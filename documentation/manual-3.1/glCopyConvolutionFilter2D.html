@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glCopyConvolutionFilter2D : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glCopyConvolutionFilter2D</h1>
+</header>
+<main class="content">
+    <section class="purpose">copy pixels into a two-dimensional convolution filter</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glCopyConvolutionFilter2D"></a>
+    <span class="c-function">glCopyConvolutionFilter2D</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glCopyConvolutionFilter2D"></a>
+    <span class="py-function">glCopyConvolutionFilter2D</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Must be
+    <span class="constant">GL_CONVOLUTION_2D</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalformat"></a>
+                        internalformat
+                    </th>
+                    <td>
+    <div class="para">
+                    The internal format of the convolution filter kernel.
+                    The allowable values are
+    <span class="constant">GL_ALPHA</span>
+    ,
+    <span class="constant">GL_ALPHA4</span>
+    ,
+    <span class="constant">GL_ALPHA8</span>
+    ,
+    <span class="constant">GL_ALPHA12</span>
+    ,
+    <span class="constant">GL_ALPHA16</span>
+    ,
+    <span class="constant">GL_LUMINANCE</span>
+    ,
+    <span class="constant">GL_LUMINANCE4</span>
+    ,
+    <span class="constant">GL_LUMINANCE8</span>
+    ,
+    <span class="constant">GL_LUMINANCE12</span>
+    ,
+    <span class="constant">GL_LUMINANCE16</span>
+    ,
+    <span class="constant">GL_LUMINANCE_ALPHA</span>
+    ,
+    <span class="constant">GL_LUMINANCE4_ALPHA4</span>
+    ,
+    <span class="constant">GL_LUMINANCE6_ALPHA2</span>
+    ,
+    <span class="constant">GL_LUMINANCE8_ALPHA8</span>
+    ,
+    <span class="constant">GL_LUMINANCE12_ALPHA4</span>
+    ,
+    <span class="constant">GL_LUMINANCE12_ALPHA12</span>
+    ,
+    <span class="constant">GL_LUMINANCE16_ALPHA16</span>
+    ,
+    <span class="constant">GL_INTENSITY</span>
+    ,
+    <span class="constant">GL_INTENSITY4</span>
+    ,
+    <span class="constant">GL_INTENSITY8</span>
+    ,
+    <span class="constant">GL_INTENSITY12</span>
+    ,
+    <span class="constant">GL_INTENSITY16</span>
+    ,
+    <span class="constant">GL_R3_G3_B2</span>
+    ,
+    <span class="constant">GL_RGB</span>
+    ,
+    <span class="constant">GL_RGB4</span>
+    ,
+    <span class="constant">GL_RGB5</span>
+    ,
+    <span class="constant">GL_RGB8</span>
+    ,
+    <span class="constant">GL_RGB10</span>
+    ,
+    <span class="constant">GL_RGB12</span>
+    ,
+    <span class="constant">GL_RGB16</span>
+    ,
+    <span class="constant">GL_RGBA</span>
+    ,
+    <span class="constant">GL_RGBA2</span>
+    ,
+    <span class="constant">GL_RGBA4</span>
+    ,
+    <span class="constant">GL_RGB5_A1</span>
+    ,
+    <span class="constant">GL_RGBA8</span>
+    ,
+    <span class="constant">GL_RGB10_A2</span>
+    ,
+    <span class="constant">GL_RGBA12</span>
+    , or
+    <span class="constant">GL_RGBA16</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-x"></a><a name="param-y"></a>
+                        x, y
+                    </th>
+                    <td>
+    <div class="para">
+                    The window space coordinates of the lower-left coordinate of the
+                    pixel array to copy.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">
+                    The width of the pixel array to copy.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-height"></a>
+                        height
+                    </th>
+                    <td>
+    <div class="para">
+                    The height of the pixel array to copy.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glCopyConvolutionFilter2D.html">glCopyConvolutionFilter2D</a>
+    defines a two-dimensional convolution filter kernel with pixels
+            from the current
+    <span class="constant">GL_READ_BUFFER</span>
+    (rather than from main memory,
+            as is the case for
+    <a class="crossref" href="./glConvolutionFilter2D.html">glConvolutionFilter2D</a>
+    ).
+</div>
+    <div class="para">
+            The screen-aligned pixel rectangle with lower-left corner at (
+    <a class="parameter" href="#param-x">x</a>
+    ,\
+    <a class="parameter" href="#param-y">y</a>
+    ),
+            width
+    <a class="parameter" href="#param-width">width</a>
+    and height
+    <a class="parameter" href="#param-height">height</a>
+    is used to define the convolution filter. If any pixels within this
+            region are
+            outside the window that is associated with the GL context, the
+            values obtained for those pixels are undefined.
+</div>
+    <div class="para">
+            The pixels in the rectangle are processed
+            exactly as if
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    had been called with
+    <span class="emphasis">format</span>
+    set to RGBA, but the process stops just before final conversion.
+            The R, G, B, and A components of each pixel are next scaled by the four
+            2D
+    <span class="constant">GL_CONVOLUTION_FILTER_SCALE</span>
+    parameters and biased by the
+            four 2D
+    <span class="constant">GL_CONVOLUTION_FILTER_BIAS</span>
+    parameters.
+            (The scale and bias parameters are set by
+    <a class="crossref" href="./glConvolutionParameter.html">glConvolutionParameter</a>
+    using the
+    <span class="constant">GL_CONVOLUTION_2D</span>
+    target and the names
+    <span class="constant">GL_CONVOLUTION_FILTER_SCALE</span>
+    and
+    <span class="constant">GL_CONVOLUTION_FILTER_BIAS</span>
+    .
+            The parameters themselves are vectors of four values that are applied to red,
+            green, blue, and alpha, in that order.)
+            The R, G, B, and A values are not clamped to [0,1] at any time during this
+            process.
+</div>
+    <div class="para">
+            Each pixel is then converted to the internal format specified by
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    .
+            This conversion simply maps the component values of the pixel (R, G, B,
+            and A) to the values included in the internal format (red, green, blue,
+            alpha, luminance, and intensity).  The mapping is as follows:
+</div>
+    <div class="para">
+        </div>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>
+    <span class="emphasis">
+                        Internal Format
+                        </span>
+</th><th>
+    <span class="emphasis">
+                        Red
+                        </span>
+</th><th>
+    <span class="emphasis">
+                        Green
+                        </span>
+</th><th>
+    <span class="emphasis">
+                        Blue
+                        </span>
+</th><th>
+    <span class="emphasis">
+                        Alpha
+                        </span>
+</th><th>
+    <span class="emphasis">
+                        Luminance
+                        </span>
+</th><th>
+    <span class="emphasis">
+                        Intensity
+                        </span>
+</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+    <span class="constant">GL_ALPHA</span>
+</td><td>
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        A
+                        </td><td>
+                        </td><td>
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_LUMINANCE</span>
+</td><td>
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        R
+                        </td><td>
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_LUMINANCE_ALPHA</span>
+</td><td>
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        A
+                        </td><td>
+                        R
+                        </td><td>
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INTENSITY</span>
+</td><td>
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        R
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_RGB</span>
+</td><td>
+                        R
+                        </td><td>
+                        G
+                        </td><td>
+                        B
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_RGBA</span>
+</td><td>
+                        R
+                        </td><td>
+                        G
+                        </td><td>
+                        B
+                        </td><td>
+                        A
+                        </td><td>
+                        </td><td>
+                        </td>
+                </tr>
+    </tbody></table>
+    <div class="para">
+            The red, green, blue, alpha, luminance, and/or intensity components of
+            the resulting pixels are stored in floating-point rather than integer
+            format.
+        </div>
+    <div class="para">
+            Pixel ordering is such that lower x screen coordinates correspond to
+            lower
+    <span class="emphasis">i</span>
+    filter image coordinates, and lower y screen coordinates
+            correspond to lower
+    <span class="emphasis">j</span>
+    filter image coordinates.
+</div>
+    <div class="para">
+            Note that after a convolution is performed, the resulting color
+            components are also scaled by their corresponding
+    <span class="constant">GL_POST_CONVOLUTION_c_SCALE</span>
+    parameters and biased by their
+            corresponding
+    <span class="constant">GL_POST_CONVOLUTION_c_BIAS</span>
+    parameters (where
+    <span class="emphasis">c</span>
+    takes on the values
+    <span class="emphasis">RED</span>
+    ,
+    <span class="emphasis">GREEN</span>
+    ,
+    <span class="emphasis">BLUE</span>
+    , and
+    <span class="emphasis">ALPHA</span>
+    ).
+            These parameters are set by
+    <a class="crossref" href="./glPixelTransfer.html">glPixelTransfer</a>
+    .
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glCopyConvolutionFilter2D.html">glCopyConvolutionFilter2D</a>
+    is present only if
+    <div class="code">ARB_imaging</div>
+    is returned when
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+    is called with an argument of
+    <span class="constant">GL_EXTENSIONS</span>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not
+    <span class="constant">GL_CONVOLUTION_2D</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is not one of the
+            allowable values.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-width">width</a>
+    is less than zero or greater
+            than the maximum supported value.
+            This value may be queried with
+    <a class="crossref" href="./glGetConvolutionParameter.html">glGetConvolutionParameter</a>
+    using target
+    <span class="constant">GL_CONVOLUTION_2D</span>
+    and name
+    <span class="constant">GL_MAX_CONVOLUTION_WIDTH</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-height">height</a>
+    is less than zero or greater
+            than the maximum supported value.
+            This value may be queried with
+    <a class="crossref" href="./glGetConvolutionParameter.html">glGetConvolutionParameter</a>
+    using target
+    <span class="constant">GL_CONVOLUTION_2D</span>
+    and name
+    <span class="constant">GL_MAX_CONVOLUTION_HEIGHT</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glCopyConvolutionFilter2D.html">glCopyConvolutionFilter2D</a>
+    is executed
+            between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding
+            execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetConvolutionParameter.html">glGetConvolutionParameter</a>
+    ,
+    <a class="crossref" href="./glGetConvolutionFilter.html">glGetConvolutionFilter</a>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glConvolutionFilter2D.html">glConvolutionFilter2D</a>
+    ,
+    <a class="crossref" href="./glConvolutionParameter.html">glConvolutionParameter</a>
+    ,
+    <a class="crossref" href="./glPixelTransfer.html">glPixelTransfer</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

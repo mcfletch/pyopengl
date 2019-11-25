@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluNurbsCallback : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluNurbsCallback</h1>
+</header>
+<main class="content">
+    <section class="purpose">define a callback for a NURBS object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluNurbsCallback"></a>
+    <span class="c-function">gluNurbsCallback</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUnurbs* (
+            <a href="#param-nurb" class="parameter">nurb</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-which" class="parameter">which</a>
+        )
+        ,
+    </span><span class="param-def">
+        _GLUfuncptr (
+            <a href="#param-CallBackFunc" class="parameter">CallBackFunc</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluNurbsCallback"></a>
+    <span class="py-function">gluNurbsCallback</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-nurb" class="parameter">nurb</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-which" class="parameter">which</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-CallBackFunc" class="parameter">CallBackFunc</a>
+    </span>
+</span> )
+    <pre class="pydoc">Dispatch to the nurb's addCallback operation</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-nurb"></a>
+                        nurb
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the NURBS object (created with
+    <a class="crossref" href="./gluNewNurbsRenderer.html">gluNewNurbsRenderer</a>
+    ).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-which"></a>
+                        which
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the callback being defined.
+                    Valid values are
+    <span class="constant">GLU_NURBS_BEGIN</span>
+    ,
+    <span class="constant">GLU_NURBS_VERTEX</span>
+    ,
+    <span class="constant">GLU_NURBS_NORMAL</span>
+    ,
+    <span class="constant">GLU_NURBS_COLOR</span>
+    ,
+    <span class="constant">GLU_NURBS_TEXTURE_COORD</span>
+    ,
+    <span class="constant">GLU_NURBS_END</span>
+    ,
+    <span class="constant">GLU_NURBS_BEGIN_DATA</span>
+    ,
+    <span class="constant">GLU_NURBS_VERTEX_DATA</span>
+    ,
+    <span class="constant">GLU_NURBS_NORMAL_DATA</span>
+    ,
+    <span class="constant">GLU_NURBS_COLOR_DATA</span>
+    ,
+    <span class="constant">GLU_NURBS_TEXTURE_COORD_DATA</span>
+    ,
+    <span class="constant">GLU_NURBS_END_DATA</span>
+    , and
+    <span class="constant">GLU_NURBS_ERROR</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-CallBackFunc"></a>
+                        CallBackFunc
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the function that the callback calls.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluNurbsCallback.html">gluNurbsCallback</a>
+    is used to define a callback to be used by a NURBS
+            object.
+            If the specified callback is already defined, then it is replaced.  If
+    <a class="parameter" href="#param-CallBackFunc">CallBackFunc</a>
+    is NULL, then this callback will not get
+            invoked and the related data, if any, will be lost.
+</div>
+    <div class="para">
+            Except the error callback, these callbacks are used by NURBS tessellator (when
+    <span class="constant">GLU_NURBS_MODE</span>
+    is set to be
+    <span class="constant">GLU_NURBS_TESSELLATOR</span>
+    ) to return back the OpenGL
+            polygon primitives resulting from the tessellation. Note that there are two
+            versions of each callback: one with a user data pointer and one without. If both versions for a particular callback are specified then the callback with
+            the user data pointer will be used. Note that ``userData'' is a copy of the pointer that was specified at the last call to
+    <a class="function" href="./gluNurbsCallbackData.html">gluNurbsCallbackData</a>
+    .
+</div>
+    <div class="para">
+            The error callback function is effective no matter which value that
+    <span class="constant">GLU_NURBS_MODE</span>
+    is set to.
+            All other callback functions are effective only when
+    <span class="constant">GLU_NURBS_MODE</span>
+    is set to
+    <span class="constant">GLU_NURBS_TESSELLATOR</span>
+    .
+</div>
+    <div class="para">
+            The legal callbacks are as follows:
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_NURBS_BEGIN</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+                        The begin callback indicates the start of a primitive. The function
+                        takes a single argument of type GLenum, which can be one of
+    <span class="constant">GLU_LINES</span>
+    ,
+    <span class="constant">GLU_LINE_STRIP</span>
+    ,
+    <span class="constant">GLU_TRIANGLE_FAN</span>
+    ,
+    <span class="constant">GLU_TRIANGLE_STRIP</span>
+    ,
+    <span class="constant">GLU_TRIANGLES</span>
+    , or
+    <span class="constant">GLU_QUAD_STRIP</span>
+    . The
+                        default begin callback function is NULL. The function prototype
+                        for this callback looks like:
+    <div class="programlisting">
+void begin( GLenum type );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_NURBS_BEGIN_DATA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+                        The same as the
+    <span class="constant">GLU_NURBS_BEGIN</span>
+    callback except that it takes an
+                        additional pointer argument. This pointer is a copy of the pointer that
+                        was specified at the last call to
+    <a class="function" href="./gluNurbsCallbackData.html">gluNurbsCallbackData</a>
+    .  The
+                        default callback function is NULL. The function prototype for this
+                        callback function looks like:
+    <div class="programlisting">
+void beginData(GLenum type, void *userData);
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_NURBS_VERTEX</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+                        The vertex callback indicates a vertex of the primitive. The
+                        coordinates of the vertex are stored in the parameter ``vertex''. All
+                        the generated vertices have dimension 3; that is, homogeneous
+                        coordinates have been transformed into affine coordinates. The default
+                        vertex callback function is NULL. The function prototype for this
+                        callback function looks like:
+    <div class="programlisting">
+void vertex( GLfloat *vertex );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_NURBS_VERTEX_DATA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+                        This is the same as the
+    <span class="constant">GLU_NURBS_VERTEX</span>
+    callback, except that
+                        it takes an additional pointer argument. This pointer is a copy of the
+                        pointer that was specified at the last call to
+    <a class="function" href="./gluNurbsCallbackData.html">gluNurbsCallbackData</a>
+    .  The default callback function is NULL. The
+                        function prototype for this callback function looks like:
+    <div class="programlisting">
+void vertexData( GLfloat *vertex, void *userData );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_NURBS_NORMAL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+                        The normal callback is invoked as the vertex normal is generated.
+                        The components of the normal are stored in the parameter ``normal.''
+                        In the case of a NURBS curve, the callback function is effective only when
+                        the user provides a normal map (
+    <span class="constant">GLU_MAP1_NORMAL</span>
+    ).
+                        In the case of a NURBS surface, if a normal map (
+    <span class="constant">GLU_MAP2_NORMAL</span>
+    )
+                        is provided, then the generated normal is computed from the normal map.
+                        If a normal map is not provided, then a surface normal is computed in
+                        a manner similar to that described for evaluators when
+    <span class="constant">GLU_AUTO_NORMAL</span>
+    is enabled.
+                        The default normal callback function is NULL. The function
+                        prototype for this callback function looks like:
+    <div class="programlisting">
+void normal( GLfloat *normal );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_NURBS_NORMAL_DATA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+                        The same as the
+    <span class="constant">GLU_NURBS_NORMAL</span>
+    callback except that it
+                        takes an additional pointer argument. This pointer is a copy of the pointer
+                        that was specified at the last call to
+    <a class="function" href="./gluNurbsCallbackData.html">gluNurbsCallbackData</a>
+    .  The default callback function is NULL. The function prototype for this callback function looks like:
+    <div class="programlisting">
+void normalData( GLfloat *normal, void *userData );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_NURBS_COLOR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+                        The color callback is invoked as the color of a vertex is generated.
+                        The components of the color are stored in the parameter ``color.''
+                        This callback is effective only when the user provides a color map
+                        (
+    <span class="constant">GLU_MAP1_COLOR_4</span>
+    or
+    <span class="constant">GLU_MAP2_COLOR_4</span>
+    ). ``color'' contains four
+                        components: R, G, B, A. The default color callback function is NULL.
+                        The prototype for this callback function looks like:
+    <div class="programlisting">
+void color( GLfloat *color );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_NURBS_COLOR_DATA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+                        The same as the
+    <span class="constant">GLU_NURBS_COLOR</span>
+    callback except that it
+                        takes an additional pointer argument. This pointer is a copy of the pointer
+                        that was specified at the last call to
+    <a class="function" href="./gluNurbsCallbackData.html">gluNurbsCallbackData</a>
+    .  The default callback function is NULL. The function prototype for this callback function looks like:
+    <div class="programlisting">
+void colorData( GLfloat *color, void *userData );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_NURBS_TEXTURE_COORD</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+                        The texture callback is invoked as the texture coordinates
+                        of a vertex are generated. These coordinates are stored in the parameter
+                        ``texCoord.'' The number of texture coordinates can be 1, 2, 3, or 4 depending
+                        on which type of texture map is specified
+                        (
+    <span class="constant">GLU_MAP1_TEXTURE_COORD_1</span>
+    ,
+    <span class="constant">GLU_MAP1_TEXTURE_COORD_2</span>
+    ,
+    <span class="constant">GLU_MAP1_TEXTURE_COORD_3</span>
+    ,
+    <span class="constant">GLU_MAP1_TEXTURE_COORD_4</span>
+    ,
+    <span class="constant">GLU_MAP2_TEXTURE_COORD_1</span>
+    ,
+    <span class="constant">GLU_MAP2_TEXTURE_COORD_2</span>
+    ,
+    <span class="constant">GLU_MAP2_TEXTURE_COORD_3</span>
+    ,
+    <span class="constant">GLU_MAP2_TEXTURE_COORD_4</span>
+    ).
+                        If no texture map is specified, this callback function will not be called.
+                        The default texture callback function is NULL. The function prototype
+                        for this callback function looks like:
+    <div class="programlisting">
+void texCoord( GLfloat *texCoord );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_NURBS_TEXTURE_COORD_DATA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+                        This is the same as the
+    <span class="constant">GLU_NURBS_TEXTURE_COORD</span>
+    callback, except that it
+                        takes an additional pointer argument. This pointer is a copy of the pointer
+                        that was specified at the last call to
+    <a class="function" href="./gluNurbsCallbackData.html">gluNurbsCallbackData</a>
+    .  The default callback function is NULL. The function prototype for this callback function looks like:
+    <div class="programlisting">
+void texCoordData( GLfloat *texCoord, void *userData );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_NURBS_END</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+                        The end callback is invoked at the end of a primitive. The default end callback function is NULL. The function prototype for this callback function looks like:
+    <div class="programlisting">
+void end( void );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_NURBS_END_DATA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+                        This is the same as the
+    <span class="constant">GLU_NURBS_END</span>
+    callback, except that it
+                        takes an additional pointer argument. This pointer is a copy of the pointer
+                        that was specified at the last call to
+    <a class="function" href="./gluNurbsCallbackData.html">gluNurbsCallbackData</a>
+    .  The default callback function is NULL. The function prototype for this callback function looks like:
+    <div class="programlisting">
+void endData( void  *userData );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_NURBS_ERROR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+                        The error function is called when an error is encountered.
+                        Its single argument
+                        is of type GLenum, and it indicates the specific error that occurred.
+                        There are 37 errors unique to NURBS, named
+    <span class="constant">GLU_NURBS_ERROR1</span>
+    through
+    <span class="constant">GLU_NURBS_ERROR37</span>
+    .
+                        Character strings describing these errors can be retrieved with
+    <a class="crossref" href="./gluErrorString.html">gluErrorString</a>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./gluNurbsCallback.html">gluNurbsCallback</a>
+    is available only if the GLU version is 1.2 or greater.
+</div>
+    <div class="para">
+            GLU version 1.2 supports only the
+    <span class="constant">GLU_ERROR</span>
+    parameter for
+    <a class="parameter" href="#param-which">which</a>
+    . The
+    <span class="constant">GLU_ERROR</span>
+    value is deprecated in GLU version 1.3 in
+            favor of
+    <span class="constant">GLU_NURBS_ERROR</span>
+    .  All other accepted values for
+    <a class="parameter" href="#param-CallBackFunc">CallBackFunc</a>
+    are available only if the GLU version is 1.3 or greater.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluErrorString.html">gluErrorString</a>
+    ,
+    <a class="crossref" href="./gluNewNurbsRenderer.html">gluNewNurbsRenderer</a>
+    ,
+    <a class="function" href="./gluNurbsCallbackData.html">gluNurbsCallbackData</a>
+    ,
+    <a class="crossref" href="./gluNurbsProperty.html">gluNurbsProperty</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluNurbsCallback</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_surface_cb.py">tests/redbook_surface_cb.py</a>
+    Lines: <span class="sample-lines">127, 128, 129, 130, 131, 132</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

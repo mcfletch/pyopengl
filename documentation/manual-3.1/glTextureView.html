@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glTextureView : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glTextureView</h1>
+</header>
+<main class="content">
+    <section class="purpose">initialize a texture as a data alias of another texture's data store</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glTextureView"></a>
+    <span class="c-function">glTextureView</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-origtexture" class="parameter">origtexture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-minlevel" class="parameter">minlevel</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-numlevels" class="parameter">numlevels</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-minlayer" class="parameter">minlayer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-numlayers" class="parameter">numlayers</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTextureView"></a>
+    <span class="py-function">glTextureView</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-origtexture" class="parameter">origtexture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-minlevel" class="parameter">minlevel</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-numlevels" class="parameter">numlevels</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-minlayer" class="parameter">minlayer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-numlayers" class="parameter">numlayers</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the texture object to be initialized as a view.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target to be used for the newly initialized texture.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-origtexture"></a>
+                        origtexture
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of a texture object of which to make a view.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalformat"></a>
+                        internalformat
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the internal format for the newly created view.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-minlevel"></a>
+                        minlevel
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies lowest level of detail of the view.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-numlevels"></a>
+                        numlevels
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of levels of detail to include in the view.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-minlayer"></a>
+                        minlayer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the index of the first layer to include in the view.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-numlayers"></a>
+                        numlayers
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of layers to include in the view.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glTextureView.html">glTextureView</a>
+    initializes a texture object as an
+            alias, or view of another texture object, sharing some or all of the
+            parent texture's data store with the initialized texture.
+    <a class="parameter" href="#param-texture">texture</a>
+    specifies a name previously reserved by a successful call to
+    <a class="crossref" href="./glGenTextures.html">glGenTextures</a>
+    but that has not yet been bound or given a target.
+    <a class="parameter" href="#param-target">target</a>
+    specifies the target for the newly initialized texture and must be compatible
+            with the target of the parent texture, given in
+    <a class="parameter" href="#param-origtexture">origtexture</a>
+    as specified in the following table:
+</div>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>Original Target</th><th>Compatible New Targets</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+    <span class="constant">GL_TEXTURE_1D</span>
+</td><td>
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_TEXTURE_2D</span>
+</td><td>
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_TEXTURE_3D</span>
+</td><td>
+    <span class="constant">GL_TEXTURE_3D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+</td><td>
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+</td><td>
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_TEXTURE_BUFFER</span>
+</td><td>
+    <span class="emphasis">none</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+</td><td>
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+</td><td>
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+</td><td>
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+</td><td>
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    ,
+    <span class="constant">GL_TEXTURE_MULTISAMPLE_ARRAY</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+</td><td>
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    ,
+    <span class="constant">GL_TEXTURE_MULTISAMPLE_ARRAY</span>
+</td>
+                </tr>
+    </tbody></table>
+    <div class="para">
+            The value of
+    <span class="constant">GL_TEXTURE_IMMUTABLE_FORMAT</span>
+    for
+    <a class="parameter" href="#param-origtexture">origtexture</a>
+    must be
+    <span class="constant">GL_TRUE</span>
+    .
+            After initialization,
+    <a class="parameter" href="#param-texture">texture</a>
+    inherits the data store of
+            the parent texture,
+    <a class="parameter" href="#param-origtexture">origtexture</a>
+    and is usable as a normal
+            texture object with target
+    <a class="parameter" href="#param-target">target</a>
+    . Data in the shared store
+            is reinterpreted with the new internal format specified by
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    .
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    must be compatible with the internal format
+            of the parent texture as specified in the following table:
+</div>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>Class</th><th>Internal Formats</th>
+                </tr>
+                <tr valign="top">
+                    <td>128-bit</td><td>
+    <span class="constant">GL_RGBA32F</span>
+    ,
+    <span class="constant">GL_RGBA32UI</span>
+    ,
+    <span class="constant">GL_RGBA32I</span>
+</td>
+                </tr><tr valign="top">
+                    <td>96-bit</td><td>
+    <span class="constant">GL_RGB32F</span>
+    ,
+    <span class="constant">GL_RGB32UI</span>
+    ,
+    <span class="constant">GL_RGB32I</span>
+</td>
+                </tr><tr valign="top">
+                    <td>64-bit</td><td>
+    <span class="constant">GL_RGBA16F</span>
+    ,
+    <span class="constant">GL_RG32F</span>
+    ,
+    <span class="constant">GL_RGBA16UI</span>
+    ,
+    <span class="constant">GL_RG32UI</span>
+    ,
+    <span class="constant">GL_RGBA16I</span>
+    ,
+    <span class="constant">GL_RG32I</span>
+    ,
+    <span class="constant">GL_RGBA16</span>
+    ,
+    <span class="constant">GL_RGBA16_SNORM</span>
+</td>
+                </tr><tr valign="top">
+                    <td>48-bit</td><td>
+    <span class="constant">GL_RGB16</span>
+    ,
+    <span class="constant">GL_RGB16_SNORM</span>
+    ,
+    <span class="constant">GL_RGB16F</span>
+    ,
+    <span class="constant">GL_RGB16UI</span>
+    ,
+    <span class="constant">GL_RGB16I</span>
+</td>
+                </tr><tr valign="top">
+                    <td>32-bit</td><td>
+    <span class="constant">GL_RG16F</span>
+    ,
+    <span class="constant">GL_R11F_G11F_B10F</span>
+    ,
+    <span class="constant">GL_R32F</span>
+    ,
+    <span class="constant">GL_RGB10_A2UI</span>
+    ,
+    <span class="constant">GL_RGBA8UI</span>
+    ,
+    <span class="constant">GL_RG16UI</span>
+    ,
+    <span class="constant">GL_R32UI</span>
+    ,
+    <span class="constant">GL_RGBA8I</span>
+    ,
+    <span class="constant">GL_RG16I</span>
+    ,
+    <span class="constant">GL_R32I</span>
+    ,
+    <span class="constant">GL_RGB10_A2</span>
+    ,
+    <span class="constant">GL_RGBA8</span>
+    ,
+    <span class="constant">GL_RG16</span>
+    ,
+    <span class="constant">GL_RGBA8_SNORM</span>
+    ,
+    <span class="constant">GL_RG16_SNORM</span>
+    ,
+    <span class="constant">GL_SRGB8_ALPHA8</span>
+    ,
+    <span class="constant">GL_RGB9_E5</span>
+</td>
+                </tr><tr valign="top">
+                    <td>24-bit</td><td>
+    <span class="constant">GL_RGB8</span>
+    ,
+    <span class="constant">GL_RGB8_SNORM</span>
+    ,
+    <span class="constant">GL_SRGB8</span>
+    ,
+    <span class="constant">GL_RGB8UI</span>
+    ,
+    <span class="constant">GL_RGB8I</span>
+</td>
+                </tr><tr valign="top">
+                    <td>16-bit</td><td>
+    <span class="constant">GL_R16F</span>
+    ,
+    <span class="constant">GL_RG8UI</span>
+    ,
+    <span class="constant">GL_R16UI</span>
+    ,
+    <span class="constant">GL_RG8I</span>
+    ,
+    <span class="constant">GL_R16I</span>
+    ,
+    <span class="constant">GL_RG8</span>
+    ,
+    <span class="constant">GL_R16</span>
+    ,
+    <span class="constant">GL_RG8_SNORM</span>
+    ,
+    <span class="constant">GL_R16_SNORM</span>
+</td>
+                </tr><tr valign="top">
+                    <td>8-bit</td><td>
+    <span class="constant">GL_R8UI</span>
+    ,
+    <span class="constant">GL_R8I</span>
+    ,
+    <span class="constant">GL_R8</span>
+    ,
+    <span class="constant">GL_R8_SNORM</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_RGTC1_RED</span>
+</td><td>
+    <span class="constant">GL_COMPRESSED_RED_RGTC1</span>
+    ,
+    <span class="constant">GL_COMPRESSED_SIGNED_RED_RGTC1</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_RGTC2_RG</span>
+</td><td>
+    <span class="constant">GL_COMPRESSED_RG_RGTC2</span>
+    ,
+    <span class="constant">GL_COMPRESSED_SIGNED_RG_RGTC2</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_BPTC_UNORM</span>
+</td><td>
+    <span class="constant">GL_COMPRESSED_RGBA_BPTC_UNORM</span>
+    ,
+    <span class="constant">GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_BPTC_FLOAT</span>
+</td><td>
+    <span class="constant">GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT</span>
+</td>
+                </tr>
+    </tbody></table>
+    <div class="para">
+            If the original texture is an array or has multiple mipmap levels,
+            the parameters
+    <a class="parameter" href="#param-minlayer">minlayer</a>
+    ,
+    <a class="parameter" href="#param-numlayers">numlayers</a>
+    ,
+    <a class="parameter" href="#param-minlevel">minlevel</a>
+    , and
+    <a class="parameter" href="#param-numlevels">numlevels</a>
+    control which of those slices and levels are considered part of the texture.
+            The
+    <a class="parameter" href="#param-minlevel">minlevel</a>
+    and
+    <a class="parameter" href="#param-minlayer">minlayer</a>
+    parameters are relative to the view of the
+            original texture. If
+    <a class="parameter" href="#param-numlayers">numlayers</a>
+    or
+    <a class="parameter" href="#param-numlevels">numlevels</a>
+    extend beyond the original
+            texture, they are clamped to the max extent of the original texture.
+</div>
+    <div class="para">
+            If the new texture's target is
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    , the clamped
+    <a class="parameter" href="#param-numlayers">numlayers</a>
+    must be equal to 6. If the new texture's target is
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    ,
+            then
+    <a class="parameter" href="#param-numlayers">numlayers</a>
+    counts layer-faces rather than layers, and the clamped
+    <a class="parameter" href="#param-numlayers">numlayers</a>
+    must be a multiple of 6. If the new texture's target is
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    or
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    , the width and height of the original texture's
+            levels must be equal.
+</div>
+    <div class="para">
+            When the original texture's target is
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    , the layer
+            parameters are interpreted in the same order as if it were a
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    with 6 layer-faces.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    , or
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    ,
+    <a class="parameter" href="#param-numlayers">numlayers</a>
+    must equal 1.
+</div>
+    <div class="para">
+            The dimensions of the original texture must be less than or equal to the maximum
+            supported dimensions of the new target. For example, if the original texture has a
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    target and its width is greater than
+    <span class="constant">GL_MAX_CUBE_MAP_TEXTURE_SIZE</span>
+    , an error
+            will be generated if
+    <a class="function" href="./glTextureView.html">glTextureView</a>
+    is called to create a
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    view.
+</div>
+    <div class="para">
+            Texture commands that take a
+    <a class="parameter" href="#param-level">level</a>
+    or
+    <a class="parameter" href="#param-layer">layer</a>
+    parameter, such as
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    , interpret that parameter to be relative to the view of the
+            texture. i.e. the mipmap level of the data store that would be updated via
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    would be the sum of
+    <a class="parameter" href="#param-level">level</a>
+    and the value of
+    <span class="constant">GL_TEXTURE_VIEW_MIN_LEVEL</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-minlayer">minlayer</a>
+    or
+    <a class="parameter" href="#param-minlevel">minlevel</a>
+    are larger than the greatest layer or level of
+    <a class="parameter" href="#param-origtexture">origtexture</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not compatible
+            with the target of
+    <a class="parameter" href="#param-origtexture">origtexture</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the dimensions of
+    <a class="parameter" href="#param-origtexture">origtexture</a>
+    are greater than the maximum supported dimensions for
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is not compatible
+            with the internal format of
+    <a class="parameter" href="#param-origtexture">origtexture</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-texture">texture</a>
+    has already been bound
+            or otherwise given a target.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the value of
+    <span class="constant">GL_TEXTURE_IMMUTABLE_FORMAT</span>
+    for
+    <a class="parameter" href="#param-origtexture">origtexture</a>
+    is not
+    <span class="constant">GL_TRUE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-origtexture">origtexture</a>
+    is not the name of an
+            existing texture object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generaged if
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    and
+    <a class="parameter" href="#param-numlayers">numlayers</a>
+    is not 6, or if
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    and
+    <a class="parameter" href="#param-numlayers">numlayers</a>
+    is not an integer multiple of 6.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    , or
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    and
+    <a class="parameter" href="#param-numlayers">numlayers</a>
+    does not equal 1.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-texture">texture</a>
+    zero or is not the name of a texture previously
+            returned from a successful call to
+    <a class="crossref" href="./glGenTextures.html">glGenTextures</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glTexParameter.html">glTexParameter</a>
+    with arguments
+    <span class="constant">GL_TEXTURE_VIEW_MIN_LEVEL</span>
+    ,
+    <span class="constant">GL_TEXTURE_VIEW_NUM_LEVELS</span>
+    ,
+    <span class="constant">GL_TEXTURE_VIEW_MIN_LAYER</span>
+    ,
+    <span class="constant">GL_TEXTURE_VIEW_NUM_LAYERS</span>
+    , or
+    <span class="constant">GL_TEXTURE_IMMUTABLE_LEVELS</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glTextureView.html">glTextureView</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glTexStorage1D.html">glTexStorage1D</a>
+    ,
+    <a class="crossref" href="./glTexStorage2D.html">glTexStorage2D</a>
+    ,
+    <a class="crossref" href="./glTexStorage3D.html">glTexStorage3D</a>
+    ,
+    <a class="crossref" href="./glGetTexParameter.html">glGetTexParameter</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2013-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

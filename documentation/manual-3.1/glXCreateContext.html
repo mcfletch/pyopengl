@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXCreateContext : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXCreateContext</h1>
+</header>
+<main class="content">
+    <section class="purpose">create a new GLX rendering context</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXCreateContext"></a>
+    <span class="c-function">glXCreateContext</span>(<span class="parameter-list">
+    <span class="param-def">
+        Display * (
+            <a href="#param-dpy" class="parameter">dpy</a>
+        )
+        ,
+    </span><span class="param-def">
+        XVisualInfo * (
+            <a href="#param-vis" class="parameter">vis</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLXContext (
+            <a href="#param-shareList" class="parameter">shareList</a>
+        )
+        ,
+    </span><span class="param-def">
+        Bool (
+            <a href="#param-direct" class="parameter">direct</a>
+        )
+    </span>
+</span>)-&gt; GLXContext
+</div>
+                <div class="py-signature">
+    <a name="py-glXCreateContext"></a>
+    <span class="py-function">glXCreateContext</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-dpy" class="parameter">dpy</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-vis" class="parameter">vis</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-shareList" class="parameter">shareList</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-direct" class="parameter">direct</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'OpenGL.raw.GLX._types.LP_struct___GLXcontextRec'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dpy"></a>
+                        dpy
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the connection to the X server.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-vis"></a>
+                        vis
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the visual that defines the frame buffer resources available to
+                    the rendering context.
+                    It is a pointer to an
+    <span class="constant">XVisualInfo</span>
+    structure,
+                    not a visual ID or a pointer to a
+    <span class="constant">Visual</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-shareList"></a>
+                        shareList
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the context with which to share display lists.
+    <span class="constant">NULL</span>
+    indicates that no sharing is to take place.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-direct"></a>
+                        direct
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies whether rendering is to be done with a direct connection
+                    to the graphics system if possible (
+    <span class="constant">True</span>
+    )
+                    or through the X server (
+    <span class="constant">False</span>
+    ).
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXCreateContext.html">glXCreateContext</a>
+    creates a GLX rendering context and returns its handle.
+            This context can be used to render into both windows and GLX pixmaps.
+            If
+    <a class="function" href="./glXCreateContext.html">glXCreateContext</a>
+    fails to create a rendering context,
+    <span class="constant">NULL</span>
+    is returned.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-direct">direct</a>
+    is
+    <span class="constant">True</span>
+    ,
+            then a direct rendering context is created if the
+            implementation supports direct rendering, if the connection is to an X
+            server that is local, and if a direct rendering context is available. (An implementation may return an indirect context when
+    <a class="parameter" href="#param-direct">direct</a>
+    is
+    <span class="constant">True</span>
+    .)
+            If
+    <a class="parameter" href="#param-direct">direct</a>
+    is
+    <span class="constant">False</span>
+    ,
+            then a rendering context that renders through the X server is always created.
+            Direct rendering provides a performance advantage in some implementations.
+            However, direct rendering contexts cannot be shared outside a single process,
+            and they may be unable to render to GLX pixmaps.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-shareList">shareList</a>
+    is not
+    <span class="constant">NULL</span>
+    ,
+            then all display-list indexes and definitions are shared by
+            context
+    <a class="parameter" href="#param-shareList">shareList</a>
+    and by the newly created context.
+            An arbitrary number of contexts can share a single display-list space.
+            However,
+            all rendering contexts that share a single display-list space must
+            themselves exist in the same address space.
+            Two rendering contexts share an address space if both are nondirect
+            using the same server,
+            or if both are direct and owned by a single process.
+            Note that in the nondirect case, it is not necessary for the calling
+            threads to share an address space,
+            only for their related rendering contexts to share an address space.
+</div>
+    <div class="para">
+            If the GL version is 1.1 or greater,
+            then all texture objects except object 0
+            are shared by any contexts that share display lists.
+        </div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <span class="constant">XVisualInfo</span>
+    is defined in
+    <span class="emphasis">Xutil.h.</span>
+    It is a structure that includes
+    <span class="emphasis">visual</span>
+    ,
+    <span class="emphasis">visualID</span>
+    ,
+    <span class="emphasis">screen</span>
+    , and
+    <span class="emphasis">depth</span>
+    elements.
+</div>
+    <div class="para">
+            A
+    <span class="emphasis">process</span>
+    is a single execution environment,
+            implemented in a single address space,
+            consisting of one or more threads.
+</div>
+    <div class="para">
+            A
+    <span class="emphasis">thread</span>
+    is one of a set of subprocesses that share
+            a single address space,
+            but maintain separate program counters,
+            stack spaces,
+            and other related global data.
+            A
+    <span class="emphasis">thread</span>
+    that is the only member of its subprocess group
+            is equivalent to a
+    <span class="emphasis">process</span>
+    .
+</div>
+    <div class="para">
+            It may not be possible to render to a GLX pixmap with a direct rendering
+            context.
+        </div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">NULL</span>
+    is returned if execution fails on the client side.
+</div>
+    <div class="para">
+    <span class="constant">BadMatch</span>
+    is generated if the context to be created would not
+            share the address space or the screen of the context specified by
+    <a class="parameter" href="#param-shareList">shareList</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">BadValue</span>
+    is generated if
+    <a class="parameter" href="#param-vis">vis</a>
+    is not a valid visual (for
+            example, if a particular GLX implementation does not support it).
+</div>
+    <div class="para">
+    <span class="constant">GLXBadContext</span>
+    is generated if
+    <a class="parameter" href="#param-shareList">shareList</a>
+    is not a GLX context
+            and is not
+    <span class="constant">NULL</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">BadAlloc</span>
+    is generated if the server does not have enough
+            resources to allocate the new context.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glXDestroyContext.html">glXDestroyContext</a>
+    ,
+    <a class="crossref" href="./glXGetConfig.html">glXGetConfig</a>
+    ,
+    <a class="crossref" href="./glXIsDirect.html">glXIsDirect</a>
+    ,
+    <a class="crossref" href="./glXMakeCurrent.html">glXMakeCurrent</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

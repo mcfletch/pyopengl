@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutChangeToMenuEntry : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutChangeToMenuEntry</h1>
+</header>
+<main class="content">
+    <section class="purpose">changes the specified menu item in the current menu into a menu entry.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutChangeToMenuEntry"></a>
+    <span class="c-function">glutChangeToMenuEntry</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-entry" class="parameter">entry</a>
+        )
+        ,
+    </span><span class="param-def">
+        char(
+            <a href="#param-name" class="parameter">name</a>
+        )
+        ,
+    </span><span class="param-def">
+        int(
+            <a href="#param-value" class="parameter">value</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutChangeToMenuEntry"></a>
+    <span class="py-function">glutChangeToMenuEntry</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-item" class="parameter">item</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-label" class="parameter">label</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-value" class="parameter">value</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutChangeToMenuEntry( c_int(item), STRING(label), c_int(value) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-entry"></a>
+                        entry
+                    </th>
+                    <td>
+    <div class="simpara">
+						Index into the menu items of the current menu (1 is the topmost menu item).
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="simpara">
+						ASCII character string to display in the menu entry.
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-value"></a>
+                        value
+                    </th>
+                    <td>
+    <div class="simpara">
+						Value to return to the menu's callback function if the menu entry is selected.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutChangeToMenuEntry.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutChangeToMenuEntry.html">glutChangeToMenuEntry</a>
+    changes the specified menu entry in the current menu into a menu entry. The
+			entry parameter determines which menu item should be changed, with one being the topmost item. entry must be between 1
+			and
+    <span class="constant">GLUT_MENU_NUM_ITEMS</span>
+    inclusive. The menu item to change does not have to be a menu entry
+			already. The string name will be displayed for the newly changed menu entry. The value will be returned to the menu's
+			callback if this menu entry is selected.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutChangeToSubMenu.html">glutChangeToSubMenu</a>
+            <a class="crossref" href="./glutAddMenuEntry.html">glutAddMenuEntry</a>
+            <a class="crossref" href="./glutRemoveMenuItem.html">glutRemoveMenuItem</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutChangeToMenuEntry</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/glutplane.py">PyOpenGL-Demo/GLUT/glutplane.py</a>
+    Lines: <span class="sample-lines">188, 194</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

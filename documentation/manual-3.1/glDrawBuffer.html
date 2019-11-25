@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glDrawBuffer : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glDrawBuffer</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify which color buffers are to be drawn into</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glDrawBuffer"></a>
+    <span class="c-function">glDrawBuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-buf" class="parameter">buf</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glDrawBuffer"></a>
+    <span class="py-function">glDrawBuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-buf" class="parameter">buf</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glDrawBuffers"></a>
+    <span class="py-function">glDrawBuffers</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-n" class="parameter">n</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufs" class="parameter">bufs</a>
+    </span>
+</span> )
+    <pre class="pydoc">glDrawBuffers( bufs ) -&gt; bufs
+
+    Wrapper will calculate n from dims of bufs if only
+    one argument is provided...
+    </pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glNamedFramebufferDrawBuffer"></a>
+    <span class="c-function">glNamedFramebufferDrawBuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-buf" class="parameter">buf</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glNamedFramebufferDrawBuffer"></a>
+    <span class="py-function">glNamedFramebufferDrawBuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buf" class="parameter">buf</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glNamedFramebufferDrawBuffers"></a>
+    <span class="py-function">glNamedFramebufferDrawBuffers</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-n" class="parameter">n</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufs" class="parameter">bufs</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-framebuffer"></a>
+                        framebuffer
+                    </th>
+                    <td>
+    <div class="para">Specifies the name of the framebuffer object for
+    <a class="function" href="./glDrawBuffer.html#c-glNamedFramebufferDrawBuffer">glNamedFramebufferDrawBuffer</a>
+    function. Must be
+          zero or the name of a framebuffer object.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-buf"></a>
+                        buf
+                    </th>
+                    <td>
+    <div class="para">For default framebuffer, the argument specifies up to four
+          color buffers to be drawn into. Symbolic constants
+    <span class="constant">GL_NONE</span>
+    ,
+    <span class="constant">GL_FRONT_LEFT</span>
+    ,
+    <span class="constant">GL_FRONT_RIGHT</span>
+    ,
+    <span class="constant">GL_BACK_LEFT</span>
+    ,
+    <span class="constant">GL_BACK_RIGHT</span>
+    ,
+    <span class="constant">GL_FRONT</span>
+    ,
+    <span class="constant">GL_BACK</span>
+    ,
+    <span class="constant">GL_LEFT</span>
+    ,
+    <span class="constant">GL_RIGHT</span>
+    , and
+    <span class="constant">GL_FRONT_AND_BACK</span>
+    are accepted. The initial
+          value is
+    <span class="constant">GL_FRONT</span>
+    for single-buffered contexts,
+          and
+    <span class="constant">GL_BACK</span>
+    for double-buffered contexts. For
+          framebuffer objects,
+    <span class="constant">GL_COLOR_ATTACHMENT$m$</span>
+    and
+    <span class="constant">GL_NONE</span>
+    enums are accepted, where
+    <span class="constant">$m$</span>
+    is a value between 0 and
+    <span class="constant">GL_MAX_COLOR_ATTACHMENTS</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">When colors are written to the frame buffer, they are written into
+    the color buffers specified by
+    <a class="function" href="./glDrawBuffer.html">glDrawBuffer</a>
+    . One of
+    the following values can be used for default framebuffer:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NONE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">No color buffers are written.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FRONT_LEFT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Only the front left color buffer is written.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FRONT_RIGHT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Only the front right color buffer is written.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BACK_LEFT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Only the back left color buffer is written.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BACK_RIGHT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Only the back right color buffer is written.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FRONT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Only the front left and front right color buffers are written.
+          If there is no front right color buffer, only the front left color
+          buffer is written.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BACK</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Only the back left and back right color buffers are written.
+          If there is no back right color buffer, only the back left color
+          buffer is written.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LEFT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Only the front left and back left color buffers are written.
+          If there is no back left color buffer, only the front left color
+          buffer is written.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_RIGHT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Only the front right and back right color buffers are written.
+          If there is no back right color buffer, only the front right color
+          buffer is written.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FRONT_AND_BACK</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">All the front and back color buffers (front left, front right,
+          back left, back right) are written. If there are no back color
+          buffers, only the front left and front right color buffers are
+          written. If there are no right color buffers, only the front left
+          and back left color buffers are written. If there are no right or
+          back color buffers, only the front left color buffer is
+          written.</div>
+</dd>
+</div>
+</dl>
+    <div class="para">If more than one color buffer is selected for drawing, then blending
+    or logical operations are computed and applied independently for each
+    color buffer and can produce different results in each buffer.</div>
+    <div class="para">Monoscopic contexts include only
+    <span class="emphasis">left</span>
+    buffers,
+    and stereoscopic contexts include both
+    <span class="emphasis">left</span>
+    and
+    <span class="emphasis">right</span>
+    buffers. Likewise, single-buffered contexts
+    include only
+    <span class="emphasis">front</span>
+    buffers, and double-buffered
+    contexts include both
+    <span class="emphasis">front</span>
+    and
+    <span class="emphasis">back</span>
+    buffers. The context is selected at GL
+    initialization.
+</div>
+    <div class="para">For framebuffer objects,
+    <span class="constant">GL_COLOR_ATTACHMENT$m$</span>
+    and
+    <span class="constant">GL_NONE</span>
+    enums are accepted, where
+    <span class="constant">$m$</span>
+    is a value between 0 and
+    <span class="constant">GL_MAX_COLOR_ATTACHMENTS</span>
+    . glDrawBuffer will set the
+    draw buffer for fragment colors other than zero to
+    <span class="constant">GL_NONE</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    error is generated by
+    <a class="function" href="./glDrawBuffer.html#c-glNamedFramebufferDrawBuffer">glNamedFramebufferDrawBuffer</a>
+    if
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is not zero or the name of an existing
+    framebuffer object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-buf">buf</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the
+    default framebuffer is affected and none of the buffers indicated by
+    <a class="parameter" href="#param-buf">buf</a>
+    exists.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a
+    framebuffer object is affected and
+    <a class="parameter" href="#param-buf">buf</a>
+    is not equal
+    to
+    <span class="constant">GL_NONE</span>
+    or
+    <span class="constant">GL_COLOR_ATTACHMENT$m$</span>
+    , where
+    <span class="constant">$m$</span>
+    is a value between 0 and
+    <span class="constant">GL_MAX_COLOR_ATTACHMENTS</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_DRAW_BUFFER</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glDrawBuffer.html">glDrawBuffer</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glDrawBuffer.html#c-glNamedFramebufferDrawBuffer">glNamedFramebufferDrawBuffer</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    ,
+    <a class="crossref" href="./glColorMask.html">glColorMask</a>
+    ,
+    <a class="crossref" href="./glDrawBuffers.html">glDrawBuffers</a>
+    ,
+    <a class="crossref" href="./glLogicOp.html">glLogicOp</a>
+    ,
+    <a class="crossref" href="./glReadBuffer.html">glReadBuffer</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glDrawBuffer</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_2.py">tests/shadow_2.py</a>
+    Lines: <span class="sample-lines">141, 162</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/stereo/stereoDemo.py">PyOpenGL-Demo/proesch/stereo/stereoDemo.py</a>
+    Lines: <span class="sample-lines">80, 83, 87, 97</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

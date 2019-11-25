@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glVertexPointer : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glVertexPointer</h1>
+</header>
+<main class="content">
+    <section class="purpose">define an array of vertex data</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glVertexPointer"></a>
+    <span class="c-function">glVertexPointer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLint (
+            <a href="#param-size" class="parameter">size</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-stride" class="parameter">stride</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void * (
+            <a href="#param-pointer" class="parameter">pointer</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glVertexPointer"></a>
+    <span class="py-function">glVertexPointer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-size" class="parameter">size</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-stride" class="parameter">stride</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pointer" class="parameter">pointer</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glVertexPointerf"></a>
+    <span class="py-function">glVertexPointerf</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pointer" class="parameter">pointer</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glVertexPointeri"></a>
+    <span class="py-function">glVertexPointeri</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pointer" class="parameter">pointer</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glVertexPointers"></a>
+    <span class="py-function">glVertexPointers</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pointer" class="parameter">pointer</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-size"></a>
+                        size
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of coordinates per vertex. Must be 2, 3, or
+                    4. The initial value is 4.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the data type of each coordinate in the array.
+                    Symbolic constants
+    <span class="constant">GL_SHORT</span>
+    ,
+    <span class="constant">GL_INT</span>
+    ,
+    <span class="constant">GL_FLOAT</span>
+    ,
+                    or
+    <span class="constant">GL_DOUBLE</span>
+    are accepted. The initial value is
+    <span class="constant">GL_FLOAT</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-stride"></a>
+                        stride
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the byte offset between consecutive
+                    vertices. If
+    <a class="parameter" href="#param-stride">stride</a>
+    is 0, the vertices are understood to be tightly packed in
+                    the array. The initial value
+                    is 0.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pointer"></a>
+                        pointer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to the first coordinate of the first vertex in the
+                    array. The initial value is 0.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glVertexPointer.html">glVertexPointer</a>
+    specifies the location and data format of an array of vertex coordinates
+            to use when rendering.
+    <a class="parameter" href="#param-size">size</a>
+    specifies the number of coordinates per vertex, and must be 2, 3, or 4.
+    <a class="parameter" href="#param-type">type</a>
+    specifies the data type of each coordinate, and
+    <a class="parameter" href="#param-stride">stride</a>
+    specifies the byte stride from one
+            vertex to the next, allowing vertices and attributes
+            to be packed into a single array or stored in separate arrays.
+            (Single-array storage may be more efficient on some implementations;
+            see
+    <a class="crossref" href="./glInterleavedArrays.html">glInterleavedArrays</a>
+    .)
+</div>
+    <div class="para">
+            If a non-zero named buffer object is bound to the
+    <span class="constant">GL_ARRAY_BUFFER</span>
+    target
+            (see
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ) while a vertex array is
+            specified,
+    <a class="parameter" href="#param-pointer">pointer</a>
+    is treated as a byte offset into the buffer object's data store.
+            Also, the buffer object binding (
+    <span class="constant">GL_ARRAY_BUFFER_BINDING</span>
+    ) is saved as vertex array
+            client-side state (
+    <span class="constant">GL_VERTEX_ARRAY_BUFFER_BINDING</span>
+    ).
+</div>
+    <div class="para">
+            When a vertex array is specified,
+    <a class="parameter" href="#param-size">size</a>
+    ,
+    <a class="parameter" href="#param-type">type</a>
+    ,
+    <a class="parameter" href="#param-stride">stride</a>
+    , and
+    <a class="parameter" href="#param-pointer">pointer</a>
+    are saved as client-side
+            state, in addition to the current vertex array buffer object binding.
+</div>
+    <div class="para">
+            To enable and disable the vertex array, call
+    <a class="crossref" href="./glEnableClientState.html">glEnableClientState</a>
+    and
+    <a class="crossref" href="./glEnableClientState.html#c-glDisableClientState">glDisableClientState</a>
+    with the argument
+    <span class="constant">GL_VERTEX_ARRAY</span>
+    . If
+            enabled, the vertex array is used when
+    <a class="crossref" href="./glArrayElement.html">glArrayElement</a>
+    ,
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    ,
+    <a class="crossref" href="./glMultiDrawArrays.html">glMultiDrawArrays</a>
+    ,
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    ,
+    <a class="crossref" href="./glMultiDrawElements.html">glMultiDrawElements</a>
+    , or
+    <a class="crossref" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    is called.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glVertexPointer.html">glVertexPointer</a>
+    is available only if the GL version is 1.1 or greater.
+</div>
+    <div class="para">
+            The vertex array is initially disabled and isn't accessed when
+    <a class="crossref" href="./glArrayElement.html">glArrayElement</a>
+    ,
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    ,
+    <a class="crossref" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    ,
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    ,
+    <a class="crossref" href="./glMultiDrawArrays.html">glMultiDrawArrays</a>
+    , or
+    <a class="crossref" href="./glMultiDrawElements.html">glMultiDrawElements</a>
+    is called.
+</div>
+    <div class="para">
+            Execution of
+    <a class="function" href="./glVertexPointer.html">glVertexPointer</a>
+    is not allowed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    ,
+            but an error may or may not be generated. If no error is generated,
+            the operation is undefined.
+</div>
+    <div class="para">
+    <a class="function" href="./glVertexPointer.html">glVertexPointer</a>
+    is typically implemented on the client side.
+</div>
+    <div class="para">
+            Vertex array parameters are client-side state and are therefore not
+            saved or restored by
+    <a class="crossref" href="./glPushAttrib.html">glPushAttrib</a>
+    and
+    <a class="crossref" href="./glPushAttrib.html#c-glPopAttrib">glPopAttrib</a>
+    .
+            Use
+    <a class="crossref" href="./glPushClientAttrib.html">glPushClientAttrib</a>
+    and
+    <a class="crossref" href="./glPushClientAttrib.html#c-glPopClientAttrib">glPopClientAttrib</a>
+    instead.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-size">size</a>
+    is not 2, 3, or 4.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-stride">stride</a>
+    is negative.
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_VERTEX_ARRAY</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_VERTEX_ARRAY_SIZE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_VERTEX_ARRAY_TYPE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_VERTEX_ARRAY_STRIDE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_VERTEX_ARRAY_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_ARRAY_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetPointerv.html">glGetPointerv</a>
+    with argument
+    <span class="constant">GL_VERTEX_ARRAY_POINTER</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glArrayElement.html">glArrayElement</a>
+    ,
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ,
+    <a class="crossref" href="./glColorPointer.html">glColorPointer</a>
+    ,
+    <a class="crossref" href="./glEnableClientState.html#c-glDisableClientState">glDisableClientState</a>
+    ,
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    ,
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    ,
+    <a class="crossref" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    ,
+    <a class="crossref" href="./glEdgeFlagPointer.html">glEdgeFlagPointer</a>
+    ,
+    <a class="crossref" href="./glEnableClientState.html">glEnableClientState</a>
+    ,
+    <a class="crossref" href="./glFogCoordPointer.html">glFogCoordPointer</a>
+    ,
+    <a class="crossref" href="./glIndexPointer.html">glIndexPointer</a>
+    ,
+    <a class="crossref" href="./glInterleavedArrays.html">glInterleavedArrays</a>
+    ,
+    <a class="crossref" href="./glMultiDrawArrays.html">glMultiDrawArrays</a>
+    ,
+    <a class="crossref" href="./glMultiDrawElements.html">glMultiDrawElements</a>
+    ,
+    <a class="crossref" href="./glNormalPointer.html">glNormalPointer</a>
+    ,
+    <a class="crossref" href="./glPushClientAttrib.html#c-glPopClientAttrib">glPopClientAttrib</a>
+    ,
+    <a class="crossref" href="./glPushClientAttrib.html">glPushClientAttrib</a>
+    ,
+    <a class="crossref" href="./glSecondaryColorPointer.html">glSecondaryColorPointer</a>
+    ,
+    <a class="crossref" href="./glTexCoordPointer.html">glTexCoordPointer</a>
+    ,
+    <a class="crossref" href="./glVertex.html">glVertex</a>
+    ,
+    <a class="crossref" href="./glVertexAttribPointer.html">glVertexAttribPointer</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glVertexPointer</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_2.py">tests/shader_2.py</a>
+    Lines: <span class="sample-lines">168</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_2_c_void_p.py">tests/shader_2_c_void_p.py</a>
+    Lines: <span class="sample-lines">61</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_4_subset.py">tests/shader_4_subset.py</a>
+    Lines: <span class="sample-lines">70</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_sphere.py">tests/shader_sphere.py</a>
+    Lines: <span class="sample-lines">103</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/gldrawelements_string.py">tests/gldrawelements_string.py</a>
+    Lines: <span class="sample-lines">22</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/gldrawarrays_string.py">tests/gldrawarrays_string.py</a>
+    Lines: <span class="sample-lines">15</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_3.py">tests/shader_3.py</a>
+    Lines: <span class="sample-lines">169</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/drawcube.py">OpenGLContext/drawcube.py</a>
+    Lines: <span class="sample-lines">34</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/indexedpolygons.py">OpenGLContext/scenegraph/indexedpolygons.py</a>
+    Lines: <span class="sample-lines">62, 125</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/quadrics.py">OpenGLContext/scenegraph/quadrics.py</a>
+    Lines: <span class="sample-lines">51</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/box.py">OpenGLContext/scenegraph/box.py</a>
+    Lines: <span class="sample-lines">43</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/colorCube/colorCube.py">PyOpenGL-Demo/proesch/colorCube/colorCube.py</a>
+    Lines: <span class="sample-lines">53, 60</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson45.py">PyOpenGL-Demo/NeHe/lesson45.py</a>
+    Lines: <span class="sample-lines">417, 434</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/draw.py">pygl2d/draw.py</a>
+    Lines: <span class="sample-lines">89</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">113</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">94</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">179</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">187</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

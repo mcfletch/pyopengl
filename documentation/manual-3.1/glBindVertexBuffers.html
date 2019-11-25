@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glBindVertexBuffers : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glBindVertexBuffers</h1>
+</header>
+<main class="content">
+    <section class="purpose">attach multiple buffer objects to a vertex array object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glBindVertexBuffers"></a>
+    <span class="c-function">glBindVertexBuffers</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-first" class="parameter">first</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-count" class="parameter">count</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLuint *(
+            <a href="#param-buffers" class="parameter">buffers</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLintptr *(
+            <a href="#param-offsets" class="parameter">offsets</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLsizei *(
+            <a href="#param-strides" class="parameter">strides</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glBindVertexBuffer"></a>
+    <span class="py-function">glBindVertexBuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-bindingindex" class="parameter">bindingindex</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-offset" class="parameter">offset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-stride" class="parameter">stride</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glBindVertexBuffers"></a>
+    <span class="py-function">glBindVertexBuffers</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-first" class="parameter">first</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-count" class="parameter">count</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buffers" class="parameter">buffers</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-offsets" class="parameter">offsets</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-strides" class="parameter">strides</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glVertexArrayVertexBuffers"></a>
+    <span class="c-function">glVertexArrayVertexBuffers</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-vaobj" class="parameter">vaobj</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-first" class="parameter">first</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-count" class="parameter">count</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLuint *(
+            <a href="#param-buffers" class="parameter">buffers</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLintptr *(
+            <a href="#param-offsets" class="parameter">offsets</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLsizei *(
+            <a href="#param-strides" class="parameter">strides</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glVertexArrayVertexBuffer"></a>
+    <span class="py-function">glVertexArrayVertexBuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-vaobj" class="parameter">vaobj</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bindingindex" class="parameter">bindingindex</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-offset" class="parameter">offset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-stride" class="parameter">stride</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glVertexArrayVertexBuffers"></a>
+    <span class="py-function">glVertexArrayVertexBuffers</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-vaobj" class="parameter">vaobj</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-first" class="parameter">first</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-count" class="parameter">count</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buffers" class="parameter">buffers</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-offsets" class="parameter">offsets</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-strides" class="parameter">strides</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-vaobj"></a>
+                        vaobj
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the vertex array object for
+    <a class="function" href="./glBindVertexBuffers.html#c-glVertexArrayVertexBuffers">glVertexArrayVertexBuffers</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-first"></a>
+                        first
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the first vertex buffer binding point to which
+                    a buffer object is to be bound.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-count"></a>
+                        count
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of buffers to bind.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-buffers"></a>
+                        buffers
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of an array of names of existing
+                    buffer objects.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-offsets"></a>
+                        offsets
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of an array of offsets to
+                    associate with the binding points.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-buffers"></a>
+                        buffers
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of an array of strides to
+                    associate with the binding points.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glBindVertexBuffers.html">glBindVertexBuffers</a>
+    and
+    <a class="function" href="./glBindVertexBuffers.html#c-glVertexArrayVertexBuffers">glVertexArrayVertexBuffers</a>
+    bind storage
+            from an array of existing buffer objects to a specified number
+            of consecutive vertex buffer binding points units in a vertex
+            array object. For
+    <a class="function" href="./glBindVertexBuffers.html">glBindVertexBuffers</a>
+    , the
+            vertex array object is the currently bound vertex array object.
+            For
+    <a class="function" href="./glBindVertexBuffers.html#c-glVertexArrayVertexBuffers">glVertexArrayVertexBuffers</a>
+    ,
+    <a class="parameter" href="#param-vaobj">vaobj</a>
+    is the name of the vertex array
+            object.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-count">count</a>
+    existing buffer objects are bound
+            to vertex buffer binding points numbered $first$ through $first
+            + count - 1$. If
+    <a class="parameter" href="#param-buffers">buffers</a>
+    is not NULL, it
+            specifies an array of
+    <a class="parameter" href="#param-count">count</a>
+    values, each
+            of which must be zero or the name of an existing buffer object.
+    <a class="parameter" href="#param-offsets">offsets</a>
+    and
+    <a class="parameter" href="#param-strides">strides</a>
+    specify arrays of
+    <a class="parameter" href="#param-count">count</a>
+    values indicating the offset of the
+            first element and stride between elements in each buffer,
+            respectively. If
+    <a class="parameter" href="#param-buffers">buffers</a>
+    is NULL, each
+            affected vertex buffer binding point from $first$ through $first
+            + count - 1$ will be reset to have no bound buffer object. In
+            this case, the offsets and strides associated with the binding
+            points are set to default values, ignoring
+    <a class="parameter" href="#param-offsets">offsets</a>
+    and
+    <a class="parameter" href="#param-strides">strides</a>
+    .
+</div>
+    <div class="para">
+    <a class="function" href="./glBindVertexBuffers.html">glBindVertexBuffers</a>
+    is equivalent (assuming no errors
+            are generated) to:
+    <div class="programlisting">    for (i = 0; i &lt; count; i++) {
+        if (buffers == NULL) {
+            glBindVertexBuffer(first + i, 0, 0, 16);
+        } else {
+            glBindVertexBuffer(first + i, buffers[i], offsets[i], strides[i]);
+        }
+    }</div>
+    except that buffers will not be created if they do not exist.
+</div>
+    <div class="para">
+    <a class="function" href="./glBindVertexBuffers.html#c-glVertexArrayVertexBuffers">glVertexArrayVertexBuffers</a>
+    is equivalent to
+            the pseudocode above, but replacing
+    <a class="function" href="./glBindVertexBuffers.html">glBindVertexBuffers</a>
+    (args) with
+    <a class="function" href="./glBindVertexBuffers.html#c-glVertexArrayVertexBuffers">glVertexArrayVertexBuffers</a>
+    (vaobj, args).
+</div>
+    <div class="para">
+            The values specified in
+    <a class="parameter" href="#param-buffers">buffers</a>
+    ,
+    <a class="parameter" href="#param-offsets">offsets</a>
+    , and
+    <a class="parameter" href="#param-strides">strides</a>
+    will be checked separately for
+            each vertex buffer binding point. When a value for a specific
+            vertex buffer binding point is invalid, the state for that
+            binding point will be unchanged and an error will be generated.
+            However, state for other vertex buffer binding points will still
+            be changed if their corresponding values are valid.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated
+            by
+    <a class="function" href="./glBindVertexBuffers.html">glBindVertexBuffers</a>
+    if no vertex array
+            object is bound.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glBindVertexBuffers.html#c-glVertexArrayVertexBuffers">glVertexArrayVertexBuffers</a>
+    if
+    <a class="parameter" href="#param-vaobj">vaobj</a>
+    is not the name of the vertex array
+            object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if $first
+            + count$ is greater than the value of
+    <span class="constant">GL_MAX_VERTEX_ATTRIB_BINDINGS</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if any
+            value in
+    <span class="constant">buffers</span>
+    is not zero or the name of
+            an existing buffer object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if any value
+            in
+    <a class="parameter" href="#param-offsets">offsets</a>
+    or
+    <a class="parameter" href="#param-strides">strides</a>
+    is negative, or if a value is
+    <a class="parameter" href="#param-stride">stride</a>
+    is greater than the value of
+    <span class="constant">GL_MAX_VERTEX_ATTRIB_STRIDE</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glBindVertexBuffers.html">glBindVertexBuffers</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glBindVertexBuffers.html#c-glVertexArrayVertexBuffers">glVertexArrayVertexBuffers</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenBuffers.html">glGenBuffers</a>
+    ,
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ,
+    <a class="crossref" href="./glDeleteBuffers.html">glDeleteBuffers</a>
+    <a class="crossref" href="./glDeleteTextures.html">glDeleteTextures</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

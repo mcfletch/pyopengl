@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glPointParameter : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glPointParameter</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify point parameters</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glPointParameter"></a>
+    <span class="c-function">glPointParameter</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glPointParameterf"></a>
+    <span class="c-function">glPointParameterf</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glPointParameterf"></a>
+    <span class="py-function">glPointParameterf</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glPointParameterfv"></a>
+    <span class="c-function">glPointParameterfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLfloat * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glPointParameterfv"></a>
+    <span class="py-function">glPointParameterfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glPointParameteri"></a>
+    <span class="c-function">glPointParameteri</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glPointParameteri"></a>
+    <span class="py-function">glPointParameteri</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glPointParameteriv"></a>
+    <span class="c-function">glPointParameteriv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glPointParameteriv"></a>
+    <span class="py-function">glPointParameteriv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a single-valued point parameter.
+    <span class="constant">GL_POINT_FADE_THRESHOLD_SIZE</span>
+    , and
+    <span class="constant">GL_POINT_SPRITE_COORD_ORIGIN</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-param"></a>
+                        param
+                    </th>
+                    <td>
+    <div class="para">
+                    For
+    <a class="function" href="./glPointParameter.html#c-glPointParameterf">glPointParameterf</a>
+    and
+    <a class="function" href="./glPointParameter.html#c-glPointParameteri">glPointParameteri</a>
+    , specifies the
+                    value that
+    <a class="parameter" href="#param-pname">pname</a>
+    will be set to.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">
+                    For
+    <a class="function" href="./glPointParameter.html#c-glPointParameterfv">glPointParameterfv</a>
+    and
+    <a class="function" href="./glPointParameter.html#c-glPointParameteriv">glPointParameteriv</a>
+    , specifies a
+                    pointer to an array where the value or values to be
+                    assigned to
+    <a class="parameter" href="#param-pname">pname</a>
+    are stored.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            The following values are accepted for
+    <a class="parameter" href="#param-pname">pname</a>
+    :
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POINT_FADE_THRESHOLD_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    is a single floating-point value that specifies the threshold value
+                        to which point sizes are clamped if they exceed the specified value.  The
+                        default value is 1.0.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POINT_SPRITE_COORD_ORIGIN</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                    </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    is a single enum specifying the point sprite texture coordinate origin, either
+    <span class="constant">GL_LOWER_LEFT</span>
+    or
+    <span class="constant">GL_UPPER_LEFT</span>
+    .
+                        The default value is
+    <span class="constant">GL_UPPER_LEFT</span>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if the value specified for
+    <span class="constant">GL_POINT_FADE_THRESHOLD_SIZE</span>
+    is less than zero.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated If the value specified for
+    <span class="constant">GL_POINT_SPRITE_COORD_ORIGIN</span>
+    is not
+    <span class="constant">GL_LOWER_LEFT</span>
+    or
+    <span class="constant">GL_UPPER_LEFT</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_POINT_FADE_THRESHOLD_SIZE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_POINT_SPRITE_COORD_ORIGIN</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glPointParameter.html#c-glPointParameterf">glPointParameterf</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glPointParameter.html#c-glPointParameterfv">glPointParameterfv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glPointParameter.html#c-glPointParameteri">glPointParameteri</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glPointParameter.html#c-glPointParameteriv">glPointParameteriv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glPointSize.html">glPointSize</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI
+            Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glPointParameterf</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/pointset.py">OpenGLContext/scenegraph/pointset.py</a>
+    Lines: <span class="sample-lines">12, 13, 75, 76, 77, 84, 85, 86</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/line.py">core/line.py</a>
+    Lines: <span class="sample-lines">100, 101</span>
+</div>
+        <div class="sample-key">glPointParameterfv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/pointset.py">OpenGLContext/scenegraph/pointset.py</a>
+    Lines: <span class="sample-lines">15, 16, 78, 87</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

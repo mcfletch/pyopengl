@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glFramebufferParameteri : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glFramebufferParameteri</h1>
+</header>
+<main class="content">
+    <section class="purpose">set a named parameter of a framebuffer object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glFramebufferParameteri"></a>
+    <span class="c-function">glFramebufferParameteri</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glFramebufferParameteri"></a>
+    <span class="py-function">glFramebufferParameteri</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glNamedFramebufferParameteri"></a>
+    <span class="c-function">glNamedFramebufferParameteri</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glNamedFramebufferParameteri"></a>
+    <span class="py-function">glNamedFramebufferParameteri</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target to which the framebuffer is bound
+                    for
+    <a class="function" href="./glFramebufferParameteri.html">glFramebufferParameteri</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-framebuffer"></a>
+                        framebuffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the framebuffer object for
+    <a class="function" href="./glFramebufferParameteri.html#c-glNamedFramebufferParameteri">glNamedFramebufferParameteri</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the framebuffer parameter to be modified.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-param"></a>
+                        param
+                    </th>
+                    <td>
+    <div class="para">
+                    The new value for the parameter named
+    <a class="parameter" href="#param-pname">pname</a>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glFramebufferParameteri.html">glFramebufferParameteri</a>
+    and
+    <a class="function" href="./glFramebufferParameteri.html#c-glNamedFramebufferParameteri">glNamedFramebufferParameteri</a>
+    modify the
+            value of the parameter named
+    <a class="parameter" href="#param-pname">pname</a>
+    in the
+            specified framebuffer object. There are no modifiable parameters
+            of the default draw and read framebuffer, so they are not valid
+            targets of these commands.
+</div>
+    <div class="para">
+            For
+    <a class="function" href="./glFramebufferParameteri.html">glFramebufferParameteri</a>
+    ,
+            the framebuffer object is that bound to
+    <a class="parameter" href="#param-target">target</a>
+    , which must be
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    ,
+    <span class="constant">GL_READ_FRAMEBUFFER</span>
+    or
+    <span class="constant">GL_FRAMEBUFFER</span>
+    .
+    <span class="constant">GL_FRAMEBUFFER</span>
+    is equivalent to
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    .
+</div>
+    <div class="para">
+            For
+    <a class="function" href="./glFramebufferParameteri.html#c-glNamedFramebufferParameteri">glNamedFramebufferParameteri</a>
+    ,
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is the name of the
+            framebuffer object.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-pname">pname</a>
+    specifies the parameter to be
+            modified. The following values are accepted:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FRAMEBUFFER_DEFAULT_WIDTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-param">param</a>
+    specifies the assumed with for a framebuffer object with no attachments. If a
+                        framebuffer has attachments then the width of those attachments is used, otherwise
+                        the value of
+    <span class="constant">GL_FRAMEBUFFER_DEFAULT_WIDTH</span>
+    is used for the
+                        framebuffer.
+    <a class="parameter" href="#param-param">param</a>
+    must be greater than or equal to zero and less than
+                        or equal to the value of
+    <span class="constant">GL_MAX_FRAMEBUFFER_WIDTH</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FRAMEBUFFER_DEFAULT_HEIGHT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-param">param</a>
+    specifies the assumed height for a framebuffer object with no attachments. If a
+                        framebuffer has attachments then the height of those attachments is used, otherwise
+                        the value of
+    <span class="constant">GL_FRAMEBUFFER_DEFAULT_HEIGHT</span>
+    is used for the
+                        framebuffer.
+    <a class="parameter" href="#param-param">param</a>
+    must be greater than or equal to zero and less than
+                        or equal to the value of
+    <span class="constant">GL_MAX_FRAMEBUFFER_HEIGHT</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FRAMEBUFFER_DEFAULT_LAYERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-param">param</a>
+    specifies the assumed number of layers for a framebuffer object with no attachments. If a
+                        framebuffer has attachments then the layer count of those attachments is used, otherwise
+                        the value of
+    <span class="constant">GL_FRAMEBUFFER_DEFAULT_LAYERS</span>
+    is used for the
+                        framebuffer.
+    <a class="parameter" href="#param-param">param</a>
+    must be greater than or equal to zero and less than
+                        or equal to the value of
+    <span class="constant">GL_MAX_FRAMEBUFFER_LAYERS</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FRAMEBUFFER_DEFAULT_SAMPLES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-param">param</a>
+    specifies the assumed number of samples in a framebuffer object with no attachments. If a
+                        framebuffer has attachments then the sample count of those attachments is used, otherwise
+                        the value of
+    <span class="constant">GL_FRAMEBUFFER_DEFAULT_SAMPLES</span>
+    is used for the
+                        framebuffer.
+    <a class="parameter" href="#param-param">param</a>
+    must be greater than or equal to zero and less than
+                        or equal to the value of
+    <span class="constant">GL_MAX_FRAMEBUFFER_SAMPLE</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-param">param</a>
+    specifies whether the framebuffer should assume identical sample locations and
+                        the same number of samples for all texels in the virtual image. If
+    <a class="parameter" href="#param-param">param</a>
+    is zero,
+                        then the implementation may vary the position or the count of samples within the virtual image from
+                        pixel to pixel, otherwise it will use the same sample position and count for all pixels in the virtual image.
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glFramebufferParameteri.html">glFramebufferParameteri</a>
+    if
+    <a class="parameter" href="#param-target">target</a>
+    is not one of the accepted
+            framebuffer targets.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glFramebufferParameteri.html">glFramebufferParameteri</a>
+    if the default
+            framebuffer is bound to
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glFramebufferParameteri.html#c-glNamedFramebufferParameteri">glNamedFramebufferParameteri</a>
+    if
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is not the name of an
+            existing framebuffer object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_FRAMEBUFFER_DEFAULT_WIDTH</span>
+    and
+    <a class="parameter" href="#param-param">param</a>
+    is less than zero or greater than
+            the value of
+    <span class="constant">GL_MAX_FRAMEBUFFER_WIDTH</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_FRAMEBUFFER_DEFAULT_HEIGHT</span>
+    and
+    <a class="parameter" href="#param-param">param</a>
+    is less than zero or greater than
+            the value of
+    <span class="constant">GL_MAX_FRAMEBUFFER_HEIGHT</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_FRAMEBUFFER_DEFAULT_LAYERS</span>
+    and
+    <a class="parameter" href="#param-param">param</a>
+    is less than zero or greater than
+            the value of
+    <span class="constant">GL_MAX_FRAMEBUFFER_LAYERS</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_FRAMEBUFFER_DEFAULT_SAMPLES</span>
+    and
+    <a class="parameter" href="#param-param">param</a>
+    is less than zero or greater than
+            the value of
+    <span class="constant">GL_MAX_FRAMEBUFFER_SAMPLES</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="function" href="./glGetFramebufferParameteriv.html">glGetFramebufferParameteriv</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glFramebufferParameteri.html">glFramebufferParameteri</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glFramebufferParameteri.html#c-glNamedFramebufferParameteri">glNamedFramebufferParameteri</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBindFramebuffer.html">glBindFramebuffer</a>
+    ,
+    <a class="crossref" href="./glCreateFramebuffers.html">glCreateFramebuffers</a>
+    ,
+    <a class="crossref" href="./glFramebufferRenderbuffer.html">glFramebufferRenderbuffer</a>
+    ,
+    <a class="crossref" href="./glFramebufferTexture.html">glFramebufferTexture</a>
+    ,
+    <a class="crossref" href="./glGenFramebuffers.html">glGenFramebuffers</a>
+    ,
+    <a class="crossref" href="./glGetFramebufferParameter.html">glGetFramebufferParameter</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2013-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

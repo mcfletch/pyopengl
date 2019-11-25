@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gl_BoundingBox : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>gl_BoundingBox</h1>
+</header>
+<main class="content">
+    <section class="purpose">contains the bounding box primitives generated from the output patch</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gl_BoundingBox"></a>
+    <span class="c-function">gl_BoundingBox</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <div class="varname">gl_BoundingBox[]</div>
+    is an array of two vec4 values that should be used instead of the value of
+    <span class="constant">GL_PRIMITIVE_BOUNDING_BOX</span>
+    as the primitive bounding box (see
+    <a class="crossref" href="./glPrimitiveBoundingBox.html">glPrimitiveBoundingBox</a>
+    ) for primitives generated
+            from the output patch.
+    <div class="varname">gl_BoundingBox[]</div>
+    is
+            consumed by the tessellation primitive generator, and is not available as an
+            input to the tessellation evaluation shader.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            If tessellation is active, each invocation of the tessellation control
+            shader may re-specify the bounding box by writing to the built-in
+    <div class="varname">gl_BoundingBox[]</div>
+    variable. If the shader statically assigns a value to
+            any part of this variable, then
+    <div class="varname">gl_BoundingBox[]</div>
+    is used instead of
+            the parameters to
+    <a class="function" href="./glPrimitiveBoundingBox.html">glPrimitiveBoundingBox</a>
+    .
+            If the shader contains a static assignment
+            to
+    <div class="varname">gl_BoundingBox[]</div>
+    and there is an execution path through the shader
+            that does not write all components of
+    <div class="varname">gl_BoundingBox[]</div>
+    , the value of
+            unwritten components and corresponding bounding box coordinates is undefined
+            for executions of the shader that take that path.
+</div>
+    <div class="para">
+            If the tessellation control shader re-specifies the bounding box, the re-specified
+            value is used for primitives generated from the output patch by
+            the primitive generator, any primitives emitted by the geometry shader
+            invocations for those generated primitives, and any primitives further
+            introduced during clipping.
+        </div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>gl_BoundingBox[]</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glPrimitiveBoundingBox.html">glPrimitiveBoundingBox</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2015 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

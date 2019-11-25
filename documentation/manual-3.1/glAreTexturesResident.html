@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glAreTexturesResident : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glAreTexturesResident</h1>
+</header>
+<main class="content">
+    <section class="purpose">determine if textures are loaded in texture memory</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glAreTexturesResident"></a>
+    <span class="c-function">glAreTexturesResident</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLsizei (
+            <a href="#param-n" class="parameter">n</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLuint * (
+            <a href="#param-textures" class="parameter">textures</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean * (
+            <a href="#param-residences" class="parameter">residences</a>
+        )
+    </span>
+</span>)-&gt; GLboolean
+</div>
+                <div class="py-signature">
+    <a name="py-glAreTexturesResident"></a>
+    <span class="py-function">glAreTexturesResident</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-n" class="parameter">n</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-textures" class="parameter">textures</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-residences" class="parameter">residences</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_ubyte'&gt;</span>
+    <pre class="pydoc">Allow both Pythonic and C-style calls to glAreTexturesResident
+
+        glAreTexturesResident( arrays.GLuintArray( textures) )
+
+    or
+
+        glAreTexturesResident( int(n), arrays.GLuintArray( textures), arrays.GLuboolean( output) )
+
+    or
+
+        glAreTexturesResident( int(n), arrays.GLuintArray( textures) )
+
+    returns the output arrays.GLubooleanArray
+    </pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-n"></a>
+                        n
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of textures to be queried.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-textures"></a>
+                        textures
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies an array containing the names of the textures to be queried.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-residences"></a>
+                        residences
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies an array in which the texture residence status is returned.
+                    The residence status of a texture named by an element of
+    <a class="parameter" href="#param-textures">textures</a>
+    is
+                    returned in the corresponding element of
+    <a class="parameter" href="#param-residences">residences</a>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            GL establishes
+            a ``working set'' of textures that are resident in texture memory.
+            These textures can be bound to a texture target much more efficiently
+            than textures that are not resident.
+        </div>
+    <div class="para">
+    <a class="function" href="./glAreTexturesResident.html">glAreTexturesResident</a>
+    queries the texture residence status of the
+    <a class="parameter" href="#param-n">n</a>
+    textures named by
+            the elements of
+    <a class="parameter" href="#param-textures">textures</a>
+    .
+            If all the named textures are resident,
+    <a class="function" href="./glAreTexturesResident.html">glAreTexturesResident</a>
+    returns
+    <span class="constant">GL_TRUE</span>
+    ,
+            and the contents of
+    <a class="parameter" href="#param-residences">residences</a>
+    are undisturbed.
+            If not all the named textures are resident,
+    <a class="function" href="./glAreTexturesResident.html">glAreTexturesResident</a>
+    returns
+    <span class="constant">GL_FALSE</span>
+    ,
+            and detailed status is returned in the
+    <a class="parameter" href="#param-n">n</a>
+    elements of
+    <a class="parameter" href="#param-residences">residences</a>
+    .
+            If an element of
+    <a class="parameter" href="#param-residences">residences</a>
+    is
+    <span class="constant">GL_TRUE</span>
+    , then the texture named by
+            the corresponding element of
+    <a class="parameter" href="#param-textures">textures</a>
+    is resident.
+</div>
+    <div class="para">
+            The residence status of a single bound texture may also be queried
+            by calling
+    <a class="crossref" href="./glGetTexParameter.html">glGetTexParameter</a>
+    with the
+    <span class="emphasis">target</span>
+    argument set to the
+            target to which the texture is bound, and the
+    <span class="emphasis">pname</span>
+    argument
+            set to
+    <span class="constant">GL_TEXTURE_RESIDENT</span>
+    .
+            This is the only way that the residence status of a default texture can be
+            queried.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glAreTexturesResident.html">glAreTexturesResident</a>
+    is available only if the GL version is 1.1 or greater.
+</div>
+    <div class="para">
+    <a class="function" href="./glAreTexturesResident.html">glAreTexturesResident</a>
+    returns the residency status of the textures at the time of
+            invocation. It does not guarantee that the textures will remain
+            resident at any other time.
+</div>
+    <div class="para">
+            If textures reside in virtual memory (there is no texture memory), they
+            are considered always resident.
+        </div>
+    <div class="para">
+            Some implementations may not load a texture until the first use of
+            that texture.
+        </div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-n">n</a>
+    is negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if any element in
+    <a class="parameter" href="#param-textures">textures</a>
+    is 0 or does not name a texture. In that case, the function returns
+    <span class="constant">GL_FALSE</span>
+    and the contents of
+    <a class="parameter" href="#param-residences">residences</a>
+    is indeterminate.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glAreTexturesResident.html">glAreTexturesResident</a>
+    is executed
+            between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding
+            execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetTexParameter.html">glGetTexParameter</a>
+    with parameter name
+    <span class="constant">GL_TEXTURE_RESIDENT</span>
+    retrieves the residence status of a currently bound texture.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+    ,
+    <a class="crossref" href="./glGetTexParameter.html">glGetTexParameter</a>
+    ,
+    <a class="crossref" href="./glPrioritizeTextures.html">glPrioritizeTextures</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexParameter.html">glTexParameter</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glAreTexturesResident</div>
+        <div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Textures.py">VisionEgg/Textures.py</a>
+    Lines: <span class="sample-lines">488</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

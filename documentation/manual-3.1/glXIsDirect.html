@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXIsDirect : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXIsDirect</h1>
+</header>
+<main class="content">
+    <section class="purpose">indicate whether direct rendering is enabled</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXIsDirect"></a>
+    <span class="c-function">glXIsDirect</span>(<span class="parameter-list">
+    <span class="param-def">
+        Display * (
+            <a href="#param-dpy" class="parameter">dpy</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLXContext (
+            <a href="#param-ctx" class="parameter">ctx</a>
+        )
+    </span>
+</span>)-&gt; Bool
+</div>
+                <div class="py-signature">
+    <a name="py-glXIsDirect"></a>
+    <span class="py-function">glXIsDirect</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-dpy" class="parameter">dpy</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-ctx" class="parameter">ctx</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_uint'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dpy"></a>
+                        dpy
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the connection to the X server.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-ctx"></a>
+                        ctx
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the GLX context that is being queried.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXIsDirect.html">glXIsDirect</a>
+    returns
+    <span class="constant">True</span>
+    if
+    <a class="parameter" href="#param-ctx">ctx</a>
+    is a direct rendering context,
+    <span class="constant">False</span>
+    otherwise.
+            Direct rendering contexts pass rendering commands directly from the calling
+            process's address space to the rendering system,
+            bypassing the X server.
+            Nondirect rendering contexts pass all rendering commands to the X server.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GLXBadContext</span>
+    is generated if
+    <a class="parameter" href="#param-ctx">ctx</a>
+    is not a valid GLX context.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glXCreateContext.html">glXCreateContext</a>
+    ,
+    <a class="crossref" href="./glXCreateNewContext.html">glXCreateNewContext</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

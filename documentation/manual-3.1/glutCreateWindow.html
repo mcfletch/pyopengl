@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutCreateWindow : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutCreateWindow</h1>
+</header>
+<main class="content">
+    <section class="purpose">creates a top-level window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutCreateWindow"></a>
+    <span class="c-function">glutCreateWindow</span>(<span class="parameter-list">
+    <span class="param-def">
+        char(
+            <a href="#param-name" class="parameter">name</a>
+        )
+    </span>
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glutCreateWindow"></a>
+    <span class="py-function">glutCreateWindow</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-title" class="parameter">title</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">glutCreateWindow( STRING(title) ) -&gt; c_int</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="simpara">
+						ASCII character string for use as window name.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutCreateWindow.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			glutCreateWindow creates a top-level window. The name will be provided to the window system as the window's name. The
+			intent is that the window system will label the window with the name.
+		</div>
+    <div class="para">
+			Implicitly, the current window is set to the newly created window.
+		</div>
+    <div class="para">
+			Each created window has a unique associated OpenGL context. State changes to a window's associated OpenGL context can
+			be done immediately after the window is created.
+		</div>
+    <div class="para">
+			The display state of a window is initially for the window to be shown. But the window's display state is not actually
+			acted upon until
+    <a class="function" href="./glutMainLoop.html">glutMainLoop</a>
+    is entered. This means until
+    <a class="function" href="./glutMainLoop.html">glutMainLoop</a>
+    is called, rendering to a created window is ineffective because the window
+			can not yet be displayed.
+</div>
+    <div class="para">
+			The value returned is a unique small integer identifier for the window. The range of allocated identifiers starts at
+			one. This window identifier can be used when calling
+    <a class="function" href="./glutSetWindow.html">glutSetWindow</a>
+    .
+</div>
+    </section><section class="section" id="glutCreateWindow.3GLUT-x_implementation_notes">
+    <h2 class="title">X Implementation Notes</h2>
+    <div class="para">
+			The proper X Inter-Client Communication Conventions Manual (ICCCM) top-level properties are established. The
+    <span class="constant">WM_COMMAND</span>
+    property that lists the command line used to invoke the GLUT program is only
+			established for the first window created.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutCreateSubWindow.html">glutCreateSubWindow</a>
+            <a class="crossref" href="./glutCreateMenu.html">glutCreateMenu</a>
+            <a class="crossref" href="./glutDestroyWindow.html">glutDestroyWindow</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutCreateWindow</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/glutcontext.py">OpenGLContext/glutcontext.py</a>
+    Lines: <span class="sample-lines">40</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/shaderProg/torusShader.py">PyOpenGL-Demo/proesch/shaderProg/torusShader.py</a>
+    Lines: <span class="sample-lines">104</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/shaderProg/textureShader.py">PyOpenGL-Demo/proesch/shaderProg/textureShader.py</a>
+    Lines: <span class="sample-lines">157</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/shaderProg/shaderProg.py">PyOpenGL-Demo/proesch/shaderProg/shaderProg.py</a>
+    Lines: <span class="sample-lines">149</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/bezier/bezier.py">PyOpenGL-Demo/proesch/bezier/bezier.py</a>
+    Lines: <span class="sample-lines">139</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/stereo/stereoDemo.py">PyOpenGL-Demo/proesch/stereo/stereoDemo.py</a>
+    Lines: <span class="sample-lines">158</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbsCurve/nurbsCurve.py">PyOpenGL-Demo/proesch/nurbsCurve/nurbsCurve.py</a>
+    Lines: <span class="sample-lines">96</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbsCurve/nurbsCircle.py">PyOpenGL-Demo/proesch/nurbsCurve/nurbsCircle.py</a>
+    Lines: <span class="sample-lines">98</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py">PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py</a>
+    Lines: <span class="sample-lines">75</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/interactionMatrix/interactionMatrix.py">PyOpenGL-Demo/proesch/interactionMatrix/interactionMatrix.py</a>
+    Lines: <span class="sample-lines">61</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">203</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/simple/simpleQuad.py">PyOpenGL-Demo/proesch/simple/simpleQuad.py</a>
+    Lines: <span class="sample-lines">39</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/simple/simpleInteraction.py">PyOpenGL-Demo/proesch/simple/simpleInteraction.py</a>
+    Lines: <span class="sample-lines">162</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/simple/simpleAnimation.py">PyOpenGL-Demo/proesch/simple/simpleAnimation.py</a>
+    Lines: <span class="sample-lines">57</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/simpleTexture/texturedQuad.py">PyOpenGL-Demo/proesch/simpleTexture/texturedQuad.py</a>
+    Lines: <span class="sample-lines">87</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/colorCube/colorCube.py">PyOpenGL-Demo/proesch/colorCube/colorCube.py</a>
+    Lines: <span class="sample-lines">71</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson5.py">PyOpenGL-Demo/NeHe/lesson5.py</a>
+    Lines: <span class="sample-lines">210</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson45.py">PyOpenGL-Demo/NeHe/lesson45.py</a>
+    Lines: <span class="sample-lines">482</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson3.py">PyOpenGL-Demo/NeHe/lesson3.py</a>
+    Lines: <span class="sample-lines">139</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson23.py">PyOpenGL-Demo/NeHe/lesson23.py</a>
+    Lines: <span class="sample-lines">241</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson4.py">PyOpenGL-Demo/NeHe/lesson4.py</a>
+    Lines: <span class="sample-lines">162</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson6.py">PyOpenGL-Demo/NeHe/lesson6.py</a>
+    Lines: <span class="sample-lines">198</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson42.py">PyOpenGL-Demo/NeHe/lesson42.py</a>
+    Lines: <span class="sample-lines">400</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson6-multi.py">PyOpenGL-Demo/NeHe/lesson6-multi.py</a>
+    Lines: <span class="sample-lines">236</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson18.py">PyOpenGL-Demo/NeHe/lesson18.py</a>
+    Lines: <span class="sample-lines">272</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson11.py">PyOpenGL-Demo/NeHe/lesson11.py</a>
+    Lines: <span class="sample-lines">160</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson16.py">PyOpenGL-Demo/NeHe/lesson16.py</a>
+    Lines: <span class="sample-lines">181</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson12.py">PyOpenGL-Demo/NeHe/lesson12.py</a>
+    Lines: <span class="sample-lines">161</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson19.py">PyOpenGL-Demo/NeHe/lesson19.py</a>
+    Lines: <span class="sample-lines">253</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson13.py">PyOpenGL-Demo/NeHe/lesson13.py</a>
+    Lines: <span class="sample-lines">192</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson2.py">PyOpenGL-Demo/NeHe/lesson2.py</a>
+    Lines: <span class="sample-lines">134</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson1.py">PyOpenGL-Demo/NeHe/lesson1.py</a>
+    Lines: <span class="sample-lines">112</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson41.py">PyOpenGL-Demo/NeHe/lesson41.py</a>
+    Lines: <span class="sample-lines">330</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson26.py">PyOpenGL-Demo/NeHe/lesson26.py</a>
+    Lines: <span class="sample-lines">227</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson48/NeHeGL.py">PyOpenGL-Demo/NeHe/lesson48/NeHeGL.py</a>
+    Lines: <span class="sample-lines">137</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson43/lesson43.py">PyOpenGL-Demo/NeHe/lesson43/lesson43.py</a>
+    Lines: <span class="sample-lines">168</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/lesson44.py">PyOpenGL-Demo/NeHe/lesson44/lesson44.py</a>
+    Lines: <span class="sample-lines">442</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/double.py">PyOpenGL-Demo/redbook/double.py</a>
+    Lines: <span class="sample-lines">109</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/lines.py">PyOpenGL-Demo/redbook/lines.py</a>
+    Lines: <span class="sample-lines">137</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/hello.py">PyOpenGL-Demo/redbook/hello.py</a>
+    Lines: <span class="sample-lines">98</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/teapots.py">PyOpenGL-Demo/redbook/teapots.py</a>
+    Lines: <span class="sample-lines">203</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/drawf.py">PyOpenGL-Demo/redbook/drawf.py</a>
+    Lines: <span class="sample-lines">109</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/fog.py">PyOpenGL-Demo/redbook/fog.py</a>
+    Lines: <span class="sample-lines">151</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/scene.py">PyOpenGL-Demo/redbook/scene.py</a>
+    Lines: <span class="sample-lines">136</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/movelight.py">PyOpenGL-Demo/redbook/movelight.py</a>
+    Lines: <span class="sample-lines">135</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/cube.py">PyOpenGL-Demo/redbook/cube.py</a>
+    Lines: <span class="sample-lines">94</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/smooth.py">PyOpenGL-Demo/redbook/smooth.py</a>
+    Lines: <span class="sample-lines">103</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLE/maintest.py">PyOpenGL-Demo/GLE/maintest.py</a>
+    Lines: <span class="sample-lines">36</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/molehill.py">PyOpenGL-Demo/GLUT/molehill.py</a>
+    Lines: <span class="sample-lines">62</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/gears.py">PyOpenGL-Demo/GLUT/gears.py</a>
+    Lines: <span class="sample-lines">268</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/gluttimerfunc_testCase.py">PyOpenGL-Demo/GLUT/gluttimerfunc_testCase.py</a>
+    Lines: <span class="sample-lines">83</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/glutplane.py">PyOpenGL-Demo/GLUT/glutplane.py</a>
+    Lines: <span class="sample-lines">219</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/shader_test.py">PyOpenGL-Demo/GLUT/shader_test.py</a>
+    Lines: <span class="sample-lines">124</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/conechecker.py">PyOpenGL-Demo/GLUT/tom/conechecker.py</a>
+    Lines: <span class="sample-lines">66</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/lorentz.py">PyOpenGL-Demo/GLUT/tom/lorentz.py</a>
+    Lines: <span class="sample-lines">118</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/checker.py">PyOpenGL-Demo/GLUT/tom/checker.py</a>
+    Lines: <span class="sample-lines">110</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/text.py">PyOpenGL-Demo/GLUT/tom/text.py</a>
+    Lines: <span class="sample-lines">111</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/conesave.py">PyOpenGL-Demo/GLUT/tom/conesave.py</a>
+    Lines: <span class="sample-lines">52</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/arraytest.py">PyOpenGL-Demo/GLUT/tom/arraytest.py</a>
+    Lines: <span class="sample-lines">97</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/cone.py">PyOpenGL-Demo/GLUT/tom/cone.py</a>
+    Lines: <span class="sample-lines">112</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/da/dots.py">PyOpenGL-Demo/da/dots.py</a>
+    Lines: <span class="sample-lines">100</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/py2exe-example/shader_test.py">py2exe-example/shader_test.py</a>
+    Lines: <span class="sample-lines">126</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/applications/glutviewer.py">pymmlib/applications/glutviewer.py</a>
+    Lines: <span class="sample-lines">402</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglGlut.py">renderers/openglGlut.py</a>
+    Lines: <span class="sample-lines">54</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/glutdevice.py">system/glutdevice.py</a>
+    Lines: <span class="sample-lines">50</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/ui/window/win_glut.py">pymt/ui/window/win_glut.py</a>
+    Lines: <span class="sample-lines">15, 38</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">352</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">383</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">250</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">231</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">229</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">311</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">220</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">319</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">373</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">330</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

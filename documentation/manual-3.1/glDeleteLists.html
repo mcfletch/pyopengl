@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glDeleteLists : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glDeleteLists</h1>
+</header>
+<main class="content">
+    <section class="purpose">delete a contiguous group of display lists</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glDeleteLists"></a>
+    <span class="c-function">glDeleteLists</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-list" class="parameter">list</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-range" class="parameter">range</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glDeleteLists"></a>
+    <span class="py-function">glDeleteLists</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-list" class="parameter">list</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-range" class="parameter">range</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-list"></a>
+                        list
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the integer name of the first display list to delete.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-range"></a>
+                        range
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of display lists to delete.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glDeleteLists.html">glDeleteLists</a>
+    causes a contiguous group of display lists to be deleted.
+    <a class="parameter" href="#param-list">list</a>
+    is the name of the first display list to be deleted,
+            and
+    <a class="parameter" href="#param-range">range</a>
+    is the number of display lists to delete.
+            All display lists
+    <math><mi mathvariant="italic">d</mi></math>
+    with
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">list</mi>
+                    <mo>&lt;=</mo>
+                    <mi mathvariant="italic">d</mi>
+                    <mo>&lt;=</mo>
+                    <mrow>
+                        <mi mathvariant="italic">list</mi>
+                        <mo>+</mo>
+                        <mi mathvariant="italic">range</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                    </mrow>
+                </mrow>
+            </math>
+    are deleted.
+</div>
+    <div class="para">
+            All storage locations allocated to the specified display lists are freed,
+            and the names are available for reuse at a later time.
+            Names within the range that do not have an associated display list are ignored.
+            If
+    <a class="parameter" href="#param-range">range</a>
+    is 0, nothing happens.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-range">range</a>
+    is negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glDeleteLists.html">glDeleteLists</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glCallList.html">glCallList</a>
+    ,
+    <a class="crossref" href="./glCallLists.html">glCallLists</a>
+    ,
+    <a class="crossref" href="./glGenLists.html">glGenLists</a>
+    ,
+    <a class="crossref" href="./glIsList.html">glIsList</a>
+    ,
+    <a class="crossref" href="./glNewList.html">glNewList</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glDeleteLists</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glprint.py">tests/glprint.py</a>
+    Lines: <span class="sample-lines">59</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/displaylist.py">OpenGLContext/displaylist.py</a>
+    Lines: <span class="sample-lines">45, 45, 53</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/pygamefont.py">OpenGLContext/scenegraph/text/pygamefont.py</a>
+    Lines: <span class="sample-lines">75</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/font.py">OpenGLContext/scenegraph/text/font.py</a>
+    Lines: <span class="sample-lines">180</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/wxfont.py">OpenGLContext/scenegraph/text/wxfont.py</a>
+    Lines: <span class="sample-lines">107</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/toolsfont.py">OpenGLContext/scenegraph/text/toolsfont.py</a>
+    Lines: <span class="sample-lines">288</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/glutfont.py">OpenGLContext/scenegraph/text/glutfont.py</a>
+    Lines: <span class="sample-lines">42</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">44</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson13.py">PyOpenGL-Demo/NeHe/lesson13.py</a>
+    Lines: <span class="sample-lines">88</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson43/glFreeType.py">PyOpenGL-Demo/NeHe/lesson43/glFreeType.py</a>
+    Lines: <span class="sample-lines">317</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/glFont.py">PyOpenGL-Demo/NeHe/lesson44/glFont.py</a>
+    Lines: <span class="sample-lines">34</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/lesson44.py">PyOpenGL-Demo/NeHe/lesson44/lesson44.py</a>
+    Lines: <span class="sample-lines">390</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/mmLib/OpenGLDriver.py">pymmlib/mmLib/OpenGLDriver.py</a>
+    Lines: <span class="sample-lines">94</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglSoya.py">renderers/openglSoya.py</a>
+    Lines: <span class="sample-lines">57</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglPygame.py">renderers/openglPygame.py</a>
+    Lines: <span class="sample-lines">60</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglGlut.py">renderers/openglGlut.py</a>
+    Lines: <span class="sample-lines">79</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/openglgraphics.py">system/openglgraphics.py</a>
+    Lines: <span class="sample-lines">56</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/data.py">pyggel/data.py</a>
+    Lines: <span class="sample-lines">224</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">526</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">513</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py">Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">218</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/Display3D.py">Sketches/THF/3D/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">218</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">513</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">526</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

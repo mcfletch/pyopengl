@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glMapBuffer : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glMapBuffer</h1>
+</header>
+<main class="content">
+    <section class="purpose">map all of a buffer object's data store into the client's address space</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glMapBuffer"></a>
+    <span class="c-function">glMapBuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-access" class="parameter">access</a>
+        )
+    </span>
+</span>)-&gt; void *
+</div>
+                <div class="py-signature">
+    <a name="py-glMapBuffer"></a>
+    <span class="py-function">glMapBuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-access" class="parameter">access</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_void_p'&gt;</span>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glMapNamedBuffer"></a>
+    <span class="c-function">glMapNamedBuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-access" class="parameter">access</a>
+        )
+    </span>
+</span>)-&gt; void *
+</div>
+                <div class="py-signature">
+    <a name="py-glMapNamedBuffer"></a>
+    <span class="py-function">glMapNamedBuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-access" class="parameter">access</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_void_p'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target to which the buffer object is bound
+                    for
+    <a class="function" href="./glMapBuffer.html">glMapBuffer</a>
+    , which must be one
+                    of the buffer binding targets in the following table:
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-buffer"></a>
+                        buffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the buffer object for
+    <a class="function" href="./glMapBuffer.html#c-glMapNamedBuffer">glMapNamedBuffer</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-access"></a>
+                        access
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the access policy for
+    <a class="function" href="./glMapBuffer.html">glMapBuffer</a>
+    and
+    <a class="function" href="./glMapBuffer.html#c-glMapNamedBuffer">glMapNamedBuffer</a>
+    , indicating
+                    whether it will be possible to read from, write to, or
+                    both read from and write to the buffer object's mapped
+                    data store. The symbolic constant must be
+    <span class="constant">GL_READ_ONLY</span>
+    ,
+    <span class="constant">GL_WRITE_ONLY</span>
+    , or
+    <span class="constant">GL_READ_WRITE</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glMapBuffer.html">glMapBuffer</a>
+    and
+    <a class="function" href="./glMapBuffer.html#c-glMapNamedBuffer">glMapNamedBuffer</a>
+    map the entire data store
+            of a specified buffer object into the client's address space.
+            The data can then be directly read and/or written relative to
+            the returned pointer, depending on the specified
+    <a class="parameter" href="#param-access">access</a>
+    policy.
+</div>
+    <div class="para">
+            A pointer to the beginning of the mapped range is returned once
+            all pending operations on that buffer object have completed, and
+            may be used to modify and/or query the corresponding range of
+            the data store according to the value of
+    <a class="parameter" href="#param-access">access</a>
+    :
+    <div class="itemizedlist">
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_READ_ONLY</span>
+    indicates that
+                        the returned pointer may be used to read buffer
+                        object data.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_WRITE_ONLY</span>
+    indicates that
+                        the returned pointer may be used to modify buffer
+                        object data.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_READ_WRITE</span>
+    indicates that
+                        the returned pointer may be used to read and to
+                        modify buffer object data.
+</div>
+</dd>
+</div>
+</div>
+    <div class="para">
+            If an error is generated, a
+    <div class="code">NULL</div>
+    pointer is
+            returned.
+</div>
+    <div class="para">
+            If no error occurs, the returned pointer will reflect an
+            allocation aligned to the value of
+    <span class="constant">GL_MIN_MAP_BUFFER_ALIGNMENT</span>
+    basic machine
+            units.
+</div>
+    <div class="para">
+            The returned pointer values may not be passed as parameter
+            values to GL commands. For example, they may not be used to
+            specify array pointers, or to specify or query pixel or texture
+            image data; such actions produce undefined results, although
+            implementations may not check for such behavior for performance
+            reasons.
+        </div>
+    <div class="para">
+            No GL error is generated if the returned pointer is accessed in
+            a way inconsistent with
+    <a class="parameter" href="#param-access">access</a>
+    (e.g. used
+            to read from a mapping made with
+    <a class="parameter" href="#param-access">access</a>
+    <span class="constant">GL_WRITE_ONLY</span>
+    or write to a mapping made
+            with
+    <a class="parameter" href="#param-access">access</a>
+    <span class="constant">GL_READ_ONLY</span>
+    ), but the result is undefined
+            and system errors (possibly including program termination) may
+            occur.
+</div>
+    <div class="para">
+            Mappings to the data stores of buffer objects may have
+            nonstandard performance characteristics. For example, such
+            mappings may be marked as uncacheable regions of memory, and in
+            such cases reading from them may be very slow. To ensure optimal
+            performance, the client should use the mapping in a fashion
+            consistent with the values of
+    <span class="constant">GL_BUFFER_USAGE</span>
+    for the buffer object and
+            of
+    <a class="parameter" href="#param-access">access</a>
+    . Using a mapping in a fashion
+            inconsistent with these values is liable to be multiple orders
+            of magnitude slower than using normal memory.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            Alignment of the returned pointer is guaranteed only if the
+            version of the GL version is 4.2 or greater. Also, the
+    <span class="constant">GL_ATOMIC_COUNTER_BUFFER</span>
+    target is accepted
+            only if the GL version is 4.2 or greater.
+</div>
+    <div class="para">
+            The
+    <span class="constant">GL_DISPATCH_INDIRECT_BUFFER</span>
+    and
+    <span class="constant">GL_SHADER_STORAGE_BUFFER</span>
+    targets are
+            available only if the GL version is 4.3 or greater.
+</div>
+    <div class="para">
+            The
+    <span class="constant">GL_QUERY_BUFFER</span>
+    target is available
+            only if the GL version is 4.4 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glMapBuffer.html">glMapBuffer</a>
+    if
+    <a class="parameter" href="#param-target">target</a>
+    is not one of the buffer binding
+            targets listed above.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glMapBuffer.html">glMapBuffer</a>
+    if zero is bound to
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glMapBuffer.html#c-glMapNamedBuffer">glMapNamedBuffer</a>
+    if
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is not the name of an existing
+            buffer object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-access">access</a>
+    is not
+    <span class="constant">GL_READ_ONLY</span>
+    ,
+    <span class="constant">GL_WRITE_ONLY</span>
+    , or
+    <span class="constant">GL_READ_WRITE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_OUT_OF_MEMORY</span>
+    is generated if the GL is
+            unable to map the buffer object's data store. This may occur for
+            a variety of system-specific reasons, such as the absence of
+            sufficient remaining virtual memory.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the
+            buffer object is in a mapped state.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetBufferPointerv.html">glGetBufferPointerv</a>
+    with argument
+    <span class="constant">GL_BUFFER_MAP_POINTER</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetBufferParameteriv.html#c-glGetBufferParameteriv">glGetBufferParameter</a>
+    with argument
+    <span class="constant">GL_BUFFER_MAPPED</span>
+    ,
+    <span class="constant">GL_BUFFER_ACCESS</span>
+    , or
+    <span class="constant">GL_BUFFER_USAGE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with
+    <a class="parameter" href="#param-pname">pname</a>
+    <span class="constant">GL_MIN_MAP_BUFFER_ALIGNMENT</span>
+    . The value must
+            be a power of two that is at least 64.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glMapBuffer.html">glMapBuffer</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glMapBuffer.html#c-glMapNamedBuffer">glMapNamedBuffer</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ,
+    <a class="crossref" href="./glBindBufferBase.html">glBindBufferBase</a>
+    ,
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    ,
+    <a class="crossref" href="./glBufferData.html">glBufferData</a>
+    ,
+    <a class="crossref" href="./glBufferSubData.html">glBufferSubData</a>
+    ,
+    <a class="crossref" href="./glDeleteBuffers.html">glDeleteBuffers</a>
+    ,
+    <a class="crossref" href="./glMapBufferRange.html">glMapBufferRange</a>
+    ,
+    <a class="crossref" href="./glUnmapBuffer.html">glUnmapBuffer</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2005 Addison-Wesley.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glMapBuffer</div>
+        <div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">241</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">273</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">263</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

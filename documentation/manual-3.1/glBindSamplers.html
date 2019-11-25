@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glBindSamplers : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glBindSamplers</h1>
+</header>
+<main class="content">
+    <section class="purpose">bind one or more named sampler objects to a sequence of consecutive sampler units</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glBindSamplers"></a>
+    <span class="c-function">glBindSamplers</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-first" class="parameter">first</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-count" class="parameter">count</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLuint *(
+            <a href="#param-samplers" class="parameter">samplers</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glBindSampler"></a>
+    <span class="py-function">glBindSampler</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-unit" class="parameter">unit</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-sampler" class="parameter">sampler</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glBindSamplers"></a>
+    <span class="py-function">glBindSamplers</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-first" class="parameter">first</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-count" class="parameter">count</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-samplers" class="parameter">samplers</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-first"></a>
+                        first
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the first sampler unit to which a sampler object is to be bound.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-count"></a>
+                        count
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of samplers to bind.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-samplers"></a>
+                        samplers
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of an array of names of existing sampler objects.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glBindSamplers.html">glBindSamplers</a>
+    binds samplers from an array of existing sampler objects to a specified
+            number of consecutive sampler units.
+    <a class="parameter" href="#param-count">count</a>
+    specifies the number of sampler
+            objects whose names are stored in the array
+    <a class="parameter" href="#param-samplers">samplers</a>
+    . That number
+            of sampler names is read from the array and bound to the
+    <a class="parameter" href="#param-count">count</a>
+    consecutive
+            sampler units starting from
+    <a class="parameter" href="#param-first">first</a>
+    .
+</div>
+    <div class="para">
+            If the name zero appears in the
+    <a class="parameter" href="#param-samplers">samplers</a>
+    array, any existing binding
+            to the sampler unit is reset. Any non-zero entry in
+    <a class="parameter" href="#param-samplers">samplers</a>
+    must be the
+            name of an existing sampler object. When a non-zero entry in
+    <a class="parameter" href="#param-samplers">samplers</a>
+    is
+            present, that sampler object is bound to the corresponding sampler unit.
+            If
+    <a class="parameter" href="#param-samplers">samplers</a>
+    is
+    <span class="constant">NULL</span>
+    then it is as
+            if an appropriately sized array containing only zeros had been specified.
+</div>
+    <div class="para">
+    <a class="function" href="./glBindSamplers.html">glBindSamplers</a>
+    is equivalent to the following pseudo code:
+</div>
+    <div class="programlisting">    for (i = 0; i &lt; count; i++) {
+        if (samplers == NULL) {
+            glBindSampler(first + i, 0);
+        } else {
+            glBindSampler(first + i, samplers[i]);
+        }
+    }</div>
+    <div class="para">
+        Each entry in
+    <a class="parameter" href="#param-samplers">samplers</a>
+    will be checked individually and if found
+        to be invalid, the state for that sampler unit will not be changed and an error will be
+        generated. However, the state for other sampler units referenced by the command will still
+        be updated.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glBindSamplers.html">glBindSamplers</a>
+    is available only if the GL version is 4.4 or higher.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-first">first</a>
+    +
+    <a class="parameter" href="#param-count">count</a>
+    is greater
+            than the number of sampler units supported by the implementation.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if any value in
+    <a class="parameter" href="#param-samplers">samplers</a>
+    is
+            not zero or the name of an existing sampler object.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_SAMPLER_BINDING</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glBindSamplers.html">glBindSamplers</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenSamplers.html">glGenSamplers</a>
+    ,
+    <a class="crossref" href="./glBindSampler.html">glBindSampler</a>
+    ,
+    <a class="crossref" href="./glDeleteSamplers.html">glDeleteSamplers</a>
+    ,
+    <a class="crossref" href="./glGet.html">glGet</a>
+    ,
+    <a class="crossref" href="./glSamplerParameter.html">glSamplerParameter</a>
+    ,
+    <a class="crossref" href="./glGetSamplerParameter.html">glGetSamplerParameter</a>
+    ,
+    <a class="crossref" href="./glGenTextures.html">glGenTextures</a>
+    ,
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+    ,
+    <a class="crossref" href="./glDeleteTextures.html">glDeleteTextures</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2013-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

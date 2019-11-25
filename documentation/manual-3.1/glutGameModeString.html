@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutGameModeString : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutGameModeString</h1>
+</header>
+<main class="content">
+    <section class="purpose">sets the game mode configuration via a string.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutGameModeString"></a>
+    <span class="c-function">glutGameModeString</span>(<span class="parameter-list">
+    <span class="param-def">
+        const char(
+            <a href="#param-string" class="parameter">string</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutGameModeString"></a>
+    <span class="py-function">glutGameModeString</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-string" class="parameter">string</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutGameModeString( STRING(string) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-string"></a>
+                        string
+                    </th>
+                    <td>
+    <div class="simpara">
+						ASCII string for selecting a game mode configuration.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutGameModeString.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutGameModeString.html">glutGameModeString</a>
+    sets the game mode configuration via an ASCII string. The game mode
+			configuration string for GLUT's fullscreen game mode describes the suitable screen width and height in pixels, the
+			pixel depth in bits, and the video refresh frequency in hertz. The game mode configuration string can also specify a
+			window system dependent display mode.
+</div>
+    <div class="para">
+			The string is a list of zero or more capability descriptions seperated by spaces and tabs. Each capability description
+			is a capability name that is followed by a comparator and a numeric value. (Unlike the display mode string specified
+			using
+    <a class="function" href="./glutInitDisplayString.html">glutInitDisplayString</a>
+    , the comparator and numeric value are
+    <a class="parameter" href="#param-not">not</a>
+    optional.) For example, "width&gt;=640" and "bpp=32" are both valid
+			criteria.
+</div>
+    <div class="para">
+			The capability descriptions are translated into a set of criteria used to select the appropriate game mode
+			configuration.
+		</div>
+    <div class="para">
+			The criteria are matched in strict left to right order of precdence. That is, the first specified criteria (leftmost)
+			takes precedence over the later criteria for non-exact criteria (greater than, less than, etc. comparators). Exact
+			criteria (equal, not equal compartors) must match exactly so precedence is not relevant.
+		</div>
+    <div class="para">
+			The numeric value is an integer that is parsed according to ANSI C's
+    strtol(str, strptr,
+			0)
+    behavior. This means that decimal, octal (leading 0), and hexidecimal values (leading 0x) are accepeted.
+			The valid compartors are:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">=</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Equal.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">!=</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Not equal.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">&lt;</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Less than and preferring larger difference (the least is best).
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">&gt;</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Greater than and preferring larger differences (the most is best).
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">&lt;=</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Less than or equal and preferring larger difference (the least is best).
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">&gt;=</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Greater than or equal and preferring more instead of less. This comparator is useful for allocating
+						resources like color precsion or depth buffer precision where the maximum precison is generally preferred.
+						Contrast with the tilde (~) comprator.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">~</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Greater than or equal but preferring less instead of more. This compartor is useful for allocating
+						resources such as stencil bits or auxillary color buffers where you would rather not over allocate.
+					</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+			The valid capability names are:
+		</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">bpp</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Bits per pixel for the frame buffer.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">height</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Height of the screen in pixels.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">hertz</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Video refresh rate of the screen in hertz.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">num</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Number of the window system depenedent display mode configuration.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">width</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Width of the screen in pixels.
+					</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+			An additional compact screen resolution description format is supported. This compact description convienently encodes
+			the screen resolution description in a single phrase. For example, "640x480:16@60" requests a 640 by 480
+			pixel screen with 16 bits per pixel at a 60 hertz video refresh rate. A compact screen resolution description can be
+			mixed with conventional capability descriptions.
+		</div>
+    <div class="para">
+			The compact screen resolution description format is as follows:
+		</div>
+    <div class="para">
+			[
+    <span class="emphasis">width</span>
+    "x"
+    <span class="emphasis">height</span>
+    ][ ":"
+    <span class="emphasis">bitsPerPixel</span>
+    ][ "@"
+    <span class="emphasis">videoRate</span>
+    ]
+</div>
+    <div class="para">
+			Unspecifed capability descriptions will result in unspecified criteria being generated. These unspecified criteria help
+    <a class="function" href="./glutGameModeString.html">glutGameModeString</a>
+    behave sensibly with terse game mode description strings.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutGameModeGet.html">glutGameModeGet</a>
+            <a class="crossref" href="./glutEnterGameMode.html">glutEnterGameMode</a>
+            <a class="crossref" href="./glutEnterGameMode.html#c-glutLeaveGameMode">glutLeaveGameMode</a>
+            <a class="crossref" href="./glutInitDisplayString.html">glutInitDisplayString</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutGameModeString</div>
+        <div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglGlut.py">renderers/openglGlut.py</a>
+    Lines: <span class="sample-lines">49</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/glutdevice.py">system/glutdevice.py</a>
+    Lines: <span class="sample-lines">45</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

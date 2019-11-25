@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glColor : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glColor</h1>
+</header>
+<main class="content">
+    <section class="purpose">set the current color</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor"></a>
+    <span class="c-function">glColor</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+                <div class="py-signature">
+    <a name="py-glColor"></a>
+    <span class="py-function">glColor</span>( <span class="parameter-list">
+    <span class="param-def">
+        *
+            <a href="#param-args" class="parameter">args</a>
+    </span>
+</span> )
+    <pre class="pydoc">glColor*f* -- convenience function to dispatch on argument type
+
+    dispatches to glColor3f, glColor2f, glColor4f, glColor3f, glColor2f, glColor4f
+    depending on the arguments passed...
+    </pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3b"></a>
+    <span class="c-function">glColor3b</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLbyte (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLbyte (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLbyte (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3b"></a>
+    <span class="py-function">glColor3b</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3bv"></a>
+    <span class="c-function">glColor3bv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLbyte * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3bv"></a>
+    <span class="py-function">glColor3bv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3d"></a>
+    <span class="c-function">glColor3d</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3d"></a>
+    <span class="py-function">glColor3d</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3dv"></a>
+    <span class="c-function">glColor3dv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLdouble * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3dv"></a>
+    <span class="py-function">glColor3dv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3f"></a>
+    <span class="c-function">glColor3f</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLfloat (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3f"></a>
+    <span class="py-function">glColor3f</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3fv"></a>
+    <span class="c-function">glColor3fv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLfloat * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3fv"></a>
+    <span class="py-function">glColor3fv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3i"></a>
+    <span class="c-function">glColor3i</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLint (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3i"></a>
+    <span class="py-function">glColor3i</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3iv"></a>
+    <span class="c-function">glColor3iv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLint * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3iv"></a>
+    <span class="py-function">glColor3iv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3s"></a>
+    <span class="c-function">glColor3s</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLshort (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLshort (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLshort (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3s"></a>
+    <span class="py-function">glColor3s</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3sv"></a>
+    <span class="c-function">glColor3sv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLshort * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3sv"></a>
+    <span class="py-function">glColor3sv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3ub"></a>
+    <span class="c-function">glColor3ub</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLubyte (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLubyte (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLubyte (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3ub"></a>
+    <span class="py-function">glColor3ub</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3ubv"></a>
+    <span class="c-function">glColor3ubv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLubyte * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3ubv"></a>
+    <span class="py-function">glColor3ubv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3ui"></a>
+    <span class="c-function">glColor3ui</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3ui"></a>
+    <span class="py-function">glColor3ui</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3uiv"></a>
+    <span class="c-function">glColor3uiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLuint * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3uiv"></a>
+    <span class="py-function">glColor3uiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3us"></a>
+    <span class="c-function">glColor3us</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLushort (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLushort (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLushort (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3us"></a>
+    <span class="py-function">glColor3us</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor3usv"></a>
+    <span class="c-function">glColor3usv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLushort * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor3usv"></a>
+    <span class="py-function">glColor3usv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4b"></a>
+    <span class="c-function">glColor4b</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLbyte (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLbyte (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLbyte (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLbyte (
+            <a href="#param-alpha" class="parameter">alpha</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4b"></a>
+    <span class="py-function">glColor4b</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-alpha" class="parameter">alpha</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4bv"></a>
+    <span class="c-function">glColor4bv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLbyte * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4bv"></a>
+    <span class="py-function">glColor4bv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4d"></a>
+    <span class="c-function">glColor4d</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-alpha" class="parameter">alpha</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4d"></a>
+    <span class="py-function">glColor4d</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-alpha" class="parameter">alpha</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4dv"></a>
+    <span class="c-function">glColor4dv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLdouble * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4dv"></a>
+    <span class="py-function">glColor4dv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4f"></a>
+    <span class="c-function">glColor4f</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLfloat (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-alpha" class="parameter">alpha</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4f"></a>
+    <span class="py-function">glColor4f</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-alpha" class="parameter">alpha</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4fv"></a>
+    <span class="c-function">glColor4fv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLfloat * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4fv"></a>
+    <span class="py-function">glColor4fv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4i"></a>
+    <span class="c-function">glColor4i</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLint (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-alpha" class="parameter">alpha</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4i"></a>
+    <span class="py-function">glColor4i</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-alpha" class="parameter">alpha</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4iv"></a>
+    <span class="c-function">glColor4iv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLint * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4iv"></a>
+    <span class="py-function">glColor4iv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4s"></a>
+    <span class="c-function">glColor4s</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLshort (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLshort (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLshort (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLshort (
+            <a href="#param-alpha" class="parameter">alpha</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4s"></a>
+    <span class="py-function">glColor4s</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-alpha" class="parameter">alpha</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4sv"></a>
+    <span class="c-function">glColor4sv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLshort * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4sv"></a>
+    <span class="py-function">glColor4sv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4ub"></a>
+    <span class="c-function">glColor4ub</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLubyte (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLubyte (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLubyte (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLubyte (
+            <a href="#param-alpha" class="parameter">alpha</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4ub"></a>
+    <span class="py-function">glColor4ub</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-alpha" class="parameter">alpha</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4ubv"></a>
+    <span class="c-function">glColor4ubv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLubyte * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4ubv"></a>
+    <span class="py-function">glColor4ubv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4ui"></a>
+    <span class="c-function">glColor4ui</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-alpha" class="parameter">alpha</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4ui"></a>
+    <span class="py-function">glColor4ui</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-alpha" class="parameter">alpha</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4uiv"></a>
+    <span class="c-function">glColor4uiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLuint * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4uiv"></a>
+    <span class="py-function">glColor4uiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4us"></a>
+    <span class="c-function">glColor4us</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLushort (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLushort (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLushort (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLushort (
+            <a href="#param-alpha" class="parameter">alpha</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4us"></a>
+    <span class="py-function">glColor4us</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-alpha" class="parameter">alpha</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColor4usv"></a>
+    <span class="c-function">glColor4usv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLushort * (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColor4usv"></a>
+    <span class="py-function">glColor4usv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-red"></a><a name="param-green"></a><a name="param-blue"></a>
+                        red, green, blue
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify new red, green, and blue values for the current color.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-alpha"></a>
+                        alpha
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a new alpha value for the current color.
+                    Included only in the four-argument
+    <a class="function" href="./glColor.html#c-glColor4fv">glColor4</a>
+    commands.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-v"></a>
+                        v
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to an array that contains red, green, blue,
+                    and (sometimes) alpha values.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            The GL stores both a current single-valued color index
+            and a current four-valued RGBA color.
+    <a class="function" href="./glColor.html">glColor</a>
+    sets a new four-valued RGBA color.
+    <a class="function" href="./glColor.html">glColor</a>
+    has two major variants:
+    <a class="function" href="./glColor.html#c-glColor3f">glColor3</a>
+    and
+    <a class="function" href="./glColor.html#c-glColor4fv">glColor4</a>
+    .
+    <a class="function" href="./glColor.html#c-glColor3f">glColor3</a>
+    variants specify new red,
+            green,
+            and blue values explicitly
+            and set the current alpha value to 1.0 (full intensity) implicitly.
+    <a class="function" href="./glColor.html#c-glColor4fv">glColor4</a>
+    variants specify all four color components explicitly.
+</div>
+    <div class="para">
+    <a class="function" href="./glColor.html#c-glColor3b">glColor3b</a>
+    ,
+    <a class="function" href="./glColor.html#c-glColor4b">glColor4b</a>
+    ,
+    <a class="function" href="./glColor.html#c-glColor3s">glColor3s</a>
+    ,
+    <a class="function" href="./glColor.html#c-glColor4s">glColor4s</a>
+    ,
+    <a class="function" href="./glColor.html#c-glColor3i">glColor3i</a>
+    , and
+    <a class="function" href="./glColor.html#c-glColor4i">glColor4i</a>
+    take
+            three or four signed byte, short, or long integers as arguments.
+            When
+    <span class="emphasis">v</span>
+    is appended to the name,
+            the color commands can take a pointer to an array of such values.
+</div>
+    <div class="para">
+            Current color values are stored in floating-point format,
+            with unspecified mantissa and exponent sizes.
+            Unsigned integer color components,
+            when specified,
+            are linearly mapped to floating-point values such that the largest
+            representable value maps to 1.0 (full intensity),
+            and 0 maps to 0.0 (zero intensity).
+            Signed integer color components,
+            when specified,
+            are linearly mapped to floating-point values such that the most positive
+            representable value maps to 1.0,
+            and the most negative representable value maps to
+    <math>
+                <mn>-1.0</mn>
+            </math>
+    .
+            (Note that
+            this mapping does not convert 0 precisely to 0.0.)
+            Floating-point values are mapped directly.
+</div>
+    <div class="para">
+            Neither floating-point nor signed integer values are clamped
+            to the range
+    <math>
+                <mfenced open="[" close="]">
+                    <mn>0</mn>
+                    <mn>1</mn>
+                </mfenced>
+            </math>
+    before the current color is updated.
+            However,
+            color components are clamped to this range before they are interpolated
+            or written into a color buffer.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            The initial value for the current color is (1, 1, 1, 1).
+        </div>
+    <div class="para">
+            The current color can be updated at any time.
+            In particular,
+    <a class="function" href="./glColor.html">glColor</a>
+    can be called between a call to
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding
+            call to
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_CURRENT_COLOR</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_RGBA_MODE</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="function" href="./glColorPointer.html">glColorPointer</a>
+    ,
+    <a class="crossref" href="./glIndex.html">glIndex</a>
+    ,
+    <a class="crossref" href="./glSecondaryColor.html">glSecondaryColor</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glColor</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/_bitmap_font.py">tests/_bitmap_font.py</a>
+    Lines: <span class="sample-lines">48, 57, 59, 71, 73, 86, 88</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/gldrawelements_list.py">tests/gldrawelements_list.py</a>
+    Lines: <span class="sample-lines">29</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_surface_cb.py">tests/redbook_surface_cb.py</a>
+    Lines: <span class="sample-lines">155</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/shadow/passes.py">OpenGLContext/shadow/passes.py</a>
+    Lines: <span class="sample-lines">131, 320</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/spherebackground.py">OpenGLContext/scenegraph/spherebackground.py</a>
+    Lines: <span class="sample-lines">66</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/toolsfont.py">OpenGLContext/scenegraph/text/toolsfont.py</a>
+    Lines: <span class="sample-lines">110, 112</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/mesh.py">pyggel/mesh.py</a>
+    Lines: <span class="sample-lines">311, 768</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/geometry.py">pyggel/geometry.py</a>
+    Lines: <span class="sample-lines">152, 306, 454, 584</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/image.py">pyggel/image.py</a>
+    Lines: <span class="sample-lines">103, 169</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/misc.py">pyggel/misc.py</a>
+    Lines: <span class="sample-lines">334</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLComponent.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLComponent.py</a>
+    Lines: <span class="sample-lines">461, 473</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Examples/OpenGL/MiniExamples/OpenGLComponent.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Examples/OpenGL/MiniExamples/OpenGLComponent.py</a>
+    Lines: <span class="sample-lines">33, 45</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Examples/OpenGL/Checkers/CheckersBoard.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Examples/OpenGL/Checkers/CheckersBoard.py</a>
+    Lines: <span class="sample-lines">45, 47</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Examples/OpenGL/Checkers/CheckersPiece.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Examples/OpenGL/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">52, 54, 57</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/Examples/Checkers/CheckersBoard.py">Sketches/MPS/Examples/Checkers/CheckersBoard.py</a>
+    Lines: <span class="sample-lines">45, 47</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/Examples/Checkers/CheckersPiece.py">Sketches/MPS/Examples/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">52, 54, 57</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLComponent.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLComponent.py</a>
+    Lines: <span class="sample-lines">458, 470</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Examples/Checkers/CheckersBoard.py">Sketches/CL/Topology3D/THF/Examples/Checkers/CheckersBoard.py</a>
+    Lines: <span class="sample-lines">45, 47</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Examples/Checkers/CheckersPiece.py">Sketches/CL/Topology3D/THF/Examples/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">52, 54, 57</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLComponent.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLComponent.py</a>
+    Lines: <span class="sample-lines">458, 470</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Examples/Checkers/CheckersBoard.py">Sketches/THF/Packages/Examples/Checkers/CheckersBoard.py</a>
+    Lines: <span class="sample-lines">45, 47</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Examples/Checkers/CheckersPiece.py">Sketches/THF/Packages/Examples/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">52, 54, 57</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLComponent.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLComponent.py</a>
+    Lines: <span class="sample-lines">461, 473</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Examples/OpenGL/MiniExamples/OpenGLComponent.py">Code/Python/Kamaelia/Examples/OpenGL/MiniExamples/OpenGLComponent.py</a>
+    Lines: <span class="sample-lines">33, 45</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Examples/OpenGL/Checkers/CheckersBoard.py">Code/Python/Kamaelia/Examples/OpenGL/Checkers/CheckersBoard.py</a>
+    Lines: <span class="sample-lines">45, 47</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Examples/OpenGL/Checkers/CheckersPiece.py">Code/Python/Kamaelia/Examples/OpenGL/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">52, 54, 57</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/sliceTextures.py">wobjects/sliceTextures.py</a>
+    Lines: <span class="sample-lines">158, 245</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/textures.py">wobjects/textures.py</a>
+    Lines: <span class="sample-lines">518, 728</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/polygonalModeling.py">wobjects/polygonalModeling.py</a>
+    Lines: <span class="sample-lines">994, 998</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/utils/cropper.py">utils/cropper.py</a>
+    Lines: <span class="sample-lines">370, 397, 404, 424</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/base.py">core/base.py</a>
+    Lines: <span class="sample-lines">615</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/baseWibjects.py">core/baseWibjects.py</a>
+    Lines: <span class="sample-lines">71, 92, 191</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/axises.py">core/axises.py</a>
+    Lines: <span class="sample-lines">787, 835, 2024</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wibjects/sliders.py">wibjects/sliders.py</a>
+    Lines: <span class="sample-lines">376, 378, 392, 410</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wibjects/colorWibjects.py">wibjects/colorWibjects.py</a>
+    Lines: <span class="sample-lines">541, 546, 552, 677, 697</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/examples/customWobject.py">examples/customWobject.py</a>
+    Lines: <span class="sample-lines">21</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/text/text_base.py">text/text_base.py</a>
+    Lines: <span class="sample-lines">261</span>
+</div>
+        <div class="sample-key">glColor3d</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/indexedlineset.py">OpenGLContext/scenegraph/indexedlineset.py</a>
+    Lines: <span class="sample-lines">77, 82</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/games/untangle/data_viewer.py">examples/games/untangle/data_viewer.py</a>
+    Lines: <span class="sample-lines">47, 54, 59</span>
+</div>
+        <div class="sample-key">glColor3dv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/browser/vpcurve.py">OpenGLContext/browser/vpcurve.py</a>
+    Lines: <span class="sample-lines">89</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/indexedfaceset.py">OpenGLContext/scenegraph/indexedfaceset.py</a>
+    Lines: <span class="sample-lines">590, 624</span>
+</div>
+        <div class="sample-key">glColor3f</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glutbitmapcharacter.py">tests/glutbitmapcharacter.py</a>
+    Lines: <span class="sample-lines">46</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe5.py">tests/nehe5.py</a>
+    Lines: <span class="sample-lines">46, 48, 50, 52, 54, 56, 58, 60, 62, 64, 66, 68, 77, 82, 87, 92, 97, 102</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/dek_surf.py">tests/dek_surf.py</a>
+    Lines: <span class="sample-lines">56</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/ilsstrategies.py">tests/ilsstrategies.py</a>
+    Lines: <span class="sample-lines">28</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glu_tess2.py">tests/glu_tess2.py</a>
+    Lines: <span class="sample-lines">59</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glu_tess.py">tests/glu_tess.py</a>
+    Lines: <span class="sample-lines">60</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe4.py">tests/nehe4.py</a>
+    Lines: <span class="sample-lines">53, 55, 57, 69</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe3.py">tests/nehe3.py</a>
+    Lines: <span class="sample-lines">35, 37, 39, 46</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/shadow/volume.py">OpenGLContext/shadow/volume.py</a>
+    Lines: <span class="sample-lines">322, 324</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/boundingvolume.py">OpenGLContext/scenegraph/boundingvolume.py</a>
+    Lines: <span class="sample-lines">254</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/indexedfaceset.py">OpenGLContext/scenegraph/indexedfaceset.py</a>
+    Lines: <span class="sample-lines">602, 604</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/shape.py">OpenGLContext/scenegraph/shape.py</a>
+    Lines: <span class="sample-lines">52, 84</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/appearance.py">OpenGLContext/scenegraph/appearance.py</a>
+    Lines: <span class="sample-lines">3, 48</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/toolsfont.py">OpenGLContext/scenegraph/text/toolsfont.py</a>
+    Lines: <span class="sample-lines">44, 46, 70, 72</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/renderpass.py">OpenGLContext/passes/renderpass.py</a>
+    Lines: <span class="sample-lines">380</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/shaderProg/textureShader.py">PyOpenGL-Demo/proesch/shaderProg/textureShader.py</a>
+    Lines: <span class="sample-lines">86</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbsCurve/nurbsCurve.py">PyOpenGL-Demo/proesch/nurbsCurve/nurbsCurve.py</a>
+    Lines: <span class="sample-lines">68, 74</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbsCurve/nurbsCircle.py">PyOpenGL-Demo/proesch/nurbsCurve/nurbsCircle.py</a>
+    Lines: <span class="sample-lines">71, 77</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py">PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py</a>
+    Lines: <span class="sample-lines">37</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/simple/simpleQuad.py">PyOpenGL-Demo/proesch/simple/simpleQuad.py</a>
+    Lines: <span class="sample-lines">21</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/simple/simpleInteraction.py">PyOpenGL-Demo/proesch/simple/simpleInteraction.py</a>
+    Lines: <span class="sample-lines">132</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/simple/simpleAnimation.py">PyOpenGL-Demo/proesch/simple/simpleAnimation.py</a>
+    Lines: <span class="sample-lines">39</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/simpleTexture/texturedQuad.py">PyOpenGL-Demo/proesch/simpleTexture/texturedQuad.py</a>
+    Lines: <span class="sample-lines">53</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson5.py">PyOpenGL-Demo/NeHe/lesson5.py</a>
+    Lines: <span class="sample-lines">100, 102, 104, 107, 109, 111, 114, 116, 118, 122, 124, 126, 137, 143, 149, 155, 161, 167</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson3.py">PyOpenGL-Demo/NeHe/lesson3.py</a>
+    Lines: <span class="sample-lines">87, 89, 91, 100</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson4.py">PyOpenGL-Demo/NeHe/lesson4.py</a>
+    Lines: <span class="sample-lines">100, 102, 104, 118</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson11.py">PyOpenGL-Demo/NeHe/lesson11.py</a>
+    Lines: <span class="sample-lines">98, 103</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson13.py">PyOpenGL-Demo/NeHe/lesson13.py</a>
+    Lines: <span class="sample-lines">153</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson26.py">PyOpenGL-Demo/NeHe/lesson26.py</a>
+    Lines: <span class="sample-lines">92</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson48/Lesson48.py">PyOpenGL-Demo/NeHe/lesson48/Lesson48.py</a>
+    Lines: <span class="sample-lines">134, 143</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/lesson44.py">PyOpenGL-Demo/NeHe/lesson44/lesson44.py</a>
+    Lines: <span class="sample-lines">191</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/conechecker.py">PyOpenGL-Demo/tom/conechecker.py</a>
+    Lines: <span class="sample-lines">12, 19, 21</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/lorentz.py">PyOpenGL-Demo/tom/lorentz.py</a>
+    Lines: <span class="sample-lines">54</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/checker.py">PyOpenGL-Demo/tom/checker.py</a>
+    Lines: <span class="sample-lines">12, 19, 21</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/Line.py">PyOpenGL-Demo/tom/Line.py</a>
+    Lines: <span class="sample-lines">12, 14, 16, 18</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/demo.py">PyOpenGL-Demo/tom/demo.py</a>
+    Lines: <span class="sample-lines">53, 55, 57, 59</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/double.py">PyOpenGL-Demo/redbook/double.py</a>
+    Lines: <span class="sample-lines">70</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/lines.py">PyOpenGL-Demo/redbook/lines.py</a>
+    Lines: <span class="sample-lines">81</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/hello.py">PyOpenGL-Demo/redbook/hello.py</a>
+    Lines: <span class="sample-lines">67</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/drawf.py">PyOpenGL-Demo/redbook/drawf.py</a>
+    Lines: <span class="sample-lines">79</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/movelight.py">PyOpenGL-Demo/redbook/movelight.py</a>
+    Lines: <span class="sample-lines">104</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/cube.py">PyOpenGL-Demo/redbook/cube.py</a>
+    Lines: <span class="sample-lines">70</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/smooth.py">PyOpenGL-Demo/redbook/smooth.py</a>
+    Lines: <span class="sample-lines">70, 72, 74</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLE/helix.py">PyOpenGL-Demo/GLE/helix.py</a>
+    Lines: <span class="sample-lines">15</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/glutplane.py">PyOpenGL-Demo/GLUT/glutplane.py</a>
+    Lines: <span class="sample-lines">52, 55, 77, 80, 87</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/lorentz.py">PyOpenGL-Demo/GLUT/tom/lorentz.py</a>
+    Lines: <span class="sample-lines">52</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/OglSurface/OglFrame.py">PyOpenGL-Demo/dek/OglSurface/OglFrame.py</a>
+    Lines: <span class="sample-lines">26, 31, 36</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/OglSurface/triangle.py">PyOpenGL-Demo/dek/OglSurface/triangle.py</a>
+    Lines: <span class="sample-lines">63, 68, 73, 94, 99</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/da/dots.py">PyOpenGL-Demo/da/dots.py</a>
+    Lines: <span class="sample-lines">44</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/mmLib/OpenGLDriver.py">pymmlib/mmLib/OpenGLDriver.py</a>
+    Lines: <span class="sample-lines">372, 399, 515, 565</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/applications/glutviewer.py">pymmlib/applications/glutviewer.py</a>
+    Lines: <span class="sample-lines">94, 217, 247</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Core.py">VisionEgg/Core.py</a>
+    Lines: <span class="sample-lines">1492</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/MoreStimuli.py">VisionEgg/MoreStimuli.py</a>
+    Lines: <span class="sample-lines">117, 239, 321, 457</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/SphereMap.py">VisionEgg/SphereMap.py</a>
+    Lines: <span class="sample-lines">289, 296</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Text.py">VisionEgg/Text.py</a>
+    Lines: <span class="sample-lines">421, 485</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Dots.py">VisionEgg/Dots.py</a>
+    Lines: <span class="sample-lines">235</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/obj.py">pymt/obj.py</a>
+    Lines: <span class="sample-lines">23, 284</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/statement.py">pymt/graphx/statement.py</a>
+    Lines: <span class="sample-lines">55, 244</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/draw.py">pymt/graphx/draw.py</a>
+    Lines: <span class="sample-lines">425</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/colors.py">pymt/graphx/colors.py</a>
+    Lines: <span class="sample-lines">8, 51</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/apps/3Ddrawing/3Ddrawing.py">examples/apps/3Ddrawing/3Ddrawing.py</a>
+    Lines: <span class="sample-lines">128, 139, 145, 170</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/apps/3Dviewer/3Dviewer.py">examples/apps/3Dviewer/3Dviewer.py</a>
+    Lines: <span class="sample-lines">33</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/misc.py">pyggel/misc.py</a>
+    Lines: <span class="sample-lines">34, 46</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/draw.py">pygl2d/draw.py</a>
+    Lines: <span class="sample-lines">51, 70, 117, 136</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">870</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/Old/SoC/simplecube.py">Sketches/MPS/Old/SoC/simplecube.py</a>
+    Lines: <span class="sample-lines">103, 109, 115, 121, 127, 133</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MH/OpenGL/3dFolding.py">Sketches/MH/OpenGL/3dFolding.py</a>
+    Lines: <span class="sample-lines">140</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MH/OpenGL/Folding.py">Sketches/MH/OpenGL/Folding.py</a>
+    Lines: <span class="sample-lines">57, 63</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Experiments/Spheres.py">Sketches/CL/Topology3D/Experiments/Spheres.py</a>
+    Lines: <span class="sample-lines">119</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">848</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Display3D.py">Sketches/CL/Topology3D/THF/Sketches/Display3D.py</a>
+    Lines: <span class="sample-lines">486</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/PygameWrapperPlane.py">Sketches/CL/Topology3D/THF/Sketches/PygameWrapperPlane.py</a>
+    Lines: <span class="sample-lines">158</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py">Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">537</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/PygameWrapperPlane.py">Sketches/CL/Topology3D/THF/Sketches/playground/PygameWrapperPlane.py</a>
+    Lines: <span class="sample-lines">79</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Examples/simplecube/simplecube_controlled.py">Sketches/CL/Topology3D/THF/Examples/simplecube/simplecube_controlled.py</a>
+    Lines: <span class="sample-lines">128, 134, 140, 146, 152, 158</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Examples/simplecube/simplecube.py">Sketches/CL/Topology3D/THF/Examples/simplecube/simplecube.py</a>
+    Lines: <span class="sample-lines">66, 72, 78, 84, 90, 96</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Display3D.py">Sketches/THF/3D/Display3D.py</a>
+    Lines: <span class="sample-lines">486</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/PygameWrapperPlane.py">Sketches/THF/3D/PygameWrapperPlane.py</a>
+    Lines: <span class="sample-lines">158</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/Display3D.py">Sketches/THF/3D/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">537</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/PygameWrapperPlane.py">Sketches/THF/3D/playground/PygameWrapperPlane.py</a>
+    Lines: <span class="sample-lines">79</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/simplecube/simplecube_controlled.py">Sketches/THF/simplecube/simplecube_controlled.py</a>
+    Lines: <span class="sample-lines">127, 133, 139, 145, 151, 157</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/simplecube/simplecube.py">Sketches/THF/simplecube/simplecube.py</a>
+    Lines: <span class="sample-lines">66, 72, 78, 84, 90, 96</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">847</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">870</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/functions/boxplot.py">functions/boxplot.py</a>
+    Lines: <span class="sample-lines">234</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/functions/bar.py">functions/bar.py</a>
+    Lines: <span class="sample-lines">167, 173</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/sliceTextures.py">wobjects/sliceTextures.py</a>
+    Lines: <span class="sample-lines">166</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/textures.py">wobjects/textures.py</a>
+    Lines: <span class="sample-lines">526</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/axes.py">core/axes.py</a>
+    Lines: <span class="sample-lines">985, 987, 989, 991</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/line.py">core/line.py</a>
+    Lines: <span class="sample-lines">687, 757, 773, 778, 794, 799, 838, 848</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/axises.py">core/axises.py</a>
+    Lines: <span class="sample-lines">2018</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">104</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">93</span>
+</div>
+        <div class="sample-key">glColor3fv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson12.py">PyOpenGL-Demo/NeHe/lesson12.py</a>
+    Lines: <span class="sample-lines">124, 127</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/checker.py">PyOpenGL-Demo/GLUT/tom/checker.py</a>
+    Lines: <span class="sample-lines">35, 37</span>
+</div>
+        <div class="sample-key">glColor3ub</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson42.py">PyOpenGL-Demo/NeHe/lesson42.py</a>
+    Lines: <span class="sample-lines">261</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson43/lesson43.py">PyOpenGL-Demo/NeHe/lesson43/lesson43.py</a>
+    Lines: <span class="sample-lines">117</span>
+</div>
+        <div class="sample-key">glColor4f</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_alpha.py">tests/redbook_alpha.py</a>
+    Lines: <span class="sample-lines">90, 98</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/framecounter.py">OpenGLContext/framecounter.py</a>
+    Lines: <span class="sample-lines">66</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/_flat.py">OpenGLContext/passes/_flat.py</a>
+    Lines: <span class="sample-lines">551</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcore.py">OpenGLContext/passes/flatcore.py</a>
+    Lines: <span class="sample-lines">273</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcompat.py">OpenGLContext/passes/flatcompat.py</a>
+    Lines: <span class="sample-lines">288</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson45.py">PyOpenGL-Demo/NeHe/lesson45.py</a>
+    Lines: <span class="sample-lines">348</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson19.py">PyOpenGL-Demo/NeHe/lesson19.py</a>
+    Lines: <span class="sample-lines">152</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson26.py">PyOpenGL-Demo/NeHe/lesson26.py</a>
+    Lines: <span class="sample-lines">103, 182</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/lesson44.py">PyOpenGL-Demo/NeHe/lesson44/lesson44.py</a>
+    Lines: <span class="sample-lines">232</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/glCamera.py">PyOpenGL-Demo/NeHe/lesson44/glCamera.py</a>
+    Lines: <span class="sample-lines">700</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/gluttimerfunc_testCase.py">PyOpenGL-Demo/GLUT/gluttimerfunc_testCase.py</a>
+    Lines: <span class="sample-lines">54</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Gratings.py">VisionEgg/Gratings.py</a>
+    Lines: <span class="sample-lines">401, 691</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Core.py">VisionEgg/Core.py</a>
+    Lines: <span class="sample-lines">1494</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/MoreStimuli.py">VisionEgg/MoreStimuli.py</a>
+    Lines: <span class="sample-lines">119, 241, 323, 459</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/SphereMap.py">VisionEgg/SphereMap.py</a>
+    Lines: <span class="sample-lines">291, 298, 530, 1205</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Textures.py">VisionEgg/Textures.py</a>
+    Lines: <span class="sample-lines">1475, 1589, 1785</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Text.py">VisionEgg/Text.py</a>
+    Lines: <span class="sample-lines">423, 487</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Dots.py">VisionEgg/Dots.py</a>
+    Lines: <span class="sample-lines">45, 237</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/statement.py">pymt/graphx/statement.py</a>
+    Lines: <span class="sample-lines">55, 246</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/draw.py">pymt/graphx/draw.py</a>
+    Lines: <span class="sample-lines">361, 364, 367, 370, 473, 475, 477, 487, 497, 507, 539, 541, 543, 545</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/colors.py">pymt/graphx/colors.py</a>
+    Lines: <span class="sample-lines">8, 44</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/desktop/desktop-multi.py">examples/desktop/desktop-multi.py</a>
+    Lines: <span class="sample-lines">5, 230</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/games/untangle/untangle.py">examples/games/untangle/untangle.py</a>
+    Lines: <span class="sample-lines">124, 126, 158</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/games/bloop/bloop.py">examples/games/bloop/bloop.py</a>
+    Lines: <span class="sample-lines">110, 112, 133</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/apps/particles/particles.py">examples/apps/particles/particles.py</a>
+    Lines: <span class="sample-lines">195</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/mesh.py">pyggel/mesh.py</a>
+    Lines: <span class="sample-lines">224</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/misc.py">pyggel/misc.py</a>
+    Lines: <span class="sample-lines">32, 44</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/draw.py">pygl2d/draw.py</a>
+    Lines: <span class="sample-lines">45, 63, 79, 87, 98, 112, 134, 147</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/image.py">pygl2d/image.py</a>
+    Lines: <span class="sample-lines">169</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL} Scocca</span>
+    <a href="http://bazaar.launchpad.net/~bebraw/scocca/devel/view/head:/scocca/graphics/opengl/color.py">scocca/graphics/opengl/color.py</a>
+    Lines: <span class="sample-lines">32, 36, 38</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py</a>
+    Lines: <span class="sample-lines">492, 571, 616</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/ArrowButton.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/ArrowButton.py</a>
+    Lines: <span class="sample-lines">71, 90</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/SkyGrassBackground.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/SkyGrassBackground.py</a>
+    Lines: <span class="sample-lines">66, 71</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">111, 142</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/SimpleButton.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/SimpleButton.py</a>
+    Lines: <span class="sample-lines">108, 130</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/PygameWrapper.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/PygameWrapper.py</a>
+    Lines: <span class="sample-lines">160</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Label.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">121</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Button.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">146</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/SimpleCube.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/SimpleCube.py</a>
+    Lines: <span class="sample-lines">74, 81, 88, 95, 102, 109</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Utils/Particles3D.py">Sketches/CL/Topology3D/Utils/Particles3D.py</a>
+    Lines: <span class="sample-lines">228</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Experiments/Cubes.py">Sketches/CL/Topology3D/Experiments/Cubes.py</a>
+    Lines: <span class="sample-lines">94</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/ArrowButton.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/ArrowButton.py</a>
+    Lines: <span class="sample-lines">71, 90</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/SkyGrassBackground.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/SkyGrassBackground.py</a>
+    Lines: <span class="sample-lines">66, 71</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">111, 142</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/SimpleButton.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/SimpleButton.py</a>
+    Lines: <span class="sample-lines">108, 130</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/PygameWrapper.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/PygameWrapper.py</a>
+    Lines: <span class="sample-lines">160</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Label.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">121</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Button.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">150</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/SimpleCube.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/SimpleCube.py</a>
+    Lines: <span class="sample-lines">74, 81, 88, 95, 102, 109</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Object3D.py">Sketches/CL/Topology3D/THF/Sketches/Object3D.py</a>
+    Lines: <span class="sample-lines">127, 133, 139, 145, 151, 157</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Display3D.py">Sketches/CL/Topology3D/THF/Sketches/Display3D.py</a>
+    Lines: <span class="sample-lines">499, 504</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Progress3D.py">Sketches/CL/Topology3D/THF/Sketches/Progress3D.py</a>
+    Lines: <span class="sample-lines">150, 179</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Scrollbar3D.py">Sketches/CL/Topology3D/THF/Sketches/Scrollbar3D.py</a>
+    Lines: <span class="sample-lines">173, 181, 198, 206, 228, 240</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Button3D.py">Sketches/CL/Topology3D/THF/Sketches/Button3D.py</a>
+    Lines: <span class="sample-lines">188</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/SimpleCube.py">Sketches/CL/Topology3D/THF/Sketches/SimpleCube.py</a>
+    Lines: <span class="sample-lines">143, 149, 155, 161, 167, 173</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/SkyGrassBackground.py">Sketches/CL/Topology3D/THF/Sketches/playground/SkyGrassBackground.py</a>
+    Lines: <span class="sample-lines">48, 53</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/ProgressBar.py">Sketches/CL/Topology3D/THF/Sketches/playground/ProgressBar.py</a>
+    Lines: <span class="sample-lines">66, 103</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/Button.py">Sketches/CL/Topology3D/THF/Sketches/playground/Button.py</a>
+    Lines: <span class="sample-lines">77</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/SimpleCube.py">Sketches/CL/Topology3D/THF/Sketches/playground/SimpleCube.py</a>
+    Lines: <span class="sample-lines">52, 58, 64, 70, 76, 82</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Object3D.py">Sketches/THF/3D/Object3D.py</a>
+    Lines: <span class="sample-lines">127, 133, 139, 145, 151, 157</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Display3D.py">Sketches/THF/3D/Display3D.py</a>
+    Lines: <span class="sample-lines">499, 504</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Progress3D.py">Sketches/THF/3D/Progress3D.py</a>
+    Lines: <span class="sample-lines">150, 179</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Scrollbar3D.py">Sketches/THF/3D/Scrollbar3D.py</a>
+    Lines: <span class="sample-lines">173, 181, 198, 206, 228, 240</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Button3D.py">Sketches/THF/3D/Button3D.py</a>
+    Lines: <span class="sample-lines">188</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/SimpleCube.py">Sketches/THF/3D/SimpleCube.py</a>
+    Lines: <span class="sample-lines">143, 149, 155, 161, 167, 173</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/SkyGrassBackground.py">Sketches/THF/3D/playground/SkyGrassBackground.py</a>
+    Lines: <span class="sample-lines">48, 53</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/ProgressBar.py">Sketches/THF/3D/playground/ProgressBar.py</a>
+    Lines: <span class="sample-lines">66, 103</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/Button.py">Sketches/THF/3D/playground/Button.py</a>
+    Lines: <span class="sample-lines">77</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/SimpleCube.py">Sketches/THF/3D/playground/SimpleCube.py</a>
+    Lines: <span class="sample-lines">52, 58, 64, 70, 76, 82</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/ArrowButton.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/ArrowButton.py</a>
+    Lines: <span class="sample-lines">71, 90</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/SkyGrassBackground.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/SkyGrassBackground.py</a>
+    Lines: <span class="sample-lines">66, 71</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">111, 142</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/SimpleButton.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/SimpleButton.py</a>
+    Lines: <span class="sample-lines">108, 130</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/PygameWrapper.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/PygameWrapper.py</a>
+    Lines: <span class="sample-lines">160</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Label.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">121</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Button.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">146</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/SimpleCube.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/SimpleCube.py</a>
+    Lines: <span class="sample-lines">74, 81, 88, 95, 102, 109</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py">Code/Python/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py</a>
+    Lines: <span class="sample-lines">492, 571, 616</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/ArrowButton.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/ArrowButton.py</a>
+    Lines: <span class="sample-lines">71, 90</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/SkyGrassBackground.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/SkyGrassBackground.py</a>
+    Lines: <span class="sample-lines">66, 71</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">111, 142</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/SimpleButton.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/SimpleButton.py</a>
+    Lines: <span class="sample-lines">108, 130</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/PygameWrapper.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/PygameWrapper.py</a>
+    Lines: <span class="sample-lines">160</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Label.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">121</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Button.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">146</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/SimpleCube.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/SimpleCube.py</a>
+    Lines: <span class="sample-lines">74, 81, 88, 95, 102, 109</span>
+</div>
+        <div class="sample-key">glColor4ub</div>
+        <div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglBase.py">renderers/openglBase.py</a>
+    Lines: <span class="sample-lines">139, 154, 156, 158, 160, 167, 180, 218</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglGlut.py">renderers/openglGlut.py</a>
+    Lines: <span class="sample-lines">251</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/openglgraphics.py">system/openglgraphics.py</a>
+    Lines: <span class="sample-lines">83, 101, 130, 138, 152, 242</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/lib/squirtle.py">pymt/lib/squirtle.py</a>
+    Lines: <span class="sample-lines">17, 520, 540</span>
+</div>
+        <div class="sample-key">glColor4ubv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/_flat.py">OpenGLContext/passes/_flat.py</a>
+    Lines: <span class="sample-lines">526</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcore.py">OpenGLContext/passes/flatcore.py</a>
+    Lines: <span class="sample-lines">248</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcompat.py">OpenGLContext/passes/flatcompat.py</a>
+    Lines: <span class="sample-lines">263</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glPushAttrib : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glPushAttrib</h1>
+</header>
+<main class="content">
+    <section class="purpose">push and pop the server attribute stack</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glPopAttrib"></a>
+    <span class="c-function">glPopAttrib</span>(<span class="parameter-list">
+    <span class="param-def">
+         (
+            <a href="#param-void" class="parameter">void</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glPopAttrib"></a>
+    <span class="py-function">glPopAttrib</span>( <span class="parameter-list">
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glPushAttrib"></a>
+    <span class="c-function">glPushAttrib</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLbitfield (
+            <a href="#param-mask" class="parameter">mask</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glPushAttrib"></a>
+    <span class="py-function">glPushAttrib</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-mask" class="parameter">mask</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-mask"></a>
+                        mask
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a mask that indicates which attributes to save. Values for
+    <a class="parameter" href="#param-mask">mask</a>
+    are listed below.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glPushAttrib.html">glPushAttrib</a>
+    takes one argument,
+            a mask that indicates which groups of state variables
+            to save on the attribute stack.
+            Symbolic constants are used to set bits in the mask.
+    <a class="parameter" href="#param-mask">mask</a>
+    is typically constructed by specifying the bitwise-or of several
+            of these constants together.
+            The special mask
+    <span class="constant">GL_ALL_ATTRIB_BITS</span>
+    can be used to save all stackable states.
+</div>
+    <div class="para">
+            The symbolic mask constants and their associated GL state are as follows
+            (the second column lists which attributes are saved):
+        </div>
+    <div class="para">
+        </div>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <span class="constant">GL_ACCUM_BUFFER_BIT</span>
+</td><td>
+                        Accumulation buffer clear value
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_COLOR_BUFFER_BIT</span>
+</td><td>
+    <span class="constant">GL_ALPHA_TEST</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Alpha test function and reference value
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_BLEND</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Blending source and destination functions
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Constant blend color
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Blending equation
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_DITHER</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_DRAW_BUFFER</span>
+    setting
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_COLOR_LOGIC_OP</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_INDEX_LOGIC_OP</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Logic op function
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Color mode and index mode clear values
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Color mode and index mode writemasks
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_CURRENT_BIT</span>
+</td><td>
+                        Current RGBA color
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Current color index
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Current normal vector
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Current texture coordinates
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Current raster position
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_CURRENT_RASTER_POSITION_VALID</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        RGBA color associated with current raster position
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Color index associated with current raster position
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Texture coordinates associated with current raster position
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_EDGE_FLAG</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DEPTH_BUFFER_BIT</span>
+</td><td>
+    <span class="constant">GL_DEPTH_TEST</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Depth buffer test function
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Depth buffer clear value
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_DEPTH_WRITEMASK</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_ENABLE_BIT</span>
+</td><td>
+    <span class="constant">GL_ALPHA_TEST</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_AUTO_NORMAL</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_BLEND</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Enable bits for the user-definable clipping planes
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_COLOR_MATERIAL</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_CULL_FACE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_DEPTH_TEST</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_DITHER</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_FOG</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_LIGHT</span>
+    <span class="emphasis">i</span>
+    where
+    <span class="constant">0</span>
+    &lt;=
+    <span class="emphasis">i</span>
+    &lt;
+    <span class="constant">GL_MAX_LIGHTS</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_LIGHTING</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_LINE_SMOOTH</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_LINE_STIPPLE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_COLOR_LOGIC_OP</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_INDEX_LOGIC_OP</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_MAP1_</span>
+    <span class="emphasis">x</span>
+    where
+    <span class="emphasis">x</span>
+    is a map type
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_MAP2_</span>
+    <span class="emphasis">x</span>
+    where
+    <span class="emphasis">x</span>
+    is a map type
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_MULTISAMPLE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_NORMALIZE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POINT_SMOOTH</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POLYGON_OFFSET_LINE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POLYGON_OFFSET_FILL</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POLYGON_OFFSET_POINT</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POLYGON_SMOOTH</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POLYGON_STIPPLE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_SAMPLE_ALPHA_TO_COVERAGE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_SAMPLE_ALPHA_TO_ONE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_SAMPLE_COVERAGE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_SCISSOR_TEST</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_STENCIL_TEST</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_TEXTURE_1D</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_TEXTURE_2D</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_TEXTURE_3D</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Flags
+    <span class="constant">GL_TEXTURE_GEN_</span>
+    <span class="emphasis">x</span>
+    where
+    <span class="emphasis">x</span>
+    is S, T, R, or Q
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_EVAL_BIT</span>
+</td><td>
+    <span class="constant">GL_MAP1_</span>
+    <span class="emphasis">x</span>
+    enable bits, where
+    <span class="emphasis">x</span>
+    is a map type
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_MAP2_</span>
+    <span class="emphasis">x</span>
+    enable bits, where
+    <span class="emphasis">x</span>
+    is a map type
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        1D grid endpoints and divisions
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        2D grid endpoints and divisions
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_AUTO_NORMAL</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FOG_BIT</span>
+</td><td>
+    <span class="constant">GL_FOG</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Fog color
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Fog density
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Linear fog start
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Linear fog end
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Fog index
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_FOG_MODE</span>
+    value
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_HINT_BIT</span>
+</td><td>
+    <span class="constant">GL_PERSPECTIVE_CORRECTION_HINT</span>
+    setting
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POINT_SMOOTH_HINT</span>
+    setting
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_LINE_SMOOTH_HINT</span>
+    setting
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POLYGON_SMOOTH_HINT</span>
+    setting
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_FOG_HINT</span>
+    setting
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_GENERATE_MIPMAP_HINT</span>
+    setting
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_TEXTURE_COMPRESSION_HINT</span>
+    setting
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_LIGHTING_BIT</span>
+</td><td>
+    <span class="constant">GL_COLOR_MATERIAL</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_COLOR_MATERIAL_FACE</span>
+    value
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Color material parameters that are tracking the current color
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Ambient scene color
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_LIGHT_MODEL_LOCAL_VIEWER</span>
+    value
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_LIGHT_MODEL_TWO_SIDE</span>
+    setting
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_LIGHTING</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Enable bit for each light
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Ambient, diffuse, and specular intensity for each light
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Direction, position, exponent, and cutoff angle for each light
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Constant, linear, and quadratic attenuation factors for each light
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Ambient, diffuse, specular, and emissive color for each material
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Ambient, diffuse, and specular color indices for each material
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Specular exponent for each material
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_SHADE_MODEL</span>
+    setting
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_LINE_BIT</span>
+</td><td>
+    <span class="constant">GL_LINE_SMOOTH</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_LINE_STIPPLE</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Line stipple pattern and repeat counter
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Line width
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_LIST_BIT</span>
+</td><td>
+    <span class="constant">GL_LIST_BASE</span>
+    setting
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_MULTISAMPLE_BIT</span>
+</td><td>
+    <span class="constant">GL_MULTISAMPLE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_SAMPLE_ALPHA_TO_COVERAGE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_SAMPLE_ALPHA_TO_ONE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_SAMPLE_COVERAGE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_SAMPLE_COVERAGE_VALUE</span>
+    value
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_SAMPLE_COVERAGE_INVERT</span>
+    value
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_PIXEL_MODE_BIT</span>
+</td><td>
+    <span class="constant">GL_RED_BIAS</span>
+    and
+    <span class="constant">GL_RED_SCALE</span>
+    settings
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_GREEN_BIAS</span>
+    and
+    <span class="constant">GL_GREEN_SCALE</span>
+    values
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_BLUE_BIAS</span>
+    and
+    <span class="constant">GL_BLUE_SCALE</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_ALPHA_BIAS</span>
+    and
+    <span class="constant">GL_ALPHA_SCALE</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_DEPTH_BIAS</span>
+    and
+    <span class="constant">GL_DEPTH_SCALE</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_INDEX_OFFSET</span>
+    and
+    <span class="constant">GL_INDEX_SHIFT</span>
+    values
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_MAP_COLOR</span>
+    and
+    <span class="constant">GL_MAP_STENCIL</span>
+    flags
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_ZOOM_X</span>
+    and
+    <span class="constant">GL_ZOOM_Y</span>
+    factors
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_READ_BUFFER</span>
+    setting
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_POINT_BIT</span>
+</td><td>
+    <span class="constant">GL_POINT_SMOOTH</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Point size
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_POLYGON_BIT</span>
+</td><td>
+    <span class="constant">GL_CULL_FACE</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_CULL_FACE_MODE</span>
+    value
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_FRONT_FACE</span>
+    indicator
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POLYGON_MODE</span>
+    setting
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POLYGON_SMOOTH</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POLYGON_STIPPLE</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POLYGON_OFFSET_FILL</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POLYGON_OFFSET_LINE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POLYGON_OFFSET_POINT</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POLYGON_OFFSET_FACTOR</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_POLYGON_OFFSET_UNITS</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_POLYGON_STIPPLE_BIT</span>
+</td><td>
+                        Polygon stipple image
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SCISSOR_BIT</span>
+</td><td>
+    <span class="constant">GL_SCISSOR_TEST</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Scissor box
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_STENCIL_BUFFER_BIT</span>
+</td><td>
+    <span class="constant">GL_STENCIL_TEST</span>
+    enable bit
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Stencil function and reference value
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Stencil value mask
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Stencil fail, pass, and depth buffer pass actions
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Stencil buffer clear value
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Stencil buffer writemask
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_TEXTURE_BIT</span>
+</td><td>
+                        Enable bits for the four texture coordinates
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Border color for each texture image
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Minification function for each texture image
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Magnification function for each texture image
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Texture coordinates and wrap mode for each texture image
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Color and mode for each texture environment
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Enable bits
+    <span class="constant">GL_TEXTURE_GEN_</span>
+    <span class="emphasis">x</span>
+    ,
+    <span class="emphasis">x</span>
+    is S, T, R, and Q
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_TEXTURE_GEN_MODE</span>
+    setting for S, T, R, and Q
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <a class="crossref" href="./glTexGen.html">glTexGen</a>
+    plane equations for S, T, R, and Q
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Current texture bindings (for example,
+    <span class="constant">GL_TEXTURE_BINDING_2D</span>
+    )
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_TRANSFORM_BIT</span>
+</td><td>
+                        Coefficients of the six clipping planes
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Enable bits for the user-definable clipping planes
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_MATRIX_MODE</span>
+    value
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_NORMALIZE</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+    <span class="constant">GL_RESCALE_NORMAL</span>
+    flag
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_VIEWPORT_BIT</span>
+</td><td>
+                        Depth range (near and far)
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        </td><td>
+                        Viewport origin and extent
+                        </td>
+                </tr>
+    </tbody></table>
+    <div class="para">
+    <a class="crossref" href="./glPushAttrib.html#c-glPopAttrib">glPopAttrib</a>
+    restores the values of the state variables saved with the last
+    <a class="function" href="./glPushAttrib.html">glPushAttrib</a>
+    command.
+            Those not saved are left unchanged.
+</div>
+    <div class="para">
+            It is an error to push attributes onto a full stack
+            or to pop attributes off an empty stack.
+            In either case, the error flag is set
+            and no other change is made to GL state.
+        </div>
+    <div class="para">
+            Initially, the attribute stack is empty.
+        </div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            Not all values for GL state can be saved on the attribute stack.
+            For example,
+            render mode state,
+            and select and feedback state cannot be saved.
+            Client state must be saved with
+    <a class="crossref" href="./glPushClientAttrib.html">glPushClientAttrib</a>
+    .
+</div>
+    <div class="para">
+            The depth of the attribute stack depends on the implementation,
+            but it must be at least 16.
+        </div>
+    <div class="para">
+            For OpenGL versions 1.3 and greater, or when the
+    <div class="code">ARB_multitexture</div>
+    extension is supported, pushing and
+            popping texture state applies to all supported texture units.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_STACK_OVERFLOW</span>
+    is generated if
+    <a class="function" href="./glPushAttrib.html">glPushAttrib</a>
+    is called while
+            the attribute stack is full.
+</div>
+    <div class="para">
+    <span class="constant">GL_STACK_UNDERFLOW</span>
+    is generated if
+    <a class="crossref" href="./glPushAttrib.html#c-glPopAttrib">glPopAttrib</a>
+    is called while
+            the attribute stack is empty.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glPushAttrib.html">glPushAttrib</a>
+    or
+    <a class="crossref" href="./glPushAttrib.html#c-glPopAttrib">glPopAttrib</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_ATTRIB_STACK_DEPTH</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_ATTRIB_STACK_DEPTH</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    ,
+    <a class="crossref" href="./glGetClipPlane.html">glGetClipPlane</a>
+    ,
+    <a class="crossref" href="./glGetError.html">glGetError</a>
+    ,
+    <a class="crossref" href="./glGetLight.html">glGetLight</a>
+    ,
+    <a class="crossref" href="./glGetMap.html">glGetMap</a>
+    ,
+    <a class="crossref" href="./glGetMaterial.html">glGetMaterial</a>
+    ,
+    <a class="crossref" href="./glGetPixelMap.html">glGetPixelMap</a>
+    ,
+    <a class="crossref" href="./glGetPolygonStipple.html">glGetPolygonStipple</a>
+    ,
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+    ,
+    <a class="crossref" href="./glGetTexEnv.html">glGetTexEnv</a>
+    ,
+    <a class="crossref" href="./glGetTexGen.html">glGetTexGen</a>
+    ,
+    <a class="crossref" href="./glGetTexImage.html">glGetTexImage</a>
+    ,
+    <a class="crossref" href="./glGetTexLevelParameter.html">glGetTexLevelParameter</a>
+    ,
+    <a class="crossref" href="./glGetTexParameter.html">glGetTexParameter</a>
+    ,
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    ,
+    <a class="crossref" href="./glPushClientAttrib.html">glPushClientAttrib</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glPopAttrib</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_1.py">tests/shadow_1.py</a>
+    Lines: <span class="sample-lines">474</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/framecounter.py">OpenGLContext/framecounter.py</a>
+    Lines: <span class="sample-lines">78</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/indexedpolygons.py">OpenGLContext/scenegraph/indexedpolygons.py</a>
+    Lines: <span class="sample-lines">238</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/shape.py">OpenGLContext/scenegraph/shape.py</a>
+    Lines: <span class="sample-lines">61, 96</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/arraygeometry.py">OpenGLContext/scenegraph/arraygeometry.py</a>
+    Lines: <span class="sample-lines">181</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/quadrics.py">OpenGLContext/scenegraph/quadrics.py</a>
+    Lines: <span class="sample-lines">68</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson13.py">PyOpenGL-Demo/NeHe/lesson13.py</a>
+    Lines: <span class="sample-lines">106</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson43/glFreeType.py">PyOpenGL-Demo/NeHe/lesson43/glFreeType.py</a>
+    Lines: <span class="sample-lines">193, 203, 307</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/obj.py">pymt/obj.py</a>
+    Lines: <span class="sample-lines">20, 116</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/statement.py">pymt/graphx/statement.py</a>
+    Lines: <span class="sample-lines">54, 55, 227, 249, 274</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/draw.py">pymt/graphx/draw.py</a>
+    Lines: <span class="sample-lines">213, 272, 432</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/fbo.py">pymt/graphx/fbo.py</a>
+    Lines: <span class="sample-lines">19, 228, 275, 286</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/css.py">pymt/graphx/css.py</a>
+    Lines: <span class="sample-lines">14, 120, 136</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/stencil.py">pymt/graphx/stencil.py</a>
+    Lines: <span class="sample-lines">20, 64</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/apps/3Dviewer/3Dviewer.py">examples/apps/3Dviewer/3Dviewer.py</a>
+    Lines: <span class="sample-lines">65</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/data.py">pyggel/data.py</a>
+    Lines: <span class="sample-lines">560</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/misc.py">pyggel/misc.py</a>
+    Lines: <span class="sample-lines">49</span>
+</div>
+        <div class="sample-key">glPushAttrib</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_1.py">tests/shadow_1.py</a>
+    Lines: <span class="sample-lines">317</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/framecounter.py">OpenGLContext/framecounter.py</a>
+    Lines: <span class="sample-lines">57</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/indexedpolygons.py">OpenGLContext/scenegraph/indexedpolygons.py</a>
+    Lines: <span class="sample-lines">196</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/shape.py">OpenGLContext/scenegraph/shape.py</a>
+    Lines: <span class="sample-lines">38, 74</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/arraygeometry.py">OpenGLContext/scenegraph/arraygeometry.py</a>
+    Lines: <span class="sample-lines">144</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/quadrics.py">OpenGLContext/scenegraph/quadrics.py</a>
+    Lines: <span class="sample-lines">47</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson13.py">PyOpenGL-Demo/NeHe/lesson13.py</a>
+    Lines: <span class="sample-lines">101</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson43/glFreeType.py">PyOpenGL-Demo/NeHe/lesson43/glFreeType.py</a>
+    Lines: <span class="sample-lines">187, 200, 271</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/obj.py">pymt/obj.py</a>
+    Lines: <span class="sample-lines">19, 90</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/statement.py">pymt/graphx/statement.py</a>
+    Lines: <span class="sample-lines">56, 224, 242, 268</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/draw.py">pymt/graphx/draw.py</a>
+    Lines: <span class="sample-lines">159, 266, 418</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/fbo.py">pymt/graphx/fbo.py</a>
+    Lines: <span class="sample-lines">19, 223, 255, 260</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/css.py">pymt/graphx/css.py</a>
+    Lines: <span class="sample-lines">14, 112, 128</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/stencil.py">pymt/graphx/stencil.py</a>
+    Lines: <span class="sample-lines">20, 37</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/apps/3Dviewer/3Dviewer.py">examples/apps/3Dviewer/3Dviewer.py</a>
+    Lines: <span class="sample-lines">37</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/data.py">pyggel/data.py</a>
+    Lines: <span class="sample-lines">547</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/misc.py">pyggel/misc.py</a>
+    Lines: <span class="sample-lines">23</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

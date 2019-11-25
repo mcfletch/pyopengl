@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutRemoveMenuItem : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutRemoveMenuItem</h1>
+</header>
+<main class="content">
+    <section class="purpose">remove the specified menu item.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutRemoveMenuItem"></a>
+    <span class="c-function">glutRemoveMenuItem</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-entry" class="parameter">entry</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutRemoveMenuItem"></a>
+    <span class="py-function">glutRemoveMenuItem</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-item" class="parameter">item</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutRemoveMenuItem( c_int(item) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-entry"></a>
+                        entry
+                    </th>
+                    <td>
+    <div class="simpara">
+						Index into the menu items of the current menu (1 is the topmost menu item).
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutRemoveMenuItem.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			glutRemoveMenuItem remove the entry menu item regardless of whether it is a menu entry or sub-menu trigger.
+    <a class="parameter" href="#param-entry">entry</a>
+    must be between 1 and
+    <a class="function" href="./glutGet.html">glutGet(GLUT_MENU_NUM_ITEMS)</a>
+    inclusive. Menu items below the removed menu item are
+			renumbered.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutAddMenuEntry.html">glutAddMenuEntry</a>
+            <a class="crossref" href="./glutAddSubMenu.html">glutAddSubMenu</a>
+            <a class="crossref" href="./glutChangeToMenuEntry.html">glutChangeToMenuEntry</a>
+            <a class="crossref" href="./glutChangeToSubMenu.html">glutChangeToSubMenu</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

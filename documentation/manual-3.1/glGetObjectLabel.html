@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetObjectLabel : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetObjectLabel</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieve the label of a named object identified within a namespace</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetObjectLabel"></a>
+    <span class="c-function">glGetObjectLabel</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-identifier" class="parameter">identifier</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-name" class="parameter">name</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei * (
+            <a href="#param-length" class="parameter">length</a>
+        )
+        ,
+    </span><span class="param-def">
+        char * (
+            <a href="#param-label" class="parameter">label</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetObjectLabel"></a>
+    <span class="py-function">glGetObjectLabel</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-identifier" class="parameter">identifier</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-name" class="parameter">name</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-length" class="parameter">length</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-label" class="parameter">label</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-identifier"></a>
+                        identifier
+                    </th>
+                    <td>
+    <div class="para">
+                    The namespace from which the name of the object is allocated.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="para">
+                    The name of the object whose label to retrieve.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bufSize"></a>
+                        bufSize
+                    </th>
+                    <td>
+    <div class="para">
+                    The length of the buffer whose address is in
+    <a class="parameter" href="#param-label">label</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-length"></a>
+                        length
+                    </th>
+                    <td>
+    <div class="para">
+                    The address of a variable to receive the length of the object label.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-label"></a>
+                        label
+                    </th>
+                    <td>
+    <div class="para">
+                    The address of a string that will receive the object label.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetObjectLabel.html">glGetObjectLabel</a>
+    retrieves the label of the object identified by
+    <a class="parameter" href="#param-name">name</a>
+    within the namespace given by
+    <a class="parameter" href="#param-identifier">identifier</a>
+    .
+    <a class="parameter" href="#param-identifier">identifier</a>
+    must be one of
+    <span class="constant">GL_BUFFER</span>
+    ,
+    <span class="constant">GL_SHADER</span>
+    ,
+    <span class="constant">GL_PROGRAM</span>
+    ,
+    <span class="constant">GL_VERTEX_ARRAY</span>
+    ,
+    <span class="constant">GL_QUERY</span>
+    ,
+    <span class="constant">GL_PROGRAM_PIPELINE</span>
+    ,
+    <span class="constant">GL_TRANSFORM_FEEDBACK</span>
+    ,
+    <span class="constant">GL_SAMPLER</span>
+    ,
+    <span class="constant">GL_TEXTURE</span>
+    ,
+    <span class="constant">GL_RENDERBUFFER</span>
+    ,
+    <span class="constant">GL_FRAMEBUFFER</span>
+    ,
+            to indicate the namespace containing the names of buffers, shaders, programs, vertex array objects, query objects,
+            program pipelines, transform feedback objects, samplers, textures, renderbuffers and frame
+            buffers, respectively.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-label">label</a>
+    is the address of a string that will be used to store the object label.
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    specifies the number of characters in the array identified by
+    <a class="parameter" href="#param-label">label</a>
+    .
+    <a class="parameter" href="#param-length">length</a>
+    contains the address of a variable which will receive the number of characters in the object label.
+            If
+    <a class="parameter" href="#param-length">length</a>
+    is NULL, then it is ignored and no data is written. Likewise, if
+    <a class="parameter" href="#param-label">label</a>
+    is NULL, or if
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    is zero then no data is written to
+    <a class="parameter" href="#param-label">label</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-identifier">identifier</a>
+    is not one of the accepted object types.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-name">name</a>
+    is not the name of an existing object of the type specified by
+    <a class="parameter" href="#param-identifier">identifier</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    is
+            zero.
+</div>
+    <div class="para">
+            If not NULL,
+    <a class="parameter" href="#param-length">length</a>
+    and
+    <a class="parameter" href="#param-label">label</a>
+    should be addresses
+            to which the client has write access, otherwise undefined behavior, including process termination
+            may occur.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_LABEL_LENGTH</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetObjectLabel.html">glGetObjectLabel</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glPushDebugGroup.html">glPushDebugGroup</a>
+    ,
+    <a class="crossref" href="./glPopDebugGroup.html">glPopDebugGroup</a>
+    ,
+    <a class="crossref" href="./glObjectLabel.html">glObjectLabel</a>
+    ,
+    <a class="crossref" href="./glGetObjectPtrLabel.html">glGetObjectPtrLabel</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2013-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

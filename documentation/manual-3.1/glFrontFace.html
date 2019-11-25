@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glFrontFace : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glFrontFace</h1>
+</header>
+<main class="content">
+    <section class="purpose">define front- and back-facing polygons</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glFrontFace"></a>
+    <span class="c-function">glFrontFace</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-mode" class="parameter">mode</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glFrontFace"></a>
+    <span class="py-function">glFrontFace</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-mode" class="parameter">mode</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-mode"></a>
+                        mode
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the orientation of front-facing polygons.
+    <span class="constant">GL_CW</span>
+    and
+    <span class="constant">GL_CCW</span>
+    are accepted.
+                    The initial value is
+    <span class="constant">GL_CCW</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            In a scene composed entirely of opaque closed surfaces,
+            back-facing polygons are never visible.
+            Eliminating these invisible polygons has the obvious benefit
+            of speeding up the rendering of the image.
+            To enable and disable elimination of back-facing polygons, call
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="function" href="./glEnable.html#c-glDisable">glDisable</a>
+    with argument
+    <span class="constant">GL_CULL_FACE</span>
+    .
+</div>
+    <div class="para">
+            The projection of a polygon to window coordinates is said to have
+            clockwise winding if an imaginary object following the path
+            from its first vertex,
+            its second vertex,
+            and so on,
+            to its last vertex,
+            and finally back to its first vertex,
+            moves in a clockwise direction about the interior of the polygon.
+            The polygon's winding is said to be counterclockwise if the imaginary
+            object following the same path moves in a counterclockwise direction
+            about the interior of the polygon.
+    <a class="function" href="./glFrontFace.html">glFrontFace</a>
+    specifies whether polygons with clockwise winding in window coordinates,
+            or counterclockwise winding in window coordinates,
+            are taken to be front-facing.
+            Passing
+    <span class="constant">GL_CCW</span>
+    to
+    <a class="parameter" href="#param-mode">mode</a>
+    selects counterclockwise polygons as
+            front-facing;
+    <span class="constant">GL_CW</span>
+    selects clockwise polygons as front-facing.
+            By default, counterclockwise polygons are taken to be front-facing.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-mode">mode</a>
+    is not an accepted value.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_FRONT_FACE</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glFrontFace.html">glFrontFace</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glCullFace.html">glCullFace</a>
+    ,
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glFrontFace</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shaders.py">tests/shaders.py</a>
+    Lines: <span class="sample-lines">32, 36</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/shadow/volume.py">OpenGLContext/shadow/volume.py</a>
+    Lines: <span class="sample-lines">233, 276</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/nurbs.py">OpenGLContext/scenegraph/nurbs.py</a>
+    Lines: <span class="sample-lines">173, 175, 210</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/indexedpolygons.py">OpenGLContext/scenegraph/indexedpolygons.py</a>
+    Lines: <span class="sample-lines">220, 222</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/teapot.py">OpenGLContext/scenegraph/teapot.py</a>
+    Lines: <span class="sample-lines">29, 36</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/arraygeometry.py">OpenGLContext/scenegraph/arraygeometry.py</a>
+    Lines: <span class="sample-lines">169</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/spherebackground.py">OpenGLContext/scenegraph/spherebackground.py</a>
+    Lines: <span class="sample-lines">69</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/toolsfont.py">OpenGLContext/scenegraph/text/toolsfont.py</a>
+    Lines: <span class="sample-lines">95, 118, 160, 163, 173</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/_flat.py">OpenGLContext/passes/_flat.py</a>
+    Lines: <span class="sample-lines">341</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcore.py">OpenGLContext/passes/flatcore.py</a>
+    Lines: <span class="sample-lines">76</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcompat.py">OpenGLContext/passes/flatcompat.py</a>
+    Lines: <span class="sample-lines">86</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/fog.py">PyOpenGL-Demo/tom/fog.py</a>
+    Lines: <span class="sample-lines">42</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/teapots.py">PyOpenGL-Demo/redbook/teapots.py</a>
+    Lines: <span class="sample-lines">82</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/text.py">PyOpenGL-Demo/GLUT/tom/text.py</a>
+    Lines: <span class="sample-lines">74</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/view.py">pyggel/view.py</a>
+    Lines: <span class="sample-lines">187</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py</a>
+    Lines: <span class="sample-lines">630, 632</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Utils/Particles3D.py">Sketches/CL/Topology3D/Utils/Particles3D.py</a>
+    Lines: <span class="sample-lines">362, 364</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py">Code/Python/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py</a>
+    Lines: <span class="sample-lines">630, 632</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/textures.py">wobjects/textures.py</a>
+    Lines: <span class="sample-lines">952</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/polygonalModeling.py">wobjects/polygonalModeling.py</a>
+    Lines: <span class="sample-lines">1027</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

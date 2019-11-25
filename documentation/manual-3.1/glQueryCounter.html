@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glQueryCounter : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glQueryCounter</h1>
+</header>
+<main class="content">
+    <section class="purpose">record the GL time into a query object after all previous commands have reached the GL server but have not yet necessarily executed.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glQueryCounter"></a>
+    <span class="c-function">glQueryCounter</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-id" class="parameter">id</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glQueryCounter"></a>
+    <span class="py-function">glQueryCounter</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-id" class="parameter">id</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-id"></a>
+                        id
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the name of a query object into which to record the GL time.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the counter to query.
+    <a class="parameter" href="#param-target">target</a>
+    must be
+    <span class="constant">GL_TIMESTAMP</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glQueryCounter.html">glQueryCounter</a>
+    causes the GL to record the current time into the query object named
+    <a class="parameter" href="#param-id">id</a>
+    .
+    <a class="parameter" href="#param-target">target</a>
+    must be
+    <span class="constant">GL_TIMESTAMP</span>
+    . The time is recorded after all previous commands on the
+            GL client and server state and the framebuffer have been fully realized. When the time is recorded, the query result for that object
+            is marked available.
+    <a class="function" href="./glQueryCounter.html">glQueryCounter</a>
+    timer queries can be used within a
+    <a class="crossref" href="./glBeginQuery.html">glBeginQuery</a>
+    /
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+    block where the target is
+    <span class="constant">GL_TIME_ELAPSED</span>
+    and it does
+            not affect the result of that query object.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glQueryCounter.html">glQueryCounter</a>
+    is available only if the GL version is 3.3 or higher.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-id">id</a>
+    is the name
+            of a query object that is already in use within a
+    <a class="crossref" href="./glBeginQuery.html">glBeginQuery</a>
+    /
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+    block.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-id">id</a>
+    is not the name of a query object returned
+            from a previous call to
+    <a class="crossref" href="./glGenQueries.html">glGenQueries</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not
+    <span class="constant">GL_TIMESTAMP</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glQueryCounter.html">glQueryCounter</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenQueries.html">glGenQueries</a>
+    ,
+    <a class="crossref" href="./glBeginQuery.html">glBeginQuery</a>
+    ,
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+    ,
+    <a class="crossref" href="./glDeleteQueries.html">glDeleteQueries</a>
+    ,
+    <a class="crossref" href="./glGetQueryObject.html">glGetQueryObject</a>
+    ,
+    <a class="crossref" href="./glGetQueryiv.html">glGetQueryiv</a>
+    ,
+    <a class="crossref" href="./glGet.html">glGet</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

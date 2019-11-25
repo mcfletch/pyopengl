@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glMaterial : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glMaterial</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify material parameters for the lighting model</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glMaterial"></a>
+    <span class="c-function">glMaterial</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+                <div class="py-signature">
+    <a name="py-glMaterial"></a>
+    <span class="py-function">glMaterial</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-faces" class="parameter">faces</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-constant" class="parameter">constant</a>
+        ,
+    </span><span class="param-def">
+        *
+            <a href="#param-args" class="parameter">args</a>
+    </span>
+</span> )
+    <pre class="pydoc">glMaterial -- convenience function to dispatch on argument type
+
+    If passed a single argument in args, calls:
+        glMaterialfv( faces, constant, args[0] )
+    else calls:
+        glMaterialf( faces, constant, *args )
+    </pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glMaterialf"></a>
+    <span class="c-function">glMaterialf</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-face" class="parameter">face</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glMaterialf"></a>
+    <span class="py-function">glMaterialf</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-face" class="parameter">face</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glMaterialfv"></a>
+    <span class="c-function">glMaterialfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-face" class="parameter">face</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLfloat * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glMaterialfv"></a>
+    <span class="py-function">glMaterialfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-face" class="parameter">face</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glMateriali"></a>
+    <span class="c-function">glMateriali</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-face" class="parameter">face</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glMateriali"></a>
+    <span class="py-function">glMateriali</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-face" class="parameter">face</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glMaterialiv"></a>
+    <span class="c-function">glMaterialiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-face" class="parameter">face</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glMaterialiv"></a>
+    <span class="py-function">glMaterialiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-face" class="parameter">face</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-face"></a>
+                        face
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies which face or faces are being updated.
+                    Must be one of
+    <span class="constant">GL_FRONT</span>
+    ,
+    <span class="constant">GL_BACK</span>
+    , or
+    <span class="constant">GL_FRONT_AND_BACK</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the single-valued material parameter of the face or faces
+                    that is being updated.
+                    Must be
+    <span class="constant">GL_SHININESS</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-param"></a>
+                        param
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the value that parameter
+    <span class="constant">GL_SHININESS</span>
+    will be set to.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-face"></a>
+                        face
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies which face or faces are being updated.
+                    Must be one of
+    <span class="constant">GL_FRONT</span>
+    ,
+    <span class="constant">GL_BACK</span>
+    , or
+    <span class="constant">GL_FRONT_AND_BACK</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the material parameter of the face or faces that is being updated.
+                    Must be one of
+    <span class="constant">GL_AMBIENT</span>
+    ,
+    <span class="constant">GL_DIFFUSE</span>
+    ,
+    <span class="constant">GL_SPECULAR</span>
+    ,
+    <span class="constant">GL_EMISSION</span>
+    ,
+    <span class="constant">GL_SHININESS</span>
+    ,
+    <span class="constant">GL_AMBIENT_AND_DIFFUSE</span>
+    , or
+    <span class="constant">GL_COLOR_INDEXES</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to the value or values that
+    <a class="parameter" href="#param-pname">pname</a>
+    will be set to.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glMaterial.html">glMaterial</a>
+    assigns values to material parameters.
+            There are two matched sets of material parameters.
+            One,
+            the
+    <span class="emphasis">front-facing</span>
+    set,
+            is used to shade points,
+            lines,
+            bitmaps,
+            and all polygons
+            (when two-sided lighting is disabled),
+            or just front-facing polygons
+            (when two-sided lighting is enabled).
+            The other set,
+    <span class="emphasis">back-facing</span>
+    ,
+            is used to shade back-facing polygons only when two-sided lighting is enabled.
+            Refer to the
+    <a class="crossref" href="./glLightModel.html">glLightModel</a>
+    reference page for details concerning one- and
+            two-sided lighting calculations.
+</div>
+    <div class="para">
+    <a class="function" href="./glMaterial.html">glMaterial</a>
+    takes three arguments.
+            The first,
+    <a class="parameter" href="#param-face">face</a>
+    ,
+            specifies whether the
+    <span class="constant">GL_FRONT</span>
+    materials, the
+    <span class="constant">GL_BACK</span>
+    materials, or both
+    <span class="constant">GL_FRONT_AND_BACK</span>
+    materials will be modified.
+            The second,
+    <a class="parameter" href="#param-pname">pname</a>
+    ,
+            specifies which of several parameters in one or both sets will be modified.
+            The third,
+    <a class="parameter" href="#param-params">params</a>
+    ,
+            specifies what value or values will be assigned to the specified parameter.
+</div>
+    <div class="para">
+            Material parameters are used in the lighting equation that is optionally
+            applied to each vertex.
+            The equation is discussed in the
+    <a class="crossref" href="./glLightModel.html">glLightModel</a>
+    reference page.
+            The parameters that can be specified using
+    <a class="function" href="./glMaterial.html">glMaterial</a>
+    ,
+            and their interpretations by the lighting equation, are as follows:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_AMBIENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    contains four integer or floating-point values that specify
+                        the ambient RGBA reflectance of the material.
+                        Integer values are mapped linearly such that the most positive representable
+                        value maps to 1.0,
+                        and the most negative representable value maps to
+    <math>
+                            <mn>-1.0</mn>
+                        </math>
+    .
+                        Floating-point values are mapped directly.
+                        Neither integer nor floating-point values are clamped.
+                        The initial ambient reflectance for both front- and back-facing materials
+                        is (0.2, 0.2, 0.2, 1.0).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DIFFUSE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    contains four integer or floating-point values that specify
+                        the diffuse RGBA reflectance of the material.
+                        Integer values are mapped linearly such that the most positive representable
+                        value maps to 1.0,
+                        and the most negative representable value maps to
+    <math>
+                            <mn>-1.0</mn>
+                        </math>
+    .
+                        Floating-point values are mapped directly.
+                        Neither integer nor floating-point values are clamped.
+                        The initial diffuse reflectance for both front- and back-facing materials
+                        is (0.8, 0.8, 0.8, 1.0).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SPECULAR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    contains four integer or floating-point values that specify
+                        the specular RGBA reflectance of the material.
+                        Integer values are mapped linearly such that the most positive representable
+                        value maps to 1.0,
+                        and the most negative representable value maps to
+    <math>
+                            <mn>-1.0</mn>
+                        </math>
+    .
+                        Floating-point values are mapped directly.
+                        Neither integer nor floating-point values are clamped.
+                        The initial specular reflectance for both front- and back-facing materials
+                        is (0, 0, 0, 1).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_EMISSION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    contains four integer or floating-point values that specify
+                        the RGBA emitted light intensity of the material.
+                        Integer values are mapped linearly such that the most positive representable
+                        value maps to 1.0,
+                        and the most negative representable value maps to
+    <math>
+                            <mn>-1.0</mn>
+                        </math>
+    .
+                        Floating-point values are mapped directly.
+                        Neither integer nor floating-point values are clamped.
+                        The initial emission intensity for both front- and back-facing materials
+                        is (0, 0, 0, 1).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SHININESS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    is a single integer or floating-point value that specifies
+                        the RGBA specular exponent of the material.
+                        Integer and floating-point values are mapped directly.
+                        Only values in the range
+    <math>
+                            <mfenced open="[" close="]">
+                                <mn>0</mn>
+                                <mn>128</mn>
+                            </mfenced>
+                        </math>
+    are accepted.
+                        The initial specular exponent for both front- and back-facing materials
+                        is 0.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_AMBIENT_AND_DIFFUSE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Equivalent to calling
+    <a class="function" href="./glMaterial.html">glMaterial</a>
+    twice with the same parameter values,
+                        once with
+    <span class="constant">GL_AMBIENT</span>
+    and once with
+    <span class="constant">GL_DIFFUSE</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_COLOR_INDEXES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    contains three integer or floating-point values specifying
+                        the color indices for ambient,
+                        diffuse,
+                        and specular lighting.
+                        These three values,
+                        and
+    <span class="constant">GL_SHININESS</span>
+    ,
+                        are the only material values used by the color index mode lighting equation.
+                        Refer to the
+    <a class="crossref" href="./glLightModel.html">glLightModel</a>
+    reference page for a discussion
+                        of color index lighting.
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            The material parameters can be updated at any time.
+            In particular,
+    <a class="function" href="./glMaterial.html">glMaterial</a>
+    can be called between a call to
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding
+            call to
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+            If only a single material parameter is to be changed per vertex,
+            however,
+    <a class="crossref" href="./glColorMaterial.html">glColorMaterial</a>
+    is preferred over
+    <a class="function" href="./glMaterial.html">glMaterial</a>
+    (see
+    <a class="crossref" href="./glColorMaterial.html">glColorMaterial</a>
+    ).
+</div>
+    <div class="para">
+            While the ambient, diffuse, specular and emission material parameters
+            all have alpha components, only the diffuse alpha component is used in
+            the lighting computation.
+        </div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if either
+    <a class="parameter" href="#param-face">face</a>
+    or
+    <a class="parameter" href="#param-pname">pname</a>
+    is not
+            an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if a specular exponent outside the range
+    <math>
+                <mfenced open="[" close="]">
+                    <mn>0</mn>
+                    <mn>128</mn>
+                </mfenced>
+            </math>
+    is specified.
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetMaterial.html">glGetMaterial</a>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glColorMaterial.html">glColorMaterial</a>
+    ,
+    <a class="crossref" href="./glLight.html">glLight</a>
+    ,
+    <a class="crossref" href="./glLightModel.html">glLightModel</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glMaterial</div>
+        <div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/polygonalModeling.py">wobjects/polygonalModeling.py</a>
+    Lines: <span class="sample-lines">1002, 1003, 1004, 1005, 1006</span>
+</div>
+        <div class="sample-key">glMaterialf</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/material.py">OpenGLContext/scenegraph/material.py</a>
+    Lines: <span class="sample-lines">89</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/bezier/bezier.py">PyOpenGL-Demo/proesch/bezier/bezier.py</a>
+    Lines: <span class="sample-lines">131</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/stereo/stereoDemo.py">PyOpenGL-Demo/proesch/stereo/stereoDemo.py</a>
+    Lines: <span class="sample-lines">122</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py">PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py</a>
+    Lines: <span class="sample-lines">62</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">180</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/teapots.py">PyOpenGL-Demo/redbook/teapots.py</a>
+    Lines: <span class="sample-lines">112</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/fog.py">PyOpenGL-Demo/redbook/fog.py</a>
+    Lines: <span class="sample-lines">82</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/obj.py">pymt/obj.py</a>
+    Lines: <span class="sample-lines">22, 52</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">370</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">273</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">254</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">252</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">329</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">243</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">337</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">348</span>
+</div>
+        <div class="sample-key">glMaterialfv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_trim.py">tests/redbook_trim.py</a>
+    Lines: <span class="sample-lines">89, 90, 91</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_alpha3D.py">tests/redbook_alpha3D.py</a>
+    Lines: <span class="sample-lines">76, 77, 127, 128, 136, 137</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_surface.py">tests/redbook_surface.py</a>
+    Lines: <span class="sample-lines">61, 62, 63</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_surface_cb.py">tests/redbook_surface_cb.py</a>
+    Lines: <span class="sample-lines">78, 79, 80</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/material.py">OpenGLContext/scenegraph/material.py</a>
+    Lines: <span class="sample-lines">88</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/bezier/bezier.py">PyOpenGL-Demo/proesch/bezier/bezier.py</a>
+    Lines: <span class="sample-lines">128, 129, 130</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/stereo/stereoDemo.py">PyOpenGL-Demo/proesch/stereo/stereoDemo.py</a>
+    Lines: <span class="sample-lines">119, 120, 121</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py">PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py</a>
+    Lines: <span class="sample-lines">59, 60, 61</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">154, 155, 159, 160, 179</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/conechecker.py">PyOpenGL-Demo/tom/conechecker.py</a>
+    Lines: <span class="sample-lines">31, 32, 33, 34</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/text.py">PyOpenGL-Demo/tom/text.py</a>
+    Lines: <span class="sample-lines">12</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/fog.py">PyOpenGL-Demo/tom/fog.py</a>
+    Lines: <span class="sample-lines">58, 59, 60, 61</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/conesave.py">PyOpenGL-Demo/tom/conesave.py</a>
+    Lines: <span class="sample-lines">14, 15, 16, 17</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/demo.py">PyOpenGL-Demo/tom/demo.py</a>
+    Lines: <span class="sample-lines">82</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/cone.py">PyOpenGL-Demo/tom/cone.py</a>
+    Lines: <span class="sample-lines">9, 10, 11, 12</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/pick.py">PyOpenGL-Demo/tom/pick.py</a>
+    Lines: <span class="sample-lines">15, 17</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/teapots.py">PyOpenGL-Demo/redbook/teapots.py</a>
+    Lines: <span class="sample-lines">107, 109, 111</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/fog.py">PyOpenGL-Demo/redbook/fog.py</a>
+    Lines: <span class="sample-lines">77, 79, 81</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/molehill.py">PyOpenGL-Demo/GLUT/molehill.py</a>
+    Lines: <span class="sample-lines">143, 144, 147, 154, 161, 168</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/gears.py">PyOpenGL-Demo/GLUT/gears.py</a>
+    Lines: <span class="sample-lines">237, 243, 249</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/text.py">PyOpenGL-Demo/GLUT/tom/text.py</a>
+    Lines: <span class="sample-lines">77</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/cone.py">PyOpenGL-Demo/GLUT/tom/cone.py</a>
+    Lines: <span class="sample-lines">33, 34, 35, 36</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/mmLib/OpenGLDriver.py">pymmlib/mmLib/OpenGLDriver.py</a>
+    Lines: <span class="sample-lines">384, 385, 386, 387, 388, 411, 412, 413, 414, 415</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/applications/glutviewer.py">pymmlib/applications/glutviewer.py</a>
+    Lines: <span class="sample-lines">77, 78, 79, 80, 81</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/obj.py">pymt/obj.py</a>
+    Lines: <span class="sample-lines">21, 48, 49, 50, 51</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">369</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">272</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">253</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">251</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">328</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">242</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">336</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">347</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glTextureBarrier : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glTextureBarrier</h1>
+</header>
+<main class="content">
+    <section class="purpose">controls the ordering of reads and writes to rendered fragments across drawing commands</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glTextureBarrier"></a>
+    <span class="c-function">glTextureBarrier</span>(<span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-void" class="parameter">void</a>
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTextureBarrier"></a>
+    <span class="py-function">glTextureBarrier</span>( <span class="parameter-list">
+</span> )
+</div>
+        </div>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            The values of rendered fragments are undefined when a shader
+            stage fetches texels and the same texels are written via
+            fragment shader outputs, even if the reads and writes are not in
+            the same drawing command. To safely read the result of a written
+            texel via a texel fetch in a subsequent drawing command, call
+    <a class="function" href="./glTextureBarrier.html">glTextureBarrier</a>
+    between the two drawing
+            commands to guarantee that writes have completed and caches have
+            been invalidated before subsequent drawing commands are
+            executed.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            The situation described above is referred to as a
+    <span class="emphasis">rendering feedback loop</span>
+    and is discussed in
+            more detail in section 9.3 of the OpenGL 4.5 Specification.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+            None.
+        </div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glTextureBarrier.html">glTextureBarrier</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glMemoryBarrier.html">glMemoryBarrier</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

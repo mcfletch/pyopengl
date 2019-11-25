@@ -1,0 +1,2440 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glEnable : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glEnable</h1>
+</header>
+<main class="content">
+    <section class="purpose">enable or disable server-side GL capabilities</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glDisable"></a>
+    <span class="c-function">glDisable</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-cap" class="parameter">cap</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glDisable"></a>
+    <span class="py-function">glDisable</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-cap" class="parameter">cap</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glDisablei"></a>
+    <span class="c-function">glDisablei</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-cap" class="parameter">cap</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glDisablei"></a>
+    <span class="py-function">glDisablei</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glEnable"></a>
+    <span class="c-function">glEnable</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-cap" class="parameter">cap</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEnable"></a>
+    <span class="py-function">glEnable</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-cap" class="parameter">cap</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glEnablei"></a>
+    <span class="c-function">glEnablei</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-cap" class="parameter">cap</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEnablei"></a>
+    <span class="py-function">glEnablei</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-cap"></a>
+                        cap
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a symbolic constant indicating a GL capability.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the index of the switch to disable (for
+    <a class="function" href="./glEnable.html#c-glEnablei">glEnablei</a>
+    and
+    <a class="function" href="./glEnable.html#c-glDisablei">glDisablei</a>
+    only).
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glEnable.html">glEnable</a>
+    and
+    <a class="function" href="./glEnable.html#c-glDisable">glDisable</a>
+    enable and disable various capabilities. Use
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    or
+    <a class="crossref" href="./glGet.html">glGet</a>
+    to determine the current setting of any capability. The initial
+            value for each capability with the exception of
+    <span class="constant">GL_DITHER</span>
+    and
+    <span class="constant">GL_MULTISAMPLE</span>
+    is
+    <span class="constant">GL_FALSE</span>
+    . The initial value for
+    <span class="constant">GL_DITHER</span>
+    and
+    <span class="constant">GL_MULTISAMPLE</span>
+    is
+    <span class="constant">GL_TRUE</span>
+    .
+</div>
+    <div class="para">
+            Both
+    <a class="function" href="./glEnable.html">glEnable</a>
+    and
+    <a class="function" href="./glEnable.html#c-glDisable">glDisable</a>
+    take a single argument,
+    <a class="parameter" href="#param-cap">cap</a>
+    ,
+            which can assume one of the following values:
+</div>
+    <div class="para">
+            Some of the GL's capabilities are indexed.
+    <a class="function" href="./glEnable.html#c-glEnablei">glEnablei</a>
+    and
+    <a class="function" href="./glEnable.html#c-glDisablei">glDisablei</a>
+    enable and disable
+            indexed capabilities.
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BLEND</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled,
+                        blend the computed fragment color values with the values in the color
+                        buffers. See
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_CLIP_DISTANCE</span>
+    <span class="emphasis">i</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled, clip geometry against user-defined half space
+    <span class="emphasis">i</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_COLOR_LOGIC_OP</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled,
+                        apply the currently selected logical operation to the computed fragment
+                        color and color buffer values. See
+    <a class="crossref" href="./glLogicOp.html">glLogicOp</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_CULL_FACE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled,
+                        cull polygons based on their winding in window coordinates.
+                        See
+    <a class="crossref" href="./glCullFace.html">glCullFace</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEBUG_OUTPUT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled, debug messages are produced by a debug context. When disabled,
+                        the debug message log is silenced. Note that in a non-debug context, very
+                        few, if any messages might be produced, even when
+    <span class="constant">GL_DEBUG_OUTPUT</span>
+    is enabled.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEBUG_OUTPUT_SYNCHRONOUS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled, debug messages are produced synchronously by a debug context. If disabled,
+                        debug messages may be produced asynchronously. In particular, they may be delayed relative
+                        to the execution of GL commands, and the debug callback function may be called from
+                        a thread other than that in which the commands are executed.
+                        See
+    <a class="crossref" href="./glDebugMessageCallback.html">glDebugMessageCallback</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEPTH_CLAMP</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled,
+                        the
+    <math overflow="scroll">
+                            <mo>-</mo><msub><mi>w</mi><mi>c</mi></msub><mo></mo><msub><mi>z</mi><mi>c</mi></msub><mo></mo><msub><mi>w</mi><mi>c</mi></msub>
+                        </math>
+    plane equation is ignored by view volume clipping (effectively, there is no near or
+                        far plane clipping).
+                        See
+    <a class="crossref" href="./glDepthRange.html">glDepthRange</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEPTH_TEST</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled,
+                        do depth comparisons and update the depth buffer. Note that even if
+                        the depth buffer exists and the depth mask is non-zero, the
+                        depth buffer is not updated if the depth test is disabled. See
+    <a class="crossref" href="./glDepthFunc.html">glDepthFunc</a>
+    and
+    <a class="crossref" href="./glDepthRange.html">glDepthRange</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DITHER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled,
+                        dither color components or indices before they are written to the
+                        color buffer.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FRAMEBUFFER_SRGB</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled
+                        and the value of
+    <span class="constant">GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING</span>
+    for the
+                        framebuffer attachment corresponding to the destination buffer is
+    <span class="constant">GL_SRGB</span>
+    ,
+                        the R, G, and B destination color values (after conversion from fixed-point to floating-point)
+                        are considered to be encoded for the sRGB color space and hence are linearized prior to
+                        their use in blending.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LINE_SMOOTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled,
+                        draw lines with correct filtering.
+                        Otherwise,
+                        draw aliased lines.
+                        See
+    <a class="crossref" href="./glLineWidth.html">glLineWidth</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MULTISAMPLE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled,
+                        use multiple fragment samples in computing the final color of a pixel.
+                        See
+    <a class="crossref" href="./glSampleCoverage.html">glSampleCoverage</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POLYGON_OFFSET_FILL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled, and if the polygon is rendered in
+    <span class="constant">GL_FILL</span>
+    mode, an offset is added to depth values of a polygon's
+                        fragments before the depth comparison is performed.
+                        See
+    <a class="crossref" href="./glPolygonOffset.html">glPolygonOffset</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POLYGON_OFFSET_LINE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled, and if the polygon is rendered in
+    <span class="constant">GL_LINE</span>
+    mode, an offset is added to depth values of a polygon's
+                        fragments before the depth comparison is performed.
+                        See
+    <a class="crossref" href="./glPolygonOffset.html">glPolygonOffset</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POLYGON_OFFSET_POINT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled, an offset is added to depth values of a polygon's fragments
+                        before the depth comparison is performed, if the polygon is rendered in
+    <span class="constant">GL_POINT</span>
+    mode. See
+    <a class="crossref" href="./glPolygonOffset.html">glPolygonOffset</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POLYGON_SMOOTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled, draw polygons with proper filtering.
+                        Otherwise, draw aliased polygons. For correct antialiased polygons,
+                        an alpha buffer is needed and the polygons must be sorted front to
+                        back.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PRIMITIVE_RESTART</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        Enables primitive restarting.  If enabled, any one of the draw commands
+                        which transfers a set of generic attribute array elements to the GL will restart
+                        the primitive when the index of the vertex is equal to the primitive restart index.
+                        See
+    <a class="crossref" href="./glPrimitiveRestartIndex.html">glPrimitiveRestartIndex</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PRIMITIVE_RESTART_FIXED_INDEX</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        Enables primitive restarting with a fixed index. If enabled, any one of the
+                        draw commands which transfers a set of generic attribute array elements to the GL will
+                        restart the primitive when the index of the vertex is equal to the fixed primitive
+                        index for the specified index type. The fixed index is equal to
+    <math overflow="scroll"><msup><mn>2</mn><mi>n</mi></msup><mo></mo><mn>1</mn></math>
+    where
+    <span class="emphasis">n</span>
+    is equal to 8 for
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    ,
+                        16 for
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+    and 32 for
+    <span class="constant">GL_UNSIGNED_INT</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_RASTERIZER_DISCARD</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled,
+                        primitives are discarded after the optional transform feedback stage,
+                        but before rasterization. Furthermore, when enabled,
+    <a class="crossref" href="./glClear.html">glClear</a>
+    ,
+    <a class="crossref" href="./glClearBufferData.html">glClearBufferData</a>
+    ,
+    <a class="crossref" href="./glClearBufferSubData.html">glClearBufferSubData</a>
+    ,
+    <a class="crossref" href="./glClearTexImage.html">glClearTexImage</a>
+    , and
+    <a class="crossref" href="./glClearTexSubImage.html">glClearTexSubImage</a>
+    are ignored.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SAMPLE_ALPHA_TO_COVERAGE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled,
+                        compute a temporary coverage value where each bit is determined by the
+                        alpha value at the corresponding sample location.  The temporary coverage
+                        value is then ANDed with the fragment coverage value.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SAMPLE_ALPHA_TO_ONE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled,
+                        each sample alpha value is replaced by the maximum representable alpha value.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SAMPLE_COVERAGE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled,
+                        the fragment's coverage is ANDed with the temporary coverage value.  If
+    <span class="constant">GL_SAMPLE_COVERAGE_INVERT</span>
+    is set to
+    <span class="constant">GL_TRUE</span>
+    , invert the coverage
+                        value.
+                        See
+    <a class="crossref" href="./glSampleCoverage.html">glSampleCoverage</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SAMPLE_SHADING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled, the active fragment shader is run once for each covered sample, or at
+                        fraction of this rate as determined by the current value of
+    <span class="constant">GL_MIN_SAMPLE_SHADING_VALUE</span>
+    .
+                        See
+    <a class="crossref" href="./glMinSampleShading.html">glMinSampleShading</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SAMPLE_MASK</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled, the sample coverage mask generated for a fragment during rasterization
+                        will be ANDed with the value of
+    <span class="constant">GL_SAMPLE_MASK_VALUE</span>
+    before
+                        shading occurs.
+                        See
+    <a class="crossref" href="./glSampleMaski.html">glSampleMaski</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SCISSOR_TEST</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled,
+                        discard fragments that are outside the scissor rectangle.
+                        See
+    <a class="crossref" href="./glScissor.html">glScissor</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_TEST</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled,
+                        do stencil testing and update the stencil buffer.
+                        See
+    <a class="crossref" href="./glStencilFunc.html">glStencilFunc</a>
+    and
+    <a class="crossref" href="./glStencilOp.html">glStencilOp</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_CUBE_MAP_SEAMLESS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled, cubemap textures are sampled such that when linearly sampling from the border
+                        between two adjacent faces, texels from both faces are used to generate the final sample
+                        value. When disabled, texels from only a single face are used to construct the final
+                        sample value.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PROGRAM_POINT_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                </div>
+    <div class="para">
+                        If enabled
+                        and a vertex or geometry shader is active, then the derived point size is taken from the (potentially clipped) shader builtin
+    <span class="constant">gl_PointSize</span>
+    and clamped to the implementation-dependent point size range.
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-cap">cap</a>
+    is not one of the values
+            listed previously.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated by
+    <a class="function" href="./glEnable.html#c-glEnablei">glEnablei</a>
+    and
+    <a class="function" href="./glEnable.html#c-glDisablei">glDisablei</a>
+    if
+    <a class="parameter" href="#param-index">index</a>
+    is greater than or equal to the number of indexed capabilities for
+    <a class="parameter" href="#param-cap">cap</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <span class="constant">GL_PRIMITIVE_RESTART</span>
+    is available only if the GL version is 3.1 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_TEXTURE_CUBE_MAP_SEAMLESS</span>
+    is available only if the GL version is 3.2 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_PRIMITIVE_RESTART_FIXED_INDEX</span>
+    is available only if the GL version is 4.3 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_DEBUG_OUTPUT</span>
+    and
+    <span class="constant">GL_DEBUG_OUTPUT_SYNCHRONOUS</span>
+    are available only if the GL version is 4.3 or greater.
+</div>
+    <div class="para">
+            Any token accepted by
+    <a class="function" href="./glEnable.html">glEnable</a>
+    or
+    <a class="function" href="./glEnable.html#c-glDisable">glDisable</a>
+    is also accepted by
+    <a class="function" href="./glEnable.html#c-glEnablei">glEnablei</a>
+    and
+    <a class="function" href="./glEnable.html#c-glDisablei">glDisablei</a>
+    , but if the capability is not indexed,
+            the maximum value that
+    <a class="parameter" href="#param-index">index</a>
+    may take is zero.
+</div>
+    <div class="para">
+            In general, passing an indexed capability to
+    <a class="function" href="./glEnable.html">glEnable</a>
+    or
+    <a class="function" href="./glEnable.html#c-glDisable">glDisable</a>
+    will enable or disable that capability for all indices, resepectively.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glEnable.html#c-glDisable">glDisable</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glEnable.html#c-glDisablei">glDisablei</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glEnable.html">glEnable</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glEnable.html#c-glEnablei">glEnablei</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    ,
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    ,
+    <a class="crossref" href="./glCullFace.html">glCullFace</a>
+    ,
+    <a class="crossref" href="./glDepthFunc.html">glDepthFunc</a>
+    ,
+    <a class="crossref" href="./glDepthRange.html">glDepthRange</a>
+    ,
+    <a class="crossref" href="./glGet.html">glGet</a>
+    ,
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    ,
+    <a class="crossref" href="./glLineWidth.html">glLineWidth</a>
+    ,
+    <a class="crossref" href="./glLogicOp.html">glLogicOp</a>
+    ,
+    <a class="crossref" href="./glPointSize.html">glPointSize</a>
+    ,
+    <a class="crossref" href="./glPolygonMode.html">glPolygonMode</a>
+    ,
+    <a class="crossref" href="./glPolygonOffset.html">glPolygonOffset</a>
+    ,
+    <a class="crossref" href="./glSampleCoverage.html">glSampleCoverage</a>
+    ,
+    <a class="crossref" href="./glScissor.html">glScissor</a>
+    ,
+    <a class="crossref" href="./glStencilFunc.html">glStencilFunc</a>
+    ,
+    <a class="crossref" href="./glStencilOp.html">glStencilOp</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This document is licensed under the SGI
+            Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glDisable</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_alpha3D.py">tests/redbook_alpha3D.py</a>
+    Lines: <span class="sample-lines">143</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glut_fullscreen.py">tests/glut_fullscreen.py</a>
+    Lines: <span class="sample-lines">20</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/wgl_font.py">tests/wgl_font.py</a>
+    Lines: <span class="sample-lines">47</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe8.py">tests/nehe8.py</a>
+    Lines: <span class="sample-lines">77, 79, 80, 81, 84, 96, 110, 115</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6_multi.py">tests/nehe6_multi.py</a>
+    Lines: <span class="sample-lines">75</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/gldrawelements_list.py">tests/gldrawelements_list.py</a>
+    Lines: <span class="sample-lines">30, 33</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glhistogram.py">tests/glhistogram.py</a>
+    Lines: <span class="sample-lines">73</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6_convolve.py">tests/nehe6_convolve.py</a>
+    Lines: <span class="sample-lines">130, 137</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6_timer.py">tests/nehe6_timer.py</a>
+    Lines: <span class="sample-lines">80</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe5.py">tests/nehe5.py</a>
+    Lines: <span class="sample-lines">25</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/dek_surf.py">tests/dek_surf.py</a>
+    Lines: <span class="sample-lines">47</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glprint.py">tests/glprint.py</a>
+    Lines: <span class="sample-lines">110</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe7.py">tests/nehe7.py</a>
+    Lines: <span class="sample-lines">134, 136, 137, 138</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/ilsstrategies.py">tests/ilsstrategies.py</a>
+    Lines: <span class="sample-lines">27</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glu_tess2.py">tests/glu_tess2.py</a>
+    Lines: <span class="sample-lines">49</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6_compressed.py">tests/nehe6_compressed.py</a>
+    Lines: <span class="sample-lines">47</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_alpha.py">tests/redbook_alpha.py</a>
+    Lines: <span class="sample-lines">71, 75</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_1.py">tests/shadow_1.py</a>
+    Lines: <span class="sample-lines">276, 468, 471, 680, 682, 683, 684, 685</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6.py">tests/nehe6.py</a>
+    Lines: <span class="sample-lines">66</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glu_tess.py">tests/glu_tess.py</a>
+    Lines: <span class="sample-lines">48</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe4.py">tests/nehe4.py</a>
+    Lines: <span class="sample-lines">41, 42</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe3.py">tests/nehe3.py</a>
+    Lines: <span class="sample-lines">28, 29</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/pygame_textureatlas.py">tests/pygame_textureatlas.py</a>
+    Lines: <span class="sample-lines">152</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/dek_texturesurf.py">tests/dek_texturesurf.py</a>
+    Lines: <span class="sample-lines">59</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe2.py">tests/nehe2.py</a>
+    Lines: <span class="sample-lines">44</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/framecounter.py">OpenGLContext/framecounter.py</a>
+    Lines: <span class="sample-lines">59, 60</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/texture.py">OpenGLContext/texture.py</a>
+    Lines: <span class="sample-lines">102, 274</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/shadow/passes.py">OpenGLContext/shadow/passes.py</a>
+    Lines: <span class="sample-lines">133, 134, 165, 166</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/browser/vpcurve.py">OpenGLContext/browser/vpcurve.py</a>
+    Lines: <span class="sample-lines">95</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/imagetexture.py">OpenGLContext/scenegraph/imagetexture.py</a>
+    Lines: <span class="sample-lines">100</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/cubebackground.py">OpenGLContext/scenegraph/cubebackground.py</a>
+    Lines: <span class="sample-lines">69, 70</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/boundingvolume.py">OpenGLContext/scenegraph/boundingvolume.py</a>
+    Lines: <span class="sample-lines">252, 301, 307</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/nurbs.py">OpenGLContext/scenegraph/nurbs.py</a>
+    Lines: <span class="sample-lines">127, 128, 179</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/indexedpolygons.py">OpenGLContext/scenegraph/indexedpolygons.py</a>
+    Lines: <span class="sample-lines">43, 100, 227</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/indexedlineset.py">OpenGLContext/scenegraph/indexedlineset.py</a>
+    Lines: <span class="sample-lines">89</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/shape.py">OpenGLContext/scenegraph/shape.py</a>
+    Lines: <span class="sample-lines">56, 88</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/arraygeometry.py">OpenGLContext/scenegraph/arraygeometry.py</a>
+    Lines: <span class="sample-lines">161, 173</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/pointset.py">OpenGLContext/scenegraph/pointset.py</a>
+    Lines: <span class="sample-lines">68, 81, 83</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/spherebackground.py">OpenGLContext/scenegraph/spherebackground.py</a>
+    Lines: <span class="sample-lines">51, 52, 54, 67</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/font.py">OpenGLContext/scenegraph/text/font.py</a>
+    Lines: <span class="sample-lines">328</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/toolsfont.py">OpenGLContext/scenegraph/text/toolsfont.py</a>
+    Lines: <span class="sample-lines">27, 326</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/_flat.py">OpenGLContext/passes/_flat.py</a>
+    Lines: <span class="sample-lines">459, 552, 554</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcore.py">OpenGLContext/passes/flatcore.py</a>
+    Lines: <span class="sample-lines">183, 274, 276</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/rendervisitor.py">OpenGLContext/passes/rendervisitor.py</a>
+    Lines: <span class="sample-lines">157</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcompat.py">OpenGLContext/passes/flatcompat.py</a>
+    Lines: <span class="sample-lines">123, 196, 220, 289, 291</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/renderpass.py">OpenGLContext/passes/renderpass.py</a>
+    Lines: <span class="sample-lines">356, 384, 392</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py">PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py</a>
+    Lines: <span class="sample-lines">36</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson23.py">PyOpenGL-Demo/NeHe/lesson23.py</a>
+    Lines: <span class="sample-lines">179, 180</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson42.py">PyOpenGL-Demo/NeHe/lesson42.py</a>
+    Lines: <span class="sample-lines">320, 346</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson18.py">PyOpenGL-Demo/NeHe/lesson18.py</a>
+    Lines: <span class="sample-lines">201</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson19.py">PyOpenGL-Demo/NeHe/lesson19.py</a>
+    Lines: <span class="sample-lines">93</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson26.py">PyOpenGL-Demo/NeHe/lesson26.py</a>
+    Lines: <span class="sample-lines">110, 111, 112, 154, 176, 177, 181, 188</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson43/glFreeType.py">PyOpenGL-Demo/NeHe/lesson43/glFreeType.py</a>
+    Lines: <span class="sample-lines">273, 275</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/glFont.py">PyOpenGL-Demo/NeHe/lesson44/glFont.py</a>
+    Lines: <span class="sample-lines">74, 92, 93</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/lesson44.py">PyOpenGL-Demo/NeHe/lesson44/lesson44.py</a>
+    Lines: <span class="sample-lines">196, 197, 198</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/glCamera.py">PyOpenGL-Demo/NeHe/lesson44/glCamera.py</a>
+    Lines: <span class="sample-lines">549, 649, 651</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/conechecker.py">PyOpenGL-Demo/tom/conechecker.py</a>
+    Lines: <span class="sample-lines">15</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/lorentz.py">PyOpenGL-Demo/tom/lorentz.py</a>
+    Lines: <span class="sample-lines">28</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/poly.py">PyOpenGL-Demo/tom/poly.py</a>
+    Lines: <span class="sample-lines">41</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/checker.py">PyOpenGL-Demo/tom/checker.py</a>
+    Lines: <span class="sample-lines">15</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/Line.py">PyOpenGL-Demo/tom/Line.py</a>
+    Lines: <span class="sample-lines">10</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/fog.py">PyOpenGL-Demo/tom/fog.py</a>
+    Lines: <span class="sample-lines">37</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/demo.py">PyOpenGL-Demo/tom/demo.py</a>
+    Lines: <span class="sample-lines">51</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/arraytest.py">PyOpenGL-Demo/tom/arraytest.py</a>
+    Lines: <span class="sample-lines">29</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/lines.py">PyOpenGL-Demo/redbook/lines.py</a>
+    Lines: <span class="sample-lines">120</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/movelight.py">PyOpenGL-Demo/redbook/movelight.py</a>
+    Lines: <span class="sample-lines">103</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/molehill.py">PyOpenGL-Demo/GLUT/molehill.py</a>
+    Lines: <span class="sample-lines">44</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/glutplane.py">PyOpenGL-Demo/GLUT/glutplane.py</a>
+    Lines: <span class="sample-lines">49</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/lorentz.py">PyOpenGL-Demo/GLUT/tom/lorentz.py</a>
+    Lines: <span class="sample-lines">40</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/checker.py">PyOpenGL-Demo/GLUT/tom/checker.py</a>
+    Lines: <span class="sample-lines">30</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/arraytest.py">PyOpenGL-Demo/GLUT/tom/arraytest.py</a>
+    Lines: <span class="sample-lines">44</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/texturesurf.py">PyOpenGL-Demo/dek/texturesurf.py</a>
+    Lines: <span class="sample-lines">74</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/OglSurface/OglFrame.py">PyOpenGL-Demo/dek/OglSurface/OglFrame.py</a>
+    Lines: <span class="sample-lines">22</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/OglSurface/triangle.py">PyOpenGL-Demo/dek/OglSurface/triangle.py</a>
+    Lines: <span class="sample-lines">78, 79, 88, 89</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/mmLib/OpenGLDriver.py">pymmlib/mmLib/OpenGLDriver.py</a>
+    Lines: <span class="sample-lines">190, 196, 201, 206, 222, 224, 287, 327, 343, 438, 472, 486, 514, 564</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/applications/glutviewer.py">pymmlib/applications/glutviewer.py</a>
+    Lines: <span class="sample-lines">93, 192, 216</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglBase.py">renderers/openglBase.py</a>
+    Lines: <span class="sample-lines">137, 195, 242, 264, 316</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglPygame.py">renderers/openglPygame.py</a>
+    Lines: <span class="sample-lines">322</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/openglgraphics.py">system/openglgraphics.py</a>
+    Lines: <span class="sample-lines">99, 136, 166, 194, 374</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Gratings.py">VisionEgg/Gratings.py</a>
+    Lines: <span class="sample-lines">323, 338, 424, 640, 646, 713, 715</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Core.py">VisionEgg/Core.py</a>
+    Lines: <span class="sample-lines">1487, 1488, 1489</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/MoreStimuli.py">VisionEgg/MoreStimuli.py</a>
+    Lines: <span class="sample-lines">120, 121, 174, 243, 247, 251, 324, 325, 387, 452, 453, 454, 525</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/SphereMap.py">VisionEgg/SphereMap.py</a>
+    Lines: <span class="sample-lines">249, 250, 286, 303, 792, 793, 845</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Textures.py">VisionEgg/Textures.py</a>
+    Lines: <span class="sample-lines">1315, 1453, 1585</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Text.py">VisionEgg/Text.py</a>
+    Lines: <span class="sample-lines">410, 411, 412, 424, 475, 476, 496</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Dots.py">VisionEgg/Dots.py</a>
+    Lines: <span class="sample-lines">187, 244, 254, 368, 371</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/texture.py">pymt/texture.py</a>
+    Lines: <span class="sample-lines">17, 160, 329</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/obj.py">pymt/obj.py</a>
+    Lines: <span class="sample-lines">19, 58, 289, 290, 291, 292</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/statement.py">pymt/graphx/statement.py</a>
+    Lines: <span class="sample-lines">53, 156, 196</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/fbo.py">pymt/graphx/fbo.py</a>
+    Lines: <span class="sample-lines">21, 256</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/colors.py">pymt/graphx/colors.py</a>
+    Lines: <span class="sample-lines">8, 46, 56</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/core/video/video_pyglet.py">pymt/core/video/video_pyglet.py</a>
+    Lines: <span class="sample-lines">12, 101</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/apps/3Ddrawing/3Ddrawing.py">examples/apps/3Ddrawing/3Ddrawing.py</a>
+    Lines: <span class="sample-lines">53, 54, 55, 144</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/apps/3Dviewer/3Dviewer.py">examples/apps/3Dviewer/3Dviewer.py</a>
+    Lines: <span class="sample-lines">62, 63, 64</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/font.py">pyggel/font.py</a>
+    Lines: <span class="sample-lines">1005</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/particle.py">pyggel/particle.py</a>
+    Lines: <span class="sample-lines">271</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/geometry.py">pyggel/geometry.py</a>
+    Lines: <span class="sample-lines">331, 334, 486</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/light.py">pyggel/light.py</a>
+    Lines: <span class="sample-lines">49</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/image.py">pyggel/image.py</a>
+    Lines: <span class="sample-lines">170</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/misc.py">pyggel/misc.py</a>
+    Lines: <span class="sample-lines">36</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/scene.py">pyggel/scene.py</a>
+    Lines: <span class="sample-lines">140, 156, 182, 195</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/view.py">pyggel/view.py</a>
+    Lines: <span class="sample-lines">210, 246, 287, 311, 329</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/draw.py">pygl2d/draw.py</a>
+    Lines: <span class="sample-lines">41, 50, 58, 71, 72, 77, 86, 96, 105, 118, 119, 133, 145</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/display.py">pygl2d/display.py</a>
+    Lines: <span class="sample-lines">76</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL} Scocca</span>
+    <a href="http://bazaar.launchpad.net/~bebraw/scocca/devel/view/head:/scocca/graphics/opengl/decorators.py">scocca/graphics/opengl/decorators.py</a>
+    Lines: <span class="sample-lines">29, 43</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL} Scocca</span>
+    <a href="http://bazaar.launchpad.net/~bebraw/scocca/devel/view/head:/scocca/graphics/opengl/projections.py">scocca/graphics/opengl/projections.py</a>
+    Lines: <span class="sample-lines">34</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py</a>
+    Lines: <span class="sample-lines">417, 541, 587, 634</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">176</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">837, 876, 907</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/PygameWrapper.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/PygameWrapper.py</a>
+    Lines: <span class="sample-lines">204</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Label.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">169, 209</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Button.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">194, 261</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/TexPlane.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/TexPlane.py</a>
+    Lines: <span class="sample-lines">107, 141</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MH/OpenGL/3dFolding.py">Sketches/MH/OpenGL/3dFolding.py</a>
+    Lines: <span class="sample-lines">145, 193</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Utils/Particles3D.py">Sketches/CL/Topology3D/Utils/Particles3D.py</a>
+    Lines: <span class="sample-lines">158, 281, 322, 366</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Experiments/Cubes.py">Sketches/CL/Topology3D/Experiments/Cubes.py</a>
+    Lines: <span class="sample-lines">265, 272, 275</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">176</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">815, 854, 885</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/PygameWrapper.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/PygameWrapper.py</a>
+    Lines: <span class="sample-lines">204</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Label.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">169, 209</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Button.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">202, 272</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/TexPlane.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/TexPlane.py</a>
+    Lines: <span class="sample-lines">107, 141</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Display3D.py">Sketches/CL/Topology3D/THF/Sketches/Display3D.py</a>
+    Lines: <span class="sample-lines">452, 459, 492</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Scrollbar3D.py">Sketches/CL/Topology3D/THF/Sketches/Scrollbar3D.py</a>
+    Lines: <span class="sample-lines">169</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Button3D.py">Sketches/CL/Topology3D/THF/Sketches/Button3D.py</a>
+    Lines: <span class="sample-lines">139, 186, 239</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/TexPlane.py">Sketches/CL/Topology3D/THF/Sketches/TexPlane.py</a>
+    Lines: <span class="sample-lines">157, 238</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/PygameWrapperPlane.py">Sketches/CL/Topology3D/THF/Sketches/PygameWrapperPlane.py</a>
+    Lines: <span class="sample-lines">167</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py">Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">498, 504, 543</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/Button.py">Sketches/CL/Topology3D/THF/Sketches/playground/Button.py</a>
+    Lines: <span class="sample-lines">126, 175</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/TexPlane.py">Sketches/CL/Topology3D/THF/Sketches/playground/TexPlane.py</a>
+    Lines: <span class="sample-lines">68, 101</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/PygameWrapperPlane.py">Sketches/CL/Topology3D/THF/Sketches/playground/PygameWrapperPlane.py</a>
+    Lines: <span class="sample-lines">90</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Display3D.py">Sketches/THF/3D/Display3D.py</a>
+    Lines: <span class="sample-lines">452, 459, 492</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Scrollbar3D.py">Sketches/THF/3D/Scrollbar3D.py</a>
+    Lines: <span class="sample-lines">169</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Button3D.py">Sketches/THF/3D/Button3D.py</a>
+    Lines: <span class="sample-lines">139, 186, 239</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/TexPlane.py">Sketches/THF/3D/TexPlane.py</a>
+    Lines: <span class="sample-lines">157, 238</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/PygameWrapperPlane.py">Sketches/THF/3D/PygameWrapperPlane.py</a>
+    Lines: <span class="sample-lines">167</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/Display3D.py">Sketches/THF/3D/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">498, 504, 543</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/Button.py">Sketches/THF/3D/playground/Button.py</a>
+    Lines: <span class="sample-lines">126, 175</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/TexPlane.py">Sketches/THF/3D/playground/TexPlane.py</a>
+    Lines: <span class="sample-lines">68, 101</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/PygameWrapperPlane.py">Sketches/THF/3D/playground/PygameWrapperPlane.py</a>
+    Lines: <span class="sample-lines">90</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">176</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">814, 853, 884</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/PygameWrapper.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/PygameWrapper.py</a>
+    Lines: <span class="sample-lines">204</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Label.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">169, 209</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Button.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">194, 261</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/TexPlane.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/TexPlane.py</a>
+    Lines: <span class="sample-lines">107, 141</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py">Code/Python/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py</a>
+    Lines: <span class="sample-lines">417, 541, 587, 634</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">176</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">837, 876, 907</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/PygameWrapper.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/PygameWrapper.py</a>
+    Lines: <span class="sample-lines">204</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Label.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">169, 209</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Button.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">194, 261</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/TexPlane.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/TexPlane.py</a>
+    Lines: <span class="sample-lines">107, 141</span>
+</div><div class="py-sample">
+    <span class="sample-project">Gloopy</span>
+    <a href="https://bitbucket.org/tartley/gloopy/src/tip/gloopy/view/render.py">gloopy/view/render.py</a>
+    Lines: <span class="sample-lines">90</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/functions/boxplot.py">functions/boxplot.py</a>
+    Lines: <span class="sample-lines">239</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/functions/bar.py">functions/bar.py</a>
+    Lines: <span class="sample-lines">153</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/textures.py">wobjects/textures.py</a>
+    Lines: <span class="sample-lines">752, 753, 754, 794, 969, 1189, 1190, 1191, 1218</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/polygonalModeling.py">wobjects/polygonalModeling.py</a>
+    Lines: <span class="sample-lines">1076, 1079, 1080, 1081</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/baseFigure.py">core/baseFigure.py</a>
+    Lines: <span class="sample-lines">840, 843, 844, 905</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/axes.py">core/axes.py</a>
+    Lines: <span class="sample-lines">801, 909, 967, 1250</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/baseTexture.py">core/baseTexture.py</a>
+    Lines: <span class="sample-lines">250</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/light.py">core/light.py</a>
+    Lines: <span class="sample-lines">274</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/line.py">core/line.py</a>
+    Lines: <span class="sample-lines">113, 114, 116, 662, 678, 698, 730, 751, 767, 806, 817, 818, 821, 822</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/baseWibjects.py">core/baseWibjects.py</a>
+    Lines: <span class="sample-lines">81, 193</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/axises.py">core/axises.py</a>
+    Lines: <span class="sample-lines">811, 831, 2014</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wibjects/sliders.py">wibjects/sliders.py</a>
+    Lines: <span class="sample-lines">394</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wibjects/colorWibjects.py">wibjects/colorWibjects.py</a>
+    Lines: <span class="sample-lines">559, 676, 692</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">53, 191, 199</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">52, 172, 180</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">52, 170, 178</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">52, 161, 169</span>
+</div>
+        <div class="sample-key">glEnable</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_trim.py">tests/redbook_trim.py</a>
+    Lines: <span class="sample-lines">93, 94</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_alpha3D.py">tests/redbook_alpha3D.py</a>
+    Lines: <span class="sample-lines">120, 121, 138</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_surface.py">tests/redbook_surface.py</a>
+    Lines: <span class="sample-lines">65, 66</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/_bitmap_font.py">tests/_bitmap_font.py</a>
+    Lines: <span class="sample-lines">43, 54, 68, 83</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe8.py">tests/nehe8.py</a>
+    Lines: <span class="sample-lines">75, 76, 91, 111, 114</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glhistogram.py">tests/glhistogram.py</a>
+    Lines: <span class="sample-lines">41</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6_convolve.py">tests/nehe6_convolve.py</a>
+    Lines: <span class="sample-lines">106, 151</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glut_font.py">tests/glut_font.py</a>
+    Lines: <span class="sample-lines">26</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/gldrawpixels.py">tests/gldrawpixels.py</a>
+    Lines: <span class="sample-lines">56</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/dek_surf.py">tests/dek_surf.py</a>
+    Lines: <span class="sample-lines">48, 49, 50</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/arbwindowpos.py">tests/arbwindowpos.py</a>
+    Lines: <span class="sample-lines">90</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe7.py">tests/nehe7.py</a>
+    Lines: <span class="sample-lines">132, 133, 140</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/ilsstrategies.py">tests/ilsstrategies.py</a>
+    Lines: <span class="sample-lines">39</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glu_tess2.py">tests/glu_tess2.py</a>
+    Lines: <span class="sample-lines">50</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6_compressed.py">tests/nehe6_compressed.py</a>
+    Lines: <span class="sample-lines">55</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/wx_font.py">tests/wx_font.py</a>
+    Lines: <span class="sample-lines">27</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_alpha.py">tests/redbook_alpha.py</a>
+    Lines: <span class="sample-lines">74</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_1.py">tests/shadow_1.py</a>
+    Lines: <span class="sample-lines">91, 270, 314, 452, 457, 643, 646, 674</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6.py">tests/nehe6.py</a>
+    Lines: <span class="sample-lines">79</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glu_tess.py">tests/glu_tess.py</a>
+    Lines: <span class="sample-lines">44</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/line_stipple.py">tests/line_stipple.py</a>
+    Lines: <span class="sample-lines">28</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_surface_cb.py">tests/redbook_surface_cb.py</a>
+    Lines: <span class="sample-lines">82, 83</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/pygame_textureatlas.py">tests/pygame_textureatlas.py</a>
+    Lines: <span class="sample-lines">129</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/dek_texturesurf.py">tests/dek_texturesurf.py</a>
+    Lines: <span class="sample-lines">44, 52, 61, 62, 63</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/framecounter.py">OpenGLContext/framecounter.py</a>
+    Lines: <span class="sample-lines">75</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/texture.py">OpenGLContext/texture.py</a>
+    Lines: <span class="sample-lines">97, 270</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/drawcube.py">OpenGLContext/drawcube.py</a>
+    Lines: <span class="sample-lines">31, 32, 33</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/shadow/passes.py">OpenGLContext/shadow/passes.py</a>
+    Lines: <span class="sample-lines">231, 235, 245, 249, 322, 323</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/browser/vpcurve.py">OpenGLContext/browser/vpcurve.py</a>
+    Lines: <span class="sample-lines">79</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/imagetexture.py">OpenGLContext/scenegraph/imagetexture.py</a>
+    Lines: <span class="sample-lines">70</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/cubebackground.py">OpenGLContext/scenegraph/cubebackground.py</a>
+    Lines: <span class="sample-lines">86, 87</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/boundingvolume.py">OpenGLContext/scenegraph/boundingvolume.py</a>
+    Lines: <span class="sample-lines">273, 303, 309</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/nurbs.py">OpenGLContext/scenegraph/nurbs.py</a>
+    Lines: <span class="sample-lines">108, 109, 177, 184, 209</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/indexedpolygons.py">OpenGLContext/scenegraph/indexedpolygons.py</a>
+    Lines: <span class="sample-lines">27, 40, 76, 97, 225</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/indexedlineset.py">OpenGLContext/scenegraph/indexedlineset.py</a>
+    Lines: <span class="sample-lines">63</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/light.py">OpenGLContext/scenegraph/light.py</a>
+    Lines: <span class="sample-lines">46, 47</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/shape.py">OpenGLContext/scenegraph/shape.py</a>
+    Lines: <span class="sample-lines">54, 86</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/arraygeometry.py">OpenGLContext/scenegraph/arraygeometry.py</a>
+    Lines: <span class="sample-lines">151, 159, 171</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/pointset.py">OpenGLContext/scenegraph/pointset.py</a>
+    Lines: <span class="sample-lines">65, 72</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/spherebackground.py">OpenGLContext/scenegraph/spherebackground.py</a>
+    Lines: <span class="sample-lines">53, 64, 65, 68</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/font.py">OpenGLContext/scenegraph/text/font.py</a>
+    Lines: <span class="sample-lines">324</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/toolsfont.py">OpenGLContext/scenegraph/text/toolsfont.py</a>
+    Lines: <span class="sample-lines">33, 330</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/_flat.py">OpenGLContext/passes/_flat.py</a>
+    Lines: <span class="sample-lines">342, 345, 438, 462, 517, 553</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcore.py">OpenGLContext/passes/flatcore.py</a>
+    Lines: <span class="sample-lines">77, 80, 162, 186, 239, 275</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/rendervisitor.py">OpenGLContext/passes/rendervisitor.py</a>
+    Lines: <span class="sample-lines">133, 160, 182, 335, 337</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcompat.py">OpenGLContext/passes/flatcompat.py</a>
+    Lines: <span class="sample-lines">87, 89, 91, 175, 199, 221, 254, 290</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/renderpass.py">OpenGLContext/passes/renderpass.py</a>
+    Lines: <span class="sample-lines">332, 333, 339, 357, 382</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/shaderProg/torusShader.py">PyOpenGL-Demo/proesch/shaderProg/torusShader.py</a>
+    Lines: <span class="sample-lines">87</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/shaderProg/textureShader.py">PyOpenGL-Demo/proesch/shaderProg/textureShader.py</a>
+    Lines: <span class="sample-lines">133</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/bezier/bezier.py">PyOpenGL-Demo/proesch/bezier/bezier.py</a>
+    Lines: <span class="sample-lines">119, 121, 122, 132, 133</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/stereo/stereoDemo.py">PyOpenGL-Demo/proesch/stereo/stereoDemo.py</a>
+    Lines: <span class="sample-lines">107, 109, 110</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py">PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py</a>
+    Lines: <span class="sample-lines">41, 47, 49, 50</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">170, 172, 173, 181</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/simpleTexture/texturedQuad.py">PyOpenGL-Demo/proesch/simpleTexture/texturedQuad.py</a>
+    Lines: <span class="sample-lines">81</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/colorCube/colorCube.py">PyOpenGL-Demo/proesch/colorCube/colorCube.py</a>
+    Lines: <span class="sample-lines">64</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson5.py">PyOpenGL-Demo/NeHe/lesson5.py</a>
+    Lines: <span class="sample-lines">67</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson45.py">PyOpenGL-Demo/NeHe/lesson45.py</a>
+    Lines: <span class="sample-lines">344, 347</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson3.py">PyOpenGL-Demo/NeHe/lesson3.py</a>
+    Lines: <span class="sample-lines">54</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson23.py">PyOpenGL-Demo/NeHe/lesson23.py</a>
+    Lines: <span class="sample-lines">59, 63, 154, 155</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson4.py">PyOpenGL-Demo/NeHe/lesson4.py</a>
+    Lines: <span class="sample-lines">64</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson6.py">PyOpenGL-Demo/NeHe/lesson6.py</a>
+    Lines: <span class="sample-lines">85, 89</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson42.py">PyOpenGL-Demo/NeHe/lesson42.py</a>
+    Lines: <span class="sample-lines">157, 167, 169, 175, 318, 343</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson6-multi.py">PyOpenGL-Demo/NeHe/lesson6-multi.py</a>
+    Lines: <span class="sample-lines">113, 117, 124</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson18.py">PyOpenGL-Demo/NeHe/lesson18.py</a>
+    Lines: <span class="sample-lines">109, 113, 126, 199</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson11.py">PyOpenGL-Demo/NeHe/lesson11.py</a>
+    Lines: <span class="sample-lines">37</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson16.py">PyOpenGL-Demo/NeHe/lesson16.py</a>
+    Lines: <span class="sample-lines">50, 54, 84</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson12.py">PyOpenGL-Demo/NeHe/lesson12.py</a>
+    Lines: <span class="sample-lines">40, 43, 44, 45</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson19.py">PyOpenGL-Demo/NeHe/lesson19.py</a>
+    Lines: <span class="sample-lines">94, 100</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson13.py">PyOpenGL-Demo/NeHe/lesson13.py</a>
+    Lines: <span class="sample-lines">115</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson2.py">PyOpenGL-Demo/NeHe/lesson2.py</a>
+    Lines: <span class="sample-lines">54</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson1.py">PyOpenGL-Demo/NeHe/lesson1.py</a>
+    Lines: <span class="sample-lines">54</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson41.py">PyOpenGL-Demo/NeHe/lesson41.py</a>
+    Lines: <span class="sample-lines">181, 185, 190</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson26.py">PyOpenGL-Demo/NeHe/lesson26.py</a>
+    Lines: <span class="sample-lines">59, 63, 68, 69, 104, 106, 107, 150, 158, 163, 180, 187</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson48/Lesson48.py">PyOpenGL-Demo/NeHe/lesson48/Lesson48.py</a>
+    Lines: <span class="sample-lines">37, 47, 48, 50</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson48/NeHeGL.py">PyOpenGL-Demo/NeHe/lesson48/NeHeGL.py</a>
+    Lines: <span class="sample-lines">77</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson43/glFreeType.py">PyOpenGL-Demo/NeHe/lesson43/glFreeType.py</a>
+    Lines: <span class="sample-lines">274, 276</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson43/lesson43.py">PyOpenGL-Demo/NeHe/lesson43/lesson43.py</a>
+    Lines: <span class="sample-lines">67, 68</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/glFont.py">PyOpenGL-Demo/NeHe/lesson44/glFont.py</a>
+    Lines: <span class="sample-lines">70, 71, 91</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/lesson44.py">PyOpenGL-Demo/NeHe/lesson44/lesson44.py</a>
+    Lines: <span class="sample-lines">142, 190, 192, 193</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/glCamera.py">PyOpenGL-Demo/NeHe/lesson44/glCamera.py</a>
+    Lines: <span class="sample-lines">547, 550, 650</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/conechecker.py">PyOpenGL-Demo/tom/conechecker.py</a>
+    Lines: <span class="sample-lines">23, 40, 41, 43</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/lorentz.py">PyOpenGL-Demo/tom/lorentz.py</a>
+    Lines: <span class="sample-lines">44</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/poly.py">PyOpenGL-Demo/tom/poly.py</a>
+    Lines: <span class="sample-lines">43</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/checker.py">PyOpenGL-Demo/tom/checker.py</a>
+    Lines: <span class="sample-lines">23</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/Line.py">PyOpenGL-Demo/tom/Line.py</a>
+    Lines: <span class="sample-lines">21</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/fog.py">PyOpenGL-Demo/tom/fog.py</a>
+    Lines: <span class="sample-lines">38, 43, 44, 45, 46, 47</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/conesave.py">PyOpenGL-Demo/tom/conesave.py</a>
+    Lines: <span class="sample-lines">23, 24</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/demo.py">PyOpenGL-Demo/tom/demo.py</a>
+    Lines: <span class="sample-lines">62</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/arraytest.py">PyOpenGL-Demo/tom/arraytest.py</a>
+    Lines: <span class="sample-lines">31</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/cone.py">PyOpenGL-Demo/tom/cone.py</a>
+    Lines: <span class="sample-lines">18, 19, 21</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/lines.py">PyOpenGL-Demo/redbook/lines.py</a>
+    Lines: <span class="sample-lines">84</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/teapots.py">PyOpenGL-Demo/redbook/teapots.py</a>
+    Lines: <span class="sample-lines">83, 84, 85, 86, 87</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/fog.py">PyOpenGL-Demo/redbook/fog.py</a>
+    Lines: <span class="sample-lines">72, 74, 75, 84</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/scene.py">PyOpenGL-Demo/redbook/scene.py</a>
+    Lines: <span class="sample-lines">79, 80, 81</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/movelight.py">PyOpenGL-Demo/redbook/movelight.py</a>
+    Lines: <span class="sample-lines">83, 84, 85, 106</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLE/maintest.py">PyOpenGL-Demo/GLE/maintest.py</a>
+    Lines: <span class="sample-lines">47, 59, 62, 63, 65</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/molehill.py">PyOpenGL-Demo/GLUT/molehill.py</a>
+    Lines: <span class="sample-lines">42, 43, 45, 142</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/gears.py">PyOpenGL-Demo/GLUT/gears.py</a>
+    Lines: <span class="sample-lines">229, 230, 231, 232, 253</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/glutplane.py">PyOpenGL-Demo/GLUT/glutplane.py</a>
+    Lines: <span class="sample-lines">60</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/shader_test.py">PyOpenGL-Demo/GLUT/shader_test.py</a>
+    Lines: <span class="sample-lines">28</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/lorentz.py">PyOpenGL-Demo/GLUT/tom/lorentz.py</a>
+    Lines: <span class="sample-lines">56</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/checker.py">PyOpenGL-Demo/GLUT/tom/checker.py</a>
+    Lines: <span class="sample-lines">40, 80, 115</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/text.py">PyOpenGL-Demo/GLUT/tom/text.py</a>
+    Lines: <span class="sample-lines">39, 40, 75, 76</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/arraytest.py">PyOpenGL-Demo/GLUT/tom/arraytest.py</a>
+    Lines: <span class="sample-lines">48</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/cone.py">PyOpenGL-Demo/GLUT/tom/cone.py</a>
+    Lines: <span class="sample-lines">44, 45, 49</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/tile.py">PyOpenGL-Demo/dek/tile.py</a>
+    Lines: <span class="sample-lines">69</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/texturesurf.py">PyOpenGL-Demo/dek/texturesurf.py</a>
+    Lines: <span class="sample-lines">77, 78, 88, 89, 90</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/OglSurface/OglFrame.py">PyOpenGL-Demo/dek/OglSurface/OglFrame.py</a>
+    Lines: <span class="sample-lines">69, 70</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/OglSurface/triangle.py">PyOpenGL-Demo/dek/OglSurface/triangle.py</a>
+    Lines: <span class="sample-lines">31, 33, 45, 46, 50, 104</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/py2exe-example/shader_test.py">py2exe-example/shader_test.py</a>
+    Lines: <span class="sample-lines">29</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/mmLib/OpenGLDriver.py">pymmlib/mmLib/OpenGLDriver.py</a>
+    Lines: <span class="sample-lines">162, 164, 177, 194, 199, 204, 210, 215, 282, 322, 355, 467, 502</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/applications/glutviewer.py">pymmlib/applications/glutviewer.py</a>
+    Lines: <span class="sample-lines">74, 181, 183, 185, 188, 195</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglBase.py">renderers/openglBase.py</a>
+    Lines: <span class="sample-lines">181, 219, 261, 317, 319</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglPygame.py">renderers/openglPygame.py</a>
+    Lines: <span class="sample-lines">310</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/openglgraphics.py">system/openglgraphics.py</a>
+    Lines: <span class="sample-lines">153, 195, 197, 362</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Gratings.py">VisionEgg/Gratings.py</a>
+    Lines: <span class="sample-lines">322, 341, 345, 638, 642, 645, 651</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/MoreStimuli.py">VisionEgg/MoreStimuli.py</a>
+    Lines: <span class="sample-lines">123, 158, 161, 245, 249, 327, 367, 370, 505, 508</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/SphereMap.py">VisionEgg/SphereMap.py</a>
+    Lines: <span class="sample-lines">281, 283, 503, 504, 505, 790, 791, 1198, 1199, 1200</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Textures.py">VisionEgg/Textures.py</a>
+    Lines: <span class="sample-lines">1293, 1451, 1454, 1457, 1583, 1587, 1600, 1757, 1758, 1759</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Text.py">VisionEgg/Text.py</a>
+    Lines: <span class="sample-lines">492, 494</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Dots.py">VisionEgg/Dots.py</a>
+    Lines: <span class="sample-lines">182, 184, 249, 357, 359</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/texture.py">pymt/texture.py</a>
+    Lines: <span class="sample-lines">17, 156, 315</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/obj.py">pymt/obj.py</a>
+    Lines: <span class="sample-lines">19, 46, 91, 281, 282, 283</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/ui/widgets/speechbubble.py">pymt/ui/widgets/speechbubble.py</a>
+    Lines: <span class="sample-lines">11, 82</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/ui/window/win_pygame.py">pymt/ui/window/win_pygame.py</a>
+    Lines: <span class="sample-lines">15, 112</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/ui/window/__init__.py">pymt/ui/window/__init__.py</a>
+    Lines: <span class="sample-lines">18, 307</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/lib/squirtle.py">pymt/lib/squirtle.py</a>
+    Lines: <span class="sample-lines">15, 43, 44</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/statement.py">pymt/graphx/statement.py</a>
+    Lines: <span class="sample-lines">53, 152, 193, 269</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/colors.py">pymt/graphx/colors.py</a>
+    Lines: <span class="sample-lines">8, 48, 53</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/stencil.py">pymt/graphx/stencil.py</a>
+    Lines: <span class="sample-lines">21, 43</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/apps/3Ddrawing/3Ddrawing.py">examples/apps/3Ddrawing/3Ddrawing.py</a>
+    Lines: <span class="sample-lines">31, 32, 33, 34</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/apps/3Dviewer/3Dviewer.py">examples/apps/3Dviewer/3Dviewer.py</a>
+    Lines: <span class="sample-lines">40, 41, 42, 43</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/font.py">pyggel/font.py</a>
+    Lines: <span class="sample-lines">1008</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/particle.py">pyggel/particle.py</a>
+    Lines: <span class="sample-lines">277</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/geometry.py">pyggel/geometry.py</a>
+    Lines: <span class="sample-lines">342, 344, 495</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/light.py">pyggel/light.py</a>
+    Lines: <span class="sample-lines">44</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/image.py">pyggel/image.py</a>
+    Lines: <span class="sample-lines">176</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/data.py">pyggel/data.py</a>
+    Lines: <span class="sample-lines">554, 616</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/misc.py">pyggel/misc.py</a>
+    Lines: <span class="sample-lines">26</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/scene.py">pyggel/scene.py</a>
+    Lines: <span class="sample-lines">128, 168, 170, 201</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/view.py">pyggel/view.py</a>
+    Lines: <span class="sample-lines">158, 159, 162, 163, 165, 168, 170, 189, 208, 244, 305, 323, 334</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/draw.py">pygl2d/draw.py</a>
+    Lines: <span class="sample-lines">40, 44, 52, 57, 61, 73, 82, 92, 102, 107, 109, 120, 137, 152</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/display.py">pygl2d/display.py</a>
+    Lines: <span class="sample-lines">34, 37, 41, 42, 73</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL} Scocca</span>
+    <a href="http://bazaar.launchpad.net/~bebraw/scocca/devel/view/head:/scocca/graphics/opengl/decorators.py">scocca/graphics/opengl/decorators.py</a>
+    Lines: <span class="sample-lines">23, 38</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py</a>
+    Lines: <span class="sample-lines">411, 515, 579, 625</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">137</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">461, 468, 838, 877, 900</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/PygameWrapper.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/PygameWrapper.py</a>
+    Lines: <span class="sample-lines">188</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Label.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">144, 203</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Button.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">169, 255</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/TexPlane.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/TexPlane.py</a>
+    Lines: <span class="sample-lines">93, 135</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/Old/SoC/simplecube.py">Sketches/MPS/Old/SoC/simplecube.py</a>
+    Lines: <span class="sample-lines">64</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MH/OpenGL/3dFolding.py">Sketches/MH/OpenGL/3dFolding.py</a>
+    Lines: <span class="sample-lines">131, 187</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Utils/Particles3D.py">Sketches/CL/Topology3D/Utils/Particles3D.py</a>
+    Lines: <span class="sample-lines">152, 251, 314, 355</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Experiments/Spheres.py">Sketches/CL/Topology3D/Experiments/Spheres.py</a>
+    Lines: <span class="sample-lines">55, 60, 76, 77, 78</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Experiments/Cubes.py">Sketches/CL/Topology3D/Experiments/Cubes.py</a>
+    Lines: <span class="sample-lines">75, 83, 93, 267, 271, 274</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">137</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">460, 467, 816, 855, 878</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/PygameWrapper.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/PygameWrapper.py</a>
+    Lines: <span class="sample-lines">188</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Label.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">144, 203</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Button.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">173, 266</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/TexPlane.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/TexPlane.py</a>
+    Lines: <span class="sample-lines">93, 135</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Display3D.py">Sketches/CL/Topology3D/THF/Sketches/Display3D.py</a>
+    Lines: <span class="sample-lines">136, 141, 445, 460, 493</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Progress3D.py">Sketches/CL/Topology3D/THF/Sketches/Progress3D.py</a>
+    Lines: <span class="sample-lines">213</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Scrollbar3D.py">Sketches/CL/Topology3D/THF/Sketches/Scrollbar3D.py</a>
+    Lines: <span class="sample-lines">263</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Button3D.py">Sketches/CL/Topology3D/THF/Sketches/Button3D.py</a>
+    Lines: <span class="sample-lines">133, 213, 240</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/TexPlane.py">Sketches/CL/Topology3D/THF/Sketches/TexPlane.py</a>
+    Lines: <span class="sample-lines">136, 232</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/PygameWrapperPlane.py">Sketches/CL/Topology3D/THF/Sketches/PygameWrapperPlane.py</a>
+    Lines: <span class="sample-lines">144</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py">Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">145, 491, 505, 544</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/Button.py">Sketches/CL/Topology3D/THF/Sketches/playground/Button.py</a>
+    Lines: <span class="sample-lines">101, 169</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/TexPlane.py">Sketches/CL/Topology3D/THF/Sketches/playground/TexPlane.py</a>
+    Lines: <span class="sample-lines">53, 95</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/PygameWrapperPlane.py">Sketches/CL/Topology3D/THF/Sketches/playground/PygameWrapperPlane.py</a>
+    Lines: <span class="sample-lines">71</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Examples/simplecube/simplecube_controlled.py">Sketches/CL/Topology3D/THF/Examples/simplecube/simplecube_controlled.py</a>
+    Lines: <span class="sample-lines">88</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Examples/simplecube/simplecube.py">Sketches/CL/Topology3D/THF/Examples/simplecube/simplecube.py</a>
+    Lines: <span class="sample-lines">35</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Display3D.py">Sketches/THF/3D/Display3D.py</a>
+    Lines: <span class="sample-lines">136, 141, 445, 460, 493</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Progress3D.py">Sketches/THF/3D/Progress3D.py</a>
+    Lines: <span class="sample-lines">213</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Scrollbar3D.py">Sketches/THF/3D/Scrollbar3D.py</a>
+    Lines: <span class="sample-lines">263</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Button3D.py">Sketches/THF/3D/Button3D.py</a>
+    Lines: <span class="sample-lines">133, 213, 240</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/TexPlane.py">Sketches/THF/3D/TexPlane.py</a>
+    Lines: <span class="sample-lines">136, 232</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/PygameWrapperPlane.py">Sketches/THF/3D/PygameWrapperPlane.py</a>
+    Lines: <span class="sample-lines">144</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/Display3D.py">Sketches/THF/3D/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">145, 491, 505, 544</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/Button.py">Sketches/THF/3D/playground/Button.py</a>
+    Lines: <span class="sample-lines">101, 169</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/TexPlane.py">Sketches/THF/3D/playground/TexPlane.py</a>
+    Lines: <span class="sample-lines">53, 95</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/PygameWrapperPlane.py">Sketches/THF/3D/playground/PygameWrapperPlane.py</a>
+    Lines: <span class="sample-lines">71</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/simplecube/simplecube_controlled.py">Sketches/THF/simplecube/simplecube_controlled.py</a>
+    Lines: <span class="sample-lines">87</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/simplecube/simplecube.py">Sketches/THF/simplecube/simplecube.py</a>
+    Lines: <span class="sample-lines">35</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">137</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">460, 467, 815, 854, 877</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/PygameWrapper.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/PygameWrapper.py</a>
+    Lines: <span class="sample-lines">188</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Label.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">144, 203</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Button.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">169, 255</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/TexPlane.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/TexPlane.py</a>
+    Lines: <span class="sample-lines">93, 135</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py">Code/Python/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py</a>
+    Lines: <span class="sample-lines">411, 515, 579, 625</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">137</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">461, 468, 838, 877, 900</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/PygameWrapper.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/PygameWrapper.py</a>
+    Lines: <span class="sample-lines">188</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Label.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">144, 203</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Button.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">169, 255</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/TexPlane.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/TexPlane.py</a>
+    Lines: <span class="sample-lines">93, 135</span>
+</div><div class="py-sample">
+    <span class="sample-project">Gloopy</span>
+    <a href="https://bitbucket.org/tartley/gloopy/src/tip/gloopy/view/render.py">gloopy/view/render.py</a>
+    Lines: <span class="sample-lines">74, 75, 76, 88</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/functions/boxplot.py">functions/boxplot.py</a>
+    Lines: <span class="sample-lines">241, 250, 307, 324</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/functions/bar.py">functions/bar.py</a>
+    Lines: <span class="sample-lines">180</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/textures.py">wobjects/textures.py</a>
+    Lines: <span class="sample-lines">757, 795, 796, 953, 1194, 1219, 1220</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/polygonalModeling.py">wobjects/polygonalModeling.py</a>
+    Lines: <span class="sample-lines">982, 1011, 1012, 1029</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/utils/cropper.py">utils/cropper.py</a>
+    Lines: <span class="sample-lines">380</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/baseFigure.py">core/baseFigure.py</a>
+    Lines: <span class="sample-lines">870, 874</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/axes.py">core/axes.py</a>
+    Lines: <span class="sample-lines">996, 1041</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/baseTexture.py">core/baseTexture.py</a>
+    Lines: <span class="sample-lines">227</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/light.py">core/light.py</a>
+    Lines: <span class="sample-lines">264</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/line.py">core/line.py</a>
+    Lines: <span class="sample-lines">90, 95, 104, 635, 636, 659, 700, 742, 753, 769, 807</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/baseWibjects.py">core/baseWibjects.py</a>
+    Lines: <span class="sample-lines">103</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/axises.py">core/axises.py</a>
+    Lines: <span class="sample-lines">803, 842, 2031</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wibjects/colorWibjects.py">wibjects/colorWibjects.py</a>
+    Lines: <span class="sample-lines">535, 687, 760</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">363</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">394</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">34, 189, 196, 261, 265, 266, 270, 276</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">33, 170, 177, 242, 246, 247, 251, 257</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">33, 168, 175, 240, 244, 245, 249, 255</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">322</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">33, 159, 166, 231, 235, 236, 240, 246</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">330</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">384</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">341</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

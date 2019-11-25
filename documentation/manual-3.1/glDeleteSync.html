@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glDeleteSync : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glDeleteSync</h1>
+</header>
+<main class="content">
+    <section class="purpose">delete a sync object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glDeleteSync"></a>
+    <span class="c-function">glDeleteSync</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLsync (
+            <a href="#param-sync" class="parameter">sync</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glDeleteSync"></a>
+    <span class="py-function">glDeleteSync</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-sync" class="parameter">sync</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sync"></a>
+                        sync
+                    </th>
+                    <td>
+    <div class="para">
+                    The sync object to be deleted.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glDeleteSync.html">glDeleteSync</a>
+    deletes the sync object specified by
+    <a class="parameter" href="#param-sync">sync</a>
+    . If the fence command
+            corresponding to the specified sync object has completed, or if no
+    <a class="crossref" href="./glWaitSync.html">glWaitSync</a>
+    or
+    <a class="crossref" href="./glClientWaitSync.html">glClientWaitSync</a>
+    commands are blocking on
+    <a class="parameter" href="#param-sync">sync</a>
+    ,
+            the object is deleted immediately. Otherwise,
+    <a class="parameter" href="#param-sync">sync</a>
+    is flagged for deletion and will be deleted when
+            it is no longer associated with any fence command and is no longer blocking any
+    <a class="crossref" href="./glWaitSync.html">glWaitSync</a>
+    or
+    <a class="crossref" href="./glClientWaitSync.html">glClientWaitSync</a>
+    command. In either case, after
+    <a class="function" href="./glDeleteSync.html">glDeleteSync</a>
+    returns, the name
+    <a class="parameter" href="#param-sync">sync</a>
+    is invalid and can no longer be used to
+            refer to the sync object.
+</div>
+    <div class="para">
+    <a class="function" href="./glDeleteSync.html">glDeleteSync</a>
+    will silently ignore a
+    <a class="parameter" href="#param-sync">sync</a>
+    value of zero.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    glSync
+    is only supported if the GL version is 3.2 or greater, or if
+            the
+    <div class="code">ARB_sync</div>
+    extension is supported.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-sync">sync</a>
+    is neither zero or the name of a sync object.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glDeleteSync.html">glDeleteSync</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glFenceSync.html">glFenceSync</a>
+    ,
+    <a class="crossref" href="./glWaitSync.html">glWaitSync</a>
+    ,
+    <a class="crossref" href="./glClientWaitSync.html">glClientWaitSync</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glDeleteSync</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/arbsync.py">tests/arbsync.py</a>
+    Lines: <span class="sample-lines">49</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_instanced_mapped.py">tests/shader_instanced_mapped.py</a>
+    Lines: <span class="sample-lines">29, 56</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

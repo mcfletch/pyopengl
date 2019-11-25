@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glMatrixIndexPointer : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glMatrixIndexPointer</h1>
+</header>
+<main class="content">
+    <section class="purpose">define an array of matrix indices</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glMatrixIndexPointerOES"></a>
+    <span class="c-function">glMatrixIndexPointerOES</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLint (
+            <a href="#param-size" class="parameter">size</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-stride" class="parameter">stride</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void * (
+            <a href="#param-pointer" class="parameter">pointer</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-size"></a>
+                        size
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of matrix indices per vertex.
+                    Must be is less than or equal to
+    <span class="constant">GL_MAX_VERTEX_UNITS_OES</span>
+    .
+                    The initial value is
+    <span class="constant">0</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the data type of each matrix index in the
+                    array. Symbolic constant
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    is accepted.
+                    The initial value is
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-stride"></a>
+                        stride
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the byte offset between consecutive
+                    matrix indices. If
+    <a class="parameter" href="#param-stride">stride</a>
+    is 0, the matrix indices are understood to be tightly packed in
+                    the array. The initial value is
+    <span class="constant">0</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pointer"></a>
+                        pointer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to the first matrix index of the
+                    first vertex in the array. The initial value is
+    <span class="constant">0</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glMatrixIndexPointer.html">glMatrixIndexPointer</a>
+    specifies the location and data of an array of matrix indices
+        to use when rendering.
+    <a class="parameter" href="#param-size">size</a>
+    specifies the number of matrix indices per vertex and
+    <a class="parameter" href="#param-type">type</a>
+    the data type of the coordinates.
+    <a class="parameter" href="#param-stride">stride</a>
+    specifies the byte stride from one matrix index to the next, allowing
+        vertices and attributes to be packed into a single array or
+        stored in separate arrays. (Single-array storage may be more
+        efficient on some implementations.)
+</div>
+    <div class="para">
+        These matrices indices are used to blend corresponding matrices for a given vertex.
+        </div>
+    <div class="para">
+        When a matrix index array is
+        specified,
+    <a class="parameter" href="#param-size">size</a>
+    ,
+    <a class="parameter" href="#param-type">type</a>
+    ,
+    <a class="parameter" href="#param-stride">stride</a>
+    , and
+    <a class="parameter" href="#param-pointer">pointer</a>
+    are saved as client-side state.
+</div>
+    <div class="para">
+        If the matrix index array is enabled, it is used when
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    ,
+        or
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    is called.
+        To enable and disable the matrix index array, call
+    <a class="crossref" href="./glEnableClientState.html">glEnableClientState</a>
+    and
+    <a class="crossref" href="./glEnableClientState.html#c-glDisableClientState">glDisableClientState</a>
+    with the argument
+    <span class="constant">GL_MATRIX_INDEX_ARRAY_OES</span>
+    .
+        The matrix index array is initially disabled and isn't accessed when
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    or
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    is called.
+</div>
+    <div class="para">
+        Use
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    to construct a sequence of primitives (all of the same type)
+        from prespecified vertex and vertex attribute arrays. Use
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    to construct a sequence of primitives by indexing vertices and
+        vertex attributes.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glMatrixIndexPointer.html">glMatrixIndexPointer</a>
+    is typically implemented on the client side.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-size">size</a>
+    is greater than
+    <span class="constant">GL_MAX_VERTEX_UNITS_OES</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-stride">stride</a>
+    is negative.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glCurrentPaletteMatrix.html">glCurrentPaletteMatrix</a>
+    ,
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    ,
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    ,
+    <a class="crossref" href="./glLoadPaletteFromModelViewMatrix.html">glLoadPaletteFromModelViewMatrix</a>
+    ,
+    <a class="crossref" href="./glMatrixMode.html">glMatrixMode</a>
+    ,
+    <a class="crossref" href="./glWeightPointer.html">glWeightPointer</a>
+    ,
+</div>
+    </section><section class="section" id="copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2004
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

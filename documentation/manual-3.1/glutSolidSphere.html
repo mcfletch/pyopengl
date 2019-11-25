@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutSolidSphere : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutSolidSphere</h1>
+</header>
+<main class="content">
+    <section class="purpose">render a solid or wireframe sphere respectively.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutSolidSphere"></a>
+    <span class="c-function">glutSolidSphere</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble(
+            <a href="#param-radius" class="parameter">radius</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint(
+            <a href="#param-slices" class="parameter">slices</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint(
+            <a href="#param-stacks" class="parameter">stacks</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutSolidSphere"></a>
+    <span class="py-function">glutSolidSphere</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-radius" class="parameter">radius</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-slices" class="parameter">slices</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-stacks" class="parameter">stacks</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutSolidSphere( GLdouble(radius), GLint(slices), GLint(stacks) ) -&gt; None</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutWireSphere"></a>
+    <span class="c-function">glutWireSphere</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble(
+            <a href="#param-radius" class="parameter">radius</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint(
+            <a href="#param-slices" class="parameter">slices</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint(
+            <a href="#param-stacks" class="parameter">stacks</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutWireSphere"></a>
+    <span class="py-function">glutWireSphere</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-radius" class="parameter">radius</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-slices" class="parameter">slices</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-stacks" class="parameter">stacks</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutWireSphere( GLdouble(radius), GLint(slices), GLint(stacks) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-radius"></a>
+                        radius
+                    </th>
+                    <td>
+    <div class="simpara">
+						The radius of the sphere.
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-slices"></a>
+                        slices
+                    </th>
+                    <td>
+    <div class="simpara">
+						The number of subdivisions around the Z axis (similar to lines of longitude).
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-stacks"></a>
+                        stacks
+                    </th>
+                    <td>
+    <div class="simpara">
+						The number of subdivisions along the Z axis (similar to lines of latitude).
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutSolidSphere.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			Renders a sphere centered at the modeling coordinates origin of the specified radius. The sphere is subdivided around
+			the Z axis into slices and along the Z axis into stacks.
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutSolidCube.html">glutSolidCube</a>
+            <a class="crossref" href="./glutSolidCone.html">glutSolidCone</a>
+            <a class="crossref" href="./glutSolidTorus.html">glutSolidTorus</a>
+            <a class="crossref" href="./glutSolidDodecahedron.html">glutSolidDodecahedron</a>
+            <a class="crossref" href="./glutSolidOctahedron.html">glutSolidOctahedron</a>
+            <a class="crossref" href="./glutSolidTetrahedron.html">glutSolidTetrahedron</a>
+            <a class="crossref" href="./glutSolidIcosahedron.html">glutSolidIcosahedron</a>
+            <a class="crossref" href="./glutSolidTeapot.html">glutSolidTeapot</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutSolidSphere</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_alpha3D.py">tests/redbook_alpha3D.py</a>
+    Lines: <span class="sample-lines">83</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shaders.py">tests/shaders.py</a>
+    Lines: <span class="sample-lines">28</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/conechecker.py">PyOpenGL-Demo/tom/conechecker.py</a>
+    Lines: <span class="sample-lines">27</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/checker.py">PyOpenGL-Demo/tom/checker.py</a>
+    Lines: <span class="sample-lines">27</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/pick.py">PyOpenGL-Demo/tom/pick.py</a>
+    Lines: <span class="sample-lines">21</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/fog.py">PyOpenGL-Demo/redbook/fog.py</a>
+    Lines: <span class="sample-lines">100</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/scene.py">PyOpenGL-Demo/redbook/scene.py</a>
+    Lines: <span class="sample-lines">102</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/shader_test.py">PyOpenGL-Demo/GLUT/shader_test.py</a>
+    Lines: <span class="sample-lines">89</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/checker.py">PyOpenGL-Demo/GLUT/tom/checker.py</a>
+    Lines: <span class="sample-lines">45</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/py2exe-example/shader_test.py">py2exe-example/shader_test.py</a>
+    Lines: <span class="sample-lines">90</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/mmLib/OpenGLDriver.py">pymmlib/mmLib/OpenGLDriver.py</a>
+    Lines: <span class="sample-lines">505</span>
+</div>
+        <div class="sample-key">glutWireSphere</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/shadow/volume.py">OpenGLContext/shadow/volume.py</a>
+    Lines: <span class="sample-lines">313, 330</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

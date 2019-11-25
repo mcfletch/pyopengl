@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glLoadName : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glLoadName</h1>
+</header>
+<main class="content">
+    <section class="purpose">load a name onto the name stack</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glLoadName"></a>
+    <span class="c-function">glLoadName</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-name" class="parameter">name</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glLoadName"></a>
+    <span class="py-function">glLoadName</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-name" class="parameter">name</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a name that will replace the top value on the name stack.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            The name stack is used during selection mode to allow sets of rendering
+            commands to be uniquely identified.
+            It consists of an ordered set of unsigned integers and is initially empty.
+        </div>
+    <div class="para">
+    <a class="function" href="./glLoadName.html">glLoadName</a>
+    causes
+    <a class="parameter" href="#param-name">name</a>
+    to replace the value on the top of the name stack.
+</div>
+    <div class="para">
+            The name stack is always empty while the render mode is not
+    <span class="constant">GL_SELECT</span>
+    .
+            Calls to
+    <a class="function" href="./glLoadName.html">glLoadName</a>
+    while the render mode is not
+    <span class="constant">GL_SELECT</span>
+    are ignored.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glLoadName.html">glLoadName</a>
+    is called while the
+            name stack is empty.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glLoadName.html">glLoadName</a>
+    is executed between
+            the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_NAME_STACK_DEPTH</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_NAME_STACK_DEPTH</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glInitNames.html">glInitNames</a>
+    ,
+    <a class="crossref" href="./glPushName.html">glPushName</a>
+    ,
+    <a class="crossref" href="./glRenderMode.html">glRenderMode</a>
+    ,
+    <a class="crossref" href="./glSelectBuffer.html">glSelectBuffer</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glLoadName</div>
+        <div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">806</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Experiments/Cubes.py">Sketches/CL/Topology3D/Experiments/Cubes.py</a>
+    Lines: <span class="sample-lines">330</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">784</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py">Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">468</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/Display3D.py">Sketches/THF/3D/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">468</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">783</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">806</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

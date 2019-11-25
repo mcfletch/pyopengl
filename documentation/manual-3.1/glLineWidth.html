@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glLineWidth : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glLineWidth</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify the width of rasterized lines</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glLineWidth"></a>
+    <span class="c-function">glLineWidth</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLfloat (
+            <a href="#param-width" class="parameter">width</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glLineWidth"></a>
+    <span class="py-function">glLineWidth</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the width of rasterized lines.
+                    The initial value is 1.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glLineWidth.html">glLineWidth</a>
+    specifies the rasterized width of both aliased and antialiased
+            lines.
+            Using a line width other than 1 has different effects,
+            depending on whether line antialiasing is enabled.
+            To enable and disable line antialiasing, call
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="function" href="./glEnable.html#c-glDisable">glDisable</a>
+    with argument
+    <span class="constant">GL_LINE_SMOOTH</span>
+    . Line antialiasing is initially
+            disabled.
+</div>
+    <div class="para">
+            If line antialiasing is disabled,
+            the actual width is determined by rounding the supplied width
+            to the nearest integer.
+            (If the rounding results in the value 0,
+            it is as if the line width were 1.)
+            If
+    <math overflow="scroll">
+                <mrow>
+                    <mfenced open="∣" close="∣">
+                        <mrow>
+                            <mo>Δ</mo>
+                            <mi mathvariant="italic">x</mi>
+                        </mrow>
+                    </mfenced>
+                    <mo>&gt;=</mo>
+                    <mfenced open="∣" close="∣">
+                        <mrow>
+                            <mo>Δ</mo>
+                            <mi mathvariant="italic">y</mi>
+                        </mrow>
+                    </mfenced>
+                </mrow>
+            </math>
+    ,
+    <span class="emphasis">i</span>
+    pixels are filled in each column that is rasterized,
+            where
+    <span class="emphasis">i</span>
+    is the rounded value of
+    <a class="parameter" href="#param-width">width</a>
+    .
+            Otherwise,
+    <span class="emphasis">i</span>
+    pixels are filled in each row that is rasterized.
+</div>
+    <div class="para">
+            If antialiasing is enabled,
+            line rasterization produces a fragment for each pixel square
+            that intersects the region lying within the rectangle having width
+            equal to the current line width,
+            length equal to the actual length of the line,
+            and centered on the mathematical line segment.
+            The coverage value for each fragment is the window coordinate area
+            of the intersection of the rectangular region with the corresponding
+            pixel square.
+            This value is saved and used in the final rasterization step.
+        </div>
+    <div class="para">
+            Not all widths can be supported when line antialiasing is enabled. If an
+            unsupported width is requested, the nearest supported width is used.
+            Only width 1 is guaranteed to be supported; others depend on the
+            implementation.  Likewise, there is a range for aliased line widths as well.
+            To query the range of supported widths and the size
+            difference between supported widths within the range, call
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with arguments
+    <span class="constant">GL_ALIASED_LINE_WIDTH_RANGE</span>
+    ,
+    <span class="constant">GL_SMOOTH_LINE_WIDTH_RANGE</span>
+    , and
+    <span class="constant">GL_SMOOTH_LINE_WIDTH_GRANULARITY</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            The line width specified by
+    <a class="function" href="./glLineWidth.html">glLineWidth</a>
+    is always returned when
+    <span class="constant">GL_LINE_WIDTH</span>
+    is queried.
+            Clamping and rounding for aliased and antialiased lines have no effect on the specified value.
+</div>
+    <div class="para">
+            Nonantialiased line width may be clamped to an implementation-dependent maximum.  Call
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with
+    <span class="constant">GL_ALIASED_LINE_WIDTH_RANGE</span>
+    to determine the maximum width.
+</div>
+    <div class="para">
+            In OpenGL 1.2, the tokens
+    <span class="constant">GL_LINE_WIDTH_RANGE</span>
+    and
+    <span class="constant">GL_LINE_WIDTH_GRANULARITY</span>
+    were replaced by
+    <span class="constant">GL_ALIASED_LINE_WIDTH_RANGE</span>
+    ,
+    <span class="constant">GL_SMOOTH_LINE_WIDTH_RANGE</span>
+    , and
+    <span class="constant">GL_SMOOTH_LINE_WIDTH_GRANULARITY</span>
+    .  The old names are retained for backward compatibility, but should not be used in new code.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-width">width</a>
+    is less than or equal to 0.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_LINE_WIDTH</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_ALIASED_LINE_WIDTH_RANGE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_SMOOTH_LINE_WIDTH_RANGE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_SMOOTH_LINE_WIDTH_GRANULARITY</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_LINE_SMOOTH</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glLineWidth.html">glLineWidth</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glLineWidth</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/browser/vpcurve.py">OpenGLContext/browser/vpcurve.py</a>
+    Lines: <span class="sample-lines">75, 98</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbsCurve/nurbsCurve.py">PyOpenGL-Demo/proesch/nurbsCurve/nurbsCurve.py</a>
+    Lines: <span class="sample-lines">89</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbsCurve/nurbsCircle.py">PyOpenGL-Demo/proesch/nurbsCurve/nurbsCircle.py</a>
+    Lines: <span class="sample-lines">91</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/lines.py">PyOpenGL-Demo/redbook/lines.py</a>
+    Lines: <span class="sample-lines">94, 101</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/mmLib/OpenGLDriver.py">pymmlib/mmLib/OpenGLDriver.py</a>
+    Lines: <span class="sample-lines">292, 439, 487, 516, 566</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/applications/glutviewer.py">pymmlib/applications/glutviewer.py</a>
+    Lines: <span class="sample-lines">95, 218</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/SphereMap.py">VisionEgg/SphereMap.py</a>
+    Lines: <span class="sample-lines">292, 299</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Text.py">VisionEgg/Text.py</a>
+    Lines: <span class="sample-lines">489</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/ui/widgets/speechbubble.py">pymt/ui/widgets/speechbubble.py</a>
+    Lines: <span class="sample-lines">11, 83</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/draw.py">pymt/graphx/draw.py</a>
+    Lines: <span class="sample-lines">160, 267, 419</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/css.py">pymt/graphx/css.py</a>
+    Lines: <span class="sample-lines">14, 113, 129</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/desktop/desktop-multi.py">examples/desktop/desktop-multi.py</a>
+    Lines: <span class="sample-lines">5, 226</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/misc.py">pyggel/misc.py</a>
+    Lines: <span class="sample-lines">42</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/draw.py">pygl2d/draw.py</a>
+    Lines: <span class="sample-lines">38, 55</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL} Scocca</span>
+    <a href="http://bazaar.launchpad.net/~bebraw/scocca/devel/view/head:/scocca/graphics/opengl/draw.py">scocca/graphics/opengl/draw.py</a>
+    Lines: <span class="sample-lines">25</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/functions/boxplot.py">functions/boxplot.py</a>
+    Lines: <span class="sample-lines">235</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/functions/bar.py">functions/bar.py</a>
+    Lines: <span class="sample-lines">174</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/sliceTextures.py">wobjects/sliceTextures.py</a>
+    Lines: <span class="sample-lines">246</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/textures.py">wobjects/textures.py</a>
+    Lines: <span class="sample-lines">751, 1188</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/polygonalModeling.py">wobjects/polygonalModeling.py</a>
+    Lines: <span class="sample-lines">905</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/utils/cropper.py">utils/cropper.py</a>
+    Lines: <span class="sample-lines">371, 425</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/line.py">core/line.py</a>
+    Lines: <span class="sample-lines">686, 837</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/baseWibjects.py">core/baseWibjects.py</a>
+    Lines: <span class="sample-lines">93</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/axises.py">core/axises.py</a>
+    Lines: <span class="sample-lines">788, 836, 2025</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wibjects/sliders.py">wibjects/sliders.py</a>
+    Lines: <span class="sample-lines">458</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wibjects/colorWibjects.py">wibjects/colorWibjects.py</a>
+    Lines: <span class="sample-lines">534, 547, 698, 754</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/examples/customWobject.py">examples/customWobject.py</a>
+    Lines: <span class="sample-lines">43</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

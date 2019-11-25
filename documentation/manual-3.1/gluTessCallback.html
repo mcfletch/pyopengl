@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluTessCallback : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluTessCallback</h1>
+</header>
+<main class="content">
+    <section class="purpose">define a callback for a tessellation object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluTessCallback"></a>
+    <span class="c-function">gluTessCallback</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUtesselator* (
+            <a href="#param-tess" class="parameter">tess</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-which" class="parameter">which</a>
+        )
+        ,
+    </span><span class="param-def">
+        _GLUfuncptr (
+            <a href="#param-CallBackFunc" class="parameter">CallBackFunc</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluTessCallback"></a>
+    <span class="py-function">gluTessCallback</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-tess" class="parameter">tess</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-which" class="parameter">which</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-function" class="parameter">function</a>
+    </span>
+</span> )
+    <pre class="pydoc">Set a given gluTessellator callback for the given tessellator</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-tess"></a>
+                        tess
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the tessellation object (created with
+    <a class="crossref" href="./gluNewTess.html">gluNewTess</a>
+    ).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-which"></a>
+                        which
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the callback being defined. The following values are valid:
+    <span class="constant">GLU_TESS_BEGIN</span>
+    ,
+    <span class="constant">GLU_TESS_BEGIN_DATA</span>
+    ,
+    <span class="constant">GLU_TESS_EDGE_FLAG</span>
+    ,
+    <span class="constant">GLU_TESS_EDGE_FLAG_DATA</span>
+    ,
+    <span class="constant">GLU_TESS_VERTEX</span>
+    ,
+    <span class="constant">GLU_TESS_VERTEX_DATA</span>
+    ,
+    <span class="constant">GLU_TESS_END</span>
+    ,
+    <span class="constant">GLU_TESS_END_DATA</span>
+    ,
+    <span class="constant">GLU_TESS_COMBINE</span>
+    ,
+    <span class="constant">GLU_TESS_COMBINE_DATA</span>
+    ,
+    <span class="constant">GLU_TESS_ERROR</span>
+    , and
+    <span class="constant">GLU_TESS_ERROR_DATA</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-CallBackFunc"></a>
+                        CallBackFunc
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the function to be called.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluTessCallback.html">gluTessCallback</a>
+    is used to indicate a callback to be used by a tessellation object.
+            If the specified callback is already defined, then it is replaced. If
+    <a class="parameter" href="#param-CallBackFunc">CallBackFunc</a>
+    is NULL, then the existing callback becomes undefined.
+</div>
+    <div class="para">
+            These callbacks are used by the tessellation object to describe how a
+            polygon specified by the user is broken into triangles. Note that there
+            are two versions of each callback: one with user-specified polygon data
+            and one without. If both versions of a particular callback are specified,
+            then the callback with user-specified polygon data will be used. Note
+            that the
+    <span class="emphasis">polygon_data</span>
+    parameter used by some of the functions is
+            a copy of the pointer that was specified when
+    <a class="crossref" href="./gluTessBeginPolygon.html">gluTessBeginPolygon</a>
+    was called. The legal callbacks are as follows:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_BEGIN</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The begin callback is invoked like
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    to indicate the start of
+                        a (triangle) primitive. The function takes a single argument of type
+                        GLenum. If the
+    <span class="constant">GLU_TESS_BOUNDARY_ONLY</span>
+    property is set to
+    <span class="constant">GLU_FALSE</span>
+    , then the argument is set to either
+    <span class="constant">GLU_TRIANGLE_FAN</span>
+    ,
+    <span class="constant">GLU_TRIANGLE_STRIP</span>
+    , or
+    <span class="constant">GLU_TRIANGLES</span>
+    .
+                        If the
+    <span class="constant">GLU_TESS_BOUNDARY_ONLY</span>
+    property is set to
+    <span class="constant">GLU_TRUE</span>
+    ,
+                        then the argument will be set to
+    <span class="constant">GLU_LINE_LOOP</span>
+    . The function
+                        prototype for this callback is:
+    <div class="programlisting">
+void begin( GLenum type );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_BEGIN_DATA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The same as the
+    <span class="constant">GLU_TESS_BEGIN</span>
+    callback except that it
+                        takes an additional pointer argument. This pointer is identical to the
+                        opaque pointer provided when
+    <a class="crossref" href="./gluTessBeginPolygon.html">gluTessBeginPolygon</a>
+    was called. The function prototype for this callback
+                        is:
+    <div class="programlisting">
+void beginData( GLenum type, void *polygon_data );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_EDGE_FLAG</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The edge flag callback is similar to
+    <a class="crossref" href="./glEdgeFlag.html">glEdgeFlag</a>
+    . The function
+                        takes a single boolean flag that indicates which edges lie on the
+                        polygon boundary. If the flag is
+    <span class="constant">GLU_TRUE</span>
+    , then each vertex
+                        that follows begins an edge that lies on the polygon boundary, that is,
+                        an edge that separates an interior region from an exterior one.
+                        If the flag is
+    <span class="constant">GLU_FALSE</span>
+    , then each vertex that follows begins an edge
+                        that lies in the polygon interior. The edge flag callback (if defined) is
+                        invoked before the first vertex callback.
+</div>
+    <div class="para">
+                        Since triangle fans and triangle strips do not support edge flags, the begin
+                        callback is not called with
+    <span class="constant">GLU_TRIANGLE_FAN</span>
+    or
+    <span class="constant">GLU_TRIANGLE_STRIP</span>
+    if a non-NULL edge flag callback is provided. (If the callback is
+                        initialized to NULL, there is no impact on performance). Instead, the fans and
+                        strips are converted to independent triangles. The function prototype
+                        for this callback is:
+    <div class="programlisting">
+void edgeFlag( GLboolean flag );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_EDGE_FLAG_DATA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The same as the
+    <span class="constant">GLU_TESS_EDGE_FLAG</span>
+    callback except that it takes an additional pointer
+                        argument. This pointer is identical to the opaque pointer provided when
+    <a class="crossref" href="./gluTessBeginPolygon.html">gluTessBeginPolygon</a>
+    was called. The function prototype for this callback
+                        is:
+    <div class="programlisting">
+void edgeFlagData( GLboolean flag, void *polygon_data );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_VERTEX</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The vertex callback is invoked between the begin and end callbacks.
+                        It is similar to
+    <a class="crossref" href="./glVertex.html">glVertex</a>
+    , and it defines the vertices of the triangles
+                        created by the tessellation process. The function
+                        takes a pointer as its only argument.  This pointer is identical to
+                        the opaque pointer provided by the user when the vertex was described
+                        (see
+    <a class="crossref" href="./gluTessVertex.html">gluTessVertex</a>
+    ). The function prototype for this callback is:
+    <div class="programlisting">
+void vertex( void *vertex_data );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_VERTEX_DATA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The same as the
+    <span class="constant">GLU_TESS_VERTEX</span>
+    callback except that it takes an additional pointer
+                        argument. This pointer is identical to the opaque pointer provided when
+    <a class="crossref" href="./gluTessBeginPolygon.html">gluTessBeginPolygon</a>
+    was called. The function prototype for this callback
+                        is:
+    <div class="programlisting">
+void vertexData( void *vertex_data, void *polygon_data );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_END</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The end callback serves the same purpose as
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    . It indicates the
+                        end of a primitive and it takes no arguments. The function prototype for this
+                        callback is:
+    <div class="programlisting">
+void end( void );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_END_DATA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The same as the
+    <span class="constant">GLU_TESS_END</span>
+    callback except that it takes an additional pointer
+                        argument. This pointer is identical to the opaque pointer provided when
+    <a class="crossref" href="./gluTessBeginPolygon.html">gluTessBeginPolygon</a>
+    was called. The function prototype for this callback
+                        is:
+    <div class="programlisting">
+void endData( void *polygon_data );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_COMBINE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The combine callback is called to create a new vertex when the tessellation
+                        detects an intersection or wishes to merge features. The function takes
+                        four arguments: an array of three elements each of type GLdouble, an array
+                        of four pointers, an array of four elements each of type GLfloat, and a
+                        pointer to a pointer. The prototype is:
+    <div class="programlisting">
+void combine( GLdouble coords[3], void *vertex_data[4],
+              GLfloat weight[4], void **outData );
+                        </div>
+</div>
+    <div class="para">
+                        The vertex is defined as a linear combination of up to four existing vertices,
+                        stored in
+    <span class="emphasis">vertex_data</span>
+    . The coefficients of the linear
+                        combination are given by
+    <span class="emphasis">weight</span>
+    ; these weights always add up to 1.
+                        All vertex pointers are valid even when some of the weights are 0.
+    <span class="emphasis">coords</span>
+    gives the location of the new vertex.
+</div>
+    <div class="para">
+                        The user must allocate another vertex, interpolate parameters using
+    <span class="emphasis">vertex_data</span>
+    and
+    <span class="emphasis">weight</span>
+    , and return the new vertex pointer in
+    <span class="emphasis">outData</span>
+    . This handle is supplied during rendering callbacks.
+                        The user is responsible for freeing the memory some time after
+    <a class="crossref" href="./gluTessEndPolygon.html">gluTessEndPolygon</a>
+    is called.
+</div>
+    <div class="para">
+                        For example, if the polygon lies in an arbitrary plane in 3-space,
+                        and a color is associated with each vertex, the
+    <span class="constant">GLU_TESS_COMBINE</span>
+    callback might look like this:
+    <div class="programlisting">
+void myCombine( GLdouble coords[3], VERTEX *d[4],
+                GLfloat w[4], VERTEX **dataOut )
+{
+   VERTEX *new = new_vertex();
+   new-&gt;x = coords[0];
+   new-&gt;y = coords[1];
+   new-&gt;z = coords[2];
+   new-&gt;r = w[0]*d[0]-&gt;r + w[1]*d[1]-&gt;r + w[2]*d[2]-&gt;r + w[3]*d[3]-&gt;r;
+   new-&gt;g = w[0]*d[0]-&gt;g + w[1]*d[1]-&gt;g + w[2]*d[2]-&gt;g + w[3]*d[3]-&gt;g;
+   new-&gt;b = w[0]*d[0]-&gt;b + w[1]*d[1]-&gt;b + w[2]*d[2]-&gt;b + w[3]*d[3]-&gt;b;
+   new-&gt;a = w[0]*d[0]-&gt;a + w[1]*d[1]-&gt;a + w[2]*d[2]-&gt;a + w[3]*d[3]-&gt;a;
+   *dataOut = new;
+}
+                        </div>
+</div>
+    <div class="para">
+                        If the tessellation detects an intersection, then the
+    <span class="constant">GLU_TESS_COMBINE</span>
+    or
+    <span class="constant">GLU_TESS_COMBINE_DATA</span>
+    callback (see below) must be defined, and it must
+                        write a non-NULL pointer into
+    <span class="emphasis">dataOut</span>
+    . Otherwise the
+    <span class="constant">GLU_TESS_NEED_COMBINE_CALLBACK</span>
+    error occurs, and no
+                        output is generated.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_COMBINE_DATA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The same as the
+    <span class="constant">GLU_TESS_COMBINE</span>
+    callback except that it takes an additional pointer
+                        argument. This pointer is identical to the opaque pointer provided when
+    <a class="crossref" href="./gluTessBeginPolygon.html">gluTessBeginPolygon</a>
+    was called. The function prototype for this callback
+                        is:
+    <div class="programlisting">
+void combineData( GLdouble coords[3], void *vertex_data[4],
+                  GLfloat weight[4], void **outData,
+                  void *polygon_data );
+                        </div>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_ERROR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The error callback is called when an error is encountered. The one argument
+                        is of type GLenum; it indicates the specific error that occurred and will be
+                        set to one of
+    <span class="constant">GLU_TESS_MISSING_BEGIN_POLYGON</span>
+    ,
+    <span class="constant">GLU_TESS_MISSING_END_POLYGON</span>
+    ,
+    <span class="constant">GLU_TESS_MISSING_BEGIN_CONTOUR</span>
+    ,
+    <span class="constant">GLU_TESS_MISSING_END_CONTOUR</span>
+    ,
+    <span class="constant">GLU_TESS_COORD_TOO_LARGE</span>
+    ,
+    <span class="constant">GLU_TESS_NEED_COMBINE_CALLBACK</span>
+    , or
+    <span class="constant">GLU_OUT_OF_MEMORY</span>
+    . Character
+                        strings describing these errors can be retrieved with the
+    <a class="crossref" href="./gluErrorString.html">gluErrorString</a>
+    call. The function prototype for this callback is:
+    <div class="programlisting">
+void error( GLenum errno );
+                        </div>
+</div>
+    <div class="para">
+                        The GLU library will recover from the first four
+                        errors by inserting the missing call(s).
+    <span class="constant">GLU_TESS_COORD_TOO_LARGE</span>
+    indicates that some vertex coordinate exceeded
+                        the predefined constant
+    <span class="constant">GLU_TESS_MAX_COORD</span>
+    in absolute value, and
+                        that the value has been clamped. (Coordinate values must be small
+                        enough so that two can be multiplied together without overflow.)
+    <span class="constant">GLU_TESS_NEED_COMBINE_CALLBACK</span>
+    indicates that the tessellation
+                        detected an intersection between two edges in the input data, and the
+    <span class="constant">GLU_TESS_COMBINE</span>
+    or
+    <span class="constant">GLU_TESS_COMBINE_DATA</span>
+    callback was
+                        not provided. No output is generated.
+    <span class="constant">GLU_OUT_OF_MEMORY</span>
+    indicates
+                        that there is not enough memory so no output is generated.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_ERROR_DATA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The same as the
+    <span class="constant">GLU_TESS_ERROR</span>
+    callback except that it takes an additional pointer
+                        argument. This pointer is identical to the opaque pointer provided when
+    <a class="crossref" href="./gluTessBeginPolygon.html">gluTessBeginPolygon</a>
+    was called. The function prototype for this callback
+                        is:
+    <div class="programlisting">
+void errorData( GLenum errno, void *polygon_data );
+                        </div>
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section" id="example">
+    <h2 class="title">Example</h2>
+    <div class="para">
+            Polygons tessellated can be rendered directly like this:
+    <div class="programlisting">
+gluTessCallback(tobj, GLU_TESS_BEGIN, glBegin);
+gluTessCallback(tobj, GLU_TESS_VERTEX, glVertex3dv);
+gluTessCallback(tobj, GLU_TESS_END, glEnd);
+gluTessCallback(tobj, GLU_TESS_COMBINE, myCombine);
+gluTessBeginPolygon(tobj, NULL);
+   gluTessBeginContour(tobj);
+      gluTessVertex(tobj, v, v);
+      ...
+   gluTessEndContour(tobj);
+gluTessEndPolygon(tobj);
+            </div>
+    Typically, the tessellated polygon should be stored in a display list so that
+            it does not need to be retessellated every time it is rendered.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluErrorString.html">gluErrorString</a>
+    ,
+    <a class="crossref" href="./gluNewTess.html">gluNewTess</a>
+    ,
+    <a class="crossref" href="./gluTessBeginContour.html">gluTessBeginContour</a>
+    ,
+    <a class="crossref" href="./gluTessBeginPolygon.html">gluTessBeginPolygon</a>
+    ,
+    <a class="crossref" href="./gluTessNormal.html">gluTessNormal</a>
+    ,
+    <a class="crossref" href="./gluTessProperty.html">gluTessProperty</a>
+    ,
+    <a class="crossref" href="./gluTessVertex.html">gluTessVertex</a>
+    ,
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    ,
+    <a class="crossref" href="./glEdgeFlag.html">glEdgeFlag</a>
+    ,
+    <a class="crossref" href="./glVertex.html">glVertex</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluTessCallback</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glu_tess2.py">tests/glu_tess2.py</a>
+    Lines: <span class="sample-lines">56, 61, 62, 66</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/polygontessellator.py">OpenGLContext/scenegraph/polygontessellator.py</a>
+    Lines: <span class="sample-lines">39, 40, 41, 42</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/lib/squirtle.py">pymt/lib/squirtle.py</a>
+    Lines: <span class="sample-lines">21, 867, 868, 869, 870, 871</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/bezier.py">pymt/graphx/bezier.py</a>
+    Lines: <span class="sample-lines">41, 160, 161, 162, 163</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

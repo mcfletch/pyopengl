@@ -1,0 +1,2714 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glTexParameter : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glTexParameter</h1>
+</header>
+<main class="content">
+    <section class="purpose">set texture parameters</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexParameter"></a>
+    <span class="c-function">glTexParameter</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+                <div class="py-signature">
+    <a name="py-glTexParameter"></a>
+    <span class="py-function">glTexParameter</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-parameter" class="parameter">parameter</a>
+    </span>
+</span> )
+    <pre class="pydoc">Set a texture parameter, choose underlying call based on pname and parameter</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexParameterIiv"></a>
+    <span class="c-function">glTexParameterIiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexParameterIiv"></a>
+    <span class="py-function">glTexParameterIiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexParameterIuiv"></a>
+    <span class="c-function">glTexParameterIuiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLuint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexParameterIuiv"></a>
+    <span class="py-function">glTexParameterIuiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexParameterf"></a>
+    <span class="c-function">glTexParameterf</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexParameterf"></a>
+    <span class="py-function">glTexParameterf</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexParameterfv"></a>
+    <span class="c-function">glTexParameterfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLfloat * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexParameterfv"></a>
+    <span class="py-function">glTexParameterfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexParameteri"></a>
+    <span class="c-function">glTexParameteri</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexParameteri"></a>
+    <span class="py-function">glTexParameteri</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexParameteriv"></a>
+    <span class="c-function">glTexParameteriv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexParameteriv"></a>
+    <span class="py-function">glTexParameteriv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTextureParameter"></a>
+    <span class="c-function">glTextureParameter</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTextureParameterIiv"></a>
+    <span class="c-function">glTextureParameterIiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTextureParameterIiv"></a>
+    <span class="py-function">glTextureParameterIiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTextureParameterIuiv"></a>
+    <span class="c-function">glTextureParameterIuiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLuint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTextureParameterIuiv"></a>
+    <span class="py-function">glTextureParameterIuiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTextureParameterf"></a>
+    <span class="c-function">glTextureParameterf</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTextureParameterf"></a>
+    <span class="py-function">glTextureParameterf</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTextureParameterfv"></a>
+    <span class="c-function">glTextureParameterfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLfloat *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTextureParameterfv"></a>
+    <span class="py-function">glTextureParameterfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTextureParameteri"></a>
+    <span class="c-function">glTextureParameteri</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTextureParameteri"></a>
+    <span class="py-function">glTextureParameteri</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTextureParameteriv"></a>
+    <span class="c-function">glTextureParameteriv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTextureParameteriv"></a>
+    <span class="py-function">glTextureParameteriv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">Specifies the target to which the texture is bound for
+    <a class="function" href="./glTexParameter.html">glTexParameter</a>
+    functions. Must be one of
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    , or
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">Specifies the texture object name for
+    <a class="function" href="./glTexParameter.html#c-glTextureParameter">glTextureParameter</a>
+    functions.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">Specifies the symbolic name of a single-valued texture
+          parameter.
+    <a class="parameter" href="#param-pname">pname</a>
+    can be one of the following:
+    <span class="constant">GL_DEPTH_STENCIL_TEXTURE_MODE</span>
+    ,
+    <span class="constant">GL_TEXTURE_BASE_LEVEL</span>
+    ,
+    <span class="constant">GL_TEXTURE_COMPARE_FUNC</span>
+    ,
+    <span class="constant">GL_TEXTURE_COMPARE_MODE</span>
+    ,
+    <span class="constant">GL_TEXTURE_LOD_BIAS</span>
+    ,
+    <span class="constant">GL_TEXTURE_MIN_FILTER</span>
+    ,
+    <span class="constant">GL_TEXTURE_MAG_FILTER</span>
+    ,
+    <span class="constant">GL_TEXTURE_MIN_LOD</span>
+    ,
+    <span class="constant">GL_TEXTURE_MAX_LOD</span>
+    ,
+    <span class="constant">GL_TEXTURE_MAX_LEVEL</span>
+    ,
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+    ,
+    <span class="constant">GL_TEXTURE_SWIZZLE_G</span>
+    ,
+    <span class="constant">GL_TEXTURE_SWIZZLE_B</span>
+    ,
+    <span class="constant">GL_TEXTURE_SWIZZLE_A</span>
+    ,
+    <span class="constant">GL_TEXTURE_WRAP_S</span>
+    ,
+    <span class="constant">GL_TEXTURE_WRAP_T</span>
+    , or
+    <span class="constant">GL_TEXTURE_WRAP_R</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-param"></a>
+                        param
+                    </th>
+                    <td>
+    <div class="para">For the scalar commands, specifies the value of
+    <a class="parameter" href="#param-pname">pname</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">For the vector commands, specifies a pointer to an array where
+          the value or values of
+    <a class="parameter" href="#param-pname">pname</a>
+    are
+          stored.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glTexParameter.html">glTexParameter</a>
+    and
+    <a class="function" href="./glTexParameter.html#c-glTextureParameter">glTextureParameter</a>
+    assign the value or values in
+    <a class="parameter" href="#param-params">params</a>
+    to the texture parameter specified as
+    <a class="parameter" href="#param-pname">pname</a>
+    . For
+    <a class="function" href="./glTexParameter.html">glTexParameter</a>
+    ,
+    <a class="parameter" href="#param-target">target</a>
+    defines the target texture, either
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    , or
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    . The following symbols are
+    accepted in
+    <a class="parameter" href="#param-pname">pname</a>
+    :
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEPTH_STENCIL_TEXTURE_MODE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specifies the mode used to read from depth-stencil format textures.
+    <a class="parameter" href="#param-params">params</a>
+    must be one of
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    or
+    <span class="constant">GL_STENCIL_INDEX</span>
+    .
+                        If the depth stencil mode is
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    , then reads from depth-stencil
+                        format textures will return the depth component of the texel in
+    <math overflow="scroll"><msub><mi>R</mi><mi>t</mi></msub></math>
+    and the stencil component
+                        will be discarded. If the depth stencil mode is
+    <span class="constant">GL_STENCIL_INDEX</span>
+    then
+                        the stencil component is returned in
+    <math overflow="scroll"><msub><mi>R</mi><mi>t</mi></msub></math>
+    and the depth component is discarded. The initial value is
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BASE_LEVEL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specifies the index of the lowest defined mipmap level. This is an
+                        integer value. The initial value is 0.
+                    </div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BORDER_COLOR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The data in
+    <a class="parameter" href="#param-params">params</a>
+    specifies four values that define the border values that
+                        should be used for border texels. If a texel is sampled from the border of the texture, the
+                        values of
+    <span class="constant">GL_TEXTURE_BORDER_COLOR</span>
+    are interpreted as an RGBA color to match the
+                        texture's internal format and substituted for the non-existent texel data. If the texture contains depth
+                        components, the first component of
+    <span class="constant">GL_TEXTURE_BORDER_COLOR</span>
+    is interpreted as a depth value.
+                        The initial value is
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <mn>0.0</mn>
+                                        <mo>,</mo>
+                                        <mn>0.0</mn>
+                                        <mo>,</mo>
+                                        <mn>0.0</mn>
+                                        <mo>,</mo>
+                                        <mn>0.0</mn>
+                                    </mrow>
+                                </mfenced>
+                            </mrow>
+                        </math>
+    .
+</div>
+    <div class="para">
+                        If the values for
+    <span class="constant">GL_TEXTURE_BORDER_COLOR</span>
+    are specified with
+    <a class="function" href="./glTexParameter.html#c-glTexParameterIiv">glTexParameterIiv</a>
+    or
+    <a class="function" href="./glTexParameter.html#c-glTexParameterIuiv">glTexParameterIuiv</a>
+    , the values are stored unmodified with an internal data type of
+                        integer. If specified with
+    <a class="function" href="./glTexParameter.html#c-glTexParameteriv">glTexParameteriv</a>
+    , they are converted to floating point with the following
+                        equation:
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">f</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mrow>
+                                        <mn>2</mn>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo>+</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                    <mrow>
+                                        <msup>
+                                            <mn>2</mn>
+                                            <mi mathvariant="italic">b</mi>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfrac>
+                            </mrow>
+                        </math>
+    .
+                        If specified with
+    <a class="function" href="./glTexParameter.html#c-glTexParameterfv">glTexParameterfv</a>
+    , they are stored unmodified as floating-point values.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_COMPARE_FUNC</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specifies the comparison operator used when
+    <span class="constant">GL_TEXTURE_COMPARE_MODE</span>
+    is
+                        set to
+    <span class="constant">GL_COMPARE_REF_TO_TEXTURE</span>
+    .  Permissible values are:
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>
+    <span class="emphasis"> Texture Comparison Function </span>
+</th><th>
+    <span class="emphasis"> Computed result </span>
+</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+    <span class="constant">GL_LEQUAL</span>
+</td><td>
+    <math overflow="scroll">
+                                                <mrow>
+                                                    <mi mathvariant="italic">result</mi>
+                                                    <mo>=</mo>
+                                                    <mfenced open="{" close="">
+                                                        <mrow>
+                                                            <mtable>
+                                                                <mtr><mtd>
+                                                                    <mn>1.0</mn>
+                                                                </mtd></mtr>
+                                                                <mtr><mtd>
+                                                                    <mn>0.0</mn>
+                                                                </mtd></mtr>
+                                                            </mtable>
+                                                            <mo></mo>
+                                                            <mtable>
+                                                                <mtr><mtd>
+                                                                    <mrow>
+                                                                        <mi mathvariant="italic">r</mi>
+                                                                        <mo>&lt;=</mo>
+                                                                        <mfenced open="" close="">
+                                                                            <msub><mi mathvariant="italic">D</mi>
+                                                                            <mi mathvariant="italic">t</mi>
+                                                                            </msub>
+                                                                        </mfenced>
+                                                                    </mrow>
+                                                                </mtd></mtr>
+                                                                <mtr><mtd>
+                                                                    <mrow>
+                                                                        <mi mathvariant="italic">r</mi>
+                                                                        <mo>&gt;</mo>
+                                                                        <mfenced open="" close="">
+                                                                            <msub><mi mathvariant="italic">D</mi>
+                                                                            <mi mathvariant="italic">t</mi>
+                                                                            </msub>
+                                                                        </mfenced>
+                                                                    </mrow>
+                                                                </mtd></mtr>
+                                                            </mtable>
+                                                        </mrow>
+                                                    </mfenced>
+                                                </mrow>
+                                            </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_GEQUAL</span>
+</td><td>
+    <math overflow="scroll">
+                                                <mrow>
+                                                    <mi mathvariant="italic">result</mi>
+                                                    <mo>=</mo>
+                                                    <mfenced open="{" close="">
+                                                        <mrow>
+                                                            <mtable>
+                                                                <mtr><mtd>
+                                                                    <mn>1.0</mn>
+                                                                </mtd></mtr>
+                                                                <mtr><mtd>
+                                                                    <mn>0.0</mn>
+                                                                </mtd></mtr>
+                                                            </mtable>
+                                                            <mo></mo>
+                                                            <mtable>
+                                                                <mtr><mtd>
+                                                                    <mrow>
+                                                                        <mi mathvariant="italic">r</mi>
+                                                                        <mo>&gt;=</mo>
+                                                                        <mfenced open="" close="">
+                                                                            <msub><mi mathvariant="italic">D</mi>
+                                                                            <mi mathvariant="italic">t</mi>
+                                                                            </msub>
+                                                                        </mfenced>
+                                                                    </mrow>
+                                                                </mtd></mtr>
+                                                                <mtr><mtd>
+                                                                    <mrow>
+                                                                        <mi mathvariant="italic">r</mi>
+                                                                        <mo>&lt;</mo>
+                                                                        <mfenced open="" close="">
+                                                                            <msub><mi mathvariant="italic">D</mi>
+                                                                            <mi mathvariant="italic">t</mi>
+                                                                            </msub>
+                                                                        </mfenced>
+                                                                    </mrow>
+                                                                </mtd></mtr>
+                                                            </mtable>
+                                                        </mrow>
+                                                    </mfenced>
+                                                </mrow>
+                                            </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_LESS</span>
+</td><td>
+    <math overflow="scroll">
+                                                <mrow>
+                                                    <mi mathvariant="italic">result</mi>
+                                                    <mo>=</mo>
+                                                    <mfenced open="{" close="">
+                                                        <mrow>
+                                                            <mtable>
+                                                                <mtr><mtd>
+                                                                    <mn>1.0</mn>
+                                                                </mtd></mtr>
+                                                                <mtr><mtd>
+                                                                    <mn>0.0</mn>
+                                                                </mtd></mtr>
+                                                            </mtable>
+                                                            <mo></mo>
+                                                            <mtable>
+                                                                <mtr><mtd>
+                                                                    <mrow>
+                                                                        <mi mathvariant="italic">r</mi>
+                                                                        <mo>&lt;</mo>
+                                                                        <mfenced open="" close="">
+                                                                            <msub><mi mathvariant="italic">D</mi>
+                                                                            <mi mathvariant="italic">t</mi>
+                                                                            </msub>
+                                                                        </mfenced>
+                                                                    </mrow>
+                                                                </mtd></mtr>
+                                                                <mtr><mtd>
+                                                                    <mrow>
+                                                                        <mi mathvariant="italic">r</mi>
+                                                                        <mo>&gt;=</mo>
+                                                                        <mfenced open="" close="">
+                                                                            <msub><mi mathvariant="italic">D</mi>
+                                                                            <mi mathvariant="italic">t</mi>
+                                                                            </msub>
+                                                                        </mfenced>
+                                                                    </mrow>
+                                                                </mtd></mtr>
+                                                            </mtable>
+                                                        </mrow>
+                                                    </mfenced>
+                                                </mrow>
+                                            </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_GREATER</span>
+</td><td>
+    <math overflow="scroll">
+                                                <mrow>
+                                                    <mi mathvariant="italic">result</mi>
+                                                    <mo>=</mo>
+                                                    <mfenced open="{" close="">
+                                                        <mrow>
+                                                            <mtable>
+                                                                <mtr><mtd>
+                                                                    <mn>1.0</mn>
+                                                                </mtd></mtr>
+                                                                <mtr><mtd>
+                                                                    <mn>0.0</mn>
+                                                                </mtd></mtr>
+                                                            </mtable>
+                                                            <mo></mo>
+                                                            <mtable>
+                                                                <mtr><mtd>
+                                                                    <mrow>
+                                                                        <mi mathvariant="italic">r</mi>
+                                                                        <mo>&gt;</mo>
+                                                                        <mfenced open="" close="">
+                                                                            <msub><mi mathvariant="italic">D</mi>
+                                                                            <mi mathvariant="italic">t</mi>
+                                                                            </msub>
+                                                                        </mfenced>
+                                                                    </mrow>
+                                                                </mtd></mtr>
+                                                                <mtr><mtd>
+                                                                    <mrow>
+                                                                        <mi mathvariant="italic">r</mi>
+                                                                        <mo>&lt;=</mo>
+                                                                        <mfenced open="" close="">
+                                                                            <msub><mi mathvariant="italic">D</mi>
+                                                                            <mi mathvariant="italic">t</mi>
+                                                                            </msub>
+                                                                        </mfenced>
+                                                                    </mrow>
+                                                                </mtd></mtr>
+                                                            </mtable>
+                                                        </mrow>
+                                                    </mfenced>
+                                                </mrow>
+                                            </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_EQUAL</span>
+</td><td>
+    <math overflow="scroll">
+                                                <mrow>
+                                                    <mi mathvariant="italic">result</mi>
+                                                    <mo>=</mo>
+                                                    <mfenced open="{" close="">
+                                                        <mrow>
+                                                            <mtable>
+                                                                <mtr><mtd>
+                                                                    <mn>1.0</mn>
+                                                                </mtd></mtr>
+                                                                <mtr><mtd>
+                                                                    <mn>0.0</mn>
+                                                                </mtd></mtr>
+                                                            </mtable>
+                                                            <mo></mo>
+                                                            <mtable>
+                                                                <mtr><mtd>
+                                                                    <mrow>
+                                                                        <mi mathvariant="italic">r</mi>
+                                                                        <mo>=</mo>
+                                                                        <mfenced open="" close="">
+                                                                            <msub><mi mathvariant="italic">D</mi>
+                                                                            <mi mathvariant="italic">t</mi>
+                                                                            </msub>
+                                                                        </mfenced>
+                                                                    </mrow>
+                                                                </mtd></mtr>
+                                                                <mtr><mtd>
+                                                                    <mrow>
+                                                                        <mi mathvariant="italic">r</mi>
+                                                                        <mo></mo>
+                                                                        <mfenced open="" close="">
+                                                                            <msub><mi mathvariant="italic">D</mi>
+                                                                            <mi mathvariant="italic">t</mi>
+                                                                            </msub>
+                                                                        </mfenced>
+                                                                    </mrow>
+                                                                </mtd></mtr>
+                                                            </mtable>
+                                                        </mrow>
+                                                    </mfenced>
+                                                </mrow>
+                                            </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_NOTEQUAL</span>
+</td><td>
+    <math overflow="scroll">
+                                                <mrow>
+                                                    <mi mathvariant="italic">result</mi>
+                                                    <mo>=</mo>
+                                                    <mfenced open="{" close="">
+                                                        <mrow>
+                                                            <mtable>
+                                                                <mtr><mtd>
+                                                                    <mn>1.0</mn>
+                                                                </mtd></mtr>
+                                                                <mtr><mtd>
+                                                                    <mn>0.0</mn>
+                                                                </mtd></mtr>
+                                                            </mtable>
+                                                            <mo></mo>
+                                                            <mtable>
+                                                                <mtr><mtd>
+                                                                    <mrow>
+                                                                        <mi mathvariant="italic">r</mi>
+                                                                        <mo></mo>
+                                                                        <mfenced open="" close="">
+                                                                            <msub><mi mathvariant="italic">D</mi>
+                                                                            <mi mathvariant="italic">t</mi>
+                                                                            </msub>
+                                                                        </mfenced>
+                                                                    </mrow>
+                                                                </mtd></mtr>
+                                                                <mtr><mtd>
+                                                                    <mrow>
+                                                                        <mi mathvariant="italic">r</mi>
+                                                                        <mo>=</mo>
+                                                                        <mfenced open="" close="">
+                                                                            <msub><mi mathvariant="italic">D</mi>
+                                                                            <mi mathvariant="italic">t</mi>
+                                                                            </msub>
+                                                                        </mfenced>
+                                                                    </mrow>
+                                                                </mtd></mtr>
+                                                            </mtable>
+                                                        </mrow>
+                                                    </mfenced>
+                                                </mrow>
+                                            </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_ALWAYS</span>
+</td><td>
+    <math overflow="scroll">
+                                                <mrow>
+                                                    <mi mathvariant="italic">result</mi>
+                                                    <mo>=</mo>
+                                                    <mi>1.0</mi>
+                                                </mrow>
+                                                </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_NEVER</span>
+</td><td>
+    <math overflow="scroll">
+                                                <mrow>
+                                                    <mi mathvariant="italic">result</mi>
+                                                    <mo>=</mo>
+                                                    <mi>0.0</mi>
+                                                </mrow>
+                                                </math>
+</td>
+                </tr>
+    </tbody></table>
+    where
+    <math overflow="scroll"><mi mathvariant="italic">r</mi></math>
+    is the current interpolated texture coordinate, and
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">D</mi>
+                            <mi mathvariant="italic">t</mi>
+                            </msub>
+                        </math>
+    is the depth texture value sampled from the currently bound depth texture.
+    <math overflow="scroll"><mi mathvariant="italic">result</mi></math>
+    is assigned to the red channel.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_COMPARE_MODE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specifies the texture comparison mode for currently bound depth textures.
+                        That is, a texture whose internal format is
+    <span class="constant">GL_DEPTH_COMPONENT_*</span>
+    ; see
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    )
+                        Permissible values are:
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_COMPARE_REF_TO_TEXTURE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                                        Specifies that the interpolated and clamped
+    <math overflow="scroll"><mi mathvariant="italic">r</mi></math>
+    texture coordinate should
+                                        be compared to the value in the currently bound depth texture.  See the
+                                        discussion of
+    <span class="constant">GL_TEXTURE_COMPARE_FUNC</span>
+    for details of how the comparison
+                                        is evaluated.  The result of the comparison is assigned to the red channel.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NONE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                                        Specifies that the red channel should be assigned the
+                                        appropriate value from the currently bound depth texture.
+                                    </div>
+</dd>
+</div>
+</dl>
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_LOD_BIAS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    specifies a fixed bias value that is to be added to the level-of-detail
+                        parameter for the texture before texture sampling. The specified value is added to the shader-supplied
+                        bias value (if any) and subsequently clamped into the implementation-defined range
+    <math overflow="scroll">
+                            <mfenced open="[" close="]">
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mo>-</mo>
+                                        <msub>
+                                            <mi mathvariant="italic">bias</mi>
+                                            <mi mathvariant="italic">max</mi>
+                                        </msub>
+                                    </mrow>
+                                </mfenced>
+                                <mrow>
+                                    <mfenced open="" close="">
+                                    <mrow>
+                                        <msub>
+                                            <mi mathvariant="italic">bias</mi>
+                                            <mi mathvariant="italic">max</mi>
+                                        </msub>
+                                    </mrow>
+                                    </mfenced>
+                                </mrow>
+                            </mfenced>
+                        </math>
+    ,
+                        where
+    <math overflow="scroll">
+                            <mrow>
+                                <msub><mi mathvariant="italic">bias</mi>
+                                <mi mathvariant="italic">max</mi>
+                                </msub>
+                            </mrow>
+                        </math>
+    is the value of the implementation defined constant
+    <span class="constant">GL_MAX_TEXTURE_LOD_BIAS</span>
+    . The initial value is 0.0.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_MIN_FILTER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The texture minifying function is used whenever the level-of-detail function
+                        used when sampling from the texture determines that the texture should be minified.
+                        There are six defined minifying functions.
+                        Two of them use either the nearest texture elements or a weighted average of multiple texture elements
+                        to compute the texture value.
+                        The other four use mipmaps.
+                    </div>
+    <div class="para">
+                        A mipmap is an ordered set of arrays representing the same image
+                        at progressively lower resolutions.
+                        If the texture has dimensions
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mi mathvariant="italic">n</mi>
+                                </msup>
+                                <mo></mo>
+                                <msup><mn>2</mn>
+                                <mi mathvariant="italic">m</mi>
+                                </msup>
+                            </mrow>
+                        </math>
+    ,
+                        there are
+    <math overflow="scroll">
+                            <mrow>
+                                <mrow>
+                                    <mi mathvariant="italic">max</mi>
+                                    <mo></mo>
+                                    <mfenced open="(" close=")">
+                                        <mi mathvariant="italic">n</mi>
+                                        <mi mathvariant="italic">m</mi>
+                                    </mfenced>
+                                </mrow>
+                                <mo>+</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+    mipmaps.
+                        The first mipmap is the original texture,
+                        with dimensions
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mi mathvariant="italic">n</mi>
+                                </msup>
+                                <mo></mo>
+                                <msup><mn>2</mn>
+                                <mi mathvariant="italic">m</mi>
+                                </msup>
+                            </mrow>
+                        </math>
+    .
+                        Each subsequent mipmap has dimensions
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mi mathvariant="italic">k</mi>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                </msup>
+                                <mo></mo>
+                                <msup><mn>2</mn>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mi mathvariant="italic">l</mi>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                </msup>
+                            </mrow>
+                        </math>
+    ,
+                        where
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mi mathvariant="italic">k</mi>
+                                </msup>
+                                <mo></mo>
+                                <msup><mn>2</mn>
+                                <mi mathvariant="italic">l</mi>
+                                </msup>
+                            </mrow>
+                        </math>
+    are the dimensions of the previous mipmap,
+                        until either
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">k</mi>
+                                <mo>=</mo>
+                                <mn>0</mn>
+                            </mrow>
+                        </math>
+    or
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">l</mi>
+                                <mo>=</mo>
+                                <mn>0</mn>
+                            </mrow>
+                        </math>
+    .
+                        At that point,
+                        subsequent mipmaps have dimension
+    <math overflow="scroll">
+                            <mrow>
+                                <mn>1</mn>
+                                <mo></mo>
+                                <msup><mn>2</mn>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mi mathvariant="italic">l</mi>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                </msup>
+                            </mrow>
+                        </math>
+    or
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mi mathvariant="italic">k</mi>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                </msup>
+                                <mo></mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+    until the final mipmap,
+                        which has dimension
+    <math overflow="scroll">
+                            <mrow>
+                                <mn>1</mn>
+                                <mo></mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+    .
+                        To define the mipmaps, call
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage1D.html">glCopyTexImage1D</a>
+    , or
+    <a class="crossref" href="./glCopyTexImage2D.html">glCopyTexImage2D</a>
+    with the
+    <span class="emphasis">level</span>
+    argument indicating the order of the mipmaps.
+                        Level 0 is the original texture;
+                        level
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">max</mi>
+                                <mo></mo>
+                                <mfenced open="(" close=")">
+                                    <mi mathvariant="italic">n</mi>
+                                    <mi mathvariant="italic">m</mi>
+                                </mfenced>
+                            </mrow>
+                        </math>
+    is the final
+    <math overflow="scroll">
+                            <mrow>
+                                <mn>1</mn>
+                                <mo></mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+    mipmap.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    supplies a function for minifying the texture as one of the
+                        following:
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NEAREST</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                                        Returns the value of the texture element that is nearest
+                                        (in Manhattan distance)
+                                        to the specified texture coordinates.
+                                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LINEAR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                                        Returns the weighted average of the four texture elements
+                                        that are closest to the specified texture coordinates.
+                                        These can include items wrapped or repeated from other parts of a texture,
+                                        depending on the values of
+    <span class="constant">GL_TEXTURE_WRAP_S</span>
+    and
+    <span class="constant">GL_TEXTURE_WRAP_T</span>
+    ,
+                                        and on the exact mapping.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NEAREST_MIPMAP_NEAREST</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                                        Chooses the mipmap that most closely matches the size of the pixel
+                                        being textured and uses the
+    <span class="constant">GL_NEAREST</span>
+    criterion
+                                        (the texture element closest to the specified texture coordinates)
+                                        to produce a texture value.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LINEAR_MIPMAP_NEAREST</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                                        Chooses the mipmap that most closely matches the size of the pixel
+                                        being textured and uses the
+    <span class="constant">GL_LINEAR</span>
+    criterion
+                                        (a weighted average of the four texture elements that are closest to the specified texture coordinates)
+                                        to produce a texture value.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NEAREST_MIPMAP_LINEAR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                                        Chooses the two mipmaps that most closely match the size of the pixel
+                                        being textured and uses the
+    <span class="constant">GL_NEAREST</span>
+    criterion
+                                        (the texture element closest to the specified texture coordinates )
+                                        to produce a texture value from each mipmap.
+                                        The final texture value is a weighted average of those two values.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LINEAR_MIPMAP_LINEAR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                                        Chooses the two mipmaps that most closely match the size of the pixel
+                                        being textured and uses the
+    <span class="constant">GL_LINEAR</span>
+    criterion
+                                        (a weighted average of the texture elements that are closest to the specified texture coordinates)
+                                        to produce a texture value from each mipmap.
+                                        The final texture value is a weighted average of those two values.
+</div>
+</dd>
+</div>
+</dl>
+</div>
+    <div class="para">
+                        As more texture elements are sampled in the minification process,
+                        fewer aliasing artifacts will be apparent.
+                        While the
+    <span class="constant">GL_NEAREST</span>
+    and
+    <span class="constant">GL_LINEAR</span>
+    minification functions can be
+                        faster than the other four,
+                        they sample only one or multiple texture elements to determine the texture value
+                        of the pixel being rendered and can produce moire patterns
+                        or ragged transitions.
+                        The initial value of
+    <span class="constant">GL_TEXTURE_MIN_FILTER</span>
+    is
+    <span class="constant">GL_NEAREST_MIPMAP_LINEAR</span>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_MAG_FILTER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The texture magnification function is used whenever the level-of-detail function
+                        used when sampling from the texture determines that the texture should be magified.
+                        It sets the texture magnification function to either
+    <span class="constant">GL_NEAREST</span>
+    or
+    <span class="constant">GL_LINEAR</span>
+    (see below).
+    <span class="constant">GL_NEAREST</span>
+    is generally faster
+                        than
+    <span class="constant">GL_LINEAR</span>
+    ,
+                        but it can produce textured images with sharper edges
+                        because the transition between texture elements is not as smooth.
+                        The initial value of
+    <span class="constant">GL_TEXTURE_MAG_FILTER</span>
+    is
+    <span class="constant">GL_LINEAR</span>
+    .
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NEAREST</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                                        Returns the value of the texture element that is nearest
+                                        (in Manhattan distance)
+                                        to the specified texture coordinates.
+                                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LINEAR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                                        Returns the weighted average of the texture elements
+                                        that are closest to the specified texture coordinates.
+                                        These can include items wrapped or repeated from other parts of a texture,
+                                        depending on the values of
+    <span class="constant">GL_TEXTURE_WRAP_S</span>
+    and
+    <span class="constant">GL_TEXTURE_WRAP_T</span>
+    ,
+                                        and on the exact mapping.
+</div>
+</dd>
+</div>
+</dl>
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_MIN_LOD</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Sets the minimum level-of-detail parameter.  This floating-point value
+                        limits the selection of highest resolution mipmap (lowest mipmap
+                        level). The initial value is -1000.
+                    </div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_MAX_LOD</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Sets the maximum level-of-detail parameter.  This floating-point value
+                        limits the selection of the lowest resolution mipmap (highest mipmap
+                        level). The initial value is 1000.
+                    </div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_MAX_LEVEL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Sets the index of the highest defined mipmap level. This is an integer
+                        value. The initial value is 1000.
+                    </div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Sets the swizzle that will be applied to the
+    <math overflow="scroll"><mi mathvariant="italic">r</mi></math>
+    component of a texel before it is returned to the shader. Valid values for
+    <a class="parameter" href="#param-param">param</a>
+    are
+    <span class="constant">GL_RED</span>
+    ,
+    <span class="constant">GL_GREEN</span>
+    ,
+    <span class="constant">GL_BLUE</span>
+    ,
+    <span class="constant">GL_ALPHA</span>
+    ,
+    <span class="constant">GL_ZERO</span>
+    and
+    <span class="constant">GL_ONE</span>
+    .
+                        If
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+    is
+    <span class="constant">GL_RED</span>
+    , the value for
+    <math overflow="scroll"><mi mathvariant="italic">r</mi></math>
+    will be taken from the first
+                        channel of the fetched texel.
+                        If
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+    is
+    <span class="constant">GL_GREEN</span>
+    , the value for
+    <math overflow="scroll"><mi mathvariant="italic">r</mi></math>
+    will be taken from the second
+                        channel of the fetched texel.
+                        If
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+    is
+    <span class="constant">GL_BLUE</span>
+    , the value for
+    <math overflow="scroll"><mi mathvariant="italic">r</mi></math>
+    will be taken from the third
+                        channel of the fetched texel.
+                        If
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+    is
+    <span class="constant">GL_ALPHA</span>
+    , the value for
+    <math overflow="scroll"><mi mathvariant="italic">r</mi></math>
+    will be taken from the fourth
+                        channel of the fetched texel.
+                        If
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+    is
+    <span class="constant">GL_ZERO</span>
+    , the value for
+    <math overflow="scroll"><mi mathvariant="italic">r</mi></math>
+    will be subtituted with
+    <math overflow="scroll"><mn>0.0</mn></math>
+    .
+                        If
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+    is
+    <span class="constant">GL_ONE</span>
+    , the value for
+    <math overflow="scroll"><mi mathvariant="italic">r</mi></math>
+    will be subtituted with
+    <math overflow="scroll"><mn>1.0</mn></math>
+    .
+                        The initial value is
+    <span class="constant">GL_RED</span>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_SWIZZLE_G</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Sets the swizzle that will be applied to the
+    <math overflow="scroll"><mi mathvariant="italic">g</mi></math>
+    component of a texel before it is returned to the shader. Valid values for
+    <a class="parameter" href="#param-param">param</a>
+    and their effects are similar to
+                        those of
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+    .
+                        The initial value is
+    <span class="constant">GL_GREEN</span>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_SWIZZLE_B</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Sets the swizzle that will be applied to the
+    <math overflow="scroll"><mi mathvariant="italic">b</mi></math>
+    component of a texel before it is returned to the shader. Valid values for
+    <a class="parameter" href="#param-param">param</a>
+    and their effects are similar to
+                        those of
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+    .
+                        The initial value is
+    <span class="constant">GL_BLUE</span>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_SWIZZLE_A</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Sets the swizzle that will be applied to the
+    <math overflow="scroll"><mi mathvariant="italic">a</mi></math>
+    component of a texel before it is returned to the shader. Valid values for
+    <a class="parameter" href="#param-param">param</a>
+    and their effects are similar to
+                        those of
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+    .
+                        The initial value is
+    <span class="constant">GL_ALPHA</span>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_SWIZZLE_RGBA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Sets the swizzles that will be applied to the
+    <math overflow="scroll"><mi mathvariant="italic">r</mi></math>
+    ,
+    <math overflow="scroll"><mi mathvariant="italic">g</mi></math>
+    ,
+    <math overflow="scroll"><mi mathvariant="italic">b</mi></math>
+    , and
+    <math overflow="scroll"><mi mathvariant="italic">a</mi></math>
+    components of a texel before they are returned to the shader. Valid values for
+    <a class="parameter" href="#param-params">params</a>
+    and their effects are similar to
+                        those of
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+    , except that all channels are specified simultaneously.
+                        Setting the value of
+    <span class="constant">GL_TEXTURE_SWIZZLE_RGBA</span>
+    is equivalent (assuming no errors are generated) to
+                        setting the parameters of each of
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+    ,
+    <span class="constant">GL_TEXTURE_SWIZZLE_G</span>
+    ,
+    <span class="constant">GL_TEXTURE_SWIZZLE_B</span>
+    , and
+    <span class="constant">GL_TEXTURE_SWIZZLE_A</span>
+    successively.
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_WRAP_S</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Sets the wrap parameter for texture coordinate
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    to either
+    <span class="constant">GL_CLAMP_TO_EDGE</span>
+    ,
+    <span class="constant">GL_CLAMP_TO_BORDER</span>
+    ,
+    <span class="constant">GL_MIRRORED_REPEAT</span>
+    ,
+    <span class="constant">GL_REPEAT</span>
+    , or
+    <span class="constant">GL_MIRROR_CLAMP_TO_EDGE</span>
+    .
+    <span class="constant">GL_CLAMP_TO_EDGE</span>
+    causes
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    coordinates to be clamped to the
+                        range
+    <math overflow="scroll">
+                            <mfenced open="[" close="]">
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mfrac>
+                                            <mn>1</mn>
+                                            <mrow>
+                                                <mn>2</mn><mi mathvariant="italic">N</mi>
+                                            </mrow>
+                                        </mfrac>
+                                    </mrow>
+                                </mfenced>
+                                <mrow>
+                                    <mn>1</mn>
+                                    <mo>-</mo>
+                                    <mfenced open="" close="">
+                                        <mrow>
+                                            <mfrac>
+                                                <mn>1</mn>
+                                                <mrow>
+                                                    <mn>2</mn><mi mathvariant="italic">N</mi>
+                                                </mrow>
+                                            </mfrac>
+                                        </mrow>
+                                    </mfenced>
+                                </mrow>
+                            </mfenced>
+                        </math>
+    ,
+                        where
+    <math overflow="scroll"><mi mathvariant="italic">N</mi></math>
+    is the size
+                        of the texture in the direction of clamping.
+    <span class="constant">GL_CLAMP_TO_BORDER</span>
+    evaluates
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    coordinates in a similar manner to
+    <span class="constant">GL_CLAMP_TO_EDGE</span>
+    .
+                        However, in cases where clamping would have occurred in
+    <span class="constant">GL_CLAMP_TO_EDGE</span>
+    mode, the fetched texel data
+                        is substituted with the values specified by
+    <span class="constant">GL_TEXTURE_BORDER_COLOR</span>
+    .
+    <span class="constant">GL_REPEAT</span>
+    causes the
+                        integer part of the
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    coordinate to be ignored; the GL uses only the
+                        fractional part, thereby creating a repeating pattern.
+    <span class="constant">GL_MIRRORED_REPEAT</span>
+    causes the
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    coordinate to be set to the
+                        fractional part of the texture coordinate if the integer part of
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    is
+                        even; if the integer part of
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    is odd, then the
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    texture coordinate is
+                        set to
+    <math overflow="scroll">
+                            <mrow>
+                                <mn>1</mn>
+                                <mo>-</mo>
+                                <mrow>
+                                    <mi mathvariant="italic">frac</mi>
+                                    <mo></mo>
+                                    <mfenced open="(" close=")">
+                                        <mi mathvariant="italic">s</mi>
+                                    </mfenced>
+                                </mrow>
+                            </mrow>
+                        </math>
+    ,
+                        where
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">frac</mi>
+                                <mo></mo>
+                                <mfenced open="(" close=")">
+                                    <mi mathvariant="italic">s</mi>
+                                </mfenced>
+                            </mrow>
+                        </math>
+    represents the fractional part of
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    .
+    <span class="constant">GL_MIRROR_CLAMP_TO_EDGE</span>
+    causes the
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    coordinate to be repeated as for
+    <span class="constant">GL_MIRRORED_REPEAT</span>
+    for one repetition of the texture,
+                        at which point the coordinate to be clamped as in
+    <span class="constant">GL_CLAMP_TO_EDGE</span>
+    .
+                        Initially,
+    <span class="constant">GL_TEXTURE_WRAP_S</span>
+    is set to
+    <span class="constant">GL_REPEAT</span>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_WRAP_T</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Sets the wrap parameter for texture coordinate
+    <math overflow="scroll"><mi mathvariant="italic">t</mi></math>
+    to either
+    <span class="constant">GL_CLAMP_TO_EDGE</span>
+    ,
+    <span class="constant">GL_CLAMP_TO_BORDER</span>
+    ,
+    <span class="constant">GL_MIRRORED_REPEAT</span>
+    ,
+    <span class="constant">GL_REPEAT</span>
+    , or
+    <span class="constant">GL_MIRROR_CLAMP_TO_EDGE</span>
+    . See the discussion under
+    <span class="constant">GL_TEXTURE_WRAP_S</span>
+    .
+                        Initially,
+    <span class="constant">GL_TEXTURE_WRAP_T</span>
+    is set to
+    <span class="constant">GL_REPEAT</span>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_WRAP_R</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Sets the wrap parameter for texture coordinate
+    <math overflow="scroll"><mi mathvariant="italic">r</mi></math>
+    to either
+    <span class="constant">GL_CLAMP_TO_EDGE</span>
+    ,
+    <span class="constant">GL_CLAMP_TO_BORDER</span>
+    ,
+    <span class="constant">GL_MIRRORED_REPEAT</span>
+    ,
+    <span class="constant">GL_REPEAT</span>
+    , or
+    <span class="constant">GL_MIRROR_CLAMP_TO_EDGE</span>
+    .  See the discussion under
+    <span class="constant">GL_TEXTURE_WRAP_S</span>
+    .
+                        Initially,
+    <span class="constant">GL_TEXTURE_WRAP_R</span>
+    is set to
+    <span class="constant">GL_REPEAT</span>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">Suppose that a program attempts to sample from a texture and has set
+    <span class="constant">GL_TEXTURE_MIN_FILTER</span>
+    to one of the functions that
+    requires a mipmap. If either the dimensions of the texture images
+    currently defined (with previous calls to
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage1D.html">glCopyTexImage1D</a>
+    ,
+    or
+    <a class="crossref" href="./glCopyTexImage2D.html">glCopyTexImage2D</a>
+    )
+    do not follow the proper sequence for mipmaps (described above), or
+    there are fewer texture images defined than are needed, or the set of
+    texture images have differing numbers of texture components, then the
+    texture is considered
+    <span class="emphasis">incomplete</span>
+    .
+</div>
+    <div class="para">Linear filtering accesses the four nearest texture elements only in
+    2D textures. In 1D textures, linear filtering accesses the two nearest
+    texture elements. In 3D textures, linear filtering accesses the eight
+    nearest texture elements.</div>
+    <div class="para">
+    <a class="function" href="./glTexParameter.html">glTexParameter</a>
+    specifies the texture
+    parameters for the active texture unit, specified by calling
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    .
+    <a class="function" href="./glTexParameter.html#c-glTextureParameter">glTextureParameter</a>
+    specifies the texture parameters
+    for the texture object with ID
+    <a class="parameter" href="#param-texture">texture</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_DEPTH_STENCIL_TEXTURE_MODE</span>
+    is available only
+    if the GL version is 4.3 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_MIRROR_CLAMP_TO_EDGE</span>
+    is available only if
+    the GL version is 4.4 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glTexParameter.html">glTexParameter</a>
+    if
+    <a class="parameter" href="#param-target">target</a>
+    is
+    not one of the accepted defined values.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not one of the accepted defined
+    values.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-params">params</a>
+    should have a defined constant value (based
+    on the value of
+    <a class="parameter" href="#param-pname">pname</a>
+    ) and does not.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    glTexParameter{if}
+    or
+    glTextureParameter{if}
+    is called for a non-scalar
+    parameter (pname
+    <span class="constant">GL_TEXTURE_BORDER_COLOR</span>
+    or
+    <span class="constant">GL_TEXTURE_SWIZZLE_RGBA</span>
+    ).
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if the effective
+    target is either
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    or
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+    , and
+    <a class="parameter" href="#param-pname">pname</a>
+    is any of the sampler states.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if the effective
+    target is
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    and either of pnames
+    <span class="constant">GL_TEXTURE_WRAP_S</span>
+    or
+    <span class="constant">GL_TEXTURE_WRAP_T</span>
+    is set to either
+    <span class="constant">GL_MIRROR_CLAMP_TO_EDGE</span>
+    ,
+    <span class="constant">GL_MIRRORED_REPEAT</span>
+    or
+    <span class="constant">GL_REPEAT</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if the effective
+    target is
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    and pname
+    <span class="constant">GL_TEXTURE_MIN_FILTER</span>
+    is set to a value other than
+    <span class="constant">GL_NEAREST</span>
+    or
+    <span class="constant">GL_LINEAR</span>
+    (no
+    mipmap filtering is permitted).
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the
+    effective target is either
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    or
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+    , and pname
+    <span class="constant">GL_TEXTURE_BASE_LEVEL</span>
+    is set to a value other than
+    zero.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glTexParameter.html#c-glTextureParameter">glTextureParameter</a>
+    if texture is not the name of an
+    existing texture object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the
+    effective target is
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    and pname
+    <span class="constant">GL_TEXTURE_BASE_LEVEL</span>
+    is set to any value other than
+    zero.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_TEXTURE_BASE_LEVEL</span>
+    or
+    <span class="constant">GL_TEXTURE_MAX_LEVEL</span>
+    , and
+    <a class="parameter" href="#param-param">param</a>
+    or
+    <a class="parameter" href="#param-params">params</a>
+    is
+    negative.
+</div>
+    <div class="para"></div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetTexParameter.html">glGetTexParameter</a>
+</div>
+    <div class="para">
+    <a class="function" href="./glGetTexParameter.html#c-glGetTextureParameterfv">glGetTextureParameter</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetTexLevelParameter.html">glGetTexLevelParameter</a>
+</div>
+    <div class="para">
+    <a class="function" href="./glGetTexLevelParameter.html#c-glGetTextureLevelParameteriv">glGetTextureLevelParameter</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glTexParameter.html#c-glTexParameterIiv">glTexParameterIiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glTexParameter.html#c-glTexParameterIuiv">glTexParameterIuiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glTexParameter.html#c-glTexParameterf">glTexParameterf</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glTexParameter.html#c-glTexParameterfv">glTexParameterfv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glTexParameter.html#c-glTexParameteri">glTexParameteri</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glTexParameter.html#c-glTexParameteriv">glTexParameteriv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glTexParameter.html#c-glTextureParameterIiv">glTextureParameterIiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glTexParameter.html#c-glTextureParameterIuiv">glTextureParameterIuiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glTexParameter.html#c-glTextureParameterf">glTextureParameterf</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glTexParameter.html#c-glTextureParameterfv">glTextureParameterfv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glTexParameter.html#c-glTextureParameteri">glTextureParameteri</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glTexParameter.html#c-glTextureParameteriv">glTextureParameteriv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    ,
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage1D.html">glCopyTexImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage2D.html">glCopyTexImage2D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage1D.html">glCopyTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage2D.html">glCopyTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage3D.html">glCopyTexSubImage3D</a>
+    ,
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    ,
+    <a class="crossref" href="./glSamplerParameter.html">glSamplerParameter</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage1D.html">glTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage3D.html">glTexSubImage3D</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2012-2014
+            Khronos Group. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glTexParameter</div>
+        <div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">123, 124</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">149, 150</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">38, 39</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">37, 38</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">37, 38</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">106, 107</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">37, 38</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">114, 115</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">141, 142</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">123, 124</span>
+</div>
+        <div class="sample-key">glTexParameterf</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6_multi.py">tests/nehe6_multi.py</a>
+    Lines: <span class="sample-lines">86, 89, 96, 99</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6_convolve.py">tests/nehe6_convolve.py</a>
+    Lines: <span class="sample-lines">152, 153</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6_timer.py">tests/nehe6_timer.py</a>
+    Lines: <span class="sample-lines">98, 99</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/multitexture_1.py">tests/multitexture_1.py</a>
+    Lines: <span class="sample-lines">51, 52, 56, 57</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6_compressed.py">tests/nehe6_compressed.py</a>
+    Lines: <span class="sample-lines">56, 57</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6.py">tests/nehe6.py</a>
+    Lines: <span class="sample-lines">80, 81</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/dek_texturesurf.py">tests/dek_texturesurf.py</a>
+    Lines: <span class="sample-lines">48, 49, 50, 51</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/shaderProg/textureShader.py">PyOpenGL-Demo/proesch/shaderProg/textureShader.py</a>
+    Lines: <span class="sample-lines">127, 128, 129, 130</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/simpleTexture/texturedQuad.py">PyOpenGL-Demo/proesch/simpleTexture/texturedQuad.py</a>
+    Lines: <span class="sample-lines">75, 76, 77, 78</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson23.py">PyOpenGL-Demo/NeHe/lesson23.py</a>
+    Lines: <span class="sample-lines">42, 43, 44, 45, 46, 47</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson6.py">PyOpenGL-Demo/NeHe/lesson6.py</a>
+    Lines: <span class="sample-lines">74, 75, 76, 77, 78, 79</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson42.py">PyOpenGL-Demo/NeHe/lesson42.py</a>
+    Lines: <span class="sample-lines">160</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson6-multi.py">PyOpenGL-Demo/NeHe/lesson6-multi.py</a>
+    Lines: <span class="sample-lines">75, 76, 77, 78, 79, 80</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson18.py">PyOpenGL-Demo/NeHe/lesson18.py</a>
+    Lines: <span class="sample-lines">77, 78, 79, 80, 81, 82</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson16.py">PyOpenGL-Demo/NeHe/lesson16.py</a>
+    Lines: <span class="sample-lines">39, 40, 41, 42, 43, 44</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson19.py">PyOpenGL-Demo/NeHe/lesson19.py</a>
+    Lines: <span class="sample-lines">78, 79, 80, 81, 82, 83</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson26.py">PyOpenGL-Demo/NeHe/lesson26.py</a>
+    Lines: <span class="sample-lines">44, 45, 46, 47, 48, 49</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson43/glFreeType.py">PyOpenGL-Demo/NeHe/lesson43/glFreeType.py</a>
+    Lines: <span class="sample-lines">102, 103</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/tile.py">PyOpenGL-Demo/dek/tile.py</a>
+    Lines: <span class="sample-lines">64, 65, 66, 67</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/texturesurf.py">PyOpenGL-Demo/dek/texturesurf.py</a>
+    Lines: <span class="sample-lines">81, 82, 83, 84</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglPygame.py">renderers/openglPygame.py</a>
+    Lines: <span class="sample-lines">164, 165, 283, 284</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglGlut.py">renderers/openglGlut.py</a>
+    Lines: <span class="sample-lines">218, 219, 220, 221</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/openglgraphics.py">system/openglgraphics.py</a>
+    Lines: <span class="sample-lines">229, 230, 231, 232, 335, 336</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/data.py">pyggel/data.py</a>
+    Lines: <span class="sample-lines">160</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/image.py">pygl2d/image.py</a>
+    Lines: <span class="sample-lines">72, 73, 80, 81, 83, 84, 89, 90, 92, 93</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py</a>
+    Lines: <span class="sample-lines">413, 414</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">902, 903</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Label.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">205, 206</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Button.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">257, 258</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/TexPlane.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/TexPlane.py</a>
+    Lines: <span class="sample-lines">137, 138</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MH/OpenGL/3dFolding.py">Sketches/MH/OpenGL/3dFolding.py</a>
+    Lines: <span class="sample-lines">189, 190</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Utils/Particles3D.py">Sketches/CL/Topology3D/Utils/Particles3D.py</a>
+    Lines: <span class="sample-lines">154, 155</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Experiments/Spheres.py">Sketches/CL/Topology3D/Experiments/Spheres.py</a>
+    Lines: <span class="sample-lines">106, 107</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">880, 881</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Label.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">205, 206</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Button.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">268, 269</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/TexPlane.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/TexPlane.py</a>
+    Lines: <span class="sample-lines">137, 138</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Display3D.py">Sketches/CL/Topology3D/THF/Sketches/Display3D.py</a>
+    Lines: <span class="sample-lines">447, 448</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Button3D.py">Sketches/CL/Topology3D/THF/Sketches/Button3D.py</a>
+    Lines: <span class="sample-lines">135, 136</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/TexPlane.py">Sketches/CL/Topology3D/THF/Sketches/TexPlane.py</a>
+    Lines: <span class="sample-lines">234, 235</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py">Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">493, 494</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/Button.py">Sketches/CL/Topology3D/THF/Sketches/playground/Button.py</a>
+    Lines: <span class="sample-lines">171, 172</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/TexPlane.py">Sketches/CL/Topology3D/THF/Sketches/playground/TexPlane.py</a>
+    Lines: <span class="sample-lines">97, 98</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Display3D.py">Sketches/THF/3D/Display3D.py</a>
+    Lines: <span class="sample-lines">447, 448</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Button3D.py">Sketches/THF/3D/Button3D.py</a>
+    Lines: <span class="sample-lines">135, 136</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/TexPlane.py">Sketches/THF/3D/TexPlane.py</a>
+    Lines: <span class="sample-lines">234, 235</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/Display3D.py">Sketches/THF/3D/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">493, 494</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/Button.py">Sketches/THF/3D/playground/Button.py</a>
+    Lines: <span class="sample-lines">171, 172</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/TexPlane.py">Sketches/THF/3D/playground/TexPlane.py</a>
+    Lines: <span class="sample-lines">97, 98</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">879, 880</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Label.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">205, 206</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Button.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">257, 258</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/TexPlane.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/TexPlane.py</a>
+    Lines: <span class="sample-lines">137, 138</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py">Code/Python/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py</a>
+    Lines: <span class="sample-lines">413, 414</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">902, 903</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Label.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Label.py</a>
+    Lines: <span class="sample-lines">205, 206</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Button.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/Button.py</a>
+    Lines: <span class="sample-lines">257, 258</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/TexPlane.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/TexPlane.py</a>
+    Lines: <span class="sample-lines">137, 138</span>
+</div>
+        <div class="sample-key">glTexParameteri</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe8.py">tests/nehe8.py</a>
+    Lines: <span class="sample-lines">134, 135, 142, 143, 150, 151</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_2.py">tests/shadow_2.py</a>
+    Lines: <span class="sample-lines">121, 122, 123, 124</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe7.py">tests/nehe7.py</a>
+    Lines: <span class="sample-lines">101, 102, 109, 110, 117, 118</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_1.py">tests/shadow_1.py</a>
+    Lines: <span class="sample-lines">538, 539, 540, 541, 651, 661, 669, 687</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/texture.py">OpenGLContext/texture.py</a>
+    Lines: <span class="sample-lines">250, 251, 252, 253, 254</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/imagetexture.py">OpenGLContext/scenegraph/imagetexture.py</a>
+    Lines: <span class="sample-lines">78, 80, 82, 84, 85, 86</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson45.py">PyOpenGL-Demo/NeHe/lesson45.py</a>
+    Lines: <span class="sample-lines">195, 196</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson42.py">PyOpenGL-Demo/NeHe/lesson42.py</a>
+    Lines: <span class="sample-lines">158, 159, 161</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson18.py">PyOpenGL-Demo/NeHe/lesson18.py</a>
+    Lines: <span class="sample-lines">87, 88, 93, 94</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson41.py">PyOpenGL-Demo/NeHe/lesson41.py</a>
+    Lines: <span class="sample-lines">147, 148</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/lesson44.py">PyOpenGL-Demo/NeHe/lesson44/lesson44.py</a>
+    Lines: <span class="sample-lines">118, 119</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Gratings.py">VisionEgg/Gratings.py</a>
+    Lines: <span class="sample-lines">298, 299, 300, 301, 617, 618, 619, 620</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/SphereMap.py">VisionEgg/SphereMap.py</a>
+    Lines: <span class="sample-lines">717, 718, 719, 720, 796, 1058, 1059, 1060, 1061</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Textures.py">VisionEgg/Textures.py</a>
+    Lines: <span class="sample-lines">495, 500, 506, 512, 518</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/texture.py">pymt/texture.py</a>
+    Lines: <span class="sample-lines">17, 168, 179, 190, 191, 246</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/geometry.py">pyggel/geometry.py</a>
+    Lines: <span class="sample-lines">263, 264, 265</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/data.py">pyggel/data.py</a>
+    Lines: <span class="sample-lines">150, 151, 155, 156, 157, 168, 169, 173, 174, 175, 177, 178, 179</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/image.py">pygl2d/image.py</a>
+    Lines: <span class="sample-lines">95, 96</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Experiments/Cubes.py">Sketches/CL/Topology3D/Experiments/Cubes.py</a>
+    Lines: <span class="sample-lines">156, 157, 160, 161, 166, 167</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/textures.py">wobjects/textures.py</a>
+    Lines: <span class="sample-lines">112, 113, 114, 115, 122, 123, 124, 139</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/baseTexture.py">core/baseTexture.py</a>
+    Lines: <span class="sample-lines">572, 573, 574</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/line.py">core/line.py</a>
+    Lines: <span class="sample-lines">68, 69</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/text/text_base.py">text/text_base.py</a>
+    Lines: <span class="sample-lines">82, 83, 84, 85</span>
+</div>
+        <div class="sample-key">glTexParameteriv</div>
+        <div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Textures.py">VisionEgg/Textures.py</a>
+    Lines: <span class="sample-lines">524</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

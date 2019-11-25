@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetProgramInfoLog : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetProgramInfoLog</h1>
+</header>
+<main class="content">
+    <section class="purpose">Returns the information log for a program object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetProgramInfoLog"></a>
+    <span class="c-function">glGetProgramInfoLog</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-maxLength" class="parameter">maxLength</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei *(
+            <a href="#param-length" class="parameter">length</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLchar *(
+            <a href="#param-infoLog" class="parameter">infoLog</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetProgramInfoLog"></a>
+    <span class="py-function">glGetProgramInfoLog</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-length" class="parameter">length</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-infoLog" class="parameter">infoLog</a>
+    </span>
+</span> )
+    <pre class="pydoc">Retrieve the shader program's error messages as a Python string
+
+    returns string which is '' if no message
+    </pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">Specifies the program object whose information
+                    log is to be queried.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-maxLength"></a>
+                        maxLength
+                    </th>
+                    <td>
+    <div class="para">Specifies the size of the character buffer for
+                    storing the returned information log.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-length"></a>
+                        length
+                    </th>
+                    <td>
+    <div class="para">Returns the length of the string returned in
+    <a class="parameter" href="#param-infoLog">infoLog</a>
+    (excluding the null
+                    terminator).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-infoLog"></a>
+                        infoLog
+                    </th>
+                    <td>
+    <div class="para">Specifies an array of characters that is used
+                    to return the information log.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetProgramInfoLog.html">glGetProgramInfoLog</a>
+    returns the
+        information log for the specified program object. The
+        information log for a program object is modified when the
+        program object is linked or validated. The string that is
+        returned will be null terminated.
+</div>
+    <div class="para">
+    <a class="function" href="./glGetProgramInfoLog.html">glGetProgramInfoLog</a>
+    returns in
+    <a class="parameter" href="#param-infoLog">infoLog</a>
+    as much of the information log as
+        it can, up to a maximum of
+    <a class="parameter" href="#param-maxLength">maxLength</a>
+    characters. The number of characters actually returned,
+        excluding the null termination character, is specified by
+    <a class="parameter" href="#param-length">length</a>
+    . If the length of the returned
+        string is not required, a value of
+    <span class="constant">NULL</span>
+    can
+        be passed in the
+    <a class="parameter" href="#param-length">length</a>
+    argument. The
+        size of the buffer required to store the returned information
+        log can be obtained by calling
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    with the value
+    <span class="constant">GL_INFO_LOG_LENGTH</span>
+    .
+</div>
+    <div class="para">The information log for a program object is either an
+        empty string, or a string containing information about the last
+        link operation, or a string containing information about the
+        last validation operation. It may contain diagnostic messages,
+        warning messages, and other information. When a program object
+        is created, its information log will be a string of length
+        0.</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">The information log for a program object is the OpenGL
+        implementer's primary mechanism for conveying information about
+        linking and validating. Therefore, the information log can be
+        helpful to application developers during the development
+        process, even when these operations are successful. Application
+        developers should not expect different OpenGL implementations to
+        produce identical information logs.</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a value generated by
+        OpenGL.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a program object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-maxLength">maxLength</a>
+    is less than 0.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    with argument
+    <span class="constant">GL_INFO_LOG_LENGTH</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsProgram.html">glIsProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetProgramInfoLog.html">glGetProgramInfoLog</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glCompileShader.html">glCompileShader</a>
+    ,
+    <a class="crossref" href="./glGetShaderInfoLog.html">glGetShaderInfoLog</a>
+    ,
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    ,
+    <a class="crossref" href="./glValidateProgram.html">glValidateProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2005 3Dlabs Inc. Ltd.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glGetProgramInfoLog</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/shaders.py">OpenGLContext/scenegraph/shaders.py</a>
+    Lines: <span class="sample-lines">509, 517, 570</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/shader.py">pymt/graphx/shader.py</a>
+    Lines: <span class="sample-lines">13, 91</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">108</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">130</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">91</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">99</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">122</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">108</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

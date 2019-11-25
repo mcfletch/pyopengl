@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluNurbsSurface : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluNurbsSurface</h1>
+</header>
+<main class="content">
+    <section class="purpose">define the shape of a NURBS surface</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluNurbsSurface"></a>
+    <span class="c-function">gluNurbsSurface</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUnurbs* (
+            <a href="#param-nurb" class="parameter">nurb</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-sKnotCount" class="parameter">sKnotCount</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat* (
+            <a href="#param-sKnots" class="parameter">sKnots</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-tKnotCount" class="parameter">tKnotCount</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat* (
+            <a href="#param-tKnots" class="parameter">tKnots</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-sStride" class="parameter">sStride</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-tStride" class="parameter">tStride</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat* (
+            <a href="#param-control" class="parameter">control</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-sOrder" class="parameter">sOrder</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-tOrder" class="parameter">tOrder</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluNurbsSurface"></a>
+    <span class="py-function">gluNurbsSurface</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-nurb" class="parameter">nurb</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-sKnotCount" class="parameter">sKnotCount</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-sKnots" class="parameter">sKnots</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-tKnotCount" class="parameter">tKnotCount</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-tKnots" class="parameter">tKnots</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-sStride" class="parameter">sStride</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-tStride" class="parameter">tStride</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-control" class="parameter">control</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-sOrder" class="parameter">sOrder</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-tOrder" class="parameter">tOrder</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+    </span>
+</span> )
+    <pre class="pydoc">Pythonic version of gluNurbsSurface
+
+    Calculates knotCount, stride, and order automatically
+    </pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-nurb"></a>
+                        nurb
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the NURBS object (created with
+    <a class="crossref" href="./gluNewNurbsRenderer.html">gluNewNurbsRenderer</a>
+    ).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sKnotCount"></a>
+                        sKnotCount
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of knots in the parametric
+    <span class="emphasis">u</span>
+    direction.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sKnots"></a>
+                        sKnots
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies an array of
+    <a class="parameter" href="#param-sKnotCount">sKnotCount</a>
+    nondecreasing knot values in the parametric
+    <span class="emphasis">u</span>
+    direction.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-tKnotCount"></a>
+                        tKnotCount
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of knots in the parametric
+    <span class="emphasis">v</span>
+    direction.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-tKnots"></a>
+                        tKnots
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies an array of
+    <a class="parameter" href="#param-tKnotCount">tKnotCount</a>
+    nondecreasing knot values in the parametric
+    <span class="emphasis">v</span>
+    direction.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sStride"></a>
+                        sStride
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the offset (as a number of single-precision floating-point values)
+                    between successive control points in the parametric
+    <span class="emphasis">u</span>
+    direction
+                    in
+    <a class="parameter" href="#param-control">control</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-tStride"></a>
+                        tStride
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the offset (in single-precision floating-point values)
+                    between successive control points in the parametric
+    <span class="emphasis">v</span>
+    direction
+                    in
+    <a class="parameter" href="#param-control">control</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-control"></a>
+                        control
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies an array containing control points for the NURBS surface.
+                    The offsets between successive control points in the parametric
+    <span class="emphasis">u</span>
+    and
+    <span class="emphasis">v</span>
+    directions are given by
+    <a class="parameter" href="#param-sStride">sStride</a>
+    and
+    <a class="parameter" href="#param-tStride">tStride</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sOrder"></a>
+                        sOrder
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the order of the NURBS surface in the parametric
+    <span class="emphasis">u</span>
+    direction. The order is one more than the degree, hence
+                    a surface that is cubic in
+    <span class="emphasis">u</span>
+    has a
+    <span class="emphasis">u</span>
+    order of 4.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-tOrder"></a>
+                        tOrder
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the order of the NURBS surface in the parametric
+    <span class="emphasis">v</span>
+    direction. The order is one more than the degree, hence
+                    a surface that is cubic in
+    <span class="emphasis">v</span>
+    has a
+    <span class="emphasis">v</span>
+    order of 4.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies type of the surface.
+    <a class="parameter" href="#param-type">type</a>
+    can be any of the valid
+                    two-dimensional evaluator types (such as
+    <span class="constant">GLU_MAP2_VERTEX_3</span>
+    or
+    <span class="constant">GLU_MAP2_COLOR_4</span>
+    ).
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            Use
+    <a class="function" href="./gluNurbsSurface.html">gluNurbsSurface</a>
+    within a NURBS (Non-Uniform Rational B-Spline) surface
+            definition to describe the shape of a NURBS surface (before
+            any trimming). To mark the beginning of
+            a NURBS surface definition, use the
+    <a class="crossref" href="./gluBeginSurface.html">gluBeginSurface</a>
+    command.
+            To mark the end of a NURBS surface definition, use the
+    <a class="crossref" href="./gluBeginSurface.html#c-gluEndSurface">gluEndSurface</a>
+    command. Call
+    <a class="function" href="./gluNurbsSurface.html">gluNurbsSurface</a>
+    within a NURBS
+            surface definition only.
+</div>
+    <div class="para">
+            Positional, texture, and color coordinates are associated
+            with a surface by presenting each as a separate
+    <a class="function" href="./gluNurbsSurface.html">gluNurbsSurface</a>
+    between a
+    <a class="crossref" href="./gluBeginSurface.html">gluBeginSurface</a>
+    /
+    <a class="crossref" href="./gluBeginSurface.html#c-gluEndSurface">gluEndSurface</a>
+    pair. No more than
+            one call to
+    <a class="function" href="./gluNurbsSurface.html">gluNurbsSurface</a>
+    for each of color, position, and texture
+            data can be made within a single
+    <a class="crossref" href="./gluBeginSurface.html">gluBeginSurface</a>
+    /
+    <a class="crossref" href="./gluBeginSurface.html#c-gluEndSurface">gluEndSurface</a>
+    pair. Exactly one call must be made to describe the position of the
+            surface (a
+    <a class="parameter" href="#param-type">type</a>
+    of
+    <span class="constant">GLU_MAP2_VERTEX_3</span>
+    or
+    <span class="constant">GLU_MAP2_VERTEX_4</span>
+    ).
+</div>
+    <div class="para">
+            A NURBS surface can be trimmed by using the commands
+    <a class="crossref" href="./gluNurbsCurve.html">gluNurbsCurve</a>
+    and
+    <a class="crossref" href="./gluPwlCurve.html">gluPwlCurve</a>
+    between calls to
+    <a class="crossref" href="./gluBeginTrim.html">gluBeginTrim</a>
+    and
+    <a class="crossref" href="./gluBeginTrim.html#c-gluEndTrim">gluEndTrim</a>
+    .
+</div>
+    <div class="para">
+            Note that a
+    <a class="function" href="./gluNurbsSurface.html">gluNurbsSurface</a>
+    with
+    <a class="parameter" href="#param-sKnotCount">sKnotCount</a>
+    knots in the
+    <span class="emphasis">u</span>
+    direction
+            and
+    <a class="parameter" href="#param-tKnotCount">tKnotCount</a>
+    knots in the
+    <span class="emphasis">v</span>
+    direction with orders
+    <a class="parameter" href="#param-sOrder">sOrder</a>
+    and
+    <a class="parameter" href="#param-tOrder">tOrder</a>
+    must have
+            (
+    <a class="parameter" href="#param-sKnotCount">sKnotCount</a>
+    -
+    <a class="parameter" href="#param-sOrder">sOrder</a>
+    )
+    <math><mi mathvariant="italic">times</mi></math>
+    (
+    <a class="parameter" href="#param-tKnotCount">tKnotCount</a>
+    -
+    <a class="parameter" href="#param-tOrder">tOrder</a>
+    ) control points.
+</div>
+    </section><section class="section" id="example">
+    <h2 class="title">Example</h2>
+    <div class="para">
+            The following commands render a textured NURBS surface with normals;
+            the texture coordinates and normals are also NURBS surfaces:
+    <div class="programlisting">
+gluBeginSurface(nobj);
+   gluNurbsSurface(nobj, ..., GL_MAP2_TEXTURE_COORD_2);
+   gluNurbsSurface(nobj, ..., GL_MAP2_NORMAL);
+   gluNurbsSurface(nobj, ..., GL_MAP2_VERTEX_4);
+gluEndSurface(nobj);
+            </div>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluBeginSurface.html">gluBeginSurface</a>
+    ,
+    <a class="crossref" href="./gluBeginTrim.html">gluBeginTrim</a>
+    ,
+    <a class="crossref" href="./gluNewNurbsRenderer.html">gluNewNurbsRenderer</a>
+    ,
+    <a class="crossref" href="./gluNurbsCurve.html">gluNurbsCurve</a>
+    ,
+    <a class="crossref" href="./gluPwlCurve.html">gluPwlCurve</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluNurbsSurface</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_trim.py">tests/redbook_trim.py</a>
+    Lines: <span class="sample-lines">104</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_surface.py">tests/redbook_surface.py</a>
+    Lines: <span class="sample-lines">77</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_surface_cb.py">tests/redbook_surface_cb.py</a>
+    Lines: <span class="sample-lines">96</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/nurbs.py">OpenGLContext/scenegraph/nurbs.py</a>
+    Lines: <span class="sample-lines">194, 201</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">117</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/molehill.py">PyOpenGL-Demo/GLUT/molehill.py</a>
+    Lines: <span class="sample-lines">149, 150, 156, 157, 163, 164, 170, 171</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glMap1 : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glMap1</h1>
+</header>
+<main class="content">
+    <section class="purpose">define a one-dimensional evaluator</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glMap1"></a>
+    <span class="c-function">glMap1</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glMap1d"></a>
+    <span class="c-function">glMap1d</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-u1" class="parameter">u1</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-u2" class="parameter">u2</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-stride" class="parameter">stride</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-order" class="parameter">order</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLdouble * (
+            <a href="#param-points" class="parameter">points</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glMap1d"></a>
+    <span class="py-function">glMap1d</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-u1" class="parameter">u1</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-u2" class="parameter">u2</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-points" class="parameter">points</a>
+    </span>
+</span> )
+    <pre class="pydoc">glMap1(target, u1, u2, points[][][]) -&gt; None
+
+        This is a completely non-standard signature which doesn't allow for most
+        of the funky uses with strides and the like, but it has been like this for
+        a very long time...
+        </pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glMap1f"></a>
+    <span class="c-function">glMap1f</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-u1" class="parameter">u1</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-u2" class="parameter">u2</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-stride" class="parameter">stride</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-order" class="parameter">order</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLfloat * (
+            <a href="#param-points" class="parameter">points</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glMap1f"></a>
+    <span class="py-function">glMap1f</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-u1" class="parameter">u1</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-u2" class="parameter">u2</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-points" class="parameter">points</a>
+    </span>
+</span> )
+    <pre class="pydoc">glMap1(target, u1, u2, points[][][]) -&gt; None
+
+        This is a completely non-standard signature which doesn't allow for most
+        of the funky uses with strides and the like, but it has been like this for
+        a very long time...
+        </pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the kind of values that are generated by the evaluator.
+                    Symbolic constants
+    <span class="constant">GL_MAP1_VERTEX_3</span>
+    ,
+    <span class="constant">GL_MAP1_VERTEX_4</span>
+    ,
+    <span class="constant">GL_MAP1_INDEX</span>
+    ,
+    <span class="constant">GL_MAP1_COLOR_4</span>
+    ,
+    <span class="constant">GL_MAP1_NORMAL</span>
+    ,
+    <span class="constant">GL_MAP1_TEXTURE_COORD_1</span>
+    ,
+    <span class="constant">GL_MAP1_TEXTURE_COORD_2</span>
+    ,
+    <span class="constant">GL_MAP1_TEXTURE_COORD_3</span>
+    , and
+    <span class="constant">GL_MAP1_TEXTURE_COORD_4</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-u1"></a><a name="param-u2"></a>
+                        u1, u2
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify a linear mapping of
+    <math><mi mathvariant="italic">u</mi></math>
+    ,
+                    as presented to
+    <a class="crossref" href="./glEvalCoord.html#c-glEvalCoord1f">glEvalCoord1</a>
+    ,
+                    to
+    <math>
+                        <mover><mi mathvariant="italic">u</mi><mo></mo></mover>
+                    </math>
+    ,
+                    the variable that is evaluated by the equations specified by this command.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-stride"></a>
+                        stride
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of floats or doubles between
+                    the beginning of one control point and the beginning of the next one
+                    in the data structure referenced in
+    <a class="parameter" href="#param-points">points</a>
+    .
+                    This allows control points to be embedded in arbitrary data structures.
+                    The only constraint is that the values for a particular control point
+                    must occupy contiguous memory locations.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-order"></a>
+                        order
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of control points.
+                    Must be positive.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-points"></a>
+                        points
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to the array of control points.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            Evaluators provide a way to use polynomial or rational polynomial mapping
+            to produce vertices,
+            normals,
+            texture coordinates,
+            and colors.
+            The values produced by an evaluator are sent to further stages
+            of GL processing just as if they had been presented using
+    <a class="crossref" href="./glVertex.html">glVertex</a>
+    ,
+    <a class="crossref" href="./glNormal.html">glNormal</a>
+    ,
+    <a class="crossref" href="./glTexCoord.html">glTexCoord</a>
+    , and
+    <a class="crossref" href="./glColor.html">glColor</a>
+    commands,
+            except that the generated values do not update the current normal,
+            texture coordinates,
+            or color.
+</div>
+    <div class="para">
+            All polynomial or rational polynomial splines of any degree
+            (up to the maximum degree supported by the GL implementation)
+            can be described using evaluators.
+            These include almost all splines used in computer graphics: B-splines,
+            Bezier curves, Hermite splines, and so on.
+        </div>
+    <div class="para">
+            Evaluators define curves based on Bernstein polynomials.
+            Define
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">p</mi>
+                    <mo></mo>
+                    <mfenced open="(" close=")">
+                        <mover><mi mathvariant="italic">u</mi><mo></mo></mover>
+                    </mfenced>
+                </mrow>
+            </math>
+    as
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mrow>
+                        <mi mathvariant="italic">p</mi>
+                        <mo></mo>
+                        <mfenced open="(" close=")">
+                            <mover><mi mathvariant="italic">u</mi><mo></mo></mover>
+                        </mfenced>
+                    </mrow>
+                    <mo>=</mo>
+                    <mrow>
+                        <munderover>
+                            <mo></mo>
+                            <mrow>
+                                <mi mathvariant="italic">i</mi>
+                                <mo>=</mo>
+                                <mn>0</mn>
+                            </mrow>
+                            <mi mathvariant="italic">n</mi>
+                        </munderover>
+                        <mrow>
+                            <mrow>
+                                <msup><mfenced open="" close="">
+                                    <msub><mi mathvariant="italic">B</mi>
+                                    <mi mathvariant="italic">i</mi>
+                                    </msub>
+                                </mfenced>
+                                <mi mathvariant="italic">n</mi>
+                                </msup>
+                                <mo></mo>
+                                <mfenced open="(" close=")">
+                                    <mover><mi mathvariant="italic">u</mi><mo></mo></mover>
+                                </mfenced>
+                            </mrow>
+                            <mo></mo>
+                            <msub><mi mathvariant="italic">R</mi>
+                            <mi mathvariant="italic">i</mi>
+                            </msub>
+                        </mrow>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+        </div>
+    <div class="para">
+            where
+    <math>
+                <msub><mi mathvariant="italic">R</mi>
+                <mi mathvariant="italic">i</mi>
+                </msub>
+            </math>
+    is a control point and
+    <math>
+                <mrow>
+                    <msup><mfenced open="" close="">
+                        <msub><mi mathvariant="italic">B</mi>
+                        <mi mathvariant="italic">i</mi>
+                        </msub>
+                    </mfenced>
+                    <mi mathvariant="italic">n</mi>
+                    </msup>
+                    <mo></mo>
+                    <mfenced open="(" close=")">
+                        <mover><mi mathvariant="italic">u</mi><mo></mo></mover>
+                    </mfenced>
+                </mrow>
+            </math>
+    is the
+    <math><mi mathvariant="italic">i</mi></math>
+    th
+            Bernstein polynomial of degree
+    <math><mi mathvariant="italic">n</mi></math>
+    (
+    <a class="parameter" href="#param-order">order</a>
+    =
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">n</mi>
+                    <mo>+</mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    ):
+</div>
+    <div class="para">
+    <math>
+                <mrow>
+                    <mrow>
+                        <msup><mfenced open="" close="">
+                            <msub><mi mathvariant="italic">B</mi>
+                            <mi mathvariant="italic">i</mi>
+                            </msub>
+                        </mfenced>
+                        <mi mathvariant="italic">n</mi>
+                        </msup>
+                        <mo></mo>
+                        <mfenced open="(" close=")">
+                            <mover><mi mathvariant="italic">u</mi><mo></mo></mover>
+                        </mfenced>
+                    </mrow>
+                    <mo>=</mo>
+                    <mrow>
+                        <mfenced open="(" close=")">
+                            <mfenced open="" close="">
+                                <mtable>
+                                    <mtr><mtd>
+                                        <mi mathvariant="italic">n</mi>
+                                    </mtd></mtr>
+                                    <mtr><mtd>
+                                        <mi mathvariant="italic">i</mi>
+                                    </mtd></mtr>
+                                </mtable>
+                            </mfenced>
+                        </mfenced>
+                        <mo></mo>
+                        <msup><mfenced open="" close="">
+                            <mover><mi mathvariant="italic">u</mi><mo></mo></mover>
+                        </mfenced>
+                        <mi mathvariant="italic">i</mi>
+                        </msup>
+                        <mo></mo>
+                        <mfenced open="" close="">
+                            <msup><mfenced open="(" close=")">
+                                <mrow>
+                                    <mn>1</mn>
+                                    <mo>-</mo>
+                                    <mover><mi mathvariant="italic">u</mi><mo></mo></mover>
+                                </mrow>
+                            </mfenced>
+                            <mfenced open="" close="">
+                                <mrow>
+                                    <mi mathvariant="italic">n</mi>
+                                    <mo>-</mo>
+                                    <mi mathvariant="italic">i</mi>
+                                </mrow>
+                            </mfenced>
+                            </msup>
+                        </mfenced>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+    <div class="para">
+            Recall that
+        </div>
+    <div class="para">
+    <math>
+                <mrow>
+                    <msup><mn>0</mn>
+                    <mn>0</mn>
+                    </msup>
+                    <mo>==</mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    and
+    <math>
+                <mrow>
+                    <mfenced open="(" close=")">
+                        <mfenced open="" close="">
+                            <mtable>
+                                <mtr><mtd>
+                                    <mi mathvariant="italic">n</mi>
+                                </mtd></mtr>
+                                <mtr><mtd>
+                                    <mn>0</mn>
+                                </mtd></mtr>
+                            </mtable>
+                        </mfenced>
+                    </mfenced>
+                    <mo>==</mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+</div>
+    <div class="para">
+    <a class="function" href="./glMap1.html">glMap1</a>
+    is used to define the basis and to specify what kind of values
+            are produced.
+            Once defined,
+            a map can be enabled and disabled by calling
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="crossref" href="./glEnable.html#c-glDisable">glDisable</a>
+    with the map name, one of the nine predefined values for
+    <a class="parameter" href="#param-target">target</a>
+    described below.
+    <a class="crossref" href="./glEvalCoord.html#c-glEvalCoord1f">glEvalCoord1</a>
+    evaluates the one-dimensional maps that are enabled.
+            When
+    <a class="crossref" href="./glEvalCoord.html#c-glEvalCoord1f">glEvalCoord1</a>
+    presents a value
+    <math><mi mathvariant="italic">u</mi></math>
+    ,
+            the Bernstein functions are evaluated using
+    <math>
+                <mover><mi mathvariant="italic">u</mi><mo></mo></mover>
+            </math>
+    ,
+            where
+    <math>
+                <mrow>
+                    <mover><mi mathvariant="italic">u</mi><mo></mo></mover>
+                    <mo>=</mo>
+                    <mfrac>
+                        <mfenced open="" close="">
+                            <mrow>
+                                <mi mathvariant="italic">u</mi>
+                                <mo>-</mo>
+                                <mi mathvariant="italic">u1</mi>
+                            </mrow>
+                        </mfenced>
+                        <mfenced open="" close="">
+                            <mrow>
+                                <mi mathvariant="italic">u2</mi>
+                                <mo>-</mo>
+                                <mi mathvariant="italic">u1</mi>
+                            </mrow>
+                        </mfenced>
+                    </mfrac>
+                </mrow>
+            </math>
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-target">target</a>
+    is a symbolic constant that indicates what kind of control points
+            are provided in
+    <a class="parameter" href="#param-points">points</a>
+    ,
+            and what output is generated when the map is evaluated.
+            It can assume one of nine predefined values:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAP1_VERTEX_3</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each control point is three floating-point values representing
+    <math><mi mathvariant="italic">x</mi></math>
+    ,
+    <math><mi mathvariant="italic">y</mi></math>
+    ,
+                        and
+    <math><mi mathvariant="italic">z</mi></math>
+    .
+                        Internal
+    <a class="crossref" href="./glVertex.html#c-glVertex3iv">glVertex3</a>
+    commands are generated when the map is evaluated.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAP1_VERTEX_4</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each control point is four floating-point values representing
+    <math><mi mathvariant="italic">x</mi></math>
+    ,
+    <math><mi mathvariant="italic">y</mi></math>
+    ,
+    <math><mi mathvariant="italic">z</mi></math>
+    ,
+                        and
+    <math><mi mathvariant="italic">w</mi></math>
+    .
+                        Internal
+    <a class="crossref" href="./glVertex.html#c-glVertex4iv">glVertex4</a>
+    commands are generated when the map is evaluated.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAP1_INDEX</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each control point is a single floating-point value representing a color index.
+                        Internal
+    <a class="crossref" href="./glIndex.html">glIndex</a>
+    commands are generated when the map is evaluated
+                        but the current index is not updated with the value of these
+    <a class="crossref" href="./glIndex.html">glIndex</a>
+    commands.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAP1_COLOR_4</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each control point is four floating-point values representing
+                        red, green, blue, and alpha.
+                        Internal
+    <a class="crossref" href="./glColor.html#c-glColor4fv">glColor4</a>
+    commands are generated when the map is
+                        evaluated but the current color is not updated with the value of these
+    <a class="crossref" href="./glColor.html#c-glColor4fv">glColor4</a>
+    commands.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAP1_NORMAL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each control point is three floating-point values representing
+                        the
+    <math><mi mathvariant="italic">x</mi></math>
+    ,
+    <math><mi mathvariant="italic">y</mi></math>
+    ,
+                        and
+    <math><mi mathvariant="italic">z</mi></math>
+    components of a normal vector.
+                        Internal
+    <a class="crossref" href="./glNormal.html">glNormal</a>
+    commands are generated when the map is
+                        evaluated but the current normal is not updated with the value of
+                        these
+    <a class="crossref" href="./glNormal.html">glNormal</a>
+    commands.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAP1_TEXTURE_COORD_1</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each control point is a single floating-point value representing
+                        the
+    <math><mi mathvariant="italic">s</mi></math>
+    texture coordinate.
+                        Internal
+    <a class="crossref" href="./glTexCoord.html#c-glTexCoord1i">glTexCoord1</a>
+    commands are generated when the map is
+                        evaluated but the current texture coordinates are not updated with the value
+                        of these
+    <a class="crossref" href="./glTexCoord.html">glTexCoord</a>
+    commands.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAP1_TEXTURE_COORD_2</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each control point is two floating-point values representing
+                        the
+    <math><mi mathvariant="italic">s</mi></math>
+    and
+    <math><mi mathvariant="italic">t</mi></math>
+    texture coordinates.
+                        Internal
+    <a class="crossref" href="./glTexCoord.html#c-glTexCoord2sv">glTexCoord2</a>
+    commands are generated when the map is
+                        evaluated but the current texture coordinates are not updated with the value
+                        of these
+    <a class="crossref" href="./glTexCoord.html">glTexCoord</a>
+    commands.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAP1_TEXTURE_COORD_3</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each control point is three floating-point values representing
+                        the
+    <math><mi mathvariant="italic">s</mi></math>
+    ,
+    <math><mi mathvariant="italic">t</mi></math>
+    ,
+                        and
+    <math><mi mathvariant="italic">r</mi></math>
+    texture coordinates.
+                        Internal
+    <a class="crossref" href="./glTexCoord.html#c-glTexCoord3s">glTexCoord3</a>
+    commands are generated when the map is
+                        evaluated but the current texture coordinates are not updated with the value
+                        of these
+    <a class="crossref" href="./glTexCoord.html">glTexCoord</a>
+    commands.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAP1_TEXTURE_COORD_4</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each control point is four floating-point values representing
+                        the
+    <math><mi mathvariant="italic">s</mi></math>
+    ,
+    <math><mi mathvariant="italic">t</mi></math>
+    ,
+    <math><mi mathvariant="italic">r</mi></math>
+    ,
+                        and
+    <math><mi mathvariant="italic">q</mi></math>
+    texture coordinates.
+                        Internal
+    <a class="crossref" href="./glTexCoord.html#c-glTexCoord4iv">glTexCoord4</a>
+    commands are generated when the map is evaluated but
+                        the current texture coordinates are not updated with the value
+                        of these
+    <a class="crossref" href="./glTexCoord.html">glTexCoord</a>
+    commands.
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+    <a class="parameter" href="#param-stride">stride</a>
+    ,
+    <a class="parameter" href="#param-order">order</a>
+    , and
+    <a class="parameter" href="#param-points">points</a>
+    define the array addressing for accessing the control points.
+    <a class="parameter" href="#param-points">points</a>
+    is the location of the first control point,
+            which occupies one, two, three, or four contiguous memory locations,
+            depending on which map is being defined.
+    <a class="parameter" href="#param-order">order</a>
+    is the number of control points in the array.
+    <a class="parameter" href="#param-stride">stride</a>
+    specifies how many float or double locations to advance the internal
+            memory pointer to reach the next control point.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            As is the case with all GL commands that accept pointers to data,
+            it is as if the contents of
+    <a class="parameter" href="#param-points">points</a>
+    were copied by
+    <a class="function" href="./glMap1.html">glMap1</a>
+    before
+    <a class="function" href="./glMap1.html">glMap1</a>
+    returns.
+            Changes to the contents of
+    <a class="parameter" href="#param-points">points</a>
+    have no effect after
+    <a class="function" href="./glMap1.html">glMap1</a>
+    is called.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-u1">u1</a>
+    is equal to
+    <a class="parameter" href="#param-u2">u2</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-stride">stride</a>
+    is less than the number
+            of values in a control point.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-order">order</a>
+    is less than 1 or
+            greater than the return value of
+    <span class="constant">GL_MAX_EVAL_ORDER</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glMap1.html">glMap1</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glMap1.html">glMap1</a>
+    is called and the value
+            of
+    <span class="constant">GL_ACTIVE_TEXTURE</span>
+    is not
+    <span class="constant">GL_TEXTURE0</span>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetMap.html">glGetMap</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_EVAL_ORDER</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_VERTEX_3</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_VERTEX_4</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_INDEX</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_COLOR_4</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_NORMAL</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_TEXTURE_COORD_1</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_TEXTURE_COORD_2</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_TEXTURE_COORD_3</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_TEXTURE_COORD_4</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    ,
+    <a class="crossref" href="./glColor.html">glColor</a>
+    ,
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    ,
+    <a class="crossref" href="./glEvalCoord.html">glEvalCoord</a>
+    ,
+    <a class="crossref" href="./glEvalMesh.html">glEvalMesh</a>
+    ,
+    <a class="crossref" href="./glEvalPoint.html">glEvalPoint</a>
+    ,
+    <a class="crossref" href="./glMap2.html">glMap2</a>
+    ,
+    <a class="crossref" href="./glMapGrid.html">glMapGrid</a>
+    ,
+    <a class="crossref" href="./glNormal.html">glNormal</a>
+    ,
+    <a class="crossref" href="./glTexCoord.html">glTexCoord</a>
+    ,
+    <a class="crossref" href="./glVertex.html">glVertex</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

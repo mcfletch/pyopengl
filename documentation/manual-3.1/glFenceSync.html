@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glFenceSync : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glFenceSync</h1>
+</header>
+<main class="content">
+    <section class="purpose">create a new sync object and insert it into the GL command stream</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glFenceSync"></a>
+    <span class="c-function">glFenceSync</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-condition" class="parameter">condition</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLbitfield (
+            <a href="#param-flags" class="parameter">flags</a>
+        )
+    </span>
+</span>)-&gt; GLsync
+</div>
+                <div class="py-signature">
+    <a name="py-glFenceSync"></a>
+    <span class="py-function">glFenceSync</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-condition" class="parameter">condition</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-flags" class="parameter">flags</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'OpenGL._opaque.GLsync_pointer'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-condition"></a>
+                        condition
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the condition that must be met to set the sync object's state to signaled.
+    <a class="parameter" href="#param-condition">condition</a>
+    must be
+    <span class="constant">GL_SYNC_GPU_COMMANDS_COMPLETE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-flags"></a>
+                        flags
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a bitwise combination of flags controlling the behavior of the sync object. No flags are presently defined
+                    for this operation and
+    <a class="parameter" href="#param-flags">flags</a>
+    must be zero.
+    <div class="footnote">
+    <div class="para">
+    <a class="parameter" href="#param-flags">flags</a>
+    is a placeholder for anticipated future extensions of fence sync object capabilities.
+</div>
+</div>
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glFenceSync.html">glFenceSync</a>
+    creates a new fence sync object, inserts a fence command into the GL command stream and
+            associates it with that sync object, and returns a non-zero name corresponding to the sync object.
+</div>
+    <div class="para">
+            When the specified
+    <a class="parameter" href="#param-condition">condition</a>
+    of the sync object is satisfied by the fence command, the sync object
+            is signaled by the GL, causing any
+    <a class="crossref" href="./glWaitSync.html">glWaitSync</a>
+    ,
+    <a class="crossref" href="./glClientWaitSync.html">glClientWaitSync</a>
+    commands blocking in
+    <a class="parameter" href="#param-sync">sync</a>
+    to
+    <span class="emphasis">unblock</span>
+    . No other state is affected by
+    <a class="function" href="./glFenceSync.html">glFenceSync</a>
+    or by the execution
+            of the associated fence command.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-condition">condition</a>
+    must be
+    <span class="constant">GL_SYNC_GPU_COMMANDS_COMPLETE</span>
+    . This condition is satisfied by
+            completion of the fence command corresponding to the sync object and all preceding commands in the same command stream.
+            The sync object will not be signaled until all effects from these commands on GL client and server state and the
+            framebuffer are fully realized. Note that completion of the fence command occurs once the state of the corresponding sync
+            object has been changed, but commands waiting on that sync object may not be unblocked until after the fence command completes.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glFenceSync.html">glFenceSync</a>
+    is only supported if the GL version is 3.2 or greater, or if
+            the
+    <div class="code">ARB_sync</div>
+    extension is supported.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-condition">condition</a>
+    is not
+    <span class="constant">GL_SYNC_GPU_COMMANDS_COMPLETE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-flags">flags</a>
+    is not zero.
+</div>
+    <div class="para">
+            Additionally, if
+    <a class="function" href="./glFenceSync.html">glFenceSync</a>
+    fails, it will return zero.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glFenceSync.html">glFenceSync</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glDeleteSync.html">glDeleteSync</a>
+    ,
+    <a class="crossref" href="./glGetSynciv.html#c-glGetSynciv">glGetSync</a>
+    ,
+    <a class="crossref" href="./glWaitSync.html">glWaitSync</a>
+    ,
+    <a class="crossref" href="./glClientWaitSync.html">glClientWaitSync</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glFenceSync</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/arbsync.py">tests/arbsync.py</a>
+    Lines: <span class="sample-lines">24, 28</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_instanced_mapped.py">tests/shader_instanced_mapped.py</a>
+    Lines: <span class="sample-lines">32</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

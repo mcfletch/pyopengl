@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutGet : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutGet</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieves simple GLUT state represented by integers.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutGet"></a>
+    <span class="c-function">glutGet</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum(
+            <a href="#param-state" class="parameter">state</a>
+        )
+    </span>
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glutGet"></a>
+    <span class="py-function">glutGet</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-query" class="parameter">query</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">glutGet( GLenum(query) ) -&gt; c_int</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-state"></a>
+                        state
+                    </th>
+                    <td>
+    <div class="simpara">
+						Name of state to retrieve.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutGet.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutGet.html">glutGet</a>
+    retrieves simple GLUT state represented by integers. The state parameter determines what
+			type of state to return. Where appropriate, window capability state is returned for the layer in use. GLUT state names
+			beginning with
+    <span class="constant">GLUT_WINDOW_</span>
+    return state for the current window. GLUT state names beginning with
+    <span class="constant">GLUT_MENU_</span>
+    return state for the current menu. Other GLUT state names return global state.
+			Requesting state for an invalid GLUT state name returns negative one.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutDeviceGet.html">glutDeviceGet</a>
+            <a class="crossref" href="./glutLayerGet.html">glutLayerGet</a>
+            <a class="crossref" href="./glutGetColor.html">glutGetColor</a>
+            <a class="crossref" href="./glutSetWindow.html#c-glutGetWindow">glutGetWindow</a>
+            <a class="crossref" href="./glutSetMenu.html#c-glutGetMenu">glutGetMenu</a>
+            <a class="crossref" href="./glutGetModifiers.html">glutGetModifiers</a>
+            <a class="crossref" href="./glutExtensionSupported.html">glutExtensionSupported</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutGet</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glut_fullscreen.py">tests/glut_fullscreen.py</a>
+    Lines: <span class="sample-lines">51, 52, 53, 54</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/shaderProg/torusShader.py">PyOpenGL-Demo/proesch/shaderProg/torusShader.py</a>
+    Lines: <span class="sample-lines">52, 52</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/shaderProg/textureShader.py">PyOpenGL-Demo/proesch/shaderProg/textureShader.py</a>
+    Lines: <span class="sample-lines">89, 89</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/bezier/bezier.py">PyOpenGL-Demo/proesch/bezier/bezier.py</a>
+    Lines: <span class="sample-lines">92, 92</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/stereo/stereoDemo.py">PyOpenGL-Demo/proesch/stereo/stereoDemo.py</a>
+    Lines: <span class="sample-lines">57, 57, 138, 138</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbsCurve/nurbsCurve.py">PyOpenGL-Demo/proesch/nurbsCurve/nurbsCurve.py</a>
+    Lines: <span class="sample-lines">61, 61</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbsCurve/nurbsCircle.py">PyOpenGL-Demo/proesch/nurbsCurve/nurbsCircle.py</a>
+    Lines: <span class="sample-lines">64, 64</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py">PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py</a>
+    Lines: <span class="sample-lines">28, 28</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">145, 145</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson42.py">PyOpenGL-Demo/NeHe/lesson42.py</a>
+    Lines: <span class="sample-lines">241, 251, 252</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson41.py">PyOpenGL-Demo/NeHe/lesson41.py</a>
+    Lines: <span class="sample-lines">291</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/gluttimerfunc_testCase.py">PyOpenGL-Demo/GLUT/gluttimerfunc_testCase.py</a>
+    Lines: <span class="sample-lines">49, 50</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/conechecker.py">PyOpenGL-Demo/GLUT/tom/conechecker.py</a>
+    Lines: <span class="sample-lines">33, 33</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/lorentz.py">PyOpenGL-Demo/GLUT/tom/lorentz.py</a>
+    Lines: <span class="sample-lines">74, 74</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">233, 233, 291, 291, 318, 318</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">265, 265, 322, 322, 349, 349</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">137, 137, 184, 184, 216, 216</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">118, 118, 165, 165, 197, 197</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">116, 116, 163, 163, 195, 195</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">203, 203, 250, 250, 277, 277</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">107, 107, 154, 154, 186, 186</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">211, 211, 258, 258, 285, 285</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">255, 255, 312, 312, 339, 339</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">222, 222, 269, 269, 296, 296</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

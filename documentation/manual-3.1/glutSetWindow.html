@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutSetWindow : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutSetWindow</h1>
+</header>
+<main class="content">
+    <section class="purpose">set/get the current window</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutGetWindow"></a>
+    <span class="c-function">glutGetWindow</span>(<span class="parameter-list">
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glutGetWindow"></a>
+    <span class="py-function">glutGetWindow</span>( <span class="parameter-list">
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">glutGetWindow(  ) -&gt; c_int</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutSetWindow"></a>
+    <span class="c-function">glutSetWindow</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-win" class="parameter">win</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutSetWindow"></a>
+    <span class="py-function">glutSetWindow</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-window" class="parameter">window</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutSetWindow( c_int(window) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-win"></a>
+                        win
+                    </th>
+                    <td>
+    <div class="simpara">
+						Identifier of GLUT window to make the current window.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutSetWindow.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutSetWindow.html">glutSetWindow</a>
+    sets the current window;
+    <a class="function" href="./glutSetWindow.html#c-glutGetWindow">glutGetWindow</a>
+    returns the identifier
+			of the current window. If no windows exist or the previously current window was destroyed,
+    <a class="function" href="./glutSetWindow.html#c-glutGetWindow">glutGetWindow</a>
+    returns zero.
+    <a class="function" href="./glutSetWindow.html">glutSetWindow</a>
+    does not change the layer in use
+			for the window; this is done using
+    <a class="function" href="./glutUseLayer.html">glutUseLayer</a>
+    .
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutCreateWindow.html">glutCreateWindow</a>
+            <a class="crossref" href="./glutSetMenu.html">glutSetMenu</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutSetWindow</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/glutcontext.py">OpenGLContext/glutcontext.py</a>
+    Lines: <span class="sample-lines">77, 134</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/molehill.py">PyOpenGL-Demo/GLUT/molehill.py</a>
+    Lines: <span class="sample-lines">40, 63</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglGlut.py">renderers/openglGlut.py</a>
+    Lines: <span class="sample-lines">55</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/glutdevice.py">system/glutdevice.py</a>
+    Lines: <span class="sample-lines">52</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

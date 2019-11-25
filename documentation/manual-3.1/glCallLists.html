@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glCallLists : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glCallLists</h1>
+</header>
+<main class="content">
+    <section class="purpose">execute a list of display lists</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glCallLists"></a>
+    <span class="c-function">glCallLists</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLsizei (
+            <a href="#param-n" class="parameter">n</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void * (
+            <a href="#param-lists" class="parameter">lists</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glCallList"></a>
+    <span class="py-function">glCallList</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-list" class="parameter">list</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glCallLists"></a>
+    <span class="py-function">glCallLists</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-n" class="parameter">n</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-lists" class="parameter">lists</a>
+    </span>
+</span> )
+    <pre class="pydoc">glCallLists( bytes( lists ) or lists[] ) -&gt; None
+
+    Restricted version of glCallLists, takes a string or a GLuint compatible
+    array data-type and passes into the base function.
+    </pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-n"></a>
+                        n
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of display lists to be executed.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the type of values in
+    <a class="parameter" href="#param-lists">lists</a>
+    .
+                    Symbolic constants
+    <span class="constant">GL_BYTE</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GL_SHORT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+    ,
+    <span class="constant">GL_INT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT</span>
+    ,
+    <span class="constant">GL_FLOAT</span>
+    ,
+    <span class="constant">GL_2_BYTES</span>
+    ,
+    <span class="constant">GL_3_BYTES</span>
+    , and
+    <span class="constant">GL_4_BYTES</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-lists"></a>
+                        lists
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of an array of name offsets in the display list.
+                    The pointer type is void because the offsets can be bytes,
+                    shorts,
+                    ints,
+                    or floats,
+                    depending on the value of
+    <a class="parameter" href="#param-type">type</a>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glCallLists.html">glCallLists</a>
+    causes each display list in the list of names passed as
+    <a class="parameter" href="#param-lists">lists</a>
+    to be executed.
+            As a result,
+            the commands saved in each display list are executed in order,
+            just as if they were called without using a display list.
+            Names of display lists that have not been defined are ignored.
+</div>
+    <div class="para">
+    <a class="function" href="./glCallLists.html">glCallLists</a>
+    provides an efficient means for executing more than one display list.
+    <a class="parameter" href="#param-type">type</a>
+    allows lists with various name formats to be accepted.
+            The formats are as
+            follows:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BYTE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-lists">lists</a>
+    is treated as an array of signed bytes,
+                        each in the range
+    <math>
+                            <mn>-128</mn>
+                        </math>
+    through 127.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-lists">lists</a>
+    is treated as an array of unsigned bytes,
+                        each in the range 0 through 255.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SHORT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-lists">lists</a>
+    is treated as an array of signed two-byte integers,
+                        each in the range
+    <math>
+                            <mn>-32768</mn>
+                        </math>
+    through 32767.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-lists">lists</a>
+    is treated as an array of unsigned two-byte integers,
+                        each in the range 0 through 65535.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_INT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-lists">lists</a>
+    is treated as an array of signed four-byte integers.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNSIGNED_INT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-lists">lists</a>
+    is treated as an array of unsigned four-byte integers.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FLOAT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-lists">lists</a>
+    is treated as an array of four-byte floating-point values.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_2_BYTES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-lists">lists</a>
+    is treated as an array of unsigned bytes.
+                        Each pair of bytes specifies a single display-list name.
+                        The value of the pair is computed as 256 times the unsigned value
+                        of the first byte plus the unsigned value of the second byte.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_3_BYTES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-lists">lists</a>
+    is treated as an array of unsigned bytes.
+                        Each triplet of bytes specifies a single display-list name.
+                        The value of the triplet is computed as 65536 times the unsigned value
+                        of the first byte,
+                        plus 256 times the unsigned value of the second byte,
+                        plus the unsigned value of the third byte.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_4_BYTES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-lists">lists</a>
+    is treated as an array of unsigned bytes.
+                        Each quadruplet of bytes specifies a single display-list name.
+                        The value of the quadruplet is computed as 16777216 times the unsigned value
+                        of the first byte,
+                        plus 65536 times the unsigned value of the second byte,
+                        plus 256 times the unsigned value of the third byte,
+                        plus the unsigned value of the fourth byte.
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+            The list of display-list names is not null-terminated.
+            Rather,
+    <a class="parameter" href="#param-n">n</a>
+    specifies how many names are to be taken from
+    <a class="parameter" href="#param-lists">lists</a>
+    .
+</div>
+    <div class="para">
+            An additional level of indirection is made available with the
+    <a class="crossref" href="./glListBase.html">glListBase</a>
+    command,
+            which specifies an unsigned offset that is added to each display-list
+            name specified in
+    <a class="parameter" href="#param-lists">lists</a>
+    before that display list is executed.
+</div>
+    <div class="para">
+    <a class="function" href="./glCallLists.html">glCallLists</a>
+    can appear inside a display list.
+            To avoid the possibility of infinite recursion resulting from display lists
+            calling one another,
+            a limit is placed on the nesting level of display
+            lists during display-list execution.
+            This limit must be at least 64, and it depends on the implementation.
+</div>
+    <div class="para">
+            GL state is not saved and restored across a call to
+    <a class="function" href="./glCallLists.html">glCallLists</a>
+    .
+            Thus,
+            changes made to GL state during the execution of the display lists
+            remain after execution is completed.
+            Use
+    <a class="crossref" href="./glPushAttrib.html">glPushAttrib</a>
+    ,
+    <a class="crossref" href="./glPushAttrib.html#c-glPopAttrib">glPopAttrib</a>
+    ,
+    <a class="crossref" href="./glPushMatrix.html">glPushMatrix</a>
+    ,
+            and
+    <a class="crossref" href="./glPushMatrix.html#c-glPopMatrix">glPopMatrix</a>
+    to preserve GL state across
+    <a class="function" href="./glCallLists.html">glCallLists</a>
+    calls.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            Display lists can be executed between a call to
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding call to
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    ,
+            as long as the display list includes only commands that are allowed
+            in this interval.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-n">n</a>
+    is negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is not one of
+    <span class="constant">GL_BYTE</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GL_SHORT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+    ,
+    <span class="constant">GL_INT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT</span>
+    ,
+    <span class="constant">GL_FLOAT</span>
+    ,
+    <span class="constant">GL_2_BYTES</span>
+    ,
+    <span class="constant">GL_3_BYTES</span>
+    ,
+    <span class="constant">GL_4_BYTES</span>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_LIST_BASE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_LIST_NESTING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsList.html">glIsList</a>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glCallList.html">glCallList</a>
+    ,
+    <a class="crossref" href="./glDeleteLists.html">glDeleteLists</a>
+    ,
+    <a class="crossref" href="./glGenLists.html">glGenLists</a>
+    ,
+    <a class="crossref" href="./glListBase.html">glListBase</a>
+    ,
+    <a class="crossref" href="./glNewList.html">glNewList</a>
+    ,
+    <a class="crossref" href="./glPushAttrib.html">glPushAttrib</a>
+    ,
+    <a class="crossref" href="./glPushMatrix.html">glPushMatrix</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glCallLists</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glprint.py">tests/glprint.py</a>
+    Lines: <span class="sample-lines">64</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/font.py">OpenGLContext/scenegraph/text/font.py</a>
+    Lines: <span class="sample-lines">344, 358, 372, 391, 407, 420</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson13.py">PyOpenGL-Demo/NeHe/lesson13.py</a>
+    Lines: <span class="sample-lines">104</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson43/glFreeType.py">PyOpenGL-Demo/NeHe/lesson43/glFreeType.py</a>
+    Lines: <span class="sample-lines">302</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/glFont.py">PyOpenGL-Demo/NeHe/lesson44/glFont.py</a>
+    Lines: <span class="sample-lines">86</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

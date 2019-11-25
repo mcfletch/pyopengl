@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXGetClientString : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXGetClientString</h1>
+</header>
+<main class="content">
+    <section class="purpose">return a string describing the client</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXGetClientString"></a>
+    <span class="c-function">glXGetClientString</span>(<span class="parameter-list">
+    <span class="param-def">
+        Display * (
+            <a href="#param-dpy" class="parameter">dpy</a>
+        )
+        ,
+    </span><span class="param-def">
+        int (
+            <a href="#param-name" class="parameter">name</a>
+        )
+    </span>
+</span>)-&gt; const char *
+</div>
+                <div class="py-signature">
+    <a name="py-glXGetClientString"></a>
+    <span class="py-function">glXGetClientString</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-dpy" class="parameter">dpy</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-name" class="parameter">name</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_char_p'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dpy"></a>
+                        dpy
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the connection to the X server.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies which string is returned.
+                    The symbolic constants
+    <span class="constant">GLX_VENDOR</span>
+    ,
+    <span class="constant">GLX_VERSION</span>
+    ,
+                    and
+    <span class="constant">GLX_EXTENSIONS</span>
+    are accepted.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXGetClientString.html">glXGetClientString</a>
+    returns a string
+            describing some aspect of the client library. The possible values for
+    <a class="parameter" href="#param-name">name</a>
+    are
+    <span class="constant">GLX_VENDOR</span>
+    ,
+    <span class="constant">GLX_VERSION</span>
+    , and
+    <span class="constant">GLX_EXTENSIONS</span>
+    . If
+    <a class="parameter" href="#param-name">name</a>
+    is not set to one of these values,
+    <a class="function" href="./glXGetClientString.html">glXGetClientString</a>
+    returns
+    <span class="constant">NULL</span>
+    .
+            The format and contents of the vendor string is implementation dependent.
+</div>
+    <div class="para">
+            The extensions string is null-terminated and contains a
+            space-separated list of  extension names. (The extension names never
+            contain spaces.)
+            If there are no extensions to GLX, then the empty string is returned.
+        </div>
+    <div class="para">
+            The version string is laid out as follows:
+        </div>
+    <div class="para">
+            &lt;major_version.minor_version&gt;&lt;space&gt;&lt;vendor-specific info&gt;
+        </div>
+    <div class="para">
+            Both the major and minor portions of the version number are of arbitrary
+            length.  The vendor-specific information is optional.  However, if it is
+            present, the format and contents are implementation specific.
+        </div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glXGetClientString.html">glXGetClientString</a>
+    is available only if the GLX version is 1.1 or greater.
+</div>
+    <div class="para">
+            If the GLX version is 1.1 or 1.0, the GL version must be 1.0.
+            If the GLX version is 1.2, then the GL version must be 1.1.
+            If the GLX version is 1.3, then the GL version must be 1.2.
+        </div>
+    <div class="para">
+    <a class="function" href="./glXGetClientString.html">glXGetClientString</a>
+    only returns information about GLX extensions supported by the client.
+            Call
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+    to get a list of GL extensions supported by the server.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glXQueryVersion.html">glXQueryVersion</a>
+    ,
+    <a class="crossref" href="./glXQueryExtensionsString.html">glXQueryExtensionsString</a>
+    ,
+    <a class="crossref" href="./glXQueryServerString.html">glXQueryServerString</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

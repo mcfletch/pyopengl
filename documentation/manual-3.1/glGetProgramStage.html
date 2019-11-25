@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetProgramStage : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetProgramStage</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieve properties of a program object corresponding to a specified shader stage</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetProgramStage"></a>
+    <span class="c-function">glGetProgramStage</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetProgramStageiv"></a>
+    <span class="c-function">glGetProgramStageiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-shadertype" class="parameter">shadertype</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-values" class="parameter">values</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetProgramStageiv"></a>
+    <span class="py-function">glGetProgramStageiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-shadertype" class="parameter">shadertype</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-values" class="parameter">values</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the program containing shader stage.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-shadertype"></a>
+                        shadertype
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the shader stage from which to query for the subroutine parameter.
+    <a class="parameter" href="#param-shadertype">shadertype</a>
+    must be one of
+    <span class="constant">GL_VERTEX_SHADER</span>
+    ,
+    <span class="constant">GL_TESS_CONTROL_SHADER</span>
+    ,
+    <span class="constant">GL_TESS_EVALUATION_SHADER</span>
+    ,
+    <span class="constant">GL_GEOMETRY_SHADER</span>
+    or
+    <span class="constant">GL_FRAGMENT_SHADER</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the parameter of the shader to query.
+    <a class="parameter" href="#param-pname">pname</a>
+    must be
+    <span class="constant">GL_ACTIVE_SUBROUTINE_UNIFORMS</span>
+    ,
+    <span class="constant">GL_ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS</span>
+    ,
+    <span class="constant">GL_ACTIVE_SUBROUTINES</span>
+    ,
+    <span class="constant">GL_ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH</span>
+    ,
+                    or
+    <span class="constant">GL_ACTIVE_SUBROUTINE_MAX_LENGTH</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-values"></a>
+                        values
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of a variable into which the queried value or values will be placed.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetProgramStage.html">glGetProgramStage</a>
+    queries a parameter of a shader stage attached to a program object.
+    <a class="parameter" href="#param-program">program</a>
+    contains the name of the program to which the shader is attached.
+    <a class="parameter" href="#param-shadertype">shadertype</a>
+    specifies the stage from which to query the parameter.
+    <a class="parameter" href="#param-pname">pname</a>
+    specifies which parameter
+            should be queried. The value or values of the parameter to be queried is returned in the variable whose address
+            is given in
+    <a class="parameter" href="#param-values">values</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_ACTIVE_SUBROUTINE_UNIFORMS</span>
+    , the number
+            of active subroutine variables in the stage is returned in
+    <a class="parameter" href="#param-values">values</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS</span>
+    ,
+            the number of active subroutine variable locations in the stage is returned in
+    <a class="parameter" href="#param-values">values</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_ACTIVE_SUBROUTINES</span>
+    ,
+            the number of active subroutines in the stage is returned in
+    <a class="parameter" href="#param-values">values</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH</span>
+    ,
+            the length of the longest subroutine uniform for the stage is returned in
+    <a class="parameter" href="#param-values">values</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_ACTIVE_SUBROUTINE_MAX_LENGTH</span>
+    ,
+            the length of the longest subroutine name for the stage is returned in
+    <a class="parameter" href="#param-values">values</a>
+    . The
+            returned name length includes space for the null-terminator.
+</div>
+    <div class="para">
+            If there is no shader present of type
+    <a class="parameter" href="#param-shadertype">shadertype</a>
+    , the returned value will be consistent
+            with a shader containing no subroutines or subroutine uniforms.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-shadertype">shadertype</a>
+    or
+    <a class="parameter" href="#param-pname">pname</a>
+    is not one of the accepted values.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not the name of an
+            existing program object.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetProgramStage.html#c-glGetProgramStageiv">glGetProgramStageiv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

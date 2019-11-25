@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gleTextureMode : PyOpenGL 3.1.4 GLE Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+    <h1>gleTextureMode</h1>
+</header>
+<main class="content">
+    <section class="purpose">set the type of GLE automatic texture coordinate generation.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gleTextureMode"></a>
+    <span class="c-function">gleTextureMode</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-mode" class="parameter">mode</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gleTextureMode"></a>
+    <span class="py-function">gleTextureMode</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-mode" class="parameter">mode</a>
+    </span>
+</span> )
+    <pre class="pydoc">gleTextureMode( c_int(mode) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-mode"></a>
+                        mode
+                    </th>
+                    <td>
+    <div class="simpara">
+						bitwise OR of GLE texture mode flags
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="gleTextureMode.3GLE-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			In addition to the default glTexGen modes that are supplied by OpenGL, the tubing library also contains some of its own
+			automatic texture coordinate generation routines. In addition, user-defined texture coord generation routines can be
+			supplied. To use texture mapping with the extrusion library, one must remember to "do the obvious":
+		</div>
+    <div class="itemizedlist">
+    <dd class="listitem">
+    <div class="simpara">
+					Enable texture mapping through OpenGL
+				</div>
+</dd>
+    <dd class="listitem">
+    <div class="simpara">
+					Define and load (
+    <a class="function" href="./glTexImage2D.html">glTexImage2D</a>
+    /
+    <a class="function" href="./glBindTexture.html">glBindTexture</a>
+    ) a texture
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="simpara">
+					If using the routine below, then disable glTexgGen
+				</div>
+</dd>
+</div>
+    <div class="para">
+    <a class="function" href="./gleTextureMode.html">gleTextureMode</a>
+    can be used to set the type of automatic texture coordinate generation to be used. The argument should
+			be a bitwise-OR of any of the following flags:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLE_TEXTURE_ENABLE</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						If this bit is set, then texturing is enabled. If this bit is NOT set, then automatic texture coordinate
+						generation is disabled.
+					</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+			The way in which the automatic texture coordinate generation occurs is determined by one of the following flags. One
+			and only one of these should be selected at a time. These tokens are enumerants, not bit-flags.
+		</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLE_TEXTURE_VERTEX_FLAT</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Uses the vertexes "x" coordinate as the texture "u" coordinate, and the accumulated
+						segment length as the "v" coordinate.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLE_TEXTURE_NORMAL_FLAT</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Uses the normal vector's "x" coordinate as the texture "u" coordinate, and the
+						accumulated segment length as the "v" coordinate.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLE_TEXTURE_VERTEX_CYL</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Uses
+					</div>
+    <div class="informalequation">
+    <math>
+							<mrow>
+								<mi>u</mi>
+								<mo>=</mo>
+								<mfrac>
+									<mi></mi>
+									<mrow>
+										<mn>2</mn>
+										<mi></mi>
+									</mrow>
+								</mfrac>
+								<mo>=</mo>
+								<mfrac>
+									<mn>1</mn>
+									<mrow>
+										<mn>2</mn>
+										<mi></mi>
+									</mrow>
+								</mfrac>
+								<mrow>
+									<mo>arctan</mo>
+									<mfenced>
+										<mfrac>
+											<mi>vy</mi>
+											<mi>vx</mi>
+										</mfrac>
+									</mfenced>
+								</mrow>
+							</mrow>
+						</math>
+</div>
+    <div class="simpara">
+						as the texture "u" coordinate, and the accumulated segment length as the "v"
+						coordinate. In the above equation, "vx" and "vy" stand for the vertex's x and y
+						coordinates.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLE_TEXTURE_NORMAL_CYL</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Uses
+					</div>
+    <div class="informalequation">
+    <math>
+							<mrow>
+								<mi>u</mi>
+								<mo>=</mo>
+								<mfrac>
+									<mi></mi>
+									<mrow>
+										<mn>2</mn>
+										<mi></mi>
+									</mrow>
+								</mfrac>
+								<mo>=</mo>
+								<mfrac>
+									<mn>1</mn>
+									<mrow>
+										<mn>2</mn>
+										<mi></mi>
+									</mrow>
+								</mfrac>
+								<mrow>
+									<mo>arctan</mo>
+									<mfenced>
+										<mfrac>
+											<mi>ny</mi>
+											<mi>nx</mi>
+										</mfrac>
+									</mfenced>
+								</mrow>
+							</mrow>
+						</math>
+</div>
+    <div class="simpara">
+						as the texture "u" coordinate, and the accumulated segment length as the "v"
+						coordinate. In the above equation, "nx" and "ny" stand for the normal's x and y
+						coordinates.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLE_TEXTURE_VERTEX_SPH</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Uses
+					</div>
+    <div class="informalequation">
+    <math>
+							<mrow>
+								<mi>u</mi>
+								<mo>=</mo>
+								<mfrac>
+									<mi></mi>
+									<mrow>
+										<mn>2</mn>
+										<mi></mi>
+									</mrow>
+								</mfrac>
+								<mo>=</mo>
+								<mfrac>
+									<mn>1</mn>
+									<mrow>
+										<mn>2</mn>
+										<mi></mi>
+									</mrow>
+								</mfrac>
+								<mrow>
+									<mo>arctan</mo>
+									<mfenced>
+										<mfrac>
+											<mi>vy</mi>
+											<mi>vx</mi>
+										</mfrac>
+									</mfenced>
+								</mrow>
+							</mrow>
+						</math>
+</div>
+    <div class="simpara">
+						as the texture "u" coordinate, and
+					</div>
+    <div class="informalequation">
+    <math>
+							<mrow>
+								<mi>u</mi>
+								<mo>=</mo>
+								<mfrac>
+									<mi></mi>
+									<mrow>
+										<mn>2</mn>
+										<mi></mi>
+									</mrow>
+								</mfrac>
+								<mo>=</mo>
+								<mfrac>
+									<mn>1</mn>
+									<mrow>
+										<mn>2</mn>
+										<mi></mi>
+									</mrow>
+								</mfrac>
+								<mfenced>
+									<mrow>
+										<mn>1</mn>
+										<mo>-</mo>
+										<mrow>
+											<mo>arccos</mo>
+											<mfenced>
+												<mi>vz</mi>
+											</mfenced>
+										</mrow>
+									</mrow>
+								</mfenced>
+							</mrow>
+						</math>
+</div>
+    <div class="simpara">
+						as the texture "v" coordinate. In the above equation, "vx", "vy" and
+						"vz" stand for the vertex's x, y and z coordinates.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLE_TEXTURE_NORMAL_SPH</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Uses
+					</div>
+    <div class="informalequation">
+    <math>
+							<mrow>
+								<mi>u</mi>
+								<mo>=</mo>
+								<mfrac>
+									<mi></mi>
+									<mrow>
+										<mn>2</mn>
+										<mi></mi>
+									</mrow>
+								</mfrac>
+								<mo>=</mo>
+								<mfrac>
+									<mn>1</mn>
+									<mrow>
+										<mn>2</mn>
+										<mi></mi>
+									</mrow>
+								</mfrac>
+								<mrow>
+									<mo>arctan</mo>
+									<mfenced>
+										<mfrac>
+											<mi>ny</mi>
+											<mi>nx</mi>
+										</mfrac>
+									</mfenced>
+								</mrow>
+							</mrow>
+						</math>
+</div>
+    <div class="simpara">
+						as the texture "u" coordinate, and
+					</div>
+    <div class="informalequation">
+    <math>
+							<mrow>
+								<mi>u</mi>
+								<mo>=</mo>
+								<mfrac>
+									<mi></mi>
+									<mrow>
+										<mn>2</mn>
+										<mi></mi>
+									</mrow>
+								</mfrac>
+								<mo>=</mo>
+								<mfrac>
+									<mn>1</mn>
+									<mrow>
+										<mn>2</mn>
+										<mi></mi>
+									</mrow>
+								</mfrac>
+								<mfenced>
+									<mrow>
+										<mn>1</mn>
+										<mo>-</mo>
+										<mrow>
+											<mo>arccos</mo>
+											<mfenced>
+												<mi>vz</mi>
+											</mfenced>
+										</mrow>
+									</mrow>
+								</mfenced>
+							</mrow>
+						</math>
+</div>
+    <div class="simpara">
+						as the texture "v" coordinate. In the above equation, "nx", "ny" and
+						"nz" stand for the normal's x, y and z coordinates.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLE_TEXTURE_NORMAL_MODEL_FLAT</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GLE_TEXTURE_VERTEX_MODEL_CYL</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GLE_TEXTURE_NORMAL_MODEL_CYL</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GLE_TEXTURE_VERTEX_MODEL_SPH</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GLE_TEXTURE_NORMAL_MODEL_SPH</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GLE_TEXTURE_VERTEX_MODEL_FLAT</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						These define texture mapping modes that are very similar to those described above, except that the
+						untransformed vertices and/or normals are used. As a result, textures tends to stick to the extrusion
+						according to the extrusions local surface coordinates rather than according to real-space coordinates. This
+						will in general provide the correct style of texture mapping when affine transforms are being applied to
+						the contour, since the coordinates used are those prior to the affine transform.
+					</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section" id="gleTextureMode.3GLE-operation">
+    <h2 class="title">Operation</h2>
+    <div class="para">
+			To best understand how to use the above functions, it is best to understand how the tubing is actually drawn. Let us
+			start by defining some terms. The tubing library "extrudes" a "contour" along a "path".
+			The contour is a 2D polyline. The path is a 3D polyline. We use the word "segment" to refer to a
+			straight-line segment of the path polyline. We also interchangeably use the word "segment" to stand for the
+			section of the extrusion that lies along a path segment.
+		</div>
+    <div class="para">
+			The tubing library draws segments one at a time. It uses
+    <a class="function" href="./glPushMatrix.html">glPushMatrix</a>
+    and
+    <a class="function" href="./glPushMatrix.html#c-glPopMatrix">glPopMatrix</a>
+    to orient each segment along the negative z-axis. The segment
+			starts at
+    <math>
+					<mrow>
+						<mi>z</mi>
+						<mo>=</mo>
+						<mn>0</mn>
+					</mrow>
+				</math>
+    and ends at some negative z-value (equal to the length of the segment). The segment is then drawn by
+			calling
+    <a class="function" href="./glVertex.html#c-glVertex3f">glVertex3f</a>
+    (and
+    <a class="function" href="./glNormal.html#c-glNormal3f">glNormal3f</a>
+    )
+			by drawing the 2D contour at
+    <math>
+					<mrow>
+						<mi>z</mi>
+						<mo>=</mo>
+						<mn>0</mn>
+					</mrow>
+				</math>
+    and again at
+    <math>
+					<mrow>
+						<mi>z</mi>
+						<mo>=</mo>
+						<mo>-len</mo>
+					</mrow>
+				</math>
+    . (Of course, if the join style is one of the fancy ones, then the end-points are trimmed in a variety
+			of ways, and do not land exactly on
+    <math>
+					<mrow>
+						<mi>z</mi>
+						<mo>=</mo>
+						<mn>0</mn>
+					</mrow>
+				</math>
+    , or
+    <math>
+					<mrow>
+						<mi>z</mi>
+						<mo>=</mo>
+						<mo>-len</mo>
+					</mrow>
+				</math>
+    , but they do come close). Note that
+    <a class="function" href="./glBegin.html">glBegin</a>
+    and
+    <a class="function" href="./glBegin.html#c-glEnd">glEnd</a>
+    are called around each segment. (Note also that additional
+    <a class="function" href="./glBegin.html">glBegin</a>
+    /
+    <a class="function" href="./glBegin.html#c-glEnd">glEnd</a>
+    s may be called to draw end-caps
+			or filleting triangles for the more complex join styles.)
+</div>
+    <div class="para">
+			The obvious way to automatically generate textures is to warp the
+    <a class="function" href="./glVertex.html">glVertex</a>
+    and
+    <a class="function" href="./glNormal.html">glNormal</a>
+    functions, and compute texture coordinates based on the 3-space
+			vertex and normal coordinates. This is essentially what the tubing code does, except that it passes some extra
+			parameters. The
+    <a class="function" href="./glBegin.html">glBegin</a>
+    calls are wrapped, and the integer segment number and
+			the floating-point length of the segment are passed in. By knowing the segment number, and the segment length, the
+			texture coordinates can be adjusted. Knowing the length allows the length to be accumulated, so that a texture is
+			applied lengthwise along the extrusion. It is this accumulated length that is used in the FLAT and CYL mapping modes.
+</div>
+    <div class="para">
+			For each vertex, not only are the vertex x,y,z coordinates available, but so is a contour vertex counter indicating
+			which contour vertex this corresponds to. There is also a flag indicating whether the vertex corresponds to a front or
+			back vertex (i.e. a
+    <math>
+					<mrow>
+						<mi>z</mi>
+						<mo>=</mo>
+						<mn>0</mn>
+					</mrow>
+				</math>
+    or
+    <math>
+					<mrow>
+						<mi>z</mi>
+						<mo>=</mo>
+						<mo>-len</mo>
+					</mrow>
+				</math>
+    vertex). Again, this info can be used to avoid confusion when drawing the more complex join styles.
+</div>
+    </section><section class="section" id="gleTextureMode.3GLE-hints">
+    <h2 class="title">Hints</h2>
+    <div class="para">
+			Here are a few hints, tips, and techniques:
+		</div>
+    <div class="itemizedlist">
+    <dd class="listitem">
+    <div class="simpara">
+					Confused?
+    <span class="emphasis">Run the demos!</span>
+    The best way to understand what all the different
+					texture modes are doing is to see them in action.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="simpara">
+					The texture matrix can be used to your advantage! That is, you can use
+    <a class="function" href="./glMatrixMode.html">glMatrixMode(GL_TEXTURE)</a>
+    to control how textures are mapped to the surface. In
+					particular, you may/will want to use it to to rescale the V coordinate.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="simpara">
+					The origin of the contour will in general change the vertex x's and y's, thus changing the texture coordinates.
+				</div>
+</dd>
+    <dd class="listitem">
+    <div class="simpara">
+					The contour
+    <a class="parameter" href="#param-up">up</a>
+    vector will NOT influence the texture coordinates.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="simpara">
+					For the FLAT and CYL modes, the accumulated length really is the accumulated length of the segments in modeling
+					coordinates. Unless the extrusion is very small, this length will probably be much larger than 1.0, and so the
+					resulting texture coordinate will wrap. You will generally want to rescale the "V" coordinate to make
+					the texture map fit.
+				</div>
+</dd>
+    <dd class="listitem">
+    <div class="simpara">
+					If the texture is "swimming" around on the surface in an undesired way, try using the
+					"MODEL" version of the texture generation flag.
+				</div>
+</dd>
+    <dd class="listitem">
+    <div class="simpara">
+					Typically, you will
+    <span class="emphasis">not</span>
+    want to use the "SPH" versions of the
+					texture generation engine unless you really, really have an extrusion for which spherical coordinates are
+					appropriate. Most uses of extrusions are best handled with the "FLAT" and "CYL" generation
+					methods.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="simpara">
+					User-defined texture generation callbacks are not currently implemented, but these should be very, very easy to
+					hack in as desired. It should be easy to let your imagination run wild in here. Look at
+    <div class="filename">texgen.c</div>
+</div>
+</dd>
+</div>
+    </section><section class="section" id="gleTextureMode.3GLE-bugs">
+    <h2 class="title">Bugs</h2>
+    <div class="para">
+			Multiple threads using GLE share a single texture mode.
+		</div>
+    </section><section class="section" id="gleTextureMode.3GLE-author">
+    <h2 class="title">Author</h2>
+    <div class="para">
+			Linas Vepstas
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./gleExtrusion.html">gleExtrusion</a>
+            <a class="crossref" href="./gleSetJoinStyle.html">gleSetJoinStyle</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gleTextureMode</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/extrusions.py">OpenGLContext/scenegraph/extrusions.py</a>
+    Lines: <span class="sample-lines">101</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

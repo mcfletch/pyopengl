@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutSetCursor : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutSetCursor</h1>
+</header>
+<main class="content">
+    <section class="purpose">changes the cursor image of the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutSetCursor"></a>
+    <span class="c-function">glutSetCursor</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-cursor" class="parameter">cursor</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutSetCursor"></a>
+    <span class="py-function">glutSetCursor</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-cursor" class="parameter">cursor</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutSetCursor( c_int(cursor) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-cursor"></a>
+                        cursor
+                    </th>
+                    <td>
+    <div class="simpara">
+						Name of cursor image to change to. Possible values follow:
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutSetCursor.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutSetCursor.html">glutSetCursor</a>
+    changes the cursor image of the current window. Each call requests the window system
+			change the cursor appropriately. The cursor image when a window is created is
+    <span class="constant">GLUT_CURSOR_INHERIT</span>
+    .
+			The exact cursor images used are implementation dependent. The intent is for the image to convey the meaning of the
+			cursor name. For a top-level window,
+    <span class="constant">GLUT_CURSOR_INHERIT</span>
+    uses the default window system cursor.
+</div>
+    </section><section class="section" id="glutSetCursor.3GLUT-x_implementation_notes">
+    <h2 class="title">X Implementation Notes</h2>
+    <div class="para">
+			GLUT for X uses SGI's _SGI_CROSSHAIR_CURSOR convention to access a full-screen cross-hair cursor if possible.
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutCreateWindow.html">glutCreateWindow</a>
+            <a class="crossref" href="./glutCreateSubWindow.html">glutCreateSubWindow</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

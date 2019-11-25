@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glEvalMesh : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glEvalMesh</h1>
+</header>
+<main class="content">
+    <section class="purpose">compute a one- or two-dimensional grid of points or lines</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glEvalMesh"></a>
+    <span class="c-function">glEvalMesh</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glEvalMesh1"></a>
+    <span class="c-function">glEvalMesh1</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-mode" class="parameter">mode</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-i1" class="parameter">i1</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-i2" class="parameter">i2</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEvalMesh1"></a>
+    <span class="py-function">glEvalMesh1</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-mode" class="parameter">mode</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-i1" class="parameter">i1</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-i2" class="parameter">i2</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glEvalMesh2"></a>
+    <span class="c-function">glEvalMesh2</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-mode" class="parameter">mode</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-i1" class="parameter">i1</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-i2" class="parameter">i2</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-j1" class="parameter">j1</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-j2" class="parameter">j2</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEvalMesh2"></a>
+    <span class="py-function">glEvalMesh2</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-mode" class="parameter">mode</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-i1" class="parameter">i1</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-i2" class="parameter">i2</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-j1" class="parameter">j1</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-j2" class="parameter">j2</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-mode"></a>
+                        mode
+                    </th>
+                    <td>
+    <div class="para">
+                    In
+    <a class="function" href="./glEvalMesh.html#c-glEvalMesh1">glEvalMesh1</a>
+    , specifies whether to compute a one-dimensional mesh of points or lines.
+                    Symbolic constants
+    <span class="constant">GL_POINT</span>
+    and
+    <span class="constant">GL_LINE</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-i1"></a><a name="param-i2"></a>
+                        i1, i2
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the first and last integer values for grid domain variable
+    <math><mi mathvariant="italic">i</mi></math>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-mode"></a>
+                        mode
+                    </th>
+                    <td>
+    <div class="para">
+                    In
+    <a class="function" href="./glEvalMesh.html#c-glEvalMesh2">glEvalMesh2</a>
+    , specifies whether to compute a two-dimensional mesh of points, lines,
+                    or polygons.
+                    Symbolic constants
+    <span class="constant">GL_POINT</span>
+    ,
+    <span class="constant">GL_LINE</span>
+    , and
+    <span class="constant">GL_FILL</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-i1"></a><a name="param-i2"></a>
+                        i1, i2
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the first and last integer values for grid domain variable
+    <math><mi mathvariant="italic">i</mi></math>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-j1"></a><a name="param-j2"></a>
+                        j1, j2
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the first and last integer values for grid domain variable
+    <math><mi mathvariant="italic">j</mi></math>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="crossref" href="./glMapGrid.html">glMapGrid</a>
+    and
+    <a class="function" href="./glEvalMesh.html">glEvalMesh</a>
+    are used in tandem to efficiently
+            generate and evaluate a series of evenly-spaced map domain values.
+    <a class="function" href="./glEvalMesh.html">glEvalMesh</a>
+    steps through the integer domain of a one- or two-dimensional grid,
+            whose range is the domain of the evaluation maps specified by
+    <a class="crossref" href="./glMap1.html">glMap1</a>
+    and
+    <a class="crossref" href="./glMap2.html">glMap2</a>
+    .
+    <a class="parameter" href="#param-mode">mode</a>
+    determines whether the resulting vertices are connected as
+            points,
+            lines,
+            or filled polygons.
+</div>
+    <div class="para">
+            In the one-dimensional case,
+    <a class="function" href="./glEvalMesh.html#c-glEvalMesh1">glEvalMesh1</a>
+    ,
+            the mesh is generated as if the following code fragment were executed:
+</div>
+    <div class="para">
+    <div class="programlisting">
+glBegin(
+    <a class="parameter" href="#param-type">type</a>
+    );
+for ( i =
+    <a class="parameter" href="#param-i1">i1</a>
+    ; i &lt;=
+    <a class="parameter" href="#param-i2">i2</a>
+    ; i += 1 )
+   glEvalCoord1(
+    <math>
+		      <mrow>
+		          <mrow>
+		              <mn>i</mn>
+			      <mo></mo>
+			      <mo></mo>
+		              <mi mathvariant="italic">u</mi>
+		          </mrow>
+		          <mo>+</mo>
+		          <msub>
+		              <mi mathvariant="italic">u</mi>
+		              <mn>1</mn>
+		          </msub>
+		      </mrow>
+		  </math> );
+glEnd();
+    );
+glEnd();
+</div>
+    where
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mrow>
+                        <mo></mo>
+                        <mi mathvariant="italic">u</mi>
+                    </mrow>
+                    <mo>=</mo>
+                    <mfrac>
+                        <mfenced open="(" close=")">
+                            <mrow>
+                                <msub>
+				    <mi mathvariant="italic">u</mi>
+                                    <mn>2</mn>
+                                </msub>
+                                <mo>-</mo>
+                                <msub>
+				    <mi mathvariant="italic">u</mi>
+                                    <mn>1</mn>
+                                </msub>
+                            </mrow>
+                        </mfenced>
+                        <mi mathvariant="italic">n</mi>
+                    </mfrac>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+            and
+    <math><mi mathvariant="italic">n</mi></math>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">u</mi>
+                <mn>1</mn>
+                </msub>
+            </math>
+    ,
+            and
+    <math>
+                <msub><mi mathvariant="italic">u</mi>
+                <mn>2</mn>
+                </msub>
+            </math>
+    are the arguments to the most recent
+    <a class="crossref" href="./glMapGrid.html#c-glMapGrid">glMapGrid1</a>
+    command.
+    <span class="emphasis">type</span>
+    is
+    <span class="constant">GL_POINTS</span>
+    if
+    <a class="parameter" href="#param-mode">mode</a>
+    is
+    <span class="constant">GL_POINT</span>
+    ,
+            or
+    <span class="constant">GL_LINES</span>
+    if
+    <a class="parameter" href="#param-mode">mode</a>
+    is
+    <span class="constant">GL_LINE</span>
+    .
+</div>
+    <div class="para">
+            The one absolute numeric requirement is that if
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">i</mi>
+                    <mo>=</mo>
+                    <mi mathvariant="italic">n</mi>
+                </mrow>
+            </math>
+    ,
+            then the
+            value computed from
+    <math>
+                <mrow>
+                    <mrow>
+                        <mi mathvariant="italic">i</mi>
+                        <mo></mo>
+                        <mrow>
+                            <mo></mo>
+                            <mi mathvariant="italic">u</mi>
+                        </mrow>
+                    </mrow>
+                    <mo>+</mo>
+                    <msub><mi mathvariant="italic">u</mi>
+                    <mn>1</mn>
+                    </msub>
+                </mrow>
+            </math>
+    is exactly
+    <math>
+                <msub><mi mathvariant="italic">u</mi>
+                <mn>2</mn>
+                </msub>
+            </math>
+    .
+</div>
+    <div class="para">
+            In the two-dimensional case,
+    <a class="function" href="./glEvalMesh.html#c-glEvalMesh2">glEvalMesh2</a>
+    , let
+            .cp
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mrow>
+                        <mo></mo>
+                        <mi mathvariant="italic">u</mi>
+                    </mrow>
+                    <mo>=</mo>
+                    <mfrac>
+                        <mfenced open="(" close=")">
+                            <mrow>
+                                <msub><mi mathvariant="italic">u</mi>
+                                <mn>2</mn>
+                                </msub>
+                                <mo>-</mo>
+                                <msub><mi mathvariant="italic">u</mi>
+                                <mn>1</mn>
+                                </msub>
+                            </mrow>
+                        </mfenced>
+                        <mi mathvariant="italic">n</mi>
+                    </mfrac>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mrow>
+                        <mo></mo>
+                        <mi mathvariant="italic">v</mi>
+                    </mrow>
+                    <mo>=</mo>
+                    <mfrac>
+                        <mfenced open="(" close=")">
+                            <mrow>
+                                <msub><mi mathvariant="italic">v</mi>
+                                <mn>2</mn>
+                                </msub>
+                                <mo>-</mo>
+                                <msub><mi mathvariant="italic">v</mi>
+                                <mn>1</mn>
+                                </msub>
+                            </mrow>
+                        </mfenced>
+                        <mi mathvariant="italic">m</mi>
+                    </mfrac>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+            where
+    <math><mi mathvariant="italic">n</mi></math>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">u</mi>
+                <mn>1</mn>
+                </msub>
+            </math>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">u</mi>
+                <mn>2</mn>
+                </msub>
+            </math>
+    ,
+    <math><mi mathvariant="italic">m</mi></math>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">v</mi>
+                <mn>1</mn>
+                </msub>
+            </math>
+    ,
+            and
+    <math>
+                <msub><mi mathvariant="italic">v</mi>
+                <mn>2</mn>
+                </msub>
+            </math>
+    are the
+            arguments to the most recent
+    <a class="crossref" href="./glMapGrid.html#c-glMapGrid2f">glMapGrid2</a>
+    command.  Then, if
+    <a class="parameter" href="#param-mode">mode</a>
+    is
+    <span class="constant">GL_FILL</span>
+    , the
+    <a class="function" href="./glEvalMesh.html#c-glEvalMesh2">glEvalMesh2</a>
+    command is equivalent
+            to:
+</div>
+    <div class="para">
+    <div class="programlisting">
+for ( j =
+    <a class="parameter" href="#param-j1">j1</a>
+    ; j &lt;
+    <a class="parameter" href="#param-j2">j2</a>
+    ; j += 1 ) {
+   glBegin( GL_QUAD_STRIP );
+   for ( i =
+    <a class="parameter" href="#param-i1">i1</a>
+    ; i &lt;=
+    <a class="parameter" href="#param-i2">i2</a>
+    ; i += 1 ) {
+      glEvalCoord2(
+    <math>
+		        <mrow>
+			    <mrow>
+			        <mn>i</mn>
+				<mo></mo>
+			        <mo></mo>
+		                <mi mathvariant="italic">u</mi>
+			    </mrow>
+		            <mo>+</mo>
+		            <msub>
+		                <mi mathvariant="italic">u</mi>
+		                <mn>1</mn>
+		            </msub>
+			    <mo>,</mo>
+			    <mrow>
+			        <mn>j</mn>
+				<mo></mo>
+			        <mo></mo>
+		                <mi mathvariant="italic">v</mi>
+			    </mrow>
+		            <mo>+</mo>
+		            <msub>
+		                <mi mathvariant="italic">v</mi>
+		                <mn>1</mn>
+		            </msub>
+			</mrow>
+		    </math> );
+      glEvalCoord2(
+    );
+      glEvalCoord2(
+    <math>
+		        <mrow>
+			    <mrow>
+			        <mn>i</mn>
+				<mo></mo>
+			        <mo></mo>
+		                <mi mathvariant="italic">u</mi>
+			    </mrow>
+		            <mo>+</mo>
+		            <msub>
+		                <mi mathvariant="italic">u</mi>
+		                <mn>1</mn>
+		            </msub>
+			    <mo>,</mo>
+			    <mrow>
+			        <mrow>
+				    <mfenced open="(" close=")">
+				        <mrow>
+			                    <mn>j</mn>
+				            <mo>+</mo>
+			                    <mn>1</mn>
+				        </mrow>
+				    </mfenced>
+				</mrow>
+				<mo></mo>
+			        <mo></mo>
+		                <mi mathvariant="italic">v</mi>
+			    </mrow>
+		            <mo>+</mo>
+		            <msub>
+		                <mi mathvariant="italic">v</mi>
+		                <mn>1</mn>
+		            </msub>
+			</mrow>
+		    </math> );
+   }
+   glEnd();
+}
+    );
+   }
+   glEnd();
+}
+</div>
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-mode">mode</a>
+    is
+    <span class="constant">GL_LINE</span>
+    , then a call to
+    <a class="function" href="./glEvalMesh.html#c-glEvalMesh2">glEvalMesh2</a>
+    is equivalent to:
+</div>
+    <div class="para">
+    <div class="programlisting">
+for ( j =
+    <a class="parameter" href="#param-j1">j1</a>
+    ; j &lt;=
+    <a class="parameter" href="#param-j2">j2</a>
+    ; j += 1 ) {
+   glBegin( GL_LINE_STRIP );
+   for ( i =
+    <a class="parameter" href="#param-i1">i1</a>
+    ; i &lt;=
+    <a class="parameter" href="#param-i2">i2</a>
+    ; i += 1 )
+      glEvalCoord2(
+    <math>
+		        <mrow>
+			    <mrow>
+			        <mn>i</mn>
+				<mo></mo>
+			        <mo></mo>
+		                <mi mathvariant="italic">u</mi>
+			    </mrow>
+		            <mo>+</mo>
+		            <msub>
+		                <mi mathvariant="italic">u</mi>
+		                <mn>1</mn>
+		            </msub>
+			    <mo>,</mo>
+			    <mrow>
+			        <mn>j</mn>
+				<mo></mo>
+			        <mo></mo>
+		                <mi mathvariant="italic">v</mi>
+			    </mrow>
+		            <mo>+</mo>
+		            <msub>
+		                <mi mathvariant="italic">v</mi>
+		                <mn>1</mn>
+		            </msub>
+			</mrow>
+		    </math> );
+   glEnd();
+}
+for ( i =
+    );
+   glEnd();
+}
+for ( i =
+    <a class="parameter" href="#param-i1">i1</a>
+    ;  i &lt;=
+    <a class="parameter" href="#param-i2">i2</a>
+    ; i += 1 ) {
+   glBegin( GL_LINE_STRIP );
+   for ( j =
+    <a class="parameter" href="#param-j1">j1</a>
+    ; j &lt;=
+    <a class="parameter" href="#param-j1">j1</a>
+    ; j += 1 )
+      glEvalCoord2(
+    <math>
+		        <mrow>
+			    <mrow>
+			        <mn>i</mn>
+				<mo></mo>
+			        <mo></mo>
+		                <mi mathvariant="italic">u</mi>
+			    </mrow>
+		            <mo>+</mo>
+		            <msub>
+		                <mi mathvariant="italic">u</mi>
+		                <mn>1</mn>
+		            </msub>
+			    <mo>,</mo>
+			    <mrow>
+			        <mn>j</mn>
+				<mo></mo>
+			        <mo></mo>
+		                <mi mathvariant="italic">v</mi>
+			    </mrow>
+		            <mo>+</mo>
+		            <msub>
+		                <mi mathvariant="italic">v</mi>
+		                <mn>1</mn>
+		            </msub>
+			</mrow>
+		    </math> );
+   glEnd();
+}
+    );
+   glEnd();
+}
+</div>
+</div>
+    <div class="para">
+            And finally, if
+    <a class="parameter" href="#param-mode">mode</a>
+    is
+    <span class="constant">GL_POINT</span>
+    , then a call to
+    <a class="function" href="./glEvalMesh.html#c-glEvalMesh2">glEvalMesh2</a>
+    is equivalent to:
+</div>
+    <div class="para">
+    <div class="programlisting">
+glBegin( GL_POINTS );
+for ( j =
+    <a class="parameter" href="#param-j1">j1</a>
+    ; j &lt;=
+    <a class="parameter" href="#param-j2">j2</a>
+    ; j += 1 )
+   for ( i =
+    <a class="parameter" href="#param-i1">i1</a>
+    ; i &lt;=
+    <a class="parameter" href="#param-i2">i2</a>
+    ; i += 1 )
+      glEvalCoord2(
+    <math>
+		        <mrow>
+			    <mrow>
+			        <mn>i</mn>
+				<mo></mo>
+			        <mo></mo>
+		                <mi mathvariant="italic">u</mi>
+			    </mrow>
+		            <mo>+</mo>
+		            <msub>
+		                <mi mathvariant="italic">u</mi>
+		                <mn>1</mn>
+		            </msub>
+			    <mo>,</mo>
+			    <mrow>
+			        <mn>j</mn>
+				<mo></mo>
+			        <mo></mo>
+		                <mi mathvariant="italic">v</mi>
+			    </mrow>
+		            <mo>+</mo>
+		            <msub>
+		                <mi mathvariant="italic">v</mi>
+		                <mn>1</mn>
+		            </msub>
+			</mrow>
+		    </math> );
+glEnd();
+    );
+glEnd();
+</div>
+</div>
+    <div class="para">
+            In all three cases, the only absolute numeric requirements are that if
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">i</mi>
+                    <mo>=</mo>
+                    <mi mathvariant="italic">n</mi>
+                </mrow>
+            </math>
+    ,
+            then the value computed from
+    <math>
+                <mrow>
+                    <mrow>
+                        <mi mathvariant="italic">i</mi>
+                        <mo></mo>
+                        <mrow>
+                            <mo></mo>
+                            <mi mathvariant="italic">u</mi>
+                        </mrow>
+                    </mrow>
+                    <mo>+</mo>
+                    <msub><mi mathvariant="italic">u</mi>
+                    <mn>1</mn>
+                    </msub>
+                </mrow>
+            </math>
+    is exactly
+    <math>
+                <msub><mi mathvariant="italic">u</mi>
+                <mn>2</mn>
+                </msub>
+            </math>
+    ,
+            and if
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">j</mi>
+                    <mo>=</mo>
+                    <mi mathvariant="italic">m</mi>
+                </mrow>
+            </math>
+    ,
+            then the value computed from
+    <math>
+                <mrow>
+                    <mrow>
+                        <mi mathvariant="italic">j</mi>
+                        <mo></mo>
+                        <mrow>
+                            <mo></mo>
+                            <mi mathvariant="italic">v</mi>
+                        </mrow>
+                    </mrow>
+                    <mo>+</mo>
+                    <msub><mi mathvariant="italic">v</mi>
+                    <mn>1</mn>
+                    </msub>
+                </mrow>
+            </math>
+    is exactly
+    <math>
+                <msub><mi mathvariant="italic">v</mi>
+                <mn>2</mn>
+                </msub>
+            </math>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-mode">mode</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glEvalMesh.html">glEvalMesh</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAP1_GRID_DOMAIN</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAP2_GRID_DOMAIN</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAP1_GRID_SEGMENTS</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAP2_GRID_SEGMENTS</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    ,
+    <a class="crossref" href="./glEvalCoord.html">glEvalCoord</a>
+    ,
+    <a class="crossref" href="./glEvalPoint.html">glEvalPoint</a>
+    ,
+    <a class="crossref" href="./glMap1.html">glMap1</a>
+    ,
+    <a class="crossref" href="./glMap2.html">glMap2</a>
+    ,
+    <a class="crossref" href="./glMapGrid.html">glMapGrid</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glEvalMesh2</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/dek_surf.py">tests/dek_surf.py</a>
+    Lines: <span class="sample-lines">57</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/dek_texturesurf.py">tests/dek_texturesurf.py</a>
+    Lines: <span class="sample-lines">72</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/bezier/bezier.py">PyOpenGL-Demo/proesch/bezier/bezier.py</a>
+    Lines: <span class="sample-lines">113</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/texturesurf.py">PyOpenGL-Demo/dek/texturesurf.py</a>
+    Lines: <span class="sample-lines">96</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

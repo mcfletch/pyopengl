@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutAttachMenu : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutAttachMenu</h1>
+</header>
+<main class="content">
+    <section class="purpose">attaches/detaches a mouse button for the current window to the identifier of the current menu</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutAttachMenu"></a>
+    <span class="c-function">glutAttachMenu</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-button" class="parameter">button</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutAttachMenu"></a>
+    <span class="py-function">glutAttachMenu</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-button" class="parameter">button</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutAttachMenu( c_int(button) ) -&gt; None</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutDetachMenu"></a>
+    <span class="c-function">glutDetachMenu</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-button" class="parameter">button</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutDetachMenu"></a>
+    <span class="py-function">glutDetachMenu</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-button" class="parameter">button</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutDetachMenu( c_int(button) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-button"></a>
+                        button
+                    </th>
+                    <td>
+    <div class="simpara">
+						The button to attach a menu or detach a menu.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutAttachMenu.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutAttachMenu.html">glutAttachMenu</a>
+    attaches a mouse button for the current window to the identifier of the current
+			menu; glutDetachMenu detaches an attached mouse button from the current window. By attaching a menu identifier to a
+			button, the named menu will be popped up when the user presses the specified button. button should be one of
+    <span class="constant">GLUT_LEFT_BUTTON</span>
+    ,
+    <span class="constant">GLUT_MIDDLE_BUTTON</span>
+    , and
+    <span class="constant">GLUT_RIGHT_BUTTON</span>
+    . Note that the menu is attached to the button by identifier, not by reference.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutCreateMenu.html">glutCreateMenu</a>
+            <a class="crossref" href="./glutMouseFunc.html">glutMouseFunc</a>
+            <a class="crossref" href="./glutMenuStatusFunc.html">glutMenuStatusFunc</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutAttachMenu</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/glutvrmltestingcontext.py">OpenGLContext/glutvrmltestingcontext.py</a>
+    Lines: <span class="sample-lines">38</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/simple/simpleInteraction.py">PyOpenGL-Demo/proesch/simple/simpleInteraction.py</a>
+    Lines: <span class="sample-lines">125</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLE/maintest.py">PyOpenGL-Demo/GLE/maintest.py</a>
+    Lines: <span class="sample-lines">43</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/glutplane.py">PyOpenGL-Demo/GLUT/glutplane.py</a>
+    Lines: <span class="sample-lines">237</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

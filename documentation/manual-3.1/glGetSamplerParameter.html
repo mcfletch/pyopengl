@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetSamplerParameter : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetSamplerParameter</h1>
+</header>
+<main class="content">
+    <section class="purpose">return sampler parameter values</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetSamplerParameter"></a>
+    <span class="c-function">glGetSamplerParameter</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetSamplerParameterIiv"></a>
+    <span class="c-function">glGetSamplerParameterIiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-sampler" class="parameter">sampler</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetSamplerParameterIiv"></a>
+    <span class="py-function">glGetSamplerParameterIiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-sampler" class="parameter">sampler</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetSamplerParameterIuiv"></a>
+    <span class="c-function">glGetSamplerParameterIuiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-sampler" class="parameter">sampler</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetSamplerParameterIuiv"></a>
+    <span class="py-function">glGetSamplerParameterIuiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-sampler" class="parameter">sampler</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetSamplerParameterfv"></a>
+    <span class="c-function">glGetSamplerParameterfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-sampler" class="parameter">sampler</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetSamplerParameterfv"></a>
+    <span class="py-function">glGetSamplerParameterfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-sampler" class="parameter">sampler</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetSamplerParameteriv"></a>
+    <span class="c-function">glGetSamplerParameteriv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-sampler" class="parameter">sampler</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetSamplerParameteriv"></a>
+    <span class="py-function">glGetSamplerParameteriv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-sampler" class="parameter">sampler</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sampler"></a>
+                        sampler
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies name of the sampler object from which to retrieve parameters.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the symbolic name of a sampler parameter.
+    <span class="constant">GL_TEXTURE_MAG_FILTER</span>
+    ,
+    <span class="constant">GL_TEXTURE_MIN_FILTER</span>
+    ,
+    <span class="constant">GL_TEXTURE_MIN_LOD</span>
+    ,
+    <span class="constant">GL_TEXTURE_MAX_LOD</span>
+    ,
+    <span class="constant">GL_TEXTURE_LOD_BIAS</span>
+    ,
+    <span class="constant">GL_TEXTURE_WRAP_S</span>
+    ,
+    <span class="constant">GL_TEXTURE_WRAP_T</span>
+    ,
+    <span class="constant">GL_TEXTURE_WRAP_R</span>
+    ,
+    <span class="constant">GL_TEXTURE_BORDER_COLOR</span>
+    ,
+    <span class="constant">GL_TEXTURE_COMPARE_MODE</span>
+    , and
+    <span class="constant">GL_TEXTURE_COMPARE_FUNC</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">
+                    Returns the sampler parameters.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetSamplerParameter.html">glGetSamplerParameter</a>
+    returns in
+    <a class="parameter" href="#param-params">params</a>
+    the value or values of the sampler parameter
+            specified as
+    <a class="parameter" href="#param-pname">pname</a>
+    .
+    <a class="parameter" href="#param-sampler">sampler</a>
+    defines the target sampler, and must be the name of an existing sampler object, returned from a previous call
+            to
+    <a class="crossref" href="./glGenSamplers.html">glGenSamplers</a>
+    .
+    <a class="parameter" href="#param-pname">pname</a>
+    accepts the same symbols as
+    <a class="crossref" href="./glSamplerParameter.html">glSamplerParameter</a>
+    ,
+            with the same interpretations:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_MAG_FILTER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the single-valued texture magnification filter,
+                        a symbolic constant. The initial value is
+    <span class="constant">GL_LINEAR</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_MIN_FILTER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the single-valued texture minification filter,
+                        a symbolic constant. The initial value is
+    <span class="constant">GL_NEAREST_MIPMAP_LINEAR</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_MIN_LOD</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the single-valued texture minimum level-of-detail value.  The
+                        initial value is
+    <math overflow="scroll">
+                            <mn>-1000</mn>
+                        </math>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_MAX_LOD</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the single-valued texture maximum level-of-detail value. The
+                        initial value is 1000.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_WRAP_S</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the single-valued wrapping function for texture coordinate
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    ,
+                        a symbolic constant. The initial value is
+    <span class="constant">GL_REPEAT</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_WRAP_T</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the single-valued wrapping function for texture coordinate
+    <math overflow="scroll"><mi mathvariant="italic">t</mi></math>
+    ,
+                        a symbolic constant. The initial value is
+    <span class="constant">GL_REPEAT</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_WRAP_R</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the single-valued wrapping function for texture coordinate
+    <math overflow="scroll"><mi mathvariant="italic">r</mi></math>
+    ,
+                        a symbolic constant. The initial value is
+    <span class="constant">GL_REPEAT</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BORDER_COLOR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns four integer or floating-point numbers that comprise the RGBA color
+                        of the texture border.
+                        Floating-point values are returned in the range
+    <math overflow="scroll">
+                            <mfenced open="[" close="]">
+                                <mn>0</mn>
+                                <mn>1</mn>
+                            </mfenced>
+                        </math>
+    .
+                        Integer values are returned as a linear mapping of the internal floating-point
+                        representation such that 1.0 maps to the most positive representable
+                        integer and
+    <math overflow="scroll">
+                            <mn>-1.0</mn>
+                        </math>
+    maps to the most negative representable
+                        integer. The initial value is (0, 0, 0, 0).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_COMPARE_MODE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns a single-valued texture comparison mode, a symbolic constant.  The
+                        initial value is
+    <span class="constant">GL_NONE</span>
+    . See
+    <a class="crossref" href="./glSamplerParameter.html">glSamplerParameter</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_COMPARE_FUNC</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns a single-valued texture comparison function, a symbolic constant.  The
+                        initial value is
+    <span class="constant">GL_LEQUAL</span>
+    . See
+    <a class="crossref" href="./glSamplerParameter.html">glSamplerParameter</a>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            If an error is generated,
+            no change is made to the contents of
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    <div class="para">
+    <a class="function" href="./glGetSamplerParameter.html">glGetSamplerParameter</a>
+    is available only if the GL version is 3.3 or higher.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-sampler">sampler</a>
+    is not the name of a sampler object returned from
+            a previous call to
+    <a class="crossref" href="./glGenSamplers.html">glGenSamplers</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not an accepted value.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetSamplerParameter.html#c-glGetSamplerParameterIiv">glGetSamplerParameterIiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetSamplerParameter.html#c-glGetSamplerParameterIuiv">glGetSamplerParameterIuiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetSamplerParameter.html#c-glGetSamplerParameterfv">glGetSamplerParameterfv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetSamplerParameter.html#c-glGetSamplerParameteriv">glGetSamplerParameteriv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glSamplerParameter.html">glSamplerParameter</a>
+    ,
+    <a class="crossref" href="./glGenSamplers.html">glGenSamplers</a>
+    ,
+    <a class="crossref" href="./glDeleteSamplers.html">glDeleteSamplers</a>
+    ,
+    <a class="crossref" href="./glSamplerParameter.html">glSamplerParameter</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

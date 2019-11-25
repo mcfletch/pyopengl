@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glCreateShaderProgram : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glCreateShaderProgram</h1>
+</header>
+<main class="content">
+    <section class="purpose">create a stand-alone program from an array of null-terminated source code strings</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glCreateShaderProgramv"></a>
+    <span class="c-function">glCreateShaderProgramv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-count" class="parameter">count</a>
+        )
+        ,
+    </span><span class="param-def">
+        const char **(
+            <a href="#param-strings" class="parameter">strings</a>
+        )
+    </span>
+</span>)-&gt; GLuint
+</div>
+                <div class="py-signature">
+    <a name="py-glCreateShaderProgramv"></a>
+    <span class="py-function">glCreateShaderProgramv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-count" class="parameter">count</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-strings" class="parameter">strings</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_uint'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the type of shader to create.
+            </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-count"></a>
+                        count
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the number of source code strings in the array
+    <a class="parameter" href="#param-strings">strings</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-strings"></a>
+                        strings
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the address of an array of pointers to source code strings from which to create the program object.
+            </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glCreateShaderProgram.html">glCreateShaderProgram</a>
+    creates a program object containing compiled and linked
+            shaders for a single stage specified by
+    <a class="parameter" href="#param-type">type</a>
+    .
+    <a class="parameter" href="#param-strings">strings</a>
+    refers to an array of
+    <a class="parameter" href="#param-count">count</a>
+    strings from which to create the shader executables.
+</div>
+    <div class="para">
+    <a class="function" href="./glCreateShaderProgram.html">glCreateShaderProgram</a>
+    is equivalent (assuming no errors are generated) to:
+</div>
+    <div class="programlisting">    const GLuint shader = glCreateShader(type);
+    if (shader) {
+        glShaderSource(shader, count, strings, NULL);
+        glCompileShader(shader);
+        const GLuint program = glCreateProgram();
+        if (program) {
+            GLint compiled = GL_FALSE;
+            glGetShaderiv(shader, GL_COMPILE_STATUS, &amp;compiled);
+            glProgramParameteri(program, GL_PROGRAM_SEPARABLE, GL_TRUE);
+            if (compiled) {
+                glAttachShader(program, shader);
+                glLinkProgram(program);
+                glDetachShader(program, shader);
+            }
+            /* append-shader-info-log-to-program-info-log */
+        }
+        glDeleteShader(shader);
+        return program;
+    } else {
+        return 0;
+    }</div>
+    <div class="para">
+        The program object created by
+    <a class="function" href="./glCreateShaderProgram.html">glCreateShaderProgram</a>
+    has its
+    <span class="constant">GL_PROGRAM_SEPARABLE</span>
+    status set to
+    <span class="constant">GL_TRUE</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is not
+            an accepted shader type.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-count">count</a>
+    is
+            negative.
+</div>
+    <div class="para">
+            Other errors are generated if the supplied shader code fails to compile
+            and link, as described for the commands in the pseudocode sequence above,
+            but all such errors are generated without any side effects of executing those
+            commands.
+        </div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glCreateShaderProgram.html#c-glCreateShaderProgramv">glCreateShaderProgramv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glCreateShader.html">glCreateShader</a>
+    ,
+    <a class="crossref" href="./glCreateProgram.html">glCreateProgram</a>
+    ,
+    <a class="crossref" href="./glCompileShader.html">glCompileShader</a>
+    ,
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutSpaceballMotionFunc : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutSpaceballMotionFunc</h1>
+</header>
+<main class="content">
+    <section class="purpose">sets the Spaceball motion callback for the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutSpaceballMotionFunc"></a>
+    <span class="c-function">glutSpaceballMotionFunc</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutSpaceballMotionFunc"></a>
+    <span class="py-function">glutSpaceballMotionFunc</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-function" class="parameter">function</a>
+    </span>
+</span> )
+    <pre class="pydoc">Specify handler for GLUT 'SpaceballMotion' events
+    def handler( (int) x, (int) y, (int) z ):
+        return None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-func"></a>
+                        func
+                    </th>
+                    <td>
+    <div class="simpara">
+						The new entry callback function.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutSpaceballMotionFunc.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutSpaceballMotionFunc.html">glutSpaceballMotionFunc</a>
+    sets the Spaceball motion callback for the current window. The Spaceball
+			motion callback for a window is called when the window has Spaceball input focus (normally, when the mouse is in the
+			window) and the user generates Spaceball translations. The
+    <a class="parameter" href="#param-x">x</a>
+    ,
+    <a class="parameter" href="#param-y">y</a>
+    , and
+    <a class="parameter" href="#param-z">z</a>
+    callback parameters indicate the translations along the X, Y, and Z axes. The callback
+			parameters are normalized to be within the range of -1000 to 1000 inclusive.
+</div>
+    <div class="para">
+			Registering a Spaceball motion callback when a Spaceball device is not available has no effect and is not an error. In
+			this case, no Spaceball motion callbacks will be generated.
+		</div>
+    <div class="para">
+			Passing
+    <span class="constant">NULL</span>
+    to glutSpaceballMotionFunc
+    <a class="function" href="./glutSpaceballMotionFunc.html">glutSpaceballMotionFunc</a>
+    disables the
+			generation of Spaceball motion callbacks. When a new window is created, no Spaceball motion callback is initially
+			registered.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutSpaceballRotateFunc.html">glutSpaceballRotateFunc</a>
+            <a class="crossref" href="./glutSpaceballButtonFunc.html">glutSpaceballButtonFunc</a>
+            <a class="crossref" href="./glutMotionFunc.html">glutMotionFunc</a>
+            <a class="crossref" href="./glutTabletMotionFunc.html">glutTabletMotionFunc</a>
+            <a class="crossref" href="./glutJoystickFunc.html">glutJoystickFunc</a>
+            <a class="crossref" href="./glutDeviceGet.html">glutDeviceGet</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glEdgeFlag : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glEdgeFlag</h1>
+</header>
+<main class="content">
+    <section class="purpose">flag edges as either boundary or nonboundary</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glEdgeFlag"></a>
+    <span class="c-function">glEdgeFlag</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLboolean (
+            <a href="#param-flag" class="parameter">flag</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEdgeFlag"></a>
+    <span class="py-function">glEdgeFlag</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-flag" class="parameter">flag</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glEdgeFlagv"></a>
+    <span class="c-function">glEdgeFlagv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLboolean * (
+            <a href="#param-flag" class="parameter">flag</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEdgeFlagv"></a>
+    <span class="py-function">glEdgeFlagv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-flag" class="parameter">flag</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-flag"></a>
+                        flag
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the current edge flag value,
+                    either
+    <span class="constant">GL_TRUE</span>
+    or
+    <span class="constant">GL_FALSE</span>
+    . The initial value is
+    <span class="constant">GL_TRUE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-flag"></a>
+                        flag
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to an array that contains a single boolean element,
+                    which replaces the current edge flag value.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            Each vertex of a polygon,
+            separate triangle,
+            or separate quadrilateral specified between a
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    /
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    pair
+            is marked as the start of either a boundary or nonboundary edge.
+            If the current edge flag is true when the vertex is specified,
+            the vertex is marked as the start of a boundary edge.
+            Otherwise, the vertex is marked as the start of a nonboundary edge.
+    <a class="function" href="./glEdgeFlag.html">glEdgeFlag</a>
+    sets the edge flag bit to
+    <span class="constant">GL_TRUE</span>
+    if
+    <a class="parameter" href="#param-flag">flag</a>
+    is
+    <span class="constant">GL_TRUE</span>
+    and to
+    <span class="constant">GL_FALSE</span>
+    otherwise.
+</div>
+    <div class="para">
+            The vertices of connected triangles and connected quadrilaterals are always
+            marked as boundary,
+            regardless of the value of the edge flag.
+        </div>
+    <div class="para">
+            Boundary and nonboundary edge flags on vertices are significant only if
+    <span class="constant">GL_POLYGON_MODE</span>
+    is set to
+    <span class="constant">GL_POINT</span>
+    or
+    <span class="constant">GL_LINE</span>
+    .
+            See
+    <a class="crossref" href="./glPolygonMode.html">glPolygonMode</a>
+    .
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            The current edge flag can be updated at any time.
+            In particular,
+    <a class="function" href="./glEdgeFlag.html">glEdgeFlag</a>
+    can be called between a call to
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding
+            call to
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_EDGE_FLAG</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    ,
+    <a class="function" href="./glEdgeFlagPointer.html">glEdgeFlagPointer</a>
+    ,
+    <a class="crossref" href="./glPolygonMode.html">glPolygonMode</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

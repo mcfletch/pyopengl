@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutExtensionSupported : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutExtensionSupported</h1>
+</header>
+<main class="content">
+    <section class="purpose">helps to easily determine whether a given OpenGL extension is supported.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutExtensionSupported"></a>
+    <span class="c-function">glutExtensionSupported</span>(<span class="parameter-list">
+    <span class="param-def">
+        char(
+            <a href="#param-extension" class="parameter">extension</a>
+        )
+    </span>
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glutExtensionSupported"></a>
+    <span class="py-function">glutExtensionSupported</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-extension" class="parameter">extension</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">glutExtensionSupported( STRING(extension) ) -&gt; c_int</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-extension"></a>
+                        extension
+                    </th>
+                    <td>
+    <div class="simpara">
+						Name of OpenGL extension.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutExtensionSupported.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutExtensionSupported.html">glutExtensionSupported</a>
+    helps to easily determine whether a given OpenGL extension is supported or
+			not. The extension parameter names the extension to query. The supported extensions can also be determined with
+    <a class="function" href="./glGetString.html">glGetString(GL_EXTENSIONS)</a>
+    , but
+    <a class="function" href="./glutExtensionSupported.html">glutExtensionSupported</a>
+    does the correct parsing of the returned string.
+</div>
+    <div class="para">
+    <a class="function" href="./glutExtensionSupported.html">glutExtensionSupported</a>
+    returns non-zero if the extension is supported, zero if not supported.
+</div>
+    <div class="para">
+			There must be a valid current window to call
+    <a class="function" href="./glutExtensionSupported.html">glutExtensionSupported</a>
+    .
+</div>
+    <div class="para">
+    <a class="function" href="./glutExtensionSupported.html">glutExtensionSupported</a>
+    only returns information about OpenGL extensions only. This means window
+			system dependent extensions (for example, GLX extensions) are not reported by
+    <a class="function" href="./glutExtensionSupported.html">glutExtensionSupported</a>
+    .
+</div>
+    </section><section class="section" id="glutExtensionSupported.3GLUT-example">
+    <h2 class="title">Example</h2>
+    <div class="para">
+			Here is an example of using glutExtensionSupported:
+		</div>
+    <div class="programlisting">if (!glutExtensionSupported("GL_EXT_texture")) {
+    fprintf(stderr, "Missing the texture extension!);
+    exit(1);
+}</div>
+    <div class="para">
+			Notice that the name argument includes both the GL prefix and the extension family prefix (EXT).
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutGet.html">glutGet</a>
+            <a class="crossref" href="./glGetString.html">glGetString</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

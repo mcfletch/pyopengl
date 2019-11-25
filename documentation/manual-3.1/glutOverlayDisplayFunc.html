@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutOverlayDisplayFunc : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutOverlayDisplayFunc</h1>
+</header>
+<main class="content">
+    <section class="purpose">sets the overlay display callback for the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutOverlayDisplayFunc"></a>
+    <span class="c-function">glutOverlayDisplayFunc</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutOverlayDisplayFunc"></a>
+    <span class="py-function">glutOverlayDisplayFunc</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-function" class="parameter">function</a>
+    </span>
+</span> )
+    <pre class="pydoc">Specify handler for GLUT 'OverlayDisplay' events
+    def handler(  ):
+        return None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-func"></a>
+                        func
+                    </th>
+                    <td>
+    <div class="simpara">
+						The new overlay display callback function.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutOverlayDisplayFunc.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutDisplayFunc.html">glutDisplayFunc</a>
+    sets the overlay display callback for the current window. The
+			overlay display callback is functionally the same as the window's display callback except that the overlay display
+			callback is used to redisplay the window's overlay.
+</div>
+    <div class="para">
+			When GLUT determines that the overlay plane for the window needs to be redisplayed, the overlay display callback for
+			the window is called. Before the callback, the current window is set to the window needing to be redisplayed and the
+			layer in use is set to the overlay. The overlay display callback is called with no parameters. The entire overlay
+			region should be redisplayed in response to the callback (this includes ancillary buffers if your program depends on
+			their state).
+		</div>
+    <div class="para">
+			GLUT determines when the overlay display callback should be triggered based on the window's overlay redisplay state.
+			The overlay redisplay state for a window can be either set explicitly by calling
+    <a class="function" href="./glutPostOverlayRedisplay.html">glutPostOverlayRedisplay</a>
+    or implicitly as the result of window damage reported by the
+			window system. Multiple posted overlay redisplays for a window are coalesced by GLUT to minimize the number of overlay
+			display callbacks called.
+</div>
+    <div class="para">
+			Upon return from the overlay display callback, the overlay damaged state of the window (returned by calling
+    <a class="function" href="./glutLayerGet.html">glutLayerGet(GLUT_OVERLAY_DAMAGED)</a>
+    is cleared.
+</div>
+    <div class="para">
+			The overlay display callback can be deregistered by passing
+    <span class="constant">NULL</span>
+    to
+    <a class="function" href="./glutOverlayDisplayFunc.html">glutOverlayDisplayFunc</a>
+    . The overlay display callback is initially
+    <span class="constant">NULL</span>
+    when
+			an overlay is established. See
+    <a class="function" href="./glutDisplayFunc.html">glutDisplayFunc</a>
+    to understand how the display
+			callback alone is used if an overlay display callback is not registered.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutDisplayFunc.html">glutDisplayFunc</a>
+            <a class="crossref" href="./glutPostOverlayRedisplay.html">glutPostOverlayRedisplay</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

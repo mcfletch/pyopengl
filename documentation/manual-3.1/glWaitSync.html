@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glWaitSync : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glWaitSync</h1>
+</header>
+<main class="content">
+    <section class="purpose">instruct the GL server to block until the specified sync object becomes signaled</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glWaitSync"></a>
+    <span class="c-function">glWaitSync</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLsync (
+            <a href="#param-sync" class="parameter">sync</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLbitfield (
+            <a href="#param-flags" class="parameter">flags</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint64 (
+            <a href="#param-timeout" class="parameter">timeout</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glWaitSync"></a>
+    <span class="py-function">glWaitSync</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-sync" class="parameter">sync</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-flags" class="parameter">flags</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-timeout" class="parameter">timeout</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sync"></a>
+                        sync
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the sync object whose status to wait on.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-flags"></a>
+                        flags
+                    </th>
+                    <td>
+    <div class="para">
+                    A bitfield controlling the command flushing behavior.
+    <a class="parameter" href="#param-flags">flags</a>
+    may be zero.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-timeout"></a>
+                        timeout
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the timeout that the server should wait before continuing.
+    <a class="parameter" href="#param-timeout">timeout</a>
+    must be
+    <span class="constant">GL_TIMEOUT_IGNORED</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glWaitSync.html">glWaitSync</a>
+    causes the GL server to block and wait until
+    <a class="parameter" href="#param-sync">sync</a>
+    becomes signaled.
+    <a class="parameter" href="#param-sync">sync</a>
+    is the name of an existing sync object upon which to wait.
+    <a class="parameter" href="#param-flags">flags</a>
+    and
+    <a class="parameter" href="#param-timeout">timeout</a>
+    are currently not used and
+            must be set to zero and the special value
+    <span class="constant">GL_TIMEOUT_IGNORED</span>
+    , respectively
+    <div class="footnote">
+    <div class="para">
+    <a class="parameter" href="#param-flags">flags</a>
+    and
+    <a class="parameter" href="#param-timeout">timeout</a>
+    are placeholders for anticipated future extensions of sync object capabilities. They must have these reserved values in
+            order that existing code calling
+    <a class="function" href="./glWaitSync.html">glWaitSync</a>
+    operate properly in the presence of such extensions.
+</div>
+</div>
+    .
+    <a class="function" href="./glWaitSync.html">glWaitSync</a>
+    will always wait no longer than an implementation-dependent timeout. The
+            duration of this timeout in nanoseconds may be queried by calling
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with the
+            parameter
+    <span class="constant">GL_MAX_SERVER_WAIT_TIMEOUT</span>
+    . There is currently no way to determine whether
+    <a class="function" href="./glWaitSync.html">glWaitSync</a>
+    unblocked
+            because the timeout expired or because the sync object being waited on was signaled.
+</div>
+    <div class="para">
+            If an error occurs,
+    <a class="function" href="./glWaitSync.html">glWaitSync</a>
+    does not cause the GL server to block.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glWaitSync.html">glWaitSync</a>
+    is available only if the GL version is 3.2 or higher.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-sync">sync</a>
+    is not the name of a sync object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-flags">flags</a>
+    is not zero.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-timeout">timeout</a>
+    is not
+    <span class="constant">GL_TIMEOUT_IGNORED</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glWaitSync.html">glWaitSync</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glFenceSync.html">glFenceSync</a>
+    ,
+    <a class="crossref" href="./glClientWaitSync.html">glClientWaitSync</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

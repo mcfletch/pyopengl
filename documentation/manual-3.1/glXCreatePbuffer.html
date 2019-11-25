@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXCreatePbuffer : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXCreatePbuffer</h1>
+</header>
+<main class="content">
+    <section class="purpose">create an off-screen rendering area</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXCreatePbuffer"></a>
+    <span class="c-function">glXCreatePbuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        Display * (
+            <a href="#param-dpy" class="parameter">dpy</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLXFBConfig (
+            <a href="#param-config" class="parameter">config</a>
+        )
+        ,
+    </span><span class="param-def">
+        const int * (
+            <a href="#param-attrib_list" class="parameter">attrib_list</a>
+        )
+    </span>
+</span>)-&gt; GLXPbuffer
+</div>
+                <div class="py-signature">
+    <a name="py-glXCreatePbuffer"></a>
+    <span class="py-function">glXCreatePbuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-dpy" class="parameter">dpy</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-config" class="parameter">config</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-attrib_list" class="parameter">attrib_list</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_ulong'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dpy"></a>
+                        dpy
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the connection to the X server.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-config"></a>
+                        config
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a GLXFBConfig structure with the desired attributes for the
+                    window.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-attrib_list"></a>
+                        attrib_list
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a list of attribute value pairs, which must be terminated with
+    <span class="constant">None</span>
+    or
+    <span class="constant">NULL</span>
+    . Accepted attributes are
+    <span class="constant">GLX_PBUFFER_WIDTH</span>
+    ,
+    <span class="constant">GLX_PBUFFER_HEIGHT</span>
+    ,
+    <span class="constant">GLX_PRESERVED_CONTENTS</span>
+    , and
+    <span class="constant">GLX_LARGEST_PBUFFER</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXCreatePbuffer.html">glXCreatePbuffer</a>
+    creates an off-screen rendering area and returns its XID.
+            Any GLX rendering context that was created with respect to
+    <a class="parameter" href="#param-config">config</a>
+    can be used to render into this window.
+            Use
+    <a class="crossref" href="./glXMakeContextCurrent.html">glXMakeContextCurrent</a>
+    to associate the rendering area with a GLX
+            rendering context.
+</div>
+    <div class="para">
+            The accepted attributes for a GLXPbuffer are:
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_PBUFFER_WIDTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specify the pixel width of the requested GLXPbuffer. The default value
+                        is 0.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_PBUFFER_HEIGHT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specify the pixel height of the requested GLXPbuffer. The default value
+                        is 0.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_LARGEST_PBUFFER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specify to obtain the largest available pixel buffer, if the requested
+                        allocation would have failed. The width and height of the allocated
+                        pixel buffer will never exceed the specified
+    <span class="constant">GLX_PBUFFER_WIDTH</span>
+    or
+    <span class="constant">GLX_PBUFFER_HEIGHT</span>
+    , respectively.  Use
+    <a class="crossref" href="./glXQueryDrawable.html">glXQueryDrawable</a>
+    to
+                        retrieve the dimensions of the allocated pixel buffer. The default value is
+    <span class="constant">False</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_PRESERVED_CONTENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specify if the contents of the pixel buffer should be preserved when a
+                        resource conflict occurs.  If set to
+    <span class="constant">False</span>
+    , the contents of the
+                        pixel buffer may be lost at any time.  If set to
+    <span class="constant">True</span>
+    , or not
+                        specified in
+    <a class="parameter" href="#param-attrib_list">attrib_list</a>
+    , then the contents of the pixel buffer will be preserved
+                        (most likely by copying the contents into main system memory from the
+                        frame buffer).  In either case, the client can register (using
+    <a class="crossref" href="./glXSelectEvent.html">glXSelectEvent</a>
+    , to receive
+                        pixel buffer clobber events that are generated when the pbuffer contents have
+                        been preserved or damaged.
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+            GLXPbuffers contain the color and ancillary buffers specified by
+    <a class="parameter" href="#param-config">config</a>
+    .  It is possible to create a pixel buffer with back buffers and
+            to swap those buffers using
+    <a class="crossref" href="./glXSwapBuffers.html">glXSwapBuffers</a>
+    .
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glXCreatePbuffer.html">glXCreatePbuffer</a>
+    is available only if the GLX version is 1.3 or greater.
+</div>
+    <div class="para">
+            If the GLX version is 1.1 or 1.0, the GL version must be 1.0.
+            If the GLX version is 1.2, then the GL version must be 1.1.
+            If the GLX version is 1.3, then the GL version must be 1.2.
+        </div>
+    <div class="para">
+            GLXPbuffers are allocated from frame buffer resources; applications
+            should consider deallocating them when they are not in use.
+        </div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">BadAlloc</span>
+    is generated if there are insufficient resources to
+            allocate the requested GLXPbuffer.
+</div>
+    <div class="para">
+    <span class="constant">GLXBadFBConfig</span>
+    is generated if
+    <a class="parameter" href="#param-config">config</a>
+    is not a valid
+            GLXFBConfig.
+</div>
+    <div class="para">
+    <span class="constant">BadMatch</span>
+    is generated if
+    <a class="parameter" href="#param-config">config</a>
+    does not support rendering to
+            pixel buffers (e.g.,
+    <span class="constant">GLX_DRAWABLE_TYPE</span>
+    does not contain
+    <span class="constant">GLX_PBUFFER_BIT</span>
+    ).
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glXChooseFBConfig.html">glXChooseFBConfig</a>
+    ,
+    <a class="function" href="./glXCreatePbuffer.html">glXCreatePbuffer</a>
+    ,
+    <a class="crossref" href="./glXMakeContextCurrent.html">glXMakeContextCurrent</a>
+    ,
+    <a class="crossref" href="./glXSelectEvent.html">glXSelectEvent</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

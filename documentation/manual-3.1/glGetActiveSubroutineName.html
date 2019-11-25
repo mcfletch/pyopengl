@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetActiveSubroutineName : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetActiveSubroutineName</h1>
+</header>
+<main class="content">
+    <section class="purpose">query the name of an active shader subroutine</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetActiveSubroutineName"></a>
+    <span class="c-function">glGetActiveSubroutineName</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-shadertype" class="parameter">shadertype</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei *(
+            <a href="#param-length" class="parameter">length</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLchar *(
+            <a href="#param-name" class="parameter">name</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetActiveSubroutineName"></a>
+    <span class="py-function">glGetActiveSubroutineName</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-shadertype" class="parameter">shadertype</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufsize" class="parameter">bufsize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-length" class="parameter">length</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-name" class="parameter">name</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the program containing the subroutine.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-shadertype"></a>
+                        shadertype
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the shader stage from which to query the subroutine name.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the index of the shader subroutine uniform.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bufSize"></a>
+                        bufSize
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the size of the buffer whose address is given in
+    <a class="parameter" href="#param-name">name</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-length"></a>
+                        length
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of a variable which is to receive the length of the shader subroutine uniform name.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of an array into which the name of the shader subroutine uniform will be written.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetActiveSubroutineName.html">glGetActiveSubroutineName</a>
+    queries the name of an active shader subroutine uniform from the
+            program object given in
+    <a class="parameter" href="#param-program">program</a>
+    .
+    <a class="parameter" href="#param-index">index</a>
+    specifies the index of
+            the shader subroutine uniform within the shader stage given by
+    <a class="parameter" href="#param-stage">stage</a>
+    , and must between
+            zero and the value of
+    <span class="constant">GL_ACTIVE_SUBROUTINES</span>
+    minus one for the shader stage.
+</div>
+    <div class="para">
+            The name of the selected subroutine is returned as a null-terminated string in
+    <a class="parameter" href="#param-name">name</a>
+    . The
+            actual number of characters written into
+    <a class="parameter" href="#param-name">name</a>
+    , not including the null-terminator, is
+            returned in
+    <a class="parameter" href="#param-length">length</a>
+    . If
+    <a class="parameter" href="#param-length">length</a>
+    is
+    <span class="constant">NULL</span>
+    ,
+            no length is returned. The maximum number of characters that may be written into
+    <a class="parameter" href="#param-name">name</a>
+    ,
+            including the null-terminator, is given in
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-index">index</a>
+    is greater than or equal to
+            the value of
+    <span class="constant">GL_ACTIVE_SUBROUTINES</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not the name of an
+            existing program object.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetProgramStage.html">glGetProgramStage</a>
+    with argument
+    <span class="constant">GL_ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetActiveSubroutineName.html">glGetActiveSubroutineName</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetSubroutineIndex.html">glGetSubroutineIndex</a>
+    ,
+    <a class="crossref" href="./glGetActiveSubroutineUniform.html">glGetActiveSubroutineUniform</a>
+    ,
+    <a class="crossref" href="./glGetProgramStage.html">glGetProgramStage</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

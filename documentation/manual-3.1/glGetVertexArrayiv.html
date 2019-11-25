@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetVertexArrayiv : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetVertexArrayiv</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieve parameters of a vertex array object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetVertexArrayiv"></a>
+    <span class="c-function">glGetVertexArrayiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-vaobj" class="parameter">vaobj</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetVertexArrayiv"></a>
+    <span class="py-function">glGetVertexArrayiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-vaobj" class="parameter">vaobj</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-vaobj"></a>
+                        vaobj
+                    </th>
+                    <td>
+    <div class="para">specifies the name of the vertex array object to use for the
+          query.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">Name of the property to use for the query. Must be
+    <span class="constant">GL_ELEMENT_ARRAY_BUFFER_BINDING</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-param"></a>
+                        param
+                    </th>
+                    <td>
+    <div class="para">Returns the requested value.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">This function provides a mean of querying properties of an existing
+    vertex array object. The vertex array object does not have to be bound to
+    the rendering context at the time of the call, but must have been bound at
+    least once prior to this call.</div>
+    <div class="para">
+    <a class="function" href="./glGetVertexArrayiv.html">glGetVertexArrayiv</a>
+    can be used to retrieve ID
+    of a buffer object that will be bound to the
+    <span class="constant">GL_ELEMENT_ARRAY_BUFFER</span>
+    binding point whenever the
+    queried vertex array object is bound to the rendering context. The binding
+    can be changed for an active vertex array object with a
+    <a class="function" href="./glBindBuffer.html">glBindBuffer</a>
+    call.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    error is generated if
+    <a class="parameter" href="#param-vaobj">vaobj</a>
+    is not the name of an existing vertex array
+    object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    error is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not
+    <span class="constant">GL_ELEMENT_ARRAY_BUFFER_BINDING</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetVertexArrayiv.html">glGetVertexArrayiv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ,
+    <a class="crossref" href="./glBindVertexArray.html">glBindVertexArray</a>
+    ,
+    <a class="crossref" href="./glGet.html">glGet</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">Copyright
+    <div class="trademark"></div>
+    2014 Khronos Group. This
+    material may be distributed subject to the terms and conditions set forth
+    in the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

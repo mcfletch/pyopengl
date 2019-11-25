@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXQueryDrawable : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXQueryDrawable</h1>
+</header>
+<main class="content">
+    <section class="purpose">returns an attribute associated with a GLX drawable</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXQueryDrawable"></a>
+    <span class="c-function">glXQueryDrawable</span>(<span class="parameter-list">
+    <span class="param-def">
+        Display * (
+            <a href="#param-dpy" class="parameter">dpy</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLXDrawable (
+            <a href="#param-draw" class="parameter">draw</a>
+        )
+        ,
+    </span><span class="param-def">
+        int (
+            <a href="#param-attribute" class="parameter">attribute</a>
+        )
+        ,
+    </span><span class="param-def">
+        unsigned int * (
+            <a href="#param-value" class="parameter">value</a>
+        )
+    </span>
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glXQueryDrawable"></a>
+    <span class="py-function">glXQueryDrawable</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-dpy" class="parameter">dpy</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-draw" class="parameter">draw</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-attribute" class="parameter">attribute</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-value" class="parameter">value</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dpy"></a>
+                        dpy
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the connection to the X server.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-draw"></a>
+                        draw
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the GLX drawable to be queried.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-attribute"></a>
+                        attribute
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the attribute to be returned.  Must be one of
+    <span class="constant">GLX_WIDTH</span>
+    ,
+    <span class="constant">GLX_HEIGHT</span>
+    ,
+    <span class="constant">GLX_PRESERVED_CONTENTS</span>
+    ,
+    <span class="constant">GLX_LARGEST_PBUFFER</span>
+    , or
+    <span class="constant">GLX_FBCONFIG_ID</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-value"></a>
+                        value
+                    </th>
+                    <td>
+    <div class="para">
+                    Contains the return value for
+    <a class="parameter" href="#param-attribute">attribute</a>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXQueryDrawable.html">glXQueryDrawable</a>
+    sets
+    <a class="parameter" href="#param-value">value</a>
+    to the value of
+    <a class="parameter" href="#param-attribute">attribute</a>
+    with respect to the GLXDrawable
+    <a class="parameter" href="#param-draw">draw</a>
+    .
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-attribute">attribute</a>
+    may be one of the following:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_WIDTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the width of
+    <a class="parameter" href="#param-ctx">ctx</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_HEIGHT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the height of
+    <a class="parameter" href="#param-ctx">ctx</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_PRESERVED_CONTENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns
+    <span class="constant">True</span>
+    if the contents
+						of a GLXPbuffer are preserved when a resource
+						conflict occurs;
+    <span class="constant">False</span>
+    otherwise.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_LARGEST_PBUFFER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the value set when
+    <a class="function" href="./glXCreatePbuffer.html">glXCreatePbuffer</a>
+    was called to
+                        create the GLXPbuffer. If
+    <span class="constant">False</span>
+    is returned, then the
+                        call to
+    <a class="function" href="./glXCreatePbuffer.html">glXCreatePbuffer</a>
+    will
+                        fail to create a GLXPbuffer if the requested size
+                        is larger than the implementation maximum or
+                        available resources.  If
+    <span class="constant">True</span>
+    is returned, a GLXPbuffer of the maximum available
+                        size (if less than the requested width and height)
+                        is created.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_FBCONFIG_ID</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+					    Returns the XID for
+    <a class="parameter" href="#param-draw">draw</a>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-draw">draw</a>
+    is a GLXWindow or GLXPixmap and
+    <a class="parameter" href="#param-attribute">attribute</a>
+    is set to
+    <span class="constant">GLX_PRESERVED_CONTENTS</span>
+    or
+    <span class="constant">GLX_LARGETST_PBUFFER</span>
+    , the contents of
+    <a class="parameter" href="#param-value">value</a>
+    are undefined.  If
+    <a class="parameter" href="#param-attribute">attribute</a>
+    is not one of the attributes
+            listed above, the contents of
+    <a class="parameter" href="#param-value">value</a>
+    are
+            unedfined.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+            A
+    <span class="constant">GLXBadDrawable</span>
+    is generated if
+    <a class="parameter" href="#param-draw">draw</a>
+    is not a valid GLXDrawable.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glXCreateWindow.html">glXCreateWindow</a>
+    ,
+    <a class="crossref" href="./glXCreatePixmap.html">glXCreatePixmap</a>
+    ,
+    <a class="crossref" href="./glXCreatePbuffer.html">glXCreatePbuffer</a>
+    ,
+    <a class="crossref" href="./glXGetFBConfigAttrib.html">glXGetFBConfigAttrib</a>
+    ,
+    <a class="crossref" href="./glXChooseFBConfig.html">glXChooseFBConfig</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

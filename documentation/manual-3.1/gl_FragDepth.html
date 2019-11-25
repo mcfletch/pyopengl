@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gl_FragDepth : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>gl_FragDepth</h1>
+</header>
+<main class="content">
+    <section class="purpose">establishes a depth value for the current fragment</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gl_FragDepth"></a>
+    <span class="c-function">gl_FragDepth</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            Available only in the fragment language,
+    <div class="varname">gl_FragDepth</div>
+    is an output variable
+            that is used to establish the depth value for the current fragment. If depth buffering is enabled
+            and no shader writes to
+    <div class="varname">gl_FragDepth</div>
+    , then the fixed function value for
+            depth will be used (this value is contained in the z component of
+    <a class="crossref" href="./gl_FragCoord.html">gl_FragCoord</a>
+    )
+            otherwise, the value written to
+    <div class="varname">gl_FragDepth</div>
+    is used.
+            If a shader statically assigns to
+    <div class="varname">gl_FragDepth</div>
+    , then the value of the fragment's depth
+            may be undefined for executions of the shader that take that path. That is, if the set of linked fragment
+            shaders statically contain a write to
+    <div class="varname">gl_FragDepth</div>
+    , then it is responsible for always
+            writing it.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>gl_FragDepth</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gl_FragCoord.html">gl_FragCoord</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

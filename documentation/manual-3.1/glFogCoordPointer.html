@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glFogCoordPointer : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glFogCoordPointer</h1>
+</header>
+<main class="content">
+    <section class="purpose">define an array of fog coordinates</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glFogCoordPointer"></a>
+    <span class="c-function">glFogCoordPointer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-stride" class="parameter">stride</a>
+        )
+        ,
+    </span><span class="param-def">
+        void * (
+            <a href="#param-pointer" class="parameter">pointer</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glFogCoordPointer"></a>
+    <span class="py-function">glFogCoordPointer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-stride" class="parameter">stride</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pointer" class="parameter">pointer</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the data type of each fog coordinate.
+                    Symbolic constants
+    <span class="constant">GL_FLOAT</span>
+    ,
+                    or
+    <span class="constant">GL_DOUBLE</span>
+    are accepted. The initial value is
+    <span class="constant">GL_FLOAT</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-stride"></a>
+                        stride
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the byte offset between consecutive fog coordinates.
+                    If
+    <a class="parameter" href="#param-stride">stride</a>
+    is 0, the array elements are understood
+                    to be tightly packed. The initial value is 0.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pointer"></a>
+                        pointer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to the first coordinate of the first fog coordinate in the
+                    array. The initial value is 0.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glFogCoordPointer.html">glFogCoordPointer</a>
+    specifies the location and data format of an array of fog coordinates
+            to use when rendering.
+    <a class="parameter" href="#param-type">type</a>
+    specifies the data type of each fog
+            coordinate, and
+    <a class="parameter" href="#param-stride">stride</a>
+    specifies the byte stride from one fog coordinate to
+            the next, allowing vertices and attributes to be packed into a single array
+            or stored in separate arrays.
+</div>
+    <div class="para">
+            If a non-zero named buffer object is bound to the
+    <span class="constant">GL_ARRAY_BUFFER</span>
+    target
+            (see
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ) while a fog coordinate array is
+            specified,
+    <a class="parameter" href="#param-pointer">pointer</a>
+    is treated as a byte offset into the buffer object's data store.
+            Also, the buffer object binding (
+    <span class="constant">GL_ARRAY_BUFFER_BINDING</span>
+    ) is saved as fog coordinate vertex array
+            client-side state (
+    <span class="constant">GL_FOG_COORD_ARRAY_BUFFER_BINDING</span>
+    ).
+</div>
+    <div class="para">
+            When a fog coordinate array is specified,
+    <a class="parameter" href="#param-type">type</a>
+    ,
+    <a class="parameter" href="#param-stride">stride</a>
+    , and
+    <a class="parameter" href="#param-pointer">pointer</a>
+    are saved as client-side
+            state, in addition to the current vertex array buffer object binding.
+</div>
+    <div class="para">
+            To enable and disable the fog coordinate array, call
+    <a class="crossref" href="./glEnableClientState.html">glEnableClientState</a>
+    and
+    <a class="crossref" href="./glEnableClientState.html#c-glDisableClientState">glDisableClientState</a>
+    with the argument
+    <span class="constant">GL_FOG_COORD_ARRAY</span>
+    . If
+            enabled, the fog coordinate array is used
+            when
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    ,
+    <a class="crossref" href="./glMultiDrawArrays.html">glMultiDrawArrays</a>
+    ,
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    ,
+    <a class="crossref" href="./glMultiDrawElements.html">glMultiDrawElements</a>
+    ,
+    <a class="crossref" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    , or
+    <a class="crossref" href="./glArrayElement.html">glArrayElement</a>
+    is called.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glFogCoordPointer.html">glFogCoordPointer</a>
+    is available only if the GL version is 1.4 or greater.
+</div>
+    <div class="para">
+            Fog coordinates are not supported for interleaved vertex array formats
+            (see
+    <a class="crossref" href="./glInterleavedArrays.html">glInterleavedArrays</a>
+    ).
+</div>
+    <div class="para">
+            The fog coordinate array is initially disabled and isn't accessed when
+    <a class="crossref" href="./glArrayElement.html">glArrayElement</a>
+    ,
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    ,
+    <a class="crossref" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    ,
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    ,
+    <a class="crossref" href="./glMultiDrawArrays.html">glMultiDrawArrays</a>
+    , or
+    <a class="crossref" href="./glMultiDrawElements.html">glMultiDrawElements</a>
+    is called.
+</div>
+    <div class="para">
+            Execution of
+    <a class="function" href="./glFogCoordPointer.html">glFogCoordPointer</a>
+    is not allowed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    ,
+            but an error may or may not be generated. If no error is generated,
+            the operation is undefined.
+</div>
+    <div class="para">
+    <a class="function" href="./glFogCoordPointer.html">glFogCoordPointer</a>
+    is typically implemented on the client side with no protocol.
+</div>
+    <div class="para">
+            Fog coordinate array parameters are client-side state and are
+            therefore not saved or restored by
+    <a class="crossref" href="./glPushAttrib.html">glPushAttrib</a>
+    and
+    <a class="crossref" href="./glPushAttrib.html#c-glPopAttrib">glPopAttrib</a>
+    .
+            Use
+    <a class="crossref" href="./glPushClientAttrib.html">glPushClientAttrib</a>
+    and
+    <a class="crossref" href="./glPushClientAttrib.html#c-glPopClientAttrib">glPopClientAttrib</a>
+    instead.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is not either
+    <span class="constant">GL_FLOAT</span>
+    or
+    <span class="constant">GL_DOUBLE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-stride">stride</a>
+    is negative.
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_FOG_COORD_ARRAY</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_FOG_COORD_ARRAY_STRIDE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_FOG_COORD_ARRAY_TYPE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_FOG_COORD_ARRAY_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_ARRAY_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetPointerv.html">glGetPointerv</a>
+    with argument
+    <span class="constant">GL_FOG_COORD_ARRAY_POINTER</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glArrayElement.html">glArrayElement</a>
+    ,
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ,
+    <a class="crossref" href="./glColorPointer.html">glColorPointer</a>
+    ,
+    <a class="crossref" href="./glEnableClientState.html#c-glDisableClientState">glDisableClientState</a>
+    ,
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    ,
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    ,
+    <a class="crossref" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    ,
+    <a class="crossref" href="./glEdgeFlagPointer.html">glEdgeFlagPointer</a>
+    ,
+    <a class="crossref" href="./glEnableClientState.html">glEnableClientState</a>
+    ,
+    <a class="crossref" href="./glFogCoord.html">glFogCoord</a>
+    ,
+    <a class="crossref" href="./glIndexPointer.html">glIndexPointer</a>
+    ,
+    <a class="crossref" href="./glInterleavedArrays.html">glInterleavedArrays</a>
+    ,
+    <a class="crossref" href="./glMultiDrawArrays.html">glMultiDrawArrays</a>
+    ,
+    <a class="crossref" href="./glMultiDrawElements.html">glMultiDrawElements</a>
+    ,
+    <a class="crossref" href="./glNormalPointer.html">glNormalPointer</a>
+    ,
+    <a class="crossref" href="./glPushClientAttrib.html#c-glPopClientAttrib">glPopClientAttrib</a>
+    ,
+    <a class="crossref" href="./glPushClientAttrib.html">glPushClientAttrib</a>
+    ,
+    <a class="crossref" href="./glSecondaryColorPointer.html">glSecondaryColorPointer</a>
+    ,
+    <a class="crossref" href="./glTexCoordPointer.html">glTexCoordPointer</a>
+    ,
+    <a class="crossref" href="./glVertexAttribPointer.html">glVertexAttribPointer</a>
+    ,
+    <a class="crossref" href="./glVertexPointer.html">glVertexPointer</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutEstablishOverlay : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutEstablishOverlay</h1>
+</header>
+<main class="content">
+    <section class="purpose">establishes an overlay (if possible) for the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutEstablishOverlay"></a>
+    <span class="c-function">glutEstablishOverlay</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutEstablishOverlay"></a>
+    <span class="py-function">glutEstablishOverlay</span>( <span class="parameter-list">
+</span> )
+    <pre class="pydoc">glutEstablishOverlay(  ) -&gt; None</pre>
+</div>
+        </div>
+    </section>
+    <section class="section" id="glutEstablishOverlay.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutEstablishOverlay.html">glutEstablishOverlay</a>
+    establishes an overlay (if possible) for the current window. The requested
+			display mode for the overlay is determined by the initial display mode.
+    <a class="function" href="./glutLayerGet.html">glutLayerGet(GLUT_OVERLAY_POSSIBLE)</a>
+    can be called to determine if an overlay is possible
+			for the current window with the current initial display mode. Do not attempt to establish an overlay when one is not
+			possible; GLUT will terminate the program.
+</div>
+    <div class="para">
+			If
+    <a class="function" href="./glutEstablishOverlay.html">glutEstablishOverlay</a>
+    is called when an overlay already exists, the existing overlay is first
+			removed, and then a new overlay is established. The state of the old overlay's OpenGL context is discarded.
+</div>
+    <div class="para">
+			The initial display state of an overlay is shown, however the overlay is only actually shown if the overlay's window is
+			shown.
+		</div>
+    <div class="para">
+			Implicitly, the window's layer in use changes to the overlay immediately after the overlay is established.
+		</div>
+    </section><section class="section" id="glutEstablishOverlay.3GLUT-example">
+    <h2 class="title">Example</h2>
+    <div class="para">
+			Establishing an overlay is a bit involved, but easy once you get the hang of it. Here is an example:
+		</div>
+    <div class="programlisting">int overlaySupport;
+int transparent, red, white;
+glutInitDisplayMode(GLUT_SINGLE | GLUT_INDEX);
+overlaySupport = glutLayerGet(GLUT_OVERLAY_POSSIBLE);
+if (overlaySupport) {
+    glutEstablishOverlay();
+    glutHideOverlay();
+    transparent = glutLayerGet(GLUT_TRANSPARENT_INDEX);
+    glClearIndex(transparent);
+    red = (transparent + 1) % glutGet(GLUT_WINDOW_COLORMAP_SIZE);
+    white = (transparent + 2) % glutGet(GLUT_WINDOW_COLORMAP_SIZE);
+    glutSetColor(red, 1.0, 0.0, 0.0); /* Red. */
+    glutSetColor(white, 1.0, 1.0, 1.0); /* White. */
+    glutOverlayDisplayFunc(redrawOverlay);
+    glutReshapeFunc(reshape);
+} else {
+    printf("Sorry, no nifty overlay (try an SGI workstation)!");
+}</div>
+    <div class="para">
+			If you setup an overlay and you install a reshape callback, you need to update the viewports and possibly projection
+			matrices of both the normal plane and the overlay. For example, your reshape callback might look like this:
+		</div>
+    <div class="programlisting">void reshape(int w, int h)
+{
+    if (overlaySupport) {
+        glutUseLayer(GLUT_OVERLAY); /* Setup overlay to have X style coordinate system. */
+        glViewport(0, 0, w, h);
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        gluOrtho2D(0, w, 0, h);
+        glScalef(1, -1, 1);
+        glTranslatef(0, -h, 0);
+        glMatrixMode(GL_MODELVIEW);
+        glutUseLayer(GLUT_NORMAL);
+    }
+    glViewport(0, 0, w, h);
+}</div>
+    <div class="para">
+			See the glutOverlayDisplayFunc man page for an example showing one way to write your overlay display callback.
+		</div>
+    </section><section class="section" id="glutEstablishOverlay.3GLUT-x_implementation_notes">
+    <h2 class="title">X Implementation Notes</h2>
+    <div class="para">
+			GLUT for X uses the SERVER_OVERLAY_VISUALS convention is used to determine if overlay visuals are available. While the
+			convention allows for opaque overlays (no transparency) and overlays with the transparency specified as a bitmask, GLUT
+			overlay management only provides access to transparent pixel overlays.
+		</div>
+    <div class="para">
+			Until RGBA overlays are better understood, GLUT only supports color index overlays.
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutUseLayer.html">glutUseLayer</a>
+            <a class="crossref" href="./glutRemoveOverlay.html">glutRemoveOverlay</a>
+            <a class="crossref" href="./glutCreateWindow.html">glutCreateWindow</a>
+            <a class="crossref" href="./glutPostOverlayRedisplay.html">glutPostOverlayRedisplay</a>
+            <a class="crossref" href="./glutShowOverlay.html">glutShowOverlay</a>
+            <a class="crossref" href="./glutOverlayDisplayFunc.html">glutOverlayDisplayFunc</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

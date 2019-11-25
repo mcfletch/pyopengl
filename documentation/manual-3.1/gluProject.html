@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluProject : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluProject</h1>
+</header>
+<main class="content">
+    <section class="purpose">map object coordinates to window coordinates</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluProject"></a>
+    <span class="c-function">gluProject</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble (
+            <a href="#param-objX" class="parameter">objX</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-objY" class="parameter">objY</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-objZ" class="parameter">objZ</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLdouble * (
+            <a href="#param-model" class="parameter">model</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLdouble * (
+            <a href="#param-proj" class="parameter">proj</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLint * (
+            <a href="#param-view" class="parameter">view</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble* (
+            <a href="#param-winX" class="parameter">winX</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble* (
+            <a href="#param-winY" class="parameter">winY</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble* (
+            <a href="#param-winZ" class="parameter">winZ</a>
+        )
+    </span>
+</span>)-&gt; GLint
+</div>
+                <div class="py-signature">
+    <a name="py-gluProject"></a>
+    <span class="py-function">gluProject</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-objX" class="parameter">objX</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-objY" class="parameter">objY</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-objZ" class="parameter">objZ</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-model" class="parameter">model</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-proj" class="parameter">proj</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-view" class="parameter">view</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-winX" class="parameter">winX</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-winY" class="parameter">winY</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-winZ" class="parameter">winZ</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">Convenience wrapper for gluProject
+    
+    Automatically fills in the model, projection and viewing matrices
+    if not provided.
+    
+    returns (winX,winY,winZ) doubles
+    </pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-objX"></a><a name="param-objY"></a><a name="param-objZ"></a>
+                        objX, objY, objZ
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the object coordinates.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-model"></a>
+                        model
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the current modelview matrix (as from a
+    <a class="crossref" href="./glGet.html#c-glGetDoublev">glGetDoublev</a>
+    call).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-proj"></a>
+                        proj
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the current projection matrix (as from a
+    <a class="crossref" href="./glGet.html#c-glGetDoublev">glGetDoublev</a>
+    call).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-view"></a>
+                        view
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the current viewport (as from a
+    <a class="crossref" href="./glGet.html#c-glGetIntegerv">glGetIntegerv</a>
+    call).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-winX"></a><a name="param-winY"></a><a name="param-winZ"></a>
+                        winX, winY, winZ
+                    </th>
+                    <td>
+    <div class="para">
+                    Return the computed window coordinates.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluProject.html">gluProject</a>
+    transforms the specified object coordinates into window coordinates
+            using
+    <a class="parameter" href="#param-model">model</a>
+    ,
+    <a class="parameter" href="#param-proj">proj</a>
+    , and
+    <a class="parameter" href="#param-view">view</a>
+    . The result is stored
+            in
+    <a class="parameter" href="#param-winX">winX</a>
+    ,
+    <a class="parameter" href="#param-winY">winY</a>
+    , and
+    <a class="parameter" href="#param-winZ">winZ</a>
+    . A return value of
+    <span class="constant">GLU_TRUE</span>
+    indicates success, a return value of
+    <span class="constant">GLU_FALSE</span>
+    indicates failure.
+</div>
+    <div class="para">
+            To compute the coordinates,
+            let
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">v</mi>
+                    <mo>=</mo>
+                    <mfenced open="(" close=")">
+                        <mi mathvariant="italic">objX</mi>
+                        <mi mathvariant="italic">objY</mi>
+                        <mi mathvariant="italic">objZ</mi>
+                        <mn>1.0</mn>
+                    </mfenced>
+                </mrow>
+            </math>
+    represented as a matrix with 4 rows and 1 column.
+            Then
+    <a class="function" href="./gluProject.html">gluProject</a>
+    computes
+    <math>
+                <msup><mi mathvariant="italic">v</mi>
+                <mo></mo>
+                </msup>
+            </math>
+    as follows:
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <msup><mi mathvariant="italic">v</mi>
+                    <mo></mo>
+                    </msup>
+                    <mo>=</mo>
+                    <mrow>
+                        <mi mathvariant="italic">P</mi>
+                        <mo></mo>
+                        <mi mathvariant="italic">M</mi>
+                        <mo></mo>
+                        <mi mathvariant="italic">v</mi>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+            where
+    <math><mi mathvariant="italic">P</mi></math>
+    is the current projection matrix
+    <a class="parameter" href="#param-proj">proj</a>
+    and
+    <math><mi mathvariant="italic">M</mi></math>
+    is the current
+            modelview matrix
+    <a class="parameter" href="#param-model">model</a>
+    (both represented as
+    <math>
+                <mrow>
+                    <mn>4</mn>
+                    <mo></mo>
+                    <mn>4</mn>
+                </mrow>
+            </math>
+    matrices in column-major order).
+</div>
+    <div class="para">
+            The window coordinates are then computed as follows:
+        </div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">winX</mi>
+                    <mo>=</mo>
+                    <mrow>
+                        <mrow>
+                            <mi mathvariant="italic">view</mi>
+                            <mo></mo>
+                            <mfenced open="(" close=")">
+                                <mn>0</mn>
+                            </mfenced>
+                        </mrow>
+                        <mo>+</mo>
+                        <mfrac>
+                            <mrow>
+                                <mrow>
+                                    <mi mathvariant="italic">view</mi>
+                                    <mo></mo>
+                                    <mfenced open="(" close=")">
+                                        <mn>2</mn>
+                                    </mfenced>
+                                </mrow>
+                                <mo></mo>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <mrow>
+                                            <msup><mi mathvariant="italic">v</mi>
+                                            <mo></mo>
+                                            </msup>
+                                            <mo></mo>
+                                            <mfenced open="(" close=")">
+                                                <mn>0</mn>
+                                            </mfenced>
+                                        </mrow>
+                                        <mo>+</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                            </mrow>
+                            <mn>2</mn>
+                        </mfrac>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                    <mrow>
+                        <mi mathvariant="italic">winY</mi>
+                        <mo>=</mo>
+                        <mrow>
+                            <mrow>
+                                <mi mathvariant="italic">view</mi>
+                                <mo></mo>
+                                <mfenced open="(" close=")">
+                                    <mn>1</mn>
+                                </mfenced>
+                            </mrow>
+                            <mo>+</mo>
+                            <mfrac>
+                                <mrow>
+                                    <mrow>
+                                        <mi mathvariant="italic">view</mi>
+                                        <mo></mo>
+                                        <mfenced open="(" close=")">
+                                            <mn>3</mn>
+                                        </mfenced>
+                                    </mrow>
+                                    <mo></mo>
+                                    <mfenced open="(" close=")">
+                                        <mrow>
+                                            <mrow>
+                                                <msup><mi mathvariant="italic">v</mi>
+                                                <mo></mo>
+                                                </msup>
+                                                <mo></mo>
+                                                <mfenced open="(" close=")">
+                                                    <mn>1</mn>
+                                                </mfenced>
+                                            </mrow>
+                                            <mo>+</mo>
+                                            <mn>1</mn>
+                                        </mrow>
+                                    </mfenced>
+                                </mrow>
+                                <mn>2</mn>
+                            </mfrac>
+                        </mrow>
+                    </mrow>
+                </math>
+</div>
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                    <mrow>
+                        <mi mathvariant="italic">winZ</mi>
+                        <mo>=</mo>
+                        <mfrac>
+                            <mfenced open="(" close=")">
+                                <mrow>
+                                    <mrow>
+                                        <msup><mi mathvariant="italic">v</mi>
+                                        <mo></mo>
+                                        </msup>
+                                        <mo></mo>
+                                        <mfenced open="(" close=")">
+                                            <mn>2</mn>
+                                        </mfenced>
+                                    </mrow>
+                                    <mo>+</mo>
+                                    <mn>1</mn>
+                                </mrow>
+                            </mfenced>
+                            <mn>2</mn>
+                        </mfrac>
+                    </mrow>
+                </math>
+</div>
+</div>
+</div>
+    <div class="para">
+        </div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluUnProject.html">gluUnProject</a>
+    ,
+    <a class="crossref" href="./glGet.html">glGet</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluProject</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/tests/test_polygonsort.py">OpenGLContext/tests/test_polygonsort.py</a>
+    Lines: <span class="sample-lines">4, 22</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/events/mouseevents.py">OpenGLContext/events/mouseevents.py</a>
+    Lines: <span class="sample-lines">130</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/renderpass.py">OpenGLContext/passes/renderpass.py</a>
+    Lines: <span class="sample-lines">280</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/glCamera.py">PyOpenGL-Demo/NeHe/lesson44/glCamera.py</a>
+    Lines: <span class="sample-lines">497</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/sliceTextures.py">wobjects/sliceTextures.py</a>
+    Lines: <span class="sample-lines">205, 206</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/utils/cropper.py">utils/cropper.py</a>
+    Lines: <span class="sample-lines">305, 306</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/axises.py">core/axises.py</a>
+    Lines: <span class="sample-lines">872, 1128</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/text/text_base.py">text/text_base.py</a>
+    Lines: <span class="sample-lines">576</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

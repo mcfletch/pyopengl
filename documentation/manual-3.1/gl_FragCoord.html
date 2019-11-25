@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gl_FragCoord : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>gl_FragCoord</h1>
+</header>
+<main class="content">
+    <section class="purpose">contains the window-relative coordinates of the current fragment</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gl_FragCoord"></a>
+    <span class="c-function">gl_FragCoord</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            Available only in the fragment language,
+    <div class="varname">gl_FragCoord</div>
+    is an input variable that contains the
+            window relative coordinate (x, y, z, 1/w) values for the fragment. If multi-sampling,
+            this value can be for any location within the pixel, or one of the fragment samples.
+            This value is the result of fixed functionality that interpolates primitives after vertex
+            processing to generate fragments. The z component is the depth value that would be used for the
+            fragment's depth if no shader contained any writes to
+    <a class="crossref" href="./gl_FragDepth.html">gl_FragDepth</a>
+    .
+</div>
+    <div class="para">
+    <div class="varname">gl_FragCoord</div>
+    may be redeclared with the additional layout qualifier identifiers
+    origin_upper_left
+    or
+    pixel_center_integer
+    . By
+            default,
+    <div class="varname">gl_FragCoord</div>
+    assumes a lower-left origin for window coordinates
+            and assumes pixel centers are located at half-pixel centers. For example, the (x, y) location
+            (0.5, 0.5) is returned for the lower-left-most pixel in a window. The origin of
+    <div class="varname">gl_FragCoord</div>
+    may be changed by redeclaring
+    <div class="varname">gl_FragCoord</div>
+    with the
+    origin_upper_left
+    identifier. The values returned can also be
+            shifted by half a pixel in both x and y by
+    pixel_center_integer
+    so it
+            appears the pixels are centered at whole number pixel offsets. This moves the (x, y) value returned by
+    <div class="varname">gl_FragCoord</div>
+    of (0.5, 0.5) by default to (0.0, 0.0) with
+    pixel_center_integer
+    .
+</div>
+    <div class="para">
+            If
+    <div class="varname">gl_FragCoord</div>
+    is redeclared in any fragment shader in a program, it must be redeclared
+            in all fragment shaders in that program that have static use of
+    <div class="varname">gl_FragCoord</div>
+    . Redeclaring
+    <div class="varname">gl_FragCoord</div>
+    with any accepted qualifier affects only
+    <div class="varname">gl_FragCoord.x</div>
+    and
+    <div class="varname">gl_FragCoord.y</div>
+    . It has no affect on rasterization, transformation or any other part
+            of the OpenGL pipeline or language features.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>gl_FragCoord</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gl_FragDepth.html">gl_FragDepth</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

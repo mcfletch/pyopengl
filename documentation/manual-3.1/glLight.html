@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glLight : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glLight</h1>
+</header>
+<main class="content">
+    <section class="purpose">set light source parameters</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glLight"></a>
+    <span class="c-function">glLight</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+                <div class="py-signature">
+    <a name="py-glLight"></a>
+    <span class="py-function">glLight</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-light" class="parameter">light</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glLightf"></a>
+    <span class="c-function">glLightf</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-light" class="parameter">light</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glLightf"></a>
+    <span class="py-function">glLightf</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-light" class="parameter">light</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glLightfv"></a>
+    <span class="c-function">glLightfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-light" class="parameter">light</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLfloat * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glLightfv"></a>
+    <span class="py-function">glLightfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-light" class="parameter">light</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glLighti"></a>
+    <span class="c-function">glLighti</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-light" class="parameter">light</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glLighti"></a>
+    <span class="py-function">glLighti</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-light" class="parameter">light</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glLightiv"></a>
+    <span class="c-function">glLightiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-light" class="parameter">light</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glLightiv"></a>
+    <span class="py-function">glLightiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-light" class="parameter">light</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-light"></a>
+                        light
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a light.
+                    The number of lights depends on the implementation,
+                    but at least eight lights are supported.
+                    They are identified by symbolic names of the form
+    <span class="constant">GL_LIGHT</span>
+    <math><mi mathvariant="italic">i</mi></math>
+    ,
+                    where i ranges from 0 to the value of
+    <span class="constant">GL_MAX_LIGHTS</span>
+    - 1.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a single-valued light source parameter for
+    <a class="parameter" href="#param-light">light</a>
+    .
+    <span class="constant">GL_SPOT_EXPONENT</span>
+    ,
+    <span class="constant">GL_SPOT_CUTOFF</span>
+    ,
+    <span class="constant">GL_CONSTANT_ATTENUATION</span>
+    ,
+    <span class="constant">GL_LINEAR_ATTENUATION</span>
+    , and
+    <span class="constant">GL_QUADRATIC_ATTENUATION</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-param"></a>
+                        param
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the value that parameter
+    <a class="parameter" href="#param-pname">pname</a>
+    of light source
+    <a class="parameter" href="#param-light">light</a>
+    will be set to.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-light"></a>
+                        light
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a light.
+                    The number of lights depends on the implementation, but
+                    at least eight lights are supported.
+                    They are identified by symbolic names of the form
+    <span class="constant">GL_LIGHT</span>
+    <math><mi mathvariant="italic">i</mi></math>
+    ,
+                    where i ranges from 0 to the value of
+    <span class="constant">GL_MAX_LIGHTS</span>
+    - 1.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a light source parameter for
+    <a class="parameter" href="#param-light">light</a>
+    .
+    <span class="constant">GL_AMBIENT</span>
+    ,
+    <span class="constant">GL_DIFFUSE</span>
+    ,
+    <span class="constant">GL_SPECULAR</span>
+    ,
+    <span class="constant">GL_POSITION</span>
+    ,
+    <span class="constant">GL_SPOT_CUTOFF</span>
+    ,
+    <span class="constant">GL_SPOT_DIRECTION</span>
+    ,
+    <span class="constant">GL_SPOT_EXPONENT</span>
+    ,
+    <span class="constant">GL_CONSTANT_ATTENUATION</span>
+    ,
+    <span class="constant">GL_LINEAR_ATTENUATION</span>
+    , and
+    <span class="constant">GL_QUADRATIC_ATTENUATION</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to the value or values that parameter
+    <a class="parameter" href="#param-pname">pname</a>
+    of light source
+    <a class="parameter" href="#param-light">light</a>
+    will be set to.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glLight.html">glLight</a>
+    sets the values of individual light source parameters.
+    <a class="parameter" href="#param-light">light</a>
+    names the light and is a symbolic name of the form
+    <span class="constant">GL_LIGHT</span>
+    <math><mi mathvariant="italic">i</mi></math>
+    ,
+            where i ranges from 0 to the value of
+    <span class="constant">GL_MAX_LIGHTS</span>
+    - 1.
+    <a class="parameter" href="#param-pname">pname</a>
+    specifies one of ten light source parameters,
+            again by symbolic name.
+    <a class="parameter" href="#param-params">params</a>
+    is either a single value or a pointer to an array that contains
+            the new values.
+</div>
+    <div class="para">
+            To enable and disable lighting calculation, call
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="crossref" href="./glEnable.html#c-glDisable">glDisable</a>
+    with argument
+    <span class="constant">GL_LIGHTING</span>
+    . Lighting is
+            initially disabled.
+            When it is enabled,
+            light sources that are enabled contribute to the lighting calculation.
+            Light source
+    <math><mi mathvariant="italic">i</mi></math>
+    is enabled and disabled using
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="crossref" href="./glEnable.html#c-glDisable">glDisable</a>
+    with argument
+    <span class="constant">GL_LIGHT</span>
+    <math><mi mathvariant="italic">i</mi></math>
+    .
+</div>
+    <div class="para">
+            The ten light parameters are as follows:
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_AMBIENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    contains four integer or floating-point values that specify
+                        the ambient RGBA intensity of the light.
+                        Integer values are mapped linearly such that the most positive representable
+                        value maps to 1.0,
+                        and the most negative representable value maps to
+    <math>
+                            <mn>-1.0</mn>
+                        </math>
+    .
+                        Floating-point values are mapped directly.
+                        Neither integer nor floating-point values are clamped.
+                        The initial ambient light intensity is (0, 0, 0, 1).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DIFFUSE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    contains four integer or floating-point values that specify
+                        the diffuse RGBA intensity of the light.
+                        Integer values are mapped linearly such that the most positive representable
+                        value maps to 1.0,
+                        and the most negative representable value maps to
+    <math>
+                            <mn>-1.0</mn>
+                        </math>
+    .
+                        Floating-point values are mapped directly.
+                        Neither integer nor floating-point values are clamped.
+                        The initial value
+                        for
+    <span class="constant">GL_LIGHT0</span>
+    is (1, 1, 1, 1); for other lights, the
+                        initial value is (0, 0, 0, 1).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SPECULAR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    contains four integer or floating-point values that specify
+                        the specular RGBA intensity of the light.
+                        Integer values are mapped linearly such that the most positive representable
+                        value maps to 1.0,
+                        and the most negative representable value maps to
+    <math>
+                            <mn>-1.0</mn>
+                        </math>
+    .
+                        Floating-point values are mapped directly.
+                        Neither integer nor floating-point values are clamped.
+                        The initial value
+                        for
+    <span class="constant">GL_LIGHT0</span>
+    is (1, 1, 1, 1); for other lights, the
+                        initial value is (0, 0, 0, 1).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POSITION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    contains four integer or floating-point values that specify
+                        the position of the light in homogeneous object coordinates.
+                        Both integer and floating-point values are mapped directly.
+                        Neither integer nor floating-point values are clamped.
+</div>
+    <div class="para">
+                        The position is transformed by the modelview matrix when
+    <a class="function" href="./glLight.html">glLight</a>
+    is called (just as if it were a point),
+                        and it is stored in eye coordinates.
+                        If the
+    <math><mi mathvariant="italic">w</mi></math>
+    component of the position is 0,
+                        the light is treated as a directional source.
+                        Diffuse and specular lighting calculations take the light's direction,
+                        but not its actual position,
+                        into account,
+                        and attenuation is disabled.
+                        Otherwise,
+                        diffuse and specular lighting calculations are based on the actual location
+                        of the light in eye coordinates,
+                        and attenuation is enabled.
+                        The initial position is (0, 0, 1, 0);
+                        thus, the initial light source is directional,
+                        parallel to, and in the direction of the
+    <math>
+                            <mrow>
+                                <mo>-</mo>
+                                <mi mathvariant="italic">z</mi>
+                            </mrow>
+                        </math>
+    axis.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SPOT_DIRECTION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    contains three integer or floating-point values that specify
+                        the direction of the light in homogeneous object coordinates.
+                        Both integer and floating-point values are mapped directly.
+                        Neither integer nor floating-point values are clamped.
+</div>
+    <div class="para">
+                        The spot direction is transformed by the upper 3x3 of the modelview matrix when
+    <a class="function" href="./glLight.html">glLight</a>
+    is called,
+                        and it is stored in eye coordinates.
+                        It is significant only when
+    <span class="constant">GL_SPOT_CUTOFF</span>
+    is not 180,
+                        which it is initially.
+                        The initial direction is
+    <math>
+                            <mfenced open="(" close=")">
+                                <mn>0</mn>
+                                <mn>0</mn>
+                                <mn>-1</mn>
+                            </mfenced>
+                        </math>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SPOT_EXPONENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    is a single integer or floating-point value that specifies
+                        the intensity distribution of the light.
+                        Integer and floating-point values are mapped directly.
+                        Only values in the range
+    <math>
+                            <mfenced open="[" close="]">
+                                <mn>0</mn>
+                                <mn>128</mn>
+                            </mfenced>
+                        </math>
+    are accepted.
+</div>
+    <div class="para">
+                        Effective light intensity is attenuated by the cosine of the angle between
+                        the direction of the light and the direction from the light to the vertex
+                        being lighted,
+                        raised to the power of the spot exponent.
+                        Thus, higher spot exponents result in a more focused light source,
+                        regardless of the spot cutoff angle (see
+    <span class="constant">GL_SPOT_CUTOFF</span>
+    , next paragraph).
+                        The initial spot exponent is 0,
+                        resulting in uniform light distribution.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SPOT_CUTOFF</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    is a single integer or floating-point value that specifies
+                        the maximum spread angle of a light source.
+                        Integer and floating-point values are mapped directly.
+                        Only values in the range
+    <math>
+                            <mfenced open="[" close="]">
+                                <mn>0</mn>
+                                <mn>90</mn>
+                            </mfenced>
+                        </math>
+    and the special value 180
+                        are accepted.
+                        If the angle between the direction of the light and the direction from the
+                        light to the vertex being lighted is greater than the spot cutoff angle,
+                        the light is completely masked.
+                        Otherwise, its intensity is controlled by the spot exponent and the
+                        attenuation factors.
+                        The initial spot cutoff is 180,
+                        resulting in uniform light distribution.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_CONSTANT_ATTENUATION</span>
+</dt>
+    <dd class="listitem">
+                </dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LINEAR_ATTENUATION</span>
+</dt>
+    <dd class="listitem">
+                </dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_QUADRATIC_ATTENUATION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    is a single integer or floating-point value that specifies
+                        one of the three light attenuation factors.
+                        Integer and floating-point values are mapped directly.
+                        Only nonnegative values are accepted.
+                        If the light is positional,
+                        rather than directional,
+                        its intensity is attenuated by the reciprocal of the sum of the constant
+                        factor, the linear factor times the distance between the light
+                        and the vertex being lighted,
+                        and the quadratic factor times the square of the same distance.
+                        The initial attenuation factors are (1, 0, 0),
+                        resulting in no attenuation.
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            It is always the case that
+    <span class="constant">GL_LIGHT</span>
+    <math><mi mathvariant="italic">i</mi></math>
+    =
+    <span class="constant">GL_LIGHT0</span>
+    +
+    <math><mi mathvariant="italic">i</mi></math>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if either
+    <a class="parameter" href="#param-light">light</a>
+    or
+    <a class="parameter" href="#param-pname">pname</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if a spot exponent value is specified
+            outside the range
+    <math>
+                <mfenced open="[" close="]">
+                    <mn>0</mn>
+                    <mn>128</mn>
+                </mfenced>
+            </math>
+    ,
+            or if spot cutoff is specified outside the range
+    <math>
+                <mfenced open="[" close="]">
+                    <mn>0</mn>
+                    <mn>90</mn>
+                </mfenced>
+            </math>
+    (except for the
+            special value 180),
+            or if a negative attenuation factor is specified.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glLight.html">glLight</a>
+    is executed between
+            the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetLight.html">glGetLight</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_LIGHTING</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glColorMaterial.html">glColorMaterial</a>
+    ,
+    <a class="crossref" href="./glLightModel.html">glLightModel</a>
+    ,
+    <a class="crossref" href="./glMaterial.html">glMaterial</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glLight</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/rendervisitor.py">OpenGLContext/passes/rendervisitor.py</a>
+    Lines: <span class="sample-lines">183, 184</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">368</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">268</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">249</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">247</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">327</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">238</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">335</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">346</span>
+</div>
+        <div class="sample-key">glLightf</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/light.py">OpenGLContext/scenegraph/light.py</a>
+    Lines: <span class="sample-lines">123, 124, 125, 160, 162</span>
+</div>
+        <div class="sample-key">glLightfv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_alpha3D.py">tests/redbook_alpha3D.py</a>
+    Lines: <span class="sample-lines">119</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe8.py">tests/nehe8.py</a>
+    Lines: <span class="sample-lines">67, 68, 69</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe7.py">tests/nehe7.py</a>
+    Lines: <span class="sample-lines">77, 78, 79</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/light.py">OpenGLContext/scenegraph/light.py</a>
+    Lines: <span class="sample-lines">54, 60, 69, 159</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/bezier/bezier.py">PyOpenGL-Demo/proesch/bezier/bezier.py</a>
+    Lines: <span class="sample-lines">124, 125, 126, 127</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/stereo/stereoDemo.py">PyOpenGL-Demo/proesch/stereo/stereoDemo.py</a>
+    Lines: <span class="sample-lines">50, 51, 52, 112, 114, 116, 118</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py">PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py</a>
+    Lines: <span class="sample-lines">52, 54, 56, 58</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">175, 176, 177, 178</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson18.py">PyOpenGL-Demo/NeHe/lesson18.py</a>
+    Lines: <span class="sample-lines">123, 124, 125</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson26.py">PyOpenGL-Demo/NeHe/lesson26.py</a>
+    Lines: <span class="sample-lines">65, 66, 67, 168, 179</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/conechecker.py">PyOpenGL-Demo/tom/conechecker.py</a>
+    Lines: <span class="sample-lines">35, 36, 37, 38</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/fog.py">PyOpenGL-Demo/tom/fog.py</a>
+    Lines: <span class="sample-lines">40</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/conesave.py">PyOpenGL-Demo/tom/conesave.py</a>
+    Lines: <span class="sample-lines">18, 19, 20, 21</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/cone.py">PyOpenGL-Demo/tom/cone.py</a>
+    Lines: <span class="sample-lines">13, 14, 15, 16</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/teapots.py">PyOpenGL-Demo/redbook/teapots.py</a>
+    Lines: <span class="sample-lines">76, 77, 78</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/fog.py">PyOpenGL-Demo/redbook/fog.py</a>
+    Lines: <span class="sample-lines">73</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/scene.py">PyOpenGL-Demo/redbook/scene.py</a>
+    Lines: <span class="sample-lines">74, 75, 76, 77</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/movelight.py">PyOpenGL-Demo/redbook/movelight.py</a>
+    Lines: <span class="sample-lines">100</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLE/maintest.py">PyOpenGL-Demo/GLE/maintest.py</a>
+    Lines: <span class="sample-lines">57, 58, 60, 61</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/gears.py">PyOpenGL-Demo/GLUT/gears.py</a>
+    Lines: <span class="sample-lines">228</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/checker.py">PyOpenGL-Demo/GLUT/tom/checker.py</a>
+    Lines: <span class="sample-lines">78, 79</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/text.py">PyOpenGL-Demo/GLUT/tom/text.py</a>
+    Lines: <span class="sample-lines">34, 35, 36, 37</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/cone.py">PyOpenGL-Demo/GLUT/tom/cone.py</a>
+    Lines: <span class="sample-lines">39, 40, 41, 42</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/mmLib/OpenGLDriver.py">pymmlib/mmLib/OpenGLDriver.py</a>
+    Lines: <span class="sample-lines">178, 179, 180, 181</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/applications/glutviewer.py">pymmlib/applications/glutviewer.py</a>
+    Lines: <span class="sample-lines">196, 197, 198, 200</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/obj.py">pymt/obj.py</a>
+    Lines: <span class="sample-lines">22, 277, 278</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/light.py">pyggel/light.py</a>
+    Lines: <span class="sample-lines">39, 40, 41, 42, 43</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Experiments/Spheres.py">Sketches/CL/Topology3D/Experiments/Spheres.py</a>
+    Lines: <span class="sample-lines">71, 72, 73, 74</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Experiments/Cubes.py">Sketches/CL/Topology3D/Experiments/Cubes.py</a>
+    Lines: <span class="sample-lines">90, 91, 92</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/light.py">core/light.py</a>
+    Lines: <span class="sample-lines">265, 268, 269, 270, 273</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

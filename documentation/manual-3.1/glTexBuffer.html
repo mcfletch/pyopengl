@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glTexBuffer : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glTexBuffer</h1>
+</header>
+<main class="content">
+    <section class="purpose">attach a buffer object's data store to a buffer texture object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexBuffer"></a>
+    <span class="c-function">glTexBuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexBuffer"></a>
+    <span class="py-function">glTexBuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTextureBuffer"></a>
+    <span class="c-function">glTextureBuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTextureBuffer"></a>
+    <span class="py-function">glTextureBuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target to which the texture is bound for
+    <a class="function" href="./glTexBuffer.html">glTexBuffer</a>
+    . Must be
+    <span class="constant">GL_TEXTURE_BUFFER</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the texture object name for
+    <a class="function" href="./glTexBuffer.html#c-glTextureBuffer">glTextureBuffer</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalformat"></a>
+                        internalformat
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the internal format of the data in the store
+                    belonging to
+    <a class="parameter" href="#param-buffer">buffer</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-buffer"></a>
+                        buffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the buffer object whose storage to
+                    attach to the active buffer texture.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glTexBuffer.html">glTexBuffer</a>
+    and
+    <a class="function" href="./glTexBuffer.html#c-glTextureBuffer">glTextureBuffer</a>
+    attaches the data store of
+            a specified buffer object to a specified texture object, and
+            specify the storage format for the texture image found in
+            the buffer object. The texture object must be a buffer texture.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is zero, any buffer object
+            attached to the buffer texture is detached and no new buffer
+            object is attached. If
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is
+            non-zero, it must be the name of an existing buffer object.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    specifies the storage
+            format, and must be one of the following sized internal formats:
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    specifies the storage
+            format, and must be one of the following sized internal formats:
+</div>
+    <div class="include"></div>
+    <div class="para">
+            When a buffer object is attached to a buffer texture, the buffer
+            object's data store is taken as the texture's texel array. The
+            number of texels in the buffer texture's texel array is given by
+                $$ \left\lfloor { size \over { components \times sizeof(base\_type) } } \right\rfloor $$
+            where $size$ is the size of the buffer object in basic machine
+            units (the value of
+    <span class="constant">GL_BUFFER_SIZE</span>
+    for
+    <a class="parameter" href="#param-buffer">buffer</a>
+    ), and $components$ and
+            $base\_type$ are the element count and base data type for
+            elements, as specified in the table above. The number of texels
+            in the texel array is then clamped to the value of the
+            implementation-dependent limit
+    <span class="constant">GL_MAX_TEXTURE_BUFFER_SIZE</span>
+    . When a buffer
+            texture is accessed in a shader, the results of a texel fetch
+            are undefined if the specified texel coordinate is negative, or
+            greater than or equal to the clamped number of texels in the
+            texel array.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glTexBuffer.html">glTexBuffer</a>
+    if
+    <a class="parameter" href="#param-target">target</a>
+    is not
+    <span class="constant">GL_TEXTURE_BUFFER</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glTexBuffer.html#c-glTextureBuffer">glTextureBuffer</a>
+    if
+    <a class="parameter" href="#param-texture">texture</a>
+    is not the name of an existing
+            texture object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glTexBuffer.html#c-glTextureBuffer">glTextureBuffer</a>
+    if the effective target of
+    <a class="parameter" href="#param-texture">texture</a>
+    is not
+    <span class="constant">GL_TEXTURE_BUFFER</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is not one of the sized
+            internal formats described above.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is not zero and is not the name of
+            an existing buffer object.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_TEXTURE_BUFFER_SIZE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_TEXTURE_BINDING_BUFFER</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetTexLevelParameter.html">glGetTexLevelParameter</a>
+    with argument
+    <span class="constant">GL_TEXTURE_BUFFER_DATA_STORE_BINDING</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glTexBuffer.html">glTexBuffer</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glTexBuffer.html#c-glTextureBuffer">glTextureBuffer</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenBuffers.html">glGenBuffers</a>
+    ,
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ,
+    <a class="crossref" href="./glBufferData.html">glBufferData</a>
+    ,
+    <a class="crossref" href="./glDeleteBuffers.html">glDeleteBuffers</a>
+    ,
+    <a class="crossref" href="./glGenTextures.html">glGenTextures</a>
+    ,
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+    ,
+    <a class="crossref" href="./glDeleteTextures.html">glDeleteTextures</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glTexBuffer</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/shaders.py">OpenGLContext/scenegraph/shaders.py</a>
+    Lines: <span class="sample-lines">260</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

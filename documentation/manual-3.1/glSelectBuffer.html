@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glSelectBuffer : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glSelectBuffer</h1>
+</header>
+<main class="content">
+    <section class="purpose">establish a buffer for selection mode values</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glSelectBuffer"></a>
+    <span class="c-function">glSelectBuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLsizei (
+            <a href="#param-size" class="parameter">size</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint * (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glSelectBuffer"></a>
+    <span class="py-function">glSelectBuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-size" class="parameter">size</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+         = None
+    </span>
+</span> )
+    <pre class="pydoc">Create a selection buffer of the given size
+    </pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-size"></a>
+                        size
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the size of
+    <a class="parameter" href="#param-buffer">buffer</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-buffer"></a>
+                        buffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Returns the selection data.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glSelectBuffer.html">glSelectBuffer</a>
+    has two arguments:
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is a pointer to an array of unsigned integers,
+            and
+    <a class="parameter" href="#param-size">size</a>
+    indicates the size of the array.
+    <a class="parameter" href="#param-buffer">buffer</a>
+    returns values from the name stack
+            (see
+    <a class="crossref" href="./glInitNames.html">glInitNames</a>
+    ,
+    <a class="crossref" href="./glLoadName.html">glLoadName</a>
+    ,
+    <a class="crossref" href="./glPushName.html">glPushName</a>
+    )
+            when the rendering mode is
+    <span class="constant">GL_SELECT</span>
+    (see
+    <a class="crossref" href="./glRenderMode.html">glRenderMode</a>
+    ).
+    <a class="function" href="./glSelectBuffer.html">glSelectBuffer</a>
+    must be issued before selection mode is enabled,
+            and it must not be issued while the rendering mode is
+    <span class="constant">GL_SELECT</span>
+    .
+</div>
+    <div class="para">
+            A programmer can use selection to determine which primitives
+            are drawn into some region of a window.
+            The region is defined by the current modelview and perspective matrices.
+        </div>
+    <div class="para">
+            In selection mode, no pixel fragments are produced from rasterization.
+            Instead,
+            if a primitive or a raster position intersects the clipping
+            volume defined by the viewing frustum
+            and the user-defined clipping planes,
+            this primitive causes a selection hit.
+            (With polygons, no hit occurs if the polygon is culled.)
+            When a change is made to the name stack,
+            or when
+    <a class="crossref" href="./glRenderMode.html">glRenderMode</a>
+    is called,
+            a hit record is copied to
+    <a class="parameter" href="#param-buffer">buffer</a>
+    if any hits have occurred since the
+            last such event
+            (name stack change or
+    <a class="crossref" href="./glRenderMode.html">glRenderMode</a>
+    call).
+            The hit record consists of the number of names in the name stack at the
+            time of the event, followed by the minimum and maximum depth values
+            of all vertices that hit since the previous event,
+            followed by the name stack contents,
+            bottom name first.
+</div>
+    <div class="para">
+            Depth values (which are in the range [0,1]) are multiplied by
+    <math>
+                <mrow>
+                    <msup><mn>2</mn>
+                    <mn>32</mn>
+                    </msup>
+                    <mo>-</mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    ,
+            before being placed in the hit record.
+</div>
+    <div class="para">
+            An internal index into
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is reset to 0 whenever selection mode
+            is entered.
+            Each time a hit record is copied into
+    <a class="parameter" href="#param-buffer">buffer</a>
+    ,
+            the index is incremented to point to the cell just past the end
+            of the block of names\(emthat is, to the next available cell
+            If the hit record is larger than the number of remaining locations in
+    <a class="parameter" href="#param-buffer">buffer</a>
+    ,
+            as much data as can fit is copied,
+            and the overflow flag is set.
+            If the name stack is empty when a hit record is copied,
+            that record consists of 0 followed by the minimum and maximum depth values.
+</div>
+    <div class="para">
+            To exit selection mode, call
+    <a class="crossref" href="./glRenderMode.html">glRenderMode</a>
+    with an argument
+            other than
+    <span class="constant">GL_SELECT</span>
+    .
+            Whenever
+    <a class="crossref" href="./glRenderMode.html">glRenderMode</a>
+    is called while the render mode is
+    <span class="constant">GL_SELECT</span>
+    ,
+            it returns the number of hit records copied to
+    <a class="parameter" href="#param-buffer">buffer</a>
+    ,
+            resets the overflow flag and the selection buffer pointer,
+            and initializes the name stack to be empty.
+            If the overflow bit was set when
+    <a class="crossref" href="./glRenderMode.html">glRenderMode</a>
+    was called,
+            a negative hit record count is returned.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            The contents of
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is undefined until
+    <a class="crossref" href="./glRenderMode.html">glRenderMode</a>
+    is called
+            with an argument other than
+    <span class="constant">GL_SELECT</span>
+    .
+</div>
+    <div class="para">
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    /
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    primitives and calls to
+    <a class="crossref" href="./glRasterPos.html">glRasterPos</a>
+    can result in hits.
+    <a class="crossref" href="./glWindowPos.html">glWindowPos</a>
+    will always generate a selection hit.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-size">size</a>
+    is negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glSelectBuffer.html">glSelectBuffer</a>
+    is called while the
+            render mode is
+    <span class="constant">GL_SELECT</span>
+    ,
+            or if
+    <a class="crossref" href="./glRenderMode.html">glRenderMode</a>
+    is called with argument
+    <span class="constant">GL_SELECT</span>
+    before
+    <a class="function" href="./glSelectBuffer.html">glSelectBuffer</a>
+    is called at least once.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glSelectBuffer.html">glSelectBuffer</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_NAME_STACK_DEPTH</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_SELECTION_BUFFER_SIZE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetPointerv.html">glGetPointerv</a>
+    with argument
+    <span class="constant">GL_SELECTION_BUFFER_POINTER</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glFeedbackBuffer.html">glFeedbackBuffer</a>
+    ,
+    <a class="crossref" href="./glInitNames.html">glInitNames</a>
+    ,
+    <a class="crossref" href="./glLoadName.html">glLoadName</a>
+    ,
+    <a class="crossref" href="./glPushName.html">glPushName</a>
+    ,
+    <a class="crossref" href="./glRenderMode.html">glRenderMode</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glSelectBuffer</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/renderpass.py">OpenGLContext/passes/renderpass.py</a>
+    Lines: <span class="sample-lines">550</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">783</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Experiments/Cubes.py">Sketches/CL/Topology3D/Experiments/Cubes.py</a>
+    Lines: <span class="sample-lines">308</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">766</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py">Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">452</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/Display3D.py">Sketches/THF/3D/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">452</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">765</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">783</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

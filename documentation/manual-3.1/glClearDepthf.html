@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glClearDepthf : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glClearDepthf</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify the clear value for the depth buffer</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearDepthf"></a>
+    <span class="c-function">glClearDepthf</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLfloat (
+            <a href="#param-depth" class="parameter">depth</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClearDepth"></a>
+    <span class="py-function">glClearDepth</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-depth" class="parameter">depth</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glClearDepthf"></a>
+    <span class="py-function">glClearDepthf</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-d" class="parameter">d</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-depth"></a>
+                        depth
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the depth value used when the depth buffer is cleared. The
+                    initial value is 1.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glClearDepthf.html">glClearDepthf</a>
+    specifies the depth value used by
+    <a class="crossref" href="./glClear.html">glClear</a>
+    to clear the depth buffer.
+            When clearing a fixed-point depth buffer, values specified by
+    <a class="function" href="./glClearDepthf.html">glClearDepthf</a>
+    are clamped to the range
+    <math overflow="scroll">
+                <mfenced open="[" close="]">
+                    <mn>0</mn>
+                    <mn>1</mn>
+                </mfenced>
+            </math>
+    ,
+                        and converted to fixed-point. No clamping or conversion is applied when clearing a floating-point depth buffer.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_DEPTH_CLEAR_VALUE</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">API Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>glClearDepthf</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glClear.html">glClear</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

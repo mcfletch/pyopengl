@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glBindAttribLocation : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glBindAttribLocation</h1>
+</header>
+<main class="content">
+    <section class="purpose">Associates a generic vertex attribute index with a named attribute variable</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glBindAttribLocation"></a>
+    <span class="c-function">glBindAttribLocation</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLchar *(
+            <a href="#param-name" class="parameter">name</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glBindAttribLocation"></a>
+    <span class="py-function">glBindAttribLocation</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-name" class="parameter">name</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">Specifies the handle of the program object in
+            which the association is to be made.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">Specifies the index of the generic vertex
+            attribute to be bound.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="para">Specifies a null terminated string containing
+            the name of the vertex shader attribute variable to
+            which
+    <a class="parameter" href="#param-index">index</a>
+    is to be
+            bound.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glBindAttribLocation.html">glBindAttribLocation</a>
+    is used to
+    associate a user-defined attribute variable in the program
+    object specified by
+    <a class="parameter" href="#param-program">program</a>
+    with a
+    generic vertex attribute index. The name of the user-defined
+    attribute variable is passed as a null terminated string in
+    <a class="parameter" href="#param-name">name</a>
+    . The generic vertex attribute index
+    to be bound to this variable is specified by
+    <a class="parameter" href="#param-index">index</a>
+    . When
+    <a class="parameter" href="#param-program">program</a>
+    is made part of current state,
+    values provided via the generic vertex attribute
+    <a class="parameter" href="#param-index">index</a>
+    will modify the value of the
+    user-defined attribute variable specified by
+    <a class="parameter" href="#param-name">name</a>
+    .
+</div>
+    <div class="para">If
+    <a class="parameter" href="#param-name">name</a>
+    refers to a matrix
+    attribute variable,
+    <a class="parameter" href="#param-index">index</a>
+    refers to the
+    first column of the matrix. Other matrix columns are then
+    automatically bound to locations
+    <a class="parameter" href="#param-index+1">index+1</a>
+    for a matrix of type
+    mat2
+    ;
+    <a class="parameter" href="#param-index+1">index+1</a>
+    and
+    <a class="parameter" href="#param-index+2">index+2</a>
+    for a matrix of type
+    mat3
+    ; and
+    <a class="parameter" href="#param-index+1">index+1</a>
+    ,
+    <a class="parameter" href="#param-index+2">index+2</a>
+    ,
+    and
+    <a class="parameter" href="#param-index+3">index+3</a>
+    for a matrix of type
+    mat4
+    .
+</div>
+    <div class="para">This command makes it possible for vertex shaders to use
+    descriptive names for attribute variables rather than generic
+    variables that are numbered from zero to the value of
+    <span class="constant">GL_MAX_VERTEX_ATTRIBS</span>
+    minus one. The values sent
+    to each generic attribute index are part of current state.
+    If a different program object is made current by calling
+    <a class="crossref" href="./glUseProgram.html">glUseProgram</a>
+    ,
+    the generic vertex attributes are tracked in such a way that the
+    same values will be observed by attributes in the new program
+    object that are also bound to
+    <a class="parameter" href="#param-index">index</a>
+    .
+</div>
+    <div class="para">Attribute variable
+    name-to-generic attribute index bindings for a program object
+    can be explicitly assigned at any time by calling
+    <a class="function" href="./glBindAttribLocation.html">glBindAttribLocation</a>
+    . Attribute bindings do
+    not go into effect until
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    is called. After a program object has been linked successfully,
+    the index values for generic attributes remain fixed (and their
+    values can be queried) until the next link command
+    occurs.
+</div>
+    <div class="para">Any attribute binding that occurs after the program object has been linked will not take effect
+    until the next time the program object is linked.</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glBindAttribLocation.html">glBindAttribLocation</a>
+    can be called
+    before any vertex shader objects are bound to the specified
+    program object. It is also permissible to bind a generic
+    attribute index to an attribute variable name that is never used
+    in a vertex shader.
+</div>
+    <div class="para">If
+    <a class="parameter" href="#param-name">name</a>
+    was bound previously, that
+    information is lost. Thus you cannot bind one user-defined
+    attribute variable to multiple indices, but you can bind
+    multiple user-defined attribute variables to the same
+    index.
+</div>
+    <div class="para">Applications are allowed to bind more than one
+    user-defined attribute variable to the same generic vertex
+    attribute index. This is called
+    <span class="emphasis">aliasing</span>
+    ,
+    and it is allowed only if just one of the aliased attributes is
+    active in the executable program, or if no path through the
+    shader consumes more than one attribute of a set of attributes
+    aliased to the same location. The compiler and linker are
+    allowed to assume that no aliasing is done and are free to
+    employ optimizations that work only in the absence of aliasing.
+    OpenGL implementations are not required to do error checking to
+    detect aliasing.
+</div>
+    <div class="para">Active attributes that are not explicitly bound will be
+    bound by the linker when
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    is called. The locations assigned can be queried by calling
+    <a class="crossref" href="./glGetAttribLocation.html">glGetAttribLocation</a>
+    .
+</div>
+    <div class="para">OpenGL copies the
+    <a class="parameter" href="#param-name">name</a>
+    string when
+    <a class="function" href="./glBindAttribLocation.html">glBindAttribLocation</a>
+    is called, so an
+    application may free its copy of the
+    <a class="parameter" href="#param-name">name</a>
+    string immediately after the function returns.
+</div>
+    <div class="para">Generic attribute locations may be specified in the shader source
+    text using a
+    location
+    layout qualifier. In this case,
+    the location of the attribute specified in the shader's source takes precedence
+    and may be queried by calling
+    <a class="crossref" href="./glGetAttribLocation.html">glGetAttribLocation</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-index">index</a>
+    is greater than or equal to
+    <span class="constant">GL_MAX_VERTEX_ATTRIBS</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-name">name</a>
+    starts with the reserved prefix
+    "gl_".
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a value generated by
+    OpenGL.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a program object.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_VERTEX_ATTRIBS</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetActiveAttrib.html">glGetActiveAttrib</a>
+    with argument
+    <a class="parameter" href="#param-program">program</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetAttribLocation.html">glGetAttribLocation</a>
+    with arguments
+    <a class="parameter" href="#param-program">program</a>
+    and
+    <a class="parameter" href="#param-name">name</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsProgram.html">glIsProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glBindAttribLocation.html">glBindAttribLocation</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="function" href="./glEnableVertexAttribArray.html#c-glDisableVertexAttribArray">glDisableVertexAttribArray</a>
+    ,
+    <a class="crossref" href="./glEnableVertexAttribArray.html">glEnableVertexAttribArray</a>
+    ,
+    <a class="crossref" href="./glUseProgram.html">glUseProgram</a>
+    ,
+    <a class="crossref" href="./glVertexAttrib.html">glVertexAttrib</a>
+    ,
+    <a class="crossref" href="./glVertexAttribPointer.html">glVertexAttribPointer</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2005 3Dlabs Inc. Ltd.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glBindAttribLocation</div>
+        <div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">104</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">126</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">118</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">104</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

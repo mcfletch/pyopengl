@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutShowWindow : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutShowWindow</h1>
+</header>
+<main class="content">
+    <section class="purpose">change the display status of the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutHideWindow"></a>
+    <span class="c-function">glutHideWindow</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutHideWindow"></a>
+    <span class="py-function">glutHideWindow</span>( <span class="parameter-list">
+</span> )
+    <pre class="pydoc">glutHideWindow(  ) -&gt; None</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutIconifyWindow"></a>
+    <span class="c-function">glutIconifyWindow</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutIconifyWindow"></a>
+    <span class="py-function">glutIconifyWindow</span>( <span class="parameter-list">
+</span> )
+    <pre class="pydoc">glutIconifyWindow(  ) -&gt; None</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutShowWindow"></a>
+    <span class="c-function">glutShowWindow</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutShowWindow"></a>
+    <span class="py-function">glutShowWindow</span>( <span class="parameter-list">
+</span> )
+    <pre class="pydoc">glutShowWindow(  ) -&gt; None</pre>
+</div>
+        </div>
+    </section>
+    <section class="section" id="glutShowWindow.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutShowWindow.html">glutShowWindow</a>
+    will show the current window (though it may still not be visible if obscured by
+			other shown windows).
+    <a class="function" href="./glutShowWindow.html#c-glutHideWindow">glutHideWindow</a>
+    will hide the current window.
+    <a class="function" href="./glutShowWindow.html#c-glutIconifyWindow">glutIconifyWindow</a>
+    will iconify a top-level window, but GLUT prohibits iconification of a
+			subwindow. The effect of showing, hiding, and iconifying windows does not take place immediately. Instead the requests
+			are saved for execution upon return to the GLUT event loop. Subsequent show, hide, or iconification requests on a
+			window replace the previously saved request for that window. The effect of hiding, showing, or iconifying top-level
+			windows is subject to the window system's policy for displaying windows.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutPopWindow.html">glutPopWindow</a>
+            <a class="crossref" href="./glutPopWindow.html#c-glutPushWindow">glutPushWindow</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutShowWindow</div>
+        <div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/ui/window/win_glut.py">pymt/ui/window/win_glut.py</a>
+    Lines: <span class="sample-lines">16, 47</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

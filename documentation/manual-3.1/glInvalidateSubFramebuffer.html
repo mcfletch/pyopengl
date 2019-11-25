@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glInvalidateSubFramebuffer : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glInvalidateSubFramebuffer</h1>
+</header>
+<main class="content">
+    <section class="purpose">invalidate the content of a region of some or all of a framebuffer's attachments</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glInvalidateNamedFramebufferSubData"></a>
+    <span class="c-function">glInvalidateNamedFramebufferSubData</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-numAttachments" class="parameter">numAttachments</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLenum *(
+            <a href="#param-attachments" class="parameter">attachments</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glInvalidateNamedFramebufferSubData"></a>
+    <span class="py-function">glInvalidateNamedFramebufferSubData</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-numAttachments" class="parameter">numAttachments</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-attachments" class="parameter">attachments</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glInvalidateSubFramebuffer"></a>
+    <span class="c-function">glInvalidateSubFramebuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-numAttachments" class="parameter">numAttachments</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLenum * (
+            <a href="#param-attachments" class="parameter">attachments</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-height" class="parameter">height</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glInvalidateSubFramebuffer"></a>
+    <span class="py-function">glInvalidateSubFramebuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-numAttachments" class="parameter">numAttachments</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-attachments" class="parameter">attachments</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target to which the framebuffer object is
+                    attached for
+    <a class="function" href="./glInvalidateSubFramebuffer.html">glInvalidateSubFramebuffer</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-framebuffer"></a>
+                        framebuffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the framebuffer object for
+    <a class="function" href="./glInvalidateSubFramebuffer.html#c-glInvalidateNamedFramebufferSubData">glInvalidateNamedFramebufferSubData</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-numAttachments"></a>
+                        numAttachments
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of entries in the
+    <a class="parameter" href="#param-attachments">attachments</a>
+    array.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-attachments"></a>
+                        attachments
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to an array identifying the
+                    attachments to be invalidated.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-x"></a>
+                        x
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the X offset of the region to be invalidated.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-y"></a>
+                        y
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the Y offset of the region to be invalidated.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the width of the region to be invalidated.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-height"></a>
+                        height
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the height of the region to be invalidated.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glInvalidateSubFramebuffer.html">glInvalidateSubFramebuffer</a>
+    and
+    <a class="function" href="./glInvalidateSubFramebuffer.html#c-glInvalidateNamedFramebufferSubData">glInvalidateNamedFramebufferSubData</a>
+    invalidate the contents of a specified region of a specified set
+            of attachments of a framebuffer.
+</div>
+    <div class="para">
+            For
+    <a class="function" href="./glInvalidateSubFramebuffer.html">glInvalidateSubFramebuffer</a>
+    , the
+            framebuffer object is that bound to
+    <a class="parameter" href="#param-target">target</a>
+    , which must be one of
+    <span class="constant">GL_FRAMEBUFFER</span>
+    ,
+    <span class="constant">GL_READ_FRAMEBUFFER</span>
+    or
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    .
+    <span class="constant">GL_FRAMEBUFFER</span>
+    is equivalent to
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    . Default framebuffers
+            may also be invalidated if bound to
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+    <div class="para">
+            For
+    <a class="function" href="./glInvalidateSubFramebuffer.html#c-glInvalidateNamedFramebufferSubData">glInvalidateNamedFramebufferSubData</a>
+    ,
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is the name of the
+            framebuffer object. If
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is
+            zero, the default draw framebuffer is affected.
+</div>
+    <div class="para">
+            The set of attachments of which a region is to be invalidated
+            are specified in the
+    <a class="parameter" href="#param-attachments">attachments</a>
+    array,
+            which contains
+    <a class="parameter" href="#param-numAttachments">numAttachments</a>
+    elements.
+</div>
+    <div class="para">
+            If the specified framebuffer is a framebuffer object, each
+            element of
+    <a class="parameter" href="#param-attachments">attachments</a>
+    must be one of
+    <span class="constant">GL_DEPTH_ATTACHMENT</span>
+    ,
+    <span class="constant">GL_STENCIL_ATTACHMENT</span>
+    <span class="constant">GL_DEPTH_STENCIL_ATTACHMENT</span>
+    , or
+    <span class="constant">GL_COLOR_ATTACHMENT</span>
+    <span class="emphasis">i</span>
+    ,
+            where
+    <span class="emphasis">i</span>
+    is between zero and the value of
+    <span class="constant">GL_MAX_FRAMEBUFFER_ATTACHMENTS</span>
+    minus one.
+</div>
+    <div class="para">
+            If the specified framebuffer is a default framebuffer, each
+            element of
+    <a class="parameter" href="#param-attachments">attachments</a>
+    must be one of
+    <span class="constant">GL_FRONT_LEFT</span>
+    ,
+    <span class="constant">GL_FRONT_RIGHT</span>
+    ,
+    <span class="constant">GL_BACK_LEFT</span>
+    ,
+    <span class="constant">GL_BACK_RIGHT</span>
+    ,
+    <span class="constant">GL_AUX</span>
+    <span class="emphasis">i</span>
+    ,
+    <span class="constant">GL_ACCUM</span>
+    ,
+    <span class="constant">GL_COLOR</span>
+    ,
+    <span class="constant">GL_DEPTH</span>
+    , or
+    <span class="constant">GL_STENCIL</span>
+    .
+    <span class="constant">GL_COLOR</span>
+    ,
+            is treated as
+    <span class="constant">GL_BACK_LEFT</span>
+    for a
+            double-buffered context and
+    <span class="constant">GL_FRONT_LEFT</span>
+    for a single-buffered context. The other attachments identify
+            the corresponding specific buffer.
+</div>
+    <div class="para">
+            The contents of the specified region of each specified
+            attachment become undefined after execution of
+    <a class="function" href="./glInvalidateSubFramebuffer.html">glInvalidateSubFramebuffer</a>
+    or
+    <a class="function" href="./glInvalidateSubFramebuffer.html#c-glInvalidateNamedFramebufferSubData">glInvalidateNamedFramebufferSubData</a>
+    . The
+            region to be invalidated is specified by
+    <a class="parameter" href="#param-x">x</a>
+    ,
+    <a class="parameter" href="#param-y">y</a>
+    ,
+    <a class="parameter" href="#param-width">width</a>
+    and
+    <a class="parameter" href="#param-height">height</a>
+    where
+    <a class="parameter" href="#param-x">x</a>
+    and
+    <a class="parameter" href="#param-y">y</a>
+    give
+            the offset from the origin (with lower-left corner at $(0,0)$)
+            and
+    <a class="parameter" href="#param-width">width</a>
+    and
+    <a class="parameter" href="#param-height">height</a>
+    are the width and height,
+            respectively, of the region. Any pixels lying outside of the
+            window allocated to the current GL context (for the default
+            framebuffer), or outside of the attachments of the framebuffer
+            object, are ignored. If the framebuffer object is not complete,
+            these commands may be ignored.
+</div>
+    <div class="para">
+            If the framebuffer object is not complete,
+    <a class="function" href="./glInvalidateSubFramebuffer.html">glInvalidateSubFramebuffer</a>
+    and
+    <a class="function" href="./glInvalidateSubFramebuffer.html#c-glInvalidateNamedFramebufferSubData">glInvalidateNamedFramebufferSubData</a>
+    may be
+            ignored. This is not an error.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    by
+    <a class="function" href="./glInvalidateSubFramebuffer.html">glInvalidateSubFramebuffer</a>
+    if
+    <a class="parameter" href="#param-target">target</a>
+    is not one of the accepted
+            framebuffer targets.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    by
+    <a class="function" href="./glInvalidateSubFramebuffer.html#c-glInvalidateNamedFramebufferSubData">glInvalidateNamedFramebufferSubData</a>
+    if
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is not zero of the name of an
+            existing framebuffer object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-numAttachments">numAttachments</a>
+    ,
+    <a class="parameter" href="#param-width">width</a>
+    or
+    <a class="parameter" href="#param-height">height</a>
+    is
+            negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if any element
+            of
+    <a class="parameter" href="#param-attachments">attachments</a>
+    is not one of the accepted
+            framebuffer attachment points, as described above.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+            element of
+    <a class="parameter" href="#param-attachments">attachments</a>
+    is
+    <span class="constant">GL_COLOR_ATTACHMENT</span>
+    <span class="emphasis">m</span>
+    where
+    <span class="emphasis">m</span>
+    is greater than or equal to the
+            value of
+    <span class="constant">GL_MAX_COLOR_ATTACHMENTS</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_COLOR_ATTACHMENTS</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glInvalidateSubFramebuffer.html#c-glInvalidateNamedFramebufferSubData">glInvalidateNamedFramebufferSubData</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glInvalidateSubFramebuffer.html">glInvalidateSubFramebuffer</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glInvalidateTexSubImage.html">glInvalidateTexSubImage</a>
+    ,
+    <a class="crossref" href="./glInvalidateTexImage.html">glInvalidateTexImage</a>
+    ,
+    <a class="crossref" href="./glInvalidateBufferSubData.html">glInvalidateBufferSubData</a>
+    ,
+    <a class="crossref" href="./glInvalidateBufferData.html">glInvalidateBufferData</a>
+    ,
+    <a class="crossref" href="./glInvalidateFramebuffer.html">glInvalidateFramebuffer</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

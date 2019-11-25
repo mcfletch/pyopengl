@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetTextureSubImage : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetTextureSubImage</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieve a sub-region of a texture image from a texture
+    object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTextureSubImage"></a>
+    <span class="c-function">glGetTextureSubImage</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-level" class="parameter">level</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-xoffset" class="parameter">xoffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-yoffset" class="parameter">yoffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-zoffset" class="parameter">zoffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-depth" class="parameter">depth</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        void *(
+            <a href="#param-pixels" class="parameter">pixels</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTextureSubImage"></a>
+    <span class="py-function">glGetTextureSubImage</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-xoffset" class="parameter">xoffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-yoffset" class="parameter">yoffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-zoffset" class="parameter">zoffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-depth" class="parameter">depth</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">Specifies the name of the source texture object. Must be
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    or
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    . In specific, buffer and
+          multisample textures are not permitted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-level"></a>
+                        level
+                    </th>
+                    <td>
+    <div class="para">Specifies the level-of-detail number. Level 0 is the base
+          image level. Level $n$ is the $n$th mipmap reduction image.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-xoffset"></a>
+                        xoffset
+                    </th>
+                    <td>
+    <div class="para">Specifies a texel offset in the x direction within the texture
+          array.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-yoffset"></a>
+                        yoffset
+                    </th>
+                    <td>
+    <div class="para">Specifies a texel offset in the y direction within the texture
+          array.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-zoffset"></a>
+                        zoffset
+                    </th>
+                    <td>
+    <div class="para">Specifies a texel offset in the z direction within the texture
+          array.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">Specifies the width of the texture subimage.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-height"></a>
+                        height
+                    </th>
+                    <td>
+    <div class="para">Specifies the height of the texture subimage.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-depth"></a>
+                        depth
+                    </th>
+                    <td>
+    <div class="para">Specifies the depth of the texture subimage.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-format"></a>
+                        format
+                    </th>
+                    <td>
+    <div class="para">Specifies the format of the pixel data. The following symbolic
+          values are accepted:
+    <span class="constant">GL_RED</span>
+    ,
+    <span class="constant">GL_RG</span>
+    ,
+    <span class="constant">GL_RGB</span>
+    ,
+    <span class="constant">GL_BGR</span>
+    ,
+    <span class="constant">GL_RGBA</span>
+    ,
+    <span class="constant">GL_BGRA</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    and
+    <span class="constant">GL_STENCIL_INDEX</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">Specifies the data type of the pixel data. The following
+          symbolic values are accepted:
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GL_BYTE</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+    ,
+    <span class="constant">GL_SHORT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT</span>
+    ,
+    <span class="constant">GL_INT</span>
+    ,
+    <span class="constant">GL_FLOAT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+    , and
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bufSize"></a>
+                        bufSize
+                    </th>
+                    <td>
+    <div class="para">Specifies the size of the buffer to receive the retrieved
+          pixel data.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pixels"></a>
+                        pixels
+                    </th>
+                    <td>
+    <div class="para">Returns the texture subimage. Should be a pointer to an array
+          of the type specified by
+    <a class="parameter" href="#param-type">type</a>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetTextureSubImage.html">glGetTextureSubImage</a>
+    returns a texture subimage
+    into pixels.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-texture">texture</a>
+    is the name of the source texture
+    object and must not be a buffer or multisample texture. The effective
+    <a class="parameter" href="#param-target">target</a>
+    parameter is the value of
+    <span class="constant">GL_TEXTURE_TARGET</span>
+    for texture.
+    <a class="parameter" href="#param-Level">Level</a>
+    ,
+    <a class="parameter" href="#param-format">format</a>
+    ,
+    <a class="parameter" href="#param-type">type</a>
+    and
+    <a class="parameter" href="#param-pixels">pixels</a>
+    have the
+    same meaning as for
+    <a class="function" href="./glGetTexImage.html">glGetTexImage</a>
+    .
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    is the size of the buffer to receive the
+    retrieved pixel data.
+</div>
+    <div class="para">For cube map textures, the behavior is as though
+    GetTextureImage
+    were called, but only texels from the
+    requested cube map faces (selected by
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    and
+    <a class="parameter" href="#param-depth">depth</a>
+    , as described below) were returned.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-xoffset">xoffset</a>
+    ,
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    and
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    values indicate the position of the
+    subregion to return.
+    <a class="parameter" href="#param-width">width</a>
+    ,
+    <a class="parameter" href="#param-height">height</a>
+    and
+    <a class="parameter" href="#param-depth">depth</a>
+    indicate
+    the size of the region to return. These parameters have the same meaning
+    as for
+    <a class="function" href="./glTexSubImage3D.html">glTexSubImage3D</a>
+    , though for one- and
+    two-dimensional textures there are extra restrictions, described in the
+    errors section below.
+</div>
+    <div class="para">For one-dimensional array textures,
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    is interpreted as the first layer to access and
+    <a class="parameter" href="#param-height">height</a>
+    is the number of layers to access.
+</div>
+    <div class="para">For two-dimensional array textures,
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    is interpreted as the first layer to access and
+    <a class="parameter" href="#param-depth">depth</a>
+    is the number of layers to access.
+</div>
+    <div class="para">Cube map textures are treated as an array of six slices in the
+    z-dimension, where the value of
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    is
+    interpreted as specifying the cube map face for the corresponding layer
+    (as presented in the table below) and
+    <a class="parameter" href="#param-depth">depth</a>
+    is the
+    number of faces to access:
+</div>
+    <div class="para">
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>Layer number</td><td>Cube Map Face</td>
+                </tr><tr valign="top">
+                    <td>0</td><td>GL_TEXTURE_CUBE_MAP_POSITIVE_X</td>
+                </tr><tr valign="top">
+                    <td>1</td><td>GL_TEXTURE_CUBE_MAP_NEGATIVE_X</td>
+                </tr><tr valign="top">
+                    <td>2</td><td>GL_TEXTURE_CUBE_MAP_POSITIVE_Y</td>
+                </tr><tr valign="top">
+                    <td>3</td><td>GL_TEXTURE_CUBE_MAP_NEGATIVE_Y</td>
+                </tr><tr valign="top">
+                    <td>4</td><td>GL_TEXTURE_CUBE_MAP_POSITIVE_Z</td>
+                </tr><tr valign="top">
+                    <td>5</td><td>GL_TEXTURE_CUBE_MAP_NEGATIVE_Z</td>
+                </tr>
+    </tbody></table>
+</div>
+    <div class="para">
+        For cube map array textures,
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    is the
+        first layer-face to access, and
+    <a class="parameter" href="#param-depth">depth</a>
+    is the
+        number of layer-faces to access. A layer-face described by $k$ is
+        translated into an array layer and face according to
+            $$ layer = \left\lfloor { layer \over 6 } \right\rfloor$$
+        and
+            $$ face = k \bmod 6. $$
+</div>
+    <div class="para">Component groups from the specified sub-region are packed and placed
+    into memory as described for
+    <a class="function" href="./glGetTexImage.html#c-glGetTextureImage">glGetTextureImage</a>
+    ,
+    starting with the texel at (
+    <a class="parameter" href="#param-xoffset">xoffset</a>
+    ,
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    ,
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    ).
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    error is generated if
+    <a class="parameter" href="#param-texture">texture</a>
+    is not the name of an existing texture
+    object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    error is generated if
+    <a class="parameter" href="#param-texture">texture</a>
+    is the name of a buffer or multisample
+    texture.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-xoffset">xoffset</a>
+    ,
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    or
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    are negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-xoffset">xoffset</a>
+    +
+    <a class="parameter" href="#param-width">width</a>
+    is greater
+    than the texture's width,
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    +
+    <a class="parameter" href="#param-height">height</a>
+    is greater than the texture's height, or
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    +
+    <a class="parameter" href="#param-depth">depth</a>
+    is greater
+    than the texture's depth.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    error is generated if the
+    effective target is
+    <span class="constant">GL_TEXTURE_1D</span>
+    and either
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    is not zero, or
+    <a class="parameter" href="#param-height">height</a>
+    is not one.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    error is generated if the
+    effective target is
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    or
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    and either
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    is not zero, or
+    <a class="parameter" href="#param-depth">depth</a>
+    is not one.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    error is generated if the
+    buffer size required to store the requested data is greater than
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetTextureSubImage.html">glGetTextureSubImage</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetTexImage.html">glGetTexImage</a>
+    ,
+    <a class="function" href="./glGetTexImage.html#c-glGetTextureImage">glGetTextureImage</a>
+    ,
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage1D.html">glTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage3D.html">glTexSubImage3D</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

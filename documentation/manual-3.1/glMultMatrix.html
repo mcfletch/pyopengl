@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glMultMatrix : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glMultMatrix</h1>
+</header>
+<main class="content">
+    <section class="purpose">multiply the current matrix with the specified matrix</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glMultMatrix"></a>
+    <span class="c-function">glMultMatrix</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glMultMatrixd"></a>
+    <span class="c-function">glMultMatrixd</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLdouble * (
+            <a href="#param-m" class="parameter">m</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glMultMatrixd"></a>
+    <span class="py-function">glMultMatrixd</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-m" class="parameter">m</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glMultMatrixf"></a>
+    <span class="c-function">glMultMatrixf</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLfloat * (
+            <a href="#param-m" class="parameter">m</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glMultMatrixf"></a>
+    <span class="py-function">glMultMatrixf</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-m" class="parameter">m</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-m"></a>
+                        m
+                    </th>
+                    <td>
+    <div class="para">
+                    Points to 16 consecutive values that are used as the elements of
+                    a
+    <math>
+                        <mrow>
+                            <mn>4</mn>
+                            <mo></mo>
+                            <mn>4</mn>
+                        </mrow>
+                    </math>
+    column-major matrix.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glMultMatrix.html">glMultMatrix</a>
+    multiplies the current matrix with the one specified using
+    <a class="parameter" href="#param-m">m</a>
+    , and
+            replaces the current matrix with the product.
+</div>
+    <div class="para">
+            The current matrix is determined by the current matrix mode (see
+    <a class="crossref" href="./glMatrixMode.html">glMatrixMode</a>
+    ). It is either the projection matrix,
+            modelview matrix,
+            or the texture matrix.
+</div>
+    </section><section class="section" id="examples">
+    <h2 class="title">Examples</h2>
+    <div class="para">
+            If the current matrix is
+    <math><mi mathvariant="italic">C</mi></math>
+    and the coordinates
+            to be transformed are
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">v</mi>
+                    <mo>=</mo>
+                    <mfenced open="(" close=")">
+                        <mrow>
+                            <mi mathvariant="italic">v</mi>
+                            <mo></mo>
+                            <mfenced open="[" close="]">
+                                <mn>0</mn>
+                            </mfenced>
+                        </mrow>
+                        <mrow>
+                            <mi mathvariant="italic">v</mi>
+                            <mo></mo>
+                            <mfenced open="[" close="]">
+                                <mn>1</mn>
+                            </mfenced>
+                        </mrow>
+                        <mrow>
+                            <mi mathvariant="italic">v</mi>
+                            <mo></mo>
+                            <mfenced open="[" close="]">
+                                <mn>2</mn>
+                            </mfenced>
+                        </mrow>
+                        <mrow>
+                            <mi mathvariant="italic">v</mi>
+                            <mo></mo>
+                            <mfenced open="[" close="]">
+                                <mn>3</mn>
+                            </mfenced>
+                        </mrow>
+                    </mfenced>
+                </mrow>
+            </math>
+    ,
+            then the current transformation is
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">C</mi>
+                    <mo></mo>
+                    <mi mathvariant="italic">v</mi>
+                </mrow>
+            </math>
+    ,
+            or
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mfenced open="(" close=")">
+                        <mtable>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>0</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>4</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>8</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>12</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>1</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>5</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>9</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>13</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>2</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>6</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>10</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>14</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>3</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>7</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>11</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>15</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                        </mtable>
+                    </mfenced>
+                    <mo></mo>
+                    <mfenced open="(" close=")">
+                        <mtable>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">v</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>0</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">v</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>1</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">v</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>2</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">v</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>3</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                        </mtable>
+                    </mfenced>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+        </div>
+    <div class="para">
+            Calling
+    <a class="function" href="./glMultMatrix.html">glMultMatrix</a>
+    with an argument of
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">m</mi>
+                    <mo>=</mo>
+                    <mfenced open="{" close="}">
+                        <mrow>
+                            <mi mathvariant="italic">m</mi>
+                            <mo></mo>
+                            <mfenced open="[" close="]">
+                                <mn>0</mn>
+                            </mfenced>
+                        </mrow>
+                        <mrow>
+                            <mi mathvariant="italic">m</mi>
+                            <mo></mo>
+                            <mfenced open="[" close="]">
+                                <mn>1</mn>
+                            </mfenced>
+                        </mrow>
+                        <mi mathvariant="italic">...</mi>
+                        <mrow>
+                            <mi mathvariant="italic">m</mi>
+                            <mo></mo>
+                            <mfenced open="[" close="]">
+                                <mn>15</mn>
+                            </mfenced>
+                        </mrow>
+                    </mfenced>
+                </mrow>
+            </math>
+    replaces the current transformation with
+    <math>
+                <mrow>
+                    <mfenced open="(" close=")">
+                        <mrow>
+                            <mi mathvariant="italic">C</mi>
+                            <mo></mo>
+                            <mi mathvariant="italic">M</mi>
+                        </mrow>
+                    </mfenced>
+                    <mo></mo>
+                    <mi mathvariant="italic">v</mi>
+                </mrow>
+            </math>
+    ,
+            or
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mfenced open="(" close=")">
+                        <mtable>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>0</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>4</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>8</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>12</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>1</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>5</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>9</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>13</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>2</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>6</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>10</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>14</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>3</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>7</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>11</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>15</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                        </mtable>
+                    </mfenced>
+                    <mo></mo>
+                    <mfenced open="(" close=")">
+                        <mtable>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>0</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>4</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>8</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>12</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>1</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>5</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>9</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>13</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>2</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>6</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>10</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>14</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>3</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>7</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>11</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>15</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                        </mtable>
+                    </mfenced>
+                    <mo></mo>
+                    <mfenced open="(" close=")">
+                        <mtable>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">v</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>0</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">v</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>1</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">v</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>2</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">v</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>3</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                        </mtable>
+                    </mfenced>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+        </div>
+    <div class="para">
+            Where
+    <math><mi mathvariant="italic">v</mi></math>
+    is represented as a
+    <math>
+                <mrow>
+                    <mn>4</mn>
+                    <mo></mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    matrix.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            While the elements of the matrix may be specified with
+            single or double precision, the GL may store or operate on these
+            values in less-than-single precision.
+        </div>
+    <div class="para">
+            In many computer languages,
+    <math>
+                <mrow>
+                    <mn>4</mn>
+                    <mo></mo>
+                    <mn>4</mn>
+                </mrow>
+            </math>
+    arrays are represented
+            in row-major order. The transformations just described
+            represent these matrices in column-major order.
+            The order of the multiplication is important. For example, if the current
+            transformation is a rotation, and
+    <a class="function" href="./glMultMatrix.html">glMultMatrix</a>
+    is called with a translation matrix,
+            the translation is done directly on the coordinates to be transformed,
+            while the rotation is done on the results of that translation.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glMultMatrix.html">glMultMatrix</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MATRIX_MODE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_COLOR_MATRIX</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MODELVIEW_MATRIX</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PROJECTION_MATRIX</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_TEXTURE_MATRIX</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glLoadIdentity.html">glLoadIdentity</a>
+    ,
+    <a class="crossref" href="./glLoadMatrix.html">glLoadMatrix</a>
+    ,
+    <a class="crossref" href="./glLoadTransposeMatrix.html">glLoadTransposeMatrix</a>
+    ,
+    <a class="crossref" href="./glMatrixMode.html">glMatrixMode</a>
+    ,
+    <a class="crossref" href="./glMultTransposeMatrix.html">glMultTransposeMatrix</a>
+    ,
+    <a class="crossref" href="./glPushMatrix.html">glPushMatrix</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glMultMatrixf</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/nodepath.py">OpenGLContext/scenegraph/nodepath.py</a>
+    Lines: <span class="sample-lines">6, 30</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/spherebackground.py">OpenGLContext/scenegraph/spherebackground.py</a>
+    Lines: <span class="sample-lines">36</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/interactionMatrix/mouseInteractor.py">PyOpenGL-Demo/proesch/interactionMatrix/mouseInteractor.py</a>
+    Lines: <span class="sample-lines">70, 71</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/interactionMatrix/interactionMatrix.py">PyOpenGL-Demo/proesch/interactionMatrix/interactionMatrix.py</a>
+    Lines: <span class="sample-lines">43, 52</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson48/Lesson48.py">PyOpenGL-Demo/NeHe/lesson48/Lesson48.py</a>
+    Lines: <span class="sample-lines">133, 142</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson43/glFreeType.py">PyOpenGL-Demo/NeHe/lesson43/glFreeType.py</a>
+    Lines: <span class="sample-lines">295</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/mmLib/OpenGLDriver.py">pymmlib/mmLib/OpenGLDriver.py</a>
+    Lines: <span class="sample-lines">257, 268</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Core.py">VisionEgg/Core.py</a>
+    Lines: <span class="sample-lines">877</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/ui/widgets/scatter.py">pymt/ui/widgets/scatter.py</a>
+    Lines: <span class="sample-lines">18, 447</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/ui/widgets/composed/innerwindow.py">pymt/ui/widgets/composed/innerwindow.py</a>
+    Lines: <span class="sample-lines">8, 234</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/stencil.py">pymt/graphx/stencil.py</a>
+    Lines: <span class="sample-lines">22, 90</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/apps/3Ddrawing/3Ddrawing.py">examples/apps/3Ddrawing/3Ddrawing.py</a>
+    Lines: <span class="sample-lines">114, 136</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/apps/3Dviewer/3Dviewer.py">examples/apps/3Dviewer/3Dviewer.py</a>
+    Lines: <span class="sample-lines">88, 159</span>
+</div><div class="py-sample">
+    <span class="sample-project">Gloopy</span>
+    <a href="https://bitbucket.org/tartley/gloopy/src/tip/gloopy/view/render.py">gloopy/view/render.py</a>
+    Lines: <span class="sample-lines">132</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">217</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">121</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">102</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">91</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">187</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">86</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">195</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">206</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

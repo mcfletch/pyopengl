@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glClearTexImage : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glClearTexImage</h1>
+</header>
+<main class="content">
+    <section class="purpose">fills all a texture image with a constant value</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearTexImage"></a>
+    <span class="c-function">glClearTexImage</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-level" class="parameter">level</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClearTexImage"></a>
+    <span class="py-function">glClearTexImage</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">
+                    The name of an existing texture object containing the image to be cleared.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-level"></a>
+                        level
+                    </th>
+                    <td>
+    <div class="para">
+                    The level of
+    <a class="parameter" href="#param-texture">texture</a>
+    containing the region to be cleared.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-format"></a>
+                        format
+                    </th>
+                    <td>
+    <div class="para">
+                    The format of the data whose address in memory is given by
+    <a class="parameter" href="#param-data">data</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    The type of the data whose address in memory is given by
+    <a class="parameter" href="#param-data">data</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-data"></a>
+                        data
+                    </th>
+                    <td>
+    <div class="para">
+                    The address in memory of the data to be used to clear the specified region.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glClearTexImage.html">glClearTexImage</a>
+    fills all an image contained in a
+            texture with an application supplied value.
+    <a class="parameter" href="#param-texture">texture</a>
+    must be
+            the name of an existing texture. Further,
+    <a class="parameter" href="#param-texture">texture</a>
+    may not be
+            the name of a buffer texture, nor may its internal format be compressed.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-format">format</a>
+    and
+    <a class="parameter" href="#param-type">type</a>
+    specify the format and type of the
+            source data and are interpreted as they are for
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    .
+            Textures with a base internal format of
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    ,
+    <span class="constant">GL_STENCIL_INDEX</span>
+    , or
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    require depth component, stencil, or depth-stencil component data respectively.
+            Textures with other base internal formats require RGBA formats. Textures with integer
+            internal formats require integer data.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    is a pointer to an array of between one and four components of texel
+            data that will be used as the source for the constant fill value. The elements of
+            data are converted by the GL into the internal format of the texture image (that
+            was specified when the level was defined by any of the
+    glTexImage*
+    ,
+    glTexStorage*
+    or
+    glCopyTexImage*
+    commands), and then
+            used to fill the specified range of the destination texture level. If
+    <a class="parameter" href="#param-data">data</a>
+    is
+    <span class="constant">NULL</span>
+    , then
+            the pointer is ignored and the sub-range of the texture image is filled with zeros. If
+            texture is a multisample texture, all the samples in a texel are cleared to the value
+            specified by data.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glClearTexImage.html">glClearTexImage</a>
+    is available only if the GL version is 4.4 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-texture">texture</a>
+    is zero or not the
+            name of an existing texture object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-texture">texture</a>
+    is a buffer texture.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-texture">texture</a>
+    has a compressed
+            internal format.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the base internal format is
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the base internal format is
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the base internal format is
+    <span class="constant">GL_STENCIL_INDEX</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GL_STENCIL_INDEX</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the base internal format is
+    <span class="constant">GL_RGBA</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    ,
+    <span class="constant">GL_STENCIL_INDEX</span>
+    , or
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the internal format is integer and
+    <a class="parameter" href="#param-format">format</a>
+    does not specify integer data.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the internal format is not
+            integer and
+    <a class="parameter" href="#param-format">format</a>
+    specifies integer data.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the image array identified by
+    <a class="parameter" href="#param-level">level</a>
+    has not previously been defined by a call to
+    glTexImage*
+    or
+    glTexStorage*
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetTexImage.html">glGetTexImage</a>
+    ,
+    <a class="crossref" href="./glGetInternalformat.html">glGetInternalformat</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glClearTexImage.html">glClearTexImage</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glClearTexSubImage.html">glClearTexSubImage</a>
+    ,
+    <a class="crossref" href="./glTexStorage1D.html">glTexStorage1D</a>
+    ,
+    <a class="crossref" href="./glTexStorage2D.html">glTexStorage2D</a>
+    ,
+    <a class="crossref" href="./glTexStorage3D.html">glTexStorage3D</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2013-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

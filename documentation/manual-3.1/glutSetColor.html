@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutSetColor : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutSetColor</h1>
+</header>
+<main class="content">
+    <section class="purpose">sets the color of a colormap entry in the layer of use for the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutSetColor"></a>
+    <span class="c-function">glutSetColor</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-cell" class="parameter">cell</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat(
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat(
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat(
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutSetColor"></a>
+    <span class="py-function">glutSetColor</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-color" class="parameter">color</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutSetColor( c_int(color), GLfloat(red), GLfloat(green), GLfloat(blue) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-cell"></a>
+                        cell
+                    </th>
+                    <td>
+    <div class="simpara">
+						Color cell index (starting at zero).
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-red"></a>
+                        red
+                    </th>
+                    <td>
+    <div class="simpara">
+						Red intensity (clamped between 0.0 and 1.0 inclusive).
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-green"></a>
+                        green
+                    </th>
+                    <td>
+    <div class="simpara">
+						Green intensity (clamped between 0.0 and 1.0 inclusive).
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-blue"></a>
+                        blue
+                    </th>
+                    <td>
+    <div class="simpara">
+						Blue intensity (clamped between 0.0 and 1.0 inclusive).
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutSetColor.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			Sets the cell color index colormap entry of the current window's logical colormap for the layer in use with the color
+			specified by
+    <a class="parameter" href="#param-red">red</a>
+    ,
+    <a class="parameter" href="#param-green">green</a>
+    , and
+    <a class="parameter" href="#param-blue">blue</a>
+    . The layer in
+			use of the current window should be a color index window.
+    <a class="parameter" href="#param-cell">cell</a>
+    should be zero or greater and
+			less than the total number of colormap entries for the window. If the layer in use's colormap was copied by reference,
+			a
+    <a class="function" href="./glutSetColor.html">glutSetColor</a>
+    call will force the duplication of the colormap. Do not attempt to set the color of
+			an overlay's transparent index.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutGetColor.html">glutGetColor</a>
+            <a class="crossref" href="./glutCopyColormap.html">glutCopyColormap</a>
+            <a class="crossref" href="./glutInitDisplayMode.html">glutInitDisplayMode</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

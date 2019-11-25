@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutSolidCube : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutSolidCube</h1>
+</header>
+<main class="content">
+    <section class="purpose">render a solid or wireframe cube respectively.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutSolidCube"></a>
+    <span class="c-function">glutSolidCube</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble(
+            <a href="#param-size" class="parameter">size</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutSolidCube"></a>
+    <span class="py-function">glutSolidCube</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-size" class="parameter">size</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutSolidCube( GLdouble(size) ) -&gt; None</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutWireCube"></a>
+    <span class="c-function">glutWireCube</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble(
+            <a href="#param-size" class="parameter">size</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutWireCube"></a>
+    <span class="py-function">glutWireCube</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-size" class="parameter">size</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutWireCube( GLdouble(size) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-size"></a>
+                        size
+                    </th>
+                    <td>
+    <div class="simpara">
+						Length of each edge.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutSolidCube.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutSolidCube.html">glutSolidCube</a>
+    and
+    <a class="function" href="./glutSolidCube.html#c-glutWireCube">glutWireCube</a>
+    render a solid or wireframe cube respectively.
+			The cube is centered at the modeling coordinates origin with sides of length size.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutSolidSphere.html">glutSolidSphere</a>
+            <a class="crossref" href="./glutSolidCone.html">glutSolidCone</a>
+            <a class="crossref" href="./glutSolidTorus.html">glutSolidTorus</a>
+            <a class="crossref" href="./glutSolidDodecahedron.html">glutSolidDodecahedron</a>
+            <a class="crossref" href="./glutSolidOctahedron.html">glutSolidOctahedron</a>
+            <a class="crossref" href="./glutSolidTetrahedron.html">glutSolidTetrahedron</a>
+            <a class="crossref" href="./glutSolidIcosahedron.html">glutSolidIcosahedron</a>
+            <a class="crossref" href="./glutSolidTeapot.html">glutSolidTeapot</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutSolidCube</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_alpha3D.py">tests/redbook_alpha3D.py</a>
+    Lines: <span class="sample-lines">88</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shaders.py">tests/shaders.py</a>
+    Lines: <span class="sample-lines">30</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/boundingvolume.py">OpenGLContext/scenegraph/boundingvolume.py</a>
+    Lines: <span class="sample-lines">29, 323</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/shader_test.py">PyOpenGL-Demo/GLUT/shader_test.py</a>
+    Lines: <span class="sample-lines">91</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/py2exe-example/shader_test.py">py2exe-example/shader_test.py</a>
+    Lines: <span class="sample-lines">92</span>
+</div>
+        <div class="sample-key">glutWireCube</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/movelight.py">PyOpenGL-Demo/redbook/movelight.py</a>
+    Lines: <span class="sample-lines">105</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/cube.py">PyOpenGL-Demo/redbook/cube.py</a>
+    Lines: <span class="sample-lines">75</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

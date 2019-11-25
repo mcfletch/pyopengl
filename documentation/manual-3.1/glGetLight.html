@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetLight : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetLight</h1>
+</header>
+<main class="content">
+    <section class="purpose">return light source parameter values</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetLight"></a>
+    <span class="c-function">glGetLight</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetLightfv"></a>
+    <span class="c-function">glGetLightfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-light" class="parameter">light</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetLightfv"></a>
+    <span class="py-function">glGetLightfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-light" class="parameter">light</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetLightiv"></a>
+    <span class="c-function">glGetLightiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-light" class="parameter">light</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetLightiv"></a>
+    <span class="py-function">glGetLightiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-light" class="parameter">light</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-light"></a>
+                        light
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a light source.
+                    The number of possible lights depends on the implementation,
+                    but at least eight lights are supported.
+                    They are identified by symbolic names of the form
+    <span class="constant">GL_LIGHT</span>
+    <math><mi mathvariant="italic">i</mi></math>
+    where
+    <math><mi mathvariant="italic">i</mi></math>
+    ranges from 0 to the value of
+    <span class="constant">GL_MAX_LIGHTS</span>
+    - 1.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a light source parameter for
+    <a class="parameter" href="#param-light">light</a>
+    .
+                    Accepted symbolic names are
+    <span class="constant">GL_AMBIENT</span>
+    ,
+    <span class="constant">GL_DIFFUSE</span>
+    ,
+    <span class="constant">GL_SPECULAR</span>
+    ,
+    <span class="constant">GL_POSITION</span>
+    ,
+    <span class="constant">GL_SPOT_DIRECTION</span>
+    ,
+    <span class="constant">GL_SPOT_EXPONENT</span>
+    ,
+    <span class="constant">GL_SPOT_CUTOFF</span>
+    ,
+    <span class="constant">GL_CONSTANT_ATTENUATION</span>
+    ,
+    <span class="constant">GL_LINEAR_ATTENUATION</span>
+    , and
+    <span class="constant">GL_QUADRATIC_ATTENUATION</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">
+                    Returns the requested data.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetLight.html">glGetLight</a>
+    returns in
+    <a class="parameter" href="#param-params">params</a>
+    the value or values of a light source parameter.
+    <a class="parameter" href="#param-light">light</a>
+    names the light and is a symbolic name of the form
+    <span class="constant">GL_LIGHT</span>
+    <math><mi mathvariant="italic">i</mi></math>
+    where i ranges from 0 to the value of
+    <span class="constant">GL_MAX_LIGHTS</span>
+    - 1.
+    <span class="constant">GL_MAX_LIGHTS</span>
+    is an implementation dependent constant that is
+            greater than or equal to eight.
+    <a class="parameter" href="#param-pname">pname</a>
+    specifies one of ten light source parameters,
+            again by symbolic name.
+</div>
+    <div class="para">
+            The following parameters are defined:
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_AMBIENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns four integer or floating-point values representing the
+                        ambient intensity of the light source.
+                        Integer values,
+                        when requested,
+                        are linearly mapped from the internal floating-point representation
+                        such that 1.0 maps to the most positive representable integer value,
+                        and
+    <math>
+                            <mn>-1.0</mn>
+                        </math>
+    maps to the most negative representable integer value.
+                        If the internal value is outside the range
+    <math>
+                            <mfenced open="[" close="]">
+                                <mn>-1</mn>
+                                <mn>1</mn>
+                            </mfenced>
+                        </math>
+    ,
+                        the corresponding integer return value is undefined. The initial value is
+                        (0, 0, 0, 1).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DIFFUSE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns four integer or floating-point values representing the
+                        diffuse intensity of the light source.
+                        Integer values,
+                        when requested,
+                        are linearly mapped from the internal floating-point representation
+                        such that 1.0 maps to the most positive representable integer value,
+                        and
+    <math>
+                            <mn>-1.0</mn>
+                        </math>
+    maps to the most negative representable integer value.
+                        If the internal value is outside the range
+    <math>
+                            <mfenced open="[" close="]">
+                                <mn>-1</mn>
+                                <mn>1</mn>
+                            </mfenced>
+                        </math>
+    ,
+                        the corresponding integer return value is undefined. The initial value
+                        for
+    <span class="constant">GL_LIGHT0</span>
+    is (1, 1, 1, 1); for other lights, the
+                        initial value is (0, 0, 0, 0).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SPECULAR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns four integer or floating-point values representing the
+                        specular intensity of the light source.
+                        Integer values,
+                        when requested,
+                        are linearly mapped from the internal floating-point representation
+                        such that 1.0 maps to the most positive representable integer value,
+                        and
+    <math>
+                            <mn>-1.0</mn>
+                        </math>
+    maps to the most negative representable integer value.
+                        If the internal value is outside the range
+    <math>
+                            <mfenced open="[" close="]">
+                                <mn>-1</mn>
+                                <mn>1</mn>
+                            </mfenced>
+                        </math>
+    ,
+                        the corresponding integer return value is undefined. The initial value
+                        for
+    <span class="constant">GL_LIGHT0</span>
+    is (1, 1, 1, 1); for other lights, the
+                        initial value is (0, 0, 0, 0).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POSITION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns four integer or floating-point values representing the
+                        position of the light source.
+                        Integer values,
+                        when requested,
+                        are computed by rounding the internal floating-point values to the
+                        nearest integer value.
+                        The returned values are those maintained in eye coordinates.
+                        They will not be equal to the values specified using
+    <a class="crossref" href="./glLight.html">glLight</a>
+    ,
+                        unless the modelview matrix was identity at the time
+    <a class="crossref" href="./glLight.html">glLight</a>
+    was
+                        called. The initial value is (0, 0, 1, 0).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SPOT_DIRECTION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns three integer or floating-point values representing the
+                        direction of the light source.
+                        Integer values,
+                        when requested,
+                        are computed by rounding the internal floating-point values to the
+                        nearest integer value.
+                        The returned values are those maintained in eye coordinates.
+                        They will not be equal to the values specified using
+    <a class="crossref" href="./glLight.html">glLight</a>
+    ,
+                        unless the modelview matrix was identity at the time
+    <a class="crossref" href="./glLight.html">glLight</a>
+    was called.
+                        Although spot direction is normalized before being used in the lighting
+                        equation,
+                        the returned values are the transformed versions of the specified values
+                        prior to normalization. The initial value is
+    <math>
+                            <mfenced open="(" close=")">
+                                <mn>0</mn>
+                                <mn>0</mn>
+                                <mn>-1</mn>
+                            </mfenced>
+                        </math>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SPOT_EXPONENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns a single integer or floating-point value representing the
+                        spot exponent of the light.
+                        An integer value,
+                        when requested,
+                        is computed by rounding the internal floating-point representation to
+                        the nearest integer. The initial value is 0.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SPOT_CUTOFF</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns a single integer or floating-point value representing the
+                        spot cutoff angle of the light.
+                        An integer value,
+                        when requested,
+                        is computed by rounding the internal floating-point representation to
+                        the nearest integer. The initial value is 180.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_CONSTANT_ATTENUATION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns a single integer or floating-point value representing the
+                        constant (not distance-related) attenuation of the light.
+                        An integer value,
+                        when requested,
+                        is computed by rounding the internal floating-point representation to
+                        the nearest integer. The initial value is 1.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LINEAR_ATTENUATION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns a single integer or floating-point value representing the
+                        linear attenuation of the light.
+                        An integer value,
+                        when requested,
+                        is computed by rounding the internal floating-point representation to
+                        the nearest integer. The initial value is 0.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_QUADRATIC_ATTENUATION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns a single integer or floating-point value representing the
+                        quadratic attenuation of the light.
+                        An integer value,
+                        when requested,
+                        is computed by rounding the internal floating-point representation to
+                        the nearest integer. The initial value is 0.
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            It is always the case that
+    <span class="constant">GL_LIGHT</span>
+    <math><mi mathvariant="italic">i</mi></math>
+    =
+    <span class="constant">GL_LIGHT0</span>
+    +
+    <math><mi mathvariant="italic">i</mi></math>
+    .
+</div>
+    <div class="para">
+            If an error is generated,
+            no change is made to the contents of
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-light">light</a>
+    or
+    <a class="parameter" href="#param-pname">pname</a>
+    is not an
+            accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glGetLight.html">glGetLight</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glLight.html">glLight</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glGetLightfv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glgetlight.py">tests/glgetlight.py</a>
+    Lines: <span class="sample-lines">14</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

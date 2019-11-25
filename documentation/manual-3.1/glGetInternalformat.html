@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetInternalformat : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetInternalformat</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieve information about implementation-dependent support for internal formats</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetInternalformat"></a>
+    <span class="c-function">glGetInternalformat</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetInternalformati64v"></a>
+    <span class="c-function">glGetInternalformati64v</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint64 *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetInternalformati64v"></a>
+    <span class="py-function">glGetInternalformati64v</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetInternalformativ"></a>
+    <span class="c-function">glGetInternalformativ</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetInternalformativ"></a>
+    <span class="py-function">glGetInternalformativ</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Indicates the usage of the internal format.
+    <a class="parameter" href="#param-target">target</a>
+    must be
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    ,
+    <span class="constant">GL_TEXTURE_BUFFER</span>
+    ,
+    <span class="constant">GL_RENDERBUFFER</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    or
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalformat"></a>
+                        internalformat
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the internal format about which to retrieve information.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the type of information to query.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bufSize"></a>
+                        bufSize
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the maximum number of integers of the specified width that may be written to
+    <a class="parameter" href="#param-params">params</a>
+    by the function.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of a variable into which to write the retrieved information.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetInternalformativ.html">glGetInternalformativ</a>
+    and
+    <a class="function" href="./glGetInternalformat.html#c-glGetInternalformati64v">glGetInternalformati64v</a>
+    retrieve information about implementation-dependent support for
+            internal formats.
+    <a class="parameter" href="#param-target">target</a>
+    indicates the target with which the internal format will
+            be used and must be one of
+    <span class="constant">GL_RENDERBUFFER</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    ,
+            or
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+    , corresponding to usage as a renderbuffer, two-dimensional
+            multisample texture or two-dimensional multisample array texture, respectively.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    specifies the internal format about which to retrieve information and
+            must be a color-renderable, depth-renderable or stencil-renderable format.
+</div>
+    <div class="para">
+            The information retrieved will be written to memory addressed by the pointer specified in
+    <a class="parameter" href="#param-params">params</a>
+    . No
+            more than
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    integers will be written to this memory.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_NUM_SAMPLE_COUNTS</span>
+    , the number of sample counts that would be
+            returned by querying
+    <span class="constant">GL_SAMPLES</span>
+    will be returned in
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_SAMPLES</span>
+    , the sample counts supported for
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    and
+    <a class="parameter" href="#param-target">target</a>
+    are written into
+    <a class="parameter" href="#param-params">params</a>
+    in descending numeric order. Only positive values are returned.
+            Querying
+    <span class="constant">GL_SAMPLES</span>
+    with
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    of one will return just the maximum supported number of
+            samples for this format. The maximum value in
+    <span class="constant">GL_SAMPLES</span>
+    is guaranteed to be at least the lowest of the following:
+    <div class="itemizedlist">
+    <dd class="listitem">
+    <div class="para">
+                        The value of
+    <span class="constant">GL_MAX_INTEGER_SAMPLES</span>
+    if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is a signed or
+                        unsigned integer format.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+                        The value of
+    <span class="constant">GL_MAX_DEPTH_TEXTURE_SAMPLES</span>
+    if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is a depth- or
+                        stencil-renderable format and
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+    .
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+                        The value of
+    <span class="constant">GL_MAX_COLOR_TEXTURE_SAMPLES</span>
+    if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is a
+                        color-renderable format and
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    or
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+    .
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">The value of
+    <span class="constant">GL_MAX_SAMPLES</span>
+    .
+</div>
+</dd>
+</div>
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_INTERNALFORMAT_SUPPORTED</span>
+    ,
+    <a class="parameter" href="#param-params">params</a>
+    is set to
+    <span class="constant">GL_TRUE</span>
+    if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is a supported internal format for
+    <a class="parameter" href="#param-target">target</a>
+    and to
+    <span class="constant">GL_FALSE</span>
+    otherwise.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_INTERNALFORMAT_PREFERRED</span>
+    ,
+    <a class="parameter" href="#param-params">params</a>
+    is set to
+    <span class="constant">GL_TRUE</span>
+    if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is an format for
+    <a class="parameter" href="#param-target">target</a>
+    that is preferred by the implementation and to
+    <span class="constant">GL_FALSE</span>
+    otherwise.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_INTERNALFORMAT_RED_SIZE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_GREEN_SIZE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_BLUE_SIZE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_ALPHA_SIZE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_DEPTH_SIZE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_STENCIL_SIZE</span>
+    , or
+    <span class="constant">GL_INTERNALFORMAT_SHARED_SIZE</span>
+    then
+    <a class="parameter" href="#param-params">params</a>
+    is set to the actual resolutions that would be used for storing image array components
+            for the resource for the red, green, blue, alpha, depth, stencil and shared channels respectively. If
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is a compressed internal format, then
+    <a class="parameter" href="#param-params">params</a>
+    is set to the component resolution of an uncompressed internal format that produces
+            an image of roughly the same quality as the compressed algorithm. If the internal format is unsupported, or if a particular component is
+            not present in the format, 0 is written to
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_INTERNALFORMAT_RED_TYPE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_GREEN_TYPE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_BLUE_TYPE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_ALPHA_TYPE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_DEPTH_TYPE</span>
+    ,
+            or
+    <span class="constant">GL_INTERNALFORMAT_STENCIL_TYPE</span>
+    then
+    <a class="parameter" href="#param-params">params</a>
+    is set to a token identifying the data type used
+            to store the respective component. If the
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    represents a compressed internal format then
+            the types returned specify how components are interpreted after decompression.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_MAX_WIDTH</span>
+    ,
+    <span class="constant">GL_MAX_HEIGHT</span>
+    ,
+    <span class="constant">GL_MAX_DEPTH</span>
+    ,
+            or
+    <span class="constant">GL_MAX_LAYERS</span>
+    then
+    <a class="parameter" href="#param-pname">pname</a>
+    is filled with the maximum width, height, depth or layer count
+            for textures with internal format
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    , respectively. If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_MAX_COMBINED_DIMENSIONS</span>
+    then
+    <a class="parameter" href="#param-pname">pname</a>
+    is filled with the maximum combined dimensions of a texture of the specified internal format.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_COLOR_COMPONENTS</span>
+    then
+    <a class="parameter" href="#param-params">params</a>
+    is set to the value
+    <span class="constant">GL_TRUE</span>
+    if the internal format contains any color component (i.e., red, green, blue or alpha) and to
+    <span class="constant">GL_FALSE</span>
+    otherwise. If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_DEPTH_COMPONENTS</span>
+    or
+    <span class="constant">GL_STENCIL_COMPONENTS</span>
+    then
+    <a class="parameter" href="#param-params">params</a>
+    is set to
+    <span class="constant">GL_TRUE</span>
+    if the internal format contains a depth or stencil component, respectively, and to
+    <span class="constant">GL_FALSE</span>
+    otherwise.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_COLOR_RENDERABLE</span>
+    ,
+    <span class="constant">GL_DEPTH_RENDERABLE</span>
+    or
+    <span class="constant">GL_STENCIL_RENDERABLE</span>
+    then
+    <a class="parameter" href="#param-params">params</a>
+    is set to
+    <span class="constant">GL_TRUE</span>
+    if the specified internal format is color, depth or stencil renderable, respectively,
+            and to
+    <span class="constant">GL_FALSE</span>
+    otherwise.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_FRAMEBUFFER_RENDERABLE</span>
+    or
+    <span class="constant">GL_FRAMEBUFFER_RENDERABLE_LAYERED</span>
+    then
+    <a class="parameter" href="#param-params">params</a>
+    is set to one of
+    <span class="constant">GL_FULL_SUPPORT</span>
+    ,
+    <span class="constant">GL_CAVEAT_SUPPORT</span>
+    or
+    <span class="constant">GL_NONE</span>
+    to indicate that framebuffer attachments (layered attachments in the
+            case of
+    <span class="constant">GL_FRAMEBUFFER_RENDERABLE_LAYERED</span>
+    ) with that internal format are either
+            renderable with no restrictions, renderable with some restrictions or not renderable at all.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_FRAMEBUFFER_BLEND</span>
+    ,
+    <a class="parameter" href="#param-params">params</a>
+    is set to
+    <span class="constant">GL_TRUE</span>
+    to indicate that the internal format is supported for blending operations when attached to a framebuffer, and to
+    <span class="constant">GL_FALSE</span>
+    otherwise.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_READ_PIXELS</span>
+    then
+    <a class="parameter" href="#param-params">params</a>
+    is set to
+    <span class="constant">GL_FULL_SUPPORT</span>
+    ,
+    <span class="constant">GL_CAVEAT_SUPPORT</span>
+    or
+    <span class="constant">GL_NONE</span>
+    to that either full support, limited support or no support at all is supplied
+            for reading pixels from framebuffer attachments in the specified internal format.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_READ_PIXELS_FORMAT</span>
+    or
+    <span class="constant">GL_READ_PIXELS_TYPE</span>
+    then
+    <a class="parameter" href="#param-params">params</a>
+    is filled with the format or type, respectively, most recommended to obtain the highest image quality and performance. For
+    <span class="constant">GL_READ_PIXELS_FORMAT</span>
+    , the value returned in
+    <a class="parameter" href="#param-params">params</a>
+    is a token that is accepted for
+            the
+    <a class="parameter" href="#param-format">format</a>
+    argument to
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    . For
+    <span class="constant">GL_READ_PIXELS_TYPE</span>
+    , the value returned in
+    <a class="parameter" href="#param-params">params</a>
+    is a token that is accepted for
+            the
+    <a class="parameter" href="#param-type">type</a>
+    argument to
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_TEXTURE_IMAGE_FORMAT</span>
+    or
+    <span class="constant">GL_TEXTURE_IMAGE_TYPE</span>
+    then
+    <a class="parameter" href="#param-params">params</a>
+    is filled with the implementation-recommended format or type to be used in calls to
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    and other similar functions. For
+    <span class="constant">GL_TEXTURE_IMAGE_FORMAT</span>
+    ,
+    <a class="parameter" href="#param-params">params</a>
+    is filled with a token suitable for use as the
+    <a class="parameter" href="#param-format">format</a>
+    argument to
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    . For
+    <span class="constant">GL_TEXTURE_IMAGE_TYPE</span>
+    ,
+    <a class="parameter" href="#param-params">params</a>
+    is filled with a token suitable for use as the
+    <a class="parameter" href="#param-type">type</a>
+    argument to
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_GET_TEXTURE_IMAGE_FORMAT</span>
+    or
+    <span class="constant">GL_GET_TEXTURE_IMAGE_TYPE</span>
+    then
+    <a class="parameter" href="#param-params">params</a>
+    is filled with the implementation-recommended format or type to be used in calls to
+    <a class="crossref" href="./glGetTexImage.html">glGetTexImage</a>
+    and other similar functions. For
+    <span class="constant">GL_GET_TEXTURE_IMAGE_FORMAT</span>
+    ,
+    <a class="parameter" href="#param-params">params</a>
+    is filled with a token suitable for use as the
+    <a class="parameter" href="#param-format">format</a>
+    argument to
+    <a class="crossref" href="./glGetTexImage.html">glGetTexImage</a>
+    . For
+    <span class="constant">GL_GET_TEXTURE_IMAGE_TYPE</span>
+    ,
+    <a class="parameter" href="#param-params">params</a>
+    is filled with a token suitable for use as the
+    <a class="parameter" href="#param-type">type</a>
+    argument to
+    <a class="crossref" href="./glGetTexImage.html">glGetTexImage</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_MIPMAP</span>
+    then
+    <a class="parameter" href="#param-pname">pname</a>
+    is set to
+    <span class="constant">GL_TRUE</span>
+    to indicate that the specified internal format supports mipmaps and to
+    <span class="constant">GL_FALSE</span>
+    otherwise.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_GENERATE_MIPMAP</span>
+    or
+    <span class="constant">GL_AUTO_GENERATE_MIPMAP</span>
+    then
+    <a class="parameter" href="#param-params">params</a>
+    is indicates the level of support for manual or automatic mipmap generation for the specified internal format, respectively. Returned values
+            may be one of
+    <span class="constant">GL_FULL_SUPPORT</span>
+    ,
+    <span class="constant">GL_CAVEAT_SUPPORT</span>
+    and
+    <span class="constant">GL_NONE</span>
+    to indicate
+            either full support, limited support or no support at all.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_COLOR_ENCODING</span>
+    then the color encoding for the resource is returned in
+    <a class="parameter" href="#param-params">params</a>
+    . Possible values for color buffers are
+    <span class="constant">GL_LINEAR</span>
+    or
+    <span class="constant">GL_SRGB</span>
+    ,
+            for linear or sRGB-encoded color components, respectively. For non-color
+            formats (such as depth or stencil), or for unsupported resources,
+            the value
+    <span class="constant">GL_NONE</span>
+    is returned.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_SRGB_READ</span>
+    , or
+    <span class="constant">GL_SRGB_WRITE</span>
+    then
+    <a class="parameter" href="#param-params">params</a>
+    indicates the level of support for reading and writing to sRGB encoded images, respectively. For
+    <span class="constant">GL_SRGB_READ</span>
+    ,
+            support for converting from sRGB colorspace on read operations is returned in
+    <a class="parameter" href="#param-params">params</a>
+    and for
+    <span class="constant">GL_SRGB_WRITE</span>
+    ,
+            support for converting to sRGB colorspace on write operations to the resource is returned in
+    <a class="parameter" href="#param-params">params</a>
+    .
+    <a class="parameter" href="#param-params">params</a>
+    may be
+            set to
+    <span class="constant">GL_FULL_SUPPORT</span>
+    ,
+    <span class="constant">GL_CAVEAT_SUPPORT</span>
+    , or
+    <span class="constant">GL_NONE</span>
+    to indicate
+            full support, limited support or no support at all, respecitively.
+</div>
+    <div class="para">
+             If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_FILTER</span>
+    the
+    <a class="parameter" href="#param-params">params</a>
+    is set to either
+    <span class="constant">GL_TRUE</span>
+    or
+    <span class="constant">GL_FALSE</span>
+    to indicate support or lack thereof for filter modes other than
+    <span class="constant">GL_NEAREST</span>
+    or
+    <span class="constant">GL_NEAREST_MIPMAP</span>
+    for the specified internal format.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_VERTEX_TEXTURE</span>
+    ,
+    <span class="constant">GL_TESS_CONTROL_TEXTURE</span>
+    ,
+    <span class="constant">GL_TESS_EVALUATION_TEXTURE</span>
+    ,
+    <span class="constant">GL_GEOMETRY_TEXTURE</span>
+    ,
+    <span class="constant">GL_FRAGMENT_TEXTURE</span>
+    , or
+    <span class="constant">GL_COMPUTE_TEXTURE</span>
+    , then the value
+            written to
+    <a class="parameter" href="#param-params">params</a>
+    indicates support for use of the resource as a source of texturing in the vertex, tessellation control,
+            tessellation evaluation, geometry, fragment and compute shader stages, respectively.
+    <a class="parameter" href="#param-params">params</a>
+    may be set to
+    <span class="constant">GL_FULL_SUPPORT</span>
+    ,
+    <span class="constant">GL_CAVEAT_SUPPORT</span>
+    or
+    <span class="constant">GL_NONE</span>
+    to indicate full support,
+            limited support or no support at all, respectively.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_TEXTURE_SHADOW</span>
+    ,
+    <span class="constant">GL_TEXTURE_GATHER</span>
+    or
+    <span class="constant">GL_TEXTURE_GATHER_SHADOW</span>
+    then the value written to
+    <a class="parameter" href="#param-params">params</a>
+    indicates the level of support for using the resource with a shadow sampler, in gather operations or as a shadow sampler in gather operations, respectively. Returned values
+            may be
+    <span class="constant">GL_FULL_SUPPORT</span>
+    ,
+    <span class="constant">GL_CAVEAT_SUPPORT</span>
+    or
+    <span class="constant">GL_NONE</span>
+    to indicate full support,
+            limited support or no support at all, respectively.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_SHADER_IMAGE_LOAD</span>
+    ,
+    <span class="constant">GL_SHADER_IMAGE_STORE</span>
+    or
+    <span class="constant">GL_SHADER_IMAGE_ATOMIC</span>
+    then the value returned in
+    <a class="parameter" href="#param-params">params</a>
+    indicates the level of support for image loads, stores and atomics for resources of the specified internal
+            format. Returned values
+            may be
+    <span class="constant">GL_FULL_SUPPORT</span>
+    ,
+    <span class="constant">GL_CAVEAT_SUPPORT</span>
+    or
+    <span class="constant">GL_NONE</span>
+    to indicate full support,
+            limited support or no support at all, respectively.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_IMAGE_TEXEL_SIZE</span>
+    then the size of a texel when the resource when used as
+            an image texture is returned in
+    <a class="parameter" href="#param-params">params</a>
+    . If the resource is not supported for image
+            textures zero is returned.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_IMAGE_COMPATIBILITY_CLASS</span>
+    then the compatibility class of the resource when
+            used as an image texture is returned in
+    <a class="parameter" href="#param-params">params</a>
+    . The possible values
+            returned are
+    <span class="constant">GL_IMAGE_CLASS_4_X_32</span>
+    ,
+    <span class="constant">GL_IMAGE_CLASS_2_X_32</span>
+    ,
+    <span class="constant">GL_IMAGE_CLASS_1_X_32</span>
+    ,
+    <span class="constant">GL_IMAGE_CLASS_4_X_16</span>
+    ,
+    <span class="constant">GL_IMAGE_CLASS_2_X_16</span>
+    ,
+    <span class="constant">GL_IMAGE_CLASS_1_X_16</span>
+    ,
+    <span class="constant">GL_IMAGE_CLASS_4_X_8</span>
+    ,
+    <span class="constant">GL_IMAGE_CLASS_2_X_8</span>
+    ,
+    <span class="constant">GL_IMAGE_CLASS_1_X_8</span>
+    ,
+    <span class="constant">GL_IMAGE_CLASS_11_11_10</span>
+    , and
+    <span class="constant">GL_IMAGE_CLASS_10_10_10_2</span>
+    , which correspond to
+            the 4x32, 2x32, 1x32, 4x16, 2x16, 1x16, 4x8, 2x8, 1x8, the class
+            (a) 11/11/10 packed floating-point format, and the class (b)
+            10/10/10/2 packed formats, respectively.
+            If the resource is not supported for image textures,
+    <span class="constant">GL_NONE</span>
+    is returned.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_IMAGE_PIXEL_FORMAT</span>
+    or
+    <span class="constant">GL_IMAGE_PIXEL_TYPE</span>
+    then
+            the pixel format or type of the resource when used as an image texture is returned in
+    <a class="parameter" href="#param-params">params</a>
+    , respectively.
+            In either case, the resource is not supported for image textures
+    <span class="constant">GL_NONE</span>
+    is returned.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_IMAGE_FORMAT_COMPATIBILITY_TYPE</span>
+    , the matching criteria use for the
+            resource when used as an image textures is returned in
+    <a class="parameter" href="#param-params">params</a>
+    . Possible values returned in
+    <a class="parameter" href="#param-params">params</a>
+    are
+    <span class="constant">GL_IMAGE_FORMAT_COMPATIBILITY_BY_SIZE</span>
+    or
+    <span class="constant">GL_IMAGE_FORMAT_COMPATIBILITY_BY_CLASS</span>
+    .
+            If the resource is not supported for image textures,
+    <span class="constant">GL_NONE</span>
+    is returned.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_SIMULTANEOUS_TEXTURE_AND_DEPTH_TEST</span>
+    or
+    <span class="constant">GL_SIMULTANEOUS_TEXTURE_AND_STENCIL_TEST</span>
+    ,
+            support for using the resource both as a source for texture sampling while it is bound as a buffer for depth or stencil test, respectively, is written to
+    <a class="parameter" href="#param-params">params</a>
+    .
+            Possible values returned are
+    <span class="constant">GL_FULL_SUPPORT</span>
+    ,
+    <span class="constant">GL_CAVEAT_SUPPORT</span>
+    , or
+    <span class="constant">GL_NONE</span>
+    to indicate
+            full support, limited support or no support at all. If the resource or operation is not supported,
+    <span class="constant">GL_NONE</span>
+    is returned.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_SIMULTANEOUS_TEXTURE_AND_DEPTH_WRITE</span>
+    or
+    <span class="constant">GL_SIMULTANEOUS_TEXTURE_AND_STENCIL_WRITE</span>
+    ,
+            support for using the resource both as a source for texture sampling while performing depth or stencil writes to the resources, respectively, is written to
+    <a class="parameter" href="#param-params">params</a>
+    .
+            Possible values returned are
+    <span class="constant">GL_FULL_SUPPORT</span>
+    ,
+    <span class="constant">GL_CAVEAT_SUPPORT</span>
+    , or
+    <span class="constant">GL_NONE</span>
+    to indicate
+            full support, limited support or no support at all. If the resource or operation is not supported,
+    <span class="constant">GL_NONE</span>
+    is returned.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_TEXTURE_COMPRESSED</span>
+    then
+    <span class="constant">GL_TRUE</span>
+    is returned in
+    <a class="parameter" href="#param-params">params</a>
+    if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is a compressed internal format.
+    <span class="constant">GL_FALSE</span>
+    is returned in
+    <a class="parameter" href="#param-params">params</a>
+    otherwise.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_TEXTURE_COMPRESSED_BLOCK_WIDTH</span>
+    ,
+    <span class="constant">GL_TEXTURE_COMPRESSED_BLOCK_HEIGHT</span>
+    or
+    <span class="constant">GL_TEXTURE_COMPRESSED_BLOCK_SIZE</span>
+    then the width, height or total size, respectively of a block (in basic machine units) is returned in
+    <a class="parameter" href="#param-params">params</a>
+    . If the internal format is not compressed, or the resource is not supported, 0 is returned.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_CLEAR_BUFFER</span>
+    , the level of support for using the resource with
+    <a class="crossref" href="./glClearBufferData.html">glClearBufferData</a>
+    and
+    <a class="crossref" href="./glClearBufferSubData.html">glClearBufferSubData</a>
+    is returned in
+    <a class="parameter" href="#param-params">params</a>
+    . Possible values returned are
+    <span class="constant">GL_FULL_SUPPORT</span>
+    ,
+    <span class="constant">GL_CAVEAT_SUPPORT</span>
+    , or
+    <span class="constant">GL_NONE</span>
+    to indicate
+            full support, limited support or no support at all, respectively. If the resource or operation is not supported,
+    <span class="constant">GL_NONE</span>
+    is returned.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_TEXTURE_VIEW</span>
+    , the level of support for using the resource with the
+    <a class="crossref" href="./glTextureView.html">glTextureView</a>
+    command is returned in
+    <a class="parameter" href="#param-params">params</a>
+    . Possible values returned are
+    <span class="constant">GL_FULL_SUPPORT</span>
+    ,
+    <span class="constant">GL_CAVEAT_SUPPORT</span>
+    , or
+    <span class="constant">GL_NONE</span>
+    to indicate
+            full support, limited support or no support at all, respectively. If the resource or operation is not supported,
+    <span class="constant">GL_NONE</span>
+    is returned.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_VIEW_COMPATIBILITY_CLASS</span>
+    then the compatibility class of the resource when
+            used as a texture view is returned in
+    <a class="parameter" href="#param-params">params</a>
+    . The possible values
+            returned are
+    <span class="constant">GL_VIEW_CLASS_128_BITS</span>
+    ,
+    <span class="constant">GL_VIEW_CLASS_96_BITS</span>
+    ,
+    <span class="constant">GL_VIEW_CLASS_64_BITS</span>
+    ,
+    <span class="constant">GL_VIEW_CLASS_48_BITS</span>
+    ,
+    <span class="constant">GL_VIEW_CLASS_32_BITS</span>
+    ,
+    <span class="constant">GL_VIEW_CLASS_24_BITS</span>
+    ,
+    <span class="constant">GL_VIEW_CLASS_16_BITS</span>
+    ,
+    <span class="constant">GL_VIEW_CLASS_8_BITS</span>
+    ,
+    <span class="constant">GL_VIEW_CLASS_S3TC_DXT1_RGB</span>
+    ,
+    <span class="constant">GL_VIEW_CLASS_S3TC_DXT1_RGBA</span>
+    ,
+    <span class="constant">GL_VIEW_CLASS_S3TC_DXT3_RGBA</span>
+    ,
+    <span class="constant">GL_VIEW_CLASS_S3TC_DXT5_RGBA</span>
+    ,
+    <span class="constant">GL_VIEW_CLASS_RGTC1_RED</span>
+    ,
+    <span class="constant">GL_VIEW_CLASS_RGTC2_RG</span>
+    ,
+    <span class="constant">GL_VIEW_CLASS_BPTC_UNORM</span>
+    , and
+    <span class="constant">GL_VIEW_CLASS_BPTC_FLOAT</span>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_CLEAR_TEXTURE</span>
+    then the presence of support for using the
+    <a class="crossref" href="./glClearTexImage.html">glClearTexImage</a>
+    and
+    <a class="crossref" href="./glClearTexSubImage.html">glClearTexSubImage</a>
+    commands with the resource is written to
+    <a class="parameter" href="#param-params">params</a>
+    . Possible values written are
+    <span class="constant">GL_FULL_SUPPORT</span>
+    ,
+    <span class="constant">GL_CAVEAT_SUPPORT</span>
+    , or
+    <span class="constant">GL_NONE</span>
+    to indicate
+            full support, limited support or no support at all, respectively. If the resource or operation is not supported,
+    <span class="constant">GL_NONE</span>
+    is returned.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glGetInternalformativ.html">glGetInternalformativ</a>
+    is available only if the
+            GL version is 4.2 or higher.
+</div>
+    <div class="para">
+            The tokens
+    <span class="constant">GL_INTERNALFORMAT_SUPPORTED</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_PREFERRED</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_RED_SIZE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_GREEN_SIZE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_BLUE_SIZE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_ALPHA_SIZE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_DEPTH_SIZE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_STENCIL_SIZE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_SHARED_SIZE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_RED_TYPE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_GREEN_TYPE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_BLUE_TYPE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_ALPHA_TYPE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_DEPTH_TYPE</span>
+    ,
+    <span class="constant">GL_INTERNALFORMAT_STENCIL_TYPE</span>
+    ,
+    <span class="constant">GL_MAX_WIDTH</span>
+    ,
+    <span class="constant">GL_MAX_HEIGHT</span>
+    ,
+    <span class="constant">GL_MAX_DEPTH</span>
+    ,
+    <span class="constant">GL_MAX_LAYERS</span>
+    ,
+    <span class="constant">GL_MAX_COMBINED_DIMENSIONS</span>
+    ,
+    <span class="constant">GL_COLOR_COMPONENTS</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENTS</span>
+    ,
+    <span class="constant">GL_STENCIL_COMPONENTS</span>
+    ,
+    <span class="constant">GL_COLOR_RENDERABLE</span>
+    ,
+    <span class="constant">GL_DEPTH_RENDERABLE</span>
+    ,
+    <span class="constant">GL_STENCIL_RENDERABLE</span>
+    ,
+    <span class="constant">GL_FRAMEBUFFER_RENDERABLE</span>
+    ,
+    <span class="constant">GL_FRAMEBUFFER_RENDERABLE_LAYERED</span>
+    ,
+    <span class="constant">GL_FRAMEBUFFER_BLEND</span>
+    ,
+    <span class="constant">GL_READ_PIXELS</span>
+    ,
+    <span class="constant">GL_READ_PIXELS_FORMAT</span>
+    ,
+    <span class="constant">GL_READ_PIXELS_TYPE</span>
+    ,
+    <span class="constant">GL_TEXTURE_IMAGE_FORMAT</span>
+    ,
+    <span class="constant">GL_TEXTURE_IMAGE_TYPE</span>
+    ,
+    <span class="constant">GL_GET_TEXTURE_IMAGE_FORMAT</span>
+    ,
+    <span class="constant">GL_GET_TEXTURE_IMAGE_TYPE</span>
+    ,
+    <span class="constant">GL_MIPMAP</span>
+    ,
+    <span class="constant">GL_GENERATE_MIPMAP</span>
+    ,
+    <span class="constant">GL_AUTO_GENERATE_MIPMAP</span>
+    ,
+    <span class="constant">GL_COLOR_ENCODING</span>
+    ,
+    <span class="constant">GL_SRGB_READ</span>
+    ,
+    <span class="constant">GL_SRGB_WRITE</span>
+    ,
+    <span class="constant">GL_SRGB_DECODE_ARB</span>
+    ,
+    <span class="constant">GL_FILTER</span>
+    ,
+    <span class="constant">GL_VERTEX_TEXTURE</span>
+    ,
+    <span class="constant">GL_TESS_CONTROL_TEXTURE</span>
+    ,
+    <span class="constant">GL_TESS_EVALUATION_TEXTURE</span>
+    ,
+    <span class="constant">GL_GEOMETRY_TEXTURE</span>
+    ,
+    <span class="constant">GL_FRAGMENT_TEXTURE</span>
+    ,
+    <span class="constant">GL_COMPUTE_TEXTURE</span>
+    ,
+    <span class="constant">GL_TEXTURE_SHADOW</span>
+    ,
+    <span class="constant">GL_TEXTURE_GATHER</span>
+    ,
+    <span class="constant">GL_TEXTURE_GATHER_SHADOW</span>
+    ,
+    <span class="constant">GL_SHADER_IMAGE_LOAD</span>
+    ,
+    <span class="constant">GL_SHADER_IMAGE_STORE</span>
+    ,
+    <span class="constant">GL_SHADER_IMAGE_ATOMIC</span>
+    ,
+    <span class="constant">GL_IMAGE_TEXEL_SIZE</span>
+    ,
+    <span class="constant">GL_IMAGE_COMPATIBILITY_CLASS</span>
+    ,
+    <span class="constant">GL_IMAGE_PIXEL_FORMAT</span>
+    ,
+    <span class="constant">GL_IMAGE_PIXEL_TYPE</span>
+    ,
+    <span class="constant">GL_IMAGE_FORMAT_COMPATIBILITY_TYPE</span>
+    ,
+    <span class="constant">GL_SIMULTANEOUS_TEXTURE_AND_DEPTH_TEST</span>
+    ,
+    <span class="constant">GL_SIMULTANEOUS_TEXTURE_AND_STENCIL_TEST</span>
+    ,
+    <span class="constant">GL_SIMULTANEOUS_TEXTURE_AND_DEPTH_WRITE</span>
+    ,
+    <span class="constant">GL_SIMULTANEOUS_TEXTURE_AND_STENCIL_WRITE</span>
+    ,
+    <span class="constant">GL_TEXTURE_COMPRESSED</span>
+    ,
+    <span class="constant">GL_TEXTURE_COMPRESSED_BLOCK_WIDTH</span>
+    ,
+    <span class="constant">GL_TEXTURE_COMPRESSED_BLOCK_HEIGHT</span>
+    ,
+    <span class="constant">GL_TEXTURE_COMPRESSED_BLOCK_SIZE</span>
+    ,
+    <span class="constant">GL_CLEAR_BUFFER</span>
+    ,
+    <span class="constant">GL_TEXTURE_VIEW</span>
+    , and
+    <span class="constant">GL_VIEW_COMPATIBILITY_CLASS</span>
+    are supported only if the GL
+            version is 4.3 or higher.
+</div>
+    <div class="para">
+            The
+    <span class="constant">GL_CLEAR_TEXTURE</span>
+    token is accepted for
+    <a class="parameter" href="#param-pname">pname</a>
+    only
+            if the GL version is 4.4 or higher.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    is negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not
+    <span class="constant">GL_SAMPLES</span>
+    or
+    <span class="constant">GL_NUM_SAMPLE_COUNTS</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is not color-, depth-, or stencil-renderable.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not one of
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+    or
+    <span class="constant">GL_RENDERBUFFER</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetInternalformat.html#c-glGetInternalformati64v">glGetInternalformati64v</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetInternalformativ.html">glGetInternalformativ</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2011-2018 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

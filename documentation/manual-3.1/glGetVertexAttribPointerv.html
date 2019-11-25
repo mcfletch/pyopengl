@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetVertexAttribPointerv : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetVertexAttribPointerv</h1>
+</header>
+<main class="content">
+    <section class="purpose">return the address of the specified generic vertex attribute pointer</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetVertexAttribPointerv"></a>
+    <span class="c-function">glGetVertexAttribPointerv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        void **(
+            <a href="#param-pointer" class="parameter">pointer</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetVertexAttribPointerv"></a>
+    <span class="py-function">glGetVertexAttribPointerv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pointer" class="parameter">pointer</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">Specifies the generic vertex attribute
+            parameter to be returned.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">Specifies the symbolic name of the generic
+            vertex attribute parameter to be returned. Must be
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_POINTER</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pointer"></a>
+                        pointer
+                    </th>
+                    <td>
+    <div class="para">Returns the pointer value.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetVertexAttribPointerv.html">glGetVertexAttribPointerv</a>
+    returns
+    pointer information.
+    <a class="parameter" href="#param-index">index</a>
+    is the generic
+    vertex attribute to be queried,
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    a symbolic constant indicating the pointer to be returned, and
+    <a class="parameter" href="#param-params">params</a>
+    is a pointer to a location in
+    which to place the returned data.
+</div>
+    <div class="para">The
+    <a class="parameter" href="#param-pointer">pointer</a>
+    returned is a byte offset into the data store of the buffer object
+    that was bound to the
+    <span class="constant">GL_ARRAY_BUFFER</span>
+    target
+    (see
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ) when the desired pointer was previously specified.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">The state returned is retrieved from the currently bound vertex array object.</div>
+    <div class="para">The initial value for each pointer is 0.</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if no vertex array object is currently bound.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-index">index</a>
+    is greater than or equal to
+    <span class="constant">GL_MAX_VERTEX_ATTRIBS</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not an accepted value.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_VERTEX_ATTRIBS</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetVertexAttribPointerv.html">glGetVertexAttribPointerv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetVertexAttrib.html">glGetVertexAttrib</a>
+    ,
+    <a class="crossref" href="./glVertexAttribPointer.html">glVertexAttribPointer</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2005 3Dlabs Inc. Ltd.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

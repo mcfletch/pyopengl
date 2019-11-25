@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glDrawTex : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glDrawTex</h1>
+</header>
+<main class="content">
+    <section class="purpose">draws a texture rectangle to the screen</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glDrawTexfOES"></a>
+    <span class="c-function">glDrawTexfOES</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLfloat (
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-z" class="parameter">z</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-height" class="parameter">height</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glDrawTexfvOES"></a>
+    <span class="c-function">glDrawTexfvOES</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLfloat* (
+            <a href="#param-coords" class="parameter">coords</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glDrawTexiOES"></a>
+    <span class="c-function">glDrawTexiOES</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLint (
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-z" class="parameter">z</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-height" class="parameter">height</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glDrawTexivOES"></a>
+    <span class="c-function">glDrawTexivOES</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLint* (
+            <a href="#param-coords" class="parameter">coords</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glDrawTexsOES"></a>
+    <span class="c-function">glDrawTexsOES</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLshort (
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLshort (
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLshort (
+            <a href="#param-z" class="parameter">z</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLshort (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLshort (
+            <a href="#param-height" class="parameter">height</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glDrawTexsvOES"></a>
+    <span class="c-function">glDrawTexsvOES</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLshort* (
+            <a href="#param-coords" class="parameter">coords</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glDrawTexxOES"></a>
+    <span class="c-function">glDrawTexxOES</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLfixed (
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfixed (
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfixed (
+            <a href="#param-z" class="parameter">z</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfixed (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfixed (
+            <a href="#param-height" class="parameter">height</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glDrawTexxvOES"></a>
+    <span class="c-function">glDrawTexxvOES</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLfixed* (
+            <a href="#param-coords" class="parameter">coords</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-x"></a><a name="param-y"></a><a name="param-z"></a>
+                        x, y, z
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the position of the affected screen rectangle.
+                    </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a><a name="param-height"></a>
+                        width, height
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the width and height of the affected screen rectangle in pixels.
+                    </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-coords"></a>
+                        coords
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to the coords for the affected screen rectangle.
+                    </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    glDrawTexOES
+    draws a texture rectangle to the screen.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-x">x</a>
+    and
+    <a class="parameter" href="#param-y">y</a>
+    are given directly in window (viewport) coordinates.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-z">z</a>
+    is mapped to window depth Zw as follows:
+</div>
+    <div class="para">
+        If
+    <math>
+        <mi>z</mi><mo>&lt;=</mo><mi>0</mi>
+        then
+        <mi>Zw</mi><mo>=</mo><mi>n</mi>
+        </math>
+</div>
+    <div class="para">
+        If
+    <math>
+        <mi>z</mi><mo>&gt;=</mo><mi>1</mi>
+        then
+        <mi>Zw</mi><mo>=</mo><mi>f</mi>
+        </math>
+</div>
+    <div class="para">
+        Otherwise
+    <math>
+        <mi>Zw</mi><mo>=</mo>
+        <mi>n</mi><mo>+</mo><mi>z</mi>
+        <mo>*</mo>
+        <mo>(</mo><mi>f</mi><mo>-</mo><mi>n</mi><mo>)</mo>
+        </math>
+</div>
+    <div class="para">
+        where
+    <a class="parameter" href="#param-n">n</a>
+    and
+    <a class="parameter" href="#param-f">f</a>
+    are the near and far values of
+    <span class="constant">GL_DEPTH_RANGE</span>
+    respectively.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-width">width</a>
+    and
+    <a class="parameter" href="#param-height">height</a>
+    specify the width and height of the affected screen rectangle in pixels.
+        These values may be positive or negative;
+        however if either of these are negative, nothing is drawn.
+</div>
+    <div class="para">
+        Calling one of the DrawTex functions generates a
+        fragment for each pixel that overlaps the screen
+        rectangle bounded by (
+    <a class="parameter" href="#param-x">x</a>
+    ,
+    <a class="parameter" href="#param-y">y</a>
+    )
+        and (
+    <a class="parameter" href="#param-x">x</a>
+    +
+    <a class="parameter" href="#param-width">width</a>
+    ),
+        (
+    <a class="parameter" href="#param-y">y</a>
+    +
+    <a class="parameter" href="#param-height">height</a>
+    ).
+        For each generated fragment, the depth is given by
+    <a class="parameter" href="#param-Zw">Zw</a>
+    as defined above, and the color by the current color.
+</div>
+    <div class="para">
+            Texture coordinates for each texture unit are computed as follows:
+        </div>
+    <div class="para">
+        Let
+    <a class="parameter" href="#param-X">X</a>
+    and
+    <a class="parameter" href="#param-Y">Y</a>
+    be the screen x and y coordinates of each sample point associated with the fragment.
+        Let
+    <a class="parameter" href="#param-Wt">Wt</a>
+    and
+    <a class="parameter" href="#param-Ht">Ht</a>
+    be the width and height in texels of the texture
+        currently bound to the texture unit.
+        (If the texture is a mipmap, let
+    <a class="parameter" href="#param-Wt">Wt</a>
+    and
+    <a class="parameter" href="#param-Ht">Ht</a>
+    be the dimensions of the level specified by
+    <span class="constant">GL_TEXTURE_BASE_LEVEL</span>
+    ).
+        Let
+    <a class="parameter" href="#param-Ucr">Ucr</a>
+    ,
+    <a class="parameter" href="#param-Vcr">Vcr</a>
+    ,
+    <a class="parameter" href="#param-Wcr">Wcr</a>
+    and
+    <a class="parameter" href="#param-Hcr">Hcr</a>
+    be (respectively) the four integers that make up the
+        texture crop rectangle parameter for the currently bound texture.
+        The fragment texture coordinates
+        (
+    <a class="parameter" href="#param-s">s</a>
+    ,
+    <a class="parameter" href="#param-t">t</a>
+    ,
+    <a class="parameter" href="#param-r">r</a>
+    ,
+    <a class="parameter" href="#param-q">q</a>
+    )
+        are given by:
+</div>
+    <div class="para">
+    <math>
+        <mi>s</mi><mo>=</mo>
+        <mo>(</mo><mi>Ucr</mi><mo>+</mo>
+        <mo>(</mo><mi>X</mi><mo>-</mo><mi>x</mi><mo>)</mo><mo>*</mo>
+        <mo>(</mo><mi>Wcr</mi><mo>/</mo><mi>width</mi><mo>)</mo><mo>)</mo>
+        <mo>/</mo><mi>Wt</mi>
+        </math>
+</div>
+    <div class="para">
+    <math>
+        <mi>t</mi><mo>=</mo>
+        <mo>(</mo><mi>Vcr</mi><mo>+</mo>
+        <mo>(</mo><mi>Y</mi><mo>-</mo><mi>y</mi><mo>)</mo><mo>*</mo>
+        <mo>(</mo><mi>Hcr</mi><mo>/</mo><mi>height</mi><mo>)</mo><mo>)</mo>
+        <mo>/</mo><mi>Ht</mi>
+        </math>
+</div>
+    <div class="para">
+    <math>
+        <mi>r</mi><mo>=</mo><mi>0</mi>
+        </math>
+</div>
+    <div class="para">
+    <math>
+        <mi>q</mi><mo>=</mo><mi>1</mi>
+        </math>
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+        In the specific case where
+    <a class="parameter" href="#param-X">X</a>
+    ,
+    <a class="parameter" href="#param-Y">Y</a>
+    ,
+    <a class="parameter" href="#param-x">x</a>
+    and
+    <a class="parameter" href="#param-y">y</a>
+    are all integers,
+    <a class="parameter" href="#param-Wcr">Wcr</a>
+    /
+    <a class="parameter" href="#param-width">width</a>
+    and
+    <a class="parameter" href="#param-Hcr">Hcr</a>
+    /
+    <a class="parameter" href="#param-height">height</a>
+    are both equal to one, the base level is used for the texture read,
+        and fragments are sampled at pixel centers,
+        implementations are required to ensure that the resulting u, v texture
+        indices are also integers.
+        This results in a one-to-one mapping of texels to fragments.
+</div>
+    <div class="para">
+        Note that
+    <a class="parameter" href="#param-Wcr">Wcr</a>
+    and/or
+    <a class="parameter" href="#param-Hcr">Hcr</a>
+    can be negative.
+        The formulas given above for
+    <a class="parameter" href="#param-s">s</a>
+    and
+    <a class="parameter" href="#param-t">t</a>
+    still apply in this case.
+        The result is that if
+    <a class="parameter" href="#param-Wcr">Wcr</a>
+    is negative, the source rectangle
+        for
+    glDrawTexOES
+    operations lies to the left of the reference
+        point (
+    <a class="parameter" href="#param-Ucr">Ucr</a>
+    ,
+    <a class="parameter" href="#param-Vcr">Vcr</a>
+    )
+        rather than to the right of it,
+        and appears right-to-left reversed on the screen after a
+        call to DrawTex.
+        Similarly, if
+    <a class="parameter" href="#param-Hcr">Hcr</a>
+    is negative,
+        the source rectangle lies below the reference point
+        (
+    <a class="parameter" href="#param-Ucr">Ucr</a>
+    ,
+    <a class="parameter" href="#param-Vcr">Vcr</a>
+    )
+        rather than above it, and appears upside-down on the screen.
+</div>
+    <div class="para">
+        Note also that
+    <a class="parameter" href="#param-s">s</a>
+    ,
+    <a class="parameter" href="#param-t">t</a>
+    ,
+    <a class="parameter" href="#param-r">r</a>
+    , and
+    <a class="parameter" href="#param-q">q</a>
+    are computed for each fragment as part of
+    glDrawTexOES
+    rendering. This implies
+        that the texture matrix is ignored and has no effect on
+        the rendered result.
+</div>
+    <div class="para">
+    glDrawTexOES
+    is available only if
+        the
+    <span class="constant">GL_OES_draw_texture</span>
+    extension is supported
+        by your implementation.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetTexParameter.html">glGetTexParameter</a>
+    ,
+    <a class="crossref" href="./glTexParameter.html">glTexParameter</a>
+    ,
+</div>
+    </section><section class="section" id="copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2004
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

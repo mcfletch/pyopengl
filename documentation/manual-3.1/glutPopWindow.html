@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutPopWindow : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutPopWindow</h1>
+</header>
+<main class="content">
+    <section class="purpose">change the stacking order of the current window relative to its siblings.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutPopWindow"></a>
+    <span class="c-function">glutPopWindow</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutPopWindow"></a>
+    <span class="py-function">glutPopWindow</span>( <span class="parameter-list">
+</span> )
+    <pre class="pydoc">glutPopWindow(  ) -&gt; None</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutPushWindow"></a>
+    <span class="c-function">glutPushWindow</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutPushWindow"></a>
+    <span class="py-function">glutPushWindow</span>( <span class="parameter-list">
+</span> )
+    <pre class="pydoc">glutPushWindow(  ) -&gt; None</pre>
+</div>
+        </div>
+    </section>
+    <section class="section" id="glutPopWindow.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutPopWindow.html">glutPopWindow</a>
+    and
+    <a class="function" href="./glutPopWindow.html#c-glutPushWindow">glutPushWindow</a>
+    work on both top-level windows and
+			subwindows. The effect of pushing and popping windows does not take place immediately. Instead the push or pop is saved
+			for execution upon return to the GLUT event loop. Subsequent push or pop requests on a window replace the previously
+			saved request for that window. The effect of pushing and popping top-level windows is subject to the window system's
+			policy for restacking windows.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutShowWindow.html">glutShowWindow</a>
+            <a class="crossref" href="./glutShowWindow.html#c-glutIconifyWindow">glutIconifyWindow</a>
+            <a class="crossref" href="./glutShowWindow.html#c-glutHideWindow">glutHideWindow</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

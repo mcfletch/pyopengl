@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutMenuStatusFunc : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutMenuStatusFunc</h1>
+</header>
+<main class="content">
+    <section class="purpose">sets the global menu status callback.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutMenuStateFunc"></a>
+    <span class="c-function">glutMenuStateFunc</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutMenuStateFunc"></a>
+    <span class="py-function">glutMenuStateFunc</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-function" class="parameter">function</a>
+    </span>
+</span> )
+    <pre class="pydoc">Specify handler for GLUT 'MenuState' events
+    def handler( (int) status ):
+        return None</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutMenuStatusFunc"></a>
+    <span class="c-function">glutMenuStatusFunc</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutMenuStatusFunc"></a>
+    <span class="py-function">glutMenuStatusFunc</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-function" class="parameter">function</a>
+    </span>
+</span> )
+    <pre class="pydoc">Specify handler for GLUT 'MenuStatus' events
+    def handler( (int) status, (int) x, (int) y ):
+        return None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-func"></a>
+                        func
+                    </th>
+                    <td>
+    <div class="simpara">
+						The new menu status (or state) callback function.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutMenuStatusFunc.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutMenuStatusFunc.html">glutMenuStatusFunc</a>
+    sets the global menu status callback so a GLUT program can determine when a
+			menu is in use or not. When a menu status callback is registered, it will be called with the value
+    <span class="constant">GLUT_MENU_IN_USE</span>
+    for its value parameter when pop-up menus are in use by the user; and the
+			callback will be called with the value
+    <span class="constant">GLUT_MENU_NOT_IN_USE</span>
+    for its status parameter when pop-up
+			menus are no longer in use. The
+    <a class="parameter" href="#param-x">x</a>
+    and
+    <a class="parameter" href="#param-y">y</a>
+    parameters indicate the location
+			in window coordinates of the button press that caused the menu to go into use, or the location where the menu was
+			released (may be outside the window). The func parameter names the callback function. Other callbacks continue to
+			operate (except mouse motion callbacks) when pop-up menus are in use so the menu status callback allows a program to
+			suspend animation or other tasks when menus are in use. The cascading and unmapping of sub-menus from an initial pop-up
+			menu does not generate menu status callbacks. There is a single menu status callback for GLUT.
+</div>
+    <div class="para">
+			When the menu status callback is called, the current menu will be set to the initial pop-up menu in both the
+    <span class="constant">GLUT_MENU_IN_USE</span>
+    and
+    <span class="constant">GLUT_MENU_NOT_IN_USE</span>
+    cases. The current window will be
+			set to the window from which the initial menu was popped up from, also in both cases.
+</div>
+    <div class="para">
+			Passing
+    <span class="constant">NULL</span>
+    to
+    <a class="function" href="./glutMenuStatusFunc.html">glutMenuStatusFunc</a>
+    disables the generation of the menu status
+			callback.
+    <a class="function" href="./glutMenuStatusFunc.html#c-glutMenuStateFunc">glutMenuStateFunc</a>
+    is a deprecated version of the
+    <a class="function" href="./glutMenuStatusFunc.html">glutMenuStatusFunc</a>
+    routine. The only difference is
+    <a class="function" href="./glutMenuStatusFunc.html#c-glutMenuStateFunc">glutMenuStateFunc</a>
+    callback prototype does not deliver the two additional x and y
+			coordinates.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutCreateMenu.html">glutCreateMenu</a>
+            <a class="crossref" href="./glutCreateWindow.html">glutCreateWindow</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glUniformSubroutines : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glUniformSubroutines</h1>
+</header>
+<main class="content">
+    <section class="purpose">load active subroutine uniforms</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glUniformSubroutines"></a>
+    <span class="c-function">glUniformSubroutines</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glUniformSubroutinesuiv"></a>
+    <span class="c-function">glUniformSubroutinesuiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-shadertype" class="parameter">shadertype</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-count" class="parameter">count</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLuint *(
+            <a href="#param-indices" class="parameter">indices</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glUniformSubroutinesuiv"></a>
+    <span class="py-function">glUniformSubroutinesuiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-shadertype" class="parameter">shadertype</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-count" class="parameter">count</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-indices" class="parameter">indices</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-shadertype"></a>
+                        shadertype
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the shader stage from which to query for subroutine uniform index.
+    <a class="parameter" href="#param-shadertype">shadertype</a>
+    must be one of
+    <span class="constant">GL_VERTEX_SHADER</span>
+    ,
+    <span class="constant">GL_TESS_CONTROL_SHADER</span>
+    ,
+    <span class="constant">GL_TESS_EVALUATION_SHADER</span>
+    ,
+    <span class="constant">GL_GEOMETRY_SHADER</span>
+    or
+    <span class="constant">GL_FRAGMENT_SHADER</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-count"></a>
+                        count
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of uniform indices stored in
+    <a class="parameter" href="#param-indices">indices</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-indices"></a>
+                        indices
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of an array holding the indices to load into the shader subroutine variables.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glUniformSubroutines.html">glUniformSubroutines</a>
+    loads all active subroutine uniforms for shader stage
+    <a class="parameter" href="#param-shadertype">shadertype</a>
+    of the current program with subroutine indices from
+    <a class="parameter" href="#param-indices">indices</a>
+    ,
+            storing
+    <a class="parameter" href="#param-indices[i]">indices[i]</a>
+    into the uniform at location
+    <a class="parameter" href="#param-i">i</a>
+    .
+    <a class="parameter" href="#param-count">count</a>
+    must be equal to the value of
+    <span class="constant">GL_ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS</span>
+    for the program currently in use at shader stage
+    <a class="parameter" href="#param-shadertype">shadertype</a>
+    . Furthermore, all values in
+    <a class="parameter" href="#param-indices">indices</a>
+    must be less than the value of
+    <span class="constant">GL_ACTIVE_SUBROUTINES</span>
+    for the shader stage.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if no program object is current.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-count">count</a>
+    is not equal to the value
+            of
+    <span class="constant">GL_ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS</span>
+    for the shader stage
+    <a class="parameter" href="#param-shadertype">shadertype</a>
+    of the current program.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if any value in
+    <a class="parameter" href="#param-indices">indices</a>
+    is geater
+            than or equal to the value of
+    <span class="constant">GL_ACTIVE_SUBROUTINES</span>
+    for the shader stage
+    <a class="parameter" href="#param-shadertype">shadertype</a>
+    of the current program.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-shadertype">shadertype</a>
+    is not one of the accepted values.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetProgramStage.html">glGetProgramStage</a>
+    with argument
+    <span class="constant">GL_ACTIVE_SUBROUTINES</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetProgramStage.html">glGetProgramStage</a>
+    with argument
+    <span class="constant">GL_ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glUniformSubroutines.html#c-glUniformSubroutinesuiv">glUniformSubroutinesuiv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    ,
+    <a class="crossref" href="./glGetActiveSubroutineUniform.html">glGetActiveSubroutineUniform</a>
+    ,
+    <a class="crossref" href="./glGetActiveSubroutineUniformName.html">glGetActiveSubroutineUniformName</a>
+    ,
+    <a class="crossref" href="./glGetProgramStage.html">glGetProgramStage</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

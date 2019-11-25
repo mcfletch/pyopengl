@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXCreatePixmap : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXCreatePixmap</h1>
+</header>
+<main class="content">
+    <section class="purpose">create an off-screen rendering area</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXCreatePixmap"></a>
+    <span class="c-function">glXCreatePixmap</span>(<span class="parameter-list">
+    <span class="param-def">
+        Display * (
+            <a href="#param-dpy" class="parameter">dpy</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLXFBConfig (
+            <a href="#param-config" class="parameter">config</a>
+        )
+        ,
+    </span><span class="param-def">
+        Pixmap (
+            <a href="#param-pixmap" class="parameter">pixmap</a>
+        )
+        ,
+    </span><span class="param-def">
+        const int * (
+            <a href="#param-attrib_list" class="parameter">attrib_list</a>
+        )
+    </span>
+</span>)-&gt; GLXPixmap
+</div>
+                <div class="py-signature">
+    <a name="py-glXCreatePixmap"></a>
+    <span class="py-function">glXCreatePixmap</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-dpy" class="parameter">dpy</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-config" class="parameter">config</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixmap" class="parameter">pixmap</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-attrib_list" class="parameter">attrib_list</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_ulong'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dpy"></a>
+                        dpy
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the connection to the X server.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-config"></a>
+                        config
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a GLXFBConfig structure with the desired attributes for the
+                    window.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pixmap"></a>
+                        pixmap
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the X pixmap to be used as the rendering area.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-attrib_list"></a>
+                        attrib_list
+                    </th>
+                    <td>
+    <div class="para">
+                    Currently unused. This must be set to
+    <span class="constant">NULL</span>
+    or be an empty list
+                    (i.e., one in which the first element is
+    <span class="constant">None</span>
+    ).
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXCreatePixmap.html">glXCreatePixmap</a>
+    creates an off-screen rendering area and returns its XID.
+            Any GLX rendering context that was created with respect to
+    <a class="parameter" href="#param-config">config</a>
+    can be used to render into this window.
+            Use
+    <a class="crossref" href="./glXMakeCurrent.html">glXMakeCurrent</a>
+    to associate the rendering area with a GLX
+            rendering context.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glXCreatePixmap.html">glXCreatePixmap</a>
+    is available only if the GLX version is 1.3 or greater.
+</div>
+    <div class="para">
+            If the GLX version is 1.1 or 1.0, the GL version must be 1.0.
+            If the GLX version is 1.2, then the GL version must be 1.1.
+            If the GLX version is 1.3, then the GL version must be 1.2.
+        </div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">BadMatch</span>
+    is generated if
+    <a class="parameter" href="#param-pixmap">pixmap</a>
+    was not created with a visual
+            that corresponds to
+    <a class="parameter" href="#param-config">config</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">BadMatch</span>
+    is generated if
+    <a class="parameter" href="#param-config">config</a>
+    does not support rendering to
+            windows (e.g.,
+    <span class="constant">GLX_DRAWABLE_TYPE</span>
+    does not contain
+    <span class="constant">GLX_WINDOW_BIT</span>
+    ).
+</div>
+    <div class="para">
+    <span class="constant">BadWindow</span>
+    is generated if
+    <a class="parameter" href="#param-pixmap">pixmap</a>
+    is not a valid window XID.
+    <span class="constant">BadAlloc</span>
+    is generated if there is already a GLXFBConfig
+            associated with
+    <a class="parameter" href="#param-pixmap">pixmap</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">BadAlloc</span>
+    is generated if the X server cannot allocate a new
+            GLX window.
+</div>
+    <div class="para">
+    <span class="constant">GLXBadFBConfig</span>
+    is generated if
+    <a class="parameter" href="#param-config">config</a>
+    is not a valid
+            GLXFBConfig.
+</div>
+    <div class="para">
+        </div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glXChooseFBConfig.html">glXChooseFBConfig</a>
+    ,
+    <a class="crossref" href="./glXCreateGLXPixmap.html">glXCreateGLXPixmap</a>
+    ,
+    <a class="crossref" href="./glXDestroyWindow.html">glXDestroyWindow</a>
+    ,
+    <a class="crossref" href="./glXMakeContextCurrent.html">glXMakeContextCurrent</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

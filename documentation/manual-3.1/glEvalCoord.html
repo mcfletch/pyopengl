@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glEvalCoord : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glEvalCoord</h1>
+</header>
+<main class="content">
+    <section class="purpose">evaluate enabled one- and two-dimensional maps</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glEvalCoord"></a>
+    <span class="c-function">glEvalCoord</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glEvalCoord1d"></a>
+    <span class="c-function">glEvalCoord1d</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble (
+            <a href="#param-u" class="parameter">u</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEvalCoord1d"></a>
+    <span class="py-function">glEvalCoord1d</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-u" class="parameter">u</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glEvalCoord1dv"></a>
+    <span class="c-function">glEvalCoord1dv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLdouble * (
+            <a href="#param-u" class="parameter">u</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEvalCoord1dv"></a>
+    <span class="py-function">glEvalCoord1dv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-u" class="parameter">u</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glEvalCoord1f"></a>
+    <span class="c-function">glEvalCoord1f</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLfloat (
+            <a href="#param-u" class="parameter">u</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEvalCoord1f"></a>
+    <span class="py-function">glEvalCoord1f</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-u" class="parameter">u</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glEvalCoord1fv"></a>
+    <span class="c-function">glEvalCoord1fv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLfloat * (
+            <a href="#param-u" class="parameter">u</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEvalCoord1fv"></a>
+    <span class="py-function">glEvalCoord1fv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-u" class="parameter">u</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glEvalCoord2d"></a>
+    <span class="c-function">glEvalCoord2d</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble (
+            <a href="#param-u" class="parameter">u</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEvalCoord2d"></a>
+    <span class="py-function">glEvalCoord2d</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-u" class="parameter">u</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glEvalCoord2dv"></a>
+    <span class="c-function">glEvalCoord2dv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLdouble * (
+            <a href="#param-u" class="parameter">u</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEvalCoord2dv"></a>
+    <span class="py-function">glEvalCoord2dv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-u" class="parameter">u</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glEvalCoord2f"></a>
+    <span class="c-function">glEvalCoord2f</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLfloat (
+            <a href="#param-u" class="parameter">u</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEvalCoord2f"></a>
+    <span class="py-function">glEvalCoord2f</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-u" class="parameter">u</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glEvalCoord2fv"></a>
+    <span class="c-function">glEvalCoord2fv</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLfloat * (
+            <a href="#param-u" class="parameter">u</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEvalCoord2fv"></a>
+    <span class="py-function">glEvalCoord2fv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-u" class="parameter">u</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-u"></a>
+                        u
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a value that is the domain coordinate
+    <math><mi mathvariant="italic">u</mi></math>
+    to the basis function
+                    defined in a previous
+    <a class="crossref" href="./glMap1.html">glMap1</a>
+    or
+    <a class="crossref" href="./glMap2.html">glMap2</a>
+    command.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-v"></a>
+                        v
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a value that is the domain coordinate
+    <math><mi mathvariant="italic">v</mi></math>
+    to the basis function
+                    defined in a previous
+    <a class="crossref" href="./glMap2.html">glMap2</a>
+    command.
+                    This argument is not present in a
+    <a class="function" href="./glEvalCoord.html#c-glEvalCoord1f">glEvalCoord1</a>
+    command.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-u"></a>
+                        u
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to an array containing
+                    either one or two domain coordinates.
+                    The first coordinate is
+    <math><mi mathvariant="italic">u</mi></math>
+    .
+                    The second coordinate is
+    <math><mi mathvariant="italic">v</mi></math>
+    ,
+                    which is present only in
+    <a class="function" href="./glEvalCoord.html#c-glEvalCoord2f">glEvalCoord2</a>
+    versions.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glEvalCoord.html#c-glEvalCoord1f">glEvalCoord1</a>
+    evaluates enabled one-dimensional maps at argument
+    <a class="parameter" href="#param-u">u</a>
+    .
+    <a class="function" href="./glEvalCoord.html#c-glEvalCoord2f">glEvalCoord2</a>
+    does the same for two-dimensional maps using
+            two domain values,
+    <a class="parameter" href="#param-u">u</a>
+    and
+    <a class="parameter" href="#param-v">v</a>
+    .
+            To define a map, call
+    <a class="crossref" href="./glMap1.html">glMap1</a>
+    and
+    <a class="crossref" href="./glMap2.html">glMap2</a>
+    ; to enable and
+            disable it, call
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="crossref" href="./glEnable.html#c-glDisable">glDisable</a>
+    .
+</div>
+    <div class="para">
+            When one of the
+    <a class="function" href="./glEvalCoord.html">glEvalCoord</a>
+    commands is issued,
+            all currently enabled maps of the indicated dimension are evaluated.
+            Then,
+            for each enabled map,
+            it is as if the corresponding GL command had been issued with the
+            computed value.
+            That is,
+            if
+    <span class="constant">GL_MAP1_INDEX</span>
+    or
+    <span class="constant">GL_MAP2_INDEX</span>
+    is enabled,
+            a
+    <a class="crossref" href="./glIndex.html">glIndex</a>
+    command is simulated.
+            If
+    <span class="constant">GL_MAP1_COLOR_4</span>
+    or
+    <span class="constant">GL_MAP2_COLOR_4</span>
+    is enabled,
+            a
+    <a class="crossref" href="./glColor.html">glColor</a>
+    command is simulated.
+            If
+    <span class="constant">GL_MAP1_NORMAL</span>
+    or
+    <span class="constant">GL_MAP2_NORMAL</span>
+    is enabled,
+            a normal vector is produced,
+            and if any of
+    <span class="constant">GL_MAP1_TEXTURE_COORD_1</span>
+    ,
+    <span class="constant">GL_MAP1_TEXTURE_COORD_2</span>
+    ,
+    <span class="constant">GL_MAP1_TEXTURE_COORD_3</span>
+    ,
+    <span class="constant">GL_MAP1_TEXTURE_COORD_4</span>
+    ,
+    <span class="constant">GL_MAP2_TEXTURE_COORD_1</span>
+    ,
+    <span class="constant">GL_MAP2_TEXTURE_COORD_2</span>
+    ,
+    <span class="constant">GL_MAP2_TEXTURE_COORD_3</span>
+    , or
+    <span class="constant">GL_MAP2_TEXTURE_COORD_4</span>
+    is enabled, then an appropriate
+    <a class="crossref" href="./glTexCoord.html">glTexCoord</a>
+    command is simulated.
+</div>
+    <div class="para">
+            For color,
+            color index,
+            normal,
+            and texture coordinates the GL uses evaluated values instead of current values for those evaluations
+            that are enabled,
+            and current values otherwise,
+            However,
+            the evaluated values do not update the current values.
+            Thus, if
+    <a class="crossref" href="./glVertex.html">glVertex</a>
+    commands are interspersed with
+    <a class="function" href="./glEvalCoord.html">glEvalCoord</a>
+    commands, the color,
+            normal,
+            and texture coordinates associated with the
+    <a class="crossref" href="./glVertex.html">glVertex</a>
+    commands are not
+            affected by the values generated by the
+    <a class="function" href="./glEvalCoord.html">glEvalCoord</a>
+    commands,
+            but only by the most recent
+    <a class="crossref" href="./glColor.html">glColor</a>
+    ,
+    <a class="crossref" href="./glIndex.html">glIndex</a>
+    ,
+    <a class="crossref" href="./glNormal.html">glNormal</a>
+    , and
+    <a class="crossref" href="./glTexCoord.html">glTexCoord</a>
+    commands.
+</div>
+    <div class="para">
+            No commands are issued for maps that are not enabled.
+            If more than one texture evaluation is enabled for a particular dimension
+            (for example,
+    <span class="constant">GL_MAP2_TEXTURE_COORD_1</span>
+    and
+    <span class="constant">GL_MAP2_TEXTURE_COORD_2</span>
+    ),
+            then only the evaluation of the map that produces the larger
+            number of coordinates
+            (in this case,
+    <span class="constant">GL_MAP2_TEXTURE_COORD_2</span>
+    )
+            is carried out.
+    <span class="constant">GL_MAP1_VERTEX_4</span>
+    overrides
+    <span class="constant">GL_MAP1_VERTEX_3</span>
+    ,
+            and
+    <span class="constant">GL_MAP2_VERTEX_4</span>
+    overrides
+    <span class="constant">GL_MAP2_VERTEX_3</span>
+    ,
+            in the same manner.
+            If neither a three- nor a four-component vertex map is enabled for the
+            specified dimension,
+            the
+    <a class="function" href="./glEvalCoord.html">glEvalCoord</a>
+    command is ignored.
+</div>
+    <div class="para">
+            If you have enabled automatic normal generation,
+            by calling
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    with argument
+    <span class="constant">GL_AUTO_NORMAL</span>
+    ,
+    <a class="function" href="./glEvalCoord.html#c-glEvalCoord2f">glEvalCoord2</a>
+    generates surface normals analytically,
+            regardless of the contents or enabling of the
+    <span class="constant">GL_MAP2_NORMAL</span>
+    map.
+            Let
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mi mathvariant="bold">m</mi>
+                    <mo>=</mo>
+                    <mrow>
+                        <mfenced open="" close="">
+                            <mfrac>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mo></mo>
+                                        <mi mathvariant="bold">p</mi>
+                                    </mrow>
+                                </mfenced>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mo></mo>
+                                        <mi mathvariant="italic">u</mi>
+                                    </mrow>
+                                </mfenced>
+                            </mfrac>
+                        </mfenced>
+                        <mo></mo>
+                        <mfenced open="" close="">
+                            <mfrac>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mo></mo>
+                                        <mi mathvariant="bold">p</mi>
+                                    </mrow>
+                                </mfenced>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mo></mo>
+                                        <mi mathvariant="italic">v</mi>
+                                    </mrow>
+                                </mfenced>
+                            </mfrac>
+                        </mfenced>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+            Then the generated normal
+    <math>
+                <mi mathvariant="bold">n</mi>
+            </math>
+    is
+    <math>
+                <mrow>
+                    <mi mathvariant="bold">n</mi>
+                    <mo>=</mo>
+                    <mfrac>
+                        <mi mathvariant="bold">m</mi>
+                        <mfenced open="" close="">
+                            <mfenced open="" close="">
+                                <mi mathvariant="bold">m</mi>
+                            </mfenced>
+                        </mfenced>
+                    </mfrac>
+                </mrow>
+            </math>
+</div>
+    <div class="para">
+            If automatic normal generation is disabled,
+            the corresponding normal map
+    <span class="constant">GL_MAP2_NORMAL</span>
+    ,
+            if enabled,
+            is used to produce a normal.
+            If neither automatic normal generation nor a normal map is enabled,
+            no normal is generated for
+    <a class="function" href="./glEvalCoord.html#c-glEvalCoord2f">glEvalCoord2</a>
+    commands.
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_VERTEX_3</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_VERTEX_4</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_INDEX</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_COLOR_4</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_NORMAL</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_TEXTURE_COORD_1</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_TEXTURE_COORD_2</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_TEXTURE_COORD_3</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP1_TEXTURE_COORD_4</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP2_VERTEX_3</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP2_VERTEX_4</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP2_INDEX</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP2_COLOR_4</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP2_NORMAL</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP2_TEXTURE_COORD_1</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP2_TEXTURE_COORD_2</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP2_TEXTURE_COORD_3</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_MAP2_TEXTURE_COORD_4</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_AUTO_NORMAL</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetMap.html">glGetMap</a>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    ,
+    <a class="crossref" href="./glColor.html">glColor</a>
+    ,
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    ,
+    <a class="crossref" href="./glEvalMesh.html">glEvalMesh</a>
+    ,
+    <a class="crossref" href="./glEvalPoint.html">glEvalPoint</a>
+    ,
+    <a class="crossref" href="./glIndex.html">glIndex</a>
+    ,
+    <a class="crossref" href="./glMap1.html">glMap1</a>
+    ,
+    <a class="crossref" href="./glMap2.html">glMap2</a>
+    ,
+    <a class="crossref" href="./glMapGrid.html">glMapGrid</a>
+    ,
+    <a class="crossref" href="./glNormal.html">glNormal</a>
+    ,
+    <a class="crossref" href="./glTexCoord.html">glTexCoord</a>
+    ,
+    <a class="crossref" href="./glVertex.html">glVertex</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

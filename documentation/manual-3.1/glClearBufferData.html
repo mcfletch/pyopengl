@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glClearBufferData : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glClearBufferData</h1>
+</header>
+<main class="content">
+    <section class="purpose">fill a buffer object's data store with a fixed value</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearBufferData"></a>
+    <span class="c-function">glClearBufferData</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClearBufferData"></a>
+    <span class="py-function">glClearBufferData</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearNamedBufferData"></a>
+    <span class="c-function">glClearNamedBufferData</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void *(
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClearNamedBufferData"></a>
+    <span class="py-function">glClearNamedBufferData</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target to which the buffer object is bound
+                    for
+    <a class="function" href="./glClearBufferData.html">glClearBufferData</a>
+    , which must
+                    be one of the buffer binding targets in the
+                    following table:
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-buffer"></a>
+                        buffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the buffer object for
+    <a class="function" href="./glClearBufferData.html#c-glClearNamedBufferData">glClearNamedBufferData</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalformat"></a>
+                        internalformat
+                    </th>
+                    <td>
+    <div class="para">
+                    The internal format with which the data will be stored
+                    in the buffer object.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-format"></a>
+                        format
+                    </th>
+                    <td>
+    <div class="para">
+                    The format of the data in memory addressed by
+    <a class="parameter" href="#param-data">data</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    The type of the data in memory addressed by
+    <a class="parameter" href="#param-data">data</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-data"></a>
+                        data
+                    </th>
+                    <td>
+    <div class="para">
+                    The address of a memory location storing the data to be
+                    replicated into the buffer's data store.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glClearBufferData.html">glClearBufferData</a>
+    and
+    <a class="function" href="./glClearBufferData.html#c-glClearNamedBufferData">glClearNamedBufferData</a>
+    fill the entirety of
+            a buffer object's data store with data from client memory.
+</div>
+    <div class="para">
+            Data, initially supplied in a format specified by
+    <a class="parameter" href="#param-format">format</a>
+    in data type
+    <a class="parameter" href="#param-type">type</a>
+    is read from the memory address
+            given by
+    <a class="parameter" href="#param-data">data</a>
+    and converted into the
+            internal representation given by
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    , which must be one of the
+            following sized internal formats:
+</div>
+    <div class="include"></div>
+    <div class="para">
+            This converted data is then replicated throughout the buffer
+            object's data store. If
+    <a class="parameter" href="#param-data">data</a>
+    is NULL,
+            then the buffer's data store is filled with zeros.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glClearBufferData.html">glClearBufferData</a>
+    if
+    <a class="parameter" href="#param-target">target</a>
+    is not one of the generic buffer
+            binding targets.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated by
+    <a class="function" href="./glClearBufferData.html">glClearBufferData</a>
+    if no buffer is bound
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glClearBufferData.html#c-glClearNamedBufferData">glClearNamedBufferData</a>
+    if
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is not the name of an existing
+            buffer object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is not one of the valid
+            sized internal formats listed in the table above.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if any
+            part of the specified range of the buffer object is mapped with
+    <a class="crossref" href="./glMapBufferRange.html">glMapBufferRange</a>
+    or
+    <a class="crossref" href="./glMapBuffer.html">glMapBuffer</a>
+    ,
+            unless it was mapped with the
+    <span class="constant">GL_MAP_PERSISTENT_BIT</span>
+    bit set in the
+    <a class="function" href="./glMapBufferRange.html">glMapBufferRange</a>
+    <a class="parameter" href="#param-access">access</a>
+    flags.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    is not a valid format, or
+    <a class="parameter" href="#param-type">type</a>
+    is not a valid type.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glClearBufferData.html">glClearBufferData</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glClearBufferData.html#c-glClearNamedBufferData">glClearNamedBufferData</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glClearBufferSubData.html">glClearBufferSubData</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

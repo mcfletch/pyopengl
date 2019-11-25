@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glBindVertexArray : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glBindVertexArray</h1>
+</header>
+<main class="content">
+    <section class="purpose">bind a vertex array object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glBindVertexArray"></a>
+    <span class="c-function">glBindVertexArray</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-array" class="parameter">array</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glBindVertexArray"></a>
+    <span class="py-function">glBindVertexArray</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-array" class="parameter">array</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-array"></a>
+                        array
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the vertex array to bind.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glBindVertexArray.html">glBindVertexArray</a>
+    binds the vertex array object with name
+    <a class="parameter" href="#param-array">array</a>
+    .
+    <a class="parameter" href="#param-array">array</a>
+    is the name of a vertex array object previously returned from a call to
+    <a class="crossref" href="./glGenVertexArrays.html">glGenVertexArrays</a>
+    ,
+            or zero to break the existing vertex array object binding.
+</div>
+    <div class="para">
+            If no vertex array object with name
+    <a class="parameter" href="#param-array">array</a>
+    exists, one is created when
+    <a class="parameter" href="#param-array">array</a>
+    is first bound. If the bind
+            is successful no change is made to the state of the vertex array object, and any previous vertex array object binding is broken.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-array">array</a>
+    is not zero or the name of a vertex array object
+            previously returned from a call to
+    <a class="crossref" href="./glGenVertexArrays.html">glGenVertexArrays</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glBindVertexArray.html">glBindVertexArray</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glDeleteVertexArrays.html">glDeleteVertexArrays</a>
+    ,
+    <a class="crossref" href="./glEnableVertexAttribArray.html">glEnableVertexAttribArray</a>
+    ,
+    <a class="crossref" href="./glGenVertexArrays.html">glGenVertexArrays</a>
+    ,
+    <a class="crossref" href="./glIsVertexArray.html">glIsVertexArray</a>
+    ,
+    <a class="crossref" href="./glVertexAttribPointer.html">glVertexAttribPointer</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glBindVertexArray</div>
+        <div class="py-sample">
+    <span class="sample-project">Gloopy</span>
+    <a href="https://bitbucket.org/tartley/gloopy/src/tip/gloopy/view/gl_wrap.py">gloopy/view/gl_wrap.py</a>
+    Lines: <span class="sample-lines">12, 12, 24</span>
+</div><div class="py-sample">
+    <span class="sample-project">Gloopy</span>
+    <a href="https://bitbucket.org/tartley/gloopy/src/tip/gloopy/view/render.py">gloopy/view/render.py</a>
+    Lines: <span class="sample-lines">138, 149</span>
+</div><div class="py-sample">
+    <span class="sample-project">Gloopy</span>
+    <a href="https://bitbucket.org/tartley/gloopy/src/tip/gloopy/view/glyph.py">gloopy/view/glyph.py</a>
+    Lines: <span class="sample-lines">76, 98</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL Tutorial (Python Translation)</span>
+    <a href="https://bitbucket.org/tartley/gltutpy/src/tip/t02.playing-with-colors/VertexColors.py">t02.playing-with-colors/VertexColors.py</a>
+    Lines: <span class="sample-lines">7, 80</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL Tutorial (Python Translation)</span>
+    <a href="https://bitbucket.org/tartley/gltutpy/src/tip/t02.playing-with-colors/FragPosition.py">t02.playing-with-colors/FragPosition.py</a>
+    Lines: <span class="sample-lines">7, 77</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL Tutorial (Python Translation)</span>
+    <a href="https://bitbucket.org/tartley/gltutpy/src/tip/t01.hello-triangle/HelloTriangle.py">t01.hello-triangle/HelloTriangle.py</a>
+    Lines: <span class="sample-lines">6, 91</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">199</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

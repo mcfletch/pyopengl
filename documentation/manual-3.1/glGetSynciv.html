@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetSynciv : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetSynciv</h1>
+</header>
+<main class="content">
+    <section class="purpose">query the properties of a sync object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetSynciv"></a>
+    <span class="c-function">glGetSynciv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLsync (
+            <a href="#param-sync" class="parameter">sync</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei *(
+            <a href="#param-length" class="parameter">length</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-values" class="parameter">values</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetSynciv"></a>
+    <span class="py-function">glGetSynciv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-sync" class="parameter">sync</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-length" class="parameter">length</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-values" class="parameter">values</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sync"></a>
+                        sync
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the sync object whose properties to query.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the parameter whose value to retrieve from the sync object specified in
+    <a class="parameter" href="#param-sync">sync</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bufSize"></a>
+                        bufSize
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the size of the buffer whose address is given in
+    <a class="parameter" href="#param-values">values</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-length"></a>
+                        length
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of an variable to receive the number of integers placed in
+    <a class="parameter" href="#param-values">values</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-values"></a>
+                        values
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of an array to receive the values of the queried parameter.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetSynciv.html">glGetSynciv</a>
+    retrieves properties of a sync object.
+    <a class="parameter" href="#param-sync">sync</a>
+    specifies the name of the sync
+            object whose properties to retrieve.
+</div>
+    <div class="para">
+            On success,
+    <a class="function" href="./glGetSynciv.html">glGetSynciv</a>
+    replaces up to
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    integers in
+    <a class="parameter" href="#param-values">values</a>
+    with the
+            corresponding property values of the object being queried.  The actual number of integers replaced is returned in the variable whose address is
+            specified in
+    <a class="parameter" href="#param-length">length</a>
+    . If
+    <a class="parameter" href="#param-length">length</a>
+    is
+    <div class="code">NULL</div>
+    , no length is returned.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_OBJECT_TYPE</span>
+    , a single value representing the specific type of the sync object is
+            placed in
+    <a class="parameter" href="#param-values">values</a>
+    . The only type supported is
+    <span class="constant">GL_SYNC_FENCE</span>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_SYNC_STATUS</span>
+    , a single value representing the status of the sync object
+            (
+    <span class="constant">GL_SIGNALED</span>
+    or
+    <span class="constant">GL_UNSIGNALED</span>
+    ) is placed in
+    <a class="parameter" href="#param-values">values</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_SYNC_CONDITION</span>
+    , a single value representing the condition of the sync object
+            is placed in
+    <a class="parameter" href="#param-values">values</a>
+    . The only condition supported is
+    <span class="constant">GL_SYNC_GPU_COMMANDS_COMPLETE</span>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_SYNC_FLAGS</span>
+    , a single value representing the flags with which the sync object
+            was created is placed in
+    <a class="parameter" href="#param-values">values</a>
+    . No flags are currently supported
+    <div class="footnote">
+    <div class="para">
+    <a class="parameter" href="#param-flags">flags</a>
+    is
+            expected to be used in future extensions to the sync objects.
+</div>
+</div>
+    .
+</div>
+    <div class="para">
+            If an error occurs, nothing will be written to
+    <a class="parameter" href="#param-values">values</a>
+    or
+    <a class="parameter" href="#param-length">length</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-sync">sync</a>
+    is not the name of a sync object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not one of the accepted tokens.
+</div>
+    </section><section class="section">
+    <h2 class="title">API Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>glGetSynciv</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glFenceSync.html">glFenceSync</a>
+    ,
+    <a class="crossref" href="./glWaitSync.html">glWaitSync</a>
+    ,
+    <a class="crossref" href="./glClientWaitSync.html">glClientWaitSync</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glGetSynciv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/arbsync.py">tests/arbsync.py</a>
+    Lines: <span class="sample-lines">42</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

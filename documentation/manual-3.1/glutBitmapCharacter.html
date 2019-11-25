@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutBitmapCharacter : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutBitmapCharacter</h1>
+</header>
+<main class="content">
+    <section class="purpose">renders a bitmap character using OpenGL.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutBitmapCharacter"></a>
+    <span class="c-function">glutBitmapCharacter</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-character" class="parameter">character</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutBitmapCharacter"></a>
+    <span class="py-function">glutBitmapCharacter</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-font" class="parameter">font</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-character" class="parameter">character</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutBitmapCharacter( c_void_p(font), c_int(character) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-font"></a>
+                        font
+                    </th>
+                    <td>
+    <div class="simpara">
+						Bitmap font to use.
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-character"></a>
+                        character
+                    </th>
+                    <td>
+    <div class="simpara">
+						Character to render (not confined to 8 bits).
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutBitmapCharacter.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			Without using any display lists,
+    <a class="function" href="./glutBitmapCharacter.html">glutBitmapCharacter</a>
+    renders the character in the named bitmap
+			font. The available fonts are:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_BITMAP_8_BY_13</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						A fixed width font with every character fitting in an 8 by 13 pixel rectangle. The exact bitmaps to be used
+						is defined by the standard X glyph bitmaps for the X font named:
+					</div>
+    <div class="screen">-misc-fixed-medium-r-normal--13-120-75-75-C-80-iso8859-1</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_BITMAP_9_BY_15</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						A fixed width font with every character fitting in an 9 by 15 pixel rectangle. The exact bitmaps to be used
+						is defined by the standard X glyph bitmaps for the X font named:
+					</div>
+    <div class="screen">-misc-fixed-medium-r-normal--15-140-75-75-C-90-iso8859-1</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_BITMAP_TIMES_ROMAN_10</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						A 10-point proportional spaced Times Roman font. The exact bitmaps to be used is defined by the standard X
+						glyph bitmaps for the X font named:
+					</div>
+    <div class="screen">-adobe-times-medium-r-normal--10-100-75-75-p-54-iso8859-1</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_BITMAP_TIMES_ROMAN_24</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						A 24-point proportional spaced Times Roman font. The exact bitmaps to be used is defined by the standard X
+						glyph bitmaps for the X font named:
+					</div>
+    <div class="screen">-adobe-times-medium-r-normal--24-240-75-75-p-124-iso8859-1</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_BITMAP_HELVETICA_10</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						A 10-point proportional spaced Helvetica font. The exact bitmaps to be used is defined by the standard X
+						glyph bitmaps for the X font named:
+					</div>
+    <div class="screen">-adobe-helvetica-medium-r-normal--10-100-75-75-p-56-iso8859-1</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_BITMAP_HELVETICA_12</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						A 12-point proportional spaced Helvetica font. The exact bitmaps to be used is defined by the standard X
+						glyph bitmaps for the X font named:
+					</div>
+    <div class="screen">-adobe-helvetica-medium-r-normal--12-120-75-75-p-67-iso8859-1</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_BITMAP_HELVETICA_18</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						A 18-point proportional spaced Helvetica font. The exact bitmaps to be used is defined by the standard X
+						glyph bitmaps for the X font named:
+					</div>
+    <div class="screen">-adobe-helvetica-medium-r-normal--18-180-75-75-p-98-iso8859-1</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+			Rendering a nonexistent character has no effect. glutBitmapCharacter automatically sets the OpenGL unpack pixel storage
+			modes it needs appropriately and saves and restores the previous modes before returning. The generated call to glBitmap
+			will adjust the current raster position based on the width of the character.
+		</div>
+    </section><section class="section" id="glutBitmapCharacter.3GLUT-example">
+    <h2 class="title">Example</h2>
+    <div class="para">
+			Here is a routine that shows how to render a string of ASCII text with
+    <a class="function" href="./glutBitmapCharacter.html">glutBitmapCharacter</a>
+    :
+</div>
+    <div class="programlisting">void output(int x, int y, char *string)
+{
+  int len, i;
+  glRasterPos2f(x, y);
+  len = (int) strlen(string);
+  for (i = 0; i &lt; len; i++)
+  {
+    glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, string[i]);
+  }
+}</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutBitmapWidth.html">glutBitmapWidth</a>
+            <a class="crossref" href="./glutStrokeCharacter.html">glutStrokeCharacter</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutBitmapCharacter</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glutbitmapcharacter.py">tests/glutbitmapcharacter.py</a>
+    Lines: <span class="sample-lines">30</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/glutfont.py">OpenGLContext/scenegraph/text/glutfont.py</a>
+    Lines: <span class="sample-lines">38</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py">PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py</a>
+    Lines: <span class="sample-lines">40</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/gluttimerfunc_testCase.py">PyOpenGL-Demo/GLUT/gluttimerfunc_testCase.py</a>
+    Lines: <span class="sample-lines">68, 74</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglGlut.py">renderers/openglGlut.py</a>
+    Lines: <span class="sample-lines">258</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/openglgraphics.py">system/openglgraphics.py</a>
+    Lines: <span class="sample-lines">249</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Text.py">VisionEgg/Text.py</a>
+    Lines: <span class="sample-lines">428</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

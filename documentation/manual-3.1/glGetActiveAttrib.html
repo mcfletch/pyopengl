@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetActiveAttrib : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetActiveAttrib</h1>
+</header>
+<main class="content">
+    <section class="purpose">Returns information about an active attribute variable for the specified program object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetActiveAttrib"></a>
+    <span class="c-function">glGetActiveAttrib</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei *(
+            <a href="#param-length" class="parameter">length</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-size" class="parameter">size</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum *(
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLchar *(
+            <a href="#param-name" class="parameter">name</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetActiveAttrib"></a>
+    <span class="py-function">glGetActiveAttrib</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-length" class="parameter">length</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-size" class="parameter">size</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-name" class="parameter">name</a>
+    </span>
+</span> )
+    <pre class="pydoc">Retrieves information about the attribute variable.
+
+    program -- specifies the program to be queried
+    index -- index of the attribute to be queried 
+    
+    Following parameters are optional:
+    
+    bufSize -- determines the size of the buffer (limits number of bytes written),
+               if not provided, will be GL_ACTIVE_ATTRIBUTE_MAX_LENGTH
+    length -- pointer-to-GLsizei that will hold the resulting length of the name
+    size -- pointer-to-GLint that will hold the size of the attribute
+    type -- pointer-to-GLenum that will hold the type constant of the attribute
+    name -- pointer-to-GLchar that will hold the (null-terminated) name string
+    
+    returns (bytes) name, (int)size, (enum)type
+    </pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">Specifies the program object to be
+            queried.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">Specifies the index of the attribute variable
+            to be queried.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bufSize"></a>
+                        bufSize
+                    </th>
+                    <td>
+    <div class="para">Specifies the maximum number of characters
+            OpenGL is allowed to write in the character buffer
+            indicated by
+    <a class="parameter" href="#param-name">name</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-length"></a>
+                        length
+                    </th>
+                    <td>
+    <div class="para">Returns the number of characters actually
+            written by OpenGL in the string indicated by
+    <a class="parameter" href="#param-name">name</a>
+    (excluding the null
+            terminator) if a value other than
+    <span class="constant">NULL</span>
+    is passed.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-size"></a>
+                        size
+                    </th>
+                    <td>
+    <div class="para">Returns the size of the attribute
+            variable.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">Returns the data type of the attribute
+            variable.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="para">Returns a null terminated string containing
+            the name of the attribute variable.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetActiveAttrib.html">glGetActiveAttrib</a>
+    returns information
+    about an active attribute variable in the program object
+    specified by
+    <a class="parameter" href="#param-program">program</a>
+    . The number of
+    active attributes can be obtained by calling
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    with the value
+    <span class="constant">GL_ACTIVE_ATTRIBUTES</span>
+    . A
+    value of 0 for
+    <a class="parameter" href="#param-index">index</a>
+    selects the first
+    active attribute variable. Permissible values for
+    <a class="parameter" href="#param-index">index</a>
+    range from zero to the number of
+    active attribute variables minus one.
+</div>
+    <div class="para">A vertex shader may use either built-in attribute
+    variables, user-defined attribute variables, or both. Built-in
+    attribute variables have a prefix of "gl_" and
+    reference conventional OpenGL vertex attribtes (e.g.,
+    <a class="parameter" href="#param-gl_Vertex">gl_Vertex</a>
+    ,
+    <a class="parameter" href="#param-gl_Normal">gl_Normal</a>
+    , etc., see the OpenGL Shading
+    Language specification for a complete list.) User-defined
+    attribute variables have arbitrary names and obtain their values
+    through numbered generic vertex attributes. An attribute
+    variable (either built-in or user-defined) is considered active
+    if it is determined during the link operation that it may be
+    accessed during program execution. Therefore,
+    <a class="parameter" href="#param-program">program</a>
+    should have previously been the
+    target of a call to
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    ,
+    but it is not necessary for it to have been linked
+    successfully.
+</div>
+    <div class="para">The size of the character buffer required to store the
+    longest attribute variable name in
+    <a class="parameter" href="#param-program">program</a>
+    can be obtained by calling
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    with the value
+    <span class="constant">GL_ACTIVE_ATTRIBUTE_MAX_LENGTH</span>
+    . This value
+    should be used to allocate a buffer of sufficient size to store
+    the returned attribute name. The size of this character buffer
+    is passed in
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    , and a pointer to
+    this character buffer is passed in
+    <a class="parameter" href="#param-name">name</a>
+    .
+</div>
+    <div class="para">
+    <a class="function" href="./glGetActiveAttrib.html">glGetActiveAttrib</a>
+    returns the name of
+    the attribute variable indicated by
+    <a class="parameter" href="#param-index">index</a>
+    , storing it in the character buffer
+    specified by
+    <a class="parameter" href="#param-name">name</a>
+    . The string returned
+    will be null terminated. The actual number of characters written
+    into this buffer is returned in
+    <a class="parameter" href="#param-length">length</a>
+    ,
+    and this count does not include the null termination character.
+    If the length of the returned string is not required, a value of
+    <span class="constant">NULL</span>
+    can be passed in the
+    <a class="parameter" href="#param-length">length</a>
+    argument.
+</div>
+    <div class="para">The
+    <a class="parameter" href="#param-type">type</a>
+    argument specifies a
+    pointer to a variable into which the attribute variable's data type
+    will be written. The symbolic
+    constants
+    <span class="constant">GL_FLOAT</span>
+    ,
+    <span class="constant">GL_FLOAT_VEC2</span>
+    ,
+    <span class="constant">GL_FLOAT_VEC3</span>
+    ,
+    <span class="constant">GL_FLOAT_VEC4</span>
+    ,
+    <span class="constant">GL_FLOAT_MAT2</span>
+    ,
+    <span class="constant">GL_FLOAT_MAT3</span>
+    ,
+    <span class="constant">GL_FLOAT_MAT4</span>
+    ,
+    <span class="constant">GL_FLOAT_MAT2x3</span>
+    ,
+    <span class="constant">GL_FLOAT_MAT2x4</span>
+    ,
+    <span class="constant">GL_FLOAT_MAT3x2</span>
+    ,
+    <span class="constant">GL_FLOAT_MAT3x4</span>
+    ,
+    <span class="constant">GL_FLOAT_MAT4x2</span>
+    ,
+    <span class="constant">GL_FLOAT_MAT4x3</span>
+    ,
+    <span class="constant">GL_INT</span>
+    ,
+    <span class="constant">GL_INT_VEC2</span>
+    ,
+    <span class="constant">GL_INT_VEC3</span>
+    ,
+    <span class="constant">GL_INT_VEC4</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_VEC2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_VEC3</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_VEC4</span>
+    ,
+    <span class="constant">GL_DOUBLE</span>
+    ,
+    <span class="constant">GL_DOUBLE_VEC2</span>
+    ,
+    <span class="constant">GL_DOUBLE_VEC3</span>
+    ,
+    <span class="constant">GL_DOUBLE_VEC4</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT2</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT3</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT4</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT2x3</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT2x4</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT3x2</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT3x4</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT4x2</span>
+    , or
+    <span class="constant">GL_DOUBLE_MAT4x3</span>
+    may be returned. The
+    <a class="parameter" href="#param-size">size</a>
+    argument will return the size of the
+    attribute, in units of the type returned in
+    <a class="parameter" href="#param-type">type</a>
+    .
+</div>
+    <div class="para">The list of active attribute variables may include both
+    built-in attribute variables (which begin with the prefix
+    "gl_") as well as user-defined attribute variable
+    names.</div>
+    <div class="para">This function will return as much information as it can
+    about the specified active attribute variable. If no information
+    is available,
+    <a class="parameter" href="#param-length">length</a>
+    will be 0, and
+    <a class="parameter" href="#param-name">name</a>
+    will be an empty string. This
+    situation could occur if this function is called after a link
+    operation that failed. If an error occurs, the return values
+    <a class="parameter" href="#param-length">length</a>
+    ,
+    <a class="parameter" href="#param-size">size</a>
+    ,
+    <a class="parameter" href="#param-type">type</a>
+    , and
+    <a class="parameter" href="#param-name">name</a>
+    will be unmodified.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a value generated by
+    OpenGL.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a program object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-index">index</a>
+    is greater than or equal to the
+    number of active attribute variables in
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    is less than 0.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_VERTEX_ATTRIBS</span>
+    .
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    with argument
+    <span class="constant">GL_ACTIVE_ATTRIBUTES</span>
+    or
+    <span class="constant">GL_ACTIVE_ATTRIBUTE_MAX_LENGTH</span>
+    .
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsProgram.html">glIsProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetActiveAttrib.html">glGetActiveAttrib</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBindAttribLocation.html">glBindAttribLocation</a>
+    ,
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    ,
+    <a class="crossref" href="./glVertexAttrib.html">glVertexAttrib</a>
+    ,
+    <a class="crossref" href="./glVertexAttribPointer.html">glVertexAttribPointer</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2005 3Dlabs Inc. Ltd.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

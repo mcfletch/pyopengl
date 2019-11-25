@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetVertexArrayIndexed : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetVertexArrayIndexed</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieve parameters of an attribute of a vertex array
+    object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetVertexArrayIndexed"></a>
+    <span class="c-function">glGetVertexArrayIndexed</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetVertexArrayIndexed64iv"></a>
+    <span class="c-function">glGetVertexArrayIndexed64iv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-vaobj" class="parameter">vaobj</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint64 *(
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetVertexArrayIndexed64iv"></a>
+    <span class="py-function">glGetVertexArrayIndexed64iv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-vaobj" class="parameter">vaobj</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetVertexArrayIndexediv"></a>
+    <span class="c-function">glGetVertexArrayIndexediv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-vaobj" class="parameter">vaobj</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetVertexArrayIndexediv"></a>
+    <span class="py-function">glGetVertexArrayIndexediv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-vaobj" class="parameter">vaobj</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-vaobj"></a>
+                        vaobj
+                    </th>
+                    <td>
+    <div class="para">Specifies the name of a vertex array object.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">Specifies the index of the vertex array object attribute. Must
+	  be a number between 0 and
+	  (
+    <span class="constant">GL_MAX_VERTEX_ATTRIBS</span>
+    - 1).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">Specifies the property to be used for the query. For
+    <a class="function" href="./glGetVertexArrayIndexed.html#c-glGetVertexArrayIndexediv">glGetVertexArrayIndexediv</a>
+    , it must be one of
+	  the following values:
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_ENABLED</span>
+    ,
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_SIZE</span>
+    ,
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_STRIDE</span>
+    ,
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_TYPE</span>
+    ,
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_NORMALIZED</span>
+    ,
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_INTEGER</span>
+    ,
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_LONG</span>
+    ,
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_DIVISOR</span>
+    , or
+    <span class="constant">GL_VERTEX_ATTRIB_RELATIVE_OFFSET</span>
+    . For
+    glGetVertexArrayIndexed64v
+    , it must be equal to
+    <span class="constant">GL_VERTEX_BINDING_OFFSET</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-param"></a>
+                        param
+                    </th>
+                    <td>
+    <div class="para">Returns the requested value.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetVertexArrayIndexed.html#c-glGetVertexArrayIndexediv">glGetVertexArrayIndexediv</a>
+    and
+    <a class="function" href="./glGetVertexArrayIndexed.html#c-glGetVertexArrayIndexed64iv">glGetVertexArrayIndexed64iv</a>
+    provide a way of querying
+    parameters of an attribute at an user-specified index of a vertex array
+    object. The vertex array object does not have to be bound to the rendering
+    context at the time of the call, but must have been bound at least once
+    prior to this call.
+</div>
+    <div class="para">The following parameter values can be retrieved with
+    <a class="function" href="./glGetVertexArrayIndexed.html#c-glGetVertexArrayIndexediv">glGetVertexArrayIndexediv</a>
+    for each of the attributes
+    defined for a vertex array object:
+</div>
+    <div class="para">
+    <div class="itemizedlist">
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_ENABLED</span>
+    :
+    <a class="parameter" href="#param-param">param</a>
+    returns a value that is non-zero (true)
+	  if the vertex attribute array for index is enabled and 0 (false) if
+	  it is disabled. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_SIZE</span>
+    :
+    <a class="parameter" href="#param-param">param</a>
+    returns a single value, the size of the
+	  vertex attribute array for index. The size is the number of values
+	  for each element of the vertex attribute array, and it will be 1, 2,
+	  3 or 4. The initial value is 4.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_STRIDE</span>
+    :
+    <a class="parameter" href="#param-param">param</a>
+    returns a single value, the array
+	  stride for (number of bytes between successive elements in) the
+	  vertex attribute array for index. A value of 0 indicates the array
+	  elements are stored sequentially in memory. The initial value is
+	  0.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_TYPE</span>
+    :
+    <a class="parameter" href="#param-param">param</a>
+    returns a single value, a symbolic
+	  constant indicating the array type for the vertex attribute array
+	  for index. Possible values are
+    <span class="constant">GL_BYTE</span>
+    ,
+    <span class="constant">GL_DOUBLE</span>
+    ,
+    <span class="constant">GL_FIXED</span>
+    ,
+    <span class="constant">GL_FLOAT</span>
+    ,
+    <span class="constant">GL_HALF_FLOAT</span>
+    ,
+    <span class="constant">GL_INT</span>
+    ,
+    <span class="constant">GL_INT_2_10_10_10_REV</span>
+    ,
+    <span class="constant">GL_SHORT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+    , and
+    <span class="constant">GL_UNSIGNED_INT_10F_11F_11F_REV</span>
+    . The initial
+	  value is
+    <span class="constant">GL_FLOAT</span>
+    .
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_NORMALIZED</span>
+    :
+    <a class="parameter" href="#param-param">param</a>
+    returns a single value that is non-zero
+	  (true) if fixed-point data types for the vertex attribute array
+	  indicated by index are normalized when they are converted to
+	  floating-point, and 0 (false) otherwise. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_INTEGER</span>
+    :
+    <a class="parameter" href="#param-param">param</a>
+    returns a single value that is non-zero
+	  (true) if fixed-point data types for the vertex attribute array
+	  indicated by index have integer data type, and 0 (false) otherwise.
+	  The initial value is 0 (
+    <span class="constant">GL_FALSE</span>
+    ).
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_LONG</span>
+    :
+    <a class="parameter" href="#param-param">param</a>
+    returns a single value that is non-zero
+	  (true) if a vertex attribute is stored as an unconverted double, and
+	  0 (false) otherwise. The initial value is 0
+	  (
+    <span class="constant">GL_FALSE</span>
+    ).
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_VERTEX_ATTRIB_ARRAY_DIVISOR</span>
+    :
+    <a class="parameter" href="#param-param">param</a>
+    returns a single value that is the
+	  frequency divisor used for instanced rendering. See
+	  glVertexAttribDivisor. The initial value is 0.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_VERTEX_ATTRIB_RELATIVE_OFFSET</span>
+    :
+    <a class="parameter" href="#param-param">param</a>
+    returns a single value that is the byte
+	  offset of the first element relative to the start of the vertex
+	  buffer binding specified attribute fetches from. The initial value
+	  is 0.
+</div>
+</dd>
+</div>
+    <a class="function" href="./glGetVertexArrayIndexed.html#c-glGetVertexArrayIndexed64iv">glGetVertexArrayIndexed64iv</a>
+    can be
+    used to retrieve
+    <span class="constant">GL_VERTEX_BINDING_OFFSET</span>
+    parameter
+    value for any of the attributes defined for a vertex array object. When
+    <a class="parameter" href="#param-pname">pname</a>
+    is set to
+    <span class="constant">GL_VERTEX_BINDING_OFFSET</span>
+    ,
+    <a class="parameter" href="#param-param">param</a>
+    returns a single value that is the byte
+    offset of the first element in the bound buffer's data store. The initial
+    value for this parameter is 0.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    error is generated if
+    <a class="parameter" href="#param-vaobj">vaobj</a>
+    is not the name of an existing vertex array
+    object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    error is generated if index is
+    greater than or equal to the value of
+    <span class="constant">GL_MAX_VERTEX_ATTRIBS</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    error is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not one of the valid values. For more
+    details, please see above.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetVertexArrayIndexed.html#c-glGetVertexArrayIndexed64iv">glGetVertexArrayIndexed64iv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetVertexArrayIndexed.html#c-glGetVertexArrayIndexediv">glGetVertexArrayIndexediv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetVertexAttrib.html">glGetVertexAttrib</a>
+    ,
+    <a class="crossref" href="./glVertexAttribBinding.html">glVertexAttribBinding</a>
+    ,
+    <a class="function" href="./glVertexAttribPointer.html#c-glVertexAttribIPointer">glVertexAttribIPointer</a>
+    ,
+    <a class="function" href="./glVertexAttribPointer.html#c-glVertexAttribLPointer">glVertexAttribLPointer</a>
+    ,
+    <a class="crossref" href="./glVertexAttribPointer.html">glVertexAttribPointer</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+	    Copyright
+    <div class="trademark"></div>
+    2014 Khronos Group.
+	    This material may be distributed subject to the terms and conditions set forth in
+	    the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

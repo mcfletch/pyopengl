@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluPartialDisk : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluPartialDisk</h1>
+</header>
+<main class="content">
+    <section class="purpose">draw an arc of a disk</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluPartialDisk"></a>
+    <span class="c-function">gluPartialDisk</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUquadric* (
+            <a href="#param-quad" class="parameter">quad</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-inner" class="parameter">inner</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-outer" class="parameter">outer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-slices" class="parameter">slices</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-loops" class="parameter">loops</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-start" class="parameter">start</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-sweep" class="parameter">sweep</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluPartialDisk"></a>
+    <span class="py-function">gluPartialDisk</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-quad" class="parameter">quad</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-inner" class="parameter">inner</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-outer" class="parameter">outer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-slices" class="parameter">slices</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-loops" class="parameter">loops</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-start" class="parameter">start</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-sweep" class="parameter">sweep</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluPartialDisk( POINTER(GLUquadric)(quad), GLdouble(inner), GLdouble(outer), GLint(slices), GLint(loops), GLdouble(start), GLdouble(sweep) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-quad"></a>
+                        quad
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a quadrics object (created with
+    <a class="crossref" href="./gluNewQuadric.html">gluNewQuadric</a>
+    ).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-inner"></a>
+                        inner
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the inner radius of the partial disk (can be 0).
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-outer"></a>
+                        outer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the outer radius of the partial disk.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-slices"></a>
+                        slices
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of subdivisions around the
+    <span class="emphasis">z</span>
+    axis.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-loops"></a>
+                        loops
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of concentric rings about the origin into which
+                    the partial disk is subdivided.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-start"></a>
+                        start
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the starting angle, in degrees, of the disk portion.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sweep"></a>
+                        sweep
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the sweep angle, in degrees, of the disk portion.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluPartialDisk.html">gluPartialDisk</a>
+    renders a partial disk on the
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">z</mi>
+                    <mo>=</mo>
+                    <mn>0</mn>
+                </mrow>
+            </math>
+    plane. A partial disk is
+            similar to a full disk, except that only the subset of the disk from
+    <a class="parameter" href="#param-start">start</a>
+    through
+    <a class="parameter" href="#param-start">start</a>
+    +
+    <a class="parameter" href="#param-sweep">sweep</a>
+    is included (where 0 degrees is along the
+            +\f2y\f axis,
+            90 degrees along the +
+    <span class="emphasis">x</span>
+    axis, 180 degrees along the \-
+    <span class="emphasis">y</span>
+    axis, and
+            270 degrees along the \-
+    <span class="emphasis">x</span>
+    axis).
+</div>
+    <div class="para">
+            The partial disk has a radius of
+    <a class="parameter" href="#param-outer">outer</a>
+    and contains a concentric circular hole with a radius
+            of
+    <a class="parameter" href="#param-inner">inner</a>
+    . If
+    <a class="parameter" href="#param-inner">inner</a>
+    is 0, then no hole is generated. The partial disk is
+            subdivided around the
+    <span class="emphasis">z</span>
+    axis into slices (like pizza slices) and also
+            about the
+    <span class="emphasis">z</span>
+    axis into rings
+            (as specified by
+    <a class="parameter" href="#param-slices">slices</a>
+    and
+    <a class="parameter" href="#param-loops">loops</a>
+    , respectively).
+</div>
+    <div class="para">
+            With respect to orientation, the +
+    <span class="emphasis">z</span>
+    side of the partial disk is considered to
+            be outside (see
+    <a class="crossref" href="./gluQuadricOrientation.html">gluQuadricOrientation</a>
+    ).
+            This means that if the
+            orientation is set to
+    <span class="constant">GLU_OUTSIDE</span>
+    , then any normals generated
+            point along the +
+    <span class="emphasis">z</span>
+    axis. Otherwise, they point along the \-
+    <span class="emphasis">z</span>
+    axis.
+</div>
+    <div class="para">
+            If texturing is turned on (with
+    <a class="crossref" href="./gluQuadricTexture.html">gluQuadricTexture</a>
+    ), texture
+            coordinates are generated
+            linearly such that where
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">r</mi>
+                    <mo>=</mo>
+                    <mi mathvariant="italic">outer</mi>
+                </mrow>
+            </math>
+    ,
+            the value at (
+    <span class="emphasis">r</span>
+    , 0, 0) is
+            (1.0, 0.5), at (0,
+    <span class="emphasis">r</span>
+    , 0) it is (0.5, 1.0), at (\-
+    <span class="emphasis">r</span>
+    , 0, 0)
+            it is (0.0, 0.5), and
+            at (0, \-
+    <span class="emphasis">r</span>
+    , 0) it is (0.5, 0.0).
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluCylinder.html">gluCylinder</a>
+    ,
+    <a class="crossref" href="./gluDisk.html">gluDisk</a>
+    ,
+    <a class="crossref" href="./gluNewQuadric.html">gluNewQuadric</a>
+    ,
+    <a class="crossref" href="./gluQuadricOrientation.html">gluQuadricOrientation</a>
+    ,
+    <a class="crossref" href="./gluQuadricTexture.html">gluQuadricTexture</a>
+    ,
+    <a class="crossref" href="./gluSphere.html">gluSphere</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluPartialDisk</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson23.py">PyOpenGL-Demo/NeHe/lesson23.py</a>
+    Lines: <span class="sample-lines">174</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson18.py">PyOpenGL-Demo/NeHe/lesson18.py</a>
+    Lines: <span class="sample-lines">220</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/draw.py">pymt/graphx/draw.py</a>
+    Lines: <span class="sample-lines">21, 568, 593</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

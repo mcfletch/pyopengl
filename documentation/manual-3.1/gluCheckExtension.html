@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluCheckExtension : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluCheckExtension</h1>
+</header>
+<main class="content">
+    <section class="purpose">determines if an extension name is supported</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluCheckExtension"></a>
+    <span class="c-function">gluCheckExtension</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLubyte * (
+            <a href="#param-extName" class="parameter">extName</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLubyte * (
+            <a href="#param-extString" class="parameter">extString</a>
+        )
+    </span>
+</span>)-&gt; GLboolean
+</div>
+                <div class="py-signature">
+    <a name="py-gluCheckExtension"></a>
+    <span class="py-function">gluCheckExtension</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-extName" class="parameter">extName</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-extString" class="parameter">extString</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_ubyte'&gt;</span>
+    <pre class="pydoc">gluCheckExtension( arrays.GLubyteArray(extName), arrays.GLubyteArray(extString) ) -&gt; GLboolean</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-extName"></a>
+                        extName
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies an extension name.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-extString"></a>
+                        extString
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a space-separated list of extension names supported.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluCheckExtension.html">gluCheckExtension</a>
+    returns
+    <span class="constant">GLU_TRUE</span>
+    if
+    <a class="parameter" href="#param-extName">extName</a>
+    is supported otherwise
+    <span class="constant">GLU_FALSE</span>
+    is returned.
+</div>
+    <div class="para">
+            This is used to check for the presence for OpenGL, GLU, or GLX extension names
+            by passing the extension strings returned by
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+    ,
+    <a class="crossref" href="./gluGetString.html">gluGetString</a>
+    ,
+    <a class="crossref" href="./glXGetClientString.html">glXGetClientString</a>
+    ,
+    <a class="crossref" href="./glXQueryExtensionsString.html">glXQueryExtensionsString</a>
+    , or
+    <a class="crossref" href="./glXQueryServerString.html">glXQueryServerString</a>
+    ,
+            respectively, as
+    <a class="parameter" href="#param-extString">extString</a>
+    .
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            Cases where one extension name is a substring of another are
+            correctly handled.
+        </div>
+    <div class="para">
+            There may or may not be leading or trailing blanks in
+    <a class="parameter" href="#param-extString">extString</a>
+    .
+</div>
+    <div class="para">
+            Extension names should not contain embedded spaces.
+        </div>
+    <div class="para">
+            All strings are null-terminated.
+        </div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluGetString.html">gluGetString</a>
+    ,
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+    ,
+    <a class="crossref" href="./glXGetClientString.html">glXGetClientString</a>
+    ,
+    <a class="crossref" href="./glXQueryExtensionsString.html">glXQueryExtensionsString</a>
+    ,
+    <a class="crossref" href="./glXQueryServerString.html">glXQueryServerString</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

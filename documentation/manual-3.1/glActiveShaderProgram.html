@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glActiveShaderProgram : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glActiveShaderProgram</h1>
+</header>
+<main class="content">
+    <section class="purpose">set the active program object for a program pipeline object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glActiveShaderProgram"></a>
+    <span class="c-function">glActiveShaderProgram</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-pipeline" class="parameter">pipeline</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glActiveShaderProgram"></a>
+    <span class="py-function">glActiveShaderProgram</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pipeline" class="parameter">pipeline</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pipeline"></a>
+                        pipeline
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the program pipeline object to set the active program object for.
+            </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the program object to set as the active program pipeline object
+    <a class="parameter" href="#param-pipeline">pipeline</a>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glActiveShaderProgram.html">glActiveShaderProgram</a>
+    sets the linked program named by
+    <a class="parameter" href="#param-program">program</a>
+    to be the active program for the program pipeline object
+    <a class="parameter" href="#param-pipeline">pipeline</a>
+    . The active
+            program in the active program pipeline object is the target of calls to
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    when no program has been made current through a call to
+    <a class="crossref" href="./glUseProgram.html">glUseProgram</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-pipeline">pipeline</a>
+    is not
+            a name previously returned from a call to
+    <a class="crossref" href="./glGenProgramPipelines.html">glGenProgramPipelines</a>
+    or if such a name has been deleted by a call to
+    <a class="crossref" href="./glDeleteProgramPipelines.html">glDeleteProgramPipelines</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    refers
+            to a program object that has not been successfully linked.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glActiveShaderProgram.html">glActiveShaderProgram</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenProgramPipelines.html">glGenProgramPipelines</a>
+    ,
+    <a class="crossref" href="./glDeleteProgramPipelines.html">glDeleteProgramPipelines</a>
+    ,
+    <a class="crossref" href="./glIsProgramPipeline.html">glIsProgramPipeline</a>
+    ,
+    <a class="crossref" href="./glUseProgram.html">glUseProgram</a>
+    ,
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

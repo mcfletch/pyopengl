@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetShaderiv : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetShaderiv</h1>
+</header>
+<main class="content">
+    <section class="purpose">Returns a parameter from a shader object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetShaderiv"></a>
+    <span class="c-function">glGetShaderiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-shader" class="parameter">shader</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetShaderiv"></a>
+    <span class="py-function">glGetShaderiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-shader" class="parameter">shader</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+    <pre class="pydoc">Retrieve the integer parameter for the given shader
+
+    shader -- shader ID to query
+    pname -- parameter name
+    status -- pointer to integer to receive status or None to
+        return the parameter as an integer value
+
+    returns
+        integer if status parameter is None
+        status if status parameter is not None
+    </pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-shader"></a>
+                        shader
+                    </th>
+                    <td>
+    <div class="para">Specifies the shader object to be
+                    queried.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">Specifies the object parameter. Accepted
+                    symbolic names are
+    <span class="constant">GL_SHADER_TYPE</span>
+    ,
+    <span class="constant">GL_DELETE_STATUS</span>
+    ,
+    <span class="constant">GL_COMPILE_STATUS</span>
+    ,
+    <span class="constant">GL_INFO_LOG_LENGTH</span>
+    ,
+    <span class="constant">GL_SHADER_SOURCE_LENGTH</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">Returns the requested object parameter.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetShaderiv.html">glGetShaderiv</a>
+    returns in
+    <a class="parameter" href="#param-params">params</a>
+    the value of a parameter for a specific shader object. The
+        following parameters are defined:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SHADER_TYPE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns
+    <span class="constant">GL_VERTEX_SHADER</span>
+    if
+    <a class="parameter" href="#param-shader">shader</a>
+    is a vertex shader
+                    object, and
+    <span class="constant">GL_FRAGMENT_SHADER</span>
+    if
+    <a class="parameter" href="#param-shader">shader</a>
+    is a fragment
+                    shader object.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DELETE_STATUS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns
+    <span class="constant">GL_TRUE</span>
+    if
+    <a class="parameter" href="#param-shader">shader</a>
+    is currently flagged
+                    for deletion, and
+    <span class="constant">GL_FALSE</span>
+    otherwise.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_COMPILE_STATUS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns
+    <span class="constant">GL_TRUE</span>
+    if the last compile
+                    operation on
+    <a class="parameter" href="#param-shader">shader</a>
+    was
+                    successful, and
+    <span class="constant">GL_FALSE</span>
+    otherwise.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_INFO_LOG_LENGTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns the
+                    number of characters in the information log for
+    <a class="parameter" href="#param-shader">shader</a>
+    including the null
+                    termination character (i.e., the size of the
+                    character buffer required to store the information
+                    log). If
+    <a class="parameter" href="#param-shader">shader</a>
+    has no
+                    information log, a value of 0 is returned.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SHADER_SOURCE_LENGTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns the
+                    length of the concatenation of the source strings
+                    that make up the shader source for the
+    <a class="parameter" href="#param-shader">shader</a>
+    , including the null
+                    termination character. (i.e., the size of the
+                    character buffer required to store the shader
+                    source). If no source code exists, 0 is
+                    returned.
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">If an error is generated, no change is made to the
+        contents of
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-shader">shader</a>
+    is not a value generated by
+        OpenGL.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-shader">shader</a>
+    does not refer to a shader
+        object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not an accepted value.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetShaderInfoLog.html">glGetShaderInfoLog</a>
+    with argument
+    <a class="parameter" href="#param-shader">shader</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetShaderSource.html">glGetShaderSource</a>
+    with argument
+    <a class="parameter" href="#param-shader">shader</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsShader.html">glIsShader</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">API Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>glGetShaderiv</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glCompileShader.html">glCompileShader</a>
+    ,
+    <a class="crossref" href="./glCreateShader.html">glCreateShader</a>
+    ,
+    <a class="crossref" href="./glDeleteShader.html">glDeleteShader</a>
+    ,
+    <a class="crossref" href="./glGetProgramiv.html">glGetProgramiv</a>
+    ,
+    <a class="crossref" href="./glShaderSource.html">glShaderSource</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2005 3Dlabs Inc. Ltd.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glGetShaderiv</div>
+        <div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/shaders.py">core/shaders.py</a>
+    Lines: <span class="sample-lines">532</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">37</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">37</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">37</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">37</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">38</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">37</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

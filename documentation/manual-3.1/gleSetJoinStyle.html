@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gleSetJoinStyle : PyOpenGL 3.1.4 GLE Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+    <h1>gleSetJoinStyle</h1>
+</header>
+<main class="content">
+    <section class="purpose">Query and Set the GLE join style flags.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gleGetJoinStyle"></a>
+    <span class="c-function">gleGetJoinStyle</span>(<span class="parameter-list">
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-gleGetJoinStyle"></a>
+    <span class="py-function">gleGetJoinStyle</span>( <span class="parameter-list">
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">gleGetJoinStyle(  ) -&gt; c_int</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-gleSetJoinStyle"></a>
+    <span class="c-function">gleSetJoinStyle</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-style" class="parameter">style</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gleSetJoinStyle"></a>
+    <span class="py-function">gleSetJoinStyle</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-style" class="parameter">style</a>
+    </span>
+</span> )
+    <pre class="pydoc">gleSetJoinStyle( c_int(style) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-style"></a>
+                        style
+                    </th>
+                    <td>
+    <div class="simpara">
+						bitwise OR of flags
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="gleSetJoinStyle.3GLE-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			Query and set the GLE join style flags. This word is a bitwise OR of the flags described below.
+		</div>
+    <div class="para">
+			The initial join style
+			is
+    <span class="constant">TUBE_JN_ANGLE</span>
+    <span class="constant">TUBE_JN_CAP</span>
+    <span class="constant">TUBE_NORM_FACET</span>
+    .
+</div>
+    <dl class="variablelist">
+    <h2 class="title">Extrusion Join Styles</h2>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">TUBE_JN_RAW</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Draw polycylinders, polycones, extrusions, etc. with no special treatment of the extrusion ends.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">TUBE_JN_ANGLE</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Draw polycylinders, polycones, extrusions, etc. by extending the different segments until they butt into
+						each other with an angular style.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">TUBE_JN_CUT</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Draw polycylinders, polycones, extrusions, etc. by joining together the different segments and slicing off
+						the joint at half the angle between the segments. A cap is drawn. Note that the slicing plane runs through
+						the origin of the contour coordinate system. Thus, the amount of slice can be varied by offsetting the
+						contour with respect to the origin.
+					</div>
+    <div class="simpara">
+						Note that when two segments meet at a shallow angle, the cut join style will potentially shave off a whole
+						lot of the contour, leading to "surprising" results...
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">TUBE_JN_ROUND</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Joints will be rounded. Strictly speaking, the part of the joint above the origin will be rounded. The part
+						below the origin will come together in an angular join.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">TUBE_JN_MASK</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Mask bits. This can be used to mask off the bit field that defines the join style.
+					</div>
+</dd>
+</div>
+</dl>
+    <dl class="variablelist">
+    <h2 class="title">End Caps</h2>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">TUBE_JN_CAP</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						If this is set, a cap will be drawn at each end of the extrusion.
+					</div>
+</dd>
+</div>
+</dl>
+    <dl class="variablelist">
+    <h2 class="title">Automatic Normal Vector Generation</h2>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">TUBE_NORM_FACET</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						A normal vector is generated per facet. Useful for having an extrusion have a "faceted" look,
+						such as when extruding a square </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">TUBE_NORM_EDGE</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Normal vectors are generated so that they lie along edges. Useful for making angular things look rounded
+						under lighting. For example, when extruding a hexagon and using this flag, the hexagonal extrusion will
+						look (more like a) smooth perfectly round cylinder, rather than a six-sided shape.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">TUBE_NORM_PATH_EDGE</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Normal vectors are generated so that they both lie on edges, and so that they interpolate between
+						neighboring segments. Useful for drawing "spaghetti" </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">TUBE_NORM_MASK</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						A mask useful for masking out the "norm" bits.
+					</div>
+</dd>
+</div>
+</dl>
+    <dl class="variablelist">
+    <h2 class="title">Closed or Open Contours</h2>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">TUBE_CONTOUR_CLOSED</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						If this bit is set, the contour will be treated as a "closed" contour, where the last point
+						connects back up to the first. It is useful to set this flag when drawing closed shapes (such as extruded
+						cylinders, star-shapes, I-Beams, etc. When drawing open extrusions (e.g. corrugated sheet metal), you
+    <span class="emphasis">don't</span>
+    want to set this flag.
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section" id="gleSetJoinStyle.3GLE-bugs">
+    <h2 class="title">Bugs</h2>
+    <div class="para">
+			Multiple threads using GLE share a single global join style (although this should be easily fixable because GLE does
+			use a centralized graphics context).
+		</div>
+    </section><section class="section" id="gleSetJoinStyle.3GLE-author">
+    <h2 class="title">Author</h2>
+    <div class="para">
+			Linas Vepstas
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./gleExtrusion.html">gleExtrusion</a>
+            <a class="crossref" href="./gleTextureMode.html">gleTextureMode</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gleSetJoinStyle</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/toolsfont.py">OpenGLContext/scenegraph/text/toolsfont.py</a>
+    Lines: <span class="sample-lines">92</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLE/texas.py">PyOpenGL-Demo/GLE/texas.py</a>
+    Lines: <span class="sample-lines">44</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLE/helix.py">PyOpenGL-Demo/GLE/helix.py</a>
+    Lines: <span class="sample-lines">14</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLE/cone.py">PyOpenGL-Demo/GLE/cone.py</a>
+    Lines: <span class="sample-lines">18</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

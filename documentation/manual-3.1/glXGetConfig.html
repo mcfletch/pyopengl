@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXGetConfig : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXGetConfig</h1>
+</header>
+<main class="content">
+    <section class="purpose">return information about GLX visuals</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXGetConfig"></a>
+    <span class="c-function">glXGetConfig</span>(<span class="parameter-list">
+    <span class="param-def">
+        Display * (
+            <a href="#param-dpy" class="parameter">dpy</a>
+        )
+        ,
+    </span><span class="param-def">
+        XVisualInfo * (
+            <a href="#param-vis" class="parameter">vis</a>
+        )
+        ,
+    </span><span class="param-def">
+        int (
+            <a href="#param-attrib" class="parameter">attrib</a>
+        )
+        ,
+    </span><span class="param-def">
+        int * (
+            <a href="#param-value" class="parameter">value</a>
+        )
+    </span>
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glXGetConfig"></a>
+    <span class="py-function">glXGetConfig</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-dpy" class="parameter">dpy</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-visual" class="parameter">visual</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-attrib" class="parameter">attrib</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-value" class="parameter">value</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dpy"></a>
+                        dpy
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the connection to the X server.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-vis"></a>
+                        vis
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the visual to be queried.
+                    It is a pointer to an
+    <span class="constant">XVisualInfo</span>
+    structure,
+                    not a visual ID or a pointer to a
+    <span class="constant">Visual</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-attrib"></a>
+                        attrib
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the visual attribute to be returned.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-value"></a>
+                        value
+                    </th>
+                    <td>
+    <div class="para">
+                    Returns the requested value.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXGetConfig.html">glXGetConfig</a>
+    sets
+    <a class="parameter" href="#param-value">value</a>
+    to the
+    <a class="parameter" href="#param-attrib">attrib</a>
+    value of windows or GLX pixmaps
+            created with respect to
+    <a class="parameter" href="#param-vis">vis</a>
+    .
+    <a class="function" href="./glXGetConfig.html">glXGetConfig</a>
+    returns an error code if it fails for any reason.
+            Otherwise, zero is returned.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-attrib">attrib</a>
+    is one of the following:
+</div>
+    <div class="para">
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_USE_GL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">True</span>
+    if OpenGL rendering is supported by this visual,
+    <span class="constant">False</span>
+    otherwise.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_BUFFER_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Number of bits per color buffer.
+                        For RGBA visuals,
+    <span class="constant">GLX_BUFFER_SIZE</span>
+    is the sum of
+    <span class="constant">GLX_RED_SIZE</span>
+    ,
+    <span class="constant">GLX_GREEN_SIZE</span>
+    ,
+    <span class="constant">GLX_BLUE_SIZE</span>
+    , and
+    <span class="constant">GLX_ALPHA_SIZE</span>
+    .
+                        For color index visuals,
+    <span class="constant">GLX_BUFFER_SIZE</span>
+    is the size of the
+                        color indexes.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_LEVEL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Frame buffer level of the visual.
+                        Level zero is the default frame buffer.
+                        Positive levels correspond to frame buffers that overlay the default buffer,
+                        and negative levels correspond to frame buffers that underlay the default
+                        buffer.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_RGBA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">True</span>
+    if color buffers store red, green, blue, and alpha values.
+    <span class="constant">False</span>
+    if they store color indexes.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_DOUBLEBUFFER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">True</span>
+    if color buffers exist in front/back pairs that can be swapped,
+    <span class="constant">False</span>
+    otherwise.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_STEREO</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">True</span>
+    if color buffers exist in left/right pairs,
+    <span class="constant">False</span>
+    otherwise.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_AUX_BUFFERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Number of auxiliary color buffers that are available.
+                        Zero indicates that no auxiliary color buffers exist.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_RED_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Number of bits of red stored in each color buffer.
+                        Undefined if
+    <span class="constant">GLX_RGBA</span>
+    is
+    <span class="constant">False</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_GREEN_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Number of bits of green stored in each color buffer.
+                        Undefined if
+    <span class="constant">GLX_RGBA</span>
+    is
+    <span class="constant">False</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_BLUE_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Number of bits of blue stored in each color buffer.
+                        Undefined if
+    <span class="constant">GLX_RGBA</span>
+    is
+    <span class="constant">False</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_ALPHA_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Number of bits of alpha stored in each color buffer.
+                        Undefined if
+    <span class="constant">GLX_RGBA</span>
+    is
+    <span class="constant">False</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_DEPTH_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Number of bits in the depth buffer.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_STENCIL_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Number of bits in the stencil buffer.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_ACCUM_RED_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Number of bits of red stored in the accumulation buffer.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_ACCUM_GREEN_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Number of bits of green stored in the accumulation buffer.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_ACCUM_BLUE_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Number of bits of blue stored in the accumulation buffer.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLX_ACCUM_ALPHA_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Number of bits of alpha stored in the accumulation buffer.
+                    </div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+            The X protocol allows a single visual ID to be instantiated with
+            different numbers of bits per pixel.
+            Windows or GLX pixmaps that will be rendered with OpenGL, however,
+            must be instantiated with a color buffer depth of
+    <span class="constant">GLX_BUFFER_SIZE</span>
+    .
+</div>
+    <div class="para">
+            Although a GLX implementation can export many visuals that support GL
+            rendering,
+            it must support
+            at least one RGBA visual. This visual must have at
+            least one color buffer,
+            a stencil buffer of at least 1 bit,
+            a depth buffer of at least 12 bits,
+            and an accumulation buffer.
+            Alpha bitplanes are optional in this visual.
+            However,
+            its color buffer size must be as great as that of the
+            deepest
+    <span class="constant">TrueColor</span>
+    ,
+    <span class="constant">DirectColor</span>
+    ,
+    <span class="constant">PseudoColor</span>
+    , or
+    <span class="constant">StaticColor</span>
+    visual supported on level zero,
+            and it must itself be made available on level zero.
+</div>
+    <div class="para">
+            In addition, if the X server exports a
+    <span class="constant">PseudoColor</span>
+    or
+    <span class="constant">StaticColor</span>
+    visual on framebuffer level 0, a color index
+            visual is also required on that level.
+            It must have
+            at least one color buffer,
+            a stencil buffer of at least 1 bit,
+            and a depth buffer of at least 12 bits.
+            This visual must
+            have as many
+            color bitplanes as the deepest
+    <span class="constant">PseudoColor</span>
+    or
+    <span class="constant">StaticColor</span>
+    visual supported on level 0.
+</div>
+    <div class="para">
+            Applications are best written to select the visual that most closely
+            meets their requirements.
+            Creating windows or GLX pixmaps with unnecessary buffers can result in
+            reduced rendering performance as well as poor resource allocation.
+        </div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <span class="constant">XVisualInfo</span>
+    is defined in
+    <span class="emphasis">Xutil.h.</span>
+    It is a structure that includes
+    <span class="emphasis">visual</span>
+    ,
+    <span class="emphasis">visualID</span>
+    ,
+    <span class="emphasis">screen</span>
+    , and
+    <span class="emphasis">depth</span>
+    elements.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GLX_NO_EXTENSION</span>
+    is returned if
+    <a class="parameter" href="#param-dpy">dpy</a>
+    does not support the GLX
+            extension.
+</div>
+    <div class="para">
+    <span class="constant">GLX_BAD_SCREEN</span>
+    is returned if the screen of
+    <a class="parameter" href="#param-vis">vis</a>
+    does not correspond
+            to a screen.
+</div>
+    <div class="para">
+    <span class="constant">GLX_BAD_ATTRIBUTE</span>
+    is returned if
+    <a class="parameter" href="#param-attrib">attrib</a>
+    is not a valid GLX attribute.
+</div>
+    <div class="para">
+    <span class="constant">GLX_BAD_VISUAL</span>
+    is returned if
+    <a class="parameter" href="#param-vis">vis</a>
+    doesn't support GLX and an
+            attribute other than
+    <span class="constant">GLX_USE_GL</span>
+    is requested.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glXChooseVisual.html">glXChooseVisual</a>
+    ,
+    <a class="crossref" href="./glXCreateContext.html">glXCreateContext</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

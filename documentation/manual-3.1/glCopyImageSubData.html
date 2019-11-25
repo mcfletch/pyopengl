@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glCopyImageSubData : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glCopyImageSubData</h1>
+</header>
+<main class="content">
+    <section class="purpose">perform a raw data copy between two images</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glCopyImageSubData"></a>
+    <span class="c-function">glCopyImageSubData</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-srcName" class="parameter">srcName</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-srcTarget" class="parameter">srcTarget</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-srcLevel" class="parameter">srcLevel</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-srcX" class="parameter">srcX</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-srcY" class="parameter">srcY</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-srcZ" class="parameter">srcZ</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-dstName" class="parameter">dstName</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-dstTarget" class="parameter">dstTarget</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-dstLevel" class="parameter">dstLevel</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-dstX" class="parameter">dstX</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-dstY" class="parameter">dstY</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-dstZ" class="parameter">dstZ</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-srcWidth" class="parameter">srcWidth</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-srcHeight" class="parameter">srcHeight</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-srcDepth" class="parameter">srcDepth</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glCopyImageSubData"></a>
+    <span class="py-function">glCopyImageSubData</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-srcName" class="parameter">srcName</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-srcTarget" class="parameter">srcTarget</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-srcLevel" class="parameter">srcLevel</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-srcX" class="parameter">srcX</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-srcY" class="parameter">srcY</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-srcZ" class="parameter">srcZ</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dstName" class="parameter">dstName</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dstTarget" class="parameter">dstTarget</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dstLevel" class="parameter">dstLevel</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dstX" class="parameter">dstX</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dstY" class="parameter">dstY</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dstZ" class="parameter">dstZ</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-srcWidth" class="parameter">srcWidth</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-srcHeight" class="parameter">srcHeight</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-srcDepth" class="parameter">srcDepth</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-srcName"></a>
+                        srcName
+                    </th>
+                    <td>
+    <div class="para">
+                    The name of a texture or renderbuffer object from which to copy.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-srcTarget"></a>
+                        srcTarget
+                    </th>
+                    <td>
+    <div class="para">
+                    The target representing the namespace of the source name
+    <a class="parameter" href="#param-srcName">srcName</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-srcLevel"></a>
+                        srcLevel
+                    </th>
+                    <td>
+    <div class="para">
+                    The mipmap level to read from the source.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-srcX"></a>
+                        srcX
+                    </th>
+                    <td>
+    <div class="para">
+                    The X coordinate of the left edge of the souce region to copy.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-srcY"></a>
+                        srcY
+                    </th>
+                    <td>
+    <div class="para">
+                    The Y coordinate of the top edge of the souce region to copy.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-srcZ"></a>
+                        srcZ
+                    </th>
+                    <td>
+    <div class="para">
+                    The Z coordinate of the near edge of the souce region to copy.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dstName"></a>
+                        dstName
+                    </th>
+                    <td>
+    <div class="para">
+                    The name of a texture or renderbuffer object to which to copy.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dstTarget"></a>
+                        dstTarget
+                    </th>
+                    <td>
+    <div class="para">
+                    The target representing the namespace of the destination name
+    <a class="parameter" href="#param-dstName">dstName</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dstX"></a>
+                        dstX
+                    </th>
+                    <td>
+    <div class="para">
+                    The X coordinate of the left edge of the destination region.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dstY"></a>
+                        dstY
+                    </th>
+                    <td>
+    <div class="para">
+                    The Y coordinate of the top edge of the destination region.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dstZ"></a>
+                        dstZ
+                    </th>
+                    <td>
+    <div class="para">
+                    The Z coordinate of the near edge of the destination region.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-srcWidth"></a>
+                        srcWidth
+                    </th>
+                    <td>
+    <div class="para">
+                    The width of the region to be copied.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-srcHeight"></a>
+                        srcHeight
+                    </th>
+                    <td>
+    <div class="para">
+                    The height of the region to be copied.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-srcDepth"></a>
+                        srcDepth
+                    </th>
+                    <td>
+    <div class="para">
+                    The depth of the region to be copied.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glCopyImageSubData.html">glCopyImageSubData</a>
+    may be used to copy data from
+            one image (i.e. texture or renderbuffer) to another.
+    <a class="function" href="./glCopyImageSubData.html">glCopyImageSubData</a>
+    does not perform general-purpose conversions
+            such as scaling, resizing, blending, color-space, or format
+            conversions. It should be considered to operate in a manner
+            similar to a CPU memcpy. CopyImageSubData can copy between
+            images with different internal formats, provided
+            the formats are compatible.
+</div>
+    <div class="para">
+    <a class="function" href="./glCopyImageSubData.html">glCopyImageSubData</a>
+    also allows copying between certain
+            types of compressed and uncompressed internal formats. This copy does not perform on-the-fly compression
+            or decompression. When copying from an uncompressed internal format
+            to a compressed internal format, each texel of uncompressed data
+            becomes a single block of compressed data. When copying from a
+            compressed internal format to an uncompressed internal format,
+            a block of compressed data becomes a single texel of uncompressed
+            data. The texel size of the uncompressed format must be the same
+            size the block size of the compressed formats. Thus it is permitted
+            to copy between a 128-bit uncompressed format and a compressed
+            format which uses 8-bit 4x4 blocks, or between a 64-bit uncompressed
+            format and a compressed format which uses 4-bit 4x4 blocks.
+</div>
+    <div class="para">
+            The source object is identified by
+    <a class="parameter" href="#param-srcName">srcName</a>
+    and
+    <a class="parameter" href="#param-srcTarget">srcTarget</a>
+    and the destination object is identified
+            by
+    <a class="parameter" href="#param-dstName">dstName</a>
+    and
+    <a class="parameter" href="#param-dstTarget">dstTarget</a>
+    .
+            The interpretation of the name depends on the value
+            of the corresponding
+    <a class="parameter" href="#param-target">target</a>
+    parameter.
+            If
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_RENDERBUFFER</span>
+    , the name is interpreted as the name of a
+            renderbuffer object.  If the target parameter is a texture target,
+            the name is interpreted as a texture object.  All non-proxy
+            texture targets are accepted, with the exception of
+    <span class="constant">GL_TEXTURE_BUFFER</span>
+    and the cubemap face selectors.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-srcLevel">srcLevel</a>
+    and
+    <a class="parameter" href="#param-dstLevel">dstLevel</a>
+    identify the source and destination
+            level of detail.  For textures, this must be a valid level of
+            detail in the texture object.  For renderbuffers, this value must
+            be zero.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-srcX">srcX</a>
+    ,
+    <a class="parameter" href="#param-srcY">srcY</a>
+    , and
+    <a class="parameter" href="#param-srcZ">srcZ</a>
+    specify the lower left texel
+            coordinates of a
+    <a class="parameter" href="#param-srcWidth">srcWidth</a>
+    -wide by
+    <a class="parameter" href="#param-srcHeight">srcHeight</a>
+    -high by
+    <a class="parameter" href="#param-srcDepth">srcDepth</a>
+    -deep rectangular subregion of the source texel array.
+            Similarly,
+    <a class="parameter" href="#param-dstX">dstX</a>
+    ,
+    <a class="parameter" href="#param-dstY">dstY</a>
+    and
+    <a class="parameter" href="#param-dstZ">dstZ</a>
+    specify the coordinates of a subregion of the
+            destination texel array.  The source and destination subregions
+            must be contained entirely within the specified level of the
+            corresponding image objects.
+</div>
+    <div class="para">
+            The dimensions are always specified in texels, even for compressed
+            texture formats. However, it should be noted that if only one of the
+            source and destination textures is compressed then the number of
+            texels touched in the compressed image will be a factor of the
+            block size larger than in the uncompressed image.
+        </div>
+    <div class="para">
+            Slices of a
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    <span class="constant">GL_TEXTURE_3D</span>
+    and faces of
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    are all compatible provided
+            they share a compatible internal format, and multiple slices or faces
+            may be copied between these objects with a single call by specifying the
+            starting slice with
+    <a class="parameter" href="#param-srcZ">srcZ</a>
+    and
+    <a class="parameter" href="#param-dstZ">dstZ</a>
+    , and the number of slices to
+            be copied with
+    <a class="parameter" href="#param-srcDepth">srcDepth</a>
+    .  Cubemap textures always have six faces
+            which are selected by a zero-based face index.
+</div>
+    <div class="para">
+            For the purposes of CopyImageSubData, two internal formats are considered compatible if
+            any of the following conditions are met:
+    <div class="itemizedlist">
+    <dd class="listitem">
+    <div class="para">
+                        the formats are the same,
+                    </div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+                        the formats are considered compatible according
+                        to the compatibility rules used for texture
+                        views as defined in section 3.9.X. In
+                        particular, if both internal formats are listed
+                        in the same entry of Table 3.X.2, they are
+                        considered compatible, or
+                    </div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+                        one format is compressed and the other is
+                        uncompressed and Table 4.X.1 lists the two
+                        formats in the same row.
+                    </div>
+</dd>
+</div>
+    If the formats are not compatible, an INVALID_OPERATION error is generated.
+</div>
+    <div class="table">
+    <h2 class="title">Sized Internal Formats</h2>
+    <div class="tgroup">
+    <div class="thead">
+    <div class="row">
+    <div class="entry">
+    <span class="emphasis"> Texel / Block Size </span>
+</div>
+    <div class="entry">
+    <span class="emphasis"> Uncompressed Internal Format </span>
+</div>
+    <div class="entry">
+    <span class="emphasis"> Compressed Internal Format(s) </span>
+</div>
+</div>
+</div>
+    <div class="tbody">
+    <div class="row">
+    <div class="entry">64-bit</div>
+    <div class="entry">
+    <span class="constant">GL_RGBA32UI</span>
+    ,
+    <span class="constant">GL_RGBA32I</span>
+    ,
+    <span class="constant">GL_RGBA32F</span>
+</div>
+    <div class="entry">
+    <span class="constant">GL_COMPRESSED_RGBA_S3TC_DXT3_EXT</span>
+    ,
+    <span class="constant">GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RGBA_S3TC_DXT5_EXT</span>
+    ,
+    <span class="constant">GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RG_RGTC2</span>
+    ,
+    <span class="constant">GL_COMPRESSED_SIGNED_RG_RGTC2</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RGBA_BPTC_UNORM</span>
+    ,
+    <span class="constant">GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT</span>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">128-bit</div>
+    <div class="entry">
+    <span class="constant">GL_RGBA16UI</span>
+    ,
+    <span class="constant">GL_RGBA16I</span>
+    ,
+    <span class="constant">GL_RGBA16F</span>
+    ,
+    <span class="constant">GL_RG32F</span>
+    ,
+    <span class="constant">GL_RG32UI</span>
+    ,
+    <span class="constant">GL_RG32I</span>
+    ,
+    <span class="constant">GL_RGBA16</span>
+    ,
+    <span class="constant">GL_RGBA16_SNORM</span>
+</div>
+    <div class="entry">
+    <span class="constant">GL_COMPRESSED_RGB_S3TC_DXT1_EXT</span>
+    ,
+    <span class="constant">GL_COMPRESSED_SRGB_S3TC_DXT1_EXT</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RGBA_S3TC_DXT1_EXT</span>
+    ,
+    <span class="constant">GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RED_RGTC1</span>
+    ,
+    <span class="constant">GL_COMPRESSED_SIGNED_RED_RGTC1</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the texel size of
+            the uncompressed image is not equal to the block size of the
+            compressed image.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if either target parameter is not
+    <span class="constant">GL_RENDERBUFFER</span>
+    ,
+            a valid non-proxy texture target other than
+    <span class="constant">GL_TEXTURE_BUFFER</span>
+    , or is one
+            of the cubemap face selectors.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    does not match the type of the object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if either object is a texture and the texture is
+            not complete.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the source and
+            destination internal formats are not compatible, or if the number of samples do not match.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if either name does not correspond to a
+            valid renderbuffer or texture object according to the corresponding
+            target parameter.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if the specified level of either the source or destination is not
+            a valid level for the corresponding image.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if the
+            dimensions of the either subregion exceeds the boundaries of the
+            corresponding image object, or if the image format is compressed
+            and the dimensions of the subregion fail to meet the alignment
+            constraints of the format.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_COMPUTE_WORK_GROUP_COUNT</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glCopyImageSubData.html">glCopyImageSubData</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glDispatchComputeIndirect.html">glDispatchComputeIndirect</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2013-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

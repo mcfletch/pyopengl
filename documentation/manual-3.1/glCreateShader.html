@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glCreateShader : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glCreateShader</h1>
+</header>
+<main class="content">
+    <section class="purpose">Creates a shader object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glCreateShader"></a>
+    <span class="c-function">glCreateShader</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-shaderType" class="parameter">shaderType</a>
+        )
+    </span>
+</span>)-&gt; GLuint
+</div>
+                <div class="py-signature">
+    <a name="py-glCreateShader"></a>
+    <span class="py-function">glCreateShader</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_uint'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-shaderType"></a>
+                        shaderType
+                    </th>
+                    <td>
+    <div class="para">Specifies the type of shader to be created.
+                    Must be one of
+    <span class="constant">GL_COMPUTE_SHADER</span>
+    ,
+    <span class="constant">GL_VERTEX_SHADER</span>
+    ,
+    <span class="constant">GL_TESS_CONTROL_SHADER</span>
+    ,
+    <span class="constant">GL_TESS_EVALUATION_SHADER</span>
+    ,
+    <span class="constant">GL_GEOMETRY_SHADER</span>
+    ,
+                    or
+    <span class="constant">GL_FRAGMENT_SHADER</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glCreateShader.html">glCreateShader</a>
+    creates an empty
+        shader object and returns a non-zero value by which it can be
+        referenced. A shader object is used to maintain the source code
+        strings that define a shader.
+    <a class="parameter" href="#param-shaderType">shaderType</a>
+    indicates the type of shader to be created. Five types of shader
+        are supported. A shader of type
+    <span class="constant">GL_COMPUTE_SHADER</span>
+    is a shader that is
+        intended to run on the programmable compute processor. A shader of type
+    <span class="constant">GL_VERTEX_SHADER</span>
+    is a shader that is
+        intended to run on the programmable vertex processor.
+        A shader of type
+    <span class="constant">GL_TESS_CONTROL_SHADER</span>
+    is a shader that
+        is intended to run on the programmable tessellation processor in the control stage.
+        A shader of type
+    <span class="constant">GL_TESS_EVALUATION_SHADER</span>
+    is a shader that
+        is intended to run on the programmable tessellation processor in the evaluation stage.
+        A shader of type
+    <span class="constant">GL_GEOMETRY_SHADER</span>
+    is a shader that is intended to
+        run on the programmable geometry processor. A shader of
+        type
+    <span class="constant">GL_FRAGMENT_SHADER</span>
+    is a shader that is
+        intended to run on the programmable fragment processor.
+</div>
+    <div class="para">When created, a shader object's
+    <span class="constant">GL_SHADER_TYPE</span>
+    parameter is set to either
+    <span class="constant">GL_COMPUTE_SHADER</span>
+    ,
+    <span class="constant">GL_VERTEX_SHADER</span>
+    ,
+    <span class="constant">GL_TESS_CONTROL_SHADER</span>
+    ,
+    <span class="constant">GL_TESS_EVALUATION_SHADER</span>
+    ,
+    <span class="constant">GL_GEOMETRY_SHADER</span>
+    or
+    <span class="constant">GL_FRAGMENT_SHADER</span>
+    , depending on the value
+        of
+    <a class="parameter" href="#param-shaderType">shaderType</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">Like buffer and texture objects, the name space for
+        shader objects may be shared across a set of contexts, as long
+        as the server sides of the contexts share the same address
+        space. If the name space is shared across contexts, any attached
+        objects and the data associated with those attached objects are
+        shared as well.</div>
+    <div class="para">Applications are responsible for providing the
+        synchronization across API calls when objects are accessed from
+        different execution threads.</div>
+    <div class="para">
+    <span class="constant">GL_COMPUTE_SHADER</span>
+    is available only if the GL version is 4.3 or higher.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">This function returns 0 if an error occurs creating the
+        shader object.</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-shaderType">shaderType</a>
+    is not an accepted value.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetShader.html">glGetShader</a>
+    with a valid shader object and the parameter to be queried
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetShaderInfoLog.html">glGetShaderInfoLog</a>
+    with a valid shader object
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetShaderSource.html">glGetShaderSource</a>
+    with a valid shader object
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsShader.html">glIsShader</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glCreateShader.html">glCreateShader</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glAttachShader.html">glAttachShader</a>
+    ,
+    <a class="crossref" href="./glCompileShader.html">glCompileShader</a>
+    ,
+    <a class="crossref" href="./glDeleteShader.html">glDeleteShader</a>
+    ,
+    <a class="crossref" href="./glDetachShader.html">glDetachShader</a>
+    ,
+    <a class="crossref" href="./glShaderSource.html">glShaderSource</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2005 3Dlabs Inc. Ltd.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glCreateShader</div>
+        <div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/shader.py">pymt/graphx/shader.py</a>
+    Lines: <span class="sample-lines">11, 48</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">34</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">34</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">34</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">34</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">35</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">34</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

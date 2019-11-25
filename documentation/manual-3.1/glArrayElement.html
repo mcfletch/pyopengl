@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glArrayElement : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glArrayElement</h1>
+</header>
+<main class="content">
+    <section class="purpose">render a vertex using the specified vertex array element</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glArrayElement"></a>
+    <span class="c-function">glArrayElement</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLint (
+            <a href="#param-i" class="parameter">i</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glArrayElement"></a>
+    <span class="py-function">glArrayElement</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-i" class="parameter">i</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-i"></a>
+                        i
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies an index into the enabled vertex data arrays.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glArrayElement.html">glArrayElement</a>
+    commands are used within
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    /
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    pairs to
+            specify vertex and attribute data for point, line, and polygon
+            primitives. If
+    <span class="constant">GL_VERTEX_ARRAY</span>
+    is enabled when
+    <a class="function" href="./glArrayElement.html">glArrayElement</a>
+    is called, a
+            single vertex is drawn, using
+            vertex and attribute data taken from location
+    <a class="parameter" href="#param-i">i</a>
+    of the enabled
+            arrays. If
+    <span class="constant">GL_VERTEX_ARRAY</span>
+    is not enabled, no drawing occurs but
+            the attributes corresponding to the enabled arrays are modified.
+</div>
+    <div class="para">
+            Use
+    <a class="function" href="./glArrayElement.html">glArrayElement</a>
+    to construct primitives by indexing vertex data, rather than
+            by streaming through arrays of data in first-to-last order. Because
+            each call specifies only a single vertex, it is possible to explicitly
+            specify per-primitive attributes such as a single normal for each
+            triangle.
+</div>
+    <div class="para">
+            Changes made to array data between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the
+            corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    may affect calls to
+    <a class="function" href="./glArrayElement.html">glArrayElement</a>
+    that are made
+            within the same
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    /
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    period in nonsequential ways.
+            That is, a call to
+    <a class="function" href="./glArrayElement.html">glArrayElement</a>
+    that precedes a change to array data may
+            access the changed data, and a call that follows a change to array data
+            may access original data.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glArrayElement.html">glArrayElement</a>
+    is available only if the GL version is 1.1 or greater.
+</div>
+    <div class="para">
+    <a class="function" href="./glArrayElement.html">glArrayElement</a>
+    is included in display lists. If
+    <a class="function" href="./glArrayElement.html">glArrayElement</a>
+    is entered into a
+            display list, the necessary array data (determined by the array
+            pointers and enables) is also entered into the display list. Because
+            the array pointers and enables are client-side state, their values
+            affect display lists when the lists are created, not when the lists
+            are executed.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    may be generated if
+    <a class="parameter" href="#param-i">i</a>
+    is negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to an
+            enabled array and the buffer object's data store is currently mapped.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glClientActiveTexture.html">glClientActiveTexture</a>
+    ,
+    <a class="crossref" href="./glColorPointer.html">glColorPointer</a>
+    ,
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    ,
+    <a class="crossref" href="./glEdgeFlagPointer.html">glEdgeFlagPointer</a>
+    ,
+    <a class="crossref" href="./glFogCoordPointer.html">glFogCoordPointer</a>
+    ,
+    <a class="crossref" href="./glGetPointerv.html">glGetPointerv</a>
+    ,
+    <a class="crossref" href="./glIndexPointer.html">glIndexPointer</a>
+    ,
+    <a class="crossref" href="./glInterleavedArrays.html">glInterleavedArrays</a>
+    ,
+    <a class="crossref" href="./glNormalPointer.html">glNormalPointer</a>
+    ,
+    <a class="crossref" href="./glSecondaryColorPointer.html">glSecondaryColorPointer</a>
+    ,
+    <a class="crossref" href="./glTexCoordPointer.html">glTexCoordPointer</a>
+    ,
+    <a class="crossref" href="./glVertexPointer.html">glVertexPointer</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glArrayElement</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glarrayelement.py">tests/glarrayelement.py</a>
+    Lines: <span class="sample-lines">22</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetShaderPrecisionFormat : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetShaderPrecisionFormat</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieve the range and precision for numeric formats supported by the shader compiler</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetShaderPrecisionFormat"></a>
+    <span class="c-function">glGetShaderPrecisionFormat</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-shaderType" class="parameter">shaderType</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-precisionType" class="parameter">precisionType</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-range" class="parameter">range</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-precision" class="parameter">precision</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetShaderPrecisionFormat"></a>
+    <span class="py-function">glGetShaderPrecisionFormat</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-shadertype" class="parameter">shadertype</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-precisiontype" class="parameter">precisiontype</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-range" class="parameter">range</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-precision" class="parameter">precision</a>
+    </span>
+</span> )
+    <pre class="pydoc">Provides range and precision if not provided, returns (range,precision)</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-shaderType"></a>
+                        shaderType
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the type of shader whose precision to query.
+    <a class="parameter" href="#param-shaderType">shaderType</a>
+    must be
+    <span class="constant">GL_VERTEX_SHADER</span>
+    or
+    <span class="constant">GL_FRAGMENT_SHADER</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-precisionType"></a>
+                        precisionType
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the numeric format whose precision and range to query.
+            </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-range"></a>
+                        range
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the address of array of two integers into which encodings of the implementation's
+                numeric range are returned.
+            </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-precision"></a>
+                        precision
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the address of an integer into which the numeric precision of the implementation
+                is written.
+            </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetShaderPrecisionFormat.html">glGetShaderPrecisionFormat</a>
+    retrieves the numeric range and precision for
+            the implementation's representation of quantities in different numeric formats in specified
+            shader type.
+    <a class="parameter" href="#param-shaderType">shaderType</a>
+    specifies the type of shader for which the numeric
+            precision and range is to be retrieved and must be one of
+    <span class="constant">GL_VERTEX_SHADER</span>
+    or
+    <span class="constant">GL_FRAGMENT_SHADER</span>
+    .
+    <a class="parameter" href="#param-precisionType">precisionType</a>
+    specifies the
+            numeric format to query and must be one of
+    <span class="constant">GL_LOW_FLOAT</span>
+    ,
+    <span class="constant">GL_MEDIUM_FLOAT</span>
+    <span class="constant">GL_HIGH_FLOAT</span>
+    ,
+    <span class="constant">GL_LOW_INT</span>
+    ,
+    <span class="constant">GL_MEDIUM_INT</span>
+    ,
+            or
+    <span class="constant">GL_HIGH_INT</span>
+    .
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-range">range</a>
+    points to an array of two integers into which the format's numeric range
+            will be returned. If min and max are the smallest values representable in the format, then the values
+            returned are defined to be:
+    <a class="parameter" href="#param-range">range</a>
+    [0] = floor(log2(|min|)) and
+    <a class="parameter" href="#param-range">range</a>
+    [1] = floor(log2(|max|)).
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-precision">precision</a>
+    specifies the address of an integer into which will be written
+            the log2 value of the number of bits of precision of the format. If the smallest representable
+            value greater than 1 is 1 +
+    <span class="emphasis">eps</span>
+    , then the integer addressed by
+    <a class="parameter" href="#param-precision">precision</a>
+    will contain floor(-log2(eps)).
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-shaderType">shaderType</a>
+    or
+    <a class="parameter" href="#param-precisionType">precisionType</a>
+    is not an accepted value.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetShaderPrecisionFormat.html">glGetShaderPrecisionFormat</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glGetShaderPrecisionFormat</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/arbsync.py">tests/arbsync.py</a>
+    Lines: <span class="sample-lines">51</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

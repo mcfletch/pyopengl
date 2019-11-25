@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetTransformFeedback : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetTransformFeedback</h1>
+</header>
+<main class="content">
+    <section class="purpose">query the state of a transform feedback object.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTransformFeedbacki64_v"></a>
+    <span class="c-function">glGetTransformFeedbacki64_v</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-xfb" class="parameter">xfb</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint64 *(
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTransformFeedbacki64_v"></a>
+    <span class="py-function">glGetTransformFeedbacki64_v</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-xfb" class="parameter">xfb</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTransformFeedbacki_v"></a>
+    <span class="c-function">glGetTransformFeedbacki_v</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-xfb" class="parameter">xfb</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTransformFeedbacki_v"></a>
+    <span class="py-function">glGetTransformFeedbacki_v</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-xfb" class="parameter">xfb</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTransformFeedbackiv"></a>
+    <span class="c-function">glGetTransformFeedbackiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-xfb" class="parameter">xfb</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTransformFeedbackiv"></a>
+    <span class="py-function">glGetTransformFeedbackiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-xfb" class="parameter">xfb</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-xfb"></a>
+                        xfb
+                    </th>
+                    <td>
+    <div class="para">The name of an existing transform feedback object, or zero for
+          the default transform feedback object.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">Property to use for the query. Must be one of the values:
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_BINDING</span>
+    ,
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_START</span>
+    ,
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_SIZE</span>
+    ,
+    <span class="constant">GL_TRANSFORM_FEEDBACK_PAUSED</span>
+    ,
+    <span class="constant">GL_TRANSFORM_FEEDBACK_ACTIVE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">Index of the transform feedback stream (for indexed
+          state).</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-param"></a>
+                        param
+                    </th>
+                    <td>
+    <div class="para">The address of a buffer into which will be written the
+          requested state information.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">In order to use the Transform Feedback functionality, you need to
+    configure the Transform Feedback Buffer indexed bindings. This can be
+    achieved by either using
+    <a class="function" href="./glBindBufferBase.html">glBindBufferBase</a>
+    or
+    <a class="function" href="./glBindBuffersBase.html">glBindBuffersBase</a>
+    to associate whole buffer object
+    storage to one of the Transform Feedback Binding Points, or by calling
+    <a class="function" href="./glBindBufferRange.html">glBindBufferRange</a>
+    or
+    <a class="function" href="./glBindBuffersRange.html">glBindBuffersRange</a>
+    to use a region of a buffer object
+    storage for the binding. You may want to (but are not required to) bind a
+    Transform Feedback Object first, in order to cache the binding
+    configuration. This usually allows you to restore the Transform Feedback
+    configuration faster, than if you were to execute a list of API calls
+    necessary to set up the Transform Feedback state of your liking.
+</div>
+    <div class="para">This reference page discusses two types of getters that operate on
+    Transform Feedback Objects and their bindings.</div>
+    <div class="para">The first class operates on general Transform Feedback binding point
+    and includes
+    <a class="function" href="./glGetTransformFeedback.html#c-glGetTransformFeedbackiv">glGetTransformFeedbackiv</a>
+    function.
+    <a class="function" href="./glGetTransformFeedback.html#c-glGetTransformFeedbackiv">glGetTransformFeedbackiv</a>
+    can be used to retrieve
+    information about Transform Feedback object bound to the general Transform
+    Feedback binding point, as configured with a
+    <a class="function" href="./glBindTransformFeedback.html">glBindTransformFeedback</a>
+    call. In this case, you can
+    check:
+</div>
+    <div class="para">
+    <div class="itemizedlist">
+    <dd class="listitem">
+    <div class="para">What the ID of the currently bound Transform Feedback Object
+          is;
+          (
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_BINDING</span>
+    )
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">Whether the Transform Feedback process is currently paused;
+          (
+    <span class="constant">GL_TRANSFORM_FEEDBACK_PAUSED</span>
+    )
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">Whether the Transform Feedback process has been begun and is
+          currently undergoing;
+          (
+    <span class="constant">GL_TRANSFORM_FEEDBACK_ACTIVE</span>
+    )
+</div>
+</dd>
+</div>
+</div>
+    <div class="para">The latter class, which includes
+    <a class="function" href="./glGetTransformFeedback.html#c-glGetTransformFeedbacki_v">glGetTransformFeedbacki_v</a>
+    and
+    <a class="function" href="./glGetTransformFeedback.html#c-glGetTransformFeedbacki64_v">glGetTransformFeedbacki64_v</a>
+    functions, can be used to
+    check what the current configuration of each of the buffer object regions
+    bound to Transform Feedback Buffer binding points is. This allows you to
+    query for the following information:
+</div>
+    <div class="para">
+    <div class="itemizedlist">
+    <dd class="listitem">
+    <div class="para">
+    <a class="function" href="./glGetTransformFeedback.html#c-glGetTransformFeedbacki_v">glGetTransformFeedbacki_v</a>
+    only: What the
+          ID of the Buffer Object bound to a Transform Feedback Binding Point
+          of user-specified index is;
+          (
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_BINDING</span>
+    ).
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <a class="function" href="./glGetTransformFeedback.html#c-glGetTransformFeedbacki64_v">glGetTransformFeedbacki64_v</a>
+    only: What
+          the start offset configured for the binding is;
+          (
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_START</span>
+    );
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <a class="function" href="./glGetTransformFeedback.html#c-glGetTransformFeedbacki64_v">glGetTransformFeedbacki64_v</a>
+    only: What
+          the length of the region used for the binding is;
+          (
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_SIZE</span>
+    );
+</div>
+</dd>
+</div>
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    error is generated if
+    <a class="parameter" href="#param-xfb">xfb</a>
+    is not zero or the name of an existing
+    transform feedback object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    error is generated by
+    <a class="function" href="./glGetTransformFeedback.html#c-glGetTransformFeedbackiv">glGetTransformFeedbackiv</a>
+    if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not
+    <span class="constant">GL_TRANSFORM_FEEDBACK_PAUSED</span>
+    or
+    <span class="constant">GL_TRANSFORM_FEEDBACK_ACTIVE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    error is generated by
+    <a class="function" href="./glGetTransformFeedback.html#c-glGetTransformFeedbacki_v">glGetTransformFeedbacki_v</a>
+    if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_BINDING</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    error is generated by
+    <a class="function" href="./glGetTransformFeedback.html#c-glGetTransformFeedbacki64_v">glGetTransformFeedbacki64_v</a>
+    if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_START</span>
+    or
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_SIZE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    error is generated by
+    <a class="function" href="./glGetTransformFeedback.html#c-glGetTransformFeedbacki_v">glGetTransformFeedbacki_v</a>
+    and
+    <a class="function" href="./glGetTransformFeedback.html#c-glGetTransformFeedbacki64_v">glGetTransformFeedbacki64_v</a>
+    if
+    <a class="parameter" href="#param-index">index</a>
+    is greater than or equal to the number of
+    binding points for transform feedback (the value of
+    <span class="constant">GL_MAX_TRANSFORM_FEEDBACK_BUFFERS</span>
+    ).
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetTransformFeedback.html#c-glGetTransformFeedbackiv">glGetTransformFeedbackiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetTransformFeedback.html#c-glGetTransformFeedbacki_v">glGetTransformFeedbacki_v</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    glGetTransformFeedbacki64v
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBindBufferBase.html">glBindBufferBase</a>
+    ,
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    ,
+    <a class="crossref" href="./glBindBuffersBase.html">glBindBuffersBase</a>
+    ,
+    <a class="crossref" href="./glBindBuffersRange.html">glBindBuffersRange</a>
+    ,
+    <a class="crossref" href="./glBindTransformFeedback.html">glBindTransformFeedback</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glFramebufferTexture2D : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glFramebufferTexture2D</h1>
+</header>
+<main class="content">
+    <section class="purpose">attach a level of a texture object as a logical buffer to the currently bound framebuffer object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glFramebufferTexture2D"></a>
+    <span class="c-function">glFramebufferTexture2D</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-attachment" class="parameter">attachment</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-textarget" class="parameter">textarget</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-level" class="parameter">level</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glFramebufferTexture2D"></a>
+    <span class="py-function">glFramebufferTexture2D</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-attachment" class="parameter">attachment</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-textarget" class="parameter">textarget</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the framebuffer target.
+    <a class="parameter" href="#param-target">target</a>
+    must be
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    ,
+    <span class="constant">GL_READ_FRAMEBUFFER</span>
+    , or
+    <span class="constant">GL_FRAMEBUFFER</span>
+    .
+    <span class="constant">GL_FRAMEBUFFER</span>
+    is equivalent to
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-attachment"></a>
+                        attachment
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the attachment point of the framebuffer.
+    <a class="parameter" href="#param-attachment">attachment</a>
+    must be
+    <span class="constant">GL_COLOR_ATTACHMENT</span>
+    <span class="emphasis">i</span>
+    ,
+    <span class="constant">GL_DEPTH_ATTACHMENT</span>
+    ,
+    <span class="constant">GL_STENCIL_ATTACHMENT</span>
+    or
+    <span class="constant">GL_DEPTH_STENCIL_ATTACHMENT</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-textarget"></a>
+                        textarget
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a 2D texture target, or for cube map textures, which face is to be attached.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the texture object to attach to the framebuffer attachment point named by
+    <a class="parameter" href="#param-attachment">attachment</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-level"></a>
+                        level
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the mipmap level of
+    <a class="parameter" href="#param-texture">texture</a>
+    to attach.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glFramebufferTexture2D.html">glFramebufferTexture2D</a>
+    attaches a selected mipmap level or image of a texture object as one of the
+            logical buffers of the framebuffer object currently bound to
+    <a class="parameter" href="#param-target">target</a>
+    .
+    <a class="parameter" href="#param-target">target</a>
+    must
+            be
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    ,
+    <span class="constant">GL_READ_FRAMEBUFFER</span>
+    , or
+    <span class="constant">GL_FRAMEBUFFER</span>
+    .
+    <span class="constant">GL_FRAMEBUFFER</span>
+    is equivalent to
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    .
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-attachment">attachment</a>
+    specifies the logical attachment of the framebuffer and must be
+    <span class="constant">GL_COLOR_ATTACHMENT</span>
+    <span class="emphasis">i</span>
+    ,
+    <span class="constant">GL_DEPTH_ATTACHMENT</span>
+    ,
+    <span class="constant">GL_STENCIL_ATTACHMENT</span>
+    or
+    <span class="constant">GL_DEPTH_STENCIL_ATTACHMENT</span>
+    .
+    <span class="emphasis">i</span>
+    in
+    <span class="constant">GL_COLOR_ATTACHMENT</span>
+    <span class="emphasis">i</span>
+    may range from zero to
+            the value of
+    <span class="constant">GL_MAX_COLOR_ATTACHMENTS</span>
+    - 1. Attaching a level of a texture to
+    <span class="constant">GL_DEPTH_STENCIL_ATTACHMENT</span>
+    is equivalent to attaching that level to both the
+    <span class="constant">GL_DEPTH_ATTACHMENT</span>
+    <span class="emphasis">and</span>
+    the
+    <span class="constant">GL_STENCIL_ATTACHMENT</span>
+    attachment points simultaneously.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-textarget">textarget</a>
+    specifies what type of texture is named by
+    <a class="parameter" href="#param-texture">texture</a>
+    , and for
+            cube map textures, specifies the face that is to be attached. If
+    <a class="parameter" href="#param-texture">texture</a>
+    is not zero, it
+            must be the name of an existing two dimensional texture with
+    <a class="parameter" href="#param-textarget">textarget</a>
+    set to
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+                        unless it is a cube map texture, in which case
+    <a class="parameter" href="#param-textarget">textarget</a>
+    must be
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_X</span>
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_X</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_Y</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_Y</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_Z</span>
+    , or
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_Z</span>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-texture">texture</a>
+    is non-zero, the specified
+    <a class="parameter" href="#param-level">level</a>
+    of the texture object named
+    <a class="parameter" href="#param-texture">texture</a>
+    is attached to the framebuffer attachment point named by
+    <a class="parameter" href="#param-attachment">attachment</a>
+    .
+</div>
+    <div class="para">
+                        If
+    <a class="parameter" href="#param-textarget">textarget</a>
+    is one of
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_X</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_Y</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_Z</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_X</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_Y</span>
+    ,
+                        or
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_Z</span>
+    , then
+    <a class="parameter" href="#param-level">level</a>
+    must be greater
+            than or equal to zero and less than or equal to log
+    <div class="subscript">2</div>
+    of the value of
+    <span class="constant">GL_MAX_CUBE_MAP_TEXTURE_SIZE</span>
+    . If
+    <a class="parameter" href="#param-textarget">textarget</a>
+    is
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <a class="parameter" href="#param-level">level</a>
+    must be greater than or equal to zero and no larger than log
+    <div class="subscript">2</div>
+    of the value of
+    <span class="constant">GL_MAX_TEXTURE_SIZE</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not one of the accepted tokens.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-attachment">attachment</a>
+    is not one of the attachment points listed above.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if zero is bound to
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-textarget">textarget</a>
+    and
+    <a class="parameter" href="#param-texture">texture</a>
+    are not compatible.
+</div>
+    </section><section class="section">
+    <h2 class="title">API Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>glFramebufferTexture2D</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenFramebuffers.html">glGenFramebuffers</a>
+    ,
+    <a class="crossref" href="./glBindFramebuffer.html">glBindFramebuffer</a>
+    ,
+    <a class="crossref" href="./glGenRenderbuffers.html">glGenRenderbuffers</a>
+    ,
+    <a class="crossref" href="./glFramebufferRenderbuffer.html">glFramebufferRenderbuffer</a>
+    ,
+    <a class="crossref" href="./glFramebufferTextureLayer.html">glFramebufferTextureLayer</a>
+    ,
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glFramebufferTexture2D</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_2.py">tests/shadow_2.py</a>
+    Lines: <span class="sample-lines">88</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

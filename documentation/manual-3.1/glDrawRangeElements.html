@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glDrawRangeElements : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glDrawRangeElements</h1>
+</header>
+<main class="content">
+    <section class="purpose">render primitives from array data</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glDrawRangeElements"></a>
+    <span class="c-function">glDrawRangeElements</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-mode" class="parameter">mode</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-start" class="parameter">start</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-end" class="parameter">end</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-count" class="parameter">count</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void * (
+            <a href="#param-indices" class="parameter">indices</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glDrawRangeElements"></a>
+    <span class="py-function">glDrawRangeElements</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-mode" class="parameter">mode</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-start" class="parameter">start</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-end" class="parameter">end</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-count" class="parameter">count</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-indices" class="parameter">indices</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-mode"></a>
+                        mode
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies what kind of primitives to render.
+                    Symbolic constants
+    <span class="constant">GL_POINTS</span>
+    ,
+    <span class="constant">GL_LINE_STRIP</span>
+    ,
+    <span class="constant">GL_LINE_LOOP</span>
+    ,
+    <span class="constant">GL_LINES</span>
+    ,
+    <span class="constant">GL_LINE_STRIP_ADJACENCY</span>
+    ,
+    <span class="constant">GL_LINES_ADJACENCY</span>
+    ,
+    <span class="constant">GL_TRIANGLE_STRIP</span>
+    ,
+    <span class="constant">GL_TRIANGLE_FAN</span>
+    ,
+    <span class="constant">GL_TRIANGLES</span>
+    ,
+    <span class="constant">GL_TRIANGLE_STRIP_ADJACENCY</span>
+    ,
+    <span class="constant">GL_TRIANGLES_ADJACENCY</span>
+    and
+    <span class="constant">GL_PATCHES</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-start"></a>
+                        start
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the minimum array index contained in
+    <a class="parameter" href="#param-indices">indices</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-end"></a>
+                        end
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the maximum array index contained in
+    <a class="parameter" href="#param-indices">indices</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-count"></a>
+                        count
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of elements to be rendered.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the type of the values in
+    <a class="parameter" href="#param-indices">indices</a>
+    . Must be one of
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+    , or
+    <span class="constant">GL_UNSIGNED_INT</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-indices"></a>
+                        indices
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to the location where the indices are stored.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    is a restricted form of
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    .
+    <a class="parameter" href="#param-mode">mode</a>
+    ,
+            and
+    <a class="parameter" href="#param-count">count</a>
+    match the corresponding arguments to
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    , with
+            the additional constraint that all values in the arrays
+    <a class="parameter" href="#param-count">count</a>
+    must lie
+            between
+    <a class="parameter" href="#param-start">start</a>
+    and
+    <a class="parameter" href="#param-end">end</a>
+    , inclusive.
+</div>
+    <div class="para">
+            Implementations denote recommended maximum amounts of vertex and
+            index data,
+            which may be queried by calling
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_ELEMENTS_VERTICES</span>
+    and
+    <span class="constant">GL_MAX_ELEMENTS_INDICES</span>
+    .
+            If
+    <math overflow="scroll">
+                <mrow>
+                    <mi mathvariant="italic">end</mi>
+                    <mo>-</mo>
+                    <mi mathvariant="italic">start</mi>
+                    <mo>+</mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    is greater than the value of
+    <span class="constant">GL_MAX_ELEMENTS_VERTICES</span>
+    , or if
+    <a class="parameter" href="#param-count">count</a>
+    is greater than the value of
+    <span class="constant">GL_MAX_ELEMENTS_INDICES</span>
+    , then the call may operate at reduced
+            performance.  There is no requirement that all vertices in the range
+    <math overflow="scroll">
+                <mfenced open="[" close="]">
+                    <mi mathvariant="italic">start</mi>
+                    <mi mathvariant="italic">end</mi>
+                </mfenced>
+            </math>
+    be referenced.  However, the implementation may
+            partially process unused vertices, reducing performance from what could
+            be achieved with an optimal index set.
+</div>
+    <div class="para">
+            When
+    <a class="function" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    is called, it uses
+    <a class="parameter" href="#param-count">count</a>
+    sequential elements from an
+            enabled array, starting at
+    <a class="parameter" href="#param-start">start</a>
+    to construct a sequence of
+            geometric primitives.
+    <a class="parameter" href="#param-mode">mode</a>
+    specifies what kind of primitives are
+            constructed, and how the array elements construct these primitives. If
+            more than one array is enabled, each is used.
+</div>
+    <div class="para">
+            Vertex attributes that are modified by
+    <a class="function" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    have an
+            unspecified value after
+    <a class="function" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    returns. Attributes that aren't
+            modified maintain their previous values.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <span class="constant">GL_LINE_STRIP_ADJACENCY</span>
+    ,
+    <span class="constant">GL_LINES_ADJACENCY</span>
+    ,
+    <span class="constant">GL_TRIANGLE_STRIP_ADJACENCY</span>
+    and
+    <span class="constant">GL_TRIANGLES_ADJACENCY</span>
+    are available only if the GL version is 3.2 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+            It is an error for indices to lie outside the range
+    <math overflow="scroll">
+                <mfenced open="[" close="]">
+                    <mi mathvariant="italic">start</mi>
+                    <mi mathvariant="italic">end</mi>
+                </mfenced>
+            </math>
+    ,
+            but implementations may not check for this situation. Such indices
+            cause implementation-dependent behavior.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-mode">mode</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-count">count</a>
+    is negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <math overflow="scroll">
+                <mrow>
+                    <mi mathvariant="italic">end</mi>
+                    <mo>&lt;</mo>
+                    <mi mathvariant="italic">start</mi>
+                </mrow>
+            </math>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a geometry shader is active and
+    <a class="parameter" href="#param-mode">mode</a>
+    is incompatible with the input primitive type of the geometry shader in the currently installed program object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to an
+            enabled array or the element array and the buffer object's data store is currently mapped.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_ELEMENTS_VERTICES</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_ELEMENTS_INDICES</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    ,
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    ,
+    <a class="crossref" href="./glDrawElementsBaseVertex.html">glDrawElementsBaseVertex</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXQueryServerString : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXQueryServerString</h1>
+</header>
+<main class="content">
+    <section class="purpose">return string describing the server</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXQueryServerString"></a>
+    <span class="c-function">glXQueryServerString</span>(<span class="parameter-list">
+    <span class="param-def">
+        Display * (
+            <a href="#param-dpy" class="parameter">dpy</a>
+        )
+        ,
+    </span><span class="param-def">
+        int (
+            <a href="#param-screen" class="parameter">screen</a>
+        )
+        ,
+    </span><span class="param-def">
+        int (
+            <a href="#param-name" class="parameter">name</a>
+        )
+    </span>
+</span>)-&gt; const char *
+</div>
+                <div class="py-signature">
+    <a name="py-glXQueryServerString"></a>
+    <span class="py-function">glXQueryServerString</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-dpy" class="parameter">dpy</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-screen" class="parameter">screen</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-name" class="parameter">name</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_char_p'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dpy"></a>
+                        dpy
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the connection to the X server.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-screen"></a>
+                        screen
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the screen number.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies which string is returned:
+                    one of
+    <span class="constant">GLX_VENDOR</span>
+    ,
+    <span class="constant">GLX_VERSION</span>
+    , or
+    <span class="constant">GLX_EXTENSIONS</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXQueryServerString.html">glXQueryServerString</a>
+    returns a pointer to a static, null-terminated string
+            describing some aspect of the server's GLX extension. The possible values for
+    <a class="parameter" href="#param-name">name</a>
+    and the format of the strings is the same as for
+    <a class="crossref" href="./glXGetClientString.html">glXGetClientString</a>
+    . If
+    <a class="parameter" href="#param-name">name</a>
+    is not set to a recognized value,
+    <span class="constant">NULL</span>
+    is returned.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glXQueryServerString.html">glXQueryServerString</a>
+    is available only if the GLX version is 1.1 or greater.
+</div>
+    <div class="para">
+            If the GLX version is 1.1 or 1.0, the GL version must be 1.0.
+            If the GLX version is 1.2, the GL version must be 1.1.
+            If the GLX version is 1.3, the GL version must be 1.2.
+        </div>
+    <div class="para">
+    <a class="function" href="./glXQueryServerString.html">glXQueryServerString</a>
+    only returns information about GLX extensions supported by the server.
+            Call
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+    to get a list of GL extensions.
+            Call
+    <a class="crossref" href="./glXGetClientString.html">glXGetClientString</a>
+    to get a list of GLX extensions supported by the
+            client.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glXQueryVersion.html">glXQueryVersion</a>
+    ,
+    <a class="crossref" href="./glXGetClientString.html">glXGetClientString</a>
+    ,
+    <a class="crossref" href="./glXQueryExtensionsString.html">glXQueryExtensionsString</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

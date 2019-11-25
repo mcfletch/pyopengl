@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glClipPlane : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glClipPlane</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify a plane against which all geometry is clipped</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glClipPlane"></a>
+    <span class="c-function">glClipPlane</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-plane" class="parameter">plane</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLdouble * (
+            <a href="#param-equation" class="parameter">equation</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClipPlane"></a>
+    <span class="py-function">glClipPlane</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-plane" class="parameter">plane</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-equation" class="parameter">equation</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-plane"></a>
+                        plane
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies which clipping plane is being positioned.
+                    Symbolic names of the form
+    <span class="constant">GL_CLIP_PLANE</span>
+    <span class="emphasis">i</span>
+    ,
+                    where
+    <span class="emphasis">i</span>
+    is an integer between 0 and
+    <span class="constant">GL_MAX_CLIP_PLANES</span>
+    <math>
+                        <mn>-1</mn>
+                    </math>
+    ,
+                    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-equation"></a>
+                        equation
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of an array of four double-precision floating-point values.
+                    These values are interpreted as a plane equation.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            Geometry is always clipped against the boundaries of a six-plane frustum
+            in
+    <span class="emphasis">x</span>
+    ,
+    <span class="emphasis">y</span>
+    , and
+    <span class="emphasis">z</span>
+    .
+    <a class="function" href="./glClipPlane.html">glClipPlane</a>
+    allows the specification of additional planes,
+            not necessarily perpendicular to the
+    <span class="emphasis">x</span>
+    ,
+    <span class="emphasis">y</span>
+    , or
+    <span class="emphasis">z</span>
+    axis,
+            against which all geometry is clipped.
+            To determine the maximum number of additional clipping planes, call
+    <a class="crossref" href="./glGet.html#c-glGetIntegerv">glGetIntegerv</a>
+    with argument
+    <span class="constant">GL_MAX_CLIP_PLANES</span>
+    . All
+            implementations support at least six such clipping planes.
+            Because the resulting clipping region is the intersection
+            of the defined half-spaces,
+            it is always convex.
+</div>
+    <div class="para">
+    <a class="function" href="./glClipPlane.html">glClipPlane</a>
+    specifies a half-space using a four-component plane equation.
+            When
+    <a class="function" href="./glClipPlane.html">glClipPlane</a>
+    is called,
+    <a class="parameter" href="#param-equation">equation</a>
+    is transformed by the inverse of the modelview matrix
+            and stored in the resulting eye coordinates.
+            Subsequent changes to the modelview matrix have no effect on the
+            stored plane-equation components.
+            If the dot product of the eye coordinates of a vertex with the
+            stored plane equation components is positive or zero,
+            the vertex is
+    <span class="emphasis">in</span>
+    with respect to that clipping plane.
+            Otherwise, it is
+    <span class="emphasis">out</span>
+    .
+</div>
+    <div class="para">
+            To enable and disable clipping planes, call
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="crossref" href="./glEnable.html#c-glDisable">glDisable</a>
+    with the argument
+    <span class="constant">GL_CLIP_PLANE</span>
+    <span class="emphasis">i</span>
+    ,
+            where
+    <span class="emphasis">i</span>
+    is the plane number.
+</div>
+    <div class="para">
+            All clipping planes are initially defined as (0, 0, 0, 0) in eye coordinates
+            and are
+            disabled.
+        </div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            It is always the case that
+    <span class="constant">GL_CLIP_PLANE</span>
+    <math><mi mathvariant="italic">i</mi></math>
+    =
+    <span class="constant">GL_CLIP_PLANE0</span>
+    +
+    <math><mi mathvariant="italic">i</mi></math>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-plane">plane</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glClipPlane.html">glClipPlane</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetClipPlane.html">glGetClipPlane</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_CLIP_PLANE</span>
+    <span class="emphasis">i</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glClipPlane</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson26.py">PyOpenGL-Demo/NeHe/lesson26.py</a>
+    Lines: <span class="sample-lines">164</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

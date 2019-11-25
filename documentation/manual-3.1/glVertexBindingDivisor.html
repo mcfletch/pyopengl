@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glVertexBindingDivisor : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glVertexBindingDivisor</h1>
+</header>
+<main class="content">
+    <section class="purpose">modify the rate at which generic vertex attributes
+    advance</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glVertexArrayBindingDivisor"></a>
+    <span class="c-function">glVertexArrayBindingDivisor</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-vaobj" class="parameter">vaobj</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-bindingindex" class="parameter">bindingindex</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-divisor" class="parameter">divisor</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glVertexArrayBindingDivisor"></a>
+    <span class="py-function">glVertexArrayBindingDivisor</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-vaobj" class="parameter">vaobj</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bindingindex" class="parameter">bindingindex</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-divisor" class="parameter">divisor</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glVertexBindingDivisor"></a>
+    <span class="c-function">glVertexBindingDivisor</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-bindingindex" class="parameter">bindingindex</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-divisor" class="parameter">divisor</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glVertexBindingDivisor"></a>
+    <span class="py-function">glVertexBindingDivisor</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-bindingindex" class="parameter">bindingindex</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-divisor" class="parameter">divisor</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-vaobj"></a>
+                        vaobj
+                    </th>
+                    <td>
+    <div class="para">Specifies the name of the vertex array object for
+    <a class="function" href="./glVertexBindingDivisor.html#c-glVertexArrayBindingDivisor">glVertexArrayBindingDivisor</a>
+    function.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bindingindex"></a>
+                        bindingindex
+                    </th>
+                    <td>
+    <div class="para">The index of the binding whose divisor to modify.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-divisor"></a>
+                        divisor
+                    </th>
+                    <td>
+    <div class="para">The new value for the instance step rate to apply.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glVertexBindingDivisor.html">glVertexBindingDivisor</a>
+    and
+    <a class="function" href="./glVertexBindingDivisor.html#c-glVertexArrayBindingDivisor">glVertexArrayBindingDivisor</a>
+    modify the rate at which
+    generic vertex attributes advance when rendering multiple instances of
+    primitives in a single draw command. If
+    <a class="parameter" href="#param-divisor">divisor</a>
+    is
+    zero, the attributes using the buffer bound to
+    <a class="parameter" href="#param-bindingindex">bindingindex</a>
+    advance once per vertex. If
+    <a class="parameter" href="#param-divisor">divisor</a>
+    is non-zero, the attributes advance once
+    per
+    <a class="parameter" href="#param-divisor">divisor</a>
+    instances of the set(s) of vertices
+    being rendered. An attribute is referred to as
+    <span class="emphasis">instanced</span>
+    if the corresponding
+    <a class="parameter" href="#param-divisor">divisor</a>
+    value is non-zero.
+</div>
+    <div class="para">
+    <a class="function" href="./glVertexBindingDivisor.html">glVertexBindingDivisor</a>
+    uses currently bound
+    vertex array object , whereas
+    <a class="function" href="./glVertexBindingDivisor.html#c-glVertexArrayBindingDivisor">glVertexArrayBindingDivisor</a>
+    updates state of the
+    vertex array object with ID
+    <a class="parameter" href="#param-vaobj">vaobj</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-bindingindex">bindingindex</a>
+    is greater than or equal to the value
+    of
+    <span class="constant">GL_MAX_VERTEX_ATTRIB_BINDINGS</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    by
+    <a class="function" href="./glVertexBindingDivisor.html">glVertexBindingDivisor</a>
+    is generated if no vertex
+    array object is bound.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glVertexBindingDivisor.html#c-glVertexArrayBindingDivisor">glVertexArrayBindingDivisor</a>
+    if
+    <a class="parameter" href="#param-vaobj">vaobj</a>
+    is not the name of an existing vertex array
+    object.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with arguments
+    <span class="constant">GL_MAX_VERTEX_ATTRIB_BINDINGS</span>
+    ,
+    <span class="constant">GL_VERTEX_BINDING_DIVISOR</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glVertexBindingDivisor.html#c-glVertexArrayBindingDivisor">glVertexArrayBindingDivisor</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glVertexBindingDivisor.html">glVertexBindingDivisor</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBindVertexBuffer.html">glBindVertexBuffer</a>
+    ,
+    <a class="crossref" href="./glVertexAttribBinding.html">glVertexAttribBinding</a>
+    ,
+    <a class="crossref" href="./glVertexAttribPointer.html">glVertexAttribPointer</a>
+    ,
+    <a class="crossref" href="./glVertexBindingDivisor.html">glVertexBindingDivisor</a>
+    ,
+    <a class="crossref" href="./glVertexAttribPointer.html">glVertexAttribPointer</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2013-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

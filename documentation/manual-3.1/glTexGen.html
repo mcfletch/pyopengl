@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glTexGen : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glTexGen</h1>
+</header>
+<main class="content">
+    <section class="purpose">control the generation of texture coordinates</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexGen"></a>
+    <span class="c-function">glTexGen</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexGend"></a>
+    <span class="c-function">glTexGend</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-coord" class="parameter">coord</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexGend"></a>
+    <span class="py-function">glTexGend</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-coord" class="parameter">coord</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexGendv"></a>
+    <span class="c-function">glTexGendv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-coord" class="parameter">coord</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLdouble * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexGendv"></a>
+    <span class="py-function">glTexGendv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-coord" class="parameter">coord</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexGenf"></a>
+    <span class="c-function">glTexGenf</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-coord" class="parameter">coord</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexGenf"></a>
+    <span class="py-function">glTexGenf</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-coord" class="parameter">coord</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexGenfv"></a>
+    <span class="c-function">glTexGenfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-coord" class="parameter">coord</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLfloat * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexGenfv"></a>
+    <span class="py-function">glTexGenfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-coord" class="parameter">coord</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexGeni"></a>
+    <span class="c-function">glTexGeni</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-coord" class="parameter">coord</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexGeni"></a>
+    <span class="py-function">glTexGeni</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-coord" class="parameter">coord</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexGeniv"></a>
+    <span class="c-function">glTexGeniv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-coord" class="parameter">coord</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexGeniv"></a>
+    <span class="py-function">glTexGeniv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-coord" class="parameter">coord</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-coord"></a>
+                        coord
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a texture coordinate.
+                    Must be one of
+    <span class="constant">GL_S</span>
+    ,
+    <span class="constant">GL_T</span>
+    ,
+    <span class="constant">GL_R</span>
+    , or
+    <span class="constant">GL_Q</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the symbolic name of the texture-coordinate generation function.
+                    Must be
+    <span class="constant">GL_TEXTURE_GEN_MODE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-param"></a>
+                        param
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a single-valued texture generation parameter,
+                    one of
+    <span class="constant">GL_OBJECT_LINEAR</span>
+    ,
+    <span class="constant">GL_EYE_LINEAR</span>
+    ,
+    <span class="constant">GL_SPHERE_MAP</span>
+    ,
+    <span class="constant">GL_NORMAL_MAP</span>
+    , or
+    <span class="constant">GL_REFLECTION_MAP</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-coord"></a>
+                        coord
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a texture coordinate.
+                    Must be one of
+    <span class="constant">GL_S</span>
+    ,
+    <span class="constant">GL_T</span>
+    ,
+    <span class="constant">GL_R</span>
+    , or
+    <span class="constant">GL_Q</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the symbolic name of the texture-coordinate generation function
+                    or function parameters.
+                    Must be
+    <span class="constant">GL_TEXTURE_GEN_MODE</span>
+    ,
+    <span class="constant">GL_OBJECT_PLANE</span>
+    , or
+    <span class="constant">GL_EYE_PLANE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to an array of texture generation parameters.
+                    If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_TEXTURE_GEN_MODE</span>
+    ,
+                    then the array must contain a single symbolic constant,
+                    one of
+    <span class="constant">GL_OBJECT_LINEAR</span>
+    ,
+    <span class="constant">GL_EYE_LINEAR</span>
+    ,
+    <span class="constant">GL_SPHERE_MAP</span>
+    ,
+    <span class="constant">GL_NORMAL_MAP</span>
+    , or
+    <span class="constant">GL_REFLECTION_MAP</span>
+    .
+                    Otherwise,
+    <a class="parameter" href="#param-params">params</a>
+    holds the coefficients for the texture-coordinate generation function
+                    specified by
+    <a class="parameter" href="#param-pname">pname</a>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glTexGen.html">glTexGen</a>
+    selects a texture-coordinate generation function
+            or supplies coefficients for one of the functions.
+    <a class="parameter" href="#param-coord">coord</a>
+    names one of the (
+    <span class="emphasis">s</span>
+    ,
+    <span class="emphasis">t</span>
+    ,
+    <span class="emphasis">r</span>
+    ,
+    <span class="emphasis">q</span>
+    ) texture
+            coordinates; it must be one of the symbols
+    <span class="constant">GL_S</span>
+    ,
+    <span class="constant">GL_T</span>
+    ,
+    <span class="constant">GL_R</span>
+    , or
+    <span class="constant">GL_Q</span>
+    .
+    <a class="parameter" href="#param-pname">pname</a>
+    must be one of three symbolic constants:
+    <span class="constant">GL_TEXTURE_GEN_MODE</span>
+    ,
+    <span class="constant">GL_OBJECT_PLANE</span>
+    , or
+    <span class="constant">GL_EYE_PLANE</span>
+    .
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_TEXTURE_GEN_MODE</span>
+    ,
+            then
+    <a class="parameter" href="#param-params">params</a>
+    chooses a mode,
+            one of
+    <span class="constant">GL_OBJECT_LINEAR</span>
+    ,
+    <span class="constant">GL_EYE_LINEAR</span>
+    ,
+    <span class="constant">GL_SPHERE_MAP</span>
+    ,
+    <span class="constant">GL_NORMAL_MAP</span>
+    , or
+    <span class="constant">GL_REFLECTION_MAP</span>
+    .
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is either
+    <span class="constant">GL_OBJECT_PLANE</span>
+    or
+    <span class="constant">GL_EYE_PLANE</span>
+    ,
+    <a class="parameter" href="#param-params">params</a>
+    contains coefficients for the corresponding
+            texture generation function.
+</div>
+    <div class="para">
+            If the texture generation function is
+    <span class="constant">GL_OBJECT_LINEAR</span>
+    ,
+            the function
+</div>
+    <div class="para">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">g</mi>
+                    <mo>=</mo>
+                    <mrow>
+                        <mrow>
+                            <msub><mi mathvariant="italic">p</mi>
+                            <mn>1</mn>
+                            </msub>
+                            <mo></mo>
+                            <msub><mi mathvariant="italic">x</mi>
+                            <mi mathvariant="italic">o</mi>
+                            </msub>
+                        </mrow>
+                        <mo>+</mo>
+                        <mrow>
+                            <msub><mi mathvariant="italic">p</mi>
+                            <mn>2</mn>
+                            </msub>
+                            <mo></mo>
+                            <msub><mi mathvariant="italic">y</mi>
+                            <mi mathvariant="italic">o</mi>
+                            </msub>
+                        </mrow>
+                        <mo>+</mo>
+                        <mrow>
+                            <msub><mi mathvariant="italic">p</mi>
+                            <mn>3</mn>
+                            </msub>
+                            <mo></mo>
+                            <msub><mi mathvariant="italic">z</mi>
+                            <mi mathvariant="italic">o</mi>
+                            </msub>
+                        </mrow>
+                        <mo>+</mo>
+                        <mrow>
+                            <msub><mi mathvariant="italic">p</mi>
+                            <mn>4</mn>
+                            </msub>
+                            <mo></mo>
+                            <msub><mi mathvariant="italic">w</mi>
+                            <mi mathvariant="italic">o</mi>
+                            </msub>
+                        </mrow>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+    <div class="para">
+            is used, where
+    <math><mi mathvariant="italic">g</mi></math>
+    is the value computed for the coordinate named in
+    <a class="parameter" href="#param-coord">coord</a>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">p</mi>
+                <mn>1</mn>
+                </msub>
+            </math>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">p</mi>
+                <mn>2</mn>
+                </msub>
+            </math>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">p</mi>
+                <mn>3</mn>
+                </msub>
+            </math>
+    ,
+            and
+    <math>
+                <msub><mi mathvariant="italic">p</mi>
+                <mn>4</mn>
+                </msub>
+            </math>
+    are the four values supplied in
+    <a class="parameter" href="#param-params">params</a>
+    , and
+    <math>
+                <msub><mi mathvariant="italic">x</mi>
+                <mi mathvariant="italic">o</mi>
+                </msub>
+            </math>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">y</mi>
+                <mi mathvariant="italic">o</mi>
+                </msub>
+            </math>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">z</mi>
+                <mi mathvariant="italic">o</mi>
+                </msub>
+            </math>
+    ,
+            and
+    <math>
+                <msub><mi mathvariant="italic">w</mi>
+                <mi mathvariant="italic">o</mi>
+                </msub>
+            </math>
+    are the object coordinates of the vertex.
+            This function can be used, for example, to texture-map terrain using sea level
+            as a reference plane
+            (defined by
+    <math>
+                <msub><mi mathvariant="italic">p</mi>
+                <mn>1</mn>
+                </msub>
+            </math>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">p</mi>
+                <mn>2</mn>
+                </msub>
+            </math>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">p</mi>
+                <mn>3</mn>
+                </msub>
+            </math>
+    ,
+            and
+    <math>
+                <msub><mi mathvariant="italic">p</mi>
+                <mn>4</mn>
+                </msub>
+            </math>
+    ).
+            The altitude of a terrain vertex is computed by the
+    <span class="constant">GL_OBJECT_LINEAR</span>
+    coordinate generation function as its distance from sea level;
+            that altitude can then be used to index the texture image to map white snow
+            onto peaks and green grass onto foothills.
+</div>
+    <div class="para">
+            If the texture generation function is
+    <span class="constant">GL_EYE_LINEAR</span>
+    , the function
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">g</mi>
+                    <mo>=</mo>
+                    <mrow>
+                        <mrow>
+                            <msup><mfenced open="" close="">
+                                <msub><mi mathvariant="italic">p</mi>
+                                <mn>1</mn>
+                                </msub>
+                            </mfenced>
+                            <mo></mo>
+                            </msup>
+                            <mo></mo>
+                            <msub><mi mathvariant="italic">x</mi>
+                            <mi mathvariant="italic">e</mi>
+                            </msub>
+                        </mrow>
+                        <mo>+</mo>
+                        <mrow>
+                            <msup><mfenced open="" close="">
+                                <msub><mi mathvariant="italic">p</mi>
+                                <mn>2</mn>
+                                </msub>
+                            </mfenced>
+                            <mo></mo>
+                            </msup>
+                            <mo></mo>
+                            <msub><mi mathvariant="italic">y</mi>
+                            <mi mathvariant="italic">e</mi>
+                            </msub>
+                        </mrow>
+                        <mo>+</mo>
+                        <mrow>
+                            <msup><mfenced open="" close="">
+                                <msub><mi mathvariant="italic">p</mi>
+                                <mn>3</mn>
+                                </msub>
+                            </mfenced>
+                            <mo></mo>
+                            </msup>
+                            <mo></mo>
+                            <msub><mi mathvariant="italic">z</mi>
+                            <mi mathvariant="italic">e</mi>
+                            </msub>
+                        </mrow>
+                        <mo>+</mo>
+                        <mrow>
+                            <msup><mfenced open="" close="">
+                                <msub><mi mathvariant="italic">p</mi>
+                                <mn>4</mn>
+                                </msub>
+                            </mfenced>
+                            <mo></mo>
+                            </msup>
+                            <mo></mo>
+                            <msub><mi mathvariant="italic">w</mi>
+                            <mi mathvariant="italic">e</mi>
+                            </msub>
+                        </mrow>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+            is used, where
+        </div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mfenced open="(" close=")">
+                        <mrow>
+                            <msup><mfenced open="" close="">
+                                <msub><mi mathvariant="italic">p</mi>
+                                <mn>1</mn>
+                                </msub>
+                            </mfenced>
+                            <mo></mo>
+                            </msup>
+                            <mo></mo>
+                            <msup><mfenced open="" close="">
+                                <msub><mi mathvariant="italic">p</mi>
+                                <mn>2</mn>
+                                </msub>
+                            </mfenced>
+                            <mo></mo>
+                            </msup>
+                            <mo></mo>
+                            <msup><mfenced open="" close="">
+                                <msub><mi mathvariant="italic">p</mi>
+                                <mn>3</mn>
+                                </msub>
+                            </mfenced>
+                            <mo></mo>
+                            </msup>
+                            <mo></mo>
+                            <msup><mfenced open="" close="">
+                                <msub><mi mathvariant="italic">p</mi>
+                                <mn>4</mn>
+                                </msub>
+                            </mfenced>
+                            <mo></mo>
+                            </msup>
+                        </mrow>
+                    </mfenced>
+                    <mo>=</mo>
+                    <mrow>
+                        <mfenced open="(" close=")">
+                            <mrow>
+                                <msub><mi mathvariant="italic">p</mi>
+                                <mn>1</mn>
+                                </msub>
+                                <mo></mo>
+                                <msub><mi mathvariant="italic">p</mi>
+                                <mn>2</mn>
+                                </msub>
+                                <mo></mo>
+                                <msub><mi mathvariant="italic">p</mi>
+                                <mn>3</mn>
+                                </msub>
+                                <mo></mo>
+                                <msub><mi mathvariant="italic">p</mi>
+                                <mn>4</mn>
+                                </msub>
+                            </mrow>
+                        </mfenced>
+                        <mo></mo>
+                        <msup><mi mathvariant="italic">M</mi>
+                        <mn>-1</mn>
+                        </msup>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+            and
+    <math>
+                <msub><mi mathvariant="italic">x</mi>
+                <mi mathvariant="italic">e</mi>
+                </msub>
+            </math>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">y</mi>
+                <mi mathvariant="italic">e</mi>
+                </msub>
+            </math>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">z</mi>
+                <mi mathvariant="italic">e</mi>
+                </msub>
+            </math>
+    ,
+            and
+    <math>
+                <msub><mi mathvariant="italic">w</mi>
+                <mi mathvariant="italic">e</mi>
+                </msub>
+            </math>
+    are the eye coordinates of the vertex,
+    <math>
+                <msub><mi mathvariant="italic">p</mi>
+                <mn>1</mn>
+                </msub>
+            </math>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">p</mi>
+                <mn>2</mn>
+                </msub>
+            </math>
+    ,
+    <math>
+                <msub><mi mathvariant="italic">p</mi>
+                <mn>3</mn>
+                </msub>
+            </math>
+    ,
+            and
+    <math>
+                <msub><mi mathvariant="italic">p</mi>
+                <mn>4</mn>
+                </msub>
+            </math>
+    are the values supplied in
+    <a class="parameter" href="#param-params">params</a>
+    , and
+    <math><mi mathvariant="italic">M</mi></math>
+    is the modelview matrix when
+    <a class="function" href="./glTexGen.html">glTexGen</a>
+    is invoked.
+            If
+    <math><mi mathvariant="italic">M</mi></math>
+    is poorly conditioned or singular,
+            texture coordinates generated by the resulting function may be inaccurate
+            or undefined.
+</div>
+    <div class="para">
+            Note that the values in
+    <a class="parameter" href="#param-params">params</a>
+    define a reference plane in eye coordinates.
+            The modelview matrix that is applied to them may not be the same one
+            in effect when the polygon vertices are transformed.
+            This function establishes a field of texture coordinates
+            that can produce dynamic contour lines on moving objects.
+</div>
+    <div class="para">
+            If the texture generation function is
+    <span class="constant">GL_SPHERE_MAP</span>
+    and
+    <a class="parameter" href="#param-coord">coord</a>
+    is either
+    <span class="constant">GL_S</span>
+    or
+    <span class="constant">GL_T</span>
+    ,
+    <math><mi mathvariant="italic">s</mi></math>
+    and
+    <math><mi mathvariant="italic">t</mi></math>
+    texture coordinates are generated as follows.
+            Let
+    <span class="emphasis">u</span>
+    be the unit vector pointing from the origin to the polygon vertex
+            (in eye coordinates).
+            Let
+    <span class="emphasis">n</span>
+    sup prime be the current normal,
+            after transformation to eye coordinates.
+            Let
+</div>
+    <div class="para">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">f</mi>
+                    <mo>=</mo>
+                    <msup><mfenced open="(" close=")">
+                        <mrow>
+                            <msub><mi mathvariant="italic">f</mi>
+                            <mi mathvariant="italic">x</mi>
+                            </msub>
+                            <mo></mo>
+                            <msub><mi mathvariant="italic">f</mi>
+                            <mi mathvariant="italic">y</mi>
+                            </msub>
+                            <mo></mo>
+                            <msub><mi mathvariant="italic">f</mi>
+                            <mi mathvariant="italic">z</mi>
+                            </msub>
+                        </mrow>
+                    </mfenced>
+                    <mi mathvariant="italic">T</mi>
+                    </msup>
+                </mrow>
+            </math>
+    be the reflection vector such that
+</div>
+    <div class="para">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">f</mi>
+                    <mo>=</mo>
+                    <mrow>
+                        <mi mathvariant="italic">u</mi>
+                        <mo>-</mo>
+                        <mn>2</mn>
+                        <mo></mo>
+                        <msup><mi mathvariant="italic">n</mi>
+                        <mo></mo>
+                        </msup>
+                        <mo></mo>
+                        <msup><mfenced open="" close="">
+                            <msup><mi mathvariant="italic">n</mi>
+                            <mo></mo>
+                            </msup>
+                        </mfenced>
+                        <mi mathvariant="italic">T</mi>
+                        </msup>
+                        <mo></mo>
+                        <mi mathvariant="italic">u</mi>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+    <div class="para">
+            Finally, let
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">m</mi>
+                    <mo>=</mo>
+                    <mrow>
+                        <mn>2</mn>
+                        <mo></mo>
+                        <msqrt>
+                            <mfenced open="(" close=")">
+                                <mrow>
+                                    <msup><mfenced open="" close="">
+                                        <msub><mi mathvariant="italic">f</mi>
+                                        <mi mathvariant="italic">x</mi>
+                                        </msub>
+                                    </mfenced>
+                                    <mn>2</mn>
+                                    </msup>
+                                    <mo>+</mo>
+                                    <msup><mfenced open="" close="">
+                                        <msub><mi mathvariant="italic">f</mi>
+                                        <mi mathvariant="italic">y</mi>
+                                        </msub>
+                                    </mfenced>
+                                    <mn>2</mn>
+                                    </msup>
+                                    <mo>+</mo>
+                                    <msup><mfenced open="(" close=")">
+                                        <mrow>
+                                            <msub><mi mathvariant="italic">f</mi>
+                                            <mi mathvariant="italic">z</mi>
+                                            </msub>
+                                            <mo>+</mo>
+                                            <mn>1</mn>
+                                        </mrow>
+                                    </mfenced>
+                                    <mn>2</mn>
+                                    </msup>
+                                </mrow>
+                            </mfenced>
+                        </msqrt>
+                    </mrow>
+                </mrow>
+            </math>
+    .
+            Then the values assigned to the
+    <math><mi mathvariant="italic">s</mi></math>
+    and
+    <math><mi mathvariant="italic">t</mi></math>
+    texture coordinates are
+</div>
+    <div class="para">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">s</mi>
+                    <mo>=</mo>
+                    <mrow>
+                        <mfrac>
+                            <msub><mi mathvariant="italic">f</mi>
+                            <mi mathvariant="italic">x</mi>
+                            </msub>
+                            <mi mathvariant="italic">m</mi>
+                        </mfrac>
+                        <mo>+</mo>
+                        <mfrac>
+                            <mn>1</mn>
+                            <mn>2</mn>
+                        </mfrac>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+    <div class="para">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">t</mi>
+                    <mo>=</mo>
+                    <mrow>
+                        <mfrac>
+                            <msub><mi mathvariant="italic">f</mi>
+                            <mi mathvariant="italic">y</mi>
+                            </msub>
+                            <mi mathvariant="italic">m</mi>
+                        </mfrac>
+                        <mo>+</mo>
+                        <mfrac>
+                            <mn>1</mn>
+                            <mn>2</mn>
+                        </mfrac>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+    <div class="para">
+            To enable or disable a texture-coordinate generation function, call
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    or
+    <a class="crossref" href="./glEnable.html#c-glDisable">glDisable</a>
+    with one of the symbolic texture-coordinate names
+            (
+    <span class="constant">GL_TEXTURE_GEN_S</span>
+    ,
+    <span class="constant">GL_TEXTURE_GEN_T</span>
+    ,
+    <span class="constant">GL_TEXTURE_GEN_R</span>
+    , or
+    <span class="constant">GL_TEXTURE_GEN_Q</span>
+    ) as the argument.
+            When enabled,
+            the specified texture coordinate is computed
+            according to the generating function associated with that coordinate.
+            When disabled,
+            subsequent vertices take the specified texture coordinate
+            from the current set of texture coordinates. Initially, all texture
+            generation functions are set to
+    <span class="constant">GL_EYE_LINEAR</span>
+    and are disabled.
+            Both
+    <math><mi mathvariant="italic">s</mi></math>
+    plane equations are (1, 0, 0, 0),
+            both
+    <math><mi mathvariant="italic">t</mi></math>
+    plane equations are (0, 1, 0, 0),
+            and all
+    <math><mi mathvariant="italic">r</mi></math>
+    and
+    <math><mi mathvariant="italic">q</mi></math>
+    plane equations are (0, 0, 0, 0).
+</div>
+    <div class="para">
+            When the
+    <div class="code">ARB_multitexture</div>
+    extension is supported,
+    <a class="function" href="./glTexGen.html">glTexGen</a>
+    sets the
+            texture generation parameters for the currently active texture unit,
+            selected with
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated when
+    <a class="parameter" href="#param-coord">coord</a>
+    or
+    <a class="parameter" href="#param-pname">pname</a>
+    is not an
+            accepted defined value,
+            or when
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_TEXTURE_GEN_MODE</span>
+    and
+    <a class="parameter" href="#param-params">params</a>
+    is not an
+            accepted defined value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated when
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_TEXTURE_GEN_MODE</span>
+    ,
+    <a class="parameter" href="#param-params">params</a>
+    is
+    <span class="constant">GL_SPHERE_MAP</span>
+    ,
+            and
+    <a class="parameter" href="#param-coord">coord</a>
+    is either
+    <span class="constant">GL_R</span>
+    or
+    <span class="constant">GL_Q</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glTexGen.html">glTexGen</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetTexGen.html">glGetTexGen</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_TEXTURE_GEN_S</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_TEXTURE_GEN_T</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_TEXTURE_GEN_R</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_TEXTURE_GEN_Q</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    ,
+    <a class="crossref" href="./glCopyPixels.html">glCopyPixels</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage2D.html">glCopyTexImage2D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage1D.html">glCopyTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage2D.html">glCopyTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage3D.html">glCopyTexSubImage3D</a>
+    ,
+    <a class="crossref" href="./glTexEnv.html">glTexEnv</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexParameter.html">glTexParameter</a>
+    ,
+    <a class="crossref" href="./glTexSubImage1D.html">glTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage3D.html">glTexSubImage3D</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glTexGenfv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_1.py">tests/shadow_1.py</a>
+    Lines: <span class="sample-lines">642</span>
+</div>
+        <div class="sample-key">glTexGeni</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_1.py">tests/shadow_1.py</a>
+    Lines: <span class="sample-lines">641</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson23.py">PyOpenGL-Demo/NeHe/lesson23.py</a>
+    Lines: <span class="sample-lines">69, 70</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson26.py">PyOpenGL-Demo/NeHe/lesson26.py</a>
+    Lines: <span class="sample-lines">98, 99</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

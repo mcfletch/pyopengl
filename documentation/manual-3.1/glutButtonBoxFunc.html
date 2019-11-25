@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutButtonBoxFunc : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutButtonBoxFunc</h1>
+</header>
+<main class="content">
+    <section class="purpose">sets the dial &amp; button box button callback for the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutButtonBoxFunc"></a>
+    <span class="c-function">glutButtonBoxFunc</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutButtonBoxFunc"></a>
+    <span class="py-function">glutButtonBoxFunc</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-function" class="parameter">function</a>
+    </span>
+</span> )
+    <pre class="pydoc">Specify handler for GLUT 'ButtonBox' events
+    def handler( (int) button, (int) state ):
+        return None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-func"></a>
+                        func
+                    </th>
+                    <td>
+    <div class="simpara">
+						The new button box callback function.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutButtonBoxFunc.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutButtonBoxFunc.html">glutButtonBoxFunc</a>
+    sets the dial &amp; button box button callback for the current window. The dial
+			&amp; button box button callback for a window is called when the window has dial &amp; button box input focus
+			(normally, when the mouse is in the window) and the user generates dial &amp; button box button presses. The button
+			parameter will be the button number (starting at one). The number of available dial &amp; button box buttons can be
+			determined with glutDeviceGet(
+    <span class="constant">GLUT_NUM_BUTTON_BOX_BUTTONS</span>
+    ). The state is either
+    <span class="constant">GLUT_UP</span>
+    or
+    <span class="constant">GLUT_DOWN</span>
+    indicating whether the callback was due to a release or
+			press respectively.
+</div>
+    <div class="para">
+			Registering a dial &amp; button box button callback when a dial &amp; button box device is not available is ineffectual
+			and not an error. In this case, no dial &amp; button box button callbacks will be generated.
+		</div>
+    <div class="para">
+			Passing
+    <span class="constant">NULL</span>
+    to
+    <a class="function" href="./glutButtonBoxFunc.html">glutButtonBoxFunc</a>
+    disables the generation of dial &amp;
+			button box button callbacks. When a new window is created, no dial &amp; button box button callback is initially
+			registered.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutDialsFunc.html">glutDialsFunc</a>
+            <a class="crossref" href="./glutDeviceGet.html">glutDeviceGet</a>
+            <a class="crossref" href="./glutSpaceballButtonFunc.html">glutSpaceballButtonFunc</a>
+            <a class="crossref" href="./glutTabletButtonFunc.html">glutTabletButtonFunc</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

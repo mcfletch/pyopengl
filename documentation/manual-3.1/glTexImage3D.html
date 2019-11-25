@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glTexImage3D : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glTexImage3D</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify a three-dimensional texture image</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexImage3D"></a>
+    <span class="c-function">glTexImage3D</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-level" class="parameter">level</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-depth" class="parameter">depth</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-border" class="parameter">border</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexImage3D"></a>
+    <span class="py-function">glTexImage3D</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-depth" class="parameter">depth</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-border" class="parameter">border</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glTexImage3Df"></a>
+    <span class="py-function">glTexImage3Df</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-border" class="parameter">border</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glTexImage3Di"></a>
+    <span class="py-function">glTexImage3Di</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-border" class="parameter">border</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glTexImage3Ds"></a>
+    <span class="py-function">glTexImage3Ds</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-border" class="parameter">border</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glTexImage3Dui"></a>
+    <span class="py-function">glTexImage3Dui</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-border" class="parameter">border</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glTexImage3Dus"></a>
+    <span class="py-function">glTexImage3Dus</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-border" class="parameter">border</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target texture.
+                    Must be one of
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_PROXY_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    or
+    <span class="constant">GL_PROXY_TEXTURE_2D_ARRAY</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-level"></a>
+                        level
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the level-of-detail number.
+                    Level 0 is the base image level.
+                    Level
+    <math overflow="scroll"><mi mathvariant="italic">n</mi></math>
+    is the
+    <math overflow="scroll">
+                        <msup><mi mathvariant="italic">n</mi>
+                        <mi mathvariant="italic">th</mi>
+                        </msup>
+                    </math>
+    mipmap reduction image.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalformat"></a>
+                        internalformat
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of color components in the texture.
+                    Must be one of base internal formats given in Table 1,
+                    one of the sized internal formats given in Table 2, or one
+                    of the compressed internal formats given in Table 3, below.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the width of the texture image.
+                    All implementations support 3D texture images that are at least 16 texels
+                    wide.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-height"></a>
+                        height
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the height of the texture image.
+                    All implementations support 3D texture images that are at least 256 texels
+                    high.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-depth"></a>
+                        depth
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the depth of the texture image, or the number of layers in a texture array.
+                    All implementations support 3D texture images that are at least 256 texels
+                    deep, and texture arrays that are at least 256 layers deep.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-border"></a>
+                        border
+                    </th>
+                    <td>
+    <div class="para">
+                    This value must be 0.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-format"></a>
+                        format
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the format of the pixel data.
+                    The following symbolic values are accepted:
+    <span class="constant">GL_RED</span>
+    ,
+    <span class="constant">GL_RG</span>
+    ,
+    <span class="constant">GL_RGB</span>
+    ,
+    <span class="constant">GL_BGR</span>
+    ,
+    <span class="constant">GL_RGBA</span>
+    ,
+    <span class="constant">GL_BGRA</span>
+    ,
+    <span class="constant">GL_RED_INTEGER</span>
+    ,
+    <span class="constant">GL_RG_INTEGER</span>
+    ,
+    <span class="constant">GL_RGB_INTEGER</span>
+    ,
+    <span class="constant">GL_BGR_INTEGER</span>
+    ,
+    <span class="constant">GL_RGBA_INTEGER</span>
+    ,
+    <span class="constant">GL_BGRA_INTEGER</span>
+    ,
+    <span class="constant">GL_STENCIL_INDEX</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    ,
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the data type of the pixel data.
+                    The following symbolic values are accepted:
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GL_BYTE</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+    ,
+    <span class="constant">GL_SHORT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT</span>
+    ,
+    <span class="constant">GL_INT</span>
+    ,
+    <span class="constant">GL_HALF_FLOAT</span>
+    ,
+    <span class="constant">GL_FLOAT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+    , and
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-data"></a>
+                        data
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to the image data in memory.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            Texturing maps a portion of a specified texture image
+            onto each graphical primitive for which texturing is enabled.
+            To enable and disable three-dimensional texturing, call
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="function" href="./glEnable.html#c-glDisable">glDisable</a>
+    with argument
+    <span class="constant">GL_TEXTURE_3D</span>
+    .
+</div>
+    <div class="para">
+            To define texture images, call
+    <a class="function" href="./glTexImage3D.html">glTexImage3D</a>
+    .
+            The arguments describe the parameters of the texture image,
+            such as height,
+            width, depth,
+            width of the border,
+            level-of-detail number
+            (see
+    <a class="crossref" href="./glTexParameter.html">glTexParameter</a>
+    ),
+            and number of color components provided.
+            The last three arguments describe how the image is represented in memory.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_PROXY_TEXTURE_3D</span>
+    , no data is read from
+    <a class="parameter" href="#param-data">data</a>
+    , but
+            all of the texture image state is recalculated, checked for
+            consistency, and checked
+            against the implementation's capabilities. If the implementation cannot
+            handle a texture of the requested texture size, it sets
+            all of the image state to 0,
+            but does not generate an error (see
+    <a class="crossref" href="./glGetError.html">glGetError</a>
+    ). To query for an
+            entire mipmap array, use an image array level greater than or equal to
+            1.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+            data is read from
+    <a class="parameter" href="#param-data">data</a>
+    as a sequence of signed or unsigned bytes,
+            shorts,
+            or longs,
+            or single-precision floating-point values,
+            depending on
+    <a class="parameter" href="#param-type">type</a>
+    .
+            These values are grouped into sets of one,
+            two,
+            three,
+            or four values,
+            depending on
+    <a class="parameter" href="#param-format">format</a>
+    ,
+            to form elements.
+            Each data byte is treated as eight 1-bit elements,
+            with bit ordering determined by
+    <span class="constant">GL_UNPACK_LSB_FIRST</span>
+    (see
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    ).
+</div>
+    <div class="para">
+            If a non-zero named buffer object is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target
+            (see
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ) while a texture image is
+            specified,
+    <a class="parameter" href="#param-data">data</a>
+    is treated as a byte offset into the buffer object's data store.
+</div>
+    <div class="para">
+            The first element corresponds to the lower left corner of the texture
+            image.
+            Subsequent elements progress left-to-right through the remaining texels
+            in the lowest row of the texture image, and then in successively higher
+            rows of the texture image.
+            The final element corresponds to the upper right corner of the texture
+            image.
+        </div>
+    <div class="para">
+    <a class="parameter" href="#param-format">format</a>
+    determines the composition of each element in
+    <a class="parameter" href="#param-data">data</a>
+    .
+            It can assume one of these symbolic values:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_RED</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each element is a single red component.
+                        The GL converts it to floating point and assembles it into an RGBA element
+                        by attaching 0 for green and blue, and 1 for alpha.
+                        Each component is clamped to the range [0,1].
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_RG</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each element is a red and green pair.
+                        The GL converts each to floating point and assembles it into an RGBA element
+                        by attaching 0 for blue, and 1 for alpha.
+                        Each component is clamped to the range [0,1].
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_RGB</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GL_BGR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each element is an RGB triple.
+                        The GL converts it to floating point and assembles it into an RGBA element
+                        by attaching 1 for alpha.
+                        Each component is clamped to the range [0,1].
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_RGBA</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GL_BGRA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each element contains all four components.
+                        Each component is clamped to the range [0,1].
+                    </div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+            If an application wants to store the texture at a certain
+            resolution or in a certain format, it can request the resolution
+            and format with
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    . The GL will choose an internal
+            representation that closely approximates that requested by
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    , but
+            it may not match exactly.
+            (The representations specified by
+    <span class="constant">GL_RED</span>
+    ,
+    <span class="constant">GL_RG</span>
+    ,
+    <span class="constant">GL_RGB</span>
+    ,
+            and
+    <span class="constant">GL_RGBA</span>
+    must match exactly.)
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    may be one of the base internal formats shown in
+            Table 1, below
+</div>
+    <div class="para">
+    <div class="include"></div>
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    may also be one of the sized internal formats
+            shown in Table 2, below
+</div>
+    <div class="para">
+    <div class="include"></div>
+</div>
+    <div class="para">
+            Finally,
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    may also be one of the generic or compressed
+            texture formats shown in Table 3 below
+</div>
+    <div class="para">
+    <div class="include"></div>
+</div>
+    <div class="para">
+                If the
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    parameter is one of the generic compressed formats,
+    <span class="constant">GL_COMPRESSED_RED</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RG</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RGB</span>
+    , or
+    <span class="constant">GL_COMPRESSED_RGBA</span>
+    , the GL will replace the internal format with the symbolic constant for a specific internal format and compress the texture before storage.  If no corresponding internal format is available, or the GL can not compress that image for any reason, the internal format is instead replaced with a corresponding base internal format.
+</div>
+    <div class="para">
+            If the
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    parameter is
+    <span class="constant">GL_SRGB</span>
+    ,
+    <span class="constant">GL_SRGB8</span>
+    ,
+    <span class="constant">GL_SRGB_ALPHA</span>
+    , or
+    <span class="constant">GL_SRGB8_ALPHA8</span>
+    , the texture is treated as if the red, green, blue, or luminance components are encoded in the sRGB color space.    Any alpha component is left unchanged.  The conversion from the sRGB encoded component
+    <math overflow="scroll">
+                    <msub><mi mathvariant="italic">c</mi>
+                    <mi mathvariant="italic">s</mi>
+                    </msub>
+            </math>
+    to a linear component
+    <math overflow="scroll">
+                    <msub><mi mathvariant="italic">c</mi>
+                    <mi mathvariant="italic">l</mi>
+                    </msub>
+            </math>
+    is:
+</div>
+    <div class="para">
+    <math overflow="scroll">
+                        <mrow>
+                                <msub>
+                                  <mi mathvariant="italic">c</mi>
+                                  <mi mathvariant="italic">l</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mrow>
+                                  <mo>{</mo>
+                                  <mtable columnalign="left">
+                                        <mtr>
+                                          <mtd columnalign="left">
+                                                <mfrac>
+                                                  <msub>
+                                                        <mi mathvariant="italic">c</mi>
+                                                        <mi mathvariant="italic">s</mi>
+                                                  </msub>
+                                                  <mn>12.92</mn>
+                                                </mfrac>
+                                          </mtd>
+                                          <mtd columnalign="left">
+                                                <mrow>
+                                                  <mspace width="1ex"></mspace>
+                                                  <mo>if</mo>
+                                                  <mspace width="1ex"></mspace>
+                                                </mrow>
+                                                <msub>
+                                                  <mi mathvariant="italic">c</mi>
+                                                  <mi mathvariant="italic">s</mi>
+                                                </msub>
+                                                <mo></mo>
+                                                <mn>0.04045</mn>
+                                          </mtd>
+                                        </mtr>
+                                        <mtr>
+                                        <mtd columnalign="left">
+                                        <msup>
+                                          <mrow>
+                                                <mo>(</mo>
+                                                <mfrac>
+                                                  <mrow>
+                                                        <msub>
+                                                          <mi>c</mi>
+                                                          <mi>s</mi>
+                                                        </msub>
+                                                        <mo>+</mo>
+                                                        <mn>0.055</mn>
+                                                  </mrow>
+                                                  <mn>1.055</mn>
+                                                </mfrac>
+                                                <mo>)</mo>
+                                          </mrow>
+                                          <mn>2.4</mn>
+                                        </msup>
+                                        </mtd>
+                                  <mtd columnalign="left">
+                                                <mrow>
+                                                  <mspace width="1ex"></mspace>
+                                                  <mo>if</mo>
+                                                  <mspace width="1ex"></mspace>
+                                                </mrow>
+                                                <msub>
+                                                  <mi mathvariant="italic">c</mi>
+                                                  <mi mathvariant="italic">s</mi>
+                                                </msub>
+                                                <mo>&gt;</mo>
+                                                <mn>0.04045</mn>
+                                          </mtd>
+                                        </mtr>
+                                  </mtable>
+                                </mrow>
+                                </mrow>
+                        </math>
+</div>
+    <div class="para">
+                        Assume
+    <math overflow="scroll">
+                                                                <msub><mi mathvariant="italic">c</mi>
+                                                                <mi mathvariant="italic">s</mi>
+                                                                </msub>
+                                                </math>
+    is the sRGB component in the range [0,1].
+</div>
+    <div class="para">
+            Use the
+    <span class="constant">GL_PROXY_TEXTURE_3D</span>
+    target to try out a resolution and
+            format. The implementation will
+            update and recompute its best match for the requested storage resolution
+            and format. To then query this state, call
+    <a class="crossref" href="./glGetTexLevelParameter.html">glGetTexLevelParameter</a>
+    .
+            If the texture cannot be accommodated, texture state is set to 0.
+</div>
+    <div class="para">
+            A one-component texture image uses only the red component of the RGBA
+            color extracted from
+    <a class="parameter" href="#param-data">data</a>
+    .
+            A two-component image uses the R and A values.
+            A three-component image uses the R, G, and B values.
+            A four-component image uses all of the RGBA components.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            The
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    mode affects texture images.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    may be a null pointer.
+            In this case texture memory is
+            allocated to accommodate a texture of width
+    <a class="parameter" href="#param-width">width</a>
+    , height
+    <a class="parameter" href="#param-height">height</a>
+    ,
+            and depth
+    <a class="parameter" href="#param-depth">depth</a>
+    .
+            You can then download subtextures to initialize this
+            texture memory.
+            The image is undefined if the user tries to apply
+            an uninitialized portion of the texture image to a primitive.
+</div>
+    <div class="para">
+    <a class="function" href="./glTexImage3D.html">glTexImage3D</a>
+    specifies the three-dimensional texture for the current texture unit,
+            specified with
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_STENCIL_INDEX</span>
+    may be used for
+    <a class="parameter" href="#param-format">format</a>
+    only if the GL
+            version is 4.4 or higher.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not
+    <span class="constant">GL_TEXTURE_3D</span>
+    or
+    <span class="constant">GL_PROXY_TEXTURE_3D</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    is not an accepted
+            format constant.  Format constants other than
+    <span class="constant">GL_STENCIL_INDEX</span>
+    and
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    are accepted.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is not a type constant.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-level">level</a>
+    is less than 0.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    may be generated if
+    <a class="parameter" href="#param-level">level</a>
+    is greater than
+    <math overflow="scroll">
+                <mrow>
+                    <msub><mi mathvariant="italic">log</mi>
+                    <mn>2</mn>
+                    </msub>
+                    <mo></mo>
+                    <mfenced open="(" close=")">
+                        <mi mathvariant="italic">max</mi>
+                    </mfenced>
+                </mrow>
+            </math>
+    ,
+            where
+    <span class="emphasis">max</span>
+    is the returned value of
+    <span class="constant">GL_MAX_TEXTURE_SIZE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is not one of the
+            accepted resolution and format symbolic constants.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-width">width</a>
+    ,
+    <a class="parameter" href="#param-height">height</a>
+    , or
+    <a class="parameter" href="#param-depth">depth</a>
+    is less than 0 or greater than
+    <span class="constant">GL_MAX_TEXTURE_SIZE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-border">border</a>
+    is not 0.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is one of
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+    , or
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GL_RGB</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is one of
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+    , or
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is neither
+    <span class="constant">GL_RGBA</span>
+    nor
+    <span class="constant">GL_BGRA</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    or
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENT16</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENT24</span>
+    , or
+    <span class="constant">GL_DEPTH_COMPONENT32</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target and the buffer object's data store is currently mapped.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target and the data would be unpacked from the buffer
+            object such that the memory reads required would exceed the data store size.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target and
+    <a class="parameter" href="#param-data">data</a>
+    is not evenly divisible
+            into the number of bytes needed to store in memory a datum indicated by
+    <a class="parameter" href="#param-type">type</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetTexImage.html">glGetTexImage</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER_BINDING</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glTexImage3D.html">glTexImage3D</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_HALF_FLOAT</span>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    ,
+    <a class="crossref" href="./glCompressedTexImage1D.html">glCompressedTexImage1D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexImage2D.html">glCompressedTexImage2D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexImage3D.html">glCompressedTexImage3D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexSubImage1D.html">glCompressedTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexSubImage2D.html">glCompressedTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexSubImage3D.html">glCompressedTexSubImage3D</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage1D.html">glCopyTexImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage2D.html">glCopyTexImage2D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage1D.html">glCopyTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage2D.html">glCopyTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage3D.html">glCopyTexSubImage3D</a>
+    ,
+    <a class="crossref" href="./glGetCompressedTexImage.html">glGetCompressedTexImage</a>
+    ,
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage1D.html">glTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage3D.html">glTexSubImage3D</a>
+    ,
+    <a class="crossref" href="./glTexParameter.html">glTexParameter</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This document is licensed under the SGI
+            Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glTexImage3D</div>
+        <div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/baseTexture.py">core/baseTexture.py</a>
+    Lines: <span class="sample-lines">424, 449</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">141</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">167</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">46</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">45</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">45</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">114</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">45</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">122</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">159</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">131</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

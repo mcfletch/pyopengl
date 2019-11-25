@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluGetString : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluGetString</h1>
+</header>
+<main class="content">
+    <section class="purpose">return a string describing the GLU version or GLU extensions </section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluGetString"></a>
+    <span class="c-function">gluGetString</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-name" class="parameter">name</a>
+        )
+    </span>
+</span>)-&gt; const GLubyte *
+</div>
+                <div class="py-signature">
+    <a name="py-gluGetString"></a>
+    <span class="py-function">gluGetString</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-name" class="parameter">name</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_char_p'&gt;</span>
+    <pre class="pydoc">gluGetString( GLenum(name) ) -&gt; POINTER(GLubyte)</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a symbolic constant, one of
+    <span class="constant">GLU_VERSION</span>
+    , or
+    <span class="constant">GLU_EXTENSIONS</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluGetString.html">gluGetString</a>
+    returns a pointer to a static string describing the
+            GLU version or the GLU extensions that are supported.
+</div>
+    <div class="para">
+            The version number is one of the following
+            forms:
+        </div>
+    <div class="para">
+    <span class="emphasis">major_number.minor_number</span>
+    <span class="emphasis">major_number.minor_number.release_number</span>
+    .
+</div>
+    <div class="para">
+            The version string is of the following form:
+        </div>
+    <div class="para">
+    <span class="emphasis">version number&lt;space&gt;vendor-specific information</span>
+</div>
+    <div class="para">
+            Vendor-specific information is optional.
+            Its format and contents depend on the implementation.
+        </div>
+    <div class="para">
+            The standard GLU contains a basic set of features and capabilities.
+            If a company or group of companies wish to support other features,
+            these may be included as extensions to the GLU.
+            If
+    <a class="parameter" href="#param-name">name</a>
+    is
+    <span class="constant">GLU_EXTENSIONS</span>
+    , then
+    <a class="function" href="./gluGetString.html">gluGetString</a>
+    returns a space-separated list of names of supported GLU extensions.
+            (Extension names never contain spaces.)
+</div>
+    <div class="para">
+            All strings are null-terminated.
+        </div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./gluGetString.html">gluGetString</a>
+    only returns information about GLU extensions. Call
+    <a class="function" href="./glGetString.html">glGetString</a>
+    to get a list of GL extensions.
+</div>
+    <div class="para">
+    <a class="function" href="./gluGetString.html">gluGetString</a>
+    is an initialization routine. Calling it after
+            a
+    <a class="crossref" href="./glNewList.html">glNewList</a>
+    results in undefined behavior.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+            NULL is returned if
+    <a class="parameter" href="#param-name">name</a>
+    is not
+    <span class="constant">GLU_VERSION</span>
+    or
+    <span class="constant">GLU_EXTENSIONS</span>
+    .
+</div>
+    <div class="para">
+        </div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluGetString</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glugetstring.py">tests/glugetstring.py</a>
+    Lines: <span class="sample-lines">11, 12</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/extensionmanager.py">OpenGLContext/extensionmanager.py</a>
+    Lines: <span class="sample-lines">4, 95</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

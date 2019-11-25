@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetInternalformativ : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetInternalformativ</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieve information about implementation-dependent support for internal formats</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetInternalformativ"></a>
+    <span class="c-function">glGetInternalformativ</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetInternalformativ"></a>
+    <span class="py-function">glGetInternalformativ</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Indicates the usage of the internal format.
+    <a class="parameter" href="#param-target">target</a>
+    must be
+    <span class="constant">GL_RENDERBUFFER</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalformat"></a>
+                        internalformat
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the internal format about which to retrieve information.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the type of information to query.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bufSize"></a>
+                        bufSize
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the maximum number of integers that may be written to
+    <a class="parameter" href="#param-params">params</a>
+    by the function.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of a variable into which to write the retrieved information.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetInternalformativ.html">glGetInternalformativ</a>
+    retrieves information about implementation-dependent support for
+            internal formats.
+    <a class="parameter" href="#param-target">target</a>
+    indicates the target with which the internal format will
+            be used and must be
+    <span class="constant">GL_RENDERBUFFER</span>
+    , corresponding to usage as a renderbuffer.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    specifies the internal format about which to retrieve information and
+            must be a color-renderable, depth-renderable or stencil-renderable format.
+</div>
+    <div class="para">
+            The information retrieved will be written to memory addressed by the pointer specified in
+    <a class="parameter" href="#param-params">params</a>
+    . No
+            more than
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    integers will be written to this memory.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_NUM_SAMPLE_COUNTS</span>
+    , the number of sample counts that would be
+            returned by querying
+    <span class="constant">GL_SAMPLES</span>
+    will be returned in
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_SAMPLES</span>
+    , the sample counts supported for
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    and
+    <a class="parameter" href="#param-target">target</a>
+    are written into
+    <a class="parameter" href="#param-params">params</a>
+    in descending numeric order. Only positive values are returned.
+            Querying
+    <span class="constant">GL_SAMPLES</span>
+    with
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    of one will return just the maximum supported number of
+            samples for this format.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            Since multisampling is not supported for signed and unsigned integer internal
+                        formats, the value of
+    <span class="constant">GL_NUM_SAMPLE_COUNTS</span>
+    will be zero for such formats.
+                        If
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is
+    <span class="constant">GL_RGBA16F</span>
+    ,
+    <span class="constant">GL_R32F</span>
+    ,
+    <span class="constant">GL_RG32F</span>
+    , or
+    <span class="constant">GL_RGBA32F</span>
+    , the value of
+    <span class="constant">GL_NUM_SAMPLE_COUNTS</span>
+    may be zero, or else the maximum value in
+    <span class="constant">GL_SAMPLES</span>
+    may be less than the value of
+    <span class="constant">GL_MAX_SAMPLES</span>
+    .
+                        For every other accepted
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    , the maximum value in
+    <span class="constant">GL_SAMPLES</span>
+    is guaranteed to be at least
+    <span class="constant">GL_MAX_SAMPLES</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    is negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not
+    <span class="constant">GL_SAMPLES</span>
+    or
+    <span class="constant">GL_NUM_SAMPLE_COUNTS</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is not color-, depth-, or stencil-renderable.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not
+    <span class="constant">GL_RENDERBUFFER</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">API Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>glGetInternalformativ</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXUseXFont : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXUseXFont</h1>
+</header>
+<main class="content">
+    <section class="purpose">create bitmap display lists from an X font</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXUseXFont"></a>
+    <span class="c-function">glXUseXFont</span>(<span class="parameter-list">
+    <span class="param-def">
+        Font (
+            <a href="#param-font" class="parameter">font</a>
+        )
+        ,
+    </span><span class="param-def">
+        int (
+            <a href="#param-first" class="parameter">first</a>
+        )
+        ,
+    </span><span class="param-def">
+        int (
+            <a href="#param-count" class="parameter">count</a>
+        )
+        ,
+    </span><span class="param-def">
+        int (
+            <a href="#param-listBase" class="parameter">listBase</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glXUseXFont"></a>
+    <span class="py-function">glXUseXFont</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-font" class="parameter">font</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-first" class="parameter">first</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-count" class="parameter">count</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-list" class="parameter">list</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-font"></a>
+                        font
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the font from which character glyphs are to be taken.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-first"></a>
+                        first
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the index of the first glyph to be taken.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-count"></a>
+                        count
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of glyphs to be taken.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-listBase"></a>
+                        listBase
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the index of the first display list to be generated.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXUseXFont.html">glXUseXFont</a>
+    generates
+    <a class="parameter" href="#param-count">count</a>
+    display lists,
+            named
+    <a class="parameter" href="#param-listBase">listBase</a>
+    through
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">listBase</mi>
+                    <mo>+</mo>
+                    <mi mathvariant="italic">count</mi>
+                    <mo>-</mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    ,
+            each containing a single
+    <a class="crossref" href="./glBitmap.html">glBitmap</a>
+    command.
+            The parameters of the
+    <a class="crossref" href="./glBitmap.html">glBitmap</a>
+    command of display list
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">listBase</mi>
+                    <mo>+</mo>
+                    <mi mathvariant="italic">i</mi>
+                </mrow>
+            </math>
+    are derived from glyph
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">first</mi>
+                    <mo>+</mo>
+                    <mi mathvariant="italic">i</mi>
+                </mrow>
+            </math>
+    .
+            Bitmap parameters
+    <math><mi mathvariant="italic">xorig</mi></math>
+    ,
+    <math><mi mathvariant="italic">yorig</mi></math>
+    ,
+    <math><mi mathvariant="italic">width</mi></math>
+    ,
+            and
+    <math><mi mathvariant="italic">height</mi></math>
+    are computed from font metrics as
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">descent</mi>
+                    <mo>-</mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    ,
+    <math>
+                <mrow>
+                    <mo>-</mo>
+                    <mi mathvariant="italic">lbearing</mi>
+                </mrow>
+            </math>
+    ,
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">rbearing</mi>
+                    <mo>-</mo>
+                    <mi mathvariant="italic">lbearing</mi>
+                </mrow>
+            </math>
+    ,
+            and
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">ascent</mi>
+                    <mo>+</mo>
+                    <mi mathvariant="italic">descent</mi>
+                </mrow>
+            </math>
+    ,
+            respectively.
+    <math><mi mathvariant="italic">xmove</mi></math>
+    is taken from the glyph's
+    <math><mi mathvariant="italic">width</mi></math>
+    metric,
+            and
+    <math><mi mathvariant="italic">ymove</mi></math>
+    is set to zero.
+            Finally,
+            the glyph's image is converted to the appropriate format for
+    <a class="crossref" href="./glBitmap.html">glBitmap</a>
+    .
+</div>
+    <div class="para">
+            Using
+    <a class="function" href="./glXUseXFont.html">glXUseXFont</a>
+    may be more efficient than accessing the X font and generating
+            the display lists explicitly,
+            both because the display lists are created on the server without requiring
+            a round trip of the glyph data,
+            and because the server may choose to delay the creation of each
+            bitmap until it is accessed.
+</div>
+    <div class="para">
+            Empty display lists are created for all glyphs that are requested and
+            are not defined in
+    <a class="parameter" href="#param-font">font</a>
+    .
+    <a class="function" href="./glXUseXFont.html">glXUseXFont</a>
+    is ignored if there is no current GLX context.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">BadFont</span>
+    is generated if
+    <a class="parameter" href="#param-font">font</a>
+    is not a valid font.
+</div>
+    <div class="para">
+    <span class="constant">GLXBadContextState</span>
+    is generated if the current GLX context is
+            in display-list construction mode.
+</div>
+    <div class="para">
+    <span class="constant">GLXBadCurrentWindow</span>
+    is generated if the drawable associated
+            with the current context of the calling thread is a window, and that
+            window is no longer valid.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBitmap.html">glBitmap</a>
+    ,
+    <a class="crossref" href="./glXMakeCurrent.html">glXMakeCurrent</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

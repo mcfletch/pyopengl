@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluScaleImage : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluScaleImage</h1>
+</header>
+<main class="content">
+    <section class="purpose">scale an image to an arbitrary size</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluScaleImage"></a>
+    <span class="c-function">gluScaleImage</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-wIn" class="parameter">wIn</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-hIn" class="parameter">hIn</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-typeIn" class="parameter">typeIn</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void * (
+            <a href="#param-dataIn" class="parameter">dataIn</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-wOut" class="parameter">wOut</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-hOut" class="parameter">hOut</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-typeOut" class="parameter">typeOut</a>
+        )
+        ,
+    </span><span class="param-def">
+        void* (
+            <a href="#param-dataOut" class="parameter">dataOut</a>
+        )
+    </span>
+</span>)-&gt; GLint
+</div>
+                <div class="py-signature">
+    <a name="py-gluScaleImage"></a>
+    <span class="py-function">gluScaleImage</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-wIn" class="parameter">wIn</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-hIn" class="parameter">hIn</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-typeIn" class="parameter">typeIn</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dataIn" class="parameter">dataIn</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-wOut" class="parameter">wOut</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-hOut" class="parameter">hOut</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-typeOut" class="parameter">typeOut</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dataOut" class="parameter">dataOut</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">gluScaleImage( GLenum(format), GLsizei(wIn), GLsizei(hIn), GLenum(typeIn), c_void_p(dataIn), GLsizei(wOut), GLsizei(hOut), GLenum(typeOut), POINTER(GLvoid)(dataOut) ) -&gt; GLint</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-format"></a>
+                        format
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the format of the pixel data.
+                    The following symbolic values are valid:
+    <span class="constant">GLU_COLOR_INDEX</span>
+    ,
+    <span class="constant">GLU_STENCIL_INDEX</span>
+    ,
+    <span class="constant">GLU_DEPTH_COMPONENT</span>
+    ,
+    <span class="constant">GLU_RED</span>
+    ,
+    <span class="constant">GLU_GREEN</span>
+    ,
+    <span class="constant">GLU_BLUE</span>
+    ,
+    <span class="constant">GLU_ALPHA</span>
+    ,
+    <span class="constant">GLU_RGB</span>
+    ,
+    <span class="constant">GLU_RGBA</span>
+    ,
+    <span class="constant">GLU_BGR</span>
+    ,
+    <span class="constant">GLU_BGRA</span>
+    ,
+    <span class="constant">GLU_LUMINANCE</span>
+    , and
+    <span class="constant">GLU_LUMINANCE_ALPHA</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-wIn"></a><a name="param-hIn"></a>
+                        wIn, hIn
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify in pixels the width and height, respectively, of the source image.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-typeIn"></a>
+                        typeIn
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the data type for
+    <a class="parameter" href="#param-dataIn">dataIn</a>
+    . Must be one of
+    <span class="constant">GLU_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GLU_BYTE</span>
+    ,
+    <span class="constant">GLU_BITMAP</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT</span>
+    ,
+    <span class="constant">GLU_SHORT</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT</span>
+    ,
+    <span class="constant">GLU_INT</span>
+    ,
+    <span class="constant">GLU_FLOAT</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_6_5</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_6_5_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_10_10_10_2</span>
+    , or
+    <span class="constant">GLU_UNSIGNED_INT_2_10_10_10_REV</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dataIn"></a>
+                        dataIn
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to the source image.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-wOut"></a><a name="param-hOut"></a>
+                        wOut, hOut
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the width and height, respectively, in pixels of the destination image.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-typeOut"></a>
+                        typeOut
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the data type for
+    <a class="parameter" href="#param-dataOut">dataOut</a>
+    . Must be one of
+    <span class="constant">GLU_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GLU_BYTE</span>
+    ,
+    <span class="constant">GLU_BITMAP</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT</span>
+    ,
+    <span class="constant">GLU_SHORT</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT</span>
+    ,
+    <span class="constant">GLU_INT</span>
+    ,
+    <span class="constant">GLU_FLOAT</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_6_5</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_6_5_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_10_10_10_2</span>
+    , or
+    <span class="constant">GLU_UNSIGNED_INT_2_10_10_10_REV</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dataOut"></a>
+                        dataOut
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to the destination image.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluScaleImage.html">gluScaleImage</a>
+    scales a pixel image using the appropriate pixel store modes to
+            unpack data from the source image and pack data into the destination image.
+</div>
+    <div class="para">
+            When shrinking an image,
+    <a class="function" href="./gluScaleImage.html">gluScaleImage</a>
+    uses a box filter to sample the source image
+            and create pixels for the destination image.  When magnifying an image,
+            the pixels from the source image are linearly interpolated to create the
+            destination image.
+</div>
+    <div class="para">
+            A return value of zero indicates success, otherwise a GLU error code is returned (see
+    <a class="crossref" href="./gluErrorString.html">gluErrorString</a>
+    ).
+</div>
+    <div class="para">
+            See the
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    reference page for a description of
+            the acceptable values for the
+    <a class="parameter" href="#param-format">format</a>
+    ,
+    <a class="parameter" href="#param-typeIn">typeIn</a>
+    , and
+    <a class="parameter" href="#param-typeOut">typeOut</a>
+    parameters.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            Formats
+    <span class="constant">GLU_BGR</span>
+    , and
+    <span class="constant">GLU_BGRA</span>
+    , and types
+    <span class="constant">GLU_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_6_5</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_6_5_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_10_10_10_2</span>
+    , and
+    <span class="constant">GLU_UNSIGNED_INT_2_10_10_10_REV</span>
+    are only available if the GL version
+            is 1.2 or greater.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GLU_INVALID_VALUE</span>
+    is returned if
+    <a class="parameter" href="#param-wIn">wIn</a>
+    ,
+    <a class="parameter" href="#param-hIn">hIn</a>
+    ,
+    <a class="parameter" href="#param-wOut">wOut</a>
+    , or
+    <a class="parameter" href="#param-hOut">hOut</a>
+    is negative.
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_ENUM</span>
+    is returned if
+    <a class="parameter" href="#param-format">format</a>
+    ,
+    <a class="parameter" href="#param-typeIn">typeIn</a>
+    , or
+    <a class="parameter" href="#param-typeOut">typeOut</a>
+    is not
+            legal.
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_OPERATION</span>
+    is returned if
+    <a class="parameter" href="#param-typeIn">typeIn</a>
+    or
+    <a class="parameter" href="#param-typeOut">typeOut</a>
+    is
+    <span class="constant">GLU_UNSIGNED_BYTE_3_3_2</span>
+    or
+    <span class="constant">GLU_UNSIGNED_BYTE_2_3_3_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GLU_RGB</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_OPERATION</span>
+    is returned if
+    <a class="parameter" href="#param-typeIn">typeIn</a>
+    or
+    <a class="parameter" href="#param-typeOut">typeOut</a>
+    is
+    <span class="constant">GLU_UNSIGNED_SHORT_5_6_5</span>
+    or
+    <span class="constant">GLU_UNSIGNED_SHORT_5_6_5_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GLU_RGB</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_OPERATION</span>
+    is returned if
+    <a class="parameter" href="#param-typeIn">typeIn</a>
+    or
+    <a class="parameter" href="#param-typeOut">typeOut</a>
+    is
+    <span class="constant">GLU_UNSIGNED_SHORT_4_4_4_4</span>
+    or
+    <span class="constant">GLU_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is neither
+    <span class="constant">GLU_RGBA</span>
+    nor
+    <span class="constant">GLU_BGRA</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_OPERATION</span>
+    is returned if
+    <a class="parameter" href="#param-typeIn">typeIn</a>
+    or
+    <a class="parameter" href="#param-typeOut">typeOut</a>
+    is
+    <span class="constant">GLU_UNSIGNED_SHORT_5_5_5_1</span>
+    or
+    <span class="constant">GLU_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is neither
+    <span class="constant">GLU_RGBA</span>
+    nor
+    <span class="constant">GLU_BGRA</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_OPERATION</span>
+    is returned if
+    <a class="parameter" href="#param-typeIn">typeIn</a>
+    or
+    <a class="parameter" href="#param-typeOut">typeOut</a>
+    is
+    <span class="constant">GLU_UNSIGNED_INT_8_8_8_8</span>
+    or
+    <span class="constant">GLU_UNSIGNED_INT_8_8_8_8_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is neither
+    <span class="constant">GLU_RGBA</span>
+    nor
+    <span class="constant">GLU_BGRA</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_OPERATION</span>
+    is returned if
+    <a class="parameter" href="#param-typeIn">typeIn</a>
+    or
+    <a class="parameter" href="#param-typeOut">typeOut</a>
+    is
+    <span class="constant">GLU_UNSIGNED_INT_10_10_10_2</span>
+    or
+    <span class="constant">GLU_UNSIGNED_INT_2_10_10_10_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is neither
+    <span class="constant">GLU_RGBA</span>
+    nor
+    <span class="constant">GLU_BGRA</span>
+    .
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluBuild1DMipmaps.html">gluBuild1DMipmaps</a>
+    ,
+    <a class="crossref" href="./gluBuild2DMipmaps.html">gluBuild2DMipmaps</a>
+    ,
+    <a class="crossref" href="./gluBuild3DMipmaps.html">gluBuild3DMipmaps</a>
+    ,
+    <a class="crossref" href="./gluErrorString.html">gluErrorString</a>
+    ,
+    <a class="crossref" href="./glDrawPixels.html">glDrawPixels</a>
+    ,
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

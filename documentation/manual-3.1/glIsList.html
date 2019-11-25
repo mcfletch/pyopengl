@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glIsList : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glIsList</h1>
+</header>
+<main class="content">
+    <section class="purpose">determine if a name corresponds to a display list</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glIsList"></a>
+    <span class="c-function">glIsList</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-list" class="parameter">list</a>
+        )
+    </span>
+</span>)-&gt; GLboolean
+</div>
+                <div class="py-signature">
+    <a name="py-glIsList"></a>
+    <span class="py-function">glIsList</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-list" class="parameter">list</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_ubyte'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-list"></a>
+                        list
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a potential display list name.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glIsList.html">glIsList</a>
+    returns
+    <span class="constant">GL_TRUE</span>
+    if
+    <a class="parameter" href="#param-list">list</a>
+    is the name
+            of a display list and returns
+    <span class="constant">GL_FALSE</span>
+    if it is not, or if an error occurs.
+</div>
+    <div class="para">
+            A name returned by
+    <a class="crossref" href="./glGenLists.html">glGenLists</a>
+    , but not yet associated with a display list
+            by calling
+    <a class="crossref" href="./glNewList.html">glNewList</a>
+    , is not the name of a display list.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glIsList.html">glIsList</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glCallList.html">glCallList</a>
+    ,
+    <a class="crossref" href="./glCallLists.html">glCallLists</a>
+    ,
+    <a class="crossref" href="./glDeleteLists.html">glDeleteLists</a>
+    ,
+    <a class="crossref" href="./glGenLists.html">glGenLists</a>
+    ,
+    <a class="crossref" href="./glNewList.html">glNewList</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glIsList</div>
+        <div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/openglgraphics.py">system/openglgraphics.py</a>
+    Lines: <span class="sample-lines">54</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

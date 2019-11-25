@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glDepthMask : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glDepthMask</h1>
+</header>
+<main class="content">
+    <section class="purpose">enable or disable writing into the depth buffer</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glDepthMask"></a>
+    <span class="c-function">glDepthMask</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLboolean (
+            <a href="#param-flag" class="parameter">flag</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glDepthMask"></a>
+    <span class="py-function">glDepthMask</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-flag" class="parameter">flag</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-flag"></a>
+                        flag
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies whether the depth buffer is enabled for writing.
+                    If
+    <a class="parameter" href="#param-flag">flag</a>
+    is
+    <span class="constant">GL_FALSE</span>
+    ,
+                    depth buffer writing is disabled.
+                    Otherwise, it is enabled.
+                    Initially, depth buffer writing is enabled.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glDepthMask.html">glDepthMask</a>
+    specifies whether the depth buffer is enabled for writing.
+            If
+    <a class="parameter" href="#param-flag">flag</a>
+    is
+    <span class="constant">GL_FALSE</span>
+    ,
+            depth buffer writing is disabled.
+            Otherwise, it is enabled.
+            Initially, depth buffer writing is enabled.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_DEPTH_WRITEMASK</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            Even if the depth buffer exists and the depth mask is non-zero, the
+            depth buffer is not updated if the depth test is disabled. In order to
+            unconditionally write to the depth buffer, the depth test should be enabled
+            and set to
+    <span class="constant">GL_ALWAYS</span>
+    (see
+    <a class="crossref" href="./glDepthFunc.html">glDepthFunc</a>
+    ).
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glDepthMask.html">glDepthMask</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glColorMask.html">glColorMask</a>
+    ,
+    <a class="crossref" href="./glDepthFunc.html">glDepthFunc</a>
+    ,
+    <a class="crossref" href="./glDepthRange.html">glDepthRange</a>
+    ,
+    <a class="crossref" href="./glStencilMask.html">glStencilMask</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI
+            This document is licensed under the SGI
+            Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glDepthMask</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_alpha3D.py">tests/redbook_alpha3D.py</a>
+    Lines: <span class="sample-lines">139, 142</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe8.py">tests/nehe8.py</a>
+    Lines: <span class="sample-lines">112, 117</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/arbocclusionquery.py">tests/arbocclusionquery.py</a>
+    Lines: <span class="sample-lines">43, 59</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/shadow/passes.py">OpenGLContext/shadow/passes.py</a>
+    Lines: <span class="sample-lines">135, 167, 229, 318</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/cubebackground.py">OpenGLContext/scenegraph/cubebackground.py</a>
+    Lines: <span class="sample-lines">85</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/boundingvolume.py">OpenGLContext/scenegraph/boundingvolume.py</a>
+    Lines: <span class="sample-lines">288, 298, 313</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/font.py">OpenGLContext/scenegraph/text/font.py</a>
+    Lines: <span class="sample-lines">290, 295</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/_flat.py">OpenGLContext/passes/_flat.py</a>
+    Lines: <span class="sample-lines">440, 460</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcore.py">OpenGLContext/passes/flatcore.py</a>
+    Lines: <span class="sample-lines">164, 184</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcompat.py">OpenGLContext/passes/flatcompat.py</a>
+    Lines: <span class="sample-lines">177, 197</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/renderpass.py">OpenGLContext/passes/renderpass.py</a>
+    Lines: <span class="sample-lines">335, 358</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/OglSurface/triangle.py">PyOpenGL-Demo/dek/OglSurface/triangle.py</a>
+    Lines: <span class="sample-lines">32</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/geometry.py">pyggel/geometry.py</a>
+    Lines: <span class="sample-lines">332, 340, 487, 493</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/scene.py">pyggel/scene.py</a>
+    Lines: <span class="sample-lines">143, 155</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">139, 175</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">139, 175</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">139, 175</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">139, 175</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/polygonalModeling.py">wobjects/polygonalModeling.py</a>
+    Lines: <span class="sample-lines">903, 909</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetProgramPipeline : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetProgramPipeline</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieve properties of a program pipeline object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetProgramPipeline"></a>
+    <span class="c-function">glGetProgramPipeline</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetProgramPipelineiv"></a>
+    <span class="c-function">glGetProgramPipelineiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-pipeline" class="parameter">pipeline</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetProgramPipelineiv"></a>
+    <span class="py-function">glGetProgramPipelineiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pipeline" class="parameter">pipeline</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pipeline"></a>
+                        pipeline
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the name of a program pipeline object whose parameter retrieve.
+            </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the name of the parameter to retrieve.
+            </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the address of a variable into which will be written the value or values
+                of
+    <a class="parameter" href="#param-pname">pname</a>
+    for
+    <a class="parameter" href="#param-pipeline">pipeline</a>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetProgramPipeline.html#c-glGetProgramPipelineiv">glGetProgramPipelineiv</a>
+    retrieves the value of a property of the program
+            pipeline object
+    <a class="parameter" href="#param-pipeline">pipeline</a>
+    .
+    <a class="parameter" href="#param-pname">pname</a>
+    specifies the
+            name of the parameter whose value to retrieve. The value of the parameter is written to
+            the variable whose address is given by
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_ACTIVE_PROGRAM</span>
+    , the name of the
+            active program object of the program pipeline object is returned in
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_VERTEX_SHADER</span>
+    , the name of the
+            current program object for the vertex shader type of the program pipeline object is
+            returned in
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_TESS_CONTROL_SHADER</span>
+    , the name of the
+            current program object for the tessellation control shader type of the program pipeline object is
+            returned in
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_TESS_EVALUATION_SHADER</span>
+    , the name of the
+            current program object for the tessellation evaluation shader type of the program pipeline object is
+            returned in
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_GEOMETRY_SHADER</span>
+    , the name of the
+            current program object for the geometry shader type of the program pipeline object is
+            returned in
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_FRAGMENT_SHADER</span>
+    , the name of the
+            current program object for the fragment shader type of the program pipeline object is
+            returned in
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_INFO_LOG_LENGTH</span>
+    , the length of the
+            info log, including the null terminator, is returned in
+    <a class="parameter" href="#param-params">params</a>
+    . If there
+            is no info log, zero is returned.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-pipeline">pipeline</a>
+    is not zero or
+            a name previously returned from a call to
+    <a class="crossref" href="./glGenProgramPipelines.html">glGenProgramPipelines</a>
+    or if such a name has been deleted by a call to
+    <a class="crossref" href="./glDeleteProgramPipelines.html">glDeleteProgramPipelines</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not one
+            of the accepted values.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetProgramPipeline.html#c-glGetProgramPipelineiv">glGetProgramPipelineiv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenProgramPipelines.html">glGenProgramPipelines</a>
+    ,
+    <a class="crossref" href="./glBindProgramPipeline.html">glBindProgramPipeline</a>
+    ,
+    <a class="crossref" href="./glDeleteProgramPipelines.html">glDeleteProgramPipelines</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

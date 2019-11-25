@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glTexStorage2DMultisample : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glTexStorage2DMultisample</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify storage for a two-dimensional multisample texture</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexStorage2DMultisample"></a>
+    <span class="c-function">glTexStorage2DMultisample</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-samples" class="parameter">samples</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean (
+            <a href="#param-fixedsamplelocations" class="parameter">fixedsamplelocations</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexStorage2DMultisample"></a>
+    <span class="py-function">glTexStorage2DMultisample</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-samples" class="parameter">samples</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-fixedsamplelocations" class="parameter">fixedsamplelocations</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTextureStorage2DMultisample"></a>
+    <span class="c-function">glTextureStorage2DMultisample</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-samples" class="parameter">samples</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean (
+            <a href="#param-fixedsamplelocations" class="parameter">fixedsamplelocations</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTextureStorage2DMultisample"></a>
+    <span class="py-function">glTextureStorage2DMultisample</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-samples" class="parameter">samples</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-fixedsamplelocations" class="parameter">fixedsamplelocations</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target to which the texture object is
+                    bound for
+    <a class="function" href="./glTexStorage2DMultisample.html">glTexStorage2DMultisample</a>
+    . Must be
+                    one of
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    or
+    <span class="constant">GL_PROXY_TEXTURE_2D_MULTISAMPLE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the texture object name for
+    <a class="function" href="./glTexStorage2DMultisample.html#c-glTextureStorage2DMultisample">glTextureStorage2DMultisample</a>
+    . The
+                    effective target of
+    <a class="parameter" href="#param-texture">texture</a>
+    must
+                    be one of the valid non-proxy
+    <a class="parameter" href="#param-target">target</a>
+    values above.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-samples"></a>
+                        samples
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the number of samples in the texture.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalformat"></a>
+                        internalformat
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the sized internal format to be used to store texture image data.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the width of the texture, in texels.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-height"></a>
+                        height
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the height of the texture, in texels.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-fixedsamplelocations"></a>
+                        fixedsamplelocations
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
+                    depend on the internal format or size of the image.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glTexStorage2DMultisample.html">glTexStorage2DMultisample</a>
+    and
+    <a class="function" href="./glTexStorage2DMultisample.html#c-glTextureStorage2DMultisample">glTextureStorage2DMultisample</a>
+    specify the
+            storage requirements for
+            a two-dimensional multisample texture. Once a texture is specified with this
+            command, its format and dimensions become immutable unless it is a proxy
+            texture. The contents of the image may still be modified, however, its storage requirements
+            may not change. Such a texture is referred to as an
+    <span class="emphasis">immutable-format</span>
+    texture.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-samples">samples</a>
+    specifies the number of samples to be used for the texture
+            and must be greater than zero and less than or equal to the value of
+    <span class="constant">GL_MAX_SAMPLES</span>
+    .
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    must be a color-renderable, depth-renderable, or stencil-renderable format.
+    <a class="parameter" href="#param-width">width</a>
+    and
+    <a class="parameter" href="#param-height">height</a>
+    specify the width and height,
+            respectively, of the texture. If
+    <a class="parameter" href="#param-fixedsamplelocations">fixedsamplelocations</a>
+    is
+    <span class="constant">GL_TRUE</span>
+    ,
+            the image will use identical sample locations and the same number of samples for all texels in the image,
+            and the sample locations will not depend on the internal format or size of the image.
+</div>
+    <div class="para">
+    <div class="include"></div>
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glTexStorage2DMultisample.html">glTexStorage2DMultisample</a>
+    if zero is bound to
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glTexStorage2DMultisample.html#c-glTextureStorage2DMultisample">glTextureStorage2DMultisample</a>
+    if
+    <a class="parameter" href="#param-texture">texture</a>
+    is not the name of an existing
+            texture object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is not a
+            valid color-renderable, depth-renderable or stencil-renderable format.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    or the effective target of
+    <a class="parameter" href="#param-texture">texture</a>
+    is not one of the accepted
+            targets described above.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-width">width</a>
+    or
+    <a class="parameter" href="#param-height">height</a>
+    are less than 1 or greater than the value of
+    <span class="constant">GL_MAX_TEXTURE_SIZE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-levels">levels</a>
+    is less than 1.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-samples">samples</a>
+    is zero.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-samples">samples</a>
+    is greater than the
+            maximum number of samples supported for this
+    <a class="parameter" href="#param-target">target</a>
+    and
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the value of
+    <span class="constant">GL_TEXTURE_IMMUTABLE_FORMAT</span>
+    for the texture bound to
+    <a class="parameter" href="#param-target">target</a>
+    is not
+    <span class="constant">GL_FALSE</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glTexStorage2DMultisample.html">glTexStorage2DMultisample</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glTexStorage2DMultisample.html#c-glTextureStorage2DMultisample">glTextureStorage2DMultisample</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage2DMultisample.html">glTexImage2DMultisample</a>
+    ,
+    <a class="crossref" href="./glTexStorage1D.html">glTexStorage1D</a>
+    ,
+    <a class="crossref" href="./glTexStorage3D.html">glTexStorage3D</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2013-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

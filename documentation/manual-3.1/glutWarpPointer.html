@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutWarpPointer : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutWarpPointer</h1>
+</header>
+<main class="content">
+    <section class="purpose">glutWarpPointer warps the pointer's location.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutWarpPointer"></a>
+    <span class="c-function">glutWarpPointer</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        int(
+            <a href="#param-y" class="parameter">y</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutWarpPointer"></a>
+    <span class="py-function">glutWarpPointer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutWarpPointer( c_int(x), c_int(y) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-x"></a>
+                        x
+                    </th>
+                    <td>
+    <div class="simpara">
+						X offset relative to the current window's origin (upper left).
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-y"></a>
+                        y
+                    </th>
+                    <td>
+    <div class="simpara">
+						Y offset relative to the current window's origin (upper left).
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutWarpPointer.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutWarpPointer.html">glutWarpPointer</a>
+    warps the window system's pointer to a new location relative
+			to the origin of the current window. The new location will be offset
+    <a class="parameter" href="#param-x">x</a>
+    pixels on the X axis and
+    <a class="parameter" href="#param-y">y</a>
+    pixels on the Y axis. These parameters may be negative. The warp is done immediately.
+</div>
+    <div class="para">
+			If the pointer would be warped outside the screen's frame buffer region, the location will be clamped to the nearest
+			screen edge. The window system is allowed to further constrain the pointer's location in window system dependent ways.
+		</div>
+    <div class="para">
+			The following is good advice that applies to
+    <a class="function" href="./glutWarpPointer.html">glutWarpPointer</a>
+    : "There is seldom
+			any reason for calling this function. The pointer should normally be left to the user." (from Xlib's XWarpPointer man
+			page.)
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutMouseFunc.html">glutMouseFunc</a>
+            <a class="crossref" href="./glutMotionFunc.html">glutMotionFunc</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

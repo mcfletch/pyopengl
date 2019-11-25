@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glBeginQuery : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glBeginQuery</h1>
+</header>
+<main class="content">
+    <section class="purpose">delimit the boundaries of a query object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glBeginQuery"></a>
+    <span class="c-function">glBeginQuery</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-id" class="parameter">id</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glBeginQuery"></a>
+    <span class="py-function">glBeginQuery</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-id" class="parameter">id</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glEndQuery"></a>
+    <span class="c-function">glEndQuery</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glEndQuery"></a>
+    <span class="py-function">glEndQuery</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target type of query object established between
+    <a class="function" href="./glBeginQuery.html">glBeginQuery</a>
+    and the subsequent
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+    .
+                    The symbolic constant must be one of
+    <span class="constant">GL_SAMPLES_PASSED</span>
+    ,
+    <span class="constant">GL_ANY_SAMPLES_PASSED</span>
+    ,
+    <span class="constant">GL_ANY_SAMPLES_PASSED_CONSERVATIVE</span>
+    ,
+    <span class="constant">GL_PRIMITIVES_GENERATED</span>
+    ,
+    <span class="constant">GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN</span>
+    , or
+    <span class="constant">GL_TIME_ELAPSED</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-id"></a>
+                        id
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of a query object.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target type of query object to be concluded.
+                    The symbolic constant must be one of
+    <span class="constant">GL_SAMPLES_PASSED</span>
+    ,
+    <span class="constant">GL_ANY_SAMPLES_PASSED</span>
+    ,
+    <span class="constant">GL_ANY_SAMPLES_PASSED_CONSERVATIVE</span>
+    ,
+    <span class="constant">GL_PRIMITIVES_GENERATED</span>
+    ,
+    <span class="constant">GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN</span>
+    , or
+    <span class="constant">GL_TIME_ELAPSED</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glBeginQuery.html">glBeginQuery</a>
+    and
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+    delimit the
+            boundaries of a query object.
+    <a class="parameter" href="#param-query">query</a>
+    must be a name previously returned from a call to
+    <a class="crossref" href="./glGenQueries.html">glGenQueries</a>
+    . If a query object with name
+    <a class="parameter" href="#param-id">id</a>
+    does not yet exist it is created with the type determined by
+    <a class="parameter" href="#param-target">target</a>
+    .
+    <a class="parameter" href="#param-target">target</a>
+    must
+            be one of
+    <span class="constant">GL_SAMPLES_PASSED</span>
+    ,
+    <span class="constant">GL_ANY_SAMPLES_PASSED</span>
+    ,
+    <span class="constant">GL_PRIMITIVES_GENERATED</span>
+    ,
+    <span class="constant">GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN</span>
+    , or
+    <span class="constant">GL_TIME_ELAPSED</span>
+    . The behavior of the query
+            object depends on its type and is as follows.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_SAMPLES_PASSED</span>
+    ,
+    <a class="parameter" href="#param-id">id</a>
+    must be an unused name,
+            or the name of an existing occlusion query object.
+            When
+    <a class="function" href="./glBeginQuery.html">glBeginQuery</a>
+    is executed, the query object's samples-passed counter is reset to 0.  Subsequent
+            rendering will increment the counter for every sample that passes the depth test.  If the value of
+    <span class="constant">GL_SAMPLE_BUFFERS</span>
+    is 0, then the samples-passed count is incremented by 1 for each fragment. If the value of
+    <span class="constant">GL_SAMPLE_BUFFERS</span>
+    is 1, then the samples-passed count is incremented by the number of samples whose coverage bit is set. However, implementations, at their
+            discression may instead increase the samples-passed count by the value of
+    <span class="constant">GL_SAMPLES</span>
+    if any sample in the fragment
+            is covered. When
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+    is executed, the samples-passed counter is assigned to the query object's result value.  This value can be queried by
+            calling
+    <a class="crossref" href="./glGetQueryObject.html">glGetQueryObject</a>
+    with
+    <a class="parameter" href="#param-pname">pname</a>
+    <span class="constant">GL_QUERY_RESULT</span>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_ANY_SAMPLES_PASSED</span>
+    or
+    <span class="constant">GL_ANY_SAMPLES_PASSED_CONSERVATIVE</span>
+    ,
+    <a class="parameter" href="#param-id">id</a>
+    must be an unused name, or the name of an existing boolean occlusion query object.
+            When
+    <a class="function" href="./glBeginQuery.html">glBeginQuery</a>
+    is executed, the query object's samples-passed flag is reset to
+    <span class="constant">GL_FALSE</span>
+    .
+            Subsequent rendering causes the flag to be set to
+    <span class="constant">GL_TRUE</span>
+    if any sample passes the depth test in the case of
+    <span class="constant">GL_ANY_SAMPLES_PASSED</span>
+    ,
+            or if the implementation determines that any sample might pass the depth test in the case of
+    <span class="constant">GL_ANY_SAMPLES_PASSED_CONSERVATIVE</span>
+    .
+            The implementation may be able to provide a more efficient test in the case of
+    <span class="constant">GL_ANY_SAMPLES_PASSED_CONSERVATIVE</span>
+    if some false positives are acceptable to the application.  When
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+    is executed, the samples-passed flag is assigned to the query object's result value.  This value can
+            be queried by calling
+    <a class="crossref" href="./glGetQueryObject.html">glGetQueryObject</a>
+    with
+    <a class="parameter" href="#param-pname">pname</a>
+    <span class="constant">GL_QUERY_RESULT</span>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_PRIMITIVES_GENERATED</span>
+    ,
+    <a class="parameter" href="#param-id">id</a>
+    must be an unused
+            name, or the name of an existing primitive query object previously bound to the
+    <span class="constant">GL_PRIMITIVES_GENERATED</span>
+    query binding.
+            When
+    <a class="function" href="./glBeginQuery.html">glBeginQuery</a>
+    is executed, the query object's primitives-generated counter is reset to 0.  Subsequent
+            rendering will increment the counter once for every vertex that is emitted from the geometry shader, or from the vertex shader if
+            no geometry shader is present.  When
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+    is executed, the primitives-generated counter is assigned to
+            the query object's result value.  This value can be queried by calling
+    <a class="crossref" href="./glGetQueryObject.html">glGetQueryObject</a>
+    with
+    <a class="parameter" href="#param-pname">pname</a>
+    <span class="constant">GL_QUERY_RESULT</span>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN</span>
+    ,
+    <a class="parameter" href="#param-id">id</a>
+    must be
+            an unused name, or the name of an existing primitive query object previously bound to the
+    <span class="constant">GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN</span>
+    query binding. When
+    <a class="function" href="./glBeginQuery.html">glBeginQuery</a>
+    is executed, the query object's primitives-written counter is reset to 0.  Subsequent
+            rendering will increment the counter once for every vertex that is written into the bound transform feedback buffer(s).  If transform feedback
+            mode is not activated between the call to
+    <a class="function" href="./glBeginQuery.html">glBeginQuery</a>
+    and
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+    , the counter will not be
+            incremented.  When
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+    is executed, the primitives-written counter is assigned to
+            the query object's result value.  This value can be queried by calling
+    <a class="crossref" href="./glGetQueryObject.html">glGetQueryObject</a>
+    with
+    <a class="parameter" href="#param-pname">pname</a>
+    <span class="constant">GL_QUERY_RESULT</span>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_TIME_ELAPSED</span>
+    ,
+    <a class="parameter" href="#param-id">id</a>
+    must be
+            an unused name, or the name of an existing timer query object previously bound to the
+    <span class="constant">GL_TIME_ELAPSED</span>
+    query binding. When
+    <a class="function" href="./glBeginQuery.html">glBeginQuery</a>
+    is executed, the query object's time counter is reset to 0.  When
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+    is executed, the elapsed server time that has passed since the call to
+    <a class="function" href="./glBeginQuery.html">glBeginQuery</a>
+    is written into the query object's
+            time counter.  This value can be queried by calling
+    <a class="crossref" href="./glGetQueryObject.html">glGetQueryObject</a>
+    with
+    <a class="parameter" href="#param-pname">pname</a>
+    <span class="constant">GL_QUERY_RESULT</span>
+    .
+</div>
+    <div class="para">
+            Querying the
+    <span class="constant">GL_QUERY_RESULT</span>
+    implicitly flushes the GL pipeline until the rendering delimited by the
+            query object has completed and the result is available.
+    <span class="constant">GL_QUERY_RESULT_AVAILABLE</span>
+    can be queried to
+            determine if the result is immediately available or if the rendering is not yet complete.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            If the query target's count exceeds the maximum value representable in the number of available bits, as reported by
+    <a class="crossref" href="./glGetQueryiv.html">glGetQueryiv</a>
+    with
+    <a class="parameter" href="#param-target">target</a>
+    set to the
+            appropriate query target and
+    <a class="parameter" href="#param-pname">pname</a>
+    <span class="constant">GL_QUERY_COUNTER_BITS</span>
+    , the count becomes undefined.
+</div>
+    <div class="para">
+            An implementation may support 0 bits in its counter, in which case query results are always undefined
+            and essentially useless.
+        </div>
+    <div class="para">
+            When
+    <span class="constant">GL_SAMPLE_BUFFERS</span>
+    is 0, the samples-passed counter of an occlusion query will increment once for each
+            fragment that passes the depth test.  When
+    <span class="constant">GL_SAMPLE_BUFFERS</span>
+    is 1, an implementation may either increment
+            the samples-passed counter individually for each sample of a fragment that passes the depth test, or it may choose to increment
+            the counter for all samples of a fragment if any one of them passes the depth test.
+</div>
+    <div class="para">
+            The query targets
+    <span class="constant">GL_ANY_SAMPLES_PASSED</span>
+    , and
+    <span class="constant">GL_TIME_ELAPSED</span>
+    are availale only if
+            the GL version is 3.3 or higher.
+</div>
+    <div class="para">
+            The query target
+    <span class="constant">GL_ANY_SAMPLES_PASSED_CONSERVATIVE</span>
+    is available only of the GL version is 4.3 or higher.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not one of the accepted tokens.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glBeginQuery.html">glBeginQuery</a>
+    is executed while
+            a query object of the same
+    <a class="parameter" href="#param-target">target</a>
+    is already active.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+    is executed when a query object of the same
+    <a class="parameter" href="#param-target">target</a>
+    is not active.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-id">id</a>
+    is 0.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-id">id</a>
+    is the name of an already active query object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-id">id</a>
+    refers to an existing query object whose type
+            does not does not match
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glBeginQuery.html">glBeginQuery</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBeginQueryIndexed, glEndQueryIndexed.html#c-glBeginQueryIndexed">glBeginQueryIndexed</a>
+    ,
+    <a class="crossref" href="./glDeleteQueries.html">glDeleteQueries</a>
+    ,
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+    ,
+    <a class="crossref" href="./glGenQueries.html">glGenQueries</a>
+    ,
+    <a class="crossref" href="./glGetQueryObject.html">glGetQueryObject</a>
+    ,
+    <a class="crossref" href="./glGetQueryiv.html">glGetQueryiv</a>
+    ,
+    <a class="crossref" href="./glIsQuery.html">glIsQuery</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2005 Addison-Wesley.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glBeginQuery</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/arbocclusionquery.py">tests/arbocclusionquery.py</a>
+    Lines: <span class="sample-lines">14, 14, 44</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/boundingvolume.py">OpenGLContext/scenegraph/boundingvolume.py</a>
+    Lines: <span class="sample-lines">37, 37, 289</span>
+</div>
+        <div class="sample-key">glEndQuery</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/arbocclusionquery.py">tests/arbocclusionquery.py</a>
+    Lines: <span class="sample-lines">16, 16, 47</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/boundingvolume.py">OpenGLContext/scenegraph/boundingvolume.py</a>
+    Lines: <span class="sample-lines">39, 39, 292</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

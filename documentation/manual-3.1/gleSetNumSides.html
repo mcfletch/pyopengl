@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gleSetNumSides : PyOpenGL 3.1.4 GLE Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+    <h1>gleSetNumSides</h1>
+</header>
+<main class="content">
+    <section class="purpose">Query and Set the cylinder roundness.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gleGetNumSides"></a>
+    <span class="c-function">gleGetNumSides</span>(<span class="parameter-list">
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-gleGetNumSides"></a>
+    <span class="py-function">gleGetNumSides</span>( <span class="parameter-list">
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">gleGetNumSides(  ) -&gt; c_int</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-gleSetNumSides"></a>
+    <span class="c-function">gleSetNumSides</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-nslices" class="parameter">nslices</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gleSetNumSides"></a>
+    <span class="py-function">gleSetNumSides</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-slices" class="parameter">slices</a>
+    </span>
+</span> )
+    <pre class="pydoc">gleSetNumSides( c_int(slices) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-nslices"></a>
+                        nslices
+                    </th>
+                    <td>
+    <div class="simpara">
+						positive integer number of slices
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="gleSetNumSides.3GLE-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			Query and set the GLE cylinder and cone roundness. When GLE draws a cylinder or a cone, it approximates the circular
+			cross-section with a polygon (of 20 sides by default). These subroutines can be used to change the default number of
+			sides in this cross-section. A smaller number of sides can typically be drawn much faster, at the loss of some visual
+			accuracy. Increasing the number of sides to more than 20 will typically have no noticable visual effect.
+		</div>
+    </section><section class="section" id="gleSetNumSides.3GLE-bugs">
+    <h2 class="title">Bugs</h2>
+    <div class="para">
+			Multiple threads using GLE share a single global number of sides (although this should be easily fixable because GLE
+			does use a centralized graphics context).
+		</div>
+    </section><section class="section" id="gleSetNumSides.3GLE-author">
+    <h2 class="title">Author</h2>
+    <div class="para">
+			Linas Vepstas
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glePolyCylinder.html">glePolyCylinder</a>
+            <a class="crossref" href="./glePolyCone.html">glePolyCone</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gleSetNumSides</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/extrusions.py">OpenGLContext/scenegraph/extrusions.py</a>
+    Lines: <span class="sample-lines">102</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glIsEnabled : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glIsEnabled</h1>
+</header>
+<main class="content">
+    <section class="purpose">test whether a capability is enabled</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glIsEnabled"></a>
+    <span class="c-function">glIsEnabled</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-cap" class="parameter">cap</a>
+        )
+    </span>
+</span>)-&gt; GLboolean
+</div>
+                <div class="py-signature">
+    <a name="py-glIsEnabled"></a>
+    <span class="py-function">glIsEnabled</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-cap" class="parameter">cap</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_ubyte'&gt;</span>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glIsEnabled, glIsEnabledi"></a>
+    <span class="c-function">glIsEnabled, glIsEnabledi</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glIsEnabledi"></a>
+    <span class="c-function">glIsEnabledi</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-cap" class="parameter">cap</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+    </span>
+</span>)-&gt; GLboolean
+</div>
+                <div class="py-signature">
+    <a name="py-glIsEnabledi"></a>
+    <span class="py-function">glIsEnabledi</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_ubyte'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-cap"></a>
+                        cap
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a symbolic constant indicating a GL capability.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the index of the capability.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glIsEnabled.html">glIsEnabled</a>
+    returns
+    <span class="constant">GL_TRUE</span>
+    if
+    <a class="parameter" href="#param-cap">cap</a>
+    is an enabled capability
+            and returns
+    <span class="constant">GL_FALSE</span>
+    otherwise. Boolean states that are indexed may be tested with
+    <a class="function" href="./glIsEnabled.html#c-glIsEnabledi">glIsEnabledi</a>
+    .
+            For
+    <a class="function" href="./glIsEnabled.html#c-glIsEnabledi">glIsEnabledi</a>
+    ,
+    <a class="parameter" href="#param-index">index</a>
+    specifies the index of the capability to test.
+    <a class="parameter" href="#param-index">index</a>
+    must be between zero and the count of indexed capabilities for
+    <a class="parameter" href="#param-cap">cap</a>
+    .
+            Initially all capabilities except
+    <span class="constant">GL_DITHER</span>
+    are disabled;
+    <span class="constant">GL_DITHER</span>
+    is initially enabled.
+</div>
+    <div class="para">
+            The following capabilities are accepted for
+    <a class="parameter" href="#param-cap">cap</a>
+    :
+</div>
+    <div class="para">
+        </div>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>
+    <span class="emphasis"> Constant </span>
+</th><th>
+    <span class="emphasis"> See </span>
+</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+    <span class="constant">GL_BLEND</span>
+</td><td>
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    ,
+    <a class="crossref" href="./glLogicOp.html">glLogicOp</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_CLIP_DISTANCE</span>
+    <span class="emphasis">i</span>
+</td><td>
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_COLOR_LOGIC_OP</span>
+</td><td>
+    <a class="crossref" href="./glLogicOp.html">glLogicOp</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_CULL_FACE</span>
+</td><td>
+    <a class="crossref" href="./glCullFace.html">glCullFace</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DEPTH_CLAMP</span>
+</td><td>
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DEBUG_OUTPUT</span>
+</td><td>
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DEBUG_OUTPUT_SYNCHRONOUS</span>
+</td><td>
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DEPTH_TEST</span>
+</td><td>
+    <a class="crossref" href="./glDepthFunc.html">glDepthFunc</a>
+    ,
+    <a class="crossref" href="./glDepthRange.html">glDepthRange</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DITHER</span>
+</td><td>
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FRAMEBUFFER_SRGB</span>
+</td><td>
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_LINE_SMOOTH</span>
+</td><td>
+    <a class="crossref" href="./glLineWidth.html">glLineWidth</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_MULTISAMPLE</span>
+</td><td>
+    <a class="crossref" href="./glSampleCoverage.html">glSampleCoverage</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_POLYGON_SMOOTH</span>
+</td><td>
+    <a class="crossref" href="./glPolygonMode.html">glPolygonMode</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_POLYGON_OFFSET_FILL</span>
+</td><td>
+    <a class="crossref" href="./glPolygonOffset.html">glPolygonOffset</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_POLYGON_OFFSET_LINE</span>
+</td><td>
+    <a class="crossref" href="./glPolygonOffset.html">glPolygonOffset</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_POLYGON_OFFSET_POINT</span>
+</td><td>
+    <a class="crossref" href="./glPolygonOffset.html">glPolygonOffset</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_PROGRAM_POINT_SIZE</span>
+</td><td>
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_PRIMITIVE_RESTART</span>
+</td><td>
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    ,
+    <a class="crossref" href="./glPrimitiveRestartIndex.html">glPrimitiveRestartIndex</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLE_ALPHA_TO_COVERAGE</span>
+</td><td>
+    <a class="crossref" href="./glSampleCoverage.html">glSampleCoverage</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLE_ALPHA_TO_ONE</span>
+</td><td>
+    <a class="crossref" href="./glSampleCoverage.html">glSampleCoverage</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLE_COVERAGE</span>
+</td><td>
+    <a class="crossref" href="./glSampleCoverage.html">glSampleCoverage</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLE_MASK</span>
+</td><td>
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SCISSOR_TEST</span>
+</td><td>
+    <a class="crossref" href="./glScissor.html">glScissor</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_STENCIL_TEST</span>
+</td><td>
+    <a class="crossref" href="./glStencilFunc.html">glStencilFunc</a>
+    ,
+    <a class="crossref" href="./glStencilOp.html">glStencilOp</a>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_TEXTURE_CUBE_MAP_SEAMLESS</span>
+</td><td>
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+</td>
+                </tr>
+    </tbody></table>
+    <div class="para">
+        </div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            If an error is generated,
+    <a class="function" href="./glIsEnabled.html">glIsEnabled</a>
+    and
+    <a class="function" href="./glIsEnabled.html#c-glIsEnabledi">glIsEnabledi</a>
+    return
+    <span class="constant">GL_FALSE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_DEBUG_OUTPUT</span>
+    and
+    <span class="constant">GL_DEBUG_OUTPUT_SYNCHRONOUS</span>
+    are available only if the GL version is 4.3 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-cap">cap</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated by
+    <a class="function" href="./glIsEnabled.html#c-glIsEnabledi">glIsEnabledi</a>
+    if
+    <a class="parameter" href="#param-index">index</a>
+    is outside the
+            valid range for the indexed state
+    <a class="parameter" href="#param-cap">cap</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glIsEnabled.html">glIsEnabled</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glIsEnabled.html#c-glIsEnabledi">glIsEnabledi</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    ,
+    <a class="function" href="./glEnable.html#c-glDisable">glDisable</a>
+    ,
+    <a class="crossref" href="./glGet.html">glGet</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI
+            Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glIsEnabled</div>
+        <div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/stencil.py">pymt/graphx/stencil.py</a>
+    Lines: <span class="sample-lines">20, 40, 73</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutGameModeGet : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutGameModeGet</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieves GLUT game mode information represented by integers.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutGameModeGet"></a>
+    <span class="c-function">glutGameModeGet</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum(
+            <a href="#param-info" class="parameter">info</a>
+        )
+    </span>
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glutGameModeGet"></a>
+    <span class="py-function">glutGameModeGet</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-query" class="parameter">query</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">glutGameModeGet( GLenum(query) ) -&gt; c_int</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-info"></a>
+                        info
+                    </th>
+                    <td>
+    <div class="simpara">
+						Name of game mode information to retrieve.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutGameModeGet.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutGameModeGet.html">glutGameModeGet</a>
+    retrieves GLUT game mode information represented by integers. The info parameter
+			determines what type of game mode information to return. Requesting game mode information for an invalid GLUT game mode
+			information name returns negative one.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutGet.html">glutGet</a>
+            <a class="crossref" href="./glutDeviceGet.html">glutDeviceGet</a>
+            <a class="crossref" href="./glutLayerGet.html">glutLayerGet</a>
+            <a class="crossref" href="./glutGameModeString.html">glutGameModeString</a>
+            <a class="crossref" href="./glutEnterGameMode.html">glutEnterGameMode</a>
+            <a class="crossref" href="./glutEnterGameMode.html#c-glutLeaveGameMode">glutLeaveGameMode</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

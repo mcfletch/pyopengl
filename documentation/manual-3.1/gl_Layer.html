@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gl_Layer : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>gl_Layer</h1>
+</header>
+<main class="content">
+    <section class="purpose">contains the selected layer of a multi-layer framebuffer attachment</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gl_Layer"></a>
+    <span class="c-function">gl_Layer</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            In the geometry language,
+    <div class="varname">gl_Layer</div>
+    is used to select a specific
+            layer (or face and layer of cube map) in a multi-layer framebuffer attachment. The actual
+            layer used will come from one of the vertices in the primitive being shaded. Which vertex
+            the layer comes from is undefined and as such it is recommended to write the same value
+            to
+    <div class="varname">gl_Layer</div>
+    for all vertices in the primitive. If a shader statically
+            assigns a value to
+    <div class="varname">gl_Layer</div>
+    , layered rendering mode is enabled.
+            If a shader statically assigns a value to
+    <div class="varname">gl_Layer</div>
+    , and there is an execution path through
+            the shader that does not set
+    <div class="varname">gl_Layer</div>
+    , then the value of
+    <div class="varname">gl_Layer</div>
+    is undefined for invocations of the shader that take that path.
+</div>
+    <div class="para">
+            When used with an array of cube map textures, the
+    <div class="varname">gl_Layer</div>
+    output variable
+            takes on a special value. Instead of referring to only the layer, it is used to select a cube map
+            face and a layer. Setting
+    <div class="varname">gl_Layer</div>
+    to the value
+    <math overflow="scroll"><mi>layer</mi><mo>*</mo><mn>6</mn><mo>+</mo><mi>face</mi></math>
+    will render to
+    <math overflow="scroll"><mi>face</mi></math>
+    of the cube defined in
+    <math overflow="scroll"><mi>layer</mi></math>
+    .
+            The face values are as follows:
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>
+    <span class="emphasis"> Face Value </span>
+</th><th>
+    <span class="emphasis"> Resulting Target </span>
+</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+                            0
+                        </td><td>
+    <span class="constant">GL_TEXTURE_CUBEMAP_POSITIVE_X</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                            1
+                        </td><td>
+    <span class="constant">GL_TEXTURE_CUBEMAP_NEGATIVE_X</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                            2
+                        </td><td>
+    <span class="constant">GL_TEXTURE_CUBEMAP_POSITIVE_Y</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                            3
+                        </td><td>
+    <span class="constant">GL_TEXTURE_CUBEMAP_NEGATIVE_Y</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                            4
+                        </td><td>
+    <span class="constant">GL_TEXTURE_CUBEMAP_POSITIVE_Z</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                            5
+                        </td><td>
+    <span class="constant">GL_TEXTURE_CUBEMAP_NEGATIVE_Z</span>
+</td>
+                </tr>
+    </tbody></table>
+</div>
+    <div class="para">
+            For example, to render to the positive y cube map face located in the 5
+    <div class="superscript">th</div>
+    layer of the
+            cube map array,
+    <div class="varname">gl_Layer</div>
+    should be set to
+    <math overflow="scroll"><mn>5</mn><mo>*</mo><mn>6</mn><mo>+</mo><mn>2</mn></math>
+    .
+</div>
+    <div class="para">
+            The input variable
+    <div class="varname">gl_Layer</div>
+    in the fragment language will have the same value that was written to the
+            output variable
+    <div class="varname">gl_Layer</div>
+    in the geometry language. If the geometry stage does not dynamically assign a
+            value to
+    <div class="varname">gl_Layer</div>
+    , the value of
+    <div class="varname">gl_Layer</div>
+    in the fragment stage will be undefined.  If the geometry stage
+            makes no static assignment to
+    <div class="varname">gl_Layer</div>
+    , the input
+    <div class="varname">gl_Layer</div>
+    in the fragment stage will be zero.  Otherwise,
+            the fragment stage will read the same value written by the geometry stage, even if that value is out of
+            range.  If a fragment shader contains a static access to
+    <div class="varname">gl_Layer</div>
+    , it will count against the implementation
+            defined limit for the maximum number of inputs to the fragment stage.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>gl_Layer (geometry stage)</td><td></td>
+                </tr><tr valign="top">
+                    <td>gl_Layer (fragment stage)</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gl_ViewportIndex.html">gl_ViewportIndex</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

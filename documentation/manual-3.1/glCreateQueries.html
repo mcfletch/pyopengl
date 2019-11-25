@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glCreateQueries : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glCreateQueries</h1>
+</header>
+<main class="content">
+    <section class="purpose">create query objects</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glCreateQueries"></a>
+    <span class="c-function">glCreateQueries</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-n" class="parameter">n</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint *(
+            <a href="#param-ids" class="parameter">ids</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glCreateQueries"></a>
+    <span class="py-function">glCreateQueries</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-n" class="parameter">n</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-ids" class="parameter">ids</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                        Specifies the target of each created query object.
+                    </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-n"></a>
+                        n
+                    </th>
+                    <td>
+    <div class="para">
+                        Number of query objects to create.
+                    </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-ids"></a>
+                        ids
+                    </th>
+                    <td>
+    <div class="para">
+                        Specifies an array in which names of the new query
+                        objects are stored.
+                    </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glCreateQueries.html">glCreateQueries</a>
+    returns
+    <a class="parameter" href="#param-n">n</a>
+    previously unused query
+            object names in
+    <a class="parameter" href="#param-ids">ids</a>
+    , each representing
+            a new query object with the specified
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-target">target</a>
+    may be one of
+    <span class="constant">GL_SAMPLES_PASSED</span>
+    ,
+    <span class="constant">GL_ANY_SAMPLES_PASSED</span>
+    ,
+    <span class="constant">GL_ANY_SAMPLES_PASSED_CONSERVATIVE</span>
+    ,
+    <span class="constant">GL_TIME_ELAPSED</span>
+    ,
+    <span class="constant">GL_TIMESTAMP</span>
+    ,
+    <span class="constant">GL_PRIMITIVES_GENERATED</span>
+    or
+    <span class="constant">GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-n">n</a>
+    is negative.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glCreateQueries.html">glCreateQueries</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBeginQuery.html">glBeginQuery</a>
+    ,
+    <a class="crossref" href="./glBeginQueryIndexed, glEndQueryIndexed.html#c-glBeginQueryIndexed">glBeginQueryIndexed</a>
+    ,
+    <a class="crossref" href="./glDeleteQueries.html">glDeleteQueries</a>
+    ,
+    <a class="function" href="./glBeginQuery.html#c-glEndQuery">glEndQuery</a>
+    ,
+    <a class="crossref" href="./glGenQueries.html">glGenQueries</a>
+    ,
+    <a class="crossref" href="./glGetQueryObject.html">glGetQueryObject</a>
+    ,
+    <a class="crossref" href="./glGetQueryiv.html">glGetQueryiv</a>
+    ,
+    <a class="crossref" href="./glIsQuery.html">glIsQuery</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glReadBuffer : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glReadBuffer</h1>
+</header>
+<main class="content">
+    <section class="purpose">select a color buffer source for pixels</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glNamedFramebufferReadBuffer"></a>
+    <span class="c-function">glNamedFramebufferReadBuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-mode" class="parameter">mode</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glNamedFramebufferReadBuffer"></a>
+    <span class="py-function">glNamedFramebufferReadBuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-src" class="parameter">src</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glReadBuffer"></a>
+    <span class="c-function">glReadBuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-mode" class="parameter">mode</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glReadBuffer"></a>
+    <span class="py-function">glReadBuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-src" class="parameter">src</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-framebuffer"></a>
+                        framebuffer
+                    </th>
+                    <td>
+    <div class="para">Specifies the name of the framebuffer object for
+    <a class="function" href="./glReadBuffer.html#c-glNamedFramebufferReadBuffer">glNamedFramebufferReadBuffer</a>
+    function.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-mode"></a>
+                        mode
+                    </th>
+                    <td>
+    <div class="para">Specifies a color buffer. Accepted values are
+    <span class="constant">GL_FRONT_LEFT</span>
+    ,
+    <span class="constant">GL_FRONT_RIGHT</span>
+    ,
+    <span class="constant">GL_BACK_LEFT</span>
+    ,
+    <span class="constant">GL_BACK_RIGHT</span>
+    ,
+    <span class="constant">GL_FRONT</span>
+    ,
+    <span class="constant">GL_BACK</span>
+    ,
+    <span class="constant">GL_LEFT</span>
+    ,
+    <span class="constant">GL_RIGHT</span>
+    , and the constants
+    <span class="constant">GL_COLOR_ATTACHMENT</span>
+    <span class="emphasis">i</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glReadBuffer.html">glReadBuffer</a>
+    specifies a color buffer as the
+    source for subsequent
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage1D.html">glCopyTexImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage2D.html">glCopyTexImage2D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage1D.html">glCopyTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage2D.html">glCopyTexSubImage2D</a>
+    ,
+    and
+    <a class="crossref" href="./glCopyTexSubImage3D.html">glCopyTexSubImage3D</a>
+    commands.
+    <a class="parameter" href="#param-mode">mode</a>
+    accepts one of twelve or more
+    predefined values. In a fully configured system,
+    <span class="constant">GL_FRONT</span>
+    ,
+    <span class="constant">GL_LEFT</span>
+    , and
+    <span class="constant">GL_FRONT_LEFT</span>
+    all name the front left buffer,
+    <span class="constant">GL_FRONT_RIGHT</span>
+    and
+    <span class="constant">GL_RIGHT</span>
+    name the front right buffer, and
+    <span class="constant">GL_BACK_LEFT</span>
+    and
+    <span class="constant">GL_BACK</span>
+    name the back left buffer. Further more,
+    the constants
+    <span class="constant">GL_COLOR_ATTACHMENT</span>
+    <span class="emphasis">i</span>
+    may be
+    used to indicate the
+    <span class="emphasis">i</span>
+    <div class="superscript">th</div>
+    color attachment where
+    <span class="emphasis">i</span>
+    ranges from zero to the
+    value of
+    <span class="constant">GL_MAX_COLOR_ATTACHMENTS</span>
+    minus one.
+</div>
+    <div class="para">Nonstereo double-buffered configurations have only a front left and
+    a back left buffer. Single-buffered configurations have a front left and a
+    front right buffer if stereo, and only a front left buffer if nonstereo.
+    It is an error to specify a nonexistent buffer to
+    <a class="function" href="./glReadBuffer.html">glReadBuffer</a>
+    .
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-mode">mode</a>
+    is initially
+    <span class="constant">GL_FRONT</span>
+    in single-buffered configurations and
+    <span class="constant">GL_BACK</span>
+    in double-buffered configurations.
+</div>
+    <div class="para">For
+    <a class="function" href="./glReadBuffer.html">glReadBuffer</a>
+    , the target framebuffer object
+    is that bound to
+    <span class="constant">GL_READ_FRAMEBUFFER</span>
+    . For
+    <a class="function" href="./glReadBuffer.html#c-glNamedFramebufferReadBuffer">glNamedFramebufferReadBuffer</a>
+    ,
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    must either be zero or the name of the
+    target framebuffer object. If
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is zero,
+    then the default read framebuffer is affected.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-mode">mode</a>
+    is not one of the twelve (or more) accepted
+    values.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-mode">mode</a>
+    specifies a buffer that does not exist.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glReadBuffer.html#c-glNamedFramebufferReadBuffer">glNamedFramebufferReadBuffer</a>
+    if
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is not zero or the name of an existing
+    framebuffer object.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_READ_BUFFER</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glReadBuffer.html#c-glNamedFramebufferReadBuffer">glNamedFramebufferReadBuffer</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glReadBuffer.html">glReadBuffer</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glCopyTexImage1D.html">glCopyTexImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage2D.html">glCopyTexImage2D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage1D.html">glCopyTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage2D.html">glCopyTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage3D.html">glCopyTexSubImage3D</a>
+    ,
+    <a class="crossref" href="./glDrawBuffer.html">glDrawBuffer</a>
+    ,
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This document is licensed under the SGI
+            Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glReadBuffer</div>
+        <div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Core.py">VisionEgg/Core.py</a>
+    Lines: <span class="sample-lines">464, 466</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Textures.py">VisionEgg/Textures.py</a>
+    Lines: <span class="sample-lines">1033, 1035</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/modules/mjpegserver.py">pymt/modules/mjpegserver.py</a>
+    Lines: <span class="sample-lines">32, 160</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/modules/keybinding.py">pymt/modules/keybinding.py</a>
+    Lines: <span class="sample-lines">34, 36</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/modules/recordvideo.py">pymt/modules/recordvideo.py</a>
+    Lines: <span class="sample-lines">9, 19</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/fbo.py">pymt/graphx/fbo.py</a>
+    Lines: <span class="sample-lines">20, 251, 279</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/functions/getframe.py">functions/getframe.py</a>
+    Lines: <span class="sample-lines">31</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/axes.py">core/axes.py</a>
+    Lines: <span class="sample-lines">41</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluCylinder : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluCylinder</h1>
+</header>
+<main class="content">
+    <section class="purpose">draw a cylinder</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluCylinder"></a>
+    <span class="c-function">gluCylinder</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUquadric* (
+            <a href="#param-quad" class="parameter">quad</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-base" class="parameter">base</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-top" class="parameter">top</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-slices" class="parameter">slices</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-stacks" class="parameter">stacks</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluCylinder"></a>
+    <span class="py-function">gluCylinder</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-quad" class="parameter">quad</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-base" class="parameter">base</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-top" class="parameter">top</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-slices" class="parameter">slices</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-stacks" class="parameter">stacks</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluCylinder( POINTER(GLUquadric)(quad), GLdouble(base), GLdouble(top), GLdouble(height), GLint(slices), GLint(stacks) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-quad"></a>
+                        quad
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the quadrics object (created with
+    <a class="crossref" href="./gluNewQuadric.html">gluNewQuadric</a>
+    ).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-base"></a>
+                        base
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the radius of the cylinder at
+    <span class="emphasis">z</span>
+    = 0.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-top"></a>
+                        top
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the radius of the cylinder at
+    <span class="emphasis">z</span>
+    =
+    <a class="parameter" href="#param-height">height</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-height"></a>
+                        height
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the height of the cylinder.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-slices"></a>
+                        slices
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of subdivisions around the
+    <span class="emphasis">z</span>
+    axis.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-stacks"></a>
+                        stacks
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of subdivisions along the
+    <span class="emphasis">z</span>
+    axis.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluCylinder.html">gluCylinder</a>
+    draws a cylinder oriented along the
+    <span class="emphasis">z</span>
+    axis. The base of the cylinder
+            is placed at
+    <span class="emphasis">z</span>
+    = 0 and the top at
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">z</mi>
+                    <mo>=</mo>
+                    <mi mathvariant="italic">height</mi>
+                </mrow>
+            </math>
+    .
+            Like a sphere,
+            a cylinder is subdivided around the
+    <span class="emphasis">z</span>
+    axis into slices and along the
+    <span class="emphasis">z</span>
+    axis into stacks.
+</div>
+    <div class="para">
+            Note that if
+    <a class="parameter" href="#param-top">top</a>
+    is set to 0.0, this routine generates a cone.
+</div>
+    <div class="para">
+            If the orientation is set to
+    <span class="constant">GLU_OUTSIDE</span>
+    (with
+    <a class="crossref" href="./gluQuadricOrientation.html">gluQuadricOrientation</a>
+    ), then any generated normals
+            point away from the
+    <span class="emphasis">z</span>
+    axis. Otherwise, they point toward the
+    <span class="emphasis">z</span>
+    axis.
+</div>
+    <div class="para">
+            If texturing is turned on (with
+    <a class="crossref" href="./gluQuadricTexture.html">gluQuadricTexture</a>
+    ), then texture
+            coordinates are generated so that
+    <span class="emphasis">t</span>
+    ranges linearly from 0.0
+            at
+    <span class="emphasis">z</span>
+    = 0 to 1.0 at
+    <span class="emphasis">z</span>
+    =
+    <a class="parameter" href="#param-height">height</a>
+    , and
+    <span class="emphasis">s</span>
+    ranges from 0.0 at the +
+    <span class="emphasis">y</span>
+    axis, to 0.25 at the +
+    <span class="emphasis">x</span>
+    axis,
+            to 0.5 at the -
+    <span class="emphasis">y</span>
+    axis, to 0.75 at the \-
+    <span class="emphasis">x</span>
+    axis,
+            and back to 1.0 at the +
+    <span class="emphasis">y</span>
+    axis.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluDisk.html">gluDisk</a>
+    ,
+    <a class="crossref" href="./gluNewQuadric.html">gluNewQuadric</a>
+    ,
+    <a class="crossref" href="./gluPartialDisk.html">gluPartialDisk</a>
+    ,
+    <a class="crossref" href="./gluQuadricTexture.html">gluQuadricTexture</a>
+    ,
+    <a class="crossref" href="./gluSphere.html">gluSphere</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluCylinder</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson23.py">PyOpenGL-Demo/NeHe/lesson23.py</a>
+    Lines: <span class="sample-lines">161, 172</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson42.py">PyOpenGL-Demo/NeHe/lesson42.py</a>
+    Lines: <span class="sample-lines">345</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson18.py">PyOpenGL-Demo/NeHe/lesson18.py</a>
+    Lines: <span class="sample-lines">207, 218</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/lesson44.py">PyOpenGL-Demo/NeHe/lesson44/lesson44.py</a>
+    Lines: <span class="sample-lines">195</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Examples/OpenGL/Checkers/CheckersPiece.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Examples/OpenGL/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">53</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/Examples/Checkers/CheckersPiece.py">Sketches/MPS/Examples/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">53</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Examples/Checkers/CheckersPiece.py">Sketches/CL/Topology3D/THF/Examples/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">53</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Examples/Checkers/CheckersPiece.py">Sketches/THF/Packages/Examples/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">53</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Examples/OpenGL/Checkers/CheckersPiece.py">Code/Python/Kamaelia/Examples/OpenGL/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">53</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

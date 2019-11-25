@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluPwlCurve : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluPwlCurve</h1>
+</header>
+<main class="content">
+    <section class="purpose">describe a piecewise linear NURBS trimming curve</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluPwlCurve"></a>
+    <span class="c-function">gluPwlCurve</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUnurbs* (
+            <a href="#param-nurb" class="parameter">nurb</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-count" class="parameter">count</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat* (
+            <a href="#param-data" class="parameter">data</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-stride" class="parameter">stride</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluPwlCurve"></a>
+    <span class="py-function">gluPwlCurve</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-nurb" class="parameter">nurb</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-count" class="parameter">count</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-stride" class="parameter">stride</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluPwlCurve -- piece-wise linear curve within GLU context
+
+    data -- the data-array
+    type -- determines number of elements/data-point
+    </pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-nurb"></a>
+                        nurb
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the NURBS object (created with
+    <a class="crossref" href="./gluNewNurbsRenderer.html">gluNewNurbsRenderer</a>
+    ).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-count"></a>
+                        count
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of points on the curve.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-data"></a>
+                        data
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies an array containing the curve points.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-stride"></a>
+                        stride
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the offset (a number of single-precision floating-point values)
+                    between points on the curve.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the type of curve.
+                    Must be either
+    <span class="constant">GLU_MAP1_TRIM_2</span>
+    or
+    <span class="constant">GLU_MAP1_TRIM_3</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluPwlCurve.html">gluPwlCurve</a>
+    describes a piecewise linear trimming curve for a NURBS surface.
+            A piecewise linear curve consists of a list of
+            coordinates of points in the parameter space for the
+            NURBS surface to be trimmed. These points are connected
+            with line segments to form a curve. If the curve is
+            an approximation to a curve that is not piecewise linear,
+            the points should be close enough in parameter space that the
+            resulting path appears curved at the resolution used in the application.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-type">type</a>
+    is
+    <span class="constant">GLU_MAP1_TRIM_2</span>
+    , then it describes a curve in two-dimensional (
+    <span class="emphasis">u</span>
+    and
+    <span class="emphasis">v</span>
+    ) parameter space. If it is
+    <span class="constant">GLU_MAP1_TRIM_3</span>
+    , then it
+            describes a curve in two-dimensional homogeneous (
+    <span class="emphasis">u</span>
+    ,
+    <span class="emphasis">v</span>
+    ,
+            and
+    <span class="emphasis">w</span>
+    ) parameter space.
+            See the
+    <a class="crossref" href="./gluBeginTrim.html">gluBeginTrim</a>
+    reference page for more information
+            about trimming curves.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            To describe a trim curve that closely follows the contours of a NURBS
+            surface, call
+    <a class="crossref" href="./gluNurbsCurve.html">gluNurbsCurve</a>
+    .
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluBeginCurve.html">gluBeginCurve</a>
+    ,
+    <a class="crossref" href="./gluBeginTrim.html">gluBeginTrim</a>
+    ,
+    <a class="crossref" href="./gluNewNurbsRenderer.html">gluNewNurbsRenderer</a>
+    ,
+    <a class="crossref" href="./gluNurbsCurve.html">gluNurbsCurve</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluPwlCurve</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_trim.py">tests/redbook_trim.py</a>
+    Lines: <span class="sample-lines">112, 119</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/nurbs.py">OpenGLContext/scenegraph/nurbs.py</a>
+    Lines: <span class="sample-lines">35</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">122, 128</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

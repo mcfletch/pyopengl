@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutBitmapWidth : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutBitmapWidth</h1>
+</header>
+<main class="content">
+    <section class="purpose">returns the width/length of a bitmap character/string.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutBitmapLength"></a>
+    <span class="c-function">glutBitmapLength</span>(<span class="parameter-list">
+    <span class="param-def">
+        const(
+            <a href="#param-string" class="parameter">string</a>
+        )
+    </span>
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glutBitmapLength"></a>
+    <span class="py-function">glutBitmapLength</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-font" class="parameter">font</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-string" class="parameter">string</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">glutBitmapLength( c_void_p(font), POINTER(c_ubyte)(string) ) -&gt; c_int</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutBitmapWidth"></a>
+    <span class="c-function">glutBitmapWidth</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-character" class="parameter">character</a>
+        )
+    </span>
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glutBitmapWidth"></a>
+    <span class="py-function">glutBitmapWidth</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-font" class="parameter">font</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-character" class="parameter">character</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">glutBitmapWidth( c_void_p(font), c_int(character) ) -&gt; c_int</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-font"></a>
+                        font
+                    </th>
+                    <td>
+    <div class="simpara">
+						Bitmap font to use. For valid values, see the
+    <a class="function" href="./glutBitmapCharacter.html">glutBitmapCharacter</a>
+    description.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-character"></a>
+                        character
+                    </th>
+                    <td>
+    <div class="simpara">
+						Character to return width of (not confined to 8 bits).
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-string"></a>
+                        string
+                    </th>
+                    <td>
+    <div class="simpara">
+						Text string (8-bit characters), nul terminated.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutBitmapWidth.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutBitmapWidth.html">glutBitmapWidth</a>
+    returns the width in pixels of a bitmap character in a supported bitmap font.
+			While the width of characters in a font may vary (though fixed width fonts do not vary), the maximum height
+			characteristics of a particular font are fixed.
+</div>
+    <div class="para">
+    <a class="function" href="./glutBitmapWidth.html#c-glutBitmapLength">glutBitmapLength</a>
+    returns the length in pixels of a string (8-bit characters). This length is
+			equivalent to summing all the widths returned by glutBitmapWidth for each character in the string.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutBitmapCharacter.html">glutBitmapCharacter</a>
+            <a class="crossref" href="./glutStrokeWidth.html">glutStrokeWidth</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutBitmapWidth</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/glutfont.py">OpenGLContext/scenegraph/text/glutfont.py</a>
+    Lines: <span class="sample-lines">30</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglGlut.py">renderers/openglGlut.py</a>
+    Lines: <span class="sample-lines">244</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/openglgraphics.py">system/openglgraphics.py</a>
+    Lines: <span class="sample-lines">258</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

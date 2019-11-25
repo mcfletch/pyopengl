@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glPopDebugGroup : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glPopDebugGroup</h1>
+</header>
+<main class="content">
+    <section class="purpose">pop the active debug group</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glPopDebugGroup"></a>
+    <span class="c-function">glPopDebugGroup</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glPopDebugGroup"></a>
+    <span class="py-function">glPopDebugGroup</span>( <span class="parameter-list">
+</span> )
+</div>
+        </div>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glPopDebugGroup.html">glPopDebugGroup</a>
+    pops the active debug group.
+            After popping a debug group, the GL will also generate a debug
+            output message describing its cause based on the
+    <a class="parameter" href="#param-message">message</a>
+    string, the source
+    <a class="parameter" href="#param-source">source</a>
+    , and an ID
+    <a class="parameter" href="#param-id">id</a>
+    submitted to the corresponding
+    <a class="crossref" href="./glPushDebugGroup.html">glPushDebugGroup</a>
+    command.
+    <span class="constant">GL_DEBUG_TYPE_PUSH_GROUP</span>
+    and
+    <span class="constant">GL_DEBUG_TYPE_POP_GROUP</span>
+    share a single namespace for message
+    <a class="parameter" href="#param-id">id</a>
+    .
+    <a class="parameter" href="#param-severity">severity</a>
+    has the value
+    <span class="constant">GL_DEBUG_SEVERITY_NOTIFICATION</span>
+    . The
+    <a class="parameter" href="#param-type">type</a>
+    has the value
+    <span class="constant">GL_DEBUG_TYPE_POP_GROUP</span>
+    . Popping a debug group restores
+            the debug output volume control of the parent debug group.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_STACK_UNDERFLOW</span>
+    is generated if an attempt is made to pop the default debug
+            group from the stack.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_DEBUG_MESSAGE_LENGTH</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glPopDebugGroup.html">glPopDebugGroup</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glPushDebugGroup.html">glPushDebugGroup</a>
+    ,
+    <a class="crossref" href="./glObjectLabel.html">glObjectLabel</a>
+    ,
+    <a class="crossref" href="./glObjectPtrLabel.html">glObjectPtrLabel</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2013-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

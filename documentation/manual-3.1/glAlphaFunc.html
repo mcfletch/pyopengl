@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glAlphaFunc : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glAlphaFunc</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify the alpha test function</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glAlphaFunc"></a>
+    <span class="c-function">glAlphaFunc</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-func" class="parameter">func</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLclampf (
+            <a href="#param-ref" class="parameter">ref</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glAlphaFunc"></a>
+    <span class="py-function">glAlphaFunc</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-func" class="parameter">func</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-ref" class="parameter">ref</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-func"></a>
+                        func
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the alpha comparison function.
+                    Symbolic constants
+    <span class="constant">GL_NEVER</span>
+    ,
+    <span class="constant">GL_LESS</span>
+    ,
+    <span class="constant">GL_EQUAL</span>
+    ,
+    <span class="constant">GL_LEQUAL</span>
+    ,
+    <span class="constant">GL_GREATER</span>
+    ,
+    <span class="constant">GL_NOTEQUAL</span>
+    ,
+    <span class="constant">GL_GEQUAL</span>
+    , and
+    <span class="constant">GL_ALWAYS</span>
+    are accepted. The initial value is
+    <span class="constant">GL_ALWAYS</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-ref"></a>
+                        ref
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the reference value that incoming alpha values are compared to.
+                    This value is clamped to the range
+    <math>
+                        <mfenced open="[" close="]">
+                            <mn>0</mn>
+                            <mn>1</mn>
+                        </mfenced>
+                    </math>
+    ,
+                    where 0 represents the lowest possible alpha value
+                    and 1 the highest possible value.
+                    The initial reference value is 0.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            The alpha test discards fragments depending on the outcome of a comparison
+            between an incoming fragment's alpha value and a constant reference value.
+    <a class="function" href="./glAlphaFunc.html">glAlphaFunc</a>
+    specifies the reference value and the comparison function.
+            The comparison is performed only if alpha testing is enabled. By
+            default, it is not enabled.
+            (See
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="crossref" href="./glEnable.html#c-glDisable">glDisable</a>
+    of
+    <span class="constant">GL_ALPHA_TEST</span>
+    .)
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-func">func</a>
+    and
+    <a class="parameter" href="#param-ref">ref</a>
+    specify the conditions under which
+            the pixel is drawn.
+            The incoming alpha value is compared to
+    <a class="parameter" href="#param-ref">ref</a>
+    using the function specified by
+    <a class="parameter" href="#param-func">func</a>
+    .
+            If the value passes the comparison,
+            the incoming fragment is drawn
+            if it also passes subsequent stencil and depth buffer tests.
+            If the value fails the comparison,
+            no change is made to the frame buffer at that pixel location. The
+            comparison functions are as follows:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NEVER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Never passes.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LESS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Passes if the incoming alpha value is less than the reference value.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_EQUAL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Passes if the incoming alpha value is equal to the reference value.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LEQUAL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Passes if the incoming alpha value is less than or equal to the reference value.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_GREATER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Passes if the incoming alpha value is greater than the reference value.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NOTEQUAL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Passes if the incoming alpha value is not equal to the reference value.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_GEQUAL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Passes if the incoming alpha value is greater than or equal to
+                        the reference value.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_ALWAYS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Always passes (initial value).
+                    </div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+    <a class="function" href="./glAlphaFunc.html">glAlphaFunc</a>
+    operates on all pixel write operations,
+            including those resulting from the scan conversion of points,
+            lines,
+            polygons,
+            and bitmaps,
+            and from pixel draw and copy operations.
+    <a class="function" href="./glAlphaFunc.html">glAlphaFunc</a>
+    does not affect screen clear operations.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            Alpha testing is performed only in RGBA mode.
+        </div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-func">func</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glAlphaFunc.html">glAlphaFunc</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_ALPHA_TEST_FUNC</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_ALPHA_TEST_REF</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_ALPHA_TEST</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    ,
+    <a class="crossref" href="./glClear.html">glClear</a>
+    ,
+    <a class="crossref" href="./glDepthFunc.html">glDepthFunc</a>
+    ,
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    ,
+    <a class="crossref" href="./glStencilFunc.html">glStencilFunc</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glAlphaFunc</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/gldrawpixels.py">tests/gldrawpixels.py</a>
+    Lines: <span class="sample-lines">57</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/arbwindowpos.py">tests/arbwindowpos.py</a>
+    Lines: <span class="sample-lines">91</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_1.py">tests/shadow_1.py</a>
+    Lines: <span class="sample-lines">673</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/view.py">pyggel/view.py</a>
+    Lines: <span class="sample-lines">182</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/display.py">pygl2d/display.py</a>
+    Lines: <span class="sample-lines">45</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/line.py">core/line.py</a>
+    Lines: <span class="sample-lines">743</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">278</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">259</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">257</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">248</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

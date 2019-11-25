@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glProvokingVertex : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glProvokingVertex</h1>
+</header>
+<main class="content">
+    <section class="purpose">specifiy the vertex to be used as the source of data for flat shaded varyings</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glProvokingVertex"></a>
+    <span class="c-function">glProvokingVertex</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-provokeMode" class="parameter">provokeMode</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glProvokingVertex"></a>
+    <span class="py-function">glProvokingVertex</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-mode" class="parameter">mode</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-provokeMode"></a>
+                        provokeMode
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the vertex to be used as the source of data for flat shaded varyings.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <span class="emphasis">Flatshading</span>
+    a vertex shader varying output means to assign all vetices of the primitive the same value
+            for that output. The vertex from which these values is derived is known as the
+    <span class="emphasis">provoking vertex</span>
+    and
+    <a class="function" href="./glProvokingVertex.html">glProvokingVertex</a>
+    specifies which vertex is to be used as the source of data for flat shaded varyings.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-provokeMode">provokeMode</a>
+    must be either
+    <span class="constant">GL_FIRST_VERTEX_CONVENTION</span>
+    or
+    <span class="constant">GL_LAST_VERTEX_CONVENTION</span>
+    , and controls the selection of the vertex whose values are assigned to flatshaded
+            varying outputs. The interpretation of these values for the supported primitive types is:
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>
+    <span class="emphasis"> Primitive Type of Polygon
+    <span class="emphasis">i</span>
+</span>
+</th><th>
+    <span class="emphasis"> First Vertex Convention </span>
+</th><th>
+    <span class="emphasis"> Last Vertex Convention </span>
+</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+                                point
+                            </td><td>
+    <span class="emphasis">i</span>
+</td><td>
+    <span class="emphasis">i</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                                independent line
+                            </td><td>
+                                2
+    <span class="emphasis">i</span>
+    - 1
+</td><td>
+                                2
+    <span class="emphasis">i</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                                line loop
+                            </td><td>
+    <span class="emphasis">i</span>
+</td><td>
+    <div class="para">
+    <span class="emphasis">i</span>
+    + 1, if
+    <span class="emphasis">i</span>
+    &lt;
+    <span class="emphasis">n</span>
+</div>
+    <div class="para">
+                                1, if
+    <span class="emphasis">i</span>
+    =
+    <span class="emphasis">n</span>
+</div>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                                line strip
+                            </td><td>
+    <span class="emphasis">i</span>
+</td><td>
+    <span class="emphasis">i</span>
+    + 1
+</td>
+                </tr><tr valign="top">
+                    <td>
+                                independent triangle
+                            </td><td>
+                                3
+    <span class="emphasis">i</span>
+    - 2
+</td><td>
+                                3
+    <span class="emphasis">i</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+                                triangle strip
+                            </td><td>
+    <span class="emphasis">i</span>
+</td><td>
+    <span class="emphasis">i</span>
+    + 2
+</td>
+                </tr><tr valign="top">
+                    <td>
+                                triangle fan
+                            </td><td>
+    <span class="emphasis">i</span>
+    + 1
+</td><td>
+    <span class="emphasis">i</span>
+    + 2
+</td>
+                </tr><tr valign="top">
+                    <td>
+                                line adjacency
+                            </td><td>
+                                4
+    <span class="emphasis">i</span>
+    - 2
+</td><td>
+                                4
+    <span class="emphasis">i</span>
+    - 1
+</td>
+                </tr><tr valign="top">
+                    <td>
+                                line strip adjacency
+                            </td><td>
+    <span class="emphasis">i</span>
+    + 1
+</td><td>
+    <span class="emphasis">i</span>
+    + 2
+</td>
+                </tr><tr valign="top">
+                    <td>
+                                triangle adjacency
+                            </td><td>
+                                6
+    <span class="emphasis">i</span>
+    - 5
+</td><td>
+                                6
+    <span class="emphasis">i</span>
+    - 1
+</td>
+                </tr><tr valign="top">
+                    <td>
+                                triangle strip adjacency
+                            </td><td>
+                                2
+    <span class="emphasis">i</span>
+    - 1
+</td><td>
+                                2
+    <span class="emphasis">i</span>
+    + 3
+</td>
+                </tr>
+    </tbody></table>
+</div>
+    <div class="para">
+            If a vertex or geometry shader is active, user-defined varying outputs may be flatshaded by using the
+    <div class="code">flat</div>
+    qualifier when declaring the output.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glProvokingVertex.html">glProvokingVertex</a>
+    is available only if the GL version is 3.2 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-provokeMode">provokeMode</a>
+    is not an accepted value.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glProvokingVertex.html">glProvokingVertex</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

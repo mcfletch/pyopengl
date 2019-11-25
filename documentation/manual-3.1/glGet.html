@@ -1,0 +1,4778 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGet : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGet</h1>
+</header>
+<main class="content">
+    <section class="purpose">return the value or values of a selected parameter</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGet"></a>
+    <span class="c-function">glGet</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetBooleani_v"></a>
+    <span class="c-function">glGetBooleani_v</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetBooleani_v"></a>
+    <span class="py-function">glGetBooleani_v</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetBooleanv"></a>
+    <span class="c-function">glGetBooleanv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetBoolean"></a>
+    <span class="py-function">glGetBoolean</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glGetBooleanv"></a>
+    <span class="py-function">glGetBooleanv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetDoublei_v"></a>
+    <span class="c-function">glGetDoublei_v</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetDoublei_v"></a>
+    <span class="py-function">glGetDoublei_v</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetDoublev"></a>
+    <span class="c-function">glGetDoublev</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetDouble"></a>
+    <span class="py-function">glGetDouble</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glGetDoublev"></a>
+    <span class="py-function">glGetDoublev</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetFloati_v"></a>
+    <span class="c-function">glGetFloati_v</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetFloati_v"></a>
+    <span class="py-function">glGetFloati_v</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetFloatv"></a>
+    <span class="c-function">glGetFloatv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetFloat"></a>
+    <span class="py-function">glGetFloat</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glGetFloatv"></a>
+    <span class="py-function">glGetFloatv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetInteger64i_v"></a>
+    <span class="c-function">glGetInteger64i_v</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint64 * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetInteger64i_v"></a>
+    <span class="py-function">glGetInteger64i_v</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetInteger64v"></a>
+    <span class="c-function">glGetInteger64v</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint64 * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetInteger64v"></a>
+    <span class="py-function">glGetInteger64v</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetIntegeri_v"></a>
+    <span class="c-function">glGetIntegeri_v</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetIntegeri_v"></a>
+    <span class="py-function">glGetIntegeri_v</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetIntegerv"></a>
+    <span class="c-function">glGetIntegerv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetInteger"></a>
+    <span class="py-function">glGetInteger</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glGetIntegerv"></a>
+    <span class="py-function">glGetIntegerv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the parameter value to be returned
+                    for non-indexed versions of
+    <a class="function" href="./glGet.html">glGet</a>
+    .
+                    The symbolic constants in the list below are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the parameter value to be returned
+                    for indexed versions of
+    <a class="function" href="./glGet.html">glGet</a>
+    .
+                    The symbolic constants in the list below are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the index of the particular element being queried.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-data"></a>
+                        data
+                    </th>
+                    <td>
+    <div class="para">
+                    Returns the value or values of the specified parameter.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            These commands return values for simple state variables in GL.
+    <a class="parameter" href="#param-pname">pname</a>
+    is a symbolic constant indicating the state variable to be returned,
+            and
+    <a class="parameter" href="#param-data">data</a>
+    is a pointer to an array of the indicated type in
+            which to place the returned data.
+</div>
+    <div class="para">
+            Type conversion is performed if
+    <a class="parameter" href="#param-data">data</a>
+    has a different type than
+            the state variable value being requested.
+            If
+    <a class="function" href="./glGet.html#c-glGetBooleanv">glGetBooleanv</a>
+    is called,
+            a floating-point (or integer) value is converted to
+    <span class="constant">GL_FALSE</span>
+    if
+            and only if it is 0.0 (or 0).
+            Otherwise,
+            it is converted to
+    <span class="constant">GL_TRUE</span>
+    .
+            If
+    <a class="function" href="./glGet.html#c-glGetIntegerv">glGetIntegerv</a>
+    is called, boolean values are returned as
+    <span class="constant">GL_TRUE</span>
+    or
+    <span class="constant">GL_FALSE</span>
+    , and most floating-point values are
+            rounded to the nearest integer value. Floating-point colors and
+            normals, however, are returned with a linear mapping that maps 1.0 to
+            the most positive representable integer value
+            and
+    <math overflow="scroll">
+                <mn>-1.0</mn>
+            </math>
+    to the most negative representable integer value.
+            If
+    <a class="function" href="./glGet.html#c-glGetFloatv">glGetFloatv</a>
+    or
+    <a class="function" href="./glGet.html#c-glGetDoublev">glGetDoublev</a>
+    is called,
+            boolean values are returned as
+    <span class="constant">GL_TRUE</span>
+    or
+    <span class="constant">GL_FALSE</span>
+    ,
+            and integer values are converted to floating-point values.
+</div>
+    <div class="para">
+            The following symbolic constants are accepted by
+    <a class="parameter" href="#param-pname">pname</a>
+    :
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_ACTIVE_TEXTURE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value indicating the active multitexture unit.
+                        The initial value is
+    <span class="constant">GL_TEXTURE0</span>
+    .
+                        See
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_ALIASED_LINE_WIDTH_RANGE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a pair of values indicating the range of
+                        widths supported for aliased lines. See
+    <a class="crossref" href="./glLineWidth.html">glLineWidth</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_ARRAY_BUFFER_BINDING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the buffer object
+                        currently bound to the target
+    <span class="constant">GL_ARRAY_BUFFER</span>
+    . If no buffer object
+                        is bound to this target, 0 is returned.  The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BLEND</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether blending is
+                        enabled. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BLEND_COLOR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns four values,
+                        the red, green, blue, and alpha values which are the components of
+                        the blend color.
+                        See
+    <a class="crossref" href="./glBlendColor.html">glBlendColor</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BLEND_DST_ALPHA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the symbolic constant identifying the alpha destination blend
+                        function. The initial value is
+    <span class="constant">GL_ZERO</span>
+    .
+                        See
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    and
+    <a class="crossref" href="./glBlendFuncSeparate.html">glBlendFuncSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BLEND_DST_RGB</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the symbolic constant identifying the RGB destination blend
+                        function. The initial value is
+    <span class="constant">GL_ZERO</span>
+    .
+                        See
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    and
+    <a class="crossref" href="./glBlendFuncSeparate.html">glBlendFuncSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BLEND_EQUATION_RGB</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value, a symbolic constant indicating whether
+                        the RGB blend equation is
+    <span class="constant">GL_FUNC_ADD</span>
+    ,
+    <span class="constant">GL_FUNC_SUBTRACT</span>
+    ,
+    <span class="constant">GL_FUNC_REVERSE_SUBTRACT</span>
+    ,
+    <span class="constant">GL_MIN</span>
+    or
+    <span class="constant">GL_MAX</span>
+    .
+                        See
+    <a class="crossref" href="./glBlendEquationSeparate.html">glBlendEquationSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BLEND_EQUATION_ALPHA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value, a symbolic constant indicating whether
+                        the Alpha blend equation is
+    <span class="constant">GL_FUNC_ADD</span>
+    ,
+    <span class="constant">GL_FUNC_SUBTRACT</span>
+    ,
+    <span class="constant">GL_FUNC_REVERSE_SUBTRACT</span>
+    ,
+    <span class="constant">GL_MIN</span>
+    or
+    <span class="constant">GL_MAX</span>
+    .
+                        See
+    <a class="crossref" href="./glBlendEquationSeparate.html">glBlendEquationSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BLEND_SRC_ALPHA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the symbolic constant identifying the alpha source blend function. The initial
+                        value is
+    <span class="constant">GL_ONE</span>
+    .
+                        See
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    and
+    <a class="crossref" href="./glBlendFuncSeparate.html">glBlendFuncSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BLEND_SRC_RGB</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the symbolic constant identifying the RGB source blend function. The initial
+                        value is
+    <span class="constant">GL_ONE</span>
+    .
+                        See
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    and
+    <a class="crossref" href="./glBlendFuncSeparate.html">glBlendFuncSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_COLOR_CLEAR_VALUE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns four values:
+                        the red, green, blue, and alpha values used to clear the color buffers.
+                        Integer values,
+                        if requested,
+                        are linearly mapped from the internal floating-point representation such
+                        that 1.0 returns the most positive representable integer value,
+                        and
+    <math overflow="scroll">
+                            <mn>-1.0</mn>
+                        </math>
+    returns the most negative representable integer
+                        value. The initial value is (0, 0, 0, 0).
+                        See
+    <a class="crossref" href="./glClearColor.html">glClearColor</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_COLOR_LOGIC_OP</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether a fragment's
+                        RGBA color values are merged into the framebuffer using a logical
+                        operation. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glLogicOp.html">glLogicOp</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_COLOR_WRITEMASK</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns four boolean values:
+                        the red, green, blue, and alpha write enables for the color
+                        buffers. The initial value is (
+    <span class="constant">GL_TRUE</span>
+    ,
+    <span class="constant">GL_TRUE</span>
+    ,
+    <span class="constant">GL_TRUE</span>
+    ,
+    <span class="constant">GL_TRUE</span>
+    ).
+                        See
+    <a class="crossref" href="./glColorMask.html">glColorMask</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_COMPRESSED_TEXTURE_FORMATS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a list of symbolic
+                        constants of length
+    <span class="constant">GL_NUM_COMPRESSED_TEXTURE_FORMATS</span>
+    indicating which compressed texture formats are available.
+                        See
+    <a class="crossref" href="./glCompressedTexImage2D.html">glCompressedTexImage2D</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of active shader storage blocks that may be accessed by a compute shader.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum total number of active shader storage blocks that may be accessed by all active shaders.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMPUTE_UNIFORM_BLOCKS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of uniform blocks per compute shader.  The value must be at least 14.
+                        See
+    <a class="crossref" href="./glUniformBlockBinding.html">glUniformBlockBinding</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value, the maximum supported texture image units that
+                        can be used to access texture maps from the compute shader. The value may be at least 16.
+                        See
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMPUTE_UNIFORM_COMPONENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of individual floating-point, integer, or boolean values that can be held
+                        in uniform variable storage for a compute shader. The value must be at least 1024.
+                        See
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMPUTE_ATOMIC_COUNTERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the maximum number of atomic counters available to compute shaders.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the maximum number of atomic counter buffers that may be accessed by a compute shader.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number of words for compute shader uniform variables in all uniform
+                        blocks (including default). The value must be at least 1.
+                        See
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number of invocations in a single local work group
+                        (i.e., the product of the three dimensions) that may
+                        be dispatched to a compute shader.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMPUTE_WORK_GROUP_COUNT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Accepted by the indexed versions of
+    <a class="function" href="./glGet.html">glGet</a>
+    .
+    <a class="parameter" href="#param-data">data</a>
+    the maximum number of work
+                        groups that may be dispatched to a compute shader. Indices
+                        0, 1, and 2 correspond to the X, Y and Z dimensions, respectively.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMPUTE_WORK_GROUP_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Accepted by the indexed versions of
+    <a class="function" href="./glGet.html">glGet</a>
+    .
+    <a class="parameter" href="#param-data">data</a>
+    the maximum size of a work
+                        groups that may be used during compilation of a compute shader. Indices
+                        0, 1, and 2 correspond to the X, Y and Z dimensions, respectively.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DISPATCH_INDIRECT_BUFFER_BINDING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the buffer object
+                        currently bound to the target
+    <span class="constant">GL_DISPATCH_INDIRECT_BUFFER</span>
+    . If no buffer object
+                        is bound to this target, 0 is returned.  The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_DEBUG_GROUP_STACK_DEPTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the maximum depth of the
+                        debug message group stack.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEBUG_GROUP_STACK_DEPTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the current depth of the
+                        debug message group stack.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_CONTEXT_FLAGS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the flags with which the context was created (such as debugging functionality).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_CULL_FACE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether polygon culling
+                        is enabled. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glCullFace.html">glCullFace</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_CULL_FACE_MODE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value indicating the mode of polygon culling.
+                        The initial value is
+    <span class="constant">GL_BACK</span>
+    .
+                        See
+    <a class="crossref" href="./glCullFace.html">glCullFace</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_CURRENT_PROGRAM</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the name of the program object that is currently active, or 0 if no program object is active.
+                        See
+    <a class="crossref" href="./glUseProgram.html">glUseProgram</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEPTH_CLEAR_VALUE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the value that is used to clear the depth buffer.
+                        Integer values,
+                        if requested,
+                        are linearly mapped from the internal floating-point representation such
+                        that 1.0 returns the most positive representable integer value,
+                        and
+    <math overflow="scroll">
+                            <mn>-1.0</mn>
+                        </math>
+    returns the most negative representable integer
+                        value. The initial value is 1.
+                        See
+    <a class="crossref" href="./glClearDepth.html">glClearDepth</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEPTH_FUNC</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the symbolic constant that indicates the depth comparison
+                        function. The initial value is
+    <span class="constant">GL_LESS</span>
+    .
+                        See
+    <a class="crossref" href="./glDepthFunc.html">glDepthFunc</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEPTH_RANGE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns two values:
+                        the near and far mapping limits for the depth buffer.
+                        Integer values,
+                        if requested,
+                        are linearly mapped from the internal floating-point representation such
+                        that 1.0 returns the most positive representable integer value,
+                        and
+    <math overflow="scroll">
+                            <mn>-1.0</mn>
+                        </math>
+    returns the most negative representable integer
+                        value. The initial value is (0, 1).
+                        See
+    <a class="crossref" href="./glDepthRange.html">glDepthRange</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEPTH_TEST</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether depth testing
+                        of fragments is enabled. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glDepthFunc.html">glDepthFunc</a>
+    and
+    <a class="crossref" href="./glDepthRange.html">glDepthRange</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEPTH_WRITEMASK</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating if the depth buffer
+                        is enabled for writing. The initial value is
+    <span class="constant">GL_TRUE</span>
+    .
+                        See
+    <a class="crossref" href="./glDepthMask.html">glDepthMask</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DITHER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether dithering of
+                        fragment colors and indices is enabled. The initial value is
+    <span class="constant">GL_TRUE</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DOUBLEBUFFER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether double buffering
+                        is supported.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DRAW_BUFFER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating which buffers are being drawn to.
+                        See
+    <a class="crossref" href="./glDrawBuffer.html">glDrawBuffer</a>
+    . The initial value is
+    <span class="constant">GL_BACK</span>
+    if there
+                        are back buffers, otherwise it is
+    <span class="constant">GL_FRONT</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DRAW_BUFFER</span>
+    <span class="emphasis">i</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating which buffers are being drawn to by the corresponding output color.
+                        See
+    <a class="crossref" href="./glDrawBuffers.html">glDrawBuffers</a>
+    .
+                        The initial value of
+    <span class="constant">GL_DRAW_BUFFER0</span>
+    is
+    <span class="constant">GL_BACK</span>
+    if there
+                        are back buffers, otherwise it is
+    <span class="constant">GL_FRONT</span>
+    .  The
+                        initial values of draw buffers for all other output colors is
+    <span class="constant">GL_NONE</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DRAW_FRAMEBUFFER_BINDING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the name of the framebuffer object currently bound to the
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    target.
+                        If the default framebuffer is bound, this value will be zero. The initial value is zero.
+                        See
+    <a class="crossref" href="./glBindFramebuffer.html">glBindFramebuffer</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_READ_FRAMEBUFFER_BINDING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the name of the framebuffer object currently bound to the
+    <span class="constant">GL_READ_FRAMEBUFFER</span>
+    target.
+                        If the default framebuffer is bound, this value will be zero. The initial value is zero.
+                        See
+    <a class="crossref" href="./glBindFramebuffer.html">glBindFramebuffer</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_ELEMENT_ARRAY_BUFFER_BINDING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the buffer object
+                        currently bound to the target
+    <span class="constant">GL_ELEMENT_ARRAY_BUFFER</span>
+    . If no buffer object
+                        is bound to this target, 0 is returned.  The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FRAGMENT_SHADER_DERIVATIVE_HINT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating the mode of the derivative accuracy hint
+                        for fragment shaders. The initial value
+                        is
+    <span class="constant">GL_DONT_CARE</span>
+    .
+                        See
+    <a class="crossref" href="./glHint.html">glHint</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_IMPLEMENTATION_COLOR_READ_FORMAT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single GLenum value indicating
+                        the implementation's preferred pixel data format.
+                        See
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_IMPLEMENTATION_COLOR_READ_TYPE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single GLenum value indicating
+                        the implementation's preferred pixel data type.
+                        See
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LINE_SMOOTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether antialiasing of
+                        lines is enabled. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glLineWidth.html">glLineWidth</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LINE_SMOOTH_HINT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating the mode of the line antialiasing
+                        hint. The initial value is
+    <span class="constant">GL_DONT_CARE</span>
+    .
+                        See
+    <a class="crossref" href="./glHint.html">glHint</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LINE_WIDTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the line width as specified with
+    <a class="crossref" href="./glLineWidth.html">glLineWidth</a>
+    . The initial value is
+                        1.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LAYER_PROVOKING_VERTEX</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the implementation dependent specifc vertex of a primitive that is used to select the rendering layer.
+                        If the value returned is equivalent to
+    <span class="constant">GL_PROVOKING_VERTEX</span>
+    , then the vertex
+                        selection follows the convention specified by
+    <a class="crossref" href="./glProvokingVertex.html">glProvokingVertex</a>
+    .
+                        If the value returned is equivalent to
+    <span class="constant">GL_FIRST_VERTEX_CONVENTION</span>
+    , then the
+                        selection is always taken from the first vertex in the primitive.
+                        If the value returned is equivalent to
+    <span class="constant">GL_LAST_VERTEX_CONVENTION</span>
+    , then the
+                        selection is always taken from the last vertex in the primitive.
+                        If the value returned is equivalent to
+    <span class="constant">GL_UNDEFINED_VERTEX</span>
+    , then the
+                        selection is not guaranteed to be taken from any specific vertex in the primitive.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LOGIC_OP_MODE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating the selected logic operation
+                        mode. The initial value is
+    <span class="constant">GL_COPY</span>
+    .
+                        See
+    <a class="crossref" href="./glLogicOp.html">glLogicOp</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAJOR_VERSION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the major version number of the OpenGL API supported by the current context.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_3D_TEXTURE_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a rough estimate of the largest 3D texture that the GL can handle.
+                        The value must be at least 64.
+                        Use
+    <span class="constant">GL_PROXY_TEXTURE_3D</span>
+    to determine if a texture is too large.
+                        See
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_ARRAY_TEXTURE_LAYERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value.
+                        The value indicates the maximum number of layers allowed in an array texture, and must be at least 256.
+                        See
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_CLIP_DISTANCES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of application-defined clipping distances. The value must be at least 8.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COLOR_TEXTURE_SAMPLES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of samples in a color multisample texture.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMBINED_ATOMIC_COUNTERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the maximum number of atomic counters available to all active shaders.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number of words for fragment shader uniform variables in all uniform
+                        blocks (including default). The value must be at least 1.
+                        See
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number of words for geometry shader uniform variables in all uniform
+                        blocks (including default). The value must be at least 1.
+                        See
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value, the maximum supported texture image units that
+                        can be used to access texture maps from the vertex shader and the fragment processor combined.
+                        If both the vertex shader and the fragment processing stage access the same texture image
+                        unit, then that counts as using two texture image units against this limit.
+                        The value must be at least 48.
+                        See
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMBINED_UNIFORM_BLOCKS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of uniform blocks per program.  The value must be at least 70.
+                        See
+    <a class="crossref" href="./glUniformBlockBinding.html">glUniformBlockBinding</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_COMBINED_VERTEX_UNIFORM_COMPONENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number of words for vertex shader uniform variables in all uniform
+                        blocks (including default). The value must be at least 1.
+                        See
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_CUBE_MAP_TEXTURE_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value.
+                        The value gives a rough estimate of the largest cube-map texture that
+                        the GL can handle. The value must be at least 1024.
+                        Use
+    <span class="constant">GL_PROXY_TEXTURE_CUBE_MAP</span>
+    to determine if a texture is too large.
+                        See
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_DEPTH_TEXTURE_SAMPLES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of samples in a multisample depth or depth-stencil texture.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_DRAW_BUFFERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value, the maximum number
+                        of simultaneous outputs that may be written in a fragment shader.
+                        The value must be at least 8.
+                        See
+    <a class="crossref" href="./glDrawBuffers.html">glDrawBuffers</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_DUAL_SOURCE_DRAW_BUFFERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value, the maximum number
+                        of active draw buffers when using dual-source  blending. The value must be at least 1.
+                        See
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    and
+    <a class="crossref" href="./glBlendFuncSeparate.html">glBlendFuncSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_ELEMENTS_INDICES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the recommended maximum number of vertex array indices.
+                        See
+    <a class="crossref" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_ELEMENTS_VERTICES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the recommended maximum number of vertex array vertices.
+                        See
+    <a class="crossref" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_FRAGMENT_ATOMIC_COUNTERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the maximum number of atomic counters available to fragment shaders.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of active shader storage blocks that may be accessed by a fragment shader.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_FRAGMENT_INPUT_COMPONENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of components of the inputs read by the fragment shader, which must be at least 128.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_FRAGMENT_UNIFORM_COMPONENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of individual floating-point, integer, or boolean values that can be held
+                        in uniform variable storage for a fragment shader. The value must be at least 1024.
+                        See
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_FRAGMENT_UNIFORM_VECTORS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of individual 4-vectors of floating-point, integer, or boolean values
+                        that can be held
+                        in uniform variable storage for a fragment shader. The value is equal to the value of
+    <span class="constant">GL_MAX_FRAGMENT_UNIFORM_COMPONENTS</span>
+    divided by 4 and must be at least 256.
+                        See
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_FRAGMENT_UNIFORM_BLOCKS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of uniform blocks per fragment shader.  The value must be at least 12.
+                        See
+    <a class="crossref" href="./glUniformBlockBinding.html">glUniformBlockBinding</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_FRAMEBUFFER_WIDTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum width for a framebuffer that has no attachments, which must be at least 16384.
+                        See
+    <a class="function" href="./glFramebufferParameteri.html#c-glFramebufferParameteri">glFramebufferParameter</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_FRAMEBUFFER_HEIGHT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum height for a framebuffer that has no attachments, which must be at least 16384.
+                        See
+    <a class="function" href="./glFramebufferParameteri.html#c-glFramebufferParameteri">glFramebufferParameter</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_FRAMEBUFFER_LAYERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of layers for a framebuffer that has no attachments, which must be at least 2048.
+                        See
+    <a class="function" href="./glFramebufferParameteri.html#c-glFramebufferParameteri">glFramebufferParameter</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_FRAMEBUFFER_SAMPLES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum samples in a framebuffer that has no attachments, which must be at least 4.
+                        See
+    <a class="function" href="./glFramebufferParameteri.html#c-glFramebufferParameteri">glFramebufferParameter</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_GEOMETRY_ATOMIC_COUNTERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the maximum number of atomic counters available to geometry shaders.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of active shader storage blocks that may be accessed by a geometry shader.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_GEOMETRY_INPUT_COMPONENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of components of inputs read by a geometry shader, which must be at least 64.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_GEOMETRY_OUTPUT_COMPONENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of components of outputs written by a geometry shader, which must be at least 128.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_GEOMETRY_TEXTURE_IMAGE_UNITS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value, the maximum supported texture image units that
+                        can be used to access texture maps from the geometry shader. The value must be at least 16.
+                        See
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_GEOMETRY_UNIFORM_BLOCKS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of uniform blocks per geometry shader.  The value must be at least 12.
+                        See
+    <a class="crossref" href="./glUniformBlockBinding.html">glUniformBlockBinding</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_GEOMETRY_UNIFORM_COMPONENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of individual floating-point, integer, or boolean values that can be held
+                        in uniform variable storage for a geometry shader. The value must be at least 1024.
+                        See
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_INTEGER_SAMPLES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of samples supported in integer format multisample buffers.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MIN_MAP_BUFFER_ALIGNMENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the minimum alignment in basic machine units of pointers returned from
+    <a class="crossref" href="./glMapBuffer.html">glMapBuffer</a>
+    and
+    <a class="crossref" href="./glMapBufferRange.html">glMapBufferRange</a>
+    . This value must be a power of two and must
+                        be at least 64.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_LABEL_LENGTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum length of a label that may be assigned to an object.
+                        See
+    <a class="crossref" href="./glObjectLabel.html">glObjectLabel</a>
+    and
+    <a class="crossref" href="./glObjectPtrLabel.html">glObjectPtrLabel</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_PROGRAM_TEXEL_OFFSET</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum texel offset allowed in a texture lookup, which must be at least 7.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MIN_PROGRAM_TEXEL_OFFSET</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the minimum texel offset allowed in a texture lookup, which must be at most -8.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_RECTANGLE_TEXTURE_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value.
+                        The value gives a rough estimate of the largest rectangular texture that
+                        the GL can handle. The value must be at least 1024.
+                        Use
+    <span class="constant">GL_PROXY_TEXTURE_RECTANGLE</span>
+    to determine if a texture is too large.
+                        See
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_RENDERBUFFER_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value.
+                        The value indicates the maximum supported size for renderbuffers.
+                        See
+    <a class="crossref" href="./glFramebufferRenderbuffer.html">glFramebufferRenderbuffer</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_SAMPLE_MASK_WORDS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of sample mask words.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_SERVER_WAIT_TIMEOUT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum
+    <a class="crossref" href="./glWaitSync.html">glWaitSync</a>
+    timeout interval.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of shader storage buffer binding points on the context, which must be at least 8.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the maximum number of atomic counters available to tessellation control shaders.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the maximum number of atomic counters available to tessellation evaluation shaders.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of active shader storage blocks that may be accessed by a tessellation control shader.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of active shader storage blocks that may be accessed by a tessellation evaluation shader.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_TEXTURE_BUFFER_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value.
+                        The value gives the maximum number of texels allowed in the texel array of a texture buffer object.
+                        Value must be at least 65536.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_TEXTURE_IMAGE_UNITS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value, the maximum supported texture image units that
+                        can be used to access texture maps from the fragment shader.
+                        The value must be at least 16.
+                        See
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_TEXTURE_LOD_BIAS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum, absolute value of the texture level-of-detail bias.  The
+                        value must be at least 2.0.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_TEXTURE_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value.
+                        The value gives a rough estimate of the largest texture that
+                        the GL can handle. The value must be at least 1024.
+                        Use a proxy texture target such as
+    <span class="constant">GL_PROXY_TEXTURE_1D</span>
+    or
+    <span class="constant">GL_PROXY_TEXTURE_2D</span>
+    to determine if a texture is too large.
+                        See
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    and
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_UNIFORM_BUFFER_BINDINGS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of uniform buffer binding points on the context, which must be at least 36.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_UNIFORM_BLOCK_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum size in basic machine units of a uniform block, which must be at least 16384.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_UNIFORM_LOCATIONS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of explicitly assignable uniform locations, which must be at least 1024.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VARYING_COMPONENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number components for varying variables, which must be at least 60.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VARYING_VECTORS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number 4-vectors for varying variables, which is equal to the value of
+    <span class="constant">GL_MAX_VARYING_COMPONENTS</span>
+    and must be at least 15.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VARYING_FLOATS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of interpolators available for processing varying variables used by
+                        vertex and fragment shaders. This value represents the number of individual floating-point
+                        values that can be interpolated; varying variables declared as vectors, matrices, and arrays
+                        will all consume multiple interpolators. The value must be at least 32.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VERTEX_ATOMIC_COUNTERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the maximum number of atomic counters available to vertex shaders.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VERTEX_ATTRIBS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of 4-component generic vertex attributes accessible to a vertex shader.
+                        The value must be at least 16.
+                        See
+    <a class="crossref" href="./glVertexAttrib.html">glVertexAttrib</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of active shader storage blocks that may be accessed by a vertex shader.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VERTEX_TEXTURE_IMAGE_UNITS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value, the maximum supported texture image units that
+                        can be used to access texture maps from the vertex shader. The value may be at least 16.
+                        See
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VERTEX_UNIFORM_COMPONENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of individual floating-point, integer, or boolean values that can be held
+                        in uniform variable storage for a vertex shader. The value must be at least 1024.
+                        See
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VERTEX_UNIFORM_VECTORS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of 4-vectors that may be held in uniform variable storage for the vertex
+                        shader. The value of
+    <span class="constant">GL_MAX_VERTEX_UNIFORM_VECTORS</span>
+    is equal to the
+                        value of
+    <span class="constant">GL_MAX_VERTEX_UNIFORM_COMPONENTS</span>
+    and must be at least
+                        256.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VERTEX_OUTPUT_COMPONENTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of components of output written by a vertex shader, which must be at least 64.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VERTEX_UNIFORM_BLOCKS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the maximum number of uniform blocks per vertex shader.  The value must be at least 12.
+                        See
+    <a class="crossref" href="./glUniformBlockBinding.html">glUniformBlockBinding</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VIEWPORT_DIMS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns two values:
+                        the maximum supported width and height of the viewport.
+                        These must be at least as large as the visible dimensions of the display
+                        being rendered to.
+                        See
+    <a class="crossref" href="./glViewport.html">glViewport</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VIEWPORTS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value, the maximum number
+                        of simultaneous viewports that are supported.
+                        The value must be at least 16.
+                        See
+    <a class="crossref" href="./glViewportIndexed.html">glViewportIndexed</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MINOR_VERSION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the minor version number of the OpenGL API supported by the current context.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NUM_COMPRESSED_TEXTURE_FORMATS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single integer value indicating the number of available
+                        compressed texture formats.  The minimum value is 4.
+                        See
+    <a class="crossref" href="./glCompressedTexImage2D.html">glCompressedTexImage2D</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NUM_EXTENSIONS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number of extensions supported by the GL implementation for the current context.
+                        See
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NUM_PROGRAM_BINARY_FORMATS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number of program binary formats supported by the implementation.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NUM_SHADER_BINARY_FORMATS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number of binary shader formats supported by the implementation. If this value is
+                        greater than zero, then the implementation supports loading binary shaders. If it is
+                        zero, then the loading of binary shaders by the implementation is not supported.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PACK_ALIGNMENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the byte alignment used for writing pixel data to memory. The initial
+                        value is 4.
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PACK_IMAGE_HEIGHT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the image height used for writing pixel data to memory.  The initial
+                        value is 0.
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PACK_LSB_FIRST</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether single-bit
+                        pixels being written to memory are written first to the least significant
+                        bit of each unsigned byte. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PACK_ROW_LENGTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the row length used for writing pixel data to memory. The initial value is
+                        0.
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PACK_SKIP_IMAGES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number of pixel images skipped before the first pixel is written
+                        into memory. The initial value is 0.
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PACK_SKIP_PIXELS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number of pixel locations skipped before the first pixel is written
+                        into memory. The initial value is 0.
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PACK_SKIP_ROWS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number of rows of pixel locations skipped before the first pixel is written
+                        into memory. The initial value is 0.
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PACK_SWAP_BYTES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether the bytes of
+                        two-byte and four-byte pixel indices and components are swapped before being
+                        written to memory. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PIXEL_PACK_BUFFER_BINDING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the buffer object
+                        currently bound to the target
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    . If no buffer object
+                        is bound to this target, 0 is returned.  The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER_BINDING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the buffer object
+                        currently bound to the target
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    . If no buffer object
+                        is bound to this target, 0 is returned.  The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POINT_FADE_THRESHOLD_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the point size threshold for determining the point size.
+                        See
+    <a class="crossref" href="./glPointParameter.html">glPointParameter</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PRIMITIVE_RESTART_INDEX</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the current primitive restart index. The initial value is 0.
+                        See
+    <a class="crossref" href="./glPrimitiveRestartIndex.html">glPrimitiveRestartIndex</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PROGRAM_BINARY_FORMATS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    an array of
+    <span class="constant">GL_NUM_PROGRAM_BINARY_FORMATS</span>
+    values,
+                        indicating the proram binary formats supported by the implementation.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PROGRAM_PIPELINE_BINDING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    a single value, the name of the currently bound program pipeline
+                        object, or zero if no program pipeline object is bound.
+                        See
+    <a class="crossref" href="./glBindProgramPipeline.html">glBindProgramPipeline</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PROGRAM_POINT_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether vertex
+                        program point size mode is enabled. If enabled, then the
+                        point size is taken from the shader built-in
+    <div class="code">gl_PointSize</div>
+    . If disabled,
+                        then the point size is taken from the point state as specified
+                        by
+    <a class="crossref" href="./glPointSize.html">glPointSize</a>
+    .
+                        The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PROVOKING_VERTEX</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the currently selected provoking vertex convention. The initial value is
+    <span class="constant">GL_LAST_VERTEX_CONVENTION</span>
+    .
+                        See
+    <a class="crossref" href="./glProvokingVertex.html">glProvokingVertex</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POINT_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the point size as specified by
+    <a class="crossref" href="./glPointSize.html">glPointSize</a>
+    .
+                        The initial value is 1.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POINT_SIZE_GRANULARITY</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the size difference between adjacent supported sizes for antialiased points.
+                        See
+    <a class="crossref" href="./glPointSize.html">glPointSize</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POINT_SIZE_RANGE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns two values:
+                        the smallest and largest supported sizes for antialiased
+                        points. The smallest size must be at most 1, and the largest size must
+                        be at least 1.
+                        See
+    <a class="crossref" href="./glPointSize.html">glPointSize</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POLYGON_OFFSET_FACTOR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the scaling factor used to determine the variable offset that is added
+                        to the depth value of each fragment generated when a polygon is
+                        rasterized. The initial value is 0.
+                        See
+    <a class="crossref" href="./glPolygonOffset.html">glPolygonOffset</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POLYGON_OFFSET_UNITS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value.
+                        This value is multiplied by an implementation-specific value and then
+                        added to the depth value of each fragment
+                        generated when a polygon is rasterized. The initial value is 0.
+                        See
+    <a class="crossref" href="./glPolygonOffset.html">glPolygonOffset</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POLYGON_OFFSET_FILL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether polygon offset
+                        is enabled for polygons in fill mode. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glPolygonOffset.html">glPolygonOffset</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POLYGON_OFFSET_LINE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether polygon offset
+                        is enabled for polygons in line mode. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glPolygonOffset.html">glPolygonOffset</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POLYGON_OFFSET_POINT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether polygon offset
+                        is enabled for polygons in point mode. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glPolygonOffset.html">glPolygonOffset</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POLYGON_SMOOTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether antialiasing of
+                        polygons is enabled. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glPolygonMode.html">glPolygonMode</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POLYGON_SMOOTH_HINT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating the mode of the polygon antialiasing
+                        hint. The initial value is
+    <span class="constant">GL_DONT_CARE</span>
+    .
+                        See
+    <a class="crossref" href="./glHint.html">glHint</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_READ_BUFFER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating which color buffer is selected for
+                        reading. The initial value is
+    <span class="constant">GL_BACK</span>
+    if there is a back buffer,
+                        otherwise it is
+    <span class="constant">GL_FRONT</span>
+    .
+                        See
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_RENDERBUFFER_BINDING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the renderbuffer object
+                        currently bound to the target
+    <span class="constant">GL_RENDERBUFFER</span>
+    . If no renderbuffer object
+                        is bound to this target, 0 is returned.  The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindRenderbuffer.html">glBindRenderbuffer</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SAMPLE_BUFFERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single integer value indicating the number of sample buffers
+                        associated with the framebuffer.
+                        See
+    <a class="crossref" href="./glSampleCoverage.html">glSampleCoverage</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SAMPLE_COVERAGE_VALUE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single positive floating-point value indicating the
+                        current sample coverage value.
+                        See
+    <a class="crossref" href="./glSampleCoverage.html">glSampleCoverage</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SAMPLE_COVERAGE_INVERT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating if the temporary
+                        coverage value should be inverted.
+                        See
+    <a class="crossref" href="./glSampleCoverage.html">glSampleCoverage</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SAMPLER_BINDING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the sampler object
+                        currently bound to the active texture unit.  The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindSampler.html">glBindSampler</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SAMPLES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single integer value indicating the coverage mask size.
+                        See
+    <a class="crossref" href="./glSampleCoverage.html">glSampleCoverage</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SCISSOR_BOX</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns four values:
+                        the
+    <math overflow="scroll"><mi mathvariant="italic">x</mi></math>
+    and
+    <math overflow="scroll"><mi mathvariant="italic">y</mi></math>
+    window coordinates of the scissor box,
+                        followed by its width and height.
+                        Initially the
+    <math overflow="scroll"><mi mathvariant="italic">x</mi></math>
+    and
+    <math overflow="scroll"><mi mathvariant="italic">y</mi></math>
+    window coordinates are both 0 and the
+                        width and height are set to the size of the window.
+                        See
+    <a class="crossref" href="./glScissor.html">glScissor</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SCISSOR_TEST</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether scissoring is
+                        enabled. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glScissor.html">glScissor</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SHADER_COMPILER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether an online shader
+                        compiler is present in the implementation. All desktop OpenGL implementations must support
+                        online shader compilations, and therefore the value of
+    <span class="constant">GL_SHADER_COMPILER</span>
+    will always be
+    <span class="constant">GL_TRUE</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SHADER_STORAGE_BUFFER_BINDING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        When used with non-indexed variants of
+    <a class="function" href="./glGet.html">glGet</a>
+    (such as
+    <a class="function" href="./glGet.html#c-glGetIntegerv">glGetIntegerv</a>
+    ),
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the buffer object
+                        currently bound to the target
+    <span class="constant">GL_SHADER_STORAGE_BUFFER</span>
+    . If no buffer object
+                        is bound to this target, 0 is returned.
+                        When used with indexed variants of
+    <a class="function" href="./glGet.html">glGet</a>
+    (such as
+    <a class="function" href="./glGet.html#c-glGetIntegeri_v">glGetIntegeri_v</a>
+    ),
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the buffer object
+                        bound to the indexed shader storage buffer binding points. The initial value is 0 for all targets.
+                        See
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ,
+    <a class="crossref" href="./glBindBufferBase.html">glBindBufferBase</a>
+    , and
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the minimum required alignment
+                        for shader storage buffer sizes and offset.  The initial value is 1.
+                        See
+    <a class="crossref" href="./glShaderStorageBlockBinding.html">glShaderStorageBlockBinding</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SHADER_STORAGE_BUFFER_START</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        When used with indexed variants of
+    <a class="function" href="./glGet.html">glGet</a>
+    (such as
+    <a class="function" href="./glGet.html#c-glGetInteger64i_v">glGetInteger64i_v</a>
+    ),
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the start offset of the binding range for each
+                        indexed shader storage buffer binding. The initial value is 0 for all bindings.
+                        See
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SHADER_STORAGE_BUFFER_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        When used with indexed variants of
+    <a class="function" href="./glGet.html">glGet</a>
+    (such as
+    <a class="function" href="./glGet.html#c-glGetInteger64i_v">glGetInteger64i_v</a>
+    ),
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the size of the binding range for each
+                        indexed shader storage buffer binding. The initial value is 0 for all bindings.
+                        See
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SMOOTH_LINE_WIDTH_RANGE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a pair of values indicating the range of
+                        widths supported for smooth (antialiased) lines. See
+    <a class="crossref" href="./glLineWidth.html">glLineWidth</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SMOOTH_LINE_WIDTH_GRANULARITY</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value indicating the level of
+                        quantization applied to smooth line width parameters.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_BACK_FAIL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating what action is taken for back-facing polygons when the stencil
+                        test fails. The initial value is
+    <span class="constant">GL_KEEP</span>
+    .
+                        See
+    <a class="crossref" href="./glStencilOpSeparate.html">glStencilOpSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_BACK_FUNC</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating what function is used for back-facing polygons to compare the
+                        stencil reference value with the stencil buffer value. The initial value
+                        is
+    <span class="constant">GL_ALWAYS</span>
+    .
+                        See
+    <a class="crossref" href="./glStencilFuncSeparate.html">glStencilFuncSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_BACK_PASS_DEPTH_FAIL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating what action is taken for back-facing polygons when the stencil
+                        test passes,
+                        but the depth test fails. The initial value is
+    <span class="constant">GL_KEEP</span>
+    .
+                        See
+    <a class="crossref" href="./glStencilOpSeparate.html">glStencilOpSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_BACK_PASS_DEPTH_PASS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating what action is taken for back-facing polygons when the stencil
+                        test passes and the depth test passes. The initial value is
+    <span class="constant">GL_KEEP</span>
+    .
+                        See
+    <a class="crossref" href="./glStencilOpSeparate.html">glStencilOpSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_BACK_REF</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the reference value that is compared with the contents of the stencil
+                        buffer for back-facing polygons. The initial value is 0.
+                        See
+    <a class="crossref" href="./glStencilFuncSeparate.html">glStencilFuncSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_BACK_VALUE_MASK</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the mask that is used for back-facing polygons to mask both the stencil reference value and the
+                        stencil buffer value before they are compared. The initial value is all 1's.
+                        See
+    <a class="crossref" href="./glStencilFuncSeparate.html">glStencilFuncSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_BACK_WRITEMASK</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the mask that controls writing of the stencil bitplanes for back-facing polygons. The initial value
+                        is all 1's.
+                        See
+    <a class="crossref" href="./glStencilMaskSeparate.html">glStencilMaskSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_CLEAR_VALUE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the index to which the stencil bitplanes are cleared. The initial value is
+                        0.
+                        See
+    <a class="crossref" href="./glClearStencil.html">glClearStencil</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_FAIL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating what action is taken when the stencil
+                        test fails. The initial value is
+    <span class="constant">GL_KEEP</span>
+    .
+                        See
+    <a class="crossref" href="./glStencilOp.html">glStencilOp</a>
+    .
+                        This stencil state only affects non-polygons
+                        and front-facing polygons.  Back-facing polygons use separate stencil state.
+                        See
+    <a class="crossref" href="./glStencilOpSeparate.html">glStencilOpSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_FUNC</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating what function is used to compare the
+                        stencil reference value with the stencil buffer value. The initial value
+                        is
+    <span class="constant">GL_ALWAYS</span>
+    .
+                        See
+    <a class="crossref" href="./glStencilFunc.html">glStencilFunc</a>
+    .
+                        This stencil state only affects non-polygons
+                        and front-facing polygons.  Back-facing polygons use separate stencil state.
+                        See
+    <a class="crossref" href="./glStencilFuncSeparate.html">glStencilFuncSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_PASS_DEPTH_FAIL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating what action is taken when the stencil
+                        test passes,
+                        but the depth test fails. The initial value is
+    <span class="constant">GL_KEEP</span>
+    .
+                        See
+    <a class="crossref" href="./glStencilOp.html">glStencilOp</a>
+    .
+                        This stencil state only affects non-polygons
+                        and front-facing polygons.  Back-facing polygons use separate stencil state.
+                        See
+    <a class="crossref" href="./glStencilOpSeparate.html">glStencilOpSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_PASS_DEPTH_PASS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        a symbolic constant indicating what action is taken when the stencil
+                        test passes and the depth test passes. The initial value is
+    <span class="constant">GL_KEEP</span>
+    .
+                        See
+    <a class="crossref" href="./glStencilOp.html">glStencilOp</a>
+    .
+                        This stencil state only affects non-polygons
+                        and front-facing polygons.  Back-facing polygons use separate stencil state.
+                        See
+    <a class="crossref" href="./glStencilOpSeparate.html">glStencilOpSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_REF</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the reference value that is compared with the contents of the stencil
+                        buffer. The initial value is 0.
+                        See
+    <a class="crossref" href="./glStencilFunc.html">glStencilFunc</a>
+    .
+                        This stencil state only affects non-polygons
+                        and front-facing polygons.  Back-facing polygons use separate stencil state.
+                        See
+    <a class="crossref" href="./glStencilFuncSeparate.html">glStencilFuncSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_TEST</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether stencil testing
+                        of fragments is enabled. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glStencilFunc.html">glStencilFunc</a>
+    and
+    <a class="crossref" href="./glStencilOp.html">glStencilOp</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_VALUE_MASK</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the mask that is used to mask both the stencil reference value and the
+                        stencil buffer value before they are compared. The initial value is all 1's.
+                        See
+    <a class="crossref" href="./glStencilFunc.html">glStencilFunc</a>
+    .
+                        This stencil state only affects non-polygons
+                        and front-facing polygons.  Back-facing polygons use separate stencil state.
+                        See
+    <a class="crossref" href="./glStencilFuncSeparate.html">glStencilFuncSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_WRITEMASK</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the mask that controls writing of the stencil bitplanes. The initial value
+                        is all 1's.
+                        See
+    <a class="crossref" href="./glStencilMask.html">glStencilMask</a>
+    .
+                        This stencil state only affects non-polygons
+                        and front-facing polygons.  Back-facing polygons use separate stencil state.
+                        See
+    <a class="crossref" href="./glStencilMaskSeparate.html">glStencilMaskSeparate</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STEREO</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether stereo buffers
+                        (left and right) are supported.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SUBPIXEL_BITS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        an estimate of the number of bits of subpixel resolution that are used to
+                        position rasterized geometry in window coordinates. The value must be at least 4.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BINDING_1D</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the texture
+                        currently bound to the target
+    <span class="constant">GL_TEXTURE_1D</span>
+    . The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BINDING_1D_ARRAY</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the texture
+                        currently bound to the target
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+    . The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BINDING_2D</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the texture
+                        currently bound to the target
+    <span class="constant">GL_TEXTURE_2D</span>
+    . The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BINDING_2D_ARRAY</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the texture
+                        currently bound to the target
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    . The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BINDING_2D_MULTISAMPLE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the texture
+                        currently bound to the target
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    . The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the texture
+                        currently bound to the target
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+    . The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BINDING_3D</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the texture
+                        currently bound to the target
+    <span class="constant">GL_TEXTURE_3D</span>
+    . The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BINDING_BUFFER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the texture
+                        currently bound to the target
+    <span class="constant">GL_TEXTURE_BUFFER</span>
+    . The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BINDING_CUBE_MAP</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the texture
+                        currently bound to the target
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    . The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BINDING_RECTANGLE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the texture
+                        currently bound to the target
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    . The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_COMPRESSION_HINT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value indicating the mode of the texture
+                        compression hint.  The initial value is
+    <span class="constant">GL_DONT_CARE</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BINDING_BUFFER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the buffer object
+                        currently bound to the
+    <span class="constant">GL_TEXTURE_BUFFER</span>
+    buffer binding point. The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the minimum required alignment
+                        for texture buffer sizes and offset.  The initial value is 1.
+                        See
+    <a class="crossref" href="./glUniformBlockBinding.html">glUniformBlockBinding</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TIMESTAMP</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the 64-bit value of the current
+                        GL time.
+                        See
+    <a class="crossref" href="./glQueryCounter.html">glQueryCounter</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_BINDING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        When used with non-indexed variants of
+    <a class="function" href="./glGet.html">glGet</a>
+    (such as
+    <a class="function" href="./glGet.html#c-glGetIntegerv">glGetIntegerv</a>
+    ),
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the buffer object
+                        currently bound to the target
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER</span>
+    . If no buffer object
+                        is bound to this target, 0 is returned.
+                        When used with indexed variants of
+    <a class="function" href="./glGet.html">glGet</a>
+    (such as
+    <a class="function" href="./glGet.html#c-glGetIntegeri_v">glGetIntegeri_v</a>
+    ),
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the buffer object
+                        bound to the indexed transform feedback attribute stream. The initial value is 0 for all targets.
+                        See
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ,
+    <a class="crossref" href="./glBindBufferBase.html">glBindBufferBase</a>
+    , and
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_START</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        When used with indexed variants of
+    <a class="function" href="./glGet.html">glGet</a>
+    (such as
+    <a class="function" href="./glGet.html#c-glGetInteger64i_v">glGetInteger64i_v</a>
+    ),
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the start offset of the binding range for each
+                        transform feedback attribute stream. The initial value is 0 for all streams.
+                        See
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        When used with indexed variants of
+    <a class="function" href="./glGet.html">glGet</a>
+    (such as
+    <a class="function" href="./glGet.html#c-glGetInteger64i_v">glGetInteger64i_v</a>
+    ),
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the size of the binding range for each
+                        transform feedback attribute stream. The initial value is 0 for all streams.
+                        See
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNIFORM_BUFFER_BINDING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        When used with non-indexed variants of
+    <a class="function" href="./glGet.html">glGet</a>
+    (such as
+    <a class="function" href="./glGet.html#c-glGetIntegerv">glGetIntegerv</a>
+    ),
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the buffer object
+                        currently bound to the target
+    <span class="constant">GL_UNIFORM_BUFFER</span>
+    . If no buffer object
+                        is bound to this target, 0 is returned.
+                        When used with indexed variants of
+    <a class="function" href="./glGet.html">glGet</a>
+    (such as
+    <a class="function" href="./glGet.html#c-glGetIntegeri_v">glGetIntegeri_v</a>
+    ),
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the buffer object
+                        bound to the indexed uniform buffer binding point. The initial value is 0 for all targets.
+                        See
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ,
+    <a class="crossref" href="./glBindBufferBase.html">glBindBufferBase</a>
+    , and
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNIFORM_BUFFER_OFFSET_ALIGNMENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the minimum required alignment
+                        for uniform buffer sizes and offset.  The initial value is 1.
+                        See
+    <a class="crossref" href="./glUniformBlockBinding.html">glUniformBlockBinding</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNIFORM_BUFFER_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        When used with indexed variants of
+    <a class="function" href="./glGet.html">glGet</a>
+    (such as
+    <a class="function" href="./glGet.html#c-glGetInteger64i_v">glGetInteger64i_v</a>
+    ),
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the size of the binding range for each
+                        indexed uniform buffer binding. The initial value is 0 for all bindings.
+                        See
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNIFORM_BUFFER_START</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        When used with indexed variants of
+    <a class="function" href="./glGet.html">glGet</a>
+    (such as
+    <a class="function" href="./glGet.html#c-glGetInteger64i_v">glGetInteger64i_v</a>
+    ),
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the start offset of the binding range for each
+                        indexed uniform buffer binding. The initial value is 0 for all bindings.
+                        See
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNPACK_ALIGNMENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the byte alignment used for reading pixel data from memory. The initial
+                        value is 4.
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNPACK_IMAGE_HEIGHT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the image height used for reading pixel data from memory.  The initial
+                        is 0.
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNPACK_LSB_FIRST</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether single-bit
+                        pixels being read from memory are read first from the least significant
+                        bit of each unsigned byte. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNPACK_ROW_LENGTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the row length used for reading pixel data from memory. The initial value
+                        is 0.
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNPACK_SKIP_IMAGES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number of pixel images skipped before the first pixel is read
+                        from memory. The initial value is 0.
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNPACK_SKIP_PIXELS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number of pixel locations skipped before the first pixel is read
+                        from memory. The initial value is 0.
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNPACK_SKIP_ROWS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the number of rows of pixel locations skipped before the first pixel is read
+                        from memory. The initial value is 0.
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNPACK_SWAP_BYTES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single boolean value indicating whether the bytes of
+                        two-byte and four-byte pixel indices and components are swapped after being
+                        read from memory. The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+                        See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_VERTEX_ARRAY_BINDING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the name of the vertex array object
+                        currently bound to the context. If no vertex array object
+                        is bound to the context, 0 is returned.  The initial value is 0.
+                        See
+    <a class="crossref" href="./glBindVertexArray.html">glBindVertexArray</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_VERTEX_BINDING_DIVISOR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Accepted by the indexed forms.
+    <a class="parameter" href="#param-data">data</a>
+    returns a single integer value representing the instance step
+                        divisor of the first element in the bound buffer's data store for vertex attribute bound to
+    <a class="parameter" href="#param-index">index</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_VERTEX_BINDING_OFFSET</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Accepted by the indexed forms.
+    <a class="parameter" href="#param-data">data</a>
+    returns a single integer value representing the byte offset
+                        of the first element in the bound buffer's data store for vertex attribute bound to
+    <a class="parameter" href="#param-index">index</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_VERTEX_BINDING_STRIDE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Accepted by the indexed forms.
+    <a class="parameter" href="#param-data">data</a>
+    returns a single integer value representing the byte offset
+                        between the start of each element in the bound buffer's data store for vertex attribute bound to
+    <a class="parameter" href="#param-index">index</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_VERTEX_BINDING_BUFFER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Accepted by the indexed forms.
+    <a class="parameter" href="#param-data">data</a>
+    returns a single integer value representing the name of the buffer
+                        bound to vertex binding
+    <a class="parameter" href="#param-index">index</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single integer value containing the maximum offset that may be added to a vertex binding
+                        offset.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_VERTEX_ATTRIB_BINDINGS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single integer value containing the maximum number of vertex buffers that may be bound.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_VIEWPORT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        When used with non-indexed variants of
+    <a class="function" href="./glGet.html">glGet</a>
+    (such as
+    <a class="function" href="./glGet.html#c-glGetIntegerv">glGetIntegerv</a>
+    ),
+    <a class="parameter" href="#param-data">data</a>
+    returns four values:
+                        the
+    <math overflow="scroll"><mi mathvariant="italic">x</mi></math>
+    and
+    <math overflow="scroll"><mi mathvariant="italic">y</mi></math>
+    window coordinates of the viewport, followed by its width and height.
+                        Initially the
+    <math overflow="scroll"><mi mathvariant="italic">x</mi></math>
+    and
+    <math overflow="scroll"><mi mathvariant="italic">y</mi></math>
+    window coordinates are both set to 0,
+                        and the width and height are set to the width and height of the window into
+                        which the GL will do its rendering.
+                        See
+    <a class="crossref" href="./glViewport.html">glViewport</a>
+    .
+</div>
+    <div class="para">
+                        When used with indexed variants of
+    <a class="function" href="./glGet.html">glGet</a>
+    (such as
+    <a class="function" href="./glGet.html#c-glGetIntegeri_v">glGetIntegeri_v</a>
+    ),
+    <a class="parameter" href="#param-data">data</a>
+    returns four values:
+                        the
+    <math overflow="scroll"><mi mathvariant="italic">x</mi></math>
+    and
+    <math overflow="scroll"><mi mathvariant="italic">y</mi></math>
+    window coordinates of the indexed viewport, followed by its width and height.
+                        Initially the
+    <math overflow="scroll"><mi mathvariant="italic">x</mi></math>
+    and
+    <math overflow="scroll"><mi mathvariant="italic">y</mi></math>
+    window coordinates are both set to 0,
+                        and the width and height are set to the width and height of the window into
+                        which the GL will do its rendering.
+                        See
+    <a class="function" href="./glViewportIndexed.html#c-glViewportIndexedf">glViewportIndexedf</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_VIEWPORT_BOUNDS_RANGE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns two values, the minimum and maximum viewport bounds range.
+                        The minimum range should be at least [-32768, 32767].
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_VIEWPORT_INDEX_PROVOKING_VERTEX</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns one value,
+                        the implementation dependent specifc vertex of a primitive that is used to select the viewport index.
+                        If the value returned is equivalent to
+    <span class="constant">GL_PROVOKING_VERTEX</span>
+    , then the vertex
+                        selection follows the convention specified by
+    <a class="crossref" href="./glProvokingVertex.html">glProvokingVertex</a>
+    .
+                        If the value returned is equivalent to
+    <span class="constant">GL_FIRST_VERTEX_CONVENTION</span>
+    , then the
+                        selection is always taken from the first vertex in the primitive.
+                        If the value returned is equivalent to
+    <span class="constant">GL_LAST_VERTEX_CONVENTION</span>
+    , then the
+                        selection is always taken from the last vertex in the primitive.
+                        If the value returned is equivalent to
+    <span class="constant">GL_UNDEFINED_VERTEX</span>
+    , then the
+                        selection is not guaranteed to be taken from any specific vertex in the primitive.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_VIEWPORT_SUBPIXEL_BITS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the number of bits of sub-pixel precision which the GL
+                        uses to interpret the floating point viewport bounds. The minimum value is 0.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_MAX_ELEMENT_INDEX</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    returns a single value, the maximum index that may be specified during the
+                        transfer of generic vertex attributes to the GL.
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+            Many of the boolean parameters can also be queried more easily using
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            The following parameters return the associated value for the active texture unit:
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_BINDING_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_BINDING_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_3D</span>
+    and
+    <span class="constant">GL_TEXTURE_BINDING_3D</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_MAX_VIEWPORTS</span>
+    ,
+    <span class="constant">GL_VIEWPORT_SUBPIXEL_BITS</span>
+    ,
+    <span class="constant">GL_VIEWPORT_BOUNDS_RANGE</span>
+    ,
+    <span class="constant">GL_LAYER_PROVOKING_VERTEX</span>
+    ,
+            and
+    <span class="constant">GL_VIEWPORT_INDEX_PROVOKING_VERTEX</span>
+    are available only if the GL version is 4.1 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_MAX_VERTEX_ATOMIC_COUNTERS</span>
+    ,
+    <span class="constant">GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS</span>
+    ,
+    <span class="constant">GL_MAX_TESS_EVALUATION_ATOMIC_COUNTERS</span>
+    ,
+    <span class="constant">GL_MAX_GEOMETRY_ATOMIC_COUNTERS</span>
+    ,
+    <span class="constant">GL_MAX_FRAMGENT_ATOMIC_COUNTERS</span>
+    , and
+    <span class="constant">GL_MIN_MAP_BUFFER_ALIGNMENT</span>
+    are accepted by
+    <a class="parameter" href="#param-pname">pname</a>
+    only if the GL version is 4.2 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_MAX_ELEMENT_INDEX</span>
+    is accepted by
+    <a class="parameter" href="#param-pname">pname</a>
+    only
+            if the GL version is 4.3 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_MAX_COMPUTE_UNIFORM_BLOCKS</span>
+    ,
+    <span class="constant">GL_MAX_COMPUTE_TEXTURE_IMAGE_UNITS</span>
+    ,
+    <span class="constant">GL_MAX_COMPUTE_UNIFORM_COMPONENTS</span>
+    ,
+    <span class="constant">GL_MAX_COMPUTE_ATOMIC_COUNTERS</span>
+    ,
+    <span class="constant">GL_MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS</span>
+    ,
+    <span class="constant">GL_MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS</span>
+    ,
+    <span class="constant">GL_MAX_COMPUTE_WORK_GROUP_INVOCATIONS</span>
+    ,
+    <span class="constant">GL_MAX_COMPUTE_WORK_GROUP_COUNT</span>
+    , and
+    <span class="constant">GL_MAX_COMPUTE_WORK_GROUP_SIZE</span>
+    and
+    <span class="constant">GL_DISPATCH_INDIRECT_BUFFER_BINDING</span>
+    are available only if the GL version
+            is 4.3 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_MAX_DEBUG_GROUP_STACK_DEPTH</span>
+    ,
+    <span class="constant">GL_DEBUG_GROUP_STACK_DEPTH</span>
+    and
+    <span class="constant">GL_MAX_LABEL_LENGTH</span>
+    are accepted only if
+            the GL version is 4.3 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_MAX_UNIFORM_LOCATIONS</span>
+    is accepted only if the GL version is 4.3 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_MAX_FRAMEBUFFER_WIDTH</span>
+    ,
+    <span class="constant">GL_MAX_FRAMEBUFFER_HEIGHT</span>
+    ,
+    <span class="constant">GL_MAX_FRAMEBUFFER_LAYERS</span>
+    ,
+            and
+    <span class="constant">GL_MAX_FRAMEBUFFER_SAMPLES</span>
+    are available only if the GL version is 4.3 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_MAX_VERTEX_SHADER_STORAGE_BLOCKS</span>
+    ,
+    <span class="constant">GL_MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS</span>
+    ,
+    <span class="constant">GL_MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS</span>
+    ,
+    <span class="constant">GL_MAX_GEOMETRY_SHADER_STORAGE_BLOCKS</span>
+    ,
+    <span class="constant">GL_MAX_FRAGMENT_SHADER_STORAGE_BLOCKS</span>
+    , and
+    <span class="constant">GL_MAX_COMPUTE_SHADER_STORAGE_BLOCKS</span>
+    are available
+            only if the GL version is 4.3 or higher.
+</div>
+    <div class="para">
+    <span class="constant">GL_TEXTURE_BUFFER_OFFSET_ALIGNMENT</span>
+    is available only if the GL version is 4.3 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_VERTEX_BINDING_DIVISOR</span>
+    ,
+    <span class="constant">GL_VERTEX_BINDING_OFFSET</span>
+    ,
+    <span class="constant">GL_VERTEX_BINDING_STRIDE</span>
+    ,
+    <span class="constant">GL_VERTEX_BINDING_BUFFER</span>
+    ,
+    <span class="constant">GL_MAX_VERTEX_ATTRIB_RELATIVE_OFFSET</span>
+    and
+    <span class="constant">GL_MAX_VERTEX_ATTRIB_BINDINGS</span>
+    are available only if
+            the GL version is 4.3 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated on any of
+    <a class="function" href="./glGet.html#c-glGetBooleani_v">glGetBooleani_v</a>
+    ,
+    <a class="function" href="./glGet.html#c-glGetIntegeri_v">glGetIntegeri_v</a>
+    , or
+    <a class="function" href="./glGet.html#c-glGetInteger64i_v">glGetInteger64i_v</a>
+    if
+    <a class="parameter" href="#param-index">index</a>
+    is outside of the valid range for the indexed state
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGet.html#c-glGetBooleani_v">glGetBooleani_v</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGet.html#c-glGetBooleanv">glGetBooleanv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGet.html#c-glGetDoublei_v">glGetDoublei_v</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGet.html#c-glGetDoublev">glGetDoublev</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGet.html#c-glGetFloati_v">glGetFloati_v</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGet.html#c-glGetFloatv">glGetFloatv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGet.html#c-glGetInteger64i_v">glGetInteger64i_v</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGet.html#c-glGetInteger64v">glGetInteger64v</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGet.html#c-glGetIntegeri_v">glGetIntegeri_v</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGet.html#c-glGetIntegerv">glGetIntegerv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetActiveUniform.html">glGetActiveUniform</a>
+    ,
+    <a class="crossref" href="./glGetAttachedShaders.html">glGetAttachedShaders</a>
+    ,
+    <a class="crossref" href="./glGetAttribLocation.html">glGetAttribLocation</a>
+    ,
+    <a class="crossref" href="./glGetBufferParameteriv.html#c-glGetBufferParameteriv">glGetBufferParameter</a>
+    ,
+    <a class="crossref" href="./glGetBufferPointerv.html">glGetBufferPointerv</a>
+    ,
+    <a class="crossref" href="./glGetBufferSubData.html">glGetBufferSubData</a>
+    ,
+    <a class="crossref" href="./glGetCompressedTexImage.html">glGetCompressedTexImage</a>
+    ,
+    <a class="crossref" href="./glGetError.html">glGetError</a>
+    ,
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    ,
+    <a class="crossref" href="./glGetProgramInfoLog.html">glGetProgramInfoLog</a>
+    ,
+    <a class="crossref" href="./glGetQueryiv.html">glGetQueryiv</a>
+    ,
+    <a class="crossref" href="./glGetQueryObject.html">glGetQueryObject</a>
+    ,
+    <a class="crossref" href="./glGetShader.html">glGetShader</a>
+    ,
+    <a class="crossref" href="./glGetShaderInfoLog.html">glGetShaderInfoLog</a>
+    ,
+    <a class="crossref" href="./glGetShaderSource.html">glGetShaderSource</a>
+    ,
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+    ,
+    <a class="crossref" href="./glGetTexImage.html">glGetTexImage</a>
+    ,
+    <a class="crossref" href="./glGetTexLevelParameter.html">glGetTexLevelParameter</a>
+    ,
+    <a class="crossref" href="./glGetTexParameter.html">glGetTexParameter</a>
+    ,
+    <a class="crossref" href="./glGetUniform.html">glGetUniform</a>
+    ,
+    <a class="crossref" href="./glGetUniformLocation.html">glGetUniformLocation</a>
+    ,
+    <a class="crossref" href="./glGetVertexAttrib.html">glGetVertexAttrib</a>
+    ,
+    <a class="crossref" href="./glGetVertexAttribPointerv.html">glGetVertexAttribPointerv</a>
+    ,
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glGetBooleanv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/boundingvolume.py">OpenGLContext/scenegraph/boundingvolume.py</a>
+    Lines: <span class="sample-lines">314</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/font.py">OpenGLContext/scenegraph/text/font.py</a>
+    Lines: <span class="sample-lines">288</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/test/opengl_info.py">test/opengl_info.py</a>
+    Lines: <span class="sample-lines">114, 115, 116</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/geometry.py">pyggel/geometry.py</a>
+    Lines: <span class="sample-lines">333</span>
+</div>
+        <div class="sample-key">glGetDoublev</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glget_with_fonts.py">tests/glget_with_fonts.py</a>
+    Lines: <span class="sample-lines">33</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/renderpass.py">OpenGLContext/passes/renderpass.py</a>
+    Lines: <span class="sample-lines">704, 724, 742</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/glCamera.py">PyOpenGL-Demo/NeHe/lesson44/glCamera.py</a>
+    Lines: <span class="sample-lines">493, 494</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/checker.py">PyOpenGL-Demo/GLUT/tom/checker.py</a>
+    Lines: <span class="sample-lines">62</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/text.py">PyOpenGL-Demo/GLUT/tom/text.py</a>
+    Lines: <span class="sample-lines">55</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/conesave.py">PyOpenGL-Demo/GLUT/tom/conesave.py</a>
+    Lines: <span class="sample-lines">31</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/cone.py">PyOpenGL-Demo/GLUT/tom/cone.py</a>
+    Lines: <span class="sample-lines">64</span>
+</div>
+        <div class="sample-key">glGetFloatv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glget_with_fonts.py">tests/glget_with_fonts.py</a>
+    Lines: <span class="sample-lines">33</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/frustum.py">OpenGLContext/frustum.py</a>
+    Lines: <span class="sample-lines">33, 35</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/polygonsort.py">OpenGLContext/scenegraph/polygonsort.py</a>
+    Lines: <span class="sample-lines">37, 39, 64, 66</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/interactionMatrix/interactionMatrix.py">PyOpenGL-Demo/proesch/interactionMatrix/interactionMatrix.py</a>
+    Lines: <span class="sample-lines">35, 44, 53</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson43/glFreeType.py">PyOpenGL-Demo/NeHe/lesson43/glFreeType.py</a>
+    Lines: <span class="sample-lines">280</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/lesson44.py">PyOpenGL-Demo/NeHe/lesson44/lesson44.py</a>
+    Lines: <span class="sample-lines">228, 229</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/glCamera.py">PyOpenGL-Demo/NeHe/lesson44/glCamera.py</a>
+    Lines: <span class="sample-lines">189, 192, 320, 323, 728</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Core.py">VisionEgg/Core.py</a>
+    Lines: <span class="sample-lines">813, 826, 839, 879, 1077</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/test/conform.py">test/conform.py</a>
+    Lines: <span class="sample-lines">163, 176, 189, 202, 221</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/stencil.py">pymt/graphx/stencil.py</a>
+    Lines: <span class="sample-lines">22, 51</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/apps/3Ddrawing/3Ddrawing.py">examples/apps/3Ddrawing/3Ddrawing.py</a>
+    Lines: <span class="sample-lines">103, 115</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/apps/3Dviewer/3Dviewer.py">examples/apps/3Dviewer/3Dviewer.py</a>
+    Lines: <span class="sample-lines">84, 160</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/line.py">core/line.py</a>
+    Lines: <span class="sample-lines">99</span>
+</div>
+        <div class="sample-key">glGetIntegerv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_instanced.py">tests/shader_instanced.py</a>
+    Lines: <span class="sample-lines">81</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_2.py">tests/shadow_2.py</a>
+    Lines: <span class="sample-lines">44</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glget_with_fonts.py">tests/glget_with_fonts.py</a>
+    Lines: <span class="sample-lines">29</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_instanced_mapped.py">tests/shader_instanced_mapped.py</a>
+    Lines: <span class="sample-lines">87</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/atlas.py">OpenGLContext/atlas.py</a>
+    Lines: <span class="sample-lines">299</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/polygonsort.py">OpenGLContext/scenegraph/polygonsort.py</a>
+    Lines: <span class="sample-lines">41, 68</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/renderpass.py">OpenGLContext/passes/renderpass.py</a>
+    Lines: <span class="sample-lines">714</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson41.py">PyOpenGL-Demo/NeHe/lesson41.py</a>
+    Lines: <span class="sample-lines">98</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson43/glFreeType.py">PyOpenGL-Demo/NeHe/lesson43/glFreeType.py</a>
+    Lines: <span class="sample-lines">188</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/lesson44.py">PyOpenGL-Demo/NeHe/lesson44/lesson44.py</a>
+    Lines: <span class="sample-lines">99</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/glCamera.py">PyOpenGL-Demo/NeHe/lesson44/glCamera.py</a>
+    Lines: <span class="sample-lines">492</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglBase.py">renderers/openglBase.py</a>
+    Lines: <span class="sample-lines">254</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Gratings.py">VisionEgg/Gratings.py</a>
+    Lines: <span class="sample-lines">80, 81, 82, 124, 257, 576</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/SphereMap.py">VisionEgg/SphereMap.py</a>
+    Lines: <span class="sample-lines">659, 957</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Textures.py">VisionEgg/Textures.py</a>
+    Lines: <span class="sample-lines">678, 1183</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/test/opengl_info.py">test/opengl_info.py</a>
+    Lines: <span class="sample-lines">113, 118, 119, 120, 121, 123, 124, 125, 126, 171</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/data.py">pyggel/data.py</a>
+    Lines: <span class="sample-lines">17</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/image.py">pygl2d/image.py</a>
+    Lines: <span class="sample-lines">109</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/display.py">pygl2d/display.py</a>
+    Lines: <span class="sample-lines">74</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">792</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">792</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/baseFigure.py">core/baseFigure.py</a>
+    Lines: <span class="sample-lines">782, 783, 784</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/axes.py">core/axes.py</a>
+    Lines: <span class="sample-lines">42</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

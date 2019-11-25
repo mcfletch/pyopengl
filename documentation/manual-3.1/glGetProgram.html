@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetProgram : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetProgram</h1>
+</header>
+<main class="content">
+    <section class="purpose">Returns a parameter from a program object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetProgramiv"></a>
+    <span class="c-function">glGetProgramiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetProgramiv"></a>
+    <span class="py-function">glGetProgramiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">Specifies the program object to be
+            queried.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">Specifies the object parameter. Accepted
+            symbolic names are
+    <span class="constant">GL_DELETE_STATUS</span>
+    ,
+    <span class="constant">GL_LINK_STATUS</span>
+    ,
+    <span class="constant">GL_VALIDATE_STATUS</span>
+    ,
+    <span class="constant">GL_INFO_LOG_LENGTH</span>
+    ,
+    <span class="constant">GL_ATTACHED_SHADERS</span>
+    ,
+    <span class="constant">GL_ACTIVE_ATOMIC_COUNTER_BUFFERS</span>
+    ,
+    <span class="constant">GL_ACTIVE_ATTRIBUTES</span>
+    ,
+    <span class="constant">GL_ACTIVE_ATTRIBUTE_MAX_LENGTH</span>
+    ,
+    <span class="constant">GL_ACTIVE_UNIFORMS</span>
+    ,
+    <span class="constant">GL_ACTIVE_UNIFORM_BLOCKS</span>
+    ,
+    <span class="constant">GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH</span>
+    ,
+    <span class="constant">GL_ACTIVE_UNIFORM_MAX_LENGTH</span>
+    ,
+    <span class="constant">GL_COMPUTE_WORK_GROUP_SIZE</span>
+    <span class="constant">GL_PROGRAM_BINARY_LENGTH</span>
+    ,
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_MODE</span>
+    ,
+    <span class="constant">GL_TRANSFORM_FEEDBACK_VARYINGS</span>
+    ,
+    <span class="constant">GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH</span>
+    ,
+    <span class="constant">GL_GEOMETRY_VERTICES_OUT</span>
+    ,
+    <span class="constant">GL_GEOMETRY_INPUT_TYPE</span>
+    , and
+    <span class="constant">GL_GEOMETRY_OUTPUT_TYPE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">Returns the requested object parameter.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetProgram.html">glGetProgram</a>
+    returns in
+    <a class="parameter" href="#param-params">params</a>
+    the value of a parameter for a specific program object. The following parameters are defined:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DELETE_STATUS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns
+    <span class="constant">GL_TRUE</span>
+    if
+    <a class="parameter" href="#param-program">program</a>
+    is currently flagged
+            for deletion, and
+    <span class="constant">GL_FALSE</span>
+    otherwise.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LINK_STATUS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns
+    <span class="constant">GL_TRUE</span>
+    if the last link
+            operation on
+    <a class="parameter" href="#param-program">program</a>
+    was
+            successful, and
+    <span class="constant">GL_FALSE</span>
+    otherwise.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_VALIDATE_STATUS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns
+    <span class="constant">GL_TRUE</span>
+    or if the last
+            validation operation on
+    <a class="parameter" href="#param-program">program</a>
+    was successful, and
+    <span class="constant">GL_FALSE</span>
+    otherwise.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_INFO_LOG_LENGTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns the
+            number of characters in the information log for
+    <a class="parameter" href="#param-program">program</a>
+    including the null
+            termination character (i.e., the size of the
+            character buffer required to store the information
+            log). If
+    <a class="parameter" href="#param-program">program</a>
+    has no
+            information log, a value of 0 is
+            returned.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_ATTACHED_SHADERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns the
+            number of shader objects attached to
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_ACTIVE_ATOMIC_COUNTER_BUFFERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns the
+            number of active attribute atomic counter buffers used by
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_ACTIVE_ATTRIBUTES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns the
+            number of active attribute variables for
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_ACTIVE_ATTRIBUTE_MAX_LENGTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns the
+            length of the longest active attribute name for
+    <a class="parameter" href="#param-program">program</a>
+    , including the null
+            termination character (i.e., the size of the
+            character buffer required to store the longest
+            attribute name). If no active attributes exist, 0 is
+            returned.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_ACTIVE_UNIFORMS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns the
+            number of active uniform variables for
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_ACTIVE_UNIFORM_MAX_LENGTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns the
+            length of the longest active uniform variable name
+            for
+    <a class="parameter" href="#param-program">program</a>
+    , including the
+            null termination character (i.e., the size of the
+            character buffer required to store the longest
+            uniform variable name). If no active uniform
+            variables exist, 0 is returned.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PROGRAM_BINARY_LENGTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns the
+            length of the program binary, in bytes that will be returned by
+            a call to
+    <a class="crossref" href="./glGetProgramBinary.html">glGetProgramBinary</a>
+    .
+            When a progam's
+    <span class="constant">GL_LINK_STATUS</span>
+    is
+    <span class="constant">GL_FALSE</span>
+    ,
+            its program binary length is zero.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_COMPUTE_WORK_GROUP_SIZE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns an
+            array of three integers containing the local work group size of
+            the compute program as specified by its input layout qualifier(s).
+    <a class="parameter" href="#param-program">program</a>
+    must be the name of a program object
+            that has been previously linked successfully and contains a binary
+            for the compute shader stage.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_MODE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns a symbolic constant
+            indicating the buffer mode used when transform feedback is active.
+            This may be
+    <span class="constant">GL_SEPARATE_ATTRIBS</span>
+    or
+    <span class="constant">GL_INTERLEAVED_ATTRIBS</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TRANSFORM_FEEDBACK_VARYINGS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns the number of varying
+            variables to capture in transform feedback mode for the program.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns the length of the longest
+            variable name to be used for transform feedback, including the null-terminator.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_GEOMETRY_VERTICES_OUT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns the maximum number of vertices
+            that the geometry shader in
+    <a class="parameter" href="#param-program">program</a>
+    will output.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_GEOMETRY_INPUT_TYPE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns a symbolic constant indicating
+            the primitive type accepted as input to the geometry shader contained in
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_GEOMETRY_OUTPUT_TYPE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+            </div>
+    <div class="para">
+    <a class="parameter" href="#param-params">params</a>
+    returns a symbolic constant indicating
+            the primitive type that will be output by the geometry shader contained
+            in
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <span class="constant">GL_ACTIVE_UNIFORM_BLOCKS</span>
+    and
+    <span class="constant">GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH</span>
+    are available only if the GL version 3.1 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_GEOMETRY_VERTICES_OUT</span>
+    ,
+    <span class="constant">GL_GEOMETRY_INPUT_TYPE</span>
+    and
+    <span class="constant">GL_GEOMETRY_OUTPUT_TYPE</span>
+    are accepted only if the GL
+        version is 3.2 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_COMPUTE_WORK_GROUP_SIZE</span>
+    is accepted only if the
+        GL version is 4.3 or greater.
+</div>
+    <div class="para">If an error is generated, no change is made to the
+    contents of
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a value generated by OpenGL.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    does not refer to a program object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_GEOMETRY_VERTICES_OUT</span>
+    ,
+    <span class="constant">GL_GEOMETRY_INPUT_TYPE</span>
+    , or
+    <span class="constant">GL_GEOMETRY_OUTPUT_TYPE</span>
+    ,
+    and
+    <a class="parameter" href="#param-program">program</a>
+    does not contain a geometry shader.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_COMPUTE_WORK_GROUP_SIZE</span>
+    and
+    <a class="parameter" href="#param-program">program</a>
+    does not contain a binary for the compute shader stage.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetActiveAttrib.html">glGetActiveAttrib</a>
+    with argument
+    <a class="parameter" href="#param-program">program</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetActiveUniform.html">glGetActiveUniform</a>
+    with argument
+    <a class="parameter" href="#param-program">program</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetAttachedShaders.html">glGetAttachedShaders</a>
+    with argument
+    <a class="parameter" href="#param-program">program</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetProgramInfoLog.html">glGetProgramInfoLog</a>
+    with argument
+    <a class="parameter" href="#param-program">program</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsProgram.html">glIsProgram</a>
+    <a class="parameter" href="#param-"></a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetProgramiv.html">glGetProgramiv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glAttachShader.html">glAttachShader</a>
+    ,
+    <a class="crossref" href="./glCreateProgram.html">glCreateProgram</a>
+    ,
+    <a class="crossref" href="./glDeleteProgram.html">glDeleteProgram</a>
+    ,
+    <a class="crossref" href="./glGetShader.html">glGetShader</a>
+    ,
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    ,
+    <a class="crossref" href="./glValidateProgram.html">glValidateProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2005 3Dlabs Inc. Ltd.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glGetProgramiv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/shaders.py">OpenGLContext/scenegraph/shaders.py</a>
+    Lines: <span class="sample-lines">505, 513</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/shaders.py">core/shaders.py</a>
+    Lines: <span class="sample-lines">539</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">107</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">129</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">90</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">98</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">121</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">107</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

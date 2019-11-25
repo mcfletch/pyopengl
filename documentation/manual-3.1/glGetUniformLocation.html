@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetUniformLocation : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetUniformLocation</h1>
+</header>
+<main class="content">
+    <section class="purpose">Returns the location of a uniform variable</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetUniformLocation"></a>
+    <span class="c-function">glGetUniformLocation</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLchar *(
+            <a href="#param-name" class="parameter">name</a>
+        )
+    </span>
+</span>)-&gt; GLint
+</div>
+                <div class="py-signature">
+    <a name="py-glGetUniformLocation"></a>
+    <span class="py-function">glGetUniformLocation</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-name" class="parameter">name</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">Check that name is a string with a null byte at the end of it</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">Specifies the program object to be
+            queried.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="para">Points to a null terminated string containing
+            the name of the uniform variable whose location is
+            to be queried.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    glGetUniformLocation
+    returns an
+    integer that represents the location of a specific uniform
+    variable within a program object.
+    <a class="parameter" href="#param-name">name</a>
+    must be a null terminated string that contains no white space.
+    <a class="parameter" href="#param-name">name</a>
+    must be an active uniform variable
+    name in
+    <a class="parameter" href="#param-program">program</a>
+    that is not a structure,
+    an array of structures, or a subcomponent of a vector or a
+    matrix. This function returns -1 if
+    <a class="parameter" href="#param-name">name</a>
+    does not correspond to an active uniform variable in
+    <a class="parameter" href="#param-program">program</a>
+    , if
+    <a class="parameter" href="#param-name">name</a>
+    starts with the reserved prefix "gl_", or if
+    <a class="parameter" href="#param-name">name</a>
+    is associated with an atomic counter or
+    a named uniform block.
+</div>
+    <div class="para">Uniform variables that are structures or arrays of
+    structures may be queried by calling
+    <a class="function" href="./glGetUniformLocation.html">glGetUniformLocation</a>
+    for each field within
+    the structure. The array element operator "[]" and the
+    structure field operator "." may be used in
+    <a class="parameter" href="#param-name">name</a>
+    in order to select elements within
+    an array or fields within a structure. The result of using these
+    operators is not allowed to be another structure, an array of
+    structures, or a subcomponent of a vector or a matrix. Except if
+    the last part of
+    <a class="parameter" href="#param-name">name</a>
+    indicates a uniform
+    variable array, the location of the first element of an array
+    can be retrieved by using the name of the array, or by using the
+    name appended by "[0]".
+</div>
+    <div class="para">The actual locations assigned to uniform variables are not
+    known until the program object is linked successfully. After
+    linking has occurred, the command
+    <a class="function" href="./glGetUniformLocation.html">glGetUniformLocation</a>
+    can be used to obtain
+    the location of a uniform variable. This location value can then
+    be passed to
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    to set the value of the uniform variable or to
+    <a class="crossref" href="./glGetUniform.html">glGetUniform</a>
+    in order to query the current value of the uniform variable.
+    After a program object has been linked successfully, the index
+    values for uniform variables remain fixed until the next link
+    command occurs. Uniform variable locations and values can only
+    be queried after a link if the link was successful.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a value generated by
+    OpenGL.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a program object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    has not been successfully
+    linked.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetActiveUniform.html">glGetActiveUniform</a>
+    with arguments
+    <a class="parameter" href="#param-program">program</a>
+    and the index of
+    an active uniform variable
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    with arguments
+    <a class="parameter" href="#param-program">program</a>
+    and
+    <span class="constant">GL_ACTIVE_UNIFORMS</span>
+    or
+    <span class="constant">GL_ACTIVE_UNIFORM_MAX_LENGTH</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetUniform.html">glGetUniform</a>
+    with arguments
+    <a class="parameter" href="#param-program">program</a>
+    and the name of a
+    uniform variable
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsProgram.html">glIsProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetUniformLocation.html">glGetUniformLocation</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    ,
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2005 3Dlabs Inc. Ltd.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glGetUniformLocation</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_5.py">tests/shader_5.py</a>
+    Lines: <span class="sample-lines">272</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_8.py">tests/shader_8.py</a>
+    Lines: <span class="sample-lines">171, 175</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_4_subset.py">tests/shader_4_subset.py</a>
+    Lines: <span class="sample-lines">50, 51</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_7.py">tests/shader_7.py</a>
+    Lines: <span class="sample-lines">221, 230</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_10.py">tests/shader_10.py</a>
+    Lines: <span class="sample-lines">230, 234</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_3.py">tests/shader_3.py</a>
+    Lines: <span class="sample-lines">132, 133</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_11.py">tests/shader_11.py</a>
+    Lines: <span class="sample-lines">244</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shaders.py">tests/shaders.py</a>
+    Lines: <span class="sample-lines">71</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/pygame_textureatlas.py">tests/pygame_textureatlas.py</a>
+    Lines: <span class="sample-lines">71, 72</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_6.py">tests/shader_6.py</a>
+    Lines: <span class="sample-lines">222</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_9.py">tests/shader_9.py</a>
+    Lines: <span class="sample-lines">294, 298</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_4.py">tests/shader_4.py</a>
+    Lines: <span class="sample-lines">104</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/cubebackground.py">OpenGLContext/scenegraph/cubebackground.py</a>
+    Lines: <span class="sample-lines">162</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/shaders.py">OpenGLContext/scenegraph/shaders.py</a>
+    Lines: <span class="sample-lines">563</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/shader.py">pymt/graphx/shader.py</a>
+    Lines: <span class="sample-lines">10, 61, 65</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">111</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">133</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">94</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">102</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">125</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">111</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

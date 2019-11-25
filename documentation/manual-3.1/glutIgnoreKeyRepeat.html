@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutIgnoreKeyRepeat : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutIgnoreKeyRepeat</h1>
+</header>
+<main class="content">
+    <section class="purpose">determines if auto repeat keystrokes are reported to the current window</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutIgnoreKeyRepeat"></a>
+    <span class="c-function">glutIgnoreKeyRepeat</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-ignore" class="parameter">ignore</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutIgnoreKeyRepeat"></a>
+    <span class="py-function">glutIgnoreKeyRepeat</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-ignore" class="parameter">ignore</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutIgnoreKeyRepeat( c_int(ignore) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-ignore"></a>
+                        ignore
+                    </th>
+                    <td>
+    <div class="simpara">
+						Non-zero indicates auto repeat keystrokes should not be reported by the keyboard and special callbacks;
+						zero indicates that auto repeat keystrokes will be reported.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutIgnoreKeyRepeat.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutIgnoreKeyRepeat.html">glutIgnoreKeyRepeat</a>
+    determines if auto repeat keystrokes are reported to the current window. The
+			ignore auto repeat state of a window can be queried with
+    <a class="function" href="./glutDeviceGet.html">glutDeviceGet(GLUT_DEVICE_IGNORE_KEY_REPEAT)</a>
+    .
+</div>
+    <div class="para">
+			Ignoring auto repeated keystrokes is generally done in conjunction with using the
+    <a class="function" href="./glutKeyboardUpFunc.html">glutKeyboardUpFunc</a>
+    and
+    <a class="function" href="./glutSpecialUpFunc.html">glutSpecialUpFunc</a>
+    callbacks to repeat key releases. If you do not ignore auto repeated keystrokes, your GLUT application will experience
+			repeated release/press callbacks. Games using the keyboard will typically want to ignore key repeat.
+</div>
+    </section><section class="section" id="glutIgnoreKeyRepeat.3GLUT-glut_implementation_notes_for_x11">
+    <h2 class="title">Glut Implementation Notes For X11</h2>
+    <div class="para">
+			X11 sends KeyPress events repeatedly when the window system's global auto repeat is enabled.
+    <a class="function" href="./glutIgnoreKeyRepeat.html">glutIgnoreKeyRepeat</a>
+    can prevent these auto repeated keystrokes from being reported as keyboard or
+			special callbacks, but there is still some minimal overhead by the X server to continually stream KeyPress events to
+			the GLUT application. The
+    <a class="function" href="./glutSetKeyRepeat.html">glutSetKeyRepeat</a>
+    routine can be used to actually
+			disable the global sending of auto repeated KeyPress events. Note that
+    <a class="function" href="./glutSetKeyRepeat.html">glutSetKeyRepeat</a>
+    affects the global window system auto repeat state so other
+			applications will not auto repeat if you disable auto repeat globally through
+    <a class="function" href="./glutSetKeyRepeat.html">glutSetKeyRepeat</a>
+    .
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutSetKeyRepeat.html">glutSetKeyRepeat</a>
+            <a class="crossref" href="./glutDeviceGet.html">glutDeviceGet</a>
+            <a class="crossref" href="./glutKeyboardFunc.html">glutKeyboardFunc</a>
+            <a class="crossref" href="./glutKeyboardUpFunc.html">glutKeyboardUpFunc</a>
+            <a class="crossref" href="./glutSpecialFunc.html">glutSpecialFunc</a>
+            <a class="crossref" href="./glutSpecialUpFunc.html">glutSpecialUpFunc</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

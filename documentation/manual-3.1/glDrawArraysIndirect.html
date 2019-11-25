@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glDrawArraysIndirect : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glDrawArraysIndirect</h1>
+</header>
+<main class="content">
+    <section class="purpose">render primitives from array data, taking parameters from memory</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glDrawArraysIndirect"></a>
+    <span class="c-function">glDrawArraysIndirect</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-mode" class="parameter">mode</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void *(
+            <a href="#param-indirect" class="parameter">indirect</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glDrawArraysIndirect"></a>
+    <span class="py-function">glDrawArraysIndirect</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-mode" class="parameter">mode</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-indirect" class="parameter">indirect</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-mode"></a>
+                        mode
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies what kind of primitives to render.
+                    Symbolic constants
+    <span class="constant">GL_POINTS</span>
+    ,
+    <span class="constant">GL_LINE_STRIP</span>
+    ,
+    <span class="constant">GL_LINE_LOOP</span>
+    ,
+    <span class="constant">GL_LINES</span>
+    ,
+    <span class="constant">GL_LINE_STRIP_ADJACENCY</span>
+    ,
+    <span class="constant">GL_LINES_ADJACENCY</span>
+    ,
+    <span class="constant">GL_TRIANGLE_STRIP</span>
+    ,
+    <span class="constant">GL_TRIANGLE_FAN</span>
+    ,
+    <span class="constant">GL_TRIANGLES</span>
+    ,
+    <span class="constant">GL_TRIANGLE_STRIP_ADJACENCY</span>
+    ,
+    <span class="constant">GL_TRIANGLES_ADJACENCY</span>
+    , and
+    <span class="constant">GL_PATCHES</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-indirect"></a>
+                        indirect
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of a structure containing the draw parameters.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glDrawArraysIndirect.html">glDrawArraysIndirect</a>
+    specifies multiple geometric primitives
+            with very few subroutine calls.
+    <a class="function" href="./glDrawArraysIndirect.html">glDrawArraysIndirect</a>
+    behaves
+            similarly to
+    <a class="crossref" href="./glDrawArraysInstancedBaseInstance.html">glDrawArraysInstancedBaseInstance</a>
+    ,
+            execept that the parameters to
+    <a class="crossref" href="./glDrawArraysInstancedBaseInstance.html">glDrawArraysInstancedBaseInstance</a>
+    are stored in memory at the address given by
+    <a class="parameter" href="#param-indirect">indirect</a>
+    .
+</div>
+    <div class="para">
+            The parameters addressed by
+    <a class="parameter" href="#param-indirect">indirect</a>
+    are packed into a structure
+            that takes the form (in C):
+    <div class="programlisting">    typedef  struct {
+        uint  count;
+        uint  primCount;
+        uint  first;
+        uint  baseInstance;
+    } DrawArraysIndirectCommand;
+    const DrawArraysIndirectCommand *cmd = (const DrawArraysIndirectCommand *)indirect;
+    glDrawArraysInstancedBaseInstance(mode, cmd-&gt;first, cmd-&gt;count, cmd-&gt;primCount, cmd-&gt;baseInstance);</div>
+</div>
+    <div class="para">
+            If a buffer is bound to the
+    <span class="constant">GL_DRAW_INDIRECT_BUFFER</span>
+    binding at the time
+            of a call to
+    <a class="function" href="./glDrawArraysIndirect.html">glDrawArraysIndirect</a>
+    ,
+    <a class="parameter" href="#param-indirect">indirect</a>
+    is interpreted as an offset, in basic machine units, into that buffer and the parameter
+            data is read from the buffer rather than from client memory.
+</div>
+    <div class="para">
+            In contrast to
+    <a class="crossref" href="./glDrawArraysInstancedBaseInstance.html">glDrawArraysInstancedBaseInstance</a>
+    ,
+            the
+    <div class="code">first</div>
+    member of the parameter structure is unsigned, and out-of-range indices
+            do not generate an error.
+</div>
+    <div class="para">
+            Vertex attributes that are modified by
+    <a class="function" href="./glDrawArraysIndirect.html">glDrawArraysIndirect</a>
+    have an
+            unspecified value after
+    <a class="function" href="./glDrawArraysIndirect.html">glDrawArraysIndirect</a>
+    returns. Attributes that aren't
+            modified remain well defined.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            The
+    <a class="parameter" href="#param-baseInstance">baseInstance</a>
+    member of the
+    <a class="parameter" href="#param-DrawArraysIndirectCommand">DrawArraysIndirectCommand</a>
+    structure is defined only if the GL version is 4.2 or greater. For versions of the GL less than 4.2,
+            this parameter is present but is reserved and should be set to zero. On earlier versions of the GL,
+            behavior is undefined if it is non-zero.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-mode">mode</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to an
+            enabled array or to the
+    <span class="constant">GL_DRAW_INDIRECT_BUFFER</span>
+    binding and the buffer object's data store is currently mapped.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a geometry shader is active and
+    <a class="parameter" href="#param-mode">mode</a>
+    is incompatible with the input primitive type of the geometry shader in the currently installed program object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-mode">mode</a>
+    is
+    <span class="constant">GL_PATCHES</span>
+    and no tessellation control shader is active.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glDrawArraysIndirect.html">glDrawArraysIndirect</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    ,
+    <a class="crossref" href="./glDrawArraysInstanced.html">glDrawArraysInstanced</a>
+    ,
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    ,
+    <a class="crossref" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    ,
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glStencilFunc : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glStencilFunc</h1>
+</header>
+<main class="content">
+    <section class="purpose">set front and back function and reference value for stencil testing</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glStencilFunc"></a>
+    <span class="c-function">glStencilFunc</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-func" class="parameter">func</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-ref" class="parameter">ref</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-mask" class="parameter">mask</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glStencilFunc"></a>
+    <span class="py-function">glStencilFunc</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-func" class="parameter">func</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-ref" class="parameter">ref</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-mask" class="parameter">mask</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-func"></a>
+                        func
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the test function.
+                    Eight symbolic constants are valid:
+    <span class="constant">GL_NEVER</span>
+    ,
+    <span class="constant">GL_LESS</span>
+    ,
+    <span class="constant">GL_LEQUAL</span>
+    ,
+    <span class="constant">GL_GREATER</span>
+    ,
+    <span class="constant">GL_GEQUAL</span>
+    ,
+    <span class="constant">GL_EQUAL</span>
+    ,
+    <span class="constant">GL_NOTEQUAL</span>
+    , and
+    <span class="constant">GL_ALWAYS</span>
+    . The initial value is
+    <span class="constant">GL_ALWAYS</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-ref"></a>
+                        ref
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the reference value for the stencil test.
+    <a class="parameter" href="#param-ref">ref</a>
+    is clamped to the range
+    <math overflow="scroll">
+                        <mfenced open="[" close="]">
+                            <mn>0</mn>
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mi mathvariant="italic">n</mi>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </mfenced>
+                    </math>
+    ,
+                    where
+    <math overflow="scroll"><mi mathvariant="italic">n</mi></math>
+    is the number of bitplanes in the stencil buffer. The
+                    initial value is 0.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-mask"></a>
+                        mask
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a mask that is ANDed with both the reference value
+                    and the stored stencil value when the test is done. The initial value
+                    is all 1's.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            Stenciling,
+            like depth-buffering,
+            enables and disables drawing on a per-pixel basis.
+            Stencil planes are first drawn into using GL drawing primitives, then
+            geometry and images are rendered using the stencil planes to mask out
+            portions of the screen.
+            Stenciling is typically used in multipass rendering algorithms
+            to achieve special effects,
+            such as decals,
+            outlining,
+            and constructive solid geometry rendering.
+        </div>
+    <div class="para">
+            The stencil test conditionally eliminates a pixel based on the outcome
+            of a comparison between the reference value
+            and the value in the stencil buffer.
+            To enable and disable the test, call
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="function" href="./glEnable.html#c-glDisable">glDisable</a>
+    with argument
+    <span class="constant">GL_STENCIL_TEST</span>
+    .
+            To specify actions based on the outcome of the stencil test, call
+    <a class="crossref" href="./glStencilOp.html">glStencilOp</a>
+    or
+    <a class="crossref" href="./glStencilOpSeparate.html">glStencilOpSeparate</a>
+    .
+</div>
+    <div class="para">
+            There can be two separate sets of
+    <a class="parameter" href="#param-func">func</a>
+    ,
+    <a class="parameter" href="#param-ref">ref</a>
+    , and
+    <a class="parameter" href="#param-mask">mask</a>
+    parameters; one affects back-facing polygons, and the other
+            affects front-facing polygons as well as other non-polygon primitives.
+    <a class="crossref" href="./glStencilFunc.html">glStencilFunc</a>
+    sets both front
+            and back stencil state to the same values. Use
+    <a class="crossref" href="./glStencilFuncSeparate.html">glStencilFuncSeparate</a>
+    to set front and back stencil state to different values.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-func">func</a>
+    is a symbolic constant that determines the stencil comparison function.
+            It accepts one of eight values,
+            shown in the following list.
+    <a class="parameter" href="#param-ref">ref</a>
+    is an integer reference value that is used in the stencil comparison.
+            It is clamped to the range
+    <math overflow="scroll">
+                <mfenced open="[" close="]">
+                    <mn>0</mn>
+                    <mrow>
+                        <msup><mn>2</mn>
+                        <mi mathvariant="italic">n</mi>
+                        </msup>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                    </mrow>
+                </mfenced>
+            </math>
+    ,
+            where
+    <math overflow="scroll"><mi mathvariant="italic">n</mi></math>
+    is the number of bitplanes in the stencil buffer.
+    <a class="parameter" href="#param-mask">mask</a>
+    is bitwise ANDed with both the reference value
+            and the stored stencil value,
+            with the ANDed values participating in the comparison.
+</div>
+    <div class="para">
+            If
+    <span class="emphasis">stencil</span>
+    represents the value stored in the corresponding
+            stencil buffer location,
+            the following list shows the effect of each comparison function
+            that can be specified by
+    <a class="parameter" href="#param-func">func</a>
+    .
+            Only if the comparison succeeds is the pixel passed through
+            to the next stage in the rasterization process
+            (see
+    <a class="crossref" href="./glStencilOp.html">glStencilOp</a>
+    ).
+            All tests treat
+    <span class="emphasis">stencil</span>
+    values as unsigned integers in the range
+    <math overflow="scroll">
+                <mfenced open="[" close="]">
+                    <mn>0</mn>
+                    <mrow>
+                        <msup><mn>2</mn>
+                        <mi mathvariant="italic">n</mi>
+                        </msup>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                    </mrow>
+                </mfenced>
+            </math>
+    ,
+            where
+    <math overflow="scroll"><mi mathvariant="italic">n</mi></math>
+    is the number of bitplanes in the stencil buffer.
+</div>
+    <div class="para">
+            The following values are accepted by
+    <a class="parameter" href="#param-func">func</a>
+    :
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NEVER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Always fails.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LESS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Passes if (
+    <a class="parameter" href="#param-ref">ref</a>
+    &amp;
+    <a class="parameter" href="#param-mask">mask</a>
+    ) &lt; (
+    <span class="emphasis">stencil</span>
+    &amp;
+    <a class="parameter" href="#param-mask">mask</a>
+    ).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LEQUAL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Passes if (
+    <a class="parameter" href="#param-ref">ref</a>
+    &amp;
+    <a class="parameter" href="#param-mask">mask</a>
+    ) &lt;= (
+    <span class="emphasis">stencil</span>
+    &amp;
+    <a class="parameter" href="#param-mask">mask</a>
+    ).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_GREATER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Passes if (
+    <a class="parameter" href="#param-ref">ref</a>
+    &amp;
+    <a class="parameter" href="#param-mask">mask</a>
+    ) &gt; (
+    <span class="emphasis">stencil</span>
+    &amp;
+    <a class="parameter" href="#param-mask">mask</a>
+    ).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_GEQUAL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Passes if (
+    <a class="parameter" href="#param-ref">ref</a>
+    &amp;
+    <a class="parameter" href="#param-mask">mask</a>
+    ) &gt;= (
+    <span class="emphasis">stencil</span>
+    &amp;
+    <a class="parameter" href="#param-mask">mask</a>
+    ).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_EQUAL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Passes if (
+    <a class="parameter" href="#param-ref">ref</a>
+    &amp;
+    <a class="parameter" href="#param-mask">mask</a>
+    ) = (
+    <span class="emphasis">stencil</span>
+    &amp;
+    <a class="parameter" href="#param-mask">mask</a>
+    ).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NOTEQUAL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Passes if (
+    <a class="parameter" href="#param-ref">ref</a>
+    &amp;
+    <a class="parameter" href="#param-mask">mask</a>
+    ) != (
+    <span class="emphasis">stencil</span>
+    &amp;
+    <a class="parameter" href="#param-mask">mask</a>
+    ).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_ALWAYS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Always passes.
+                    </div>
+</dd>
+</div>
+</dl>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            Initially, the stencil test is disabled.
+            If there is no stencil buffer,
+            no stencil modification can occur and it is as if
+            the stencil test always passes.
+        </div>
+    <div class="para">
+    <a class="crossref" href="./glStencilFunc.html">glStencilFunc</a>
+    is the same as
+            calling
+    <a class="crossref" href="./glStencilFuncSeparate.html">glStencilFuncSeparate</a>
+    with
+    <a class="parameter" href="#param-face">face</a>
+    set to
+    <span class="constant">GL_FRONT_AND_BACK</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-func">func</a>
+    is not one of the eight
+            accepted values.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_STENCIL_FUNC</span>
+    ,
+    <span class="constant">GL_STENCIL_VALUE_MASK</span>
+    ,
+    <span class="constant">GL_STENCIL_REF</span>
+    ,
+    <span class="constant">GL_STENCIL_BACK_FUNC</span>
+    ,
+    <span class="constant">GL_STENCIL_BACK_VALUE_MASK</span>
+    ,
+    <span class="constant">GL_STENCIL_BACK_REF</span>
+    ,
+            or
+    <span class="constant">GL_STENCIL_BITS</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_STENCIL_TEST</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glStencilFunc.html">glStencilFunc</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    ,
+    <a class="crossref" href="./glDepthFunc.html">glDepthFunc</a>
+    ,
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    ,
+    <a class="crossref" href="./glLogicOp.html">glLogicOp</a>
+    ,
+    <a class="crossref" href="./glStencilFuncSeparate.html">glStencilFuncSeparate</a>
+    ,
+    <a class="crossref" href="./glStencilMask.html">glStencilMask</a>
+    ,
+    <a class="crossref" href="./glStencilMaskSeparate.html">glStencilMaskSeparate</a>
+    ,
+    <a class="crossref" href="./glStencilOp.html">glStencilOp</a>
+    ,
+    <a class="crossref" href="./glStencilOpSeparate.html">glStencilOpSeparate</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glStencilFunc</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/shadow/passes.py">OpenGLContext/shadow/passes.py</a>
+    Lines: <span class="sample-lines">127, 246, 314, 351</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson26.py">PyOpenGL-Demo/NeHe/lesson26.py</a>
+    Lines: <span class="sample-lines">152, 160</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/stencil.py">pymt/graphx/stencil.py</a>
+    Lines: <span class="sample-lines">21, 46, 81, 95, 109</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/misc.py">pyggel/misc.py</a>
+    Lines: <span class="sample-lines">27, 38</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

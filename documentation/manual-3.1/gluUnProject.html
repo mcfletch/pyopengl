@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluUnProject : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluUnProject</h1>
+</header>
+<main class="content">
+    <section class="purpose">map window coordinates to object coordinates</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluUnProject"></a>
+    <span class="c-function">gluUnProject</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble (
+            <a href="#param-winX" class="parameter">winX</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-winY" class="parameter">winY</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-winZ" class="parameter">winZ</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLdouble * (
+            <a href="#param-model" class="parameter">model</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLdouble * (
+            <a href="#param-proj" class="parameter">proj</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLint * (
+            <a href="#param-view" class="parameter">view</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble* (
+            <a href="#param-objX" class="parameter">objX</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble* (
+            <a href="#param-objY" class="parameter">objY</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble* (
+            <a href="#param-objZ" class="parameter">objZ</a>
+        )
+    </span>
+</span>)-&gt; GLint
+</div>
+                <div class="py-signature">
+    <a name="py-gluUnProject"></a>
+    <span class="py-function">gluUnProject</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-winX" class="parameter">winX</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-winY" class="parameter">winY</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-winZ" class="parameter">winZ</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-model" class="parameter">model</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-proj" class="parameter">proj</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-view" class="parameter">view</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-objX" class="parameter">objX</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-objY" class="parameter">objY</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-objZ" class="parameter">objZ</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">Convenience wrapper for gluUnProject
+    
+    Automatically fills in the model, projection and viewing matrices
+    if not provided.
+    
+    returns (objX,objY,objZ) doubles
+    </pre>
+</div>
+                <div class="py-signature">
+    <a name="py-gluUnProject4"></a>
+    <span class="py-function">gluUnProject4</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-winX" class="parameter">winX</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-winY" class="parameter">winY</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-winZ" class="parameter">winZ</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-clipW" class="parameter">clipW</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-model" class="parameter">model</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-proj" class="parameter">proj</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-view" class="parameter">view</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-nearVal" class="parameter">nearVal</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-farVal" class="parameter">farVal</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-objX" class="parameter">objX</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-objY" class="parameter">objY</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-objZ" class="parameter">objZ</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-objW" class="parameter">objW</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">Convenience wrapper for gluUnProject
+    
+    Automatically fills in the model, projection and viewing matrices
+    if not provided.
+    
+    returns (objX,objY,objZ) doubles
+    </pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-winX"></a><a name="param-winY"></a><a name="param-winZ"></a>
+                        winX, winY, winZ
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the window coordinates to be mapped.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-model"></a>
+                        model
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the modelview matrix (as from a
+    <a class="crossref" href="./glGet.html#c-glGetDoublev">glGetDoublev</a>
+    call).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-proj"></a>
+                        proj
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the projection matrix (as from a
+    <a class="crossref" href="./glGet.html#c-glGetDoublev">glGetDoublev</a>
+    call).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-view"></a>
+                        view
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the viewport (as from a
+    <a class="crossref" href="./glGet.html#c-glGetIntegerv">glGetIntegerv</a>
+    call).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-objX"></a><a name="param-objY"></a><a name="param-objZ"></a>
+                        objX, objY, objZ
+                    </th>
+                    <td>
+    <div class="para">
+                    Returns the computed object coordinates.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluUnProject.html">gluUnProject</a>
+    maps the specified window coordinates into object
+            coordinates using
+    <a class="parameter" href="#param-model">model</a>
+    ,
+    <a class="parameter" href="#param-proj">proj</a>
+    , and
+    <a class="parameter" href="#param-view">view</a>
+    .
+            The result is stored in
+    <a class="parameter" href="#param-objX">objX</a>
+    ,
+    <a class="parameter" href="#param-objY">objY</a>
+    , and
+    <a class="parameter" href="#param-objZ">objZ</a>
+    . A return value of
+    <span class="constant">GLU_TRUE</span>
+    indicates success; a return value of
+    <span class="constant">GLU_FALSE</span>
+    indicates failure.
+</div>
+    <div class="para">
+            To compute the coordinates
+    <math>
+                <mfenced open="(" close=")">
+                    <mi mathvariant="italic">objX</mi>
+                    <mi mathvariant="italic">objY</mi>
+                    <mi mathvariant="italic">objZ</mi>
+                </mfenced>
+            </math>
+    ,
+    <a class="function" href="./gluUnProject.html">gluUnProject</a>
+    multiplies the normalized device coordinates by the inverse of
+    <a class="parameter" href="#param-model">model</a>
+    *
+    <a class="parameter" href="#param-proj">proj</a>
+    as follows:
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mfenced open="(" close=")">
+                        <mtable>
+                            <mtr><mtd>
+                                <mi mathvariant="italic">objX</mi>
+                            </mtd></mtr>
+                            <mtr><mtd>
+                                <mi mathvariant="italic">objY</mi>
+                            </mtd></mtr>
+                            <mtr><mtd>
+                                <mi mathvariant="italic">objZ</mi>
+                            </mtd></mtr>
+                            <mtr><mtd>
+                                <mi mathvariant="italic">W</mi>
+                            </mtd></mtr>
+                        </mtable>
+                    </mfenced>
+                    <mo>=</mo>
+                    <mrow>
+                        <mrow>
+                            <mi mathvariant="italic">INV</mi>
+                            <mo></mo>
+                            <mfenced open="(" close=")">
+                                <mrow>
+                                    <mi mathvariant="italic">P</mi>
+                                    <mo></mo>
+                                    <mi mathvariant="italic">M</mi>
+                                </mrow>
+                            </mfenced>
+                        </mrow>
+                        <mo></mo>
+                        <mfenced open="(" close=")">
+                            <mtable>
+                                <mtr><mtd>
+                                    <mrow>
+                                        <mfrac>
+                                            <mfenced open="" close="">
+                                                <mrow>
+                                                    <mn>2</mn>
+                                                    <mo></mo>
+                                                    <mfenced open="(" close=")">
+                                                        <mrow>
+                                                            <mi mathvariant="italic">winX</mi>
+                                                            <mo>-</mo>
+                                                            <mrow>
+                                                                <mi mathvariant="italic">view</mi>
+                                                                <mo></mo>
+                                                                <mfenced open="[" close="]">
+                                                                    <mn>0</mn>
+                                                                </mfenced>
+                                                            </mrow>
+                                                        </mrow>
+                                                    </mfenced>
+                                                </mrow>
+                                            </mfenced>
+                                            <mfenced open="" close="">
+                                                <mrow>
+                                                    <mi mathvariant="italic">view</mi>
+                                                    <mo></mo>
+                                                    <mfenced open="[" close="]">
+                                                        <mn>2</mn>
+                                                    </mfenced>
+                                                </mrow>
+                                            </mfenced>
+                                        </mfrac>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mtd></mtr>
+                                <mtr><mtd>
+                                    <mrow>
+                                        <mfrac>
+                                            <mfenced open="" close="">
+                                                <mrow>
+                                                    <mn>2</mn>
+                                                    <mo></mo>
+                                                    <mfenced open="(" close=")">
+                                                        <mrow>
+                                                            <mi mathvariant="italic">winY</mi>
+                                                            <mo>-</mo>
+                                                            <mrow>
+                                                                <mi mathvariant="italic">view</mi>
+                                                                <mo></mo>
+                                                                <mfenced open="[" close="]">
+                                                                    <mn>1</mn>
+                                                                </mfenced>
+                                                            </mrow>
+                                                        </mrow>
+                                                    </mfenced>
+                                                </mrow>
+                                            </mfenced>
+                                            <mfenced open="" close="">
+                                                <mrow>
+                                                    <mi mathvariant="italic">view</mi>
+                                                    <mo></mo>
+                                                    <mfenced open="[" close="]">
+                                                        <mn>3</mn>
+                                                    </mfenced>
+                                                </mrow>
+                                            </mfenced>
+                                        </mfrac>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mtd></mtr>
+                                <mtr><mtd>
+                                    <mrow>
+                                        <mrow>
+                                            <mn>2</mn>
+                                            <mo></mo>
+                                            <mfenced open="(" close=")">
+                                                <mi mathvariant="italic">winZ</mi>
+                                            </mfenced>
+                                        </mrow>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mtd></mtr>
+                                <mtr><mtd>
+                                    <mn>1</mn>
+                                </mtd></mtr>
+                            </mtable>
+                        </mfenced>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+    <math><mi mathvariant="italic">INV</mi></math>
+    denotes matrix inversion.
+            W is an unused variable, included for consistent matrix notation.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluProject.html">gluProject</a>
+    ,
+    <a class="crossref" href="./glGet.html">glGet</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluUnProject</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/events/mouseevents.py">OpenGLContext/events/mouseevents.py</a>
+    Lines: <span class="sample-lines">108</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

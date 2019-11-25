@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluTessNormal : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluTessNormal</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify a normal for a polygon</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluTessNormal"></a>
+    <span class="c-function">gluTessNormal</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUtesselator* (
+            <a href="#param-tess" class="parameter">tess</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-valueX" class="parameter">valueX</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-valueY" class="parameter">valueY</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-valueZ" class="parameter">valueZ</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluTessNormal"></a>
+    <span class="py-function">gluTessNormal</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-tess" class="parameter">tess</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-valueX" class="parameter">valueX</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-valueY" class="parameter">valueY</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-valueZ" class="parameter">valueZ</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluTessNormal( POINTER(GLUtesselator)(tess), GLdouble(valueX), GLdouble(valueY), GLdouble(valueZ) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-tess"></a>
+                        tess
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the tessellation object (created with
+    <a class="crossref" href="./gluNewTess.html">gluNewTess</a>
+    ).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-valueX"></a>
+                        valueX
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the first component of the normal.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-valueY"></a>
+                        valueY
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the second component of the normal.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-valueZ"></a>
+                        valueZ
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the third component of the normal.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluTessNormal.html">gluTessNormal</a>
+    describes a normal for a polygon that the program is defining.
+            All input data will be projected onto a plane perpendicular to one of
+            the three coordinate axes before tessellation and all output triangles
+            will be oriented CCW with
+            respect to the normal (CW orientation can be obtained by reversing the
+            sign of the supplied normal). For example, if you know that all polygons
+            lie in the x-y plane, call
+    <a class="function" href="./gluTessNormal.html">gluTessNormal</a>
+    (tess, 0.0, 0.0, 1.0)
+            before rendering any polygons.
+</div>
+    <div class="para">
+            If the supplied normal is (0.0, 0.0, 0.0) (the initial value), the normal is
+            determined as follows. The direction of the normal, up to its sign, is
+            found by fitting a plane to the vertices, without regard to how the
+            vertices are connected. It is expected that the input data lies approximately
+            in the plane; otherwise, projection perpendicular to one of the three
+            coordinate axes may substantially change the geometry. The sign of the
+            normal is chosen so that the sum of the signed areas of all input
+            contours is nonnegative (where a CCW contour has positive area).
+        </div>
+    <div class="para">
+            The supplied normal persists until it is changed by another call to
+    <a class="function" href="./gluTessNormal.html">gluTessNormal</a>
+    .
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluTessBeginPolygon.html">gluTessBeginPolygon</a>
+    ,
+    <a class="crossref" href="./gluTessEndPolygon.html">gluTessEndPolygon</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluTessNormal</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/polygontessellator.py">OpenGLContext/scenegraph/polygontessellator.py</a>
+    Lines: <span class="sample-lines">82, 100</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/toolsfont.py">OpenGLContext/scenegraph/text/toolsfont.py</a>
+    Lines: <span class="sample-lines">182</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/lib/squirtle.py">pymt/lib/squirtle.py</a>
+    Lines: <span class="sample-lines">21, 406</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/bezier.py">pymt/graphx/bezier.py</a>
+    Lines: <span class="sample-lines">39, 141</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glFrustum : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glFrustum</h1>
+</header>
+<main class="content">
+    <section class="purpose">multiply the current matrix by a perspective matrix</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glFrustum"></a>
+    <span class="c-function">glFrustum</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble (
+            <a href="#param-left" class="parameter">left</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-right" class="parameter">right</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-bottom" class="parameter">bottom</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-top" class="parameter">top</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-nearVal" class="parameter">nearVal</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-farVal" class="parameter">farVal</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glFrustum"></a>
+    <span class="py-function">glFrustum</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-left" class="parameter">left</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-right" class="parameter">right</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bottom" class="parameter">bottom</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-top" class="parameter">top</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-zNear" class="parameter">zNear</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-zFar" class="parameter">zFar</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-left"></a><a name="param-right"></a>
+                        left, right
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the coordinates for the left and right vertical clipping planes.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bottom"></a><a name="param-top"></a>
+                        bottom, top
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the coordinates for the bottom and top horizontal clipping planes.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-nearVal"></a><a name="param-farVal"></a>
+                        nearVal, farVal
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the distances to the near and far depth clipping planes.
+                    Both distances must be positive.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glFrustum.html">glFrustum</a>
+    describes a perspective matrix that produces a perspective projection.
+            The current matrix (see
+    <a class="crossref" href="./glMatrixMode.html">glMatrixMode</a>
+    ) is multiplied by this matrix
+            and the result replaces the current matrix, as if
+    <a class="crossref" href="./glMultMatrix.html">glMultMatrix</a>
+    were called with the following matrix
+            as its argument:
+</div>
+    <div class="para">
+        </div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mfenced open="[" close="]">
+                    <mtable>
+                        <mtr>
+                            <mtd>
+                                <mfenced open="" close="">
+                                    <mfrac>
+                                        <mfenced open="" close="">
+                                            <mrow>
+                                                <mn>2</mn>
+                                                <mo></mo>
+                                                <mi mathvariant="italic">nearVal</mi>
+                                            </mrow>
+                                        </mfenced>
+                                        <mfenced open="" close="">
+                                            <mrow>
+                                                <mi mathvariant="italic">right</mi>
+                                                <mo>-</mo>
+                                                <mi mathvariant="italic">left</mi>
+                                            </mrow>
+                                        </mfenced>
+                                    </mfrac>
+                                </mfenced>
+                            </mtd>
+                            <mtd>
+                                <mn>0</mn>
+                            </mtd>
+                            <mtd>
+                                <mi mathvariant="italic">A</mi>
+                            </mtd>
+                            <mtd>
+                                <mn>0</mn>
+                            </mtd>
+                        </mtr>
+                        <mtr>
+                            <mtd>
+                                <mn>0</mn>
+                            </mtd>
+                            <mtd>
+                                <mfenced open="" close="">
+                                    <mfrac>
+                                        <mfenced open="" close="">
+                                            <mrow>
+                                                <mn>2</mn>
+                                                <mo></mo>
+                                                <mi mathvariant="italic">nearVal</mi>
+                                            </mrow>
+                                        </mfenced>
+                                        <mfenced open="" close="">
+                                            <mrow>
+                                                <mi mathvariant="italic">top</mi>
+                                                <mo>-</mo>
+                                                <mi mathvariant="italic">bottom</mi>
+                                            </mrow>
+                                        </mfenced>
+                                    </mfrac>
+                                </mfenced>
+                            </mtd>
+                            <mtd>
+                                <mi mathvariant="italic">B</mi>
+                            </mtd>
+                            <mtd>
+                                <mn>0</mn>
+                            </mtd>
+                        </mtr>
+                        <mtr>
+                            <mtd>
+                                <mn>0</mn>
+                            </mtd>
+                            <mtd>
+                                <mn>0</mn>
+                            </mtd>
+                            <mtd>
+                                <mi mathvariant="italic">C</mi>
+                            </mtd>
+                            <mtd>
+                                <mi mathvariant="italic">D</mi>
+                            </mtd>
+                        </mtr>
+                        <mtr>
+                            <mtd>
+                                <mn>0</mn>
+                            </mtd>
+                            <mtd>
+                                <mn>0</mn>
+                            </mtd>
+                            <mtd>
+                                <mn>-1</mn>
+                            </mtd>
+                            <mtd>
+                                <mn>0</mn>
+                            </mtd>
+                        </mtr>
+                    </mtable>
+                </mfenced>
+            </math>
+</div>
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">A</mi>
+                    <mo>=</mo>
+                    <mfrac>
+                        <mfenced open="" close="">
+                            <mrow>
+                                <mi mathvariant="italic">right</mi>
+                                <mo>+</mo>
+                                <mi mathvariant="italic">left</mi>
+                            </mrow>
+                        </mfenced>
+                        <mfenced open="" close="">
+                            <mrow>
+                                <mi mathvariant="italic">right</mi>
+                                <mo>-</mo>
+                                <mi mathvariant="italic">left</mi>
+                            </mrow>
+                        </mfenced>
+                    </mfrac>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">B</mi>
+                    <mo>=</mo>
+                    <mfrac>
+                        <mfenced open="" close="">
+                            <mrow>
+                                <mi mathvariant="italic">top</mi>
+                                <mo>+</mo>
+                                <mi mathvariant="italic">bottom</mi>
+                            </mrow>
+                        </mfenced>
+                        <mfenced open="" close="">
+                            <mrow>
+                                <mi mathvariant="italic">top</mi>
+                                <mo>-</mo>
+                                <mi mathvariant="italic">bottom</mi>
+                            </mrow>
+                        </mfenced>
+                    </mfrac>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">C</mi>
+                    <mo>=</mo>
+                    <mrow>
+                        <mo>-</mo>
+                        <mfenced open="" close="">
+                            <mfrac>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mi mathvariant="italic">farVal</mi>
+                                        <mo>+</mo>
+                                        <mi mathvariant="italic">nearVal</mi>
+                                    </mrow>
+                                </mfenced>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mi mathvariant="italic">farVal</mi>
+                                        <mo>-</mo>
+                                        <mi mathvariant="italic">nearVal</mi>
+                                    </mrow>
+                                </mfenced>
+                            </mfrac>
+                        </mfenced>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">D</mi>
+                    <mo>=</mo>
+                    <mrow>
+                        <mo>-</mo>
+                        <mfenced open="" close="">
+                            <mfrac>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mn>2</mn>
+                                        <mo></mo>
+                                        <mi mathvariant="italic">farVal</mi>
+                                        <mo></mo>
+                                        <mi mathvariant="italic">nearVal</mi>
+                                    </mrow>
+                                </mfenced>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mi mathvariant="italic">farVal</mi>
+                                        <mo>-</mo>
+                                        <mi mathvariant="italic">nearVal</mi>
+                                    </mrow>
+                                </mfenced>
+                            </mfrac>
+                        </mfenced>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+        </div>
+    <div class="para">
+            Typically, the matrix mode is
+    <span class="constant">GL_PROJECTION</span>
+    , and
+    <math>
+                <mfenced open="(" close=")">
+                    <mi mathvariant="italic">left</mi>
+                    <mi mathvariant="italic">bottom</mi>
+                    <mrow>
+                        <mo>-</mo>
+                        <mi mathvariant="italic">nearVal</mi>
+                    </mrow>
+                </mfenced>
+            </math>
+    and
+    <math>
+                <mfenced open="(" close=")">
+                    <mi mathvariant="italic">right</mi>
+                    <mi mathvariant="italic">top</mi>
+                    <mrow>
+                        <mo>-</mo>
+                        <mi mathvariant="italic">nearVal</mi>
+                    </mrow>
+                </mfenced>
+            </math>
+    specify the points on the near clipping plane that are mapped
+            to the lower left and upper right corners of the window,
+            assuming that the eye is located at (0, 0, 0).
+    <math>
+                <mrow>
+                    <mo>-</mo>
+                    <mi mathvariant="italic">farVal</mi>
+                </mrow>
+            </math>
+    specifies the location of the far clipping plane.
+            Both
+    <a class="parameter" href="#param-nearVal">nearVal</a>
+    and
+    <a class="parameter" href="#param-farVal">farVal</a>
+    must be positive.
+</div>
+    <div class="para">
+            Use
+    <a class="crossref" href="./glPushMatrix.html">glPushMatrix</a>
+    and
+    <a class="crossref" href="./glPushMatrix.html#c-glPopMatrix">glPopMatrix</a>
+    to save and restore
+            the current matrix stack.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            Depth buffer precision is affected by the values specified for
+    <a class="parameter" href="#param-nearVal">nearVal</a>
+    and
+    <a class="parameter" href="#param-farVal">farVal</a>
+    .
+            The greater the ratio of
+    <a class="parameter" href="#param-farVal">farVal</a>
+    to
+    <a class="parameter" href="#param-nearVal">nearVal</a>
+    is,
+            the less effective the depth buffer will be at distinguishing between
+            surfaces that are near each other.
+            If
+</div>
+    <div class="para">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">r</mi>
+                    <mo>=</mo>
+                    <mfrac>
+                        <mi mathvariant="italic">farVal</mi>
+                        <mi mathvariant="italic">nearVal</mi>
+                    </mfrac>
+                </mrow>
+            </math>
+</div>
+    <div class="para">
+            roughly
+    <math>
+                <mrow>
+                    <msub><mi mathvariant="italic">log</mi>
+                    <mn>2</mn>
+                    </msub>
+                    <mo></mo>
+                    <mfenced open="(" close=")">
+                        <mi mathvariant="italic">r</mi>
+                    </mfenced>
+                </mrow>
+            </math>
+    bits of depth buffer precision are lost.
+            Because
+    <math><mi mathvariant="italic">r</mi></math>
+    approaches infinity as
+    <a class="parameter" href="#param-nearVal">nearVal</a>
+    approaches 0,
+    <a class="parameter" href="#param-nearVal">nearVal</a>
+    must never be set to 0.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-nearVal">nearVal</a>
+    or
+    <a class="parameter" href="#param-farVal">farVal</a>
+    is not
+            positive, or if
+    <a class="parameter" href="#param-left">left</a>
+    =
+    <a class="parameter" href="#param-right">right</a>
+    , or
+    <a class="parameter" href="#param-bottom">bottom</a>
+    =
+    <a class="parameter" href="#param-top">top</a>
+    ,
+            or
+    <a class="parameter" href="#param-near">near</a>
+    =
+    <a class="parameter" href="#param-far">far</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glFrustum.html">glFrustum</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MATRIX_MODE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MODELVIEW_MATRIX</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PROJECTION_MATRIX</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_TEXTURE_MATRIX</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_COLOR_MATRIX</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glOrtho.html">glOrtho</a>
+    ,
+    <a class="crossref" href="./glMatrixMode.html">glMatrixMode</a>
+    ,
+    <a class="crossref" href="./glMultMatrix.html">glMultMatrix</a>
+    ,
+    <a class="crossref" href="./glPushMatrix.html">glPushMatrix</a>
+    ,
+    <a class="crossref" href="./glViewport.html">glViewport</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glFrustum</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/boundingvolume.py">tests/boundingvolume.py</a>
+    Lines: <span class="sample-lines">77, 82</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/stereo/stereoDemo.py">PyOpenGL-Demo/proesch/stereo/stereoDemo.py</a>
+    Lines: <span class="sample-lines">66</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/cube.py">PyOpenGL-Demo/redbook/cube.py</a>
+    Lines: <span class="sample-lines">82</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLE/maintest.py">PyOpenGL-Demo/GLE/maintest.py</a>
+    Lines: <span class="sample-lines">53</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/gears.py">PyOpenGL-Demo/GLUT/gears.py</a>
+    Lines: <span class="sample-lines">214</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/glutplane.py">PyOpenGL-Demo/GLUT/glutplane.py</a>
+    Lines: <span class="sample-lines">243</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Core.py">VisionEgg/Core.py</a>
+    Lines: <span class="sample-lines">1076</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/ui/window/__init__.py">pymt/ui/window/__init__.py</a>
+    Lines: <span class="sample-lines">19, 456</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">260</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">153</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">134</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">132</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">219</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">123</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">227</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">238</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

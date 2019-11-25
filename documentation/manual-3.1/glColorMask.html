@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glColorMask : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glColorMask</h1>
+</header>
+<main class="content">
+    <section class="purpose">enable and disable writing of frame buffer color components</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glColorMask"></a>
+    <span class="c-function">glColorMask</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLboolean (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean (
+            <a href="#param-alpha" class="parameter">alpha</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColorMask"></a>
+    <span class="py-function">glColorMask</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-alpha" class="parameter">alpha</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColorMask, glColorMaski"></a>
+    <span class="c-function">glColorMask, glColorMaski</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColorMaski"></a>
+    <span class="c-function">glColorMaski</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-buf" class="parameter">buf</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean (
+            <a href="#param-alpha" class="parameter">alpha</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColorMaski"></a>
+    <span class="py-function">glColorMaski</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-r" class="parameter">r</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-g" class="parameter">g</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-b" class="parameter">b</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-a" class="parameter">a</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-buf"></a>
+                        buf
+                    </th>
+                    <td>
+    <div class="para">
+                    For
+    <a class="function" href="./glColorMask.html#c-glColorMaski">glColorMaski</a>
+    , specifies the index of the
+                    draw buffer whose color mask to set.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-red"></a><a name="param-green"></a><a name="param-blue"></a><a name="param-alpha"></a>
+                        red, green, blue, alpha
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify whether red, green, blue, and alpha are to be written
+                    into the frame buffer.
+                    The initial values are all
+    <span class="constant">GL_TRUE</span>
+    ,
+                    indicating that the color components are written.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glColorMask.html">glColorMask</a>
+    and
+    <a class="function" href="./glColorMask.html#c-glColorMaski">glColorMaski</a>
+    specify whether the individual color components in the frame buffer
+            can or cannot be written.
+    <a class="function" href="./glColorMask.html#c-glColorMaski">glColorMaski</a>
+    sets the mask for a specific draw buffer, whereas
+    <a class="function" href="./glColorMask.html">glColorMask</a>
+    sets the mask for all draw buffers.
+            If
+    <a class="parameter" href="#param-red">red</a>
+    is
+    <span class="constant">GL_FALSE</span>
+    ,
+            for example,
+            no change is made to the red component of any pixel in any of the
+            color buffers,
+            regardless of the drawing operation attempted.
+</div>
+    <div class="para">
+            Changes to individual bits of components cannot be controlled.
+            Rather,
+            changes are either enabled or disabled for entire color components.
+        </div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_COLOR_WRITEMASK</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glColorMask.html">glColorMask</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glColorMask.html#c-glColorMaski">glColorMaski</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glClear.html">glClear</a>
+    ,
+    <a class="crossref" href="./glDepthMask.html">glDepthMask</a>
+    ,
+    <a class="crossref" href="./glStencilMask.html">glStencilMask</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI
+            Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glColorMask</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_1.py">tests/shadow_1.py</a>
+    Lines: <span class="sample-lines">423, 472</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/arbocclusionquery.py">tests/arbocclusionquery.py</a>
+    Lines: <span class="sample-lines">42, 58</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/shadow/passes.py">OpenGLContext/shadow/passes.py</a>
+    Lines: <span class="sample-lines">130, 242, 319, 354</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/shadow/volume.py">OpenGLContext/shadow/volume.py</a>
+    Lines: <span class="sample-lines">246, 257, 260, 268, 278</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/boundingvolume.py">OpenGLContext/scenegraph/boundingvolume.py</a>
+    Lines: <span class="sample-lines">286, 311</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/stereo/stereoDemo.py">PyOpenGL-Demo/proesch/stereo/stereoDemo.py</a>
+    Lines: <span class="sample-lines">92, 95</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson26.py">PyOpenGL-Demo/NeHe/lesson26.py</a>
+    Lines: <span class="sample-lines">148, 159</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/stencil.py">pymt/graphx/stencil.py</a>
+    Lines: <span class="sample-lines">20, 48, 83, 94, 108</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

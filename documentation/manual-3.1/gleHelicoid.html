@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gleHelicoid : PyOpenGL 3.1.4 GLE Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+    <h1>gleHelicoid</h1>
+</header>
+<main class="content">
+    <section class="purpose">Generalized torus, spiral with circle contour.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gleHelicoid"></a>
+    <span class="c-function">gleHelicoid</span>(<span class="parameter-list">
+    <span class="param-def">
+        gleDouble(
+            <a href="#param-rToroid" class="parameter">rToroid</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[3](
+            <a href="#param-up" class="parameter">up</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-startRadius" class="parameter">startRadius</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-drdTheta" class="parameter">drdTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-startZ" class="parameter">startZ</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-dzdTheta" class="parameter">dzdTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[2][3](
+            <a href="#param-startXform" class="parameter">startXform</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[2][3](
+            <a href="#param-dXformdTheta" class="parameter">dXformdTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-startTheta" class="parameter">startTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-sweepTheta" class="parameter">sweepTheta</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gleHelicoid"></a>
+    <span class="py-function">gleHelicoid</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-rToroid" class="parameter">rToroid</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startRadius" class="parameter">startRadius</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-drdTheta" class="parameter">drdTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startZ" class="parameter">startZ</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dzdTheta" class="parameter">dzdTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startXform" class="parameter">startXform</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dXformdTheta" class="parameter">dXformdTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startTheta" class="parameter">startTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-sweepTheta" class="parameter">sweepTheta</a>
+    </span>
+</span> )
+    <pre class="pydoc">gleHelicoid( gleDouble(rToroid), gleDouble(startRadius), gleDouble(drdTheta), gleDouble(startZ), gleDouble(dzdTheta), arrays.GLdoubleArray(startXform), arrays.GLdoubleArray(dXformdTheta), gleDouble(startTheta), gleDouble(sweepTheta) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-rToroid"></a>
+                        rToroid
+                    </th>
+                    <td>
+    <div class="simpara">
+						circle contour (torus) radius
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startRadius"></a>
+                        startRadius
+                    </th>
+                    <td>
+    <div class="simpara">
+						spiral starts in x-y plane
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-drdTheta"></a>
+                        drdTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						change in radius per revolution
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startZ"></a>
+                        startZ
+                    </th>
+                    <td>
+    <div class="simpara">
+						starting z value
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dzdTheta"></a>
+                        dzdTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						change in Z per revolution
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startXform"></a>
+                        startXform
+                    </th>
+                    <td>
+    <div class="simpara">
+						starting contour affine transformation
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dXformdTheta"></a>
+                        dXformdTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						tangent change xform per revolution
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startTheta"></a>
+                        startTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						start angle in x-y plane
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sweepTheta"></a>
+                        sweepTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						degrees to spiral around
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="gleHelicoid.3GLE-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			Generalized Torus. Similar to
+    <a class="function" href="./gleSpiral.html">gleSpiral</a>
+    , except contour is a circle. Uses
+    <a class="function" href="./gleSpiral.html">gleSpiral</a>
+    to draw.
+</div>
+    </section><section class="section" id="gleHelicoid.3GLE-author">
+    <h2 class="title">Author</h2>
+    <div class="para">
+			Linas Vepstas
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./gleSpiral.html">gleSpiral</a>
+            <a class="crossref" href="./gleToroid.html">gleToroid</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gleHelicoid</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLE/helix.py">PyOpenGL-Demo/GLE/helix.py</a>
+    Lines: <span class="sample-lines">22</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

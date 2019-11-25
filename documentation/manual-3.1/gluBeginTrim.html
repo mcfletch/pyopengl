@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluBeginTrim : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluBeginTrim</h1>
+</header>
+<main class="content">
+    <section class="purpose">delimit a NURBS trimming loop definition</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluBeginTrim"></a>
+    <span class="c-function">gluBeginTrim</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUnurbs* (
+            <a href="#param-nurb" class="parameter">nurb</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluBeginTrim"></a>
+    <span class="py-function">gluBeginTrim</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-nurb" class="parameter">nurb</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluBeginTrim( POINTER(GLUnurbs)(nurb) ) -&gt; None</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-gluEndTrim"></a>
+    <span class="c-function">gluEndTrim</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUnurbs* (
+            <a href="#param-nurb" class="parameter">nurb</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluEndTrim"></a>
+    <span class="py-function">gluEndTrim</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-nurb" class="parameter">nurb</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluEndTrim( POINTER(GLUnurbs)(nurb) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-nurb"></a>
+                        nurb
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the NURBS object (created with
+    <a class="crossref" href="./gluNewNurbsRenderer.html">gluNewNurbsRenderer</a>
+    ).
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            Use
+    <a class="function" href="./gluBeginTrim.html">gluBeginTrim</a>
+    to mark the beginning of a
+            trimming loop and
+    <a class="crossref" href="./gluBeginTrim.html#c-gluEndTrim">gluEndTrim</a>
+    to mark the end
+            of a trimming loop. A trimming loop is
+            a set of oriented curve segments (forming a closed curve) that
+            define boundaries of a NURBS surface. You include these
+            trimming loops in the definition of a NURBS
+            surface, between calls to
+    <a class="crossref" href="./gluBeginSurface.html">gluBeginSurface</a>
+    and
+    <a class="crossref" href="./gluBeginSurface.html#c-gluEndSurface">gluEndSurface</a>
+    .
+</div>
+    <div class="para">
+            The definition for a NURBS surface can contain many
+            trimming loops. For example, if you wrote a definition
+            for a NURBS surface that resembled a rectangle with
+            a hole punched out, the definition would contain two
+            trimming loops. One loop would define the outer edge
+            of the rectangle; the other would define
+            the hole punched out of the rectangle. The definitions
+            of each of these trimming loops would be bracketed by a
+    <a class="function" href="./gluBeginTrim.html">gluBeginTrim</a>
+    /
+    <a class="crossref" href="./gluBeginTrim.html#c-gluEndTrim">gluEndTrim</a>
+    pair.
+</div>
+    <div class="para">
+            The definition of a single closed trimming loop can consist
+            of multiple curve segments, each described as a piecewise
+            linear curve (see
+    <a class="crossref" href="./gluPwlCurve.html">gluPwlCurve</a>
+    ) or as a single NURBS
+            curve (see
+    <a class="crossref" href="./gluNurbsCurve.html">gluNurbsCurve</a>
+    ), or as a combination of
+            both in any order. The only library calls that can
+            appear in a trimming loop definition (between the calls
+            to
+    <a class="function" href="./gluBeginTrim.html">gluBeginTrim</a>
+    and
+    <a class="crossref" href="./gluBeginTrim.html#c-gluEndTrim">gluEndTrim</a>
+    ) are
+    <a class="crossref" href="./gluPwlCurve.html">gluPwlCurve</a>
+    and
+    <a class="crossref" href="./gluNurbsCurve.html">gluNurbsCurve</a>
+    .
+</div>
+    <div class="para">
+            The area of the NURBS surface that is displayed is the
+            region in the domain to the left of the trimming curve
+            as the curve parameter increases. Thus, the retained
+            region of the NURBS surface is inside a
+            counterclockwise trimming loop and outside a clockwise
+            trimming loop. For the rectangle mentioned earlier,
+            the trimming loop for the outer edge of the rectangle runs
+            counterclockwise, while the trimming loop for the punched-out hole
+            runs clockwise.
+        </div>
+    <div class="para">
+            If you use more than one curve to define a single trimming
+            loop, the curve segments must form a closed loop (that is,
+            the endpoint of each curve must be the starting point of the
+            next curve, and the endpoint of the final curve must
+            be the starting point of the first curve). If the
+            endpoints of the curve are sufficiently close together
+            but not exactly coincident, they will be coerced to match.
+            If the endpoints are not sufficiently close, an error results
+            (see
+    <a class="crossref" href="./gluNurbsCallback.html">gluNurbsCallback</a>
+    ).
+</div>
+    <div class="para">
+            If a trimming loop definition contains multiple curves,
+            the direction of the curves must be consistent (that is, the
+            inside must be to the left of all of the curves). Nested
+            trimming loops are legal as long as the curve orientations
+            alternate correctly.
+            If trimming curves are self-intersecting,
+            or intersect one another, an error results.
+        </div>
+    <div class="para">
+            If no trimming information is given
+            for a NURBS surface, the entire surface is drawn.
+        </div>
+    </section><section class="section" id="example">
+    <h2 class="title">Example</h2>
+    <div class="para">
+            This code fragment defines a trimming loop that consists of one
+            piecewise linear curve, and two NURBS curves:
+    <div class="programlisting">
+gluBeginTrim(nobj);
+   gluPwlCurve(..., GLU_MAP1_TRIM_2);
+   gluNurbsCurve(..., GLU_MAP1_TRIM_2);
+   gluNurbsCurve(..., GLU_MAP1_TRIM_3);
+gluEndTrim(nobj);
+            </div>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluBeginSurface.html">gluBeginSurface</a>
+    ,
+    <a class="crossref" href="./gluNewNurbsRenderer.html">gluNewNurbsRenderer</a>
+    ,
+    <a class="crossref" href="./gluNurbsCallback.html">gluNurbsCallback</a>
+    ,
+    <a class="crossref" href="./gluNurbsCurve.html">gluNurbsCurve</a>
+    ,
+    <a class="crossref" href="./gluPwlCurve.html">gluPwlCurve</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluBeginTrim</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_trim.py">tests/redbook_trim.py</a>
+    Lines: <span class="sample-lines">110, 116</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/nurbs.py">OpenGLContext/scenegraph/nurbs.py</a>
+    Lines: <span class="sample-lines">64</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">120, 126, 132</span>
+</div>
+        <div class="sample-key">gluEndTrim</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_trim.py">tests/redbook_trim.py</a>
+    Lines: <span class="sample-lines">114, 121</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/nurbs.py">OpenGLContext/scenegraph/nurbs.py</a>
+    Lines: <span class="sample-lines">69</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">123, 129, 135</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

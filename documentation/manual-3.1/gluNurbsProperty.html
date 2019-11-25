@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluNurbsProperty : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluNurbsProperty</h1>
+</header>
+<main class="content">
+    <section class="purpose">set a NURBS property</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluNurbsProperty"></a>
+    <span class="c-function">gluNurbsProperty</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUnurbs* (
+            <a href="#param-nurb" class="parameter">nurb</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-property" class="parameter">property</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-value" class="parameter">value</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluNurbsProperty"></a>
+    <span class="py-function">gluNurbsProperty</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-nurb" class="parameter">nurb</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-property" class="parameter">property</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-value" class="parameter">value</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluNurbsProperty( POINTER(GLUnurbs)(nurb), GLenum(property), GLfloat(value) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-nurb"></a>
+                        nurb
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the NURBS object (created with
+    <a class="crossref" href="./gluNewNurbsRenderer.html">gluNewNurbsRenderer</a>
+    ).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-property"></a>
+                        property
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the property to be set. Valid values are
+    <span class="constant">GLU_SAMPLING_TOLERANCE</span>
+    ,
+    <span class="constant">GLU_DISPLAY_MODE</span>
+    ,
+    <span class="constant">GLU_CULLING</span>
+    ,
+    <span class="constant">GLU_AUTO_LOAD_MATRIX</span>
+    ,
+    <span class="constant">GLU_PARAMETRIC_TOLERANCE</span>
+    ,
+    <span class="constant">GLU_SAMPLING_METHOD</span>
+    ,
+    <span class="constant">GLU_U_STEP</span>
+    ,
+    <span class="constant">GLU_V_STEP</span>
+    , or
+    <span class="constant">GLU_NURBS_MODE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-value"></a>
+                        value
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the value of the indicated property.
+                    It may be a numeric value or one of
+    <span class="constant">GLU_OUTLINE_POLYGON</span>
+    ,
+    <span class="constant">GLU_FILL</span>
+    ,
+    <span class="constant">GLU_OUTLINE_PATCH</span>
+    ,
+    <span class="constant">GLU_TRUE</span>
+    ,
+    <span class="constant">GLU_FALSE</span>
+    ,
+    <span class="constant">GLU_PATH_LENGTH</span>
+    ,
+    <span class="constant">GLU_PARAMETRIC_ERROR</span>
+    ,
+    <span class="constant">GLU_DOMAIN_DISTANCE</span>
+    ,
+    <span class="constant">GLU_NURBS_RENDERER</span>
+    , or
+    <span class="constant">GLU_NURBS_TESSELLATOR</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluNurbsProperty.html">gluNurbsProperty</a>
+    is used to control properties stored in a NURBS object. These
+            properties affect the way that a NURBS curve is rendered. The accepted
+            values for
+    <a class="parameter" href="#param-property">property</a>
+    are as follows:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_NURBS_MODE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-value">value</a>
+    should be set to be either
+    <span class="constant">GLU_NURBS_RENDERER</span>
+    or
+    <span class="constant">GLU_NURBS_TESSELLATOR</span>
+    . When set to
+    <span class="constant">GLU_NURBS_RENDERER</span>
+    , NURBS objects
+                        are tessellated into OpenGL primitives and sent to the pipeline for
+                        rendering. When set to
+    <span class="constant">GLU_NURBS_TESSELLATOR</span>
+    , NURBS objects are
+                        tessellated into OpenGL primitives but the vertices, normals, colors, and/or textures are
+                        retrieved back through a callback interface (see
+    <a class="crossref" href="./gluNurbsCallback.html">gluNurbsCallback</a>
+    ). This allows the user to cache the
+                        tessellated results for further processing.
+                        The initial value is
+    <span class="constant">GLU_NURBS_RENDERER</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_SAMPLING_METHOD</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specifies how a NURBS surface should be
+                        tessellated.
+    <a class="parameter" href="#param-value">value</a>
+    may be one of
+    <span class="constant">GLU_PATH_LENGTH</span>
+    ,
+    <span class="constant">GLU_PARAMETRIC_ERROR</span>
+    ,
+    <span class="constant">GLU_DOMAIN_DISTANCE</span>
+    ,
+    <span class="constant">GLU_OBJECT_PATH_LENGTH</span>
+    , or
+    <span class="constant">GLU_OBJECT_PARAMETRIC_ERROR</span>
+    .
+                        When set to
+    <span class="constant">GLU_PATH_LENGTH</span>
+    , the surface is rendered so that
+                        the maximum length, in
+                        pixels, of the edges of the tessellation polygons is no greater than
+                        what is specified by
+    <span class="constant">GLU_SAMPLING_TOLERANCE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLU_PARAMETRIC_ERROR</span>
+    specifies that the surface is rendered in such a
+                        way that the value specified by
+    <span class="constant">GLU_PARAMETRIC_TOLERANCE</span>
+    describes the
+                        maximum distance, in pixels, between the tessellation polygons and the
+                        surfaces they approximate.
+</div>
+    <div class="para">
+    <span class="constant">GLU_DOMAIN_DISTANCE</span>
+    allows users to specify, in parametric coordinates,
+                        how many sample points per unit length are taken in
+    <span class="emphasis">u</span>
+    ,
+    <span class="emphasis">v</span>
+    direction.
+</div>
+    <div class="para">
+    <span class="constant">GLU_OBJECT_PATH_LENGTH</span>
+    is similar to
+    <span class="constant">GLU_PATH_LENGTH</span>
+    except that it is view independent; that is, the surface is rendered so that the maximum length, in object space, of edges of the tessellation polygons is no greater than what is specified by
+    <span class="constant">GLU_SAMPLING_TOLERANCE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLU_OBJECT_PARAMETRIC_ERROR</span>
+    is similar to
+    <span class="constant">GLU_PARAMETRIC_ERROR</span>
+    except that it is view independent; that is, the surface is rendered in such a way that the value specified by
+    <span class="constant">GLU_PARAMETRIC_TOLERANCE</span>
+    describes the maximum distance, in object space, between the tessellation polygons and the surfaces they approximate.
+</div>
+    <div class="para">
+                        The initial value of
+    <span class="constant">GLU_SAMPLING_METHOD</span>
+    is
+    <span class="constant">GLU_PATH_LENGTH</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_SAMPLING_TOLERANCE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specifies the maximum length, in pixels or in object space length unit,
+                        to use when the sampling method is set to
+    <span class="constant">GLU_PATH_LENGTH</span>
+    or
+    <span class="constant">GLU_OBJECT_PATH_LENGTH</span>
+    .
+                        The NURBS code is conservative when rendering a curve
+                        or surface, so the actual length can be somewhat shorter. The initial
+                        value is 50.0 pixels.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_PARAMETRIC_TOLERANCE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specifies the maximum distance, in pixels or in object space length unit,
+                        to use when the sampling method is
+    <span class="constant">GLU_PARAMETRIC_ERROR</span>
+    or
+    <span class="constant">GLU_OBJECT_PARAMETRIC_ERROR</span>
+    .
+                        The initial value is 0.5.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_U_STEP</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specifies the number of sample points per unit length taken
+                        along the
+    <span class="emphasis">u</span>
+    axis in parametric coordinates. It is needed when
+    <span class="constant">GLU_SAMPLING_METHOD</span>
+    is set to
+    <span class="constant">GLU_DOMAIN_DISTANCE</span>
+    .
+                        The initial value is 100.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_V_STEP</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specifies the number of sample points per unit length taken
+                        along the
+    <span class="emphasis">v</span>
+    axis in parametric coordinate. It is needed when
+    <span class="constant">GLU_SAMPLING_METHOD</span>
+    is set to
+    <span class="constant">GLU_DOMAIN_DISTANCE</span>
+    . The initial
+                        value is 100.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_DISPLAY_MODE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-value">value</a>
+    can be set to
+    <span class="constant">GLU_OUTLINE_POLYGON</span>
+    ,
+    <span class="constant">GLU_FILL</span>
+    , or
+    <span class="constant">GLU_OUTLINE_PATCH</span>
+    .
+                        When
+    <span class="constant">GLU_NURBS_MODE</span>
+    is set to be
+    <span class="constant">GLU_NURBS_RENDERER</span>
+    ,
+    <a class="parameter" href="#param-value">value</a>
+    defines how a NURBS surface should be rendered.
+                        When
+    <a class="parameter" href="#param-value">value</a>
+    is set to
+    <span class="constant">GLU_FILL</span>
+    , the surface is rendered as a
+                        set of polygons. When
+    <a class="parameter" href="#param-value">value</a>
+    is set to
+    <span class="constant">GLU_OUTLINE_POLYGON</span>
+    , the NURBS library draws only the outlines
+                        of the polygons created by tessellation. When
+    <a class="parameter" href="#param-value">value</a>
+    is set to
+    <span class="constant">GLU_OUTLINE_PATCH</span>
+    just the outlines of patches and trim
+                        curves defined by the user are drawn.
+</div>
+    <div class="para">
+                        When
+    <span class="constant">GLU_NURBS_MODE</span>
+    is set to be
+    <span class="constant">GLU_NURBS_TESSELLATOR</span>
+    ,
+    <a class="parameter" href="#param-value">value</a>
+    defines how a NURBS surface should be tessellated.
+                        When
+    <span class="constant">GLU_DISPLAY_MODE</span>
+    is set to
+    <span class="constant">GLU_FILL</span>
+    or
+    <span class="constant">GLU_OUTLINE_POLYGON</span>
+    ,
+                        the NURBS surface is tessellated into OpenGL triangle primitives that can be
+                        retrieved back  through callback functions. If
+    <span class="constant">GLU_DISPLAY_MODE</span>
+    is set to
+    <span class="constant">GLU_OUTLINE_PATCH</span>
+    , only the outlines of the patches and trim curves are generated as a sequence of line strips that can be retrieved back through callback functions.
+</div>
+    <div class="para">
+                        The initial value is
+    <span class="constant">GLU_FILL</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_CULLING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-value">value</a>
+    is a boolean value that, when set to
+    <span class="constant">GLU_TRUE</span>
+    , indicates that
+                        a NURBS curve should be discarded prior to tessellation if its control points
+                        lie outside the current viewport. The initial value is
+    <span class="constant">GLU_FALSE</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_AUTO_LOAD_MATRIX</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+    <a class="parameter" href="#param-value">value</a>
+    is a boolean value. When set to
+    <span class="constant">GLU_TRUE</span>
+    , the NURBS code
+                        downloads the projection matrix, the modelview matrix, and the
+                        viewport from the GL server to compute sampling and
+                        culling
+                        matrices for each NURBS curve that is rendered. Sampling and culling matrices
+                        are required to determine the tessellation of a NURBS surface into line segments
+                        or polygons and to cull a NURBS surface if it lies outside the viewport.
+</div>
+    <div class="para">
+                        If this mode is set to
+    <span class="constant">GLU_FALSE</span>
+    , then the program needs
+                        to provide a projection matrix, a modelview matrix, and a viewport
+                        for the NURBS renderer to use to construct sampling and culling matrices.
+                        This can be done with the
+    <a class="crossref" href="./gluLoadSamplingMatrices.html">gluLoadSamplingMatrices</a>
+    function.
+                        This mode is initially set to
+    <span class="constant">GLU_TRUE</span>
+    .
+                        Changing it from
+    <span class="constant">GLU_TRUE</span>
+    to
+    <span class="constant">GLU_FALSE</span>
+    does not affect
+                        the sampling and culling matrices until
+    <a class="crossref" href="./gluLoadSamplingMatrices.html">gluLoadSamplingMatrices</a>
+    is called.
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            If
+    <span class="constant">GLU_AUTO_LOAD_MATRIX</span>
+    is true, sampling and culling may be
+            executed incorrectly if NURBS routines are compiled into a display list.
+</div>
+    <div class="para">
+            A
+    <a class="parameter" href="#param-property">property</a>
+    of
+    <span class="constant">GLU_PARAMETRIC_TOLERANCE</span>
+    ,
+    <span class="constant">GLU_SAMPLING_METHOD</span>
+    ,
+    <span class="constant">GLU_U_STEP</span>
+    , or
+    <span class="constant">GLU_V_STEP</span>
+    ,
+            or a
+    <a class="parameter" href="#param-value">value</a>
+    of
+    <span class="constant">GLU_PATH_LENGTH</span>
+    ,
+    <span class="constant">GLU_PARAMETRIC_ERROR</span>
+    ,
+    <span class="constant">GLU_DOMAIN_DISTANCE</span>
+    are only available if the GLU version is 1.1 or greater. They are not
+            valid parameters in GLU 1.0.
+</div>
+    <div class="para">
+    <a class="crossref" href="./gluGetString.html">gluGetString</a>
+    can
+            be used to determine the GLU version.
+</div>
+    <div class="para">
+    <span class="constant">GLU_NURBS_MODE</span>
+    is only available if the GLU version is 1.3 or
+            greater.
+</div>
+    <div class="para">
+            The
+    <span class="constant">GLU_OBJECT_PATH_LENGTH</span>
+    and
+    <span class="constant">GLU_OBJECT_PARAMETRIC_ERROR</span>
+    values for the
+    <span class="constant">GLU_SAMPLING_METHOD</span>
+    property are only available if
+            the GLU version is 1.3 or greater.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluGetNurbsProperty.html">gluGetNurbsProperty</a>
+    ,
+    <a class="crossref" href="./gluGetString.html">gluGetString</a>
+    ,
+    <a class="crossref" href="./gluLoadSamplingMatrices.html">gluLoadSamplingMatrices</a>
+    ,
+    <a class="crossref" href="./gluNewNurbsRenderer.html">gluNewNurbsRenderer</a>
+    ,
+    <a class="crossref" href="./gluNurbsCallback.html">gluNurbsCallback</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluNurbsProperty</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_trim.py">tests/redbook_trim.py</a>
+    Lines: <span class="sample-lines">134, 135</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_surface.py">tests/redbook_surface.py</a>
+    Lines: <span class="sample-lines">94, 95</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_surface_cb.py">tests/redbook_surface_cb.py</a>
+    Lines: <span class="sample-lines">123, 124, 125</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/nurbs.py">OpenGLContext/scenegraph/nurbs.py</a>
+    Lines: <span class="sample-lines">142, 372, 374, 378, 389, 390, 391</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbsCurve/nurbsCurve.py">PyOpenGL-Demo/proesch/nurbsCurve/nurbsCurve.py</a>
+    Lines: <span class="sample-lines">90</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbsCurve/nurbsCircle.py">PyOpenGL-Demo/proesch/nurbsCurve/nurbsCircle.py</a>
+    Lines: <span class="sample-lines">92</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">185, 186</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/molehill.py">PyOpenGL-Demo/GLUT/molehill.py</a>
+    Lines: <span class="sample-lines">68, 69</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gleSpiral : PyOpenGL 3.1.4 GLE Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+    <h1>gleSpiral</h1>
+</header>
+<main class="content">
+    <section class="purpose">Sweep an arbitrary contour along a helical path.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gleSpiral"></a>
+    <span class="c-function">gleSpiral</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-ncp" class="parameter">ncp</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[][2](
+            <a href="#param-contour" class="parameter">contour</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[][2](
+            <a href="#param-cont_normal" class="parameter">cont_normal</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[3](
+            <a href="#param-up" class="parameter">up</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-startRadius" class="parameter">startRadius</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-drdTheta" class="parameter">drdTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-startZ" class="parameter">startZ</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-dzdTheta" class="parameter">dzdTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[2][3](
+            <a href="#param-startXform" class="parameter">startXform</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[2][3](
+            <a href="#param-dXformdTheta" class="parameter">dXformdTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-startTheta" class="parameter">startTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-sweepTheta" class="parameter">sweepTheta</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gleSpiral"></a>
+    <span class="py-function">gleSpiral</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-contour" class="parameter">contour</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-cont_normal" class="parameter">cont_normal</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-up" class="parameter">up</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startRadius" class="parameter">startRadius</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-drdTheta" class="parameter">drdTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startZ" class="parameter">startZ</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dzdTheta" class="parameter">dzdTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startXform" class="parameter">startXform</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dXformdTheta" class="parameter">dXformdTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startTheta" class="parameter">startTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-sweepTheta" class="parameter">sweepTheta</a>
+    </span>
+</span> )
+    <pre class="pydoc">gleSpiral( c_int(ncp), arrays.GLdoubleArray(contour), arrays.GLdoubleArray(cont_normal), arrays.GLdoubleArray(up), gleDouble(startRadius), gleDouble(drdTheta), gleDouble(startZ), gleDouble(dzdTheta), arrays.GLdoubleArray(startXform), arrays.GLdoubleArray(dXformdTheta), gleDouble(startTheta), gleDouble(sweepTheta) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-ncp"></a>
+                        ncp
+                    </th>
+                    <td>
+    <div class="simpara">
+						number of contour points
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-contour"></a>
+                        contour
+                    </th>
+                    <td>
+    <div class="simpara">
+						2D contour
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-cont_normal"></a>
+                        cont_normal
+                    </th>
+                    <td>
+    <div class="simpara">
+						2D contour normals
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-up"></a>
+                        up
+                    </th>
+                    <td>
+    <div class="simpara">
+						up vector for contour
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startRadius"></a>
+                        startRadius
+                    </th>
+                    <td>
+    <div class="simpara">
+						spiral starts in x-y plane
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-drdTheta"></a>
+                        drdTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						change in radius per revolution
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startZ"></a>
+                        startZ
+                    </th>
+                    <td>
+    <div class="simpara">
+						starting z value
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dzdTheta"></a>
+                        dzdTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						change in Z per revolution
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startXform"></a>
+                        startXform
+                    </th>
+                    <td>
+    <div class="simpara">
+						starting contour affine transformation
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dXformdTheta"></a>
+                        dXformdTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						tangent change xform per revolution
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startTheta"></a>
+                        startTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						start angle in x-y plane
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sweepTheta"></a>
+                        sweepTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						degrees to spiral around
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="gleSpiral.3GLE-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			Sweep an arbitrary contour along a helical path.
+		</div>
+    <div class="para">
+			The axis of the helix lies along the modeling coordinate z-axis.
+		</div>
+    <div class="para">
+			An affine transform can be applied as the contour is swept. For most ordinary usage, the affines should be given as
+    <span class="constant">NULL</span>
+    .
+</div>
+    <div class="para">
+			The
+    <a class="parameter" href="#param-startXform">startXform</a>
+    is an affine matrix applied to the contour to deform the contour. Thus,
+    <a class="parameter" href="#param-startXform">startXform</a>
+    of the form
+</div>
+    <div class="informalequation">
+    <math>
+				<mfenced>
+					<mtable>
+						<mtr>
+							<mtd>
+								<mi>cos</mi>
+							</mtd>
+							<mtd>
+								<mi>sin</mi>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+						</mtr>
+						<mtr>
+							<mtd>
+								<mo>-</mo>
+								<mo>sin</mo>
+							</mtd>
+							<mtd>
+								<mi>cos</mi>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+						</mtr>
+					</mtable>
+				</mfenced>
+			</math>
+</div>
+    <div class="para">
+			will rotate the contour (in the plane of the contour), while
+		</div>
+    <div class="informalequation">
+    <math>
+				<mfenced>
+					<mtable>
+						<mtr>
+							<mtd>
+								<mn>1</mn>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mi>tx</mi>
+							</mtd>
+						</mtr>
+						<mtr>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mn>1</mn>
+							</mtd>
+							<mtd>
+								<mi>ty</mi>
+							</mtd>
+						</mtr>
+					</mtable>
+				</mfenced>
+			</math>
+</div>
+    <div class="para">
+			will translate the contour, and
+		</div>
+    <div class="informalequation">
+    <math>
+				<mfenced>
+					<mtable>
+						<mtr>
+							<mtd>
+								<mi>sx</mi>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+						</mtr>
+						<mtr>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mi>sy</mi>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+						</mtr>
+					</mtable>
+				</mfenced>
+			</math>
+</div>
+    <div class="para">
+			scales along the two axes of the contour. In particular, note that
+		</div>
+    <div class="informalequation">
+    <math>
+				<mfenced>
+					<mtable>
+						<mtr>
+							<mtd>
+								<mn>1</mn>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+						</mtr>
+						<mtr>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mn>1</mn>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+						</mtr>
+					</mtable>
+				</mfenced>
+			</math>
+</div>
+    <div class="para">
+			is the identity matrix. The
+    <a class="parameter" href="#param-dXformdTheta">dXformdTheta</a>
+    is a differential affine matrix that is integrated
+			while the contour is extruded. Note that this affine matrix lives in the tangent space, and so it should have the form
+			of a generator. Thus, dx/dt's of the form
+</div>
+    <div class="informalequation">
+    <math>
+				<mfenced>
+					<mtable>
+						<mtr>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mi>r</mi>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+						</mtr>
+						<mtr>
+							<mtd>
+								<mo>-</mo>
+								<mi>r</mi>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+						</mtr>
+					</mtable>
+				</mfenced>
+			</math>
+</div>
+    <div class="para">
+			rotate the the contour as it is extruded (
+    <math>
+					<mi>r</mi>
+					<mo></mo>
+					<mn>0</mn>
+				</math>
+    implies no rotation,
+    <math>
+					<mi>r</mi>
+					<mo></mo>
+					<mn>2</mn>
+					<mi></mi>
+				</math>
+    implies that the contour is rotated once, etc.), while
+</div>
+    <div class="informalequation">
+    <math>
+				<mfenced>
+					<mtable>
+						<mtr>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mi>tx</mi>
+							</mtd>
+						</mtr>
+						<mtr>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mi>ty</mi>
+							</mtd>
+						</mtr>
+					</mtable>
+				</mfenced>
+			</math>
+</div>
+    <div class="para">
+			translates the contour, and
+		</div>
+    <div class="informalequation">
+    <math>
+				<mfenced>
+					<mtable>
+						<mtr>
+							<mtd>
+								<mi>sx</mi>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+						</mtr>
+						<mtr>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mi>sy</mi>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+						</mtr>
+					</mtable>
+				</mfenced>
+			</math>
+</div>
+    <div class="para">
+			scales it. In particular, note that
+		</div>
+    <div class="informalequation">
+    <math>
+				<mfenced>
+					<mtable>
+						<mtr>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+						</mtr>
+						<mtr>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+							<mtd>
+								<mn>0</mn>
+							</mtd>
+						</mtr>
+					</mtable>
+				</mfenced>
+			</math>
+</div>
+    <div class="para">
+			is the identity matrix </div>
+    </section><section class="section" id="gleSpiral.3GLE-author">
+    <h2 class="title">Author</h2>
+    <div class="para">
+			Linas Vepstas
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./gleLathe.html">gleLathe</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gleSpiral</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/extrusions.py">OpenGLContext/scenegraph/extrusions.py</a>
+    Lines: <span class="sample-lines">204</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

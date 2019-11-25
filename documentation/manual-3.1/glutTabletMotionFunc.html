@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutTabletMotionFunc : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutTabletMotionFunc</h1>
+</header>
+<main class="content">
+    <section class="purpose">sets the special keyboard callback for the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutTabletMotionFunc"></a>
+    <span class="c-function">glutTabletMotionFunc</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutTabletMotionFunc"></a>
+    <span class="py-function">glutTabletMotionFunc</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-function" class="parameter">function</a>
+    </span>
+</span> )
+    <pre class="pydoc">Specify handler for GLUT 'TabletMotion' events
+    def handler( (int) x, (int) y ):
+        return None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-func"></a>
+                        func
+                    </th>
+                    <td>
+    <div class="simpara">
+						The new entry callback function.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutTabletMotionFunc.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutTabletMotionFunc.html">glutTabletMotionFunc</a>
+    sets the tablet motion callback for the current window. The tablet motion
+			callback for a window is called when the window has tablet input focus (normally, when the mouse is in the window) and
+			the user generates tablet motion. The
+    <a class="parameter" href="#param-x">x</a>
+    and
+    <a class="parameter" href="#param-y">y</a>
+    callback parameters
+			indicate the absolute position of the tablet "puck" on the tablet. The callback parameters are normalized to be within
+			the range of 0 to 2000 inclusive.
+</div>
+    <div class="para">
+			Registering a tablet motion callback when a tablet device is not available is ineffectual and not an error. In this
+			case, no tablet motion callbacks will be generated.
+		</div>
+    <div class="para">
+			Passing
+    <span class="constant">NULL</span>
+    to
+    <a class="function" href="./glutTabletMotionFunc.html">glutTabletMotionFunc</a>
+    disables the generation of tablet motion
+			callbacks. When a new window is created, no tablet motion callback is initially registered.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutTabletButtonFunc.html">glutTabletButtonFunc</a>
+            <a class="crossref" href="./glutDeviceGet.html">glutDeviceGet</a>
+            <a class="crossref" href="./glutMotionFunc.html">glutMotionFunc</a>
+            <a class="crossref" href="./glutSpaceballMotionFunc.html">glutSpaceballMotionFunc</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

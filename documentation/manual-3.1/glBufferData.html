@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glBufferData : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glBufferData</h1>
+</header>
+<main class="content">
+    <section class="purpose">creates and initializes a buffer object's data
+    store</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glBufferData"></a>
+    <span class="c-function">glBufferData</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizeiptr (
+            <a href="#param-size" class="parameter">size</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-usage" class="parameter">usage</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glBufferData"></a>
+    <span class="py-function">glBufferData</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-size" class="parameter">size</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-usage" class="parameter">usage</a>
+    </span>
+</span> )
+    <pre class="pydoc">Copy given data into the currently bound vertex-buffer-data object
+
+    target -- the symbolic constant indicating which buffer type is intended
+    size -- if provided, the count-in-bytes of the array
+    data -- data-pointer to be used, may be None to initialize without
+        copying over a data-set
+    usage -- hint to the driver as to how to set up access to the buffer
+
+    Note: parameter "size" can be omitted, which makes the signature
+        glBufferData( target, data, usage )
+    instead of:
+        glBufferData( target, size, data, usage )
+    </pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glNamedBufferData"></a>
+    <span class="c-function">glNamedBufferData</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizeiptr (
+            <a href="#param-size" class="parameter">size</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void *(
+            <a href="#param-data" class="parameter">data</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-usage" class="parameter">usage</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glNamedBufferData"></a>
+    <span class="py-function">glNamedBufferData</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-size" class="parameter">size</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-usage" class="parameter">usage</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+            Specifies the target to which the buffer object is bound for
+    <a class="function" href="./glBufferData.html">glBufferData</a>
+    , which must be one of the
+            buffer binding targets in the following table:
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-buffer"></a>
+                        buffer
+                    </th>
+                    <td>
+    <div class="para">Specifies the name of the buffer object for
+    <a class="function" href="./glBufferData.html#c-glNamedBufferData">glNamedBufferData</a>
+    function.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-size"></a>
+                        size
+                    </th>
+                    <td>
+    <div class="para">Specifies the size in bytes of the buffer object's new data
+          store.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-data"></a>
+                        data
+                    </th>
+                    <td>
+    <div class="para">Specifies a pointer to data that will be copied into the data
+          store for initialization, or
+    <span class="constant">NULL</span>
+    if no data is
+          to be copied.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-usage"></a>
+                        usage
+                    </th>
+                    <td>
+    <div class="para">Specifies the expected usage pattern of the data store. The
+          symbolic constant must be
+    <span class="constant">GL_STREAM_DRAW</span>
+    ,
+    <span class="constant">GL_STREAM_READ</span>
+    ,
+    <span class="constant">GL_STREAM_COPY</span>
+    ,
+    <span class="constant">GL_STATIC_DRAW</span>
+    ,
+    <span class="constant">GL_STATIC_READ</span>
+    ,
+    <span class="constant">GL_STATIC_COPY</span>
+    ,
+    <span class="constant">GL_DYNAMIC_DRAW</span>
+    ,
+    <span class="constant">GL_DYNAMIC_READ</span>
+    , or
+    <span class="constant">GL_DYNAMIC_COPY</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glBufferData.html">glBufferData</a>
+    and
+    <a class="function" href="./glBufferData.html#c-glNamedBufferData">glNamedBufferData</a>
+    create a new data store for a
+    buffer object. In case of
+    <a class="function" href="./glBufferData.html">glBufferData</a>
+    , the buffer
+    object currently bound to
+    <a class="parameter" href="#param-target">target</a>
+    is used. For
+    <a class="function" href="./glBufferData.html#c-glNamedBufferData">glNamedBufferData</a>
+    , a buffer object associated with ID
+    specified by the caller in
+    <a class="parameter" href="#param-buffer">buffer</a>
+    will be used
+    instead.
+</div>
+    <div class="para">While creating the new storage, any pre-existing data store is
+    deleted. The new data store is created with the specified
+    <a class="parameter" href="#param-size">size</a>
+    in bytes and
+    <a class="parameter" href="#param-usage">usage</a>
+    . If
+    <a class="parameter" href="#param-data">data</a>
+    is not
+    <span class="constant">NULL</span>
+    , the data
+    store is initialized with data from this pointer. In its initial state,
+    the new data store is not mapped, it has a
+    <span class="constant">NULL</span>
+    mapped pointer, and its mapped access is
+    <span class="constant">GL_READ_WRITE</span>
+    .
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-usage">usage</a>
+    is a hint to the GL implementation as
+    to how a buffer object's data store will be accessed. This enables the GL
+    implementation to make more intelligent decisions that may significantly
+    impact buffer object performance. It does not, however, constrain the
+    actual usage of the data store.
+    <a class="parameter" href="#param-usage">usage</a>
+    can be broken
+    down into two parts: first, the frequency of access (modification and
+    usage), and second, the nature of that access. The frequency of access may
+    be one of these:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">STREAM</dt>
+    <dd class="listitem">
+    <div class="para">The data store contents will be modified once and used at most
+          a few times.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">STATIC</dt>
+    <dd class="listitem">
+    <div class="para">The data store contents will be modified once and used many
+          times.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">DYNAMIC</dt>
+    <dd class="listitem">
+    <div class="para">The data store contents will be modified repeatedly and used
+          many times.</div>
+</dd>
+</div>
+</dl>
+    <div class="para">The nature of access may be one of these:</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">DRAW</dt>
+    <dd class="listitem">
+    <div class="para">The data store contents are modified by the application, and
+          used as the source for GL drawing and image specification
+          commands.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">READ</dt>
+    <dd class="listitem">
+    <div class="para">The data store contents are modified by reading data from the
+          GL, and used to return that data when queried by the
+          application.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">COPY</dt>
+    <dd class="listitem">
+    <div class="para">The data store contents are modified by reading data from the
+          GL, and used as the source for GL drawing and image specification
+          commands.</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-data">data</a>
+    is
+    <span class="constant">NULL</span>
+    , a data store of the specified size is still created,
+            but its contents remain uninitialized and thus undefined.
+</div>
+    <div class="para">
+            Clients must align data elements consistently with the requirements of the client
+            platform, with an additional base-level requirement that an offset within a buffer to
+            a datum comprising
+    <math overflow="scroll"><mi mathvariant="italic">N</mi></math>
+    bytes be a
+            multiple of
+    <math overflow="scroll"><mi mathvariant="italic">N</mi></math>
+    .
+</div>
+    <div class="para">
+            The
+    <span class="constant">GL_ATOMIC_COUNTER_BUFFER</span>
+    target is available only if the GL version
+            is 4.2 or greater.
+</div>
+    <div class="para">
+            The
+    <span class="constant">GL_DISPATCH_INDIRECT_BUFFER</span>
+    and
+    <span class="constant">GL_SHADER_STORAGE_BUFFER</span>
+    targets are available only if the GL version
+            is 4.3 or greater.
+</div>
+    <div class="para">
+            The
+    <span class="constant">GL_QUERY_BUFFER</span>
+    target is available only if the GL version is 4.4 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glBufferData.html">glBufferData</a>
+    if
+    <a class="parameter" href="#param-target">target</a>
+    is not
+    one of the accepted buffer targets.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-usage">usage</a>
+    is not
+    <span class="constant">GL_STREAM_DRAW</span>
+    ,
+    <span class="constant">GL_STREAM_READ</span>
+    ,
+    <span class="constant">GL_STREAM_COPY</span>
+    ,
+    <span class="constant">GL_STATIC_DRAW</span>
+    ,
+    <span class="constant">GL_STATIC_READ</span>
+    ,
+    <span class="constant">GL_STATIC_COPY</span>
+    ,
+    <span class="constant">GL_DYNAMIC_DRAW</span>
+    ,
+    <span class="constant">GL_DYNAMIC_READ</span>
+    , or
+    <span class="constant">GL_DYNAMIC_COPY</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-size">size</a>
+    is negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glBufferData.html">glBufferData</a>
+    if the reserved buffer object name 0 is
+    bound to
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glBufferData.html#c-glNamedBufferData">glNamedBufferData</a>
+    if buffer is not the name of an
+    existing buffer object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the
+    <span class="constant">GL_BUFFER_IMMUTABLE_STORAGE</span>
+    flag of the buffer
+        object is
+    <span class="constant">GL_TRUE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_OUT_OF_MEMORY</span>
+    is generated if the GL is
+    unable to create a data store with the specified
+    <a class="parameter" href="#param-size">size</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetBufferSubData.html">glGetBufferSubData</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetBufferParameteriv.html#c-glGetBufferParameteriv">glGetBufferParameter</a>
+    with argument
+    <span class="constant">GL_BUFFER_SIZE</span>
+    or
+    <span class="constant">GL_BUFFER_USAGE</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glBufferData.html">glBufferData</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glBufferData.html#c-glNamedBufferData">glNamedBufferData</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ,
+    <a class="crossref" href="./glBufferSubData.html">glBufferSubData</a>
+    ,
+    <a class="crossref" href="./glMapBuffer.html">glMapBuffer</a>
+    ,
+    <a class="crossref" href="./glUnmapBuffer.html">glUnmapBuffer</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2005 Addison-Wesley.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glBufferData</div>
+        <div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/data.py">pyggel/data.py</a>
+    Lines: <span class="sample-lines">347, 353, 359, 365</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL Tutorial (Python Translation)</span>
+    <a href="https://bitbucket.org/tartley/gltutpy/src/tip/t02.playing-with-colors/VertexColors.py">t02.playing-with-colors/VertexColors.py</a>
+    Lines: <span class="sample-lines">67</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL Tutorial (Python Translation)</span>
+    <a href="https://bitbucket.org/tartley/gltutpy/src/tip/t02.playing-with-colors/FragPosition.py">t02.playing-with-colors/FragPosition.py</a>
+    Lines: <span class="sample-lines">64</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL Tutorial (Python Translation)</span>
+    <a href="https://bitbucket.org/tartley/gltutpy/src/tip/t01.hello-triangle/HelloTriangle.py">t01.hello-triangle/HelloTriangle.py</a>
+    Lines: <span class="sample-lines">78</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">134, 187, 190, 238</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">160, 216, 219, 270</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">95, 98</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">161, 164</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">169, 172</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">152, 206, 209, 260</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">176, 179</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

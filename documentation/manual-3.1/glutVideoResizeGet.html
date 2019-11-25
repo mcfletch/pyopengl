@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutVideoResizeGet : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutVideoResizeGet</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieves GLUT video resize information represented by integers.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutVideoResizeGet"></a>
+    <span class="c-function">glutVideoResizeGet</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum(
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glutVideoResizeGet"></a>
+    <span class="py-function">glutVideoResizeGet</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-query" class="parameter">query</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">glutVideoResizeGet( GLenum(query) ) -&gt; c_int</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-param"></a>
+                        param
+                    </th>
+                    <td>
+    <div class="simpara">
+						Name of video resize information to retrieve.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutVideoResizeGet.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutVideoResizeGet.html">glutVideoResizeGet</a>
+    retrieves GLUT video resizing information represented by integers. The
+    <a class="parameter" href="#param-param">param</a>
+    parameter determines what type of video resize information to return.
+</div>
+    </section><section class="section" id="glutVideoResizeGet.3GLUT-x_implementation_notes">
+    <h2 class="title">X Implementation Notes</h2>
+    <div class="para">
+			The current implementation uses the SGIX_video_resize GLX extension. This extension is currently supported on SGI's
+			InfiniteReality-based systems.
+		</div>
+    </section><section class="section" id="glutVideoResizeGet.3GLUT-win32_implementation_notes">
+    <h2 class="title">Win32 Implementation Notes</h2>
+    <div class="para">
+			The current implementation never reports that video resizing is possible.
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutGet.html">glutGet</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

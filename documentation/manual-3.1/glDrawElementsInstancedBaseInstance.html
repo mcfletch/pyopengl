@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glDrawElementsInstancedBaseInstance : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glDrawElementsInstancedBaseInstance</h1>
+</header>
+<main class="content">
+    <section class="purpose">draw multiple instances of a set of elements with offset applied to instanced attributes</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glDrawElementsInstancedBaseInstance"></a>
+    <span class="c-function">glDrawElementsInstancedBaseInstance</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-mode" class="parameter">mode</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-count" class="parameter">count</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void * (
+            <a href="#param-indices" class="parameter">indices</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-instancecount" class="parameter">instancecount</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-baseinstance" class="parameter">baseinstance</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glDrawElementsInstancedBaseInstance"></a>
+    <span class="py-function">glDrawElementsInstancedBaseInstance</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-mode" class="parameter">mode</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-count" class="parameter">count</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-indices" class="parameter">indices</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-instancecount" class="parameter">instancecount</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-baseinstance" class="parameter">baseinstance</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-mode"></a>
+                        mode
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies what kind of primitives to render.
+                    Symbolic constants
+    <span class="constant">GL_POINTS</span>
+    ,
+    <span class="constant">GL_LINE_STRIP</span>
+    ,
+    <span class="constant">GL_LINE_LOOP</span>
+    ,
+    <span class="constant">GL_LINES</span>
+    ,
+    <span class="constant">GL_LINE_STRIP_ADJACENCY</span>
+    ,
+    <span class="constant">GL_LINES_ADJACENCY</span>
+    ,
+    <span class="constant">GL_TRIANGLE_STRIP</span>
+    ,
+    <span class="constant">GL_TRIANGLE_FAN</span>
+    ,
+    <span class="constant">GL_TRIANGLES</span>
+    ,
+    <span class="constant">GL_TRIANGLE_STRIP_ADJACENCY</span>
+    ,
+    <span class="constant">GL_TRIANGLES_ADJACENCY</span>
+    and
+    <span class="constant">GL_PATCHES</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-count"></a>
+                        count
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of elements to be rendered.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the type of the values in
+    <a class="parameter" href="#param-indices">indices</a>
+    . Must be one of
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+    , or
+    <span class="constant">GL_UNSIGNED_INT</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-indices"></a>
+                        indices
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to the location where the indices are stored.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-instancecount"></a>
+                        instancecount
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of instances of the specified range of indices to be rendered.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-baseinstance"></a>
+                        baseinstance
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the base instance for use in fetching instanced vertex attributes.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glDrawElementsInstancedBaseInstance.html">glDrawElementsInstancedBaseInstance</a>
+    behaves identically to
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    except that
+    <a class="parameter" href="#param-instancecount">instancecount</a>
+    instances of the set of elements are executed and the value of the internal counter
+    <a class="parameter" href="#param-instanceID">instanceID</a>
+    advances for each iteration.
+    <a class="parameter" href="#param-instanceID">instanceID</a>
+    is an internal 32-bit integer counter
+            that may be read by a vertex shader as
+    <span class="constant">gl_InstanceID</span>
+    .
+</div>
+    <div class="para">
+    <a class="function" href="./glDrawElementsInstancedBaseInstance.html">glDrawElementsInstancedBaseInstance</a>
+    has the same effect as:
+    <div class="programlisting">    if (mode, count, or type is invalid )
+        generate appropriate error
+    else {
+        for (int i = 0; i &lt; instancecount ; i++) {
+            instanceID = i;
+            glDrawElements(mode, count, type, indices);
+        }
+        instanceID = 0;
+    }</div>
+</div>
+    <div class="para">
+            Specific vertex attributes may be classified as
+    <span class="emphasis">instanced</span>
+    through the use of
+    <a class="crossref" href="./glVertexAttribDivisor.html">glVertexAttribDivisor</a>
+    . Instanced vertex attributes
+            supply per-instance vertex data to the vertex shader. The index of the vertex fetched from the enabled instanced vertex
+            attribute arrays is calculated as
+    <math overflow="scroll">
+                  <mrow>
+                    <mfenced open="" close="">
+                      <mfrac>
+                        <mrow>
+                          <mi>gl</mi>
+                          <mo>_</mo>
+                          <mi>InstanceID</mi>
+                        </mrow>
+                        <mi>divisor</mi>
+                      </mfrac>
+                    </mfenced>
+                    <mo lspace="2px" rspace="2px"></mo>
+                    <mi>baseInstance</mi>
+                  </mrow>
+                </math>
+    . Note that
+    <a class="parameter" href="#param-baseinstance">baseinstance</a>
+    does not affect the
+            shader-visible value of
+    <span class="constant">gl_InstanceID</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glDrawElementsInstancedBaseInstance.html">glDrawElementsInstancedBaseInstance</a>
+    is available only if the GL version is 4.2 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_LINE_STRIP_ADJACENCY</span>
+    ,
+    <span class="constant">GL_LINES_ADJACENCY</span>
+    ,
+    <span class="constant">GL_TRIANGLE_STRIP_ADJACENCY</span>
+    and
+    <span class="constant">GL_TRIANGLES_ADJACENCY</span>
+    are available only if the GL version is 3.2 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-mode">mode</a>
+    is not one of
+    <span class="constant">GL_POINTS</span>
+    ,
+    <span class="constant">GL_LINE_STRIP</span>
+    ,
+    <span class="constant">GL_LINE_LOOP</span>
+    ,
+    <span class="constant">GL_LINES</span>
+    ,
+    <span class="constant">GL_TRIANGLE_STRIP</span>
+    ,
+    <span class="constant">GL_TRIANGLE_FAN</span>
+    , or
+    <span class="constant">GL_TRIANGLES</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-count">count</a>
+    or
+    <a class="parameter" href="#param-instancecount">instancecount</a>
+    is negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a geometry shader is active and
+    <a class="parameter" href="#param-mode">mode</a>
+    is incompatible with the input primitive type of the geometry shader in the currently installed program object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to an
+            enabled array and the buffer object's data store is currently mapped.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glDrawElementsInstancedBaseInstance.html">glDrawElementsInstancedBaseInstance</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    ,
+    <a class="crossref" href="./glDrawArraysInstanced.html">glDrawArraysInstanced</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

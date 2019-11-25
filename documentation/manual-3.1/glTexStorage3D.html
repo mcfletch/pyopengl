@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glTexStorage3D : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glTexStorage3D</h1>
+</header>
+<main class="content">
+    <section class="purpose">simultaneously specify storage for all levels of a three-dimensional, two-dimensional array or cube-map array texture</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexStorage3D"></a>
+    <span class="c-function">glTexStorage3D</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-levels" class="parameter">levels</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-depth" class="parameter">depth</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexStorage3D"></a>
+    <span class="py-function">glTexStorage3D</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-levels" class="parameter">levels</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-depth" class="parameter">depth</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glTextureStorage3D"></a>
+    <span class="c-function">glTextureStorage3D</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-levels" class="parameter">levels</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-depth" class="parameter">depth</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTextureStorage3D"></a>
+    <span class="py-function">glTextureStorage3D</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-levels" class="parameter">levels</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-depth" class="parameter">depth</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target to which the texture object is
+                    bound for
+    <a class="function" href="./glTexStorage3D.html">glTexStorage3D</a>
+    . Must be
+                    one of
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    ,
+    <span class="constant">GL_PROXY_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_PROXY_TEXTURE_2D_ARRAY</span>
+    or
+    <span class="constant">GL_PROXY_TEXTURE_CUBE_MAP_ARRAY</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the texture object name for
+    <a class="function" href="./glTexStorage3D.html#c-glTextureStorage3D">glTextureStorage3D</a>
+    . The effective
+                    target of
+    <a class="parameter" href="#param-texture">texture</a>
+    must be one of
+                    the valid non-proxy
+    <a class="parameter" href="#param-target">target</a>
+    values
+                    above.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-levels"></a>
+                        levels
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the number of texture levels.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalformat"></a>
+                        internalformat
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the sized internal format to be used to store texture image data.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the width of the texture, in texels.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-height"></a>
+                        height
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the height of the texture, in texels.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-depth"></a>
+                        depth
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the depth of the texture, in texels.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glTexStorage3D.html">glTexStorage3D</a>
+    and
+    <a class="function" href="./glTexStorage3D.html#c-glTextureStorage3D">glTextureStorage3D</a>
+    specify the
+            storage requirements for all levels
+            of a three-dimensional, two-dimensional array or cube-map array texture simultaneously. Once a texture is specified with this
+            command, the format and dimensions of all levels become immutable unless it is a proxy
+            texture. The contents of the image may still be modified, however, its storage requirements
+            may not change. Such a texture is referred to as an
+    <span class="emphasis">immutable-format</span>
+    texture.
+</div>
+    <div class="para">
+            The behavior of
+    <a class="function" href="./glTexStorage3D.html">glTexStorage3D</a>
+    depends on the
+    <a class="parameter" href="#param-target">target</a>
+    parameter.
+            When
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_TEXTURE_3D</span>
+    , or
+    <span class="constant">GL_PROXY_TEXTURE_3D</span>
+    ,
+            calling
+    <a class="function" href="./glTexStorage3D.html">glTexStorage3D</a>
+    is equivalent, assuming no errors are generated,
+            to executing the following pseudo-code:
+</div>
+    <div class="programlisting">    for (i = 0; i &lt; levels; i++) {
+        glTexImage3D(target, i, internalformat, width, height, depth, 0, format, type, NULL);
+        width = max(1, (width / 2));
+        height = max(1, (height / 2));
+        depth = max(1, (depth / 2));
+    }</div>
+    <div class="para">
+            When
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_PROXY_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    , or
+    <span class="constant">GL_PROXY_TEXTURE_CUBE_MAP_ARRAY</span>
+    ,
+    <a class="function" href="./glTexStorage3D.html">glTexStorage3D</a>
+    is equivalent to:
+</div>
+    <div class="programlisting">    for (i = 0; i &lt; levels; i++) {
+        glTexImage3D(target, i, internalformat, width, height, depth, 0, format, type, NULL);
+        width = max(1, (width / 2));
+        height = max(1, (height / 2));
+    }</div>
+    <div class="para">
+            Calling
+    <a class="function" href="./glTexStorage3D.html#c-glTextureStorage3D">glTextureStorage3D</a>
+    is equivalent to the
+            above pseudo-code, where
+    <a class="parameter" href="#param-target">target</a>
+    is the
+            effective target of
+    <a class="parameter" href="#param-texture">texture</a>
+    and it is as
+            if
+    <a class="parameter" href="#param-texture">texture</a>
+    were bound to
+    <a class="parameter" href="#param-target">target</a>
+    for the purposes of
+    <a class="function" href="./glTexImage3D.html">glTexImage3D</a>
+    .
+</div>
+    <div class="para">
+            Since no texture data is actually provided, the values used in the pseudo-code
+            for
+    <a class="parameter" href="#param-format">format</a>
+    and
+    <a class="parameter" href="#param-type">type</a>
+    are
+            irrelevant and may be considered to be any values that are legal for the
+            chosen
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    enumerant.
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    must be one of the sized internal formats given in Table 1 below, one of the sized depth-component
+            formats
+    <span class="constant">GL_DEPTH_COMPONENT32F</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENT24</span>
+    , or
+    <span class="constant">GL_DEPTH_COMPONENT16</span>
+    , one of the combined depth-stencil formats,
+    <span class="constant">GL_DEPTH32F_STENCIL8</span>
+    , or
+    <span class="constant">GL_DEPTH24_STENCIL8</span>
+    , or the
+            stencil-only format,
+    <span class="constant">GL_STENCIL_INDEX8</span>
+    . Upon success,
+            the value of
+    <span class="constant">GL_TEXTURE_IMMUTABLE_FORMAT</span>
+    becomes
+    <span class="constant">GL_TRUE</span>
+    . The value of
+    <span class="constant">GL_TEXTURE_IMMUTABLE_FORMAT</span>
+    may be discovered by calling
+    <a class="crossref" href="./glGetTexParameter.html">glGetTexParameter</a>
+    with
+    <a class="parameter" href="#param-pname">pname</a>
+    set to
+    <span class="constant">GL_TEXTURE_IMMUTABLE_FORMAT</span>
+    .
+            No further changes to the dimensions or format of the texture object may be
+            made. Using any command that might alter the dimensions or format of the
+            texture object (such as
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    or
+            another call to
+    <a class="function" href="./glTexStorage3D.html">glTexStorage3D</a>
+    ) will result in the
+            generation of a
+    <span class="constant">GL_INVALID_OPERATION</span>
+    error, even if it
+            would not, in fact, alter the dimensions or format of the object.
+</div>
+    <div class="para">
+    <div class="include"></div>
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <span class="constant">GL_STENCIL_INDEX8</span>
+    is accepted for
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    only if the GL version is 4.4 or higher.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glTexStorage3D.html">glTexStorage3D</a>
+    if zero is bound to
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glTexStorage3D.html#c-glTextureStorage3D">glTextureStorage3D</a>
+    if
+    <a class="parameter" href="#param-texture">texture</a>
+    is not the name of an existing
+            texture object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is not a
+            valid sized internal format.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    or the effective target of
+    <a class="parameter" href="#param-texture">texture</a>
+    is not one of the accepted
+            targets described above.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-width">width</a>
+    ,
+    <a class="parameter" href="#param-height">height</a>
+    ,
+    <a class="parameter" href="#param-depth">depth</a>
+    or
+    <a class="parameter" href="#param-levels">levels</a>
+    are less than 1.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_TEXTURE_3D</span>
+    or
+    <span class="constant">GL_PROXY_TEXTURE_3D</span>
+    and
+    <a class="parameter" href="#param-levels">levels</a>
+    is greater than
+    <math overflow="scroll">
+                  <mrow>
+                    <mfenced open="" close="">
+                      <mrow>
+                        <msub>
+                          <mi>log</mi>
+                          <mn>2</mn>
+                        </msub>
+                        <mfenced open="(" close=")">
+                          <mrow>
+                            <mi>max</mi>
+                            <mfenced open="(" close=")">
+                              <mrow>
+                                <mi>width</mi>
+                                <mo>,</mo>
+                                <mtext fontfamily="Times New Roman"></mtext>
+                                <mi>height</mi>
+                                <mo>,</mo>
+                                <mtext fontfamily="Times New Roman"></mtext>
+                                <mi>depth</mi>
+                              </mrow>
+                            </mfenced>
+                          </mrow>
+                        </mfenced>
+                      </mrow>
+                    </mfenced>
+                    <mo>+</mo>
+                    <mn>1</mn>
+                  </mrow>
+                </math>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_PROXY_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXURE_CUBE_MAP_ARRAY</span>
+    , or
+    <span class="constant">GL_PROXY_TEXTURE_CUBE_MAP_ARRAY</span>
+    and
+    <a class="parameter" href="#param-levels">levels</a>
+    is greater than
+    <math overflow="scroll">
+                  <mrow>
+                    <mfenced open="" close="">
+                      <mrow>
+                        <msub>
+                          <mi>log</mi>
+                          <mn>2</mn>
+                        </msub>
+                        <mfenced open="(" close=")">
+                          <mrow>
+                            <mi>max</mi>
+                            <mfenced open="(" close=")">
+                              <mrow>
+                                <mi>width</mi>
+                                <mo>,</mo>
+                                <mtext fontfamily="Times New Roman"></mtext>
+                                <mi>height</mi>
+                              </mrow>
+                            </mfenced>
+                          </mrow>
+                        </mfenced>
+                      </mrow>
+                    </mfenced>
+                    <mo>+</mo>
+                    <mn>1</mn>
+                  </mrow>
+                </math>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glTexStorage3D.html">glTexStorage3D</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glTexStorage3D.html#c-glTextureStorage3D">glTextureStorage3D</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexStorage1D.html">glTexStorage1D</a>
+    ,
+    <a class="crossref" href="./glTexStorage2D.html">glTexStorage2D</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

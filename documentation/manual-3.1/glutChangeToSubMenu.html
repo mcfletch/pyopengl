@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutChangeToSubMenu : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutChangeToSubMenu</h1>
+</header>
+<main class="content">
+    <section class="purpose">changes the specified menu item in the current menu into a sub-menu trigger.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutChangeToSubMenu"></a>
+    <span class="c-function">glutChangeToSubMenu</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-entry" class="parameter">entry</a>
+        )
+        ,
+    </span><span class="param-def">
+        char(
+            <a href="#param-name" class="parameter">name</a>
+        )
+        ,
+    </span><span class="param-def">
+        int(
+            <a href="#param-menu" class="parameter">menu</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutChangeToSubMenu"></a>
+    <span class="py-function">glutChangeToSubMenu</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-item" class="parameter">item</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-label" class="parameter">label</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-value" class="parameter">value</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutChangeToSubMenu( c_int(item), STRING(label), c_int(value) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-entry"></a>
+                        entry
+                    </th>
+                    <td>
+    <div class="simpara">
+						Index into the menu items of the current menu (1 is the topmost menu item).
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="simpara">
+						ASCII character string to display in the menu item to cascade the sub-menu from.
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-menu"></a>
+                        menu
+                    </th>
+                    <td>
+    <div class="simpara">
+						Identifier of the menu to cascade from this sub-menu menu item.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutChangeToSubMenu.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutChangeToSubMenu.html">glutChangeToSubMenu</a>
+    changes the specified menu item in the current menu into a sub-menu trigger.
+			The entry parameter determines which menu item should be changed, with one being the topmost item. entry must be
+			between 1 and
+    <a class="function" href="./glutGet.html">glutGet(GLUT_MENU_NUM_ITEMS)</a>
+    inclusive. The menu item to change
+			does not have to be a sub-menu trigger already. The string name will be displayed for the newly changed sub-menu
+			trigger. The menu identifier names the sub-menu to cascade from the newly added sub-menu trigger.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutChangeToMenuEntry.html">glutChangeToMenuEntry</a>
+            <a class="crossref" href="./glutAddSubMenu.html">glutAddSubMenu</a>
+            <a class="crossref" href="./glutRemoveMenuItem.html">glutRemoveMenuItem</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutForceJoystickFunc : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutForceJoystickFunc</h1>
+</header>
+<main class="content">
+    <section class="purpose">forces current window's joystick callback to be called.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutForceJoystickFunc"></a>
+    <span class="c-function">glutForceJoystickFunc</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutForceJoystickFunc"></a>
+    <span class="py-function">glutForceJoystickFunc</span>( <span class="parameter-list">
+</span> )
+    <pre class="pydoc">glutForceJoystickFunc(  ) -&gt; None</pre>
+</div>
+        </div>
+    </section>
+    <section class="section" id="glutForceJoystickFunc.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutForceJoystickFunc.html">glutForceJoystickFunc</a>
+    forces the current window's joystick callback to be called, reporting the
+			latest joystick state.
+</div>
+    <div class="para">
+			The joystick callback is called either due to polling of the joystick at the uniform timer interval set by
+    <a class="function" href="./glutJoystickFunc.html">glutJoystickFunc</a>
+    's
+    <a class="parameter" href="#param-pollInterval">pollInterval</a>
+    (specified in milliseconds) or in
+			response to calling
+    <a class="function" href="./glutForceJoystickFunc.html">glutForceJoystickFunc</a>
+    . If the
+    <a class="parameter" href="#param-pollInterval">pollInterval</a>
+    is
+			non-positive, no joystick polling is performed and the GLUT application must frequently (usually from an idle callback)
+			call
+    <a class="function" href="./glutForceJoystickFunc.html">glutForceJoystickFunc</a>
+    .
+</div>
+    <div class="para">
+			The joystick callback will be called once (if one exists) for each time
+    <a class="function" href="./glutForceJoystickFunc.html">glutForceJoystickFunc</a>
+    is
+			called. The callback is called from
+    <a class="function" href="./glutJoystickFunc.html">glutJoystickFunc</a>
+    . That is, when
+    <a class="function" href="./glutJoystickFunc.html">glutJoystickFunc</a>
+    returns, the callback will have already happened.
+</div>
+    </section><section class="section" id="glutForceJoystickFunc.3GLUT-glut_implementation_notes_for_x11">
+    <h2 class="title">Glut Implementation Notes For X11</h2>
+    <div class="para">
+			The current implementation of GLUT for X11 supports the joystick API, but not actual joystick input. A future
+			implementation of GLUT for X11 may add joystick support.
+		</div>
+    </section><section class="section" id="glutForceJoystickFunc.3GLUT-glut_implementation_notes_for_win32">
+    <h2 class="title">Glut Implementation Notes For Win32</h2>
+    <div class="para">
+			The current implementation of GLUT for Win32 supports the joystick API and joystick input, but does so through the
+			dated joySetCapture and joyGetPosEx Win32 Multimedia API. The current GLUT joystick support for Win32 has all the
+			limitations of the Win32 Multimedia API joystick support. A future implementation of GLUT for Win32 may use
+			DirectInput.
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutJoystickFunc.html">glutJoystickFunc</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

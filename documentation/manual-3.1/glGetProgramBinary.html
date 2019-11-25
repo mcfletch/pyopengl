@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetProgramBinary : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetProgramBinary</h1>
+</header>
+<main class="content">
+    <section class="purpose">return a binary representation of a program object's compiled and linked executable source</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetProgramBinary"></a>
+    <span class="c-function">glGetProgramBinary</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei *(
+            <a href="#param-length" class="parameter">length</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum *(
+            <a href="#param-binaryFormat" class="parameter">binaryFormat</a>
+        )
+        ,
+    </span><span class="param-def">
+        void *(
+            <a href="#param-binary" class="parameter">binary</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetProgramBinary"></a>
+    <span class="py-function">glGetProgramBinary</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-length" class="parameter">length</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-binaryFormat" class="parameter">binaryFormat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-binary" class="parameter">binary</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the name of a program object whose binary representation to retrieve.
+            </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bufSize"></a>
+                        bufSize
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the size of the buffer whose address is given by
+    <a class="parameter" href="#param-binary">binary</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-length"></a>
+                        length
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the address of a variable to receive the number of bytes written into
+    <a class="parameter" href="#param-binary">binary</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-binaryFormat"></a>
+                        binaryFormat
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the address of a variable to receive a token indicating the format of the binary data returned by the GL.
+            </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-binary"></a>
+                        binary
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the address an array into which the GL will return
+    <a class="parameter" href="#param-program">program</a>
+    's binary representation.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetProgramBinary.html">glGetProgramBinary</a>
+    returns a binary representation of the compiled
+            and linked executable for
+    <a class="parameter" href="#param-program">program</a>
+    into the array of bytes whose
+            address is specified in
+    <a class="parameter" href="#param-binary">binary</a>
+    . The maximum number of bytes that
+            may be written into
+    <a class="parameter" href="#param-binary">binary</a>
+    is specified by
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    .
+            If the program binary is greater in size than
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    bytes,
+            then an error is generated, otherwise the actual number of bytes written into
+    <a class="parameter" href="#param-binary">binary</a>
+    is returned in the variable whose address is given by
+    <a class="parameter" href="#param-length">length</a>
+    . If
+    <a class="parameter" href="#param-length">length</a>
+    is
+    <span class="constant">NULL</span>
+    , then no length is returned.
+</div>
+    <div class="para">
+            The format of the program binary written into
+    <a class="parameter" href="#param-binary">binary</a>
+    is returned in
+            the variable whose address is given by
+    <a class="parameter" href="#param-binaryFormat">binaryFormat</a>
+    , and may be implementation dependent. The binary produced
+            by the GL may subsequently be returned to the GL by calling
+    <a class="crossref" href="./glProgramBinary.html">glProgramBinary</a>
+    ,
+            with
+    <a class="parameter" href="#param-binaryFormat">binaryFormat</a>
+    and
+    <a class="parameter" href="#param-length">length</a>
+    set to the values
+            returned by
+    <a class="function" href="./glGetProgramBinary.html">glGetProgramBinary</a>
+    , and passing the returned binary data
+            in the
+    <a class="parameter" href="#param-binary">binary</a>
+    parameter.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    is less than
+            the size of
+    <span class="constant">GL_PROGRAM_BINARY_LENGTH</span>
+    for
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <span class="constant">GL_LINK_STATUS</span>
+    for the
+            program object is false.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    with argument
+    <span class="constant">GL_PROGRAM_BINARY_LENGTH</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetProgramBinary.html">glGetProgramBinary</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    ,
+    <a class="crossref" href="./glProgramBinary.html">glProgramBinary</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

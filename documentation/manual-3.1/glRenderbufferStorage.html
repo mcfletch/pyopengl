@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glRenderbufferStorage : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glRenderbufferStorage</h1>
+</header>
+<main class="content">
+    <section class="purpose">establish data storage, format and dimensions of a
+    renderbuffer object's image</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glNamedRenderbufferStorage"></a>
+    <span class="c-function">glNamedRenderbufferStorage</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-renderbuffer" class="parameter">renderbuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glNamedRenderbufferStorage"></a>
+    <span class="py-function">glNamedRenderbufferStorage</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-renderbuffer" class="parameter">renderbuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glRenderbufferStorage"></a>
+    <span class="c-function">glRenderbufferStorage</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glRenderbufferStorage"></a>
+    <span class="py-function">glRenderbufferStorage</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">Specifies a binding target of the allocation for
+    <a class="function" href="./glRenderbufferStorage.html">glRenderbufferStorage</a>
+    function. Must be
+    <span class="constant">GL_RENDERBUFFER</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-renderbuffer"></a>
+                        renderbuffer
+                    </th>
+                    <td>
+    <div class="para">Specifies the name of the renderbuffer object for
+    <a class="function" href="./glRenderbufferStorage.html#c-glNamedRenderbufferStorage">glNamedRenderbufferStorage</a>
+    function.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalformat"></a>
+                        internalformat
+                    </th>
+                    <td>
+    <div class="para">Specifies the internal format to use for the renderbuffer
+          object's image.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">Specifies the width of the renderbuffer, in pixels.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-height"></a>
+                        height
+                    </th>
+                    <td>
+    <div class="para">Specifies the height of the renderbuffer, in pixels.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glRenderbufferStorage.html">glRenderbufferStorage</a>
+    is equivalent to calling
+    <a class="crossref" href="./glRenderbufferStorageMultisample.html">glRenderbufferStorageMultisample</a>
+    with the
+    <a class="parameter" href="#param-samples">samples</a>
+    set to zero, and
+    <a class="function" href="./glRenderbufferStorage.html#c-glNamedRenderbufferStorage">glNamedRenderbufferStorage</a>
+    is equivalent to calling
+    <a class="function" href="./glRenderbufferStorageMultisample.html#c-glNamedRenderbufferStorageMultisample">glNamedRenderbufferStorageMultisample</a>
+    with the
+    samples set to zero.
+</div>
+    <div class="para">For
+    <a class="function" href="./glRenderbufferStorage.html">glRenderbufferStorage</a>
+    , the target of the
+    operation, specified by
+    <a class="parameter" href="#param-target">target</a>
+    must be
+    <span class="constant">GL_RENDERBUFFER</span>
+    . For
+    <a class="function" href="./glRenderbufferStorage.html#c-glNamedRenderbufferStorage">glNamedRenderbufferStorage</a>
+    ,
+    <a class="parameter" href="#param-renderbuffer">renderbuffer</a>
+    must be a name of an existing
+    renderbuffer object.
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    specifies the
+    internal format to be used for the renderbuffer object's storage and must
+    be a color-renderable, depth-renderable, or stencil-renderable format.
+    <a class="parameter" href="#param-width">width</a>
+    and
+    <a class="parameter" href="#param-height">height</a>
+    are the
+    dimensions, in pixels, of the renderbuffer. Both
+    <a class="parameter" href="#param-width">width</a>
+    and
+    <a class="parameter" href="#param-height">height</a>
+    must be
+    less than or equal to the value of
+    <span class="constant">GL_MAX_RENDERBUFFER_SIZE</span>
+    .
+</div>
+    <div class="para">Upon success,
+    <a class="function" href="./glRenderbufferStorage.html">glRenderbufferStorage</a>
+    and
+    <a class="function" href="./glRenderbufferStorage.html#c-glNamedRenderbufferStorage">glNamedRenderbufferStorage</a>
+    delete any existing data
+    store for the renderbuffer image and the contents of the data store after
+    calling
+    <a class="function" href="./glRenderbufferStorage.html">glRenderbufferStorage</a>
+    are undefined.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glRenderbufferStorage.html">glRenderbufferStorage</a>
+    if
+    <a class="parameter" href="#param-target">target</a>
+    is not
+    <span class="constant">GL_RENDERBUFFER</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    glNamedRenderbufferStorage if
+    <a class="parameter" href="#param-renderbuffer">renderbuffer</a>
+    is not
+    the name of an existing renderbuffer object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if either of
+    <a class="parameter" href="#param-width">width</a>
+    or
+    <a class="parameter" href="#param-height">height</a>
+    is negative,
+    or greater than the value of
+    <span class="constant">GL_MAX_RENDERBUFFER_SIZE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is not a color-renderable,
+    depth-renderable, or stencil-renderable format.
+</div>
+    <div class="para">
+    <span class="constant">GL_OUT_OF_MEMORY</span>
+    is generated if the GL is
+    unable to create a data store of the requested size.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glRenderbufferStorage.html#c-glNamedRenderbufferStorage">glNamedRenderbufferStorage</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glRenderbufferStorage.html">glRenderbufferStorage</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenRenderbuffers.html">glGenRenderbuffers</a>
+    ,
+    <a class="crossref" href="./glBindRenderbuffer.html">glBindRenderbuffer</a>
+    ,
+    <a class="function" href="./glRenderbufferStorageMultisample.html#c-glNamedRenderbufferStorageMultisample">glNamedRenderbufferStorageMultisample</a>
+    ,
+    <a class="crossref" href="./glRenderbufferStorageMultisample.html">glRenderbufferStorageMultisample</a>
+    ,
+    <a class="crossref" href="./glFramebufferRenderbuffer.html">glFramebufferRenderbuffer</a>
+    ,
+    <a class="crossref" href="./glDeleteRenderbuffers.html">glDeleteRenderbuffers</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glRenderbufferStorage</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_2.py">tests/shadow_2.py</a>
+    Lines: <span class="sample-lines">99</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

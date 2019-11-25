@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glColorTableParameter : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glColorTableParameter</h1>
+</header>
+<main class="content">
+    <section class="purpose">set color lookup table parameters</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glColorTableParameter"></a>
+    <span class="c-function">glColorTableParameter</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColorTableParameterfv"></a>
+    <span class="c-function">glColorTableParameterfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLfloat * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColorTableParameterfv"></a>
+    <span class="py-function">glColorTableParameterfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glColorTableParameteriv"></a>
+    <span class="c-function">glColorTableParameteriv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColorTableParameteriv"></a>
+    <span class="py-function">glColorTableParameteriv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    The target color table.
+                    Must be
+    <span class="constant">GL_COLOR_TABLE</span>
+    ,
+    <span class="constant">GL_POST_CONVOLUTION_COLOR_TABLE</span>
+    , or
+    <span class="constant">GL_POST_COLOR_MATRIX_COLOR_TABLE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    The symbolic name of a texture color lookup table parameter.
+                    Must be one of
+    <span class="constant">GL_COLOR_TABLE_SCALE</span>
+    or
+    <span class="constant">GL_COLOR_TABLE_BIAS</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">
+                    A pointer to an array where the values of the parameters are stored.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glColorTableParameter.html">glColorTableParameter</a>
+    is used to specify the scale factors and bias terms applied to
+            color components when they are loaded into a color table.
+    <a class="parameter" href="#param-target">target</a>
+    indicates which color table the scale and bias terms apply to; it
+            must be set to
+    <span class="constant">GL_COLOR_TABLE</span>
+    ,
+    <span class="constant">GL_POST_CONVOLUTION_COLOR_TABLE</span>
+    , or
+    <span class="constant">GL_POST_COLOR_MATRIX_COLOR_TABLE</span>
+    .
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-pname">pname</a>
+    must be
+    <span class="constant">GL_COLOR_TABLE_SCALE</span>
+    to set the
+            scale factors.
+            In this case,
+    <a class="parameter" href="#param-params">params</a>
+    points to an array of four values, which are
+            the scale factors for red, green, blue, and alpha, in that order.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-pname">pname</a>
+    must be
+    <span class="constant">GL_COLOR_TABLE_BIAS</span>
+    to set the
+            bias terms. In this case,
+    <a class="parameter" href="#param-params">params</a>
+    points to an array of four values, which are the bias
+            terms for red, green, blue, and alpha, in that order.
+</div>
+    <div class="para">
+            The color tables themselves are specified by
+            calling
+    <a class="crossref" href="./glColorTable.html">glColorTable</a>
+    .
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glColorTableParameter.html">glColorTableParameter</a>
+    is available only if
+    <div class="code">ARB_imaging</div>
+    is returned from calling
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+    with an argument of
+    <span class="constant">GL_EXTENSIONS</span>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    or
+    <a class="parameter" href="#param-pname">pname</a>
+    is not
+            an acceptable value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glColorTableParameter.html">glColorTableParameter</a>
+    is executed
+            between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding
+            execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetColorTableParameter.html">glGetColorTableParameter</a>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glColorTable.html">glColorTable</a>
+    ,
+    <a class="crossref" href="./glPixelTransfer.html">glPixelTransfer</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

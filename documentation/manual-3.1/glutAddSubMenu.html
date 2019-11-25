@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutAddSubMenu : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutAddSubMenu</h1>
+</header>
+<main class="content">
+    <section class="purpose">adds a sub-menu trigger to the bottom of the current menu.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutAddSubMenu"></a>
+    <span class="c-function">glutAddSubMenu</span>(<span class="parameter-list">
+    <span class="param-def">
+        char(
+            <a href="#param-name" class="parameter">name</a>
+        )
+        ,
+    </span><span class="param-def">
+        int(
+            <a href="#param-menu" class="parameter">menu</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutAddSubMenu"></a>
+    <span class="py-function">glutAddSubMenu</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-label" class="parameter">label</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-subMenu" class="parameter">subMenu</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutAddSubMenu( STRING(label), c_int(subMenu) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="simpara">
+						ASCII character string to display in the menu item from which to cascade the sub-menu.
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-menu"></a>
+                        menu
+                    </th>
+                    <td>
+    <div class="simpara">
+						Identifier of the menu to cascade from this sub-menu menu item.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutAddSubMenu.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutAddSubMenu.html">glutAddSubMenu</a>
+    adds a sub-menu trigger to the bottom of the current menu. The string name will be
+			displayed for the newly added sub-menu trigger. If the sub-menu trigger is entered, the sub-menu numbered menu will be
+			cascaded, allowing sub-menu menu items to be selected.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutAddMenuEntry.html">glutAddMenuEntry</a>
+            <a class="crossref" href="./glutChangeToSubMenu.html">glutChangeToSubMenu</a>
+            <a class="crossref" href="./glutRemoveMenuItem.html">glutRemoveMenuItem</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutAddSubMenu</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/glutvrmltestingcontext.py">OpenGLContext/glutvrmltestingcontext.py</a>
+    Lines: <span class="sample-lines">36, 37</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/simple/simpleInteraction.py">PyOpenGL-Demo/proesch/simple/simpleInteraction.py</a>
+    Lines: <span class="sample-lines">123</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

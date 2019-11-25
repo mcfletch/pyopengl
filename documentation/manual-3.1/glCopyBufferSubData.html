@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glCopyBufferSubData : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glCopyBufferSubData</h1>
+</header>
+<main class="content">
+    <section class="purpose">copy all or part of the data store of a buffer object to the data store of another buffer object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glCopyBufferSubData"></a>
+    <span class="c-function">glCopyBufferSubData</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-readTarget" class="parameter">readTarget</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-writeTarget" class="parameter">writeTarget</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLintptr (
+            <a href="#param-readOffset" class="parameter">readOffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLintptr (
+            <a href="#param-writeOffset" class="parameter">writeOffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizeiptr (
+            <a href="#param-size" class="parameter">size</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glCopyBufferSubData"></a>
+    <span class="py-function">glCopyBufferSubData</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-readTarget" class="parameter">readTarget</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-writeTarget" class="parameter">writeTarget</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-readOffset" class="parameter">readOffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-writeOffset" class="parameter">writeOffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-size" class="parameter">size</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glCopyNamedBufferSubData"></a>
+    <span class="c-function">glCopyNamedBufferSubData</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-readBuffer" class="parameter">readBuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-writeBuffer" class="parameter">writeBuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLintptr (
+            <a href="#param-readOffset" class="parameter">readOffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLintptr (
+            <a href="#param-writeOffset" class="parameter">writeOffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizeiptr (
+            <a href="#param-size" class="parameter">size</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glCopyNamedBufferSubData"></a>
+    <span class="py-function">glCopyNamedBufferSubData</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-readBuffer" class="parameter">readBuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-writeBuffer" class="parameter">writeBuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-readOffset" class="parameter">readOffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-writeOffset" class="parameter">writeOffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-size" class="parameter">size</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-readTarget"></a>
+                        readTarget
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target to which the source buffer object
+                    is bound for
+    <a class="function" href="./glCopyBufferSubData.html">glCopyBufferSubData</a>
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-writeTarget"></a>
+                        writeTarget
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target to which the destination buffer
+                    object is bound for
+    <a class="function" href="./glCopyBufferSubData.html">glCopyBufferSubData</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-readBuffer"></a>
+                        readBuffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the source buffer object for
+    <a class="function" href="./glCopyBufferSubData.html#c-glCopyNamedBufferSubData">glCopyNamedBufferSubData</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-writeBuffer"></a>
+                        writeBuffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the destination buffer object for
+    <a class="function" href="./glCopyBufferSubData.html#c-glCopyNamedBufferSubData">glCopyNamedBufferSubData</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-readOffset"></a>
+                        readOffset
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the offset, in basic machine units, within the
+                    data store of the source buffer object at which data
+                    will be read.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-writeOffset"></a>
+                        writeOffset
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the offset, in basic machine units, within the
+                    data store of the destination buffer object at which
+                    data will be written.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-size"></a>
+                        size
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the size, in basic machine units, of the data
+                    to be copied from the source buffer object to the
+                    destination buffer object.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glCopyBufferSubData.html">glCopyBufferSubData</a>
+    and
+    <a class="function" href="./glCopyBufferSubData.html#c-glCopyNamedBufferSubData">glCopyNamedBufferSubData</a>
+    copy part of the
+            data store attached to a source buffer object to the data store
+            attached to a destination buffer object. The number of basic
+            machine units indicated by
+    <a class="parameter" href="#param-size">size</a>
+    is copied
+            from the source at offset
+    <a class="parameter" href="#param-readOffset">readOffset</a>
+    to
+            the destination at
+    <a class="parameter" href="#param-writeOffset">writeOffset</a>
+    .
+    <a class="parameter" href="#param-readOffset">readOffset</a>
+    ,
+    <a class="parameter" href="#param-writeOffset">writeOffset</a>
+    and
+    <a class="parameter" href="#param-size">size</a>
+    are in terms of basic machine units.
+</div>
+    <div class="para">
+            For
+    <a class="function" href="./glCopyBufferSubData.html">glCopyBufferSubData</a>
+    ,
+    <a class="parameter" href="#param-readTarget">readTarget</a>
+    and
+    <a class="parameter" href="#param-writeTarget">writeTarget</a>
+    specify the targets to which
+            the source and destination buffer objects are bound, and must
+            each be one of the buffer binding targets in the following
+            table:
+</div>
+    <div class="include"></div>
+    <div class="para">
+            Any of these targets may be used, but the targets
+    <span class="constant">GL_COPY_READ_BUFFER</span>
+    and
+    <span class="constant">GL_COPY_WRITE_BUFFER</span>
+    are provided
+            specifically to allow copies between buffers without disturbing
+            other GL state.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-readOffset">readOffset</a>
+    ,
+    <a class="parameter" href="#param-writeOffset">writeOffset</a>
+    and
+    <a class="parameter" href="#param-size">size</a>
+    must all be greater than or equal to
+            zero. Furthermore, $readOffset+size$ must not exceeed the size
+            of the source buffer object, and $writeOffset+size$ must not
+            exceeed the size of the buffer bound to
+    <a class="parameter" href="#param-writeTarget">writeTarget</a>
+    . If the source and
+            destination are the same buffer object, then the source and
+            destination ranges must not overlap.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            The
+    <span class="constant">GL_DISPATCH_INDIRECT_BUFFER</span>
+    and
+    <span class="constant">GL_SHADER_STORAGE_BUFFER</span>
+    targets are
+            available only if the GL version is 4.3 or greater.
+</div>
+    <div class="para">
+            The
+    <span class="constant">GL_QUERY_BUFFER</span>
+    target is available
+            only if the GL version is 4.4 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glCopyBufferSubData.html">glCopyBufferSubData</a>
+    if
+    <a class="parameter" href="#param-readTarget">readTarget</a>
+    or
+    <a class="parameter" href="#param-writeTarget">writeTarget</a>
+    is not one of the buffer
+            binding targets listed above.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glCopyBufferSubData.html">glCopyBufferSubData</a>
+    if zero is bound to
+    <a class="parameter" href="#param-readTarget">readTarget</a>
+    or
+    <a class="parameter" href="#param-writeTarget">writeTarget</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glCopyBufferSubData.html#c-glCopyNamedBufferSubData">glCopyNamedBufferSubData</a>
+    if
+    <a class="parameter" href="#param-readBuffer">readBuffer</a>
+    or
+    <a class="parameter" href="#param-writeBuffer">writeBuffer</a>
+    is not the name of an
+            existing buffer object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if any of
+    <a class="parameter" href="#param-readOffset">readOffset</a>
+    ,
+    <a class="parameter" href="#param-writeOffset">writeOffset</a>
+    or
+    <a class="parameter" href="#param-size">size</a>
+    is negative, if $readOffset + size$
+            is greater than the size of the source buffer object (its value
+            of
+    <span class="constant">GL_BUFFER_SIZE</span>
+    ), or if $writeOffset +
+            size$ is greater than the size of the destination buffer object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if the source
+            and destination are the same buffer object, and the ranges
+            $[readOffset,readOffset+size)$ and
+            $[writeOffset,writeOffset+size)$ overlap.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if either
+            the source or destination buffer object is mapped with
+    <a class="crossref" href="./glMapBufferRange.html">glMapBufferRange</a>
+    or
+    <a class="crossref" href="./glMapBuffer.html">glMapBuffer</a>
+    ,
+            unless they were mapped with the
+    <span class="constant">GL_MAP_PERSISTENT</span>
+    bit set in the
+    <a class="function" href="./glMapBufferRange.html">glMapBufferRange</a>
+    <a class="parameter" href="#param-access">access</a>
+    flags.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glCopyBufferSubData.html">glCopyBufferSubData</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glCopyBufferSubData.html#c-glCopyNamedBufferSubData">glCopyNamedBufferSubData</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenBuffers.html">glGenBuffers</a>
+    ,
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ,
+    <a class="crossref" href="./glBufferData.html">glBufferData</a>
+    ,
+    <a class="crossref" href="./glBufferSubData.html">glBufferSubData</a>
+    ,
+    <a class="crossref" href="./glGetBufferSubData.html">glGetBufferSubData</a>
+    ,
+    <a class="crossref" href="./glMapBuffer.html">glMapBuffer</a>
+    ,
+    <a class="crossref" href="./glMapBufferRange.html">glMapBufferRange</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

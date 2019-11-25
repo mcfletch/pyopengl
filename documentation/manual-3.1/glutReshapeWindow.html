@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutReshapeWindow : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutReshapeWindow</h1>
+</header>
+<main class="content">
+    <section class="purpose">requests a change to the size of the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutReshapeWindow"></a>
+    <span class="c-function">glutReshapeWindow</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        int(
+            <a href="#param-height" class="parameter">height</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutReshapeWindow"></a>
+    <span class="py-function">glutReshapeWindow</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutReshapeWindow( c_int(width), c_int(height) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="simpara">
+						New width of window in pixels.
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-height"></a>
+                        height
+                    </th>
+                    <td>
+    <div class="simpara">
+						New height of window in pixels.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutReshapeWindow.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutReshapeWindow.html">glutReshapeWindow</a>
+    requests a change in the size of the current window. The
+    <a class="parameter" href="#param-width">width</a>
+    and
+    <a class="parameter" href="#param-height">height</a>
+    parameters are size extents in pixels. The
+    <a class="parameter" href="#param-width">width</a>
+    and
+    <a class="parameter" href="#param-height">height</a>
+    must be positive values.
+</div>
+    <div class="para">
+			The requests by
+    <a class="function" href="./glutReshapeWindow.html">glutReshapeWindow</a>
+    are not processed immediately. The request is executed after
+			returning to the main event loop. This allows multiple
+    <a class="function" href="./glutReshapeWindow.html">glutReshapeWindow</a>
+    ,
+    <a class="function" href="./glutPositionWindow.html">glutPositionWindow</a>
+    , and
+    <a class="function" href="./glutFullScreen.html">glutFullScreen</a>
+    requests
+			to the same window to be coalesced.
+</div>
+    <div class="para">
+			In the case of top-level windows, a
+    <a class="function" href="./glutReshapeWindow.html">glutReshapeWindow</a>
+    call is considered only a request for sizing
+			the window. The window system is free to apply its own policies to top-level window sizing. The intent is that
+			top-level windows should be reshaped according
+    <a class="function" href="./glutReshapeWindow.html">glutReshapeWindow</a>
+    's parameters. Whether a reshape
+			actually takes effect and, if so, the reshaped dimensions are reported to the program by a reshape callback.
+</div>
+    <div class="para">
+    <a class="function" href="./glutReshapeWindow.html">glutReshapeWindow</a>
+    disables the full screen status of a window if previously enabled.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutPositionWindow.html">glutPositionWindow</a>
+            <a class="crossref" href="./glutReshapeFunc.html">glutReshapeFunc</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutReshapeWindow</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glut_fullscreen.py">tests/glut_fullscreen.py</a>
+    Lines: <span class="sample-lines">45</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/ui/window/win_glut.py">pymt/ui/window/win_glut.py</a>
+    Lines: <span class="sample-lines">15, 70</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

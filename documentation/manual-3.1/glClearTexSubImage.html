@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glClearTexSubImage : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glClearTexSubImage</h1>
+</header>
+<main class="content">
+    <section class="purpose">fills all or part of a texture image with a constant value</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearTexSubImage"></a>
+    <span class="c-function">glClearTexSubImage</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-level" class="parameter">level</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-xoffset" class="parameter">xoffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-yoffset" class="parameter">yoffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-zoffset" class="parameter">zoffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-depth" class="parameter">depth</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClearTexSubImage"></a>
+    <span class="py-function">glClearTexSubImage</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-xoffset" class="parameter">xoffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-yoffset" class="parameter">yoffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-zoffset" class="parameter">zoffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-depth" class="parameter">depth</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">
+                    The name of an existing texture object containing the image to be cleared.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-level"></a>
+                        level
+                    </th>
+                    <td>
+    <div class="para">
+                    The level of
+    <a class="parameter" href="#param-texture">texture</a>
+    containing the region to be cleared.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-xoffset"></a>
+                        xoffset
+                    </th>
+                    <td>
+    <div class="para">
+                    The coordinate of the left edge of the region to be cleared.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-yoffset"></a>
+                        yoffset
+                    </th>
+                    <td>
+    <div class="para">
+                    The coordinate of the lower edge of the region to be cleared.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-zoffset"></a>
+                        zoffset
+                    </th>
+                    <td>
+    <div class="para">
+                    The coordinate of the front of the region to be cleared.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">
+                    The width of the region to be cleared.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-height"></a>
+                        height
+                    </th>
+                    <td>
+    <div class="para">
+                    The height of the region to be cleared.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-depth"></a>
+                        depth
+                    </th>
+                    <td>
+    <div class="para">
+                    The depth of the region to be cleared.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-format"></a>
+                        format
+                    </th>
+                    <td>
+    <div class="para">
+                    The format of the data whose address in memory is given by
+    <a class="parameter" href="#param-data">data</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    The type of the data whose address in memory is given by
+    <a class="parameter" href="#param-data">data</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-data"></a>
+                        data
+                    </th>
+                    <td>
+    <div class="para">
+                    The address in memory of the data to be used to clear the specified region.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glClearTexSubImage.html">glClearTexSubImage</a>
+    fills all or part of an image contained in a
+            texture with an application supplied value.
+    <a class="parameter" href="#param-texture">texture</a>
+    must be
+            the name of an existing texture. Further,
+    <a class="parameter" href="#param-texture">texture</a>
+    may not be
+            the name of a buffer texture, nor may its internal format be compressed.
+</div>
+    <div class="para">
+            Arguments
+    <a class="parameter" href="#param-xoffset">xoffset</a>
+    ,
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    , and
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    specify the lower left texel coordinates of
+            a width-wide by height-high by depth-deep rectangular subregion of the texel array.
+</div>
+    <div class="para">
+            For one-dimensional array textures,
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    is interpreted as the first layer to
+            be cleared and
+    <a class="parameter" href="#param-height">height</a>
+    is the number of layers to clear. For two-dimensional array
+            textures,
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    is interpreted as the first layer to be cleared and
+    <a class="parameter" href="#param-depth">depth</a>
+    is the number
+            of layers to clear. Cube map textures are treated as an array of six slices in the z-dimension,
+            where the value of
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    is interpreted as specifying the cube map face
+            for the corresponding layer and
+    <a class="parameter" href="#param-depth">depth</a>
+    is the number of faces to clear.
+            For cube map array textures,
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    is the first layer-face to clear,
+            and
+    <a class="parameter" href="#param-depth">depth</a>
+    is the number of layer-faces to clear. Each layer-face is
+            translated into an array layer and a cube map face as described in the OpenGL Specification.
+</div>
+    <div class="para">
+            Negative values of
+    <a class="parameter" href="#param-xoffset">xoffset</a>
+    ,
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    , and
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    correspond to the coordinates of
+            border texels. Taking
+    <math overflow="scroll"><mi mathvariant="italic">ws</mi></math>
+    ,
+    <math overflow="scroll"><mi mathvariant="italic">hs</mi></math>
+    ,
+    <math overflow="scroll"><mi mathvariant="italic">ds</mi></math>
+    ,
+    <math overflow="scroll"><mi mathvariant="italic">wb</mi></math>
+    ,
+    <math overflow="scroll"><mi mathvariant="italic">hb</mi></math>
+    , and
+    <math overflow="scroll"><mi mathvariant="italic">db</mi></math>
+    to be
+            the specified
+    <a class="parameter" href="#param-width">width</a>
+    ,
+    <a class="parameter" href="#param-height">height</a>
+    ,
+    <a class="parameter" href="#param-depth">depth</a>
+    , and the border width, border height, and border
+            depth of the texel array and taking
+    <math overflow="scroll"><mi mathvariant="italic">x</mi></math>
+    ,
+    <math overflow="scroll"><mi mathvariant="italic">y</mi></math>
+    ,
+    <math overflow="scroll"><mi mathvariant="italic">z</mi></math>
+    ,
+    <math overflow="scroll"><mi mathvariant="italic">w</mi></math>
+    ,
+    <math overflow="scroll"><mi mathvariant="italic">h</mi></math>
+    , and
+    <math overflow="scroll"><mi mathvariant="italic">d</mi></math>
+    to be the
+    <a class="parameter" href="#param-xoffset">xoffset</a>
+    ,
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    ,
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    ,
+    <a class="parameter" href="#param-width">width</a>
+    ,
+    <a class="parameter" href="#param-height">height</a>
+    , and
+    <a class="parameter" href="#param-depth">depth</a>
+    argument values,
+            any of the following relationships generates a
+    <span class="constant">GL_INVALID_OPERATION</span>
+    error:
+    <div class="itemizedlist">
+    <dd class="listitem">
+    <div class="informalequation">
+    <math overflow="scroll">
+                            <mrow>
+                                    <mtext>x</mtext>
+                                    <mo>&lt;</mo>
+                                    <msub>
+                                            <mtext>w</mtext>
+                                            <mtext>b</mtext>
+                                    </msub>
+                            </mrow>
+                        </math>
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="informalequation">
+    <math overflow="scroll">
+                            <mrow>
+                                <mtext mathvariant="italic">x</mtext>
+                                <mo>+</mo>
+                                <mtext mathvariant="italic">w</mtext>
+                                <mo>&gt;</mo>
+                                <msub>
+                                    <mtext mathvariant="italic">w</mtext>
+                                    <mtext mathvariant="italic">s</mtext>
+                                </msub>
+                                <mo>-</mo>
+                                <msub>
+                                    <mtext mathvariant="italic">w</mtext>
+                                    <mtext mathvariant="italic">b</mtext>
+                                </msub>
+                            </mrow>
+                        </math>
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="informalequation">
+    <math overflow="scroll">
+                            <mrow>
+                                <mtext mathvariant="italic">y</mtext>
+                                <mo>&lt;</mo>
+                                <mo>-</mo>
+                                <msub>
+                                    <mtext mathvariant="italic">h</mtext>
+                                    <mtext mathvariant="italic">b</mtext>
+                                </msub>
+                            </mrow>
+                        </math>
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="informalequation">
+    <math overflow="scroll">
+                            <mrow>
+                                <mtext mathvariant="italic">y</mtext>
+                                <mo>+</mo>
+                                <mtext mathvariant="italic">h</mtext>
+                                <mo>&gt;</mo>
+                                <msub>
+                                    <mtext mathvariant="italic">h</mtext>
+                                    <mtext mathvariant="italic">s</mtext>
+                                </msub>
+                                <mo>-</mo>
+                                <msub>
+                                    <mtext mathvariant="italic">h</mtext>
+                                    <mtext mathvariant="italic">b</mtext>
+                                </msub>
+                            </mrow>
+                        </math>
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="informalequation">
+    <math overflow="scroll">
+                            <mrow>
+                                <mtext mathvariant="italic">z</mtext>
+                                <mo>&lt;</mo>
+                                <mo>-</mo>
+                                <msub>
+                                    <mtext mathvariant="italic">d</mtext>
+                                    <mtext mathvariant="italic">b</mtext>
+                                </msub>
+                            </mrow>
+                        </math>
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="informalequation">
+    <math overflow="scroll">
+                            <mrow>
+                                <mtext mathvariant="italic">z</mtext>
+                                <mo>+</mo>
+                                <mtext mathvariant="italic">d</mtext>
+                                <mo>&gt;</mo>
+                                <msub>
+                                    <mtext mathvariant="italic">d</mtext>
+                                    <mtext mathvariant="italic">s</mtext>
+                                </msub>
+                                <mo>-</mo>
+                                <msub>
+                                    <mtext mathvariant="italic">d</mtext>
+                                    <mtext mathvariant="italic">b</mtext>
+                                </msub>
+                            </mrow>
+                        </math>
+</div>
+</dd>
+</div>
+</div>
+    <div class="para">
+            For texture types that do not have certain dimensions, this command treats those
+            dimensions as having a size of 1. For example, to clear a portion of a two-dimensional
+            texture, use
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    equal to zero and
+    <a class="parameter" href="#param-depth">depth</a>
+    equal to one.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-format">format</a>
+    and
+    <a class="parameter" href="#param-type">type</a>
+    specify the format and type of the
+            source data and are interpreted as they are for
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    .
+            Textures with a base internal format of
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    ,
+    <span class="constant">GL_STENCIL_INDEX</span>
+    , or
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    require depth component, stencil, or depth-stencil component data respectively.
+            Textures with other base internal formats require RGBA formats. Textures with integer
+            internal formats require integer data.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    is a pointer to an array of between one and four components of texel
+            data that will be used as the source for the constant fill value. The elements of
+            data are converted by the GL into the internal format of the texture image (that
+            was specified when the level was defined by any of the
+    glTexImage*
+    ,
+    glTexStorage*
+    or
+    glCopyTexImage*
+    commands), and then
+            used to fill the specified range of the destination texture level. If
+    <a class="parameter" href="#param-data">data</a>
+    is
+    <span class="constant">NULL</span>
+    , then
+            the pointer is ignored and the sub-range of the texture image is filled with zeros. If
+            texture is a multisample texture, all the samples in a texel are cleared to the value
+            specified by data.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glClearTexSubImage.html">glClearTexSubImage</a>
+    is available only if the GL version is 4.4 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-texture">texture</a>
+    is zero or not the
+            name of an existing texture object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-texture">texture</a>
+    is a buffer texture.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-texture">texture</a>
+    has a compressed
+            internal format.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the base internal format is
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the base internal format is
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the base internal format is
+    <span class="constant">GL_STENCIL_INDEX</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GL_STENCIL_INDEX</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the base internal format is
+    <span class="constant">GL_RGBA</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    ,
+    <span class="constant">GL_STENCIL_INDEX</span>
+    , or
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the internal format is integer and
+    <a class="parameter" href="#param-format">format</a>
+    does not specify integer data.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the internal format is not
+            integer and
+    <a class="parameter" href="#param-format">format</a>
+    specifies integer data.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    error is generated if the
+    <a class="parameter" href="#param-xoffset">xoffset</a>
+    ,
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    ,
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    ,
+    <a class="parameter" href="#param-width">width</a>
+    ,
+    <a class="parameter" href="#param-height">height</a>
+    , and
+    <a class="parameter" href="#param-depth">depth</a>
+    parameters (or combinations thereof) specify a region that falls outside the
+            defined texture image array (including border, if any).
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetTexImage.html">glGetTexImage</a>
+    ,
+    <a class="crossref" href="./glGetInternalformat.html">glGetInternalformat</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glClearTexSubImage.html">glClearTexSubImage</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glClearTexImage.html">glClearTexImage</a>
+    ,
+    <a class="crossref" href="./glTexStorage1D.html">glTexStorage1D</a>
+    ,
+    <a class="crossref" href="./glTexStorage2D.html">glTexStorage2D</a>
+    ,
+    <a class="crossref" href="./glTexStorage3D.html">glTexStorage3D</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2013-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

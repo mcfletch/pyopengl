@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glCopyColorSubTable : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glCopyColorSubTable</h1>
+</header>
+<main class="content">
+    <section class="purpose">respecify a portion of a color table</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glCopyColorSubTable"></a>
+    <span class="c-function">glCopyColorSubTable</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-start" class="parameter">start</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glCopyColorSubTable"></a>
+    <span class="py-function">glCopyColorSubTable</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-start" class="parameter">start</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Must be one of
+    <span class="constant">GL_COLOR_TABLE</span>
+    ,
+    <span class="constant">GL_POST_CONVOLUTION_COLOR_TABLE</span>
+    , or
+    <span class="constant">GL_POST_COLOR_MATRIX_COLOR_TABLE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-start"></a>
+                        start
+                    </th>
+                    <td>
+    <div class="para">
+                    The starting index of the portion of the color table to be replaced.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-x"></a><a name="param-y"></a>
+                        x, y
+                    </th>
+                    <td>
+    <div class="para">
+                    The window coordinates of the left corner of the row of pixels to be
+                    copied.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">
+                    The number of table entries to replace.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glCopyColorSubTable.html">glCopyColorSubTable</a>
+    is used to respecify a contiguous portion of a color table previously
+            defined using
+    <a class="crossref" href="./glColorTable.html">glColorTable</a>
+    .  The pixels copied from the framebuffer
+            replace the portion of the existing table from indices
+    <a class="parameter" href="#param-start">start</a>
+    to
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">start</mi>
+                    <mo>+</mo>
+                    <mi mathvariant="italic">x</mi>
+                    <mo>-</mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    ,
+            inclusive.  This region may not include any
+            entries outside the range of the color table, as was originally specified.
+            It is not an error to specify a subtexture with width of 0, but such a
+            specification has no effect.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glCopyColorSubTable.html">glCopyColorSubTable</a>
+    is present only if
+    <div class="code">ARB_imaging</div>
+    is returned when
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+    is called with an argument of
+    <span class="constant">GL_EXTENSIONS</span>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not a previously defined
+            color table.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not one of the allowable
+            values.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <math>
+                <mrow>
+                    <mrow>
+                        <mi mathvariant="italic">start</mi>
+                        <mo>+</mo>
+                        <mi mathvariant="italic">x</mi>
+                    </mrow>
+                    <mo>&gt;</mo>
+                    <mi mathvariant="italic">width</mi>
+                </mrow>
+            </math>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glCopyColorSubTable.html">glCopyColorSubTable</a>
+    is executed
+            between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding
+            execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetColorTable.html">glGetColorTable</a>
+    ,
+    <a class="crossref" href="./glGetColorTableParameter.html">glGetColorTableParameter</a>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glColorSubTable.html">glColorSubTable</a>
+    ,
+    <a class="crossref" href="./glColorTableParameter.html">glColorTableParameter</a>
+    ,
+    <a class="crossref" href="./glCopyColorTable.html">glCopyColorTable</a>
+    ,
+    <a class="function" href="./glCopyColorSubTable.html">glCopyColorSubTable</a>
+    ,
+    <a class="crossref" href="./glGetColorTable.html">glGetColorTable</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

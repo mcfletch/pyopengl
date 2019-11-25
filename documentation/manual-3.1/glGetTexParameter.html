@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetTexParameter : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetTexParameter</h1>
+</header>
+<main class="content">
+    <section class="purpose">return texture parameter values</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTexParameter"></a>
+    <span class="c-function">glGetTexParameter</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTexParameterIiv"></a>
+    <span class="c-function">glGetTexParameterIiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTexParameterIiv"></a>
+    <span class="py-function">glGetTexParameterIiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTexParameterIuiv"></a>
+    <span class="c-function">glGetTexParameterIuiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTexParameterIuiv"></a>
+    <span class="py-function">glGetTexParameterIuiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTexParameterfv"></a>
+    <span class="c-function">glGetTexParameterfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTexParameterfv"></a>
+    <span class="py-function">glGetTexParameterfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTexParameteriv"></a>
+    <span class="c-function">glGetTexParameteriv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTexParameteriv"></a>
+    <span class="py-function">glGetTexParameteriv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTextureParameterIiv"></a>
+    <span class="c-function">glGetTextureParameterIiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTextureParameterIiv"></a>
+    <span class="py-function">glGetTextureParameterIiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTextureParameterIuiv"></a>
+    <span class="c-function">glGetTextureParameterIuiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTextureParameterIuiv"></a>
+    <span class="py-function">glGetTextureParameterIuiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTextureParameterfv"></a>
+    <span class="c-function">glGetTextureParameterfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTextureParameterfv"></a>
+    <span class="py-function">glGetTextureParameterfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTextureParameteriv"></a>
+    <span class="c-function">glGetTextureParameteriv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTextureParameteriv"></a>
+    <span class="py-function">glGetTextureParameteriv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">Specifies the target to which the texture is bound for
+    <a class="function" href="./glGetTexParameter.html#c-glGetTexParameterfv">glGetTexParameterfv</a>
+    ,
+    <a class="function" href="./glGetTexParameter.html#c-glGetTexParameteriv">glGetTexParameteriv</a>
+    ,
+    <a class="function" href="./glGetTexParameter.html#c-glGetTexParameterIiv">glGetTexParameterIiv</a>
+    , and
+    <a class="function" href="./glGetTexParameter.html#c-glGetTexParameterIuiv">glGetTexParameterIuiv</a>
+    functions.
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    ,
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    , and
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">Specifies the texture object name for
+    <a class="function" href="./glGetTexParameter.html#c-glGetTextureParameterfv">glGetTextureParameterfv</a>
+    ,
+    <a class="function" href="./glGetTexParameter.html#c-glGetTextureParameteriv">glGetTextureParameteriv</a>
+    ,
+    <a class="function" href="./glGetTexParameter.html#c-glGetTextureParameterIiv">glGetTextureParameterIiv</a>
+    , and
+    <a class="function" href="./glGetTexParameter.html#c-glGetTextureParameterIuiv">glGetTextureParameterIuiv</a>
+    functions.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">Specifies the symbolic name of a texture parameter.
+    <span class="constant">GL_DEPTH_STENCIL_TEXTURE_MODE</span>
+    ,
+    <span class="constant">GL_IMAGE_FORMAT_COMPATIBILITY_TYPE</span>
+    ,
+    <span class="constant">GL_TEXTURE_BASE_LEVEL</span>
+    ,
+    <span class="constant">GL_TEXTURE_BORDER_COLOR</span>
+    ,
+    <span class="constant">GL_TEXTURE_COMPARE_MODE</span>
+    ,
+    <span class="constant">GL_TEXTURE_COMPARE_FUNC</span>
+    ,
+    <span class="constant">GL_TEXTURE_IMMUTABLE_FORMAT</span>
+    ,
+    <span class="constant">GL_TEXTURE_IMMUTABLE_LEVELS</span>
+    ,
+    <span class="constant">GL_TEXTURE_LOD_BIAS</span>
+    ,
+    <span class="constant">GL_TEXTURE_MAG_FILTER</span>
+    ,
+    <span class="constant">GL_TEXTURE_MAX_LEVEL</span>
+    ,
+    <span class="constant">GL_TEXTURE_MAX_LOD</span>
+    ,
+    <span class="constant">GL_TEXTURE_MIN_FILTER</span>
+    ,
+    <span class="constant">GL_TEXTURE_MIN_LOD</span>
+    ,
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+    ,
+    <span class="constant">GL_TEXTURE_SWIZZLE_G</span>
+    ,
+    <span class="constant">GL_TEXTURE_SWIZZLE_B</span>
+    ,
+    <span class="constant">GL_TEXTURE_SWIZZLE_A</span>
+    ,
+    <span class="constant">GL_TEXTURE_SWIZZLE_RGBA</span>
+    ,
+    <span class="constant">GL_TEXTURE_TARGET</span>
+    ,
+    <span class="constant">GL_TEXTURE_VIEW_MIN_LAYER</span>
+    ,
+    <span class="constant">GL_TEXTURE_VIEW_MIN_LEVEL</span>
+    ,
+    <span class="constant">GL_TEXTURE_VIEW_NUM_LAYERS</span>
+    ,
+    <span class="constant">GL_TEXTURE_VIEW_NUM_LEVELS</span>
+    ,
+    <span class="constant">GL_TEXTURE_WRAP_S</span>
+    ,
+    <span class="constant">GL_TEXTURE_WRAP_T</span>
+    , and
+    <span class="constant">GL_TEXTURE_WRAP_R</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">Returns the texture parameters.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetTexParameter.html">glGetTexParameter</a>
+    and
+    <a class="function" href="./glGetTexParameter.html#c-glGetTextureParameterfv">glGetTextureParameter</a>
+    return in
+    <a class="parameter" href="#param-params">params</a>
+    the value or values of the texture parameter
+        specified as
+    <a class="parameter" href="#param-pname">pname</a>
+    .
+    <a class="parameter" href="#param-target">target</a>
+    defines the target texture.
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    , or
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+    specify one-, two-,
+        or three-dimensional, one-dimensional array, two-dimensional array,
+        rectangle, cube-mapped or cube-mapped array, two-dimensional multisample,
+        or two-dimensional multisample array texturing, respectively.
+    <a class="parameter" href="#param-pname">pname</a>
+    accepts the same symbols as
+    <a class="crossref" href="./glTexParameter.html">glTexParameter</a>
+    ,
+        with the same interpretations:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEPTH_STENCIL_TEXTURE_MODE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns the single-value depth stencil texture mode, a
+          symbolic constant. The initial value is
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_MAG_FILTER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns the single-valued texture magnification filter, a
+          symbolic constant. The initial value is
+    <span class="constant">GL_LINEAR</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_MIN_FILTER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns the single-valued texture minification filter, a
+          symbolic constant. The initial value is
+    <span class="constant">GL_NEAREST_MIPMAP_LINEAR</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_MIN_LOD</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the single-valued texture minimum level-of-detail value.  The
+                        initial value is
+    <math overflow="scroll">
+                <mn>-1000</mn>
+              </math>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_MAX_LOD</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns the single-valued texture maximum level-of-detail
+          value. The initial value is 1000.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BASE_LEVEL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns the single-valued base texture mipmap level. The
+          initial value is 0.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_MAX_LEVEL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns the single-valued maximum texture mipmap array level.
+          The initial value is 1000.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_SWIZZLE_R</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns the red component swizzle. The initial value is
+    <span class="constant">GL_RED</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_SWIZZLE_G</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns the green component swizzle. The initial value is
+    <span class="constant">GL_GREEN</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_SWIZZLE_B</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns the blue component swizzle. The initial value is
+    <span class="constant">GL_BLUE</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_SWIZZLE_A</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns the alpha component swizzle. The initial value is
+    <span class="constant">GL_ALPHA</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_SWIZZLE_RGBA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns the component swizzle for all channels in a single
+          query.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_WRAP_S</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the single-valued wrapping function for texture coordinate
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    ,
+                        a symbolic constant. The initial value is
+    <span class="constant">GL_REPEAT</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_WRAP_T</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the single-valued wrapping function for texture coordinate
+    <math overflow="scroll"><mi mathvariant="italic">t</mi></math>
+    ,
+                        a symbolic constant. The initial value is
+    <span class="constant">GL_REPEAT</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_WRAP_R</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the single-valued wrapping function for texture coordinate
+    <math overflow="scroll"><mi mathvariant="italic">r</mi></math>
+    ,
+                        a symbolic constant. The initial value is
+    <span class="constant">GL_REPEAT</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_BORDER_COLOR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns four integer or floating-point numbers that comprise the RGBA color
+                        of the texture border.
+                        Floating-point values are returned in the range
+    <math overflow="scroll">
+                            <mfenced open="[" close="]">
+                                <mn>0</mn>
+                                <mn>1</mn>
+                            </mfenced>
+                        </math>
+    .
+                        Integer values are returned as a linear mapping of the internal floating-point
+                        representation such that 1.0 maps to the most positive representable
+                        integer and
+    <math overflow="scroll">
+                            <mn>-1.0</mn>
+                        </math>
+    maps to the most negative representable
+                        integer. The initial value is (0, 0, 0, 0).
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_COMPARE_MODE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns a single-valued texture comparison mode, a symbolic
+            constant. The initial value is
+    <span class="constant">GL_NONE</span>
+    . See
+    <a class="crossref" href="./glTexParameter.html">glTexParameter</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_COMPARE_FUNC</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns a single-valued texture comparison function, a
+            symbolic constant. The initial value is
+    <span class="constant">GL_LEQUAL</span>
+    . See
+    <a class="crossref" href="./glTexParameter.html">glTexParameter</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_VIEW_MIN_LEVEL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns a single-valued base level of a texture view
+            relative to its parent. The initial value is 0. See
+    <a class="crossref" href="./glTextureView.html">glTextureView</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_VIEW_NUM_LEVELS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns a single-valued number of levels of detail of a
+            texture view. See
+    <a class="crossref" href="./glTextureView.html">glTextureView</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_VIEW_MIN_LAYER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns a single-valued first level of a texture array view
+            relative to its parent. See
+    <a class="crossref" href="./glTextureView.html">glTextureView</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_VIEW_NUM_LAYERS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns a single-valued number of layers in a texture array
+            view. See
+    <a class="crossref" href="./glTextureView.html">glTextureView</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_IMMUTABLE_LEVELS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns a single-valued number of immutable texture levels
+            in a texture view. See
+    <a class="crossref" href="./glTextureView.html">glTextureView</a>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">In addition to the parameters that may be set with
+    <a class="crossref" href="./glTexParameter.html">glTexParameter</a>
+    ,
+    <a class="function" href="./glGetTexParameter.html">glGetTexParameter</a>
+    and
+    <a class="function" href="./glGetTexParameter.html#c-glGetTextureParameterfv">glGetTextureParameter</a>
+    accept the following
+    read-only parameters:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_IMAGE_FORMAT_COMPATIBILITY_TYPE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns the matching criteria use for the texture when used as
+          an image texture. Can return
+    <span class="constant">GL_IMAGE_FORMAT_COMPATIBILITY_BY_SIZE</span>
+    ,
+    <span class="constant">GL_IMAGE_FORMAT_COMPATIBILITY_BY_CLASS</span>
+    or
+    <span class="constant">GL_NONE</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_IMMUTABLE_FORMAT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns non-zero if the texture has an immutable format.
+          Textures become immutable if their storage is specified with
+    <a class="crossref" href="./glTexStorage1D.html">glTexStorage1D</a>
+    ,
+    <a class="crossref" href="./glTexStorage2D.html">glTexStorage2D</a>
+    or
+    <a class="crossref" href="./glTexStorage3D.html">glTexStorage3D</a>
+    .
+          The initial value is
+    <span class="constant">GL_FALSE</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TEXTURE_TARGET</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Returns the effective target of the texture object. For
+    glGetTex*Parameter
+    functions, this is the
+          target parameter. For
+    glGetTextureParameter*
+    ,
+          it is the target to which the texture was initially bound when it
+          was created, or the value of the target parameter to the call to
+    <a class="function" href="./glCreateTextures.html">glCreateTextures</a>
+    which created the
+          texture.
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">If an error is generated, no change is made to the contents of
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_IMAGE_FORMAT_COMPATIBILITY_TYPE</span>
+    is available
+    only if the GL version is 4.2 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_DEPTH_STENCIL_TEXTURE_MODE</span>
+    ,
+    <span class="constant">GL_TEXTURE_VIEW_MIN_LEVEL</span>
+    ,
+    <span class="constant">GL_TEXTURE_VIEW_NUM_LEVELS</span>
+    ,
+    <span class="constant">GL_TEXTURE_VIEW_MIN_LAYER</span>
+    ,
+    <span class="constant">GL_TEXTURE_VIEW_NUM_LAYERS</span>
+    and
+    <span class="constant">GL_TEXTURE_IMMUTABLE_LEVELS</span>
+    are available only if the
+    GL version is 4.3 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_TEXTURE_TARGET</span>
+    are available only if the GL
+    version is 4.5 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    error is generated by
+    <a class="function" href="./glGetTexParameter.html">glGetTexParameter</a>
+    if the effective
+    <a class="parameter" href="#param-target">target</a>
+    is not one of the accepted texture
+    targets.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    glGetTextureParameter*
+    if
+    <a class="parameter" href="#param-texture">texture</a>
+    is not the name of an existing texture
+    object.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetTexParameter.html#c-glGetTexParameterIiv">glGetTexParameterIiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetTexParameter.html#c-glGetTexParameterIuiv">glGetTexParameterIuiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetTexParameter.html#c-glGetTexParameterfv">glGetTexParameterfv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetTexParameter.html#c-glGetTexParameteriv">glGetTexParameteriv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetTexParameter.html#c-glGetTextureParameterIiv">glGetTextureParameterIiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetTexParameter.html#c-glGetTextureParameterIuiv">glGetTextureParameterIuiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetTexParameter.html#c-glGetTextureParameterfv">glGetTextureParameterfv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetTexParameter.html#c-glGetTextureParameteriv">glGetTextureParameteriv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glTexParameter.html">glTexParameter</a>
+    ,
+    <a class="function" href="./glTexParameter.html#c-glTextureParameter">glTextureParameter</a>
+    ,
+    <a class="crossref" href="./glTexStorage1D.html">glTexStorage1D</a>
+    ,
+    <a class="crossref" href="./glTexStorage2D.html">glTexStorage2D</a>
+    ,
+    <a class="crossref" href="./glTexStorage3D.html">glTexStorage3D</a>
+    ,
+    <a class="function" href="./glTexStorage1D.html#c-glTextureStorage1D">glTextureStorage1D</a>
+    ,
+    <a class="function" href="./glTexStorage2D.html#c-glTextureStorage2D">glTextureStorage2D</a>
+    ,
+    <a class="function" href="./glTexStorage3D.html#c-glTextureStorage3D">glTextureStorage3D</a>
+    ,
+    <a class="crossref" href="./glTextureView.html">glTextureView</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI
+            Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

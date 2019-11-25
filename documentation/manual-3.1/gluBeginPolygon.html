@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluBeginPolygon : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluBeginPolygon</h1>
+</header>
+<main class="content">
+    <section class="purpose">delimit a polygon description</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluBeginPolygon"></a>
+    <span class="c-function">gluBeginPolygon</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUtesselator* (
+            <a href="#param-tess" class="parameter">tess</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluBeginPolygon"></a>
+    <span class="py-function">gluBeginPolygon</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-tess" class="parameter">tess</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluBeginPolygon( POINTER(GLUtesselator)(tess) ) -&gt; None</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-gluEndPolygon"></a>
+    <span class="c-function">gluEndPolygon</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUtesselator* (
+            <a href="#param-tess" class="parameter">tess</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluEndPolygon"></a>
+    <span class="py-function">gluEndPolygon</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-tess" class="parameter">tess</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluEndPolygon( POINTER(GLUtesselator)(tess) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-tess"></a>
+                        tess
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the tessellation object (created with
+    <a class="crossref" href="./gluNewTess.html">gluNewTess</a>
+    ).
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluBeginPolygon.html">gluBeginPolygon</a>
+    and
+    <a class="crossref" href="./gluBeginPolygon.html#c-gluEndPolygon">gluEndPolygon</a>
+    delimit the definition of a
+            nonconvex polygon.
+            To define such a polygon, first call
+    <a class="function" href="./gluBeginPolygon.html">gluBeginPolygon</a>
+    .
+            Then define the contours of the polygon
+            by calling
+    <a class="crossref" href="./gluTessVertex.html">gluTessVertex</a>
+    for each vertex
+            and
+    <a class="crossref" href="./gluNextContour.html">gluNextContour</a>
+    to start each new contour.
+            Finally, call
+    <a class="crossref" href="./gluBeginPolygon.html#c-gluEndPolygon">gluEndPolygon</a>
+    to signal the end of the definition.
+            See the
+    <a class="crossref" href="./gluTessVertex.html">gluTessVertex</a>
+    and
+    <a class="crossref" href="./gluNextContour.html">gluNextContour</a>
+    reference pages for more details.
+</div>
+    <div class="para">
+            Once
+    <a class="crossref" href="./gluBeginPolygon.html#c-gluEndPolygon">gluEndPolygon</a>
+    is called, the polygon is tessellated, and the
+            resulting triangles are described through callbacks.
+            See
+    <a class="crossref" href="./gluTessCallback.html">gluTessCallback</a>
+    for descriptions of the callback functions.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            This command is obsolete and is provided for backward compatibility
+            only. Calls to
+    <a class="function" href="./gluBeginPolygon.html">gluBeginPolygon</a>
+    are mapped to
+    <a class="crossref" href="./gluTessBeginPolygon.html">gluTessBeginPolygon</a>
+    followed by
+    <a class="crossref" href="./gluTessBeginContour.html">gluTessBeginContour</a>
+    . Calls to
+    <a class="crossref" href="./gluBeginPolygon.html#c-gluEndPolygon">gluEndPolygon</a>
+    are mapped
+            to
+    <a class="crossref" href="./gluTessBeginContour.html#c-gluTessEndContour">gluTessEndContour</a>
+    followed by
+    <a class="crossref" href="./gluTessEndPolygon.html">gluTessEndPolygon</a>
+    .
+</div>
+    </section><section class="section" id="example">
+    <h2 class="title">Example</h2>
+    <div class="para">
+            A quadrilateral with a triangular hole in it can be described like this:
+    <div class="programlisting">
+gluBeginPolygon(tobj);
+   gluTessVertex(tobj, v1, v1);
+   gluTessVertex(tobj, v2, v2);
+   gluTessVertex(tobj, v3, v3);
+   gluTessVertex(tobj, v4, v4);
+gluNextContour(tobj, GLU_INTERIOR);
+   gluTessVertex(tobj, v5, v5);
+   gluTessVertex(tobj, v6, v6);
+   gluTessVertex(tobj, v7, v7);
+gluEndPolygon(tobj);
+            </div>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluNewTess.html">gluNewTess</a>
+    ,
+    <a class="crossref" href="./gluNextContour.html">gluNextContour</a>
+    ,
+    <a class="crossref" href="./gluTessBeginContour.html">gluTessBeginContour</a>
+    ,
+    <a class="crossref" href="./gluTessBeginPolygon.html">gluTessBeginPolygon</a>
+    ,
+    <a class="crossref" href="./gluTessCallback.html">gluTessCallback</a>
+    ,
+    <a class="crossref" href="./gluTessVertex.html">gluTessVertex</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

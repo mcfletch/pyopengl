@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXGetProcAddress : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXGetProcAddress</h1>
+</header>
+<main class="content">
+    <section class="purpose">obtain a pointer to an OpenGL or GLX function</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXGetProcAddress"></a>
+    <span class="c-function">glXGetProcAddress</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLubyte * (
+            <a href="#param-procName" class="parameter">procName</a>
+        )
+    </span>
+</span>)-&gt; void(*)()
+</div>
+                <div class="py-signature">
+    <a name="py-glXGetProcAddress"></a>
+    <span class="py-function">glXGetProcAddress</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-procName" class="parameter">procName</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.CFunctionType'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-procName"></a>
+                        procName
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the OpenGL or GLX function whose address is to be returned.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXGetProcAddress.html">glXGetProcAddress</a>
+    returns the address of the function specified in
+    <a class="parameter" href="#param-procName">procName</a>
+    .  This is
+            necessary in environments where the OpenGL link library exports a different
+            set of functions than the runtime library.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            A
+    <span class="constant">NULL</span>
+    pointer is returned if function requested is not suported
+            in the implementation being queried.
+</div>
+    <div class="para">
+            GLU functions are not queryable due to the fact that the library may not be
+            loaded at the time of the query.
+        </div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

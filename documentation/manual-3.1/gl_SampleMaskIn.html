@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gl_SampleMaskIn : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>gl_SampleMaskIn</h1>
+</header>
+<main class="content">
+    <section class="purpose">contains the computed sample coverage mask for the current fragment</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gl_SampleMaskIn"></a>
+    <span class="c-function">gl_SampleMaskIn</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <div class="varname">gl_SampleMaskIn</div>
+    is a fragment language that indicates the
+            set of samples covered by the primitive generating the fragment during
+            multisample rasterization. It has a sample bit set if and only if the sample
+            is considered covered for this fragment shader invocation. Bit
+    <span class="emphasis">B</span>
+    of mask
+    <div class="varname">gl_SampleMask[M]</div>
+    corresponds to sample 32 *
+    <span class="emphasis">M</span>
+    +
+    <span class="emphasis">B</span>
+    .
+            The array has
+    ceil
+    (
+    <span class="emphasis">s</span>
+    / 32) elements
+            where
+    <span class="emphasis">s</span>
+    is the maximum number of color samples supported
+            by the implementation.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>gl_SampleMaskIn</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gl_SampleMask.html">gl_SampleMask</a>
+    ,
+    <a class="crossref" href="./gl_SampleID.html">gl_SampleID</a>
+    ,
+    <a class="crossref" href="./gl_SamplePosition.html">gl_SamplePosition</a>
+    ,
+    <a class="crossref" href="./gl_FragCoord.html">gl_FragCoord</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

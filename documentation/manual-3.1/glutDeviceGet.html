@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutDeviceGet : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutDeviceGet</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieves GLUT device information represented by integers.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutDeviceGet"></a>
+    <span class="c-function">glutDeviceGet</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum(
+            <a href="#param-info" class="parameter">info</a>
+        )
+    </span>
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glutDeviceGet"></a>
+    <span class="py-function">glutDeviceGet</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-query" class="parameter">query</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">glutDeviceGet( GLenum(query) ) -&gt; c_int</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-info"></a>
+                        info
+                    </th>
+                    <td>
+    <div class="simpara">
+						Name of device information to retrieve.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutDeviceGet.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutDeviceGet.html">glutDeviceGet</a>
+    retrieves GLUT device information represented by integers. The info parameter
+			determines what type of device information to return. Requesting device information for an invalid GLUT device
+			information name returns negative one.
+</div>
+    </section><section class="section" id="glutDeviceGet.3GLUT-x_implementation_notes">
+    <h2 class="title">X Implementation Notes</h2>
+    <div class="para">
+			The current implementation uses to X Input extension to regonize SGI's Spaceball, tablet, and dial and button box
+			devices.
+		</div>
+    </section><section class="section" id="glutDeviceGet.3GLUT-win32_implementation_notes">
+    <h2 class="title">Win32 Implementation Notes</h2>
+    <div class="para">
+			The
+    <span class="constant">GLUT_DEVICE_KEY_REPEAT</span>
+    always returns
+    <span class="constant">GLUT_KEY_REPEAT_ON</span>
+    .
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutGet.html">glutGet</a>
+            <a class="crossref" href="./glutKeyboardFunc.html">glutKeyboardFunc</a>
+            <a class="crossref" href="./glutMouseFunc.html">glutMouseFunc</a>
+            <a class="crossref" href="./glutSpaceballMotionFunc.html">glutSpaceballMotionFunc</a>
+            <a class="crossref" href="./glutTabletMotionFunc.html">glutTabletMotionFunc</a>
+            <a class="crossref" href="./glutTabletButtonFunc.html">glutTabletButtonFunc</a>
+            <a class="crossref" href="./glutDialsFunc.html">glutDialsFunc</a>
+            <a class="crossref" href="./glutButtonBoxFunc.html">glutButtonBoxFunc</a>
+            <a class="crossref" href="./glutIgnoreKeyRepeat.html">glutIgnoreKeyRepeat</a>
+            <a class="crossref" href="./glutSetKeyRepeat.html">glutSetKeyRepeat</a>
+            <a class="crossref" href="./glutJoystickFunc.html">glutJoystickFunc</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

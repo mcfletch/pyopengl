@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glClearBuffer : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glClearBuffer</h1>
+</header>
+<main class="content">
+    <section class="purpose">clear individual buffers of a framebuffer</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearBuffer"></a>
+    <span class="c-function">glClearBuffer</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearBufferfi"></a>
+    <span class="c-function">glClearBufferfi</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-depth" class="parameter">depth</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-stencil" class="parameter">stencil</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClearBufferfi"></a>
+    <span class="py-function">glClearBufferfi</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-depth" class="parameter">depth</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-stencil" class="parameter">stencil</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearBufferfv"></a>
+    <span class="c-function">glClearBufferfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLfloat * (
+            <a href="#param-value" class="parameter">value</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClearBufferfv"></a>
+    <span class="py-function">glClearBufferfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-value" class="parameter">value</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearBufferiv"></a>
+    <span class="c-function">glClearBufferiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLint * (
+            <a href="#param-value" class="parameter">value</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClearBufferiv"></a>
+    <span class="py-function">glClearBufferiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-value" class="parameter">value</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearBufferuiv"></a>
+    <span class="c-function">glClearBufferuiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLuint * (
+            <a href="#param-value" class="parameter">value</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClearBufferuiv"></a>
+    <span class="py-function">glClearBufferuiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-value" class="parameter">value</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearNamedFramebufferfi"></a>
+    <span class="c-function">glClearNamedFramebufferfi</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-depth" class="parameter">depth</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-stencil" class="parameter">stencil</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClearNamedFramebufferfi"></a>
+    <span class="py-function">glClearNamedFramebufferfi</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-depth" class="parameter">depth</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-stencil" class="parameter">stencil</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearNamedFramebufferfv"></a>
+    <span class="c-function">glClearNamedFramebufferfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLfloat *(
+            <a href="#param-value" class="parameter">value</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClearNamedFramebufferfv"></a>
+    <span class="py-function">glClearNamedFramebufferfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-value" class="parameter">value</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearNamedFramebufferiv"></a>
+    <span class="c-function">glClearNamedFramebufferiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLint *(
+            <a href="#param-value" class="parameter">value</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClearNamedFramebufferiv"></a>
+    <span class="py-function">glClearNamedFramebufferiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-value" class="parameter">value</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearNamedFramebufferuiv"></a>
+    <span class="c-function">glClearNamedFramebufferuiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLuint *(
+            <a href="#param-value" class="parameter">value</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClearNamedFramebufferuiv"></a>
+    <span class="py-function">glClearNamedFramebufferuiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-drawbuffer" class="parameter">drawbuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-value" class="parameter">value</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-framebuffer"></a>
+                        framebuffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the framebuffer object for
+    glClearNamedFramebuffer*
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-buffer"></a>
+                        buffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the buffer to clear.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-drawbuffer"></a>
+                        drawbuffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify a particular draw buffer to clear.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-value"></a>
+                        value
+                    </th>
+                    <td>
+    <div class="para">
+                    A pointer to the value or values to clear the buffer to.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-depth"></a>
+                        depth
+                    </th>
+                    <td>
+    <div class="para">
+                    The value to clear the depth buffer to.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-stencil"></a>
+                        stencil
+                    </th>
+                    <td>
+    <div class="para">
+                    The value to clear the stencil buffer to.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            These commands clear a specified buffer of a framebuffer to
+            specified value(s). For
+    glClearBuffer*
+    , the
+            framebuffer is the currently bound draw framebuffer object. For
+    glClearNamedFramebuffer*
+    ,
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is zero, indicating the
+            default draw framebuffer, or the name of a framebuffer object.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-buffer">buffer</a>
+    and
+    <a class="parameter" href="#param-drawbuffer">drawbuffer</a>
+    identify the buffer to clear.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is
+    <span class="constant">GL_COLOR</span>
+    , a particular draw buffer
+    <span class="constant">GL_DRAW_BUFFER</span>
+    <a class="parameter" href="#param-i">i</a>
+    is
+            specified by passing
+    <a class="parameter" href="#param-i">i</a>
+    as
+    <a class="parameter" href="#param-drawbuffer">drawbuffer</a>
+    , and
+    <a class="parameter" href="#param-value">value</a>
+    points to a four-element vector
+            specifying the R, G, B and A color to clear that draw buffer to.
+            If the value of
+    <span class="constant">GL_DRAW_BUFFER</span>
+    <a class="parameter" href="#param-i">i</a>
+    is
+    <span class="constant">GL_NONE</span>
+    , the command has no effect.
+            Otherwise, the value of
+    <span class="constant">GL_DRAW_BUFFER</span>
+    <a class="parameter" href="#param-i">i</a>
+    identifies one or more color buffers, each of which is cleared
+            to the same value. Clamping and type conversion for fixed-point
+            color buffers are performed in the same fashion as for
+    <a class="crossref" href="./glClearColor.html">glClearColor</a>
+    .
+            The
+    *fv
+    ,
+    *iv
+    and
+    *uiv
+    forms of these commands should be used
+            to clear fixed- and floating-point, signed integer, and unsigned
+            integer color buffers respectively.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is
+    <span class="constant">GL_DEPTH</span>
+    ,
+    <a class="parameter" href="#param-drawbuffer">drawbuffer</a>
+    must be zero, and
+    <a class="parameter" href="#param-value">value</a>
+    points to a
+            single value to clear the depth buffer to. Clamping and type
+            conversion for fixed-point depth buffers are performed in the
+            same fashion as for
+    <a class="crossref" href="./glClearDepth.html">glClearDepth</a>
+    .
+            Only the
+    *fv
+    forms of these commands should
+            be used to clear depth buffers; other forms do not accept a
+    <a class="parameter" href="#param-buffer">buffer</a>
+    of
+    <span class="constant">GL_DEPTH</span>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is
+    <span class="constant">GL_STENCIL</span>
+    ,
+    <a class="parameter" href="#param-drawbuffer">drawbuffer</a>
+    must be zero, and
+    <a class="parameter" href="#param-value">value</a>
+    points to a single value to clear
+            the stencil buffer to. Masking is performed in the same fashion
+            as for
+    <a class="crossref" href="./glClearStencil.html">glClearStencil</a>
+    .
+            Only the
+    *iv
+    forms of these commands should
+            be used to clear stencil buffers; be used to clear stencil
+            buffers; other forms do not accept a
+    <a class="parameter" href="#param-buffer">buffer</a>
+    of
+    <span class="constant">GL_STENCIL</span>
+    .
+</div>
+    <div class="para">
+    <a class="function" href="./glClearBuffer.html#c-glClearBufferfi">glClearBufferfi</a>
+    and
+    <a class="function" href="./glClearBuffer.html#c-glClearNamedFramebufferfi">glClearNamedFramebufferfi</a>
+    are used to clear
+            the depth and stencil buffers simultaneously.
+    <a class="parameter" href="#param-buffer">buffer</a>
+    must be
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    and
+    <a class="parameter" href="#param-drawbuffer">drawbuffer</a>
+    must be zero.
+    <a class="parameter" href="#param-depth">depth</a>
+    and
+    <a class="parameter" href="#param-stencil">stencil</a>
+    are the values to clear the depth and stencil buffers to,
+            respectively. Clamping and type conversion of
+    <a class="parameter" href="#param-depth">depth</a>
+    for fixed-point depth buffers are
+            performed in the same fashion as for
+    <a class="crossref" href="./glClearDepth.html">glClearDepth</a>
+    .
+            Masking of
+    <a class="parameter" href="#param-stencil">stencil</a>
+    for stencil buffers is
+            performed in the same fashion as for
+    <a class="crossref" href="./glClearStencil.html">glClearStencil</a>
+    .
+            These commands are equivalent to clearing the depth and stencil
+            buffers separately, but may be faster when a buffer of internal
+            format
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    is being cleared.
+            The same per-fragment and masking operations defined for
+    <a class="function" href="./glClear.html">glClear</a>
+    are applied.
+</div>
+    <div class="para">
+            The result of these commands is undefined if no conversion
+            between the type of the specified
+    <a class="parameter" href="#param-value">value</a>
+    and the type of the buffer being cleared is defined (for
+            example, if
+    <a class="function" href="./glClearBuffer.html#c-glClearBufferiv">glClearBufferiv</a>
+    is called for a
+            fixed- or floating-point buffer, or if
+    <a class="function" href="./glClearBuffer.html#c-glClearBufferfv">glClearBufferfv</a>
+    is called for a signed or
+            unsigned integer buffer). This is not an error.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    glClearNamedFramebuffer*
+    if
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is not zero or the name of an
+            existing framebuffer object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glClearBuffer.html#c-glClearBufferiv">glClearBufferiv</a>
+    and
+    <a class="function" href="./glClearBuffer.html#c-glClearNamedFramebufferiv">glClearNamedFramebufferiv</a>
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is not
+    <span class="constant">GL_COLOR</span>
+    or
+    <span class="constant">GL_STENCIL</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glClearBuffer.html#c-glClearBufferuiv">glClearBufferuiv</a>
+    and
+    <a class="function" href="./glClearBuffer.html#c-glClearNamedFramebufferuiv">glClearNamedFramebufferuiv</a>
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is not
+    <span class="constant">GL_COLOR</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glClearBuffer.html#c-glClearBufferfv">glClearBufferfv</a>
+    and
+    <a class="function" href="./glClearBuffer.html#c-glClearNamedFramebufferfv">glClearNamedFramebufferfv</a>
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is not
+    <span class="constant">GL_COLOR</span>
+    or
+    <span class="constant">GL_DEPTH</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glClearBuffer.html#c-glClearBufferfi">glClearBufferfi</a>
+    and
+    <a class="function" href="./glClearBuffer.html#c-glClearNamedFramebufferfi">glClearNamedFramebufferfi</a>
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is not
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is
+    <span class="constant">GL_COLOR</span>
+    <a class="parameter" href="#param-drawbuffer">drawbuffer</a>
+    is negative, or greater than
+            the value of
+    <span class="constant">GL_MAX_DRAW_BUFFERS</span>
+    minus one.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is
+    <span class="constant">GL_DEPTH</span>
+    ,
+    <span class="constant">GL_STENCIL</span>
+    or
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    and
+    <a class="parameter" href="#param-drawbuffer">drawbuffer</a>
+    is not zero.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glClearBuffer.html#c-glClearBufferfi">glClearBufferfi</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glClearBuffer.html#c-glClearBufferfv">glClearBufferfv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glClearBuffer.html#c-glClearBufferiv">glClearBufferiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glClearBuffer.html#c-glClearBufferuiv">glClearBufferuiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glClearBuffer.html#c-glClearNamedFramebufferfi">glClearNamedFramebufferfi</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glClearBuffer.html#c-glClearNamedFramebufferfv">glClearNamedFramebufferfv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glClearBuffer.html#c-glClearNamedFramebufferiv">glClearNamedFramebufferiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glClearBuffer.html#c-glClearNamedFramebufferuiv">glClearNamedFramebufferuiv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glClearColor.html">glClearColor</a>
+    ,
+    <a class="crossref" href="./glClearDepth.html">glClearDepth</a>
+    ,
+    <a class="crossref" href="./glClearStencil.html">glClearStencil</a>
+    ,
+    <a class="crossref" href="./glClear.html">glClear</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

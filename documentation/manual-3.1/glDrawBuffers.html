@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glDrawBuffers : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glDrawBuffers</h1>
+</header>
+<main class="content">
+    <section class="purpose">Specifies a list of color buffers to be drawn
+    into</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glDrawBuffers"></a>
+    <span class="c-function">glDrawBuffers</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLsizei (
+            <a href="#param-n" class="parameter">n</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLenum *(
+            <a href="#param-bufs" class="parameter">bufs</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glDrawBuffer"></a>
+    <span class="py-function">glDrawBuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-buf" class="parameter">buf</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glDrawBuffers"></a>
+    <span class="py-function">glDrawBuffers</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-n" class="parameter">n</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufs" class="parameter">bufs</a>
+    </span>
+</span> )
+    <pre class="pydoc">glDrawBuffers( bufs ) -&gt; bufs
+
+    Wrapper will calculate n from dims of bufs if only
+    one argument is provided...
+    </pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glNamedFramebufferDrawBuffers"></a>
+    <span class="c-function">glNamedFramebufferDrawBuffers</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-n" class="parameter">n</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLenum *(
+            <a href="#param-bufs" class="parameter">bufs</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glNamedFramebufferDrawBuffer"></a>
+    <span class="py-function">glNamedFramebufferDrawBuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buf" class="parameter">buf</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glNamedFramebufferDrawBuffers"></a>
+    <span class="py-function">glNamedFramebufferDrawBuffers</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-n" class="parameter">n</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufs" class="parameter">bufs</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-framebuffer"></a>
+                        framebuffer
+                    </th>
+                    <td>
+    <div class="para">Specifies the name of the framebuffer object for
+    <a class="function" href="./glDrawBuffers.html#c-glNamedFramebufferDrawBuffers">glNamedFramebufferDrawBuffers</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-n"></a>
+                        n
+                    </th>
+                    <td>
+    <div class="para">Specifies the number of buffers in
+    <a class="parameter" href="#param-bufs">bufs</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bufs"></a>
+                        bufs
+                    </th>
+                    <td>
+    <div class="para">Points to an array of symbolic constants specifying the
+          buffers into which fragment colors or data values will be
+          written.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glDrawBuffers.html">glDrawBuffers</a>
+    and
+    <a class="function" href="./glDrawBuffers.html#c-glNamedFramebufferDrawBuffers">glNamedFramebufferDrawBuffers</a>
+    define an array of buffers into
+    which outputs from the fragment shader data will be written. If a fragment
+    shader writes a value to one or more user defined output variables, then
+    the value of each variable will be written into the buffer specified at a
+    location within
+    <a class="parameter" href="#param-bufs">bufs</a>
+    corresponding to the location
+    assigned to that user defined output. The draw buffer used for user
+    defined outputs assigned to locations greater than or equal to
+    <a class="parameter" href="#param-n">n</a>
+    is implicitly set to
+    <span class="constant">GL_NONE</span>
+    and any data written to such an output is discarded.
+</div>
+    <div class="para">For
+    <a class="function" href="./glDrawBuffers.html">glDrawBuffers</a>
+    , the framebuffer object that
+    is bound to the
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    binding will be
+    used. For
+    <a class="function" href="./glDrawBuffers.html#c-glNamedFramebufferDrawBuffers">glNamedFramebufferDrawBuffers</a>
+    ,
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is the name of the framebuffer object.
+    If
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is zero, then the default
+    framebuffer is affected.
+</div>
+    <div class="para">The symbolic constants contained in
+    <a class="parameter" href="#param-bufs">bufs</a>
+    may
+    be any of the following:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NONE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">The fragment shader output value is not written into any color
+          buffer.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FRONT_LEFT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">The fragment shader output value is written into the front
+          left color buffer.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FRONT_RIGHT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">The fragment shader output value is written into the front
+          right color buffer.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BACK_LEFT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">The fragment shader output value is written into the back left
+          color buffer.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BACK_RIGHT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">The fragment shader output value is written into the back
+          right color buffer.</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_COLOR_ATTACHMENT</span>
+    <span class="emphasis">n</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">The fragment shader output value is written into the
+    <span class="emphasis">n</span>
+    th color attachment of the current
+          framebuffer.
+    <span class="emphasis">n</span>
+    may range from zero to the value
+          of
+    <span class="constant">GL_MAX_COLOR_ATTACHMENTS</span>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">Except for
+    <span class="constant">GL_NONE</span>
+    , the preceding symbolic
+    constants may not appear more than once in
+    <a class="parameter" href="#param-bufs">bufs</a>
+    .
+    The maximum number of draw buffers supported is implementation dependent
+    and can be queried by calling
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with the argument
+    <span class="constant">GL_MAX_DRAW_BUFFERS</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">The symbolic constants
+    <span class="constant">GL_FRONT</span>
+    ,
+    <span class="constant">GL_BACK</span>
+    ,
+    <span class="constant">GL_LEFT</span>
+    ,
+    <span class="constant">GL_RIGHT</span>
+    , and
+    <span class="constant">GL_FRONT_AND_BACK</span>
+    are not allowed in the
+    <a class="parameter" href="#param-bufs">bufs</a>
+    array since they may
+    refer to multiple buffers.
+</div>
+    <div class="para">If a fragment shader does not write to a user defined output
+    variable, the values of the fragment colors following shader execution are
+    undefined. For each fragment generated in this situation, a different
+    value may be written into each of the buffers specified by
+    <a class="parameter" href="#param-bufs">bufs</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    error is generated by
+    <a class="function" href="./glDrawBuffers.html#c-glNamedFramebufferDrawBuffers">glNamedFramebufferDrawBuffers</a>
+    if
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is not zero or the name of an existing
+    framebuffer object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if one of the
+    values in
+    <a class="parameter" href="#param-bufs">bufs</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if the API call
+    refers to the default framebuffer and one or more of the values in
+    <a class="parameter" href="#param-bufs">bufs</a>
+    is one of the
+    <span class="constant">GL_COLOR_ATTACHMENT</span>
+    <span class="emphasis">n</span>
+    tokens.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if the API call
+    refers to a framebuffer object and one or more of the values in
+    <a class="parameter" href="#param-bufs">bufs</a>
+    is anything other than
+    <span class="constant">GL_NONE</span>
+    or one of the
+    <span class="constant">GL_COLOR_ATTACHMENT</span>
+    <span class="emphasis">n</span>
+    tokens.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-n">n</a>
+    is less than 0.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a symbolic
+    constant other than
+    <span class="constant">GL_NONE</span>
+    appears more than once in
+    <a class="parameter" href="#param-bufs">bufs</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if any of the
+    entries in
+    <a class="parameter" href="#param-bufs">bufs</a>
+    (other than
+    <span class="constant">GL_NONE</span>
+    ) indicates a color buffer that does not
+    exist in the current GL context.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if any value
+    in
+    <a class="parameter" href="#param-bufs">bufs</a>
+    is
+    <span class="constant">GL_BACK</span>
+    , and
+    <a class="parameter" href="#param-n">n</a>
+    is not one.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-n">n</a>
+    is greater than
+    <span class="constant">GL_MAX_DRAW_BUFFERS</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_DRAW_BUFFERS</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_DRAW_BUFFER</span>
+    <span class="emphasis">i</span>
+    where
+    <span class="emphasis">
+    <div class="code">i</div>
+</span>
+    indicates the number of the draw
+        buffer whose value is to be queried.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glDrawBuffers.html">glDrawBuffers</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glDrawBuffers.html#c-glNamedFramebufferDrawBuffers">glNamedFramebufferDrawBuffers</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    ,
+    <a class="crossref" href="./glColorMask.html">glColorMask</a>
+    ,
+    <a class="crossref" href="./glDrawBuffers.html">glDrawBuffers</a>
+    ,
+    <a class="crossref" href="./glLogicOp.html">glLogicOp</a>
+    ,
+    <a class="crossref" href="./glReadBuffer.html">glReadBuffer</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2005 3Dlabs Inc. Ltd.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

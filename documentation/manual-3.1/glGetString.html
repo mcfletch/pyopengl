@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetString : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetString</h1>
+</header>
+<main class="content">
+    <section class="purpose">return a string describing the current GL connection</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetString"></a>
+    <span class="c-function">glGetString</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-name" class="parameter">name</a>
+        )
+    </span>
+</span>)-&gt; const GLubyte *
+</div>
+                <div class="py-signature">
+    <a name="py-glGetString"></a>
+    <span class="py-function">glGetString</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-name" class="parameter">name</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_char_p'&gt;</span>
+    <pre class="pydoc">glGetString( constant ) -&gt; Current string value</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetStringi"></a>
+    <span class="c-function">glGetStringi</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-name" class="parameter">name</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+    </span>
+</span>)-&gt; const GLubyte *
+</div>
+                <div class="py-signature">
+    <a name="py-glGetStringi"></a>
+    <span class="py-function">glGetStringi</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-name" class="parameter">name</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_char_p'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a symbolic constant, one of
+    <span class="constant">GL_VENDOR</span>
+    ,
+    <span class="constant">GL_RENDERER</span>
+    ,
+    <span class="constant">GL_VERSION</span>
+    , or
+    <span class="constant">GL_SHADING_LANGUAGE_VERSION</span>
+    .
+                    Additionally,
+    <a class="function" href="./glGetString.html#c-glGetStringi">glGetStringi</a>
+    accepts the
+    <span class="constant">GL_EXTENSIONS</span>
+    token.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">
+                    For
+    <a class="function" href="./glGetString.html#c-glGetStringi">glGetStringi</a>
+    , specifies the index of the string to return.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetString.html">glGetString</a>
+    returns a pointer to a static string
+            describing some aspect of the current GL connection.
+    <a class="parameter" href="#param-name">name</a>
+    can be one of the following:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_VENDOR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the company responsible for this GL implementation.
+                        This name does not change from release to release.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_RENDERER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns the name of the renderer.
+                        This name is typically specific to a particular configuration of a hardware
+                        platform.
+                        It does not change from release to release.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_VERSION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns a version or release number.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SHADING_LANGUAGE_VERSION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Returns a version or release number for the shading language.
+                    </div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+    <a class="function" href="./glGetString.html#c-glGetStringi">glGetStringi</a>
+    returns a pointer to a static string
+            indexed by
+    <a class="parameter" href="#param-index">index</a>
+    .
+    <a class="parameter" href="#param-name">name</a>
+    can be one of the following:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_EXTENSIONS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        For
+    <a class="function" href="./glGetString.html#c-glGetStringi">glGetStringi</a>
+    only, returns the extension string
+                        supported by the implementation at
+    <a class="parameter" href="#param-index">index</a>
+    .
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+            Strings
+    <span class="constant">GL_VENDOR</span>
+    and
+    <span class="constant">GL_RENDERER</span>
+    together uniquely specify
+            a platform. They do not change from release to release and should be used
+            by platform-recognition algorithms.
+</div>
+    <div class="para">
+            The
+    <span class="constant">GL_VERSION</span>
+    and
+    <span class="constant">GL_SHADING_LANGUAGE_VERSION</span>
+    strings begin with a version number.
+            The version number uses one
+            of these forms:
+</div>
+    <div class="para">
+    <span class="emphasis">major_number.minor_number</span>
+    <span class="emphasis">major_number.minor_number.release_number</span>
+</div>
+    <div class="para">
+            Vendor-specific information may follow the version
+            number. Its format depends on the implementation, but
+            a space always separates the version number and
+            the vendor-specific information.
+        </div>
+    <div class="para">
+            All strings are null-terminated.
+        </div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            If an error is generated,
+    <a class="function" href="./glGetString.html">glGetString</a>
+    returns 0.
+</div>
+    <div class="para">
+            The client and server may support different versions.
+    <a class="function" href="./glGetString.html">glGetString</a>
+    always returns a compatible version number.
+            The release number always describes the server.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-name">name</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated by
+    <a class="function" href="./glGetString.html#c-glGetStringi">glGetStringi</a>
+    if
+    <a class="parameter" href="#param-index">index</a>
+    is outside the valid range for indexed state
+    <a class="parameter" href="#param-name">name</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetString.html">glGetString</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetString.html#c-glGetStringi">glGetStringi</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI
+            Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glGetString</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glget_with_fonts.py">tests/glget_with_fonts.py</a>
+    Lines: <span class="sample-lines">40, 43</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/extensionmanager.py">OpenGLContext/extensionmanager.py</a>
+    Lines: <span class="sample-lines">3, 89</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/debug/state.py">OpenGLContext/debug/state.py</a>
+    Lines: <span class="sample-lines">38</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/shaders.py">OpenGLContext/scenegraph/shaders.py</a>
+    Lines: <span class="sample-lines">26</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson45.py">PyOpenGL-Demo/NeHe/lesson45.py</a>
+    Lines: <span class="sample-lines">248</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/gears.py">PyOpenGL-Demo/GLUT/gears.py</a>
+    Lines: <span class="sample-lines">278, 279, 280, 281</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Core.py">VisionEgg/Core.py</a>
+    Lines: <span class="sample-lines">325, 326, 327</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/PlatformDependent.py">VisionEgg/PlatformDependent.py</a>
+    Lines: <span class="sample-lines">222, 223</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/test/opengl_info.py">test/opengl_info.py</a>
+    Lines: <span class="sample-lines">90, 91, 92, 94</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/ui/window/__init__.py">pymt/ui/window/__init__.py</a>
+    Lines: <span class="sample-lines">18, 297</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/tools/benchmark.py">pymt/tools/benchmark.py</a>
+    Lines: <span class="sample-lines">240, 241, 242</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/tools/dump.py">pymt/tools/dump.py</a>
+    Lines: <span class="sample-lines">49, 50, 51, 52</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/misc.py">core/misc.py</a>
+    Lines: <span class="sample-lines">86, 90, 91, 92, 93</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

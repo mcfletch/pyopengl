@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutJoystickFunc : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutJoystickFunc</h1>
+</header>
+<main class="content">
+    <section class="purpose">sets the joystick callback for the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutJoystickFunc"></a>
+    <span class="c-function">glutJoystickFunc</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-pollInterval" class="parameter">pollInterval</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutJoystickFunc"></a>
+    <span class="py-function">glutJoystickFunc</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-function" class="parameter">function</a>
+    </span>
+</span> )
+    <pre class="pydoc">Specify handler for GLUT 'Joystick' events
+    def handler( (int) buttonMask, (int) x, (int) y, (int) z ):
+        return None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-func"></a>
+                        func
+                    </th>
+                    <td>
+    <div class="simpara">
+						The new joystick callback function.
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pollInterval"></a>
+                        pollInterval
+                    </th>
+                    <td>
+    <div class="simpara">
+						Joystick polling interval in milliseconds.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutJoystickFunc.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutJoystickFunc.html">glutJoystickFunc</a>
+    sets the joystick callback for the current window.
+</div>
+    <div class="para">
+			The joystick callback is called either due to polling of the joystick at the uniform timer interval specified by
+    <a class="parameter" href="#param-pollInterval">pollInterval</a>
+    (in milliseconds) or in response to calling
+    <a class="function" href="./glutForceJoystickFunc.html">glutForceJoystickFunc</a>
+    . If the
+    <a class="parameter" href="#param-pollInterval">pollInterval</a>
+    is non-positive, no
+			joystick polling is performed and the GLUT application must frequently (usually from an idle callback) call
+    <a class="function" href="./glutForceJoystickFunc.html">glutForceJoystickFunc</a>
+    .
+</div>
+    <div class="para">
+			The joystick buttons are reported by the callback's
+    <a class="parameter" href="#param-buttonMask">buttonMask</a>
+    parameter. The constants
+    <span class="constant">GLUT_JOYSTICK_BUTTON_A</span>
+    (0x1),
+    <span class="constant">GLUT_JOYSTICK_BUTTON_B</span>
+    (0x2),
+    <span class="constant">GLUT_JOYSTICK_BUTTON_C</span>
+    (0x4), and
+    <span class="constant">GLUT_JOYSTICK_BUTTON_D</span>
+    (0x8) are provided
+			for programming convience.
+</div>
+    <div class="para">
+			The x, y, and z callback parameters report the X, Y, and Z axes of the joystick. The joystick is centered at (0,0,0).
+			X, Y, and Z are scaled to range between -1000 and 1000. Moving the joystick left reports negative X; right reports
+			positive X. Pulling the stick towards you reports negative Y; push the stick away from you reports positive Y. If the
+			joystick has a third axis (rudder or up/down), down reports negative Z; up reports positive Z.
+		</div>
+    <div class="para">
+			Passing a
+    <span class="constant">NULL</span>
+    func to
+    <a class="function" href="./glutJoystickFunc.html">glutJoystickFunc</a>
+    disables the generation of joystick
+			callbacks. Without a joystick callback registered,
+    <a class="function" href="./glutForceJoystickFunc.html">glutForceJoystickFunc</a>
+    does
+			nothing.
+</div>
+    <div class="para">
+			When a new window is created, no joystick callback is initially registered.
+		</div>
+    </section><section class="section" id="glutJoystickFunc.3GLUT-limitations">
+    <h2 class="title">Limitations</h2>
+    <div class="para">
+			The GLUT joystick callback only reports the first 3 axes and 32 buttons. GLUT supports only a single joystick.
+		</div>
+    </section><section class="section" id="glutJoystickFunc.3GLUT-glut_implementation_notes_for_x11">
+    <h2 class="title">Glut Implementation Notes For X11</h2>
+    <div class="para">
+			The current implementation of GLUT for X11 supports the joystick API, but not joystick input. A future implementation
+			of GLUT for X11 may add joystick support.
+		</div>
+    </section><section class="section" id="glutJoystickFunc.3GLUT-glut_implementation_notes_for_win32">
+    <h2 class="title">Glut Implementation Notes For Win32</h2>
+    <div class="para">
+			The current implementation of GLUT for Win32 supports the joystick API and joystick input, but does so through the
+			dated
+    joySetCapture
+    and
+    joyGetPosEx
+    Win32 Multimedia API. The current GLUT joystick support for Win32 has all the limitations of the Win32 Multimedia API
+			joystick support. A future implementation of GLUT for Win32 may use DirectInput.
+</div>
+    </section><section class="section" id="glutJoystickFunc.3GLUT-glut_implementation_notes_for_non-analog_joysticks">
+    <h2 class="title">Glut Implementation Notes For Non-Analog Joysticks</h2>
+    <div class="para">
+			If the connected joystick does not return (x,y,z) as a continuous range (for example, an 8 position Atari 2600
+			joystick), the implementation should report the most extreme (x,y,z) location. That is, if a 2D joystick is pushed to
+			the upper left, report (-1000,1000,0).
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutForceJoystickFunc.html">glutForceJoystickFunc</a>
+            <a class="crossref" href="./glutMotionFunc.html">glutMotionFunc</a>
+            <a class="crossref" href="./glutMouseFunc.html">glutMouseFunc</a>
+            <a class="crossref" href="./glutSpaceballButtonFunc.html">glutSpaceballButtonFunc</a>
+            <a class="crossref" href="./glutSpaceballMotionFunc.html">glutSpaceballMotionFunc</a>
+            <a class="crossref" href="./glutButtonBoxFunc.html">glutButtonBoxFunc</a>
+            <a class="crossref" href="./glutTabletButtonFunc.html">glutTabletButtonFunc</a>
+            <a class="crossref" href="./glutDeviceGet.html">glutDeviceGet</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

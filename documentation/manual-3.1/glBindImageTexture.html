@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glBindImageTexture : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glBindImageTexture</h1>
+</header>
+<main class="content">
+    <section class="purpose">bind a level of a texture to an image unit</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glBindImageTexture"></a>
+    <span class="c-function">glBindImageTexture</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-unit" class="parameter">unit</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-level" class="parameter">level</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean (
+            <a href="#param-layered" class="parameter">layered</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-layer" class="parameter">layer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-access" class="parameter">access</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glBindImageTexture"></a>
+    <span class="py-function">glBindImageTexture</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-unit" class="parameter">unit</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-layered" class="parameter">layered</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-layer" class="parameter">layer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-access" class="parameter">access</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glBindImageTextures"></a>
+    <span class="py-function">glBindImageTextures</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-first" class="parameter">first</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-count" class="parameter">count</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-textures" class="parameter">textures</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-unit"></a>
+                        unit
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the index of the image unit to which to bind the texture
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the texture to bind to the image unit.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-level"></a>
+                        level
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the level of the texture that is to be bound.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-layered"></a>
+                        layered
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies whether a layered texture binding is to be established.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-layer"></a>
+                        layer
+                    </th>
+                    <td>
+    <div class="para">
+                    If
+    <a class="parameter" href="#param-layered">layered</a>
+    is
+    <span class="constant">GL_FALSE</span>
+    , specifies the layer of
+    <a class="parameter" href="#param-texture">texture</a>
+    to be bound to the image unit. Ignored otherwise.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-access"></a>
+                        access
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a token indicating the type of access that will be performed on the image.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-format"></a>
+                        format
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the format that the elements of the image will be treated as for the purposes of formatted stores.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glBindImageTexture.html">glBindImageTexture</a>
+    binds a single level of a texture to an image unit for the purpose of
+            reading and writing it from shaders.
+    <a class="parameter" href="#param-unit">unit</a>
+    specifies the zero-based index of the image
+            unit to which to bind the texture level.
+    <a class="parameter" href="#param-texture">texture</a>
+    specifies the name of an existing texture
+            object to bind to the image unit. If
+    <a class="parameter" href="#param-texture">texture</a>
+    is zero, then any existing binding to
+            the image unit is broken.
+    <a class="parameter" href="#param-level">level</a>
+    specifies the level of the texture to bind to the image
+            unit.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-texture">texture</a>
+    is the name of a one-, two-, or three-dimensional array texture, a cube map
+            or cube map array texture, or a two-dimensional multisample array texture, then it is possible to bind either
+            the entire array, or only a single layer of the array to the image unit. In such cases, if
+    <a class="parameter" href="#param-layered">layered</a>
+    is
+    <span class="constant">GL_TRUE</span>
+    , the entire array is attached to the image unit and
+    <a class="parameter" href="#param-layer">layer</a>
+    is ignored. However, if
+    <a class="parameter" href="#param-layered">layered</a>
+    is
+    <span class="constant">GL_FALSE</span>
+    then
+    <a class="parameter" href="#param-layer">layer</a>
+    specifies the layer of the array to attach to the image unit.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-access">access</a>
+    specifies the access types to be performed by shaders and may be set to
+    <span class="constant">GL_READ_ONLY</span>
+    ,
+    <span class="constant">GL_WRITE_ONLY</span>
+    , or
+    <span class="constant">GL_READ_WRITE</span>
+    to indicate read-only, write-only or read-write access, respectively. Violation of the access type specified in
+    <a class="parameter" href="#param-access">access</a>
+    (for example, if a shader writes to an image bound with
+    <a class="parameter" href="#param-access">access</a>
+    set to
+    <span class="constant">GL_READ_ONLY</span>
+    )
+            will lead to undefined results, possibly including program termination.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-format">format</a>
+    specifies the format that is to be used when performing formatted stores into the
+            image from shaders.
+    <a class="parameter" href="#param-format">format</a>
+    must be compatible with the texture's internal format and must
+            be one of the formats listed in the following table.
+</div>
+    <div class="para">
+    <div class="table">
+    <h2 class="title">Internal Image Formats</h2>
+    <div class="tgroup">
+    <div class="thead">
+    <div class="row">
+    <div class="entry">
+    <span class="emphasis"> Image Unit Format </span>
+</div>
+    <div class="entry">
+    <span class="emphasis"> Format Qualifier </span>
+</div>
+</div>
+</div>
+    <div class="tbody">
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RGBA32F</span>
+</div>
+    <div class="entry">
+    <div class="code">rgba32f</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RGBA16F</span>
+</div>
+    <div class="entry">
+    <div class="code">rgba16f</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RG32F</span>
+</div>
+    <div class="entry">
+    <div class="code">rg32f</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RG16F</span>
+</div>
+    <div class="entry">
+    <div class="code">rg16f</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_R11F_G11F_B10F</span>
+</div>
+    <div class="entry">
+    <div class="code">r11f_g11f_b10f</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_R32F</span>
+</div>
+    <div class="entry">
+    <div class="code">r32f</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_R16F</span>
+</div>
+    <div class="entry">
+    <div class="code">r16f</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RGBA32UI</span>
+</div>
+    <div class="entry">
+    <div class="code">rgba32ui</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RGBA16UI</span>
+</div>
+    <div class="entry">
+    <div class="code">rgba16ui</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RGB10_A2UI</span>
+</div>
+    <div class="entry">
+    <div class="code">rgb10_a2ui</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RGBA8UI</span>
+</div>
+    <div class="entry">
+    <div class="code">rgba8ui</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RG32UI</span>
+</div>
+    <div class="entry">
+    <div class="code">rg32ui</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RG16UI</span>
+</div>
+    <div class="entry">
+    <div class="code">rg16ui</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RG8UI</span>
+</div>
+    <div class="entry">
+    <div class="code">rg8ui</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_R32UI</span>
+</div>
+    <div class="entry">
+    <div class="code">r32ui</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_R16UI</span>
+</div>
+    <div class="entry">
+    <div class="code">r16ui</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_R8UI</span>
+</div>
+    <div class="entry">
+    <div class="code">r8ui</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RGBA32I</span>
+</div>
+    <div class="entry">
+    <div class="code">rgba32i</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RGBA16I</span>
+</div>
+    <div class="entry">
+    <div class="code">rgba16i</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RGBA8I</span>
+</div>
+    <div class="entry">
+    <div class="code">rgba8i</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RG32I</span>
+</div>
+    <div class="entry">
+    <div class="code">rg32i</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RG16I</span>
+</div>
+    <div class="entry">
+    <div class="code">rg16i</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RG8I</span>
+</div>
+    <div class="entry">
+    <div class="code">rg8i</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_R32I</span>
+</div>
+    <div class="entry">
+    <div class="code">r32i</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_R16I</span>
+</div>
+    <div class="entry">
+    <div class="code">r16i</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_R8I</span>
+</div>
+    <div class="entry">
+    <div class="code">r8i</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RGBA16</span>
+</div>
+    <div class="entry">
+    <div class="code">rgba16</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RGB10_A2</span>
+</div>
+    <div class="entry">
+    <div class="code">rgb10_a2</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RGBA8</span>
+</div>
+    <div class="entry">
+    <div class="code">rgba8</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RG16</span>
+</div>
+    <div class="entry">
+    <div class="code">rg16</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RG8</span>
+</div>
+    <div class="entry">
+    <div class="code">rg8</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_R16</span>
+</div>
+    <div class="entry">
+    <div class="code">r16</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_R8</span>
+</div>
+    <div class="entry">
+    <div class="code">r8</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RGBA16_SNORM</span>
+</div>
+    <div class="entry">
+    <div class="code">rgba16_snorm</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RGBA8_SNORM</span>
+</div>
+    <div class="entry">
+    <div class="code">rgba8_snorm</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RG16_SNORM</span>
+</div>
+    <div class="entry">
+    <div class="code">rg16_snorm</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_RG8_SNORM</span>
+</div>
+    <div class="entry">
+    <div class="code">rg8_snorm</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_R16_SNORM</span>
+</div>
+    <div class="entry">
+    <div class="code">r16_snorm</div>
+</div>
+</div>
+    <div class="row">
+    <div class="entry">
+    <span class="constant">GL_R8_SNORM</span>
+</div>
+    <div class="entry">
+    <div class="code">r8_snorm</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+    <div class="para">
+            When a texture is bound to an image unit, the
+    <a class="parameter" href="#param-format">format</a>
+    parameter for the image
+            unit need not exactly match the texture internal format as long as the formats are
+            considered compatible as defined in the OpenGL Specification. The matching criterion used
+            for a given texture may be determined by calling
+    <a class="crossref" href="./glGetTexParameter.html">glGetTexParameter</a>
+    with
+    <a class="parameter" href="#param-value">value</a>
+    set to
+    <span class="constant">GL_IMAGE_FORMAT_COMPATIBILITY_TYPE</span>
+    , with return values of
+    <span class="constant">GL_IMAGE_FORMAT_COMPATIBILITY_BY_SIZE</span>
+    and
+    <span class="constant">GL_IMAGE_FORMAT_COMPATIBILITY_BY_CLASS</span>
+    , specifying matches by size and class, respectively.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            The
+    <a class="function" href="./glBindImageTexture.html">glBindImageTexture</a>
+    is available only if the GL version is 4.2 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-unit">unit</a>
+    greater than or equal to the
+            value of
+    <span class="constant">GL_MAX_IMAGE_UNITS</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-texture">texture</a>
+    is not the name of
+            an existing texture object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-level">level</a>
+    or
+    <a class="parameter" href="#param-layer">layer</a>
+    is less than zero.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-access">access</a>
+    or
+    <a class="parameter" href="#param-format">format</a>
+    is not one of the supported tokens.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_IMAGE_BINDING_NAME</span>
+    .
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_IMAGE_BINDING_LEVEL</span>
+    .
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_IMAGE_BINDING_LAYERED</span>
+    .
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_IMAGE_BINDING_LAYER</span>
+    .
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_IMAGE_BINDING_ACCESS</span>
+    .
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_IMAGE_BINDING_FORMAT</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glBindImageTexture.html">glBindImageTexture</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenTextures.html">glGenTextures</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexStorage1D.html">glTexStorage1D</a>
+    ,
+    <a class="crossref" href="./glTexStorage2D.html">glTexStorage2D</a>
+    ,
+    <a class="crossref" href="./glTexStorage3D.html">glTexStorage3D</a>
+    ,
+    <a class="crossref" href="./glBindTexture.html">glBindTexture</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

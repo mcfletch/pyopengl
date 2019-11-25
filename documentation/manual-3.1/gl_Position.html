@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gl_Position : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>gl_Position</h1>
+</header>
+<main class="content">
+    <section class="purpose">contains the position of the current vertex</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gl_Position"></a>
+    <span class="c-function">gl_Position</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            In the vertex, tessellation evaluation and geometry languages, a single
+            global instance of the
+    <div class="varname">gl_PerVertex</div>
+    named block is available and
+            its
+    <div class="varname">gl_Position</div>
+    member is an output that receives the
+            homogeneous vertex position. It may be written at any time during shader execution.
+            The value written to
+    <div class="varname">gl_Position</div>
+    will be used by primitive assembly,
+            clipping, culling and other fixed functionality operations, if present, that operate on
+            primitives after vertex processing has occurred.
+</div>
+    <div class="para">
+            In the tessellation control language, the
+    <div class="varname">gl_PerVertex</div>
+    named block
+            is used to construct an array,
+    <div class="varname">gl_out[]</div>
+    , whose
+    <div class="varname">gl_Position</div>
+    members hold the homogeneous control point position, which become available as inputs to the subsequent
+            tessellation evaluation shader.
+</div>
+    <div class="para">
+            The value of
+    <div class="varname">gl_Position</div>
+    (or the
+    <div class="varname">gl_Position</div>
+    member of the
+    <div class="varname">gl_out[]</div>
+    array, in the case of the tessellation control shader)
+            is undefined after the vertex, tessellation control, and tessellation evaluation
+            shading stages if the corresponding shader executable does
+            not write to gl_Position. It is also undefined after the geometry processing stage if the geometry shader executable calls
+    EmitVertex
+    without having
+            written
+    <div class="varname">gl_Position</div>
+    since the last call to
+    EmitVertex
+    (or hasn't written it at all).
+</div>
+    <div class="para">
+            In the tessellation control, tessellation evaluation and geometry languages,
+            the
+    <div class="varname">gl_PerVertex</div>
+    named block is used to construct an array,
+    <div class="varname">gl_in[]</div>
+    of per-vertex or per-control point inputs whose content represents the corresponding
+            outputs written by the previous stage.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>gl_Position</td><td></td>
+                </tr>
+    </tbody></table>
+    <div class="para">Versions 1.10 to 1.40 - vertex shader only.</div>
+    <div class="para">Versions 1.50 to 3.30 - vertex and geometry shaders only.</div>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gl_PointSize.html">gl_PointSize</a>
+    ,
+    <a class="crossref" href="./gl_ClipDistance.html">gl_ClipDistance</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glColorMaterial : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glColorMaterial</h1>
+</header>
+<main class="content">
+    <section class="purpose">cause a material color to track the current color</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glColorMaterial"></a>
+    <span class="c-function">glColorMaterial</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-face" class="parameter">face</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-mode" class="parameter">mode</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glColorMaterial"></a>
+    <span class="py-function">glColorMaterial</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-face" class="parameter">face</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-mode" class="parameter">mode</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-face"></a>
+                        face
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies whether front,
+                    back,
+                    or both front and back material parameters should track the current color.
+                    Accepted values are
+    <span class="constant">GL_FRONT</span>
+    ,
+    <span class="constant">GL_BACK</span>
+    ,
+                    and
+    <span class="constant">GL_FRONT_AND_BACK</span>
+    .
+                    The initial value is
+    <span class="constant">GL_FRONT_AND_BACK</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-mode"></a>
+                        mode
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies which of several material parameters track the current color.
+                    Accepted values are
+    <span class="constant">GL_EMISSION</span>
+    ,
+    <span class="constant">GL_AMBIENT</span>
+    ,
+    <span class="constant">GL_DIFFUSE</span>
+    ,
+    <span class="constant">GL_SPECULAR</span>
+    ,
+                    and
+    <span class="constant">GL_AMBIENT_AND_DIFFUSE</span>
+    .
+                    The initial value is
+    <span class="constant">GL_AMBIENT_AND_DIFFUSE</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glColorMaterial.html">glColorMaterial</a>
+    specifies which material parameters track the current color.
+            When
+    <span class="constant">GL_COLOR_MATERIAL</span>
+    is enabled,
+            the material parameter or parameters specified by
+    <a class="parameter" href="#param-mode">mode</a>
+    ,
+            of the material or materials specified by
+    <a class="parameter" href="#param-face">face</a>
+    ,
+            track the current color at all times.
+</div>
+    <div class="para">
+            To enable and disable
+    <span class="constant">GL_COLOR_MATERIAL</span>
+    , call
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="crossref" href="./glEnable.html#c-glDisable">glDisable</a>
+    with argument
+    <span class="constant">GL_COLOR_MATERIAL</span>
+    .
+    <span class="constant">GL_COLOR_MATERIAL</span>
+    is initially disabled.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glColorMaterial.html">glColorMaterial</a>
+    makes it possible to change a subset of material parameters for each
+            vertex using only the
+    <a class="crossref" href="./glColor.html">glColor</a>
+    command,
+            without calling
+    <a class="crossref" href="./glMaterial.html">glMaterial</a>
+    .
+            If only such a subset of parameters is to be specified for each
+            vertex, calling
+    <a class="function" href="./glColorMaterial.html">glColorMaterial</a>
+    is preferable to calling
+    <a class="crossref" href="./glMaterial.html">glMaterial</a>
+    .
+</div>
+    <div class="para">
+            Call
+    <a class="function" href="./glColorMaterial.html">glColorMaterial</a>
+    before enabling
+    <span class="constant">GL_COLOR_MATERIAL</span>
+    .
+</div>
+    <div class="para">
+            Calling
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    ,
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    , or
+    <a class="crossref" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    may leave the current color indeterminate, if the color array is enabled.
+            If
+    <a class="function" href="./glColorMaterial.html">glColorMaterial</a>
+    is enabled while the current color is indeterminate, the
+            lighting material state specified by
+    <a class="parameter" href="#param-face">face</a>
+    and
+    <a class="parameter" href="#param-mode">mode</a>
+    is also indeterminate.
+</div>
+    <div class="para">
+            If the GL version is 1.1 or greater, and
+    <span class="constant">GL_COLOR_MATERIAL</span>
+    is
+            enabled, evaluated color values affect the results of the lighting
+            equation as if the current color were being modified, but no change is
+            made to the tracking lighting parameter of the current color.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-face">face</a>
+    or
+    <a class="parameter" href="#param-mode">mode</a>
+    is not an
+            accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glColorMaterial.html">glColorMaterial</a>
+    is executed between
+            the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_COLOR_MATERIAL</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_COLOR_MATERIAL_PARAMETER</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_COLOR_MATERIAL_FACE</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glColor.html">glColor</a>
+    ,
+    <a class="crossref" href="./glColorPointer.html">glColorPointer</a>
+    ,
+    <a class="crossref" href="./glDrawArrays.html">glDrawArrays</a>
+    ,
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    ,
+    <a class="crossref" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    ,
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    ,
+    <a class="crossref" href="./glLight.html">glLight</a>
+    ,
+    <a class="crossref" href="./glLightModel.html">glLightModel</a>
+    ,
+    <a class="crossref" href="./glMaterial.html">glMaterial</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glColorMaterial</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/indexedpolygons.py">OpenGLContext/scenegraph/indexedpolygons.py</a>
+    Lines: <span class="sample-lines">26, 75</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/arraygeometry.py">OpenGLContext/scenegraph/arraygeometry.py</a>
+    Lines: <span class="sample-lines">150</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/pointset.py">OpenGLContext/scenegraph/pointset.py</a>
+    Lines: <span class="sample-lines">64</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/spherebackground.py">OpenGLContext/scenegraph/spherebackground.py</a>
+    Lines: <span class="sample-lines">50</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLE/maintest.py">PyOpenGL-Demo/GLE/maintest.py</a>
+    Lines: <span class="sample-lines">64</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/OglSurface/triangle.py">PyOpenGL-Demo/dek/OglSurface/triangle.py</a>
+    Lines: <span class="sample-lines">49</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/obj.py">pymt/obj.py</a>
+    Lines: <span class="sample-lines">21, 53</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/view.py">pyggel/view.py</a>
+    Lines: <span class="sample-lines">160</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/polygonalModeling.py">wobjects/polygonalModeling.py</a>
+    Lines: <span class="sample-lines">983</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">271</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">252</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">250</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">241</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

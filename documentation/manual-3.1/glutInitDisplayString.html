@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutInitDisplayString : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutInitDisplayString</h1>
+</header>
+<main class="content">
+    <section class="purpose">sets the initial display mode via a string.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutInitDisplayString"></a>
+    <span class="c-function">glutInitDisplayString</span>(<span class="parameter-list">
+    <span class="param-def">
+        char(
+            <a href="#param-string" class="parameter">string</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutInitDisplayString"></a>
+    <span class="py-function">glutInitDisplayString</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-displayMode" class="parameter">displayMode</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutInitDisplayString( STRING(displayMode) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-string"></a>
+                        string
+                    </th>
+                    <td>
+    <div class="simpara">
+						Display mode description string, see below.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutInitDisplayString.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			The initial display mode description string is used when creating top-level windows, subwindows, and overlays to
+			determine the OpenGL display mode for the to-be-created window or overlay.
+		</div>
+    <div class="para">
+			The string is a list of zero or more capability descriptions separated by spaces and tabs. Each capability description
+			is a capability name that is optionally followed by a comparator and a numeric value. For example, "double"
+			and "depth&gt;=12" are both valid criteria.
+		</div>
+    <div class="para">
+			The capability descriptions are translated into a set of criteria used to select the appropriate frame buffer
+			configuration.
+		</div>
+    <div class="para">
+			The criteria are matched in strict left to right order of precdence. That is, the first specified criteria (leftmost)
+			takes precedence over the later criteria for non-exact criteria (greater than, less than, etc. comparators). Exact
+			criteria (equal, not equal compartors) must match exactly so precedence is not relevant.
+		</div>
+    <div class="para">
+			The numeric value is an integer that is parsed according to ANSI C's
+    strtol(str, strptr,
+			0)
+    behavior. This means that decimal, octal (leading 0), and hexidecimal values (leading 0x) are accepeted.
+</div>
+    <div class="para">
+			The valid compartors are:
+		</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">=</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Equal.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">!=</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Not equal.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">&lt;</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Less than and preferring larger difference (the least is best).
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">&gt;</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Greater than and preferring larger differences (the most is best).
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">&lt;=</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Less than or equal and preferring larger difference (the least is best).
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">&gt;=</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Greater than or equal and preferring more instead of less. This comparator is useful for allocating
+						resources like color precsion or depth buffer precision where the maximum precison is generally preferred.
+						Contrast with the tilde (~) comprator.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">~</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Greater than or equal but preferring less instead of more. This compartor is useful for allocating
+						resources such as stencil bits or auxillary color buffers where you would rather not over allocate. When
+						the compartor and numeric value are not specified, each capability name has a different default (one
+						default is to require a a compartor and numeric value).
+					</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+			The valid capability names are:
+		</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">alpha</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Alpha color buffer precision in bits. Default is "&gt;=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">acca</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Red, green, blue, and alpha accumulation buffer precision in bits. Default is "&gt;=1" for red,
+						green, blue, and alpha capabilities.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">acc</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Red, green, and green accumulation buffer precision in bits and zero bits of alpha accumulation buffer
+						precision. Default is "&gt;=1" for red, green, and blue capabilities, and "~0" for the
+						alpha capability.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">blue</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Blue color buffer precision in bits. Default is "&gt;=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">buffer</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Number of bits in the color index color buffer. Default is "&gt;=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">conformant</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Boolean indicating if the frame buffer configuration is conformant or not. Conformance information is based
+						on GLX's EXT_visual_rating extension if supported. If the extension is not supported, all visuals are
+						assumed conformat. Default is "=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">depth</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Number of bits of precsion in the depth buffer. Default is "&gt;=12".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">double</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Boolean indicating if the color buffer is double buffered. Default is "=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">green</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Green color buffer precision in bits. Default is "&gt;=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">index</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Boolean if the color model is color index or not. True is color index. Default is "&gt;=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">num</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						A special capability name indicating where the value represents the Nth frame buffer configuration matching
+						the description string. When not specified, glutInitDisplayString also returns the first (best matching)
+						configuration. num requires a compartor and numeric value.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">red</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Red color buffer precision in bits. Default is "&gt;=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">rgba</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Number of bits of red, green, blue, and alpha in the RGBA color buffer. Default is "&gt;=1" for
+						red, green, blue, and alpha capabilities, and "=1" for the RGBA color model capability.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">rgb</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Number of bits of red, green, and blue in the RGBA color buffer and zero bits of alpha color buffer
+						precision. Default is "&gt;=1" for the red, green, and blue capabilities, and "~0" for
+						alpha capability, and "=1" for the RGBA color model capability.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">luminance</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Number of bits of red in the RGBA and zero bits of green, blue (alpha not specified) of color buffer
+						precision. Default is "&gt;=1" for the red capabilitis, and "=0" for the green and blue
+						capabilities, and "=1" for the RGBA color model capability, and, for X11, "=1" for the
+						StaticGray ("xstaticgray") capability.
+					</div>
+    <div class="simpara">
+						SGI InfiniteReality (and other future machines) support a 16-bit luminance (single channel) display mode
+						(an additional 16-bit alpha channel can also be requested). The red channel maps to gray scale and green
+						and blue channels are not available. A 16-bit precision luminance display mode is often appropriate for
+						medical imaging applications. Do not expect many machines to support extended precision luminance display
+						modes.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">stencil</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Number of bits in the stencil buffer.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">single</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Boolean indicate the color buffer is single buffered. Double buffer capability "=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">stereo</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Boolean indicating the color buffer is supports OpenGL-style stereo. Default is "=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">samples</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Indicates the number of multisamples to use based on GLX's SGIS_multisample extension (for antialiasing).
+						Default is "&lt;=4". This default means that a GLUT application can request multipsampling if
+						available by simply specifying "samples".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">slow</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Boolean indicating if the frame buffer configuration is slow or not. For the X11 implementation of GLUT,
+						slowness information is based on GLX's EXT_visual_rating extension if supported. If the EXT_visual_rating
+						extension is not supported, all visuals are assumed fast. For the Win32 implementation of GLUT, slowness is
+						based on if the underlying Pixel Format Descriptor (PFD) is marked "generic" and not
+						"accelerated". This implies that Microsoft's relatively slow software OpenGL implementation is
+						used by this PFD. Note that slowness is a relative designation relative to other frame buffer
+						configurations available. The intent of the slow capability is to help programs avoid frame buffer
+						configurations that are slower (but perhaps higher precision) for the current machine. Default is
+						"&gt;=0" if not comparator and numeric value are provided. This default means that slow visuals
+						are used in preference to fast visuals, but fast visuals will still be allowed.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">win32pfd</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Only recognized on GLUT implementations for Win32, this capability name matches the Win32 Pixel Format
+						Descriptor by numer. win32pfd requires a compartor and numeric value.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">xvisual</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Only recongized on GLUT implementations for the X Window System, this capability name matches the X visual
+						ID by number. xvisual requires a compartor and numeric value.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">xstaticgray</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Only recongized on GLUT implementations for the X Window System, boolean indicating if the frame buffer
+						configuration's X visual is of type StaticGray. Default is "=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">xgrayscale</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Only recongized on GLUT implementations for the X Window System, boolean indicating if the frame buffer
+						configuration's X visual is of type GrayScale. Default is "=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">xstaticcolor</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Only recongized on GLUT implementations for the X Window System, boolean indicating if the frame buffer
+						configuration's X visual is of type StaticColor. Default is "=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">xpseudocolor</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Only recongized on GLUT implementations for the X Window System, boolean indicating if the frame buffer
+						configuration's X visual is of type PsuedoColor. Default is "=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">xtruecolor</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Only recongized on GLUT implementations for the X Window System, boolean indicating if the frame buffer
+						configuration's X visual is of type TrueColor. Default is "=1".
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="emphasis">xdirectcolor</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Only recongized on GLUT implementations for the X Window System, boolean indicating if the frame buffer
+						configuration's X visual is of type DirectColor. Default is "=1".
+					</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+			Unspecifed capability descriptions will result in unspecified criteria being generated. These unspecified criteria help
+    <a class="function" href="./glutInitDisplayString.html">glutInitDisplayString</a>
+    behave sensibly with terse display mode description strings. For example, if
+			no "slow" capability description is provided, fast frame buffer configurations will be choosen in preference
+			to slow frame buffer configurations, but slow frame buffer configurations will still be choosen if no better fast frame
+			buffer configuration is available.
+</div>
+    </section><section class="section" id="glutInitDisplayString.3GLUT-example">
+    <h2 class="title">Example</h2>
+    <div class="para">
+			Here is an examples using
+    <a class="function" href="./glutInitDisplayString.html">glutInitDisplayString</a>
+    :
+</div>
+    <div class="programlisting">glutInitDisplayString("stencil~2 rgb double depth&gt;=16 samples");</div>
+    <div class="para">
+			The above call requests a window with an RGBA color model (but requesting no bits of alpha), a depth buffer with at
+			least 16 bits of precsion but preferring more, mutlisampling if available, and at least 2 bits of stencil (favoring
+			less stencil to more as long as 2 bits are available).
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutInit.html">glutInit</a>
+            <a class="crossref" href="./glutCreateWindow.html">glutCreateWindow</a>
+            <a class="crossref" href="./glutInitDisplayMode.html">glutInitDisplayMode</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

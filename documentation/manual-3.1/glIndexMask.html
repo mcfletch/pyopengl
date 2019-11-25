@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glIndexMask : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glIndexMask</h1>
+</header>
+<main class="content">
+    <section class="purpose">control the writing of individual bits in the color index buffers</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glIndexMask"></a>
+    <span class="c-function">glIndexMask</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-mask" class="parameter">mask</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glIndexMask"></a>
+    <span class="py-function">glIndexMask</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-mask" class="parameter">mask</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-mask"></a>
+                        mask
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a bit mask to enable and disable the writing of individual bits
+                    in the color index buffers.
+                    Initially, the mask is all 1's.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glIndexMask.html">glIndexMask</a>
+    controls the writing of individual bits in the color index buffers.
+            The least significant
+    <math><mi mathvariant="italic">n</mi></math>
+    bits of
+    <a class="parameter" href="#param-mask">mask</a>
+    ,
+            where
+    <math><mi mathvariant="italic">n</mi></math>
+    is the number of bits in a color index buffer,
+            specify a mask.
+            Where a 1 (one) appears in the mask,
+            it's possible to write to the corresponding bit in the color index
+            buffer (or buffers).
+            Where a 0 (zero) appears,
+            the corresponding bit is write-protected.
+</div>
+    <div class="para">
+            This mask is used only in color index mode,
+            and it affects only the buffers currently selected for writing
+            (see
+    <a class="crossref" href="./glDrawBuffer.html">glDrawBuffer</a>
+    ).
+            Initially, all bits are enabled for writing.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glIndexMask.html">glIndexMask</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_INDEX_WRITEMASK</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glColorMask.html">glColorMask</a>
+    ,
+    <a class="crossref" href="./glDepthMask.html">glDepthMask</a>
+    ,
+    <a class="crossref" href="./glDrawBuffer.html">glDrawBuffer</a>
+    ,
+    <a class="crossref" href="./glIndex.html">glIndex</a>
+    ,
+    <a class="crossref" href="./glIndexPointer.html">glIndexPointer</a>
+    ,
+    <a class="crossref" href="./glStencilMask.html">glStencilMask</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

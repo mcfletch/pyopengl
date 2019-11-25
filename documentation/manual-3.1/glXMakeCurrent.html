@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXMakeCurrent : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXMakeCurrent</h1>
+</header>
+<main class="content">
+    <section class="purpose">attach a GLX context to a window or a GLX pixmap</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXMakeCurrent"></a>
+    <span class="c-function">glXMakeCurrent</span>(<span class="parameter-list">
+    <span class="param-def">
+        Display * (
+            <a href="#param-dpy" class="parameter">dpy</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLXDrawable (
+            <a href="#param-drawable" class="parameter">drawable</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLXContext (
+            <a href="#param-ctx" class="parameter">ctx</a>
+        )
+    </span>
+</span>)-&gt; Bool
+</div>
+                <div class="py-signature">
+    <a name="py-glXMakeCurrent"></a>
+    <span class="py-function">glXMakeCurrent</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-dpy" class="parameter">dpy</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-drawable" class="parameter">drawable</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-ctx" class="parameter">ctx</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_uint'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dpy"></a>
+                        dpy
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the connection to the X server.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-drawable"></a>
+                        drawable
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a GLX drawable.
+                    Must be either an X window ID or a GLX pixmap ID.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-ctx"></a>
+                        ctx
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a GLX rendering context that is to be attached to
+    <a class="parameter" href="#param-drawable">drawable</a>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXMakeCurrent.html">glXMakeCurrent</a>
+    does two things:
+            It makes
+    <a class="parameter" href="#param-ctx">ctx</a>
+    the current GLX rendering context of the calling thread,
+            replacing the previously current context if there was one,
+            and it attaches
+    <a class="parameter" href="#param-ctx">ctx</a>
+    to a GLX drawable,
+            either a window or a GLX pixmap.
+            As a result of these two actions,
+            subsequent GL rendering calls
+            use rendering context
+    <a class="parameter" href="#param-ctx">ctx</a>
+    to modify GLX drawable
+    <a class="parameter" href="#param-drawable">drawable</a>
+    (for
+            reading and writing).
+            Because
+    <a class="function" href="./glXMakeCurrent.html">glXMakeCurrent</a>
+    always replaces the current rendering context with
+    <a class="parameter" href="#param-ctx">ctx</a>
+    ,
+            there can be only one current context per thread.
+</div>
+    <div class="para">
+            Pending commands to the
+            previous context, if any, are flushed before it is released.
+        </div>
+    <div class="para">
+            The first time
+    <a class="parameter" href="#param-ctx">ctx</a>
+    is made current to any thread,
+            its viewport is set to the full size of
+    <a class="parameter" href="#param-drawable">drawable</a>
+    .
+            Subsequent calls by any thread to
+    <a class="function" href="./glXMakeCurrent.html">glXMakeCurrent</a>
+    with
+    <a class="parameter" href="#param-ctx">ctx</a>
+    have no effect on its viewport.
+</div>
+    <div class="para">
+            To release the current context without assigning a new one,
+            call
+    <a class="function" href="./glXMakeCurrent.html">glXMakeCurrent</a>
+    with
+    <a class="parameter" href="#param-drawable">drawable</a>
+    set to
+    <span class="constant">None</span>
+    and
+    <a class="parameter" href="#param-ctx">ctx</a>
+    set to
+    <span class="constant">NULL</span>
+    .
+</div>
+    <div class="para">
+    <a class="function" href="./glXMakeCurrent.html">glXMakeCurrent</a>
+    returns
+    <span class="constant">True</span>
+    if it is successful,
+    <span class="constant">False</span>
+    otherwise.
+            If
+    <span class="constant">False</span>
+    is returned, the previously current rendering context
+            and drawable (if any) remain unchanged.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            A
+    <span class="emphasis">process</span>
+    is a single-execution environment,
+            implemented in a single address space,
+            consisting of one or more threads.
+</div>
+    <div class="para">
+            A
+    <span class="emphasis">thread</span>
+    is one of a set of subprocesses that share
+            a single address space,
+            but maintain separate program counters,
+            stack spaces,
+            and other related global data.
+            A
+    <span class="emphasis">thread</span>
+    that is the only member of its subprocess group
+            is equivalent to a
+    <span class="emphasis">process</span>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">BadMatch</span>
+    is generated if
+    <a class="parameter" href="#param-drawable">drawable</a>
+    was not
+            created with the same X screen and visual as
+    <a class="parameter" href="#param-ctx">ctx</a>
+    .
+            It is also generated if
+    <a class="parameter" href="#param-drawable">drawable</a>
+    is
+    <span class="constant">None</span>
+    and
+    <a class="parameter" href="#param-ctx">ctx</a>
+    is not
+    <span class="constant">NULL</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">BadAccess</span>
+    is generated if
+    <a class="parameter" href="#param-ctx">ctx</a>
+    was current to another thread
+            at the time
+    <a class="function" href="./glXMakeCurrent.html">glXMakeCurrent</a>
+    was called.
+</div>
+    <div class="para">
+    <span class="constant">GLXBadDrawable</span>
+    is generated if
+    <a class="parameter" href="#param-drawable">drawable</a>
+    is not a valid GLX drawable.
+</div>
+    <div class="para">
+    <span class="constant">GLXBadContext</span>
+    is generated if
+    <a class="parameter" href="#param-ctx">ctx</a>
+    is not a valid GLX context.
+</div>
+    <div class="para">
+    <span class="constant">GLXBadContextState</span>
+    is generated if
+    <a class="function" href="./glXMakeCurrent.html">glXMakeCurrent</a>
+    is executed between
+            the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLXBadContextState</span>
+    is also generated if the rendering context current
+            to the calling thread has GL renderer state
+    <span class="constant">GLX_FEEDBACK</span>
+    or
+    <span class="constant">GLX_SELECT</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLXBadCurrentWindow</span>
+    is generated if there are pending GL
+            commands for the previous context and the current drawable is
+            a window that is no longer valid.
+</div>
+    <div class="para">
+    <span class="constant">BadAlloc</span>
+    may be generated if the server has delayed allocation
+            of ancillary buffers until
+    <a class="function" href="./glXMakeCurrent.html">glXMakeCurrent</a>
+    is called, only to find that it has
+            insufficient resources to complete the allocation.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glXCreateContext.html">glXCreateContext</a>
+    ,
+    <a class="crossref" href="./glXCreateGLXPixmap.html">glXCreateGLXPixmap</a>
+    <a class="crossref" href="./glXGetCurrentContext.html">glXGetCurrentContext</a>
+    ,
+    <a class="crossref" href="./glXGetCurrentDisplay.html">glXGetCurrentDisplay</a>
+    ,
+    <a class="crossref" href="./glXGetCurrentDrawable.html">glXGetCurrentDrawable</a>
+    ,
+    <a class="crossref" href="./glXGetCurrentReadDrawable.html">glXGetCurrentReadDrawable</a>
+    ,
+    <a class="crossref" href="./glXMakeContextCurrent.html">glXMakeContextCurrent</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

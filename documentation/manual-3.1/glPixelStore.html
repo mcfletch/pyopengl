@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glPixelStore : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glPixelStore</h1>
+</header>
+<main class="content">
+    <section class="purpose">set pixel storage modes</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glPixelStore"></a>
+    <span class="c-function">glPixelStore</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glPixelStoref"></a>
+    <span class="c-function">glPixelStoref</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glPixelStoref"></a>
+    <span class="py-function">glPixelStoref</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glPixelStorei"></a>
+    <span class="c-function">glPixelStorei</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-param" class="parameter">param</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glPixelStorei"></a>
+    <span class="py-function">glPixelStorei</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-param" class="parameter">param</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the symbolic name of the parameter to be set.
+                    Six values affect the packing of pixel data into memory:
+    <span class="constant">GL_PACK_SWAP_BYTES</span>
+    ,
+    <span class="constant">GL_PACK_LSB_FIRST</span>
+    ,
+    <span class="constant">GL_PACK_ROW_LENGTH</span>
+    ,
+    <span class="constant">GL_PACK_IMAGE_HEIGHT</span>
+    ,
+    <span class="constant">GL_PACK_SKIP_PIXELS</span>
+    ,
+    <span class="constant">GL_PACK_SKIP_ROWS</span>
+    ,
+    <span class="constant">GL_PACK_SKIP_IMAGES</span>
+    , and
+    <span class="constant">GL_PACK_ALIGNMENT</span>
+    .
+                    Six more affect the unpacking of pixel data
+    <span class="emphasis">from</span>
+    memory:
+    <span class="constant">GL_UNPACK_SWAP_BYTES</span>
+    ,
+    <span class="constant">GL_UNPACK_LSB_FIRST</span>
+    ,
+    <span class="constant">GL_UNPACK_ROW_LENGTH</span>
+    ,
+    <span class="constant">GL_UNPACK_IMAGE_HEIGHT</span>
+    ,
+    <span class="constant">GL_UNPACK_SKIP_PIXELS</span>
+    ,
+    <span class="constant">GL_UNPACK_SKIP_ROWS</span>
+    ,
+    <span class="constant">GL_UNPACK_SKIP_IMAGES</span>
+    , and
+    <span class="constant">GL_UNPACK_ALIGNMENT</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-param"></a>
+                        param
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the value that
+    <a class="parameter" href="#param-pname">pname</a>
+    is set to.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glPixelStore.html">glPixelStore</a>
+    sets pixel storage modes that affect the operation of subsequent
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    as well as the unpacking of
+            texture patterns (see
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage1D.html">glTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage3D.html">glTexSubImage3D</a>
+    ),
+    <a class="crossref" href="./glCompressedTexImage1D.html">glCompressedTexImage1D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexImage2D.html">glCompressedTexImage2D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexImage3D.html">glCompressedTexImage3D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexSubImage1D.html">glCompressedTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexSubImage2D.html">glCompressedTexSubImage2D</a>
+    or
+    <a class="crossref" href="./glCompressedTexSubImage1D.html">glCompressedTexSubImage1D</a>
+    .
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-pname">pname</a>
+    is a symbolic constant indicating the parameter to be set, and
+    <a class="parameter" href="#param-param">param</a>
+    is the new value.  Six of the twelve storage parameters affect
+            how pixel data is returned to client memory.
+            They are as follows:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PACK_SWAP_BYTES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        If true,
+                        byte ordering for multibyte color components,
+                        depth components,
+                        or stencil indices
+                        is reversed.
+                        That is,
+                        if a four-byte component consists of bytes
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>0</mn>
+                            </msub>
+                        </math>
+    ,
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>1</mn>
+                            </msub>
+                        </math>
+    ,
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>2</mn>
+                            </msub>
+                        </math>
+    ,
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>3</mn>
+                            </msub>
+                        </math>
+    ,
+                        it is stored in memory as
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>3</mn>
+                            </msub>
+                        </math>
+    ,
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>2</mn>
+                            </msub>
+                        </math>
+    ,
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>1</mn>
+                            </msub>
+                        </math>
+    ,
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>0</mn>
+                            </msub>
+                        </math>
+    if
+    <span class="constant">GL_PACK_SWAP_BYTES</span>
+    is true.
+    <span class="constant">GL_PACK_SWAP_BYTES</span>
+    has no effect on the memory order of components
+                        within a pixel,
+                        only on the order of bytes within components or indices.
+                        For example,
+                        the three components of a
+    <span class="constant">GL_RGB</span>
+    format pixel are always stored with
+                        red first,
+                        green second,
+                        and blue third,
+                        regardless of the value of
+    <span class="constant">GL_PACK_SWAP_BYTES</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PACK_LSB_FIRST</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        If true,
+                        bits are ordered within a byte from least significant to most significant;
+                        otherwise,
+                        the first bit in each byte is the most significant one.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PACK_ROW_LENGTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        If greater than 0,
+    <span class="constant">GL_PACK_ROW_LENGTH</span>
+    defines the number of pixels in a row.
+                        If the first pixel of a row is placed at location
+    <math overflow="scroll"><mi mathvariant="italic">p</mi></math>
+    in memory,
+                        then the location of the first pixel of the next row is obtained by skipping
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">k</mi>
+                                <mo>=</mo>
+                                <mfenced open="{" close="">
+                                    <mrow>
+                                        <mtable>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mi mathvariant="italic">n</mi>
+                                                    <mo></mo>
+                                                    <mi mathvariant="italic">l</mi>
+                                                </mrow>
+                                            </mtd></mtr>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mfenced open="" close="">
+                                                        <mfrac>
+                                                            <mi mathvariant="italic">a</mi>
+                                                            <mi mathvariant="italic">s</mi>
+                                                        </mfrac>
+                                                    </mfenced>
+                                                    <mo></mo>
+                                                    <mfenced open="" close="">
+                                                        <mfrac>
+                                                            <mfenced open="" close="">
+                                                                <mrow>
+                                                                    <mi mathvariant="italic">s</mi>
+                                                                    <mo></mo>
+                                                                    <mi mathvariant="italic">n</mi>
+                                                                    <mo></mo>
+                                                                    <mi mathvariant="italic">l</mi>
+                                                                </mrow>
+                                                            </mfenced>
+                                                            <mi mathvariant="italic">a</mi>
+                                                        </mfrac>
+                                                    </mfenced>
+                                                </mrow>
+                                            </mtd></mtr>
+                                        </mtable>
+                                        <mo></mo>
+                                        <mtable>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mi mathvariant="italic">s</mi>
+                                                    <mo>&gt;=</mo>
+                                                    <mi mathvariant="italic">a</mi>
+                                                </mrow>
+                                            </mtd></mtr>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mi mathvariant="italic">s</mi>
+                                                    <mo>&lt;</mo>
+                                                    <mi mathvariant="italic">a</mi>
+                                                </mrow>
+                                            </mtd></mtr>
+                                        </mtable>
+                                    </mrow>
+                                </mfenced>
+                            </mrow>
+                        </math>
+</div>
+</div>
+    <div class="para">
+                        components or indices,
+                        where
+    <math overflow="scroll"><mi mathvariant="italic">n</mi></math>
+    is the number of components or indices in a pixel,
+    <math overflow="scroll"><mi mathvariant="italic">l</mi></math>
+    is the number of pixels in a row
+                        (
+    <span class="constant">GL_PACK_ROW_LENGTH</span>
+    if it is greater than 0,
+                        the
+    <math overflow="scroll"><mi mathvariant="italic">width</mi></math>
+    argument to the pixel routine otherwise),
+    <math overflow="scroll"><mi mathvariant="italic">a</mi></math>
+    is the value of
+    <span class="constant">GL_PACK_ALIGNMENT</span>
+    , and
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    is the size, in bytes, of a single component
+                        (if
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">a</mi>
+                                <mo>&lt;</mo>
+                                <mi mathvariant="italic">s</mi>
+                            </mrow>
+                        </math>
+    ,
+                        then it is as if
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">a</mi>
+                                <mo>=</mo>
+                                <mi mathvariant="italic">s</mi>
+                            </mrow>
+                        </math>
+    ).
+                        In the case of 1-bit values,
+                        the location of the next row is obtained by skipping
+</div>
+    <div class="para">
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">k</mi>
+                                <mo>=</mo>
+                                <mrow>
+                                    <mn>8</mn>
+                                    <mo></mo>
+                                    <mi mathvariant="italic">a</mi>
+                                    <mo></mo>
+                                    <mfenced open="" close="">
+                                        <mfrac>
+                                            <mfenced open="" close="">
+                                                <mrow>
+                                                    <mi mathvariant="italic">n</mi>
+                                                    <mo></mo>
+                                                    <mi mathvariant="italic">l</mi>
+                                                </mrow>
+                                            </mfenced>
+                                            <mfenced open="" close="">
+                                                <mrow>
+                                                    <mn>8</mn>
+                                                    <mo></mo>
+                                                    <mi mathvariant="italic">a</mi>
+                                                </mrow>
+                                            </mfenced>
+                                        </mfrac>
+                                    </mfenced>
+                                </mrow>
+                            </mrow>
+                        </math>
+</div>
+    <div class="para">
+                        components or indices.
+                    </div>
+    <div class="para">
+                        The word
+    <span class="emphasis">component</span>
+    in this description refers to the nonindex values
+                        red,
+                        green,
+                        blue,
+                        alpha,
+                        and depth.
+                        Storage format
+    <span class="constant">GL_RGB</span>
+    ,
+                        for example,
+                        has three components per pixel:
+                        first red,
+                        then green,
+                        and finally blue.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PACK_IMAGE_HEIGHT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        If greater than 0,
+    <span class="constant">GL_PACK_IMAGE_HEIGHT</span>
+    defines the number of pixels in an image
+                        three-dimensional texture volume, where ``image'' is defined by all pixels
+                        sharing the same third dimension index.
+                        If the first pixel of a row is placed at location
+    <math overflow="scroll"><mi mathvariant="italic">p</mi></math>
+    in memory,
+                        then the location of the first pixel of the next row is obtained by skipping
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">k</mi>
+                                <mo>=</mo>
+                                <mfenced open="{" close="">
+                                    <mrow>
+                                        <mtable>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mi mathvariant="italic">n</mi>
+                                                    <mo></mo>
+                                                    <mi mathvariant="italic">l</mi>
+                                                    <mo></mo>
+                                                    <mi mathvariant="italic">h</mi>
+                                                </mrow>
+                                            </mtd></mtr>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mfenced open="" close="">
+                                                        <mfrac>
+                                                            <mi mathvariant="italic">a</mi>
+                                                            <mi mathvariant="italic">s</mi>
+                                                        </mfrac>
+                                                    </mfenced>
+                                                    <mo></mo>
+                                                    <mfenced open="" close="">
+                                                        <mfrac>
+                                                            <mfenced open="" close="">
+                                                                <mrow>
+                                                                    <mi mathvariant="italic">s</mi>
+                                                                    <mo></mo>
+                                                                    <mi mathvariant="italic">n</mi>
+                                                                    <mo></mo>
+                                                                    <mi mathvariant="italic">l</mi>
+                                                                    <mo></mo>
+                                                                    <mi mathvariant="italic">h</mi>
+                                                                </mrow>
+                                                            </mfenced>
+                                                            <mi mathvariant="italic">a</mi>
+                                                        </mfrac>
+                                                    </mfenced>
+                                                </mrow>
+                                            </mtd></mtr>
+                                        </mtable>
+                                        <mo></mo>
+                                        <mtable>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mi mathvariant="italic">s</mi>
+                                                    <mo>&gt;=</mo>
+                                                    <mi mathvariant="italic">a</mi>
+                                                </mrow>
+                                            </mtd></mtr>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mi mathvariant="italic">s</mi>
+                                                    <mo>&lt;</mo>
+                                                    <mi mathvariant="italic">a</mi>
+                                                </mrow>
+                                            </mtd></mtr>
+                                        </mtable>
+                                    </mrow>
+                                </mfenced>
+                            </mrow>
+                        </math>
+</div>
+</div>
+    <div class="para">
+                        components or indices, where
+    <math overflow="scroll"><mi mathvariant="italic">n</mi></math>
+    is the number of components or indices
+                        in a pixel,
+    <math overflow="scroll"><mi mathvariant="italic">l</mi></math>
+    is the number of pixels in a row
+                        (
+    <span class="constant">GL_PACK_ROW_LENGTH</span>
+    if it is greater than 0, the
+    <math overflow="scroll"><mi mathvariant="italic">width</mi></math>
+    argument to
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    otherwise),
+    <math overflow="scroll"><mi mathvariant="italic">h</mi></math>
+    is the number of
+                        rows in a pixel image (
+    <span class="constant">GL_PACK_IMAGE_HEIGHT</span>
+    if it is greater than
+                        0, the
+    <math overflow="scroll"><mi mathvariant="italic">height</mi></math>
+    argument to the
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    routine otherwise),
+    <math overflow="scroll"><mi mathvariant="italic">a</mi></math>
+    is the value of
+    <span class="constant">GL_PACK_ALIGNMENT</span>
+    , and
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    is the size, in bytes, of a single
+                        component (if
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">a</mi>
+                                <mo>&lt;</mo>
+                                <mi mathvariant="italic">s</mi>
+                            </mrow>
+                        </math>
+    ,
+                        then it is as if
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">a</mi>
+                                <mo>=</mo>
+                                <mi mathvariant="italic">s</mi>
+                            </mrow>
+                        </math>
+    ).
+</div>
+    <div class="para">
+                        The word
+    <span class="emphasis">component</span>
+    in this description refers to the nonindex values
+                        red,
+                        green,
+                        blue,
+                        alpha,
+                        and depth.
+                        Storage format
+    <span class="constant">GL_RGB</span>
+    ,
+                        for example,
+                        has three components per pixel:
+                        first red,
+                        then green,
+                        and finally blue.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PACK_SKIP_PIXELS</span>
+    ,
+    <span class="constant">GL_PACK_SKIP_ROWS</span>
+    , and
+    <span class="constant">GL_PACK_SKIP_IMAGES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        These values are provided as a convenience to the programmer;
+                        they provide no functionality that cannot be duplicated simply by
+                        incrementing the pointer passed to
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    .
+                        Setting
+    <span class="constant">GL_PACK_SKIP_PIXELS</span>
+    to
+    <math overflow="scroll"><mi mathvariant="italic">i</mi></math>
+    is equivalent to incrementing
+                        the pointer by
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">i</mi>
+                                <mo></mo>
+                                <mi mathvariant="italic">n</mi>
+                            </mrow>
+                        </math>
+    components or indices,
+                        where
+    <math overflow="scroll"><mi mathvariant="italic">n</mi></math>
+    is the number of components or indices in each pixel.
+                        Setting
+    <span class="constant">GL_PACK_SKIP_ROWS</span>
+    to
+    <math overflow="scroll"><mi mathvariant="italic">j</mi></math>
+    is equivalent to incrementing
+                        the pointer by
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">j</mi>
+                                <mo></mo>
+                                <mi mathvariant="italic">m</mi>
+                            </mrow>
+                        </math>
+    components or indices,
+                        where
+    <math overflow="scroll"><mi mathvariant="italic">m</mi></math>
+    is the number of components or indices per row,
+                        as just computed in the
+    <span class="constant">GL_PACK_ROW_LENGTH</span>
+    section.
+                        Setting
+    <span class="constant">GL_PACK_SKIP_IMAGES</span>
+    to
+    <math overflow="scroll"><mi mathvariant="italic">k</mi></math>
+    is equivalent to incrementing
+                        the pointer by
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">k</mi>
+                                <mo></mo>
+                                <mi mathvariant="italic">p</mi>
+                            </mrow>
+                        </math>
+    ,
+                        where
+    <math overflow="scroll"><mi mathvariant="italic">p</mi></math>
+    is the number of components or indices
+                        per image, as computed in the
+    <span class="constant">GL_PACK_IMAGE_HEIGHT</span>
+    section.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PACK_ALIGNMENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specifies the alignment requirements for the start of each pixel row in memory.
+                        The allowable values are
+                        1 (byte-alignment),
+                        2 (rows aligned to even-numbered bytes),
+                        4 (word-alignment), and
+                        8 (rows start on double-word boundaries).
+                    </div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+            The other six of the twelve storage parameters affect how pixel data is
+            read from client memory.
+            These values are significant for
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage1D.html">glTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    , and
+    <a class="crossref" href="./glTexSubImage3D.html">glTexSubImage3D</a>
+</div>
+    <div class="para">
+            They are as follows:
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNPACK_SWAP_BYTES</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        If true,
+                        byte ordering for multibyte color components,
+                        depth components,
+                        or stencil indices
+                        is reversed.
+                        That is,
+                        if a four-byte component consists of bytes
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>0</mn>
+                            </msub>
+                        </math>
+    ,
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>1</mn>
+                            </msub>
+                        </math>
+    ,
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>2</mn>
+                            </msub>
+                        </math>
+    ,
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>3</mn>
+                            </msub>
+                        </math>
+    ,
+                        it is taken from memory as
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>3</mn>
+                            </msub>
+                        </math>
+    ,
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>2</mn>
+                            </msub>
+                        </math>
+    ,
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>1</mn>
+                            </msub>
+                        </math>
+    ,
+    <math overflow="scroll">
+                            <msub><mi mathvariant="italic">b</mi>
+                            <mn>0</mn>
+                            </msub>
+                        </math>
+    if
+    <span class="constant">GL_UNPACK_SWAP_BYTES</span>
+    is true.
+    <span class="constant">GL_UNPACK_SWAP_BYTES</span>
+    has no effect on the memory order of components
+                        within a pixel,
+                        only on the order of bytes within components or indices.
+                        For example,
+                        the three components of a
+    <span class="constant">GL_RGB</span>
+    format pixel are always stored with
+                        red first,
+                        green second,
+                        and blue third,
+                        regardless of the value of
+    <span class="constant">GL_UNPACK_SWAP_BYTES</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNPACK_LSB_FIRST</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        If true,
+                        bits are ordered within a byte from least significant to most significant;
+                        otherwise,
+                        the first bit in each byte is the most significant one.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNPACK_ROW_LENGTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        If greater than 0,
+    <span class="constant">GL_UNPACK_ROW_LENGTH</span>
+    defines the number of pixels in a row.
+                        If the first pixel of a row is placed at location
+    <math overflow="scroll"><mi mathvariant="italic">p</mi></math>
+    in memory,
+                        then the location of the first pixel of the next row is obtained by skipping
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">k</mi>
+                                <mo>=</mo>
+                                <mfenced open="{" close="">
+                                    <mrow>
+                                        <mtable>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mi mathvariant="italic">n</mi>
+                                                    <mo></mo>
+                                                    <mi mathvariant="italic">l</mi>
+                                                </mrow>
+                                            </mtd></mtr>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mfenced open="" close="">
+                                                        <mfrac>
+                                                            <mi mathvariant="italic">a</mi>
+                                                            <mi mathvariant="italic">s</mi>
+                                                        </mfrac>
+                                                    </mfenced>
+                                                    <mo></mo>
+                                                    <mfenced open="" close="">
+                                                        <mfrac>
+                                                            <mfenced open="" close="">
+                                                                <mrow>
+                                                                    <mi mathvariant="italic">s</mi>
+                                                                    <mo></mo>
+                                                                    <mi mathvariant="italic">n</mi>
+                                                                    <mo></mo>
+                                                                    <mi mathvariant="italic">l</mi>
+                                                                </mrow>
+                                                            </mfenced>
+                                                            <mi mathvariant="italic">a</mi>
+                                                        </mfrac>
+                                                    </mfenced>
+                                                </mrow>
+                                            </mtd></mtr>
+                                        </mtable>
+                                        <mo></mo>
+                                        <mtable>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mi mathvariant="italic">s</mi>
+                                                    <mo>&gt;=</mo>
+                                                    <mi mathvariant="italic">a</mi>
+                                                </mrow>
+                                            </mtd></mtr>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mi mathvariant="italic">s</mi>
+                                                    <mo>&lt;</mo>
+                                                    <mi mathvariant="italic">a</mi>
+                                                </mrow>
+                                            </mtd></mtr>
+                                        </mtable>
+                                    </mrow>
+                                </mfenced>
+                            </mrow>
+                        </math>
+</div>
+</div>
+    <div class="para">
+                        components or indices,
+                        where
+    <math overflow="scroll"><mi mathvariant="italic">n</mi></math>
+    is the number of components or indices in a pixel,
+    <math overflow="scroll"><mi mathvariant="italic">l</mi></math>
+    is the number of pixels in a row
+                        (
+    <span class="constant">GL_UNPACK_ROW_LENGTH</span>
+    if it is greater than 0,
+                        the
+    <math overflow="scroll"><mi mathvariant="italic">width</mi></math>
+    argument to the pixel routine otherwise),
+    <math overflow="scroll"><mi mathvariant="italic">a</mi></math>
+    is the value of
+    <span class="constant">GL_UNPACK_ALIGNMENT</span>
+    , and
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    is the size, in bytes, of a single component
+                        (if
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">a</mi>
+                                <mo>&lt;</mo>
+                                <mi mathvariant="italic">s</mi>
+                            </mrow>
+                        </math>
+    ,
+                        then it is as if
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">a</mi>
+                                <mo>=</mo>
+                                <mi mathvariant="italic">s</mi>
+                            </mrow>
+                        </math>
+    ).
+                        In the case of 1-bit values,
+                        the location of the next row is obtained by skipping
+</div>
+    <div class="para">
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">k</mi>
+                                <mo>=</mo>
+                                <mrow>
+                                    <mn>8</mn>
+                                    <mo></mo>
+                                    <mi mathvariant="italic">a</mi>
+                                    <mo></mo>
+                                    <mfenced open="" close="">
+                                        <mfrac>
+                                            <mfenced open="" close="">
+                                                <mrow>
+                                                    <mi mathvariant="italic">n</mi>
+                                                    <mo></mo>
+                                                    <mi mathvariant="italic">l</mi>
+                                                </mrow>
+                                            </mfenced>
+                                            <mfenced open="" close="">
+                                                <mrow>
+                                                    <mn>8</mn>
+                                                    <mo></mo>
+                                                    <mi mathvariant="italic">a</mi>
+                                                </mrow>
+                                            </mfenced>
+                                        </mfrac>
+                                    </mfenced>
+                                </mrow>
+                            </mrow>
+                        </math>
+</div>
+    <div class="para">
+                        components or indices.
+                    </div>
+    <div class="para">
+                        The word
+    <span class="emphasis">component</span>
+    in this description refers to the nonindex values
+                        red,
+                        green,
+                        blue,
+                        alpha,
+                        and depth.
+                        Storage format
+    <span class="constant">GL_RGB</span>
+    ,
+                        for example,
+                        has three components per pixel:
+                        first red,
+                        then green,
+                        and finally blue.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNPACK_IMAGE_HEIGHT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        If greater than 0,
+    <span class="constant">GL_UNPACK_IMAGE_HEIGHT</span>
+    defines the number of pixels in an image of
+                        a three-dimensional texture volume.  Where ``image'' is defined by all
+                        pixel sharing the same third dimension index.
+                        If the first pixel of a row is placed at location
+    <math overflow="scroll"><mi mathvariant="italic">p</mi></math>
+    in memory,
+                        then the location of the first pixel of the next row is obtained by skipping
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">k</mi>
+                                <mo>=</mo>
+                                <mfenced open="{" close="">
+                                    <mrow>
+                                        <mtable>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mi mathvariant="italic">n</mi>
+                                                    <mo></mo>
+                                                    <mi mathvariant="italic">l</mi>
+                                                    <mo></mo>
+                                                    <mi mathvariant="italic">h</mi>
+                                                </mrow>
+                                            </mtd></mtr>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mfenced open="" close="">
+                                                        <mfrac>
+                                                            <mi mathvariant="italic">a</mi>
+                                                            <mi mathvariant="italic">s</mi>
+                                                        </mfrac>
+                                                    </mfenced>
+                                                    <mo></mo>
+                                                    <mfenced open="" close="">
+                                                        <mfrac>
+                                                            <mfenced open="" close="">
+                                                                <mrow>
+                                                                    <mi mathvariant="italic">s</mi>
+                                                                    <mo></mo>
+                                                                    <mi mathvariant="italic">n</mi>
+                                                                    <mo></mo>
+                                                                    <mi mathvariant="italic">l</mi>
+                                                                    <mo></mo>
+                                                                    <mi mathvariant="italic">h</mi>
+                                                                </mrow>
+                                                            </mfenced>
+                                                            <mi mathvariant="italic">a</mi>
+                                                        </mfrac>
+                                                    </mfenced>
+                                                </mrow>
+                                            </mtd></mtr>
+                                        </mtable>
+                                        <mo></mo>
+                                        <mtable>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mi mathvariant="italic">s</mi>
+                                                    <mo>&gt;=</mo>
+                                                    <mi mathvariant="italic">a</mi>
+                                                </mrow>
+                                            </mtd></mtr>
+                                            <mtr><mtd>
+                                                <mrow>
+                                                    <mi mathvariant="italic">s</mi>
+                                                    <mo>&lt;</mo>
+                                                    <mi mathvariant="italic">a</mi>
+                                                </mrow>
+                                            </mtd></mtr>
+                                        </mtable>
+                                    </mrow>
+                                </mfenced>
+                            </mrow>
+                        </math>
+</div>
+</div>
+    <div class="para">
+                        components or indices,
+                        where
+    <math overflow="scroll"><mi mathvariant="italic">n</mi></math>
+    is the number of components or indices in a pixel,
+    <math overflow="scroll"><mi mathvariant="italic">l</mi></math>
+    is the number of pixels in a row
+                        (
+    <span class="constant">GL_UNPACK_ROW_LENGTH</span>
+    if it is greater than 0,
+                        the
+    <math overflow="scroll"><mi mathvariant="italic">width</mi></math>
+    argument to
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    otherwise),
+    <math overflow="scroll"><mi mathvariant="italic">h</mi></math>
+    is the number of rows in an image (
+    <span class="constant">GL_UNPACK_IMAGE_HEIGHT</span>
+    if
+                        it is greater than 0, the
+    <math overflow="scroll"><mi mathvariant="italic">height</mi></math>
+    argument to
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    otherwise),
+    <math overflow="scroll"><mi mathvariant="italic">a</mi></math>
+    is the value of
+    <span class="constant">GL_UNPACK_ALIGNMENT</span>
+    , and
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    is the size, in bytes, of a single component
+                        (if
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">a</mi>
+                                <mo>&lt;</mo>
+                                <mi mathvariant="italic">s</mi>
+                            </mrow>
+                        </math>
+    ,
+                        then it is as if
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">a</mi>
+                                <mo>=</mo>
+                                <mi mathvariant="italic">s</mi>
+                            </mrow>
+                        </math>
+    ).
+</div>
+    <div class="para">
+                        The word
+    <span class="emphasis">component</span>
+    in this description refers to the nonindex values
+                        red,
+                        green,
+                        blue,
+                        alpha,
+                        and depth.
+                        Storage format
+    <span class="constant">GL_RGB</span>
+    ,
+                        for example,
+                        has three components per pixel:
+                        first red,
+                        then green,
+                        and finally blue.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNPACK_SKIP_PIXELS</span>
+    and
+    <span class="constant">GL_UNPACK_SKIP_ROWS</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        These values are provided as a convenience to the programmer;
+                        they provide no functionality that cannot be duplicated by
+                        incrementing the pointer passed to
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage1D.html">glTexSubImage1D</a>
+    or
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    .
+                        Setting
+    <span class="constant">GL_UNPACK_SKIP_PIXELS</span>
+    to
+    <math overflow="scroll"><mi mathvariant="italic">i</mi></math>
+    is equivalent to incrementing
+                        the pointer by
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">i</mi>
+                                <mo></mo>
+                                <mi mathvariant="italic">n</mi>
+                            </mrow>
+                        </math>
+    components or indices,
+                        where
+    <math overflow="scroll"><mi mathvariant="italic">n</mi></math>
+    is the number of components or indices in each pixel.
+                        Setting
+    <span class="constant">GL_UNPACK_SKIP_ROWS</span>
+    to
+    <math overflow="scroll"><mi mathvariant="italic">j</mi></math>
+    is equivalent to incrementing
+                        the pointer by
+    <math overflow="scroll">
+                            <mrow>
+                                <mi mathvariant="italic">j</mi>
+                                <mo></mo>
+                                <mi mathvariant="italic">k</mi>
+                            </mrow>
+                        </math>
+    components or indices,
+                        where
+    <math overflow="scroll"><mi mathvariant="italic">k</mi></math>
+    is the number of components or indices per row,
+                        as just computed in the
+    <span class="constant">GL_UNPACK_ROW_LENGTH</span>
+    section.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNPACK_ALIGNMENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specifies the alignment requirements for the start of each pixel row in memory.
+                        The allowable values are
+                        1 (byte-alignment),
+                        2 (rows aligned to even-numbered bytes),
+                        4 (word-alignment), and
+                        8 (rows start on double-word boundaries).
+                    </div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+            The following table gives the type,
+            initial value,
+            and range of valid values for each storage parameter
+            that can be set with
+    <a class="function" href="./glPixelStore.html">glPixelStore</a>
+    .
+</div>
+    <div class="para">
+        </div>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>
+    <span class="emphasis">
+    <a class="parameter" href="#param-pname">pname</a>
+</span>
+</th><th>
+    <span class="emphasis"> Type </span>
+</th><th>
+    <span class="emphasis"> Initial Value </span>
+</th><th>
+    <span class="emphasis"> Valid Range </span>
+</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+    <span class="constant">GL_PACK_SWAP_BYTES</span>
+</td><td>
+                        boolean
+                        </td><td>
+                        false
+                        </td><td>
+                        true or false
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_PACK_LSB_FIRST</span>
+</td><td>
+                        boolean
+                        </td><td>
+                        false
+                        </td><td>
+                        true or false
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_PACK_ROW_LENGTH</span>
+</td><td>
+                        integer
+                        </td><td>
+                        0
+                        </td><td>
+    <math overflow="scroll">
+                            <mfenced open="[" close=")">
+                                <mn>0</mn>
+                                <mn></mn>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_PACK_IMAGE_HEIGHT</span>
+</td><td>
+                        integer
+                        </td><td>
+                        0
+                        </td><td>
+    <math overflow="scroll">
+                            <mfenced open="[" close=")">
+                                <mn>0</mn>
+                                <mn></mn>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_PACK_SKIP_ROWS</span>
+</td><td>
+                        integer
+                        </td><td>
+                        0
+                        </td><td>
+    <math overflow="scroll">
+                            <mfenced open="[" close=")">
+                                <mn>0</mn>
+                                <mn></mn>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_PACK_SKIP_PIXELS</span>
+</td><td>
+                        integer
+                        </td><td>
+                        0
+                        </td><td>
+    <math overflow="scroll">
+                            <mfenced open="[" close=")">
+                                <mn>0</mn>
+                                <mn></mn>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_PACK_SKIP_IMAGES</span>
+</td><td>
+                        integer
+                        </td><td>
+                        0
+                        </td><td>
+    <math overflow="scroll">
+                            <mfenced open="[" close=")">
+                                <mn>0</mn>
+                                <mn></mn>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_PACK_ALIGNMENT</span>
+</td><td>
+                        integer
+                        </td><td>
+                        4
+                        </td><td>
+                        1, 2, 4, or 8
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNPACK_SWAP_BYTES</span>
+</td><td>
+                        boolean
+                        </td><td>
+                        false
+                        </td><td>
+                        true or false
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNPACK_LSB_FIRST</span>
+</td><td>
+                        boolean
+                        </td><td>
+                        false
+                        </td><td>
+                        true or false
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNPACK_ROW_LENGTH</span>
+</td><td>
+                        integer
+                        </td><td>
+                        0
+                        </td><td>
+    <math overflow="scroll">
+                            <mfenced open="[" close=")">
+                                <mn>0</mn>
+                                <mn></mn>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNPACK_IMAGE_HEIGHT</span>
+</td><td>
+                        integer
+                        </td><td>
+                        0
+                        </td><td>
+    <math overflow="scroll">
+                            <mfenced open="[" close=")">
+                                <mn>0</mn>
+                                <mn></mn>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNPACK_SKIP_ROWS</span>
+</td><td>
+                        integer
+                        </td><td>
+                        0
+                        </td><td>
+    <math overflow="scroll">
+                            <mfenced open="[" close=")">
+                                <mn>0</mn>
+                                <mn></mn>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNPACK_SKIP_PIXELS</span>
+</td><td>
+                        integer
+                        </td><td>
+                        0
+                        </td><td>
+    <math overflow="scroll">
+                            <mfenced open="[" close=")">
+                                <mn>0</mn>
+                                <mn></mn>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNPACK_SKIP_IMAGES</span>
+</td><td>
+                        integer
+                        </td><td>
+                        0
+                        </td><td>
+    <math overflow="scroll">
+                            <mfenced open="[" close=")">
+                                <mn>0</mn>
+                                <mn></mn>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNPACK_ALIGNMENT</span>
+</td><td>
+                        integer
+                        </td><td>
+                        4
+                        </td><td>
+                        1, 2, 4, or 8
+                        </td>
+                </tr>
+    </tbody></table>
+    <div class="para">
+    <a class="function" href="./glPixelStore.html#c-glPixelStoref">glPixelStoref</a>
+    can be used to set any pixel store parameter.
+            If the parameter type is boolean,
+            then if
+    <a class="parameter" href="#param-param">param</a>
+    is 0,
+            the parameter is false;
+            otherwise it is set to true.
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is an integer type parameter,
+    <a class="parameter" href="#param-param">param</a>
+    is rounded to the nearest integer.
+</div>
+    <div class="para">
+            Likewise,
+    <a class="function" href="./glPixelStorei.html">glPixelStorei</a>
+    can also be used to set any of the
+            pixel store parameters.
+            Boolean parameters are set to false if
+    <a class="parameter" href="#param-param">param</a>
+    is 0 and true otherwise.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if a negative row length,
+            pixel skip,
+            or row skip value is specified,
+            or if alignment is specified as other than 1, 2, 4, or 8.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PACK_SWAP_BYTES</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PACK_LSB_FIRST</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PACK_ROW_LENGTH</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PACK_IMAGE_HEIGHT</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PACK_SKIP_ROWS</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PACK_SKIP_PIXELS</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PACK_SKIP_IMAGES</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PACK_ALIGNMENT</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_UNPACK_SWAP_BYTES</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_UNPACK_LSB_FIRST</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_UNPACK_ROW_LENGTH</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_UNPACK_IMAGE_HEIGHT</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_UNPACK_SKIP_ROWS</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_UNPACK_SKIP_PIXELS</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_UNPACK_SKIP_IMAGES</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_UNPACK_ALIGNMENT</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glPixelStore.html#c-glPixelStoref">glPixelStoref</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glPixelStorei.html">glPixelStorei</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage1D.html">glTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage3D.html">glTexSubImage3D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexImage1D.html">glCompressedTexImage1D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexImage2D.html">glCompressedTexImage2D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexImage3D.html">glCompressedTexImage3D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexSubImage1D.html">glCompressedTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexSubImage2D.html">glCompressedTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexSubImage1D.html">glCompressedTexSubImage1D</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI
+            Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glPixelStorei</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/gldrawpixelssynth.py">tests/gldrawpixelssynth.py</a>
+    Lines: <span class="sample-lines">40, 41</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe8.py">tests/nehe8.py</a>
+    Lines: <span class="sample-lines">133, 141, 149</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glhistogram.py">tests/glhistogram.py</a>
+    Lines: <span class="sample-lines">46, 47</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6_convolve.py">tests/nehe6_convolve.py</a>
+    Lines: <span class="sample-lines">103</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/readpixelsleak.py">tests/readpixelsleak.py</a>
+    Lines: <span class="sample-lines">56, 74</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/saveimage.py">tests/saveimage.py</a>
+    Lines: <span class="sample-lines">97, 144</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/gldrawpixels.py">tests/gldrawpixels.py</a>
+    Lines: <span class="sample-lines">60, 61</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/arbwindowpos.py">tests/arbwindowpos.py</a>
+    Lines: <span class="sample-lines">92, 93</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe7.py">tests/nehe7.py</a>
+    Lines: <span class="sample-lines">100, 108, 116</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6_compressed.py">tests/nehe6_compressed.py</a>
+    Lines: <span class="sample-lines">33</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe6.py">tests/nehe6.py</a>
+    Lines: <span class="sample-lines">52</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/dek_texturesurf.py">tests/dek_texturesurf.py</a>
+    Lines: <span class="sample-lines">108</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/context.py">OpenGLContext/context.py</a>
+    Lines: <span class="sample-lines">329</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/texture.py">OpenGLContext/texture.py</a>
+    Lines: <span class="sample-lines">85, 87, 107, 109, 248, 249, 300, 302</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/debug/bufferimage.py">OpenGLContext/debug/bufferimage.py</a>
+    Lines: <span class="sample-lines">35, 65</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/pygamefont.py">OpenGLContext/scenegraph/text/pygamefont.py</a>
+    Lines: <span class="sample-lines">67, 68</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/wxfont.py">OpenGLContext/scenegraph/text/wxfont.py</a>
+    Lines: <span class="sample-lines">89, 90</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson23.py">PyOpenGL-Demo/NeHe/lesson23.py</a>
+    Lines: <span class="sample-lines">40</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson6.py">PyOpenGL-Demo/NeHe/lesson6.py</a>
+    Lines: <span class="sample-lines">72</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson6-multi.py">PyOpenGL-Demo/NeHe/lesson6-multi.py</a>
+    Lines: <span class="sample-lines">73</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson18.py">PyOpenGL-Demo/NeHe/lesson18.py</a>
+    Lines: <span class="sample-lines">75</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson16.py">PyOpenGL-Demo/NeHe/lesson16.py</a>
+    Lines: <span class="sample-lines">37</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson19.py">PyOpenGL-Demo/NeHe/lesson19.py</a>
+    Lines: <span class="sample-lines">76</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson26.py">PyOpenGL-Demo/NeHe/lesson26.py</a>
+    Lines: <span class="sample-lines">42</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/glCamera.py">PyOpenGL-Demo/NeHe/lesson44/glCamera.py</a>
+    Lines: <span class="sample-lines">501</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/conesave.py">PyOpenGL-Demo/tom/conesave.py</a>
+    Lines: <span class="sample-lines">38</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/drawf.py">PyOpenGL-Demo/redbook/drawf.py</a>
+    Lines: <span class="sample-lines">73</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/conesave.py">PyOpenGL-Demo/GLUT/tom/conesave.py</a>
+    Lines: <span class="sample-lines">33</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/tile.py">PyOpenGL-Demo/dek/tile.py</a>
+    Lines: <span class="sample-lines">60</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/OglSurface/OglFrame.py">PyOpenGL-Demo/dek/OglSurface/OglFrame.py</a>
+    Lines: <span class="sample-lines">43</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglPygame.py">renderers/openglPygame.py</a>
+    Lines: <span class="sample-lines">155, 279</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglGlut.py">renderers/openglGlut.py</a>
+    Lines: <span class="sample-lines">208</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/openglgraphics.py">system/openglgraphics.py</a>
+    Lines: <span class="sample-lines">225, 331</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/texture.py">pymt/texture.py</a>
+    Lines: <span class="sample-lines">19, 318</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/textures.py">wobjects/textures.py</a>
+    Lines: <span class="sample-lines">101</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

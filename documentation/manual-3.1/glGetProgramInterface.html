@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetProgramInterface : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetProgramInterface</h1>
+</header>
+<main class="content">
+    <section class="purpose">query a property of an interface in a program</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetProgramInterface"></a>
+    <span class="c-function">glGetProgramInterface</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetProgramInterfaceiv"></a>
+    <span class="c-function">glGetProgramInterfaceiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-programInterface" class="parameter">programInterface</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint * (
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetProgramInterfaceiv"></a>
+    <span class="py-function">glGetProgramInterfaceiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-programInterface" class="parameter">programInterface</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">
+                    The name of a program object whose interface to query.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-programInterface"></a>
+                        programInterface
+                    </th>
+                    <td>
+    <div class="para">
+                    A token identifying the interface within
+    <a class="parameter" href="#param-program">program</a>
+    to query.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    The name of the parameter within
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    to query.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">
+                    The address of a variable to retrieve the value of
+    <a class="parameter" href="#param-pname">pname</a>
+    for the program interface.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetProgramInterface.html#c-glGetProgramInterfaceiv">glGetProgramInterfaceiv</a>
+    queries the property of the interface identifed
+            by
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    in
+    <a class="parameter" href="#param-program">program</a>
+    , the property name of
+            which is given by
+    <a class="parameter" href="#param-pname">pname</a>
+    .
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-program">program</a>
+    must be the name of an existing program object.
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    is the name of the interface within
+    <a class="parameter" href="#param-program">program</a>
+    to query and must be one of the following
+            values:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNIFORM</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The query is targeted at the set of active uniforms within
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_UNIFORM_BLOCK</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The query is targeted at the set of active uniform blocks within
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_ATOMIC_COUNTER_BUFFER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The query is targeted at the set of active atomic counter buffer binding points within
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PROGRAM_INPUT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The query is targeted at the set of active input variables used by the first shader stage of
+    <a class="parameter" href="#param-program">program</a>
+    .
+                        If
+    <a class="parameter" href="#param-program">program</a>
+    contains multiple shader stages then input variables from any stage other than the first
+                        will not be enumerated.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_PROGRAM_OUTPUT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The query is targeted at the set of active output variables produced by the last shader stage of
+    <a class="parameter" href="#param-program">program</a>
+    .
+                        If
+    <a class="parameter" href="#param-program">program</a>
+    contains multiple shader stages then output variables from any stage other than the last
+                        will not be enumerated.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_VERTEX_SUBROUTINE</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GL_TESS_CONTROL_SUBROUTINE</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GL_TESS_EVALUATION_SUBROUTINE</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GL_GEOMETRY_SUBROUTINE</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GL_FRAGMENT_SUBROUTINE</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GL_COMPUTE_SUBROUTINE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The query is targeted at the set of active subroutines for the vertex, tessellation control, tessellation evaluation,
+                        geometry, fragment and compute shader stages of
+    <a class="parameter" href="#param-program">program</a>
+    , respectively.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_VERTEX_SUBROUTINE_UNIFORM</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GL_TESS_CONTROL_SUBROUTINE_UNIFORM</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GL_TESS_EVALUATION_SUBROUTINE_UNIFORM</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GL_GEOMETRY_SUBROUTINE_UNIFORM</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GL_FRAGMENT_SUBROUTINE_UNIFORM</span>
+</dt>
+    <dt class="term">
+    <span class="constant">GL_COMPUTE_SUBROUTINE_UNIFORM</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The query is targeted at the set of active subroutine uniform variables used by the vertex, tessellation control, tessellation evaluation,
+                        geometry, fragment and compute shader stages of
+    <a class="parameter" href="#param-program">program</a>
+    , respectively.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TRANSFORM_FEEDBACK_VARYING</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The query is targeted at the set of output variables from the last non-fragment stage of
+    <a class="parameter" href="#param-program">program</a>
+    that would be
+                        captured if transform feedback were active.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BUFFER_VARIABLE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The query is targeted at the set of active buffer variables used by
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_SHADER_STORAGE_BLOCK</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The query is targeted at the set of active shader storage blocks used by
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The query is targeted at the set of active buffer binding points to which output variables in the
+    <span class="constant">GL_TRANSFORM_FEEDBACK_VARYING</span>
+    interface are written.
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+    <a class="parameter" href="#param-pname">pname</a>
+    identifies the property of
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    to return in
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_ACTIVE_RESOURCES</span>
+    , the value returned is the number of
+            resources in the active resource list for
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    .  If the list
+            of active resources for
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    is empty, zero is returned.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_MAX_NAME_LENGTH</span>
+    , the value returned is the length of the
+            longest active name string for an active resource in
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    .
+            This length includes an extra character for the null terminator.  If the
+            list of active resources for
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    is empty, zero is
+            returned.  It is an error to specify
+    <span class="constant">GL_MAX_NAME_LENGTH</span>
+    when
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    is
+    <span class="constant">GL_ATOMIC_COUNTER_BUFFER</span>
+    , as active atomic counter buffer resources are
+            not assigned name strings.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_MAX_NUM_ACTIVE_VARIABLES</span>
+    , the value returned is the number
+            of active variables belonging to the interface block or atomic counter
+            buffer resource in
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    with the most active variables.  If
+            the list of active resources for
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    is empty, zero is
+            returned.  When
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_MAX_NUM_ACTIVE_VARIABLES</span>
+    ,
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    must be
+    <span class="constant">GL_UNIFORM_BLOCK</span>
+    ,
+    <span class="constant">GL_ATOMIC_COUNTER_BUFFER</span>
+    , or
+    <span class="constant">GL_SHADER_STORAGE_BLOCK</span>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_MAX_NUM_COMPATIBLE_SUBROUTINES</span>
+    , the value returned is the
+            number of compatible subroutines belonging to the active subroutine
+            uniform in
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    with the most compatible subroutines.  If
+            the list of active resources for
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    is empty, zero is
+            returned. When
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_MAX_NUM_COMPATIBLE_SUBROUTINES</span>
+    ,
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    must be one of
+    <span class="constant">GL_VERTEX_SUBROUTINE_UNIFORM</span>
+    ,
+    <span class="constant">GL_TESS_CONTROL_SUBROUTINE_UNIFORM</span>
+    ,
+    <span class="constant">GL_TESS_EVALUATION_SUBROUTINE_UNIFORM</span>
+    ,
+    <span class="constant">GL_GEOMETRY_SUBROUTINE_UNIFORM</span>
+    ,
+    <span class="constant">GL_FRAGMENT_SUBROUTINE_UNIFORM</span>
+    , or
+    <span class="constant">GL_COMPUTE_SUBROUTINE_UNIFORM</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-identifier">identifier</a>
+    is not one of the accepted object types.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not the name of an existing sync object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    is
+            zero.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_MAX_NAME_LENGTH</span>
+    and
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    is
+    <span class="constant">GL_ATOMIC_COUNTER_BUFFER</span>
+    or
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER</span>
+    ,
+            since active atomic counter and transform feedback buffer resources are not assigned name strings.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    error is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_MAX_NUM_ACTIVE_VARIABLES</span>
+    and
+    <a class="parameter" href="#param-programInterface">programInterface</a>
+    is not
+    <span class="constant">GL_UNIFORM_BLOCK</span>
+    ,
+    <span class="constant">GL_SHADER_STORAGE_BLOCK</span>
+    ,
+    <span class="constant">GL_ATOMIC_COUNTER_BUFFER</span>
+    , or
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER</span>
+    .
+</div>
+    <div class="para">
+            If not NULL,
+    <a class="parameter" href="#param-length">length</a>
+    and
+    <a class="parameter" href="#param-label">label</a>
+    should be addresses
+            to which the client has write access, otherwise undefined behavior, including process termination
+            may occur.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_LABEL_LENGTH</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetProgramInterface.html#c-glGetProgramInterfaceiv">glGetProgramInterfaceiv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glPushDebugGroup.html">glPushDebugGroup</a>
+    ,
+    <a class="crossref" href="./glPopDebugGroup.html">glPopDebugGroup</a>
+    ,
+    <a class="crossref" href="./glObjectLabel.html">glObjectLabel</a>
+    ,
+    <a class="crossref" href="./glGetObjectLabel.html">glGetObjectLabel</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2013-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glBindProgramPipeline : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glBindProgramPipeline</h1>
+</header>
+<main class="content">
+    <section class="purpose">bind a program pipeline to the current context</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glBindProgramPipeline"></a>
+    <span class="c-function">glBindProgramPipeline</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-pipeline" class="parameter">pipeline</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glBindProgramPipeline"></a>
+    <span class="py-function">glBindProgramPipeline</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pipeline" class="parameter">pipeline</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pipeline"></a>
+                        pipeline
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the name of the pipeline object to bind to the context.
+            </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glBindProgramPipeline.html">glBindProgramPipeline</a>
+    binds a program pipeline object to the current
+            context.
+    <a class="parameter" href="#param-pipeline">pipeline</a>
+    must be a name previously returned from a call
+            to
+    <a class="crossref" href="./glGenProgramPipelines.html">glGenProgramPipelines</a>
+    . If
+            no program pipeline exists with name
+    <a class="parameter" href="#param-pipeline">pipeline</a>
+    then a new pipeline object
+            is created with that name and initialized to the default state vector.
+</div>
+    <div class="para">
+            When a program pipeline object is bound using
+    <a class="function" href="./glBindProgramPipeline.html">glBindProgramPipeline</a>
+    , any previous
+            binding is broken and is replaced with a binding to the specified pipeline object. If
+    <a class="parameter" href="#param-pipeline">pipeline</a>
+    is zero, the previous binding is broken and is not replaced, leaving no pipeline object bound.
+            If no current program object has been established by
+    <a class="crossref" href="./glUseProgram.html">glUseProgram</a>
+    ,
+            the program objects used for each stage and for uniform updates are taken from the bound program
+            pipeline object, if any. If there is a current program object established by
+    <a class="crossref" href="./glUseProgram.html">glUseProgram</a>
+    ,
+            the bound program pipeline object has no effect on rendering or uniform updates. When a bound program
+            pipeline object is used for rendering, individual shader executables are taken from its program objects.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-pipeline">pipeline</a>
+    is not zero or
+            a name previously returned from a call to
+    <a class="crossref" href="./glGenProgramPipelines.html">glGenProgramPipelines</a>
+    or if such a name has been deleted by a call to
+    <a class="crossref" href="./glDeleteProgramPipelines.html">glDeleteProgramPipelines</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glBindProgramPipeline.html">glBindProgramPipeline</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glCreateShader.html">glCreateShader</a>
+    ,
+    <a class="crossref" href="./glCreateProgram.html">glCreateProgram</a>
+    ,
+    <a class="crossref" href="./glCompileShader.html">glCompileShader</a>
+    ,
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    ,
+    <a class="crossref" href="./glGenProgramPipelines.html">glGenProgramPipelines</a>
+    ,
+    <a class="crossref" href="./glDeleteProgramPipelines.html">glDeleteProgramPipelines</a>
+    ,
+    <a class="crossref" href="./glIsProgramPipeline.html">glIsProgramPipeline</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

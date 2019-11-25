@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluDisk : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluDisk</h1>
+</header>
+<main class="content">
+    <section class="purpose">draw a disk</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluDisk"></a>
+    <span class="c-function">gluDisk</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUquadric* (
+            <a href="#param-quad" class="parameter">quad</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-inner" class="parameter">inner</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-outer" class="parameter">outer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-slices" class="parameter">slices</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-loops" class="parameter">loops</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluDisk"></a>
+    <span class="py-function">gluDisk</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-quad" class="parameter">quad</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-inner" class="parameter">inner</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-outer" class="parameter">outer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-slices" class="parameter">slices</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-loops" class="parameter">loops</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluDisk( POINTER(GLUquadric)(quad), GLdouble(inner), GLdouble(outer), GLint(slices), GLint(loops) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-quad"></a>
+                        quad
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the quadrics object (created with
+    <a class="crossref" href="./gluNewQuadric.html">gluNewQuadric</a>
+    ).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-inner"></a>
+                        inner
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the inner radius of the disk (may be 0).
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-outer"></a>
+                        outer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the outer radius of the disk.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-slices"></a>
+                        slices
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of subdivisions around the
+    <span class="emphasis">z</span>
+    axis.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-loops"></a>
+                        loops
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of concentric rings about the origin into which
+                    the disk is subdivided.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluDisk.html">gluDisk</a>
+    renders a disk on the
+    <span class="emphasis">z</span>
+    = 0 plane. The disk has a radius of
+    <a class="parameter" href="#param-outer">outer</a>
+    and contains a concentric circular hole with a radius
+            of
+    <a class="parameter" href="#param-inner">inner</a>
+    . If
+    <a class="parameter" href="#param-inner">inner</a>
+    is 0, then no hole is generated. The disk is
+            subdivided around the
+    <span class="emphasis">z</span>
+    axis into slices (like pizza slices) and also
+            about the
+    <span class="emphasis">z</span>
+    axis into rings
+            (as specified by
+    <a class="parameter" href="#param-slices">slices</a>
+    and
+    <a class="parameter" href="#param-loops">loops</a>
+    , respectively).
+</div>
+    <div class="para">
+            With respect to orientation, the +
+    <span class="emphasis">z</span>
+    side of the disk is considered to be
+            ``outside'' (see
+    <a class="crossref" href="./gluQuadricOrientation.html">gluQuadricOrientation</a>
+    ).
+            This means that if the
+            orientation is set to
+    <span class="constant">GLU_OUTSIDE</span>
+    , then any normals generated
+            point along the +
+    <span class="emphasis">z</span>
+    axis. Otherwise, they point along the \-
+    <span class="emphasis">z</span>
+    axis.
+</div>
+    <div class="para">
+            If texturing has been turned on (with
+    <a class="crossref" href="./gluQuadricTexture.html">gluQuadricTexture</a>
+    ),
+            texture coordinates are generated
+            linearly such that where
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">r</mi>
+                    <mo>=</mo>
+                    <mi mathvariant="italic">outer</mi>
+                </mrow>
+            </math>
+    ,
+            the value at (
+    <span class="emphasis">r</span>
+    , 0, 0) is
+            (1, 0.5), at (0,
+    <span class="emphasis">r</span>
+    , 0) it is (0.5, 1), at (\-
+    <span class="emphasis">r</span>
+    , 0, 0)
+            it is (0, 0.5), and
+            at (0, \-
+    <span class="emphasis">r</span>
+    , 0) it is (0.5, 0).
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluCylinder.html">gluCylinder</a>
+    ,
+    <a class="crossref" href="./gluNewQuadric.html">gluNewQuadric</a>
+    ,
+    <a class="crossref" href="./gluPartialDisk.html">gluPartialDisk</a>
+    ,
+    <a class="crossref" href="./gluQuadricOrientation.html">gluQuadricOrientation</a>
+    ,
+    <a class="crossref" href="./gluQuadricTexture.html">gluQuadricTexture</a>
+    ,
+    <a class="crossref" href="./gluSphere.html">gluSphere</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluDisk</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson23.py">PyOpenGL-Demo/NeHe/lesson23.py</a>
+    Lines: <span class="sample-lines">163</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson18.py">PyOpenGL-Demo/NeHe/lesson18.py</a>
+    Lines: <span class="sample-lines">209</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/draw.py">pymt/graphx/draw.py</a>
+    Lines: <span class="sample-lines">21, 230, 232</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/games/untangle/graph.py">examples/games/untangle/graph.py</a>
+    Lines: <span class="sample-lines">17, 20</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/draw.py">pygl2d/draw.py</a>
+    Lines: <span class="sample-lines">150</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Examples/OpenGL/Checkers/CheckersPiece.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Examples/OpenGL/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">55, 58</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/Examples/Checkers/CheckersPiece.py">Sketches/MPS/Examples/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">55, 58</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Examples/Checkers/CheckersPiece.py">Sketches/CL/Topology3D/THF/Examples/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">55, 58</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Examples/Checkers/CheckersPiece.py">Sketches/THF/Packages/Examples/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">55, 58</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Examples/OpenGL/Checkers/CheckersPiece.py">Code/Python/Kamaelia/Examples/OpenGL/Checkers/CheckersPiece.py</a>
+    Lines: <span class="sample-lines">55, 58</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

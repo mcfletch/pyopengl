@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXQueryExtension : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXQueryExtension</h1>
+</header>
+<main class="content">
+    <section class="purpose">indicate whether the GLX extension is supported</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXQueryExtension"></a>
+    <span class="c-function">glXQueryExtension</span>(<span class="parameter-list">
+    <span class="param-def">
+        Display * (
+            <a href="#param-dpy" class="parameter">dpy</a>
+        )
+        ,
+    </span><span class="param-def">
+        int * (
+            <a href="#param-errorBase" class="parameter">errorBase</a>
+        )
+        ,
+    </span><span class="param-def">
+        int * (
+            <a href="#param-eventBase" class="parameter">eventBase</a>
+        )
+    </span>
+</span>)-&gt; Bool
+</div>
+                <div class="py-signature">
+    <a name="py-glXQueryExtension"></a>
+    <span class="py-function">glXQueryExtension</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-dpy" class="parameter">dpy</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-errorb" class="parameter">errorb</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-event" class="parameter">event</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_uint'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dpy"></a>
+                        dpy
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the connection to the X server.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-errorBase"></a>
+                        errorBase
+                    </th>
+                    <td>
+    <div class="para">
+                    Returns the base error code of the GLX server extension.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-eventBase"></a>
+                        eventBase
+                    </th>
+                    <td>
+    <div class="para">
+                    Returns the base event code of the GLX server extension.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXQueryExtension.html">glXQueryExtension</a>
+    returns
+    <span class="constant">True</span>
+    if the X server of
+            connection
+    <a class="parameter" href="#param-dpy">dpy</a>
+    supports the GLX extension,
+    <span class="constant">False</span>
+    otherwise.
+            If
+    <span class="constant">True</span>
+    is returned,
+            then
+    <a class="parameter" href="#param-errorBase">errorBase</a>
+    and
+    <a class="parameter" href="#param-eventBase">eventBase</a>
+    return the error base and event base of
+            the GLX extension.  These values should be added to the constant
+            error and event values to determine the actual event or error values.
+            Otherwise,
+    <a class="parameter" href="#param-errorBase">errorBase</a>
+    and
+    <a class="parameter" href="#param-eventBase">eventBase</a>
+    are unchanged.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-errorBase">errorBase</a>
+    and
+    <a class="parameter" href="#param-eventBase">eventBase</a>
+    do not return values if they are specified
+            as
+    <span class="constant">NULL</span>
+    .
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glXQueryVersion.html">glXQueryVersion</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

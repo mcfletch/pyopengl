@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutCreateSubWindow : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutCreateSubWindow</h1>
+</header>
+<main class="content">
+    <section class="purpose">creates a subwindow.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutCreateSubWindow"></a>
+    <span class="c-function">glutCreateSubWindow</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-win" class="parameter">win</a>
+        )
+        ,
+    </span><span class="param-def">
+        int(
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        int(
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        int(
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        int(
+            <a href="#param-height" class="parameter">height</a>
+        )
+    </span>
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glutCreateSubWindow"></a>
+    <span class="py-function">glutCreateSubWindow</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-window" class="parameter">window</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">glutCreateSubWindow( c_int(window), c_int(x), c_int(y), c_int(width), c_int(height) ) -&gt; c_int</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-win"></a>
+                        win
+                    </th>
+                    <td>
+    <div class="simpara">
+						Identifier of the subwindow's parent window.
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-x"></a>
+                        x
+                    </th>
+                    <td>
+    <div class="simpara">
+						Window X location in pixels relative to parent window's origin.
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-y"></a>
+                        y
+                    </th>
+                    <td>
+    <div class="simpara">
+						Window Y location in pixels relative to parent window's origin.
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="simpara">
+						Width in pixels.
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-height"></a>
+                        height
+                    </th>
+                    <td>
+    <div class="simpara">
+						Height in pixels.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutCreateSubWindow.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutCreateSubWindow.html">glutCreateSubWindow</a>
+    creates a subwindow of the window identified by win of size width and height
+			at location x and y within the current window. Implicitly, the current window is set to the newly created subwindow.
+</div>
+    <div class="para">
+			Each created window has a unique associated OpenGL context. State changes to a window's associated OpenGL context can
+			be done immediately after the window is created.
+		</div>
+    <div class="para">
+			The display state of a window is initially for the window to be shown. But the window's display state is not actually
+			acted upon until
+    <a class="function" href="./glutMainLoop.html">glutMainLoop</a>
+    is entered. This means until
+    <a class="function" href="./glutMainLoop.html">glutMainLoop</a>
+    is called, rendering to a created window is ineffective. Subwindows can not
+			be iconified.
+</div>
+    <div class="para">
+			Subwindows can be nested arbitrarily deep. The value returned is a unique small integer identifier for the window. The
+			range of allocated identifiers starts at one.
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutCreateWindow.html">glutCreateWindow</a>
+            <a class="crossref" href="./glutDestroyWindow.html">glutDestroyWindow</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetPixelMap : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetPixelMap</h1>
+</header>
+<main class="content">
+    <section class="purpose">return the specified pixel map</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetPixelMap"></a>
+    <span class="c-function">glGetPixelMap</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetPixelMapfv"></a>
+    <span class="c-function">glGetPixelMapfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-map" class="parameter">map</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetPixelMapfv"></a>
+    <span class="py-function">glGetPixelMapfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-map" class="parameter">map</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-values" class="parameter">values</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetPixelMapuiv"></a>
+    <span class="c-function">glGetPixelMapuiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-map" class="parameter">map</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetPixelMapuiv"></a>
+    <span class="py-function">glGetPixelMapuiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-map" class="parameter">map</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-values" class="parameter">values</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetPixelMapusv"></a>
+    <span class="c-function">glGetPixelMapusv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-map" class="parameter">map</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLushort * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetPixelMapusv"></a>
+    <span class="py-function">glGetPixelMapusv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-map" class="parameter">map</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-values" class="parameter">values</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-map"></a>
+                        map
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the pixel map to return.
+                    Accepted values are
+    <span class="constant">GL_PIXEL_MAP_I_TO_I</span>
+    ,
+    <span class="constant">GL_PIXEL_MAP_S_TO_S</span>
+    ,
+    <span class="constant">GL_PIXEL_MAP_I_TO_R</span>
+    ,
+    <span class="constant">GL_PIXEL_MAP_I_TO_G</span>
+    ,
+    <span class="constant">GL_PIXEL_MAP_I_TO_B</span>
+    ,
+    <span class="constant">GL_PIXEL_MAP_I_TO_A</span>
+    ,
+    <span class="constant">GL_PIXEL_MAP_R_TO_R</span>
+    ,
+    <span class="constant">GL_PIXEL_MAP_G_TO_G</span>
+    ,
+    <span class="constant">GL_PIXEL_MAP_B_TO_B</span>
+    , and
+    <span class="constant">GL_PIXEL_MAP_A_TO_A</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-data"></a>
+                        data
+                    </th>
+                    <td>
+    <div class="para">
+                    Returns the pixel map contents.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            See the
+    <a class="crossref" href="./glPixelMap.html">glPixelMap</a>
+    reference page for a description of the acceptable
+            values for the
+    <a class="parameter" href="#param-map">map</a>
+    parameter.
+    <a class="function" href="./glGetPixelMap.html">glGetPixelMap</a>
+    returns in
+    <a class="parameter" href="#param-data">data</a>
+    the contents of the pixel map
+            specified in
+    <a class="parameter" href="#param-map">map</a>
+    .
+            Pixel maps are used during the execution of
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    ,
+    <a class="crossref" href="./glDrawPixels.html">glDrawPixels</a>
+    ,
+    <a class="crossref" href="./glCopyPixels.html">glCopyPixels</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage1D.html">glTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage3D.html">glTexSubImage3D</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage1D.html">glCopyTexImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage2D.html">glCopyTexImage2D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage1D.html">glCopyTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage2D.html">glCopyTexSubImage2D</a>
+    , and
+    <a class="crossref" href="./glCopyTexSubImage3D.html">glCopyTexSubImage3D</a>
+    .
+            to map color indices,
+            stencil indices,
+            color components,
+            and depth components to other values.
+</div>
+    <div class="para">
+            If a non-zero named buffer object is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target
+            (see
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ) while a pixel map is
+            requested,
+    <a class="parameter" href="#param-data">data</a>
+    is treated as a byte offset into the buffer object's data store.
+</div>
+    <div class="para">
+            Unsigned integer values,
+            if requested,
+            are linearly mapped from the internal fixed or floating-point representation
+            such that 1.0 maps to the largest representable integer value,
+            and 0.0 maps to 0.
+            Return unsigned integer values are undefined if the map value was
+            not in the range [0,1].
+        </div>
+    <div class="para">
+            To determine the required size of
+    <a class="parameter" href="#param-map">map</a>
+    ,
+            call
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with the appropriate symbolic
+            constant.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            If an error is generated,
+            no change is made to the contents of
+    <a class="parameter" href="#param-data">data</a>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-map">map</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target and the buffer object's data store is currently mapped.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target and the data would be packed to the buffer
+            object such that the memory writes required would exceed the data store size.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glGetPixelMap.html#c-glGetPixelMapfv">glGetPixelMapfv</a>
+    if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target and
+    <a class="parameter" href="#param-data">data</a>
+    is not evenly divisible
+            into the number of bytes needed to store in memory a GLfloat datum.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glGetPixelMap.html#c-glGetPixelMapuiv">glGetPixelMapuiv</a>
+    if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target and
+    <a class="parameter" href="#param-data">data</a>
+    is not evenly divisible
+            into the number of bytes needed to store in memory a GLuint datum.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glGetPixelMap.html#c-glGetPixelMapusv">glGetPixelMapusv</a>
+    if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target and
+    <a class="parameter" href="#param-data">data</a>
+    is not evenly divisible
+            into the number of bytes needed to store in memory a GLushort datum.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glGetPixelMap.html">glGetPixelMap</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_MAP_I_TO_I_SIZE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_MAP_S_TO_S_SIZE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_MAP_I_TO_R_SIZE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_MAP_I_TO_G_SIZE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_MAP_I_TO_B_SIZE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_MAP_I_TO_A_SIZE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_MAP_R_TO_R_SIZE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_MAP_G_TO_G_SIZE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_MAP_B_TO_B_SIZE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_MAP_A_TO_A_SIZE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_PIXEL_MAP_TABLE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_PACK_BUFFER_BINDING</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glColorSubTable.html">glColorSubTable</a>
+    ,
+    <a class="crossref" href="./glColorTable.html">glColorTable</a>
+    ,
+    <a class="crossref" href="./glConvolutionFilter1D.html">glConvolutionFilter1D</a>
+    ,
+    <a class="crossref" href="./glConvolutionFilter2D.html">glConvolutionFilter2D</a>
+    ,
+    <a class="crossref" href="./glCopyColorSubTable.html">glCopyColorSubTable</a>
+    ,
+    <a class="crossref" href="./glCopyColorTable.html">glCopyColorTable</a>
+    ,
+    <a class="crossref" href="./glCopyPixels.html">glCopyPixels</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage1D.html">glCopyTexImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage2D.html">glCopyTexImage2D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage1D.html">glCopyTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage2D.html">glCopyTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage3D.html">glCopyTexSubImage3D</a>
+    ,
+    <a class="crossref" href="./glDrawPixels.html">glDrawPixels</a>
+    ,
+    <a class="crossref" href="./glGetHistogram.html">glGetHistogram</a>
+    ,
+    <a class="crossref" href="./glGetMinmax.html">glGetMinmax</a>
+    ,
+    <a class="crossref" href="./glGetTexImage.html">glGetTexImage</a>
+    ,
+    <a class="crossref" href="./glPixelMap.html">glPixelMap</a>
+    ,
+    <a class="crossref" href="./glPixelTransfer.html">glPixelTransfer</a>
+    ,
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    ,
+    <a class="crossref" href="./glSeparableFilter2D.html">glSeparableFilter2D</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage1D.html">glTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage3D.html">glTexSubImage3D</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glGetPixelMapfv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glgetpixelmap.py">tests/glgetpixelmap.py</a>
+    Lines: <span class="sample-lines">14</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

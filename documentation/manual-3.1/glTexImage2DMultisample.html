@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glTexImage2DMultisample : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glTexImage2DMultisample</h1>
+</header>
+<main class="content">
+    <section class="purpose">establish the data storage, format, dimensions, and number of samples of a multisample texture's image</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glTexImage2DMultisample"></a>
+    <span class="c-function">glTexImage2DMultisample</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-samples" class="parameter">samples</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean (
+            <a href="#param-fixedsamplelocations" class="parameter">fixedsamplelocations</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glTexImage2DMultisample"></a>
+    <span class="py-function">glTexImage2DMultisample</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-samples" class="parameter">samples</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-fixedsamplelocations" class="parameter">fixedsamplelocations</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target of the operation.
+    <a class="parameter" href="#param-target">target</a>
+    must be
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    or
+    <span class="constant">GL_PROXY_TEXTURE_2D_MULTISAMPLE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-samples"></a>
+                        samples
+                    </th>
+                    <td>
+    <div class="para">
+                    The number of samples in the multisample texture's image.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalformat"></a>
+                        internalformat
+                    </th>
+                    <td>
+    <div class="para">
+                    The internal format to be used to store the multisample texture's image.
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    must specify a color-renderable, depth-renderable, or stencil-renderable format.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">
+                    The width of the multisample texture's image, in texels.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-height"></a>
+                        height
+                    </th>
+                    <td>
+    <div class="para">
+                    The height of the multisample texture's image, in texels.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-fixedsamplelocations"></a>
+                        fixedsamplelocations
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies whether the image will use identical sample locations and the same number of samples for all texels in the image, and the sample locations will not
+                    depend on the internal format or size of the image.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glTexImage2DMultisample.html">glTexImage2DMultisample</a>
+    establishes the data storage, format, dimensions and number of samples of a multisample texture's image.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-target">target</a>
+    must be
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    or
+    <span class="constant">GL_PROXY_TEXTURE_2D_MULTISAMPLE</span>
+    .
+    <a class="parameter" href="#param-width">width</a>
+    and
+    <a class="parameter" href="#param-height">height</a>
+    are the dimensions in texels of the texture, and must be in the
+            range zero to the value of
+    <span class="constant">GL_MAX_TEXTURE_SIZE</span>
+    minus one.
+    <a class="parameter" href="#param-samples">samples</a>
+    specifies the number of samples
+            in the image and must be in the range zero to the value of
+    <span class="constant">GL_MAX_SAMPLES</span>
+    minus one.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    must be a color-renderable, depth-renderable, or stencil-renderable format.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-fixedsamplelocations">fixedsamplelocations</a>
+    is
+    <span class="constant">GL_TRUE</span>
+    , the image will use identical sample locations and the same
+            number of samples for all texels in the image, and the sample locations will not depend on the internal format or size of the image.
+</div>
+    <div class="para">
+            When a multisample texture is accessed in a shader, the access takes one vector of integers describing which texel to fetch and an integer
+            corresponding to the sample numbers describing which sample within the texel to fetch. No standard sampling instructions are allowed on the
+            multisample texture targets.
+        </div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glTexImage2DMultisample.html">glTexImage2DMultisample</a>
+    is available only if the GL version is 3.2 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is a depth- or stencil-renderable format and
+    <a class="parameter" href="#param-samples">samples</a>
+    is greater than the value of
+    <span class="constant">GL_MAX_DEPTH_TEXTURE_SAMPLES</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is a color-renderable format and
+    <a class="parameter" href="#param-samples">samples</a>
+    is
+            greater than the value of
+    <span class="constant">GL_MAX_COLOR_TEXTURE_SAMPLES</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is a signed or unsigned integer format and
+    <a class="parameter" href="#param-samples">samples</a>
+    is greater than the value of
+    <span class="constant">GL_MAX_INTEGER_SAMPLES</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if either
+    <a class="parameter" href="#param-width">width</a>
+    or
+    <a class="parameter" href="#param-height">height</a>
+    negative or is greater than
+    <span class="constant">GL_MAX_TEXTURE_SIZE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-samples">samples</a>
+    is zero.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-samples">samples</a>
+    is greater than the
+            maximum number of samples supported for this
+    <a class="parameter" href="#param-target">target</a>
+    and
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glTexImage2DMultisample.html">glTexImage2DMultisample</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexImage2DMultisample.html">glTexImage2DMultisample</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

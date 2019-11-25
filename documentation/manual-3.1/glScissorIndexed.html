@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glScissorIndexed : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glScissorIndexed</h1>
+</header>
+<main class="content">
+    <section class="purpose">define the scissor box for a specific viewport</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glScissorIndexed"></a>
+    <span class="c-function">glScissorIndexed</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-left" class="parameter">left</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-bottom" class="parameter">bottom</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glScissorIndexed"></a>
+    <span class="py-function">glScissorIndexed</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-left" class="parameter">left</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bottom" class="parameter">bottom</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glScissorIndexedv"></a>
+    <span class="c-function">glScissorIndexedv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLint *(
+            <a href="#param-v" class="parameter">v</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glScissorIndexedv"></a>
+    <span class="py-function">glScissorIndexedv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-v" class="parameter">v</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the index of the viewport whose scissor box to modify.
+            </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-left"></a><a name="param-bottom"></a>
+                        left, bottom
+                    </th>
+                    <td>
+    <div class="para">
+                Specify the coordinate of the bottom left corner of the scissor box, in pixels.
+            </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a><a name="param-height"></a>
+                        width, height
+                    </th>
+                    <td>
+    <div class="para">
+                Specify ths dimensions of the scissor box, in pixels.
+            </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-v"></a>
+                        v
+                    </th>
+                    <td>
+    <div class="para">
+                For
+    <a class="function" href="./glScissorIndexed.html#c-glScissorIndexedv">glScissorIndexedv</a>
+    , specifies the address of an array containing the left, bottom, width and height of each
+                scissor box, in that order.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glScissorIndexed.html">glScissorIndexed</a>
+    defines the scissor box for a specified viewport.
+    <a class="parameter" href="#param-index">index</a>
+    specifies the index of scissor box to modify.
+    <a class="parameter" href="#param-index">index</a>
+    must be less than the value of
+    <span class="constant">GL_MAX_VIEWPORTS</span>
+    .
+            For
+    <a class="function" href="./glScissorIndexed.html">glScissorIndexed</a>
+    ,
+    <a class="parameter" href="#param-left">left</a>
+    ,
+    <a class="parameter" href="#param-bottom">bottom</a>
+    ,
+    <a class="parameter" href="#param-width">width</a>
+    and
+    <a class="parameter" href="#param-height">height</a>
+    specify the left, bottom, width
+            and height of the scissor box, in pixels, respectively.
+            For
+    <a class="function" href="./glScissorIndexed.html#c-glScissorIndexedv">glScissorIndexedv</a>
+    ,
+    <a class="parameter" href="#param-v">v</a>
+    specifies the address of an
+            array containing integers specifying the lower left corner of the scissor box, and the width and
+            height of the scissor box, in that order.
+</div>
+    <div class="para">
+            To enable and disable the scissor test, call
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="function" href="./glEnable.html#c-glDisable">glDisable</a>
+    with argument
+    <span class="constant">GL_SCISSOR_TEST</span>
+    . The test is initially disabled for all viewports.
+            While the test is enabled, only pixels that lie within the scissor box
+            can be modified by drawing commands.
+            Window coordinates have integer values at the shared corners of
+            frame buffer pixels.
+    <div class="code">glScissor(0,0,1,1)</div>
+    allows modification of only the lower left
+            pixel in the window, and
+    <div class="code">glScissor(0,0,0,0)</div>
+    doesn't allow
+            modification of any pixels in the window.
+</div>
+    <div class="para">
+            When the scissor test is disabled,
+            it is as though the scissor box includes the entire window.
+        </div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-index">index</a>
+    is greater than or equal to
+            the value of
+    <span class="constant">GL_MAX_VIEWPORTS</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if any width or height specified in the array
+    <a class="parameter" href="#param-v">v</a>
+    is negative.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_SCISSOR_BOX</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_SCISSOR_TEST</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glScissorIndexed.html">glScissorIndexed</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glScissorIndexed.html#c-glScissorIndexedv">glScissorIndexedv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    ,
+    <a class="crossref" href="./glScissor.html">glScissor</a>
+    ,
+    <a class="crossref" href="./glScissorArray.html">glScissorArray</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

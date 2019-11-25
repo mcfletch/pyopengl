@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glBindBuffer : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glBindBuffer</h1>
+</header>
+<main class="content">
+    <section class="purpose">bind a named buffer object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glBindBuffer"></a>
+    <span class="c-function">glBindBuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-buffer" class="parameter">buffer</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glBindBuffer"></a>
+    <span class="py-function">glBindBuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buffer" class="parameter">buffer</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target to which the buffer object is
+                    bound, which must be one of the buffer binding targets
+                    in the following table:
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-buffer"></a>
+                        buffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of a buffer object.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glBindBuffer.html">glBindBuffer</a>
+    binds a buffer object to the specified buffer binding point. Calling
+    <a class="function" href="./glBindBuffer.html">glBindBuffer</a>
+    with
+    <a class="parameter" href="#param-target">target</a>
+    set to one of the accepted symbolic constants and
+    <a class="parameter" href="#param-buffer">buffer</a>
+    set to the name
+            of a buffer object binds that buffer object name to the target. If no buffer object with name
+    <a class="parameter" href="#param-buffer">buffer</a>
+    exists, one is created with that name. When a buffer object is bound to a target, the previous binding for that
+            target is automatically broken.
+</div>
+    <div class="para">
+            Buffer object names are unsigned integers. The value zero is reserved, but
+            there is no default buffer object for each buffer object target. Instead,
+    <a class="parameter" href="#param-buffer">buffer</a>
+    set to zero
+            effectively unbinds any buffer object previously bound, and restores client memory usage for that buffer object target (if supported for that target).
+            Buffer object names and the corresponding buffer object contents are local to
+            the shared object space of the current
+            GL rendering context;
+            two rendering contexts share buffer object names only if they
+            explicitly enable sharing between contexts through the appropriate GL windows interfaces functions.
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGenBuffers.html">glGenBuffers</a>
+    must be used to generate a set of unused buffer object names.
+</div>
+    <div class="para">
+            The state of a buffer object immediately after it is first bound is an unmapped zero-sized memory buffer with
+    <span class="constant">GL_READ_WRITE</span>
+    access and
+    <span class="constant">GL_STATIC_DRAW</span>
+    usage.
+</div>
+    <div class="para">
+            While a non-zero buffer object name is bound, GL operations on the target to which it is
+            bound affect the bound buffer object, and queries of the target to which it is bound return state
+            from the bound buffer object. While buffer object name zero is bound, as in the initial state,
+            attempts to modify or query state on the target to which it is bound generates an
+    <span class="constant">GL_INVALID_OPERATION</span>
+    error.
+</div>
+    <div class="para">
+            When a non-zero buffer object is bound to the
+    <span class="constant">GL_ARRAY_BUFFER</span>
+    target,
+            the vertex array pointer parameter is interpreted as an offset within the
+            buffer object measured in basic machine units.
+</div>
+    <div class="para">
+            When a non-zero buffer object is bound to the
+    <span class="constant">GL_DRAW_INDIRECT_BUFFER</span>
+    target,
+            parameters for draws issued through
+    <a class="crossref" href="./glDrawArraysIndirect.html">glDrawArraysIndirect</a>
+    and
+    <a class="crossref" href="./glDrawElementsIndirect.html">glDrawElementsIndirect</a>
+    are sourced
+            from the specified offset in that buffer object's data store.
+</div>
+    <div class="para">
+            When a non-zero buffer object is bound to the
+    <span class="constant">GL_DISPATCH_INDIRECT_BUFFER</span>
+    target,
+            the parameters for compute dispatches issued through
+    <a class="crossref" href="./glDispatchComputeIndirect.html">glDispatchComputeIndirect</a>
+    are sourced from the specified offset in that buffer object's data store.
+</div>
+    <div class="para">
+            While a non-zero buffer object is bound to the
+    <span class="constant">GL_ELEMENT_ARRAY_BUFFER</span>
+    target,
+            the indices parameter of
+    <a class="crossref" href="./glDrawElements.html">glDrawElements</a>
+    ,
+    <a class="crossref" href="./glDrawElementsInstanced.html">glDrawElementsInstanced</a>
+    ,
+    <a class="crossref" href="./glDrawElementsBaseVertex.html">glDrawElementsBaseVertex</a>
+    ,
+    <a class="crossref" href="./glDrawRangeElements.html">glDrawRangeElements</a>
+    ,
+    <a class="crossref" href="./glDrawRangeElementsBaseVertex.html">glDrawRangeElementsBaseVertex</a>
+    ,
+    <a class="crossref" href="./glMultiDrawElements.html">glMultiDrawElements</a>
+    , or
+    <a class="crossref" href="./glMultiDrawElementsBaseVertex.html">glMultiDrawElementsBaseVertex</a>
+    is interpreted as an
+            offset within the buffer object measured in basic machine units.
+</div>
+    <div class="para">
+            While a non-zero buffer object is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target,
+            the following commands are affected:
+    <a class="crossref" href="./glGetCompressedTexImage.html">glGetCompressedTexImage</a>
+    ,
+    <a class="crossref" href="./glGetTexImage.html">glGetTexImage</a>
+    , and
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    . The pointer parameter is
+            interpreted as an offset within the buffer object measured in basic machine units.
+</div>
+    <div class="para">
+            While a non-zero buffer object is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target,
+            the following commands are affected:
+    <a class="crossref" href="./glCompressedTexImage1D.html">glCompressedTexImage1D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexImage2D.html">glCompressedTexImage2D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexImage3D.html">glCompressedTexImage3D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexSubImage1D.html">glCompressedTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexSubImage2D.html">glCompressedTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexSubImage3D.html">glCompressedTexSubImage3D</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage1D.html">glTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    , and
+    <a class="crossref" href="./glTexSubImage3D.html">glTexSubImage3D</a>
+    . The pointer parameter is
+            interpreted as an offset within the buffer object measured in basic machine units.
+</div>
+    <div class="para">
+            The buffer targets
+    <span class="constant">GL_COPY_READ_BUFFER</span>
+    and
+    <span class="constant">GL_COPY_WRITE_BUFFER</span>
+    are provided to allow
+    <a class="crossref" href="./glCopyBufferSubData.html">glCopyBufferSubData</a>
+    to be used without disturbing the state of other bindings. However,
+    <a class="crossref" href="./glCopyBufferSubData.html">glCopyBufferSubData</a>
+    may be used with any pair of buffer binding points.
+</div>
+    <div class="para">
+            The
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER</span>
+    buffer binding point may be passed to
+    <a class="function" href="./glBindBuffer.html">glBindBuffer</a>
+    ,
+            but will not directly affect transform feedback state. Instead, the indexed
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER</span>
+    bindings must be used through a call to
+    <a class="crossref" href="./glBindBufferBase.html">glBindBufferBase</a>
+    or
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    . This will affect the generic
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER</span>
+    binding.
+</div>
+    <div class="para">
+            Likewise, the
+    <span class="constant">GL_UNIFORM_BUFFER</span>
+    ,
+    <span class="constant">GL_ATOMIC_COUNTER_BUFFER</span>
+    and
+    <span class="constant">GL_SHADER_STORAGE_BUFFER</span>
+    buffer binding points may
+            be used, but do not directly affect uniform buffer, atomic counter buffer or shader storage buffer state, respectively.
+    <a class="crossref" href="./glBindBufferBase.html">glBindBufferBase</a>
+    or
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    must be used to bind a buffer to
+            an indexed uniform buffer, atomic counter buffer or shader storage buffer binding point.
+</div>
+    <div class="para">
+            The
+    <span class="constant">GL_QUERY_BUFFER</span>
+    binding point is used to specify a buffer object that is to
+            receive the results of query objects through calls to the
+    <a class="crossref" href="./glGetQueryObject.html">glGetQueryObject</a>
+    family of commands.
+</div>
+    <div class="para">
+            A buffer object binding created with
+    <a class="function" href="./glBindBuffer.html">glBindBuffer</a>
+    remains active until a different
+            buffer object name is bound to the same target, or until the bound buffer object is
+            deleted with
+    <a class="crossref" href="./glDeleteBuffers.html">glDeleteBuffers</a>
+    .
+</div>
+    <div class="para">
+            Once created, a named buffer object may be re-bound to any target as often as needed. However,
+            the GL implementation may make choices about how to optimize the storage of a buffer object based
+            on its initial binding target.
+        </div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            The
+    <span class="constant">GL_COPY_READ_BUFFER</span>
+    ,
+    <span class="constant">GL_UNIFORM_BUFFER</span>
+    and
+    <span class="constant">GL_TEXTURE_BUFFER</span>
+    targets are available only if the GL version is 3.1 or greater.
+</div>
+    <div class="para">
+            The
+    <span class="constant">GL_ATOMIC_COUNTER_BUFFER</span>
+    target is available only if the GL version is 4.2 or greater.
+</div>
+    <div class="para">
+            The
+    <span class="constant">GL_DISPATCH_INDIRECT_BUFFER</span>
+    and
+    <span class="constant">GL_SHADER_STORAGE_BUFFER</span>
+    targets are available only if the GL version is 4.3 or greater.
+</div>
+    <div class="para">
+            The
+    <span class="constant">GL_QUERY_BUFFER</span>
+    target is available only if the GL version is 4.4 or greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not one of the allowable
+            values.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-buffer">buffer</a>
+    is not a name previously returned
+            from a call to
+    <a class="crossref" href="./glGenBuffers.html">glGenBuffers</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_ARRAY_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_ATOMIC_COUNTER_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_COPY_READ_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_COPY_WRITE_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_DRAW_INDIRECT_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_DISPATCH_INDIRECT_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_ELEMENT_ARRAY_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_PACK_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_SHADER_STORAGE_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_UNIFORM_BUFFER_BINDING</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glBindBuffer.html">glBindBuffer</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenBuffers.html">glGenBuffers</a>
+    ,
+    <a class="crossref" href="./glBindBufferBase.html">glBindBufferBase</a>
+    ,
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    ,
+    <a class="crossref" href="./glMapBuffer.html">glMapBuffer</a>
+    ,
+    <a class="crossref" href="./glUnmapBuffer.html">glUnmapBuffer</a>
+    ,
+    <a class="crossref" href="./glDeleteBuffers.html">glDeleteBuffers</a>
+    ,
+    <a class="crossref" href="./glGet.html">glGet</a>
+    ,
+    <a class="crossref" href="./glIsBuffer.html">glIsBuffer</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2005 Addison-Wesley.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glBindBuffer</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/shaders.py">OpenGLContext/scenegraph/shaders.py</a>
+    Lines: <span class="sample-lines">659</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/data.py">pyggel/data.py</a>
+    Lines: <span class="sample-lines">387</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL Tutorial (Python Translation)</span>
+    <a href="https://bitbucket.org/tartley/gltutpy/src/tip/t02.playing-with-colors/VertexColors.py">t02.playing-with-colors/VertexColors.py</a>
+    Lines: <span class="sample-lines">65, 71, 89</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL Tutorial (Python Translation)</span>
+    <a href="https://bitbucket.org/tartley/gltutpy/src/tip/t02.playing-with-colors/FragPosition.py">t02.playing-with-colors/FragPosition.py</a>
+    Lines: <span class="sample-lines">62, 68, 86</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL Tutorial (Python Translation)</span>
+    <a href="https://bitbucket.org/tartley/gltutpy/src/tip/t01.hello-triangle/HelloTriangle.py">t01.hello-triangle/HelloTriangle.py</a>
+    Lines: <span class="sample-lines">76, 82, 100</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">131, 146, 186, 189, 237, 247</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">157, 172, 215, 218, 269, 279</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">94, 97</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">160, 163</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">168, 171</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">149, 164, 205, 208, 259, 269</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">175, 178</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

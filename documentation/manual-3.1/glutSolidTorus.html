@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutSolidTorus : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutSolidTorus</h1>
+</header>
+<main class="content">
+    <section class="purpose">render a solid or wireframe torus (doughnut) respectively.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutSolidTorus"></a>
+    <span class="c-function">glutSolidTorus</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble(
+            <a href="#param-innerRadius" class="parameter">innerRadius</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble(
+            <a href="#param-outerRadius" class="parameter">outerRadius</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint(
+            <a href="#param-nsides" class="parameter">nsides</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint(
+            <a href="#param-rings" class="parameter">rings</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutSolidTorus"></a>
+    <span class="py-function">glutSolidTorus</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-innerRadius" class="parameter">innerRadius</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-outerRadius" class="parameter">outerRadius</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-sides" class="parameter">sides</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-rings" class="parameter">rings</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutSolidTorus( GLdouble(innerRadius), GLdouble(outerRadius), GLint(sides), GLint(rings) ) -&gt; None</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutWireTorus"></a>
+    <span class="c-function">glutWireTorus</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble(
+            <a href="#param-innerRadius" class="parameter">innerRadius</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble(
+            <a href="#param-outerRadius" class="parameter">outerRadius</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint(
+            <a href="#param-nsides" class="parameter">nsides</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint(
+            <a href="#param-rings" class="parameter">rings</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutWireTorus"></a>
+    <span class="py-function">glutWireTorus</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-innerRadius" class="parameter">innerRadius</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-outerRadius" class="parameter">outerRadius</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-sides" class="parameter">sides</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-rings" class="parameter">rings</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutWireTorus( GLdouble(innerRadius), GLdouble(outerRadius), GLint(sides), GLint(rings) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-innerRadius"></a>
+                        innerRadius
+                    </th>
+                    <td>
+    <div class="simpara">
+						Inner radius of the torus.
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-outerRadius"></a>
+                        outerRadius
+                    </th>
+                    <td>
+    <div class="simpara">
+						Outer radius of the torus.
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-nsides"></a>
+                        nsides
+                    </th>
+                    <td>
+    <div class="simpara">
+						Number of sides for each radial section.
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-rings"></a>
+                        rings
+                    </th>
+                    <td>
+    <div class="simpara">
+						Number of radial divisions for the torus.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutSolidTorus.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutSolidTorus.html">glutSolidTorus</a>
+    and
+    <a class="function" href="./glutSolidTorus.html#c-glutWireTorus">glutWireTorus</a>
+    render a solid or wireframe torus (doughnut)
+			respectively centered at the modeling coordinates origin whose axis is aligned with the Z axis.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutSolidSphere.html">glutSolidSphere</a>
+            <a class="crossref" href="./glutSolidCube.html">glutSolidCube</a>
+            <a class="crossref" href="./glutSolidCone.html">glutSolidCone</a>
+            <a class="crossref" href="./glutSolidDodecahedron.html">glutSolidDodecahedron</a>
+            <a class="crossref" href="./glutSolidOctahedron.html">glutSolidOctahedron</a>
+            <a class="crossref" href="./glutSolidTetrahedron.html">glutSolidTetrahedron</a>
+            <a class="crossref" href="./glutSolidIcosahedron.html">glutSolidIcosahedron</a>
+            <a class="crossref" href="./glutSolidTeapot.html">glutSolidTeapot</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutSolidTorus</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/shaderProg/torusShader.py">PyOpenGL-Demo/proesch/shaderProg/torusShader.py</a>
+    Lines: <span class="sample-lines">92</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/tom/fog.py">PyOpenGL-Demo/tom/fog.py</a>
+    Lines: <span class="sample-lines">62</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/scene.py">PyOpenGL-Demo/redbook/scene.py</a>
+    Lines: <span class="sample-lines">91</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/movelight.py">PyOpenGL-Demo/redbook/movelight.py</a>
+    Lines: <span class="sample-lines">109</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

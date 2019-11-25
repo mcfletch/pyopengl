@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glCopyColorTable : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glCopyColorTable</h1>
+</header>
+<main class="content">
+    <section class="purpose">copy pixels into a color table</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glCopyColorTable"></a>
+    <span class="c-function">glCopyColorTable</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glCopyColorTable"></a>
+    <span class="py-function">glCopyColorTable</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    The color table target. Must be
+    <span class="constant">GL_COLOR_TABLE</span>
+    ,
+    <span class="constant">GL_POST_CONVOLUTION_COLOR_TABLE</span>
+    ,
+                    or
+    <span class="constant">GL_POST_COLOR_MATRIX_COLOR_TABLE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalformat"></a>
+                        internalformat
+                    </th>
+                    <td>
+    <div class="para">
+                    The internal storage format of the texture image.
+                    Must be one of the following symbolic constants:
+    <span class="constant">GL_ALPHA</span>
+    ,
+    <span class="constant">GL_ALPHA4</span>
+    ,
+    <span class="constant">GL_ALPHA8</span>
+    ,
+    <span class="constant">GL_ALPHA12</span>
+    ,
+    <span class="constant">GL_ALPHA16</span>
+    ,
+    <span class="constant">GL_LUMINANCE</span>
+    ,
+    <span class="constant">GL_LUMINANCE4</span>
+    ,
+    <span class="constant">GL_LUMINANCE8</span>
+    ,
+    <span class="constant">GL_LUMINANCE12</span>
+    ,
+    <span class="constant">GL_LUMINANCE16</span>
+    ,
+    <span class="constant">GL_LUMINANCE_ALPHA</span>
+    ,
+    <span class="constant">GL_LUMINANCE4_ALPHA4</span>
+    ,
+    <span class="constant">GL_LUMINANCE6_ALPHA2</span>
+    ,
+    <span class="constant">GL_LUMINANCE8_ALPHA8</span>
+    ,
+    <span class="constant">GL_LUMINANCE12_ALPHA4</span>
+    ,
+    <span class="constant">GL_LUMINANCE12_ALPHA12</span>
+    ,
+    <span class="constant">GL_LUMINANCE16_ALPHA16</span>
+    ,
+    <span class="constant">GL_INTENSITY</span>
+    ,
+    <span class="constant">GL_INTENSITY4</span>
+    ,
+    <span class="constant">GL_INTENSITY8</span>
+    ,
+    <span class="constant">GL_INTENSITY12</span>
+    ,
+    <span class="constant">GL_INTENSITY16</span>
+    ,
+    <span class="constant">GL_R3_G3_B2</span>
+    ,
+    <span class="constant">GL_RGB</span>
+    ,
+    <span class="constant">GL_RGB4</span>
+    ,
+    <span class="constant">GL_RGB5</span>
+    ,
+    <span class="constant">GL_RGB8</span>
+    ,
+    <span class="constant">GL_RGB10</span>
+    ,
+    <span class="constant">GL_RGB12</span>
+    ,
+    <span class="constant">GL_RGB16</span>
+    ,
+    <span class="constant">GL_RGBA</span>
+    ,
+    <span class="constant">GL_RGBA2</span>
+    ,
+    <span class="constant">GL_RGBA4</span>
+    ,
+    <span class="constant">GL_RGB5_A1</span>
+    ,
+    <span class="constant">GL_RGBA8</span>
+    ,
+    <span class="constant">GL_RGB10_A2</span>
+    ,
+    <span class="constant">GL_RGBA12</span>
+    , or
+    <span class="constant">GL_RGBA16</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-x"></a>
+                        x
+                    </th>
+                    <td>
+    <div class="para">
+                    The x coordinate of the lower-left corner of the pixel rectangle
+                    to be transferred to the color table.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-y"></a>
+                        y
+                    </th>
+                    <td>
+    <div class="para">
+                    The y coordinate of the lower-left corner of the pixel rectangle
+                    to be transferred to the color table.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">
+                    The width of the pixel rectangle.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glCopyColorTable.html">glCopyColorTable</a>
+    loads a color table with pixels from the current
+    <span class="constant">GL_READ_BUFFER</span>
+    (rather than from main memory, as is the case for
+    <a class="crossref" href="./glColorTable.html">glColorTable</a>
+    ).
+</div>
+    <div class="para">
+            The screen-aligned pixel rectangle with lower-left corner at (
+    <a class="parameter" href="#param-x">x</a>
+    ,\
+    <a class="parameter" href="#param-y">y</a>
+    )
+            having width
+    <a class="parameter" href="#param-width">width</a>
+    and height 1
+            is loaded into the color table. If any pixels within
+            this region are outside the window that is associated with the GL
+            context, the values obtained for those pixels are undefined.
+</div>
+    <div class="para">
+            The pixels in the rectangle are processed just as if
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    were called, with
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    set to RGBA,
+            but processing stops after the final conversion to RGBA.
+</div>
+    <div class="para">
+            The four scale parameters and the four bias parameters that are defined
+            for the table are then used to scale and bias the R, G, B, and A components
+            of each pixel. The scale and bias parameters are set by calling
+    <a class="crossref" href="./glColorTableParameter.html">glColorTableParameter</a>
+    .
+</div>
+    <div class="para">
+            Next, the R, G, B, and A values are clamped to the range
+    <math>
+                <mfenced open="[" close="]">
+                    <mn>0</mn>
+                    <mn>1</mn>
+                </mfenced>
+            </math>
+    .
+            Each pixel is then converted to the internal format specified by
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    . This conversion simply maps the component values of the pixel (R, G, B,
+            and A) to the values included in the internal format (red, green, blue,
+            alpha, luminance, and intensity).  The mapping is as follows:
+</div>
+    <div class="para">
+        </div>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>
+    <span class="emphasis">
+                        Internal Format
+                        </span>
+</th><th>
+    <span class="emphasis">
+                        Red
+                        </span>
+</th><th>
+    <span class="emphasis">
+                        Green
+                        </span>
+</th><th>
+    <span class="emphasis">
+                        Blue
+                        </span>
+</th><th>
+    <span class="emphasis">
+                        Alpha
+                        </span>
+</th><th>
+    <span class="emphasis">
+                        Luminance
+                        </span>
+</th><th>
+    <span class="emphasis">
+                        Intensity
+                        </span>
+</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+    <span class="constant">GL_ALPHA</span>
+</td><td>
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        A
+                        </td><td>
+                        </td><td>
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_LUMINANCE</span>
+</td><td>
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        R
+                        </td><td>
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_LUMINANCE_ALPHA</span>
+</td><td>
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        A
+                        </td><td>
+                        R
+                        </td><td>
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INTENSITY</span>
+</td><td>
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        R
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_RGB</span>
+</td><td>
+                        R
+                        </td><td>
+                        G
+                        </td><td>
+                        B
+                        </td><td>
+                        </td><td>
+                        </td><td>
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_RGBA</span>
+</td><td>
+                        R
+                        </td><td>
+                        G
+                        </td><td>
+                        B
+                        </td><td>
+                        A
+                        </td><td>
+                        </td><td>
+                        </td>
+                </tr>
+    </tbody></table>
+    <div class="para">
+            Finally, the red, green, blue, alpha, luminance, and/or intensity components of
+            the resulting pixels are stored in the color table.
+            They form a one-dimensional table with indices in the range
+    <math>
+                <mfenced open="[" close="]">
+                    <mn>0</mn>
+                    <mrow>
+                        <mi mathvariant="italic">width</mi>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                    </mrow>
+                </mfenced>
+            </math>
+    .
+</div>
+    <div class="para">
+        </div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glCopyColorTable.html">glCopyColorTable</a>
+    is available only if
+    <div class="code">ARB_imaging</div>
+    is returned from calling
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+    with an argument of
+    <span class="constant">GL_EXTENSIONS</span>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated when
+    <a class="parameter" href="#param-target">target</a>
+    is not one of the
+            allowable values.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-width">width</a>
+    is less than zero.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is not one of the
+            allowable values.
+</div>
+    <div class="para">
+    <span class="constant">GL_TABLE_TOO_LARGE</span>
+    is generated if the requested color table
+            is too large to be supported by the implementation.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glCopyColorTable.html">glCopyColorTable</a>
+    is executed
+            between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding
+            execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetColorTable.html">glGetColorTable</a>
+    ,
+    <a class="crossref" href="./glGetColorTableParameter.html">glGetColorTableParameter</a>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glColorTable.html">glColorTable</a>
+    ,
+    <a class="crossref" href="./glColorTableParameter.html">glColorTableParameter</a>
+    ,
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

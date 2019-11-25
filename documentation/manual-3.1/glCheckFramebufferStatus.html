@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glCheckFramebufferStatus : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glCheckFramebufferStatus</h1>
+</header>
+<main class="content">
+    <section class="purpose">check the completeness status of a framebuffer</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glCheckFramebufferStatus"></a>
+    <span class="c-function">glCheckFramebufferStatus</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+    </span>
+</span>)-&gt; GLenum
+</div>
+                <div class="py-signature">
+    <a name="py-glCheckFramebufferStatus"></a>
+    <span class="py-function">glCheckFramebufferStatus</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_uint'&gt;</span>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glCheckNamedFramebufferStatus"></a>
+    <span class="c-function">glCheckNamedFramebufferStatus</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+    </span>
+</span>)-&gt; GLenum
+</div>
+                <div class="py-signature">
+    <a name="py-glCheckNamedFramebufferStatus"></a>
+    <span class="py-function">glCheckNamedFramebufferStatus</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_uint'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the target to which the framebuffer is bound for
+    <a class="function" href="./glCheckFramebufferStatus.html">glCheckFramebufferStatus</a>
+    , and the
+                    target against which framebuffer completeness of
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is checked for
+    <a class="function" href="./glCheckFramebufferStatus.html#c-glCheckNamedFramebufferStatus">glCheckNamedFramebufferStatus</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-framebuffer"></a>
+                        framebuffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the framebuffer object
+                    for
+    <a class="function" href="./glCheckFramebufferStatus.html#c-glCheckNamedFramebufferStatus">glCheckNamedFramebufferStatus</a>
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glCheckFramebufferStatus.html">glCheckFramebufferStatus</a>
+    and
+    <a class="function" href="./glCheckFramebufferStatus.html#c-glCheckNamedFramebufferStatus">glCheckNamedFramebufferStatus</a>
+    return the
+            completeness status of a framebuffer object when treated as a
+            read or draw framebuffer, depending on the value of
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+    <div class="para">
+            For
+    <a class="function" href="./glCheckFramebufferStatus.html">glCheckFramebufferStatus</a>
+    , the
+            framebuffer checked is that bound to
+    <a class="parameter" href="#param-target">target</a>
+    , which must be
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    ,
+    <span class="constant">GL_READ_FRAMEBUFFER</span>
+    or
+    <span class="constant">GL_FRAMEBUFFER</span>
+    .
+    <span class="constant">GL_FRAMEBUFFER</span>
+    is equivalent to
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    .
+</div>
+    <div class="para">
+            For
+    <a class="function" href="./glCheckFramebufferStatus.html#c-glCheckNamedFramebufferStatus">glCheckNamedFramebufferStatus</a>
+    ,
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is zero or the name of the
+            framebuffer object to check. If
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is zero, then the status of
+            the default read or draw framebuffer, as determined by
+    <a class="parameter" href="#param-target">target</a>
+    , is returned.
+</div>
+    <div class="para">
+            The return value is
+    <span class="constant">GL_FRAMEBUFFER_COMPLETE</span>
+    if the specified framebuffer is complete. Otherwise, the return
+            value is determined as follows:
+    <div class="itemizedlist">
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_FRAMEBUFFER_UNDEFINED</span>
+    is
+                        returned if the specified framebuffer is the default
+                        read or draw framebuffer, but the default
+                        framebuffer does not exist.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT</span>
+    is returned if any of the framebuffer attachment
+                        points are framebuffer incomplete.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT</span>
+    is returned if the framebuffer does not have at
+                        least one image attached to it.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER</span>
+    is returned if the value of
+    <span class="constant">GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE</span>
+    is
+    <span class="constant">GL_NONE</span>
+    for any color
+                         attachment point(s) named by
+    <span class="constant">GL_DRAW_BUFFERi</span>
+    .
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_FRAMEBUFFER_INCOMPLETE_READ_BUFFER</span>
+    is returned if
+    <span class="constant">GL_READ_BUFFER</span>
+    is not
+    <span class="constant">GL_NONE</span>
+    and the value of
+    <span class="constant">GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE</span>
+    is
+    <span class="constant">GL_NONE</span>
+    for the color
+                        attachment point named by
+    <span class="constant">GL_READ_BUFFER</span>
+    .
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_FRAMEBUFFER_UNSUPPORTED</span>
+    is
+                        returned if the combination of internal formats of
+                        the attached images violates an
+                        implementation-dependent set of restrictions.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE</span>
+    is returned if the value of
+    <span class="constant">GL_RENDERBUFFER_SAMPLES</span>
+    is not
+                        the same for all attached renderbuffers; if the
+                        value of
+    <span class="constant">GL_TEXTURE_SAMPLES</span>
+    is
+                        the not same for all attached textures; or, if the
+                        attached images are a mix of renderbuffers and
+                        textures, the value of
+    <span class="constant">GL_RENDERBUFFER_SAMPLES</span>
+    does
+                        not match the value of
+    <span class="constant">GL_TEXTURE_SAMPLES</span>
+    .
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_FRAMEBUFFER_INCOMPLETE_MULTISAMPLE</span>
+    is also returned if the value of
+    <span class="constant">GL_TEXTURE_FIXED_SAMPLE_LOCATIONS</span>
+    is not the same for all attached textures; or, if
+                        the attached images are a mix of renderbuffers and
+                        textures, the value of
+    <span class="constant">GL_TEXTURE_FIXED_SAMPLE_LOCATIONS</span>
+    is not
+    <span class="constant">GL_TRUE</span>
+    for all attached
+                        textures.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS</span>
+    is returned if any framebuffer attachment is
+                        layered, and any populated attachment is not
+                        layered, or if all populated color attachments are
+                        not from textures of the same target.
+</div>
+</dd>
+</div>
+</div>
+    <div class="para">
+            Additionally, if an error occurs, zero is returned.
+        </div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    ,
+    <span class="constant">GL_READ_FRAMEBUFFER</span>
+    or
+    <span class="constant">GL_FRAMEBUFFER</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glCheckFramebufferStatus.html#c-glCheckNamedFramebufferStatus">glCheckNamedFramebufferStatus</a>
+    if
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is not zero or the name of an
+            existing framebuffer object.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glCheckFramebufferStatus.html">glCheckFramebufferStatus</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glCheckFramebufferStatus.html#c-glCheckNamedFramebufferStatus">glCheckNamedFramebufferStatus</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenFramebuffers.html">glGenFramebuffers</a>
+    ,
+    <a class="crossref" href="./glDeleteFramebuffers.html">glDeleteFramebuffers</a>
+    <a class="crossref" href="./glBindFramebuffer.html">glBindFramebuffer</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glClientActiveTexture : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glClientActiveTexture</h1>
+</header>
+<main class="content">
+    <section class="purpose">select active texture unit</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glClientActiveTexture"></a>
+    <span class="c-function">glClientActiveTexture</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClientActiveTexture"></a>
+    <span class="py-function">glClientActiveTexture</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies which texture unit to make active. The number
+                    of texture units is implementation dependent, but must be at least
+                    two.
+    <a class="parameter" href="#param-texture">texture</a>
+    must be one of
+    <span class="constant">GL_TEXTURE</span>
+    <math><mi mathvariant="italic">i</mi></math>
+    ,
+                    where i ranges from 0 to the value of
+    <span class="constant">GL_MAX_TEXTURE_COORDS</span>
+    - 1, which is an
+                    implementation-dependent value.  The initial value is
+    <span class="constant">GL_TEXTURE0</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glClientActiveTexture.html">glClientActiveTexture</a>
+    selects the vertex array client state parameters to be modified by
+    <a class="crossref" href="./glTexCoordPointer.html">glTexCoordPointer</a>
+    , and enabled or disabled with
+    <a class="crossref" href="./glEnableClientState.html">glEnableClientState</a>
+    or
+    <a class="crossref" href="./glEnableClientState.html#c-glDisableClientState">glDisableClientState</a>
+    , respectively,
+            when called with a parameter of
+    <span class="constant">GL_TEXTURE_COORD_ARRAY</span>
+    .
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glClientActiveTexture.html">glClientActiveTexture</a>
+    is supported only if the GL version is 1.3 or greater, or
+    <div class="code">ARB_multitexture</div>
+    is included in the string returned by
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+    when called with the argument
+    <span class="constant">GL_EXTENSIONS</span>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-texture">texture</a>
+    is not one of
+    <span class="constant">GL_TEXTURE</span>
+    <math><mi mathvariant="italic">i</mi></math>
+    ,
+            where
+            i ranges from 0 to the value of
+    <span class="constant">GL_MAX_TEXTURE_COORDS</span>
+    - 1.
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_CLIENT_ACTIVE_TEXTURE</span>
+    or
+    <span class="constant">GL_MAX_TEXTURE_COORDS</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    ,
+    <a class="crossref" href="./glEnableClientState.html#c-glDisableClientState">glDisableClientState</a>
+    ,
+    <a class="crossref" href="./glEnableClientState.html">glEnableClientState</a>
+    ,
+    <a class="crossref" href="./glMultiTexCoord.html">glMultiTexCoord</a>
+    ,
+    <a class="crossref" href="./glTexCoordPointer.html">glTexCoordPointer</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

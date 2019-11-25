@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glIsFramebuffer : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glIsFramebuffer</h1>
+</header>
+<main class="content">
+    <section class="purpose">determine if a name corresponds to a framebuffer object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glIsFramebuffer"></a>
+    <span class="c-function">glIsFramebuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        )
+    </span>
+</span>)-&gt; GLboolean
+</div>
+                <div class="py-signature">
+    <a name="py-glIsFramebuffer"></a>
+    <span class="py-function">glIsFramebuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_ubyte'&gt;</span>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-framebuffer"></a>
+                        framebuffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a value that may be the name of a framebuffer object.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glIsFramebuffer.html">glIsFramebuffer</a>
+    returns
+    <span class="constant">GL_TRUE</span>
+    if
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is currently the name of a framebuffer
+            object. If
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is zero, or if
+    <span class="constant">framebuffer</span>
+    is not the name of a framebuffer object, or if an error
+            occurs,
+    <a class="function" href="./glIsFramebuffer.html">glIsFramebuffer</a>
+    returns
+    <span class="constant">GL_FALSE</span>
+    . If
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is a name returned by
+    <a class="crossref" href="./glGenFramebuffers.html">glGenFramebuffers</a>
+    , by that has not yet been bound through a call to
+    <a class="crossref" href="./glBindFramebuffer.html">glBindFramebuffer</a>
+    , then the name is not a framebuffer object and
+    <a class="function" href="./glIsFramebuffer.html">glIsFramebuffer</a>
+    returns
+    <span class="constant">GL_FALSE</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glIsFramebuffer.html">glIsFramebuffer</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenFramebuffers.html">glGenFramebuffers</a>
+    ,
+    <a class="crossref" href="./glBindFramebuffer.html">glBindFramebuffer</a>
+    ,
+    <a class="crossref" href="./glDeleteFramebuffers.html">glDeleteFramebuffers</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

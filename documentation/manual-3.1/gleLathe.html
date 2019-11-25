@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gleLathe : PyOpenGL 3.1.4 GLE Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+    <h1>gleLathe</h1>
+</header>
+<main class="content">
+    <section class="purpose">Sweep using a Z-axis shear to create an arbitrary contour along a helical path.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gleLathe"></a>
+    <span class="c-function">gleLathe</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-ncp" class="parameter">ncp</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[][2](
+            <a href="#param-contour" class="parameter">contour</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[][2](
+            <a href="#param-cont_normal" class="parameter">cont_normal</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[3](
+            <a href="#param-up" class="parameter">up</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-startRadius" class="parameter">startRadius</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-drdTheta" class="parameter">drdTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-startZ" class="parameter">startZ</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-dzdTheta" class="parameter">dzdTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[2][3](
+            <a href="#param-startXform" class="parameter">startXform</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[2][3](
+            <a href="#param-dXformdTheta" class="parameter">dXformdTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-startTheta" class="parameter">startTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-sweepTheta" class="parameter">sweepTheta</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gleLathe"></a>
+    <span class="py-function">gleLathe</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-contour" class="parameter">contour</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-cont_normal" class="parameter">cont_normal</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-up" class="parameter">up</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startRadius" class="parameter">startRadius</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-drdTheta" class="parameter">drdTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startZ" class="parameter">startZ</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dzdTheta" class="parameter">dzdTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startXform" class="parameter">startXform</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dXformdTheta" class="parameter">dXformdTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startTheta" class="parameter">startTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-sweepTheta" class="parameter">sweepTheta</a>
+    </span>
+</span> )
+    <pre class="pydoc">gleLathe( c_int(ncp), arrays.GLdoubleArray(contour), arrays.GLdoubleArray(cont_normal), arrays.GLdoubleArray(up), gleDouble(startRadius), gleDouble(drdTheta), gleDouble(startZ), gleDouble(dzdTheta), arrays.GLdoubleArray(startXform), arrays.GLdoubleArray(dXformdTheta), gleDouble(startTheta), gleDouble(sweepTheta) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-ncp"></a>
+                        ncp
+                    </th>
+                    <td>
+    <div class="simpara">
+						number of contour points
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-contour"></a>
+                        contour
+                    </th>
+                    <td>
+    <div class="simpara">
+						2D contour
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-cont_normal"></a>
+                        cont_normal
+                    </th>
+                    <td>
+    <div class="simpara">
+						2D contour normals
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-up"></a>
+                        up
+                    </th>
+                    <td>
+    <div class="simpara">
+						up vector for contour
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startRadius"></a>
+                        startRadius
+                    </th>
+                    <td>
+    <div class="simpara">
+						spiral starts in x-y plane
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-drdTheta"></a>
+                        drdTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						change in radius per revolution
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startZ"></a>
+                        startZ
+                    </th>
+                    <td>
+    <div class="simpara">
+						starting z value
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dzdTheta"></a>
+                        dzdTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						change in Z per revolution
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startXform"></a>
+                        startXform
+                    </th>
+                    <td>
+    <div class="simpara">
+						starting contour affine transformation
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dXformdTheta"></a>
+                        dXformdTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						tangent change xform per revolution
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startTheta"></a>
+                        startTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						start angle in x-y plane
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sweepTheta"></a>
+                        sweepTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						degrees to spiral around
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="gleLathe.3GLE-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			Sweep an arbitrary contour along a helical path. The sweep will be performed as a shear along the z-axis, so that the
+			orientation of the contour is displaced, rather than translated, as the contour is swept.
+		</div>
+    <div class="para">
+			The axis of the helix lies along the modeling coordinate z-axis.
+		</div>
+    <div class="para">
+			An affine transform can be applied as the contour is swept. For most ordinary usage, the affines should be given as
+    <span class="constant">NULL</span>
+    .
+</div>
+    </section><section class="section" id="gleLathe.3GLE-author">
+    <h2 class="title">Author</h2>
+    <div class="para">
+			Linas Vepstas
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./gleSpiral.html">gleSpiral</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gleLathe</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/extrusions.py">OpenGLContext/scenegraph/extrusions.py</a>
+    Lines: <span class="sample-lines">132</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glBindBuffersRange : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glBindBuffersRange</h1>
+</header>
+<main class="content">
+    <section class="purpose">bind ranges of one or more buffer objects to a sequence of indexed buffer targets</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glBindBuffersRange"></a>
+    <span class="c-function">glBindBuffersRange</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-first" class="parameter">first</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-count" class="parameter">count</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLuint *(
+            <a href="#param-buffers" class="parameter">buffers</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLintptr *(
+            <a href="#param-offsets" class="parameter">offsets</a>
+        )
+        ,
+    </span><span class="param-def">
+        const GLintptr *(
+            <a href="#param-sizes" class="parameter">sizes</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glBindBuffersRange"></a>
+    <span class="py-function">glBindBuffersRange</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-first" class="parameter">first</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-count" class="parameter">count</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-buffers" class="parameter">buffers</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-offsets" class="parameter">offsets</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-sizes" class="parameter">sizes</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the target of the bind operation.
+    <a class="parameter" href="#param-target">target</a>
+    must be
+                    one of
+    <span class="constant">GL_ATOMIC_COUNTER_BUFFER</span>
+    ,
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER</span>
+    ,
+    <span class="constant">GL_UNIFORM_BUFFER</span>
+    or
+    <span class="constant">GL_SHADER_STORAGE_BUFFER</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-first"></a>
+                        first
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the index of the first binding point within the array specified by
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-count"></a>
+                        count
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the number of contiguous binding points to which to bind buffers.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-buffers"></a>
+                        buffers
+                    </th>
+                    <td>
+    <div class="para">
+                    A pointer to an array of names of buffer objects to bind to the targets on the specified binding point, or
+    <span class="constant">NULL</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-offsets"></a>
+                        offsets
+                    </th>
+                    <td>
+    <div class="para">
+                        A pointer to an array of offsets into the corresponding buffer in
+    <a class="parameter" href="#param-buffers">buffers</a>
+    to
+                        bind, or
+    <span class="constant">NULL</span>
+    if
+    <a class="parameter" href="#param-buffers">buffers</a>
+    is
+    <span class="constant">NULL</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sizes"></a>
+                        sizes
+                    </th>
+                    <td>
+    <div class="para">
+                        A pointer to an array of sizes of the corresponding buffer in
+    <a class="parameter" href="#param-buffers">buffers</a>
+    to
+                        bind, or
+    <span class="constant">NULL</span>
+    if
+    <a class="parameter" href="#param-buffers">buffers</a>
+    is
+    <span class="constant">NULL</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glBindBuffersRange.html">glBindBuffersRange</a>
+    binds a set of
+    <a class="parameter" href="#param-count">count</a>
+    ranges from buffer objects whose names
+            are given in the array
+    <a class="parameter" href="#param-buffers">buffers</a>
+    to the
+    <a class="parameter" href="#param-count">count</a>
+    consecutive binding
+            points starting from index
+    <a class="parameter" href="#param-first">first</a>
+    of the array of targets specified
+            by
+    <a class="parameter" href="#param-target">target</a>
+    .
+    <a class="parameter" href="#param-offsets">offsets</a>
+    specifies the address of an array containing
+    <a class="parameter" href="#param-count">count</a>
+    starting offsets within the buffers, and
+    <a class="parameter" href="#param-sizes">sizes</a>
+    specifies the
+            address of an array of
+    <a class="parameter" href="#param-count">count</a>
+    sizes of the ranges. If
+    <a class="parameter" href="#param-buffers">buffers</a>
+    is
+    <span class="constant">NULL</span>
+    then
+    <a class="parameter" href="#param-offsets">offsets</a>
+    and
+    <a class="parameter" href="#param-sizes">sizes</a>
+    are ignored and
+    <a class="function" href="./glBindBuffersRange.html">glBindBuffersRange</a>
+    unbinds any
+            buffers that are currently bound to the referenced binding points. Assuming no errors are generated, it is equivalent to the following
+            pseudo-code, which calls
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    ,
+            with the exception that the non-indexed
+    <a class="parameter" href="#param-target">target</a>
+    is not changed by
+    <a class="function" href="./glBindBuffersRange.html">glBindBuffersRange</a>
+    :
+</div>
+    <div class="programlisting">    for (i = 0; i &lt; count; i++) {
+        if (buffers != NULL) {
+            glBindBufferRange(target, first + i, buffers[i], offsets[i], sizes[i]);
+        } else {
+            glBindBufferRange(target, first + i, 0);
+        }
+    }</div>
+    <div class="para">
+            Each entry in
+    <a class="parameter" href="#param-buffers">buffers</a>
+    ,
+    <a class="parameter" href="#param-offsets">offsets</a>
+    , and
+    <a class="parameter" href="#param-sizes">sizes</a>
+    will be
+            checked individually and if found to be invalid, the state for that buffer binding index will not be changed and an
+            error will be generated. However, the state for other buffer binding indices referenced by the command will
+            still be updated.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glBindBuffersBase.html">glBindBuffersBase</a>
+    is available only if the GL version is 4.4 or higher.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not
+    <span class="constant">GL_ATOMIC_COUNTER_BUFFER</span>
+    ,
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BUFFER</span>
+    ,
+    <span class="constant">GL_UNIFORM_BUFFER</span>
+    or
+    <span class="constant">GL_SHADER_STORAGE_BUFFER</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-first">first</a>
+    +
+    <a class="parameter" href="#param-count">count</a>
+    is greater
+            than the number of target-specific indexed binding points.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if any value in
+    <a class="parameter" href="#param-buffers">buffers</a>
+    is not
+            zero or the name of an existing buffer object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated by if any value in
+    <a class="parameter" href="#param-offsets">offsets</a>
+    is less than zero or
+            if any value in
+    <a class="parameter" href="#param-sizes">sizes</a>
+    is less than zero.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if any pair of values in
+    <a class="parameter" href="#param-offsets">offsets</a>
+    and
+    <a class="parameter" href="#param-sizes">sizes</a>
+    does not respectively satisfy the constraints described for those
+            parameters for the specified target.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glBindBuffersRange.html">glBindBuffersRange</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenBuffers.html">glGenBuffers</a>
+    ,
+    <a class="crossref" href="./glDeleteBuffers.html">glDeleteBuffers</a>
+    ,
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ,
+    <a class="crossref" href="./glBindBufferBase.html">glBindBufferBase</a>
+    ,
+    <a class="crossref" href="./glBindBufferRange.html">glBindBufferRange</a>
+    ,
+    <a class="crossref" href="./glBindBuffersRange.html">glBindBuffersRange</a>
+    ,
+    <a class="crossref" href="./glMapBuffer.html">glMapBuffer</a>
+    ,
+    <a class="crossref" href="./glUnmapBuffer.html">glUnmapBuffer</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2013-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

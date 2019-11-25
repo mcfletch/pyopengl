@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluLookAt : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluLookAt</h1>
+</header>
+<main class="content">
+    <section class="purpose">define a viewing transformation</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluLookAt"></a>
+    <span class="c-function">gluLookAt</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble (
+            <a href="#param-eyeX" class="parameter">eyeX</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-eyeY" class="parameter">eyeY</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-eyeZ" class="parameter">eyeZ</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-centerX" class="parameter">centerX</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-centerY" class="parameter">centerY</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-centerZ" class="parameter">centerZ</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-upX" class="parameter">upX</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-upY" class="parameter">upY</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-upZ" class="parameter">upZ</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluLookAt"></a>
+    <span class="py-function">gluLookAt</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-eyeX" class="parameter">eyeX</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-eyeY" class="parameter">eyeY</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-eyeZ" class="parameter">eyeZ</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-centerX" class="parameter">centerX</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-centerY" class="parameter">centerY</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-centerZ" class="parameter">centerZ</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-upX" class="parameter">upX</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-upY" class="parameter">upY</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-upZ" class="parameter">upZ</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluLookAt( GLdouble(eyeX), GLdouble(eyeY), GLdouble(eyeZ), GLdouble(centerX), GLdouble(centerY), GLdouble(centerZ), GLdouble(upX), GLdouble(upY), GLdouble(upZ) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-eyeX"></a><a name="param-eyeY"></a><a name="param-eyeZ"></a>
+                        eyeX, eyeY, eyeZ
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the position of the eye point.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-centerX"></a><a name="param-centerY"></a><a name="param-centerZ"></a>
+                        centerX, centerY, centerZ
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the position of the reference point.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-upX"></a><a name="param-upY"></a><a name="param-upZ"></a>
+                        upX, upY, upZ
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the direction of the
+    <span class="emphasis">up</span>
+    vector.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluLookAt.html">gluLookAt</a>
+    creates a viewing matrix derived from an eye point, a reference
+            point indicating the center of the scene, and an
+    <span class="emphasis">UP</span>
+    vector.
+</div>
+    <div class="para">
+            The matrix
+            maps the reference point to the negative
+    <span class="emphasis">z</span>
+    axis and the
+            eye point to the origin.
+            When a typical projection matrix is used,
+            the center of the scene therefore maps to the center of the viewport.
+            Similarly, the direction described by the
+    <span class="emphasis">UP</span>
+    vector projected onto the viewing plane is mapped to the positive
+    <span class="emphasis">y</span>
+    axis so that it points upward in the viewport.
+            The
+    <span class="emphasis">UP</span>
+    vector must not be parallel to the line of sight from the
+            eye point to the reference point.
+</div>
+    <div class="para">
+            Let
+        </div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">F</mi>
+                    <mo>=</mo>
+                    <mfenced open="(" close=")">
+                        <mtable>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">centerX</mi>
+                                        <mo>-</mo>
+                                        <mi mathvariant="italic">eyeX</mi>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">centerY</mi>
+                                        <mo>-</mo>
+                                        <mi mathvariant="italic">eyeY</mi>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">centerZ</mi>
+                                        <mo>-</mo>
+                                        <mi mathvariant="italic">eyeZ</mi>
+                                    </mrow>
+                                </mtd>
+                            </mtr>
+                        </mtable>
+                    </mfenced>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+        </div>
+    <div class="para">
+            Let
+    <span class="emphasis">UP</span>
+    be the vector
+    <math>
+                <mfenced open="(" close=")">
+                    <mi mathvariant="italic">upX</mi>
+                    <mi mathvariant="italic">upY</mi>
+                    <mi mathvariant="italic">upZ</mi>
+                </mfenced>
+            </math>
+    .
+</div>
+    <div class="para">
+            Then normalize as follows:
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">f</mi>
+                    <mo>=</mo>
+                    <mfrac>
+                        <mi mathvariant="italic">F</mi>
+                        <mfenced open="" close="">
+                            <mfenced open="" close="">
+                                <mi mathvariant="italic">F</mi>
+                            </mfenced>
+                        </mfenced>
+                    </mfrac>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <msup><mi mathvariant="italic">UP</mi>
+                    <mo></mo>
+                    </msup>
+                    <mo>=</mo>
+                    <mfrac>
+                        <mi mathvariant="italic">UP</mi>
+                        <mfenced open="" close="">
+                            <mfenced open="" close="">
+                                <mi mathvariant="italic">UP</mi>
+                            </mfenced>
+                        </mfenced>
+                    </mfrac>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+        </div>
+    <div class="para">
+            Finally, let
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">s</mi>
+                    <mo>=</mo>
+                    <mrow>
+                        <mi mathvariant="italic">f</mi>
+                        <mo></mo>
+                        <msup><mi mathvariant="italic">UP</mi>
+                        <mo></mo>
+                        </msup>
+                    </mrow>
+                </mrow>
+            </math>
+    ,
+            and
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">u</mi>
+                    <mo>=</mo>
+                    <mrow>
+                        <mfenced open="(" close=")">
+                            <mfrac>
+                                <mi mathvariant="italic">s</mi>
+                                <mfenced open="" close="">
+                                    <mi mathvariant="italic">s</mi>
+                                </mfenced>
+                            </mfrac>
+                        </mfenced>
+                        <mo></mo>
+                        <mi mathvariant="italic">f</mi>
+                    </mrow>
+                </mrow>
+            </math>
+    .
+</div>
+    <div class="para">
+        </div>
+    <div class="para">
+            M is then constructed as follows:
+    <div class="informalequation">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">M</mi>
+                    <mo>=</mo>
+                    <mfenced open="(" close=")">
+                        <mtable>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">s</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>0</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">s</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>1</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">s</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>2</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mn>0</mn>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">u</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>0</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">u</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>1</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mi mathvariant="italic">u</mi>
+                                        <mo></mo>
+                                        <mfenced open="[" close="]">
+                                            <mn>2</mn>
+                                        </mfenced>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mn>0</mn>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mrow>
+                                        <mo>-</mo>
+                                        <mrow>
+                                            <mi mathvariant="italic">f</mi>
+                                            <mo></mo>
+                                            <mfenced open="[" close="]">
+                                                <mn>0</mn>
+                                            </mfenced>
+                                        </mrow>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mo>-</mo>
+                                        <mrow>
+                                            <mi mathvariant="italic">f</mi>
+                                            <mo></mo>
+                                            <mfenced open="[" close="]">
+                                                <mn>1</mn>
+                                            </mfenced>
+                                        </mrow>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mrow>
+                                        <mo>-</mo>
+                                        <mrow>
+                                            <mi mathvariant="italic">f</mi>
+                                            <mo></mo>
+                                            <mfenced open="[" close="]">
+                                                <mn>2</mn>
+                                            </mfenced>
+                                        </mrow>
+                                    </mrow>
+                                </mtd>
+                                <mtd>
+                                    <mn>0</mn>
+                                </mtd>
+                            </mtr>
+                            <mtr>
+                                <mtd>
+                                    <mn>0</mn>
+                                </mtd>
+                                <mtd>
+                                    <mn>0</mn>
+                                </mtd>
+                                <mtd>
+                                    <mn>0</mn>
+                                </mtd>
+                                <mtd>
+                                    <mn>1</mn>
+                                </mtd>
+                            </mtr>
+                        </mtable>
+                    </mfenced>
+                </mrow>
+            </math>
+</div>
+</div>
+    <div class="para">
+            and
+    <a class="function" href="./gluLookAt.html">gluLookAt</a>
+    is equivalent to
+    <div class="programlisting">
+glMultMatrixf(M);
+glTranslated(-eyex, -eyey, -eyez);
+            </div>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluPerspective.html">gluPerspective</a>
+    ,
+    <a class="crossref" href="./glFrustum.html">glFrustum</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluLookAt</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/browser/nodes.py">OpenGLContext/browser/nodes.py</a>
+    Lines: <span class="sample-lines">47</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/stereo/stereoDemo.py">PyOpenGL-Demo/proesch/stereo/stereoDemo.py</a>
+    Lines: <span class="sample-lines">69</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/movelight.py">PyOpenGL-Demo/redbook/movelight.py</a>
+    Lines: <span class="sample-lines">96</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/cube.py">PyOpenGL-Demo/redbook/cube.py</a>
+    Lines: <span class="sample-lines">73</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/lorentz.py">PyOpenGL-Demo/GLUT/tom/lorentz.py</a>
+    Lines: <span class="sample-lines">81</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/checker.py">PyOpenGL-Demo/GLUT/tom/checker.py</a>
+    Lines: <span class="sample-lines">73</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/text.py">PyOpenGL-Demo/GLUT/tom/text.py</a>
+    Lines: <span class="sample-lines">66</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/cone.py">PyOpenGL-Demo/GLUT/tom/cone.py</a>
+    Lines: <span class="sample-lines">75</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">774</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">757</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">756</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">774</span>
+</div><div class="py-sample">
+    <span class="sample-project">Gloopy</span>
+    <a href="https://bitbucket.org/tartley/gloopy/src/tip/gloopy/view/modelview.py">gloopy/view/modelview.py</a>
+    Lines: <span class="sample-lines">36</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

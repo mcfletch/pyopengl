@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glCopyTexImage2D : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glCopyTexImage2D</h1>
+</header>
+<main class="content">
+    <section class="purpose">copy pixels into a 2D texture image</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glCopyTexImage2D"></a>
+    <span class="c-function">glCopyTexImage2D</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-level" class="parameter">level</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-border" class="parameter">border</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glCopyTexImage2D"></a>
+    <span class="py-function">glCopyTexImage2D</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-border" class="parameter">border</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target texture.
+                    Must be
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_X</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_X</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_Y</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_Y</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_Z</span>
+    , or
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_Z</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-level"></a>
+                        level
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the level-of-detail number.
+                    Level 0 is the base image level.
+                    Level
+    <span class="emphasis">n</span>
+    is the
+    <span class="emphasis">n</span>
+    th mipmap reduction image.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalformat"></a>
+                        internalformat
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the internal format of the texture.
+                    Must be one of the following symbolic constants:
+    <span class="constant">GL_COMPRESSED_RED</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RG</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RGB</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RGBA</span>
+    .
+    <span class="constant">GL_COMPRESSED_SRGB</span>
+    ,
+    <span class="constant">GL_COMPRESSED_SRGB_ALPHA</span>
+    .
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENT16</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENT24</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENT32</span>
+    ,
+    <span class="constant">GL_STENCIL_INDEX8</span>
+    ,
+    <span class="constant">GL_RED</span>
+    ,
+    <span class="constant">GL_RG</span>
+    ,
+    <span class="constant">GL_RGB</span>
+    ,
+    <span class="constant">GL_R3_G3_B2</span>
+    ,
+    <span class="constant">GL_RGB4</span>
+    ,
+    <span class="constant">GL_RGB5</span>
+    ,
+    <span class="constant">GL_RGB8</span>
+    ,
+    <span class="constant">GL_RGB10</span>
+    ,
+    <span class="constant">GL_RGB12</span>
+    ,
+    <span class="constant">GL_RGB16</span>
+    ,
+    <span class="constant">GL_RGBA</span>
+    ,
+    <span class="constant">GL_RGBA2</span>
+    ,
+    <span class="constant">GL_RGBA4</span>
+    ,
+    <span class="constant">GL_RGB5_A1</span>
+    ,
+    <span class="constant">GL_RGBA8</span>
+    ,
+    <span class="constant">GL_RGB10_A2</span>
+    ,
+    <span class="constant">GL_RGBA12</span>
+    ,
+    <span class="constant">GL_RGBA16</span>
+    ,
+    <span class="constant">GL_SRGB</span>
+    ,
+    <span class="constant">GL_SRGB8</span>
+    ,
+    <span class="constant">GL_SRGB_ALPHA</span>
+    , or
+    <span class="constant">GL_SRGB8_ALPHA8</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-x"></a><a name="param-y"></a>
+                        x, y
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the window coordinates of the lower left corner
+                    of the rectangular region of pixels to be copied.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the width of the texture image.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-height"></a>
+                        height
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the height of the texture image.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-border"></a>
+                        border
+                    </th>
+                    <td>
+    <div class="para">
+                    Must be 0.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glCopyTexImage2D.html">glCopyTexImage2D</a>
+    defines a two-dimensional texture image, or cube-map texture image
+            with pixels from the current
+    <span class="constant">GL_READ_BUFFER</span>
+    .
+</div>
+    <div class="para">
+            The screen-aligned pixel rectangle with lower left corner at (
+    <a class="parameter" href="#param-x">x</a>
+    ,
+    <a class="parameter" href="#param-y">y</a>
+    ) and with a width of
+    <math overflow="scroll">
+                <mi mathvariant="italic">width</mi>
+            </math>
+    and a height of
+    <math overflow="scroll">
+                <mi mathvariant="italic">height</mi>
+            </math>
+    defines the texture array
+            at the mipmap level specified by
+    <a class="parameter" href="#param-level">level</a>
+    .
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    specifies the internal format of the texture array.
+</div>
+    <div class="para">
+            The pixels in the rectangle are processed exactly as if
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    had been called, but the process stops just before
+            final conversion.
+            At this point all pixel component values are clamped to the range
+    <math overflow="scroll">
+                <mfenced open="[" close="]">
+                    <mn>0</mn>
+                    <mn>1</mn>
+                </mfenced>
+            </math>
+    and then converted to the texture's internal format for storage in the texel
+            array.
+</div>
+    <div class="para">
+            Pixel ordering is such that lower
+    <math overflow="scroll"><mi mathvariant="italic">x</mi></math>
+    and
+    <math overflow="scroll"><mi mathvariant="italic">y</mi></math>
+    screen coordinates correspond to
+            lower
+    <math overflow="scroll"><mi mathvariant="italic">s</mi></math>
+    and
+    <math overflow="scroll"><mi mathvariant="italic">t</mi></math>
+    texture coordinates.
+</div>
+    <div class="para">
+            If any of the pixels within the specified rectangle of the current
+    <span class="constant">GL_READ_BUFFER</span>
+    are outside the window associated with the current
+            rendering context, then the values obtained for those pixels are undefined.
+</div>
+    <div class="para">
+            When
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is one of the sRGB  types, the GL does not automatically convert the source pixels to the sRGB color space.  In this case, the
+    <a class="function" href="./glPixelMap.html">glPixelMap</a>
+    function can be used to accomplish the conversion.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            1, 2, 3, and 4 are not accepted values for
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    .
+</div>
+    <div class="para">
+            An image with height or width of 0 indicates a NULL texture.
+        </div>
+    <div class="para">
+    <span class="constant">GL_STENCIL_INDEX8</span>
+    is accepted for
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    only
+            if the GL version is 4.4 or higher.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_X</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_X</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_Y</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_Y</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_Z</span>
+    , or
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_Z</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-level">level</a>
+    is less than 0.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    may be generated if
+    <a class="parameter" href="#param-level">level</a>
+    is greater
+            than
+    <math overflow="scroll">
+                <mrow>
+                    <msub><mi mathvariant="italic">log</mi>
+                    <mn>2</mn>
+                    </msub>
+                    <mo></mo>
+                    <mi mathvariant="italic">max</mi>
+                </mrow>
+            </math>
+    ,
+            where
+    <math overflow="scroll"><mi mathvariant="italic">max</mi></math>
+    is the returned value of
+    <span class="constant">GL_MAX_TEXTURE_SIZE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-width">width</a>
+    is less than 0
+            or greater than
+    <span class="constant">GL_MAX_TEXTURE_SIZE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-border">border</a>
+    is not 0.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is not an
+            accepted format.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENT16</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENT24</span>
+    , or
+    <span class="constant">GL_DEPTH_COMPONENT32</span>
+    and there is no depth
+            buffer.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetTexImage.html">glGetTexImage</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glCopyTexImage2D.html">glCopyTexImage2D</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glCopyTexImage1D.html">glCopyTexImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage1D.html">glCopyTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage2D.html">glCopyTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage1D.html">glTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glTexParameter.html">glTexParameter</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2012-2014 Khronos Group.
+            This document is licensed under the SGI
+            Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glCopyTexImage2D</div>
+        <div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Textures.py">VisionEgg/Textures.py</a>
+    Lines: <span class="sample-lines">1055</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/data.py">pyggel/data.py</a>
+    Lines: <span class="sample-lines">621</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

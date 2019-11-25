@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gl_CullDistance : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>gl_CullDistance</h1>
+</header>
+<main class="content">
+    <section class="purpose">provides a mechanism for controlling user culling</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gl_CullDistance"></a>
+    <span class="c-function">gl_CullDistance</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            The
+    <div class="varname">gl_CullDistance</div>
+    variable provides a
+            mechanism for controlling user culling. The element
+    <a class="parameter" href="#param-gl_CullDistance">gl_CullDistance</a>
+    [
+    <span class="emphasis">i</span>
+    ]
+            specifies a cull distance for each plane
+    <span class="emphasis">i</span>
+    .
+            A distance of 0.0 means that the vertex is on the plane, a
+            positive distance means that the vertex is inside the cull
+            volume, and a negative distance means that the point is outside
+            the cull volume. Primitives whose vertices all have a negative
+            clip distance for plane
+    <span class="emphasis">i</span>
+    will be
+            discarded.
+</div>
+    <div class="para">
+            The
+    <div class="varname">gl_CullDistance</div>
+    array is predeclared as
+            unsized and must be sized by the shader either by redeclaring it
+            with an size or by indexing it only with integral constant
+            expressions. The size determines the number and set of enabled
+            cull distances and can be at most
+    <div class="varname">gl_MaxCullDistances</div>
+    . The number of varying
+            components consumed by
+    <div class="varname">gl_CullDistance</div>
+    will
+            match the size of the array. Shaders writing
+    <div class="varname">gl_CullDistance</div>
+    must write all enabled
+            distances, or culling results are undefined.
+</div>
+    <div class="para">
+            As an output variable,
+    <div class="varname">gl_CullDistance</div>
+    provides the place for the
+            shader to write these distances. As an input in all but the
+            fragment language, it reads the values written in the previous
+            shader stage. In the fragment language, the
+    <div class="varname">gl_CullDistance</div>
+    array contains linearly
+            interpolated values for the vertex values written by a shader to
+            the
+    <div class="varname">gl_CullDistance</div>
+    vertex output variable.
+</div>
+    <div class="para">
+            It is a compile-time or link-time error for the set of shaders
+            forming a program to have the sum of the sizes of the
+    <div class="varname">gl_ClipDistance</div>
+    and
+    <div class="varname">gl_CullDistance</div>
+    arrays to be larger than
+    <div class="varname">gl_MaxCombinedClipAndCullDistances</div>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>gl_CullDistance</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gl_ClipDistance.html">gl_ClipDistance</a>
+    ,
+    <a class="crossref" href="./gl_PointSize.html">gl_PointSize</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

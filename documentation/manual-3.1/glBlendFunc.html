@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glBlendFunc : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glBlendFunc</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify pixel arithmetic</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glBlendFunc"></a>
+    <span class="c-function">glBlendFunc</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-sfactor" class="parameter">sfactor</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-dfactor" class="parameter">dfactor</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glBlendFunc"></a>
+    <span class="py-function">glBlendFunc</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-sfactor" class="parameter">sfactor</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dfactor" class="parameter">dfactor</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glBlendFunci"></a>
+    <span class="c-function">glBlendFunci</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-buf" class="parameter">buf</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-sfactor" class="parameter">sfactor</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-dfactor" class="parameter">dfactor</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glBlendFunci"></a>
+    <span class="py-function">glBlendFunci</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-buf" class="parameter">buf</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-src" class="parameter">src</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dst" class="parameter">dst</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-buf"></a>
+                        buf
+                    </th>
+                    <td>
+    <div class="para">
+                    For
+    <a class="function" href="./glBlendFunc.html#c-glBlendFunci">glBlendFunci</a>
+    , specifies the index of the draw
+                    buffer for which to set the blend function.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sfactor"></a>
+                        sfactor
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies how the red, green, blue,
+                    and alpha source blending factors are computed.
+                    The initial value is
+    <span class="constant">GL_ONE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dfactor"></a>
+                        dfactor
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies how the red, green, blue,
+                    and alpha destination blending factors are computed.
+                    The following symbolic constants are accepted:
+    <span class="constant">GL_ZERO</span>
+    ,
+    <span class="constant">GL_ONE</span>
+    ,
+    <span class="constant">GL_SRC_COLOR</span>
+    ,
+    <span class="constant">GL_ONE_MINUS_SRC_COLOR</span>
+    ,
+    <span class="constant">GL_DST_COLOR</span>
+    ,
+    <span class="constant">GL_ONE_MINUS_DST_COLOR</span>
+    ,
+    <span class="constant">GL_SRC_ALPHA</span>
+    ,
+    <span class="constant">GL_ONE_MINUS_SRC_ALPHA</span>
+    ,
+    <span class="constant">GL_DST_ALPHA</span>
+    ,
+    <span class="constant">GL_ONE_MINUS_DST_ALPHA</span>
+    .
+    <span class="constant">GL_CONSTANT_COLOR</span>
+    ,
+    <span class="constant">GL_ONE_MINUS_CONSTANT_COLOR</span>
+    ,
+    <span class="constant">GL_CONSTANT_ALPHA</span>
+    , and
+    <span class="constant">GL_ONE_MINUS_CONSTANT_ALPHA</span>
+    .
+                    The initial value is
+    <span class="constant">GL_ZERO</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            Pixels can be drawn using a function that blends
+            the incoming (source) RGBA values with the RGBA values
+            that are already in the frame buffer (the destination values).
+            Blending is initially disabled.
+            Use
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="function" href="./glEnable.html#c-glDisable">glDisable</a>
+    with argument
+    <span class="constant">GL_BLEND</span>
+    to enable and disable blending.
+</div>
+    <div class="para">
+    <a class="function" href="./glBlendFunc.html">glBlendFunc</a>
+    defines the operation of blending for all draw buffers when it is enabled.
+    <a class="function" href="./glBlendFunc.html#c-glBlendFunci">glBlendFunci</a>
+    defines the operation of blending for a single draw buffer
+            specified by
+    <a class="parameter" href="#param-buf">buf</a>
+    when enabled for that draw buffer.
+    <a class="parameter" href="#param-sfactor">sfactor</a>
+    specifies which method is used to scale the
+            source color components.
+    <a class="parameter" href="#param-dfactor">dfactor</a>
+    specifies which method is used to scale the
+            destination color components.
+            Both parameters must be one of the following symbolic constants:
+    <span class="constant">GL_ZERO</span>
+    ,
+    <span class="constant">GL_ONE</span>
+    ,
+    <span class="constant">GL_SRC_COLOR</span>
+    ,
+    <span class="constant">GL_ONE_MINUS_SRC_COLOR</span>
+    ,
+    <span class="constant">GL_DST_COLOR</span>
+    ,
+    <span class="constant">GL_ONE_MINUS_DST_COLOR</span>
+    ,
+    <span class="constant">GL_SRC_ALPHA</span>
+    ,
+    <span class="constant">GL_ONE_MINUS_SRC_ALPHA</span>
+    ,
+    <span class="constant">GL_DST_ALPHA</span>
+    ,
+    <span class="constant">GL_ONE_MINUS_DST_ALPHA</span>
+    ,
+    <span class="constant">GL_CONSTANT_COLOR</span>
+    ,
+    <span class="constant">GL_ONE_MINUS_CONSTANT_COLOR</span>
+    ,
+    <span class="constant">GL_CONSTANT_ALPHA</span>
+    ,
+    <span class="constant">GL_ONE_MINUS_CONSTANT_ALPHA</span>
+    ,
+    <span class="constant">GL_SRC_ALPHA_SATURATE</span>
+    ,
+    <span class="constant">GL_SRC1_COLOR</span>
+    ,
+    <span class="constant">GL_ONE_MINUS_SRC1_COLOR</span>
+    ,
+    <span class="constant">GL_SRC1_ALPHA</span>
+    , and
+    <span class="constant">GL_ONE_MINUS_SRC1_ALPHA</span>
+    .
+            The possible methods are described in the following table.
+            Each method defines four scale factors,
+            one each for red, green, blue, and alpha.
+            In the table and in subsequent equations, first source, second source
+            and destination color components are referred to as
+    <math overflow="scroll">
+                <mfenced open="(" close=")">
+                    <msub><mi mathvariant="italic">R</mi>
+                    <mi mathvariant="italic">s0</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">G</mi>
+                    <mi mathvariant="italic">s0</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">B</mi>
+                    <mi mathvariant="italic">s0</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">A</mi>
+                    <mi mathvariant="italic">s0</mi>
+                    </msub>
+                </mfenced>
+            </math>
+    ,
+    <math overflow="scroll">
+                <mfenced open="(" close=")">
+                    <msub><mi mathvariant="italic">R</mi>
+                    <mi mathvariant="italic">s1</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">G</mi>
+                    <mi mathvariant="italic">s1</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">B</mi>
+                    <mi mathvariant="italic">s1</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">A</mi>
+                    <mi mathvariant="italic">s1</mi>
+                    </msub>
+                </mfenced>
+            </math>
+    and
+    <math overflow="scroll">
+                <mfenced open="(" close=")">
+                    <msub><mi mathvariant="italic">R</mi>
+                    <mi mathvariant="italic">d</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">G</mi>
+                    <mi mathvariant="italic">d</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">B</mi>
+                    <mi mathvariant="italic">d</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">A</mi>
+                    <mi mathvariant="italic">d</mi>
+                    </msub>
+                </mfenced>
+            </math>
+    , respectively.
+            The color specified by
+    <a class="crossref" href="./glBlendColor.html">glBlendColor</a>
+    is referred to as
+    <math overflow="scroll">
+                <mfenced open="(" close=")">
+                    <msub><mi mathvariant="italic">R</mi>
+                    <mi mathvariant="italic">c</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">G</mi>
+                    <mi mathvariant="italic">c</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">B</mi>
+                    <mi mathvariant="italic">c</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">A</mi>
+                    <mi mathvariant="italic">c</mi>
+                    </msub>
+                </mfenced>
+            </math>
+    .
+            They are understood to have integer values between 0 and
+    <math overflow="scroll">
+                <mfenced open="(" close=")">
+                    <msub><mi mathvariant="italic">k</mi>
+                    <mi mathvariant="italic">R</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">k</mi>
+                    <mi mathvariant="italic">G</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">k</mi>
+                    <mi mathvariant="italic">B</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">k</mi>
+                    <mi mathvariant="italic">A</mi>
+                    </msub>
+                </mfenced>
+            </math>
+    ,
+            where
+</div>
+    <div class="para">
+    <math overflow="scroll">
+                <mrow>
+                    <msub><mi mathvariant="italic">k</mi>
+                    <mi mathvariant="italic">c</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <mrow>
+                        <msup><mn>2</mn>
+                        <mfenced open="" close="">
+                            <msub><mi mathvariant="italic">m</mi>
+                            <mi mathvariant="italic">c</mi>
+                            </msub>
+                        </mfenced>
+                        </msup>
+                        <mo>-</mo>
+                        <mn>1</mn>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+    <div class="para">
+            and
+    <math overflow="scroll">
+                <mfenced open="(" close=")">
+                    <msub><mi mathvariant="italic">m</mi>
+                    <mi mathvariant="italic">R</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">m</mi>
+                    <mi mathvariant="italic">G</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">m</mi>
+                    <mi mathvariant="italic">B</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">m</mi>
+                    <mi mathvariant="italic">A</mi>
+                    </msub>
+                </mfenced>
+            </math>
+    is the number of red,
+            green,
+            blue,
+            and alpha bitplanes.
+</div>
+    <div class="para">
+            Source and destination scale factors are referred to as
+    <math overflow="scroll">
+                <mfenced open="(" close=")">
+                    <msub><mi mathvariant="italic">s</mi>
+                    <mi mathvariant="italic">R</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">s</mi>
+                    <mi mathvariant="italic">G</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">s</mi>
+                    <mi mathvariant="italic">B</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">s</mi>
+                    <mi mathvariant="italic">A</mi>
+                    </msub>
+                </mfenced>
+            </math>
+    and
+    <math overflow="scroll">
+                <mfenced open="(" close=")">
+                    <msub><mi mathvariant="italic">d</mi>
+                    <mi mathvariant="italic">R</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">d</mi>
+                    <mi mathvariant="italic">G</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">d</mi>
+                    <mi mathvariant="italic">B</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">d</mi>
+                    <mi mathvariant="italic">A</mi>
+                    </msub>
+                </mfenced>
+            </math>
+    .
+            The scale factors described in the table,
+            denoted
+    <math overflow="scroll">
+                <mfenced open="(" close=")">
+                    <msub><mi mathvariant="italic">f</mi>
+                    <mi mathvariant="italic">R</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">f</mi>
+                    <mi mathvariant="italic">G</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">f</mi>
+                    <mi mathvariant="italic">B</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">f</mi>
+                    <mi mathvariant="italic">A</mi>
+                    </msub>
+                </mfenced>
+            </math>
+    ,
+            represent either source or destination factors.
+            All scale factors have range
+    <math overflow="scroll">
+                <mfenced open="[" close="]">
+                    <mn>0</mn>
+                    <mn>1</mn>
+                </mfenced>
+            </math>
+    .
+</div>
+    <div class="para">
+        </div>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>
+    <span class="emphasis"> Parameter </span>
+</th><th>
+    <math overflow="scroll">
+                                <mfenced open="(" close=")">
+                                    <msub><mi mathvariant="italic">f</mi>
+                                    <mi mathvariant="italic">R</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">f</mi>
+                                    <mi mathvariant="italic">G</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">f</mi>
+                                    <mi mathvariant="italic">B</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">f</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfenced>
+                            </math>
+</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+    <span class="constant">GL_ZERO</span>
+</td><td>
+    <math overflow="scroll">
+                            <mfenced open="(" close=")">
+                                <mn>0</mn>
+                                <mn>0</mn>
+                                <mn>0</mn>
+                                <mn>0</mn>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_ONE</span>
+</td><td>
+    <math overflow="scroll">
+                            <mfenced open="(" close=")">
+                                <mn>1</mn>
+                                <mn>1</mn>
+                                <mn>1</mn>
+                                <mn>1</mn>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SRC_COLOR</span>
+</td><td>
+    <math overflow="scroll">
+                            <mfenced open="(" close=")">
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">R</mi>
+                                    <mi mathvariant="italic">s0</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">R</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">G</mi>
+                                    <mi mathvariant="italic">s0</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">G</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">B</mi>
+                                    <mi mathvariant="italic">s0</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">B</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">s0</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_ONE_MINUS_SRC_COLOR</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                </mfenced>
+                                <mo>-</mo>
+                                <mfenced open="(" close=")">
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">R</mi>
+                                        <mi mathvariant="italic">s0</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">R</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">G</mi>
+                                        <mi mathvariant="italic">s0</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">G</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">B</mi>
+                                        <mi mathvariant="italic">s0</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">B</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">s0</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                </mfenced>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DST_COLOR</span>
+</td><td>
+    <math overflow="scroll">
+                            <mfenced open="(" close=")">
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">R</mi>
+                                    <mi mathvariant="italic">d</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">R</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">G</mi>
+                                    <mi mathvariant="italic">d</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">G</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">B</mi>
+                                    <mi mathvariant="italic">d</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">B</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">d</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_ONE_MINUS_DST_COLOR</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                </mfenced>
+                                <mo>-</mo>
+                                <mfenced open="(" close=")">
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">R</mi>
+                                        <mi mathvariant="italic">d</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">R</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">G</mi>
+                                        <mi mathvariant="italic">d</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">G</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">B</mi>
+                                        <mi mathvariant="italic">d</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">B</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">d</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                </mfenced>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SRC_ALPHA</span>
+</td><td>
+    <math overflow="scroll">
+                            <mfenced open="(" close=")">
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">s0</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">s0</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">s0</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">s0</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_ONE_MINUS_SRC_ALPHA</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                </mfenced>
+                                <mo>-</mo>
+                                <mfenced open="(" close=")">
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">s0</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">s0</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">s0</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">s0</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                </mfenced>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DST_ALPHA</span>
+</td><td>
+    <math overflow="scroll">
+                            <mfenced open="(" close=")">
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">d</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">d</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">d</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">d</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_ONE_MINUS_DST_ALPHA</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                </mfenced>
+                                <mo>-</mo>
+                                <mfenced open="(" close=")">
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">d</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">d</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">d</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">d</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                </mfenced>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_CONSTANT_COLOR</span>
+</td><td>
+    <math overflow="scroll">
+                            <mfenced open="(" close=")">
+                                <msub><mi mathvariant="italic">R</mi>
+                                <mi mathvariant="italic">c</mi>
+                                </msub>
+                                <msub><mi mathvariant="italic">G</mi>
+                                <mi mathvariant="italic">c</mi>
+                                </msub>
+                                <msub><mi mathvariant="italic">B</mi>
+                                <mi mathvariant="italic">c</mi>
+                                </msub>
+                                <msub><mi mathvariant="italic">A</mi>
+                                <mi mathvariant="italic">c</mi>
+                                </msub>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_ONE_MINUS_CONSTANT_COLOR</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                </mfenced>
+                                <mo>-</mo>
+                                <mfenced open="(" close=")">
+                                    <msub><mi mathvariant="italic">R</mi>
+                                    <mi mathvariant="italic">c</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">G</mi>
+                                    <mi mathvariant="italic">c</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">B</mi>
+                                    <mi mathvariant="italic">c</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">c</mi>
+                                    </msub>
+                                </mfenced>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_CONSTANT_ALPHA</span>
+</td><td>
+    <math overflow="scroll">
+                            <mfenced open="(" close=")">
+                                <msub><mi mathvariant="italic">A</mi>
+                                <mi mathvariant="italic">c</mi>
+                                </msub>
+                                <msub><mi mathvariant="italic">A</mi>
+                                <mi mathvariant="italic">c</mi>
+                                </msub>
+                                <msub><mi mathvariant="italic">A</mi>
+                                <mi mathvariant="italic">c</mi>
+                                </msub>
+                                <msub><mi mathvariant="italic">A</mi>
+                                <mi mathvariant="italic">c</mi>
+                                </msub>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_ONE_MINUS_CONSTANT_ALPHA</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                </mfenced>
+                                <mo>-</mo>
+                                <mfenced open="(" close=")">
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">c</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">c</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">c</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">c</mi>
+                                    </msub>
+                                </mfenced>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SRC_ALPHA_SATURATE</span>
+</td><td>
+    <math overflow="scroll">
+                            <mfenced open="(" close=")">
+                                <mi mathvariant="italic">i</mi>
+                                <mi mathvariant="italic">i</mi>
+                                <mi mathvariant="italic">i</mi>
+                                <mn>1</mn>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SRC1_COLOR</span>
+</td><td>
+    <math overflow="scroll">
+                            <mfenced open="(" close=")">
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">R</mi>
+                                    <mi mathvariant="italic">s1</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">R</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">G</mi>
+                                    <mi mathvariant="italic">s1</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">G</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">B</mi>
+                                    <mi mathvariant="italic">s1</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">B</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">s1</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_ONE_MINUS_SRC1_COLOR</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                </mfenced>
+                                <mo>-</mo>
+                                <mfenced open="(" close=")">
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">R</mi>
+                                        <mi mathvariant="italic">s1</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">R</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">G</mi>
+                                        <mi mathvariant="italic">s1</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">G</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">B</mi>
+                                        <mi mathvariant="italic">s1</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">B</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">s1</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                </mfenced>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SRC1_ALPHA</span>
+</td><td>
+    <math overflow="scroll">
+                            <mfenced open="(" close=")">
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">s1</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">s1</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">s1</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                                <mfrac>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">s1</mi>
+                                    </msub>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                </mfrac>
+                            </mfenced>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_ONE_MINUS_SRC1_ALPHA</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                    <mn>1</mn>
+                                </mfenced>
+                                <mo>-</mo>
+                                <mfenced open="(" close=")">
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">s1</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">s1</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">s1</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                    <mfrac>
+                                        <msub><mi mathvariant="italic">A</mi>
+                                        <mi mathvariant="italic">s1</mi>
+                                        </msub>
+                                        <msub><mi mathvariant="italic">k</mi>
+                                        <mi mathvariant="italic">A</mi>
+                                        </msub>
+                                    </mfrac>
+                                </mfenced>
+                            </mrow>
+                        </math>
+</td>
+                </tr>
+    </tbody></table>
+    <div class="para">
+            In the table,
+        </div>
+    <div class="para">
+    <math overflow="scroll">
+                <mrow>
+                    <mi mathvariant="italic">i</mi>
+                    <mo>=</mo>
+                    <mfrac>
+                        <mrow>
+                            <mi mathvariant="italic">min</mi>
+                            <mo></mo>
+                            <mfenced open="(" close=")">
+                                <msub><mi mathvariant="italic">A</mi>
+                                <mi mathvariant="italic">s</mi>
+                                </msub>
+                                <mrow>
+                                    <msub><mi mathvariant="italic">k</mi>
+                                    <mi mathvariant="italic">A</mi>
+                                    </msub>
+                                    <mo>-</mo>
+                                    <msub><mi mathvariant="italic">A</mi>
+                                    <mi mathvariant="italic">d</mi>
+                                    </msub>
+                                </mrow>
+                            </mfenced>
+                        </mrow>
+                        <msub><mi mathvariant="italic">k</mi>
+                        <mi mathvariant="italic">A</mi>
+                        </msub>
+                    </mfrac>
+                </mrow>
+            </math>
+</div>
+    <div class="para">
+            To determine the blended RGBA values of a pixel,
+            the system uses the following equations:
+        </div>
+    <div class="para">
+    <math overflow="scroll">
+                <mrow>
+                    <msub><mi mathvariant="italic">R</mi>
+                    <mi mathvariant="italic">d</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <mrow>
+                        <mi mathvariant="italic">min</mi>
+                        <mo></mo>
+                        <mfenced open="(" close=")">
+                            <msub><mi mathvariant="italic">k</mi>
+                            <mi mathvariant="italic">R</mi>
+                            </msub>
+                            <mrow>
+                                <msub><mi mathvariant="italic">R</mi>
+                                <mi mathvariant="italic">s</mi>
+                                </msub>
+                                <mo></mo>
+                                <msub><mi mathvariant="italic">s</mi>
+                                <mi mathvariant="italic">R</mi>
+                                </msub>
+                                <mo>+</mo>
+                                <msub><mi mathvariant="italic">R</mi>
+                                <mi mathvariant="italic">d</mi>
+                                </msub>
+                                <mo></mo>
+                                <msub><mi mathvariant="italic">d</mi>
+                                <mi mathvariant="italic">R</mi>
+                                </msub>
+                            </mrow>
+                        </mfenced>
+                    </mrow>
+                </mrow>
+            </math>
+    <math overflow="scroll">
+                <mrow>
+                    <msub><mi mathvariant="italic">G</mi>
+                    <mi mathvariant="italic">d</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <mrow>
+                        <mi mathvariant="italic">min</mi>
+                        <mo></mo>
+                        <mfenced open="(" close=")">
+                            <msub><mi mathvariant="italic">k</mi>
+                            <mi mathvariant="italic">G</mi>
+                            </msub>
+                            <mrow>
+                                <msub><mi mathvariant="italic">G</mi>
+                                <mi mathvariant="italic">s</mi>
+                                </msub>
+                                <mo></mo>
+                                <msub><mi mathvariant="italic">s</mi>
+                                <mi mathvariant="italic">G</mi>
+                                </msub>
+                                <mo>+</mo>
+                                <msub><mi mathvariant="italic">G</mi>
+                                <mi mathvariant="italic">d</mi>
+                                </msub>
+                                <mo></mo>
+                                <msub><mi mathvariant="italic">d</mi>
+                                <mi mathvariant="italic">G</mi>
+                                </msub>
+                            </mrow>
+                        </mfenced>
+                    </mrow>
+                </mrow>
+            </math>
+    <math overflow="scroll">
+                <mrow>
+                    <msub><mi mathvariant="italic">B</mi>
+                    <mi mathvariant="italic">d</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <mrow>
+                        <mi mathvariant="italic">min</mi>
+                        <mo></mo>
+                        <mfenced open="(" close=")">
+                            <msub><mi mathvariant="italic">k</mi>
+                            <mi mathvariant="italic">B</mi>
+                            </msub>
+                            <mrow>
+                                <msub><mi mathvariant="italic">B</mi>
+                                <mi mathvariant="italic">s</mi>
+                                </msub>
+                                <mo></mo>
+                                <msub><mi mathvariant="italic">s</mi>
+                                <mi mathvariant="italic">B</mi>
+                                </msub>
+                                <mo>+</mo>
+                                <msub><mi mathvariant="italic">B</mi>
+                                <mi mathvariant="italic">d</mi>
+                                </msub>
+                                <mo></mo>
+                                <msub><mi mathvariant="italic">d</mi>
+                                <mi mathvariant="italic">B</mi>
+                                </msub>
+                            </mrow>
+                        </mfenced>
+                    </mrow>
+                </mrow>
+            </math>
+    <math overflow="scroll">
+                <mrow>
+                    <msub><mi mathvariant="italic">A</mi>
+                    <mi mathvariant="italic">d</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <mrow>
+                        <mi mathvariant="italic">min</mi>
+                        <mo></mo>
+                        <mfenced open="(" close=")">
+                            <msub><mi mathvariant="italic">k</mi>
+                            <mi mathvariant="italic">A</mi>
+                            </msub>
+                            <mrow>
+                                <msub><mi mathvariant="italic">A</mi>
+                                <mi mathvariant="italic">s</mi>
+                                </msub>
+                                <mo></mo>
+                                <msub><mi mathvariant="italic">s</mi>
+                                <mi mathvariant="italic">A</mi>
+                                </msub>
+                                <mo>+</mo>
+                                <msub><mi mathvariant="italic">A</mi>
+                                <mi mathvariant="italic">d</mi>
+                                </msub>
+                                <mo></mo>
+                                <msub><mi mathvariant="italic">d</mi>
+                                <mi mathvariant="italic">A</mi>
+                                </msub>
+                            </mrow>
+                        </mfenced>
+                    </mrow>
+                </mrow>
+            </math>
+</div>
+    <div class="para">
+            Despite the apparent precision of the above equations,
+            blending arithmetic is not exactly specified,
+            because blending operates with imprecise integer color values.
+            However,
+            a blend factor that should be equal to 1
+            is guaranteed not to modify its multiplicand,
+            and a blend factor equal to 0 reduces its multiplicand to 0.
+            For example,
+            when
+    <a class="parameter" href="#param-sfactor">sfactor</a>
+    is
+    <span class="constant">GL_SRC_ALPHA</span>
+    ,
+    <a class="parameter" href="#param-dfactor">dfactor</a>
+    is
+    <span class="constant">GL_ONE_MINUS_SRC_ALPHA</span>
+    ,
+            and
+    <math overflow="scroll">
+                <msub><mi mathvariant="italic">A</mi>
+                <mi mathvariant="italic">s</mi>
+                </msub>
+            </math>
+    is equal to
+    <math overflow="scroll">
+                <msub><mi mathvariant="italic">k</mi>
+                <mi mathvariant="italic">A</mi>
+                </msub>
+            </math>
+    ,
+            the equations reduce to simple replacement:
+</div>
+    <div class="para">
+    <math overflow="scroll">
+                <mrow>
+                    <msub><mi mathvariant="italic">R</mi>
+                    <mi mathvariant="italic">d</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <msub><mi mathvariant="italic">R</mi>
+                    <mi mathvariant="italic">s</mi>
+                    </msub>
+                </mrow>
+            </math>
+    <math overflow="scroll">
+                <mrow>
+                    <msub><mi mathvariant="italic">G</mi>
+                    <mi mathvariant="italic">d</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <msub><mi mathvariant="italic">G</mi>
+                    <mi mathvariant="italic">s</mi>
+                    </msub>
+                </mrow>
+            </math>
+    <math overflow="scroll">
+                <mrow>
+                    <msub><mi mathvariant="italic">B</mi>
+                    <mi mathvariant="italic">d</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <msub><mi mathvariant="italic">B</mi>
+                    <mi mathvariant="italic">s</mi>
+                    </msub>
+                </mrow>
+            </math>
+    <math overflow="scroll">
+                <mrow>
+                    <msub><mi mathvariant="italic">A</mi>
+                    <mi mathvariant="italic">d</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <msub><mi mathvariant="italic">A</mi>
+                    <mi mathvariant="italic">s</mi>
+                    </msub>
+                </mrow>
+            </math>
+</div>
+    <div class="para">
+        </div>
+    </section><section class="section">
+    <h2 class="title">Examples</h2>
+    <div class="para">
+        </div>
+    <div class="para">
+            Transparency is best implemented using blend function
+            (
+    <span class="constant">GL_SRC_ALPHA</span>
+    ,
+    <span class="constant">GL_ONE_MINUS_SRC_ALPHA</span>
+    )
+            with primitives sorted from farthest to nearest.
+            Note that this transparency calculation does not require
+            the presence of alpha bitplanes in the frame buffer.
+</div>
+    <div class="para">
+            Blend function
+            (
+    <span class="constant">GL_SRC_ALPHA</span>
+    ,
+    <span class="constant">GL_ONE_MINUS_SRC_ALPHA</span>
+    )
+            is also useful for rendering antialiased points and lines
+            in arbitrary order.
+</div>
+    <div class="para">
+            Polygon antialiasing is optimized using blend function
+            (
+    <span class="constant">GL_SRC_ALPHA_SATURATE</span>
+    ,
+    <span class="constant">GL_ONE</span>
+    )
+            with polygons sorted from nearest to farthest.
+            (See the
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    ,
+    <a class="function" href="./glEnable.html#c-glDisable">glDisable</a>
+    reference page and the
+    <span class="constant">GL_POLYGON_SMOOTH</span>
+    argument for information on polygon antialiasing.)
+            Destination alpha bitplanes,
+            which must be present for this blend function to operate correctly,
+            store the accumulated coverage.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            Incoming (source) alpha is correctly thought of as a material opacity,
+            ranging from 1.0
+            (
+    <math overflow="scroll">
+                <msub><mi mathvariant="italic">K</mi>
+                <mi mathvariant="italic">A</mi>
+                </msub>
+            </math>
+    ),
+            representing complete opacity,
+            to 0.0 (0), representing complete
+            transparency.
+</div>
+    <div class="para">
+            When more than one color buffer is enabled for drawing,
+            the GL performs blending separately for each enabled buffer,
+            using the contents of that buffer for destination color.
+            (See
+    <a class="crossref" href="./glDrawBuffer.html">glDrawBuffer</a>
+    .)
+</div>
+    <div class="para">
+            When dual source blending is enabled (i.e., one of the blend factors requiring
+            the second color input is used), the maximum number of enabled draw buffers
+            is given by
+    <span class="constant">GL_MAX_DUAL_SOURCE_DRAW_BUFFERS</span>
+    , which may
+            be lower than
+    <span class="constant">GL_MAX_DRAW_BUFFERS</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if either
+    <a class="parameter" href="#param-sfactor">sfactor</a>
+    or
+    <a class="parameter" href="#param-dfactor">dfactor</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated by
+    <a class="function" href="./glBlendFunc.html#c-glBlendFunci">glBlendFunci</a>
+    if
+    <a class="parameter" href="#param-buf">buf</a>
+    is greater
+            than or equal to the value of
+    <span class="constant">GL_MAX_DRAW_BUFFERS</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_BLEND_SRC_RGB</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_BLEND_SRC_ALPHA</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_BLEND_DST_RGB</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_BLEND_DST_ALPHA</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_BLEND</span>
+</div>
+    <div class="para">
+        </div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glBlendFunc.html">glBlendFunc</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glBlendFunc.html#c-glBlendFunci">glBlendFunci</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBlendColor.html">glBlendColor</a>
+    ,
+    <a class="crossref" href="./glBlendEquation.html">glBlendEquation</a>
+    ,
+    <a class="crossref" href="./glBlendFuncSeparate.html">glBlendFuncSeparate</a>
+    ,
+    <a class="crossref" href="./glClear.html">glClear</a>
+    ,
+    <a class="crossref" href="./glDrawBuffer.html">glDrawBuffer</a>
+    ,
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    ,
+    <a class="crossref" href="./glLogicOp.html">glLogicOp</a>
+    ,
+    <a class="crossref" href="./glStencilFunc.html">glStencilFunc</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glBlendFunc</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_alpha3D.py">tests/redbook_alpha3D.py</a>
+    Lines: <span class="sample-lines">140</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/_bitmap_font.py">tests/_bitmap_font.py</a>
+    Lines: <span class="sample-lines">44</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/nehe8.py">tests/nehe8.py</a>
+    Lines: <span class="sample-lines">116</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glut_font.py">tests/glut_font.py</a>
+    Lines: <span class="sample-lines">27</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/wx_font.py">tests/wx_font.py</a>
+    Lines: <span class="sample-lines">28</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_alpha.py">tests/redbook_alpha.py</a>
+    Lines: <span class="sample-lines">76</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_1.py">tests/shadow_1.py</a>
+    Lines: <span class="sample-lines">271</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/shadow/passes.py">OpenGLContext/shadow/passes.py</a>
+    Lines: <span class="sample-lines">137, 236, 324</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/imagetexture.py">OpenGLContext/scenegraph/imagetexture.py</a>
+    Lines: <span class="sample-lines">71</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/font.py">OpenGLContext/scenegraph/text/font.py</a>
+    Lines: <span class="sample-lines">323</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/_flat.py">OpenGLContext/passes/_flat.py</a>
+    Lines: <span class="sample-lines">439</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcore.py">OpenGLContext/passes/flatcore.py</a>
+    Lines: <span class="sample-lines">163</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcompat.py">OpenGLContext/passes/flatcompat.py</a>
+    Lines: <span class="sample-lines">176</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/renderpass.py">OpenGLContext/passes/renderpass.py</a>
+    Lines: <span class="sample-lines">334, 340</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson19.py">PyOpenGL-Demo/NeHe/lesson19.py</a>
+    Lines: <span class="sample-lines">97</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson26.py">PyOpenGL-Demo/NeHe/lesson26.py</a>
+    Lines: <span class="sample-lines">105, 183</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson43/glFreeType.py">PyOpenGL-Demo/NeHe/lesson43/glFreeType.py</a>
+    Lines: <span class="sample-lines">277</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/glFont.py">PyOpenGL-Demo/NeHe/lesson44/glFont.py</a>
+    Lines: <span class="sample-lines">72</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson44/glCamera.py">PyOpenGL-Demo/NeHe/lesson44/glCamera.py</a>
+    Lines: <span class="sample-lines">548</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/OglSurface/OglFrame.py">PyOpenGL-Demo/dek/OglSurface/OglFrame.py</a>
+    Lines: <span class="sample-lines">68</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/mmLib/OpenGLDriver.py">pymmlib/mmLib/OpenGLDriver.py</a>
+    Lines: <span class="sample-lines">211</span>
+</div><div class="py-sample">
+    <span class="sample-project">{Artistic License} PymmLib</span>
+    <a href="https://github.com/masci/mmLib/blob/master/pymmlib/applications/glutviewer.py">pymmlib/applications/glutviewer.py</a>
+    Lines: <span class="sample-lines">189</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglBase.py">renderers/openglBase.py</a>
+    Lines: <span class="sample-lines">320</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/openglgraphics.py">system/openglgraphics.py</a>
+    Lines: <span class="sample-lines">198</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Gratings.py">VisionEgg/Gratings.py</a>
+    Lines: <span class="sample-lines">346, 652</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/MoreStimuli.py">VisionEgg/MoreStimuli.py</a>
+    Lines: <span class="sample-lines">122, 160, 326, 369, 507</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/SphereMap.py">VisionEgg/SphereMap.py</a>
+    Lines: <span class="sample-lines">284, 523, 1202</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Textures.py">VisionEgg/Textures.py</a>
+    Lines: <span class="sample-lines">1458, 1601, 1777</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Text.py">VisionEgg/Text.py</a>
+    Lines: <span class="sample-lines">493</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Dots.py">VisionEgg/Dots.py</a>
+    Lines: <span class="sample-lines">185, 360</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/lib/squirtle.py">pymt/lib/squirtle.py</a>
+    Lines: <span class="sample-lines">17, 45</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/statement.py">pymt/graphx/statement.py</a>
+    Lines: <span class="sample-lines">54, 153</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/colors.py">pymt/graphx/colors.py</a>
+    Lines: <span class="sample-lines">8, 49, 54</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/view.py">pyggel/view.py</a>
+    Lines: <span class="sample-lines">169</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/display.py">pygl2d/display.py</a>
+    Lines: <span class="sample-lines">35</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL} Scocca</span>
+    <a href="http://bazaar.launchpad.net/~bebraw/scocca/devel/view/head:/scocca/graphics/opengl/decorators.py">scocca/graphics/opengl/decorators.py</a>
+    Lines: <span class="sample-lines">24</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">140</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Experiments/Cubes.py">Sketches/CL/Topology3D/Experiments/Cubes.py</a>
+    Lines: <span class="sample-lines">95</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">140</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Display3D.py">Sketches/CL/Topology3D/THF/Sketches/Display3D.py</a>
+    Lines: <span class="sample-lines">142</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Display3D.py">Sketches/THF/3D/Display3D.py</a>
+    Lines: <span class="sample-lines">142</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">140</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">140</span>
+</div><div class="py-sample">
+    <span class="sample-project">Gloopy</span>
+    <a href="https://bitbucket.org/tartley/gloopy/src/tip/gloopy/view/render.py">gloopy/view/render.py</a>
+    Lines: <span class="sample-lines">77</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/utils/cropper.py">utils/cropper.py</a>
+    Lines: <span class="sample-lines">381, 412</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/baseFigure.py">core/baseFigure.py</a>
+    Lines: <span class="sample-lines">871</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/line.py">core/line.py</a>
+    Lines: <span class="sample-lines">672, 676, 701, 724, 727, 810</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

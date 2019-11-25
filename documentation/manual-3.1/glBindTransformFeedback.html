@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glBindTransformFeedback : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glBindTransformFeedback</h1>
+</header>
+<main class="content">
+    <section class="purpose">bind a transform feedback object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glBindTransformFeedback"></a>
+    <span class="c-function">glBindTransformFeedback</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-id" class="parameter">id</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glBindTransformFeedback"></a>
+    <span class="py-function">glBindTransformFeedback</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-id" class="parameter">id</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target to which to bind the transform feedback object
+    <a class="parameter" href="#param-id">id</a>
+    .
+    <a class="parameter" href="#param-target">target</a>
+    must be
+    <span class="constant">GL_TRANSFORM_FEEDBACK</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-id"></a>
+                        id
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of a transform feedback object reserved by
+    <a class="crossref" href="./glGenTransformFeedbacks.html">glGenTransformFeedbacks</a>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glBindTransformFeedback.html">glBindTransformFeedback</a>
+    binds the transform feedback object with name
+    <a class="parameter" href="#param-id">id</a>
+    to the current
+            GL state.
+    <a class="parameter" href="#param-id">id</a>
+    must be a name previously returned from a call to
+    <a class="crossref" href="./glGenTransformFeedbacks.html">glGenTransformFeedbacks</a>
+    . If
+    <a class="parameter" href="#param-id">id</a>
+    has not
+            previously been bound, a new transform feedback object with name
+    <a class="parameter" href="#param-id">id</a>
+    and initialized with the
+            default transform state vector is created.
+</div>
+    <div class="para">
+            In the initial state, a default transform feedback object is bound and treated as
+            a transform feedback object with a name of zero. If the name zero is subsequently bound, the default
+            transform feedback object is again bound to the GL state.
+        </div>
+    <div class="para">
+            While a transform feedback buffer object is bound, GL operations on the target
+            to which it is bound affect the bound transform feedback object, and queries of the
+            target to which a transform feedback object is bound return state from the bound
+            object. When buffer objects are bound for transform feedback, they are attached to
+            the currently bound transform feedback object. Buffer objects are used for trans-
+            form feedback only if they are attached to the currently bound transform feedback
+            object.
+        </div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not
+    <span class="constant">GL_TRANSFORM_FEEDBACK</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if the transform feedback operation is
+            active on the currently bound transform feedback object, and that operation is not paused.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-id">id</a>
+    is not
+            zero or the name of a transform feedback object returned from a previous call to
+    <a class="crossref" href="./glGenTransformFeedbacks.html">glGenTransformFeedbacks</a>
+    , or
+            if such a name has been deleted by
+    <a class="crossref" href="./glDeleteTransformFeedbacks.html">glDeleteTransformFeedbacks</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_TRANSFORM_FEEDBACK_BINDING</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glBindTransformFeedback.html">glBindTransformFeedback</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenTransformFeedbacks.html">glGenTransformFeedbacks</a>
+    ,
+    <a class="crossref" href="./glDeleteTransformFeedbacks.html">glDeleteTransformFeedbacks</a>
+    ,
+    <a class="crossref" href="./glIsTransformFeedback.html">glIsTransformFeedback</a>
+    ,
+    <a class="crossref" href="./glBeginTransformFeedback.html">glBeginTransformFeedback</a>
+    ,
+    <a class="crossref" href="./glPauseTransformFeedback.html">glPauseTransformFeedback</a>
+    ,
+    <a class="crossref" href="./glResumeTransformFeedback.html">glResumeTransformFeedback</a>
+    ,
+    <a class="function" href="./glBeginTransformFeedback.html#c-glEndTransformFeedback">glEndTransformFeedback</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

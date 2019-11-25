@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluNextContour : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluNextContour</h1>
+</header>
+<main class="content">
+    <section class="purpose">mark the beginning of another contour</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluNextContour"></a>
+    <span class="c-function">gluNextContour</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUtesselator* (
+            <a href="#param-tess" class="parameter">tess</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluNextContour"></a>
+    <span class="py-function">gluNextContour</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-tess" class="parameter">tess</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluNextContour( POINTER(GLUtesselator)(tess), GLenum(type) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-tess"></a>
+                        tess
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the tessellation object (created with
+    <a class="crossref" href="./gluNewTess.html">gluNewTess</a>
+    ).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the type of the contour being defined. Valid values are
+    <span class="constant">GLU_EXTERIOR</span>
+    ,
+    <span class="constant">GLU_INTERIOR</span>
+    ,
+    <span class="constant">GLU_UNKNOWN</span>
+    ,
+    <span class="constant">GLU_CCW</span>
+    , and
+    <span class="constant">GLU_CW</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluNextContour.html">gluNextContour</a>
+    is used in describing polygons with multiple contours. After the first
+            contour has been described through a series of
+    <a class="crossref" href="./gluTessVertex.html">gluTessVertex</a>
+    calls,
+            a
+    <a class="function" href="./gluNextContour.html">gluNextContour</a>
+    call indicates that the previous contour is complete and that the
+            next contour is about to begin.
+            Another series of
+    <a class="crossref" href="./gluTessVertex.html">gluTessVertex</a>
+    calls is then used to describe the new
+            contour. This process can be repeated until all contours have been described.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-type">type</a>
+    defines what type of contour follows.
+            The legal contour types are as follows:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_EXTERIOR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        An exterior contour defines an exterior boundary of the polygon.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_INTERIOR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        An interior contour defines an interior boundary of the polygon (such as
+                        a hole).
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_UNKNOWN</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        An unknown contour is analyzed by the library to determine if it is interior
+                        or exterior.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_CCW</span>
+    ,
+</dt>
+    <dd class="listitem">
+                </dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_CW</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The first
+    <span class="constant">GLU_CCW</span>
+    or
+    <span class="constant">GLU_CW</span>
+    contour defined is considered to
+                        be exterior. All other contours are considered to be exterior if they
+                        are oriented in the same direction (clockwise or counterclockwise) as
+                        the first contour, and interior if they are not.
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+            If one contour is of type
+    <span class="constant">GLU_CCW</span>
+    or
+    <span class="constant">GLU_CW</span>
+    , then all
+            contours must be of the same type (if they are not, then all
+    <span class="constant">GLU_CCW</span>
+    and
+    <span class="constant">GLU_CW</span>
+    contours will be changed to
+    <span class="constant">GLU_UNKNOWN</span>
+    ).
+</div>
+    <div class="para">
+            Note that there is no real difference between the
+    <span class="constant">GLU_CCW</span>
+    and
+    <span class="constant">GLU_CW</span>
+    contour types.
+</div>
+    <div class="para">
+            Before the first contour is described,
+    <a class="function" href="./gluNextContour.html">gluNextContour</a>
+    can be called to
+            define the type of the first contour.
+            If
+    <a class="function" href="./gluNextContour.html">gluNextContour</a>
+    is not called before the first contour, then the first contour is
+            marked
+    <span class="constant">GLU_EXTERIOR</span>
+    .
+</div>
+    <div class="para">
+            This command is obsolete and is provided for backward compatibility
+            only. Calls to
+    <a class="function" href="./gluNextContour.html">gluNextContour</a>
+    are mapped to
+    <a class="crossref" href="./gluTessBeginContour.html#c-gluTessEndContour">gluTessEndContour</a>
+    followed by
+    <a class="crossref" href="./gluTessBeginContour.html">gluTessBeginContour</a>
+    .
+</div>
+    </section><section class="section" id="example">
+    <h2 class="title">Example</h2>
+    <div class="para">
+            A quadrilateral with a triangular hole in it can be described as follows:
+    <div class="programlisting">
+gluBeginPolygon(tobj);
+   gluTessVertex(tobj, v1, v1);
+   gluTessVertex(tobj, v2, v2);
+   gluTessVertex(tobj, v3, v3);
+   gluTessVertex(tobj, v4, v4);
+gluNextContour(tobj, GLU_INTERIOR);
+   gluTessVertex(tobj, v5, v5);
+   gluTessVertex(tobj, v6, v6);
+   gluTessVertex(tobj, v7, v7);
+gluEndPolygon(tobj);
+            </div>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluBeginPolygon.html">gluBeginPolygon</a>
+    ,
+    <a class="crossref" href="./gluNewTess.html">gluNewTess</a>
+    ,
+    <a class="crossref" href="./gluTessBeginContour.html">gluTessBeginContour</a>
+    ,
+    <a class="crossref" href="./gluTessCallback.html">gluTessCallback</a>
+    ,
+    <a class="crossref" href="./gluTessVertex.html">gluTessVertex</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

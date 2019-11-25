@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gleToroid : PyOpenGL 3.1.4 GLE Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+    <h1>gleToroid</h1>
+</header>
+<main class="content">
+    <section class="purpose">Generalized torus, lathe with circle contour.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gleToroid"></a>
+    <span class="c-function">gleToroid</span>(<span class="parameter-list">
+    <span class="param-def">
+        gleDouble(
+            <a href="#param-rToroid" class="parameter">rToroid</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[3](
+            <a href="#param-up" class="parameter">up</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-startRadius" class="parameter">startRadius</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-drdTheta" class="parameter">drdTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-startZ" class="parameter">startZ</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-dzdTheta" class="parameter">dzdTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[2][3](
+            <a href="#param-startXform" class="parameter">startXform</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[2][3](
+            <a href="#param-dXformdTheta" class="parameter">dXformdTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-startTheta" class="parameter">startTheta</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble(
+            <a href="#param-sweepTheta" class="parameter">sweepTheta</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gleToroid"></a>
+    <span class="py-function">gleToroid</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-rToroid" class="parameter">rToroid</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startRadius" class="parameter">startRadius</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-drdTheta" class="parameter">drdTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startZ" class="parameter">startZ</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dzdTheta" class="parameter">dzdTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startXform" class="parameter">startXform</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dXformdTheta" class="parameter">dXformdTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-startTheta" class="parameter">startTheta</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-sweepTheta" class="parameter">sweepTheta</a>
+    </span>
+</span> )
+    <pre class="pydoc">gleToroid( gleDouble(rToroid), gleDouble(startRadius), gleDouble(drdTheta), gleDouble(startZ), gleDouble(dzdTheta), arrays.GLdoubleArray(startXform), arrays.GLdoubleArray(dXformdTheta), gleDouble(startTheta), gleDouble(sweepTheta) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-rToroid"></a>
+                        rToroid
+                    </th>
+                    <td>
+    <div class="simpara">
+						circle contour (torus) radius
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startRadius"></a>
+                        startRadius
+                    </th>
+                    <td>
+    <div class="simpara">
+						spiral starts in x-y plane
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-drdTheta"></a>
+                        drdTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						change in radius per revolution
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startZ"></a>
+                        startZ
+                    </th>
+                    <td>
+    <div class="simpara">
+						starting z value
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dzdTheta"></a>
+                        dzdTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						change in Z per revolution
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startXform"></a>
+                        startXform
+                    </th>
+                    <td>
+    <div class="simpara">
+						starting contour affine transformation
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dXformdTheta"></a>
+                        dXformdTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						tangent change xform per revolution
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-startTheta"></a>
+                        startTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						start angle in x-y plane
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sweepTheta"></a>
+                        sweepTheta
+                    </th>
+                    <td>
+    <div class="simpara">
+						degrees to spiral around
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="gleToroid.3GLE-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			Generalized Torus. Similar to
+    <a class="function" href="./gleLathe.html">gleLathe</a>
+    , except contour is a circle. Uses
+    <a class="function" href="./gleLathe.html">gleLathe</a>
+    to draw.
+</div>
+    </section><section class="section" id="gleToroid.3GLE-author">
+    <h2 class="title">Author</h2>
+    <div class="para">
+			Linas Vepstas
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./gleSpiral.html">gleSpiral</a>
+            <a class="crossref" href="./gleHelicoid.html">gleHelicoid</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

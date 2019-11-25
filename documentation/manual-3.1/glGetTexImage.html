@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetTexImage : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetTexImage</h1>
+</header>
+<main class="content">
+    <section class="purpose">return a texture image</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTexImage"></a>
+    <span class="c-function">glGetTexImage</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-level" class="parameter">level</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        void * (
+            <a href="#param-pixels" class="parameter">pixels</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTexImage"></a>
+    <span class="py-function">glGetTexImage</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-array" class="parameter">array</a>
+         = None
+        ,
+    </span><span class="param-def">
+            <a href="#param-outputType" class="parameter">outputType</a>
+         = &lt;type 'str'&gt;
+    </span>
+</span> )
+    <pre class="pydoc">Get a texture-level as an image
+
+    target -- enum constant for the texture engine to be read
+    level -- the mip-map level to read
+    format -- image format to read out the data
+    type -- data-type into which to read the data
+    array -- optional array/offset into which to store the value
+
+    outputType -- default (bytes) provides string output of the
+        results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
+        and type == GL_UNSIGNED_BYTE.  Any other value will cause
+        output in the default array output format.
+
+    returns the pixel data array in the format defined by the
+    format, type and outputType
+    </pre>
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTexImagef"></a>
+    <span class="py-function">glGetTexImagef</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+         = GL_FLOAT
+        ,
+    </span><span class="param-def">
+            <a href="#param-array" class="parameter">array</a>
+         = None
+        ,
+    </span><span class="param-def">
+            <a href="#param-outputType" class="parameter">outputType</a>
+         = &lt;type 'str'&gt;
+    </span>
+</span> )
+    <pre class="pydoc">Get a texture-level as an image
+        
+        target -- enum constant for the texture engine to be read
+        level -- the mip-map level to read
+        format -- image format to read out the data
+        type -- data-type into which to read the data
+        array -- optional array/offset into which to store the value
+
+        outputType -- default (bytes) provides string output of the
+            results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
+            and type == GL_UNSIGNED_BYTE.  Any other value will cause
+            output in the default array output format.
+
+        returns the pixel data array in the format defined by the
+        format, type and outputType
+        </pre>
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTexImagei"></a>
+    <span class="py-function">glGetTexImagei</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+         = GL_INT
+        ,
+    </span><span class="param-def">
+            <a href="#param-array" class="parameter">array</a>
+         = None
+        ,
+    </span><span class="param-def">
+            <a href="#param-outputType" class="parameter">outputType</a>
+         = &lt;type 'str'&gt;
+    </span>
+</span> )
+    <pre class="pydoc">Get a texture-level as an image
+        
+        target -- enum constant for the texture engine to be read
+        level -- the mip-map level to read
+        format -- image format to read out the data
+        type -- data-type into which to read the data
+        array -- optional array/offset into which to store the value
+
+        outputType -- default (bytes) provides string output of the
+            results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
+            and type == GL_UNSIGNED_BYTE.  Any other value will cause
+            output in the default array output format.
+
+        returns the pixel data array in the format defined by the
+        format, type and outputType
+        </pre>
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTexImages"></a>
+    <span class="py-function">glGetTexImages</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+         = GL_SHORT
+        ,
+    </span><span class="param-def">
+            <a href="#param-array" class="parameter">array</a>
+         = None
+        ,
+    </span><span class="param-def">
+            <a href="#param-outputType" class="parameter">outputType</a>
+         = &lt;type 'str'&gt;
+    </span>
+</span> )
+    <pre class="pydoc">Get a texture-level as an image
+        
+        target -- enum constant for the texture engine to be read
+        level -- the mip-map level to read
+        format -- image format to read out the data
+        type -- data-type into which to read the data
+        array -- optional array/offset into which to store the value
+
+        outputType -- default (bytes) provides string output of the
+            results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
+            and type == GL_UNSIGNED_BYTE.  Any other value will cause
+            output in the default array output format.
+
+        returns the pixel data array in the format defined by the
+        format, type and outputType
+        </pre>
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTexImageui"></a>
+    <span class="py-function">glGetTexImageui</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+         = GL_UNSIGNED_INT
+        ,
+    </span><span class="param-def">
+            <a href="#param-array" class="parameter">array</a>
+         = None
+        ,
+    </span><span class="param-def">
+            <a href="#param-outputType" class="parameter">outputType</a>
+         = &lt;type 'str'&gt;
+    </span>
+</span> )
+    <pre class="pydoc">Get a texture-level as an image
+        
+        target -- enum constant for the texture engine to be read
+        level -- the mip-map level to read
+        format -- image format to read out the data
+        type -- data-type into which to read the data
+        array -- optional array/offset into which to store the value
+
+        outputType -- default (bytes) provides string output of the
+            results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
+            and type == GL_UNSIGNED_BYTE.  Any other value will cause
+            output in the default array output format.
+
+        returns the pixel data array in the format defined by the
+        format, type and outputType
+        </pre>
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTexImageus"></a>
+    <span class="py-function">glGetTexImageus</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+         = GL_UNSIGNED_SHORT
+        ,
+    </span><span class="param-def">
+            <a href="#param-array" class="parameter">array</a>
+         = None
+        ,
+    </span><span class="param-def">
+            <a href="#param-outputType" class="parameter">outputType</a>
+         = &lt;type 'str'&gt;
+    </span>
+</span> )
+    <pre class="pydoc">Get a texture-level as an image
+        
+        target -- enum constant for the texture engine to be read
+        level -- the mip-map level to read
+        format -- image format to read out the data
+        type -- data-type into which to read the data
+        array -- optional array/offset into which to store the value
+
+        outputType -- default (bytes) provides string output of the
+            results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
+            and type == GL_UNSIGNED_BYTE.  Any other value will cause
+            output in the default array output format.
+
+        returns the pixel data array in the format defined by the
+        format, type and outputType
+        </pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetTextureImage"></a>
+    <span class="c-function">glGetTextureImage</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-level" class="parameter">level</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        void *(
+            <a href="#param-pixels" class="parameter">pixels</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetTextureImage"></a>
+    <span class="py-function">glGetTextureImage</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetnTexImage"></a>
+    <span class="c-function">glGetnTexImage</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-level" class="parameter">level</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        void *(
+            <a href="#param-pixels" class="parameter">pixels</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetnTexImage"></a>
+    <span class="py-function">glGetnTexImage</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">Specifies the target to which the texture is bound for
+    <a class="function" href="./glGetTexImage.html">glGetTexImage</a>
+    and
+    <a class="function" href="./glGetTexImage.html#c-glGetnTexImage">glGetnTexImage</a>
+    functions.
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_X</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_X</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_Y</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_Y</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_Z</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_Z</span>
+    , and
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    are acceptable.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the texture object name.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-level"></a>
+                        level
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the level-of-detail number of the desired image.
+                    Level 0 is the base image level.
+                    Level
+    <math overflow="scroll"><mi mathvariant="italic">n</mi></math>
+    is the
+    <math overflow="scroll"><mi mathvariant="italic">n</mi></math>
+    th
+                    mipmap reduction image.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-format"></a>
+                        format
+                    </th>
+                    <td>
+    <div class="para">Specifies a pixel format for the returned data. The supported
+          formats are
+    <span class="constant">GL_STENCIL_INDEX</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    ,
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    ,
+    <span class="constant">GL_RED</span>
+    ,
+    <span class="constant">GL_GREEN</span>
+    ,
+    <span class="constant">GL_BLUE</span>
+    ,
+    <span class="constant">GL_RG</span>
+    ,
+    <span class="constant">GL_RGB</span>
+    ,
+    <span class="constant">GL_RGBA</span>
+    ,
+    <span class="constant">GL_BGR</span>
+    ,
+    <span class="constant">GL_BGRA</span>
+    ,
+    <span class="constant">GL_RED_INTEGER</span>
+    ,
+    <span class="constant">GL_GREEN_INTEGER</span>
+    ,
+    <span class="constant">GL_BLUE_INTEGER</span>
+    ,
+    <span class="constant">GL_RG_INTEGER</span>
+    ,
+    <span class="constant">GL_RGB_INTEGER</span>
+    ,
+    <span class="constant">GL_RGBA_INTEGER</span>
+    ,
+    <span class="constant">GL_BGR_INTEGER</span>
+    ,
+    <span class="constant">GL_BGRA_INTEGER</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">Specifies a pixel type for the returned data. The supported
+          types are
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GL_BYTE</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+    ,
+    <span class="constant">GL_SHORT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT</span>
+    ,
+    <span class="constant">GL_INT</span>
+    ,
+    <span class="constant">GL_HALF_FLOAT</span>
+    ,
+    <span class="constant">GL_FLOAT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_24_8</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_10F_11F_11F_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_5_9_9_9_REV</span>
+    , and
+    <span class="constant">GL_FLOAT_32_UNSIGNED_INT_24_8_REV</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bufSize"></a>
+                        bufSize
+                    </th>
+                    <td>
+    <div class="para">Specifies the size of the buffer
+    <a class="parameter" href="#param-pixels">pixels</a>
+    for
+    <a class="function" href="./glGetTexImage.html#c-glGetnTexImage">glGetnTexImage</a>
+    and
+    <a class="function" href="./glGetTexImage.html#c-glGetTextureImage">glGetTextureImage</a>
+    functions.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pixels"></a>
+                        pixels
+                    </th>
+                    <td>
+    <div class="para">Returns the texture image. Should be a pointer to an array of
+          the type specified by
+    <a class="parameter" href="#param-type">type</a>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetTexImage.html">glGetTexImage</a>
+    ,
+    <a class="function" href="./glGetTexImage.html#c-glGetnTexImage">glGetnTexImage</a>
+    and
+    <a class="function" href="./glGetTexImage.html#c-glGetTextureImage">glGetTextureImage</a>
+    functions return a texture
+    image into
+    <a class="parameter" href="#param-pixels">pixels</a>
+    . For
+    <a class="function" href="./glGetTexImage.html">glGetTexImage</a>
+    and
+    <a class="function" href="./glGetTexImage.html#c-glGetnTexImage">glGetnTexImage</a>
+    ,
+    <a class="parameter" href="#param-target">target</a>
+    specifies whether the desired texture image is one specified by
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    (
+    <span class="constant">GL_TEXTURE_1D</span>
+    ),
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    (
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    or any of
+    <span class="constant">GL_TEXTURE_CUBE_MAP_*</span>
+    ), or
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    (
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    ). For
+    <a class="function" href="./glGetTexImage.html#c-glGetTextureImage">glGetTextureImage</a>
+    ,
+    <a class="parameter" href="#param-texture">texture</a>
+    specifies the texture object name. In addition to types of textures
+    accepted by
+    <a class="function" href="./glGetTexImage.html">glGetTexImage</a>
+    and
+    <a class="function" href="./glGetTexImage.html#c-glGetnTexImage">glGetnTexImage</a>
+    , the function also accepts cube map
+    texture objects (with effective target
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    ).
+    <a class="parameter" href="#param-level">level</a>
+    specifies the level-of-detail number of the desired image.
+    <a class="parameter" href="#param-format">format</a>
+    and
+    <a class="parameter" href="#param-type">type</a>
+    specify
+    the format and type of the desired image array. See the reference page
+    for
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    for a description of the acceptable values for the
+    <a class="parameter" href="#param-format">format</a>
+    and
+    <a class="parameter" href="#param-type">type</a>
+    parameters, respectively. For glGetnTexImage and glGetTextureImage
+    functions, bufSize tells the size of the buffer to receive the retrieved
+    pixel data.
+    <a class="function" href="./glGetTexImage.html#c-glGetnTexImage">glGetnTexImage</a>
+    and
+    <a class="function" href="./glGetTexImage.html#c-glGetTextureImage">glGetTextureImage</a>
+    do not write more than
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    bytes into
+    <a class="parameter" href="#param-pixels">pixels</a>
+    .
+</div>
+    <div class="para">If a non-zero named buffer object is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target (see
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    )
+    while a texture image is requested,
+    <a class="parameter" href="#param-pixels">pixels</a>
+    is
+    treated as a byte offset into the buffer object's data store.
+</div>
+    <div class="para">To understand the operation of
+    <a class="function" href="./glGetTexImage.html">glGetTexImage</a>
+    ,
+    consider the selected internal four-component texture image to be an RGBA
+    color buffer the size of the image. The semantics of
+    <a class="function" href="./glGetTexImage.html">glGetTexImage</a>
+    are then identical to those of
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    ,
+    with the exception that no pixel transfer operations are performed, when
+    called with the same
+    <a class="parameter" href="#param-format">format</a>
+    and
+    <a class="parameter" href="#param-type">type</a>
+    , with
+    <span class="emphasis">x</span>
+    and
+    <span class="emphasis">y</span>
+    set to 0,
+    <span class="emphasis">width</span>
+    set to the
+    width of the texture image and
+    <span class="emphasis">height</span>
+    set to 1 for
+    1D images, or to the height of the texture image for 2D images.
+</div>
+    <div class="para">If the selected texture image does not contain four components, the
+    following mappings are applied. Single-component textures are treated as
+    RGBA buffers with red set to the single-component value, green set to 0,
+    blue set to 0, and alpha set to 1. Two-component textures are treated as
+    RGBA buffers with red set to the value of component zero, alpha set to the
+    value of component one, and green and blue set to 0. Finally,
+    three-component textures are treated as RGBA buffers with red set to
+    component zero, green set to component one, blue set to component two, and
+    alpha set to 1.</div>
+    <div class="para">To determine the required size of
+    <a class="parameter" href="#param-pixels">pixels</a>
+    , use
+    <a class="crossref" href="./glGetTexLevelParameter.html">glGetTexLevelParameter</a>
+    to determine the dimensions of the internal texture image, then scale
+    the required number of pixels by the storage required for each pixel,
+    based on
+    <a class="parameter" href="#param-format">format</a>
+    and
+    <a class="parameter" href="#param-type">type</a>
+    .
+    Be sure to take the pixel storage parameters into account, especially
+    <span class="constant">GL_PACK_ALIGNMENT</span>
+    .
+</div>
+    <div class="para">If
+    <a class="function" href="./glGetTexImage.html#c-glGetTextureImage">glGetTextureImage</a>
+    is used against a cube map
+    texture object, the texture is treated as a three-dimensional image of a
+    depth of 6, where the cube map faces are ordered as image layers, in an
+    order presented in the table below:
+</div>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>Layer number</th><th>Cube Map Face</th>
+                </tr>
+                <tr valign="top">
+                    <td>0</td><td>GL_TEXTURE_CUBE_MAP_POSITIVE_X</td>
+                </tr><tr valign="top">
+                    <td>1</td><td>GL_TEXTURE_CUBE_MAP_NEGATIVE_X</td>
+                </tr><tr valign="top">
+                    <td>2</td><td>GL_TEXTURE_CUBE_MAP_POSITIVE_Y</td>
+                </tr><tr valign="top">
+                    <td>3</td><td>GL_TEXTURE_CUBE_MAP_NEGATIVE_Y</td>
+                </tr><tr valign="top">
+                    <td>4</td><td>GL_TEXTURE_CUBE_MAP_POSITIVE_Z</td>
+                </tr><tr valign="top">
+                    <td>5</td><td>GL_TEXTURE_CUBE_MAP_NEGATIVE_Z</td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">If an error is generated, no change is made to the contents of
+    <a class="parameter" href="#param-pixels">pixels</a>
+    .
+</div>
+    <div class="para">
+    <a class="function" href="./glGetTexImage.html">glGetTexImage</a>
+    and
+    <a class="function" href="./glGetTexImage.html#c-glGetnTexImage">glGetnTexImage</a>
+    return the texture image for the
+    active texture unit.
+</div>
+    <div class="para">
+    <span class="constant">GL_STENCIL_INDEX</span>
+    is accepted for
+    <a class="parameter" href="#param-format">format</a>
+    only if the GL version is 4.4 or
+    greater.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glGetTexImage.html">glGetTexImage</a>
+    and
+    <a class="function" href="./glGetTexImage.html#c-glGetnTexImage">glGetnTexImage</a>
+    functions if
+    <a class="parameter" href="#param-target">target</a>
+    is not an accepted value. These
+    include:
+</div>
+    <div class="para">
+    <div class="itemizedlist">
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_X</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_X</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_Y</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_Y</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_Z</span>
+    , and
+    <span class="constant">GL_TEXTURE_CUBE_MAP_NEGATIVE_Z</span>
+    for
+    <a class="function" href="./glGetTexImage.html">glGetTexImage</a>
+    and
+    <a class="function" href="./glGetTexImage.html#c-glGetnTexImage">glGetnTexImage</a>
+    functions.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+    <span class="constant">GL_TEXTURE_1D</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D</span>
+    ,
+    <span class="constant">GL_TEXTURE_3D</span>
+    ,
+    <span class="constant">GL_TEXTURE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_CUBE_MAP_ARRAY</span>
+    ,
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    , and
+    <span class="constant">GL_TEXTURE_CUBE_MAP</span>
+    for
+    <a class="function" href="./glGetTexImage.html#c-glGetTextureImage">glGetTextureImage</a>
+    function.
+</div>
+</dd>
+</div>
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glGetTexImage.html#c-glGetTextureImage">glGetTextureImage</a>
+    if
+    <a class="parameter" href="#param-texture">texture</a>
+    is not the name of an existing texture object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    , or
+    <a class="parameter" href="#param-type">type</a>
+    is not an
+    accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-level">level</a>
+    is less than 0.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    may be generated if
+    <a class="parameter" href="#param-level">level</a>
+    is greater than
+    <math overflow="scroll">
+                <mrow>
+                    <msub><mi mathvariant="italic">log</mi>
+                    <mn>2</mn>
+                    </msub>
+                    <mo></mo>
+                    <mfenced open="(" close=")">
+                        <mi mathvariant="italic">max</mi>
+                    </mfenced>
+                </mrow>
+            </math>
+    ,
+ where
+    <math overflow="scroll"><mi mathvariant="italic">max</mi></math>
+    is the returned value of
+    <span class="constant">GL_MAX_TEXTURE_SIZE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-level">level</a>
+    is non-zero and the effective target is
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is one of
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+    , or
+    <span class="constant">GL_UNSIGNED_INT_10F_11F_11F_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GL_RGB</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is one of
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+    , or
+    <span class="constant">GL_UNSIGNED_INT_5_9_9_9_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is neither
+    <span class="constant">GL_RGBA</span>
+    or
+    <span class="constant">GL_BGRA</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    is
+    <span class="constant">GL_STENCIL_INDEX</span>
+    and
+    the base internal format is not
+    <span class="constant">GL_STENCIL_INDEX</span>
+    or
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero
+    buffer object name is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target and the buffer object's
+    data store is currently mapped.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero
+    buffer object name is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target and the data would be
+    packed to the buffer object such that the memory writes required would
+    exceed the data store size.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero
+    buffer object name is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target and
+    <a class="parameter" href="#param-pixels">pixels</a>
+    is not evenly divisible into the number of
+    bytes needed to store in memory a datum indicated by
+    <a class="parameter" href="#param-type">type</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glGetTexImage.html#c-glGetTextureImage">glGetTextureImage</a>
+    and
+    <a class="function" href="./glGetTexImage.html#c-glGetnTexImage">glGetnTexImage</a>
+    if the buffer size required to store
+    the requested data is greater than
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetTexLevelParameter.html">glGetTexLevelParameter</a>
+    with argument
+    <span class="constant">GL_TEXTURE_WIDTH</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetTexLevelParameter.html">glGetTexLevelParameter</a>
+    with argument
+    <span class="constant">GL_TEXTURE_HEIGHT</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetTexLevelParameter.html">glGetTexLevelParameter</a>
+    with argument
+    <span class="constant">GL_TEXTURE_INTERNAL_FORMAT</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with arguments
+    <span class="constant">GL_PACK_ALIGNMENT</span>
+    and others
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_PACK_BUFFER_BINDING</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetTexImage.html">glGetTexImage</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetTexImage.html#c-glGetTextureImage">glGetTextureImage</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetTexImage.html#c-glGetnTexImage">glGetnTexImage</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    ,
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage1D.html">glTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage3D.html">glTexSubImage3D</a>
+    ,
+    <a class="crossref" href="./glTexParameter.html">glTexParameter</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI
+            Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glGetTexImage</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/getteximage.py">tests/getteximage.py</a>
+    Lines: <span class="sample-lines">29</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

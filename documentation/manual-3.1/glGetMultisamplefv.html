@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetMultisamplefv : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetMultisamplefv</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieve the location of a sample</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetMultisamplefv"></a>
+    <span class="c-function">glGetMultisamplefv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat *(
+            <a href="#param-val" class="parameter">val</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetMultisamplefv"></a>
+    <span class="py-function">glGetMultisamplefv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-val" class="parameter">val</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the sample parameter name.
+    <a class="parameter" href="#param-pname">pname</a>
+    must be
+    <span class="constant">GL_SAMPLE_POSITION</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the index of the sample whose position to query.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-val"></a>
+                        val
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of an array to receive the position of the sample.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetMultisamplefv.html">glGetMultisamplefv</a>
+    queries the location of
+            a given sample.
+    <a class="parameter" href="#param-pname">pname</a>
+    specifies the
+            sample parameter to retrieve and must be
+    <span class="constant">GL_SAMPLE_POSITION</span>
+    .
+    <a class="parameter" href="#param-index">index</a>
+    corresponds to the sample for which
+            the location should be returned. The sample location is returned
+            as two floating-point values in
+    <a class="parameter" href="#param-val[0]">val[0]</a>
+    and
+    <a class="parameter" href="#param-val[1]">val[1]</a>
+    , each between 0 and 1,
+            corresponding to the
+    <a class="parameter" href="#param-x">x</a>
+    and
+    <a class="parameter" href="#param-y">y</a>
+    locations respectively in the GL pixel
+            space of that sample. (0.5, 0.5) thus corresponds to the pixel
+            center.
+    <a class="parameter" href="#param-index">index</a>
+    must be between zero and
+            the value of
+    <span class="constant">GL_SAMPLES</span>
+    minus one.
+</div>
+    <div class="para">
+            If the multisample mode does not have fixed sample locations, the returned values may only reflect the locations of samples
+            within some pixels.
+        </div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not one
+    <span class="constant">GL_SAMPLE_POSITION</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-index">index</a>
+    is greater than or equal to the value of
+    <span class="constant">GL_SAMPLES</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">API Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetMultisamplefv.html">glGetMultisamplefv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenFramebuffers.html">glGenFramebuffers</a>
+    ,
+    <a class="crossref" href="./glBindFramebuffer.html">glBindFramebuffer</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2015 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gl_PrimitiveID : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>gl_PrimitiveID</h1>
+</header>
+<main class="content">
+    <section class="purpose">contains the index of the current primitive</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gl_PrimitiveID"></a>
+    <span class="c-function">gl_PrimitiveID</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <div class="varname">gl_PrimitiveID</div>
+    is a tessellation control, tessellation evaluation
+            and fragment language input variable. For the tessellation control and tessellation
+            evaluation languages, it holds the number of primitives processed by
+            the shader since the current set of rendering primitives was started. The first
+            primitive processed by the drawing command is numbered zero and the primitive ID counter is incremented after every individual point, line
+            or triangle primitive is processed. For triangles drawn in point or line mode, the
+            primitive ID counter is incremented only once, even through multiple points or lines
+            may actually be drawn. Restarting a primitive topology using the primitive restart
+            index has no effect on the primitive ID counter.
+</div>
+    <div class="para">
+            In the geometry language,
+    <div class="varname">gl_PrimitiveID</div>
+    is an output
+            variable that is passed to the corresponding
+    <div class="varname">gl_PrimitiveID</div>
+    input
+            variable in the fragment shader. If no geomery shader is present then
+    <div class="varname">gl_PrimitiveID</div>
+    in the fragment language behaves identically as it would in the tessellation control and evaluation
+            languages. If a geometry shader is present but does not write to
+    <div class="varname">gl_PrimitiveID</div>
+    ,
+            the value of
+    <div class="varname">gl_PrimitiveID</div>
+    in the fragment shader is undefined.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <div class="varname">gl_PrimitiveID</div>
+    (Fragment and Geometry Languages)
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <div class="varname">gl_PrimitiveID</div>
+    (Tessellation Control and Evaluation Languages)
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gl_InstanceID.html">gl_InstanceID</a>
+    ,
+    <a class="crossref" href="./gl_VertexID.html">gl_VertexID</a>
+    ,
+    <a class="crossref" href="./gl_PrimitiveIDIn.html">gl_PrimitiveIDIn</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glCompressedTexSubImage1D : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glCompressedTexSubImage1D</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify a one-dimensional texture subimage in a compressed
+    format</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glCompressedTexSubImage1D"></a>
+    <span class="c-function">glCompressedTexSubImage1D</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-level" class="parameter">level</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-xoffset" class="parameter">xoffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-imageSize" class="parameter">imageSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glCompressedTexSubImage1D"></a>
+    <span class="py-function">glCompressedTexSubImage1D</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-xoffset" class="parameter">xoffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glCompressedTextureSubImage1D"></a>
+    <span class="c-function">glCompressedTextureSubImage1D</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-level" class="parameter">level</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-xoffset" class="parameter">xoffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-imageSize" class="parameter">imageSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void *(
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glCompressedTextureSubImage1D"></a>
+    <span class="py-function">glCompressedTextureSubImage1D</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-xoffset" class="parameter">xoffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-imageSize" class="parameter">imageSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">Specifies the target, to which the texture is bound, for
+    <a class="function" href="./glCompressedTexSubImage1D.html">glCompressedTexSubImage1D</a>
+    function. Must be
+    <span class="constant">GL_TEXTURE_1D</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">Specifies the texture object name for
+    <a class="function" href="./glCompressedTexSubImage1D.html#c-glCompressedTextureSubImage1D">glCompressedTextureSubImage1D</a>
+    function.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-level"></a>
+                        level
+                    </th>
+                    <td>
+    <div class="para">Specifies the level-of-detail number. Level 0 is the base
+          image level. Level
+    <span class="emphasis">n</span>
+    is the
+    <span class="emphasis">n</span>
+    th mipmap reduction image.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-xoffset"></a>
+                        xoffset
+                    </th>
+                    <td>
+    <div class="para">Specifies a texel offset in the x direction within the texture
+          array.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">Specifies the width of the texture subimage.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-format"></a>
+                        format
+                    </th>
+                    <td>
+    <div class="para">Specifies the format of the compressed image data stored at
+          address
+    <a class="parameter" href="#param-data">data</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-imageSize"></a>
+                        imageSize
+                    </th>
+                    <td>
+    <div class="para">Specifies the number of unsigned bytes of image data starting
+          at the address specified by
+    <a class="parameter" href="#param-data">data</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-data"></a>
+                        data
+                    </th>
+                    <td>
+    <div class="para">Specifies a pointer to the compressed image data in
+          memory.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">Texturing allows elements of an image array to be read by
+    shaders.</div>
+    <div class="para">
+    <a class="function" href="./glCompressedTexSubImage1D.html">glCompressedTexSubImage1D</a>
+    and
+    <a class="function" href="./glCompressedTexSubImage1D.html#c-glCompressedTextureSubImage1D">glCompressedTextureSubImage1D</a>
+    redefine a contiguous
+    subregion of an existing one-dimensional texture image. The texels
+    referenced by
+    <a class="parameter" href="#param-data">data</a>
+    replace the portion of the
+    existing texture array with x indices
+    <a class="parameter" href="#param-xoffset">xoffset</a>
+    and
+    <math overflow="scroll">
+                <mrow>
+                    <mi mathvariant="italic">xoffset</mi>
+                    <mo>+</mo>
+                    <mi mathvariant="italic">width</mi>
+                    <mo>-</mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    ,
+            inclusive.  This region may not include any texels
+    outside the range of the texture array as it was originally specified. It
+    is not an error to specify a subtexture with width of 0, but such a
+    specification has no effect.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    must be a known compressed
+        image format (such as
+    <span class="constant">GL_RGTC</span>
+    ) or an
+        extension-specified compressed-texture format. The
+    <a class="parameter" href="#param-format">format</a>
+    of the compressed texture image is selected
+        by the GL implementation that compressed it (see
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ),
+        and should be queried at the time the texture was
+        compressed with
+    <a class="crossref" href="./glGetTexLevelParameter.html">glGetTexLevelParameter</a>
+    .
+</div>
+    <div class="para">If a non-zero named buffer object is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target (see
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    )
+    while a texture image is specified,
+    <a class="parameter" href="#param-data">data</a>
+    is treated as a byte offset into the buffer
+    object's data store.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is not one of the generic compressed
+    internal formats:
+    <span class="constant">GL_COMPRESSED_RED</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RG</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RGB</span>
+    ,
+    <span class="constant">GL_COMPRESSED_RGBA</span>
+    .
+    <span class="constant">GL_COMPRESSED_SRGB</span>
+    , or
+    <span class="constant">GL_COMPRESSED_SRGB_ALPHA</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-imageSize">imageSize</a>
+    is not consistent with the format,
+    dimensions, and contents of the specified compressed image data.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if parameter
+    combinations are not supported by the specific compressed internal format
+    as specified in the specific texture compression extension.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero
+    buffer object name is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target and the buffer object's
+    data store is currently mapped.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero
+    buffer object name is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target and the data would be
+    unpacked from the buffer object such that the memory reads required would
+    exceed the data store size.
+</div>
+    <div class="para">GL_INVALID_OPERATION is generated by
+    <a class="function" href="./glCompressedTexSubImage1D.html#c-glCompressedTextureSubImage1D">glCompressedTextureSubImage1D</a>
+    function if texture is
+    not the name of an existing texture object.
+</div>
+    <div class="para">Undefined results, including abnormal program termination, are
+    generated if
+    <a class="parameter" href="#param-data">data</a>
+    is not encoded in a manner
+    consistent with the extension specification defining the internal
+    compression format.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetCompressedTexImage.html">glGetCompressedTexImage</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_TEXTURE_COMPRESSED</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER_BINDING</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetTexLevelParameter.html">glGetTexLevelParameter</a>
+    with arguments
+    <span class="constant">GL_TEXTURE_INTERNAL_FORMAT</span>
+    and
+    <span class="constant">GL_TEXTURE_COMPRESSED_IMAGE_SIZE</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glCompressedTexSubImage1D.html">glCompressedTexSubImage1D</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glCompressedTexSubImage1D.html#c-glCompressedTextureSubImage1D">glCompressedTextureSubImage1D</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glActiveTexture.html">glActiveTexture</a>
+    ,
+    <a class="crossref" href="./glCompressedTexImage1D.html">glCompressedTexImage1D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexImage2D.html">glCompressedTexImage2D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexImage3D.html">glCompressedTexImage3D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexSubImage2D.html">glCompressedTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glCompressedTexSubImage3D.html">glCompressedTexSubImage3D</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage1D.html">glCopyTexImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexImage2D.html">glCopyTexImage2D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage1D.html">glCopyTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage2D.html">glCopyTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glCopyTexSubImage3D.html">glCopyTexSubImage3D</a>
+    ,
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage1D.html">glTexSubImage1D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage2D.html">glTexSubImage2D</a>
+    ,
+    <a class="crossref" href="./glTexSubImage3D.html">glTexSubImage3D</a>
+    ,
+    <a class="crossref" href="./glTexParameter.html">glTexParameter</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

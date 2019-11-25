@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gl_SampleMask : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>gl_SampleMask</h1>
+</header>
+<main class="content">
+    <section class="purpose">specifies the sample coverage mask for the current fragment</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gl_SampleMask"></a>
+    <span class="c-function">gl_SampleMask</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <div class="varname">gl_SampleMask</div>
+    is a fragment language output array that may be
+            used to set the sample mask for the fragment being processed. Coverage for the current
+            fragment will become the logical AND of the coverage mask and the output
+    <div class="varname">gl_SampleMask</div>
+    .
+            That is, setting a bit in
+    <div class="varname">gl_SampleMask</div>
+    to zero will cause the
+            corresponding sample to be considered uncovered for the purposes of multisample fragment operations. However,
+            setting sample mask bits back to one will never enable samples not covered by the original primitive.
+            Bit
+    <span class="emphasis">B</span>
+    of mask
+    <div class="varname">gl_SampleMask[M]</div>
+    corresponds to sample
+            32 *
+    <span class="emphasis">M</span>
+    +
+    <span class="emphasis">B</span>
+    . This array must be sized in the fragment shader
+            either implicitly or explicitly to be the same size as the implementation-dependent maximum
+            sample-mask (as an array of 32-bit elements), determined by the maximum number of samples.
+            If the fragment shader statically assigns a value to
+    <div class="varname">gl_SampleMask</div>
+    , the
+            sample mask will be undefined for any array elements of any fragment shader invocation that
+            fails to assign a value. If a shader does not statically assign a value to
+    <div class="varname">gl_SampleMask</div>
+    ,
+            the sample mask has no effect on the processing of a fragment.
+            If the fragment shader is being evaluated at any  frequency other than per-fragment, bits within
+            the sample mask not corresponding to the current fragment shader invocation are ignored.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>gl_SampleMask</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gl_SampleMaskIn.html">gl_SampleMaskIn</a>
+    ,
+    <a class="crossref" href="./gl_SampleID.html">gl_SampleID</a>
+    ,
+    <a class="crossref" href="./gl_SamplePosition.html">gl_SamplePosition</a>
+    ,
+    <a class="crossref" href="./gl_FragCoord.html">gl_FragCoord</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2011-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

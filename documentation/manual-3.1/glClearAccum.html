@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glClearAccum : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glClearAccum</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify clear values for the accumulation buffer</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glClearAccum"></a>
+    <span class="c-function">glClearAccum</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLfloat (
+            <a href="#param-red" class="parameter">red</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-green" class="parameter">green</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-blue" class="parameter">blue</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat (
+            <a href="#param-alpha" class="parameter">alpha</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glClearAccum"></a>
+    <span class="py-function">glClearAccum</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-red" class="parameter">red</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-green" class="parameter">green</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-blue" class="parameter">blue</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-alpha" class="parameter">alpha</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-red"></a><a name="param-green"></a><a name="param-blue"></a><a name="param-alpha"></a>
+                        red, green, blue, alpha
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the red, green, blue, and alpha values used when the
+                    accumulation buffer is cleared.
+                    The initial values are all 0.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glClearAccum.html">glClearAccum</a>
+    specifies the red, green, blue, and alpha values used by
+    <a class="crossref" href="./glClear.html">glClear</a>
+    to clear the accumulation buffer.
+</div>
+    <div class="para">
+            Values specified by
+    <a class="function" href="./glClearAccum.html">glClearAccum</a>
+    are clamped to the
+            range
+    <math>
+                <mfenced open="[" close="]">
+                    <mn>-1</mn>
+                    <mn>1</mn>
+                </mfenced>
+            </math>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glClearAccum.html">glClearAccum</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_ACCUM_CLEAR_VALUE</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glAccum.html">glAccum</a>
+    ,
+    <a class="crossref" href="./glClear.html">glClear</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

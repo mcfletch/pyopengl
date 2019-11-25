@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glLinkProgram : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glLinkProgram</h1>
+</header>
+<main class="content">
+    <section class="purpose">Links a program object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glLinkProgram"></a>
+    <span class="c-function">glLinkProgram</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glLinkProgram"></a>
+    <span class="py-function">glLinkProgram</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">Specifies the handle of the program object to be linked.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glLinkProgram.html">glLinkProgram</a>
+    links the program
+    object specified by
+    <a class="parameter" href="#param-program">program</a>
+    . If any
+    shader objects of type
+    <span class="constant">GL_VERTEX_SHADER</span>
+    are
+    attached to
+    <a class="parameter" href="#param-program">program</a>
+    , they will be used to
+    create an executable that will run on the programmable vertex
+    processor. If any shader objects of type
+    <span class="constant">GL_GEOMETRY_SHADER</span>
+    are attached to
+    <a class="parameter" href="#param-program">program</a>
+    , they will be used to create
+    an executable that will run on the programmable geometry processor.
+    If any shader objects of type
+    <span class="constant">GL_FRAGMENT_SHADER</span>
+    are attached to
+    <a class="parameter" href="#param-program">program</a>
+    , they will be used to create an
+    executable that will run on the programmable fragment
+    processor.
+</div>
+    <div class="para">The status of the link operation will be stored as part of
+    the program object's state. This value will be set to
+    <span class="constant">GL_TRUE</span>
+    if the program object was linked
+    without errors and is ready for use, and
+    <span class="constant">GL_FALSE</span>
+    otherwise. It can be queried by
+    calling
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    with arguments
+    <a class="parameter" href="#param-program">program</a>
+    and
+    <span class="constant">GL_LINK_STATUS</span>
+    .
+</div>
+    <div class="para">As a result of a successful link operation, all active
+    user-defined uniform variables belonging to
+    <a class="parameter" href="#param-program">program</a>
+    will be initialized to 0, and
+    each of the program object's active uniform variables will be
+    assigned a location that can be queried by calling
+    <a class="crossref" href="./glGetUniformLocation.html">glGetUniformLocation</a>
+    .
+    Also, any active user-defined attribute variables that have not
+    been bound to a generic vertex attribute index will be bound to
+    one at this time.
+</div>
+    <div class="para">Linking of a program object can fail for a number of
+    reasons as specified in the
+    <span class="emphasis">OpenGL Shading Language
+    Specification</span>
+    . The following lists some of the
+    conditions that will cause a link error.
+</div>
+    <div class="itemizedlist">
+    <dd class="listitem">
+    <div class="para">The number of active attribute variables supported
+        by the implementation has been exceeded.</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">The storage limit for uniform variables has been
+        exceeded.</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">The number of active uniform variables supported
+        by the implementation has been exceeded.</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">The
+    main
+    function is missing
+        for the vertex, geometry or fragment shader.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">A varying variable actually used in the fragment
+        shader is not declared in the same way (or is not
+        declared at all) in the vertex shader, or geometry shader if present.</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">A reference to a function or variable name is
+        unresolved.</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">A shared global is declared with two different
+        types or two different initial values.</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">One or more of the attached shader objects has not
+        been successfully compiled.</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">Binding a generic attribute matrix caused some
+        rows of the matrix to fall outside the allowed maximum
+        of
+    <span class="constant">GL_MAX_VERTEX_ATTRIBS</span>
+    .
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">Not enough contiguous vertex attribute slots could
+        be found to bind attribute matrices.</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">The program object contains objects to form a fragment shader but
+        does not contain objects to form a vertex shader.</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">The program object contains objects to form a geometry shader
+        but does not contain objects to form a vertex shader.</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">The program object contains objects to form a geometry shader
+        and the input primitive type, output primitive type, or maximum output
+        vertex count is not specified in any compiled geometry shader
+        object.</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">The program object contains objects to form a geometry shader
+        and the input primitive type, output primitive type, or maximum output
+        vertex count is specified differently in multiple geometry shader
+        objects.</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">The number of active outputs in the fragment shader is greater
+        than the value of
+    <span class="constant">GL_MAX_DRAW_BUFFERS</span>
+    .
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">The program has an active output assigned to a location greater
+        than or equal to the value of
+    <span class="constant">GL_MAX_DUAL_SOURCE_DRAW_BUFFERS</span>
+    and has an active output assigned an index greater than or equal to one.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">More than one varying out variable is bound to the same number and index.</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">The explicit binding assigments do not leave enough space for the linker
+        to automatically assign a location for a varying out array, which requires
+        multiple contiguous locations.</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">The
+    <a class="parameter" href="#param-count">count</a>
+    specified by
+    <a class="crossref" href="./glTransformFeedbackVaryings.html">glTransformFeedbackVaryings</a>
+    is non-zero, but the program object has no vertex or geometry shader.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">Any variable name specified to
+    <a class="crossref" href="./glTransformFeedbackVaryings.html">glTransformFeedbackVaryings</a>
+    in the
+    <a class="parameter" href="#param-varyings">varyings</a>
+    array is not declared as an output in the vertex shader (or the geometry shader, if active).
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">Any two entries in the
+    <a class="parameter" href="#param-varyings">varyings</a>
+    array given
+    <a class="crossref" href="./glTransformFeedbackVaryings.html">glTransformFeedbackVaryings</a>
+    specify the same varying variable.
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">The total number of components to capture in any transform feedback varying variable
+        is  greater  than  the  constant
+    <span class="constant">GL_MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS</span>
+    and the buffer mode is
+    <span class="constant">GL_SEPARATE_ATTRIBS</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="para">When a program object has been successfully linked, the
+    program object can be made part of current state by calling
+    <a class="crossref" href="./glUseProgram.html">glUseProgram</a>
+    .
+    Whether or not the link operation was successful, the program
+    object's information log will be overwritten. The information
+    log can be retrieved by calling
+    <a class="crossref" href="./glGetProgramInfoLog.html">glGetProgramInfoLog</a>
+    .
+</div>
+    <div class="para">
+    <a class="function" href="./glLinkProgram.html">glLinkProgram</a>
+    will also install the
+    generated executables as part of the current rendering state if
+    the link operation was successful and the specified program
+    object is already currently in use as a result of a previous
+    call to
+    <a class="crossref" href="./glUseProgram.html">glUseProgram</a>
+    .
+    If the program object currently in use is relinked
+    unsuccessfully, its link status will be set to
+    <span class="constant">GL_FALSE</span>
+    , but the executables and
+    associated state will remain part of the current state until a
+    subsequent call to
+    <a class="function" href="./glUseProgram.html">glUseProgram</a>
+    removes it
+    from use. After it is removed from use, it cannot be made part
+    of current state until it has been successfully relinked.
+</div>
+    <div class="para">If
+    <a class="parameter" href="#param-program">program</a>
+    contains shader objects
+    of type
+    <span class="constant">GL_VERTEX_SHADER</span>
+    , and optionally of type
+    <span class="constant">GL_GEOMETRY_SHADER</span>
+    ,
+    but does not contain shader objects of type
+    <span class="constant">GL_FRAGMENT_SHADER</span>
+    , the vertex shader executable will
+    be installed on the programmable vertex processor, the geometry shader executable, if present,
+    will be installed on the programmable geometry processor, but no executable will
+    be installed on the fragment processor. The results of
+    rasterizing primitives with such a program will be undefined.
+</div>
+    <div class="para">The program object's information log is updated and the
+    program is generated at the time of the link operation. After
+    the link operation, applications are free to modify attached
+    shader objects, compile attached shader objects, detach shader
+    objects, delete shader objects, and attach additional shader
+    objects. None of these operations affects the information log or
+    the program that is part of the program object.</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">If the link operation is unsuccessful, any information about a previous link operation on
+    <a class="parameter" href="#param-program">program</a>
+    is lost (i.e., a failed link does not restore the old state of
+    <a class="parameter" href="#param-program">program</a>
+    ). Certain information can still be retrieved from
+    <a class="parameter" href="#param-program">program</a>
+    even after an unsuccessful link operation. See for instance
+    <a class="crossref" href="./glGetActiveAttrib.html">glGetActiveAttrib</a>
+    and
+    <a class="crossref" href="./glGetActiveUniform.html">glGetActiveUniform</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a value generated by OpenGL.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a program object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is the currently active program
+    object and transform feedback mode is active.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with the argument
+    <span class="constant">GL_CURRENT_PROGRAM</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetActiveAttrib.html">glGetActiveAttrib</a>
+    with argument
+    <a class="parameter" href="#param-program">program</a>
+    and the index of an active attribute variable
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetActiveUniform.html">glGetActiveUniform</a>
+    with argument
+    <a class="parameter" href="#param-program">program</a>
+    and the index of an active uniform variable
+    <a class="parameter" href="#param-"></a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetAttachedShaders.html">glGetAttachedShaders</a>
+    with argument
+    <a class="parameter" href="#param-program">program</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetAttribLocation.html">glGetAttribLocation</a>
+    with argument
+    <a class="parameter" href="#param-program">program</a>
+    and an attribute variable name
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    with arguments
+    <a class="parameter" href="#param-program">program</a>
+    and
+    <span class="constant">GL_LINK_STATUS</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetProgramInfoLog.html">glGetProgramInfoLog</a>
+    with argument
+    <a class="parameter" href="#param-program">program</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetUniform.html">glGetUniform</a>
+    with argument
+    <a class="parameter" href="#param-program">program</a>
+    and a uniform variable location
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetUniformLocation.html">glGetUniformLocation</a>
+    with argument
+    <a class="parameter" href="#param-program">program</a>
+    and a uniform variable name
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsProgram.html">glIsProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glLinkProgram.html">glLinkProgram</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glAttachShader.html">glAttachShader</a>
+    ,
+    <a class="crossref" href="./glBindAttribLocation.html">glBindAttribLocation</a>
+    ,
+    <a class="crossref" href="./glCompileShader.html">glCompileShader</a>
+    ,
+    <a class="crossref" href="./glCreateProgram.html">glCreateProgram</a>
+    ,
+    <a class="crossref" href="./glDeleteProgram.html">glDeleteProgram</a>
+    ,
+    <a class="crossref" href="./glDetachShader.html">glDetachShader</a>
+    ,
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    ,
+    <a class="crossref" href="./glUseProgram.html">glUseProgram</a>
+    ,
+    <a class="crossref" href="./glValidateProgram.html">glValidateProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2005 3Dlabs Inc. Ltd.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glLinkProgram</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/shaders.py">OpenGLContext/scenegraph/shaders.py</a>
+    Lines: <span class="sample-lines">496</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/shader.py">pymt/graphx/shader.py</a>
+    Lines: <span class="sample-lines">11, 42</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">106</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">128</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">89</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">97</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">120</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">106</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

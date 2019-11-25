@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutSolidTeapot : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutSolidTeapot</h1>
+</header>
+<main class="content">
+    <section class="purpose">render a solid or wireframe teapot respectively.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutSolidTeapot"></a>
+    <span class="c-function">glutSolidTeapot</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble(
+            <a href="#param-size" class="parameter">size</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutSolidTeapot"></a>
+    <span class="py-function">glutSolidTeapot</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-size" class="parameter">size</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutSolidTeapot( GLdouble(size) ) -&gt; None</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutWireTeapot"></a>
+    <span class="c-function">glutWireTeapot</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble(
+            <a href="#param-size" class="parameter">size</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutWireTeapot"></a>
+    <span class="py-function">glutWireTeapot</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-size" class="parameter">size</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutWireTeapot( GLdouble(size) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-size"></a>
+                        size
+                    </th>
+                    <td>
+    <div class="simpara">
+						Relative size of the teapot.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutSolidTeapot.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutSolidTeapot.html">glutSolidTeapot</a>
+    and
+    <a class="function" href="./glutSolidTeapot.html#c-glutWireTeapot">glutWireTeapot</a>
+    render a solid or wireframe teapot
+			respectively. Both surface normals and texture coordinates for the teapot are generated. The teapot is generated with
+			OpenGL evaluators.
+</div>
+    </section><section class="section" id="glutSolidTeapot.3GLUT-bugs">
+    <h2 class="title">Bugs</h2>
+    <div class="para">
+			The teapot is greatly over-tesselated; it renders way too slow. OpenGL's default
+    <a class="function" href="./glFrontFace.html">glFrontFace</a>
+    state assumes that front facing polygons (for the purpose of face culling)
+			have vertices that wind counter clockwise when projected into window space. This teapot is rendered with its front
+			facing polygon vertices winding clockwise. For OpenGL's default back face culling to work, you should use:
+</div>
+    <div class="programlisting">glFrontFace(GL_CW);
+glutSolidTeapot(size);
+glFrontFace(GL_CCW);</div>
+    <div class="para">
+			Both these bugs reflect issues in the original aux toolkit's teapot rendering routines (GLUT used the same teapot
+			rendering routine).
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutSolidSphere.html">glutSolidSphere</a>
+            <a class="crossref" href="./glutSolidCube.html">glutSolidCube</a>
+            <a class="crossref" href="./glutSolidCone.html">glutSolidCone</a>
+            <a class="crossref" href="./glutSolidTorus.html">glutSolidTorus</a>
+            <a class="crossref" href="./glutSolidDodecahedron.html">glutSolidDodecahedron</a>
+            <a class="crossref" href="./glutSolidOctahedron.html">glutSolidOctahedron</a>
+            <a class="crossref" href="./glutSolidTetrahedron.html">glutSolidTetrahedron</a>
+            <a class="crossref" href="./glutSolidIcosahedron.html">glutSolidIcosahedron</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutSolidTeapot</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shaders.py">tests/shaders.py</a>
+    Lines: <span class="sample-lines">34</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/gear.py">OpenGLContext/scenegraph/gear.py</a>
+    Lines: <span class="sample-lines">6</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/teapot.py">OpenGLContext/scenegraph/teapot.py</a>
+    Lines: <span class="sample-lines">6, 34</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/stereo/stereoDemo.py">PyOpenGL-Demo/proesch/stereo/stereoDemo.py</a>
+    Lines: <span class="sample-lines">126</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py">PyOpenGL-Demo/proesch/interactionMatrix/interactionPot.py</a>
+    Lines: <span class="sample-lines">68</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">190</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson23.py">PyOpenGL-Demo/NeHe/lesson23.py</a>
+    Lines: <span class="sample-lines">176</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson18.py">PyOpenGL-Demo/NeHe/lesson18.py</a>
+    Lines: <span class="sample-lines">222</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/redbook/teapots.py">PyOpenGL-Demo/redbook/teapots.py</a>
+    Lines: <span class="sample-lines">93, 117</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py</a>
+    Lines: <span class="sample-lines">631</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Utils/Particles3D.py">Sketches/CL/Topology3D/Utils/Particles3D.py</a>
+    Lines: <span class="sample-lines">363</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py">Code/Python/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py</a>
+    Lines: <span class="sample-lines">631</span>
+</div>
+        <div class="sample-key">glutWireTeapot</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/gear.py">OpenGLContext/scenegraph/gear.py</a>
+    Lines: <span class="sample-lines">6</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/teapot.py">OpenGLContext/scenegraph/teapot.py</a>
+    Lines: <span class="sample-lines">6, 32</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

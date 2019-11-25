@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gleExtrusion : PyOpenGL 3.1.4 GLE Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+    <h1>gleExtrusion</h1>
+</header>
+<main class="content">
+    <section class="purpose">Extrude arbitrary 2D contour along arbitrary 3D path.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gleExtrusion"></a>
+    <span class="c-function">gleExtrusion</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-ncp" class="parameter">ncp</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[][2](
+            <a href="#param-contour" class="parameter">contour</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[][2](
+            <a href="#param-cont_normal" class="parameter">cont_normal</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[3](
+            <a href="#param-up" class="parameter">up</a>
+        )
+        ,
+    </span><span class="param-def">
+        int(
+            <a href="#param-npoints" class="parameter">npoints</a>
+        )
+        ,
+    </span><span class="param-def">
+        gleDouble[][3](
+            <a href="#param-point_array" class="parameter">point_array</a>
+        )
+        ,
+    </span><span class="param-def">
+        float[][3](
+            <a href="#param-color_array" class="parameter">color_array</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gleExtrusion"></a>
+    <span class="py-function">gleExtrusion</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-contour" class="parameter">contour</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-cont_normal" class="parameter">cont_normal</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-up" class="parameter">up</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-point_array" class="parameter">point_array</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-color_array" class="parameter">color_array</a>
+    </span>
+</span> )
+    <pre class="pydoc">gleExtrusion( c_int(ncp), arrays.GLdoubleArray(contour), arrays.GLdoubleArray(cont_normal), arrays.GLdoubleArray(up), c_int(npoints), arrays.GLdoubleArray(point_array), arrays.GLfloatArray(color_array) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-ncp"></a>
+                        ncp
+                    </th>
+                    <td>
+    <div class="simpara">
+						number of contour points
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-contour"></a>
+                        contour
+                    </th>
+                    <td>
+    <div class="simpara">
+						2D contour
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-cont_normal"></a>
+                        cont_normal
+                    </th>
+                    <td>
+    <div class="simpara">
+						2D contour normals
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-up"></a>
+                        up
+                    </th>
+                    <td>
+    <div class="simpara">
+						up vector for contour
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-npoints"></a>
+                        npoints
+                    </th>
+                    <td>
+    <div class="simpara">
+						numpoints in poly-line
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-point_array"></a>
+                        point_array
+                    </th>
+                    <td>
+    <div class="simpara">
+						polyline vertices
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-color_array"></a>
+                        color_array
+                    </th>
+                    <td>
+    <div class="simpara">
+						colors at polyline verts
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="gleExtrusion.3GLE-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			Extrude arbitrary 2D contour along arbitrary 3D path. The argument
+    <a class="parameter" href="#param-contour">contour</a>
+    specifies the 2D
+			contour to be extruded, while the argument
+    <a class="parameter" href="#param-point_array">point_array</a>
+    specifies the path along which to
+			extrude. The vector
+    <a class="parameter" href="#param-up">up</a>
+    defines the orientation of the contour y-axis in real 3D space.
+</div>
+    <div class="para">
+			Note that neither the very first segment, nor the very last segment are drawn. The first and last segments serve only
+			to define the angle of the join at the very ends of the polyline. Thus, to draw one segment, three must be specified.
+			To draw two segments, four must be specified, etc.
+		</div>
+    <div class="para">
+			The normal array may be
+    <span class="constant">NULL</span>
+    . If it is, normal vectors will
+    <a class="parameter" href="#param-not">not</a>
+    be automatically generated, and the object will look terrible when lit.
+</div>
+    <div class="para">
+			The color array may be
+    <span class="constant">NULL</span>
+    . If
+    <span class="constant">NULL</span>
+    , the current color is used. If not
+    <span class="constant">NULL</span>
+    , the
+    <a class="function" href="./glColor.html#c-glColor3f">glColor3f</a>
+    routine is used to set the color;
+			therefore, specifying the
+    <a class="function" href="./glColorMaterial.html">glColorMaterial</a>
+    subroutine before this primitive can
+			be used to set diffuse, specular, ambient, etc. colors.
+</div>
+    </section><section class="section" id="gleExtrusion.3GLE-author">
+    <h2 class="title">Author</h2>
+    <div class="para">
+			Linas Vepstas
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./gleTwistExtrusion.html">gleTwistExtrusion</a>
+            <a class="crossref" href="./gleSuperExtrusion.html">gleSuperExtrusion</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gleExtrusion</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/toolsfont.py">OpenGLContext/scenegraph/text/toolsfont.py</a>
+    Lines: <span class="sample-lines">99</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLE/texas.py">PyOpenGL-Demo/GLE/texas.py</a>
+    Lines: <span class="sample-lines">50, 51</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLE">GLE</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

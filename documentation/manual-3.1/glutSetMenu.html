@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutSetMenu : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutSetMenu</h1>
+</header>
+<main class="content">
+    <section class="purpose">set/get the current menu</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutGetMenu"></a>
+    <span class="c-function">glutGetMenu</span>(<span class="parameter-list">
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glutGetMenu"></a>
+    <span class="py-function">glutGetMenu</span>( <span class="parameter-list">
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">glutGetMenu(  ) -&gt; c_int</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutSetMenu"></a>
+    <span class="c-function">glutSetMenu</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-menu" class="parameter">menu</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutSetMenu"></a>
+    <span class="py-function">glutSetMenu</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-menu" class="parameter">menu</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutSetMenu( c_int(menu) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-menu"></a>
+                        menu
+                    </th>
+                    <td>
+    <div class="simpara">
+						The identifier of the menu to make the current menu.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutSetMenu.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutSetMenu.html">glutSetMenu</a>
+    sets the current menu;
+    <a class="function" href="./glutSetMenu.html#c-glutGetMenu">glutGetMenu</a>
+    returns the identifier of the
+			current menu. If no menus exist or the previous current menu was destroyed,
+    <a class="function" href="./glutSetMenu.html#c-glutGetMenu">glutGetMenu</a>
+    returns
+			zero.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutCreateMenu.html">glutCreateMenu</a>
+            <a class="crossref" href="./glutSetWindow.html">glutSetWindow</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

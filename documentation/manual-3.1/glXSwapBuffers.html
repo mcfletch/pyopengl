@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXSwapBuffers : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXSwapBuffers</h1>
+</header>
+<main class="content">
+    <section class="purpose">exchange front and back buffers</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXSwapBuffers"></a>
+    <span class="c-function">glXSwapBuffers</span>(<span class="parameter-list">
+    <span class="param-def">
+        Display * (
+            <a href="#param-dpy" class="parameter">dpy</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLXDrawable (
+            <a href="#param-drawable" class="parameter">drawable</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glXSwapBuffers"></a>
+    <span class="py-function">glXSwapBuffers</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-dpy" class="parameter">dpy</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-drawable" class="parameter">drawable</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dpy"></a>
+                        dpy
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the connection to the X server.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-drawable"></a>
+                        drawable
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the drawable whose buffers are to be swapped.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXSwapBuffers.html">glXSwapBuffers</a>
+    promotes the contents of the back buffer of
+    <a class="parameter" href="#param-drawable">drawable</a>
+    to become
+            the contents of the front buffer of
+    <a class="parameter" href="#param-drawable">drawable</a>
+    .
+            The contents of the back buffer then become undefined.
+            The update typically takes place during the vertical retrace of
+            the monitor,
+            rather than immediately after
+    <a class="function" href="./glXSwapBuffers.html">glXSwapBuffers</a>
+    is called.
+</div>
+    <div class="para">
+    <a class="function" href="./glXSwapBuffers.html">glXSwapBuffers</a>
+    performs an implicit
+    <a class="crossref" href="./glFlush.html">glFlush</a>
+    before it returns.
+            Subsequent OpenGL commands may be issued immediately after calling
+    <a class="function" href="./glXSwapBuffers.html">glXSwapBuffers</a>
+    ,
+            but are not executed until the buffer exchange is completed.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-drawable">drawable</a>
+    was not created with respect to a double-buffered visual,
+    <a class="function" href="./glXSwapBuffers.html">glXSwapBuffers</a>
+    has no effect,
+            and no error is generated.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            The contents of the back buffer become undefined after
+            a swap. Note that this applies to pixel buffers as well as windows.
+        </div>
+    <div class="para">
+            All GLX rendering contexts share the same notion of which are front buffers
+            and which are back buffers.
+            One consequence is that when multiple clients are rendering to the same
+            double-buffered window,
+            all of them should finish rendering before one of them issues the command
+            to swap buffers.
+            The clients are responsible for implementing this synchronization.
+            Typically this is accomplished by executing
+    <a class="crossref" href="./glFinish.html">glFinish</a>
+    and then
+            using a semaphore in shared memory to rendezvous before swapping.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GLXBadDrawable</span>
+    is generated if
+    <a class="parameter" href="#param-drawable">drawable</a>
+    is not a valid GLX drawable.
+</div>
+    <div class="para">
+    <span class="constant">GLXBadCurrentWindow</span>
+    is generated if
+    <a class="parameter" href="#param-dpy">dpy</a>
+    and
+    <a class="parameter" href="#param-drawable">drawable</a>
+    are
+            respectively the display and drawable associated with the current
+            context of the calling thread, and
+    <a class="parameter" href="#param-drawable">drawable</a>
+    identifies a window that
+            is no longer valid.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glFlush.html">glFlush</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

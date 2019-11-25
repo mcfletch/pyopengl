@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluErrorString : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluErrorString</h1>
+</header>
+<main class="content">
+    <section class="purpose">produce an error string from a GL or GLU error code</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluErrorString"></a>
+    <span class="c-function">gluErrorString</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-error" class="parameter">error</a>
+        )
+    </span>
+</span>)-&gt; const GLubyte *
+</div>
+                <div class="py-signature">
+    <a name="py-gluErrorString"></a>
+    <span class="py-function">gluErrorString</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-error" class="parameter">error</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_char_p'&gt;</span>
+    <pre class="pydoc">gluErrorString( GLenum(error) ) -&gt; POINTER(GLubyte)</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-error"></a>
+                        error
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a GL or GLU error code.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluErrorString.html">gluErrorString</a>
+    produces an error string from a GL or GLU error code. The string
+            is in ISO Latin 1 format. For example,
+    <a class="function" href="./gluErrorString.html">gluErrorString</a>
+    (
+    <span class="constant">GLU_OUT_OF_MEMORY</span>
+    ) returns the string
+    <span class="emphasis">out of memory</span>
+    .
+</div>
+    <div class="para">
+            The standard GLU error codes are
+    <span class="constant">GLU_INVALID_ENUM</span>
+    ,
+    <span class="constant">GLU_INVALID_VALUE</span>
+    ,
+            and
+    <span class="constant">GLU_OUT_OF_MEMORY</span>
+    .
+            Certain other GLU functions can return specialized error codes
+            through callbacks.
+            See the
+    <a class="crossref" href="./glGetError.html">glGetError</a>
+    reference page for the list of
+            GL error codes.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">NULL</span>
+    is returned if
+    <a class="parameter" href="#param-error">error</a>
+    is not a valid GL or GLU error code.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluNurbsCallback.html">gluNurbsCallback</a>
+    ,
+    <a class="crossref" href="./gluQuadricCallback.html">gluQuadricCallback</a>
+    ,
+    <a class="crossref" href="./gluTessCallback.html">gluTessCallback</a>
+    ,
+    <a class="crossref" href="./glGetError.html">glGetError</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluErrorString</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/shaderProg/shaderProg.py">PyOpenGL-Demo/proesch/shaderProg/shaderProg.py</a>
+    Lines: <span class="sample-lines">51</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/lib/squirtle.py">pymt/lib/squirtle.py</a>
+    Lines: <span class="sample-lines">23, 861</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/bezier.py">pymt/graphx/bezier.py</a>
+    Lines: <span class="sample-lines">41, 157</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

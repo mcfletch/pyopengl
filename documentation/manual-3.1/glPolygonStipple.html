@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glPolygonStipple : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glPolygonStipple</h1>
+</header>
+<main class="content">
+    <section class="purpose">set the polygon stippling pattern</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glPolygonStipple"></a>
+    <span class="c-function">glPolygonStipple</span>(<span class="parameter-list">
+    <span class="param-def">
+        const GLubyte * (
+            <a href="#param-pattern" class="parameter">pattern</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glPolygonStipple"></a>
+    <span class="py-function">glPolygonStipple</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-mask" class="parameter">mask</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pattern"></a>
+                        pattern
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to a
+    <math>
+                        <mrow>
+                            <mn>32</mn>
+                            <mo></mo>
+                            <mn>32</mn>
+                        </mrow>
+                    </math>
+    stipple pattern that will be unpacked
+                    from memory in the same way that
+    <a class="crossref" href="./glDrawPixels.html">glDrawPixels</a>
+    unpacks pixels.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            Polygon stippling,
+            like line stippling
+            (see
+    <a class="crossref" href="./glLineStipple.html">glLineStipple</a>
+    ),
+            masks out certain fragments produced by rasterization,
+            creating a pattern.
+            Stippling is independent of polygon antialiasing.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-pattern">pattern</a>
+    is a pointer to a
+    <math>
+                <mrow>
+                    <mn>32</mn>
+                    <mo></mo>
+                    <mn>32</mn>
+                </mrow>
+            </math>
+    stipple pattern that is stored
+            in memory just like the pixel data supplied to a
+    <a class="crossref" href="./glDrawPixels.html">glDrawPixels</a>
+    call with
+    <span class="emphasis"></span>
+    height
+            and
+    <span class="emphasis">width</span>
+    both equal to 32, a pixel format
+            of
+    <span class="constant">GL_COLOR_INDEX</span>
+    , and data type
+            of
+    <span class="constant">GL_BITMAP</span>
+    .
+            That is,
+            the stipple pattern is represented as a
+    <math>
+                <mrow>
+                    <mn>32</mn>
+                    <mo></mo>
+                    <mn>32</mn>
+                </mrow>
+            </math>
+    array
+            of 1-bit color indices packed in unsigned bytes.
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    parameters like
+    <span class="constant">GL_UNPACK_SWAP_BYTES</span>
+    and
+    <span class="constant">GL_UNPACK_LSB_FIRST</span>
+    affect the assembling of the bits into a
+            stipple pattern.
+            Pixel transfer operations
+            (shift, offset, pixel map)
+            are not applied to the stipple image,
+            however.
+</div>
+    <div class="para">
+            If a non-zero named buffer object is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target
+            (see
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ) while a stipple pattern is
+            specified,
+    <a class="parameter" href="#param-pattern">pattern</a>
+    is treated as a byte offset into the buffer object's data store.
+</div>
+    <div class="para">
+            To enable and disable polygon stippling, call
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="crossref" href="./glEnable.html#c-glDisable">glDisable</a>
+    with argument
+    <span class="constant">GL_POLYGON_STIPPLE</span>
+    . Polygon stippling is initially
+            disabled. If it's enabled,
+            a rasterized polygon fragment with window coordinates
+    <math>
+                <msub><mi mathvariant="italic">x</mi>
+                <mi mathvariant="italic">w</mi>
+                </msub>
+            </math>
+    and
+    <math>
+                <msub><mi mathvariant="italic">y</mi>
+                <mi mathvariant="italic">w</mi>
+                </msub>
+            </math>
+    is sent to the next stage of the GL if and only if the
+            (
+    <math>
+                <mrow>
+                    <msub><mi mathvariant="italic">x</mi>
+                    <mi mathvariant="italic">w</mi>
+                    </msub>
+                    <mo>%</mo>
+                    <mn>32</mn>
+                </mrow>
+            </math>
+    )th
+            bit in the
+            (
+    <math>
+                <mrow>
+                    <msub><mi mathvariant="italic">y</mi>
+                    <mi mathvariant="italic">w</mi>
+                    </msub>
+                    <mo>%</mo>
+                    <mn>32</mn>
+                </mrow>
+            </math>
+    )th
+            row
+            of the stipple pattern is 1 (one).
+            When polygon stippling is disabled, it is as if the stipple pattern
+            consists of all 1's.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target and the buffer object's data store is currently mapped.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target and the data would be unpacked from the buffer
+            object such that the memory reads required would exceed the data store size.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glPolygonStipple.html">glPolygonStipple</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetPolygonStipple.html">glGetPolygonStipple</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_POLYGON_STIPPLE</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER_BINDING</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glDrawPixels.html">glDrawPixels</a>
+    ,
+    <a class="crossref" href="./glLineStipple.html">glLineStipple</a>
+    ,
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    ,
+    <a class="crossref" href="./glPixelTransfer.html">glPixelTransfer</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glPolygonStipple</div>
+        <div class="py-sample">
+    <span class="sample-project">{LGPL} pygl2d</span>
+    <a href="https://github.com/RyanHope/PyGL2D/blob/master/pygl2d/draw.py">pygl2d/draw.py</a>
+    Lines: <span class="sample-lines">110</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

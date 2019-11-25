@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glDrawPixels : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glDrawPixels</h1>
+</header>
+<main class="content">
+    <section class="purpose">write a block of pixels to the frame buffer</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glDrawPixels"></a>
+    <span class="c-function">glDrawPixels</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glDrawPixels"></a>
+    <span class="py-function">glDrawPixels</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glDrawPixelsf"></a>
+    <span class="py-function">glDrawPixelsf</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glDrawPixelsi"></a>
+    <span class="py-function">glDrawPixelsi</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glDrawPixelss"></a>
+    <span class="py-function">glDrawPixelss</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glDrawPixelsui"></a>
+    <span class="py-function">glDrawPixelsui</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+                <div class="py-signature">
+    <a name="py-glDrawPixelsus"></a>
+    <span class="py-function">glDrawPixelsus</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pixels" class="parameter">pixels</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a><a name="param-height"></a>
+                        width, height
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the dimensions of the pixel rectangle to be written
+                    into the frame buffer.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-format"></a>
+                        format
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the format of the pixel data.
+                    Symbolic constants
+    <span class="constant">GL_COLOR_INDEX</span>
+    ,
+    <span class="constant">GL_STENCIL_INDEX</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    ,
+    <span class="constant">GL_RGB</span>
+    ,
+    <span class="constant">GL_BGR</span>
+    ,
+    <span class="constant">GL_RGBA</span>
+    ,
+    <span class="constant">GL_BGRA</span>
+    ,
+    <span class="constant">GL_RED</span>
+    ,
+    <span class="constant">GL_GREEN</span>
+    ,
+    <span class="constant">GL_BLUE</span>
+    ,
+    <span class="constant">GL_ALPHA</span>
+    ,
+    <span class="constant">GL_LUMINANCE</span>
+    , and
+    <span class="constant">GL_LUMINANCE_ALPHA</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the data type for
+    <a class="parameter" href="#param-data">data</a>
+    .
+                    Symbolic constants
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GL_BYTE</span>
+    ,
+    <span class="constant">GL_BITMAP</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+    ,
+    <span class="constant">GL_SHORT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT</span>
+    ,
+    <span class="constant">GL_INT</span>
+    ,
+    <span class="constant">GL_FLOAT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+    , and
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-data"></a>
+                        data
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to the pixel data.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glDrawPixels.html">glDrawPixels</a>
+    reads pixel data from memory and writes it into the frame buffer
+            relative to the current raster position, provided that the raster
+            position is valid.  Use
+    <a class="crossref" href="./glRasterPos.html">glRasterPos</a>
+    or
+    <a class="crossref" href="./glWindowPos.html">glWindowPos</a>
+    to set the current raster position; use
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_CURRENT_RASTER_POSITION_VALID</span>
+    to determine if the specified raster position is valid, and
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_CURRENT_RASTER_POSITION</span>
+    to query the raster position.
+</div>
+    <div class="para">
+            Several parameters define the encoding of pixel data in memory
+            and control the processing of the pixel data
+            before it is placed in the frame buffer.
+            These parameters are set with four commands:
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    ,
+    <a class="crossref" href="./glPixelTransfer.html">glPixelTransfer</a>
+    ,
+    <a class="crossref" href="./glPixelMap.html">glPixelMap</a>
+    , and
+    <a class="crossref" href="./glPixelZoom.html">glPixelZoom</a>
+    .
+            This reference page describes the effects on
+    <a class="function" href="./glDrawPixels.html">glDrawPixels</a>
+    of many,
+            but not all, of the parameters specified by these four commands.
+</div>
+    <div class="para">
+            Data is read from
+    <a class="parameter" href="#param-data">data</a>
+    as a sequence of signed or unsigned bytes,
+            signed or unsigned shorts, signed or unsigned integers, or
+            single-precision floating-point values, depending on
+    <a class="parameter" href="#param-type">type</a>
+    .
+            When
+    <a class="parameter" href="#param-type">type</a>
+    is one of
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GL_BYTE</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+    ,
+    <span class="constant">GL_SHORT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT</span>
+    ,
+    <span class="constant">GL_INT</span>
+    , or
+    <span class="constant">GL_FLOAT</span>
+    each of these bytes, shorts, integers, or
+            floating-point values is interpreted as one color or depth component, or
+            one index, depending on
+    <a class="parameter" href="#param-format">format</a>
+    .
+            When
+    <a class="parameter" href="#param-type">type</a>
+    is one of
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+    , or
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+    , each unsigned value is interpreted as
+            containing all the components for a single pixel, with the color
+            components arranged according to
+    <a class="parameter" href="#param-format">format</a>
+    .
+            When
+    <a class="parameter" href="#param-type">type</a>
+    is one of
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+    , or
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+    , each unsigned value is interpreted
+            as containing all color components, specified by
+    <a class="parameter" href="#param-format">format</a>
+    , for a single
+            pixel in a reversed order. Indices are always treated individually.
+            Color components are treated as groups of one, two, three, or four
+            values, again based on
+    <a class="parameter" href="#param-format">format</a>
+    . Both individual indices and groups of
+            components are referred to as pixels.
+            If
+    <a class="parameter" href="#param-type">type</a>
+    is
+    <span class="constant">GL_BITMAP</span>
+    , the data must be unsigned bytes, and
+    <a class="parameter" href="#param-format">format</a>
+    must be either
+    <span class="constant">GL_COLOR_INDEX</span>
+    or
+    <span class="constant">GL_STENCIL_INDEX</span>
+    .
+            Each unsigned byte is treated as eight 1-bit pixels, with bit ordering
+            determined by
+    <span class="constant">GL_UNPACK_LSB_FIRST</span>
+    (see
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    ).
+</div>
+    <div class="para">
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">width</mi>
+                    <mo></mo>
+                    <mi mathvariant="italic">height</mi>
+                </mrow>
+            </math>
+    pixels are read from memory,
+            starting at location
+    <a class="parameter" href="#param-data">data</a>
+    .
+            By default, these pixels are taken from adjacent memory locations,
+            except that after all
+    <a class="parameter" href="#param-width">width</a>
+    pixels are read,
+            the read pointer is advanced to the next four-byte boundary.
+            The four-byte row alignment is specified by
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    with
+            argument
+    <span class="constant">GL_UNPACK_ALIGNMENT</span>
+    ,
+            and it can be set to one, two, four, or eight bytes.
+            Other pixel store parameters specify different read pointer advancements,
+            both before the first pixel is read
+            and after all
+    <a class="parameter" href="#param-width">width</a>
+    pixels are read.
+            See the
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    reference page for details on these options.
+</div>
+    <div class="para">
+            If a non-zero named buffer object is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target
+            (see
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ) while a block of pixels is
+            specified,
+    <a class="parameter" href="#param-data">data</a>
+    is treated as a byte offset into the buffer object's data store.
+</div>
+    <div class="para">
+            The
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">width</mi>
+                    <mo></mo>
+                    <mi mathvariant="italic">height</mi>
+                </mrow>
+            </math>
+    pixels that are read from memory are
+            each operated on in the same way,
+            based on the values of several parameters specified by
+    <a class="crossref" href="./glPixelTransfer.html">glPixelTransfer</a>
+    and
+    <a class="crossref" href="./glPixelMap.html">glPixelMap</a>
+    .
+            The details of these operations,
+            as well as the target buffer into which the pixels are drawn,
+            are specific to the format of the pixels,
+            as specified by
+    <a class="parameter" href="#param-format">format</a>
+    .
+    <a class="parameter" href="#param-format">format</a>
+    can assume one of 13 symbolic values:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_COLOR_INDEX</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each pixel is a single value,
+                        a color index.
+                        It is converted to fixed-point format,
+                        with an unspecified number of bits to the right of the binary point,
+                        regardless of the memory data type.
+                        Floating-point values convert to true fixed-point values.
+                        Signed and unsigned integer data is converted with all fraction bits
+                        set to 0.
+                        Bitmap data convert to either 0 or 1.
+                    </div>
+    <div class="para">
+                        Each fixed-point index is then shifted left by
+    <span class="constant">GL_INDEX_SHIFT</span>
+    bits
+                        and added to
+    <span class="constant">GL_INDEX_OFFSET</span>
+    .
+                        If
+    <span class="constant">GL_INDEX_SHIFT</span>
+    is negative,
+                        the shift is to the right.
+                        In either case, zero bits fill otherwise unspecified bit locations in the
+                        result.
+</div>
+    <div class="para">
+                        If the GL is in RGBA mode,
+                        the resulting index is converted to an RGBA pixel
+                        with the help of the
+    <span class="constant">GL_PIXEL_MAP_I_TO_R</span>
+    ,
+    <span class="constant">GL_PIXEL_MAP_I_TO_G</span>
+    ,
+    <span class="constant">GL_PIXEL_MAP_I_TO_B</span>
+    ,
+                        and
+    <span class="constant">GL_PIXEL_MAP_I_TO_A</span>
+    tables.
+                        If the GL is in color index mode,
+                        and if
+    <span class="constant">GL_MAP_COLOR</span>
+    is true,
+                        the index is replaced with the value that it references in lookup table
+    <span class="constant">GL_PIXEL_MAP_I_TO_I</span>
+    .
+                        Whether the lookup replacement of the index is done or not,
+                        the integer part of the index is then ANDed with
+    <math>
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mi mathvariant="italic">b</mi>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+    ,
+                        where
+    <math><mi mathvariant="italic">b</mi></math>
+    is the number of bits in a color index buffer.
+</div>
+    <div class="para">
+                        The GL then converts the resulting indices or RGBA colors to fragments
+                        by attaching the current raster position
+    <span class="emphasis">z</span>
+    coordinate and
+                        texture coordinates to each pixel,
+                        then assigning
+    <math><mi mathvariant="italic">x</mi></math>
+    and
+    <math><mi mathvariant="italic">y</mi></math>
+    window coordinates to the
+    <math><mi mathvariant="italic">n</mi></math>
+    th
+                        fragment such that
+    <div class="informalequation">
+    <math>
+                            <mrow>
+                                <msub><mi mathvariant="italic">x</mi>
+                                <mi mathvariant="italic">n</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mrow>
+                                    <msub><mi mathvariant="italic">x</mi>
+                                    <mi mathvariant="italic">r</mi>
+                                    </msub>
+                                    <mo>+</mo>
+                                    <mrow>
+                                        <mi mathvariant="italic">n</mi>
+                                        <mo>%</mo>
+                                        <mi mathvariant="italic">width</mi>
+                                    </mrow>
+                                </mrow>
+                            </mrow>
+                        </math>
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                                <mrow>
+                                    <msub><mi mathvariant="italic">y</mi>
+                                    <mi mathvariant="italic">n</mi>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mrow>
+                                        <msub><mi mathvariant="italic">y</mi>
+                                        <mi mathvariant="italic">r</mi>
+                                        </msub>
+                                        <mo>+</mo>
+                                        <mfenced open="" close="">
+                                            <mfrac>
+                                                <mi mathvariant="italic">n</mi>
+                                                <mi mathvariant="italic">width</mi>
+                                            </mfrac>
+                                        </mfenced>
+                                    </mrow>
+                                </mrow>
+                            </math>
+</div>
+</div>
+    <div class="para">
+                        </div>
+</div>
+    <div class="para">
+                        where
+    <math>
+                            <mfenced open="(" close=")">
+                                <msub><mi mathvariant="italic">x</mi>
+                                <mi mathvariant="italic">r</mi>
+                                </msub>
+                                <msub><mi mathvariant="italic">y</mi>
+                                <mi mathvariant="italic">r</mi>
+                                </msub>
+                            </mfenced>
+                        </math>
+    is the current raster position.
+                        These pixel fragments are then treated just like the fragments generated by
+                        rasterizing points, lines, or polygons.
+                        Texture mapping,
+                        fog,
+                        and all the fragment operations are applied before the fragments are written
+                        to the frame buffer.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_INDEX</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each pixel is a single value,
+                        a stencil index.
+                        It is converted to fixed-point format,
+                        with an unspecified number of bits to the right of the binary point,
+                        regardless of the memory data type.
+                        Floating-point values convert to true fixed-point values.
+                        Signed and unsigned integer data is converted with all fraction bits
+                        set to 0.
+                        Bitmap data convert to either 0 or 1.
+                    </div>
+    <div class="para">
+                        Each fixed-point index is then shifted left by
+    <span class="constant">GL_INDEX_SHIFT</span>
+    bits,
+                        and added to
+    <span class="constant">GL_INDEX_OFFSET</span>
+    .
+                        If
+    <span class="constant">GL_INDEX_SHIFT</span>
+    is negative,
+                        the shift is to the right.
+                        In either case, zero bits fill otherwise unspecified bit locations in the
+                        result.
+                        If
+    <span class="constant">GL_MAP_STENCIL</span>
+    is true,
+                        the index is replaced with the value that it references in lookup table
+    <span class="constant">GL_PIXEL_MAP_S_TO_S</span>
+    .
+                        Whether the lookup replacement of the index is done or not,
+                        the integer part of the index is then ANDed with
+    <math>
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mi mathvariant="italic">b</mi>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+    ,
+                        where
+    <math><mi mathvariant="italic">b</mi></math>
+    is the number of bits in the stencil buffer.
+                        The resulting stencil indices are then written to the stencil buffer
+                        such that the
+    <math><mi mathvariant="italic">n</mi></math>
+    th
+                        index is written to location
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                            <mrow>
+                                <msub><mi mathvariant="italic">x</mi>
+                                <mi mathvariant="italic">n</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mrow>
+                                    <msub><mi mathvariant="italic">x</mi>
+                                    <mi mathvariant="italic">r</mi>
+                                    </msub>
+                                    <mo>+</mo>
+                                    <mrow>
+                                        <mi mathvariant="italic">n</mi>
+                                        <mo>%</mo>
+                                        <mi mathvariant="italic">width</mi>
+                                    </mrow>
+                                </mrow>
+                            </mrow>
+                        </math>
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                                <mrow>
+                                    <msub><mi mathvariant="italic">y</mi>
+                                    <mi mathvariant="italic">n</mi>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mrow>
+                                        <msub><mi mathvariant="italic">y</mi>
+                                        <mi mathvariant="italic">r</mi>
+                                        </msub>
+                                        <mo>+</mo>
+                                        <mfenced open="" close="">
+                                            <mfrac>
+                                                <mi mathvariant="italic">n</mi>
+                                                <mi mathvariant="italic">width</mi>
+                                            </mfrac>
+                                        </mfenced>
+                                    </mrow>
+                                </mrow>
+                            </math>
+</div>
+</div>
+</div>
+    <div class="para">
+                        where
+    <math>
+                            <mfenced open="(" close=")">
+                                <msub><mi mathvariant="italic">x</mi>
+                                <mi mathvariant="italic">r</mi>
+                                </msub>
+                                <msub><mi mathvariant="italic">y</mi>
+                                <mi mathvariant="italic">r</mi>
+                                </msub>
+                            </mfenced>
+                        </math>
+    is the current raster position.
+                        Only the pixel ownership test,
+                        the scissor test,
+                        and the stencil writemask affect these write operations.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each pixel is a single-depth component.
+                        Floating-point data is converted directly to an internal floating-point
+                        format with unspecified precision.
+                        Signed integer data is mapped linearly to the internal floating-point
+                        format such that the most positive representable integer value maps to 1.0,
+                        and the most negative representable value maps to
+    <math>
+                            <mn>-1.0</mn>
+                        </math>
+    .
+                        Unsigned integer data is mapped similarly:
+                        the largest integer value maps to 1.0,
+                        and 0 maps to 0.0.
+                        The resulting floating-point depth value is then multiplied
+                        by
+    <span class="constant">GL_DEPTH_SCALE</span>
+    and added to
+    <span class="constant">GL_DEPTH_BIAS</span>
+    .
+                        The result is clamped to the range
+    <math>
+                            <mfenced open="[" close="]">
+                                <mn>0</mn>
+                                <mn>1</mn>
+                            </mfenced>
+                        </math>
+    .
+</div>
+    <div class="para">
+                        The GL then converts the resulting depth components to fragments
+                        by attaching the current raster position color or color index and
+                        texture coordinates to each pixel,
+                        then assigning
+    <math><mi mathvariant="italic">x</mi></math>
+    and
+    <math><mi mathvariant="italic">y</mi></math>
+    window coordinates to the
+    <math><mi mathvariant="italic">n</mi></math>
+    th
+                        fragment such that
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                            <mrow>
+                                <msub><mi mathvariant="italic">x</mi>
+                                <mi mathvariant="italic">n</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mrow>
+                                    <msub><mi mathvariant="italic">x</mi>
+                                    <mi mathvariant="italic">r</mi>
+                                    </msub>
+                                    <mo>+</mo>
+                                    <mrow>
+                                        <mi mathvariant="italic">n</mi>
+                                        <mo>%</mo>
+                                        <mi mathvariant="italic">width</mi>
+                                    </mrow>
+                                </mrow>
+                            </mrow>
+                        </math>
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                                <mrow>
+                                    <msub><mi mathvariant="italic">y</mi>
+                                    <mi mathvariant="italic">n</mi>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mrow>
+                                        <msub><mi mathvariant="italic">y</mi>
+                                        <mi mathvariant="italic">r</mi>
+                                        </msub>
+                                        <mo>+</mo>
+                                        <mfenced open="" close="">
+                                            <mfrac>
+                                                <mi mathvariant="italic">n</mi>
+                                                <mi mathvariant="italic">width</mi>
+                                            </mfrac>
+                                        </mfenced>
+                                    </mrow>
+                                </mrow>
+                            </math>
+</div>
+</div>
+</div>
+    <div class="para">
+                        where
+    <math>
+                            <mfenced open="(" close=")">
+                                <msub><mi mathvariant="italic">x</mi>
+                                <mi mathvariant="italic">r</mi>
+                                </msub>
+                                <msub><mi mathvariant="italic">y</mi>
+                                <mi mathvariant="italic">r</mi>
+                                </msub>
+                            </mfenced>
+                        </math>
+    is the current raster position.
+                        These pixel fragments are then treated just like the fragments generated by
+                        rasterizing points, lines, or polygons.
+                        Texture mapping,
+                        fog,
+                        and all the fragment operations are applied before the fragments are written
+                        to the frame buffer.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_RGBA</span>
+</dt>
+    <dd class="listitem">
+                </dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BGRA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each pixel is a four-component group: For
+    <span class="constant">GL_RGBA</span>
+    , the red
+                        component is first, followed by green, followed by blue, followed by
+                        alpha; for
+    <span class="constant">GL_BGRA</span>
+    the order is blue, green, red and then alpha.
+                        Floating-point values are converted directly to an internal floating-point
+                        format with unspecified precision.
+                        Signed integer values are mapped linearly to the internal floating-point
+                        format such that the most positive representable integer value maps to 1.0,
+                        and the most negative representable value maps to
+    <math>
+                            <mn>-1.0</mn>
+                        </math>
+    .
+                        (Note that
+                        this mapping does not convert 0 precisely to 0.0.)
+                        Unsigned integer data is mapped similarly:
+                        The largest integer value maps to 1.0,
+                        and 0 maps to 0.0.
+                        The resulting floating-point color values are then multiplied
+                        by
+    <span class="constant">GL_c_SCALE</span>
+    and added to
+    <span class="constant">GL_c_BIAS</span>
+    ,
+                        where
+    <span class="emphasis">c</span>
+    is RED, GREEN, BLUE, and ALPHA
+                        for the respective color components.
+                        The results are clamped to the range
+    <math>
+                            <mfenced open="[" close="]">
+                                <mn>0</mn>
+                                <mn>1</mn>
+                            </mfenced>
+                        </math>
+    .
+</div>
+    <div class="para">
+                        If
+    <span class="constant">GL_MAP_COLOR</span>
+    is true,
+                        each color component is scaled by the size of lookup table
+    <span class="constant">GL_PIXEL_MAP_c_TO_c</span>
+    ,
+                        then replaced by the value that it references in that table.
+    <span class="emphasis">c</span>
+    is R, G, B, or A respectively.
+</div>
+    <div class="para">
+                        The GL then converts the resulting RGBA colors to fragments
+                        by attaching the current raster position
+    <span class="emphasis">z</span>
+    coordinate and
+                        texture coordinates to each pixel,
+                        then assigning
+    <math><mi mathvariant="italic">x</mi></math>
+    and
+    <math><mi mathvariant="italic">y</mi></math>
+    window coordinates to the
+    <math><mi mathvariant="italic">n</mi></math>
+    th
+                        fragment such that
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                            <mrow>
+                                <msub><mi mathvariant="italic">x</mi>
+                                <mi mathvariant="italic">n</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mrow>
+                                    <msub><mi mathvariant="italic">x</mi>
+                                    <mi mathvariant="italic">r</mi>
+                                    </msub>
+                                    <mo>+</mo>
+                                    <mrow>
+                                        <mi mathvariant="italic">n</mi>
+                                        <mo>%</mo>
+                                        <mi mathvariant="italic">width</mi>
+                                    </mrow>
+                                </mrow>
+                            </mrow>
+                        </math>
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                                <mrow>
+                                    <msub><mi mathvariant="italic">y</mi>
+                                    <mi mathvariant="italic">n</mi>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mrow>
+                                        <msub><mi mathvariant="italic">y</mi>
+                                        <mi mathvariant="italic">r</mi>
+                                        </msub>
+                                        <mo>+</mo>
+                                        <mfenced open="" close="">
+                                            <mfrac>
+                                                <mi mathvariant="italic">n</mi>
+                                                <mi mathvariant="italic">width</mi>
+                                            </mfrac>
+                                        </mfenced>
+                                    </mrow>
+                                </mrow>
+                            </math>
+</div>
+</div>
+</div>
+    <div class="para">
+                        where
+    <math>
+                            <mfenced open="(" close=")">
+                                <msub><mi mathvariant="italic">x</mi>
+                                <mi mathvariant="italic">r</mi>
+                                </msub>
+                                <msub><mi mathvariant="italic">y</mi>
+                                <mi mathvariant="italic">r</mi>
+                                </msub>
+                            </mfenced>
+                        </math>
+    is the current raster position.
+                        These pixel fragments are then treated just like the fragments generated by
+                        rasterizing points, lines, or polygons.
+                        Texture mapping,
+                        fog,
+                        and all the fragment operations are applied before the fragments are written
+                        to the frame buffer.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_RED</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each pixel is a single red component.
+                        This component is converted to the internal floating-point format in
+                        the same way the red component of an RGBA pixel is. It is
+                        then converted to an RGBA pixel with green and blue set to 0,
+                        and alpha set to 1.
+                        After this conversion, the pixel is treated as if it had been read
+                        as an RGBA pixel.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_GREEN</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each pixel is a single green component.
+                        This component is converted to the internal floating-point format in
+                        the same way the green component of an RGBA pixel is.
+                        It is then converted to an RGBA pixel with red and blue set to 0,
+                        and alpha set to 1.
+                        After this conversion, the pixel is treated as if it had been read
+                        as an RGBA pixel.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BLUE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each pixel is a single blue component.
+                        This component is converted to the internal floating-point format in
+                        the same way the blue component of an RGBA pixel is.
+                        It is then converted to an RGBA pixel with red and green set to 0,
+                        and alpha set to 1.
+                        After this conversion, the pixel is treated as if it had been read
+                        as an RGBA pixel.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_ALPHA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each pixel is a single alpha component.
+                        This component is converted to the internal floating-point format in
+                        the same way the alpha component of an RGBA pixel is.
+                        It is then converted to an RGBA pixel with red, green, and blue set to 0.
+                        After this conversion, the pixel is treated as if it had been read
+                        as an RGBA pixel.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_RGB</span>
+</dt>
+    <dd class="listitem">
+                </dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_BGR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each pixel is a three-component group:
+                        red first, followed by green, followed by blue; for
+    <span class="constant">GL_BGR</span>
+    , the
+                        first component is blue, followed by green and then red.
+                        Each component is converted to the internal floating-point format in
+                        the same way the red, green, and blue components of an RGBA pixel are.
+                        The color triple is converted to an RGBA pixel with alpha set to 1.
+                        After this conversion, the pixel is treated as if it had been read
+                        as an RGBA pixel.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LUMINANCE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each pixel is a single luminance component.
+                        This component is converted to the internal floating-point format in
+                        the same way the red component of an RGBA pixel is.
+                        It is then converted to an RGBA pixel with red, green, and blue set to the
+                        converted luminance value,
+                        and alpha set to 1.
+                        After this conversion, the pixel is treated as if it had been read
+                        as an RGBA pixel.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LUMINANCE_ALPHA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Each pixel is a two-component group:
+                        luminance first, followed by alpha.
+                        The two components are converted to the internal floating-point format in
+                        the same way the red component of an RGBA pixel is.
+                        They are then converted to an RGBA pixel with red, green, and blue set to the
+                        converted luminance value,
+                        and alpha set to the converted alpha value.
+                        After this conversion, the pixel is treated as if it had been read
+                        as an RGBA pixel.
+                    </div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+                        The following table summarizes the meaning of the valid constants for the
+    <span class="emphasis">type</span>
+    parameter:
+</div>
+    <div class="para">
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>
+    <span class="emphasis">
+                                        Type
+                                        </span>
+</th><th>
+    <span class="emphasis">
+                                        Corresponding Type
+                                        </span>
+</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+</td><td>
+                                        unsigned 8-bit integer
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_BYTE</span>
+</td><td>
+                                        signed 8-bit integer
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_BITMAP</span>
+</td><td>
+                                        single bits in unsigned 8-bit integers
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+</td><td>
+                                        unsigned 16-bit integer
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SHORT</span>
+</td><td>
+                                        signed 16-bit integer
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT</span>
+</td><td>
+                                        unsigned 32-bit integer
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT</span>
+</td><td>
+                                        32-bit integer
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT</span>
+</td><td>
+                                        single-precision floating-point
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+</td><td>
+                                        unsigned 8-bit integer
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+</td><td>
+                                        unsigned 8-bit integer with reversed component ordering
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+</td><td>
+                                        unsigned 16-bit integer
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+</td><td>
+                                        unsigned 16-bit integer with reversed component ordering
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+</td><td>
+                                        unsigned 16-bit integer
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+</td><td>
+                                        unsigned 16-bit integer with reversed component ordering
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+</td><td>
+                                        unsigned 16-bit integer
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+</td><td>
+                                        unsigned 16-bit integer with reversed component ordering
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+</td><td>
+                                        unsigned 32-bit integer
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+</td><td>
+                                        unsigned 32-bit integer with reversed component ordering
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+</td><td>
+                                        unsigned 32-bit integer
+                                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+</td><td>
+                                        unsigned 32-bit integer with reversed component ordering
+                                        </td>
+                </tr>
+    </tbody></table>
+</div>
+    <div class="para">
+                    </div>
+    <div class="para">
+            The rasterization described so far assumes pixel zoom factors of 1.
+            If
+    <a class="crossref" href="./glPixelZoom.html">glPixelZoom</a>
+    is used to change the
+    <math><mi mathvariant="italic">x</mi></math>
+    and
+    <math><mi mathvariant="italic">y</mi></math>
+    pixel zoom factors,
+            pixels are converted to fragments as follows.
+            If
+    <math>
+                <mfenced open="(" close=")">
+                    <msub><mi mathvariant="italic">x</mi>
+                    <mi mathvariant="italic">r</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">y</mi>
+                    <mi mathvariant="italic">r</mi>
+                    </msub>
+                </mfenced>
+            </math>
+    is the current raster position,
+            and a given pixel is in the
+    <math><mi mathvariant="italic">n</mi></math>
+    th
+            column and
+    <math><mi mathvariant="italic">m</mi></math>
+    th
+            row
+            of the pixel rectangle,
+            then fragments are generated for pixels whose centers are in the rectangle
+            with corners at
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                <mfenced open="(" close=")">
+                    <mrow>
+                        <msub><mi mathvariant="italic">x</mi>
+                        <mi mathvariant="italic">r</mi>
+                        </msub>
+                        <mo>+</mo>
+                        <mfenced open="" close="">
+                            <msub><mi mathvariant="italic">zoom</mi>
+                            <mi mathvariant="italic">x</mi>
+                            </msub>
+                        </mfenced>
+                        <mo></mo>
+                        <mi mathvariant="italic">n</mi>
+                    </mrow>
+                    <mrow>
+                        <msub><mi mathvariant="italic">y</mi>
+                        <mi mathvariant="italic">r</mi>
+                        </msub>
+                        <mo>+</mo>
+                        <mfenced open="" close="">
+                            <msub><mi mathvariant="italic">zoom</mi>
+                            <mi mathvariant="italic">y</mi>
+                            </msub>
+                        </mfenced>
+                        <mo></mo>
+                        <mi mathvariant="italic">m</mi>
+                    </mrow>
+                </mfenced>
+            </math>
+</div>
+    <div class="para">
+    <div class="informalequation">
+    <math>
+                    <mfenced open="(" close=")">
+                        <mrow>
+                            <msub><mi mathvariant="italic">x</mi>
+                            <mi mathvariant="italic">r</mi>
+                            </msub>
+                            <mo>+</mo>
+                            <mrow>
+                                <mfenced open="" close="">
+                                    <msub><mi mathvariant="italic">zoom</mi>
+                                    <mi mathvariant="italic">x</mi>
+                                    </msub>
+                                </mfenced>
+                                <mo></mo>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <mi mathvariant="italic">n</mi>
+                                        <mo>+</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                            </mrow>
+                        </mrow>
+                        <mrow>
+                            <msub><mi mathvariant="italic">y</mi>
+                            <mi mathvariant="italic">r</mi>
+                            </msub>
+                            <mo>+</mo>
+                            <mrow>
+                                <mfenced open="" close="">
+                                    <msub><mi mathvariant="italic">zoom</mi>
+                                    <mi mathvariant="italic">y</mi>
+                                    </msub>
+                                </mfenced>
+                                <mo></mo>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <mi mathvariant="italic">m</mi>
+                                        <mo>+</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                            </mrow>
+                        </mrow>
+                    </mfenced>
+                </math>
+</div>
+</div>
+</div>
+    <div class="para">
+            where
+    <math>
+                <msub><mi mathvariant="italic">zoom</mi>
+                <mi mathvariant="italic">x</mi>
+                </msub>
+            </math>
+    is the value of
+    <span class="constant">GL_ZOOM_X</span>
+    and
+    <math>
+                <msub><mi mathvariant="italic">zoom</mi>
+                <mi mathvariant="italic">y</mi>
+                </msub>
+            </math>
+    is the value of
+    <span class="constant">GL_ZOOM_Y</span>
+    .
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <span class="constant">GL_BGR</span>
+    and
+    <span class="constant">GL_BGRA</span>
+    are only valid for
+    <a class="parameter" href="#param-format">format</a>
+    if the GL
+            version is 1.2 or greater.
+</div>
+    <div class="para">
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+    , and
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+    are only valid for
+    <a class="parameter" href="#param-type">type</a>
+    if the
+            GL version is 1.2 or greater.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    or
+    <a class="parameter" href="#param-type">type</a>
+    is not one of
+            the accepted values.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is
+    <span class="constant">GL_BITMAP</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not either
+    <span class="constant">GL_COLOR_INDEX</span>
+    or
+    <span class="constant">GL_STENCIL_INDEX</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if either
+    <a class="parameter" href="#param-width">width</a>
+    or
+    <a class="parameter" href="#param-height">height</a>
+    is negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    is
+    <span class="constant">GL_STENCIL_INDEX</span>
+    and there is no stencil buffer.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    is
+    <span class="constant">GL_RED</span>
+    ,
+    <span class="constant">GL_GREEN</span>
+    ,
+    <span class="constant">GL_BLUE</span>
+    ,
+    <span class="constant">GL_ALPHA</span>
+    ,
+    <span class="constant">GL_RGB</span>
+    ,
+    <span class="constant">GL_RGBA</span>
+    ,
+    <span class="constant">GL_BGR</span>
+    ,
+    <span class="constant">GL_BGRA</span>
+    ,
+    <span class="constant">GL_LUMINANCE</span>
+    ,
+            or
+    <span class="constant">GL_LUMINANCE_ALPHA</span>
+    ,
+            and the GL is in color index mode.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    is one of
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+    , or
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GL_RGB</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    is one of
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+    , or
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is neither
+    <span class="constant">GL_RGBA</span>
+    nor
+    <span class="constant">GL_BGRA</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target and the buffer object's data store is currently mapped.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target and the data would be unpacked from the buffer
+            object such that the memory reads required would exceed the data store size.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER</span>
+    target and
+    <a class="parameter" href="#param-data">data</a>
+    is not evenly divisible
+            into the number of bytes needed to store in memory a datum indicated by
+    <a class="parameter" href="#param-type">type</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glDrawPixels.html">glDrawPixels</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_CURRENT_RASTER_POSITION</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_CURRENT_RASTER_POSITION_VALID</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_UNPACK_BUFFER_BINDING</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glAlphaFunc.html">glAlphaFunc</a>
+    ,
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    ,
+    <a class="crossref" href="./glCopyPixels.html">glCopyPixels</a>
+    ,
+    <a class="crossref" href="./glDepthFunc.html">glDepthFunc</a>
+    ,
+    <a class="crossref" href="./glLogicOp.html">glLogicOp</a>
+    ,
+    <a class="crossref" href="./glPixelMap.html">glPixelMap</a>
+    ,
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    ,
+    <a class="crossref" href="./glPixelTransfer.html">glPixelTransfer</a>
+    ,
+    <a class="crossref" href="./glPixelZoom.html">glPixelZoom</a>
+    ,
+    <a class="crossref" href="./glRasterPos.html">glRasterPos</a>
+    ,
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    ,
+    <a class="crossref" href="./glScissor.html">glScissor</a>
+    ,
+    <a class="crossref" href="./glStencilFunc.html">glStencilFunc</a>
+    ,
+    <a class="crossref" href="./glWindowPos.html">glWindowPos</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glDrawPixels</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/gldrawpixelssynth.py">tests/gldrawpixelssynth.py</a>
+    Lines: <span class="sample-lines">56</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/getteximage.py">tests/getteximage.py</a>
+    Lines: <span class="sample-lines">32</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glhistogram.py">tests/glhistogram.py</a>
+    Lines: <span class="sample-lines">62</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/saveimage.py">tests/saveimage.py</a>
+    Lines: <span class="sample-lines">26</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/gldrawpixels.py">tests/gldrawpixels.py</a>
+    Lines: <span class="sample-lines">76</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/arbwindowpos.py">tests/arbwindowpos.py</a>
+    Lines: <span class="sample-lines">98, 108</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/wx_font.py">tests/wx_font.py</a>
+    Lines: <span class="sample-lines">46</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/text/wxfont.py">OpenGLContext/scenegraph/text/wxfont.py</a>
+    Lines: <span class="sample-lines">96</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/fbo.py">pymt/graphx/fbo.py</a>
+    Lines: <span class="sample-lines">21, 284</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/axes.py">core/axes.py</a>
+    Lines: <span class="sample-lines">903</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

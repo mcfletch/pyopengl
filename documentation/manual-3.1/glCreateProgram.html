@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glCreateProgram : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glCreateProgram</h1>
+</header>
+<main class="content">
+    <section class="purpose">Creates a program object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glCreateProgram"></a>
+    <span class="c-function">glCreateProgram</span>(<span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-void" class="parameter">void</a>
+    </span>
+</span>)-&gt; GLuint
+</div>
+                <div class="py-signature">
+    <a name="py-glCreateProgram"></a>
+    <span class="py-function">glCreateProgram</span>( <span class="parameter-list">
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_uint'&gt;</span>
+</div>
+        </div>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glCreateProgram.html">glCreateProgram</a>
+    creates an empty
+        program object and returns a non-zero value by which it can be
+        referenced. A program object is an object to which shader
+        objects can be attached. This provides a mechanism to specify
+        the shader objects that will be linked to create a program. It
+        also provides a means for checking the compatibility of the
+        shaders that will be used to create a program (for instance,
+        checking the compatibility between a vertex shader and a
+        fragment shader). When no longer needed as part of a program
+        object, shader objects can be detached.
+</div>
+    <div class="para">One or more executables are created in a program object by
+        successfully attaching shader objects to it with
+    <a class="crossref" href="./glAttachShader.html">glAttachShader</a>
+    ,
+        successfully compiling the shader objects with
+    <a class="crossref" href="./glCompileShader.html">glCompileShader</a>
+    ,
+        and successfully linking the program object with
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    .
+        These executables are made part of current state when
+    <a class="crossref" href="./glUseProgram.html">glUseProgram</a>
+    is called. Program objects can be deleted by calling
+    <a class="crossref" href="./glDeleteProgram.html">glDeleteProgram</a>
+    .
+        The memory associated with the program object will be deleted
+        when it is no longer part of current rendering state for any
+        context.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">Like buffer and texture objects, the name space for
+        program objects may be shared across a set of contexts, as long
+        as the server sides of the contexts share the same address
+        space. If the name space is shared across contexts, any attached
+        objects and the data associated with those attached objects are
+        shared as well.</div>
+    <div class="para">Applications are responsible for providing the
+        synchronization across API calls when objects are accessed from
+        different execution threads.</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">This function returns 0 if an error occurs creating the program object.</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with the argument
+    <span class="constant">GL_CURRENT_PROGRAM</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetActiveAttrib.html">glGetActiveAttrib</a>
+    with a valid program object and the index of an active attribute
+        variable
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetActiveUniform.html">glGetActiveUniform</a>
+    with a valid program object and the index of an active uniform
+        variable
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetAttachedShaders.html">glGetAttachedShaders</a>
+    with a valid program object
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetAttribLocation.html">glGetAttribLocation</a>
+    with a valid program object and the name of an attribute
+        variable
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    with a valid program object and the parameter to be queried
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetProgramInfoLog.html">glGetProgramInfoLog</a>
+    with a valid program object
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetUniform.html">glGetUniform</a>
+    with a valid program object and the location of a uniform
+        variable
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetUniformLocation.html">glGetUniformLocation</a>
+    with a valid program object and the name of a uniform
+        variable
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsProgram.html">glIsProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glCreateProgram.html">glCreateProgram</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glAttachShader.html">glAttachShader</a>
+    ,
+    <a class="crossref" href="./glBindAttribLocation.html">glBindAttribLocation</a>
+    ,
+    <a class="crossref" href="./glCreateShader.html">glCreateShader</a>
+    ,
+    <a class="crossref" href="./glDeleteProgram.html">glDeleteProgram</a>
+    ,
+    <a class="crossref" href="./glDetachShader.html">glDetachShader</a>
+    ,
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    ,
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    ,
+    <a class="crossref" href="./glUseProgram.html">glUseProgram</a>
+    ,
+    <a class="crossref" href="./glValidateProgram.html">glValidateProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2005 3Dlabs Inc. Ltd.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glCreateProgram</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/shaders.py">OpenGLContext/scenegraph/shaders.py</a>
+    Lines: <span class="sample-lines">479</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/shader.py">pymt/graphx/shader.py</a>
+    Lines: <span class="sample-lines">10, 30</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">99</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">121</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">85</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">93</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">113</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">99</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

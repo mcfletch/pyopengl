@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutCopyColormap : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutCopyColormap</h1>
+</header>
+<main class="content">
+    <section class="purpose">copies the logical colormap for the layer in use from a specified window to the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutCopyColormap"></a>
+    <span class="c-function">glutCopyColormap</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-win" class="parameter">win</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutCopyColormap"></a>
+    <span class="py-function">glutCopyColormap</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-window" class="parameter">window</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutCopyColormap( c_int(window) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-win"></a>
+                        win
+                    </th>
+                    <td>
+    <div class="simpara">
+						The identifier of the window to copy the logical colormap from.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutCopyColormap.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutCopyColormap.html">glutCopyColormap</a>
+    copies (lazily if possible to promote sharing) the logical colormap from a
+			specified window to the current window's layer in use. The copy will be from the normal plane to the normal plane; or
+			from the overlay to the overlay (never across different layers). Once a colormap has been copied, avoid setting cells
+			in the colormap with
+    <a class="function" href="./glutSetColor.html">glutSetColor</a>
+    since that will force an actual copy of the
+			colormap if it was previously copied by reference.
+    <a class="function" href="./glutCopyColormap.html">glutCopyColormap</a>
+    should only be called when
+			both the current window and the win window are color index windows.
+</div>
+    </section><section class="section" id="glutCopyColormap.3GLUT-example">
+    <h2 class="title">Example</h2>
+    <div class="para">
+			Here is an example of how to create two color index GLUT windows with their colormaps loaded identically and so that
+			the windows are likely to share the same colormap:
+		</div>
+    <div class="programlisting">int win1, win2;
+glutInitDisplayMode(GLUT_INDEX);
+win1 = glutCreateWindow("first color index win");
+glutSetColor(0, 0.0, 0.0, 0.0); /* black */
+glutSetColor(1, 0.5, 0.5, 0.5); /* gray */
+glutSetColor(2, 1.0, 1.0, 1.0); /* black */
+glutSetColor(3, 1.0, 0.0, 0.0); /* red */
+win2 = glutCreateWindow("second color index win");
+glutCopyColormap(win1);</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutSetColor.html">glutSetColor</a>
+            <a class="crossref" href="./glutGetColor.html">glutGetColor</a>
+            <a class="crossref" href="./glutCreateWindow.html">glutCreateWindow</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

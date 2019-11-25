@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glBindFragDataLocationIndexed : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glBindFragDataLocationIndexed</h1>
+</header>
+<main class="content">
+    <section class="purpose">bind a user-defined varying out variable to a fragment shader color number and index</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glBindFragDataLocationIndexed"></a>
+    <span class="c-function">glBindFragDataLocationIndexed</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-colorNumber" class="parameter">colorNumber</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        const char *(
+            <a href="#param-name" class="parameter">name</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glBindFragDataLocationIndexed"></a>
+    <span class="py-function">glBindFragDataLocationIndexed</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-colorNumber" class="parameter">colorNumber</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-name" class="parameter">name</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">
+                    The name of the program containing varying out variable whose binding to modify
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-colorNumber"></a>
+                        colorNumber
+                    </th>
+                    <td>
+    <div class="para">
+                    The color number to bind the user-defined varying out variable to
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">
+                    The index of the color input to bind the user-defined varying out variable to
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="para">
+                    The name of the user-defined varying out variable whose binding to modify
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glBindFragDataLocationIndexed.html">glBindFragDataLocationIndexed</a>
+    specifies that the varying out variable
+    <a class="parameter" href="#param-name">name</a>
+    in
+    <a class="parameter" href="#param-program">program</a>
+    should be bound to fragment color
+    <a class="parameter" href="#param-colorNumber">colorNumber</a>
+    when the program is next
+            linked.
+    <a class="parameter" href="#param-index">index</a>
+    may be zero or one to specify that the color be used as either the first or second color
+            input to the blend equation, respectively.
+</div>
+    <div class="para">
+            The bindings specified by
+    <a class="function" href="./glBindFragDataLocationIndexed.html">glBindFragDataLocationIndexed</a>
+    have no effect until
+    <a class="parameter" href="#param-program">program</a>
+    is next linked. Bindings may be specified at any time after
+    <a class="parameter" href="#param-program">program</a>
+    has been created. Specifically,
+            they may be specified before shader objects are attached to the program. Therefore, any name may be specified in
+    <a class="parameter" href="#param-name">name</a>
+    ,
+            including a name that is never used as a varying out variable in any fragment shader object. Names beginning with
+    <span class="constant">gl_</span>
+    are
+            reserved by the GL.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-name">name</a>
+    was bound previously, its assigned binding is replaced with
+    <a class="parameter" href="#param-colorNumber">colorNumber</a>
+    and
+    <a class="parameter" href="#param-index">index</a>
+    .
+    <a class="parameter" href="#param-name">name</a>
+    must be a null-terminated string.
+    <a class="parameter" href="#param-index">index</a>
+    must be less than or equal to one,
+            and
+    <a class="parameter" href="#param-colorNumber">colorNumber</a>
+    must be less than the value of
+    <span class="constant">GL_MAX_DRAW_BUFFERS</span>
+    if
+    <a class="parameter" href="#param-index">index</a>
+    is zero, and less than the value of
+    <span class="constant">GL_MAX_DUAL_SOURCE_DRAW_BUFFERS</span>
+    if index is greater than or equal to one.
+</div>
+    <div class="para">
+            In addition to the errors generated by
+    <a class="function" href="./glBindFragDataLocationIndexed.html">glBindFragDataLocationIndexed</a>
+    , the
+            program
+    <a class="parameter" href="#param-program">program</a>
+    will fail to link if:
+    <div class="itemizedlist">
+    <dd class="listitem">
+    <div class="para">
+                        The number of active outputs is greater than the value
+    <span class="constant">GL_MAX_DRAW_BUFFERS</span>
+    .
+</div>
+</dd>
+    <dd class="listitem">
+    <div class="para">
+                        More than one varying out variable is bound to the same color number.
+                    </div>
+</dd>
+</div>
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            Varying out varyings may have locations assigned explicitly in the shader text using a
+    <div class="code">location</div>
+    layout qualifier. If a shader statically assigns a location to a varying out variable in the shader text,
+            that location is used and any location assigned with
+    <a class="function" href="./glBindFragDataLocation.html">glBindFragDataLocation</a>
+    is ignored.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-colorNumber">colorNumber</a>
+    is greater than or equal to
+    <span class="constant">GL_MAX_DRAW_BUFFERS</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-colorNumber">colorNumber</a>
+    is greater than or equal to
+    <span class="constant">GL_MAX_DUAL_SOURCE_DRAW_BUFFERS</span>
+    and
+    <a class="parameter" href="#param-index">index</a>
+    is greater than or equal to one.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-index">index</a>
+    is greater than one.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-name">name</a>
+    starts with the reserved
+    <span class="constant">gl_</span>
+    prefix.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    program
+    is not the name of a program object.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetFragDataLocation.html">glGetFragDataLocation</a>
+    with a valid program object
+            and the name of a user-defined varying out variable
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetFragDataIndex.html">glGetFragDataIndex</a>
+    with a valid program object
+            and the name of a user-defined varying out variable
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glBindFragDataLocationIndexed.html">glBindFragDataLocationIndexed</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glCreateProgram.html">glCreateProgram</a>
+    ,
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    <a class="crossref" href="./glGetFragDataLocation.html">glGetFragDataLocation</a>
+    ,
+    <a class="crossref" href="./glGetFragDataIndex.html">glGetFragDataIndex</a>
+    <a class="crossref" href="./glBindFragDataLocation.html">glBindFragDataLocation</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

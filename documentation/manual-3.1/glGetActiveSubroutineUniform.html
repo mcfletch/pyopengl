@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetActiveSubroutineUniform : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetActiveSubroutineUniform</h1>
+</header>
+<main class="content">
+    <section class="purpose">query a property of an active shader subroutine uniform</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetActiveSubroutineUniform"></a>
+    <span class="c-function">glGetActiveSubroutineUniform</span>(<span class="parameter-list">
+</span>)-&gt;
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetActiveSubroutineUniformiv"></a>
+    <span class="c-function">glGetActiveSubroutineUniformiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-shadertype" class="parameter">shadertype</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-values" class="parameter">values</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetActiveSubroutineUniformiv"></a>
+    <span class="py-function">glGetActiveSubroutineUniformiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-shadertype" class="parameter">shadertype</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-values" class="parameter">values</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the program containing the subroutine.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-shadertype"></a>
+                        shadertype
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the shader stage from which to query for the subroutine parameter.
+    <a class="parameter" href="#param-shadertype">shadertype</a>
+    must be one of
+    <span class="constant">GL_VERTEX_SHADER</span>
+    ,
+    <span class="constant">GL_TESS_CONTROL_SHADER</span>
+    ,
+    <span class="constant">GL_TESS_EVALUATION_SHADER</span>
+    ,
+    <span class="constant">GL_GEOMETRY_SHADER</span>
+    or
+    <span class="constant">GL_FRAGMENT_SHADER</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the index of the shader subroutine uniform.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the parameter of the shader subroutine uniform to query.
+    <a class="parameter" href="#param-pname">pname</a>
+    must be
+    <span class="constant">GL_NUM_COMPATIBLE_SUBROUTINES</span>
+    ,
+    <span class="constant">GL_COMPATIBLE_SUBROUTINES</span>
+    ,
+    <span class="constant">GL_UNIFORM_SIZE</span>
+    or
+    <span class="constant">GL_UNIFORM_NAME_LENGTH</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-values"></a>
+                        values
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the address of a into which the queried value or values will be placed.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetActiveSubroutineUniform.html">glGetActiveSubroutineUniform</a>
+    queries a parameter of an active shader subroutine uniform.
+    <a class="parameter" href="#param-program">program</a>
+    contains the name of the program containing the uniform.
+    <a class="parameter" href="#param-shadertype">shadertype</a>
+    specifies the stage which the uniform location, given by
+    <a class="parameter" href="#param-index">index</a>
+    , is valid.
+    <a class="parameter" href="#param-index">index</a>
+    must be between zero and the value of
+    <span class="constant">GL_ACTIVE_SUBROUTINE_UNIFORMS</span>
+    minus one for the
+            shader stage.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_NUM_COMPATIBLE_SUBROUTINES</span>
+    , a single integer indicating the number
+            of subroutines that can be assigned to the uniform is returned in
+    <a class="parameter" href="#param-values">values</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_COMPATIBLE_SUBROUTINES</span>
+    , an array of integers is returned in
+    <a class="parameter" href="#param-values">values</a>
+    , with each integer specifying the index of an active subroutine that can be assigned to
+            the selected subroutine uniform. The number of integers returned is the same as the value returned for
+    <span class="constant">GL_NUM_COMPATIBLE_SUBROUTINES</span>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_UNIFORM_SIZE</span>
+    , a single integer is returned in
+    <a class="parameter" href="#param-values">values</a>
+    .
+            If the selected subroutine uniform is an array, the  declared size of the array is returned; otherwise, one is returned.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_UNIFORM_NAME_LENGTH</span>
+    , a single integer specifying the length of
+            the subroutine uniform name (including the terminating null character) is returned in
+    <a class="parameter" href="#param-values">values</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-shadertype">shadertype</a>
+    or
+    <a class="parameter" href="#param-pname">pname</a>
+    is not one of the accepted values.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-index">index</a>
+    is greater than or equal to
+            the value of
+    <span class="constant">GL_ACTIVE_SUBROUTINES</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not the name of an
+            existing program object.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetProgramStage.html">glGetProgramStage</a>
+    with argument
+    <span class="constant">GL_ACTIVE_SUBROUTINE_UNIFORMS</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetActiveSubroutineUniform.html#c-glGetActiveSubroutineUniformiv">glGetActiveSubroutineUniformiv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetSubroutineIndex.html">glGetSubroutineIndex</a>
+    ,
+    <a class="crossref" href="./glGetActiveSubroutineUniformName.html">glGetActiveSubroutineUniformName</a>
+    ,
+    <a class="crossref" href="./glGetProgramStage.html">glGetProgramStage</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

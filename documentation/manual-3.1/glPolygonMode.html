@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glPolygonMode : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glPolygonMode</h1>
+</header>
+<main class="content">
+    <section class="purpose">select a polygon rasterization mode</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glPolygonMode"></a>
+    <span class="c-function">glPolygonMode</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-face" class="parameter">face</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-mode" class="parameter">mode</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glPolygonMode"></a>
+    <span class="py-function">glPolygonMode</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-face" class="parameter">face</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-mode" class="parameter">mode</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-face"></a>
+                        face
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the polygons that
+    <a class="parameter" href="#param-mode">mode</a>
+    applies to.
+                    Must be
+    <span class="constant">GL_FRONT_AND_BACK</span>
+    for front- and back-facing polygons.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-mode"></a>
+                        mode
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies how polygons will be rasterized.
+                    Accepted values are
+    <span class="constant">GL_POINT</span>
+    ,
+    <span class="constant">GL_LINE</span>
+    , and
+    <span class="constant">GL_FILL</span>
+    .
+                    The initial value is
+    <span class="constant">GL_FILL</span>
+    for both front- and back-facing polygons.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glPolygonMode.html">glPolygonMode</a>
+    controls the interpretation of polygons for rasterization.
+    <a class="parameter" href="#param-face">face</a>
+    describes which polygons
+    <a class="parameter" href="#param-mode">mode</a>
+    applies to:
+            both front and back-facing polygons (
+    <span class="constant">GL_FRONT_AND_BACK</span>
+    ).
+            The polygon mode affects only the final rasterization of polygons.
+            In particular,
+            a polygon's vertices are lit and
+            the polygon is clipped and possibly culled before these modes are applied.
+</div>
+    <div class="para">
+            Three modes are defined and can be specified in
+    <a class="parameter" href="#param-mode">mode</a>
+    :
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_POINT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Polygon vertices that are marked as the start of a boundary edge
+                        are drawn as points.
+                        Point attributes such as
+    <span class="constant">GL_POINT_SIZE</span>
+    and
+    <span class="constant">GL_POINT_SMOOTH</span>
+    control
+                        the rasterization of the points.
+                        Polygon rasterization attributes other than
+    <span class="constant">GL_POLYGON_MODE</span>
+    have no effect.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_LINE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Boundary edges of the polygon are drawn as line segments.
+                        Line attributes such as
+    <span class="constant">GL_LINE_WIDTH</span>
+    and
+    <span class="constant">GL_LINE_SMOOTH</span>
+    control
+                        the rasterization of the lines.
+                        Polygon rasterization attributes other than
+    <span class="constant">GL_POLYGON_MODE</span>
+    have no effect.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_FILL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The interior of the polygon is filled.
+                        Polygon attributes such as
+    <span class="constant">GL_POLYGON_SMOOTH</span>
+    control the rasterization of the polygon.
+</div>
+</dd>
+</div>
+</dl>
+    </section><section class="section">
+    <h2 class="title">Examples</h2>
+    <div class="para">
+            To draw a surface with outlined polygons,
+            call
+    <div class="programlisting">
+glPolygonMode(
+    <span class="constant">GL_FRONT_AND_BACK</span>
+    ,
+    <span class="constant">GL_LINE</span>
+    );
+</div>
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            Vertices are marked as boundary or nonboundary with an edge flag.
+            Edge flags are generated internally by the GL when it decomposes
+            triangle stips and fans.
+        </div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if either
+    <a class="parameter" href="#param-face">face</a>
+    or
+    <a class="parameter" href="#param-mode">mode</a>
+    is not
+            an accepted value.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_POLYGON_MODE</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glPolygonMode.html">glPolygonMode</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glLineWidth.html">glLineWidth</a>
+    ,
+    <a class="crossref" href="./glPointSize.html">glPointSize</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glPolygonMode</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson11.py">PyOpenGL-Demo/NeHe/lesson11.py</a>
+    Lines: <span class="sample-lines">40, 41</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/MoreStimuli.py">VisionEgg/MoreStimuli.py</a>
+    Lines: <span class="sample-lines">164, 173, 373, 386, 511, 524</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} Pyggel</span>
+    <a href="https://github.com/philippTheCat/pyggel/blob/master/pyggel/misc.py">pyggel/misc.py</a>
+    Lines: <span class="sample-lines">30, 41</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">109, 133</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">109, 133</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/Progress3D.py">Sketches/CL/Topology3D/THF/Sketches/Progress3D.py</a>
+    Lines: <span class="sample-lines">147, 172</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/ProgressBar.py">Sketches/CL/Topology3D/THF/Sketches/playground/ProgressBar.py</a>
+    Lines: <span class="sample-lines">100, 125</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/Progress3D.py">Sketches/THF/3D/Progress3D.py</a>
+    Lines: <span class="sample-lines">147, 172</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/ProgressBar.py">Sketches/THF/3D/playground/ProgressBar.py</a>
+    Lines: <span class="sample-lines">100, 125</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/ProgressBar.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">109, 133</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/ProgressBar.py</a>
+    Lines: <span class="sample-lines">109, 133</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/wobjects/polygonalModeling.py">wobjects/polygonalModeling.py</a>
+    Lines: <span class="sample-lines">904, 908, 917, 922</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glFramebufferRenderbuffer : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glFramebufferRenderbuffer</h1>
+</header>
+<main class="content">
+    <section class="purpose">attach a renderbuffer as a logical buffer of a framebuffer object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glFramebufferRenderbuffer"></a>
+    <span class="c-function">glFramebufferRenderbuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-attachment" class="parameter">attachment</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-renderbuffertarget" class="parameter">renderbuffertarget</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-renderbuffer" class="parameter">renderbuffer</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glFramebufferRenderbuffer"></a>
+    <span class="py-function">glFramebufferRenderbuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-attachment" class="parameter">attachment</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-renderbuffertarget" class="parameter">renderbuffertarget</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-renderbuffer" class="parameter">renderbuffer</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glNamedFramebufferRenderbuffer"></a>
+    <span class="c-function">glNamedFramebufferRenderbuffer</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-attachment" class="parameter">attachment</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-renderbuffertarget" class="parameter">renderbuffertarget</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-renderbuffer" class="parameter">renderbuffer</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glNamedFramebufferRenderbuffer"></a>
+    <span class="py-function">glNamedFramebufferRenderbuffer</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-framebuffer" class="parameter">framebuffer</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-attachment" class="parameter">attachment</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-renderbuffertarget" class="parameter">renderbuffertarget</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-renderbuffer" class="parameter">renderbuffer</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target to which the framebuffer is bound
+                    for
+    <a class="function" href="./glFramebufferRenderbuffer.html">glFramebufferRenderbuffer</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-framebuffer"></a>
+                        framebuffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of the framebuffer object for
+    <a class="function" href="./glFramebufferRenderbuffer.html#c-glNamedFramebufferRenderbuffer">glNamedFramebufferRenderbuffer</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-attachment"></a>
+                        attachment
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the attachment point of the framebuffer.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-renderbuffertarget"></a>
+                        renderbuffertarget
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the renderbuffer target. Must be
+    <span class="constant">GL_RENDERBUFFER</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-renderbuffer"></a>
+                        renderbuffer
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the name of an existing renderbuffer object of
+                    type
+    <a class="parameter" href="#param-renderbuffertarget">renderbuffertarget</a>
+    to
+                    attach.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glFramebufferRenderbuffer.html">glFramebufferRenderbuffer</a>
+    and
+    <a class="function" href="./glFramebufferRenderbuffer.html#c-glNamedFramebufferRenderbuffer">glNamedFramebufferRenderbuffer</a>
+    attaches a
+            renderbuffer as one of the logical buffers of the specified
+            framebuffer object. Renderbuffers cannot be attached to the
+            default draw and read framebuffer, so they are not valid targets
+            of these commands.
+</div>
+    <div class="para">
+            For
+    <a class="function" href="./glFramebufferRenderbuffer.html">glFramebufferRenderbuffer</a>
+    ,
+            the framebuffer object is that bound to
+    <a class="parameter" href="#param-target">target</a>
+    , which must be
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    ,
+    <span class="constant">GL_READ_FRAMEBUFFER</span>
+    or
+    <span class="constant">GL_FRAMEBUFFER</span>
+    .
+    <span class="constant">GL_FRAMEBUFFER</span>
+    is equivalent to
+    <span class="constant">GL_DRAW_FRAMEBUFFER</span>
+    .
+</div>
+    <div class="para">
+            For
+    <a class="function" href="./glFramebufferRenderbuffer.html#c-glNamedFramebufferRenderbuffer">glNamedFramebufferRenderbuffer</a>
+    ,
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is the name of the
+            framebuffer object.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-renderbuffertarget">renderbuffertarget</a>
+    must be
+    <span class="constant">GL_RENDERBUFFER</span>
+    .
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-renderbuffer">renderbuffer</a>
+    must be zero or the name of
+            an existing renderbuffer object of type
+    <a class="parameter" href="#param-renderbuffertarget">renderbuffertarget</a>
+    . If
+    <a class="parameter" href="#param-renderbuffer">renderbuffer</a>
+    is not zero, then the
+            specified renderbuffer will be used as the logical buffer
+            identified by
+    <a class="parameter" href="#param-attachment">attachment</a>
+    of the specified
+            framebuffer object. If
+    <a class="parameter" href="#param-renderbuffer">renderbuffer</a>
+    is
+            zero, then the value of
+    <a class="parameter" href="#param-renderbuffertarget">renderbuffertarget</a>
+    is ignored.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-attachment">attachment</a>
+    specifies the logical
+            attachment of the framebuffer and must be
+    <span class="constant">GL_COLOR_ATTACHMENT</span>
+    <span class="emphasis">i</span>
+    ,
+    <span class="constant">GL_DEPTH_ATTACHMENT</span>
+    ,
+    <span class="constant">GL_STENCIL_ATTACHMENT</span>
+    or
+    <span class="constant">GL_DEPTH_STENCIL_ATTACHMENT</span>
+    .
+    <span class="emphasis">i</span>
+    in may range from zero to the value of
+    <span class="constant">GL_MAX_COLOR_ATTACHMENTS</span>
+    minus one.
+            Setting
+    <a class="parameter" href="#param-attachment">attachment</a>
+    to the value
+    <span class="constant">GL_DEPTH_STENCIL_ATTACHMENT</span>
+    is a special
+            case causing both the depth and stencil attachments of the
+            specified framebuffer object to be set to
+    <a class="parameter" href="#param-renderbuffer">renderbuffer</a>
+    , which should have the base
+            internal format
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    .
+</div>
+    <div class="para">
+            The value of
+    <span class="constant">GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE</span>
+    for
+            the specified attachment point is set to
+    <span class="constant">GL_RENDERBUFFER</span>
+    and the value of
+    <span class="constant">GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME</span>
+    is
+            set to
+    <a class="parameter" href="#param-renderbuffer">renderbuffer</a>
+    . All other state
+            values of specified attachment point are set to their default
+            values. No change is made to the state of the renderbuuffer
+            object and any previous attachment to the
+    <a class="parameter" href="#param-attachment">attachment</a>
+    logical buffer of the
+            specified framebuffer object is broken.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-renderbuffer">renderbuffer</a>
+    is zero, these commands
+            will detach the image, if any, identified by the specified
+            attachment point of the specified framebuffer object. All state
+            values of the attachment point are set to their default values.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated by
+    <a class="function" href="./glFramebufferRenderbuffer.html">glFramebufferRenderbuffer</a>
+    if
+    <a class="parameter" href="#param-target">target</a>
+    is not one of the accepted
+            framebuffer targets.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glFramebufferRenderbuffer.html">glFramebufferRenderbuffer</a>
+    if zero is bound
+            to
+    <a class="parameter" href="#param-target">target</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glFramebufferRenderbuffer.html#c-glNamedFramebufferRenderbuffer">glNamedFramebufferRenderbuffer</a>
+    if
+    <a class="parameter" href="#param-framebuffer">framebuffer</a>
+    is not the name of an
+            existing framebuffer object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-attachment">attachment</a>
+    is not one of the accepted
+            attachment points.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-renderbuffertarget">renderbuffertarget</a>
+    is not
+    <span class="constant">GL_RENDERBUFFER</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-renderbuffertarget">renderbuffertarget</a>
+    is not zero or the
+            name of an existing renderbuffer object of type
+    <span class="constant">GL_RENDERBUFFER</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glFramebufferRenderbuffer.html">glFramebufferRenderbuffer</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glFramebufferRenderbuffer.html#c-glNamedFramebufferRenderbuffer">glNamedFramebufferRenderbuffer</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGenFramebuffers.html">glGenFramebuffers</a>
+    ,
+    <a class="crossref" href="./glBindFramebuffer.html">glBindFramebuffer</a>
+    ,
+    <a class="crossref" href="./glGenRenderbuffers.html">glGenRenderbuffers</a>
+    ,
+    <a class="crossref" href="./glFramebufferTexture.html">glFramebufferTexture</a>
+    ,
+    <a class="function" href="./glFramebufferTexture.html#c-glFramebufferTexture1D">glFramebufferTexture1D</a>
+    ,
+    <a class="function" href="./glFramebufferTexture2D.html">glFramebufferTexture2D</a>
+    ,
+    <a class="function" href="./glFramebufferTexture.html#c-glFramebufferTexture3D">glFramebufferTexture3D</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glFramebufferRenderbuffer</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shadow_2.py">tests/shadow_2.py</a>
+    Lines: <span class="sample-lines">105</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

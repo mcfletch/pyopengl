@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluSphere : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluSphere</h1>
+</header>
+<main class="content">
+    <section class="purpose">draw a sphere</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluSphere"></a>
+    <span class="c-function">gluSphere</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUquadric* (
+            <a href="#param-quad" class="parameter">quad</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-radius" class="parameter">radius</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-slices" class="parameter">slices</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-stacks" class="parameter">stacks</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluSphere"></a>
+    <span class="py-function">gluSphere</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-quad" class="parameter">quad</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-radius" class="parameter">radius</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-slices" class="parameter">slices</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-stacks" class="parameter">stacks</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluSphere( POINTER(GLUquadric)(quad), GLdouble(radius), GLint(slices), GLint(stacks) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-quad"></a>
+                        quad
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the quadrics object (created with
+    <a class="crossref" href="./gluNewQuadric.html">gluNewQuadric</a>
+    ).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-radius"></a>
+                        radius
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the radius of the sphere.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-slices"></a>
+                        slices
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of subdivisions around the
+    <span class="emphasis">z</span>
+    axis
+                    (similar to lines of longitude).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-stacks"></a>
+                        stacks
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the number of subdivisions along the
+    <span class="emphasis">z</span>
+    axis
+                    (similar to lines of
+                    latitude).
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluSphere.html">gluSphere</a>
+    draws a sphere of the given radius centered around the origin. The
+            sphere is subdivided around the
+    <span class="emphasis">z</span>
+    axis into slices and along the
+    <span class="emphasis">z</span>
+    axis
+            into stacks (similar to lines of longitude and latitude).
+</div>
+    <div class="para">
+            If the orientation is set to
+    <span class="constant">GLU_OUTSIDE</span>
+    (with
+    <a class="crossref" href="./gluQuadricOrientation.html">gluQuadricOrientation</a>
+    ), then any normals generated
+            point away from the center of the sphere.
+            Otherwise, they point toward the center of the sphere.
+</div>
+    <div class="para">
+            If texturing is turned on (with
+    <a class="crossref" href="./gluQuadricTexture.html">gluQuadricTexture</a>
+    ), then texture
+            coordinates are
+            generated so that
+    <span class="emphasis">t</span>
+    ranges from 0.0 at
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">z</mi>
+                    <mo>=</mo>
+                    <mrow>
+                        <mo>-</mo>
+                        <mi mathvariant="italic">radius</mi>
+                    </mrow>
+                </mrow>
+            </math>
+    to 1.0 at
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">z</mi>
+                    <mo>=</mo>
+                    <mi mathvariant="italic">radius</mi>
+                </mrow>
+            </math>
+    (
+    <span class="emphasis">t</span>
+    increases linearly along longitudinal
+            lines),
+            and
+    <span class="emphasis">s</span>
+    ranges from 0.0 at the +
+    <span class="emphasis">y</span>
+    axis, to 0.25 at the
+            +
+    <span class="emphasis">x</span>
+    axis,
+            to 0.5 at the \-
+    <span class="emphasis">y</span>
+    axis, to 0.75 at the \-
+    <span class="emphasis">x</span>
+    axis, and back to 1.0
+            at the +
+    <span class="emphasis">y</span>
+    axis.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluCylinder.html">gluCylinder</a>
+    ,
+    <a class="crossref" href="./gluDisk.html">gluDisk</a>
+    ,
+    <a class="crossref" href="./gluNewQuadric.html">gluNewQuadric</a>
+    ,
+    <a class="crossref" href="./gluPartialDisk.html">gluPartialDisk</a>
+    ,
+    <a class="crossref" href="./gluQuadricOrientation.html">gluQuadricOrientation</a>
+    ,
+    <a class="crossref" href="./gluQuadricTexture.html">gluQuadricTexture</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluSphere</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson23.py">PyOpenGL-Demo/NeHe/lesson23.py</a>
+    Lines: <span class="sample-lines">168</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson42.py">PyOpenGL-Demo/NeHe/lesson42.py</a>
+    Lines: <span class="sample-lines">319</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson18.py">PyOpenGL-Demo/NeHe/lesson18.py</a>
+    Lines: <span class="sample-lines">214</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson26.py">PyOpenGL-Demo/NeHe/lesson26.py</a>
+    Lines: <span class="sample-lines">101, 108</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/NeHe/lesson48/Lesson48.py">PyOpenGL-Demo/NeHe/lesson48/Lesson48.py</a>
+    Lines: <span class="sample-lines">144</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py</a>
+    Lines: <span class="sample-lines">584</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Utils/Particles3D.py">Sketches/CL/Topology3D/Utils/Particles3D.py</a>
+    Lines: <span class="sample-lines">319</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Experiments/Spheres.py">Sketches/CL/Topology3D/Experiments/Spheres.py</a>
+    Lines: <span class="sample-lines">128</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py">Code/Python/Kamaelia/Kamaelia/Visualisation/PhysicsGraph3D/Particles3D.py</a>
+    Lines: <span class="sample-lines">584</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

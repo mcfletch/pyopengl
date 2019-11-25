@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glCopyPixels : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glCopyPixels</h1>
+</header>
+<main class="content">
+    <section class="purpose">copy pixels in the frame buffer</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glCopyPixels"></a>
+    <span class="c-function">glCopyPixels</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLint (
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glCopyPixels"></a>
+    <span class="py-function">glCopyPixels</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-x"></a><a name="param-y"></a>
+                        x, y
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the window coordinates of the lower left corner
+                    of the rectangular region of pixels to be copied.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a><a name="param-height"></a>
+                        width, height
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the dimensions of the rectangular region of pixels to be copied.
+                    Both must be nonnegative.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies whether color values,
+                    depth values,
+                    or stencil values are to be copied.
+                    Symbolic constants
+    <span class="constant">GL_COLOR</span>
+    ,
+    <span class="constant">GL_DEPTH</span>
+    ,
+                    and
+    <span class="constant">GL_STENCIL</span>
+    are accepted.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glCopyPixels.html">glCopyPixels</a>
+    copies a screen-aligned rectangle of pixels
+            from the specified frame buffer location to a region relative to the
+            current raster position.
+            Its operation is well defined only if the entire pixel source region
+            is within the exposed portion of the window.
+            Results of copies from outside the window,
+            or from regions of the window that are not exposed,
+            are hardware dependent and undefined.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-x">x</a>
+    and
+    <a class="parameter" href="#param-y">y</a>
+    specify the window coordinates of
+            the lower left corner of the rectangular region to be copied.
+    <a class="parameter" href="#param-width">width</a>
+    and
+    <a class="parameter" href="#param-height">height</a>
+    specify the dimensions of the
+            rectangular region to be copied.
+            Both
+    <a class="parameter" href="#param-width">width</a>
+    and
+    <a class="parameter" href="#param-height">height</a>
+    must not be negative.
+</div>
+    <div class="para">
+            Several parameters control the processing of the pixel data
+            while it is being copied.
+            These parameters are set with three commands:
+    <a class="crossref" href="./glPixelTransfer.html">glPixelTransfer</a>
+    ,
+    <a class="crossref" href="./glPixelMap.html">glPixelMap</a>
+    , and
+    <a class="crossref" href="./glPixelZoom.html">glPixelZoom</a>
+    .
+            This reference page describes the effects on
+    <a class="function" href="./glCopyPixels.html">glCopyPixels</a>
+    of most,
+            but not all, of the parameters specified by these three commands.
+</div>
+    <div class="para">
+    <a class="function" href="./glCopyPixels.html">glCopyPixels</a>
+    copies values from each pixel with the lower left-hand corner at
+    <math>
+                <mfenced open="(" close=")">
+                    <mrow>
+                        <mi mathvariant="italic">x</mi>
+                        <mo>+</mo>
+                        <mi mathvariant="italic">i</mi>
+                    </mrow>
+                    <mrow>
+                        <mi mathvariant="italic">y</mi>
+                        <mo>+</mo>
+                        <mi mathvariant="italic">j</mi>
+                    </mrow>
+                </mfenced>
+            </math>
+    for
+    <math>
+                <mrow>
+                    <mn>0</mn>
+                    <mo>&lt;=</mo>
+                    <mi mathvariant="italic">i</mi>
+                    <mo>&lt;</mo>
+                    <mi mathvariant="italic">width</mi>
+                </mrow>
+            </math>
+    and
+    <math>
+                <mrow>
+                    <mn>0</mn>
+                    <mo>&lt;=</mo>
+                    <mi mathvariant="italic">j</mi>
+                    <mo>&lt;</mo>
+                    <mi mathvariant="italic">height</mi>
+                </mrow>
+            </math>
+    .
+            This pixel is said to be the
+    <math><mi mathvariant="italic">i</mi></math>
+    th
+            pixel in the
+    <math><mi mathvariant="italic">j</mi></math>
+    th
+            row.
+            Pixels are copied in row order from the lowest to the highest row,
+            left to right in each row.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-type">type</a>
+    specifies whether color, depth, or stencil data is to be copied.
+            The details of the transfer for each data type are as follows:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_COLOR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Indices or RGBA colors are read from the buffer currently specified as the
+                        read source buffer (see
+    <a class="crossref" href="./glReadBuffer.html">glReadBuffer</a>
+    ).
+                        If the GL is in color index mode,
+                        each index that is read from this buffer is converted
+                        to a fixed-point format with an unspecified
+                        number of bits to the right of the binary point.
+                        Each index is then shifted left by
+    <span class="constant">GL_INDEX_SHIFT</span>
+    bits,
+                        and added to
+    <span class="constant">GL_INDEX_OFFSET</span>
+    .
+                        If
+    <span class="constant">GL_INDEX_SHIFT</span>
+    is negative,
+                        the shift is to the right.
+                        In either case, zero bits fill otherwise unspecified bit locations in the
+                        result.
+                        If
+    <span class="constant">GL_MAP_COLOR</span>
+    is true,
+                        the index is replaced with the value that it references in lookup table
+    <span class="constant">GL_PIXEL_MAP_I_TO_I</span>
+    .
+                        Whether the lookup replacement of the index is done or not,
+                        the integer part of the index is then ANDed with
+    <math>
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mi mathvariant="italic">b</mi>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+    ,
+                        where
+    <math><mi mathvariant="italic">b</mi></math>
+    is the number of bits in a color index buffer.
+</div>
+    <div class="para">
+                        If the GL is in RGBA mode,
+                        the red, green, blue, and alpha components of each pixel that is read
+                        are converted to an internal floating-point format with unspecified
+                        precision.
+                        The conversion maps the largest representable component value to 1.0,
+                        and component value 0 to 0.0.
+                        The resulting floating-point color values are then multiplied
+                        by
+    <span class="constant">GL_c_SCALE</span>
+    and added to
+    <span class="constant">GL_c_BIAS</span>
+    ,
+                        where
+    <span class="emphasis">c</span>
+    is RED, GREEN, BLUE, and ALPHA
+                        for the respective color components.
+                        The results are clamped to the range [0,1].
+                        If
+    <span class="constant">GL_MAP_COLOR</span>
+    is true,
+                        each color component is scaled by the size of lookup table
+    <span class="constant">GL_PIXEL_MAP_c_TO_c</span>
+    ,
+                        then replaced by the value that it references in that table.
+    <span class="emphasis">c</span>
+    is R, G, B, or A.
+</div>
+    <div class="para">
+                        If the
+    <div class="code">ARB_imaging</div>
+    extension is supported, the color values may
+                        be
+                        additionally processed by color-table lookups, color-matrix
+                        transformations, and convolution filters.
+</div>
+    <div class="para">
+                        The GL then converts the resulting indices or RGBA colors to fragments
+                        by attaching the current raster position
+    <span class="emphasis">z</span>
+    coordinate and
+                        texture coordinates to each pixel,
+                        then assigning window coordinates
+    <math>
+                            <mfenced open="(" close=")">
+                                <mrow>
+                                    <msub><mi mathvariant="italic">x</mi>
+                                    <mi mathvariant="italic">r</mi>
+                                    </msub>
+                                    <mo>+</mo>
+                                    <mi mathvariant="italic">i</mi>
+                                </mrow>
+                                <mrow>
+                                    <msub><mi mathvariant="italic">y</mi>
+                                    <mi mathvariant="italic">r</mi>
+                                    </msub>
+                                    <mo>+</mo>
+                                    <mi mathvariant="italic">j</mi>
+                                </mrow>
+                            </mfenced>
+                        </math>
+    ,
+                        where
+    <math>
+                            <mfenced open="(" close=")">
+                                <msub><mi mathvariant="italic">x</mi>
+                                <mi mathvariant="italic">r</mi>
+                                </msub>
+                                <msub><mi mathvariant="italic">y</mi>
+                                <mi mathvariant="italic">r</mi>
+                                </msub>
+                            </mfenced>
+                        </math>
+    is the current raster position,
+                        and the pixel was the
+    <math><mi mathvariant="italic">i</mi></math>
+    th
+                        pixel in the
+    <math><mi mathvariant="italic">j</mi></math>
+    th
+                        row.
+                        These pixel fragments are then treated just like the fragments generated by
+                        rasterizing points, lines, or polygons.
+                        Texture mapping,
+                        fog,
+                        and all the fragment operations are applied before the fragments are written
+                        to the frame buffer.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEPTH</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Depth values are read from the depth buffer and
+                        converted directly to an internal floating-point format
+                        with unspecified precision.
+                        The resulting floating-point depth value is then multiplied
+                        by
+    <span class="constant">GL_DEPTH_SCALE</span>
+    and added to
+    <span class="constant">GL_DEPTH_BIAS</span>
+    .
+                        The result is clamped to the range [0,1].
+</div>
+    <div class="para">
+                        The GL then converts the resulting depth components to fragments
+                        by attaching the current raster position color or color index and
+                        texture coordinates to each pixel,
+                        then assigning window coordinates
+    <math>
+                            <mfenced open="(" close=")">
+                                <mrow>
+                                    <msub><mi mathvariant="italic">x</mi>
+                                    <mi mathvariant="italic">r</mi>
+                                    </msub>
+                                    <mo>+</mo>
+                                    <mi mathvariant="italic">i</mi>
+                                </mrow>
+                                <mrow>
+                                    <msub><mi mathvariant="italic">y</mi>
+                                    <mi mathvariant="italic">r</mi>
+                                    </msub>
+                                    <mo>+</mo>
+                                    <mi mathvariant="italic">j</mi>
+                                </mrow>
+                            </mfenced>
+                        </math>
+    ,
+                        where
+    <math>
+                            <mfenced open="(" close=")">
+                                <msub><mi mathvariant="italic">x</mi>
+                                <mi mathvariant="italic">r</mi>
+                                </msub>
+                                <msub><mi mathvariant="italic">y</mi>
+                                <mi mathvariant="italic">r</mi>
+                                </msub>
+                            </mfenced>
+                        </math>
+    is the current raster position,
+                        and the pixel was the
+    <math><mi mathvariant="italic">i</mi></math>
+    th
+                        pixel in the
+    <math><mi mathvariant="italic">j</mi></math>
+    th
+                        row.
+                        These pixel fragments are then treated just like the fragments generated by
+                        rasterizing points, lines, or polygons.
+                        Texture mapping,
+                        fog,
+                        and all the fragment operations are applied before the fragments are written
+                        to the frame buffer.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Stencil indices are read from the stencil buffer and
+                        converted to an internal fixed-point format
+                        with an unspecified number of bits to the right of the binary point.
+                        Each fixed-point index is then shifted left by
+    <span class="constant">GL_INDEX_SHIFT</span>
+    bits,
+                        and added to
+    <span class="constant">GL_INDEX_OFFSET</span>
+    .
+                        If
+    <span class="constant">GL_INDEX_SHIFT</span>
+    is negative,
+                        the shift is to the right.
+                        In either case, zero bits fill otherwise unspecified bit locations in the
+                        result.
+                        If
+    <span class="constant">GL_MAP_STENCIL</span>
+    is true,
+                        the index is replaced with the value that it references in lookup table
+    <span class="constant">GL_PIXEL_MAP_S_TO_S</span>
+    .
+                        Whether the lookup replacement of the index is done or not,
+                        the integer part of the index is then ANDed with
+    <math>
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mi mathvariant="italic">b</mi>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+    ,
+                        where
+    <math><mi mathvariant="italic">b</mi></math>
+    is the number of bits in the stencil buffer.
+                        The resulting stencil indices are then written to the stencil buffer
+                        such that the index read from the
+    <math><mi mathvariant="italic">i</mi></math>
+    th
+                        location of the
+    <math><mi mathvariant="italic">j</mi></math>
+    th
+                        row
+                        is written to location
+    <math>
+                            <mfenced open="(" close=")">
+                                <mrow>
+                                    <msub><mi mathvariant="italic">x</mi>
+                                    <mi mathvariant="italic">r</mi>
+                                    </msub>
+                                    <mo>+</mo>
+                                    <mi mathvariant="italic">i</mi>
+                                </mrow>
+                                <mrow>
+                                    <msub><mi mathvariant="italic">y</mi>
+                                    <mi mathvariant="italic">r</mi>
+                                    </msub>
+                                    <mo>+</mo>
+                                    <mi mathvariant="italic">j</mi>
+                                </mrow>
+                            </mfenced>
+                        </math>
+    ,
+                        where
+    <math>
+                            <mfenced open="(" close=")">
+                                <msub><mi mathvariant="italic">x</mi>
+                                <mi mathvariant="italic">r</mi>
+                                </msub>
+                                <msub><mi mathvariant="italic">y</mi>
+                                <mi mathvariant="italic">r</mi>
+                                </msub>
+                            </mfenced>
+                        </math>
+    is the current raster position.
+                        Only the pixel ownership test,
+                        the scissor test,
+                        and the stencil writemask affect these write operations.
+</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+            The rasterization described thus far assumes pixel zoom factors of 1.0.
+            If
+    <a class="crossref" href="./glPixelZoom.html">glPixelZoom</a>
+    is used to change the
+    <math><mi mathvariant="italic">x</mi></math>
+    and
+    <math><mi mathvariant="italic">y</mi></math>
+    pixel zoom factors,
+            pixels are converted to fragments as follows.
+            If
+    <math>
+                <mfenced open="(" close=")">
+                    <msub><mi mathvariant="italic">x</mi>
+                    <mi mathvariant="italic">r</mi>
+                    </msub>
+                    <msub><mi mathvariant="italic">y</mi>
+                    <mi mathvariant="italic">r</mi>
+                    </msub>
+                </mfenced>
+            </math>
+    is the current raster position,
+            and a given pixel is in the
+    <math><mi mathvariant="italic">i</mi></math>
+    th
+            location in the
+    <math><mi mathvariant="italic">j</mi></math>
+    th
+            row of the source
+            pixel rectangle,
+            then fragments are generated for pixels whose centers are in the rectangle
+            with corners at
+</div>
+    <div class="para">
+    <math>
+                <mfenced open="(" close=")">
+                    <mrow>
+                        <msub><mi mathvariant="italic">x</mi>
+                        <mi mathvariant="italic">r</mi>
+                        </msub>
+                        <mo>+</mo>
+                        <mfenced open="" close="">
+                            <msub><mi mathvariant="italic">zoom</mi>
+                            <mi mathvariant="italic">x</mi>
+                            </msub>
+                        </mfenced>
+                        <mo></mo>
+                        <mi mathvariant="italic">i</mi>
+                    </mrow>
+                    <mrow>
+                        <msub><mi mathvariant="italic">y</mi>
+                        <mi mathvariant="italic">r</mi>
+                        </msub>
+                        <mo>+</mo>
+                        <mfenced open="" close="">
+                            <msub><mi mathvariant="italic">zoom</mi>
+                            <mi mathvariant="italic">y</mi>
+                            </msub>
+                        </mfenced>
+                        <mo></mo>
+                        <mi mathvariant="italic">j</mi>
+                    </mrow>
+                </mfenced>
+            </math>
+</div>
+    <div class="para">
+             and
+        </div>
+    <div class="para">
+    <math>
+                <mfenced open="(" close=")">
+                    <mrow>
+                        <msub><mi mathvariant="italic">x</mi>
+                        <mi mathvariant="italic">r</mi>
+                        </msub>
+                        <mo>+</mo>
+                        <mrow>
+                            <mfenced open="" close="">
+                                <msub><mi mathvariant="italic">zoom</mi>
+                                <mi mathvariant="italic">x</mi>
+                                </msub>
+                            </mfenced>
+                            <mo></mo>
+                            <mfenced open="(" close=")">
+                                <mrow>
+                                    <mi mathvariant="italic">i</mi>
+                                    <mo>+</mo>
+                                    <mn>1</mn>
+                                </mrow>
+                            </mfenced>
+                        </mrow>
+                    </mrow>
+                    <mrow>
+                        <msub><mi mathvariant="italic">y</mi>
+                        <mi mathvariant="italic">r</mi>
+                        </msub>
+                        <mo>+</mo>
+                        <mrow>
+                            <mfenced open="" close="">
+                                <msub><mi mathvariant="italic">zoom</mi>
+                                <mi mathvariant="italic">y</mi>
+                                </msub>
+                            </mfenced>
+                            <mo></mo>
+                            <mfenced open="(" close=")">
+                                <mrow>
+                                    <mi mathvariant="italic">j</mi>
+                                    <mo>+</mo>
+                                    <mn>1</mn>
+                                </mrow>
+                            </mfenced>
+                        </mrow>
+                    </mrow>
+                </mfenced>
+            </math>
+</div>
+    <div class="para">
+            where
+    <math>
+                <msub><mi mathvariant="italic">zoom</mi>
+                <mi mathvariant="italic">x</mi>
+                </msub>
+            </math>
+    is the value of
+    <span class="constant">GL_ZOOM_X</span>
+    and
+    <math>
+                <msub><mi mathvariant="italic">zoom</mi>
+                <mi mathvariant="italic">y</mi>
+                </msub>
+            </math>
+    is the value of
+    <span class="constant">GL_ZOOM_Y</span>
+    .
+</div>
+    </section><section class="section" id="examples">
+    <h2 class="title">Examples</h2>
+    <div class="para">
+            To copy the color pixel in the lower left corner of the window to the current raster position,
+            use
+        </div>
+    <div class="para">
+    <div class="programlisting">
+glCopyPixels(0, 0, 1, 1,
+    <span class="constant">GL_COLOR</span>
+    );
+</div>
+</div>
+    <div class="para">
+        </div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            Modes specified by
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    have no effect on the operation
+            of
+    <a class="function" href="./glCopyPixels.html">glCopyPixels</a>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is not an accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if either
+    <a class="parameter" href="#param-width">width</a>
+    or
+    <a class="parameter" href="#param-height">height</a>
+    is negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is
+    <span class="constant">GL_DEPTH</span>
+    and there is no depth buffer.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is
+    <span class="constant">GL_STENCIL</span>
+    and there is no stencil buffer.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glCopyPixels.html">glCopyPixels</a>
+    is executed between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_CURRENT_RASTER_POSITION</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_CURRENT_RASTER_POSITION_VALID</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glColorTable.html">glColorTable</a>
+    ,
+    <a class="crossref" href="./glConvolutionFilter1D.html">glConvolutionFilter1D</a>
+    ,
+    <a class="crossref" href="./glConvolutionFilter2D.html">glConvolutionFilter2D</a>
+    ,
+    <a class="crossref" href="./glDepthFunc.html">glDepthFunc</a>
+    ,
+    <a class="crossref" href="./glDrawBuffer.html">glDrawBuffer</a>
+    ,
+    <a class="crossref" href="./glDrawPixels.html">glDrawPixels</a>
+    ,
+    <a class="crossref" href="./glMatrixMode.html">glMatrixMode</a>
+    ,
+    <a class="crossref" href="./glPixelMap.html">glPixelMap</a>
+    ,
+    <a class="crossref" href="./glPixelTransfer.html">glPixelTransfer</a>
+    ,
+    <a class="crossref" href="./glPixelZoom.html">glPixelZoom</a>
+    ,
+    <a class="crossref" href="./glRasterPos.html">glRasterPos</a>
+    ,
+    <a class="crossref" href="./glReadBuffer.html">glReadBuffer</a>
+    ,
+    <a class="crossref" href="./glReadPixels.html">glReadPixels</a>
+    ,
+    <a class="crossref" href="./glSeparableFilter2D.html">glSeparableFilter2D</a>
+    ,
+    <a class="crossref" href="./glStencilFunc.html">glStencilFunc</a>
+    ,
+    <a class="crossref" href="./glWindowPos.html">glWindowPos</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXSelectEvent : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXSelectEvent</h1>
+</header>
+<main class="content">
+    <section class="purpose">select GLX events for a window or a GLX pixel buffer</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXSelectEvent"></a>
+    <span class="c-function">glXSelectEvent</span>(<span class="parameter-list">
+    <span class="param-def">
+        Display * (
+            <a href="#param-dpy" class="parameter">dpy</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLXDrawable (
+            <a href="#param-draw" class="parameter">draw</a>
+        )
+        ,
+    </span><span class="param-def">
+        unsigned long (
+            <a href="#param-event_mask" class="parameter">event_mask</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glXSelectEvent"></a>
+    <span class="py-function">glXSelectEvent</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-dpy" class="parameter">dpy</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-draw" class="parameter">draw</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-event_mask" class="parameter">event_mask</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dpy"></a>
+                        dpy
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the connection to the X server.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-draw"></a>
+                        draw
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a GLX drawable. Must be a GLX pixel buffer or a window.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-event_mask"></a>
+                        event_mask
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the events to be returned for
+    <a class="parameter" href="#param-draw">draw</a>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXSelectEvent.html">glXSelectEvent</a>
+    sets the GLX event mask for a GLX pixel buffer or a window.
+            Calling
+    <a class="function" href="./glXSelectEvent.html">glXSelectEvent</a>
+    overrides any previous event mask that was
+            set by the client for
+    <a class="parameter" href="#param-draw">draw</a>
+    . Note that it does not affect the
+            event masks that other clients may have specified for
+    <a class="parameter" href="#param-draw">draw</a>
+    since
+            each client rendering to
+    <a class="parameter" href="#param-draw">draw</a>
+    has a separate event mask for it.
+</div>
+    <div class="para">
+            Currently, only one GLX event,
+    <span class="constant">GLX_PBUFFER_CLOBBER_MASK</span>
+    ,
+            can be selected. The following data is returned to the client when a
+    <span class="constant">GLX_PBUFFER_CLOBBER_MASK</span>
+    event occurs:
+</div>
+    <div class="para">
+            typedef struct {
+        </div>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+                            int
+    <span class="emphasis">event_type</span>
+    ;
+</td><td>
+                        /* GLX_DAMAGED or GLX_SAVED */
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                            int
+    <span class="emphasis">draw_type</span>
+    ;
+</td><td>
+                        /* GLX_WINDOW or GLX_PBUFFER */
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                            unsigned long
+    <span class="emphasis">serial</span>
+    ;
+</td><td>
+                        /* # of last request processed by server */
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                            Bool
+    <span class="emphasis">send_event</span>
+    ;
+</td><td>
+                        /* true if this came for SendEvent request */
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                            Display
+    <span class="emphasis">*display</span>
+    ;
+</td><td>
+                        /* display the event was read from */
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                            GLXDrawable
+    <span class="emphasis">drawable</span>
+    ;
+</td><td>
+                        /* i.d. of Drawable */
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                            unsigned int
+    <span class="emphasis">buffer_mask</span>
+    ;
+</td><td>
+                        /* mask indicating affected buffers */
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                            int
+    <span class="emphasis">x, y</span>
+    ;
+</td><td>
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                            int
+    <span class="emphasis">width, height</span>
+    ;
+</td><td>
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                            int
+    <span class="emphasis">count</span>
+    ;
+</td><td>
+                        /* if nonzero, at least this many more */
+                        </td>
+                </tr>
+    </tbody></table>
+    <div class="para">
+            } GLXPbufferClobberEvent;
+            The valid bit masks used in
+    <span class="emphasis">buffer_mask</span>
+    are:
+</div>
+    <div class="para">
+        </div>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>
+    <span class="emphasis">
+                        Bitmask
+                        </span>
+</th><th>
+    <span class="emphasis">
+                        Corresponding Buffer
+                        </span>
+</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+    <span class="constant">GLX_FRONT_LEFT_BUFFER_BIT</span>
+</td><td>
+                        Front left color buffer
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GLX_FRONT_RIGHT_BUFFER_BIT</span>
+</td><td>
+                        Front right color buffer
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GLX_BACK_LEFT_BUFFER_BIT</span>
+</td><td>
+                        Back left color buffer
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GLX_BACK_RIGHT_BUFFER_BIT</span>
+</td><td>
+                        Back right color buffer
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GLX_AUX_BUFFERS_BIT</span>
+</td><td>
+                        Auxiliary buffer
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GLX_DEPTH_BUFFER_BIT</span>
+</td><td>
+                        Depth buffer
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GLX_STENCIL_BUFFER_BIT</span>
+</td><td>
+                        Stencil buffer
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GLX_ACCUM_BUFFER_BIT</span>
+</td><td>
+                        Accumulation buffer
+                        </td>
+                </tr>
+    </tbody></table>
+    <div class="para">
+            A single X server operation can cause several buffer clobber events to be
+            sent. (e.g., a single GLX pixel buffer may be damaged and cause multiple
+            buffer clobber events to be generated). Each event specifies one
+            region of the GLX drawable that was affected by the X Server operation.
+            The
+    <span class="emphasis">buffer_mask</span>
+    field indicates which color buffers and
+            ancillary buffers were affected. All the buffer clobber events
+            generated by a single X server action are guaranteed to be
+            contiguous in the event queue. The conditions under which this event is
+            generated and the
+    <span class="emphasis">event_type</span>
+    varies, depending on the type of the
+            GLX drawable.
+</div>
+    <div class="para">
+            When the
+    <span class="constant">GLX_AUX_BUFFERS_BIT</span>
+    is set in
+    <span class="emphasis">buffer_mask</span>
+    , then
+    <span class="emphasis">aux_buffer</span>
+    is set to indicate which buffer was affected. If more
+            than one aux buffer was affected, then additional events are
+            generated as part of the same contiguous event group. Each
+            additional event will have only the
+    <span class="constant">GLX_AUX_BUFFERS_BIT</span>
+    set in
+    <span class="emphasis">buffer_mask</span>
+    , and the
+    <span class="emphasis">aux_buffer</span>
+    field will be set
+            appropriately. For nonstereo drawables,
+    <span class="constant">GLX_FRONT_LEFT_BUFFER_BIT</span>
+    and
+    <span class="constant">GLX_BACK_LEFT_BUFFER_BIT</span>
+    are
+            used to specify the front and back color buffers.
+</div>
+    <div class="para">
+            For preserved GLX pixel buffers, a buffer clobber event with
+            type
+    <span class="constant">GLX_SAVED</span>
+    is generated whenever the contents of the
+            GLX pixel buffer is moved out of offscreen memory. The event(s) describes which
+            portions of the GLX pixel buffer were affected. Clients who receive many
+            buffer clobber events, referring to different save actions,
+            should consider freeing the GLX pixel buffer resource in order to prevent
+            the system from thrashing due to insufficient resources.
+</div>
+    <div class="para">
+            For an unpreserved GLXPbuffer, a buffer clobber event, with type
+    <span class="constant">GLX_DAMAGED</span>
+    , is generated whenever a portion of the GLX pixel buffer
+            becomes invalid. The client may wish to regenerate the invalid portions
+            of the GLX pixel buffer.
+</div>
+    <div class="para">
+            For Windows, buffer clobber events, with type
+    <span class="constant">GLX_SAVED</span>
+    , occur
+            whenever an ancillary buffer, associated with the window, gets clobbered
+            or moved out of off-screen memory. The event contains information
+            indicating which color buffers and ancillary buffers\(emand which portions
+            of those buffers\(emwere affected.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glXSelectEvent.html">glXSelectEvent</a>
+    is available only if the GLX version is 1.3 or greater.
+</div>
+    <div class="para">
+            If the GLX version is 1.1 or 1.0, the GL version must be 1.0.
+            If the GLX version is 1.2, then the GL version must be 1.1.
+            If the GLX version is 1.3, then the GL version must be 1.2.
+        </div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GLXBadDrawable</span>
+    is generated if
+    <a class="parameter" href="#param-draw">draw</a>
+    is not a valid window
+            or a valid GLX pixel buffer.
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glXGetSelectedEvent.html">glXGetSelectedEvent</a>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glXCreatePbuffer.html">glXCreatePbuffer</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

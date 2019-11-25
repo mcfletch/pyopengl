@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glProgramParameteri : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glProgramParameteri</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify a parameter for a program object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glProgramParameteri"></a>
+    <span class="c-function">glProgramParameteri</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-pname" class="parameter">pname</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-value" class="parameter">value</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glProgramParameteri"></a>
+    <span class="py-function">glProgramParameteri</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-value" class="parameter">value</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the name of a program object whose parameter to modify.
+            </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-pname"></a>
+                        pname
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the name of the parameter to modify.
+            </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-value"></a>
+                        value
+                    </th>
+                    <td>
+    <div class="para">
+                Specifies the new value of the parameter specified by
+    <a class="parameter" href="#param-pname">pname</a>
+    for
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glProgramParameteri.html">glProgramParameteri</a>
+    specifies a new value for the parameter nameed by
+    <a class="parameter" href="#param-pname">pname</a>
+    for the program object
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-pname">pname</a>
+    is
+    <span class="constant">GL_PROGRAM_BINARY_RETRIEVABLE_HINT</span>
+    ,
+    <a class="parameter" href="#param-value">value</a>
+    should be
+    <span class="constant">GL_FALSE</span>
+    or
+    <span class="constant">GL_TRUE</span>
+    to indicate to the implementation the intention of the application to retrieve the program's
+            binary representation with
+    <a class="crossref" href="./glGetProgramBinary.html">glGetProgramBinary</a>
+    .
+            The implementation may use this information to store information that may be useful for a future
+            query of the program's binary. It is recommended to set
+    <span class="constant">GL_PROGRAM_BINARY_RETRIEVABLE_HINT</span>
+    for the program to
+    <span class="constant">GL_TRUE</span>
+    before calling
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    , and
+            using the program at run-time if the binary is to be retrieved later.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not the
+            name of an existing program object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-pname">pname</a>
+    is not
+    <span class="constant">GL_PROGRAM_BINARY_RETRIEVABLE_HINT</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-value">value</a>
+    is not
+    <span class="constant">GL_FALSE</span>
+    or
+    <span class="constant">GL_TRUE</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetProgramiv.html">glGetProgramiv</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">API Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>glProgramParameteri</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetProgramiv.html">glGetProgramiv</a>
+    ,
+    <a class="crossref" href="./glGetProgramBinary.html">glGetProgramBinary</a>
+    ,
+    <a class="crossref" href="./glProgramBinary.html">glProgramBinary</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

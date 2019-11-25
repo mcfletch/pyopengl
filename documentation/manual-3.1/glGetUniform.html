@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetUniform : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetUniform</h1>
+</header>
+<main class="content">
+    <section class="purpose">Returns the value of a uniform variable</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetUniformdv"></a>
+    <span class="c-function">glGetUniformdv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-location" class="parameter">location</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetUniformdv"></a>
+    <span class="py-function">glGetUniformdv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-location" class="parameter">location</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetUniformfv"></a>
+    <span class="c-function">glGetUniformfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-location" class="parameter">location</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetUniformfv"></a>
+    <span class="py-function">glGetUniformfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-location" class="parameter">location</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetUniformiv"></a>
+    <span class="c-function">glGetUniformiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-location" class="parameter">location</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetUniformiv"></a>
+    <span class="py-function">glGetUniformiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-location" class="parameter">location</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetUniformuiv"></a>
+    <span class="c-function">glGetUniformuiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-location" class="parameter">location</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetUniformuiv"></a>
+    <span class="py-function">glGetUniformuiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-location" class="parameter">location</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetnUniformdv"></a>
+    <span class="c-function">glGetnUniformdv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-location" class="parameter">location</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetnUniformdv"></a>
+    <span class="py-function">glGetnUniformdv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-location" class="parameter">location</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetnUniformfv"></a>
+    <span class="c-function">glGetnUniformfv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-location" class="parameter">location</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLfloat *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetnUniformfv"></a>
+    <span class="py-function">glGetnUniformfv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-location" class="parameter">location</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetnUniformiv"></a>
+    <span class="c-function">glGetnUniformiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-location" class="parameter">location</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetnUniformiv"></a>
+    <span class="py-function">glGetnUniformiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-location" class="parameter">location</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetnUniformuiv"></a>
+    <span class="c-function">glGetnUniformuiv</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-location" class="parameter">location</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint *(
+            <a href="#param-params" class="parameter">params</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetnUniformuiv"></a>
+    <span class="py-function">glGetnUniformuiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-location" class="parameter">location</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">Specifies the program object to be queried.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-location"></a>
+                        location
+                    </th>
+                    <td>
+    <div class="para">Specifies the location of the uniform variable to be
+          queried.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bufSize"></a>
+                        bufSize
+                    </th>
+                    <td>
+    <div class="para">Specifies the size of the buffer
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-params"></a>
+                        params
+                    </th>
+                    <td>
+    <div class="para">Returns the value of the specified uniform variable.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetUniform.html">glGetUniform</a>
+    and
+    <a class="function" href="./glGetUniform.html#c-glGetnUniformfv">glGetnUniform</a>
+    return in
+    <a class="parameter" href="#param-params">params</a>
+    the value(s) of the specified uniform variable. The type of the uniform
+    variable specified by
+    <a class="parameter" href="#param-location">location</a>
+    determines the
+    number of values returned. If the uniform variable is defined in the
+    shader as a boolean, int, or float, a single value will be returned. If it
+    is defined as a vec2, ivec2, or bvec2, two values will be returned. If it
+    is defined as a vec3, ivec3, or bvec3, three values will be returned, and
+    so on. To query values stored in uniform variables declared as arrays,
+    call
+    <a class="function" href="./glGetUniform.html">glGetUniform</a>
+    for each element of the array. To
+    query values stored in uniform variables declared as structures, call
+    <a class="function" href="./glGetUniform.html">glGetUniform</a>
+    for each field in the structure. The
+    values for uniform variables declared as a matrix will be returned in
+    column major order.
+</div>
+    <div class="para">The locations assigned to uniform variables are not known until the
+    program object is linked. After linking has occurred, the command
+    <a class="crossref" href="./glGetUniformLocation.html">glGetUniformLocation</a>
+    can be used to obtain the location of a uniform variable. This location
+    value can then be passed to
+    <a class="function" href="./glGetUniform.html">glGetUniform</a>
+    or
+    <a class="function" href="./glGetUniform.html#c-glGetnUniformfv">glGetnUniform</a>
+    in order to query the current value
+    of the uniform variable. After a program object has been linked
+    successfully, the index values for uniform variables remain fixed until
+    the next link command occurs. The uniform variable values can only be
+    queried after a link if the link was successful.
+</div>
+    <div class="para">The only difference between
+    <a class="function" href="./glGetUniform.html">glGetUniform</a>
+    and
+    <a class="function" href="./glGetUniform.html#c-glGetnUniformfv">glGetnUniform</a>
+    is that
+    <a class="function" href="./glGetUniform.html#c-glGetnUniformfv">glGetnUniform</a>
+    will generate an error if size of the
+    <a class="parameter" href="#param-params">params</a>
+    buffer,as described by
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    , is not large enough to hold the result
+    data.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">If an error is generated, no change is made to the contents of
+    <a class="parameter" href="#param-params">params</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a value generated by OpenGL.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a program object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    has not been successfully linked.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-location">location</a>
+    does not correspond to a valid uniform
+    variable location for the specified program object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glGetUniform.html#c-glGetnUniformfv">glGetnUniform</a>
+    if the buffer size required to store
+    the requested data is greater than
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetActiveUniform.html">glGetActiveUniform</a>
+    with arguments
+    <a class="parameter" href="#param-program">program</a>
+    and the index of an active
+    uniform variable
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    with arguments
+    <a class="parameter" href="#param-program">program</a>
+    and
+    <span class="constant">GL_ACTIVE_UNIFORMS</span>
+    or
+    <span class="constant">GL_ACTIVE_UNIFORM_MAX_LENGTH</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetUniformLocation.html">glGetUniformLocation</a>
+    with arguments
+    <a class="parameter" href="#param-program">program</a>
+    and the name of a uniform
+    variable
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsProgram.html">glIsProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetUniform.html#c-glGetUniformdv">glGetUniformdv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetUniform.html#c-glGetUniformfv">glGetUniformfv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetUniform.html#c-glGetUniformiv">glGetUniformiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetUniform.html#c-glGetUniformuiv">glGetUniformuiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetUniform.html#c-glGetnUniformdv">glGetnUniformdv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetUniform.html#c-glGetnUniformfv">glGetnUniformfv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetUniform.html#c-glGetnUniformiv">glGetnUniformiv</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glGetUniform.html#c-glGetnUniformuiv">glGetnUniformuiv</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glCreateProgram.html">glCreateProgram</a>
+    ,
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    ,
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2005 3Dlabs Inc. Ltd.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glGetUniformfv</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/shader_7.py">tests/shader_7.py</a>
+    Lines: <span class="sample-lines">306</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

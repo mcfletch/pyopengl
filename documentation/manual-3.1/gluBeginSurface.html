@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluBeginSurface : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluBeginSurface</h1>
+</header>
+<main class="content">
+    <section class="purpose">delimit a NURBS surface definition</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluBeginSurface"></a>
+    <span class="c-function">gluBeginSurface</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUnurbs* (
+            <a href="#param-nurb" class="parameter">nurb</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluBeginSurface"></a>
+    <span class="py-function">gluBeginSurface</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-nurb" class="parameter">nurb</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluBeginSurface( POINTER(GLUnurbs)(nurb) ) -&gt; None</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-gluEndSurface"></a>
+    <span class="c-function">gluEndSurface</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUnurbs* (
+            <a href="#param-nurb" class="parameter">nurb</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluEndSurface"></a>
+    <span class="py-function">gluEndSurface</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-nurb" class="parameter">nurb</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluEndSurface( POINTER(GLUnurbs)(nurb) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-nurb"></a>
+                        nurb
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the NURBS object (created with
+    <a class="crossref" href="./gluNewNurbsRenderer.html">gluNewNurbsRenderer</a>
+    ).
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            Use
+    <a class="function" href="./gluBeginSurface.html">gluBeginSurface</a>
+    to mark the beginning of a NURBS
+            surface definition. After
+            calling
+    <a class="function" href="./gluBeginSurface.html">gluBeginSurface</a>
+    , make one or more calls to
+    <a class="crossref" href="./gluNurbsSurface.html">gluNurbsSurface</a>
+    to define the attributes of the surface.
+            Exactly one of these calls to
+    <a class="crossref" href="./gluNurbsSurface.html">gluNurbsSurface</a>
+    must have a
+            surface type of
+    <span class="constant">GLU_MAP2_VERTEX_3</span>
+    or
+    <span class="constant">GLU_MAP2_VERTEX_4</span>
+    .
+            To mark the end of the NURBS surface definition, call
+    <a class="crossref" href="./gluBeginSurface.html#c-gluEndSurface">gluEndSurface</a>
+    .
+</div>
+    <div class="para">
+            Trimming of NURBS surfaces is supported with
+    <a class="crossref" href="./gluBeginTrim.html">gluBeginTrim</a>
+    ,
+    <a class="crossref" href="./gluPwlCurve.html">gluPwlCurve</a>
+    ,
+    <a class="crossref" href="./gluNurbsCurve.html">gluNurbsCurve</a>
+    , and
+    <a class="crossref" href="./gluBeginTrim.html#c-gluEndTrim">gluEndTrim</a>
+    . See the
+    <a class="crossref" href="./gluBeginTrim.html">gluBeginTrim</a>
+    reference page for details.
+</div>
+    <div class="para">
+            GL evaluators are used to render the NURBS surface as a set of polygons.
+            Evaluator state is preserved during rendering
+            with
+    <a class="crossref" href="./glPushAttrib.html">glPushAttrib</a>
+    (
+    <span class="constant">GLU_EVAL_BIT</span>
+    ) and
+    <a class="crossref" href="./glPushAttrib.html#c-glPopAttrib">glPopAttrib</a>
+    .
+            See the
+    <a class="crossref" href="./glPushAttrib.html">glPushAttrib</a>
+    reference page for details on exactly what state
+            these calls preserve.
+</div>
+    </section><section class="section" id="example">
+    <h2 class="title">Example</h2>
+    <div class="para">
+            The following commands render a textured NURBS surface with normals;
+            the texture coordinates and normals are also described as NURBS surfaces:
+    <div class="programlisting">
+gluBeginSurface(nobj);
+   gluNurbsSurface(nobj, ..., GL_MAP2_TEXTURE_COORD_2);
+   gluNurbsSurface(nobj, ..., GL_MAP2_NORMAL);
+   gluNurbsSurface(nobj, ..., GL_MAP2_VERTEX_4);
+gluEndSurface(nobj);
+            </div>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluBeginCurve.html">gluBeginCurve</a>
+    ,
+    <a class="crossref" href="./gluBeginTrim.html">gluBeginTrim</a>
+    ,
+    <a class="crossref" href="./gluNewNurbsRenderer.html">gluNewNurbsRenderer</a>
+    ,
+    <a class="crossref" href="./gluNurbsCurve.html">gluNurbsCurve</a>
+    ,
+    <a class="crossref" href="./gluNurbsSurface.html">gluNurbsSurface</a>
+    ,
+    <a class="crossref" href="./gluPwlCurve.html">gluPwlCurve</a>
+    ,
+    <a class="crossref" href="./glPushAttrib.html">glPushAttrib</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluBeginSurface</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_trim.py">tests/redbook_trim.py</a>
+    Lines: <span class="sample-lines">102</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_surface.py">tests/redbook_surface.py</a>
+    Lines: <span class="sample-lines">74</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_surface_cb.py">tests/redbook_surface_cb.py</a>
+    Lines: <span class="sample-lines">91</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/nurbs.py">OpenGLContext/scenegraph/nurbs.py</a>
+    Lines: <span class="sample-lines">113, 261</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">116</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/molehill.py">PyOpenGL-Demo/GLUT/molehill.py</a>
+    Lines: <span class="sample-lines">148, 155, 162, 169</span>
+</div>
+        <div class="sample-key">gluEndSurface</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_trim.py">tests/redbook_trim.py</a>
+    Lines: <span class="sample-lines">123</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_surface.py">tests/redbook_surface.py</a>
+    Lines: <span class="sample-lines">84</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/redbook_surface_cb.py">tests/redbook_surface_cb.py</a>
+    Lines: <span class="sample-lines">103</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/nurbs.py">OpenGLContext/scenegraph/nurbs.py</a>
+    Lines: <span class="sample-lines">122, 289</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/nurbs/nurbs.py">PyOpenGL-Demo/proesch/nurbs/nurbs.py</a>
+    Lines: <span class="sample-lines">137</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/molehill.py">PyOpenGL-Demo/GLUT/molehill.py</a>
+    Lines: <span class="sample-lines">151, 158, 165, 172</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

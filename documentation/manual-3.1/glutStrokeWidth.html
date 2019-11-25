@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutStrokeWidth : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutStrokeWidth</h1>
+</header>
+<main class="content">
+    <section class="purpose">returns the width/length of a stroke character/string.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutStrokeLength"></a>
+    <span class="c-function">glutStrokeLength</span>(<span class="parameter-list">
+    <span class="param-def">
+        const(
+            <a href="#param-string" class="parameter">string</a>
+        )
+    </span>
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glutStrokeLength"></a>
+    <span class="py-function">glutStrokeLength</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-font" class="parameter">font</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-string" class="parameter">string</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">glutStrokeLength( c_void_p(font), POINTER(c_ubyte)(string) ) -&gt; c_int</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutStrokeLengthf"></a>
+    <span class="c-function">glutStrokeLengthf</span>(<span class="parameter-list">
+    <span class="param-def">
+        const(
+            <a href="#param-string" class="parameter">string</a>
+        )
+    </span>
+</span>)-&gt; float
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutStrokeWidth"></a>
+    <span class="c-function">glutStrokeWidth</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-character" class="parameter">character</a>
+        )
+    </span>
+</span>)-&gt; int
+</div>
+                <div class="py-signature">
+    <a name="py-glutStrokeWidth"></a>
+    <span class="py-function">glutStrokeWidth</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-font" class="parameter">font</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-character" class="parameter">character</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">glutStrokeWidth( c_void_p(font), c_int(character) ) -&gt; c_int</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutStrokeWidthf"></a>
+    <span class="c-function">glutStrokeWidthf</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-character" class="parameter">character</a>
+        )
+    </span>
+</span>)-&gt; float
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-font"></a>
+                        font
+                    </th>
+                    <td>
+    <div class="simpara">
+						Stroke font to use. For valid values, see the
+    <a class="function" href="./glutStrokeWidth.html">glutStrokeWidth</a>
+    description.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-character"></a>
+                        character
+                    </th>
+                    <td>
+    <div class="simpara">
+						Character to return width of (not confined to 8 bits).
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-string"></a>
+                        string
+                    </th>
+                    <td>
+    <div class="simpara">
+						Text string (8-bit characters), null terminated.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutStrokeWidth.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutStrokeWidth.html#c-glutStrokeWidthf">glutStrokeWidthf</a>
+    returns the width in modeling units of a stroke character in a supported stroke
+			font. While the width of characters in a font may vary (though fixed width fonts do not vary), the maximum height
+			characteristics of a particular font are fixed.
+</div>
+    <div class="para">
+    <a class="function" href="./glutStrokeWidth.html#c-glutStrokeLengthf">glutStrokeLengthf</a>
+    returns the length in modeling units of a string (8-bit characters). This length
+			is equivalent to summing all the widths returned by
+    <a class="function" href="./glutStrokeWidth.html#c-glutStrokeWidthf">glutStrokeWidthf</a>
+    for each character in the
+			string.
+</div>
+    </section><section class="section" id="glutStrokeWidth.3GLUT-bugs">
+    <h2 class="title">Bugs</h2>
+    <div class="para">
+			The deprecated
+    <a class="function" href="./glutStrokeWidth.html">glutStrokeWidth</a>
+    and
+    <a class="function" href="./glutStrokeWidth.html#c-glutStrokeLength">glutStrokeLength</a>
+    routines return an
+			integer rather than a float. Newer GLUT programs should use the newer float-returning routine
+    <a class="function" href="./glutStrokeWidth.html#c-glutStrokeWidthf">glutStrokeWidthf</a>
+    and
+    <a class="function" href="./glutStrokeWidth.html#c-glutStrokeLengthf">glutStrokeLengthf</a>
+    . Note that these newer float routines
+			do not exist in implementations prior to GLUT 3.8. Also, the
+    <a class="function" href="./glutStrokeWidth.html#c-glutStrokeLength">glutStrokeLength</a>
+    routine summed
+			integerized character widths so it underestimated the length of strings prior to GLUT 3.8, but the implementation of
+    <a class="function" href="./glutStrokeWidth.html#c-glutStrokeLength">glutStrokeLength</a>
+    in GLUT 3.8 and beyond sums the character widths for the strings in a float
+			(though
+    <a class="function" href="./glutStrokeWidth.html#c-glutStrokeLength">glutStrokeLength</a>
+    still returns an integer).
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutStrokeCharacter.html">glutStrokeCharacter</a>
+            <a class="crossref" href="./glutBitmapWidth.html">glutBitmapWidth</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

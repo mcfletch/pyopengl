@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutRemoveOverlay : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutRemoveOverlay</h1>
+</header>
+<main class="content">
+    <section class="purpose">removes the overlay (if one exists) from the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutRemoveOverlay"></a>
+    <span class="c-function">glutRemoveOverlay</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutRemoveOverlay"></a>
+    <span class="py-function">glutRemoveOverlay</span>( <span class="parameter-list">
+</span> )
+    <pre class="pydoc">glutRemoveOverlay(  ) -&gt; None</pre>
+</div>
+        </div>
+    </section>
+    <section class="section" id="glutRemoveOverlay.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutRemoveOverlay.html">glutRemoveOverlay</a>
+    removes the overlay (if one exists). It is safe to call
+    <a class="function" href="./glutRemoveOverlay.html">glutRemoveOverlay</a>
+    even if no overlay is currently established
+</div>
+    <div class="para">
+			If the program intends to re-establish the overlay later, it is typically faster and less resource intensive to use
+    <a class="function" href="./glutShowOverlay.html#c-glutHideOverlay">glutHideOverlay</a>
+    and
+    <a class="function" href="./glutShowOverlay.html">glutShowOverlay</a>
+    to simply change the display status of the overlay.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutEstablishOverlay.html">glutEstablishOverlay</a>
+            <a class="crossref" href="./glutDestroyWindow.html">glutDestroyWindow</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

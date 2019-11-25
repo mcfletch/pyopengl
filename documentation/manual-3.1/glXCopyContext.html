@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXCopyContext : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXCopyContext</h1>
+</header>
+<main class="content">
+    <section class="purpose">copy state from one rendering context to another</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXCopyContext"></a>
+    <span class="c-function">glXCopyContext</span>(<span class="parameter-list">
+    <span class="param-def">
+        Display * (
+            <a href="#param-dpy" class="parameter">dpy</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLXContext (
+            <a href="#param-src" class="parameter">src</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLXContext (
+            <a href="#param-dst" class="parameter">dst</a>
+        )
+        ,
+    </span><span class="param-def">
+        unsigned long (
+            <a href="#param-mask" class="parameter">mask</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glXCopyContext"></a>
+    <span class="py-function">glXCopyContext</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-dpy" class="parameter">dpy</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-src" class="parameter">src</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-dst" class="parameter">dst</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-mask" class="parameter">mask</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dpy"></a>
+                        dpy
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the connection to the X server.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-src"></a>
+                        src
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the source context.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-dst"></a>
+                        dst
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the destination context.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-mask"></a>
+                        mask
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies which portions of
+    <a class="parameter" href="#param-src">src</a>
+    state are to be copied to
+    <a class="parameter" href="#param-dst">dst</a>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glXCopyContext.html">glXCopyContext</a>
+    copies selected groups of state variables from
+    <a class="parameter" href="#param-src">src</a>
+    to
+    <a class="parameter" href="#param-dst">dst</a>
+    .
+    <a class="parameter" href="#param-mask">mask</a>
+    indicates which groups of state variables are to be copied.
+    <a class="parameter" href="#param-mask">mask</a>
+    contains the bitwise OR of the same symbolic names that are
+            passed to the GL command
+    <a class="crossref" href="./glPushAttrib.html">glPushAttrib</a>
+    .
+            The single symbolic constant
+    <span class="constant">GLX_ALL_ATTRIB_BITS</span>
+    can be used to
+            copy the maximum possible portion of rendering state.
+</div>
+    <div class="para">
+            The copy can be done only if the renderers named by
+    <a class="parameter" href="#param-src">src</a>
+    and
+    <a class="parameter" href="#param-dst">dst</a>
+    share an address space.
+            Two rendering contexts share an address space if both are nondirect
+            using the same server,
+            or if both are direct and owned by a single process.
+            Note that in the nondirect case it is not necessary for the calling
+            threads to share an address space,
+            only for their related rendering contexts to share an address space.
+</div>
+    <div class="para">
+            Not all values for GL state can be copied.
+            For example,
+            pixel pack and unpack state,
+            render mode state,
+            and select and feedback state are not copied.
+            The state that can be copied is exactly the state that is manipulated
+            by the GL command
+    <a class="crossref" href="./glPushAttrib.html">glPushAttrib</a>
+    .
+</div>
+    <div class="para">
+            An implicit
+    <a class="crossref" href="./glFlush.html">glFlush</a>
+    is done by
+    <a class="function" href="./glXCopyContext.html">glXCopyContext</a>
+    if
+    <a class="parameter" href="#param-src">src</a>
+    is the current
+            context for the calling thread.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+        </div>
+    <div class="para">
+            A
+    <span class="emphasis">process</span>
+    is a single execution environment,
+            implemented in a single address space,
+            consisting of one or more threads.
+</div>
+    <div class="para">
+            A
+    <span class="emphasis">thread</span>
+    is one of a set of subprocesses that share
+            a single address space,
+            but maintain separate program counters,
+            stack spaces,
+            and other related global data.
+            A
+    <span class="emphasis">thread</span>
+    that is the only member of its subprocess group
+            is equivalent to a
+    <span class="emphasis">process</span>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">BadMatch</span>
+    is generated if rendering contexts
+    <a class="parameter" href="#param-src">src</a>
+    and
+    <a class="parameter" href="#param-dst">dst</a>
+    do not share an address space
+            or were not created with respect to the same screen.
+</div>
+    <div class="para">
+    <span class="constant">BadAccess</span>
+    is generated if
+    <a class="parameter" href="#param-dst">dst</a>
+    is current to any thread
+            (including the calling thread) at the time
+    <a class="function" href="./glXCopyContext.html">glXCopyContext</a>
+    is called.
+</div>
+    <div class="para">
+    <span class="constant">GLXBadCurrentWindow</span>
+    is generated if
+    <a class="parameter" href="#param-src">src</a>
+    is the current
+            context and the current drawable is a window that is no longer valid.
+</div>
+    <div class="para">
+    <span class="constant">GLXBadContext</span>
+    is generated if either
+    <a class="parameter" href="#param-src">src</a>
+    or
+    <a class="parameter" href="#param-dst">dst</a>
+    is not
+            a valid GLX context.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glPushAttrib.html">glPushAttrib</a>
+    ,
+    <a class="crossref" href="./glXCreateContext.html">glXCreateContext</a>
+    ,
+    <a class="crossref" href="./glXIsDirect.html">glXIsDirect</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

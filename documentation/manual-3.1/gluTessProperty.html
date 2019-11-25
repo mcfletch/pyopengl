@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluTessProperty : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluTessProperty</h1>
+</header>
+<main class="content">
+    <section class="purpose">set a tessellation object property</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluTessProperty"></a>
+    <span class="c-function">gluTessProperty</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUtesselator* (
+            <a href="#param-tess" class="parameter">tess</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-which" class="parameter">which</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluTessProperty"></a>
+    <span class="py-function">gluTessProperty</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-tess" class="parameter">tess</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-which" class="parameter">which</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluTessProperty( POINTER(GLUtesselator)(tess), GLenum(which), GLdouble(data) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-tess"></a>
+                        tess
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the tessellation object (created with
+    <a class="crossref" href="./gluNewTess.html">gluNewTess</a>
+    ).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-which"></a>
+                        which
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the property to be set. Valid values are
+    <span class="constant">GLU_TESS_WINDING_RULE</span>
+    ,
+    <span class="constant">GLU_TESS_BOUNDARY_ONLY</span>
+    , and
+    <span class="constant">GLU_TESS_TOLERANCE</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-data"></a>
+                        data
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the value of the indicated property.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluTessProperty.html">gluTessProperty</a>
+    is used to control properties stored in a tessellation object. These
+            properties affect the way that the polygons are interpreted and rendered.
+            The legal values for
+    <a class="parameter" href="#param-which">which</a>
+    are as follows:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_WINDING_RULE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Determines which parts of the polygon are on the ``interior''.
+    <a class="parameter" href="#param-data">data</a>
+    may be set to one of
+    <span class="constant">GLU_TESS_WINDING_ODD</span>
+    ,
+    <span class="constant">GLU_TESS_WINDING_NONZERO</span>
+    ,
+    <span class="constant">GLU_TESS_WINDING_POSITIVE</span>
+    ,
+    <span class="constant">GLU_TESS_WINDING_NEGATIVE</span>
+    , or
+    <span class="constant">GLU_TESS_WINDING_ABS_GEQ_TWO</span>
+    .
+</div>
+    <div class="para">
+                        To understand how the winding rule works, consider that the input
+                        contours partition the plane into regions. The winding rule determines which
+                        of these regions are inside the polygon.
+                    </div>
+    <div class="para">
+                        For a single contour C, the winding number of a point x is simply the signed
+                        number of revolutions we make around x as we travel once around C
+                        (where CCW is positive). When there are several contours, the individual
+                        winding numbers are summed. This procedure associates a signed integer
+                        value with each point x in the plane. Note that the winding number is the
+                        same for all points in a single region.
+                    </div>
+    <div class="para">
+                        The winding rule classifies a region as ``inside'' if its winding number
+                        belongs to the chosen category (odd, nonzero, positive, negative, or
+                        absolute value of at least two). The previous GLU tessellator (prior to
+                        GLU 1.2) used the ``odd'' rule. The ``nonzero'' rule is another common way to
+                        define the interior. The other three rules are useful for polygon CSG
+                        operations.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_BOUNDARY_ONLY</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Is a boolean value (``value'' should be set
+                        to GL_TRUE or GL_FALSE). When set to GL_TRUE, a set of closed contours
+                        separating the polygon interior and exterior are returned instead of a
+                        tessellation. Exterior contours are oriented CCW with respect to the
+                        normal; interior contours are oriented CW. The
+    <span class="constant">GLU_TESS_BEGIN</span>
+    and
+    <span class="constant">GLU_TESS_BEGIN_DATA</span>
+    callbacks use the type GL_LINE_LOOP for
+                        each contour.
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLU_TESS_TOLERANCE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Specifies a tolerance for merging features to reduce the size of the output.
+                        For example, two vertices that are very close to each other might be
+                        replaced by a single vertex. The tolerance is multiplied by the largest
+                        coordinate magnitude of any input vertex; this specifies the maximum
+                        distance that any feature can move as the result of a single merge
+                        operation. If a single feature takes part in several merge operations, the
+                        total distance moved could be larger.
+                    </div>
+    <div class="para">
+                        Feature merging is completely optional; the tolerance is only a hint.
+                        The implementation is free to merge in some cases and not in others, or to
+                        never merge features at all. The initial tolerance is 0.
+                    </div>
+    <div class="para">
+                        The current implementation merges vertices only if they are exactly
+                        coincident, regardless of the current tolerance. A vertex is spliced into
+                        an edge only if the implementation is unable to distinguish which side of
+                        the edge the vertex lies on. Two edges are merged only when both endpoints
+                        are identical.
+                    </div>
+</dd>
+</div>
+</dl>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluGetTessProperty.html">gluGetTessProperty</a>
+    ,
+    <a class="crossref" href="./gluNewTess.html">gluNewTess</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluTessProperty</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/polygontessellator.py">OpenGLContext/scenegraph/polygontessellator.py</a>
+    Lines: <span class="sample-lines">43</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/lib/squirtle.py">pymt/lib/squirtle.py</a>
+    Lines: <span class="sample-lines">21, 407</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/bezier.py">pymt/graphx/bezier.py</a>
+    Lines: <span class="sample-lines">39, 142</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

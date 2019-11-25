@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glHistogram : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glHistogram</h1>
+</header>
+<main class="content">
+    <section class="purpose">define histogram table</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glHistogram"></a>
+    <span class="c-function">glHistogram</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean (
+            <a href="#param-sink" class="parameter">sink</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glHistogram"></a>
+    <span class="py-function">glHistogram</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalformat" class="parameter">internalformat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-sink" class="parameter">sink</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    The histogram whose parameters are to be set.
+                    Must be one of
+    <span class="constant">GL_HISTOGRAM</span>
+    or
+    <span class="constant">GL_PROXY_HISTOGRAM</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">
+                    The number of entries in the histogram table.  Must be a power of 2.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalformat"></a>
+                        internalformat
+                    </th>
+                    <td>
+    <div class="para">
+                    The format of entries in the histogram table.
+                    Must be one of
+    <span class="constant">GL_ALPHA</span>
+    ,
+    <span class="constant">GL_ALPHA4</span>
+    ,
+    <span class="constant">GL_ALPHA8</span>
+    ,
+    <span class="constant">GL_ALPHA12</span>
+    ,
+    <span class="constant">GL_ALPHA16</span>
+    ,
+    <span class="constant">GL_LUMINANCE</span>
+    ,
+    <span class="constant">GL_LUMINANCE4</span>
+    ,
+    <span class="constant">GL_LUMINANCE8</span>
+    ,
+    <span class="constant">GL_LUMINANCE12</span>
+    ,
+    <span class="constant">GL_LUMINANCE16</span>
+    ,
+    <span class="constant">GL_LUMINANCE_ALPHA</span>
+    ,
+    <span class="constant">GL_LUMINANCE4_ALPHA4</span>
+    ,
+    <span class="constant">GL_LUMINANCE6_ALPHA2</span>
+    ,
+    <span class="constant">GL_LUMINANCE8_ALPHA8</span>
+    ,
+    <span class="constant">GL_LUMINANCE12_ALPHA4</span>
+    ,
+    <span class="constant">GL_LUMINANCE12_ALPHA12</span>
+    ,
+    <span class="constant">GL_LUMINANCE16_ALPHA16</span>
+    ,
+    <span class="constant">GL_R3_G3_B2</span>
+    ,
+    <span class="constant">GL_RGB</span>
+    ,
+    <span class="constant">GL_RGB4</span>
+    ,
+    <span class="constant">GL_RGB5</span>
+    ,
+    <span class="constant">GL_RGB8</span>
+    ,
+    <span class="constant">GL_RGB10</span>
+    ,
+    <span class="constant">GL_RGB12</span>
+    ,
+    <span class="constant">GL_RGB16</span>
+    ,
+    <span class="constant">GL_RGBA</span>
+    ,
+    <span class="constant">GL_RGBA2</span>
+    ,
+    <span class="constant">GL_RGBA4</span>
+    ,
+    <span class="constant">GL_RGB5_A1</span>
+    ,
+    <span class="constant">GL_RGBA8</span>
+    ,
+    <span class="constant">GL_RGB10_A2</span>
+    ,
+    <span class="constant">GL_RGBA12</span>
+    , or
+    <span class="constant">GL_RGBA16</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-sink"></a>
+                        sink
+                    </th>
+                    <td>
+    <div class="para">
+                    If
+    <span class="constant">GL_TRUE</span>
+    , pixels will be consumed by the histogramming
+                    process and no drawing or texture loading will take place.
+                    If
+    <span class="constant">GL_FALSE</span>
+    , pixels will proceed to the minmax process after
+                    histogramming.
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            When
+    <span class="constant">GL_HISTOGRAM</span>
+    is enabled, RGBA color components are converted to
+            histogram table indices by clamping to the range [0,1], multiplying by
+            the width of the histogram table, and rounding to the nearest integer.
+            The table entries selected by the RGBA indices are then incremented.
+            (If the internal format of the histogram table includes luminance, then
+            the index derived from the R color component determines the luminance
+            table entry to be incremented.)  If a histogram table entry is incremented
+            beyond its maximum value, then its value becomes undefined.  (This is
+            not an error.)
+</div>
+    <div class="para">
+            Histogramming is performed only for RGBA pixels (though these may
+            be specified originally as color indices and converted to RGBA by
+            index table lookup).
+            Histogramming is enabled with
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and disabled with
+    <a class="crossref" href="./glEnable.html#c-glDisable">glDisable</a>
+    .
+</div>
+    <div class="para">
+            When
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_HISTOGRAM</span>
+    ,
+    <a class="function" href="./glHistogram.html">glHistogram</a>
+    redefines the current
+            histogram table to have
+    <a class="parameter" href="#param-width">width</a>
+    entries of the format specified by
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    .
+            The entries are indexed 0 through
+    <math>
+                <mrow>
+                    <mi mathvariant="italic">width</mi>
+                    <mo>-</mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    ,
+            and
+            all entries are initialized to zero.
+            The values in the previous histogram table, if any, are lost.
+            If
+    <a class="parameter" href="#param-sink">sink</a>
+    is
+    <span class="constant">GL_TRUE</span>
+    , then pixels are discarded after histogramming;
+            no further processing of the pixels takes place, and no drawing,
+            texture loading, or pixel readback will result.
+</div>
+    <div class="para">
+            When
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_PROXY_HISTOGRAM</span>
+    ,
+    <a class="function" href="./glHistogram.html">glHistogram</a>
+    computes all
+            state information as if the histogram table were to be redefined,
+            but does not actually define the new table.
+            If the requested histogram table is too large to be supported, then the
+            state information will be set to zero.
+            This provides a way to determine if a histogram table with the given
+            parameters can be supported.
+</div>
+    <div class="para">
+        </div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glHistogram.html">glHistogram</a>
+    is present only if
+    <div class="code">ARB_imaging</div>
+    is returned when
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+    is called with an argument of
+    <span class="constant">GL_EXTENSIONS</span>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not one of the allowable
+            values.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-width">width</a>
+    is less than zero or is
+            not a power of 2.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-internalformat">internalformat</a>
+    is not one of the
+            allowable values.
+</div>
+    <div class="para">
+    <span class="constant">GL_TABLE_TOO_LARGE</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is
+    <span class="constant">GL_HISTOGRAM</span>
+    and the histogram table specified is too large for the implementation.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glHistogram.html">glHistogram</a>
+    is executed
+            between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding
+            execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetHistogramParameter.html">glGetHistogramParameter</a>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetHistogram.html">glGetHistogram</a>
+    ,
+    <a class="crossref" href="./glResetHistogram.html">glResetHistogram</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glHistogram</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glhistogram.py">tests/glhistogram.py</a>
+    Lines: <span class="sample-lines">40</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

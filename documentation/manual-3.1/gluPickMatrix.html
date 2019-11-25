@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluPickMatrix : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluPickMatrix</h1>
+</header>
+<main class="content">
+    <section class="purpose">define a picking region</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluPickMatrix"></a>
+    <span class="c-function">gluPickMatrix</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLdouble (
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-delX" class="parameter">delX</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLdouble (
+            <a href="#param-delY" class="parameter">delY</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint * (
+            <a href="#param-viewport" class="parameter">viewport</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluPickMatrix"></a>
+    <span class="py-function">gluPickMatrix</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-delX" class="parameter">delX</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-delY" class="parameter">delY</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-viewport" class="parameter">viewport</a>
+    </span>
+</span> )
+    <pre class="pydoc">gluPickMatrix( GLdouble(x), GLdouble(y), GLdouble(delX), GLdouble(delY), arrays.GLintArray(viewport) ) -&gt; None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-x"></a><a name="param-y"></a>
+                        x, y
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the center of a picking region in window coordinates.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-delX"></a><a name="param-delY"></a>
+                        delX, delY
+                    </th>
+                    <td>
+    <div class="para">
+                    Specify the width and height, respectively, of the picking region in window
+                    coordinates.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-viewport"></a>
+                        viewport
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the current viewport (as from a
+    <a class="crossref" href="./glGet.html#c-glGetIntegerv">glGetIntegerv</a>
+    call).
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluPickMatrix.html">gluPickMatrix</a>
+    creates a projection matrix that can be used to restrict drawing
+            to a small region of the viewport.
+            This is typically useful to
+            determine what objects are being drawn near the cursor.
+            Use
+    <a class="function" href="./gluPickMatrix.html">gluPickMatrix</a>
+    to
+            restrict drawing to a small region around the cursor.
+            Then,
+            enter selection mode (with
+    <a class="crossref" href="./glRenderMode.html">glRenderMode</a>
+    ) and rerender the scene.
+            All primitives that would have been drawn near
+            the cursor are identified and stored in the selection buffer.
+</div>
+    <div class="para">
+            The matrix created by
+    <a class="function" href="./gluPickMatrix.html">gluPickMatrix</a>
+    is multiplied by the current matrix just
+            as if
+    <a class="crossref" href="./glMultMatrix.html">glMultMatrix</a>
+    is called with the generated matrix.
+            To effectively use the generated pick matrix for picking,
+            first call
+    <a class="crossref" href="./glLoadIdentity.html">glLoadIdentity</a>
+    to load an identity matrix onto the
+            perspective matrix stack.
+            Then call
+    <a class="function" href="./gluPickMatrix.html">gluPickMatrix</a>
+    ,
+            and, finally, call a command (such as
+    <a class="crossref" href="./gluPerspective.html">gluPerspective</a>
+    )
+            to multiply the perspective matrix by the pick matrix.
+</div>
+    <div class="para">
+            When using
+    <a class="function" href="./gluPickMatrix.html">gluPickMatrix</a>
+    to pick NURBS, be careful to turn off the NURBS
+            property
+    <span class="constant">GLU_AUTO_LOAD_MATRIX</span>
+    .  If
+    <span class="constant">GLU_AUTO_LOAD_MATRIX</span>
+    is not
+            turned off, then any NURBS surface rendered is subdivided differently with
+            the pick matrix than the way it was subdivided without the pick matrix.
+</div>
+    </section><section class="section" id="example">
+    <h2 class="title">Example</h2>
+    <div class="para">
+            When rendering a scene as follows:
+    <div class="programlisting">
+glMatrixMode(GL_PROJECTION);
+glLoadIdentity();
+gluPerspective(...);
+glMatrixMode(GL_MODELVIEW);
+/* Draw the scene */
+            </div>
+    a portion of the viewport can be selected as a pick region like this:
+    <div class="programlisting">
+glMatrixMode(GL_PROJECTION);
+glLoadIdentity();
+gluPickMatrix(x, y, width, height, viewport);
+gluPerspective(...);
+glMatrixMode(GL_MODELVIEW);
+/* Draw the scene */
+            </div>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluPerspective.html">gluPerspective</a>
+    ,
+    <a class="crossref" href="./glGet.html">glGet</a>
+    ,
+    <a class="crossref" href="./glLoadIdentity.html">glLoadIdentity</a>
+    ,
+    <a class="crossref" href="./glMultMatrix.html">glMultMatrix</a>
+    ,
+    <a class="crossref" href="./glRenderMode.html">glRenderMode</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluPickMatrix</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/renderpass.py">OpenGLContext/passes/renderpass.py</a>
+    Lines: <span class="sample-lines">545</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/MPS/BugReports/FixTests/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">795</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/Experiments/Cubes.py">Sketches/CL/Topology3D/Experiments/Cubes.py</a>
+    Lines: <span class="sample-lines">320</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/CL/Topology3D/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">773</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py">Sketches/CL/Topology3D/THF/Sketches/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">458</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/3D/playground/Display3D.py">Sketches/THF/3D/playground/Display3D.py</a>
+    Lines: <span class="sample-lines">458</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Sketches/THF/Packages/Kamaelia/Community/THF/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">772</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL or GPL or MPL} Kamaelia</span>
+    <a href="https://github.com/sparkslabs/kamaelia/blob/master/Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py">Code/Python/Kamaelia/Kamaelia/UI/OpenGL/OpenGLDisplay.py</a>
+    Lines: <span class="sample-lines">795</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

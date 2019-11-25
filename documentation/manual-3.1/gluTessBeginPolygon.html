@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluTessBeginPolygon : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluTessBeginPolygon</h1>
+</header>
+<main class="content">
+    <section class="purpose">delimit a polygon description</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluTessBeginPolygon"></a>
+    <span class="c-function">gluTessBeginPolygon</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLUtesselator* (
+            <a href="#param-tess" class="parameter">tess</a>
+        )
+        ,
+    </span><span class="param-def">
+        void* (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-gluTessBeginPolygon"></a>
+    <span class="py-function">gluTessBeginPolygon</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-tess" class="parameter">tess</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+    <pre class="pydoc">Start definition of polygon in the tessellator</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-tess"></a>
+                        tess
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the tessellation object (created with
+    <a class="crossref" href="./gluNewTess.html">gluNewTess</a>
+    ).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-data"></a>
+                        data
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to user polygon data.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluTessBeginPolygon.html">gluTessBeginPolygon</a>
+    and
+    <a class="crossref" href="./gluTessEndPolygon.html">gluTessEndPolygon</a>
+    delimit the definition of a
+            convex, concave or self-intersecting polygon. Within each
+    <a class="function" href="./gluTessBeginPolygon.html">gluTessBeginPolygon</a>
+    /
+    <a class="crossref" href="./gluTessEndPolygon.html">gluTessEndPolygon</a>
+    pair, there must be one or more calls to
+    <a class="crossref" href="./gluTessBeginContour.html">gluTessBeginContour</a>
+    /
+    <a class="crossref" href="./gluTessBeginContour.html#c-gluTessEndContour">gluTessEndContour</a>
+    .
+            Within each contour, there are zero or more calls to
+    <a class="crossref" href="./gluTessVertex.html">gluTessVertex</a>
+    . The vertices
+            specify a closed contour (the last vertex of each contour is automatically linked
+            to the first). See the
+    <a class="crossref" href="./gluTessVertex.html">gluTessVertex</a>
+    ,
+    <a class="crossref" href="./gluTessBeginContour.html">gluTessBeginContour</a>
+    , and
+    <a class="crossref" href="./gluTessBeginContour.html#c-gluTessEndContour">gluTessEndContour</a>
+    reference pages for more details.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-data">data</a>
+    is a pointer to a user-defined data structure. If the appropriate callback(s)
+            are specified (see
+    <a class="crossref" href="./gluTessCallback.html">gluTessCallback</a>
+    ), then this pointer is returned to the
+            callback function(s). Thus, it is a convenient way to store per-polygon information.
+</div>
+    <div class="para">
+            Once
+    <a class="crossref" href="./gluTessEndPolygon.html">gluTessEndPolygon</a>
+    is called, the polygon is tessellated, and the
+            resulting triangles are described through callbacks.
+            See
+    <a class="crossref" href="./gluTessCallback.html">gluTessCallback</a>
+    for descriptions of the callback functions.
+</div>
+    </section><section class="section" id="example">
+    <h2 class="title">Example</h2>
+    <div class="para">
+            A quadrilateral with a triangular hole in it can be described as follows:
+    <div class="programlisting">
+gluTessBeginPolygon(tobj, NULL);
+   gluTessBeginContour(tobj);
+      gluTessVertex(tobj, v1, v1);
+      gluTessVertex(tobj, v2, v2);
+      gluTessVertex(tobj, v3, v3);
+      gluTessVertex(tobj, v4, v4);
+   gluTessEndContour(tobj);
+   gluTessBeginContour(tobj);
+      gluTessVertex(tobj, v5, v5);
+      gluTessVertex(tobj, v6, v6);
+      gluTessVertex(tobj, v7, v7);
+   gluTessEndContour(tobj);
+gluTessEndPolygon(tobj);
+            </div>
+</div>
+    <div class="para">
+        </div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluNewTess.html">gluNewTess</a>
+    ,
+    <a class="crossref" href="./gluTessBeginContour.html">gluTessBeginContour</a>
+    ,
+    <a class="crossref" href="./gluTessCallback.html">gluTessCallback</a>
+    ,
+    <a class="crossref" href="./gluTessEndPolygon.html">gluTessEndPolygon</a>
+    ,
+    <a class="crossref" href="./gluTessNormal.html">gluTessNormal</a>
+    ,
+    <a class="crossref" href="./gluTessProperty.html">gluTessProperty</a>
+    ,
+    <a class="crossref" href="./gluTessVertex.html">gluTessVertex</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">gluTessBeginPolygon</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/glu_tess2.py">tests/glu_tess2.py</a>
+    Lines: <span class="sample-lines">67</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/scenegraph/polygontessellator.py">OpenGLContext/scenegraph/polygontessellator.py</a>
+    Lines: <span class="sample-lines">80</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/lib/squirtle.py">pymt/lib/squirtle.py</a>
+    Lines: <span class="sample-lines">22, 893</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/bezier.py">pymt/graphx/bezier.py</a>
+    Lines: <span class="sample-lines">40, 165</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

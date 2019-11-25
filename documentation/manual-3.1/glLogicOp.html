@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glLogicOp : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glLogicOp</h1>
+</header>
+<main class="content">
+    <section class="purpose">specify a logical pixel operation for rendering</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glLogicOp"></a>
+    <span class="c-function">glLogicOp</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-opcode" class="parameter">opcode</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glLogicOp"></a>
+    <span class="py-function">glLogicOp</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-opcode" class="parameter">opcode</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-opcode"></a>
+                        opcode
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a symbolic constant that selects a logical operation.
+                    The following symbols are accepted:
+    <span class="constant">GL_CLEAR</span>
+    ,
+    <span class="constant">GL_SET</span>
+    ,
+    <span class="constant">GL_COPY</span>
+    ,
+    <span class="constant">GL_COPY_INVERTED</span>
+    ,
+    <span class="constant">GL_NOOP</span>
+    ,
+    <span class="constant">GL_INVERT</span>
+    ,
+    <span class="constant">GL_AND</span>
+    ,
+    <span class="constant">GL_NAND</span>
+    ,
+    <span class="constant">GL_OR</span>
+    ,
+    <span class="constant">GL_NOR</span>
+    ,
+    <span class="constant">GL_XOR</span>
+    ,
+    <span class="constant">GL_EQUIV</span>
+    ,
+    <span class="constant">GL_AND_REVERSE</span>
+    ,
+    <span class="constant">GL_AND_INVERTED</span>
+    ,
+    <span class="constant">GL_OR_REVERSE</span>
+    , and
+    <span class="constant">GL_OR_INVERTED</span>
+    . The initial value is
+    <span class="constant">GL_COPY</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glLogicOp.html">glLogicOp</a>
+    specifies a logical operation that,
+            when enabled,
+            is applied between the incoming RGBA color
+            and the RGBA color at the corresponding location in the
+            frame buffer.
+            To enable or disable the logical operation, call
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    and
+    <a class="function" href="./glEnable.html#c-glDisable">glDisable</a>
+    using the symbolic constant
+    <span class="constant">GL_COLOR_LOGIC_OP</span>
+    . The initial value is
+            disabled.
+</div>
+    <div class="para">
+        </div>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>
+    <span class="emphasis"> Opcode </span>
+</th><th>
+    <span class="emphasis"> Resulting Operation </span>
+</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+    <span class="constant">GL_CLEAR</span>
+</td><td>
+                            0
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SET</span>
+</td><td>
+                            1
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_COPY</span>
+</td><td>
+                            s
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_COPY_INVERTED</span>
+</td><td>
+                            ~s
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_NOOP</span>
+</td><td>
+                            d
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INVERT</span>
+</td><td>
+                            ~d
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_AND</span>
+</td><td>
+                            s &amp; d
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_NAND</span>
+</td><td>
+                            ~(s &amp; d)
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_OR</span>
+</td><td>
+                            s | d
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_NOR</span>
+</td><td>
+                            ~(s | d)
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_XOR</span>
+</td><td>
+                            s ^ d
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_EQUIV</span>
+</td><td>
+                            ~(s ^ d)
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_AND_REVERSE</span>
+</td><td>
+                            s &amp; ~d
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_AND_INVERTED</span>
+</td><td>
+                            ~s &amp; d
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_OR_REVERSE</span>
+</td><td>
+                            s | ~d
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_OR_INVERTED</span>
+</td><td>
+                            ~s | d
+                        </td>
+                </tr>
+    </tbody></table>
+    <div class="para">
+    <a class="parameter" href="#param-opcode">opcode</a>
+    is a symbolic constant chosen from the list above.
+            In the explanation of the logical operations,
+    <span class="emphasis">s</span>
+    represents the incoming color and
+    <span class="emphasis">d</span>
+    represents the color in the frame buffer.
+            Standard C-language operators are used.
+            As these bitwise operators suggest,
+            the logical operation is applied independently to each bit pair of the
+            source and destination colors.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            When more than one RGBA color buffer is enabled for drawing,
+            logical operations are performed separately for each enabled buffer,
+            using for the destination value the contents of that buffer
+            (see
+    <a class="crossref" href="./glDrawBuffer.html">glDrawBuffer</a>
+    ).
+</div>
+    <div class="para">
+            Logic operations have no effect on floating point draw buffers. However, if
+    <span class="constant">GL_COLOR_LOGIC_OP</span>
+    is enabled, blending is still disabled
+            in this case.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-opcode">opcode</a>
+    is not an accepted value.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_LOGIC_OP_MODE</span>
+    .
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsEnabled.html">glIsEnabled</a>
+    with argument
+    <span class="constant">GL_COLOR_LOGIC_OP</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glLogicOp.html">glLogicOp</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glBlendFunc.html">glBlendFunc</a>
+    ,
+    <a class="crossref" href="./glDrawBuffer.html">glDrawBuffer</a>
+    ,
+    <a class="crossref" href="./glEnable.html">glEnable</a>
+    ,
+    <a class="crossref" href="./glStencilOp.html">glStencilOp</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

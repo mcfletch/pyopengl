@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutKeyboardUpFunc : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutKeyboardUpFunc</h1>
+</header>
+<main class="content">
+    <section class="purpose">sets the keyboard up (key release) callback for the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutKeyboardUpFunc"></a>
+    <span class="c-function">glutKeyboardUpFunc</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutKeyboardUpFunc"></a>
+    <span class="py-function">glutKeyboardUpFunc</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-function" class="parameter">function</a>
+    </span>
+</span> )
+    <pre class="pydoc">Specify handler for GLUT 'KeyboardUp' events
+    def handler( (int) key, (int) x, (int) y ):
+        return None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-func"></a>
+                        func
+                    </th>
+                    <td>
+    <div class="simpara">
+						The new keyboard up callback function.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutKeyboardUpFunc.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutKeyboardFunc.html">glutKeyboardFunc</a>
+    sets the keyboard up (key release) callback for the current
+			window. When a user types into the window, each key release matching an ASCII character will generate a keyboard up
+			callback. The key callback parameter is the generated ASCII character. The state of modifier keys such as Shift cannot
+			be determined directly; their only effect will be on the returned ASCII data. The x and y callback parameters indicate
+			the mouse location in window relative coordinates when the key was pressed. When a new window is created, no keyboard
+			callback is initially registered, and ASCII key strokes in the window are ignored. Passing
+    <span class="constant">NULL</span>
+    to
+    <a class="function" href="./glutKeyboardFunc.html">glutKeyboardFunc</a>
+    disables the generation of keyboard callbacks.
+</div>
+    <div class="para">
+			During a keyboard up callback,
+    <a class="function" href="./glutGetModifiers.html">glutGetModifiers</a>
+    may be called to determine the
+			state of modifier keys when the keystroke generating the callback occurred.
+</div>
+    <div class="para">
+			To avoid the reporting of key release/press pairs due to auto repeat, use
+    <a class="function" href="./glutIgnoreKeyRepeat.html">glutIgnoreKeyRepeat</a>
+    to ignore auto repeated keystrokes.
+</div>
+    <div class="para">
+			There is no guarantee that the keyboard press callback will match the exact ASCII character as the keyboard up
+			callback. For example, the key down may be for a lowercase b, but the key release may report an uppercase B if the
+			shift state has changed. The same applies to symbols and control characters. The precise behavior is window system
+			dependent.
+		</div>
+    <div class="para">
+			Use
+    <a class="function" href="./glutSpecialUpFunc.html">glutSpecialUpFunc</a>
+    for a means to detect non-ASCII key releases.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutKeyboardFunc.html">glutKeyboardFunc</a>
+            <a class="crossref" href="./glutSpecialUpFunc.html">glutSpecialUpFunc</a>
+            <a class="crossref" href="./glutSpecialFunc.html">glutSpecialFunc</a>
+            <a class="crossref" href="./glutCreateWindow.html">glutCreateWindow</a>
+            <a class="crossref" href="./glutMouseFunc.html">glutMouseFunc</a>
+            <a class="crossref" href="./glutSpaceballButtonFunc.html">glutSpaceballButtonFunc</a>
+            <a class="crossref" href="./glutButtonBoxFunc.html">glutButtonBoxFunc</a>
+            <a class="crossref" href="./glutTabletButtonFunc.html">glutTabletButtonFunc</a>
+            <a class="crossref" href="./glutGetModifiers.html">glutGetModifiers</a>
+            <a class="crossref" href="./glutIgnoreKeyRepeat.html">glutIgnoreKeyRepeat</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutKeyboardUpFunc</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/glutcontext.py">OpenGLContext/glutcontext.py</a>
+    Lines: <span class="sample-lines">95, 97</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglGlut.py">renderers/openglGlut.py</a>
+    Lines: <span class="sample-lines">62</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/glutdevice.py">system/glutdevice.py</a>
+    Lines: <span class="sample-lines">59</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

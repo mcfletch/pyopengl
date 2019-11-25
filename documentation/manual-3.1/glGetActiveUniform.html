@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetActiveUniform : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetActiveUniform</h1>
+</header>
+<main class="content">
+    <section class="purpose">Returns information about an active uniform variable for the specified program object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetActiveUniform"></a>
+    <span class="c-function">glGetActiveUniform</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-program" class="parameter">program</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLuint (
+            <a href="#param-index" class="parameter">index</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei *(
+            <a href="#param-length" class="parameter">length</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint *(
+            <a href="#param-size" class="parameter">size</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum *(
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLchar *(
+            <a href="#param-name" class="parameter">name</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetActiveUniform"></a>
+    <span class="py-function">glGetActiveUniform</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-index" class="parameter">index</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-length" class="parameter">length</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-size" class="parameter">size</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-name" class="parameter">name</a>
+    </span>
+</span> )
+    <pre class="pydoc">Retrieve the name, size and type of the uniform of the index in the program
+    
+    program -- specifies the program to be queried
+    index -- index of the uniform to be queried 
+    
+    Following parameters are optional:
+    
+    bufSize -- determines the size of the buffer (limits number of bytes written),
+               if not provided, will be GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH
+    length -- pointer-to-GLsizei that will hold the resulting length of the name
+    size -- pointer-to-GLint that will hold the size of the attribute
+    type -- pointer-to-GLenum that will hold the type constant of the attribute
+    name -- pointer-to-GLchar that will hold the (null-terminated) name string
+    
+    returns (bytes) name, (int)size, (enum)type
+    </pre>
+</div>
+                <div class="py-signature">
+    <a name="py-glGetActiveUniformsiv"></a>
+    <span class="py-function">glGetActiveUniformsiv</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-program" class="parameter">program</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-uniformCount" class="parameter">uniformCount</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-uniformIndices" class="parameter">uniformIndices</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-pname" class="parameter">pname</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-params" class="parameter">params</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-program"></a>
+                        program
+                    </th>
+                    <td>
+    <div class="para">Specifies the program object to be
+            queried.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-index"></a>
+                        index
+                    </th>
+                    <td>
+    <div class="para">Specifies the index of the uniform variable to
+            be queried.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bufSize"></a>
+                        bufSize
+                    </th>
+                    <td>
+    <div class="para">Specifies the maximum number of characters
+            OpenGL is allowed to write in the character buffer
+            indicated by
+    <a class="parameter" href="#param-name">name</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-length"></a>
+                        length
+                    </th>
+                    <td>
+    <div class="para">Returns the number of characters actually
+            written by OpenGL in the string indicated by
+    <a class="parameter" href="#param-name">name</a>
+    (excluding the null
+            terminator) if a value other than
+    <span class="constant">NULL</span>
+    is passed.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-size"></a>
+                        size
+                    </th>
+                    <td>
+    <div class="para">Returns the size of the uniform
+            variable.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">Returns the data type of the uniform
+            variable.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-name"></a>
+                        name
+                    </th>
+                    <td>
+    <div class="para">Returns a null terminated string containing
+            the name of the uniform variable.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetActiveUniform.html">glGetActiveUniform</a>
+    returns
+    information about an active uniform variable in the program
+    object specified by
+    <a class="parameter" href="#param-program">program</a>
+    . The number
+    of active uniform variables can be obtained by calling
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    with the value
+    <span class="constant">GL_ACTIVE_UNIFORMS</span>
+    . A value
+    of 0 for
+    <a class="parameter" href="#param-index">index</a>
+    selects the first active
+    uniform variable. Permissible values for
+    <a class="parameter" href="#param-index">index</a>
+    range from zero to the number of
+    active uniform variables minus one.
+</div>
+    <div class="para">Shaders may use either built-in uniform variables,
+    user-defined uniform variables, or both. Built-in uniform
+    variables have a prefix of "gl_" and reference
+    existing OpenGL state or values derived from such state (e.g.,
+    <a class="parameter" href="#param-gl_DepthRangeParameters">gl_DepthRangeParameters</a>
+    , see the OpenGL
+    Shading Language specification for a complete list.)
+    User-defined uniform variables have arbitrary names and obtain
+    their values from the application through calls to
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    .
+    A uniform variable (either built-in or user-defined) is
+    considered active if it is determined during the link operation
+    that it may be accessed during program execution. Therefore,
+    <a class="parameter" href="#param-program">program</a>
+    should have previously been the
+    target of a call to
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    ,
+    but it is not necessary for it to have been linked
+    successfully.
+</div>
+    <div class="para">The size of the character buffer required to store the
+    longest uniform variable name in
+    <a class="parameter" href="#param-program">program</a>
+    can be obtained by calling
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    with the value
+    <span class="constant">GL_ACTIVE_UNIFORM_MAX_LENGTH</span>
+    . This value
+    should be used to allocate a buffer of sufficient size to store
+    the returned uniform variable name. The size of this character
+    buffer is passed in
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    , and a
+    pointer to this character buffer is passed in
+    <a class="parameter" href="#param-name.">name.</a>
+</div>
+    <div class="para">
+    <a class="function" href="./glGetActiveUniform.html">glGetActiveUniform</a>
+    returns the name
+    of the uniform variable indicated by
+    <a class="parameter" href="#param-index">index</a>
+    , storing it in the character buffer
+    specified by
+    <a class="parameter" href="#param-name">name</a>
+    . The string returned
+    will be null terminated. The actual number of characters written
+    into this buffer is returned in
+    <a class="parameter" href="#param-length">length</a>
+    ,
+    and this count does not include the null termination character.
+    If the length of the returned string is not required, a value of
+    <span class="constant">NULL</span>
+    can be passed in the
+    <a class="parameter" href="#param-length">length</a>
+    argument.
+</div>
+    <div class="para">The
+    <a class="parameter" href="#param-type">type</a>
+    argument will return a pointer to the uniform variable's data
+    type. The symbolic constants returned for uniform types are shown in the
+    table below.
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>
+    <span class="emphasis"> Returned Symbolic Contant </span>
+</th><th>
+    <span class="emphasis"> Shader Uniform Type </span>
+</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT</span>
+</td><td>
+    <span class="constant">float</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT_VEC2</span>
+</td><td>
+    <span class="constant">vec2</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT_VEC3</span>
+</td><td>
+    <span class="constant">vec3</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT_VEC4</span>
+</td><td>
+    <span class="constant">vec4</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DOUBLE</span>
+</td><td>
+    <span class="constant">double</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DOUBLE_VEC2</span>
+</td><td>
+    <span class="constant">dvec2</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DOUBLE_VEC3</span>
+</td><td>
+    <span class="constant">dvec3</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DOUBLE_VEC4</span>
+</td><td>
+    <span class="constant">dvec4</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT</span>
+</td><td>
+    <span class="constant">int</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_VEC2</span>
+</td><td>
+    <span class="constant">ivec2</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_VEC3</span>
+</td><td>
+    <span class="constant">ivec3</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_VEC4</span>
+</td><td>
+    <span class="constant">ivec4</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT</span>
+</td><td>
+    <span class="constant">unsigned int</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_VEC2</span>
+</td><td>
+    <span class="constant">uvec2</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_VEC3</span>
+</td><td>
+    <span class="constant">uvec3</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_VEC4</span>
+</td><td>
+    <span class="constant">uvec4</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_BOOL</span>
+</td><td>
+    <span class="constant">bool</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_BOOL_VEC2</span>
+</td><td>
+    <span class="constant">bvec2</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_BOOL_VEC3</span>
+</td><td>
+    <span class="constant">bvec3</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_BOOL_VEC4</span>
+</td><td>
+    <span class="constant">bvec4</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT_MAT2</span>
+</td><td>
+    <span class="constant">mat2</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT_MAT3</span>
+</td><td>
+    <span class="constant">mat3</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT_MAT4</span>
+</td><td>
+    <span class="constant">mat4</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT_MAT2x3</span>
+</td><td>
+    <span class="constant">mat2x3</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT_MAT2x4</span>
+</td><td>
+    <span class="constant">mat2x4</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT_MAT3x2</span>
+</td><td>
+    <span class="constant">mat3x2</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT_MAT3x4</span>
+</td><td>
+    <span class="constant">mat3x4</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT_MAT4x2</span>
+</td><td>
+    <span class="constant">mat4x2</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT_MAT4x3</span>
+</td><td>
+    <span class="constant">mat4x3</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DOUBLE_MAT2</span>
+</td><td>
+    <span class="constant">dmat2</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DOUBLE_MAT3</span>
+</td><td>
+    <span class="constant">dmat3</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DOUBLE_MAT4</span>
+</td><td>
+    <span class="constant">dmat4</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DOUBLE_MAT2x3</span>
+</td><td>
+    <span class="constant">dmat2x3</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DOUBLE_MAT2x4</span>
+</td><td>
+    <span class="constant">dmat2x4</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DOUBLE_MAT3x2</span>
+</td><td>
+    <span class="constant">dmat3x2</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DOUBLE_MAT3x4</span>
+</td><td>
+    <span class="constant">dmat3x4</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DOUBLE_MAT4x2</span>
+</td><td>
+    <span class="constant">dmat4x2</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_DOUBLE_MAT4x3</span>
+</td><td>
+    <span class="constant">dmat4x3</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_1D</span>
+</td><td>
+    <span class="constant">sampler1D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_2D</span>
+</td><td>
+    <span class="constant">sampler2D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_3D</span>
+</td><td>
+    <span class="constant">sampler3D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_CUBE</span>
+</td><td>
+    <span class="constant">samplerCube</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_1D_SHADOW</span>
+</td><td>
+    <span class="constant">sampler1DShadow</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_2D_SHADOW</span>
+</td><td>
+    <span class="constant">sampler2DShadow</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_1D_ARRAY</span>
+</td><td>
+    <span class="constant">sampler1DArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_2D_ARRAY</span>
+</td><td>
+    <span class="constant">sampler2DArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_1D_ARRAY_SHADOW</span>
+</td><td>
+    <span class="constant">sampler1DArrayShadow</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_2D_ARRAY_SHADOW</span>
+</td><td>
+    <span class="constant">sampler2DArrayShadow</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_2D_MULTISAMPLE</span>
+</td><td>
+    <span class="constant">sampler2DMS</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_2D_MULTISAMPLE_ARRAY</span>
+</td><td>
+    <span class="constant">sampler2DMSArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_CUBE_SHADOW</span>
+</td><td>
+    <span class="constant">samplerCubeShadow</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_BUFFER</span>
+</td><td>
+    <span class="constant">samplerBuffer</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_2D_RECT</span>
+</td><td>
+    <span class="constant">sampler2DRect</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SAMPLER_2D_RECT_SHADOW</span>
+</td><td>
+    <span class="constant">sampler2DRectShadow</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_SAMPLER_1D</span>
+</td><td>
+    <span class="constant">isampler1D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_SAMPLER_2D</span>
+</td><td>
+    <span class="constant">isampler2D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_SAMPLER_3D</span>
+</td><td>
+    <span class="constant">isampler3D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_SAMPLER_CUBE</span>
+</td><td>
+    <span class="constant">isamplerCube</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_SAMPLER_1D_ARRAY</span>
+</td><td>
+    <span class="constant">isampler1DArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_SAMPLER_2D_ARRAY</span>
+</td><td>
+    <span class="constant">isampler2DArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_SAMPLER_2D_MULTISAMPLE</span>
+</td><td>
+    <span class="constant">isampler2DMS</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_SAMPLER_2D_MULTISAMPLE_ARRAY</span>
+</td><td>
+    <span class="constant">isampler2DMSArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_SAMPLER_BUFFER</span>
+</td><td>
+    <span class="constant">isamplerBuffer</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_SAMPLER_2D_RECT</span>
+</td><td>
+    <span class="constant">isampler2DRect</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_SAMPLER_1D</span>
+</td><td>
+    <span class="constant">usampler1D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_SAMPLER_2D</span>
+</td><td>
+    <span class="constant">usampler2D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_SAMPLER_3D</span>
+</td><td>
+    <span class="constant">usampler3D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_SAMPLER_CUBE</span>
+</td><td>
+    <span class="constant">usamplerCube</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_SAMPLER_1D_ARRAY</span>
+</td><td>
+    <span class="constant">usampler2DArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_SAMPLER_2D_ARRAY</span>
+</td><td>
+    <span class="constant">usampler2DArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE</span>
+</td><td>
+    <span class="constant">usampler2DMS</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY</span>
+</td><td>
+    <span class="constant">usampler2DMSArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_SAMPLER_BUFFER</span>
+</td><td>
+    <span class="constant">usamplerBuffer</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_SAMPLER_2D_RECT</span>
+</td><td>
+    <span class="constant">usampler2DRect</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_IMAGE_1D</span>
+</td><td>
+    <span class="constant">image1D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_IMAGE_2D</span>
+</td><td>
+    <span class="constant">image2D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_IMAGE_3D</span>
+</td><td>
+    <span class="constant">image3D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_IMAGE_2D_RECT</span>
+</td><td>
+    <span class="constant">image2DRect</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_IMAGE_CUBE</span>
+</td><td>
+    <span class="constant">imageCube</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_IMAGE_BUFFER</span>
+</td><td>
+    <span class="constant">imageBuffer</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_IMAGE_1D_ARRAY</span>
+</td><td>
+    <span class="constant">image1DArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_IMAGE_2D_ARRAY</span>
+</td><td>
+    <span class="constant">image2DArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_IMAGE_2D_MULTISAMPLE</span>
+</td><td>
+    <span class="constant">image2DMS</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_IMAGE_2D_MULTISAMPLE_ARRAY</span>
+</td><td>
+    <span class="constant">image2DMSArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_IMAGE_1D</span>
+</td><td>
+    <span class="constant">iimage1D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_IMAGE_2D</span>
+</td><td>
+    <span class="constant">iimage2D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_IMAGE_3D</span>
+</td><td>
+    <span class="constant">iimage3D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_IMAGE_2D_RECT</span>
+</td><td>
+    <span class="constant">iimage2DRect</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_IMAGE_CUBE</span>
+</td><td>
+    <span class="constant">iimageCube</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_IMAGE_BUFFER</span>
+</td><td>
+    <span class="constant">iimageBuffer</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_IMAGE_1D_ARRAY</span>
+</td><td>
+    <span class="constant">iimage1DArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_IMAGE_2D_ARRAY</span>
+</td><td>
+    <span class="constant">iimage2DArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_IMAGE_2D_MULTISAMPLE</span>
+</td><td>
+    <span class="constant">iimage2DMS</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY</span>
+</td><td>
+    <span class="constant">iimage2DMSArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_1D</span>
+</td><td>
+    <span class="constant">uimage1D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_2D</span>
+</td><td>
+    <span class="constant">uimage2D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_3D</span>
+</td><td>
+    <span class="constant">uimage3D</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_2D_RECT</span>
+</td><td>
+    <span class="constant">uimage2DRect</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_CUBE</span>
+</td><td>
+    <span class="constant">uimageCube</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_BUFFER</span>
+</td><td>
+    <span class="constant">uimageBuffer</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_1D_ARRAY</span>
+</td><td>
+    <span class="constant">uimage1DArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_2D_ARRAY</span>
+</td><td>
+    <span class="constant">uimage2DArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE</span>
+</td><td>
+    <span class="constant">uimage2DMS</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY</span>
+</td><td>
+    <span class="constant">uimage2DMSArray</span>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_ATOMIC_COUNTER</span>
+</td><td>
+    <span class="constant">atomic_uint</span>
+</td>
+                </tr>
+    </tbody></table>
+</div>
+    <div class="para">If one or more elements of an array are active, the name
+    of the array is returned in
+    <a class="parameter" href="#param-name">name</a>
+    , the
+    type is returned in
+    <a class="parameter" href="#param-type">type</a>
+    , and the
+    <a class="parameter" href="#param-size">size</a>
+    parameter returns the highest array
+    element index used, plus one, as determined by the compiler
+    and/or linker. Only one active uniform variable will be reported
+    for a uniform array.
+</div>
+    <div class="para">Uniform variables that are declared as structures or
+    arrays of structures will not be returned directly by this
+    function. Instead, each of these uniform variables will be
+    reduced to its fundamental components containing the
+    "." and "[]" operators such that each of the
+    names is valid as an argument to
+    <a class="crossref" href="./glGetUniformLocation.html">glGetUniformLocation</a>
+    .
+    Each of these reduced uniform variables is counted as one active
+    uniform variable and is assigned an index. A valid name cannot
+    be a structure, an array of structures, or a subcomponent of a
+    vector or matrix.
+</div>
+    <div class="para">The size of the uniform variable will be returned in
+    <a class="parameter" href="#param-size">size</a>
+    . Uniform variables other than arrays
+    will have a size of 1. Structures and arrays of structures will
+    be reduced as described earlier, such that each of the names
+    returned will be a data type in the earlier list. If this
+    reduction results in an array, the size returned will be as
+    described for uniform arrays; otherwise, the size returned will
+    be 1.
+</div>
+    <div class="para">The list of active uniform variables may include both
+    built-in uniform variables (which begin with the prefix
+    "gl_") as well as user-defined uniform variable
+    names.</div>
+    <div class="para">This function will return as much information as it can
+    about the specified active uniform variable. If no information
+    is available,
+    <a class="parameter" href="#param-length">length</a>
+    will be 0, and
+    <a class="parameter" href="#param-name">name</a>
+    will be an empty string. This
+    situation could occur if this function is called after a link
+    operation that failed. If an error occurs, the return values
+    <a class="parameter" href="#param-length">length</a>
+    ,
+    <a class="parameter" href="#param-size">size</a>
+    ,
+    <a class="parameter" href="#param-type">type</a>
+    , and
+    <a class="parameter" href="#param-name">name</a>
+    will be unmodified.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+            The double types,
+    <span class="constant">GL_DOUBLE</span>
+    ,
+    <span class="constant">GL_DOUBLE_VEC2</span>
+    ,
+    <span class="constant">GL_DOUBLE_VEC3</span>
+    ,
+    <span class="constant">GL_DOUBLE_VEC4</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT2</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT3</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT4</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT2x3</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT2x4</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT3x2</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT3x4</span>
+    ,
+    <span class="constant">GL_DOUBLE_MAT4x2</span>
+    ,
+            and
+    <span class="constant">GL_DOUBLE_MAT4x3</span>
+    are only available if the GL
+            version is 4.1 or higher.
+</div>
+    <div class="para">
+            The image types,
+    <span class="constant">GL_IMAGE_1D</span>
+    ,
+    <span class="constant">GL_IMAGE_2D</span>
+    ,
+    <span class="constant">GL_IMAGE_3D</span>
+    ,
+    <span class="constant">GL_IMAGE_2D_RECT</span>
+    ,
+    <span class="constant">GL_IMAGE_CUBE</span>
+    ,
+    <span class="constant">GL_IMAGE_BUFFER</span>
+    ,
+    <span class="constant">GL_IMAGE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_IMAGE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_IMAGE_2D_MULTISAMPLE</span>
+    ,
+    <span class="constant">GL_IMAGE_2D_MULTISAMPLE_ARRAY</span>
+    ,
+    <span class="constant">GL_INT_IMAGE_1D</span>
+    ,
+    <span class="constant">GL_INT_IMAGE_2D</span>
+    ,
+    <span class="constant">GL_INT_IMAGE_3D</span>
+    ,
+    <span class="constant">GL_INT_IMAGE_2D_RECT</span>
+    ,
+    <span class="constant">GL_INT_IMAGE_CUBE</span>
+    ,
+    <span class="constant">GL_INT_IMAGE_BUFFER</span>
+    ,
+    <span class="constant">GL_INT_IMAGE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_INT_IMAGE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_INT_IMAGE_2D_MULTISAMPLE</span>
+    ,
+    <span class="constant">GL_INT_IMAGE_2D_MULTISAMPLE_ARRAY</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_1D</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_2D</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_3D</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_2D_RECT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_CUBE</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_BUFFER</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_1D_ARRAY</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_2D_ARRAY</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY</span>
+    ,
+            and the atomic counter type,
+    <span class="constant">GL_UNSIGNED_INT_ATOMIC_COUNTER</span>
+    are only available if the GL
+            version is 4.2 or higher.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a value generated by
+    OpenGL.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-program">program</a>
+    is not a program object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-index">index</a>
+    is greater than or equal to the
+    number of active uniform variables in
+    <a class="parameter" href="#param-program">program</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    is less than 0.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_VERTEX_UNIFORM_COMPONENTS</span>
+    ,
+    <span class="constant">GL_MAX_GEOMETRY_UNIFORM_COMPONENTS</span>
+    ,
+    <span class="constant">GL_MAX_TESS_CONTROL_UNIFORM_COMPONENTS</span>
+    ,
+    <span class="constant">GL_MAX_TESS_EVALUATION_UNIFORM_COMPONENTS</span>
+    ,
+    <span class="constant">GL_MAX_FRAGMENT_UNIFORM_COMPONENTS</span>
+    .
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGetProgram.html">glGetProgram</a>
+    with argument
+    <span class="constant">GL_ACTIVE_UNIFORMS</span>
+    or
+    <span class="constant">GL_ACTIVE_UNIFORM_MAX_LENGTH</span>
+    .
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsProgram.html">glIsProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetActiveUniform.html">glGetActiveUniform</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetUniform.html">glGetUniform</a>
+    ,
+    <a class="crossref" href="./glGetUniformLocation.html">glGetUniformLocation</a>
+    ,
+    <a class="crossref" href="./glLinkProgram.html">glLinkProgram</a>
+    ,
+    <a class="crossref" href="./glUniform.html">glUniform</a>
+    ,
+    <a class="crossref" href="./glUseProgram.html">glUseProgram</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2005 3Dlabs Inc. Ltd.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

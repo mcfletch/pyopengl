@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutSpecialUpFunc : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutSpecialUpFunc</h1>
+</header>
+<main class="content">
+    <section class="purpose">sets the special keyboard up (key release) callback for the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutSpecialUpFunc"></a>
+    <span class="c-function">glutSpecialUpFunc</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutSpecialUpFunc"></a>
+    <span class="py-function">glutSpecialUpFunc</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-function" class="parameter">function</a>
+    </span>
+</span> )
+    <pre class="pydoc">Specify handler for GLUT 'SpecialUp' events
+    def handler( (int) key, (int) x, (int) y ):
+        return None</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-func"></a>
+                        func
+                    </th>
+                    <td>
+    <div class="simpara">
+						The new special callback function.
+					</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutSpecialUpFunc.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutSpecialUpFunc.html">glutSpecialUpFunc</a>
+    sets the special keyboard up (key release) callback for the current window. The
+			special keyboard up callback is triggered when keyboard function or directional keys are released. The
+    <a class="parameter" href="#param-key">key</a>
+    callback parameter is a
+    <span class="constant">GLUT_KEY_*</span>
+    constant for the special key
+			pressed. The
+    <a class="parameter" href="#param-x">x</a>
+    and
+    <a class="parameter" href="#param-y">y</a>
+    callback parameters indicate the mouse in window
+			relative coordinates when the key was pressed. When a new window is created, no special up callback is initially
+			registered and special key releases in the window are ignored. Passing
+    <span class="constant">NULL</span>
+    to
+    <a class="function" href="./glutSpecialUpFunc.html">glutSpecialUpFunc</a>
+    disables the generation of special up callbacks.
+</div>
+    <div class="para">
+			During a special up callback,
+    <a class="function" href="./glutGetModifiers.html">glutGetModifiers</a>
+    may be called to determine the
+			state of modifier keys when the key release generating the callback occurred.
+</div>
+    <div class="para">
+			To avoid the reporting of key release/press pairs due to auto repeat, use
+    <a class="function" href="./glutIgnoreKeyRepeat.html">glutIgnoreKeyRepeat</a>
+    to ignore auto repeated keystrokes.
+</div>
+    <div class="para">
+			An implementation should do its best to provide ways to generate all the
+    <span class="constant">GLUT_KEY_</span>
+    * special keys.
+			The available
+    <span class="constant">GLUT_KEY_*</span>
+    values are:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_F1</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						F1 function key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_F2</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						F2 function key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_F3</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						F3 function key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_F4</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						F4 function key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_F5</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						F5 function key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_F6</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						F6 function key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_F7</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						F7 function key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_F8</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						F8 function key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_F9</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						F9 function key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_F10</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						F10 function key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_F11</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						F11 function key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_F12</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						F12 function key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_LEFT</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Left directional key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_UP</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Up directional key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_RIGHT</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Right directional key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_DOWN</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Down directional key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_PAGE_UP</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Page up directional key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_PAGE_DOWN</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Page down directional key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_HOME</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Home directional key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_END</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						End directional key.
+					</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GLUT_KEY_INSERT</span>
+</dt>
+    <dd class="listitem">
+    <div class="simpara">
+						Inset directional key.
+					</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+			Note that the escape, backspace, and delete keys are generated as an ASCII character.
+		</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutSpecialFunc.html">glutSpecialFunc</a>
+            <a class="crossref" href="./glutKeyboardFunc.html">glutKeyboardFunc</a>
+            <a class="crossref" href="./glutKeyboardUpFunc.html">glutKeyboardUpFunc</a>
+            <a class="crossref" href="./glutMouseFunc.html">glutMouseFunc</a>
+            <a class="crossref" href="./glutSpaceballButtonFunc.html">glutSpaceballButtonFunc</a>
+            <a class="crossref" href="./glutButtonBoxFunc.html">glutButtonBoxFunc</a>
+            <a class="crossref" href="./glutTabletButtonFunc.html">glutTabletButtonFunc</a>
+            <a class="crossref" href="./glutGetModifiers.html">glutGetModifiers</a>
+            <a class="crossref" href="./glutIgnoreKeyRepeat.html">glutIgnoreKeyRepeat</a>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glutSpecialUpFunc</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/glutcontext.py">OpenGLContext/glutcontext.py</a>
+    Lines: <span class="sample-lines">105, 107</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/renderers/openglGlut.py">renderers/openglGlut.py</a>
+    Lines: <span class="sample-lines">64</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyUI2</span>
+    <a href="https://github.com/Ripsnorta/pyui2/blob/master/system/glutdevice.py">system/glutdevice.py</a>
+    Lines: <span class="sample-lines">61</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

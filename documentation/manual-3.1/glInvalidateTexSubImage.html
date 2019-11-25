@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glInvalidateTexSubImage : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glInvalidateTexSubImage</h1>
+</header>
+<main class="content">
+    <section class="purpose">invalidate a region of a texture image</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glInvalidateTexSubImage"></a>
+    <span class="c-function">glInvalidateTexSubImage</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-texture" class="parameter">texture</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-level" class="parameter">level</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-xoffset" class="parameter">xoffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-yoffset" class="parameter">yoffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-zoffset" class="parameter">zoffset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-depth" class="parameter">depth</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glInvalidateTexSubImage"></a>
+    <span class="py-function">glInvalidateTexSubImage</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-texture" class="parameter">texture</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-xoffset" class="parameter">xoffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-yoffset" class="parameter">yoffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-zoffset" class="parameter">zoffset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-depth" class="parameter">depth</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-texture"></a>
+                        texture
+                    </th>
+                    <td>
+    <div class="para">
+                    The name of a texture object a subregion of which to invalidate.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-level"></a>
+                        level
+                    </th>
+                    <td>
+    <div class="para">
+                    The level of detail of the texture object within which the region resides.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-xoffset"></a>
+                        xoffset
+                    </th>
+                    <td>
+    <div class="para">
+                    The X offset of the region to be invalidated.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-yoffset"></a>
+                        yoffset
+                    </th>
+                    <td>
+    <div class="para">
+                    The Y offset of the region to be invalidated.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-zoffset"></a>
+                        zoffset
+                    </th>
+                    <td>
+    <div class="para">
+                    The Z offset of the region to be invalidated.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">
+                    The width of the region to be invalidated.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-height"></a>
+                        height
+                    </th>
+                    <td>
+    <div class="para">
+                    The height of the region to be invalidated.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-depth"></a>
+                        depth
+                    </th>
+                    <td>
+    <div class="para">
+                    The depth of the region to be invalidated.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glInvalidateTexSubImage.html">glInvalidateTexSubImage</a>
+    invalidates all or part of
+            a texture image.
+    <a class="parameter" href="#param-texture">texture</a>
+    and
+    <a class="parameter" href="#param-level">level</a>
+    indicated
+            which texture image is being invalidated. After this command, data in that subregion have undefined
+            values.
+    <a class="parameter" href="#param-xoffset">xoffset</a>
+    ,
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    ,
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    ,
+    <a class="parameter" href="#param-width">width</a>
+    ,
+    <a class="parameter" href="#param-height">height</a>
+    , and
+    <a class="parameter" href="#param-depth">depth</a>
+    are interpreted as they are in
+    <a class="crossref" href="./glTexSubImage3D.html">glTexSubImage3D</a>
+    . For texture targets that
+            don't have certain dimensions, this command treats those dimensions as
+            having a size of 1. For example, to invalidate a portion of a two-
+            dimensional texture, the application would use
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    equal to zero and
+    <a class="parameter" href="#param-depth">depth</a>
+    equal to one. Cube map textures are treated as an array of six
+            slices in the z-dimension, where a value of
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    is interpreted as
+            specifying face
+    <span class="constant">GL_TEXTURE_CUBE_MAP_POSITIVE_X</span>
+    +
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    .
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-level">level</a>
+    must be greater than or equal to zero and be
+            less than the base 2 logarithm of the maximum texture width, height, or depth.
+    <a class="parameter" href="#param-xoffset">xoffset</a>
+    ,
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    and
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    must be greater than or equal to zero and be less than the width, height or depth
+            of the image, respectively. Furthermore,
+    <a class="parameter" href="#param-xoffset">xoffset</a>
+    +
+    <a class="parameter" href="#param-width">width</a>
+    ,
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    +
+    <a class="parameter" href="#param-height">height</a>
+    , and
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    +
+    <a class="parameter" href="#param-depth">depth</a>
+    must be less
+            than or equal to the width, height or depth of the image, respectively.
+</div>
+    <div class="para">
+            For textures of targets
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    ,
+    <span class="constant">GL_TEXTURE_BUFFER</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    , or
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+    , level must be zero.
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-xoffset">xoffset</a>
+    ,
+    <a class="parameter" href="#param-yoffset">yoffset</a>
+    or
+    <a class="parameter" href="#param-zoffset">zoffset</a>
+    is less than zero,
+            or if any of them is greater than the size of the image in the corresponding dimension.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-level">level</a>
+    is
+            less than zero or if it is greater or equal to the base 2 logarithm of the maximum texture width, height, or depth.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if the target of
+    <a class="parameter" href="#param-texture">texture</a>
+    is any of
+    <span class="constant">GL_TEXTURE_RECTANGLE</span>
+    ,
+    <span class="constant">GL_TEXTURE_BUFFER</span>
+    ,
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE</span>
+    , or
+    <span class="constant">GL_TEXTURE_2D_MULTISAMPLE_ARRAY</span>
+    and
+    <a class="parameter" href="#param-level">level</a>
+    is not zero.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-texture">texture</a>
+    is not the
+            name of an existing texture object.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_MAX_TEXTURE_SIZE</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glInvalidateTexSubImage.html">glInvalidateTexSubImage</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glInvalidateTexImage.html">glInvalidateTexImage</a>
+    ,,
+    <a class="crossref" href="./glInvalidateBufferSubData.html">glInvalidateBufferSubData</a>
+    ,
+    <a class="crossref" href="./glInvalidateBufferData.html">glInvalidateBufferData</a>
+    ,
+    <a class="crossref" href="./glInvalidateFramebuffer.html">glInvalidateFramebuffer</a>
+    ,
+    <a class="crossref" href="./glInvalidateSubFramebuffer.html">glInvalidateSubFramebuffer</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2013-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

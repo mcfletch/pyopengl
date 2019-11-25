@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutPostOverlayRedisplay : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutPostOverlayRedisplay</h1>
+</header>
+<main class="content">
+    <section class="purpose">marks the overlay of the current or specified window as needing to be redisplayed.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutPostOverlayRedisplay"></a>
+    <span class="c-function">glutPostOverlayRedisplay</span>(<span class="parameter-list">
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutPostOverlayRedisplay"></a>
+    <span class="py-function">glutPostOverlayRedisplay</span>( <span class="parameter-list">
+</span> )
+    <pre class="pydoc">glutPostOverlayRedisplay(  ) -&gt; None</pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glutPostWindowOverlayRedisplay"></a>
+    <span class="c-function">glutPostWindowOverlayRedisplay</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-win" class="parameter">win</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glutPostWindowOverlayRedisplay"></a>
+    <span class="py-function">glutPostWindowOverlayRedisplay</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-window" class="parameter">window</a>
+    </span>
+</span> )
+    <pre class="pydoc">glutPostWindowOverlayRedisplay( c_int(window) ) -&gt; None</pre>
+</div>
+        </div>
+    </section>
+    <section class="section" id="glutPostOverlayRedisplay.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+			Mark the overlay of current window as needing to be redisplayed. The next iteration through
+    <a class="function" href="./glutMainLoop.html">glutMainLoop</a>
+    , the window's overlay display callback (or simply the display callback if
+			no overlay display callback is registered) will be called to redisplay the window's overlay plane. Multiple calls to
+    <a class="function" href="./glutPostOverlayRedisplay.html">glutPostOverlayRedisplay</a>
+    before the next display callback opportunity (or overlay display callback
+			opportunity if one is registered) generate only a single redisplay.
+    <a class="function" href="./glutPostOverlayRedisplay.html">glutPostOverlayRedisplay</a>
+    may
+			be called within a window's display or overlay display callback to re-mark that window for redisplay.
+</div>
+    <div class="para">
+			Logically, overlay damage notification for a window is treated as a
+    <a class="function" href="./glutPostOverlayRedisplay.html">glutPostOverlayRedisplay</a>
+    on
+			the damaged window. Unlike damage reported by the window system,
+    <a class="function" href="./glutPostOverlayRedisplay.html">glutPostOverlayRedisplay</a>
+    will not
+			set to true the overlay's damaged status (returned by
+    <a class="function" href="./glutLayerGet.html">glutLayerGet(GLUT_OVERLAY_DAMAGED)</a>
+    .
+</div>
+    <div class="para">
+			If the window you want to post an overlay redisplay on is not already current (and you do not require it to be
+			immediately made current), using
+    <a class="function" href="./glutPostOverlayRedisplay.html#c-glutPostWindowOverlayRedisplay">glutPostWindowOverlayRedisplay</a>
+    is more efficient that calling
+    <a class="function" href="./glutSetWindow.html">glutSetWindow</a>
+    to the desired window and then calling
+    <a class="function" href="./glutPostOverlayRedisplay.html">glutPostOverlayRedisplay</a>
+    .
+</div>
+    </section><section class="section" id="glutPostOverlayRedisplay.3GLUT-example">
+    <h2 class="title">Example</h2>
+    <div class="para">
+			If you are doing an interactive effect like rubberbanding in the overlay, it is a good idea to structure your rendering
+			to minimize flicker (most overlays are single-buffered). Only clear the overlay if you know that the window has been
+			damaged. Otherwise, try to simply erase what you last drew and redraw it in an updated position. Here is an example
+			overlay display callback used to implement overlay rubberbanding:
+		</div>
+    <div class="programlisting">void redrawOverlay(void)
+{
+    static int prevStretchX, prevStretchY;
+    if (glutLayerGet(GLUT_OVERLAY_DAMAGED)) {
+		/* Damage means we need a full clear. */
+        glClear(GL_COLOR_BUFFER_BIT);
+    } else {
+		/* Undraw last rubber-band. */
+        glIndexi(transparent);
+        glBegin(GL_LINE_LOOP);
+        glVertex2i(anchorX, anchorY);
+        glVertex2i(anchorX, prevStretchY);
+        glVertex2i(prevStretchX, prevStretchY);
+        glVertex2i(prevStretchX, anchorY);
+        glEnd();
+    }
+    glIndexi(red);
+    glBegin(GL_LINE_LOOP);
+    glVertex2i(anchorX, anchorY);
+    glVertex2i(anchorX, stretchY);
+    glVertex2i(stretchX, stretchY);
+    glVertex2i(stretchX, anchorY);
+    glEnd();
+    prevStretchX = stretchX;
+    prevStretchY = stretchY;
+}</div>
+    <div class="para">
+			Notice how
+    <a class="function" href="./glutLayerGet.html">glutLayerGet(GLUT_OVERLAY_DAMAGED)</a>
+    is used to determine if a clear
+			needs to take place because of damage; if a clear is unnecessary, it is faster to just draw the last rubberband using
+			the transparent pixel.
+</div>
+    <div class="para">
+			When the application is through with the rubberbanding effect, the best way to get ride of the rubberband is to simply
+			hide the overlay by calling
+    <a class="function" href="./glutShowOverlay.html#c-glutHideOverlay">glutHideOverlay</a>
+    .
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutPostRedisplay.html">glutPostRedisplay</a>
+            <a class="crossref" href="./glutEstablishOverlay.html">glutEstablishOverlay</a>
+            <a class="crossref" href="./glutLayerGet.html">glutLayerGet</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetError : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetError</h1>
+</header>
+<main class="content">
+    <section class="purpose">return error information</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetError"></a>
+    <span class="c-function">glGetError</span>(<span class="parameter-list">
+    <span class="param-def">
+         (
+            <a href="#param-void" class="parameter">void</a>
+        )
+    </span>
+</span>)-&gt; GLenum
+</div>
+                <div class="py-signature">
+    <a name="py-glGetError"></a>
+    <span class="py-function">glGetError</span>( <span class="parameter-list">
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_uint'&gt;</span>
+</div>
+        </div>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetError.html">glGetError</a>
+    returns the value of the error flag.
+            Each detectable error is assigned a numeric code and symbolic name.
+            When an error occurs,
+            the error flag is set to the appropriate error code value.
+            No other errors are recorded until
+    <a class="function" href="./glGetError.html">glGetError</a>
+    is called,
+            the error code is returned,
+            and the flag is reset to
+    <span class="constant">GL_NO_ERROR</span>
+    .
+            If a call to
+    <a class="function" href="./glGetError.html">glGetError</a>
+    returns
+    <span class="constant">GL_NO_ERROR</span>
+    ,
+            there has been no detectable error since the last call to
+    <a class="function" href="./glGetError.html">glGetError</a>
+    ,
+            or since the GL was initialized.
+</div>
+    <div class="para">
+            To allow for distributed implementations,
+            there may be several error flags.
+            If any single error flag has recorded an error,
+            the value of that flag is returned
+            and that flag is reset to
+    <span class="constant">GL_NO_ERROR</span>
+    when
+    <a class="function" href="./glGetError.html">glGetError</a>
+    is called.
+            If more than one flag has recorded an error,
+    <a class="function" href="./glGetError.html">glGetError</a>
+    returns and clears an arbitrary error flag value.
+            Thus,
+    <a class="function" href="./glGetError.html">glGetError</a>
+    should always be called in a loop,
+            until it returns
+    <span class="constant">GL_NO_ERROR</span>
+    ,
+            if all error flags are to be reset.
+</div>
+    <div class="para">
+            Initially, all error flags are set to
+    <span class="constant">GL_NO_ERROR</span>
+    .
+</div>
+    <div class="para">
+            The following errors are currently defined:
+        </div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_NO_ERROR</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        No error has been recorded.
+                        The value of this symbolic constant is guaranteed to be 0.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_INVALID_ENUM</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        An unacceptable value is specified for an enumerated argument.
+                        The offending command is ignored
+                        and has no other side effect than to set the error flag.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_INVALID_VALUE</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        A numeric argument is out of range.
+                        The offending command is ignored
+                        and has no other side effect than to set the error flag.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_INVALID_OPERATION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The specified operation is not allowed in the current state.
+                        The offending command is ignored
+                        and has no other side effect than to set the error flag.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_INVALID_FRAMEBUFFER_OPERATION</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        The framebuffer object is not complete. The offending command
+                        is ignored and has no other side effect than to set the error flag.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_OUT_OF_MEMORY</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        There is not enough memory left to execute the command.
+                        The state of the GL is undefined,
+                        except for the state of the error flags,
+                        after this error is recorded.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STACK_UNDERFLOW</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        An attempt has been made to perform an operation that would
+                        cause an internal stack to underflow.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STACK_OVERFLOW</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        An attempt has been made to perform an operation that would
+                        cause an internal stack to overflow.
+                    </div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+            When an error flag is set,
+            results of a GL operation are undefined only if
+    <span class="constant">GL_OUT_OF_MEMORY</span>
+    has occurred.
+            In all other cases,
+            the command generating the error is ignored and has no effect on the GL state
+            or frame buffer contents.
+            If the generating command returns a value, it returns 0.
+            If
+    <a class="function" href="./glGetError.html">glGetError</a>
+    itself generates an error, it returns 0.
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetError.html">glGetError</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI
+            This document is licensed under the SGI
+            Free Software B License. For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glGetError</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/proesch/shaderProg/shaderProg.py">PyOpenGL-Demo/proesch/shaderProg/shaderProg.py</a>
+    Lines: <span class="sample-lines">49</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

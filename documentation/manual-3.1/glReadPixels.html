@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glReadPixels : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glReadPixels</h1>
+</header>
+<main class="content">
+    <section class="purpose">read a block of pixels from the frame buffer</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glReadPixels"></a>
+    <span class="c-function">glReadPixels</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLint (
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        void * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glReadPixels"></a>
+    <span class="py-function">glReadPixels</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-array" class="parameter">array</a>
+         = None
+        ,
+    </span><span class="param-def">
+            <a href="#param-outputType" class="parameter">outputType</a>
+         = &lt;type 'str'&gt;
+    </span>
+</span> )
+    <pre class="pydoc">Read specified pixels from the current display buffer
+
+    x,y,width,height -- location and dimensions of the image to read
+        from the buffer
+    format -- pixel format for the resulting data
+    type -- data-format for the resulting data
+    array -- optional array/offset into which to store the value
+    outputType -- default (bytes) provides string output of the
+        results iff OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING is True
+        and type == GL_UNSIGNED_BYTE.  Any other value will cause
+        output in the default array output format.
+
+    returns the pixel data array in the format defined by the
+    format, type and outputType
+    </pre>
+</div>
+                <div class="py-signature">
+    <a name="py-glReadPixelsf"></a>
+    <span class="py-function">glReadPixelsf</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+         = GL_FLOAT
+        ,
+    </span><span class="param-def">
+            <a href="#param-array" class="parameter">array</a>
+         = None
+        ,
+    </span><span class="param-def">
+            <a href="#param-outputType" class="parameter">outputType</a>
+         = &lt;type 'str'&gt;
+    </span>
+</span> )
+    <pre class="pydoc">Read specified pixels from the current display buffer
+
+        This typed version returns data in your specified default
+        array data-type format, or in the passed array, which will
+        be converted to the array-type required by the format.
+        </pre>
+</div>
+                <div class="py-signature">
+    <a name="py-glReadPixelsi"></a>
+    <span class="py-function">glReadPixelsi</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+         = GL_INT
+        ,
+    </span><span class="param-def">
+            <a href="#param-array" class="parameter">array</a>
+         = None
+        ,
+    </span><span class="param-def">
+            <a href="#param-outputType" class="parameter">outputType</a>
+         = &lt;type 'str'&gt;
+    </span>
+</span> )
+    <pre class="pydoc">Read specified pixels from the current display buffer
+
+        This typed version returns data in your specified default
+        array data-type format, or in the passed array, which will
+        be converted to the array-type required by the format.
+        </pre>
+</div>
+                <div class="py-signature">
+    <a name="py-glReadPixelss"></a>
+    <span class="py-function">glReadPixelss</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+         = GL_SHORT
+        ,
+    </span><span class="param-def">
+            <a href="#param-array" class="parameter">array</a>
+         = None
+        ,
+    </span><span class="param-def">
+            <a href="#param-outputType" class="parameter">outputType</a>
+         = &lt;type 'str'&gt;
+    </span>
+</span> )
+    <pre class="pydoc">Read specified pixels from the current display buffer
+
+        This typed version returns data in your specified default
+        array data-type format, or in the passed array, which will
+        be converted to the array-type required by the format.
+        </pre>
+</div>
+                <div class="py-signature">
+    <a name="py-glReadPixelsui"></a>
+    <span class="py-function">glReadPixelsui</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+         = GL_UNSIGNED_INT
+        ,
+    </span><span class="param-def">
+            <a href="#param-array" class="parameter">array</a>
+         = None
+        ,
+    </span><span class="param-def">
+            <a href="#param-outputType" class="parameter">outputType</a>
+         = &lt;type 'str'&gt;
+    </span>
+</span> )
+    <pre class="pydoc">Read specified pixels from the current display buffer
+
+        This typed version returns data in your specified default
+        array data-type format, or in the passed array, which will
+        be converted to the array-type required by the format.
+        </pre>
+</div>
+                <div class="py-signature">
+    <a name="py-glReadPixelsus"></a>
+    <span class="py-function">glReadPixelsus</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+         = GL_UNSIGNED_SHORT
+        ,
+    </span><span class="param-def">
+            <a href="#param-array" class="parameter">array</a>
+         = None
+        ,
+    </span><span class="param-def">
+            <a href="#param-outputType" class="parameter">outputType</a>
+         = &lt;type 'str'&gt;
+    </span>
+</span> )
+    <pre class="pydoc">Read specified pixels from the current display buffer
+
+        This typed version returns data in your specified default
+        array data-type format, or in the passed array, which will
+        be converted to the array-type required by the format.
+        </pre>
+</div>
+        </div><div class="signature">
+            <div class="c-signature">
+    <a name="c-glReadnPixels"></a>
+    <span class="c-function">glReadnPixels</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLint (
+            <a href="#param-x" class="parameter">x</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-y" class="parameter">y</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-height" class="parameter">height</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        void *(
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glReadnPixels"></a>
+    <span class="py-function">glReadnPixels</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-x" class="parameter">x</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-y" class="parameter">y</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-height" class="parameter">height</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-x"></a><a name="param-y"></a>
+                        x, y
+                    </th>
+                    <td>
+    <div class="para">Specify the window coordinates of the first pixel that is read
+          from the frame buffer. This location is the lower left corner of a
+          rectangular block of pixels.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a><a name="param-height"></a>
+                        width, height
+                    </th>
+                    <td>
+    <div class="para">Specify the dimensions of the pixel rectangle.
+    <a class="parameter" href="#param-width">width</a>
+    and
+    <a class="parameter" href="#param-height">height</a>
+    of
+          one correspond to a single pixel.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-format"></a>
+                        format
+                    </th>
+                    <td>
+    <div class="para">Specifies the format of the pixel data. The following symbolic
+          values are accepted:
+    <span class="constant">GL_STENCIL_INDEX</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    ,
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    ,
+    <span class="constant">GL_RED</span>
+    ,
+    <span class="constant">GL_GREEN</span>
+    ,
+    <span class="constant">GL_BLUE</span>
+    ,
+    <span class="constant">GL_RGB</span>
+    ,
+    <span class="constant">GL_BGR</span>
+    ,
+    <span class="constant">GL_RGBA</span>
+    , and
+    <span class="constant">GL_BGRA</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">Specifies the data type of the pixel data. Must be one of
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GL_BYTE</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+    ,
+    <span class="constant">GL_SHORT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT</span>
+    ,
+    <span class="constant">GL_INT</span>
+    ,
+    <span class="constant">GL_HALF_FLOAT</span>
+    ,
+    <span class="constant">GL_FLOAT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_24_8</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_10F_11F_11F_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_5_9_9_9_REV</span>
+    , or
+    <span class="constant">GL_FLOAT_32_UNSIGNED_INT_24_8_REV</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bufSize"></a>
+                        bufSize
+                    </th>
+                    <td>
+    <div class="para">Specifies the size of the buffer
+    <a class="parameter" href="#param-data">data</a>
+    for
+    <a class="function" href="./glReadPixels.html#c-glReadnPixels">glReadnPixels</a>
+    function.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-data"></a>
+                        data
+                    </th>
+                    <td>
+    <div class="para">Returns the pixel data.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glReadPixels.html">glReadPixels</a>
+    and
+    <a class="function" href="./glReadPixels.html#c-glReadnPixels">glReadnPixels</a>
+    return pixel data from the frame
+    buffer, starting with the pixel whose lower left corner is at location
+    (
+    <a class="parameter" href="#param-x">x</a>
+    ,
+    <a class="parameter" href="#param-y">y</a>
+    ), into client memory
+    starting at location
+    <a class="parameter" href="#param-data">data</a>
+    . Several parameters
+    control the processing of the pixel data before it is placed into client
+    memory. These parameters are set with
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    .
+    This reference page describes the effects on
+    <a class="function" href="./glReadPixels.html">glReadPixels</a>
+    and
+    <a class="function" href="./glReadPixels.html#c-glReadnPixels">glReadnPixels</a>
+    of most, but not all of the parameters specified by these three
+    commands.
+</div>
+    <div class="para">If a non-zero named buffer object is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target (see
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    )
+    while a block of pixels is requested,
+    <a class="parameter" href="#param-data">data</a>
+    is
+    treated as a byte offset into the buffer object's data store rather than
+    a pointer to client memory.
+</div>
+    <div class="para">
+    <a class="function" href="./glReadPixels.html">glReadPixels</a>
+    and
+    <a class="function" href="./glReadPixels.html#c-glReadnPixels">glReadnPixels</a>
+    return values from each pixel with
+    lower left corner at
+    <math overflow="scroll">
+                <mfenced open="(" close=")">
+                    <mrow>
+                        <mi mathvariant="italic">x</mi>
+                        <mo>+</mo>
+                        <mi mathvariant="italic">i</mi>
+                    </mrow>
+                    <mrow>
+                        <mi mathvariant="italic">y</mi>
+                        <mo>+</mo>
+                        <mi mathvariant="italic">j</mi>
+                    </mrow>
+                </mfenced>
+            </math>
+    for
+    <math overflow="scroll">
+                <mrow>
+                    <mn>0</mn>
+                    <mo>&lt;=</mo>
+                    <mi mathvariant="italic">i</mi>
+                    <mo>&lt;</mo>
+                    <mi mathvariant="italic">width</mi>
+                </mrow>
+            </math>
+    and
+    <math overflow="scroll">
+                <mrow>
+                    <mn>0</mn>
+                    <mo>&lt;=</mo>
+                    <mi mathvariant="italic">j</mi>
+                    <mo>&lt;</mo>
+                    <mi mathvariant="italic">height</mi>
+                </mrow>
+            </math>
+    .
+            This pixel is said to be the
+    <math overflow="scroll"><mi mathvariant="italic">i</mi></math>
+    th
+            pixel in the
+    <math overflow="scroll"><mi mathvariant="italic">j</mi></math>
+    th
+            row.
+            Pixels are returned in row order from the lowest to the highest row,
+            left to right in each row.
+</div>
+    <div class="para">
+    <a class="parameter" href="#param-format">format</a>
+    specifies the format for the returned pixel values;
+            accepted values are:
+</div>
+    <dl class="variablelist">
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_STENCIL_INDEX</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Stencil values are read from the stencil buffer.
+                    </div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Depth values are read from the depth buffer.
+                        Each component is converted to floating point such that the minimum depth
+                        value maps to 0 and the maximum value maps to 1.
+                        Each component is clamped to the range
+    <math overflow="scroll">
+                            <mfenced open="[" close="]">
+                                <mn>0</mn>
+                                <mn>1</mn>
+                            </mfenced>
+                        </math>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_DEPTH_STENCIL</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">
+                        Values are taken from both the depth and stencil buffers. The
+    <a class="parameter" href="#param-type">type</a>
+    parameter
+                        must be
+    <span class="constant">GL_UNSIGNED_INT_24_8</span>
+    or
+    <span class="constant">GL_FLOAT_32_UNSIGNED_INT_24_8_REV</span>
+    .
+</div>
+</dd>
+</div>
+    <div class="varlistentry">
+    <dt class="term">
+    <span class="constant">GL_RED</span>
+    ,
+    <span class="constant">GL_GREEN</span>
+    ,
+    <span class="constant">GL_BLUE</span>
+    ,
+    <span class="constant">GL_RGB</span>
+    ,
+    <span class="constant">GL_BGR</span>
+    ,
+    <span class="constant">GL_RGBA</span>
+    ,
+    <span class="constant">GL_BGRA</span>
+</dt>
+    <dd class="listitem">
+    <div class="para">Color values are taken from the color buffer.</div>
+</dd>
+</div>
+</dl>
+    <div class="para">
+            Finally, the indices or components
+            are converted to the proper format,
+            as specified by
+    <a class="parameter" href="#param-type">type</a>
+    .
+            If
+    <a class="parameter" href="#param-format">format</a>
+    is
+    <span class="constant">GL_STENCIL_INDEX</span>
+    and
+    <a class="parameter" href="#param-type">type</a>
+    is not
+    <span class="constant">GL_FLOAT</span>
+    ,
+            each index is masked with the mask value given in the following table.
+            If
+    <a class="parameter" href="#param-type">type</a>
+    is
+    <span class="constant">GL_FLOAT</span>
+    , then each integer index is converted to
+            single-precision floating-point format.
+</div>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-format">format</a>
+    is
+    <span class="constant">GL_RED</span>
+    ,
+    <span class="constant">GL_GREEN</span>
+    ,
+    <span class="constant">GL_BLUE</span>
+    ,
+    <span class="constant">GL_RGB</span>
+    ,
+    <span class="constant">GL_BGR</span>
+    ,
+    <span class="constant">GL_RGBA</span>
+    , or
+    <span class="constant">GL_BGRA</span>
+    and
+    <a class="parameter" href="#param-type">type</a>
+    is not
+    <span class="constant">GL_FLOAT</span>
+    ,
+            each component is multiplied by the multiplier shown in the following table.
+            If type is
+    <span class="constant">GL_FLOAT</span>
+    , then each component is passed as is
+            (or converted to the client's single-precision floating-point format if
+            it is different from the one used by the GL).
+</div>
+    <div class="para">
+        </div>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>
+    <a class="parameter" href="#param-type">type</a>
+</th><th>
+    <span class="emphasis"> Index Mask </span>
+</th><th>
+    <span class="emphasis"> Component Conversion </span>
+</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>8</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>8</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_BYTE</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>7</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mfrac>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mfenced open="(" close=")">
+                                            <mrow>
+                                                <msup><mn>2</mn>
+                                                <mn>8</mn>
+                                                </msup>
+                                                <mo>-</mo>
+                                                <mn>1</mn>
+                                            </mrow>
+                                        </mfenced>
+                                        <mo></mo>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mn>2</mn>
+                            </mfrac>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>16</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>16</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_SHORT</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>15</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mfrac>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mfenced open="(" close=")">
+                                            <mrow>
+                                                <msup><mn>2</mn>
+                                                <mn>16</mn>
+                                                </msup>
+                                                <mo>-</mo>
+                                                <mn>1</mn>
+                                            </mrow>
+                                        </mfenced>
+                                        <mo></mo>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mn>2</mn>
+                            </mfrac>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>32</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>32</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_INT</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>31</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mfrac>
+                                <mfenced open="" close="">
+                                    <mrow>
+                                        <mfenced open="(" close=")">
+                                            <mrow>
+                                                <msup><mn>2</mn>
+                                                <mn>32</mn>
+                                                </msup>
+                                                <mo>-</mo>
+                                                <mn>1</mn>
+                                            </mrow>
+                                        </mfenced>
+                                        <mo></mo>
+                                        <mi mathvariant="italic">c</mi>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mn>2</mn>
+                            </mfrac>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_HALF_FLOAT</span>
+</td><td>
+                        none
+                        </td><td>
+    <math overflow="scroll"><mi mathvariant="italic">c</mi></math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT</span>
+</td><td>
+                        none
+                        </td><td>
+    <math overflow="scroll"><mi mathvariant="italic">c</mi></math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>N</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>N</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>N</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>N</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>N</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>N</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>N</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>N</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>N</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>N</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>N</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>N</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>N</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>N</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>N</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>N</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>N</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>N</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>N</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>N</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>N</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>N</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>N</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>N</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_24_8</span>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <msup><mn>2</mn>
+                                <mn>N</mn>
+                                </msup>
+                                <mo>-</mo>
+                                <mn>1</mn>
+                            </mrow>
+                        </math>
+</td><td>
+    <math overflow="scroll">
+                            <mrow>
+                                <mfenced open="(" close=")">
+                                    <mrow>
+                                        <msup><mn>2</mn>
+                                        <mn>N</mn>
+                                        </msup>
+                                        <mo>-</mo>
+                                        <mn>1</mn>
+                                    </mrow>
+                                </mfenced>
+                                <mo></mo>
+                                <mi mathvariant="italic">c</mi>
+                            </mrow>
+                        </math>
+</td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_10F_11F_11F_REV</span>
+</td><td>
+                        --
+                        </td><td>
+                        Special
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_UNSIGNED_INT_5_9_9_9_REV</span>
+</td><td>
+                        --
+                        </td><td>
+                        Special
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+    <span class="constant">GL_FLOAT_32_UNSIGNED_INT_24_8_REV</span>
+</td><td>
+                        none
+                        </td><td>
+    <math overflow="scroll"><mi mathvariant="italic">c</mi></math>
+    (Depth Only)
+</td>
+                </tr>
+    </tbody></table>
+    <div class="para">
+            Return values are placed in memory as follows.
+            If
+    <a class="parameter" href="#param-format">format</a>
+    is
+    <span class="constant">GL_STENCIL_INDEX</span>
+    ,
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    ,
+    <span class="constant">GL_RED</span>
+    ,
+    <span class="constant">GL_GREEN</span>
+    , or
+    <span class="constant">GL_BLUE</span>
+    ,
+            a single value is returned and the data for the
+    <math overflow="scroll"><mi mathvariant="italic">i</mi></math>
+    th
+            pixel in the
+    <math overflow="scroll"><mi mathvariant="italic">j</mi></math>
+    th
+            row
+            is placed in location
+    <math overflow="scroll">
+                <mrow>
+                    <mfenced open="(" close=")">
+                        <mi mathvariant="italic">j</mi>
+                    </mfenced>
+                    <mo></mo>
+                    <mi mathvariant="italic">width</mi>
+                    <mo>+</mo>
+                    <mi mathvariant="italic">i</mi>
+                </mrow>
+            </math>
+    .
+    <span class="constant">GL_RGB</span>
+    and
+    <span class="constant">GL_BGR</span>
+    return three values,
+    <span class="constant">GL_RGBA</span>
+    and
+    <span class="constant">GL_BGRA</span>
+    return four
+    values for each pixel, with all values corresponding to a single pixel
+    occupying contiguous space in
+    <a class="parameter" href="#param-data">data</a>
+    . Storage
+    parameters set by
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    ,
+    such as
+    <span class="constant">GL_PACK_LSB_FIRST</span>
+    and
+    <span class="constant">GL_PACK_SWAP_BYTES</span>
+    , affect the way that data is
+    written into memory. See
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    for a description.
+</div>
+    <div class="para">
+    <a class="function" href="./glReadPixels.html#c-glReadnPixels">glReadnPixels</a>
+    function will only handle the
+    call if
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    is at least of the size required to
+    store the requested data. Otherwise, it will generate a
+    <span class="constant">GL_INVALID_OPERATION</span>
+    error.
+</div>
+    </section><section class="section">
+    <h2 class="title">Notes</h2>
+    <div class="para">Values for pixels that lie outside the window connected to the
+    current GL context are undefined.</div>
+    <div class="para">If an error is generated, no change is made to the contents of
+    <a class="parameter" href="#param-data">data</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    or
+    <a class="parameter" href="#param-type">type</a>
+    is not an
+    accepted value.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if either
+    <a class="parameter" href="#param-width">width</a>
+    or
+    <a class="parameter" href="#param-height">height</a>
+    is
+    negative.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    is
+    <span class="constant">GL_STENCIL_INDEX</span>
+    and
+    there is no stencil buffer.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    is
+    <span class="constant">GL_DEPTH_COMPONENT</span>
+    and there is no depth buffer.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    is
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    and
+    there is no depth buffer or if there is no stencil buffer.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    is
+    <span class="constant">GL_DEPTH_STENCIL</span>
+    and
+    <a class="parameter" href="#param-type">type</a>
+    is not
+    <span class="constant">GL_UNSIGNED_INT_24_8</span>
+    or
+    <span class="constant">GL_FLOAT_32_UNSIGNED_INT_24_8_REV</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is one of
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+    , or
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GL_RGB</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-type">type</a>
+    is one of
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+    , or
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is neither
+    <span class="constant">GL_RGBA</span>
+    nor
+    <span class="constant">GL_BGRA</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero
+    buffer object name is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target and the buffer object's
+    data store is currently mapped.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero
+    buffer object name is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target and the data would be
+    packed to the buffer object such that the memory writes required would
+    exceed the data store size.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero
+    buffer object name is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target and
+    <a class="parameter" href="#param-data">data</a>
+    is not evenly divisible into the number of
+    bytes needed to store in memory a datum indicated by
+    <a class="parameter" href="#param-type">type</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <span class="constant">GL_READ_FRAMEBUFFER_BINDING</span>
+    is non-zero, the read
+    framebuffer is complete, and the value of
+    <span class="constant">GL_SAMPLE_BUFFERS</span>
+    for the read framebuffer is greater
+    than zero.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated by
+    <a class="function" href="./glReadPixels.html#c-glReadnPixels">glReadnPixels</a>
+    if the buffer size required to store
+    the requested data is greater than
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_PACK_BUFFER_BINDING</span>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glReadPixels.html">glReadPixels</a>
+</td><td></td>
+                </tr><tr valign="top">
+                    <td>
+    <a class="function" href="./glReadPixels.html#c-glReadnPixels">glReadnPixels</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glPixelStore.html">glPixelStore</a>
+    ,
+    <a class="crossref" href="./glReadBuffer.html">glReadBuffer</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006 Silicon Graphics, Inc.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This document is licensed under the SGI Free Software B License.
+            For details, see
+    <div class="link">http://oss.sgi.com/projects/FreeB/</div>
+    .
+</div>
+    </section>
+    <section class="samples-section">
+        <h2>Sample Code References</h2>
+        <p>The following code samples have been found which appear to reference the
+        functions described here.  Take care that the code may be old, broken or not
+        even use PyOpenGL.</p>
+        <div class="py-samples">
+        <div class="sample-key">glReadPixels</div>
+        <div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/readpixelsleak.py">tests/readpixelsleak.py</a>
+    Lines: <span class="sample-lines">25</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/saveimage.py">tests/saveimage.py</a>
+    Lines: <span class="sample-lines">101, 149</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/tests/pbodemo.py">tests/pbodemo.py</a>
+    Lines: <span class="sample-lines">22</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/debug/bufferimage.py">OpenGLContext/debug/bufferimage.py</a>
+    Lines: <span class="sample-lines">66</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/_flat.py">OpenGLContext/passes/_flat.py</a>
+    Lines: <span class="sample-lines">536, 541</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcore.py">OpenGLContext/passes/flatcore.py</a>
+    Lines: <span class="sample-lines">258, 263</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGLContext</span>
+    <a href="http://github.com/mcfletch/openglcontext/blob/master/OpenGLContext/passes/flatcompat.py">OpenGLContext/passes/flatcompat.py</a>
+    Lines: <span class="sample-lines">273, 278</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/GLUT/tom/conesave.py">PyOpenGL-Demo/GLUT/tom/conesave.py</a>
+    Lines: <span class="sample-lines">34</span>
+</div><div class="py-sample">
+    <span class="sample-project">OpenGL-Demo</span>
+    <a href="http://github.com/mcfletch/pyopengl-demo/blob/master/PyOpenGL-Demo/dek/OglSurface/OglFrame.py">PyOpenGL-Demo/dek/OglSurface/OglFrame.py</a>
+    Lines: <span class="sample-lines">44</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} VisionEgg</span>
+    <a href="http://github.com/visionegg/visionegg/blob/master/VisionEgg/Core.py">VisionEgg/Core.py</a>
+    Lines: <span class="sample-lines">470</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/modules/mjpegserver.py">pymt/modules/mjpegserver.py</a>
+    Lines: <span class="sample-lines">32, 161</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/modules/keybinding.py">pymt/modules/keybinding.py</a>
+    Lines: <span class="sample-lines">34, 37</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/modules/recordvideo.py">pymt/modules/recordvideo.py</a>
+    Lines: <span class="sample-lines">9, 20</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/pymt/graphx/fbo.py">pymt/graphx/fbo.py</a>
+    Lines: <span class="sample-lines">20, 252</span>
+</div><div class="py-sample">
+    <span class="sample-project">{LGPL} PyMT</span>
+    <a href="http://github.com/tito/pymt/blob/master/examples/apps/3Ddrawing/3Ddrawing.py">examples/apps/3Ddrawing/3Ddrawing.py</a>
+    Lines: <span class="sample-lines">159</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/functions/getframe.py">functions/getframe.py</a>
+    Lines: <span class="sample-lines">53</span>
+</div><div class="py-sample">
+    <span class="sample-project">Visvis</span>
+    <a href="https://github.com/almarklein/visvis/blob/master/core/axes.py">core/axes.py</a>
+    Lines: <span class="sample-lines">45</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/08-pbo.py">08-pbo.py</a>
+    Lines: <span class="sample-lines">240</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/10-gl3.2core.py">10-gl3.2core.py</a>
+    Lines: <span class="sample-lines">272</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/04-vbo.py">04-vbo.py</a>
+    Lines: <span class="sample-lines">138</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/03-array.py">03-array.py</a>
+    Lines: <span class="sample-lines">119</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/02-displaylist.py">02-displaylist.py</a>
+    Lines: <span class="sample-lines">117</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/05-shader.py">05-shader.py</a>
+    Lines: <span class="sample-lines">204</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/01-direct.py">01-direct.py</a>
+    Lines: <span class="sample-lines">108</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/06-perpixel.py">06-perpixel.py</a>
+    Lines: <span class="sample-lines">212</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/09-gles2.py">09-gles2.py</a>
+    Lines: <span class="sample-lines">262</span>
+</div><div class="py-sample">
+    <span class="sample-project">{GPL3} OpenGL-Programmable</span>
+    <a href="https://bitbucket.org/rndblnch/opengl-programmable/src/tip/07-attrib.py">07-attrib.py</a>
+    Lines: <span class="sample-lines">223</span>
+</div>
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

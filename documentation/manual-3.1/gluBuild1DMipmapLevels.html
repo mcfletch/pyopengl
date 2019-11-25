@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>gluBuild1DMipmapLevels : PyOpenGL 3.1.4 GLU Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+    <h1>gluBuild1DMipmapLevels</h1>
+</header>
+<main class="content">
+    <section class="purpose">builds a subset of one-dimensional mipmap levels</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-gluBuild1DMipmapLevels"></a>
+    <span class="c-function">gluBuild1DMipmapLevels</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-internalFormat" class="parameter">internalFormat</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-width" class="parameter">width</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-type" class="parameter">type</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-level" class="parameter">level</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-base" class="parameter">base</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLint (
+            <a href="#param-max" class="parameter">max</a>
+        )
+        ,
+    </span><span class="param-def">
+        const void * (
+            <a href="#param-data" class="parameter">data</a>
+        )
+    </span>
+</span>)-&gt; GLint
+</div>
+                <div class="py-signature">
+    <a name="py-gluBuild1DMipmapLevels"></a>
+    <span class="py-function">gluBuild1DMipmapLevels</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-internalFormat" class="parameter">internalFormat</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-width" class="parameter">width</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-level" class="parameter">level</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-base" class="parameter">base</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-max" class="parameter">max</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-data" class="parameter">data</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_int'&gt;</span>
+    <pre class="pydoc">gluBuild1DMipmapLevels( GLenum(target), GLint(internalFormat), GLsizei(width), GLenum(format), GLenum(type), GLint(level), GLint(base), GLint(max), c_void_p(data) ) -&gt; GLint</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the target texture.  Must be
+    <span class="constant">GLU_TEXTURE_1D</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-internalFormat"></a>
+                        internalFormat
+                    </th>
+                    <td>
+    <div class="para">
+                    Requests the internal storage format of the texture image.  The most
+                    current version of the SGI implementation of GLU does not check this
+                    value for validity before passing it on to the underlying OpenGL
+                    implementation.  A value that is not accepted by the OpenGL
+                    implementation will lead to an OpenGL error.  The benefit of not
+                    checking this value at the GLU level is that OpenGL extensions can add
+                    new internal texture formats without requiring a revision of the GLU
+                    implementation.  Older implementations of GLU check this value and
+                    raise a GLU error if it is not 1, 2, 3, or 4 or one of the following
+                    symbolic constants:
+    <span class="constant">GLU_ALPHA</span>
+    ,
+    <span class="constant">GLU_ALPHA4</span>
+    ,
+    <span class="constant">GLU_ALPHA8</span>
+    ,
+    <span class="constant">GLU_ALPHA12</span>
+    ,
+    <span class="constant">GLU_ALPHA16</span>
+    ,
+    <span class="constant">GLU_LUMINANCE</span>
+    ,
+    <span class="constant">GLU_LUMINANCE4</span>
+    ,
+    <span class="constant">GLU_LUMINANCE8</span>
+    ,
+    <span class="constant">GLU_LUMINANCE12</span>
+    ,
+    <span class="constant">GLU_LUMINANCE16</span>
+    ,
+    <span class="constant">GLU_LUMINANCE_ALPHA</span>
+    ,
+    <span class="constant">GLU_LUMINANCE4_ALPHA4</span>
+    ,
+    <span class="constant">GLU_LUMINANCE6_ALPHA2</span>
+    ,
+    <span class="constant">GLU_LUMINANCE8_ALPHA8</span>
+    ,
+    <span class="constant">GLU_LUMINANCE12_ALPHA4</span>
+    ,
+    <span class="constant">GLU_LUMINANCE12_ALPHA12</span>
+    ,
+    <span class="constant">GLU_LUMINANCE16_ALPHA16</span>
+    ,
+    <span class="constant">GLU_INTENSITY</span>
+    ,
+    <span class="constant">GLU_INTENSITY4</span>
+    ,
+    <span class="constant">GLU_INTENSITY8</span>
+    ,
+    <span class="constant">GLU_INTENSITY12</span>
+    ,
+    <span class="constant">GLU_INTENSITY16</span>
+    ,
+    <span class="constant">GLU_RGB</span>
+    ,
+    <span class="constant">GLU_R3_G3_B2</span>
+    ,
+    <span class="constant">GLU_RGB4</span>
+    ,
+    <span class="constant">GLU_RGB5</span>
+    ,
+    <span class="constant">GLU_RGB8</span>
+    ,
+    <span class="constant">GLU_RGB10</span>
+    ,
+    <span class="constant">GLU_RGB12</span>
+    ,
+    <span class="constant">GLU_RGB16</span>
+    ,
+    <span class="constant">GLU_RGBA</span>
+    ,
+    <span class="constant">GLU_RGBA2</span>
+    ,
+    <span class="constant">GLU_RGBA4</span>
+    ,
+    <span class="constant">GLU_RGB5_A1</span>
+    ,
+    <span class="constant">GLU_RGBA8</span>
+    ,
+    <span class="constant">GLU_RGB10_A2</span>
+    ,
+    <span class="constant">GLU_RGBA12</span>
+    , or
+    <span class="constant">GLU_RGBA16</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-width"></a>
+                        width
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the width in pixels of the texture image.
+                    This should be a power of 2.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-format"></a>
+                        format
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the format of the pixel data.
+                    Must be one of:
+    <span class="constant">GLU_COLOR_INDEX</span>
+    ,
+    <span class="constant">GLU_DEPTH_COMPONENT</span>
+    ,
+    <span class="constant">GLU_RED</span>
+    ,
+    <span class="constant">GLU_GREEN</span>
+    ,
+    <span class="constant">GLU_BLUE</span>
+    ,
+    <span class="constant">GLU_ALPHA</span>
+    ,
+    <span class="constant">GLU_RGB</span>
+    ,
+    <span class="constant">GLU_RGBA</span>
+    ,
+    <span class="constant">GLU_BGR</span>
+    ,
+    <span class="constant">GLU_BGRA</span>
+    ,
+    <span class="constant">GLU_LUMINANCE</span>
+    , or
+    <span class="constant">GLU_LUMINANCE_ALPHA</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-type"></a>
+                        type
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the data type for
+    <a class="parameter" href="#param-data">data</a>
+    .
+                    Must be one of:
+    <span class="constant">GLU_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GLU_BYTE</span>
+    ,
+    <span class="constant">GLU_BITMAP</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT</span>
+    ,
+    <span class="constant">GLU_SHORT</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT</span>
+    ,
+    <span class="constant">GLU_INT</span>
+    ,
+    <span class="constant">GLU_FLOAT</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_6_5</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_6_5_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_10_10_10_2</span>
+    , or
+    <span class="constant">GLU_UNSIGNED_INT_2_10_10_10_REV</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-level"></a>
+                        level
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the mipmap level of the image data.
+                </div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-base"></a>
+                        base
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the minimum mipmap level to pass to
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-max"></a>
+                        max
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies the maximum mipmap level to pass to
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-data"></a>
+                        data
+                    </th>
+                    <td>
+    <div class="para">
+                    Specifies a pointer to the image data in memory.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./gluBuild1DMipmapLevels.html">gluBuild1DMipmapLevels</a>
+    builds a subset of prefiltered one-dimensional texture maps of decreasing
+            resolutions called a mipmap. This is used for the antialiasing of
+            texture mapped primitives.
+</div>
+    <div class="para">
+            A return value of zero indicates success, otherwise a GLU error code is
+            returned (see
+    <a class="crossref" href="./gluErrorString.html">gluErrorString</a>
+    ).
+</div>
+    <div class="para">
+            A series of mipmap levels from
+    <a class="parameter" href="#param-base">base</a>
+    to
+    <a class="parameter" href="#param-max">max</a>
+    is built by decimating
+    <a class="parameter" href="#param-data">data</a>
+    in half
+            until size
+    <math>
+                <mrow>
+                    <mn>1</mn>
+                    <mo></mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    is reached. At each level, each texel in the
+            halved mipmap level is an average of the corresponding two texels in the larger
+            mipmap level.
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    is called to load these mipmap levels from
+    <a class="parameter" href="#param-base">base</a>
+    to
+    <a class="parameter" href="#param-max">max</a>
+    . If
+    <a class="parameter" href="#param-max">max</a>
+    is larger than the highest mipmap level for the
+            texture of the specified size, then a GLU error code is returned (see
+    <a class="crossref" href="./gluErrorString.html">gluErrorString</a>
+    ) and nothing is loaded.
+</div>
+    <div class="para">
+            For example, if
+    <a class="parameter" href="#param-level">level</a>
+    is 2 and
+    <a class="parameter" href="#param-width">width</a>
+    is 16, the
+            following levels are possible:
+    <math>
+                <mrow>
+                    <mn>16</mn>
+                    <mo></mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    ,
+    <math>
+                <mrow>
+                    <mn>8</mn>
+                    <mo></mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    ,
+    <math>
+                <mrow>
+                    <mn>4</mn>
+                    <mo></mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    ,
+    <math>
+                <mrow>
+                    <mn>2</mn>
+                    <mo></mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    ,
+    <math>
+                <mrow>
+                    <mn>1</mn>
+                    <mo></mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    .
+            These correspond
+            to levels 2 through 6 respectively.
+            If
+    <a class="parameter" href="#param-base">base</a>
+    is 3 and
+    <a class="parameter" href="#param-max">max</a>
+    is 5, then only mipmap levels
+    <math>
+                <mrow>
+                    <mn>8</mn>
+                    <mo></mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    ,
+    <math>
+                <mrow>
+                    <mn>4</mn>
+                    <mo></mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    and
+    <math>
+                <mrow>
+                    <mn>2</mn>
+                    <mo></mo>
+                    <mn>1</mn>
+                </mrow>
+            </math>
+    are
+            loaded. However, if
+    <a class="parameter" href="#param-max">max</a>
+    is 7, then an error is returned and nothing is
+            loaded since
+    <a class="parameter" href="#param-max">max</a>
+    is larger than the highest mipmap level which is, in
+            this case, 6.
+</div>
+    <div class="para">
+            The highest mipmap level can be derived from the formula
+    <math>
+                <mrow>
+                    <msub><mi mathvariant="italic">log</mi>
+                    <mn>2</mn>
+                    </msub>
+                    <mo></mo>
+                    <mfenced open="(" close=")">
+                        <mrow>
+                            <mi mathvariant="italic">width</mi>
+                            <mo></mo>
+                            <msup><mn>2</mn>
+                            <mi mathvariant="italic">level</mi>
+                            </msup>
+                        </mrow>
+                    </mfenced>
+                </mrow>
+            </math>
+    .
+</div>
+    <div class="para">
+            See the
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    reference page for a description of the
+            acceptable values for
+    <a class="parameter" href="#param-type">type</a>
+    parameter. See the
+    <a class="crossref" href="./glDrawPixels.html">glDrawPixels</a>
+    reference page for a description of the acceptable values
+            for
+    <a class="parameter" href="#param-level">level</a>
+    parameter.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./gluBuild1DMipmapLevels.html">gluBuild1DMipmapLevels</a>
+    is only available if the GLU version is 1.3 or greater.
+</div>
+    <div class="para">
+            Formats
+    <span class="constant">GLU_BGR</span>
+    , and
+    <span class="constant">GLU_BGRA</span>
+    , and types
+    <span class="constant">GLU_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_6_5</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_6_5_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GLU_UNSIGNED_INT_10_10_10_2</span>
+    , and
+    <span class="constant">GLU_UNSIGNED_INT_2_10_10_10_REV</span>
+    are only available if the GL version
+            is 1.2 or greater.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GLU_INVALID_VALUE</span>
+    is returned if
+    <a class="parameter" href="#param-level">level</a>
+    &gt;
+    <a class="parameter" href="#param-base">base</a>
+    ,
+    <a class="parameter" href="#param-base">base</a>
+    &lt; 0,
+    <a class="parameter" href="#param-max">max</a>
+    &lt;
+    <a class="parameter" href="#param-base">base</a>
+    or
+    <a class="parameter" href="#param-max">max</a>
+    is &gt; the highest mipmap level for
+    <a class="parameter" href="#param-data">data</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_VALUE</span>
+    is returned if
+    <a class="parameter" href="#param-width">width</a>
+    is &lt; 1.
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_ENUM</span>
+    is returned if
+    <a class="parameter" href="#param-internalFormat">internalFormat</a>
+    ,
+    <a class="parameter" href="#param-format">format</a>
+    , or
+    <a class="parameter" href="#param-type">type</a>
+    are not
+            legal.
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_OPERATION</span>
+    is returned if
+    <a class="parameter" href="#param-type">type</a>
+    is
+    <span class="constant">GLU_UNSIGNED_BYTE_3_3_2</span>
+    or
+    <span class="constant">GLU_UNSIGNED_BYTE_2_3_3_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GLU_RGB</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_OPERATION</span>
+    is returned if
+    <a class="parameter" href="#param-type">type</a>
+    is
+    <span class="constant">GLU_UNSIGNED_SHORT_5_6_5</span>
+    or
+    <span class="constant">GLU_UNSIGNED_SHORT_5_6_5_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GLU_RGB</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_OPERATION</span>
+    is returned if
+    <a class="parameter" href="#param-type">type</a>
+    is
+    <span class="constant">GLU_UNSIGNED_SHORT_4_4_4_4</span>
+    or
+    <span class="constant">GLU_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is neither
+    <span class="constant">GLU_RGBA</span>
+    nor
+    <span class="constant">GLU_BGRA</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_OPERATION</span>
+    is returned if
+    <a class="parameter" href="#param-type">type</a>
+    is
+    <span class="constant">GLU_UNSIGNED_SHORT_5_5_5_1</span>
+    or
+    <span class="constant">GLU_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is neither
+    <span class="constant">GLU_RGBA</span>
+    nor
+    <span class="constant">GLU_BGRA</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_OPERATION</span>
+    is returned if
+    <a class="parameter" href="#param-type">type</a>
+    is
+    <span class="constant">GLU_UNSIGNED_INT_8_8_8_8</span>
+    or
+    <span class="constant">GLU_UNSIGNED_INT_8_8_8_8_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is neither
+    <span class="constant">GLU_RGBA</span>
+    nor
+    <span class="constant">GLU_BGRA</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GLU_INVALID_OPERATION</span>
+    is returned if
+    <a class="parameter" href="#param-type">type</a>
+    is
+    <span class="constant">GLU_UNSIGNED_INT_10_10_10_2</span>
+    or
+    <span class="constant">GLU_UNSIGNED_INT_2_10_10_10_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is neither
+    <span class="constant">GLU_RGBA</span>
+    nor
+    <span class="constant">GLU_BGRA</span>
+    .
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./gluBuild1DMipmaps.html">gluBuild1DMipmaps</a>
+    ,
+    <a class="crossref" href="./gluBuild2DMipmapLevels.html">gluBuild2DMipmapLevels</a>
+    ,
+    <a class="crossref" href="./gluBuild2DMipmaps.html">gluBuild2DMipmaps</a>
+    ,
+    <a class="crossref" href="./gluBuild3DMipmapLevels.html">gluBuild3DMipmapLevels</a>
+    ,
+    <a class="crossref" href="./gluBuild3DMipmaps.html">gluBuild3DMipmaps</a>
+    ,
+    <a class="crossref" href="./gluErrorString.html">gluErrorString</a>
+    ,
+    <a class="crossref" href="./glDrawPixels.html">glDrawPixels</a>
+    ,
+    <a class="crossref" href="./glGetTexImage.html">glGetTexImage</a>
+    ,
+    <a class="crossref" href="./glGetTexLevelParameter.html">glGetTexLevelParameter</a>
+    ,
+    <a class="crossref" href="./glTexImage1D.html">glTexImage1D</a>
+    ,
+    <a class="crossref" href="./glTexImage2D.html">glTexImage2D</a>
+    ,
+    <a class="crossref" href="./glTexImage3D.html">glTexImage3D</a>
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<section class="mathjax-note">
+    <h2>MathML Rendering</h2>
+    <div><a href="http://www.mathjax.org/">
+    <img title="Powered by MathJax" src="http://www.mathjax.org/badge.gif" border="0" alt="Powered by MathJax"></a></div>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLU">GLU</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glXWaitX : PyOpenGL 3.1.4 GLX Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+    <h1>glXWaitX</h1>
+</header>
+<main class="content">
+    <section class="purpose">complete X execution prior to subsequent GL calls</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glXWaitX"></a>
+    <span class="c-function">glXWaitX</span>(<span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-void" class="parameter">void</a>
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glXWaitX"></a>
+    <span class="py-function">glXWaitX</span>( <span class="parameter-list">
+</span> )
+</div>
+        </div>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+            X rendering calls made prior to
+    <a class="function" href="./glXWaitX.html">glXWaitX</a>
+    are guaranteed to be
+            executed before GL rendering calls made after
+    <a class="function" href="./glXWaitX.html">glXWaitX</a>
+    .
+            Although the same result can be achieved using
+    XSync
+    ,
+    <a class="function" href="./glXWaitX.html">glXWaitX</a>
+    does not require a round trip to the server,
+            and it is therefore more efficient in cases where client and server
+            are on separate machines.
+</div>
+    <div class="para">
+    <a class="function" href="./glXWaitX.html">glXWaitX</a>
+    is ignored if there is no current GLX context.
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glXWaitX.html">glXWaitX</a>
+    may or may not flush the GL stream.
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GLXBadCurrentWindow</span>
+    is generated if the drawable associated
+            with the current context of the calling thread is a window, and that
+            window is no longer valid.
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glFinish.html">glFinish</a>
+    ,
+    <a class="crossref" href="./glFlush.html">glFlush</a>
+    ,
+    <a class="crossref" href="./glXWaitGL.html">glXWaitGL</a>
+    ,
+    XSync
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLX">GLX</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glutGetColor : PyOpenGL 3.1.4 GLUT Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+    <h1>glutGetColor</h1>
+</header>
+<main class="content">
+    <section class="purpose">retrieves a red, green, or blue component for a given color index colormap entry for the layer in use's logical
+		colormap for the current window.</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glutGetColor"></a>
+    <span class="c-function">glutGetColor</span>(<span class="parameter-list">
+    <span class="param-def">
+        int(
+            <a href="#param-cell" class="parameter">cell</a>
+        )
+        ,
+    </span><span class="param-def">
+        int(
+            <a href="#param-component" class="parameter">component</a>
+        )
+    </span>
+</span>)-&gt; GLfloat
+</div>
+                <div class="py-signature">
+    <a name="py-glutGetColor"></a>
+    <span class="py-function">glutGetColor</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-color" class="parameter">color</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-component" class="parameter">component</a>
+    </span>
+</span> )
+    <span>-&gt; &lt;class 'ctypes.c_float'&gt;</span>
+    <pre class="pydoc">glutGetColor( c_int(color), c_int(component) ) -&gt; GLfloat</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-cell"></a>
+                        cell
+                    </th>
+                    <td>
+    <div class="simpara">
+						Color cell index (starting at zero).
+					</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-component"></a>
+                        component
+                    </th>
+                    <td>
+    <div class="simpara">
+						One of
+    <span class="constant">GLUT_RED</span>
+    ,
+    <span class="constant">GLUT_GREEN</span>
+    , or
+    <span class="constant">GLUT_BLUE</span>
+    .
+</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="glutGetColor.3GLUT-description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glutGetColor.html">glutGetColor</a>
+    retrieves a red, green, or blue component for a given color index colormap entry for
+			the current window's logical colormap. The current window should be a color index window. cell should be zero or
+			greater and less than the total number of colormap entries for the window. For valid color indices, the value returned
+			is a floating point value between 0.0 and 1.0 inclusive.
+    <a class="function" href="./glutGetColor.html">glutGetColor</a>
+    will return -1.0 if the
+			color index specified is an overlay's transparent index, less than zero, or greater or equal to the value returned by
+    <a class="function" href="./glutGet.html">glutGet(GLUT_WINDOW_COLORMAP_SIZE)</a>
+    , that is if the color index is transparent
+			or outside the valid range of color indices.
+</div>
+    </section>
+    <section class="see-also">
+        <h2>See Also</h2>
+            <a class="crossref" href="./glutGet.html">glutGet</a>
+            <a class="crossref" href="./glutSetColor.html">glutSetColor</a>
+            <a class="crossref" href="./glutCopyColormap.html">glutCopyColormap</a>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GLUT">GLUT</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

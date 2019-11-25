@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetShaderSource : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetShaderSource</h1>
+</header>
+<main class="content">
+    <section class="purpose">Returns the source code string from a shader object</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetShaderSource"></a>
+    <span class="c-function">glGetShaderSource</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLuint (
+            <a href="#param-shader" class="parameter">shader</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei (
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLsizei *(
+            <a href="#param-length" class="parameter">length</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLchar *(
+            <a href="#param-source" class="parameter">source</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetShaderSource"></a>
+    <span class="py-function">glGetShaderSource</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-shader" class="parameter">shader</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-bufSize" class="parameter">bufSize</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-length" class="parameter">length</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-source" class="parameter">source</a>
+    </span>
+</span> )
+    <pre class="pydoc">Retrieve the program/shader's source code as a Python string
+
+    returns string which is '' if no source code
+    </pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-shader"></a>
+                        shader
+                    </th>
+                    <td>
+    <div class="para">Specifies the shader object to be
+            queried.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-bufSize"></a>
+                        bufSize
+                    </th>
+                    <td>
+    <div class="para">Specifies the size of the character buffer for
+            storing the returned source code string.</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-length"></a>
+                        length
+                    </th>
+                    <td>
+    <div class="para">Returns the length of the string returned in
+    <a class="parameter" href="#param-source">source</a>
+    (excluding the null
+            terminator).
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-source"></a>
+                        source
+                    </th>
+                    <td>
+    <div class="para">Specifies an array of characters that is used
+            to return the source code string.</div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetShaderSource.html">glGetShaderSource</a>
+    returns the
+    concatenation of the source code strings from the shader object
+    specified by
+    <a class="parameter" href="#param-shader">shader</a>
+    . The source code
+    strings for a shader object are the result of a previous call to
+    <a class="crossref" href="./glShaderSource.html">glShaderSource</a>
+    .
+    The string returned by the function will be null
+    terminated.
+</div>
+    <div class="para">
+    <a class="function" href="./glGetShaderSource.html">glGetShaderSource</a>
+    returns in
+    <a class="parameter" href="#param-source">source</a>
+    as much of the source code string
+    as it can, up to a maximum of
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    characters. The number of characters actually returned,
+    excluding the null termination character, is specified by
+    <a class="parameter" href="#param-length">length</a>
+    . If the length of the returned
+    string is not required, a value of
+    <span class="constant">NULL</span>
+    can
+    be passed in the
+    <a class="parameter" href="#param-length">length</a>
+    argument. The
+    size of the buffer required to store the returned source code
+    string can be obtained by calling
+    <a class="crossref" href="./glGetShader.html">glGetShader</a>
+    with the value
+    <span class="constant">GL_SHADER_SOURCE_LENGTH</span>
+    .
+</div>
+    </section><section class="section">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-shader">shader</a>
+    is not a value generated by
+    OpenGL.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-shader">shader</a>
+    is not a shader object.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_VALUE</span>
+    is generated if
+    <a class="parameter" href="#param-bufSize">bufSize</a>
+    is less than 0.
+</div>
+    </section><section class="section">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetShader.html">glGetShader</a>
+    with argument
+    <span class="constant">GL_SHADER_SOURCE_LENGTH</span>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glIsShader.html">glIsShader</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Version Support</h2>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <td>
+    <a class="function" href="./glGetShaderSource.html">glGetShaderSource</a>
+</td><td></td>
+                </tr>
+    </tbody></table>
+    </section><section class="section">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glCreateShader.html">glCreateShader</a>
+    ,
+    <a class="crossref" href="./glShaderSource.html">glShaderSource</a>
+</div>
+    </section><section class="section">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    2003-2005 3Dlabs Inc. Ltd.
+            Copyright
+    <div class="trademark"></div>
+    2010-2014 Khronos Group.
+            This material may be distributed subject to the terms and conditions set forth in
+            the Open Publication License, v 1.0, 8 June 1999.
+    <div class="link">http://opencontent.org/openpub/</div>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>

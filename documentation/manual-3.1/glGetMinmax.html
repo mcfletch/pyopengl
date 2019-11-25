@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>glGetMinmax : PyOpenGL 3.1.4 GL Man Pages</title>
+    <link rel="stylesheet" href="./manpage.css" type="text/css">
+    <link rel="stylesheet" href="./modern.css" type="text/css">
+</head>
+<body>
+<header>
+    <ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+    <h1>glGetMinmax</h1>
+</header>
+<main class="content">
+    <section class="purpose">get minimum and maximum pixel values</section>
+    <section class="signatures">
+        <h2>Signature</h2>
+        <div class="signature">
+            <div class="c-signature">
+    <a name="c-glGetMinmax"></a>
+    <span class="c-function">glGetMinmax</span>(<span class="parameter-list">
+    <span class="param-def">
+        GLenum (
+            <a href="#param-target" class="parameter">target</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLboolean (
+            <a href="#param-reset" class="parameter">reset</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-format" class="parameter">format</a>
+        )
+        ,
+    </span><span class="param-def">
+        GLenum (
+            <a href="#param-types" class="parameter">types</a>
+        )
+        ,
+    </span><span class="param-def">
+        void * (
+            <a href="#param-values" class="parameter">values</a>
+        )
+    </span>
+</span>)-&gt; void
+</div>
+                <div class="py-signature">
+    <a name="py-glGetMinmax"></a>
+    <span class="py-function">glGetMinmax</span>( <span class="parameter-list">
+    <span class="param-def">
+            <a href="#param-target" class="parameter">target</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-reset" class="parameter">reset</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-format" class="parameter">format</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-type" class="parameter">type</a>
+        ,
+    </span><span class="param-def">
+            <a href="#param-values" class="parameter">values</a>
+    </span>
+</span> )
+    <pre class="pydoc">Retrieve minimum and maximum values as a 2-element image</pre>
+</div>
+        </div>
+            <h2>Parameters</h2>
+            <table><tbody>
+                <tr><th align="right">Variables</th><th>Description</th></tr>
+                <tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-target"></a>
+                        target
+                    </th>
+                    <td>
+    <div class="para">
+                    Must be
+    <span class="constant">GL_MINMAX</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-reset"></a>
+                        reset
+                    </th>
+                    <td>
+    <div class="para">
+                    If
+    <span class="constant">GL_TRUE</span>
+    , all entries in the minmax table that are actually
+                    returned are reset to their initial values.  (Other entries are unaltered.)
+                    If
+    <span class="constant">GL_FALSE</span>
+    , the minmax table is unaltered.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-format"></a>
+                        format
+                    </th>
+                    <td>
+    <div class="para">
+                    The format of the data to be returned in
+    <a class="parameter" href="#param-values">values</a>
+    .
+                    Must be one of
+    <span class="constant">GL_RED</span>
+    ,
+    <span class="constant">GL_GREEN</span>
+    ,
+    <span class="constant">GL_BLUE</span>
+    ,
+    <span class="constant">GL_ALPHA</span>
+    ,
+    <span class="constant">GL_RGB</span>
+    ,
+    <span class="constant">GL_BGR</span>
+    ,
+    <span class="constant">GL_RGBA</span>
+    ,
+    <span class="constant">GL_BGRA</span>
+    ,
+    <span class="constant">GL_LUMINANCE</span>
+    , or
+    <span class="constant">GL_LUMINANCE_ALPHA</span>
+    .
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-types"></a>
+                        types
+                    </th>
+                    <td>
+    <div class="para">
+                    The type of the data to be returned in
+    <a class="parameter" href="#param-values">values</a>
+    .
+                    Symbolic constants
+    <span class="constant">GL_UNSIGNED_BYTE</span>
+    ,
+    <span class="constant">GL_BYTE</span>
+    ,
+    <span class="constant">GL_BITMAP</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT</span>
+    ,
+    <span class="constant">GL_SHORT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT</span>
+    ,
+    <span class="constant">GL_INT</span>
+    ,
+    <span class="constant">GL_FLOAT</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+    , and
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+    are accepted.
+</div>
+</td>
+                </tr><tr class="varref" valign="top">
+                    <th align="right">
+                        <a name="param-values"></a>
+                        values
+                    </th>
+                    <td>
+    <div class="para">
+                    A pointer to storage for the returned values.
+                </div>
+</td>
+                </tr>
+            </tbody></table>
+    </section>
+    <section class="section" id="description">
+    <h2 class="title">Description</h2>
+    <div class="para">
+    <a class="function" href="./glGetMinmax.html">glGetMinmax</a>
+    returns the accumulated minimum and maximum pixel values (computed on a
+            per-component basis) in a one-dimensional image of width 2.  The first set
+            of return values are the minima, and the second set of return values
+            are the maxima.
+            The format of the return values is determined by
+    <a class="parameter" href="#param-format">format</a>
+    , and their type is
+            determined by
+    <a class="parameter" href="#param-types">types</a>
+    .
+</div>
+    <div class="para">
+            If a non-zero named buffer object is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target
+            (see
+    <a class="crossref" href="./glBindBuffer.html">glBindBuffer</a>
+    ) while minimum and maximum pixel values are
+            requested,
+    <a class="parameter" href="#param-values">values</a>
+    is treated as a byte offset into the buffer object's data store.
+</div>
+    <div class="para">
+            No pixel transfer operations are performed on the return values, but pixel
+            storage modes that are applicable to one-dimensional images are performed.
+            Color components that are requested in the specified
+    <a class="parameter" href="#param-format">format</a>
+    , but that
+            are not included in the internal format of the minmax table, are
+            returned as zero.  The assignment of internal color components to the
+            components requested by
+    <a class="parameter" href="#param-format">format</a>
+    are as follows:
+</div>
+    <div class="para">
+        </div>
+    <table class="informaltable"><tbody>
+                <tr valign="top">
+                    <th>
+    <span class="emphasis">
+                        Internal Component
+                        </span>
+</th><th>
+    <span class="emphasis">
+                        Resulting Component
+                        </span>
+</th>
+                </tr>
+                <tr valign="top">
+                    <td>
+                        Red
+                        </td><td>
+                        Red
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        Green
+                        </td><td>
+                        Green
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        Blue
+                        </td><td>
+                        Blue
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        Alpha
+                        </td><td>
+                        Alpha
+                        </td>
+                </tr><tr valign="top">
+                    <td>
+                        Luminance
+                        </td><td>
+                        Red
+                        </td>
+                </tr>
+    </tbody></table>
+    <div class="para">
+            If
+    <a class="parameter" href="#param-reset">reset</a>
+    is
+    <span class="constant">GL_TRUE</span>
+    , the minmax table entries corresponding
+            to the return values are reset to their initial
+            values.  Minimum and maximum values that are not returned are not
+            modified, even if
+    <a class="parameter" href="#param-reset">reset</a>
+    is
+    <span class="constant">GL_TRUE</span>
+    .
+</div>
+    </section><section class="section" id="notes">
+    <h2 class="title">Notes</h2>
+    <div class="para">
+    <a class="function" href="./glGetMinmax.html">glGetMinmax</a>
+    is present only if
+    <div class="code">ARB_imaging</div>
+    is returned when
+    <a class="crossref" href="./glGetString.html">glGetString</a>
+    is called with an argument of
+    <span class="constant">GL_EXTENSIONS</span>
+    .
+</div>
+    </section><section class="section" id="errors">
+    <h2 class="title">Errors</h2>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-target">target</a>
+    is not
+    <span class="constant">GL_MINMAX</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-format">format</a>
+    is not one of the allowable
+            values.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_ENUM</span>
+    is generated if
+    <a class="parameter" href="#param-types">types</a>
+    is not one of the allowable
+            values.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-types">types</a>
+    is one of
+    <span class="constant">GL_UNSIGNED_BYTE_3_3_2</span>
+    ,
+    <span class="constant">GL_UNSIGNED_BYTE_2_3_3_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5</span>
+    , or
+    <span class="constant">GL_UNSIGNED_SHORT_5_6_5_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is not
+    <span class="constant">GL_RGB</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="parameter" href="#param-types">types</a>
+    is one of
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_4_4_4_4_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_5_5_5_1</span>
+    ,
+    <span class="constant">GL_UNSIGNED_SHORT_1_5_5_5_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_8_8_8_8_REV</span>
+    ,
+    <span class="constant">GL_UNSIGNED_INT_10_10_10_2</span>
+    , or
+    <span class="constant">GL_UNSIGNED_INT_2_10_10_10_REV</span>
+    and
+    <a class="parameter" href="#param-format">format</a>
+    is neither
+    <span class="constant">GL_RGBA</span>
+    nor
+    <span class="constant">GL_BGRA</span>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target and the buffer object's data store is currently mapped.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target and the data would be packed to the buffer
+            object such that the memory writes required would exceed the data store size.
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if a non-zero buffer object name is bound to the
+    <span class="constant">GL_PIXEL_PACK_BUFFER</span>
+    target and
+    <a class="parameter" href="#param-values">values</a>
+    is not evenly divisible
+            into the number of bytes needed to store in memory a datum indicated by
+    <a class="parameter" href="#param-type">type</a>
+    .
+</div>
+    <div class="para">
+    <span class="constant">GL_INVALID_OPERATION</span>
+    is generated if
+    <a class="function" href="./glGetMinmax.html">glGetMinmax</a>
+    is executed
+            between the execution of
+    <a class="crossref" href="./glBegin.html">glBegin</a>
+    and the corresponding
+            execution of
+    <a class="crossref" href="./glBegin.html#c-glEnd">glEnd</a>
+    .
+</div>
+    </section><section class="section" id="associatedgets">
+    <h2 class="title">Associated Gets</h2>
+    <div class="para">
+    <a class="crossref" href="./glGetMinmaxParameter.html">glGetMinmaxParameter</a>
+</div>
+    <div class="para">
+    <a class="crossref" href="./glGet.html">glGet</a>
+    with argument
+    <span class="constant">GL_PIXEL_PACK_BUFFER_BINDING</span>
+</div>
+    </section><section class="section" id="seealso">
+    <h2 class="title">See Also</h2>
+    <div class="para">
+    <a class="crossref" href="./glMinmax.html">glMinmax</a>
+    ,
+    <a class="crossref" href="./glResetMinmax.html">glResetMinmax</a>
+    ,
+</div>
+    </section><section class="section" id="Copyright">
+    <h2 class="title">Copyright</h2>
+    <div class="para">
+            Copyright
+    <div class="trademark"></div>
+    1991-2006
+            Silicon Graphics, Inc. This document is licensed under the SGI
+            Free Software B License. For details, see
+    <a class="extref" href="http://oss.sgi.com/projects/FreeB/">http://oss.sgi.com/projects/FreeB/</a>
+    .
+</div>
+    </section>
+</main>
+<section class="copyright-notice">
+    <h2>Copyright Notices</h2>
+    <div>
+        This documentation is based on documentation licensed under the
+        <a href="http://oss.sgi.com/projects/FreeB/">SGI Free Software License B</a>.
+    </div>
+</section>
+<footer>
+<ul class="menu">
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="./index.html#GL">GL</a></li>
+</ul>
+<div class="clear-both"></div>
+</footer>
+</body>
+</html>
