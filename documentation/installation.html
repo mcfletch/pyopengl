@@ -10,9 +10,9 @@
     <header>
       <nav>
       <ul class="menu">
-        <li><a href="/index.html">Home</a></li>
-        <li><a href="/documentation/index.html">Docs</a></li>
-        <li><a href="/documentation/installation.html">Install</a></li>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="index.html">Docs</a></li>
+        <li><a href="installation.html">Install</a></li>
       </ul>
       </nav>
     <h1>PyOpenGL Installation</h1>
@@ -85,28 +85,13 @@ $ python setup.py install</pre>
         of other packages to function.  You do <strong>NOT</strong> need 
         OpenGLContext to work with PyOpenGL.
     </p>
-    <p>Basic installation of OpenGLContext is as follows (note that you must 
-    explicitly specify the OpenGLContext and PyVRML97 releases as they are not 
-    currently in final/production releases on PyPI):
+    <p>Basic installation of OpenGLContext is as follows:
     <pre>$ virtualenv oglc-env
 $ source oglc-env/bin/activate
-(oglc-env)$ pip install PyOpenGL PyOpenGL_accelerate "PyVRML97==2.3.0a4" simpleparse numpy "OpenGLContext==2.2.0a3" pydispatcher pillow</pre>
+(oglc-env)$ pip install PyOpenGL PyOpenGL_accelerate PyVRML97 simpleparse numpy ttfquery fonttools OpenGLContext pydispatcher pillow</pre>
 
-    <p>Once you have the dependencies, you can install OpenGLContext itself</p>
-    <pre>$ pip install PyDispatcher PyVRML97 OpenGLContext</pre>
     <p>Recommended Enhancements for OpenGLContext </p>
     <ul>
-      <li><a href="http://sourceforge.net/projects/ttfquery/">TTFQuery</a>
-        and<br>
-      </li>
-      <li><a href="http://sourceforge.net/projects/ttfquery/">FontTools</a><br>
-      <ul>
-        <li>Provide access to TrueType fonts stored in the file system,
-          used by the "toolsfont" and "pygamefont" modules in the
-          scenegraph/text
-          package.&nbsp; Without these modules, you will not have access to
-          extruded fonts (toolsfont) or antialiased bitmap fonts (pygamefont)</li>
-      </ul>
       </li>
       <li><a href="http://sourceforge.net/project/showfiles.php?group_id=10718">wxPython</a>
         and/or&nbsp;</li>
@@ -130,40 +115,24 @@ $ source oglc-env/bin/activate
     </ul>
     </section>
     <section>
-    <h2>BZR (Developer) Install</h2>
+    <h2>git (Developer) Install</h2>
     <p>If you would like to contribute to PyOpenGL development or just need
       to ride the bleeding edge, you will likely want to work with a
-      source-code checkout. &nbsp;You will need the&nbsp;<a href="http://bazaar-vcs.org/">Bazaar</a>
-      (bzr) tool to work with the repository:</p>
-    <pre>$ bzr branch lp:pyopengl
+      source-code checkout. &nbsp;You will need the&nbsp;<a href="https://git-scm.com/">Git</a>
+      (git) tool to work with the repository:</p>
+    <pre>$ git clone https://github.com/mcfletch/pyopengl.git
 $ cd pyopengl
 $ python setup.py develop --user
-$ cd OpenGL_accelerate
+$ cd accelerate
 $ python setup.py develop --user
 $ cd ../../</pre>
-    <p>To contribute to OpenGLContext development (or to run the tests, for
-      instance):</p>
-    <pre>$ bzr branch lp:pyvrml97
-$ cd pyvrml97 
-$ python setup.py develop --user
-$ cd ../
-$ bzr branch lp:openglcontext
-$ cd openglcontext
-$ python setup.py develop --user</pre>
-    <p>To contribute your changes back, either publish
-      your branch publicly (for instance on LaunchPad) or create a "merge
-      directive" to send to pyopengl-devel@lists.sourceforge.net:</p>
-    <pre>bzr send -o my-changes.diff</pre>
-    <p>Note that you'll need to subscribe to <a href="https://lists.sourceforge.net/lists/listinfo/pyopengl-devel">pyopengl-devel</a>
-      to post changes to it. &nbsp;If you prefer you can send them to <a href="mailto:mcfletch@vrplumber.com">Mike
-        Fletcher</a> instead.</p>
     </section>
     <section>
     <h3>Building Documentation</h3>
     <p>The documentation build system is completely rewritten for PyOpenGL
       3.x and is far easier to use and faster &nbsp;(at least a couple of
       orders of magnitude) than the old Java-based docbook processor.</p>
-    <pre>bzr branch lp:~mcfletch/pyopengl/directdocs<br>cd directdocs<br>./samples.py<br>./references.py<br>./generate.py<br>./upload.py</pre>
+    <pre>git checkout<br>cd directdocs<br>./samples.py<br>./references.py<br>./generate.py<br>./upload.py</pre>
     <p>The
       last command will not work unless you happen to be me. You need the
       lxml.etree and kid packages installed to run the generator (also bzr,
