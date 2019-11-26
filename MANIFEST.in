@@ -7,3 +7,4 @@ include OpenGL/DLLS/*
 include license.txt
 include ChangeLog.txt
 exclude accelerate
+exclude directdocs
