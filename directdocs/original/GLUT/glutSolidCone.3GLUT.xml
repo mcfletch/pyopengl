@@ -1,0 +1,137 @@
+<refentry id="glutSolidCone.3GLUT">
+	<refmeta id="glutSolidCone.3GLUT-meta">
+		<refentrytitle>glutSolidCone</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSolidCone.3GLUT-name">
+		<refname>glutSolidCone</refname>
+		<refname>glutWireCone</refname>
+		<refpurpose>render a solid or wireframe cone respectively.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSolidCone.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSolidCone</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>base</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>height</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>slices</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>stacks</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutWireCone</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>base</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>height</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>slices</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>stacks</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSolidCone.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>base</parameter></term>
+				<listitem>
+					<simpara>
+						The radius of the base of the cone.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>height</parameter></term>
+				<listitem>
+					<simpara>
+						The height of the cone.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>slices</parameter></term>
+				<listitem>
+					<simpara>
+						The number of subdivisions around the Z axis.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>stacks</parameter></term>
+				<listitem>
+					<simpara>
+						The number of subdivisions along the Z axis.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutSolidCone.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutSolidCone</function> and <function>glutWireCone</function> render a solid or wireframe cone respectively
+			oriented along the <inlineequation>
+				<mml:math>
+					<mml:mi>z</mml:mi>
+				</mml:math>
+			</inlineequation> axis. The base of the cone is placed at <inlineequation>
+				<mml:math>
+					<mml:mi>z</mml:mi>
+					<mml:mo>=</mml:mo>
+					<mml:mn>0</mml:mn>
+				</mml:math>
+			</inlineequation>, and the top at <inlineequation>
+				<mml:math>
+					<mml:mi>z</mml:mi>
+					<mml:mo>=</mml:mo>
+					<mml:mi>height</mml:mi>
+				</mml:math>
+			</inlineequation>. The cone is subdivided around the <inlineequation>
+				<mml:math>
+					<mml:mi>z</mml:mi>
+				</mml:math>
+			</inlineequation> axis into slices, and along the <inlineequation>
+				<mml:math>
+					<mml:mi>z</mml:mi>
+				</mml:math>
+			</inlineequation> axis into stacks.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSolidCone.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutSolidSphere</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidCube</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidTorus</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidDodecahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidOctahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidTetrahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidIcosahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidTeapot</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

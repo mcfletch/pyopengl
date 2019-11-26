@@ -1,0 +1,75 @@
+<refentry id="glutMotionFunc.3GLUT">
+	<refmeta id="glutMotionFunc.3GLUT-meta">
+		<refentrytitle>glutMotionFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutMotionFunc.3GLUT-name">
+		<refname>glutMotionFunc</refname>
+		<refname>glutPassiveMotionFunc</refname>
+		<refpurpose>set the motion and passive motion callbacks respectively for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutMotionFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutMotionFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;x,&nbsp;int&nbsp;y)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutPassiveMotionFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;x,&nbsp;int&nbsp;y)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutMotionFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new motion or passive motion callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutMotionFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutMotionFunc</function> and <function>glutPassiveMotionFunc</function> set the motion and passive motion
+			callback respectively for the current window. The motion callback for a window is called when the mouse moves within
+			the window while one or more mouse buttons are pressed. The passive motion callback for a window is called when the
+			mouse moves within the window while no mouse buttons are pressed.
+		</para>
+		<para>
+			The <parameter>x</parameter> and <parameter>y</parameter> callback parameters indicate the mouse location in window
+			relative coordinates.
+		</para>
+		<para>
+			Passing <constant>NULL</constant> to <function>glutMotionFunc</function> or <function>glutPassiveMotionFunc</function>
+			disables the generation of the mouse or passive motion callback respectively.
+		</para>
+	</refsect1>
+	<refsect1 id="glutMotionFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutMouseFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpaceballMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutTabletMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

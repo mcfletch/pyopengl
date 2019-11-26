@@ -1,0 +1,65 @@
+<refentry id="glutForceJoystickFunc.3GLUT">
+	<refmeta id="glutForceJoystickFunc.3GLUT-meta">
+		<refentrytitle>glutForceJoystickFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutForceJoystickFunc.3GLUT-name">
+		<refname>glutForceJoystickFunc</refname>
+		<refpurpose>forces current window's joystick callback to be called.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutForceJoystickFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutForceJoystickFunc</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutForceJoystickFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutForceJoystickFunc</function> forces the current window's joystick callback to be called, reporting the
+			latest joystick state.
+		</para>
+		<para>
+			The joystick callback is called either due to polling of the joystick at the uniform timer interval set by <function
+			moreinfo="refentry">glutJoystickFunc</function>'s <parameter>pollInterval</parameter> (specified in milliseconds) or in
+			response to calling <function>glutForceJoystickFunc</function>. If the <parameter>pollInterval</parameter> is
+			non-positive, no joystick polling is performed and the GLUT application must frequently (usually from an idle callback)
+			call <function>glutForceJoystickFunc</function>.
+		</para>
+		<para>
+			The joystick callback will be called once (if one exists) for each time <function>glutForceJoystickFunc</function> is
+			called. The callback is called from <function moreinfo="refentry">glutJoystickFunc</function>. That is, when <function
+			moreinfo="refentry">glutJoystickFunc</function> returns, the callback will have already happened.
+		</para>
+	</refsect1>
+	<refsect1 id="glutForceJoystickFunc.3GLUT-glut_implementation_notes_for_x11">
+		<title>Glut Implementation Notes For X11</title>
+		<para>
+			The current implementation of GLUT for X11 supports the joystick API, but not actual joystick input. A future
+			implementation of GLUT for X11 may add joystick support.
+		</para>
+	</refsect1>
+	<refsect1 id="glutForceJoystickFunc.3GLUT-glut_implementation_notes_for_win32">
+		<title>Glut Implementation Notes For Win32</title>
+		<para>
+			The current implementation of GLUT for Win32 supports the joystick API and joystick input, but does so through the
+			dated joySetCapture and joyGetPosEx Win32 Multimedia API. The current GLUT joystick support for Win32 has all the
+			limitations of the Win32 Multimedia API joystick support. A future implementation of GLUT for Win32 may use
+			DirectInput.
+		</para>
+	</refsect1>
+	<refsect1 id="glutForceJoystickFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutJoystickFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

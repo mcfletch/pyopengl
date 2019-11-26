@@ -1,0 +1,78 @@
+<refentry id="glutCopyColormap.3GLUT">
+	<refmeta id="glutCopyColormap.3GLUT-meta">
+		<refentrytitle>glutCopyColormap</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutCopyColormap.3GLUT-name">
+		<refname>glutCopyColormap</refname>
+		<refpurpose>copies the logical colormap for the layer in use from a specified window to the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutCopyColormap.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutCopyColormap</function></funcdef>
+				<paramdef>int&nbsp;<parameter>win</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutCopyColormap.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>win</parameter></term>
+				<listitem>
+					<simpara>
+						The identifier of the window to copy the logical colormap from.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutCopyColormap.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutCopyColormap</function> copies (lazily if possible to promote sharing) the logical colormap from a
+			specified window to the current window's layer in use. The copy will be from the normal plane to the normal plane; or
+			from the overlay to the overlay (never across different layers). Once a colormap has been copied, avoid setting cells
+			in the colormap with <function moreinfo="refentry">glutSetColor</function> since that will force an actual copy of the
+			colormap if it was previously copied by reference. <function>glutCopyColormap</function> should only be called when
+			both the current window and the win window are color index windows.
+		</para>
+	</refsect1>
+	<refsect1 id="glutCopyColormap.3GLUT-example">
+		<title>Example</title>
+		<para>
+			Here is an example of how to create two color index GLUT windows with their colormaps loaded identically and so that
+			the windows are likely to share the same colormap:
+		</para>
+		<programlisting>int win1, win2;
+glutInitDisplayMode(GLUT_INDEX);
+win1 = glutCreateWindow(&quot;first color index win&quot;);
+glutSetColor(0, 0.0, 0.0, 0.0); /* black */
+glutSetColor(1, 0.5, 0.5, 0.5); /* gray */
+glutSetColor(2, 1.0, 1.0, 1.0); /* black */
+glutSetColor(3, 1.0, 0.0, 0.0); /* red */
+win2 = glutCreateWindow(&quot;second color index win&quot;);
+glutCopyColormap(win1);</programlisting>
+	</refsect1>
+	<refsect1 id="glutCopyColormap.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutSetColor</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutGetColor</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

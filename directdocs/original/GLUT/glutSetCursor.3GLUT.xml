@@ -1,0 +1,249 @@
+<refentry id="glutSetCursor.3GLUT">
+	<refmeta id="glutSetCursor.3GLUT-meta">
+		<refentrytitle>glutSetCursor</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSetCursor.3GLUT-name">
+		<refname>glutSetCursor</refname>
+		<refpurpose>changes the cursor image of the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSetCursor.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSetCursor</function></funcdef>
+				<paramdef>int&nbsp;<parameter>cursor</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSetCursor.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>cursor</parameter></term>
+				<listitem>
+					<simpara>
+						Name of cursor image to change to. Possible values follow:
+					</simpara>
+					<variablelist>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_RIGHT_ARROW</constant></term>
+							<listitem>
+								<simpara>
+									Arrow pointing up and to the right.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_LEFT_ARROW</constant></term>
+							<listitem>
+								<simpara>
+									Arrow pointing up and to the left.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_INFO</constant></term>
+							<listitem>
+								<simpara>
+									Pointing hand.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_DESTROY</constant></term>
+							<listitem>
+								<simpara>
+									Skull &amp; cross bones.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_HELP</constant></term>
+							<listitem>
+								<simpara>
+									Question mark.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_CYCLE</constant></term>
+							<listitem>
+								<simpara>
+									Arrows rotating in a circle.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_SPRAY</constant></term>
+							<listitem>
+								<simpara>
+									Spray can.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_WAIT</constant></term>
+							<listitem>
+								<simpara>
+									Wrist watch.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_TEXT</constant></term>
+							<listitem>
+								<simpara>
+									Insertion point cursor for text.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_CROSSHAIR</constant></term>
+							<listitem>
+								<simpara>
+									Simple cross-hair.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_UP_DOWN</constant></term>
+							<listitem>
+								<simpara>
+									Bi-directional pointing up &amp; down.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_LEFT_RIGHT</constant></term>
+							<listitem>
+								<simpara>
+									Bi-directional pointing left &amp; right.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_TOP_SIDE</constant></term>
+							<listitem>
+								<simpara>
+									Arrow pointing to top side.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_BOTTOM_SIDE</constant></term>
+							<listitem>
+								<simpara>
+									Arrow pointing to bottom side.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_LEFT_SIDE</constant></term>
+							<listitem>
+								<simpara>
+									Arrow pointing to left side.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_RIGHT_SIDE</constant></term>
+							<listitem>
+								<simpara>
+									Arrow pointing to right side.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_TOP_LEFT_CORNER</constant></term>
+							<listitem>
+								<simpara>
+									Arrow pointing to top-left corner.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_TOP_RIGHT_CORNER</constant></term>
+							<listitem>
+								<simpara>
+									Arrow pointing to top-right corner.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_BOTTOM_RIGHT_CORNER</constant></term>
+							<listitem>
+								<simpara>
+									Arrow pointing to bottom-left corner.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_BOTTOM_LEFT_CORNER</constant></term>
+							<listitem>
+								<simpara>
+									Arrow pointing to bottom-right corner.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_FULL_CROSSHAIR</constant></term>
+							<listitem>
+								<simpara>
+									Full-screen cross-hair cursor (if possible, otherwise
+									<constant>GLUT_CURSOR_CROSSHAIR</constant>).
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_NONE</constant></term>
+							<listitem>
+								<simpara>
+									Invisible cursor.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_CURSOR_INHERIT</constant></term>
+							<listitem>
+								<simpara>
+									Use parent's cursor.
+								</simpara>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutSetCursor.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutSetCursor</function> changes the cursor image of the current window. Each call requests the window system
+			change the cursor appropriately. The cursor image when a window is created is <constant>GLUT_CURSOR_INHERIT</constant>.
+			The exact cursor images used are implementation dependent. The intent is for the image to convey the meaning of the
+			cursor name. For a top-level window, <constant>GLUT_CURSOR_INHERIT</constant> uses the default window system cursor.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSetCursor.3GLUT-x_implementation_notes">
+		<title>X Implementation Notes</title>
+		<para>
+			GLUT for X uses SGI's _SGI_CROSSHAIR_CURSOR convention to access a full-screen cross-hair cursor if possible.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSetCursor.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutCreateSubWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

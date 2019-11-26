@@ -1,0 +1,38 @@
+<refentry id="glutMainLoop.3GLUT">
+	<refmeta id="glutMainLoop.3GLUT-meta">
+		<refentrytitle>glutMainLoop</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutMainLoop.3GLUT-name">
+		<refname>glutMainLoop</refname>
+		<refpurpose>enters the GLUT event processing loop.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutMainLoop.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutMainLoop</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutMainLoop.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutMainLoop</function> enters the GLUT event processing loop. This routine should be called at most once in
+			a GLUT program. Once called, this routine will never return. It will call as necessary any callbacks that have been
+			registered.
+		</para>
+	</refsect1>
+	<refsect1 id="glutMainLoop.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutInit</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

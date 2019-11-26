@@ -1,0 +1,156 @@
+<refentry id="glutInit.3GLUT">
+	<refmeta id="glutInit.3GLUT-meta">
+		<refentrytitle>glutInit</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutInit.3GLUT-name">
+		<refname>glutInit</refname>
+		<refpurpose>initialize the GLUT library.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutInit.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutInit</function></funcdef>
+				<paramdef>int&nbsp;*<parameter>argcp</parameter></paramdef>
+				<paramdef>char&nbsp;**<parameter>argv</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutInit.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>argcp</parameter></term>
+				<listitem>
+					<simpara>
+						A pointer to the program's unmodified <parameter>argc</parameter> variable from main. Upon return, the
+						value pointed to by <parameter>argcp</parameter> will be updated, because <function>glutInit</function>
+						extracts any command line options intended for the GLUT library.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>argv</parameter></term>
+				<listitem>
+					<simpara>
+						The program's unmodified <parameter>argv</parameter> variable from main. Like <parameter>argcp</parameter>,
+						the data for <parameter>argv</parameter> will be updated because <function>glutInit</function> extracts any
+						command line options understood by the GLUT library.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutInit.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutInit</function> will initialize the GLUT library and negotiate a session with the window system. During
+			this process, <function>glutInit</function> may cause the termination of the GLUT program with an error message to the
+			user if GLUT cannot be properly initialized. Examples of this situation include the failure to connect to the window
+			system, the lack of window system support for OpenGL, and invalid command line options.
+		</para>
+		<para>
+			<function>glutInit</function> also processes command line options, but the specific options parse are window system
+			dependent.
+		</para>
+	</refsect1>
+	<refsect1 id="glutInit.3GLUT-x_implementation_notes">
+		<title>X Implementation Notes</title>
+		<para>
+			The X Window System specific options parsed by <function>glutInit</function> are as follows:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><emphasis role="bold">-display</emphasis> <emphasis>DISPLAY</emphasis></term>
+				<listitem>
+					<simpara>
+						Specify the X server to connect to. If not specified, the value of the DISPLAY environment variable is used.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">-geometry</emphasis> <emphasis>WxH+X+Y</emphasis></term>
+				<listitem>
+					<simpara>
+						Determines where window's should be created on the screen. The emphasis following -geometry should be
+						formatted as a standard X geometry specification. The effect of using this option is to change the GLUT
+						initial size and initial position the same as if <function
+						moreinfo="refentry">glutInitWindowSize</function> or <function
+						moreinfo="refentry">glutInitWindowPosition</function> were called directly.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">-iconic</emphasis></term>
+				<listitem>
+					<simpara>
+						Requests all top-level windows be created in an iconic state.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">-indirect</emphasis></term>
+				<listitem>
+					<simpara>
+						Force the use of indirect OpenGL rendering contexts.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">-direct</emphasis></term>
+				<listitem>
+					<simpara>
+						Force the use of direct OpenGL rendering contexts (not all GLX implementations support direct rendering
+						contexts). A fatal error is generated if direct rendering is not supported by the OpenGL implementation. If
+						neither -indirect or -direct are used to force a particular behavior, GLUT will attempt to use direct
+						rendering if possible and otherwise fallback to indirect rendering.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">-gldebug</emphasis></term>
+				<listitem>
+					<simpara>
+						After processing callbacks and/or events, check if there are any OpenGL errors by calling <function
+						moreinfo="refentry">glGetError</function>. If an error is reported, print out a warning by looking up the
+						error code with <function moreinfo="refentry">gluErrorString</function>. Using this option is helpful in
+						detecting OpenGL run-time errors.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">-sync</emphasis></term>
+				<listitem>
+					<simpara>
+						Enable synchronous X protocol transactions. This option makes it easier to track down potential X protocol
+						errors.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutInit.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutInitWindowPosition</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutInitWindowSize</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMainLoop</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

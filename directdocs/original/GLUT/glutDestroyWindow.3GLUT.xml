@@ -1,0 +1,61 @@
+<refentry id="glutDestroyWindow.3GLUT">
+	<refmeta id="glutDestroyWindow.3GLUT-meta">
+		<refentrytitle>glutDestroyWindow</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutDestroyWindow.3GLUT-name">
+		<refname>glutDestroyWindow</refname>
+		<refpurpose>destroys the specified window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutDestroyWindow.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutDestroyWindow</function></funcdef>
+				<paramdef>int&nbsp;<parameter>win</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutDestroyWindow.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>win</parameter></term>
+				<listitem>
+					<simpara>
+						Identifier of GLUT window to destroy.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutDestroyWindow.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutDestroyWindow</function> destroys the window specified by win and the window's associated OpenGL context,
+			logical colormap (if the window is color index), and overlay and related state (if an overlay has been established).
+			Any subwindows of destroyed windows are also destroyed by <function>glutDestroyWindow</function>. If win was the
+			current window, the current window becomes invalid (<function moreinfo="refentry">glutGetWindow</function> will return
+			zero).
+		</para>
+	</refsect1>
+	<refsect1 id="glutDestroyWindow.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutCreateSubWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDestroyMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

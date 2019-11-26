@@ -1,0 +1,125 @@
+<refentry id="glutSetKeyRepeat.3GLUT">
+	<refmeta id="glutSetKeyRepeat.3GLUT-meta">
+		<refentrytitle>glutSetKeyRepeat</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSetKeyRepeat.3GLUT-name">
+		<refname>glutSetKeyRepeat</refname>
+		<refpurpose>sets the key repeat mode</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSetKeyRepeat.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutSetKeyRepeat</function></funcdef>
+				<paramdef>int&nbsp;<parameter>repeatMode</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSetKeyRepeat.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>repeatMode</parameter></term>
+				<listitem>
+					<simpara>
+						Mode for setting key repeat to.
+					</simpara>
+					<variablelist>
+						<varlistentry>
+							<term><constant>GLUT_KEY_REPEAT_OFF</constant></term>
+							<listitem>
+								<simpara>
+									Disable key repeat for the window system on a global basis if possible.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_KEY_REPEAT_ON</constant></term>
+							<listitem>
+								<simpara>
+									Enable key repeat for the window system on a global basis if possible.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_KEY_REPEAT_DEFAULT</constant></term>
+							<listitem>
+								<simpara>
+									Reset the key repeat mode for the window system to its default state if possible.
+								</simpara>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutSetKeyRepeat.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutSetKeyRepeat</function> sets the key repeat mode for the window system on a global basis if possible. If
+			supported by the window system, the key repeat can either be enabled, disabled, or set to the window system's default
+			key repeat state.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSetKeyRepeat.3GLUT-glut_implementation_notes_for_x11">
+		<title>Glut Implementation Notes For X11</title>
+		<para>
+			X11 sends KeyPress events repeatedly when the window system's global auto repeat is enabled. <function
+			moreinfo="refentry">glutIgnoreKeyRepeat</function> can prevent these auto repeated keystrokes from being reported as
+			keyboard or special callbacks, but there is still some minimal overhead by the X server to continually stream KeyPress
+			events to the GLUT application. The <function>glutSetKeyRepeat</function> routine can be used to actually disable the
+			global sending of auto repeated KeyPress events. Note that <function>glutSetKeyRepeat</function> affects the global
+			window system auto repeat state so other applications will not auto repeat if you disable auto repeat globally through
+			<function>glutSetKeyRepeat</function>.
+		</para>
+		<para>
+			GLUT applications using the X11 GLUT implemenation should disable key repeat with <function>glutSetKeyRepeat</function>
+			to disable key repeats most efficiently.
+		</para>
+		<para>
+			GLUT applications that change the key repeat state with <function>glutSetKeyRepeat</function> are responsible for
+			explicitly restoring the default key repeat state on exit.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSetKeyRepeat.3GLUT-glut_implementation_notes_for_win32">
+		<title>Glut Implementation Notes For Win32</title>
+		<para>
+			The Win32 implementation of <function>glutSetKeyRepeat</function> does nothing. The <function
+			moreinfo="refentry">glutIgnoreKeyRepeat</function> routine can be used in the Win32 GLUT implementation to ignore
+			repeated keys on a per-window basis without changing the global window system key repeat.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSetKeyRepeat.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutIgnoreKeyRepeat</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutKeyboardFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpecialFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutKeyboardUpFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpecialUpFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDeviceGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

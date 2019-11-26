@@ -1,0 +1,91 @@
+<refentry id="glutDisplayFunc.3GLUT">
+	<refmeta id="glutDisplayFunc.3GLUT-meta">
+		<refentrytitle>glutDisplayFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutDisplayFunc.3GLUT-name">
+		<refname>glutDisplayFunc</refname>
+		<refpurpose>sets the display callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutDisplayFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutDisplayFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(void)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutDisplayFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new display callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutDisplayFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutDisplayFunc</function> sets the display callback for the current window. When GLUT determines that the
+			normal plane for the window needs to be redisplayed, the display callback for the window is called. Before the
+			callback, the current window is set to the window needing to be redisplayed and (if no overlay display callback is
+			registered) the layer in use is set to the normal plane. The display callback is called with no parameters. The entire
+			normal plane region should be redisplayed in response to the callback (this includes ancillary buffers if your program
+			depends on their state).
+		</para>
+		<para>
+			GLUT determines when the display callback should be triggered based on the window's redisplay state. The redisplay
+			state for a window can be either set explicitly by calling <function moreinfo="refentry">glutPostRedisplay</function>
+			or implicitly as the result of window damage reported by the window system. Multiple posted redisplays for a window are
+			coalesced by GLUT to minimize the number of display callbacks called.
+		</para>
+		<para>
+			When an overlay is established for a window, but there is no overlay display callback registered, the display callback
+			is used for redisplaying both the overlay and normal plane (that is, it will be called if either the redisplay state or
+			overlay redisplay state is set). In this case, the layer in use is not implicitly changed on entry to the display
+			callback.
+		</para>
+		<para>
+			See <function moreinfo="refentry">glutOverlayDisplayFunc</function> to understand how distinct callbacks for the
+			overlay and normal plane of a window may be established.
+		</para>
+		<para>
+			When a window is created, no display callback exists for the window. It is the responsibility of the programmer to
+			install a display callback for the window before the window is shown. A display callback must be registered for any
+			window that is shown. If a window becomes displayed without a display callback being registered, a fatal error occurs.
+			Passing <constant>NULL</constant> to glutDisplayFunc is illegal as of GLUT 3.0; there is no way to "deregister" a
+			display callback (though another callback routine can always be registered).
+		</para>
+		<para>
+			Upon return from the display callback, the normal damaged state of the window (returned by calling <function
+			moreinfo="refentry">glutLayerGet(GLUT_NORMAL_DAMAGED)</function> is cleared. If there is no overlay display callback
+			registered the overlay damaged state of the window (returned by calling <function
+			moreinfo="refentry">glutLayerGet(GLUT_OVERLAY_DAMAGED)</function> is also cleared.
+		</para>
+	</refsect1>
+	<refsect1 id="glutDisplayFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutPostRedisplay</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutOverlayDisplayFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,79 @@
+<refentry id="glutChangeToSubMenu.3GLUT">
+	<refmeta id="glutChangeToSubMenu.3GLUT-meta">
+		<refentrytitle>glutChangeToSubMenu</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutChangeToSubMenu.3GLUT-name">
+		<refname>glutChangeToSubMenu</refname>
+		<refpurpose>changes the specified menu item in the current menu into a sub-menu trigger.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutChangeToSubMenu.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutChangeToSubMenu</function></funcdef>
+				<paramdef>int&nbsp;<parameter>entry</parameter></paramdef>
+				<paramdef>char&nbsp;*<parameter>name</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>menu</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutChangeToSubMenu.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>entry</parameter></term>
+				<listitem>
+					<simpara>
+						Index into the menu items of the current menu (1 is the topmost menu item).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>name</parameter></term>
+				<listitem>
+					<simpara>
+						ASCII character string to display in the menu item to cascade the sub-menu from.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>menu</parameter></term>
+				<listitem>
+					<simpara>
+						Identifier of the menu to cascade from this sub-menu menu item.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutChangeToSubMenu.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutChangeToSubMenu</function> changes the specified menu item in the current menu into a sub-menu trigger.
+			The entry parameter determines which menu item should be changed, with one being the topmost item. entry must be
+			between 1 and <function moreinfo="refentry">glutGet(GLUT_MENU_NUM_ITEMS)</function> inclusive. The menu item to change
+			does not have to be a sub-menu trigger already. The string name will be displayed for the newly changed sub-menu
+			trigger. The menu identifier names the sub-menu to cascade from the newly added sub-menu trigger.
+		</para>
+	</refsect1>
+	<refsect1 id="glutChangeToSubMenu.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutChangeToMenuEntry</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutAddSubMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutRemoveMenuItem</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

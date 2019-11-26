@@ -1,0 +1,64 @@
+<refentry id="glutRemoveMenuItem.3GLUT">
+	<refmeta id="glutRemoveMenuItem.3GLUT-meta">
+		<refentrytitle>glutRemoveMenuItem</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutRemoveMenuItem.3GLUT-name">
+		<refname>glutRemoveMenuItem</refname>
+		<refpurpose>remove the specified menu item.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutRemoveMenuItem.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutRemoveMenuItem</function></funcdef>
+				<paramdef>int&nbsp;<parameter>entry</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutRemoveMenuItem.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>entry</parameter></term>
+				<listitem>
+					<simpara>
+						Index into the menu items of the current menu (1 is the topmost menu item).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutRemoveMenuItem.3GLUT-description">
+		<title>Description</title>
+		<para>
+			glutRemoveMenuItem remove the entry menu item regardless of whether it is a menu entry or sub-menu trigger.
+			<parameter>entry</parameter> must be between 1 and <function
+			moreinfo="refentry">glutGet(GLUT_MENU_NUM_ITEMS)</function> inclusive. Menu items below the removed menu item are
+			renumbered.
+		</para>
+	</refsect1>
+	<refsect1 id="glutRemoveMenuItem.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutAddMenuEntry</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutAddSubMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutChangeToMenuEntry</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutChangeToSubMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,68 @@
+<refentry id="glutAddSubMenu.3GLUT">
+	<refmeta id="glutAddSubMenu.3GLUT-meta">
+		<refentrytitle>glutAddSubMenu</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutAddSubMenu.3GLUT-name">
+		<refname>glutAddSubMenu</refname>
+		<refpurpose>adds a sub-menu trigger to the bottom of the current menu.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutAddSubMenu.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutAddSubMenu</function></funcdef>
+				<paramdef>char&nbsp;*<parameter>name</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>menu</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutAddSubMenu.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>name</parameter></term>
+				<listitem>
+					<simpara>
+						ASCII character string to display in the menu item from which to cascade the sub-menu.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>menu</parameter></term>
+				<listitem>
+					<simpara>
+						Identifier of the menu to cascade from this sub-menu menu item.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutAddSubMenu.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutAddSubMenu</function> adds a sub-menu trigger to the bottom of the current menu. The string name will be
+			displayed for the newly added sub-menu trigger. If the sub-menu trigger is entered, the sub-menu numbered menu will be
+			cascaded, allowing sub-menu menu items to be selected.
+		</para>
+	</refsect1>
+	<refsect1 id="glutAddSubMenu.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutAddMenuEntry</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutChangeToSubMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutRemoveMenuItem</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

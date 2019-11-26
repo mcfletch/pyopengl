@@ -1,0 +1,56 @@
+<refentry id="glutShowWindow.3GLUT">
+	<refmeta id="glutShowWindow.3GLUT-meta">
+		<refentrytitle>glutShowWindow</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutShowWindow.3GLUT-name">
+		<refname>glutShowWindow</refname>
+		<refname>glutHideWindow</refname>
+		<refname>glutIconifyWindow</refname>
+		<refpurpose>change the display status of the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutShowWindow.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutShowWindow</function></funcdef>
+				<void/>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutHideWindow</function></funcdef>
+				<void/>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutIconifyWindow</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutShowWindow.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutShowWindow</function> will show the current window (though it may still not be visible if obscured by
+			other shown windows). <function>glutHideWindow</function> will hide the current window.
+			<function>glutIconifyWindow</function> will iconify a top-level window, but GLUT prohibits iconification of a
+			subwindow. The effect of showing, hiding, and iconifying windows does not take place immediately. Instead the requests
+			are saved for execution upon return to the GLUT event loop. Subsequent show, hide, or iconification requests on a
+			window replace the previously saved request for that window. The effect of hiding, showing, or iconifying top-level
+			windows is subject to the window system's policy for displaying windows.
+		</para>
+	</refsect1>
+	<refsect1 id="glutShowWindow.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutPopWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutPushWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

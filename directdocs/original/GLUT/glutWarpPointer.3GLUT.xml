@@ -1,0 +1,73 @@
+<refentry id="glutWarpPointer.3GLUT">
+	<refmeta id="glutWarpPointer.3GLUT-meta">
+		<refentrytitle>glutWarpPointer</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutWarpPointer.3GLUT-name">
+		<refname>glutWarpPointer</refname>
+		<refpurpose>glutWarpPointer warps the pointer's location.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutWarpPointer.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutWarpPointer</function></funcdef>
+				<paramdef>int&nbsp;<parameter>x</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>y</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutWarpPointer.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>x</parameter></term>
+				<listitem>
+					<simpara>
+						X offset relative to the current window's origin (upper left).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>y</parameter></term>
+				<listitem>
+					<simpara>
+						Y offset relative to the current window's origin (upper left).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutWarpPointer.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function moreinfo="refentry">glutWarpPointer</function> warps the window system's pointer to a new location relative
+			to the origin of the current window. The new location will be offset <parameter>x</parameter> pixels on the X axis and
+			<parameter>y</parameter> pixels on the Y axis. These parameters may be negative. The warp is done immediately.
+		</para>
+		<para>
+			If the pointer would be warped outside the screen's frame buffer region, the location will be clamped to the nearest
+			screen edge. The window system is allowed to further constrain the pointer's location in window system dependent ways.
+		</para>
+		<para>
+			The following is good advice that applies to <function moreinfo="refentry">glutWarpPointer</function>: "There is seldom
+			any reason for calling this function. The pointer should normally be left to the user." (from Xlib's XWarpPointer man
+			page.)
+		</para>
+	</refsect1>
+	<refsect1 id="glutWarpPointer.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutMouseFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

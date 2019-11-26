@@ -1,0 +1,61 @@
+<refentry id="glutSetWindow.3GLUT">
+	<refmeta id="glutSetWindow.3GLUT-meta">
+		<refentrytitle>glutSetWindow</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSetWindow.3GLUT-name">
+		<refname>glutSetWindow</refname>
+		<refname>glutGetWindow</refname>
+		<refpurpose>set/get the current window</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSetWindow.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSetWindow</function></funcdef>
+				<paramdef>int&nbsp;<parameter>win</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutGetWindow</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSetWindow.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>win</parameter></term>
+				<listitem>
+					<simpara>
+						Identifier of GLUT window to make the current window.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutSetWindow.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutSetWindow</function> sets the current window; <function>glutGetWindow</function> returns the identifier
+			of the current window. If no windows exist or the previously current window was destroyed,
+			<function>glutGetWindow</function> returns zero. <function>glutSetWindow</function> does not change the layer in use
+			for the window; this is done using <function moreinfo="refentry">glutUseLayer</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSetWindow.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSetMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

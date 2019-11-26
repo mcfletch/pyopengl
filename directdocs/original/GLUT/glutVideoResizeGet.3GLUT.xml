@@ -1,0 +1,104 @@
+<refentry id="glutVideoResizeGet.3GLUT">
+	<refmeta id="glutVideoResizeGet.3GLUT-meta">
+		<refentrytitle>glutVideoResizeGet</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutVideoResizeGet.3GLUT-name">
+		<refname>glutVideoResizeGet</refname>
+		<refpurpose>retrieves GLUT video resize information represented by integers.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutVideoResizeGet.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutVideoResizeGet</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>param</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutVideoResizeGet.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>param</parameter></term>
+				<listitem>
+					<simpara>
+						Name of video resize information to retrieve.
+					</simpara>
+					<variablelist>
+						<varlistentry>
+							<term><constant>GLUT_VIDEO_RESIZE_POSSIBLE</constant></term>
+							<listitem>
+								<simpara>
+									Non-zero if video resizing is supported by the underlying system; zero if not supported. If
+									this is zero, the other video resize GLUT calls do nothing when called. See the Implementation
+									Notes sections below.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_VIDEO_RESIZE_X_DELTA</constant></term>
+							<term><constant>GLUT_VIDEO_RESIZE_Y_DELTA</constant></term>
+							<term><constant>GLUT_VIDEO_RESIZE_WIDTH_DELTA</constant></term>
+							<term><constant>GLUT_VIDEO_RESIZE_HEIGHT_DELTA</constant></term>
+							<term><constant>GLUT_VIDEO_RESIZE_X</constant></term>
+							<term><constant>GLUT_VIDEO_RESIZE_Y</constant></term>
+							<term><constant>GLUT_VIDEO_RESIZE_WIDTH</constant></term>
+							<term><constant>GLUT_VIDEO_RESIZE_HEIGHT</constant></term>
+							<term><constant>GLUT_VIDEO_RESIZE_IN_USE</constant></term>
+							<listitem>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutVideoResizeGet.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutVideoResizeGet</function> retrieves GLUT video resizing information represented by integers. The
+			<parameter>param</parameter> parameter determines what type of video resize information to return.
+		</para>
+	</refsect1>
+	<refsect1 id="glutVideoResizeGet.3GLUT-x_implementation_notes">
+		<title>X Implementation Notes</title>
+		<para>
+			The current implementation uses the SGIX_video_resize GLX extension. This extension is currently supported on SGI's
+			InfiniteReality-based systems.
+		</para>
+	</refsect1>
+	<refsect1 id="glutVideoResizeGet.3GLUT-win32_implementation_notes">
+		<title>Win32 Implementation Notes</title>
+		<para>
+			The current implementation never reports that video resizing is possible.
+		</para>
+	</refsect1>
+	<refsect1 id="glutVideoResizeGet.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<!--<member><citerefentry>
+					<refentrytitle>glutSetupVideoResizing</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutStopVideoResizing</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutVideoResize</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutVideoPan</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>-->
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

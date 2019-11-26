@@ -1,0 +1,78 @@
+<refentry id="glutPositionWindow.3GLUT">
+	<refmeta id="glutPositionWindow.3GLUT-meta">
+		<refentrytitle>glutPositionWindow</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutPositionWindow.3GLUT-name">
+		<refname>glutPositionWindow</refname>
+		<refpurpose>requests a change to the position of the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutPositionWindow.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutPositionWindow</function></funcdef>
+				<paramdef>int&nbsp;<parameter>x</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>y</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutPositionWindow.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>x</parameter></term>
+				<listitem>
+					<simpara>
+						New X location of window in pixels.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>y</parameter></term>
+				<listitem>
+					<simpara>
+						New Y location of window in pixels.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutPositionWindow.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutPositionWindow</function> requests a change in the position of the current window. For top-level windows,
+			the <parameter>x</parameter> and <parameter>y</parameter> parameters are pixel offsets from the screen origin.
+		</para>
+		<para>
+			For subwindows, the <parameter>x</parameter> and <parameter>y</parameter> parameters are pixel offsets from the
+			window's parent window origin. The requests by <function>glutPositionWindow</function> are not processed immediately.
+			The request is executed after returning to the main event loop. This allows multiple
+			<function>glutPositionWindow</function>, <function moreinfo="refentry">glutReshapeWindow</function>, and <function
+			moreinfo="refentry">glutFullScreen</function> requests to the same window to be coalesced.
+		</para>
+		<para>
+			In the case of top-level windows, a <function>glutPositionWindow</function> call is considered only a request for
+			positioning the window. The window system is free to apply its own policies to top-level window placement. The intent
+			is that top-level windows should be repositioned according <function>glutPositionWindow</function>'s parameters.
+		</para>
+		<para>
+			<function>glutPositionWindow</function> disables the full screen status of a window if previously enabled.
+		</para>
+	</refsect1>
+	<refsect1 id="glutPositionWindow.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutInitWindowPosition</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutReshapeWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,90 @@
+<refentry id="glutWindowStatusFunc.3GLUT">
+	<refmeta id="glutWindowStatusFunc.3GLUT-meta">
+		<refentrytitle>glutWindowStatusFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutWindowStatusFunc.3GLUT-name">
+		<refname>glutWindowStatusFunc</refname>
+		<refpurpose>sets the window status callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutWindowStatusFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutWindowStatusFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;state)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutWindowStatusFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new window status callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutWindowStatusFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutWindowStatusFunc</function> sets the window status callback for the current window. The window status
+			callback for a window is called when the window status (visibility) of a window changes. The
+			<parameter>state</parameter> callback parameter is one of <constant>GLUT_HIDDEN</constant>,
+			<constant>GLUT_FULLY_RETAINED</constant>, <constant>GLUT_PARTIALLY_RETAINED</constant>, or
+			<constant>GLUT_FULLY_COVERED</constant> depending on the current window status of the window.
+			<constant>GLUT_HIDDEN</constant> means that the window is either not shown (often meaning that the window is
+			iconified). <constant>GLUT_FULLY_RETAINED</constant> means that the window is fully retained (no pixels belonging to
+			the window are covered by other windows). <constant>GLUT_PARTIALLY_RETAINED</constant> means that the window is
+			partially retained (some but not all pixels belonging to the window are covered by other windows).
+			<constant>GLUT_FULLY_COVERED</constant> means the window is shown but no part of the window is visible, i.e., until the
+			window's status changes, all further rendering to the window is discarded.
+		</para>
+		<para>
+			GLUT considers a window visible if any pixel of the window is visible or any pixel of any descendant window is visible
+			on the screen.
+		</para>
+		<para>
+			GLUT applications are encouraged to disable rendering and/or animation when windows have a status of either
+			<constant>GLUT_HIDDEN</constant> or <constant>GLUT_FULLY_COVERED</constant>.
+		</para>
+		<para>
+			Passing <constant>NULL</constant> to <function>glutWindowStatusFunc</function> disables the generation of the window
+			status callback.
+		</para>
+		<para>
+			If the window status callback for a window is disabled and later re-enabled, the window status of the window is
+			undefined; any change in window window status will be reported, that is if you disable a window status callback and
+			re-enable the callback, you are guaranteed the next window status change will be reported.
+		</para>
+		<para>
+			Setting the window status callback for a window disables the visibility callback set for the window (and vice versa).
+			The visibility callback is set with <function moreinfo="refentry">glutVisibilityFunc</function>. <function
+			moreinfo="refentry">glutVisibilityFunc</function> is deprecated in favor of the more informative
+			<function>glutWindowStatusFunc</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glutWindowStatusFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutPopWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutVisibilityFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

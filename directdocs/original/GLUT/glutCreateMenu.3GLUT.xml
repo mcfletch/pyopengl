@@ -1,0 +1,99 @@
+<refentry id="glutCreateMenu.3GLUT">
+	<refmeta id="glutCreateMenu.3GLUT-meta">
+		<refentrytitle>glutCreateMenu</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutCreateMenu.3GLUT-name">
+		<refname>glutCreateMenu</refname>
+		<refpurpose>creates a new pop-up menu.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutCreateMenu.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutCreateMenu</function></funcdef>
+				<paramdef>void&nbsp;(*<paramdef>func</paramdef>)(int&nbsp;<parameter>value</parameter>)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutCreateMenu.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The callback function for the menu that is called when a menu entry from the menu is selected. The value
+						passed to the callback is determined by the value for the selected menu entry.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutCreateMenu.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutCreateMenu</function> creates a new pop-up menu and returns a unique small integer identifier. The range
+			of allocated identifiers starts at one. The menu identifier range is separate from the window identifier range.
+			Implicitly, the current menu is set to the newly created menu. This menu identifier can be used when calling <function
+			moreinfo="refentry">glutSetMenu</function>.
+		</para>
+		<para>
+			When the menu callback is called because a menu entry is selected for the menu, the current menu will be implicitly set
+			to the menu with the selected entry before the callback is made.
+		</para>
+	</refsect1>
+	<refsect1 id="glutCreateMenu.3GLUT-example">
+		<title>Example</title>
+		<para>
+			Here is a quick example of how to create a GLUT popup menu with two submenus and attach it to the right button of the
+			current window:
+		</para>
+		<programlisting>int submenu1, submenu2;
+submenu1 = glutCreateMenu(selectMessage);
+glutAddMenuEntry(&quot;abc&quot;, 1);
+glutAddMenuEntry(&quot;ABC&quot;, 2);
+submenu2 = glutCreateMenu(selectColor);
+glutAddMenuEntry(&quot;Green&quot;, 1);
+glutAddMenuEntry(&quot;Red&quot;, 2);
+glutAddMenuEntry(&quot;White&quot;, 3);
+glutCreateMenu(selectFont);
+glutAddMenuEntry(&quot;9 by 15&quot;, 0);
+glutAddMenuEntry(&quot;Times Roman 10&quot;, 1);
+glutAddMenuEntry(&quot;Times Roman 24&quot;, 2);
+glutAddSubMenu(&quot;Messages&quot;, submenu1);
+glutAddSubMenu(&quot;Color&quot;, submenu2);
+glutAttachMenu(GLUT_RIGHT_BUTTON);</programlisting>
+	</refsect1>
+	<refsect1 id="glutCreateMenu.3GLUT-x_implementation_notes">
+		<title>X Implementation Notes</title>
+		<para>
+			If available, GLUT for X will take advantage of overlay planes for implementing pop-up menus. The use of overlay planes
+			can eliminate display callbacks when pop-up menus are deactivated. The SERVER_OVERLAY_VISUALS convention is used to
+			determine if overlay visuals are available.
+		</para>
+	</refsect1>
+	<refsect1 id="glutCreateMenu.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDestroyMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSetMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutAttachMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

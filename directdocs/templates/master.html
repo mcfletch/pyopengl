@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      py:strip="">
+<?python
+from dumbpydoc import Alternate
+from dumbmarkup import format_docstring
+?>
+<ul class="menu" py:def="nav_table(context)">
+    <?python
+        previous = getattr( context, 'previous', None)
+        next = getattr( context,'next',None)
+    ?>
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/documentation/index.html">Docs</a></li>
+    <li><a href="/documentation/installation.html">Install</a></li>
+    <div py:for="parent in module.parents" py:strip="">
+        <li py:if="parent is not module"><a class="parent-link" href="${parent.name}.html">${parent.basename}</a></li>
+    </div>
+</ul>
+<span py:def="breadcrumbs( module )">
+    <span py:for="parent in module.parents">
+        <span py:if="parent is not module" py:strip=""><a class="parent-link" href="${parent.name}.html">${parent.basename}</a>.</span>
+        <span py:if="parent is module" py:strip="">${parent.basename}</span>
+    </span>
+</span>
+<a py:def="classref( cls )" title="${cls.name}" href="${cls.module.name}.html#class-${cls.basename}">${cls.basename}</a>
+<div py:def="docstring( obj )" class="doc-string" py:if="obj.docstring">
+    ${convert( format_docstring( obj.docstring ))}
+</div>
+<div py:def="pysignature( function,name=None, link=None )" class="py-signature">
+    <a name="py-${function.name}"/>
+    <div py:if="function.alternates" class="alternates">
+        <div class="alternate-description"><span class="py-function">${function.name}</span> (alternate implementations)</div>
+        <div py:for="alternate in function.alternates" class="alternate">
+            ${pysignature( alternate )}
+        </div>
+    </div>
+    <div py:if="not function.alternates" py:strip="">
+        <span class="py-function"><a py:strip="not link" href="../manual-3.0/${link}">${function.name}</a></span>( ${paramlist(function)} )
+        <span py:if="function.return_value">-&gt; ${function.return_value}</span>
+        ${docstring( function )}
+    </div>
+</div>
+<span py:def="paramlist( function )" class="parameter-list">
+    <span py:for="i,param in enumerate(function.parameters)" class="param-def">
+        <span py:if="param.varargs" py:strip="">*</span>
+        <span py:if="param.varnamed" py:strip="">**</span>
+        <span py:if="param.data_type" py:strip="">${param.data_type}( </span>
+            ${param.name}
+        <span py:if="param.data_type" py:strip="">)</span>
+        <span py:if="param.has_default" py:strip=""> = ${repr(param.default)}</span>
+        <span py:strip="" py:if="i &lt; len(function.parameters)-1">, </span>
+    </span>
+</span>
+<!-- dumbmarkup support -->
+<div py:def="children(node)" py:if="node.children" py:strip=""><div py:for="child in node.children" py:strip="">${convert(child)}</div></div>
+<div py:def="node_content(node)" py:strip="">${node.text}${children(node)}</div>
+<div py:def="convert( node )" py:strip="">
+	<h1 py:if="node.html_tag == 'h1'" class="${node.html_class}">${node_content(node)}</h1>
+	<h2 py:if="node.html_tag == 'h2'" class="${node.html_class}">${node_content(node)}</h2>
+	<div py:if="node.html_tag == 'div'" class="${node.html_class}">${node_content(node)}</div>
+	<ul py:if="node.html_tag == 'ul'" class="${node.html_class}">${node_content(node)}</ul>
+	<li py:if="node.html_tag == 'li'" class="${node.html_class}">${node_content(node)}</li>
+	<dl py:if="node.html_tag == 'dl'" class="${node.html_class}">${node_content(node)}</dl>
+	<dt py:if="node.html_tag == 'dt'" class="${node.html_class}">${node_content(node)}</dt>
+	<dd py:if="node.html_tag == 'dd'" class="${node.html_class}">${node_content(node)}</dd>
+	<a py:if="node.html_tag == 'a'" class="${node.html_class}" href="${node.url}">${node_content(node)}</a>
+	<img py:if="node.html_tag == 'img'" class="${node.html_class} wiki" src="${node.url}" alt="${node.text}" />
+	${node.tail}
+</div>
+
+
+<head py:match="head" py:attrs="select('@*')">
+    <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+    <title py:replace="''">Your title goes here</title>
+    <meta py:replace="select('*')"/>
+</head>
+
+<body py:match="body" py:attrs="select('@*')">
+  <div id="content">
+    <div py:replace="select('*|text()')"/>
+    <!-- End of content -->
+  </div>
+</body>
+</html>

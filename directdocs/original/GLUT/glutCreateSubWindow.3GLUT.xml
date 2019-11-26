@@ -1,0 +1,104 @@
+<refentry id="glutCreateSubWindow.3GLUT">
+	<refmeta id="glutCreateSubWindow.3GLUT-meta">
+		<refentrytitle>glutCreateSubWindow</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutCreateSubWindow.3GLUT-name">
+		<refname>glutCreateSubWindow</refname>
+		<refpurpose>creates a subwindow.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutCreateSubWindow.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutCreateSubWindow</function></funcdef>
+				<paramdef>int&nbsp;<parameter>win</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>x</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>y</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>width</parameter></paramdef>
+				<paramdef>int&nbsp;<parameter>height</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutCreateSubWindow.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>win</parameter></term>
+				<listitem>
+					<simpara>
+						Identifier of the subwindow's parent window.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>x</parameter></term>
+				<listitem>
+					<simpara>
+						Window X location in pixels relative to parent window's origin.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>y</parameter></term>
+				<listitem>
+					<simpara>
+						Window Y location in pixels relative to parent window's origin.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>width</parameter></term>
+				<listitem>
+					<simpara>
+						Width in pixels.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>height</parameter></term>
+				<listitem>
+					<simpara>
+						Height in pixels.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutCreateSubWindow.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutCreateSubWindow</function> creates a subwindow of the window identified by win of size width and height
+			at location x and y within the current window. Implicitly, the current window is set to the newly created subwindow.
+		</para>
+		<para>
+			Each created window has a unique associated OpenGL context. State changes to a window's associated OpenGL context can
+			be done immediately after the window is created.
+		</para>
+		<para>
+			The display state of a window is initially for the window to be shown. But the window's display state is not actually
+			acted upon until <function moreinfo="refentry">glutMainLoop</function> is entered. This means until <function
+			moreinfo="refentry">glutMainLoop</function> is called, rendering to a created window is ineffective. Subwindows can not
+			be iconified.
+		</para>
+		<para>
+			Subwindows can be nested arbitrarily deep. The value returned is a unique small integer identifier for the window. The
+			range of allocated identifiers starts at one.
+		</para>
+	</refsect1>
+	<refsect1 id="glutCreateSubWindow.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDestroyWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

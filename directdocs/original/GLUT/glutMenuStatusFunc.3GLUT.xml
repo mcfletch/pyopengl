@@ -1,0 +1,79 @@
+<refentry id="glutMenuStatusFunc.3GLUT">
+	<refmeta id="glutMenuStatusFunc.3GLUT-meta">
+		<refentrytitle>glutMenuStatusFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutMenuStatusFunc.3GLUT-name">
+		<refname>glutMenuStatusFunc</refname>
+		<refname>glutMenuStateFunc</refname>
+		<refpurpose>sets the global menu status callback.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutMenuStatusFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutMenuStatusFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;status,&nbsp;int&nbsp;x,&nbsp;int&nbsp;y)</paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutMenuStateFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;status)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutMenuStatusFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new menu status (or state) callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutMenuStatusFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutMenuStatusFunc</function> sets the global menu status callback so a GLUT program can determine when a
+			menu is in use or not. When a menu status callback is registered, it will be called with the value
+			<constant>GLUT_MENU_IN_USE</constant> for its value parameter when pop-up menus are in use by the user; and the
+			callback will be called with the value <constant>GLUT_MENU_NOT_IN_USE</constant> for its status parameter when pop-up
+			menus are no longer in use. The <parameter>x</parameter> and <parameter>y</parameter> parameters indicate the location
+			in window coordinates of the button press that caused the menu to go into use, or the location where the menu was
+			released (may be outside the window). The func parameter names the callback function. Other callbacks continue to
+			operate (except mouse motion callbacks) when pop-up menus are in use so the menu status callback allows a program to
+			suspend animation or other tasks when menus are in use. The cascading and unmapping of sub-menus from an initial pop-up
+			menu does not generate menu status callbacks. There is a single menu status callback for GLUT.
+		</para>
+		<para>
+			When the menu status callback is called, the current menu will be set to the initial pop-up menu in both the
+			<constant>GLUT_MENU_IN_USE</constant> and <constant>GLUT_MENU_NOT_IN_USE</constant> cases. The current window will be
+			set to the window from which the initial menu was popped up from, also in both cases.
+		</para>
+		<para>
+			Passing <constant>NULL</constant> to <function>glutMenuStatusFunc</function> disables the generation of the menu status
+			callback. <function moreinfo="refentry">glutMenuStateFunc</function> is a deprecated version of the
+			<function>glutMenuStatusFunc</function> routine. The only difference is <function
+			moreinfo="refentry">glutMenuStateFunc</function> callback prototype does not deliver the two additional x and y
+			coordinates.
+		</para>
+	</refsect1>
+	<refsect1 id="glutMenuStatusFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

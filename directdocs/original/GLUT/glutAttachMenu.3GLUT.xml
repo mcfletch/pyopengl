@@ -1,0 +1,66 @@
+<refentry id="glutAttachMenu.3GLUT">
+	<refmeta id="glutAttachMenu.3GLUT-meta">
+		<refentrytitle>glutAttachMenu</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutAttachMenu.3GLUT-name">
+		<refname>glutAttachMenu</refname>
+		<refname>glutDetachMenu</refname>
+		<refpurpose>attaches/detaches a mouse button for the current window to the identifier of the current menu</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutAttachMenu.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutAttachMenu</function></funcdef>
+				<paramdef>int&nbsp;<parameter>button</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutDetachMenu</function></funcdef>
+				<paramdef>int&nbsp;<parameter>button</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutAttachMenu.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>button</parameter></term>
+				<listitem>
+					<simpara>
+						The button to attach a menu or detach a menu.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutAttachMenu.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutAttachMenu</function> attaches a mouse button for the current window to the identifier of the current
+			menu; glutDetachMenu detaches an attached mouse button from the current window. By attaching a menu identifier to a
+			button, the named menu will be popped up when the user presses the specified button. button should be one of
+			<constant>GLUT_LEFT_BUTTON</constant>, <constant>GLUT_MIDDLE_BUTTON</constant>, and
+			<constant>GLUT_RIGHT_BUTTON</constant>. Note that the menu is attached to the button by identifier, not by reference.
+		</para>
+	</refsect1>
+	<refsect1 id="glutAttachMenu.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMouseFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMenuStatusFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

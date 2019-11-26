@@ -1,0 +1,103 @@
+<refentry id="glutSolidSphere.3GLUT">
+	<refmeta id="glutSolidSphere.3GLUT-meta">
+		<refentrytitle>glutSolidSphere</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSolidSphere.3GLUT-name">
+		<refname>glutSolidSphere</refname>
+		<refname>glutWireSphere</refname>
+		<refpurpose>render a solid or wireframe sphere respectively.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSolidSphere.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSolidSphere</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>radius</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>slices</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>stacks</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutWireSphere</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>radius</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>slices</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>stacks</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSolidSphere.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>radius</parameter></term>
+				<listitem>
+					<simpara>
+						The radius of the sphere.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>slices</parameter></term>
+				<listitem>
+					<simpara>
+						The number of subdivisions around the Z axis (similar to lines of longitude).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>stacks</parameter></term>
+				<listitem>
+					<simpara>
+						The number of subdivisions along the Z axis (similar to lines of latitude).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutSolidSphere.3GLUT-description">
+		<title>Description</title>
+		<para>
+			Renders a sphere centered at the modeling coordinates origin of the specified radius. The sphere is subdivided around
+			the Z axis into slices and along the Z axis into stacks.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSolidSphere.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutSolidCube</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidCone</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidTorus</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidDodecahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidOctahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidTetrahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidIcosahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidTeapot</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

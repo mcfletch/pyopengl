@@ -1,0 +1,60 @@
+<refentry id="glutUseLayer.3GLUT">
+	<refmeta id="glutUseLayer.3GLUT-meta">
+		<refentrytitle>glutUseLayer</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutUseLayer.3GLUT-name">
+		<refname>glutUseLayer</refname>
+		<refpurpose>changes the layer in use for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutUseLayer.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutUseLayer</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>layer</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutUseLayer.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>layer</parameter></term>
+				<listitem>
+					<simpara>
+						Either <constant>GLUT_NORMAL</constant> or <constant>GLUT_OVERLAY</constant>, selecting the normal plane or
+						overlay respectively.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutUseLayer.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutUseLayer</function> changes the per-window layer in use for the current window, selecting either the
+			normal plane or overlay. The overlay should only be specified if an overlay exists, however windows without an overlay
+			may still call <function moreinfo="refentry">glutUseLayer(GLUT_NORMAL)</function>. OpenGL commands for the window are
+			directed to the current layer in use.
+		</para>
+		<para>
+			To query the layer in use for a window, call <function moreinfo="refentry">glutLayerGet(GLUT_LAYER_IN_USE)</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glutUseLayer.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutEstablishOverlay</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSetWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

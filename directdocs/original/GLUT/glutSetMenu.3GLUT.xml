@@ -1,0 +1,60 @@
+<refentry id="glutSetMenu.3GLUT">
+	<refmeta id="glutSetMenu.3GLUT-meta">
+		<refentrytitle>glutSetMenu</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSetMenu.3GLUT-name">
+		<refname>glutSetMenu</refname>
+		<refname>glutGetMenu</refname>
+		<refpurpose>set/get the current menu</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSetMenu.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSetMenu</function></funcdef>
+				<paramdef>int&nbsp;<parameter>menu</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutGetMenu</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSetMenu.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>menu</parameter></term>
+				<listitem>
+					<simpara>
+						The identifier of the menu to make the current menu.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutSetMenu.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutSetMenu</function> sets the current menu; <function>glutGetMenu</function> returns the identifier of the
+			current menu. If no menus exist or the previous current menu was destroyed, <function>glutGetMenu</function> returns
+			zero.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSetMenu.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutCreateMenu</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSetWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,90 @@
+<refentry id="glutKeyboardFunc.3GLUT">
+	<refmeta id="glutKeyboardFunc.3GLUT-meta">
+		<refentrytitle>glutKeyboardFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutKeyboardFunc.3GLUT-name">
+		<refname>glutKeyboardFunc</refname>
+		<refpurpose>sets the keyboard callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutKeyboardFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutKeyboardFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(unsigned&nbsp;char&nbsp;key,&nbsp;int&nbsp;x,&nbsp;int&nbsp;y)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutKeyboardFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new keyboard callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutKeyboardFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutKeyboardFunc</function> sets the keyboard callback for the current window. When a user types into the
+			window, each key press generating an ASCII character will generate a keyboard callback. The key callback parameter is
+			the generated ASCII character. The state of modifier keys such as Shift cannot be determined directly; their only
+			effect will be on the returned ASCII data. The x and y callback parameters indicate the mouse location in window
+			relative coordinates when the key was pressed. When a new window is created, no keyboard callback is initially
+			registered, and ASCII key strokes in the window are ignored. Passing <constant>NULL</constant> to
+			<function>glutKeyboardFunc</function> disables the generation of keyboard callbacks.
+		</para>
+		<para>
+			During a keyboard callback, <function moreinfo="refentry">glutGetModifiers</function> may be called to determine the
+			state of modifier keys when the keystroke generating the callback occurred.
+		</para>
+		<para>
+			Use <function moreinfo="refentry">glutSpecialFunc</function> for a means to detect non-ASCII key strokes.
+		</para>
+	</refsect1>
+	<refsect1 id="glutKeyboardFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutKeyboardUpFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpecialFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMouseFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpaceballButtonFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutButtonBoxFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutTabletButtonFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutGetModifiers</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>
