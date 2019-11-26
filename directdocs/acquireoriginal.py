@@ -1,5 +1,6 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 """Builds links from the OpenGL.org man pages to our "original" directory"""
+from __future__ import absolute_import
 import os, sys, glob, shutil, re, subprocess
 
 MAN_TARGET = 'original'

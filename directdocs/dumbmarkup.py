@@ -1,6 +1,8 @@
 """Simplistic wiki-like format parsing support"""
+from __future__ import absolute_import
 import re,os,sys,textwrap, datetime
 import logging
+import six
 log = logging.getLogger( __name__ )
 
 text_re = re.compile(
@@ -84,7 +86,7 @@ class Block( object ):
         return markup( text, child_function )
     def append( self, value ):
         """Append given value to our content"""
-        if isinstance( value, (str,unicode)):
+        if isinstance( value, (str,six.text_type)):
             if self.children:
                 last_child = self.children[-1]
                 if last_child.tail:

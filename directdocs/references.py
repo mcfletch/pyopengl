@@ -1,5 +1,7 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 """Collects sample-code references from file-system"""
+from __future__ import absolute_import
+from __future__ import print_function
 import token, tokenize, glob, os
 from directdocs.model import Sample
 
@@ -32,9 +34,11 @@ def glName( name ):
         return True
     return 0
 
-def glProcess( filename, tokenType,tokenString,(sourceRow,sourceCol),(endRow,endCol),lineText ):
+def glProcess( filename, tokenType,tokenString, xxx_todo_changeme4, xxx_todo_changeme5,lineText ):
     """Process the name in some way"""
-    print filename, sourceRow, tokenString, lineText.strip()
+    (sourceRow,sourceCol) = xxx_todo_changeme4
+    (endRow,endCol) = xxx_todo_changeme5
+    print(filename, sourceRow, tokenString, lineText.strip())
     
 
 def generate_tokens_file( filename, filterFunction=glName, processFunction=glProcess ):
@@ -47,7 +51,7 @@ def generate_tokens_file( filename, filterFunction=glName, processFunction=glPro
             if tokenType == token.NAME and filterFunction and filterFunction(tokenString):
                 if processFunction:
                     processFunction( filename, tokenType, tokenString, (sourceRow,sourceCol),(endRow,endCol),lineText )
-    except Exception, err:
+    except Exception as err:
         pass
 
 def generate_tokens_dir( directory, filterFunction=glName, processFunction=glProcess ):
@@ -91,11 +95,13 @@ class SampleSource( object ):
         self.urlTemplate = urlTemplate
         self.baseURL = baseURL
         self.suppressed = suppressed or {}
-    def processEntry( self, filename, tokenType,tokenString,(sourceRow,sourceCol),(endRow,endCol),lineText ):
+    def processEntry( self, filename, tokenType,tokenString, xxx_todo_changeme, xxx_todo_changeme1,lineText ):
         """Record an entry from the scanner"""
+        (sourceRow,sourceCol) = xxx_todo_changeme
+        (endRow,endCol) = xxx_todo_changeme1
         url = self.url( filename, (sourceRow,sourceCol),(endRow,endCol) )
         deltaPath = self.deltaPath( filename )
-        if not self.suppressed.has_key( deltaPath ):
+        if deltaPath not in self.suppressed:
             self.nameMapping.setdefault(tokenString, []).append( Sample(
                 url=url,
                 projectName=self.projectName,
@@ -112,8 +118,10 @@ class SampleSource( object ):
         deltaPath = filename[len(os.path.commonprefix( (self.localDir, filename))):]
         deltaPath = deltaPath.replace( '\\','/').lstrip( '/' )
         return deltaPath
-    def url( self, filename, (sourceRow,sourceCol),(endRow,endCol) ):
+    def url( self, filename, xxx_todo_changeme2, xxx_todo_changeme3 ):
         """Create a URL for the given filename"""
+        (sourceRow,sourceCol) = xxx_todo_changeme2
+        (endRow,endCol) = xxx_todo_changeme3
         deltaPath = self.deltaPath( filename )
         baseURL = self.baseURL.rstrip( '/' )
         return self.urlTemplate %locals()
@@ -254,10 +262,10 @@ if __name__ == "__main__":
     open( CACHE_FILE, 'wb').write(
         pickle.dumps( items )
     )
-    items = items.items()
+    items = list(items.items())
     items.sort()
     for name, itemset in items:
-        print name
+        print(name)
         for item in itemset:
-            print ' ', item.projectName, item.deltaPath, item.lineText
+            print(' ', item.projectName, item.deltaPath, item.lineText)
     

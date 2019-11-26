@@ -1,5 +1,7 @@
 """Modelling objects for the documentation generator"""
+from __future__ import absolute_import
 import logging, types, inspect
+from six.moves import zip
 log = logging.getLogger( 'directdocs.model' )
 
 from OpenGL import __version__
@@ -95,8 +97,8 @@ class RefSect( object ):
     def has_function( self, name ):
         """Ask whether we have this name defined"""
         return (
-            self.functions.has_key( name ) or
-            self.py_functions.has_key( name )
+            name in self.functions or
+            name in self.py_functions
         )
     def get_module( self ):
         """Retrieve our module"""
@@ -135,7 +137,7 @@ class RefSect( object ):
                                 alias = name,
                             )
                             self.py_functions[name] = function
-                            if not self.reference.functions.has_key( name ):
+                            if name not in self.reference.functions:
                                 self.reference.functions[ name ] = function
     def get_samples( self, sample_set ):
         """Populate our sample-set for all of the available samples"""
@@ -146,11 +148,12 @@ class RefSect( object ):
         filtered = []
         filter_set = {}
         for name in names:
-            if not filter_set.has_key( name ):
+            if name not in filter_set:
                 filtered.append( name )
         for name in filtered:
-            if sample_set.has_key( name ):
+            if name in sample_set:
                 self.samples.append( (name,Sample.joined(sample_set[name])))
+        self.samples.sort()
 
 class Function( object ):
     """Function description produced from docs
@@ -260,7 +263,7 @@ class PyFunction( Function ):
                         name, default=default_dict.get( name, NOT_DEFINED ),
                         function = self,
                     ))
-            except Exception, err:
+            except Exception as err:
                 import pdb
                 pdb.set_trace()
             if varargs:

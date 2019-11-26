@@ -11,9 +11,9 @@ need_math_render = []
 ?>
 <html xmlns:py="http://genshi.edgewall.org/">
 <ul class="menu" py:def="nav_table()">
-    <li><a href="/index.html">Home</a></li>
-    <li><a href="/documentation/index.html">Docs</a></li>
-    <li><a href="/documentation/installation.html">Install</a></li>
+    <li><a href="../../index.html">Home</a></li>
+    <li><a href="../index.html">Docs</a></li>
+    <li><a href="../installation.html">Install</a></li>
     <li><a href="./index.html#${section.package}">${section.package}</a></li>
 </ul>
 <div py:def="contents( docbook )" py:strip="">${docbook.text}<div py:for="x in docbook" py:strip="">${convert(x)}</div></div>

@@ -1,5 +1,7 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 """Downloads project source checkouts for integration as samples"""
+from __future__ import absolute_import
+from __future__ import print_function
 import os, subprocess
 SAMPLE_DIRECTORY = '.samples'
 
@@ -202,6 +204,6 @@ if __name__ == "__main__":
         os.makedirs(SAMPLE_DIRECTORY)
     os.chdir( '.samples' )
     for checkout in checkouts:
-        print('Project:', checkout.dirname)
+        print(('Project:', checkout.dirname))
         checkout.update()
     

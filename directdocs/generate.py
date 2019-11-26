@@ -1,15 +1,19 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 """Generates the PyOpenGL reference documentation"""
+from __future__ import absolute_import
+from __future__ import print_function
 import glob, os, datetime, subprocess, re, sys
 #import elementtree.ElementTree as ET
 import lxml.etree as ET
 from genshi.template import TemplateLoader
 import logging
+import six
 log = logging.getLogger( 'generate' )
 
 from directdocs.model import Function, Parameter, ParameterReference
 from directdocs import model,references
 from OpenGL import __version__
+from OpenGL._bytes import as_8_bit
 from OpenGL import GL, GLU, GLUT, GLE,GLX
 
 loader = TemplateLoader([os.path.join(os.path.dirname( __file__ ), 'templates')])
@@ -24,7 +28,7 @@ MML_NS = "http://www.w3.org/1998/Math/MathML"
 XML_NS = "http://www.w3.org/XML/1998/namespace"
 LINK_NS = "http://www.w3.org/1999/xlink"
 
-WRAPPER = """<?xml version="1.0" encoding="UTF-8"?>
+WRAPPER = b"""<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book SYSTEM "test" [ <!ENTITY nbsp " "> ]>
 
 <book
@@ -33,7 +37,7 @@ WRAPPER = """<?xml version="1.0" encoding="UTF-8"?>
     xmlns:xlink="%s"
 >
 %%s
-</book>"""%( DOCBOOK_NS, MML_NS, LINK_NS )
+</book>"""%tuple( as_8_bit(x) for x in [DOCBOOK_NS, MML_NS, LINK_NS ] )
 
 IMPLEMENTATION_MODULES = [
     # modules which contain external API entry points...
@@ -54,14 +58,14 @@ class Reference( model.Reference ):
         key = '%s.%s'%(title,volume)
         if '(' in title:
             title = title.split('(')[0]
-        if self.sections.has_key( key ):
+        if key in self.sections:
             return self.sections[key]
-        elif self.section_titles.has_key( title ):
+        elif title in self.section_titles:
             return self.section_titles[ title ]
-        elif self.functions.has_key( title ):
+        elif title in self.functions:
             return self.functions[title]
         elif title.startswith( 'glX') or title.startswith( 'wgl' ):
-            print 'Reference to', title, 'in', getattr(section,'title','Unknown')
+            print('Reference to', title, 'in', getattr(section,'title','Unknown'))
             return None
         else:
             # try a linear scan for suffixed version...
@@ -133,7 +137,7 @@ class RefSect( model.RefSect ):
             elif id:
                 self.discussions.append(section)
             elif not id:
-                log.warn( 'Found reference section without id: %s', section.items() )
+                log.warn( 'Found reference section without id: %s', list(section.items()) )
                 self.discussions.append( section )
                 continue
             processed_sections[ id ] = True
@@ -176,11 +180,11 @@ class RefSect( model.RefSect ):
                         data_type = typ,
                         name = paramname
                     ))
-                except Exception, err:
-                    print 'Failure retrieving parameter:', str(param)
+                except Exception as err:
+                    print('Failure retrieving parameter:', str(param))
         try:
             function = self.functions[ funcname ]
-        except KeyError, err:
+        except KeyError as err:
             function = Function(funcname,self)
             self.functions[ funcname ] = function
 #           err.args += (self.functions.keys(),)
@@ -209,7 +213,7 @@ class RefSect( model.RefSect ):
 
         self.varrefs.extend( set )
 
-HEADER_KILLER = re.compile( '[<][!]DOCTYPE.*?[>]', re.MULTILINE|re.DOTALL )
+HEADER_KILLER = re.compile( b'[<][!]DOCTYPE.*?[>]', re.MULTILINE|re.DOTALL )
 def strip_bad_header( data ):
     """Header in the xml files declared from opengl.org doesn't declare namespaces but files use them"""
     match = HEADER_KILLER.search( data )
@@ -219,18 +223,18 @@ def strip_bad_header( data ):
        
 
 def load_file( filename ):
-    data = WRAPPER%(strip_bad_header(open(filename).read()))
+    data = WRAPPER%(strip_bad_header(open(filename,'rb').read()))
     # data = open(filename).read()
     parser = ET.ETCompatXMLParser(resolve_entities=False)
     try:
         return filter_comments( ET.XML( data, parser ) )
-    except Exception, err:
+    except Exception as err:
         log.error( "Failure loading file: %r", filename )
         raise
 
 def filter_comments( tree ):
     for element in tree:
-        if isinstance(element.tag, (str,unicode)):
+        if isinstance(element.tag, (str,six.text_type)):
             filter_comments( element )
         else:
             tree.remove( element )
@@ -238,7 +242,7 @@ def filter_comments( tree ):
 
 def init_output( ):
     if not os.path.isdir( OUTPUT_DIRECTORY ):
-        print 'Creating new manual directory: %s'%(OUTPUT_DIRECTORY )
+        print('Creating new manual directory: %s'%(OUTPUT_DIRECTORY ))
         os.mkdir( OUTPUT_DIRECTORY )
     for file in os.listdir( 'output' ):
         src = os.path.join( 'output', file )
@@ -271,7 +275,7 @@ def main():
     log.info( 'Loading references' )
     if os.path.isfile( references.CACHE_FILE ):
         import pickle
-        samples = pickle.loads( open(references.CACHE_FILE).read())
+        samples = pickle.loads( open(references.CACHE_FILE,'rb').read())
     else:
         log.warn( """Loading references directly, run ./references.py to pre-generate""" )
         samples = references.loadData()
@@ -345,7 +349,7 @@ def main():
         data = stream.render('html')
         data = data.encode('utf-8')
         open(
-            output_file, 'w'
+            output_file, 'wb'
         ).write( data )
         old_file = os.path.splitext( output_file )[0] + '.xhtml'
         base = ref.url( section )

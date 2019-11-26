@@ -1,7 +1,12 @@
 #! /usr/bin/env python
 """Extremely dumb replacement for pydoc"""
+from __future__ import absolute_import
+from __future__ import print_function
 from directdocs import model,references
 import OpenGL
+import six
+from six.moves import range
+from six.moves import zip
 OpenGL.USE_ACCELERATE = False # document the Python versions
 OpenGL.MODULE_ANNOTATIONS = True # tell us where the constants/alternates are defined...
 from OpenGL.extensions import _Alternate as Alternate
@@ -13,7 +18,7 @@ from ctypes import _CFuncPtr as CFunctionType
 from OpenGL.GL import glGetString
 from OpenGL.platform.baseplatform import _NullFunctionPointer as NullFunc
 from OpenGL import platform
-import dumbmarkup
+from . import dumbmarkup
 
 CythonMethod = type( platform.PLATFORM.GL.glGetString )
 
@@ -111,7 +116,7 @@ class PyModule( object ):
         if self._inspected:
             return
         self._inspected = True
-        for key,value in sorted( self.mod.__dict__.items(), key=lambda x: x[0].lower()):
+        for key,value in sorted( list(self.mod.__dict__.items()), key=lambda x: x[0].lower()):
             if self.interesting( value ):
                 for attr,types in self.FT_MAP:
                     if isinstance( value, types ):
@@ -129,8 +134,8 @@ class PyModule( object ):
                                 value = inspector( value, key )
                             collection.append( (key,value))
             else:
-                if not isinstance( value, (str,unicode,int,long,dict)):
-                    print 'not interesting', key, type(value)
+                if not isinstance( value, (str,six.text_type,int,int,dict)):
+                    print('not interesting', key, type(value))
         if self.is_package:
             dirname = os.path.dirname( self.mod.__file__ )
             for name in sorted(os.listdir( dirname )):
@@ -149,7 +154,7 @@ class PyModule( object ):
         mod = PyModule( ".".join( [self.name,name] ))
         try:
             mod.inspect()
-        except Exception, err:
+        except Exception as err:
             log.warn( 'Unable to import %s: %s'%( mod.name, err ))
             return None
         else:
@@ -218,14 +223,14 @@ class Class( object ):
         if self.cls.__doc__:
             try:
                 return textwrap.dedent( self.cls.__doc__ or '' )
-            except TypeError, err:
+            except TypeError as err:
                 return None
         else:
             return None
 
     def inspect( self ):
         """Introspect to find methods, properties, etceteras"""
-        for key,value in sorted(self.cls.__dict__.items(), key=lambda x: x[0].lower()):
+        for key,value in sorted(list(self.cls.__dict__.items()), key=lambda x: x[0].lower()):
             if isinstance( value, (
                 types.FunctionType,
                 types.MethodType,
@@ -249,7 +254,7 @@ class Property( object ):
         if self.target.__doc__:
             try:
                 return textwrap.dedent( self.target.__doc__ or '' )
-            except TypeError, err:
+            except TypeError as err:
                 return None
         else:
             return None

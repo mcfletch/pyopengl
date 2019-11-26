@@ -1,10 +1,13 @@
 #! /usr/bin/env python
 """Generate the OpenGLContext shader tutorials from '''-string marked-up source code"""
+from __future__ import absolute_import
+from __future__ import print_function
 import re,os,sys,textwrap, datetime
 from genshi.template import TemplateLoader
 import logging
+from six.moves import range
 log = logging.getLogger( 'tutorials' )
-from dumbmarkup import *
+from .dumbmarkup import *
 
 loader = TemplateLoader([os.path.join(os.path.dirname( __file__ ), 'templates')])
 
@@ -101,7 +104,7 @@ def generate_index( paths ):
     )
     data = stream.render( 'html' )
     html_file = os.path.join( OUTPUT_DIRECTORY, 'index.html' )
-    print 'writing', html_file
+    print('writing', html_file)
     open( html_file, 'w').write( data )
     redirect( html_file )
 
@@ -116,7 +119,7 @@ def generate( tutorial, prev=None, next=None, path=None ):
         next=next,
     )
     data = stream.render( 'html' )
-    print 'writing', tutorial.html_file
+    print('writing', tutorial.html_file)
     open( tutorial.html_file, 'w').write( data )
     redirect( tutorial.html_file )
 
