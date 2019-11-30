@@ -59,6 +59,14 @@ environment:
     - PYTHON: "C:\\Python37-x64"
       PYTHON_VERSION: "3.7.0"
       PYTHON_ARCH: "64"    
+    
+    - PYTHON: "C:\\Python38"
+      PYTHON_VERSION: "3.8.0"
+      PYTHON_ARCH: "32"
+
+    - PYTHON: "C:\\Python38-x64"
+      PYTHON_VERSION: "3.8.0"
+      PYTHON_ARCH: "64"    
 
 branches:
 
@@ -84,8 +92,6 @@ build_script:
 
 test_script:
   - "%CMD_IN_ENV% pytest -sv tests/test_core.py"
-
-after_test: off
 
 artifacts:
   - path: accelerate\dist\*
