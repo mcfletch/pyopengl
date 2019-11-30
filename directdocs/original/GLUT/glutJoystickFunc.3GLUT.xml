@@ -1,0 +1,143 @@
+<refentry id="glutJoystickFunc.3GLUT">
+	<refmeta id="glutJoystickFunc.3GLUT-meta">
+		<refentrytitle>glutJoystickFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutJoystickFunc.3GLUT-name">
+		<refname>glutJoystickFunc</refname>
+		<refpurpose>sets the joystick callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutJoystickFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutJoystickFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(unsigned&nbsp;int&nbsp;buttonMask,&nbsp;int&nbsp;x,&nbsp;int&nbsp;y,&nbsp;int&nbsp;z)</paramdef>
+				<paramdef>int&nbsp;<parameter>pollInterval</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutJoystickFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new joystick callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>pollInterval</parameter></term>
+				<listitem>
+					<simpara>
+						Joystick polling interval in milliseconds.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutJoystickFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutJoystickFunc</function> sets the joystick callback for the current window.
+		</para>
+		<para>
+			The joystick callback is called either due to polling of the joystick at the uniform timer interval specified by
+			<parameter>pollInterval</parameter> (in milliseconds) or in response to calling <function
+			moreinfo="refentry">glutForceJoystickFunc</function>. If the <parameter>pollInterval</parameter> is non-positive, no
+			joystick polling is performed and the GLUT application must frequently (usually from an idle callback) call <function
+			moreinfo="refentry">glutForceJoystickFunc</function>.
+		</para>
+		<para>
+			The joystick buttons are reported by the callback's <parameter>buttonMask</parameter> parameter. The constants
+			<constant>GLUT_JOYSTICK_BUTTON_A</constant> (0x1), <constant>GLUT_JOYSTICK_BUTTON_B</constant> (0x2),
+			<constant>GLUT_JOYSTICK_BUTTON_C</constant> (0x4), and <constant>GLUT_JOYSTICK_BUTTON_D</constant> (0x8) are provided
+			for programming convience.
+		</para>
+		<para>
+			The x, y, and z callback parameters report the X, Y, and Z axes of the joystick. The joystick is centered at (0,0,0).
+			X, Y, and Z are scaled to range between -1000 and 1000. Moving the joystick left reports negative X; right reports
+			positive X. Pulling the stick towards you reports negative Y; push the stick away from you reports positive Y. If the
+			joystick has a third axis (rudder or up/down), down reports negative Z; up reports positive Z.
+		</para>
+		<para>
+			Passing a <constant>NULL</constant> func to <function>glutJoystickFunc</function> disables the generation of joystick
+			callbacks. Without a joystick callback registered, <function moreinfo="refentry">glutForceJoystickFunc</function> does
+			nothing.
+		</para>
+		<para>
+			When a new window is created, no joystick callback is initially registered.
+		</para>
+	</refsect1>
+	<refsect1 id="glutJoystickFunc.3GLUT-limitations">
+		<title>Limitations</title>
+		<para>
+			The GLUT joystick callback only reports the first 3 axes and 32 buttons. GLUT supports only a single joystick.
+		</para>
+	</refsect1>
+	<refsect1 id="glutJoystickFunc.3GLUT-glut_implementation_notes_for_x11">
+		<title>Glut Implementation Notes For X11</title>
+		<para>
+			The current implementation of GLUT for X11 supports the joystick API, but not joystick input. A future implementation
+			of GLUT for X11 may add joystick support.
+		</para>
+	</refsect1>
+	<refsect1 id="glutJoystickFunc.3GLUT-glut_implementation_notes_for_win32">
+		<title>Glut Implementation Notes For Win32</title>
+		<para>
+			The current implementation of GLUT for Win32 supports the joystick API and joystick input, but does so through the
+			dated <function moreinfo="refentry">joySetCapture</function> and <function moreinfo="refentry">joyGetPosEx</function>
+			Win32 Multimedia API. The current GLUT joystick support for Win32 has all the limitations of the Win32 Multimedia API
+			joystick support. A future implementation of GLUT for Win32 may use DirectInput.
+		</para>
+	</refsect1>
+	<refsect1 id="glutJoystickFunc.3GLUT-glut_implementation_notes_for_non-analog_joysticks">
+		<title>Glut Implementation Notes For Non-Analog Joysticks</title>
+		<para>
+			If the connected joystick does not return (x,y,z) as a continuous range (for example, an 8 position Atari 2600
+			joystick), the implementation should report the most extreme (x,y,z) location. That is, if a 2D joystick is pushed to
+			the upper left, report (-1000,1000,0).
+		</para>
+	</refsect1>
+	<refsect1 id="glutJoystickFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutForceJoystickFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMouseFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpaceballButtonFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpaceballMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutButtonBoxFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutTabletButtonFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDeviceGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+<xi:include href="master.html" />
+<head>
+    <title>${module.name}</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="manpage.css" />
+    <link rel="stylesheet" href="./modern.css" type="text/css" />
+</head>
+<body class="python-module">
+    <header>
+    ${nav_table(module)}
+    <h1>${module.name}</h1>
+    </header>
+    <section class="modules" py:if="module.is_package and module.modules">
+        <h2><a name="modules" >Modules</a></h2>
+        <div py:for="child in module.modules" class="float-left module" style="width: 33%"><a href="${child.name}.html">${child.name}</a></div>
+        <div style="clear: both" />
+    </section>
+    <section id="module-docstring">
+    ${docstring(module)}
+    </section>
+    <section class="functions" py:if="module.functions">
+        <h2><a name="functions" >Functions</a></h2>
+        <div py:for="name,func in module.functions">
+            ${pysignature( func,name, link=module.link( func,name ) )}
+        </div>
+    </section>
+    <section class="classes" py:if="module.classes">
+        <h2><a name="classes" >Classes</a></h2>
+        <div py:for="name,cls in module.classes" class="class-pydoc">
+            <div class="class-declaration">class <a name="class-${cls.basename}" class="class-name">${cls.basename}</a>(
+                <span py:for="base in cls.bases" class="base-class">${classref( base )}</span>
+            ):</div>
+            <div class="class-body">
+                ${docstring( cls )}
+                <div py:for="name,prop in cls.properties" class="property">
+                    ${prop.name}
+                    ${docstring( prop )}
+                </div>
+                <div py:for="name,func in cls.functions" py:strip="">
+                    ${pysignature( func, name )}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="constants" py:if="module.constants">
+        <h2><a name="constants" >Constants</a></h2>
+        <div class="constant-list">
+            <div py:for="name,const in module.constants" class="constant">
+                ${const}
+            </div>
+        </div>
+    </section>
+    <footer>
+    ${nav_table(module)}
+      <div>A SourceForge Open-Source Project </div>
+      <div><a href="http://sourceforge.net"><img src="http://sourceforge.net/sflogo.php?group_id=5988&amp;type=1" border="0" /></a></div>
+      <div class="clear-both"><br></div>
+    </footer>
+</body>
+</html>

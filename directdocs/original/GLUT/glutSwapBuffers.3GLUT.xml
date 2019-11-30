@@ -1,0 +1,51 @@
+<refentry id="glutSwapBuffers.3GLUT">
+	<refmeta id="glutSwapBuffers.3GLUT-meta">
+		<refentrytitle>glutSwapBuffers</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSwapBuffers.3GLUT-name">
+		<refname>glutSwapBuffers</refname>
+		<refpurpose>swaps the buffers of the current window if double buffered.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSwapBuffers.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSwapBuffers</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSwapBuffers.3GLUT-description">
+		<title>Description</title>
+		<para>
+			Performs a buffer swap on the layer in use for the current window. Specifically, <function>glutSwapBuffers</function>
+			promotes the contents of the back buffer of the layer in use of the current window to become the contents of the front
+			buffer. The contents of the back buffer then become undefined. The update typically takes place during the vertical
+			retrace of the monitor, rather than immediately after <function>glutSwapBuffers</function> is called.
+		</para>
+		<para>
+			An implicit <function moreinfo="refentry">glFlush</function> is done by <function>glutSwapBuffers</function> before it
+			returns. Subsequent OpenGL commands can be issued immediately after calling <function>glutSwapBuffers</function>, but
+			are not executed until the buffer exchange is completed.
+		</para>
+		<para>
+			If the layer in use is not double buffered, <function>glutSwapBuffers</function> has no effect.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSwapBuffers.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutPostRedisplay</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDisplayFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

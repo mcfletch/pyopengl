@@ -1,3 +1,11 @@
 dist
+build
 *.egg-info
 __pycache__
+.vscode
+*.pyc
+src/khronosapi
+accelerate/dist
+*.so
+mmap-test-data.dat
+.tox

@@ -1,0 +1,82 @@
+<refentry id="glutSpaceballMotionFunc.3GLUT">
+	<refmeta id="glutSpaceballMotionFunc.3GLUT-meta">
+		<refentrytitle>glutSpaceballMotionFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSpaceballMotionFunc.3GLUT-name">
+		<refname>glutSpaceballMotionFunc</refname>
+		<refpurpose>sets the Spaceball motion callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSpaceballMotionFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSpaceballMotionFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;x,&nbsp;int&nbsp;y,&nbsp;int&nbsp;z)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSpaceballMotionFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new entry callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutSpaceballMotionFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutSpaceballMotionFunc</function> sets the Spaceball motion callback for the current window. The Spaceball
+			motion callback for a window is called when the window has Spaceball input focus (normally, when the mouse is in the
+			window) and the user generates Spaceball translations. The <parameter>x</parameter>, <parameter>y</parameter>, and
+			<parameter>z</parameter> callback parameters indicate the translations along the X, Y, and Z axes. The callback
+			parameters are normalized to be within the range of -1000 to 1000 inclusive.
+		</para>
+		<para>
+			Registering a Spaceball motion callback when a Spaceball device is not available has no effect and is not an error. In
+			this case, no Spaceball motion callbacks will be generated.
+		</para>
+		<para>
+			Passing <constant>NULL</constant> to glutSpaceballMotionFunc<function>glutSpaceballMotionFunc</function> disables the
+			generation of Spaceball motion callbacks. When a new window is created, no Spaceball motion callback is initially
+			registered.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSpaceballMotionFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutSpaceballRotateFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpaceballButtonFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutTabletMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutJoystickFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDeviceGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

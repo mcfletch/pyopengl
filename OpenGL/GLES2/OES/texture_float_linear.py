@@ -12,12 +12,10 @@ Overview (from the spec)
 	LINEAR_MIPMAP_NEAREST and LINEAR_MIPMAP_NEAREST minification
 	filters.
 	
-	When implemented against OpenGL ES 3.0 or later versions, sized 32-bit
-	floating-point formats become texture-filterable. This should be noted
-	by, for example, checking the ``TF'' column of table 8.13 in the ES 3.1
-	Specification (``Correspondence of sized internal formats to base
-	internal formats ... and use cases ...'') for the R32F, RG32F, RGB32F,
-	and RGBA32F formats.
+	When implemented against OpenGL ES 3.0 or later versions, the
+	existing sized 32-bit floating-point formats become texture-filterable,
+	but no new formats are added.
+	
 
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/OES/texture_float_linear.txt

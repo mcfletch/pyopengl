@@ -1,0 +1,208 @@
+<refentry id="glutGameModeString.3GLUT">
+	<refmeta id="glutGameModeString.3GLUT-meta">
+		<refentrytitle>glutGameModeString</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutGameModeString.3GLUT-name">
+		<refname>glutGameModeString</refname>
+		<refpurpose>sets the game mode configuration via a string.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutGameModeString.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutGameModeString</function></funcdef>
+				<paramdef>const char&nbsp;*<parameter>string</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutGameModeString.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>string</parameter></term>
+				<listitem>
+					<simpara>
+						ASCII string for selecting a game mode configuration.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutGameModeString.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutGameModeString</function> sets the game mode configuration via an ASCII string. The game mode
+			configuration string for GLUT's fullscreen game mode describes the suitable screen width and height in pixels, the
+			pixel depth in bits, and the video refresh frequency in hertz. The game mode configuration string can also specify a
+			window system dependent display mode.
+		</para>
+		<para>
+			The string is a list of zero or more capability descriptions seperated by spaces and tabs. Each capability description
+			is a capability name that is followed by a comparator and a numeric value. (Unlike the display mode string specified
+			using <function moreinfo="refentry">glutInitDisplayString</function>, the comparator and numeric value are
+			<parameter>not</parameter> optional.) For example, &quot;width&gt;=640&quot; and &quot;bpp=32&quot; are both valid
+			criteria.
+		</para>
+		<para>
+			The capability descriptions are translated into a set of criteria used to select the appropriate game mode
+			configuration.
+		</para>
+		<para>
+			The criteria are matched in strict left to right order of precdence. That is, the first specified criteria (leftmost)
+			takes precedence over the later criteria for non-exact criteria (greater than, less than, etc. comparators). Exact
+			criteria (equal, not equal compartors) must match exactly so precedence is not relevant.
+		</para>
+		<para>
+			The numeric value is an integer that is parsed according to ANSI C's <function moreinfo="refentry">strtol(str, strptr,
+			0)</function> behavior. This means that decimal, octal (leading 0), and hexidecimal values (leading 0x) are accepeted.
+			The valid compartors are:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>=</term>
+				<listitem>
+					<simpara>
+						Equal.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>!=</term>
+				<listitem>
+					<simpara>
+						Not equal.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>&lt;</term>
+				<listitem>
+					<simpara>
+						Less than and preferring larger difference (the least is best).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>&gt;</term>
+				<listitem>
+					<simpara>
+						Greater than and preferring larger differences (the most is best).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>&lt;=</term>
+				<listitem>
+					<simpara>
+						Less than or equal and preferring larger difference (the least is best).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>&gt;=</term>
+				<listitem>
+					<simpara>
+						Greater than or equal and preferring more instead of less. This comparator is useful for allocating
+						resources like color precsion or depth buffer precision where the maximum precison is generally preferred.
+						Contrast with the tilde (~) comprator.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>~</term>
+				<listitem>
+					<simpara>
+						Greater than or equal but preferring less instead of more. This compartor is useful for allocating
+						resources such as stencil bits or auxillary color buffers where you would rather not over allocate.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			The valid capability names are:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><emphasis role="bold">bpp</emphasis></term>
+				<listitem>
+					<simpara>
+						Bits per pixel for the frame buffer.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">height</emphasis></term>
+				<listitem>
+					<simpara>
+						Height of the screen in pixels.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">hertz</emphasis></term>
+				<listitem>
+					<simpara>
+						Video refresh rate of the screen in hertz.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">num</emphasis></term>
+				<listitem>
+					<simpara>
+						Number of the window system depenedent display mode configuration.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">width</emphasis></term>
+				<listitem>
+					<simpara>
+						Width of the screen in pixels.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			An additional compact screen resolution description format is supported. This compact description convienently encodes
+			the screen resolution description in a single phrase. For example, &quot;640x480:16@60&quot; requests a 640 by 480
+			pixel screen with 16 bits per pixel at a 60 hertz video refresh rate. A compact screen resolution description can be
+			mixed with conventional capability descriptions.
+		</para>
+		<para>
+			The compact screen resolution description format is as follows:
+		</para>
+		<para>
+			[ <emphasis>width</emphasis> &quot;x&quot; <emphasis>height</emphasis> ][ &quot;:&quot;
+			<emphasis>bitsPerPixel</emphasis> ][ &quot;@&quot; <emphasis>videoRate</emphasis> ]
+		</para>
+		<para>
+			Unspecifed capability descriptions will result in unspecified criteria being generated. These unspecified criteria help
+			<function>glutGameModeString</function> behave sensibly with terse game mode description strings.
+		</para>
+	</refsect1>
+	<refsect1 id="glutGameModeString.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutGameModeGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutEnterGameMode</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutLeaveGameMode</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutInitDisplayString</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

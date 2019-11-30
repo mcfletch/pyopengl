@@ -38,6 +38,7 @@ GL_ALPHA_TEST_REF_QCOM	(1,)
 GL_ALPHA_TO_COVERAGE_DITHER_MODE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_alpha_to_coverage_dither_control.txt
 GL_AMBIENT	(4,)
 GL_AMBIENT_AND_DIFFUSE	(4,)
+GL_AMBIENT_SGIX	
 GL_ANY_SAMPLES_PASSED	(1,)
 GL_ANY_SAMPLES_PASSED_CONSERVATIVE	(1,)
 GL_ARRAY_BUFFER	
@@ -63,6 +64,8 @@ GL_ATOMIC_COUNTER_BUFFER_INDEX	(1,)
 GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
 GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
 GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
+GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_MESH_SHADER_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TASK_SHADER_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
 GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_CONTROL_SHADER	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
 GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
 GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_VERTEX_SHADER	(1,)	#TODO Is actually GL_ATOMIC_COUNTER_BUFFER_ACTIVE_ATOMIC_COUNTERS
@@ -127,7 +130,11 @@ GL_BUFFER_SIZE_ARB	(1,)
 GL_BUFFER_STORAGE_FLAGS	(1,)
 GL_BUFFER_USAGE	(1,)
 GL_BUFFER_USAGE_ARB	(1,)
+GL_BUMP_NUM_TEX_UNITS_ATI	
+GL_BUMP_ROT_MATRIX_ATI	
+GL_BUMP_ROT_MATRIX_SIZE_ATI	
 GL_BUMP_TARGET_ATI	(1,)
+GL_BUMP_TEX_UNITS_ATI	
 GL_CALLIGRAPHIC_FRAGMENT_SGIX	(1,)
 GL_CLAMP_FRAGMENT_COLOR	(1,)
 GL_CLAMP_FRAGMENT_COLOR_ARB	(1,)
@@ -243,6 +250,7 @@ GL_CONSERVATIVE_RASTER_DILATE_RANGE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-d
 GL_CONSERVATIVE_RASTER_MODE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_conservative_raster_pre_snap_triangles.txt
 GL_CONSTANT	
 GL_CONSTANT_ATTENUATION	(1,)
+GL_CONSTANT_ATTENUATION_SGIX	
 GL_CONSTANT_COLOR0_NV	(4,)
 GL_CONSTANT_COLOR1_NV	(4,)
 GL_CONST_EYE_NV	(3,)
@@ -346,6 +354,9 @@ GL_DEPTH_STENCIL_TEXTURE_MODE	(1,)
 GL_DEPTH_TEST	(1,)
 GL_DEPTH_TEXTURE_MODE	(1,)
 GL_DEPTH_WRITEMASK	(1,)
+GL_DETACHED_BUFFERS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_memory_attachment.txt
+GL_DETACHED_MEMORY_INCARNATION_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_memory_attachment.txt
+GL_DETACHED_TEXTURES_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_memory_attachment.txt
 GL_DETAIL_TEXTURE_2D_BINDING_SGIS	(1,)
 GL_DETAIL_TEXTURE_2D_SGIS	
 GL_DETAIL_TEXTURE_FUNC_POINTS_SGIS	
@@ -355,6 +366,7 @@ GL_DEVICE_LUID_EXT
 GL_DEVICE_NODE_MASK_EXT	
 GL_DEVICE_UUID_EXT	
 GL_DIFFUSE	(4,)
+GL_DIFFUSE_SGIX	
 GL_DISPATCH_INDIRECT_BUFFER	
 GL_DISPATCH_INDIRECT_BUFFER_BINDING	(1,)
 GL_DISTANCE_ATTENUATION_SGIS	(3,)
@@ -441,7 +453,9 @@ GL_ELEMENT_ARRAY_POINTER_APPLE	(1,)	#TODO Review http://www.opengl.org/registry/
 GL_ELEMENT_ARRAY_TYPE_APPLE	(1,)
 GL_ELEMENT_ARRAY_TYPE_ATI	(1,)
 GL_EMISSION	(4,)
+GL_EVAL_2D_NV	
 GL_EVAL_FRACTIONAL_TESSELLATION_NV	(1,)
+GL_EVAL_TRIANGULAR_2D_NV	
 GL_EVAL_VERTEX_ATTRIB0_NV	(1,)
 GL_EVAL_VERTEX_ATTRIB10_NV	(1,)
 GL_EVAL_VERTEX_ATTRIB11_NV	(1,)
@@ -521,18 +535,34 @@ GL_FRAGMENT_TEXTURE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/
 GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE	(1,)
 GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE	(1,)
 GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING	(1,)
+GL_FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING_EXT	
 GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE	(1,)
+GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE_EXT	
 GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE	(1,)
 GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE	(1,)
 GL_FRAMEBUFFER_ATTACHMENT_LAYERED	(1,)
+GL_FRAMEBUFFER_ATTACHMENT_LAYERED_ARB	
+GL_FRAMEBUFFER_ATTACHMENT_LAYERED_EXT	
+GL_FRAMEBUFFER_ATTACHMENT_LAYERED_OES	
 GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME	(1,)
+GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_EXT	
+GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_OES	
 GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE	(1,)
+GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE_EXT	
+GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE_OES	
 GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE	(1,)
 GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE	(1,)
+GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_EXT	
+GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_OES	
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/OVR/OVR_multiview.txt
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE	(1,)
+GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE_EXT	
+GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE_OES	
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER	(1,)
+GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_EXT	
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL	(1,)
+GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_EXT	
+GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_OES	
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/OVR/OVR_multiview.txt
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_SAMPLES_EXT	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/EXT/EXT_multisampled_render_to_texture.txt
 GL_FRAMEBUFFER_ATTACHMENT_TEXTURE_SCALE_IMG	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/IMG/IMG_framebuffer_downsample.txt
@@ -620,10 +650,20 @@ GL_HISTOGRAM_WIDTH_EXT	(1,)
 GL_HI_BIAS_NV	(1,)
 GL_HI_SCALE_NV	(1,)
 GL_IMAGE_COMPATIBILITY_CLASS	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_IMAGE_CUBIC_WEIGHT_HP	
 GL_IMAGE_FORMAT_COMPATIBILITY_TYPE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_IMAGE_MAG_FILTER_HP	
+GL_IMAGE_MIN_FILTER_HP	
 GL_IMAGE_PIXEL_FORMAT	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_IMAGE_PIXEL_TYPE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_IMAGE_ROTATE_ANGLE_HP	
+GL_IMAGE_ROTATE_ORIGIN_X_HP	
+GL_IMAGE_ROTATE_ORIGIN_Y_HP	
+GL_IMAGE_SCALE_X_HP	
+GL_IMAGE_SCALE_Y_HP	
 GL_IMAGE_TEXEL_SIZE	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
+GL_IMAGE_TRANSLATE_X_HP	
+GL_IMAGE_TRANSLATE_Y_HP	
 GL_IMPLEMENTATION_COLOR_READ_FORMAT	(1,)
 GL_IMPLEMENTATION_COLOR_READ_TYPE	(1,)
 GL_INDEX_ARRAY	(1,)
@@ -685,6 +725,7 @@ GL_LIGHT_MODEL_COLOR_CONTROL_EXT	(1,)
 GL_LIGHT_MODEL_LOCAL_VIEWER	(1,)
 GL_LIGHT_MODEL_TWO_SIDE	(1,)
 GL_LINEAR_ATTENUATION	(1,)
+GL_LINEAR_ATTENUATION_SGIX	
 GL_LINE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_polygon_mode.txt
 GL_LINE_SMOOTH	(1,)
 GL_LINE_SMOOTH_HINT	(1,)
@@ -801,6 +842,7 @@ GL_MAX_CLIPMAP_DEPTH_SGIX	(1,)
 GL_MAX_CLIPMAP_VIRTUAL_DEPTH_SGIX	(1,)
 GL_MAX_CLIP_DISTANCES	(1,)
 GL_MAX_CLIP_PLANES	(1,)
+GL_MAX_COARSE_FRAGMENT_SAMPLES_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_shading_rate_image.txt
 GL_MAX_COLOR_ATTACHMENTS	(1,)
 GL_MAX_COLOR_ATTACHMENTS_EXT	(1,)
 GL_MAX_COLOR_FRAMEBUFFER_SAMPLES_AMD	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/AMD/AMD_framebuffer_multisample_advanced.txt
@@ -818,7 +860,9 @@ GL_MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS	(1,)
 GL_MAX_COMBINED_IMAGE_UNIFORMS	(1,)
 GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS	(1,)
 GL_MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS_EXT	(1,)
+GL_MAX_COMBINED_MESH_UNIFORM_COMPONENTS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
 GL_MAX_COMBINED_SHADER_STORAGE_BLOCKS	(1,)
+GL_MAX_COMBINED_TASK_UNIFORM_COMPONENTS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
 GL_MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS	(1,)
 GL_MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS	(1,)
 GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS	(1,)
@@ -859,6 +903,7 @@ GL_MAX_DEPTH_TEXTURE_SAMPLES	(1,)
 GL_MAX_DRAW_BUFFERS	(1,)
 GL_MAX_DRAW_BUFFERS_ARB	(1,)
 GL_MAX_DRAW_BUFFERS_ATI	(1,)
+GL_MAX_DRAW_MESH_TASKS_COUNT_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
 GL_MAX_DUAL_SOURCE_DRAW_BUFFERS	(1,)
 GL_MAX_ELEMENTS_INDICES	(1,)
 GL_MAX_ELEMENTS_VERTICES	(1,)
@@ -922,6 +967,19 @@ GL_MAX_LIGHTS	(1,)
 GL_MAX_LIST_NESTING	(1,)
 GL_MAX_MAP_TESSELLATION_NV	(1,)
 GL_MAX_MATRIX_PALETTE_STACK_DEPTH_ARB	(1,)
+GL_MAX_MESH_ATOMIC_COUNTERS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_MESH_ATOMIC_COUNTER_BUFFERS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_MESH_IMAGE_UNIFORMS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_MESH_OUTPUT_PRIMITIVES_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_MESH_OUTPUT_VERTICES_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_MESH_SHADER_STORAGE_BLOCKS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_MESH_TEXTURE_IMAGE_UNITS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_MESH_TOTAL_MEMORY_SIZE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_MESH_UNIFORM_BLOCKS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_MESH_UNIFORM_COMPONENTS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_MESH_VIEWS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_MESH_WORK_GROUP_INVOCATIONS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_MESH_WORK_GROUP_SIZE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
 GL_MAX_MODELVIEW_STACK_DEPTH	(1,)
 GL_MAX_MULTISAMPLE_COVERAGE_MODES_NV	(1,)
 GL_MAX_NAME_LENGTH	(1,)
@@ -999,6 +1057,7 @@ GL_MAX_SHADER_PIXEL_LOCAL_STORAGE_FAST_SIZE_EXT	(1,)	#TODO Review /home/mcfletch
 GL_MAX_SHADER_PIXEL_LOCAL_STORAGE_SIZE_EXT	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/EXT/EXT_shader_pixel_local_storage.txt
 GL_MAX_SHADER_STORAGE_BLOCK_SIZE	(1,)
 GL_MAX_SHADER_STORAGE_BUFFER_BINDINGS	(1,)
+GL_MAX_SHADER_SUBSAMPLED_IMAGE_UNITS_QCOM	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/QCOM/QCOM_texture_foveated_subsampled_layout.txt
 GL_MAX_SHININESS_NV	(1,)
 GL_MAX_SPARSE_3D_TEXTURE_SIZE_AMD	(1,)	#TODO Review http://www.opengl.org/registry/specs//AMD/sparse_texture.txt
 GL_MAX_SPARSE_3D_TEXTURE_SIZE_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sparse_texture.txt
@@ -1011,6 +1070,17 @@ GL_MAX_SPOT_EXPONENT_NV	(1,)
 GL_MAX_SUBPIXEL_PRECISION_BIAS_BITS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_conservative_raster.txt
 GL_MAX_SUBROUTINES	(1,)
 GL_MAX_SUBROUTINE_UNIFORM_LOCATIONS	(1,)
+GL_MAX_TASK_ATOMIC_COUNTERS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_TASK_ATOMIC_COUNTER_BUFFERS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_TASK_IMAGE_UNIFORMS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_TASK_OUTPUT_COUNT_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_TASK_SHADER_STORAGE_BLOCKS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_TASK_TEXTURE_IMAGE_UNITS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_TASK_TOTAL_MEMORY_SIZE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_TASK_UNIFORM_BLOCKS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_TASK_UNIFORM_COMPONENTS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_TASK_WORK_GROUP_INVOCATIONS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MAX_TASK_WORK_GROUP_SIZE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
 GL_MAX_TESS_CONTROL_ATOMIC_COUNTERS	(1,)
 GL_MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS	(1,)
 GL_MAX_TESS_CONTROL_IMAGE_UNIFORMS	(1,)
@@ -1096,6 +1166,12 @@ GL_MAX_VIEWPORT_DIMS	(2,)
 GL_MAX_VIEWS_OVR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/OVR/OVR_multiview.txt
 GL_MAX_WIDTH	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/internalformat_query2.txt
 GL_MAX_WINDOW_RECTANGLES_EXT	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/EXT/EXT_window_rectangles.txt
+GL_MESH_OUTPUT_PER_PRIMITIVE_GRANULARITY_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MESH_OUTPUT_PER_VERTEX_GRANULARITY_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MESH_OUTPUT_TYPE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MESH_PRIMITIVES_OUT_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MESH_VERTICES_OUT_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_MESH_WORK_GROUP_SIZE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
 GL_MINMAX	(1,)
 GL_MINMAX_EXT	(1,)
 GL_MINMAX_FORMAT	(1,)
@@ -1269,6 +1345,7 @@ GL_PACK_SKIP_VOLUMES_SGIS	(1,)
 GL_PACK_SUBSAMPLE_RATE_SGIX	
 GL_PACK_SWAP_BYTES	(1,)
 GL_PARALLEL_ARRAYS_INTEL	(1,)
+GL_PARAMETER_BUFFER	
 GL_PARAMETER_BUFFER_BINDING_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/indirect_parameters.txt
 GL_PATCH_DEFAULT_INNER_LEVEL	(1,)
 GL_PATCH_DEFAULT_OUTER_LEVEL	(1,)
@@ -1394,6 +1471,7 @@ GL_POLYGON_SMOOTH	(1,)
 GL_POLYGON_SMOOTH_HINT	(1,)
 GL_POLYGON_STIPPLE	(1,)
 GL_POSITION	(4,)
+GL_POSITION_SGIX	
 GL_POST_COLOR_MATRIX_ALPHA_BIAS	(1,)
 GL_POST_COLOR_MATRIX_ALPHA_BIAS_SGI	(1,)
 GL_POST_COLOR_MATRIX_ALPHA_SCALE	(1,)
@@ -1515,22 +1593,19 @@ GL_PROXY_TEXTURE_RECTANGLE
 GL_PROXY_TEXTURE_RECTANGLE_ARB	
 GL_PROXY_TEXTURE_RECTANGLE_NV	
 GL_QUADRATIC_ATTENUATION	(1,)
+GL_QUADRATIC_ATTENUATION_SGIX	
 GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION	(1,)
 GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION_EXT	(1,)
 GL_QUAD_TEXTURE_SELECT_SGIS	
 GL_QUERY_BUFFER	
 GL_QUERY_BUFFER_BINDING	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/query_buffer_object.txt
 GL_QUERY_BUFFER_BINDING_AMD	(1,)
-GL_QUERY_BY_REGION_NO_WAIT	
-GL_QUERY_BY_REGION_WAIT	
 GL_QUERY_COUNTER_BITS	(1,)
 GL_QUERY_COUNTER_BITS_ARB	(1,)
-GL_QUERY_NO_WAIT	
 GL_QUERY_RESULT	(1,)
 GL_QUERY_RESULT_AVAILABLE	(1,)
 GL_QUERY_RESULT_NO_WAIT	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/query_buffer_object.txt
 GL_QUERY_TARGET	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/direct_state_access.txt
-GL_QUERY_WAIT	
 GL_RASTERIZER_DISCARD	(1,)
 GL_RASTER_FIXED_SAMPLE_LOCATIONS_EXT	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_framebuffer_mixed_samples.txt
 GL_RASTER_POSITION_UNCLIPPED_IBM	(1,)
@@ -1560,28 +1635,53 @@ GL_REFERENCE_PLANE_EQUATION_SGIX	(4,)
 GL_REFERENCE_PLANE_SGIX	(1,)
 GL_REGISTER_COMBINERS_NV	(1,)
 GL_RENDERBUFFER_ALPHA_SIZE	(1,)
+GL_RENDERBUFFER_ALPHA_SIZE_EXT	
+GL_RENDERBUFFER_ALPHA_SIZE_OES	
 GL_RENDERBUFFER_BINDING	(1,)
 GL_RENDERBUFFER_BINDING_EXT	(1,)
 GL_RENDERBUFFER_BLUE_SIZE	(1,)
+GL_RENDERBUFFER_BLUE_SIZE_EXT	
+GL_RENDERBUFFER_BLUE_SIZE_OES	
+GL_RENDERBUFFER_COLOR_SAMPLES_AMD	
 GL_RENDERBUFFER_COLOR_SAMPLES_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/framebuffer_multisample_coverage.txt
+GL_RENDERBUFFER_COVERAGE_SAMPLES_AMD	
 GL_RENDERBUFFER_COVERAGE_SAMPLES_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/framebuffer_multisample_coverage.txt
 GL_RENDERBUFFER_DEPTH_SIZE	(1,)
+GL_RENDERBUFFER_DEPTH_SIZE_EXT	
+GL_RENDERBUFFER_DEPTH_SIZE_OES	
 GL_RENDERBUFFER_FREE_MEMORY_ATI	(1,)
 GL_RENDERBUFFER_GREEN_SIZE	(1,)
+GL_RENDERBUFFER_GREEN_SIZE_EXT	
+GL_RENDERBUFFER_GREEN_SIZE_OES	
 GL_RENDERBUFFER_HEIGHT	(1,)
+GL_RENDERBUFFER_HEIGHT_EXT	
+GL_RENDERBUFFER_HEIGHT_OES	
 GL_RENDERBUFFER_INTERNAL_FORMAT	(1,)
+GL_RENDERBUFFER_INTERNAL_FORMAT_EXT	
+GL_RENDERBUFFER_INTERNAL_FORMAT_OES	
 GL_RENDERBUFFER_RED_SIZE	(1,)
+GL_RENDERBUFFER_RED_SIZE_EXT	
+GL_RENDERBUFFER_RED_SIZE_OES	
 GL_RENDERBUFFER_SAMPLES	(1,)
+GL_RENDERBUFFER_SAMPLES_ANGLE	
+GL_RENDERBUFFER_SAMPLES_APPLE	
+GL_RENDERBUFFER_SAMPLES_EXT	
 GL_RENDERBUFFER_SAMPLES_IMG	(1,)
+GL_RENDERBUFFER_SAMPLES_NV	
 GL_RENDERBUFFER_STENCIL_SIZE	(1,)
+GL_RENDERBUFFER_STENCIL_SIZE_EXT	
+GL_RENDERBUFFER_STENCIL_SIZE_OES	
 GL_RENDERBUFFER_STORAGE_SAMPLES_AMD	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/AMD/AMD_framebuffer_multisample_advanced.txt
 GL_RENDERBUFFER_WIDTH	(1,)
+GL_RENDERBUFFER_WIDTH_EXT	
+GL_RENDERBUFFER_WIDTH_OES	
 GL_RENDERER	(1,)
 GL_RENDER_GPU_MASK_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_gpu_multicast.txt
 GL_RENDER_MODE	(1,)
 GL_REPLACEMENT_CODE_ARRAY_STRIDE_SUN	(1,)
 GL_REPLACEMENT_CODE_ARRAY_TYPE_SUN	(1,)
 GL_REPLACEMENT_CODE_SUN	(1,)
+GL_REPRESENTATIVE_FRAGMENT_TEST_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_representative_fragment_test.txt
 GL_RESCALE_NORMAL	(1,)
 GL_RESCALE_NORMAL_EXT	(1,)
 GL_RESET_NOTIFICATION_STRATEGY	(1,)	#TODO Review http://www.opengl.org/registry/specs//KHR/robustness.txt
@@ -1637,7 +1737,9 @@ GL_SAMPLE_POSITION	(2,)
 GL_SAMPLE_SHADING_ARB	(1,)
 GL_SAMPLE_SHADING_OES	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/OES/OES_sample_shading.txt
 GL_SCISSOR_BOX	(4,)
+GL_SCISSOR_BOX_EXCLUSIVE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_scissor_exclusive.txt
 GL_SCISSOR_TEST	(1,)
+GL_SCISSOR_TEST_EXCLUSIVE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_scissor_exclusive.txt
 GL_SECONDARY_COLOR_ARRAY	(1,)
 GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING	(1,)
 GL_SECONDARY_COLOR_ARRAY_BUFFER_BINDING_ARB	(1,)
@@ -1669,6 +1771,11 @@ GL_SHADER_STORAGE_BUFFER_START	(1,)
 GL_SHADER_TYPE	(1,)
 GL_SHADE_MODEL	(1,)
 GL_SHADING_LANGUAGE_VERSION	(1,)
+GL_SHADING_RATE_IMAGE_BINDING_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_shading_rate_image.txt
+GL_SHADING_RATE_IMAGE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_shading_rate_image.txt
+GL_SHADING_RATE_IMAGE_PALETTE_SIZE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_shading_rate_image.txt
+GL_SHADING_RATE_IMAGE_TEXEL_HEIGHT_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_shading_rate_image.txt
+GL_SHADING_RATE_IMAGE_TEXEL_WIDTH_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_shading_rate_image.txt
 GL_SHADOW_AMBIENT_SGIX	
 GL_SHARED_TEXTURE_PALETTE_EXT	
 GL_SHARPEN_TEXTURE_FUNC_POINTS_SGIS	
@@ -1688,10 +1795,14 @@ GL_SPARSE_BUFFER_PAGE_SIZE_ARB	(1,)	#TODO Review http://www.opengl.org/registry/
 GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_ARB	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/sparse_texture.txt
 GL_SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_EXT	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/EXT/EXT_sparse_texture.txt
 GL_SPECULAR	(4,)
+GL_SPECULAR_SGIX	
 GL_SPIR_V_BINARY_ARB	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/ARB/ARB_gl_spirv.txt
 GL_SPOT_CUTOFF	(1,)
+GL_SPOT_CUTOFF_SGIX	
 GL_SPOT_DIRECTION	(3,)
+GL_SPOT_DIRECTION_SGIX	
 GL_SPOT_EXPONENT	(1,)
+GL_SPOT_EXPONENT_SGIX	
 GL_SPRITE_AXIS_SGIX	(3,)
 GL_SPRITE_MODE_SGIX	(1,)
 GL_SPRITE_SGIX	(1,)
@@ -1735,6 +1846,19 @@ GL_STENCIL_TEST_TWO_SIDE_EXT	(1,)
 GL_STENCIL_VALUE_MASK	(1,)
 GL_STENCIL_WRITEMASK	(1,)
 GL_STEREO	(1,)
+GL_SUBGROUP_FEATURE_ARITHMETIC_BIT_KHR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/KHR/KHR_shader_subgroup.txt
+GL_SUBGROUP_FEATURE_BALLOT_BIT_KHR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/KHR/KHR_shader_subgroup.txt
+GL_SUBGROUP_FEATURE_BASIC_BIT_KHR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/KHR/KHR_shader_subgroup.txt
+GL_SUBGROUP_FEATURE_CLUSTERED_BIT_KHR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/KHR/KHR_shader_subgroup.txt
+GL_SUBGROUP_FEATURE_PARTITIONED_BIT_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_shader_subgroup_partitioned.txt
+GL_SUBGROUP_FEATURE_QUAD_BIT_KHR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/KHR/KHR_shader_subgroup.txt
+GL_SUBGROUP_FEATURE_SHUFFLE_BIT_KHR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/KHR/KHR_shader_subgroup.txt
+GL_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT_KHR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/KHR/KHR_shader_subgroup.txt
+GL_SUBGROUP_FEATURE_VOTE_BIT_KHR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/KHR/KHR_shader_subgroup.txt
+GL_SUBGROUP_QUAD_ALL_STAGES_KHR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/KHR/KHR_shader_subgroup.txt
+GL_SUBGROUP_SIZE_KHR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/KHR/KHR_shader_subgroup.txt
+GL_SUBGROUP_SUPPORTED_FEATURES_KHR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/KHR/KHR_shader_subgroup.txt
+GL_SUBGROUP_SUPPORTED_STAGES_KHR	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/KHR/KHR_shader_subgroup.txt
 GL_SUBPIXEL_BITS	(1,)
 GL_SUBPIXEL_PRECISION_BIAS_X_BITS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_conservative_raster.txt
 GL_SUBPIXEL_PRECISION_BIAS_Y_BITS_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_conservative_raster.txt
@@ -1749,6 +1873,7 @@ GL_TANGENT_ARRAY_EXT	(1,)
 GL_TANGENT_ARRAY_POINTER_EXT	(1,)
 GL_TANGENT_ARRAY_STRIDE_EXT	(1,)
 GL_TANGENT_ARRAY_TYPE_EXT	(1,)
+GL_TASK_WORK_GROUP_SIZE_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
 GL_TESSELLATION_MODE_AMD	(1,)
 GL_TESS_CONTROL_OUTPUT_VERTICES	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/tessellation_shader.txt
 GL_TESS_CONTROL_PROGRAM_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/tessellation_program5.txt
@@ -1926,6 +2051,7 @@ GL_TEXTURE_MATERIAL_FACE_EXT	(1,)
 GL_TEXTURE_MATERIAL_PARAMETER_EXT	(1,)
 GL_TEXTURE_MATRIX	(4, 4)
 GL_TEXTURE_MATRIX_FLOAT_AS_INT_BITS_OES	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/OES/OES_matrix_get.txt
+GL_TEXTURE_MAX_ANISOTROPY	
 GL_TEXTURE_MAX_ANISOTROPY_EXT	(1,)
 GL_TEXTURE_MAX_CLAMP_R_SGIX	(1,)
 GL_TEXTURE_MAX_CLAMP_S_SGIX	(1,)
@@ -2019,6 +2145,8 @@ GL_UNIFORM_BLOCK_NAME_LENGTH	(1,)
 GL_UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER	(1,)	#TODO Review http://www.opengl.org/registry/specs//ARB/compute_shader.txt
 GL_UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER	(1,)
 GL_UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER	(1,)
+GL_UNIFORM_BLOCK_REFERENCED_BY_MESH_SHADER_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
+GL_UNIFORM_BLOCK_REFERENCED_BY_TASK_SHADER_NV	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NV/NV_mesh_shader.txt
 GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER	(1,)
 GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER	(1,)
 GL_UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER	(1,)
@@ -2056,6 +2184,7 @@ GL_UNPACK_SKIP_ROWS	(1,)
 GL_UNPACK_SKIP_VOLUMES_SGIS	(1,)
 GL_UNPACK_SUBSAMPLE_RATE_SGIX	
 GL_UNPACK_SWAP_BYTES	(1,)
+GL_UPLOAD_GPU_MASK_NVX	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/NVX/NVX_gpu_multicast2.txt
 GL_VALIDATE_STATUS	(1,)
 GL_VARIANT_ARRAY_POINTER_EXT	(1,)	#TODO Review http://www.opengl.org/registry/specs//EXT/vertex_shader.txt
 GL_VARIANT_ARRAY_TYPE_EXT	(1,)

@@ -312,6 +312,11 @@ Overview (from the spec)
 	  atomicCounterDecrement -> OpAtomicIDecrement (with post decrement)
 	  atomicCounter          -> OpAtomicLoad
 	
+	Mapping of uniform initializers
+	
+	  Using the OpVariable initializer logic, but only from a constant
+	  instruction (not a global one).
+	
 	Mapping of other instructions
 	
 	  %     -> OpUMod/OpSMod
@@ -333,6 +338,7 @@ Overview (from the spec)
 	    version 4.5.)
 	  + *AtomicCounter* Storage Class can use the *Offset* decoration
 	  + OriginLowerLeft
+	  + Uniforms support constant initializers.
 	
 	Corresponding features that GLSL keeps, despite GL_KHR_vulkan_glsl removal:
 	  . default uniforms (those not inside a uniform block)

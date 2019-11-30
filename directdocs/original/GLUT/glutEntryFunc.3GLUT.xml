@@ -1,0 +1,67 @@
+<refentry id="glutEntryFunc.3GLUT">
+	<refmeta id="glutEntryFunc.3GLUT-meta">
+		<refentrytitle>glutEntryFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutEntryFunc.3GLUT-name">
+		<refname>glutEntryFunc</refname>
+		<refpurpose>sets the mouse enter/leave callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutEntryFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutEntryFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;state)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutEntryFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new entry callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutEntryFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutEntryFunc</function> sets the mouse enter/leave callback for the current window. The state callback
+			parameter is either <constant>GLUT_LEFT</constant> or <constant>GLUT_ENTERED</constant> depending on if the mouse
+			pointer has last left or entered the window.
+		</para>
+		<para>
+			Passing <constant>NULL</constant> to <function>glutEntryFunc</function> disables the generation of the mouse
+			enter/leave callback.
+		</para>
+		<para>
+			Some window systems may not generate accurate enter/leave callbacks.
+		</para>
+		<note>
+			<title>X IMPLEMENTATION NOTES</title> <para>
+				An X implementation of GLUT should generate accurate enter/leave callbacks.
+			</para>
+		</note>
+	</refsect1>
+	<refsect1 id="glutEntryFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

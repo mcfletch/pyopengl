@@ -1,0 +1,113 @@
+<refentry id="glutSolidTorus.3GLUT">
+	<refmeta id="glutSolidTorus.3GLUT-meta">
+		<refentrytitle>glutSolidTorus</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSolidTorus.3GLUT-name">
+		<refname>glutSolidTorus</refname>
+		<refname>glutWireTorus</refname>
+		<refpurpose>render a solid or wireframe torus (doughnut) respectively.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSolidTorus.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSolidTorus</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>innerRadius</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>outerRadius</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>nsides</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>rings</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutWireTorus</function></funcdef>
+				<paramdef>GLdouble&nbsp;<parameter>innerRadius</parameter></paramdef>
+				<paramdef>GLdouble&nbsp;<parameter>outerRadius</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>nsides</parameter></paramdef>
+				<paramdef>GLint&nbsp;<parameter>rings</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSolidTorus.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>innerRadius</parameter></term>
+				<listitem>
+					<simpara>
+						Inner radius of the torus.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>outerRadius</parameter></term>
+				<listitem>
+					<simpara>
+						Outer radius of the torus.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>nsides</parameter></term>
+				<listitem>
+					<simpara>
+						Number of sides for each radial section.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><parameter>rings</parameter></term>
+				<listitem>
+					<simpara>
+						Number of radial divisions for the torus.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutSolidTorus.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutSolidTorus</function> and <function>glutWireTorus</function> render a solid or wireframe torus (doughnut)
+			respectively centered at the modeling coordinates origin whose axis is aligned with the Z axis.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSolidTorus.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutSolidSphere</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidCube</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidCone</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidDodecahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidOctahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidTetrahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidIcosahedron</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSolidTeapot</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

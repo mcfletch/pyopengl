@@ -2,7 +2,7 @@
 """Registry for loading Khronos API definitions from XML files"""
 from lxml import etree as ET
 import os, sys, json, logging
-from OpenGL._bytes import as_8_bit
+from OpenGL._bytes import as_8_bit, unicode, as_str
 log = logging.getLogger( __name__ )
 HERE = os.path.dirname( __file__ )
 
@@ -50,21 +50,21 @@ class Registry( object ):
                 if method:
                     method( element, context )
                 else:
-                    print 'Expand', element.tag
+                    print('Expand', element.tag)
                     self.dispatch( element, context )
     
     def type( self, element, context=None ):
         name = element.get('name')
         if not name:
             name = element.find('name').text 
-        self.type_set[as_8_bit(name)] = element 
+        self.type_set[as_str(name)] = element 
     
     def debug_types( self ):
         for name,type in self.types.items():
-            print name, type
+            print(name, type)
     
     def enums( self, element, context=None ):
-        name = as_8_bit(element.get('namespace'))
+        name = as_str(element.get('namespace'))
         if name not in self.enum_namespaces:
             namespace = EnumNamespace(name)
             self.enum_namespaces[name] = namespace
@@ -74,7 +74,7 @@ class Registry( object ):
     
     def enum( self, element, context=None ):
         if isinstance( context, EnumNamespace ):
-            name,value = as_8_bit(element.get('name')),element.get('value')
+            name,value = as_str(element.get('name')),element.get('value')
             enum = Enum( name, value )
             context.append( enum )
             self.enumeration_set[name] = enum
@@ -83,19 +83,19 @@ class Registry( object ):
         elif isinstance( context, EnumGroup ):
             name = element.get('name')
             assert name, 'No name on %s'%ET.tostring(element)
-            context.append( as_8_bit(name) )
+            context.append( as_str(name) )
     
     def debug_enums( self ):
         for name,namespace in self.enum_namespaces.items():
-            print 'Namespace', namespace.namespace
+            print('Namespace', namespace.namespace)
             for enum in namespace:
-                print '  ', enum
+                print('  ', enum)
     
     def command( self, element, context=None ):
         """Parse command definition into structured format"""
         proto = element.find( 'proto' )
         if proto is not None:
-            name = as_8_bit(proto.find('name').text)
+            name = as_str(proto.find('name').text)
             assert name, 'No name in command: %s'%(ET.tostring( element))
             return_type = self._type_decl( proto )
             assert return_type, 'No return type in command: %s'%(ET.tostring( element))
@@ -104,7 +104,7 @@ class Registry( object ):
             lengths = {}
             groups = {}
             for param in [x for x in element if x.tag == 'param']:
-                pname = as_8_bit(param.find( 'name' ).text)
+                pname = as_str(param.find( 'name' ).text)
                 arg_names.append( pname )
                 arg_types.append( self._type_decl( param ))
                 if param.get( 'len' ):
@@ -142,7 +142,7 @@ class Registry( object ):
     
     def debug_commands( self ):
         for name,command in sorted(self.command_set.items()):
-            print command
+            print( command )
         
     def feature( self, element, context=None ):
         api,name,number = [element.get(x) for x in ('api','name','number')]
@@ -177,7 +177,7 @@ class Registry( object ):
             self.dispatch( element, remove )
     
     def debug_apis( self ):
-        print [x.api for x in self.feature_set.values()]
+        print( [x.api for x in self.feature_set.values()])
 
 class EnumNamespace( list ):
     def __init__( self, namespace, *args ):
@@ -392,14 +392,14 @@ class Remove( list ):
 
 def parse( xmlfile ):
     registry = Registry()
-    registry.load( ET.fromstring( open( xmlfile ).read()) )
+    registry.load( ET.fromstring( open( xmlfile, 'rb' ).read()) )
     return registry 
 
 
 if __name__ == "__main__":
     if sys.argv[1:]:
         for file in sys.argv[1:]:
-            print file
+            print(file)
             registry = parse( file )
     
     #registry.debug_types()

@@ -1,0 +1,87 @@
+<refentry id="glutSpaceballButtonFunc.3GLUT">
+	<refmeta id="glutSpaceballButtonFunc.3GLUT-meta">
+		<refentrytitle>glutSpaceballButtonFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutSpaceballButtonFunc.3GLUT-name">
+		<refname>glutSpaceballButtonFunc</refname>
+		<refpurpose>sets the Spaceball button callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutSpaceballButtonFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutSpaceballButtonFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;button,&nbsp;int&nbsp;state)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutSpaceballButtonFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new spaceball button callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutSpaceballButtonFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutSpaceballButtonFunc</function> sets the Spaceball button callback for the current window. The Spaceball
+			button callback for a window is called when the window has Spaceball input focus (normally, when the mouse is in the
+			window) and the user generates Spaceball button presses. The <parameter>button</parameter> parameter will be the button
+			number (starting at one). The number of available Spaceball buttons can be determined with <function
+			moreinfo="refentry">glutDeviceGet(GLUT_NUM_SPACEBALL_BUTTONS)</function>. The state is either
+			<constant>GLUT_UP</constant> or <constant>GLUT_DOWN</constant> indicating whether the callback was due to a release or
+			press respectively.
+		</para>
+		<para>
+			Registering a Spaceball button callback when a Spaceball device is not available is ineffectual and not an error. In
+			this case, no Spaceball button callbacks will be generated.
+		</para>
+		<para>
+			Passing <constant>NULL</constant> to <function>glutSpaceballButtonFunc</function> disables the generation of Spaceball
+			button callbacks. When a new window is created, no Spaceball button callback is initially registered.
+		</para>
+	</refsect1>
+	<refsect1 id="glutSpaceballButtonFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutSpaceballMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpaceballRotateFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMouseFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutButtonBoxFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutTabletButtonFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutJoystickFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDeviceGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,74 @@
+<refentry id="gleSetNumSides.3GLE">
+	<refmeta id="gleSetNumSides.3GLE-meta">
+		<refentrytitle>gleSetNumSides</refentrytitle>
+		<manvolnum>3GLE</manvolnum>
+	</refmeta>
+	<refnamediv id="gleSetNumSides.3GLE-name">
+		<refname>gleSetNumSides</refname>
+		<refname>gleGetNumSides</refname>
+		<refpurpose>Query and Set the cylinder roundness.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gleSetNumSides.3GLE-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gleSetNumSides</function></funcdef>
+				<paramdef>int&nbsp;<parameter>nslices</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>gleGetNumSides</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gleSetNumSides.3GLE-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>nslices</parameter></term>
+				<listitem>
+					<simpara>
+						positive integer number of slices
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gleSetNumSides.3GLE-description">
+		<title>Description</title>
+		<para>
+			Query and set the GLE cylinder and cone roundness. When GLE draws a cylinder or a cone, it approximates the circular
+			cross-section with a polygon (of 20 sides by default). These subroutines can be used to change the default number of
+			sides in this cross-section. A smaller number of sides can typically be drawn much faster, at the loss of some visual
+			accuracy. Increasing the number of sides to more than 20 will typically have no noticable visual effect.
+		</para>
+	</refsect1>
+	<refsect1 id="gleSetNumSides.3GLE-bugs">
+		<title>Bugs</title>
+		<para>
+			Multiple threads using GLE share a single global number of sides (although this should be easily fixable because GLE
+			does use a centralized graphics context).
+		</para>
+	</refsect1>
+	<refsect1 id="gleSetNumSides.3GLE-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glePolyCylinder</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glePolyCone</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+	<refsect1 id="gleSetNumSides.3GLE-author">
+		<title>Author</title>
+		<para>
+			Linas Vepstas
+		</para>
+	</refsect1>
+</refentry>

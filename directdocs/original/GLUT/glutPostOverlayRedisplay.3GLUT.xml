@@ -1,0 +1,111 @@
+<refentry id="glutPostOverlayRedisplay.3GLUT">
+	<refmeta id="glutPostOverlayRedisplay.3GLUT-meta">
+		<refentrytitle>glutPostOverlayRedisplay</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutPostOverlayRedisplay.3GLUT-name">
+		<refname>glutPostOverlayRedisplay</refname>
+		<refname>glutPostWindowOverlayRedisplay</refname>
+		<refpurpose>marks the overlay of the current or specified window as needing to be redisplayed.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutPostOverlayRedisplay.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutPostOverlayRedisplay</function></funcdef>
+				<void/>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutPostWindowOverlayRedisplay</function></funcdef>
+				<paramdef>int&nbsp;<parameter>win</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutPostOverlayRedisplay.3GLUT-description">
+		<title>Description</title>
+		<para>
+			Mark the overlay of current window as needing to be redisplayed. The next iteration through <function
+			moreinfo="refentry">glutMainLoop</function>, the window's overlay display callback (or simply the display callback if
+			no overlay display callback is registered) will be called to redisplay the window's overlay plane. Multiple calls to
+			<function>glutPostOverlayRedisplay</function> before the next display callback opportunity (or overlay display callback
+			opportunity if one is registered) generate only a single redisplay. <function>glutPostOverlayRedisplay</function> may
+			be called within a window's display or overlay display callback to re-mark that window for redisplay.
+		</para>
+		<para>
+			Logically, overlay damage notification for a window is treated as a <function>glutPostOverlayRedisplay</function> on
+			the damaged window. Unlike damage reported by the window system, <function>glutPostOverlayRedisplay</function> will not
+			set to true the overlay's damaged status (returned by <function
+			moreinfo="refentry">glutLayerGet(GLUT_OVERLAY_DAMAGED)</function>.
+		</para>
+		<para>
+			If the window you want to post an overlay redisplay on is not already current (and you do not require it to be
+			immediately made current), using <function>glutPostWindowOverlayRedisplay</function> is more efficient that calling
+			<function moreinfo="refentry">glutSetWindow</function> to the desired window and then calling
+			<function>glutPostOverlayRedisplay</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glutPostOverlayRedisplay.3GLUT-example">
+		<title>Example</title>
+		<para>
+			If you are doing an interactive effect like rubberbanding in the overlay, it is a good idea to structure your rendering
+			to minimize flicker (most overlays are single-buffered). Only clear the overlay if you know that the window has been
+			damaged. Otherwise, try to simply erase what you last drew and redraw it in an updated position. Here is an example
+			overlay display callback used to implement overlay rubberbanding:
+		</para>
+		<programlisting>void redrawOverlay(void)
+{
+    static int prevStretchX, prevStretchY;
+
+    if (glutLayerGet(GLUT_OVERLAY_DAMAGED)) {
+		/* Damage means we need a full clear. */
+        glClear(GL_COLOR_BUFFER_BIT);
+    } else {
+		/* Undraw last rubber-band. */
+        glIndexi(transparent);
+        glBegin(GL_LINE_LOOP);
+        glVertex2i(anchorX, anchorY);
+        glVertex2i(anchorX, prevStretchY);
+        glVertex2i(prevStretchX, prevStretchY);
+        glVertex2i(prevStretchX, anchorY);
+        glEnd();
+    }
+    glIndexi(red);
+    glBegin(GL_LINE_LOOP);
+    glVertex2i(anchorX, anchorY);
+    glVertex2i(anchorX, stretchY);
+    glVertex2i(stretchX, stretchY);
+    glVertex2i(stretchX, anchorY);
+    glEnd();
+    prevStretchX = stretchX;
+    prevStretchY = stretchY;
+}</programlisting>
+		<para>
+			Notice how <function moreinfo="refentry">glutLayerGet(GLUT_OVERLAY_DAMAGED)</function> is used to determine if a clear
+			needs to take place because of damage; if a clear is unnecessary, it is faster to just draw the last rubberband using
+			the transparent pixel.
+		</para>
+		<para>
+			When the application is through with the rubberbanding effect, the best way to get ride of the rubberband is to simply
+			hide the overlay by calling <function moreinfo="refentry">glutHideOverlay</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glutPostOverlayRedisplay.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutPostRedisplay</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutEstablishOverlay</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutLayerGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

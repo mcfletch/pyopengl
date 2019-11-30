@@ -178,4 +178,4 @@ class TestEvaluators(basetestcase.BaseTest):
             glePolyCone(((-6.0, 6.0, 0.0), (6.0, 6.0, 0.0), (6.0, -6.0, 0.0), (-6.0, -6.0, 0.0), (-6.0, 6.0, 0.0), (6.0, 6.0, 0.0)),
                                 ((0.0, 0.0, 0.0), (0.0, 0.8, 0.3), (0.8, 0.3, 0.0), (0.2, 0.3, 0.9), (0.2, 0.8, 0.5), (0.0, 0.0, 0.0)), (1, 1, 3, 0.5, 2, 1))
         else:
-            log.warn("No GLE extrusion library")
+            log.warning("No GLE extrusion library")

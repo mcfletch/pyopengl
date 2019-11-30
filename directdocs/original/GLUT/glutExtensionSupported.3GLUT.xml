@@ -1,0 +1,80 @@
+<refentry id="glutExtensionSupported.3GLUT">
+	<refmeta id="glutExtensionSupported.3GLUT-meta">
+		<refentrytitle>glutExtensionSupported</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutExtensionSupported.3GLUT-name">
+		<refname>glutExtensionSupported</refname>
+		<refpurpose>helps to easily determine whether a given OpenGL extension is supported.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutExtensionSupported.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutExtensionSupported</function></funcdef>
+				<paramdef>char&nbsp;*<parameter>extension</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutExtensionSupported.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>extension</parameter></term>
+				<listitem>
+					<simpara>
+						Name of OpenGL extension.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutExtensionSupported.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutExtensionSupported</function> helps to easily determine whether a given OpenGL extension is supported or
+			not. The extension parameter names the extension to query. The supported extensions can also be determined with
+			<function moreinfo="refentry">glGetString(GL_EXTENSIONS)</function>, but <function>glutExtensionSupported</function>
+			does the correct parsing of the returned string.
+		</para>
+		<para>
+			<function>glutExtensionSupported</function> returns non-zero if the extension is supported, zero if not supported.
+		</para>
+		<para>
+			There must be a valid current window to call <function>glutExtensionSupported</function>.
+		</para>
+		<para>
+			<function>glutExtensionSupported</function> only returns information about OpenGL extensions only. This means window
+			system dependent extensions (for example, GLX extensions) are not reported by
+			<function>glutExtensionSupported</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glutExtensionSupported.3GLUT-example">
+		<title>Example</title>
+		<para>
+			Here is an example of using glutExtensionSupported:
+		</para>
+		<programlisting>if (!glutExtensionSupported(&quot;GL_EXT_texture&quot;)) {
+    fprintf(stderr, &quot;Missing the texture extension!);
+    exit(1);
+}</programlisting>
+		<para>
+			Notice that the name argument includes both the GL prefix and the extension family prefix (EXT).
+		</para>
+	</refsect1>
+	<refsect1 id="glutExtensionSupported.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glGetString</refentrytitle>
+					<manvolnum>3G</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

@@ -70,21 +70,22 @@ init:
 
 install:
   - "powershell appveyor\\install.ps1"
+  - "%CMD_IN_ENV% python -m pip install pygame pytest numpy"
   - "%CMD_IN_ENV% python setup.py install"
   - cd accelerate
   - "%CMD_IN_ENV% python setup.py install"
   - cd ..
 
-build: off
-
-test_script:
-  - "ECHO pytest tests not being run"
-
-after_test:
+build_script:
   - cd accelerate
   - "ECHO %WITH_COMPILER% %PYTHON%/python.exe setup.py bdist_wheel"
   - "%WITH_COMPILER% %PYTHON%/python.exe setup.py bdist_wheel"
   - cd ..
+
+test_script:
+  - "%CMD_IN_ENV% pytest -sv tests/test_core.py"
+
+after_test: off
 
 artifacts:
   - path: accelerate\dist\*

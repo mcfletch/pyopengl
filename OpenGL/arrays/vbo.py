@@ -116,7 +116,7 @@ class Implementation( object ):
                         # we have to pass an array-compatible type here...
                         buf = gluint( buffer )
                         self.glDeleteBuffers(1, buf)
-                    except (AttributeError, nfe) as err:
+                    except (AttributeError, nfe, TypeError) as err:
                         pass
             try:
                 self._DELETERS_.pop( key )

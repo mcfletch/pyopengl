@@ -45,7 +45,7 @@ Running Tests
 
 You can run the PyOpenGL test suite from a source-code checkout, you will need:
 
-* git (for the checkout) or bzr (if you are checking out from launchpad)
+* git (for the checkout)
 * GLUT (FreeGLUT)
 * GLExtrusion library (libgle)
 * GLU (normally available on any OpenGL-capable machine)
@@ -61,3 +61,12 @@ numpy. Some will have accelerate, and some will not.
 
 .. image:: https://travis-ci.org/mcfletch/pyopengl.svg?branch=master
     :target: https://travis-ci.org/mcfletch/pyopengl
+    :alt: Travis Tests
+
+.. image:: https://ci.appveyor.com/api/projects/status/MikeCFletcher/pyopengl/branch/master
+    :target: https://ci.appveyor.com/project/MikeCFletcher/pyopengl
+    :alt: Appveyor Build
+
+.. image:: https://img.shields.io/pypi/v/pyopengl.svg
+    :target: https://pypi.python.org/pypi/pyopengl
+    :alt: Latest PyPI Version

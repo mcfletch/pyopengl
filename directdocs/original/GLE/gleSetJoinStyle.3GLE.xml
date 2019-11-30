@@ -1,0 +1,193 @@
+<refentry id="gleSetJoinStyle.3GLE">
+	<refmeta id="gleSetJoinStyle.3GLE-meta">
+		<refentrytitle>gleSetJoinStyle</refentrytitle>
+		<manvolnum>3GLE</manvolnum>
+	</refmeta>
+	<refnamediv id="gleSetJoinStyle.3GLE-name">
+		<refname>gleSetJoinStyle</refname>
+		<refname>gleGetJoinStyle</refname>
+		<refpurpose>Query and Set the GLE join style flags.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="gleSetJoinStyle.3GLE-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>gleSetJoinStyle</function></funcdef>
+				<paramdef>int&nbsp;<parameter>style</parameter></paramdef>
+			</funcprototype>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>gleGetJoinStyle</function></funcdef>
+				<void/>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="gleSetJoinStyle.3GLE-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>style</parameter></term>
+				<listitem>
+					<simpara>
+						bitwise OR of flags
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gleSetJoinStyle.3GLE-description">
+		<title>Description</title>
+		<para>
+			Query and set the GLE join style flags. This word is a bitwise OR of the flags described below.
+		</para>
+		<para>
+			The initial join style
+			is <constant>TUBE_JN_ANGLE</constant>&nbsp;|&nbsp;<constant>TUBE_JN_CAP</constant>&nbsp;|&nbsp;<constant>TUBE_NORM_FACET</constant>.
+		</para>
+		<variablelist>
+			<title>Extrusion Join Styles</title>
+			<varlistentry>
+				<term><constant>TUBE_JN_RAW</constant></term>
+				<listitem>
+					<simpara>
+						Draw polycylinders, polycones, extrusions, etc. with no special treatment of the extrusion ends.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>TUBE_JN_ANGLE</constant></term>
+				<listitem>
+					<simpara>
+						Draw polycylinders, polycones, extrusions, etc. by extending the different segments until they butt into
+						each other with an angular style.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>TUBE_JN_CUT</constant></term>
+				<listitem>
+					<simpara>
+						Draw polycylinders, polycones, extrusions, etc. by joining together the different segments and slicing off
+						the joint at half the angle between the segments. A cap is drawn. Note that the slicing plane runs through
+						the origin of the contour coordinate system. Thus, the amount of slice can be varied by offsetting the
+						contour with respect to the origin.
+					</simpara>
+					<simpara>
+						Note that when two segments meet at a shallow angle, the cut join style will potentially shave off a whole
+						lot of the contour, leading to &quot;surprising&quot; results...
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>TUBE_JN_ROUND</constant></term>
+				<listitem>
+					<simpara>
+						Joints will be rounded. Strictly speaking, the part of the joint above the origin will be rounded. The part
+						below the origin will come together in an angular join.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>TUBE_JN_MASK</constant></term>
+				<listitem>
+					<simpara>
+						Mask bits. This can be used to mask off the bit field that defines the join style.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<variablelist>
+			<title>End Caps</title>
+			<varlistentry>
+				<term><constant>TUBE_JN_CAP</constant></term>
+				<listitem>
+					<simpara>
+						If this is set, a cap will be drawn at each end of the extrusion.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<variablelist>
+			<title>Automatic Normal Vector Generation</title>
+			<varlistentry>
+				<term><constant>TUBE_NORM_FACET</constant></term>
+				<listitem>
+					<simpara>
+						A normal vector is generated per facet. Useful for having an extrusion have a &quot;faceted&quot; look,
+						such as when extruding a square &mdash; each of the four sides of the square will look flat.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>TUBE_NORM_EDGE</constant></term>
+				<listitem>
+					<simpara>
+						Normal vectors are generated so that they lie along edges. Useful for making angular things look rounded
+						under lighting. For example, when extruding a hexagon and using this flag, the hexagonal extrusion will
+						look (more like a) smooth perfectly round cylinder, rather than a six-sided shape.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>TUBE_NORM_PATH_EDGE</constant></term>
+				<listitem>
+					<simpara>
+						Normal vectors are generated so that they both lie on edges, and so that they interpolate between
+						neighboring segments. Useful for drawing &quot;spaghetti&quot; &mdash; extrusions that follow a spline
+						path. Because the spline path must be &quot;tessellated&quot; into small straight segments, each segment
+						will look straight unless this flag is set.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><constant>TUBE_NORM_MASK</constant></term>
+				<listitem>
+					<simpara>
+						A mask useful for masking out the &quot;norm&quot; bits.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<variablelist>
+			<title>Closed or Open Contours</title>
+			<varlistentry>
+				<term><constant>TUBE_CONTOUR_CLOSED</constant></term>
+				<listitem>
+					<simpara>
+						If this bit is set, the contour will be treated as a &quot;closed&quot; contour, where the last point
+						connects back up to the first. It is useful to set this flag when drawing closed shapes (such as extruded
+						cylinders, star-shapes, I-Beams, etc. When drawing open extrusions (e.g. corrugated sheet metal), you
+						<emphasis role="bold">don't</emphasis> want to set this flag.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="gleSetJoinStyle.3GLE-bugs">
+		<title>Bugs</title>
+		<para>
+			Multiple threads using GLE share a single global join style (although this should be easily fixable because GLE does
+			use a centralized graphics context).
+		</para>
+	</refsect1>
+	<refsect1 id="gleSetJoinStyle.3GLE-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>gleExtrusion</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>gleTextureMode</refentrytitle>
+					<manvolnum>3GLE</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+	<refsect1 id="gleSetJoinStyle.3GLE-author">
+		<title>Author</title>
+		<para>
+			Linas Vepstas
+		</para>
+	</refsect1>
+</refentry>

@@ -1,0 +1,73 @@
+<refentry id="glutTabletMotionFunc.3GLUT">
+	<refmeta id="glutTabletMotionFunc.3GLUT-meta">
+		<refentrytitle>glutTabletMotionFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutTabletMotionFunc.3GLUT-name">
+		<refname>glutTabletMotionFunc</refname>
+		<refpurpose>sets the special keyboard callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutTabletMotionFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutTabletMotionFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;x,&nbsp;int&nbsp;y)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutTabletMotionFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new entry callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutTabletMotionFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutTabletMotionFunc</function> sets the tablet motion callback for the current window. The tablet motion
+			callback for a window is called when the window has tablet input focus (normally, when the mouse is in the window) and
+			the user generates tablet motion. The <parameter>x</parameter>and <parameter>y</parameter> callback parameters
+			indicate the absolute position of the tablet "puck" on the tablet. The callback parameters are normalized to be within
+			the range of 0 to 2000 inclusive.
+		</para>
+		<para>
+			Registering a tablet motion callback when a tablet device is not available is ineffectual and not an error. In this
+			case, no tablet motion callbacks will be generated.
+		</para>
+		<para>
+			Passing <constant>NULL</constant> to <function>glutTabletMotionFunc</function> disables the generation of tablet motion
+			callbacks. When a new window is created, no tablet motion callback is initially registered.
+		</para>
+	</refsect1>
+	<refsect1 id="glutTabletMotionFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutTabletButtonFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDeviceGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpaceballMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

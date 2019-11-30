@@ -3,9 +3,10 @@
 import ctypes
 from OpenGL.platform import ctypesloader
 from OpenGL._bytes import as_8_bit
-import sys
+import sys, logging
 from OpenGL import _configflags
 from OpenGL import logs, MODULE_ANNOTATIONS
+log = logging.getLogger(__name__)
 
 class lazy_property( object ):
     def __init__( self, function ):
@@ -384,7 +385,12 @@ class _NullFunctionPointer( object ):
     __bool__ = __nonzero__
     def load( self ):
         """Attempt to load the function again, presumably with a context this time"""
-        from OpenGL import platform
+        try:
+            from OpenGL import platform
+        except ImportError:
+            if log:
+                log.info('Platform import failed (likely during shutdown)')
+            return None
         try:
             func = platform.PLATFORM.constructFunction(
                 self.__name__, self.DLL, 
@@ -408,12 +414,17 @@ class _NullFunctionPointer( object ):
         if self.load():
             return self( *args, **named )
         else:
-            from OpenGL import error
-            raise error.NullFunctionError(
-                """Attempt to call an undefined function %s, check for bool(%s) before calling"""%(
-                    self.__name__, self.__name__,
+            try:
+                from OpenGL import error
+            except ImportError as err:
+                # Python interpreter is shutting down...
+                pass
+            else:
+                raise error.NullFunctionError(
+                    """Attempt to call an undefined function %s, check for bool(%s) before calling"""%(
+                        self.__name__, self.__name__,
+                    )
                 )
-            )
 
 class _DeprecatedFunctionPointer( _NullFunctionPointer ):
     deprecated = True

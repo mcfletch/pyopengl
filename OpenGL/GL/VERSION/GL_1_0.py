@@ -424,7 +424,7 @@ glGetPixelMapusv=wrapper.wrapper(glGetPixelMapusv).setOutput(
     'values',size=_glgets._glget_size_mapping,pnameArg='map',orPassIn=True
 )
 glGetPolygonStipple=wrapper.wrapper(glGetPolygonStipple).setOutput(
-    'mask',size=(128,),orPassIn=True
+    'mask',size=lambda x:(x,),pnameArg='128.0',orPassIn=True
 )
 glGetTexEnvfv=wrapper.wrapper(glGetTexEnvfv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True

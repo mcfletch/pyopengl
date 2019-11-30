@@ -1,0 +1,79 @@
+<refentry id="glutOverlayDisplayFunc.3GLUT">
+	<refmeta id="glutOverlayDisplayFunc.3GLUT-meta">
+		<refentrytitle>glutOverlayDisplayFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutOverlayDisplayFunc.3GLUT-name">
+		<refname>glutOverlayDisplayFunc</refname>
+		<refpurpose>sets the overlay display callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutOverlayDisplayFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutOverlayDisplayFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)()</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutOverlayDisplayFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new overlay display callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutOverlayDisplayFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function moreinfo="refentry">glutDisplayFunc</function> sets the overlay display callback for the current window. The
+			overlay display callback is functionally the same as the window's display callback except that the overlay display
+			callback is used to redisplay the window's overlay.
+		</para>
+		<para>
+			When GLUT determines that the overlay plane for the window needs to be redisplayed, the overlay display callback for
+			the window is called. Before the callback, the current window is set to the window needing to be redisplayed and the
+			layer in use is set to the overlay. The overlay display callback is called with no parameters. The entire overlay
+			region should be redisplayed in response to the callback (this includes ancillary buffers if your program depends on
+			their state).
+		</para>
+		<para>
+			GLUT determines when the overlay display callback should be triggered based on the window's overlay redisplay state.
+			The overlay redisplay state for a window can be either set explicitly by calling <function
+			moreinfo="refentry">glutPostOverlayRedisplay</function> or implicitly as the result of window damage reported by the
+			window system. Multiple posted overlay redisplays for a window are coalesced by GLUT to minimize the number of overlay
+			display callbacks called.
+		</para>
+		<para>
+			Upon return from the overlay display callback, the overlay damaged state of the window (returned by calling <function
+			moreinfo="refentry">glutLayerGet(GLUT_OVERLAY_DAMAGED)</function> is cleared.
+		</para>
+		<para>
+			The overlay display callback can be deregistered by passing <constant>NULL</constant> to
+			<function>glutOverlayDisplayFunc</function>. The overlay display callback is initially <constant>NULL</constant> when
+			an overlay is established. See <function moreinfo="refentry">glutDisplayFunc</function> to understand how the display
+			callback alone is used if an overlay display callback is not registered.
+		</para>
+	</refsect1>
+	<refsect1 id="glutOverlayDisplayFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutDisplayFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutPostOverlayRedisplay</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

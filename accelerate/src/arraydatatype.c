@@ -980,7 +980,7 @@ struct __pyx_obj_17OpenGL_accelerate_13arraydatatype_SizedOutput {
 
 
 /* "src/arraydatatype.pyx":350
- *                 raise KeyError( """Unknown specifier %s (lookup = %s)"""%( specifier, self.lookup ))
+ *                 raise KeyError( """Unknown specifier %r (lookup = %s)"""%( specifier, self.lookup ))
  * DO_OUTPUT = (None,_NULL)
  * cdef class SizedOutputOrInput( SizedOutput ):             # <<<<<<<<<<<<<<
  *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
@@ -1202,7 +1202,7 @@ static struct __pyx_vtabstruct_17OpenGL_accelerate_13arraydatatype_SizedOutput *
 
 
 /* "src/arraydatatype.pyx":350
- *                 raise KeyError( """Unknown specifier %s (lookup = %s)"""%( specifier, self.lookup ))
+ *                 raise KeyError( """Unknown specifier %r (lookup = %s)"""%( specifier, self.lookup ))
  * DO_OUTPUT = (None,_NULL)
  * cdef class SizedOutputOrInput( SizedOutput ):             # <<<<<<<<<<<<<<
  *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
@@ -1866,7 +1866,7 @@ static const char __pyx_k_pyx_unpickle_ArrayDatatype[] = "__pyx_unpickle_ArrayDa
 static const char __pyx_k_pyx_unpickle_AsArrayOfType[] = "__pyx_unpickle_AsArrayOfType";
 static const char __pyx_k_pyx_unpickle_OutputOrInput[] = "__pyx_unpickle_OutputOrInput";
 static const char __pyx_k_OpenGL_arrays_arraydatatype[] = "OpenGL.arrays.arraydatatype";
-static const char __pyx_k_Unknown_specifier_s_lookup_s[] = "Unknown specifier %s (lookup = %s)";
+static const char __pyx_k_Unknown_specifier_r_lookup_s[] = "Unknown specifier %r (lookup = %s)";
 static const char __pyx_k_pyx_unpickle_HandlerRegistry[] = "__pyx_unpickle_HandlerRegistry";
 static const char __pyx_k_pyx_unpickle_AsArrayTypedSize[] = "__pyx_unpickle_AsArrayTypedSize";
 static const char __pyx_k_pyx_unpickle_AsArrayTypedSizeC[] = "__pyx_unpickle_AsArrayTypedSizeChecked";
@@ -1921,7 +1921,7 @@ static PyObject *__pyx_n_s_SizedOutput;
 static PyObject *__pyx_n_s_SizedOutputOrInput;
 static PyObject *__pyx_n_s_TypeError;
 static PyObject *__pyx_kp_s_Unable_to_find_any_output_handle;
-static PyObject *__pyx_kp_s_Unknown_specifier_s_lookup_s;
+static PyObject *__pyx_kp_s_Unknown_specifier_r_lookup_s;
 static PyObject *__pyx_n_s_ValueError;
 static PyObject *__pyx_n_s_append;
 static PyObject *__pyx_n_s_arrayByteCount;
@@ -9651,7 +9651,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_13arraydatatype_11SizedOutput_c_get
  *                 if not isinstance( result, tuple ):
  *                     result = (result,)             # <<<<<<<<<<<<<<
  *                 return result
- *             except KeyError as err:
+ *             except (TypeError,KeyError) as err:
  */
             __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 345, __pyx_L9_error)
             __Pyx_GOTREF(__pyx_t_4);
@@ -9674,8 +9674,8 @@ static PyObject *__pyx_f_17OpenGL_accelerate_13arraydatatype_11SizedOutput_c_get
  *                 if not isinstance( result, tuple ):
  *                     result = (result,)
  *                 return result             # <<<<<<<<<<<<<<
- *             except KeyError as err:
- *                 raise KeyError( """Unknown specifier %s (lookup = %s)"""%( specifier, self.lookup ))
+ *             except (TypeError,KeyError) as err:
+ *                 raise KeyError( """Unknown specifier %r (lookup = %s)"""%( specifier, self.lookup ))
  */
           __Pyx_XDECREF(__pyx_r);
           if (!(likely(PyTuple_CheckExact(__pyx_v_result))||((__pyx_v_result) == Py_None)||(PyErr_Format(PyExc_TypeError, "Expected %.16s, got %.200s", "tuple", Py_TYPE(__pyx_v_result)->tp_name), 0))) __PYX_ERR(0, 346, __pyx_L9_error)
@@ -9699,11 +9699,11 @@ static PyObject *__pyx_f_17OpenGL_accelerate_13arraydatatype_11SizedOutput_c_get
         /* "src/arraydatatype.pyx":347
  *                     result = (result,)
  *                 return result
- *             except KeyError as err:             # <<<<<<<<<<<<<<
- *                 raise KeyError( """Unknown specifier %s (lookup = %s)"""%( specifier, self.lookup ))
+ *             except (TypeError,KeyError) as err:             # <<<<<<<<<<<<<<
+ *                 raise KeyError( """Unknown specifier %r (lookup = %s)"""%( specifier, self.lookup ))
  * DO_OUTPUT = (None,_NULL)
  */
-        __pyx_t_12 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_KeyError);
+        __pyx_t_12 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_TypeError) || __Pyx_PyErr_ExceptionMatches(__pyx_builtin_KeyError);
         if (__pyx_t_12) {
           __Pyx_AddTraceback("OpenGL_accelerate.arraydatatype.SizedOutput.c_getSize", __pyx_clineno, __pyx_lineno, __pyx_filename);
           if (__Pyx_GetException(&__pyx_t_4, &__pyx_t_8, &__pyx_t_9) < 0) __PYX_ERR(0, 347, __pyx_L11_except_error)
@@ -9715,8 +9715,8 @@ static PyObject *__pyx_f_17OpenGL_accelerate_13arraydatatype_11SizedOutput_c_get
 
           /* "src/arraydatatype.pyx":348
  *                 return result
- *             except KeyError as err:
- *                 raise KeyError( """Unknown specifier %s (lookup = %s)"""%( specifier, self.lookup ))             # <<<<<<<<<<<<<<
+ *             except (TypeError,KeyError) as err:
+ *                 raise KeyError( """Unknown specifier %r (lookup = %s)"""%( specifier, self.lookup ))             # <<<<<<<<<<<<<<
  * DO_OUTPUT = (None,_NULL)
  * cdef class SizedOutputOrInput( SizedOutput ):
  */
@@ -9728,7 +9728,7 @@ static PyObject *__pyx_f_17OpenGL_accelerate_13arraydatatype_11SizedOutput_c_get
           __Pyx_INCREF(__pyx_v_self->lookup);
           __Pyx_GIVEREF(__pyx_v_self->lookup);
           PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_v_self->lookup);
-          __pyx_t_14 = __Pyx_PyString_Format(__pyx_kp_s_Unknown_specifier_s_lookup_s, __pyx_t_13); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 348, __pyx_L11_except_error)
+          __pyx_t_14 = __Pyx_PyString_Format(__pyx_kp_s_Unknown_specifier_r_lookup_s, __pyx_t_13); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 348, __pyx_L11_except_error)
           __Pyx_GOTREF(__pyx_t_14);
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
           __pyx_t_13 = __Pyx_PyObject_CallOneArg(__pyx_builtin_KeyError, __pyx_t_14); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 348, __pyx_L11_except_error)
@@ -19731,7 +19731,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_SizedOutputOrInput, __pyx_k_SizedOutputOrInput, sizeof(__pyx_k_SizedOutputOrInput), 0, 0, 1, 1},
   {&__pyx_n_s_TypeError, __pyx_k_TypeError, sizeof(__pyx_k_TypeError), 0, 0, 1, 1},
   {&__pyx_kp_s_Unable_to_find_any_output_handle, __pyx_k_Unable_to_find_any_output_handle, sizeof(__pyx_k_Unable_to_find_any_output_handle), 0, 0, 1, 0},
-  {&__pyx_kp_s_Unknown_specifier_s_lookup_s, __pyx_k_Unknown_specifier_s_lookup_s, sizeof(__pyx_k_Unknown_specifier_s_lookup_s), 0, 0, 1, 0},
+  {&__pyx_kp_s_Unknown_specifier_r_lookup_s, __pyx_k_Unknown_specifier_r_lookup_s, sizeof(__pyx_k_Unknown_specifier_r_lookup_s), 0, 0, 1, 0},
   {&__pyx_n_s_ValueError, __pyx_k_ValueError, sizeof(__pyx_k_ValueError), 0, 0, 1, 1},
   {&__pyx_n_s_append, __pyx_k_append, sizeof(__pyx_k_append), 0, 0, 1, 1},
   {&__pyx_n_s_arrayByteCount, __pyx_k_arrayByteCount, sizeof(__pyx_k_arrayByteCount), 0, 0, 1, 1},
@@ -20491,8 +20491,8 @@ if (!__Pyx_RefNanny) {
   PyType_Modified(__pyx_ptype_17OpenGL_accelerate_13arraydatatype_ArrayDatatype);
 
   /* "src/arraydatatype.pyx":349
- *             except KeyError as err:
- *                 raise KeyError( """Unknown specifier %s (lookup = %s)"""%( specifier, self.lookup ))
+ *             except (TypeError,KeyError) as err:
+ *                 raise KeyError( """Unknown specifier %r (lookup = %s)"""%( specifier, self.lookup ))
  * DO_OUTPUT = (None,_NULL)             # <<<<<<<<<<<<<<
  * cdef class SizedOutputOrInput( SizedOutput ):
  *     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):

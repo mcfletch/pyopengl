@@ -1,0 +1,72 @@
+<refentry id="glutReshapeFunc.3GLUT">
+	<refmeta id="glutReshapeFunc.3GLUT-meta">
+		<refentrytitle>glutReshapeFunc</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutReshapeFunc.3GLUT-name">
+		<refname>glutReshapeFunc</refname>
+		<refpurpose>sets the reshape callback for the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutReshapeFunc.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutReshapeFunc</function></funcdef>
+				<paramdef>void&nbsp;(*<parameter>func</parameter>)(int&nbsp;width,&nbsp;int&nbsp;height)</paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutReshapeFunc.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>func</parameter></term>
+				<listitem>
+					<simpara>
+						The new reshape callback function.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutReshapeFunc.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutReshapeFunc</function> sets the reshape callback for the current window. The reshape callback is
+			triggered when a window is reshaped. A reshape callback is also triggered immediately before a window's first display
+			callback after a window is created or whenever an overlay for the window is established. The
+			<parameter>width</parameter> and <parameter>height</parameter> parameters of the callback specify the new window size
+			in pixels. Before the callback, the current window is set to the window that has been reshaped.
+		</para>
+		<para>
+			If a reshape callback is not registered for a window or <constant>NULL</constant> is passed to
+			<function>glutReshapeFunc</function> (to deregister a previously registered callback), the default reshape callback is
+			used. This default callback will simply call <function moreinfo="refentry">glViewport(0,0,width,height)</function> on
+			the normal plane (and on the overlay if one exists).
+		</para>
+		<para>
+			If an overlay is established for the window, a single reshape callback is generated. It is the callback's
+			responsibility to update both the normal plane and overlay for the window (changing the layer in use as necessary).
+		</para>
+		<para>
+			When a top-level window is reshaped, subwindows are not reshaped. It is up to the GLUT program to manage the size and
+			positions of subwindows within a top-level window. Still, reshape callbacks will be triggered for subwindows when their
+			size is changed using <function moreinfo="refentry">glutReshapeWindow</function>.
+		</para>
+	</refsect1>
+	<refsect1 id="glutReshapeFunc.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutDisplayFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutReshapeWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

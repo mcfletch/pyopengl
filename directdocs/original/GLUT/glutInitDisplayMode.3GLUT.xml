@@ -1,0 +1,189 @@
+<refentry id="glutInitDisplayMode.3GLUT">
+	<refmeta id="glutInitDisplayMode.3GLUT-meta">
+		<refentrytitle>glutInitDisplayMode</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutInitDisplayMode.3GLUT-name">
+		<refname>glutInitDisplayMode</refname>
+		<refpurpose>sets the initial display mode.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutInitDisplayMode.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutInitDisplayMode</function></funcdef>
+				<paramdef>unsigned int&nbsp;<parameter>mode</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutInitDisplayMode.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>mode</parameter></term>
+				<listitem>
+					<simpara>
+						Display mode, normally the bitwise OR-ing of GLUT display mode bit masks. See values below:
+					</simpara>
+					<variablelist>
+						<varlistentry>
+							<term><constant>GLUT_RGBA</constant></term>
+							<listitem>
+								<simpara>
+									Bit mask to select an RGBA mode window. This is the default if neither
+									<constant>GLUT_RGBA</constant> nor <constant>GLUT_INDEX</constant> are specified.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_RGB</constant></term>
+							<listitem>
+								<simpara>
+									An alias for <constant>GLUT_RGBA</constant>.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_INDEX</constant></term>
+							<listitem>
+								<simpara>
+									Bit mask to select a color index mode window. This overrides <constant>GLUT_RGBA</constant> if
+									it is also specified.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_SINGLE</constant></term>
+							<listitem>
+								<simpara>
+									Bit mask to select a single buffered window. This is the default if neither
+									<constant>GLUT_DOUBLE</constant> or <constant>GLUT_SINGLE</constant> are specified.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_DOUBLE</constant></term>
+							<listitem>
+								<simpara>
+									Bit mask to select a double buffered window. This overrides <constant>GLUT_SINGLE</constant> if
+									it is also specified.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_ACCUM</constant></term>
+							<listitem>
+								<simpara>
+									Bit mask to request a window with an accumulation buffer.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_ALPHA</constant></term>
+							<listitem>
+								<simpara>
+									Bit mask to request a window with an alpha component to the color buffer(s).
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_DEPTH</constant></term>
+							<listitem>
+								<simpara>
+									Bit mask to request a window with a depth buffer.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_STENCIL</constant></term>
+							<listitem>
+								<simpara>
+									Bit mask to request a window with a stencil buffer.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_MULTISAMPLE</constant></term>
+							<listitem>
+								<simpara>
+									Bit mask to request a window with multisampling support. If multisampling is not available, a
+									non-multisampling window will automatically be chosen. Note: both the OpenGL client-side and
+									server-side implementations must support the GLX_SAMPLE_SGIS extension for multisampling to be
+									available.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_STEREO</constant></term>
+							<listitem>
+								<simpara>
+									Bit mask to select a stereo window.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_LUMINANCE</constant></term>
+							<listitem>
+								<simpara>
+									Bit mask to select a window with a "luminance" color model. This model provides the
+									functionality of OpenGL's RGBA color model, but the green and blue components are not
+									maintained in the frame buffer. Instead each pixel's red component is converted to an index
+									between zero and <function moreinfo="refentry">glutGet(GLUT_WINDOW_COLORMAP_SIZE)-1</function>
+									and looked up in a per-window color map to determine the color of pixels within the window. The
+									initial colormap of <constant>GLUT_LUMINANCE</constant> windows is initialized to be a linear
+									gray ramp, but can be modified with GLUT's colormap routines.
+								</simpara>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutInitDisplayMode.3GLUT-description">
+		<title>Description</title>
+		<para>
+			The initial display mode is used when creating top-level windows, subwindows, and overlays to determine the OpenGL
+			display mode for the to-be-created window or overlay.
+		</para>
+		<para>
+			Note that <constant>GLUT_RGBA</constant> selects the RGBA color model, but it does not request any bits of alpha
+			(sometimes called an alpha buffer or destination alpha) be allocated. To request alpha, specify
+			<constant>GLUT_ALPHA</constant>. The same applies to <constant>GLUT_LUMINANCE</constant>.
+		</para>
+		<para>
+			Note that some bits &quot;request&quot; a capability and other bits &quot;select&quot; a capability. A requestable
+			capability may be assigned to the created window even if the bit for the capability was not set. For example, GLUT may
+			create a window with a depth buffer even though <constant>GLUT_DEPTH</constant> is not specified.
+		</para>
+		<para>
+			The <function moreinfo="refentry">glutInitDisplayString</function> routine provides a more powerful way to select frame
+			buffer capabilities for GLUT windows.
+		</para>
+	</refsect1>
+	<refsect1 id="glutInitDisplayMode.3GLUT-glut_luminance_implementation_notes">
+		<title><constant>GLUT_LUMINANCE</constant> Implementation Notes</title>
+		<para>
+			<constant>GLUT_LUMINANCE</constant> is not supported on most OpenGL platforms.
+		</para>
+	</refsect1>
+	<refsect1 id="glutInitDisplayMode.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutInit</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutInitDisplayString</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

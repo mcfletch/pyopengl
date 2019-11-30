@@ -1,0 +1,122 @@
+<refentry id="glutLayerGet.3GLUT">
+	<refmeta id="glutLayerGet.3GLUT-meta">
+		<refentrytitle>glutLayerGet</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutLayerGet.3GLUT-name">
+		<refname>glutLayerGet</refname>
+		<refpurpose>retrieves GLUT state pertaining to the layers of the current window.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutLayerGet.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutLayerGet</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>info</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutLayerGet.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>info</parameter></term>
+				<listitem>
+					<simpara>
+						Name of device information to retrieve.
+					</simpara>
+					<variablelist>
+						<varlistentry>
+							<term><constant>GLUT_OVERLAY_POSSIBLE</constant></term>
+							<listitem>
+								<simpara>
+									Whether an overlay could be established for the current window given the current initial
+									display mode. If false, <function moreinfo="refentry">glutEstablishOverlay</function> will fail
+									with a fatal error if called.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_LAYER_IN_USE</constant></term>
+							<listitem>
+								<simpara>
+									Either <constant>GLUT_NORMAL</constant> or <constant>GLUT_OVERLAY</constant> depending on
+									whether the normal plane or overlay is the layer in use.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_HAS_OVERLAY</constant></term>
+							<listitem>
+								<simpara>
+									If the current window has an overlay established.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_TRANSPARENT_INDEX</constant></term>
+							<listitem>
+								<simpara>
+									The transparent color index of the overlay of the current window; negative one is returned if
+									no overlay is in use.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_NORMAL_DAMAGED</constant></term>
+							<listitem>
+								<simpara>
+									True if the normal plane of the current window has damaged (by window system activity) since
+									the last display callback was triggered. Calling <function
+									moreinfo="refentry">glutPostRedisplay</function> will not set this true.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_OVERLAY_DAMAGED</constant></term>
+							<listitem>
+								<simpara>
+									True if the overlay plane of the current window has damaged (by window system activity) since
+									the last display callback was triggered. Calling <function
+									moreinfo="refentry">glutPostRedisplay</function> or <function
+									moreinfo="refentry">glutPostOverlayRedisplay</function> will not set this true. Negative one is
+									returned if no overlay is in use.
+								</simpara>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutLayerGet.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutLayerGet</function> retrieves GLUT layer information for the current window represented by integers. The
+			<parameter>info</parameter> parameter determines what type of layer information to return.
+		</para>
+	</refsect1>
+	<refsect1 id="glutLayerGet.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutEstablishOverlay</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutShowOverlay</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSetColor</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

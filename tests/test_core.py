@@ -3,6 +3,7 @@ from __future__ import print_function
 import pygame, pygame.display
 import logging, time, traceback, unittest, os
 logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
 HERE = os.path.dirname( __file__ )
 import pickle
 try:
@@ -37,18 +38,16 @@ else:
 from OpenGL import error
 from OpenGL.GLU import *
 import OpenGL
-from OpenGL.extensions import alternate
+from OpenGL.extensions import alternate, GLQuerier
 from OpenGL.GL.framebufferobjects import *
 from OpenGL.GL.EXT.multi_draw_arrays import *
 from OpenGL.GL.ARB.imaging import *
 from OpenGL._bytes import _NULL_8_BYTE
 
-
 glMultiDrawElements = alternate( 
     glMultiDrawElementsEXT, glMultiDrawElements, 
 )
 import basetestcase
-    
 
 class TestCore( basetestcase.BaseTest ):
     def test_errors( self ):
@@ -170,7 +169,10 @@ class TestCore( basetestcase.BaseTest ):
         def test_vbo( self ):
             """Test utility vbo wrapper"""
             from OpenGL.arrays import vbo
-            assert vbo.get_implementation()
+            if not vbo.get_implementation():
+                return
+            if not glVertexPointerd or not glDrawElements:
+                return
             points = array( [
                 [0,0,0],
                 [0,1,0],
@@ -208,13 +210,42 @@ class TestCore( basetestcase.BaseTest ):
             # errors if called explicitly
             d.delete()
         def test_glgetbufferparameter(self):
-            from OpenGL.arrays import vbo
+            if not glGenBuffers or not glGenVertexArrays:
+                return None
             buffer = glGenBuffers(1)
             vertex_array = glGenVertexArrays(1,buffer)
             glBindBuffer(GL_ARRAY_BUFFER, buffer)
             try:
                 mapped = glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_MAPPED)
                 assert mapped == (GL_FALSE if OpenGL.SIZE_1_ARRAY_UNPACK else [GL_FALSE]), mapped
+            finally:
+                glBindBuffer(GL_ARRAY_BUFFER, 0)
+                glDeleteVertexArrays(1,vertex_array)
+                glDeleteBuffers(1,buffer)
+    def test_glbufferparameter_create(self):
+        if not glGenBuffers or not glGenVertexArrays:
+            return None
+        for create in [True,False]:
+            buffer = glGenBuffers(1)
+            vertex_array = glGenVertexArrays(1,buffer)
+            glBindBuffer(GL_ARRAY_BUFFER, buffer)
+            try:
+                for param, expected in [
+                    (GL_BUFFER_SIZE,0),
+                    (GL_BUFFER_MAPPED,GL_FALSE),
+                    (GL_BUFFER_STORAGE_FLAGS,0),
+                    (GL_BUFFER_USAGE,GL_STATIC_DRAW),
+                ]:
+                    if create:
+                        mapped = GLint(-1)
+                        glGetBufferParameteriv(GL_ARRAY_BUFFER, param, mapped)
+                        assert mapped.value == expected, (param, mapped, expected)
+                    else:
+                        mapped = glGetBufferParameteriv(GL_ARRAY_BUFFER, param)
+                        if param != GL_BUFFER_USAGE or OpenGL.SIZE_1_ARRAY_UNPACK:
+                            assert mapped == expected, (param, mapped, expected)
+                        else:
+                            assert mapped[0] == expected, (param, mapped[0], expected)
             finally:
                 glBindBuffer(GL_ARRAY_BUFFER, 0)
                 glDeleteVertexArrays(1,vertex_array)
@@ -328,6 +359,8 @@ class TestCore( basetestcase.BaseTest ):
                 print('No multi_draw_arrays support')
     def test_glDrawBuffers_list( self ):
         """Test that glDrawBuffers with list argument doesn't crash"""
+        if not glDrawBuffers:
+            return
         a_type = GLenum*2
         args = a_type(
             GL_COLOR_ATTACHMENT0,
@@ -339,6 +372,10 @@ class TestCore( basetestcase.BaseTest ):
             assert err.err == GL_INVALID_OPERATION, err
     def test_glDrawBuffers_list_valid( self ):
         """Test that glDrawBuffers with list argument where value is set"""
+        if not glGenFramebuffers:
+            return
+        if not glDrawBuffers:
+            return
         previous = glGetIntegerv( GL_READ_BUFFER )
         fbo = glGenFramebuffers(1)
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
@@ -394,12 +431,14 @@ class TestCore( basetestcase.BaseTest ):
     
     def test_lookupint( self ):
         from OpenGL.raw.GL import _lookupint 
+        if GLQuerier.pullVersion() < [2]:
+            return
         l = _lookupint.LookupInt( GL_NUM_COMPRESSED_TEXTURE_FORMATS, GLint )
         result = int(l)
         if not os.environ.get('TRAVIS'):
             assert result, "No compressed textures on this platform? that seems unlikely"
         else:
-            assert not result, "Travis xvfb doesn't normally have compressed textures, possible upgrade?"
+            "Travis xvfb doesn't normally have compressed textures, possible upgrade?"
     
     def test_glget( self ):
         """Test that we can run glGet... on registered constants without crashing..."""
@@ -484,6 +523,8 @@ class TestCore( basetestcase.BaseTest ):
     
     
     def test_orinput_handling( self ):
+        if not glGenVertexArrays:
+            return None
         x = glGenVertexArrays(1)
         x = int(x) # check that we got x as an integer-compatible value
         x2 = GLuint()
@@ -499,9 +540,13 @@ class TestCore( basetestcase.BaseTest ):
     
     
     def test_get_read_fb_binding( self ):
+        if GLQuerier.pullVersion() < [3]:
+            return
         glGetInteger(GL_READ_FRAMEBUFFER_BINDING)
     
     def test_shader_compile_string( self ):
+        if not glCreateShader:
+            return None
         shader = glCreateShader(GL_VERTEX_SHADER)
         
         def glsl_version():
@@ -524,6 +569,8 @@ class TestCore( basetestcase.BaseTest ):
             assert False, """Failed to compile"""
     
     def test_gen_framebuffers_twice( self ):
+        if not glGenFramebuffersEXT:
+            return
         glGenFramebuffersEXT(1)
         f1 = glGenFramebuffersEXT(1)
         f2 = glGenFramebuffersEXT(1)

@@ -1,0 +1,429 @@
+<refentry id="glutInitDisplayString.3GLUT">
+	<refmeta id="glutInitDisplayString.3GLUT-meta">
+		<refentrytitle>glutInitDisplayString</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutInitDisplayString.3GLUT-name">
+		<refname>glutInitDisplayString</refname>
+		<refpurpose>sets the initial display mode via a string.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutInitDisplayString.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>void&nbsp;<function>glutInitDisplayString</function></funcdef>
+				<paramdef>char&nbsp;*<parameter>string</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutInitDisplayString.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>string</parameter></term>
+				<listitem>
+					<simpara>
+						Display mode description string, see below.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutInitDisplayString.3GLUT-description">
+		<title>Description</title>
+		<para>
+			The initial display mode description string is used when creating top-level windows, subwindows, and overlays to
+			determine the OpenGL display mode for the to-be-created window or overlay.
+		</para>
+		<para>
+			The string is a list of zero or more capability descriptions separated by spaces and tabs. Each capability description
+			is a capability name that is optionally followed by a comparator and a numeric value. For example, &quot;double&quot;
+			and &quot;depth&gt;=12&quot; are both valid criteria.
+		</para>
+		<para>
+			The capability descriptions are translated into a set of criteria used to select the appropriate frame buffer
+			configuration.
+		</para>
+		<para>
+			The criteria are matched in strict left to right order of precdence. That is, the first specified criteria (leftmost)
+			takes precedence over the later criteria for non-exact criteria (greater than, less than, etc. comparators). Exact
+			criteria (equal, not equal compartors) must match exactly so precedence is not relevant.
+		</para>
+		<para>
+			The numeric value is an integer that is parsed according to ANSI C's <function moreinfo="refentry">strtol(str, strptr,
+			0)</function> behavior. This means that decimal, octal (leading 0), and hexidecimal values (leading 0x) are accepeted.
+		</para>
+		<para>
+			The valid compartors are:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><emphasis role="bold">=</emphasis></term>
+				<listitem>
+					<simpara>
+						Equal.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">!=</emphasis></term>
+				<listitem>
+					<simpara>
+						Not equal.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">&lt;</emphasis></term>
+				<listitem>
+					<simpara>
+						Less than and preferring larger difference (the least is best).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">&gt;</emphasis></term>
+				<listitem>
+					<simpara>
+						Greater than and preferring larger differences (the most is best).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">&lt;=</emphasis></term>
+				<listitem>
+					<simpara>
+						Less than or equal and preferring larger difference (the least is best).
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">&gt;=</emphasis></term>
+				<listitem>
+					<simpara>
+						Greater than or equal and preferring more instead of less. This comparator is useful for allocating
+						resources like color precsion or depth buffer precision where the maximum precison is generally preferred.
+						Contrast with the tilde (~) comprator.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">~</emphasis></term>
+				<listitem>
+					<simpara>
+						Greater than or equal but preferring less instead of more. This compartor is useful for allocating
+						resources such as stencil bits or auxillary color buffers where you would rather not over allocate. When
+						the compartor and numeric value are not specified, each capability name has a different default (one
+						default is to require a a compartor and numeric value).
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			The valid capability names are:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term><emphasis role="bold">alpha</emphasis></term>
+				<listitem>
+					<simpara>
+						Alpha color buffer precision in bits. Default is &quot;&gt;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">acca</emphasis></term>
+				<listitem>
+					<simpara>
+						Red, green, blue, and alpha accumulation buffer precision in bits. Default is &quot;&gt;=1&quot; for red,
+						green, blue, and alpha capabilities.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">acc</emphasis></term>
+				<listitem>
+					<simpara>
+						Red, green, and green accumulation buffer precision in bits and zero bits of alpha accumulation buffer
+						precision. Default is &quot;&gt;=1&quot; for red, green, and blue capabilities, and &quot;~0&quot; for the
+						alpha capability.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">blue</emphasis></term>
+				<listitem>
+					<simpara>
+						Blue color buffer precision in bits. Default is &quot;&gt;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">buffer</emphasis></term>
+				<listitem>
+					<simpara>
+						Number of bits in the color index color buffer. Default is &quot;&gt;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">conformant</emphasis></term>
+				<listitem>
+					<simpara>
+						Boolean indicating if the frame buffer configuration is conformant or not. Conformance information is based
+						on GLX's EXT_visual_rating extension if supported. If the extension is not supported, all visuals are
+						assumed conformat. Default is &quot;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">depth</emphasis></term>
+				<listitem>
+					<simpara>
+						Number of bits of precsion in the depth buffer. Default is &quot;&gt;=12&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">double</emphasis></term>
+				<listitem>
+					<simpara>
+						Boolean indicating if the color buffer is double buffered. Default is &quot;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">green</emphasis></term>
+				<listitem>
+					<simpara>
+						Green color buffer precision in bits. Default is &quot;&gt;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">index</emphasis></term>
+				<listitem>
+					<simpara>
+						Boolean if the color model is color index or not. True is color index. Default is &quot;&gt;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">num</emphasis></term>
+				<listitem>
+					<simpara>
+						A special capability name indicating where the value represents the Nth frame buffer configuration matching
+						the description string. When not specified, glutInitDisplayString also returns the first (best matching)
+						configuration. num requires a compartor and numeric value.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">red</emphasis></term>
+				<listitem>
+					<simpara>
+						Red color buffer precision in bits. Default is &quot;&gt;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">rgba</emphasis></term>
+				<listitem>
+					<simpara>
+						Number of bits of red, green, blue, and alpha in the RGBA color buffer. Default is &quot;&gt;=1&quot; for
+						red, green, blue, and alpha capabilities, and &quot;=1&quot; for the RGBA color model capability.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">rgb</emphasis></term>
+				<listitem>
+					<simpara>
+						Number of bits of red, green, and blue in the RGBA color buffer and zero bits of alpha color buffer
+						precision. Default is &quot;&gt;=1&quot; for the red, green, and blue capabilities, and &quot;~0&quot; for
+						alpha capability, and &quot;=1&quot; for the RGBA color model capability.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">luminance</emphasis></term>
+				<listitem>
+					<simpara>
+						Number of bits of red in the RGBA and zero bits of green, blue (alpha not specified) of color buffer
+						precision. Default is &quot;&gt;=1&quot; for the red capabilitis, and &quot;=0&quot; for the green and blue
+						capabilities, and &quot;=1&quot; for the RGBA color model capability, and, for X11, &quot;=1&quot; for the
+						StaticGray (&quot;xstaticgray&quot;) capability.
+					</simpara>
+					<simpara>
+						SGI InfiniteReality (and other future machines) support a 16-bit luminance (single channel) display mode
+						(an additional 16-bit alpha channel can also be requested). The red channel maps to gray scale and green
+						and blue channels are not available. A 16-bit precision luminance display mode is often appropriate for
+						medical imaging applications. Do not expect many machines to support extended precision luminance display
+						modes.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">stencil</emphasis></term>
+				<listitem>
+					<simpara>
+						Number of bits in the stencil buffer.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">single</emphasis></term>
+				<listitem>
+					<simpara>
+						Boolean indicate the color buffer is single buffered. Double buffer capability &quot;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">stereo</emphasis></term>
+				<listitem>
+					<simpara>
+						Boolean indicating the color buffer is supports OpenGL-style stereo. Default is &quot;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">samples</emphasis></term>
+				<listitem>
+					<simpara>
+						Indicates the number of multisamples to use based on GLX's SGIS_multisample extension (for antialiasing).
+						Default is &quot;&lt;=4&quot;. This default means that a GLUT application can request multipsampling if
+						available by simply specifying &quot;samples&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">slow</emphasis></term>
+				<listitem>
+					<simpara>
+						Boolean indicating if the frame buffer configuration is slow or not. For the X11 implementation of GLUT,
+						slowness information is based on GLX's EXT_visual_rating extension if supported. If the EXT_visual_rating
+						extension is not supported, all visuals are assumed fast. For the Win32 implementation of GLUT, slowness is
+						based on if the underlying Pixel Format Descriptor (PFD) is marked &quot;generic&quot; and not
+						&quot;accelerated&quot;. This implies that Microsoft's relatively slow software OpenGL implementation is
+						used by this PFD. Note that slowness is a relative designation relative to other frame buffer
+						configurations available. The intent of the slow capability is to help programs avoid frame buffer
+						configurations that are slower (but perhaps higher precision) for the current machine. Default is
+						&quot;&gt;=0&quot; if not comparator and numeric value are provided. This default means that slow visuals
+						are used in preference to fast visuals, but fast visuals will still be allowed.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">win32pfd</emphasis></term>
+				<listitem>
+					<simpara>
+						Only recognized on GLUT implementations for Win32, this capability name matches the Win32 Pixel Format
+						Descriptor by numer. win32pfd requires a compartor and numeric value.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">xvisual</emphasis></term>
+				<listitem>
+					<simpara>
+						Only recongized on GLUT implementations for the X Window System, this capability name matches the X visual
+						ID by number. xvisual requires a compartor and numeric value.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">xstaticgray</emphasis></term>
+				<listitem>
+					<simpara>
+						Only recongized on GLUT implementations for the X Window System, boolean indicating if the frame buffer
+						configuration's X visual is of type StaticGray. Default is &quot;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">xgrayscale</emphasis></term>
+				<listitem>
+					<simpara>
+						Only recongized on GLUT implementations for the X Window System, boolean indicating if the frame buffer
+						configuration's X visual is of type GrayScale. Default is &quot;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">xstaticcolor</emphasis></term>
+				<listitem>
+					<simpara>
+						Only recongized on GLUT implementations for the X Window System, boolean indicating if the frame buffer
+						configuration's X visual is of type StaticColor. Default is &quot;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">xpseudocolor</emphasis></term>
+				<listitem>
+					<simpara>
+						Only recongized on GLUT implementations for the X Window System, boolean indicating if the frame buffer
+						configuration's X visual is of type PsuedoColor. Default is &quot;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">xtruecolor</emphasis></term>
+				<listitem>
+					<simpara>
+						Only recongized on GLUT implementations for the X Window System, boolean indicating if the frame buffer
+						configuration's X visual is of type TrueColor. Default is &quot;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term><emphasis role="bold">xdirectcolor</emphasis></term>
+				<listitem>
+					<simpara>
+						Only recongized on GLUT implementations for the X Window System, boolean indicating if the frame buffer
+						configuration's X visual is of type DirectColor. Default is &quot;=1&quot;.
+					</simpara>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			Unspecifed capability descriptions will result in unspecified criteria being generated. These unspecified criteria help
+			<function>glutInitDisplayString</function> behave sensibly with terse display mode description strings. For example, if
+			no &quot;slow&quot; capability description is provided, fast frame buffer configurations will be choosen in preference
+			to slow frame buffer configurations, but slow frame buffer configurations will still be choosen if no better fast frame
+			buffer configuration is available.
+		</para>
+	</refsect1>
+	<refsect1 id="glutInitDisplayString.3GLUT-example">
+		<title>Example</title>
+		<para>
+			Here is an examples using <function>glutInitDisplayString</function>:
+		</para>
+		<programlisting>glutInitDisplayString(&quot;stencil~2 rgb double depth&gt;=16 samples&quot;);</programlisting>
+		<para>
+			The above call requests a window with an RGBA color model (but requesting no bits of alpha), a depth buffer with at
+			least 16 bits of precsion but preferring more, mutlisampling if available, and at least 2 bits of stencil (favoring
+			less stencil to more as long as 2 bits are available).
+		</para>
+	</refsect1>
+	<refsect1 id="glutInitDisplayString.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutInit</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutCreateWindow</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutInitDisplayMode</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

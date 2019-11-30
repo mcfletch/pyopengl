@@ -14,12 +14,12 @@ Overview (from the spec)
 	implementation-dependent, and this extension provides no guarantee over
 	how individual shader invocations are assigned to such sets.  In
 	particular, the set of shader invocations has no necessary relationship
-	with the compute shader local work group -- a pair of shader invocations
-	in a single compute shader work group may end up in different sets used by
+	with the compute shader workgroup -- a pair of shader invocations
+	in a single compute shader workgroup may end up in different sets used by
 	these built-ins.
 	
 	Compute shaders operate on an explicitly specified group of threads (a
-	local work group), but many implementations of OpenGL ES 3.0 will even group
+	workgroup), but many implementations of OpenGL ES 3.0 will even group
 	non-compute shader invocations and execute them in a SIMD fashion.  When
 	executing code like
 	

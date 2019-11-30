@@ -210,7 +210,7 @@ class TestCoreDatatype(basetestcase.BaseTest):
         if sys.version_info[:2] >= (2,7):
             structures.append(
                 # on Python 3.4 we do *not* get the (3) prefix :(
-                ((GLint * 3)( 1,2,3 ),12,4,False,1,[b'(3)<i',b'(3)<l',b'<i'],[3],None),
+                ((GLint * 3)( 1,2,3 ),12,4,False,1,[b'(3)<i',b'(3)<l',b'<i',b'<l'],[3],None),
             )
         
         if sys.version_info[:2] >= (3,0):

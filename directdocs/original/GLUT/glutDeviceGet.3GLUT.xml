@@ -1,0 +1,246 @@
+<refentry id="glutDeviceGet.3GLUT">
+	<refmeta id="glutDeviceGet.3GLUT-meta">
+		<refentrytitle>glutDeviceGet</refentrytitle>
+		<manvolnum>3GLUT</manvolnum>
+	</refmeta>
+	<refnamediv id="glutDeviceGet.3GLUT-name">
+		<refname>glutDeviceGet</refname>
+		<refpurpose>retrieves GLUT device information represented by integers.</refpurpose>
+	</refnamediv>
+	<refsynopsisdiv id="glutDeviceGet.3GLUT-c_spec">
+		<title>C Specification</title>
+		<funcsynopsis>
+			<funcprototype>
+				<funcdef>int&nbsp;<function>glutDeviceGet</function></funcdef>
+				<paramdef>GLenum&nbsp;<parameter>info</parameter></paramdef>
+			</funcprototype>
+		</funcsynopsis>
+	</refsynopsisdiv>
+	<refsect1 id="glutDeviceGet.3GLUT-parameters">
+		<title>Parameters</title>
+		<variablelist>
+			<varlistentry>
+				<term><parameter>info</parameter></term>
+				<listitem>
+					<simpara>
+						Name of device information to retrieve.
+					</simpara>
+					<variablelist>
+						<varlistentry>
+							<term><constant>GLUT_HAS_KEYBOARD</constant></term>
+							<listitem>
+								<simpara>
+									Non-zero if a keyboard is available; zero if not available. For most GLUT implementations, a
+									keyboard can be assumed.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_HAS_MOUSE</constant></term>
+							<listitem>
+								<simpara>
+									Non-zero if a mouse is available; zero if not available. For most GLUT implementations, a
+									keyboard can be assumed.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_HAS_SPACEBALL</constant></term>
+							<listitem>
+								<simpara>
+									Non-zero if a Spaceball is available; zero if not available.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_HAS_DIAL_AND_BUTTON_BOX</constant></term>
+							<listitem>
+								<simpara>
+									Non-zero if a dial &amp; button box is available; zero if not available.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_HAS_TABLET</constant></term>
+							<listitem>
+								<simpara>
+									Non-zero if a tablet is available; zero if not available.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_NUM_MOUSE_BUTTONS</constant></term>
+							<listitem>
+								<simpara>
+									Number of buttons supported by the mouse. If no mouse is supported, zero is returned.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_NUM_SPACEBALL_BUTTONS</constant></term>
+							<listitem>
+								<simpara>
+									Number of buttons supported by the Spaceball. If no Spaceball is supported, zero is returned.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_NUM_BUTTON_BOX_BUTTONS</constant></term>
+							<listitem>
+								<simpara>
+									Number of buttons supported by the dial &amp; button box device. If no dials &amp; button box
+									device is supported, zero is returned.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_NUM_DIALS</constant></term>
+							<listitem>
+								<simpara>
+									Number of dials supported by the dial &amp; button box device. If no dials &amp; button box
+									device is supported, zero is returned.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_NUM_TABLET_BUTTONS</constant></term>
+							<listitem>
+								<simpara>
+									Number of buttons supported by the tablet. If no tablet is supported, zero is returned.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_DEVICE_IGNORE_KEY_REPEAT</constant></term>
+							<listitem>
+								<simpara>
+									Returns true if the current window's auto repeated keys are ignored. This state is controlled
+									by <function moreinfo="refentry">glutIgnoreKeyRepeat</function>.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_DEVICE_KEY_REPEAT</constant></term>
+							<listitem>
+								<simpara>
+									The window system's global key repeat state. Returns either
+									<constant>GLUT_KEY_REPEAT_OFF</constant>, <constant>GLUT_KEY_REPEAT_ON</constant>, or
+									<constant>GLUT_KEY_REPEAT_DEFAULT</constant>. This will not necessarily return the value last
+									passed to <function moreinfo="refentry">glutSetKeyRepeat</function>.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_JOYSTICK_POLL_RATE</constant></term>
+							<listitem>
+								<simpara>
+									Returns the current window's joystick poll rate as set by <function
+									moreinfo="refentry">glutJoystickFunc</function>. If no joystick is supported, the poll rate
+									will always be zero. The joystick poll rate also returns zero if the poll rate last specified
+									to <function moreinfo="refentry">glutJoystickFunc</function> is negative or a
+									<constant>NULL</constant> callback was registered.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_HAS_JOYSTICK</constant></term>
+							<listitem>
+								<simpara>
+									Non-zero if a joystick is available; zero if not available.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_JOYSTICK_BUTTONS</constant></term>
+							<listitem>
+								<simpara>
+									Number of buttons supported by the joystick. If no joystick is supported, zero is returned.
+								</simpara>
+							</listitem>
+						</varlistentry>
+						<varlistentry>
+							<term><constant>GLUT_JOYSTICK_AXES</constant></term>
+							<listitem>
+								<simpara>
+									Number of axes supported by the joystick. If no joystick is supposrted, zero is returned.
+								</simpara>
+							</listitem>
+						</varlistentry>
+					</variablelist>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</refsect1>
+	<refsect1 id="glutDeviceGet.3GLUT-description">
+		<title>Description</title>
+		<para>
+			<function>glutDeviceGet</function> retrieves GLUT device information represented by integers. The info parameter
+			determines what type of device information to return. Requesting device information for an invalid GLUT device
+			information name returns negative one.
+		</para>
+	</refsect1>
+	<refsect1 id="glutDeviceGet.3GLUT-x_implementation_notes">
+		<title>X Implementation Notes</title>
+		<para>
+			The current implementation uses to X Input extension to regonize SGI's Spaceball, tablet, and dial and button box
+			devices.
+		</para>
+	</refsect1>
+	<refsect1 id="glutDeviceGet.3GLUT-win32_implementation_notes">
+		<title>Win32 Implementation Notes</title>
+		<para>
+			The <constant>GLUT_DEVICE_KEY_REPEAT</constant> always returns <constant>GLUT_KEY_REPEAT_ON</constant>.
+		</para>
+	</refsect1>
+	<refsect1 id="glutDeviceGet.3GLUT-see_also">
+		<title>See Also</title>
+		<para>
+			<simplelist type="inline">
+				<member><citerefentry>
+					<refentrytitle>glutGet</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutKeyboardFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutMouseFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSpaceballMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutTabletMotionFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutTabletButtonFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutDialsFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutButtonBoxFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutIgnoreKeyRepeat</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutSetKeyRepeat</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+				<member><citerefentry>
+					<refentrytitle>glutJoystickFunc</refentrytitle>
+					<manvolnum>3GLUT</manvolnum>
+				</citerefentry></member>
+			</simplelist>
+		</para>
+	</refsect1>
+</refentry>

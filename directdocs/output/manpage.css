@@ -1,0 +1,77 @@
+.purpose {
+    padding: .5em;
+    border: thin lightgrey solid;
+}
+.signature {
+    margin-left: 2em;
+}
+.py-signature {
+    margin-left: 1em;
+    color: darkgreen;
+}
+div.simpara, div.para {
+    margin: .25em;
+}
+span.parameter {
+    color: blue;
+}
+
+.c-function {
+    color: darkgrey;
+}
+
+.pydoc {
+    border: solid lightgrey thin;
+    background: lightyellow;
+    color: darkgreen;
+    font-size: 80%;
+    margin-left: 1em;
+    margin-top: 0;
+    margin-bottom: .25em;
+}
+.sample-key {
+    color: darkgrey;
+}
+.py-sample {
+    margin-left: 1.5em;
+}
+.deprecated, .deprecation-warning {
+    background-color: #fff0f0;
+}
+.deprecation-description {
+    margin-left: 2em;
+}
+.programlisting {
+    white-space: pre;
+}
+.metadata {
+    margin: 2em;
+    color: grey;
+    font-size: 50%;
+}
+.code, .constant {
+    display: inline;
+    font-family: monospace;
+    font-size: 110%;
+}
+.constant {
+    color: #007700;
+}
+
+.doc-string {
+    margin-left: 1em;
+    color: #707070;
+}
+.property:before {
+    content: '@';
+}
+.property {
+    margin-left: 1em;
+    color: #307030;
+}
+.py-function:before {
+    content: 'def ';
+}
+.float-left {
+    float: left;
+}
