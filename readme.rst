@@ -1,4 +1,4 @@
-PyOpenGL and PyOpenGL_accelerate
+PyOpenGL and PyOpenGL_Accelerate
 =================================
 
 PyOpenGL is normally distributed via PyPI using standard pip::
@@ -70,3 +70,7 @@ numpy. Some will have accelerate, and some will not.
 .. image:: https://img.shields.io/pypi/v/pyopengl.svg
     :target: https://pypi.python.org/pypi/pyopengl
     :alt: Latest PyPI Version
+
+.. image:: https://img.shields.io/pypi/dm/pyopengl.svg
+    :target: https://pypi.python.org/pypi/pyopengl
+    :alt: Monthly download counter
