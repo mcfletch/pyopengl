@@ -6,5 +6,5 @@ wrapper mechanism.  The source code is part of the
 PyOpenGL package and is built via the setupaccel.py
 script in the top level of the PyOpenGL source package.
 """
-__version__ = '3.1.3rc1'
-__version_tuple__ = (3,1,3)
+__version__ = '3.1.4'
+__version_tuple__ = (3,1,4)
