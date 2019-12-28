@@ -29,7 +29,9 @@ if LateBind is None:
 
             return final callable
             """
-
+        def __nonzero__(self):
+            """Resolve our final call and check for empty/nonzero on it"""
+            return bool(self.getFinalCall())
         def __call__( self, *args, **named ):
             """Call self._finalCall, calling finalise() first if not already called
 
