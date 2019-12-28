@@ -1,3 +1,4 @@
 include src/*.pyx
 include src/*.c
+include OpenGL_accelerate/*.pxd
 include license.txt
