@@ -248,6 +248,12 @@ def loadData():
             projectName = '{GPL3} OpenGL-Programmable',
             urlTemplate = BITBUCKET,
         ),
+        SampleSource(
+            os.path.join(SAMPLES,'pyrender'),
+            baseURL='https://github.com/mmatl/pyrender',
+            projectName='Pyrender',
+            urlTemplate=GITHUB,
+        )
     ]:
         generate_tokens_dir( s.localDir, processFunction = s.processEntry)
     result = SampleSource.nameMapping

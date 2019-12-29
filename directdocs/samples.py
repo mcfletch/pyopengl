@@ -181,7 +181,11 @@ checkouts = [
     HgSource(
         'https://bitbucket.org/rndblnch/opengl-programmable/',
         dirname = 'programmable',
-    )
+    ),
+    GITSource(
+        'https://github.com/mmatl/pyrender.git',
+        dirname='pyrender',
+    ),
     # pymol # not pyopengl AFAICS
     # {LGPL} mirra # no online view of code AFAICS
     # soccerbots http://soccerbots.googlecode.com/svn/
