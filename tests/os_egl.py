@@ -1,13 +1,15 @@
 from __future__ import print_function
-import os
+import os, logging
+log = logging.getLogger( __name__ )
 if not os.environ.get( 'PYOPENGL_PLATFORM' ):
     os.environ['PYOPENGL_PLATFORM'] = 'egl'
+if 'DISPLAY' in os.environ:
+    del os.environ['DISPLAY']
 import logging, contextlib
 from functools import wraps
 from OpenGL.GL import *
 from OpenGL.EGL import *
 from OpenGL import arrays
-log = logging.getLogger( __name__ )
 
 API_MAP = {
     EGL_OPENGL_BIT:EGL_OPENGL_API,
