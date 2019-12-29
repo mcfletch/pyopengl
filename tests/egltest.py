@@ -1,15 +1,15 @@
 """EGL Pygame test framework"""
 from __future__ import print_function
+import os
+if not os.environ.get( 'PYOPENGL_PLATFORM' ):
+    os.environ['PYOPENGL_PLATFORM'] = 'egl'
 import ctypes
 import pygame.display 
 import pygame 
-import os 
 import logging
 import OpenGL
 from functools import wraps
 
-if not os.environ.get( 'PYOPENGL_PLATFORM' ):
-    os.environ['PYOPENGL_PLATFORM'] = 'egl'
 if os.environ.get( 'TEST_NO_ACCELERATE' ):
     OpenGL.USE_ACCELERATE = False
 
