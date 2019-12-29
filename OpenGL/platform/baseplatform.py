@@ -379,7 +379,7 @@ class _NullFunctionPointer( object ):
     resolved = False
     def __nonzero__( self ):
         """Make this object appear to be NULL"""
-        if self.extension and not self.resolved:
+        if (not self.resolved) and (self.extension or self.force_extension):
             self.load()
         return self.resolved
     __bool__ = __nonzero__
