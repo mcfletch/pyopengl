@@ -9,3 +9,4 @@ accelerate/dist
 *.so
 mmap-test-data.dat
 .tox
+tests/output.ppm
