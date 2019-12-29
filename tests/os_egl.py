@@ -85,7 +85,7 @@ def egl_context(
     if ctx == EGL_NO_CONTEXT:
         raise RuntimeError( 'Unable to create context' )
     eglMakeCurrent( display, surface, surface, ctx )
-    yield ctx,surface 
+    yield display,ctx,surface 
     content = glReadPixelsub(0,0, width, height, GL_RGB, outputType=None)
     if output:
         write_ppm(content, output)
@@ -93,9 +93,10 @@ def egl_context(
 
 def main():
     with egl_context() as setup:
-        ctx,surface = setup
+        display,ctx,surface = setup
         glClearColor(1.0,1.0,1.0,1.0)
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
