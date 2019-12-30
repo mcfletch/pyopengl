@@ -23,22 +23,6 @@ API_MAP = {
 }
 
 
-def write_ppm(buf, filename):
-    f = open(filename, "w")
-    if f:
-        h, w, c = buf.shape
-        print("P3", file=f)
-        print("# ascii ppm file created by os_egl", file=f)
-        print("%i %i" % (w, h), file=f)
-        print("255", file=f)
-        for y in range(h - 1, -1, -1):
-            for x in range(w):
-                pixel = buf[y, x]
-                l = " %3d %3d %3d" % (pixel[0], pixel[1], pixel[2])
-                f.write(l)
-            f.write("\n")
-
-
 def platformDisplay(device):
     """Get platform display from device specifier
     
@@ -88,7 +72,7 @@ def egl_context(
     output="output.ppm",
 ):
     """Setup a context for rendering"""
-    major, minor = GLint(), GLint()
+    major, minor = EGLint(), EGLint()
     created_device = platform_surface = surface = None
     if device is None:
         display = eglGetDisplay(EGL_DEFAULT_DISPLAY)
@@ -101,10 +85,13 @@ def egl_context(
         try:
             eglInitialize(display, major, minor)
         except GLError as err:
-            err.err = debug.eglErrorName(err.err)
             log.warning("eglInitilise failure on %s: %s", display, err.err)
             raise NoEGLSupport(display)
-        num_configs = GLint()
+        log.debug(
+            "Available configs:\n%s",
+            debug.format_debug_configs(debug.debug_configs(display)),
+        )
+        num_configs = EGLint()
         configs = (EGLConfig * 1)()
         local_attributes = list(attributes[:])
         if pbuffer:
@@ -120,65 +107,51 @@ def egl_context(
         )
         log.debug("Attributes: %s", local_attributes)
         local_attributes = arrays.GLintArray.asArray(local_attributes)
-        try:
-            success = eglChooseConfig(
-                display, local_attributes, configs, 1, num_configs
+        success = eglChooseConfig(display, local_attributes, configs, 1, num_configs)
+        if not success:
+            raise RuntimeError("Unable to complete config filtering")
+        if not num_configs:
+            raise RuntimeError(
+                "No compatible configs found on %s" % (device or "default")
             )
-            if not success:
-                raise RuntimeError("Unable to complete config filtering")
-            if not num_configs:
-                configs = (EGLConfig * 10)()
-                eglGetConfigs(display, configs, 10, num_configs)
-                if num_configs.value:
-                    for config in configs[: num_configs.value]:
-                        log.warning(
-                            "Unused config: %s",
-                            pprint.pformat(debug.debug_config(display, config)),
-                        )
-                raise RuntimeError(
-                    "No compatible configs found on %s" % (device or "default")
-                )
-            # for config in configs[:num_configs.value]:
-            #     log.debug("Config: %s",pprint.pformat(debug.debug_config(display,config)))
-            config = configs[0]
-            log.debug(
-                "Selecting config: %s",
-                pprint.pformat(debug.debug_config(display, config)),
-            )
-            surface_attributes = [
-                EGL_WIDTH,
+        # for config in configs[:num_configs.value]:
+        #     log.debug("Config: %s",pprint.pformat(debug.debug_config(display,config)))
+        config = configs[0]
+        log.debug(
+            "Selected config: %s",
+            debug.format_debug_configs(
+                debug.debug_configs(display, configs=list(configs))
+            ),
+        )
+        surface_attributes = [
+            EGL_WIDTH,
+            width,
+            EGL_HEIGHT,
+            height,
+            EGL_NONE,
+        ]
+        if pbuffer:
+            surface = eglCreatePbufferSurface(display, configs[0], surface_attributes,)
+        else:
+            visual = EGLint()
+            eglGetConfigAttrib(display, configs[0], EGL_NATIVE_VISUAL_ID, visual)
+            log.debug("Native visual id %s", visual.value)
+            platform_surface = gbmdevice.create_surface(
+                created_device,
                 width,
-                EGL_HEIGHT,
                 height,
-                EGL_NONE,
-            ]
-            if pbuffer:
-                surface = eglCreatePbufferSurface(
-                    display, configs[0], surface_attributes,
-                )
-            else:
-                visual = EGLint()
-                eglGetConfigAttrib(display, configs[0], EGL_NATIVE_VISUAL_ID, visual)
-                log.debug("Native visual id %s", visual.value)
-                platform_surface = gbmdevice.create_surface(
-                    created_device,
-                    width,
-                    height,
-                    format=visual.value,
-                    flags=gbmdevice.GBM_BO_USE_RENDERING,
-                )
-                log.debug("Native surface created on %s", device)
-                if not platform_surface:
-                    raise RuntimeError("Unable to allocate a gbm surface")
-                log.debug("Creating GBM platform window surface")
-                surface = eglCreatePlatformWindowSurface(
-                    display, configs[0], platform_surface, None
-                )
-                if surface == EGL_NO_SURFACE:
-                    raise RuntimeError("Platform window surface creation failure")
-        except GLError as err:
-            err.err = debug.eglErrorName(err.err)
-            raise
+                format=visual.value,
+                flags=gbmdevice.GBM_BO_USE_RENDERING,
+            )
+            log.debug("Native surface created on %s", device)
+            if not platform_surface:
+                raise RuntimeError("Unable to allocate a gbm surface")
+            log.debug("Creating GBM platform window surface")
+            surface = eglCreatePlatformWindowSurface(
+                display, configs[0], platform_surface, None
+            )
+            if surface == EGL_NO_SURFACE:
+                raise RuntimeError("Platform window surface creation failure")
         log.debug("Binding api %s", api)
         eglBindAPI(API_MAP[api])
         ctx = eglCreateContext(display, configs[0], EGL_NO_CONTEXT, None)
@@ -196,7 +169,7 @@ def egl_context(
         if output:
             log.debug("Doing readpixels for writing buffer")
             content = glReadPixelsub(0, 0, width, height, GL_RGB, outputType=None,)
-            write_ppm(content, output)
+            debug.write_ppm(content, output)
             # glFinish()
     finally:
         if display:
