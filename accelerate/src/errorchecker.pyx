@@ -12,13 +12,15 @@ cdef class _ErrorChecker:
     cdef public int checkContext
     cdef public object _isValid
     cdef public object _getErrors
+    cdef public object _errorClass
     cdef public int _noErrorResult 
     
-    def __init__( self, platform, baseOperation, noErrorResult=0 ):
+    def __init__( self, platform, baseOperation, noErrorResult=0, errorClass=None ):
         """Initialize from a platform module/reference"""
         self._isValid = platform.CurrentContextIsValid
         self._getErrors = baseOperation
         self._noErrorResult = noErrorResult
+        self._errorClass = errorClass
         
         self.doChecks = bool( _configflags.ERROR_CHECKING and self._getErrors )
         self.checkContext = _configflags.CONTEXT_CHECKING
@@ -49,8 +51,11 @@ cdef class _ErrorChecker:
                     return 
             err = self._getErrors()
             if err != self._noErrorResult:
-                from OpenGL.error import GLError
-                raise GLError(
+                if self._errorClass is None:
+                    # circular import here otherwise
+                    from OpenGL.error import GLError
+                    self._errorClass = GLError
+                raise self._errorClass(
                     err,
                     result,
                     cArguments = cArguments,
