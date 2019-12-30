@@ -1,4 +1,4 @@
-from OpenGL.error import _ErrorChecker
+from OpenGL.error import _ErrorChecker, GLError
 from OpenGL import platform as _p
 
 if _ErrorChecker:
