@@ -1,26 +1,31 @@
 """Debug utilities for EGL operations"""
 from OpenGL.EGL import *
 import itertools
+
+
 def eglErrorName(value):
     """Returns error constant if known, otherwise returns value"""
-    return KNOWN_ERRORS.get(value,value)
+    return KNOWN_ERRORS.get(value, value)
+
+
 KNOWN_ERRORS = {
-    EGL_SUCCESS:EGL_SUCCESS,
-    EGL_NOT_INITIALIZED:EGL_NOT_INITIALIZED,
-    EGL_BAD_ACCESS:EGL_BAD_ACCESS,
-    EGL_BAD_ALLOC:EGL_BAD_ALLOC,
-    EGL_BAD_ATTRIBUTE:EGL_BAD_ATTRIBUTE,
-    EGL_BAD_CONTEXT:EGL_BAD_CONTEXT,
-    EGL_BAD_CONFIG:EGL_BAD_CONFIG,
-    EGL_BAD_CURRENT_SURFACE:EGL_BAD_CURRENT_SURFACE,
-    EGL_BAD_DISPLAY:EGL_BAD_DISPLAY,
-    EGL_BAD_SURFACE:EGL_BAD_SURFACE,
-    EGL_BAD_MATCH:EGL_BAD_MATCH,
-    EGL_BAD_PARAMETER:EGL_BAD_PARAMETER,
-    EGL_BAD_NATIVE_PIXMAP:EGL_BAD_NATIVE_PIXMAP,
-    EGL_BAD_NATIVE_WINDOW:EGL_BAD_NATIVE_WINDOW,
-    EGL_CONTEXT_LOST:EGL_CONTEXT_LOST,
+    EGL_SUCCESS: EGL_SUCCESS,
+    EGL_NOT_INITIALIZED: EGL_NOT_INITIALIZED,
+    EGL_BAD_ACCESS: EGL_BAD_ACCESS,
+    EGL_BAD_ALLOC: EGL_BAD_ALLOC,
+    EGL_BAD_ATTRIBUTE: EGL_BAD_ATTRIBUTE,
+    EGL_BAD_CONTEXT: EGL_BAD_CONTEXT,
+    EGL_BAD_CONFIG: EGL_BAD_CONFIG,
+    EGL_BAD_CURRENT_SURFACE: EGL_BAD_CURRENT_SURFACE,
+    EGL_BAD_DISPLAY: EGL_BAD_DISPLAY,
+    EGL_BAD_SURFACE: EGL_BAD_SURFACE,
+    EGL_BAD_MATCH: EGL_BAD_MATCH,
+    EGL_BAD_PARAMETER: EGL_BAD_PARAMETER,
+    EGL_BAD_NATIVE_PIXMAP: EGL_BAD_NATIVE_PIXMAP,
+    EGL_BAD_NATIVE_WINDOW: EGL_BAD_NATIVE_WINDOW,
+    EGL_CONTEXT_LOST: EGL_CONTEXT_LOST,
 }
+
 
 def write_ppm(buf, filename):
     """Write height * width * 3-component buffer as ppm to filename
@@ -43,22 +48,24 @@ def write_ppm(buf, filename):
             f.write("\n")
 
 
-def debug_config(display,config):
+def debug_config(display, config):
     """Get debug display for the given configuration"""
     result = {}
     value = EGLint()
     for attr in CONFIG_ATTRS:
-        eglGetConfigAttrib(display,config, attr, value)
+        if not eglGetConfigAttrib(display, config, attr, value):
+            log.warning("Failed to get attribute %s from config", attr)
+            continue
         if attr in BITMASK_FIELDS:
-            attr_value = {
-            }
+            attr_value = {}
             for subattr in BITMASK_FIELDS[attr]:
                 if value.value & subattr:
-                    attr_value[subattr.name] = True 
+                    attr_value[subattr.name] = True
         else:
             attr_value = value.value
         result[attr.name] = attr_value
     return result
+
 
 def debug_configs(display, configs=None, max_count=256):
     """Present a formatted list of configs for the display"""
@@ -69,11 +76,9 @@ def debug_configs(display, configs=None, max_count=256):
         if not num_configs.value:
             return []
         configs = configs[: num_configs.value]
-    debug_configs = [
-        debug_config(display, cfg)
-        for cfg in configs
-    ]
+    debug_configs = [debug_config(display, cfg) for cfg in configs]
     return debug_configs
+
 
 SURFACE_TYPE_BITS = [
     EGL_MULTISAMPLE_RESOLVE_BOX_BIT,
@@ -83,7 +88,7 @@ SURFACE_TYPE_BITS = [
     EGL_VG_ALPHA_FORMAT_PRE_BIT,
     EGL_VG_COLORSPACE_LINEAR_BIT,
     EGL_WINDOW_BIT,
-]    
+]
 RENDERABLE_TYPE_BITS = [
     EGL_OPENGL_BIT,
     EGL_OPENGL_ES_BIT,
@@ -136,43 +141,51 @@ CONFIG_ATTRS = [
     EGL_TRANSPARENT_BLUE_VALUE,
 ]
 
-BITMASK_FIELDS = dict([
-    (EGL_SURFACE_TYPE,SURFACE_TYPE_BITS),
-    (EGL_RENDERABLE_TYPE,RENDERABLE_TYPE_BITS),
-    (EGL_CONFORMANT,RENDERABLE_TYPE_BITS),
-    (EGL_CONFIG_CAVEAT,CAVEAT_BITS),
-    (EGL_TRANSPARENT_TYPE,TRANSPARENT_BITS),
-])
+BITMASK_FIELDS = dict(
+    [
+        (EGL_SURFACE_TYPE, SURFACE_TYPE_BITS),
+        (EGL_RENDERABLE_TYPE, RENDERABLE_TYPE_BITS),
+        (EGL_CONFORMANT, RENDERABLE_TYPE_BITS),
+        (EGL_CONFIG_CAVEAT, CAVEAT_BITS),
+        (EGL_TRANSPARENT_TYPE, TRANSPARENT_BITS),
+    ]
+)
+
+
 def bit_renderer(bit):
     def render(value):
         if bit.name in value:
-            return ' Y'
+            return " Y"
         else:
-            return ' .'
+            return " ."
+
     return render
 
+
 CONFIG_FORMAT = [
-    (EGL_CONFIG_ID,'0x%x', 'id', 'cfg'),
-    (EGL_BUFFER_SIZE,'%i','sz','bf'),
-    (EGL_LEVEL,'%i','l','lv'),
-    (EGL_RED_SIZE,'%i','r','cbuf'),
-    (EGL_GREEN_SIZE,'%i','g','cbuf'),
-    (EGL_BLUE_SIZE,'%i','b','cbuf'),
-    (EGL_ALPHA_SIZE,'%i','a','cbuf'),
-    (EGL_DEPTH_SIZE,'%i','th','dp'),
-    (EGL_STENCIL_SIZE,'%i','t','s'),
-    (EGL_SAMPLES,'%i','ns','mult'),
-    (EGL_SAMPLE_BUFFERS,'%i','bu','mult'),
-    (EGL_NATIVE_VISUAL_ID,'0x%x','id','visual'),
-    (EGL_RENDERABLE_TYPE,bit_renderer(EGL_OPENGL_BIT),'gl','render'),
-    (EGL_RENDERABLE_TYPE,bit_renderer(EGL_OPENGL_ES_BIT),'es','render'),
-    (EGL_RENDERABLE_TYPE,bit_renderer(EGL_OPENGL_ES2_BIT),'e2','render'),
-    (EGL_RENDERABLE_TYPE,bit_renderer(EGL_OPENGL_ES3_BIT),'e3','render'),
-    (EGL_RENDERABLE_TYPE,bit_renderer(EGL_OPENVG_BIT),'vg','render'),
-    (EGL_SURFACE_TYPE,bit_renderer(EGL_WINDOW_BIT),'wn','surface'),
-    (EGL_SURFACE_TYPE,bit_renderer(EGL_PBUFFER_BIT),'pb','surface'),
-    (EGL_SURFACE_TYPE,bit_renderer(EGL_PIXMAP_BIT),'px','surface'),
+    (EGL_CONFIG_ID, "0x%x", "id", "cfg"),
+    (EGL_BUFFER_SIZE, "%i", "sz", "bf"),
+    (EGL_LEVEL, "%i", "l", "lv"),
+    (EGL_RED_SIZE, "%i", "r", "cbuf"),
+    (EGL_GREEN_SIZE, "%i", "g", "cbuf"),
+    (EGL_BLUE_SIZE, "%i", "b", "cbuf"),
+    (EGL_ALPHA_SIZE, "%i", "a", "cbuf"),
+    (EGL_DEPTH_SIZE, "%i", "th", "dp"),
+    (EGL_STENCIL_SIZE, "%i", "t", "s"),
+    (EGL_SAMPLES, "%i", "ns", "mult"),
+    (EGL_SAMPLE_BUFFERS, "%i", "bu", "mult"),
+    (EGL_NATIVE_VISUAL_ID, "0x%x", "id", "visual"),
+    (EGL_RENDERABLE_TYPE, bit_renderer(EGL_OPENGL_BIT), "gl", "render"),
+    (EGL_RENDERABLE_TYPE, bit_renderer(EGL_OPENGL_ES_BIT), "es", "render"),
+    (EGL_RENDERABLE_TYPE, bit_renderer(EGL_OPENGL_ES2_BIT), "e2", "render"),
+    (EGL_RENDERABLE_TYPE, bit_renderer(EGL_OPENGL_ES3_BIT), "e3", "render"),
+    (EGL_RENDERABLE_TYPE, bit_renderer(EGL_OPENVG_BIT), "vg", "render"),
+    (EGL_SURFACE_TYPE, bit_renderer(EGL_WINDOW_BIT), "wn", "surface"),
+    (EGL_SURFACE_TYPE, bit_renderer(EGL_PBUFFER_BIT), "pb", "surface"),
+    (EGL_SURFACE_TYPE, bit_renderer(EGL_PIXMAP_BIT), "px", "surface"),
 ]
+
+
 def format_debug_configs(debug_configs, formats=CONFIG_FORMAT):
     """Format config for compact debugging display
     
@@ -188,45 +201,45 @@ def format_debug_configs(debug_configs, formats=CONFIG_FORMAT):
     logs or utilities
     """
     columns = []
-    for (key,format,subcol,col) in formats:
+    for (key, format, subcol, col) in formats:
         column = []
         max_width = 0
         for row in debug_configs:
-            if isinstance(row,EGLConfig):
-                raise TypeError(row, 'Call debug_config(display,config)')
-            value = row[key.name]
-            if isinstance(format,str):
-                formatted = format%(value)
+            if isinstance(row, EGLConfig):
+                raise TypeError(row, "Call debug_config(display,config)")
+            try:
+                value = row[key.name]
+            except KeyError:
+                formatted = "_"
             else:
-                formatted = format(value)
-            max_width = max((len(formatted),max_width))
+                if isinstance(format, str):
+                    formatted = format % (value)
+                else:
+                    formatted = format(value)
+            max_width = max((len(formatted), max_width))
             column.append(formatted)
-        columns.append({
-            'rows':column,
-            'key':key,
-            'format':format,
-            'subcol':subcol,
-            'col': col,
-            'width': max_width,
-        })
+        columns.append(
+            {
+                "rows": column,
+                "key": key,
+                "format": format,
+                "subcol": subcol,
+                "col": col,
+                "width": max_width,
+            }
+        )
     headers = []
     subheaders = []
-    rows = [headers,subheaders]
+    rows = [headers, subheaders]
     last_column = None
     last_column_width = 0
-    for header,subcols in itertools.groupby(columns,lambda x: x['col']):
+    for header, subcols in itertools.groupby(columns, lambda x: x["col"]):
         subcols = list(subcols)
-        width = sum([col['width'] for col in subcols])+(len(subcols)-1)
-        headers.append(header.center(width,'.')[:width])
+        width = sum([col["width"] for col in subcols]) + (len(subcols) - 1)
+        headers.append(header.center(width, ".")[:width])
     for column in columns:
-        subheaders.append(column['subcol'].rjust(column['width'])[:column['width']])
-    rows.extend(zip(*[
-        [
-            v.rjust(col['width'], ' ') 
-            for v in col['rows']
-        ] 
-        for col in columns
-    ]))
-    return '\n'.join([
-        ' '.join(row) for row in rows
-    ])
+        subheaders.append(column["subcol"].rjust(column["width"])[: column["width"]])
+    rows.extend(
+        zip(*[[v.rjust(col["width"], " ") for v in col["rows"]] for col in columns])
+    )
+    return "\n".join([" ".join(row) for row in rows])
