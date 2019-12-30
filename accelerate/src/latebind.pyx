@@ -17,7 +17,9 @@ cdef class LateBind:
     def __nonzero__(self):
         """Resolve our final call and check for empty/nonzero on it"""
         return bool(self.getFinalCall())
-    __bool__ = __nonzero__
+    def __bool__(self):
+        """Resolve our final call and check for empty/nonzero on it"""
+        return bool(self.getFinalCall())
 
     def getFinalCall( self ):
         """Retrieve and/or bind and retrieve final call"""
