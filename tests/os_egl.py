@@ -1,5 +1,5 @@
 from __future__ import print_function
-import os, logging, pprint, ipdb
+import os, logging, pprint
 
 log = logging.getLogger(__name__)
 if not os.environ.get("PYOPENGL_PLATFORM"):
@@ -8,7 +8,8 @@ if "DISPLAY" in os.environ:
     del os.environ["DISPLAY"]
 import logging, contextlib
 from functools import wraps
-from OpenGL.GL import *
+
+# from OpenGL.GL import *
 from OpenGL.EGL import *
 from OpenGL.EGL import debug
 from OpenGL import arrays
@@ -49,6 +50,44 @@ def platformDisplay(device):
     return display, created_device
 
 
+def gbmPlatformSurface(display, config, platform_device, width, height):
+    """Create a GBM platform surface for display with config on platform_device
+    
+    returns egl_surface, gbm_surface
+    """
+    visual = EGLint()
+    eglGetConfigAttrib(display, config, EGL_NATIVE_VISUAL_ID, visual)
+    platform_surface = gbmdevice.create_surface(
+        platform_device,
+        width,
+        height,
+        format=visual.value,
+        flags=gbmdevice.GBM_BO_USE_RENDERING,
+    )
+    if not platform_surface:
+        raise RuntimeError("Unable to allocate a gbm surface")
+    surface = eglCreatePlatformWindowSurface(display, config, platform_surface, None)
+    if surface == EGL_NO_SURFACE:
+        log.error("Failed to create the EGL surface on the GBM surface")
+        raise RuntimeError("Platform window surface creation failure")
+    return surface, platform_surface
+
+
+def choose_config(display, attributes):
+    """utility to choose config for the display based on attributes"""
+    num_configs = EGLint()
+    configs = (EGLConfig * 1)()
+    local_attributes = arrays.GLintArray.asArray(attributes)
+    success = eglChooseConfig(display, local_attributes, configs, 1, num_configs)
+    if not success:
+        raise NoConfig("Unable to complete config filtering", attributes)
+    if not num_configs:
+        raise NoConfig(
+            "No compatible configs found", attributes,
+        )
+    return configs[0]
+
+
 @contextlib.contextmanager
 def egl_context(
     width=256,
@@ -84,15 +123,16 @@ def egl_context(
         # print("Display: %s"%(display.address,))
         try:
             eglInitialize(display, major, minor)
-        except GLError as err:
+        except EGLError as err:
             log.warning("eglInitilise failure on %s: %s", display, err.err)
             raise NoEGLSupport(display)
         log.debug(
             "Available configs:\n%s",
             debug.format_debug_configs(debug.debug_configs(display)),
         )
-        num_configs = EGLint()
-        configs = (EGLConfig * 1)()
+
+        # for config in configs[:num_configs.value]:
+        #     log.debug("Config: %s",pprint.pformat(debug.debug_config(display,config)))
         local_attributes = list(attributes[:])
         if pbuffer:
             local_attributes.extend(
@@ -105,23 +145,10 @@ def egl_context(
         local_attributes.extend(
             [EGL_CONFORMANT, api, EGL_NONE,]  # end of list
         )
-        log.debug("Attributes: %s", local_attributes)
-        local_attributes = arrays.GLintArray.asArray(local_attributes)
-        success = eglChooseConfig(display, local_attributes, configs, 1, num_configs)
-        if not success:
-            raise RuntimeError("Unable to complete config filtering")
-        if not num_configs:
-            raise RuntimeError(
-                "No compatible configs found on %s" % (device or "default")
-            )
-        # for config in configs[:num_configs.value]:
-        #     log.debug("Config: %s",pprint.pformat(debug.debug_config(display,config)))
-        config = configs[0]
+        config = choose_config(display, local_attributes,)
         log.debug(
-            "Selected config: %s",
-            debug.format_debug_configs(
-                debug.debug_configs(display, configs=list(configs))
-            ),
+            "Selected config:\n%s",
+            debug.format_debug_configs(debug.debug_configs(display, configs=[config])),
         )
         surface_attributes = [
             EGL_WIDTH,
@@ -131,59 +158,45 @@ def egl_context(
             EGL_NONE,
         ]
         if pbuffer:
-            surface = eglCreatePbufferSurface(display, configs[0], surface_attributes,)
+            surface = eglCreatePbufferSurface(display, config, surface_attributes,)
         else:
-            visual = EGLint()
-            eglGetConfigAttrib(display, configs[0], EGL_NATIVE_VISUAL_ID, visual)
-            log.debug("Native visual id %s", visual.value)
-            platform_surface = gbmdevice.create_surface(
-                created_device,
-                width,
-                height,
-                format=visual.value,
-                flags=gbmdevice.GBM_BO_USE_RENDERING,
+            surface, platform_surface = gbmPlatformSurface(
+                display, config, created_device, width, height
             )
-            log.debug("Native surface created on %s", device)
-            if not platform_surface:
-                raise RuntimeError("Unable to allocate a gbm surface")
-            log.debug("Creating GBM platform window surface")
-            surface = eglCreatePlatformWindowSurface(
-                display, configs[0], platform_surface, None
-            )
-            if surface == EGL_NO_SURFACE:
-                raise RuntimeError("Platform window surface creation failure")
-        log.debug("Binding api %s", api)
         eglBindAPI(API_MAP[api])
-        ctx = eglCreateContext(display, configs[0], EGL_NO_CONTEXT, None)
+        ctx = eglCreateContext(display, config, EGL_NO_CONTEXT, None)
         if ctx == EGL_NO_CONTEXT:
             raise RuntimeError("Unable to create context")
         eglMakeCurrent(display, surface, surface, ctx)
-        log.debug("Yielding to caller")
         yield display, ctx, surface
-        log.debug("Doing context cleanup")
-        if not pbuffer:
-            # This crashes on my intel i915 device, as do glFlush and glFinish
-            eglSwapBuffers(display, surface)
-        else:
-            glFinish()
         if output:
             log.debug("Doing readpixels for writing buffer")
-            content = glReadPixelsub(0, 0, width, height, GL_RGB, outputType=None,)
+            from OpenGL import arrays
+
+            content = arrays.GLubyteArray.zeros((width, height, 3))
+            if api == EGL_OPENGL_BIT:
+                from OpenGL.GL import glReadPixels, GL_UNSIGNED_BYTE, GL_RGB
+            elif api == EGL_OPENGL_ES3_BIT:
+                from OpenGL.GLES3 import glReadPixels, GL_UNSIGNED_BYTE, GL_RGB
+            elif api == EGL_OPENGL_ES2_BIT:
+                from OpenGL.GLES2 import glReadPixels, GL_UNSIGNED_BYTE, GL_RGB
+            elif api == EGL_OPENGL_ES_BIT:
+                from OpenGL.GLES1 import glReadPixels, GL_UNSIGNED_BYTE, GL_RGB
+            content = glReadPixels(
+                0, 0, width, height, GL_RGB, type=GL_UNSIGNED_BYTE, array=content
+            )
+
             debug.write_ppm(content, output)
             # glFinish()
     finally:
         if display:
-            log.debug("Unsetting current")
             eglMakeCurrent(display, None, None, None)
             if surface:
                 eglDestroySurface(display, surface)
-            log.debug("Terminating display")
             eglTerminate(display)
         if platform_surface:
-            log.debug("Cleaning up gbm surface")
             gbmdevice.gbm.gbm_surface_destroy(platform_surface)
         if created_device:
-            log.debug("Closing gbm device")
             gbmdevice.close_device(created_device)
 
 
@@ -191,7 +204,22 @@ class NoEGLSupport(Exception):
     """Raised if we could not initialise an egl context"""
 
 
+class NoConfig(Exception):
+    """Raised if we did not find any configs"""
+
+
 def debug_info(setup):
+    from OpenGL.GL import (
+        glClearColor,
+        glClear,
+        GL_COLOR_BUFFER_BIT,
+        GL_DEPTH_BUFFER_BIT,
+        glGetString,
+        GL_VENDOR,
+        GL_EXTENSIONS,
+        glFinish,
+    )
+
     display, ctx, surface = setup
     glClearColor(1.0, 1.0, 1.0, 1.0)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -211,18 +239,18 @@ def main():
         try:
             with egl_context(device=device, pbuffer=True) as setup:
                 debug_info(setup)
-        except (NoEGLSupport):
-            pass
-        except (GLError, RuntimeError):
+        except (NoEGLSupport, NoConfig) as err:
+            log.info("Cannot configure: %s", err)
+        except (EGLError, RuntimeError):
             log.exception("Failed during: %s", device)
     for device in gbmdevice.enumerate_devices():
         log.info("Starting tests with: %s", device)
         try:
             with egl_context(device=device, pbuffer=False) as setup:
                 debug_info(setup)
-        except (NoEGLSupport):
-            pass
-        except (GLError, RuntimeError):
+        except (NoEGLSupport, NoConfig) as err:
+            log.info("Cannot configure: %s", err)
+        except (EGLError, RuntimeError):
             log.exception("Failed during: %s", device)
 
 
