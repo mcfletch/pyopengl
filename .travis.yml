@@ -28,6 +28,7 @@ addons:
         - libgbm1
         - libgl1-mesa-dri
         - libsdl1.2-dev
+        - libfreetype6-dev
 
 before_install:
   - sudo apt-get update -qq -y
