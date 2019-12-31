@@ -27,6 +27,7 @@ addons:
         - libglapi-mesa
         - libgbm1
         - libgl1-mesa-dri
+        - libsdl1.2-dev
 
 before_install:
   - sudo apt-get update -qq -y
