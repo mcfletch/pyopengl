@@ -1,20 +1,10 @@
 
-arch:
-  - amd64
-  - arm64
 language: python
 python:
     - "2.7"
     - "3.6"
     - "3.7"
-matrix:
-  include:
-    - os: linux
-      arch: amd64
-      dist: bionic
-    - os: linux
-      arch: arm64
-      dist: bionic
+    - "3.8"
 
 install:
     - pip install pygame numpy cython pytest psutil
