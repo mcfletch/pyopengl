@@ -47,6 +47,13 @@ def platformDisplay(device):
             raise RuntimeError("Unable to create EGL display on %s" % (display))
     else:
         raise RuntimeError("eglGetPlatformDisplay has no implementation")
+    if not created_device:
+        try:
+            name = get_device_name(device)
+            if name is not None:
+                log.debug("DRM Name: %s", name)
+        except EGLError:
+            log.debug("Unable to retrieve the DRM name")
     return display, created_device
 
 
@@ -226,6 +233,26 @@ def debug_info(setup):
     log.info("Vendor: %s", glGetString(GL_VENDOR))
     log.info("Extensions: %s", glGetString(GL_EXTENSIONS))
     glFinish()
+
+def get_device_name(device):
+    """Try to get the display's DRM device name
+
+    This is almost certainly not going to work on
+    anything other than Linux
+    """
+    from OpenGL.EGL.EXT.device_query import (
+        eglQueryDeviceStringEXT,
+    )
+    from OpenGL.EGL.EXT.device_drm import (
+        EGL_DRM_DEVICE_FILE_EXT,
+    )
+    if eglQueryDeviceStringEXT:
+        name = eglQueryDeviceStringEXT(
+            device,
+            EGL_DRM_DEVICE_FILE_EXT
+        )
+        return name.decode('ascii',errors='ignore')
+    return None
 
 
 def main():
