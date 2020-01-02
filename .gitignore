@@ -4,6 +4,7 @@ build
 __pycache__
 .vscode
 *.pyc
+*.pyd
 src/khronosapi
 accelerate/dist
 *.so
