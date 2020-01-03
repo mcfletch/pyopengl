@@ -140,4 +140,13 @@ GL_TYPE_TO_ARRAY_MAPPING = {
     GL_1_1.GL_CHAR: _types.GLchar,
     GL_1_1.GL_BYTE: _types.GLbyte,
     GL_1_1.GL_UNSIGNED_BYTE: _types.GLubyte,
+    'f': _types.GLfloat,
+    'd': _types.GLdouble,
+    'i': _types.GLint,
+    'I': _types.GLuint,
+    'h': _types.GLshort,
+    'H': _types.GLushort,
+    'b': _types.GLbyte,
+    'B': _types.GLubyte,
+    's': _types.GLchar,
 }
