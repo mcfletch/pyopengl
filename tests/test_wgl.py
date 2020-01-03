@@ -4,7 +4,7 @@ import logging
 log = logging.getLogger(__name__)
 HERE = os.path.dirname( __file__ )
 if sys.platform != 'win32':
-    raise pytest.skip(reason='Non-windows platform')
+    raise pytest.skip('Non-windows (WGL) platform', allow_module_level=True)
 try:
     from numpy import *
 except ImportError as err:
@@ -13,7 +13,6 @@ import pygame, pygame.display
 pygame.display.init()
 from OpenGL.GL import *
 from OpenGL.WGL import *
-
 
 class TestWGL(unittest.TestCase):
     width,height = 300,300
