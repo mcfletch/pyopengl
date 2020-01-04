@@ -14,6 +14,13 @@ cdef class LateBind:
     def finalise( self ):
         """Finalise our target to our final callable object"""
 
+    def __nonzero__(self):
+        """Resolve our final call and check for empty/nonzero on it"""
+        return bool(self.getFinalCall())
+    def __bool__(self):
+        """Resolve our final call and check for empty/nonzero on it"""
+        return bool(self.getFinalCall())
+
     def getFinalCall( self ):
         """Retrieve and/or bind and retrieve final call"""
         if not self._finalCall:

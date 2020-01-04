@@ -451,7 +451,7 @@ class TestCore( basetestcase.BaseTest ):
                 continue
             if key >= 0x92be and key <= 0x92c9:
                 continue
-            print( 'Trying glGetFloatv( 0x%x )'%(key,))
+            # print( 'Trying glGetFloatv( 0x%x )'%(key,))
             try:
                 result = glGetFloatv( key )
             except error.GLError as err:
@@ -590,7 +590,8 @@ class TestCore( basetestcase.BaseTest ):
                 GL_TEXTURE_2D, 0, 
                 s3tc.GL_COMPRESSED_RGBA_S3TC_DXT5_EXT, 
                 256, 256, 0, 
-                image
+                # 256*256*1,
+                image,
             )
             assert texture
     

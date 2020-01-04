@@ -331,8 +331,6 @@ def main():
     data = stream.render('html')
     open( os.path.join(OUTPUT_DIRECTORY,'index.html'), 'w').write( data )
     base = 'index.html'
-    old_file = os.path.join(OUTPUT_DIRECTORY,'index.xhtml')
-    open( old_file, 'w' ).write(REDIRECT%locals())
 
     for name,section in sorted(ref.sections.items()):
         output_file = os.path.join( OUTPUT_DIRECTORY,ref.url(section))
@@ -351,9 +349,6 @@ def main():
         open(
             output_file, 'wb'
         ).write( data )
-        old_file = os.path.splitext( output_file )[0] + '.xhtml'
-        base = ref.url( section )
-        open( old_file, 'w' ).write(REDIRECT%locals())
         
 
     # Now store out references for things which want to do Python: refsect

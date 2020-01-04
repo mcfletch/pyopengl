@@ -159,19 +159,19 @@ checkouts = [
         dirname = 'pygl2d',
     ),
     BZRSource(
-        'lp:~bebraw/scocca/devel',
+        'https://code.launchpad.net/~bebraw/scocca/devel',
         dirname = 'scocca',
     ),
-    HgSource(
-        'https://bitbucket.org/tartley/gltutpy',
+    GITSource(
+        'https://github.com/tartley/gltutpy.git',
         dirname = 'gltutpy',
     ),
-    HgSource(
-        'https://bitbucket.org/tartley/algorithmic-generation-of-geometry',
+    GITSource(
+        'https://github.com/tartley/algorithmic-generation-of-opengl-geometry.git',
         dirname = 'agog',
     ),
-    HgSource(
-        'https://bitbucket.org/tartley/gloopy',
+    GITSource(
+        'https://github.com/tartley/gloopy.git',
         dirname = 'gloopy',
     ),
     GITSource(
@@ -181,7 +181,11 @@ checkouts = [
     HgSource(
         'https://bitbucket.org/rndblnch/opengl-programmable/',
         dirname = 'programmable',
-    )
+    ),
+    GITSource(
+        'https://github.com/mmatl/pyrender.git',
+        dirname='pyrender',
+    ),
     # pymol # not pyopengl AFAICS
     # {LGPL} mirra # no online view of code AFAICS
     # soccerbots http://soccerbots.googlecode.com/svn/

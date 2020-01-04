@@ -7,9 +7,9 @@ from OpenGL._opaque import opaque_pointer_cls as _opaque_pointer_cls
 c_void = None
 
 class _WGLQuerier( extensions.ExtensionQuerier ):
-    prefix = as_8_bit('WGL_')
+    prefix = b'WGL_'
     assumed_version = [1,0]
-    version_prefix = as_8_bit('WGL_VERSION_WGL_')
+    version_prefix = b'WGL_VERSION_WGL_'
     def pullVersion( self ):
         # only one version...
         return [1,0]
@@ -19,7 +19,7 @@ class _WGLQuerier( extensions.ExtensionQuerier ):
         wglGetCurrentDC.restyle = HDC
         try:
             dc = wglGetCurrentDC()
-            proc_address = PLATFORM.getExtensionProcedure(as_8_bit('wglGetExtensionsStringARB') )
+            proc_address = PLATFORM.getExtensionProcedure(b'wglGetExtensionsStringARB')
             wglGetExtensionStringARB = PLATFORM.functionTypeFor( PLATFORM.WGL )(
                 c_char_p,
                 HDC,

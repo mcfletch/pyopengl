@@ -71,7 +71,7 @@ class TestNumpyNative(_AccelArray,unittest.TestCase):
     def test_asArrayCopy( self ):
         a2 = self.array[:,0]
         assert not a2.flags.contiguous 
-        self.failUnlessRaises(
+        self.assertRaises(
             error.CopyError,
             self.eoc_handler.asArray,
                 a2

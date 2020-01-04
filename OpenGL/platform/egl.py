@@ -31,11 +31,15 @@ class EGLPlatform( baseplatform.BasePlatform ):
     @baseplatform.lazy_property
     def GL(self):
         try:
-            return ctypesloader.loadLibrary(
-                ctypes.cdll,
-                'GL', 
-                mode=ctypes.RTLD_GLOBAL 
-            )
+            for name in ('OpenGL','GL'):
+                lib = ctypesloader.loadLibrary(
+                    ctypes.cdll,
+                    'GL', 
+                    mode=ctypes.RTLD_GLOBAL 
+                )
+                if lib:
+                    return lib 
+            raise OSError("No GL/OpenGL library available")
         except OSError:
             return self.GLES2 or self.GLES1
     @baseplatform.lazy_property

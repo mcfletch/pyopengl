@@ -14,11 +14,14 @@ cdef extern from "numpy/arrayobject.h":
     cdef np.ndarray PyArray_FromArray( np.ndarray, np.dtype, int )
     cdef np.ndarray PyArray_ContiguousFromAny( object op, int, int, int max_depth)
     cdef int PyArray_Check( object )
+    cdef int PyArray_CheckScalar( object )
     int NPY_ARRAY_CARRAY
     int NPY_ARRAY_FORCECAST
     int PyArray_ISCARRAY( np.ndarray instance )
     int PyArray_ISCARRAY_RO( np.ndarray instance )
     cdef np.ndarray PyArray_Zeros(int nd, np.Py_intptr_t* dims, np.dtype, int fortran)
+    cdef np.ndarray PyArray_EnsureArray(object)
+    cdef int PyArray_FillWithScalar(object, object)
     cdef void import_array()
     cdef void* PyArray_DATA( np.ndarray )
     cdef int PyArray_NDIM( np.ndarray )
@@ -40,6 +43,8 @@ cdef class NumpyHandler(FormatHandler):
     HANDLED_TYPES = (
         np.ndarray,
         np.bool_,
+        np.intc,
+        np.uintc,
         np.int8,
         np.uint8,
         np.int16,
@@ -85,7 +90,6 @@ cdef class NumpyHandler(FormatHandler):
             raise TypeError(
                 """Numpy format handler passed a non-numpy-array object %s (of type %s)"""%( instance, type(instance) ),
             )
-        
         return <np.ndarray> instance
         
     cdef c_from_param( self, object instance, object typeCode ):
@@ -147,8 +151,17 @@ cdef class NumpyHandler(FormatHandler):
         return constant
     cdef c_asArray( self, object instance, object typeCode ):
         """Retrieve the given value as a (contiguous) array of type typeCode"""
-        cdef np.ndarray working = (<np.ndarray>self.c_check_array( instance ))
+        cdef np.ndarray working
         cdef np.dtype typecode
+        cdef int res
+        if PyArray_CheckScalar(instance):
+            Py_INCREF(instance)
+            working = self.c_zeros((1,), typeCode)
+            res = PyArray_FillWithScalar(<object>working, instance)
+            if res < -1:
+                raise ValueError("Unable to fill new array with value %r (%s)"%(instance,instance.__class__))
+        else:
+            working = (<np.ndarray>self.c_check_array( instance ))
         if typeCode is None:
             typecode = array_descr(working)
         else:
@@ -194,6 +207,9 @@ cdef class NumpyHandler(FormatHandler):
             return instance 
         else:
             # "convert" regardless (will return same instance if already contiguous)
+            if PyArray_CheckScalar(instance):
+                Py_INCREF( <object> instance )
+                return PyArray_EnsureArray(instance)
             if not PyArray_ISCARRAY_RO( instance ) or array_descr(instance) != dtype:
                 # TODO: make sure there's no way to segfault here 
                 Py_INCREF( <object> instance )

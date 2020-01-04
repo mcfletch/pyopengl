@@ -77,6 +77,8 @@ if NumpyHandler is None:
         HANDLED_TYPES = (
             numpy.ndarray,
             numpy.bool_,
+            numpy.intc, 
+            numpy.uintc,
             numpy.int8,
             numpy.uint8,
             numpy.int16,
@@ -255,4 +257,13 @@ GL_TYPE_TO_ARRAY_MAPPING = {
     GL_1_1.GL_UNSIGNED_SHORT: lookupDtype(USHORT_TYPE),
     _types.GL_VOID_P: lookupDtype('P'),
     None: None,
+    'f': lookupDtype('f'),
+    'd': lookupDtype('d'),
+    'i': lookupDtype('i'),
+    'I': lookupDtype('I'),
+    'h': lookupDtype('h'),
+    'H': lookupDtype('H'),
+    'b': lookupDtype('b'),
+    'B': lookupDtype('B'),
+    's': lookupDtype('B'),
 }

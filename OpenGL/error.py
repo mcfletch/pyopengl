@@ -157,7 +157,8 @@ class GLUError( Error ):
 
 class GLUTError( Error ):
     """GLUT error implementation class"""
-
+class EGLError( GLError ):
+    """EGL error implementation class"""
 
 if _configflags.ERROR_CHECKING:
     from OpenGL import acceleratesupport
@@ -177,11 +178,12 @@ if _configflags.ERROR_CHECKING:
                 _currentChecker -- currently active checking function
             """
             _getErrors = None
-            def __init__( self, platform, baseOperation=None, noErrorResult=0 ):
+            def __init__( self, platform, baseOperation=None, noErrorResult=0, errorClass=GLError ):
                 """Initialize from a platform module/reference"""
                 self._isValid = platform.CurrentContextIsValid
                 self._getErrors = baseOperation
                 self._noErrorResult = noErrorResult
+                self._errorClass = errorClass
                 if self._getErrors:
                     if _configflags.CONTEXT_CHECKING:
                         self._registeredChecker = self.safeGetError 
@@ -225,7 +227,7 @@ if _configflags.ERROR_CHECKING:
                 """
                 err = self._currentChecker()
                 if err != self._noErrorResult:
-                    raise GLError(
+                    raise self._errorClass(
                         err,
                         result,
                         cArguments = cArguments,

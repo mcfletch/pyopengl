@@ -9,12 +9,9 @@ from OpenGL.GL import GLdouble
 from OpenGL.arrays import arraydatatype
 handler = arraydatatype.ArrayDatatype.getHandler( GLdouble * 16 )
 handler.registerReturn( )
-
 import time,traceback
 start = time.time()
-
 window = None
-
 def display():
     try:
         glutSetWindow(window);
@@ -29,19 +26,15 @@ def display():
     except Exception:
         traceback.print_exc()
         sys.exit(0)
-
 size = (250,250)
-
 def reshape( *args ):
     global size 
     size = args
     glViewport( *( (0,0)+args) )
     display()
-
 def ontimer( *args ):
     print('timer', args, '@time', time.time()-start)
     glutTimerFunc( 1000, ontimer, 24 )
-
 def idle():
     delta = time.time()-start
     if delta < 10:
@@ -70,12 +63,10 @@ def idle():
             pass # Older PyOpenGL, you may see a seg-fault here...
         import sys
         sys.exit( 0 )
-
 def printFunction( name ):
     def onevent( *args ):
         print('%s -> %s'%(name, ", ".join( [str(a) for a in args ])))
     return onevent
-
 
 
 if __name__ == "__main__":
@@ -100,6 +91,6 @@ if __name__ == "__main__":
     glutSpecialFunc( printFunction( 'Special' ))
     glutSpecialUpFunc( printFunction( 'SpecialUp' ))
     glutTimerFunc( 1000, ontimer, 23 )
-    
+  
     glutIdleFunc( idle )
     glutMainLoop()

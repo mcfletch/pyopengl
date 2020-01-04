@@ -34,10 +34,10 @@ def glName( name ):
         return True
     return 0
 
-def glProcess( filename, tokenType,tokenString, xxx_todo_changeme4, xxx_todo_changeme5,lineText ):
+def glProcess( filename, tokenType, tokenString, sourceStart, sourceEnd, lineText ):
     """Process the name in some way"""
-    (sourceRow,sourceCol) = xxx_todo_changeme4
-    (endRow,endCol) = xxx_todo_changeme5
+    (sourceRow,sourceCol) = sourceStart
+    (endRow,endCol) = sourceEnd
     print(filename, sourceRow, tokenString, lineText.strip())
     
 
@@ -77,8 +77,8 @@ VIEWSVN = '%(baseURL)s/%(deltaPath)s?view=markup'
 LOGGERHEAD = '%(baseURL)s/view/head:/%(deltaPath)s'
 GOOGLECODE = '%(baseURL)s/source/browse/trunk/%(deltaPath)s'
 GOOGLECODE_HG = '%(baseURL)s/source/browse/%(deltaPath)s'
-GITHUB = '%(baseURL)s/blob/master/%(deltaPath)s'
-BITBUCKET = '%(baseURL)s/src/tip/%(deltaPath)s'
+GITHUB = '%(baseURL)s/blob/master/%(deltaPath)s#L%(sourceRow)s'
+BITBUCKET = '%(baseURL)s/src/tip/%(deltaPath)s#lines-%(sourceRow)s'
 
 class SampleSource( object ):
     """A source from which samples may be generated"""
@@ -220,21 +220,21 @@ def loadData():
         ),
         SampleSource(
             os.path.join( SAMPLES, 'agog' ),
-            baseURL='https://bitbucket.org/tartley/algorithmic-generation-of-geometry/',
+            baseURL='https://github.com/tartley/algorithmic-generation-of-opengl-geometry',
             projectName = 'AGoG',
-            urlTemplate = BITBUCKET,
+            urlTemplate = GITHUB,
         ),
         SampleSource(
             os.path.join( SAMPLES, 'gloopy' ),
-            baseURL = 'https://bitbucket.org/tartley/gloopy/',
+            baseURL = 'https://github.com/tartley/gloopy',
             projectName = 'Gloopy',
-            urlTemplate = BITBUCKET,
+            urlTemplate = GITHUB,
         ),
         SampleSource(
             os.path.join( SAMPLES, 'gltutpy' ),
-            baseURL = 'https://bitbucket.org/tartley/gltutpy/',
+            baseURL = 'https://github.com/tartley/gltutpy',
             projectName = 'OpenGL Tutorial (Python Translation)',
-            urlTemplate = BITBUCKET,
+            urlTemplate = GITHUB,
         ),
         SampleSource(
             os.path.join( SAMPLES, 'visvis' ),
@@ -248,6 +248,12 @@ def loadData():
             projectName = '{GPL3} OpenGL-Programmable',
             urlTemplate = BITBUCKET,
         ),
+        SampleSource(
+            os.path.join(SAMPLES,'pyrender'),
+            baseURL='https://github.com/mmatl/pyrender',
+            projectName='Pyrender',
+            urlTemplate=GITHUB,
+        )
     ]:
         generate_tokens_dir( s.localDir, processFunction = s.processEntry)
     result = SampleSource.nameMapping
