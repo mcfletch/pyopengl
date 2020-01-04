@@ -575,39 +575,30 @@ def typedImageFunction( suffix, arrayConstant,  baseFunction ):
     """Produce a typed version of the given image function"""
     functionName = baseFunction.__name__
     functionName = '%(functionName)s%(suffix)s'%locals()
-    if baseFunction:
-        arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ arrayConstant ]
-        function = setDimensionsAsInts(
-            setImageInput(
-                baseFunction,
-                arrayType,
-                typeName = arrayConstant,
-            )
+    arrayType = arrays.GL_CONSTANT_TO_ARRAY_TYPE[ arrayConstant ]
+    function = setDimensionsAsInts(
+        setImageInput(
+            baseFunction,
+            arrayType,
+            typeName = arrayConstant,
         )
-        return functionName, function
-    else:
-        return functionName, baseFunction
+    )
+    return functionName, function
 
 def _setDataSize( baseFunction, argument='imageSize' ):
     """Set the data-size value to come from the data field"""
-    if baseFunction:
-        converter = CompressedImageConverter()
-        return asWrapper( baseFunction ).setPyConverter(
-            argument
-        ).setCConverter( argument, converter )
-    else:
-        return baseFunction
+    converter = CompressedImageConverter()
+    return asWrapper( baseFunction ).setPyConverter(
+        argument
+    ).setCConverter( argument, converter )
 
 def compressedImageFunction( baseFunction ):
     """Set the imageSize and dimensions-as-ints converters for baseFunction"""
-    if baseFunction:
-        return setDimensionsAsInts(
-            _setDataSize(
-                baseFunction, argument='imageSize'
-            )
+    return setDimensionsAsInts(
+        _setDataSize(
+            baseFunction, argument='imageSize'
         )
-    else:
-        return baseFunction
+    )
 
 for suffix,arrayConstant in [
     ('b', GL_1_1.GL_BYTE),
