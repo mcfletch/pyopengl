@@ -77,6 +77,8 @@ if NumpyHandler is None:
         HANDLED_TYPES = (
             numpy.ndarray,
             numpy.bool_,
+            numpy.intc, 
+            numpy.uintc,
             numpy.int8,
             numpy.uint8,
             numpy.int16,

@@ -43,6 +43,8 @@ cdef class NumpyHandler(FormatHandler):
     HANDLED_TYPES = (
         np.ndarray,
         np.bool_,
+        np.intc,
+        np.uintc,
         np.int8,
         np.uint8,
         np.int16,
