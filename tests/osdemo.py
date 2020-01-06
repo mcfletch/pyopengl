@@ -143,6 +143,7 @@ if __name__ == '__main__':
     z = glGetIntegerv(GL_DEPTH_BITS)
     s = glGetIntegerv(GL_STENCIL_BITS)
     a = glGetIntegerv(GL_ACCUM_RED_BITS)
+    print("OpenGL Version: %s"%(extensions.GLQuerier.getVersion()))
     print("Depth=%d Stencil=%d Accum=%d" % (z, s, a))
 
     print("Width=%d Height=%d" % (OSMesaGetIntegerv(OSMESA_WIDTH),

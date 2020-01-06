@@ -224,6 +224,7 @@ def debug_info(setup):
         glGetString,
         GL_VENDOR,
         GL_EXTENSIONS,
+        GL_VERSION,
         glFinish,
     )
 
@@ -231,6 +232,7 @@ def debug_info(setup):
     glClearColor(1.0, 1.0, 1.0, 1.0)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     log.info("Vendor: %s", glGetString(GL_VENDOR))
+    log.info("Vendor: %s", glGetString(GL_VERSION))
     log.info("Extensions: %s", glGetString(GL_EXTENSIONS))
     glFinish()
 
