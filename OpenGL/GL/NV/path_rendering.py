@@ -517,6 +517,12 @@ glPointAlongPathNV=wrapper.wrapper(glPointAlongPathNV).setOutput(
 ).setOutput(
     'y',size=(1,),orPassIn=True
 )
+# INPUT glGetProgramResourcefvNV.params size not checked against count
+glGetProgramResourcefvNV=wrapper.wrapper(glGetProgramResourcefvNV).setInputArraySize(
+    'length', 1
+).setInputArraySize(
+    'params', None
+)
 # INPUT glPathColorGenNV.coeffs size not checked against 'genMode,colorFormat'
 glPathColorGenNV=wrapper.wrapper(glPathColorGenNV).setInputArraySize(
     'coeffs', None

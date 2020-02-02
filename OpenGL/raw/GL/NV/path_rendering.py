@@ -237,7 +237,7 @@ def glGetPathTexGenfvNV(texCoordSet,pname,value):pass
 def glGetPathTexGenivNV(texCoordSet,pname,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLfloatArray)
-def glGetProgramResourcefvNV(program,programInterface,index,propCount,props,bufSize,length,params):pass
+def glGetProgramResourcefvNV(program,programInterface,index,propCount,props,count,length,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLfloat)
 def glInterpolatePathsNV(resultPath,pathA,pathB,weight):pass
