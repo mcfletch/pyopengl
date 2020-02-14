@@ -34,7 +34,7 @@ class EGLPlatform( baseplatform.BasePlatform ):
             for name in ('OpenGL','GL'):
                 lib = ctypesloader.loadLibrary(
                     ctypes.cdll,
-                    'GL', 
+                    name, 
                     mode=ctypes.RTLD_GLOBAL 
                 )
                 if lib:
