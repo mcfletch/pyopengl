@@ -242,10 +242,13 @@ class TestCore( basetestcase.BaseTest ):
                         assert mapped.value == expected, (param, mapped, expected)
                     else:
                         mapped = glGetBufferParameteriv(GL_ARRAY_BUFFER, param)
-                        if param != GL_BUFFER_USAGE or OpenGL.SIZE_1_ARRAY_UNPACK:
-                            assert mapped == expected, (param, mapped, expected)
+                        if param == GL_BUFFER_USAGE:
+                            assert mapped[0] == expected, (param, mapped, expected)
                         else:
-                            assert mapped[0] == expected, (param, mapped[0], expected)
+                            if OpenGL.SIZE_1_ARRAY_UNPACK:
+                                assert mapped == expected, (param, mapped, expected)
+                            else:
+                                assert mapped[0] == expected, (param, mapped[0], expected)
             finally:
                 glBindBuffer(GL_ARRAY_BUFFER, 0)
                 glDeleteVertexArrays(1,vertex_array)
