@@ -63,7 +63,7 @@ numpy. Some will have accelerate, and some will not.
     :target: https://travis-ci.org/mcfletch/pyopengl
     :alt: Travis Tests
 
-.. image:: https://ci.appveyor.com/api/projects/status/MikeCFletcher/pyopengl/branch/master
+.. image:: https://ci.appveyor.com/api/projects/status/github/mcfletch/pyopengl
     :target: https://ci.appveyor.com/project/MikeCFletcher/pyopengl
     :alt: Appveyor Build
 
