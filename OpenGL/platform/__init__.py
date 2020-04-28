@@ -38,7 +38,7 @@ def _load( ):
 
     key = (
         os.environ.get( 'PYOPENGL_PLATFORM'), 
-        os.environ.get( 'XDG_SESSION_TYPE').lower(),
+        os.environ.get( 'XDG_SESSION_TYPE','').lower(),
         guessing_key,
         sys.platform,
         os.name,
