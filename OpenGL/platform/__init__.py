@@ -20,9 +20,29 @@ import os, sys
 from OpenGL.plugins import PlatformPlugin
 from OpenGL import _configflags
 
+XDG = 'XDG_SESSION_TYPE'
+WAYLAND_DISPLAY = 'WAYLAND_DISPLAY'
+
 def _load( ):
     """Load the os.name plugin for the platform functionality"""
-    key = (os.environ.get( 'PYOPENGL_PLATFORM'), sys.platform,os.name)
+    # Linux override keys...
+    guessing_key = None
+    if (
+        sys.platform in ('linux','linux2') 
+        and not 'PYOPENGL_PLATFORM' in os.environ
+    ):
+        if 'WAYLAND_DISPLAY' in os.environ:
+            guessing_key = 'wayland'
+        elif 'DISPLAY' in os.environ:
+            guessing_key = 'linux'
+
+    key = (
+        os.environ.get( 'PYOPENGL_PLATFORM'), 
+        os.environ.get( 'XDG_SESSION_TYPE').lower(),
+        guessing_key,
+        sys.platform,
+        os.name,
+    )
     plugin  = PlatformPlugin.match( key )
     plugin_class = plugin.load()
     plugin.loaded = True

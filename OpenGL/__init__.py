@@ -211,11 +211,15 @@ TYPE_ANNOTATIONS = False
 # Declarations of plugins provided by PyOpenGL itself
 from OpenGL.plugins import PlatformPlugin, FormatHandler
 PlatformPlugin( 'nt', 'OpenGL.platform.win32.Win32Platform' )
-PlatformPlugin( 'linux2', 'OpenGL.platform.glx.GLXPlatform' )
 PlatformPlugin( 'darwin', 'OpenGL.platform.darwin.DarwinPlatform' )
+PlatformPlugin( 'linux2', 'OpenGL.platform.glx.GLXPlatform' )
+PlatformPlugin( 'linux', 'OpenGL.platform.glx.GLXPlatform' )
 PlatformPlugin( 'posix', 'OpenGL.platform.glx.GLXPlatform' )
+PlatformPlugin( 'x11', 'OpenGL.platform.glx.GLXPlatform' ) # xdg session type
 PlatformPlugin( 'osmesa', 'OpenGL.platform.osmesa.OSMesaPlatform')
 PlatformPlugin( 'egl', 'OpenGL.platform.egl.EGLPlatform')
+PlatformPlugin( 'wayland', 'OpenGL.platform.egl.EGLPlatform') # xdg session type
+PlatformPlugin( 'xwayland', 'OpenGL.platform.egl.EGLPlatform') # xdg session type, but use egl even though normally you'd expect GLX
 
 import sys
 if sys.version_info[0] < 3:
