@@ -35,11 +35,11 @@ def write_ppm(buf, filename):
     linux workstations.
     """
     with open(filename, "w") as f:
-        h, w, c = buf.shape
-        print("P3", file=f)
-        print("# ascii ppm file created by pyopengl", file=f)
-        print("%i %i" % (w, h), file=f)
-        print("255", file=f)
+        (h, w, c) = buf.shape
+        f.write("P3\n")
+        f.write("# ascii ppm file created by pyopengl\n")
+        f.write("%i %i\n" % (w, h))
+        f.write("255\n")
         for y in range(h - 1, -1, -1):
             for x in range(w):
                 pixel = buf[y, x]
