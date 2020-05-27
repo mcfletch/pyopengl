@@ -1,4 +1,6 @@
 """Simple plug-in mechanism to provide replacement for setuptools plugins"""
+import logging 
+log = logging.getLogger(__name__)
 
 class Plugin( object ):
     """Base class for plugins to be loaded"""
@@ -14,7 +16,12 @@ class Plugin( object ):
         """Attempt to load and return our entry point"""
         try:
             return importByName( self.import_path )
-        except ImportError:
+        except ImportError as err:
+            log.warning(
+                'Unable to import %s: %s',
+                self.import_path,
+                err
+            )
             return None
     @classmethod
     def match( cls, *args ):
