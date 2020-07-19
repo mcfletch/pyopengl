@@ -212,7 +212,7 @@ cdef class NumpyHandler(FormatHandler):
                 return PyArray_EnsureArray(instance)
             if not PyArray_ISCARRAY_RO( instance ) or array_descr(instance) != dtype:
                 # TODO: make sure there's no way to segfault here 
-                Py_INCREF( <object> instance )
+                # Py_INCREF( <object> instance )
                 Py_INCREF( <object> dtype )
                 return PyArray_FromArray( 
                     instance, 
