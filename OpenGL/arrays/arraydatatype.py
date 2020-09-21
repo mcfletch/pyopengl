@@ -201,6 +201,11 @@ if ADT is None:
         baseType = _types.GLclampf
         typeConstant = _types.GL_FLOAT
 
+    class GLfloat16Array(ArrayDatatype, ctypes.POINTER(_types.GLushort)):
+        """Array datatype for float16 as GLushort types"""
+        baseType = _types.GLushort
+        typeConstant = _types.GL_HALF_FLOAT
+
     class GLfloatArray( ArrayDatatype, ctypes.POINTER(_types.GLfloat )):
         """Array datatype for GLfloat types"""
         baseType = _types.GLfloat
@@ -282,6 +287,7 @@ else:
     GLclampdArray = ADT( GL_1_1.GL_DOUBLE, _types.GLclampd )
     GLclampfArray = ADT( GL_1_1.GL_FLOAT, _types.GLclampf )
     GLdoubleArray = ADT( GL_1_1.GL_DOUBLE, _types.GLdouble )
+    GLfloat16Array = ADT( GL_1_1.GL_HALF_FLOAT, _types.GLushort )
     GLfloatArray = ADT( GL_1_1.GL_FLOAT, _types.GLfloat )
     GLbyteArray = ADT( GL_1_1.GL_BYTE, _types.GLbyte )
     GLcharArray = GLcharARBArray = ADT( GL_1_1.GL_BYTE, _types.GLchar )
@@ -298,11 +304,6 @@ else:
     GLfixedArray = ADT( _types.GL_FIXED, _types.GLfixed )
 
 EGLAttribArray = GLintArray
-
-class GLfloat16Array( ArrayDatatype, ctypes.POINTER(_types.GLushort )):
-    """Array datatype for float16 as GLushort types"""
-    baseType = _types.GLushort
-    typeConstant = _types.GL_HALF_FLOAT
 
 
 GL_CONSTANT_TO_ARRAY_TYPE = {
