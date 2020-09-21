@@ -284,6 +284,7 @@ FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', [
     'numpy.int16',
     'numpy.int32',
     'numpy.int64',
+    'numpy.float16',
     'numpy.float32',
     'numpy.float64',
     'numpy.float128',
