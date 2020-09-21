@@ -236,6 +236,7 @@ def lookupDtype( char ):
 ARRAY_TO_GL_TYPE_MAPPING = {
     lookupDtype('d'): GL_1_1.GL_DOUBLE,
     lookupDtype('f'): GL_1_1.GL_FLOAT,
+    lookupDtype('e'): _types.GL_HALF_FLOAT,
     lookupDtype('i'): GL_1_1.GL_INT,
     lookupDtype(SHORT_TYPE): GL_1_1.GL_SHORT,
     lookupDtype(USHORT_TYPE): GL_1_1.GL_UNSIGNED_SHORT,
@@ -249,6 +250,7 @@ ARRAY_TO_GL_TYPE_MAPPING = {
 GL_TYPE_TO_ARRAY_MAPPING = {
     GL_1_1.GL_DOUBLE: lookupDtype('d'),
     GL_1_1.GL_FLOAT:lookupDtype('f'),
+    _types.GL_HALF_FLOAT: lookupDtype('e'),
     GL_1_1.GL_INT: lookupDtype('i'),
     GL_1_1.GL_BYTE: lookupDtype('b'),
     GL_1_1.GL_SHORT: lookupDtype(SHORT_TYPE),
@@ -257,6 +259,7 @@ GL_TYPE_TO_ARRAY_MAPPING = {
     GL_1_1.GL_UNSIGNED_SHORT: lookupDtype(USHORT_TYPE),
     _types.GL_VOID_P: lookupDtype('P'),
     None: None,
+    'e': lookupDtype('e'),
     'f': lookupDtype('f'),
     'd': lookupDtype('d'),
     'i': lookupDtype('i'),
