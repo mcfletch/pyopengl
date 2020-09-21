@@ -290,6 +290,7 @@ class TestCoreDatatype(basetestcase.BaseTest):
     @pytest.mark.skipif( not np, reason="Numpy not available")
     def test_byte_count_numpy( self ):
         for a,expected in [
+            (np.array([1,2],dtype='e'),4),
             (np.array([1,2],dtype='f'),8),
             (np.array([1,2],dtype='d'),16),
             (np.array([1,2],dtype='B'),2),
