@@ -299,7 +299,14 @@ else:
 
 EGLAttribArray = GLintArray
 
+class GLfloat16Array( ArrayDatatype, ctypes.POINTER(_types.GLushort )):
+    """Array datatype for float16 as GLushort types"""
+    baseType = _types.GLushort
+    typeConstant = _types.GL_HALF_FLOAT
+
+
 GL_CONSTANT_TO_ARRAY_TYPE = {
+    GL_1_1.GL_HALF_FLOAT : GLfloat16Array,
     GL_1_1.GL_DOUBLE : GLclampdArray,
     GL_1_1.GL_FLOAT : GLclampfArray,
     GL_1_1.GL_FLOAT : GLfloatArray,

@@ -29,12 +29,14 @@ BYTE_SIZES = {
     GL_INT: 4,
     GL_UNSIGNED_INT: 4,
     GL_UNSIGNED_INT64: 8,
+    GL_HALF_FLOAT: 2,
     GL_FLOAT: 4,
     GL_DOUBLE: 8,
 }
 
 ARRAY_TO_GL_TYPE_MAPPING = {
     'c': GL_UNSIGNED_BYTE,
+    'e': GL_HALF_FLOAT,
     'f': GL_FLOAT,
     'b': GL_BYTE,
     'i': GL_INT,
