@@ -138,7 +138,9 @@ def returnFormat( data, type ):
     """
     if _configflags.UNSIGNED_BYTE_IMAGES_AS_STRING:
         if type == _simple.GL_UNSIGNED_BYTE:
-            if hasattr( data, 'tostring' ):
+            if hasattr( data, 'tobytes' ):
+                return data.tobytes()
+            elif hasattr( data, 'tostring' ):
                 return data.tostring()
             elif hasattr( data, 'raw' ):
                 return data.raw 
