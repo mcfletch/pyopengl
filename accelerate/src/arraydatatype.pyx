@@ -303,7 +303,7 @@ cdef class Output(cArgConverter):
         if thisSize == (1,):
             try:
                 return result[0]
-            except TypeError as err:
+            except (IndexError,TypeError) as err:
                 return result
         else:
             return result
