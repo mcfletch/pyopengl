@@ -10,6 +10,40 @@ environment:
     # a later point release.
     # See: http://www.appveyor.com/docs/installed-software#python
 
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      PYTHON: "C:\\Python39"
+      PYTHON_VERSION: "3.9.0"
+      PYTHON_ARCH: "32"
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      PYTHON: "C:\\Python39-x64"
+      PYTHON_VERSION: "3.9.0"
+      PYTHON_ARCH: "64"
+
+    - PYTHON: "C:\\Python36"
+      PYTHON_VERSION: "3.6.4"
+      PYTHON_ARCH: "32"
+
+    - PYTHON: "C:\\Python36-x64"
+      PYTHON_VERSION: "3.6.4"
+      PYTHON_ARCH: "64"
+
+    - PYTHON: "C:\\Python37"
+      PYTHON_VERSION: "3.7.0"
+      PYTHON_ARCH: "32"
+
+    - PYTHON: "C:\\Python37-x64"
+      PYTHON_VERSION: "3.7.0"
+      PYTHON_ARCH: "64"
+
+    - PYTHON: "C:\\Python38"
+      PYTHON_VERSION: "3.8.0"
+      PYTHON_ARCH: "32"
+
+    - PYTHON: "C:\\Python38-x64"
+      PYTHON_VERSION: "3.8.0"
+      PYTHON_ARCH: "64"
+
     - PYTHON: "C:\\Python27"
       PYTHON_VERSION: "2.7.14"
       PYTHON_ARCH: "32"
@@ -42,40 +76,6 @@ environment:
       PYTHON_VERSION: "3.5.3"
       PYTHON_ARCH: "64"
 
-    - PYTHON: "C:\\Python36"
-      PYTHON_VERSION: "3.6.4"
-      PYTHON_ARCH: "32"
-
-    - PYTHON: "C:\\Python36-x64"
-      PYTHON_VERSION: "3.6.4"
-      PYTHON_ARCH: "64"
-
-    - PYTHON: "C:\\Python37"
-      PYTHON_VERSION: "3.7.0"
-      PYTHON_ARCH: "32"
-
-    - PYTHON: "C:\\Python37-x64"
-      PYTHON_VERSION: "3.7.0"
-      PYTHON_ARCH: "64"
-
-    - PYTHON: "C:\\Python38"
-      PYTHON_VERSION: "3.8.0"
-      PYTHON_ARCH: "32"
-
-    - PYTHON: "C:\\Python38-x64"
-      PYTHON_VERSION: "3.8.0"
-      PYTHON_ARCH: "64"
-
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-      PYTHON: "C:\\Python39"
-      PYTHON_VERSION: "3.9.0"
-      PYTHON_ARCH: "32"
-
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-      PYTHON: "C:\\Python39-x64"
-      PYTHON_VERSION: "3.9.0"
-      PYTHON_ARCH: "64"
-
 branches:
   only:
     - master
@@ -85,10 +85,10 @@ init:
 
 install:
   - "powershell appveyor\\install.ps1"
-  - "%CMD_IN_ENV% python -m pip install pygame pytest numpy"
-  - "%CMD_IN_ENV% python setup.py install"
+  - "%CMD_IN_ENV% %PYTHON%\\python.exe -m pip install pygame pytest numpy"
+  - "%CMD_IN_ENV% %PYTHON%\\python.exe setup.py install"
   - cd accelerate
-  - "%CMD_IN_ENV% python setup.py install"
+  - "%CMD_IN_ENV% %PYTHON%\\python.exe setup.py install"
   - cd ..
 
 build_script:
