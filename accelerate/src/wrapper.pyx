@@ -330,12 +330,16 @@ cdef class Wrapper:
                     result, self, pyArgs, cArgs,
                 )
             else:
-                return self.returnValues(
-                    result,
-                    self,
-                    pyArgs,
-                    cArgs,
-                )
+                try:
+                    return self.returnValues(
+                        result,
+                        self,
+                        pyArgs,
+                        cArgs,
+                    )
+                except Exception as err:
+                    err.args += (self.returnValues,)
+                    raise
         else:
             return result
 
