@@ -1,4 +1,3 @@
 tox
-cython>=28
+cython>=0.28
 numpy
--r ./test-requirements.txt
