@@ -84,12 +84,9 @@ GLuint = _defineType( 'GLuint', ctypes.c_uint, long )
 GLfixed = _defineType('GLfixed', ctypes.c_int32, int )
 GLclampx = _defineType('GLclampx', ctypes.c_int32, int )
 
-if hasattr(ctypes, 'c_ptrdiff_t'): # maybe some day...
-    GLsizei = _defineType( 'GLsizei', ctypes.c_ptrdiff_t, int )
-elif hasattr(ctypes, 'c_ssize_t'): # 2.7+ should have this
-    GLsizei = _defineType( 'GLsizei', ctypes.c_ssize_t, int )
-else: # really old, likely never hit these days
-    GLsizei = _defineType( 'GLsizei', ctypes.c_long, int )
+GLsizei = _defineType( 'GLsizei', ctypes.c_int, int )
+GLintptr = _defineType( 'GLintptr', ctypes.c_ssize_t, int )
+GLsizeiptr = _defineType( 'GLsizeiptr', ctypes.c_ssize_t, int )
 
 GLubyte = ctypes.c_ubyte
 GLubyte_3 = GLubyte * 3
@@ -109,8 +106,8 @@ GLuint64 = GLuint64EXT = _defineType('GLuint64', ctypes.c_uint64, long )
 GLint64 = GLint64EXT = _defineType('GLint64', ctypes.c_int64, long )
 
 # ptrdiff_t, actually...
-GLsizeiptrARB = GLsizeiptr = GLsizei
-GLvdpauSurfaceNV = GLintptrARB = GLintptr = GLsizei
+GLsizeiptrARB = GLsizeiptr
+GLvdpauSurfaceNV = GLintptrARB = GLintptr
 size_t = ctypes.c_size_t
 int32_t = ctypes.c_int32
 int64_t = ctypes.c_int64
