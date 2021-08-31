@@ -236,7 +236,7 @@ def _get_texture_level_dims(target,level):
         GL_1_1.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_HEIGHT, dim )
         dims.append( dim.value )
         if target != GL_1_1.GL_TEXTURE_2D:
-            GL_1_1.glGetTexLevelParameteriv( target, level, GL_1_1.GL_TEXTURE_DEPTH, dim )
+            GL_1_1.glGetTexLevelParameteriv( target, level, GL_1_2.GL_TEXTURE_DEPTH, dim )
             dims.append( dim.value )
     return dims
 
