@@ -84,9 +84,12 @@ GLuint = _defineType( 'GLuint', ctypes.c_uint, long )
 GLfixed = _defineType('GLfixed', ctypes.c_int32, int )
 GLclampx = _defineType('GLclampx', ctypes.c_int32, int )
 
-GLsizei = _defineType( 'GLsizei', ctypes.c_int, int )
+# This is explicitly called out as equivalent to a uint
+GLsizei = _defineType( 'GLsizei', ctypes.c_uint, long )
+# Signed 2's complement binary integer with sizeof( void * )
 GLintptr = _defineType( 'GLintptr', ctypes.c_ssize_t, int )
-GLsizeiptr = _defineType( 'GLsizeiptr', ctypes.c_ssize_t, int )
+# Unsigned size-of-x
+GLsizeiptr = _defineType( 'GLsizeiptr', ctypes.c_size_t, int )
 
 GLubyte = ctypes.c_ubyte
 GLubyte_3 = GLubyte * 3
