@@ -8,13 +8,15 @@ WHEEL_DIR = os.path.join( HERE, '.wheels' )
 
 PYTHONS = [
     # order is so that most-important platforms are checked first
+    'python3.10',
+    'python3.9',
+    'python3.8',
+    'python3.6',
     'python2.7',
-    'python3.4',
-    'python3.3',
     # python2.6 support is less important than the above at this point,
     # and doing a --user install clobbers 2.7's version of the packages
     # should use a virtualenv for all of them, really...
-    'python2.6', 
+    #'python2.6', 
 ]
 PYGAME_SOURCE = os.path.join( HERE, '.pygame' )
 
