@@ -24,7 +24,7 @@ def main():
         )
         print(dpy)
         if EGL_1_5.eglGetPlatformDisplay:
-            dpy = platform_base.eglGetPlatformDisplay(
+            dpy = EGL_1_5.eglGetPlatformDisplay(
                 platform_gbm.EGL_PLATFORM_GBM_MESA, 
                 ctypes.c_void_p(dev), 
                 ctypes.c_void_p(0)
