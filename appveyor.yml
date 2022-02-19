@@ -10,15 +10,27 @@ environment:
     # a later point release.
     # See: http://www.appveyor.com/docs/installed-software#python
 
+    # Tweak builds where Python 3.10 is installed
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+      PYTHON: "C:\\Python310-x64"
+      PYTHON_VERSION: "3.10.2"
+      PYTHON_ARCH: "64"
+
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+      PYTHON: "C:\\Python310"
+      PYTHON_VERSION: "3.10.2"
+      PYTHON_ARCH: "64"
+
     # The tweak builds on the image where Python3.9 compatible compiler is available
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       PYTHON: "C:\\Python39"
-      PYTHON_VERSION: "3.9.0"
+      PYTHON_VERSION: "3.9.10"
       PYTHON_ARCH: "32"
 
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
       PYTHON: "C:\\Python39-x64"
-      PYTHON_VERSION: "3.9.0"
+      PYTHON_VERSION: "3.9.10"
       PYTHON_ARCH: "64"
 
     # Older Python's that can be built with the default windows images...
