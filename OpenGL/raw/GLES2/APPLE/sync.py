@@ -41,7 +41,7 @@ def glFenceSyncAPPLE(condition,flags):pass
 def glGetInteger64vAPPLE(pname,params):pass
 @_f
 @_p.types(None,_cs.GLsync,_cs.GLenum,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLintArray)
-def glGetSyncivAPPLE(sync,pname,count,length,values):pass
+def glGetSyncivAPPLE(sync,pname,bufSize,length,values):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLsync)
 def glIsSyncAPPLE(sync):pass

@@ -19,4 +19,4 @@ GL_QUERY_RESOURCE_TEXTURE_NV=_C('GL_QUERY_RESOURCE_TEXTURE_NV',0x9545)
 GL_QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV=_C('GL_QUERY_RESOURCE_TYPE_VIDMEM_ALLOC_NV',0x9540)
 @_f
 @_p.types(_cs.GLint,_cs.GLenum,_cs.GLint,_cs.GLuint,arrays.GLintArray)
-def glQueryResourceNV(queryType,tagId,count,buffer):pass
+def glQueryResourceNV(queryType,tagId,bufSize,buffer):pass

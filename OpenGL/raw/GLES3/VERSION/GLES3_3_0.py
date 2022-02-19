@@ -466,7 +466,7 @@ def glGetInteger64v(pname,data):pass
 def glGetIntegeri_v(target,index,data):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLsizei,arrays.GLintArray)
-def glGetInternalformativ(target,internalformat,pname,count,params):pass
+def glGetInternalformativ(target,internalformat,pname,bufSize,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLuintArray,ctypes.c_void_p)
 def glGetProgramBinary(program,bufSize,length,binaryFormat,binary):pass
@@ -487,7 +487,7 @@ def glGetSamplerParameteriv(sampler,pname,params):pass
 def glGetStringi(name,index):pass
 @_f
 @_p.types(None,_cs.GLsync,_cs.GLenum,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLintArray)
-def glGetSynciv(sync,pname,count,length,values):pass
+def glGetSynciv(sync,pname,bufSize,length,values):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLsizeiArray,arrays.GLuintArray,arrays.GLcharArray)
 def glGetTransformFeedbackVarying(program,index,bufSize,length,size,type,name):pass

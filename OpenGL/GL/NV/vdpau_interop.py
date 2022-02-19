@@ -45,7 +45,7 @@ glVDPAURegisterOutputSurfaceNV=wrapper.wrapper(glVDPAURegisterOutputSurfaceNV).s
 )
 # glVDPAUGetSurfaceivNV.length is OUTPUT without known output size
 glVDPAUGetSurfaceivNV=wrapper.wrapper(glVDPAUGetSurfaceivNV).setOutput(
-    'values',size=lambda x:(x,),pnameArg='count',orPassIn=True
+    'values',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 )
 # INPUT glVDPAUMapSurfacesNV.surfaces size not checked against numSurfaces
 glVDPAUMapSurfacesNV=wrapper.wrapper(glVDPAUMapSurfacesNV).setInputArraySize(

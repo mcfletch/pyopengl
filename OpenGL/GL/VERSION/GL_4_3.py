@@ -31,7 +31,7 @@ glGetFramebufferParameteriv=wrapper.wrapper(glGetFramebufferParameteriv).setOutp
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )
 glGetInternalformati64v=wrapper.wrapper(glGetInternalformati64v).setOutput(
-    'params',size=lambda x:(x,),pnameArg='count',orPassIn=True
+    'params',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 )
 # INPUT glInvalidateFramebuffer.attachments size not checked against numAttachments
 glInvalidateFramebuffer=wrapper.wrapper(glInvalidateFramebuffer).setInputArraySize(
@@ -65,7 +65,7 @@ glGetProgramResourceName=wrapper.wrapper(glGetProgramResourceName).setOutput(
 glGetProgramResourceiv=wrapper.wrapper(glGetProgramResourceiv).setOutput(
     'length',size=(1,),orPassIn=True
 ).setOutput(
-    'params',size=lambda x:(x,),pnameArg='count',orPassIn=True
+    'params',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 ).setInputArraySize(
     'props', None
 )

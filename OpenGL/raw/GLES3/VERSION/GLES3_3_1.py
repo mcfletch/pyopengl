@@ -253,7 +253,7 @@ def glGetProgramResourceLocation(program,programInterface,name):pass
 def glGetProgramResourceName(program,programInterface,index,bufSize,length,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLintArray)
-def glGetProgramResourceiv(program,programInterface,index,propCount,props,count,length,params):pass
+def glGetProgramResourceiv(program,programInterface,index,propCount,props,bufSize,length,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLint,_cs.GLenum,arrays.GLfloatArray)
 def glGetTexLevelParameterfv(target,level,pname,params):pass

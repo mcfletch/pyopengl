@@ -110,7 +110,7 @@ def glGetInteger64v(pname,data):pass
 def glGetMultisamplefv(pname,index,val):pass
 @_f
 @_p.types(None,_cs.GLsync,_cs.GLenum,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLintArray)
-def glGetSynciv(sync,pname,count,length,values):pass
+def glGetSynciv(sync,pname,bufSize,length,values):pass
 @_f
 @_p.types(_cs.GLboolean,_cs.GLsync)
 def glIsSync(sync):pass

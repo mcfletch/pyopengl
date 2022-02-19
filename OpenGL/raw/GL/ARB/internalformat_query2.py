@@ -147,4 +147,4 @@ GL_VIEW_CLASS_S3TC_DXT5_RGBA=_C('GL_VIEW_CLASS_S3TC_DXT5_RGBA',0x82CF)
 GL_VIEW_COMPATIBILITY_CLASS=_C('GL_VIEW_COMPATIBILITY_CLASS',0x82B6)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLsizei,arrays.GLint64Array)
-def glGetInternalformati64v(target,internalformat,pname,count,params):pass
+def glGetInternalformati64v(target,internalformat,pname,bufSize,params):pass

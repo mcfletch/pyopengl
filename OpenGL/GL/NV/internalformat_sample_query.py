@@ -57,7 +57,7 @@ def glInitInternalformatSampleQueryNV():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# INPUT glGetInternalformatSampleivNV.params size not checked against count
+# INPUT glGetInternalformatSampleivNV.params size not checked against bufSize
 glGetInternalformatSampleivNV=wrapper.wrapper(glGetInternalformatSampleivNV).setInputArraySize(
     'params', None
 )

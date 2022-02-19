@@ -14,4 +14,4 @@ def _f( function ):
 GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE=_C('GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE',0x93A0)
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetTranslatedShaderSourceANGLE(shader,bufSize,length,source):pass
+def glGetTranslatedShaderSourceANGLE(shader,bufsize,length,source):pass

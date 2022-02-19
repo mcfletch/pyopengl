@@ -78,12 +78,12 @@ glGetActiveSubroutineUniformiv=wrapper.wrapper(glGetActiveSubroutineUniformiv).s
 glGetActiveSubroutineUniformName=wrapper.wrapper(glGetActiveSubroutineUniformName).setOutput(
     'length',size=(1,),orPassIn=True
 ).setOutput(
-    'name',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+    'name',size=lambda x:(x,),pnameArg='bufsize',orPassIn=True
 )
 glGetActiveSubroutineName=wrapper.wrapper(glGetActiveSubroutineName).setOutput(
     'length',size=(1,),orPassIn=True
 ).setOutput(
-    'name',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+    'name',size=lambda x:(x,),pnameArg='bufsize',orPassIn=True
 )
 # INPUT glUniformSubroutinesuiv.indices size not checked against count
 glUniformSubroutinesuiv=wrapper.wrapper(glUniformSubroutinesuiv).setInputArraySize(

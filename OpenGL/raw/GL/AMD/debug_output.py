@@ -36,4 +36,4 @@ def glDebugMessageEnableAMD(category,severity,count,ids,enabled):pass
 def glDebugMessageInsertAMD(category,severity,id,length,buf):pass
 @_f
 @_p.types(_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray,arrays.GLuintArray,arrays.GLuintArray,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetDebugMessageLogAMD(count,bufSize,categories,severities,ids,lengths,message):pass
+def glGetDebugMessageLogAMD(count,bufsize,categories,severities,ids,lengths,message):pass

@@ -33,7 +33,7 @@ def glCoverageModulationNV(components):pass
 def glCoverageModulationTableNV(n,v):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLfloatArray)
-def glGetCoverageModulationTableNV(bufSize,v):pass
+def glGetCoverageModulationTableNV(bufsize,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLboolean)
 def glRasterSamplesEXT(samples,fixedsamplelocations):pass

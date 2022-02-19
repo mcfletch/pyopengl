@@ -20,4 +20,4 @@ GL_TEXTURE_2D_MULTISAMPLE=_C('GL_TEXTURE_2D_MULTISAMPLE',0x9100)
 GL_TEXTURE_2D_MULTISAMPLE_ARRAY=_C('GL_TEXTURE_2D_MULTISAMPLE_ARRAY',0x9102)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLsizei,_cs.GLenum,_cs.GLsizei,arrays.GLintArray)
-def glGetInternalformatSampleivNV(target,internalformat,samples,pname,count,params):pass
+def glGetInternalformatSampleivNV(target,internalformat,samples,pname,bufSize,params):pass

@@ -31,9 +31,6 @@ def glEndQueryEXT(target):pass
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray)
 def glGenQueriesEXT(n,ids):pass
 @_f
-@_p.types(None,_cs.GLenum,arrays.GLint64Array)
-def glGetInteger64vEXT(pname,data):pass
-@_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,arrays.GLint64Array)
 def glGetQueryObjecti64vEXT(id,pname,params):pass
 @_f

@@ -131,10 +131,10 @@ def glEndQueryIndexed(target,index):pass
 def glGenTransformFeedbacks(n,ids):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetActiveSubroutineName(program,shadertype,index,bufSize,length,name):pass
+def glGetActiveSubroutineName(program,shadertype,index,bufsize,length,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetActiveSubroutineUniformName(program,shadertype,index,bufSize,length,name):pass
+def glGetActiveSubroutineUniformName(program,shadertype,index,bufsize,length,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetActiveSubroutineUniformiv(program,shadertype,index,pname,values):pass

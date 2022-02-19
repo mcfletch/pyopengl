@@ -24,10 +24,10 @@ GL_UNIFORM_NAME_LENGTH=_C('GL_UNIFORM_NAME_LENGTH',0x8A39)
 GL_UNIFORM_SIZE=_C('GL_UNIFORM_SIZE',0x8A38)
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetActiveSubroutineName(program,shadertype,index,bufSize,length,name):pass
+def glGetActiveSubroutineName(program,shadertype,index,bufsize,length,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLcharArray)
-def glGetActiveSubroutineUniformName(program,shadertype,index,bufSize,length,name):pass
+def glGetActiveSubroutineUniformName(program,shadertype,index,bufsize,length,name):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLenum,arrays.GLintArray)
 def glGetActiveSubroutineUniformiv(program,shadertype,index,pname,values):pass

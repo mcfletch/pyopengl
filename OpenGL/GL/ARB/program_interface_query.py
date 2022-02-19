@@ -71,7 +71,7 @@ glGetProgramResourceName=wrapper.wrapper(glGetProgramResourceName).setOutput(
 glGetProgramResourceiv=wrapper.wrapper(glGetProgramResourceiv).setOutput(
     'length',size=(1,),orPassIn=True
 ).setOutput(
-    'params',size=lambda x:(x,),pnameArg='count',orPassIn=True
+    'params',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 ).setInputArraySize(
     'props', None
 )

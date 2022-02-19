@@ -146,7 +146,7 @@ def glDrawTransformFeedbackStreamInstanced(mode,id,stream,instancecount):pass
 def glGetActiveAtomicCounterBufferiv(program,bufferIndex,pname,params):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLsizei,arrays.GLintArray)
-def glGetInternalformativ(target,internalformat,pname,count,params):pass
+def glGetInternalformativ(target,internalformat,pname,bufSize,params):pass
 @_f
 @_p.types(None,_cs.GLbitfield)
 def glMemoryBarrier(barriers):pass

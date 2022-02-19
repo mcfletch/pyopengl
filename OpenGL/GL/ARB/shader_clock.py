@@ -9,16 +9,6 @@ Overview (from the spec)
 	This extension exposes a 64-bit monotonically incrementing shader
 	counter which may be used to derive local timing information within
 	a single shader invocation.
-	
-	Mapping to SPIR-V
-	-----------------
-	
-	For informational purposes (non-specification), the following is an
-	expected way for an implementation to map GLSL constructs to SPIR-V
-	constructs:
-	
-	    clock2x32ARB -> OpReadClockKHR with a Scope of Subgroup, Result type of uvec2
-	    clockARB -> OpReadClockKHR with a Scope of Subgroup, Result type of uitn64_t
 
 The official definition of this extension is available here:
 http://www.opengl.org/registry/specs/ARB/shader_clock.txt

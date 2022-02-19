@@ -81,7 +81,7 @@ glGetDebugMessageLogAMD=wrapper.wrapper(glGetDebugMessageLogAMD).setOutput(
 ).setOutput(
     'lengths',size=lambda x:(x,),pnameArg='count',orPassIn=True
 ).setOutput(
-    'message',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+    'message',size=lambda x:(x,),pnameArg='bufsize',orPassIn=True
 ).setOutput(
     'severities',size=lambda x:(x,),pnameArg='count',orPassIn=True
 )

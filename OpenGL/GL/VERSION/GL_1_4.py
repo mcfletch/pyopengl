@@ -20,7 +20,7 @@ def glInitGl14VERSION():
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
 # INPUT glMultiDrawArrays.count size not checked against 'drawcount'
-# INPUT glMultiDrawArrays.first size not checked against 'drawcount'
+# INPUT glMultiDrawArrays.first size not checked against 'count'
 glMultiDrawArrays=wrapper.wrapper(glMultiDrawArrays).setInputArraySize(
     'count', None
 ).setInputArraySize(

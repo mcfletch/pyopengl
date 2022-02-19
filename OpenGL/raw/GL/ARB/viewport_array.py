@@ -26,16 +26,10 @@ GL_VIEWPORT_INDEX_PROVOKING_VERTEX=_C('GL_VIEWPORT_INDEX_PROVOKING_VERTEX',0x825
 GL_VIEWPORT_SUBPIXEL_BITS=_C('GL_VIEWPORT_SUBPIXEL_BITS',0x825C)
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLdoubleArray)
-def glDepthRangeArraydvNV(first,count,v):pass
-@_f
-@_p.types(None,_cs.GLuint,_cs.GLsizei,arrays.GLdoubleArray)
 def glDepthRangeArrayv(first,count,v):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble)
 def glDepthRangeIndexed(index,n,f):pass
-@_f
-@_p.types(None,_cs.GLuint,_cs.GLdouble,_cs.GLdouble)
-def glDepthRangeIndexeddNV(index,n,f):pass
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLuint,arrays.GLdoubleArray)
 def glGetDoublei_v(target,index,data):pass

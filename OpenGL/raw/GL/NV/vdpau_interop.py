@@ -20,7 +20,7 @@ GL_WRITE_DISCARD_NV=_C('GL_WRITE_DISCARD_NV',0x88BE)
 def glVDPAUFiniNV():pass
 @_f
 @_p.types(None,_cs.GLvdpauSurfaceNV,_cs.GLenum,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLintArray)
-def glVDPAUGetSurfaceivNV(surface,pname,count,length,values):pass
+def glVDPAUGetSurfaceivNV(surface,pname,bufSize,length,values):pass
 @_f
 @_p.types(None,ctypes.c_void_p,ctypes.c_void_p)
 def glVDPAUInitNV(vdpDevice,getProcAddress):pass

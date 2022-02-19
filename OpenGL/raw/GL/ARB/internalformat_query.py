@@ -14,4 +14,4 @@ def _f( function ):
 GL_NUM_SAMPLE_COUNTS=_C('GL_NUM_SAMPLE_COUNTS',0x9380)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLenum,_cs.GLsizei,arrays.GLintArray)
-def glGetInternalformativ(target,internalformat,pname,count,params):pass
+def glGetInternalformativ(target,internalformat,pname,bufSize,params):pass

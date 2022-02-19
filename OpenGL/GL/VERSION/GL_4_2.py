@@ -28,7 +28,7 @@ glDrawElementsInstancedBaseVertexBaseInstance=wrapper.wrapper(glDrawElementsInst
     'indices', None
 )
 glGetInternalformativ=wrapper.wrapper(glGetInternalformativ).setOutput(
-    'params',size=lambda x:(x,),pnameArg='count',orPassIn=True
+    'params',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 )
 glGetActiveAtomicCounterBufferiv=wrapper.wrapper(glGetActiveAtomicCounterBufferiv).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
