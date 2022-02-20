@@ -82,7 +82,7 @@ if __name__ == "__main__":
         description = 'Standard OpenGL bindings for Python',
         options = {
             'sdist': {
-                'formats': ['gztar','zip'],
+                'formats': ['gztar'],
                 'force_manifest': True,
             },
         },
