@@ -145,5 +145,8 @@ if __name__ == "__main__":
             'OpenGL_accelerate':'OpenGL_accelerate',
         },
         ext_modules=extensions,
+        install_requires = [
+            "numpy"
+        ],
         **extraArguments
     )
