@@ -85,9 +85,9 @@ init:
 install:
   - "powershell appveyor\\install.ps1"
   - "%CMD_IN_ENV% %PYTHON%\\python.exe -m pip install --prefer-binary pygame pytest numpy"
-  - "%CMD_IN_ENV% %PYTHON%\\python.exe pip install ."
+  - "%CMD_IN_ENV% %PYTHON%\\python.exe -m pip install ."
   - cd accelerate
-  - "%CMD_IN_ENV% %PYTHON%\\python.exe pip install ."
+  - "%CMD_IN_ENV% %PYTHON%\\python.exe -m pip install ."
   - cd ..
 
 build_script:
