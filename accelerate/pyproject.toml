@@ -1,0 +1,30 @@
+[build-system]
+requires = [ "setuptools", "Cython >= 0.28", "numpy" ]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PyOpenGL-accelerate"
+description = "Acceleration code for PyOpenGL"
+authors = [ { name = "Mike C. Fletcher", email = "mcfletch@vrplumber.com" } ]
+urls.homepage = "http://pyopengl.sourceforge.net"
+license = { text = "BSD" }
+readme = { file = "README.txt", content-type = "text/plain" }
+keywords = [ "PyOpenGL", "accelerate", "Cython" ]
+classifiers = [
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: C",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Multimedia :: Graphics :: 3D Rendering",
+    "Intended Audience :: Developers",
+]
+
+dynamic = [ "version" ]
+
+[tool.setuptools]
+packages = [ "OpenGL_accelerate" ]
+platforms = [ "Win32", "Linux", "OS-X", "Posix" ]
+
+[tool.setuptools.dynamic]
+version = { attr = "OpenGL_accelerate.__init__.__version__" }

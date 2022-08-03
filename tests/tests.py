@@ -139,14 +139,13 @@ def ensure_virtualenv( python, numpy=True ):
     
     subprocess.check_call([
         os.path.join( bin_path, 'python' ),
-        'setup.py',
-        'build_ext', '--force',
-        'install',
+        '-m', 'pip', 'install',
+        '.',
     ], cwd = os.path.join( HERE, '..','OpenGL_accelerate' ))
     subprocess.check_call([
         os.path.join( bin_path, 'python' ),
-        'setup.py',
-        'develop',
+        '-m', 'pip', 'install',
+        '-e', '.',
     ], cwd = os.path.join( HERE, '..' ))
 
 def env_setup():

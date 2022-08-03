@@ -85,15 +85,16 @@ init:
 install:
   - "powershell appveyor\\install.ps1"
   - "%CMD_IN_ENV% %PYTHON%\\python.exe -m pip install --prefer-binary pygame pytest numpy"
-  - "%CMD_IN_ENV% %PYTHON%\\python.exe setup.py install"
+  - "%CMD_IN_ENV% %PYTHON%\\python.exe pip install ."
   - cd accelerate
-  - "%CMD_IN_ENV% %PYTHON%\\python.exe setup.py install"
+  - "%CMD_IN_ENV% %PYTHON%\\python.exe pip install ."
   - cd ..
 
 build_script:
   - cd accelerate
-  - "ECHO %WITH_COMPILER% %PYTHON%/python.exe setup.py bdist_wheel"
-  - "%WITH_COMPILER% %PYTHON%/python.exe setup.py bdist_wheel"
+  - "%PYTHON%\\python.exe -m pip install build"
+  - "ECHO %WITH_COMPILER% %PYTHON%/python.exe -m build ."
+  - "%WITH_COMPILER% %PYTHON%/python.exe -m build ."
   - cd ..
 
 test_script:
