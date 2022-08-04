@@ -165,7 +165,7 @@ function InstallPip ($python_home) {
         & $python_path $GET_PIP_PATH
     } else {
         Write-Host "pip already installed. Upgrading..."
-        & $pip_path install --upgrade pip
+        & $python_path -m pip install --upgrade pip
     }
 }
 
@@ -219,7 +219,7 @@ function InstallMinicondaPip ($python_home) {
         Start-Process -FilePath "$conda_path" -ArgumentList $args -Wait -Passthru
     } else {
         Write-Host "pip already installed. Upgrading..."
-        & $pip_path install --upgrade pip
+        & $conda_path update --yes pip
     }
 }
 
