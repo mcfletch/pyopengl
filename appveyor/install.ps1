@@ -164,7 +164,8 @@ function InstallPip ($python_home) {
         Write-Host "Executing:" $python_path $GET_PIP_PATH
         & $python_path $GET_PIP_PATH
     } else {
-        Write-Host "pip already installed."
+        Write-Host "pip already installed. Upgrading..."
+        & $python_path -m pip install --upgrade pip
     }
 }
 
@@ -217,7 +218,8 @@ function InstallMinicondaPip ($python_home) {
         Write-Host $conda_path $args
         Start-Process -FilePath "$conda_path" -ArgumentList $args -Wait -Passthru
     } else {
-        Write-Host "pip already installed."
+        Write-Host "pip already installed. Upgrading..."
+        & $conda_path update --yes pip
     }
 }
 
@@ -229,7 +231,7 @@ function InstallPackage ($python_home, $pkg) {
 function main () {
     InstallPython $env:PYTHON_VERSION $env:PYTHON_ARCH $env:PYTHON
     InstallPip $env:PYTHON
-    InstallPackage $env:PYTHON wheel numpy pygame
+    InstallPackage $env:PYTHON wheel
 }
 
 main

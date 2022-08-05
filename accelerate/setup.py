@@ -1,10 +1,9 @@
 #!/usr/bin/env python
 """Builds accelleration functions for PyOpenGL
 """
-try:
-    from setuptools import setup,Extension
-except ImportError:
-    from distutils.core import setup,Extension
+
+from setuptools import setup, Extension
+
 try:
     from Cython.Distutils import build_ext
 except ImportError:
@@ -15,15 +14,6 @@ else:
 import sys, os
 
 HERE = os.path.normpath(os.path.abspath(os.path.dirname( __file__ )))
-with open(os.path.join(HERE, 'README.txt'), 'r') as f:
-    long_description = f.read()
-
-version = None
-# get version from __init__.py
-for line in open( os.path.join( HERE,'OpenGL_accelerate','__init__.py') ):
-    if line.startswith( '__version__' ):
-        version = eval(line.split( '=' )[1].strip())
-assert version, """Couldn't determine version string!"""
 
 extensions = [
 ]
@@ -41,7 +31,6 @@ def cython_extension( name, include_dirs = (), ):
             ),
         ],
         include_dirs = [
-            os.path.join(HERE,'..'),
             os.path.join(HERE,'src'),
             HERE,
         ]+ list(include_dirs),
@@ -92,7 +81,7 @@ else:
 
     ) )
 
-if __name__ == "__main__":
+if True:  # minimise Git diff
     # Workaround for Broken apple Python build params echoed in distutils
     # Approach taken from the PyMongo driver. OS-X Python builds were created with 
     # non-existent flag, and distutils passes those flags to the extension 
@@ -104,45 +93,19 @@ if __name__ == "__main__":
         for key in ('CFLAGS', 'PY_CFLAGS'):
             if key in res:
                 res[key] = res[key].replace('-mno-fused-madd', '')
-    
-    extraArguments = {
-        'classifiers': [
-            """License :: OSI Approved :: BSD License""",
-            """Programming Language :: Python""",
-            """Programming Language :: Python :: 3""",
-            """Programming Language :: C""",
-            """Topic :: Software Development :: Libraries :: Python Modules""",
-            """Topic :: Multimedia :: Graphics :: 3D Rendering""",
-            """Intended Audience :: Developers""",
-        ],
-        'keywords': 'PyOpenGL,accelerate,Cython',
-        'long_description' : long_description,
-        'long_description_content_type' : 'text/plain',
-        'platforms': ['Win32','Linux','OS-X','Posix'],
-    }
+
+    extraArguments = {}
     ### Now the actual set up call
     if have_cython:
         extraArguments['cmdclass'] = {
             'build_ext': build_ext,
         }
     setup (
-        name = "PyOpenGL-accelerate",
-        version = version,
-        description = "Acceleration code for PyOpenGL",
-        author = "Mike C. Fletcher",
-        author_email = "mcfletch@vrplumber.com",
-        url = "http://pyopengl.sourceforge.net",
-        download_url = "http://sourceforge.net/project/showfiles.php?group_id=5988",
-        license = 'BSD',
-        packages = ['OpenGL_accelerate'],
         options = {
             'sdist': {
                 'formats': ['gztar','zip'],
                 'force_manifest': True,
             },
-        },
-        package_dir = {
-            'OpenGL_accelerate':'OpenGL_accelerate',
         },
         ext_modules=extensions,
         **extraArguments

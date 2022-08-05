@@ -6,12 +6,12 @@ PyOpenGL is normally distributed via PyPI using standard pip::
     $ pip install PyOpenGL PyOpenGL_accelerate
 
 You can install this repository by branching/cloning and running
-setup.py::
+``pip``::
 
     $ cd pyopengl
-    $ python setup.py develop
+    $ pip install -e .
     $ cd accelerate
-    $ python setup.py develop
+    $ pip install -e .
 
 Note that to compile PyOpenGL_accelerate you will need to have 
 a functioning Python extension-compiling environment.
