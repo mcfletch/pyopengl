@@ -1,3 +1,3 @@
 tox
-cython>=0.28
+cython>=0.28,<3.0
 numpy
