@@ -37,7 +37,7 @@ The `documentation pages`_ are useful for looking up the parameters and semantic
 PyOpenGL calls.
 
 .. _`tutorial page`: http://pyopengl.sourceforge.net/context/tutorials/index.html
-.. _`documentation pages`: http://pyopengl.sourceforge.net/documentation/
+.. _`documentation pages`: https://mcfletch.github.io/pyopengl/documentation/index.html
 
 
 Running Tests
