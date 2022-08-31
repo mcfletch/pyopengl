@@ -16,7 +16,7 @@ try:
             )
             raise ImportError("""Old version of OpenGL_accelerate""")
         ACCELERATE_AVAILABLE = True
-        _log.info("""OpenGL_accelerate module loaded""")
+        _log.debug("""OpenGL_accelerate module loaded""")
     else:
         raise ImportError("""Acceleration disabled""")
 except ImportError as err:
