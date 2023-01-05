@@ -40,7 +40,6 @@ class GLXPlatform(baseplatform.BasePlatform):
         except OSError:
             return None
 
-    # GLX doesn't seem to have its own loadable module?
     @baseplatform.lazy_property
     def GLX(self):
         try:
