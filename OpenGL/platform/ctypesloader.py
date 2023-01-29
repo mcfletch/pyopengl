@@ -52,7 +52,7 @@ def _loadLibraryPosix(dllType, name, mode):
     suffix = '.so'
     base_name = prefix + name + suffix
     
-    filenames_to_try = []
+    filenames_to_try = [base_name]
     # If a .so is missing, let's try libs with so version (e.g libGLU.so.9, libGLU.so.8 and so on)
     filenames_to_try.extend(list(reversed([
         base_name + '.%i' % i for i in range(0, 10)
