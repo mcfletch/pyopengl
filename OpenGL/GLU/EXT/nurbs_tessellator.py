@@ -1,6 +1,7 @@
 '''GLU extension EXT.nurbs_tessellator
 '''
 from OpenGL import extensions
+from OpenGL.raw.GL import _types
 from OpenGL.raw.GLU import constants
 
 GLU_NURBS_BEGIN_EXT = _types.GLU_NURBS_BEGIN_EXT
@@ -18,6 +19,7 @@ GLU_NURBS_MODE_EXT = _types.GLU_NURBS_MODE_EXT
 GLU_NURBS_TESSELLATOR_EXT = _types.GLU_NURBS_TESSELLATOR_EXT
 GLU_NURBS_RENDERER_EXT = _types.GLU_NURBS_RENDERER_EXT
 
+
 def gluInitNurbsTessellatorEXT():
     '''Return boolean indicating whether this module is available'''
-    return extensions.hasGLUExtension( 'GLU_EXT_nurbs_tessellator' )
+    return extensions.hasGLUExtension('GLU_EXT_nurbs_tessellator')
