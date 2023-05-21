@@ -113,7 +113,7 @@ if (  # Prevents running of setup during code introspection imports
     setup(
         options={
             "sdist": {
-                "formats": ["gztar", "zip"],
+                "formats": ["gztar"],
                 "force_manifest": True,
             },
         },
