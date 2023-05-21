@@ -28,12 +28,13 @@ jobs:
       with:
         platforms: all
     - name: Build wheels
-      uses: pypa/cibuildwheel@v2.12.1
+      uses: pypa/cibuildwheel@v2.12.3
       with:
-        package_dir: 'accelerate'
-        output_dir: 'accelerate/dist'
+        package_dir: './accelerate'
+        output_dir: './accelerate/dist'
       env:
         BUILD_EXTENSION: yes
+        CIBW_SKIP: 'pp*'
 
     - name: Save wheels
       uses: actions/upload-artifact@v3
