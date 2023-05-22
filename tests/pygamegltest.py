@@ -25,11 +25,14 @@ import pygame, pygame.display
 from functools import wraps
 
 SCREEN = None
-def pygametest( size=(300,300), name=None ):
-    def gltest( function ):
+
+
+def pygametest(size=(300, 300), name=None):
+    def gltest(function):
         """Decorator to allow a function to run in a Pygame OpenGL context"""
-        @wraps( function )
-        def test_function( *args, **named ):
+
+        @wraps(function)
+        def test_function(*args, **named):
             global SCREEN
             pygame.display.init()
             SCREEN = pygame.display.set_mode(
@@ -37,13 +40,16 @@ def pygametest( size=(300,300), name=None ):
                 pygame.OPENGL | pygame.DOUBLEBUF,
             )
             pygame.display.set_caption(name or function.__name__)
-            pygame.key.set_repeat(500,30)
+            pygame.key.set_repeat(500, 30)
             try:
                 return function(*args, **named)
             finally:
                 pygame.display.quit()
                 pygame.quit()
+
         return test_function
-    return gltest 
+
+    return gltest
+
 
 gltest = pygametest()

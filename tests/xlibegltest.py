@@ -47,7 +47,9 @@ API_NAMES = dict(
 
 
 class EGLWindow(object):
-    def __init__(self, display, msg, api='es2', attributes=DESIRED_ATTRIBUTES):
+    def __init__(
+        self, display, msg, size=(300, 300), api='es2', attributes=DESIRED_ATTRIBUTES
+    ):
         self.display = display
         self.msg = msg
 
@@ -55,8 +57,8 @@ class EGLWindow(object):
         self.window = self.screen.root.create_window(
             50,
             50,
-            300,
-            200,
+            size[0],
+            size[1],
             2,
             self.screen.root_depth,
             X.InputOutput,
@@ -65,6 +67,7 @@ class EGLWindow(object):
             background_pixel=self.screen.white_pixel,
             event_mask=(
                 X.ExposureMask
+                | X.ResizeRedirectMask
                 | X.StructureNotifyMask
                 | X.ButtonPressMask
                 | X.ButtonReleaseMask
@@ -92,6 +95,7 @@ class EGLWindow(object):
         num_configs = ctypes.c_long()
         configs = (EGLConfig * 2)()
         api_constant = API_NAMES[self.api.lower()]
+        print('api requested:', self.api, ' api constant', api_constant)
         local_attributes = self.attributes[:]
         local_attributes.extend(
             [
@@ -136,10 +140,6 @@ class EGLWindow(object):
                     eglSwapBuffers(self.egl_display, self.egl_surface)
                     if exit_on_render:
                         return
-                # elif e.type == X.ResizeRequest:
-                #     import pdb
-
-                #     pdb.set_trace()
 
                 elif e.type == X.KeyPress:
                     return

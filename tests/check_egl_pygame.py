@@ -19,6 +19,8 @@ if not os.environ.get("PYOPENGL_PLATFORM"):
 
 import OpenGL, ctypes
 
+OpenGL.setPlatform("egl")
+
 if os.environ.get("TEST_NO_ACCELERATE"):
     OpenGL.USE_ACCELERATE = False
 from OpenGL._bytes import as_str
@@ -87,9 +89,10 @@ def main(displayfunc, api):
     eglGetConfigs(display, configs, num_configs.value, num_configs)
     for config_id in configs:
         # print config_id
-        describe_config(display, config_id)
+        log.info("First config: %s", describe_config(display, config_id))
+        break
 
-    log.info("Attempting to bind and create contexts/apis")
+    log.info("Attempting to bind and create contexts/apis for %s", api)
     try:
         eglBindAPI(0x3333)  # junk value
     except GLError:
@@ -100,9 +103,17 @@ def main(displayfunc, api):
 
     # now need to get a raw X window handle...
     pygame.init()
-    pygame.display.set_mode((500, 500))
+
+    pygame.display.set_mode((500, 500), flags=pygame.NOFRAME | pygame.SHOWN)
+    # pygame.display.init()
     window = pygame.display.get_wm_info()["window"]
+
+    # print("Clearing current context")
+    # eglMakeCurrent(display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT)
+
     surface = eglCreateWindowSurface(display, configs[0], window, None)
+    if surface == EGL_NO_SURFACE:
+        raise RuntimeError("No surface could be created")
 
     ctx = eglCreateContext(display, configs[0], EGL_NO_CONTEXT, None)
     if ctx == EGL_NO_CONTEXT:
