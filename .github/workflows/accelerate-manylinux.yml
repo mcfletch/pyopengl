@@ -156,7 +156,7 @@ jobs:
         uses: actions/download-artifact@v3
         id: download
         with:
-          name: ${{ github.ref }}-core
+          name: core
           path: dist
 
       - name: Publish package distributions to PyPI
