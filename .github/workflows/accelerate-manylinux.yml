@@ -121,7 +121,7 @@ jobs:
           path: dist
       - name: Download Accelerate Binary
         uses: actions/download-artifact@v3
-        id: download
+        id: download-binary
         with:
           name: accel-binary
           path: dist
