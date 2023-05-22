@@ -71,6 +71,10 @@ class GLXPlatform(baseplatform.BasePlatform):
         return self.GLES2
 
     @baseplatform.lazy_property
+    def EGL(self):
+        return ctypesloader.loadLibrary(ctypes.cdll, 'EGL')
+
+    @baseplatform.lazy_property
     def glXGetProcAddressARB(self):
         base = self.GLX.glXGetProcAddressARB
         base.restype = ctypes.c_void_p
