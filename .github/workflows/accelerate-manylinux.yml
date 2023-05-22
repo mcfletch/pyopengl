@@ -2,7 +2,8 @@ name: Build PyOpenGL-accelerate wheels with manylinux
 
 on:
   push:
-    branch: "develop"
+    branches:
+      - "develop"
 
 jobs:
   tarballs:
@@ -39,13 +40,13 @@ jobs:
       - name: Save Core Distributions
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.ref }}-core
+          name: core
           path: dist/*
 
       - name: Save Accelerate Distributions
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.ref }}-accel
+          name: accel
           path: accelerate/dist/*
 
   wheels:
@@ -93,7 +94,7 @@ jobs:
       - name: Save wheels
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.ref }}-accel
+          name: accel-binary
           path: accelerate/dist/*.whl
 
   pypi-publish-accel:
@@ -116,7 +117,13 @@ jobs:
         uses: actions/download-artifact@v3
         id: download
         with:
-          name: ${{ github.ref }}-accel
+          name: accel
+          path: dist
+      - name: Download Accelerate Binary
+        uses: actions/download-artifact@v3
+        id: download
+        with:
+          name: accel-binary
           path: dist
 
       # retrieve your distributions here
