@@ -34,10 +34,20 @@ jobs:
         python3 -m
         build
         --sdist
-        --wheel
         --outdir accelerate/dist
         accelerate
 
+    - name: Save Core Distributions
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ github.ref }}-core
+        path: dist/*
+
+    - name: Save Accelerate Distributions
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ github.ref }}-accel
+        path: accelerate/dist/*
 
   wheels:
     name: Build architecture-specific wheels on ${{ matrix.os }}
@@ -70,7 +80,6 @@ jobs:
       env:
         BUILD_EXTENSION: yes
         CIBW_SKIP: 'pp*'
-        CIBW_BUILD: 'cp311-manylinux_x86_64'
     
     - name: Build wheels (master)
       uses: pypa/cibuildwheel@v2.12.3
@@ -85,52 +94,70 @@ jobs:
     - name: Save wheels
       uses: actions/upload-artifact@v3
       with:
-        name: ${{ github.ref }}
+        name: ${{ github.ref }}-accel
         path: accelerate/dist/*.whl
 
-  #  pypi-publish-accel:
-  #     name: Upload Accelerate ${{matrix.repo}}
-  #     runs-on: ubuntu-latest
-  #     # TODO: should be choosing the repo URL based on master/develop
-  #     if: ${{ github.ref == 'refs/heads/develop' }}
-  #     strategy:
-  #       matrix:
-  #           repo: 
-  #           - https://test.pypi.org/legacy/
-  #     permissions:
-  #       # IMPORTANT: this permission is mandatory for trusted publishing
-  #       id-token: write
-  #     steps:
-  #       # retrieve your distributions here
-  #       - name: Publish package distributions to PyPI
-  #         uses: pypa/gh-action-pypi-publish@release/v1
-  #         with:
-  #           username: __token__
-  #           password: ${{ secrets.PYPI_TOKEN }}
-  #           # Note: this is apparently different than the package-dir meaning in the cibuildwheel
-  #           packages-dir: 'accelerate/dist'
-  #           repository_url: ${{matrix.repo}}
-          
-  #  pypi-publish-core:
-  #     name: Upload OpenGL to ${{matrix.repo}}
-  #     runs-on: ubuntu-latest
-  #     # TODO: should be choosing the repo URL based on master/develop
-  #     if: ${{ github.ref == 'refs/heads/develop' }}
-  #     strategy:
-  #       matrix:
-  #         repo: 
-  #           - https://test.pypi.org/legacy/
-  #     permissions:
-  #       # IMPORTANT: this permission is mandatory for trusted publishing
-  #       id-token: write
-  #     steps:
-  #       # retrieve your distributions here
+   pypi-publish-accel:
+      name: Upload Accelerate ${{matrix.repo}}
+      runs-on: ubuntu-latest
+      needs: 
+        - wheels 
+        - tarballs
+      # TODO: should be choosing the repo URL based on master/develop
+      if: ${{ github.ref == 'refs/heads/develop' }}
+      strategy:
+        matrix:
+            repo: 
+            - https://test.pypi.org/legacy/
+      permissions:
+        # IMPORTANT: this permission is mandatory for trusted publishing
+        id-token: write
+      steps:
+        - name: Download Accelerate
+          uses: actions/download-artifact@v3
+          id: download
+          with:
+            name: ${{ github.ref }}-accel
+            path: dist
 
-  #       - name: Publish package distributions to PyPI
-  #         uses: pypa/gh-action-pypi-publish@release/v1
-  #         with:
-  #           username: __token__
-  #           password: ${{ secrets.PYPI_TOKEN }}
-  #           # Note: this is apparently different than the package-dir meaning in the cibuildwheel
-  #           packages-dir: 'dist'
-  #           repository_url: ${{matrix.repo}}
+        # retrieve your distributions here
+        - name: Publish package distributions to PyPI
+          uses: pypa/gh-action-pypi-publish@release/v1
+          with:
+            username: __token__
+            password: ${{ secrets.PYPI_TOKEN }}
+            # Note: this is apparently different than the package-dir meaning in the cibuildwheel
+            packages-dir: 'dist'
+            repository_url: ${{matrix.repo}}
+          
+   pypi-publish-core:
+      name: Upload Core to ${{matrix.repo}}
+      runs-on: ubuntu-latest
+      needs: 
+        - wheels 
+        - tarballs
+      # TODO: should be choosing the repo URL based on master/develop
+      if: ${{ github.ref == 'refs/heads/develop' }}
+      strategy:
+        matrix:
+          repo: 
+            - https://test.pypi.org/legacy/
+      permissions:
+        # IMPORTANT: this permission is mandatory for trusted publishing
+        id-token: write
+      steps:
+        - name: Download Core
+          uses: actions/download-artifact@v3
+          id: download
+          with:
+            name: ${{ github.ref }}-core
+            path: dist
+
+        - name: Publish package distributions to PyPI
+          uses: pypa/gh-action-pypi-publish@release/v1
+          with:
+            username: __token__
+            password: ${{ secrets.PYPI_TOKEN }}
+            # Note: this is apparently different than the package-dir meaning in the cibuildwheel
+            packages-dir: 'dist'
+            repository_url: ${{matrix.repo}}
