@@ -2,8 +2,7 @@ name: Build PyOpenGL-accelerate wheels with manylinux
 
 on:
   push:
-    branch: 
-      "develop"
+    branch: "develop"
 
 jobs:
   tarballs:
