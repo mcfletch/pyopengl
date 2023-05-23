@@ -38,3 +38,6 @@ find = { include = [ "OpenGL*" ], namespaces = false }
 
 [tool.setuptools.dynamic]
 version = { attr = "OpenGL.version.__version__" }
+
+[tool.black]
+skip-string-normalization=true

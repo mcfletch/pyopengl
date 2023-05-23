@@ -180,123 +180,196 @@ import occurs the flags should no longer be changed.
 """
 from OpenGL.version import __version__
 import os
-def environ_key( name, default ):
-    composed = 'PYOPENGL_%s'%name.upper()
+
+
+def environ_key(name, default):
+    composed = "PYOPENGL_%s" % name.upper()
     if composed in os.environ:
         value = os.environ[composed]
-        if value.lower() in ('1','true'):
-            return True 
+        if value.lower() in ("1", "true"):
+            return True
         else:
             return False
-    return os.environ.get( composed, default )
+    return os.environ.get(composed, default)
 
-ERROR_CHECKING = environ_key( 'ERROR_CHECKING', True)
-ERROR_LOGGING = environ_key( 'ERROR_LOGGING', False )
-ERROR_ON_COPY = environ_key( 'ERROR_ON_COPY', False )
-ARRAY_SIZE_CHECKING = environ_key( 'ARRAY_SIZE_CHECKING', True )
-STORE_POINTERS = environ_key( 'STORE_POINTERS', True )
+
+ERROR_CHECKING = environ_key("ERROR_CHECKING", True)
+ERROR_LOGGING = environ_key("ERROR_LOGGING", False)
+ERROR_ON_COPY = environ_key("ERROR_ON_COPY", False)
+ARRAY_SIZE_CHECKING = environ_key("ARRAY_SIZE_CHECKING", True)
+STORE_POINTERS = environ_key("STORE_POINTERS", True)
 WARN_ON_FORMAT_UNAVAILABLE = False
 FORWARD_COMPATIBLE_ONLY = False
 SIZE_1_ARRAY_UNPACK = True
-USE_ACCELERATE = environ_key( 'USE_ACCELERATE', True )
-CONTEXT_CHECKING = environ_key( 'CONTEXT_CHECKING', False )
+USE_ACCELERATE = environ_key("USE_ACCELERATE", True)
+CONTEXT_CHECKING = environ_key("CONTEXT_CHECKING", False)
 
-FULL_LOGGING = environ_key( 'FULL_LOGGING', False )
-ALLOW_NUMPY_SCALARS = environ_key( 'ALLOW_NUMPY_SCALARS', False )
-UNSIGNED_BYTE_IMAGES_AS_STRING = environ_key( 'UNSIGNED_BYTE_IMAGES_AS_STRING', True )
+FULL_LOGGING = environ_key("FULL_LOGGING", False)
+ALLOW_NUMPY_SCALARS = environ_key("ALLOW_NUMPY_SCALARS", False)
+UNSIGNED_BYTE_IMAGES_AS_STRING = environ_key("UNSIGNED_BYTE_IMAGES_AS_STRING", True)
 MODULE_ANNOTATIONS = False
 TYPE_ANNOTATIONS = False
 
 
 # Declarations of plugins provided by PyOpenGL itself
 from OpenGL.plugins import PlatformPlugin, FormatHandler
-PlatformPlugin( 'nt', 'OpenGL.platform.win32.Win32Platform' )
-PlatformPlugin( 'darwin', 'OpenGL.platform.darwin.DarwinPlatform' )
-PlatformPlugin( 'linux2', 'OpenGL.platform.glx.GLXPlatform' )
-PlatformPlugin( 'linux', 'OpenGL.platform.glx.GLXPlatform' )
-PlatformPlugin( 'posix', 'OpenGL.platform.glx.GLXPlatform' )
-PlatformPlugin( 'x11', 'OpenGL.platform.glx.GLXPlatform' ) # xdg session type
-PlatformPlugin( 'osmesa', 'OpenGL.platform.osmesa.OSMesaPlatform')
-PlatformPlugin( 'egl', 'OpenGL.platform.egl.EGLPlatform')
-PlatformPlugin( 'wayland', 'OpenGL.platform.egl.EGLPlatform') # xdg session type
-PlatformPlugin( 'xwayland', 'OpenGL.platform.egl.EGLPlatform') # xdg session type, but use egl even though normally you'd expect GLX
+
+PlatformPlugin("nt", "OpenGL.platform.win32.Win32Platform")
+PlatformPlugin("darwin", "OpenGL.platform.darwin.DarwinPlatform")
+PlatformPlugin("linux2", "OpenGL.platform.glx.GLXPlatform")
+PlatformPlugin("linux", "OpenGL.platform.glx.GLXPlatform")
+PlatformPlugin("glx", "OpenGL.platform.glx.GLXPlatform")
+PlatformPlugin("posix", "OpenGL.platform.glx.GLXPlatform")
+PlatformPlugin("x11", "OpenGL.platform.glx.GLXPlatform")  # xdg session type
+PlatformPlugin("osmesa", "OpenGL.platform.osmesa.OSMesaPlatform")
+PlatformPlugin("egl", "OpenGL.platform.egl.EGLPlatform")
+PlatformPlugin("wayland", "OpenGL.platform.egl.EGLPlatform")  # xdg session type
+PlatformPlugin(
+    "xwayland", "OpenGL.platform.egl.EGLPlatform"
+)  # xdg session type, but use egl even though normally you'd expect GLX
+
+
+def setPlatform(key):
+    """Programatically set the platform to use for PyOpenGL
+
+    Note: you must do this *before* you import e.g. GL.* or GLES.*
+    as the extension procedure lookup is platform dependent
+
+    The PYOPENGL_PLATFORM environment variable is likely more useful
+    for a *user* choosing a platform, but in cases where the programmer
+    needs to choose the platform (e.g. to allow using Pygame-GLX
+    under wayland) you can call `setPlatform('glx')` to force the
+    use of the glx plugin.
+    """
+    os.environ["PYOPENGL_PLATFORM"] = key
+
 
 import sys
+
 if sys.version_info[0] < 3:
     # Python 3.x renames the built-in module
-    _bi = '__builtin__'
+    _bi = "__builtin__"
 else:
-    _bi = 'builtins'
+    _bi = "builtins"
 
-FormatHandler( 'none', 'OpenGL.arrays.nones.NoneHandler', [ _bi+'.NoneType'],isOutput=False )
+FormatHandler(
+    "none", "OpenGL.arrays.nones.NoneHandler", [_bi + ".NoneType"], isOutput=False
+)
 
 if sys.version_info[0] < 3:
-    FormatHandler( 'str', 'OpenGL.arrays.strings.StringHandler',[_bi+'.str'], isOutput=False )
-    FormatHandler( 'unicode', 'OpenGL.arrays.strings.UnicodeHandler',[_bi+'.unicode'], isOutput=False )
+    FormatHandler(
+        "str", "OpenGL.arrays.strings.StringHandler", [_bi + ".str"], isOutput=False
+    )
+    FormatHandler(
+        "unicode",
+        "OpenGL.arrays.strings.UnicodeHandler",
+        [_bi + ".unicode"],
+        isOutput=False,
+    )
 else:
-    FormatHandler( 'bytes', 'OpenGL.arrays.strings.StringHandler',[_bi+'.bytes'], isOutput=False )
-    FormatHandler( 'str', 'OpenGL.arrays.strings.UnicodeHandler',[_bi+'.str'], isOutput=False )
-    
-FormatHandler( 'list', 'OpenGL.arrays.lists.ListHandler', [
-    _bi+'.list',
-    _bi+'.tuple',
-], isOutput=False )
-FormatHandler( 'numbers', 'OpenGL.arrays.numbers.NumberHandler', [
-    _bi+'.int',
-    _bi+'.float',
-    _bi+'.long',
-], isOutput=False )
+    FormatHandler(
+        "bytes", "OpenGL.arrays.strings.StringHandler", [_bi + ".bytes"], isOutput=False
+    )
+    FormatHandler(
+        "str", "OpenGL.arrays.strings.UnicodeHandler", [_bi + ".str"], isOutput=False
+    )
+
 FormatHandler(
-    'ctypesarrays', 'OpenGL.arrays.ctypesarrays.CtypesArrayHandler',
+    "list",
+    "OpenGL.arrays.lists.ListHandler",
     [
-        '_ctypes.ArrayType',
-        '_ctypes.PyCArrayType',
-        '_ctypes.Array',
-        '_ctypes.array.Array',
+        _bi + ".list",
+        _bi + ".tuple",
+    ],
+    isOutput=False,
+)
+FormatHandler(
+    "numbers",
+    "OpenGL.arrays.numbers.NumberHandler",
+    [
+        _bi + ".int",
+        _bi + ".float",
+        _bi + ".long",
+    ],
+    isOutput=False,
+)
+FormatHandler(
+    "ctypesarrays",
+    "OpenGL.arrays.ctypesarrays.CtypesArrayHandler",
+    [
+        "_ctypes.ArrayType",
+        "_ctypes.PyCArrayType",
+        "_ctypes.Array",
+        "_ctypes.array.Array",
     ],
     isOutput=True,
 )
 FormatHandler(
-    'ctypesparameter',
-    'OpenGL.arrays.ctypesparameters.CtypesParameterHandler',
+    "ctypesparameter",
+    "OpenGL.arrays.ctypesparameters.CtypesParameterHandler",
     [
-        _bi+'.CArgObject',
-        'ctypes.c_uint',
-        'ctypes.c_int',
-        'ctypes.c_float',
-        'ctypes.c_double',
-        'ctypes.c_ulong',
-        'ctypes.c_long',
-        'ctypes.c_longlong',
+        _bi + ".CArgObject",
+        "ctypes.c_uint",
+        "ctypes.c_int",
+        "ctypes.c_float",
+        "ctypes.c_double",
+        "ctypes.c_ulong",
+        "ctypes.c_long",
+        "ctypes.c_longlong",
     ],
     isOutput=True,
 )
-FormatHandler( 'ctypespointer', 'OpenGL.arrays.ctypespointers.CtypesPointerHandler',[
-    'ctypes.c_void_p',
-    '_ctypes._Pointer',
-    'ctypes.c_char_p',
-    '_ctypes.pointer._Pointer',
-],isOutput=False )
-FormatHandler( 'numpy', 'OpenGL.arrays.numpymodule.NumpyHandler', [
-    'numpy.ndarray',
-    'numpy.core.memmap.memmap',
-    'numpy.uint8',
-    'numpy.uint16',
-    'numpy.uint32',
-    'numpy.uint64',
-    'numpy.int8',
-    'numpy.int16',
-    'numpy.int32',
-    'numpy.int64',
-    'numpy.float16',
-    'numpy.float32',
-    'numpy.float64',
-    'numpy.float128',
-],isOutput=True )
-FormatHandler( 'buffer', 'OpenGL.arrays.buffers.BufferHandler', [
-    'OpenGL.arrays._buffers.Py_buffer',
-    _bi+'.memoryview',
-    _bi+'.bytearray',
-],isOutput=True )
-FormatHandler( 'vbo', 'OpenGL.arrays.vbo.VBOHandler', ['OpenGL.arrays.vbo.VBO','OpenGL_accelerate.vbo.VBO'],isOutput=False )
-FormatHandler( 'vbooffset', 'OpenGL.arrays.vbo.VBOOffsetHandler', ['OpenGL.arrays.vbo.VBOOffset','OpenGL_accelerate.vbo.VBOOffset'],isOutput=False )
+FormatHandler(
+    "ctypespointer",
+    "OpenGL.arrays.ctypespointers.CtypesPointerHandler",
+    [
+        "ctypes.c_void_p",
+        "_ctypes._Pointer",
+        "ctypes.c_char_p",
+        "_ctypes.pointer._Pointer",
+    ],
+    isOutput=False,
+)
+FormatHandler(
+    "numpy",
+    "OpenGL.arrays.numpymodule.NumpyHandler",
+    [
+        "numpy.ndarray",
+        "numpy.core.memmap.memmap",
+        "numpy.uint8",
+        "numpy.uint16",
+        "numpy.uint32",
+        "numpy.uint64",
+        "numpy.int8",
+        "numpy.int16",
+        "numpy.int32",
+        "numpy.int64",
+        "numpy.float16",
+        "numpy.float32",
+        "numpy.float64",
+        "numpy.float128",
+    ],
+    isOutput=True,
+)
+FormatHandler(
+    "buffer",
+    "OpenGL.arrays.buffers.BufferHandler",
+    [
+        "OpenGL.arrays._buffers.Py_buffer",
+        _bi + ".memoryview",
+        _bi + ".bytearray",
+    ],
+    isOutput=True,
+)
+FormatHandler(
+    "vbo",
+    "OpenGL.arrays.vbo.VBOHandler",
+    ["OpenGL.arrays.vbo.VBO", "OpenGL_accelerate.vbo.VBO"],
+    isOutput=False,
+)
+FormatHandler(
+    "vbooffset",
+    "OpenGL.arrays.vbo.VBOOffsetHandler",
+    ["OpenGL.arrays.vbo.VBOOffset", "OpenGL_accelerate.vbo.VBOOffset"],
+    isOutput=False,
+)

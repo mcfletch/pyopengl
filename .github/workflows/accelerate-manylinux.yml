@@ -1,0 +1,157 @@
+name: Build PyOpenGL-accelerate wheels with manylinux
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  tarballs:
+    name: Build source tarballs and root wheels
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: Install build
+        run: >-
+          python3 -m
+          pip install
+          build
+          --user
+      - name: Build a binary wheel and a source tarball for root
+        run: >-
+          python3 -m
+          build
+          --sdist
+          --wheel
+          --outdir dist/
+          .
+      - name: Build a source tarball for accelerate
+        run: >-
+          python3 -m
+          build
+          --sdist
+          --outdir accelerate/dist
+          accelerate
+
+      - name: Save Core Distributions
+        uses: actions/upload-artifact@v3
+        with:
+          name: core
+          path: dist/*
+
+      - name: Save Accelerate Distributions
+        uses: actions/upload-artifact@v3
+        with:
+          name: accel
+          path: accelerate/dist/*
+
+  wheels:
+    name: Build architecture-specific wheels on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macOS-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - name: Set up QEMU
+        if: runner.os == 'Linux'
+        uses: docker/setup-qemu-action@v2
+        with:
+          platforms: all
+
+      - name: Build wheels (develop)
+        uses: pypa/cibuildwheel@v2.12.3
+        if: ${{ github.ref == 'refs/heads/develop' }}
+        with:
+          package-dir: "./accelerate"
+          output-dir: "./accelerate/dist"
+        env:
+          BUILD_EXTENSION: yes
+          CIBW_SKIP: "pp*"
+
+      - name: Build wheels (master)
+        uses: pypa/cibuildwheel@v2.12.3
+        if: ${{ github.ref == 'refs/heads/master' }}
+        with:
+          package-dir: "./accelerate"
+          output-dir: "./accelerate/dist"
+        env:
+          BUILD_EXTENSION: yes
+          CIBW_SKIP: "pp*"
+
+      - name: Save wheels
+        uses: actions/upload-artifact@v3
+        with:
+          name: accel-binary
+          path: accelerate/dist/*.whl
+
+  pypi-publish-accel:
+    name: Upload Accelerate ${{matrix.repo}}
+    runs-on: ubuntu-latest
+    needs:
+      - wheels
+      - tarballs
+    # TODO: should be choosing the repo URL based on master/develop
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
+    steps:
+      - name: Download Accelerate
+        uses: actions/download-artifact@v3
+        id: download-accelerate
+        with:
+          name: accel
+          path: dist
+      - name: Download Accelerate Binary
+        uses: actions/download-artifact@v3
+        id: download-accelerate-bin
+        with:
+          name: accel-binary
+          path: dist
+
+      # retrieve your distributions here
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          username: __token__
+          password: ${{ secrets.PYPI_TOKEN }}
+          # Note: this is apparently different than the package-dir meaning in the cibuildwheel
+          packages-dir: "dist"
+
+  pypi-publish-core:
+    name: Upload Core to ${{matrix.repo}}
+    runs-on: ubuntu-latest
+    needs:
+      - wheels
+      - tarballs
+    # TODO: should be choosing the repo URL based on master/develop
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
+    steps:
+      - name: Download Core
+        uses: actions/download-artifact@v3
+        id: download
+        with:
+          name: core
+          path: dist
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          username: __token__
+          password: ${{ secrets.PYPI_TOKEN }}
+          # Note: this is apparently different than the package-dir meaning in the cibuildwheel
+          packages-dir: "dist"
