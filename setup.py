@@ -2,12 +2,10 @@
 """PyOpenGL setup script (setuptools-based)
 """
 import sys, os
+from setuptools import setup
+from distutils.command.install_data import install_data
 
 extra_commands = {}
-
-from setuptools import setup
-
-from distutils.command.install_data import install_data
 
 
 class smart_install_data(install_data):
