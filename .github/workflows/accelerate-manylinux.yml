@@ -3,7 +3,7 @@ name: Build PyOpenGL-accelerate wheels with manylinux
 on:
   push:
     branches:
-      - "develop"
+      - "master"
 
 jobs:
   tarballs:
@@ -104,24 +104,19 @@ jobs:
       - wheels
       - tarballs
     # TODO: should be choosing the repo URL based on master/develop
-    if: ${{ github.ref == 'refs/heads/develop' }}
-    strategy:
-      matrix:
-        repo:
-          - https://test.pypi.org/legacy/
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
       id-token: write
     steps:
       - name: Download Accelerate
         uses: actions/download-artifact@v3
-        id: download
+        id: download-accelerate
         with:
           name: accel
           path: dist
       - name: Download Accelerate Binary
         uses: actions/download-artifact@v3
-        id: download-binary
+        id: download-accelerate-bin
         with:
           name: accel-binary
           path: dist
@@ -134,7 +129,6 @@ jobs:
           password: ${{ secrets.PYPI_TOKEN }}
           # Note: this is apparently different than the package-dir meaning in the cibuildwheel
           packages-dir: "dist"
-          repository_url: ${{matrix.repo}}
 
   pypi-publish-core:
     name: Upload Core to ${{matrix.repo}}
@@ -143,11 +137,6 @@ jobs:
       - wheels
       - tarballs
     # TODO: should be choosing the repo URL based on master/develop
-    if: ${{ github.ref == 'refs/heads/develop' }}
-    strategy:
-      matrix:
-        repo:
-          - https://test.pypi.org/legacy/
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
       id-token: write
@@ -166,4 +155,3 @@ jobs:
           password: ${{ secrets.PYPI_TOKEN }}
           # Note: this is apparently different than the package-dir meaning in the cibuildwheel
           packages-dir: "dist"
-          repository_url: ${{matrix.repo}}
