@@ -12,9 +12,13 @@ class GLXPlatform(baseplatform.BasePlatform):
     @baseplatform.lazy_property
     def GL(self):
         try:
-            return ctypesloader.loadLibrary(
-                ctypes.cdll, "OpenGL", mode=ctypes.RTLD_GLOBAL
-            )
+            for name in ('OpenGL', 'GL'):
+                lib = ctypesloader.loadLibrary(
+                    ctypes.cdll, name, mode=ctypes.RTLD_GLOBAL
+                )
+                if lib:
+                    return lib
+            raise ImportError("Unable to find an OpenGL or GL library")
         except OSError as err:
             try:
                 # libGL was the original name, older devices likely still need it...
@@ -43,7 +47,12 @@ class GLXPlatform(baseplatform.BasePlatform):
     @baseplatform.lazy_property
     def GLX(self):
         try:
-            return ctypesloader.loadLibrary(ctypes.cdll, "GLX", mode=ctypes.RTLD_GLOBAL)
+            for name in ('GLX', 'OpenGL', 'GL'):
+                lib = ctypesloader.loadLibrary(
+                    ctypes.cdll, name, mode=ctypes.RTLD_GLOBAL
+                )
+                if lib and getattr(lib, 'glXCreateContext', None):
+                    return lib
         except OSError as err:
             return self.GL
 
