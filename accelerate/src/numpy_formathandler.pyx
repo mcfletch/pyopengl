@@ -1,4 +1,5 @@
 """Accelerator for numpy format handler operations"""
+#cython: language_level=3
 from ctypes import c_void_p
 import numpy as np
 cimport numpy as np
@@ -121,7 +122,7 @@ cdef class NumpyHandler(FormatHandler):
             c_dims = PyArray_ContiguousFromAny( 
                 [int(x) for x in dims], np.NPY_INTP, 1,1 
             )
-        except (ValueError,TypeError), err:
+        except (ValueError,TypeError) as err:
             dims = (int(dims),)
             c_dims = PyArray_ContiguousFromAny( 
                 dims, np.NPY_INTP, 1,1 

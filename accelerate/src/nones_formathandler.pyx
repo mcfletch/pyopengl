@@ -1,4 +1,5 @@
 """Accelerator for None-as-an-array format handler operations"""
+#cython: language_level=3
 from OpenGL_accelerate.formathandler cimport FormatHandler
 
 cdef class NoneHandler(FormatHandler):

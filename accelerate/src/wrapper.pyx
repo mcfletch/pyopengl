@@ -1,4 +1,5 @@
 """Cython-coded implementation of wrapper module"""
+#cython: language_level=3
 import ctypes
 from OpenGL import error
 from OpenGL._null import NULL as _NULL
@@ -64,7 +65,7 @@ cdef class CArgCalculatorElement:
                 return self.c_converter.c_call( pyArgs, self.index, self.wrapper )
             elif self.callable:
                 return self.converter.__call__( pyArgs, self.index, self.wrapper )
-        except Exception, err:
+        except Exception as err:
             err.args += ( self.index, self.wrapper )
             raise
         return self.converter
@@ -122,7 +123,7 @@ cdef class PyArgCalculatorElement:
                 return self.converter( 
                     args[self.index], self.wrapper, args 
                 )
-        except Exception, err:
+        except Exception as err:
             if hasattr( err, 'args' ):
                 err.args += ( self.converter, )
             raise
@@ -190,13 +191,13 @@ cdef class CArgumentCalculator:
                 # heavy operation.
                 try:
                     result[i] = (<cArgumentConverter>converter).c_call( cArgs[i] )
-                except Exception, err:
+                except Exception as err:
                     err.args += (converter,)
                     raise
             else:
                 try:
                     result[i] = converter( cArgs[i] )
-                except Exception, err:
+                except Exception as err:
                     err.args += (converter,)
                     raise
         return result
@@ -224,7 +225,7 @@ cdef class DefaultCConverter(cArgConverter):
     cdef object c_call( self, tuple pyArgs, int index, object baseOperation ):
         try:
             return pyArgs[ self.index ]
-        except IndexError, err:
+        except IndexError as err:
             raise ValueError(
                 """Expected parameter index %r, but pyArgs only length %s"""%(
                 self.index,
@@ -309,10 +310,10 @@ cdef class Wrapper:
             cArguments = cArgs
         try:
             result = self.wrappedOperation( *cArguments )
-        except (ctypes.ArgumentError,TypeError,AttributeError), err:
+        except (ctypes.ArgumentError,TypeError,AttributeError) as err:
             err.args = err.args + (cArguments,)
             raise err
-        except error.GLError, err:
+        except error.GLError as err:
             err.cArgs = cArgs 
             err.pyArgs = pyArgs
             raise err

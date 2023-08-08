@@ -1,4 +1,5 @@
 """Cython-coded VBO implementation"""
+#cython: language_level=3
 import ctypes, weakref
 from OpenGL_accelerate.formathandler cimport FormatHandler
 from OpenGL import error
@@ -188,7 +189,7 @@ cdef class VBO:
         buffers = self.get_implementation().glGenBuffers(1)
         try:
             self.buffer = long( buffers )
-        except (TypeError,ValueError), err:
+        except (TypeError,ValueError) as err:
             self.buffer = buffers[0]
         self.target = self.c_resolve( self.target_spec )
         self.usage = self.c_resolve( self.usage_spec )
@@ -222,11 +223,11 @@ cdef class VBO:
             self.created = False
             try:
                 self.get_implementation().glDeleteBuffers(1, ctypes.c_uint32( self.buffer))
-            except (AttributeError, error.NullFunctionError), err:
+            except (AttributeError, error.NullFunctionError) as err:
                 pass
             try:
                 self.get_implementation()._DELETERS_.pop( id(self))
-            except KeyError, err:
+            except KeyError as err:
                 pass
     def bind( self ):
         """Bind this buffer for use in vertex calls"""

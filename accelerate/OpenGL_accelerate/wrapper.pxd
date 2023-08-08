@@ -1,4 +1,6 @@
 """Importable Cython declarations for wrapper module"""
+#cython: language_level=3
+
 cdef class cArgConverter:
 	cdef object c_call( self, tuple pyArgs, int index, object baseOperation )
 cdef class pyArgConverter:

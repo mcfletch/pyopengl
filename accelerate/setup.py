@@ -2,7 +2,12 @@
 """Builds accelleration functions for PyOpenGL
 """
 
-from setuptools import setup, Extension
+import sys
+
+if sys.version_info[:2] < (3, 12):
+    from setuptools import setup, Extension
+else:
+    from distutils.core import setup, Extension
 
 try:
     from Cython.Distutils import build_ext
@@ -42,6 +47,7 @@ def cython_extension(
             # that we use throughout our code...
             #    ('NPY_NO_DEPRECATED_API','NPY_1_7_API_VERSION'),
         ],
+        compiler_directives={'language_level': "3"} if have_cython else {},
     )
 
 

@@ -1,4 +1,6 @@
 """Cython memoryview implementation of buffer-api format handler"""
+#cython: language_level=3
+
 from ctypes import c_void_p
 from OpenGL_accelerate.formathandler cimport FormatHandler
 import traceback, weakref
