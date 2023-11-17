@@ -301,6 +301,7 @@ FormatHandler(
         "_ctypes.PyCArrayType",
         "_ctypes.Array",
         "_ctypes.array.Array",
+        "_ctypes.array.ArrayMeta",
     ],
     isOutput=True,
 )
