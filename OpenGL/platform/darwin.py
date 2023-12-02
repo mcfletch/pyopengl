@@ -59,7 +59,9 @@ class DarwinPlatform( baseplatform.BasePlatform ):
 
     @baseplatform.lazy_property
     def GetCurrentContext( self ):
-        return self.CGL.CGLGetCurrentContext 
+        CGLGetCurrentContext = self.CGL.CGLGetCurrentContext
+        CGLGetCurrentContext.restype = ctypes.c_void_p
+        return CGLGetCurrentContext
 
     def getGLUTFontPointer( self, constant ):
         """Platform specific function to retrieve a GLUT font pointer

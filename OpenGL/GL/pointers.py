@@ -276,7 +276,7 @@ def glRenderMode( newMode ):
     # Okay, now that the easy cases are out of the way...
     #  Do we have a pre-stored pointer about which the user already knows?
     context = platform.GetCurrentContext()
-    if context == 0:
+    if not context:
         raise error.Error(
             """Returning from glRenderMode without a valid context!"""
         )
