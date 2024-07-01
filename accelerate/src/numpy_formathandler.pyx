@@ -20,7 +20,7 @@ cdef extern from "numpy/arrayobject.h":
     int NPY_ARRAY_FORCECAST
     int PyArray_ISCARRAY( np.ndarray instance )
     int PyArray_ISCARRAY_RO( np.ndarray instance )
-    cdef np.ndarray PyArray_Zeros(int nd, np.Py_intptr_t* dims, np.dtype, int fortran)
+    cdef np.ndarray PyArray_Zeros(int nd, np.npy_intp* dims, np.dtype, int fortran)
     cdef np.ndarray PyArray_EnsureArray(object)
     cdef int PyArray_FillWithScalar(object, object)
     cdef void import_array()
