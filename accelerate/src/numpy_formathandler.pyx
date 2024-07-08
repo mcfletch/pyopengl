@@ -22,8 +22,7 @@ cdef extern from "numpy/arrayobject.h":
     int PyArray_ISCARRAY_RO( np.ndarray instance )
     cdef np.ndarray PyArray_Zeros(int nd, np.npy_intp* dims, np.dtype, int fortran)
     cdef np.ndarray PyArray_EnsureArray(object)
-    cdef int PyArray_FillWithScalar(object, object)
-    cdef void import_array()
+    cdef int PyArray_FillWithScalar(np.ndarray, object)
     cdef void* PyArray_DATA( np.ndarray )
     cdef int PyArray_NDIM( np.ndarray )
     cdef int *PyArray_DIMS( np.ndarray )
@@ -227,4 +226,4 @@ cdef class NumpyHandler(FormatHandler):
 
 # Cython numpy tutorial neglects to mention this AFAICS
 # get segfaults without it
-import_array()
+np.import_array()
