@@ -109,13 +109,13 @@ jobs:
       id-token: write
     steps:
       - name: Download Accelerate
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         id: download-accelerate
         with:
           name: accel
           path: dist
       - name: Download Accelerate Binary
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         id: download-accelerate-bin
         with:
           name: accel-binary
@@ -142,7 +142,7 @@ jobs:
       id-token: write
     steps:
       - name: Download Core
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         id: download
         with:
           name: core
