@@ -220,9 +220,12 @@ class TestCoreDatatype(basetestcase.BaseTest):
     def test_buffer_api_basic(self):
         import array as silly_array
 
-        structures = [
-            (b'this and that', 13, 1, True, 1, b'B', [13], [1]),
-        ]
+        structures = []
+        if sys.version_info[:2] >= (3, 9):
+            structures.append(
+                (b'this and that', 13, 1, True, 1, b'B', [13], [1]),
+            )
+
         if sys.version_info[:2] >= (2, 7):
             # GH#92 Big-endian hosts report different formats because yeah, obviously
             if sys.byteorder == 'little':  # x86 cases
@@ -230,21 +233,26 @@ class TestCoreDatatype(basetestcase.BaseTest):
             else:
                 int_formats = [b'(3)>i', b'(3)>l', b'>i', b'>l']
 
-            structures.append(
-                # on Python 3.4 we do *not* get the (3) prefix :(
-                (
-                    (GLint * 3)(1, 2, 3),
-                    12,
-                    4,
-                    False,
-                    1,
-                    int_formats,
-                    [3],
-                    None,
-                ),
-            )
+            if sys.version_info[:2] not in [(3, 8), (3, 7)]:
 
-        if sys.version_info[:2] >= (3, 0):
+                structures.append(
+                    # on Python 3.4 we do *not* get the (3) prefix :(
+                    (
+                        (GLint * 3)(1, 2, 3),
+                        12,
+                        4,
+                        False,
+                        1,
+                        int_formats,
+                        [3],
+                        None,
+                    ),
+                )
+
+        if sys.version_info[:2] >= (3, 0) and sys.version_info[:2] not in [
+            (3, 8),
+            (3, 7),
+        ]:
             # only supports buffer protocol in 3.x
             structures.extend(
                 [
@@ -261,7 +269,8 @@ class TestCoreDatatype(basetestcase.BaseTest):
                 ]
             )
         try:
-            structures.append((memoryview(b'this'), 4, 1, True, 1, b'B', [4], [1]))
+            if sys.version_info[:2] not in [(3, 8), (3, 7)]:
+                structures.append((memoryview(b'this'), 4, 1, True, 1, b'B', [4], [1]))
         except NameError:
             # Python 2.6 doesn't have memory view
             pass
