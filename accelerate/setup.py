@@ -117,6 +117,7 @@ if (  # Prevents running of setup during code introspection imports
             "build_ext": build_ext,
         }
     setup(
+        build_requires=['cython'],
         options={
             "sdist": {
                 "formats": ["gztar"],

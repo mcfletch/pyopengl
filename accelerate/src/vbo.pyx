@@ -138,7 +138,7 @@ cdef class VBO:
         is concerned).
         """
         if slice.step and not slice.step == 1:
-            raise NotImplemented( """Don't know how to map stepped arrays yet""" )
+            raise NotImplementedError( """Don't know how to map stepped arrays yet""" )
         # TODO: handle e.g. mapping character data into an integer data-set
         data = self.arrayType.asArray( array )
         start = (slice.start or 0)
