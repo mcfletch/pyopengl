@@ -1,10 +1,13 @@
 """Implementations for common converter types"""
-import ctypes,logging
+
+import ctypes, logging
 from OpenGL._bytes import bytes, unicode, as_8_bit
 from OpenGL._null import NULL
-_log = logging.getLogger( 'OpenGL.converters' )
 
-class Converter( object ):
+_log = logging.getLogger('OpenGL.converters')
+
+
+class Converter(object):
     """Base class for Converter types
 
     Converter objects are callable objects used with the
@@ -24,9 +27,11 @@ class Converter( object ):
     Converters can be any of the Wrapper API helper functions,
     so the callable interface can vary among Converter classes.
     """
-    argNames = ( )
-    indexLookups = ( )
-    def __init__( self, *args, **named ):
+
+    argNames = ()
+    indexLookups = ()
+
+    def __init__(self, *args, **named):
         """Store arguments in attributes
 
         *args -- mapped to self.argNames in order to set attributes
@@ -35,26 +40,28 @@ class Converter( object ):
         argNames = list(self.argNames)
         for a in self.argNames:
             if a in named:
-                setattr( self, a, named[a] )
-                argNames.remove( a )
-        for a,value in zip( argNames, args ):
-            setattr( self, a, value )
-    def finalise( self, wrapper ):
+                setattr(self, a, named[a])
+                argNames.remove(a)
+        for a, value in zip(argNames, args):
+            setattr(self, a, value)
+
+    def finalise(self, wrapper):
         """Look up our indices (where appropriate)"""
-        for indexname,argName,methodName in self.indexLookups:
+        for indexname, argName, methodName in self.indexLookups:
             setattr(
-                self, indexname,
-                getattr(wrapper,methodName)(getattr( self, argName ))
+                self, indexname, getattr(wrapper, methodName)(getattr(self, argName))
             )
 
+
 # Definitions of the abstract interfaces...
-class PyConverter( Converter ):
+class PyConverter(Converter):
     """Converter sub-class for use in Wrapper.pyConverters
 
     This class just defines the interface for a pyConverter-style
     Converter object
     """
-    def __call__( self, incoming, function, arguments ):
+
+    def __call__(self, incoming, function, arguments):
         """Convert incoming argument into compatable data-types
 
         incoming -- the Python argument for this parameter
@@ -64,17 +71,19 @@ class PyConverter( Converter ):
 
 
         """
-        raise NotImplemented( """%s class doesn't implement __call__"""%(
-            self.__class__.__name__,
-        ))
+        raise NotImplementedError(
+            """%s class doesn't implement __call__""" % (self.__class__.__name__,)
+        )
 
-class CConverter( Converter ):
+
+class CConverter(Converter):
     """Converter sub-class for use in Wrapper.cConverters
 
     This class just defines the interface for a cConverter-style
     Converter object
     """
-    def __call__( self, pyArgs, index, baseOperation ):
+
+    def __call__(self, pyArgs, index, baseOperation):
         """Calculate C-compatible Python object from Python arguments
 
         pyArgs -- set of Python argument objects converted by
@@ -82,16 +91,19 @@ class CConverter( Converter ):
         index -- our index in baseOperation.cConverters
         baseOperation -- the Wrapper object which we are supporting
         """
-        raise NotImplemented( """%s class doesn't implement __call__"""%(
-            self.__class__.__name__,
-        ))
-class ReturnValues( Converter ):
+        raise NotImplementedError(
+            """%s class doesn't implement __call__""" % (self.__class__.__name__,)
+        )
+
+
+class ReturnValues(Converter):
     """Converter sub-class for use as Wrapper.returnValues
 
     This class just defines the interface for a returnValues-style
     Converter object
     """
-    def __call__( self, result, baseOperation, pyArgs, cArgs ):
+
+    def __call__(self, result, baseOperation, pyArgs, cArgs):
         """Return a final value to the caller
 
         result -- the raw ctypes result value
@@ -101,23 +113,31 @@ class ReturnValues( Converter ):
 
         return the Python object for the final result
         """
-        raise NotImplemented( """%s class doesn't implement __call__"""%(
-            self.__class__.__name__,
-        ))
+        raise NotImplementedError(
+            """%s class doesn't implement __call__""" % (self.__class__.__name__,)
+        )
+
 
 # Now the concrete classes...
 from OpenGL import acceleratesupport
+
 CallFuncPyConverter = None
 if acceleratesupport.ACCELERATE_AVAILABLE:
     try:
         from OpenGL_accelerate.wrapper import (
-            CallFuncPyConverter, DefaultCConverter, getPyArgsName,
+            CallFuncPyConverter,
+            DefaultCConverter,
+            getPyArgsName,
         )
         from OpenGL_accelerate.arraydatatype import (
-            Output,SizedOutput,OutputOrInput,SizedOutputOrInput
+            Output,
+            SizedOutput,
+            OutputOrInput,
+            SizedOutputOrInput,
         )
         from OpenGL_accelerate.wrapper import (
-            returnCArgument, returnPyArgument,
+            returnCArgument,
+            returnPyArgument,
         )
     except ImportError as err:
         _log.warning(
@@ -125,15 +145,19 @@ if acceleratesupport.ACCELERATE_AVAILABLE:
         )
         CallFuncPyConverter = None
 if CallFuncPyConverter is None:
-    class CallFuncPyConverter( PyConverter ):
+
+    class CallFuncPyConverter(PyConverter):
         """PyConverter that takes a callable and calls it on incoming"""
-        def __init__( self, function ):
+
+        def __init__(self, function):
             """Store the function"""
             self.function = function
-        def __call__( self, incoming, function, argument ):
+
+        def __call__(self, incoming, function, argument):
             """Call our function on incoming"""
-            return self.function( incoming )
-    class DefaultCConverter( CConverter ):
+            return self.function(incoming)
+
+    class DefaultCConverter(CConverter):
         """NULL or Default CConverter, returns same-named Python argument
 
         Used primarily to allow for specifying a converter that explicitly
@@ -143,36 +167,44 @@ if CallFuncPyConverter is None:
 
         Raises informative errors if the index cannot be resolved in pyArgs
         """
-        def __init__( self, index ):
+
+        def __init__(self, index):
             """Just store index for future access"""
             self.index = index
-        def __call__( self, pyArgs, index, wrapper ):
+
+        def __call__(self, pyArgs, index, wrapper):
             """Return pyArgs[self.index] or raise a ValueError"""
             try:
-                return pyArgs[ self.index ]
+                return pyArgs[self.index]
             except IndexError:
                 raise ValueError(
-                    """Expected parameter index %r, but pyArgs only length %s"""%(
-                    self.index,
-                    len(pyArgs )
-                ))
-    class getPyArgsName( CConverter ):
+                    """Expected parameter index %r, but pyArgs only length %s"""
+                    % (self.index, len(pyArgs))
+                )
+
+    class getPyArgsName(CConverter):
         """CConverter returning named Python argument
 
         Intended for use in cConverters, the function returned
         retrieves the named pyArg and returns it when called.
         """
+
         argNames = ('name',)
-        indexLookups = [ ('index','name', 'pyArgIndex' ), ]
-        __slots__ = ( 'index', 'name')
-        def __call__( self, pyArgs, index, baseOperation ):
+        indexLookups = [
+            ('index', 'name', 'pyArgIndex'),
+        ]
+        __slots__ = ('index', 'name')
+
+        def __call__(self, pyArgs, index, baseOperation):
             """Return pyArgs[ self.index ]"""
             try:
-                return pyArgs[ self.index ]
+                return pyArgs[self.index]
             except AttributeError:
-                raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
+                raise RuntimeError(
+                    """"Did not resolve parameter index for %r""" % (self.name)
+                )
 
-    class Output( CConverter ):
+    class Output(CConverter):
         """CConverter generating static-size typed output arrays
 
         Produces an output array of given type (arrayType) and
@@ -186,89 +218,115 @@ if CallFuncPyConverter is None:
                 PyOpenGL compatability mode, where result arrays of
                 size (1,) are returned as scalar values.
         """
-        argNames = ('name','size','arrayType' )
+
+        argNames = ('name', 'size', 'arrayType')
         indexLookups = [
-            ('outIndex','name', 'cArgIndex' ),
+            ('outIndex', 'name', 'cArgIndex'),
         ]
-        __slots__ = ('index','size','arrayType','outIndex','inIndex')
-        def __call__( self, pyArgs, index, baseOperation ):
+        __slots__ = ('index', 'size', 'arrayType', 'outIndex', 'inIndex')
+
+        def __call__(self, pyArgs, index, baseOperation):
             """Return pyArgs[ self.index ]"""
-            return self.arrayType.zeros( self.getSize(pyArgs) )
-        def getSize( self, pyArgs ):
+            return self.arrayType.zeros(self.getSize(pyArgs))
+
+        def getSize(self, pyArgs):
             """Retrieve the array size for this argument"""
             return self.size
-        def oldStyleReturn( self, result, baseOperation, pyArgs, cArgs ):
+
+        def oldStyleReturn(self, result, baseOperation, pyArgs, cArgs):
             """Retrieve cArgs[ self.index ]"""
-            result = cArgs[ self.outIndex ]
+            result = cArgs[self.outIndex]
             try:
                 thisSize = self.getSize(pyArgs)
             except KeyError:
-                return result 
+                return result
             if thisSize == (1,):
                 try:
                     return result[0]
-                except (IndexError,TypeError):
+                except (IndexError, TypeError):
                     return result
             else:
                 return result
-    class OutputOrInput( Output ):
-        DO_OUTPUT = (None,NULL)
-        def __call__( self, pyArgs, index, baseOperation ):
+
+    class OutputOrInput(Output):
+        DO_OUTPUT = (None, NULL)
+
+        def __call__(self, pyArgs, index, baseOperation):
             for do_output in self.DO_OUTPUT:
                 if pyArgs[index] is do_output:
-                    return super( OutputOrInput,self ).__call__( pyArgs, index, baseOperation )
-            return self.arrayType.asArray( pyArgs[index] )
+                    return super(OutputOrInput, self).__call__(
+                        pyArgs, index, baseOperation
+                    )
+            return self.arrayType.asArray(pyArgs[index])
 
-    class SizedOutput( Output ):
+    class SizedOutput(Output):
         """Output generating dynamically-sized typed output arrays
 
         Takes an extra parameter "specifier", which is the name of
         a Python argument to be passed to the lookup function in order
         to determine the appropriate size for the output array.
         """
-        argNames = ('name','specifier','lookup','arrayType' )
+
+        argNames = ('name', 'specifier', 'lookup', 'arrayType')
         indexLookups = [
-            ('outIndex','name', 'cArgIndex' ),
-            ('index','specifier', 'pyArgIndex' ),
+            ('outIndex', 'name', 'cArgIndex'),
+            ('index', 'specifier', 'pyArgIndex'),
         ]
-        __slots__ = ('index','outIndex','specifier','lookup','arrayType')
-        def getSize( self, pyArgs ):
+        __slots__ = ('index', 'outIndex', 'specifier', 'lookup', 'arrayType')
+
+        def getSize(self, pyArgs):
             """Retrieve the array size for this argument"""
             try:
-                specifier = pyArgs[ self.index ]
+                specifier = pyArgs[self.index]
             except AttributeError:
-                raise RuntimeError( """"Did not resolve parameter index for %r"""%(self.name))
+                raise RuntimeError(
+                    """"Did not resolve parameter index for %r""" % (self.name)
+                )
             else:
                 try:
-                    return self.lookup( specifier )
+                    return self.lookup(specifier)
                 except KeyError:
-                    raise KeyError( """Unknown specifier %s"""%( specifier ))
-    class SizedOutputOrInput( SizedOutput ):
-        DO_OUTPUT = (None,NULL)
-        def __call__( self, pyArgs, index, baseOperation ):
+                    raise KeyError("""Unknown specifier %s""" % (specifier))
+
+    class SizedOutputOrInput(SizedOutput):
+        DO_OUTPUT = (None, NULL)
+
+        def __call__(self, pyArgs, index, baseOperation):
             for do_output in self.DO_OUTPUT:
                 if pyArgs[index] is do_output:
-                    return super( SizedOutputOrInput,self ).__call__( pyArgs, index, baseOperation )
-            return self.arrayType.asArray( pyArgs[index] )
-    class returnCArgument( ReturnValues ):
+                    return super(SizedOutputOrInput, self).__call__(
+                        pyArgs, index, baseOperation
+                    )
+            return self.arrayType.asArray(pyArgs[index])
+
+    class returnCArgument(ReturnValues):
         """ReturnValues returning the named cArgs value"""
+
         argNames = ('name',)
-        indexLookups = [ ('index','name', 'cArgIndex' ), ]
-        __slots__ = ( 'index', 'name' )
-        def __call__( self, result, baseOperation, pyArgs, cArgs ):
+        indexLookups = [
+            ('index', 'name', 'cArgIndex'),
+        ]
+        __slots__ = ('index', 'name')
+
+        def __call__(self, result, baseOperation, pyArgs, cArgs):
             """Retrieve cArgs[ self.index ]"""
             return cArgs[self.index]
 
-    class returnPyArgument( ReturnValues ):
+    class returnPyArgument(ReturnValues):
         """ReturnValues returning the named pyArgs value"""
+
         argNames = ('name',)
-        indexLookups = [ ('index','name', 'pyArgIndex' ), ]
-        __slots__ = ( 'index', 'name' )
-        def __call__( self, result, baseOperation, pyArgs, cArgs ):
+        indexLookups = [
+            ('index', 'name', 'pyArgIndex'),
+        ]
+        __slots__ = ('index', 'name')
+
+        def __call__(self, result, baseOperation, pyArgs, cArgs):
             """Retrieve pyArgs[ self.index ]"""
             return pyArgs[self.index]
 
-class StringLengths( CConverter ):
+
+class StringLengths(CConverter):
     """CConverter for processing array-of-pointers-to-strings data-type
 
     Converter is a CConverter for the array-of-lengths for a
@@ -286,29 +344,38 @@ class StringLengths( CConverter ):
         totalCount -- CConverter callable giving count of string
             pointers (that is, length of the pointer array)
     """
+
     argNames = ('name',)
-    indexLookups = [ ('index','name', 'pyArgIndex' ), ]
+    indexLookups = [
+        ('index', 'name', 'pyArgIndex'),
+    ]
     __slots__ = ()
-    def __call__( self, pyArgs, index, baseOperation ):
+
+    def __call__(self, pyArgs, index, baseOperation):
         """Get array of length integers for string contents"""
         from OpenGL.raw.GL import _types
+
         tmp = [len(x) for x in pyArgs[self.index]]
         a_type = _types.GLint * len(tmp)
-        return a_type( *tmp )
-    def totalCount( self, pyArgs, index, baseOperation ):
+        return a_type(*tmp)
+
+    def totalCount(self, pyArgs, index, baseOperation):
         """Get array of length integers for string contents"""
         return len(pyArgs[self.index])
-    def stringArray( self, arg, baseOperation, args ):
+
+    def stringArray(self, arg, baseOperation, args):
         """Create basic array-of-strings object from pyArg"""
-        if isinstance( arg, (bytes,unicode) ):
+        if isinstance(arg, (bytes, unicode)):
             arg = [arg]
         value = [as_8_bit(x) for x in arg]
         return value
-    def stringArrayForC( self, strings ):
+
+    def stringArrayForC(self, strings):
         """Create a ctypes pointer to char-pointer set"""
         from OpenGL import arrays
+
         result = (ctypes.c_char_p * len(strings))()
-        for i,s in enumerate(strings):
+        for i, s in enumerate(strings):
             result[i] = ctypes.cast(
                 arrays.GLcharARBArray.dataPointer(s),
                 ctypes.c_char_p,

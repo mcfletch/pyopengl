@@ -1,5 +1,6 @@
 """Numbers passed as array handling code for PyOpenGL
 """
+
 REGISTRY_NAME = 'numbers'
 from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.VERSION import GL_1_1
@@ -40,13 +41,13 @@ class NumberHandler(formathandler.FormatHandler):
 
     def zeros(self, dims, typeCode=None):
         """Currently don't allow Number as output types!"""
-        raise NotImplemented(
+        raise NotImplementedError(
             """Number data-type not allowed as an output array format"""
         )
 
     def ones(self, dims, typeCode=None):
         """Currently don't allow Number as output types!"""
-        raise NotImplemented(
+        raise NotImplementedError(
             """Number data-type not allowed as an output array format"""
         )
 

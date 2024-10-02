@@ -16,6 +16,7 @@ See baseplatform.BasePlatform for the core functionality
 of a platform implementation.  See the various platform 
 specific modules for examples to use when porting.
 """
+
 import os, sys
 from OpenGL.plugins import PlatformPlugin
 from OpenGL import _configflags
@@ -23,27 +24,28 @@ from OpenGL import _configflags
 XDG = 'XDG_SESSION_TYPE'
 WAYLAND_DISPLAY = 'WAYLAND_DISPLAY'
 
-def _load( ):
+PLATFORM = None
+nullFunction = None
+
+
+def _load():
     """Load the os.name plugin for the platform functionality"""
     # Linux override keys...
     guessing_key = None
-    if (
-        sys.platform in ('linux','linux2') 
-        and not 'PYOPENGL_PLATFORM' in os.environ
-    ):
+    if sys.platform in ('linux', 'linux2') and 'PYOPENGL_PLATFORM' not in os.environ:
         if 'WAYLAND_DISPLAY' in os.environ:
             guessing_key = 'wayland'
         elif 'DISPLAY' in os.environ:
             guessing_key = 'linux'
 
     key = (
-        os.environ.get( 'PYOPENGL_PLATFORM'), 
-        os.environ.get( 'XDG_SESSION_TYPE','').lower(),
+        os.environ.get('PYOPENGL_PLATFORM'),
+        os.environ.get('XDG_SESSION_TYPE', '').lower(),
         guessing_key,
         sys.platform,
         os.name,
     )
-    plugin  = PlatformPlugin.match( key )
+    plugin = PlatformPlugin.match(key)
     plugin_class = plugin.load()
     plugin.loaded = True
     # create instance of this platform implementation
@@ -53,15 +55,18 @@ def _load( ):
     plugin.install(globals())
     return plugin
 
+
 _load()
 
-def types(resultType,*argTypes):
+
+def types(resultType, *argTypes):
     """Decorator to add returnType, argTypes and argNames to a function"""
-    def add_types( function ):
+
+    def add_types(function):
         """Adds the given metadata to the function, introspects var names from declaration"""
         function.resultType = resultType
-        function.argTypes = argTypes 
-        if hasattr( function, 'func_code' ): # python 2.x
+        function.argTypes = argTypes
+        if hasattr(function, 'func_code'):  # python 2.x
             function.argNames = function.func_code.co_varnames
         else:
             function.argNames = function.__code__.co_varnames
@@ -69,30 +74,43 @@ def types(resultType,*argTypes):
             function.__annotations__ = {
                 'return': resultType,
             }
-            for name,typ in zip(function.argNames,argTypes):
+            for name, typ in zip(function.argNames, argTypes):
                 function.__annotations__[name] = typ
-        return function 
+        return function
+
     return add_types
 
-def unpack_constants( constants, namespace ):
+
+def unpack_constants(constants, namespace):
     """Create constants and add to the namespace"""
     from OpenGL.constant import Constant
+
     for line in constants.splitlines():
         if line and line.split():
-            name,value = line.split()
-            namespace[name] = Constant( name, int(value,16) )
+            name, value = line.split()
+            namespace[name] = Constant(name, int(value, 16))
 
-def createFunction( function, dll,extension, deprecated=False, error_checker=None, force_extension=False ):
+
+def createFunction(
+    function,
+    dll,
+    extension,
+    deprecated=False,
+    error_checker=None,
+    force_extension=False,
+):
     """Allows the more compact declaration format to use the old-style constructor"""
     return nullFunction(
         function.__name__,
         dll or PLATFORM.GL,
-        resultType = function.resultType,
-        argTypes = function.argTypes,
-        doc = None, argNames = function.argNames,
-        extension = extension,
-        deprecated = deprecated,
-        module = function.__module__,
-        error_checker = error_checker,
-        force_extension = force_extension or getattr(function,'force_extension',force_extension),
+        resultType=function.resultType,
+        argTypes=function.argTypes,
+        doc=None,
+        argNames=function.argNames,
+        extension=extension,
+        deprecated=deprecated,
+        module=function.__module__,
+        error_checker=error_checker,
+        force_extension=force_extension
+        or getattr(function, 'force_extension', force_extension),
     )

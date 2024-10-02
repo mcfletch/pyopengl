@@ -1,5 +1,6 @@
 """Base class for platform implementations
 """
+
 import ctypes
 from OpenGL.platform import ctypesloader
 from OpenGL._bytes import as_8_bit
@@ -54,7 +55,7 @@ def _find_module(exclude=(__name__,)):
     frame = sys._getframe()
     while frame and '__name__' in frame.f_globals:
         if exclude:
-            if not frame.f_globals['__name__'] in exclude:
+            if frame.f_globals['__name__'] not in exclude:
                 return frame.f_globals['__name__']
 
         else:
