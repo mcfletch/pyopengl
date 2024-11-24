@@ -67,7 +67,7 @@ jobs:
           python-version: 3.x
       - name: Set up QEMU
         if: runner.os == 'Linux'
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
         with:
           platforms: all
 
@@ -115,23 +115,12 @@ jobs:
         with:
           name: accel
           path: dist
-      - name: Download Accelerate Binary Windows
-        uses: actions/download-artifact@v4.1.7
-        id: download-accelerate-bin-windows
+      - name: Download Accelerate Binary
+        uses: actions/download-artifact@v4
+        id: download-accelerate-bin
         with:
-          name: accel-binary-windows-latest
-          path: dist
-      - name: Download Accelerate Binary Ubuntu
-        uses: actions/download-artifact@v4.1.7
-        id: download-accelerate-bin-ubuntu
-        with:
-          name: accel-binary-ubuntu-latest
-          path: dist
-      - name: Download Accelerate Binary MacOS
-        uses: actions/download-artifact@v4.1.7
-        id: download-accelerate-bin-macOS
-        with:
-          name: accel-binary-macOS-latest
+          pattern: accel-binary-*
+          merge-multiple: true
           path: dist
 
       # retrieve your distributions here
