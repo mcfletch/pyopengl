@@ -227,4 +227,4 @@ cdef class NumpyHandler(FormatHandler):
 
 # Cython numpy tutorial neglects to mention this AFAICS
 # get segfaults without it
-import_array()
+# import_array()
