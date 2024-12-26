@@ -45,7 +45,7 @@ def cython_extension(
             # *cython* itself is using the deprecated api, and the
             # deprecated APIs are actually providing the attributes
             # that we use throughout our code...
-            #    ('NPY_NO_DEPRECATED_API','NPY_1_7_API_VERSION'),
+            ('NPY_NO_DEPRECATED_API', 'NPY_1_7_API_VERSION'),
         ],
         compiler_directives={'language_level': "3"} if have_cython else {},
     )
