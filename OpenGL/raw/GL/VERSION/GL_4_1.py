@@ -270,7 +270,7 @@ def glScissorIndexed(index,left,bottom,width,height):pass
 def glScissorIndexedv(index,v):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray,_cs.GLenum,ctypes.c_void_p,_cs.GLsizei)
-def glShaderBinary(count,shaders,binaryformat,binary,length):pass
+def glShaderBinary(count,shaders,binaryFormat,binary,length):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLbitfield,_cs.GLuint)
 def glUseProgramStages(pipeline,stages,program):pass

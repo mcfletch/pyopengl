@@ -6,7 +6,7 @@ Python-friendly API
 
 Overview (from the spec)
 	
-	OpenGL ES 3.1 supports 8-bit (signed) normalized textures.
+	OpenGL ES 3.0 supports 8-bit (signed) normalized textures.
 	
 	This extension provides a set of new 16 bit signed normalized and
 	unsigned normalized fixed point texture, renderbuffer and

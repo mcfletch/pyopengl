@@ -102,10 +102,6 @@ glVertexAttrib4NusvARB=wrapper.wrapper(glVertexAttrib4NusvARB).setInputArraySize
 glVertexAttrib4NuivARB=wrapper.wrapper(glVertexAttrib4NuivARB).setInputArraySize(
     'v', 4
 )
-# INPUT glVertexAttribPointerARB.pointer size not checked against 'size,type,stride'
-glVertexAttribPointerARB=wrapper.wrapper(glVertexAttribPointerARB).setInputArraySize(
-    'pointer', None
-)
 glGetActiveAttribARB=wrapper.wrapper(glGetActiveAttribARB).setOutput(
     'length',size=(1,),orPassIn=True
 ).setOutput(

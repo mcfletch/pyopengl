@@ -6,7 +6,7 @@ Python-friendly API
 
 Overview (from the spec)
 	
-	OpenGL ES 3.1 supports a variety of signed normalized texture and
+	OpenGL ES 3.0 supports a variety of signed normalized texture and
 	renderbuffer formats which are not color-renderable.
 	
 	This extension enables signed normalized texture and renderbuffer

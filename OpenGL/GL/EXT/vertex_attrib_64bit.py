@@ -75,10 +75,6 @@ glVertexAttribL3dvEXT=wrapper.wrapper(glVertexAttribL3dvEXT).setInputArraySize(
 glVertexAttribL4dvEXT=wrapper.wrapper(glVertexAttribL4dvEXT).setInputArraySize(
     'v', 4
 )
-# INPUT glVertexAttribLPointerEXT.pointer size not checked against size
-glVertexAttribLPointerEXT=wrapper.wrapper(glVertexAttribLPointerEXT).setInputArraySize(
-    'pointer', None
-)
 glGetVertexAttribLdvEXT=wrapper.wrapper(glGetVertexAttribLdvEXT).setOutput(
     'params',size=_glgets._glget_size_mapping,pnameArg='pname',orPassIn=True
 )

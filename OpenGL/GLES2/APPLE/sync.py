@@ -41,7 +41,7 @@ def glInitSyncAPPLE():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# INPUT glGetSyncivAPPLE.values size not checked against bufSize
+# INPUT glGetSyncivAPPLE.values size not checked against count
 glGetSyncivAPPLE=wrapper.wrapper(glGetSyncivAPPLE).setInputArraySize(
     'values', None
 )

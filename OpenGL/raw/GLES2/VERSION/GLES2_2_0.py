@@ -605,7 +605,7 @@ def glSampleCoverage(value,invert):pass
 def glScissor(x,y,width,height):pass
 @_f
 @_p.types(None,_cs.GLsizei,arrays.GLuintArray,_cs.GLenum,ctypes.c_void_p,_cs.GLsizei)
-def glShaderBinary(count,shaders,binaryformat,binary,length):pass
+def glShaderBinary(count,shaders,binaryFormat,binary,length):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLsizei,ctypes.POINTER( ctypes.POINTER( _cs.GLchar )),arrays.GLintArray)
 def glShaderSource(shader,count,string,length):pass

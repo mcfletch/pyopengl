@@ -45,9 +45,6 @@ def glGetShadingRateSampleLocationivNV(rate,samples,index,location):pass
 @_p.types(None,_cs.GLboolean)
 def glShadingRateImageBarrierNV(synchronize):pass
 @_f
-@_p.types(None,_cs.GLboolean)
-def glShadingRateImageBarrierNV(synchronize):pass
-@_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray)
 def glShadingRateImagePaletteNV(viewport,first,count,rates):pass
 @_f

@@ -31,9 +31,9 @@ glDrawRangeElementsBaseVertex=wrapper.wrapper(glDrawRangeElementsBaseVertex).set
 glDrawElementsInstancedBaseVertex=wrapper.wrapper(glDrawElementsInstancedBaseVertex).setInputArraySize(
     'indices', None
 )
-# INPUT glMultiDrawElementsBaseVertex.basevertex size not checked against 'drawcount'
-# INPUT glMultiDrawElementsBaseVertex.count size not checked against 'drawcount'
-# INPUT glMultiDrawElementsBaseVertex.indices size not checked against 'drawcount'
+# INPUT glMultiDrawElementsBaseVertex.basevertex size not checked against drawcount
+# INPUT glMultiDrawElementsBaseVertex.count size not checked against drawcount
+# INPUT glMultiDrawElementsBaseVertex.indices size not checked against drawcount
 glMultiDrawElementsBaseVertex=wrapper.wrapper(glMultiDrawElementsBaseVertex).setInputArraySize(
     'basevertex', None
 ).setInputArraySize(
@@ -47,7 +47,7 @@ glGetInteger64v=wrapper.wrapper(glGetInteger64v).setOutput(
 glGetSynciv=wrapper.wrapper(glGetSynciv).setOutput(
     'length',size=(1,),orPassIn=True
 ).setOutput(
-    'values',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+    'values',size=lambda x:(x,),pnameArg='count',orPassIn=True
 )
 glGetInteger64i_v=wrapper.wrapper(glGetInteger64i_v).setOutput(
     'data',size=_glgets._glget_size_mapping,pnameArg='target',orPassIn=True

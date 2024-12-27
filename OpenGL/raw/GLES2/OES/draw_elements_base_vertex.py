@@ -23,4 +23,4 @@ def glDrawElementsInstancedBaseVertexOES(mode,count,type,indices,instancecount,b
 def glDrawRangeElementsBaseVertexOES(mode,start,end,count,type,indices,basevertex):pass
 @_f
 @_p.types(None,_cs.GLenum,arrays.GLsizeiArray,_cs.GLenum,arrays.GLvoidpArray,_cs.GLsizei,arrays.GLintArray)
-def glMultiDrawElementsBaseVertexEXT(mode,count,type,indices,primcount,basevertex):pass
+def glMultiDrawElementsBaseVertexEXT(mode,count,type,indices,drawcount,basevertex):pass

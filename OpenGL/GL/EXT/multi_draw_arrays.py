@@ -27,15 +27,15 @@ def glInitMultiDrawArraysEXT():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# INPUT glMultiDrawArraysEXT.count size not checked against 'primcount'
-# INPUT glMultiDrawArraysEXT.first size not checked against 'primcount'
+# INPUT glMultiDrawArraysEXT.count size not checked against primcount
+# INPUT glMultiDrawArraysEXT.first size not checked against primcount
 glMultiDrawArraysEXT=wrapper.wrapper(glMultiDrawArraysEXT).setInputArraySize(
     'count', None
 ).setInputArraySize(
     'first', None
 )
-# INPUT glMultiDrawElementsEXT.count size not checked against 'primcount'
-# INPUT glMultiDrawElementsEXT.indices size not checked against 'primcount'
+# INPUT glMultiDrawElementsEXT.count size not checked against primcount
+# INPUT glMultiDrawElementsEXT.indices size not checked against primcount
 glMultiDrawElementsEXT=wrapper.wrapper(glMultiDrawElementsEXT).setInputArraySize(
     'count', None
 ).setInputArraySize(

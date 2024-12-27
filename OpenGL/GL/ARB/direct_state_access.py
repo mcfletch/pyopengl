@@ -66,13 +66,56 @@ glCreateBuffers=wrapper.wrapper(glCreateBuffers).setInputArraySize(
 glNamedBufferStorage=wrapper.wrapper(glNamedBufferStorage).setInputArraySize(
     'data', None
 )
-# INPUT glNamedBufferSubData.data size not checked against 'size'
+# INPUT glNamedBufferData.data size not checked against size
+glNamedBufferData=wrapper.wrapper(glNamedBufferData).setInputArraySize(
+    'data', None
+)
+# INPUT glNamedBufferSubData.data size not checked against size
 glNamedBufferSubData=wrapper.wrapper(glNamedBufferSubData).setInputArraySize(
+    'data', None
+)
+# INPUT glClearNamedBufferData.data size not checked against 'format,type'
+glClearNamedBufferData=wrapper.wrapper(glClearNamedBufferData).setInputArraySize(
+    'data', None
+)
+# INPUT glClearNamedBufferSubData.data size not checked against 'format,type'
+glClearNamedBufferSubData=wrapper.wrapper(glClearNamedBufferSubData).setInputArraySize(
+    'data', None
+)
+glGetNamedBufferPointerv=wrapper.wrapper(glGetNamedBufferPointerv).setInputArraySize(
+    'params', 1
+)
+# INPUT glGetNamedBufferSubData.data size not checked against size
+glGetNamedBufferSubData=wrapper.wrapper(glGetNamedBufferSubData).setInputArraySize(
     'data', None
 )
 # INPUT glCreateFramebuffers.framebuffers size not checked against n
 glCreateFramebuffers=wrapper.wrapper(glCreateFramebuffers).setInputArraySize(
     'framebuffers', None
+)
+# INPUT glNamedFramebufferDrawBuffers.bufs size not checked against n
+glNamedFramebufferDrawBuffers=wrapper.wrapper(glNamedFramebufferDrawBuffers).setInputArraySize(
+    'bufs', None
+)
+# INPUT glInvalidateNamedFramebufferData.attachments size not checked against numAttachments
+glInvalidateNamedFramebufferData=wrapper.wrapper(glInvalidateNamedFramebufferData).setInputArraySize(
+    'attachments', None
+)
+# INPUT glInvalidateNamedFramebufferSubData.attachments size not checked against numAttachments
+glInvalidateNamedFramebufferSubData=wrapper.wrapper(glInvalidateNamedFramebufferSubData).setInputArraySize(
+    'attachments', None
+)
+# INPUT glClearNamedFramebufferiv.value size not checked against 'buffer'
+glClearNamedFramebufferiv=wrapper.wrapper(glClearNamedFramebufferiv).setInputArraySize(
+    'value', None
+)
+# INPUT glClearNamedFramebufferuiv.value size not checked against 'buffer'
+glClearNamedFramebufferuiv=wrapper.wrapper(glClearNamedFramebufferuiv).setInputArraySize(
+    'value', None
+)
+# INPUT glClearNamedFramebufferfv.value size not checked against 'buffer'
+glClearNamedFramebufferfv=wrapper.wrapper(glClearNamedFramebufferfv).setInputArraySize(
+    'value', None
 )
 # INPUT glCreateRenderbuffers.renderbuffers size not checked against n
 glCreateRenderbuffers=wrapper.wrapper(glCreateRenderbuffers).setInputArraySize(
@@ -82,9 +125,55 @@ glCreateRenderbuffers=wrapper.wrapper(glCreateRenderbuffers).setInputArraySize(
 glCreateTextures=wrapper.wrapper(glCreateTextures).setInputArraySize(
     'textures', None
 )
+# INPUT glCompressedTextureSubImage1D.data size not checked against imageSize
+glCompressedTextureSubImage1D=wrapper.wrapper(glCompressedTextureSubImage1D).setInputArraySize(
+    'data', None
+)
+# INPUT glCompressedTextureSubImage2D.data size not checked against imageSize
+glCompressedTextureSubImage2D=wrapper.wrapper(glCompressedTextureSubImage2D).setInputArraySize(
+    'data', None
+)
+# INPUT glCompressedTextureSubImage3D.data size not checked against imageSize
+glCompressedTextureSubImage3D=wrapper.wrapper(glCompressedTextureSubImage3D).setInputArraySize(
+    'data', None
+)
+# INPUT glTextureParameterfv.param size not checked against 'pname'
+glTextureParameterfv=wrapper.wrapper(glTextureParameterfv).setInputArraySize(
+    'param', None
+)
+# INPUT glTextureParameterIiv.params size not checked against 'pname'
+glTextureParameterIiv=wrapper.wrapper(glTextureParameterIiv).setInputArraySize(
+    'params', None
+)
+# INPUT glTextureParameterIuiv.params size not checked against 'pname'
+glTextureParameterIuiv=wrapper.wrapper(glTextureParameterIuiv).setInputArraySize(
+    'params', None
+)
+# INPUT glTextureParameteriv.param size not checked against 'pname'
+glTextureParameteriv=wrapper.wrapper(glTextureParameteriv).setInputArraySize(
+    'param', None
+)
+# INPUT glGetTextureImage.pixels size not checked against bufSize
+glGetTextureImage=wrapper.wrapper(glGetTextureImage).setInputArraySize(
+    'pixels', None
+)
+# INPUT glGetCompressedTextureImage.pixels size not checked against bufSize
+glGetCompressedTextureImage=wrapper.wrapper(glGetCompressedTextureImage).setInputArraySize(
+    'pixels', None
+)
 # INPUT glCreateVertexArrays.arrays size not checked against n
 glCreateVertexArrays=wrapper.wrapper(glCreateVertexArrays).setInputArraySize(
     'arrays', None
+)
+# INPUT glVertexArrayVertexBuffers.buffers size not checked against count
+# INPUT glVertexArrayVertexBuffers.offsets size not checked against count
+# INPUT glVertexArrayVertexBuffers.strides size not checked against count
+glVertexArrayVertexBuffers=wrapper.wrapper(glVertexArrayVertexBuffers).setInputArraySize(
+    'buffers', None
+).setInputArraySize(
+    'offsets', None
+).setInputArraySize(
+    'strides', None
 )
 # INPUT glCreateSamplers.samplers size not checked against n
 glCreateSamplers=wrapper.wrapper(glCreateSamplers).setInputArraySize(

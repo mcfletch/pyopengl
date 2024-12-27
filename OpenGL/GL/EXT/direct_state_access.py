@@ -650,6 +650,9 @@ glGetFramebufferParameterivEXT=wrapper.wrapper(glGetFramebufferParameterivEXT).s
 glGetVertexArrayPointervEXT=wrapper.wrapper(glGetVertexArrayPointervEXT).setInputArraySize(
     'param', 1
 )
+glGetVertexArrayPointeri_vEXT=wrapper.wrapper(glGetVertexArrayPointeri_vEXT).setInputArraySize(
+    'param', 1
+)
 # INPUT glNamedBufferStorageEXT.data size not checked against size
 glNamedBufferStorageEXT=wrapper.wrapper(glNamedBufferStorageEXT).setInputArraySize(
     'data', None

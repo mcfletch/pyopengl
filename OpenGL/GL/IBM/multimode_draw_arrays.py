@@ -32,9 +32,9 @@ def glInitMultimodeDrawArraysIBM():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# INPUT glMultiModeDrawArraysIBM.count size not checked against 'primcount'
-# INPUT glMultiModeDrawArraysIBM.first size not checked against 'primcount'
-# INPUT glMultiModeDrawArraysIBM.mode size not checked against 'primcount'
+# INPUT glMultiModeDrawArraysIBM.count size not checked against primcount
+# INPUT glMultiModeDrawArraysIBM.first size not checked against primcount
+# INPUT glMultiModeDrawArraysIBM.mode size not checked against 'primcount,modestride'
 glMultiModeDrawArraysIBM=wrapper.wrapper(glMultiModeDrawArraysIBM).setInputArraySize(
     'count', None
 ).setInputArraySize(
@@ -42,9 +42,9 @@ glMultiModeDrawArraysIBM=wrapper.wrapper(glMultiModeDrawArraysIBM).setInputArray
 ).setInputArraySize(
     'mode', None
 )
-# INPUT glMultiModeDrawElementsIBM.count size not checked against 'primcount'
-# INPUT glMultiModeDrawElementsIBM.indices size not checked against 'primcount'
-# INPUT glMultiModeDrawElementsIBM.mode size not checked against 'primcount'
+# INPUT glMultiModeDrawElementsIBM.count size not checked against primcount
+# INPUT glMultiModeDrawElementsIBM.indices size not checked against primcount
+# INPUT glMultiModeDrawElementsIBM.mode size not checked against 'primcount,modestride'
 glMultiModeDrawElementsIBM=wrapper.wrapper(glMultiModeDrawElementsIBM).setInputArraySize(
     'count', None
 ).setInputArraySize(

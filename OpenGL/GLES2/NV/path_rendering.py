@@ -517,6 +517,29 @@ glPointAlongPathNV=wrapper.wrapper(glPointAlongPathNV).setOutput(
 ).setOutput(
     'y',size=(1,),orPassIn=True
 )
+# INPUT glStencilThenCoverFillPathInstancedNV.paths size not checked against 'numPaths,pathNameType,paths'
+# INPUT glStencilThenCoverFillPathInstancedNV.transformValues size not checked against 'numPaths,transformType'
+glStencilThenCoverFillPathInstancedNV=wrapper.wrapper(glStencilThenCoverFillPathInstancedNV).setInputArraySize(
+    'paths', None
+).setInputArraySize(
+    'transformValues', None
+)
+# INPUT glStencilThenCoverStrokePathInstancedNV.paths size not checked against 'numPaths,pathNameType,paths'
+# INPUT glStencilThenCoverStrokePathInstancedNV.transformValues size not checked against 'numPaths,transformType'
+glStencilThenCoverStrokePathInstancedNV=wrapper.wrapper(glStencilThenCoverStrokePathInstancedNV).setInputArraySize(
+    'paths', None
+).setInputArraySize(
+    'transformValues', None
+)
+glPathGlyphIndexRangeNV=wrapper.wrapper(glPathGlyphIndexRangeNV).setInputArraySize(
+    'baseAndCount', 2
+)
+# INPUT glGetProgramResourcefvNV.params size not checked against count
+glGetProgramResourcefvNV=wrapper.wrapper(glGetProgramResourcefvNV).setInputArraySize(
+    'length', 1
+).setInputArraySize(
+    'params', None
+)
 # INPUT glPathColorGenNV.coeffs size not checked against 'genMode,colorFormat'
 glPathColorGenNV=wrapper.wrapper(glPathColorGenNV).setInputArraySize(
     'coeffs', None
