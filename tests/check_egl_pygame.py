@@ -36,15 +36,37 @@ def describe_config(display, config):
     """Describe the given configuration"""
     parameters = (
         EGL_CONFIG_ID,
-        EGL_BUFFER_SIZE,
+        EGL_CONFIG_CAVEAT,
+        EGL_CONFORMANT,
         EGL_LEVEL,
-        EGL_RED_SIZE,
-        EGL_GREEN_SIZE,
-        EGL_BLUE_SIZE,
-        EGL_ALPHA_SIZE,
-        EGL_DEPTH_SIZE,
-        EGL_STENCIL_SIZE,
+        EGL_NATIVE_RENDERABLE,
+        EGL_NATIVE_VISUAL_ID,
+        EGL_NATIVE_VISUAL_TYPE,
         EGL_SURFACE_TYPE,
+        EGL_ALPHA_SIZE,
+        EGL_ALPHA_MASK_SIZE,
+        EGL_BIND_TO_TEXTURE_RGB,
+        EGL_BIND_TO_TEXTURE_RGBA,
+        EGL_BLUE_SIZE,
+        EGL_BUFFER_SIZE,
+        EGL_COLOR_BUFFER_TYPE,
+        EGL_DEPTH_SIZE,
+        EGL_GREEN_SIZE,
+        EGL_LUMINANCE_SIZE,
+        EGL_MAX_PBUFFER_WIDTH,
+        EGL_MAX_PBUFFER_HEIGHT,
+        EGL_MAX_PBUFFER_PIXELS,
+        EGL_MAX_SWAP_INTERVAL,
+        EGL_MIN_SWAP_INTERVAL,
+        EGL_RED_SIZE,
+        EGL_RENDERABLE_TYPE,
+        EGL_SAMPLE_BUFFERS,
+        EGL_SAMPLES,
+        EGL_STENCIL_SIZE,
+        EGL_TRANSPARENT_TYPE,
+        EGL_TRANSPARENT_RED_VALUE,
+        EGL_TRANSPARENT_GREEN_VALUE,
+        EGL_TRANSPARENT_BLUE_VALUE,
     )
     description = []
     for param in parameters:
@@ -65,7 +87,8 @@ def mainloop(displayfunc):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
-        displayfunc()
+        if not displayfunc():
+            break
         print("rendered")
 
 
@@ -87,10 +110,26 @@ def main(displayfunc, api):
 
     configs = (EGLConfig * num_configs.value)()
     eglGetConfigs(display, configs, num_configs.value, num_configs)
-    for config_id in configs:
+    for number, config_id in enumerate(configs):
         # print config_id
-        log.info("First config: %s", describe_config(display, config_id))
-        break
+        log.info("Config #%d\n%s", number, describe_config(display, config_id))
+
+    bit = EGL_OPENGL_API
+    if api == 'gles':
+        bit = EGL_OPENGL_ES_BIT
+    elif api == 'gles2':
+        bit = EGL_OPENGL_ES2_BIT
+    attributes = [
+        EGL_NATIVE_RENDERABLE,
+        EGL_TRUE,
+        EGL_CONFORMANT,
+        bit,
+        EGL_COLOR_BUFFER_TYPE,
+        EGL_RGB_BUFFER,
+        EGL_NONE,
+    ]
+    attributes = (EGLint * len(attributes))(*attributes)
+    eglChooseConfig(display, attributes, configs, len(configs), num_configs)
 
     log.info("Attempting to bind and create contexts/apis for %s", api)
     try:
@@ -123,7 +162,12 @@ def main(displayfunc, api):
         log.info("Created regular context")
 
         def _displayfunc():
-            displayfunc(display, surface, ctx)
+            try:
+                displayfunc(display, surface, ctx)
+            except Exception:
+                return False
+            else:
+                return True
 
         mainloop(_displayfunc)
 
