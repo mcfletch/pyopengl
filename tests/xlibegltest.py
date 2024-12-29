@@ -54,6 +54,14 @@ class EGLWindow(object):
         self.msg = msg
 
         self.screen: Xlib.Window = self.display.screen()
+        event_mask = (
+            X.ExposureMask
+            | X.ResizeRedirectMask
+            | X.StructureNotifyMask
+            | X.ButtonPressMask
+            | X.ButtonReleaseMask
+            | X.Button1MotionMask
+        )
         self.window = self.screen.root.create_window(
             50,
             50,
@@ -65,14 +73,7 @@ class EGLWindow(object):
             X.CopyFromParent,
             # special attribute values
             background_pixel=self.screen.white_pixel,
-            event_mask=(
-                X.ExposureMask
-                | X.ResizeRedirectMask
-                | X.StructureNotifyMask
-                | X.ButtonPressMask
-                | X.ButtonReleaseMask
-                | X.Button1MotionMask
-            ),
+            event_mask=event_mask,
             colormap=X.CopyFromParent,
         )
         self.gc = self.window.create_gc(
