@@ -388,8 +388,19 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
                                 % locals()
                             )
                         elif isinstance(dependency, xmlreg.Dynamicsize):
+                            if '/' in dependency:
+                                fragments = [x.strip() for x in dependency.split('/')]
+                                functor = 'lambda x: (x//%s)' % (fragments[1])
+                                dependency = fragments[0]
+                            elif '*' in dependency:
+                                fragments = [x.strip() for x in dependency.split('/')]
+                                functor = 'lambda x: (x*%s)' % (fragments[1])
+                                dependency = fragments[0]
+                            else:
+                                functor = 'lambda x:(x,)'
+
                             base.append(
-                                '.setOutput(\n    %(param)r,size=lambda x:(x,),pnameArg=%(dependency)r,orPassIn=True\n)'
+                                '.setOutput(\n    %(param)r,size=%(functor)s,pnameArg=%(dependency)r,orPassIn=True\n)'
                                 % locals()
                             )
                         elif isinstance(dependency, xmlreg.Multiple):
