@@ -12,6 +12,7 @@ def test_es1():
     GL.glEnableClientState(GL.GL_VERTEX_ARRAY)
     GL.glVertexPointer(3, GL.GL_FLOAT, 0, vertices)
     GL.glDrawArrays(GL.GL_TRIANGLES, 0, 3)
+    print('OK')
 
 
 if __name__ == "__main__":

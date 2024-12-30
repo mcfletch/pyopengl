@@ -88,8 +88,8 @@ def mainloop(displayfunc):
             if event.type == pygame.QUIT:
                 return
         if not displayfunc():
-            break
-        print("rendered")
+            return False
+        return True
 
 
 def main(displayfunc, api):
@@ -110,9 +110,6 @@ def main(displayfunc, api):
 
     configs = (EGLConfig * num_configs.value)()
     eglGetConfigs(display, configs, num_configs.value, num_configs)
-    for number, config_id in enumerate(configs):
-        # print config_id
-        log.info("Config #%d\n%s", number, describe_config(display, config_id))
 
     bit = EGL_OPENGL_API
     if api == 'gles':
@@ -130,6 +127,11 @@ def main(displayfunc, api):
     ]
     attributes = (EGLint * len(attributes))(*attributes)
     eglChooseConfig(display, attributes, configs, len(configs), num_configs)
+
+    for number, config_id in enumerate(configs):
+        # print config_id
+        log.info("Config #%d\n%s", number, describe_config(display, config_id))
+        break
 
     log.info("Attempting to bind and create contexts/apis for %s", api)
     try:
@@ -165,11 +167,13 @@ def main(displayfunc, api):
             try:
                 displayfunc(display, surface, ctx)
             except Exception:
+                log.exception("Failure during display function")
                 return False
             else:
                 return True
 
-        mainloop(_displayfunc)
+        if not mainloop(_displayfunc):
+            raise RuntimeError("Display func crashed")
 
     pbufAttribs = (EGLint * 5)(*[EGL_WIDTH, 500, EGL_HEIGHT, 500, EGL_NONE])
     pbuffer = eglCreatePbufferSurface(display, configs[0], pbufAttribs)
@@ -181,6 +185,7 @@ def main(displayfunc, api):
         "Available EGL extensions:\n  %s",
         "\n  ".join([as_str(ext) for ext in EGLQuerier.getExtensions().split()]),
     )
+    print('OK')
 
 
 def displayfunc_gl(display, surface, ctx):

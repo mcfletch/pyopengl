@@ -49,6 +49,7 @@ def test_gl():
             stride = 3 * 4
             glVertexAttribPointer(position_location, 3, GL_FLOAT, False, stride, vbo)
             glDrawArrays(GL_TRIANGLES, 0, 3)
+    print('OK')
 
 
 if __name__ == "__main__":

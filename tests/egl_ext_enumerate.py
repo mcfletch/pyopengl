@@ -3,13 +3,17 @@ from OpenGL import EGL
 from OpenGL.EGL.EXT import device_query, device_enumeration
 from OpenGL.GL import GLint
 
+
 def main():
-    with egl_context(output=None) as context:
-        display,context,surface = context
-        print("Vendor: %s"%(EGL.eglQueryString(display, EGL.EGL_VENDOR)))
-        print("Version: %s"%(EGL.eglQueryString(display, EGL.EGL_VERSION)))
-        print("Extensions: %s"%(EGL.eglQueryString(display, EGL.EGL_EXTENSIONS),))
-        print("Client Extensions: %s"%(EGL.eglQueryString(display, EGL.EGL_CLIENT_APIS),))
+    with egl_context(output=None, pbuffer=True) as context:
+        display, context, surface = context
+        print("Vendor: %s" % (EGL.eglQueryString(display, EGL.EGL_VENDOR)))
+        print("Version: %s" % (EGL.eglQueryString(display, EGL.EGL_VERSION)))
+        print("Extensions: %s" % (EGL.eglQueryString(display, EGL.EGL_EXTENSIONS),))
+        print(
+            "Client Extensions: %s"
+            % (EGL.eglQueryString(display, EGL.EGL_CLIENT_APIS),)
+        )
         if device_enumeration.eglQueryDevicesEXT:
             devices = (device_query.EGLDeviceEXT * 5)()
             count = GLint()
@@ -18,12 +22,15 @@ def main():
                 devices,
                 count,
             )
-            for device in devices[:int(count)]:
+            for device in devices[: count.value]:
                 print(device)
         else:
             print('No device_query extension available')
+        print('OK')
+
 
 if __name__ == "__main__":
     import logging
+
     logging.basicConfig(level=logging.DEBUG)
     main()

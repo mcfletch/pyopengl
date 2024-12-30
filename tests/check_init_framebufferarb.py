@@ -14,8 +14,12 @@ def main():
     pg.display.set_mode((50, 50), DOUBLEBUF | OPENGL)
     pg.display.init()
     OpenGL.GL.glGetString(OpenGL.GL.GL_VERSION)
+    if not glInitFramebufferObjectARB:
+        print("SKIP")
+        return
     print(glInitFramebufferObjectARB())
     print(OpenGL.__version__)
+    print('OK')
 
 
 if __name__ == "__main__":
