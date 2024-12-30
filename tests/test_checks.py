@@ -213,3 +213,30 @@ def test_egl_ext_enumerate():
 @check_test
 def test_feedbackvarying():
     """Tests that feedback varying buffer operations work"""
+
+
+@check_test
+def test_test_sf2946226():
+    """Test sourceforge bug vs. regressions"""
+
+
+@glut_only
+@check_test
+def test_test_instanced_draw_detect():
+    """Test that instanced draw extension can be identified"""
+
+
+@glut_only
+@check_test
+def test_test_gldouble_ctypes():
+    """Test use of gldouble array in ctypes"""
+
+
+@check_test
+def test_test_glgetactiveuniform():
+    """Test use of gldouble array in ctypes"""
+
+
+@check_test
+def test_test_glgetfloat_leak():
+    """Test use of gldouble array in ctypes"""

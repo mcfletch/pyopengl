@@ -1,5 +1,5 @@
 import pygamegltest
-import os
+import os, sys
 
 # We have to import at least *one* VBO implementation...
 from OpenGL import GL, arrays
@@ -53,3 +53,5 @@ def test_sf_2980896():
                 """Shouldn't have any (or at least much) extra RAM allocated, lost: %s on iteration %d"""
                 % (current - memory, i)
             )  # fails only when run in the whole suite...
+    sys.stdout.write('OK\n')
+    sys.stdout.flush()
