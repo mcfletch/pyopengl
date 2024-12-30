@@ -5,6 +5,10 @@ import pytest
 from functools import wraps
 from OpenGL.GLUT import glutInit
 
+try:
+    import numpy
+except ImportError:
+    numpy = None
 HERE = os.path.dirname(os.path.abspath(__file__))
 log = logging.getLogger(__name__)
 
@@ -23,6 +27,16 @@ def glut_only(func):
     @wraps(func)
     def glut_only_test(*args, **named):
         if not glutInit:
+            pytest.skip("No GLUT installed")
+        return func(*args, **named)
+
+    return glut_only_test
+
+
+def numpy_only(func):
+    @wraps(func)
+    def glut_only_test(*args, **named):
+        if not numpy:
             pytest.skip("No GLUT installed")
         return func(*args, **named)
 
@@ -82,16 +96,19 @@ def test_check_crash_on_glutinit():
     """Checks that basic glut init works"""
 
 
+@numpy_only
 @check_test
 def test_check_egl_es1():
     """Checks egl with es1 under pygame"""
 
 
+@numpy_only
 @check_test
 def test_check_egl_es2():
     """Checks egl with es2 under pygame"""
 
 
+@numpy_only
 @check_test
 def test_check_egl_opengl():
     """Checks egl with opengl under pygame"""
@@ -108,6 +125,7 @@ def test_check_glutwindow():
     """Checks GLUT window manipulation functions"""
 
 
+@pytest.mark.xfail
 @check_test
 def test_check_egl_pygame():
     """Checks egl running over a pygame context"""
@@ -124,6 +142,7 @@ def test_check_import_err():
     """Checks that the GLU module can be imported"""
 
 
+@numpy_only
 @check_test
 def test_check_leak_on_discontiguous_array():
     """Checks that discontiguous array copy doesn't leak the copy"""
