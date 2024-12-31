@@ -72,7 +72,7 @@ jobs:
           platforms: all
 
       - name: Build wheels (develop)
-        uses: pypa/cibuildwheel@v2
+        uses: pypa/cibuildwheel@v2.22.0
         if: ${{ github.ref == 'refs/heads/develop' }}
         with:
           package-dir: "./accelerate"
@@ -82,7 +82,7 @@ jobs:
           CIBW_SKIP: "pp*"
 
       - name: Build wheels (master)
-        uses: pypa/cibuildwheel@v2
+        uses: pypa/cibuildwheel@v2.22.0
         if: ${{ github.ref == 'refs/heads/master' }}
         with:
           package-dir: "./accelerate"
