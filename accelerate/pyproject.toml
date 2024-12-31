@@ -1,3 +1,49 @@
+[project]
+name="PyOpenGL-accelerate"
+dynamic=["version"]
+description = "Cython-coded accelerators for PyOpenGL"
+authors = [
+    {name="Mike C. Fletcher",email="mcfletch@vrplumber.com"},
+]
+readme = {file="README.md", content-type = "text/markdown"}
+license={file="license.txt"}
+keywords = [
+    "Graphics",
+    "3D",
+    "OpenGL",
+    "GLU",
+    "GLUT",
+    "GLE",
+    "GLX",
+    "EXT",
+    "ARB",
+    "Mesa",
+    "PyOpenGL",
+]
+classifiers = [
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 2",
+    "Programming Language :: Python :: 3",
+    "Topic :: Multimedia :: Graphics :: 3D Rendering",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Intended Audience :: Developers",
+]
+[project.urls]
+Homepage = "https://mcfletch.github.io/pyopengl/"
+Download = "https://pypi.org/project/PyOpenGL-accelerate/"
+Source = "https://github.com/mcfletch/pyopengl"
+Documentation = "https://mcfletch.github.io/pyopengl/documentation/index.html"
+
 [build-system]
 requires = [ "setuptools >= 42.0", "Cython >= 0.28", "numpy" ]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+version = {attr = "OpenGL_accelerate.__version__"}
+
+[tool.setuptools.packages.find]
+namespaces=false
+include=["OpenGL_accelerate"]
+exclude=["tests","src"]
+
