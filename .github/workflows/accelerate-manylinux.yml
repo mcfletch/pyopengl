@@ -10,9 +10,9 @@ jobs:
     name: Build source tarballs and root wheels
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
       - name: Install build
@@ -38,13 +38,13 @@ jobs:
           accelerate
 
       - name: Save Core Distributions
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: core
           path: dist/*
 
       - name: Save Accelerate Distributions
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: accel
           path: accelerate/dist/*
@@ -60,9 +60,9 @@ jobs:
           - macOS-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: 3.x
       - name: Set up QEMU
@@ -92,7 +92,7 @@ jobs:
           CIBW_SKIP: "pp*"
 
       - name: Save wheels
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: accel-binary
           path: accelerate/dist/*.whl
@@ -100,6 +100,7 @@ jobs:
   pypi-publish-accel:
     name: Upload Accelerate ${{matrix.repo}}
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
     needs:
       - wheels
       - tarballs
@@ -133,6 +134,7 @@ jobs:
   pypi-publish-core:
     name: Upload Core to ${{matrix.repo}}
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
     needs:
       - wheels
       - tarballs
@@ -150,6 +152,7 @@ jobs:
 
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
+        id: upload
         with:
           username: __token__
           password: ${{ secrets.PYPI_TOKEN }}
