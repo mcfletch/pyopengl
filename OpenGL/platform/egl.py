@@ -73,7 +73,8 @@ class EGLPlatform( baseplatform.BasePlatform ):
         #   https://github.com/raspberrypi/firmware/issues/110
         import os
         if os.path.exists('/proc/cpuinfo'):
-            info = open('/proc/cpuinfo').read()
+            with open('/proc/cpuinfo', 'r') as f:
+                info = f.read()
             if 'BCM2708' in info or 'BCM2709' in info:
                 assert self.GLES2
         try:
