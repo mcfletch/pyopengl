@@ -138,7 +138,7 @@ jobs:
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          username: __token__
+          user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
           # Note: this is apparently different than the package-dir meaning in the cibuildwheel
           packages-dir: "dist"
@@ -166,7 +166,7 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         id: upload
         with:
-          username: __token__
+          user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
           # Note: this is apparently different than the package-dir meaning in the cibuildwheel
           packages-dir: "dist"
