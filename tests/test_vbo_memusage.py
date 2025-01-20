@@ -6,10 +6,6 @@ from OpenGL import GL, arrays
 from OpenGL.arrays import vbo
 
 try:
-    import psutil
-except ImportError:
-    psutil = None
-try:
     unicode
 except NameError:
     unicode = str
@@ -18,13 +14,21 @@ import pytest
 import gc
 
 try:
+    import psutil
+except ImportError:
+    psutil = None
+    pytest.skip(reason="No psutil available", allow_module_level=True)
+
+try:
     import numpy as np
 except ImportError:
     np = None
 
 
 def get_current_memory():
-    return psutil.Process(os.getpid()).memory_info().rss
+    if psutil:
+        return psutil.Process(os.getpid()).memory_info().rss
+    return 0
 
 
 @pytest.mark.skipif(not psutil, reason="No psutil available")

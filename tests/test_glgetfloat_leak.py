@@ -5,7 +5,13 @@ import pygame
 from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
-import psutil
+
+try:
+    import psutil
+except ImportError:
+    import pytest
+
+    pytest.skip(reason="No psutil available", allow_module_level=True)
 
 
 def main():
