@@ -1,13 +1,8 @@
 #!/usr/bin/env python
 """Builds accelleration functions for PyOpenGL
 """
-
 import sys
-
-if sys.version_info[:2] < (3, 12):
-    from setuptools import setup, Extension
-else:
-    from distutils.core import setup, Extension
+from setuptools import setup, Extension
 
 try:
     from Cython.Distutils import build_ext

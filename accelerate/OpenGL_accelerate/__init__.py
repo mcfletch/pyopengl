@@ -7,5 +7,5 @@ PyOpenGL package and is built via the setupaccel.py
 script in the top level of the PyOpenGL source package.
 """
 
-__version__ = "3.1.9a1"
+__version__ = "3.1.9"
 __version_tuple__ = (3, 1, 9)

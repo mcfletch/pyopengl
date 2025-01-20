@@ -44,9 +44,8 @@ version = {attr = "OpenGL.version.__version__"}
 
 [tool.setuptools.packages.find]
 namespaces=false
-include=["OpenGL"]
+include=["OpenGL*"]
 exclude=["tests","accelerate","directdocs","documentation"]
-
 
 [tool.black]
 skip-string-normalization=true
