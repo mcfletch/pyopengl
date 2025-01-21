@@ -103,7 +103,9 @@ class EGLPlatform( baseplatform.BasePlatform ):
     DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.CFUNCTYPE )
     @baseplatform.lazy_property
     def GetCurrentContext( self ):
-        return self.EGL.eglGetCurrentContext
+        eglGetCurrentContext = self.EGL.eglGetCurrentContext
+        eglGetCurrentContext.restype = ctypes.c_void_p
+        return eglGetCurrentContext
 
     def getGLUTFontPointer( self, constant ):
         """Platform specific function to retrieve a GLUT font pointer
