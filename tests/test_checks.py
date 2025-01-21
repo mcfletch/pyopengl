@@ -74,17 +74,20 @@ def check_test(func):
                 "Test did not produce output: %s",
                 stderr.decode('utf-8', errors='ignore'),
             )
-            raise RuntimeError('Test script failure')
+            raise RuntimeError('Test script failure on %s' % (func.__name__))
         if 'SKIP' in lines:
-            raise pytest.skip("Skipped by executable")
+            raise pytest.skip("Skipped by executable on %s" % (func.__name__))
         elif 'OK' in lines:
             return
         else:
             log.error(
-                "Failing check script output: %s",
+                "Failing check script stderr: %s",
                 stderr.decode('utf-8', errors='ignore'),
             )
-            print(output)
+            log.error(
+                "Failing check script stdout: %s",
+                output,
+            )
             raise RuntimeError("Test Failed")
 
     return test_x
