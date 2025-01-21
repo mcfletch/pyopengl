@@ -35,7 +35,7 @@ def getContext( context = None ):
     """
     if context is None:
         context = platform.GetCurrentContext()
-        if context == 0:
+        if not context:
             from OpenGL import error
             raise error.Error(
                 """Attempt to retrieve context when no valid context"""
