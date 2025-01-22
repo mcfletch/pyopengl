@@ -82,10 +82,6 @@ glVertexAttribI4ubvEXT=wrapper.wrapper(glVertexAttribI4ubvEXT).setInputArraySize
 glVertexAttribI4usvEXT=wrapper.wrapper(glVertexAttribI4usvEXT).setInputArraySize(
     'v', 4
 )
-# INPUT glVertexAttribIPointerEXT.pointer size not checked against 'size,type,stride'
-glVertexAttribIPointerEXT=wrapper.wrapper(glVertexAttribIPointerEXT).setInputArraySize(
-    'pointer', None
-)
 glGetVertexAttribIivEXT=wrapper.wrapper(glGetVertexAttribIivEXT).setOutput(
     'params',size=(1,),orPassIn=True
 )

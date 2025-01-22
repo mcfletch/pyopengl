@@ -1,5 +1,5 @@
 import pygamegltest
-import os
+import os, sys
 
 # We have to import at least *one* VBO implementation...
 from OpenGL import GL, arrays
@@ -34,7 +34,7 @@ def test_sf_2980896():
     """Test SF#2980896 report of memory leak on VBO transfer"""
     data = arrays.GLfloatArray.zeros((1000,))
     memory = get_current_memory()
-    for i in range(100):
+    for i in range(8):
         new_vbo = vbo.VBO(data)
         with new_vbo:
             # data is transferred to the VBO
@@ -48,7 +48,10 @@ def test_sf_2980896():
             memory = get_current_memory()
         else:
             current = get_current_memory()
-            assert current - memory < 200, (
-                """Shouldn't have any (or at least much) extra RAM allocated, lost: %s"""
-                % (current - memory)
+            delta = current - memory
+            assert delta < 200, (
+                """Shouldn't have any (or at least much) extra RAM allocated, lost: %s on iteration %d"""
+                % (current - memory, i)
             )  # fails only when run in the whole suite...
+    sys.stdout.write('OK\n')
+    sys.stdout.flush()

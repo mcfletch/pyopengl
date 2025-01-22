@@ -51,8 +51,8 @@ def ChoosePixelFormat(hDc,pPfd):pass
 @_p.types(_cs.c_int,_cs.HDC,_cs.c_int,_cs.UINT,ctypes.POINTER(_cs.PIXELFORMATDESCRIPTOR))
 def DescribePixelFormat(hdc,ipfd,cjpfd,ppfd):pass
 @_f
-@_p.types(_cs.UINT,_cs.HENHMETAFILE,ctypes.POINTER(_cs.PIXELFORMATDESCRIPTOR))
-def GetEnhMetaFilePixelFormat(hemf,ppfd):pass
+@_p.types(_cs.UINT,_cs.HENHMETAFILE,_cs.UINT,ctypes.POINTER(_cs.PIXELFORMATDESCRIPTOR))
+def GetEnhMetaFilePixelFormat(hemf,cbBuffer,ppfd):pass
 @_f
 @_p.types(_cs.c_int,_cs.HDC)
 def GetPixelFormat(hdc):pass

@@ -124,19 +124,19 @@ glGetnCompressedTexImageARB=wrapper.wrapper(glGetnCompressedTexImageARB).setOutp
     'img',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 )
 glGetnUniformfvARB=wrapper.wrapper(glGetnUniformfvARB).setOutput(
-    'params',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+    'params',size=lambda x: (x//4),pnameArg='bufSize',orPassIn=True
 )
 glGetnUniformivARB=wrapper.wrapper(glGetnUniformivARB).setOutput(
-    'params',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+    'params',size=lambda x: (x//4),pnameArg='bufSize',orPassIn=True
 )
 glGetnUniformuivARB=wrapper.wrapper(glGetnUniformuivARB).setOutput(
-    'params',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+    'params',size=lambda x: (x//4),pnameArg='bufSize',orPassIn=True
 )
 glGetnUniformdvARB=wrapper.wrapper(glGetnUniformdvARB).setOutput(
-    'params',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+    'params',size=lambda x: (x//8),pnameArg='bufSize',orPassIn=True
 )
 glGetnMapdvARB=wrapper.wrapper(glGetnMapdvARB).setOutput(
-    'v',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+    'v',size=lambda x: (x//8),pnameArg='bufSize',orPassIn=True
 )
 glGetnMapfvARB=wrapper.wrapper(glGetnMapfvARB).setOutput(
     'v',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
@@ -145,7 +145,7 @@ glGetnMapivARB=wrapper.wrapper(glGetnMapivARB).setOutput(
     'v',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 )
 glGetnPixelMapfvARB=wrapper.wrapper(glGetnPixelMapfvARB).setOutput(
-    'values',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
+    'values',size=lambda x: (x//4),pnameArg='bufSize',orPassIn=True
 )
 glGetnPixelMapuivARB=wrapper.wrapper(glGetnPixelMapuivARB).setOutput(
     'values',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True

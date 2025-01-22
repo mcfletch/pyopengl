@@ -1,7 +1,3 @@
-[build-system]
-requires = [ "setuptools >= 61.0", "Cython >= 0.28", "numpy" ]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "PyOpenGL-accelerate"
 description = "Acceleration code for PyOpenGL"
@@ -22,9 +18,19 @@ classifiers = [
 
 dynamic = [ "version" ]
 
-[tool.setuptools]
-packages = [ "OpenGL_accelerate" ]
-platforms = [ "Win32", "Linux", "OS-X", "Posix" ]
+[project.urls]
+Homepage = "https://mcfletch.github.io/pyopengl/"
+Download = "https://pypi.org/project/PyOpenGL-accelerate/"
+Source = "https://github.com/mcfletch/pyopengl"
+Documentation = "https://mcfletch.github.io/pyopengl/documentation/index.html"
+
+[build-system]
+requires = [ "setuptools >= 61.0", "Cython >= 0.28", "numpy" ]
+build-backend = "setuptools.build_meta"
 
 [tool.setuptools.dynamic]
 version = { attr = "OpenGL_accelerate.__init__.__version__" }
+
+[tool.setuptools]
+packages = [ "OpenGL_accelerate" ]
+platforms = [ "Win32", "Linux", "OS-X", "Posix" ]

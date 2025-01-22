@@ -1,4 +1,5 @@
 """Cython-coded GL-error-check module"""
+#cython: language_level=3
 from OpenGL import _configflags
 
 cdef class _ErrorChecker:

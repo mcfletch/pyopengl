@@ -38,10 +38,6 @@ glGetTransformFeedbackVarying=wrapper.wrapper(glGetTransformFeedbackVarying).set
 ).setOutput(
     'type',size=(1,),orPassIn=True
 )
-# INPUT glVertexAttribIPointer.pointer size not checked against 'size,type,stride'
-glVertexAttribIPointer=wrapper.wrapper(glVertexAttribIPointer).setInputArraySize(
-    'pointer', None
-)
 glGetVertexAttribIiv=wrapper.wrapper(glGetVertexAttribIiv).setOutput(
     'params',size=(1,),orPassIn=True
 )

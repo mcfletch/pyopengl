@@ -1,4 +1,5 @@
 """Cython import description for formathandler types"""
+#cython: language_level=3
 
 cdef class FormatHandler:
 	cdef public int ERROR_ON_COPY

@@ -19,15 +19,15 @@ def glInitGl14VERSION():
     from OpenGL import extensions
     return extensions.hasGLExtension( _EXTENSION_NAME )
 
-# INPUT glMultiDrawArrays.count size not checked against 'drawcount'
-# INPUT glMultiDrawArrays.first size not checked against 'count'
+# INPUT glMultiDrawArrays.count size not checked against drawcount
+# INPUT glMultiDrawArrays.first size not checked against drawcount
 glMultiDrawArrays=wrapper.wrapper(glMultiDrawArrays).setInputArraySize(
     'count', None
 ).setInputArraySize(
     'first', None
 )
-# INPUT glMultiDrawElements.count size not checked against 'drawcount'
-# INPUT glMultiDrawElements.indices size not checked against 'drawcount'
+# INPUT glMultiDrawElements.count size not checked against drawcount
+# INPUT glMultiDrawElements.indices size not checked against drawcount
 glMultiDrawElements=wrapper.wrapper(glMultiDrawElements).setInputArraySize(
     'count', None
 ).setInputArraySize(

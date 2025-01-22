@@ -18,3 +18,6 @@ GL_MAX_VIEWS_OVR=_C('GL_MAX_VIEWS_OVR',0x9631)
 @_f
 @_p.types(None,_cs.GLenum,_cs.GLenum,_cs.GLuint,_cs.GLint,_cs.GLint,_cs.GLsizei)
 def glFramebufferTextureMultiviewOVR(target,attachment,texture,level,baseViewIndex,numViews):pass
+@_f
+@_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLint,_cs.GLint,_cs.GLsizei)
+def glNamedFramebufferTextureMultiviewOVR(framebuffer,attachment,texture,level,baseViewIndex,numViews):pass

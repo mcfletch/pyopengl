@@ -69,9 +69,10 @@ glActiveVaryingNV=wrapper.wrapper(glActiveVaryingNV).setInputArraySize(
 glGetVaryingLocationNV=wrapper.wrapper(glGetVaryingLocationNV).setInputArraySize(
     'name', None
 )
-# OUTPUT glGetActiveVaryingNV.name COMPSIZE(program, index, bufSize) 
 glGetActiveVaryingNV=wrapper.wrapper(glGetActiveVaryingNV).setOutput(
     'length',size=(1,),orPassIn=True
+).setOutput(
+    'name',size=lambda x:(x,),pnameArg='bufSize',orPassIn=True
 ).setOutput(
     'size',size=(1,),orPassIn=True
 ).setOutput(

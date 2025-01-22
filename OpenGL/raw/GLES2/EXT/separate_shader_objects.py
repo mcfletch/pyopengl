@@ -146,9 +146,6 @@ def glProgramUniformMatrix3x4fvEXT(program,location,count,transpose,value):pass
 def glProgramUniformMatrix4fvEXT(program,location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
-def glProgramUniformMatrix4fvEXT(program,location,count,transpose,value):pass
-@_f
-@_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)
 def glProgramUniformMatrix4x2fvEXT(program,location,count,transpose,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLint,_cs.GLsizei,_cs.GLboolean,arrays.GLfloatArray)

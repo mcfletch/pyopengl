@@ -88,9 +88,9 @@ glDrawRangeElementsBaseVertexEXT=wrapper.wrapper(glDrawRangeElementsBaseVertexEX
 glDrawElementsInstancedBaseVertexEXT=wrapper.wrapper(glDrawElementsInstancedBaseVertexEXT).setInputArraySize(
     'indices', None
 )
-# INPUT glMultiDrawElementsBaseVertexEXT.basevertex size not checked against 'drawcount'
-# INPUT glMultiDrawElementsBaseVertexEXT.count size not checked against 'drawcount'
-# INPUT glMultiDrawElementsBaseVertexEXT.indices size not checked against 'drawcount'
+# INPUT glMultiDrawElementsBaseVertexEXT.basevertex size not checked against drawcount
+# INPUT glMultiDrawElementsBaseVertexEXT.count size not checked against drawcount
+# INPUT glMultiDrawElementsBaseVertexEXT.indices size not checked against drawcount
 glMultiDrawElementsBaseVertexEXT=wrapper.wrapper(glMultiDrawElementsBaseVertexEXT).setInputArraySize(
     'basevertex', None
 ).setInputArraySize(

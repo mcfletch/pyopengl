@@ -12,20 +12,22 @@ void main(void)
     gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex * scale;
 }
 """
+
+
 def main():
     pygame.init()
     disp = pygame.display.set_mode((1024, 768), OPENGL | DOUBLEBUF)
 
-    program = compileProgram(
-        compileShader( vertex_shader, GL_VERTEX_SHADER )
-    )
+    program = compileProgram(compileShader(vertex_shader, GL_VERTEX_SHADER))
 
     nu = glGetProgramiv(program, GL_ACTIVE_UNIFORMS)
     for i in range(nu):
         name, size, type = glGetActiveUniform(program, i)
         print('CORE - ', name, size, type)
-        glGetActiveUniformARB( program, i )
+        glGetActiveUniformARB(program, i)
         print('ARB  - ', name, size, type)
+    print('OK')
+
 
 if __name__ == "__main__":
     main()

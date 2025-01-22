@@ -1,4 +1,6 @@
 """Cython-coded Array-handling accelerator module"""
+#cython: language_level=3
+
 import ctypes
 import OpenGL
 from OpenGL._null import NULL as _NULL

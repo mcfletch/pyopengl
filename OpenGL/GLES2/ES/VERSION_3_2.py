@@ -81,18 +81,6 @@ glDrawElementsInstancedBaseVertex=wrapper.wrapper(glDrawElementsInstancedBaseVer
 glReadnPixels=wrapper.wrapper(glReadnPixels).setInputArraySize(
     'data', None
 )
-# INPUT glGetnUniformfv.params size not checked against bufSize
-glGetnUniformfv=wrapper.wrapper(glGetnUniformfv).setInputArraySize(
-    'params', None
-)
-# INPUT glGetnUniformiv.params size not checked against bufSize
-glGetnUniformiv=wrapper.wrapper(glGetnUniformiv).setInputArraySize(
-    'params', None
-)
-# INPUT glGetnUniformuiv.params size not checked against bufSize
-glGetnUniformuiv=wrapper.wrapper(glGetnUniformuiv).setInputArraySize(
-    'params', None
-)
 # INPUT glTexParameterIiv.params size not checked against 'pname'
 glTexParameterIiv=wrapper.wrapper(glTexParameterIiv).setInputArraySize(
     'params', None

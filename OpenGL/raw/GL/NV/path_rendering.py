@@ -237,7 +237,7 @@ def glGetPathTexGenfvNV(texCoordSet,pname,value):pass
 def glGetPathTexGenivNV(texCoordSet,pname,value):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,_cs.GLuint,_cs.GLsizei,arrays.GLuintArray,_cs.GLsizei,arrays.GLsizeiArray,arrays.GLfloatArray)
-def glGetProgramResourcefvNV(program,programInterface,index,propCount,props,bufSize,length,params):pass
+def glGetProgramResourcefvNV(program,programInterface,index,propCount,props,count,length,params):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLuint,_cs.GLuint,_cs.GLfloat)
 def glInterpolatePathsNV(resultPath,pathA,pathB,weight):pass
@@ -347,7 +347,7 @@ def glPathFogGenNV(genMode):pass
 @_p.types(_cs.GLenum,_cs.GLuint,_cs.GLenum,ctypes.c_void_p,_cs.GLbitfield,_cs.GLuint,_cs.GLsizei,_cs.GLuint,_cs.GLfloat)
 def glPathGlyphIndexArrayNV(firstPathName,fontTarget,fontName,fontStyle,firstGlyphIndex,numGlyphs,pathParameterTemplate,emScale):pass
 @_f
-@_p.types(_cs.GLenum,_cs.GLenum,ctypes.c_void_p,_cs.GLbitfield,_cs.GLuint,_cs.GLfloat,_cs.GLuint)
+@_p.types(_cs.GLenum,_cs.GLenum,ctypes.c_void_p,_cs.GLbitfield,_cs.GLuint,_cs.GLfloat,arrays.GLuintArray)
 def glPathGlyphIndexRangeNV(fontTarget,fontName,fontStyle,pathParameterTemplate,emScale,baseAndCount):pass
 @_f
 @_p.types(None,_cs.GLuint,_cs.GLenum,ctypes.c_void_p,_cs.GLbitfield,_cs.GLuint,_cs.GLsizei,_cs.GLenum,_cs.GLuint,_cs.GLfloat)

@@ -97,10 +97,6 @@ glProgramUniform3uivEXT=wrapper.wrapper(glProgramUniform3uivEXT).setInputArraySi
 glProgramUniform4uivEXT=wrapper.wrapper(glProgramUniform4uivEXT).setInputArraySize(
     'value', None
 )
-# INPUT glProgramUniformMatrix4fvEXT.value size not checked against count*16
-glProgramUniformMatrix4fvEXT=wrapper.wrapper(glProgramUniformMatrix4fvEXT).setInputArraySize(
-    'value', None
-)
 # INPUT glProgramUniformMatrix2x3fvEXT.value size not checked against count*6
 glProgramUniformMatrix2x3fvEXT=wrapper.wrapper(glProgramUniformMatrix2x3fvEXT).setInputArraySize(
     'value', None

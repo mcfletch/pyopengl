@@ -1,4 +1,5 @@
 """General pattern which does late-bound calls"""
+#cython: language_level=3
 
 cdef class LateBind:
     """Provides a __call__ which dispatches to self._finalCall

@@ -12,6 +12,8 @@ def main():
     devices = (EGLDeviceEXT * 10)()
     count = EGLint()
     major, minor = EGLint(), EGLint()
+    if not eglQueryDevicesEXT:
+        raise RuntimeError("No egl query devices extension available")
     if eglQueryDevicesEXT(10, devices, count):
         log.info("%s devices enumerated", count)
         for i, device in enumerate(devices[: count.value]):

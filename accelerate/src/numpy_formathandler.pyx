@@ -1,4 +1,5 @@
 """Accelerator for numpy format handler operations"""
+#cython: language_level=3
 from ctypes import c_void_p
 import numpy as np
 cimport numpy as np
@@ -19,9 +20,9 @@ cdef extern from "numpy/arrayobject.h":
     int NPY_ARRAY_FORCECAST
     int PyArray_ISCARRAY( np.ndarray instance )
     int PyArray_ISCARRAY_RO( np.ndarray instance )
-    cdef np.ndarray PyArray_Zeros(int nd, np.Py_intptr_t* dims, np.dtype, int fortran)
+    cdef np.ndarray PyArray_Zeros(int nd, np.npy_intp* dims, np.dtype, int fortran)
     cdef np.ndarray PyArray_EnsureArray(object)
-    cdef int PyArray_FillWithScalar(object, object)
+    cdef int PyArray_FillWithScalar(np.ndarray, object)
     cdef void import_array()
     cdef void* PyArray_DATA( np.ndarray )
     cdef int PyArray_NDIM( np.ndarray )
@@ -121,7 +122,7 @@ cdef class NumpyHandler(FormatHandler):
             c_dims = PyArray_ContiguousFromAny( 
                 [int(x) for x in dims], np.NPY_INTP, 1,1 
             )
-        except (ValueError,TypeError), err:
+        except (ValueError,TypeError) as err:
             dims = (int(dims),)
             c_dims = PyArray_ContiguousFromAny( 
                 dims, np.NPY_INTP, 1,1 
@@ -157,7 +158,7 @@ cdef class NumpyHandler(FormatHandler):
         if PyArray_CheckScalar(instance):
             Py_INCREF(instance)
             working = self.c_zeros((1,), typeCode)
-            res = PyArray_FillWithScalar(<object>working, instance)
+            res = PyArray_FillWithScalar(working, instance)
             if res < -1:
                 raise ValueError("Unable to fill new array with value %r (%s)"%(instance,instance.__class__))
         else:
@@ -226,4 +227,4 @@ cdef class NumpyHandler(FormatHandler):
 
 # Cython numpy tutorial neglects to mention this AFAICS
 # get segfaults without it
-import_array()
+# import_array()

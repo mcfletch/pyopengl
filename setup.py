@@ -1,9 +1,8 @@
 #! /usr/bin/env python
-"""PyOpenGL setup script (setuptools-based)
-"""
+"""PyOpenGL setup script distutils/setuptools/pip based"""
 import sys, os
-from setuptools import setup
 from distutils.command.install_data import install_data
+from setuptools import setup
 
 extra_commands = {}
 

@@ -1,4 +1,5 @@
 """Debug utilities for EGL operations"""
+
 from OpenGL.EGL import *
 import itertools
 
@@ -29,7 +30,7 @@ KNOWN_ERRORS = {
 
 def write_ppm(buf, filename):
     """Write height * width * 3-component buffer as ppm to filename
-    
+
     This lets us write a simple image format without
     using any libraries that can be viewed on most
     linux workstations.
@@ -188,11 +189,11 @@ CONFIG_FORMAT = [
 
 def format_debug_configs(debug_configs, formats=CONFIG_FORMAT):
     """Format config for compact debugging display
-    
-    Produces a config summary display for a set of 
+
+    Produces a config summary display for a set of
     debug_configs as a text-mode table.
 
-    Uses `formats` (default `CONFIG_FORMAT`) to determine 
+    Uses `formats` (default `CONFIG_FORMAT`) to determine
     which fields are extracted and how they are formatted
     along with the column/subcolum set to be rendered in
     the overall header.
@@ -201,7 +202,7 @@ def format_debug_configs(debug_configs, formats=CONFIG_FORMAT):
     logs or utilities
     """
     columns = []
-    for (key, format, subcol, col) in formats:
+    for key, format, subcol, col in formats:
         column = []
         max_width = 0
         for row in debug_configs:
@@ -231,8 +232,8 @@ def format_debug_configs(debug_configs, formats=CONFIG_FORMAT):
     headers = []
     subheaders = []
     rows = [headers, subheaders]
-    last_column = None
-    last_column_width = 0
+    # last_column = None
+    # last_column_width = 0
     for header, subcols in itertools.groupby(columns, lambda x: x["col"]):
         subcols = list(subcols)
         width = sum([col["width"] for col in subcols]) + (len(subcols) - 1)

@@ -1,13 +1,16 @@
 """Test GLUT forward-compatible mode..."""
+
 from __future__ import print_function
 import OpenGL
+
 OpenGL.FORWARD_COMPATIBLE_ONLY = True
 OpenGL.ERROR_CHECKING = True
-#OpenGL.USE_ACCELERATE = False
+# OpenGL.USE_ACCELERATE = False
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 import time
+
 start = time.time()
 
 from OpenGL.GL.AMD.debug_output import glGetDebugMessageLogAMD
@@ -24,93 +27,113 @@ glGetDebugMessageLog = extensions.alternate(
 
 window = None
 
+
 def display():
     try:
-        glutSetWindow(window);
-        glClearColor (0.0, 0.0, (time.time()%1.0)/1.0, 0.0)
-        glClear (GL_COLOR_BUFFER_BIT)
+        glutSetWindow(window)
+        glClearColor(0.0, 0.0, (time.time() % 1.0) / 1.0, 0.0)
+        glClear(GL_COLOR_BUFFER_BIT)
         try:
-            glGetString( GL_EXTENSIONS )
+            glGetString(GL_EXTENSIONS)
         except GLError:
-            pass 
+            pass
         else:
             print('Egads, glGetString should not have worked!')
-        assert bool( glGenVertexArrays ), "Should have vertex array support in 3.2"
+        assert bool(glGenVertexArrays), "Should have vertex array support in 3.2"
         for message in get_debug_messages():
             print(message)
-        glFlush ()
+        glFlush()
         glutSwapBuffers()
     except Exception:
-        glutDestroyWindow( window )
+        glutDestroyWindow(window)
         raise
+
 
 def get_debug_messages():
     messages = []
-    count = glGetIntegerv( GL_DEBUG_LOGGED_MESSAGES )
-    max_size = int(glGetIntegerv( GL_MAX_DEBUG_MESSAGE_LENGTH ))
+    count = glGetIntegerv(GL_DEBUG_LOGGED_MESSAGES)
+    max_size = int(glGetIntegerv(GL_MAX_DEBUG_MESSAGE_LENGTH))
     source = GLenum()
     type = GLenum()
     id = GLenum()
     severity = GLenum()
     length = GLsizei()
-    buffer = ctypes.create_string_buffer( max_size )
+    buffer = ctypes.create_string_buffer(max_size)
     for i in range(count):
-        result = glGetDebugMessageLog( 1, max_size, source, type, id, severity, length, buffer )
+        result = glGetDebugMessageLog(
+            1, max_size, source, type, id, severity, length, buffer
+        )
         if result:
-            messages.append( {
-                'message':buffer[:length.value],
-                'type': type.value,
-                'id': id.value,
-                'severity': severity.value,
-                'source': source.value,
-            })
+            messages.append(
+                {
+                    'message': buffer[: length.value],
+                    'type': type.value,
+                    'id': id.value,
+                    'severity': severity.value,
+                    'source': source.value,
+                }
+            )
     return messages
     assert len(messages), messages
 
-        
 
-size = (250,250)
+size = (250, 250)
 
-def reshape( *args ):
-    global size 
+
+def reshape(*args):
+    global size
     size = args
-    glViewport( *( (0,0)+args) )
+    glViewport(*((0, 0) + args))
     display()
 
-def printFunction( name ):
-    def onevent( *args ):
-        print('%s -> %s'%(name, ", ".join( [str(a) for a in args ])))
+
+def printFunction(name):
+    def onevent(*args):
+        print('%s -> %s' % (name, ", ".join([str(a) for a in args])))
+
     return onevent
 
+
+def idle(*args, **named):
+    sys.stdout.write("OK\n")
+    sys.stdout.flush()
+    global window
+    glutDestroyWindow(window)
+    try:
+        if fgDeinitialize:
+            fgDeinitialize(False)
+    except NameError:
+        pass  # Older PyOpenGL, you may see a seg-fault here...
+
+    os._exit(0)
 
 
 if __name__ == "__main__":
     import sys
+
     newArgv = glutInit(sys.argv)
     glutInitContextVersion(3, 1)
-    glutInitContextFlags(GLUT_FORWARD_COMPATIBLE|GLUT_DEBUG)
+    glutInitContextFlags(GLUT_FORWARD_COMPATIBLE | GLUT_DEBUG)
     glutInitContextProfile(GLUT_CORE_PROFILE)
-    glutInitDisplayMode( GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH )
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH)
 
-    glutSetOption(
-        GLUT_ACTION_ON_WINDOW_CLOSE,
-        GLUT_ACTION_GLUTMAINLOOP_RETURNS
-    );
+    glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS)
     glutInitWindowSize(250, 250)
     glutInitWindowPosition(100, 100)
     window = glutCreateWindow("hello")
     print('window', repr(window))
     glutDisplayFunc(display)
     glutReshapeFunc(reshape)
-    glutMouseFunc(printFunction( 'Mouse' ))
-    glutEntryFunc(printFunction( 'Entry' ))
-    glutKeyboardFunc( printFunction( 'Keyboard' ))
-    glutKeyboardUpFunc( printFunction( 'KeyboardUp' ))
-    glutMotionFunc( printFunction( 'Motion' ))
-    glutPassiveMotionFunc( printFunction( 'PassiveMotion' ))
-    glutVisibilityFunc( printFunction( 'Visibility' ))
-    glutWindowStatusFunc( printFunction( 'WindowStatus' ))
-    glutSpecialFunc( printFunction( 'Special' ))
-    glutSpecialUpFunc( printFunction( 'SpecialUp' ))
-    
+    glutMouseFunc(printFunction('Mouse'))
+    glutEntryFunc(printFunction('Entry'))
+    glutKeyboardFunc(printFunction('Keyboard'))
+    glutKeyboardUpFunc(printFunction('KeyboardUp'))
+    glutMotionFunc(printFunction('Motion'))
+    glutIdleFunc(idle)
+    glutPassiveMotionFunc(printFunction('PassiveMotion'))
+    glutVisibilityFunc(printFunction('Visibility'))
+    glutWindowStatusFunc(printFunction('WindowStatus'))
+    glutSpecialFunc(printFunction('Special'))
+    glutSpecialUpFunc(printFunction('SpecialUp'))
+
     glutMainLoop()

@@ -137,10 +137,6 @@ glVertexAttrib4uivARB=wrapper.wrapper(glVertexAttrib4uivARB).setInputArraySize(
 glVertexAttrib4usvARB=wrapper.wrapper(glVertexAttrib4usvARB).setInputArraySize(
     'v', 4
 )
-# INPUT glVertexAttribPointerARB.pointer size not checked against 'size,type,stride'
-glVertexAttribPointerARB=wrapper.wrapper(glVertexAttribPointerARB).setInputArraySize(
-    'pointer', None
-)
 # INPUT glProgramStringARB.string size not checked against len
 glProgramStringARB=wrapper.wrapper(glProgramStringARB).setInputArraySize(
     'string', None

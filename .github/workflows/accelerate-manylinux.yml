@@ -10,9 +10,9 @@ jobs:
     name: Build source tarballs and root wheels
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
       - name: Install build
@@ -38,13 +38,13 @@ jobs:
           accelerate
 
       - name: Save Core Distributions
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: core
           path: dist/*
 
       - name: Save Accelerate Distributions
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: accel
           path: accelerate/dist/*
@@ -60,9 +60,9 @@ jobs:
           - macOS-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: 3.x
       - name: Set up QEMU
@@ -72,7 +72,7 @@ jobs:
           platforms: all
 
       - name: Build wheels (develop)
-        uses: pypa/cibuildwheel@v2.12.3
+        uses: pypa/cibuildwheel@v2.22.0
         if: ${{ github.ref == 'refs/heads/develop' }}
         with:
           package-dir: "./accelerate"
@@ -82,7 +82,7 @@ jobs:
           CIBW_SKIP: "pp*"
 
       - name: Build wheels (master)
-        uses: pypa/cibuildwheel@v2.12.3
+        uses: pypa/cibuildwheel@v2.22.0
         if: ${{ github.ref == 'refs/heads/master' }}
         with:
           package-dir: "./accelerate"
@@ -92,14 +92,15 @@ jobs:
           CIBW_SKIP: "pp*"
 
       - name: Save wheels
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: accel-binary
+          name: accel-binary-${{ matrix.os }}
           path: accelerate/dist/*.whl
 
   pypi-publish-accel:
     name: Upload Accelerate ${{matrix.repo}}
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
     needs:
       - wheels
       - tarballs
@@ -109,23 +110,35 @@ jobs:
       id-token: write
     steps:
       - name: Download Accelerate
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         id: download-accelerate
         with:
           name: accel
           path: dist
-      - name: Download Accelerate Binary
-        uses: actions/download-artifact@v3
-        id: download-accelerate-bin
+      - name: Download Accelerate Binary Windows
+        uses: actions/download-artifact@v4.1.7
+        id: download-accelerate-bin-windows
         with:
-          name: accel-binary
+          name: accel-binary-windows-latest
+          path: dist
+      - name: Download Accelerate Binary Ubuntu
+        uses: actions/download-artifact@v4.1.7
+        id: download-accelerate-bin-ubuntu
+        with:
+          name: accel-binary-ubuntu-latest
+          path: dist
+      - name: Download Accelerate Binary MacOS
+        uses: actions/download-artifact@v4.1.7
+        id: download-accelerate-bin-macOS
+        with:
+          name: accel-binary-macOS-latest
           path: dist
 
       # retrieve your distributions here
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          username: __token__
+          user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
           # Note: this is apparently different than the package-dir meaning in the cibuildwheel
           packages-dir: "dist"
@@ -133,6 +146,7 @@ jobs:
   pypi-publish-core:
     name: Upload Core to ${{matrix.repo}}
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
     needs:
       - wheels
       - tarballs
@@ -142,7 +156,7 @@ jobs:
       id-token: write
     steps:
       - name: Download Core
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         id: download
         with:
           name: core
@@ -150,8 +164,9 @@ jobs:
 
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
+        id: upload
         with:
-          username: __token__
+          user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
           # Note: this is apparently different than the package-dir meaning in the cibuildwheel
           packages-dir: "dist"
