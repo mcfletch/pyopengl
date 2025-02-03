@@ -191,12 +191,15 @@ jobs:
     strategy:
       matrix:
         distro: [manylinux2014, manylinux_2_28]
-        arch: [aarch64, armv7l]
+        arch: [aarch64]
+        include:
+          - distro: manylinux_2_31
+            arch: armv7l
+
 
     env:
       CIBW_MANYLINUX_AARCH64_IMAGE: ${{ matrix.distro }}
-      CIBW_MANYLINUX_S390X_IMAGE: ${{ matrix.distro }}
-      CIBW_MANYLINUX_PPC64LE_IMAGE: ${{ matrix.distro }}
+      CIBW_MANYLINUX_ARMV7L_IMAGE: ${{ matrix.distro }}
       CIBW_BUILD: cp3*-manylinux*
       CIBW_ARCHS: ${{matrix.arch}}
 
@@ -247,7 +250,6 @@ jobs:
   #       arch: [ppc64le, s390x]
 
   #   env:
-  #     CIBW_MANYLINUX_AARCH64_IMAGE: ${{ matrix.distro }}
   #     CIBW_MANYLINUX_S390X_IMAGE: ${{ matrix.distro }}
   #     CIBW_MANYLINUX_PPC64LE_IMAGE: ${{ matrix.distro }}
   #     CIBW_BUILD: cp3*-manylinux*
