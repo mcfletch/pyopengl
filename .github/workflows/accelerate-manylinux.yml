@@ -50,14 +50,21 @@ jobs:
           path: accelerate/dist/*
 
   wheels:
-    name: Build architecture-specific wheels on ${{ matrix.os }}
+    name: Build architecture-specific wheels on ${{ matrix.os }}-${{ matrix.arch }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os:
-          - ubuntu-latest
-          - windows-latest
-          - macOS-latest
+        os: [ubuntu-latest, ubuntu-24.04-arm, macos-latest, macos-13, windows-latest]  # Use specific versions for clarity
+        arch: [x86_64, arm64]
+        exclude:
+          - os: ubuntu-latest
+            arch: arm64
+          - os: ubuntu-24.04-arm  # No need to specify arch, it's already implicit
+            arch: x86_64  # Exclude x86_64 on ARM
+          - os: macos-latest   # Exclude macOS 14-15 (Sonoma)
+            arch: x86_64   # Exclude x86_64 explicitly
+          - os: macos-13  # Exclude macOS 13 (Ventura) - arm64
+            arch: arm64   # Exclude arm64 on macOS 13
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -65,11 +72,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      - name: Set up QEMU
-        if: runner.os == 'Linux'
-        uses: docker/setup-qemu-action@v2
-        with:
-          platforms: all
 
       - name: Build wheels (develop)
         uses: pypa/cibuildwheel@v2.22.0
@@ -79,7 +81,8 @@ jobs:
           output-dir: "./accelerate/dist"
         env:
           BUILD_EXTENSION: yes
-          CIBW_SKIP: "pp*"
+          CIBW_ARCHS_MACOS: ${{ matrix.os }}-${{ matrix.arch }}
+          CIBW_SKIP: "*-win32 *-manylinux_i686 *-musllinux_*"
 
       - name: Build wheels (master)
         uses: pypa/cibuildwheel@v2.22.0
@@ -89,12 +92,13 @@ jobs:
           output-dir: "./accelerate/dist"
         env:
           BUILD_EXTENSION: yes
-          CIBW_SKIP: "pp*"
+          CIBW_ARCHS_MACOS: ${{ matrix.arch }}
+          CIBW_SKIP: "*-win32 *-manylinux_i686 *-musllinux_*"
 
       - name: Save wheels
         uses: actions/upload-artifact@v4
         with:
-          name: accel-binary-${{ matrix.os }}
+          name: accel-binary-${{ matrix.os }}-${{ matrix.arch }}
           path: accelerate/dist/*.whl
 
   pypi-publish-accel:
