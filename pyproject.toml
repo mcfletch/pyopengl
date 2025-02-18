@@ -96,3 +96,19 @@ ignore = [
 
 [tool.ruff.format]
 quote-style = "single"
+
+[tool.cibuildwheel]
+archs = "native"
+# Necessary to see build output from the actual compilation
+build-verbosity = 1
+
+# linux images
+manylinux-x86_64-image = "quay.io/pypa/manylinux_2_28_x86_64"
+manylinux-aarch64-image = "quay.io/pypa/manylinux_2_28_aarch64"
+
+# Don't test Python 3.8 wheels on macOS/arm64
+test-skip="cp38-macosx_*:arm64"
+
+# Needed for full C++17 support
+[tool.cibuildwheel.macos.environment]
+MACOSX_DEPLOYMENT_TARGET = "10.15"
