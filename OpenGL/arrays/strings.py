@@ -56,8 +56,8 @@ class StringHandler(formathandler.FormatHandler):
         """Convert given value to an array value of given typeCode"""
         if isinstance(value, bytes):
             return value
-        elif hasattr(value, 'tostring'):
-            return value.tostring()
+        elif hasattr(value, 'tobytes'):
+            return value.tobytes()
         elif hasattr(value, 'raw'):
             return value.raw
         # could convert types to string here, but we're not registered for

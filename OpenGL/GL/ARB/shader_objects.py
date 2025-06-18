@@ -248,8 +248,8 @@ def glGetActiveUniformARB(baseOperation,program, index,bufSize=None):
         bufSize = int(glGetObjectParameterivARB( program, GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB))
     if index < max_index and index >= 0:
         length,name,size,type = baseOperation( program, index, bufSize )
-        if hasattr(name,'tostring'):
-            name = name.tostring().rstrip(b'\000')
+        if hasattr(name,'tobytes'):
+            name = name.tobytes().rstrip(b'\000')
         elif hasattr(name,'value'):
             name = name.value
         return name,size,type
