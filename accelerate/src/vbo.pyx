@@ -1,6 +1,7 @@
 """Cython-coded VBO implementation"""
 #cython: language_level=3
 import ctypes, weakref
+from ctypes import c_long as long
 from OpenGL_accelerate.formathandler cimport FormatHandler
 from OpenGL import error
 from OpenGL._bytes import bytes,unicode

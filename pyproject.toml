@@ -36,7 +36,7 @@ Source = "https://github.com/mcfletch/pyopengl"
 Documentation = "https://mcfletch.github.io/pyopengl/documentation/index.html"
 
 [build-system]
-requires = [ "setuptools >= 42.0" ]
+requires = [ "setuptools >= 42.0", "cython>=3.0.0" ]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.dynamic]
