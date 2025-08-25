@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 from __future__ import print_function
 import pygame, pygame.display
-import logging, time, traceback, unittest, os, pytest
+import logging, time, traceback, unittest, os, pytest, tempfile
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
@@ -171,24 +171,26 @@ class TestCore(basetestcase.BaseTest):
             If we had a reasonable lib that dumped raw image data to a shared-mem file
             we might be able to use this for movie display :)
             """
-            fh = open('mmap-test-data.dat', 'wb+')
-            fh.write(_NULL_8_BYTE * (32 * 32 * 3 + 1))
-            fh.flush()
-            fh.close()
-            # using memmap here...
-            data = memmap('mmap-test-data.dat')
-            for i in range(0, 255, 2):
-                glDrawPixels(
-                    32,
-                    32,
-                    GL_RGB,
-                    GL_UNSIGNED_BYTE,
-                    data,
-                )
-                glFlush()
-                pygame.display.flip()
-                data[::2] = i
-                time.sleep(0.001)
+            with tempfile.TemporaryDirectory() as td:
+                fn = os.path.join(td, 'mmap-test-data.dat')
+                fh = open(fn, 'wb+')
+                fh.write(_NULL_8_BYTE * (32 * 32 * 3 + 1))
+                fh.flush()
+                fh.close()
+                # using memmap here...
+                data = memmap(fn)
+                for i in range(0, 255, 2):
+                    glDrawPixels(
+                        32,
+                        32,
+                        GL_RGB,
+                        GL_UNSIGNED_BYTE,
+                        data,
+                    )
+                    glFlush()
+                    pygame.display.flip()
+                    data[::2] = i
+                    time.sleep(0.001)
 
     if array:
 
