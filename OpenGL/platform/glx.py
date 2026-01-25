@@ -12,7 +12,7 @@ class GLXPlatform(baseplatform.BasePlatform):
     # references to GL/GLU functions).
     @baseplatform.lazy_property
     def GL(self):
-        for name in ('OpenGL', 'GL'):
+        for name in ('GL', 'OpenGL'):
             try:
                 lib = ctypesloader.loadLibrary(
                     ctypes.cdll, name, mode=ctypes.RTLD_GLOBAL
@@ -42,7 +42,7 @@ class GLXPlatform(baseplatform.BasePlatform):
     @baseplatform.lazy_property
     def GLX(self):
         try:
-            for name in ('GLX', 'OpenGL', 'GL'):
+            for name in ('GLX', 'GL', 'OpenGL'):
                 lib = ctypesloader.loadLibrary(
                     ctypes.cdll, name, mode=ctypes.RTLD_GLOBAL
                 )
@@ -101,7 +101,7 @@ class GLXPlatform(baseplatform.BasePlatform):
     # really kosher...
     @baseplatform.lazy_property
     def GetCurrentContext(self):
-        glXGetCurrentContext = self.GLX.glXGetCurrentContext
+        glXGetCurrentContext = self.GL.glXGetCurrentContext
         glXGetCurrentContext.restype = ctypes.c_void_p
         return glXGetCurrentContext
 
