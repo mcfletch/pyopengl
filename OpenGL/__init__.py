@@ -216,18 +216,18 @@ from OpenGL.plugins import PlatformPlugin, FormatHandler
 
 PlatformPlugin("nt", "OpenGL.platform.win32.Win32Platform")
 PlatformPlugin("darwin", "OpenGL.platform.darwin.DarwinPlatform")
-# The Unix platform supports both GLX and EGL, selecting between them at
+# The Linux platform supports both GLX and EGL, selecting between them at
 # runtime by probing for the current context, so every X11/Wayland/GLX/EGL
 # key maps to the same implementation.
-PlatformPlugin("linux2", "OpenGL.platform.unix.UnixPlatform")
-PlatformPlugin("linux", "OpenGL.platform.unix.UnixPlatform")
-PlatformPlugin("glx", "OpenGL.platform.unix.UnixPlatform")
-PlatformPlugin("posix", "OpenGL.platform.unix.UnixPlatform")
-PlatformPlugin("x11", "OpenGL.platform.unix.UnixPlatform")  # xdg session type
+PlatformPlugin("linux2", "OpenGL.platform.linux.LinuxPlatform")
+PlatformPlugin("linux", "OpenGL.platform.linux.LinuxPlatform")
+PlatformPlugin("glx", "OpenGL.platform.linux.LinuxPlatform")
+PlatformPlugin("posix", "OpenGL.platform.linux.LinuxPlatform")
+PlatformPlugin("x11", "OpenGL.platform.linux.LinuxPlatform")  # xdg session type
 PlatformPlugin("osmesa", "OpenGL.platform.osmesa.OSMesaPlatform")
-PlatformPlugin("egl", "OpenGL.platform.unix.UnixPlatform")
-PlatformPlugin("wayland", "OpenGL.platform.unix.UnixPlatform")  # xdg session type
-PlatformPlugin("xwayland", "OpenGL.platform.unix.UnixPlatform")  # xdg session type
+PlatformPlugin("egl", "OpenGL.platform.linux.LinuxPlatform")
+PlatformPlugin("wayland", "OpenGL.platform.linux.LinuxPlatform")  # xdg session type
+PlatformPlugin("xwayland", "OpenGL.platform.linux.LinuxPlatform")  # xdg session type
 
 
 def setPlatform(key):

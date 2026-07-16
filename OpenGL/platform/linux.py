@@ -1,6 +1,6 @@
-"""Unix (Linux/BSD) platform supporting either GLX or EGL at runtime
+"""Linux (and BSD) platform supporting either GLX or EGL at runtime
 
-Historically PyOpenGL shipped two separate Unix platforms: ``glx`` (desktop
+Historically PyOpenGL shipped two separate platforms here: ``glx`` (desktop
 X11/GLX) and ``egl`` (embedded / Wayland / headless).  The choice was made
 *once*, at import time, from environment guesses (e.g. the presence of
 ``WAYLAND_DISPLAY``).  That guess is frequently wrong: a GLX toolkit such as
@@ -22,7 +22,7 @@ import ctypes, ctypes.util
 from OpenGL.platform import baseplatform, ctypesloader
 
 
-class UnixPlatform(baseplatform.BasePlatform):
+class LinuxPlatform(baseplatform.BasePlatform):
     """Linux/BSD implementation supporting GLX and/or EGL, chosen at runtime
 
     The library loaders below are the union of the old GLXPlatform and
@@ -262,7 +262,7 @@ class UnixPlatform(baseplatform.BasePlatform):
 
     def install(self, namespace):
         """Install, working around SDL not recognising wayland by default"""
-        result = super(UnixPlatform, self).install(namespace)
+        result = super(LinuxPlatform, self).install(namespace)
         import os
         if os.environ.get('XDG_SESSION_TYPE') == 'wayland':
             if not os.environ.get('SDL_VIDEODRIVER'):
