@@ -34,7 +34,7 @@ implementation of the VBO functions.
 from OpenGL.arrays.arraydatatype import ArrayDatatype
 from OpenGL.arrays.formathandler import FormatHandler
 from OpenGL.raw.GL import _types
-from OpenGL import error
+from OpenGL import error, platform
 from OpenGL._bytes import bytes, unicode, as_8_bit
 import ctypes, logging
 
@@ -114,14 +114,31 @@ class Implementation(object):
         # to non during module deletion and causing errors to be raised
         nfe = error.NullFunctionError
         gluint = _types.GLuint
+        get_current = platform.GetCurrentContext
 
         def doBufferDeletion(*args, **named):
+            # A deleter runs from a weakref callback, so it runs wherever the
+            # collector happened to be -- which for a program that loads in the
+            # background is as likely as not a worker thread, with no GL context
+            # current on it at all. Deleting a buffer there cannot work: buffer
+            # names belong to the context that made them, so the call either
+            # does nothing or, on some drivers, takes the process down. The
+            # names are dropped instead; the driver frees them with the context
+            # they belong to.
+            try:
+                deletable = bool(get_current())
+            except Exception:
+                # Asked during interpreter shutdown, where what it needs may
+                # already be gone. Nothing can be freed then either.
+                deletable = False
             while buffers:
                 try:
                     buffer = buffers.pop()
                 except IndexError as err:
                     break
                 else:
+                    if not deletable:
+                        continue
                     try:
                         # Note that to avoid ERROR_ON_COPY issues
                         # we have to pass an array-compatible type here...
