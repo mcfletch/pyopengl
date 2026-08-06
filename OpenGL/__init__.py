@@ -223,6 +223,7 @@ PlatformPlugin("posix", "OpenGL.platform.glx.GLXPlatform")
 PlatformPlugin("x11", "OpenGL.platform.glx.GLXPlatform")  # xdg session type
 PlatformPlugin("osmesa", "OpenGL.platform.osmesa.OSMesaPlatform")
 PlatformPlugin("egl", "OpenGL.platform.egl.EGLPlatform")
+PlatformPlugin("android", "OpenGL.platform.egl.EGLPlatform")
 PlatformPlugin("wayland", "OpenGL.platform.egl.EGLPlatform")  # xdg session type
 PlatformPlugin(
     "xwayland", "OpenGL.platform.egl.EGLPlatform"
