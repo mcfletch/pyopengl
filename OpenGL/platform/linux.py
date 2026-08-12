@@ -169,21 +169,34 @@ class LinuxPlatform(baseplatform.BasePlatform):
         return base
 
     def getExtensionProcedure(self, name):
-        """Resolve an extension procedure via the interface owning the context
+        """Resolve an extension procedure via the interface that owns it
 
-        Prefer the get-proc-address function for whichever API currently owns a
-        context; if nothing is current, fall back to whatever is available,
-        preferring GLX (the historical desktop default).
+        An ``egl*`` or ``glX*`` name names its own interface, so it is resolved
+        by that interface's get-proc-address and never the other's: GLVND's
+        glXGetProcAddressARB manufactures a non-null dispatch stub for *any*
+        name, so asking it for an ``egl*`` function (as happened when no context
+        was current) returns a pointer that is not the real entry point and
+        whose call silently fails.  A core ``gl*`` name is served by both, so it
+        follows whichever API currently owns a context, falling back -- when
+        nothing is current -- to GLX (the historical desktop default).
         """
-        api = self._active_api
-        if api is None:
-            # Probe so a live context selects the matching interface.
-            self.GetCurrentContext()
-            api = self._active_api
-        if api == 'egl':
+        prefix = name[:3]
+        if isinstance(prefix, bytes):
+            prefix = prefix.decode('ascii', 'replace')
+        if prefix == 'egl':
             order = (self.eglGetProcAddress, self.glXGetProcAddressARB)
-        else:
+        elif prefix == 'glX':
             order = (self.glXGetProcAddressARB, self.eglGetProcAddress)
+        else:
+            api = self._active_api
+            if api is None:
+                # Probe so a live context selects the matching interface.
+                self.GetCurrentContext()
+                api = self._active_api
+            if api == 'egl':
+                order = (self.eglGetProcAddress, self.glXGetProcAddressARB)
+            else:
+                order = (self.glXGetProcAddressARB, self.eglGetProcAddress)
         for getProcAddress in order:
             if getProcAddress is not None:
                 return getProcAddress(name)
