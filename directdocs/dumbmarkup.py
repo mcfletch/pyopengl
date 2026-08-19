@@ -11,8 +11,12 @@ text_re = re.compile(
 )
 block_splitter = re.compile(r"""\n[ \t]*\n""",re.MULTILINE|re.I|re.DOTALL)
 empty_line_matcher = re.compile(r"""[ \t]*\n""",re.MULTILINE|re.I|re.DOTALL)
+#: ``[target link text]``, where the target has to look like a location -- a
+#: scheme, a path, an anchor or a filename. Ordinary bracketed prose ("[--help
+#: for the tunable knobs]") is left alone rather than becoming an invented link.
 markup_re = re.compile(
-    r"""\[(?P<url>[^ ]+)[ ]+(?P<link_text>[^]]+)\]|(?P<bald_url>http\:\/\/[^ \t\n]+)"""
+    r"""\[(?P<url>(?:\w+://|[./#])[^ ]*|[^ ]+\.\w{2,4})[ ]+(?P<link_text>[^]]+)\]"""
+    r"""|(?P<bald_url>https?\:\/\/[^ \t\n]+)"""
 )
 image_extensions = [ '.png','.jpg','.bmp','.tif' ]
 dl = re.compile( r"""[ \t]*(?P<term>\w+)\W*[-][-]\W*(?P<def>.*)""" )
@@ -112,6 +116,24 @@ class Title( Block ):
     html_tag = 'h1'
     html_class = 'title'
 
+def single_line( block ):
+    """Whether a block is one line, ignoring trailing whitespace."""
+    return len( block.strip().splitlines() ) == 1
+
+
+def is_aligned( block ):
+    """Whether a block's own spacing carries meaning.
+
+    A table, a column of names against descriptions, a fragment of a shell
+    session: all of them line up their continuation lines under something, and
+    all of them read as nonsense once HTML has collapsed the runs of spaces that
+    did the lining up. Detected by a line, other than the first, that is indented
+    relative to the block after the block's common indent is removed.
+    """
+    lines = textwrap.dedent( block ).splitlines()
+    return any( line[:1].isspace() for line in lines[1:] if line.strip() )
+
+
 def indent_level( block ):
     """Number of characters of indent"""
     block = block.replace( '\t',' '*8)
@@ -155,12 +177,14 @@ class Commentary( Grouping ):
                     else:
                         if dd:
                             dd.append( line )
-            elif block.startswith( '=' ) and block.endswith( '=' ):
+            elif single_line( block ) and block.startswith( '=' ) and block.endswith( '=' ):
                 self.append( Title( block.strip( '=' ).strip(), cls=cls ))
-            elif block.startswith( '_' ) and block.endswith( '_' ):
+            elif single_line( block ) and block.startswith( '_' ) and block.endswith( '_' ):
                 title = Title( block.strip( '_' ).strip(), cls=cls )
                 title.html_tag= 'h2'
                 self.append( title )
+            elif is_aligned( block ):
+                self.append( Preformatted( block, cls=cls ))
             else:
                 self.append( Paragraph( block,cls=cls ))
 
@@ -176,6 +200,18 @@ class Paragraph( Block ):
     """Generic paragraph in commentary"""
     html_tag = 'div'
     html_class = 'paragraph'
+
+class Preformatted( Block ):
+    """A block whose own spacing is part of what it says.
+
+    Rendered into a ``pre``, so the columns of a table and the indents of a
+    sample survive; its text is not marked up, because a bracket or a bare URL
+    inside aligned text is content rather than a link.
+    """
+    html_tag = 'pre'
+    html_class = 'preformatted'
+    def markup( self, text ):
+        return text, None
 class UL( Grouping ):
     """Unordered list in commentary"""
     html_tag = 'ul'

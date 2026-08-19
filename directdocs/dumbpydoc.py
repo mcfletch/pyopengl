@@ -28,7 +28,7 @@ HERE = os.path.dirname( __file__ )
 loader = TemplateLoader([os.path.join(HERE,'templates')])
 log = logging.getLogger( 'dumbpydoc' )
 
-FUNCTION_MAPPING = pickle.load( open( '.pyfunc-urls.pkl' ))
+FUNCTION_MAPPING = pickle.load( open( os.path.join(HERE,'.pyfunc-urls.pkl'), 'rb' ))
 
 platform.PLATFORM.EGL = None 
 platform.PLATFORM.WGL = None
@@ -234,7 +234,6 @@ class Class( object ):
             if isinstance( value, (
                 types.FunctionType,
                 types.MethodType,
-                types.UnboundMethodType,
                 types.BuiltinFunctionType,
                 types.BuiltinMethodType,
                 classmethod,
@@ -261,7 +260,7 @@ class Property( object ):
 
 
 
-def render( mod ):
+def render( mod, recurse=True ):
     if not isinstance( mod, PyModule ):
         mod = PyModule( mod )
     mod.inspect()
@@ -281,25 +280,80 @@ def render( mod ):
     output = stream.render()
     if output:
         open( os.path.join(HERE, 'pydoc',mod.outfile), 'w').write( output )
-    for child in mod.modules:
-        render( child )
+    if recurse:
+        for child in mod.modules:
+            render( child )
 
-if __name__ == '__main__':
-    logging.basicConfig( level=logging.DEBUG )
-    for mod in [
-        'OpenGL',
-#        'OpenGL.GL.ARB.sync',
-#        'OpenGL.GL.selection',
-#        'OpenGL.arrays.vbo',
-        'OpenGL_accelerate',
-        'OpenGLContext',
-        'OpenGLContext_qt',
-        'vrml',
-        'vrml_accelerate',
-        'pydispatch',
-        'ttfquery',
-    ]:
-        render( mod )
+#: The projects documented by a plain ``python -m directdocs.dumbpydoc`` run.
+PROJECTS = [
+    'OpenGL',
+    'OpenGL_accelerate',
+    'OpenGLContext',
+    'OpenGLContext_qt',
+    'vrml',
+    'vrml_accelerate',
+    'pydispatch',
+    'ttfquery',
+    'omi_audio',
+    'omi_physics',
+    'openglcontext_forest_demo',
+    'twig_bb',
+]
+
+#: Module-name fragments that are not part of a project's public surface.
+SKIP_FRAGMENTS = ('.tests.', '.tests', '.test_', '.__main__')
+
+
+def package_modules( root ):
+    """Every importable module under ``root``, the root itself included.
+
+    :func:`render` finds child modules by looking at what is already an
+    attribute of a package, which only reaches a module some ``__init__`` has
+    imported. A project that finds its parts through plugin registries or
+    deferred imports -- backends, node types, loaders -- keeps most of itself
+    out of that graph, so the names are taken from the filesystem instead and
+    handed to :func:`render` directly.
+
+    A subpackage that cannot be imported is skipped rather than fatal: a
+    Windows-only or toolkit-specific module is absent by circumstance, not by
+    error, and the rest of the project still documents.
+    """
+    import pkgutil
+    names = [root]
+    try:
+        package = __import__( root, {}, {}, [root] )
+    except ImportError as err:
+        log.warning( 'cannot import %s: %s', root, err )
+        return []
+    path = getattr( package, '__path__', None )
+    if not path:
+        return names
+    for _, name, _ in pkgutil.walk_packages(
+        path, prefix=root + '.', onerror=lambda name: None,
+    ):
+        if not any( fragment in name for fragment in SKIP_FRAGMENTS ):
+            names.append( name )
+    return names
+
+
+def render_projects( projects=None ):
+    """Document whole projects, returning (rendered, failed) name lists."""
+    rendered, failed = [], []
+    for root in (projects or PROJECTS):
+        for name in package_modules( root ):
+            try:
+                render( name, recurse=False )
+            except Exception as err:
+                log.warning( 'could not document %s: %s', name, err )
+                failed.append( name )
+            else:
+                rendered.append( name )
     for support in glob.glob( os.path.join( HERE, 'output', '*.css' )):
         shutil.copy( support, os.path.join( HERE, 'pydoc' ))
-    
+    return rendered, failed
+
+
+if __name__ == '__main__':
+    logging.basicConfig( level=logging.WARNING )
+    rendered, failed = render_projects()
+    print( '%d modules documented, %d skipped' % (len(rendered), len(failed)) )

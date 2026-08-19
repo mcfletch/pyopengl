@@ -287,14 +287,20 @@ class PyFunction(Function):
         elif hasattr(target, 'wrappedOperation'):
             return self.get_parameters(target.wrappedOperation)
         elif isinstance(target, (types.FunctionType, types.MethodType)):
-            args, varargs, varkw, defaults = inspect.getargspec(target)
-            defaults = defaults or ()
+            spec = inspect.getfullargspec(target)
+            args, varargs, varkw = spec.args, spec.varargs, spec.varkw
+            defaults = spec.defaults or ()
             default_dict = dict(
                 [
                     (arg, default)
                     for (arg, default) in zip(args[-len(defaults) :], defaults)
                 ]
             )
+            # Keyword-only arguments carry their own defaults, and are appended
+            # after the positional ones, whose pairing with `defaults` above
+            # depends on them not being in that list.
+            args = args + list(spec.kwonlyargs)
+            default_dict.update(spec.kwonlydefaults or {})
             try:
                 parameters = []
                 for name in args:
@@ -308,9 +314,8 @@ class PyFunction(Function):
                         )
                     )
             except Exception as err:
-                import pdb
-
-                pdb.set_trace()
+                log.warning('could not describe parameters of %s: %s', target, err)
+                parameters = []
             if varargs:
                 parameters.append(
                     Parameter(

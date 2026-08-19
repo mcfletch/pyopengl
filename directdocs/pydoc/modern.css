@@ -112,3 +112,16 @@ ul.menu li {
 .menu a[href] {
     color: #c0c0ff;
 }
+
+/* A docstring block whose own spacing carries meaning: a table, a column of
+   names against descriptions, a fragment of a shell session. Kept in a pre so
+   the alignment survives, but wrapped in the body text's own colours rather
+   than looking like a code sample. */
+pre.preformatted {
+    white-space: pre-wrap;
+    margin: 0.5em 0;
+    padding: 0.4em 0.8em;
+    overflow-x: auto;
+    font-size: 0.95em;
+    border-left: 3px solid rgba(128, 128, 128, 0.35);
+}

@@ -3,8 +3,8 @@
       xmlns:xi="http://www.w3.org/2001/XInclude"
       py:strip="">
 <?python
-from dumbpydoc import Alternate
-from dumbmarkup import format_docstring
+from directdocs.dumbpydoc import Alternate
+from directdocs.dumbmarkup import format_docstring
 ?>
 <ul class="menu" py:def="nav_table(context)">
     <?python
@@ -60,6 +60,7 @@ from dumbmarkup import format_docstring
 	<h1 py:if="node.html_tag == 'h1'" class="${node.html_class}">${node_content(node)}</h1>
 	<h2 py:if="node.html_tag == 'h2'" class="${node.html_class}">${node_content(node)}</h2>
 	<div py:if="node.html_tag == 'div'" class="${node.html_class}">${node_content(node)}</div>
+	<pre py:if="node.html_tag == 'pre'" class="${node.html_class}">${node_content(node)}</pre>
 	<ul py:if="node.html_tag == 'ul'" class="${node.html_class}">${node_content(node)}</ul>
 	<li py:if="node.html_tag == 'li'" class="${node.html_class}">${node_content(node)}</li>
 	<dl py:if="node.html_tag == 'dl'" class="${node.html_class}">${node_content(node)}</dl>
