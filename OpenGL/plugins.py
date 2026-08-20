@@ -45,7 +45,49 @@ def importByName( fullName ):
     module = __import__( ".".join(moduleName), {}, {}, moduleName)
     return getattr( module, className )
 
-        
+
+def _registries( ):
+    """Iterate over every distinct registry any Plugin subclass declares"""
+    seen = []
+    pending = [Plugin]
+    while pending:
+        cls = pending.pop()
+        pending.extend( cls.__subclasses__() )
+        registry = getattr( cls, 'registry', None )
+        if registry is not None and not any( registry is known for known in seen ):
+            seen.append( registry )
+    return seen
+
+def registered_modules( prefix=None ):
+    """Report the modules the registered plug-ins import, as a sorted list
+
+    A plug-in declares its entry point as a dotted ``import_path`` and imports
+    it only once something matches, so a tool that follows import statements --
+    a freezer such as PyInstaller, cx_Freeze or Nuitka -- sees none of them and
+    freezes an application that cannot load a platform, a format handler or,
+    with OpenGLContext on top, a scenegraph node. This reports the modules
+    those paths name so that such a tool can be told about them.
+
+    Every registry is read, including those declared by packages layered on
+    PyOpenGL, so the answer covers whatever is imported at the time of the call.
+
+    prefix -- when given, report only the modules within this package. Matching
+        is on whole dotted components, so ``OpenGL`` selects ``OpenGL.arrays``
+        and not ``OpenGLContext``.
+    """
+    modules = set()
+    for registry in _registries():
+        for plugin in registry:
+            module = plugin.import_path.rpartition( '.' )[0]
+            if module:
+                modules.add( module )
+    if prefix is not None:
+        modules = set([
+            module for module in modules
+            if module == prefix or module.startswith( prefix + '.' )
+        ])
+    return sorted( modules )
+
 class PlatformPlugin( Plugin ):
     """Platform-level plugin registration"""
     registry = []

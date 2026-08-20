@@ -16,6 +16,28 @@ You can install this repository by branching/cloning and running
 Note that to compile PyOpenGL_accelerate you will need to have 
 a functioning Python extension-compiling environment.
 
+Freezing an application
+------------------------
+
+PyOpenGL chooses its platform module and its array format handlers through a
+plug-in registry (``OpenGL.plugins``), which names each one as a string and
+imports it when something matches. A tool that follows import statements sees
+none of them, and freezes an application that cannot load a platform at all.
+
+PyOpenGL therefore ships its own PyInstaller hook, which PyInstaller finds by
+itself through the ``pyinstaller40`` entry point: there is nothing to configure
+and nothing to list. It reports the modules the registries would import --
+read from the registries themselves, so a plug-in added by another package is
+carried too -- and on Windows the GLUT and GLE DLLs, which
+``OpenGL.platform.ctypesloader`` opens by path.
+
+For another freezer, ``OpenGL.plugins.registered_modules()`` is the same answer
+without PyInstaller in the way::
+
+    >>> from OpenGL import plugins
+    >>> plugins.registered_modules('OpenGL')
+    ['OpenGL.arrays.buffers', 'OpenGL.arrays.ctypesarrays', ...]
+
 Learning PyOpenGL
 -----------------
 

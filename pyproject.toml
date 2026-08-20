@@ -48,6 +48,12 @@ dev = [
     "PyOpenGL[test]",
 ]
 
+# PyInstaller reads this to find the hooks in OpenGL/__pyinstaller, which tell it
+# about the plug-in registries and the Windows DLLs it cannot see by following
+# import statements. Nothing is imported from that package at run time.
+[project.entry-points.pyinstaller40]
+hook-dirs = "OpenGL.__pyinstaller:get_hook_dirs"
+
 [project.urls]
 Homepage = "https://mcfletch.github.io/pyopengl/"
 Download = "https://pypi.org/project/PyOpenGL/"
