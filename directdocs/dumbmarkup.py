@@ -127,11 +127,19 @@ def is_aligned( block ):
     A table, a column of names against descriptions, a fragment of a shell
     session: all of them line up their continuation lines under something, and
     all of them read as nonsense once HTML has collapsed the runs of spaces that
-    did the lining up. Detected by a line, other than the first, that is indented
-    relative to the block after the block's common indent is removed.
+    did the lining up. Detected by a line that is indented relative to the block
+    once the block's common indent is removed.
+
+    The first line of a block cut from a docstring begins right after the
+    quotes, so it carries none of the indent its continuation lines do and
+    cannot be part of the common prefix; the prefix is taken from the rest and
+    applied to all of them.
     """
-    lines = textwrap.dedent( block ).splitlines()
-    return any( line[:1].isspace() for line in lines[1:] if line.strip() )
+    lines = [line for line in block.splitlines() if line.strip()]
+    if len( lines ) < 2:
+        return False
+    indent = min( indent_level( line ) for line in lines[1:] )
+    return any( line[indent:][:1].isspace() for line in lines[1:] )
 
 
 def indent_level( block ):
