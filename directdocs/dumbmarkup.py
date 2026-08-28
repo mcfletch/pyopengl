@@ -14,8 +14,11 @@ empty_line_matcher = re.compile(r"""[ \t]*\n""",re.MULTILINE|re.I|re.DOTALL)
 #: ``[target link text]``, where the target has to look like a location -- a
 #: scheme, a path, an anchor or a filename. Ordinary bracketed prose ("[--help
 #: for the tunable knobs]") is left alone rather than becoming an invented link.
+#: An optional ``class=name`` in front of the target puts that class on the
+#: element, which is how a page floats one image against another.
 markup_re = re.compile(
-    r"""\[(?P<url>(?:\w+://|[./#])[^ ]*|[^ ]+\.\w{2,4})[ ]+(?P<link_text>[^]]+)\]"""
+    r"""\[(?:class=(?P<cls>[\w-]+)[ ]+)?"""
+    r"""(?P<url>(?:\w+://|[./#])[^ ]*|[^ ]+\.\w{2,4})[ ]+(?P<link_text>[^]]+)\]"""
     r"""|(?P<bald_url>https?\:\/\/[^ \t\n]+)"""
 )
 image_extensions = [ '.png','.jpg','.bmp','.tif' ]
@@ -71,13 +74,14 @@ class Block( object ):
         def child_function( match ):
             if match.group( 'url' ):
                 url = match.group( 'url' )
-                cls = Anchor
+                node_class = Anchor
                 for suffix in image_extensions:
                     if url.endswith( suffix ):
-                        cls = Image
-                return cls(
+                        node_class = Image
+                return node_class(
                     match.group( 'link_text' ),
                     url,
+                    cls=match.group( 'cls' ),
                 )
             elif match.group( 'bald_url' ):
                 url = match.group( 'bald_url' )
@@ -237,8 +241,8 @@ class DD( Block ):
 class Anchor( Block ):
     """Simple url link/anchor value"""
     html_tag = 'a'
-    def __init__( self, text, url ):
-        super( Anchor, self ).__init__( text )
+    def __init__( self, text, url, cls=None ):
+        super( Anchor, self ).__init__( text, cls=cls )
         self.url = url
     def markup( self, text ):
         return self.text, []
