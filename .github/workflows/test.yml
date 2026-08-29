@@ -1,0 +1,83 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: test
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  test_opengl:
+    strategy:
+      fail-fast: false
+      matrix:
+# tox could handle the python matrix -- but this way we get better
+#   separation and reporting from gitHub actions
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        os:
+# Ubuntu test runners don't have OpenGL
+#   I *think* Mesa could be installed, but haven't figured that out yet.
+# maybe as simple as: https://github.com/marketplace/actions/setup-opengl
+#           - ubuntu-latest
+          - windows-latest
+          - macos-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install pyopengl
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install .
+
+    - name: Install test dependencies
+      run: |
+        python -m pip install numpy psutil pygame pytest
+
+    - name: Test pyopengl
+      run: |
+        pytest tests
+
+  test_opengl-accelerate:
+    strategy:
+      fail-fast: false
+      matrix:
+# tox could handle the python matrix -- but this way we get better
+#   separation and reporting from gitHub actions
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        os:
+# Ubuntu test runners don't have OpenGL
+#   I *think* Mesa could be installed, but haven't figured that out yet.
+#           - ubuntu-latest
+          - windows-latest
+          - macos-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install Accelerate
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install accelerate/
+
+    - name: Install test dependencies
+      run: |
+        cd accelerate
+        python -m pip install -r test-requirements.txt
+
+    - name: Test Accelerate
+      run: |
+        cd accelerate
+        pytest tests
+
