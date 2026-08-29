@@ -16,7 +16,7 @@ class TestEvaluators(basetestcase.BaseTest):
         0.0], [1.5, -0.5, -1.0]], [[-1.5, 0.5, 4.0], [-0.5, 0.5, 0.0], [0.5, 0.5,
         3.0], [1.5, 0.5, 4.0]], [[-1.5, 1.5, -2.0], [-0.5, 1.5, -2.0], [0.5, 1.5,
         0.0], [1.5, 1.5, -1.0]]]
-    if (not OpenGL.ERROR_ON_COPY) or array:	
+    if (not OpenGL.ERROR_ON_COPY) or np:
         def test_evaluator( self ):
             """Test whether the evaluator functions work"""
             glDisable(GL_CULL_FACE)
