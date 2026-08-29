@@ -121,3 +121,11 @@ ignore = [
 
 [tool.ruff.format]
 quote-style = "preserve"
+
+# uv decides whether its cached metadata for a source tree is still current
+# from pyproject.toml, setup.py and setup.cfg alone. This project's version
+# lives in OpenGL/version.py, so name that file too: without it a version bump
+# leaves uv answering with the previous number, and a dependent requiring the
+# new one resolves against PyPI rather than this checkout.
+[tool.uv]
+cache-keys = [{ file = "pyproject.toml" }, { file = "OpenGL/version.py" }]
