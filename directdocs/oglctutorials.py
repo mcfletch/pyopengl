@@ -229,6 +229,7 @@ if __name__ == "__main__":
             for name in [
                 'lightobject.py',
                 'molehill.py',
+                'molehill_edit.py',
                 'nurbsobject.py',
                 'particles_simple.py',
             ]
