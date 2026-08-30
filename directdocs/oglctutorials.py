@@ -3,6 +3,7 @@
 from __future__ import absolute_import
 from __future__ import print_function
 import re,os,sys,textwrap, datetime
+from genshi.core import Markup
 from genshi.template import TemplateLoader
 import logging
 from six.moves import range
@@ -39,7 +40,18 @@ if not os.path.isdir( OUTPUT_DIRECTORY ):
     os.makedirs( OUTPUT_DIRECTORY )
 
 class TutorialPath( Grouping ):
-    """Path through a series of tutorials"""
+    """Path through a series of tutorials
+
+    description, if given, is a block of HTML introducing the path.  The index
+    page renders it above the path's list of tutorials; a path without one is
+    listed with its title alone.
+    """
+    description = None
+    def __init__( self, *args, **named ):
+        description = named.pop( 'description', None )
+        if description:
+            self.description = Markup( description )
+        super( TutorialPath, self ).__init__( *args, **named )
     def generate_children( self ):
         first = self.children
         for i in range( len(first)):
@@ -150,7 +162,13 @@ def parse_file( filename ):
 
 if __name__ == "__main__":
     shaders = TutorialPath(
-        "Introduction to Shaders",
+        "Introduction to Shaders (Lighting)",
+        description = """<p>This is a low-level introductory tutorial path.  It is
+        intended for those who have either never done 3D graphics with OpenGL, or who
+        have only done "legacy" OpenGL rendering (i.e. you learned OpenGL before about
+        2007).  It walks through the development of low-level code to perform
+        Blinn-Phong rendering of DirectionalLights, PointLights and SpotLights as well
+        as the basics of geometric rendering (with Vertex Buffer Objects).</p>""",
         children =[
             parse_file( os.path.join( test_dir,name ))
             for name in [
@@ -173,6 +191,9 @@ if __name__ == "__main__":
     )
     matrices = TutorialPath(
         "Transformations and Matrices",
+        description = """<p>These tutorials cover the matrices which map your geometry
+        into the cube the OpenGL hardware draws, how to calculate them on the CPU, and
+        how to feed them to a shader.</p>""",
         children =[
             parse_file( os.path.join( test_dir,name ))
             for name in [
@@ -182,16 +203,27 @@ if __name__ == "__main__":
     )
     effects = TutorialPath(
         "Depth-map Shadows",
+        description = """<p>These tutorials describe how to setup modern
+        shadow-map-based shadow-casting.  These are fairly advanced tutorials which
+        assume you are comfortable with OpenGL.  The last of them builds the same
+        scene out of scenegraph nodes and lets OpenGLContext's own shadow pass
+        light it.</p>""",
         children =[
             parse_file( os.path.join( test_dir,name ))
             for name in [
                 'shadow_1.py',
                 'shadow_2.py',
+                'shadow_3.py',
             ]
         ],
     )
     nodes = TutorialPath(
         "Scenegraph Nodes",
+        description = """<p>This is a high-level introductory tutorial path.  It is
+        intended to introduce the OpenGLContext/VRML97 scenegraph engine.  It
+        demonstrates more involved rendering tasks, but with far less detail than the
+        Introduction to Shaders tutorial.  It does not attempt to describe how the
+        effects are achieved, just how to achieve them.</p>""",
         children =[
             parse_file( os.path.join( test_dir,name ))
             for name in [
@@ -204,6 +236,10 @@ if __name__ == "__main__":
     )
     nehe = TutorialPath(
         "NeHe Translations",
+        description = """<p>These tutorials are translations of the famous "NeHe"
+        series of tutorials.  These are low-level introductory tutorials which
+        generally use the legacy OpenGL API.  The linked original tutorials are very
+        gentle and thorough.</p>""",
         children =[
             parse_file( os.path.join( test_dir,name ))
             for name in [
