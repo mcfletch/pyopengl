@@ -405,6 +405,10 @@ your top-level script does):</p>
 <p>This should <strong>only</strong> be done by applications, never by
 libraries, as disabling error checking entirely makes it much harder to
 debug a PyOpenGL application.</p>
+<p>Under <a href="c-dispatch.html">the C dispatch layer</a> the same flag
+applies per entry point per context, and the check is made from C rather than
+through a Python callback, so it costs the driver round trip and nothing
+else.</p>
 <p>You can also customise the error-checking functionality rather than disabling it, for
 instance, if you will always have a valid context, you could register
 the raw glGetError function as the error checker to avoid the overhead
