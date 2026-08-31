@@ -215,8 +215,13 @@ class TestSelection:
             command(parameters=[('target', 'GLenum', {}), ('texture', 'GLuint', {})])
         )
 
-    def test_hand_written_families_are_not_emitted_yet(self):
-        assert not emit_c.is_emittable(command(name='glShaderSource', helper='string_array'))
+    def test_a_hand_written_entry_point_is_emitted(self):
+        """glShaderSource has a C function of its own, so it is claimed."""
+        assert emit_c.is_emittable(command(name='glShaderSource', api='GL'))
+        assert emit_c.hand_written(command(name='glShaderSource', api='GL'))
+
+    def test_a_family_with_no_hand_written_body_is_not_emitted(self):
+        assert not emit_c.is_emittable(command(name='glTexImage2D', helper='image'))
 
     def test_image_sized_outputs_are_not_emitted_yet(self):
         """An image's size depends on the current pixel-store state."""
@@ -240,9 +245,10 @@ class TestSelection:
             )
         )
 
-    def test_pointer_returns_are_not_emitted_yet(self):
+    def test_struct_pointer_returns_are_not_emitted_yet(self):
+        """The GLX queries hand back ctypes pointers to X structures."""
         assert not emit_c.is_emittable(
-            command(name='glMapBuffer', return_type='void *')
+            command(name='glXGetVisualFromFBConfig', return_type='XVisualInfo *')
         )
 
     def test_string_returns_are_emitted(self):
@@ -392,3 +398,19 @@ class TestMultipleOutputs:
         text = body(self.two_outputs())
         assert 'pygl_output_tuple' in text
         assert '_outputs[] = {' in text
+
+
+class TestPointerReturns:
+    def test_a_void_pointer_return_is_an_address(self):
+        """``glMapBuffer`` hands back an int today, and None for a null."""
+        text = body(command(name='glMapBuffer', return_type='void *'))
+        assert 'pygl_address_or_none' in text
+
+    def test_a_void_pointer_return_is_emitted(self):
+        assert emit_c.is_emittable(command(name='glMapBuffer', return_type='void *'))
+
+    def test_a_struct_pointer_return_is_not(self):
+        """``glXChooseVisual`` hands back a ctypes pointer to a struct."""
+        assert not emit_c.is_emittable(
+            command(name='glXChooseVisual', return_type='XVisualInfo *')
+        )

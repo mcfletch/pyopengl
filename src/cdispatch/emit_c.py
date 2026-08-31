@@ -7,7 +7,7 @@ beside the generated ones.
 """
 
 from . import ctypes_model as cm
-from . import model
+from . import handwritten, model
 
 __all__ = [
     'emit_stub',
@@ -95,7 +95,14 @@ def _size_expression(command, parameter):
     raise ValueError('no C expression for %r' % (size,))
 
 
+def hand_written(command):
+    """The hand-written implementation for this command, or None."""
+    return handwritten.lookup(command.api, command.name)
+
+
 def exclusion_reason(command):
+    if hand_written(command) is not None:
+        return ''
     """Why the C does not implement this command, or '' when it does.
 
     Every command left on the ctypes path has a reason here, so that
@@ -106,7 +113,7 @@ def exclusion_reason(command):
         return 'hand-written family: %s' % (command.helper,)
     if command.return_type.pointers and not (
         command.return_type.pointers == 1
-        and command.return_type.base in ('GLubyte', 'GLchar', 'char')
+        and command.return_type.base in ('GLubyte', 'GLchar', 'char', 'void')
     ):
         return 'pointer return: %s' % (command.return_type.declaration(),)
     if (
@@ -138,6 +145,8 @@ def is_emittable(command):
     friendly behaviour its Python wrapper provides.  The generator therefore
     refuses a command rather than emitting a stub that is nearly right.
     """
+    if hand_written(command) is not None:
+        return True
     if command.helper:
         return False
     if command.return_type.pointers:
@@ -146,7 +155,7 @@ def is_emittable(command):
         # hand-written bodies with the Tier 3 families.
         if not (
             command.return_type.pointers == 1
-            and command.return_type.base in ('GLubyte', 'GLchar', 'char')
+            and command.return_type.base in ('GLubyte', 'GLchar', 'char', 'void')
         ):
             return False
     if not command.returns_void and not command.return_type.pointers:
@@ -174,6 +183,11 @@ def _return_statement(command, result='_result'):
     if command.returns_void:
         return None
     if return_type.pointers:
+        if return_type.base == 'void':
+            # glMapBuffer and its relatives hand back the address itself, as
+            # an int, or None for a null pointer.  It is a mapped region, not
+            # a string, so there is nothing to copy out of it.
+            return 'pygl_address_or_none(%s)' % (result,)
         return 'pygl_bytes_or_none((const char *)%s)' % (result,)
     macro = cm.scalar_macro(return_type)
     if macro in ('GL_U64',):
@@ -202,6 +216,7 @@ RETURN_KINDS = {
     'bytes': 2,
     'float': 3,
     'opaque': 4,
+    'address': 5,
 }
 
 
@@ -209,6 +224,8 @@ def return_kind(command):
     if command.returns_void:
         return RETURN_KINDS['void']
     if command.return_type.pointers:
+        if command.return_type.base == 'void':
+            return RETURN_KINDS['address']
         return RETURN_KINDS['bytes']
     macro = cm.scalar_macro(command.return_type)
     if macro in ('GL_F', 'GL_D'):
@@ -374,34 +391,45 @@ _API_ENUM = {
 def emit_command_record(command, slot):
     """The static metadata a GLProc exposes to Python."""
     symbol = stub_symbol(command)
+    hand = hand_written(command)
+    # argNames reports the C entry point's argument names even where the
+    # friendly form takes fewer, because that is what it reports today.
+    arg_names = [p.name for p in command.parameters]
+    #: What the docstring and the text signature describe.
+    call_names = list(hand.arg_names) if hand else arg_names
     lines = []
-    if command.parameters:
+    if arg_names:
         lines.append(
             'static const char *const %s_args[] = {%s};'
-            % (symbol, ', '.join(_c_string(p.name) for p in command.parameters))
+            % (symbol, ', '.join(_c_string(name) for name in arg_names))
         )
         args = '%s_args' % (symbol,)
     else:
         args = 'NULL'
-    doc = command.signature_line()
+    doc = hand.signature if hand else command.signature_line()
     if command.purpose:
         doc = '%s\n\n%s' % (doc, command.purpose)
     lines.append(
         'static const PyGLCommand %s_info = '
-        '{%s, %s, %s, %s, %s, %d, %d, %s, %d, %d, %d};'
+        '{%s, %s, %s, %s, %s, %d, %d, %s, %d, %d, %d, %d};'
         % (
             symbol,
             _c_string(command.name),
             _c_string(doc),
-            _c_string(command.text_signature()),
+            _c_string(
+            '($module, %s, /)' % (', '.join(call_names),)
+            if hand
+            else command.text_signature()
+        ),
             args,
             _c_string(command.feature),
-            len(command.parameters),
+            len(arg_names),
             slot,
             _API_ENUM[command.api],
             1 if command.deprecated else 0,
-            len(command.required_arguments),
+            len(call_names),
             return_kind(command),
+            1 if hand else 0,
         )
     )
     return '\n'.join(lines) + '\n'
@@ -419,17 +447,29 @@ def emit_translation_unit(api, commands, slots):
         '#include "pygl_glgets.h"',
         '',
     ]
+    declared = set()
     for command in commands:
+        hand = hand_written(command)
         parts.append(emit_command_record(command, slots[(command.api, command.name)]))
-        parts.append(emit_stub(command))
+        if hand is not None:
+            if hand.symbol not in declared:
+                parts.append(
+                    'PyObject *%s(GLProc *self, PyObject *const *_a, '
+                    'size_t _nargsf);' % (hand.symbol,)
+                )
+                declared.add(hand.symbol)
+        else:
+            parts.append(emit_stub(command))
         parts.append('')
     parts.append(
         'const PyGLEntry pygl_entries_%s[] = {' % (api,)
     )
     for command in commands:
+        hand = hand_written(command)
         symbol = stub_symbol(command)
         parts.append(
-            '    {&%s_info, (vectorcallfunc)%s},' % (symbol, symbol)
+            '    {&%s_info, (vectorcallfunc)%s},'
+            % (symbol, hand.symbol if hand else symbol)
         )
     parts.append('    {NULL, NULL}')
     parts.append('};')

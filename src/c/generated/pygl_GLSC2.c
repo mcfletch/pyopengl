@@ -7,7 +7,7 @@
 #include "pygl_glgets.h"
 
 static const char *const pygl_GLSC2_glActiveTexture_args[] = {"texture"};
-static const PyGLCommand pygl_GLSC2_glActiveTexture_info = {"glActiveTexture", "glActiveTexture(texture) -> None", "($module, texture, /)", pygl_GLSC2_glActiveTexture_args, "GLSC2_SC_VERSION_2_0", 1, 4186, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glActiveTexture_info = {"glActiveTexture", "glActiveTexture(texture) -> None", "($module, texture, /)", pygl_GLSC2_glActiveTexture_args, "GLSC2_SC_VERSION_2_0", 1, 4204, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glActiveTexture(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -24,7 +24,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glBindBuffer_args[] = {"target", "buffer"};
-static const PyGLCommand pygl_GLSC2_glBindBuffer_info = {"glBindBuffer", "glBindBuffer(target, buffer) -> None", "($module, target, buffer, /)", pygl_GLSC2_glBindBuffer_args, "GLSC2_SC_VERSION_2_0", 2, 4187, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glBindBuffer_info = {"glBindBuffer", "glBindBuffer(target, buffer) -> None", "($module, target, buffer, /)", pygl_GLSC2_glBindBuffer_args, "GLSC2_SC_VERSION_2_0", 2, 4205, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glBindBuffer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -42,7 +42,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glBindFramebuffer_args[] = {"target", "framebuffer"};
-static const PyGLCommand pygl_GLSC2_glBindFramebuffer_info = {"glBindFramebuffer", "glBindFramebuffer(target, framebuffer) -> None", "($module, target, framebuffer, /)", pygl_GLSC2_glBindFramebuffer_args, "GLSC2_SC_VERSION_2_0", 2, 4188, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glBindFramebuffer_info = {"glBindFramebuffer", "glBindFramebuffer(target, framebuffer) -> None", "($module, target, framebuffer, /)", pygl_GLSC2_glBindFramebuffer_args, "GLSC2_SC_VERSION_2_0", 2, 4206, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glBindFramebuffer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -60,7 +60,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glBindRenderbuffer_args[] = {"target", "renderbuffer"};
-static const PyGLCommand pygl_GLSC2_glBindRenderbuffer_info = {"glBindRenderbuffer", "glBindRenderbuffer(target, renderbuffer) -> None", "($module, target, renderbuffer, /)", pygl_GLSC2_glBindRenderbuffer_args, "GLSC2_SC_VERSION_2_0", 2, 4189, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glBindRenderbuffer_info = {"glBindRenderbuffer", "glBindRenderbuffer(target, renderbuffer) -> None", "($module, target, renderbuffer, /)", pygl_GLSC2_glBindRenderbuffer_args, "GLSC2_SC_VERSION_2_0", 2, 4207, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glBindRenderbuffer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -78,7 +78,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glBindTexture_args[] = {"target", "texture"};
-static const PyGLCommand pygl_GLSC2_glBindTexture_info = {"glBindTexture", "glBindTexture(target, texture) -> None", "($module, target, texture, /)", pygl_GLSC2_glBindTexture_args, "GLSC2_SC_VERSION_2_0", 2, 4190, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glBindTexture_info = {"glBindTexture", "glBindTexture(target, texture) -> None", "($module, target, texture, /)", pygl_GLSC2_glBindTexture_args, "GLSC2_SC_VERSION_2_0", 2, 4208, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glBindTexture(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -96,7 +96,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glBlendColor_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLSC2_glBlendColor_info = {"glBlendColor", "glBlendColor(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLSC2_glBlendColor_args, "GLSC2_SC_VERSION_2_0", 4, 4191, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glBlendColor_info = {"glBlendColor", "glBlendColor(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLSC2_glBlendColor_args, "GLSC2_SC_VERSION_2_0", 4, 4209, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glBlendColor(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -116,7 +116,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glBlendEquation_args[] = {"mode"};
-static const PyGLCommand pygl_GLSC2_glBlendEquation_info = {"glBlendEquation", "glBlendEquation(mode) -> None", "($module, mode, /)", pygl_GLSC2_glBlendEquation_args, "GLSC2_SC_VERSION_2_0", 1, 4192, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glBlendEquation_info = {"glBlendEquation", "glBlendEquation(mode) -> None", "($module, mode, /)", pygl_GLSC2_glBlendEquation_args, "GLSC2_SC_VERSION_2_0", 1, 4210, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glBlendEquation(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -133,7 +133,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glBlendEquationSeparate_args[] = {"modeRGB", "modeAlpha"};
-static const PyGLCommand pygl_GLSC2_glBlendEquationSeparate_info = {"glBlendEquationSeparate", "glBlendEquationSeparate(modeRGB, modeAlpha) -> None", "($module, modeRGB, modeAlpha, /)", pygl_GLSC2_glBlendEquationSeparate_args, "GLSC2_SC_VERSION_2_0", 2, 4193, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glBlendEquationSeparate_info = {"glBlendEquationSeparate", "glBlendEquationSeparate(modeRGB, modeAlpha) -> None", "($module, modeRGB, modeAlpha, /)", pygl_GLSC2_glBlendEquationSeparate_args, "GLSC2_SC_VERSION_2_0", 2, 4211, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glBlendEquationSeparate(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -151,7 +151,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glBlendFunc_args[] = {"sfactor", "dfactor"};
-static const PyGLCommand pygl_GLSC2_glBlendFunc_info = {"glBlendFunc", "glBlendFunc(sfactor, dfactor) -> None", "($module, sfactor, dfactor, /)", pygl_GLSC2_glBlendFunc_args, "GLSC2_SC_VERSION_2_0", 2, 4194, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glBlendFunc_info = {"glBlendFunc", "glBlendFunc(sfactor, dfactor) -> None", "($module, sfactor, dfactor, /)", pygl_GLSC2_glBlendFunc_args, "GLSC2_SC_VERSION_2_0", 2, 4212, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glBlendFunc(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -169,7 +169,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glBlendFuncSeparate_args[] = {"sfactorRGB", "dfactorRGB", "sfactorAlpha", "dfactorAlpha"};
-static const PyGLCommand pygl_GLSC2_glBlendFuncSeparate_info = {"glBlendFuncSeparate", "glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha) -> None", "($module, sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha, /)", pygl_GLSC2_glBlendFuncSeparate_args, "GLSC2_SC_VERSION_2_0", 4, 4195, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glBlendFuncSeparate_info = {"glBlendFuncSeparate", "glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha) -> None", "($module, sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha, /)", pygl_GLSC2_glBlendFuncSeparate_args, "GLSC2_SC_VERSION_2_0", 4, 4213, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glBlendFuncSeparate(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -189,7 +189,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glBufferData_args[] = {"target", "size", "data", "usage"};
-static const PyGLCommand pygl_GLSC2_glBufferData_info = {"glBufferData", "glBufferData(target, size, data, usage) -> None", "($module, target, size, data, usage, /)", pygl_GLSC2_glBufferData_args, "GLSC2_SC_VERSION_2_0", 4, 4196, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glBufferData_info = {"glBufferData", "glBufferData(target, size, data, usage) -> None", "($module, target, size, data, usage, /)", pygl_GLSC2_glBufferData_args, "GLSC2_SC_VERSION_2_0", 4, 4214, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glBufferData(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -212,7 +212,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glBufferSubData_args[] = {"target", "offset", "size", "data"};
-static const PyGLCommand pygl_GLSC2_glBufferSubData_info = {"glBufferSubData", "glBufferSubData(target, offset, size, data) -> None", "($module, target, offset, size, data, /)", pygl_GLSC2_glBufferSubData_args, "GLSC2_SC_VERSION_2_0", 4, 4197, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glBufferSubData_info = {"glBufferSubData", "glBufferSubData(target, offset, size, data) -> None", "($module, target, offset, size, data, /)", pygl_GLSC2_glBufferSubData_args, "GLSC2_SC_VERSION_2_0", 4, 4215, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glBufferSubData(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -235,7 +235,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glCheckFramebufferStatus_args[] = {"target"};
-static const PyGLCommand pygl_GLSC2_glCheckFramebufferStatus_info = {"glCheckFramebufferStatus", "glCheckFramebufferStatus(target) -> GLenum", "($module, target, /)", pygl_GLSC2_glCheckFramebufferStatus_args, "GLSC2_SC_VERSION_2_0", 1, 4198, PYGL_API_GLSC2, 0, 1, 1};
+static const PyGLCommand pygl_GLSC2_glCheckFramebufferStatus_info = {"glCheckFramebufferStatus", "glCheckFramebufferStatus(target) -> GLenum", "($module, target, /)", pygl_GLSC2_glCheckFramebufferStatus_args, "GLSC2_SC_VERSION_2_0", 1, 4216, PYGL_API_GLSC2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLSC2_glCheckFramebufferStatus(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -252,7 +252,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glClear_args[] = {"mask"};
-static const PyGLCommand pygl_GLSC2_glClear_info = {"glClear", "glClear(mask) -> None", "($module, mask, /)", pygl_GLSC2_glClear_args, "GLSC2_SC_VERSION_2_0", 1, 4199, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glClear_info = {"glClear", "glClear(mask) -> None", "($module, mask, /)", pygl_GLSC2_glClear_args, "GLSC2_SC_VERSION_2_0", 1, 4217, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glClear(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -269,7 +269,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glClearColor_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLSC2_glClearColor_info = {"glClearColor", "glClearColor(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLSC2_glClearColor_args, "GLSC2_SC_VERSION_2_0", 4, 4200, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glClearColor_info = {"glClearColor", "glClearColor(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLSC2_glClearColor_args, "GLSC2_SC_VERSION_2_0", 4, 4218, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glClearColor(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -289,7 +289,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glClearDepthf_args[] = {"d"};
-static const PyGLCommand pygl_GLSC2_glClearDepthf_info = {"glClearDepthf", "glClearDepthf(d) -> None", "($module, d, /)", pygl_GLSC2_glClearDepthf_args, "GLSC2_SC_VERSION_2_0", 1, 4201, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glClearDepthf_info = {"glClearDepthf", "glClearDepthf(d) -> None", "($module, d, /)", pygl_GLSC2_glClearDepthf_args, "GLSC2_SC_VERSION_2_0", 1, 4219, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glClearDepthf(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -306,7 +306,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glClearStencil_args[] = {"s"};
-static const PyGLCommand pygl_GLSC2_glClearStencil_info = {"glClearStencil", "glClearStencil(s) -> None", "($module, s, /)", pygl_GLSC2_glClearStencil_args, "GLSC2_SC_VERSION_2_0", 1, 4202, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glClearStencil_info = {"glClearStencil", "glClearStencil(s) -> None", "($module, s, /)", pygl_GLSC2_glClearStencil_args, "GLSC2_SC_VERSION_2_0", 1, 4220, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glClearStencil(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -323,7 +323,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glColorMask_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLSC2_glColorMask_info = {"glColorMask", "glColorMask(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLSC2_glColorMask_args, "GLSC2_SC_VERSION_2_0", 4, 4203, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glColorMask_info = {"glColorMask", "glColorMask(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLSC2_glColorMask_args, "GLSC2_SC_VERSION_2_0", 4, 4221, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glColorMask(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -342,7 +342,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLSC2_glCreateProgram_info = {"glCreateProgram", "glCreateProgram() -> GLuint", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", 0, 4204, PYGL_API_GLSC2, 0, 0, 1};
+static const PyGLCommand pygl_GLSC2_glCreateProgram_info = {"glCreateProgram", "glCreateProgram() -> GLuint", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", 0, 4222, PYGL_API_GLSC2, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GLSC2_glCreateProgram(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -358,7 +358,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glCullFace_args[] = {"mode"};
-static const PyGLCommand pygl_GLSC2_glCullFace_info = {"glCullFace", "glCullFace(mode) -> None", "($module, mode, /)", pygl_GLSC2_glCullFace_args, "GLSC2_SC_VERSION_2_0", 1, 4205, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glCullFace_info = {"glCullFace", "glCullFace(mode) -> None", "($module, mode, /)", pygl_GLSC2_glCullFace_args, "GLSC2_SC_VERSION_2_0", 1, 4223, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glCullFace(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -375,7 +375,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glDepthFunc_args[] = {"func"};
-static const PyGLCommand pygl_GLSC2_glDepthFunc_info = {"glDepthFunc", "glDepthFunc(func) -> None", "($module, func, /)", pygl_GLSC2_glDepthFunc_args, "GLSC2_SC_VERSION_2_0", 1, 4206, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glDepthFunc_info = {"glDepthFunc", "glDepthFunc(func) -> None", "($module, func, /)", pygl_GLSC2_glDepthFunc_args, "GLSC2_SC_VERSION_2_0", 1, 4224, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glDepthFunc(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -392,7 +392,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glDepthMask_args[] = {"flag"};
-static const PyGLCommand pygl_GLSC2_glDepthMask_info = {"glDepthMask", "glDepthMask(flag) -> None", "($module, flag, /)", pygl_GLSC2_glDepthMask_args, "GLSC2_SC_VERSION_2_0", 1, 4207, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glDepthMask_info = {"glDepthMask", "glDepthMask(flag) -> None", "($module, flag, /)", pygl_GLSC2_glDepthMask_args, "GLSC2_SC_VERSION_2_0", 1, 4225, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glDepthMask(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -409,7 +409,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glDepthRangef_args[] = {"n", "f"};
-static const PyGLCommand pygl_GLSC2_glDepthRangef_info = {"glDepthRangef", "glDepthRangef(n, f) -> None", "($module, n, f, /)", pygl_GLSC2_glDepthRangef_args, "GLSC2_SC_VERSION_2_0", 2, 4208, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glDepthRangef_info = {"glDepthRangef", "glDepthRangef(n, f) -> None", "($module, n, f, /)", pygl_GLSC2_glDepthRangef_args, "GLSC2_SC_VERSION_2_0", 2, 4226, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glDepthRangef(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -427,7 +427,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glDisable_args[] = {"cap"};
-static const PyGLCommand pygl_GLSC2_glDisable_info = {"glDisable", "glDisable(cap) -> None", "($module, cap, /)", pygl_GLSC2_glDisable_args, "GLSC2_SC_VERSION_2_0", 1, 4209, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glDisable_info = {"glDisable", "glDisable(cap) -> None", "($module, cap, /)", pygl_GLSC2_glDisable_args, "GLSC2_SC_VERSION_2_0", 1, 4227, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glDisable(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -444,7 +444,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glDisableVertexAttribArray_args[] = {"index"};
-static const PyGLCommand pygl_GLSC2_glDisableVertexAttribArray_info = {"glDisableVertexAttribArray", "glDisableVertexAttribArray(index) -> None", "($module, index, /)", pygl_GLSC2_glDisableVertexAttribArray_args, "GLSC2_SC_VERSION_2_0", 1, 4210, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glDisableVertexAttribArray_info = {"glDisableVertexAttribArray", "glDisableVertexAttribArray(index) -> None", "($module, index, /)", pygl_GLSC2_glDisableVertexAttribArray_args, "GLSC2_SC_VERSION_2_0", 1, 4228, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glDisableVertexAttribArray(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -461,7 +461,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glDrawArrays_args[] = {"mode", "first", "count"};
-static const PyGLCommand pygl_GLSC2_glDrawArrays_info = {"glDrawArrays", "glDrawArrays(mode, first, count) -> None", "($module, mode, first, count, /)", pygl_GLSC2_glDrawArrays_args, "GLSC2_SC_VERSION_2_0", 3, 4211, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glDrawArrays_info = {"glDrawArrays", "glDrawArrays(mode, first, count) -> None", "($module, mode, first, count, /)", pygl_GLSC2_glDrawArrays_args, "GLSC2_SC_VERSION_2_0", 3, 4229, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glDrawArrays(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -480,7 +480,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glEnable_args[] = {"cap"};
-static const PyGLCommand pygl_GLSC2_glEnable_info = {"glEnable", "glEnable(cap) -> None", "($module, cap, /)", pygl_GLSC2_glEnable_args, "GLSC2_SC_VERSION_2_0", 1, 4212, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glEnable_info = {"glEnable", "glEnable(cap) -> None", "($module, cap, /)", pygl_GLSC2_glEnable_args, "GLSC2_SC_VERSION_2_0", 1, 4230, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glEnable(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -497,7 +497,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glEnableVertexAttribArray_args[] = {"index"};
-static const PyGLCommand pygl_GLSC2_glEnableVertexAttribArray_info = {"glEnableVertexAttribArray", "glEnableVertexAttribArray(index) -> None", "($module, index, /)", pygl_GLSC2_glEnableVertexAttribArray_args, "GLSC2_SC_VERSION_2_0", 1, 4213, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glEnableVertexAttribArray_info = {"glEnableVertexAttribArray", "glEnableVertexAttribArray(index) -> None", "($module, index, /)", pygl_GLSC2_glEnableVertexAttribArray_args, "GLSC2_SC_VERSION_2_0", 1, 4231, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glEnableVertexAttribArray(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -513,7 +513,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLSC2_glFinish_info = {"glFinish", "glFinish() -> None", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", 0, 4214, PYGL_API_GLSC2, 0, 0, 0};
+static const PyGLCommand pygl_GLSC2_glFinish_info = {"glFinish", "glFinish() -> None", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", 0, 4232, PYGL_API_GLSC2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glFinish(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -528,7 +528,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLSC2_glFlush_info = {"glFlush", "glFlush() -> None", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", 0, 4215, PYGL_API_GLSC2, 0, 0, 0};
+static const PyGLCommand pygl_GLSC2_glFlush_info = {"glFlush", "glFlush() -> None", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", 0, 4233, PYGL_API_GLSC2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glFlush(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -544,7 +544,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glFramebufferRenderbuffer_args[] = {"target", "attachment", "renderbuffertarget", "renderbuffer"};
-static const PyGLCommand pygl_GLSC2_glFramebufferRenderbuffer_info = {"glFramebufferRenderbuffer", "glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) -> None", "($module, target, attachment, renderbuffertarget, renderbuffer, /)", pygl_GLSC2_glFramebufferRenderbuffer_args, "GLSC2_SC_VERSION_2_0", 4, 4216, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glFramebufferRenderbuffer_info = {"glFramebufferRenderbuffer", "glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) -> None", "($module, target, attachment, renderbuffertarget, renderbuffer, /)", pygl_GLSC2_glFramebufferRenderbuffer_args, "GLSC2_SC_VERSION_2_0", 4, 4234, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glFramebufferRenderbuffer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -564,7 +564,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glFramebufferTexture2D_args[] = {"target", "attachment", "textarget", "texture", "level"};
-static const PyGLCommand pygl_GLSC2_glFramebufferTexture2D_info = {"glFramebufferTexture2D", "glFramebufferTexture2D(target, attachment, textarget, texture, level) -> None", "($module, target, attachment, textarget, texture, level, /)", pygl_GLSC2_glFramebufferTexture2D_args, "GLSC2_SC_VERSION_2_0", 5, 4217, PYGL_API_GLSC2, 0, 5, 0};
+static const PyGLCommand pygl_GLSC2_glFramebufferTexture2D_info = {"glFramebufferTexture2D", "glFramebufferTexture2D(target, attachment, textarget, texture, level) -> None", "($module, target, attachment, textarget, texture, level, /)", pygl_GLSC2_glFramebufferTexture2D_args, "GLSC2_SC_VERSION_2_0", 5, 4235, PYGL_API_GLSC2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glFramebufferTexture2D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -585,7 +585,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glFrontFace_args[] = {"mode"};
-static const PyGLCommand pygl_GLSC2_glFrontFace_info = {"glFrontFace", "glFrontFace(mode) -> None", "($module, mode, /)", pygl_GLSC2_glFrontFace_args, "GLSC2_SC_VERSION_2_0", 1, 4218, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glFrontFace_info = {"glFrontFace", "glFrontFace(mode) -> None", "($module, mode, /)", pygl_GLSC2_glFrontFace_args, "GLSC2_SC_VERSION_2_0", 1, 4236, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glFrontFace(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -602,7 +602,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGenBuffers_args[] = {"n", "buffers"};
-static const PyGLCommand pygl_GLSC2_glGenBuffers_info = {"glGenBuffers", "glGenBuffers(n) -> buffers", "($module, n, buffers=None, /)", pygl_GLSC2_glGenBuffers_args, "GLSC2_SC_VERSION_2_0", 2, 4219, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glGenBuffers_info = {"glGenBuffers", "glGenBuffers(n) -> buffers", "($module, n, buffers=None, /)", pygl_GLSC2_glGenBuffers_args, "GLSC2_SC_VERSION_2_0", 2, 4237, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGenBuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -624,7 +624,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGenFramebuffers_args[] = {"n", "framebuffers"};
-static const PyGLCommand pygl_GLSC2_glGenFramebuffers_info = {"glGenFramebuffers", "glGenFramebuffers(n) -> framebuffers", "($module, n, framebuffers=None, /)", pygl_GLSC2_glGenFramebuffers_args, "GLSC2_SC_VERSION_2_0", 2, 4220, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glGenFramebuffers_info = {"glGenFramebuffers", "glGenFramebuffers(n) -> framebuffers", "($module, n, framebuffers=None, /)", pygl_GLSC2_glGenFramebuffers_args, "GLSC2_SC_VERSION_2_0", 2, 4238, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGenFramebuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -646,7 +646,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGenRenderbuffers_args[] = {"n", "renderbuffers"};
-static const PyGLCommand pygl_GLSC2_glGenRenderbuffers_info = {"glGenRenderbuffers", "glGenRenderbuffers(n) -> renderbuffers", "($module, n, renderbuffers=None, /)", pygl_GLSC2_glGenRenderbuffers_args, "GLSC2_SC_VERSION_2_0", 2, 4221, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glGenRenderbuffers_info = {"glGenRenderbuffers", "glGenRenderbuffers(n) -> renderbuffers", "($module, n, renderbuffers=None, /)", pygl_GLSC2_glGenRenderbuffers_args, "GLSC2_SC_VERSION_2_0", 2, 4239, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGenRenderbuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -668,7 +668,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGenTextures_args[] = {"n", "textures"};
-static const PyGLCommand pygl_GLSC2_glGenTextures_info = {"glGenTextures", "glGenTextures(n) -> textures", "($module, n, textures=None, /)", pygl_GLSC2_glGenTextures_args, "GLSC2_SC_VERSION_2_0", 2, 4222, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glGenTextures_info = {"glGenTextures", "glGenTextures(n) -> textures", "($module, n, textures=None, /)", pygl_GLSC2_glGenTextures_args, "GLSC2_SC_VERSION_2_0", 2, 4240, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGenTextures(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -690,7 +690,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGenerateMipmap_args[] = {"target"};
-static const PyGLCommand pygl_GLSC2_glGenerateMipmap_info = {"glGenerateMipmap", "glGenerateMipmap(target) -> None", "($module, target, /)", pygl_GLSC2_glGenerateMipmap_args, "GLSC2_SC_VERSION_2_0", 1, 4223, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glGenerateMipmap_info = {"glGenerateMipmap", "glGenerateMipmap(target) -> None", "($module, target, /)", pygl_GLSC2_glGenerateMipmap_args, "GLSC2_SC_VERSION_2_0", 1, 4241, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGenerateMipmap(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -707,7 +707,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetAttribLocation_args[] = {"program", "name"};
-static const PyGLCommand pygl_GLSC2_glGetAttribLocation_info = {"glGetAttribLocation", "glGetAttribLocation(program, name) -> GLint", "($module, program, name, /)", pygl_GLSC2_glGetAttribLocation_args, "GLSC2_SC_VERSION_2_0", 2, 4224, PYGL_API_GLSC2, 0, 2, 1};
+static const PyGLCommand pygl_GLSC2_glGetAttribLocation_info = {"glGetAttribLocation", "glGetAttribLocation(program, name) -> GLint", "($module, program, name, /)", pygl_GLSC2_glGetAttribLocation_args, "GLSC2_SC_VERSION_2_0", 2, 4242, PYGL_API_GLSC2, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLSC2_glGetAttribLocation(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -729,7 +729,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetBooleanv_args[] = {"pname", "data"};
-static const PyGLCommand pygl_GLSC2_glGetBooleanv_info = {"glGetBooleanv", "glGetBooleanv(pname) -> data", "($module, pname, data=None, /)", pygl_GLSC2_glGetBooleanv_args, "GLSC2_SC_VERSION_2_0", 2, 4225, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glGetBooleanv_info = {"glGetBooleanv", "glGetBooleanv(pname) -> data", "($module, pname, data=None, /)", pygl_GLSC2_glGetBooleanv_args, "GLSC2_SC_VERSION_2_0", 2, 4243, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGetBooleanv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -751,7 +751,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetBufferParameteriv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLSC2_glGetBufferParameteriv_info = {"glGetBufferParameteriv", "glGetBufferParameteriv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLSC2_glGetBufferParameteriv_args, "GLSC2_SC_VERSION_2_0", 3, 4226, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glGetBufferParameteriv_info = {"glGetBufferParameteriv", "glGetBufferParameteriv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLSC2_glGetBufferParameteriv_args, "GLSC2_SC_VERSION_2_0", 3, 4244, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGetBufferParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -773,7 +773,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLSC2_glGetError_info = {"glGetError", "glGetError() -> GLenum", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", 0, 4227, PYGL_API_GLSC2, 0, 0, 1};
+static const PyGLCommand pygl_GLSC2_glGetError_info = {"glGetError", "glGetError() -> GLenum", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", 0, 4245, PYGL_API_GLSC2, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GLSC2_glGetError(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -789,7 +789,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetFloatv_args[] = {"pname", "data"};
-static const PyGLCommand pygl_GLSC2_glGetFloatv_info = {"glGetFloatv", "glGetFloatv(pname) -> data", "($module, pname, data=None, /)", pygl_GLSC2_glGetFloatv_args, "GLSC2_SC_VERSION_2_0", 2, 4228, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glGetFloatv_info = {"glGetFloatv", "glGetFloatv(pname) -> data", "($module, pname, data=None, /)", pygl_GLSC2_glGetFloatv_args, "GLSC2_SC_VERSION_2_0", 2, 4246, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGetFloatv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -811,7 +811,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetFramebufferAttachmentParameteriv_args[] = {"target", "attachment", "pname", "params"};
-static const PyGLCommand pygl_GLSC2_glGetFramebufferAttachmentParameteriv_info = {"glGetFramebufferAttachmentParameteriv", "glGetFramebufferAttachmentParameteriv(target, attachment, pname) -> params", "($module, target, attachment, pname, params=None, /)", pygl_GLSC2_glGetFramebufferAttachmentParameteriv_args, "GLSC2_SC_VERSION_2_0", 4, 4229, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glGetFramebufferAttachmentParameteriv_info = {"glGetFramebufferAttachmentParameteriv", "glGetFramebufferAttachmentParameteriv(target, attachment, pname) -> params", "($module, target, attachment, pname, params=None, /)", pygl_GLSC2_glGetFramebufferAttachmentParameteriv_args, "GLSC2_SC_VERSION_2_0", 4, 4247, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGetFramebufferAttachmentParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -834,7 +834,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLSC2_glGetGraphicsResetStatus_info = {"glGetGraphicsResetStatus", "glGetGraphicsResetStatus() -> GLenum", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", 0, 4230, PYGL_API_GLSC2, 0, 0, 1};
+static const PyGLCommand pygl_GLSC2_glGetGraphicsResetStatus_info = {"glGetGraphicsResetStatus", "glGetGraphicsResetStatus() -> GLenum", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", 0, 4248, PYGL_API_GLSC2, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GLSC2_glGetGraphicsResetStatus(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -850,7 +850,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetIntegerv_args[] = {"pname", "data"};
-static const PyGLCommand pygl_GLSC2_glGetIntegerv_info = {"glGetIntegerv", "glGetIntegerv(pname) -> data", "($module, pname, data=None, /)", pygl_GLSC2_glGetIntegerv_args, "GLSC2_SC_VERSION_2_0", 2, 4231, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glGetIntegerv_info = {"glGetIntegerv", "glGetIntegerv(pname) -> data", "($module, pname, data=None, /)", pygl_GLSC2_glGetIntegerv_args, "GLSC2_SC_VERSION_2_0", 2, 4249, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGetIntegerv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -872,7 +872,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetProgramiv_args[] = {"program", "pname", "params"};
-static const PyGLCommand pygl_GLSC2_glGetProgramiv_info = {"glGetProgramiv", "glGetProgramiv(program, pname) -> params", "($module, program, pname, params=None, /)", pygl_GLSC2_glGetProgramiv_args, "GLSC2_SC_VERSION_2_0", 3, 4232, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glGetProgramiv_info = {"glGetProgramiv", "glGetProgramiv(program, pname) -> params", "($module, program, pname, params=None, /)", pygl_GLSC2_glGetProgramiv_args, "GLSC2_SC_VERSION_2_0", 3, 4250, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGetProgramiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -895,7 +895,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetRenderbufferParameteriv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLSC2_glGetRenderbufferParameteriv_info = {"glGetRenderbufferParameteriv", "glGetRenderbufferParameteriv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLSC2_glGetRenderbufferParameteriv_args, "GLSC2_SC_VERSION_2_0", 3, 4233, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glGetRenderbufferParameteriv_info = {"glGetRenderbufferParameteriv", "glGetRenderbufferParameteriv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLSC2_glGetRenderbufferParameteriv_args, "GLSC2_SC_VERSION_2_0", 3, 4251, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGetRenderbufferParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -918,7 +918,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetString_args[] = {"name"};
-static const PyGLCommand pygl_GLSC2_glGetString_info = {"glGetString", "glGetString(name) -> GLubyte", "($module, name, /)", pygl_GLSC2_glGetString_args, "GLSC2_SC_VERSION_2_0", 1, 4234, PYGL_API_GLSC2, 0, 1, 2};
+static const PyGLCommand pygl_GLSC2_glGetString_info = {"glGetString", "glGetString(name) -> GLubyte", "($module, name, /)", pygl_GLSC2_glGetString_args, "GLSC2_SC_VERSION_2_0", 1, 4252, PYGL_API_GLSC2, 0, 1, 2, 0};
 
 static PyObject *
 pygl_GLSC2_glGetString(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -935,7 +935,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetTexParameterfv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLSC2_glGetTexParameterfv_info = {"glGetTexParameterfv", "glGetTexParameterfv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLSC2_glGetTexParameterfv_args, "GLSC2_SC_VERSION_2_0", 3, 4235, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glGetTexParameterfv_info = {"glGetTexParameterfv", "glGetTexParameterfv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLSC2_glGetTexParameterfv_args, "GLSC2_SC_VERSION_2_0", 3, 4253, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGetTexParameterfv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -958,7 +958,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetTexParameteriv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLSC2_glGetTexParameteriv_info = {"glGetTexParameteriv", "glGetTexParameteriv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLSC2_glGetTexParameteriv_args, "GLSC2_SC_VERSION_2_0", 3, 4236, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glGetTexParameteriv_info = {"glGetTexParameteriv", "glGetTexParameteriv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLSC2_glGetTexParameteriv_args, "GLSC2_SC_VERSION_2_0", 3, 4254, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGetTexParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -981,7 +981,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetUniformLocation_args[] = {"program", "name"};
-static const PyGLCommand pygl_GLSC2_glGetUniformLocation_info = {"glGetUniformLocation", "glGetUniformLocation(program, name) -> GLint", "($module, program, name, /)", pygl_GLSC2_glGetUniformLocation_args, "GLSC2_SC_VERSION_2_0", 2, 4237, PYGL_API_GLSC2, 0, 2, 1};
+static const PyGLCommand pygl_GLSC2_glGetUniformLocation_info = {"glGetUniformLocation", "glGetUniformLocation(program, name) -> GLint", "($module, program, name, /)", pygl_GLSC2_glGetUniformLocation_args, "GLSC2_SC_VERSION_2_0", 2, 4255, PYGL_API_GLSC2, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLSC2_glGetUniformLocation(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1003,7 +1003,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetVertexAttribPointerv_args[] = {"index", "pname", "pointer"};
-static const PyGLCommand pygl_GLSC2_glGetVertexAttribPointerv_info = {"glGetVertexAttribPointerv", "glGetVertexAttribPointerv(index, pname) -> pointer", "($module, index, pname, pointer=None, /)", pygl_GLSC2_glGetVertexAttribPointerv_args, "GLSC2_SC_VERSION_2_0", 3, 4238, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glGetVertexAttribPointerv_info = {"glGetVertexAttribPointerv", "glGetVertexAttribPointerv(index, pname) -> pointer", "($module, index, pname, pointer=None, /)", pygl_GLSC2_glGetVertexAttribPointerv_args, "GLSC2_SC_VERSION_2_0", 3, 4256, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGetVertexAttribPointerv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1026,7 +1026,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetVertexAttribfv_args[] = {"index", "pname", "params"};
-static const PyGLCommand pygl_GLSC2_glGetVertexAttribfv_info = {"glGetVertexAttribfv", "glGetVertexAttribfv(index, pname) -> params", "($module, index, pname, params=None, /)", pygl_GLSC2_glGetVertexAttribfv_args, "GLSC2_SC_VERSION_2_0", 3, 4239, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glGetVertexAttribfv_info = {"glGetVertexAttribfv", "glGetVertexAttribfv(index, pname) -> params", "($module, index, pname, params=None, /)", pygl_GLSC2_glGetVertexAttribfv_args, "GLSC2_SC_VERSION_2_0", 3, 4257, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGetVertexAttribfv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1049,7 +1049,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetVertexAttribiv_args[] = {"index", "pname", "params"};
-static const PyGLCommand pygl_GLSC2_glGetVertexAttribiv_info = {"glGetVertexAttribiv", "glGetVertexAttribiv(index, pname) -> params", "($module, index, pname, params=None, /)", pygl_GLSC2_glGetVertexAttribiv_args, "GLSC2_SC_VERSION_2_0", 3, 4240, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glGetVertexAttribiv_info = {"glGetVertexAttribiv", "glGetVertexAttribiv(index, pname) -> params", "($module, index, pname, params=None, /)", pygl_GLSC2_glGetVertexAttribiv_args, "GLSC2_SC_VERSION_2_0", 3, 4258, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGetVertexAttribiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1072,7 +1072,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetnUniformfv_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GLSC2_glGetnUniformfv_info = {"glGetnUniformfv", "glGetnUniformfv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLSC2_glGetnUniformfv_args, "GLSC2_SC_VERSION_2_0", 4, 4241, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glGetnUniformfv_info = {"glGetnUniformfv", "glGetnUniformfv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLSC2_glGetnUniformfv_args, "GLSC2_SC_VERSION_2_0", 4, 4259, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGetnUniformfv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1095,7 +1095,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glGetnUniformiv_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GLSC2_glGetnUniformiv_info = {"glGetnUniformiv", "glGetnUniformiv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLSC2_glGetnUniformiv_args, "GLSC2_SC_VERSION_2_0", 4, 4242, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glGetnUniformiv_info = {"glGetnUniformiv", "glGetnUniformiv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLSC2_glGetnUniformiv_args, "GLSC2_SC_VERSION_2_0", 4, 4260, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glGetnUniformiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1118,7 +1118,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glHint_args[] = {"target", "mode"};
-static const PyGLCommand pygl_GLSC2_glHint_info = {"glHint", "glHint(target, mode) -> None", "($module, target, mode, /)", pygl_GLSC2_glHint_args, "GLSC2_SC_VERSION_2_0", 2, 4243, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glHint_info = {"glHint", "glHint(target, mode) -> None", "($module, target, mode, /)", pygl_GLSC2_glHint_args, "GLSC2_SC_VERSION_2_0", 2, 4261, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glHint(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1136,7 +1136,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glIsEnabled_args[] = {"cap"};
-static const PyGLCommand pygl_GLSC2_glIsEnabled_info = {"glIsEnabled", "glIsEnabled(cap) -> GLboolean", "($module, cap, /)", pygl_GLSC2_glIsEnabled_args, "GLSC2_SC_VERSION_2_0", 1, 4244, PYGL_API_GLSC2, 0, 1, 1};
+static const PyGLCommand pygl_GLSC2_glIsEnabled_info = {"glIsEnabled", "glIsEnabled(cap) -> GLboolean", "($module, cap, /)", pygl_GLSC2_glIsEnabled_args, "GLSC2_SC_VERSION_2_0", 1, 4262, PYGL_API_GLSC2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLSC2_glIsEnabled(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1153,7 +1153,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glLineWidth_args[] = {"width"};
-static const PyGLCommand pygl_GLSC2_glLineWidth_info = {"glLineWidth", "glLineWidth(width) -> None", "($module, width, /)", pygl_GLSC2_glLineWidth_args, "GLSC2_SC_VERSION_2_0", 1, 4245, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glLineWidth_info = {"glLineWidth", "glLineWidth(width) -> None", "($module, width, /)", pygl_GLSC2_glLineWidth_args, "GLSC2_SC_VERSION_2_0", 1, 4263, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glLineWidth(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1170,7 +1170,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glPixelStorei_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLSC2_glPixelStorei_info = {"glPixelStorei", "glPixelStorei(pname, param) -> None", "($module, pname, param, /)", pygl_GLSC2_glPixelStorei_args, "GLSC2_SC_VERSION_2_0", 2, 4246, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glPixelStorei_info = {"glPixelStorei", "glPixelStorei(pname, param) -> None", "($module, pname, param, /)", pygl_GLSC2_glPixelStorei_args, "GLSC2_SC_VERSION_2_0", 2, 4264, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glPixelStorei(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1188,7 +1188,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glPolygonOffset_args[] = {"factor", "units"};
-static const PyGLCommand pygl_GLSC2_glPolygonOffset_info = {"glPolygonOffset", "glPolygonOffset(factor, units) -> None", "($module, factor, units, /)", pygl_GLSC2_glPolygonOffset_args, "GLSC2_SC_VERSION_2_0", 2, 4247, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glPolygonOffset_info = {"glPolygonOffset", "glPolygonOffset(factor, units) -> None", "($module, factor, units, /)", pygl_GLSC2_glPolygonOffset_args, "GLSC2_SC_VERSION_2_0", 2, 4265, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glPolygonOffset(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1206,7 +1206,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glProgramBinary_args[] = {"program", "binaryFormat", "binary", "length"};
-static const PyGLCommand pygl_GLSC2_glProgramBinary_info = {"glProgramBinary", "glProgramBinary(program, binaryFormat, binary, length) -> None", "($module, program, binaryFormat, binary, length, /)", pygl_GLSC2_glProgramBinary_args, "GLSC2_SC_VERSION_2_0", 4, 4248, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glProgramBinary_info = {"glProgramBinary", "glProgramBinary(program, binaryFormat, binary, length) -> None", "($module, program, binaryFormat, binary, length, /)", pygl_GLSC2_glProgramBinary_args, "GLSC2_SC_VERSION_2_0", 4, 4266, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glProgramBinary(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1229,7 +1229,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glReadnPixels_args[] = {"x", "y", "width", "height", "format", "type", "bufSize", "data"};
-static const PyGLCommand pygl_GLSC2_glReadnPixels_info = {"glReadnPixels", "glReadnPixels(x, y, width, height, format, type, bufSize, data) -> None", "($module, x, y, width, height, format, type, bufSize, data, /)", pygl_GLSC2_glReadnPixels_args, "GLSC2_SC_VERSION_2_0", 8, 4249, PYGL_API_GLSC2, 0, 8, 0};
+static const PyGLCommand pygl_GLSC2_glReadnPixels_info = {"glReadnPixels", "glReadnPixels(x, y, width, height, format, type, bufSize, data) -> None", "($module, x, y, width, height, format, type, bufSize, data, /)", pygl_GLSC2_glReadnPixels_args, "GLSC2_SC_VERSION_2_0", 8, 4267, PYGL_API_GLSC2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glReadnPixels(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1256,7 +1256,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glRenderbufferStorage_args[] = {"target", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLSC2_glRenderbufferStorage_info = {"glRenderbufferStorage", "glRenderbufferStorage(target, internalformat, width, height) -> None", "($module, target, internalformat, width, height, /)", pygl_GLSC2_glRenderbufferStorage_args, "GLSC2_SC_VERSION_2_0", 4, 4250, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glRenderbufferStorage_info = {"glRenderbufferStorage", "glRenderbufferStorage(target, internalformat, width, height) -> None", "($module, target, internalformat, width, height, /)", pygl_GLSC2_glRenderbufferStorage_args, "GLSC2_SC_VERSION_2_0", 4, 4268, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glRenderbufferStorage(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1276,7 +1276,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glSampleCoverage_args[] = {"value", "invert"};
-static const PyGLCommand pygl_GLSC2_glSampleCoverage_info = {"glSampleCoverage", "glSampleCoverage(value, invert) -> None", "($module, value, invert, /)", pygl_GLSC2_glSampleCoverage_args, "GLSC2_SC_VERSION_2_0", 2, 4251, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glSampleCoverage_info = {"glSampleCoverage", "glSampleCoverage(value, invert) -> None", "($module, value, invert, /)", pygl_GLSC2_glSampleCoverage_args, "GLSC2_SC_VERSION_2_0", 2, 4269, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glSampleCoverage(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1294,7 +1294,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glScissor_args[] = {"x", "y", "width", "height"};
-static const PyGLCommand pygl_GLSC2_glScissor_info = {"glScissor", "glScissor(x, y, width, height) -> None", "($module, x, y, width, height, /)", pygl_GLSC2_glScissor_args, "GLSC2_SC_VERSION_2_0", 4, 4252, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glScissor_info = {"glScissor", "glScissor(x, y, width, height) -> None", "($module, x, y, width, height, /)", pygl_GLSC2_glScissor_args, "GLSC2_SC_VERSION_2_0", 4, 4270, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glScissor(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1314,7 +1314,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glStencilFunc_args[] = {"func", "ref", "mask"};
-static const PyGLCommand pygl_GLSC2_glStencilFunc_info = {"glStencilFunc", "glStencilFunc(func, ref, mask) -> None", "($module, func, ref, mask, /)", pygl_GLSC2_glStencilFunc_args, "GLSC2_SC_VERSION_2_0", 3, 4253, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glStencilFunc_info = {"glStencilFunc", "glStencilFunc(func, ref, mask) -> None", "($module, func, ref, mask, /)", pygl_GLSC2_glStencilFunc_args, "GLSC2_SC_VERSION_2_0", 3, 4271, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glStencilFunc(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1333,7 +1333,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glStencilFuncSeparate_args[] = {"face", "func", "ref", "mask"};
-static const PyGLCommand pygl_GLSC2_glStencilFuncSeparate_info = {"glStencilFuncSeparate", "glStencilFuncSeparate(face, func, ref, mask) -> None", "($module, face, func, ref, mask, /)", pygl_GLSC2_glStencilFuncSeparate_args, "GLSC2_SC_VERSION_2_0", 4, 4254, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glStencilFuncSeparate_info = {"glStencilFuncSeparate", "glStencilFuncSeparate(face, func, ref, mask) -> None", "($module, face, func, ref, mask, /)", pygl_GLSC2_glStencilFuncSeparate_args, "GLSC2_SC_VERSION_2_0", 4, 4272, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glStencilFuncSeparate(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1353,7 +1353,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glStencilMask_args[] = {"mask"};
-static const PyGLCommand pygl_GLSC2_glStencilMask_info = {"glStencilMask", "glStencilMask(mask) -> None", "($module, mask, /)", pygl_GLSC2_glStencilMask_args, "GLSC2_SC_VERSION_2_0", 1, 4255, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glStencilMask_info = {"glStencilMask", "glStencilMask(mask) -> None", "($module, mask, /)", pygl_GLSC2_glStencilMask_args, "GLSC2_SC_VERSION_2_0", 1, 4273, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glStencilMask(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1370,7 +1370,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glStencilMaskSeparate_args[] = {"face", "mask"};
-static const PyGLCommand pygl_GLSC2_glStencilMaskSeparate_info = {"glStencilMaskSeparate", "glStencilMaskSeparate(face, mask) -> None", "($module, face, mask, /)", pygl_GLSC2_glStencilMaskSeparate_args, "GLSC2_SC_VERSION_2_0", 2, 4256, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glStencilMaskSeparate_info = {"glStencilMaskSeparate", "glStencilMaskSeparate(face, mask) -> None", "($module, face, mask, /)", pygl_GLSC2_glStencilMaskSeparate_args, "GLSC2_SC_VERSION_2_0", 2, 4274, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glStencilMaskSeparate(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1388,7 +1388,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glStencilOp_args[] = {"fail", "zfail", "zpass"};
-static const PyGLCommand pygl_GLSC2_glStencilOp_info = {"glStencilOp", "glStencilOp(fail, zfail, zpass) -> None", "($module, fail, zfail, zpass, /)", pygl_GLSC2_glStencilOp_args, "GLSC2_SC_VERSION_2_0", 3, 4257, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glStencilOp_info = {"glStencilOp", "glStencilOp(fail, zfail, zpass) -> None", "($module, fail, zfail, zpass, /)", pygl_GLSC2_glStencilOp_args, "GLSC2_SC_VERSION_2_0", 3, 4275, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glStencilOp(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1407,7 +1407,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glStencilOpSeparate_args[] = {"face", "sfail", "dpfail", "dppass"};
-static const PyGLCommand pygl_GLSC2_glStencilOpSeparate_info = {"glStencilOpSeparate", "glStencilOpSeparate(face, sfail, dpfail, dppass) -> None", "($module, face, sfail, dpfail, dppass, /)", pygl_GLSC2_glStencilOpSeparate_args, "GLSC2_SC_VERSION_2_0", 4, 4258, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glStencilOpSeparate_info = {"glStencilOpSeparate", "glStencilOpSeparate(face, sfail, dpfail, dppass) -> None", "($module, face, sfail, dpfail, dppass, /)", pygl_GLSC2_glStencilOpSeparate_args, "GLSC2_SC_VERSION_2_0", 4, 4276, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glStencilOpSeparate(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1427,7 +1427,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glTexParameterf_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLSC2_glTexParameterf_info = {"glTexParameterf", "glTexParameterf(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLSC2_glTexParameterf_args, "GLSC2_SC_VERSION_2_0", 3, 4259, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glTexParameterf_info = {"glTexParameterf", "glTexParameterf(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLSC2_glTexParameterf_args, "GLSC2_SC_VERSION_2_0", 3, 4277, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glTexParameterf(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1446,7 +1446,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glTexParameterfv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLSC2_glTexParameterfv_info = {"glTexParameterfv", "glTexParameterfv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLSC2_glTexParameterfv_args, "GLSC2_SC_VERSION_2_0", 3, 4260, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glTexParameterfv_info = {"glTexParameterfv", "glTexParameterfv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLSC2_glTexParameterfv_args, "GLSC2_SC_VERSION_2_0", 3, 4278, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glTexParameterfv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1468,7 +1468,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glTexParameteri_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLSC2_glTexParameteri_info = {"glTexParameteri", "glTexParameteri(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLSC2_glTexParameteri_args, "GLSC2_SC_VERSION_2_0", 3, 4261, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glTexParameteri_info = {"glTexParameteri", "glTexParameteri(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLSC2_glTexParameteri_args, "GLSC2_SC_VERSION_2_0", 3, 4279, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glTexParameteri(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1487,7 +1487,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glTexParameteriv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLSC2_glTexParameteriv_info = {"glTexParameteriv", "glTexParameteriv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLSC2_glTexParameteriv_args, "GLSC2_SC_VERSION_2_0", 3, 4262, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glTexParameteriv_info = {"glTexParameteriv", "glTexParameteriv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLSC2_glTexParameteriv_args, "GLSC2_SC_VERSION_2_0", 3, 4280, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glTexParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1509,7 +1509,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glTexStorage2D_args[] = {"target", "levels", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLSC2_glTexStorage2D_info = {"glTexStorage2D", "glTexStorage2D(target, levels, internalformat, width, height) -> None", "($module, target, levels, internalformat, width, height, /)", pygl_GLSC2_glTexStorage2D_args, "GLSC2_SC_VERSION_2_0", 5, 4263, PYGL_API_GLSC2, 0, 5, 0};
+static const PyGLCommand pygl_GLSC2_glTexStorage2D_info = {"glTexStorage2D", "glTexStorage2D(target, levels, internalformat, width, height) -> None", "($module, target, levels, internalformat, width, height, /)", pygl_GLSC2_glTexStorage2D_args, "GLSC2_SC_VERSION_2_0", 5, 4281, PYGL_API_GLSC2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glTexStorage2D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1530,7 +1530,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform1f_args[] = {"location", "v0"};
-static const PyGLCommand pygl_GLSC2_glUniform1f_info = {"glUniform1f", "glUniform1f(location, v0) -> None", "($module, location, v0, /)", pygl_GLSC2_glUniform1f_args, "GLSC2_SC_VERSION_2_0", 2, 4264, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glUniform1f_info = {"glUniform1f", "glUniform1f(location, v0) -> None", "($module, location, v0, /)", pygl_GLSC2_glUniform1f_args, "GLSC2_SC_VERSION_2_0", 2, 4282, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform1f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1548,7 +1548,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform1fv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLSC2_glUniform1fv_info = {"glUniform1fv", "glUniform1fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform1fv_args, "GLSC2_SC_VERSION_2_0", 3, 4265, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glUniform1fv_info = {"glUniform1fv", "glUniform1fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform1fv_args, "GLSC2_SC_VERSION_2_0", 3, 4283, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform1fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1570,7 +1570,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform1i_args[] = {"location", "v0"};
-static const PyGLCommand pygl_GLSC2_glUniform1i_info = {"glUniform1i", "glUniform1i(location, v0) -> None", "($module, location, v0, /)", pygl_GLSC2_glUniform1i_args, "GLSC2_SC_VERSION_2_0", 2, 4266, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glUniform1i_info = {"glUniform1i", "glUniform1i(location, v0) -> None", "($module, location, v0, /)", pygl_GLSC2_glUniform1i_args, "GLSC2_SC_VERSION_2_0", 2, 4284, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform1i(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1588,7 +1588,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform1iv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLSC2_glUniform1iv_info = {"glUniform1iv", "glUniform1iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform1iv_args, "GLSC2_SC_VERSION_2_0", 3, 4267, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glUniform1iv_info = {"glUniform1iv", "glUniform1iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform1iv_args, "GLSC2_SC_VERSION_2_0", 3, 4285, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform1iv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1610,7 +1610,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform2f_args[] = {"location", "v0", "v1"};
-static const PyGLCommand pygl_GLSC2_glUniform2f_info = {"glUniform2f", "glUniform2f(location, v0, v1) -> None", "($module, location, v0, v1, /)", pygl_GLSC2_glUniform2f_args, "GLSC2_SC_VERSION_2_0", 3, 4268, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glUniform2f_info = {"glUniform2f", "glUniform2f(location, v0, v1) -> None", "($module, location, v0, v1, /)", pygl_GLSC2_glUniform2f_args, "GLSC2_SC_VERSION_2_0", 3, 4286, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform2f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1629,7 +1629,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform2fv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLSC2_glUniform2fv_info = {"glUniform2fv", "glUniform2fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform2fv_args, "GLSC2_SC_VERSION_2_0", 3, 4269, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glUniform2fv_info = {"glUniform2fv", "glUniform2fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform2fv_args, "GLSC2_SC_VERSION_2_0", 3, 4287, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform2fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1651,7 +1651,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform2i_args[] = {"location", "v0", "v1"};
-static const PyGLCommand pygl_GLSC2_glUniform2i_info = {"glUniform2i", "glUniform2i(location, v0, v1) -> None", "($module, location, v0, v1, /)", pygl_GLSC2_glUniform2i_args, "GLSC2_SC_VERSION_2_0", 3, 4270, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glUniform2i_info = {"glUniform2i", "glUniform2i(location, v0, v1) -> None", "($module, location, v0, v1, /)", pygl_GLSC2_glUniform2i_args, "GLSC2_SC_VERSION_2_0", 3, 4288, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform2i(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1670,7 +1670,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform2iv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLSC2_glUniform2iv_info = {"glUniform2iv", "glUniform2iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform2iv_args, "GLSC2_SC_VERSION_2_0", 3, 4271, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glUniform2iv_info = {"glUniform2iv", "glUniform2iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform2iv_args, "GLSC2_SC_VERSION_2_0", 3, 4289, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform2iv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1692,7 +1692,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform3f_args[] = {"location", "v0", "v1", "v2"};
-static const PyGLCommand pygl_GLSC2_glUniform3f_info = {"glUniform3f", "glUniform3f(location, v0, v1, v2) -> None", "($module, location, v0, v1, v2, /)", pygl_GLSC2_glUniform3f_args, "GLSC2_SC_VERSION_2_0", 4, 4272, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glUniform3f_info = {"glUniform3f", "glUniform3f(location, v0, v1, v2) -> None", "($module, location, v0, v1, v2, /)", pygl_GLSC2_glUniform3f_args, "GLSC2_SC_VERSION_2_0", 4, 4290, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform3f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1712,7 +1712,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform3fv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLSC2_glUniform3fv_info = {"glUniform3fv", "glUniform3fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform3fv_args, "GLSC2_SC_VERSION_2_0", 3, 4273, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glUniform3fv_info = {"glUniform3fv", "glUniform3fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform3fv_args, "GLSC2_SC_VERSION_2_0", 3, 4291, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform3fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1734,7 +1734,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform3i_args[] = {"location", "v0", "v1", "v2"};
-static const PyGLCommand pygl_GLSC2_glUniform3i_info = {"glUniform3i", "glUniform3i(location, v0, v1, v2) -> None", "($module, location, v0, v1, v2, /)", pygl_GLSC2_glUniform3i_args, "GLSC2_SC_VERSION_2_0", 4, 4274, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glUniform3i_info = {"glUniform3i", "glUniform3i(location, v0, v1, v2) -> None", "($module, location, v0, v1, v2, /)", pygl_GLSC2_glUniform3i_args, "GLSC2_SC_VERSION_2_0", 4, 4292, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform3i(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1754,7 +1754,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform3iv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLSC2_glUniform3iv_info = {"glUniform3iv", "glUniform3iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform3iv_args, "GLSC2_SC_VERSION_2_0", 3, 4275, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glUniform3iv_info = {"glUniform3iv", "glUniform3iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform3iv_args, "GLSC2_SC_VERSION_2_0", 3, 4293, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform3iv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1776,7 +1776,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform4f_args[] = {"location", "v0", "v1", "v2", "v3"};
-static const PyGLCommand pygl_GLSC2_glUniform4f_info = {"glUniform4f", "glUniform4f(location, v0, v1, v2, v3) -> None", "($module, location, v0, v1, v2, v3, /)", pygl_GLSC2_glUniform4f_args, "GLSC2_SC_VERSION_2_0", 5, 4276, PYGL_API_GLSC2, 0, 5, 0};
+static const PyGLCommand pygl_GLSC2_glUniform4f_info = {"glUniform4f", "glUniform4f(location, v0, v1, v2, v3) -> None", "($module, location, v0, v1, v2, v3, /)", pygl_GLSC2_glUniform4f_args, "GLSC2_SC_VERSION_2_0", 5, 4294, PYGL_API_GLSC2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform4f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1797,7 +1797,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform4fv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLSC2_glUniform4fv_info = {"glUniform4fv", "glUniform4fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform4fv_args, "GLSC2_SC_VERSION_2_0", 3, 4277, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glUniform4fv_info = {"glUniform4fv", "glUniform4fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform4fv_args, "GLSC2_SC_VERSION_2_0", 3, 4295, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform4fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1819,7 +1819,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform4i_args[] = {"location", "v0", "v1", "v2", "v3"};
-static const PyGLCommand pygl_GLSC2_glUniform4i_info = {"glUniform4i", "glUniform4i(location, v0, v1, v2, v3) -> None", "($module, location, v0, v1, v2, v3, /)", pygl_GLSC2_glUniform4i_args, "GLSC2_SC_VERSION_2_0", 5, 4278, PYGL_API_GLSC2, 0, 5, 0};
+static const PyGLCommand pygl_GLSC2_glUniform4i_info = {"glUniform4i", "glUniform4i(location, v0, v1, v2, v3) -> None", "($module, location, v0, v1, v2, v3, /)", pygl_GLSC2_glUniform4i_args, "GLSC2_SC_VERSION_2_0", 5, 4296, PYGL_API_GLSC2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform4i(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1840,7 +1840,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniform4iv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLSC2_glUniform4iv_info = {"glUniform4iv", "glUniform4iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform4iv_args, "GLSC2_SC_VERSION_2_0", 3, 4279, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glUniform4iv_info = {"glUniform4iv", "glUniform4iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLSC2_glUniform4iv_args, "GLSC2_SC_VERSION_2_0", 3, 4297, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniform4iv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1862,7 +1862,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniformMatrix2fv_args[] = {"location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLSC2_glUniformMatrix2fv_info = {"glUniformMatrix2fv", "glUniformMatrix2fv(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLSC2_glUniformMatrix2fv_args, "GLSC2_SC_VERSION_2_0", 4, 4280, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glUniformMatrix2fv_info = {"glUniformMatrix2fv", "glUniformMatrix2fv(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLSC2_glUniformMatrix2fv_args, "GLSC2_SC_VERSION_2_0", 4, 4298, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniformMatrix2fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1885,7 +1885,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniformMatrix3fv_args[] = {"location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLSC2_glUniformMatrix3fv_info = {"glUniformMatrix3fv", "glUniformMatrix3fv(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLSC2_glUniformMatrix3fv_args, "GLSC2_SC_VERSION_2_0", 4, 4281, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glUniformMatrix3fv_info = {"glUniformMatrix3fv", "glUniformMatrix3fv(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLSC2_glUniformMatrix3fv_args, "GLSC2_SC_VERSION_2_0", 4, 4299, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniformMatrix3fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1908,7 +1908,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUniformMatrix4fv_args[] = {"location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLSC2_glUniformMatrix4fv_info = {"glUniformMatrix4fv", "glUniformMatrix4fv(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLSC2_glUniformMatrix4fv_args, "GLSC2_SC_VERSION_2_0", 4, 4282, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glUniformMatrix4fv_info = {"glUniformMatrix4fv", "glUniformMatrix4fv(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLSC2_glUniformMatrix4fv_args, "GLSC2_SC_VERSION_2_0", 4, 4300, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUniformMatrix4fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1931,7 +1931,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glUseProgram_args[] = {"program"};
-static const PyGLCommand pygl_GLSC2_glUseProgram_info = {"glUseProgram", "glUseProgram(program) -> None", "($module, program, /)", pygl_GLSC2_glUseProgram_args, "GLSC2_SC_VERSION_2_0", 1, 4283, PYGL_API_GLSC2, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glUseProgram_info = {"glUseProgram", "glUseProgram(program) -> None", "($module, program, /)", pygl_GLSC2_glUseProgram_args, "GLSC2_SC_VERSION_2_0", 1, 4301, PYGL_API_GLSC2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glUseProgram(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1948,7 +1948,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glVertexAttrib1f_args[] = {"index", "x"};
-static const PyGLCommand pygl_GLSC2_glVertexAttrib1f_info = {"glVertexAttrib1f", "glVertexAttrib1f(index, x) -> None", "($module, index, x, /)", pygl_GLSC2_glVertexAttrib1f_args, "GLSC2_SC_VERSION_2_0", 2, 4284, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glVertexAttrib1f_info = {"glVertexAttrib1f", "glVertexAttrib1f(index, x) -> None", "($module, index, x, /)", pygl_GLSC2_glVertexAttrib1f_args, "GLSC2_SC_VERSION_2_0", 2, 4302, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glVertexAttrib1f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1966,7 +1966,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glVertexAttrib1fv_args[] = {"index", "v"};
-static const PyGLCommand pygl_GLSC2_glVertexAttrib1fv_info = {"glVertexAttrib1fv", "glVertexAttrib1fv(index, v) -> None", "($module, index, v, /)", pygl_GLSC2_glVertexAttrib1fv_args, "GLSC2_SC_VERSION_2_0", 2, 4285, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glVertexAttrib1fv_info = {"glVertexAttrib1fv", "glVertexAttrib1fv(index, v) -> None", "($module, index, v, /)", pygl_GLSC2_glVertexAttrib1fv_args, "GLSC2_SC_VERSION_2_0", 2, 4303, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glVertexAttrib1fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1987,7 +1987,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glVertexAttrib2f_args[] = {"index", "x", "y"};
-static const PyGLCommand pygl_GLSC2_glVertexAttrib2f_info = {"glVertexAttrib2f", "glVertexAttrib2f(index, x, y) -> None", "($module, index, x, y, /)", pygl_GLSC2_glVertexAttrib2f_args, "GLSC2_SC_VERSION_2_0", 3, 4286, PYGL_API_GLSC2, 0, 3, 0};
+static const PyGLCommand pygl_GLSC2_glVertexAttrib2f_info = {"glVertexAttrib2f", "glVertexAttrib2f(index, x, y) -> None", "($module, index, x, y, /)", pygl_GLSC2_glVertexAttrib2f_args, "GLSC2_SC_VERSION_2_0", 3, 4304, PYGL_API_GLSC2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glVertexAttrib2f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2006,7 +2006,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glVertexAttrib2fv_args[] = {"index", "v"};
-static const PyGLCommand pygl_GLSC2_glVertexAttrib2fv_info = {"glVertexAttrib2fv", "glVertexAttrib2fv(index, v) -> None", "($module, index, v, /)", pygl_GLSC2_glVertexAttrib2fv_args, "GLSC2_SC_VERSION_2_0", 2, 4287, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glVertexAttrib2fv_info = {"glVertexAttrib2fv", "glVertexAttrib2fv(index, v) -> None", "($module, index, v, /)", pygl_GLSC2_glVertexAttrib2fv_args, "GLSC2_SC_VERSION_2_0", 2, 4305, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glVertexAttrib2fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2027,7 +2027,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glVertexAttrib3f_args[] = {"index", "x", "y", "z"};
-static const PyGLCommand pygl_GLSC2_glVertexAttrib3f_info = {"glVertexAttrib3f", "glVertexAttrib3f(index, x, y, z) -> None", "($module, index, x, y, z, /)", pygl_GLSC2_glVertexAttrib3f_args, "GLSC2_SC_VERSION_2_0", 4, 4288, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glVertexAttrib3f_info = {"glVertexAttrib3f", "glVertexAttrib3f(index, x, y, z) -> None", "($module, index, x, y, z, /)", pygl_GLSC2_glVertexAttrib3f_args, "GLSC2_SC_VERSION_2_0", 4, 4306, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glVertexAttrib3f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2047,7 +2047,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glVertexAttrib3fv_args[] = {"index", "v"};
-static const PyGLCommand pygl_GLSC2_glVertexAttrib3fv_info = {"glVertexAttrib3fv", "glVertexAttrib3fv(index, v) -> None", "($module, index, v, /)", pygl_GLSC2_glVertexAttrib3fv_args, "GLSC2_SC_VERSION_2_0", 2, 4289, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glVertexAttrib3fv_info = {"glVertexAttrib3fv", "glVertexAttrib3fv(index, v) -> None", "($module, index, v, /)", pygl_GLSC2_glVertexAttrib3fv_args, "GLSC2_SC_VERSION_2_0", 2, 4307, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glVertexAttrib3fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2068,7 +2068,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glVertexAttrib4f_args[] = {"index", "x", "y", "z", "w"};
-static const PyGLCommand pygl_GLSC2_glVertexAttrib4f_info = {"glVertexAttrib4f", "glVertexAttrib4f(index, x, y, z, w) -> None", "($module, index, x, y, z, w, /)", pygl_GLSC2_glVertexAttrib4f_args, "GLSC2_SC_VERSION_2_0", 5, 4290, PYGL_API_GLSC2, 0, 5, 0};
+static const PyGLCommand pygl_GLSC2_glVertexAttrib4f_info = {"glVertexAttrib4f", "glVertexAttrib4f(index, x, y, z, w) -> None", "($module, index, x, y, z, w, /)", pygl_GLSC2_glVertexAttrib4f_args, "GLSC2_SC_VERSION_2_0", 5, 4308, PYGL_API_GLSC2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glVertexAttrib4f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2089,7 +2089,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glVertexAttrib4fv_args[] = {"index", "v"};
-static const PyGLCommand pygl_GLSC2_glVertexAttrib4fv_info = {"glVertexAttrib4fv", "glVertexAttrib4fv(index, v) -> None", "($module, index, v, /)", pygl_GLSC2_glVertexAttrib4fv_args, "GLSC2_SC_VERSION_2_0", 2, 4291, PYGL_API_GLSC2, 0, 2, 0};
+static const PyGLCommand pygl_GLSC2_glVertexAttrib4fv_info = {"glVertexAttrib4fv", "glVertexAttrib4fv(index, v) -> None", "($module, index, v, /)", pygl_GLSC2_glVertexAttrib4fv_args, "GLSC2_SC_VERSION_2_0", 2, 4309, PYGL_API_GLSC2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glVertexAttrib4fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2110,7 +2110,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glVertexAttribPointer_args[] = {"index", "size", "type", "normalized", "stride", "pointer"};
-static const PyGLCommand pygl_GLSC2_glVertexAttribPointer_info = {"glVertexAttribPointer", "glVertexAttribPointer(index, size, type, normalized, stride, pointer) -> None", "($module, index, size, type, normalized, stride, pointer, /)", pygl_GLSC2_glVertexAttribPointer_args, "GLSC2_SC_VERSION_2_0", 6, 4292, PYGL_API_GLSC2, 0, 6, 0};
+static const PyGLCommand pygl_GLSC2_glVertexAttribPointer_info = {"glVertexAttribPointer", "glVertexAttribPointer(index, size, type, normalized, stride, pointer) -> None", "($module, index, size, type, normalized, stride, pointer, /)", pygl_GLSC2_glVertexAttribPointer_args, "GLSC2_SC_VERSION_2_0", 6, 4310, PYGL_API_GLSC2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glVertexAttribPointer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2135,7 +2135,7 @@ _fail:
 
 
 static const char *const pygl_GLSC2_glViewport_args[] = {"x", "y", "width", "height"};
-static const PyGLCommand pygl_GLSC2_glViewport_info = {"glViewport", "glViewport(x, y, width, height) -> None", "($module, x, y, width, height, /)", pygl_GLSC2_glViewport_args, "GLSC2_SC_VERSION_2_0", 4, 4293, PYGL_API_GLSC2, 0, 4, 0};
+static const PyGLCommand pygl_GLSC2_glViewport_info = {"glViewport", "glViewport(x, y, width, height) -> None", "($module, x, y, width, height, /)", pygl_GLSC2_glViewport_args, "GLSC2_SC_VERSION_2_0", 4, 4311, PYGL_API_GLSC2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glViewport(GLProc *self, PyObject *const *_a, size_t _nargsf)

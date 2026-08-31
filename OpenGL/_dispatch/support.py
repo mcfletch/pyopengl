@@ -192,12 +192,13 @@ def array_type_list(names):
 
 
 #: Mirrors the PYGL_RET_* enum in src/c/pygl.h.
-_RET_VOID, _RET_INT, _RET_BYTES, _RET_FLOAT, _RET_OPAQUE = range(5)
+_RET_VOID, _RET_INT, _RET_BYTES, _RET_FLOAT, _RET_OPAQUE, _RET_ADDRESS = range(6)
 
 _RESTYPE_EQUIVALENTS = {
     _RET_VOID: (None,),
     _RET_BYTES: (ctypes.c_char_p,),
     _RET_FLOAT: (ctypes.c_float, ctypes.c_double),
+    _RET_ADDRESS: (ctypes.c_void_p,),
 }
 
 
@@ -223,3 +224,28 @@ def lookup_int(pname):
     output = ctypes.c_int()
     glGetIntegerv(pname, output)
     return int(output.value)
+
+
+_signatures = {}
+
+
+def signature_for(name, text_signature):
+    """An ``inspect.Signature`` for an entry point.
+
+    ``inspect.signature()`` reads ``__text_signature__`` only from the builtin
+    callable types, so an entry point answers with the Signature itself, built
+    from the same string the C carries.
+    """
+    import inspect
+
+    signature = _signatures.get(name)
+    if signature is None:
+        # The leading $module is the convention for a bound self; strip it, as
+        # the entry point takes no such argument.
+        text = text_signature.replace('($module, ', '(').replace('($module)', '()')
+        namespace = {}
+        exec(compile('def %s%s: pass' % (name, text), '<signature>', 'exec'),
+             namespace)
+        signature = inspect.signature(namespace[name])
+        _signatures[name] = signature
+    return signature

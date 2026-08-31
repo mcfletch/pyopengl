@@ -108,7 +108,8 @@ enum {
     PYGL_RET_INT,
     PYGL_RET_BYTES,
     PYGL_RET_FLOAT,
-    PYGL_RET_OPAQUE
+    PYGL_RET_OPAQUE,
+    PYGL_RET_ADDRESS
 };
 
 typedef struct {
@@ -123,6 +124,10 @@ typedef struct {
     uint8_t deprecated;
     uint8_t required_args; /* arguments a caller must supply */
     uint8_t return_kind;
+    /* Set for an entry point written by hand rather than generated.  Its
+     * friendly behaviour is already complete, so a customisation call that
+     * restates it changes nothing rather than demoting to ctypes. */
+    uint8_t hand_written;
 } PyGLCommand;
 
 /* ------------------------------------------------------------------ *
@@ -250,6 +255,7 @@ void pygl_release(PyGLBuf *buffer);
 /* Return-value conversion.  The rule is that the C layer returns the same
  * Python object the ctypes layer returns today. */
 PyObject *pygl_bytes_or_none(const char *value);
+PyObject *pygl_address_or_none(void *value);
 PyObject *pygl_opaque(void *value, const char *type_name);
 
 /* The output-array return.  A one-element result is unpacked to a scalar,

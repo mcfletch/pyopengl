@@ -171,18 +171,13 @@ void *pygl_slot_slow(GLProc *self)
     void *address;
     unsigned long long value;
 
-    if (pygl_current->slots[command->slot] == (void *)PYGL_SLOT_ABSENT) {
-        PyErr_Format(pygl_null_function_error,
-                     "Attempt to call an undefined function %s, check for bool(%s) "
-                     "before calling",
-                     command->name, command->name);
-        return NULL;
-    }
-
-    /* An unresolved slot is the once-per-context-per-entry-point path, so it
-     * can afford to ask the platform which context is actually current.  That
-     * makes a missed make_current notification self-correcting for every entry
-     * point the new context has not yet used. */
+    /* Ask the platform which context is actually current *before* consulting
+     * what this table remembers.  Reaching here is the
+     * once-per-context-per-entry-point path, so it can afford the query, and
+     * doing it first is what makes a missed make_current notification
+     * self-correcting -- including the case where an entry point was probed
+     * before any context existed and the answer was recorded against the
+     * table used when there is none. */
     pygl_sync_context();
 
     if (pygl_current->is_null_context && pygl_needs_context(command)) {
@@ -221,7 +216,12 @@ void *pygl_slot_slow(GLProc *self)
     }
     if (result == Py_None) {
         Py_DECREF(result);
-        pygl_current->slots[command->slot] = (void *)PYGL_SLOT_ABSENT;
+        /* "Absent" is only worth remembering when a context was current to
+         * answer it.  Without one the answer says nothing about any real
+         * context, and remembering it would outlive the reason for it. */
+        if (pygl_current->handle != NULL) {
+            pygl_current->slots[command->slot] = (void *)PYGL_SLOT_ABSENT;
+        }
         PyErr_Format(pygl_null_function_error,
                      "Attempt to call an undefined function %s, check for bool(%s) "
                      "before calling",
@@ -235,7 +235,9 @@ void *pygl_slot_slow(GLProc *self)
     }
     address = (void *)(uintptr_t)value;
     if ((uintptr_t)address < PYGL_SLOT_MIN_REAL) {
-        pygl_current->slots[command->slot] = (void *)PYGL_SLOT_ABSENT;
+        if (pygl_current->handle != NULL) {
+            pygl_current->slots[command->slot] = (void *)PYGL_SLOT_ABSENT;
+        }
         PyErr_Format(pygl_null_function_error,
                      "Attempt to call an undefined function %s, check for bool(%s) "
                      "before calling",
@@ -841,6 +843,16 @@ PyObject *pygl_bytes_or_none(const char *value)
     return PyBytes_FromString(value);
 }
 
+/* A mapped-buffer pointer is handed back as the address itself, which is what
+ * a ctypes c_void_p restype produces: an int, or None for a null pointer. */
+PyObject *pygl_address_or_none(void *value)
+{
+    if (value == NULL) {
+        Py_RETURN_NONE;
+    }
+    return PyLong_FromVoidPtr(value);
+}
+
 PyObject *pygl_opaque(void *value, const char *type_name)
 {
     if (value == NULL) {
@@ -933,6 +945,20 @@ static PyObject *GLProc_get_text_signature(GLProc *self, void *closure)
         Py_RETURN_NONE;
     }
     return PyUnicode_FromString(self->info->text_signature);
+}
+
+/* inspect.signature() only reads __text_signature__ from the builtin callable
+ * types, so an entry point answers with a Signature it builds from the same
+ * string.  It is built on demand: nothing on the call path reads it. */
+static PyObject *GLProc_get_signature(GLProc *self, void *closure)
+{
+    (void)closure;
+    if (self->info->text_signature == NULL) {
+        PyErr_SetString(PyExc_AttributeError, "__signature__");
+        return NULL;
+    }
+    return PyObject_CallMethod(pygl_support, "signature_for", "ss",
+                               self->info->name, self->info->text_signature);
 }
 
 static PyObject *GLProc_get_arg_names(GLProc *self, void *closure)
@@ -1137,8 +1163,14 @@ static PyObject *GLProc_declarative(GLProc *self, PyObject *args, PyObject *kwds
 static PyObject *GLProc_fallback(GLProc *self, PyObject *args, PyObject *kwds,
                                  const char *method)
 {
-    PyObject *keywords = kwds ? kwds : PyDict_New();
-    PyObject *result;
+    PyObject *keywords, *result;
+
+    if (self->info->hand_written) {
+        /* A hand-written entry point already implements what the call
+         * describes, so restating it changes nothing. */
+        return Py_NewRef((PyObject *)self);
+    }
+    keywords = kwds ? kwds : PyDict_New();
     if (keywords == NULL) {
         return NULL;
     }
@@ -1196,6 +1228,7 @@ static PyGetSetDef GLProc_getset[] = {
     {"__qualname__", (getter)GLProc_get_name, NULL, NULL, NULL},
     {"__doc__", (getter)GLProc_get_doc, (setter)GLProc_set_doc, NULL, NULL},
     {"__text_signature__", (getter)GLProc_get_text_signature, NULL, NULL, NULL},
+    {"__signature__", (getter)GLProc_get_signature, NULL, NULL, NULL},
     {"__module__", (getter)GLProc_get_module, NULL, NULL, NULL},
     {"argNames", (getter)GLProc_get_arg_names, NULL, NULL, NULL},
     {"argtypes", (getter)GLProc_get_argtypes, (setter)GLProc_set_argtypes, NULL,

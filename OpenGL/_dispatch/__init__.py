@@ -101,9 +101,13 @@ def install():
     entry_points.update(_c.entry_points)
     configure()
 
-    from OpenGL import wrapper
+    from OpenGL import platform, wrapper
 
     _base_wrapper = wrapper.wrapper
+    # The platform installs its bound methods into the module namespace at
+    # import, and that is the name the friendly modules call, so the module
+    # attribute is what has to be replaced.
+    _base_extension = platform.createExtensionFunction
 
     def wrapper_(base):
         """A C entry point already implements what the wrapper would add."""
@@ -111,9 +115,50 @@ def install():
             return base
         return _base_wrapper(base)
 
+    def createExtensionFunction(functionName, dll, *args, **named):
+        """A few friendly modules rebuild an entry point from scratch.
+
+        ``OpenGL.GL.VERSION.GL_2_0`` builds its own ``glShaderSource`` rather
+        than customising the generated one, so that declaration never reaches
+        ``createFunction``.  Catching it here lets the hand-written C
+        implementation win where there is one.
+        """
+        binding = _base_extension(functionName, dll, *args, **named)
+        proc = _handwritten_for(functionName, dll)
+        if proc is None:
+            return binding
+        from OpenGL._dispatch import support
+
+        support.register_ctypes_binding(_api_of_dll(dll), functionName, binding)
+        return proc
+
     wrapper.wrapper = wrapper_
+    platform.createExtensionFunction = createExtensionFunction
     ACTIVE = True
     return True
+
+
+#: Which namespace a library object serves.  GL, GLX and WGL share one library,
+#: so the name's prefix settles it where they overlap.
+_DLL_APIS = ('GLES2', 'GLES3', 'GLES1', 'EGL', 'GL')
+
+
+def _api_of_dll(dll):
+    from OpenGL import platform
+
+    for api in _DLL_APIS:
+        if getattr(platform.PLATFORM, api, None) is dll:
+            return api
+    return 'GL'
+
+
+def _handwritten_for(name, dll):
+    """The hand-written C entry point for a rebuilt binding, if there is one."""
+    from OpenGL._dispatch import _tables
+
+    if name not in _tables.HANDWRITTEN:
+        return None
+    return entry_points.get((_api_of_dll(dll), name))
 
 
 def entry_point_for(function, binding):

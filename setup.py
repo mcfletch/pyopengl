@@ -24,6 +24,7 @@ def dispatch_extension():
     if not sources:
         return []
     sources = [os.path.relpath(path, HERE).replace(os.sep, '/') for path in sources]
+    sources.insert(0, 'src/c/pygl_handwritten.c')
     sources.insert(0, 'src/c/pygl_runtime.c')
     return [
         Extension(

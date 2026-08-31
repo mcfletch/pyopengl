@@ -3,7 +3,7 @@
 import os
 
 from . import ctypes_model as cm
-from . import emit_c, extract, glgets
+from . import emit_c, extract, glgets, handwritten
 
 __all__ = ['generate', 'allocate_slots', 'emit_elements_header']
 
@@ -109,6 +109,14 @@ def emit_tables_module(array_types, slots):
     for name in array_types:
         lines.append('    %r,' % (name,))
     lines.append(']')
+    lines.append('')
+    lines.append('#: Entry points implemented by a hand-written C function.  A')
+    lines.append('#: friendly module that rebuilds one of these from scratch is')
+    lines.append('#: still routed to the C implementation.')
+    lines.append('HANDWRITTEN = frozenset([')
+    for entry in handwritten.ENTRIES:
+        lines.append('    %r,' % (entry.name,))
+    lines.append('])')
     lines.append('')
     lines.append('SLOTS = {')
     for key in sorted(slots):
