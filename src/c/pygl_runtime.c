@@ -509,7 +509,15 @@ int pygl_array_in_sized(GLProc *self, PyObject *object, const PyGLElement *eleme
     if (pygl_array_in(self, object, element, index, out) < 0) {
         return -1;
     }
-    if (out->pointer == NULL || !pygl_array_size_checking) {
+    if (out->owner == NULL && !out->have_view) {
+        /* The argument was None, which is a null pointer rather than an array
+         * of the wrong length.  A zero-length sequence is *not* this case: it
+         * converts to an empty array whose data pointer is also null, and
+         * skipping the check for it would hand the driver address zero to read
+         * from. */
+        return 0;
+    }
+    if (!pygl_array_size_checking) {
         return 0;
     }
     if (element->itemsize == 0) {
