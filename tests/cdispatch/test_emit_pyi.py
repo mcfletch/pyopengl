@@ -224,3 +224,13 @@ class TestConstants:
         assert 'GL_TEXTURE_2D' in constants['GL']
         assert 'GL_ARRAY_BUFFER' in constants['GL']
         assert len(constants['GL']) > 5000
+
+
+def test_a_stub_is_not_exhaustive():
+    """The namespace exports more than the registry describes.
+
+    A stub is exhaustive unless it says otherwise, so without a fallback every
+    array type, error class and sub-package would be an error in correct code.
+    """
+    text = emit_pyi.emit_module('GL', [], constants=['GL_TEXTURE_2D'])
+    assert 'def __getattr__(name: str) -> Any:' in text

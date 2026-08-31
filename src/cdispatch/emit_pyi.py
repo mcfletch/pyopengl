@@ -60,6 +60,21 @@ from typing import Any, TypeAlias
 '''
 
 
+#: The namespace exports more than the registry describes -- the array types,
+#: the error classes, the sub-packages, the helper libraries.  A stub is
+#: exhaustive unless it says otherwise, so without this every one of those
+#: would be an error in code that is correct.
+_FALLBACK = '''
+def __getattr__(name: str) -> Any:
+    """Anything this stub does not describe.
+
+    The generated part covers the entry points and the enums.  What is left --
+    the array types, the error classes, the sub-packages and the helper
+    libraries -- is described by the modules themselves.
+    """
+'''
+
+
 def _alias_declarations():
     lines = [
         '# What may be *passed* where an array is wanted.  Deliberately wide:',
@@ -202,4 +217,5 @@ def emit_module(api, commands, constants=()):
         parts.append(emit_signature(command).replace(': ...', ':', 1))
         parts.append('    """%s"""' % (_safe_docstring(doc),))
         parts.append('')
+    parts.append(_FALLBACK)
     return '\n'.join(parts)

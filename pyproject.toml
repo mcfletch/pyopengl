@@ -67,6 +67,11 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools.dynamic]
 version = {attr = "OpenGL.version.__version__"}
 
+[tool.setuptools.package-data]
+# py.typed tells a type checker the package ships type information; without it
+# the .pyi stubs beside the modules are ignored.
+OpenGL = ["py.typed", "*/__init__.pyi"]
+
 [tool.setuptools.packages.find]
 namespaces=false
 include=["OpenGL*"]

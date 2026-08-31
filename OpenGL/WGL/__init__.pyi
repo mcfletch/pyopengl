@@ -776,3 +776,12 @@ def wglWaitForMscOML(hdc: Any, target_msc: int, divisor: int, remainder: int, us
 
 def wglWaitForSbcOML(hdc: Any, target_sbc: int, ust: AnyArray, msc: AnyArray, sbc: AnyArray) -> int:
     """wglWaitForSbcOML(hdc, target_sbc, ust, msc, sbc) -> BOOL"""
+
+
+def __getattr__(name: str) -> Any:
+    """Anything this stub does not describe.
+
+    The generated part covers the entry points and the enums.  What is left --
+    the array types, the error classes, the sub-packages and the helper
+    libraries -- is described by the modules themselves.
+    """

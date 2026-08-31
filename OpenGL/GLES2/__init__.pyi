@@ -4236,3 +4236,12 @@ def glWeightPathsNV(resultPath: int, numPaths: int, paths: UIntArray, weights: F
 
 def glWindowRectanglesEXT(mode: int, count: int, box: IntArray) -> None:
     """glWindowRectanglesEXT(mode, count, box) -> None"""
+
+
+def __getattr__(name: str) -> Any:
+    """Anything this stub does not describe.
+
+    The generated part covers the entry points and the enums.  What is left --
+    the array types, the error classes, the sub-packages and the helper
+    libraries -- is described by the modules themselves.
+    """

@@ -198,7 +198,26 @@ it that way.</p>
     <td>logs every call</td>
     <td>not implemented in C.  Tracing selects the ctypes implementation for
         the process.</td></tr>
+
+<tr><td><code>glFoo.__doc__</code> and <code>inspect.signature(glFoo)</code></td>
+    <td><code>None</code>; <code>signature()</code> raises</td>
+    <td>a signature line, and a Signature.  Gained, not changed.</td></tr>
+
+<tr><td><code>glFoo.extension</code> for a command promoted into core</td>
+    <td>whichever declaration the namespace ended up holding, which depends on
+        import order</td>
+    <td>the core declaration.  A command adopted into a GL version is declared
+        twice, by the extension that introduced it and by the version that
+        adopted it; the core one resolves without an extension check, so an
+        entry point resolves in a context that has the function but no longer
+        advertises the old extension string.  No entry point that resolves
+        under ctypes fails to resolve under C.</td></tr>
 </table>
+
+<p>The full list is not a matter of recollection:
+<code>tests/test_attribute_surface.py</code> surveys every entry point under
+both implementations in separate processes and compares the answers, so a
+difference that is not in the table above is a test failure.</p>
 
 <h3>Ways out</h3>
 
