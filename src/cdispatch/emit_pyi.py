@@ -61,7 +61,11 @@ from typing import Any, TypeAlias
 
 
 def _alias_declarations():
-    lines = []
+    lines = [
+        '# What may be *passed* where an array is wanted.  Deliberately wide:',
+        '# a matching buffer is used directly and anything else is converted,',
+        '# and None is a null pointer wherever one is meaningful.',
+    ]
     for alias in sorted(set(ARRAY_ALIASES.values())):
         lines.append(
             '%s: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None'
@@ -70,6 +74,14 @@ def _alias_declarations():
     lines.append(
         'AnyArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None'
     )
+    lines.append('')
+    lines.append('# What is *returned*.  Which concrete type depends on the')
+    lines.append('# configured array module -- numpy by default -- so the name')
+    lines.append('# records the element type and the alias stays open.  It must')
+    lines.append('# not include None: an output array is always an array.')
+    for alias in sorted(set(ARRAY_ALIASES.values())):
+        lines.append('%sResult: TypeAlias = Any' % (alias,))
+    lines.append('AnyArrayResult: TypeAlias = Any')
     return '\n'.join(lines)
 
 
@@ -92,7 +104,7 @@ def _annotation(parameter):
 def _return_annotation(command):
     outputs = command.output_parameters
     if outputs:
-        annotations = [_array_annotation(output) for output in outputs]
+        annotations = ['%sResult' % (_array_annotation(o),) for o in outputs]
         if len(annotations) == 1:
             return annotations[0]
         return 'tuple[%s]' % (', '.join(annotations),)

@@ -11,6 +11,9 @@ from typing import Any, TypeAlias
 #: Anything the layer accepts where an array of this element type is wanted.
 #: A matching buffer is used directly and anything else is converted, so the
 #: alias is deliberately wide.
+# What may be *passed* where an array is wanted.  Deliberately wide:
+# a matching buffer is used directly and anything else is converted,
+# and None is a null pointer wherever one is meaningful.
 ByteArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 DoubleArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 FloatArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
@@ -22,6 +25,22 @@ UInt64Array: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 UIntArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 UShortArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 AnyArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
+
+# What is *returned*.  Which concrete type depends on the
+# configured array module -- numpy by default -- so the name
+# records the element type and the alias stays open.  It must
+# not include None: an output array is always an array.
+ByteArrayResult: TypeAlias = Any
+DoubleArrayResult: TypeAlias = Any
+FloatArrayResult: TypeAlias = Any
+Int64ArrayResult: TypeAlias = Any
+IntArrayResult: TypeAlias = Any
+ShortArrayResult: TypeAlias = Any
+UByteArrayResult: TypeAlias = Any
+UInt64ArrayResult: TypeAlias = Any
+UIntArrayResult: TypeAlias = Any
+UShortArrayResult: TypeAlias = Any
+AnyArrayResult: TypeAlias = Any
 
 # The enums.  They are Constant instances, which subclass int.
 GL_3DC_XY_AMD: int
@@ -1119,10 +1138,10 @@ def glFrustumx(l: int, r: int, b: int, t: int, n: int, f: int) -> None:
 def glFrustumxOES(l: int, r: int, b: int, t: int, n: int, f: int) -> None:
     """glFrustumxOES(l, r, b, t, n, f) -> None"""
 
-def glGenBuffers(n: int, buffers: UIntArray | None = None) -> UIntArray:
+def glGenBuffers(n: int, buffers: UIntArray | None = None) -> UIntArrayResult:
     """glGenBuffers(n) -> buffers"""
 
-def glGenFencesNV(n: int, fences: UIntArray | None = None) -> UIntArray:
+def glGenFencesNV(n: int, fences: UIntArray | None = None) -> UIntArrayResult:
     """glGenFencesNV(n) -> fences"""
 
 def glGenFramebuffersOES(n: int, framebuffers: UIntArray) -> None:
@@ -1131,7 +1150,7 @@ def glGenFramebuffersOES(n: int, framebuffers: UIntArray) -> None:
 def glGenRenderbuffersOES(n: int, renderbuffers: UIntArray) -> None:
     """glGenRenderbuffersOES(n, renderbuffers) -> None"""
 
-def glGenTextures(n: int, textures: UIntArray | None = None) -> UIntArray:
+def glGenTextures(n: int, textures: UIntArray | None = None) -> UIntArrayResult:
     """glGenTextures(n) -> textures"""
 
 def glGenVertexArraysOES(n: int, arrays: UIntArray) -> None:
@@ -1140,10 +1159,10 @@ def glGenVertexArraysOES(n: int, arrays: UIntArray) -> None:
 def glGenerateMipmapOES(target: int) -> None:
     """glGenerateMipmapOES(target) -> None"""
 
-def glGetBooleanv(pname: int, data: UByteArray | None = None) -> UByteArray:
+def glGetBooleanv(pname: int, data: UByteArray | None = None) -> UByteArrayResult:
     """glGetBooleanv(pname) -> data"""
 
-def glGetBufferParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetBufferParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetBufferParameteriv(target, pname) -> params"""
 
 def glGetBufferPointervOES(target: int, pname: int, params: AnyArray) -> None:
@@ -1152,19 +1171,19 @@ def glGetBufferPointervOES(target: int, pname: int, params: AnyArray) -> None:
 def glGetClipPlanef(plane: int, equation: FloatArray) -> None:
     """glGetClipPlanef(plane, equation) -> None"""
 
-def glGetClipPlanefOES(plane: int, equation: FloatArray | None = None) -> FloatArray:
+def glGetClipPlanefOES(plane: int, equation: FloatArray | None = None) -> FloatArrayResult:
     """glGetClipPlanefOES(plane) -> equation"""
 
 def glGetClipPlanex(plane: int, equation: IntArray) -> None:
     """glGetClipPlanex(plane, equation) -> None"""
 
-def glGetClipPlanexOES(plane: int, equation: IntArray | None = None) -> IntArray:
+def glGetClipPlanexOES(plane: int, equation: IntArray | None = None) -> IntArrayResult:
     """glGetClipPlanexOES(plane) -> equation"""
 
-def glGetConvolutionParameterxvOES(target: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetConvolutionParameterxvOES(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetConvolutionParameterxvOES(target, pname) -> params"""
 
-def glGetDebugMessageLog(count: int, bufSize: int, sources: UIntArray | None = None, types: UIntArray | None = None, ids: UIntArray | None = None, severities: UIntArray | None = None, lengths: IntArray | None = None, messageLog: ByteArray | None = None) -> tuple[UIntArray, IntArray, ByteArray, UIntArray, UIntArray, UIntArray]:
+def glGetDebugMessageLog(count: int, bufSize: int, sources: UIntArray | None = None, types: UIntArray | None = None, ids: UIntArray | None = None, severities: UIntArray | None = None, lengths: IntArray | None = None, messageLog: ByteArray | None = None) -> tuple[UIntArrayResult, IntArrayResult, ByteArrayResult, UIntArrayResult, UIntArrayResult, UIntArrayResult]:
     """glGetDebugMessageLog(count, bufSize) -> ids, lengths, messageLog, severities, sources, types"""
 
 def glGetDebugMessageLogKHR(count: int, bufSize: int, sources: UIntArray, types: UIntArray, ids: UIntArray, severities: UIntArray, lengths: IntArray, messageLog: ByteArray) -> int:
@@ -1179,16 +1198,16 @@ def glGetDriverControlsQCOM(num: IntArray, size: int, driverControls: UIntArray)
 def glGetError() -> int:
     """glGetError() -> GLenum"""
 
-def glGetFenceivNV(fence: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetFenceivNV(fence: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetFenceivNV(fence, pname) -> params"""
 
 def glGetFixedv(pname: int, params: IntArray) -> None:
     """glGetFixedv(pname, params) -> None"""
 
-def glGetFixedvOES(pname: int, params: IntArray | None = None) -> IntArray:
+def glGetFixedvOES(pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetFixedvOES(pname) -> params"""
 
-def glGetFloatv(pname: int, data: FloatArray | None = None) -> FloatArray:
+def glGetFloatv(pname: int, data: FloatArray | None = None) -> FloatArrayResult:
     """glGetFloatv(pname) -> data"""
 
 def glGetFramebufferAttachmentParameterivOES(target: int, attachment: int, pname: int, params: IntArray) -> None:
@@ -1197,19 +1216,19 @@ def glGetFramebufferAttachmentParameterivOES(target: int, attachment: int, pname
 def glGetGraphicsResetStatusEXT() -> int:
     """glGetGraphicsResetStatusEXT() -> GLenum"""
 
-def glGetHistogramParameterxvOES(target: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetHistogramParameterxvOES(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetHistogramParameterxvOES(target, pname) -> params"""
 
 def glGetInteger64vAPPLE(pname: int, params: Int64Array) -> None:
     """glGetInteger64vAPPLE(pname, params) -> None"""
 
-def glGetIntegerv(pname: int, data: IntArray | None = None) -> IntArray:
+def glGetIntegerv(pname: int, data: IntArray | None = None) -> IntArrayResult:
     """glGetIntegerv(pname) -> data"""
 
-def glGetLightfv(light: int, pname: int, params: FloatArray | None = None) -> FloatArray:
+def glGetLightfv(light: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
     """glGetLightfv(light, pname) -> params"""
 
-def glGetLightxOES(light: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetLightxOES(light: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetLightxOES(light, pname) -> params"""
 
 def glGetLightxv(light: int, pname: int, params: IntArray) -> None:
@@ -1218,10 +1237,10 @@ def glGetLightxv(light: int, pname: int, params: IntArray) -> None:
 def glGetLightxvOES(light: int, pname: int, params: IntArray) -> None:
     """glGetLightxvOES(light, pname, params) -> None"""
 
-def glGetMapxvOES(target: int, query: int, v: IntArray | None = None) -> IntArray:
+def glGetMapxvOES(target: int, query: int, v: IntArray | None = None) -> IntArrayResult:
     """glGetMapxvOES(target, query) -> v"""
 
-def glGetMaterialfv(face: int, pname: int, params: FloatArray | None = None) -> FloatArray:
+def glGetMaterialfv(face: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
     """glGetMaterialfv(face, pname) -> params"""
 
 def glGetMaterialxOES(face: int, pname: int, param: int) -> None:
@@ -1233,22 +1252,22 @@ def glGetMaterialxv(face: int, pname: int, params: IntArray) -> None:
 def glGetMaterialxvOES(face: int, pname: int, params: IntArray) -> None:
     """glGetMaterialxvOES(face, pname, params) -> None"""
 
-def glGetObjectLabel(identifier: int, name: int, bufSize: int, length: IntArray | None = None, label: ByteArray | None = None) -> tuple[ByteArray, IntArray]:
+def glGetObjectLabel(identifier: int, name: int, bufSize: int, length: IntArray | None = None, label: ByteArray | None = None) -> tuple[ByteArrayResult, IntArrayResult]:
     """glGetObjectLabel(identifier, name, bufSize) -> label, length"""
 
 def glGetObjectLabelKHR(identifier: int, name: int, bufSize: int, length: IntArray, label: ByteArray) -> None:
     """glGetObjectLabelKHR(identifier, name, bufSize, length, label) -> None"""
 
-def glGetObjectPtrLabel(ptr: AnyArray, bufSize: int, length: IntArray | None = None, label: ByteArray | None = None) -> tuple[ByteArray, IntArray]:
+def glGetObjectPtrLabel(ptr: AnyArray, bufSize: int, length: IntArray | None = None, label: ByteArray | None = None) -> tuple[ByteArrayResult, IntArrayResult]:
     """glGetObjectPtrLabel(ptr, bufSize) -> label, length"""
 
 def glGetObjectPtrLabelKHR(ptr: AnyArray, bufSize: int, length: IntArray, label: ByteArray) -> None:
     """glGetObjectPtrLabelKHR(ptr, bufSize, length, label) -> None"""
 
-def glGetPixelMapxv(map: int, size: int, values: IntArray | None = None) -> IntArray:
+def glGetPixelMapxv(map: int, size: int, values: IntArray | None = None) -> IntArrayResult:
     """glGetPixelMapxv(map, size) -> values"""
 
-def glGetPointerv(pname: int, params: AnyArray | None = None) -> AnyArray:
+def glGetPointerv(pname: int, params: AnyArray | None = None) -> AnyArrayResult:
     """glGetPointerv(pname) -> params"""
 
 def glGetPointervKHR(pname: int, params: AnyArray) -> None:
@@ -1263,16 +1282,16 @@ def glGetString(name: int) -> bytes:
 def glGetSyncivAPPLE(sync: Any, pname: int, count: int, length: IntArray, values: IntArray) -> None:
     """glGetSyncivAPPLE(sync, pname, count, length, values) -> None"""
 
-def glGetTexEnvfv(target: int, pname: int, params: FloatArray | None = None) -> FloatArray:
+def glGetTexEnvfv(target: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
     """glGetTexEnvfv(target, pname) -> params"""
 
-def glGetTexEnviv(target: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetTexEnviv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetTexEnviv(target, pname) -> params"""
 
 def glGetTexEnvxv(target: int, pname: int, params: IntArray) -> None:
     """glGetTexEnvxv(target, pname, params) -> None"""
 
-def glGetTexEnvxvOES(target: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetTexEnvxvOES(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetTexEnvxvOES(target, pname) -> params"""
 
 def glGetTexGenfvOES(coord: int, pname: int, params: FloatArray) -> None:
@@ -1281,22 +1300,22 @@ def glGetTexGenfvOES(coord: int, pname: int, params: FloatArray) -> None:
 def glGetTexGenivOES(coord: int, pname: int, params: IntArray) -> None:
     """glGetTexGenivOES(coord, pname, params) -> None"""
 
-def glGetTexGenxvOES(coord: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetTexGenxvOES(coord: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetTexGenxvOES(coord, pname) -> params"""
 
-def glGetTexLevelParameterxvOES(target: int, level: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetTexLevelParameterxvOES(target: int, level: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetTexLevelParameterxvOES(target, level, pname) -> params"""
 
-def glGetTexParameterfv(target: int, pname: int, params: FloatArray | None = None) -> FloatArray:
+def glGetTexParameterfv(target: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
     """glGetTexParameterfv(target, pname) -> params"""
 
-def glGetTexParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetTexParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetTexParameteriv(target, pname) -> params"""
 
 def glGetTexParameterxv(target: int, pname: int, params: IntArray) -> None:
     """glGetTexParameterxv(target, pname, params) -> None"""
 
-def glGetTexParameterxvOES(target: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetTexParameterxvOES(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetTexParameterxvOES(target, pname) -> params"""
 
 def glGetnUniformfvEXT(program: int, location: int, bufSize: int, params: FloatArray) -> None:
@@ -1644,7 +1663,7 @@ def glPushGroupMarkerEXT(length: int, marker: ByteArray) -> None:
 def glPushMatrix() -> None:
     """glPushMatrix() -> None"""
 
-def glQueryMatrixxOES(mantissa: IntArray | None = None, exponent: IntArray | None = None) -> tuple[IntArray, IntArray]:
+def glQueryMatrixxOES(mantissa: IntArray | None = None, exponent: IntArray | None = None) -> tuple[IntArrayResult, IntArrayResult]:
     """glQueryMatrixxOES() -> exponent, mantissa"""
 
 def glRasterPos2xOES(x: int, y: int) -> None:

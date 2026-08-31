@@ -11,6 +11,9 @@ from typing import Any, TypeAlias
 #: Anything the layer accepts where an array of this element type is wanted.
 #: A matching buffer is used directly and anything else is converted, so the
 #: alias is deliberately wide.
+# What may be *passed* where an array is wanted.  Deliberately wide:
+# a matching buffer is used directly and anything else is converted,
+# and None is a null pointer wherever one is meaningful.
 ByteArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 DoubleArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 FloatArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
@@ -22,6 +25,22 @@ UInt64Array: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 UIntArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 UShortArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 AnyArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
+
+# What is *returned*.  Which concrete type depends on the
+# configured array module -- numpy by default -- so the name
+# records the element type and the alias stays open.  It must
+# not include None: an output array is always an array.
+ByteArrayResult: TypeAlias = Any
+DoubleArrayResult: TypeAlias = Any
+FloatArrayResult: TypeAlias = Any
+Int64ArrayResult: TypeAlias = Any
+IntArrayResult: TypeAlias = Any
+ShortArrayResult: TypeAlias = Any
+UByteArrayResult: TypeAlias = Any
+UInt64ArrayResult: TypeAlias = Any
+UIntArrayResult: TypeAlias = Any
+UShortArrayResult: TypeAlias = Any
+AnyArrayResult: TypeAlias = Any
 
 # The enums.  They are Constant instances, which subclass int.
 GLX_3DFX_FULLSCREEN_MODE_MESA: int

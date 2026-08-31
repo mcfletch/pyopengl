@@ -79,7 +79,7 @@ class TestSignatures:
         assert (
             text
             == 'def glGenTextures(n: int, textures: UIntArray | None = None)'
-            ' -> UIntArray: ...'
+            ' -> UIntArrayResult: ...'
         )
 
     def test_several_outputs_return_a_tuple(self):
@@ -105,7 +105,7 @@ class TestSignatures:
                 ],
             )
         )
-        assert text.endswith('-> tuple[IntArray, IntArray]: ...')
+        assert text.endswith('-> tuple[IntArrayResult, IntArrayResult]: ...')
 
     def test_a_scalar_return(self):
         text = emit_pyi.emit_signature(

@@ -11,6 +11,9 @@ from typing import Any, TypeAlias
 #: Anything the layer accepts where an array of this element type is wanted.
 #: A matching buffer is used directly and anything else is converted, so the
 #: alias is deliberately wide.
+# What may be *passed* where an array is wanted.  Deliberately wide:
+# a matching buffer is used directly and anything else is converted,
+# and None is a null pointer wherever one is meaningful.
 ByteArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 DoubleArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 FloatArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
@@ -22,6 +25,22 @@ UInt64Array: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 UIntArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 UShortArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
 AnyArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None
+
+# What is *returned*.  Which concrete type depends on the
+# configured array module -- numpy by default -- so the name
+# records the element type and the alias stays open.  It must
+# not include None: an output array is always an array.
+ByteArrayResult: TypeAlias = Any
+DoubleArrayResult: TypeAlias = Any
+FloatArrayResult: TypeAlias = Any
+Int64ArrayResult: TypeAlias = Any
+IntArrayResult: TypeAlias = Any
+ShortArrayResult: TypeAlias = Any
+UByteArrayResult: TypeAlias = Any
+UInt64ArrayResult: TypeAlias = Any
+UIntArrayResult: TypeAlias = Any
+UShortArrayResult: TypeAlias = Any
+AnyArrayResult: TypeAlias = Any
 
 # The enums.  They are Constant instances, which subclass int.
 GL_ACTIVE_TEXTURE: int
@@ -416,16 +435,16 @@ def glFramebufferTexture2D(target: int, attachment: int, textarget: int, texture
 def glFrontFace(mode: int) -> None:
     """glFrontFace(mode) -> None"""
 
-def glGenBuffers(n: int, buffers: UIntArray | None = None) -> UIntArray:
+def glGenBuffers(n: int, buffers: UIntArray | None = None) -> UIntArrayResult:
     """glGenBuffers(n) -> buffers"""
 
-def glGenFramebuffers(n: int, framebuffers: UIntArray | None = None) -> UIntArray:
+def glGenFramebuffers(n: int, framebuffers: UIntArray | None = None) -> UIntArrayResult:
     """glGenFramebuffers(n) -> framebuffers"""
 
-def glGenRenderbuffers(n: int, renderbuffers: UIntArray | None = None) -> UIntArray:
+def glGenRenderbuffers(n: int, renderbuffers: UIntArray | None = None) -> UIntArrayResult:
     """glGenRenderbuffers(n) -> renderbuffers"""
 
-def glGenTextures(n: int, textures: UIntArray | None = None) -> UIntArray:
+def glGenTextures(n: int, textures: UIntArray | None = None) -> UIntArrayResult:
     """glGenTextures(n) -> textures"""
 
 def glGenerateMipmap(target: int) -> None:
@@ -434,52 +453,52 @@ def glGenerateMipmap(target: int) -> None:
 def glGetAttribLocation(program: int, name: ByteArray) -> int:
     """glGetAttribLocation(program, name) -> GLint"""
 
-def glGetBooleanv(pname: int, data: UByteArray | None = None) -> UByteArray:
+def glGetBooleanv(pname: int, data: UByteArray | None = None) -> UByteArrayResult:
     """glGetBooleanv(pname) -> data"""
 
-def glGetBufferParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetBufferParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetBufferParameteriv(target, pname) -> params"""
 
 def glGetError() -> int:
     """glGetError() -> GLenum"""
 
-def glGetFloatv(pname: int, data: FloatArray | None = None) -> FloatArray:
+def glGetFloatv(pname: int, data: FloatArray | None = None) -> FloatArrayResult:
     """glGetFloatv(pname) -> data"""
 
-def glGetFramebufferAttachmentParameteriv(target: int, attachment: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetFramebufferAttachmentParameteriv(target: int, attachment: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetFramebufferAttachmentParameteriv(target, attachment, pname) -> params"""
 
 def glGetGraphicsResetStatus() -> int:
     """glGetGraphicsResetStatus() -> GLenum"""
 
-def glGetIntegerv(pname: int, data: IntArray | None = None) -> IntArray:
+def glGetIntegerv(pname: int, data: IntArray | None = None) -> IntArrayResult:
     """glGetIntegerv(pname) -> data"""
 
-def glGetProgramiv(program: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetProgramiv(program: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetProgramiv(program, pname) -> params"""
 
-def glGetRenderbufferParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetRenderbufferParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetRenderbufferParameteriv(target, pname) -> params"""
 
 def glGetString(name: int) -> bytes:
     """glGetString(name) -> GLubyte"""
 
-def glGetTexParameterfv(target: int, pname: int, params: FloatArray | None = None) -> FloatArray:
+def glGetTexParameterfv(target: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
     """glGetTexParameterfv(target, pname) -> params"""
 
-def glGetTexParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetTexParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetTexParameteriv(target, pname) -> params"""
 
 def glGetUniformLocation(program: int, name: ByteArray) -> int:
     """glGetUniformLocation(program, name) -> GLint"""
 
-def glGetVertexAttribPointerv(index: int, pname: int, pointer: AnyArray | None = None) -> AnyArray:
+def glGetVertexAttribPointerv(index: int, pname: int, pointer: AnyArray | None = None) -> AnyArrayResult:
     """glGetVertexAttribPointerv(index, pname) -> pointer"""
 
-def glGetVertexAttribfv(index: int, pname: int, params: FloatArray | None = None) -> FloatArray:
+def glGetVertexAttribfv(index: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
     """glGetVertexAttribfv(index, pname) -> params"""
 
-def glGetVertexAttribiv(index: int, pname: int, params: IntArray | None = None) -> IntArray:
+def glGetVertexAttribiv(index: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetVertexAttribiv(index, pname) -> params"""
 
 def glGetnUniformfv(program: int, location: int, bufSize: int, params: FloatArray) -> None:
