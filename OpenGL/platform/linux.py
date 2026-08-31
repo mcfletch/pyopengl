@@ -172,18 +172,22 @@ class LinuxPlatform(baseplatform.BasePlatform):
         """Resolve an extension procedure via the interface that owns it
 
         An ``egl*`` or ``glX*`` name names its own interface, so it is resolved
-        by that interface's get-proc-address and never the other's: GLVND's
-        glXGetProcAddressARB manufactures a non-null dispatch stub for *any*
-        name, so asking it for an ``egl*`` function (as happened when no context
-        was current) returns a pointer that is not the real entry point and
-        whose call silently fails.  A core ``gl*`` name is served by both, so it
-        follows whichever API currently owns a context, falling back -- when
-        nothing is current -- to GLX (the historical desktop default).
+        by that interface's get-proc-address and never the other's.  A core
+        ``gl*`` name is served by both, so it follows whichever API currently
+        owns a context, falling back -- when nothing is current -- to GLX (the
+        historical desktop default).
         """
         prefix = name[:3]
         if isinstance(prefix, bytes):
             prefix = prefix.decode('ascii', 'replace')
         if prefix == 'egl':
+            # The prefix, not the current context, decides here: GLVND's
+            # glXGetProcAddressARB manufactures a non-null dispatch stub for
+            # *any* name asked of it, including an ``egl*`` one.  That pointer
+            # marshals and calls without error but is not the function's entry
+            # point, so an EGL client extension resolved through GLX (as the
+            # device-enumeration family was, being called before any context
+            # exists) silently returns failure with EGL_SUCCESS set.
             order = (self.eglGetProcAddress, self.glXGetProcAddressARB)
         elif prefix == 'glX':
             order = (self.glXGetProcAddressARB, self.eglGetProcAddress)

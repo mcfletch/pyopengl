@@ -9,7 +9,7 @@ eglGetProcAddress and a ``glX*`` name through glXGetProcAddressARB, regardless
 of which context (if any) is current.
 """
 
-from OpenGL.platform.unix import UnixPlatform
+from OpenGL.platform.linux import LinuxPlatform
 
 
 class _Recorder:
@@ -25,7 +25,7 @@ class _Recorder:
 
 
 def _platform(egl, glx, active_api):
-    plat = UnixPlatform()
+    plat = LinuxPlatform()
     # lazy_property is a non-data descriptor, so these instance attributes
     # shadow the real library resolvers -- no libGL/libEGL is loaded.
     plat.eglGetProcAddress = egl
