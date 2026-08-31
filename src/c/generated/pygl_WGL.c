@@ -6,8 +6,54 @@
 #include "pygl_elements.h"
 #include "pygl_glgets.h"
 
+static const char *const pygl_WGL_ChoosePixelFormat_args[] = {"hDc", "pPfd"};
+static const PyGLCommand pygl_WGL_ChoosePixelFormat_info = {"ChoosePixelFormat", "ChoosePixelFormat(hDc, pPfd) -> c_int", "($module, hDc, pPfd, /)", pygl_WGL_ChoosePixelFormat_args, "WGL_VERSION_WGL_1_0", 2, 4369, PYGL_API_WGL, 0, 2, 1};
+
+static PyObject *
+pygl_WGL_ChoosePixelFormat(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(2);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hDc);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(1, pPfd, &pygl_elem_any);
+    PYGL_CALL_R(_result, int, (void *, void *), (hDc, pPfd));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_DescribePixelFormat_args[] = {"hdc", "ipfd", "cjpfd", "ppfd"};
+static const PyGLCommand pygl_WGL_DescribePixelFormat_info = {"DescribePixelFormat", "DescribePixelFormat(hdc, ipfd, cjpfd, ppfd) -> c_int", "($module, hdc, ipfd, cjpfd, ppfd, /)", pygl_WGL_DescribePixelFormat_args, "WGL_VERSION_WGL_1_0", 4, 4370, PYGL_API_WGL, 0, 4, 1};
+
+static PyObject *
+pygl_WGL_DescribePixelFormat(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(4);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hdc);
+    PYGL_I(1, ipfd);
+    PYGL_U(2, cjpfd);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(3, ppfd, &pygl_elem_any);
+    PYGL_CALL_R(_result, int, (void *, int, unsigned int, void *), (hdc, ipfd, cjpfd, ppfd));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_GetEnhMetaFilePixelFormat_args[] = {"hemf", "cbBuffer", "ppfd"};
-static const PyGLCommand pygl_WGL_GetEnhMetaFilePixelFormat_info = {"GetEnhMetaFilePixelFormat", "GetEnhMetaFilePixelFormat(hemf, cbBuffer, ppfd) -> UINT", "($module, hemf, cbBuffer, ppfd, /)", pygl_WGL_GetEnhMetaFilePixelFormat_args, "WGL_VERSION_WGL_1_0", 3, 4192, PYGL_API_WGL, 0, 3, 1};
+static const PyGLCommand pygl_WGL_GetEnhMetaFilePixelFormat_info = {"GetEnhMetaFilePixelFormat", "GetEnhMetaFilePixelFormat(hemf, cbBuffer, ppfd) -> UINT", "($module, hemf, cbBuffer, ppfd, /)", pygl_WGL_GetEnhMetaFilePixelFormat_args, "WGL_VERSION_WGL_1_0", 3, 4371, PYGL_API_WGL, 0, 3, 1};
 
 static PyObject *
 pygl_WGL_GetEnhMetaFilePixelFormat(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -29,8 +75,48 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_GetPixelFormat_args[] = {"hdc"};
+static const PyGLCommand pygl_WGL_GetPixelFormat_info = {"GetPixelFormat", "GetPixelFormat(hdc) -> c_int", "($module, hdc, /)", pygl_WGL_GetPixelFormat_args, "WGL_VERSION_WGL_1_0", 1, 4372, PYGL_API_WGL, 0, 1, 1};
+
+static PyObject *
+pygl_WGL_GetPixelFormat(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(1);
+    PYGL_OPAQUE(0, hdc);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void *), (hdc));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_SetPixelFormat_args[] = {"hdc", "ipfd", "ppfd"};
+static const PyGLCommand pygl_WGL_SetPixelFormat_info = {"SetPixelFormat", "SetPixelFormat(hdc, ipfd, ppfd) -> BOOL", "($module, hdc, ipfd, ppfd, /)", pygl_WGL_SetPixelFormat_args, "WGL_VERSION_WGL_1_0", 3, 4373, PYGL_API_WGL, 0, 3, 1};
+
+static PyObject *
+pygl_WGL_SetPixelFormat(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(3);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hdc);
+    PYGL_I(1, ipfd);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(2, ppfd, &pygl_elem_any);
+    PYGL_CALL_R(_result, int, (void *, int, void *), (hdc, ipfd, ppfd));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_SwapBuffers_args[] = {"hdc"};
-static const PyGLCommand pygl_WGL_SwapBuffers_info = {"SwapBuffers", "SwapBuffers(hdc) -> BOOL", "($module, hdc, /)", pygl_WGL_SwapBuffers_args, "WGL_VERSION_WGL_1_0", 1, 4193, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_SwapBuffers_info = {"SwapBuffers", "SwapBuffers(hdc) -> BOOL", "($module, hdc, /)", pygl_WGL_SwapBuffers_args, "WGL_VERSION_WGL_1_0", 1, 4374, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_SwapBuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -47,7 +133,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglAssociateImageBufferEventsI3D_args[] = {"hDC", "pEvent", "pAddress", "pSize", "count"};
-static const PyGLCommand pygl_WGL_wglAssociateImageBufferEventsI3D_info = {"wglAssociateImageBufferEventsI3D", "wglAssociateImageBufferEventsI3D(hDC, pEvent, pAddress, pSize, count) -> BOOL", "($module, hDC, pEvent, pAddress, pSize, count, /)", pygl_WGL_wglAssociateImageBufferEventsI3D_args, "WGL_I3D_image_buffer", 5, 4194, PYGL_API_WGL, 0, 5, 1};
+static const PyGLCommand pygl_WGL_wglAssociateImageBufferEventsI3D_info = {"wglAssociateImageBufferEventsI3D", "wglAssociateImageBufferEventsI3D(hDC, pEvent, pAddress, pSize, count) -> BOOL", "($module, hDC, pEvent, pAddress, pSize, count, /)", pygl_WGL_wglAssociateImageBufferEventsI3D_args, "WGL_I3D_image_buffer", 5, 4375, PYGL_API_WGL, 0, 5, 1};
 
 static PyObject *
 pygl_WGL_wglAssociateImageBufferEventsI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -71,7 +157,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglBeginFrameTrackingI3D_info = {"wglBeginFrameTrackingI3D", "wglBeginFrameTrackingI3D() -> BOOL", "($module, /)", NULL, "WGL_I3D_swap_frame_usage", 0, 4195, PYGL_API_WGL, 0, 0, 1};
+static const PyGLCommand pygl_WGL_wglBeginFrameTrackingI3D_info = {"wglBeginFrameTrackingI3D", "wglBeginFrameTrackingI3D() -> BOOL", "($module, /)", NULL, "WGL_I3D_swap_frame_usage", 0, 4376, PYGL_API_WGL, 0, 0, 1};
 
 static PyObject *
 pygl_WGL_wglBeginFrameTrackingI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -87,7 +173,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglBindDisplayColorTableEXT_args[] = {"id"};
-static const PyGLCommand pygl_WGL_wglBindDisplayColorTableEXT_info = {"wglBindDisplayColorTableEXT", "wglBindDisplayColorTableEXT(id) -> GLboolean", "($module, id, /)", pygl_WGL_wglBindDisplayColorTableEXT_args, "WGL_EXT_display_color_table", 1, 4196, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglBindDisplayColorTableEXT_info = {"wglBindDisplayColorTableEXT", "wglBindDisplayColorTableEXT(id) -> GLboolean", "($module, id, /)", pygl_WGL_wglBindDisplayColorTableEXT_args, "WGL_EXT_display_color_table", 1, 4377, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglBindDisplayColorTableEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -104,7 +190,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglBindSwapBarrierNV_args[] = {"group", "barrier"};
-static const PyGLCommand pygl_WGL_wglBindSwapBarrierNV_info = {"wglBindSwapBarrierNV", "wglBindSwapBarrierNV(group, barrier) -> BOOL", "($module, group, barrier, /)", pygl_WGL_wglBindSwapBarrierNV_args, "WGL_NV_swap_group", 2, 4197, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglBindSwapBarrierNV_info = {"wglBindSwapBarrierNV", "wglBindSwapBarrierNV(group, barrier) -> BOOL", "($module, group, barrier, /)", pygl_WGL_wglBindSwapBarrierNV_args, "WGL_NV_swap_group", 2, 4378, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglBindSwapBarrierNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -121,8 +207,26 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglBindTexImageARB_args[] = {"hPbuffer", "iBuffer"};
+static const PyGLCommand pygl_WGL_wglBindTexImageARB_info = {"wglBindTexImageARB", "wglBindTexImageARB(hPbuffer, iBuffer) -> BOOL", "($module, hPbuffer, iBuffer, /)", pygl_WGL_wglBindTexImageARB_args, "WGL_ARB_render_texture", 2, 4379, PYGL_API_WGL, 0, 2, 1};
+
+static PyObject *
+pygl_WGL_wglBindTexImageARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(2);
+    PYGL_OPAQUE(0, hPbuffer);
+    PYGL_I(1, iBuffer);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void *, int), (hPbuffer, iBuffer));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglBindVideoCaptureDeviceNV_args[] = {"uVideoSlot", "hDevice"};
-static const PyGLCommand pygl_WGL_wglBindVideoCaptureDeviceNV_info = {"wglBindVideoCaptureDeviceNV", "wglBindVideoCaptureDeviceNV(uVideoSlot, hDevice) -> BOOL", "($module, uVideoSlot, hDevice, /)", pygl_WGL_wglBindVideoCaptureDeviceNV_args, "WGL_NV_video_capture", 2, 4198, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglBindVideoCaptureDeviceNV_info = {"wglBindVideoCaptureDeviceNV", "wglBindVideoCaptureDeviceNV(uVideoSlot, hDevice) -> BOOL", "($module, uVideoSlot, hDevice, /)", pygl_WGL_wglBindVideoCaptureDeviceNV_args, "WGL_NV_video_capture", 2, 4380, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglBindVideoCaptureDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -139,8 +243,51 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglBindVideoDeviceNV_args[] = {"hDc", "uVideoSlot", "hVideoDevice", "piAttribList"};
+static const PyGLCommand pygl_WGL_wglBindVideoDeviceNV_info = {"wglBindVideoDeviceNV", "wglBindVideoDeviceNV(hDc, uVideoSlot, hVideoDevice, piAttribList) -> BOOL", "($module, hDc, uVideoSlot, hVideoDevice, piAttribList, /)", pygl_WGL_wglBindVideoDeviceNV_args, "WGL_NV_present_video", 4, 4381, PYGL_API_WGL, 0, 4, 1};
+
+static PyObject *
+pygl_WGL_wglBindVideoDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(4);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hDc);
+    PYGL_U(1, uVideoSlot);
+    PYGL_OPAQUE(2, hVideoDevice);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(3, piAttribList, &pygl_elem_c_int);
+    PYGL_CALL_R(_result, int, (void *, unsigned int, void *, void *), (hDc, uVideoSlot, hVideoDevice, piAttribList));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglBindVideoImageNV_args[] = {"hVideoDevice", "hPbuffer", "iVideoBuffer"};
+static const PyGLCommand pygl_WGL_wglBindVideoImageNV_info = {"wglBindVideoImageNV", "wglBindVideoImageNV(hVideoDevice, hPbuffer, iVideoBuffer) -> BOOL", "($module, hVideoDevice, hPbuffer, iVideoBuffer, /)", pygl_WGL_wglBindVideoImageNV_args, "WGL_NV_video_output", 3, 4382, PYGL_API_WGL, 0, 3, 1};
+
+static PyObject *
+pygl_WGL_wglBindVideoImageNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(3);
+    PYGL_OPAQUE(0, hVideoDevice);
+    PYGL_OPAQUE(1, hPbuffer);
+    PYGL_I(2, iVideoBuffer);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void *, void *, int), (hVideoDevice, hPbuffer, iVideoBuffer));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglBlitContextFramebufferAMD_args[] = {"dstCtx", "srcX0", "srcY0", "srcX1", "srcY1", "dstX0", "dstY0", "dstX1", "dstY1", "mask", "filter"};
-static const PyGLCommand pygl_WGL_wglBlitContextFramebufferAMD_info = {"wglBlitContextFramebufferAMD", "wglBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> VOID", "($module, dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter, /)", pygl_WGL_wglBlitContextFramebufferAMD_args, "WGL_AMD_gpu_association", 11, 4199, PYGL_API_WGL, 0, 11, 4};
+static const PyGLCommand pygl_WGL_wglBlitContextFramebufferAMD_info = {"wglBlitContextFramebufferAMD", "wglBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> VOID", "($module, dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter, /)", pygl_WGL_wglBlitContextFramebufferAMD_args, "WGL_AMD_gpu_association", 11, 4383, PYGL_API_WGL, 0, 11, 4};
 
 static PyObject *
 pygl_WGL_wglBlitContextFramebufferAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -167,7 +314,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglChoosePixelFormatARB_args[] = {"hdc", "piAttribIList", "pfAttribFList", "nMaxFormats", "piFormats", "nNumFormats"};
-static const PyGLCommand pygl_WGL_wglChoosePixelFormatARB_info = {"wglChoosePixelFormatARB", "wglChoosePixelFormatARB(hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats) -> BOOL", "($module, hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats, /)", pygl_WGL_wglChoosePixelFormatARB_args, "WGL_ARB_pixel_format", 6, 4200, PYGL_API_WGL, 0, 6, 1};
+static const PyGLCommand pygl_WGL_wglChoosePixelFormatARB_info = {"wglChoosePixelFormatARB", "wglChoosePixelFormatARB(hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats) -> BOOL", "($module, hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats, /)", pygl_WGL_wglChoosePixelFormatARB_args, "WGL_ARB_pixel_format", 6, 4384, PYGL_API_WGL, 0, 6, 1};
 
 static PyObject *
 pygl_WGL_wglChoosePixelFormatARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -177,9 +324,9 @@ pygl_WGL_wglChoosePixelFormatARB(GLProc *self, PyObject *const *_a, size_t _narg
     PYGL_OPAQUE(0, hdc);
     PYGL_U(3, nMaxFormats);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, piAttribIList, &pygl_elem_any);
+    PYGL_ARRAY_IN(1, piAttribIList, &pygl_elem_c_int);
     PYGL_ARRAY_IN(2, pfAttribFList, &pygl_elem_any);
-    PYGL_ARRAY_IN(4, piFormats, &pygl_elem_any);
+    PYGL_ARRAY_IN(4, piFormats, &pygl_elem_c_int);
     PYGL_ARRAY_IN(5, nNumFormats, &pygl_elem_any);
     PYGL_CALL_R(_result, int, (void *, void *, void *, unsigned int, void *, void *), (hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats));
     PYGL_CHECK();
@@ -193,7 +340,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglChoosePixelFormatEXT_args[] = {"hdc", "piAttribIList", "pfAttribFList", "nMaxFormats", "piFormats", "nNumFormats"};
-static const PyGLCommand pygl_WGL_wglChoosePixelFormatEXT_info = {"wglChoosePixelFormatEXT", "wglChoosePixelFormatEXT(hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats) -> BOOL", "($module, hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats, /)", pygl_WGL_wglChoosePixelFormatEXT_args, "WGL_EXT_pixel_format", 6, 4201, PYGL_API_WGL, 0, 6, 1};
+static const PyGLCommand pygl_WGL_wglChoosePixelFormatEXT_info = {"wglChoosePixelFormatEXT", "wglChoosePixelFormatEXT(hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats) -> BOOL", "($module, hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats, /)", pygl_WGL_wglChoosePixelFormatEXT_args, "WGL_EXT_pixel_format", 6, 4385, PYGL_API_WGL, 0, 6, 1};
 
 static PyObject *
 pygl_WGL_wglChoosePixelFormatEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -203,9 +350,9 @@ pygl_WGL_wglChoosePixelFormatEXT(GLProc *self, PyObject *const *_a, size_t _narg
     PYGL_OPAQUE(0, hdc);
     PYGL_U(3, nMaxFormats);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, piAttribIList, &pygl_elem_any);
+    PYGL_ARRAY_IN(1, piAttribIList, &pygl_elem_c_int);
     PYGL_ARRAY_IN(2, pfAttribFList, &pygl_elem_any);
-    PYGL_ARRAY_IN(4, piFormats, &pygl_elem_any);
+    PYGL_ARRAY_IN(4, piFormats, &pygl_elem_c_int);
     PYGL_ARRAY_IN(5, nNumFormats, &pygl_elem_any);
     PYGL_CALL_R(_result, int, (void *, void *, void *, unsigned int, void *, void *), (hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats));
     PYGL_CHECK();
@@ -219,7 +366,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglCopyContext_args[] = {"hglrcSrc", "hglrcDst", "mask"};
-static const PyGLCommand pygl_WGL_wglCopyContext_info = {"wglCopyContext", "wglCopyContext(hglrcSrc, hglrcDst, mask) -> BOOL", "($module, hglrcSrc, hglrcDst, mask, /)", pygl_WGL_wglCopyContext_args, "WGL_VERSION_WGL_1_0", 3, 4202, PYGL_API_WGL, 0, 3, 1};
+static const PyGLCommand pygl_WGL_wglCopyContext_info = {"wglCopyContext", "wglCopyContext(hglrcSrc, hglrcDst, mask) -> BOOL", "($module, hglrcSrc, hglrcDst, mask, /)", pygl_WGL_wglCopyContext_args, "WGL_VERSION_WGL_1_0", 3, 4386, PYGL_API_WGL, 0, 3, 1};
 
 static PyObject *
 pygl_WGL_wglCopyContext(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -238,7 +385,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglCopyImageSubDataNV_args[] = {"hSrcRC", "srcName", "srcTarget", "srcLevel", "srcX", "srcY", "srcZ", "hDstRC", "dstName", "dstTarget", "dstLevel", "dstX", "dstY", "dstZ", "width", "height", "depth"};
-static const PyGLCommand pygl_WGL_wglCopyImageSubDataNV_info = {"wglCopyImageSubDataNV", "wglCopyImageSubDataNV(hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth) -> BOOL", "($module, hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth, /)", pygl_WGL_wglCopyImageSubDataNV_args, "WGL_NV_copy_image", 17, 4203, PYGL_API_WGL, 0, 17, 1};
+static const PyGLCommand pygl_WGL_wglCopyImageSubDataNV_info = {"wglCopyImageSubDataNV", "wglCopyImageSubDataNV(hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth) -> BOOL", "($module, hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth, /)", pygl_WGL_wglCopyImageSubDataNV_args, "WGL_NV_copy_image", 17, 4387, PYGL_API_WGL, 0, 17, 1};
 
 static PyObject *
 pygl_WGL_wglCopyImageSubDataNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -271,7 +418,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglCreateAffinityDCNV_args[] = {"phGpuList"};
-static const PyGLCommand pygl_WGL_wglCreateAffinityDCNV_info = {"wglCreateAffinityDCNV", "wglCreateAffinityDCNV(phGpuList) -> HDC", "($module, phGpuList, /)", pygl_WGL_wglCreateAffinityDCNV_args, "WGL_NV_gpu_affinity", 1, 4204, PYGL_API_WGL, 0, 1, 4};
+static const PyGLCommand pygl_WGL_wglCreateAffinityDCNV_info = {"wglCreateAffinityDCNV", "wglCreateAffinityDCNV(phGpuList) -> HDC", "($module, phGpuList, /)", pygl_WGL_wglCreateAffinityDCNV_args, "WGL_NV_gpu_affinity", 1, 4388, PYGL_API_WGL, 0, 1, 4};
 
 static PyObject *
 pygl_WGL_wglCreateAffinityDCNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -292,7 +439,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglCreateAssociatedContextAMD_args[] = {"id"};
-static const PyGLCommand pygl_WGL_wglCreateAssociatedContextAMD_info = {"wglCreateAssociatedContextAMD", "wglCreateAssociatedContextAMD(id) -> HGLRC", "($module, id, /)", pygl_WGL_wglCreateAssociatedContextAMD_args, "WGL_AMD_gpu_association", 1, 4205, PYGL_API_WGL, 0, 1, 4};
+static const PyGLCommand pygl_WGL_wglCreateAssociatedContextAMD_info = {"wglCreateAssociatedContextAMD", "wglCreateAssociatedContextAMD(id) -> HGLRC", "($module, id, /)", pygl_WGL_wglCreateAssociatedContextAMD_args, "WGL_AMD_gpu_association", 1, 4389, PYGL_API_WGL, 0, 1, 4};
 
 static PyObject *
 pygl_WGL_wglCreateAssociatedContextAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -309,7 +456,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglCreateAssociatedContextAttribsAMD_args[] = {"id", "hShareContext", "attribList"};
-static const PyGLCommand pygl_WGL_wglCreateAssociatedContextAttribsAMD_info = {"wglCreateAssociatedContextAttribsAMD", "wglCreateAssociatedContextAttribsAMD(id, hShareContext, attribList) -> HGLRC", "($module, id, hShareContext, attribList, /)", pygl_WGL_wglCreateAssociatedContextAttribsAMD_args, "WGL_AMD_gpu_association", 3, 4206, PYGL_API_WGL, 0, 3, 4};
+static const PyGLCommand pygl_WGL_wglCreateAssociatedContextAttribsAMD_info = {"wglCreateAssociatedContextAttribsAMD", "wglCreateAssociatedContextAttribsAMD(id, hShareContext, attribList) -> HGLRC", "($module, id, hShareContext, attribList, /)", pygl_WGL_wglCreateAssociatedContextAttribsAMD_args, "WGL_AMD_gpu_association", 3, 4390, PYGL_API_WGL, 0, 3, 4};
 
 static PyObject *
 pygl_WGL_wglCreateAssociatedContextAttribsAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -319,7 +466,7 @@ pygl_WGL_wglCreateAssociatedContextAttribsAMD(GLProc *self, PyObject *const *_a,
     PYGL_U(0, id);
     PYGL_OPAQUE(1, hShareContext);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, attribList, &pygl_elem_any);
+    PYGL_ARRAY_IN(2, attribList, &pygl_elem_c_int);
     PYGL_CALL_R(_result, void *, (unsigned int, void *, void *), (id, hShareContext, attribList));
     PYGL_CHECK();
     PyObject *_value = pygl_opaque((void *)_result, "HGLRC");
@@ -331,8 +478,27 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglCreateBufferRegionARB_args[] = {"hDC", "iLayerPlane", "uType"};
+static const PyGLCommand pygl_WGL_wglCreateBufferRegionARB_info = {"wglCreateBufferRegionARB", "wglCreateBufferRegionARB(hDC, iLayerPlane, uType) -> HANDLE", "($module, hDC, iLayerPlane, uType, /)", pygl_WGL_wglCreateBufferRegionARB_args, "WGL_ARB_buffer_region", 3, 4391, PYGL_API_WGL, 0, 3, 4};
+
+static PyObject *
+pygl_WGL_wglCreateBufferRegionARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(3);
+    PYGL_OPAQUE(0, hDC);
+    PYGL_I(1, iLayerPlane);
+    PYGL_U(2, uType);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, void *, (void *, int, unsigned int), (hDC, iLayerPlane, uType));
+    PYGL_CHECK();
+    return pygl_opaque((void *)_result, "HANDLE");
+_fail:
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglCreateContext_args[] = {"hDc"};
-static const PyGLCommand pygl_WGL_wglCreateContext_info = {"wglCreateContext", "wglCreateContext(hDc) -> HGLRC", "($module, hDc, /)", pygl_WGL_wglCreateContext_args, "WGL_VERSION_WGL_1_0", 1, 4207, PYGL_API_WGL, 0, 1, 4};
+static const PyGLCommand pygl_WGL_wglCreateContext_info = {"wglCreateContext", "wglCreateContext(hDc) -> HGLRC", "($module, hDc, /)", pygl_WGL_wglCreateContext_args, "WGL_VERSION_WGL_1_0", 1, 4392, PYGL_API_WGL, 0, 1, 4};
 
 static PyObject *
 pygl_WGL_wglCreateContext(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -349,7 +515,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglCreateContextAttribsARB_args[] = {"hDC", "hShareContext", "attribList"};
-static const PyGLCommand pygl_WGL_wglCreateContextAttribsARB_info = {"wglCreateContextAttribsARB", "wglCreateContextAttribsARB(hDC, hShareContext, attribList) -> HGLRC", "($module, hDC, hShareContext, attribList, /)", pygl_WGL_wglCreateContextAttribsARB_args, "WGL_ARB_create_context", 3, 4208, PYGL_API_WGL, 0, 3, 4};
+static const PyGLCommand pygl_WGL_wglCreateContextAttribsARB_info = {"wglCreateContextAttribsARB", "wglCreateContextAttribsARB(hDC, hShareContext, attribList) -> HGLRC", "($module, hDC, hShareContext, attribList, /)", pygl_WGL_wglCreateContextAttribsARB_args, "WGL_ARB_create_context", 3, 4393, PYGL_API_WGL, 0, 3, 4};
 
 static PyObject *
 pygl_WGL_wglCreateContextAttribsARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -359,7 +525,7 @@ pygl_WGL_wglCreateContextAttribsARB(GLProc *self, PyObject *const *_a, size_t _n
     PYGL_OPAQUE(0, hDC);
     PYGL_OPAQUE(1, hShareContext);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, attribList, &pygl_elem_any);
+    PYGL_ARRAY_IN(2, attribList, &pygl_elem_c_int);
     PYGL_CALL_R(_result, void *, (void *, void *, void *), (hDC, hShareContext, attribList));
     PYGL_CHECK();
     PyObject *_value = pygl_opaque((void *)_result, "HGLRC");
@@ -372,7 +538,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglCreateDisplayColorTableEXT_args[] = {"id"};
-static const PyGLCommand pygl_WGL_wglCreateDisplayColorTableEXT_info = {"wglCreateDisplayColorTableEXT", "wglCreateDisplayColorTableEXT(id) -> GLboolean", "($module, id, /)", pygl_WGL_wglCreateDisplayColorTableEXT_args, "WGL_EXT_display_color_table", 1, 4209, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglCreateDisplayColorTableEXT_info = {"wglCreateDisplayColorTableEXT", "wglCreateDisplayColorTableEXT(id) -> GLboolean", "($module, id, /)", pygl_WGL_wglCreateDisplayColorTableEXT_args, "WGL_EXT_display_color_table", 1, 4394, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglCreateDisplayColorTableEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -389,7 +555,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglCreateImageBufferI3D_args[] = {"hDC", "dwSize", "uFlags"};
-static const PyGLCommand pygl_WGL_wglCreateImageBufferI3D_info = {"wglCreateImageBufferI3D", "wglCreateImageBufferI3D(hDC, dwSize, uFlags) -> LPVOID", "($module, hDC, dwSize, uFlags, /)", pygl_WGL_wglCreateImageBufferI3D_args, "WGL_I3D_image_buffer", 3, 4210, PYGL_API_WGL, 0, 3, 4};
+static const PyGLCommand pygl_WGL_wglCreateImageBufferI3D_info = {"wglCreateImageBufferI3D", "wglCreateImageBufferI3D(hDC, dwSize, uFlags) -> LPVOID", "($module, hDC, dwSize, uFlags, /)", pygl_WGL_wglCreateImageBufferI3D_args, "WGL_I3D_image_buffer", 3, 4395, PYGL_API_WGL, 0, 3, 4};
 
 static PyObject *
 pygl_WGL_wglCreateImageBufferI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -407,8 +573,76 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglCreateLayerContext_args[] = {"hDc", "level"};
+static const PyGLCommand pygl_WGL_wglCreateLayerContext_info = {"wglCreateLayerContext", "wglCreateLayerContext(hDc, level) -> HGLRC", "($module, hDc, level, /)", pygl_WGL_wglCreateLayerContext_args, "WGL_VERSION_WGL_1_0", 2, 4396, PYGL_API_WGL, 0, 2, 4};
+
+static PyObject *
+pygl_WGL_wglCreateLayerContext(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(2);
+    PYGL_OPAQUE(0, hDc);
+    PYGL_I(1, level);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, void *, (void *, int), (hDc, level));
+    PYGL_CHECK();
+    return pygl_opaque((void *)_result, "HGLRC");
+_fail:
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglCreatePbufferARB_args[] = {"hDC", "iPixelFormat", "iWidth", "iHeight", "piAttribList"};
+static const PyGLCommand pygl_WGL_wglCreatePbufferARB_info = {"wglCreatePbufferARB", "wglCreatePbufferARB(hDC, iPixelFormat, iWidth, iHeight, piAttribList) -> HPBUFFERARB", "($module, hDC, iPixelFormat, iWidth, iHeight, piAttribList, /)", pygl_WGL_wglCreatePbufferARB_args, "WGL_ARB_pbuffer", 5, 4397, PYGL_API_WGL, 0, 5, 4};
+
+static PyObject *
+pygl_WGL_wglCreatePbufferARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(5);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hDC);
+    PYGL_I(1, iPixelFormat);
+    PYGL_I(2, iWidth);
+    PYGL_I(3, iHeight);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(4, piAttribList, &pygl_elem_c_int);
+    PYGL_CALL_R(_result, void *, (void *, int, int, int, void *), (hDC, iPixelFormat, iWidth, iHeight, piAttribList));
+    PYGL_CHECK();
+    PyObject *_value = pygl_opaque((void *)_result, "HPBUFFERARB");
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglCreatePbufferEXT_args[] = {"hDC", "iPixelFormat", "iWidth", "iHeight", "piAttribList"};
+static const PyGLCommand pygl_WGL_wglCreatePbufferEXT_info = {"wglCreatePbufferEXT", "wglCreatePbufferEXT(hDC, iPixelFormat, iWidth, iHeight, piAttribList) -> HPBUFFEREXT", "($module, hDC, iPixelFormat, iWidth, iHeight, piAttribList, /)", pygl_WGL_wglCreatePbufferEXT_args, "WGL_EXT_pbuffer", 5, 4398, PYGL_API_WGL, 0, 5, 4};
+
+static PyObject *
+pygl_WGL_wglCreatePbufferEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(5);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hDC);
+    PYGL_I(1, iPixelFormat);
+    PYGL_I(2, iWidth);
+    PYGL_I(3, iHeight);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(4, piAttribList, &pygl_elem_c_int);
+    PYGL_CALL_R(_result, void *, (void *, int, int, int, void *), (hDC, iPixelFormat, iWidth, iHeight, piAttribList));
+    PYGL_CHECK();
+    PyObject *_value = pygl_opaque((void *)_result, "HPBUFFEREXT");
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglDXCloseDeviceNV_args[] = {"hDevice"};
-static const PyGLCommand pygl_WGL_wglDXCloseDeviceNV_info = {"wglDXCloseDeviceNV", "wglDXCloseDeviceNV(hDevice) -> BOOL", "($module, hDevice, /)", pygl_WGL_wglDXCloseDeviceNV_args, "WGL_NV_DX_interop", 1, 4211, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglDXCloseDeviceNV_info = {"wglDXCloseDeviceNV", "wglDXCloseDeviceNV(hDevice) -> BOOL", "($module, hDevice, /)", pygl_WGL_wglDXCloseDeviceNV_args, "WGL_NV_DX_interop", 1, 4399, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglDXCloseDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -425,7 +659,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDXLockObjectsNV_args[] = {"hDevice", "count", "hObjects"};
-static const PyGLCommand pygl_WGL_wglDXLockObjectsNV_info = {"wglDXLockObjectsNV", "wglDXLockObjectsNV(hDevice, count, hObjects) -> BOOL", "($module, hDevice, count, hObjects, /)", pygl_WGL_wglDXLockObjectsNV_args, "WGL_NV_DX_interop", 3, 4212, PYGL_API_WGL, 0, 3, 1};
+static const PyGLCommand pygl_WGL_wglDXLockObjectsNV_info = {"wglDXLockObjectsNV", "wglDXLockObjectsNV(hDevice, count, hObjects) -> BOOL", "($module, hDevice, count, hObjects, /)", pygl_WGL_wglDXLockObjectsNV_args, "WGL_NV_DX_interop", 3, 4400, PYGL_API_WGL, 0, 3, 1};
 
 static PyObject *
 pygl_WGL_wglDXLockObjectsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -448,7 +682,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDXObjectAccessNV_args[] = {"hObject", "access"};
-static const PyGLCommand pygl_WGL_wglDXObjectAccessNV_info = {"wglDXObjectAccessNV", "wglDXObjectAccessNV(hObject, access) -> BOOL", "($module, hObject, access, /)", pygl_WGL_wglDXObjectAccessNV_args, "WGL_NV_DX_interop", 2, 4213, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglDXObjectAccessNV_info = {"wglDXObjectAccessNV", "wglDXObjectAccessNV(hObject, access) -> BOOL", "($module, hObject, access, /)", pygl_WGL_wglDXObjectAccessNV_args, "WGL_NV_DX_interop", 2, 4401, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglDXObjectAccessNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -466,7 +700,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDXOpenDeviceNV_args[] = {"dxDevice"};
-static const PyGLCommand pygl_WGL_wglDXOpenDeviceNV_info = {"wglDXOpenDeviceNV", "wglDXOpenDeviceNV(dxDevice) -> HANDLE", "($module, dxDevice, /)", pygl_WGL_wglDXOpenDeviceNV_args, "WGL_NV_DX_interop", 1, 4214, PYGL_API_WGL, 0, 1, 4};
+static const PyGLCommand pygl_WGL_wglDXOpenDeviceNV_info = {"wglDXOpenDeviceNV", "wglDXOpenDeviceNV(dxDevice) -> HANDLE", "($module, dxDevice, /)", pygl_WGL_wglDXOpenDeviceNV_args, "WGL_NV_DX_interop", 1, 4402, PYGL_API_WGL, 0, 1, 4};
 
 static PyObject *
 pygl_WGL_wglDXOpenDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -487,7 +721,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDXRegisterObjectNV_args[] = {"hDevice", "dxObject", "name", "type", "access"};
-static const PyGLCommand pygl_WGL_wglDXRegisterObjectNV_info = {"wglDXRegisterObjectNV", "wglDXRegisterObjectNV(hDevice, dxObject, name, type, access) -> HANDLE", "($module, hDevice, dxObject, name, type, access, /)", pygl_WGL_wglDXRegisterObjectNV_args, "WGL_NV_DX_interop", 5, 4215, PYGL_API_WGL, 0, 5, 4};
+static const PyGLCommand pygl_WGL_wglDXRegisterObjectNV_info = {"wglDXRegisterObjectNV", "wglDXRegisterObjectNV(hDevice, dxObject, name, type, access) -> HANDLE", "($module, hDevice, dxObject, name, type, access, /)", pygl_WGL_wglDXRegisterObjectNV_args, "WGL_NV_DX_interop", 5, 4403, PYGL_API_WGL, 0, 5, 4};
 
 static PyObject *
 pygl_WGL_wglDXRegisterObjectNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -512,7 +746,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDXSetResourceShareHandleNV_args[] = {"dxObject", "shareHandle"};
-static const PyGLCommand pygl_WGL_wglDXSetResourceShareHandleNV_info = {"wglDXSetResourceShareHandleNV", "wglDXSetResourceShareHandleNV(dxObject, shareHandle) -> BOOL", "($module, dxObject, shareHandle, /)", pygl_WGL_wglDXSetResourceShareHandleNV_args, "WGL_NV_DX_interop", 2, 4216, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglDXSetResourceShareHandleNV_info = {"wglDXSetResourceShareHandleNV", "wglDXSetResourceShareHandleNV(dxObject, shareHandle) -> BOOL", "($module, dxObject, shareHandle, /)", pygl_WGL_wglDXSetResourceShareHandleNV_args, "WGL_NV_DX_interop", 2, 4404, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglDXSetResourceShareHandleNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -534,7 +768,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDXUnlockObjectsNV_args[] = {"hDevice", "count", "hObjects"};
-static const PyGLCommand pygl_WGL_wglDXUnlockObjectsNV_info = {"wglDXUnlockObjectsNV", "wglDXUnlockObjectsNV(hDevice, count, hObjects) -> BOOL", "($module, hDevice, count, hObjects, /)", pygl_WGL_wglDXUnlockObjectsNV_args, "WGL_NV_DX_interop", 3, 4217, PYGL_API_WGL, 0, 3, 1};
+static const PyGLCommand pygl_WGL_wglDXUnlockObjectsNV_info = {"wglDXUnlockObjectsNV", "wglDXUnlockObjectsNV(hDevice, count, hObjects) -> BOOL", "($module, hDevice, count, hObjects, /)", pygl_WGL_wglDXUnlockObjectsNV_args, "WGL_NV_DX_interop", 3, 4405, PYGL_API_WGL, 0, 3, 1};
 
 static PyObject *
 pygl_WGL_wglDXUnlockObjectsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -557,7 +791,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDXUnregisterObjectNV_args[] = {"hDevice", "hObject"};
-static const PyGLCommand pygl_WGL_wglDXUnregisterObjectNV_info = {"wglDXUnregisterObjectNV", "wglDXUnregisterObjectNV(hDevice, hObject) -> BOOL", "($module, hDevice, hObject, /)", pygl_WGL_wglDXUnregisterObjectNV_args, "WGL_NV_DX_interop", 2, 4218, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglDXUnregisterObjectNV_info = {"wglDXUnregisterObjectNV", "wglDXUnregisterObjectNV(hDevice, hObject) -> BOOL", "($module, hDevice, hObject, /)", pygl_WGL_wglDXUnregisterObjectNV_args, "WGL_NV_DX_interop", 2, 4406, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglDXUnregisterObjectNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -575,7 +809,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDelayBeforeSwapNV_args[] = {"hDC", "seconds"};
-static const PyGLCommand pygl_WGL_wglDelayBeforeSwapNV_info = {"wglDelayBeforeSwapNV", "wglDelayBeforeSwapNV(hDC, seconds) -> BOOL", "($module, hDC, seconds, /)", pygl_WGL_wglDelayBeforeSwapNV_args, "WGL_NV_delay_before_swap", 2, 4219, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglDelayBeforeSwapNV_info = {"wglDelayBeforeSwapNV", "wglDelayBeforeSwapNV(hDC, seconds) -> BOOL", "($module, hDC, seconds, /)", pygl_WGL_wglDelayBeforeSwapNV_args, "WGL_NV_delay_before_swap", 2, 4407, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglDelayBeforeSwapNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -593,7 +827,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDeleteAssociatedContextAMD_args[] = {"hglrc"};
-static const PyGLCommand pygl_WGL_wglDeleteAssociatedContextAMD_info = {"wglDeleteAssociatedContextAMD", "wglDeleteAssociatedContextAMD(hglrc) -> BOOL", "($module, hglrc, /)", pygl_WGL_wglDeleteAssociatedContextAMD_args, "WGL_AMD_gpu_association", 1, 4220, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglDeleteAssociatedContextAMD_info = {"wglDeleteAssociatedContextAMD", "wglDeleteAssociatedContextAMD(hglrc) -> BOOL", "($module, hglrc, /)", pygl_WGL_wglDeleteAssociatedContextAMD_args, "WGL_AMD_gpu_association", 1, 4408, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglDeleteAssociatedContextAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -610,7 +844,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDeleteBufferRegionARB_args[] = {"hRegion"};
-static const PyGLCommand pygl_WGL_wglDeleteBufferRegionARB_info = {"wglDeleteBufferRegionARB", "wglDeleteBufferRegionARB(hRegion) -> VOID", "($module, hRegion, /)", pygl_WGL_wglDeleteBufferRegionARB_args, "WGL_ARB_buffer_region", 1, 4221, PYGL_API_WGL, 0, 1, 4};
+static const PyGLCommand pygl_WGL_wglDeleteBufferRegionARB_info = {"wglDeleteBufferRegionARB", "wglDeleteBufferRegionARB(hRegion) -> VOID", "($module, hRegion, /)", pygl_WGL_wglDeleteBufferRegionARB_args, "WGL_ARB_buffer_region", 1, 4409, PYGL_API_WGL, 0, 1, 4};
 
 static PyObject *
 pygl_WGL_wglDeleteBufferRegionARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -627,7 +861,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDeleteContext_args[] = {"oldContext"};
-static const PyGLCommand pygl_WGL_wglDeleteContext_info = {"wglDeleteContext", "wglDeleteContext(oldContext) -> BOOL", "($module, oldContext, /)", pygl_WGL_wglDeleteContext_args, "WGL_VERSION_WGL_1_0", 1, 4222, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglDeleteContext_info = {"wglDeleteContext", "wglDeleteContext(oldContext) -> BOOL", "($module, oldContext, /)", pygl_WGL_wglDeleteContext_args, "WGL_VERSION_WGL_1_0", 1, 4410, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglDeleteContext(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -644,7 +878,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDeleteDCNV_args[] = {"hdc"};
-static const PyGLCommand pygl_WGL_wglDeleteDCNV_info = {"wglDeleteDCNV", "wglDeleteDCNV(hdc) -> BOOL", "($module, hdc, /)", pygl_WGL_wglDeleteDCNV_args, "WGL_NV_gpu_affinity", 1, 4223, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglDeleteDCNV_info = {"wglDeleteDCNV", "wglDeleteDCNV(hdc) -> BOOL", "($module, hdc, /)", pygl_WGL_wglDeleteDCNV_args, "WGL_NV_gpu_affinity", 1, 4411, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglDeleteDCNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -660,8 +894,33 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglDescribeLayerPlane_args[] = {"hDc", "pixelFormat", "layerPlane", "nBytes", "plpd"};
+static const PyGLCommand pygl_WGL_wglDescribeLayerPlane_info = {"wglDescribeLayerPlane", "wglDescribeLayerPlane(hDc, pixelFormat, layerPlane, nBytes, plpd) -> BOOL", "($module, hDc, pixelFormat, layerPlane, nBytes, plpd, /)", pygl_WGL_wglDescribeLayerPlane_args, "WGL_VERSION_WGL_1_0", 5, 4412, PYGL_API_WGL, 0, 5, 1};
+
+static PyObject *
+pygl_WGL_wglDescribeLayerPlane(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(5);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hDc);
+    PYGL_I(1, pixelFormat);
+    PYGL_I(2, layerPlane);
+    PYGL_U(3, nBytes);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(4, plpd, &pygl_elem_any);
+    PYGL_CALL_R(_result, int, (void *, int, int, unsigned int, void *), (hDc, pixelFormat, layerPlane, nBytes, plpd));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglDestroyDisplayColorTableEXT_args[] = {"id"};
-static const PyGLCommand pygl_WGL_wglDestroyDisplayColorTableEXT_info = {"wglDestroyDisplayColorTableEXT", "wglDestroyDisplayColorTableEXT(id) -> VOID", "($module, id, /)", pygl_WGL_wglDestroyDisplayColorTableEXT_args, "WGL_EXT_display_color_table", 1, 4224, PYGL_API_WGL, 0, 1, 4};
+static const PyGLCommand pygl_WGL_wglDestroyDisplayColorTableEXT_info = {"wglDestroyDisplayColorTableEXT", "wglDestroyDisplayColorTableEXT(id) -> VOID", "($module, id, /)", pygl_WGL_wglDestroyDisplayColorTableEXT_args, "WGL_EXT_display_color_table", 1, 4413, PYGL_API_WGL, 0, 1, 4};
 
 static PyObject *
 pygl_WGL_wglDestroyDisplayColorTableEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -678,7 +937,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDestroyImageBufferI3D_args[] = {"hDC", "pAddress"};
-static const PyGLCommand pygl_WGL_wglDestroyImageBufferI3D_info = {"wglDestroyImageBufferI3D", "wglDestroyImageBufferI3D(hDC, pAddress) -> BOOL", "($module, hDC, pAddress, /)", pygl_WGL_wglDestroyImageBufferI3D_args, "WGL_I3D_image_buffer", 2, 4225, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglDestroyImageBufferI3D_info = {"wglDestroyImageBufferI3D", "wglDestroyImageBufferI3D(hDC, pAddress) -> BOOL", "($module, hDC, pAddress, /)", pygl_WGL_wglDestroyImageBufferI3D_args, "WGL_I3D_image_buffer", 2, 4414, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglDestroyImageBufferI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -696,7 +955,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDestroyPbufferARB_args[] = {"hPbuffer"};
-static const PyGLCommand pygl_WGL_wglDestroyPbufferARB_info = {"wglDestroyPbufferARB", "wglDestroyPbufferARB(hPbuffer) -> BOOL", "($module, hPbuffer, /)", pygl_WGL_wglDestroyPbufferARB_args, "WGL_ARB_pbuffer", 1, 4226, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglDestroyPbufferARB_info = {"wglDestroyPbufferARB", "wglDestroyPbufferARB(hPbuffer) -> BOOL", "($module, hPbuffer, /)", pygl_WGL_wglDestroyPbufferARB_args, "WGL_ARB_pbuffer", 1, 4415, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglDestroyPbufferARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -713,7 +972,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDestroyPbufferEXT_args[] = {"hPbuffer"};
-static const PyGLCommand pygl_WGL_wglDestroyPbufferEXT_info = {"wglDestroyPbufferEXT", "wglDestroyPbufferEXT(hPbuffer) -> BOOL", "($module, hPbuffer, /)", pygl_WGL_wglDestroyPbufferEXT_args, "WGL_EXT_pbuffer", 1, 4227, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglDestroyPbufferEXT_info = {"wglDestroyPbufferEXT", "wglDestroyPbufferEXT(hPbuffer) -> BOOL", "($module, hPbuffer, /)", pygl_WGL_wglDestroyPbufferEXT_args, "WGL_EXT_pbuffer", 1, 4416, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglDestroyPbufferEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -729,7 +988,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglDisableFrameLockI3D_info = {"wglDisableFrameLockI3D", "wglDisableFrameLockI3D() -> BOOL", "($module, /)", NULL, "WGL_I3D_swap_frame_lock", 0, 4228, PYGL_API_WGL, 0, 0, 1};
+static const PyGLCommand pygl_WGL_wglDisableFrameLockI3D_info = {"wglDisableFrameLockI3D", "wglDisableFrameLockI3D() -> BOOL", "($module, /)", NULL, "WGL_I3D_swap_frame_lock", 0, 4417, PYGL_API_WGL, 0, 0, 1};
 
 static PyObject *
 pygl_WGL_wglDisableFrameLockI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -745,7 +1004,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglDisableGenlockI3D_args[] = {"hDC"};
-static const PyGLCommand pygl_WGL_wglDisableGenlockI3D_info = {"wglDisableGenlockI3D", "wglDisableGenlockI3D(hDC) -> BOOL", "($module, hDC, /)", pygl_WGL_wglDisableGenlockI3D_args, "WGL_I3D_genlock", 1, 4229, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglDisableGenlockI3D_info = {"wglDisableGenlockI3D", "wglDisableGenlockI3D(hDC) -> BOOL", "($module, hDC, /)", pygl_WGL_wglDisableGenlockI3D_args, "WGL_I3D_genlock", 1, 4418, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglDisableGenlockI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -761,7 +1020,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglEnableFrameLockI3D_info = {"wglEnableFrameLockI3D", "wglEnableFrameLockI3D() -> BOOL", "($module, /)", NULL, "WGL_I3D_swap_frame_lock", 0, 4230, PYGL_API_WGL, 0, 0, 1};
+static const PyGLCommand pygl_WGL_wglEnableFrameLockI3D_info = {"wglEnableFrameLockI3D", "wglEnableFrameLockI3D() -> BOOL", "($module, /)", NULL, "WGL_I3D_swap_frame_lock", 0, 4419, PYGL_API_WGL, 0, 0, 1};
 
 static PyObject *
 pygl_WGL_wglEnableFrameLockI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -777,7 +1036,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglEnableGenlockI3D_args[] = {"hDC"};
-static const PyGLCommand pygl_WGL_wglEnableGenlockI3D_info = {"wglEnableGenlockI3D", "wglEnableGenlockI3D(hDC) -> BOOL", "($module, hDC, /)", pygl_WGL_wglEnableGenlockI3D_args, "WGL_I3D_genlock", 1, 4231, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglEnableGenlockI3D_info = {"wglEnableGenlockI3D", "wglEnableGenlockI3D(hDC) -> BOOL", "($module, hDC, /)", pygl_WGL_wglEnableGenlockI3D_args, "WGL_I3D_genlock", 1, 4420, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglEnableGenlockI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -793,7 +1052,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglEndFrameTrackingI3D_info = {"wglEndFrameTrackingI3D", "wglEndFrameTrackingI3D() -> BOOL", "($module, /)", NULL, "WGL_I3D_swap_frame_usage", 0, 4232, PYGL_API_WGL, 0, 0, 1};
+static const PyGLCommand pygl_WGL_wglEndFrameTrackingI3D_info = {"wglEndFrameTrackingI3D", "wglEndFrameTrackingI3D() -> BOOL", "($module, /)", NULL, "WGL_I3D_swap_frame_usage", 0, 4421, PYGL_API_WGL, 0, 0, 1};
 
 static PyObject *
 pygl_WGL_wglEndFrameTrackingI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -808,8 +1067,27 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglEnumGpuDevicesNV_args[] = {"hGpu", "iDeviceIndex", "lpGpuDevice"};
+static const PyGLCommand pygl_WGL_wglEnumGpuDevicesNV_info = {"wglEnumGpuDevicesNV", "wglEnumGpuDevicesNV(hGpu, iDeviceIndex, lpGpuDevice) -> BOOL", "($module, hGpu, iDeviceIndex, lpGpuDevice, /)", pygl_WGL_wglEnumGpuDevicesNV_args, "WGL_NV_gpu_affinity", 3, 4422, PYGL_API_WGL, 0, 3, 1};
+
+static PyObject *
+pygl_WGL_wglEnumGpuDevicesNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(3);
+    PYGL_OPAQUE(0, hGpu);
+    PYGL_U(1, iDeviceIndex);
+    PYGL_OPAQUE(2, lpGpuDevice);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void *, unsigned int, void *), (hGpu, iDeviceIndex, lpGpuDevice));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglEnumGpusFromAffinityDCNV_args[] = {"hAffinityDC", "iGpuIndex", "hGpu"};
-static const PyGLCommand pygl_WGL_wglEnumGpusFromAffinityDCNV_info = {"wglEnumGpusFromAffinityDCNV", "wglEnumGpusFromAffinityDCNV(hAffinityDC, iGpuIndex, hGpu) -> BOOL", "($module, hAffinityDC, iGpuIndex, hGpu, /)", pygl_WGL_wglEnumGpusFromAffinityDCNV_args, "WGL_NV_gpu_affinity", 3, 4233, PYGL_API_WGL, 0, 3, 1};
+static const PyGLCommand pygl_WGL_wglEnumGpusFromAffinityDCNV_info = {"wglEnumGpusFromAffinityDCNV", "wglEnumGpusFromAffinityDCNV(hAffinityDC, iGpuIndex, hGpu) -> BOOL", "($module, hAffinityDC, iGpuIndex, hGpu, /)", pygl_WGL_wglEnumGpusFromAffinityDCNV_args, "WGL_NV_gpu_affinity", 3, 4423, PYGL_API_WGL, 0, 3, 1};
 
 static PyObject *
 pygl_WGL_wglEnumGpusFromAffinityDCNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -832,7 +1110,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglEnumGpusNV_args[] = {"iGpuIndex", "phGpu"};
-static const PyGLCommand pygl_WGL_wglEnumGpusNV_info = {"wglEnumGpusNV", "wglEnumGpusNV(iGpuIndex, phGpu) -> BOOL", "($module, iGpuIndex, phGpu, /)", pygl_WGL_wglEnumGpusNV_args, "WGL_NV_gpu_affinity", 2, 4234, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglEnumGpusNV_info = {"wglEnumGpusNV", "wglEnumGpusNV(iGpuIndex, phGpu) -> BOOL", "($module, iGpuIndex, phGpu, /)", pygl_WGL_wglEnumGpusNV_args, "WGL_NV_gpu_affinity", 2, 4424, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglEnumGpusNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -854,7 +1132,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglEnumerateVideoCaptureDevicesNV_args[] = {"hDc", "phDeviceList"};
-static const PyGLCommand pygl_WGL_wglEnumerateVideoCaptureDevicesNV_info = {"wglEnumerateVideoCaptureDevicesNV", "wglEnumerateVideoCaptureDevicesNV(hDc, phDeviceList) -> UINT", "($module, hDc, phDeviceList, /)", pygl_WGL_wglEnumerateVideoCaptureDevicesNV_args, "WGL_NV_video_capture", 2, 4235, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglEnumerateVideoCaptureDevicesNV_info = {"wglEnumerateVideoCaptureDevicesNV", "wglEnumerateVideoCaptureDevicesNV(hDc, phDeviceList) -> UINT", "($module, hDc, phDeviceList, /)", pygl_WGL_wglEnumerateVideoCaptureDevicesNV_args, "WGL_NV_video_capture", 2, 4425, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglEnumerateVideoCaptureDevicesNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -875,8 +1153,30 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglEnumerateVideoDevicesNV_args[] = {"hDc", "phDeviceList"};
+static const PyGLCommand pygl_WGL_wglEnumerateVideoDevicesNV_info = {"wglEnumerateVideoDevicesNV", "wglEnumerateVideoDevicesNV(hDc, phDeviceList) -> c_int", "($module, hDc, phDeviceList, /)", pygl_WGL_wglEnumerateVideoDevicesNV_args, "WGL_NV_present_video", 2, 4426, PYGL_API_WGL, 0, 2, 1};
+
+static PyObject *
+pygl_WGL_wglEnumerateVideoDevicesNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(2);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hDc);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(1, phDeviceList, &pygl_elem_any);
+    PYGL_CALL_R(_result, int, (void *, void *), (hDc, phDeviceList));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglFreeMemoryNV_args[] = {"pointer"};
-static const PyGLCommand pygl_WGL_wglFreeMemoryNV_info = {"wglFreeMemoryNV", "wglFreeMemoryNV(pointer) -> None", "($module, pointer, /)", pygl_WGL_wglFreeMemoryNV_args, "WGL_NV_vertex_array_range", 1, 4236, PYGL_API_WGL, 0, 1, 0};
+static const PyGLCommand pygl_WGL_wglFreeMemoryNV_info = {"wglFreeMemoryNV", "wglFreeMemoryNV(pointer) -> None", "($module, pointer, /)", pygl_WGL_wglFreeMemoryNV_args, "WGL_NV_vertex_array_range", 1, 4427, PYGL_API_WGL, 0, 1, 0};
 
 static PyObject *
 pygl_WGL_wglFreeMemoryNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -896,7 +1196,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglGenlockSampleRateI3D_args[] = {"hDC", "uRate"};
-static const PyGLCommand pygl_WGL_wglGenlockSampleRateI3D_info = {"wglGenlockSampleRateI3D", "wglGenlockSampleRateI3D(hDC, uRate) -> BOOL", "($module, hDC, uRate, /)", pygl_WGL_wglGenlockSampleRateI3D_args, "WGL_I3D_genlock", 2, 4237, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglGenlockSampleRateI3D_info = {"wglGenlockSampleRateI3D", "wglGenlockSampleRateI3D(hDC, uRate) -> BOOL", "($module, hDC, uRate, /)", pygl_WGL_wglGenlockSampleRateI3D_args, "WGL_I3D_genlock", 2, 4428, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglGenlockSampleRateI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -914,7 +1214,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglGenlockSourceDelayI3D_args[] = {"hDC", "uDelay"};
-static const PyGLCommand pygl_WGL_wglGenlockSourceDelayI3D_info = {"wglGenlockSourceDelayI3D", "wglGenlockSourceDelayI3D(hDC, uDelay) -> BOOL", "($module, hDC, uDelay, /)", pygl_WGL_wglGenlockSourceDelayI3D_args, "WGL_I3D_genlock", 2, 4238, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglGenlockSourceDelayI3D_info = {"wglGenlockSourceDelayI3D", "wglGenlockSourceDelayI3D(hDC, uDelay) -> BOOL", "($module, hDC, uDelay, /)", pygl_WGL_wglGenlockSourceDelayI3D_args, "WGL_I3D_genlock", 2, 4429, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglGenlockSourceDelayI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -932,7 +1232,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglGenlockSourceEdgeI3D_args[] = {"hDC", "uEdge"};
-static const PyGLCommand pygl_WGL_wglGenlockSourceEdgeI3D_info = {"wglGenlockSourceEdgeI3D", "wglGenlockSourceEdgeI3D(hDC, uEdge) -> BOOL", "($module, hDC, uEdge, /)", pygl_WGL_wglGenlockSourceEdgeI3D_args, "WGL_I3D_genlock", 2, 4239, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglGenlockSourceEdgeI3D_info = {"wglGenlockSourceEdgeI3D", "wglGenlockSourceEdgeI3D(hDC, uEdge) -> BOOL", "($module, hDC, uEdge, /)", pygl_WGL_wglGenlockSourceEdgeI3D_args, "WGL_I3D_genlock", 2, 4430, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglGenlockSourceEdgeI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -950,7 +1250,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglGenlockSourceI3D_args[] = {"hDC", "uSource"};
-static const PyGLCommand pygl_WGL_wglGenlockSourceI3D_info = {"wglGenlockSourceI3D", "wglGenlockSourceI3D(hDC, uSource) -> BOOL", "($module, hDC, uSource, /)", pygl_WGL_wglGenlockSourceI3D_args, "WGL_I3D_genlock", 2, 4240, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglGenlockSourceI3D_info = {"wglGenlockSourceI3D", "wglGenlockSourceI3D(hDC, uSource) -> BOOL", "($module, hDC, uSource, /)", pygl_WGL_wglGenlockSourceI3D_args, "WGL_I3D_genlock", 2, 4431, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglGenlockSourceI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -968,7 +1268,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglGetContextGPUIDAMD_args[] = {"hglrc"};
-static const PyGLCommand pygl_WGL_wglGetContextGPUIDAMD_info = {"wglGetContextGPUIDAMD", "wglGetContextGPUIDAMD(hglrc) -> UINT", "($module, hglrc, /)", pygl_WGL_wglGetContextGPUIDAMD_args, "WGL_AMD_gpu_association", 1, 4241, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglGetContextGPUIDAMD_info = {"wglGetContextGPUIDAMD", "wglGetContextGPUIDAMD(hglrc) -> UINT", "($module, hglrc, /)", pygl_WGL_wglGetContextGPUIDAMD_args, "WGL_AMD_gpu_association", 1, 4432, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglGetContextGPUIDAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -984,7 +1284,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglGetCurrentAssociatedContextAMD_info = {"wglGetCurrentAssociatedContextAMD", "wglGetCurrentAssociatedContextAMD() -> HGLRC", "($module, /)", NULL, "WGL_AMD_gpu_association", 0, 4242, PYGL_API_WGL, 0, 0, 4};
+static const PyGLCommand pygl_WGL_wglGetCurrentAssociatedContextAMD_info = {"wglGetCurrentAssociatedContextAMD", "wglGetCurrentAssociatedContextAMD() -> HGLRC", "($module, /)", NULL, "WGL_AMD_gpu_association", 0, 4433, PYGL_API_WGL, 0, 0, 4};
 
 static PyObject *
 pygl_WGL_wglGetCurrentAssociatedContextAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -999,7 +1299,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglGetCurrentContext_info = {"wglGetCurrentContext", "wglGetCurrentContext() -> HGLRC", "($module, /)", NULL, "WGL_VERSION_WGL_1_0", 0, 4243, PYGL_API_WGL, 0, 0, 4};
+static const PyGLCommand pygl_WGL_wglGetCurrentContext_info = {"wglGetCurrentContext", "wglGetCurrentContext() -> HGLRC", "($module, /)", NULL, "WGL_VERSION_WGL_1_0", 0, 4434, PYGL_API_WGL, 0, 0, 4};
 
 static PyObject *
 pygl_WGL_wglGetCurrentContext(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1014,7 +1314,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglGetCurrentDC_info = {"wglGetCurrentDC", "wglGetCurrentDC() -> HDC", "($module, /)", NULL, "WGL_VERSION_WGL_1_0", 0, 4244, PYGL_API_WGL, 0, 0, 4};
+static const PyGLCommand pygl_WGL_wglGetCurrentDC_info = {"wglGetCurrentDC", "wglGetCurrentDC() -> HDC", "($module, /)", NULL, "WGL_VERSION_WGL_1_0", 0, 4435, PYGL_API_WGL, 0, 0, 4};
 
 static PyObject *
 pygl_WGL_wglGetCurrentDC(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1029,7 +1329,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglGetCurrentReadDCARB_info = {"wglGetCurrentReadDCARB", "wglGetCurrentReadDCARB() -> HDC", "($module, /)", NULL, "WGL_ARB_make_current_read", 0, 4245, PYGL_API_WGL, 0, 0, 4};
+static const PyGLCommand pygl_WGL_wglGetCurrentReadDCARB_info = {"wglGetCurrentReadDCARB", "wglGetCurrentReadDCARB() -> HDC", "($module, /)", NULL, "WGL_ARB_make_current_read", 0, 4436, PYGL_API_WGL, 0, 0, 4};
 
 static PyObject *
 pygl_WGL_wglGetCurrentReadDCARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1044,7 +1344,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglGetCurrentReadDCEXT_info = {"wglGetCurrentReadDCEXT", "wglGetCurrentReadDCEXT() -> HDC", "($module, /)", NULL, "WGL_EXT_make_current_read", 0, 4246, PYGL_API_WGL, 0, 0, 4};
+static const PyGLCommand pygl_WGL_wglGetCurrentReadDCEXT_info = {"wglGetCurrentReadDCEXT", "wglGetCurrentReadDCEXT() -> HDC", "($module, /)", NULL, "WGL_EXT_make_current_read", 0, 4437, PYGL_API_WGL, 0, 0, 4};
 
 static PyObject *
 pygl_WGL_wglGetCurrentReadDCEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1059,8 +1359,31 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglGetDigitalVideoParametersI3D_args[] = {"hDC", "iAttribute", "piValue"};
+static const PyGLCommand pygl_WGL_wglGetDigitalVideoParametersI3D_info = {"wglGetDigitalVideoParametersI3D", "wglGetDigitalVideoParametersI3D(hDC, iAttribute, piValue) -> BOOL", "($module, hDC, iAttribute, piValue, /)", pygl_WGL_wglGetDigitalVideoParametersI3D_args, "WGL_I3D_digital_video_control", 3, 4438, PYGL_API_WGL, 0, 3, 1};
+
+static PyObject *
+pygl_WGL_wglGetDigitalVideoParametersI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(3);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hDC);
+    PYGL_I(1, iAttribute);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(2, piValue, &pygl_elem_c_int);
+    PYGL_CALL_R(_result, int, (void *, int, void *), (hDC, iAttribute, piValue));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglGetExtensionsStringARB_args[] = {"hdc"};
-static const PyGLCommand pygl_WGL_wglGetExtensionsStringARB_info = {"wglGetExtensionsStringARB", "wglGetExtensionsStringARB(hdc) -> GLchar", "($module, hdc, /)", pygl_WGL_wglGetExtensionsStringARB_args, "WGL_ARB_extensions_string", 1, 4247, PYGL_API_WGL, 0, 1, 2};
+static const PyGLCommand pygl_WGL_wglGetExtensionsStringARB_info = {"wglGetExtensionsStringARB", "wglGetExtensionsStringARB(hdc) -> GLchar", "($module, hdc, /)", pygl_WGL_wglGetExtensionsStringARB_args, "WGL_ARB_extensions_string", 1, 4439, PYGL_API_WGL, 0, 1, 2};
 
 static PyObject *
 pygl_WGL_wglGetExtensionsStringARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1076,7 +1399,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglGetExtensionsStringEXT_info = {"wglGetExtensionsStringEXT", "wglGetExtensionsStringEXT() -> GLchar", "($module, /)", NULL, "WGL_EXT_extensions_string", 0, 4248, PYGL_API_WGL, 0, 0, 2};
+static const PyGLCommand pygl_WGL_wglGetExtensionsStringEXT_info = {"wglGetExtensionsStringEXT", "wglGetExtensionsStringEXT() -> GLchar", "($module, /)", NULL, "WGL_EXT_extensions_string", 0, 4440, PYGL_API_WGL, 0, 0, 2};
 
 static PyObject *
 pygl_WGL_wglGetExtensionsStringEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1092,7 +1415,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglGetFrameUsageI3D_args[] = {"pUsage"};
-static const PyGLCommand pygl_WGL_wglGetFrameUsageI3D_info = {"wglGetFrameUsageI3D", "wglGetFrameUsageI3D(pUsage) -> BOOL", "($module, pUsage, /)", pygl_WGL_wglGetFrameUsageI3D_args, "WGL_I3D_swap_frame_usage", 1, 4249, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglGetFrameUsageI3D_info = {"wglGetFrameUsageI3D", "wglGetFrameUsageI3D(pUsage) -> BOOL", "($module, pUsage, /)", pygl_WGL_wglGetFrameUsageI3D_args, "WGL_I3D_swap_frame_usage", 1, 4441, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglGetFrameUsageI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1113,7 +1436,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglGetGPUIDsAMD_args[] = {"maxCount", "ids"};
-static const PyGLCommand pygl_WGL_wglGetGPUIDsAMD_info = {"wglGetGPUIDsAMD", "wglGetGPUIDsAMD(maxCount, ids) -> UINT", "($module, maxCount, ids, /)", pygl_WGL_wglGetGPUIDsAMD_args, "WGL_AMD_gpu_association", 2, 4250, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglGetGPUIDsAMD_info = {"wglGetGPUIDsAMD", "wglGetGPUIDsAMD(maxCount, ids) -> UINT", "($module, maxCount, ids, /)", pygl_WGL_wglGetGPUIDsAMD_args, "WGL_AMD_gpu_association", 2, 4442, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglGetGPUIDsAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1135,7 +1458,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglGetGPUInfoAMD_args[] = {"id", "property", "dataType", "size", "data"};
-static const PyGLCommand pygl_WGL_wglGetGPUInfoAMD_info = {"wglGetGPUInfoAMD", "wglGetGPUInfoAMD(id, property, dataType, size, data) -> INT", "($module, id, property, dataType, size, data, /)", pygl_WGL_wglGetGPUInfoAMD_args, "WGL_AMD_gpu_association", 5, 4251, PYGL_API_WGL, 0, 5, 1};
+static const PyGLCommand pygl_WGL_wglGetGPUInfoAMD_info = {"wglGetGPUInfoAMD", "wglGetGPUInfoAMD(id, property, dataType, size, data) -> INT", "($module, id, property, dataType, size, data, /)", pygl_WGL_wglGetGPUInfoAMD_args, "WGL_AMD_gpu_association", 5, 4443, PYGL_API_WGL, 0, 5, 1};
 
 static PyObject *
 pygl_WGL_wglGetGPUInfoAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1159,8 +1482,56 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglGetGammaTableI3D_args[] = {"hDC", "iEntries", "puRed", "puGreen", "puBlue"};
+static const PyGLCommand pygl_WGL_wglGetGammaTableI3D_info = {"wglGetGammaTableI3D", "wglGetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue) -> BOOL", "($module, hDC, iEntries, puRed, puGreen, puBlue, /)", pygl_WGL_wglGetGammaTableI3D_args, "WGL_I3D_gamma", 5, 4444, PYGL_API_WGL, 0, 5, 1};
+
+static PyObject *
+pygl_WGL_wglGetGammaTableI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(5);
+    PYGL_FRAME(3);
+    PYGL_OPAQUE(0, hDC);
+    PYGL_I(1, iEntries);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(2, puRed, &pygl_elem_any);
+    PYGL_ARRAY_IN(3, puGreen, &pygl_elem_any);
+    PYGL_ARRAY_IN(4, puBlue, &pygl_elem_any);
+    PYGL_CALL_R(_result, int, (void *, int, void *, void *, void *), (hDC, iEntries, puRed, puGreen, puBlue));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglGetGammaTableParametersI3D_args[] = {"hDC", "iAttribute", "piValue"};
+static const PyGLCommand pygl_WGL_wglGetGammaTableParametersI3D_info = {"wglGetGammaTableParametersI3D", "wglGetGammaTableParametersI3D(hDC, iAttribute, piValue) -> BOOL", "($module, hDC, iAttribute, piValue, /)", pygl_WGL_wglGetGammaTableParametersI3D_args, "WGL_I3D_gamma", 3, 4445, PYGL_API_WGL, 0, 3, 1};
+
+static PyObject *
+pygl_WGL_wglGetGammaTableParametersI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(3);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hDC);
+    PYGL_I(1, iAttribute);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(2, piValue, &pygl_elem_c_int);
+    PYGL_CALL_R(_result, int, (void *, int, void *), (hDC, iAttribute, piValue));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglGetGenlockSampleRateI3D_args[] = {"hDC", "uRate"};
-static const PyGLCommand pygl_WGL_wglGetGenlockSampleRateI3D_info = {"wglGetGenlockSampleRateI3D", "wglGetGenlockSampleRateI3D(hDC, uRate) -> BOOL", "($module, hDC, uRate, /)", pygl_WGL_wglGetGenlockSampleRateI3D_args, "WGL_I3D_genlock", 2, 4252, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglGetGenlockSampleRateI3D_info = {"wglGetGenlockSampleRateI3D", "wglGetGenlockSampleRateI3D(hDC, uRate) -> BOOL", "($module, hDC, uRate, /)", pygl_WGL_wglGetGenlockSampleRateI3D_args, "WGL_I3D_genlock", 2, 4446, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglGetGenlockSampleRateI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1182,7 +1553,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglGetGenlockSourceDelayI3D_args[] = {"hDC", "uDelay"};
-static const PyGLCommand pygl_WGL_wglGetGenlockSourceDelayI3D_info = {"wglGetGenlockSourceDelayI3D", "wglGetGenlockSourceDelayI3D(hDC, uDelay) -> BOOL", "($module, hDC, uDelay, /)", pygl_WGL_wglGetGenlockSourceDelayI3D_args, "WGL_I3D_genlock", 2, 4253, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglGetGenlockSourceDelayI3D_info = {"wglGetGenlockSourceDelayI3D", "wglGetGenlockSourceDelayI3D(hDC, uDelay) -> BOOL", "($module, hDC, uDelay, /)", pygl_WGL_wglGetGenlockSourceDelayI3D_args, "WGL_I3D_genlock", 2, 4447, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglGetGenlockSourceDelayI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1204,7 +1575,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglGetGenlockSourceEdgeI3D_args[] = {"hDC", "uEdge"};
-static const PyGLCommand pygl_WGL_wglGetGenlockSourceEdgeI3D_info = {"wglGetGenlockSourceEdgeI3D", "wglGetGenlockSourceEdgeI3D(hDC, uEdge) -> BOOL", "($module, hDC, uEdge, /)", pygl_WGL_wglGetGenlockSourceEdgeI3D_args, "WGL_I3D_genlock", 2, 4254, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglGetGenlockSourceEdgeI3D_info = {"wglGetGenlockSourceEdgeI3D", "wglGetGenlockSourceEdgeI3D(hDC, uEdge) -> BOOL", "($module, hDC, uEdge, /)", pygl_WGL_wglGetGenlockSourceEdgeI3D_args, "WGL_I3D_genlock", 2, 4448, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglGetGenlockSourceEdgeI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1226,7 +1597,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglGetGenlockSourceI3D_args[] = {"hDC", "uSource"};
-static const PyGLCommand pygl_WGL_wglGetGenlockSourceI3D_info = {"wglGetGenlockSourceI3D", "wglGetGenlockSourceI3D(hDC, uSource) -> BOOL", "($module, hDC, uSource, /)", pygl_WGL_wglGetGenlockSourceI3D_args, "WGL_I3D_genlock", 2, 4255, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglGetGenlockSourceI3D_info = {"wglGetGenlockSourceI3D", "wglGetGenlockSourceI3D(hDC, uSource) -> BOOL", "($module, hDC, uSource, /)", pygl_WGL_wglGetGenlockSourceI3D_args, "WGL_I3D_genlock", 2, 4449, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglGetGenlockSourceI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1247,8 +1618,33 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglGetLayerPaletteEntries_args[] = {"hdc", "iLayerPlane", "iStart", "cEntries", "pcr"};
+static const PyGLCommand pygl_WGL_wglGetLayerPaletteEntries_info = {"wglGetLayerPaletteEntries", "wglGetLayerPaletteEntries(hdc, iLayerPlane, iStart, cEntries, pcr) -> c_int", "($module, hdc, iLayerPlane, iStart, cEntries, pcr, /)", pygl_WGL_wglGetLayerPaletteEntries_args, "WGL_VERSION_WGL_1_0", 5, 4450, PYGL_API_WGL, 0, 5, 1};
+
+static PyObject *
+pygl_WGL_wglGetLayerPaletteEntries(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(5);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hdc);
+    PYGL_I(1, iLayerPlane);
+    PYGL_I(2, iStart);
+    PYGL_I(3, cEntries);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(4, pcr, &pygl_elem_any);
+    PYGL_CALL_R(_result, int, (void *, int, int, int, void *), (hdc, iLayerPlane, iStart, cEntries, pcr));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglGetMscRateOML_args[] = {"hdc", "numerator", "denominator"};
-static const PyGLCommand pygl_WGL_wglGetMscRateOML_info = {"wglGetMscRateOML", "wglGetMscRateOML(hdc, numerator, denominator) -> BOOL", "($module, hdc, numerator, denominator, /)", pygl_WGL_wglGetMscRateOML_args, "WGL_OML_sync_control", 3, 4256, PYGL_API_WGL, 0, 3, 1};
+static const PyGLCommand pygl_WGL_wglGetMscRateOML_info = {"wglGetMscRateOML", "wglGetMscRateOML(hdc, numerator, denominator) -> BOOL", "($module, hdc, numerator, denominator, /)", pygl_WGL_wglGetMscRateOML_args, "WGL_OML_sync_control", 3, 4451, PYGL_API_WGL, 0, 3, 1};
 
 static PyObject *
 pygl_WGL_wglGetMscRateOML(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1271,7 +1667,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglGetPbufferDCARB_args[] = {"hPbuffer"};
-static const PyGLCommand pygl_WGL_wglGetPbufferDCARB_info = {"wglGetPbufferDCARB", "wglGetPbufferDCARB(hPbuffer) -> HDC", "($module, hPbuffer, /)", pygl_WGL_wglGetPbufferDCARB_args, "WGL_ARB_pbuffer", 1, 4257, PYGL_API_WGL, 0, 1, 4};
+static const PyGLCommand pygl_WGL_wglGetPbufferDCARB_info = {"wglGetPbufferDCARB", "wglGetPbufferDCARB(hPbuffer) -> HDC", "($module, hPbuffer, /)", pygl_WGL_wglGetPbufferDCARB_args, "WGL_ARB_pbuffer", 1, 4452, PYGL_API_WGL, 0, 1, 4};
 
 static PyObject *
 pygl_WGL_wglGetPbufferDCARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1288,7 +1684,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglGetPbufferDCEXT_args[] = {"hPbuffer"};
-static const PyGLCommand pygl_WGL_wglGetPbufferDCEXT_info = {"wglGetPbufferDCEXT", "wglGetPbufferDCEXT(hPbuffer) -> HDC", "($module, hPbuffer, /)", pygl_WGL_wglGetPbufferDCEXT_args, "WGL_EXT_pbuffer", 1, 4258, PYGL_API_WGL, 0, 1, 4};
+static const PyGLCommand pygl_WGL_wglGetPbufferDCEXT_info = {"wglGetPbufferDCEXT", "wglGetPbufferDCEXT(hPbuffer) -> HDC", "($module, hPbuffer, /)", pygl_WGL_wglGetPbufferDCEXT_args, "WGL_EXT_pbuffer", 1, 4453, PYGL_API_WGL, 0, 1, 4};
 
 static PyObject *
 pygl_WGL_wglGetPbufferDCEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1304,8 +1700,112 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglGetPixelFormatAttribfvARB_args[] = {"hdc", "iPixelFormat", "iLayerPlane", "nAttributes", "piAttributes", "pfValues"};
+static const PyGLCommand pygl_WGL_wglGetPixelFormatAttribfvARB_info = {"wglGetPixelFormatAttribfvARB", "wglGetPixelFormatAttribfvARB(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues) -> BOOL", "($module, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues, /)", pygl_WGL_wglGetPixelFormatAttribfvARB_args, "WGL_ARB_pixel_format", 6, 4454, PYGL_API_WGL, 0, 6, 1};
+
+static PyObject *
+pygl_WGL_wglGetPixelFormatAttribfvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(6);
+    PYGL_FRAME(2);
+    PYGL_OPAQUE(0, hdc);
+    PYGL_I(1, iPixelFormat);
+    PYGL_I(2, iLayerPlane);
+    PYGL_U(3, nAttributes);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(4, piAttributes, &pygl_elem_c_int);
+    PYGL_ARRAY_IN(5, pfValues, &pygl_elem_any);
+    PYGL_CALL_R(_result, int, (void *, int, int, unsigned int, void *, void *), (hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglGetPixelFormatAttribfvEXT_args[] = {"hdc", "iPixelFormat", "iLayerPlane", "nAttributes", "piAttributes", "pfValues"};
+static const PyGLCommand pygl_WGL_wglGetPixelFormatAttribfvEXT_info = {"wglGetPixelFormatAttribfvEXT", "wglGetPixelFormatAttribfvEXT(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues) -> BOOL", "($module, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues, /)", pygl_WGL_wglGetPixelFormatAttribfvEXT_args, "WGL_EXT_pixel_format", 6, 4455, PYGL_API_WGL, 0, 6, 1};
+
+static PyObject *
+pygl_WGL_wglGetPixelFormatAttribfvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(6);
+    PYGL_FRAME(2);
+    PYGL_OPAQUE(0, hdc);
+    PYGL_I(1, iPixelFormat);
+    PYGL_I(2, iLayerPlane);
+    PYGL_U(3, nAttributes);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(4, piAttributes, &pygl_elem_c_int);
+    PYGL_ARRAY_IN(5, pfValues, &pygl_elem_any);
+    PYGL_CALL_R(_result, int, (void *, int, int, unsigned int, void *, void *), (hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglGetPixelFormatAttribivARB_args[] = {"hdc", "iPixelFormat", "iLayerPlane", "nAttributes", "piAttributes", "piValues"};
+static const PyGLCommand pygl_WGL_wglGetPixelFormatAttribivARB_info = {"wglGetPixelFormatAttribivARB", "wglGetPixelFormatAttribivARB(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues) -> BOOL", "($module, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues, /)", pygl_WGL_wglGetPixelFormatAttribivARB_args, "WGL_ARB_pixel_format", 6, 4456, PYGL_API_WGL, 0, 6, 1};
+
+static PyObject *
+pygl_WGL_wglGetPixelFormatAttribivARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(6);
+    PYGL_FRAME(2);
+    PYGL_OPAQUE(0, hdc);
+    PYGL_I(1, iPixelFormat);
+    PYGL_I(2, iLayerPlane);
+    PYGL_U(3, nAttributes);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(4, piAttributes, &pygl_elem_c_int);
+    PYGL_ARRAY_IN(5, piValues, &pygl_elem_c_int);
+    PYGL_CALL_R(_result, int, (void *, int, int, unsigned int, void *, void *), (hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglGetPixelFormatAttribivEXT_args[] = {"hdc", "iPixelFormat", "iLayerPlane", "nAttributes", "piAttributes", "piValues"};
+static const PyGLCommand pygl_WGL_wglGetPixelFormatAttribivEXT_info = {"wglGetPixelFormatAttribivEXT", "wglGetPixelFormatAttribivEXT(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues) -> BOOL", "($module, hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues, /)", pygl_WGL_wglGetPixelFormatAttribivEXT_args, "WGL_EXT_pixel_format", 6, 4457, PYGL_API_WGL, 0, 6, 1};
+
+static PyObject *
+pygl_WGL_wglGetPixelFormatAttribivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(6);
+    PYGL_FRAME(2);
+    PYGL_OPAQUE(0, hdc);
+    PYGL_I(1, iPixelFormat);
+    PYGL_I(2, iLayerPlane);
+    PYGL_U(3, nAttributes);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(4, piAttributes, &pygl_elem_c_int);
+    PYGL_ARRAY_IN(5, piValues, &pygl_elem_c_int);
+    PYGL_CALL_R(_result, int, (void *, int, int, unsigned int, void *, void *), (hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglGetProcAddress_args[] = {"lpszProc"};
-static const PyGLCommand pygl_WGL_wglGetProcAddress_info = {"wglGetProcAddress", "wglGetProcAddress(lpszProc) -> PROC", "($module, lpszProc, /)", pygl_WGL_wglGetProcAddress_args, "WGL_VERSION_WGL_1_0", 1, 4259, PYGL_API_WGL, 0, 1, 4};
+static const PyGLCommand pygl_WGL_wglGetProcAddress_info = {"wglGetProcAddress", "wglGetProcAddress(lpszProc) -> PROC", "($module, lpszProc, /)", pygl_WGL_wglGetProcAddress_args, "WGL_VERSION_WGL_1_0", 1, 4458, PYGL_API_WGL, 0, 1, 4};
 
 static PyObject *
 pygl_WGL_wglGetProcAddress(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1321,8 +1821,23 @@ _fail:
 }
 
 
+static const PyGLCommand pygl_WGL_wglGetSwapIntervalEXT_info = {"wglGetSwapIntervalEXT", "wglGetSwapIntervalEXT() -> c_int", "($module, /)", NULL, "WGL_EXT_swap_control", 0, 4459, PYGL_API_WGL, 0, 0, 1};
+
+static PyObject *
+pygl_WGL_wglGetSwapIntervalEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(0);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void), ());
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglGetSyncValuesOML_args[] = {"hdc", "ust", "msc", "sbc"};
-static const PyGLCommand pygl_WGL_wglGetSyncValuesOML_info = {"wglGetSyncValuesOML", "wglGetSyncValuesOML(hdc, ust, msc, sbc) -> BOOL", "($module, hdc, ust, msc, sbc, /)", pygl_WGL_wglGetSyncValuesOML_args, "WGL_OML_sync_control", 4, 4260, PYGL_API_WGL, 0, 4, 1};
+static const PyGLCommand pygl_WGL_wglGetSyncValuesOML_info = {"wglGetSyncValuesOML", "wglGetSyncValuesOML(hdc, ust, msc, sbc) -> BOOL", "($module, hdc, ust, msc, sbc, /)", pygl_WGL_wglGetSyncValuesOML_args, "WGL_OML_sync_control", 4, 4460, PYGL_API_WGL, 0, 4, 1};
 
 static PyObject *
 pygl_WGL_wglGetSyncValuesOML(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1345,8 +1860,31 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglGetVideoDeviceNV_args[] = {"hDC", "numDevices", "hVideoDevice"};
+static const PyGLCommand pygl_WGL_wglGetVideoDeviceNV_info = {"wglGetVideoDeviceNV", "wglGetVideoDeviceNV(hDC, numDevices, hVideoDevice) -> BOOL", "($module, hDC, numDevices, hVideoDevice, /)", pygl_WGL_wglGetVideoDeviceNV_args, "WGL_NV_video_output", 3, 4461, PYGL_API_WGL, 0, 3, 1};
+
+static PyObject *
+pygl_WGL_wglGetVideoDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(3);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hDC);
+    PYGL_I(1, numDevices);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(2, hVideoDevice, &pygl_elem_any);
+    PYGL_CALL_R(_result, int, (void *, int, void *), (hDC, numDevices, hVideoDevice));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglGetVideoInfoNV_args[] = {"hpVideoDevice", "pulCounterOutputPbuffer", "pulCounterOutputVideo"};
-static const PyGLCommand pygl_WGL_wglGetVideoInfoNV_info = {"wglGetVideoInfoNV", "wglGetVideoInfoNV(hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo) -> BOOL", "($module, hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo, /)", pygl_WGL_wglGetVideoInfoNV_args, "WGL_NV_video_output", 3, 4261, PYGL_API_WGL, 0, 3, 1};
+static const PyGLCommand pygl_WGL_wglGetVideoInfoNV_info = {"wglGetVideoInfoNV", "wglGetVideoInfoNV(hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo) -> BOOL", "($module, hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo, /)", pygl_WGL_wglGetVideoInfoNV_args, "WGL_NV_video_output", 3, 4462, PYGL_API_WGL, 0, 3, 1};
 
 static PyObject *
 pygl_WGL_wglGetVideoInfoNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1369,7 +1907,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglIsEnabledFrameLockI3D_args[] = {"pFlag"};
-static const PyGLCommand pygl_WGL_wglIsEnabledFrameLockI3D_info = {"wglIsEnabledFrameLockI3D", "wglIsEnabledFrameLockI3D(pFlag) -> BOOL", "($module, pFlag, /)", pygl_WGL_wglIsEnabledFrameLockI3D_args, "WGL_I3D_swap_frame_lock", 1, 4262, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglIsEnabledFrameLockI3D_info = {"wglIsEnabledFrameLockI3D", "wglIsEnabledFrameLockI3D(pFlag) -> BOOL", "($module, pFlag, /)", pygl_WGL_wglIsEnabledFrameLockI3D_args, "WGL_I3D_swap_frame_lock", 1, 4463, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglIsEnabledFrameLockI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1390,7 +1928,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglIsEnabledGenlockI3D_args[] = {"hDC", "pFlag"};
-static const PyGLCommand pygl_WGL_wglIsEnabledGenlockI3D_info = {"wglIsEnabledGenlockI3D", "wglIsEnabledGenlockI3D(hDC, pFlag) -> BOOL", "($module, hDC, pFlag, /)", pygl_WGL_wglIsEnabledGenlockI3D_args, "WGL_I3D_genlock", 2, 4263, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglIsEnabledGenlockI3D_info = {"wglIsEnabledGenlockI3D", "wglIsEnabledGenlockI3D(hDC, pFlag) -> BOOL", "($module, hDC, pFlag, /)", pygl_WGL_wglIsEnabledGenlockI3D_args, "WGL_I3D_genlock", 2, 4464, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglIsEnabledGenlockI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1412,7 +1950,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglJoinSwapGroupNV_args[] = {"hDC", "group"};
-static const PyGLCommand pygl_WGL_wglJoinSwapGroupNV_info = {"wglJoinSwapGroupNV", "wglJoinSwapGroupNV(hDC, group) -> BOOL", "($module, hDC, group, /)", pygl_WGL_wglJoinSwapGroupNV_args, "WGL_NV_swap_group", 2, 4264, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglJoinSwapGroupNV_info = {"wglJoinSwapGroupNV", "wglJoinSwapGroupNV(hDC, group) -> BOOL", "($module, hDC, group, /)", pygl_WGL_wglJoinSwapGroupNV_args, "WGL_NV_swap_group", 2, 4465, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglJoinSwapGroupNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1430,7 +1968,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglLoadDisplayColorTableEXT_args[] = {"table", "length"};
-static const PyGLCommand pygl_WGL_wglLoadDisplayColorTableEXT_info = {"wglLoadDisplayColorTableEXT", "wglLoadDisplayColorTableEXT(table, length) -> GLboolean", "($module, table, length, /)", pygl_WGL_wglLoadDisplayColorTableEXT_args, "WGL_EXT_display_color_table", 2, 4265, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglLoadDisplayColorTableEXT_info = {"wglLoadDisplayColorTableEXT", "wglLoadDisplayColorTableEXT(table, length) -> GLboolean", "($module, table, length, /)", pygl_WGL_wglLoadDisplayColorTableEXT_args, "WGL_EXT_display_color_table", 2, 4466, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglLoadDisplayColorTableEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1452,7 +1990,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglLockVideoCaptureDeviceNV_args[] = {"hDc", "hDevice"};
-static const PyGLCommand pygl_WGL_wglLockVideoCaptureDeviceNV_info = {"wglLockVideoCaptureDeviceNV", "wglLockVideoCaptureDeviceNV(hDc, hDevice) -> BOOL", "($module, hDc, hDevice, /)", pygl_WGL_wglLockVideoCaptureDeviceNV_args, "WGL_NV_video_capture", 2, 4266, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglLockVideoCaptureDeviceNV_info = {"wglLockVideoCaptureDeviceNV", "wglLockVideoCaptureDeviceNV(hDc, hDevice) -> BOOL", "($module, hDc, hDevice, /)", pygl_WGL_wglLockVideoCaptureDeviceNV_args, "WGL_NV_video_capture", 2, 4467, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglLockVideoCaptureDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1470,7 +2008,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglMakeAssociatedContextCurrentAMD_args[] = {"hglrc"};
-static const PyGLCommand pygl_WGL_wglMakeAssociatedContextCurrentAMD_info = {"wglMakeAssociatedContextCurrentAMD", "wglMakeAssociatedContextCurrentAMD(hglrc) -> BOOL", "($module, hglrc, /)", pygl_WGL_wglMakeAssociatedContextCurrentAMD_args, "WGL_AMD_gpu_association", 1, 4267, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglMakeAssociatedContextCurrentAMD_info = {"wglMakeAssociatedContextCurrentAMD", "wglMakeAssociatedContextCurrentAMD(hglrc) -> BOOL", "($module, hglrc, /)", pygl_WGL_wglMakeAssociatedContextCurrentAMD_args, "WGL_AMD_gpu_association", 1, 4468, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglMakeAssociatedContextCurrentAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1487,7 +2025,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglMakeContextCurrentARB_args[] = {"hDrawDC", "hReadDC", "hglrc"};
-static const PyGLCommand pygl_WGL_wglMakeContextCurrentARB_info = {"wglMakeContextCurrentARB", "wglMakeContextCurrentARB(hDrawDC, hReadDC, hglrc) -> BOOL", "($module, hDrawDC, hReadDC, hglrc, /)", pygl_WGL_wglMakeContextCurrentARB_args, "WGL_ARB_make_current_read", 3, 4268, PYGL_API_WGL, 0, 3, 1};
+static const PyGLCommand pygl_WGL_wglMakeContextCurrentARB_info = {"wglMakeContextCurrentARB", "wglMakeContextCurrentARB(hDrawDC, hReadDC, hglrc) -> BOOL", "($module, hDrawDC, hReadDC, hglrc, /)", pygl_WGL_wglMakeContextCurrentARB_args, "WGL_ARB_make_current_read", 3, 4469, PYGL_API_WGL, 0, 3, 1};
 
 static PyObject *
 pygl_WGL_wglMakeContextCurrentARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1506,7 +2044,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglMakeContextCurrentEXT_args[] = {"hDrawDC", "hReadDC", "hglrc"};
-static const PyGLCommand pygl_WGL_wglMakeContextCurrentEXT_info = {"wglMakeContextCurrentEXT", "wglMakeContextCurrentEXT(hDrawDC, hReadDC, hglrc) -> BOOL", "($module, hDrawDC, hReadDC, hglrc, /)", pygl_WGL_wglMakeContextCurrentEXT_args, "WGL_EXT_make_current_read", 3, 4269, PYGL_API_WGL, 0, 3, 1};
+static const PyGLCommand pygl_WGL_wglMakeContextCurrentEXT_info = {"wglMakeContextCurrentEXT", "wglMakeContextCurrentEXT(hDrawDC, hReadDC, hglrc) -> BOOL", "($module, hDrawDC, hReadDC, hglrc, /)", pygl_WGL_wglMakeContextCurrentEXT_args, "WGL_EXT_make_current_read", 3, 4470, PYGL_API_WGL, 0, 3, 1};
 
 static PyObject *
 pygl_WGL_wglMakeContextCurrentEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1525,7 +2063,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglMakeCurrent_args[] = {"hDc", "newContext"};
-static const PyGLCommand pygl_WGL_wglMakeCurrent_info = {"wglMakeCurrent", "wglMakeCurrent(hDc, newContext) -> BOOL", "($module, hDc, newContext, /)", pygl_WGL_wglMakeCurrent_args, "WGL_VERSION_WGL_1_0", 2, 4270, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglMakeCurrent_info = {"wglMakeCurrent", "wglMakeCurrent(hDc, newContext) -> BOOL", "($module, hDc, newContext, /)", pygl_WGL_wglMakeCurrent_args, "WGL_VERSION_WGL_1_0", 2, 4471, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglMakeCurrent(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1542,8 +2080,30 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglQueryCurrentContextNV_args[] = {"iAttribute", "piValue"};
+static const PyGLCommand pygl_WGL_wglQueryCurrentContextNV_info = {"wglQueryCurrentContextNV", "wglQueryCurrentContextNV(iAttribute, piValue) -> BOOL", "($module, iAttribute, piValue, /)", pygl_WGL_wglQueryCurrentContextNV_args, "WGL_NV_present_video", 2, 4472, PYGL_API_WGL, 0, 2, 1};
+
+static PyObject *
+pygl_WGL_wglQueryCurrentContextNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(2);
+    PYGL_FRAME(1);
+    PYGL_I(0, iAttribute);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(1, piValue, &pygl_elem_c_int);
+    PYGL_CALL_R(_result, int, (int, void *), (iAttribute, piValue));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglQueryFrameCountNV_args[] = {"hDC", "count"};
-static const PyGLCommand pygl_WGL_wglQueryFrameCountNV_info = {"wglQueryFrameCountNV", "wglQueryFrameCountNV(hDC, count) -> BOOL", "($module, hDC, count, /)", pygl_WGL_wglQueryFrameCountNV_args, "WGL_NV_swap_group", 2, 4271, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglQueryFrameCountNV_info = {"wglQueryFrameCountNV", "wglQueryFrameCountNV(hDC, count) -> BOOL", "($module, hDC, count, /)", pygl_WGL_wglQueryFrameCountNV_args, "WGL_NV_swap_group", 2, 4473, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglQueryFrameCountNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1565,7 +2125,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglQueryFrameLockMasterI3D_args[] = {"pFlag"};
-static const PyGLCommand pygl_WGL_wglQueryFrameLockMasterI3D_info = {"wglQueryFrameLockMasterI3D", "wglQueryFrameLockMasterI3D(pFlag) -> BOOL", "($module, pFlag, /)", pygl_WGL_wglQueryFrameLockMasterI3D_args, "WGL_I3D_swap_frame_lock", 1, 4272, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglQueryFrameLockMasterI3D_info = {"wglQueryFrameLockMasterI3D", "wglQueryFrameLockMasterI3D(pFlag) -> BOOL", "($module, pFlag, /)", pygl_WGL_wglQueryFrameLockMasterI3D_args, "WGL_I3D_swap_frame_lock", 1, 4474, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglQueryFrameLockMasterI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1586,7 +2146,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglQueryFrameTrackingI3D_args[] = {"pFrameCount", "pMissedFrames", "pLastMissedUsage"};
-static const PyGLCommand pygl_WGL_wglQueryFrameTrackingI3D_info = {"wglQueryFrameTrackingI3D", "wglQueryFrameTrackingI3D(pFrameCount, pMissedFrames, pLastMissedUsage) -> BOOL", "($module, pFrameCount, pMissedFrames, pLastMissedUsage, /)", pygl_WGL_wglQueryFrameTrackingI3D_args, "WGL_I3D_swap_frame_usage", 3, 4273, PYGL_API_WGL, 0, 3, 1};
+static const PyGLCommand pygl_WGL_wglQueryFrameTrackingI3D_info = {"wglQueryFrameTrackingI3D", "wglQueryFrameTrackingI3D(pFrameCount, pMissedFrames, pLastMissedUsage) -> BOOL", "($module, pFrameCount, pMissedFrames, pLastMissedUsage, /)", pygl_WGL_wglQueryFrameTrackingI3D_args, "WGL_I3D_swap_frame_usage", 3, 4475, PYGL_API_WGL, 0, 3, 1};
 
 static PyObject *
 pygl_WGL_wglQueryFrameTrackingI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1609,7 +2169,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglQueryGenlockMaxSourceDelayI3D_args[] = {"hDC", "uMaxLineDelay", "uMaxPixelDelay"};
-static const PyGLCommand pygl_WGL_wglQueryGenlockMaxSourceDelayI3D_info = {"wglQueryGenlockMaxSourceDelayI3D", "wglQueryGenlockMaxSourceDelayI3D(hDC, uMaxLineDelay, uMaxPixelDelay) -> BOOL", "($module, hDC, uMaxLineDelay, uMaxPixelDelay, /)", pygl_WGL_wglQueryGenlockMaxSourceDelayI3D_args, "WGL_I3D_genlock", 3, 4274, PYGL_API_WGL, 0, 3, 1};
+static const PyGLCommand pygl_WGL_wglQueryGenlockMaxSourceDelayI3D_info = {"wglQueryGenlockMaxSourceDelayI3D", "wglQueryGenlockMaxSourceDelayI3D(hDC, uMaxLineDelay, uMaxPixelDelay) -> BOOL", "($module, hDC, uMaxLineDelay, uMaxPixelDelay, /)", pygl_WGL_wglQueryGenlockMaxSourceDelayI3D_args, "WGL_I3D_genlock", 3, 4476, PYGL_API_WGL, 0, 3, 1};
 
 static PyObject *
 pygl_WGL_wglQueryGenlockMaxSourceDelayI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1632,7 +2192,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglQueryMaxSwapGroupsNV_args[] = {"hDC", "maxGroups", "maxBarriers"};
-static const PyGLCommand pygl_WGL_wglQueryMaxSwapGroupsNV_info = {"wglQueryMaxSwapGroupsNV", "wglQueryMaxSwapGroupsNV(hDC, maxGroups, maxBarriers) -> BOOL", "($module, hDC, maxGroups, maxBarriers, /)", pygl_WGL_wglQueryMaxSwapGroupsNV_args, "WGL_NV_swap_group", 3, 4275, PYGL_API_WGL, 0, 3, 1};
+static const PyGLCommand pygl_WGL_wglQueryMaxSwapGroupsNV_info = {"wglQueryMaxSwapGroupsNV", "wglQueryMaxSwapGroupsNV(hDC, maxGroups, maxBarriers) -> BOOL", "($module, hDC, maxGroups, maxBarriers, /)", pygl_WGL_wglQueryMaxSwapGroupsNV_args, "WGL_NV_swap_group", 3, 4477, PYGL_API_WGL, 0, 3, 1};
 
 static PyObject *
 pygl_WGL_wglQueryMaxSwapGroupsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1654,8 +2214,54 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglQueryPbufferARB_args[] = {"hPbuffer", "iAttribute", "piValue"};
+static const PyGLCommand pygl_WGL_wglQueryPbufferARB_info = {"wglQueryPbufferARB", "wglQueryPbufferARB(hPbuffer, iAttribute, piValue) -> BOOL", "($module, hPbuffer, iAttribute, piValue, /)", pygl_WGL_wglQueryPbufferARB_args, "WGL_ARB_pbuffer", 3, 4478, PYGL_API_WGL, 0, 3, 1};
+
+static PyObject *
+pygl_WGL_wglQueryPbufferARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(3);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hPbuffer);
+    PYGL_I(1, iAttribute);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(2, piValue, &pygl_elem_c_int);
+    PYGL_CALL_R(_result, int, (void *, int, void *), (hPbuffer, iAttribute, piValue));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglQueryPbufferEXT_args[] = {"hPbuffer", "iAttribute", "piValue"};
+static const PyGLCommand pygl_WGL_wglQueryPbufferEXT_info = {"wglQueryPbufferEXT", "wglQueryPbufferEXT(hPbuffer, iAttribute, piValue) -> BOOL", "($module, hPbuffer, iAttribute, piValue, /)", pygl_WGL_wglQueryPbufferEXT_args, "WGL_EXT_pbuffer", 3, 4479, PYGL_API_WGL, 0, 3, 1};
+
+static PyObject *
+pygl_WGL_wglQueryPbufferEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(3);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hPbuffer);
+    PYGL_I(1, iAttribute);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(2, piValue, &pygl_elem_c_int);
+    PYGL_CALL_R(_result, int, (void *, int, void *), (hPbuffer, iAttribute, piValue));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglQuerySwapGroupNV_args[] = {"hDC", "group", "barrier"};
-static const PyGLCommand pygl_WGL_wglQuerySwapGroupNV_info = {"wglQuerySwapGroupNV", "wglQuerySwapGroupNV(hDC, group, barrier) -> BOOL", "($module, hDC, group, barrier, /)", pygl_WGL_wglQuerySwapGroupNV_args, "WGL_NV_swap_group", 3, 4276, PYGL_API_WGL, 0, 3, 1};
+static const PyGLCommand pygl_WGL_wglQuerySwapGroupNV_info = {"wglQuerySwapGroupNV", "wglQuerySwapGroupNV(hDC, group, barrier) -> BOOL", "($module, hDC, group, barrier, /)", pygl_WGL_wglQuerySwapGroupNV_args, "WGL_NV_swap_group", 3, 4480, PYGL_API_WGL, 0, 3, 1};
 
 static PyObject *
 pygl_WGL_wglQuerySwapGroupNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1677,8 +2283,51 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglQueryVideoCaptureDeviceNV_args[] = {"hDc", "hDevice", "iAttribute", "piValue"};
+static const PyGLCommand pygl_WGL_wglQueryVideoCaptureDeviceNV_info = {"wglQueryVideoCaptureDeviceNV", "wglQueryVideoCaptureDeviceNV(hDc, hDevice, iAttribute, piValue) -> BOOL", "($module, hDc, hDevice, iAttribute, piValue, /)", pygl_WGL_wglQueryVideoCaptureDeviceNV_args, "WGL_NV_video_capture", 4, 4481, PYGL_API_WGL, 0, 4, 1};
+
+static PyObject *
+pygl_WGL_wglQueryVideoCaptureDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(4);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hDc);
+    PYGL_OPAQUE(1, hDevice);
+    PYGL_I(2, iAttribute);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(3, piValue, &pygl_elem_c_int);
+    PYGL_CALL_R(_result, int, (void *, void *, int, void *), (hDc, hDevice, iAttribute, piValue));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglRealizeLayerPalette_args[] = {"hdc", "iLayerPlane", "bRealize"};
+static const PyGLCommand pygl_WGL_wglRealizeLayerPalette_info = {"wglRealizeLayerPalette", "wglRealizeLayerPalette(hdc, iLayerPlane, bRealize) -> BOOL", "($module, hdc, iLayerPlane, bRealize, /)", pygl_WGL_wglRealizeLayerPalette_args, "WGL_VERSION_WGL_1_0", 3, 4482, PYGL_API_WGL, 0, 3, 1};
+
+static PyObject *
+pygl_WGL_wglRealizeLayerPalette(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(3);
+    PYGL_OPAQUE(0, hdc);
+    PYGL_I(1, iLayerPlane);
+    PYGL_I(2, bRealize);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void *, int, int), (hdc, iLayerPlane, bRealize));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglReleaseImageBufferEventsI3D_args[] = {"hDC", "pAddress", "count"};
-static const PyGLCommand pygl_WGL_wglReleaseImageBufferEventsI3D_info = {"wglReleaseImageBufferEventsI3D", "wglReleaseImageBufferEventsI3D(hDC, pAddress, count) -> BOOL", "($module, hDC, pAddress, count, /)", pygl_WGL_wglReleaseImageBufferEventsI3D_args, "WGL_I3D_image_buffer", 3, 4277, PYGL_API_WGL, 0, 3, 1};
+static const PyGLCommand pygl_WGL_wglReleaseImageBufferEventsI3D_info = {"wglReleaseImageBufferEventsI3D", "wglReleaseImageBufferEventsI3D(hDC, pAddress, count) -> BOOL", "($module, hDC, pAddress, count, /)", pygl_WGL_wglReleaseImageBufferEventsI3D_args, "WGL_I3D_image_buffer", 3, 4483, PYGL_API_WGL, 0, 3, 1};
 
 static PyObject *
 pygl_WGL_wglReleaseImageBufferEventsI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1700,8 +2349,62 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglReleasePbufferDCARB_args[] = {"hPbuffer", "hDC"};
+static const PyGLCommand pygl_WGL_wglReleasePbufferDCARB_info = {"wglReleasePbufferDCARB", "wglReleasePbufferDCARB(hPbuffer, hDC) -> c_int", "($module, hPbuffer, hDC, /)", pygl_WGL_wglReleasePbufferDCARB_args, "WGL_ARB_pbuffer", 2, 4484, PYGL_API_WGL, 0, 2, 1};
+
+static PyObject *
+pygl_WGL_wglReleasePbufferDCARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(2);
+    PYGL_OPAQUE(0, hPbuffer);
+    PYGL_OPAQUE(1, hDC);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void *, void *), (hPbuffer, hDC));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglReleasePbufferDCEXT_args[] = {"hPbuffer", "hDC"};
+static const PyGLCommand pygl_WGL_wglReleasePbufferDCEXT_info = {"wglReleasePbufferDCEXT", "wglReleasePbufferDCEXT(hPbuffer, hDC) -> c_int", "($module, hPbuffer, hDC, /)", pygl_WGL_wglReleasePbufferDCEXT_args, "WGL_EXT_pbuffer", 2, 4485, PYGL_API_WGL, 0, 2, 1};
+
+static PyObject *
+pygl_WGL_wglReleasePbufferDCEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(2);
+    PYGL_OPAQUE(0, hPbuffer);
+    PYGL_OPAQUE(1, hDC);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void *, void *), (hPbuffer, hDC));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglReleaseTexImageARB_args[] = {"hPbuffer", "iBuffer"};
+static const PyGLCommand pygl_WGL_wglReleaseTexImageARB_info = {"wglReleaseTexImageARB", "wglReleaseTexImageARB(hPbuffer, iBuffer) -> BOOL", "($module, hPbuffer, iBuffer, /)", pygl_WGL_wglReleaseTexImageARB_args, "WGL_ARB_render_texture", 2, 4486, PYGL_API_WGL, 0, 2, 1};
+
+static PyObject *
+pygl_WGL_wglReleaseTexImageARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(2);
+    PYGL_OPAQUE(0, hPbuffer);
+    PYGL_I(1, iBuffer);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void *, int), (hPbuffer, iBuffer));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglReleaseVideoCaptureDeviceNV_args[] = {"hDc", "hDevice"};
-static const PyGLCommand pygl_WGL_wglReleaseVideoCaptureDeviceNV_info = {"wglReleaseVideoCaptureDeviceNV", "wglReleaseVideoCaptureDeviceNV(hDc, hDevice) -> BOOL", "($module, hDc, hDevice, /)", pygl_WGL_wglReleaseVideoCaptureDeviceNV_args, "WGL_NV_video_capture", 2, 4278, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglReleaseVideoCaptureDeviceNV_info = {"wglReleaseVideoCaptureDeviceNV", "wglReleaseVideoCaptureDeviceNV(hDc, hDevice) -> BOOL", "($module, hDc, hDevice, /)", pygl_WGL_wglReleaseVideoCaptureDeviceNV_args, "WGL_NV_video_capture", 2, 4487, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglReleaseVideoCaptureDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1719,7 +2422,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglReleaseVideoDeviceNV_args[] = {"hVideoDevice"};
-static const PyGLCommand pygl_WGL_wglReleaseVideoDeviceNV_info = {"wglReleaseVideoDeviceNV", "wglReleaseVideoDeviceNV(hVideoDevice) -> BOOL", "($module, hVideoDevice, /)", pygl_WGL_wglReleaseVideoDeviceNV_args, "WGL_NV_video_output", 1, 4279, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglReleaseVideoDeviceNV_info = {"wglReleaseVideoDeviceNV", "wglReleaseVideoDeviceNV(hVideoDevice) -> BOOL", "($module, hVideoDevice, /)", pygl_WGL_wglReleaseVideoDeviceNV_args, "WGL_NV_video_output", 1, 4488, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglReleaseVideoDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1735,8 +2438,26 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglReleaseVideoImageNV_args[] = {"hPbuffer", "iVideoBuffer"};
+static const PyGLCommand pygl_WGL_wglReleaseVideoImageNV_info = {"wglReleaseVideoImageNV", "wglReleaseVideoImageNV(hPbuffer, iVideoBuffer) -> BOOL", "($module, hPbuffer, iVideoBuffer, /)", pygl_WGL_wglReleaseVideoImageNV_args, "WGL_NV_video_output", 2, 4489, PYGL_API_WGL, 0, 2, 1};
+
+static PyObject *
+pygl_WGL_wglReleaseVideoImageNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(2);
+    PYGL_OPAQUE(0, hPbuffer);
+    PYGL_I(1, iVideoBuffer);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void *, int), (hPbuffer, iVideoBuffer));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglResetFrameCountNV_args[] = {"hDC"};
-static const PyGLCommand pygl_WGL_wglResetFrameCountNV_info = {"wglResetFrameCountNV", "wglResetFrameCountNV(hDC) -> BOOL", "($module, hDC, /)", pygl_WGL_wglResetFrameCountNV_args, "WGL_NV_swap_group", 1, 4280, PYGL_API_WGL, 0, 1, 1};
+static const PyGLCommand pygl_WGL_wglResetFrameCountNV_info = {"wglResetFrameCountNV", "wglResetFrameCountNV(hDC) -> BOOL", "($module, hDC, /)", pygl_WGL_wglResetFrameCountNV_args, "WGL_NV_swap_group", 1, 4490, PYGL_API_WGL, 0, 1, 1};
 
 static PyObject *
 pygl_WGL_wglResetFrameCountNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1752,8 +2473,172 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglRestoreBufferRegionARB_args[] = {"hRegion", "x", "y", "width", "height", "xSrc", "ySrc"};
+static const PyGLCommand pygl_WGL_wglRestoreBufferRegionARB_info = {"wglRestoreBufferRegionARB", "wglRestoreBufferRegionARB(hRegion, x, y, width, height, xSrc, ySrc) -> BOOL", "($module, hRegion, x, y, width, height, xSrc, ySrc, /)", pygl_WGL_wglRestoreBufferRegionARB_args, "WGL_ARB_buffer_region", 7, 4491, PYGL_API_WGL, 0, 7, 1};
+
+static PyObject *
+pygl_WGL_wglRestoreBufferRegionARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(7);
+    PYGL_OPAQUE(0, hRegion);
+    PYGL_I(1, x);
+    PYGL_I(2, y);
+    PYGL_I(3, width);
+    PYGL_I(4, height);
+    PYGL_I(5, xSrc);
+    PYGL_I(6, ySrc);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void *, int, int, int, int, int, int), (hRegion, x, y, width, height, xSrc, ySrc));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglSaveBufferRegionARB_args[] = {"hRegion", "x", "y", "width", "height"};
+static const PyGLCommand pygl_WGL_wglSaveBufferRegionARB_info = {"wglSaveBufferRegionARB", "wglSaveBufferRegionARB(hRegion, x, y, width, height) -> BOOL", "($module, hRegion, x, y, width, height, /)", pygl_WGL_wglSaveBufferRegionARB_args, "WGL_ARB_buffer_region", 5, 4492, PYGL_API_WGL, 0, 5, 1};
+
+static PyObject *
+pygl_WGL_wglSaveBufferRegionARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(5);
+    PYGL_OPAQUE(0, hRegion);
+    PYGL_I(1, x);
+    PYGL_I(2, y);
+    PYGL_I(3, width);
+    PYGL_I(4, height);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void *, int, int, int, int), (hRegion, x, y, width, height));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglSendPbufferToVideoNV_args[] = {"hPbuffer", "iBufferType", "pulCounterPbuffer", "bBlock"};
+static const PyGLCommand pygl_WGL_wglSendPbufferToVideoNV_info = {"wglSendPbufferToVideoNV", "wglSendPbufferToVideoNV(hPbuffer, iBufferType, pulCounterPbuffer, bBlock) -> BOOL", "($module, hPbuffer, iBufferType, pulCounterPbuffer, bBlock, /)", pygl_WGL_wglSendPbufferToVideoNV_args, "WGL_NV_video_output", 4, 4493, PYGL_API_WGL, 0, 4, 1};
+
+static PyObject *
+pygl_WGL_wglSendPbufferToVideoNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(4);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hPbuffer);
+    PYGL_I(1, iBufferType);
+    PYGL_I(3, bBlock);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(2, pulCounterPbuffer, &pygl_elem_any);
+    PYGL_CALL_R(_result, int, (void *, int, void *, int), (hPbuffer, iBufferType, pulCounterPbuffer, bBlock));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglSetDigitalVideoParametersI3D_args[] = {"hDC", "iAttribute", "piValue"};
+static const PyGLCommand pygl_WGL_wglSetDigitalVideoParametersI3D_info = {"wglSetDigitalVideoParametersI3D", "wglSetDigitalVideoParametersI3D(hDC, iAttribute, piValue) -> BOOL", "($module, hDC, iAttribute, piValue, /)", pygl_WGL_wglSetDigitalVideoParametersI3D_args, "WGL_I3D_digital_video_control", 3, 4494, PYGL_API_WGL, 0, 3, 1};
+
+static PyObject *
+pygl_WGL_wglSetDigitalVideoParametersI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(3);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hDC);
+    PYGL_I(1, iAttribute);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(2, piValue, &pygl_elem_c_int);
+    PYGL_CALL_R(_result, int, (void *, int, void *), (hDC, iAttribute, piValue));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglSetGammaTableI3D_args[] = {"hDC", "iEntries", "puRed", "puGreen", "puBlue"};
+static const PyGLCommand pygl_WGL_wglSetGammaTableI3D_info = {"wglSetGammaTableI3D", "wglSetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue) -> BOOL", "($module, hDC, iEntries, puRed, puGreen, puBlue, /)", pygl_WGL_wglSetGammaTableI3D_args, "WGL_I3D_gamma", 5, 4495, PYGL_API_WGL, 0, 5, 1};
+
+static PyObject *
+pygl_WGL_wglSetGammaTableI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(5);
+    PYGL_FRAME(3);
+    PYGL_OPAQUE(0, hDC);
+    PYGL_I(1, iEntries);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(2, puRed, &pygl_elem_any);
+    PYGL_ARRAY_IN(3, puGreen, &pygl_elem_any);
+    PYGL_ARRAY_IN(4, puBlue, &pygl_elem_any);
+    PYGL_CALL_R(_result, int, (void *, int, void *, void *, void *), (hDC, iEntries, puRed, puGreen, puBlue));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglSetGammaTableParametersI3D_args[] = {"hDC", "iAttribute", "piValue"};
+static const PyGLCommand pygl_WGL_wglSetGammaTableParametersI3D_info = {"wglSetGammaTableParametersI3D", "wglSetGammaTableParametersI3D(hDC, iAttribute, piValue) -> BOOL", "($module, hDC, iAttribute, piValue, /)", pygl_WGL_wglSetGammaTableParametersI3D_args, "WGL_I3D_gamma", 3, 4496, PYGL_API_WGL, 0, 3, 1};
+
+static PyObject *
+pygl_WGL_wglSetGammaTableParametersI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(3);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hDC);
+    PYGL_I(1, iAttribute);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(2, piValue, &pygl_elem_c_int);
+    PYGL_CALL_R(_result, int, (void *, int, void *), (hDC, iAttribute, piValue));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglSetLayerPaletteEntries_args[] = {"hdc", "iLayerPlane", "iStart", "cEntries", "pcr"};
+static const PyGLCommand pygl_WGL_wglSetLayerPaletteEntries_info = {"wglSetLayerPaletteEntries", "wglSetLayerPaletteEntries(hdc, iLayerPlane, iStart, cEntries, pcr) -> c_int", "($module, hdc, iLayerPlane, iStart, cEntries, pcr, /)", pygl_WGL_wglSetLayerPaletteEntries_args, "WGL_VERSION_WGL_1_0", 5, 4497, PYGL_API_WGL, 0, 5, 1};
+
+static PyObject *
+pygl_WGL_wglSetLayerPaletteEntries(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(5);
+    PYGL_FRAME(1);
+    PYGL_OPAQUE(0, hdc);
+    PYGL_I(1, iLayerPlane);
+    PYGL_I(2, iStart);
+    PYGL_I(3, cEntries);
+    PYGL_CONV_OK();
+    PYGL_ARRAY_IN(4, pcr, &pygl_elem_any);
+    PYGL_CALL_R(_result, int, (void *, int, int, int, void *), (hdc, iLayerPlane, iStart, cEntries, pcr));
+    PYGL_CHECK();
+    PyObject *_value = PyLong_FromLong((long)_result);
+    PYGL_CLEANUP();
+    return _value;
+_fail:
+    PYGL_CLEANUP();
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglSetPbufferAttribARB_args[] = {"hPbuffer", "piAttribList"};
-static const PyGLCommand pygl_WGL_wglSetPbufferAttribARB_info = {"wglSetPbufferAttribARB", "wglSetPbufferAttribARB(hPbuffer, piAttribList) -> BOOL", "($module, hPbuffer, piAttribList, /)", pygl_WGL_wglSetPbufferAttribARB_args, "WGL_ARB_render_texture", 2, 4281, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglSetPbufferAttribARB_info = {"wglSetPbufferAttribARB", "wglSetPbufferAttribARB(hPbuffer, piAttribList) -> BOOL", "($module, hPbuffer, piAttribList, /)", pygl_WGL_wglSetPbufferAttribARB_args, "WGL_ARB_render_texture", 2, 4498, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglSetPbufferAttribARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1762,7 +2647,7 @@ pygl_WGL_wglSetPbufferAttribARB(GLProc *self, PyObject *const *_a, size_t _nargs
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, hPbuffer);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, piAttribList, &pygl_elem_any);
+    PYGL_ARRAY_IN(1, piAttribList, &pygl_elem_c_int);
     PYGL_CALL_R(_result, int, (void *, void *), (hPbuffer, piAttribList));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromLong((long)_result);
@@ -1775,7 +2660,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglSetStereoEmitterState3DL_args[] = {"hDC", "uState"};
-static const PyGLCommand pygl_WGL_wglSetStereoEmitterState3DL_info = {"wglSetStereoEmitterState3DL", "wglSetStereoEmitterState3DL(hDC, uState) -> BOOL", "($module, hDC, uState, /)", pygl_WGL_wglSetStereoEmitterState3DL_args, "WGL_DL_stereo_control", 2, 4282, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglSetStereoEmitterState3DL_info = {"wglSetStereoEmitterState3DL", "wglSetStereoEmitterState3DL(hDC, uState) -> BOOL", "($module, hDC, uState, /)", pygl_WGL_wglSetStereoEmitterState3DL_args, "WGL_DL_stereo_control", 2, 4499, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglSetStereoEmitterState3DL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1793,7 +2678,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglShareLists_args[] = {"hrcSrvShare", "hrcSrvSource"};
-static const PyGLCommand pygl_WGL_wglShareLists_info = {"wglShareLists", "wglShareLists(hrcSrvShare, hrcSrvSource) -> BOOL", "($module, hrcSrvShare, hrcSrvSource, /)", pygl_WGL_wglShareLists_args, "WGL_VERSION_WGL_1_0", 2, 4283, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglShareLists_info = {"wglShareLists", "wglShareLists(hrcSrvShare, hrcSrvSource) -> BOOL", "($module, hrcSrvShare, hrcSrvSource, /)", pygl_WGL_wglShareLists_args, "WGL_VERSION_WGL_1_0", 2, 4500, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglShareLists(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1811,7 +2696,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglSwapBuffersMscOML_args[] = {"hdc", "target_msc", "divisor", "remainder"};
-static const PyGLCommand pygl_WGL_wglSwapBuffersMscOML_info = {"wglSwapBuffersMscOML", "wglSwapBuffersMscOML(hdc, target_msc, divisor, remainder) -> INT64", "($module, hdc, target_msc, divisor, remainder, /)", pygl_WGL_wglSwapBuffersMscOML_args, "WGL_OML_sync_control", 4, 4284, PYGL_API_WGL, 0, 4, 1};
+static const PyGLCommand pygl_WGL_wglSwapBuffersMscOML_info = {"wglSwapBuffersMscOML", "wglSwapBuffersMscOML(hdc, target_msc, divisor, remainder) -> INT64", "($module, hdc, target_msc, divisor, remainder, /)", pygl_WGL_wglSwapBuffersMscOML_args, "WGL_OML_sync_control", 4, 4501, PYGL_API_WGL, 0, 4, 1};
 
 static PyObject *
 pygl_WGL_wglSwapBuffersMscOML(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1830,8 +2715,25 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglSwapIntervalEXT_args[] = {"interval"};
+static const PyGLCommand pygl_WGL_wglSwapIntervalEXT_info = {"wglSwapIntervalEXT", "wglSwapIntervalEXT(interval) -> BOOL", "($module, interval, /)", pygl_WGL_wglSwapIntervalEXT_args, "WGL_EXT_swap_control", 1, 4502, PYGL_API_WGL, 0, 1, 1};
+
+static PyObject *
+pygl_WGL_wglSwapIntervalEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(1);
+    PYGL_I(0, interval);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (int), (interval));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglSwapLayerBuffers_args[] = {"hdc", "fuFlags"};
-static const PyGLCommand pygl_WGL_wglSwapLayerBuffers_info = {"wglSwapLayerBuffers", "wglSwapLayerBuffers(hdc, fuFlags) -> BOOL", "($module, hdc, fuFlags, /)", pygl_WGL_wglSwapLayerBuffers_args, "WGL_VERSION_WGL_1_0", 2, 4285, PYGL_API_WGL, 0, 2, 1};
+static const PyGLCommand pygl_WGL_wglSwapLayerBuffers_info = {"wglSwapLayerBuffers", "wglSwapLayerBuffers(hdc, fuFlags) -> BOOL", "($module, hdc, fuFlags, /)", pygl_WGL_wglSwapLayerBuffers_args, "WGL_VERSION_WGL_1_0", 2, 4503, PYGL_API_WGL, 0, 2, 1};
 
 static PyObject *
 pygl_WGL_wglSwapLayerBuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1849,7 +2751,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglSwapLayerBuffersMscOML_args[] = {"hdc", "fuPlanes", "target_msc", "divisor", "remainder"};
-static const PyGLCommand pygl_WGL_wglSwapLayerBuffersMscOML_info = {"wglSwapLayerBuffersMscOML", "wglSwapLayerBuffersMscOML(hdc, fuPlanes, target_msc, divisor, remainder) -> INT64", "($module, hdc, fuPlanes, target_msc, divisor, remainder, /)", pygl_WGL_wglSwapLayerBuffersMscOML_args, "WGL_OML_sync_control", 5, 4286, PYGL_API_WGL, 0, 5, 1};
+static const PyGLCommand pygl_WGL_wglSwapLayerBuffersMscOML_info = {"wglSwapLayerBuffersMscOML", "wglSwapLayerBuffersMscOML(hdc, fuPlanes, target_msc, divisor, remainder) -> INT64", "($module, hdc, fuPlanes, target_msc, divisor, remainder, /)", pygl_WGL_wglSwapLayerBuffersMscOML_args, "WGL_OML_sync_control", 5, 4504, PYGL_API_WGL, 0, 5, 1};
 
 static PyObject *
 pygl_WGL_wglSwapLayerBuffersMscOML(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1870,7 +2772,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglUseFontBitmaps_args[] = {"hDC", "first", "count", "listBase"};
-static const PyGLCommand pygl_WGL_wglUseFontBitmaps_info = {"wglUseFontBitmaps", "wglUseFontBitmaps(hDC, first, count, listBase) -> BOOL", "($module, hDC, first, count, listBase, /)", pygl_WGL_wglUseFontBitmaps_args, "WGL_VERSION_WGL_1_0", 4, 4287, PYGL_API_WGL, 0, 4, 1};
+static const PyGLCommand pygl_WGL_wglUseFontBitmaps_info = {"wglUseFontBitmaps", "wglUseFontBitmaps(hDC, first, count, listBase) -> BOOL", "($module, hDC, first, count, listBase, /)", pygl_WGL_wglUseFontBitmaps_args, "WGL_VERSION_WGL_1_0", 4, 4505, PYGL_API_WGL, 0, 4, 1};
 
 static PyObject *
 pygl_WGL_wglUseFontBitmaps(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1890,7 +2792,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglUseFontBitmapsA_args[] = {"hDC", "first", "count", "listBase"};
-static const PyGLCommand pygl_WGL_wglUseFontBitmapsA_info = {"wglUseFontBitmapsA", "wglUseFontBitmapsA(hDC, first, count, listBase) -> BOOL", "($module, hDC, first, count, listBase, /)", pygl_WGL_wglUseFontBitmapsA_args, "WGL_VERSION_WGL_1_0", 4, 4288, PYGL_API_WGL, 0, 4, 1};
+static const PyGLCommand pygl_WGL_wglUseFontBitmapsA_info = {"wglUseFontBitmapsA", "wglUseFontBitmapsA(hDC, first, count, listBase) -> BOOL", "($module, hDC, first, count, listBase, /)", pygl_WGL_wglUseFontBitmapsA_args, "WGL_VERSION_WGL_1_0", 4, 4506, PYGL_API_WGL, 0, 4, 1};
 
 static PyObject *
 pygl_WGL_wglUseFontBitmapsA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1910,7 +2812,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglUseFontBitmapsW_args[] = {"hDC", "first", "count", "listBase"};
-static const PyGLCommand pygl_WGL_wglUseFontBitmapsW_info = {"wglUseFontBitmapsW", "wglUseFontBitmapsW(hDC, first, count, listBase) -> BOOL", "($module, hDC, first, count, listBase, /)", pygl_WGL_wglUseFontBitmapsW_args, "WGL_VERSION_WGL_1_0", 4, 4289, PYGL_API_WGL, 0, 4, 1};
+static const PyGLCommand pygl_WGL_wglUseFontBitmapsW_info = {"wglUseFontBitmapsW", "wglUseFontBitmapsW(hDC, first, count, listBase) -> BOOL", "($module, hDC, first, count, listBase, /)", pygl_WGL_wglUseFontBitmapsW_args, "WGL_VERSION_WGL_1_0", 4, 4507, PYGL_API_WGL, 0, 4, 1};
 
 static PyObject *
 pygl_WGL_wglUseFontBitmapsW(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1929,8 +2831,80 @@ _fail:
 }
 
 
+static const char *const pygl_WGL_wglUseFontOutlines_args[] = {"hDC", "first", "count", "listBase", "deviation", "extrusion", "format", "lpgmf"};
+static const PyGLCommand pygl_WGL_wglUseFontOutlines_info = {"wglUseFontOutlines", "wglUseFontOutlines(hDC, first, count, listBase, deviation, extrusion, format, lpgmf) -> BOOL", "($module, hDC, first, count, listBase, deviation, extrusion, format, lpgmf, /)", pygl_WGL_wglUseFontOutlines_args, "WGL_VERSION_WGL_1_0", 8, 4508, PYGL_API_WGL, 0, 8, 1};
+
+static PyObject *
+pygl_WGL_wglUseFontOutlines(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(8);
+    PYGL_OPAQUE(0, hDC);
+    PYGL_U(1, first);
+    PYGL_U(2, count);
+    PYGL_U(3, listBase);
+    PYGL_F(4, deviation);
+    PYGL_F(5, extrusion);
+    PYGL_I(6, format);
+    PYGL_OPAQUE(7, lpgmf);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void *, unsigned int, unsigned int, unsigned int, float, float, int, void *), (hDC, first, count, listBase, deviation, extrusion, format, lpgmf));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglUseFontOutlinesA_args[] = {"hDC", "first", "count", "listBase", "deviation", "extrusion", "format", "lpgmf"};
+static const PyGLCommand pygl_WGL_wglUseFontOutlinesA_info = {"wglUseFontOutlinesA", "wglUseFontOutlinesA(hDC, first, count, listBase, deviation, extrusion, format, lpgmf) -> BOOL", "($module, hDC, first, count, listBase, deviation, extrusion, format, lpgmf, /)", pygl_WGL_wglUseFontOutlinesA_args, "WGL_VERSION_WGL_1_0", 8, 4509, PYGL_API_WGL, 0, 8, 1};
+
+static PyObject *
+pygl_WGL_wglUseFontOutlinesA(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(8);
+    PYGL_OPAQUE(0, hDC);
+    PYGL_U(1, first);
+    PYGL_U(2, count);
+    PYGL_U(3, listBase);
+    PYGL_F(4, deviation);
+    PYGL_F(5, extrusion);
+    PYGL_I(6, format);
+    PYGL_OPAQUE(7, lpgmf);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void *, unsigned int, unsigned int, unsigned int, float, float, int, void *), (hDC, first, count, listBase, deviation, extrusion, format, lpgmf));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
+static const char *const pygl_WGL_wglUseFontOutlinesW_args[] = {"hDC", "first", "count", "listBase", "deviation", "extrusion", "format", "lpgmf"};
+static const PyGLCommand pygl_WGL_wglUseFontOutlinesW_info = {"wglUseFontOutlinesW", "wglUseFontOutlinesW(hDC, first, count, listBase, deviation, extrusion, format, lpgmf) -> BOOL", "($module, hDC, first, count, listBase, deviation, extrusion, format, lpgmf, /)", pygl_WGL_wglUseFontOutlinesW_args, "WGL_VERSION_WGL_1_0", 8, 4510, PYGL_API_WGL, 0, 8, 1};
+
+static PyObject *
+pygl_WGL_wglUseFontOutlinesW(GLProc *self, PyObject *const *_a, size_t _nargsf)
+{
+    PYGL_ARITY(8);
+    PYGL_OPAQUE(0, hDC);
+    PYGL_U(1, first);
+    PYGL_U(2, count);
+    PYGL_U(3, listBase);
+    PYGL_F(4, deviation);
+    PYGL_F(5, extrusion);
+    PYGL_I(6, format);
+    PYGL_OPAQUE(7, lpgmf);
+    PYGL_CONV_OK();
+    PYGL_CALL_R(_result, int, (void *, unsigned int, unsigned int, unsigned int, float, float, int, void *), (hDC, first, count, listBase, deviation, extrusion, format, lpgmf));
+    PYGL_CHECK();
+    return PyLong_FromLong((long)_result);
+_fail:
+    return NULL;
+}
+
+
 static const char *const pygl_WGL_wglWaitForMscOML_args[] = {"hdc", "target_msc", "divisor", "remainder", "ust", "msc", "sbc"};
-static const PyGLCommand pygl_WGL_wglWaitForMscOML_info = {"wglWaitForMscOML", "wglWaitForMscOML(hdc, target_msc, divisor, remainder, ust, msc, sbc) -> BOOL", "($module, hdc, target_msc, divisor, remainder, ust, msc, sbc, /)", pygl_WGL_wglWaitForMscOML_args, "WGL_OML_sync_control", 7, 4290, PYGL_API_WGL, 0, 7, 1};
+static const PyGLCommand pygl_WGL_wglWaitForMscOML_info = {"wglWaitForMscOML", "wglWaitForMscOML(hdc, target_msc, divisor, remainder, ust, msc, sbc) -> BOOL", "($module, hdc, target_msc, divisor, remainder, ust, msc, sbc, /)", pygl_WGL_wglWaitForMscOML_args, "WGL_OML_sync_control", 7, 4511, PYGL_API_WGL, 0, 7, 1};
 
 static PyObject *
 pygl_WGL_wglWaitForMscOML(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1957,7 +2931,7 @@ _fail:
 
 
 static const char *const pygl_WGL_wglWaitForSbcOML_args[] = {"hdc", "target_sbc", "ust", "msc", "sbc"};
-static const PyGLCommand pygl_WGL_wglWaitForSbcOML_info = {"wglWaitForSbcOML", "wglWaitForSbcOML(hdc, target_sbc, ust, msc, sbc) -> BOOL", "($module, hdc, target_sbc, ust, msc, sbc, /)", pygl_WGL_wglWaitForSbcOML_args, "WGL_OML_sync_control", 5, 4291, PYGL_API_WGL, 0, 5, 1};
+static const PyGLCommand pygl_WGL_wglWaitForSbcOML_info = {"wglWaitForSbcOML", "wglWaitForSbcOML(hdc, target_sbc, ust, msc, sbc) -> BOOL", "($module, hdc, target_sbc, ust, msc, sbc, /)", pygl_WGL_wglWaitForSbcOML_args, "WGL_OML_sync_control", 5, 4512, PYGL_API_WGL, 0, 5, 1};
 
 static PyObject *
 pygl_WGL_wglWaitForSbcOML(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1982,13 +2956,20 @@ _fail:
 
 
 const PyGLEntry pygl_entries_WGL[] = {
+    {&pygl_WGL_ChoosePixelFormat_info, (vectorcallfunc)pygl_WGL_ChoosePixelFormat},
+    {&pygl_WGL_DescribePixelFormat_info, (vectorcallfunc)pygl_WGL_DescribePixelFormat},
     {&pygl_WGL_GetEnhMetaFilePixelFormat_info, (vectorcallfunc)pygl_WGL_GetEnhMetaFilePixelFormat},
+    {&pygl_WGL_GetPixelFormat_info, (vectorcallfunc)pygl_WGL_GetPixelFormat},
+    {&pygl_WGL_SetPixelFormat_info, (vectorcallfunc)pygl_WGL_SetPixelFormat},
     {&pygl_WGL_SwapBuffers_info, (vectorcallfunc)pygl_WGL_SwapBuffers},
     {&pygl_WGL_wglAssociateImageBufferEventsI3D_info, (vectorcallfunc)pygl_WGL_wglAssociateImageBufferEventsI3D},
     {&pygl_WGL_wglBeginFrameTrackingI3D_info, (vectorcallfunc)pygl_WGL_wglBeginFrameTrackingI3D},
     {&pygl_WGL_wglBindDisplayColorTableEXT_info, (vectorcallfunc)pygl_WGL_wglBindDisplayColorTableEXT},
     {&pygl_WGL_wglBindSwapBarrierNV_info, (vectorcallfunc)pygl_WGL_wglBindSwapBarrierNV},
+    {&pygl_WGL_wglBindTexImageARB_info, (vectorcallfunc)pygl_WGL_wglBindTexImageARB},
     {&pygl_WGL_wglBindVideoCaptureDeviceNV_info, (vectorcallfunc)pygl_WGL_wglBindVideoCaptureDeviceNV},
+    {&pygl_WGL_wglBindVideoDeviceNV_info, (vectorcallfunc)pygl_WGL_wglBindVideoDeviceNV},
+    {&pygl_WGL_wglBindVideoImageNV_info, (vectorcallfunc)pygl_WGL_wglBindVideoImageNV},
     {&pygl_WGL_wglBlitContextFramebufferAMD_info, (vectorcallfunc)pygl_WGL_wglBlitContextFramebufferAMD},
     {&pygl_WGL_wglChoosePixelFormatARB_info, (vectorcallfunc)pygl_WGL_wglChoosePixelFormatARB},
     {&pygl_WGL_wglChoosePixelFormatEXT_info, (vectorcallfunc)pygl_WGL_wglChoosePixelFormatEXT},
@@ -1997,10 +2978,14 @@ const PyGLEntry pygl_entries_WGL[] = {
     {&pygl_WGL_wglCreateAffinityDCNV_info, (vectorcallfunc)pygl_WGL_wglCreateAffinityDCNV},
     {&pygl_WGL_wglCreateAssociatedContextAMD_info, (vectorcallfunc)pygl_WGL_wglCreateAssociatedContextAMD},
     {&pygl_WGL_wglCreateAssociatedContextAttribsAMD_info, (vectorcallfunc)pygl_WGL_wglCreateAssociatedContextAttribsAMD},
+    {&pygl_WGL_wglCreateBufferRegionARB_info, (vectorcallfunc)pygl_WGL_wglCreateBufferRegionARB},
     {&pygl_WGL_wglCreateContext_info, (vectorcallfunc)pygl_WGL_wglCreateContext},
     {&pygl_WGL_wglCreateContextAttribsARB_info, (vectorcallfunc)pygl_WGL_wglCreateContextAttribsARB},
     {&pygl_WGL_wglCreateDisplayColorTableEXT_info, (vectorcallfunc)pygl_WGL_wglCreateDisplayColorTableEXT},
     {&pygl_WGL_wglCreateImageBufferI3D_info, (vectorcallfunc)pygl_WGL_wglCreateImageBufferI3D},
+    {&pygl_WGL_wglCreateLayerContext_info, (vectorcallfunc)pygl_WGL_wglCreateLayerContext},
+    {&pygl_WGL_wglCreatePbufferARB_info, (vectorcallfunc)pygl_WGL_wglCreatePbufferARB},
+    {&pygl_WGL_wglCreatePbufferEXT_info, (vectorcallfunc)pygl_WGL_wglCreatePbufferEXT},
     {&pygl_WGL_wglDXCloseDeviceNV_info, (vectorcallfunc)pygl_WGL_wglDXCloseDeviceNV},
     {&pygl_WGL_wglDXLockObjectsNV_info, (vectorcallfunc)pygl_WGL_wglDXLockObjectsNV},
     {&pygl_WGL_wglDXObjectAccessNV_info, (vectorcallfunc)pygl_WGL_wglDXObjectAccessNV},
@@ -2014,6 +2999,7 @@ const PyGLEntry pygl_entries_WGL[] = {
     {&pygl_WGL_wglDeleteBufferRegionARB_info, (vectorcallfunc)pygl_WGL_wglDeleteBufferRegionARB},
     {&pygl_WGL_wglDeleteContext_info, (vectorcallfunc)pygl_WGL_wglDeleteContext},
     {&pygl_WGL_wglDeleteDCNV_info, (vectorcallfunc)pygl_WGL_wglDeleteDCNV},
+    {&pygl_WGL_wglDescribeLayerPlane_info, (vectorcallfunc)pygl_WGL_wglDescribeLayerPlane},
     {&pygl_WGL_wglDestroyDisplayColorTableEXT_info, (vectorcallfunc)pygl_WGL_wglDestroyDisplayColorTableEXT},
     {&pygl_WGL_wglDestroyImageBufferI3D_info, (vectorcallfunc)pygl_WGL_wglDestroyImageBufferI3D},
     {&pygl_WGL_wglDestroyPbufferARB_info, (vectorcallfunc)pygl_WGL_wglDestroyPbufferARB},
@@ -2023,9 +3009,11 @@ const PyGLEntry pygl_entries_WGL[] = {
     {&pygl_WGL_wglEnableFrameLockI3D_info, (vectorcallfunc)pygl_WGL_wglEnableFrameLockI3D},
     {&pygl_WGL_wglEnableGenlockI3D_info, (vectorcallfunc)pygl_WGL_wglEnableGenlockI3D},
     {&pygl_WGL_wglEndFrameTrackingI3D_info, (vectorcallfunc)pygl_WGL_wglEndFrameTrackingI3D},
+    {&pygl_WGL_wglEnumGpuDevicesNV_info, (vectorcallfunc)pygl_WGL_wglEnumGpuDevicesNV},
     {&pygl_WGL_wglEnumGpusFromAffinityDCNV_info, (vectorcallfunc)pygl_WGL_wglEnumGpusFromAffinityDCNV},
     {&pygl_WGL_wglEnumGpusNV_info, (vectorcallfunc)pygl_WGL_wglEnumGpusNV},
     {&pygl_WGL_wglEnumerateVideoCaptureDevicesNV_info, (vectorcallfunc)pygl_WGL_wglEnumerateVideoCaptureDevicesNV},
+    {&pygl_WGL_wglEnumerateVideoDevicesNV_info, (vectorcallfunc)pygl_WGL_wglEnumerateVideoDevicesNV},
     {&pygl_WGL_wglFreeMemoryNV_info, (vectorcallfunc)pygl_WGL_wglFreeMemoryNV},
     {&pygl_WGL_wglGenlockSampleRateI3D_info, (vectorcallfunc)pygl_WGL_wglGenlockSampleRateI3D},
     {&pygl_WGL_wglGenlockSourceDelayI3D_info, (vectorcallfunc)pygl_WGL_wglGenlockSourceDelayI3D},
@@ -2037,20 +3025,30 @@ const PyGLEntry pygl_entries_WGL[] = {
     {&pygl_WGL_wglGetCurrentDC_info, (vectorcallfunc)pygl_WGL_wglGetCurrentDC},
     {&pygl_WGL_wglGetCurrentReadDCARB_info, (vectorcallfunc)pygl_WGL_wglGetCurrentReadDCARB},
     {&pygl_WGL_wglGetCurrentReadDCEXT_info, (vectorcallfunc)pygl_WGL_wglGetCurrentReadDCEXT},
+    {&pygl_WGL_wglGetDigitalVideoParametersI3D_info, (vectorcallfunc)pygl_WGL_wglGetDigitalVideoParametersI3D},
     {&pygl_WGL_wglGetExtensionsStringARB_info, (vectorcallfunc)pygl_WGL_wglGetExtensionsStringARB},
     {&pygl_WGL_wglGetExtensionsStringEXT_info, (vectorcallfunc)pygl_WGL_wglGetExtensionsStringEXT},
     {&pygl_WGL_wglGetFrameUsageI3D_info, (vectorcallfunc)pygl_WGL_wglGetFrameUsageI3D},
     {&pygl_WGL_wglGetGPUIDsAMD_info, (vectorcallfunc)pygl_WGL_wglGetGPUIDsAMD},
     {&pygl_WGL_wglGetGPUInfoAMD_info, (vectorcallfunc)pygl_WGL_wglGetGPUInfoAMD},
+    {&pygl_WGL_wglGetGammaTableI3D_info, (vectorcallfunc)pygl_WGL_wglGetGammaTableI3D},
+    {&pygl_WGL_wglGetGammaTableParametersI3D_info, (vectorcallfunc)pygl_WGL_wglGetGammaTableParametersI3D},
     {&pygl_WGL_wglGetGenlockSampleRateI3D_info, (vectorcallfunc)pygl_WGL_wglGetGenlockSampleRateI3D},
     {&pygl_WGL_wglGetGenlockSourceDelayI3D_info, (vectorcallfunc)pygl_WGL_wglGetGenlockSourceDelayI3D},
     {&pygl_WGL_wglGetGenlockSourceEdgeI3D_info, (vectorcallfunc)pygl_WGL_wglGetGenlockSourceEdgeI3D},
     {&pygl_WGL_wglGetGenlockSourceI3D_info, (vectorcallfunc)pygl_WGL_wglGetGenlockSourceI3D},
+    {&pygl_WGL_wglGetLayerPaletteEntries_info, (vectorcallfunc)pygl_WGL_wglGetLayerPaletteEntries},
     {&pygl_WGL_wglGetMscRateOML_info, (vectorcallfunc)pygl_WGL_wglGetMscRateOML},
     {&pygl_WGL_wglGetPbufferDCARB_info, (vectorcallfunc)pygl_WGL_wglGetPbufferDCARB},
     {&pygl_WGL_wglGetPbufferDCEXT_info, (vectorcallfunc)pygl_WGL_wglGetPbufferDCEXT},
+    {&pygl_WGL_wglGetPixelFormatAttribfvARB_info, (vectorcallfunc)pygl_WGL_wglGetPixelFormatAttribfvARB},
+    {&pygl_WGL_wglGetPixelFormatAttribfvEXT_info, (vectorcallfunc)pygl_WGL_wglGetPixelFormatAttribfvEXT},
+    {&pygl_WGL_wglGetPixelFormatAttribivARB_info, (vectorcallfunc)pygl_WGL_wglGetPixelFormatAttribivARB},
+    {&pygl_WGL_wglGetPixelFormatAttribivEXT_info, (vectorcallfunc)pygl_WGL_wglGetPixelFormatAttribivEXT},
     {&pygl_WGL_wglGetProcAddress_info, (vectorcallfunc)pygl_WGL_wglGetProcAddress},
+    {&pygl_WGL_wglGetSwapIntervalEXT_info, (vectorcallfunc)pygl_WGL_wglGetSwapIntervalEXT},
     {&pygl_WGL_wglGetSyncValuesOML_info, (vectorcallfunc)pygl_WGL_wglGetSyncValuesOML},
+    {&pygl_WGL_wglGetVideoDeviceNV_info, (vectorcallfunc)pygl_WGL_wglGetVideoDeviceNV},
     {&pygl_WGL_wglGetVideoInfoNV_info, (vectorcallfunc)pygl_WGL_wglGetVideoInfoNV},
     {&pygl_WGL_wglIsEnabledFrameLockI3D_info, (vectorcallfunc)pygl_WGL_wglIsEnabledFrameLockI3D},
     {&pygl_WGL_wglIsEnabledGenlockI3D_info, (vectorcallfunc)pygl_WGL_wglIsEnabledGenlockI3D},
@@ -2061,25 +3059,45 @@ const PyGLEntry pygl_entries_WGL[] = {
     {&pygl_WGL_wglMakeContextCurrentARB_info, (vectorcallfunc)pygl_WGL_wglMakeContextCurrentARB},
     {&pygl_WGL_wglMakeContextCurrentEXT_info, (vectorcallfunc)pygl_WGL_wglMakeContextCurrentEXT},
     {&pygl_WGL_wglMakeCurrent_info, (vectorcallfunc)pygl_WGL_wglMakeCurrent},
+    {&pygl_WGL_wglQueryCurrentContextNV_info, (vectorcallfunc)pygl_WGL_wglQueryCurrentContextNV},
     {&pygl_WGL_wglQueryFrameCountNV_info, (vectorcallfunc)pygl_WGL_wglQueryFrameCountNV},
     {&pygl_WGL_wglQueryFrameLockMasterI3D_info, (vectorcallfunc)pygl_WGL_wglQueryFrameLockMasterI3D},
     {&pygl_WGL_wglQueryFrameTrackingI3D_info, (vectorcallfunc)pygl_WGL_wglQueryFrameTrackingI3D},
     {&pygl_WGL_wglQueryGenlockMaxSourceDelayI3D_info, (vectorcallfunc)pygl_WGL_wglQueryGenlockMaxSourceDelayI3D},
     {&pygl_WGL_wglQueryMaxSwapGroupsNV_info, (vectorcallfunc)pygl_WGL_wglQueryMaxSwapGroupsNV},
+    {&pygl_WGL_wglQueryPbufferARB_info, (vectorcallfunc)pygl_WGL_wglQueryPbufferARB},
+    {&pygl_WGL_wglQueryPbufferEXT_info, (vectorcallfunc)pygl_WGL_wglQueryPbufferEXT},
     {&pygl_WGL_wglQuerySwapGroupNV_info, (vectorcallfunc)pygl_WGL_wglQuerySwapGroupNV},
+    {&pygl_WGL_wglQueryVideoCaptureDeviceNV_info, (vectorcallfunc)pygl_WGL_wglQueryVideoCaptureDeviceNV},
+    {&pygl_WGL_wglRealizeLayerPalette_info, (vectorcallfunc)pygl_WGL_wglRealizeLayerPalette},
     {&pygl_WGL_wglReleaseImageBufferEventsI3D_info, (vectorcallfunc)pygl_WGL_wglReleaseImageBufferEventsI3D},
+    {&pygl_WGL_wglReleasePbufferDCARB_info, (vectorcallfunc)pygl_WGL_wglReleasePbufferDCARB},
+    {&pygl_WGL_wglReleasePbufferDCEXT_info, (vectorcallfunc)pygl_WGL_wglReleasePbufferDCEXT},
+    {&pygl_WGL_wglReleaseTexImageARB_info, (vectorcallfunc)pygl_WGL_wglReleaseTexImageARB},
     {&pygl_WGL_wglReleaseVideoCaptureDeviceNV_info, (vectorcallfunc)pygl_WGL_wglReleaseVideoCaptureDeviceNV},
     {&pygl_WGL_wglReleaseVideoDeviceNV_info, (vectorcallfunc)pygl_WGL_wglReleaseVideoDeviceNV},
+    {&pygl_WGL_wglReleaseVideoImageNV_info, (vectorcallfunc)pygl_WGL_wglReleaseVideoImageNV},
     {&pygl_WGL_wglResetFrameCountNV_info, (vectorcallfunc)pygl_WGL_wglResetFrameCountNV},
+    {&pygl_WGL_wglRestoreBufferRegionARB_info, (vectorcallfunc)pygl_WGL_wglRestoreBufferRegionARB},
+    {&pygl_WGL_wglSaveBufferRegionARB_info, (vectorcallfunc)pygl_WGL_wglSaveBufferRegionARB},
+    {&pygl_WGL_wglSendPbufferToVideoNV_info, (vectorcallfunc)pygl_WGL_wglSendPbufferToVideoNV},
+    {&pygl_WGL_wglSetDigitalVideoParametersI3D_info, (vectorcallfunc)pygl_WGL_wglSetDigitalVideoParametersI3D},
+    {&pygl_WGL_wglSetGammaTableI3D_info, (vectorcallfunc)pygl_WGL_wglSetGammaTableI3D},
+    {&pygl_WGL_wglSetGammaTableParametersI3D_info, (vectorcallfunc)pygl_WGL_wglSetGammaTableParametersI3D},
+    {&pygl_WGL_wglSetLayerPaletteEntries_info, (vectorcallfunc)pygl_WGL_wglSetLayerPaletteEntries},
     {&pygl_WGL_wglSetPbufferAttribARB_info, (vectorcallfunc)pygl_WGL_wglSetPbufferAttribARB},
     {&pygl_WGL_wglSetStereoEmitterState3DL_info, (vectorcallfunc)pygl_WGL_wglSetStereoEmitterState3DL},
     {&pygl_WGL_wglShareLists_info, (vectorcallfunc)pygl_WGL_wglShareLists},
     {&pygl_WGL_wglSwapBuffersMscOML_info, (vectorcallfunc)pygl_WGL_wglSwapBuffersMscOML},
+    {&pygl_WGL_wglSwapIntervalEXT_info, (vectorcallfunc)pygl_WGL_wglSwapIntervalEXT},
     {&pygl_WGL_wglSwapLayerBuffers_info, (vectorcallfunc)pygl_WGL_wglSwapLayerBuffers},
     {&pygl_WGL_wglSwapLayerBuffersMscOML_info, (vectorcallfunc)pygl_WGL_wglSwapLayerBuffersMscOML},
     {&pygl_WGL_wglUseFontBitmaps_info, (vectorcallfunc)pygl_WGL_wglUseFontBitmaps},
     {&pygl_WGL_wglUseFontBitmapsA_info, (vectorcallfunc)pygl_WGL_wglUseFontBitmapsA},
     {&pygl_WGL_wglUseFontBitmapsW_info, (vectorcallfunc)pygl_WGL_wglUseFontBitmapsW},
+    {&pygl_WGL_wglUseFontOutlines_info, (vectorcallfunc)pygl_WGL_wglUseFontOutlines},
+    {&pygl_WGL_wglUseFontOutlinesA_info, (vectorcallfunc)pygl_WGL_wglUseFontOutlinesA},
+    {&pygl_WGL_wglUseFontOutlinesW_info, (vectorcallfunc)pygl_WGL_wglUseFontOutlinesW},
     {&pygl_WGL_wglWaitForMscOML_info, (vectorcallfunc)pygl_WGL_wglWaitForMscOML},
     {&pygl_WGL_wglWaitForSbcOML_info, (vectorcallfunc)pygl_WGL_wglWaitForSbcOML},
     {NULL, NULL}

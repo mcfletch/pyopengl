@@ -177,6 +177,10 @@ typedef struct {
      * party code annotates them -- so an entry point carries an instance
      * dictionary.  Nothing on the call path reads it. */
     PyObject *doc_override;
+    /* The friendly modules clear `extension` on a few entry points so that
+     * they resolve as core rather than through an extension check. */
+    PyObject *extension_override;
+    int has_extension_override;
     PyObject *dict;
 } GLProc;
 

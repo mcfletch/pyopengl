@@ -6,10 +6,14 @@
     "GLES3",
     "GLSC2",
     "GLX",
-    "WGL"
+    "WGL",
+    "EGL"
   ],
   "array_types": [
     "ArrayDatatype",
+    "EGLAttribArray",
+    "GLuintArray",
+    "GLintArray",
     "GLuintArray",
     "GLbooleanArray",
     "GLbyteArray",
@@ -33,6 +37,8 @@
     "GLuint64Array",
     "GLuint64Array",
     "GLushortArray",
+    "GLintArray",
+    "GLuintArray",
     "GLbyteArray",
     "GLdoubleArray",
     "GLfloatArray",
@@ -41,7 +47,7 @@
     "GLuintArray",
     "GLvoidpArray"
   ],
-  "emitted": 4292,
+  "emitted": 4513,
   "glget_tables": [
     "GL",
     "GLES1",
@@ -49,6 +55,6 @@
     "GLES3",
     "GLSC2"
   ],
-  "slots": 4292,
+  "slots": 4513,
   "total": 4839
 }

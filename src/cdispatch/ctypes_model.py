@@ -129,6 +129,31 @@ _SCALAR_MACROS = {
     'GLintptrARB': 'GL_IPTR',
     'GLsizeiptrARB': 'GL_IPTR',
     'GLvdpauSurfaceNV': 'GL_IPTR',
+    'GLchar': 'GL_I',
+    'GLcharARB': 'GL_I',
+    # ``_types.py`` spells the plain C types as their ctypes names, so the raw
+    # modules declare them that way and the extractor sees them so.
+    'c_int': 'GL_I',
+    'c_uint': 'GL_U',
+    'c_ulong': 'GL_U64',
+    'c_short': 'GL_I',
+    'c_ushort': 'GL_U',
+    'c_float': 'GL_F',
+    'c_double': 'GL_D',
+    # EGL.  The registry for these is not vendored, so the vocabulary comes
+    # from the shipped OpenGL/raw/EGL/_types.py rather than from an XML file.
+    'EGLint': 'GL_I',
+    'EGLBoolean': 'GL_U',
+    'EGLenum': 'GL_U',
+    'EGLNativeFileDescriptorKHR': 'GL_I',
+    'EGLTime': 'GL_U64',
+    'EGLTimeKHR': 'GL_U64',
+    'EGLTimeNV': 'GL_U64',
+    'EGLuint64NV': 'GL_U64',
+    'EGLuint64KHR': 'GL_U64',
+    'EGLAttrib': 'GL_IPTR',
+    'EGLAttribKHR': 'GL_IPTR',
+    'EGLsizeiANDROID': 'GL_IPTR',
 }
 
 #: Typedef'd pointers.  Declared with no ``*`` in the registry but pointer-sized
@@ -178,6 +203,33 @@ _OPAQUE = frozenset(
         'GLDEBUGPROCARB',
         'GLDEBUGPROCKHR',
         'GLDEBUGPROCAMD',
+        # EGL's opaque handles are all pointer-sized.
+        'EGLDisplay',
+        'EGLSurface',
+        'EGLContext',
+        'EGLConfig',
+        'EGLClientBuffer',
+        'EGLDeviceEXT',
+        'EGLImage',
+        'EGLImageKHR',
+        'EGLStreamKHR',
+        'EGLSync',
+        'EGLSyncKHR',
+        'EGLSyncNV',
+        'EGLOutputLayerEXT',
+        'EGLOutputPortEXT',
+        'EGLObjectKHR',
+        'EGLLabelKHR',
+        'EGLNativeDisplayType',
+        'EGLNativeWindowType',
+        'EGLNativePixmapType',
+        'EGLDEBUGPROCKHR',
+        'EGLGetBlobFuncANDROID',
+        'EGLSetBlobFuncANDROID',
+        '__eglMustCastToProperFunctionPointerType',
+        # Windows structure pointers, opaque to the binding.
+        'LPGLYPHMETRICSFLOAT',
+        'PGPU_DEVICE',
     ]
 )
 
@@ -231,6 +283,11 @@ _ELEMENTS = {
     'GLbitfield': _element('GLbitfield', 'I', 4, 'GLuintArray', ('L',)),
     'unsigned int': _element('unsigned int', 'I', 4, 'GLuintArray', ('L',)),
     'GLhandleARB': _element('GLhandleARB', 'I', 4, 'GLuintArray', ('L',)),
+    'c_int': _element('c_int', 'i', 4, 'GLintArray', ('l',)),
+    'c_uint': _element('c_uint', 'I', 4, 'GLuintArray', ('L',)),
+    'EGLint': _element('EGLint', 'i', 4, 'GLintArray', ('l',)),
+    'EGLenum': _element('EGLenum', 'I', 4, 'GLuintArray', ('L',)),
+    'EGLAttrib': _element('EGLAttrib', 'q', 8, 'EGLAttribArray', ('l', 'n')),
     'GLshort': _element('GLshort', 'h', 2, 'GLshortArray'),
     'GLushort': _element('GLushort', 'H', 2, 'GLushortArray'),
     'GLbyte': _element('GLbyte', 'b', 1, 'GLbyteArray'),

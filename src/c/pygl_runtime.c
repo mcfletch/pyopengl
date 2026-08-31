@@ -151,7 +151,10 @@ static void pygl_sync_context(void)
 static int pygl_needs_context(const PyGLCommand *command)
 {
     const char *name = command->name;
-    if (command->api == PYGL_API_GLX || command->api == PYGL_API_WGL) {
+    if (command->api == PYGL_API_GLX || command->api == PYGL_API_WGL ||
+        command->api == PYGL_API_EGL) {
+        /* The window-system APIs are how a context is made in the first place,
+         * so they are meaningful with none current. */
         return 0;
     }
     if (strcmp(name, "glGetString") == 0 || strcmp(name, "glGetStringi") == 0 ||
@@ -199,9 +202,20 @@ void *pygl_slot_slow(GLProc *self)
         return pygl_current->slots[command->slot];
     }
 
-    result = PyObject_CallMethod(pygl_support, "resolve", "sssi", command->name,
-                                 command->extension ? command->extension : "",
-                                 "", (int)command->api);
+    {
+        const char *extension = command->extension ? command->extension : "";
+        if (self->has_extension_override) {
+            extension = self->extension_override
+                            ? PyUnicode_AsUTF8(self->extension_override)
+                            : "";
+            if (extension == NULL) {
+                return NULL;
+            }
+        }
+        result = PyObject_CallMethod(pygl_support, "resolve", "sssi",
+                                     command->name, extension, "",
+                                     (int)command->api);
+    }
     if (result == NULL) {
         return NULL;
     }
@@ -827,6 +841,7 @@ static void GLProc_dealloc(GLProc *self)
     Py_XDECREF(self->ctypes_callable);
     Py_XDECREF(self->errcheck);
     Py_XDECREF(self->doc_override);
+    Py_XDECREF(self->extension_override);
     Py_XDECREF(self->dict);
     Py_TYPE(self)->tp_free((PyObject *)self);
 }
@@ -922,10 +937,26 @@ static PyObject *GLProc_get_arg_names(GLProc *self, void *closure)
 static PyObject *GLProc_get_extension(GLProc *self, void *closure)
 {
     (void)closure;
+    if (self->has_extension_override) {
+        return Py_NewRef(self->extension_override ? self->extension_override
+                                                  : Py_None);
+    }
     if (self->info->extension == NULL || self->info->extension[0] == '\0') {
         Py_RETURN_NONE;
     }
     return PyUnicode_FromString(self->info->extension);
+}
+
+/* Assigning `extension` says which extension to check before resolving, and
+ * None says to resolve as core.  It has to take effect before the entry point
+ * is first called, which is how the friendly modules use it. */
+static int GLProc_set_extension(GLProc *self, PyObject *value, void *closure)
+{
+    (void)closure;
+    Py_XSETREF(self->extension_override,
+               (value == NULL || value == Py_None) ? NULL : Py_NewRef(value));
+    self->has_extension_override = 1;
+    return 0;
 }
 
 static PyObject *GLProc_get_deprecated(GLProc *self, void *closure)
@@ -1151,7 +1182,8 @@ static PyGetSetDef GLProc_getset[] = {
     {"restype", (getter)GLProc_get_restype, (setter)GLProc_set_restype, NULL,
      NULL},
     {"DLL", (getter)GLProc_get_dll, NULL, NULL, NULL},
-    {"extension", (getter)GLProc_get_extension, NULL, NULL, NULL},
+    {"extension", (getter)GLProc_get_extension, (setter)GLProc_set_extension,
+     NULL, NULL},
     {"deprecated", (getter)GLProc_get_deprecated, NULL, NULL, NULL},
     {"errcheck", (getter)GLProc_get_errcheck, (setter)GLProc_set_errcheck, NULL,
      NULL},
@@ -1200,6 +1232,8 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub)
     proc->errcheck = NULL;
     proc->weakreflist = NULL;
     proc->doc_override = NULL;
+    proc->extension_override = NULL;
+    proc->has_extension_override = 0;
     proc->dict = NULL;
     return (PyObject *)proc;
 }

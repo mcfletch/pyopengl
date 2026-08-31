@@ -12,6 +12,7 @@ extern const PyGLEntry pygl_entries_GLES3[];
 extern const PyGLEntry pygl_entries_GLSC2[];
 extern const PyGLEntry pygl_entries_GLX[];
 extern const PyGLEntry pygl_entries_WGL[];
+extern const PyGLEntry pygl_entries_EGL[];
 
 int pygl_register_generated(PyObject *mapping)
 {
@@ -34,6 +35,9 @@ int pygl_register_generated(PyObject *mapping)
         return -1;
     }
     if (pygl_register_entries(mapping, pygl_entries_WGL) < 0) {
+        return -1;
+    }
+    if (pygl_register_entries(mapping, pygl_entries_EGL) < 0) {
         return -1;
     }
     return 0;
