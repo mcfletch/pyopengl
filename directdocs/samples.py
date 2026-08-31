@@ -3,9 +3,11 @@
 from __future__ import absolute_import
 from __future__ import print_function
 import os, subprocess
+HERE = os.path.dirname(os.path.abspath(__file__))
 SAMPLE_DIRECTORY = '.samples'
 
 class BaseSource( object ):
+    dirname: str
     def __init__( self, root, project=None, dirname=None ):
         self.root = root 
         self.project = project 
@@ -131,15 +133,15 @@ checkouts = [
 #        dirname = 'visionegg',
 #    ),
     GITSource(
-        'git://github.com/visionegg/visionegg.git',
+        'https://github.com/visionegg/visionegg.git',
         dirname = 'visionegg',
     ),
     GITSource(
-        'git://github.com/tito/pymt.git',
+        'https://github.com/tito/pymt.git',
         dirname = 'pymt',
     ),
     GITSource(
-        'git://github.com/rossant/galry.git',
+        'https://github.com/rossant/galry.git',
         dirname = 'galry',
     ),
 #    SVNSource(
@@ -158,10 +160,10 @@ checkouts = [
         'https://github.com/RyanHope/PyGL2D.git',
         dirname = 'pygl2d',
     ),
-    BZRSource(
-        'https://code.launchpad.net/~bebraw/scocca/devel',
-        dirname = 'scocca',
-    ),
+    # BZRSource(
+    #     'https://code.launchpad.net/~bebraw/scocca/devel',
+    #     dirname = 'scocca',
+    # ),
     GITSource(
         'https://github.com/tartley/gltutpy.git',
         dirname = 'gltutpy',
@@ -178,13 +180,21 @@ checkouts = [
         'https://github.com/almarklein/visvis',
         dirname = 'visvis',
     ),
-    HgSource(
-        'https://bitbucket.org/rndblnch/opengl-programmable/',
-        dirname = 'programmable',
-    ),
     GITSource(
         'https://github.com/mmatl/pyrender.git',
         dirname='pyrender',
+    ),
+    GITSource(
+        'https://github.com/vispy/vispy.git',
+        dirname='vispy',
+    ),
+    GITSource(
+        'https://github.com/pyqtgraph/pyqtgraph.git',
+        dirname='pyqtgraph',
+    ),
+    GITSource(
+        'https://github.com/psychopy/psychopy.git',
+        dirname='psychopy',
     ),
     # pymol # not pyopengl AFAICS
     # {LGPL} mirra # no online view of code AFAICS
@@ -206,8 +216,8 @@ checkouts = [
 if __name__ == "__main__":
     if not os.path.exists(SAMPLE_DIRECTORY):
         os.makedirs(SAMPLE_DIRECTORY)
-    os.chdir( '.samples' )
+    os.chdir( os.path.join(HERE,'.samples' ))
     for checkout in checkouts:
-        print(('Project:', checkout.dirname))
+        print('Project:', checkout.dirname)
         checkout.update()
     

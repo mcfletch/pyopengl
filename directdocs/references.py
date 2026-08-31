@@ -2,7 +2,13 @@
 """Collects sample-code references from file-system"""
 from __future__ import absolute_import
 from __future__ import print_function
-import token, tokenize, glob, os
+import token, tokenize, glob, os, sys
+HERE = os.path.dirname(os.path.abspath(__file__))
+PACKAGE_ROOT = os.path.dirname(HERE)
+if PACKAGE_ROOT not in sys.path:
+    # run as ./references.py the package root is not on the path, and the
+    # samples must pickle as directdocs.model.Sample for generate.py to load
+    sys.path.insert(0, PACKAGE_ROOT)
 from directdocs.model import Sample
 
 try:
@@ -77,7 +83,7 @@ VIEWSVN = '%(baseURL)s/%(deltaPath)s?view=markup'
 LOGGERHEAD = '%(baseURL)s/view/head:/%(deltaPath)s'
 GOOGLECODE = '%(baseURL)s/source/browse/trunk/%(deltaPath)s'
 GOOGLECODE_HG = '%(baseURL)s/source/browse/%(deltaPath)s'
-GITHUB = '%(baseURL)s/blob/master/%(deltaPath)s#L%(sourceRow)s'
+GITHUB = '%(baseURL)s/blob/%(branch)s/%(deltaPath)s#L%(sourceRow)s'
 BITBUCKET = '%(baseURL)s/src/tip/%(deltaPath)s#lines-%(sourceRow)s'
 
 class SampleSource( object ):
@@ -89,12 +95,14 @@ class SampleSource( object ):
         urlTemplate = VIEWCVS,
         projectName='',
         suppressed = None,
+        branch = 'master',
     ):
         self.localDir = localDir
         self.projectName = projectName
         self.urlTemplate = urlTemplate
         self.baseURL = baseURL
         self.suppressed = suppressed or {}
+        self.branch = branch
     def processEntry( self, filename, tokenType,tokenString, xxx_todo_changeme, xxx_todo_changeme1,lineText ):
         """Record an entry from the scanner"""
         (sourceRow,sourceCol) = xxx_todo_changeme
@@ -124,6 +132,7 @@ class SampleSource( object ):
         (endRow,endCol) = xxx_todo_changeme3
         deltaPath = self.deltaPath( filename )
         baseURL = self.baseURL.rstrip( '/' )
+        branch = self.branch
         return self.urlTemplate %locals()
         
 
@@ -138,9 +147,10 @@ def loadData():
                 "tests/glget.py":1,
             },
             baseURL = 'http://github.com/mcfletch/openglcontext',
-                       
+
             projectName = 'OpenGLContext',
             urlTemplate = GITHUB,
+            branch = 'main',
         ),
         SampleSource(
             os.path.join(SAMPLES,'PyOpenGL-Demo'),
@@ -241,6 +251,7 @@ def loadData():
             baseURL = 'https://github.com/almarklein/visvis',
             projectName = 'Visvis',
             urlTemplate = GITHUB,
+            branch = 'main',
         ),
         SampleSource(
             os.path.join(SAMPLES,'programmable'),
@@ -253,7 +264,27 @@ def loadData():
             baseURL='https://github.com/mmatl/pyrender',
             projectName='Pyrender',
             urlTemplate=GITHUB,
-        )
+        ),
+        SampleSource(
+            os.path.join(SAMPLES,'vispy'),
+            baseURL='https://github.com/vispy/vispy',
+            projectName='VisPy',
+            urlTemplate=GITHUB,
+            branch='main',
+        ),
+        SampleSource(
+            os.path.join(SAMPLES,'pyqtgraph'),
+            baseURL='https://github.com/pyqtgraph/pyqtgraph',
+            projectName='PyQtGraph',
+            urlTemplate=GITHUB,
+        ),
+        SampleSource(
+            os.path.join(SAMPLES,'psychopy'),
+            baseURL='https://github.com/psychopy/psychopy',
+            projectName='{GPL3} PsychoPy',
+            urlTemplate=GITHUB,
+            branch='dev',
+        ),
     ]:
         generate_tokens_dir( s.localDir, processFunction = s.processEntry)
     result = SampleSource.nameMapping

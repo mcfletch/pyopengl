@@ -5,6 +5,7 @@
 <?python
 from directdocs.dumbpydoc import Alternate
 from directdocs.dumbmarkup import format_docstring
+from directdocs.model import MANUAL_DIRECTORY
 ?>
 <ul class="menu" py:def="nav_table(context)">
     <?python
@@ -37,7 +38,7 @@ from directdocs.dumbmarkup import format_docstring
         </div>
     </div>
     <div py:if="not function.alternates" py:strip="">
-        <span class="py-function"><a py:strip="not link" href="../manual-3.0/${link}">${function.name}</a></span>( ${paramlist(function)} )
+        <span class="py-function"><a py:strip="not link" href="../${MANUAL_DIRECTORY}/${link}">${function.name}</a></span>( ${paramlist(function)} )
         <span py:if="function.return_value">-&gt; ${function.return_value}</span>
         ${docstring( function )}
     </div>

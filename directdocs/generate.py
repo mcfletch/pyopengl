@@ -10,6 +10,12 @@ import logging
 import six
 log = logging.getLogger( 'generate' )
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+PACKAGE_ROOT = os.path.dirname(HERE)
+if PACKAGE_ROOT not in sys.path:
+    # run as ./generate.py the package root is not on the path, and the
+    # cached samples unpickle as directdocs.model.Sample
+    sys.path.insert(0, PACKAGE_ROOT)
 from directdocs.model import Function, Parameter, ParameterReference
 from directdocs import model,references
 from OpenGL import __version__
@@ -18,7 +24,7 @@ from OpenGL import GL, GLU, GLUT, GLE,GLX
 
 loader = TemplateLoader([os.path.join(os.path.dirname( __file__ ), 'templates')])
 
-OUTPUT_DIRECTORY = 'manual-%s'%(model.MAJOR_VERSION,)
+OUTPUT_DIRECTORY = model.MANUAL_DIRECTORY
 
 IMPORTED_PACKAGES = [GL,GLU,GLUT,GLE,GLX]
 PACKAGES = ['GL','GLU','GLUT','GLE','GLX']

@@ -1,7 +1,6 @@
 # PyOpenGL Direct Documentation Generator
 
-To Produce the PyOpenGL documentation-set (you need PyOpenGL installed,
-so checkout this branch separately from the master branch):
+To Produce the PyOpenGL documentation-set:
 
 ```
 	./acquireoriginal.py

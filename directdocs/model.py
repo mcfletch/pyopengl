@@ -9,6 +9,9 @@ log = logging.getLogger('directdocs.model')
 from OpenGL import __version__
 
 MAJOR_VERSION = '.'.join(__version__.split('.')[:2])
+#: Directory the reference manual is generated into, and the target of the
+#: cross-links from the pydoc pages that sit beside it
+MANUAL_DIRECTORY = 'manual-%s' % (MAJOR_VERSION,)
 
 
 class NotDefined(object):
