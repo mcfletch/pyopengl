@@ -353,3 +353,42 @@ class TestGLGetSizedOutputs:
         text = body(self.glgetv())
         assert 'params_count' in text
         assert 'pygl_output_value(&_bufs[params_slot], &pygl_elem_GLint, params_count)' in text
+
+
+class TestMultipleOutputs:
+    """Several outputs compose into a tuple, in the order they were declared."""
+
+    def two_outputs(self):
+        return command(
+            name='glGetQueryObjectuiv',
+            parameters=[
+                ('id', 'GLuint', {}),
+                (
+                    'first',
+                    'GLint *',
+                    {'direction': model.OUT, 'size': model.Fixed(1)},
+                ),
+                (
+                    'second',
+                    'GLuint *',
+                    {'direction': model.OUT, 'size': model.Fixed(4)},
+                ),
+            ],
+        )
+
+    def test_is_emitted(self):
+        assert emit_c.is_emittable(self.two_outputs())
+
+    def test_both_outputs_get_a_frame_slot(self):
+        text = body(self.two_outputs())
+        assert 'PYGL_FRAME(2);' in text
+        assert 'PYGL_ARRAY_OUT(1, first,' in text
+        assert 'PYGL_ARRAY_OUT(2, second,' in text
+
+    def test_the_arity_range_covers_both(self):
+        assert 'PYGL_ARITY_RANGE(1, 3);' in body(self.two_outputs())
+
+    def test_a_tuple_is_built_from_them(self):
+        text = body(self.two_outputs())
+        assert 'pygl_output_tuple' in text
+        assert '_outputs[] = {' in text

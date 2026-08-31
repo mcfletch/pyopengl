@@ -74,6 +74,14 @@ def _scalar_macro(parameter):
     return macro
 
 
+def _output_size(command, parameter):
+    """The element count an output contributes to the return value."""
+    if isinstance(parameter.size, model.GLGetTable):
+        # Not known until the pname table has been consulted at run time.
+        return '%s_count' % (parameter.c_name,)
+    return '(Py_ssize_t)(%s)' % (_size_expression(command, parameter),)
+
+
 def _size_expression(command, parameter):
     """The element count for a sized parameter, as a C expression."""
     size = parameter.size
@@ -121,10 +129,6 @@ def is_emittable(command):
             return False
         if not parameter.is_array and parameter.macro is None:
             return False
-    if len(command.output_parameters) > 1:
-        # Several outputs compose into a tuple return whose ordering is the
-        # friendly layer's business; they land with Tier 3.
-        return False
     return True
 
 
@@ -190,6 +194,15 @@ def emit_stub(command):
     required = len(command.required_arguments)
     total = len(command.parameters)
 
+    # Array parameters take frame slots in declaration order, so a slot index
+    # is a compile-time constant the generator can name directly.
+    frame_slots = {
+        parameter.name: slot
+        for slot, parameter in enumerate(
+            p for p in command.parameters if p.is_array
+        )
+    }
+
     lines.append('static PyObject *')
     lines.append(
         '%s(GLProc *self, PyObject *const *_a, size_t _nargsf)'
@@ -252,16 +265,31 @@ def emit_stub(command):
         )
     lines.append('    PYGL_CHECK();')
 
-    if outputs:
+    if len(outputs) > 1:
+        # A local rather than a static: a glGet-sized output's count is not
+        # known until the table has been consulted.
+        lines.append('    const PyGLOutput _outputs[] = {')
+        for output in outputs:
+            lines.append(
+                '        {%d, %s, %s},'
+                % (
+                    frame_slots[output.name],
+                    element_symbol(output),
+                    _output_size(command, output),
+                )
+            )
+        lines.append('    };')
+        lines.append(
+            '    PyObject *_value = pygl_output_tuple(_bufs, _outputs, %d);'
+            % (len(outputs),)
+        )
+        lines.append('    PYGL_CLEANUP();')
+        lines.append('    return _value;')
+    elif outputs:
         output = outputs[0]
-        if isinstance(output.size, model.GLGetTable):
-            # The count is not known until the table has been consulted.
-            size = '%s_count' % (output.c_name,)
-        else:
-            size = '(Py_ssize_t)(%s)' % (_size_expression(command, output),)
         lines.append(
             '    PyObject *_value = pygl_output_value(&_bufs[%s_slot], %s, %s);'
-            % (output.c_name, element_symbol(output), size)
+            % (output.c_name, element_symbol(output), _output_size(command, output))
         )
         lines.append('    PYGL_CLEANUP();')
         lines.append('    return _value;')

@@ -257,6 +257,16 @@ PyObject *pygl_opaque(void *value, const char *type_name);
 PyObject *pygl_output_value(PyGLBuf *buffer, const PyGLElement *element,
                             Py_ssize_t count);
 
+/* Several outputs compose into a tuple, in the order they were declared. */
+typedef struct {
+    int slot;
+    const PyGLElement *element;
+    Py_ssize_t count;
+} PyGLOutput;
+
+PyObject *pygl_output_tuple(PyGLBuf *buffers, const PyGLOutput *outputs,
+                            Py_ssize_t count);
+
 /* The generated tables register themselves through these. */
 typedef struct {
     const PyGLCommand *info;

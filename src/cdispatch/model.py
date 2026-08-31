@@ -159,6 +159,10 @@ class Parameter:
     direction: str = IN
     size: _SizeSpec = NO_SIZE
     retain: bool = False
+    #: Where this output falls in the returned tuple.  It is the order the
+    #: friendly layer annotated the outputs in, which is not always the order
+    #: the C signature declares them in.
+    output_order: int = 0
 
     @property
     def c_name(self):
@@ -228,7 +232,11 @@ class Command:
 
     @property
     def output_parameters(self):
-        return [p for p in self.parameters if p.is_output]
+        """The outputs, in the order they contribute to the return value."""
+        return sorted(
+            (p for p in self.parameters if p.is_output),
+            key=lambda parameter: parameter.output_order,
+        )
 
     @property
     def python_arguments(self):

@@ -47,7 +47,7 @@
     "GLuintArray",
     "GLvoidpArray"
   ],
-  "emitted": 4513,
+  "emitted": 4560,
   "glget_tables": [
     "GL",
     "GLES1",
@@ -55,6 +55,6 @@
     "GLES3",
     "GLSC2"
   ],
-  "slots": 4513,
+  "slots": 4560,
   "total": 4839
 }

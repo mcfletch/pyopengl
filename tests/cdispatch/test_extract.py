@@ -177,3 +177,21 @@ class TestRegistryCrossCheck:
         assert not tree['glBindTexture'].helper
         assert not tree['glGenTextures'].helper
         assert not tree['glUniformMatrix4fv'].helper
+
+
+class TestOutputOrdering:
+    """A multi-output return follows the order the outputs were annotated.
+
+    ``glGetShaderPrecisionFormat`` declares ``range`` before ``precision`` in
+    its C signature but annotates ``precision`` first, and the tuple its
+    callers unpack follows the annotation.
+    """
+
+    def test_the_tuple_follows_the_annotation_order(self, commands):
+        command = commands[('GLES2', 'glGetShaderPrecisionFormat')]
+        assert [p.name for p in command.output_parameters] == ['precision', 'range']
+        assert [p.name for p in command.parameters][2:] == ['range', 'precision']
+
+    def test_a_single_output_needs_no_ordering(self, tree):
+        command = tree['glGenTextures']
+        assert [p.name for p in command.output_parameters] == ['textures']

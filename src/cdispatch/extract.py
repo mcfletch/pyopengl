@@ -304,6 +304,7 @@ def _apply_annotations(command, entry):
     by_name = {parameter.name: index for index, parameter in enumerate(command.parameters)}
     if entry.get('helper'):
         command.helper = entry['helper']
+    order = 0
     for kind, call in entry['annotations']:
         arguments = {
             keyword.arg: keyword.value for keyword in call.keywords if keyword.arg
@@ -325,6 +326,8 @@ def _apply_annotations(command, entry):
             continue
         # setOutput
         parameter.direction = model.OUT
+        parameter.output_order = order
+        order += 1
         pname = arguments.get('pnameArg')
         size_node = arguments.get('size') or (
             positional[1] if len(positional) > 1 else None

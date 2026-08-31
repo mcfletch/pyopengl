@@ -812,6 +812,27 @@ PyObject *pygl_output_value(PyGLBuf *buffer, const PyGLElement *element,
     return value;
 }
 
+PyObject *pygl_output_tuple(PyGLBuf *buffers, const PyGLOutput *outputs,
+                            Py_ssize_t count)
+{
+    PyObject *result = PyTuple_New(count);
+    Py_ssize_t index;
+    if (result == NULL) {
+        return NULL;
+    }
+    for (index = 0; index < count; index++) {
+        const PyGLOutput *output = &outputs[index];
+        PyObject *value = pygl_output_value(&buffers[output->slot],
+                                            output->element, output->count);
+        if (value == NULL) {
+            Py_DECREF(result);
+            return NULL;
+        }
+        PyTuple_SET_ITEM(result, index, value);
+    }
+    return result;
+}
+
 PyObject *pygl_bytes_or_none(const char *value)
 {
     if (value == NULL) {
