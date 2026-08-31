@@ -1190,17 +1190,37 @@ still on ctypes, is what `src/check_registry.py` prints:
 
 ### Phases
 
-0 infrastructure, 1 annotation extraction, 3 Tier 1 and arrays, 4 Tier 2
-including the 1,798-entry `_glgets` table, 6 per-context dispatch, and 7 error
-checking including `GL_KHR_debug` are done. Phase 5 has one family of five —
-`glShaderSource`, which also established how a hand-written entry point is
-registered beside the generated ones. Phase 8's docstrings, text signatures and
-`.pyi` stubs are done. Phase 2's differential harness exists as the
-array-acceptance matrix and running both implementations over the whole suite,
-rather than as a per-entry-point generator. Phase 9's virtual packages are not
-started. Phase 10 is deliberately not taken: ctypes remains the default.
+| phase | state |
+|---|---|
+| 0 infrastructure | done |
+| 1 annotation extraction | done, cross-checked against the registry |
+| 2 differential harness | the attribute-surface comparison, the array-acceptance matrix, and both implementations over every suite; not a per-entry-point argument generator |
+| 3 Tier 1, arrays, opt-in switch | done |
+| 4 Tier 2 declarative annotations | done, including the 1,798-entry `_glgets` table |
+| 5 Tier 3, one family per release | one of five: `glShaderSource`, which established how a hand-written entry point registers beside the generated ones |
+| 6 per-context dispatch | done, with the multi-context tests as its exit criterion |
+| 7 error checking | done, including `GL_KHR_debug` |
+| 8 docstrings and `.pyi` | done; mypy accepts client code using both the generated part and the fallback |
+| 9 virtual packages | not started |
+| 10 flip the default | deliberately not taken: ctypes remains the default |
+| 11 retire what is dead | not appropriate while both implementations ship |
+
+The differential work found two divergences no functional test would have
+caught, both in attributes a client reads without calling anything:
+`glShaderSource.argNames` reported the raw declaration's names rather than the
+ones its callers see, and a command promoted into core is declared twice, so
+which declaration the ctypes namespace holds depends on import order. The
+second is now decided deliberately — the core declaration wins, because it
+resolves without an extension check — and the test asserts the property that
+matters rather than the string: no entry point that resolves under ctypes
+fails to resolve under C.
 
 ### Beyond the phases
+
+`.github/workflows/registry-update.yml` pulls the registry weekly,
+regenerates, fails only on drift the baseline does not record, and opens a
+pull request whose body is the report. `tox.ini` gains a dispatch axis, so
+both implementations are tested rather than one.
 
 `src/check_registry.py` compares the shipped bindings against the registry.
 It found the shipped tree already lags: **7 registry commands with no binding,
