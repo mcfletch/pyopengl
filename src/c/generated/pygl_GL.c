@@ -915,7 +915,7 @@ _fail:
 
 
 static const char *const pygl_GL_glBindBufferBase_args[] = {"target", "index", "buffer"};
-static const PyGLCommand pygl_GL_glBindBufferBase_info = {"glBindBufferBase", "glBindBufferBase(target, index, buffer) -> None", "($module, target, index, buffer, /)", pygl_GL_glBindBufferBase_args, "GL_VERSION_GL_3_1", 3, 163, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glBindBufferBase_info = {"glBindBufferBase", "glBindBufferBase(target, index, buffer) -> None", "($module, target, index, buffer, /)", pygl_GL_glBindBufferBase_args, "GL_VERSION_GL_3_0", 3, 163, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glBindBufferBase(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1012,7 +1012,7 @@ _fail:
 
 
 static const char *const pygl_GL_glBindBufferRange_args[] = {"target", "index", "buffer", "offset", "size"};
-static const PyGLCommand pygl_GL_glBindBufferRange_info = {"glBindBufferRange", "glBindBufferRange(target, index, buffer, offset, size) -> None", "($module, target, index, buffer, offset, size, /)", pygl_GL_glBindBufferRange_args, "GL_VERSION_GL_3_1", 5, 168, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glBindBufferRange_info = {"glBindBufferRange", "glBindBufferRange(target, index, buffer, offset, size) -> None", "($module, target, index, buffer, offset, size, /)", pygl_GL_glBindBufferRange_args, "GL_VERSION_GL_3_0", 5, 168, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glBindBufferRange(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1383,7 +1383,7 @@ _fail:
 
 
 static const char *const pygl_GL_glBindProgramARB_args[] = {"target", "program"};
-static const PyGLCommand pygl_GL_glBindProgramARB_info = {"glBindProgramARB", "glBindProgramARB(target, program) -> None", "($module, target, program, /)", pygl_GL_glBindProgramARB_args, "GL_ARB_vertex_program", 2, 186, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glBindProgramARB_info = {"glBindProgramARB", "glBindProgramARB(target, program) -> None", "($module, target, program, /)", pygl_GL_glBindProgramARB_args, "GL_ARB_fragment_program", 2, 186, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glBindProgramARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6906,7 +6906,7 @@ _fail:
 
 
 static const char *const pygl_GL_glDebugMessageCallback_args[] = {"callback", "userParam"};
-static const PyGLCommand pygl_GL_glDebugMessageCallback_info = {"glDebugMessageCallback", "glDebugMessageCallback(callback, userParam) -> None", "($module, callback, userParam, /)", pygl_GL_glDebugMessageCallback_args, "GL_KHR_debug", 2, 457, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glDebugMessageCallback_info = {"glDebugMessageCallback", "glDebugMessageCallback(callback, userParam) -> None", "($module, callback, userParam, /)", pygl_GL_glDebugMessageCallback_args, "GL_VERSION_GL_4_3", 2, 457, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glDebugMessageCallback(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6990,7 +6990,7 @@ _fail:
 
 
 static const char *const pygl_GL_glDebugMessageControl_args[] = {"source", "type", "severity", "count", "ids", "enabled"};
-static const PyGLCommand pygl_GL_glDebugMessageControl_info = {"glDebugMessageControl", "glDebugMessageControl(source, type, severity, count, ids, enabled) -> None", "($module, source, type, severity, count, ids, enabled, /)", pygl_GL_glDebugMessageControl_args, "GL_KHR_debug", 6, 461, PYGL_API_GL, 0, 6, 0, 0};
+static const PyGLCommand pygl_GL_glDebugMessageControl_info = {"glDebugMessageControl", "glDebugMessageControl(source, type, severity, count, ids, enabled) -> None", "($module, source, type, severity, count, ids, enabled, /)", pygl_GL_glDebugMessageControl_args, "GL_VERSION_GL_4_3", 6, 461, PYGL_API_GL, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GL_glDebugMessageControl(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7089,7 +7089,7 @@ _fail:
 
 
 static const char *const pygl_GL_glDebugMessageInsert_args[] = {"source", "type", "id", "severity", "length", "buf"};
-static const PyGLCommand pygl_GL_glDebugMessageInsert_info = {"glDebugMessageInsert", "glDebugMessageInsert(source, type, id, severity, length, buf) -> None", "($module, source, type, id, severity, length, buf, /)", pygl_GL_glDebugMessageInsert_args, "GL_KHR_debug", 6, 465, PYGL_API_GL, 0, 6, 0, 0};
+static const PyGLCommand pygl_GL_glDebugMessageInsert_info = {"glDebugMessageInsert", "glDebugMessageInsert(source, type, id, severity, length, buf) -> None", "($module, source, type, id, severity, length, buf, /)", pygl_GL_glDebugMessageInsert_args, "GL_VERSION_GL_4_3", 6, 465, PYGL_API_GL, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GL_glDebugMessageInsert(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7647,7 +7647,7 @@ _fail:
 
 
 static const char *const pygl_GL_glDeleteProgramsARB_args[] = {"n", "programs"};
-static const PyGLCommand pygl_GL_glDeleteProgramsARB_info = {"glDeleteProgramsARB", "glDeleteProgramsARB(n, programs) -> None", "($module, n, programs, /)", pygl_GL_glDeleteProgramsARB_args, "GL_ARB_vertex_program", 2, 491, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glDeleteProgramsARB_info = {"glDeleteProgramsARB", "glDeleteProgramsARB(n, programs) -> None", "($module, n, programs, /)", pygl_GL_glDeleteProgramsARB_args, "GL_ARB_fragment_program", 2, 491, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glDeleteProgramsARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8341,7 +8341,7 @@ _fail:
 
 
 static const char *const pygl_GL_glDisableIndexedEXT_args[] = {"target", "index"};
-static const PyGLCommand pygl_GL_glDisableIndexedEXT_info = {"glDisableIndexedEXT", "glDisableIndexedEXT(target, index) -> None", "($module, target, index, /)", pygl_GL_glDisableIndexedEXT_args, "GL_EXT_draw_buffers2", 2, 527, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glDisableIndexedEXT_info = {"glDisableIndexedEXT", "glDisableIndexedEXT(target, index) -> None", "($module, target, index, /)", pygl_GL_glDisableIndexedEXT_args, "GL_EXT_direct_state_access", 2, 527, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glDisableIndexedEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8465,7 +8465,7 @@ _fail:
 
 
 static const char *const pygl_GL_glDisableVertexAttribArrayARB_args[] = {"index"};
-static const PyGLCommand pygl_GL_glDisableVertexAttribArrayARB_info = {"glDisableVertexAttribArrayARB", "glDisableVertexAttribArrayARB(index) -> None", "($module, index, /)", pygl_GL_glDisableVertexAttribArrayARB_args, "GL_ARB_vertex_shader", 1, 534, PYGL_API_GL, 0, 1, 0, 0};
+static const PyGLCommand pygl_GL_glDisableVertexAttribArrayARB_info = {"glDisableVertexAttribArrayARB", "glDisableVertexAttribArrayARB(index) -> None", "($module, index, /)", pygl_GL_glDisableVertexAttribArrayARB_args, "GL_ARB_vertex_program", 1, 534, PYGL_API_GL, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GL_glDisableVertexAttribArrayARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9377,7 +9377,7 @@ _fail:
 
 
 static const char *const pygl_GL_glEnableIndexedEXT_args[] = {"target", "index"};
-static const PyGLCommand pygl_GL_glEnableIndexedEXT_info = {"glEnableIndexedEXT", "glEnableIndexedEXT(target, index) -> None", "($module, target, index, /)", pygl_GL_glEnableIndexedEXT_args, "GL_EXT_draw_buffers2", 2, 579, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glEnableIndexedEXT_info = {"glEnableIndexedEXT", "glEnableIndexedEXT(target, index) -> None", "($module, target, index, /)", pygl_GL_glEnableIndexedEXT_args, "GL_EXT_direct_state_access", 2, 579, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glEnableIndexedEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9501,7 +9501,7 @@ _fail:
 
 
 static const char *const pygl_GL_glEnableVertexAttribArrayARB_args[] = {"index"};
-static const PyGLCommand pygl_GL_glEnableVertexAttribArrayARB_info = {"glEnableVertexAttribArrayARB", "glEnableVertexAttribArrayARB(index) -> None", "($module, index, /)", pygl_GL_glEnableVertexAttribArrayARB_args, "GL_ARB_vertex_shader", 1, 586, PYGL_API_GL, 0, 1, 0, 0};
+static const PyGLCommand pygl_GL_glEnableVertexAttribArrayARB_info = {"glEnableVertexAttribArrayARB", "glEnableVertexAttribArrayARB(index) -> None", "($module, index, /)", pygl_GL_glEnableVertexAttribArrayARB_args, "GL_ARB_vertex_program", 1, 586, PYGL_API_GL, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GL_glEnableVertexAttribArrayARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12121,7 +12121,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGenProgramsARB_args[] = {"n", "programs"};
-static const PyGLCommand pygl_GL_glGenProgramsARB_info = {"glGenProgramsARB", "glGenProgramsARB(n) -> programs", "($module, n, programs=None, /)", pygl_GL_glGenProgramsARB_args, "GL_ARB_vertex_program", 2, 724, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glGenProgramsARB_info = {"glGenProgramsARB", "glGenProgramsARB(n) -> programs", "($module, n, programs=None, /)", pygl_GL_glGenProgramsARB_args, "GL_ARB_fragment_program", 2, 724, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glGenProgramsARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12844,7 +12844,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetBooleanIndexedvEXT_args[] = {"target", "index", "data"};
-static const PyGLCommand pygl_GL_glGetBooleanIndexedvEXT_info = {"glGetBooleanIndexedvEXT", "glGetBooleanIndexedvEXT(target, index) -> data", "($module, target, index, data=None, /)", pygl_GL_glGetBooleanIndexedvEXT_args, "GL_EXT_draw_buffers2", 3, 756, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glGetBooleanIndexedvEXT_info = {"glGetBooleanIndexedvEXT", "glGetBooleanIndexedvEXT(target, index) -> data", "($module, target, index, data=None, /)", pygl_GL_glGetBooleanIndexedvEXT_args, "GL_EXT_direct_state_access", 3, 756, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glGetBooleanIndexedvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13577,7 +13577,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetDebugMessageLog_args[] = {"count", "bufSize", "sources", "types", "ids", "severities", "lengths", "messageLog"};
-static const PyGLCommand pygl_GL_glGetDebugMessageLog_info = {"glGetDebugMessageLog", "glGetDebugMessageLog(count, bufSize) -> ids, lengths, messageLog, severities, sources, types", "($module, count, bufSize, ids=None, lengths=None, messageLog=None, severities=None, sources=None, types=None, /)", pygl_GL_glGetDebugMessageLog_args, "GL_KHR_debug", 8, 788, PYGL_API_GL, 0, 8, 1, 0};
+static const PyGLCommand pygl_GL_glGetDebugMessageLog_info = {"glGetDebugMessageLog", "glGetDebugMessageLog(count, bufSize) -> ids, lengths, messageLog, severities, sources, types", "($module, count, bufSize, ids=None, lengths=None, messageLog=None, severities=None, sources=None, types=None, /)", pygl_GL_glGetDebugMessageLog_args, "GL_VERSION_GL_4_3", 8, 788, PYGL_API_GL, 0, 8, 1, 0};
 
 static PyObject *
 pygl_GL_glGetDebugMessageLog(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14337,7 +14337,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glGetGraphicsResetStatus_info = {"glGetGraphicsResetStatus", "glGetGraphicsResetStatus() -> GLenum", "($module, /)", NULL, "GL_KHR_robustness", 0, 820, PYGL_API_GL, 0, 0, 1, 0};
+static const PyGLCommand pygl_GL_glGetGraphicsResetStatus_info = {"glGetGraphicsResetStatus", "glGetGraphicsResetStatus() -> GLenum", "($module, /)", NULL, "GL_VERSION_GL_4_5", 0, 820, PYGL_API_GL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GL_glGetGraphicsResetStatus(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14663,7 +14663,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetIntegerIndexedvEXT_args[] = {"target", "index", "data"};
-static const PyGLCommand pygl_GL_glGetIntegerIndexedvEXT_info = {"glGetIntegerIndexedvEXT", "glGetIntegerIndexedvEXT(target, index) -> data", "($module, target, index, data=None, /)", pygl_GL_glGetIntegerIndexedvEXT_args, "GL_EXT_draw_buffers2", 3, 836, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glGetIntegerIndexedvEXT_info = {"glGetIntegerIndexedvEXT", "glGetIntegerIndexedvEXT(target, index) -> data", "($module, target, index, data=None, /)", pygl_GL_glGetIntegerIndexedvEXT_args, "GL_EXT_direct_state_access", 3, 836, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glGetIntegerIndexedvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14686,7 +14686,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetIntegeri_v_args[] = {"target", "index", "data"};
-static const PyGLCommand pygl_GL_glGetIntegeri_v_info = {"glGetIntegeri_v", "glGetIntegeri_v(target, index) -> data", "($module, target, index, data=None, /)", pygl_GL_glGetIntegeri_v_args, "GL_VERSION_GL_3_1", 3, 837, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glGetIntegeri_v_info = {"glGetIntegeri_v", "glGetIntegeri_v(target, index) -> data", "($module, target, index, data=None, /)", pygl_GL_glGetIntegeri_v_args, "GL_VERSION_GL_3_0", 3, 837, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glGetIntegeri_v(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -16478,7 +16478,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetObjectLabel_args[] = {"identifier", "name", "bufSize", "length", "label"};
-static const PyGLCommand pygl_GL_glGetObjectLabel_info = {"glGetObjectLabel", "glGetObjectLabel(identifier, name, bufSize) -> label, length", "($module, identifier, name, bufSize, label=None, length=None, /)", pygl_GL_glGetObjectLabel_args, "GL_KHR_debug", 5, 914, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glGetObjectLabel_info = {"glGetObjectLabel", "glGetObjectLabel(identifier, name, bufSize) -> label, length", "($module, identifier, name, bufSize, label=None, length=None, /)", pygl_GL_glGetObjectLabel_args, "GL_VERSION_GL_4_3", 5, 914, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glGetObjectLabel(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -16625,7 +16625,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetObjectPtrLabel_args[] = {"ptr", "bufSize", "length", "label"};
-static const PyGLCommand pygl_GL_glGetObjectPtrLabel_info = {"glGetObjectPtrLabel", "glGetObjectPtrLabel(ptr, bufSize) -> label, length", "($module, ptr, bufSize, label=None, length=None, /)", pygl_GL_glGetObjectPtrLabel_args, "GL_KHR_debug", 4, 920, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glGetObjectPtrLabel_info = {"glGetObjectPtrLabel", "glGetObjectPtrLabel(ptr, bufSize) -> label, length", "($module, ptr, bufSize, label=None, length=None, /)", pygl_GL_glGetObjectPtrLabel_args, "GL_VERSION_GL_4_3", 4, 920, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glGetObjectPtrLabel(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -17458,7 +17458,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetPointerv_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GL_glGetPointerv_info = {"glGetPointerv", "glGetPointerv(pname) -> params", "($module, pname, params=None, /)", pygl_GL_glGetPointerv_args, "GL_KHR_debug", 2, 955, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glGetPointerv_info = {"glGetPointerv", "glGetPointerv(pname) -> params", "($module, pname, params=None, /)", pygl_GL_glGetPointerv_args, "GL_VERSION_GL_1_1", 2, 955, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glGetPointerv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -17620,7 +17620,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetProgramEnvParameterdvARB_args[] = {"target", "index", "params"};
-static const PyGLCommand pygl_GL_glGetProgramEnvParameterdvARB_info = {"glGetProgramEnvParameterdvARB", "glGetProgramEnvParameterdvARB(target, index) -> params", "($module, target, index, params=None, /)", pygl_GL_glGetProgramEnvParameterdvARB_args, "GL_ARB_vertex_program", 3, 962, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glGetProgramEnvParameterdvARB_info = {"glGetProgramEnvParameterdvARB", "glGetProgramEnvParameterdvARB(target, index) -> params", "($module, target, index, params=None, /)", pygl_GL_glGetProgramEnvParameterdvARB_args, "GL_ARB_fragment_program", 3, 962, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glGetProgramEnvParameterdvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -17643,7 +17643,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetProgramEnvParameterfvARB_args[] = {"target", "index", "params"};
-static const PyGLCommand pygl_GL_glGetProgramEnvParameterfvARB_info = {"glGetProgramEnvParameterfvARB", "glGetProgramEnvParameterfvARB(target, index) -> params", "($module, target, index, params=None, /)", pygl_GL_glGetProgramEnvParameterfvARB_args, "GL_ARB_vertex_program", 3, 963, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glGetProgramEnvParameterfvARB_info = {"glGetProgramEnvParameterfvARB", "glGetProgramEnvParameterfvARB(target, index) -> params", "($module, target, index, params=None, /)", pygl_GL_glGetProgramEnvParameterfvARB_args, "GL_ARB_fragment_program", 3, 963, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glGetProgramEnvParameterfvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -17736,7 +17736,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetProgramLocalParameterdvARB_args[] = {"target", "index", "params"};
-static const PyGLCommand pygl_GL_glGetProgramLocalParameterdvARB_info = {"glGetProgramLocalParameterdvARB", "glGetProgramLocalParameterdvARB(target, index) -> params", "($module, target, index, params=None, /)", pygl_GL_glGetProgramLocalParameterdvARB_args, "GL_ARB_vertex_program", 3, 967, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glGetProgramLocalParameterdvARB_info = {"glGetProgramLocalParameterdvARB", "glGetProgramLocalParameterdvARB(target, index) -> params", "($module, target, index, params=None, /)", pygl_GL_glGetProgramLocalParameterdvARB_args, "GL_ARB_fragment_program", 3, 967, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glGetProgramLocalParameterdvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -17759,7 +17759,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetProgramLocalParameterfvARB_args[] = {"target", "index", "params"};
-static const PyGLCommand pygl_GL_glGetProgramLocalParameterfvARB_info = {"glGetProgramLocalParameterfvARB", "glGetProgramLocalParameterfvARB(target, index) -> params", "($module, target, index, params=None, /)", pygl_GL_glGetProgramLocalParameterfvARB_args, "GL_ARB_vertex_program", 3, 968, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glGetProgramLocalParameterfvARB_info = {"glGetProgramLocalParameterfvARB", "glGetProgramLocalParameterfvARB(target, index) -> params", "($module, target, index, params=None, /)", pygl_GL_glGetProgramLocalParameterfvARB_args, "GL_ARB_fragment_program", 3, 968, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glGetProgramLocalParameterfvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -18156,7 +18156,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetProgramStringARB_args[] = {"target", "pname", "string"};
-static const PyGLCommand pygl_GL_glGetProgramStringARB_info = {"glGetProgramStringARB", "glGetProgramStringARB(target, pname, string) -> None", "($module, target, pname, string, /)", pygl_GL_glGetProgramStringARB_args, "GL_ARB_vertex_program", 3, 984, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glGetProgramStringARB_info = {"glGetProgramStringARB", "glGetProgramStringARB(target, pname, string) -> None", "($module, target, pname, string, /)", pygl_GL_glGetProgramStringARB_args, "GL_ARB_fragment_program", 3, 984, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glGetProgramStringARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -18246,7 +18246,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetProgramivARB_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GL_glGetProgramivARB_info = {"glGetProgramivARB", "glGetProgramivARB(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GL_glGetProgramivARB_args, "GL_ARB_vertex_program", 3, 988, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glGetProgramivARB_info = {"glGetProgramivARB", "glGetProgramivARB(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GL_glGetProgramivARB_args, "GL_ARB_fragment_program", 3, 988, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glGetProgramivARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -20395,7 +20395,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetUnsignedBytei_vEXT_args[] = {"target", "index", "data"};
-static const PyGLCommand pygl_GL_glGetUnsignedBytei_vEXT_info = {"glGetUnsignedBytei_vEXT", "glGetUnsignedBytei_vEXT(target, index, data) -> None", "($module, target, index, data, /)", pygl_GL_glGetUnsignedBytei_vEXT_args, "GL_EXT_semaphore", 3, 1083, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glGetUnsignedBytei_vEXT_info = {"glGetUnsignedBytei_vEXT", "glGetUnsignedBytei_vEXT(target, index, data) -> None", "($module, target, index, data, /)", pygl_GL_glGetUnsignedBytei_vEXT_args, "GL_EXT_memory_object", 3, 1083, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glGetUnsignedBytei_vEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -20417,7 +20417,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetUnsignedBytevEXT_args[] = {"pname", "data"};
-static const PyGLCommand pygl_GL_glGetUnsignedBytevEXT_info = {"glGetUnsignedBytevEXT", "glGetUnsignedBytevEXT(pname, data) -> None", "($module, pname, data, /)", pygl_GL_glGetUnsignedBytevEXT_args, "GL_EXT_semaphore", 2, 1084, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glGetUnsignedBytevEXT_info = {"glGetUnsignedBytevEXT", "glGetUnsignedBytevEXT(pname, data) -> None", "($module, pname, data, /)", pygl_GL_glGetUnsignedBytevEXT_args, "GL_EXT_memory_object", 2, 1084, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glGetUnsignedBytevEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -21031,7 +21031,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetVertexAttribPointervARB_args[] = {"index", "pname", "pointer"};
-static const PyGLCommand pygl_GL_glGetVertexAttribPointervARB_info = {"glGetVertexAttribPointervARB", "glGetVertexAttribPointervARB(index, pname) -> pointer", "($module, index, pname, pointer=None, /)", pygl_GL_glGetVertexAttribPointervARB_args, "GL_ARB_vertex_shader", 3, 1111, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glGetVertexAttribPointervARB_info = {"glGetVertexAttribPointervARB", "glGetVertexAttribPointervARB(index, pname) -> pointer", "($module, index, pname, pointer=None, /)", pygl_GL_glGetVertexAttribPointervARB_args, "GL_ARB_vertex_program", 3, 1111, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glGetVertexAttribPointervARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -21100,7 +21100,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetVertexAttribdvARB_args[] = {"index", "pname", "params"};
-static const PyGLCommand pygl_GL_glGetVertexAttribdvARB_info = {"glGetVertexAttribdvARB", "glGetVertexAttribdvARB(index, pname) -> params", "($module, index, pname, params=None, /)", pygl_GL_glGetVertexAttribdvARB_args, "GL_ARB_vertex_shader", 3, 1114, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glGetVertexAttribdvARB_info = {"glGetVertexAttribdvARB", "glGetVertexAttribdvARB(index, pname) -> params", "($module, index, pname, params=None, /)", pygl_GL_glGetVertexAttribdvARB_args, "GL_ARB_vertex_program", 3, 1114, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glGetVertexAttribdvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -21169,7 +21169,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetVertexAttribfvARB_args[] = {"index", "pname", "params"};
-static const PyGLCommand pygl_GL_glGetVertexAttribfvARB_info = {"glGetVertexAttribfvARB", "glGetVertexAttribfvARB(index, pname) -> params", "($module, index, pname, params=None, /)", pygl_GL_glGetVertexAttribfvARB_args, "GL_ARB_vertex_shader", 3, 1117, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glGetVertexAttribfvARB_info = {"glGetVertexAttribfvARB", "glGetVertexAttribfvARB(index, pname) -> params", "($module, index, pname, params=None, /)", pygl_GL_glGetVertexAttribfvARB_args, "GL_ARB_vertex_program", 3, 1117, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glGetVertexAttribfvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -21238,7 +21238,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetVertexAttribivARB_args[] = {"index", "pname", "params"};
-static const PyGLCommand pygl_GL_glGetVertexAttribivARB_info = {"glGetVertexAttribivARB", "glGetVertexAttribivARB(index, pname) -> params", "($module, index, pname, params=None, /)", pygl_GL_glGetVertexAttribivARB_args, "GL_ARB_vertex_shader", 3, 1120, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glGetVertexAttribivARB_info = {"glGetVertexAttribivARB", "glGetVertexAttribivARB(index, pname) -> params", "($module, index, pname, params=None, /)", pygl_GL_glGetVertexAttribivARB_args, "GL_ARB_vertex_program", 3, 1120, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glGetVertexAttribivARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -22183,7 +22183,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetnUniformfv_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GL_glGetnUniformfv_info = {"glGetnUniformfv", "glGetnUniformfv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GL_glGetnUniformfv_args, "GL_KHR_robustness", 4, 1160, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glGetnUniformfv_info = {"glGetnUniformfv", "glGetnUniformfv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GL_glGetnUniformfv_args, "GL_VERSION_GL_4_5", 4, 1160, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glGetnUniformfv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -22276,7 +22276,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetnUniformiv_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GL_glGetnUniformiv_info = {"glGetnUniformiv", "glGetnUniformiv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GL_glGetnUniformiv_args, "GL_KHR_robustness", 4, 1164, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glGetnUniformiv_info = {"glGetnUniformiv", "glGetnUniformiv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GL_glGetnUniformiv_args, "GL_VERSION_GL_4_5", 4, 1164, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glGetnUniformiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -22369,7 +22369,7 @@ _fail:
 
 
 static const char *const pygl_GL_glGetnUniformuiv_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GL_glGetnUniformuiv_info = {"glGetnUniformuiv", "glGetnUniformuiv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GL_glGetnUniformuiv_args, "GL_KHR_robustness", 4, 1168, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glGetnUniformuiv_info = {"glGetnUniformuiv", "glGetnUniformuiv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GL_glGetnUniformuiv_args, "GL_VERSION_GL_4_5", 4, 1168, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glGetnUniformuiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -23568,7 +23568,7 @@ _fail:
 
 
 static const char *const pygl_GL_glIsEnabledIndexedEXT_args[] = {"target", "index"};
-static const PyGLCommand pygl_GL_glIsEnabledIndexedEXT_info = {"glIsEnabledIndexedEXT", "glIsEnabledIndexedEXT(target, index) -> GLboolean", "($module, target, index, /)", pygl_GL_glIsEnabledIndexedEXT_args, "GL_EXT_draw_buffers2", 2, 1230, PYGL_API_GL, 0, 2, 1, 0};
+static const PyGLCommand pygl_GL_glIsEnabledIndexedEXT_info = {"glIsEnabledIndexedEXT", "glIsEnabledIndexedEXT(target, index) -> GLboolean", "($module, target, index, /)", pygl_GL_glIsEnabledIndexedEXT_args, "GL_EXT_direct_state_access", 2, 1230, PYGL_API_GL, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GL_glIsEnabledIndexedEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -23904,7 +23904,7 @@ _fail:
 
 
 static const char *const pygl_GL_glIsProgramARB_args[] = {"program"};
-static const PyGLCommand pygl_GL_glIsProgramARB_info = {"glIsProgramARB", "glIsProgramARB(program) -> GLboolean", "($module, program, /)", pygl_GL_glIsProgramARB_args, "GL_ARB_vertex_program", 1, 1249, PYGL_API_GL, 0, 1, 1, 0};
+static const PyGLCommand pygl_GL_glIsProgramARB_info = {"glIsProgramARB", "glIsProgramARB(program) -> GLboolean", "($module, program, /)", pygl_GL_glIsProgramARB_args, "GL_ARB_fragment_program", 1, 1249, PYGL_API_GL, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GL_glIsProgramARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -31866,7 +31866,7 @@ _fail:
 
 
 static const char *const pygl_GL_glObjectLabel_args[] = {"identifier", "name", "length", "label"};
-static const PyGLCommand pygl_GL_glObjectLabel_info = {"glObjectLabel", "glObjectLabel(identifier, name, length, label) -> None", "($module, identifier, name, length, label, /)", pygl_GL_glObjectLabel_args, "GL_KHR_debug", 4, 1637, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glObjectLabel_info = {"glObjectLabel", "glObjectLabel(identifier, name, length, label) -> None", "($module, identifier, name, length, label, /)", pygl_GL_glObjectLabel_args, "GL_VERSION_GL_4_3", 4, 1637, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glObjectLabel(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -31912,7 +31912,7 @@ _fail:
 
 
 static const char *const pygl_GL_glObjectPtrLabel_args[] = {"ptr", "length", "label"};
-static const PyGLCommand pygl_GL_glObjectPtrLabel_info = {"glObjectPtrLabel", "glObjectPtrLabel(ptr, length, label) -> None", "($module, ptr, length, label, /)", pygl_GL_glObjectPtrLabel_args, "GL_KHR_debug", 3, 1639, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glObjectPtrLabel_info = {"glObjectPtrLabel", "glObjectPtrLabel(ptr, length, label) -> None", "($module, ptr, length, label, /)", pygl_GL_glObjectPtrLabel_args, "GL_VERSION_GL_4_3", 3, 1639, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glObjectPtrLabel(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -33645,7 +33645,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glPopDebugGroup_info = {"glPopDebugGroup", "glPopDebugGroup() -> None", "($module, /)", NULL, "GL_KHR_debug", 0, 1725, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glPopDebugGroup_info = {"glPopDebugGroup", "glPopDebugGroup() -> None", "($module, /)", NULL, "GL_VERSION_GL_4_3", 0, 1725, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glPopDebugGroup(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -34011,7 +34011,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramEnvParameter4dARB_args[] = {"target", "index", "x", "y", "z", "w"};
-static const PyGLCommand pygl_GL_glProgramEnvParameter4dARB_info = {"glProgramEnvParameter4dARB", "glProgramEnvParameter4dARB(target, index, x, y, z, w) -> None", "($module, target, index, x, y, z, w, /)", pygl_GL_glProgramEnvParameter4dARB_args, "GL_ARB_vertex_program", 6, 1743, PYGL_API_GL, 0, 6, 0, 0};
+static const PyGLCommand pygl_GL_glProgramEnvParameter4dARB_info = {"glProgramEnvParameter4dARB", "glProgramEnvParameter4dARB(target, index, x, y, z, w) -> None", "($module, target, index, x, y, z, w, /)", pygl_GL_glProgramEnvParameter4dARB_args, "GL_ARB_fragment_program", 6, 1743, PYGL_API_GL, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramEnvParameter4dARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -34033,7 +34033,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramEnvParameter4dvARB_args[] = {"target", "index", "params"};
-static const PyGLCommand pygl_GL_glProgramEnvParameter4dvARB_info = {"glProgramEnvParameter4dvARB", "glProgramEnvParameter4dvARB(target, index, params) -> None", "($module, target, index, params, /)", pygl_GL_glProgramEnvParameter4dvARB_args, "GL_ARB_vertex_program", 3, 1744, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glProgramEnvParameter4dvARB_info = {"glProgramEnvParameter4dvARB", "glProgramEnvParameter4dvARB(target, index, params) -> None", "($module, target, index, params, /)", pygl_GL_glProgramEnvParameter4dvARB_args, "GL_ARB_fragment_program", 3, 1744, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramEnvParameter4dvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -34055,7 +34055,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramEnvParameter4fARB_args[] = {"target", "index", "x", "y", "z", "w"};
-static const PyGLCommand pygl_GL_glProgramEnvParameter4fARB_info = {"glProgramEnvParameter4fARB", "glProgramEnvParameter4fARB(target, index, x, y, z, w) -> None", "($module, target, index, x, y, z, w, /)", pygl_GL_glProgramEnvParameter4fARB_args, "GL_ARB_vertex_program", 6, 1745, PYGL_API_GL, 0, 6, 0, 0};
+static const PyGLCommand pygl_GL_glProgramEnvParameter4fARB_info = {"glProgramEnvParameter4fARB", "glProgramEnvParameter4fARB(target, index, x, y, z, w) -> None", "($module, target, index, x, y, z, w, /)", pygl_GL_glProgramEnvParameter4fARB_args, "GL_ARB_fragment_program", 6, 1745, PYGL_API_GL, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramEnvParameter4fARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -34077,7 +34077,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramEnvParameter4fvARB_args[] = {"target", "index", "params"};
-static const PyGLCommand pygl_GL_glProgramEnvParameter4fvARB_info = {"glProgramEnvParameter4fvARB", "glProgramEnvParameter4fvARB(target, index, params) -> None", "($module, target, index, params, /)", pygl_GL_glProgramEnvParameter4fvARB_args, "GL_ARB_vertex_program", 3, 1746, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glProgramEnvParameter4fvARB_info = {"glProgramEnvParameter4fvARB", "glProgramEnvParameter4fvARB(target, index, params) -> None", "($module, target, index, params, /)", pygl_GL_glProgramEnvParameter4fvARB_args, "GL_ARB_fragment_program", 3, 1746, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramEnvParameter4fvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -34256,7 +34256,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramLocalParameter4dARB_args[] = {"target", "index", "x", "y", "z", "w"};
-static const PyGLCommand pygl_GL_glProgramLocalParameter4dARB_info = {"glProgramLocalParameter4dARB", "glProgramLocalParameter4dARB(target, index, x, y, z, w) -> None", "($module, target, index, x, y, z, w, /)", pygl_GL_glProgramLocalParameter4dARB_args, "GL_ARB_vertex_program", 6, 1754, PYGL_API_GL, 0, 6, 0, 0};
+static const PyGLCommand pygl_GL_glProgramLocalParameter4dARB_info = {"glProgramLocalParameter4dARB", "glProgramLocalParameter4dARB(target, index, x, y, z, w) -> None", "($module, target, index, x, y, z, w, /)", pygl_GL_glProgramLocalParameter4dARB_args, "GL_ARB_fragment_program", 6, 1754, PYGL_API_GL, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramLocalParameter4dARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -34278,7 +34278,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramLocalParameter4dvARB_args[] = {"target", "index", "params"};
-static const PyGLCommand pygl_GL_glProgramLocalParameter4dvARB_info = {"glProgramLocalParameter4dvARB", "glProgramLocalParameter4dvARB(target, index, params) -> None", "($module, target, index, params, /)", pygl_GL_glProgramLocalParameter4dvARB_args, "GL_ARB_vertex_program", 3, 1755, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glProgramLocalParameter4dvARB_info = {"glProgramLocalParameter4dvARB", "glProgramLocalParameter4dvARB(target, index, params) -> None", "($module, target, index, params, /)", pygl_GL_glProgramLocalParameter4dvARB_args, "GL_ARB_fragment_program", 3, 1755, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramLocalParameter4dvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -34300,7 +34300,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramLocalParameter4fARB_args[] = {"target", "index", "x", "y", "z", "w"};
-static const PyGLCommand pygl_GL_glProgramLocalParameter4fARB_info = {"glProgramLocalParameter4fARB", "glProgramLocalParameter4fARB(target, index, x, y, z, w) -> None", "($module, target, index, x, y, z, w, /)", pygl_GL_glProgramLocalParameter4fARB_args, "GL_ARB_vertex_program", 6, 1756, PYGL_API_GL, 0, 6, 0, 0};
+static const PyGLCommand pygl_GL_glProgramLocalParameter4fARB_info = {"glProgramLocalParameter4fARB", "glProgramLocalParameter4fARB(target, index, x, y, z, w) -> None", "($module, target, index, x, y, z, w, /)", pygl_GL_glProgramLocalParameter4fARB_args, "GL_ARB_fragment_program", 6, 1756, PYGL_API_GL, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramLocalParameter4fARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -34322,7 +34322,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramLocalParameter4fvARB_args[] = {"target", "index", "params"};
-static const PyGLCommand pygl_GL_glProgramLocalParameter4fvARB_info = {"glProgramLocalParameter4fvARB", "glProgramLocalParameter4fvARB(target, index, params) -> None", "($module, target, index, params, /)", pygl_GL_glProgramLocalParameter4fvARB_args, "GL_ARB_vertex_program", 3, 1757, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glProgramLocalParameter4fvARB_info = {"glProgramLocalParameter4fvARB", "glProgramLocalParameter4fvARB(target, index, params) -> None", "($module, target, index, params, /)", pygl_GL_glProgramLocalParameter4fvARB_args, "GL_ARB_fragment_program", 3, 1757, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramLocalParameter4fvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -34725,7 +34725,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramParameteriEXT_args[] = {"program", "pname", "value"};
-static const PyGLCommand pygl_GL_glProgramParameteriEXT_info = {"glProgramParameteriEXT", "glProgramParameteriEXT(program, pname, value) -> None", "($module, program, pname, value, /)", pygl_GL_glProgramParameteriEXT_args, "GL_EXT_separate_shader_objects", 3, 1775, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glProgramParameteriEXT_info = {"glProgramParameteriEXT", "glProgramParameteriEXT(program, pname, value) -> None", "($module, program, pname, value, /)", pygl_GL_glProgramParameteriEXT_args, "GL_EXT_geometry_shader4", 3, 1775, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramParameteriEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -34814,7 +34814,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramStringARB_args[] = {"target", "format", "len", "string"};
-static const PyGLCommand pygl_GL_glProgramStringARB_info = {"glProgramStringARB", "glProgramStringARB(target, format, len, string) -> None", "($module, target, format, len, string, /)", pygl_GL_glProgramStringARB_args, "GL_ARB_vertex_program", 4, 1779, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramStringARB_info = {"glProgramStringARB", "glProgramStringARB(target, format, len, string) -> None", "($module, target, format, len, string, /)", pygl_GL_glProgramStringARB_args, "GL_ARB_fragment_program", 4, 1779, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramStringARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -34962,7 +34962,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform1fEXT_args[] = {"program", "location", "v0"};
-static const PyGLCommand pygl_GL_glProgramUniform1fEXT_info = {"glProgramUniform1fEXT", "glProgramUniform1fEXT(program, location, v0) -> None", "($module, program, location, v0, /)", pygl_GL_glProgramUniform1fEXT_args, "GL_EXT_separate_shader_objects", 3, 1786, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform1fEXT_info = {"glProgramUniform1fEXT", "glProgramUniform1fEXT(program, location, v0) -> None", "($module, program, location, v0, /)", pygl_GL_glProgramUniform1fEXT_args, "GL_EXT_direct_state_access", 3, 1786, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform1fEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -35004,7 +35004,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform1fvEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GL_glProgramUniform1fvEXT_info = {"glProgramUniform1fvEXT", "glProgramUniform1fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform1fvEXT_args, "GL_EXT_separate_shader_objects", 4, 1788, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform1fvEXT_info = {"glProgramUniform1fvEXT", "glProgramUniform1fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform1fvEXT_args, "GL_EXT_direct_state_access", 4, 1788, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform1fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -35130,7 +35130,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform1iEXT_args[] = {"program", "location", "v0"};
-static const PyGLCommand pygl_GL_glProgramUniform1iEXT_info = {"glProgramUniform1iEXT", "glProgramUniform1iEXT(program, location, v0) -> None", "($module, program, location, v0, /)", pygl_GL_glProgramUniform1iEXT_args, "GL_EXT_separate_shader_objects", 3, 1794, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform1iEXT_info = {"glProgramUniform1iEXT", "glProgramUniform1iEXT(program, location, v0) -> None", "($module, program, location, v0, /)", pygl_GL_glProgramUniform1iEXT_args, "GL_EXT_direct_state_access", 3, 1794, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform1iEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -35172,7 +35172,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform1ivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GL_glProgramUniform1ivEXT_info = {"glProgramUniform1ivEXT", "glProgramUniform1ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform1ivEXT_args, "GL_EXT_separate_shader_objects", 4, 1796, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform1ivEXT_info = {"glProgramUniform1ivEXT", "glProgramUniform1ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform1ivEXT_args, "GL_EXT_direct_state_access", 4, 1796, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform1ivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -35298,7 +35298,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform1uiEXT_args[] = {"program", "location", "v0"};
-static const PyGLCommand pygl_GL_glProgramUniform1uiEXT_info = {"glProgramUniform1uiEXT", "glProgramUniform1uiEXT(program, location, v0) -> None", "($module, program, location, v0, /)", pygl_GL_glProgramUniform1uiEXT_args, "GL_EXT_separate_shader_objects", 3, 1802, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform1uiEXT_info = {"glProgramUniform1uiEXT", "glProgramUniform1uiEXT(program, location, v0) -> None", "($module, program, location, v0, /)", pygl_GL_glProgramUniform1uiEXT_args, "GL_EXT_direct_state_access", 3, 1802, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform1uiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -35340,7 +35340,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform1uivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GL_glProgramUniform1uivEXT_info = {"glProgramUniform1uivEXT", "glProgramUniform1uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform1uivEXT_args, "GL_EXT_separate_shader_objects", 4, 1804, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform1uivEXT_info = {"glProgramUniform1uivEXT", "glProgramUniform1uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform1uivEXT_args, "GL_EXT_direct_state_access", 4, 1804, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform1uivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -35469,7 +35469,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform2fEXT_args[] = {"program", "location", "v0", "v1"};
-static const PyGLCommand pygl_GL_glProgramUniform2fEXT_info = {"glProgramUniform2fEXT", "glProgramUniform2fEXT(program, location, v0, v1) -> None", "($module, program, location, v0, v1, /)", pygl_GL_glProgramUniform2fEXT_args, "GL_EXT_separate_shader_objects", 4, 1810, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform2fEXT_info = {"glProgramUniform2fEXT", "glProgramUniform2fEXT(program, location, v0, v1) -> None", "($module, program, location, v0, v1, /)", pygl_GL_glProgramUniform2fEXT_args, "GL_EXT_direct_state_access", 4, 1810, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform2fEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -35512,7 +35512,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform2fvEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GL_glProgramUniform2fvEXT_info = {"glProgramUniform2fvEXT", "glProgramUniform2fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform2fvEXT_args, "GL_EXT_separate_shader_objects", 4, 1812, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform2fvEXT_info = {"glProgramUniform2fvEXT", "glProgramUniform2fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform2fvEXT_args, "GL_EXT_direct_state_access", 4, 1812, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform2fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -35641,7 +35641,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform2iEXT_args[] = {"program", "location", "v0", "v1"};
-static const PyGLCommand pygl_GL_glProgramUniform2iEXT_info = {"glProgramUniform2iEXT", "glProgramUniform2iEXT(program, location, v0, v1) -> None", "($module, program, location, v0, v1, /)", pygl_GL_glProgramUniform2iEXT_args, "GL_EXT_separate_shader_objects", 4, 1818, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform2iEXT_info = {"glProgramUniform2iEXT", "glProgramUniform2iEXT(program, location, v0, v1) -> None", "($module, program, location, v0, v1, /)", pygl_GL_glProgramUniform2iEXT_args, "GL_EXT_direct_state_access", 4, 1818, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform2iEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -35684,7 +35684,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform2ivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GL_glProgramUniform2ivEXT_info = {"glProgramUniform2ivEXT", "glProgramUniform2ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform2ivEXT_args, "GL_EXT_separate_shader_objects", 4, 1820, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform2ivEXT_info = {"glProgramUniform2ivEXT", "glProgramUniform2ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform2ivEXT_args, "GL_EXT_direct_state_access", 4, 1820, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform2ivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -35813,7 +35813,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform2uiEXT_args[] = {"program", "location", "v0", "v1"};
-static const PyGLCommand pygl_GL_glProgramUniform2uiEXT_info = {"glProgramUniform2uiEXT", "glProgramUniform2uiEXT(program, location, v0, v1) -> None", "($module, program, location, v0, v1, /)", pygl_GL_glProgramUniform2uiEXT_args, "GL_EXT_separate_shader_objects", 4, 1826, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform2uiEXT_info = {"glProgramUniform2uiEXT", "glProgramUniform2uiEXT(program, location, v0, v1) -> None", "($module, program, location, v0, v1, /)", pygl_GL_glProgramUniform2uiEXT_args, "GL_EXT_direct_state_access", 4, 1826, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform2uiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -35856,7 +35856,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform2uivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GL_glProgramUniform2uivEXT_info = {"glProgramUniform2uivEXT", "glProgramUniform2uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform2uivEXT_args, "GL_EXT_separate_shader_objects", 4, 1828, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform2uivEXT_info = {"glProgramUniform2uivEXT", "glProgramUniform2uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform2uivEXT_args, "GL_EXT_direct_state_access", 4, 1828, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform2uivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -35988,7 +35988,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform3fEXT_args[] = {"program", "location", "v0", "v1", "v2"};
-static const PyGLCommand pygl_GL_glProgramUniform3fEXT_info = {"glProgramUniform3fEXT", "glProgramUniform3fEXT(program, location, v0, v1, v2) -> None", "($module, program, location, v0, v1, v2, /)", pygl_GL_glProgramUniform3fEXT_args, "GL_EXT_separate_shader_objects", 5, 1834, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform3fEXT_info = {"glProgramUniform3fEXT", "glProgramUniform3fEXT(program, location, v0, v1, v2) -> None", "($module, program, location, v0, v1, v2, /)", pygl_GL_glProgramUniform3fEXT_args, "GL_EXT_direct_state_access", 5, 1834, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform3fEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -36032,7 +36032,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform3fvEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GL_glProgramUniform3fvEXT_info = {"glProgramUniform3fvEXT", "glProgramUniform3fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform3fvEXT_args, "GL_EXT_separate_shader_objects", 4, 1836, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform3fvEXT_info = {"glProgramUniform3fvEXT", "glProgramUniform3fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform3fvEXT_args, "GL_EXT_direct_state_access", 4, 1836, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform3fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -36164,7 +36164,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform3iEXT_args[] = {"program", "location", "v0", "v1", "v2"};
-static const PyGLCommand pygl_GL_glProgramUniform3iEXT_info = {"glProgramUniform3iEXT", "glProgramUniform3iEXT(program, location, v0, v1, v2) -> None", "($module, program, location, v0, v1, v2, /)", pygl_GL_glProgramUniform3iEXT_args, "GL_EXT_separate_shader_objects", 5, 1842, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform3iEXT_info = {"glProgramUniform3iEXT", "glProgramUniform3iEXT(program, location, v0, v1, v2) -> None", "($module, program, location, v0, v1, v2, /)", pygl_GL_glProgramUniform3iEXT_args, "GL_EXT_direct_state_access", 5, 1842, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform3iEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -36208,7 +36208,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform3ivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GL_glProgramUniform3ivEXT_info = {"glProgramUniform3ivEXT", "glProgramUniform3ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform3ivEXT_args, "GL_EXT_separate_shader_objects", 4, 1844, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform3ivEXT_info = {"glProgramUniform3ivEXT", "glProgramUniform3ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform3ivEXT_args, "GL_EXT_direct_state_access", 4, 1844, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform3ivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -36340,7 +36340,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform3uiEXT_args[] = {"program", "location", "v0", "v1", "v2"};
-static const PyGLCommand pygl_GL_glProgramUniform3uiEXT_info = {"glProgramUniform3uiEXT", "glProgramUniform3uiEXT(program, location, v0, v1, v2) -> None", "($module, program, location, v0, v1, v2, /)", pygl_GL_glProgramUniform3uiEXT_args, "GL_EXT_separate_shader_objects", 5, 1850, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform3uiEXT_info = {"glProgramUniform3uiEXT", "glProgramUniform3uiEXT(program, location, v0, v1, v2) -> None", "($module, program, location, v0, v1, v2, /)", pygl_GL_glProgramUniform3uiEXT_args, "GL_EXT_direct_state_access", 5, 1850, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform3uiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -36384,7 +36384,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform3uivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GL_glProgramUniform3uivEXT_info = {"glProgramUniform3uivEXT", "glProgramUniform3uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform3uivEXT_args, "GL_EXT_separate_shader_objects", 4, 1852, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform3uivEXT_info = {"glProgramUniform3uivEXT", "glProgramUniform3uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform3uivEXT_args, "GL_EXT_direct_state_access", 4, 1852, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform3uivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -36519,7 +36519,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform4fEXT_args[] = {"program", "location", "v0", "v1", "v2", "v3"};
-static const PyGLCommand pygl_GL_glProgramUniform4fEXT_info = {"glProgramUniform4fEXT", "glProgramUniform4fEXT(program, location, v0, v1, v2, v3) -> None", "($module, program, location, v0, v1, v2, v3, /)", pygl_GL_glProgramUniform4fEXT_args, "GL_EXT_separate_shader_objects", 6, 1858, PYGL_API_GL, 0, 6, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform4fEXT_info = {"glProgramUniform4fEXT", "glProgramUniform4fEXT(program, location, v0, v1, v2, v3) -> None", "($module, program, location, v0, v1, v2, v3, /)", pygl_GL_glProgramUniform4fEXT_args, "GL_EXT_direct_state_access", 6, 1858, PYGL_API_GL, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform4fEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -36564,7 +36564,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform4fvEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GL_glProgramUniform4fvEXT_info = {"glProgramUniform4fvEXT", "glProgramUniform4fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform4fvEXT_args, "GL_EXT_separate_shader_objects", 4, 1860, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform4fvEXT_info = {"glProgramUniform4fvEXT", "glProgramUniform4fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform4fvEXT_args, "GL_EXT_direct_state_access", 4, 1860, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform4fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -36699,7 +36699,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform4iEXT_args[] = {"program", "location", "v0", "v1", "v2", "v3"};
-static const PyGLCommand pygl_GL_glProgramUniform4iEXT_info = {"glProgramUniform4iEXT", "glProgramUniform4iEXT(program, location, v0, v1, v2, v3) -> None", "($module, program, location, v0, v1, v2, v3, /)", pygl_GL_glProgramUniform4iEXT_args, "GL_EXT_separate_shader_objects", 6, 1866, PYGL_API_GL, 0, 6, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform4iEXT_info = {"glProgramUniform4iEXT", "glProgramUniform4iEXT(program, location, v0, v1, v2, v3) -> None", "($module, program, location, v0, v1, v2, v3, /)", pygl_GL_glProgramUniform4iEXT_args, "GL_EXT_direct_state_access", 6, 1866, PYGL_API_GL, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform4iEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -36744,7 +36744,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform4ivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GL_glProgramUniform4ivEXT_info = {"glProgramUniform4ivEXT", "glProgramUniform4ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform4ivEXT_args, "GL_EXT_separate_shader_objects", 4, 1868, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform4ivEXT_info = {"glProgramUniform4ivEXT", "glProgramUniform4ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform4ivEXT_args, "GL_EXT_direct_state_access", 4, 1868, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform4ivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -36879,7 +36879,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform4uiEXT_args[] = {"program", "location", "v0", "v1", "v2", "v3"};
-static const PyGLCommand pygl_GL_glProgramUniform4uiEXT_info = {"glProgramUniform4uiEXT", "glProgramUniform4uiEXT(program, location, v0, v1, v2, v3) -> None", "($module, program, location, v0, v1, v2, v3, /)", pygl_GL_glProgramUniform4uiEXT_args, "GL_EXT_separate_shader_objects", 6, 1874, PYGL_API_GL, 0, 6, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform4uiEXT_info = {"glProgramUniform4uiEXT", "glProgramUniform4uiEXT(program, location, v0, v1, v2, v3) -> None", "($module, program, location, v0, v1, v2, v3, /)", pygl_GL_glProgramUniform4uiEXT_args, "GL_EXT_direct_state_access", 6, 1874, PYGL_API_GL, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform4uiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -36924,7 +36924,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniform4uivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GL_glProgramUniform4uivEXT_info = {"glProgramUniform4uivEXT", "glProgramUniform4uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform4uivEXT_args, "GL_EXT_separate_shader_objects", 4, 1876, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniform4uivEXT_info = {"glProgramUniform4uivEXT", "glProgramUniform4uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GL_glProgramUniform4uivEXT_args, "GL_EXT_direct_state_access", 4, 1876, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniform4uivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37103,7 +37103,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniformMatrix2fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GL_glProgramUniformMatrix2fvEXT_info = {"glProgramUniformMatrix2fvEXT", "glProgramUniformMatrix2fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix2fvEXT_args, "GL_EXT_separate_shader_objects", 5, 1884, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniformMatrix2fvEXT_info = {"glProgramUniformMatrix2fvEXT", "glProgramUniformMatrix2fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix2fvEXT_args, "GL_EXT_direct_state_access", 5, 1884, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniformMatrix2fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37199,7 +37199,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniformMatrix2x3fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GL_glProgramUniformMatrix2x3fvEXT_info = {"glProgramUniformMatrix2x3fvEXT", "glProgramUniformMatrix2x3fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix2x3fvEXT_args, "GL_EXT_separate_shader_objects", 5, 1888, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniformMatrix2x3fvEXT_info = {"glProgramUniformMatrix2x3fvEXT", "glProgramUniformMatrix2x3fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix2x3fvEXT_args, "GL_EXT_direct_state_access", 5, 1888, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniformMatrix2x3fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37295,7 +37295,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniformMatrix2x4fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GL_glProgramUniformMatrix2x4fvEXT_info = {"glProgramUniformMatrix2x4fvEXT", "glProgramUniformMatrix2x4fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix2x4fvEXT_args, "GL_EXT_separate_shader_objects", 5, 1892, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniformMatrix2x4fvEXT_info = {"glProgramUniformMatrix2x4fvEXT", "glProgramUniformMatrix2x4fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix2x4fvEXT_args, "GL_EXT_direct_state_access", 5, 1892, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniformMatrix2x4fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37391,7 +37391,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniformMatrix3fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GL_glProgramUniformMatrix3fvEXT_info = {"glProgramUniformMatrix3fvEXT", "glProgramUniformMatrix3fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix3fvEXT_args, "GL_EXT_separate_shader_objects", 5, 1896, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniformMatrix3fvEXT_info = {"glProgramUniformMatrix3fvEXT", "glProgramUniformMatrix3fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix3fvEXT_args, "GL_EXT_direct_state_access", 5, 1896, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniformMatrix3fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37487,7 +37487,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniformMatrix3x2fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GL_glProgramUniformMatrix3x2fvEXT_info = {"glProgramUniformMatrix3x2fvEXT", "glProgramUniformMatrix3x2fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix3x2fvEXT_args, "GL_EXT_separate_shader_objects", 5, 1900, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniformMatrix3x2fvEXT_info = {"glProgramUniformMatrix3x2fvEXT", "glProgramUniformMatrix3x2fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix3x2fvEXT_args, "GL_EXT_direct_state_access", 5, 1900, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniformMatrix3x2fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37583,7 +37583,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniformMatrix3x4fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GL_glProgramUniformMatrix3x4fvEXT_info = {"glProgramUniformMatrix3x4fvEXT", "glProgramUniformMatrix3x4fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix3x4fvEXT_args, "GL_EXT_separate_shader_objects", 5, 1904, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniformMatrix3x4fvEXT_info = {"glProgramUniformMatrix3x4fvEXT", "glProgramUniformMatrix3x4fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix3x4fvEXT_args, "GL_EXT_direct_state_access", 5, 1904, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniformMatrix3x4fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37679,7 +37679,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniformMatrix4fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GL_glProgramUniformMatrix4fvEXT_info = {"glProgramUniformMatrix4fvEXT", "glProgramUniformMatrix4fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix4fvEXT_args, "GL_EXT_separate_shader_objects", 5, 1908, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniformMatrix4fvEXT_info = {"glProgramUniformMatrix4fvEXT", "glProgramUniformMatrix4fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix4fvEXT_args, "GL_EXT_direct_state_access", 5, 1908, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniformMatrix4fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37775,7 +37775,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniformMatrix4x2fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GL_glProgramUniformMatrix4x2fvEXT_info = {"glProgramUniformMatrix4x2fvEXT", "glProgramUniformMatrix4x2fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix4x2fvEXT_args, "GL_EXT_separate_shader_objects", 5, 1912, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniformMatrix4x2fvEXT_info = {"glProgramUniformMatrix4x2fvEXT", "glProgramUniformMatrix4x2fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix4x2fvEXT_args, "GL_EXT_direct_state_access", 5, 1912, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniformMatrix4x2fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37871,7 +37871,7 @@ _fail:
 
 
 static const char *const pygl_GL_glProgramUniformMatrix4x3fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GL_glProgramUniformMatrix4x3fvEXT_info = {"glProgramUniformMatrix4x3fvEXT", "glProgramUniformMatrix4x3fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix4x3fvEXT_args, "GL_EXT_separate_shader_objects", 5, 1916, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glProgramUniformMatrix4x3fvEXT_info = {"glProgramUniformMatrix4x3fvEXT", "glProgramUniformMatrix4x3fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GL_glProgramUniformMatrix4x3fvEXT_args, "GL_EXT_direct_state_access", 5, 1916, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glProgramUniformMatrix4x3fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -38040,7 +38040,7 @@ _fail:
 
 
 static const char *const pygl_GL_glPushDebugGroup_args[] = {"source", "id", "length", "message"};
-static const PyGLCommand pygl_GL_glPushDebugGroup_info = {"glPushDebugGroup", "glPushDebugGroup(source, id, length, message) -> None", "($module, source, id, length, message, /)", pygl_GL_glPushDebugGroup_args, "GL_KHR_debug", 4, 1925, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glPushDebugGroup_info = {"glPushDebugGroup", "glPushDebugGroup(source, id, length, message) -> None", "($module, source, id, length, message, /)", pygl_GL_glPushDebugGroup_args, "GL_VERSION_GL_4_3", 4, 1925, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glPushDebugGroup(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -38885,7 +38885,7 @@ _fail:
 
 
 static const char *const pygl_GL_glReadnPixels_args[] = {"x", "y", "width", "height", "format", "type", "bufSize", "data"};
-static const PyGLCommand pygl_GL_glReadnPixels_info = {"glReadnPixels", "glReadnPixels(x, y, width, height, format, type, bufSize, data) -> None", "($module, x, y, width, height, format, type, bufSize, data, /)", pygl_GL_glReadnPixels_args, "GL_KHR_robustness", 8, 1968, PYGL_API_GL, 0, 8, 0, 0};
+static const PyGLCommand pygl_GL_glReadnPixels_info = {"glReadnPixels", "glReadnPixels(x, y, width, height, format, type, bufSize, data) -> None", "($module, x, y, width, height, format, type, bufSize, data, /)", pygl_GL_glReadnPixels_args, "GL_VERSION_GL_4_5", 8, 1968, PYGL_API_GL, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GL_glReadnPixels(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -41573,7 +41573,7 @@ _fail:
 }
 
 
-static const char *const pygl_GL_glShaderSource_args[] = {"shader", "count", "string", "length"};
+static const char *const pygl_GL_glShaderSource_args[] = {"shaderObj", "count", "string", "length"};
 static const PyGLCommand pygl_GL_glShaderSource_info = {"glShaderSource", "glShaderSource(shader, string) -> None", "($module, shader, string, /)", pygl_GL_glShaderSource_args, "GL_VERSION_GL_2_0", 4, 2102, PYGL_API_GL, 0, 2, 0, 1};
 
 PyObject *pygl_hand_glShaderSource(GLProc *self, PyObject *const *_a, size_t _nargsf);
@@ -46141,7 +46141,7 @@ _fail:
 
 
 static const char *const pygl_GL_glTextureStorage1DEXT_args[] = {"texture", "target", "levels", "internalformat", "width"};
-static const PyGLCommand pygl_GL_glTextureStorage1DEXT_info = {"glTextureStorage1DEXT", "glTextureStorage1DEXT(texture, target, levels, internalformat, width) -> None", "($module, texture, target, levels, internalformat, width, /)", pygl_GL_glTextureStorage1DEXT_args, "GL_EXT_texture_storage", 5, 2327, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glTextureStorage1DEXT_info = {"glTextureStorage1DEXT", "glTextureStorage1DEXT(texture, target, levels, internalformat, width) -> None", "($module, texture, target, levels, internalformat, width, /)", pygl_GL_glTextureStorage1DEXT_args, "GL_EXT_direct_state_access", 5, 2327, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glTextureStorage1DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -46183,7 +46183,7 @@ _fail:
 
 
 static const char *const pygl_GL_glTextureStorage2DEXT_args[] = {"texture", "target", "levels", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GL_glTextureStorage2DEXT_info = {"glTextureStorage2DEXT", "glTextureStorage2DEXT(texture, target, levels, internalformat, width, height) -> None", "($module, texture, target, levels, internalformat, width, height, /)", pygl_GL_glTextureStorage2DEXT_args, "GL_EXT_texture_storage", 6, 2329, PYGL_API_GL, 0, 6, 0, 0};
+static const PyGLCommand pygl_GL_glTextureStorage2DEXT_info = {"glTextureStorage2DEXT", "glTextureStorage2DEXT(texture, target, levels, internalformat, width, height) -> None", "($module, texture, target, levels, internalformat, width, height, /)", pygl_GL_glTextureStorage2DEXT_args, "GL_EXT_direct_state_access", 6, 2329, PYGL_API_GL, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GL_glTextureStorage2DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -46272,7 +46272,7 @@ _fail:
 
 
 static const char *const pygl_GL_glTextureStorage3DEXT_args[] = {"texture", "target", "levels", "internalformat", "width", "height", "depth"};
-static const PyGLCommand pygl_GL_glTextureStorage3DEXT_info = {"glTextureStorage3DEXT", "glTextureStorage3DEXT(texture, target, levels, internalformat, width, height, depth) -> None", "($module, texture, target, levels, internalformat, width, height, depth, /)", pygl_GL_glTextureStorage3DEXT_args, "GL_EXT_texture_storage", 7, 2333, PYGL_API_GL, 0, 7, 0, 0};
+static const PyGLCommand pygl_GL_glTextureStorage3DEXT_info = {"glTextureStorage3DEXT", "glTextureStorage3DEXT(texture, target, levels, internalformat, width, height, depth) -> None", "($module, texture, target, levels, internalformat, width, height, depth, /)", pygl_GL_glTextureStorage3DEXT_args, "GL_EXT_direct_state_access", 7, 2333, PYGL_API_GL, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GL_glTextureStorage3DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -51491,7 +51491,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib1dARB_args[] = {"index", "x"};
-static const PyGLCommand pygl_GL_glVertexAttrib1dARB_info = {"glVertexAttrib1dARB", "glVertexAttrib1dARB(index, x) -> None", "($module, index, x, /)", pygl_GL_glVertexAttrib1dARB_args, "GL_ARB_vertex_shader", 2, 2585, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib1dARB_info = {"glVertexAttrib1dARB", "glVertexAttrib1dARB(index, x) -> None", "($module, index, x, /)", pygl_GL_glVertexAttrib1dARB_args, "GL_ARB_vertex_program", 2, 2585, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib1dARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -51548,7 +51548,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib1dvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib1dvARB_info = {"glVertexAttrib1dvARB", "glVertexAttrib1dvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib1dvARB_args, "GL_ARB_vertex_shader", 2, 2588, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib1dvARB_info = {"glVertexAttrib1dvARB", "glVertexAttrib1dvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib1dvARB_args, "GL_ARB_vertex_program", 2, 2588, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib1dvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -51608,7 +51608,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib1fARB_args[] = {"index", "x"};
-static const PyGLCommand pygl_GL_glVertexAttrib1fARB_info = {"glVertexAttrib1fARB", "glVertexAttrib1fARB(index, x) -> None", "($module, index, x, /)", pygl_GL_glVertexAttrib1fARB_args, "GL_ARB_vertex_shader", 2, 2591, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib1fARB_info = {"glVertexAttrib1fARB", "glVertexAttrib1fARB(index, x) -> None", "($module, index, x, /)", pygl_GL_glVertexAttrib1fARB_args, "GL_ARB_vertex_program", 2, 2591, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib1fARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -51665,7 +51665,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib1fvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib1fvARB_info = {"glVertexAttrib1fvARB", "glVertexAttrib1fvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib1fvARB_args, "GL_ARB_vertex_shader", 2, 2594, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib1fvARB_info = {"glVertexAttrib1fvARB", "glVertexAttrib1fvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib1fvARB_args, "GL_ARB_vertex_program", 2, 2594, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib1fvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -51764,7 +51764,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib1sARB_args[] = {"index", "x"};
-static const PyGLCommand pygl_GL_glVertexAttrib1sARB_info = {"glVertexAttrib1sARB", "glVertexAttrib1sARB(index, x) -> None", "($module, index, x, /)", pygl_GL_glVertexAttrib1sARB_args, "GL_ARB_vertex_shader", 2, 2599, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib1sARB_info = {"glVertexAttrib1sARB", "glVertexAttrib1sARB(index, x) -> None", "($module, index, x, /)", pygl_GL_glVertexAttrib1sARB_args, "GL_ARB_vertex_program", 2, 2599, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib1sARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -51821,7 +51821,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib1svARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib1svARB_info = {"glVertexAttrib1svARB", "glVertexAttrib1svARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib1svARB_args, "GL_ARB_vertex_shader", 2, 2602, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib1svARB_info = {"glVertexAttrib1svARB", "glVertexAttrib1svARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib1svARB_args, "GL_ARB_vertex_program", 2, 2602, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib1svARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -51882,7 +51882,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib2dARB_args[] = {"index", "x", "y"};
-static const PyGLCommand pygl_GL_glVertexAttrib2dARB_info = {"glVertexAttrib2dARB", "glVertexAttrib2dARB(index, x, y) -> None", "($module, index, x, y, /)", pygl_GL_glVertexAttrib2dARB_args, "GL_ARB_vertex_shader", 3, 2605, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib2dARB_info = {"glVertexAttrib2dARB", "glVertexAttrib2dARB(index, x, y) -> None", "($module, index, x, y, /)", pygl_GL_glVertexAttrib2dARB_args, "GL_ARB_vertex_program", 3, 2605, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib2dARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -51941,7 +51941,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib2dvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib2dvARB_info = {"glVertexAttrib2dvARB", "glVertexAttrib2dvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib2dvARB_args, "GL_ARB_vertex_shader", 2, 2608, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib2dvARB_info = {"glVertexAttrib2dvARB", "glVertexAttrib2dvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib2dvARB_args, "GL_ARB_vertex_program", 2, 2608, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib2dvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52002,7 +52002,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib2fARB_args[] = {"index", "x", "y"};
-static const PyGLCommand pygl_GL_glVertexAttrib2fARB_info = {"glVertexAttrib2fARB", "glVertexAttrib2fARB(index, x, y) -> None", "($module, index, x, y, /)", pygl_GL_glVertexAttrib2fARB_args, "GL_ARB_vertex_shader", 3, 2611, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib2fARB_info = {"glVertexAttrib2fARB", "glVertexAttrib2fARB(index, x, y) -> None", "($module, index, x, y, /)", pygl_GL_glVertexAttrib2fARB_args, "GL_ARB_vertex_program", 3, 2611, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib2fARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52061,7 +52061,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib2fvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib2fvARB_info = {"glVertexAttrib2fvARB", "glVertexAttrib2fvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib2fvARB_args, "GL_ARB_vertex_shader", 2, 2614, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib2fvARB_info = {"glVertexAttrib2fvARB", "glVertexAttrib2fvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib2fvARB_args, "GL_ARB_vertex_program", 2, 2614, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib2fvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52162,7 +52162,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib2sARB_args[] = {"index", "x", "y"};
-static const PyGLCommand pygl_GL_glVertexAttrib2sARB_info = {"glVertexAttrib2sARB", "glVertexAttrib2sARB(index, x, y) -> None", "($module, index, x, y, /)", pygl_GL_glVertexAttrib2sARB_args, "GL_ARB_vertex_shader", 3, 2619, PYGL_API_GL, 0, 3, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib2sARB_info = {"glVertexAttrib2sARB", "glVertexAttrib2sARB(index, x, y) -> None", "($module, index, x, y, /)", pygl_GL_glVertexAttrib2sARB_args, "GL_ARB_vertex_program", 3, 2619, PYGL_API_GL, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib2sARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52221,7 +52221,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib2svARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib2svARB_info = {"glVertexAttrib2svARB", "glVertexAttrib2svARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib2svARB_args, "GL_ARB_vertex_shader", 2, 2622, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib2svARB_info = {"glVertexAttrib2svARB", "glVertexAttrib2svARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib2svARB_args, "GL_ARB_vertex_program", 2, 2622, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib2svARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52283,7 +52283,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib3dARB_args[] = {"index", "x", "y", "z"};
-static const PyGLCommand pygl_GL_glVertexAttrib3dARB_info = {"glVertexAttrib3dARB", "glVertexAttrib3dARB(index, x, y, z) -> None", "($module, index, x, y, z, /)", pygl_GL_glVertexAttrib3dARB_args, "GL_ARB_vertex_shader", 4, 2625, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib3dARB_info = {"glVertexAttrib3dARB", "glVertexAttrib3dARB(index, x, y, z) -> None", "($module, index, x, y, z, /)", pygl_GL_glVertexAttrib3dARB_args, "GL_ARB_vertex_program", 4, 2625, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib3dARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52344,7 +52344,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib3dvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib3dvARB_info = {"glVertexAttrib3dvARB", "glVertexAttrib3dvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib3dvARB_args, "GL_ARB_vertex_shader", 2, 2628, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib3dvARB_info = {"glVertexAttrib3dvARB", "glVertexAttrib3dvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib3dvARB_args, "GL_ARB_vertex_program", 2, 2628, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib3dvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52406,7 +52406,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib3fARB_args[] = {"index", "x", "y", "z"};
-static const PyGLCommand pygl_GL_glVertexAttrib3fARB_info = {"glVertexAttrib3fARB", "glVertexAttrib3fARB(index, x, y, z) -> None", "($module, index, x, y, z, /)", pygl_GL_glVertexAttrib3fARB_args, "GL_ARB_vertex_shader", 4, 2631, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib3fARB_info = {"glVertexAttrib3fARB", "glVertexAttrib3fARB(index, x, y, z) -> None", "($module, index, x, y, z, /)", pygl_GL_glVertexAttrib3fARB_args, "GL_ARB_vertex_program", 4, 2631, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib3fARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52467,7 +52467,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib3fvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib3fvARB_info = {"glVertexAttrib3fvARB", "glVertexAttrib3fvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib3fvARB_args, "GL_ARB_vertex_shader", 2, 2634, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib3fvARB_info = {"glVertexAttrib3fvARB", "glVertexAttrib3fvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib3fvARB_args, "GL_ARB_vertex_program", 2, 2634, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib3fvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52570,7 +52570,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib3sARB_args[] = {"index", "x", "y", "z"};
-static const PyGLCommand pygl_GL_glVertexAttrib3sARB_info = {"glVertexAttrib3sARB", "glVertexAttrib3sARB(index, x, y, z) -> None", "($module, index, x, y, z, /)", pygl_GL_glVertexAttrib3sARB_args, "GL_ARB_vertex_shader", 4, 2639, PYGL_API_GL, 0, 4, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib3sARB_info = {"glVertexAttrib3sARB", "glVertexAttrib3sARB(index, x, y, z) -> None", "($module, index, x, y, z, /)", pygl_GL_glVertexAttrib3sARB_args, "GL_ARB_vertex_program", 4, 2639, PYGL_API_GL, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib3sARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52631,7 +52631,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib3svARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib3svARB_info = {"glVertexAttrib3svARB", "glVertexAttrib3svARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib3svARB_args, "GL_ARB_vertex_shader", 2, 2642, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib3svARB_info = {"glVertexAttrib3svARB", "glVertexAttrib3svARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib3svARB_args, "GL_ARB_vertex_program", 2, 2642, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib3svARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52694,7 +52694,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4NbvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib4NbvARB_info = {"glVertexAttrib4NbvARB", "glVertexAttrib4NbvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4NbvARB_args, "GL_ARB_vertex_shader", 2, 2645, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4NbvARB_info = {"glVertexAttrib4NbvARB", "glVertexAttrib4NbvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4NbvARB_args, "GL_ARB_vertex_program", 2, 2645, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4NbvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52736,7 +52736,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4NivARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib4NivARB_info = {"glVertexAttrib4NivARB", "glVertexAttrib4NivARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4NivARB_args, "GL_ARB_vertex_shader", 2, 2647, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4NivARB_info = {"glVertexAttrib4NivARB", "glVertexAttrib4NivARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4NivARB_args, "GL_ARB_vertex_program", 2, 2647, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4NivARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52778,7 +52778,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4NsvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib4NsvARB_info = {"glVertexAttrib4NsvARB", "glVertexAttrib4NsvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4NsvARB_args, "GL_ARB_vertex_shader", 2, 2649, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4NsvARB_info = {"glVertexAttrib4NsvARB", "glVertexAttrib4NsvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4NsvARB_args, "GL_ARB_vertex_program", 2, 2649, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4NsvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52820,7 +52820,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4NubARB_args[] = {"index", "x", "y", "z", "w"};
-static const PyGLCommand pygl_GL_glVertexAttrib4NubARB_info = {"glVertexAttrib4NubARB", "glVertexAttrib4NubARB(index, x, y, z, w) -> None", "($module, index, x, y, z, w, /)", pygl_GL_glVertexAttrib4NubARB_args, "GL_ARB_vertex_shader", 5, 2651, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4NubARB_info = {"glVertexAttrib4NubARB", "glVertexAttrib4NubARB(index, x, y, z, w) -> None", "($module, index, x, y, z, w, /)", pygl_GL_glVertexAttrib4NubARB_args, "GL_ARB_vertex_program", 5, 2651, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4NubARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52862,7 +52862,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4NubvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib4NubvARB_info = {"glVertexAttrib4NubvARB", "glVertexAttrib4NubvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4NubvARB_args, "GL_ARB_vertex_shader", 2, 2653, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4NubvARB_info = {"glVertexAttrib4NubvARB", "glVertexAttrib4NubvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4NubvARB_args, "GL_ARB_vertex_program", 2, 2653, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4NubvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52904,7 +52904,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4NuivARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib4NuivARB_info = {"glVertexAttrib4NuivARB", "glVertexAttrib4NuivARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4NuivARB_args, "GL_ARB_vertex_shader", 2, 2655, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4NuivARB_info = {"glVertexAttrib4NuivARB", "glVertexAttrib4NuivARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4NuivARB_args, "GL_ARB_vertex_program", 2, 2655, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4NuivARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52946,7 +52946,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4NusvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib4NusvARB_info = {"glVertexAttrib4NusvARB", "glVertexAttrib4NusvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4NusvARB_args, "GL_ARB_vertex_shader", 2, 2657, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4NusvARB_info = {"glVertexAttrib4NusvARB", "glVertexAttrib4NusvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4NusvARB_args, "GL_ARB_vertex_program", 2, 2657, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4NusvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -52988,7 +52988,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4bvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib4bvARB_info = {"glVertexAttrib4bvARB", "glVertexAttrib4bvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4bvARB_args, "GL_ARB_vertex_shader", 2, 2659, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4bvARB_info = {"glVertexAttrib4bvARB", "glVertexAttrib4bvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4bvARB_args, "GL_ARB_vertex_program", 2, 2659, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4bvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -53030,7 +53030,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4dARB_args[] = {"index", "x", "y", "z", "w"};
-static const PyGLCommand pygl_GL_glVertexAttrib4dARB_info = {"glVertexAttrib4dARB", "glVertexAttrib4dARB(index, x, y, z, w) -> None", "($module, index, x, y, z, w, /)", pygl_GL_glVertexAttrib4dARB_args, "GL_ARB_vertex_shader", 5, 2661, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4dARB_info = {"glVertexAttrib4dARB", "glVertexAttrib4dARB(index, x, y, z, w) -> None", "($module, index, x, y, z, w, /)", pygl_GL_glVertexAttrib4dARB_args, "GL_ARB_vertex_program", 5, 2661, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4dARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -53093,7 +53093,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4dvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib4dvARB_info = {"glVertexAttrib4dvARB", "glVertexAttrib4dvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4dvARB_args, "GL_ARB_vertex_shader", 2, 2664, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4dvARB_info = {"glVertexAttrib4dvARB", "glVertexAttrib4dvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4dvARB_args, "GL_ARB_vertex_program", 2, 2664, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4dvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -53156,7 +53156,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4fARB_args[] = {"index", "x", "y", "z", "w"};
-static const PyGLCommand pygl_GL_glVertexAttrib4fARB_info = {"glVertexAttrib4fARB", "glVertexAttrib4fARB(index, x, y, z, w) -> None", "($module, index, x, y, z, w, /)", pygl_GL_glVertexAttrib4fARB_args, "GL_ARB_vertex_shader", 5, 2667, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4fARB_info = {"glVertexAttrib4fARB", "glVertexAttrib4fARB(index, x, y, z, w) -> None", "($module, index, x, y, z, w, /)", pygl_GL_glVertexAttrib4fARB_args, "GL_ARB_vertex_program", 5, 2667, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4fARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -53219,7 +53219,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4fvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib4fvARB_info = {"glVertexAttrib4fvARB", "glVertexAttrib4fvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4fvARB_args, "GL_ARB_vertex_shader", 2, 2670, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4fvARB_info = {"glVertexAttrib4fvARB", "glVertexAttrib4fvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4fvARB_args, "GL_ARB_vertex_program", 2, 2670, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4fvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -53324,7 +53324,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4ivARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib4ivARB_info = {"glVertexAttrib4ivARB", "glVertexAttrib4ivARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4ivARB_args, "GL_ARB_vertex_shader", 2, 2675, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4ivARB_info = {"glVertexAttrib4ivARB", "glVertexAttrib4ivARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4ivARB_args, "GL_ARB_vertex_program", 2, 2675, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4ivARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -53366,7 +53366,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4sARB_args[] = {"index", "x", "y", "z", "w"};
-static const PyGLCommand pygl_GL_glVertexAttrib4sARB_info = {"glVertexAttrib4sARB", "glVertexAttrib4sARB(index, x, y, z, w) -> None", "($module, index, x, y, z, w, /)", pygl_GL_glVertexAttrib4sARB_args, "GL_ARB_vertex_shader", 5, 2677, PYGL_API_GL, 0, 5, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4sARB_info = {"glVertexAttrib4sARB", "glVertexAttrib4sARB(index, x, y, z, w) -> None", "($module, index, x, y, z, w, /)", pygl_GL_glVertexAttrib4sARB_args, "GL_ARB_vertex_program", 5, 2677, PYGL_API_GL, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4sARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -53429,7 +53429,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4svARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib4svARB_info = {"glVertexAttrib4svARB", "glVertexAttrib4svARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4svARB_args, "GL_ARB_vertex_shader", 2, 2680, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4svARB_info = {"glVertexAttrib4svARB", "glVertexAttrib4svARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4svARB_args, "GL_ARB_vertex_program", 2, 2680, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4svARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -53513,7 +53513,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4ubvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib4ubvARB_info = {"glVertexAttrib4ubvARB", "glVertexAttrib4ubvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4ubvARB_args, "GL_ARB_vertex_shader", 2, 2684, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4ubvARB_info = {"glVertexAttrib4ubvARB", "glVertexAttrib4ubvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4ubvARB_args, "GL_ARB_vertex_program", 2, 2684, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4ubvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -53576,7 +53576,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4uivARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib4uivARB_info = {"glVertexAttrib4uivARB", "glVertexAttrib4uivARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4uivARB_args, "GL_ARB_vertex_shader", 2, 2687, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4uivARB_info = {"glVertexAttrib4uivARB", "glVertexAttrib4uivARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4uivARB_args, "GL_ARB_vertex_program", 2, 2687, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4uivARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -53618,7 +53618,7 @@ _fail:
 
 
 static const char *const pygl_GL_glVertexAttrib4usvARB_args[] = {"index", "v"};
-static const PyGLCommand pygl_GL_glVertexAttrib4usvARB_info = {"glVertexAttrib4usvARB", "glVertexAttrib4usvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4usvARB_args, "GL_ARB_vertex_shader", 2, 2689, PYGL_API_GL, 0, 2, 0, 0};
+static const PyGLCommand pygl_GL_glVertexAttrib4usvARB_info = {"glVertexAttrib4usvARB", "glVertexAttrib4usvARB(index, v) -> None", "($module, index, v, /)", pygl_GL_glVertexAttrib4usvARB_args, "GL_ARB_vertex_program", 2, 2689, PYGL_API_GL, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GL_glVertexAttrib4usvARB(GLProc *self, PyObject *const *_a, size_t _nargsf)

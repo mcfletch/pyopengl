@@ -88,7 +88,7 @@ _fail:
 
 
 static const char *const pygl_EGL_eglClientWaitSyncKHR_args[] = {"dpy", "sync", "flags", "timeout"};
-static const PyGLCommand pygl_EGL_eglClientWaitSyncKHR_info = {"eglClientWaitSyncKHR", "eglClientWaitSyncKHR(dpy, sync, flags, timeout) -> EGLint", "($module, dpy, sync, flags, timeout, /)", pygl_EGL_eglClientWaitSyncKHR_args, "EGL_KHR_reusable_sync", 4, 4, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglClientWaitSyncKHR_info = {"eglClientWaitSyncKHR", "eglClientWaitSyncKHR(dpy, sync, flags, timeout) -> EGLint", "($module, dpy, sync, flags, timeout, /)", pygl_EGL_eglClientWaitSyncKHR_args, "EGL_KHR_fence_sync", 4, 4, PYGL_API_EGL, 0, 4, 1, 0};
 
 static PyObject *
 pygl_EGL_eglClientWaitSyncKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -240,7 +240,7 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateImageKHR_args[] = {"dpy", "ctx", "target", "buffer", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateImageKHR_info = {"eglCreateImageKHR", "eglCreateImageKHR(dpy, ctx, target, buffer, attrib_list) -> EGLImageKHR", "($module, dpy, ctx, target, buffer, attrib_list, /)", pygl_EGL_eglCreateImageKHR_args, "EGL_KHR_image_base", 5, 11, PYGL_API_EGL, 0, 5, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateImageKHR_info = {"eglCreateImageKHR", "eglCreateImageKHR(dpy, ctx, target, buffer, attrib_list) -> EGLImageKHR", "($module, dpy, ctx, target, buffer, attrib_list, /)", pygl_EGL_eglCreateImageKHR_args, "EGL_KHR_image", 5, 11, PYGL_API_EGL, 0, 5, 4, 0};
 
 static PyObject *
 pygl_EGL_eglCreateImageKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -590,7 +590,7 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateSyncKHR_args[] = {"dpy", "type", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateSyncKHR_info = {"eglCreateSyncKHR", "eglCreateSyncKHR(dpy, type, attrib_list) -> EGLSyncKHR", "($module, dpy, type, attrib_list, /)", pygl_EGL_eglCreateSyncKHR_args, "EGL_KHR_reusable_sync", 3, 26, PYGL_API_EGL, 0, 3, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateSyncKHR_info = {"eglCreateSyncKHR", "eglCreateSyncKHR(dpy, type, attrib_list) -> EGLSyncKHR", "($module, dpy, type, attrib_list, /)", pygl_EGL_eglCreateSyncKHR_args, "EGL_KHR_fence_sync", 3, 26, PYGL_API_EGL, 0, 3, 4, 0};
 
 static PyObject *
 pygl_EGL_eglCreateSyncKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -695,7 +695,7 @@ _fail:
 
 
 static const char *const pygl_EGL_eglDestroyImageKHR_args[] = {"dpy", "image"};
-static const PyGLCommand pygl_EGL_eglDestroyImageKHR_info = {"eglDestroyImageKHR", "eglDestroyImageKHR(dpy, image) -> EGLBoolean", "($module, dpy, image, /)", pygl_EGL_eglDestroyImageKHR_args, "EGL_KHR_image_base", 2, 31, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglDestroyImageKHR_info = {"eglDestroyImageKHR", "eglDestroyImageKHR(dpy, image) -> EGLBoolean", "($module, dpy, image, /)", pygl_EGL_eglDestroyImageKHR_args, "EGL_KHR_image", 2, 31, PYGL_API_EGL, 0, 2, 1, 0};
 
 static PyObject *
 pygl_EGL_eglDestroyImageKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -767,7 +767,7 @@ _fail:
 
 
 static const char *const pygl_EGL_eglDestroySyncKHR_args[] = {"dpy", "sync"};
-static const PyGLCommand pygl_EGL_eglDestroySyncKHR_info = {"eglDestroySyncKHR", "eglDestroySyncKHR(dpy, sync) -> EGLBoolean", "($module, dpy, sync, /)", pygl_EGL_eglDestroySyncKHR_args, "EGL_KHR_reusable_sync", 2, 35, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglDestroySyncKHR_info = {"eglDestroySyncKHR", "eglDestroySyncKHR(dpy, sync) -> EGLBoolean", "($module, dpy, sync, /)", pygl_EGL_eglDestroySyncKHR_args, "EGL_KHR_fence_sync", 2, 35, PYGL_API_EGL, 0, 2, 1, 0};
 
 static PyObject *
 pygl_EGL_eglDestroySyncKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1198,7 +1198,7 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetSyncAttribKHR_args[] = {"dpy", "sync", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglGetSyncAttribKHR_info = {"eglGetSyncAttribKHR", "eglGetSyncAttribKHR(dpy, sync, attribute, value) -> EGLBoolean", "($module, dpy, sync, attribute, value, /)", pygl_EGL_eglGetSyncAttribKHR_args, "EGL_KHR_reusable_sync", 4, 56, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetSyncAttribKHR_info = {"eglGetSyncAttribKHR", "eglGetSyncAttribKHR(dpy, sync, attribute, value) -> EGLBoolean", "($module, dpy, sync, attribute, value, /)", pygl_EGL_eglGetSyncAttribKHR_args, "EGL_KHR_fence_sync", 4, 56, PYGL_API_EGL, 0, 4, 1, 0};
 
 static PyObject *
 pygl_EGL_eglGetSyncAttribKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1318,7 +1318,7 @@ _fail:
 
 
 static const char *const pygl_EGL_eglLockSurfaceKHR_args[] = {"dpy", "surface", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglLockSurfaceKHR_info = {"eglLockSurfaceKHR", "eglLockSurfaceKHR(dpy, surface, attrib_list) -> EGLBoolean", "($module, dpy, surface, attrib_list, /)", pygl_EGL_eglLockSurfaceKHR_args, "EGL_KHR_lock_surface3", 3, 62, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglLockSurfaceKHR_info = {"eglLockSurfaceKHR", "eglLockSurfaceKHR(dpy, surface, attrib_list) -> EGLBoolean", "($module, dpy, surface, attrib_list, /)", pygl_EGL_eglLockSurfaceKHR_args, "EGL_KHR_lock_surface", 3, 62, PYGL_API_EGL, 0, 3, 1, 0};
 
 static PyObject *
 pygl_EGL_eglLockSurfaceKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1484,7 +1484,7 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryDeviceAttribEXT_args[] = {"device", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQueryDeviceAttribEXT_info = {"eglQueryDeviceAttribEXT", "eglQueryDeviceAttribEXT(device, attribute, value) -> EGLBoolean", "($module, device, attribute, value, /)", pygl_EGL_eglQueryDeviceAttribEXT_args, "EGL_EXT_device_query", 3, 70, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryDeviceAttribEXT_info = {"eglQueryDeviceAttribEXT", "eglQueryDeviceAttribEXT(device, attribute, value) -> EGLBoolean", "($module, device, attribute, value, /)", pygl_EGL_eglQueryDeviceAttribEXT_args, "EGL_EXT_device_base", 3, 70, PYGL_API_EGL, 0, 3, 1, 0};
 
 static PyObject *
 pygl_EGL_eglQueryDeviceAttribEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1507,7 +1507,7 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryDeviceStringEXT_args[] = {"device", "name"};
-static const PyGLCommand pygl_EGL_eglQueryDeviceStringEXT_info = {"eglQueryDeviceStringEXT", "eglQueryDeviceStringEXT(device, name) -> GLchar", "($module, device, name, /)", pygl_EGL_eglQueryDeviceStringEXT_args, "EGL_EXT_device_query", 2, 71, PYGL_API_EGL, 0, 2, 2, 0};
+static const PyGLCommand pygl_EGL_eglQueryDeviceStringEXT_info = {"eglQueryDeviceStringEXT", "eglQueryDeviceStringEXT(device, name) -> GLchar", "($module, device, name, /)", pygl_EGL_eglQueryDeviceStringEXT_args, "EGL_EXT_device_base", 2, 71, PYGL_API_EGL, 0, 2, 2, 0};
 
 static PyObject *
 pygl_EGL_eglQueryDeviceStringEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1525,7 +1525,7 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryDevicesEXT_args[] = {"max_devices", "devices", "num_devices"};
-static const PyGLCommand pygl_EGL_eglQueryDevicesEXT_info = {"eglQueryDevicesEXT", "eglQueryDevicesEXT(max_devices, devices, num_devices) -> EGLBoolean", "($module, max_devices, devices, num_devices, /)", pygl_EGL_eglQueryDevicesEXT_args, "EGL_EXT_device_enumeration", 3, 72, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryDevicesEXT_info = {"eglQueryDevicesEXT", "eglQueryDevicesEXT(max_devices, devices, num_devices) -> EGLBoolean", "($module, max_devices, devices, num_devices, /)", pygl_EGL_eglQueryDevicesEXT_args, "EGL_EXT_device_base", 3, 72, PYGL_API_EGL, 0, 3, 1, 0};
 
 static PyObject *
 pygl_EGL_eglQueryDevicesEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1548,7 +1548,7 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryDisplayAttribEXT_args[] = {"dpy", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQueryDisplayAttribEXT_info = {"eglQueryDisplayAttribEXT", "eglQueryDisplayAttribEXT(dpy, attribute, value) -> EGLBoolean", "($module, dpy, attribute, value, /)", pygl_EGL_eglQueryDisplayAttribEXT_args, "EGL_EXT_device_query", 3, 73, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryDisplayAttribEXT_info = {"eglQueryDisplayAttribEXT", "eglQueryDisplayAttribEXT(dpy, attribute, value) -> EGLBoolean", "($module, dpy, attribute, value, /)", pygl_EGL_eglQueryDisplayAttribEXT_args, "EGL_EXT_device_base", 3, 73, PYGL_API_EGL, 0, 3, 1, 0};
 
 static PyObject *
 pygl_EGL_eglQueryDisplayAttribEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2339,7 +2339,7 @@ _fail:
 
 
 static const char *const pygl_EGL_eglUnlockSurfaceKHR_args[] = {"dpy", "surface"};
-static const PyGLCommand pygl_EGL_eglUnlockSurfaceKHR_info = {"eglUnlockSurfaceKHR", "eglUnlockSurfaceKHR(dpy, surface) -> EGLBoolean", "($module, dpy, surface, /)", pygl_EGL_eglUnlockSurfaceKHR_args, "EGL_KHR_lock_surface3", 2, 110, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglUnlockSurfaceKHR_info = {"eglUnlockSurfaceKHR", "eglUnlockSurfaceKHR(dpy, surface) -> EGLBoolean", "($module, dpy, surface, /)", pygl_EGL_eglUnlockSurfaceKHR_args, "EGL_KHR_lock_surface", 2, 110, PYGL_API_EGL, 0, 2, 1, 0};
 
 static PyObject *
 pygl_EGL_eglUnlockSurfaceKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)

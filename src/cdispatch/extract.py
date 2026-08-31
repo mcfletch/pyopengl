@@ -365,6 +365,29 @@ def _apply_annotations(command, entry):
 APIS = ('GL', 'GLES1', 'GLES2', 'GLES3', 'GLSC2', 'GLX', 'WGL', 'EGL')
 
 
+def _is_core_feature(feature):
+    """Whether a feature name is a core version rather than an extension."""
+    return bool(feature) and 'VERSION' in feature.split('_')
+
+
+def _prefer(existing, candidate):
+    """Which of two declarations of the same command to keep.
+
+    A command promoted into core is declared twice: once by the extension that
+    introduced it and once by the version that adopted it.  The core
+    declaration is the one to keep, because it resolves without an extension
+    check -- a context that has the function but does not advertise the old
+    extension string still gets it.
+    """
+    if _is_core_feature(existing.feature) and not _is_core_feature(candidate.feature):
+        return existing
+    if _is_core_feature(candidate.feature) and not _is_core_feature(existing.feature):
+        return candidate
+    # Both core or both extensions: the earlier version wins, so that a
+    # command adopted in 4.1 is not re-attributed to 4.6.
+    return existing if existing.feature <= candidate.feature else candidate
+
+
 def _api_for_path(root, path):
     """Which API namespace a friendly module customises.
 
@@ -467,7 +490,11 @@ def extract_tree(root, registry_root=None):
                 for command_name, command in extract_raw(
                     os.path.join(directory, name), api
                 ).items():
-                    commands[(api, command_name)] = command
+                    key = (api, command_name)
+                    existing = commands.get(key)
+                    if existing is not None and _prefer(existing, command) is existing:
+                        continue
+                    commands[key] = command
 
     for directory, _folders, files in os.walk(root):
         if 'raw' in directory.split(os.sep) or '__pycache__' in directory:

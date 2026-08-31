@@ -192,7 +192,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXBindVideoImageNV_args[] = {"dpy", "VideoDevice", "pbuf", "iVideoBuffer"};
-static const PyGLCommand pygl_GLX_glXBindVideoImageNV_info = {"glXBindVideoImageNV", "glXBindVideoImageNV(dpy, VideoDevice, pbuf, iVideoBuffer) -> c_int", "($module, dpy, VideoDevice, pbuf, iVideoBuffer, /)", pygl_GLX_glXBindVideoImageNV_args, "GLX_NV_video_output", 4, 4315, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXBindVideoImageNV_info = {"glXBindVideoImageNV", "glXBindVideoImageNV(dpy, VideoDevice, pbuf, iVideoBuffer) -> c_int", "($module, dpy, VideoDevice, pbuf, iVideoBuffer, /)", pygl_GLX_glXBindVideoImageNV_args, "GLX_NV_video_out", 4, 4315, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXBindVideoImageNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1457,7 +1457,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetVideoDeviceNV_args[] = {"dpy", "screen", "numVideoDevices", "pVideoDevice"};
-static const PyGLCommand pygl_GLX_glXGetVideoDeviceNV_info = {"glXGetVideoDeviceNV", "glXGetVideoDeviceNV(dpy, screen, numVideoDevices, pVideoDevice) -> c_int", "($module, dpy, screen, numVideoDevices, pVideoDevice, /)", pygl_GLX_glXGetVideoDeviceNV_args, "GLX_NV_video_output", 4, 4372, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetVideoDeviceNV_info = {"glXGetVideoDeviceNV", "glXGetVideoDeviceNV(dpy, screen, numVideoDevices, pVideoDevice) -> c_int", "($module, dpy, screen, numVideoDevices, pVideoDevice, /)", pygl_GLX_glXGetVideoDeviceNV_args, "GLX_NV_video_out", 4, 4372, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetVideoDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1481,7 +1481,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetVideoInfoNV_args[] = {"dpy", "screen", "VideoDevice", "pulCounterOutputPbuffer", "pulCounterOutputVideo"};
-static const PyGLCommand pygl_GLX_glXGetVideoInfoNV_info = {"glXGetVideoInfoNV", "glXGetVideoInfoNV(dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo) -> c_int", "($module, dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo, /)", pygl_GLX_glXGetVideoInfoNV_args, "GLX_NV_video_output", 5, 4373, PYGL_API_GLX, 0, 5, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetVideoInfoNV_info = {"glXGetVideoInfoNV", "glXGetVideoInfoNV(dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo) -> c_int", "($module, dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo, /)", pygl_GLX_glXGetVideoInfoNV_args, "GLX_NV_video_out", 5, 4373, PYGL_API_GLX, 0, 5, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetVideoInfoNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2363,7 +2363,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXReleaseVideoDeviceNV_args[] = {"dpy", "screen", "VideoDevice"};
-static const PyGLCommand pygl_GLX_glXReleaseVideoDeviceNV_info = {"glXReleaseVideoDeviceNV", "glXReleaseVideoDeviceNV(dpy, screen, VideoDevice) -> c_int", "($module, dpy, screen, VideoDevice, /)", pygl_GLX_glXReleaseVideoDeviceNV_args, "GLX_NV_video_output", 3, 4411, PYGL_API_GLX, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLX_glXReleaseVideoDeviceNV_info = {"glXReleaseVideoDeviceNV", "glXReleaseVideoDeviceNV(dpy, screen, VideoDevice) -> c_int", "($module, dpy, screen, VideoDevice, /)", pygl_GLX_glXReleaseVideoDeviceNV_args, "GLX_NV_video_out", 3, 4411, PYGL_API_GLX, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLX_glXReleaseVideoDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2386,7 +2386,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXReleaseVideoImageNV_args[] = {"dpy", "pbuf"};
-static const PyGLCommand pygl_GLX_glXReleaseVideoImageNV_info = {"glXReleaseVideoImageNV", "glXReleaseVideoImageNV(dpy, pbuf) -> c_int", "($module, dpy, pbuf, /)", pygl_GLX_glXReleaseVideoImageNV_args, "GLX_NV_video_output", 2, 4412, PYGL_API_GLX, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLX_glXReleaseVideoImageNV_info = {"glXReleaseVideoImageNV", "glXReleaseVideoImageNV(dpy, pbuf) -> c_int", "($module, dpy, pbuf, /)", pygl_GLX_glXReleaseVideoImageNV_args, "GLX_NV_video_out", 2, 4412, PYGL_API_GLX, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLX_glXReleaseVideoImageNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2474,7 +2474,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXSendPbufferToVideoNV_args[] = {"dpy", "pbuf", "iBufferType", "pulCounterPbuffer", "bBlock"};
-static const PyGLCommand pygl_GLX_glXSendPbufferToVideoNV_info = {"glXSendPbufferToVideoNV", "glXSendPbufferToVideoNV(dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock) -> c_int", "($module, dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock, /)", pygl_GLX_glXSendPbufferToVideoNV_args, "GLX_NV_video_output", 5, 4416, PYGL_API_GLX, 0, 5, 1, 0};
+static const PyGLCommand pygl_GLX_glXSendPbufferToVideoNV_info = {"glXSendPbufferToVideoNV", "glXSendPbufferToVideoNV(dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock) -> c_int", "($module, dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock, /)", pygl_GLX_glXSendPbufferToVideoNV_args, "GLX_NV_video_out", 5, 4416, PYGL_API_GLX, 0, 5, 1, 0};
 
 static PyObject *
 pygl_GLX_glXSendPbufferToVideoNV(GLProc *self, PyObject *const *_a, size_t _nargsf)

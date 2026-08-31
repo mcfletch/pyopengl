@@ -35,6 +35,11 @@ class HandWritten:
     arg_names: tuple
     #: Its docstring's first line.
     signature: str
+    #: What ``argNames`` reports.  The C entry point's names, which is what it
+    #: reports today; a friendly module that rebuilds the binding may spell
+    #: them differently from the raw declaration, and that spelling is the one
+    #: callers see.
+    c_arg_names: tuple = ()
 
 
 ENTRIES = (
@@ -44,6 +49,7 @@ ENTRIES = (
         symbol='pygl_hand_glShaderSource',
         arg_names=('shader', 'string'),
         signature='glShaderSource(shader, string) -> None',
+        c_arg_names=('shaderObj', 'count', 'string', 'length'),
     ),
     HandWritten(
         name='glShaderSourceARB',
@@ -51,6 +57,7 @@ ENTRIES = (
         symbol='pygl_hand_glShaderSource',
         arg_names=('shaderObj', 'string'),
         signature='glShaderSourceARB(shaderObj, string) -> None',
+        c_arg_names=('shaderObj', 'count', 'string', 'length'),
     ),
 )
 

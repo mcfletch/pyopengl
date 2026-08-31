@@ -1695,7 +1695,7 @@ _fail:
 
 
 static const char *const pygl_GLES1_glEGLImageTargetTexture2DOES_args[] = {"target", "image"};
-static const PyGLCommand pygl_GLES1_glEGLImageTargetTexture2DOES_info = {"glEGLImageTargetTexture2DOES", "glEGLImageTargetTexture2DOES(target, image) -> None", "($module, target, image, /)", pygl_GLES1_glEGLImageTargetTexture2DOES_args, "GLES1_OES_EGL_image_external", 2, 3019, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glEGLImageTargetTexture2DOES_info = {"glEGLImageTargetTexture2DOES", "glEGLImageTargetTexture2DOES(target, image) -> None", "($module, target, image, /)", pygl_GLES1_glEGLImageTargetTexture2DOES_args, "GLES1_OES_EGL_image", 2, 3019, PYGL_API_GLES1, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES1_glEGLImageTargetTexture2DOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3499,7 +3499,7 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetPointerv_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetPointerv_info = {"glGetPointerv", "glGetPointerv(pname) -> params", "($module, pname, params=None, /)", pygl_GLES1_glGetPointerv_args, "GLES1_KHR_debug", 2, 3104, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetPointerv_info = {"glGetPointerv", "glGetPointerv(pname) -> params", "($module, pname, params=None, /)", pygl_GLES1_glGetPointerv_args, "GLES1_VERSION_GLES1_1_0", 2, 3104, PYGL_API_GLES1, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES1_glGetPointerv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3740,7 +3740,7 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetTexGenxvOES_args[] = {"coord", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetTexGenxvOES_info = {"glGetTexGenxvOES", "glGetTexGenxvOES(coord, pname) -> params", "($module, coord, pname, params=None, /)", pygl_GLES1_glGetTexGenxvOES_args, "GLES1_OES_texture_cube_map", 3, 3115, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetTexGenxvOES_info = {"glGetTexGenxvOES", "glGetTexGenxvOES(coord, pname) -> params", "($module, coord, pname, params=None, /)", pygl_GLES1_glGetTexGenxvOES_args, "GLES1_OES_fixed_point", 3, 3115, PYGL_API_GLES1, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES1_glGetTexGenxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7247,7 +7247,7 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexGenxOES_args[] = {"coord", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glTexGenxOES_info = {"glTexGenxOES", "glTexGenxOES(coord, pname, param) -> None", "($module, coord, pname, param, /)", pygl_GLES1_glTexGenxOES_args, "GLES1_OES_texture_cube_map", 3, 3293, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexGenxOES_info = {"glTexGenxOES", "glTexGenxOES(coord, pname, param) -> None", "($module, coord, pname, param, /)", pygl_GLES1_glTexGenxOES_args, "GLES1_OES_fixed_point", 3, 3293, PYGL_API_GLES1, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES1_glTexGenxOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7266,7 +7266,7 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexGenxvOES_args[] = {"coord", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glTexGenxvOES_info = {"glTexGenxvOES", "glTexGenxvOES(coord, pname, params) -> None", "($module, coord, pname, params, /)", pygl_GLES1_glTexGenxvOES_args, "GLES1_OES_texture_cube_map", 3, 3294, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexGenxvOES_info = {"glTexGenxvOES", "glTexGenxvOES(coord, pname, params) -> None", "($module, coord, pname, params, /)", pygl_GLES1_glTexGenxvOES_args, "GLES1_OES_fixed_point", 3, 3294, PYGL_API_GLES1, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES1_glTexGenxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf)

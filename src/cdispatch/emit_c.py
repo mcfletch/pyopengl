@@ -415,7 +415,11 @@ def emit_command_record(command, slot):
     hand = hand_written(command)
     # argNames reports the C entry point's argument names even where the
     # friendly form takes fewer, because that is what it reports today.
-    arg_names = [p.name for p in command.parameters]
+    arg_names = (
+        list(hand.c_arg_names)
+        if hand is not None and hand.c_arg_names
+        else [p.name for p in command.parameters]
+    )
     #: What the docstring and the text signature describe.
     call_names = list(hand.arg_names) if hand else arg_names
     lines = []
