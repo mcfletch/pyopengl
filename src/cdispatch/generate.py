@@ -179,6 +179,7 @@ def generate(package_root, output_root, report=None, tables_path=None,
 
     if stubs_root is not None:
         # One stub file per API namespace, beside the package it describes.
+        constants = extract.extract_constants(package_root)
         for api in extract.APIS:
             selected = [
                 command
@@ -192,7 +193,7 @@ def generate(package_root, output_root, report=None, tables_path=None,
                 continue
             _write(
                 os.path.join(directory, '__init__.pyi'),
-                emit_pyi.emit_module(api, selected),
+                emit_pyi.emit_module(api, selected, constants.get(api, ())),
             )
     if tables_path is not None:
         _write(tables_path, emit_tables_module(emit_array_type_names(elements), slots))

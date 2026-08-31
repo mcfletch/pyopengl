@@ -161,12 +161,19 @@ def _safe_docstring(text):
     return text.replace('\\', '\\\\').replace('"""', "'''")
 
 
-def emit_module(api, commands):
+def emit_module(api, commands, constants=()):
     """One API's stub file."""
     parts = [
         _PREAMBLE
         % {'title': 'OpenGL.%s' % (api,), 'aliases': _alias_declarations()}
     ]
+    if constants:
+        parts.append(
+            '# The enums.  They are Constant instances, which subclass int.'
+        )
+        for name in constants:
+            parts.append('%s: int' % (name,))
+        parts.append('')
     seen = set()
     for command in sorted(commands, key=lambda item: item.name):
         if command.name in seen:

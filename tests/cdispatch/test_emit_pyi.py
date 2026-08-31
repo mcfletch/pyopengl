@@ -196,3 +196,31 @@ class TestValidPython:
         for api in ('GL', 'GLES2', 'EGL'):
             selected = [c for key, c in commands.items() if key[0] == api]
             ast.parse(emit_pyi.emit_module(api, selected))
+
+
+class TestConstants:
+    """A stub that declares only the functions would reject GL_TEXTURE_2D.
+
+    The enums are most of what a caller writes, so a stub without them makes a
+    type checker reject correct code -- worse than shipping no stub at all.
+    """
+
+    def test_constants_are_declared(self):
+        text = emit_pyi.emit_module(
+            'GL', [], constants=['GL_TEXTURE_2D', 'GL_TRIANGLES']
+        )
+        assert 'GL_TEXTURE_2D: int' in text
+        assert 'GL_TRIANGLES: int' in text
+
+    def test_the_shipped_tree_declares_its_constants(self):
+        import os
+
+        from cdispatch import extract
+
+        here = os.path.dirname(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        )
+        constants = extract.extract_constants(os.path.join(here, 'OpenGL'))
+        assert 'GL_TEXTURE_2D' in constants['GL']
+        assert 'GL_ARRAY_BUFFER' in constants['GL']
+        assert len(constants['GL']) > 5000

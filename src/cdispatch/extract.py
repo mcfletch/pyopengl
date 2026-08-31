@@ -15,7 +15,12 @@ import os
 from . import model
 from .ctypes_model import CType, parse_type
 
-__all__ = ['extract_tree', 'extract_raw', 'extract_friendly']
+__all__ = [
+    'extract_tree',
+    'extract_raw',
+    'extract_friendly',
+    'extract_constants',
+]
 
 #: ``arrays.GLuintArray`` and friends name a pointer to their element type.
 _ARRAY_ELEMENT = {
@@ -517,3 +522,47 @@ def _mark_retained(commands):
         for parameter in command.parameters:
             if parameter.is_array and parameter.direction == model.IN:
                 parameter.retain = True
+
+
+def extract_constants(root):
+    """``{api: [constant name]}`` for every enum the raw modules define.
+
+    The stubs need these: the enums are most of what a caller writes, and a
+    stub that declared only the functions would make a type checker reject
+    correct code.
+    """
+    constants = {}
+    raw_root = os.path.join(root, 'raw')
+    for api in APIS:
+        api_root = os.path.join(raw_root, api)
+        if not os.path.isdir(api_root):
+            continue
+        names = set()
+        for directory, _folders, files in os.walk(api_root):
+            if '__pycache__' in directory:
+                continue
+            for filename in sorted(files):
+                if not filename.endswith('.py'):
+                    continue
+                path = os.path.join(directory, filename)
+                with open(path, 'r', encoding='utf-8') as handle:
+                    try:
+                        tree = ast.parse(handle.read(), filename=path)
+                    except SyntaxError:
+                        continue
+                for node in tree.body:
+                    if not isinstance(node, ast.Assign):
+                        continue
+                    if not isinstance(node.value, ast.Call):
+                        continue
+                    function = node.value.func
+                    called = getattr(function, 'id', None) or getattr(
+                        function, 'attr', None
+                    )
+                    if called not in ('_C', 'Constant', 'IntConstant'):
+                        continue
+                    for target in node.targets:
+                        if isinstance(target, ast.Name) and target.id.isidentifier():
+                            names.add(target.id)
+        constants[api] = sorted(names)
+    return constants
