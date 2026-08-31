@@ -46,14 +46,15 @@ optional, and its absence leaves the ctypes implementation in place.</p>
 
 <h2>What is implemented in C</h2>
 
-<p>4,560 of PyOpenGL's 4,839 bindings, across GL, GLES 1/2/3, GLSC2, GLX, WGL
+<p>4,574 of PyOpenGL's 4,839 bindings, across GL, GLES 1/2/3, GLSC2, GLX, WGL
 and EGL.  The rest keep their ctypes binding, and
 <code>python src/check_registry.py</code> lists them with the reason for each.
 The families still on ctypes are the ones whose behaviour is a computation
 rather than a description: images, whose size depends on format, type,
 dimensions and the current pixel-store state; the variadic entry points such as
 <code>glVertex</code> and <code>glColor</code>; the client-side array pointer
-family; and <code>glShaderSource</code>.</p>
+family; and the string-array parameters.  <code>glShaderSource</code> is the
+one of those already done, by hand.</p>
 
 <h2>Contexts</h2>
 
@@ -222,10 +223,23 @@ process, so a debugging habit that relies on either keeps working.  Assigning
 nothing; assigning a different one moves it likewise.
 <code>PYOPENGL_DISPATCH=ctypes</code> is the way out for everything else.</p>
 
+<h2>What is not implemented in C</h2>
+
+<p>GL, GLES&nbsp;1/2/3, GLSC2, GLX, WGL and EGL are generated from the
+registry.  <strong>GLU, GLUT, GLE and OSMesa are not</strong> &#8212; they are
+hand-maintained rather than registry-described, so there is no table to
+generate them from.  They keep their ctypes bindings, which is about 210 entry
+points, none of them on a hot path.</p>
+
 <h2>Regenerating and keeping up with the registry</h2>
 
 <pre>python src/regenerate_c.py     # registry and shipped tree in, C out
 python src/check_registry.py   # what changed, and what needs a person</pre>
+
+<p>Maintaining or extending the generator is covered separately, in
+<code>src/cdispatch/README.md</code>: how the pipeline fits together, how to add
+an entry point that needs hand-written C, and how to add an array element
+type.</p>
 
 <p><code>check_registry.py</code> reports registry commands with no binding,
 bindings whose signature no longer matches, enums with no constant, and every
