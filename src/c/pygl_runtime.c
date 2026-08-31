@@ -664,6 +664,107 @@ int pygl_array_out(GLProc *self, PyObject *object, const PyGLElement *element,
     return 0;
 }
 
+/* Bisect the pname table.  It is sorted by the generator, and the search is
+ * over about 1,800 entries, so this is eleven comparisons. */
+static const PyGLGetSize *pygl_glget_find(const PyGLGetSize *table,
+                                          Py_ssize_t count, unsigned int pname)
+{
+    Py_ssize_t low = 0, high = count - 1;
+    while (low <= high) {
+        Py_ssize_t middle = (low + high) / 2;
+        if (table[middle].pname == pname) {
+            return &table[middle];
+        }
+        if (table[middle].pname < pname) {
+            low = middle + 1;
+        } else {
+            high = middle - 1;
+        }
+    }
+    return NULL;
+}
+
+int pygl_array_out_glget(GLProc *self, PyObject *object, const PyGLElement *element,
+                         Py_ssize_t index, unsigned int pname,
+                         const PyGLGetSize *table, Py_ssize_t table_count,
+                         PyGLBuf *out, Py_ssize_t *count)
+{
+    const PyGLGetSize *entry = pygl_glget_find(table, table_count, pname);
+    PyObject *type, *allocated, *pointer, *shape;
+    void *address;
+
+    /* A caller-supplied array is taken without consulting the table, which is
+     * what the ctypes converter does: the size is needed to *allocate*, not to
+     * accept.  A pname the table does not know is therefore usable so long as
+     * the caller brings their own array -- and several NVIDIA and EXT queries
+     * are used exactly that way. */
+    if (object != NULL && object != Py_None) {
+        *count = (entry == NULL || entry->lookup)
+                     ? 0
+                     : (Py_ssize_t)entry->dim0 * (entry->dim1 ? entry->dim1 : 1);
+        return pygl_array_out(self, object, element, index, *count, out);
+    }
+
+    if (entry == NULL) {
+        PyErr_Format(PyExc_KeyError, "Unknown specifier 0x%04X", pname);
+        return -1;
+    }
+
+    out->owner = NULL;
+    out->have_view = 0;
+    out->pointer = NULL;
+
+    if (entry->lookup) {
+        /* The size itself comes from a runtime query.  Six pnames in the
+         * desktop table do this, so a Python call is the right cost. */
+        PyObject *size = PyObject_CallMethod(pygl_support, "lookup_int", "I",
+                                             entry->lookup);
+        if (size == NULL) {
+            return -1;
+        }
+        *count = PyLong_AsSsize_t(size);
+        Py_DECREF(size);
+        if (PyErr_Occurred()) {
+            return -1;
+        }
+        shape = Py_BuildValue("(n)", *count);
+    } else if (entry->dim1) {
+        /* A matrix pname hands back a matrix, not a flat run of numbers. */
+        *count = (Py_ssize_t)entry->dim0 * entry->dim1;
+        shape = Py_BuildValue("(ii)", (int)entry->dim0, (int)entry->dim1);
+    } else {
+        *count = entry->dim0;
+        shape = Py_BuildValue("(i)", (int)entry->dim0);
+    }
+    if (shape == NULL) {
+        return -1;
+    }
+    type = pygl_array_type(element);
+    if (type == NULL) {
+        Py_DECREF(shape);
+        return -1;
+    }
+    allocated = PyObject_CallMethodOneArg(type, pygl_str_zeros, shape);
+    Py_DECREF(shape);
+    if (allocated == NULL) {
+        return -1;
+    }
+    pointer = PyObject_CallMethodOneArg(type, pygl_str_dataPointer, allocated);
+    if (pointer == NULL) {
+        Py_DECREF(allocated);
+        return -1;
+    }
+    if (pygl_address_of(pointer, &address) < 0) {
+        Py_DECREF(pointer);
+        Py_DECREF(allocated);
+        return -1;
+    }
+    Py_DECREF(pointer);
+    out->owner = allocated;
+    out->pointer = address;
+    return 0;
+}
+
 void pygl_release(PyGLBuf *buffer)
 {
     if (buffer->have_view) {

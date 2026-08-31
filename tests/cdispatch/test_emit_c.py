@@ -7,6 +7,7 @@ from cdispatch.ctypes_model import parse_type
 
 
 def command(name='glBindTexture', return_type='void', parameters=(), **kwargs):
+    kwargs.setdefault('api', 'GL')
     return model.Command(
         name=name,
         return_type=parse_type(return_type),
@@ -217,18 +218,22 @@ class TestSelection:
     def test_hand_written_families_are_not_emitted_yet(self):
         assert not emit_c.is_emittable(command(name='glShaderSource', helper='string_array'))
 
-    def test_glget_sized_outputs_are_not_emitted_yet(self):
+    def test_image_sized_outputs_are_not_emitted_yet(self):
+        """An image's size depends on the current pixel-store state."""
         assert not emit_c.is_emittable(
             command(
-                name='glGetIntegerv',
+                name='glReadPixels',
                 parameters=[
-                    ('pname', 'GLenum', {}),
+                    ('format', 'GLenum', {}),
+                    ('type', 'GLenum', {}),
                     (
-                        'params',
-                        'GLint *',
+                        'pixels',
+                        'void *',
                         {
                             'direction': model.OUT,
-                            'size': model.GLGetTable(pname_argument=0),
+                            'size': model.ImageSize(
+                                format_argument=0, type_argument=1
+                            ),
                         },
                     ),
                 ],
@@ -311,3 +316,40 @@ def test_pointer_array_output_uses_the_voidp_array_type():
         )
     )
     assert 'PYGL_ARRAY_OUT(2, pointer, &pygl_elem_voidp, (Py_ssize_t)(1));' in text
+
+
+class TestGLGetSizedOutputs:
+    """Phase 4's second half: outputs whose size comes from the pname table."""
+
+    def glgetv(self):
+        return command(
+            name='glGetIntegerv',
+            api='GL',
+            parameters=[
+                ('pname', 'GLenum', {}),
+                (
+                    'params',
+                    'GLint *',
+                    {
+                        'direction': model.OUT,
+                        'size': model.GLGetTable(pname_argument=0),
+                    },
+                ),
+            ],
+        )
+
+    def test_is_emitted(self):
+        assert emit_c.is_emittable(self.glgetv())
+
+    def test_names_the_pname_argument_and_the_api_table(self):
+        text = body(self.glgetv())
+        assert (
+            'PYGL_ARRAY_OUT_GLGET(1, params, &pygl_elem_GLint, pname, '
+            'pygl_glget_GL);' in text
+        )
+
+    def test_the_element_count_comes_from_the_lookup(self):
+        """The count is not known until the table is consulted at run time."""
+        text = body(self.glgetv())
+        assert 'params_count' in text
+        assert 'pygl_output_value(&_bufs[params_slot], &pygl_elem_GLint, params_count)' in text

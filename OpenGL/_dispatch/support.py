@@ -209,3 +209,17 @@ def restype_matches(kind, value):
     ctypes, where an arbitrary restype means what it has always meant.
     """
     return value in _RESTYPE_EQUIVALENTS.get(kind, ())
+
+
+def lookup_int(pname):
+    """The element count for an output whose size is itself a GL query.
+
+    ``_glgets`` records a handful of pnames -- GL_COMPRESSED_TEXTURE_FORMATS
+    and the pixel-map sizes -- whose output length is whatever a
+    ``glGetIntegerv`` of another pname answers.
+    """
+    from OpenGL.GL import glGetIntegerv
+
+    output = ctypes.c_int()
+    glGetIntegerv(pname, output)
+    return int(output.value)

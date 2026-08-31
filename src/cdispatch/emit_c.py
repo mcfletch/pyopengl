@@ -109,14 +109,14 @@ def is_emittable(command):
         if cm.scalar_macro(command.return_type) is None:
             return False
     for parameter in command.parameters:
-        if isinstance(parameter.size, (model.GLGetTable, model.ImageSize)):
+        if isinstance(parameter.size, model.ImageSize):
             return False
         if not parameter.size.declarative:
             return False
         if parameter.is_string_pointer:
             return False
         if parameter.is_output and not isinstance(
-            parameter.size, (model.Fixed, model.FromArg)
+            parameter.size, (model.Fixed, model.FromArg, model.GLGetTable)
         ):
             return False
         if not parameter.is_array and parameter.macro is None:
@@ -215,7 +215,13 @@ def emit_stub(command):
         if not parameter.is_array:
             continue
         element = element_symbol(parameter)
-        if parameter.is_output:
+        if parameter.is_output and isinstance(parameter.size, model.GLGetTable):
+            pname = command.parameters[parameter.size.pname_argument].c_name
+            lines.append(
+                '    PYGL_ARRAY_OUT_GLGET(%d, %s, %s, %s, pygl_glget_%s);'
+                % (index, parameter.c_name, element, pname, command.api)
+            )
+        elif parameter.is_output:
             lines.append(
                 '    PYGL_ARRAY_OUT(%d, %s, %s, (Py_ssize_t)(%s));'
                 % (index, parameter.c_name, element, _size_expression(command, parameter))
@@ -248,11 +254,14 @@ def emit_stub(command):
 
     if outputs:
         output = outputs[0]
-        index = command.parameters.index(output)
+        if isinstance(output.size, model.GLGetTable):
+            # The count is not known until the table has been consulted.
+            size = '%s_count' % (output.c_name,)
+        else:
+            size = '(Py_ssize_t)(%s)' % (_size_expression(command, output),)
         lines.append(
-            '    PyObject *_value = pygl_output_value(&_bufs[%s_slot], %s, '
-            '(Py_ssize_t)(%s));'
-            % (output.c_name, element_symbol(output), _size_expression(command, output))
+            '    PyObject *_value = pygl_output_value(&_bufs[%s_slot], %s, %s);'
+            % (output.c_name, element_symbol(output), size)
         )
         lines.append('    PYGL_CLEANUP();')
         lines.append('    return _value;')
@@ -343,6 +352,7 @@ def emit_translation_unit(api, commands, slots):
         ' */',
         '#include "pygl.h"',
         '#include "pygl_elements.h"',
+        '#include "pygl_glgets.h"',
         '',
     ]
     for command in commands:

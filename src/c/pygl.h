@@ -223,6 +223,21 @@ int pygl_array_in(GLProc *self, PyObject *object, const PyGLElement *element,
 /* As above, and additionally check the element count. */
 int pygl_array_in_sized(GLProc *self, PyObject *object, const PyGLElement *element,
                         Py_ssize_t index, Py_ssize_t expected, PyGLBuf *out);
+/* One pname's output size, from the generated _glgets table. */
+typedef struct {
+    uint32_t pname;
+    uint16_t dim0;
+    uint16_t dim1;
+    uint32_t lookup; /* non-zero: query this pname for the element count */
+} PyGLGetSize;
+
+/* Allocate an output array sized from the pname table, or accept the caller's.
+ * `count` receives the element count, for the return-value unpacking. */
+int pygl_array_out_glget(GLProc *self, PyObject *object, const PyGLElement *element,
+                         Py_ssize_t index, unsigned int pname,
+                         const PyGLGetSize *table, Py_ssize_t table_count,
+                         PyGLBuf *out, Py_ssize_t *count);
+
 /* Allocate an output array of `count` elements, or accept the caller's. */
 int pygl_array_out(GLProc *self, PyObject *object, const PyGLElement *element,
                    Py_ssize_t index, Py_ssize_t count, PyGLBuf *out);
@@ -307,6 +322,16 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
 #define PYGL_ARRAY_IN_SIZED(i, name, element, count)                           \
     if (PYGL_UNLIKELY(pygl_array_in_sized(self, _a[i], (element), (i), (count),      \
                                           &_bufs[_nb]) < 0))                   \
+        goto _fail;                                                            \
+    void *name = _bufs[_nb++].pointer
+
+#define PYGL_ARRAY_OUT_GLGET(i, name, element, pname, table)                   \
+    int name##_slot = _nb;                                                     \
+    Py_ssize_t name##_count = 0;                                               \
+    if (PYGL_UNLIKELY(pygl_array_out_glget(self, (i) < _nargs ? _a[i] : NULL,   \
+                                           (element), (i), (pname), (table),   \
+                                           (table##_count), &_bufs[_nb],       \
+                                           &name##_count) < 0))                \
         goto _fail;                                                            \
     void *name = _bufs[_nb++].pointer
 

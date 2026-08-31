@@ -3,7 +3,7 @@
 import os
 
 from . import ctypes_model as cm
-from . import emit_c, extract
+from . import emit_c, extract, glgets
 
 __all__ = ['generate', 'allocate_slots', 'emit_elements_header']
 
@@ -149,6 +149,8 @@ def generate(package_root, output_root, report=None, tables_path=None):
     _write(
         os.path.join(output_root, 'pygl_elements.h'), emit_elements_header(elements)
     )
+    glget_text, glget_apis = glgets.emit_tables(package_root, extract.APIS)
+    _write(os.path.join(output_root, 'pygl_glgets.h'), glget_text)
 
     by_api = []
     for api in extract.APIS:
@@ -174,6 +176,7 @@ def generate(package_root, output_root, report=None, tables_path=None):
                 'total': len(commands),
                 'emitted': len(emittable),
                 'apis': by_api,
+                'glget_tables': glget_apis,
                 'array_types': emit_array_type_names(elements),
             }
         )
