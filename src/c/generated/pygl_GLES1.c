@@ -1864,7 +1864,7 @@ pygl_GLES1_glExtGetBufferPointervQCOM(GLProc *self, PyObject *const *_a, size_t 
     PYGL_FRAME(1);
     PYGL_U(0, target);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN_SIZED(1, params, &pygl_elem_any, 1);
+    PYGL_ARRAY_IN_SIZED(1, params, &pygl_elem_voidp, 1);
     PYGL_CALL_V((unsigned int, void *), (target, params));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -2690,7 +2690,7 @@ pygl_GLES1_glGetBufferPointervOES(GLProc *self, PyObject *const *_a, size_t _nar
     PYGL_U(0, target);
     PYGL_U(1, pname);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN_SIZED(2, params, &pygl_elem_any, 1);
+    PYGL_ARRAY_IN_SIZED(2, params, &pygl_elem_voidp, 1);
     PYGL_CALL_V((unsigned int, unsigned int, void *), (target, pname, params));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -3142,10 +3142,10 @@ pygl_GLES1_glGetPointerv(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_FRAME(1);
     PYGL_U(0, pname);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(1, params, &pygl_elem_any, (Py_ssize_t)(1));
+    PYGL_ARRAY_OUT(1, params, &pygl_elem_voidp, (Py_ssize_t)(1));
     PYGL_CALL_V((unsigned int, void *), (pname, params));
     PYGL_CHECK();
-    PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_any, (Py_ssize_t)(1));
+    PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_voidp, (Py_ssize_t)(1));
     PYGL_CLEANUP();
     return _value;
 _fail:
@@ -3164,7 +3164,7 @@ pygl_GLES1_glGetPointervKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_FRAME(1);
     PYGL_U(0, pname);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN_SIZED(1, params, &pygl_elem_any, 1);
+    PYGL_ARRAY_IN_SIZED(1, params, &pygl_elem_voidp, 1);
     PYGL_CALL_V((unsigned int, void *), (pname, params));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -4346,7 +4346,7 @@ pygl_GLES1_glMultiDrawElementsEXT(GLProc *self, PyObject *const *_a, size_t _nar
     PYGL_SZ(4, primcount);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(1, count, &pygl_elem_GLsizei);
-    PYGL_ARRAY_IN(3, indices, &pygl_elem_any);
+    PYGL_ARRAY_IN(3, indices, &pygl_elem_voidp);
     PYGL_CALL_V((unsigned int, void *, unsigned int, void *, int), (mode, count, type, indices, primcount));
     PYGL_CHECK();
     PYGL_CLEANUP();

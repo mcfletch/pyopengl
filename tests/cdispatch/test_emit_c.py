@@ -288,3 +288,26 @@ def test_void_pointer_input_still_accepts_any_buffer():
         )
     )
     assert 'PYGL_ARRAY_IN(2, data, &pygl_elem_any);' in text
+
+
+def test_pointer_array_output_uses_the_voidp_array_type():
+    """``void **`` outputs allocate through GLvoidpArray, as setOutput does.
+
+    The generic ArrayDatatype cannot size an allocation, so an output that
+    named it would allocate too little and the GL would write past the end.
+    """
+    text = body(
+        command(
+            name='glGetVertexAttribPointerv',
+            parameters=[
+                ('index', 'GLuint', {}),
+                ('pname', 'GLenum', {}),
+                (
+                    'pointer',
+                    'void **',
+                    {'direction': model.OUT, 'size': model.Fixed(1)},
+                ),
+            ],
+        )
+    )
+    assert 'PYGL_ARRAY_OUT(2, pointer, &pygl_elem_voidp, (Py_ssize_t)(1));' in text

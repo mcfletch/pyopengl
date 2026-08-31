@@ -43,4 +43,9 @@ static const PyGLElement pygl_elem_int = {'i', 'l', 0, 4, 27, "GLintArray"};
 static const PyGLElement pygl_elem_int64_t = {'q', 'l', 0, 8, 28, "GLint64Array"};
 static const PyGLElement pygl_elem_unsigned_int = {'I', 'L', 0, 4, 29, "GLuintArray"};
 
+/* An array of pointers.  No struct code matches it on the fast path,
+ * so every call converts through GLvoidpArray -- which is what can
+ * size an allocation of them. */
+static const PyGLElement pygl_elem_voidp = {0, 0, 0, (uint8_t)sizeof(void *), 30, "GLvoidpArray"};
+
 #endif /* PYGL_ELEMENTS_H */

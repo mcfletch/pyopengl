@@ -907,10 +907,10 @@ pygl_GLES3_glGetBufferPointerv(GLProc *self, PyObject *const *_a, size_t _nargsf
     PYGL_U(0, target);
     PYGL_U(1, pname);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(2, params, &pygl_elem_any, (Py_ssize_t)(1));
+    PYGL_ARRAY_OUT(2, params, &pygl_elem_voidp, (Py_ssize_t)(1));
     PYGL_CALL_V((unsigned int, unsigned int, void *), (target, pname, params));
     PYGL_CHECK();
-    PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_any, (Py_ssize_t)(1));
+    PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_voidp, (Py_ssize_t)(1));
     PYGL_CLEANUP();
     return _value;
 _fail:

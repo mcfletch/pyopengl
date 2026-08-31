@@ -622,6 +622,16 @@ int pygl_array_out(GLProc *self, PyObject *object, const PyGLElement *element,
     out->have_view = 0;
     out->pointer = NULL;
 
+    if (element->itemsize == 0) {
+        /* Nothing here knows how wide an element is, so an allocation would be
+         * a guess and the GL would write past the end of it.  The generator is
+         * not supposed to emit such an output; say so rather than crash. */
+        PyErr_Format(PyExc_RuntimeError,
+                     "%s: cannot allocate an output array of %s, which has no "
+                     "element width",
+                     self->info->name, element->name);
+        return -1;
+    }
     type = pygl_array_type(element);
     if (type == NULL) {
         return -1;

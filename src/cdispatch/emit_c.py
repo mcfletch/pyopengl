@@ -54,7 +54,12 @@ def element_symbol(parameter):
         # output array of the wrong type is coerced -- which is what tells the
         # caller their result would not have reached them.
         return '&pygl_elem_GLubyte'
-    if ctype.base == 'void' or ctype.pointers > 1:
+    if ctype.pointers > 1:
+        # An array of pointers.  GLvoidpArray is what setOutput derives from
+        # the ctypes argtype, and it is the only array class that can size an
+        # allocation of them.
+        return '&pygl_elem_voidp'
+    if ctype.base == 'void':
         return '&pygl_elem_any'
     element = cm.element_type(ctype.base)
     if not element.buffer_format:

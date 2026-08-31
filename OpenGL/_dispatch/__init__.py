@@ -14,7 +14,13 @@ import ctypes
 import os
 import sys
 
-__all__ = ['AVAILABLE', 'ACTIVE', 'install', 'entry_points']
+__all__ = [
+    'AVAILABLE',
+    'ACTIVE',
+    'install',
+    'entry_points',
+    'suspend_error_checking',
+]
 
 #: Which implementation the process is using.  ``PYOPENGL_DISPATCH=ctypes``
 #: selects the current implementation wholesale and keeps doing so after the
@@ -106,39 +112,8 @@ def install():
         return _base_wrapper(base)
 
     wrapper.wrapper = wrapper_
-    _follow_error_suspension()
     ACTIVE = True
     return True
-
-
-def _follow_error_suspension():
-    """Suspend the C error check where the ctypes checker suspends its own.
-
-    ``glGetError`` between ``glBegin`` and ``glEnd`` is itself an invalid
-    operation, so OpenGL.GL.exceptional turns checking off for the block
-    through ``_ErrorChecker.onBegin``/``onEnd``.  Those entry points stay on
-    the ctypes path, so the C layer follows the same switch rather than
-    keeping a second one.
-    """
-    try:
-        from OpenGL.raw.GL import _errors
-    except ImportError:
-        return
-    checker = getattr(_errors, '_error_checker', None)
-    if checker is None or not hasattr(checker, 'onBegin'):
-        return
-    base_begin, base_end = checker.onBegin, checker.onEnd
-
-    def onBegin():
-        _c.suspend_error_checking(True)
-        return base_begin()
-
-    def onEnd():
-        _c.suspend_error_checking(False)
-        return base_end()
-
-    checker.onBegin = onBegin
-    checker.onEnd = onEnd
 
 
 def entry_point_for(function, binding):
@@ -161,6 +136,18 @@ def _api_of(module_name):
     if len(parts) > 2 and parts[1] == 'raw':
         return parts[2]
     return 'GL'
+
+
+def suspend_error_checking(suspend):
+    """Turn the C layer's per-call error check off, and on again.
+
+    ``glGetError`` between ``glBegin`` and ``glEnd`` is itself an invalid
+    operation, so OpenGL.GL.exceptional suspends checking for the block.  Those
+    two entry points stay on the ctypes path, so they tell the C layer rather
+    than the C layer keeping a second switch of its own.
+    """
+    if ACTIVE:
+        _c.suspend_error_checking(bool(suspend))
 
 
 def make_current(handle):

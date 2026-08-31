@@ -33,15 +33,19 @@ glRasterPosDispatch = {
 }
 
 if _configflags.ERROR_CHECKING:
+    from OpenGL import _dispatch as _c_dispatch
+
     @_lazy( full.glBegin )
     def glBegin( baseFunction, mode ):
         """Begin GL geometry-definition mode, disable automatic error checking"""
         _errors._error_checker.onBegin( )
+        _c_dispatch.suspend_error_checking( True )
         return baseFunction( mode )
     @_lazy( full.glEnd )
     def glEnd( baseFunction ):
         """Finish GL geometry-definition mode, re-enable automatic error checking"""
         _errors._error_checker.onEnd( )
+        _c_dispatch.suspend_error_checking( False )
         return baseFunction( )
 else:
     glBegin = full.glBegin

@@ -54,13 +54,26 @@ def emit_elements_header(elements):
             )
         )
     lines.append('')
+    lines.append('/* An array of pointers.  No struct code matches it on the fast path,')
+    lines.append(' * so every call converts through GLvoidpArray -- which is what can')
+    lines.append(' * size an allocation of them. */')
+    lines.append(
+        'static const PyGLElement pygl_elem_voidp = '
+        '{0, 0, 0, (uint8_t)sizeof(void *), %d, "GLvoidpArray"};'
+        % (len(elements) + 1,)
+    )
+    lines.append('')
     lines.append('#endif /* PYGL_ELEMENTS_H */')
     return '\n'.join(lines) + '\n'
 
 
 def emit_array_type_names(elements):
     """The ``OpenGL.arrays`` class names, in ``array_index`` order."""
-    return ['ArrayDatatype'] + [element.array_class for element in elements]
+    return (
+        ['ArrayDatatype']
+        + [element.array_class for element in elements]
+        + ['GLvoidpArray']
+    )
 
 
 def emit_registration(by_api):

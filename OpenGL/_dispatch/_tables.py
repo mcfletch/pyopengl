@@ -35,6 +35,7 @@ ARRAY_TYPES = [
     'GLintArray',
     'GLint64Array',
     'GLuintArray',
+    'GLvoidpArray',
 ]
 
 SLOTS = {
