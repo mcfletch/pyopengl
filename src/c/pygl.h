@@ -211,12 +211,28 @@ void *pygl_slot_slow(GLProc *self);
  * verifies -- checking only where a slot happened to be unresolved would
  * report the same mistake sometimes and not others. */
 extern int pygl_context_checking;
+
+/* How the layer decides which context's table to dispatch through.
+ *
+ * PYGL_TRACK_NOTIFY, the default, re-reads the current context whenever a slot
+ * needs resolving and otherwise trusts make_current.  That is the same
+ * exposure the ctypes implementation has always had -- it holds one binding
+ * per process, so it cannot tell contexts apart at all -- and per-context
+ * tables can only improve on it.
+ *
+ * PYGL_TRACK_VERIFY asks the platform on every call.  It costs about 97ns on
+ * the reference machine, and it exists for a program that switches between
+ * contexts of differing capability without saying so. */
+enum { PYGL_TRACK_VERIFY = 0, PYGL_TRACK_NOTIFY = 1 };
+extern int pygl_context_tracking;
+
 void *pygl_slot_checked(GLProc *self);
 
 static inline void *pygl_slot(GLProc *self)
 {
     void *fp;
-    if (PYGL_UNLIKELY(pygl_context_checking)) {
+    if (PYGL_UNLIKELY(pygl_context_checking) ||
+        pygl_context_tracking == PYGL_TRACK_VERIFY) {
         return pygl_slot_checked(self);
     }
     fp = pygl_current->slots[self->info->slot];

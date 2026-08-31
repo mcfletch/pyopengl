@@ -30,12 +30,20 @@ __all__ = [
 #: default flips.
 DISPATCH = os.environ.get('PYOPENGL_DISPATCH', 'ctypes').strip().lower()
 
-#: Ask the platform which context is current on every call rather than only
-#: when resolving.  Correct for a process that switches contexts without
-#: telling PyOpenGL, and costs about 95ns per call on the reference machine.
-STRICT_CONTEXT = (
-    os.environ.get('PYOPENGL_CONTEXT_TRACKING', 'auto').strip().lower() == 'strict'
-)
+#: How the layer decides which context's table to dispatch through.
+#:
+#: ``auto`` (the default) re-reads the current context whenever an entry point
+#: needs resolving, and otherwise trusts ``make_current``.  That is the same
+#: exposure the ctypes implementation has always had -- it holds one binding
+#: per process and cannot tell contexts apart at all -- so per-context tables
+#: can only improve on it.
+#:
+#: ``verify`` asks the platform on every call, for a program that switches
+#: between contexts of differing capability without saying so.  It costs about
+#: 97ns per call on the reference machine.
+CONTEXT_TRACKING = os.environ.get('PYOPENGL_CONTEXT_TRACKING', 'auto').strip().lower()
+_TRACK_VERIFY, _TRACK_NOTIFY = 0, 1
+TRACKING = _TRACK_VERIFY if CONTEXT_TRACKING in ('verify', 'strict') else _TRACK_NOTIFY
 
 AVAILABLE = False
 ACTIVE = False
@@ -82,7 +90,8 @@ def configure():
         ctypes_pointer=ctypes._Pointer,
         error_slot=error_slot,
         get_current_context=_current_context_getter() or 0,
-        strict_context=STRICT_CONTEXT,
+        strict_context=False,
+        context_tracking=TRACKING,
         array_size_checking=_configflags.ARRAY_SIZE_CHECKING,
         error_checking=_configflags.ERROR_CHECKING,
         error_proc=proc,

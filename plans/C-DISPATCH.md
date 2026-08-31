@@ -1138,13 +1138,18 @@ what changed under measurement, and where the implementation stands.
   3,508 unique commands are **4,839 bindings** across GL, GLES1/2/3, GLSC2,
   GLX, WGL and EGL. EGL is in scope after all: its registry is not vendored,
   but the shipped `OpenGL/raw/EGL` tree carries the same facts.
-- **Context switching cannot be detected per call.** `glXGetCurrentContext`
-  costs **95 ns** on the reference machine against `glGetError`'s 7 ns, so the
-  notification design the plan specifies is not merely preferable, it is
-  forced. Resolution re-reads the current context, which makes a missed
-  notification self-correcting for every entry point the new context has not
-  used yet; `PYOPENGL_CONTEXT_TRACKING=strict` pays the 95 ns for the exact
-  answer.
+- **Which context is current cannot be known cheaply, and cannot be observed
+  at all.** An application makes a context current inside glfw, Qt or SDL,
+  which call the window-system library directly; PyOpenGL is not on that path.
+  Asking the driver costs **97 ns**, against `glGetError`'s 7 ns, so it cannot
+  go on the call path by default. The default re-reads the current context
+  whenever an entry point needs resolving and otherwise assumes it has not
+  changed — which is **no worse than the ctypes implementation**, which holds
+  one binding per process and cannot distinguish contexts at all.
+  `PYOPENGL_CONTEXT_TRACKING=verify` pays the 97 ns for exactness (177 ns per
+  call against 383 for ctypes), and `make_current` is exact and free for a
+  program willing to call it. Requiring the application's toolkit to route
+  through PyOpenGL is not an option and is not asked for.
 - **The no-context check must stay behind `CONTEXT_CHECKING`.** The plan made
   it always-on because it had become free. Free is not the only question:
   deleting GL objects from a cleanup handler that runs after the context is

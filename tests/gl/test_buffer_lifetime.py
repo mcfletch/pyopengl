@@ -47,28 +47,40 @@ class TestBufferLifetime(GLTestCase):
         assert exports_are_clear(values)
 
     def test_two_arrays_are_both_released(self):
-        """``glPrioritizeTextures(n, textures, priorities)`` takes two."""
-        if not bool(glPrioritizeTextures):
-            self.skipTest('no glPrioritizeTextures in this context')
-        textures = glGenTextures(2)
-        names = np.asarray(textures, dtype='I')
-        priorities = np.zeros(2, 'f')
-        glPrioritizeTextures(2, names, priorities)
-        assert exports_are_clear(names)
-        assert exports_are_clear(priorities)
+        """``glDrawElements`` takes an index array beside its scalars.
+
+        A deprecated entry point would be the obvious choice here, but
+        ``bool(glFoo)`` says the driver exports the symbol, not that the
+        current profile will accept a call to it -- and a compatibility-only
+        entry point called under a core profile faults inside the driver,
+        under either implementation.
+        """
+        indices = np.zeros(3, 'I')
+        buffer = np.zeros(9, 'f')
+        glEnableClientState(GL_VERTEX_ARRAY)
+        try:
+            glVertexPointer(3, GL_FLOAT, 0, buffer)
+            glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, indices)
+        finally:
+            glDisableClientState(GL_VERTEX_ARRAY)
+        assert exports_are_clear(indices)
+        assert exports_are_clear(buffer)
 
     def test_a_failure_after_a_successful_acquisition_releases_it(self):
-        """The first array is acquired; the second is the wrong length.
+        """The first array is acquired; the second cannot be converted.
 
         This is the case the cleanup frame exists for: without it the first
         buffer stays exported for the life of the array.
         """
-        if not bool(glPrioritizeTextures):
-            self.skipTest('no glPrioritizeTextures in this context')
-        names = np.zeros(2, 'I')
-        with pytest.raises(Exception):
-            glPrioritizeTextures(2, names, object())
-        assert exports_are_clear(names)
+        buffer = np.zeros(9, 'f')
+        glEnableClientState(GL_VERTEX_ARRAY)
+        try:
+            glVertexPointer(3, GL_FLOAT, 0, buffer)
+            with pytest.raises(Exception):
+                glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, object())
+        finally:
+            glDisableClientState(GL_VERTEX_ARRAY)
+        assert exports_are_clear(buffer)
 
     def test_the_argument_is_not_kept_alive_after_the_call(self):
         values = np.zeros(3, 'd')

@@ -72,23 +72,32 @@ and false in another.  And a binding held in a local variable across a context
 switch still dispatches correctly, because the entry point object holds a slot
 index rather than an address.</p>
 
-<h3>Telling the layer that the context changed</h3>
+<h3>Knowing which context is current</h3>
 
-<p>PyOpenGL does not see your windowing toolkit call <code>MakeCurrent</code>,
-and asking the driver which context is current costs about 95 ns &#8212; more
-than a whole dispatch &#8212; so it is not asked on every call.  Instead:</p>
+<p>An application makes a context current inside its windowing toolkit &#8212;
+glfw, Qt, pygame and SDL all call <code>glXMakeCurrent</code> or
+<code>eglMakeCurrent</code> themselves &#8212; and PyOpenGL is not on that call
+path, so it cannot observe the switch.  Asking the driver instead costs about
+97&nbsp;ns per call on the reference machine, more than a whole dispatch.</p>
+
+<p>The default therefore re-reads the current context whenever an entry point
+needs resolving, and otherwise assumes it has not changed.  <strong>This is not
+a new limitation.</strong>  The ctypes implementation holds one binding per
+process and cannot tell contexts apart at all, so a process with two contexts
+of differing capability has always had this exposure; per-context tables narrow
+it rather than widening it.</p>
+
+<p>Where it matters &#8212; a program that switches between contexts of genuinely
+different capability, such as a discrete-GPU context beside a software one
+&#8212; there are two ways to be exact:</p>
 
 <ul>
-<li>A process with one context needs to do nothing.</li>
-<li>When an entry point is used for the first time in a context, the layer
-re-reads the current context, so a new context picks up its own pointers for
-everything it has not called yet.</li>
-<li>An application that switches between contexts and wants that to be exact
-calls <code>OpenGL._dispatch.make_current(handle)</code> after each switch, with
-the handle <code>OpenGL.platform.PLATFORM.GetCurrentContext()</code> returns.</li>
-<li><code>PYOPENGL_CONTEXT_TRACKING=strict</code> asks the driver on every call
-instead.  It is exact and it costs the 95 ns; it exists for diagnosing a
-multi-context program, not for shipping.</li>
+<li><code>PYOPENGL_CONTEXT_TRACKING=verify</code> asks the driver on every call.
+Nothing to change in the program, and it costs the 97&nbsp;ns: about 177&nbsp;ns
+per call rather than 58, against 383 for ctypes.</li>
+<li><code>OpenGL._dispatch.make_current(handle)</code> after each switch, with
+the handle <code>OpenGL.platform.PLATFORM.GetCurrentContext()</code> returns.
+Exact and free, for a program willing to say so.</li>
 </ul>
 
 <p><code>OpenGL._dispatch.forget_context(handle)</code> releases a destroyed

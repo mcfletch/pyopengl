@@ -32,6 +32,7 @@ static int pygl_error_slot = -1;
 static int pygl_strict_context = 0;
 static int pygl_array_size_checking = 1;
 int pygl_context_checking = 0;
+int pygl_context_tracking = PYGL_TRACK_NOTIFY;
 /* OpenGL.SIZE_1_ARRAY_UNPACK: whether a one-element output is handed back as a
  * scalar rather than as an array of one. */
 static int pygl_size_1_array_unpack = 1;
@@ -300,7 +301,8 @@ void *pygl_slot_slow(GLProc *self)
 void *pygl_slot_checked(GLProc *self)
 {
     void *fp;
-    pygl_sync_context();
+    /* The raw platform address, not the Python one: this runs per call. */
+    pygl_sync_context_fast();
     if (pygl_current->is_null_context && pygl_needs_context(self->info)) {
         PyErr_Format(pygl_no_context_error,
                      "Attempt to call %s with no current OpenGL context",
@@ -1560,21 +1562,22 @@ static PyObject *pygl_py_configure(PyObject *module, PyObject *args, PyObject *k
                                "strict_context",    "array_size_checking",
                                "error_checking",    "error_proc",
                                "size_1_array_unpack", "context_checking",
-                               NULL};
+                               "context_tracking", NULL};
     PyObject *support = NULL, *array_types = NULL;
     PyObject *simple = NULL, *pointer = NULL, *error_proc = Py_None;
     int error_slot = -1, strict = 0, size_checking = 1, error_checking = 0;
-    int unpack = 1, context_checking = 0;
+    int unpack = 1, context_checking = 0, tracking = PYGL_TRACK_VERIFY;
     unsigned long long getter = 0;
     (void)module;
-    if (!PyArg_ParseTupleAndKeywords(args, kwds, "OOOO|iKpppOpp", keywords, &support,
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "OOOO|iKpppOppi", keywords, &support,
                                      &array_types, &simple, &pointer, &error_slot,
                                      &getter, &strict, &size_checking,
                                      &error_checking, &error_proc, &unpack,
-                                     &context_checking)) {
+                                     &context_checking, &tracking)) {
         return NULL;
     }
     pygl_context_checking = context_checking;
+    pygl_context_tracking = tracking;
     pygl_array_size_checking = size_checking;
     pygl_size_1_array_unpack = unpack;
     pygl_default_flags = error_checking ? PYGL_F_CHECK_ERRORS : 0;
