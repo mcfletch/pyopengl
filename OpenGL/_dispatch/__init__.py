@@ -59,7 +59,7 @@ def _current_context_getter():
 
 def configure():
     """Hand the C layer the Python facilities it calls back into."""
-    from OpenGL import arrays  # noqa: F401  -- registers the format handlers
+    from OpenGL import _configflags, arrays  # noqa: F401 -- registers handlers
     from OpenGL._dispatch import _tables, support
 
     error_slot = -1
@@ -74,6 +74,10 @@ def configure():
         error_slot=error_slot,
         get_current_context=_current_context_getter() or 0,
         strict_context=STRICT_CONTEXT,
+        array_size_checking=_configflags.ARRAY_SIZE_CHECKING,
+        error_checking=_configflags.ERROR_CHECKING,
+        error_proc=proc,
+        size_1_array_unpack=_configflags.SIZE_1_ARRAY_UNPACK,
     )
 
 
@@ -102,8 +106,39 @@ def install():
         return _base_wrapper(base)
 
     wrapper.wrapper = wrapper_
+    _follow_error_suspension()
     ACTIVE = True
     return True
+
+
+def _follow_error_suspension():
+    """Suspend the C error check where the ctypes checker suspends its own.
+
+    ``glGetError`` between ``glBegin`` and ``glEnd`` is itself an invalid
+    operation, so OpenGL.GL.exceptional turns checking off for the block
+    through ``_ErrorChecker.onBegin``/``onEnd``.  Those entry points stay on
+    the ctypes path, so the C layer follows the same switch rather than
+    keeping a second one.
+    """
+    try:
+        from OpenGL.raw.GL import _errors
+    except ImportError:
+        return
+    checker = getattr(_errors, '_error_checker', None)
+    if checker is None or not hasattr(checker, 'onBegin'):
+        return
+    base_begin, base_end = checker.onBegin, checker.onEnd
+
+    def onBegin():
+        _c.suspend_error_checking(True)
+        return base_begin()
+
+    def onEnd():
+        _c.suspend_error_checking(False)
+        return base_end()
+
+    checker.onBegin = onBegin
+    checker.onEnd = onEnd
 
 
 def entry_point_for(function, binding):

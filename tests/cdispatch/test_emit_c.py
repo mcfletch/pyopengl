@@ -248,3 +248,43 @@ class TestSelection:
                 parameters=[('name', 'GLenum', {})],
             )
         )
+
+
+def test_void_pointer_output_is_a_ubyte_array():
+    """``wrapper.setOutput`` maps a ``void *`` output to ``GLubyteArray``.
+
+    Without it a caller's wrongly-typed output array is accepted as any
+    contiguous buffer rather than being coerced -- and the coercion is what
+    tells the caller their result would have been lost.
+    """
+    text = body(
+        command(
+            name='glGetBufferSubData',
+            parameters=[
+                ('target', 'GLenum', {}),
+                ('offset', 'GLintptr', {}),
+                ('size', 'GLsizeiptr', {}),
+                (
+                    'data',
+                    'void *',
+                    {'direction': model.OUT, 'size': model.FromArg(argument=2)},
+                ),
+            ],
+        )
+    )
+    assert 'PYGL_ARRAY_OUT(3, data, &pygl_elem_GLubyte,' in text
+
+
+def test_void_pointer_input_still_accepts_any_buffer():
+    text = body(
+        command(
+            name='glBufferData',
+            parameters=[
+                ('target', 'GLenum', {}),
+                ('size', 'GLsizeiptr', {}),
+                ('data', 'const void *', {}),
+                ('usage', 'GLenum', {}),
+            ],
+        )
+    )
+    assert 'PYGL_ARRAY_IN(2, data, &pygl_elem_any);' in text

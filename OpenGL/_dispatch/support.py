@@ -79,11 +79,20 @@ def resolve(name, extension, _unused, api_index):
 
 
 def as_pointer(value):
-    """The address of anything a client may pass where a pointer is wanted."""
+    """The address of anything a client may pass where a pointer is wanted.
+
+    Covers what the ctypes layer accepts today: plain integers, ctypes
+    instances, the opaque pointer classes, and the byref result that the ctypes
+    array handlers answer ``dataPointer`` with -- which carries its address
+    rather than stating it.
+    """
     if value is None:
         return 0
     if isinstance(value, int):
         return value
+    referent = getattr(value, '_obj', None)
+    if referent is not None:
+        return ctypes.addressof(referent)
     for attribute in ('value', '_as_parameter_'):
         inner = getattr(value, attribute, None)
         if isinstance(inner, int):
@@ -91,6 +100,10 @@ def as_pointer(value):
     try:
         return ctypes.cast(value, ctypes.c_void_p).value or 0
     except (ctypes.ArgumentError, TypeError):
+        pass
+    try:
+        return ctypes.addressof(value)
+    except TypeError:
         pass
     try:
         return int(value)
@@ -101,17 +114,33 @@ def as_pointer(value):
 _opaque_classes = {}
 
 
+#: Where the opaque pointer classes are declared.  It has to be *these*
+#: classes rather than freshly built ones: they are what the ctypes bindings
+#: name in their argtypes, so a GLsync built from a different class of the same
+#: name is rejected by any entry point still on the ctypes path.
+_OPAQUE_MODULES = ('OpenGL.raw.GL._types', 'OpenGL.raw.EGL._types')
+
+
 def opaque(address, type_name):
     """Rebuild the opaque pointer object this return type produces today."""
-    from OpenGL import _opaque
+    import importlib
 
     cls = _opaque_classes.get(type_name)
     if cls is None:
-        cls = getattr(_opaque, type_name, None)
+        for module_name in _OPAQUE_MODULES:
+            try:
+                module = importlib.import_module(module_name)
+            except ImportError:
+                continue
+            cls = getattr(module, type_name, None)
+            if cls is not None:
+                break
         if cls is None:
+            from OpenGL import _opaque
+
             cls = _opaque.opaque_pointer_cls(type_name)
         _opaque_classes[type_name] = cls
-    return cls(address)
+    return ctypes.cast(ctypes.c_void_p(address), cls)
 
 
 def raise_gl_error(code, name):

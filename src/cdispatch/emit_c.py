@@ -49,6 +49,11 @@ def element_name(base):
 def element_symbol(parameter):
     """The static element description a stub names for an array parameter."""
     ctype = parameter.ctype
+    if ctype.base == 'void' and ctype.pointers == 1 and parameter.is_output:
+        # wrapper.setOutput resolves a void * output to GLubyteArray, so an
+        # output array of the wrong type is coerced -- which is what tells the
+        # caller their result would not have reached them.
+        return '&pygl_elem_GLubyte'
     if ctype.base == 'void' or ctype.pointers > 1:
         return '&pygl_elem_any'
     element = cm.element_type(ctype.base)

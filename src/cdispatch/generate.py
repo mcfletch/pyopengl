@@ -33,8 +33,10 @@ def emit_elements_header(elements):
         '',
         '/* A void * parameter promises only an address, so any contiguous',
         ' * buffer is acceptable and no conversion is needed. */',
+        '/* itemsize 0: a void * parameter has no element width, so there is',
+        ' * no length for a size check to compare against. */',
         'static const PyGLElement pygl_elem_any = '
-        "{'*', 0, 0, 1, 0, \"ArrayDatatype\"};",
+        "{'*', 0, 0, 0, 0, \"ArrayDatatype\"};",
         '',
     ]
     for index, element in enumerate(elements, start=1):

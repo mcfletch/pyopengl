@@ -30,6 +30,20 @@ static PyObject *pygl_ctypes_pointer = NULL;
 static Py_ssize_t pygl_command_count = 0;
 static int pygl_error_slot = -1;
 static int pygl_strict_context = 0;
+static int pygl_array_size_checking = 1;
+/* OpenGL.SIZE_1_ARRAY_UNPACK: whether a one-element output is handed back as a
+ * scalar rather than as an array of one. */
+static int pygl_size_1_array_unpack = 1;
+/* glGetError inside a glBegin/glEnd block is itself an invalid operation, so
+ * error checking is suspended for the duration.  The ctypes path does this
+ * through _ErrorChecker.onBegin/onEnd; this is the same switch. */
+static int pygl_error_suspended = 0;
+/* The flag byte a freshly created context table starts every slot at, so that
+ * OpenGL.ERROR_CHECKING means the same thing in a context created later. */
+static uint8_t pygl_default_flags = 0;
+/* The glGetError entry point, so the error check can resolve its own slot in a
+ * context that has not called it yet. */
+static PyObject *pygl_error_proc = NULL;
 
 /* The platform's "which context is current" function, as a raw address, so the
  * strict-tracking mode does not pay a Python call.  Costs about 95ns on the
@@ -64,6 +78,9 @@ static PyGLDispatch *pygl_table_new(void *handle)
         PyMem_Free(table->flags);
         PyMem_Free(table);
         return NULL;
+    }
+    if (pygl_default_flags) {
+        memset(table->flags, pygl_default_flags, (size_t)pygl_command_count);
     }
     table->handle = handle;
     return table;
@@ -250,12 +267,23 @@ int pygl_check_error(GLProc *self)
     unsigned int code;
     PyObject *result;
 
+    if (pygl_error_suspended) {
+        return 0;
+    }
     if (pygl_error_slot < 0) {
         return 0;
     }
     fp = pygl_current->slots[pygl_error_slot];
     if ((uintptr_t)fp < PYGL_SLOT_MIN_REAL) {
-        return 0;
+        /* This context has not resolved glGetError yet. */
+        if (pygl_error_proc == NULL) {
+            return 0;
+        }
+        fp = pygl_slot((GLProc *)pygl_error_proc);
+        if (fp == NULL) {
+            PyErr_Clear();
+            return 0;
+        }
     }
     code = ((unsigned int (*)(void))fp)();
     if (code == 0) {
@@ -271,6 +299,33 @@ int pygl_boolean_slow(PyObject *object)
 {
     int result = PyObject_IsTrue(object);
     return result < 0 ? 0 : result;
+}
+
+/* The address of whatever ArrayDatatype calls a data pointer.  It is usually
+ * an integer, but the ctypes handlers answer with a byref result, which
+ * carries its address rather than stating it. */
+static int pygl_address_of(PyObject *object, void **out)
+{
+    unsigned long long value = PyLong_AsUnsignedLongLong(object);
+    if (!PyErr_Occurred()) {
+        *out = (void *)(uintptr_t)value;
+        return 0;
+    }
+    PyErr_Clear();
+    {
+        PyObject *number = PyObject_CallMethod(pygl_support, "as_pointer", "O",
+                                               object);
+        if (number == NULL) {
+            return -1;
+        }
+        value = PyLong_AsUnsignedLongLong(number);
+        Py_DECREF(number);
+        if (PyErr_Occurred()) {
+            return -1;
+        }
+    }
+    *out = (void *)(uintptr_t)value;
+    return 0;
 }
 
 void *pygl_pointer_slow(PyObject *object)
@@ -361,7 +416,7 @@ static int pygl_array_convert(PyObject *object, const PyGLElement *element,
                               PyGLBuf *out)
 {
     PyObject *type, *converted, *pointer;
-    unsigned long long address;
+    void *address;
 
     type = pygl_array_type(element);
     if (type == NULL) {
@@ -376,15 +431,15 @@ static int pygl_array_convert(PyObject *object, const PyGLElement *element,
         Py_DECREF(converted);
         return -1;
     }
-    address = PyLong_AsUnsignedLongLong(pointer);
-    Py_DECREF(pointer);
-    if (PyErr_Occurred()) {
+    if (pygl_address_of(pointer, &address) < 0) {
+        Py_DECREF(pointer);
         Py_DECREF(converted);
         return -1;
     }
+    Py_DECREF(pointer);
     out->owner = converted;
     out->have_view = 0;
-    out->pointer = (void *)(uintptr_t)address;
+    out->pointer = address;
     return 0;
 }
 
@@ -408,7 +463,20 @@ static int pygl_array_acquire(PyObject *object, const PyGLElement *element,
     if (writable) {
         flags |= PyBUF_WRITABLE;
     }
-    if (PyObject_CheckBuffer(object) && !pygl_is_ctypes_pointer(object)) {
+    if (pygl_is_ctypes_pointer(object)) {
+        if (element->primary == '*') {
+            /* A void * parameter wants the address the ctypes object holds,
+             * which is what the ctypes layer passes.  ArrayDatatype cannot
+             * answer for the opaque pointer classes. */
+            void *address = pygl_pointer_slow(object);
+            if (address == NULL && PyErr_Occurred()) {
+                return -1;
+            }
+            out->owner = Py_NewRef(object);
+            out->pointer = address;
+            return 0;
+        }
+    } else if (PyObject_CheckBuffer(object)) {
         if (PyObject_GetBuffer(object, &out->view, flags) == 0) {
             if (pygl_format_matches(element, out->view.format)) {
                 out->have_view = 1;
@@ -441,14 +509,19 @@ int pygl_array_in_sized(GLProc *self, PyObject *object, const PyGLElement *eleme
     if (pygl_array_in(self, object, element, index, out) < 0) {
         return -1;
     }
-    if (out->pointer == NULL) {
+    if (out->pointer == NULL || !pygl_array_size_checking) {
+        return 0;
+    }
+    if (element->itemsize == 0) {
+        /* A void * parameter has no element width, so there is nothing to
+         * check the caller's length against. */
         return 0;
     }
     if (out->have_view) {
-        count = element->itemsize ? out->view.len / element->itemsize : 0;
+        count = out->view.len;
     } else {
-        PyObject *size = PyObject_CallMethod(pygl_array_type(element), "arraySize",
-                                             "O", out->owner);
+        PyObject *size = PyObject_CallMethod(pygl_array_type(element),
+                                             "arrayByteCount", "O", out->owner);
         if (size == NULL) {
             PyErr_Clear();
             return 0;
@@ -460,30 +533,90 @@ int pygl_array_in_sized(GLProc *self, PyObject *object, const PyGLElement *eleme
             return 0;
         }
     }
-    if (count < expected) {
+    /* The check is on the byte count and it is exact, which is what
+     * arrayhelpers.asArrayTypeSize asserts today: an array of the wrong length
+     * in either direction is a caller error, not something to truncate. */
+    expected *= element->itemsize;
+    if (count != expected) {
         PyErr_Format(PyExc_ValueError,
-                     "%s: array of length %zd passed where %zd elements are "
-                     "required for argument %zd",
-                     self->info->name, count, expected, index + 1);
+                     "Expected %zd byte array, got %zd byte array",
+                     expected, count);
         pygl_release(out);
         return -1;
     }
     return 0;
 }
 
+static PyObject *type_or_null(const PyGLElement *element)
+{
+    PyObject *type = pygl_array_type(element);
+    if (type == NULL) {
+        PyErr_Clear();
+    }
+    return type;
+}
+
+/* Whether converting `original` to `converted` lost bytes. */
+static int pygl_copy_shrank(PyObject *type, PyObject *original, PyObject *converted)
+{
+    PyObject *before, *after;
+    Py_ssize_t a, b;
+    if (type == NULL) {
+        return 0;
+    }
+    before = PyObject_CallMethod(type, "arrayByteCount", "O", original);
+    if (before == NULL) {
+        PyErr_Clear();
+        return 0;
+    }
+    after = PyObject_CallMethod(type, "arrayByteCount", "O", converted);
+    if (after == NULL) {
+        PyErr_Clear();
+        Py_DECREF(before);
+        return 0;
+    }
+    a = PyLong_AsSsize_t(before);
+    b = PyLong_AsSsize_t(after);
+    Py_DECREF(before);
+    Py_DECREF(after);
+    if (PyErr_Occurred()) {
+        PyErr_Clear();
+        return 0;
+    }
+    return b < a;
+}
+
 int pygl_array_out(GLProc *self, PyObject *object, const PyGLElement *element,
                    Py_ssize_t index, Py_ssize_t count, PyGLBuf *out)
 {
     PyObject *type, *allocated, *pointer;
-    unsigned long long address;
+    void *address;
 
     /* orPassIn is the normal path, not an exception: a caller-supplied array
      * is written into and handed back. */
-    (void)self;
     (void)index;
     if (object != NULL && object != Py_None) {
-        return pygl_array_acquire(object, element, out, 1);
+        if (pygl_array_acquire(object, element, out, 1) < 0) {
+            return -1;
+        }
+        /* When the caller's array had to be copied to match, the GL writes
+         * into the copy.  If that copy is smaller than what the caller passed,
+         * the result never reaches them -- the silent "returns zeroes" bug --
+         * so refuse it and say what to pass instead. */
+        if (out->owner != NULL && out->owner != object &&
+            pygl_copy_shrank(type_or_null(element), object, out->owner)) {
+            PyErr_Format(PyExc_TypeError,
+                         "%s: pass-in output array was coerced to a smaller "
+                         "buffer, so the GL result cannot be written back into "
+                         "your array. Pass a correctly-typed array, or None to "
+                         "have one allocated.",
+                         self->info->name);
+            pygl_release(out);
+            return -1;
+        }
+        return 0;
     }
+    (void)self;
 
     out->owner = NULL;
     out->have_view = 0;
@@ -502,14 +635,14 @@ int pygl_array_out(GLProc *self, PyObject *object, const PyGLElement *element,
         Py_DECREF(allocated);
         return -1;
     }
-    address = PyLong_AsUnsignedLongLong(pointer);
-    Py_DECREF(pointer);
-    if (PyErr_Occurred()) {
+    if (pygl_address_of(pointer, &address) < 0) {
+        Py_DECREF(pointer);
         Py_DECREF(allocated);
         return -1;
     }
+    Py_DECREF(pointer);
     out->owner = allocated;
-    out->pointer = (void *)(uintptr_t)address;
+    out->pointer = address;
     return 0;
 }
 
@@ -532,7 +665,7 @@ PyObject *pygl_output_value(PyGLBuf *buffer, const PyGLElement *element,
     if (value == NULL) {
         Py_RETURN_NONE;
     }
-    if (count == 1) {
+    if (count == 1 && pygl_size_1_array_unpack) {
         PyObject *item = PySequence_GetItem(value, 0);
         if (item == NULL) {
             PyErr_Clear();
@@ -1102,17 +1235,26 @@ static PyObject *pygl_py_configure(PyObject *module, PyObject *args, PyObject *k
     static char *keywords[] = {"support",           "array_types",
                                "ctypes_simple",     "ctypes_pointer",
                                "error_slot",        "get_current_context",
-                               "strict_context",    NULL};
+                               "strict_context",    "array_size_checking",
+                               "error_checking",    "error_proc",
+                               "size_1_array_unpack", NULL};
     PyObject *support = NULL, *array_types = NULL;
-    PyObject *simple = NULL, *pointer = NULL;
-    int error_slot = -1, strict = 0;
+    PyObject *simple = NULL, *pointer = NULL, *error_proc = Py_None;
+    int error_slot = -1, strict = 0, size_checking = 1, error_checking = 0;
+    int unpack = 1;
     unsigned long long getter = 0;
     (void)module;
-    if (!PyArg_ParseTupleAndKeywords(args, kwds, "OOOO|iKp", keywords, &support,
+    if (!PyArg_ParseTupleAndKeywords(args, kwds, "OOOO|iKpppOp", keywords, &support,
                                      &array_types, &simple, &pointer, &error_slot,
-                                     &getter, &strict)) {
+                                     &getter, &strict, &size_checking,
+                                     &error_checking, &error_proc, &unpack)) {
         return NULL;
     }
+    pygl_array_size_checking = size_checking;
+    pygl_size_1_array_unpack = unpack;
+    pygl_default_flags = error_checking ? PYGL_F_CHECK_ERRORS : 0;
+    Py_XSETREF(pygl_error_proc,
+               error_proc == Py_None ? NULL : Py_NewRef(error_proc));
     Py_XSETREF(pygl_ctypes_simple, Py_NewRef(simple));
     Py_XSETREF(pygl_ctypes_pointer, Py_NewRef(pointer));
     Py_XSETREF(pygl_support, Py_NewRef(support));
@@ -1124,6 +1266,28 @@ static PyObject *pygl_py_configure(PyObject *module, PyObject *args, PyObject *k
     pygl_error_slot = error_slot;
     pygl_get_current_context = (void *(*)(void))(uintptr_t)getter;
     pygl_strict_context = strict;
+    if (pygl_default_flags) {
+        Py_ssize_t index;
+        PyGLDispatch *table;
+        for (index = 0; index < pygl_command_count; index++) {
+            pygl_null_table.flags[index] = pygl_default_flags;
+            pygl_default_table.flags[index] = pygl_default_flags;
+        }
+        for (table = pygl_tables; table != NULL; table = table->next) {
+            memset(table->flags, pygl_default_flags, (size_t)pygl_command_count);
+        }
+    }
+    Py_RETURN_NONE;
+}
+
+static PyObject *pygl_py_suspend_error_checking(PyObject *module, PyObject *argument)
+{
+    int suspend = PyObject_IsTrue(argument);
+    (void)module;
+    if (suspend < 0) {
+        return NULL;
+    }
+    pygl_error_suspended = suspend;
     Py_RETURN_NONE;
 }
 
@@ -1158,6 +1322,8 @@ static PyMethodDef pygl_methods[] = {
      "The address the current context has resolved an entry point to."},
     {"set_error_checking", pygl_py_set_error_checking, METH_VARARGS,
      "Turn per-call error checking on or off, for one entry point or all."},
+    {"suspend_error_checking", pygl_py_suspend_error_checking, METH_O,
+     "Suspend per-call error checking, for the duration of a glBegin block."},
     {"sync_context", pygl_py_sync_context, METH_NOARGS,
      "Re-read the current context from the platform and switch tables."},
     {"command_count", pygl_py_command_count, METH_NOARGS,

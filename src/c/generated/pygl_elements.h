@@ -9,7 +9,9 @@
 
 /* A void * parameter promises only an address, so any contiguous
  * buffer is acceptable and no conversion is needed. */
-static const PyGLElement pygl_elem_any = {'*', 0, 0, 1, 0, "ArrayDatatype"};
+/* itemsize 0: a void * parameter has no element width, so there is
+ * no length for a size check to compare against. */
+static const PyGLElement pygl_elem_any = {'*', 0, 0, 0, 0, "ArrayDatatype"};
 
 static const PyGLElement pygl_elem_GLbitfield = {'I', 'L', 0, 4, 1, "GLuintArray"};
 static const PyGLElement pygl_elem_GLboolean = {'B', '?', 'c', 1, 2, "GLbooleanArray"};
