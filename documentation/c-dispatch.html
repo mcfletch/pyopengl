@@ -188,12 +188,6 @@ it that way.</p>
     <td>resolved once, cached for the process</td>
     <td>answered for the current context</td></tr>
 
-<tr><td>a call with no current context</td>
-    <td>undefined unless <code>CONTEXT_CHECKING</code> is on, which it is not
-        by default</td>
-    <td>raises <code>OpenGL.error.NoContext</code>.  The check became free, so
-        it is always on.</td></tr>
-
 <tr><td><code>OpenGL.FULL_LOGGING</code></td>
     <td>logs every call</td>
     <td>not implemented in C.  Tracing selects the ctypes implementation for

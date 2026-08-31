@@ -1145,6 +1145,15 @@ what changed under measurement, and where the implementation stands.
   notification self-correcting for every entry point the new context has not
   used yet; `PYOPENGL_CONTEXT_TRACKING=strict` pays the 95 ns for the exact
   answer.
+- **The no-context check must stay behind `CONTEXT_CHECKING`.** The plan made
+  it always-on because it had become free. Free is not the only question:
+  deleting GL objects from a cleanup handler that runs after the context is
+  gone is ordinary, and it is a silent no-op today. Turning that into an
+  exception breaks working applications at shutdown, which is where they are
+  least able to handle it — PyOpenGL's own suite does it, which is how this
+  was found. The flag is honoured, off by default as it is today, and when it
+  is on every call verifies rather than only the calls that happen to hit an
+  unresolved slot.
 - **Error checking through `GL_KHR_debug` is worth more than estimated.**
   Checking costs **0.8 ns** rather than the 11 ns of a `glGetError` round
   trip, so leaving it on stops being a trade against speed.

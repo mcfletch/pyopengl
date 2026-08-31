@@ -87,6 +87,7 @@ def configure():
         error_checking=_configflags.ERROR_CHECKING,
         error_proc=proc,
         size_1_array_unpack=_configflags.SIZE_1_ARRAY_UNPACK,
+        context_checking=_configflags.CONTEXT_CHECKING,
     )
 
 

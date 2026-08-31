@@ -205,9 +205,21 @@ typedef struct {
  * once-per-context-per-entry-point path. */
 void *pygl_slot_slow(GLProc *self);
 
+/* OpenGL.CONTEXT_CHECKING.  Off by default, as it is today: calling an entry
+ * point with no current context is a no-op, which is what a cleanup handler
+ * running after its context was destroyed relies on.  With it on, every call
+ * verifies -- checking only where a slot happened to be unresolved would
+ * report the same mistake sometimes and not others. */
+extern int pygl_context_checking;
+void *pygl_slot_checked(GLProc *self);
+
 static inline void *pygl_slot(GLProc *self)
 {
-    void *fp = pygl_current->slots[self->info->slot];
+    void *fp;
+    if (PYGL_UNLIKELY(pygl_context_checking)) {
+        return pygl_slot_checked(self);
+    }
+    fp = pygl_current->slots[self->info->slot];
     if (PYGL_LIKELY((uintptr_t)fp >= PYGL_SLOT_MIN_REAL)) {
         return fp;
     }
