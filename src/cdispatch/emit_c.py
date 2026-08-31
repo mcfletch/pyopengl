@@ -95,6 +95,42 @@ def _size_expression(command, parameter):
     raise ValueError('no C expression for %r' % (size,))
 
 
+def exclusion_reason(command):
+    """Why the C does not implement this command, or '' when it does.
+
+    Every command left on the ctypes path has a reason here, so that
+    ``src/check_registry.py`` can account for all of them and nothing is left
+    behind silently.
+    """
+    if command.helper:
+        return 'hand-written family: %s' % (command.helper,)
+    if command.return_type.pointers and not (
+        command.return_type.pointers == 1
+        and command.return_type.base in ('GLubyte', 'GLchar', 'char')
+    ):
+        return 'pointer return: %s' % (command.return_type.declaration(),)
+    if (
+        not command.returns_void
+        and not command.return_type.pointers
+        and cm.scalar_macro(command.return_type) is None
+    ):
+        return 'unknown return type: %s' % (command.return_type.base,)
+    for parameter in command.parameters:
+        if isinstance(parameter.size, model.ImageSize):
+            return 'image-sized parameter'
+        if not parameter.size.declarative:
+            return 'non-declarative size'
+        if parameter.is_string_pointer:
+            return 'string-array parameter'
+        if parameter.is_output and not isinstance(
+            parameter.size, (model.Fixed, model.FromArg, model.GLGetTable)
+        ):
+            return 'output with no expressible size'
+        if not parameter.is_array and parameter.macro is None:
+            return 'unknown parameter type: %s' % (parameter.ctype.base,)
+    return ''
+
+
 def is_emittable(command):
     """Whether the C implements everything this command's callers rely on.
 
