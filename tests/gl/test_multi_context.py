@@ -42,7 +42,11 @@ class TestMultipleContexts(unittest.TestCase):
             handle = self._handle_of(window)
             if handle:
                 dispatch.forget_context(handle)
-        glfw.terminate()
+            glfw.destroy_window(window)
+        glfw.make_context_current(None)
+        # Deliberately not glfw.terminate(): the library is initialised once
+        # for the whole run and shared with every other test, and tearing it
+        # down here leaves them calling into an uninitialised GLFW.
 
     def _handle_of(self, window):
         glfw.make_context_current(window)

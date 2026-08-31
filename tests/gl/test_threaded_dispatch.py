@@ -31,7 +31,9 @@ class TestThreadedDispatch(unittest.TestCase):
             self.skipTest('could not create a context')
 
     def tearDown(self):
-        glfw.terminate()
+        glfw.make_context_current(None)
+        glfw.destroy_window(self.window)
+        # Deliberately not glfw.terminate(): see test_multi_context.
 
     def test_a_fresh_thread_dispatches_correctly(self):
         """The context is made current *on the worker*, as the GL requires."""
