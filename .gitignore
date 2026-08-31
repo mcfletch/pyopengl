@@ -14,3 +14,6 @@ tests/output.ppm
 
 accelerate/manylinux-dist/
 accelerate/src/*.c
+
+# The C dispatch extension, built in place by an editable install.
+OpenGL/_dispatch/*.so
