@@ -138,12 +138,47 @@ static int pygl_make_current(void *handle)
     return 0;
 }
 
-/* Re-read the current context from the platform.  Used on the resolution slow
- * path, and on every call in strict tracking mode. */
+/* Re-read the current context from the platform.
+ *
+ * On the resolution slow path this asks the platform layer in Python, because
+ * that is the only thing that knows which interface owns the current context:
+ * a Linux process can hold GLX and EGL contexts at once, and asking the wrong
+ * one answers "none".  It runs once per entry point per context, so the cost
+ * of a Python call is not on any hot path.
+ *
+ * Strict tracking mode calls this on every call and cannot afford that, so it
+ * uses the raw address of whichever interface was active when the layer was
+ * configured. */
 static void pygl_sync_context(void)
 {
     void *handle;
+    PyObject *answer;
+
+    if (pygl_support == NULL) {
+        return;
+    }
+    answer = PyObject_CallMethod(pygl_support, "current_context", NULL);
+    if (answer == NULL) {
+        PyErr_Clear();
+        return;
+    }
+    handle = (void *)(uintptr_t)PyLong_AsUnsignedLongLong(answer);
+    Py_DECREF(answer);
+    if (PyErr_Occurred()) {
+        PyErr_Clear();
+        return;
+    }
+    if (handle != pygl_current->handle) {
+        pygl_make_current(handle);
+    }
+}
+
+/* The per-call form, for strict tracking. */
+static void pygl_sync_context_fast(void)
+{
+    void *handle;
     if (pygl_get_current_context == NULL) {
+        pygl_sync_context();
         return;
     }
     handle = pygl_get_current_context();
@@ -1586,6 +1621,16 @@ static PyObject *pygl_py_sync_context(PyObject *module, PyObject *noargs)
     Py_RETURN_NONE;
 }
 
+/* Referenced by the strict-tracking path; kept distinct so that the
+ * once-per-context path and the per-call path can differ. */
+static PyObject *pygl_py_sync_context_fast(PyObject *module, PyObject *noargs)
+{
+    (void)module;
+    (void)noargs;
+    pygl_sync_context_fast();
+    Py_RETURN_NONE;
+}
+
 static PyObject *pygl_py_command_count(PyObject *module, PyObject *noargs)
 {
     (void)module;
@@ -1617,6 +1662,8 @@ static PyMethodDef pygl_methods[] = {
      "0 to check with glGetError, 1 to check the GL_KHR_debug flag."},
     {"sync_context", pygl_py_sync_context, METH_NOARGS,
      "Re-read the current context from the platform and switch tables."},
+    {"sync_context_fast", pygl_py_sync_context_fast, METH_NOARGS,
+     "As sync_context, through the raw platform address."},
     {"command_count", pygl_py_command_count, METH_NOARGS,
      "How many entry points the dispatch table holds a slot for."},
     {NULL}};

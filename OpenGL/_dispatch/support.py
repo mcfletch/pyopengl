@@ -262,3 +262,16 @@ def raise_debug_error(identifier, message, name):
         description=message,
         baseOperation=name,
     )
+
+
+def current_context():
+    """Which context is current, as an integer handle.
+
+    The platform layer is the only thing that knows which interface owns it:
+    a Linux process can hold GLX and EGL contexts at once, and asking the
+    wrong one answers "none".
+    """
+    try:
+        return int(platform.PLATFORM.GetCurrentContext() or 0)
+    except Exception:
+        return 0
