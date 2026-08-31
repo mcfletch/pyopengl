@@ -219,7 +219,22 @@ static inline int pygl_wants_error_check(GLProc *self)
     return pygl_current->flags[self->info->slot] & PYGL_F_CHECK_ERRORS;
 }
 
+/* How errors are noticed.  GL_KHR_debug reports them through a callback the
+ * driver invokes during the call, so checking becomes a read of a flag rather
+ * than a glGetError round trip. */
+enum { PYGL_ERRORS_GETERROR = 0, PYGL_ERRORS_DEBUG = 1 };
+extern int pygl_error_mode;
+extern PYGL_THREAD_LOCAL int pygl_debug_pending;
+
 int pygl_check_error(GLProc *self);
+
+static inline int pygl_check_needed(GLProc *self)
+{
+    if (pygl_error_mode == PYGL_ERRORS_DEBUG) {
+        return pygl_debug_pending;
+    }
+    return pygl_current->flags[self->info->slot] & PYGL_F_CHECK_ERRORS;
+}
 PyObject *pygl_arity_error(GLProc *self, Py_ssize_t want, Py_ssize_t got);
 PyObject *pygl_arity_range_error(GLProc *self, Py_ssize_t low, Py_ssize_t high,
                                  Py_ssize_t got);
@@ -381,7 +396,7 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
     } while (0)
 
 #define PYGL_CHECK()                                                           \
-    if (PYGL_UNLIKELY(pygl_wants_error_check(self))) {                         \
+    if (PYGL_UNLIKELY(pygl_check_needed(self))) {                              \
         if (pygl_check_error(self) < 0)                                        \
             goto _fail;                                                        \
     }

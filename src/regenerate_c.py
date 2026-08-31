@@ -42,6 +42,7 @@ def main(argv=None):
         arguments.output,
         report=report,
         tables_path=os.path.join(arguments.package, '_dispatch', '_tables.py'),
+        stubs_root=arguments.package,
     )
     report['slots'] = len(slots)
     with open(arguments.manifest, 'w', encoding='utf-8') as handle:

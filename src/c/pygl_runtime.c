@@ -38,6 +38,16 @@ static int pygl_size_1_array_unpack = 1;
  * error checking is suspended for the duration.  The ctypes path does this
  * through _ErrorChecker.onBegin/onEnd; this is the same switch. */
 static int pygl_error_suspended = 0;
+
+/* GL_KHR_debug reporting.  The driver calls pygl_debug_callback during the GL
+ * call itself when GL_DEBUG_OUTPUT_SYNCHRONOUS is on, so the callback records
+ * what happened and the stub's check becomes a read of `pygl_debug_pending`
+ * rather than a glGetError round trip. */
+int pygl_error_mode = PYGL_ERRORS_GETERROR;
+PYGL_THREAD_LOCAL int pygl_debug_pending = 0;
+#define PYGL_DEBUG_MESSAGE_MAX 1024
+static PYGL_THREAD_LOCAL char pygl_debug_message[PYGL_DEBUG_MESSAGE_MAX];
+static PYGL_THREAD_LOCAL unsigned int pygl_debug_id = 0;
 /* The flag byte a freshly created context table starts every slot at, so that
  * OpenGL.ERROR_CHECKING means the same thing in a context created later. */
 static uint8_t pygl_default_flags = 0;
@@ -277,6 +287,44 @@ void pygl_argument_error(GLProc *self, Py_ssize_t index, const char *expected)
                  index + 1, "TypeError", expected);
 }
 
+/* GL_DEBUG_TYPE_ERROR.  Declared here rather than included so that the runtime
+ * depends on no GL header. */
+#define PYGL_DEBUG_TYPE_ERROR 0x824C
+
+/* Called by the driver, on the calling thread, during the GL call.  It must do
+ * as little as possible: no Python objects, no allocation.  Copying the text
+ * and setting a flag is all that is needed, because the stub reads the flag
+ * immediately afterwards. */
+static void
+#if defined(_WIN32)
+    __stdcall
+#endif
+    pygl_debug_callback(unsigned int source, unsigned int type, unsigned int id,
+                        unsigned int severity, int length, const char *message,
+                        const void *user)
+{
+    size_t limit;
+    (void)source;
+    (void)severity;
+    (void)user;
+    if (type != PYGL_DEBUG_TYPE_ERROR || pygl_error_suspended) {
+        return;
+    }
+    limit = (size_t)(length < 0 ? 0 : length);
+    if (limit == 0 && message != NULL) {
+        limit = strlen(message);
+    }
+    if (limit >= PYGL_DEBUG_MESSAGE_MAX) {
+        limit = PYGL_DEBUG_MESSAGE_MAX - 1;
+    }
+    if (message != NULL && limit) {
+        memcpy(pygl_debug_message, message, limit);
+    }
+    pygl_debug_message[limit] = '\0';
+    pygl_debug_id = id;
+    pygl_debug_pending = 1;
+}
+
 int pygl_check_error(GLProc *self)
 {
     void *fp;
@@ -285,6 +333,17 @@ int pygl_check_error(GLProc *self)
 
     if (pygl_error_suspended) {
         return 0;
+    }
+    if (pygl_error_mode == PYGL_ERRORS_DEBUG) {
+        if (!pygl_debug_pending) {
+            return 0;
+        }
+        pygl_debug_pending = 0;
+        result = PyObject_CallMethod(pygl_support, "raise_debug_error", "Iss",
+                                     pygl_debug_id, pygl_debug_message,
+                                     self->info->name);
+        Py_XDECREF(result);
+        return -1;
     }
     if (pygl_error_slot < 0) {
         return 0;
@@ -1498,6 +1557,27 @@ static PyObject *pygl_py_suspend_error_checking(PyObject *module, PyObject *argu
     Py_RETURN_NONE;
 }
 
+/* The address of the callback, so the Python side can hand it to
+ * glDebugMessageCallback through the ordinary entry point. */
+static PyObject *pygl_py_debug_callback_address(PyObject *module, PyObject *noargs)
+{
+    (void)module;
+    (void)noargs;
+    return PyLong_FromVoidPtr((void *)pygl_debug_callback);
+}
+
+static PyObject *pygl_py_set_error_mode(PyObject *module, PyObject *argument)
+{
+    long mode = PyLong_AsLong(argument);
+    (void)module;
+    if (PyErr_Occurred()) {
+        return NULL;
+    }
+    pygl_error_mode = (int)mode;
+    pygl_debug_pending = 0;
+    Py_RETURN_NONE;
+}
+
 static PyObject *pygl_py_sync_context(PyObject *module, PyObject *noargs)
 {
     (void)module;
@@ -1531,6 +1611,10 @@ static PyMethodDef pygl_methods[] = {
      "Turn per-call error checking on or off, for one entry point or all."},
     {"suspend_error_checking", pygl_py_suspend_error_checking, METH_O,
      "Suspend per-call error checking, for the duration of a glBegin block."},
+    {"debug_callback_address", pygl_py_debug_callback_address, METH_NOARGS,
+     "The address of the GL_KHR_debug callback, for glDebugMessageCallback."},
+    {"set_error_mode", pygl_py_set_error_mode, METH_O,
+     "0 to check with glGetError, 1 to check the GL_KHR_debug flag."},
     {"sync_context", pygl_py_sync_context, METH_NOARGS,
      "Re-read the current context from the platform and switch tables."},
     {"command_count", pygl_py_command_count, METH_NOARGS,

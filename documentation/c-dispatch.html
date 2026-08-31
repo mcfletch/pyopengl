@@ -112,7 +112,38 @@ optional; acceptance is not.</p>
 <p><code>OpenGL.ERROR_CHECKING</code> is read when the layer is configured and
 applies per entry point per context.  <code>glGetError</code> is called from C
 rather than through a Python callback, so checking costs the driver round trip
-and nothing else.</p>
+and nothing else.  <code>OpenGL._dispatch.set_error_checking(enable,
+entry_point=None)</code> changes it at run time, for one entry point or for
+all &#8212; which the import-time flag cannot do.</p>
+
+<h3>Checking through GL_KHR_debug</h3>
+
+<p>The round trip <em>is</em> the cost of error checking.  Where the context
+offers <code>GL_KHR_debug</code>, the driver can report an error through a
+callback during the call instead, and the check afterwards becomes a read of
+the flag that callback set:</p>
+
+<pre>import OpenGL._dispatch as dispatch
+dispatch.use_debug_output(True)</pre>
+
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th><code>glBindTexture</code></th><th>ns</th></tr>
+<tr><td>checking via <code>glGetError</code></td><td>48.9</td></tr>
+<tr><td>checking via <code>GL_KHR_debug</code></td><td>38.4</td></tr>
+<tr><td>no checking at all</td><td>37.6</td></tr>
+</table>
+
+<p>Checking costs 0.8 ns rather than 11 ns, so leaving it on is no longer a
+trade against speed.  The exception is the same <code>GLError</code>, raised
+from the same call; the description is the driver's own message rather than a
+code looked up afterwards.</p>
+
+<p>It requires a context with <code>GL_KHR_debug</code>;
+<code>use_debug_output()</code> returns False and leaves checking as it was
+where there is none.  It turns on <code>GL_DEBUG_OUTPUT_SYNCHRONOUS</code>,
+because the callback has to run during the call it belongs to for the error to
+be attributed to the right entry point.  Messages that are not errors are not
+requested, so the driver does not spend time formatting them.</p>
 
 <h2>Docstrings and introspection</h2>
 

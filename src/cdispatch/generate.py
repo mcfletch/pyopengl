@@ -3,7 +3,7 @@
 import os
 
 from . import ctypes_model as cm
-from . import emit_c, extract, glgets, handwritten
+from . import emit_c, emit_pyi, extract, glgets, handwritten
 
 __all__ = ['generate', 'allocate_slots', 'emit_elements_header']
 
@@ -138,7 +138,8 @@ def _write(path, text):
     return True
 
 
-def generate(package_root, output_root, report=None, tables_path=None):
+def generate(package_root, output_root, report=None, tables_path=None,
+             stubs_root=None):
     """Generate every C artifact from the shipped tree.
 
     Returns the command records, so that callers can report on coverage without
@@ -175,6 +176,24 @@ def generate(package_root, output_root, report=None, tables_path=None):
             emit_c.emit_translation_unit(api, selected, slots),
         )
     _write(os.path.join(output_root, 'pygl_generated.c'), emit_registration(by_api))
+
+    if stubs_root is not None:
+        # One stub file per API namespace, beside the package it describes.
+        for api in extract.APIS:
+            selected = [
+                command
+                for key, command in sorted(commands.items())
+                if key[0] == api
+            ]
+            if not selected:
+                continue
+            directory = os.path.join(stubs_root, api)
+            if not os.path.isdir(directory):
+                continue
+            _write(
+                os.path.join(directory, '__init__.pyi'),
+                emit_pyi.emit_module(api, selected),
+            )
     if tables_path is not None:
         _write(tables_path, emit_tables_module(emit_array_type_names(elements), slots))
 

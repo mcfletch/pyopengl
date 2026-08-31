@@ -7,7 +7,7 @@
 #include "pygl_glgets.h"
 
 static const char *const pygl_GLES2_glAcquireKeyedMutexWin32EXT_args[] = {"memory", "key", "timeout"};
-static const PyGLCommand pygl_GLES2_glAcquireKeyedMutexWin32EXT_info = {"glAcquireKeyedMutexWin32EXT", "glAcquireKeyedMutexWin32EXT(memory, key, timeout) -> GLboolean", "($module, memory, key, timeout, /)", pygl_GLES2_glAcquireKeyedMutexWin32EXT_args, "GLES2_EXT_win32_keyed_mutex", 3, 3330, PYGL_API_GLES2, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLES2_glAcquireKeyedMutexWin32EXT_info = {"glAcquireKeyedMutexWin32EXT", "glAcquireKeyedMutexWin32EXT(memory, key, timeout) -> GLboolean", "($module, memory, key, timeout, /)", pygl_GLES2_glAcquireKeyedMutexWin32EXT_args, "GLES2_EXT_win32_keyed_mutex", 3, 3327, PYGL_API_GLES2, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLES2_glAcquireKeyedMutexWin32EXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -26,7 +26,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glActiveProgramEXT_args[] = {"program"};
-static const PyGLCommand pygl_GLES2_glActiveProgramEXT_info = {"glActiveProgramEXT", "glActiveProgramEXT(program) -> None", "($module, program, /)", pygl_GLES2_glActiveProgramEXT_args, "GLES2_EXT_separate_shader_objects", 1, 3331, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glActiveProgramEXT_info = {"glActiveProgramEXT", "glActiveProgramEXT(program) -> None", "($module, program, /)", pygl_GLES2_glActiveProgramEXT_args, "GLES2_EXT_separate_shader_objects", 1, 3328, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glActiveProgramEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -43,7 +43,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glActiveShaderProgramEXT_args[] = {"pipeline", "program"};
-static const PyGLCommand pygl_GLES2_glActiveShaderProgramEXT_info = {"glActiveShaderProgramEXT", "glActiveShaderProgramEXT(pipeline, program) -> None", "($module, pipeline, program, /)", pygl_GLES2_glActiveShaderProgramEXT_args, "GLES2_EXT_separate_shader_objects", 2, 3332, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glActiveShaderProgramEXT_info = {"glActiveShaderProgramEXT", "glActiveShaderProgramEXT(pipeline, program) -> None", "($module, pipeline, program, /)", pygl_GLES2_glActiveShaderProgramEXT_args, "GLES2_EXT_separate_shader_objects", 2, 3329, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glActiveShaderProgramEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -61,7 +61,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glActiveTexture_args[] = {"texture"};
-static const PyGLCommand pygl_GLES2_glActiveTexture_info = {"glActiveTexture", "glActiveTexture(texture) -> None", "($module, texture, /)", pygl_GLES2_glActiveTexture_args, "GLES2_VERSION_GLES2_2_0", 1, 3333, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glActiveTexture_info = {"glActiveTexture", "glActiveTexture(texture) -> None", "($module, texture, /)", pygl_GLES2_glActiveTexture_args, "GLES2_VERSION_GLES2_2_0", 1, 3330, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glActiveTexture(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -78,7 +78,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glAlphaFuncQCOM_args[] = {"func", "ref"};
-static const PyGLCommand pygl_GLES2_glAlphaFuncQCOM_info = {"glAlphaFuncQCOM", "glAlphaFuncQCOM(func, ref) -> None", "($module, func, ref, /)", pygl_GLES2_glAlphaFuncQCOM_args, "GLES2_QCOM_alpha_test", 2, 3334, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glAlphaFuncQCOM_info = {"glAlphaFuncQCOM", "glAlphaFuncQCOM(func, ref) -> None", "($module, func, ref, /)", pygl_GLES2_glAlphaFuncQCOM_args, "GLES2_QCOM_alpha_test", 2, 3331, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glAlphaFuncQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -95,7 +95,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glApplyFramebufferAttachmentCMAAINTEL_info = {"glApplyFramebufferAttachmentCMAAINTEL", "glApplyFramebufferAttachmentCMAAINTEL() -> None", "($module, /)", NULL, "GLES2_INTEL_framebuffer_CMAA", 0, 3335, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glApplyFramebufferAttachmentCMAAINTEL_info = {"glApplyFramebufferAttachmentCMAAINTEL", "glApplyFramebufferAttachmentCMAAINTEL() -> None", "($module, /)", NULL, "GLES2_INTEL_framebuffer_CMAA", 0, 3332, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glApplyFramebufferAttachmentCMAAINTEL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -111,7 +111,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glAttachShader_args[] = {"program", "shader"};
-static const PyGLCommand pygl_GLES2_glAttachShader_info = {"glAttachShader", "glAttachShader(program, shader) -> None", "($module, program, shader, /)", pygl_GLES2_glAttachShader_args, "GLES2_VERSION_GLES2_2_0", 2, 3336, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glAttachShader_info = {"glAttachShader", "glAttachShader(program, shader) -> None", "($module, program, shader, /)", pygl_GLES2_glAttachShader_args, "GLES2_VERSION_GLES2_2_0", 2, 3333, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glAttachShader(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -129,7 +129,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBeginConditionalRenderNV_args[] = {"id", "mode"};
-static const PyGLCommand pygl_GLES2_glBeginConditionalRenderNV_info = {"glBeginConditionalRenderNV", "glBeginConditionalRenderNV(id, mode) -> None", "($module, id, mode, /)", pygl_GLES2_glBeginConditionalRenderNV_args, "GLES2_NV_conditional_render", 2, 3337, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glBeginConditionalRenderNV_info = {"glBeginConditionalRenderNV", "glBeginConditionalRenderNV(id, mode) -> None", "($module, id, mode, /)", pygl_GLES2_glBeginConditionalRenderNV_args, "GLES2_NV_conditional_render", 2, 3334, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBeginConditionalRenderNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -147,7 +147,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBeginPerfMonitorAMD_args[] = {"monitor"};
-static const PyGLCommand pygl_GLES2_glBeginPerfMonitorAMD_info = {"glBeginPerfMonitorAMD", "glBeginPerfMonitorAMD(monitor) -> None", "($module, monitor, /)", pygl_GLES2_glBeginPerfMonitorAMD_args, "GLES2_AMD_performance_monitor", 1, 3338, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glBeginPerfMonitorAMD_info = {"glBeginPerfMonitorAMD", "glBeginPerfMonitorAMD(monitor) -> None", "($module, monitor, /)", pygl_GLES2_glBeginPerfMonitorAMD_args, "GLES2_AMD_performance_monitor", 1, 3335, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBeginPerfMonitorAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -164,7 +164,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBeginPerfQueryINTEL_args[] = {"queryHandle"};
-static const PyGLCommand pygl_GLES2_glBeginPerfQueryINTEL_info = {"glBeginPerfQueryINTEL", "glBeginPerfQueryINTEL(queryHandle) -> None", "($module, queryHandle, /)", pygl_GLES2_glBeginPerfQueryINTEL_args, "GLES2_INTEL_performance_query", 1, 3339, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glBeginPerfQueryINTEL_info = {"glBeginPerfQueryINTEL", "glBeginPerfQueryINTEL(queryHandle) -> None", "($module, queryHandle, /)", pygl_GLES2_glBeginPerfQueryINTEL_args, "GLES2_INTEL_performance_query", 1, 3336, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBeginPerfQueryINTEL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -181,7 +181,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBeginQueryEXT_args[] = {"target", "id"};
-static const PyGLCommand pygl_GLES2_glBeginQueryEXT_info = {"glBeginQueryEXT", "glBeginQueryEXT(target, id) -> None", "($module, target, id, /)", pygl_GLES2_glBeginQueryEXT_args, "GLES2_EXT_occlusion_query_boolean", 2, 3340, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glBeginQueryEXT_info = {"glBeginQueryEXT", "glBeginQueryEXT(target, id) -> None", "($module, target, id, /)", pygl_GLES2_glBeginQueryEXT_args, "GLES2_EXT_occlusion_query_boolean", 2, 3337, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBeginQueryEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -199,7 +199,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBindAttribLocation_args[] = {"program", "index", "name"};
-static const PyGLCommand pygl_GLES2_glBindAttribLocation_info = {"glBindAttribLocation", "glBindAttribLocation(program, index, name) -> None", "($module, program, index, name, /)", pygl_GLES2_glBindAttribLocation_args, "GLES2_VERSION_GLES2_2_0", 3, 3341, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glBindAttribLocation_info = {"glBindAttribLocation", "glBindAttribLocation(program, index, name) -> None", "($module, program, index, name, /)", pygl_GLES2_glBindAttribLocation_args, "GLES2_VERSION_GLES2_2_0", 3, 3338, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBindAttribLocation(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -221,7 +221,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBindBuffer_args[] = {"target", "buffer"};
-static const PyGLCommand pygl_GLES2_glBindBuffer_info = {"glBindBuffer", "glBindBuffer(target, buffer) -> None", "($module, target, buffer, /)", pygl_GLES2_glBindBuffer_args, "GLES2_VERSION_GLES2_2_0", 2, 3342, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glBindBuffer_info = {"glBindBuffer", "glBindBuffer(target, buffer) -> None", "($module, target, buffer, /)", pygl_GLES2_glBindBuffer_args, "GLES2_VERSION_GLES2_2_0", 2, 3339, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBindBuffer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -239,7 +239,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBindFragDataLocationEXT_args[] = {"program", "color", "name"};
-static const PyGLCommand pygl_GLES2_glBindFragDataLocationEXT_info = {"glBindFragDataLocationEXT", "glBindFragDataLocationEXT(program, color, name) -> None", "($module, program, color, name, /)", pygl_GLES2_glBindFragDataLocationEXT_args, "GLES2_EXT_blend_func_extended", 3, 3343, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glBindFragDataLocationEXT_info = {"glBindFragDataLocationEXT", "glBindFragDataLocationEXT(program, color, name) -> None", "($module, program, color, name, /)", pygl_GLES2_glBindFragDataLocationEXT_args, "GLES2_EXT_blend_func_extended", 3, 3340, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBindFragDataLocationEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -261,7 +261,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBindFragDataLocationIndexedEXT_args[] = {"program", "colorNumber", "index", "name"};
-static const PyGLCommand pygl_GLES2_glBindFragDataLocationIndexedEXT_info = {"glBindFragDataLocationIndexedEXT", "glBindFragDataLocationIndexedEXT(program, colorNumber, index, name) -> None", "($module, program, colorNumber, index, name, /)", pygl_GLES2_glBindFragDataLocationIndexedEXT_args, "GLES2_EXT_blend_func_extended", 4, 3344, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glBindFragDataLocationIndexedEXT_info = {"glBindFragDataLocationIndexedEXT", "glBindFragDataLocationIndexedEXT(program, colorNumber, index, name) -> None", "($module, program, colorNumber, index, name, /)", pygl_GLES2_glBindFragDataLocationIndexedEXT_args, "GLES2_EXT_blend_func_extended", 4, 3341, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBindFragDataLocationIndexedEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -284,7 +284,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBindFramebuffer_args[] = {"target", "framebuffer"};
-static const PyGLCommand pygl_GLES2_glBindFramebuffer_info = {"glBindFramebuffer", "glBindFramebuffer(target, framebuffer) -> None", "($module, target, framebuffer, /)", pygl_GLES2_glBindFramebuffer_args, "GLES2_VERSION_GLES2_2_0", 2, 3345, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glBindFramebuffer_info = {"glBindFramebuffer", "glBindFramebuffer(target, framebuffer) -> None", "($module, target, framebuffer, /)", pygl_GLES2_glBindFramebuffer_args, "GLES2_VERSION_GLES2_2_0", 2, 3342, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBindFramebuffer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -302,7 +302,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBindProgramPipelineEXT_args[] = {"pipeline"};
-static const PyGLCommand pygl_GLES2_glBindProgramPipelineEXT_info = {"glBindProgramPipelineEXT", "glBindProgramPipelineEXT(pipeline) -> None", "($module, pipeline, /)", pygl_GLES2_glBindProgramPipelineEXT_args, "GLES2_EXT_separate_shader_objects", 1, 3346, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glBindProgramPipelineEXT_info = {"glBindProgramPipelineEXT", "glBindProgramPipelineEXT(pipeline) -> None", "($module, pipeline, /)", pygl_GLES2_glBindProgramPipelineEXT_args, "GLES2_EXT_separate_shader_objects", 1, 3343, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBindProgramPipelineEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -319,7 +319,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBindRenderbuffer_args[] = {"target", "renderbuffer"};
-static const PyGLCommand pygl_GLES2_glBindRenderbuffer_info = {"glBindRenderbuffer", "glBindRenderbuffer(target, renderbuffer) -> None", "($module, target, renderbuffer, /)", pygl_GLES2_glBindRenderbuffer_args, "GLES2_VERSION_GLES2_2_0", 2, 3347, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glBindRenderbuffer_info = {"glBindRenderbuffer", "glBindRenderbuffer(target, renderbuffer) -> None", "($module, target, renderbuffer, /)", pygl_GLES2_glBindRenderbuffer_args, "GLES2_VERSION_GLES2_2_0", 2, 3344, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBindRenderbuffer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -337,7 +337,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBindSampler_args[] = {"unit", "sampler"};
-static const PyGLCommand pygl_GLES2_glBindSampler_info = {"glBindSampler", "glBindSampler(unit, sampler) -> None", "($module, unit, sampler, /)", pygl_GLES2_glBindSampler_args, "GLES2_MESA_sampler_objects", 2, 3348, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glBindSampler_info = {"glBindSampler", "glBindSampler(unit, sampler) -> None", "($module, unit, sampler, /)", pygl_GLES2_glBindSampler_args, "GLES2_MESA_sampler_objects", 2, 3345, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBindSampler(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -355,7 +355,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBindShadingRateImageNV_args[] = {"texture"};
-static const PyGLCommand pygl_GLES2_glBindShadingRateImageNV_info = {"glBindShadingRateImageNV", "glBindShadingRateImageNV(texture) -> None", "($module, texture, /)", pygl_GLES2_glBindShadingRateImageNV_args, "GLES2_NV_shading_rate_image", 1, 3349, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glBindShadingRateImageNV_info = {"glBindShadingRateImageNV", "glBindShadingRateImageNV(texture) -> None", "($module, texture, /)", pygl_GLES2_glBindShadingRateImageNV_args, "GLES2_NV_shading_rate_image", 1, 3346, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBindShadingRateImageNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -372,7 +372,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBindTexture_args[] = {"target", "texture"};
-static const PyGLCommand pygl_GLES2_glBindTexture_info = {"glBindTexture", "glBindTexture(target, texture) -> None", "($module, target, texture, /)", pygl_GLES2_glBindTexture_args, "GLES2_VERSION_GLES2_2_0", 2, 3350, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glBindTexture_info = {"glBindTexture", "glBindTexture(target, texture) -> None", "($module, target, texture, /)", pygl_GLES2_glBindTexture_args, "GLES2_VERSION_GLES2_2_0", 2, 3347, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBindTexture(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -390,7 +390,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBindVertexArrayOES_args[] = {"array"};
-static const PyGLCommand pygl_GLES2_glBindVertexArrayOES_info = {"glBindVertexArrayOES", "glBindVertexArrayOES(array) -> None", "($module, array, /)", pygl_GLES2_glBindVertexArrayOES_args, "GLES2_OES_vertex_array_object", 1, 3351, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glBindVertexArrayOES_info = {"glBindVertexArrayOES", "glBindVertexArrayOES(array) -> None", "($module, array, /)", pygl_GLES2_glBindVertexArrayOES_args, "GLES2_OES_vertex_array_object", 1, 3348, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBindVertexArrayOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -406,7 +406,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glBlendBarrier_info = {"glBlendBarrier", "glBlendBarrier() -> None", "($module, /)", NULL, "GLES2_ES_VERSION_3_2", 0, 3352, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendBarrier_info = {"glBlendBarrier", "glBlendBarrier() -> None", "($module, /)", NULL, "GLES2_ES_VERSION_3_2", 0, 3349, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendBarrier(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -421,7 +421,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glBlendBarrierKHR_info = {"glBlendBarrierKHR", "glBlendBarrierKHR() -> None", "($module, /)", NULL, "GLES2_KHR_blend_equation_advanced", 0, 3353, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendBarrierKHR_info = {"glBlendBarrierKHR", "glBlendBarrierKHR() -> None", "($module, /)", NULL, "GLES2_KHR_blend_equation_advanced", 0, 3350, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendBarrierKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -436,7 +436,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glBlendBarrierNV_info = {"glBlendBarrierNV", "glBlendBarrierNV() -> None", "($module, /)", NULL, "GLES2_NV_blend_equation_advanced", 0, 3354, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendBarrierNV_info = {"glBlendBarrierNV", "glBlendBarrierNV() -> None", "($module, /)", NULL, "GLES2_NV_blend_equation_advanced", 0, 3351, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendBarrierNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -452,7 +452,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendColor_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLES2_glBlendColor_info = {"glBlendColor", "glBlendColor(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES2_glBlendColor_args, "GLES2_VERSION_GLES2_2_0", 4, 3355, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendColor_info = {"glBlendColor", "glBlendColor(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES2_glBlendColor_args, "GLES2_VERSION_GLES2_2_0", 4, 3352, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendColor(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -472,7 +472,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendEquation_args[] = {"mode"};
-static const PyGLCommand pygl_GLES2_glBlendEquation_info = {"glBlendEquation", "glBlendEquation(mode) -> None", "($module, mode, /)", pygl_GLES2_glBlendEquation_args, "GLES2_VERSION_GLES2_2_0", 1, 3356, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendEquation_info = {"glBlendEquation", "glBlendEquation(mode) -> None", "($module, mode, /)", pygl_GLES2_glBlendEquation_args, "GLES2_VERSION_GLES2_2_0", 1, 3353, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendEquation(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -489,7 +489,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendEquationEXT_args[] = {"mode"};
-static const PyGLCommand pygl_GLES2_glBlendEquationEXT_info = {"glBlendEquationEXT", "glBlendEquationEXT(mode) -> None", "($module, mode, /)", pygl_GLES2_glBlendEquationEXT_args, "GLES2_EXT_blend_minmax", 1, 3357, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendEquationEXT_info = {"glBlendEquationEXT", "glBlendEquationEXT(mode) -> None", "($module, mode, /)", pygl_GLES2_glBlendEquationEXT_args, "GLES2_EXT_blend_minmax", 1, 3354, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendEquationEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -506,7 +506,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendEquationSeparate_args[] = {"modeRGB", "modeAlpha"};
-static const PyGLCommand pygl_GLES2_glBlendEquationSeparate_info = {"glBlendEquationSeparate", "glBlendEquationSeparate(modeRGB, modeAlpha) -> None", "($module, modeRGB, modeAlpha, /)", pygl_GLES2_glBlendEquationSeparate_args, "GLES2_VERSION_GLES2_2_0", 2, 3358, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendEquationSeparate_info = {"glBlendEquationSeparate", "glBlendEquationSeparate(modeRGB, modeAlpha) -> None", "($module, modeRGB, modeAlpha, /)", pygl_GLES2_glBlendEquationSeparate_args, "GLES2_VERSION_GLES2_2_0", 2, 3355, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendEquationSeparate(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -524,7 +524,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendEquationSeparatei_args[] = {"buf", "modeRGB", "modeAlpha"};
-static const PyGLCommand pygl_GLES2_glBlendEquationSeparatei_info = {"glBlendEquationSeparatei", "glBlendEquationSeparatei(buf, modeRGB, modeAlpha) -> None", "($module, buf, modeRGB, modeAlpha, /)", pygl_GLES2_glBlendEquationSeparatei_args, "GLES2_ES_VERSION_3_2", 3, 3359, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendEquationSeparatei_info = {"glBlendEquationSeparatei", "glBlendEquationSeparatei(buf, modeRGB, modeAlpha) -> None", "($module, buf, modeRGB, modeAlpha, /)", pygl_GLES2_glBlendEquationSeparatei_args, "GLES2_ES_VERSION_3_2", 3, 3356, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendEquationSeparatei(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -543,7 +543,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendEquationSeparateiEXT_args[] = {"buf", "modeRGB", "modeAlpha"};
-static const PyGLCommand pygl_GLES2_glBlendEquationSeparateiEXT_info = {"glBlendEquationSeparateiEXT", "glBlendEquationSeparateiEXT(buf, modeRGB, modeAlpha) -> None", "($module, buf, modeRGB, modeAlpha, /)", pygl_GLES2_glBlendEquationSeparateiEXT_args, "GLES2_EXT_draw_buffers_indexed", 3, 3360, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendEquationSeparateiEXT_info = {"glBlendEquationSeparateiEXT", "glBlendEquationSeparateiEXT(buf, modeRGB, modeAlpha) -> None", "($module, buf, modeRGB, modeAlpha, /)", pygl_GLES2_glBlendEquationSeparateiEXT_args, "GLES2_EXT_draw_buffers_indexed", 3, 3357, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendEquationSeparateiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -562,7 +562,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendEquationSeparateiOES_args[] = {"buf", "modeRGB", "modeAlpha"};
-static const PyGLCommand pygl_GLES2_glBlendEquationSeparateiOES_info = {"glBlendEquationSeparateiOES", "glBlendEquationSeparateiOES(buf, modeRGB, modeAlpha) -> None", "($module, buf, modeRGB, modeAlpha, /)", pygl_GLES2_glBlendEquationSeparateiOES_args, "GLES2_OES_draw_buffers_indexed", 3, 3361, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendEquationSeparateiOES_info = {"glBlendEquationSeparateiOES", "glBlendEquationSeparateiOES(buf, modeRGB, modeAlpha) -> None", "($module, buf, modeRGB, modeAlpha, /)", pygl_GLES2_glBlendEquationSeparateiOES_args, "GLES2_OES_draw_buffers_indexed", 3, 3358, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendEquationSeparateiOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -581,7 +581,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendEquationi_args[] = {"buf", "mode"};
-static const PyGLCommand pygl_GLES2_glBlendEquationi_info = {"glBlendEquationi", "glBlendEquationi(buf, mode) -> None", "($module, buf, mode, /)", pygl_GLES2_glBlendEquationi_args, "GLES2_ES_VERSION_3_2", 2, 3362, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendEquationi_info = {"glBlendEquationi", "glBlendEquationi(buf, mode) -> None", "($module, buf, mode, /)", pygl_GLES2_glBlendEquationi_args, "GLES2_ES_VERSION_3_2", 2, 3359, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendEquationi(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -599,7 +599,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendEquationiEXT_args[] = {"buf", "mode"};
-static const PyGLCommand pygl_GLES2_glBlendEquationiEXT_info = {"glBlendEquationiEXT", "glBlendEquationiEXT(buf, mode) -> None", "($module, buf, mode, /)", pygl_GLES2_glBlendEquationiEXT_args, "GLES2_EXT_draw_buffers_indexed", 2, 3363, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendEquationiEXT_info = {"glBlendEquationiEXT", "glBlendEquationiEXT(buf, mode) -> None", "($module, buf, mode, /)", pygl_GLES2_glBlendEquationiEXT_args, "GLES2_EXT_draw_buffers_indexed", 2, 3360, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendEquationiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -617,7 +617,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendEquationiOES_args[] = {"buf", "mode"};
-static const PyGLCommand pygl_GLES2_glBlendEquationiOES_info = {"glBlendEquationiOES", "glBlendEquationiOES(buf, mode) -> None", "($module, buf, mode, /)", pygl_GLES2_glBlendEquationiOES_args, "GLES2_OES_draw_buffers_indexed", 2, 3364, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendEquationiOES_info = {"glBlendEquationiOES", "glBlendEquationiOES(buf, mode) -> None", "($module, buf, mode, /)", pygl_GLES2_glBlendEquationiOES_args, "GLES2_OES_draw_buffers_indexed", 2, 3361, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendEquationiOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -635,7 +635,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendFunc_args[] = {"sfactor", "dfactor"};
-static const PyGLCommand pygl_GLES2_glBlendFunc_info = {"glBlendFunc", "glBlendFunc(sfactor, dfactor) -> None", "($module, sfactor, dfactor, /)", pygl_GLES2_glBlendFunc_args, "GLES2_VERSION_GLES2_2_0", 2, 3365, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendFunc_info = {"glBlendFunc", "glBlendFunc(sfactor, dfactor) -> None", "($module, sfactor, dfactor, /)", pygl_GLES2_glBlendFunc_args, "GLES2_VERSION_GLES2_2_0", 2, 3362, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendFunc(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -653,7 +653,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendFuncSeparate_args[] = {"sfactorRGB", "dfactorRGB", "sfactorAlpha", "dfactorAlpha"};
-static const PyGLCommand pygl_GLES2_glBlendFuncSeparate_info = {"glBlendFuncSeparate", "glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha) -> None", "($module, sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha, /)", pygl_GLES2_glBlendFuncSeparate_args, "GLES2_VERSION_GLES2_2_0", 4, 3366, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendFuncSeparate_info = {"glBlendFuncSeparate", "glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha) -> None", "($module, sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha, /)", pygl_GLES2_glBlendFuncSeparate_args, "GLES2_VERSION_GLES2_2_0", 4, 3363, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendFuncSeparate(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -673,7 +673,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendFuncSeparatei_args[] = {"buf", "srcRGB", "dstRGB", "srcAlpha", "dstAlpha"};
-static const PyGLCommand pygl_GLES2_glBlendFuncSeparatei_info = {"glBlendFuncSeparatei", "glBlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha) -> None", "($module, buf, srcRGB, dstRGB, srcAlpha, dstAlpha, /)", pygl_GLES2_glBlendFuncSeparatei_args, "GLES2_ES_VERSION_3_2", 5, 3367, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendFuncSeparatei_info = {"glBlendFuncSeparatei", "glBlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha) -> None", "($module, buf, srcRGB, dstRGB, srcAlpha, dstAlpha, /)", pygl_GLES2_glBlendFuncSeparatei_args, "GLES2_ES_VERSION_3_2", 5, 3364, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendFuncSeparatei(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -694,7 +694,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendFuncSeparateiEXT_args[] = {"buf", "srcRGB", "dstRGB", "srcAlpha", "dstAlpha"};
-static const PyGLCommand pygl_GLES2_glBlendFuncSeparateiEXT_info = {"glBlendFuncSeparateiEXT", "glBlendFuncSeparateiEXT(buf, srcRGB, dstRGB, srcAlpha, dstAlpha) -> None", "($module, buf, srcRGB, dstRGB, srcAlpha, dstAlpha, /)", pygl_GLES2_glBlendFuncSeparateiEXT_args, "GLES2_EXT_draw_buffers_indexed", 5, 3368, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendFuncSeparateiEXT_info = {"glBlendFuncSeparateiEXT", "glBlendFuncSeparateiEXT(buf, srcRGB, dstRGB, srcAlpha, dstAlpha) -> None", "($module, buf, srcRGB, dstRGB, srcAlpha, dstAlpha, /)", pygl_GLES2_glBlendFuncSeparateiEXT_args, "GLES2_EXT_draw_buffers_indexed", 5, 3365, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendFuncSeparateiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -715,7 +715,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendFuncSeparateiOES_args[] = {"buf", "srcRGB", "dstRGB", "srcAlpha", "dstAlpha"};
-static const PyGLCommand pygl_GLES2_glBlendFuncSeparateiOES_info = {"glBlendFuncSeparateiOES", "glBlendFuncSeparateiOES(buf, srcRGB, dstRGB, srcAlpha, dstAlpha) -> None", "($module, buf, srcRGB, dstRGB, srcAlpha, dstAlpha, /)", pygl_GLES2_glBlendFuncSeparateiOES_args, "GLES2_OES_draw_buffers_indexed", 5, 3369, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendFuncSeparateiOES_info = {"glBlendFuncSeparateiOES", "glBlendFuncSeparateiOES(buf, srcRGB, dstRGB, srcAlpha, dstAlpha) -> None", "($module, buf, srcRGB, dstRGB, srcAlpha, dstAlpha, /)", pygl_GLES2_glBlendFuncSeparateiOES_args, "GLES2_OES_draw_buffers_indexed", 5, 3366, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendFuncSeparateiOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -736,7 +736,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendFunci_args[] = {"buf", "src", "dst"};
-static const PyGLCommand pygl_GLES2_glBlendFunci_info = {"glBlendFunci", "glBlendFunci(buf, src, dst) -> None", "($module, buf, src, dst, /)", pygl_GLES2_glBlendFunci_args, "GLES2_ES_VERSION_3_2", 3, 3370, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendFunci_info = {"glBlendFunci", "glBlendFunci(buf, src, dst) -> None", "($module, buf, src, dst, /)", pygl_GLES2_glBlendFunci_args, "GLES2_ES_VERSION_3_2", 3, 3367, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendFunci(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -755,7 +755,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendFunciEXT_args[] = {"buf", "src", "dst"};
-static const PyGLCommand pygl_GLES2_glBlendFunciEXT_info = {"glBlendFunciEXT", "glBlendFunciEXT(buf, src, dst) -> None", "($module, buf, src, dst, /)", pygl_GLES2_glBlendFunciEXT_args, "GLES2_EXT_draw_buffers_indexed", 3, 3371, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendFunciEXT_info = {"glBlendFunciEXT", "glBlendFunciEXT(buf, src, dst) -> None", "($module, buf, src, dst, /)", pygl_GLES2_glBlendFunciEXT_args, "GLES2_EXT_draw_buffers_indexed", 3, 3368, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendFunciEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -774,7 +774,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendFunciOES_args[] = {"buf", "src", "dst"};
-static const PyGLCommand pygl_GLES2_glBlendFunciOES_info = {"glBlendFunciOES", "glBlendFunciOES(buf, src, dst) -> None", "($module, buf, src, dst, /)", pygl_GLES2_glBlendFunciOES_args, "GLES2_OES_draw_buffers_indexed", 3, 3372, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendFunciOES_info = {"glBlendFunciOES", "glBlendFunciOES(buf, src, dst) -> None", "($module, buf, src, dst, /)", pygl_GLES2_glBlendFunciOES_args, "GLES2_OES_draw_buffers_indexed", 3, 3369, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendFunciOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -793,7 +793,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlendParameteriNV_args[] = {"pname", "value"};
-static const PyGLCommand pygl_GLES2_glBlendParameteriNV_info = {"glBlendParameteriNV", "glBlendParameteriNV(pname, value) -> None", "($module, pname, value, /)", pygl_GLES2_glBlendParameteriNV_args, "GLES2_NV_blend_equation_advanced", 2, 3373, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlendParameteriNV_info = {"glBlendParameteriNV", "glBlendParameteriNV(pname, value) -> None", "($module, pname, value, /)", pygl_GLES2_glBlendParameteriNV_args, "GLES2_NV_blend_equation_advanced", 2, 3370, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlendParameteriNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -811,7 +811,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlitFramebufferANGLE_args[] = {"srcX0", "srcY0", "srcX1", "srcY1", "dstX0", "dstY0", "dstX1", "dstY1", "mask", "filter"};
-static const PyGLCommand pygl_GLES2_glBlitFramebufferANGLE_info = {"glBlitFramebufferANGLE", "glBlitFramebufferANGLE(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> None", "($module, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter, /)", pygl_GLES2_glBlitFramebufferANGLE_args, "GLES2_ANGLE_framebuffer_blit", 10, 3374, PYGL_API_GLES2, 0, 10, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlitFramebufferANGLE_info = {"glBlitFramebufferANGLE", "glBlitFramebufferANGLE(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> None", "($module, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter, /)", pygl_GLES2_glBlitFramebufferANGLE_args, "GLES2_ANGLE_framebuffer_blit", 10, 3371, PYGL_API_GLES2, 0, 10, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlitFramebufferANGLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -837,7 +837,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlitFramebufferLayerEXT_args[] = {"srcX0", "srcY0", "srcX1", "srcY1", "srcLayer", "dstX0", "dstY0", "dstX1", "dstY1", "dstLayer", "mask", "filter"};
-static const PyGLCommand pygl_GLES2_glBlitFramebufferLayerEXT_info = {"glBlitFramebufferLayerEXT", "glBlitFramebufferLayerEXT(srcX0, srcY0, srcX1, srcY1, srcLayer, dstX0, dstY0, dstX1, dstY1, dstLayer, mask, filter) -> None", "($module, srcX0, srcY0, srcX1, srcY1, srcLayer, dstX0, dstY0, dstX1, dstY1, dstLayer, mask, filter, /)", pygl_GLES2_glBlitFramebufferLayerEXT_args, "GLES2_EXT_framebuffer_blit_layers", 12, 3375, PYGL_API_GLES2, 0, 12, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlitFramebufferLayerEXT_info = {"glBlitFramebufferLayerEXT", "glBlitFramebufferLayerEXT(srcX0, srcY0, srcX1, srcY1, srcLayer, dstX0, dstY0, dstX1, dstY1, dstLayer, mask, filter) -> None", "($module, srcX0, srcY0, srcX1, srcY1, srcLayer, dstX0, dstY0, dstX1, dstY1, dstLayer, mask, filter, /)", pygl_GLES2_glBlitFramebufferLayerEXT_args, "GLES2_EXT_framebuffer_blit_layers", 12, 3372, PYGL_API_GLES2, 0, 12, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlitFramebufferLayerEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -865,7 +865,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlitFramebufferLayersEXT_args[] = {"srcX0", "srcY0", "srcX1", "srcY1", "dstX0", "dstY0", "dstX1", "dstY1", "mask", "filter"};
-static const PyGLCommand pygl_GLES2_glBlitFramebufferLayersEXT_info = {"glBlitFramebufferLayersEXT", "glBlitFramebufferLayersEXT(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> None", "($module, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter, /)", pygl_GLES2_glBlitFramebufferLayersEXT_args, "GLES2_EXT_framebuffer_blit_layers", 10, 3376, PYGL_API_GLES2, 0, 10, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlitFramebufferLayersEXT_info = {"glBlitFramebufferLayersEXT", "glBlitFramebufferLayersEXT(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> None", "($module, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter, /)", pygl_GLES2_glBlitFramebufferLayersEXT_args, "GLES2_EXT_framebuffer_blit_layers", 10, 3373, PYGL_API_GLES2, 0, 10, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlitFramebufferLayersEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -891,7 +891,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBlitFramebufferNV_args[] = {"srcX0", "srcY0", "srcX1", "srcY1", "dstX0", "dstY0", "dstX1", "dstY1", "mask", "filter"};
-static const PyGLCommand pygl_GLES2_glBlitFramebufferNV_info = {"glBlitFramebufferNV", "glBlitFramebufferNV(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> None", "($module, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter, /)", pygl_GLES2_glBlitFramebufferNV_args, "GLES2_NV_framebuffer_blit", 10, 3377, PYGL_API_GLES2, 0, 10, 0, 0};
+static const PyGLCommand pygl_GLES2_glBlitFramebufferNV_info = {"glBlitFramebufferNV", "glBlitFramebufferNV(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> None", "($module, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter, /)", pygl_GLES2_glBlitFramebufferNV_args, "GLES2_NV_framebuffer_blit", 10, 3374, PYGL_API_GLES2, 0, 10, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBlitFramebufferNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -917,7 +917,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBufferAttachMemoryNV_args[] = {"target", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glBufferAttachMemoryNV_info = {"glBufferAttachMemoryNV", "glBufferAttachMemoryNV(target, memory, offset) -> None", "($module, target, memory, offset, /)", pygl_GLES2_glBufferAttachMemoryNV_args, "GLES2_NV_memory_attachment", 3, 3378, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glBufferAttachMemoryNV_info = {"glBufferAttachMemoryNV", "glBufferAttachMemoryNV(target, memory, offset) -> None", "($module, target, memory, offset, /)", pygl_GLES2_glBufferAttachMemoryNV_args, "GLES2_NV_memory_attachment", 3, 3375, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBufferAttachMemoryNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -936,7 +936,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBufferPageCommitmentMemNV_args[] = {"target", "offset", "size", "memory", "memOffset", "commit"};
-static const PyGLCommand pygl_GLES2_glBufferPageCommitmentMemNV_info = {"glBufferPageCommitmentMemNV", "glBufferPageCommitmentMemNV(target, offset, size, memory, memOffset, commit) -> None", "($module, target, offset, size, memory, memOffset, commit, /)", pygl_GLES2_glBufferPageCommitmentMemNV_args, "GLES2_NV_memory_object_sparse", 6, 3379, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glBufferPageCommitmentMemNV_info = {"glBufferPageCommitmentMemNV", "glBufferPageCommitmentMemNV(target, offset, size, memory, memOffset, commit) -> None", "($module, target, offset, size, memory, memOffset, commit, /)", pygl_GLES2_glBufferPageCommitmentMemNV_args, "GLES2_NV_memory_object_sparse", 6, 3376, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBufferPageCommitmentMemNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -958,7 +958,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBufferStorageEXT_args[] = {"target", "size", "data", "flags"};
-static const PyGLCommand pygl_GLES2_glBufferStorageEXT_info = {"glBufferStorageEXT", "glBufferStorageEXT(target, size, data, flags) -> None", "($module, target, size, data, flags, /)", pygl_GLES2_glBufferStorageEXT_args, "GLES2_EXT_buffer_storage", 4, 3380, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glBufferStorageEXT_info = {"glBufferStorageEXT", "glBufferStorageEXT(target, size, data, flags) -> None", "($module, target, size, data, flags, /)", pygl_GLES2_glBufferStorageEXT_args, "GLES2_EXT_buffer_storage", 4, 3377, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBufferStorageEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -981,7 +981,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBufferStorageExternalEXT_args[] = {"target", "offset", "size", "clientBuffer", "flags"};
-static const PyGLCommand pygl_GLES2_glBufferStorageExternalEXT_info = {"glBufferStorageExternalEXT", "glBufferStorageExternalEXT(target, offset, size, clientBuffer, flags) -> None", "($module, target, offset, size, clientBuffer, flags, /)", pygl_GLES2_glBufferStorageExternalEXT_args, "GLES2_EXT_external_buffer", 5, 3381, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glBufferStorageExternalEXT_info = {"glBufferStorageExternalEXT", "glBufferStorageExternalEXT(target, offset, size, clientBuffer, flags) -> None", "($module, target, offset, size, clientBuffer, flags, /)", pygl_GLES2_glBufferStorageExternalEXT_args, "GLES2_EXT_external_buffer", 5, 3378, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBufferStorageExternalEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1002,7 +1002,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glBufferStorageMemEXT_args[] = {"target", "size", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glBufferStorageMemEXT_info = {"glBufferStorageMemEXT", "glBufferStorageMemEXT(target, size, memory, offset) -> None", "($module, target, size, memory, offset, /)", pygl_GLES2_glBufferStorageMemEXT_args, "GLES2_EXT_memory_object", 4, 3382, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glBufferStorageMemEXT_info = {"glBufferStorageMemEXT", "glBufferStorageMemEXT(target, size, memory, offset) -> None", "($module, target, size, memory, offset, /)", pygl_GLES2_glBufferStorageMemEXT_args, "GLES2_EXT_memory_object", 4, 3379, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glBufferStorageMemEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1022,7 +1022,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCheckFramebufferStatus_args[] = {"target"};
-static const PyGLCommand pygl_GLES2_glCheckFramebufferStatus_info = {"glCheckFramebufferStatus", "glCheckFramebufferStatus(target) -> GLenum", "($module, target, /)", pygl_GLES2_glCheckFramebufferStatus_args, "GLES2_VERSION_GLES2_2_0", 1, 3383, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glCheckFramebufferStatus_info = {"glCheckFramebufferStatus", "glCheckFramebufferStatus(target) -> GLenum", "($module, target, /)", pygl_GLES2_glCheckFramebufferStatus_args, "GLES2_VERSION_GLES2_2_0", 1, 3380, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glCheckFramebufferStatus(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1039,7 +1039,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glClear_args[] = {"mask"};
-static const PyGLCommand pygl_GLES2_glClear_info = {"glClear", "glClear(mask) -> None", "($module, mask, /)", pygl_GLES2_glClear_args, "GLES2_VERSION_GLES2_2_0", 1, 3384, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glClear_info = {"glClear", "glClear(mask) -> None", "($module, mask, /)", pygl_GLES2_glClear_args, "GLES2_VERSION_GLES2_2_0", 1, 3381, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glClear(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1056,7 +1056,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glClearColor_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLES2_glClearColor_info = {"glClearColor", "glClearColor(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES2_glClearColor_args, "GLES2_VERSION_GLES2_2_0", 4, 3385, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glClearColor_info = {"glClearColor", "glClearColor(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES2_glClearColor_args, "GLES2_VERSION_GLES2_2_0", 4, 3382, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glClearColor(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1076,7 +1076,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glClearDepthf_args[] = {"d"};
-static const PyGLCommand pygl_GLES2_glClearDepthf_info = {"glClearDepthf", "glClearDepthf(d) -> None", "($module, d, /)", pygl_GLES2_glClearDepthf_args, "GLES2_VERSION_GLES2_2_0", 1, 3386, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glClearDepthf_info = {"glClearDepthf", "glClearDepthf(d) -> None", "($module, d, /)", pygl_GLES2_glClearDepthf_args, "GLES2_VERSION_GLES2_2_0", 1, 3383, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glClearDepthf(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1093,7 +1093,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glClearPixelLocalStorageuiEXT_args[] = {"offset", "n", "values"};
-static const PyGLCommand pygl_GLES2_glClearPixelLocalStorageuiEXT_info = {"glClearPixelLocalStorageuiEXT", "glClearPixelLocalStorageuiEXT(offset, n, values) -> None", "($module, offset, n, values, /)", pygl_GLES2_glClearPixelLocalStorageuiEXT_args, "GLES2_EXT_shader_pixel_local_storage2", 3, 3387, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glClearPixelLocalStorageuiEXT_info = {"glClearPixelLocalStorageuiEXT", "glClearPixelLocalStorageuiEXT(offset, n, values) -> None", "($module, offset, n, values, /)", pygl_GLES2_glClearPixelLocalStorageuiEXT_args, "GLES2_EXT_shader_pixel_local_storage2", 3, 3384, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glClearPixelLocalStorageuiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1115,7 +1115,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glClearStencil_args[] = {"s"};
-static const PyGLCommand pygl_GLES2_glClearStencil_info = {"glClearStencil", "glClearStencil(s) -> None", "($module, s, /)", pygl_GLES2_glClearStencil_args, "GLES2_VERSION_GLES2_2_0", 1, 3388, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glClearStencil_info = {"glClearStencil", "glClearStencil(s) -> None", "($module, s, /)", pygl_GLES2_glClearStencil_args, "GLES2_VERSION_GLES2_2_0", 1, 3385, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glClearStencil(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1132,7 +1132,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glClientWaitSyncAPPLE_args[] = {"sync", "flags", "timeout"};
-static const PyGLCommand pygl_GLES2_glClientWaitSyncAPPLE_info = {"glClientWaitSyncAPPLE", "glClientWaitSyncAPPLE(sync, flags, timeout) -> GLenum", "($module, sync, flags, timeout, /)", pygl_GLES2_glClientWaitSyncAPPLE_args, "GLES2_APPLE_sync", 3, 3389, PYGL_API_GLES2, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLES2_glClientWaitSyncAPPLE_info = {"glClientWaitSyncAPPLE", "glClientWaitSyncAPPLE(sync, flags, timeout) -> GLenum", "($module, sync, flags, timeout, /)", pygl_GLES2_glClientWaitSyncAPPLE_args, "GLES2_APPLE_sync", 3, 3386, PYGL_API_GLES2, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLES2_glClientWaitSyncAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1151,7 +1151,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glClipControlEXT_args[] = {"origin", "depth"};
-static const PyGLCommand pygl_GLES2_glClipControlEXT_info = {"glClipControlEXT", "glClipControlEXT(origin, depth) -> None", "($module, origin, depth, /)", pygl_GLES2_glClipControlEXT_args, "GLES2_EXT_clip_control", 2, 3390, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glClipControlEXT_info = {"glClipControlEXT", "glClipControlEXT(origin, depth) -> None", "($module, origin, depth, /)", pygl_GLES2_glClipControlEXT_args, "GLES2_EXT_clip_control", 2, 3387, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glClipControlEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1169,7 +1169,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glColorMask_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLES2_glColorMask_info = {"glColorMask", "glColorMask(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES2_glColorMask_args, "GLES2_VERSION_GLES2_2_0", 4, 3391, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glColorMask_info = {"glColorMask", "glColorMask(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES2_glColorMask_args, "GLES2_VERSION_GLES2_2_0", 4, 3388, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glColorMask(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1189,7 +1189,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glColorMaski_args[] = {"index", "r", "g", "b", "a"};
-static const PyGLCommand pygl_GLES2_glColorMaski_info = {"glColorMaski", "glColorMaski(index, r, g, b, a) -> None", "($module, index, r, g, b, a, /)", pygl_GLES2_glColorMaski_args, "GLES2_ES_VERSION_3_2", 5, 3392, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glColorMaski_info = {"glColorMaski", "glColorMaski(index, r, g, b, a) -> None", "($module, index, r, g, b, a, /)", pygl_GLES2_glColorMaski_args, "GLES2_ES_VERSION_3_2", 5, 3389, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glColorMaski(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1210,7 +1210,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glColorMaskiEXT_args[] = {"index", "r", "g", "b", "a"};
-static const PyGLCommand pygl_GLES2_glColorMaskiEXT_info = {"glColorMaskiEXT", "glColorMaskiEXT(index, r, g, b, a) -> None", "($module, index, r, g, b, a, /)", pygl_GLES2_glColorMaskiEXT_args, "GLES2_EXT_draw_buffers_indexed", 5, 3393, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glColorMaskiEXT_info = {"glColorMaskiEXT", "glColorMaskiEXT(index, r, g, b, a) -> None", "($module, index, r, g, b, a, /)", pygl_GLES2_glColorMaskiEXT_args, "GLES2_EXT_draw_buffers_indexed", 5, 3390, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glColorMaskiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1231,7 +1231,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glColorMaskiOES_args[] = {"index", "r", "g", "b", "a"};
-static const PyGLCommand pygl_GLES2_glColorMaskiOES_info = {"glColorMaskiOES", "glColorMaskiOES(index, r, g, b, a) -> None", "($module, index, r, g, b, a, /)", pygl_GLES2_glColorMaskiOES_args, "GLES2_OES_draw_buffers_indexed", 5, 3394, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glColorMaskiOES_info = {"glColorMaskiOES", "glColorMaskiOES(index, r, g, b, a) -> None", "($module, index, r, g, b, a, /)", pygl_GLES2_glColorMaskiOES_args, "GLES2_OES_draw_buffers_indexed", 5, 3391, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glColorMaskiOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1252,7 +1252,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCompileShader_args[] = {"shader"};
-static const PyGLCommand pygl_GLES2_glCompileShader_info = {"glCompileShader", "glCompileShader(shader) -> None", "($module, shader, /)", pygl_GLES2_glCompileShader_args, "GLES2_VERSION_GLES2_2_0", 1, 3395, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glCompileShader_info = {"glCompileShader", "glCompileShader(shader) -> None", "($module, shader, /)", pygl_GLES2_glCompileShader_args, "GLES2_VERSION_GLES2_2_0", 1, 3392, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCompileShader(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1269,7 +1269,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glConservativeRasterParameteriNV_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES2_glConservativeRasterParameteriNV_info = {"glConservativeRasterParameteriNV", "glConservativeRasterParameteriNV(pname, param) -> None", "($module, pname, param, /)", pygl_GLES2_glConservativeRasterParameteriNV_args, "GLES2_NV_conservative_raster_pre_snap_triangles", 2, 3396, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glConservativeRasterParameteriNV_info = {"glConservativeRasterParameteriNV", "glConservativeRasterParameteriNV(pname, param) -> None", "($module, pname, param, /)", pygl_GLES2_glConservativeRasterParameteriNV_args, "GLES2_NV_conservative_raster_pre_snap_triangles", 2, 3393, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glConservativeRasterParameteriNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1287,7 +1287,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCopyBufferSubDataNV_args[] = {"readTarget", "writeTarget", "readOffset", "writeOffset", "size"};
-static const PyGLCommand pygl_GLES2_glCopyBufferSubDataNV_info = {"glCopyBufferSubDataNV", "glCopyBufferSubDataNV(readTarget, writeTarget, readOffset, writeOffset, size) -> None", "($module, readTarget, writeTarget, readOffset, writeOffset, size, /)", pygl_GLES2_glCopyBufferSubDataNV_args, "GLES2_NV_copy_buffer", 5, 3397, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glCopyBufferSubDataNV_info = {"glCopyBufferSubDataNV", "glCopyBufferSubDataNV(readTarget, writeTarget, readOffset, writeOffset, size) -> None", "($module, readTarget, writeTarget, readOffset, writeOffset, size, /)", pygl_GLES2_glCopyBufferSubDataNV_args, "GLES2_NV_copy_buffer", 5, 3394, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCopyBufferSubDataNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1308,7 +1308,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCopyImageSubData_args[] = {"srcName", "srcTarget", "srcLevel", "srcX", "srcY", "srcZ", "dstName", "dstTarget", "dstLevel", "dstX", "dstY", "dstZ", "srcWidth", "srcHeight", "srcDepth"};
-static const PyGLCommand pygl_GLES2_glCopyImageSubData_info = {"glCopyImageSubData", "glCopyImageSubData(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth) -> None", "($module, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth, /)", pygl_GLES2_glCopyImageSubData_args, "GLES2_ES_VERSION_3_2", 15, 3398, PYGL_API_GLES2, 0, 15, 0, 0};
+static const PyGLCommand pygl_GLES2_glCopyImageSubData_info = {"glCopyImageSubData", "glCopyImageSubData(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth) -> None", "($module, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth, /)", pygl_GLES2_glCopyImageSubData_args, "GLES2_ES_VERSION_3_2", 15, 3395, PYGL_API_GLES2, 0, 15, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCopyImageSubData(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1339,7 +1339,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCopyImageSubDataEXT_args[] = {"srcName", "srcTarget", "srcLevel", "srcX", "srcY", "srcZ", "dstName", "dstTarget", "dstLevel", "dstX", "dstY", "dstZ", "srcWidth", "srcHeight", "srcDepth"};
-static const PyGLCommand pygl_GLES2_glCopyImageSubDataEXT_info = {"glCopyImageSubDataEXT", "glCopyImageSubDataEXT(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth) -> None", "($module, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth, /)", pygl_GLES2_glCopyImageSubDataEXT_args, "GLES2_EXT_copy_image", 15, 3399, PYGL_API_GLES2, 0, 15, 0, 0};
+static const PyGLCommand pygl_GLES2_glCopyImageSubDataEXT_info = {"glCopyImageSubDataEXT", "glCopyImageSubDataEXT(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth) -> None", "($module, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth, /)", pygl_GLES2_glCopyImageSubDataEXT_args, "GLES2_EXT_copy_image", 15, 3396, PYGL_API_GLES2, 0, 15, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCopyImageSubDataEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1370,7 +1370,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCopyImageSubDataOES_args[] = {"srcName", "srcTarget", "srcLevel", "srcX", "srcY", "srcZ", "dstName", "dstTarget", "dstLevel", "dstX", "dstY", "dstZ", "srcWidth", "srcHeight", "srcDepth"};
-static const PyGLCommand pygl_GLES2_glCopyImageSubDataOES_info = {"glCopyImageSubDataOES", "glCopyImageSubDataOES(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth) -> None", "($module, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth, /)", pygl_GLES2_glCopyImageSubDataOES_args, "GLES2_OES_copy_image", 15, 3400, PYGL_API_GLES2, 0, 15, 0, 0};
+static const PyGLCommand pygl_GLES2_glCopyImageSubDataOES_info = {"glCopyImageSubDataOES", "glCopyImageSubDataOES(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth) -> None", "($module, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth, /)", pygl_GLES2_glCopyImageSubDataOES_args, "GLES2_OES_copy_image", 15, 3397, PYGL_API_GLES2, 0, 15, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCopyImageSubDataOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1401,7 +1401,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCopyPathNV_args[] = {"resultPath", "srcPath"};
-static const PyGLCommand pygl_GLES2_glCopyPathNV_info = {"glCopyPathNV", "glCopyPathNV(resultPath, srcPath) -> None", "($module, resultPath, srcPath, /)", pygl_GLES2_glCopyPathNV_args, "GLES2_NV_path_rendering", 2, 3401, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glCopyPathNV_info = {"glCopyPathNV", "glCopyPathNV(resultPath, srcPath) -> None", "($module, resultPath, srcPath, /)", pygl_GLES2_glCopyPathNV_args, "GLES2_NV_path_rendering", 2, 3398, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCopyPathNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1419,7 +1419,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCopyTexImage2D_args[] = {"target", "level", "internalformat", "x", "y", "width", "height", "border"};
-static const PyGLCommand pygl_GLES2_glCopyTexImage2D_info = {"glCopyTexImage2D", "glCopyTexImage2D(target, level, internalformat, x, y, width, height, border) -> None", "($module, target, level, internalformat, x, y, width, height, border, /)", pygl_GLES2_glCopyTexImage2D_args, "GLES2_VERSION_GLES2_2_0", 8, 3402, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glCopyTexImage2D_info = {"glCopyTexImage2D", "glCopyTexImage2D(target, level, internalformat, x, y, width, height, border) -> None", "($module, target, level, internalformat, x, y, width, height, border, /)", pygl_GLES2_glCopyTexImage2D_args, "GLES2_VERSION_GLES2_2_0", 8, 3399, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCopyTexImage2D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1443,7 +1443,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCopyTexSubImage2D_args[] = {"target", "level", "xoffset", "yoffset", "x", "y", "width", "height"};
-static const PyGLCommand pygl_GLES2_glCopyTexSubImage2D_info = {"glCopyTexSubImage2D", "glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height) -> None", "($module, target, level, xoffset, yoffset, x, y, width, height, /)", pygl_GLES2_glCopyTexSubImage2D_args, "GLES2_VERSION_GLES2_2_0", 8, 3403, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glCopyTexSubImage2D_info = {"glCopyTexSubImage2D", "glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height) -> None", "($module, target, level, xoffset, yoffset, x, y, width, height, /)", pygl_GLES2_glCopyTexSubImage2D_args, "GLES2_VERSION_GLES2_2_0", 8, 3400, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCopyTexSubImage2D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1467,7 +1467,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCopyTexSubImage3DOES_args[] = {"target", "level", "xoffset", "yoffset", "zoffset", "x", "y", "width", "height"};
-static const PyGLCommand pygl_GLES2_glCopyTexSubImage3DOES_info = {"glCopyTexSubImage3DOES", "glCopyTexSubImage3DOES(target, level, xoffset, yoffset, zoffset, x, y, width, height) -> None", "($module, target, level, xoffset, yoffset, zoffset, x, y, width, height, /)", pygl_GLES2_glCopyTexSubImage3DOES_args, "GLES2_OES_texture_3D", 9, 3404, PYGL_API_GLES2, 0, 9, 0, 0};
+static const PyGLCommand pygl_GLES2_glCopyTexSubImage3DOES_info = {"glCopyTexSubImage3DOES", "glCopyTexSubImage3DOES(target, level, xoffset, yoffset, zoffset, x, y, width, height) -> None", "($module, target, level, xoffset, yoffset, zoffset, x, y, width, height, /)", pygl_GLES2_glCopyTexSubImage3DOES_args, "GLES2_OES_texture_3D", 9, 3401, PYGL_API_GLES2, 0, 9, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCopyTexSubImage3DOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1492,7 +1492,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCopyTextureLevelsAPPLE_args[] = {"destinationTexture", "sourceTexture", "sourceBaseLevel", "sourceLevelCount"};
-static const PyGLCommand pygl_GLES2_glCopyTextureLevelsAPPLE_info = {"glCopyTextureLevelsAPPLE", "glCopyTextureLevelsAPPLE(destinationTexture, sourceTexture, sourceBaseLevel, sourceLevelCount) -> None", "($module, destinationTexture, sourceTexture, sourceBaseLevel, sourceLevelCount, /)", pygl_GLES2_glCopyTextureLevelsAPPLE_args, "GLES2_APPLE_copy_texture_levels", 4, 3405, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glCopyTextureLevelsAPPLE_info = {"glCopyTextureLevelsAPPLE", "glCopyTextureLevelsAPPLE(destinationTexture, sourceTexture, sourceBaseLevel, sourceLevelCount) -> None", "($module, destinationTexture, sourceTexture, sourceBaseLevel, sourceLevelCount, /)", pygl_GLES2_glCopyTextureLevelsAPPLE_args, "GLES2_APPLE_copy_texture_levels", 4, 3402, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCopyTextureLevelsAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1512,7 +1512,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCoverFillPathInstancedNV_args[] = {"numPaths", "pathNameType", "paths", "pathBase", "coverMode", "transformType", "transformValues"};
-static const PyGLCommand pygl_GLES2_glCoverFillPathInstancedNV_info = {"glCoverFillPathInstancedNV", "glCoverFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues) -> None", "($module, numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues, /)", pygl_GLES2_glCoverFillPathInstancedNV_args, "GLES2_NV_path_rendering", 7, 3406, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glCoverFillPathInstancedNV_info = {"glCoverFillPathInstancedNV", "glCoverFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues) -> None", "($module, numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues, /)", pygl_GLES2_glCoverFillPathInstancedNV_args, "GLES2_NV_path_rendering", 7, 3403, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCoverFillPathInstancedNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1538,7 +1538,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCoverFillPathNV_args[] = {"path", "coverMode"};
-static const PyGLCommand pygl_GLES2_glCoverFillPathNV_info = {"glCoverFillPathNV", "glCoverFillPathNV(path, coverMode) -> None", "($module, path, coverMode, /)", pygl_GLES2_glCoverFillPathNV_args, "GLES2_NV_path_rendering", 2, 3407, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glCoverFillPathNV_info = {"glCoverFillPathNV", "glCoverFillPathNV(path, coverMode) -> None", "($module, path, coverMode, /)", pygl_GLES2_glCoverFillPathNV_args, "GLES2_NV_path_rendering", 2, 3404, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCoverFillPathNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1556,7 +1556,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCoverStrokePathInstancedNV_args[] = {"numPaths", "pathNameType", "paths", "pathBase", "coverMode", "transformType", "transformValues"};
-static const PyGLCommand pygl_GLES2_glCoverStrokePathInstancedNV_info = {"glCoverStrokePathInstancedNV", "glCoverStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues) -> None", "($module, numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues, /)", pygl_GLES2_glCoverStrokePathInstancedNV_args, "GLES2_NV_path_rendering", 7, 3408, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glCoverStrokePathInstancedNV_info = {"glCoverStrokePathInstancedNV", "glCoverStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues) -> None", "($module, numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues, /)", pygl_GLES2_glCoverStrokePathInstancedNV_args, "GLES2_NV_path_rendering", 7, 3405, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCoverStrokePathInstancedNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1582,7 +1582,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCoverStrokePathNV_args[] = {"path", "coverMode"};
-static const PyGLCommand pygl_GLES2_glCoverStrokePathNV_info = {"glCoverStrokePathNV", "glCoverStrokePathNV(path, coverMode) -> None", "($module, path, coverMode, /)", pygl_GLES2_glCoverStrokePathNV_args, "GLES2_NV_path_rendering", 2, 3409, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glCoverStrokePathNV_info = {"glCoverStrokePathNV", "glCoverStrokePathNV(path, coverMode) -> None", "($module, path, coverMode, /)", pygl_GLES2_glCoverStrokePathNV_args, "GLES2_NV_path_rendering", 2, 3406, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCoverStrokePathNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1600,7 +1600,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCoverageMaskNV_args[] = {"mask"};
-static const PyGLCommand pygl_GLES2_glCoverageMaskNV_info = {"glCoverageMaskNV", "glCoverageMaskNV(mask) -> None", "($module, mask, /)", pygl_GLES2_glCoverageMaskNV_args, "GLES2_NV_coverage_sample", 1, 3410, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glCoverageMaskNV_info = {"glCoverageMaskNV", "glCoverageMaskNV(mask) -> None", "($module, mask, /)", pygl_GLES2_glCoverageMaskNV_args, "GLES2_NV_coverage_sample", 1, 3407, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCoverageMaskNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1617,7 +1617,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCoverageModulationNV_args[] = {"components"};
-static const PyGLCommand pygl_GLES2_glCoverageModulationNV_info = {"glCoverageModulationNV", "glCoverageModulationNV(components) -> None", "($module, components, /)", pygl_GLES2_glCoverageModulationNV_args, "GLES2_NV_framebuffer_mixed_samples", 1, 3411, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glCoverageModulationNV_info = {"glCoverageModulationNV", "glCoverageModulationNV(components) -> None", "($module, components, /)", pygl_GLES2_glCoverageModulationNV_args, "GLES2_NV_framebuffer_mixed_samples", 1, 3408, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCoverageModulationNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1634,7 +1634,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCoverageModulationTableNV_args[] = {"n", "v"};
-static const PyGLCommand pygl_GLES2_glCoverageModulationTableNV_info = {"glCoverageModulationTableNV", "glCoverageModulationTableNV(n, v) -> None", "($module, n, v, /)", pygl_GLES2_glCoverageModulationTableNV_args, "GLES2_NV_framebuffer_mixed_samples", 2, 3412, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glCoverageModulationTableNV_info = {"glCoverageModulationTableNV", "glCoverageModulationTableNV(n, v) -> None", "($module, n, v, /)", pygl_GLES2_glCoverageModulationTableNV_args, "GLES2_NV_framebuffer_mixed_samples", 2, 3409, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCoverageModulationTableNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1655,7 +1655,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCoverageOperationNV_args[] = {"operation"};
-static const PyGLCommand pygl_GLES2_glCoverageOperationNV_info = {"glCoverageOperationNV", "glCoverageOperationNV(operation) -> None", "($module, operation, /)", pygl_GLES2_glCoverageOperationNV_args, "GLES2_NV_coverage_sample", 1, 3413, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glCoverageOperationNV_info = {"glCoverageOperationNV", "glCoverageOperationNV(operation) -> None", "($module, operation, /)", pygl_GLES2_glCoverageOperationNV_args, "GLES2_NV_coverage_sample", 1, 3410, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCoverageOperationNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1672,7 +1672,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCreateMemoryObjectsEXT_args[] = {"n", "memoryObjects"};
-static const PyGLCommand pygl_GLES2_glCreateMemoryObjectsEXT_info = {"glCreateMemoryObjectsEXT", "glCreateMemoryObjectsEXT(n, memoryObjects) -> None", "($module, n, memoryObjects, /)", pygl_GLES2_glCreateMemoryObjectsEXT_args, "GLES2_EXT_memory_object", 2, 3414, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glCreateMemoryObjectsEXT_info = {"glCreateMemoryObjectsEXT", "glCreateMemoryObjectsEXT(n, memoryObjects) -> None", "($module, n, memoryObjects, /)", pygl_GLES2_glCreateMemoryObjectsEXT_args, "GLES2_EXT_memory_object", 2, 3411, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCreateMemoryObjectsEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1693,7 +1693,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCreatePerfQueryINTEL_args[] = {"queryId", "queryHandle"};
-static const PyGLCommand pygl_GLES2_glCreatePerfQueryINTEL_info = {"glCreatePerfQueryINTEL", "glCreatePerfQueryINTEL(queryId, queryHandle) -> None", "($module, queryId, queryHandle, /)", pygl_GLES2_glCreatePerfQueryINTEL_args, "GLES2_INTEL_performance_query", 2, 3415, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glCreatePerfQueryINTEL_info = {"glCreatePerfQueryINTEL", "glCreatePerfQueryINTEL(queryId, queryHandle) -> None", "($module, queryId, queryHandle, /)", pygl_GLES2_glCreatePerfQueryINTEL_args, "GLES2_INTEL_performance_query", 2, 3412, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCreatePerfQueryINTEL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1713,7 +1713,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glCreateProgram_info = {"glCreateProgram", "glCreateProgram() -> GLuint", "($module, /)", NULL, "GLES2_VERSION_GLES2_2_0", 0, 3416, PYGL_API_GLES2, 0, 0, 1, 0};
+static const PyGLCommand pygl_GLES2_glCreateProgram_info = {"glCreateProgram", "glCreateProgram() -> GLuint", "($module, /)", NULL, "GLES2_VERSION_GLES2_2_0", 0, 3413, PYGL_API_GLES2, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GLES2_glCreateProgram(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1729,7 +1729,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCreateSemaphoresNV_args[] = {"n", "semaphores"};
-static const PyGLCommand pygl_GLES2_glCreateSemaphoresNV_info = {"glCreateSemaphoresNV", "glCreateSemaphoresNV(n, semaphores) -> None", "($module, n, semaphores, /)", pygl_GLES2_glCreateSemaphoresNV_args, "GLES2_NV_timeline_semaphore", 2, 3417, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glCreateSemaphoresNV_info = {"glCreateSemaphoresNV", "glCreateSemaphoresNV(n, semaphores) -> None", "($module, n, semaphores, /)", pygl_GLES2_glCreateSemaphoresNV_args, "GLES2_NV_timeline_semaphore", 2, 3414, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCreateSemaphoresNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1750,7 +1750,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCreateShader_args[] = {"type"};
-static const PyGLCommand pygl_GLES2_glCreateShader_info = {"glCreateShader", "glCreateShader(type) -> GLuint", "($module, type, /)", pygl_GLES2_glCreateShader_args, "GLES2_VERSION_GLES2_2_0", 1, 3418, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glCreateShader_info = {"glCreateShader", "glCreateShader(type) -> GLuint", "($module, type, /)", pygl_GLES2_glCreateShader_args, "GLES2_VERSION_GLES2_2_0", 1, 3415, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glCreateShader(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1767,7 +1767,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCreateShaderProgramEXT_args[] = {"type", "string"};
-static const PyGLCommand pygl_GLES2_glCreateShaderProgramEXT_info = {"glCreateShaderProgramEXT", "glCreateShaderProgramEXT(type, string) -> GLuint", "($module, type, string, /)", pygl_GLES2_glCreateShaderProgramEXT_args, "GLES2_EXT_separate_shader_objects", 2, 3419, PYGL_API_GLES2, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLES2_glCreateShaderProgramEXT_info = {"glCreateShaderProgramEXT", "glCreateShaderProgramEXT(type, string) -> GLuint", "($module, type, string, /)", pygl_GLES2_glCreateShaderProgramEXT_args, "GLES2_EXT_separate_shader_objects", 2, 3416, PYGL_API_GLES2, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLES2_glCreateShaderProgramEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1789,7 +1789,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glCullFace_args[] = {"mode"};
-static const PyGLCommand pygl_GLES2_glCullFace_info = {"glCullFace", "glCullFace(mode) -> None", "($module, mode, /)", pygl_GLES2_glCullFace_args, "GLES2_VERSION_GLES2_2_0", 1, 3420, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glCullFace_info = {"glCullFace", "glCullFace(mode) -> None", "($module, mode, /)", pygl_GLES2_glCullFace_args, "GLES2_VERSION_GLES2_2_0", 1, 3417, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glCullFace(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1806,7 +1806,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDebugMessageCallback_args[] = {"callback", "userParam"};
-static const PyGLCommand pygl_GLES2_glDebugMessageCallback_info = {"glDebugMessageCallback", "glDebugMessageCallback(callback, userParam) -> None", "($module, callback, userParam, /)", pygl_GLES2_glDebugMessageCallback_args, "GLES2_ES_VERSION_3_2", 2, 3421, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDebugMessageCallback_info = {"glDebugMessageCallback", "glDebugMessageCallback(callback, userParam) -> None", "($module, callback, userParam, /)", pygl_GLES2_glDebugMessageCallback_args, "GLES2_ES_VERSION_3_2", 2, 3418, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDebugMessageCallback(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1827,7 +1827,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDebugMessageCallbackKHR_args[] = {"callback", "userParam"};
-static const PyGLCommand pygl_GLES2_glDebugMessageCallbackKHR_info = {"glDebugMessageCallbackKHR", "glDebugMessageCallbackKHR(callback, userParam) -> None", "($module, callback, userParam, /)", pygl_GLES2_glDebugMessageCallbackKHR_args, "GLES2_KHR_debug", 2, 3422, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDebugMessageCallbackKHR_info = {"glDebugMessageCallbackKHR", "glDebugMessageCallbackKHR(callback, userParam) -> None", "($module, callback, userParam, /)", pygl_GLES2_glDebugMessageCallbackKHR_args, "GLES2_KHR_debug", 2, 3419, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDebugMessageCallbackKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1848,7 +1848,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDebugMessageControl_args[] = {"source", "type", "severity", "count", "ids", "enabled"};
-static const PyGLCommand pygl_GLES2_glDebugMessageControl_info = {"glDebugMessageControl", "glDebugMessageControl(source, type, severity, count, ids, enabled) -> None", "($module, source, type, severity, count, ids, enabled, /)", pygl_GLES2_glDebugMessageControl_args, "GLES2_ES_VERSION_3_2", 6, 3423, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glDebugMessageControl_info = {"glDebugMessageControl", "glDebugMessageControl(source, type, severity, count, ids, enabled) -> None", "($module, source, type, severity, count, ids, enabled, /)", pygl_GLES2_glDebugMessageControl_args, "GLES2_ES_VERSION_3_2", 6, 3420, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDebugMessageControl(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1873,7 +1873,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDebugMessageControlKHR_args[] = {"source", "type", "severity", "count", "ids", "enabled"};
-static const PyGLCommand pygl_GLES2_glDebugMessageControlKHR_info = {"glDebugMessageControlKHR", "glDebugMessageControlKHR(source, type, severity, count, ids, enabled) -> None", "($module, source, type, severity, count, ids, enabled, /)", pygl_GLES2_glDebugMessageControlKHR_args, "GLES2_KHR_debug", 6, 3424, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glDebugMessageControlKHR_info = {"glDebugMessageControlKHR", "glDebugMessageControlKHR(source, type, severity, count, ids, enabled) -> None", "($module, source, type, severity, count, ids, enabled, /)", pygl_GLES2_glDebugMessageControlKHR_args, "GLES2_KHR_debug", 6, 3421, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDebugMessageControlKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1898,7 +1898,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDebugMessageInsert_args[] = {"source", "type", "id", "severity", "length", "buf"};
-static const PyGLCommand pygl_GLES2_glDebugMessageInsert_info = {"glDebugMessageInsert", "glDebugMessageInsert(source, type, id, severity, length, buf) -> None", "($module, source, type, id, severity, length, buf, /)", pygl_GLES2_glDebugMessageInsert_args, "GLES2_ES_VERSION_3_2", 6, 3425, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glDebugMessageInsert_info = {"glDebugMessageInsert", "glDebugMessageInsert(source, type, id, severity, length, buf) -> None", "($module, source, type, id, severity, length, buf, /)", pygl_GLES2_glDebugMessageInsert_args, "GLES2_ES_VERSION_3_2", 6, 3422, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDebugMessageInsert(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1923,7 +1923,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDebugMessageInsertKHR_args[] = {"source", "type", "id", "severity", "length", "buf"};
-static const PyGLCommand pygl_GLES2_glDebugMessageInsertKHR_info = {"glDebugMessageInsertKHR", "glDebugMessageInsertKHR(source, type, id, severity, length, buf) -> None", "($module, source, type, id, severity, length, buf, /)", pygl_GLES2_glDebugMessageInsertKHR_args, "GLES2_KHR_debug", 6, 3426, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glDebugMessageInsertKHR_info = {"glDebugMessageInsertKHR", "glDebugMessageInsertKHR(source, type, id, severity, length, buf) -> None", "($module, source, type, id, severity, length, buf, /)", pygl_GLES2_glDebugMessageInsertKHR_args, "GLES2_KHR_debug", 6, 3423, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDebugMessageInsertKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1948,7 +1948,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeleteBuffers_args[] = {"n", "buffers"};
-static const PyGLCommand pygl_GLES2_glDeleteBuffers_info = {"glDeleteBuffers", "glDeleteBuffers(n, buffers) -> None", "($module, n, buffers, /)", pygl_GLES2_glDeleteBuffers_args, "GLES2_VERSION_GLES2_2_0", 2, 3427, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeleteBuffers_info = {"glDeleteBuffers", "glDeleteBuffers(n, buffers) -> None", "($module, n, buffers, /)", pygl_GLES2_glDeleteBuffers_args, "GLES2_VERSION_GLES2_2_0", 2, 3424, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeleteBuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1969,7 +1969,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeleteFencesNV_args[] = {"n", "fences"};
-static const PyGLCommand pygl_GLES2_glDeleteFencesNV_info = {"glDeleteFencesNV", "glDeleteFencesNV(n, fences) -> None", "($module, n, fences, /)", pygl_GLES2_glDeleteFencesNV_args, "GLES2_NV_fence", 2, 3428, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeleteFencesNV_info = {"glDeleteFencesNV", "glDeleteFencesNV(n, fences) -> None", "($module, n, fences, /)", pygl_GLES2_glDeleteFencesNV_args, "GLES2_NV_fence", 2, 3425, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeleteFencesNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1990,7 +1990,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeleteFramebuffers_args[] = {"n", "framebuffers"};
-static const PyGLCommand pygl_GLES2_glDeleteFramebuffers_info = {"glDeleteFramebuffers", "glDeleteFramebuffers(n, framebuffers) -> None", "($module, n, framebuffers, /)", pygl_GLES2_glDeleteFramebuffers_args, "GLES2_VERSION_GLES2_2_0", 2, 3429, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeleteFramebuffers_info = {"glDeleteFramebuffers", "glDeleteFramebuffers(n, framebuffers) -> None", "($module, n, framebuffers, /)", pygl_GLES2_glDeleteFramebuffers_args, "GLES2_VERSION_GLES2_2_0", 2, 3426, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeleteFramebuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2011,7 +2011,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeleteMemoryObjectsEXT_args[] = {"n", "memoryObjects"};
-static const PyGLCommand pygl_GLES2_glDeleteMemoryObjectsEXT_info = {"glDeleteMemoryObjectsEXT", "glDeleteMemoryObjectsEXT(n, memoryObjects) -> None", "($module, n, memoryObjects, /)", pygl_GLES2_glDeleteMemoryObjectsEXT_args, "GLES2_EXT_memory_object", 2, 3430, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeleteMemoryObjectsEXT_info = {"glDeleteMemoryObjectsEXT", "glDeleteMemoryObjectsEXT(n, memoryObjects) -> None", "($module, n, memoryObjects, /)", pygl_GLES2_glDeleteMemoryObjectsEXT_args, "GLES2_EXT_memory_object", 2, 3427, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeleteMemoryObjectsEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2032,7 +2032,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeletePathsNV_args[] = {"path", "range"};
-static const PyGLCommand pygl_GLES2_glDeletePathsNV_info = {"glDeletePathsNV", "glDeletePathsNV(path, range) -> None", "($module, path, range, /)", pygl_GLES2_glDeletePathsNV_args, "GLES2_NV_path_rendering", 2, 3431, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeletePathsNV_info = {"glDeletePathsNV", "glDeletePathsNV(path, range) -> None", "($module, path, range, /)", pygl_GLES2_glDeletePathsNV_args, "GLES2_NV_path_rendering", 2, 3428, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeletePathsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2050,7 +2050,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeletePerfMonitorsAMD_args[] = {"n", "monitors"};
-static const PyGLCommand pygl_GLES2_glDeletePerfMonitorsAMD_info = {"glDeletePerfMonitorsAMD", "glDeletePerfMonitorsAMD(n) -> monitors", "($module, n, monitors=None, /)", pygl_GLES2_glDeletePerfMonitorsAMD_args, "GLES2_AMD_performance_monitor", 2, 3432, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeletePerfMonitorsAMD_info = {"glDeletePerfMonitorsAMD", "glDeletePerfMonitorsAMD(n) -> monitors", "($module, n, monitors=None, /)", pygl_GLES2_glDeletePerfMonitorsAMD_args, "GLES2_AMD_performance_monitor", 2, 3429, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeletePerfMonitorsAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2072,7 +2072,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeletePerfQueryINTEL_args[] = {"queryHandle"};
-static const PyGLCommand pygl_GLES2_glDeletePerfQueryINTEL_info = {"glDeletePerfQueryINTEL", "glDeletePerfQueryINTEL(queryHandle) -> None", "($module, queryHandle, /)", pygl_GLES2_glDeletePerfQueryINTEL_args, "GLES2_INTEL_performance_query", 1, 3433, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeletePerfQueryINTEL_info = {"glDeletePerfQueryINTEL", "glDeletePerfQueryINTEL(queryHandle) -> None", "($module, queryHandle, /)", pygl_GLES2_glDeletePerfQueryINTEL_args, "GLES2_INTEL_performance_query", 1, 3430, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeletePerfQueryINTEL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2089,7 +2089,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeleteProgram_args[] = {"program"};
-static const PyGLCommand pygl_GLES2_glDeleteProgram_info = {"glDeleteProgram", "glDeleteProgram(program) -> None", "($module, program, /)", pygl_GLES2_glDeleteProgram_args, "GLES2_VERSION_GLES2_2_0", 1, 3434, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeleteProgram_info = {"glDeleteProgram", "glDeleteProgram(program) -> None", "($module, program, /)", pygl_GLES2_glDeleteProgram_args, "GLES2_VERSION_GLES2_2_0", 1, 3431, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeleteProgram(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2106,7 +2106,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeleteProgramPipelinesEXT_args[] = {"n", "pipelines"};
-static const PyGLCommand pygl_GLES2_glDeleteProgramPipelinesEXT_info = {"glDeleteProgramPipelinesEXT", "glDeleteProgramPipelinesEXT(n, pipelines) -> None", "($module, n, pipelines, /)", pygl_GLES2_glDeleteProgramPipelinesEXT_args, "GLES2_EXT_separate_shader_objects", 2, 3435, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeleteProgramPipelinesEXT_info = {"glDeleteProgramPipelinesEXT", "glDeleteProgramPipelinesEXT(n, pipelines) -> None", "($module, n, pipelines, /)", pygl_GLES2_glDeleteProgramPipelinesEXT_args, "GLES2_EXT_separate_shader_objects", 2, 3432, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeleteProgramPipelinesEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2127,7 +2127,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeleteQueriesEXT_args[] = {"n", "ids"};
-static const PyGLCommand pygl_GLES2_glDeleteQueriesEXT_info = {"glDeleteQueriesEXT", "glDeleteQueriesEXT(n, ids) -> None", "($module, n, ids, /)", pygl_GLES2_glDeleteQueriesEXT_args, "GLES2_EXT_occlusion_query_boolean", 2, 3436, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeleteQueriesEXT_info = {"glDeleteQueriesEXT", "glDeleteQueriesEXT(n, ids) -> None", "($module, n, ids, /)", pygl_GLES2_glDeleteQueriesEXT_args, "GLES2_EXT_occlusion_query_boolean", 2, 3433, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeleteQueriesEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2148,7 +2148,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeleteRenderbuffers_args[] = {"n", "renderbuffers"};
-static const PyGLCommand pygl_GLES2_glDeleteRenderbuffers_info = {"glDeleteRenderbuffers", "glDeleteRenderbuffers(n, renderbuffers) -> None", "($module, n, renderbuffers, /)", pygl_GLES2_glDeleteRenderbuffers_args, "GLES2_VERSION_GLES2_2_0", 2, 3437, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeleteRenderbuffers_info = {"glDeleteRenderbuffers", "glDeleteRenderbuffers(n, renderbuffers) -> None", "($module, n, renderbuffers, /)", pygl_GLES2_glDeleteRenderbuffers_args, "GLES2_VERSION_GLES2_2_0", 2, 3434, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeleteRenderbuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2169,7 +2169,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeleteSamplers_args[] = {"count", "samplers"};
-static const PyGLCommand pygl_GLES2_glDeleteSamplers_info = {"glDeleteSamplers", "glDeleteSamplers(count, samplers) -> None", "($module, count, samplers, /)", pygl_GLES2_glDeleteSamplers_args, "GLES2_MESA_sampler_objects", 2, 3438, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeleteSamplers_info = {"glDeleteSamplers", "glDeleteSamplers(count, samplers) -> None", "($module, count, samplers, /)", pygl_GLES2_glDeleteSamplers_args, "GLES2_MESA_sampler_objects", 2, 3435, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeleteSamplers(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2190,7 +2190,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeleteSemaphoresEXT_args[] = {"n", "semaphores"};
-static const PyGLCommand pygl_GLES2_glDeleteSemaphoresEXT_info = {"glDeleteSemaphoresEXT", "glDeleteSemaphoresEXT(n, semaphores) -> None", "($module, n, semaphores, /)", pygl_GLES2_glDeleteSemaphoresEXT_args, "GLES2_EXT_semaphore", 2, 3439, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeleteSemaphoresEXT_info = {"glDeleteSemaphoresEXT", "glDeleteSemaphoresEXT(n, semaphores) -> None", "($module, n, semaphores, /)", pygl_GLES2_glDeleteSemaphoresEXT_args, "GLES2_EXT_semaphore", 2, 3436, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeleteSemaphoresEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2211,7 +2211,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeleteShader_args[] = {"shader"};
-static const PyGLCommand pygl_GLES2_glDeleteShader_info = {"glDeleteShader", "glDeleteShader(shader) -> None", "($module, shader, /)", pygl_GLES2_glDeleteShader_args, "GLES2_VERSION_GLES2_2_0", 1, 3440, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeleteShader_info = {"glDeleteShader", "glDeleteShader(shader) -> None", "($module, shader, /)", pygl_GLES2_glDeleteShader_args, "GLES2_VERSION_GLES2_2_0", 1, 3437, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeleteShader(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2228,7 +2228,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeleteSyncAPPLE_args[] = {"sync"};
-static const PyGLCommand pygl_GLES2_glDeleteSyncAPPLE_info = {"glDeleteSyncAPPLE", "glDeleteSyncAPPLE(sync) -> None", "($module, sync, /)", pygl_GLES2_glDeleteSyncAPPLE_args, "GLES2_APPLE_sync", 1, 3441, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeleteSyncAPPLE_info = {"glDeleteSyncAPPLE", "glDeleteSyncAPPLE(sync) -> None", "($module, sync, /)", pygl_GLES2_glDeleteSyncAPPLE_args, "GLES2_APPLE_sync", 1, 3438, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeleteSyncAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2245,7 +2245,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeleteTextures_args[] = {"n", "textures"};
-static const PyGLCommand pygl_GLES2_glDeleteTextures_info = {"glDeleteTextures", "glDeleteTextures(n, textures) -> None", "($module, n, textures, /)", pygl_GLES2_glDeleteTextures_args, "GLES2_VERSION_GLES2_2_0", 2, 3442, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeleteTextures_info = {"glDeleteTextures", "glDeleteTextures(n, textures) -> None", "($module, n, textures, /)", pygl_GLES2_glDeleteTextures_args, "GLES2_VERSION_GLES2_2_0", 2, 3439, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeleteTextures(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2266,7 +2266,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDeleteVertexArraysOES_args[] = {"n", "arrays"};
-static const PyGLCommand pygl_GLES2_glDeleteVertexArraysOES_info = {"glDeleteVertexArraysOES", "glDeleteVertexArraysOES(n, arrays) -> None", "($module, n, arrays, /)", pygl_GLES2_glDeleteVertexArraysOES_args, "GLES2_OES_vertex_array_object", 2, 3443, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDeleteVertexArraysOES_info = {"glDeleteVertexArraysOES", "glDeleteVertexArraysOES(n, arrays) -> None", "($module, n, arrays, /)", pygl_GLES2_glDeleteVertexArraysOES_args, "GLES2_OES_vertex_array_object", 2, 3440, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDeleteVertexArraysOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2287,7 +2287,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDepthFunc_args[] = {"func"};
-static const PyGLCommand pygl_GLES2_glDepthFunc_info = {"glDepthFunc", "glDepthFunc(func) -> None", "($module, func, /)", pygl_GLES2_glDepthFunc_args, "GLES2_VERSION_GLES2_2_0", 1, 3444, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glDepthFunc_info = {"glDepthFunc", "glDepthFunc(func) -> None", "($module, func, /)", pygl_GLES2_glDepthFunc_args, "GLES2_VERSION_GLES2_2_0", 1, 3441, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDepthFunc(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2304,7 +2304,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDepthMask_args[] = {"flag"};
-static const PyGLCommand pygl_GLES2_glDepthMask_info = {"glDepthMask", "glDepthMask(flag) -> None", "($module, flag, /)", pygl_GLES2_glDepthMask_args, "GLES2_VERSION_GLES2_2_0", 1, 3445, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glDepthMask_info = {"glDepthMask", "glDepthMask(flag) -> None", "($module, flag, /)", pygl_GLES2_glDepthMask_args, "GLES2_VERSION_GLES2_2_0", 1, 3442, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDepthMask(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2321,7 +2321,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDepthRangeArrayfvNV_args[] = {"first", "count", "v"};
-static const PyGLCommand pygl_GLES2_glDepthRangeArrayfvNV_info = {"glDepthRangeArrayfvNV", "glDepthRangeArrayfvNV(first, count, v) -> None", "($module, first, count, v, /)", pygl_GLES2_glDepthRangeArrayfvNV_args, "GLES2_NV_viewport_array", 3, 3446, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glDepthRangeArrayfvNV_info = {"glDepthRangeArrayfvNV", "glDepthRangeArrayfvNV(first, count, v) -> None", "($module, first, count, v, /)", pygl_GLES2_glDepthRangeArrayfvNV_args, "GLES2_NV_viewport_array", 3, 3443, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDepthRangeArrayfvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2343,7 +2343,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDepthRangeArrayfvOES_args[] = {"first", "count", "v"};
-static const PyGLCommand pygl_GLES2_glDepthRangeArrayfvOES_info = {"glDepthRangeArrayfvOES", "glDepthRangeArrayfvOES(first, count, v) -> None", "($module, first, count, v, /)", pygl_GLES2_glDepthRangeArrayfvOES_args, "GLES2_OES_viewport_array", 3, 3447, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glDepthRangeArrayfvOES_info = {"glDepthRangeArrayfvOES", "glDepthRangeArrayfvOES(first, count, v) -> None", "($module, first, count, v, /)", pygl_GLES2_glDepthRangeArrayfvOES_args, "GLES2_OES_viewport_array", 3, 3444, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDepthRangeArrayfvOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2365,7 +2365,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDepthRangeIndexedfNV_args[] = {"index", "n", "f"};
-static const PyGLCommand pygl_GLES2_glDepthRangeIndexedfNV_info = {"glDepthRangeIndexedfNV", "glDepthRangeIndexedfNV(index, n, f) -> None", "($module, index, n, f, /)", pygl_GLES2_glDepthRangeIndexedfNV_args, "GLES2_NV_viewport_array", 3, 3448, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glDepthRangeIndexedfNV_info = {"glDepthRangeIndexedfNV", "glDepthRangeIndexedfNV(index, n, f) -> None", "($module, index, n, f, /)", pygl_GLES2_glDepthRangeIndexedfNV_args, "GLES2_NV_viewport_array", 3, 3445, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDepthRangeIndexedfNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2384,7 +2384,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDepthRangeIndexedfOES_args[] = {"index", "n", "f"};
-static const PyGLCommand pygl_GLES2_glDepthRangeIndexedfOES_info = {"glDepthRangeIndexedfOES", "glDepthRangeIndexedfOES(index, n, f) -> None", "($module, index, n, f, /)", pygl_GLES2_glDepthRangeIndexedfOES_args, "GLES2_OES_viewport_array", 3, 3449, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glDepthRangeIndexedfOES_info = {"glDepthRangeIndexedfOES", "glDepthRangeIndexedfOES(index, n, f) -> None", "($module, index, n, f, /)", pygl_GLES2_glDepthRangeIndexedfOES_args, "GLES2_OES_viewport_array", 3, 3446, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDepthRangeIndexedfOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2403,7 +2403,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDepthRangef_args[] = {"n", "f"};
-static const PyGLCommand pygl_GLES2_glDepthRangef_info = {"glDepthRangef", "glDepthRangef(n, f) -> None", "($module, n, f, /)", pygl_GLES2_glDepthRangef_args, "GLES2_VERSION_GLES2_2_0", 2, 3450, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDepthRangef_info = {"glDepthRangef", "glDepthRangef(n, f) -> None", "($module, n, f, /)", pygl_GLES2_glDepthRangef_args, "GLES2_VERSION_GLES2_2_0", 2, 3447, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDepthRangef(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2421,7 +2421,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDetachShader_args[] = {"program", "shader"};
-static const PyGLCommand pygl_GLES2_glDetachShader_info = {"glDetachShader", "glDetachShader(program, shader) -> None", "($module, program, shader, /)", pygl_GLES2_glDetachShader_args, "GLES2_VERSION_GLES2_2_0", 2, 3451, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDetachShader_info = {"glDetachShader", "glDetachShader(program, shader) -> None", "($module, program, shader, /)", pygl_GLES2_glDetachShader_args, "GLES2_VERSION_GLES2_2_0", 2, 3448, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDetachShader(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2439,7 +2439,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDisable_args[] = {"cap"};
-static const PyGLCommand pygl_GLES2_glDisable_info = {"glDisable", "glDisable(cap) -> None", "($module, cap, /)", pygl_GLES2_glDisable_args, "GLES2_VERSION_GLES2_2_0", 1, 3452, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glDisable_info = {"glDisable", "glDisable(cap) -> None", "($module, cap, /)", pygl_GLES2_glDisable_args, "GLES2_VERSION_GLES2_2_0", 1, 3449, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDisable(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2456,7 +2456,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDisableDriverControlQCOM_args[] = {"driverControl"};
-static const PyGLCommand pygl_GLES2_glDisableDriverControlQCOM_info = {"glDisableDriverControlQCOM", "glDisableDriverControlQCOM(driverControl) -> None", "($module, driverControl, /)", pygl_GLES2_glDisableDriverControlQCOM_args, "GLES2_QCOM_driver_control", 1, 3453, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glDisableDriverControlQCOM_info = {"glDisableDriverControlQCOM", "glDisableDriverControlQCOM(driverControl) -> None", "($module, driverControl, /)", pygl_GLES2_glDisableDriverControlQCOM_args, "GLES2_QCOM_driver_control", 1, 3450, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDisableDriverControlQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2473,7 +2473,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDisableVertexAttribArray_args[] = {"index"};
-static const PyGLCommand pygl_GLES2_glDisableVertexAttribArray_info = {"glDisableVertexAttribArray", "glDisableVertexAttribArray(index) -> None", "($module, index, /)", pygl_GLES2_glDisableVertexAttribArray_args, "GLES2_VERSION_GLES2_2_0", 1, 3454, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glDisableVertexAttribArray_info = {"glDisableVertexAttribArray", "glDisableVertexAttribArray(index) -> None", "($module, index, /)", pygl_GLES2_glDisableVertexAttribArray_args, "GLES2_VERSION_GLES2_2_0", 1, 3451, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDisableVertexAttribArray(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2490,7 +2490,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDisablei_args[] = {"target", "index"};
-static const PyGLCommand pygl_GLES2_glDisablei_info = {"glDisablei", "glDisablei(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glDisablei_args, "GLES2_ES_VERSION_3_2", 2, 3455, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDisablei_info = {"glDisablei", "glDisablei(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glDisablei_args, "GLES2_ES_VERSION_3_2", 2, 3452, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDisablei(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2508,7 +2508,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDisableiEXT_args[] = {"target", "index"};
-static const PyGLCommand pygl_GLES2_glDisableiEXT_info = {"glDisableiEXT", "glDisableiEXT(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glDisableiEXT_args, "GLES2_EXT_draw_buffers_indexed", 2, 3456, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDisableiEXT_info = {"glDisableiEXT", "glDisableiEXT(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glDisableiEXT_args, "GLES2_EXT_draw_buffers_indexed", 2, 3453, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDisableiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2526,7 +2526,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDisableiNV_args[] = {"target", "index"};
-static const PyGLCommand pygl_GLES2_glDisableiNV_info = {"glDisableiNV", "glDisableiNV(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glDisableiNV_args, "GLES2_NV_viewport_array", 2, 3457, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDisableiNV_info = {"glDisableiNV", "glDisableiNV(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glDisableiNV_args, "GLES2_NV_viewport_array", 2, 3454, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDisableiNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2544,7 +2544,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDisableiOES_args[] = {"target", "index"};
-static const PyGLCommand pygl_GLES2_glDisableiOES_info = {"glDisableiOES", "glDisableiOES(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glDisableiOES_args, "GLES2_OES_viewport_array", 2, 3458, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDisableiOES_info = {"glDisableiOES", "glDisableiOES(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glDisableiOES_args, "GLES2_OES_viewport_array", 2, 3455, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDisableiOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2562,7 +2562,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDiscardFramebufferEXT_args[] = {"target", "numAttachments", "attachments"};
-static const PyGLCommand pygl_GLES2_glDiscardFramebufferEXT_info = {"glDiscardFramebufferEXT", "glDiscardFramebufferEXT(target, numAttachments, attachments) -> None", "($module, target, numAttachments, attachments, /)", pygl_GLES2_glDiscardFramebufferEXT_args, "GLES2_EXT_discard_framebuffer", 3, 3459, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glDiscardFramebufferEXT_info = {"glDiscardFramebufferEXT", "glDiscardFramebufferEXT(target, numAttachments, attachments) -> None", "($module, target, numAttachments, attachments, /)", pygl_GLES2_glDiscardFramebufferEXT_args, "GLES2_EXT_discard_framebuffer", 3, 3456, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDiscardFramebufferEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2584,7 +2584,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDrawArrays_args[] = {"mode", "first", "count"};
-static const PyGLCommand pygl_GLES2_glDrawArrays_info = {"glDrawArrays", "glDrawArrays(mode, first, count) -> None", "($module, mode, first, count, /)", pygl_GLES2_glDrawArrays_args, "GLES2_VERSION_GLES2_2_0", 3, 3460, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glDrawArrays_info = {"glDrawArrays", "glDrawArrays(mode, first, count) -> None", "($module, mode, first, count, /)", pygl_GLES2_glDrawArrays_args, "GLES2_VERSION_GLES2_2_0", 3, 3457, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDrawArrays(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2603,7 +2603,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDrawArraysInstancedANGLE_args[] = {"mode", "first", "count", "primcount"};
-static const PyGLCommand pygl_GLES2_glDrawArraysInstancedANGLE_info = {"glDrawArraysInstancedANGLE", "glDrawArraysInstancedANGLE(mode, first, count, primcount) -> None", "($module, mode, first, count, primcount, /)", pygl_GLES2_glDrawArraysInstancedANGLE_args, "GLES2_ANGLE_instanced_arrays", 4, 3461, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glDrawArraysInstancedANGLE_info = {"glDrawArraysInstancedANGLE", "glDrawArraysInstancedANGLE(mode, first, count, primcount) -> None", "($module, mode, first, count, primcount, /)", pygl_GLES2_glDrawArraysInstancedANGLE_args, "GLES2_ANGLE_instanced_arrays", 4, 3458, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDrawArraysInstancedANGLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2623,7 +2623,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDrawArraysInstancedBaseInstanceEXT_args[] = {"mode", "first", "count", "instancecount", "baseinstance"};
-static const PyGLCommand pygl_GLES2_glDrawArraysInstancedBaseInstanceEXT_info = {"glDrawArraysInstancedBaseInstanceEXT", "glDrawArraysInstancedBaseInstanceEXT(mode, first, count, instancecount, baseinstance) -> None", "($module, mode, first, count, instancecount, baseinstance, /)", pygl_GLES2_glDrawArraysInstancedBaseInstanceEXT_args, "GLES2_EXT_base_instance", 5, 3462, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glDrawArraysInstancedBaseInstanceEXT_info = {"glDrawArraysInstancedBaseInstanceEXT", "glDrawArraysInstancedBaseInstanceEXT(mode, first, count, instancecount, baseinstance) -> None", "($module, mode, first, count, instancecount, baseinstance, /)", pygl_GLES2_glDrawArraysInstancedBaseInstanceEXT_args, "GLES2_EXT_base_instance", 5, 3459, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDrawArraysInstancedBaseInstanceEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2644,7 +2644,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDrawArraysInstancedEXT_args[] = {"mode", "start", "count", "primcount"};
-static const PyGLCommand pygl_GLES2_glDrawArraysInstancedEXT_info = {"glDrawArraysInstancedEXT", "glDrawArraysInstancedEXT(mode, start, count, primcount) -> None", "($module, mode, start, count, primcount, /)", pygl_GLES2_glDrawArraysInstancedEXT_args, "GLES2_EXT_instanced_arrays", 4, 3463, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glDrawArraysInstancedEXT_info = {"glDrawArraysInstancedEXT", "glDrawArraysInstancedEXT(mode, start, count, primcount) -> None", "($module, mode, start, count, primcount, /)", pygl_GLES2_glDrawArraysInstancedEXT_args, "GLES2_EXT_instanced_arrays", 4, 3460, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDrawArraysInstancedEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2664,7 +2664,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDrawArraysInstancedNV_args[] = {"mode", "first", "count", "primcount"};
-static const PyGLCommand pygl_GLES2_glDrawArraysInstancedNV_info = {"glDrawArraysInstancedNV", "glDrawArraysInstancedNV(mode, first, count, primcount) -> None", "($module, mode, first, count, primcount, /)", pygl_GLES2_glDrawArraysInstancedNV_args, "GLES2_NV_draw_instanced", 4, 3464, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glDrawArraysInstancedNV_info = {"glDrawArraysInstancedNV", "glDrawArraysInstancedNV(mode, first, count, primcount) -> None", "($module, mode, first, count, primcount, /)", pygl_GLES2_glDrawArraysInstancedNV_args, "GLES2_NV_draw_instanced", 4, 3461, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDrawArraysInstancedNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2684,7 +2684,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDrawBuffersIndexedEXT_args[] = {"n", "location", "indices"};
-static const PyGLCommand pygl_GLES2_glDrawBuffersIndexedEXT_info = {"glDrawBuffersIndexedEXT", "glDrawBuffersIndexedEXT(n, location, indices) -> None", "($module, n, location, indices, /)", pygl_GLES2_glDrawBuffersIndexedEXT_args, "GLES2_EXT_multiview_draw_buffers", 3, 3465, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glDrawBuffersIndexedEXT_info = {"glDrawBuffersIndexedEXT", "glDrawBuffersIndexedEXT(n, location, indices) -> None", "($module, n, location, indices, /)", pygl_GLES2_glDrawBuffersIndexedEXT_args, "GLES2_EXT_multiview_draw_buffers", 3, 3462, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDrawBuffersIndexedEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2706,7 +2706,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDrawBuffersNV_args[] = {"n", "bufs"};
-static const PyGLCommand pygl_GLES2_glDrawBuffersNV_info = {"glDrawBuffersNV", "glDrawBuffersNV(n, bufs) -> None", "($module, n, bufs, /)", pygl_GLES2_glDrawBuffersNV_args, "GLES2_NV_draw_buffers", 2, 3466, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDrawBuffersNV_info = {"glDrawBuffersNV", "glDrawBuffersNV(n, bufs) -> None", "($module, n, bufs, /)", pygl_GLES2_glDrawBuffersNV_args, "GLES2_NV_draw_buffers", 2, 3463, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDrawBuffersNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2727,7 +2727,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDrawElementsInstancedBaseInstanceEXT_args[] = {"mode", "count", "type", "indices", "instancecount", "baseinstance"};
-static const PyGLCommand pygl_GLES2_glDrawElementsInstancedBaseInstanceEXT_info = {"glDrawElementsInstancedBaseInstanceEXT", "glDrawElementsInstancedBaseInstanceEXT(mode, count, type, indices, instancecount, baseinstance) -> None", "($module, mode, count, type, indices, instancecount, baseinstance, /)", pygl_GLES2_glDrawElementsInstancedBaseInstanceEXT_args, "GLES2_EXT_base_instance", 6, 3467, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glDrawElementsInstancedBaseInstanceEXT_info = {"glDrawElementsInstancedBaseInstanceEXT", "glDrawElementsInstancedBaseInstanceEXT(mode, count, type, indices, instancecount, baseinstance) -> None", "($module, mode, count, type, indices, instancecount, baseinstance, /)", pygl_GLES2_glDrawElementsInstancedBaseInstanceEXT_args, "GLES2_EXT_base_instance", 6, 3464, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDrawElementsInstancedBaseInstanceEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2752,7 +2752,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDrawElementsInstancedBaseVertexBaseInstanceEXT_args[] = {"mode", "count", "type", "indices", "instancecount", "basevertex", "baseinstance"};
-static const PyGLCommand pygl_GLES2_glDrawElementsInstancedBaseVertexBaseInstanceEXT_info = {"glDrawElementsInstancedBaseVertexBaseInstanceEXT", "glDrawElementsInstancedBaseVertexBaseInstanceEXT(mode, count, type, indices, instancecount, basevertex, baseinstance) -> None", "($module, mode, count, type, indices, instancecount, basevertex, baseinstance, /)", pygl_GLES2_glDrawElementsInstancedBaseVertexBaseInstanceEXT_args, "GLES2_EXT_base_instance", 7, 3468, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glDrawElementsInstancedBaseVertexBaseInstanceEXT_info = {"glDrawElementsInstancedBaseVertexBaseInstanceEXT", "glDrawElementsInstancedBaseVertexBaseInstanceEXT(mode, count, type, indices, instancecount, basevertex, baseinstance) -> None", "($module, mode, count, type, indices, instancecount, basevertex, baseinstance, /)", pygl_GLES2_glDrawElementsInstancedBaseVertexBaseInstanceEXT_args, "GLES2_EXT_base_instance", 7, 3465, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDrawElementsInstancedBaseVertexBaseInstanceEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2778,7 +2778,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDrawMeshTasksIndirectNV_args[] = {"indirect"};
-static const PyGLCommand pygl_GLES2_glDrawMeshTasksIndirectNV_info = {"glDrawMeshTasksIndirectNV", "glDrawMeshTasksIndirectNV(indirect) -> None", "($module, indirect, /)", pygl_GLES2_glDrawMeshTasksIndirectNV_args, "GLES2_NV_mesh_shader", 1, 3469, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glDrawMeshTasksIndirectNV_info = {"glDrawMeshTasksIndirectNV", "glDrawMeshTasksIndirectNV(indirect) -> None", "($module, indirect, /)", pygl_GLES2_glDrawMeshTasksIndirectNV_args, "GLES2_NV_mesh_shader", 1, 3466, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDrawMeshTasksIndirectNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2795,7 +2795,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDrawMeshTasksNV_args[] = {"first", "count"};
-static const PyGLCommand pygl_GLES2_glDrawMeshTasksNV_info = {"glDrawMeshTasksNV", "glDrawMeshTasksNV(first, count) -> None", "($module, first, count, /)", pygl_GLES2_glDrawMeshTasksNV_args, "GLES2_NV_mesh_shader", 2, 3470, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDrawMeshTasksNV_info = {"glDrawMeshTasksNV", "glDrawMeshTasksNV(first, count) -> None", "($module, first, count, /)", pygl_GLES2_glDrawMeshTasksNV_args, "GLES2_NV_mesh_shader", 2, 3467, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDrawMeshTasksNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2813,7 +2813,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDrawTransformFeedbackEXT_args[] = {"mode", "id"};
-static const PyGLCommand pygl_GLES2_glDrawTransformFeedbackEXT_info = {"glDrawTransformFeedbackEXT", "glDrawTransformFeedbackEXT(mode, id) -> None", "($module, mode, id, /)", pygl_GLES2_glDrawTransformFeedbackEXT_args, "GLES2_EXT_draw_transform_feedback", 2, 3471, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glDrawTransformFeedbackEXT_info = {"glDrawTransformFeedbackEXT", "glDrawTransformFeedbackEXT(mode, id) -> None", "($module, mode, id, /)", pygl_GLES2_glDrawTransformFeedbackEXT_args, "GLES2_EXT_draw_transform_feedback", 2, 3468, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDrawTransformFeedbackEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2831,7 +2831,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDrawTransformFeedbackInstancedEXT_args[] = {"mode", "id", "instancecount"};
-static const PyGLCommand pygl_GLES2_glDrawTransformFeedbackInstancedEXT_info = {"glDrawTransformFeedbackInstancedEXT", "glDrawTransformFeedbackInstancedEXT(mode, id, instancecount) -> None", "($module, mode, id, instancecount, /)", pygl_GLES2_glDrawTransformFeedbackInstancedEXT_args, "GLES2_EXT_draw_transform_feedback", 3, 3472, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glDrawTransformFeedbackInstancedEXT_info = {"glDrawTransformFeedbackInstancedEXT", "glDrawTransformFeedbackInstancedEXT(mode, id, instancecount) -> None", "($module, mode, id, instancecount, /)", pygl_GLES2_glDrawTransformFeedbackInstancedEXT_args, "GLES2_EXT_draw_transform_feedback", 3, 3469, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDrawTransformFeedbackInstancedEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2850,7 +2850,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glDrawVkImageNV_args[] = {"vkImage", "sampler", "x0", "y0", "x1", "y1", "z", "s0", "t0", "s1", "t1"};
-static const PyGLCommand pygl_GLES2_glDrawVkImageNV_info = {"glDrawVkImageNV", "glDrawVkImageNV(vkImage, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1) -> None", "($module, vkImage, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1, /)", pygl_GLES2_glDrawVkImageNV_args, "GLES2_NV_draw_vulkan_image", 11, 3473, PYGL_API_GLES2, 0, 11, 0, 0};
+static const PyGLCommand pygl_GLES2_glDrawVkImageNV_info = {"glDrawVkImageNV", "glDrawVkImageNV(vkImage, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1) -> None", "($module, vkImage, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1, /)", pygl_GLES2_glDrawVkImageNV_args, "GLES2_NV_draw_vulkan_image", 11, 3470, PYGL_API_GLES2, 0, 11, 0, 0};
 
 static PyObject *
 pygl_GLES2_glDrawVkImageNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2877,7 +2877,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEGLImageTargetRenderbufferStorageOES_args[] = {"target", "image"};
-static const PyGLCommand pygl_GLES2_glEGLImageTargetRenderbufferStorageOES_info = {"glEGLImageTargetRenderbufferStorageOES", "glEGLImageTargetRenderbufferStorageOES(target, image) -> None", "($module, target, image, /)", pygl_GLES2_glEGLImageTargetRenderbufferStorageOES_args, "GLES2_OES_EGL_image", 2, 3474, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glEGLImageTargetRenderbufferStorageOES_info = {"glEGLImageTargetRenderbufferStorageOES", "glEGLImageTargetRenderbufferStorageOES(target, image) -> None", "($module, target, image, /)", pygl_GLES2_glEGLImageTargetRenderbufferStorageOES_args, "GLES2_OES_EGL_image", 2, 3471, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEGLImageTargetRenderbufferStorageOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2895,7 +2895,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEGLImageTargetTexStorageEXT_args[] = {"target", "image", "attrib_list"};
-static const PyGLCommand pygl_GLES2_glEGLImageTargetTexStorageEXT_info = {"glEGLImageTargetTexStorageEXT", "glEGLImageTargetTexStorageEXT(target, image, attrib_list) -> None", "($module, target, image, attrib_list, /)", pygl_GLES2_glEGLImageTargetTexStorageEXT_args, "GLES2_EXT_EGL_image_storage", 3, 3475, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glEGLImageTargetTexStorageEXT_info = {"glEGLImageTargetTexStorageEXT", "glEGLImageTargetTexStorageEXT(target, image, attrib_list) -> None", "($module, target, image, attrib_list, /)", pygl_GLES2_glEGLImageTargetTexStorageEXT_args, "GLES2_EXT_EGL_image_storage", 3, 3472, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEGLImageTargetTexStorageEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2917,7 +2917,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEGLImageTargetTexture2DOES_args[] = {"target", "image"};
-static const PyGLCommand pygl_GLES2_glEGLImageTargetTexture2DOES_info = {"glEGLImageTargetTexture2DOES", "glEGLImageTargetTexture2DOES(target, image) -> None", "($module, target, image, /)", pygl_GLES2_glEGLImageTargetTexture2DOES_args, "GLES2_OES_EGL_image_external", 2, 3476, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glEGLImageTargetTexture2DOES_info = {"glEGLImageTargetTexture2DOES", "glEGLImageTargetTexture2DOES(target, image) -> None", "($module, target, image, /)", pygl_GLES2_glEGLImageTargetTexture2DOES_args, "GLES2_OES_EGL_image_external", 2, 3473, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEGLImageTargetTexture2DOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2935,7 +2935,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEGLImageTargetTextureStorageEXT_args[] = {"texture", "image", "attrib_list"};
-static const PyGLCommand pygl_GLES2_glEGLImageTargetTextureStorageEXT_info = {"glEGLImageTargetTextureStorageEXT", "glEGLImageTargetTextureStorageEXT(texture, image, attrib_list) -> None", "($module, texture, image, attrib_list, /)", pygl_GLES2_glEGLImageTargetTextureStorageEXT_args, "GLES2_EXT_EGL_image_storage", 3, 3477, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glEGLImageTargetTextureStorageEXT_info = {"glEGLImageTargetTextureStorageEXT", "glEGLImageTargetTextureStorageEXT(texture, image, attrib_list) -> None", "($module, texture, image, attrib_list, /)", pygl_GLES2_glEGLImageTargetTextureStorageEXT_args, "GLES2_EXT_EGL_image_storage", 3, 3474, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEGLImageTargetTextureStorageEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2957,7 +2957,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEnable_args[] = {"cap"};
-static const PyGLCommand pygl_GLES2_glEnable_info = {"glEnable", "glEnable(cap) -> None", "($module, cap, /)", pygl_GLES2_glEnable_args, "GLES2_VERSION_GLES2_2_0", 1, 3478, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glEnable_info = {"glEnable", "glEnable(cap) -> None", "($module, cap, /)", pygl_GLES2_glEnable_args, "GLES2_VERSION_GLES2_2_0", 1, 3475, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEnable(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2974,7 +2974,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEnableDriverControlQCOM_args[] = {"driverControl"};
-static const PyGLCommand pygl_GLES2_glEnableDriverControlQCOM_info = {"glEnableDriverControlQCOM", "glEnableDriverControlQCOM(driverControl) -> None", "($module, driverControl, /)", pygl_GLES2_glEnableDriverControlQCOM_args, "GLES2_QCOM_driver_control", 1, 3479, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glEnableDriverControlQCOM_info = {"glEnableDriverControlQCOM", "glEnableDriverControlQCOM(driverControl) -> None", "($module, driverControl, /)", pygl_GLES2_glEnableDriverControlQCOM_args, "GLES2_QCOM_driver_control", 1, 3476, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEnableDriverControlQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2991,7 +2991,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEnableVertexAttribArray_args[] = {"index"};
-static const PyGLCommand pygl_GLES2_glEnableVertexAttribArray_info = {"glEnableVertexAttribArray", "glEnableVertexAttribArray(index) -> None", "($module, index, /)", pygl_GLES2_glEnableVertexAttribArray_args, "GLES2_VERSION_GLES2_2_0", 1, 3480, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glEnableVertexAttribArray_info = {"glEnableVertexAttribArray", "glEnableVertexAttribArray(index) -> None", "($module, index, /)", pygl_GLES2_glEnableVertexAttribArray_args, "GLES2_VERSION_GLES2_2_0", 1, 3477, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEnableVertexAttribArray(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3008,7 +3008,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEnablei_args[] = {"target", "index"};
-static const PyGLCommand pygl_GLES2_glEnablei_info = {"glEnablei", "glEnablei(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glEnablei_args, "GLES2_ES_VERSION_3_2", 2, 3481, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glEnablei_info = {"glEnablei", "glEnablei(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glEnablei_args, "GLES2_ES_VERSION_3_2", 2, 3478, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEnablei(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3026,7 +3026,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEnableiEXT_args[] = {"target", "index"};
-static const PyGLCommand pygl_GLES2_glEnableiEXT_info = {"glEnableiEXT", "glEnableiEXT(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glEnableiEXT_args, "GLES2_EXT_draw_buffers_indexed", 2, 3482, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glEnableiEXT_info = {"glEnableiEXT", "glEnableiEXT(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glEnableiEXT_args, "GLES2_EXT_draw_buffers_indexed", 2, 3479, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEnableiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3044,7 +3044,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEnableiNV_args[] = {"target", "index"};
-static const PyGLCommand pygl_GLES2_glEnableiNV_info = {"glEnableiNV", "glEnableiNV(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glEnableiNV_args, "GLES2_NV_viewport_array", 2, 3483, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glEnableiNV_info = {"glEnableiNV", "glEnableiNV(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glEnableiNV_args, "GLES2_NV_viewport_array", 2, 3480, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEnableiNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3062,7 +3062,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEnableiOES_args[] = {"target", "index"};
-static const PyGLCommand pygl_GLES2_glEnableiOES_info = {"glEnableiOES", "glEnableiOES(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glEnableiOES_args, "GLES2_OES_viewport_array", 2, 3484, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glEnableiOES_info = {"glEnableiOES", "glEnableiOES(target, index) -> None", "($module, target, index, /)", pygl_GLES2_glEnableiOES_args, "GLES2_OES_viewport_array", 2, 3481, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEnableiOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3079,7 +3079,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glEndConditionalRenderNV_info = {"glEndConditionalRenderNV", "glEndConditionalRenderNV() -> None", "($module, /)", NULL, "GLES2_NV_conditional_render", 0, 3485, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glEndConditionalRenderNV_info = {"glEndConditionalRenderNV", "glEndConditionalRenderNV() -> None", "($module, /)", NULL, "GLES2_NV_conditional_render", 0, 3482, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEndConditionalRenderNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3095,7 +3095,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEndPerfMonitorAMD_args[] = {"monitor"};
-static const PyGLCommand pygl_GLES2_glEndPerfMonitorAMD_info = {"glEndPerfMonitorAMD", "glEndPerfMonitorAMD(monitor) -> None", "($module, monitor, /)", pygl_GLES2_glEndPerfMonitorAMD_args, "GLES2_AMD_performance_monitor", 1, 3486, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glEndPerfMonitorAMD_info = {"glEndPerfMonitorAMD", "glEndPerfMonitorAMD(monitor) -> None", "($module, monitor, /)", pygl_GLES2_glEndPerfMonitorAMD_args, "GLES2_AMD_performance_monitor", 1, 3483, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEndPerfMonitorAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3112,7 +3112,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEndPerfQueryINTEL_args[] = {"queryHandle"};
-static const PyGLCommand pygl_GLES2_glEndPerfQueryINTEL_info = {"glEndPerfQueryINTEL", "glEndPerfQueryINTEL(queryHandle) -> None", "($module, queryHandle, /)", pygl_GLES2_glEndPerfQueryINTEL_args, "GLES2_INTEL_performance_query", 1, 3487, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glEndPerfQueryINTEL_info = {"glEndPerfQueryINTEL", "glEndPerfQueryINTEL(queryHandle) -> None", "($module, queryHandle, /)", pygl_GLES2_glEndPerfQueryINTEL_args, "GLES2_INTEL_performance_query", 1, 3484, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEndPerfQueryINTEL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3129,7 +3129,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEndQueryEXT_args[] = {"target"};
-static const PyGLCommand pygl_GLES2_glEndQueryEXT_info = {"glEndQueryEXT", "glEndQueryEXT(target) -> None", "($module, target, /)", pygl_GLES2_glEndQueryEXT_args, "GLES2_EXT_occlusion_query_boolean", 1, 3488, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glEndQueryEXT_info = {"glEndQueryEXT", "glEndQueryEXT(target) -> None", "($module, target, /)", pygl_GLES2_glEndQueryEXT_args, "GLES2_EXT_occlusion_query_boolean", 1, 3485, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEndQueryEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3146,7 +3146,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glEndTilingQCOM_args[] = {"preserveMask"};
-static const PyGLCommand pygl_GLES2_glEndTilingQCOM_info = {"glEndTilingQCOM", "glEndTilingQCOM(preserveMask) -> None", "($module, preserveMask, /)", pygl_GLES2_glEndTilingQCOM_args, "GLES2_QCOM_tiled_rendering", 1, 3489, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glEndTilingQCOM_info = {"glEndTilingQCOM", "glEndTilingQCOM(preserveMask) -> None", "($module, preserveMask, /)", pygl_GLES2_glEndTilingQCOM_args, "GLES2_QCOM_tiled_rendering", 1, 3486, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glEndTilingQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3163,7 +3163,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glExtGetBufferPointervQCOM_args[] = {"target", "params"};
-static const PyGLCommand pygl_GLES2_glExtGetBufferPointervQCOM_info = {"glExtGetBufferPointervQCOM", "glExtGetBufferPointervQCOM(target, params) -> None", "($module, target, params, /)", pygl_GLES2_glExtGetBufferPointervQCOM_args, "GLES2_QCOM_extended_get", 2, 3490, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glExtGetBufferPointervQCOM_info = {"glExtGetBufferPointervQCOM", "glExtGetBufferPointervQCOM(target, params) -> None", "($module, target, params, /)", pygl_GLES2_glExtGetBufferPointervQCOM_args, "GLES2_QCOM_extended_get", 2, 3487, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glExtGetBufferPointervQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3184,7 +3184,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glExtGetBuffersQCOM_args[] = {"buffers", "maxBuffers", "numBuffers"};
-static const PyGLCommand pygl_GLES2_glExtGetBuffersQCOM_info = {"glExtGetBuffersQCOM", "glExtGetBuffersQCOM(buffers, maxBuffers, numBuffers) -> None", "($module, buffers, maxBuffers, numBuffers, /)", pygl_GLES2_glExtGetBuffersQCOM_args, "GLES2_QCOM_extended_get", 3, 3491, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glExtGetBuffersQCOM_info = {"glExtGetBuffersQCOM", "glExtGetBuffersQCOM(buffers, maxBuffers, numBuffers) -> None", "($module, buffers, maxBuffers, numBuffers, /)", pygl_GLES2_glExtGetBuffersQCOM_args, "GLES2_QCOM_extended_get", 3, 3488, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glExtGetBuffersQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3206,7 +3206,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glExtGetFramebuffersQCOM_args[] = {"framebuffers", "maxFramebuffers", "numFramebuffers"};
-static const PyGLCommand pygl_GLES2_glExtGetFramebuffersQCOM_info = {"glExtGetFramebuffersQCOM", "glExtGetFramebuffersQCOM(framebuffers, maxFramebuffers, numFramebuffers) -> None", "($module, framebuffers, maxFramebuffers, numFramebuffers, /)", pygl_GLES2_glExtGetFramebuffersQCOM_args, "GLES2_QCOM_extended_get", 3, 3492, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glExtGetFramebuffersQCOM_info = {"glExtGetFramebuffersQCOM", "glExtGetFramebuffersQCOM(framebuffers, maxFramebuffers, numFramebuffers) -> None", "($module, framebuffers, maxFramebuffers, numFramebuffers, /)", pygl_GLES2_glExtGetFramebuffersQCOM_args, "GLES2_QCOM_extended_get", 3, 3489, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glExtGetFramebuffersQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3228,7 +3228,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glExtGetProgramBinarySourceQCOM_args[] = {"program", "shadertype", "source", "length"};
-static const PyGLCommand pygl_GLES2_glExtGetProgramBinarySourceQCOM_info = {"glExtGetProgramBinarySourceQCOM", "glExtGetProgramBinarySourceQCOM(program, shadertype, source, length) -> None", "($module, program, shadertype, source, length, /)", pygl_GLES2_glExtGetProgramBinarySourceQCOM_args, "GLES2_QCOM_extended_get2", 4, 3493, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glExtGetProgramBinarySourceQCOM_info = {"glExtGetProgramBinarySourceQCOM", "glExtGetProgramBinarySourceQCOM(program, shadertype, source, length) -> None", "($module, program, shadertype, source, length, /)", pygl_GLES2_glExtGetProgramBinarySourceQCOM_args, "GLES2_QCOM_extended_get2", 4, 3490, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glExtGetProgramBinarySourceQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3251,7 +3251,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glExtGetProgramsQCOM_args[] = {"programs", "maxPrograms", "numPrograms"};
-static const PyGLCommand pygl_GLES2_glExtGetProgramsQCOM_info = {"glExtGetProgramsQCOM", "glExtGetProgramsQCOM(programs, maxPrograms, numPrograms) -> None", "($module, programs, maxPrograms, numPrograms, /)", pygl_GLES2_glExtGetProgramsQCOM_args, "GLES2_QCOM_extended_get2", 3, 3494, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glExtGetProgramsQCOM_info = {"glExtGetProgramsQCOM", "glExtGetProgramsQCOM(programs, maxPrograms, numPrograms) -> None", "($module, programs, maxPrograms, numPrograms, /)", pygl_GLES2_glExtGetProgramsQCOM_args, "GLES2_QCOM_extended_get2", 3, 3491, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glExtGetProgramsQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3273,7 +3273,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glExtGetRenderbuffersQCOM_args[] = {"renderbuffers", "maxRenderbuffers", "numRenderbuffers"};
-static const PyGLCommand pygl_GLES2_glExtGetRenderbuffersQCOM_info = {"glExtGetRenderbuffersQCOM", "glExtGetRenderbuffersQCOM(renderbuffers, maxRenderbuffers, numRenderbuffers) -> None", "($module, renderbuffers, maxRenderbuffers, numRenderbuffers, /)", pygl_GLES2_glExtGetRenderbuffersQCOM_args, "GLES2_QCOM_extended_get", 3, 3495, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glExtGetRenderbuffersQCOM_info = {"glExtGetRenderbuffersQCOM", "glExtGetRenderbuffersQCOM(renderbuffers, maxRenderbuffers, numRenderbuffers) -> None", "($module, renderbuffers, maxRenderbuffers, numRenderbuffers, /)", pygl_GLES2_glExtGetRenderbuffersQCOM_args, "GLES2_QCOM_extended_get", 3, 3492, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glExtGetRenderbuffersQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3295,7 +3295,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glExtGetShadersQCOM_args[] = {"shaders", "maxShaders", "numShaders"};
-static const PyGLCommand pygl_GLES2_glExtGetShadersQCOM_info = {"glExtGetShadersQCOM", "glExtGetShadersQCOM(shaders, maxShaders, numShaders) -> None", "($module, shaders, maxShaders, numShaders, /)", pygl_GLES2_glExtGetShadersQCOM_args, "GLES2_QCOM_extended_get2", 3, 3496, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glExtGetShadersQCOM_info = {"glExtGetShadersQCOM", "glExtGetShadersQCOM(shaders, maxShaders, numShaders) -> None", "($module, shaders, maxShaders, numShaders, /)", pygl_GLES2_glExtGetShadersQCOM_args, "GLES2_QCOM_extended_get2", 3, 3493, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glExtGetShadersQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3317,7 +3317,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glExtGetTexLevelParameterivQCOM_args[] = {"texture", "face", "level", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glExtGetTexLevelParameterivQCOM_info = {"glExtGetTexLevelParameterivQCOM", "glExtGetTexLevelParameterivQCOM(texture, face, level, pname, params) -> None", "($module, texture, face, level, pname, params, /)", pygl_GLES2_glExtGetTexLevelParameterivQCOM_args, "GLES2_QCOM_extended_get", 5, 3497, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glExtGetTexLevelParameterivQCOM_info = {"glExtGetTexLevelParameterivQCOM", "glExtGetTexLevelParameterivQCOM(texture, face, level, pname, params) -> None", "($module, texture, face, level, pname, params, /)", pygl_GLES2_glExtGetTexLevelParameterivQCOM_args, "GLES2_QCOM_extended_get", 5, 3494, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glExtGetTexLevelParameterivQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3341,7 +3341,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glExtGetTexSubImageQCOM_args[] = {"target", "level", "xoffset", "yoffset", "zoffset", "width", "height", "depth", "format", "type", "texels"};
-static const PyGLCommand pygl_GLES2_glExtGetTexSubImageQCOM_info = {"glExtGetTexSubImageQCOM", "glExtGetTexSubImageQCOM(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, texels) -> None", "($module, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, texels, /)", pygl_GLES2_glExtGetTexSubImageQCOM_args, "GLES2_QCOM_extended_get", 11, 3498, PYGL_API_GLES2, 0, 11, 0, 0};
+static const PyGLCommand pygl_GLES2_glExtGetTexSubImageQCOM_info = {"glExtGetTexSubImageQCOM", "glExtGetTexSubImageQCOM(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, texels) -> None", "($module, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, texels, /)", pygl_GLES2_glExtGetTexSubImageQCOM_args, "GLES2_QCOM_extended_get", 11, 3495, PYGL_API_GLES2, 0, 11, 0, 0};
 
 static PyObject *
 pygl_GLES2_glExtGetTexSubImageQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3371,7 +3371,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glExtGetTexturesQCOM_args[] = {"textures", "maxTextures", "numTextures"};
-static const PyGLCommand pygl_GLES2_glExtGetTexturesQCOM_info = {"glExtGetTexturesQCOM", "glExtGetTexturesQCOM(textures, maxTextures, numTextures) -> None", "($module, textures, maxTextures, numTextures, /)", pygl_GLES2_glExtGetTexturesQCOM_args, "GLES2_QCOM_extended_get", 3, 3499, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glExtGetTexturesQCOM_info = {"glExtGetTexturesQCOM", "glExtGetTexturesQCOM(textures, maxTextures, numTextures) -> None", "($module, textures, maxTextures, numTextures, /)", pygl_GLES2_glExtGetTexturesQCOM_args, "GLES2_QCOM_extended_get", 3, 3496, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glExtGetTexturesQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3393,7 +3393,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glExtIsProgramBinaryQCOM_args[] = {"program"};
-static const PyGLCommand pygl_GLES2_glExtIsProgramBinaryQCOM_info = {"glExtIsProgramBinaryQCOM", "glExtIsProgramBinaryQCOM(program) -> GLboolean", "($module, program, /)", pygl_GLES2_glExtIsProgramBinaryQCOM_args, "GLES2_QCOM_extended_get2", 1, 3500, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glExtIsProgramBinaryQCOM_info = {"glExtIsProgramBinaryQCOM", "glExtIsProgramBinaryQCOM(program) -> GLboolean", "($module, program, /)", pygl_GLES2_glExtIsProgramBinaryQCOM_args, "GLES2_QCOM_extended_get2", 1, 3497, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glExtIsProgramBinaryQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3410,7 +3410,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glExtTexObjectStateOverrideiQCOM_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLES2_glExtTexObjectStateOverrideiQCOM_info = {"glExtTexObjectStateOverrideiQCOM", "glExtTexObjectStateOverrideiQCOM(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES2_glExtTexObjectStateOverrideiQCOM_args, "GLES2_QCOM_extended_get", 3, 3501, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glExtTexObjectStateOverrideiQCOM_info = {"glExtTexObjectStateOverrideiQCOM", "glExtTexObjectStateOverrideiQCOM(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES2_glExtTexObjectStateOverrideiQCOM_args, "GLES2_QCOM_extended_get", 3, 3498, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glExtTexObjectStateOverrideiQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3429,7 +3429,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glExtrapolateTex2DQCOM_args[] = {"src1", "src2", "output", "scaleFactor"};
-static const PyGLCommand pygl_GLES2_glExtrapolateTex2DQCOM_info = {"glExtrapolateTex2DQCOM", "glExtrapolateTex2DQCOM(src1, src2, output, scaleFactor) -> None", "($module, src1, src2, output, scaleFactor, /)", pygl_GLES2_glExtrapolateTex2DQCOM_args, "GLES2_QCOM_frame_extrapolation", 4, 3502, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glExtrapolateTex2DQCOM_info = {"glExtrapolateTex2DQCOM", "glExtrapolateTex2DQCOM(src1, src2, output, scaleFactor) -> None", "($module, src1, src2, output, scaleFactor, /)", pygl_GLES2_glExtrapolateTex2DQCOM_args, "GLES2_QCOM_frame_extrapolation", 4, 3499, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glExtrapolateTex2DQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3449,7 +3449,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFenceSyncAPPLE_args[] = {"condition", "flags"};
-static const PyGLCommand pygl_GLES2_glFenceSyncAPPLE_info = {"glFenceSyncAPPLE", "glFenceSyncAPPLE(condition, flags) -> GLsync", "($module, condition, flags, /)", pygl_GLES2_glFenceSyncAPPLE_args, "GLES2_APPLE_sync", 2, 3503, PYGL_API_GLES2, 0, 2, 4, 0};
+static const PyGLCommand pygl_GLES2_glFenceSyncAPPLE_info = {"glFenceSyncAPPLE", "glFenceSyncAPPLE(condition, flags) -> GLsync", "($module, condition, flags, /)", pygl_GLES2_glFenceSyncAPPLE_args, "GLES2_APPLE_sync", 2, 3500, PYGL_API_GLES2, 0, 2, 4, 0};
 
 static PyObject *
 pygl_GLES2_glFenceSyncAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3466,7 +3466,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glFinish_info = {"glFinish", "glFinish() -> None", "($module, /)", NULL, "GLES2_VERSION_GLES2_2_0", 0, 3504, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glFinish_info = {"glFinish", "glFinish() -> None", "($module, /)", NULL, "GLES2_VERSION_GLES2_2_0", 0, 3501, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFinish(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3482,7 +3482,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFinishFenceNV_args[] = {"fence"};
-static const PyGLCommand pygl_GLES2_glFinishFenceNV_info = {"glFinishFenceNV", "glFinishFenceNV(fence) -> None", "($module, fence, /)", pygl_GLES2_glFinishFenceNV_args, "GLES2_NV_fence", 1, 3505, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glFinishFenceNV_info = {"glFinishFenceNV", "glFinishFenceNV(fence) -> None", "($module, fence, /)", pygl_GLES2_glFinishFenceNV_args, "GLES2_NV_fence", 1, 3502, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFinishFenceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3498,7 +3498,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glFlush_info = {"glFlush", "glFlush() -> None", "($module, /)", NULL, "GLES2_VERSION_GLES2_2_0", 0, 3506, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glFlush_info = {"glFlush", "glFlush() -> None", "($module, /)", NULL, "GLES2_VERSION_GLES2_2_0", 0, 3503, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFlush(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3514,7 +3514,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFlushMappedBufferRangeEXT_args[] = {"target", "offset", "length"};
-static const PyGLCommand pygl_GLES2_glFlushMappedBufferRangeEXT_info = {"glFlushMappedBufferRangeEXT", "glFlushMappedBufferRangeEXT(target, offset, length) -> None", "($module, target, offset, length, /)", pygl_GLES2_glFlushMappedBufferRangeEXT_args, "GLES2_EXT_map_buffer_range", 3, 3507, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glFlushMappedBufferRangeEXT_info = {"glFlushMappedBufferRangeEXT", "glFlushMappedBufferRangeEXT(target, offset, length) -> None", "($module, target, offset, length, /)", pygl_GLES2_glFlushMappedBufferRangeEXT_args, "GLES2_EXT_map_buffer_range", 3, 3504, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFlushMappedBufferRangeEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3533,7 +3533,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFragmentCoverageColorNV_args[] = {"color"};
-static const PyGLCommand pygl_GLES2_glFragmentCoverageColorNV_info = {"glFragmentCoverageColorNV", "glFragmentCoverageColorNV(color) -> None", "($module, color, /)", pygl_GLES2_glFragmentCoverageColorNV_args, "GLES2_NV_fragment_coverage_to_color", 1, 3508, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glFragmentCoverageColorNV_info = {"glFragmentCoverageColorNV", "glFragmentCoverageColorNV(color) -> None", "($module, color, /)", pygl_GLES2_glFragmentCoverageColorNV_args, "GLES2_NV_fragment_coverage_to_color", 1, 3505, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFragmentCoverageColorNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3549,7 +3549,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glFramebufferFetchBarrierEXT_info = {"glFramebufferFetchBarrierEXT", "glFramebufferFetchBarrierEXT() -> None", "($module, /)", NULL, "GLES2_EXT_shader_framebuffer_fetch_non_coherent", 0, 3509, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferFetchBarrierEXT_info = {"glFramebufferFetchBarrierEXT", "glFramebufferFetchBarrierEXT() -> None", "($module, /)", NULL, "GLES2_EXT_shader_framebuffer_fetch_non_coherent", 0, 3506, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferFetchBarrierEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3564,7 +3564,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glFramebufferFetchBarrierQCOM_info = {"glFramebufferFetchBarrierQCOM", "glFramebufferFetchBarrierQCOM() -> None", "($module, /)", NULL, "GLES2_QCOM_shader_framebuffer_fetch_noncoherent", 0, 3510, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferFetchBarrierQCOM_info = {"glFramebufferFetchBarrierQCOM", "glFramebufferFetchBarrierQCOM() -> None", "($module, /)", NULL, "GLES2_QCOM_shader_framebuffer_fetch_noncoherent", 0, 3507, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferFetchBarrierQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3580,7 +3580,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferFoveationConfigQCOM_args[] = {"framebuffer", "numLayers", "focalPointsPerLayer", "requestedFeatures", "providedFeatures"};
-static const PyGLCommand pygl_GLES2_glFramebufferFoveationConfigQCOM_info = {"glFramebufferFoveationConfigQCOM", "glFramebufferFoveationConfigQCOM(framebuffer, numLayers, focalPointsPerLayer, requestedFeatures, providedFeatures) -> None", "($module, framebuffer, numLayers, focalPointsPerLayer, requestedFeatures, providedFeatures, /)", pygl_GLES2_glFramebufferFoveationConfigQCOM_args, "GLES2_QCOM_framebuffer_foveated", 5, 3511, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferFoveationConfigQCOM_info = {"glFramebufferFoveationConfigQCOM", "glFramebufferFoveationConfigQCOM(framebuffer, numLayers, focalPointsPerLayer, requestedFeatures, providedFeatures) -> None", "($module, framebuffer, numLayers, focalPointsPerLayer, requestedFeatures, providedFeatures, /)", pygl_GLES2_glFramebufferFoveationConfigQCOM_args, "GLES2_QCOM_framebuffer_foveated", 5, 3508, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferFoveationConfigQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3604,7 +3604,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferFoveationParametersQCOM_args[] = {"framebuffer", "layer", "focalPoint", "focalX", "focalY", "gainX", "gainY", "foveaArea"};
-static const PyGLCommand pygl_GLES2_glFramebufferFoveationParametersQCOM_info = {"glFramebufferFoveationParametersQCOM", "glFramebufferFoveationParametersQCOM(framebuffer, layer, focalPoint, focalX, focalY, gainX, gainY, foveaArea) -> None", "($module, framebuffer, layer, focalPoint, focalX, focalY, gainX, gainY, foveaArea, /)", pygl_GLES2_glFramebufferFoveationParametersQCOM_args, "GLES2_QCOM_framebuffer_foveated", 8, 3512, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferFoveationParametersQCOM_info = {"glFramebufferFoveationParametersQCOM", "glFramebufferFoveationParametersQCOM(framebuffer, layer, focalPoint, focalX, focalY, gainX, gainY, foveaArea) -> None", "($module, framebuffer, layer, focalPoint, focalX, focalY, gainX, gainY, foveaArea, /)", pygl_GLES2_glFramebufferFoveationParametersQCOM_args, "GLES2_QCOM_framebuffer_foveated", 8, 3509, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferFoveationParametersQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3628,7 +3628,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferParameteriMESA_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLES2_glFramebufferParameteriMESA_info = {"glFramebufferParameteriMESA", "glFramebufferParameteriMESA(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES2_glFramebufferParameteriMESA_args, "GLES2_MESA_framebuffer_flip_y", 3, 3513, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferParameteriMESA_info = {"glFramebufferParameteriMESA", "glFramebufferParameteriMESA(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES2_glFramebufferParameteriMESA_args, "GLES2_MESA_framebuffer_flip_y", 3, 3510, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferParameteriMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3647,7 +3647,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferPixelLocalStorageSizeEXT_args[] = {"target", "size"};
-static const PyGLCommand pygl_GLES2_glFramebufferPixelLocalStorageSizeEXT_info = {"glFramebufferPixelLocalStorageSizeEXT", "glFramebufferPixelLocalStorageSizeEXT(target, size) -> None", "($module, target, size, /)", pygl_GLES2_glFramebufferPixelLocalStorageSizeEXT_args, "GLES2_EXT_shader_pixel_local_storage2", 2, 3514, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferPixelLocalStorageSizeEXT_info = {"glFramebufferPixelLocalStorageSizeEXT", "glFramebufferPixelLocalStorageSizeEXT(target, size) -> None", "($module, target, size, /)", pygl_GLES2_glFramebufferPixelLocalStorageSizeEXT_args, "GLES2_EXT_shader_pixel_local_storage2", 2, 3511, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferPixelLocalStorageSizeEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3665,7 +3665,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferRenderbuffer_args[] = {"target", "attachment", "renderbuffertarget", "renderbuffer"};
-static const PyGLCommand pygl_GLES2_glFramebufferRenderbuffer_info = {"glFramebufferRenderbuffer", "glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) -> None", "($module, target, attachment, renderbuffertarget, renderbuffer, /)", pygl_GLES2_glFramebufferRenderbuffer_args, "GLES2_VERSION_GLES2_2_0", 4, 3515, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferRenderbuffer_info = {"glFramebufferRenderbuffer", "glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) -> None", "($module, target, attachment, renderbuffertarget, renderbuffer, /)", pygl_GLES2_glFramebufferRenderbuffer_args, "GLES2_VERSION_GLES2_2_0", 4, 3512, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferRenderbuffer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3685,7 +3685,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferSampleLocationsfvNV_args[] = {"target", "start", "count", "v"};
-static const PyGLCommand pygl_GLES2_glFramebufferSampleLocationsfvNV_info = {"glFramebufferSampleLocationsfvNV", "glFramebufferSampleLocationsfvNV(target, start, count, v) -> None", "($module, target, start, count, v, /)", pygl_GLES2_glFramebufferSampleLocationsfvNV_args, "GLES2_NV_sample_locations", 4, 3516, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferSampleLocationsfvNV_info = {"glFramebufferSampleLocationsfvNV", "glFramebufferSampleLocationsfvNV(target, start, count, v) -> None", "($module, target, start, count, v, /)", pygl_GLES2_glFramebufferSampleLocationsfvNV_args, "GLES2_NV_sample_locations", 4, 3513, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferSampleLocationsfvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3708,7 +3708,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferShadingRateEXT_args[] = {"target", "attachment", "texture", "baseLayer", "numLayers", "texelWidth", "texelHeight"};
-static const PyGLCommand pygl_GLES2_glFramebufferShadingRateEXT_info = {"glFramebufferShadingRateEXT", "glFramebufferShadingRateEXT(target, attachment, texture, baseLayer, numLayers, texelWidth, texelHeight) -> None", "($module, target, attachment, texture, baseLayer, numLayers, texelWidth, texelHeight, /)", pygl_GLES2_glFramebufferShadingRateEXT_args, "GLES2_EXT_fragment_shading_rate", 7, 3517, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferShadingRateEXT_info = {"glFramebufferShadingRateEXT", "glFramebufferShadingRateEXT(target, attachment, texture, baseLayer, numLayers, texelWidth, texelHeight) -> None", "($module, target, attachment, texture, baseLayer, numLayers, texelWidth, texelHeight, /)", pygl_GLES2_glFramebufferShadingRateEXT_args, "GLES2_EXT_fragment_shading_rate", 7, 3514, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferShadingRateEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3731,7 +3731,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferTexture_args[] = {"target", "attachment", "texture", "level"};
-static const PyGLCommand pygl_GLES2_glFramebufferTexture_info = {"glFramebufferTexture", "glFramebufferTexture(target, attachment, texture, level) -> None", "($module, target, attachment, texture, level, /)", pygl_GLES2_glFramebufferTexture_args, "GLES2_ES_VERSION_3_2", 4, 3518, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferTexture_info = {"glFramebufferTexture", "glFramebufferTexture(target, attachment, texture, level) -> None", "($module, target, attachment, texture, level, /)", pygl_GLES2_glFramebufferTexture_args, "GLES2_ES_VERSION_3_2", 4, 3515, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferTexture(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3751,7 +3751,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferTexture2D_args[] = {"target", "attachment", "textarget", "texture", "level"};
-static const PyGLCommand pygl_GLES2_glFramebufferTexture2D_info = {"glFramebufferTexture2D", "glFramebufferTexture2D(target, attachment, textarget, texture, level) -> None", "($module, target, attachment, textarget, texture, level, /)", pygl_GLES2_glFramebufferTexture2D_args, "GLES2_VERSION_GLES2_2_0", 5, 3519, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferTexture2D_info = {"glFramebufferTexture2D", "glFramebufferTexture2D(target, attachment, textarget, texture, level) -> None", "($module, target, attachment, textarget, texture, level, /)", pygl_GLES2_glFramebufferTexture2D_args, "GLES2_VERSION_GLES2_2_0", 5, 3516, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferTexture2D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3772,7 +3772,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferTexture2DDownsampleIMG_args[] = {"target", "attachment", "textarget", "texture", "level", "xscale", "yscale"};
-static const PyGLCommand pygl_GLES2_glFramebufferTexture2DDownsampleIMG_info = {"glFramebufferTexture2DDownsampleIMG", "glFramebufferTexture2DDownsampleIMG(target, attachment, textarget, texture, level, xscale, yscale) -> None", "($module, target, attachment, textarget, texture, level, xscale, yscale, /)", pygl_GLES2_glFramebufferTexture2DDownsampleIMG_args, "GLES2_IMG_framebuffer_downsample", 7, 3520, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferTexture2DDownsampleIMG_info = {"glFramebufferTexture2DDownsampleIMG", "glFramebufferTexture2DDownsampleIMG(target, attachment, textarget, texture, level, xscale, yscale) -> None", "($module, target, attachment, textarget, texture, level, xscale, yscale, /)", pygl_GLES2_glFramebufferTexture2DDownsampleIMG_args, "GLES2_IMG_framebuffer_downsample", 7, 3517, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferTexture2DDownsampleIMG(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3795,7 +3795,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferTexture2DMultisampleEXT_args[] = {"target", "attachment", "textarget", "texture", "level", "samples"};
-static const PyGLCommand pygl_GLES2_glFramebufferTexture2DMultisampleEXT_info = {"glFramebufferTexture2DMultisampleEXT", "glFramebufferTexture2DMultisampleEXT(target, attachment, textarget, texture, level, samples) -> None", "($module, target, attachment, textarget, texture, level, samples, /)", pygl_GLES2_glFramebufferTexture2DMultisampleEXT_args, "GLES2_EXT_multisampled_render_to_texture", 6, 3521, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferTexture2DMultisampleEXT_info = {"glFramebufferTexture2DMultisampleEXT", "glFramebufferTexture2DMultisampleEXT(target, attachment, textarget, texture, level, samples) -> None", "($module, target, attachment, textarget, texture, level, samples, /)", pygl_GLES2_glFramebufferTexture2DMultisampleEXT_args, "GLES2_EXT_multisampled_render_to_texture", 6, 3518, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferTexture2DMultisampleEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3817,7 +3817,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferTexture2DMultisampleIMG_args[] = {"target", "attachment", "textarget", "texture", "level", "samples"};
-static const PyGLCommand pygl_GLES2_glFramebufferTexture2DMultisampleIMG_info = {"glFramebufferTexture2DMultisampleIMG", "glFramebufferTexture2DMultisampleIMG(target, attachment, textarget, texture, level, samples) -> None", "($module, target, attachment, textarget, texture, level, samples, /)", pygl_GLES2_glFramebufferTexture2DMultisampleIMG_args, "GLES2_IMG_multisampled_render_to_texture", 6, 3522, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferTexture2DMultisampleIMG_info = {"glFramebufferTexture2DMultisampleIMG", "glFramebufferTexture2DMultisampleIMG(target, attachment, textarget, texture, level, samples) -> None", "($module, target, attachment, textarget, texture, level, samples, /)", pygl_GLES2_glFramebufferTexture2DMultisampleIMG_args, "GLES2_IMG_multisampled_render_to_texture", 6, 3519, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferTexture2DMultisampleIMG(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3839,7 +3839,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferTexture3DOES_args[] = {"target", "attachment", "textarget", "texture", "level", "zoffset"};
-static const PyGLCommand pygl_GLES2_glFramebufferTexture3DOES_info = {"glFramebufferTexture3DOES", "glFramebufferTexture3DOES(target, attachment, textarget, texture, level, zoffset) -> None", "($module, target, attachment, textarget, texture, level, zoffset, /)", pygl_GLES2_glFramebufferTexture3DOES_args, "GLES2_OES_texture_3D", 6, 3523, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferTexture3DOES_info = {"glFramebufferTexture3DOES", "glFramebufferTexture3DOES(target, attachment, textarget, texture, level, zoffset) -> None", "($module, target, attachment, textarget, texture, level, zoffset, /)", pygl_GLES2_glFramebufferTexture3DOES_args, "GLES2_OES_texture_3D", 6, 3520, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferTexture3DOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3861,7 +3861,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferTextureEXT_args[] = {"target", "attachment", "texture", "level"};
-static const PyGLCommand pygl_GLES2_glFramebufferTextureEXT_info = {"glFramebufferTextureEXT", "glFramebufferTextureEXT(target, attachment, texture, level) -> None", "($module, target, attachment, texture, level, /)", pygl_GLES2_glFramebufferTextureEXT_args, "GLES2_EXT_geometry_shader", 4, 3524, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferTextureEXT_info = {"glFramebufferTextureEXT", "glFramebufferTextureEXT(target, attachment, texture, level) -> None", "($module, target, attachment, texture, level, /)", pygl_GLES2_glFramebufferTextureEXT_args, "GLES2_EXT_geometry_shader", 4, 3521, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferTextureEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3881,7 +3881,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferTextureLayerDownsampleIMG_args[] = {"target", "attachment", "texture", "level", "layer", "xscale", "yscale"};
-static const PyGLCommand pygl_GLES2_glFramebufferTextureLayerDownsampleIMG_info = {"glFramebufferTextureLayerDownsampleIMG", "glFramebufferTextureLayerDownsampleIMG(target, attachment, texture, level, layer, xscale, yscale) -> None", "($module, target, attachment, texture, level, layer, xscale, yscale, /)", pygl_GLES2_glFramebufferTextureLayerDownsampleIMG_args, "GLES2_IMG_framebuffer_downsample", 7, 3525, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferTextureLayerDownsampleIMG_info = {"glFramebufferTextureLayerDownsampleIMG", "glFramebufferTextureLayerDownsampleIMG(target, attachment, texture, level, layer, xscale, yscale) -> None", "($module, target, attachment, texture, level, layer, xscale, yscale, /)", pygl_GLES2_glFramebufferTextureLayerDownsampleIMG_args, "GLES2_IMG_framebuffer_downsample", 7, 3522, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferTextureLayerDownsampleIMG(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3904,7 +3904,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferTextureMultisampleMultiviewOVR_args[] = {"target", "attachment", "texture", "level", "samples", "baseViewIndex", "numViews"};
-static const PyGLCommand pygl_GLES2_glFramebufferTextureMultisampleMultiviewOVR_info = {"glFramebufferTextureMultisampleMultiviewOVR", "glFramebufferTextureMultisampleMultiviewOVR(target, attachment, texture, level, samples, baseViewIndex, numViews) -> None", "($module, target, attachment, texture, level, samples, baseViewIndex, numViews, /)", pygl_GLES2_glFramebufferTextureMultisampleMultiviewOVR_args, "GLES2_OVR_multiview_multisampled_render_to_texture", 7, 3526, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferTextureMultisampleMultiviewOVR_info = {"glFramebufferTextureMultisampleMultiviewOVR", "glFramebufferTextureMultisampleMultiviewOVR(target, attachment, texture, level, samples, baseViewIndex, numViews) -> None", "($module, target, attachment, texture, level, samples, baseViewIndex, numViews, /)", pygl_GLES2_glFramebufferTextureMultisampleMultiviewOVR_args, "GLES2_OVR_multiview_multisampled_render_to_texture", 7, 3523, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferTextureMultisampleMultiviewOVR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3927,7 +3927,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferTextureMultiviewOVR_args[] = {"target", "attachment", "texture", "level", "baseViewIndex", "numViews"};
-static const PyGLCommand pygl_GLES2_glFramebufferTextureMultiviewOVR_info = {"glFramebufferTextureMultiviewOVR", "glFramebufferTextureMultiviewOVR(target, attachment, texture, level, baseViewIndex, numViews) -> None", "($module, target, attachment, texture, level, baseViewIndex, numViews, /)", pygl_GLES2_glFramebufferTextureMultiviewOVR_args, "GLES2_OVR_multiview", 6, 3527, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferTextureMultiviewOVR_info = {"glFramebufferTextureMultiviewOVR", "glFramebufferTextureMultiviewOVR(target, attachment, texture, level, baseViewIndex, numViews) -> None", "($module, target, attachment, texture, level, baseViewIndex, numViews, /)", pygl_GLES2_glFramebufferTextureMultiviewOVR_args, "GLES2_OVR_multiview", 6, 3524, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferTextureMultiviewOVR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3949,7 +3949,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFramebufferTextureOES_args[] = {"target", "attachment", "texture", "level"};
-static const PyGLCommand pygl_GLES2_glFramebufferTextureOES_info = {"glFramebufferTextureOES", "glFramebufferTextureOES(target, attachment, texture, level) -> None", "($module, target, attachment, texture, level, /)", pygl_GLES2_glFramebufferTextureOES_args, "GLES2_OES_geometry_shader", 4, 3528, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glFramebufferTextureOES_info = {"glFramebufferTextureOES", "glFramebufferTextureOES(target, attachment, texture, level) -> None", "($module, target, attachment, texture, level, /)", pygl_GLES2_glFramebufferTextureOES_args, "GLES2_OES_geometry_shader", 4, 3525, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFramebufferTextureOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3969,7 +3969,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glFrontFace_args[] = {"mode"};
-static const PyGLCommand pygl_GLES2_glFrontFace_info = {"glFrontFace", "glFrontFace(mode) -> None", "($module, mode, /)", pygl_GLES2_glFrontFace_args, "GLES2_VERSION_GLES2_2_0", 1, 3529, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glFrontFace_info = {"glFrontFace", "glFrontFace(mode) -> None", "($module, mode, /)", pygl_GLES2_glFrontFace_args, "GLES2_VERSION_GLES2_2_0", 1, 3526, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glFrontFace(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3986,7 +3986,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGenBuffers_args[] = {"n", "buffers"};
-static const PyGLCommand pygl_GLES2_glGenBuffers_info = {"glGenBuffers", "glGenBuffers(n) -> buffers", "($module, n, buffers=None, /)", pygl_GLES2_glGenBuffers_args, "GLES2_VERSION_GLES2_2_0", 2, 3530, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGenBuffers_info = {"glGenBuffers", "glGenBuffers(n) -> buffers", "($module, n, buffers=None, /)", pygl_GLES2_glGenBuffers_args, "GLES2_VERSION_GLES2_2_0", 2, 3527, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGenBuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4008,7 +4008,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGenFencesNV_args[] = {"n", "fences"};
-static const PyGLCommand pygl_GLES2_glGenFencesNV_info = {"glGenFencesNV", "glGenFencesNV(n) -> fences", "($module, n, fences=None, /)", pygl_GLES2_glGenFencesNV_args, "GLES2_NV_fence", 2, 3531, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGenFencesNV_info = {"glGenFencesNV", "glGenFencesNV(n) -> fences", "($module, n, fences=None, /)", pygl_GLES2_glGenFencesNV_args, "GLES2_NV_fence", 2, 3528, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGenFencesNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4030,7 +4030,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGenFramebuffers_args[] = {"n", "framebuffers"};
-static const PyGLCommand pygl_GLES2_glGenFramebuffers_info = {"glGenFramebuffers", "glGenFramebuffers(n) -> framebuffers", "($module, n, framebuffers=None, /)", pygl_GLES2_glGenFramebuffers_args, "GLES2_VERSION_GLES2_2_0", 2, 3532, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGenFramebuffers_info = {"glGenFramebuffers", "glGenFramebuffers(n) -> framebuffers", "($module, n, framebuffers=None, /)", pygl_GLES2_glGenFramebuffers_args, "GLES2_VERSION_GLES2_2_0", 2, 3529, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGenFramebuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4052,7 +4052,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGenPathsNV_args[] = {"range"};
-static const PyGLCommand pygl_GLES2_glGenPathsNV_info = {"glGenPathsNV", "glGenPathsNV(range) -> GLuint", "($module, range, /)", pygl_GLES2_glGenPathsNV_args, "GLES2_NV_path_rendering", 1, 3533, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glGenPathsNV_info = {"glGenPathsNV", "glGenPathsNV(range) -> GLuint", "($module, range, /)", pygl_GLES2_glGenPathsNV_args, "GLES2_NV_path_rendering", 1, 3530, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGenPathsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4069,7 +4069,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGenPerfMonitorsAMD_args[] = {"n", "monitors"};
-static const PyGLCommand pygl_GLES2_glGenPerfMonitorsAMD_info = {"glGenPerfMonitorsAMD", "glGenPerfMonitorsAMD(n) -> monitors", "($module, n, monitors=None, /)", pygl_GLES2_glGenPerfMonitorsAMD_args, "GLES2_AMD_performance_monitor", 2, 3534, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGenPerfMonitorsAMD_info = {"glGenPerfMonitorsAMD", "glGenPerfMonitorsAMD(n) -> monitors", "($module, n, monitors=None, /)", pygl_GLES2_glGenPerfMonitorsAMD_args, "GLES2_AMD_performance_monitor", 2, 3531, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGenPerfMonitorsAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4091,7 +4091,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGenProgramPipelinesEXT_args[] = {"n", "pipelines"};
-static const PyGLCommand pygl_GLES2_glGenProgramPipelinesEXT_info = {"glGenProgramPipelinesEXT", "glGenProgramPipelinesEXT(n, pipelines) -> None", "($module, n, pipelines, /)", pygl_GLES2_glGenProgramPipelinesEXT_args, "GLES2_EXT_separate_shader_objects", 2, 3535, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGenProgramPipelinesEXT_info = {"glGenProgramPipelinesEXT", "glGenProgramPipelinesEXT(n, pipelines) -> None", "($module, n, pipelines, /)", pygl_GLES2_glGenProgramPipelinesEXT_args, "GLES2_EXT_separate_shader_objects", 2, 3532, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGenProgramPipelinesEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4112,7 +4112,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGenQueriesEXT_args[] = {"n", "ids"};
-static const PyGLCommand pygl_GLES2_glGenQueriesEXT_info = {"glGenQueriesEXT", "glGenQueriesEXT(n, ids) -> None", "($module, n, ids, /)", pygl_GLES2_glGenQueriesEXT_args, "GLES2_EXT_occlusion_query_boolean", 2, 3536, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGenQueriesEXT_info = {"glGenQueriesEXT", "glGenQueriesEXT(n, ids) -> None", "($module, n, ids, /)", pygl_GLES2_glGenQueriesEXT_args, "GLES2_EXT_occlusion_query_boolean", 2, 3533, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGenQueriesEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4133,7 +4133,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGenRenderbuffers_args[] = {"n", "renderbuffers"};
-static const PyGLCommand pygl_GLES2_glGenRenderbuffers_info = {"glGenRenderbuffers", "glGenRenderbuffers(n) -> renderbuffers", "($module, n, renderbuffers=None, /)", pygl_GLES2_glGenRenderbuffers_args, "GLES2_VERSION_GLES2_2_0", 2, 3537, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGenRenderbuffers_info = {"glGenRenderbuffers", "glGenRenderbuffers(n) -> renderbuffers", "($module, n, renderbuffers=None, /)", pygl_GLES2_glGenRenderbuffers_args, "GLES2_VERSION_GLES2_2_0", 2, 3534, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGenRenderbuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4155,7 +4155,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGenSamplers_args[] = {"count", "samplers"};
-static const PyGLCommand pygl_GLES2_glGenSamplers_info = {"glGenSamplers", "glGenSamplers(count) -> samplers", "($module, count, samplers=None, /)", pygl_GLES2_glGenSamplers_args, "GLES2_MESA_sampler_objects", 2, 3538, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGenSamplers_info = {"glGenSamplers", "glGenSamplers(count) -> samplers", "($module, count, samplers=None, /)", pygl_GLES2_glGenSamplers_args, "GLES2_MESA_sampler_objects", 2, 3535, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGenSamplers(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4177,7 +4177,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGenSemaphoresEXT_args[] = {"n", "semaphores"};
-static const PyGLCommand pygl_GLES2_glGenSemaphoresEXT_info = {"glGenSemaphoresEXT", "glGenSemaphoresEXT(n, semaphores) -> None", "($module, n, semaphores, /)", pygl_GLES2_glGenSemaphoresEXT_args, "GLES2_EXT_semaphore", 2, 3539, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGenSemaphoresEXT_info = {"glGenSemaphoresEXT", "glGenSemaphoresEXT(n, semaphores) -> None", "($module, n, semaphores, /)", pygl_GLES2_glGenSemaphoresEXT_args, "GLES2_EXT_semaphore", 2, 3536, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGenSemaphoresEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4198,7 +4198,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGenTextures_args[] = {"n", "textures"};
-static const PyGLCommand pygl_GLES2_glGenTextures_info = {"glGenTextures", "glGenTextures(n) -> textures", "($module, n, textures=None, /)", pygl_GLES2_glGenTextures_args, "GLES2_VERSION_GLES2_2_0", 2, 3540, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGenTextures_info = {"glGenTextures", "glGenTextures(n) -> textures", "($module, n, textures=None, /)", pygl_GLES2_glGenTextures_args, "GLES2_VERSION_GLES2_2_0", 2, 3537, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGenTextures(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4220,7 +4220,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGenVertexArraysOES_args[] = {"n", "arrays"};
-static const PyGLCommand pygl_GLES2_glGenVertexArraysOES_info = {"glGenVertexArraysOES", "glGenVertexArraysOES(n, arrays) -> None", "($module, n, arrays, /)", pygl_GLES2_glGenVertexArraysOES_args, "GLES2_OES_vertex_array_object", 2, 3541, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGenVertexArraysOES_info = {"glGenVertexArraysOES", "glGenVertexArraysOES(n, arrays) -> None", "($module, n, arrays, /)", pygl_GLES2_glGenVertexArraysOES_args, "GLES2_OES_vertex_array_object", 2, 3538, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGenVertexArraysOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4241,7 +4241,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGenerateMipmap_args[] = {"target"};
-static const PyGLCommand pygl_GLES2_glGenerateMipmap_info = {"glGenerateMipmap", "glGenerateMipmap(target) -> None", "($module, target, /)", pygl_GLES2_glGenerateMipmap_args, "GLES2_VERSION_GLES2_2_0", 1, 3542, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glGenerateMipmap_info = {"glGenerateMipmap", "glGenerateMipmap(target) -> None", "($module, target, /)", pygl_GLES2_glGenerateMipmap_args, "GLES2_VERSION_GLES2_2_0", 1, 3539, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGenerateMipmap(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4258,7 +4258,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetBooleanv_args[] = {"pname", "data"};
-static const PyGLCommand pygl_GLES2_glGetBooleanv_info = {"glGetBooleanv", "glGetBooleanv(pname) -> data", "($module, pname, data=None, /)", pygl_GLES2_glGetBooleanv_args, "GLES2_VERSION_GLES2_2_0", 2, 3543, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetBooleanv_info = {"glGetBooleanv", "glGetBooleanv(pname) -> data", "($module, pname, data=None, /)", pygl_GLES2_glGetBooleanv_args, "GLES2_VERSION_GLES2_2_0", 2, 3540, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetBooleanv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4280,7 +4280,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetBufferParameteriv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetBufferParameteriv_info = {"glGetBufferParameteriv", "glGetBufferParameteriv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetBufferParameteriv_args, "GLES2_VERSION_GLES2_2_0", 3, 3544, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetBufferParameteriv_info = {"glGetBufferParameteriv", "glGetBufferParameteriv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetBufferParameteriv_args, "GLES2_VERSION_GLES2_2_0", 3, 3541, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetBufferParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4303,7 +4303,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetBufferPointervOES_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetBufferPointervOES_info = {"glGetBufferPointervOES", "glGetBufferPointervOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glGetBufferPointervOES_args, "GLES2_OES_mapbuffer", 3, 3545, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetBufferPointervOES_info = {"glGetBufferPointervOES", "glGetBufferPointervOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glGetBufferPointervOES_args, "GLES2_OES_mapbuffer", 3, 3542, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetBufferPointervOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4325,7 +4325,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetCoverageModulationTableNV_args[] = {"bufSize", "v"};
-static const PyGLCommand pygl_GLES2_glGetCoverageModulationTableNV_info = {"glGetCoverageModulationTableNV", "glGetCoverageModulationTableNV(bufSize, v) -> None", "($module, bufSize, v, /)", pygl_GLES2_glGetCoverageModulationTableNV_args, "GLES2_NV_framebuffer_mixed_samples", 2, 3546, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetCoverageModulationTableNV_info = {"glGetCoverageModulationTableNV", "glGetCoverageModulationTableNV(bufSize, v) -> None", "($module, bufSize, v, /)", pygl_GLES2_glGetCoverageModulationTableNV_args, "GLES2_NV_framebuffer_mixed_samples", 2, 3543, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetCoverageModulationTableNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4346,7 +4346,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetDebugMessageLog_args[] = {"count", "bufSize", "sources", "types", "ids", "severities", "lengths", "messageLog"};
-static const PyGLCommand pygl_GLES2_glGetDebugMessageLog_info = {"glGetDebugMessageLog", "glGetDebugMessageLog(count, bufSize) -> ids, lengths, messageLog, severities, sources, types", "($module, count, bufSize, ids=None, lengths=None, messageLog=None, severities=None, sources=None, types=None, /)", pygl_GLES2_glGetDebugMessageLog_args, "GLES2_ES_VERSION_3_2", 8, 3547, PYGL_API_GLES2, 0, 8, 1, 0};
+static const PyGLCommand pygl_GLES2_glGetDebugMessageLog_info = {"glGetDebugMessageLog", "glGetDebugMessageLog(count, bufSize) -> ids, lengths, messageLog, severities, sources, types", "($module, count, bufSize, ids=None, lengths=None, messageLog=None, severities=None, sources=None, types=None, /)", pygl_GLES2_glGetDebugMessageLog_args, "GLES2_ES_VERSION_3_2", 8, 3544, PYGL_API_GLES2, 0, 8, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGetDebugMessageLog(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4382,7 +4382,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetDebugMessageLogKHR_args[] = {"count", "bufSize", "sources", "types", "ids", "severities", "lengths", "messageLog"};
-static const PyGLCommand pygl_GLES2_glGetDebugMessageLogKHR_info = {"glGetDebugMessageLogKHR", "glGetDebugMessageLogKHR(count, bufSize, sources, types, ids, severities, lengths, messageLog) -> GLuint", "($module, count, bufSize, sources, types, ids, severities, lengths, messageLog, /)", pygl_GLES2_glGetDebugMessageLogKHR_args, "GLES2_KHR_debug", 8, 3548, PYGL_API_GLES2, 0, 8, 1, 0};
+static const PyGLCommand pygl_GLES2_glGetDebugMessageLogKHR_info = {"glGetDebugMessageLogKHR", "glGetDebugMessageLogKHR(count, bufSize, sources, types, ids, severities, lengths, messageLog) -> GLuint", "($module, count, bufSize, sources, types, ids, severities, lengths, messageLog, /)", pygl_GLES2_glGetDebugMessageLogKHR_args, "GLES2_KHR_debug", 8, 3545, PYGL_API_GLES2, 0, 8, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGetDebugMessageLogKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4410,7 +4410,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetDriverControlStringQCOM_args[] = {"driverControl", "bufSize", "length", "driverControlString"};
-static const PyGLCommand pygl_GLES2_glGetDriverControlStringQCOM_info = {"glGetDriverControlStringQCOM", "glGetDriverControlStringQCOM(driverControl, bufSize, length, driverControlString) -> None", "($module, driverControl, bufSize, length, driverControlString, /)", pygl_GLES2_glGetDriverControlStringQCOM_args, "GLES2_QCOM_driver_control", 4, 3549, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetDriverControlStringQCOM_info = {"glGetDriverControlStringQCOM", "glGetDriverControlStringQCOM(driverControl, bufSize, length, driverControlString) -> None", "($module, driverControl, bufSize, length, driverControlString, /)", pygl_GLES2_glGetDriverControlStringQCOM_args, "GLES2_QCOM_driver_control", 4, 3546, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetDriverControlStringQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4433,7 +4433,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetDriverControlsQCOM_args[] = {"num", "size", "driverControls"};
-static const PyGLCommand pygl_GLES2_glGetDriverControlsQCOM_info = {"glGetDriverControlsQCOM", "glGetDriverControlsQCOM(num, size, driverControls) -> None", "($module, num, size, driverControls, /)", pygl_GLES2_glGetDriverControlsQCOM_args, "GLES2_QCOM_driver_control", 3, 3550, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetDriverControlsQCOM_info = {"glGetDriverControlsQCOM", "glGetDriverControlsQCOM(num, size, driverControls) -> None", "($module, num, size, driverControls, /)", pygl_GLES2_glGetDriverControlsQCOM_args, "GLES2_QCOM_driver_control", 3, 3547, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetDriverControlsQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4454,7 +4454,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glGetError_info = {"glGetError", "glGetError() -> GLenum", "($module, /)", NULL, "GLES2_VERSION_GLES2_2_0", 0, 3551, PYGL_API_GLES2, 0, 0, 1, 0};
+static const PyGLCommand pygl_GLES2_glGetError_info = {"glGetError", "glGetError() -> GLenum", "($module, /)", NULL, "GLES2_VERSION_GLES2_2_0", 0, 3548, PYGL_API_GLES2, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGetError(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4470,7 +4470,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetFenceivNV_args[] = {"fence", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetFenceivNV_info = {"glGetFenceivNV", "glGetFenceivNV(fence, pname) -> params", "($module, fence, pname, params=None, /)", pygl_GLES2_glGetFenceivNV_args, "GLES2_NV_fence", 3, 3552, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetFenceivNV_info = {"glGetFenceivNV", "glGetFenceivNV(fence, pname) -> params", "($module, fence, pname, params=None, /)", pygl_GLES2_glGetFenceivNV_args, "GLES2_NV_fence", 3, 3549, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetFenceivNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4493,7 +4493,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetFirstPerfQueryIdINTEL_args[] = {"queryId"};
-static const PyGLCommand pygl_GLES2_glGetFirstPerfQueryIdINTEL_info = {"glGetFirstPerfQueryIdINTEL", "glGetFirstPerfQueryIdINTEL(queryId) -> None", "($module, queryId, /)", pygl_GLES2_glGetFirstPerfQueryIdINTEL_args, "GLES2_INTEL_performance_query", 1, 3553, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetFirstPerfQueryIdINTEL_info = {"glGetFirstPerfQueryIdINTEL", "glGetFirstPerfQueryIdINTEL(queryId) -> None", "($module, queryId, /)", pygl_GLES2_glGetFirstPerfQueryIdINTEL_args, "GLES2_INTEL_performance_query", 1, 3550, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetFirstPerfQueryIdINTEL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4513,7 +4513,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetFloati_vNV_args[] = {"target", "index", "data"};
-static const PyGLCommand pygl_GLES2_glGetFloati_vNV_info = {"glGetFloati_vNV", "glGetFloati_vNV(target, index, data) -> None", "($module, target, index, data, /)", pygl_GLES2_glGetFloati_vNV_args, "GLES2_NV_viewport_array", 3, 3554, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetFloati_vNV_info = {"glGetFloati_vNV", "glGetFloati_vNV(target, index, data) -> None", "($module, target, index, data, /)", pygl_GLES2_glGetFloati_vNV_args, "GLES2_NV_viewport_array", 3, 3551, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetFloati_vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4535,7 +4535,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetFloati_vOES_args[] = {"target", "index", "data"};
-static const PyGLCommand pygl_GLES2_glGetFloati_vOES_info = {"glGetFloati_vOES", "glGetFloati_vOES(target, index, data) -> None", "($module, target, index, data, /)", pygl_GLES2_glGetFloati_vOES_args, "GLES2_OES_viewport_array", 3, 3555, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetFloati_vOES_info = {"glGetFloati_vOES", "glGetFloati_vOES(target, index, data) -> None", "($module, target, index, data, /)", pygl_GLES2_glGetFloati_vOES_args, "GLES2_OES_viewport_array", 3, 3552, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetFloati_vOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4557,7 +4557,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetFloatv_args[] = {"pname", "data"};
-static const PyGLCommand pygl_GLES2_glGetFloatv_info = {"glGetFloatv", "glGetFloatv(pname) -> data", "($module, pname, data=None, /)", pygl_GLES2_glGetFloatv_args, "GLES2_VERSION_GLES2_2_0", 2, 3556, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetFloatv_info = {"glGetFloatv", "glGetFloatv(pname) -> data", "($module, pname, data=None, /)", pygl_GLES2_glGetFloatv_args, "GLES2_VERSION_GLES2_2_0", 2, 3553, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetFloatv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4579,7 +4579,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetFragDataIndexEXT_args[] = {"program", "name"};
-static const PyGLCommand pygl_GLES2_glGetFragDataIndexEXT_info = {"glGetFragDataIndexEXT", "glGetFragDataIndexEXT(program, name) -> GLint", "($module, program, name, /)", pygl_GLES2_glGetFragDataIndexEXT_args, "GLES2_EXT_blend_func_extended", 2, 3557, PYGL_API_GLES2, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLES2_glGetFragDataIndexEXT_info = {"glGetFragDataIndexEXT", "glGetFragDataIndexEXT(program, name) -> GLint", "($module, program, name, /)", pygl_GLES2_glGetFragDataIndexEXT_args, "GLES2_EXT_blend_func_extended", 2, 3554, PYGL_API_GLES2, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGetFragDataIndexEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4601,7 +4601,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetFragmentShadingRatesEXT_args[] = {"samples", "maxCount", "count", "shadingRates"};
-static const PyGLCommand pygl_GLES2_glGetFragmentShadingRatesEXT_info = {"glGetFragmentShadingRatesEXT", "glGetFragmentShadingRatesEXT(samples, maxCount, count, shadingRates) -> None", "($module, samples, maxCount, count, shadingRates, /)", pygl_GLES2_glGetFragmentShadingRatesEXT_args, "GLES2_EXT_fragment_shading_rate", 4, 3558, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetFragmentShadingRatesEXT_info = {"glGetFragmentShadingRatesEXT", "glGetFragmentShadingRatesEXT(samples, maxCount, count, shadingRates) -> None", "($module, samples, maxCount, count, shadingRates, /)", pygl_GLES2_glGetFragmentShadingRatesEXT_args, "GLES2_EXT_fragment_shading_rate", 4, 3555, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetFragmentShadingRatesEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4624,7 +4624,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetFramebufferAttachmentParameteriv_args[] = {"target", "attachment", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetFramebufferAttachmentParameteriv_info = {"glGetFramebufferAttachmentParameteriv", "glGetFramebufferAttachmentParameteriv(target, attachment, pname) -> params", "($module, target, attachment, pname, params=None, /)", pygl_GLES2_glGetFramebufferAttachmentParameteriv_args, "GLES2_VERSION_GLES2_2_0", 4, 3559, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetFramebufferAttachmentParameteriv_info = {"glGetFramebufferAttachmentParameteriv", "glGetFramebufferAttachmentParameteriv(target, attachment, pname) -> params", "($module, target, attachment, pname, params=None, /)", pygl_GLES2_glGetFramebufferAttachmentParameteriv_args, "GLES2_VERSION_GLES2_2_0", 4, 3556, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetFramebufferAttachmentParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4648,7 +4648,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetFramebufferParameterivMESA_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetFramebufferParameterivMESA_info = {"glGetFramebufferParameterivMESA", "glGetFramebufferParameterivMESA(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glGetFramebufferParameterivMESA_args, "GLES2_MESA_framebuffer_flip_y", 3, 3560, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetFramebufferParameterivMESA_info = {"glGetFramebufferParameterivMESA", "glGetFramebufferParameterivMESA(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glGetFramebufferParameterivMESA_args, "GLES2_MESA_framebuffer_flip_y", 3, 3557, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetFramebufferParameterivMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4670,7 +4670,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetFramebufferPixelLocalStorageSizeEXT_args[] = {"target"};
-static const PyGLCommand pygl_GLES2_glGetFramebufferPixelLocalStorageSizeEXT_info = {"glGetFramebufferPixelLocalStorageSizeEXT", "glGetFramebufferPixelLocalStorageSizeEXT(target) -> GLsizei", "($module, target, /)", pygl_GLES2_glGetFramebufferPixelLocalStorageSizeEXT_args, "GLES2_EXT_shader_pixel_local_storage2", 1, 3561, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glGetFramebufferPixelLocalStorageSizeEXT_info = {"glGetFramebufferPixelLocalStorageSizeEXT", "glGetFramebufferPixelLocalStorageSizeEXT(target) -> GLsizei", "($module, target, /)", pygl_GLES2_glGetFramebufferPixelLocalStorageSizeEXT_args, "GLES2_EXT_shader_pixel_local_storage2", 1, 3558, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGetFramebufferPixelLocalStorageSizeEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4686,7 +4686,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glGetGraphicsResetStatus_info = {"glGetGraphicsResetStatus", "glGetGraphicsResetStatus() -> GLenum", "($module, /)", NULL, "GLES2_ES_VERSION_3_2", 0, 3562, PYGL_API_GLES2, 0, 0, 1, 0};
+static const PyGLCommand pygl_GLES2_glGetGraphicsResetStatus_info = {"glGetGraphicsResetStatus", "glGetGraphicsResetStatus() -> GLenum", "($module, /)", NULL, "GLES2_ES_VERSION_3_2", 0, 3559, PYGL_API_GLES2, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGetGraphicsResetStatus(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4701,7 +4701,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glGetGraphicsResetStatusEXT_info = {"glGetGraphicsResetStatusEXT", "glGetGraphicsResetStatusEXT() -> GLenum", "($module, /)", NULL, "GLES2_EXT_robustness", 0, 3563, PYGL_API_GLES2, 0, 0, 1, 0};
+static const PyGLCommand pygl_GLES2_glGetGraphicsResetStatusEXT_info = {"glGetGraphicsResetStatusEXT", "glGetGraphicsResetStatusEXT() -> GLenum", "($module, /)", NULL, "GLES2_EXT_robustness", 0, 3560, PYGL_API_GLES2, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGetGraphicsResetStatusEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4716,7 +4716,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glGetGraphicsResetStatusKHR_info = {"glGetGraphicsResetStatusKHR", "glGetGraphicsResetStatusKHR() -> GLenum", "($module, /)", NULL, "GLES2_KHR_robustness", 0, 3564, PYGL_API_GLES2, 0, 0, 1, 0};
+static const PyGLCommand pygl_GLES2_glGetGraphicsResetStatusKHR_info = {"glGetGraphicsResetStatusKHR", "glGetGraphicsResetStatusKHR() -> GLenum", "($module, /)", NULL, "GLES2_KHR_robustness", 0, 3561, PYGL_API_GLES2, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGetGraphicsResetStatusKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4732,7 +4732,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetImageHandleNV_args[] = {"texture", "level", "layered", "layer", "format"};
-static const PyGLCommand pygl_GLES2_glGetImageHandleNV_info = {"glGetImageHandleNV", "glGetImageHandleNV(texture, level, layered, layer, format) -> GLuint64", "($module, texture, level, layered, layer, format, /)", pygl_GLES2_glGetImageHandleNV_args, "GLES2_NV_bindless_texture", 5, 3565, PYGL_API_GLES2, 0, 5, 1, 0};
+static const PyGLCommand pygl_GLES2_glGetImageHandleNV_info = {"glGetImageHandleNV", "glGetImageHandleNV(texture, level, layered, layer, format) -> GLuint64", "($module, texture, level, layered, layer, format, /)", pygl_GLES2_glGetImageHandleNV_args, "GLES2_NV_bindless_texture", 5, 3562, PYGL_API_GLES2, 0, 5, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGetImageHandleNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4753,7 +4753,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetInteger64vAPPLE_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetInteger64vAPPLE_info = {"glGetInteger64vAPPLE", "glGetInteger64vAPPLE(pname, params) -> None", "($module, pname, params, /)", pygl_GLES2_glGetInteger64vAPPLE_args, "GLES2_APPLE_sync", 2, 3566, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetInteger64vAPPLE_info = {"glGetInteger64vAPPLE", "glGetInteger64vAPPLE(pname, params) -> None", "($module, pname, params, /)", pygl_GLES2_glGetInteger64vAPPLE_args, "GLES2_APPLE_sync", 2, 3563, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetInteger64vAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4774,7 +4774,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetInteger64vEXT_args[] = {"pname", "data"};
-static const PyGLCommand pygl_GLES2_glGetInteger64vEXT_info = {"glGetInteger64vEXT", "glGetInteger64vEXT(pname, data) -> None", "($module, pname, data, /)", pygl_GLES2_glGetInteger64vEXT_args, "GLES2_EXT_disjoint_timer_query", 2, 3567, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetInteger64vEXT_info = {"glGetInteger64vEXT", "glGetInteger64vEXT(pname, data) -> None", "($module, pname, data, /)", pygl_GLES2_glGetInteger64vEXT_args, "GLES2_EXT_disjoint_timer_query", 2, 3564, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetInteger64vEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4795,7 +4795,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetIntegeri_vEXT_args[] = {"target", "index", "data"};
-static const PyGLCommand pygl_GLES2_glGetIntegeri_vEXT_info = {"glGetIntegeri_vEXT", "glGetIntegeri_vEXT(target, index, data) -> None", "($module, target, index, data, /)", pygl_GLES2_glGetIntegeri_vEXT_args, "GLES2_EXT_multiview_draw_buffers", 3, 3568, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetIntegeri_vEXT_info = {"glGetIntegeri_vEXT", "glGetIntegeri_vEXT(target, index, data) -> None", "($module, target, index, data, /)", pygl_GLES2_glGetIntegeri_vEXT_args, "GLES2_EXT_multiview_draw_buffers", 3, 3565, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetIntegeri_vEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4817,7 +4817,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetIntegerv_args[] = {"pname", "data"};
-static const PyGLCommand pygl_GLES2_glGetIntegerv_info = {"glGetIntegerv", "glGetIntegerv(pname) -> data", "($module, pname, data=None, /)", pygl_GLES2_glGetIntegerv_args, "GLES2_VERSION_GLES2_2_0", 2, 3569, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetIntegerv_info = {"glGetIntegerv", "glGetIntegerv(pname) -> data", "($module, pname, data=None, /)", pygl_GLES2_glGetIntegerv_args, "GLES2_VERSION_GLES2_2_0", 2, 3566, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetIntegerv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4839,7 +4839,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetInternalformatSampleivNV_args[] = {"target", "internalformat", "samples", "pname", "count", "params"};
-static const PyGLCommand pygl_GLES2_glGetInternalformatSampleivNV_info = {"glGetInternalformatSampleivNV", "glGetInternalformatSampleivNV(target, internalformat, samples, pname, count, params) -> None", "($module, target, internalformat, samples, pname, count, params, /)", pygl_GLES2_glGetInternalformatSampleivNV_args, "GLES2_NV_internalformat_sample_query", 6, 3570, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetInternalformatSampleivNV_info = {"glGetInternalformatSampleivNV", "glGetInternalformatSampleivNV(target, internalformat, samples, pname, count, params) -> None", "($module, target, internalformat, samples, pname, count, params, /)", pygl_GLES2_glGetInternalformatSampleivNV_args, "GLES2_NV_internalformat_sample_query", 6, 3567, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetInternalformatSampleivNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4864,7 +4864,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetMemoryObjectDetachedResourcesuivNV_args[] = {"memory", "pname", "first", "count", "params"};
-static const PyGLCommand pygl_GLES2_glGetMemoryObjectDetachedResourcesuivNV_info = {"glGetMemoryObjectDetachedResourcesuivNV", "glGetMemoryObjectDetachedResourcesuivNV(memory, pname, first, count, params) -> None", "($module, memory, pname, first, count, params, /)", pygl_GLES2_glGetMemoryObjectDetachedResourcesuivNV_args, "GLES2_NV_memory_attachment", 5, 3571, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetMemoryObjectDetachedResourcesuivNV_info = {"glGetMemoryObjectDetachedResourcesuivNV", "glGetMemoryObjectDetachedResourcesuivNV(memory, pname, first, count, params) -> None", "($module, memory, pname, first, count, params, /)", pygl_GLES2_glGetMemoryObjectDetachedResourcesuivNV_args, "GLES2_NV_memory_attachment", 5, 3568, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetMemoryObjectDetachedResourcesuivNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4888,7 +4888,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetMemoryObjectParameterivEXT_args[] = {"memoryObject", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetMemoryObjectParameterivEXT_info = {"glGetMemoryObjectParameterivEXT", "glGetMemoryObjectParameterivEXT(memoryObject, pname, params) -> None", "($module, memoryObject, pname, params, /)", pygl_GLES2_glGetMemoryObjectParameterivEXT_args, "GLES2_EXT_memory_object", 3, 3572, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetMemoryObjectParameterivEXT_info = {"glGetMemoryObjectParameterivEXT", "glGetMemoryObjectParameterivEXT(memoryObject, pname, params) -> None", "($module, memoryObject, pname, params, /)", pygl_GLES2_glGetMemoryObjectParameterivEXT_args, "GLES2_EXT_memory_object", 3, 3569, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetMemoryObjectParameterivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4910,7 +4910,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetNextPerfQueryIdINTEL_args[] = {"queryId", "nextQueryId"};
-static const PyGLCommand pygl_GLES2_glGetNextPerfQueryIdINTEL_info = {"glGetNextPerfQueryIdINTEL", "glGetNextPerfQueryIdINTEL(queryId, nextQueryId) -> None", "($module, queryId, nextQueryId, /)", pygl_GLES2_glGetNextPerfQueryIdINTEL_args, "GLES2_INTEL_performance_query", 2, 3573, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetNextPerfQueryIdINTEL_info = {"glGetNextPerfQueryIdINTEL", "glGetNextPerfQueryIdINTEL(queryId, nextQueryId) -> None", "($module, queryId, nextQueryId, /)", pygl_GLES2_glGetNextPerfQueryIdINTEL_args, "GLES2_INTEL_performance_query", 2, 3570, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetNextPerfQueryIdINTEL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4931,7 +4931,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetObjectLabel_args[] = {"identifier", "name", "bufSize", "length", "label"};
-static const PyGLCommand pygl_GLES2_glGetObjectLabel_info = {"glGetObjectLabel", "glGetObjectLabel(identifier, name, bufSize) -> label, length", "($module, identifier, name, bufSize, label=None, length=None, /)", pygl_GLES2_glGetObjectLabel_args, "GLES2_ES_VERSION_3_2", 5, 3574, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetObjectLabel_info = {"glGetObjectLabel", "glGetObjectLabel(identifier, name, bufSize) -> label, length", "($module, identifier, name, bufSize, label=None, length=None, /)", pygl_GLES2_glGetObjectLabel_args, "GLES2_ES_VERSION_3_2", 5, 3571, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetObjectLabel(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4960,7 +4960,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetObjectLabelEXT_args[] = {"type", "object", "bufSize", "length", "label"};
-static const PyGLCommand pygl_GLES2_glGetObjectLabelEXT_info = {"glGetObjectLabelEXT", "glGetObjectLabelEXT(type, object, bufSize, length, label) -> None", "($module, type, object, bufSize, length, label, /)", pygl_GLES2_glGetObjectLabelEXT_args, "GLES2_EXT_debug_label", 5, 3575, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetObjectLabelEXT_info = {"glGetObjectLabelEXT", "glGetObjectLabelEXT(type, object, bufSize, length, label) -> None", "($module, type, object, bufSize, length, label, /)", pygl_GLES2_glGetObjectLabelEXT_args, "GLES2_EXT_debug_label", 5, 3572, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetObjectLabelEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -4984,7 +4984,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetObjectLabelKHR_args[] = {"identifier", "name", "bufSize", "length", "label"};
-static const PyGLCommand pygl_GLES2_glGetObjectLabelKHR_info = {"glGetObjectLabelKHR", "glGetObjectLabelKHR(identifier, name, bufSize, length, label) -> None", "($module, identifier, name, bufSize, length, label, /)", pygl_GLES2_glGetObjectLabelKHR_args, "GLES2_KHR_debug", 5, 3576, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetObjectLabelKHR_info = {"glGetObjectLabelKHR", "glGetObjectLabelKHR(identifier, name, bufSize, length, label) -> None", "($module, identifier, name, bufSize, length, label, /)", pygl_GLES2_glGetObjectLabelKHR_args, "GLES2_KHR_debug", 5, 3573, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetObjectLabelKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5008,7 +5008,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetObjectPtrLabel_args[] = {"ptr", "bufSize", "length", "label"};
-static const PyGLCommand pygl_GLES2_glGetObjectPtrLabel_info = {"glGetObjectPtrLabel", "glGetObjectPtrLabel(ptr, bufSize) -> label, length", "($module, ptr, bufSize, label=None, length=None, /)", pygl_GLES2_glGetObjectPtrLabel_args, "GLES2_ES_VERSION_3_2", 4, 3577, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetObjectPtrLabel_info = {"glGetObjectPtrLabel", "glGetObjectPtrLabel(ptr, bufSize) -> label, length", "($module, ptr, bufSize, label=None, length=None, /)", pygl_GLES2_glGetObjectPtrLabel_args, "GLES2_ES_VERSION_3_2", 4, 3574, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetObjectPtrLabel(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5036,7 +5036,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetObjectPtrLabelKHR_args[] = {"ptr", "bufSize", "length", "label"};
-static const PyGLCommand pygl_GLES2_glGetObjectPtrLabelKHR_info = {"glGetObjectPtrLabelKHR", "glGetObjectPtrLabelKHR(ptr, bufSize, length, label) -> None", "($module, ptr, bufSize, length, label, /)", pygl_GLES2_glGetObjectPtrLabelKHR_args, "GLES2_KHR_debug", 4, 3578, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetObjectPtrLabelKHR_info = {"glGetObjectPtrLabelKHR", "glGetObjectPtrLabelKHR(ptr, bufSize, length, label) -> None", "($module, ptr, bufSize, length, label, /)", pygl_GLES2_glGetObjectPtrLabelKHR_args, "GLES2_KHR_debug", 4, 3575, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetObjectPtrLabelKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5059,7 +5059,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPathColorGenfvNV_args[] = {"color", "pname", "value"};
-static const PyGLCommand pygl_GLES2_glGetPathColorGenfvNV_info = {"glGetPathColorGenfvNV", "glGetPathColorGenfvNV(color, pname) -> value", "($module, color, pname, value=None, /)", pygl_GLES2_glGetPathColorGenfvNV_args, "GLES2_NV_path_rendering", 3, 3579, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPathColorGenfvNV_info = {"glGetPathColorGenfvNV", "glGetPathColorGenfvNV(color, pname) -> value", "($module, color, pname, value=None, /)", pygl_GLES2_glGetPathColorGenfvNV_args, "GLES2_NV_path_rendering", 3, 3576, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPathColorGenfvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5082,7 +5082,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPathColorGenivNV_args[] = {"color", "pname", "value"};
-static const PyGLCommand pygl_GLES2_glGetPathColorGenivNV_info = {"glGetPathColorGenivNV", "glGetPathColorGenivNV(color, pname) -> value", "($module, color, pname, value=None, /)", pygl_GLES2_glGetPathColorGenivNV_args, "GLES2_NV_path_rendering", 3, 3580, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPathColorGenivNV_info = {"glGetPathColorGenivNV", "glGetPathColorGenivNV(color, pname) -> value", "($module, color, pname, value=None, /)", pygl_GLES2_glGetPathColorGenivNV_args, "GLES2_NV_path_rendering", 3, 3577, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPathColorGenivNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5105,7 +5105,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPathCommandsNV_args[] = {"path", "commands"};
-static const PyGLCommand pygl_GLES2_glGetPathCommandsNV_info = {"glGetPathCommandsNV", "glGetPathCommandsNV(path) -> commands", "($module, path, commands=None, /)", pygl_GLES2_glGetPathCommandsNV_args, "GLES2_NV_path_rendering", 2, 3581, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPathCommandsNV_info = {"glGetPathCommandsNV", "glGetPathCommandsNV(path) -> commands", "($module, path, commands=None, /)", pygl_GLES2_glGetPathCommandsNV_args, "GLES2_NV_path_rendering", 2, 3578, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPathCommandsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5127,7 +5127,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPathCoordsNV_args[] = {"path", "coords"};
-static const PyGLCommand pygl_GLES2_glGetPathCoordsNV_info = {"glGetPathCoordsNV", "glGetPathCoordsNV(path) -> coords", "($module, path, coords=None, /)", pygl_GLES2_glGetPathCoordsNV_args, "GLES2_NV_path_rendering", 2, 3582, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPathCoordsNV_info = {"glGetPathCoordsNV", "glGetPathCoordsNV(path) -> coords", "($module, path, coords=None, /)", pygl_GLES2_glGetPathCoordsNV_args, "GLES2_NV_path_rendering", 2, 3579, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPathCoordsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5149,7 +5149,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPathDashArrayNV_args[] = {"path", "dashArray"};
-static const PyGLCommand pygl_GLES2_glGetPathDashArrayNV_info = {"glGetPathDashArrayNV", "glGetPathDashArrayNV(path) -> dashArray", "($module, path, dashArray=None, /)", pygl_GLES2_glGetPathDashArrayNV_args, "GLES2_NV_path_rendering", 2, 3583, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPathDashArrayNV_info = {"glGetPathDashArrayNV", "glGetPathDashArrayNV(path) -> dashArray", "($module, path, dashArray=None, /)", pygl_GLES2_glGetPathDashArrayNV_args, "GLES2_NV_path_rendering", 2, 3580, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPathDashArrayNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5171,7 +5171,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPathLengthNV_args[] = {"path", "startSegment", "numSegments"};
-static const PyGLCommand pygl_GLES2_glGetPathLengthNV_info = {"glGetPathLengthNV", "glGetPathLengthNV(path, startSegment, numSegments) -> GLfloat", "($module, path, startSegment, numSegments, /)", pygl_GLES2_glGetPathLengthNV_args, "GLES2_NV_path_rendering", 3, 3584, PYGL_API_GLES2, 0, 3, 3, 0};
+static const PyGLCommand pygl_GLES2_glGetPathLengthNV_info = {"glGetPathLengthNV", "glGetPathLengthNV(path, startSegment, numSegments) -> GLfloat", "($module, path, startSegment, numSegments, /)", pygl_GLES2_glGetPathLengthNV_args, "GLES2_NV_path_rendering", 3, 3581, PYGL_API_GLES2, 0, 3, 3, 0};
 
 static PyObject *
 pygl_GLES2_glGetPathLengthNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5190,7 +5190,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPathMetricRangeNV_args[] = {"metricQueryMask", "firstPathName", "numPaths", "stride", "metrics"};
-static const PyGLCommand pygl_GLES2_glGetPathMetricRangeNV_info = {"glGetPathMetricRangeNV", "glGetPathMetricRangeNV(metricQueryMask, firstPathName, numPaths, stride, metrics) -> None", "($module, metricQueryMask, firstPathName, numPaths, stride, metrics, /)", pygl_GLES2_glGetPathMetricRangeNV_args, "GLES2_NV_path_rendering", 5, 3585, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPathMetricRangeNV_info = {"glGetPathMetricRangeNV", "glGetPathMetricRangeNV(metricQueryMask, firstPathName, numPaths, stride, metrics) -> None", "($module, metricQueryMask, firstPathName, numPaths, stride, metrics, /)", pygl_GLES2_glGetPathMetricRangeNV_args, "GLES2_NV_path_rendering", 5, 3582, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPathMetricRangeNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5214,7 +5214,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPathMetricsNV_args[] = {"metricQueryMask", "numPaths", "pathNameType", "paths", "pathBase", "stride", "metrics"};
-static const PyGLCommand pygl_GLES2_glGetPathMetricsNV_info = {"glGetPathMetricsNV", "glGetPathMetricsNV(metricQueryMask, numPaths, pathNameType, paths, pathBase, stride, metrics) -> None", "($module, metricQueryMask, numPaths, pathNameType, paths, pathBase, stride, metrics, /)", pygl_GLES2_glGetPathMetricsNV_args, "GLES2_NV_path_rendering", 7, 3586, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPathMetricsNV_info = {"glGetPathMetricsNV", "glGetPathMetricsNV(metricQueryMask, numPaths, pathNameType, paths, pathBase, stride, metrics) -> None", "($module, metricQueryMask, numPaths, pathNameType, paths, pathBase, stride, metrics, /)", pygl_GLES2_glGetPathMetricsNV_args, "GLES2_NV_path_rendering", 7, 3583, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPathMetricsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5240,7 +5240,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPathParameterfvNV_args[] = {"path", "pname", "value"};
-static const PyGLCommand pygl_GLES2_glGetPathParameterfvNV_info = {"glGetPathParameterfvNV", "glGetPathParameterfvNV(path, pname) -> value", "($module, path, pname, value=None, /)", pygl_GLES2_glGetPathParameterfvNV_args, "GLES2_NV_path_rendering", 3, 3587, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPathParameterfvNV_info = {"glGetPathParameterfvNV", "glGetPathParameterfvNV(path, pname) -> value", "($module, path, pname, value=None, /)", pygl_GLES2_glGetPathParameterfvNV_args, "GLES2_NV_path_rendering", 3, 3584, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPathParameterfvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5263,7 +5263,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPathParameterivNV_args[] = {"path", "pname", "value"};
-static const PyGLCommand pygl_GLES2_glGetPathParameterivNV_info = {"glGetPathParameterivNV", "glGetPathParameterivNV(path, pname) -> value", "($module, path, pname, value=None, /)", pygl_GLES2_glGetPathParameterivNV_args, "GLES2_NV_path_rendering", 3, 3588, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPathParameterivNV_info = {"glGetPathParameterivNV", "glGetPathParameterivNV(path, pname) -> value", "($module, path, pname, value=None, /)", pygl_GLES2_glGetPathParameterivNV_args, "GLES2_NV_path_rendering", 3, 3585, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPathParameterivNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5286,7 +5286,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPathSpacingNV_args[] = {"pathListMode", "numPaths", "pathNameType", "paths", "pathBase", "advanceScale", "kerningScale", "transformType", "returnedSpacing"};
-static const PyGLCommand pygl_GLES2_glGetPathSpacingNV_info = {"glGetPathSpacingNV", "glGetPathSpacingNV(pathListMode, numPaths, pathNameType, paths, pathBase, advanceScale, kerningScale, transformType, returnedSpacing) -> None", "($module, pathListMode, numPaths, pathNameType, paths, pathBase, advanceScale, kerningScale, transformType, returnedSpacing, /)", pygl_GLES2_glGetPathSpacingNV_args, "GLES2_NV_path_rendering", 9, 3589, PYGL_API_GLES2, 0, 9, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPathSpacingNV_info = {"glGetPathSpacingNV", "glGetPathSpacingNV(pathListMode, numPaths, pathNameType, paths, pathBase, advanceScale, kerningScale, transformType, returnedSpacing) -> None", "($module, pathListMode, numPaths, pathNameType, paths, pathBase, advanceScale, kerningScale, transformType, returnedSpacing, /)", pygl_GLES2_glGetPathSpacingNV_args, "GLES2_NV_path_rendering", 9, 3586, PYGL_API_GLES2, 0, 9, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPathSpacingNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5314,7 +5314,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPathTexGenfvNV_args[] = {"texCoordSet", "pname", "value"};
-static const PyGLCommand pygl_GLES2_glGetPathTexGenfvNV_info = {"glGetPathTexGenfvNV", "glGetPathTexGenfvNV(texCoordSet, pname) -> value", "($module, texCoordSet, pname, value=None, /)", pygl_GLES2_glGetPathTexGenfvNV_args, "GLES2_NV_path_rendering", 3, 3590, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPathTexGenfvNV_info = {"glGetPathTexGenfvNV", "glGetPathTexGenfvNV(texCoordSet, pname) -> value", "($module, texCoordSet, pname, value=None, /)", pygl_GLES2_glGetPathTexGenfvNV_args, "GLES2_NV_path_rendering", 3, 3587, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPathTexGenfvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5337,7 +5337,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPathTexGenivNV_args[] = {"texCoordSet", "pname", "value"};
-static const PyGLCommand pygl_GLES2_glGetPathTexGenivNV_info = {"glGetPathTexGenivNV", "glGetPathTexGenivNV(texCoordSet, pname) -> value", "($module, texCoordSet, pname, value=None, /)", pygl_GLES2_glGetPathTexGenivNV_args, "GLES2_NV_path_rendering", 3, 3591, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPathTexGenivNV_info = {"glGetPathTexGenivNV", "glGetPathTexGenivNV(texCoordSet, pname) -> value", "($module, texCoordSet, pname, value=None, /)", pygl_GLES2_glGetPathTexGenivNV_args, "GLES2_NV_path_rendering", 3, 3588, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPathTexGenivNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5360,7 +5360,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPerfCounterInfoINTEL_args[] = {"queryId", "counterId", "counterNameLength", "counterName", "counterDescLength", "counterDesc", "counterOffset", "counterDataSize", "counterTypeEnum", "counterDataTypeEnum", "rawCounterMaxValue"};
-static const PyGLCommand pygl_GLES2_glGetPerfCounterInfoINTEL_info = {"glGetPerfCounterInfoINTEL", "glGetPerfCounterInfoINTEL(queryId, counterId, counterNameLength, counterName, counterDescLength, counterDesc, counterOffset, counterDataSize, counterTypeEnum, counterDataTypeEnum, rawCounterMaxValue) -> None", "($module, queryId, counterId, counterNameLength, counterName, counterDescLength, counterDesc, counterOffset, counterDataSize, counterTypeEnum, counterDataTypeEnum, rawCounterMaxValue, /)", pygl_GLES2_glGetPerfCounterInfoINTEL_args, "GLES2_INTEL_performance_query", 11, 3592, PYGL_API_GLES2, 0, 11, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPerfCounterInfoINTEL_info = {"glGetPerfCounterInfoINTEL", "glGetPerfCounterInfoINTEL(queryId, counterId, counterNameLength, counterName, counterDescLength, counterDesc, counterOffset, counterDataSize, counterTypeEnum, counterDataTypeEnum, rawCounterMaxValue) -> None", "($module, queryId, counterId, counterNameLength, counterName, counterDescLength, counterDesc, counterOffset, counterDataSize, counterTypeEnum, counterDataTypeEnum, rawCounterMaxValue, /)", pygl_GLES2_glGetPerfCounterInfoINTEL_args, "GLES2_INTEL_performance_query", 11, 3589, PYGL_API_GLES2, 0, 11, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPerfCounterInfoINTEL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5390,7 +5390,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPerfMonitorCounterDataAMD_args[] = {"monitor", "pname", "dataSize", "data", "bytesWritten"};
-static const PyGLCommand pygl_GLES2_glGetPerfMonitorCounterDataAMD_info = {"glGetPerfMonitorCounterDataAMD", "glGetPerfMonitorCounterDataAMD(monitor, pname, dataSize) -> bytesWritten, data", "($module, monitor, pname, dataSize, bytesWritten=None, data=None, /)", pygl_GLES2_glGetPerfMonitorCounterDataAMD_args, "GLES2_AMD_performance_monitor", 5, 3593, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPerfMonitorCounterDataAMD_info = {"glGetPerfMonitorCounterDataAMD", "glGetPerfMonitorCounterDataAMD(monitor, pname, dataSize) -> bytesWritten, data", "($module, monitor, pname, dataSize, bytesWritten=None, data=None, /)", pygl_GLES2_glGetPerfMonitorCounterDataAMD_args, "GLES2_AMD_performance_monitor", 5, 3590, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPerfMonitorCounterDataAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5419,7 +5419,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPerfMonitorCounterInfoAMD_args[] = {"group", "counter", "pname", "data"};
-static const PyGLCommand pygl_GLES2_glGetPerfMonitorCounterInfoAMD_info = {"glGetPerfMonitorCounterInfoAMD", "glGetPerfMonitorCounterInfoAMD(group, counter, pname) -> data", "($module, group, counter, pname, data=None, /)", pygl_GLES2_glGetPerfMonitorCounterInfoAMD_args, "GLES2_AMD_performance_monitor", 4, 3594, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPerfMonitorCounterInfoAMD_info = {"glGetPerfMonitorCounterInfoAMD", "glGetPerfMonitorCounterInfoAMD(group, counter, pname) -> data", "($module, group, counter, pname, data=None, /)", pygl_GLES2_glGetPerfMonitorCounterInfoAMD_args, "GLES2_AMD_performance_monitor", 4, 3591, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPerfMonitorCounterInfoAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5443,7 +5443,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPerfMonitorCounterStringAMD_args[] = {"group", "counter", "bufSize", "length", "counterString"};
-static const PyGLCommand pygl_GLES2_glGetPerfMonitorCounterStringAMD_info = {"glGetPerfMonitorCounterStringAMD", "glGetPerfMonitorCounterStringAMD(group, counter, bufSize) -> counterString, length", "($module, group, counter, bufSize, counterString=None, length=None, /)", pygl_GLES2_glGetPerfMonitorCounterStringAMD_args, "GLES2_AMD_performance_monitor", 5, 3595, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPerfMonitorCounterStringAMD_info = {"glGetPerfMonitorCounterStringAMD", "glGetPerfMonitorCounterStringAMD(group, counter, bufSize) -> counterString, length", "($module, group, counter, bufSize, counterString=None, length=None, /)", pygl_GLES2_glGetPerfMonitorCounterStringAMD_args, "GLES2_AMD_performance_monitor", 5, 3592, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPerfMonitorCounterStringAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5471,38 +5471,8 @@ _fail:
 }
 
 
-static const char *const pygl_GLES2_glGetPerfMonitorCountersAMD_args[] = {"group", "numCounters", "maxActiveCounters", "counterSize", "counters"};
-static const PyGLCommand pygl_GLES2_glGetPerfMonitorCountersAMD_info = {"glGetPerfMonitorCountersAMD", "glGetPerfMonitorCountersAMD(group, counterSize) -> counters, maxActiveCounters, numCounters", "($module, group, counterSize, counters=None, maxActiveCounters=None, numCounters=None, /)", pygl_GLES2_glGetPerfMonitorCountersAMD_args, "GLES2_AMD_performance_monitor", 5, 3596, PYGL_API_GLES2, 0, 5, 0, 0};
-
-static PyObject *
-pygl_GLES2_glGetPerfMonitorCountersAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
-{
-    PYGL_ARITY_RANGE(2, 5);
-    PYGL_FRAME(3);
-    PYGL_U(0, group);
-    PYGL_SZ(3, counterSize);
-    PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(1, numCounters, &pygl_elem_GLint, (Py_ssize_t)(1));
-    PYGL_ARRAY_OUT(2, maxActiveCounters, &pygl_elem_GLint, (Py_ssize_t)(1));
-    PYGL_ARRAY_OUT(4, counters, &pygl_elem_GLuint, (Py_ssize_t)(counterSize));
-    PYGL_CALL_V((unsigned int, void *, void *, int, void *), (group, numCounters, maxActiveCounters, counterSize, counters));
-    PYGL_CHECK();
-    const PyGLOutput _outputs[] = {
-        {2, &pygl_elem_GLuint, (Py_ssize_t)(counterSize)},
-        {1, &pygl_elem_GLint, (Py_ssize_t)(1)},
-        {0, &pygl_elem_GLint, (Py_ssize_t)(1)},
-    };
-    PyObject *_value = pygl_output_tuple(_bufs, _outputs, 3);
-    PYGL_CLEANUP();
-    return _value;
-_fail:
-    PYGL_CLEANUP();
-    return NULL;
-}
-
-
 static const char *const pygl_GLES2_glGetPerfMonitorGroupStringAMD_args[] = {"group", "bufSize", "length", "groupString"};
-static const PyGLCommand pygl_GLES2_glGetPerfMonitorGroupStringAMD_info = {"glGetPerfMonitorGroupStringAMD", "glGetPerfMonitorGroupStringAMD(group, bufSize) -> groupString, length", "($module, group, bufSize, groupString=None, length=None, /)", pygl_GLES2_glGetPerfMonitorGroupStringAMD_args, "GLES2_AMD_performance_monitor", 4, 3597, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPerfMonitorGroupStringAMD_info = {"glGetPerfMonitorGroupStringAMD", "glGetPerfMonitorGroupStringAMD(group, bufSize) -> groupString, length", "($module, group, bufSize, groupString=None, length=None, /)", pygl_GLES2_glGetPerfMonitorGroupStringAMD_args, "GLES2_AMD_performance_monitor", 4, 3593, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPerfMonitorGroupStringAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5529,35 +5499,8 @@ _fail:
 }
 
 
-static const char *const pygl_GLES2_glGetPerfMonitorGroupsAMD_args[] = {"numGroups", "groupsSize", "groups"};
-static const PyGLCommand pygl_GLES2_glGetPerfMonitorGroupsAMD_info = {"glGetPerfMonitorGroupsAMD", "glGetPerfMonitorGroupsAMD(groupsSize) -> groups, numGroups", "($module, groupsSize, groups=None, numGroups=None, /)", pygl_GLES2_glGetPerfMonitorGroupsAMD_args, "GLES2_AMD_performance_monitor", 3, 3598, PYGL_API_GLES2, 0, 3, 0, 0};
-
-static PyObject *
-pygl_GLES2_glGetPerfMonitorGroupsAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
-{
-    PYGL_ARITY_RANGE(1, 3);
-    PYGL_FRAME(2);
-    PYGL_SZ(1, groupsSize);
-    PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(0, numGroups, &pygl_elem_GLint, (Py_ssize_t)(1));
-    PYGL_ARRAY_OUT(2, groups, &pygl_elem_GLuint, (Py_ssize_t)(groupsSize));
-    PYGL_CALL_V((void *, int, void *), (numGroups, groupsSize, groups));
-    PYGL_CHECK();
-    const PyGLOutput _outputs[] = {
-        {1, &pygl_elem_GLuint, (Py_ssize_t)(groupsSize)},
-        {0, &pygl_elem_GLint, (Py_ssize_t)(1)},
-    };
-    PyObject *_value = pygl_output_tuple(_bufs, _outputs, 2);
-    PYGL_CLEANUP();
-    return _value;
-_fail:
-    PYGL_CLEANUP();
-    return NULL;
-}
-
-
 static const char *const pygl_GLES2_glGetPerfQueryDataINTEL_args[] = {"queryHandle", "flags", "dataSize", "data", "bytesWritten"};
-static const PyGLCommand pygl_GLES2_glGetPerfQueryDataINTEL_info = {"glGetPerfQueryDataINTEL", "glGetPerfQueryDataINTEL(queryHandle, flags, dataSize, data, bytesWritten) -> None", "($module, queryHandle, flags, dataSize, data, bytesWritten, /)", pygl_GLES2_glGetPerfQueryDataINTEL_args, "GLES2_INTEL_performance_query", 5, 3599, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPerfQueryDataINTEL_info = {"glGetPerfQueryDataINTEL", "glGetPerfQueryDataINTEL(queryHandle, flags, dataSize, data, bytesWritten) -> None", "($module, queryHandle, flags, dataSize, data, bytesWritten, /)", pygl_GLES2_glGetPerfQueryDataINTEL_args, "GLES2_INTEL_performance_query", 5, 3594, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPerfQueryDataINTEL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5581,7 +5524,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPerfQueryIdByNameINTEL_args[] = {"queryName", "queryId"};
-static const PyGLCommand pygl_GLES2_glGetPerfQueryIdByNameINTEL_info = {"glGetPerfQueryIdByNameINTEL", "glGetPerfQueryIdByNameINTEL(queryName, queryId) -> None", "($module, queryName, queryId, /)", pygl_GLES2_glGetPerfQueryIdByNameINTEL_args, "GLES2_INTEL_performance_query", 2, 3600, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPerfQueryIdByNameINTEL_info = {"glGetPerfQueryIdByNameINTEL", "glGetPerfQueryIdByNameINTEL(queryName, queryId) -> None", "($module, queryName, queryId, /)", pygl_GLES2_glGetPerfQueryIdByNameINTEL_args, "GLES2_INTEL_performance_query", 2, 3595, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPerfQueryIdByNameINTEL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5602,7 +5545,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPerfQueryInfoINTEL_args[] = {"queryId", "queryNameLength", "queryName", "dataSize", "noCounters", "noInstances", "capsMask"};
-static const PyGLCommand pygl_GLES2_glGetPerfQueryInfoINTEL_info = {"glGetPerfQueryInfoINTEL", "glGetPerfQueryInfoINTEL(queryId, queryNameLength, queryName, dataSize, noCounters, noInstances, capsMask) -> None", "($module, queryId, queryNameLength, queryName, dataSize, noCounters, noInstances, capsMask, /)", pygl_GLES2_glGetPerfQueryInfoINTEL_args, "GLES2_INTEL_performance_query", 7, 3601, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPerfQueryInfoINTEL_info = {"glGetPerfQueryInfoINTEL", "glGetPerfQueryInfoINTEL(queryId, queryNameLength, queryName, dataSize, noCounters, noInstances, capsMask) -> None", "($module, queryId, queryNameLength, queryName, dataSize, noCounters, noInstances, capsMask, /)", pygl_GLES2_glGetPerfQueryInfoINTEL_args, "GLES2_INTEL_performance_query", 7, 3596, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPerfQueryInfoINTEL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5628,7 +5571,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPointerv_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetPointerv_info = {"glGetPointerv", "glGetPointerv(pname) -> params", "($module, pname, params=None, /)", pygl_GLES2_glGetPointerv_args, "GLES2_ES_VERSION_3_2", 2, 3602, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPointerv_info = {"glGetPointerv", "glGetPointerv(pname) -> params", "($module, pname, params=None, /)", pygl_GLES2_glGetPointerv_args, "GLES2_ES_VERSION_3_2", 2, 3597, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPointerv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5650,7 +5593,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetPointervKHR_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetPointervKHR_info = {"glGetPointervKHR", "glGetPointervKHR(pname, params) -> None", "($module, pname, params, /)", pygl_GLES2_glGetPointervKHR_args, "GLES2_KHR_debug", 2, 3603, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetPointervKHR_info = {"glGetPointervKHR", "glGetPointervKHR(pname, params) -> None", "($module, pname, params, /)", pygl_GLES2_glGetPointervKHR_args, "GLES2_KHR_debug", 2, 3598, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetPointervKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5671,7 +5614,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetProgramBinaryOES_args[] = {"program", "bufSize", "length", "binaryFormat", "binary"};
-static const PyGLCommand pygl_GLES2_glGetProgramBinaryOES_info = {"glGetProgramBinaryOES", "glGetProgramBinaryOES(program, bufSize, length, binaryFormat, binary) -> None", "($module, program, bufSize, length, binaryFormat, binary, /)", pygl_GLES2_glGetProgramBinaryOES_args, "GLES2_OES_get_program_binary", 5, 3604, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetProgramBinaryOES_info = {"glGetProgramBinaryOES", "glGetProgramBinaryOES(program, bufSize, length, binaryFormat, binary) -> None", "($module, program, bufSize, length, binaryFormat, binary, /)", pygl_GLES2_glGetProgramBinaryOES_args, "GLES2_OES_get_program_binary", 5, 3599, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetProgramBinaryOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5695,7 +5638,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetProgramPipelineInfoLogEXT_args[] = {"pipeline", "bufSize", "length", "infoLog"};
-static const PyGLCommand pygl_GLES2_glGetProgramPipelineInfoLogEXT_info = {"glGetProgramPipelineInfoLogEXT", "glGetProgramPipelineInfoLogEXT(pipeline, bufSize, length, infoLog) -> None", "($module, pipeline, bufSize, length, infoLog, /)", pygl_GLES2_glGetProgramPipelineInfoLogEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3605, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetProgramPipelineInfoLogEXT_info = {"glGetProgramPipelineInfoLogEXT", "glGetProgramPipelineInfoLogEXT(pipeline, bufSize, length, infoLog) -> None", "($module, pipeline, bufSize, length, infoLog, /)", pygl_GLES2_glGetProgramPipelineInfoLogEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3600, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetProgramPipelineInfoLogEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5718,7 +5661,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetProgramPipelineivEXT_args[] = {"pipeline", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetProgramPipelineivEXT_info = {"glGetProgramPipelineivEXT", "glGetProgramPipelineivEXT(pipeline, pname, params) -> None", "($module, pipeline, pname, params, /)", pygl_GLES2_glGetProgramPipelineivEXT_args, "GLES2_EXT_separate_shader_objects", 3, 3606, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetProgramPipelineivEXT_info = {"glGetProgramPipelineivEXT", "glGetProgramPipelineivEXT(pipeline, pname, params) -> None", "($module, pipeline, pname, params, /)", pygl_GLES2_glGetProgramPipelineivEXT_args, "GLES2_EXT_separate_shader_objects", 3, 3601, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetProgramPipelineivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5740,7 +5683,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetProgramResourceLocationIndexEXT_args[] = {"program", "programInterface", "name"};
-static const PyGLCommand pygl_GLES2_glGetProgramResourceLocationIndexEXT_info = {"glGetProgramResourceLocationIndexEXT", "glGetProgramResourceLocationIndexEXT(program, programInterface, name) -> GLint", "($module, program, programInterface, name, /)", pygl_GLES2_glGetProgramResourceLocationIndexEXT_args, "GLES2_EXT_blend_func_extended", 3, 3607, PYGL_API_GLES2, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLES2_glGetProgramResourceLocationIndexEXT_info = {"glGetProgramResourceLocationIndexEXT", "glGetProgramResourceLocationIndexEXT(program, programInterface, name) -> GLint", "($module, program, programInterface, name, /)", pygl_GLES2_glGetProgramResourceLocationIndexEXT_args, "GLES2_EXT_blend_func_extended", 3, 3602, PYGL_API_GLES2, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGetProgramResourceLocationIndexEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5763,7 +5706,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetProgramResourcefvNV_args[] = {"program", "programInterface", "index", "propCount", "props", "count", "length", "params"};
-static const PyGLCommand pygl_GLES2_glGetProgramResourcefvNV_info = {"glGetProgramResourcefvNV", "glGetProgramResourcefvNV(program, programInterface, index, propCount, props, count, length, params) -> None", "($module, program, programInterface, index, propCount, props, count, length, params, /)", pygl_GLES2_glGetProgramResourcefvNV_args, "GLES2_NV_path_rendering", 8, 3608, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetProgramResourcefvNV_info = {"glGetProgramResourcefvNV", "glGetProgramResourcefvNV(program, programInterface, index, propCount, props, count, length, params) -> None", "($module, program, programInterface, index, propCount, props, count, length, params, /)", pygl_GLES2_glGetProgramResourcefvNV_args, "GLES2_NV_path_rendering", 8, 3603, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetProgramResourcefvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5790,7 +5733,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetProgramiv_args[] = {"program", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetProgramiv_info = {"glGetProgramiv", "glGetProgramiv(program, pname) -> params", "($module, program, pname, params=None, /)", pygl_GLES2_glGetProgramiv_args, "GLES2_VERSION_GLES2_2_0", 3, 3609, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetProgramiv_info = {"glGetProgramiv", "glGetProgramiv(program, pname) -> params", "($module, program, pname, params=None, /)", pygl_GLES2_glGetProgramiv_args, "GLES2_VERSION_GLES2_2_0", 3, 3604, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetProgramiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5813,7 +5756,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetQueryObjecti64vEXT_args[] = {"id", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetQueryObjecti64vEXT_info = {"glGetQueryObjecti64vEXT", "glGetQueryObjecti64vEXT(id, pname) -> params", "($module, id, pname, params=None, /)", pygl_GLES2_glGetQueryObjecti64vEXT_args, "GLES2_EXT_disjoint_timer_query", 3, 3610, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetQueryObjecti64vEXT_info = {"glGetQueryObjecti64vEXT", "glGetQueryObjecti64vEXT(id, pname) -> params", "($module, id, pname, params=None, /)", pygl_GLES2_glGetQueryObjecti64vEXT_args, "GLES2_EXT_disjoint_timer_query", 3, 3605, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetQueryObjecti64vEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5836,7 +5779,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetQueryObjectivEXT_args[] = {"id", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetQueryObjectivEXT_info = {"glGetQueryObjectivEXT", "glGetQueryObjectivEXT(id, pname, params) -> None", "($module, id, pname, params, /)", pygl_GLES2_glGetQueryObjectivEXT_args, "GLES2_EXT_disjoint_timer_query", 3, 3611, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetQueryObjectivEXT_info = {"glGetQueryObjectivEXT", "glGetQueryObjectivEXT(id, pname, params) -> None", "($module, id, pname, params, /)", pygl_GLES2_glGetQueryObjectivEXT_args, "GLES2_EXT_disjoint_timer_query", 3, 3606, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetQueryObjectivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5858,7 +5801,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetQueryObjectui64vEXT_args[] = {"id", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetQueryObjectui64vEXT_info = {"glGetQueryObjectui64vEXT", "glGetQueryObjectui64vEXT(id, pname) -> params", "($module, id, pname, params=None, /)", pygl_GLES2_glGetQueryObjectui64vEXT_args, "GLES2_EXT_disjoint_timer_query", 3, 3612, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetQueryObjectui64vEXT_info = {"glGetQueryObjectui64vEXT", "glGetQueryObjectui64vEXT(id, pname) -> params", "($module, id, pname, params=None, /)", pygl_GLES2_glGetQueryObjectui64vEXT_args, "GLES2_EXT_disjoint_timer_query", 3, 3607, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetQueryObjectui64vEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5881,7 +5824,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetQueryObjectuivEXT_args[] = {"id", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetQueryObjectuivEXT_info = {"glGetQueryObjectuivEXT", "glGetQueryObjectuivEXT(id, pname, params) -> None", "($module, id, pname, params, /)", pygl_GLES2_glGetQueryObjectuivEXT_args, "GLES2_EXT_occlusion_query_boolean", 3, 3613, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetQueryObjectuivEXT_info = {"glGetQueryObjectuivEXT", "glGetQueryObjectuivEXT(id, pname, params) -> None", "($module, id, pname, params, /)", pygl_GLES2_glGetQueryObjectuivEXT_args, "GLES2_EXT_occlusion_query_boolean", 3, 3608, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetQueryObjectuivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5903,7 +5846,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetQueryivEXT_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetQueryivEXT_info = {"glGetQueryivEXT", "glGetQueryivEXT(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glGetQueryivEXT_args, "GLES2_EXT_occlusion_query_boolean", 3, 3614, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetQueryivEXT_info = {"glGetQueryivEXT", "glGetQueryivEXT(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glGetQueryivEXT_args, "GLES2_EXT_occlusion_query_boolean", 3, 3609, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetQueryivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5925,7 +5868,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetRenderbufferParameteriv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetRenderbufferParameteriv_info = {"glGetRenderbufferParameteriv", "glGetRenderbufferParameteriv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetRenderbufferParameteriv_args, "GLES2_VERSION_GLES2_2_0", 3, 3615, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetRenderbufferParameteriv_info = {"glGetRenderbufferParameteriv", "glGetRenderbufferParameteriv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetRenderbufferParameteriv_args, "GLES2_VERSION_GLES2_2_0", 3, 3610, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetRenderbufferParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5948,7 +5891,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetSamplerParameterIiv_args[] = {"sampler", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetSamplerParameterIiv_info = {"glGetSamplerParameterIiv", "glGetSamplerParameterIiv(sampler, pname) -> params", "($module, sampler, pname, params=None, /)", pygl_GLES2_glGetSamplerParameterIiv_args, "GLES2_ES_VERSION_3_2", 3, 3616, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetSamplerParameterIiv_info = {"glGetSamplerParameterIiv", "glGetSamplerParameterIiv(sampler, pname) -> params", "($module, sampler, pname, params=None, /)", pygl_GLES2_glGetSamplerParameterIiv_args, "GLES2_ES_VERSION_3_2", 3, 3611, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetSamplerParameterIiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5971,7 +5914,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetSamplerParameterIivEXT_args[] = {"sampler", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetSamplerParameterIivEXT_info = {"glGetSamplerParameterIivEXT", "glGetSamplerParameterIivEXT(sampler, pname, params) -> None", "($module, sampler, pname, params, /)", pygl_GLES2_glGetSamplerParameterIivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3617, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetSamplerParameterIivEXT_info = {"glGetSamplerParameterIivEXT", "glGetSamplerParameterIivEXT(sampler, pname, params) -> None", "($module, sampler, pname, params, /)", pygl_GLES2_glGetSamplerParameterIivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3612, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetSamplerParameterIivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -5993,7 +5936,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetSamplerParameterIivOES_args[] = {"sampler", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetSamplerParameterIivOES_info = {"glGetSamplerParameterIivOES", "glGetSamplerParameterIivOES(sampler, pname, params) -> None", "($module, sampler, pname, params, /)", pygl_GLES2_glGetSamplerParameterIivOES_args, "GLES2_OES_texture_border_clamp", 3, 3618, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetSamplerParameterIivOES_info = {"glGetSamplerParameterIivOES", "glGetSamplerParameterIivOES(sampler, pname, params) -> None", "($module, sampler, pname, params, /)", pygl_GLES2_glGetSamplerParameterIivOES_args, "GLES2_OES_texture_border_clamp", 3, 3613, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetSamplerParameterIivOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6015,7 +5958,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetSamplerParameterIuiv_args[] = {"sampler", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetSamplerParameterIuiv_info = {"glGetSamplerParameterIuiv", "glGetSamplerParameterIuiv(sampler, pname) -> params", "($module, sampler, pname, params=None, /)", pygl_GLES2_glGetSamplerParameterIuiv_args, "GLES2_ES_VERSION_3_2", 3, 3619, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetSamplerParameterIuiv_info = {"glGetSamplerParameterIuiv", "glGetSamplerParameterIuiv(sampler, pname) -> params", "($module, sampler, pname, params=None, /)", pygl_GLES2_glGetSamplerParameterIuiv_args, "GLES2_ES_VERSION_3_2", 3, 3614, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetSamplerParameterIuiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6038,7 +5981,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetSamplerParameterIuivEXT_args[] = {"sampler", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetSamplerParameterIuivEXT_info = {"glGetSamplerParameterIuivEXT", "glGetSamplerParameterIuivEXT(sampler, pname, params) -> None", "($module, sampler, pname, params, /)", pygl_GLES2_glGetSamplerParameterIuivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3620, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetSamplerParameterIuivEXT_info = {"glGetSamplerParameterIuivEXT", "glGetSamplerParameterIuivEXT(sampler, pname, params) -> None", "($module, sampler, pname, params, /)", pygl_GLES2_glGetSamplerParameterIuivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3615, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetSamplerParameterIuivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6060,7 +6003,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetSamplerParameterIuivOES_args[] = {"sampler", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetSamplerParameterIuivOES_info = {"glGetSamplerParameterIuivOES", "glGetSamplerParameterIuivOES(sampler, pname, params) -> None", "($module, sampler, pname, params, /)", pygl_GLES2_glGetSamplerParameterIuivOES_args, "GLES2_OES_texture_border_clamp", 3, 3621, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetSamplerParameterIuivOES_info = {"glGetSamplerParameterIuivOES", "glGetSamplerParameterIuivOES(sampler, pname, params) -> None", "($module, sampler, pname, params, /)", pygl_GLES2_glGetSamplerParameterIuivOES_args, "GLES2_OES_texture_border_clamp", 3, 3616, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetSamplerParameterIuivOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6082,7 +6025,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetSamplerParameterfv_args[] = {"sampler", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetSamplerParameterfv_info = {"glGetSamplerParameterfv", "glGetSamplerParameterfv(sampler, pname) -> params", "($module, sampler, pname, params=None, /)", pygl_GLES2_glGetSamplerParameterfv_args, "GLES2_MESA_sampler_objects", 3, 3622, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetSamplerParameterfv_info = {"glGetSamplerParameterfv", "glGetSamplerParameterfv(sampler, pname) -> params", "($module, sampler, pname, params=None, /)", pygl_GLES2_glGetSamplerParameterfv_args, "GLES2_MESA_sampler_objects", 3, 3617, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetSamplerParameterfv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6105,7 +6048,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetSamplerParameteriv_args[] = {"sampler", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetSamplerParameteriv_info = {"glGetSamplerParameteriv", "glGetSamplerParameteriv(sampler, pname) -> params", "($module, sampler, pname, params=None, /)", pygl_GLES2_glGetSamplerParameteriv_args, "GLES2_MESA_sampler_objects", 3, 3623, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetSamplerParameteriv_info = {"glGetSamplerParameteriv", "glGetSamplerParameteriv(sampler, pname) -> params", "($module, sampler, pname, params=None, /)", pygl_GLES2_glGetSamplerParameteriv_args, "GLES2_MESA_sampler_objects", 3, 3618, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetSamplerParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6128,7 +6071,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetSemaphoreParameterivNV_args[] = {"semaphore", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetSemaphoreParameterivNV_info = {"glGetSemaphoreParameterivNV", "glGetSemaphoreParameterivNV(semaphore, pname, params) -> None", "($module, semaphore, pname, params, /)", pygl_GLES2_glGetSemaphoreParameterivNV_args, "GLES2_NV_timeline_semaphore", 3, 3624, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetSemaphoreParameterivNV_info = {"glGetSemaphoreParameterivNV", "glGetSemaphoreParameterivNV(semaphore, pname, params) -> None", "($module, semaphore, pname, params, /)", pygl_GLES2_glGetSemaphoreParameterivNV_args, "GLES2_NV_timeline_semaphore", 3, 3619, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetSemaphoreParameterivNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6150,7 +6093,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetSemaphoreParameterui64vEXT_args[] = {"semaphore", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetSemaphoreParameterui64vEXT_info = {"glGetSemaphoreParameterui64vEXT", "glGetSemaphoreParameterui64vEXT(semaphore, pname, params) -> None", "($module, semaphore, pname, params, /)", pygl_GLES2_glGetSemaphoreParameterui64vEXT_args, "GLES2_EXT_semaphore", 3, 3625, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetSemaphoreParameterui64vEXT_info = {"glGetSemaphoreParameterui64vEXT", "glGetSemaphoreParameterui64vEXT(semaphore, pname, params) -> None", "($module, semaphore, pname, params, /)", pygl_GLES2_glGetSemaphoreParameterui64vEXT_args, "GLES2_EXT_semaphore", 3, 3620, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetSemaphoreParameterui64vEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6172,7 +6115,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetShaderPrecisionFormat_args[] = {"shadertype", "precisiontype", "range", "precision"};
-static const PyGLCommand pygl_GLES2_glGetShaderPrecisionFormat_info = {"glGetShaderPrecisionFormat", "glGetShaderPrecisionFormat(shadertype, precisiontype) -> precision, range", "($module, shadertype, precisiontype, precision=None, range=None, /)", pygl_GLES2_glGetShaderPrecisionFormat_args, "GLES2_VERSION_GLES2_2_0", 4, 3626, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetShaderPrecisionFormat_info = {"glGetShaderPrecisionFormat", "glGetShaderPrecisionFormat(shadertype, precisiontype) -> precision, range", "($module, shadertype, precisiontype, precision=None, range=None, /)", pygl_GLES2_glGetShaderPrecisionFormat_args, "GLES2_VERSION_GLES2_2_0", 4, 3621, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetShaderPrecisionFormat(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6200,7 +6143,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetShaderiv_args[] = {"shader", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetShaderiv_info = {"glGetShaderiv", "glGetShaderiv(shader, pname) -> params", "($module, shader, pname, params=None, /)", pygl_GLES2_glGetShaderiv_args, "GLES2_VERSION_GLES2_2_0", 3, 3627, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetShaderiv_info = {"glGetShaderiv", "glGetShaderiv(shader, pname) -> params", "($module, shader, pname, params=None, /)", pygl_GLES2_glGetShaderiv_args, "GLES2_VERSION_GLES2_2_0", 3, 3622, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetShaderiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6223,7 +6166,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetShadingRateImagePaletteNV_args[] = {"viewport", "entry", "rate"};
-static const PyGLCommand pygl_GLES2_glGetShadingRateImagePaletteNV_info = {"glGetShadingRateImagePaletteNV", "glGetShadingRateImagePaletteNV(viewport, entry, rate) -> None", "($module, viewport, entry, rate, /)", pygl_GLES2_glGetShadingRateImagePaletteNV_args, "GLES2_NV_shading_rate_image", 3, 3628, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetShadingRateImagePaletteNV_info = {"glGetShadingRateImagePaletteNV", "glGetShadingRateImagePaletteNV(viewport, entry, rate) -> None", "($module, viewport, entry, rate, /)", pygl_GLES2_glGetShadingRateImagePaletteNV_args, "GLES2_NV_shading_rate_image", 3, 3623, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetShadingRateImagePaletteNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6245,7 +6188,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetShadingRateSampleLocationivNV_args[] = {"rate", "samples", "index", "location"};
-static const PyGLCommand pygl_GLES2_glGetShadingRateSampleLocationivNV_info = {"glGetShadingRateSampleLocationivNV", "glGetShadingRateSampleLocationivNV(rate, samples, index, location) -> None", "($module, rate, samples, index, location, /)", pygl_GLES2_glGetShadingRateSampleLocationivNV_args, "GLES2_NV_shading_rate_image", 4, 3629, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetShadingRateSampleLocationivNV_info = {"glGetShadingRateSampleLocationivNV", "glGetShadingRateSampleLocationivNV(rate, samples, index, location) -> None", "($module, rate, samples, index, location, /)", pygl_GLES2_glGetShadingRateSampleLocationivNV_args, "GLES2_NV_shading_rate_image", 4, 3624, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetShadingRateSampleLocationivNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6268,7 +6211,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetString_args[] = {"name"};
-static const PyGLCommand pygl_GLES2_glGetString_info = {"glGetString", "glGetString(name) -> GLubyte", "($module, name, /)", pygl_GLES2_glGetString_args, "GLES2_VERSION_GLES2_2_0", 1, 3630, PYGL_API_GLES2, 0, 1, 2, 0};
+static const PyGLCommand pygl_GLES2_glGetString_info = {"glGetString", "glGetString(name) -> GLubyte", "($module, name, /)", pygl_GLES2_glGetString_args, "GLES2_VERSION_GLES2_2_0", 1, 3625, PYGL_API_GLES2, 0, 1, 2, 0};
 
 static PyObject *
 pygl_GLES2_glGetString(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6285,7 +6228,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetSyncivAPPLE_args[] = {"sync", "pname", "count", "length", "values"};
-static const PyGLCommand pygl_GLES2_glGetSyncivAPPLE_info = {"glGetSyncivAPPLE", "glGetSyncivAPPLE(sync, pname, count, length, values) -> None", "($module, sync, pname, count, length, values, /)", pygl_GLES2_glGetSyncivAPPLE_args, "GLES2_APPLE_sync", 5, 3631, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetSyncivAPPLE_info = {"glGetSyncivAPPLE", "glGetSyncivAPPLE(sync, pname, count, length, values) -> None", "($module, sync, pname, count, length, values, /)", pygl_GLES2_glGetSyncivAPPLE_args, "GLES2_APPLE_sync", 5, 3626, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetSyncivAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6309,7 +6252,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetTexParameterIiv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetTexParameterIiv_info = {"glGetTexParameterIiv", "glGetTexParameterIiv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetTexParameterIiv_args, "GLES2_ES_VERSION_3_2", 3, 3632, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetTexParameterIiv_info = {"glGetTexParameterIiv", "glGetTexParameterIiv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetTexParameterIiv_args, "GLES2_ES_VERSION_3_2", 3, 3627, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetTexParameterIiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6332,7 +6275,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetTexParameterIivEXT_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetTexParameterIivEXT_info = {"glGetTexParameterIivEXT", "glGetTexParameterIivEXT(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetTexParameterIivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3633, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetTexParameterIivEXT_info = {"glGetTexParameterIivEXT", "glGetTexParameterIivEXT(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetTexParameterIivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3628, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetTexParameterIivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6355,7 +6298,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetTexParameterIivOES_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetTexParameterIivOES_info = {"glGetTexParameterIivOES", "glGetTexParameterIivOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glGetTexParameterIivOES_args, "GLES2_OES_texture_border_clamp", 3, 3634, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetTexParameterIivOES_info = {"glGetTexParameterIivOES", "glGetTexParameterIivOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glGetTexParameterIivOES_args, "GLES2_OES_texture_border_clamp", 3, 3629, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetTexParameterIivOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6377,7 +6320,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetTexParameterIuiv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetTexParameterIuiv_info = {"glGetTexParameterIuiv", "glGetTexParameterIuiv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetTexParameterIuiv_args, "GLES2_ES_VERSION_3_2", 3, 3635, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetTexParameterIuiv_info = {"glGetTexParameterIuiv", "glGetTexParameterIuiv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetTexParameterIuiv_args, "GLES2_ES_VERSION_3_2", 3, 3630, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetTexParameterIuiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6400,7 +6343,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetTexParameterIuivEXT_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetTexParameterIuivEXT_info = {"glGetTexParameterIuivEXT", "glGetTexParameterIuivEXT(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetTexParameterIuivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3636, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetTexParameterIuivEXT_info = {"glGetTexParameterIuivEXT", "glGetTexParameterIuivEXT(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetTexParameterIuivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3631, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetTexParameterIuivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6423,7 +6366,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetTexParameterIuivOES_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetTexParameterIuivOES_info = {"glGetTexParameterIuivOES", "glGetTexParameterIuivOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glGetTexParameterIuivOES_args, "GLES2_OES_texture_border_clamp", 3, 3637, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetTexParameterIuivOES_info = {"glGetTexParameterIuivOES", "glGetTexParameterIuivOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glGetTexParameterIuivOES_args, "GLES2_OES_texture_border_clamp", 3, 3632, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetTexParameterIuivOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6445,7 +6388,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetTexParameterfv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetTexParameterfv_info = {"glGetTexParameterfv", "glGetTexParameterfv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetTexParameterfv_args, "GLES2_VERSION_GLES2_2_0", 3, 3638, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetTexParameterfv_info = {"glGetTexParameterfv", "glGetTexParameterfv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetTexParameterfv_args, "GLES2_VERSION_GLES2_2_0", 3, 3633, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetTexParameterfv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6468,7 +6411,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetTexParameteriv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetTexParameteriv_info = {"glGetTexParameteriv", "glGetTexParameteriv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetTexParameteriv_args, "GLES2_VERSION_GLES2_2_0", 3, 3639, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetTexParameteriv_info = {"glGetTexParameteriv", "glGetTexParameteriv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES2_glGetTexParameteriv_args, "GLES2_VERSION_GLES2_2_0", 3, 3634, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetTexParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6491,7 +6434,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetTextureHandleIMG_args[] = {"texture"};
-static const PyGLCommand pygl_GLES2_glGetTextureHandleIMG_info = {"glGetTextureHandleIMG", "glGetTextureHandleIMG(texture) -> GLuint64", "($module, texture, /)", pygl_GLES2_glGetTextureHandleIMG_args, "GLES2_IMG_bindless_texture", 1, 3640, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glGetTextureHandleIMG_info = {"glGetTextureHandleIMG", "glGetTextureHandleIMG(texture) -> GLuint64", "($module, texture, /)", pygl_GLES2_glGetTextureHandleIMG_args, "GLES2_IMG_bindless_texture", 1, 3635, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGetTextureHandleIMG(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6508,7 +6451,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetTextureHandleNV_args[] = {"texture"};
-static const PyGLCommand pygl_GLES2_glGetTextureHandleNV_info = {"glGetTextureHandleNV", "glGetTextureHandleNV(texture) -> GLuint64", "($module, texture, /)", pygl_GLES2_glGetTextureHandleNV_args, "GLES2_NV_bindless_texture", 1, 3641, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glGetTextureHandleNV_info = {"glGetTextureHandleNV", "glGetTextureHandleNV(texture) -> GLuint64", "($module, texture, /)", pygl_GLES2_glGetTextureHandleNV_args, "GLES2_NV_bindless_texture", 1, 3636, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGetTextureHandleNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6525,7 +6468,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetTextureSamplerHandleIMG_args[] = {"texture", "sampler"};
-static const PyGLCommand pygl_GLES2_glGetTextureSamplerHandleIMG_info = {"glGetTextureSamplerHandleIMG", "glGetTextureSamplerHandleIMG(texture, sampler) -> GLuint64", "($module, texture, sampler, /)", pygl_GLES2_glGetTextureSamplerHandleIMG_args, "GLES2_IMG_bindless_texture", 2, 3642, PYGL_API_GLES2, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLES2_glGetTextureSamplerHandleIMG_info = {"glGetTextureSamplerHandleIMG", "glGetTextureSamplerHandleIMG(texture, sampler) -> GLuint64", "($module, texture, sampler, /)", pygl_GLES2_glGetTextureSamplerHandleIMG_args, "GLES2_IMG_bindless_texture", 2, 3637, PYGL_API_GLES2, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGetTextureSamplerHandleIMG(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6543,7 +6486,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetTextureSamplerHandleNV_args[] = {"texture", "sampler"};
-static const PyGLCommand pygl_GLES2_glGetTextureSamplerHandleNV_info = {"glGetTextureSamplerHandleNV", "glGetTextureSamplerHandleNV(texture, sampler) -> GLuint64", "($module, texture, sampler, /)", pygl_GLES2_glGetTextureSamplerHandleNV_args, "GLES2_NV_bindless_texture", 2, 3643, PYGL_API_GLES2, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLES2_glGetTextureSamplerHandleNV_info = {"glGetTextureSamplerHandleNV", "glGetTextureSamplerHandleNV(texture, sampler) -> GLuint64", "($module, texture, sampler, /)", pygl_GLES2_glGetTextureSamplerHandleNV_args, "GLES2_NV_bindless_texture", 2, 3638, PYGL_API_GLES2, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLES2_glGetTextureSamplerHandleNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6561,7 +6504,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetTranslatedShaderSourceANGLE_args[] = {"shader", "bufSize", "length", "source"};
-static const PyGLCommand pygl_GLES2_glGetTranslatedShaderSourceANGLE_info = {"glGetTranslatedShaderSourceANGLE", "glGetTranslatedShaderSourceANGLE(shader, bufSize, length, source) -> None", "($module, shader, bufSize, length, source, /)", pygl_GLES2_glGetTranslatedShaderSourceANGLE_args, "GLES2_ANGLE_translated_shader_source", 4, 3644, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetTranslatedShaderSourceANGLE_info = {"glGetTranslatedShaderSourceANGLE", "glGetTranslatedShaderSourceANGLE(shader, bufSize, length, source) -> None", "($module, shader, bufSize, length, source, /)", pygl_GLES2_glGetTranslatedShaderSourceANGLE_args, "GLES2_ANGLE_translated_shader_source", 4, 3639, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetTranslatedShaderSourceANGLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6584,7 +6527,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetUniformfv_args[] = {"program", "location", "params"};
-static const PyGLCommand pygl_GLES2_glGetUniformfv_info = {"glGetUniformfv", "glGetUniformfv(program, location, params) -> None", "($module, program, location, params, /)", pygl_GLES2_glGetUniformfv_args, "GLES2_VERSION_GLES2_2_0", 3, 3645, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetUniformfv_info = {"glGetUniformfv", "glGetUniformfv(program, location, params) -> None", "($module, program, location, params, /)", pygl_GLES2_glGetUniformfv_args, "GLES2_VERSION_GLES2_2_0", 3, 3640, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetUniformfv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6606,7 +6549,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetUniformi64vNV_args[] = {"program", "location", "params"};
-static const PyGLCommand pygl_GLES2_glGetUniformi64vNV_info = {"glGetUniformi64vNV", "glGetUniformi64vNV(program, location, params) -> None", "($module, program, location, params, /)", pygl_GLES2_glGetUniformi64vNV_args, "GLES2_NV_gpu_shader5", 3, 3646, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetUniformi64vNV_info = {"glGetUniformi64vNV", "glGetUniformi64vNV(program, location, params) -> None", "($module, program, location, params, /)", pygl_GLES2_glGetUniformi64vNV_args, "GLES2_NV_gpu_shader5", 3, 3641, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetUniformi64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6628,7 +6571,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetUniformiv_args[] = {"program", "location", "params"};
-static const PyGLCommand pygl_GLES2_glGetUniformiv_info = {"glGetUniformiv", "glGetUniformiv(program, location, params) -> None", "($module, program, location, params, /)", pygl_GLES2_glGetUniformiv_args, "GLES2_VERSION_GLES2_2_0", 3, 3647, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetUniformiv_info = {"glGetUniformiv", "glGetUniformiv(program, location, params) -> None", "($module, program, location, params, /)", pygl_GLES2_glGetUniformiv_args, "GLES2_VERSION_GLES2_2_0", 3, 3642, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetUniformiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6650,7 +6593,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetUnsignedBytei_vEXT_args[] = {"target", "index", "data"};
-static const PyGLCommand pygl_GLES2_glGetUnsignedBytei_vEXT_info = {"glGetUnsignedBytei_vEXT", "glGetUnsignedBytei_vEXT(target, index, data) -> None", "($module, target, index, data, /)", pygl_GLES2_glGetUnsignedBytei_vEXT_args, "GLES2_EXT_semaphore", 3, 3648, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetUnsignedBytei_vEXT_info = {"glGetUnsignedBytei_vEXT", "glGetUnsignedBytei_vEXT(target, index, data) -> None", "($module, target, index, data, /)", pygl_GLES2_glGetUnsignedBytei_vEXT_args, "GLES2_EXT_semaphore", 3, 3643, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetUnsignedBytei_vEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6672,7 +6615,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetUnsignedBytevEXT_args[] = {"pname", "data"};
-static const PyGLCommand pygl_GLES2_glGetUnsignedBytevEXT_info = {"glGetUnsignedBytevEXT", "glGetUnsignedBytevEXT(pname, data) -> None", "($module, pname, data, /)", pygl_GLES2_glGetUnsignedBytevEXT_args, "GLES2_EXT_semaphore", 2, 3649, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetUnsignedBytevEXT_info = {"glGetUnsignedBytevEXT", "glGetUnsignedBytevEXT(pname, data) -> None", "($module, pname, data, /)", pygl_GLES2_glGetUnsignedBytevEXT_args, "GLES2_EXT_semaphore", 2, 3644, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetUnsignedBytevEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6693,7 +6636,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetVertexAttribPointerv_args[] = {"index", "pname", "pointer"};
-static const PyGLCommand pygl_GLES2_glGetVertexAttribPointerv_info = {"glGetVertexAttribPointerv", "glGetVertexAttribPointerv(index, pname) -> pointer", "($module, index, pname, pointer=None, /)", pygl_GLES2_glGetVertexAttribPointerv_args, "GLES2_VERSION_GLES2_2_0", 3, 3650, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetVertexAttribPointerv_info = {"glGetVertexAttribPointerv", "glGetVertexAttribPointerv(index, pname) -> pointer", "($module, index, pname, pointer=None, /)", pygl_GLES2_glGetVertexAttribPointerv_args, "GLES2_VERSION_GLES2_2_0", 3, 3645, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetVertexAttribPointerv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6716,7 +6659,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetVertexAttribfv_args[] = {"index", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetVertexAttribfv_info = {"glGetVertexAttribfv", "glGetVertexAttribfv(index, pname) -> params", "($module, index, pname, params=None, /)", pygl_GLES2_glGetVertexAttribfv_args, "GLES2_VERSION_GLES2_2_0", 3, 3651, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetVertexAttribfv_info = {"glGetVertexAttribfv", "glGetVertexAttribfv(index, pname) -> params", "($module, index, pname, params=None, /)", pygl_GLES2_glGetVertexAttribfv_args, "GLES2_VERSION_GLES2_2_0", 3, 3646, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetVertexAttribfv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6739,7 +6682,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetVertexAttribiv_args[] = {"index", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glGetVertexAttribiv_info = {"glGetVertexAttribiv", "glGetVertexAttribiv(index, pname) -> params", "($module, index, pname, params=None, /)", pygl_GLES2_glGetVertexAttribiv_args, "GLES2_VERSION_GLES2_2_0", 3, 3652, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetVertexAttribiv_info = {"glGetVertexAttribiv", "glGetVertexAttribiv(index, pname) -> params", "($module, index, pname, params=None, /)", pygl_GLES2_glGetVertexAttribiv_args, "GLES2_VERSION_GLES2_2_0", 3, 3647, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetVertexAttribiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6762,7 +6705,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetVkProcAddrNV_args[] = {"name"};
-static const PyGLCommand pygl_GLES2_glGetVkProcAddrNV_info = {"glGetVkProcAddrNV", "glGetVkProcAddrNV(name) -> GLVULKANPROCNV", "($module, name, /)", pygl_GLES2_glGetVkProcAddrNV_args, "GLES2_NV_draw_vulkan_image", 1, 3653, PYGL_API_GLES2, 0, 1, 4, 0};
+static const PyGLCommand pygl_GLES2_glGetVkProcAddrNV_info = {"glGetVkProcAddrNV", "glGetVkProcAddrNV(name) -> GLVULKANPROCNV", "($module, name, /)", pygl_GLES2_glGetVkProcAddrNV_args, "GLES2_NV_draw_vulkan_image", 1, 3648, PYGL_API_GLES2, 0, 1, 4, 0};
 
 static PyObject *
 pygl_GLES2_glGetVkProcAddrNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6783,7 +6726,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetnUniformfv_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GLES2_glGetnUniformfv_info = {"glGetnUniformfv", "glGetnUniformfv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformfv_args, "GLES2_ES_VERSION_3_2", 4, 3654, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetnUniformfv_info = {"glGetnUniformfv", "glGetnUniformfv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformfv_args, "GLES2_ES_VERSION_3_2", 4, 3649, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetnUniformfv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6806,7 +6749,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetnUniformfvEXT_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GLES2_glGetnUniformfvEXT_info = {"glGetnUniformfvEXT", "glGetnUniformfvEXT(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformfvEXT_args, "GLES2_EXT_robustness", 4, 3655, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetnUniformfvEXT_info = {"glGetnUniformfvEXT", "glGetnUniformfvEXT(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformfvEXT_args, "GLES2_EXT_robustness", 4, 3650, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetnUniformfvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6829,7 +6772,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetnUniformfvKHR_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GLES2_glGetnUniformfvKHR_info = {"glGetnUniformfvKHR", "glGetnUniformfvKHR(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformfvKHR_args, "GLES2_KHR_robustness", 4, 3656, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetnUniformfvKHR_info = {"glGetnUniformfvKHR", "glGetnUniformfvKHR(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformfvKHR_args, "GLES2_KHR_robustness", 4, 3651, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetnUniformfvKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6852,7 +6795,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetnUniformiv_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GLES2_glGetnUniformiv_info = {"glGetnUniformiv", "glGetnUniformiv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformiv_args, "GLES2_ES_VERSION_3_2", 4, 3657, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetnUniformiv_info = {"glGetnUniformiv", "glGetnUniformiv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformiv_args, "GLES2_ES_VERSION_3_2", 4, 3652, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetnUniformiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6875,7 +6818,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetnUniformivEXT_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GLES2_glGetnUniformivEXT_info = {"glGetnUniformivEXT", "glGetnUniformivEXT(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformivEXT_args, "GLES2_EXT_robustness", 4, 3658, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetnUniformivEXT_info = {"glGetnUniformivEXT", "glGetnUniformivEXT(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformivEXT_args, "GLES2_EXT_robustness", 4, 3653, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetnUniformivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6898,7 +6841,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetnUniformivKHR_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GLES2_glGetnUniformivKHR_info = {"glGetnUniformivKHR", "glGetnUniformivKHR(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformivKHR_args, "GLES2_KHR_robustness", 4, 3659, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetnUniformivKHR_info = {"glGetnUniformivKHR", "glGetnUniformivKHR(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformivKHR_args, "GLES2_KHR_robustness", 4, 3654, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetnUniformivKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6921,7 +6864,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetnUniformuiv_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GLES2_glGetnUniformuiv_info = {"glGetnUniformuiv", "glGetnUniformuiv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformuiv_args, "GLES2_ES_VERSION_3_2", 4, 3660, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetnUniformuiv_info = {"glGetnUniformuiv", "glGetnUniformuiv(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformuiv_args, "GLES2_ES_VERSION_3_2", 4, 3655, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetnUniformuiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6944,7 +6887,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glGetnUniformuivKHR_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GLES2_glGetnUniformuivKHR_info = {"glGetnUniformuivKHR", "glGetnUniformuivKHR(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformuivKHR_args, "GLES2_KHR_robustness", 4, 3661, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glGetnUniformuivKHR_info = {"glGetnUniformuivKHR", "glGetnUniformuivKHR(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES2_glGetnUniformuivKHR_args, "GLES2_KHR_robustness", 4, 3656, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glGetnUniformuivKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6967,7 +6910,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glHint_args[] = {"target", "mode"};
-static const PyGLCommand pygl_GLES2_glHint_info = {"glHint", "glHint(target, mode) -> None", "($module, target, mode, /)", pygl_GLES2_glHint_args, "GLES2_VERSION_GLES2_2_0", 2, 3662, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glHint_info = {"glHint", "glHint(target, mode) -> None", "($module, target, mode, /)", pygl_GLES2_glHint_args, "GLES2_VERSION_GLES2_2_0", 2, 3657, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glHint(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -6985,7 +6928,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glImportMemoryFdEXT_args[] = {"memory", "size", "handleType", "fd"};
-static const PyGLCommand pygl_GLES2_glImportMemoryFdEXT_info = {"glImportMemoryFdEXT", "glImportMemoryFdEXT(memory, size, handleType, fd) -> None", "($module, memory, size, handleType, fd, /)", pygl_GLES2_glImportMemoryFdEXT_args, "GLES2_EXT_memory_object_fd", 4, 3663, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glImportMemoryFdEXT_info = {"glImportMemoryFdEXT", "glImportMemoryFdEXT(memory, size, handleType, fd) -> None", "($module, memory, size, handleType, fd, /)", pygl_GLES2_glImportMemoryFdEXT_args, "GLES2_EXT_memory_object_fd", 4, 3658, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glImportMemoryFdEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7005,7 +6948,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glImportMemoryWin32HandleEXT_args[] = {"memory", "size", "handleType", "handle"};
-static const PyGLCommand pygl_GLES2_glImportMemoryWin32HandleEXT_info = {"glImportMemoryWin32HandleEXT", "glImportMemoryWin32HandleEXT(memory, size, handleType, handle) -> None", "($module, memory, size, handleType, handle, /)", pygl_GLES2_glImportMemoryWin32HandleEXT_args, "GLES2_EXT_memory_object_win32", 4, 3664, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glImportMemoryWin32HandleEXT_info = {"glImportMemoryWin32HandleEXT", "glImportMemoryWin32HandleEXT(memory, size, handleType, handle) -> None", "($module, memory, size, handleType, handle, /)", pygl_GLES2_glImportMemoryWin32HandleEXT_args, "GLES2_EXT_memory_object_win32", 4, 3659, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glImportMemoryWin32HandleEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7028,7 +6971,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glImportMemoryWin32NameEXT_args[] = {"memory", "size", "handleType", "name"};
-static const PyGLCommand pygl_GLES2_glImportMemoryWin32NameEXT_info = {"glImportMemoryWin32NameEXT", "glImportMemoryWin32NameEXT(memory, size, handleType, name) -> None", "($module, memory, size, handleType, name, /)", pygl_GLES2_glImportMemoryWin32NameEXT_args, "GLES2_EXT_memory_object_win32", 4, 3665, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glImportMemoryWin32NameEXT_info = {"glImportMemoryWin32NameEXT", "glImportMemoryWin32NameEXT(memory, size, handleType, name) -> None", "($module, memory, size, handleType, name, /)", pygl_GLES2_glImportMemoryWin32NameEXT_args, "GLES2_EXT_memory_object_win32", 4, 3660, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glImportMemoryWin32NameEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7051,7 +6994,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glImportSemaphoreFdEXT_args[] = {"semaphore", "handleType", "fd"};
-static const PyGLCommand pygl_GLES2_glImportSemaphoreFdEXT_info = {"glImportSemaphoreFdEXT", "glImportSemaphoreFdEXT(semaphore, handleType, fd) -> None", "($module, semaphore, handleType, fd, /)", pygl_GLES2_glImportSemaphoreFdEXT_args, "GLES2_EXT_semaphore_fd", 3, 3666, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glImportSemaphoreFdEXT_info = {"glImportSemaphoreFdEXT", "glImportSemaphoreFdEXT(semaphore, handleType, fd) -> None", "($module, semaphore, handleType, fd, /)", pygl_GLES2_glImportSemaphoreFdEXT_args, "GLES2_EXT_semaphore_fd", 3, 3661, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glImportSemaphoreFdEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7070,7 +7013,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glImportSemaphoreWin32HandleEXT_args[] = {"semaphore", "handleType", "handle"};
-static const PyGLCommand pygl_GLES2_glImportSemaphoreWin32HandleEXT_info = {"glImportSemaphoreWin32HandleEXT", "glImportSemaphoreWin32HandleEXT(semaphore, handleType, handle) -> None", "($module, semaphore, handleType, handle, /)", pygl_GLES2_glImportSemaphoreWin32HandleEXT_args, "GLES2_EXT_semaphore_win32", 3, 3667, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glImportSemaphoreWin32HandleEXT_info = {"glImportSemaphoreWin32HandleEXT", "glImportSemaphoreWin32HandleEXT(semaphore, handleType, handle) -> None", "($module, semaphore, handleType, handle, /)", pygl_GLES2_glImportSemaphoreWin32HandleEXT_args, "GLES2_EXT_semaphore_win32", 3, 3662, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glImportSemaphoreWin32HandleEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7092,7 +7035,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glImportSemaphoreWin32NameEXT_args[] = {"semaphore", "handleType", "name"};
-static const PyGLCommand pygl_GLES2_glImportSemaphoreWin32NameEXT_info = {"glImportSemaphoreWin32NameEXT", "glImportSemaphoreWin32NameEXT(semaphore, handleType, name) -> None", "($module, semaphore, handleType, name, /)", pygl_GLES2_glImportSemaphoreWin32NameEXT_args, "GLES2_EXT_semaphore_win32", 3, 3668, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glImportSemaphoreWin32NameEXT_info = {"glImportSemaphoreWin32NameEXT", "glImportSemaphoreWin32NameEXT(semaphore, handleType, name) -> None", "($module, semaphore, handleType, name, /)", pygl_GLES2_glImportSemaphoreWin32NameEXT_args, "GLES2_EXT_semaphore_win32", 3, 3663, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glImportSemaphoreWin32NameEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7114,7 +7057,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glInsertEventMarkerEXT_args[] = {"length", "marker"};
-static const PyGLCommand pygl_GLES2_glInsertEventMarkerEXT_info = {"glInsertEventMarkerEXT", "glInsertEventMarkerEXT(length, marker) -> None", "($module, length, marker, /)", pygl_GLES2_glInsertEventMarkerEXT_args, "GLES2_EXT_debug_marker", 2, 3669, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glInsertEventMarkerEXT_info = {"glInsertEventMarkerEXT", "glInsertEventMarkerEXT(length, marker) -> None", "($module, length, marker, /)", pygl_GLES2_glInsertEventMarkerEXT_args, "GLES2_EXT_debug_marker", 2, 3664, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glInsertEventMarkerEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7135,7 +7078,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glInterpolatePathsNV_args[] = {"resultPath", "pathA", "pathB", "weight"};
-static const PyGLCommand pygl_GLES2_glInterpolatePathsNV_info = {"glInterpolatePathsNV", "glInterpolatePathsNV(resultPath, pathA, pathB, weight) -> None", "($module, resultPath, pathA, pathB, weight, /)", pygl_GLES2_glInterpolatePathsNV_args, "GLES2_NV_path_rendering", 4, 3670, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glInterpolatePathsNV_info = {"glInterpolatePathsNV", "glInterpolatePathsNV(resultPath, pathA, pathB, weight) -> None", "($module, resultPath, pathA, pathB, weight, /)", pygl_GLES2_glInterpolatePathsNV_args, "GLES2_NV_path_rendering", 4, 3665, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glInterpolatePathsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7155,7 +7098,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsBuffer_args[] = {"buffer"};
-static const PyGLCommand pygl_GLES2_glIsBuffer_info = {"glIsBuffer", "glIsBuffer(buffer) -> GLboolean", "($module, buffer, /)", pygl_GLES2_glIsBuffer_args, "GLES2_VERSION_GLES2_2_0", 1, 3671, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsBuffer_info = {"glIsBuffer", "glIsBuffer(buffer) -> GLboolean", "($module, buffer, /)", pygl_GLES2_glIsBuffer_args, "GLES2_VERSION_GLES2_2_0", 1, 3666, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsBuffer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7172,7 +7115,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsEnabled_args[] = {"cap"};
-static const PyGLCommand pygl_GLES2_glIsEnabled_info = {"glIsEnabled", "glIsEnabled(cap) -> GLboolean", "($module, cap, /)", pygl_GLES2_glIsEnabled_args, "GLES2_VERSION_GLES2_2_0", 1, 3672, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsEnabled_info = {"glIsEnabled", "glIsEnabled(cap) -> GLboolean", "($module, cap, /)", pygl_GLES2_glIsEnabled_args, "GLES2_VERSION_GLES2_2_0", 1, 3667, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsEnabled(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7189,7 +7132,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsEnabledi_args[] = {"target", "index"};
-static const PyGLCommand pygl_GLES2_glIsEnabledi_info = {"glIsEnabledi", "glIsEnabledi(target, index) -> GLboolean", "($module, target, index, /)", pygl_GLES2_glIsEnabledi_args, "GLES2_ES_VERSION_3_2", 2, 3673, PYGL_API_GLES2, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsEnabledi_info = {"glIsEnabledi", "glIsEnabledi(target, index) -> GLboolean", "($module, target, index, /)", pygl_GLES2_glIsEnabledi_args, "GLES2_ES_VERSION_3_2", 2, 3668, PYGL_API_GLES2, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsEnabledi(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7207,7 +7150,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsEnablediEXT_args[] = {"target", "index"};
-static const PyGLCommand pygl_GLES2_glIsEnablediEXT_info = {"glIsEnablediEXT", "glIsEnablediEXT(target, index) -> GLboolean", "($module, target, index, /)", pygl_GLES2_glIsEnablediEXT_args, "GLES2_EXT_draw_buffers_indexed", 2, 3674, PYGL_API_GLES2, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsEnablediEXT_info = {"glIsEnablediEXT", "glIsEnablediEXT(target, index) -> GLboolean", "($module, target, index, /)", pygl_GLES2_glIsEnablediEXT_args, "GLES2_EXT_draw_buffers_indexed", 2, 3669, PYGL_API_GLES2, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsEnablediEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7225,7 +7168,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsEnablediNV_args[] = {"target", "index"};
-static const PyGLCommand pygl_GLES2_glIsEnablediNV_info = {"glIsEnablediNV", "glIsEnablediNV(target, index) -> GLboolean", "($module, target, index, /)", pygl_GLES2_glIsEnablediNV_args, "GLES2_NV_viewport_array", 2, 3675, PYGL_API_GLES2, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsEnablediNV_info = {"glIsEnablediNV", "glIsEnablediNV(target, index) -> GLboolean", "($module, target, index, /)", pygl_GLES2_glIsEnablediNV_args, "GLES2_NV_viewport_array", 2, 3670, PYGL_API_GLES2, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsEnablediNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7243,7 +7186,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsEnablediOES_args[] = {"target", "index"};
-static const PyGLCommand pygl_GLES2_glIsEnablediOES_info = {"glIsEnablediOES", "glIsEnablediOES(target, index) -> GLboolean", "($module, target, index, /)", pygl_GLES2_glIsEnablediOES_args, "GLES2_OES_viewport_array", 2, 3676, PYGL_API_GLES2, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsEnablediOES_info = {"glIsEnablediOES", "glIsEnablediOES(target, index) -> GLboolean", "($module, target, index, /)", pygl_GLES2_glIsEnablediOES_args, "GLES2_OES_viewport_array", 2, 3671, PYGL_API_GLES2, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsEnablediOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7261,7 +7204,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsFenceNV_args[] = {"fence"};
-static const PyGLCommand pygl_GLES2_glIsFenceNV_info = {"glIsFenceNV", "glIsFenceNV(fence) -> GLboolean", "($module, fence, /)", pygl_GLES2_glIsFenceNV_args, "GLES2_NV_fence", 1, 3677, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsFenceNV_info = {"glIsFenceNV", "glIsFenceNV(fence) -> GLboolean", "($module, fence, /)", pygl_GLES2_glIsFenceNV_args, "GLES2_NV_fence", 1, 3672, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsFenceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7278,7 +7221,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsFramebuffer_args[] = {"framebuffer"};
-static const PyGLCommand pygl_GLES2_glIsFramebuffer_info = {"glIsFramebuffer", "glIsFramebuffer(framebuffer) -> GLboolean", "($module, framebuffer, /)", pygl_GLES2_glIsFramebuffer_args, "GLES2_VERSION_GLES2_2_0", 1, 3678, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsFramebuffer_info = {"glIsFramebuffer", "glIsFramebuffer(framebuffer) -> GLboolean", "($module, framebuffer, /)", pygl_GLES2_glIsFramebuffer_args, "GLES2_VERSION_GLES2_2_0", 1, 3673, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsFramebuffer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7295,7 +7238,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsImageHandleResidentNV_args[] = {"handle"};
-static const PyGLCommand pygl_GLES2_glIsImageHandleResidentNV_info = {"glIsImageHandleResidentNV", "glIsImageHandleResidentNV(handle) -> GLboolean", "($module, handle, /)", pygl_GLES2_glIsImageHandleResidentNV_args, "GLES2_NV_bindless_texture", 1, 3679, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsImageHandleResidentNV_info = {"glIsImageHandleResidentNV", "glIsImageHandleResidentNV(handle) -> GLboolean", "($module, handle, /)", pygl_GLES2_glIsImageHandleResidentNV_args, "GLES2_NV_bindless_texture", 1, 3674, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsImageHandleResidentNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7312,7 +7255,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsMemoryObjectEXT_args[] = {"memoryObject"};
-static const PyGLCommand pygl_GLES2_glIsMemoryObjectEXT_info = {"glIsMemoryObjectEXT", "glIsMemoryObjectEXT(memoryObject) -> GLboolean", "($module, memoryObject, /)", pygl_GLES2_glIsMemoryObjectEXT_args, "GLES2_EXT_memory_object", 1, 3680, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsMemoryObjectEXT_info = {"glIsMemoryObjectEXT", "glIsMemoryObjectEXT(memoryObject) -> GLboolean", "($module, memoryObject, /)", pygl_GLES2_glIsMemoryObjectEXT_args, "GLES2_EXT_memory_object", 1, 3675, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsMemoryObjectEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7329,7 +7272,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsPathNV_args[] = {"path"};
-static const PyGLCommand pygl_GLES2_glIsPathNV_info = {"glIsPathNV", "glIsPathNV(path) -> GLboolean", "($module, path, /)", pygl_GLES2_glIsPathNV_args, "GLES2_NV_path_rendering", 1, 3681, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsPathNV_info = {"glIsPathNV", "glIsPathNV(path) -> GLboolean", "($module, path, /)", pygl_GLES2_glIsPathNV_args, "GLES2_NV_path_rendering", 1, 3676, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsPathNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7346,7 +7289,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsPointInFillPathNV_args[] = {"path", "mask", "x", "y"};
-static const PyGLCommand pygl_GLES2_glIsPointInFillPathNV_info = {"glIsPointInFillPathNV", "glIsPointInFillPathNV(path, mask, x, y) -> GLboolean", "($module, path, mask, x, y, /)", pygl_GLES2_glIsPointInFillPathNV_args, "GLES2_NV_path_rendering", 4, 3682, PYGL_API_GLES2, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsPointInFillPathNV_info = {"glIsPointInFillPathNV", "glIsPointInFillPathNV(path, mask, x, y) -> GLboolean", "($module, path, mask, x, y, /)", pygl_GLES2_glIsPointInFillPathNV_args, "GLES2_NV_path_rendering", 4, 3677, PYGL_API_GLES2, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsPointInFillPathNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7366,7 +7309,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsPointInStrokePathNV_args[] = {"path", "x", "y"};
-static const PyGLCommand pygl_GLES2_glIsPointInStrokePathNV_info = {"glIsPointInStrokePathNV", "glIsPointInStrokePathNV(path, x, y) -> GLboolean", "($module, path, x, y, /)", pygl_GLES2_glIsPointInStrokePathNV_args, "GLES2_NV_path_rendering", 3, 3683, PYGL_API_GLES2, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsPointInStrokePathNV_info = {"glIsPointInStrokePathNV", "glIsPointInStrokePathNV(path, x, y) -> GLboolean", "($module, path, x, y, /)", pygl_GLES2_glIsPointInStrokePathNV_args, "GLES2_NV_path_rendering", 3, 3678, PYGL_API_GLES2, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsPointInStrokePathNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7385,7 +7328,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsProgram_args[] = {"program"};
-static const PyGLCommand pygl_GLES2_glIsProgram_info = {"glIsProgram", "glIsProgram(program) -> GLboolean", "($module, program, /)", pygl_GLES2_glIsProgram_args, "GLES2_VERSION_GLES2_2_0", 1, 3684, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsProgram_info = {"glIsProgram", "glIsProgram(program) -> GLboolean", "($module, program, /)", pygl_GLES2_glIsProgram_args, "GLES2_VERSION_GLES2_2_0", 1, 3679, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsProgram(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7402,7 +7345,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsProgramPipelineEXT_args[] = {"pipeline"};
-static const PyGLCommand pygl_GLES2_glIsProgramPipelineEXT_info = {"glIsProgramPipelineEXT", "glIsProgramPipelineEXT(pipeline) -> GLboolean", "($module, pipeline, /)", pygl_GLES2_glIsProgramPipelineEXT_args, "GLES2_EXT_separate_shader_objects", 1, 3685, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsProgramPipelineEXT_info = {"glIsProgramPipelineEXT", "glIsProgramPipelineEXT(pipeline) -> GLboolean", "($module, pipeline, /)", pygl_GLES2_glIsProgramPipelineEXT_args, "GLES2_EXT_separate_shader_objects", 1, 3680, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsProgramPipelineEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7419,7 +7362,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsQueryEXT_args[] = {"id"};
-static const PyGLCommand pygl_GLES2_glIsQueryEXT_info = {"glIsQueryEXT", "glIsQueryEXT(id) -> GLboolean", "($module, id, /)", pygl_GLES2_glIsQueryEXT_args, "GLES2_EXT_occlusion_query_boolean", 1, 3686, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsQueryEXT_info = {"glIsQueryEXT", "glIsQueryEXT(id) -> GLboolean", "($module, id, /)", pygl_GLES2_glIsQueryEXT_args, "GLES2_EXT_occlusion_query_boolean", 1, 3681, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsQueryEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7436,7 +7379,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsRenderbuffer_args[] = {"renderbuffer"};
-static const PyGLCommand pygl_GLES2_glIsRenderbuffer_info = {"glIsRenderbuffer", "glIsRenderbuffer(renderbuffer) -> GLboolean", "($module, renderbuffer, /)", pygl_GLES2_glIsRenderbuffer_args, "GLES2_VERSION_GLES2_2_0", 1, 3687, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsRenderbuffer_info = {"glIsRenderbuffer", "glIsRenderbuffer(renderbuffer) -> GLboolean", "($module, renderbuffer, /)", pygl_GLES2_glIsRenderbuffer_args, "GLES2_VERSION_GLES2_2_0", 1, 3682, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsRenderbuffer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7453,7 +7396,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsSampler_args[] = {"sampler"};
-static const PyGLCommand pygl_GLES2_glIsSampler_info = {"glIsSampler", "glIsSampler(sampler) -> GLboolean", "($module, sampler, /)", pygl_GLES2_glIsSampler_args, "GLES2_MESA_sampler_objects", 1, 3688, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsSampler_info = {"glIsSampler", "glIsSampler(sampler) -> GLboolean", "($module, sampler, /)", pygl_GLES2_glIsSampler_args, "GLES2_MESA_sampler_objects", 1, 3683, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsSampler(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7470,7 +7413,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsSemaphoreEXT_args[] = {"semaphore"};
-static const PyGLCommand pygl_GLES2_glIsSemaphoreEXT_info = {"glIsSemaphoreEXT", "glIsSemaphoreEXT(semaphore) -> GLboolean", "($module, semaphore, /)", pygl_GLES2_glIsSemaphoreEXT_args, "GLES2_EXT_semaphore", 1, 3689, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsSemaphoreEXT_info = {"glIsSemaphoreEXT", "glIsSemaphoreEXT(semaphore) -> GLboolean", "($module, semaphore, /)", pygl_GLES2_glIsSemaphoreEXT_args, "GLES2_EXT_semaphore", 1, 3684, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsSemaphoreEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7487,7 +7430,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsShader_args[] = {"shader"};
-static const PyGLCommand pygl_GLES2_glIsShader_info = {"glIsShader", "glIsShader(shader) -> GLboolean", "($module, shader, /)", pygl_GLES2_glIsShader_args, "GLES2_VERSION_GLES2_2_0", 1, 3690, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsShader_info = {"glIsShader", "glIsShader(shader) -> GLboolean", "($module, shader, /)", pygl_GLES2_glIsShader_args, "GLES2_VERSION_GLES2_2_0", 1, 3685, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsShader(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7504,7 +7447,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsSyncAPPLE_args[] = {"sync"};
-static const PyGLCommand pygl_GLES2_glIsSyncAPPLE_info = {"glIsSyncAPPLE", "glIsSyncAPPLE(sync) -> GLboolean", "($module, sync, /)", pygl_GLES2_glIsSyncAPPLE_args, "GLES2_APPLE_sync", 1, 3691, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsSyncAPPLE_info = {"glIsSyncAPPLE", "glIsSyncAPPLE(sync) -> GLboolean", "($module, sync, /)", pygl_GLES2_glIsSyncAPPLE_args, "GLES2_APPLE_sync", 1, 3686, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsSyncAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7521,7 +7464,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsTexture_args[] = {"texture"};
-static const PyGLCommand pygl_GLES2_glIsTexture_info = {"glIsTexture", "glIsTexture(texture) -> GLboolean", "($module, texture, /)", pygl_GLES2_glIsTexture_args, "GLES2_VERSION_GLES2_2_0", 1, 3692, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsTexture_info = {"glIsTexture", "glIsTexture(texture) -> GLboolean", "($module, texture, /)", pygl_GLES2_glIsTexture_args, "GLES2_VERSION_GLES2_2_0", 1, 3687, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsTexture(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7538,7 +7481,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsTextureHandleResidentNV_args[] = {"handle"};
-static const PyGLCommand pygl_GLES2_glIsTextureHandleResidentNV_info = {"glIsTextureHandleResidentNV", "glIsTextureHandleResidentNV(handle) -> GLboolean", "($module, handle, /)", pygl_GLES2_glIsTextureHandleResidentNV_args, "GLES2_NV_bindless_texture", 1, 3693, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsTextureHandleResidentNV_info = {"glIsTextureHandleResidentNV", "glIsTextureHandleResidentNV(handle) -> GLboolean", "($module, handle, /)", pygl_GLES2_glIsTextureHandleResidentNV_args, "GLES2_NV_bindless_texture", 1, 3688, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsTextureHandleResidentNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7555,7 +7498,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glIsVertexArrayOES_args[] = {"array"};
-static const PyGLCommand pygl_GLES2_glIsVertexArrayOES_info = {"glIsVertexArrayOES", "glIsVertexArrayOES(array) -> GLboolean", "($module, array, /)", pygl_GLES2_glIsVertexArrayOES_args, "GLES2_OES_vertex_array_object", 1, 3694, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glIsVertexArrayOES_info = {"glIsVertexArrayOES", "glIsVertexArrayOES(array) -> GLboolean", "($module, array, /)", pygl_GLES2_glIsVertexArrayOES_args, "GLES2_OES_vertex_array_object", 1, 3689, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glIsVertexArrayOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7572,7 +7515,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glLabelObjectEXT_args[] = {"type", "object", "length", "label"};
-static const PyGLCommand pygl_GLES2_glLabelObjectEXT_info = {"glLabelObjectEXT", "glLabelObjectEXT(type, object, length, label) -> None", "($module, type, object, length, label, /)", pygl_GLES2_glLabelObjectEXT_args, "GLES2_EXT_debug_label", 4, 3695, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glLabelObjectEXT_info = {"glLabelObjectEXT", "glLabelObjectEXT(type, object, length, label) -> None", "($module, type, object, length, label, /)", pygl_GLES2_glLabelObjectEXT_args, "GLES2_EXT_debug_label", 4, 3690, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glLabelObjectEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7595,7 +7538,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glLineWidth_args[] = {"width"};
-static const PyGLCommand pygl_GLES2_glLineWidth_info = {"glLineWidth", "glLineWidth(width) -> None", "($module, width, /)", pygl_GLES2_glLineWidth_args, "GLES2_VERSION_GLES2_2_0", 1, 3696, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glLineWidth_info = {"glLineWidth", "glLineWidth(width) -> None", "($module, width, /)", pygl_GLES2_glLineWidth_args, "GLES2_VERSION_GLES2_2_0", 1, 3691, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glLineWidth(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7612,7 +7555,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glLinkProgram_args[] = {"program"};
-static const PyGLCommand pygl_GLES2_glLinkProgram_info = {"glLinkProgram", "glLinkProgram(program) -> None", "($module, program, /)", pygl_GLES2_glLinkProgram_args, "GLES2_VERSION_GLES2_2_0", 1, 3697, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glLinkProgram_info = {"glLinkProgram", "glLinkProgram(program) -> None", "($module, program, /)", pygl_GLES2_glLinkProgram_args, "GLES2_VERSION_GLES2_2_0", 1, 3692, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glLinkProgram(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7629,7 +7572,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMakeImageHandleNonResidentNV_args[] = {"handle"};
-static const PyGLCommand pygl_GLES2_glMakeImageHandleNonResidentNV_info = {"glMakeImageHandleNonResidentNV", "glMakeImageHandleNonResidentNV(handle) -> None", "($module, handle, /)", pygl_GLES2_glMakeImageHandleNonResidentNV_args, "GLES2_NV_bindless_texture", 1, 3698, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glMakeImageHandleNonResidentNV_info = {"glMakeImageHandleNonResidentNV", "glMakeImageHandleNonResidentNV(handle) -> None", "($module, handle, /)", pygl_GLES2_glMakeImageHandleNonResidentNV_args, "GLES2_NV_bindless_texture", 1, 3693, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMakeImageHandleNonResidentNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7646,7 +7589,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMakeImageHandleResidentNV_args[] = {"handle", "access"};
-static const PyGLCommand pygl_GLES2_glMakeImageHandleResidentNV_info = {"glMakeImageHandleResidentNV", "glMakeImageHandleResidentNV(handle, access) -> None", "($module, handle, access, /)", pygl_GLES2_glMakeImageHandleResidentNV_args, "GLES2_NV_bindless_texture", 2, 3699, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMakeImageHandleResidentNV_info = {"glMakeImageHandleResidentNV", "glMakeImageHandleResidentNV(handle, access) -> None", "($module, handle, access, /)", pygl_GLES2_glMakeImageHandleResidentNV_args, "GLES2_NV_bindless_texture", 2, 3694, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMakeImageHandleResidentNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7664,7 +7607,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMakeTextureHandleNonResidentNV_args[] = {"handle"};
-static const PyGLCommand pygl_GLES2_glMakeTextureHandleNonResidentNV_info = {"glMakeTextureHandleNonResidentNV", "glMakeTextureHandleNonResidentNV(handle) -> None", "($module, handle, /)", pygl_GLES2_glMakeTextureHandleNonResidentNV_args, "GLES2_NV_bindless_texture", 1, 3700, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glMakeTextureHandleNonResidentNV_info = {"glMakeTextureHandleNonResidentNV", "glMakeTextureHandleNonResidentNV(handle) -> None", "($module, handle, /)", pygl_GLES2_glMakeTextureHandleNonResidentNV_args, "GLES2_NV_bindless_texture", 1, 3695, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMakeTextureHandleNonResidentNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7681,7 +7624,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMakeTextureHandleResidentNV_args[] = {"handle"};
-static const PyGLCommand pygl_GLES2_glMakeTextureHandleResidentNV_info = {"glMakeTextureHandleResidentNV", "glMakeTextureHandleResidentNV(handle) -> None", "($module, handle, /)", pygl_GLES2_glMakeTextureHandleResidentNV_args, "GLES2_NV_bindless_texture", 1, 3701, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glMakeTextureHandleResidentNV_info = {"glMakeTextureHandleResidentNV", "glMakeTextureHandleResidentNV(handle) -> None", "($module, handle, /)", pygl_GLES2_glMakeTextureHandleResidentNV_args, "GLES2_NV_bindless_texture", 1, 3696, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMakeTextureHandleResidentNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7698,7 +7641,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMapBufferOES_args[] = {"target", "access"};
-static const PyGLCommand pygl_GLES2_glMapBufferOES_info = {"glMapBufferOES", "glMapBufferOES(target, access) -> void", "($module, target, access, /)", pygl_GLES2_glMapBufferOES_args, "GLES2_OES_mapbuffer", 2, 3702, PYGL_API_GLES2, 0, 2, 5, 0};
+static const PyGLCommand pygl_GLES2_glMapBufferOES_info = {"glMapBufferOES", "glMapBufferOES(target, access) -> void", "($module, target, access, /)", pygl_GLES2_glMapBufferOES_args, "GLES2_OES_mapbuffer", 2, 3697, PYGL_API_GLES2, 0, 2, 5, 0};
 
 static PyObject *
 pygl_GLES2_glMapBufferOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7716,7 +7659,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMapBufferRangeEXT_args[] = {"target", "offset", "length", "access"};
-static const PyGLCommand pygl_GLES2_glMapBufferRangeEXT_info = {"glMapBufferRangeEXT", "glMapBufferRangeEXT(target, offset, length, access) -> void", "($module, target, offset, length, access, /)", pygl_GLES2_glMapBufferRangeEXT_args, "GLES2_EXT_map_buffer_range", 4, 3703, PYGL_API_GLES2, 0, 4, 5, 0};
+static const PyGLCommand pygl_GLES2_glMapBufferRangeEXT_info = {"glMapBufferRangeEXT", "glMapBufferRangeEXT(target, offset, length, access) -> void", "($module, target, offset, length, access, /)", pygl_GLES2_glMapBufferRangeEXT_args, "GLES2_EXT_map_buffer_range", 4, 3698, PYGL_API_GLES2, 0, 4, 5, 0};
 
 static PyObject *
 pygl_GLES2_glMapBufferRangeEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7736,7 +7679,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixFrustumEXT_args[] = {"mode", "left", "right", "bottom", "top", "zNear", "zFar"};
-static const PyGLCommand pygl_GLES2_glMatrixFrustumEXT_info = {"glMatrixFrustumEXT", "glMatrixFrustumEXT(mode, left, right, bottom, top, zNear, zFar) -> None", "($module, mode, left, right, bottom, top, zNear, zFar, /)", pygl_GLES2_glMatrixFrustumEXT_args, "GLES2_NV_path_rendering", 7, 3704, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixFrustumEXT_info = {"glMatrixFrustumEXT", "glMatrixFrustumEXT(mode, left, right, bottom, top, zNear, zFar) -> None", "($module, mode, left, right, bottom, top, zNear, zFar, /)", pygl_GLES2_glMatrixFrustumEXT_args, "GLES2_NV_path_rendering", 7, 3699, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixFrustumEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7759,7 +7702,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixLoad3x2fNV_args[] = {"matrixMode", "m"};
-static const PyGLCommand pygl_GLES2_glMatrixLoad3x2fNV_info = {"glMatrixLoad3x2fNV", "glMatrixLoad3x2fNV(matrixMode, m) -> None", "($module, matrixMode, m, /)", pygl_GLES2_glMatrixLoad3x2fNV_args, "GLES2_NV_path_rendering", 2, 3705, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixLoad3x2fNV_info = {"glMatrixLoad3x2fNV", "glMatrixLoad3x2fNV(matrixMode, m) -> None", "($module, matrixMode, m, /)", pygl_GLES2_glMatrixLoad3x2fNV_args, "GLES2_NV_path_rendering", 2, 3700, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixLoad3x2fNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7780,7 +7723,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixLoad3x3fNV_args[] = {"matrixMode", "m"};
-static const PyGLCommand pygl_GLES2_glMatrixLoad3x3fNV_info = {"glMatrixLoad3x3fNV", "glMatrixLoad3x3fNV(matrixMode, m) -> None", "($module, matrixMode, m, /)", pygl_GLES2_glMatrixLoad3x3fNV_args, "GLES2_NV_path_rendering", 2, 3706, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixLoad3x3fNV_info = {"glMatrixLoad3x3fNV", "glMatrixLoad3x3fNV(matrixMode, m) -> None", "($module, matrixMode, m, /)", pygl_GLES2_glMatrixLoad3x3fNV_args, "GLES2_NV_path_rendering", 2, 3701, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixLoad3x3fNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7801,7 +7744,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixLoadIdentityEXT_args[] = {"mode"};
-static const PyGLCommand pygl_GLES2_glMatrixLoadIdentityEXT_info = {"glMatrixLoadIdentityEXT", "glMatrixLoadIdentityEXT(mode) -> None", "($module, mode, /)", pygl_GLES2_glMatrixLoadIdentityEXT_args, "GLES2_NV_path_rendering", 1, 3707, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixLoadIdentityEXT_info = {"glMatrixLoadIdentityEXT", "glMatrixLoadIdentityEXT(mode) -> None", "($module, mode, /)", pygl_GLES2_glMatrixLoadIdentityEXT_args, "GLES2_NV_path_rendering", 1, 3702, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixLoadIdentityEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7818,7 +7761,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixLoadTranspose3x3fNV_args[] = {"matrixMode", "m"};
-static const PyGLCommand pygl_GLES2_glMatrixLoadTranspose3x3fNV_info = {"glMatrixLoadTranspose3x3fNV", "glMatrixLoadTranspose3x3fNV(matrixMode, m) -> None", "($module, matrixMode, m, /)", pygl_GLES2_glMatrixLoadTranspose3x3fNV_args, "GLES2_NV_path_rendering", 2, 3708, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixLoadTranspose3x3fNV_info = {"glMatrixLoadTranspose3x3fNV", "glMatrixLoadTranspose3x3fNV(matrixMode, m) -> None", "($module, matrixMode, m, /)", pygl_GLES2_glMatrixLoadTranspose3x3fNV_args, "GLES2_NV_path_rendering", 2, 3703, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixLoadTranspose3x3fNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7839,7 +7782,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixLoadTransposedEXT_args[] = {"mode", "m"};
-static const PyGLCommand pygl_GLES2_glMatrixLoadTransposedEXT_info = {"glMatrixLoadTransposedEXT", "glMatrixLoadTransposedEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixLoadTransposedEXT_args, "GLES2_NV_path_rendering", 2, 3709, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixLoadTransposedEXT_info = {"glMatrixLoadTransposedEXT", "glMatrixLoadTransposedEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixLoadTransposedEXT_args, "GLES2_NV_path_rendering", 2, 3704, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixLoadTransposedEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7860,7 +7803,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixLoadTransposefEXT_args[] = {"mode", "m"};
-static const PyGLCommand pygl_GLES2_glMatrixLoadTransposefEXT_info = {"glMatrixLoadTransposefEXT", "glMatrixLoadTransposefEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixLoadTransposefEXT_args, "GLES2_NV_path_rendering", 2, 3710, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixLoadTransposefEXT_info = {"glMatrixLoadTransposefEXT", "glMatrixLoadTransposefEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixLoadTransposefEXT_args, "GLES2_NV_path_rendering", 2, 3705, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixLoadTransposefEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7881,7 +7824,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixLoaddEXT_args[] = {"mode", "m"};
-static const PyGLCommand pygl_GLES2_glMatrixLoaddEXT_info = {"glMatrixLoaddEXT", "glMatrixLoaddEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixLoaddEXT_args, "GLES2_NV_path_rendering", 2, 3711, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixLoaddEXT_info = {"glMatrixLoaddEXT", "glMatrixLoaddEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixLoaddEXT_args, "GLES2_NV_path_rendering", 2, 3706, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixLoaddEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7902,7 +7845,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixLoadfEXT_args[] = {"mode", "m"};
-static const PyGLCommand pygl_GLES2_glMatrixLoadfEXT_info = {"glMatrixLoadfEXT", "glMatrixLoadfEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixLoadfEXT_args, "GLES2_NV_path_rendering", 2, 3712, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixLoadfEXT_info = {"glMatrixLoadfEXT", "glMatrixLoadfEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixLoadfEXT_args, "GLES2_NV_path_rendering", 2, 3707, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixLoadfEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7923,7 +7866,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixMult3x2fNV_args[] = {"matrixMode", "m"};
-static const PyGLCommand pygl_GLES2_glMatrixMult3x2fNV_info = {"glMatrixMult3x2fNV", "glMatrixMult3x2fNV(matrixMode, m) -> None", "($module, matrixMode, m, /)", pygl_GLES2_glMatrixMult3x2fNV_args, "GLES2_NV_path_rendering", 2, 3713, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixMult3x2fNV_info = {"glMatrixMult3x2fNV", "glMatrixMult3x2fNV(matrixMode, m) -> None", "($module, matrixMode, m, /)", pygl_GLES2_glMatrixMult3x2fNV_args, "GLES2_NV_path_rendering", 2, 3708, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixMult3x2fNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7944,7 +7887,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixMult3x3fNV_args[] = {"matrixMode", "m"};
-static const PyGLCommand pygl_GLES2_glMatrixMult3x3fNV_info = {"glMatrixMult3x3fNV", "glMatrixMult3x3fNV(matrixMode, m) -> None", "($module, matrixMode, m, /)", pygl_GLES2_glMatrixMult3x3fNV_args, "GLES2_NV_path_rendering", 2, 3714, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixMult3x3fNV_info = {"glMatrixMult3x3fNV", "glMatrixMult3x3fNV(matrixMode, m) -> None", "($module, matrixMode, m, /)", pygl_GLES2_glMatrixMult3x3fNV_args, "GLES2_NV_path_rendering", 2, 3709, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixMult3x3fNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7965,7 +7908,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixMultTranspose3x3fNV_args[] = {"matrixMode", "m"};
-static const PyGLCommand pygl_GLES2_glMatrixMultTranspose3x3fNV_info = {"glMatrixMultTranspose3x3fNV", "glMatrixMultTranspose3x3fNV(matrixMode, m) -> None", "($module, matrixMode, m, /)", pygl_GLES2_glMatrixMultTranspose3x3fNV_args, "GLES2_NV_path_rendering", 2, 3715, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixMultTranspose3x3fNV_info = {"glMatrixMultTranspose3x3fNV", "glMatrixMultTranspose3x3fNV(matrixMode, m) -> None", "($module, matrixMode, m, /)", pygl_GLES2_glMatrixMultTranspose3x3fNV_args, "GLES2_NV_path_rendering", 2, 3710, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixMultTranspose3x3fNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7986,7 +7929,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixMultTransposedEXT_args[] = {"mode", "m"};
-static const PyGLCommand pygl_GLES2_glMatrixMultTransposedEXT_info = {"glMatrixMultTransposedEXT", "glMatrixMultTransposedEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixMultTransposedEXT_args, "GLES2_NV_path_rendering", 2, 3716, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixMultTransposedEXT_info = {"glMatrixMultTransposedEXT", "glMatrixMultTransposedEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixMultTransposedEXT_args, "GLES2_NV_path_rendering", 2, 3711, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixMultTransposedEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8007,7 +7950,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixMultTransposefEXT_args[] = {"mode", "m"};
-static const PyGLCommand pygl_GLES2_glMatrixMultTransposefEXT_info = {"glMatrixMultTransposefEXT", "glMatrixMultTransposefEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixMultTransposefEXT_args, "GLES2_NV_path_rendering", 2, 3717, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixMultTransposefEXT_info = {"glMatrixMultTransposefEXT", "glMatrixMultTransposefEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixMultTransposefEXT_args, "GLES2_NV_path_rendering", 2, 3712, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixMultTransposefEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8028,7 +7971,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixMultdEXT_args[] = {"mode", "m"};
-static const PyGLCommand pygl_GLES2_glMatrixMultdEXT_info = {"glMatrixMultdEXT", "glMatrixMultdEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixMultdEXT_args, "GLES2_NV_path_rendering", 2, 3718, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixMultdEXT_info = {"glMatrixMultdEXT", "glMatrixMultdEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixMultdEXT_args, "GLES2_NV_path_rendering", 2, 3713, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixMultdEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8049,7 +7992,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixMultfEXT_args[] = {"mode", "m"};
-static const PyGLCommand pygl_GLES2_glMatrixMultfEXT_info = {"glMatrixMultfEXT", "glMatrixMultfEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixMultfEXT_args, "GLES2_NV_path_rendering", 2, 3719, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixMultfEXT_info = {"glMatrixMultfEXT", "glMatrixMultfEXT(mode, m) -> None", "($module, mode, m, /)", pygl_GLES2_glMatrixMultfEXT_args, "GLES2_NV_path_rendering", 2, 3714, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixMultfEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8070,7 +8013,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixOrthoEXT_args[] = {"mode", "left", "right", "bottom", "top", "zNear", "zFar"};
-static const PyGLCommand pygl_GLES2_glMatrixOrthoEXT_info = {"glMatrixOrthoEXT", "glMatrixOrthoEXT(mode, left, right, bottom, top, zNear, zFar) -> None", "($module, mode, left, right, bottom, top, zNear, zFar, /)", pygl_GLES2_glMatrixOrthoEXT_args, "GLES2_NV_path_rendering", 7, 3720, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixOrthoEXT_info = {"glMatrixOrthoEXT", "glMatrixOrthoEXT(mode, left, right, bottom, top, zNear, zFar) -> None", "($module, mode, left, right, bottom, top, zNear, zFar, /)", pygl_GLES2_glMatrixOrthoEXT_args, "GLES2_NV_path_rendering", 7, 3715, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixOrthoEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8093,7 +8036,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixPopEXT_args[] = {"mode"};
-static const PyGLCommand pygl_GLES2_glMatrixPopEXT_info = {"glMatrixPopEXT", "glMatrixPopEXT(mode) -> None", "($module, mode, /)", pygl_GLES2_glMatrixPopEXT_args, "GLES2_NV_path_rendering", 1, 3721, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixPopEXT_info = {"glMatrixPopEXT", "glMatrixPopEXT(mode) -> None", "($module, mode, /)", pygl_GLES2_glMatrixPopEXT_args, "GLES2_NV_path_rendering", 1, 3716, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixPopEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8110,7 +8053,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixPushEXT_args[] = {"mode"};
-static const PyGLCommand pygl_GLES2_glMatrixPushEXT_info = {"glMatrixPushEXT", "glMatrixPushEXT(mode) -> None", "($module, mode, /)", pygl_GLES2_glMatrixPushEXT_args, "GLES2_NV_path_rendering", 1, 3722, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixPushEXT_info = {"glMatrixPushEXT", "glMatrixPushEXT(mode) -> None", "($module, mode, /)", pygl_GLES2_glMatrixPushEXT_args, "GLES2_NV_path_rendering", 1, 3717, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixPushEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8127,7 +8070,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixRotatedEXT_args[] = {"mode", "angle", "x", "y", "z"};
-static const PyGLCommand pygl_GLES2_glMatrixRotatedEXT_info = {"glMatrixRotatedEXT", "glMatrixRotatedEXT(mode, angle, x, y, z) -> None", "($module, mode, angle, x, y, z, /)", pygl_GLES2_glMatrixRotatedEXT_args, "GLES2_NV_path_rendering", 5, 3723, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixRotatedEXT_info = {"glMatrixRotatedEXT", "glMatrixRotatedEXT(mode, angle, x, y, z) -> None", "($module, mode, angle, x, y, z, /)", pygl_GLES2_glMatrixRotatedEXT_args, "GLES2_NV_path_rendering", 5, 3718, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixRotatedEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8148,7 +8091,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixRotatefEXT_args[] = {"mode", "angle", "x", "y", "z"};
-static const PyGLCommand pygl_GLES2_glMatrixRotatefEXT_info = {"glMatrixRotatefEXT", "glMatrixRotatefEXT(mode, angle, x, y, z) -> None", "($module, mode, angle, x, y, z, /)", pygl_GLES2_glMatrixRotatefEXT_args, "GLES2_NV_path_rendering", 5, 3724, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixRotatefEXT_info = {"glMatrixRotatefEXT", "glMatrixRotatefEXT(mode, angle, x, y, z) -> None", "($module, mode, angle, x, y, z, /)", pygl_GLES2_glMatrixRotatefEXT_args, "GLES2_NV_path_rendering", 5, 3719, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixRotatefEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8169,7 +8112,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixScaledEXT_args[] = {"mode", "x", "y", "z"};
-static const PyGLCommand pygl_GLES2_glMatrixScaledEXT_info = {"glMatrixScaledEXT", "glMatrixScaledEXT(mode, x, y, z) -> None", "($module, mode, x, y, z, /)", pygl_GLES2_glMatrixScaledEXT_args, "GLES2_NV_path_rendering", 4, 3725, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixScaledEXT_info = {"glMatrixScaledEXT", "glMatrixScaledEXT(mode, x, y, z) -> None", "($module, mode, x, y, z, /)", pygl_GLES2_glMatrixScaledEXT_args, "GLES2_NV_path_rendering", 4, 3720, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixScaledEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8189,7 +8132,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixScalefEXT_args[] = {"mode", "x", "y", "z"};
-static const PyGLCommand pygl_GLES2_glMatrixScalefEXT_info = {"glMatrixScalefEXT", "glMatrixScalefEXT(mode, x, y, z) -> None", "($module, mode, x, y, z, /)", pygl_GLES2_glMatrixScalefEXT_args, "GLES2_NV_path_rendering", 4, 3726, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixScalefEXT_info = {"glMatrixScalefEXT", "glMatrixScalefEXT(mode, x, y, z) -> None", "($module, mode, x, y, z, /)", pygl_GLES2_glMatrixScalefEXT_args, "GLES2_NV_path_rendering", 4, 3721, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixScalefEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8209,7 +8152,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixTranslatedEXT_args[] = {"mode", "x", "y", "z"};
-static const PyGLCommand pygl_GLES2_glMatrixTranslatedEXT_info = {"glMatrixTranslatedEXT", "glMatrixTranslatedEXT(mode, x, y, z) -> None", "($module, mode, x, y, z, /)", pygl_GLES2_glMatrixTranslatedEXT_args, "GLES2_NV_path_rendering", 4, 3727, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixTranslatedEXT_info = {"glMatrixTranslatedEXT", "glMatrixTranslatedEXT(mode, x, y, z) -> None", "($module, mode, x, y, z, /)", pygl_GLES2_glMatrixTranslatedEXT_args, "GLES2_NV_path_rendering", 4, 3722, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixTranslatedEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8229,7 +8172,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMatrixTranslatefEXT_args[] = {"mode", "x", "y", "z"};
-static const PyGLCommand pygl_GLES2_glMatrixTranslatefEXT_info = {"glMatrixTranslatefEXT", "glMatrixTranslatefEXT(mode, x, y, z) -> None", "($module, mode, x, y, z, /)", pygl_GLES2_glMatrixTranslatefEXT_args, "GLES2_NV_path_rendering", 4, 3728, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glMatrixTranslatefEXT_info = {"glMatrixTranslatefEXT", "glMatrixTranslatefEXT(mode, x, y, z) -> None", "($module, mode, x, y, z, /)", pygl_GLES2_glMatrixTranslatefEXT_args, "GLES2_NV_path_rendering", 4, 3723, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMatrixTranslatefEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8249,7 +8192,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMaxActiveShaderCoresARM_args[] = {"count"};
-static const PyGLCommand pygl_GLES2_glMaxActiveShaderCoresARM_info = {"glMaxActiveShaderCoresARM", "glMaxActiveShaderCoresARM(count) -> None", "($module, count, /)", pygl_GLES2_glMaxActiveShaderCoresARM_args, "GLES2_ARM_shader_core_properties", 1, 3729, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glMaxActiveShaderCoresARM_info = {"glMaxActiveShaderCoresARM", "glMaxActiveShaderCoresARM(count) -> None", "($module, count, /)", pygl_GLES2_glMaxActiveShaderCoresARM_args, "GLES2_ARM_shader_core_properties", 1, 3724, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMaxActiveShaderCoresARM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8266,7 +8209,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMaxShaderCompilerThreadsKHR_args[] = {"count"};
-static const PyGLCommand pygl_GLES2_glMaxShaderCompilerThreadsKHR_info = {"glMaxShaderCompilerThreadsKHR", "glMaxShaderCompilerThreadsKHR(count) -> None", "($module, count, /)", pygl_GLES2_glMaxShaderCompilerThreadsKHR_args, "GLES2_KHR_parallel_shader_compile", 1, 3730, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glMaxShaderCompilerThreadsKHR_info = {"glMaxShaderCompilerThreadsKHR", "glMaxShaderCompilerThreadsKHR(count) -> None", "($module, count, /)", pygl_GLES2_glMaxShaderCompilerThreadsKHR_args, "GLES2_KHR_parallel_shader_compile", 1, 3725, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMaxShaderCompilerThreadsKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8283,7 +8226,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMemoryObjectParameterivEXT_args[] = {"memoryObject", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glMemoryObjectParameterivEXT_info = {"glMemoryObjectParameterivEXT", "glMemoryObjectParameterivEXT(memoryObject, pname, params) -> None", "($module, memoryObject, pname, params, /)", pygl_GLES2_glMemoryObjectParameterivEXT_args, "GLES2_EXT_memory_object", 3, 3731, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glMemoryObjectParameterivEXT_info = {"glMemoryObjectParameterivEXT", "glMemoryObjectParameterivEXT(memoryObject, pname, params) -> None", "($module, memoryObject, pname, params, /)", pygl_GLES2_glMemoryObjectParameterivEXT_args, "GLES2_EXT_memory_object", 3, 3726, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMemoryObjectParameterivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8305,7 +8248,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMinSampleShading_args[] = {"value"};
-static const PyGLCommand pygl_GLES2_glMinSampleShading_info = {"glMinSampleShading", "glMinSampleShading(value) -> None", "($module, value, /)", pygl_GLES2_glMinSampleShading_args, "GLES2_ES_VERSION_3_2", 1, 3732, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glMinSampleShading_info = {"glMinSampleShading", "glMinSampleShading(value) -> None", "($module, value, /)", pygl_GLES2_glMinSampleShading_args, "GLES2_ES_VERSION_3_2", 1, 3727, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMinSampleShading(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8322,7 +8265,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMinSampleShadingOES_args[] = {"value"};
-static const PyGLCommand pygl_GLES2_glMinSampleShadingOES_info = {"glMinSampleShadingOES", "glMinSampleShadingOES(value) -> None", "($module, value, /)", pygl_GLES2_glMinSampleShadingOES_args, "GLES2_OES_sample_shading", 1, 3733, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glMinSampleShadingOES_info = {"glMinSampleShadingOES", "glMinSampleShadingOES(value) -> None", "($module, value, /)", pygl_GLES2_glMinSampleShadingOES_args, "GLES2_OES_sample_shading", 1, 3728, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMinSampleShadingOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8339,7 +8282,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMultiDrawArraysEXT_args[] = {"mode", "first", "count", "primcount"};
-static const PyGLCommand pygl_GLES2_glMultiDrawArraysEXT_info = {"glMultiDrawArraysEXT", "glMultiDrawArraysEXT(mode, first, count, primcount) -> None", "($module, mode, first, count, primcount, /)", pygl_GLES2_glMultiDrawArraysEXT_args, "GLES2_EXT_multi_draw_arrays", 4, 3734, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glMultiDrawArraysEXT_info = {"glMultiDrawArraysEXT", "glMultiDrawArraysEXT(mode, first, count, primcount) -> None", "($module, mode, first, count, primcount, /)", pygl_GLES2_glMultiDrawArraysEXT_args, "GLES2_EXT_multi_draw_arrays", 4, 3729, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMultiDrawArraysEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8362,7 +8305,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMultiDrawArraysIndirectEXT_args[] = {"mode", "indirect", "drawcount", "stride"};
-static const PyGLCommand pygl_GLES2_glMultiDrawArraysIndirectEXT_info = {"glMultiDrawArraysIndirectEXT", "glMultiDrawArraysIndirectEXT(mode, indirect, drawcount, stride) -> None", "($module, mode, indirect, drawcount, stride, /)", pygl_GLES2_glMultiDrawArraysIndirectEXT_args, "GLES2_EXT_multi_draw_indirect", 4, 3735, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glMultiDrawArraysIndirectEXT_info = {"glMultiDrawArraysIndirectEXT", "glMultiDrawArraysIndirectEXT(mode, indirect, drawcount, stride) -> None", "($module, mode, indirect, drawcount, stride, /)", pygl_GLES2_glMultiDrawArraysIndirectEXT_args, "GLES2_EXT_multi_draw_indirect", 4, 3730, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMultiDrawArraysIndirectEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8385,7 +8328,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMultiDrawElementsBaseVertexEXT_args[] = {"mode", "count", "type", "indices", "drawcount", "basevertex"};
-static const PyGLCommand pygl_GLES2_glMultiDrawElementsBaseVertexEXT_info = {"glMultiDrawElementsBaseVertexEXT", "glMultiDrawElementsBaseVertexEXT(mode, count, type, indices, drawcount, basevertex) -> None", "($module, mode, count, type, indices, drawcount, basevertex, /)", pygl_GLES2_glMultiDrawElementsBaseVertexEXT_args, "GLES2_OES_draw_elements_base_vertex", 6, 3736, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glMultiDrawElementsBaseVertexEXT_info = {"glMultiDrawElementsBaseVertexEXT", "glMultiDrawElementsBaseVertexEXT(mode, count, type, indices, drawcount, basevertex) -> None", "($module, mode, count, type, indices, drawcount, basevertex, /)", pygl_GLES2_glMultiDrawElementsBaseVertexEXT_args, "GLES2_OES_draw_elements_base_vertex", 6, 3731, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMultiDrawElementsBaseVertexEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8410,7 +8353,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMultiDrawElementsEXT_args[] = {"mode", "count", "type", "indices", "primcount"};
-static const PyGLCommand pygl_GLES2_glMultiDrawElementsEXT_info = {"glMultiDrawElementsEXT", "glMultiDrawElementsEXT(mode, count, type, indices, primcount) -> None", "($module, mode, count, type, indices, primcount, /)", pygl_GLES2_glMultiDrawElementsEXT_args, "GLES2_EXT_multi_draw_arrays", 5, 3737, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glMultiDrawElementsEXT_info = {"glMultiDrawElementsEXT", "glMultiDrawElementsEXT(mode, count, type, indices, primcount) -> None", "($module, mode, count, type, indices, primcount, /)", pygl_GLES2_glMultiDrawElementsEXT_args, "GLES2_EXT_multi_draw_arrays", 5, 3732, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMultiDrawElementsEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8434,7 +8377,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMultiDrawElementsIndirectEXT_args[] = {"mode", "type", "indirect", "drawcount", "stride"};
-static const PyGLCommand pygl_GLES2_glMultiDrawElementsIndirectEXT_info = {"glMultiDrawElementsIndirectEXT", "glMultiDrawElementsIndirectEXT(mode, type, indirect, drawcount, stride) -> None", "($module, mode, type, indirect, drawcount, stride, /)", pygl_GLES2_glMultiDrawElementsIndirectEXT_args, "GLES2_EXT_multi_draw_indirect", 5, 3738, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glMultiDrawElementsIndirectEXT_info = {"glMultiDrawElementsIndirectEXT", "glMultiDrawElementsIndirectEXT(mode, type, indirect, drawcount, stride) -> None", "($module, mode, type, indirect, drawcount, stride, /)", pygl_GLES2_glMultiDrawElementsIndirectEXT_args, "GLES2_EXT_multi_draw_indirect", 5, 3733, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMultiDrawElementsIndirectEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8458,7 +8401,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMultiDrawMeshTasksIndirectCountNV_args[] = {"indirect", "drawcount", "maxdrawcount", "stride"};
-static const PyGLCommand pygl_GLES2_glMultiDrawMeshTasksIndirectCountNV_info = {"glMultiDrawMeshTasksIndirectCountNV", "glMultiDrawMeshTasksIndirectCountNV(indirect, drawcount, maxdrawcount, stride) -> None", "($module, indirect, drawcount, maxdrawcount, stride, /)", pygl_GLES2_glMultiDrawMeshTasksIndirectCountNV_args, "GLES2_NV_mesh_shader", 4, 3739, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glMultiDrawMeshTasksIndirectCountNV_info = {"glMultiDrawMeshTasksIndirectCountNV", "glMultiDrawMeshTasksIndirectCountNV(indirect, drawcount, maxdrawcount, stride) -> None", "($module, indirect, drawcount, maxdrawcount, stride, /)", pygl_GLES2_glMultiDrawMeshTasksIndirectCountNV_args, "GLES2_NV_mesh_shader", 4, 3734, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMultiDrawMeshTasksIndirectCountNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8478,7 +8421,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glMultiDrawMeshTasksIndirectNV_args[] = {"indirect", "drawcount", "stride"};
-static const PyGLCommand pygl_GLES2_glMultiDrawMeshTasksIndirectNV_info = {"glMultiDrawMeshTasksIndirectNV", "glMultiDrawMeshTasksIndirectNV(indirect, drawcount, stride) -> None", "($module, indirect, drawcount, stride, /)", pygl_GLES2_glMultiDrawMeshTasksIndirectNV_args, "GLES2_NV_mesh_shader", 3, 3740, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glMultiDrawMeshTasksIndirectNV_info = {"glMultiDrawMeshTasksIndirectNV", "glMultiDrawMeshTasksIndirectNV(indirect, drawcount, stride) -> None", "($module, indirect, drawcount, stride, /)", pygl_GLES2_glMultiDrawMeshTasksIndirectNV_args, "GLES2_NV_mesh_shader", 3, 3735, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glMultiDrawMeshTasksIndirectNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8497,7 +8440,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glNamedBufferAttachMemoryNV_args[] = {"buffer", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glNamedBufferAttachMemoryNV_info = {"glNamedBufferAttachMemoryNV", "glNamedBufferAttachMemoryNV(buffer, memory, offset) -> None", "($module, buffer, memory, offset, /)", pygl_GLES2_glNamedBufferAttachMemoryNV_args, "GLES2_NV_memory_attachment", 3, 3741, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glNamedBufferAttachMemoryNV_info = {"glNamedBufferAttachMemoryNV", "glNamedBufferAttachMemoryNV(buffer, memory, offset) -> None", "($module, buffer, memory, offset, /)", pygl_GLES2_glNamedBufferAttachMemoryNV_args, "GLES2_NV_memory_attachment", 3, 3736, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glNamedBufferAttachMemoryNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8516,7 +8459,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glNamedBufferPageCommitmentMemNV_args[] = {"buffer", "offset", "size", "memory", "memOffset", "commit"};
-static const PyGLCommand pygl_GLES2_glNamedBufferPageCommitmentMemNV_info = {"glNamedBufferPageCommitmentMemNV", "glNamedBufferPageCommitmentMemNV(buffer, offset, size, memory, memOffset, commit) -> None", "($module, buffer, offset, size, memory, memOffset, commit, /)", pygl_GLES2_glNamedBufferPageCommitmentMemNV_args, "GLES2_NV_memory_object_sparse", 6, 3742, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glNamedBufferPageCommitmentMemNV_info = {"glNamedBufferPageCommitmentMemNV", "glNamedBufferPageCommitmentMemNV(buffer, offset, size, memory, memOffset, commit) -> None", "($module, buffer, offset, size, memory, memOffset, commit, /)", pygl_GLES2_glNamedBufferPageCommitmentMemNV_args, "GLES2_NV_memory_object_sparse", 6, 3737, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glNamedBufferPageCommitmentMemNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8538,7 +8481,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glNamedBufferStorageExternalEXT_args[] = {"buffer", "offset", "size", "clientBuffer", "flags"};
-static const PyGLCommand pygl_GLES2_glNamedBufferStorageExternalEXT_info = {"glNamedBufferStorageExternalEXT", "glNamedBufferStorageExternalEXT(buffer, offset, size, clientBuffer, flags) -> None", "($module, buffer, offset, size, clientBuffer, flags, /)", pygl_GLES2_glNamedBufferStorageExternalEXT_args, "GLES2_EXT_external_buffer", 5, 3743, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glNamedBufferStorageExternalEXT_info = {"glNamedBufferStorageExternalEXT", "glNamedBufferStorageExternalEXT(buffer, offset, size, clientBuffer, flags) -> None", "($module, buffer, offset, size, clientBuffer, flags, /)", pygl_GLES2_glNamedBufferStorageExternalEXT_args, "GLES2_EXT_external_buffer", 5, 3738, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glNamedBufferStorageExternalEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8559,7 +8502,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glNamedBufferStorageMemEXT_args[] = {"buffer", "size", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glNamedBufferStorageMemEXT_info = {"glNamedBufferStorageMemEXT", "glNamedBufferStorageMemEXT(buffer, size, memory, offset) -> None", "($module, buffer, size, memory, offset, /)", pygl_GLES2_glNamedBufferStorageMemEXT_args, "GLES2_EXT_memory_object", 4, 3744, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glNamedBufferStorageMemEXT_info = {"glNamedBufferStorageMemEXT", "glNamedBufferStorageMemEXT(buffer, size, memory, offset) -> None", "($module, buffer, size, memory, offset, /)", pygl_GLES2_glNamedBufferStorageMemEXT_args, "GLES2_EXT_memory_object", 4, 3739, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glNamedBufferStorageMemEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8579,7 +8522,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glNamedFramebufferSampleLocationsfvNV_args[] = {"framebuffer", "start", "count", "v"};
-static const PyGLCommand pygl_GLES2_glNamedFramebufferSampleLocationsfvNV_info = {"glNamedFramebufferSampleLocationsfvNV", "glNamedFramebufferSampleLocationsfvNV(framebuffer, start, count, v) -> None", "($module, framebuffer, start, count, v, /)", pygl_GLES2_glNamedFramebufferSampleLocationsfvNV_args, "GLES2_NV_sample_locations", 4, 3745, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glNamedFramebufferSampleLocationsfvNV_info = {"glNamedFramebufferSampleLocationsfvNV", "glNamedFramebufferSampleLocationsfvNV(framebuffer, start, count, v) -> None", "($module, framebuffer, start, count, v, /)", pygl_GLES2_glNamedFramebufferSampleLocationsfvNV_args, "GLES2_NV_sample_locations", 4, 3740, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glNamedFramebufferSampleLocationsfvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8602,7 +8545,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glNamedFramebufferTextureMultiviewOVR_args[] = {"framebuffer", "attachment", "texture", "level", "baseViewIndex", "numViews"};
-static const PyGLCommand pygl_GLES2_glNamedFramebufferTextureMultiviewOVR_info = {"glNamedFramebufferTextureMultiviewOVR", "glNamedFramebufferTextureMultiviewOVR(framebuffer, attachment, texture, level, baseViewIndex, numViews) -> None", "($module, framebuffer, attachment, texture, level, baseViewIndex, numViews, /)", pygl_GLES2_glNamedFramebufferTextureMultiviewOVR_args, "GLES2_OVR_multiview", 6, 3746, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glNamedFramebufferTextureMultiviewOVR_info = {"glNamedFramebufferTextureMultiviewOVR", "glNamedFramebufferTextureMultiviewOVR(framebuffer, attachment, texture, level, baseViewIndex, numViews) -> None", "($module, framebuffer, attachment, texture, level, baseViewIndex, numViews, /)", pygl_GLES2_glNamedFramebufferTextureMultiviewOVR_args, "GLES2_OVR_multiview", 6, 3741, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glNamedFramebufferTextureMultiviewOVR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8624,7 +8567,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glNamedRenderbufferStorageMultisampleAdvancedAMD_args[] = {"renderbuffer", "samples", "storageSamples", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES2_glNamedRenderbufferStorageMultisampleAdvancedAMD_info = {"glNamedRenderbufferStorageMultisampleAdvancedAMD", "glNamedRenderbufferStorageMultisampleAdvancedAMD(renderbuffer, samples, storageSamples, internalformat, width, height) -> None", "($module, renderbuffer, samples, storageSamples, internalformat, width, height, /)", pygl_GLES2_glNamedRenderbufferStorageMultisampleAdvancedAMD_args, "GLES2_AMD_framebuffer_multisample_advanced", 6, 3747, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glNamedRenderbufferStorageMultisampleAdvancedAMD_info = {"glNamedRenderbufferStorageMultisampleAdvancedAMD", "glNamedRenderbufferStorageMultisampleAdvancedAMD(renderbuffer, samples, storageSamples, internalformat, width, height) -> None", "($module, renderbuffer, samples, storageSamples, internalformat, width, height, /)", pygl_GLES2_glNamedRenderbufferStorageMultisampleAdvancedAMD_args, "GLES2_AMD_framebuffer_multisample_advanced", 6, 3742, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glNamedRenderbufferStorageMultisampleAdvancedAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8646,7 +8589,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glObjectLabel_args[] = {"identifier", "name", "length", "label"};
-static const PyGLCommand pygl_GLES2_glObjectLabel_info = {"glObjectLabel", "glObjectLabel(identifier, name, length, label) -> None", "($module, identifier, name, length, label, /)", pygl_GLES2_glObjectLabel_args, "GLES2_ES_VERSION_3_2", 4, 3748, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glObjectLabel_info = {"glObjectLabel", "glObjectLabel(identifier, name, length, label) -> None", "($module, identifier, name, length, label, /)", pygl_GLES2_glObjectLabel_args, "GLES2_ES_VERSION_3_2", 4, 3743, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glObjectLabel(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8669,7 +8612,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glObjectLabelKHR_args[] = {"identifier", "name", "length", "label"};
-static const PyGLCommand pygl_GLES2_glObjectLabelKHR_info = {"glObjectLabelKHR", "glObjectLabelKHR(identifier, name, length, label) -> None", "($module, identifier, name, length, label, /)", pygl_GLES2_glObjectLabelKHR_args, "GLES2_KHR_debug", 4, 3749, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glObjectLabelKHR_info = {"glObjectLabelKHR", "glObjectLabelKHR(identifier, name, length, label) -> None", "($module, identifier, name, length, label, /)", pygl_GLES2_glObjectLabelKHR_args, "GLES2_KHR_debug", 4, 3744, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glObjectLabelKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8692,7 +8635,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glObjectPtrLabel_args[] = {"ptr", "length", "label"};
-static const PyGLCommand pygl_GLES2_glObjectPtrLabel_info = {"glObjectPtrLabel", "glObjectPtrLabel(ptr, length, label) -> None", "($module, ptr, length, label, /)", pygl_GLES2_glObjectPtrLabel_args, "GLES2_ES_VERSION_3_2", 3, 3750, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glObjectPtrLabel_info = {"glObjectPtrLabel", "glObjectPtrLabel(ptr, length, label) -> None", "($module, ptr, length, label, /)", pygl_GLES2_glObjectPtrLabel_args, "GLES2_ES_VERSION_3_2", 3, 3745, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glObjectPtrLabel(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8714,7 +8657,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glObjectPtrLabelKHR_args[] = {"ptr", "length", "label"};
-static const PyGLCommand pygl_GLES2_glObjectPtrLabelKHR_info = {"glObjectPtrLabelKHR", "glObjectPtrLabelKHR(ptr, length, label) -> None", "($module, ptr, length, label, /)", pygl_GLES2_glObjectPtrLabelKHR_args, "GLES2_KHR_debug", 3, 3751, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glObjectPtrLabelKHR_info = {"glObjectPtrLabelKHR", "glObjectPtrLabelKHR(ptr, length, label) -> None", "($module, ptr, length, label, /)", pygl_GLES2_glObjectPtrLabelKHR_args, "GLES2_KHR_debug", 3, 3746, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glObjectPtrLabelKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8736,7 +8679,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPatchParameteri_args[] = {"pname", "value"};
-static const PyGLCommand pygl_GLES2_glPatchParameteri_info = {"glPatchParameteri", "glPatchParameteri(pname, value) -> None", "($module, pname, value, /)", pygl_GLES2_glPatchParameteri_args, "GLES2_ES_VERSION_3_2", 2, 3752, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glPatchParameteri_info = {"glPatchParameteri", "glPatchParameteri(pname, value) -> None", "($module, pname, value, /)", pygl_GLES2_glPatchParameteri_args, "GLES2_ES_VERSION_3_2", 2, 3747, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPatchParameteri(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8754,7 +8697,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPatchParameteriEXT_args[] = {"pname", "value"};
-static const PyGLCommand pygl_GLES2_glPatchParameteriEXT_info = {"glPatchParameteriEXT", "glPatchParameteriEXT(pname, value) -> None", "($module, pname, value, /)", pygl_GLES2_glPatchParameteriEXT_args, "GLES2_EXT_tessellation_shader", 2, 3753, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glPatchParameteriEXT_info = {"glPatchParameteriEXT", "glPatchParameteriEXT(pname, value) -> None", "($module, pname, value, /)", pygl_GLES2_glPatchParameteriEXT_args, "GLES2_EXT_tessellation_shader", 2, 3748, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPatchParameteriEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8772,7 +8715,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPatchParameteriOES_args[] = {"pname", "value"};
-static const PyGLCommand pygl_GLES2_glPatchParameteriOES_info = {"glPatchParameteriOES", "glPatchParameteriOES(pname, value) -> None", "($module, pname, value, /)", pygl_GLES2_glPatchParameteriOES_args, "GLES2_OES_tessellation_shader", 2, 3754, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glPatchParameteriOES_info = {"glPatchParameteriOES", "glPatchParameteriOES(pname, value) -> None", "($module, pname, value, /)", pygl_GLES2_glPatchParameteriOES_args, "GLES2_OES_tessellation_shader", 2, 3749, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPatchParameteriOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8790,7 +8733,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathColorGenNV_args[] = {"color", "genMode", "colorFormat", "coeffs"};
-static const PyGLCommand pygl_GLES2_glPathColorGenNV_info = {"glPathColorGenNV", "glPathColorGenNV(color, genMode, colorFormat, coeffs) -> None", "($module, color, genMode, colorFormat, coeffs, /)", pygl_GLES2_glPathColorGenNV_args, "GLES2_NV_path_rendering", 4, 3755, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathColorGenNV_info = {"glPathColorGenNV", "glPathColorGenNV(color, genMode, colorFormat, coeffs) -> None", "($module, color, genMode, colorFormat, coeffs, /)", pygl_GLES2_glPathColorGenNV_args, "GLES2_NV_path_rendering", 4, 3750, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathColorGenNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8813,7 +8756,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathCommandsNV_args[] = {"path", "numCommands", "commands", "numCoords", "coordType", "coords"};
-static const PyGLCommand pygl_GLES2_glPathCommandsNV_info = {"glPathCommandsNV", "glPathCommandsNV(path, numCommands, commands, numCoords, coordType, coords) -> None", "($module, path, numCommands, commands, numCoords, coordType, coords, /)", pygl_GLES2_glPathCommandsNV_args, "GLES2_NV_path_rendering", 6, 3756, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathCommandsNV_info = {"glPathCommandsNV", "glPathCommandsNV(path, numCommands, commands, numCoords, coordType, coords) -> None", "($module, path, numCommands, commands, numCoords, coordType, coords, /)", pygl_GLES2_glPathCommandsNV_args, "GLES2_NV_path_rendering", 6, 3751, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathCommandsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8838,7 +8781,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathCoordsNV_args[] = {"path", "numCoords", "coordType", "coords"};
-static const PyGLCommand pygl_GLES2_glPathCoordsNV_info = {"glPathCoordsNV", "glPathCoordsNV(path, numCoords, coordType, coords) -> None", "($module, path, numCoords, coordType, coords, /)", pygl_GLES2_glPathCoordsNV_args, "GLES2_NV_path_rendering", 4, 3757, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathCoordsNV_info = {"glPathCoordsNV", "glPathCoordsNV(path, numCoords, coordType, coords) -> None", "($module, path, numCoords, coordType, coords, /)", pygl_GLES2_glPathCoordsNV_args, "GLES2_NV_path_rendering", 4, 3752, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathCoordsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8861,7 +8804,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathCoverDepthFuncNV_args[] = {"func"};
-static const PyGLCommand pygl_GLES2_glPathCoverDepthFuncNV_info = {"glPathCoverDepthFuncNV", "glPathCoverDepthFuncNV(func) -> None", "($module, func, /)", pygl_GLES2_glPathCoverDepthFuncNV_args, "GLES2_NV_path_rendering", 1, 3758, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathCoverDepthFuncNV_info = {"glPathCoverDepthFuncNV", "glPathCoverDepthFuncNV(func) -> None", "($module, func, /)", pygl_GLES2_glPathCoverDepthFuncNV_args, "GLES2_NV_path_rendering", 1, 3753, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathCoverDepthFuncNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8878,7 +8821,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathDashArrayNV_args[] = {"path", "dashCount", "dashArray"};
-static const PyGLCommand pygl_GLES2_glPathDashArrayNV_info = {"glPathDashArrayNV", "glPathDashArrayNV(path, dashCount, dashArray) -> None", "($module, path, dashCount, dashArray, /)", pygl_GLES2_glPathDashArrayNV_args, "GLES2_NV_path_rendering", 3, 3759, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathDashArrayNV_info = {"glPathDashArrayNV", "glPathDashArrayNV(path, dashCount, dashArray) -> None", "($module, path, dashCount, dashArray, /)", pygl_GLES2_glPathDashArrayNV_args, "GLES2_NV_path_rendering", 3, 3754, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathDashArrayNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8900,7 +8843,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathFogGenNV_args[] = {"genMode"};
-static const PyGLCommand pygl_GLES2_glPathFogGenNV_info = {"glPathFogGenNV", "glPathFogGenNV(genMode) -> None", "($module, genMode, /)", pygl_GLES2_glPathFogGenNV_args, "GLES2_NV_path_rendering", 1, 3760, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathFogGenNV_info = {"glPathFogGenNV", "glPathFogGenNV(genMode) -> None", "($module, genMode, /)", pygl_GLES2_glPathFogGenNV_args, "GLES2_NV_path_rendering", 1, 3755, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathFogGenNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8917,7 +8860,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathGlyphIndexArrayNV_args[] = {"firstPathName", "fontTarget", "fontName", "fontStyle", "firstGlyphIndex", "numGlyphs", "pathParameterTemplate", "emScale"};
-static const PyGLCommand pygl_GLES2_glPathGlyphIndexArrayNV_info = {"glPathGlyphIndexArrayNV", "glPathGlyphIndexArrayNV(firstPathName, fontTarget, fontName, fontStyle, firstGlyphIndex, numGlyphs, pathParameterTemplate, emScale) -> GLenum", "($module, firstPathName, fontTarget, fontName, fontStyle, firstGlyphIndex, numGlyphs, pathParameterTemplate, emScale, /)", pygl_GLES2_glPathGlyphIndexArrayNV_args, "GLES2_NV_path_rendering", 8, 3761, PYGL_API_GLES2, 0, 8, 1, 0};
+static const PyGLCommand pygl_GLES2_glPathGlyphIndexArrayNV_info = {"glPathGlyphIndexArrayNV", "glPathGlyphIndexArrayNV(firstPathName, fontTarget, fontName, fontStyle, firstGlyphIndex, numGlyphs, pathParameterTemplate, emScale) -> GLenum", "($module, firstPathName, fontTarget, fontName, fontStyle, firstGlyphIndex, numGlyphs, pathParameterTemplate, emScale, /)", pygl_GLES2_glPathGlyphIndexArrayNV_args, "GLES2_NV_path_rendering", 8, 3756, PYGL_API_GLES2, 0, 8, 1, 0};
 
 static PyObject *
 pygl_GLES2_glPathGlyphIndexArrayNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8945,7 +8888,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathGlyphIndexRangeNV_args[] = {"fontTarget", "fontName", "fontStyle", "pathParameterTemplate", "emScale", "baseAndCount"};
-static const PyGLCommand pygl_GLES2_glPathGlyphIndexRangeNV_info = {"glPathGlyphIndexRangeNV", "glPathGlyphIndexRangeNV(fontTarget, fontName, fontStyle, pathParameterTemplate, emScale, baseAndCount) -> GLenum", "($module, fontTarget, fontName, fontStyle, pathParameterTemplate, emScale, baseAndCount, /)", pygl_GLES2_glPathGlyphIndexRangeNV_args, "GLES2_NV_path_rendering", 6, 3762, PYGL_API_GLES2, 0, 6, 1, 0};
+static const PyGLCommand pygl_GLES2_glPathGlyphIndexRangeNV_info = {"glPathGlyphIndexRangeNV", "glPathGlyphIndexRangeNV(fontTarget, fontName, fontStyle, pathParameterTemplate, emScale, baseAndCount) -> GLenum", "($module, fontTarget, fontName, fontStyle, pathParameterTemplate, emScale, baseAndCount, /)", pygl_GLES2_glPathGlyphIndexRangeNV_args, "GLES2_NV_path_rendering", 6, 3757, PYGL_API_GLES2, 0, 6, 1, 0};
 
 static PyObject *
 pygl_GLES2_glPathGlyphIndexRangeNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8971,7 +8914,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathGlyphRangeNV_args[] = {"firstPathName", "fontTarget", "fontName", "fontStyle", "firstGlyph", "numGlyphs", "handleMissingGlyphs", "pathParameterTemplate", "emScale"};
-static const PyGLCommand pygl_GLES2_glPathGlyphRangeNV_info = {"glPathGlyphRangeNV", "glPathGlyphRangeNV(firstPathName, fontTarget, fontName, fontStyle, firstGlyph, numGlyphs, handleMissingGlyphs, pathParameterTemplate, emScale) -> None", "($module, firstPathName, fontTarget, fontName, fontStyle, firstGlyph, numGlyphs, handleMissingGlyphs, pathParameterTemplate, emScale, /)", pygl_GLES2_glPathGlyphRangeNV_args, "GLES2_NV_path_rendering", 9, 3763, PYGL_API_GLES2, 0, 9, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathGlyphRangeNV_info = {"glPathGlyphRangeNV", "glPathGlyphRangeNV(firstPathName, fontTarget, fontName, fontStyle, firstGlyph, numGlyphs, handleMissingGlyphs, pathParameterTemplate, emScale) -> None", "($module, firstPathName, fontTarget, fontName, fontStyle, firstGlyph, numGlyphs, handleMissingGlyphs, pathParameterTemplate, emScale, /)", pygl_GLES2_glPathGlyphRangeNV_args, "GLES2_NV_path_rendering", 9, 3758, PYGL_API_GLES2, 0, 9, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathGlyphRangeNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8999,7 +8942,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathMemoryGlyphIndexArrayNV_args[] = {"firstPathName", "fontTarget", "fontSize", "fontData", "faceIndex", "firstGlyphIndex", "numGlyphs", "pathParameterTemplate", "emScale"};
-static const PyGLCommand pygl_GLES2_glPathMemoryGlyphIndexArrayNV_info = {"glPathMemoryGlyphIndexArrayNV", "glPathMemoryGlyphIndexArrayNV(firstPathName, fontTarget, fontSize, fontData, faceIndex, firstGlyphIndex, numGlyphs, pathParameterTemplate, emScale) -> GLenum", "($module, firstPathName, fontTarget, fontSize, fontData, faceIndex, firstGlyphIndex, numGlyphs, pathParameterTemplate, emScale, /)", pygl_GLES2_glPathMemoryGlyphIndexArrayNV_args, "GLES2_NV_path_rendering", 9, 3764, PYGL_API_GLES2, 0, 9, 1, 0};
+static const PyGLCommand pygl_GLES2_glPathMemoryGlyphIndexArrayNV_info = {"glPathMemoryGlyphIndexArrayNV", "glPathMemoryGlyphIndexArrayNV(firstPathName, fontTarget, fontSize, fontData, faceIndex, firstGlyphIndex, numGlyphs, pathParameterTemplate, emScale) -> GLenum", "($module, firstPathName, fontTarget, fontSize, fontData, faceIndex, firstGlyphIndex, numGlyphs, pathParameterTemplate, emScale, /)", pygl_GLES2_glPathMemoryGlyphIndexArrayNV_args, "GLES2_NV_path_rendering", 9, 3759, PYGL_API_GLES2, 0, 9, 1, 0};
 
 static PyObject *
 pygl_GLES2_glPathMemoryGlyphIndexArrayNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9028,7 +8971,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathParameterfNV_args[] = {"path", "pname", "value"};
-static const PyGLCommand pygl_GLES2_glPathParameterfNV_info = {"glPathParameterfNV", "glPathParameterfNV(path, pname, value) -> None", "($module, path, pname, value, /)", pygl_GLES2_glPathParameterfNV_args, "GLES2_NV_path_rendering", 3, 3765, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathParameterfNV_info = {"glPathParameterfNV", "glPathParameterfNV(path, pname, value) -> None", "($module, path, pname, value, /)", pygl_GLES2_glPathParameterfNV_args, "GLES2_NV_path_rendering", 3, 3760, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathParameterfNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9047,7 +8990,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathParameterfvNV_args[] = {"path", "pname", "value"};
-static const PyGLCommand pygl_GLES2_glPathParameterfvNV_info = {"glPathParameterfvNV", "glPathParameterfvNV(path, pname, value) -> None", "($module, path, pname, value, /)", pygl_GLES2_glPathParameterfvNV_args, "GLES2_NV_path_rendering", 3, 3766, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathParameterfvNV_info = {"glPathParameterfvNV", "glPathParameterfvNV(path, pname, value) -> None", "($module, path, pname, value, /)", pygl_GLES2_glPathParameterfvNV_args, "GLES2_NV_path_rendering", 3, 3761, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathParameterfvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9069,7 +9012,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathParameteriNV_args[] = {"path", "pname", "value"};
-static const PyGLCommand pygl_GLES2_glPathParameteriNV_info = {"glPathParameteriNV", "glPathParameteriNV(path, pname, value) -> None", "($module, path, pname, value, /)", pygl_GLES2_glPathParameteriNV_args, "GLES2_NV_path_rendering", 3, 3767, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathParameteriNV_info = {"glPathParameteriNV", "glPathParameteriNV(path, pname, value) -> None", "($module, path, pname, value, /)", pygl_GLES2_glPathParameteriNV_args, "GLES2_NV_path_rendering", 3, 3762, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathParameteriNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9088,7 +9031,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathParameterivNV_args[] = {"path", "pname", "value"};
-static const PyGLCommand pygl_GLES2_glPathParameterivNV_info = {"glPathParameterivNV", "glPathParameterivNV(path, pname, value) -> None", "($module, path, pname, value, /)", pygl_GLES2_glPathParameterivNV_args, "GLES2_NV_path_rendering", 3, 3768, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathParameterivNV_info = {"glPathParameterivNV", "glPathParameterivNV(path, pname, value) -> None", "($module, path, pname, value, /)", pygl_GLES2_glPathParameterivNV_args, "GLES2_NV_path_rendering", 3, 3763, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathParameterivNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9110,7 +9053,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathStencilDepthOffsetNV_args[] = {"factor", "units"};
-static const PyGLCommand pygl_GLES2_glPathStencilDepthOffsetNV_info = {"glPathStencilDepthOffsetNV", "glPathStencilDepthOffsetNV(factor, units) -> None", "($module, factor, units, /)", pygl_GLES2_glPathStencilDepthOffsetNV_args, "GLES2_NV_path_rendering", 2, 3769, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathStencilDepthOffsetNV_info = {"glPathStencilDepthOffsetNV", "glPathStencilDepthOffsetNV(factor, units) -> None", "($module, factor, units, /)", pygl_GLES2_glPathStencilDepthOffsetNV_args, "GLES2_NV_path_rendering", 2, 3764, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathStencilDepthOffsetNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9128,7 +9071,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathStencilFuncNV_args[] = {"func", "ref", "mask"};
-static const PyGLCommand pygl_GLES2_glPathStencilFuncNV_info = {"glPathStencilFuncNV", "glPathStencilFuncNV(func, ref, mask) -> None", "($module, func, ref, mask, /)", pygl_GLES2_glPathStencilFuncNV_args, "GLES2_NV_path_rendering", 3, 3770, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathStencilFuncNV_info = {"glPathStencilFuncNV", "glPathStencilFuncNV(func, ref, mask) -> None", "($module, func, ref, mask, /)", pygl_GLES2_glPathStencilFuncNV_args, "GLES2_NV_path_rendering", 3, 3765, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathStencilFuncNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9147,7 +9090,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathStringNV_args[] = {"path", "format", "length", "pathString"};
-static const PyGLCommand pygl_GLES2_glPathStringNV_info = {"glPathStringNV", "glPathStringNV(path, format, length, pathString) -> None", "($module, path, format, length, pathString, /)", pygl_GLES2_glPathStringNV_args, "GLES2_NV_path_rendering", 4, 3771, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathStringNV_info = {"glPathStringNV", "glPathStringNV(path, format, length, pathString) -> None", "($module, path, format, length, pathString, /)", pygl_GLES2_glPathStringNV_args, "GLES2_NV_path_rendering", 4, 3766, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathStringNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9170,7 +9113,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathSubCommandsNV_args[] = {"path", "commandStart", "commandsToDelete", "numCommands", "commands", "numCoords", "coordType", "coords"};
-static const PyGLCommand pygl_GLES2_glPathSubCommandsNV_info = {"glPathSubCommandsNV", "glPathSubCommandsNV(path, commandStart, commandsToDelete, numCommands, commands, numCoords, coordType, coords) -> None", "($module, path, commandStart, commandsToDelete, numCommands, commands, numCoords, coordType, coords, /)", pygl_GLES2_glPathSubCommandsNV_args, "GLES2_NV_path_rendering", 8, 3772, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathSubCommandsNV_info = {"glPathSubCommandsNV", "glPathSubCommandsNV(path, commandStart, commandsToDelete, numCommands, commands, numCoords, coordType, coords) -> None", "($module, path, commandStart, commandsToDelete, numCommands, commands, numCoords, coordType, coords, /)", pygl_GLES2_glPathSubCommandsNV_args, "GLES2_NV_path_rendering", 8, 3767, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathSubCommandsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9197,7 +9140,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathSubCoordsNV_args[] = {"path", "coordStart", "numCoords", "coordType", "coords"};
-static const PyGLCommand pygl_GLES2_glPathSubCoordsNV_info = {"glPathSubCoordsNV", "glPathSubCoordsNV(path, coordStart, numCoords, coordType, coords) -> None", "($module, path, coordStart, numCoords, coordType, coords, /)", pygl_GLES2_glPathSubCoordsNV_args, "GLES2_NV_path_rendering", 5, 3773, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathSubCoordsNV_info = {"glPathSubCoordsNV", "glPathSubCoordsNV(path, coordStart, numCoords, coordType, coords) -> None", "($module, path, coordStart, numCoords, coordType, coords, /)", pygl_GLES2_glPathSubCoordsNV_args, "GLES2_NV_path_rendering", 5, 3768, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathSubCoordsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9221,7 +9164,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPathTexGenNV_args[] = {"texCoordSet", "genMode", "components", "coeffs"};
-static const PyGLCommand pygl_GLES2_glPathTexGenNV_info = {"glPathTexGenNV", "glPathTexGenNV(texCoordSet, genMode, components, coeffs) -> None", "($module, texCoordSet, genMode, components, coeffs, /)", pygl_GLES2_glPathTexGenNV_args, "GLES2_NV_path_rendering", 4, 3774, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glPathTexGenNV_info = {"glPathTexGenNV", "glPathTexGenNV(texCoordSet, genMode, components, coeffs) -> None", "($module, texCoordSet, genMode, components, coeffs, /)", pygl_GLES2_glPathTexGenNV_args, "GLES2_NV_path_rendering", 4, 3769, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPathTexGenNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9244,7 +9187,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPixelStorei_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES2_glPixelStorei_info = {"glPixelStorei", "glPixelStorei(pname, param) -> None", "($module, pname, param, /)", pygl_GLES2_glPixelStorei_args, "GLES2_VERSION_GLES2_2_0", 2, 3775, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glPixelStorei_info = {"glPixelStorei", "glPixelStorei(pname, param) -> None", "($module, pname, param, /)", pygl_GLES2_glPixelStorei_args, "GLES2_VERSION_GLES2_2_0", 2, 3770, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPixelStorei(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9262,7 +9205,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPointAlongPathNV_args[] = {"path", "startSegment", "numSegments", "distance", "x", "y", "tangentX", "tangentY"};
-static const PyGLCommand pygl_GLES2_glPointAlongPathNV_info = {"glPointAlongPathNV", "glPointAlongPathNV(path, startSegment, numSegments, distance) -> tangentX, tangentY, x, y", "($module, path, startSegment, numSegments, distance, tangentX=None, tangentY=None, x=None, y=None, /)", pygl_GLES2_glPointAlongPathNV_args, "GLES2_NV_path_rendering", 8, 3776, PYGL_API_GLES2, 0, 8, 1, 0};
+static const PyGLCommand pygl_GLES2_glPointAlongPathNV_info = {"glPointAlongPathNV", "glPointAlongPathNV(path, startSegment, numSegments, distance) -> tangentX, tangentY, x, y", "($module, path, startSegment, numSegments, distance, tangentX=None, tangentY=None, x=None, y=None, /)", pygl_GLES2_glPointAlongPathNV_args, "GLES2_NV_path_rendering", 8, 3771, PYGL_API_GLES2, 0, 8, 1, 0};
 
 static PyObject *
 pygl_GLES2_glPointAlongPathNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9296,7 +9239,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPolygonModeNV_args[] = {"face", "mode"};
-static const PyGLCommand pygl_GLES2_glPolygonModeNV_info = {"glPolygonModeNV", "glPolygonModeNV(face, mode) -> None", "($module, face, mode, /)", pygl_GLES2_glPolygonModeNV_args, "GLES2_NV_polygon_mode", 2, 3777, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glPolygonModeNV_info = {"glPolygonModeNV", "glPolygonModeNV(face, mode) -> None", "($module, face, mode, /)", pygl_GLES2_glPolygonModeNV_args, "GLES2_NV_polygon_mode", 2, 3772, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPolygonModeNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9314,7 +9257,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPolygonOffset_args[] = {"factor", "units"};
-static const PyGLCommand pygl_GLES2_glPolygonOffset_info = {"glPolygonOffset", "glPolygonOffset(factor, units) -> None", "($module, factor, units, /)", pygl_GLES2_glPolygonOffset_args, "GLES2_VERSION_GLES2_2_0", 2, 3778, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glPolygonOffset_info = {"glPolygonOffset", "glPolygonOffset(factor, units) -> None", "($module, factor, units, /)", pygl_GLES2_glPolygonOffset_args, "GLES2_VERSION_GLES2_2_0", 2, 3773, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPolygonOffset(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9332,7 +9275,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPolygonOffsetClampEXT_args[] = {"factor", "units", "clamp"};
-static const PyGLCommand pygl_GLES2_glPolygonOffsetClampEXT_info = {"glPolygonOffsetClampEXT", "glPolygonOffsetClampEXT(factor, units, clamp) -> None", "($module, factor, units, clamp, /)", pygl_GLES2_glPolygonOffsetClampEXT_args, "GLES2_EXT_polygon_offset_clamp", 3, 3779, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glPolygonOffsetClampEXT_info = {"glPolygonOffsetClampEXT", "glPolygonOffsetClampEXT(factor, units, clamp) -> None", "($module, factor, units, clamp, /)", pygl_GLES2_glPolygonOffsetClampEXT_args, "GLES2_EXT_polygon_offset_clamp", 3, 3774, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPolygonOffsetClampEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9350,7 +9293,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glPopDebugGroup_info = {"glPopDebugGroup", "glPopDebugGroup() -> None", "($module, /)", NULL, "GLES2_ES_VERSION_3_2", 0, 3780, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glPopDebugGroup_info = {"glPopDebugGroup", "glPopDebugGroup() -> None", "($module, /)", NULL, "GLES2_ES_VERSION_3_2", 0, 3775, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPopDebugGroup(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9365,7 +9308,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glPopDebugGroupKHR_info = {"glPopDebugGroupKHR", "glPopDebugGroupKHR() -> None", "($module, /)", NULL, "GLES2_KHR_debug", 0, 3781, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glPopDebugGroupKHR_info = {"glPopDebugGroupKHR", "glPopDebugGroupKHR() -> None", "($module, /)", NULL, "GLES2_KHR_debug", 0, 3776, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPopDebugGroupKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9380,7 +9323,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glPopGroupMarkerEXT_info = {"glPopGroupMarkerEXT", "glPopGroupMarkerEXT() -> None", "($module, /)", NULL, "GLES2_EXT_debug_marker", 0, 3782, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glPopGroupMarkerEXT_info = {"glPopGroupMarkerEXT", "glPopGroupMarkerEXT() -> None", "($module, /)", NULL, "GLES2_EXT_debug_marker", 0, 3777, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPopGroupMarkerEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9396,7 +9339,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPrimitiveBoundingBox_args[] = {"minX", "minY", "minZ", "minW", "maxX", "maxY", "maxZ", "maxW"};
-static const PyGLCommand pygl_GLES2_glPrimitiveBoundingBox_info = {"glPrimitiveBoundingBox", "glPrimitiveBoundingBox(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW) -> None", "($module, minX, minY, minZ, minW, maxX, maxY, maxZ, maxW, /)", pygl_GLES2_glPrimitiveBoundingBox_args, "GLES2_ES_VERSION_3_2", 8, 3783, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glPrimitiveBoundingBox_info = {"glPrimitiveBoundingBox", "glPrimitiveBoundingBox(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW) -> None", "($module, minX, minY, minZ, minW, maxX, maxY, maxZ, maxW, /)", pygl_GLES2_glPrimitiveBoundingBox_args, "GLES2_ES_VERSION_3_2", 8, 3778, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPrimitiveBoundingBox(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9420,7 +9363,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPrimitiveBoundingBoxEXT_args[] = {"minX", "minY", "minZ", "minW", "maxX", "maxY", "maxZ", "maxW"};
-static const PyGLCommand pygl_GLES2_glPrimitiveBoundingBoxEXT_info = {"glPrimitiveBoundingBoxEXT", "glPrimitiveBoundingBoxEXT(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW) -> None", "($module, minX, minY, minZ, minW, maxX, maxY, maxZ, maxW, /)", pygl_GLES2_glPrimitiveBoundingBoxEXT_args, "GLES2_EXT_primitive_bounding_box", 8, 3784, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glPrimitiveBoundingBoxEXT_info = {"glPrimitiveBoundingBoxEXT", "glPrimitiveBoundingBoxEXT(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW) -> None", "($module, minX, minY, minZ, minW, maxX, maxY, maxZ, maxW, /)", pygl_GLES2_glPrimitiveBoundingBoxEXT_args, "GLES2_EXT_primitive_bounding_box", 8, 3779, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPrimitiveBoundingBoxEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9444,7 +9387,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPrimitiveBoundingBoxOES_args[] = {"minX", "minY", "minZ", "minW", "maxX", "maxY", "maxZ", "maxW"};
-static const PyGLCommand pygl_GLES2_glPrimitiveBoundingBoxOES_info = {"glPrimitiveBoundingBoxOES", "glPrimitiveBoundingBoxOES(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW) -> None", "($module, minX, minY, minZ, minW, maxX, maxY, maxZ, maxW, /)", pygl_GLES2_glPrimitiveBoundingBoxOES_args, "GLES2_OES_primitive_bounding_box", 8, 3785, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glPrimitiveBoundingBoxOES_info = {"glPrimitiveBoundingBoxOES", "glPrimitiveBoundingBoxOES(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW) -> None", "($module, minX, minY, minZ, minW, maxX, maxY, maxZ, maxW, /)", pygl_GLES2_glPrimitiveBoundingBoxOES_args, "GLES2_OES_primitive_bounding_box", 8, 3780, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPrimitiveBoundingBoxOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9468,7 +9411,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramBinaryOES_args[] = {"program", "binaryFormat", "binary", "length"};
-static const PyGLCommand pygl_GLES2_glProgramBinaryOES_info = {"glProgramBinaryOES", "glProgramBinaryOES(program, binaryFormat, binary, length) -> None", "($module, program, binaryFormat, binary, length, /)", pygl_GLES2_glProgramBinaryOES_args, "GLES2_OES_get_program_binary", 4, 3786, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramBinaryOES_info = {"glProgramBinaryOES", "glProgramBinaryOES(program, binaryFormat, binary, length) -> None", "($module, program, binaryFormat, binary, length, /)", pygl_GLES2_glProgramBinaryOES_args, "GLES2_OES_get_program_binary", 4, 3781, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramBinaryOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9491,7 +9434,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramParameteriEXT_args[] = {"program", "pname", "value"};
-static const PyGLCommand pygl_GLES2_glProgramParameteriEXT_info = {"glProgramParameteriEXT", "glProgramParameteriEXT(program, pname, value) -> None", "($module, program, pname, value, /)", pygl_GLES2_glProgramParameteriEXT_args, "GLES2_EXT_separate_shader_objects", 3, 3787, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramParameteriEXT_info = {"glProgramParameteriEXT", "glProgramParameteriEXT(program, pname, value) -> None", "($module, program, pname, value, /)", pygl_GLES2_glProgramParameteriEXT_args, "GLES2_EXT_separate_shader_objects", 3, 3782, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramParameteriEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9510,7 +9453,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramPathFragmentInputGenNV_args[] = {"program", "location", "genMode", "components", "coeffs"};
-static const PyGLCommand pygl_GLES2_glProgramPathFragmentInputGenNV_info = {"glProgramPathFragmentInputGenNV", "glProgramPathFragmentInputGenNV(program, location, genMode, components, coeffs) -> None", "($module, program, location, genMode, components, coeffs, /)", pygl_GLES2_glProgramPathFragmentInputGenNV_args, "GLES2_NV_path_rendering", 5, 3788, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramPathFragmentInputGenNV_info = {"glProgramPathFragmentInputGenNV", "glProgramPathFragmentInputGenNV(program, location, genMode, components, coeffs) -> None", "($module, program, location, genMode, components, coeffs, /)", pygl_GLES2_glProgramPathFragmentInputGenNV_args, "GLES2_NV_path_rendering", 5, 3783, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramPathFragmentInputGenNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9534,7 +9477,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform1fEXT_args[] = {"program", "location", "v0"};
-static const PyGLCommand pygl_GLES2_glProgramUniform1fEXT_info = {"glProgramUniform1fEXT", "glProgramUniform1fEXT(program, location, v0) -> None", "($module, program, location, v0, /)", pygl_GLES2_glProgramUniform1fEXT_args, "GLES2_EXT_separate_shader_objects", 3, 3789, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform1fEXT_info = {"glProgramUniform1fEXT", "glProgramUniform1fEXT(program, location, v0) -> None", "($module, program, location, v0, /)", pygl_GLES2_glProgramUniform1fEXT_args, "GLES2_EXT_separate_shader_objects", 3, 3784, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform1fEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9553,7 +9496,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform1fvEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform1fvEXT_info = {"glProgramUniform1fvEXT", "glProgramUniform1fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform1fvEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3790, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform1fvEXT_info = {"glProgramUniform1fvEXT", "glProgramUniform1fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform1fvEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3785, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform1fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9576,7 +9519,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform1i64NV_args[] = {"program", "location", "x"};
-static const PyGLCommand pygl_GLES2_glProgramUniform1i64NV_info = {"glProgramUniform1i64NV", "glProgramUniform1i64NV(program, location, x) -> None", "($module, program, location, x, /)", pygl_GLES2_glProgramUniform1i64NV_args, "GLES2_NV_gpu_shader5", 3, 3791, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform1i64NV_info = {"glProgramUniform1i64NV", "glProgramUniform1i64NV(program, location, x) -> None", "($module, program, location, x, /)", pygl_GLES2_glProgramUniform1i64NV_args, "GLES2_NV_gpu_shader5", 3, 3786, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform1i64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9595,7 +9538,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform1i64vNV_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform1i64vNV_info = {"glProgramUniform1i64vNV", "glProgramUniform1i64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform1i64vNV_args, "GLES2_NV_gpu_shader5", 4, 3792, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform1i64vNV_info = {"glProgramUniform1i64vNV", "glProgramUniform1i64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform1i64vNV_args, "GLES2_NV_gpu_shader5", 4, 3787, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform1i64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9618,7 +9561,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform1iEXT_args[] = {"program", "location", "v0"};
-static const PyGLCommand pygl_GLES2_glProgramUniform1iEXT_info = {"glProgramUniform1iEXT", "glProgramUniform1iEXT(program, location, v0) -> None", "($module, program, location, v0, /)", pygl_GLES2_glProgramUniform1iEXT_args, "GLES2_EXT_separate_shader_objects", 3, 3793, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform1iEXT_info = {"glProgramUniform1iEXT", "glProgramUniform1iEXT(program, location, v0) -> None", "($module, program, location, v0, /)", pygl_GLES2_glProgramUniform1iEXT_args, "GLES2_EXT_separate_shader_objects", 3, 3788, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform1iEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9637,7 +9580,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform1ivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform1ivEXT_info = {"glProgramUniform1ivEXT", "glProgramUniform1ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform1ivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3794, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform1ivEXT_info = {"glProgramUniform1ivEXT", "glProgramUniform1ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform1ivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3789, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform1ivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9660,7 +9603,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform1ui64NV_args[] = {"program", "location", "x"};
-static const PyGLCommand pygl_GLES2_glProgramUniform1ui64NV_info = {"glProgramUniform1ui64NV", "glProgramUniform1ui64NV(program, location, x) -> None", "($module, program, location, x, /)", pygl_GLES2_glProgramUniform1ui64NV_args, "GLES2_NV_gpu_shader5", 3, 3795, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform1ui64NV_info = {"glProgramUniform1ui64NV", "glProgramUniform1ui64NV(program, location, x) -> None", "($module, program, location, x, /)", pygl_GLES2_glProgramUniform1ui64NV_args, "GLES2_NV_gpu_shader5", 3, 3790, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform1ui64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9679,7 +9622,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform1ui64vNV_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform1ui64vNV_info = {"glProgramUniform1ui64vNV", "glProgramUniform1ui64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform1ui64vNV_args, "GLES2_NV_gpu_shader5", 4, 3796, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform1ui64vNV_info = {"glProgramUniform1ui64vNV", "glProgramUniform1ui64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform1ui64vNV_args, "GLES2_NV_gpu_shader5", 4, 3791, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform1ui64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9702,7 +9645,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform1uiEXT_args[] = {"program", "location", "v0"};
-static const PyGLCommand pygl_GLES2_glProgramUniform1uiEXT_info = {"glProgramUniform1uiEXT", "glProgramUniform1uiEXT(program, location, v0) -> None", "($module, program, location, v0, /)", pygl_GLES2_glProgramUniform1uiEXT_args, "GLES2_EXT_separate_shader_objects", 3, 3797, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform1uiEXT_info = {"glProgramUniform1uiEXT", "glProgramUniform1uiEXT(program, location, v0) -> None", "($module, program, location, v0, /)", pygl_GLES2_glProgramUniform1uiEXT_args, "GLES2_EXT_separate_shader_objects", 3, 3792, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform1uiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9721,7 +9664,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform1uivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform1uivEXT_info = {"glProgramUniform1uivEXT", "glProgramUniform1uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform1uivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3798, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform1uivEXT_info = {"glProgramUniform1uivEXT", "glProgramUniform1uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform1uivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3793, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform1uivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9744,7 +9687,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform2fEXT_args[] = {"program", "location", "v0", "v1"};
-static const PyGLCommand pygl_GLES2_glProgramUniform2fEXT_info = {"glProgramUniform2fEXT", "glProgramUniform2fEXT(program, location, v0, v1) -> None", "($module, program, location, v0, v1, /)", pygl_GLES2_glProgramUniform2fEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3799, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform2fEXT_info = {"glProgramUniform2fEXT", "glProgramUniform2fEXT(program, location, v0, v1) -> None", "($module, program, location, v0, v1, /)", pygl_GLES2_glProgramUniform2fEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3794, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform2fEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9764,7 +9707,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform2fvEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform2fvEXT_info = {"glProgramUniform2fvEXT", "glProgramUniform2fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform2fvEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3800, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform2fvEXT_info = {"glProgramUniform2fvEXT", "glProgramUniform2fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform2fvEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3795, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform2fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9787,7 +9730,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform2i64NV_args[] = {"program", "location", "x", "y"};
-static const PyGLCommand pygl_GLES2_glProgramUniform2i64NV_info = {"glProgramUniform2i64NV", "glProgramUniform2i64NV(program, location, x, y) -> None", "($module, program, location, x, y, /)", pygl_GLES2_glProgramUniform2i64NV_args, "GLES2_NV_gpu_shader5", 4, 3801, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform2i64NV_info = {"glProgramUniform2i64NV", "glProgramUniform2i64NV(program, location, x, y) -> None", "($module, program, location, x, y, /)", pygl_GLES2_glProgramUniform2i64NV_args, "GLES2_NV_gpu_shader5", 4, 3796, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform2i64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9807,7 +9750,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform2i64vNV_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform2i64vNV_info = {"glProgramUniform2i64vNV", "glProgramUniform2i64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform2i64vNV_args, "GLES2_NV_gpu_shader5", 4, 3802, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform2i64vNV_info = {"glProgramUniform2i64vNV", "glProgramUniform2i64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform2i64vNV_args, "GLES2_NV_gpu_shader5", 4, 3797, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform2i64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9830,7 +9773,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform2iEXT_args[] = {"program", "location", "v0", "v1"};
-static const PyGLCommand pygl_GLES2_glProgramUniform2iEXT_info = {"glProgramUniform2iEXT", "glProgramUniform2iEXT(program, location, v0, v1) -> None", "($module, program, location, v0, v1, /)", pygl_GLES2_glProgramUniform2iEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3803, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform2iEXT_info = {"glProgramUniform2iEXT", "glProgramUniform2iEXT(program, location, v0, v1) -> None", "($module, program, location, v0, v1, /)", pygl_GLES2_glProgramUniform2iEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3798, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform2iEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9850,7 +9793,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform2ivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform2ivEXT_info = {"glProgramUniform2ivEXT", "glProgramUniform2ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform2ivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3804, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform2ivEXT_info = {"glProgramUniform2ivEXT", "glProgramUniform2ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform2ivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3799, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform2ivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9873,7 +9816,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform2ui64NV_args[] = {"program", "location", "x", "y"};
-static const PyGLCommand pygl_GLES2_glProgramUniform2ui64NV_info = {"glProgramUniform2ui64NV", "glProgramUniform2ui64NV(program, location, x, y) -> None", "($module, program, location, x, y, /)", pygl_GLES2_glProgramUniform2ui64NV_args, "GLES2_NV_gpu_shader5", 4, 3805, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform2ui64NV_info = {"glProgramUniform2ui64NV", "glProgramUniform2ui64NV(program, location, x, y) -> None", "($module, program, location, x, y, /)", pygl_GLES2_glProgramUniform2ui64NV_args, "GLES2_NV_gpu_shader5", 4, 3800, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform2ui64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9893,7 +9836,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform2ui64vNV_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform2ui64vNV_info = {"glProgramUniform2ui64vNV", "glProgramUniform2ui64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform2ui64vNV_args, "GLES2_NV_gpu_shader5", 4, 3806, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform2ui64vNV_info = {"glProgramUniform2ui64vNV", "glProgramUniform2ui64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform2ui64vNV_args, "GLES2_NV_gpu_shader5", 4, 3801, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform2ui64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9916,7 +9859,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform2uiEXT_args[] = {"program", "location", "v0", "v1"};
-static const PyGLCommand pygl_GLES2_glProgramUniform2uiEXT_info = {"glProgramUniform2uiEXT", "glProgramUniform2uiEXT(program, location, v0, v1) -> None", "($module, program, location, v0, v1, /)", pygl_GLES2_glProgramUniform2uiEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3807, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform2uiEXT_info = {"glProgramUniform2uiEXT", "glProgramUniform2uiEXT(program, location, v0, v1) -> None", "($module, program, location, v0, v1, /)", pygl_GLES2_glProgramUniform2uiEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3802, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform2uiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9936,7 +9879,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform2uivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform2uivEXT_info = {"glProgramUniform2uivEXT", "glProgramUniform2uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform2uivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3808, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform2uivEXT_info = {"glProgramUniform2uivEXT", "glProgramUniform2uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform2uivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3803, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform2uivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9959,7 +9902,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform3fEXT_args[] = {"program", "location", "v0", "v1", "v2"};
-static const PyGLCommand pygl_GLES2_glProgramUniform3fEXT_info = {"glProgramUniform3fEXT", "glProgramUniform3fEXT(program, location, v0, v1, v2) -> None", "($module, program, location, v0, v1, v2, /)", pygl_GLES2_glProgramUniform3fEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3809, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform3fEXT_info = {"glProgramUniform3fEXT", "glProgramUniform3fEXT(program, location, v0, v1, v2) -> None", "($module, program, location, v0, v1, v2, /)", pygl_GLES2_glProgramUniform3fEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3804, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform3fEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -9980,7 +9923,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform3fvEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform3fvEXT_info = {"glProgramUniform3fvEXT", "glProgramUniform3fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform3fvEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3810, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform3fvEXT_info = {"glProgramUniform3fvEXT", "glProgramUniform3fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform3fvEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3805, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform3fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10003,7 +9946,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform3i64NV_args[] = {"program", "location", "x", "y", "z"};
-static const PyGLCommand pygl_GLES2_glProgramUniform3i64NV_info = {"glProgramUniform3i64NV", "glProgramUniform3i64NV(program, location, x, y, z) -> None", "($module, program, location, x, y, z, /)", pygl_GLES2_glProgramUniform3i64NV_args, "GLES2_NV_gpu_shader5", 5, 3811, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform3i64NV_info = {"glProgramUniform3i64NV", "glProgramUniform3i64NV(program, location, x, y, z) -> None", "($module, program, location, x, y, z, /)", pygl_GLES2_glProgramUniform3i64NV_args, "GLES2_NV_gpu_shader5", 5, 3806, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform3i64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10024,7 +9967,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform3i64vNV_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform3i64vNV_info = {"glProgramUniform3i64vNV", "glProgramUniform3i64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform3i64vNV_args, "GLES2_NV_gpu_shader5", 4, 3812, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform3i64vNV_info = {"glProgramUniform3i64vNV", "glProgramUniform3i64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform3i64vNV_args, "GLES2_NV_gpu_shader5", 4, 3807, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform3i64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10047,7 +9990,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform3iEXT_args[] = {"program", "location", "v0", "v1", "v2"};
-static const PyGLCommand pygl_GLES2_glProgramUniform3iEXT_info = {"glProgramUniform3iEXT", "glProgramUniform3iEXT(program, location, v0, v1, v2) -> None", "($module, program, location, v0, v1, v2, /)", pygl_GLES2_glProgramUniform3iEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3813, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform3iEXT_info = {"glProgramUniform3iEXT", "glProgramUniform3iEXT(program, location, v0, v1, v2) -> None", "($module, program, location, v0, v1, v2, /)", pygl_GLES2_glProgramUniform3iEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3808, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform3iEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10068,7 +10011,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform3ivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform3ivEXT_info = {"glProgramUniform3ivEXT", "glProgramUniform3ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform3ivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3814, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform3ivEXT_info = {"glProgramUniform3ivEXT", "glProgramUniform3ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform3ivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3809, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform3ivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10091,7 +10034,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform3ui64NV_args[] = {"program", "location", "x", "y", "z"};
-static const PyGLCommand pygl_GLES2_glProgramUniform3ui64NV_info = {"glProgramUniform3ui64NV", "glProgramUniform3ui64NV(program, location, x, y, z) -> None", "($module, program, location, x, y, z, /)", pygl_GLES2_glProgramUniform3ui64NV_args, "GLES2_NV_gpu_shader5", 5, 3815, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform3ui64NV_info = {"glProgramUniform3ui64NV", "glProgramUniform3ui64NV(program, location, x, y, z) -> None", "($module, program, location, x, y, z, /)", pygl_GLES2_glProgramUniform3ui64NV_args, "GLES2_NV_gpu_shader5", 5, 3810, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform3ui64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10112,7 +10055,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform3ui64vNV_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform3ui64vNV_info = {"glProgramUniform3ui64vNV", "glProgramUniform3ui64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform3ui64vNV_args, "GLES2_NV_gpu_shader5", 4, 3816, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform3ui64vNV_info = {"glProgramUniform3ui64vNV", "glProgramUniform3ui64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform3ui64vNV_args, "GLES2_NV_gpu_shader5", 4, 3811, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform3ui64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10135,7 +10078,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform3uiEXT_args[] = {"program", "location", "v0", "v1", "v2"};
-static const PyGLCommand pygl_GLES2_glProgramUniform3uiEXT_info = {"glProgramUniform3uiEXT", "glProgramUniform3uiEXT(program, location, v0, v1, v2) -> None", "($module, program, location, v0, v1, v2, /)", pygl_GLES2_glProgramUniform3uiEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3817, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform3uiEXT_info = {"glProgramUniform3uiEXT", "glProgramUniform3uiEXT(program, location, v0, v1, v2) -> None", "($module, program, location, v0, v1, v2, /)", pygl_GLES2_glProgramUniform3uiEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3812, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform3uiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10156,7 +10099,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform3uivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform3uivEXT_info = {"glProgramUniform3uivEXT", "glProgramUniform3uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform3uivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3818, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform3uivEXT_info = {"glProgramUniform3uivEXT", "glProgramUniform3uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform3uivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3813, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform3uivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10179,7 +10122,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform4fEXT_args[] = {"program", "location", "v0", "v1", "v2", "v3"};
-static const PyGLCommand pygl_GLES2_glProgramUniform4fEXT_info = {"glProgramUniform4fEXT", "glProgramUniform4fEXT(program, location, v0, v1, v2, v3) -> None", "($module, program, location, v0, v1, v2, v3, /)", pygl_GLES2_glProgramUniform4fEXT_args, "GLES2_EXT_separate_shader_objects", 6, 3819, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform4fEXT_info = {"glProgramUniform4fEXT", "glProgramUniform4fEXT(program, location, v0, v1, v2, v3) -> None", "($module, program, location, v0, v1, v2, v3, /)", pygl_GLES2_glProgramUniform4fEXT_args, "GLES2_EXT_separate_shader_objects", 6, 3814, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform4fEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10201,7 +10144,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform4fvEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform4fvEXT_info = {"glProgramUniform4fvEXT", "glProgramUniform4fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform4fvEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3820, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform4fvEXT_info = {"glProgramUniform4fvEXT", "glProgramUniform4fvEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform4fvEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3815, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform4fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10224,7 +10167,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform4i64NV_args[] = {"program", "location", "x", "y", "z", "w"};
-static const PyGLCommand pygl_GLES2_glProgramUniform4i64NV_info = {"glProgramUniform4i64NV", "glProgramUniform4i64NV(program, location, x, y, z, w) -> None", "($module, program, location, x, y, z, w, /)", pygl_GLES2_glProgramUniform4i64NV_args, "GLES2_NV_gpu_shader5", 6, 3821, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform4i64NV_info = {"glProgramUniform4i64NV", "glProgramUniform4i64NV(program, location, x, y, z, w) -> None", "($module, program, location, x, y, z, w, /)", pygl_GLES2_glProgramUniform4i64NV_args, "GLES2_NV_gpu_shader5", 6, 3816, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform4i64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10246,7 +10189,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform4i64vNV_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform4i64vNV_info = {"glProgramUniform4i64vNV", "glProgramUniform4i64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform4i64vNV_args, "GLES2_NV_gpu_shader5", 4, 3822, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform4i64vNV_info = {"glProgramUniform4i64vNV", "glProgramUniform4i64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform4i64vNV_args, "GLES2_NV_gpu_shader5", 4, 3817, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform4i64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10269,7 +10212,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform4iEXT_args[] = {"program", "location", "v0", "v1", "v2", "v3"};
-static const PyGLCommand pygl_GLES2_glProgramUniform4iEXT_info = {"glProgramUniform4iEXT", "glProgramUniform4iEXT(program, location, v0, v1, v2, v3) -> None", "($module, program, location, v0, v1, v2, v3, /)", pygl_GLES2_glProgramUniform4iEXT_args, "GLES2_EXT_separate_shader_objects", 6, 3823, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform4iEXT_info = {"glProgramUniform4iEXT", "glProgramUniform4iEXT(program, location, v0, v1, v2, v3) -> None", "($module, program, location, v0, v1, v2, v3, /)", pygl_GLES2_glProgramUniform4iEXT_args, "GLES2_EXT_separate_shader_objects", 6, 3818, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform4iEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10291,7 +10234,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform4ivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform4ivEXT_info = {"glProgramUniform4ivEXT", "glProgramUniform4ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform4ivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3824, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform4ivEXT_info = {"glProgramUniform4ivEXT", "glProgramUniform4ivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform4ivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3819, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform4ivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10314,7 +10257,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform4ui64NV_args[] = {"program", "location", "x", "y", "z", "w"};
-static const PyGLCommand pygl_GLES2_glProgramUniform4ui64NV_info = {"glProgramUniform4ui64NV", "glProgramUniform4ui64NV(program, location, x, y, z, w) -> None", "($module, program, location, x, y, z, w, /)", pygl_GLES2_glProgramUniform4ui64NV_args, "GLES2_NV_gpu_shader5", 6, 3825, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform4ui64NV_info = {"glProgramUniform4ui64NV", "glProgramUniform4ui64NV(program, location, x, y, z, w) -> None", "($module, program, location, x, y, z, w, /)", pygl_GLES2_glProgramUniform4ui64NV_args, "GLES2_NV_gpu_shader5", 6, 3820, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform4ui64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10336,7 +10279,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform4ui64vNV_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform4ui64vNV_info = {"glProgramUniform4ui64vNV", "glProgramUniform4ui64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform4ui64vNV_args, "GLES2_NV_gpu_shader5", 4, 3826, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform4ui64vNV_info = {"glProgramUniform4ui64vNV", "glProgramUniform4ui64vNV(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform4ui64vNV_args, "GLES2_NV_gpu_shader5", 4, 3821, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform4ui64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10359,7 +10302,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform4uiEXT_args[] = {"program", "location", "v0", "v1", "v2", "v3"};
-static const PyGLCommand pygl_GLES2_glProgramUniform4uiEXT_info = {"glProgramUniform4uiEXT", "glProgramUniform4uiEXT(program, location, v0, v1, v2, v3) -> None", "($module, program, location, v0, v1, v2, v3, /)", pygl_GLES2_glProgramUniform4uiEXT_args, "GLES2_EXT_separate_shader_objects", 6, 3827, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform4uiEXT_info = {"glProgramUniform4uiEXT", "glProgramUniform4uiEXT(program, location, v0, v1, v2, v3) -> None", "($module, program, location, v0, v1, v2, v3, /)", pygl_GLES2_glProgramUniform4uiEXT_args, "GLES2_EXT_separate_shader_objects", 6, 3822, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform4uiEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10381,7 +10324,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniform4uivEXT_args[] = {"program", "location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniform4uivEXT_info = {"glProgramUniform4uivEXT", "glProgramUniform4uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform4uivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3828, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniform4uivEXT_info = {"glProgramUniform4uivEXT", "glProgramUniform4uivEXT(program, location, count, value) -> None", "($module, program, location, count, value, /)", pygl_GLES2_glProgramUniform4uivEXT_args, "GLES2_EXT_separate_shader_objects", 4, 3823, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniform4uivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10404,7 +10347,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniformHandleui64IMG_args[] = {"program", "location", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniformHandleui64IMG_info = {"glProgramUniformHandleui64IMG", "glProgramUniformHandleui64IMG(program, location, value) -> None", "($module, program, location, value, /)", pygl_GLES2_glProgramUniformHandleui64IMG_args, "GLES2_IMG_bindless_texture", 3, 3829, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniformHandleui64IMG_info = {"glProgramUniformHandleui64IMG", "glProgramUniformHandleui64IMG(program, location, value) -> None", "($module, program, location, value, /)", pygl_GLES2_glProgramUniformHandleui64IMG_args, "GLES2_IMG_bindless_texture", 3, 3824, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniformHandleui64IMG(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10423,7 +10366,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniformHandleui64NV_args[] = {"program", "location", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniformHandleui64NV_info = {"glProgramUniformHandleui64NV", "glProgramUniformHandleui64NV(program, location, value) -> None", "($module, program, location, value, /)", pygl_GLES2_glProgramUniformHandleui64NV_args, "GLES2_NV_bindless_texture", 3, 3830, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniformHandleui64NV_info = {"glProgramUniformHandleui64NV", "glProgramUniformHandleui64NV(program, location, value) -> None", "($module, program, location, value, /)", pygl_GLES2_glProgramUniformHandleui64NV_args, "GLES2_NV_bindless_texture", 3, 3825, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniformHandleui64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10442,7 +10385,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniformHandleui64vIMG_args[] = {"program", "location", "count", "values"};
-static const PyGLCommand pygl_GLES2_glProgramUniformHandleui64vIMG_info = {"glProgramUniformHandleui64vIMG", "glProgramUniformHandleui64vIMG(program, location, count, values) -> None", "($module, program, location, count, values, /)", pygl_GLES2_glProgramUniformHandleui64vIMG_args, "GLES2_IMG_bindless_texture", 4, 3831, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniformHandleui64vIMG_info = {"glProgramUniformHandleui64vIMG", "glProgramUniformHandleui64vIMG(program, location, count, values) -> None", "($module, program, location, count, values, /)", pygl_GLES2_glProgramUniformHandleui64vIMG_args, "GLES2_IMG_bindless_texture", 4, 3826, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniformHandleui64vIMG(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10465,7 +10408,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniformHandleui64vNV_args[] = {"program", "location", "count", "values"};
-static const PyGLCommand pygl_GLES2_glProgramUniformHandleui64vNV_info = {"glProgramUniformHandleui64vNV", "glProgramUniformHandleui64vNV(program, location, count, values) -> None", "($module, program, location, count, values, /)", pygl_GLES2_glProgramUniformHandleui64vNV_args, "GLES2_NV_bindless_texture", 4, 3832, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniformHandleui64vNV_info = {"glProgramUniformHandleui64vNV", "glProgramUniformHandleui64vNV(program, location, count, values) -> None", "($module, program, location, count, values, /)", pygl_GLES2_glProgramUniformHandleui64vNV_args, "GLES2_NV_bindless_texture", 4, 3827, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniformHandleui64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10488,7 +10431,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniformMatrix2fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniformMatrix2fvEXT_info = {"glProgramUniformMatrix2fvEXT", "glProgramUniformMatrix2fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix2fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3833, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniformMatrix2fvEXT_info = {"glProgramUniformMatrix2fvEXT", "glProgramUniformMatrix2fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix2fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3828, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniformMatrix2fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10512,7 +10455,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniformMatrix2x3fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniformMatrix2x3fvEXT_info = {"glProgramUniformMatrix2x3fvEXT", "glProgramUniformMatrix2x3fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix2x3fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3834, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniformMatrix2x3fvEXT_info = {"glProgramUniformMatrix2x3fvEXT", "glProgramUniformMatrix2x3fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix2x3fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3829, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniformMatrix2x3fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10536,7 +10479,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniformMatrix2x4fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniformMatrix2x4fvEXT_info = {"glProgramUniformMatrix2x4fvEXT", "glProgramUniformMatrix2x4fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix2x4fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3835, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniformMatrix2x4fvEXT_info = {"glProgramUniformMatrix2x4fvEXT", "glProgramUniformMatrix2x4fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix2x4fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3830, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniformMatrix2x4fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10560,7 +10503,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniformMatrix3fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniformMatrix3fvEXT_info = {"glProgramUniformMatrix3fvEXT", "glProgramUniformMatrix3fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix3fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3836, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniformMatrix3fvEXT_info = {"glProgramUniformMatrix3fvEXT", "glProgramUniformMatrix3fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix3fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3831, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniformMatrix3fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10584,7 +10527,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniformMatrix3x2fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniformMatrix3x2fvEXT_info = {"glProgramUniformMatrix3x2fvEXT", "glProgramUniformMatrix3x2fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix3x2fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3837, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniformMatrix3x2fvEXT_info = {"glProgramUniformMatrix3x2fvEXT", "glProgramUniformMatrix3x2fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix3x2fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3832, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniformMatrix3x2fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10608,7 +10551,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniformMatrix3x4fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniformMatrix3x4fvEXT_info = {"glProgramUniformMatrix3x4fvEXT", "glProgramUniformMatrix3x4fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix3x4fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3838, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniformMatrix3x4fvEXT_info = {"glProgramUniformMatrix3x4fvEXT", "glProgramUniformMatrix3x4fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix3x4fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3833, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniformMatrix3x4fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10632,7 +10575,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniformMatrix4fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniformMatrix4fvEXT_info = {"glProgramUniformMatrix4fvEXT", "glProgramUniformMatrix4fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix4fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3839, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniformMatrix4fvEXT_info = {"glProgramUniformMatrix4fvEXT", "glProgramUniformMatrix4fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix4fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3834, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniformMatrix4fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10656,7 +10599,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniformMatrix4x2fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniformMatrix4x2fvEXT_info = {"glProgramUniformMatrix4x2fvEXT", "glProgramUniformMatrix4x2fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix4x2fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3840, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniformMatrix4x2fvEXT_info = {"glProgramUniformMatrix4x2fvEXT", "glProgramUniformMatrix4x2fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix4x2fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3835, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniformMatrix4x2fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10680,7 +10623,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glProgramUniformMatrix4x3fvEXT_args[] = {"program", "location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glProgramUniformMatrix4x3fvEXT_info = {"glProgramUniformMatrix4x3fvEXT", "glProgramUniformMatrix4x3fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix4x3fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3841, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glProgramUniformMatrix4x3fvEXT_info = {"glProgramUniformMatrix4x3fvEXT", "glProgramUniformMatrix4x3fvEXT(program, location, count, transpose, value) -> None", "($module, program, location, count, transpose, value, /)", pygl_GLES2_glProgramUniformMatrix4x3fvEXT_args, "GLES2_EXT_separate_shader_objects", 5, 3836, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glProgramUniformMatrix4x3fvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10704,7 +10647,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPushDebugGroup_args[] = {"source", "id", "length", "message"};
-static const PyGLCommand pygl_GLES2_glPushDebugGroup_info = {"glPushDebugGroup", "glPushDebugGroup(source, id, length, message) -> None", "($module, source, id, length, message, /)", pygl_GLES2_glPushDebugGroup_args, "GLES2_ES_VERSION_3_2", 4, 3842, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glPushDebugGroup_info = {"glPushDebugGroup", "glPushDebugGroup(source, id, length, message) -> None", "($module, source, id, length, message, /)", pygl_GLES2_glPushDebugGroup_args, "GLES2_ES_VERSION_3_2", 4, 3837, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPushDebugGroup(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10727,7 +10670,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPushDebugGroupKHR_args[] = {"source", "id", "length", "message"};
-static const PyGLCommand pygl_GLES2_glPushDebugGroupKHR_info = {"glPushDebugGroupKHR", "glPushDebugGroupKHR(source, id, length, message) -> None", "($module, source, id, length, message, /)", pygl_GLES2_glPushDebugGroupKHR_args, "GLES2_KHR_debug", 4, 3843, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glPushDebugGroupKHR_info = {"glPushDebugGroupKHR", "glPushDebugGroupKHR(source, id, length, message) -> None", "($module, source, id, length, message, /)", pygl_GLES2_glPushDebugGroupKHR_args, "GLES2_KHR_debug", 4, 3838, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPushDebugGroupKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10750,7 +10693,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glPushGroupMarkerEXT_args[] = {"length", "marker"};
-static const PyGLCommand pygl_GLES2_glPushGroupMarkerEXT_info = {"glPushGroupMarkerEXT", "glPushGroupMarkerEXT(length, marker) -> None", "($module, length, marker, /)", pygl_GLES2_glPushGroupMarkerEXT_args, "GLES2_EXT_debug_marker", 2, 3844, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glPushGroupMarkerEXT_info = {"glPushGroupMarkerEXT", "glPushGroupMarkerEXT(length, marker) -> None", "($module, length, marker, /)", pygl_GLES2_glPushGroupMarkerEXT_args, "GLES2_EXT_debug_marker", 2, 3839, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glPushGroupMarkerEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10771,7 +10714,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glQueryCounterEXT_args[] = {"id", "target"};
-static const PyGLCommand pygl_GLES2_glQueryCounterEXT_info = {"glQueryCounterEXT", "glQueryCounterEXT(id, target) -> None", "($module, id, target, /)", pygl_GLES2_glQueryCounterEXT_args, "GLES2_EXT_disjoint_timer_query", 2, 3845, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glQueryCounterEXT_info = {"glQueryCounterEXT", "glQueryCounterEXT(id, target) -> None", "($module, id, target, /)", pygl_GLES2_glQueryCounterEXT_args, "GLES2_EXT_disjoint_timer_query", 2, 3840, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glQueryCounterEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10789,7 +10732,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glRasterSamplesEXT_args[] = {"samples", "fixedsamplelocations"};
-static const PyGLCommand pygl_GLES2_glRasterSamplesEXT_info = {"glRasterSamplesEXT", "glRasterSamplesEXT(samples, fixedsamplelocations) -> None", "($module, samples, fixedsamplelocations, /)", pygl_GLES2_glRasterSamplesEXT_args, "GLES2_EXT_raster_multisample", 2, 3846, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glRasterSamplesEXT_info = {"glRasterSamplesEXT", "glRasterSamplesEXT(samples, fixedsamplelocations) -> None", "($module, samples, fixedsamplelocations, /)", pygl_GLES2_glRasterSamplesEXT_args, "GLES2_EXT_raster_multisample", 2, 3841, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glRasterSamplesEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10807,7 +10750,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glReadBufferIndexedEXT_args[] = {"src", "index"};
-static const PyGLCommand pygl_GLES2_glReadBufferIndexedEXT_info = {"glReadBufferIndexedEXT", "glReadBufferIndexedEXT(src, index) -> None", "($module, src, index, /)", pygl_GLES2_glReadBufferIndexedEXT_args, "GLES2_EXT_multiview_draw_buffers", 2, 3847, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glReadBufferIndexedEXT_info = {"glReadBufferIndexedEXT", "glReadBufferIndexedEXT(src, index) -> None", "($module, src, index, /)", pygl_GLES2_glReadBufferIndexedEXT_args, "GLES2_EXT_multiview_draw_buffers", 2, 3842, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glReadBufferIndexedEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10825,7 +10768,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glReadBufferNV_args[] = {"mode"};
-static const PyGLCommand pygl_GLES2_glReadBufferNV_info = {"glReadBufferNV", "glReadBufferNV(mode) -> None", "($module, mode, /)", pygl_GLES2_glReadBufferNV_args, "GLES2_NV_read_buffer", 1, 3848, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glReadBufferNV_info = {"glReadBufferNV", "glReadBufferNV(mode) -> None", "($module, mode, /)", pygl_GLES2_glReadBufferNV_args, "GLES2_NV_read_buffer", 1, 3843, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glReadBufferNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10842,7 +10785,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glReadnPixels_args[] = {"x", "y", "width", "height", "format", "type", "bufSize", "data"};
-static const PyGLCommand pygl_GLES2_glReadnPixels_info = {"glReadnPixels", "glReadnPixels(x, y, width, height, format, type, bufSize, data) -> None", "($module, x, y, width, height, format, type, bufSize, data, /)", pygl_GLES2_glReadnPixels_args, "GLES2_ES_VERSION_3_2", 8, 3849, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glReadnPixels_info = {"glReadnPixels", "glReadnPixels(x, y, width, height, format, type, bufSize, data) -> None", "($module, x, y, width, height, format, type, bufSize, data, /)", pygl_GLES2_glReadnPixels_args, "GLES2_ES_VERSION_3_2", 8, 3844, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glReadnPixels(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10869,7 +10812,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glReadnPixelsEXT_args[] = {"x", "y", "width", "height", "format", "type", "bufSize", "data"};
-static const PyGLCommand pygl_GLES2_glReadnPixelsEXT_info = {"glReadnPixelsEXT", "glReadnPixelsEXT(x, y, width, height, format, type, bufSize, data) -> None", "($module, x, y, width, height, format, type, bufSize, data, /)", pygl_GLES2_glReadnPixelsEXT_args, "GLES2_EXT_robustness", 8, 3850, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glReadnPixelsEXT_info = {"glReadnPixelsEXT", "glReadnPixelsEXT(x, y, width, height, format, type, bufSize, data) -> None", "($module, x, y, width, height, format, type, bufSize, data, /)", pygl_GLES2_glReadnPixelsEXT_args, "GLES2_EXT_robustness", 8, 3845, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glReadnPixelsEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10896,7 +10839,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glReadnPixelsKHR_args[] = {"x", "y", "width", "height", "format", "type", "bufSize", "data"};
-static const PyGLCommand pygl_GLES2_glReadnPixelsKHR_info = {"glReadnPixelsKHR", "glReadnPixelsKHR(x, y, width, height, format, type, bufSize, data) -> None", "($module, x, y, width, height, format, type, bufSize, data, /)", pygl_GLES2_glReadnPixelsKHR_args, "GLES2_KHR_robustness", 8, 3851, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glReadnPixelsKHR_info = {"glReadnPixelsKHR", "glReadnPixelsKHR(x, y, width, height, format, type, bufSize, data) -> None", "($module, x, y, width, height, format, type, bufSize, data, /)", pygl_GLES2_glReadnPixelsKHR_args, "GLES2_KHR_robustness", 8, 3846, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glReadnPixelsKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10923,7 +10866,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glReleaseKeyedMutexWin32EXT_args[] = {"memory", "key"};
-static const PyGLCommand pygl_GLES2_glReleaseKeyedMutexWin32EXT_info = {"glReleaseKeyedMutexWin32EXT", "glReleaseKeyedMutexWin32EXT(memory, key) -> GLboolean", "($module, memory, key, /)", pygl_GLES2_glReleaseKeyedMutexWin32EXT_args, "GLES2_EXT_win32_keyed_mutex", 2, 3852, PYGL_API_GLES2, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLES2_glReleaseKeyedMutexWin32EXT_info = {"glReleaseKeyedMutexWin32EXT", "glReleaseKeyedMutexWin32EXT(memory, key) -> GLboolean", "($module, memory, key, /)", pygl_GLES2_glReleaseKeyedMutexWin32EXT_args, "GLES2_EXT_win32_keyed_mutex", 2, 3847, PYGL_API_GLES2, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLES2_glReleaseKeyedMutexWin32EXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10940,7 +10883,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glReleaseShaderCompiler_info = {"glReleaseShaderCompiler", "glReleaseShaderCompiler() -> None", "($module, /)", NULL, "GLES2_VERSION_GLES2_2_0", 0, 3853, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glReleaseShaderCompiler_info = {"glReleaseShaderCompiler", "glReleaseShaderCompiler() -> None", "($module, /)", NULL, "GLES2_VERSION_GLES2_2_0", 0, 3848, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glReleaseShaderCompiler(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10956,7 +10899,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glRenderbufferStorage_args[] = {"target", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES2_glRenderbufferStorage_info = {"glRenderbufferStorage", "glRenderbufferStorage(target, internalformat, width, height) -> None", "($module, target, internalformat, width, height, /)", pygl_GLES2_glRenderbufferStorage_args, "GLES2_VERSION_GLES2_2_0", 4, 3854, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glRenderbufferStorage_info = {"glRenderbufferStorage", "glRenderbufferStorage(target, internalformat, width, height) -> None", "($module, target, internalformat, width, height, /)", pygl_GLES2_glRenderbufferStorage_args, "GLES2_VERSION_GLES2_2_0", 4, 3849, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glRenderbufferStorage(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10976,7 +10919,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glRenderbufferStorageMultisampleANGLE_args[] = {"target", "samples", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES2_glRenderbufferStorageMultisampleANGLE_info = {"glRenderbufferStorageMultisampleANGLE", "glRenderbufferStorageMultisampleANGLE(target, samples, internalformat, width, height) -> None", "($module, target, samples, internalformat, width, height, /)", pygl_GLES2_glRenderbufferStorageMultisampleANGLE_args, "GLES2_ANGLE_framebuffer_multisample", 5, 3855, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glRenderbufferStorageMultisampleANGLE_info = {"glRenderbufferStorageMultisampleANGLE", "glRenderbufferStorageMultisampleANGLE(target, samples, internalformat, width, height) -> None", "($module, target, samples, internalformat, width, height, /)", pygl_GLES2_glRenderbufferStorageMultisampleANGLE_args, "GLES2_ANGLE_framebuffer_multisample", 5, 3850, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glRenderbufferStorageMultisampleANGLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -10997,7 +10940,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glRenderbufferStorageMultisampleAPPLE_args[] = {"target", "samples", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES2_glRenderbufferStorageMultisampleAPPLE_info = {"glRenderbufferStorageMultisampleAPPLE", "glRenderbufferStorageMultisampleAPPLE(target, samples, internalformat, width, height) -> None", "($module, target, samples, internalformat, width, height, /)", pygl_GLES2_glRenderbufferStorageMultisampleAPPLE_args, "GLES2_APPLE_framebuffer_multisample", 5, 3856, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glRenderbufferStorageMultisampleAPPLE_info = {"glRenderbufferStorageMultisampleAPPLE", "glRenderbufferStorageMultisampleAPPLE(target, samples, internalformat, width, height) -> None", "($module, target, samples, internalformat, width, height, /)", pygl_GLES2_glRenderbufferStorageMultisampleAPPLE_args, "GLES2_APPLE_framebuffer_multisample", 5, 3851, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glRenderbufferStorageMultisampleAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11018,7 +10961,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glRenderbufferStorageMultisampleAdvancedAMD_args[] = {"target", "samples", "storageSamples", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES2_glRenderbufferStorageMultisampleAdvancedAMD_info = {"glRenderbufferStorageMultisampleAdvancedAMD", "glRenderbufferStorageMultisampleAdvancedAMD(target, samples, storageSamples, internalformat, width, height) -> None", "($module, target, samples, storageSamples, internalformat, width, height, /)", pygl_GLES2_glRenderbufferStorageMultisampleAdvancedAMD_args, "GLES2_AMD_framebuffer_multisample_advanced", 6, 3857, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glRenderbufferStorageMultisampleAdvancedAMD_info = {"glRenderbufferStorageMultisampleAdvancedAMD", "glRenderbufferStorageMultisampleAdvancedAMD(target, samples, storageSamples, internalformat, width, height) -> None", "($module, target, samples, storageSamples, internalformat, width, height, /)", pygl_GLES2_glRenderbufferStorageMultisampleAdvancedAMD_args, "GLES2_AMD_framebuffer_multisample_advanced", 6, 3852, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glRenderbufferStorageMultisampleAdvancedAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11040,7 +10983,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glRenderbufferStorageMultisampleEXT_args[] = {"target", "samples", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES2_glRenderbufferStorageMultisampleEXT_info = {"glRenderbufferStorageMultisampleEXT", "glRenderbufferStorageMultisampleEXT(target, samples, internalformat, width, height) -> None", "($module, target, samples, internalformat, width, height, /)", pygl_GLES2_glRenderbufferStorageMultisampleEXT_args, "GLES2_EXT_multisampled_render_to_texture", 5, 3858, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glRenderbufferStorageMultisampleEXT_info = {"glRenderbufferStorageMultisampleEXT", "glRenderbufferStorageMultisampleEXT(target, samples, internalformat, width, height) -> None", "($module, target, samples, internalformat, width, height, /)", pygl_GLES2_glRenderbufferStorageMultisampleEXT_args, "GLES2_EXT_multisampled_render_to_texture", 5, 3853, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glRenderbufferStorageMultisampleEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11061,7 +11004,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glRenderbufferStorageMultisampleIMG_args[] = {"target", "samples", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES2_glRenderbufferStorageMultisampleIMG_info = {"glRenderbufferStorageMultisampleIMG", "glRenderbufferStorageMultisampleIMG(target, samples, internalformat, width, height) -> None", "($module, target, samples, internalformat, width, height, /)", pygl_GLES2_glRenderbufferStorageMultisampleIMG_args, "GLES2_IMG_multisampled_render_to_texture", 5, 3859, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glRenderbufferStorageMultisampleIMG_info = {"glRenderbufferStorageMultisampleIMG", "glRenderbufferStorageMultisampleIMG(target, samples, internalformat, width, height) -> None", "($module, target, samples, internalformat, width, height, /)", pygl_GLES2_glRenderbufferStorageMultisampleIMG_args, "GLES2_IMG_multisampled_render_to_texture", 5, 3854, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glRenderbufferStorageMultisampleIMG(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11082,7 +11025,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glRenderbufferStorageMultisampleNV_args[] = {"target", "samples", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES2_glRenderbufferStorageMultisampleNV_info = {"glRenderbufferStorageMultisampleNV", "glRenderbufferStorageMultisampleNV(target, samples, internalformat, width, height) -> None", "($module, target, samples, internalformat, width, height, /)", pygl_GLES2_glRenderbufferStorageMultisampleNV_args, "GLES2_NV_framebuffer_multisample", 5, 3860, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glRenderbufferStorageMultisampleNV_info = {"glRenderbufferStorageMultisampleNV", "glRenderbufferStorageMultisampleNV(target, samples, internalformat, width, height) -> None", "($module, target, samples, internalformat, width, height, /)", pygl_GLES2_glRenderbufferStorageMultisampleNV_args, "GLES2_NV_framebuffer_multisample", 5, 3855, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glRenderbufferStorageMultisampleNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11103,7 +11046,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glResetMemoryObjectParameterNV_args[] = {"memory", "pname"};
-static const PyGLCommand pygl_GLES2_glResetMemoryObjectParameterNV_info = {"glResetMemoryObjectParameterNV", "glResetMemoryObjectParameterNV(memory, pname) -> None", "($module, memory, pname, /)", pygl_GLES2_glResetMemoryObjectParameterNV_args, "GLES2_NV_memory_attachment", 2, 3861, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glResetMemoryObjectParameterNV_info = {"glResetMemoryObjectParameterNV", "glResetMemoryObjectParameterNV(memory, pname) -> None", "($module, memory, pname, /)", pygl_GLES2_glResetMemoryObjectParameterNV_args, "GLES2_NV_memory_attachment", 2, 3856, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glResetMemoryObjectParameterNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11120,7 +11063,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glResolveDepthValuesNV_info = {"glResolveDepthValuesNV", "glResolveDepthValuesNV() -> None", "($module, /)", NULL, "GLES2_NV_sample_locations", 0, 3862, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glResolveDepthValuesNV_info = {"glResolveDepthValuesNV", "glResolveDepthValuesNV() -> None", "($module, /)", NULL, "GLES2_NV_sample_locations", 0, 3857, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glResolveDepthValuesNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11135,7 +11078,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glResolveMultisampleFramebufferAPPLE_info = {"glResolveMultisampleFramebufferAPPLE", "glResolveMultisampleFramebufferAPPLE() -> None", "($module, /)", NULL, "GLES2_APPLE_framebuffer_multisample", 0, 3863, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glResolveMultisampleFramebufferAPPLE_info = {"glResolveMultisampleFramebufferAPPLE", "glResolveMultisampleFramebufferAPPLE() -> None", "($module, /)", NULL, "GLES2_APPLE_framebuffer_multisample", 0, 3858, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glResolveMultisampleFramebufferAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11151,7 +11094,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSampleCoverage_args[] = {"value", "invert"};
-static const PyGLCommand pygl_GLES2_glSampleCoverage_info = {"glSampleCoverage", "glSampleCoverage(value, invert) -> None", "($module, value, invert, /)", pygl_GLES2_glSampleCoverage_args, "GLES2_VERSION_GLES2_2_0", 2, 3864, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glSampleCoverage_info = {"glSampleCoverage", "glSampleCoverage(value, invert) -> None", "($module, value, invert, /)", pygl_GLES2_glSampleCoverage_args, "GLES2_VERSION_GLES2_2_0", 2, 3859, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSampleCoverage(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11169,7 +11112,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSamplerParameterIiv_args[] = {"sampler", "pname", "param"};
-static const PyGLCommand pygl_GLES2_glSamplerParameterIiv_info = {"glSamplerParameterIiv", "glSamplerParameterIiv(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterIiv_args, "GLES2_ES_VERSION_3_2", 3, 3865, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glSamplerParameterIiv_info = {"glSamplerParameterIiv", "glSamplerParameterIiv(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterIiv_args, "GLES2_ES_VERSION_3_2", 3, 3860, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSamplerParameterIiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11191,7 +11134,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSamplerParameterIivEXT_args[] = {"sampler", "pname", "param"};
-static const PyGLCommand pygl_GLES2_glSamplerParameterIivEXT_info = {"glSamplerParameterIivEXT", "glSamplerParameterIivEXT(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterIivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3866, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glSamplerParameterIivEXT_info = {"glSamplerParameterIivEXT", "glSamplerParameterIivEXT(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterIivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3861, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSamplerParameterIivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11213,7 +11156,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSamplerParameterIivOES_args[] = {"sampler", "pname", "param"};
-static const PyGLCommand pygl_GLES2_glSamplerParameterIivOES_info = {"glSamplerParameterIivOES", "glSamplerParameterIivOES(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterIivOES_args, "GLES2_OES_texture_border_clamp", 3, 3867, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glSamplerParameterIivOES_info = {"glSamplerParameterIivOES", "glSamplerParameterIivOES(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterIivOES_args, "GLES2_OES_texture_border_clamp", 3, 3862, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSamplerParameterIivOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11235,7 +11178,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSamplerParameterIuiv_args[] = {"sampler", "pname", "param"};
-static const PyGLCommand pygl_GLES2_glSamplerParameterIuiv_info = {"glSamplerParameterIuiv", "glSamplerParameterIuiv(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterIuiv_args, "GLES2_ES_VERSION_3_2", 3, 3868, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glSamplerParameterIuiv_info = {"glSamplerParameterIuiv", "glSamplerParameterIuiv(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterIuiv_args, "GLES2_ES_VERSION_3_2", 3, 3863, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSamplerParameterIuiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11257,7 +11200,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSamplerParameterIuivEXT_args[] = {"sampler", "pname", "param"};
-static const PyGLCommand pygl_GLES2_glSamplerParameterIuivEXT_info = {"glSamplerParameterIuivEXT", "glSamplerParameterIuivEXT(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterIuivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3869, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glSamplerParameterIuivEXT_info = {"glSamplerParameterIuivEXT", "glSamplerParameterIuivEXT(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterIuivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3864, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSamplerParameterIuivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11279,7 +11222,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSamplerParameterIuivOES_args[] = {"sampler", "pname", "param"};
-static const PyGLCommand pygl_GLES2_glSamplerParameterIuivOES_info = {"glSamplerParameterIuivOES", "glSamplerParameterIuivOES(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterIuivOES_args, "GLES2_OES_texture_border_clamp", 3, 3870, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glSamplerParameterIuivOES_info = {"glSamplerParameterIuivOES", "glSamplerParameterIuivOES(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterIuivOES_args, "GLES2_OES_texture_border_clamp", 3, 3865, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSamplerParameterIuivOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11301,7 +11244,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSamplerParameterf_args[] = {"sampler", "pname", "param"};
-static const PyGLCommand pygl_GLES2_glSamplerParameterf_info = {"glSamplerParameterf", "glSamplerParameterf(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterf_args, "GLES2_MESA_sampler_objects", 3, 3871, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glSamplerParameterf_info = {"glSamplerParameterf", "glSamplerParameterf(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterf_args, "GLES2_MESA_sampler_objects", 3, 3866, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSamplerParameterf(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11320,7 +11263,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSamplerParameterfv_args[] = {"sampler", "pname", "param"};
-static const PyGLCommand pygl_GLES2_glSamplerParameterfv_info = {"glSamplerParameterfv", "glSamplerParameterfv(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterfv_args, "GLES2_MESA_sampler_objects", 3, 3872, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glSamplerParameterfv_info = {"glSamplerParameterfv", "glSamplerParameterfv(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameterfv_args, "GLES2_MESA_sampler_objects", 3, 3867, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSamplerParameterfv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11342,7 +11285,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSamplerParameteri_args[] = {"sampler", "pname", "param"};
-static const PyGLCommand pygl_GLES2_glSamplerParameteri_info = {"glSamplerParameteri", "glSamplerParameteri(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameteri_args, "GLES2_MESA_sampler_objects", 3, 3873, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glSamplerParameteri_info = {"glSamplerParameteri", "glSamplerParameteri(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameteri_args, "GLES2_MESA_sampler_objects", 3, 3868, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSamplerParameteri(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11361,7 +11304,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSamplerParameteriv_args[] = {"sampler", "pname", "param"};
-static const PyGLCommand pygl_GLES2_glSamplerParameteriv_info = {"glSamplerParameteriv", "glSamplerParameteriv(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameteriv_args, "GLES2_MESA_sampler_objects", 3, 3874, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glSamplerParameteriv_info = {"glSamplerParameteriv", "glSamplerParameteriv(sampler, pname, param) -> None", "($module, sampler, pname, param, /)", pygl_GLES2_glSamplerParameteriv_args, "GLES2_MESA_sampler_objects", 3, 3869, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSamplerParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11383,7 +11326,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glScissor_args[] = {"x", "y", "width", "height"};
-static const PyGLCommand pygl_GLES2_glScissor_info = {"glScissor", "glScissor(x, y, width, height) -> None", "($module, x, y, width, height, /)", pygl_GLES2_glScissor_args, "GLES2_VERSION_GLES2_2_0", 4, 3875, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glScissor_info = {"glScissor", "glScissor(x, y, width, height) -> None", "($module, x, y, width, height, /)", pygl_GLES2_glScissor_args, "GLES2_VERSION_GLES2_2_0", 4, 3870, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glScissor(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11403,7 +11346,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glScissorArrayvNV_args[] = {"first", "count", "v"};
-static const PyGLCommand pygl_GLES2_glScissorArrayvNV_info = {"glScissorArrayvNV", "glScissorArrayvNV(first, count, v) -> None", "($module, first, count, v, /)", pygl_GLES2_glScissorArrayvNV_args, "GLES2_NV_viewport_array", 3, 3876, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glScissorArrayvNV_info = {"glScissorArrayvNV", "glScissorArrayvNV(first, count, v) -> None", "($module, first, count, v, /)", pygl_GLES2_glScissorArrayvNV_args, "GLES2_NV_viewport_array", 3, 3871, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glScissorArrayvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11425,7 +11368,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glScissorArrayvOES_args[] = {"first", "count", "v"};
-static const PyGLCommand pygl_GLES2_glScissorArrayvOES_info = {"glScissorArrayvOES", "glScissorArrayvOES(first, count, v) -> None", "($module, first, count, v, /)", pygl_GLES2_glScissorArrayvOES_args, "GLES2_OES_viewport_array", 3, 3877, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glScissorArrayvOES_info = {"glScissorArrayvOES", "glScissorArrayvOES(first, count, v) -> None", "($module, first, count, v, /)", pygl_GLES2_glScissorArrayvOES_args, "GLES2_OES_viewport_array", 3, 3872, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glScissorArrayvOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11447,7 +11390,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glScissorExclusiveArrayvNV_args[] = {"first", "count", "v"};
-static const PyGLCommand pygl_GLES2_glScissorExclusiveArrayvNV_info = {"glScissorExclusiveArrayvNV", "glScissorExclusiveArrayvNV(first, count, v) -> None", "($module, first, count, v, /)", pygl_GLES2_glScissorExclusiveArrayvNV_args, "GLES2_NV_scissor_exclusive", 3, 3878, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glScissorExclusiveArrayvNV_info = {"glScissorExclusiveArrayvNV", "glScissorExclusiveArrayvNV(first, count, v) -> None", "($module, first, count, v, /)", pygl_GLES2_glScissorExclusiveArrayvNV_args, "GLES2_NV_scissor_exclusive", 3, 3873, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glScissorExclusiveArrayvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11469,7 +11412,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glScissorExclusiveNV_args[] = {"x", "y", "width", "height"};
-static const PyGLCommand pygl_GLES2_glScissorExclusiveNV_info = {"glScissorExclusiveNV", "glScissorExclusiveNV(x, y, width, height) -> None", "($module, x, y, width, height, /)", pygl_GLES2_glScissorExclusiveNV_args, "GLES2_NV_scissor_exclusive", 4, 3879, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glScissorExclusiveNV_info = {"glScissorExclusiveNV", "glScissorExclusiveNV(x, y, width, height) -> None", "($module, x, y, width, height, /)", pygl_GLES2_glScissorExclusiveNV_args, "GLES2_NV_scissor_exclusive", 4, 3874, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glScissorExclusiveNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11489,7 +11432,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glScissorIndexedNV_args[] = {"index", "left", "bottom", "width", "height"};
-static const PyGLCommand pygl_GLES2_glScissorIndexedNV_info = {"glScissorIndexedNV", "glScissorIndexedNV(index, left, bottom, width, height) -> None", "($module, index, left, bottom, width, height, /)", pygl_GLES2_glScissorIndexedNV_args, "GLES2_NV_viewport_array", 5, 3880, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glScissorIndexedNV_info = {"glScissorIndexedNV", "glScissorIndexedNV(index, left, bottom, width, height) -> None", "($module, index, left, bottom, width, height, /)", pygl_GLES2_glScissorIndexedNV_args, "GLES2_NV_viewport_array", 5, 3875, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glScissorIndexedNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11510,7 +11453,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glScissorIndexedOES_args[] = {"index", "left", "bottom", "width", "height"};
-static const PyGLCommand pygl_GLES2_glScissorIndexedOES_info = {"glScissorIndexedOES", "glScissorIndexedOES(index, left, bottom, width, height) -> None", "($module, index, left, bottom, width, height, /)", pygl_GLES2_glScissorIndexedOES_args, "GLES2_OES_viewport_array", 5, 3881, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glScissorIndexedOES_info = {"glScissorIndexedOES", "glScissorIndexedOES(index, left, bottom, width, height) -> None", "($module, index, left, bottom, width, height, /)", pygl_GLES2_glScissorIndexedOES_args, "GLES2_OES_viewport_array", 5, 3876, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glScissorIndexedOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11531,7 +11474,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glScissorIndexedvNV_args[] = {"index", "v"};
-static const PyGLCommand pygl_GLES2_glScissorIndexedvNV_info = {"glScissorIndexedvNV", "glScissorIndexedvNV(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glScissorIndexedvNV_args, "GLES2_NV_viewport_array", 2, 3882, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glScissorIndexedvNV_info = {"glScissorIndexedvNV", "glScissorIndexedvNV(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glScissorIndexedvNV_args, "GLES2_NV_viewport_array", 2, 3877, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glScissorIndexedvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11552,7 +11495,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glScissorIndexedvOES_args[] = {"index", "v"};
-static const PyGLCommand pygl_GLES2_glScissorIndexedvOES_info = {"glScissorIndexedvOES", "glScissorIndexedvOES(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glScissorIndexedvOES_args, "GLES2_OES_viewport_array", 2, 3883, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glScissorIndexedvOES_info = {"glScissorIndexedvOES", "glScissorIndexedvOES(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glScissorIndexedvOES_args, "GLES2_OES_viewport_array", 2, 3878, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glScissorIndexedvOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11573,7 +11516,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSelectPerfMonitorCountersAMD_args[] = {"monitor", "enable", "group", "numCounters", "counterList"};
-static const PyGLCommand pygl_GLES2_glSelectPerfMonitorCountersAMD_info = {"glSelectPerfMonitorCountersAMD", "glSelectPerfMonitorCountersAMD(monitor, enable, group, numCounters) -> counterList", "($module, monitor, enable, group, numCounters, counterList=None, /)", pygl_GLES2_glSelectPerfMonitorCountersAMD_args, "GLES2_AMD_performance_monitor", 5, 3884, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glSelectPerfMonitorCountersAMD_info = {"glSelectPerfMonitorCountersAMD", "glSelectPerfMonitorCountersAMD(monitor, enable, group, numCounters) -> counterList", "($module, monitor, enable, group, numCounters, counterList=None, /)", pygl_GLES2_glSelectPerfMonitorCountersAMD_args, "GLES2_AMD_performance_monitor", 5, 3879, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSelectPerfMonitorCountersAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11598,7 +11541,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSemaphoreParameterivNV_args[] = {"semaphore", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glSemaphoreParameterivNV_info = {"glSemaphoreParameterivNV", "glSemaphoreParameterivNV(semaphore, pname, params) -> None", "($module, semaphore, pname, params, /)", pygl_GLES2_glSemaphoreParameterivNV_args, "GLES2_NV_timeline_semaphore", 3, 3885, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glSemaphoreParameterivNV_info = {"glSemaphoreParameterivNV", "glSemaphoreParameterivNV(semaphore, pname, params) -> None", "($module, semaphore, pname, params, /)", pygl_GLES2_glSemaphoreParameterivNV_args, "GLES2_NV_timeline_semaphore", 3, 3880, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSemaphoreParameterivNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11620,7 +11563,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSemaphoreParameterui64vEXT_args[] = {"semaphore", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glSemaphoreParameterui64vEXT_info = {"glSemaphoreParameterui64vEXT", "glSemaphoreParameterui64vEXT(semaphore, pname, params) -> None", "($module, semaphore, pname, params, /)", pygl_GLES2_glSemaphoreParameterui64vEXT_args, "GLES2_EXT_semaphore", 3, 3886, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glSemaphoreParameterui64vEXT_info = {"glSemaphoreParameterui64vEXT", "glSemaphoreParameterui64vEXT(semaphore, pname, params) -> None", "($module, semaphore, pname, params, /)", pygl_GLES2_glSemaphoreParameterui64vEXT_args, "GLES2_EXT_semaphore", 3, 3881, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSemaphoreParameterui64vEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11642,7 +11585,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSetFenceNV_args[] = {"fence", "condition"};
-static const PyGLCommand pygl_GLES2_glSetFenceNV_info = {"glSetFenceNV", "glSetFenceNV(fence, condition) -> None", "($module, fence, condition, /)", pygl_GLES2_glSetFenceNV_args, "GLES2_NV_fence", 2, 3887, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glSetFenceNV_info = {"glSetFenceNV", "glSetFenceNV(fence, condition) -> None", "($module, fence, condition, /)", pygl_GLES2_glSetFenceNV_args, "GLES2_NV_fence", 2, 3882, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSetFenceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11660,7 +11603,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glShaderBinary_args[] = {"count", "shaders", "binaryFormat", "binary", "length"};
-static const PyGLCommand pygl_GLES2_glShaderBinary_info = {"glShaderBinary", "glShaderBinary(count, shaders, binaryFormat, binary, length) -> None", "($module, count, shaders, binaryFormat, binary, length, /)", pygl_GLES2_glShaderBinary_args, "GLES2_VERSION_GLES2_2_0", 5, 3888, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glShaderBinary_info = {"glShaderBinary", "glShaderBinary(count, shaders, binaryFormat, binary, length) -> None", "($module, count, shaders, binaryFormat, binary, length, /)", pygl_GLES2_glShaderBinary_args, "GLES2_VERSION_GLES2_2_0", 5, 3883, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glShaderBinary(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11684,12 +11627,12 @@ _fail:
 
 
 static const char *const pygl_GLES2_glShaderSource_args[] = {"shader", "count", "string", "length"};
-static const PyGLCommand pygl_GLES2_glShaderSource_info = {"glShaderSource", "glShaderSource(shader, string) -> None", "($module, shader, string, /)", pygl_GLES2_glShaderSource_args, "GLES2_VERSION_GLES2_2_0", 4, 3889, PYGL_API_GLES2, 0, 2, 0, 1};
+static const PyGLCommand pygl_GLES2_glShaderSource_info = {"glShaderSource", "glShaderSource(shader, string) -> None", "($module, shader, string, /)", pygl_GLES2_glShaderSource_args, "GLES2_VERSION_GLES2_2_0", 4, 3884, PYGL_API_GLES2, 0, 2, 0, 1};
 
 PyObject *pygl_hand_glShaderSource(GLProc *self, PyObject *const *_a, size_t _nargsf);
 
 static const char *const pygl_GLES2_glShadingRateCombinerOpsEXT_args[] = {"combinerOp0", "combinerOp1"};
-static const PyGLCommand pygl_GLES2_glShadingRateCombinerOpsEXT_info = {"glShadingRateCombinerOpsEXT", "glShadingRateCombinerOpsEXT(combinerOp0, combinerOp1) -> None", "($module, combinerOp0, combinerOp1, /)", pygl_GLES2_glShadingRateCombinerOpsEXT_args, "GLES2_EXT_fragment_shading_rate", 2, 3890, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glShadingRateCombinerOpsEXT_info = {"glShadingRateCombinerOpsEXT", "glShadingRateCombinerOpsEXT(combinerOp0, combinerOp1) -> None", "($module, combinerOp0, combinerOp1, /)", pygl_GLES2_glShadingRateCombinerOpsEXT_args, "GLES2_EXT_fragment_shading_rate", 2, 3885, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glShadingRateCombinerOpsEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11707,7 +11650,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glShadingRateEXT_args[] = {"rate"};
-static const PyGLCommand pygl_GLES2_glShadingRateEXT_info = {"glShadingRateEXT", "glShadingRateEXT(rate) -> None", "($module, rate, /)", pygl_GLES2_glShadingRateEXT_args, "GLES2_EXT_fragment_shading_rate", 1, 3891, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glShadingRateEXT_info = {"glShadingRateEXT", "glShadingRateEXT(rate) -> None", "($module, rate, /)", pygl_GLES2_glShadingRateEXT_args, "GLES2_EXT_fragment_shading_rate", 1, 3886, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glShadingRateEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11724,7 +11667,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glShadingRateImageBarrierNV_args[] = {"synchronize"};
-static const PyGLCommand pygl_GLES2_glShadingRateImageBarrierNV_info = {"glShadingRateImageBarrierNV", "glShadingRateImageBarrierNV(synchronize) -> None", "($module, synchronize, /)", pygl_GLES2_glShadingRateImageBarrierNV_args, "GLES2_NV_shading_rate_image", 1, 3892, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glShadingRateImageBarrierNV_info = {"glShadingRateImageBarrierNV", "glShadingRateImageBarrierNV(synchronize) -> None", "($module, synchronize, /)", pygl_GLES2_glShadingRateImageBarrierNV_args, "GLES2_NV_shading_rate_image", 1, 3887, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glShadingRateImageBarrierNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11741,7 +11684,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glShadingRateImagePaletteNV_args[] = {"viewport", "first", "count", "rates"};
-static const PyGLCommand pygl_GLES2_glShadingRateImagePaletteNV_info = {"glShadingRateImagePaletteNV", "glShadingRateImagePaletteNV(viewport, first, count, rates) -> None", "($module, viewport, first, count, rates, /)", pygl_GLES2_glShadingRateImagePaletteNV_args, "GLES2_NV_shading_rate_image", 4, 3893, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glShadingRateImagePaletteNV_info = {"glShadingRateImagePaletteNV", "glShadingRateImagePaletteNV(viewport, first, count, rates) -> None", "($module, viewport, first, count, rates, /)", pygl_GLES2_glShadingRateImagePaletteNV_args, "GLES2_NV_shading_rate_image", 4, 3888, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glShadingRateImagePaletteNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11764,7 +11707,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glShadingRateQCOM_args[] = {"rate"};
-static const PyGLCommand pygl_GLES2_glShadingRateQCOM_info = {"glShadingRateQCOM", "glShadingRateQCOM(rate) -> None", "($module, rate, /)", pygl_GLES2_glShadingRateQCOM_args, "GLES2_QCOM_shading_rate", 1, 3894, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glShadingRateQCOM_info = {"glShadingRateQCOM", "glShadingRateQCOM(rate) -> None", "($module, rate, /)", pygl_GLES2_glShadingRateQCOM_args, "GLES2_QCOM_shading_rate", 1, 3889, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glShadingRateQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11781,7 +11724,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glShadingRateSampleOrderCustomNV_args[] = {"rate", "samples", "locations"};
-static const PyGLCommand pygl_GLES2_glShadingRateSampleOrderCustomNV_info = {"glShadingRateSampleOrderCustomNV", "glShadingRateSampleOrderCustomNV(rate, samples, locations) -> None", "($module, rate, samples, locations, /)", pygl_GLES2_glShadingRateSampleOrderCustomNV_args, "GLES2_NV_shading_rate_image", 3, 3895, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glShadingRateSampleOrderCustomNV_info = {"glShadingRateSampleOrderCustomNV", "glShadingRateSampleOrderCustomNV(rate, samples, locations) -> None", "($module, rate, samples, locations, /)", pygl_GLES2_glShadingRateSampleOrderCustomNV_args, "GLES2_NV_shading_rate_image", 3, 3890, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glShadingRateSampleOrderCustomNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11803,7 +11746,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glShadingRateSampleOrderNV_args[] = {"order"};
-static const PyGLCommand pygl_GLES2_glShadingRateSampleOrderNV_info = {"glShadingRateSampleOrderNV", "glShadingRateSampleOrderNV(order) -> None", "($module, order, /)", pygl_GLES2_glShadingRateSampleOrderNV_args, "GLES2_NV_shading_rate_image", 1, 3896, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glShadingRateSampleOrderNV_info = {"glShadingRateSampleOrderNV", "glShadingRateSampleOrderNV(order) -> None", "($module, order, /)", pygl_GLES2_glShadingRateSampleOrderNV_args, "GLES2_NV_shading_rate_image", 1, 3891, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glShadingRateSampleOrderNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11820,7 +11763,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSignalSemaphoreEXT_args[] = {"semaphore", "numBufferBarriers", "buffers", "numTextureBarriers", "textures", "dstLayouts"};
-static const PyGLCommand pygl_GLES2_glSignalSemaphoreEXT_info = {"glSignalSemaphoreEXT", "glSignalSemaphoreEXT(semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, dstLayouts) -> None", "($module, semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, dstLayouts, /)", pygl_GLES2_glSignalSemaphoreEXT_args, "GLES2_EXT_semaphore", 6, 3897, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glSignalSemaphoreEXT_info = {"glSignalSemaphoreEXT", "glSignalSemaphoreEXT(semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, dstLayouts) -> None", "($module, semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, dstLayouts, /)", pygl_GLES2_glSignalSemaphoreEXT_args, "GLES2_EXT_semaphore", 6, 3892, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSignalSemaphoreEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11845,7 +11788,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSignalVkFenceNV_args[] = {"vkFence"};
-static const PyGLCommand pygl_GLES2_glSignalVkFenceNV_info = {"glSignalVkFenceNV", "glSignalVkFenceNV(vkFence) -> None", "($module, vkFence, /)", pygl_GLES2_glSignalVkFenceNV_args, "GLES2_NV_draw_vulkan_image", 1, 3898, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glSignalVkFenceNV_info = {"glSignalVkFenceNV", "glSignalVkFenceNV(vkFence) -> None", "($module, vkFence, /)", pygl_GLES2_glSignalVkFenceNV_args, "GLES2_NV_draw_vulkan_image", 1, 3893, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSignalVkFenceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11862,7 +11805,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSignalVkSemaphoreNV_args[] = {"vkSemaphore"};
-static const PyGLCommand pygl_GLES2_glSignalVkSemaphoreNV_info = {"glSignalVkSemaphoreNV", "glSignalVkSemaphoreNV(vkSemaphore) -> None", "($module, vkSemaphore, /)", pygl_GLES2_glSignalVkSemaphoreNV_args, "GLES2_NV_draw_vulkan_image", 1, 3899, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glSignalVkSemaphoreNV_info = {"glSignalVkSemaphoreNV", "glSignalVkSemaphoreNV(vkSemaphore) -> None", "($module, vkSemaphore, /)", pygl_GLES2_glSignalVkSemaphoreNV_args, "GLES2_NV_draw_vulkan_image", 1, 3894, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSignalVkSemaphoreNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11879,7 +11822,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStartTilingQCOM_args[] = {"x", "y", "width", "height", "preserveMask"};
-static const PyGLCommand pygl_GLES2_glStartTilingQCOM_info = {"glStartTilingQCOM", "glStartTilingQCOM(x, y, width, height, preserveMask) -> None", "($module, x, y, width, height, preserveMask, /)", pygl_GLES2_glStartTilingQCOM_args, "GLES2_QCOM_tiled_rendering", 5, 3900, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glStartTilingQCOM_info = {"glStartTilingQCOM", "glStartTilingQCOM(x, y, width, height, preserveMask) -> None", "($module, x, y, width, height, preserveMask, /)", pygl_GLES2_glStartTilingQCOM_args, "GLES2_QCOM_tiled_rendering", 5, 3895, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStartTilingQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11900,7 +11843,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStencilFillPathInstancedNV_args[] = {"numPaths", "pathNameType", "paths", "pathBase", "fillMode", "mask", "transformType", "transformValues"};
-static const PyGLCommand pygl_GLES2_glStencilFillPathInstancedNV_info = {"glStencilFillPathInstancedNV", "glStencilFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, fillMode, mask, transformType, transformValues) -> None", "($module, numPaths, pathNameType, paths, pathBase, fillMode, mask, transformType, transformValues, /)", pygl_GLES2_glStencilFillPathInstancedNV_args, "GLES2_NV_path_rendering", 8, 3901, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glStencilFillPathInstancedNV_info = {"glStencilFillPathInstancedNV", "glStencilFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, fillMode, mask, transformType, transformValues) -> None", "($module, numPaths, pathNameType, paths, pathBase, fillMode, mask, transformType, transformValues, /)", pygl_GLES2_glStencilFillPathInstancedNV_args, "GLES2_NV_path_rendering", 8, 3896, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStencilFillPathInstancedNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11927,7 +11870,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStencilFillPathNV_args[] = {"path", "fillMode", "mask"};
-static const PyGLCommand pygl_GLES2_glStencilFillPathNV_info = {"glStencilFillPathNV", "glStencilFillPathNV(path, fillMode, mask) -> None", "($module, path, fillMode, mask, /)", pygl_GLES2_glStencilFillPathNV_args, "GLES2_NV_path_rendering", 3, 3902, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glStencilFillPathNV_info = {"glStencilFillPathNV", "glStencilFillPathNV(path, fillMode, mask) -> None", "($module, path, fillMode, mask, /)", pygl_GLES2_glStencilFillPathNV_args, "GLES2_NV_path_rendering", 3, 3897, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStencilFillPathNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11946,7 +11889,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStencilFunc_args[] = {"func", "ref", "mask"};
-static const PyGLCommand pygl_GLES2_glStencilFunc_info = {"glStencilFunc", "glStencilFunc(func, ref, mask) -> None", "($module, func, ref, mask, /)", pygl_GLES2_glStencilFunc_args, "GLES2_VERSION_GLES2_2_0", 3, 3903, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glStencilFunc_info = {"glStencilFunc", "glStencilFunc(func, ref, mask) -> None", "($module, func, ref, mask, /)", pygl_GLES2_glStencilFunc_args, "GLES2_VERSION_GLES2_2_0", 3, 3898, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStencilFunc(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11965,7 +11908,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStencilFuncSeparate_args[] = {"face", "func", "ref", "mask"};
-static const PyGLCommand pygl_GLES2_glStencilFuncSeparate_info = {"glStencilFuncSeparate", "glStencilFuncSeparate(face, func, ref, mask) -> None", "($module, face, func, ref, mask, /)", pygl_GLES2_glStencilFuncSeparate_args, "GLES2_VERSION_GLES2_2_0", 4, 3904, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glStencilFuncSeparate_info = {"glStencilFuncSeparate", "glStencilFuncSeparate(face, func, ref, mask) -> None", "($module, face, func, ref, mask, /)", pygl_GLES2_glStencilFuncSeparate_args, "GLES2_VERSION_GLES2_2_0", 4, 3899, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStencilFuncSeparate(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11985,7 +11928,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStencilMask_args[] = {"mask"};
-static const PyGLCommand pygl_GLES2_glStencilMask_info = {"glStencilMask", "glStencilMask(mask) -> None", "($module, mask, /)", pygl_GLES2_glStencilMask_args, "GLES2_VERSION_GLES2_2_0", 1, 3905, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glStencilMask_info = {"glStencilMask", "glStencilMask(mask) -> None", "($module, mask, /)", pygl_GLES2_glStencilMask_args, "GLES2_VERSION_GLES2_2_0", 1, 3900, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStencilMask(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12002,7 +11945,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStencilMaskSeparate_args[] = {"face", "mask"};
-static const PyGLCommand pygl_GLES2_glStencilMaskSeparate_info = {"glStencilMaskSeparate", "glStencilMaskSeparate(face, mask) -> None", "($module, face, mask, /)", pygl_GLES2_glStencilMaskSeparate_args, "GLES2_VERSION_GLES2_2_0", 2, 3906, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glStencilMaskSeparate_info = {"glStencilMaskSeparate", "glStencilMaskSeparate(face, mask) -> None", "($module, face, mask, /)", pygl_GLES2_glStencilMaskSeparate_args, "GLES2_VERSION_GLES2_2_0", 2, 3901, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStencilMaskSeparate(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12020,7 +11963,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStencilOp_args[] = {"fail", "zfail", "zpass"};
-static const PyGLCommand pygl_GLES2_glStencilOp_info = {"glStencilOp", "glStencilOp(fail, zfail, zpass) -> None", "($module, fail, zfail, zpass, /)", pygl_GLES2_glStencilOp_args, "GLES2_VERSION_GLES2_2_0", 3, 3907, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glStencilOp_info = {"glStencilOp", "glStencilOp(fail, zfail, zpass) -> None", "($module, fail, zfail, zpass, /)", pygl_GLES2_glStencilOp_args, "GLES2_VERSION_GLES2_2_0", 3, 3902, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStencilOp(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12039,7 +11982,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStencilOpSeparate_args[] = {"face", "sfail", "dpfail", "dppass"};
-static const PyGLCommand pygl_GLES2_glStencilOpSeparate_info = {"glStencilOpSeparate", "glStencilOpSeparate(face, sfail, dpfail, dppass) -> None", "($module, face, sfail, dpfail, dppass, /)", pygl_GLES2_glStencilOpSeparate_args, "GLES2_VERSION_GLES2_2_0", 4, 3908, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glStencilOpSeparate_info = {"glStencilOpSeparate", "glStencilOpSeparate(face, sfail, dpfail, dppass) -> None", "($module, face, sfail, dpfail, dppass, /)", pygl_GLES2_glStencilOpSeparate_args, "GLES2_VERSION_GLES2_2_0", 4, 3903, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStencilOpSeparate(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12059,7 +12002,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStencilStrokePathInstancedNV_args[] = {"numPaths", "pathNameType", "paths", "pathBase", "reference", "mask", "transformType", "transformValues"};
-static const PyGLCommand pygl_GLES2_glStencilStrokePathInstancedNV_info = {"glStencilStrokePathInstancedNV", "glStencilStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, reference, mask, transformType, transformValues) -> None", "($module, numPaths, pathNameType, paths, pathBase, reference, mask, transformType, transformValues, /)", pygl_GLES2_glStencilStrokePathInstancedNV_args, "GLES2_NV_path_rendering", 8, 3909, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glStencilStrokePathInstancedNV_info = {"glStencilStrokePathInstancedNV", "glStencilStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, reference, mask, transformType, transformValues) -> None", "($module, numPaths, pathNameType, paths, pathBase, reference, mask, transformType, transformValues, /)", pygl_GLES2_glStencilStrokePathInstancedNV_args, "GLES2_NV_path_rendering", 8, 3904, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStencilStrokePathInstancedNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12086,7 +12029,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStencilStrokePathNV_args[] = {"path", "reference", "mask"};
-static const PyGLCommand pygl_GLES2_glStencilStrokePathNV_info = {"glStencilStrokePathNV", "glStencilStrokePathNV(path, reference, mask) -> None", "($module, path, reference, mask, /)", pygl_GLES2_glStencilStrokePathNV_args, "GLES2_NV_path_rendering", 3, 3910, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glStencilStrokePathNV_info = {"glStencilStrokePathNV", "glStencilStrokePathNV(path, reference, mask) -> None", "($module, path, reference, mask, /)", pygl_GLES2_glStencilStrokePathNV_args, "GLES2_NV_path_rendering", 3, 3905, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStencilStrokePathNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12105,7 +12048,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStencilThenCoverFillPathInstancedNV_args[] = {"numPaths", "pathNameType", "paths", "pathBase", "fillMode", "mask", "coverMode", "transformType", "transformValues"};
-static const PyGLCommand pygl_GLES2_glStencilThenCoverFillPathInstancedNV_info = {"glStencilThenCoverFillPathInstancedNV", "glStencilThenCoverFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, fillMode, mask, coverMode, transformType, transformValues) -> None", "($module, numPaths, pathNameType, paths, pathBase, fillMode, mask, coverMode, transformType, transformValues, /)", pygl_GLES2_glStencilThenCoverFillPathInstancedNV_args, "GLES2_NV_path_rendering", 9, 3911, PYGL_API_GLES2, 0, 9, 0, 0};
+static const PyGLCommand pygl_GLES2_glStencilThenCoverFillPathInstancedNV_info = {"glStencilThenCoverFillPathInstancedNV", "glStencilThenCoverFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, fillMode, mask, coverMode, transformType, transformValues) -> None", "($module, numPaths, pathNameType, paths, pathBase, fillMode, mask, coverMode, transformType, transformValues, /)", pygl_GLES2_glStencilThenCoverFillPathInstancedNV_args, "GLES2_NV_path_rendering", 9, 3906, PYGL_API_GLES2, 0, 9, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStencilThenCoverFillPathInstancedNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12133,7 +12076,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStencilThenCoverFillPathNV_args[] = {"path", "fillMode", "mask", "coverMode"};
-static const PyGLCommand pygl_GLES2_glStencilThenCoverFillPathNV_info = {"glStencilThenCoverFillPathNV", "glStencilThenCoverFillPathNV(path, fillMode, mask, coverMode) -> None", "($module, path, fillMode, mask, coverMode, /)", pygl_GLES2_glStencilThenCoverFillPathNV_args, "GLES2_NV_path_rendering", 4, 3912, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glStencilThenCoverFillPathNV_info = {"glStencilThenCoverFillPathNV", "glStencilThenCoverFillPathNV(path, fillMode, mask, coverMode) -> None", "($module, path, fillMode, mask, coverMode, /)", pygl_GLES2_glStencilThenCoverFillPathNV_args, "GLES2_NV_path_rendering", 4, 3907, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStencilThenCoverFillPathNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12153,7 +12096,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStencilThenCoverStrokePathInstancedNV_args[] = {"numPaths", "pathNameType", "paths", "pathBase", "reference", "mask", "coverMode", "transformType", "transformValues"};
-static const PyGLCommand pygl_GLES2_glStencilThenCoverStrokePathInstancedNV_info = {"glStencilThenCoverStrokePathInstancedNV", "glStencilThenCoverStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, reference, mask, coverMode, transformType, transformValues) -> None", "($module, numPaths, pathNameType, paths, pathBase, reference, mask, coverMode, transformType, transformValues, /)", pygl_GLES2_glStencilThenCoverStrokePathInstancedNV_args, "GLES2_NV_path_rendering", 9, 3913, PYGL_API_GLES2, 0, 9, 0, 0};
+static const PyGLCommand pygl_GLES2_glStencilThenCoverStrokePathInstancedNV_info = {"glStencilThenCoverStrokePathInstancedNV", "glStencilThenCoverStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, reference, mask, coverMode, transformType, transformValues) -> None", "($module, numPaths, pathNameType, paths, pathBase, reference, mask, coverMode, transformType, transformValues, /)", pygl_GLES2_glStencilThenCoverStrokePathInstancedNV_args, "GLES2_NV_path_rendering", 9, 3908, PYGL_API_GLES2, 0, 9, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStencilThenCoverStrokePathInstancedNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12181,7 +12124,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glStencilThenCoverStrokePathNV_args[] = {"path", "reference", "mask", "coverMode"};
-static const PyGLCommand pygl_GLES2_glStencilThenCoverStrokePathNV_info = {"glStencilThenCoverStrokePathNV", "glStencilThenCoverStrokePathNV(path, reference, mask, coverMode) -> None", "($module, path, reference, mask, coverMode, /)", pygl_GLES2_glStencilThenCoverStrokePathNV_args, "GLES2_NV_path_rendering", 4, 3914, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glStencilThenCoverStrokePathNV_info = {"glStencilThenCoverStrokePathNV", "glStencilThenCoverStrokePathNV(path, reference, mask, coverMode) -> None", "($module, path, reference, mask, coverMode, /)", pygl_GLES2_glStencilThenCoverStrokePathNV_args, "GLES2_NV_path_rendering", 4, 3909, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glStencilThenCoverStrokePathNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12201,7 +12144,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glSubpixelPrecisionBiasNV_args[] = {"xbits", "ybits"};
-static const PyGLCommand pygl_GLES2_glSubpixelPrecisionBiasNV_info = {"glSubpixelPrecisionBiasNV", "glSubpixelPrecisionBiasNV(xbits, ybits) -> None", "($module, xbits, ybits, /)", pygl_GLES2_glSubpixelPrecisionBiasNV_args, "GLES2_NV_conservative_raster", 2, 3915, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glSubpixelPrecisionBiasNV_info = {"glSubpixelPrecisionBiasNV", "glSubpixelPrecisionBiasNV(xbits, ybits) -> None", "($module, xbits, ybits, /)", pygl_GLES2_glSubpixelPrecisionBiasNV_args, "GLES2_NV_conservative_raster", 2, 3910, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glSubpixelPrecisionBiasNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12219,7 +12162,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTestFenceNV_args[] = {"fence"};
-static const PyGLCommand pygl_GLES2_glTestFenceNV_info = {"glTestFenceNV", "glTestFenceNV(fence) -> GLboolean", "($module, fence, /)", pygl_GLES2_glTestFenceNV_args, "GLES2_NV_fence", 1, 3916, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glTestFenceNV_info = {"glTestFenceNV", "glTestFenceNV(fence) -> GLboolean", "($module, fence, /)", pygl_GLES2_glTestFenceNV_args, "GLES2_NV_fence", 1, 3911, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glTestFenceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12236,7 +12179,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexAttachMemoryNV_args[] = {"target", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glTexAttachMemoryNV_info = {"glTexAttachMemoryNV", "glTexAttachMemoryNV(target, memory, offset) -> None", "($module, target, memory, offset, /)", pygl_GLES2_glTexAttachMemoryNV_args, "GLES2_NV_memory_attachment", 3, 3917, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexAttachMemoryNV_info = {"glTexAttachMemoryNV", "glTexAttachMemoryNV(target, memory, offset) -> None", "($module, target, memory, offset, /)", pygl_GLES2_glTexAttachMemoryNV_args, "GLES2_NV_memory_attachment", 3, 3912, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexAttachMemoryNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12255,7 +12198,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexBuffer_args[] = {"target", "internalformat", "buffer"};
-static const PyGLCommand pygl_GLES2_glTexBuffer_info = {"glTexBuffer", "glTexBuffer(target, internalformat, buffer) -> None", "($module, target, internalformat, buffer, /)", pygl_GLES2_glTexBuffer_args, "GLES2_ES_VERSION_3_2", 3, 3918, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexBuffer_info = {"glTexBuffer", "glTexBuffer(target, internalformat, buffer) -> None", "($module, target, internalformat, buffer, /)", pygl_GLES2_glTexBuffer_args, "GLES2_ES_VERSION_3_2", 3, 3913, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexBuffer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12274,7 +12217,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexBufferEXT_args[] = {"target", "internalformat", "buffer"};
-static const PyGLCommand pygl_GLES2_glTexBufferEXT_info = {"glTexBufferEXT", "glTexBufferEXT(target, internalformat, buffer) -> None", "($module, target, internalformat, buffer, /)", pygl_GLES2_glTexBufferEXT_args, "GLES2_EXT_texture_buffer", 3, 3919, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexBufferEXT_info = {"glTexBufferEXT", "glTexBufferEXT(target, internalformat, buffer) -> None", "($module, target, internalformat, buffer, /)", pygl_GLES2_glTexBufferEXT_args, "GLES2_EXT_texture_buffer", 3, 3914, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexBufferEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12293,7 +12236,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexBufferOES_args[] = {"target", "internalformat", "buffer"};
-static const PyGLCommand pygl_GLES2_glTexBufferOES_info = {"glTexBufferOES", "glTexBufferOES(target, internalformat, buffer) -> None", "($module, target, internalformat, buffer, /)", pygl_GLES2_glTexBufferOES_args, "GLES2_OES_texture_buffer", 3, 3920, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexBufferOES_info = {"glTexBufferOES", "glTexBufferOES(target, internalformat, buffer) -> None", "($module, target, internalformat, buffer, /)", pygl_GLES2_glTexBufferOES_args, "GLES2_OES_texture_buffer", 3, 3915, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexBufferOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12312,7 +12255,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexBufferRange_args[] = {"target", "internalformat", "buffer", "offset", "size"};
-static const PyGLCommand pygl_GLES2_glTexBufferRange_info = {"glTexBufferRange", "glTexBufferRange(target, internalformat, buffer, offset, size) -> None", "($module, target, internalformat, buffer, offset, size, /)", pygl_GLES2_glTexBufferRange_args, "GLES2_ES_VERSION_3_2", 5, 3921, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexBufferRange_info = {"glTexBufferRange", "glTexBufferRange(target, internalformat, buffer, offset, size) -> None", "($module, target, internalformat, buffer, offset, size, /)", pygl_GLES2_glTexBufferRange_args, "GLES2_ES_VERSION_3_2", 5, 3916, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexBufferRange(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12333,7 +12276,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexBufferRangeEXT_args[] = {"target", "internalformat", "buffer", "offset", "size"};
-static const PyGLCommand pygl_GLES2_glTexBufferRangeEXT_info = {"glTexBufferRangeEXT", "glTexBufferRangeEXT(target, internalformat, buffer, offset, size) -> None", "($module, target, internalformat, buffer, offset, size, /)", pygl_GLES2_glTexBufferRangeEXT_args, "GLES2_EXT_texture_buffer", 5, 3922, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexBufferRangeEXT_info = {"glTexBufferRangeEXT", "glTexBufferRangeEXT(target, internalformat, buffer, offset, size) -> None", "($module, target, internalformat, buffer, offset, size, /)", pygl_GLES2_glTexBufferRangeEXT_args, "GLES2_EXT_texture_buffer", 5, 3917, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexBufferRangeEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12354,7 +12297,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexBufferRangeOES_args[] = {"target", "internalformat", "buffer", "offset", "size"};
-static const PyGLCommand pygl_GLES2_glTexBufferRangeOES_info = {"glTexBufferRangeOES", "glTexBufferRangeOES(target, internalformat, buffer, offset, size) -> None", "($module, target, internalformat, buffer, offset, size, /)", pygl_GLES2_glTexBufferRangeOES_args, "GLES2_OES_texture_buffer", 5, 3923, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexBufferRangeOES_info = {"glTexBufferRangeOES", "glTexBufferRangeOES(target, internalformat, buffer, offset, size) -> None", "($module, target, internalformat, buffer, offset, size, /)", pygl_GLES2_glTexBufferRangeOES_args, "GLES2_OES_texture_buffer", 5, 3918, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexBufferRangeOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12375,7 +12318,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexEstimateMotionQCOM_args[] = {"ref", "target", "output"};
-static const PyGLCommand pygl_GLES2_glTexEstimateMotionQCOM_info = {"glTexEstimateMotionQCOM", "glTexEstimateMotionQCOM(ref, target, output) -> None", "($module, ref, target, output, /)", pygl_GLES2_glTexEstimateMotionQCOM_args, "GLES2_QCOM_motion_estimation", 3, 3924, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexEstimateMotionQCOM_info = {"glTexEstimateMotionQCOM", "glTexEstimateMotionQCOM(ref, target, output) -> None", "($module, ref, target, output, /)", pygl_GLES2_glTexEstimateMotionQCOM_args, "GLES2_QCOM_motion_estimation", 3, 3919, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexEstimateMotionQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12394,7 +12337,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexEstimateMotionRegionsQCOM_args[] = {"ref", "target", "output", "mask"};
-static const PyGLCommand pygl_GLES2_glTexEstimateMotionRegionsQCOM_info = {"glTexEstimateMotionRegionsQCOM", "glTexEstimateMotionRegionsQCOM(ref, target, output, mask) -> None", "($module, ref, target, output, mask, /)", pygl_GLES2_glTexEstimateMotionRegionsQCOM_args, "GLES2_QCOM_motion_estimation", 4, 3925, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexEstimateMotionRegionsQCOM_info = {"glTexEstimateMotionRegionsQCOM", "glTexEstimateMotionRegionsQCOM(ref, target, output, mask) -> None", "($module, ref, target, output, mask, /)", pygl_GLES2_glTexEstimateMotionRegionsQCOM_args, "GLES2_QCOM_motion_estimation", 4, 3920, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexEstimateMotionRegionsQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12414,7 +12357,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexPageCommitmentEXT_args[] = {"target", "level", "xoffset", "yoffset", "zoffset", "width", "height", "depth", "commit"};
-static const PyGLCommand pygl_GLES2_glTexPageCommitmentEXT_info = {"glTexPageCommitmentEXT", "glTexPageCommitmentEXT(target, level, xoffset, yoffset, zoffset, width, height, depth, commit) -> None", "($module, target, level, xoffset, yoffset, zoffset, width, height, depth, commit, /)", pygl_GLES2_glTexPageCommitmentEXT_args, "GLES2_EXT_sparse_texture", 9, 3926, PYGL_API_GLES2, 0, 9, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexPageCommitmentEXT_info = {"glTexPageCommitmentEXT", "glTexPageCommitmentEXT(target, level, xoffset, yoffset, zoffset, width, height, depth, commit) -> None", "($module, target, level, xoffset, yoffset, zoffset, width, height, depth, commit, /)", pygl_GLES2_glTexPageCommitmentEXT_args, "GLES2_EXT_sparse_texture", 9, 3921, PYGL_API_GLES2, 0, 9, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexPageCommitmentEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12439,7 +12382,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexPageCommitmentMemNV_args[] = {"target", "layer", "level", "xoffset", "yoffset", "zoffset", "width", "height", "depth", "memory", "offset", "commit"};
-static const PyGLCommand pygl_GLES2_glTexPageCommitmentMemNV_info = {"glTexPageCommitmentMemNV", "glTexPageCommitmentMemNV(target, layer, level, xoffset, yoffset, zoffset, width, height, depth, memory, offset, commit) -> None", "($module, target, layer, level, xoffset, yoffset, zoffset, width, height, depth, memory, offset, commit, /)", pygl_GLES2_glTexPageCommitmentMemNV_args, "GLES2_NV_memory_object_sparse", 12, 3927, PYGL_API_GLES2, 0, 12, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexPageCommitmentMemNV_info = {"glTexPageCommitmentMemNV", "glTexPageCommitmentMemNV(target, layer, level, xoffset, yoffset, zoffset, width, height, depth, memory, offset, commit) -> None", "($module, target, layer, level, xoffset, yoffset, zoffset, width, height, depth, memory, offset, commit, /)", pygl_GLES2_glTexPageCommitmentMemNV_args, "GLES2_NV_memory_object_sparse", 12, 3922, PYGL_API_GLES2, 0, 12, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexPageCommitmentMemNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12467,7 +12410,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexParameterIiv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glTexParameterIiv_info = {"glTexParameterIiv", "glTexParameterIiv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameterIiv_args, "GLES2_ES_VERSION_3_2", 3, 3928, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexParameterIiv_info = {"glTexParameterIiv", "glTexParameterIiv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameterIiv_args, "GLES2_ES_VERSION_3_2", 3, 3923, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexParameterIiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12489,7 +12432,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexParameterIivEXT_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glTexParameterIivEXT_info = {"glTexParameterIivEXT", "glTexParameterIivEXT(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameterIivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3929, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexParameterIivEXT_info = {"glTexParameterIivEXT", "glTexParameterIivEXT(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameterIivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3924, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexParameterIivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12511,7 +12454,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexParameterIivOES_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glTexParameterIivOES_info = {"glTexParameterIivOES", "glTexParameterIivOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameterIivOES_args, "GLES2_OES_texture_border_clamp", 3, 3930, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexParameterIivOES_info = {"glTexParameterIivOES", "glTexParameterIivOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameterIivOES_args, "GLES2_OES_texture_border_clamp", 3, 3925, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexParameterIivOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12533,7 +12476,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexParameterIuiv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glTexParameterIuiv_info = {"glTexParameterIuiv", "glTexParameterIuiv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameterIuiv_args, "GLES2_ES_VERSION_3_2", 3, 3931, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexParameterIuiv_info = {"glTexParameterIuiv", "glTexParameterIuiv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameterIuiv_args, "GLES2_ES_VERSION_3_2", 3, 3926, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexParameterIuiv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12555,7 +12498,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexParameterIuivEXT_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glTexParameterIuivEXT_info = {"glTexParameterIuivEXT", "glTexParameterIuivEXT(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameterIuivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3932, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexParameterIuivEXT_info = {"glTexParameterIuivEXT", "glTexParameterIuivEXT(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameterIuivEXT_args, "GLES2_EXT_texture_border_clamp", 3, 3927, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexParameterIuivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12577,7 +12520,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexParameterIuivOES_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glTexParameterIuivOES_info = {"glTexParameterIuivOES", "glTexParameterIuivOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameterIuivOES_args, "GLES2_OES_texture_border_clamp", 3, 3933, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexParameterIuivOES_info = {"glTexParameterIuivOES", "glTexParameterIuivOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameterIuivOES_args, "GLES2_OES_texture_border_clamp", 3, 3928, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexParameterIuivOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12599,7 +12542,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexParameterf_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLES2_glTexParameterf_info = {"glTexParameterf", "glTexParameterf(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES2_glTexParameterf_args, "GLES2_VERSION_GLES2_2_0", 3, 3934, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexParameterf_info = {"glTexParameterf", "glTexParameterf(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES2_glTexParameterf_args, "GLES2_VERSION_GLES2_2_0", 3, 3929, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexParameterf(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12618,7 +12561,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexParameterfv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glTexParameterfv_info = {"glTexParameterfv", "glTexParameterfv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameterfv_args, "GLES2_VERSION_GLES2_2_0", 3, 3935, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexParameterfv_info = {"glTexParameterfv", "glTexParameterfv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameterfv_args, "GLES2_VERSION_GLES2_2_0", 3, 3930, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexParameterfv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12640,7 +12583,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexParameteri_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLES2_glTexParameteri_info = {"glTexParameteri", "glTexParameteri(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES2_glTexParameteri_args, "GLES2_VERSION_GLES2_2_0", 3, 3936, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexParameteri_info = {"glTexParameteri", "glTexParameteri(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES2_glTexParameteri_args, "GLES2_VERSION_GLES2_2_0", 3, 3931, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexParameteri(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12659,7 +12602,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexParameteriv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES2_glTexParameteriv_info = {"glTexParameteriv", "glTexParameteriv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameteriv_args, "GLES2_VERSION_GLES2_2_0", 3, 3937, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexParameteriv_info = {"glTexParameteriv", "glTexParameteriv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES2_glTexParameteriv_args, "GLES2_VERSION_GLES2_2_0", 3, 3932, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12681,7 +12624,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexStorage1DEXT_args[] = {"target", "levels", "internalformat", "width"};
-static const PyGLCommand pygl_GLES2_glTexStorage1DEXT_info = {"glTexStorage1DEXT", "glTexStorage1DEXT(target, levels, internalformat, width) -> None", "($module, target, levels, internalformat, width, /)", pygl_GLES2_glTexStorage1DEXT_args, "GLES2_EXT_texture_storage", 4, 3938, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexStorage1DEXT_info = {"glTexStorage1DEXT", "glTexStorage1DEXT(target, levels, internalformat, width) -> None", "($module, target, levels, internalformat, width, /)", pygl_GLES2_glTexStorage1DEXT_args, "GLES2_EXT_texture_storage", 4, 3933, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexStorage1DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12701,7 +12644,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexStorage2DEXT_args[] = {"target", "levels", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES2_glTexStorage2DEXT_info = {"glTexStorage2DEXT", "glTexStorage2DEXT(target, levels, internalformat, width, height) -> None", "($module, target, levels, internalformat, width, height, /)", pygl_GLES2_glTexStorage2DEXT_args, "GLES2_EXT_texture_storage", 5, 3939, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexStorage2DEXT_info = {"glTexStorage2DEXT", "glTexStorage2DEXT(target, levels, internalformat, width, height) -> None", "($module, target, levels, internalformat, width, height, /)", pygl_GLES2_glTexStorage2DEXT_args, "GLES2_EXT_texture_storage", 5, 3934, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexStorage2DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12722,7 +12665,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexStorage3DEXT_args[] = {"target", "levels", "internalformat", "width", "height", "depth"};
-static const PyGLCommand pygl_GLES2_glTexStorage3DEXT_info = {"glTexStorage3DEXT", "glTexStorage3DEXT(target, levels, internalformat, width, height, depth) -> None", "($module, target, levels, internalformat, width, height, depth, /)", pygl_GLES2_glTexStorage3DEXT_args, "GLES2_EXT_texture_storage", 6, 3940, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexStorage3DEXT_info = {"glTexStorage3DEXT", "glTexStorage3DEXT(target, levels, internalformat, width, height, depth) -> None", "($module, target, levels, internalformat, width, height, depth, /)", pygl_GLES2_glTexStorage3DEXT_args, "GLES2_EXT_texture_storage", 6, 3935, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexStorage3DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12744,7 +12687,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexStorage3DMultisample_args[] = {"target", "samples", "internalformat", "width", "height", "depth", "fixedsamplelocations"};
-static const PyGLCommand pygl_GLES2_glTexStorage3DMultisample_info = {"glTexStorage3DMultisample", "glTexStorage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations) -> None", "($module, target, samples, internalformat, width, height, depth, fixedsamplelocations, /)", pygl_GLES2_glTexStorage3DMultisample_args, "GLES2_ES_VERSION_3_2", 7, 3941, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexStorage3DMultisample_info = {"glTexStorage3DMultisample", "glTexStorage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations) -> None", "($module, target, samples, internalformat, width, height, depth, fixedsamplelocations, /)", pygl_GLES2_glTexStorage3DMultisample_args, "GLES2_ES_VERSION_3_2", 7, 3936, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexStorage3DMultisample(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12767,7 +12710,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexStorage3DMultisampleOES_args[] = {"target", "samples", "internalformat", "width", "height", "depth", "fixedsamplelocations"};
-static const PyGLCommand pygl_GLES2_glTexStorage3DMultisampleOES_info = {"glTexStorage3DMultisampleOES", "glTexStorage3DMultisampleOES(target, samples, internalformat, width, height, depth, fixedsamplelocations) -> None", "($module, target, samples, internalformat, width, height, depth, fixedsamplelocations, /)", pygl_GLES2_glTexStorage3DMultisampleOES_args, "GLES2_OES_texture_storage_multisample_2d_array", 7, 3942, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexStorage3DMultisampleOES_info = {"glTexStorage3DMultisampleOES", "glTexStorage3DMultisampleOES(target, samples, internalformat, width, height, depth, fixedsamplelocations) -> None", "($module, target, samples, internalformat, width, height, depth, fixedsamplelocations, /)", pygl_GLES2_glTexStorage3DMultisampleOES_args, "GLES2_OES_texture_storage_multisample_2d_array", 7, 3937, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexStorage3DMultisampleOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12790,7 +12733,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexStorageAttribs2DEXT_args[] = {"target", "levels", "internalformat", "width", "height", "attrib_list"};
-static const PyGLCommand pygl_GLES2_glTexStorageAttribs2DEXT_info = {"glTexStorageAttribs2DEXT", "glTexStorageAttribs2DEXT(target, levels, internalformat, width, height, attrib_list) -> None", "($module, target, levels, internalformat, width, height, attrib_list, /)", pygl_GLES2_glTexStorageAttribs2DEXT_args, "GLES2_EXT_texture_storage_compression", 6, 3943, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexStorageAttribs2DEXT_info = {"glTexStorageAttribs2DEXT", "glTexStorageAttribs2DEXT(target, levels, internalformat, width, height, attrib_list) -> None", "($module, target, levels, internalformat, width, height, attrib_list, /)", pygl_GLES2_glTexStorageAttribs2DEXT_args, "GLES2_EXT_texture_storage_compression", 6, 3938, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexStorageAttribs2DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12815,7 +12758,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexStorageAttribs3DEXT_args[] = {"target", "levels", "internalformat", "width", "height", "depth", "attrib_list"};
-static const PyGLCommand pygl_GLES2_glTexStorageAttribs3DEXT_info = {"glTexStorageAttribs3DEXT", "glTexStorageAttribs3DEXT(target, levels, internalformat, width, height, depth, attrib_list) -> None", "($module, target, levels, internalformat, width, height, depth, attrib_list, /)", pygl_GLES2_glTexStorageAttribs3DEXT_args, "GLES2_EXT_texture_storage_compression", 7, 3944, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexStorageAttribs3DEXT_info = {"glTexStorageAttribs3DEXT", "glTexStorageAttribs3DEXT(target, levels, internalformat, width, height, depth, attrib_list) -> None", "($module, target, levels, internalformat, width, height, depth, attrib_list, /)", pygl_GLES2_glTexStorageAttribs3DEXT_args, "GLES2_EXT_texture_storage_compression", 7, 3939, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexStorageAttribs3DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12841,7 +12784,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexStorageMem1DEXT_args[] = {"target", "levels", "internalFormat", "width", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glTexStorageMem1DEXT_info = {"glTexStorageMem1DEXT", "glTexStorageMem1DEXT(target, levels, internalFormat, width, memory, offset) -> None", "($module, target, levels, internalFormat, width, memory, offset, /)", pygl_GLES2_glTexStorageMem1DEXT_args, "GLES2_EXT_memory_object", 6, 3945, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexStorageMem1DEXT_info = {"glTexStorageMem1DEXT", "glTexStorageMem1DEXT(target, levels, internalFormat, width, memory, offset) -> None", "($module, target, levels, internalFormat, width, memory, offset, /)", pygl_GLES2_glTexStorageMem1DEXT_args, "GLES2_EXT_memory_object", 6, 3940, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexStorageMem1DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12863,7 +12806,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexStorageMem2DEXT_args[] = {"target", "levels", "internalFormat", "width", "height", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glTexStorageMem2DEXT_info = {"glTexStorageMem2DEXT", "glTexStorageMem2DEXT(target, levels, internalFormat, width, height, memory, offset) -> None", "($module, target, levels, internalFormat, width, height, memory, offset, /)", pygl_GLES2_glTexStorageMem2DEXT_args, "GLES2_EXT_memory_object", 7, 3946, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexStorageMem2DEXT_info = {"glTexStorageMem2DEXT", "glTexStorageMem2DEXT(target, levels, internalFormat, width, height, memory, offset) -> None", "($module, target, levels, internalFormat, width, height, memory, offset, /)", pygl_GLES2_glTexStorageMem2DEXT_args, "GLES2_EXT_memory_object", 7, 3941, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexStorageMem2DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12886,7 +12829,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexStorageMem2DMultisampleEXT_args[] = {"target", "samples", "internalFormat", "width", "height", "fixedSampleLocations", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glTexStorageMem2DMultisampleEXT_info = {"glTexStorageMem2DMultisampleEXT", "glTexStorageMem2DMultisampleEXT(target, samples, internalFormat, width, height, fixedSampleLocations, memory, offset) -> None", "($module, target, samples, internalFormat, width, height, fixedSampleLocations, memory, offset, /)", pygl_GLES2_glTexStorageMem2DMultisampleEXT_args, "GLES2_EXT_memory_object", 8, 3947, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexStorageMem2DMultisampleEXT_info = {"glTexStorageMem2DMultisampleEXT", "glTexStorageMem2DMultisampleEXT(target, samples, internalFormat, width, height, fixedSampleLocations, memory, offset) -> None", "($module, target, samples, internalFormat, width, height, fixedSampleLocations, memory, offset, /)", pygl_GLES2_glTexStorageMem2DMultisampleEXT_args, "GLES2_EXT_memory_object", 8, 3942, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexStorageMem2DMultisampleEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12910,7 +12853,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexStorageMem3DEXT_args[] = {"target", "levels", "internalFormat", "width", "height", "depth", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glTexStorageMem3DEXT_info = {"glTexStorageMem3DEXT", "glTexStorageMem3DEXT(target, levels, internalFormat, width, height, depth, memory, offset) -> None", "($module, target, levels, internalFormat, width, height, depth, memory, offset, /)", pygl_GLES2_glTexStorageMem3DEXT_args, "GLES2_EXT_memory_object", 8, 3948, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexStorageMem3DEXT_info = {"glTexStorageMem3DEXT", "glTexStorageMem3DEXT(target, levels, internalFormat, width, height, depth, memory, offset) -> None", "($module, target, levels, internalFormat, width, height, depth, memory, offset, /)", pygl_GLES2_glTexStorageMem3DEXT_args, "GLES2_EXT_memory_object", 8, 3943, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexStorageMem3DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12934,7 +12877,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexStorageMem3DMultisampleEXT_args[] = {"target", "samples", "internalFormat", "width", "height", "depth", "fixedSampleLocations", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glTexStorageMem3DMultisampleEXT_info = {"glTexStorageMem3DMultisampleEXT", "glTexStorageMem3DMultisampleEXT(target, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset) -> None", "($module, target, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset, /)", pygl_GLES2_glTexStorageMem3DMultisampleEXT_args, "GLES2_EXT_memory_object", 9, 3949, PYGL_API_GLES2, 0, 9, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexStorageMem3DMultisampleEXT_info = {"glTexStorageMem3DMultisampleEXT", "glTexStorageMem3DMultisampleEXT(target, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset) -> None", "($module, target, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset, /)", pygl_GLES2_glTexStorageMem3DMultisampleEXT_args, "GLES2_EXT_memory_object", 9, 3944, PYGL_API_GLES2, 0, 9, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexStorageMem3DMultisampleEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12959,7 +12902,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTextureAttachMemoryNV_args[] = {"texture", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glTextureAttachMemoryNV_info = {"glTextureAttachMemoryNV", "glTextureAttachMemoryNV(texture, memory, offset) -> None", "($module, texture, memory, offset, /)", pygl_GLES2_glTextureAttachMemoryNV_args, "GLES2_NV_memory_attachment", 3, 3950, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glTextureAttachMemoryNV_info = {"glTextureAttachMemoryNV", "glTextureAttachMemoryNV(texture, memory, offset) -> None", "($module, texture, memory, offset, /)", pygl_GLES2_glTextureAttachMemoryNV_args, "GLES2_NV_memory_attachment", 3, 3945, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTextureAttachMemoryNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12977,7 +12920,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES2_glTextureBarrierNV_info = {"glTextureBarrierNV", "glTextureBarrierNV() -> None", "($module, /)", NULL, "GLES2_NV_texture_barrier", 0, 3951, PYGL_API_GLES2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES2_glTextureBarrierNV_info = {"glTextureBarrierNV", "glTextureBarrierNV() -> None", "($module, /)", NULL, "GLES2_NV_texture_barrier", 0, 3946, PYGL_API_GLES2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTextureBarrierNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12993,7 +12936,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTextureFoveationParametersQCOM_args[] = {"texture", "layer", "focalPoint", "focalX", "focalY", "gainX", "gainY", "foveaArea"};
-static const PyGLCommand pygl_GLES2_glTextureFoveationParametersQCOM_info = {"glTextureFoveationParametersQCOM", "glTextureFoveationParametersQCOM(texture, layer, focalPoint, focalX, focalY, gainX, gainY, foveaArea) -> None", "($module, texture, layer, focalPoint, focalX, focalY, gainX, gainY, foveaArea, /)", pygl_GLES2_glTextureFoveationParametersQCOM_args, "GLES2_QCOM_texture_foveated", 8, 3952, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glTextureFoveationParametersQCOM_info = {"glTextureFoveationParametersQCOM", "glTextureFoveationParametersQCOM(texture, layer, focalPoint, focalX, focalY, gainX, gainY, foveaArea) -> None", "($module, texture, layer, focalPoint, focalX, focalY, gainX, gainY, foveaArea, /)", pygl_GLES2_glTextureFoveationParametersQCOM_args, "GLES2_QCOM_texture_foveated", 8, 3947, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTextureFoveationParametersQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13017,7 +12960,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTexturePageCommitmentMemNV_args[] = {"texture", "layer", "level", "xoffset", "yoffset", "zoffset", "width", "height", "depth", "memory", "offset", "commit"};
-static const PyGLCommand pygl_GLES2_glTexturePageCommitmentMemNV_info = {"glTexturePageCommitmentMemNV", "glTexturePageCommitmentMemNV(texture, layer, level, xoffset, yoffset, zoffset, width, height, depth, memory, offset, commit) -> None", "($module, texture, layer, level, xoffset, yoffset, zoffset, width, height, depth, memory, offset, commit, /)", pygl_GLES2_glTexturePageCommitmentMemNV_args, "GLES2_NV_memory_object_sparse", 12, 3953, PYGL_API_GLES2, 0, 12, 0, 0};
+static const PyGLCommand pygl_GLES2_glTexturePageCommitmentMemNV_info = {"glTexturePageCommitmentMemNV", "glTexturePageCommitmentMemNV(texture, layer, level, xoffset, yoffset, zoffset, width, height, depth, memory, offset, commit) -> None", "($module, texture, layer, level, xoffset, yoffset, zoffset, width, height, depth, memory, offset, commit, /)", pygl_GLES2_glTexturePageCommitmentMemNV_args, "GLES2_NV_memory_object_sparse", 12, 3948, PYGL_API_GLES2, 0, 12, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTexturePageCommitmentMemNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13045,7 +12988,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTextureStorage1DEXT_args[] = {"texture", "target", "levels", "internalformat", "width"};
-static const PyGLCommand pygl_GLES2_glTextureStorage1DEXT_info = {"glTextureStorage1DEXT", "glTextureStorage1DEXT(texture, target, levels, internalformat, width) -> None", "($module, texture, target, levels, internalformat, width, /)", pygl_GLES2_glTextureStorage1DEXT_args, "GLES2_EXT_texture_storage", 5, 3954, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glTextureStorage1DEXT_info = {"glTextureStorage1DEXT", "glTextureStorage1DEXT(texture, target, levels, internalformat, width) -> None", "($module, texture, target, levels, internalformat, width, /)", pygl_GLES2_glTextureStorage1DEXT_args, "GLES2_EXT_texture_storage", 5, 3949, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTextureStorage1DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13066,7 +13009,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTextureStorage2DEXT_args[] = {"texture", "target", "levels", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES2_glTextureStorage2DEXT_info = {"glTextureStorage2DEXT", "glTextureStorage2DEXT(texture, target, levels, internalformat, width, height) -> None", "($module, texture, target, levels, internalformat, width, height, /)", pygl_GLES2_glTextureStorage2DEXT_args, "GLES2_EXT_texture_storage", 6, 3955, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glTextureStorage2DEXT_info = {"glTextureStorage2DEXT", "glTextureStorage2DEXT(texture, target, levels, internalformat, width, height) -> None", "($module, texture, target, levels, internalformat, width, height, /)", pygl_GLES2_glTextureStorage2DEXT_args, "GLES2_EXT_texture_storage", 6, 3950, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTextureStorage2DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13088,7 +13031,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTextureStorage3DEXT_args[] = {"texture", "target", "levels", "internalformat", "width", "height", "depth"};
-static const PyGLCommand pygl_GLES2_glTextureStorage3DEXT_info = {"glTextureStorage3DEXT", "glTextureStorage3DEXT(texture, target, levels, internalformat, width, height, depth) -> None", "($module, texture, target, levels, internalformat, width, height, depth, /)", pygl_GLES2_glTextureStorage3DEXT_args, "GLES2_EXT_texture_storage", 7, 3956, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glTextureStorage3DEXT_info = {"glTextureStorage3DEXT", "glTextureStorage3DEXT(texture, target, levels, internalformat, width, height, depth) -> None", "($module, texture, target, levels, internalformat, width, height, depth, /)", pygl_GLES2_glTextureStorage3DEXT_args, "GLES2_EXT_texture_storage", 7, 3951, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTextureStorage3DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13111,7 +13054,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTextureStorageMem1DEXT_args[] = {"texture", "levels", "internalFormat", "width", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glTextureStorageMem1DEXT_info = {"glTextureStorageMem1DEXT", "glTextureStorageMem1DEXT(texture, levels, internalFormat, width, memory, offset) -> None", "($module, texture, levels, internalFormat, width, memory, offset, /)", pygl_GLES2_glTextureStorageMem1DEXT_args, "GLES2_EXT_memory_object", 6, 3957, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glTextureStorageMem1DEXT_info = {"glTextureStorageMem1DEXT", "glTextureStorageMem1DEXT(texture, levels, internalFormat, width, memory, offset) -> None", "($module, texture, levels, internalFormat, width, memory, offset, /)", pygl_GLES2_glTextureStorageMem1DEXT_args, "GLES2_EXT_memory_object", 6, 3952, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTextureStorageMem1DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13133,7 +13076,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTextureStorageMem2DEXT_args[] = {"texture", "levels", "internalFormat", "width", "height", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glTextureStorageMem2DEXT_info = {"glTextureStorageMem2DEXT", "glTextureStorageMem2DEXT(texture, levels, internalFormat, width, height, memory, offset) -> None", "($module, texture, levels, internalFormat, width, height, memory, offset, /)", pygl_GLES2_glTextureStorageMem2DEXT_args, "GLES2_EXT_memory_object", 7, 3958, PYGL_API_GLES2, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES2_glTextureStorageMem2DEXT_info = {"glTextureStorageMem2DEXT", "glTextureStorageMem2DEXT(texture, levels, internalFormat, width, height, memory, offset) -> None", "($module, texture, levels, internalFormat, width, height, memory, offset, /)", pygl_GLES2_glTextureStorageMem2DEXT_args, "GLES2_EXT_memory_object", 7, 3953, PYGL_API_GLES2, 0, 7, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTextureStorageMem2DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13156,7 +13099,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTextureStorageMem2DMultisampleEXT_args[] = {"texture", "samples", "internalFormat", "width", "height", "fixedSampleLocations", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glTextureStorageMem2DMultisampleEXT_info = {"glTextureStorageMem2DMultisampleEXT", "glTextureStorageMem2DMultisampleEXT(texture, samples, internalFormat, width, height, fixedSampleLocations, memory, offset) -> None", "($module, texture, samples, internalFormat, width, height, fixedSampleLocations, memory, offset, /)", pygl_GLES2_glTextureStorageMem2DMultisampleEXT_args, "GLES2_EXT_memory_object", 8, 3959, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glTextureStorageMem2DMultisampleEXT_info = {"glTextureStorageMem2DMultisampleEXT", "glTextureStorageMem2DMultisampleEXT(texture, samples, internalFormat, width, height, fixedSampleLocations, memory, offset) -> None", "($module, texture, samples, internalFormat, width, height, fixedSampleLocations, memory, offset, /)", pygl_GLES2_glTextureStorageMem2DMultisampleEXT_args, "GLES2_EXT_memory_object", 8, 3954, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTextureStorageMem2DMultisampleEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13180,7 +13123,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTextureStorageMem3DEXT_args[] = {"texture", "levels", "internalFormat", "width", "height", "depth", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glTextureStorageMem3DEXT_info = {"glTextureStorageMem3DEXT", "glTextureStorageMem3DEXT(texture, levels, internalFormat, width, height, depth, memory, offset) -> None", "($module, texture, levels, internalFormat, width, height, depth, memory, offset, /)", pygl_GLES2_glTextureStorageMem3DEXT_args, "GLES2_EXT_memory_object", 8, 3960, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glTextureStorageMem3DEXT_info = {"glTextureStorageMem3DEXT", "glTextureStorageMem3DEXT(texture, levels, internalFormat, width, height, depth, memory, offset) -> None", "($module, texture, levels, internalFormat, width, height, depth, memory, offset, /)", pygl_GLES2_glTextureStorageMem3DEXT_args, "GLES2_EXT_memory_object", 8, 3955, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTextureStorageMem3DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13204,7 +13147,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTextureStorageMem3DMultisampleEXT_args[] = {"texture", "samples", "internalFormat", "width", "height", "depth", "fixedSampleLocations", "memory", "offset"};
-static const PyGLCommand pygl_GLES2_glTextureStorageMem3DMultisampleEXT_info = {"glTextureStorageMem3DMultisampleEXT", "glTextureStorageMem3DMultisampleEXT(texture, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset) -> None", "($module, texture, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset, /)", pygl_GLES2_glTextureStorageMem3DMultisampleEXT_args, "GLES2_EXT_memory_object", 9, 3961, PYGL_API_GLES2, 0, 9, 0, 0};
+static const PyGLCommand pygl_GLES2_glTextureStorageMem3DMultisampleEXT_info = {"glTextureStorageMem3DMultisampleEXT", "glTextureStorageMem3DMultisampleEXT(texture, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset) -> None", "($module, texture, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset, /)", pygl_GLES2_glTextureStorageMem3DMultisampleEXT_args, "GLES2_EXT_memory_object", 9, 3956, PYGL_API_GLES2, 0, 9, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTextureStorageMem3DMultisampleEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13229,7 +13172,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTextureViewEXT_args[] = {"texture", "target", "origtexture", "internalformat", "minlevel", "numlevels", "minlayer", "numlayers"};
-static const PyGLCommand pygl_GLES2_glTextureViewEXT_info = {"glTextureViewEXT", "glTextureViewEXT(texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers) -> None", "($module, texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers, /)", pygl_GLES2_glTextureViewEXT_args, "GLES2_EXT_texture_view", 8, 3962, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glTextureViewEXT_info = {"glTextureViewEXT", "glTextureViewEXT(texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers) -> None", "($module, texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers, /)", pygl_GLES2_glTextureViewEXT_args, "GLES2_EXT_texture_view", 8, 3957, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTextureViewEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13253,7 +13196,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTextureViewOES_args[] = {"texture", "target", "origtexture", "internalformat", "minlevel", "numlevels", "minlayer", "numlayers"};
-static const PyGLCommand pygl_GLES2_glTextureViewOES_info = {"glTextureViewOES", "glTextureViewOES(texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers) -> None", "($module, texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers, /)", pygl_GLES2_glTextureViewOES_args, "GLES2_OES_texture_view", 8, 3963, PYGL_API_GLES2, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES2_glTextureViewOES_info = {"glTextureViewOES", "glTextureViewOES(texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers) -> None", "($module, texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers, /)", pygl_GLES2_glTextureViewOES_args, "GLES2_OES_texture_view", 8, 3958, PYGL_API_GLES2, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTextureViewOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13277,7 +13220,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glTransformPathNV_args[] = {"resultPath", "srcPath", "transformType", "transformValues"};
-static const PyGLCommand pygl_GLES2_glTransformPathNV_info = {"glTransformPathNV", "glTransformPathNV(resultPath, srcPath, transformType, transformValues) -> None", "($module, resultPath, srcPath, transformType, transformValues, /)", pygl_GLES2_glTransformPathNV_args, "GLES2_NV_path_rendering", 4, 3964, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glTransformPathNV_info = {"glTransformPathNV", "glTransformPathNV(resultPath, srcPath, transformType, transformValues) -> None", "($module, resultPath, srcPath, transformType, transformValues, /)", pygl_GLES2_glTransformPathNV_args, "GLES2_NV_path_rendering", 4, 3959, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glTransformPathNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13300,7 +13243,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform1f_args[] = {"location", "v0"};
-static const PyGLCommand pygl_GLES2_glUniform1f_info = {"glUniform1f", "glUniform1f(location, v0) -> None", "($module, location, v0, /)", pygl_GLES2_glUniform1f_args, "GLES2_VERSION_GLES2_2_0", 2, 3965, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform1f_info = {"glUniform1f", "glUniform1f(location, v0) -> None", "($module, location, v0, /)", pygl_GLES2_glUniform1f_args, "GLES2_VERSION_GLES2_2_0", 2, 3960, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform1f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13318,7 +13261,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform1fv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform1fv_info = {"glUniform1fv", "glUniform1fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform1fv_args, "GLES2_VERSION_GLES2_2_0", 3, 3966, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform1fv_info = {"glUniform1fv", "glUniform1fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform1fv_args, "GLES2_VERSION_GLES2_2_0", 3, 3961, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform1fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13340,7 +13283,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform1i_args[] = {"location", "v0"};
-static const PyGLCommand pygl_GLES2_glUniform1i_info = {"glUniform1i", "glUniform1i(location, v0) -> None", "($module, location, v0, /)", pygl_GLES2_glUniform1i_args, "GLES2_VERSION_GLES2_2_0", 2, 3967, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform1i_info = {"glUniform1i", "glUniform1i(location, v0) -> None", "($module, location, v0, /)", pygl_GLES2_glUniform1i_args, "GLES2_VERSION_GLES2_2_0", 2, 3962, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform1i(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13358,7 +13301,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform1i64NV_args[] = {"location", "x"};
-static const PyGLCommand pygl_GLES2_glUniform1i64NV_info = {"glUniform1i64NV", "glUniform1i64NV(location, x) -> None", "($module, location, x, /)", pygl_GLES2_glUniform1i64NV_args, "GLES2_NV_gpu_shader5", 2, 3968, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform1i64NV_info = {"glUniform1i64NV", "glUniform1i64NV(location, x) -> None", "($module, location, x, /)", pygl_GLES2_glUniform1i64NV_args, "GLES2_NV_gpu_shader5", 2, 3963, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform1i64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13376,7 +13319,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform1i64vNV_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform1i64vNV_info = {"glUniform1i64vNV", "glUniform1i64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform1i64vNV_args, "GLES2_NV_gpu_shader5", 3, 3969, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform1i64vNV_info = {"glUniform1i64vNV", "glUniform1i64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform1i64vNV_args, "GLES2_NV_gpu_shader5", 3, 3964, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform1i64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13398,7 +13341,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform1iv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform1iv_info = {"glUniform1iv", "glUniform1iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform1iv_args, "GLES2_VERSION_GLES2_2_0", 3, 3970, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform1iv_info = {"glUniform1iv", "glUniform1iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform1iv_args, "GLES2_VERSION_GLES2_2_0", 3, 3965, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform1iv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13420,7 +13363,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform1ui64NV_args[] = {"location", "x"};
-static const PyGLCommand pygl_GLES2_glUniform1ui64NV_info = {"glUniform1ui64NV", "glUniform1ui64NV(location, x) -> None", "($module, location, x, /)", pygl_GLES2_glUniform1ui64NV_args, "GLES2_NV_gpu_shader5", 2, 3971, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform1ui64NV_info = {"glUniform1ui64NV", "glUniform1ui64NV(location, x) -> None", "($module, location, x, /)", pygl_GLES2_glUniform1ui64NV_args, "GLES2_NV_gpu_shader5", 2, 3966, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform1ui64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13438,7 +13381,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform1ui64vNV_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform1ui64vNV_info = {"glUniform1ui64vNV", "glUniform1ui64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform1ui64vNV_args, "GLES2_NV_gpu_shader5", 3, 3972, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform1ui64vNV_info = {"glUniform1ui64vNV", "glUniform1ui64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform1ui64vNV_args, "GLES2_NV_gpu_shader5", 3, 3967, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform1ui64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13460,7 +13403,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform2f_args[] = {"location", "v0", "v1"};
-static const PyGLCommand pygl_GLES2_glUniform2f_info = {"glUniform2f", "glUniform2f(location, v0, v1) -> None", "($module, location, v0, v1, /)", pygl_GLES2_glUniform2f_args, "GLES2_VERSION_GLES2_2_0", 3, 3973, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform2f_info = {"glUniform2f", "glUniform2f(location, v0, v1) -> None", "($module, location, v0, v1, /)", pygl_GLES2_glUniform2f_args, "GLES2_VERSION_GLES2_2_0", 3, 3968, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform2f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13479,7 +13422,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform2fv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform2fv_info = {"glUniform2fv", "glUniform2fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform2fv_args, "GLES2_VERSION_GLES2_2_0", 3, 3974, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform2fv_info = {"glUniform2fv", "glUniform2fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform2fv_args, "GLES2_VERSION_GLES2_2_0", 3, 3969, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform2fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13501,7 +13444,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform2i_args[] = {"location", "v0", "v1"};
-static const PyGLCommand pygl_GLES2_glUniform2i_info = {"glUniform2i", "glUniform2i(location, v0, v1) -> None", "($module, location, v0, v1, /)", pygl_GLES2_glUniform2i_args, "GLES2_VERSION_GLES2_2_0", 3, 3975, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform2i_info = {"glUniform2i", "glUniform2i(location, v0, v1) -> None", "($module, location, v0, v1, /)", pygl_GLES2_glUniform2i_args, "GLES2_VERSION_GLES2_2_0", 3, 3970, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform2i(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13520,7 +13463,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform2i64NV_args[] = {"location", "x", "y"};
-static const PyGLCommand pygl_GLES2_glUniform2i64NV_info = {"glUniform2i64NV", "glUniform2i64NV(location, x, y) -> None", "($module, location, x, y, /)", pygl_GLES2_glUniform2i64NV_args, "GLES2_NV_gpu_shader5", 3, 3976, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform2i64NV_info = {"glUniform2i64NV", "glUniform2i64NV(location, x, y) -> None", "($module, location, x, y, /)", pygl_GLES2_glUniform2i64NV_args, "GLES2_NV_gpu_shader5", 3, 3971, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform2i64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13539,7 +13482,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform2i64vNV_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform2i64vNV_info = {"glUniform2i64vNV", "glUniform2i64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform2i64vNV_args, "GLES2_NV_gpu_shader5", 3, 3977, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform2i64vNV_info = {"glUniform2i64vNV", "glUniform2i64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform2i64vNV_args, "GLES2_NV_gpu_shader5", 3, 3972, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform2i64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13561,7 +13504,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform2iv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform2iv_info = {"glUniform2iv", "glUniform2iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform2iv_args, "GLES2_VERSION_GLES2_2_0", 3, 3978, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform2iv_info = {"glUniform2iv", "glUniform2iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform2iv_args, "GLES2_VERSION_GLES2_2_0", 3, 3973, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform2iv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13583,7 +13526,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform2ui64NV_args[] = {"location", "x", "y"};
-static const PyGLCommand pygl_GLES2_glUniform2ui64NV_info = {"glUniform2ui64NV", "glUniform2ui64NV(location, x, y) -> None", "($module, location, x, y, /)", pygl_GLES2_glUniform2ui64NV_args, "GLES2_NV_gpu_shader5", 3, 3979, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform2ui64NV_info = {"glUniform2ui64NV", "glUniform2ui64NV(location, x, y) -> None", "($module, location, x, y, /)", pygl_GLES2_glUniform2ui64NV_args, "GLES2_NV_gpu_shader5", 3, 3974, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform2ui64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13602,7 +13545,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform2ui64vNV_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform2ui64vNV_info = {"glUniform2ui64vNV", "glUniform2ui64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform2ui64vNV_args, "GLES2_NV_gpu_shader5", 3, 3980, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform2ui64vNV_info = {"glUniform2ui64vNV", "glUniform2ui64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform2ui64vNV_args, "GLES2_NV_gpu_shader5", 3, 3975, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform2ui64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13624,7 +13567,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform3f_args[] = {"location", "v0", "v1", "v2"};
-static const PyGLCommand pygl_GLES2_glUniform3f_info = {"glUniform3f", "glUniform3f(location, v0, v1, v2) -> None", "($module, location, v0, v1, v2, /)", pygl_GLES2_glUniform3f_args, "GLES2_VERSION_GLES2_2_0", 4, 3981, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform3f_info = {"glUniform3f", "glUniform3f(location, v0, v1, v2) -> None", "($module, location, v0, v1, v2, /)", pygl_GLES2_glUniform3f_args, "GLES2_VERSION_GLES2_2_0", 4, 3976, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform3f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13644,7 +13587,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform3fv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform3fv_info = {"glUniform3fv", "glUniform3fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform3fv_args, "GLES2_VERSION_GLES2_2_0", 3, 3982, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform3fv_info = {"glUniform3fv", "glUniform3fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform3fv_args, "GLES2_VERSION_GLES2_2_0", 3, 3977, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform3fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13666,7 +13609,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform3i_args[] = {"location", "v0", "v1", "v2"};
-static const PyGLCommand pygl_GLES2_glUniform3i_info = {"glUniform3i", "glUniform3i(location, v0, v1, v2) -> None", "($module, location, v0, v1, v2, /)", pygl_GLES2_glUniform3i_args, "GLES2_VERSION_GLES2_2_0", 4, 3983, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform3i_info = {"glUniform3i", "glUniform3i(location, v0, v1, v2) -> None", "($module, location, v0, v1, v2, /)", pygl_GLES2_glUniform3i_args, "GLES2_VERSION_GLES2_2_0", 4, 3978, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform3i(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13686,7 +13629,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform3i64NV_args[] = {"location", "x", "y", "z"};
-static const PyGLCommand pygl_GLES2_glUniform3i64NV_info = {"glUniform3i64NV", "glUniform3i64NV(location, x, y, z) -> None", "($module, location, x, y, z, /)", pygl_GLES2_glUniform3i64NV_args, "GLES2_NV_gpu_shader5", 4, 3984, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform3i64NV_info = {"glUniform3i64NV", "glUniform3i64NV(location, x, y, z) -> None", "($module, location, x, y, z, /)", pygl_GLES2_glUniform3i64NV_args, "GLES2_NV_gpu_shader5", 4, 3979, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform3i64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13706,7 +13649,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform3i64vNV_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform3i64vNV_info = {"glUniform3i64vNV", "glUniform3i64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform3i64vNV_args, "GLES2_NV_gpu_shader5", 3, 3985, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform3i64vNV_info = {"glUniform3i64vNV", "glUniform3i64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform3i64vNV_args, "GLES2_NV_gpu_shader5", 3, 3980, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform3i64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13728,7 +13671,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform3iv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform3iv_info = {"glUniform3iv", "glUniform3iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform3iv_args, "GLES2_VERSION_GLES2_2_0", 3, 3986, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform3iv_info = {"glUniform3iv", "glUniform3iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform3iv_args, "GLES2_VERSION_GLES2_2_0", 3, 3981, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform3iv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13750,7 +13693,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform3ui64NV_args[] = {"location", "x", "y", "z"};
-static const PyGLCommand pygl_GLES2_glUniform3ui64NV_info = {"glUniform3ui64NV", "glUniform3ui64NV(location, x, y, z) -> None", "($module, location, x, y, z, /)", pygl_GLES2_glUniform3ui64NV_args, "GLES2_NV_gpu_shader5", 4, 3987, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform3ui64NV_info = {"glUniform3ui64NV", "glUniform3ui64NV(location, x, y, z) -> None", "($module, location, x, y, z, /)", pygl_GLES2_glUniform3ui64NV_args, "GLES2_NV_gpu_shader5", 4, 3982, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform3ui64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13770,7 +13713,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform3ui64vNV_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform3ui64vNV_info = {"glUniform3ui64vNV", "glUniform3ui64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform3ui64vNV_args, "GLES2_NV_gpu_shader5", 3, 3988, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform3ui64vNV_info = {"glUniform3ui64vNV", "glUniform3ui64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform3ui64vNV_args, "GLES2_NV_gpu_shader5", 3, 3983, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform3ui64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13792,7 +13735,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform4f_args[] = {"location", "v0", "v1", "v2", "v3"};
-static const PyGLCommand pygl_GLES2_glUniform4f_info = {"glUniform4f", "glUniform4f(location, v0, v1, v2, v3) -> None", "($module, location, v0, v1, v2, v3, /)", pygl_GLES2_glUniform4f_args, "GLES2_VERSION_GLES2_2_0", 5, 3989, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform4f_info = {"glUniform4f", "glUniform4f(location, v0, v1, v2, v3) -> None", "($module, location, v0, v1, v2, v3, /)", pygl_GLES2_glUniform4f_args, "GLES2_VERSION_GLES2_2_0", 5, 3984, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform4f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13813,7 +13756,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform4fv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform4fv_info = {"glUniform4fv", "glUniform4fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform4fv_args, "GLES2_VERSION_GLES2_2_0", 3, 3990, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform4fv_info = {"glUniform4fv", "glUniform4fv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform4fv_args, "GLES2_VERSION_GLES2_2_0", 3, 3985, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform4fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13835,7 +13778,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform4i_args[] = {"location", "v0", "v1", "v2", "v3"};
-static const PyGLCommand pygl_GLES2_glUniform4i_info = {"glUniform4i", "glUniform4i(location, v0, v1, v2, v3) -> None", "($module, location, v0, v1, v2, v3, /)", pygl_GLES2_glUniform4i_args, "GLES2_VERSION_GLES2_2_0", 5, 3991, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform4i_info = {"glUniform4i", "glUniform4i(location, v0, v1, v2, v3) -> None", "($module, location, v0, v1, v2, v3, /)", pygl_GLES2_glUniform4i_args, "GLES2_VERSION_GLES2_2_0", 5, 3986, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform4i(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13856,7 +13799,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform4i64NV_args[] = {"location", "x", "y", "z", "w"};
-static const PyGLCommand pygl_GLES2_glUniform4i64NV_info = {"glUniform4i64NV", "glUniform4i64NV(location, x, y, z, w) -> None", "($module, location, x, y, z, w, /)", pygl_GLES2_glUniform4i64NV_args, "GLES2_NV_gpu_shader5", 5, 3992, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform4i64NV_info = {"glUniform4i64NV", "glUniform4i64NV(location, x, y, z, w) -> None", "($module, location, x, y, z, w, /)", pygl_GLES2_glUniform4i64NV_args, "GLES2_NV_gpu_shader5", 5, 3987, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform4i64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13877,7 +13820,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform4i64vNV_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform4i64vNV_info = {"glUniform4i64vNV", "glUniform4i64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform4i64vNV_args, "GLES2_NV_gpu_shader5", 3, 3993, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform4i64vNV_info = {"glUniform4i64vNV", "glUniform4i64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform4i64vNV_args, "GLES2_NV_gpu_shader5", 3, 3988, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform4i64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13899,7 +13842,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform4iv_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform4iv_info = {"glUniform4iv", "glUniform4iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform4iv_args, "GLES2_VERSION_GLES2_2_0", 3, 3994, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform4iv_info = {"glUniform4iv", "glUniform4iv(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform4iv_args, "GLES2_VERSION_GLES2_2_0", 3, 3989, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform4iv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13921,7 +13864,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform4ui64NV_args[] = {"location", "x", "y", "z", "w"};
-static const PyGLCommand pygl_GLES2_glUniform4ui64NV_info = {"glUniform4ui64NV", "glUniform4ui64NV(location, x, y, z, w) -> None", "($module, location, x, y, z, w, /)", pygl_GLES2_glUniform4ui64NV_args, "GLES2_NV_gpu_shader5", 5, 3995, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform4ui64NV_info = {"glUniform4ui64NV", "glUniform4ui64NV(location, x, y, z, w) -> None", "($module, location, x, y, z, w, /)", pygl_GLES2_glUniform4ui64NV_args, "GLES2_NV_gpu_shader5", 5, 3990, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform4ui64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13942,7 +13885,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniform4ui64vNV_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniform4ui64vNV_info = {"glUniform4ui64vNV", "glUniform4ui64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform4ui64vNV_args, "GLES2_NV_gpu_shader5", 3, 3996, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniform4ui64vNV_info = {"glUniform4ui64vNV", "glUniform4ui64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniform4ui64vNV_args, "GLES2_NV_gpu_shader5", 3, 3991, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniform4ui64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13964,7 +13907,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniformHandleui64IMG_args[] = {"location", "value"};
-static const PyGLCommand pygl_GLES2_glUniformHandleui64IMG_info = {"glUniformHandleui64IMG", "glUniformHandleui64IMG(location, value) -> None", "($module, location, value, /)", pygl_GLES2_glUniformHandleui64IMG_args, "GLES2_IMG_bindless_texture", 2, 3997, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniformHandleui64IMG_info = {"glUniformHandleui64IMG", "glUniformHandleui64IMG(location, value) -> None", "($module, location, value, /)", pygl_GLES2_glUniformHandleui64IMG_args, "GLES2_IMG_bindless_texture", 2, 3992, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniformHandleui64IMG(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13982,7 +13925,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniformHandleui64NV_args[] = {"location", "value"};
-static const PyGLCommand pygl_GLES2_glUniformHandleui64NV_info = {"glUniformHandleui64NV", "glUniformHandleui64NV(location, value) -> None", "($module, location, value, /)", pygl_GLES2_glUniformHandleui64NV_args, "GLES2_NV_bindless_texture", 2, 3998, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniformHandleui64NV_info = {"glUniformHandleui64NV", "glUniformHandleui64NV(location, value) -> None", "($module, location, value, /)", pygl_GLES2_glUniformHandleui64NV_args, "GLES2_NV_bindless_texture", 2, 3993, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniformHandleui64NV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14000,7 +13943,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniformHandleui64vIMG_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniformHandleui64vIMG_info = {"glUniformHandleui64vIMG", "glUniformHandleui64vIMG(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniformHandleui64vIMG_args, "GLES2_IMG_bindless_texture", 3, 3999, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniformHandleui64vIMG_info = {"glUniformHandleui64vIMG", "glUniformHandleui64vIMG(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniformHandleui64vIMG_args, "GLES2_IMG_bindless_texture", 3, 3994, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniformHandleui64vIMG(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14022,7 +13965,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniformHandleui64vNV_args[] = {"location", "count", "value"};
-static const PyGLCommand pygl_GLES2_glUniformHandleui64vNV_info = {"glUniformHandleui64vNV", "glUniformHandleui64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniformHandleui64vNV_args, "GLES2_NV_bindless_texture", 3, 4000, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniformHandleui64vNV_info = {"glUniformHandleui64vNV", "glUniformHandleui64vNV(location, count, value) -> None", "($module, location, count, value, /)", pygl_GLES2_glUniformHandleui64vNV_args, "GLES2_NV_bindless_texture", 3, 3995, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniformHandleui64vNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14044,7 +13987,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniformMatrix2fv_args[] = {"location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glUniformMatrix2fv_info = {"glUniformMatrix2fv", "glUniformMatrix2fv(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix2fv_args, "GLES2_VERSION_GLES2_2_0", 4, 4001, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniformMatrix2fv_info = {"glUniformMatrix2fv", "glUniformMatrix2fv(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix2fv_args, "GLES2_VERSION_GLES2_2_0", 4, 3996, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniformMatrix2fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14067,7 +14010,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniformMatrix2x3fvNV_args[] = {"location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glUniformMatrix2x3fvNV_info = {"glUniformMatrix2x3fvNV", "glUniformMatrix2x3fvNV(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix2x3fvNV_args, "GLES2_NV_non_square_matrices", 4, 4002, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniformMatrix2x3fvNV_info = {"glUniformMatrix2x3fvNV", "glUniformMatrix2x3fvNV(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix2x3fvNV_args, "GLES2_NV_non_square_matrices", 4, 3997, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniformMatrix2x3fvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14090,7 +14033,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniformMatrix2x4fvNV_args[] = {"location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glUniformMatrix2x4fvNV_info = {"glUniformMatrix2x4fvNV", "glUniformMatrix2x4fvNV(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix2x4fvNV_args, "GLES2_NV_non_square_matrices", 4, 4003, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniformMatrix2x4fvNV_info = {"glUniformMatrix2x4fvNV", "glUniformMatrix2x4fvNV(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix2x4fvNV_args, "GLES2_NV_non_square_matrices", 4, 3998, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniformMatrix2x4fvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14113,7 +14056,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniformMatrix3fv_args[] = {"location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glUniformMatrix3fv_info = {"glUniformMatrix3fv", "glUniformMatrix3fv(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix3fv_args, "GLES2_VERSION_GLES2_2_0", 4, 4004, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniformMatrix3fv_info = {"glUniformMatrix3fv", "glUniformMatrix3fv(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix3fv_args, "GLES2_VERSION_GLES2_2_0", 4, 3999, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniformMatrix3fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14136,7 +14079,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniformMatrix3x2fvNV_args[] = {"location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glUniformMatrix3x2fvNV_info = {"glUniformMatrix3x2fvNV", "glUniformMatrix3x2fvNV(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix3x2fvNV_args, "GLES2_NV_non_square_matrices", 4, 4005, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniformMatrix3x2fvNV_info = {"glUniformMatrix3x2fvNV", "glUniformMatrix3x2fvNV(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix3x2fvNV_args, "GLES2_NV_non_square_matrices", 4, 4000, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniformMatrix3x2fvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14159,7 +14102,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniformMatrix3x4fvNV_args[] = {"location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glUniformMatrix3x4fvNV_info = {"glUniformMatrix3x4fvNV", "glUniformMatrix3x4fvNV(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix3x4fvNV_args, "GLES2_NV_non_square_matrices", 4, 4006, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniformMatrix3x4fvNV_info = {"glUniformMatrix3x4fvNV", "glUniformMatrix3x4fvNV(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix3x4fvNV_args, "GLES2_NV_non_square_matrices", 4, 4001, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniformMatrix3x4fvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14182,7 +14125,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniformMatrix4fv_args[] = {"location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glUniformMatrix4fv_info = {"glUniformMatrix4fv", "glUniformMatrix4fv(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix4fv_args, "GLES2_VERSION_GLES2_2_0", 4, 4007, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniformMatrix4fv_info = {"glUniformMatrix4fv", "glUniformMatrix4fv(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix4fv_args, "GLES2_VERSION_GLES2_2_0", 4, 4002, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniformMatrix4fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14205,7 +14148,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniformMatrix4x2fvNV_args[] = {"location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glUniformMatrix4x2fvNV_info = {"glUniformMatrix4x2fvNV", "glUniformMatrix4x2fvNV(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix4x2fvNV_args, "GLES2_NV_non_square_matrices", 4, 4008, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniformMatrix4x2fvNV_info = {"glUniformMatrix4x2fvNV", "glUniformMatrix4x2fvNV(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix4x2fvNV_args, "GLES2_NV_non_square_matrices", 4, 4003, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniformMatrix4x2fvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14228,7 +14171,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUniformMatrix4x3fvNV_args[] = {"location", "count", "transpose", "value"};
-static const PyGLCommand pygl_GLES2_glUniformMatrix4x3fvNV_info = {"glUniformMatrix4x3fvNV", "glUniformMatrix4x3fvNV(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix4x3fvNV_args, "GLES2_NV_non_square_matrices", 4, 4009, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glUniformMatrix4x3fvNV_info = {"glUniformMatrix4x3fvNV", "glUniformMatrix4x3fvNV(location, count, transpose, value) -> None", "($module, location, count, transpose, value, /)", pygl_GLES2_glUniformMatrix4x3fvNV_args, "GLES2_NV_non_square_matrices", 4, 4004, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUniformMatrix4x3fvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14251,7 +14194,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUnmapBufferOES_args[] = {"target"};
-static const PyGLCommand pygl_GLES2_glUnmapBufferOES_info = {"glUnmapBufferOES", "glUnmapBufferOES(target) -> GLboolean", "($module, target, /)", pygl_GLES2_glUnmapBufferOES_args, "GLES2_OES_mapbuffer", 1, 4010, PYGL_API_GLES2, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES2_glUnmapBufferOES_info = {"glUnmapBufferOES", "glUnmapBufferOES(target) -> GLboolean", "($module, target, /)", pygl_GLES2_glUnmapBufferOES_args, "GLES2_OES_mapbuffer", 1, 4005, PYGL_API_GLES2, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLES2_glUnmapBufferOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14268,7 +14211,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUseProgram_args[] = {"program"};
-static const PyGLCommand pygl_GLES2_glUseProgram_info = {"glUseProgram", "glUseProgram(program) -> None", "($module, program, /)", pygl_GLES2_glUseProgram_args, "GLES2_VERSION_GLES2_2_0", 1, 4011, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glUseProgram_info = {"glUseProgram", "glUseProgram(program) -> None", "($module, program, /)", pygl_GLES2_glUseProgram_args, "GLES2_VERSION_GLES2_2_0", 1, 4006, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUseProgram(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14285,7 +14228,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUseProgramStagesEXT_args[] = {"pipeline", "stages", "program"};
-static const PyGLCommand pygl_GLES2_glUseProgramStagesEXT_info = {"glUseProgramStagesEXT", "glUseProgramStagesEXT(pipeline, stages, program) -> None", "($module, pipeline, stages, program, /)", pygl_GLES2_glUseProgramStagesEXT_args, "GLES2_EXT_separate_shader_objects", 3, 4012, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glUseProgramStagesEXT_info = {"glUseProgramStagesEXT", "glUseProgramStagesEXT(pipeline, stages, program) -> None", "($module, pipeline, stages, program, /)", pygl_GLES2_glUseProgramStagesEXT_args, "GLES2_EXT_separate_shader_objects", 3, 4007, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUseProgramStagesEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14304,7 +14247,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glUseShaderProgramEXT_args[] = {"type", "program"};
-static const PyGLCommand pygl_GLES2_glUseShaderProgramEXT_info = {"glUseShaderProgramEXT", "glUseShaderProgramEXT(type, program) -> None", "($module, type, program, /)", pygl_GLES2_glUseShaderProgramEXT_args, "GLES2_EXT_separate_shader_objects", 2, 4013, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glUseShaderProgramEXT_info = {"glUseShaderProgramEXT", "glUseShaderProgramEXT(type, program) -> None", "($module, type, program, /)", pygl_GLES2_glUseShaderProgramEXT_args, "GLES2_EXT_separate_shader_objects", 2, 4008, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glUseShaderProgramEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14322,7 +14265,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glValidateProgram_args[] = {"program"};
-static const PyGLCommand pygl_GLES2_glValidateProgram_info = {"glValidateProgram", "glValidateProgram(program) -> None", "($module, program, /)", pygl_GLES2_glValidateProgram_args, "GLES2_VERSION_GLES2_2_0", 1, 4014, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glValidateProgram_info = {"glValidateProgram", "glValidateProgram(program) -> None", "($module, program, /)", pygl_GLES2_glValidateProgram_args, "GLES2_VERSION_GLES2_2_0", 1, 4009, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glValidateProgram(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14339,7 +14282,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glValidateProgramPipelineEXT_args[] = {"pipeline"};
-static const PyGLCommand pygl_GLES2_glValidateProgramPipelineEXT_info = {"glValidateProgramPipelineEXT", "glValidateProgramPipelineEXT(pipeline) -> None", "($module, pipeline, /)", pygl_GLES2_glValidateProgramPipelineEXT_args, "GLES2_EXT_separate_shader_objects", 1, 4015, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glValidateProgramPipelineEXT_info = {"glValidateProgramPipelineEXT", "glValidateProgramPipelineEXT(pipeline) -> None", "($module, pipeline, /)", pygl_GLES2_glValidateProgramPipelineEXT_args, "GLES2_EXT_separate_shader_objects", 1, 4010, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glValidateProgramPipelineEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14356,7 +14299,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glVertexAttrib1f_args[] = {"index", "x"};
-static const PyGLCommand pygl_GLES2_glVertexAttrib1f_info = {"glVertexAttrib1f", "glVertexAttrib1f(index, x) -> None", "($module, index, x, /)", pygl_GLES2_glVertexAttrib1f_args, "GLES2_VERSION_GLES2_2_0", 2, 4016, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glVertexAttrib1f_info = {"glVertexAttrib1f", "glVertexAttrib1f(index, x) -> None", "($module, index, x, /)", pygl_GLES2_glVertexAttrib1f_args, "GLES2_VERSION_GLES2_2_0", 2, 4011, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glVertexAttrib1f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14374,7 +14317,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glVertexAttrib1fv_args[] = {"index", "v"};
-static const PyGLCommand pygl_GLES2_glVertexAttrib1fv_info = {"glVertexAttrib1fv", "glVertexAttrib1fv(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glVertexAttrib1fv_args, "GLES2_VERSION_GLES2_2_0", 2, 4017, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glVertexAttrib1fv_info = {"glVertexAttrib1fv", "glVertexAttrib1fv(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glVertexAttrib1fv_args, "GLES2_VERSION_GLES2_2_0", 2, 4012, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glVertexAttrib1fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14395,7 +14338,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glVertexAttrib2f_args[] = {"index", "x", "y"};
-static const PyGLCommand pygl_GLES2_glVertexAttrib2f_info = {"glVertexAttrib2f", "glVertexAttrib2f(index, x, y) -> None", "($module, index, x, y, /)", pygl_GLES2_glVertexAttrib2f_args, "GLES2_VERSION_GLES2_2_0", 3, 4018, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glVertexAttrib2f_info = {"glVertexAttrib2f", "glVertexAttrib2f(index, x, y) -> None", "($module, index, x, y, /)", pygl_GLES2_glVertexAttrib2f_args, "GLES2_VERSION_GLES2_2_0", 3, 4013, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glVertexAttrib2f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14414,7 +14357,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glVertexAttrib2fv_args[] = {"index", "v"};
-static const PyGLCommand pygl_GLES2_glVertexAttrib2fv_info = {"glVertexAttrib2fv", "glVertexAttrib2fv(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glVertexAttrib2fv_args, "GLES2_VERSION_GLES2_2_0", 2, 4019, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glVertexAttrib2fv_info = {"glVertexAttrib2fv", "glVertexAttrib2fv(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glVertexAttrib2fv_args, "GLES2_VERSION_GLES2_2_0", 2, 4014, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glVertexAttrib2fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14435,7 +14378,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glVertexAttrib3f_args[] = {"index", "x", "y", "z"};
-static const PyGLCommand pygl_GLES2_glVertexAttrib3f_info = {"glVertexAttrib3f", "glVertexAttrib3f(index, x, y, z) -> None", "($module, index, x, y, z, /)", pygl_GLES2_glVertexAttrib3f_args, "GLES2_VERSION_GLES2_2_0", 4, 4020, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glVertexAttrib3f_info = {"glVertexAttrib3f", "glVertexAttrib3f(index, x, y, z) -> None", "($module, index, x, y, z, /)", pygl_GLES2_glVertexAttrib3f_args, "GLES2_VERSION_GLES2_2_0", 4, 4015, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glVertexAttrib3f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14455,7 +14398,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glVertexAttrib3fv_args[] = {"index", "v"};
-static const PyGLCommand pygl_GLES2_glVertexAttrib3fv_info = {"glVertexAttrib3fv", "glVertexAttrib3fv(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glVertexAttrib3fv_args, "GLES2_VERSION_GLES2_2_0", 2, 4021, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glVertexAttrib3fv_info = {"glVertexAttrib3fv", "glVertexAttrib3fv(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glVertexAttrib3fv_args, "GLES2_VERSION_GLES2_2_0", 2, 4016, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glVertexAttrib3fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14476,7 +14419,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glVertexAttrib4f_args[] = {"index", "x", "y", "z", "w"};
-static const PyGLCommand pygl_GLES2_glVertexAttrib4f_info = {"glVertexAttrib4f", "glVertexAttrib4f(index, x, y, z, w) -> None", "($module, index, x, y, z, w, /)", pygl_GLES2_glVertexAttrib4f_args, "GLES2_VERSION_GLES2_2_0", 5, 4022, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glVertexAttrib4f_info = {"glVertexAttrib4f", "glVertexAttrib4f(index, x, y, z, w) -> None", "($module, index, x, y, z, w, /)", pygl_GLES2_glVertexAttrib4f_args, "GLES2_VERSION_GLES2_2_0", 5, 4017, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glVertexAttrib4f(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14497,7 +14440,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glVertexAttrib4fv_args[] = {"index", "v"};
-static const PyGLCommand pygl_GLES2_glVertexAttrib4fv_info = {"glVertexAttrib4fv", "glVertexAttrib4fv(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glVertexAttrib4fv_args, "GLES2_VERSION_GLES2_2_0", 2, 4023, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glVertexAttrib4fv_info = {"glVertexAttrib4fv", "glVertexAttrib4fv(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glVertexAttrib4fv_args, "GLES2_VERSION_GLES2_2_0", 2, 4018, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glVertexAttrib4fv(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14518,7 +14461,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glVertexAttribDivisorANGLE_args[] = {"index", "divisor"};
-static const PyGLCommand pygl_GLES2_glVertexAttribDivisorANGLE_info = {"glVertexAttribDivisorANGLE", "glVertexAttribDivisorANGLE(index, divisor) -> None", "($module, index, divisor, /)", pygl_GLES2_glVertexAttribDivisorANGLE_args, "GLES2_ANGLE_instanced_arrays", 2, 4024, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glVertexAttribDivisorANGLE_info = {"glVertexAttribDivisorANGLE", "glVertexAttribDivisorANGLE(index, divisor) -> None", "($module, index, divisor, /)", pygl_GLES2_glVertexAttribDivisorANGLE_args, "GLES2_ANGLE_instanced_arrays", 2, 4019, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glVertexAttribDivisorANGLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14536,7 +14479,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glVertexAttribDivisorEXT_args[] = {"index", "divisor"};
-static const PyGLCommand pygl_GLES2_glVertexAttribDivisorEXT_info = {"glVertexAttribDivisorEXT", "glVertexAttribDivisorEXT(index, divisor) -> None", "($module, index, divisor, /)", pygl_GLES2_glVertexAttribDivisorEXT_args, "GLES2_EXT_instanced_arrays", 2, 4025, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glVertexAttribDivisorEXT_info = {"glVertexAttribDivisorEXT", "glVertexAttribDivisorEXT(index, divisor) -> None", "($module, index, divisor, /)", pygl_GLES2_glVertexAttribDivisorEXT_args, "GLES2_EXT_instanced_arrays", 2, 4020, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glVertexAttribDivisorEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14554,7 +14497,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glVertexAttribDivisorNV_args[] = {"index", "divisor"};
-static const PyGLCommand pygl_GLES2_glVertexAttribDivisorNV_info = {"glVertexAttribDivisorNV", "glVertexAttribDivisorNV(index, divisor) -> None", "($module, index, divisor, /)", pygl_GLES2_glVertexAttribDivisorNV_args, "GLES2_NV_instanced_arrays", 2, 4026, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glVertexAttribDivisorNV_info = {"glVertexAttribDivisorNV", "glVertexAttribDivisorNV(index, divisor) -> None", "($module, index, divisor, /)", pygl_GLES2_glVertexAttribDivisorNV_args, "GLES2_NV_instanced_arrays", 2, 4021, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glVertexAttribDivisorNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14572,7 +14515,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glViewport_args[] = {"x", "y", "width", "height"};
-static const PyGLCommand pygl_GLES2_glViewport_info = {"glViewport", "glViewport(x, y, width, height) -> None", "($module, x, y, width, height, /)", pygl_GLES2_glViewport_args, "GLES2_VERSION_GLES2_2_0", 4, 4027, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glViewport_info = {"glViewport", "glViewport(x, y, width, height) -> None", "($module, x, y, width, height, /)", pygl_GLES2_glViewport_args, "GLES2_VERSION_GLES2_2_0", 4, 4022, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glViewport(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14592,7 +14535,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glViewportArrayvNV_args[] = {"first", "count", "v"};
-static const PyGLCommand pygl_GLES2_glViewportArrayvNV_info = {"glViewportArrayvNV", "glViewportArrayvNV(first, count, v) -> None", "($module, first, count, v, /)", pygl_GLES2_glViewportArrayvNV_args, "GLES2_NV_viewport_array", 3, 4028, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glViewportArrayvNV_info = {"glViewportArrayvNV", "glViewportArrayvNV(first, count, v) -> None", "($module, first, count, v, /)", pygl_GLES2_glViewportArrayvNV_args, "GLES2_NV_viewport_array", 3, 4023, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glViewportArrayvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14614,7 +14557,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glViewportArrayvOES_args[] = {"first", "count", "v"};
-static const PyGLCommand pygl_GLES2_glViewportArrayvOES_info = {"glViewportArrayvOES", "glViewportArrayvOES(first, count, v) -> None", "($module, first, count, v, /)", pygl_GLES2_glViewportArrayvOES_args, "GLES2_OES_viewport_array", 3, 4029, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glViewportArrayvOES_info = {"glViewportArrayvOES", "glViewportArrayvOES(first, count, v) -> None", "($module, first, count, v, /)", pygl_GLES2_glViewportArrayvOES_args, "GLES2_OES_viewport_array", 3, 4024, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glViewportArrayvOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14636,7 +14579,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glViewportIndexedfNV_args[] = {"index", "x", "y", "w", "h"};
-static const PyGLCommand pygl_GLES2_glViewportIndexedfNV_info = {"glViewportIndexedfNV", "glViewportIndexedfNV(index, x, y, w, h) -> None", "($module, index, x, y, w, h, /)", pygl_GLES2_glViewportIndexedfNV_args, "GLES2_NV_viewport_array", 5, 4030, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glViewportIndexedfNV_info = {"glViewportIndexedfNV", "glViewportIndexedfNV(index, x, y, w, h) -> None", "($module, index, x, y, w, h, /)", pygl_GLES2_glViewportIndexedfNV_args, "GLES2_NV_viewport_array", 5, 4025, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glViewportIndexedfNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14657,7 +14600,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glViewportIndexedfOES_args[] = {"index", "x", "y", "w", "h"};
-static const PyGLCommand pygl_GLES2_glViewportIndexedfOES_info = {"glViewportIndexedfOES", "glViewportIndexedfOES(index, x, y, w, h) -> None", "($module, index, x, y, w, h, /)", pygl_GLES2_glViewportIndexedfOES_args, "GLES2_OES_viewport_array", 5, 4031, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glViewportIndexedfOES_info = {"glViewportIndexedfOES", "glViewportIndexedfOES(index, x, y, w, h) -> None", "($module, index, x, y, w, h, /)", pygl_GLES2_glViewportIndexedfOES_args, "GLES2_OES_viewport_array", 5, 4026, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glViewportIndexedfOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14678,7 +14621,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glViewportIndexedfvNV_args[] = {"index", "v"};
-static const PyGLCommand pygl_GLES2_glViewportIndexedfvNV_info = {"glViewportIndexedfvNV", "glViewportIndexedfvNV(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glViewportIndexedfvNV_args, "GLES2_NV_viewport_array", 2, 4032, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glViewportIndexedfvNV_info = {"glViewportIndexedfvNV", "glViewportIndexedfvNV(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glViewportIndexedfvNV_args, "GLES2_NV_viewport_array", 2, 4027, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glViewportIndexedfvNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14699,7 +14642,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glViewportIndexedfvOES_args[] = {"index", "v"};
-static const PyGLCommand pygl_GLES2_glViewportIndexedfvOES_info = {"glViewportIndexedfvOES", "glViewportIndexedfvOES(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glViewportIndexedfvOES_args, "GLES2_OES_viewport_array", 2, 4033, PYGL_API_GLES2, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES2_glViewportIndexedfvOES_info = {"glViewportIndexedfvOES", "glViewportIndexedfvOES(index, v) -> None", "($module, index, v, /)", pygl_GLES2_glViewportIndexedfvOES_args, "GLES2_OES_viewport_array", 2, 4028, PYGL_API_GLES2, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLES2_glViewportIndexedfvOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14720,7 +14663,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glViewportPositionWScaleNV_args[] = {"index", "xcoeff", "ycoeff"};
-static const PyGLCommand pygl_GLES2_glViewportPositionWScaleNV_info = {"glViewportPositionWScaleNV", "glViewportPositionWScaleNV(index, xcoeff, ycoeff) -> None", "($module, index, xcoeff, ycoeff, /)", pygl_GLES2_glViewportPositionWScaleNV_args, "GLES2_NV_clip_space_w_scaling", 3, 4034, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glViewportPositionWScaleNV_info = {"glViewportPositionWScaleNV", "glViewportPositionWScaleNV(index, xcoeff, ycoeff) -> None", "($module, index, xcoeff, ycoeff, /)", pygl_GLES2_glViewportPositionWScaleNV_args, "GLES2_NV_clip_space_w_scaling", 3, 4029, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glViewportPositionWScaleNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14739,7 +14682,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glViewportSwizzleNV_args[] = {"index", "swizzlex", "swizzley", "swizzlez", "swizzlew"};
-static const PyGLCommand pygl_GLES2_glViewportSwizzleNV_info = {"glViewportSwizzleNV", "glViewportSwizzleNV(index, swizzlex, swizzley, swizzlez, swizzlew) -> None", "($module, index, swizzlex, swizzley, swizzlez, swizzlew, /)", pygl_GLES2_glViewportSwizzleNV_args, "GLES2_NV_viewport_swizzle", 5, 4035, PYGL_API_GLES2, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES2_glViewportSwizzleNV_info = {"glViewportSwizzleNV", "glViewportSwizzleNV(index, swizzlex, swizzley, swizzlez, swizzlew) -> None", "($module, index, swizzlex, swizzley, swizzlez, swizzlew, /)", pygl_GLES2_glViewportSwizzleNV_args, "GLES2_NV_viewport_swizzle", 5, 4030, PYGL_API_GLES2, 0, 5, 0, 0};
 
 static PyObject *
 pygl_GLES2_glViewportSwizzleNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14760,7 +14703,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glWaitSemaphoreEXT_args[] = {"semaphore", "numBufferBarriers", "buffers", "numTextureBarriers", "textures", "srcLayouts"};
-static const PyGLCommand pygl_GLES2_glWaitSemaphoreEXT_info = {"glWaitSemaphoreEXT", "glWaitSemaphoreEXT(semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, srcLayouts) -> None", "($module, semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, srcLayouts, /)", pygl_GLES2_glWaitSemaphoreEXT_args, "GLES2_EXT_semaphore", 6, 4036, PYGL_API_GLES2, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES2_glWaitSemaphoreEXT_info = {"glWaitSemaphoreEXT", "glWaitSemaphoreEXT(semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, srcLayouts) -> None", "($module, semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, srcLayouts, /)", pygl_GLES2_glWaitSemaphoreEXT_args, "GLES2_EXT_semaphore", 6, 4031, PYGL_API_GLES2, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLES2_glWaitSemaphoreEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14785,7 +14728,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glWaitSyncAPPLE_args[] = {"sync", "flags", "timeout"};
-static const PyGLCommand pygl_GLES2_glWaitSyncAPPLE_info = {"glWaitSyncAPPLE", "glWaitSyncAPPLE(sync, flags, timeout) -> None", "($module, sync, flags, timeout, /)", pygl_GLES2_glWaitSyncAPPLE_args, "GLES2_APPLE_sync", 3, 4037, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glWaitSyncAPPLE_info = {"glWaitSyncAPPLE", "glWaitSyncAPPLE(sync, flags, timeout) -> None", "($module, sync, flags, timeout, /)", pygl_GLES2_glWaitSyncAPPLE_args, "GLES2_APPLE_sync", 3, 4032, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glWaitSyncAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14804,7 +14747,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glWaitVkSemaphoreNV_args[] = {"vkSemaphore"};
-static const PyGLCommand pygl_GLES2_glWaitVkSemaphoreNV_info = {"glWaitVkSemaphoreNV", "glWaitVkSemaphoreNV(vkSemaphore) -> None", "($module, vkSemaphore, /)", pygl_GLES2_glWaitVkSemaphoreNV_args, "GLES2_NV_draw_vulkan_image", 1, 4038, PYGL_API_GLES2, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES2_glWaitVkSemaphoreNV_info = {"glWaitVkSemaphoreNV", "glWaitVkSemaphoreNV(vkSemaphore) -> None", "($module, vkSemaphore, /)", pygl_GLES2_glWaitVkSemaphoreNV_args, "GLES2_NV_draw_vulkan_image", 1, 4033, PYGL_API_GLES2, 0, 1, 0, 0};
 
 static PyObject *
 pygl_GLES2_glWaitVkSemaphoreNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14821,7 +14764,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glWeightPathsNV_args[] = {"resultPath", "numPaths", "paths", "weights"};
-static const PyGLCommand pygl_GLES2_glWeightPathsNV_info = {"glWeightPathsNV", "glWeightPathsNV(resultPath, numPaths, paths, weights) -> None", "($module, resultPath, numPaths, paths, weights, /)", pygl_GLES2_glWeightPathsNV_args, "GLES2_NV_path_rendering", 4, 4039, PYGL_API_GLES2, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES2_glWeightPathsNV_info = {"glWeightPathsNV", "glWeightPathsNV(resultPath, numPaths, paths, weights) -> None", "($module, resultPath, numPaths, paths, weights, /)", pygl_GLES2_glWeightPathsNV_args, "GLES2_NV_path_rendering", 4, 4034, PYGL_API_GLES2, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLES2_glWeightPathsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -14844,7 +14787,7 @@ _fail:
 
 
 static const char *const pygl_GLES2_glWindowRectanglesEXT_args[] = {"mode", "count", "box"};
-static const PyGLCommand pygl_GLES2_glWindowRectanglesEXT_info = {"glWindowRectanglesEXT", "glWindowRectanglesEXT(mode, count, box) -> None", "($module, mode, count, box, /)", pygl_GLES2_glWindowRectanglesEXT_args, "GLES2_EXT_window_rectangles", 3, 4040, PYGL_API_GLES2, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES2_glWindowRectanglesEXT_info = {"glWindowRectanglesEXT", "glWindowRectanglesEXT(mode, count, box) -> None", "($module, mode, count, box, /)", pygl_GLES2_glWindowRectanglesEXT_args, "GLES2_EXT_window_rectangles", 3, 4035, PYGL_API_GLES2, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLES2_glWindowRectanglesEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -15132,9 +15075,7 @@ const PyGLEntry pygl_entries_GLES2[] = {
     {&pygl_GLES2_glGetPerfMonitorCounterDataAMD_info, (vectorcallfunc)pygl_GLES2_glGetPerfMonitorCounterDataAMD},
     {&pygl_GLES2_glGetPerfMonitorCounterInfoAMD_info, (vectorcallfunc)pygl_GLES2_glGetPerfMonitorCounterInfoAMD},
     {&pygl_GLES2_glGetPerfMonitorCounterStringAMD_info, (vectorcallfunc)pygl_GLES2_glGetPerfMonitorCounterStringAMD},
-    {&pygl_GLES2_glGetPerfMonitorCountersAMD_info, (vectorcallfunc)pygl_GLES2_glGetPerfMonitorCountersAMD},
     {&pygl_GLES2_glGetPerfMonitorGroupStringAMD_info, (vectorcallfunc)pygl_GLES2_glGetPerfMonitorGroupStringAMD},
-    {&pygl_GLES2_glGetPerfMonitorGroupsAMD_info, (vectorcallfunc)pygl_GLES2_glGetPerfMonitorGroupsAMD},
     {&pygl_GLES2_glGetPerfQueryDataINTEL_info, (vectorcallfunc)pygl_GLES2_glGetPerfQueryDataINTEL},
     {&pygl_GLES2_glGetPerfQueryIdByNameINTEL_info, (vectorcallfunc)pygl_GLES2_glGetPerfQueryIdByNameINTEL},
     {&pygl_GLES2_glGetPerfQueryInfoINTEL_info, (vectorcallfunc)pygl_GLES2_glGetPerfQueryInfoINTEL},

@@ -1123,3 +1123,87 @@ being made, and the cleanup path costs one counter increment per array argument.
 - `OpenGL/arrays/arraydatatype.py` — the handler registry the fast path falls
   through to.
 - `accelerate/src/*.pyx` — where Cython keeps its place.
+
+---
+
+## What landed
+
+Implemented on the `c-dispatch` branch. The design above held; what follows is
+what changed under measurement, and where the implementation stands.
+
+### Corrections to the plan, from measurement
+
+- **A binding is `(api, name)`, not `name`.** `glTexImage2D` exists in GL and
+  in GLES2 as separate bindings resolved from separate libraries. The plan's
+  3,508 unique commands are **4,839 bindings** across GL, GLES1/2/3, GLSC2,
+  GLX, WGL and EGL. EGL is in scope after all: its registry is not vendored,
+  but the shipped `OpenGL/raw/EGL` tree carries the same facts.
+- **Context switching cannot be detected per call.** `glXGetCurrentContext`
+  costs **95 ns** on the reference machine against `glGetError`'s 7 ns, so the
+  notification design the plan specifies is not merely preferable, it is
+  forced. Resolution re-reads the current context, which makes a missed
+  notification self-correcting for every entry point the new context has not
+  used yet; `PYOPENGL_CONTEXT_TRACKING=strict` pays the 95 ns for the exact
+  answer.
+- **Error checking through `GL_KHR_debug` is worth more than estimated.**
+  Checking costs **0.8 ns** rather than the 11 ns of a `glGetError` round
+  trip, so leaving it on stops being a trade against speed.
+- **The friendly modules are not the only source of truth.** Reading them
+  alone marks `glReadPixels` as pass-through, because `images.py` reaches it
+  through a differently-named wrapper. The extractor cross-checks the
+  registry's `COMPSIZE(format,type,…)` lengths, so the image family is
+  identified by what it is.
+- **An output must be the trailing argument.** Five commands
+  (`glGetPerfMonitorGroupsAMD` and relatives) have an output in the middle,
+  where no arity makes "the caller omitted it" unambiguous. They stay on
+  ctypes with that reason recorded.
+
+### Measured
+
+Reference machine as above, `OpenGL_accelerate` active, error checking on.
+
+| call | ctypes | C | |
+|---|---|---|---|
+| `glBindTexture(GL_TEXTURE_2D, 0)` | 407 ns | 58 ns | 7.0× |
+| `glUniform1f(loc, 1.0)` | 382 ns | 51 ns | 7.5× |
+| `glUniformMatrix4fv(loc,1,False,numpy 4×4)` | 1184 ns | 106 ns | 11.2× |
+| `glGetIntegerv(GL_MAX_TEXTURE_SIZE)` | 1280 ns | 513 ns | 2.5× |
+| empty Python function | 32 ns | 32 ns | — |
+
+`glGetIntegerv` gains least because allocating the output array dominates what
+is left.
+
+### Coverage
+
+**4,574 of 4,839 bindings (94.5%).** What remains, with the reason each is
+still on ctypes, is what `src/check_registry.py` prints:
+
+| | |
+|---|---|
+| image family (`glTexImage*`, `glReadPixels`, …) | 174 |
+| variadic family (`glVertex`, `glColor`, …) | 55 |
+| struct-pointer returns (GLX queries) | 12 |
+| client-array pointer family | 8 |
+| string-array parameters | 8 |
+| outputs that are not trailing | 5 |
+| other converters | 3 |
+
+### Phases
+
+0 infrastructure, 1 annotation extraction, 3 Tier 1 and arrays, 4 Tier 2
+including the 1,798-entry `_glgets` table, 6 per-context dispatch, and 7 error
+checking including `GL_KHR_debug` are done. Phase 5 has one family of five —
+`glShaderSource`, which also established how a hand-written entry point is
+registered beside the generated ones. Phase 8's docstrings, text signatures and
+`.pyi` stubs are done. Phase 2's differential harness exists as the
+array-acceptance matrix and running both implementations over the whole suite,
+rather than as a per-entry-point generator. Phase 9's virtual packages are not
+started. Phase 10 is deliberately not taken: ctypes remains the default.
+
+### Beyond the phases
+
+`src/check_registry.py` compares the shipped bindings against the registry.
+It found the shipped tree already lags: **7 registry commands with no binding,
+3 argument-name differences and 158 enums with no constant**, none of them
+caused by this work. They are recorded in `registry_baseline.json` with a
+reason, so the tool reports only what is new since.

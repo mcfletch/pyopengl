@@ -20,6 +20,9 @@ __all__ = [
     'install',
     'entry_points',
     'suspend_error_checking',
+    'use_debug_output',
+    'debug_output_available',
+    'set_error_checking',
 ]
 
 #: Which implementation the process is using.  ``PYOPENGL_DISPATCH=ctypes``
@@ -193,6 +196,85 @@ def suspend_error_checking(suspend):
     """
     if ACTIVE:
         _c.suspend_error_checking(bool(suspend))
+
+
+#: GL_KHR_debug enums, so that turning the mechanism on needs no import from
+#: a particular API module.
+_DEBUG_OUTPUT = 0x92E0
+_DEBUG_OUTPUT_SYNCHRONOUS = 0x8242
+_DEBUG_SEVERITY_NOTIFICATION = 0x826B
+_DONT_CARE = 0x1100
+
+
+def debug_output_available():
+    """Whether the current context reports errors through GL_KHR_debug."""
+    if not ACTIVE:
+        return False
+    proc = entry_points.get(('GL', 'glDebugMessageCallback'))
+    return bool(proc) if proc is not None else False
+
+
+def use_debug_output(enable=True):
+    """Notice GL errors through GL_KHR_debug rather than a glGetError per call.
+
+    A per-call ``glGetError`` is a driver round trip and it is the whole cost
+    of error checking.  With this on, the driver reports an error through a
+    callback during the call itself, and the check afterwards is a read of the
+    flag that callback set.  What a caller sees does not change: the same
+    exception, raised from the same call.
+
+    Returns True when it took effect.  It needs a context offering
+    ``GL_KHR_debug``; without one, error checking stays as it was.
+    """
+    if not ACTIVE:
+        return False
+    if not enable:
+        _c.set_error_mode(0)
+        return True
+    if not debug_output_available():
+        return False
+
+    from OpenGL.GL import (
+        glDebugMessageCallback,
+        glDebugMessageControl,
+        glEnable,
+    )
+
+    address = _c.debug_callback_address()
+    callback = ctypes.cast(ctypes.c_void_p(address), _debug_callback_type())
+    glEnable(_DEBUG_OUTPUT)
+    # Synchronous, because the callback has to run during the call it belongs
+    # to for the stub to attribute the error to the right entry point.
+    glEnable(_DEBUG_OUTPUT_SYNCHRONOUS)
+    glDebugMessageCallback(callback, None)
+    # Notifications are chatter; the callback only cares about errors, and not
+    # asking for the rest keeps the driver from formatting them.
+    glDebugMessageControl(
+        _DONT_CARE, _DONT_CARE, _DEBUG_SEVERITY_NOTIFICATION, 0, None, False
+    )
+    _c.set_error_mode(1)
+    # The callback holds the reference the driver will call through.
+    _installed_callbacks.append(callback)
+    return True
+
+
+_installed_callbacks = []
+
+
+def _debug_callback_type():
+    from OpenGL.raw.GL._types import GLDEBUGPROC
+
+    return GLDEBUGPROC
+
+
+def set_error_checking(enable=True, entry_point=None):
+    """Turn per-call error checking on or off, for one entry point or all.
+
+    Unlike ``OpenGL.ERROR_CHECKING``, which is read once at import, this takes
+    effect immediately and can be scoped to a single entry point.
+    """
+    if ACTIVE:
+        _c.set_error_checking(bool(enable), entry_point)
 
 
 def make_current(handle):

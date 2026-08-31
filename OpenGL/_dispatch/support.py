@@ -249,3 +249,16 @@ def signature_for(name, text_signature):
         signature = inspect.signature(namespace[name])
         _signatures[name] = signature
     return signature
+
+
+def raise_debug_error(identifier, message, name):
+    """Turn a GL_KHR_debug error report into the exception glGetError would.
+
+    The driver has already said what went wrong, so the message is the
+    driver's rather than a code looked up after the fact.
+    """
+    raise error.GLError(
+        err=identifier,
+        description=message,
+        baseOperation=name,
+    )

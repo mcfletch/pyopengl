@@ -95,6 +95,25 @@ def _size_expression(command, parameter):
     raise ValueError('no C expression for %r' % (size,))
 
 
+def _outputs_are_trailing(command):
+    """Whether every output is at the end of the argument list.
+
+    An output is optional -- the caller may pass their own array or leave it to
+    be allocated -- and that is only expressible positionally when the outputs
+    trail.  An output in the middle has no arity at which omitting it is
+    unambiguous, because the next argument would shift into its place.
+    """
+    positions = [
+        index
+        for index, parameter in enumerate(command.parameters)
+        if parameter.is_output
+    ]
+    if not positions:
+        return True
+    total = len(command.parameters)
+    return positions == list(range(total - len(positions), total))
+
+
 def hand_written(command):
     """The hand-written implementation for this command, or None."""
     return handwritten.lookup(command.api, command.name)
@@ -135,6 +154,8 @@ def exclusion_reason(command):
             return 'output with no expressible size'
         if not parameter.is_array and parameter.macro is None:
             return 'unknown parameter type: %s' % (parameter.ctype.base,)
+    if not _outputs_are_trailing(command):
+        return 'outputs are not the trailing arguments'
     return ''
 
 
@@ -174,7 +195,7 @@ def is_emittable(command):
             return False
         if not parameter.is_array and parameter.macro is None:
             return False
-    return True
+    return _outputs_are_trailing(command)
 
 
 def _return_statement(command, result='_result'):

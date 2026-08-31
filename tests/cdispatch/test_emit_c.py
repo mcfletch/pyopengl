@@ -414,3 +414,52 @@ class TestPointerReturns:
         assert not emit_c.is_emittable(
             command(name='glXChooseVisual', return_type='XVisualInfo *')
         )
+
+
+class TestOutputPosition:
+    """An output that is not a trailing argument cannot be optional.
+
+    ``glGetPerfMonitorGroupsAMD(numGroups, groupsSize, groups)`` has outputs at
+    positions 0 and 2, so there is no arity at which "the caller omitted the
+    output" is unambiguous -- omitting it would shift the next argument into
+    its place.  Five commands are shaped this way and they stay on ctypes.
+    """
+
+    def leading_output(self):
+        return command(
+            name='glGetPerfMonitorGroupsAMD',
+            parameters=[
+                (
+                    'numGroups',
+                    'GLint *',
+                    {'direction': model.OUT, 'size': model.Fixed(1)},
+                ),
+                ('groupsSize', 'GLsizei', {}),
+                (
+                    'groups',
+                    'GLuint *',
+                    {'direction': model.OUT, 'size': model.FromArg(argument=1)},
+                ),
+            ],
+        )
+
+    def test_is_not_emitted(self):
+        assert not emit_c.is_emittable(self.leading_output())
+
+    def test_the_reason_is_stated(self):
+        assert 'trailing' in emit_c.exclusion_reason(self.leading_output())
+
+    def test_trailing_outputs_are_still_emitted(self):
+        assert emit_c.is_emittable(
+            command(
+                name='glGenTextures',
+                parameters=[
+                    ('n', 'GLsizei', {}),
+                    (
+                        'textures',
+                        'GLuint *',
+                        {'direction': model.OUT, 'size': model.FromArg(argument=0)},
+                    ),
+                ],
+            )
+        )
