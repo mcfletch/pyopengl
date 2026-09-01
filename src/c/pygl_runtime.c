@@ -175,7 +175,14 @@ static void pygl_sync_context(void)
     }
 }
 
-/* The per-call form, for strict tracking. */
+/* The per-call form.  Uses the raw address of whichever interface was active
+ * when the layer was configured, since it cannot afford a Python call.
+ *
+ * That address is chosen before any context exists, so on a system serving
+ * both GLX and EGL it can be the wrong one -- and the wrong one answers "no
+ * context" rather than failing, which would turn a live context into a
+ * NoContext error.  A null answer is therefore checked against the platform
+ * layer, which knows which interface owns the current context. */
 static void pygl_sync_context_fast(void)
 {
     void *handle;
@@ -184,6 +191,10 @@ static void pygl_sync_context_fast(void)
         return;
     }
     handle = pygl_get_current_context();
+    if (handle == NULL) {
+        pygl_sync_context();
+        return;
+    }
     if (handle != pygl_current->handle) {
         pygl_make_current(handle);
     }
