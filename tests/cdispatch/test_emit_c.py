@@ -223,9 +223,9 @@ class TestSelection:
     def test_a_family_with_no_hand_written_body_is_not_emitted(self):
         assert not emit_c.is_emittable(command(name='glTexImage2D', helper='image'))
 
-    def test_image_sized_outputs_are_not_emitted_yet(self):
-        """An image's size depends on the current pixel-store state."""
-        assert not emit_c.is_emittable(
+    def test_image_sized_outputs_are_emitted(self):
+        """The size is computed in Python; the call belongs to the C."""
+        assert emit_c.is_emittable(
             command(
                 name='glReadPixels',
                 parameters=[

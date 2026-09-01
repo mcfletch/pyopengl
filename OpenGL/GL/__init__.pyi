@@ -7339,11 +7339,11 @@ def glGetClipPlanefOES(plane: int, equation: FloatArray | None = None) -> FloatA
 def glGetClipPlanexOES(plane: int, equation: IntArray | None = None) -> IntArrayResult:
     """glGetClipPlanexOES(plane) -> equation"""
 
-def glGetColorTable(target: int, format: int, type: int, table: AnyArray) -> None:
-    """glGetColorTable(target, format, type, table) -> None"""
+def glGetColorTable(target: int, format: int, type: int, table: AnyArray | None = None) -> AnyArrayResult:
+    """glGetColorTable(target, format, type) -> table"""
 
-def glGetColorTableEXT(target: int, format: int, type: int, data: AnyArray) -> None:
-    """glGetColorTableEXT(target, format, type, data) -> None"""
+def glGetColorTableEXT(target: int, format: int, type: int, data: AnyArray | None = None) -> AnyArrayResult:
+    """glGetColorTableEXT(target, format, type) -> data"""
 
 def glGetColorTableParameterfv(target: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
     """glGetColorTableParameterfv(target, pname) -> params"""
@@ -7363,8 +7363,8 @@ def glGetColorTableParameterivEXT(target: int, pname: int, params: IntArray | No
 def glGetColorTableParameterivSGI(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetColorTableParameterivSGI(target, pname) -> params"""
 
-def glGetColorTableSGI(target: int, format: int, type: int, table: AnyArray) -> None:
-    """glGetColorTableSGI(target, format, type, table) -> None"""
+def glGetColorTableSGI(target: int, format: int, type: int, table: AnyArray | None = None) -> AnyArrayResult:
+    """glGetColorTableSGI(target, format, type) -> table"""
 
 def glGetCombinerInputParameterfvNV(stage: int, portion: int, variable: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
     """glGetCombinerInputParameterfvNV(stage, portion, variable, pname) -> params"""
@@ -7402,11 +7402,11 @@ def glGetCompressedTextureImageEXT(texture: int, target: int, lod: int, img: Any
 def glGetCompressedTextureSubImage(texture: int, level: int, xoffset: int, yoffset: int, zoffset: int, width: int, height: int, depth: int, bufSize: int, pixels: AnyArray) -> None:
     """glGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, bufSize, pixels) -> None"""
 
-def glGetConvolutionFilter(target: int, format: int, type: int, image: AnyArray) -> None:
-    """glGetConvolutionFilter(target, format, type, image) -> None"""
+def glGetConvolutionFilter(target: int, format: int, type: int, image: AnyArray | None = None) -> AnyArrayResult:
+    """glGetConvolutionFilter(target, format, type) -> image"""
 
-def glGetConvolutionFilterEXT(target: int, format: int, type: int, image: AnyArray) -> None:
-    """glGetConvolutionFilterEXT(target, format, type, image) -> None"""
+def glGetConvolutionFilterEXT(target: int, format: int, type: int, image: AnyArray | None = None) -> AnyArrayResult:
+    """glGetConvolutionFilterEXT(target, format, type) -> image"""
 
 def glGetConvolutionParameterfv(target: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
     """glGetConvolutionParameterfv(target, pname) -> params"""
@@ -7537,11 +7537,11 @@ def glGetGraphicsResetStatusKHR() -> int:
 def glGetHandleARB(pname: int) -> int:
     """glGetHandleARB(pname) -> GLhandleARB"""
 
-def glGetHistogram(target: int, reset: bool, format: int, type: int, values: AnyArray) -> None:
-    """glGetHistogram(target, reset, format, type, values) -> None"""
+def glGetHistogram(target: int, reset: bool, format: int, type: int, values: AnyArray | None = None) -> AnyArrayResult:
+    """glGetHistogram(target, reset, format, type) -> values"""
 
-def glGetHistogramEXT(target: int, reset: bool, format: int, type: int, values: AnyArray) -> None:
-    """glGetHistogramEXT(target, reset, format, type, values) -> None"""
+def glGetHistogramEXT(target: int, reset: bool, format: int, type: int, values: AnyArray | None = None) -> AnyArrayResult:
+    """glGetHistogramEXT(target, reset, format, type) -> values"""
 
 def glGetHistogramParameterfv(target: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
     """glGetHistogramParameterfv(target, pname) -> params"""
@@ -7687,11 +7687,11 @@ def glGetMemoryObjectDetachedResourcesuivNV(memory: int, pname: int, first: int,
 def glGetMemoryObjectParameterivEXT(memoryObject: int, pname: int, params: IntArray) -> None:
     """glGetMemoryObjectParameterivEXT(memoryObject, pname, params) -> None"""
 
-def glGetMinmax(target: int, reset: bool, format: int, type: int, values: AnyArray) -> None:
-    """glGetMinmax(target, reset, format, type, values) -> None"""
+def glGetMinmax(target: int, reset: bool, format: int, type: int, values: AnyArray | None = None) -> AnyArrayResult:
+    """glGetMinmax(target, reset, format, type) -> values"""
 
-def glGetMinmaxEXT(target: int, reset: bool, format: int, type: int, values: AnyArray) -> None:
-    """glGetMinmaxEXT(target, reset, format, type, values) -> None"""
+def glGetMinmaxEXT(target: int, reset: bool, format: int, type: int, values: AnyArray | None = None) -> AnyArrayResult:
+    """glGetMinmaxEXT(target, reset, format, type) -> values"""
 
 def glGetMinmaxParameterfv(target: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
     """glGetMinmaxParameterfv(target, pname) -> params"""
@@ -7720,8 +7720,8 @@ def glGetMultiTexGenfvEXT(texunit: int, coord: int, pname: int, params: FloatArr
 def glGetMultiTexGenivEXT(texunit: int, coord: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetMultiTexGenivEXT(texunit, coord, pname) -> params"""
 
-def glGetMultiTexImageEXT(texunit: int, target: int, level: int, format: int, type: int, pixels: AnyArray) -> None:
-    """glGetMultiTexImageEXT(texunit, target, level, format, type, pixels) -> None"""
+def glGetMultiTexImageEXT(texunit: int, target: int, level: int, format: int, type: int, pixels: AnyArray | None = None) -> AnyArrayResult:
+    """glGetMultiTexImageEXT(texunit, target, level, format, type) -> pixels"""
 
 def glGetMultiTexLevelParameterfvEXT(texunit: int, target: int, level: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
     """glGetMultiTexLevelParameterfvEXT(texunit, target, level, pname) -> params"""
@@ -8131,11 +8131,11 @@ def glGetSemaphoreParameterivNV(semaphore: int, pname: int, params: IntArray) ->
 def glGetSemaphoreParameterui64vEXT(semaphore: int, pname: int, params: UInt64Array) -> None:
     """glGetSemaphoreParameterui64vEXT(semaphore, pname, params) -> None"""
 
-def glGetSeparableFilter(target: int, format: int, type: int, row: AnyArray, column: AnyArray, span: AnyArray) -> None:
-    """glGetSeparableFilter(target, format, type, row, column, span) -> None"""
+def glGetSeparableFilter(target: int, format: int, type: int, row: AnyArray | None = None, column: AnyArray | None = None, span: AnyArray | None = None) -> tuple[AnyArrayResult, AnyArrayResult, AnyArrayResult]:
+    """glGetSeparableFilter(target, format, type) -> row, column, span"""
 
-def glGetSeparableFilterEXT(target: int, format: int, type: int, row: AnyArray, column: AnyArray, span: AnyArray) -> None:
-    """glGetSeparableFilterEXT(target, format, type, row, column, span) -> None"""
+def glGetSeparableFilterEXT(target: int, format: int, type: int, row: AnyArray | None = None, column: AnyArray | None = None, span: AnyArray | None = None) -> tuple[AnyArrayResult, AnyArrayResult, AnyArrayResult]:
+    """glGetSeparableFilterEXT(target, format, type) -> row, column, span"""
 
 def glGetShaderInfoLog(shader: int, bufSize: int, length: IntArray | None = None, infoLog: ByteArray | None = None) -> tuple[ByteArrayResult, IntArrayResult]:
     """glGetShaderInfoLog(shader, bufSize) -> infoLog, length"""
@@ -8209,8 +8209,8 @@ def glGetTexGeniv(coord: int, pname: int, params: IntArray | None = None) -> Int
 def glGetTexGenxvOES(coord: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetTexGenxvOES(coord, pname) -> params"""
 
-def glGetTexImage(target: int, level: int, format: int, type: int, pixels: AnyArray) -> None:
-    """glGetTexImage(target, level, format, type, pixels) -> None"""
+def glGetTexImage(target: int, level: int, format: int, type: int, pixels: AnyArray | None = None) -> AnyArrayResult:
+    """glGetTexImage(target, level, format, type) -> pixels"""
 
 def glGetTexLevelParameterfv(target: int, level: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
     """glGetTexLevelParameterfv(target, level, pname) -> params"""
@@ -8254,8 +8254,8 @@ def glGetTextureHandleNV(texture: int) -> int:
 def glGetTextureImage(texture: int, level: int, format: int, type: int, bufSize: int, pixels: AnyArray) -> None:
     """glGetTextureImage(texture, level, format, type, bufSize, pixels) -> None"""
 
-def glGetTextureImageEXT(texture: int, target: int, level: int, format: int, type: int, pixels: AnyArray) -> None:
-    """glGetTextureImageEXT(texture, target, level, format, type, pixels) -> None"""
+def glGetTextureImageEXT(texture: int, target: int, level: int, format: int, type: int, pixels: AnyArray | None = None) -> AnyArrayResult:
+    """glGetTextureImageEXT(texture, target, level, format, type) -> pixels"""
 
 def glGetTextureLevelParameterfv(texture: int, level: int, pname: int, params: FloatArray) -> None:
     """glGetTextureLevelParameterfv(texture, level, pname, params) -> None"""
@@ -11095,8 +11095,8 @@ def glReadBuffer(src: int) -> None:
 def glReadInstrumentsSGIX(marker: int) -> None:
     """glReadInstrumentsSGIX(marker) -> None"""
 
-def glReadPixels(x: int, y: int, width: int, height: int, format: int, type: int, pixels: AnyArray) -> None:
-    """glReadPixels(x, y, width, height, format, type, pixels) -> None"""
+def glReadPixels(x: int, y: int, width: int, height: int, format: int, type: int, pixels: AnyArray | None = None) -> AnyArrayResult:
+    """glReadPixels(x, y, width, height, format, type) -> pixels"""
 
 def glReadnPixels(x: int, y: int, width: int, height: int, format: int, type: int, bufSize: int, data: AnyArray) -> None:
     """glReadnPixels(x, y, width, height, format, type, bufSize, data) -> None"""

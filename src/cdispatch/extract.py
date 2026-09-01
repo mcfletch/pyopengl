@@ -435,6 +435,45 @@ def _registry_lengths(registry_root):
     return lengths
 
 
+#: The names a COMPSIZE uses for an image's extent, in the order the GL
+#: declares them.
+_DIMENSION_NAMES = ('width', 'height', 'depth')
+
+#: Entry points that read an image out rather than sending one in.  The
+#: registry does not mark the direction, and the name is what says it.
+_IMAGE_READERS = ('glGet', 'glRead')
+
+
+def _writes_its_image(name):
+    return name.startswith(_IMAGE_READERS)
+
+
+def _image_size(command, length):
+    """Turn a pixels parameter's ``COMPSIZE`` into an :class:`ImageSize`.
+
+    The registry names the arguments the length depends on; which of them is
+    the format, which the type and which the extent is what the C stub needs
+    in order to hand them to the sizing code.
+    """
+    variables = [
+        variable.strip()
+        for variable in length[len('COMPSIZE'):].strip('()').split(',')
+    ]
+    index_of = {p.name: i for i, p in enumerate(command.parameters)}
+    if 'format' not in index_of or 'type' not in index_of:
+        return None
+    dimensions = tuple(
+        index_of[name]
+        for name in _DIMENSION_NAMES
+        if name in variables and name in index_of
+    )
+    return model.ImageSize(
+        format_argument=index_of['format'],
+        type_argument=index_of['type'],
+        dimensions=dimensions,
+    )
+
+
 def _is_image_length(length):
     """A ``COMPSIZE`` that depends on the pixel format is an image.
 
@@ -455,17 +494,41 @@ _IMAGE_PREFIXES = ('glCompressedTex', 'glCompressedMultiTex', 'glGetCompressedTe
 
 
 def _apply_registry(commands, registry_root):
+    """Fold what the registry says about parameter sizing into the records."""
     lengths = _registry_lengths(registry_root)
+    by_name = {}
     for (api, name), command in commands.items():
-        if command.helper:
-            continue
-        if name.startswith(_IMAGE_PREFIXES):
-            command.helper = 'image'
-            continue
-        for parameter, length in lengths.get(name, {}).items():
-            if _is_image_length(length):
+        by_name.setdefault(name, []).append(command)
+    for name, group in by_name.items():
+        sizes = lengths.get(name, {})
+        for command in group:
+            if command.helper and command.helper != 'image':
+                continue
+            if name.startswith(_IMAGE_PREFIXES):
+                # A compressed image carries its own size, so there is nothing
+                # to compute -- but nothing here knows the layout either.
                 command.helper = 'image'
-                break
+                continue
+            index_of = {p.name: i for i, p in enumerate(command.parameters)}
+            for parameter_name, length in sizes.items():
+                if not _is_image_length(length):
+                    continue
+                if parameter_name not in index_of:
+                    command.helper = 'image'
+                    break
+                size = _image_size(command, length)
+                if size is None:
+                    # No format and type to size it by: the extent comes from
+                    # querying the object, which is the Python layer's job.
+                    command.helper = 'image'
+                    break
+                parameter = command.parameters[index_of[parameter_name]]
+                parameter.size = size
+                # An image the layer can size does not need the Python family
+                # that used to own it.  `pixels` on a query is written into.
+                command.helper = ''
+                if _writes_its_image(name):
+                    parameter.direction = model.OUT
 
 
 def extract_tree(root, registry_root=None):

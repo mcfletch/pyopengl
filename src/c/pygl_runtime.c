@@ -909,6 +909,74 @@ int pygl_array_out_glget(GLProc *self, PyObject *object, const PyGLElement *elem
     return 0;
 }
 
+/* Hand the sizing to OpenGL.images, which owns the tables and the
+ * glPixelStorei setup, and keep whatever it answers with alive for the call. */
+static int pygl_image(GLProc *self, const char *method, PyObject *object,
+                      unsigned int format, unsigned int type, int rank, int d0,
+                      int d1, int d2, PyGLBuf *out)
+{
+    PyObject *converted, *pointer;
+    void *address;
+
+    out->owner = NULL;
+    out->have_view = 0;
+    out->pointer = NULL;
+
+    converted = PyObject_CallMethod(pygl_support, method, "sIIiiiiO",
+                                    self->info->name, format, type, rank, d0, d1,
+                                    d2, object ? object : Py_None);
+    if (converted == NULL) {
+        return -1;
+    }
+    if (converted == Py_None) {
+        /* A null image is meaningful: glTexImage2D with no pixels allocates
+         * storage without initialising it. */
+        Py_DECREF(converted);
+        return 0;
+    }
+    pointer = PyObject_CallMethod(pygl_support, "image_pointer", "O", converted);
+    if (pointer == NULL) {
+        Py_DECREF(converted);
+        return -1;
+    }
+    if (pygl_address_of(pointer, &address) < 0) {
+        Py_DECREF(pointer);
+        Py_DECREF(converted);
+        return -1;
+    }
+    Py_DECREF(pointer);
+    out->owner = converted;
+    out->pointer = address;
+    return 0;
+}
+
+int pygl_image_in(GLProc *self, PyObject *object, unsigned int format,
+                  unsigned int type, int rank, int d0, int d1, int d2,
+                  PyGLBuf *out)
+{
+    return pygl_image(self, "image_input", object, format, type, rank, d0, d1,
+                      d2, out);
+}
+
+int pygl_image_out(GLProc *self, PyObject *object, unsigned int format,
+                   unsigned int type, int rank, int d0, int d1, int d2,
+                   PyGLBuf *out)
+{
+    return pygl_image(self, "image_output", object, format, type, rank, d0, d1,
+                      d2, out);
+}
+
+/* What a read hands back.  UNSIGNED_BYTE_IMAGES_AS_STRING turns an unsigned
+ * byte image into bytes, which is what it does today. */
+PyObject *pygl_image_value(PyGLBuf *buffer, unsigned int type)
+{
+    if (buffer->owner == NULL) {
+        Py_RETURN_NONE;
+    }
+    return PyObject_CallMethod(pygl_support, "image_result", "OI", buffer->owner,
+                               type);
+}
+
 void pygl_release(PyGLBuf *buffer)
 {
     if (buffer->have_view) {

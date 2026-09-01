@@ -1684,8 +1684,8 @@ def glRasterPos4xOES(x: int, y: int, z: int, w: int) -> None:
 def glRasterPos4xvOES(coords: IntArray) -> None:
     """glRasterPos4xvOES(coords) -> None"""
 
-def glReadPixels(x: int, y: int, width: int, height: int, format: int, type: int, pixels: AnyArray) -> None:
-    """glReadPixels(x, y, width, height, format, type, pixels) -> None"""
+def glReadPixels(x: int, y: int, width: int, height: int, format: int, type: int, pixels: AnyArray | None = None) -> AnyArrayResult:
+    """glReadPixels(x, y, width, height, format, type) -> pixels"""
 
 def glReadnPixelsEXT(x: int, y: int, width: int, height: int, format: int, type: int, bufSize: int, data: AnyArray) -> None:
     """glReadnPixelsEXT(x, y, width, height, format, type, bufSize, data) -> None"""

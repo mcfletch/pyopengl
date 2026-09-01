@@ -275,3 +275,64 @@ def current_context():
         return int(platform.PLATFORM.GetCurrentContext() or 0)
     except Exception:
         return 0
+
+
+# ---------------------------------------------------------------- images
+#
+# The tables that decide an image's length -- component counts per format,
+# element type per storage type, the pixel-store settings per rank -- are
+# built at import and extended at run time by OpenGL.images.registerImage,
+# which third parties use for their own formats.  Reusing that code rather
+# than restating it in C is what keeps those registrations working.
+
+
+def _image_dims(rank, d0, d1, d2):
+    return (d0, d1, d2)[:rank]
+
+
+def image_input(name, format, type, rank, d0, d1, d2, value):
+    """The array a pixels argument becomes, with the transfer mode set.
+
+    ``None`` stays ``None``: an upload with no pixels allocates storage
+    without initialising it, which is a real and common call.
+    """
+    from OpenGL import images
+    from OpenGL.arrays import GL_CONSTANT_TO_ARRAY_TYPE
+
+    images.setupDefaultTransferMode()
+    images.rankPacking(rank + 1)
+    if value is None:
+        return None
+    array_type = GL_CONSTANT_TO_ARRAY_TYPE[images.TYPE_TO_ARRAYTYPE.get(type, type)]
+    return array_type.asArray(value)
+
+
+def image_output(name, format, type, rank, d0, d1, d2, value):
+    """Where a read puts its result: the caller's array, or a new one."""
+    from OpenGL import images
+    from OpenGL.arrays import GL_CONSTANT_TO_ARRAY_TYPE
+
+    if value is not None:
+        images.setupDefaultTransferMode()
+        images.rankPacking(rank + 1)
+        array_type = GL_CONSTANT_TO_ARRAY_TYPE[
+            images.TYPE_TO_ARRAYTYPE.get(type, type)
+        ]
+        return array_type.asArray(value)
+    return images.SetupPixelRead(format, _image_dims(rank, d0, d1, d2), type)
+
+
+def image_pointer(array):
+    """The address of a converted image."""
+    return arrays.ArrayDatatype.dataPointer(array)
+
+
+def image_result(array, type):
+    """What a read hands back.
+
+    ``OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING`` turns an unsigned byte image into
+    bytes, which is what it does today.
+    """
+    from OpenGL import images
+
+    return images.returnFormat(array, type)

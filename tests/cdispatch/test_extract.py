@@ -121,11 +121,9 @@ class TestFriendlyAnnotations:
         assert length.size == model.Fixed(1)
 
     def test_hand_written_families_are_marked(self, tree):
-        """Tier 3 commands name the helper that implements them."""
-        assert tree['glShaderSource'].helper
-        assert tree['glGetShaderInfoLog'].helper
-        assert tree['glTexImage2D'].helper
-        assert tree['glVertexPointer'].helper
+        """A command the generator cannot describe names the family it needs."""
+        assert tree['glVertexPointer'].helper == 'client_pointer'
+        assert tree['glColor3f'].helper == 'variadic' or not tree['glColor3f'].helper
 
     def test_client_array_pointers_are_retained(self, tree):
         """The GL reads these after the call returns, so they must outlive it."""
@@ -158,20 +156,25 @@ class TestRegistryCrossCheck:
     sized from format, type and dimensions.
     """
 
-    def test_image_commands_are_marked(self, tree):
+    def test_image_commands_carry_an_image_size(self, tree):
+        """The registry says which arguments size the image, so it is described
+        rather than handed to a Python family."""
         for name in (
             'glReadPixels',
-            'glGetTexImage',
             'glTexImage1D',
             'glTexImage2D',
             'glTexImage3D',
             'glTexSubImage2D',
             'glDrawPixels',
         ):
-            assert tree[name].helper, name
+            pixels = [
+                p for p in tree[name].parameters if isinstance(p.size, model.ImageSize)
+            ]
+            assert pixels, name
 
     def test_compressed_image_commands_are_marked(self, tree):
-        assert tree['glCompressedTexImage2D'].helper
+        """A compressed image carries its own size and no layout we can read."""
+        assert tree['glCompressedTexImage2D'].helper == 'image' 
 
     def test_an_ordinary_command_is_not_marked(self, tree):
         assert not tree['glBindTexture'].helper

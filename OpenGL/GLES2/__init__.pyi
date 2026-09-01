@@ -3643,8 +3643,8 @@ def glReadBufferIndexedEXT(src: int, index: int) -> None:
 def glReadBufferNV(mode: int) -> None:
     """glReadBufferNV(mode) -> None"""
 
-def glReadPixels(x: int, y: int, width: int, height: int, format: int, type: int, pixels: AnyArray) -> None:
-    """glReadPixels(x, y, width, height, format, type, pixels) -> None"""
+def glReadPixels(x: int, y: int, width: int, height: int, format: int, type: int, pixels: AnyArray | None = None) -> AnyArrayResult:
+    """glReadPixels(x, y, width, height, format, type) -> pixels"""
 
 def glReadnPixels(x: int, y: int, width: int, height: int, format: int, type: int, bufSize: int, data: AnyArray) -> None:
     """glReadnPixels(x, y, width, height, format, type, bufSize, data) -> None"""

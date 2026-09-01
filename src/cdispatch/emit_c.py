@@ -76,6 +76,8 @@ def _scalar_macro(parameter):
 
 def _output_size(command, parameter):
     """The element count an output contributes to the return value."""
+    if isinstance(parameter.size, model.ImageSize):
+        return '0'
     if isinstance(parameter.size, model.GLGetTable):
         # Not known until the pname table has been consulted at run time.
         return '%s_count' % (parameter.c_name,)
@@ -143,13 +145,13 @@ def exclusion_reason(command):
         return 'unknown return type: %s' % (command.return_type.base,)
     for parameter in command.parameters:
         if isinstance(parameter.size, model.ImageSize):
-            return 'image-sized parameter'
+            continue
         if not parameter.size.declarative:
             return 'non-declarative size'
         if parameter.is_string_pointer:
             return 'string-array parameter'
         if parameter.is_output and not isinstance(
-            parameter.size, (model.Fixed, model.FromArg, model.GLGetTable)
+            parameter.size, (model.Fixed, model.FromArg, model.GLGetTable, model.ImageSize)
         ):
             return 'output with no expressible size'
         if not parameter.is_array and parameter.macro is None:
@@ -184,7 +186,7 @@ def is_emittable(command):
             return False
     for parameter in command.parameters:
         if isinstance(parameter.size, model.ImageSize):
-            return False
+            continue
         if not parameter.size.declarative:
             return False
         if parameter.is_string_pointer:
@@ -302,7 +304,25 @@ def emit_stub(command):
         if not parameter.is_array:
             continue
         element = element_symbol(parameter)
-        if parameter.is_output and isinstance(parameter.size, model.GLGetTable):
+        if isinstance(parameter.size, model.ImageSize):
+            size = parameter.size
+            dimensions = [
+                command.parameters[index].c_name for index in size.dimensions
+            ]
+            dimensions += ['0'] * (3 - len(dimensions))
+            lines.append(
+                '    PYGL_IMAGE_%s(%d, %s, %s, %s, %d, %s);'
+                % (
+                    'OUT' if parameter.is_output else 'IN',
+                    index,
+                    parameter.c_name,
+                    command.parameters[size.format_argument].c_name,
+                    command.parameters[size.type_argument].c_name,
+                    len(size.dimensions),
+                    ', '.join(dimensions),
+                )
+            )
+        elif parameter.is_output and isinstance(parameter.size, model.GLGetTable):
             pname = command.parameters[parameter.size.pname_argument].c_name
             lines.append(
                 '    PYGL_ARRAY_OUT_GLGET(%d, %s, %s, %s, pygl_glget_%s);'
@@ -356,6 +376,14 @@ def emit_stub(command):
         lines.append(
             '    PyObject *_value = pygl_output_tuple(_bufs, _outputs, %d);'
             % (len(outputs),)
+        )
+        lines.append('    PYGL_CLEANUP();')
+        lines.append('    return _value;')
+    elif outputs and isinstance(outputs[0].size, model.ImageSize):
+        output = outputs[0]
+        lines.append(
+            '    PyObject *_value = pygl_image_value(&_bufs[%s_slot], %s);'
+            % (output.c_name, command.parameters[outputs[0].size.type_argument].c_name)
         )
         lines.append('    PYGL_CLEANUP();')
         lines.append('    return _value;')

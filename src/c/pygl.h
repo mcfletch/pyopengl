@@ -295,6 +295,19 @@ int pygl_array_out(GLProc *self, PyObject *object, const PyGLElement *element,
                    Py_ssize_t index, Py_ssize_t count, PyGLBuf *out);
 void pygl_release(PyGLBuf *buffer);
 
+/* Images.  Their length is a function of format, type, the extent and the
+ * current pixel-store state, and the tables that decide it are extensible at
+ * run time -- OpenGL.images.registerImage is a public entry point.  So the
+ * call belongs here and the sizing stays in Python, which is the same line
+ * the array rule draws. */
+int pygl_image_in(GLProc *self, PyObject *object, unsigned int format,
+                  unsigned int type, int rank, int d0, int d1, int d2,
+                  PyGLBuf *out);
+int pygl_image_out(GLProc *self, PyObject *object, unsigned int format,
+                   unsigned int type, int rank, int d0, int d1, int d2,
+                   PyGLBuf *out);
+PyObject *pygl_image_value(PyGLBuf *buffer, unsigned int type);
+
 /* Return-value conversion.  The rule is that the C layer returns the same
  * Python object the ctypes layer returns today. */
 PyObject *pygl_bytes_or_none(const char *value);
@@ -395,6 +408,21 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
                                            (element), (i), (pname), (table),   \
                                            (table##_count), &_bufs[_nb],       \
                                            &name##_count) < 0))                \
+        goto _fail;                                                            \
+    void *name = _bufs[_nb++].pointer
+
+#define PYGL_IMAGE_IN(i, name, format, type, rank, d0, d1, d2)                 \
+    if (PYGL_UNLIKELY(pygl_image_in(self, (i) < _nargs ? _a[i] : NULL, (format),      \
+                                    (type), (rank), (d0), (d1), (d2),          \
+                                    &_bufs[_nb]) < 0))                         \
+        goto _fail;                                                            \
+    void *name = _bufs[_nb++].pointer
+
+#define PYGL_IMAGE_OUT(i, name, format, type, rank, d0, d1, d2)                \
+    int name##_slot = _nb;                                                     \
+    if (PYGL_UNLIKELY(pygl_image_out(self, (i) < _nargs ? _a[i] : NULL, (format),     \
+                                     (type), (rank), (d0), (d1), (d2),         \
+                                     &_bufs[_nb]) < 0))                        \
         goto _fail;                                                            \
     void *name = _bufs[_nb++].pointer
 

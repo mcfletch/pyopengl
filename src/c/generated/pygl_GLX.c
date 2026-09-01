@@ -8,7 +8,7 @@
 #include "pygl_glgets.h"
 
 static const char *const pygl_GLX_glXAssociateDMPbufferSGIX_args[] = {"dpy", "pbuffer", "params", "dmbuffer"};
-static const PyGLCommand pygl_GLX_glXAssociateDMPbufferSGIX_info = {"glXAssociateDMPbufferSGIX", "glXAssociateDMPbufferSGIX(dpy, pbuffer, params, dmbuffer) -> Bool", "($module, dpy, pbuffer, params, dmbuffer, /)", pygl_GLX_glXAssociateDMPbufferSGIX_args, "GLX_SGIX_dmbuffer", 4, 4307, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXAssociateDMPbufferSGIX_info = {"glXAssociateDMPbufferSGIX", "glXAssociateDMPbufferSGIX(dpy, pbuffer, params, dmbuffer) -> Bool", "($module, dpy, pbuffer, params, dmbuffer, /)", pygl_GLX_glXAssociateDMPbufferSGIX_args, "GLX_SGIX_dmbuffer", 4, 4379, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXAssociateDMPbufferSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -32,7 +32,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXBindChannelToWindowSGIX_args[] = {"display", "screen", "channel", "window"};
-static const PyGLCommand pygl_GLX_glXBindChannelToWindowSGIX_info = {"glXBindChannelToWindowSGIX", "glXBindChannelToWindowSGIX(display, screen, channel, window) -> c_int", "($module, display, screen, channel, window, /)", pygl_GLX_glXBindChannelToWindowSGIX_args, "GLX_SGIX_video_resize", 4, 4308, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXBindChannelToWindowSGIX_info = {"glXBindChannelToWindowSGIX", "glXBindChannelToWindowSGIX(display, screen, channel, window) -> c_int", "($module, display, screen, channel, window, /)", pygl_GLX_glXBindChannelToWindowSGIX_args, "GLX_SGIX_video_resize", 4, 4380, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXBindChannelToWindowSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -56,7 +56,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXBindHyperpipeSGIX_args[] = {"dpy", "hpId"};
-static const PyGLCommand pygl_GLX_glXBindHyperpipeSGIX_info = {"glXBindHyperpipeSGIX", "glXBindHyperpipeSGIX(dpy, hpId) -> c_int", "($module, dpy, hpId, /)", pygl_GLX_glXBindHyperpipeSGIX_args, "GLX_SGIX_hyperpipe", 2, 4309, PYGL_API_GLX, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLX_glXBindHyperpipeSGIX_info = {"glXBindHyperpipeSGIX", "glXBindHyperpipeSGIX(dpy, hpId) -> c_int", "($module, dpy, hpId, /)", pygl_GLX_glXBindHyperpipeSGIX_args, "GLX_SGIX_hyperpipe", 2, 4381, PYGL_API_GLX, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLX_glXBindHyperpipeSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -78,7 +78,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXBindSwapBarrierNV_args[] = {"dpy", "group", "barrier"};
-static const PyGLCommand pygl_GLX_glXBindSwapBarrierNV_info = {"glXBindSwapBarrierNV", "glXBindSwapBarrierNV(dpy, group, barrier) -> Bool", "($module, dpy, group, barrier, /)", pygl_GLX_glXBindSwapBarrierNV_args, "GLX_NV_swap_group", 3, 4310, PYGL_API_GLX, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLX_glXBindSwapBarrierNV_info = {"glXBindSwapBarrierNV", "glXBindSwapBarrierNV(dpy, group, barrier) -> Bool", "($module, dpy, group, barrier, /)", pygl_GLX_glXBindSwapBarrierNV_args, "GLX_NV_swap_group", 3, 4382, PYGL_API_GLX, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLX_glXBindSwapBarrierNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -101,7 +101,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXBindSwapBarrierSGIX_args[] = {"dpy", "drawable", "barrier"};
-static const PyGLCommand pygl_GLX_glXBindSwapBarrierSGIX_info = {"glXBindSwapBarrierSGIX", "glXBindSwapBarrierSGIX(dpy, drawable, barrier) -> None", "($module, dpy, drawable, barrier, /)", pygl_GLX_glXBindSwapBarrierSGIX_args, "GLX_SGIX_swap_barrier", 3, 4311, PYGL_API_GLX, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLX_glXBindSwapBarrierSGIX_info = {"glXBindSwapBarrierSGIX", "glXBindSwapBarrierSGIX(dpy, drawable, barrier) -> None", "($module, dpy, drawable, barrier, /)", pygl_GLX_glXBindSwapBarrierSGIX_args, "GLX_SGIX_swap_barrier", 3, 4383, PYGL_API_GLX, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLX_glXBindSwapBarrierSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -123,7 +123,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXBindTexImageEXT_args[] = {"dpy", "drawable", "buffer", "attrib_list"};
-static const PyGLCommand pygl_GLX_glXBindTexImageEXT_info = {"glXBindTexImageEXT", "glXBindTexImageEXT(dpy, drawable, buffer, attrib_list) -> None", "($module, dpy, drawable, buffer, attrib_list, /)", pygl_GLX_glXBindTexImageEXT_args, "GLX_EXT_texture_from_pixmap", 4, 4312, PYGL_API_GLX, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLX_glXBindTexImageEXT_info = {"glXBindTexImageEXT", "glXBindTexImageEXT(dpy, drawable, buffer, attrib_list) -> None", "($module, dpy, drawable, buffer, attrib_list, /)", pygl_GLX_glXBindTexImageEXT_args, "GLX_EXT_texture_from_pixmap", 4, 4384, PYGL_API_GLX, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLX_glXBindTexImageEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -146,7 +146,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXBindVideoCaptureDeviceNV_args[] = {"dpy", "video_capture_slot", "device"};
-static const PyGLCommand pygl_GLX_glXBindVideoCaptureDeviceNV_info = {"glXBindVideoCaptureDeviceNV", "glXBindVideoCaptureDeviceNV(dpy, video_capture_slot, device) -> c_int", "($module, dpy, video_capture_slot, device, /)", pygl_GLX_glXBindVideoCaptureDeviceNV_args, "GLX_NV_video_capture", 3, 4313, PYGL_API_GLX, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLX_glXBindVideoCaptureDeviceNV_info = {"glXBindVideoCaptureDeviceNV", "glXBindVideoCaptureDeviceNV(dpy, video_capture_slot, device) -> c_int", "($module, dpy, video_capture_slot, device, /)", pygl_GLX_glXBindVideoCaptureDeviceNV_args, "GLX_NV_video_capture", 3, 4385, PYGL_API_GLX, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLX_glXBindVideoCaptureDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -169,7 +169,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXBindVideoDeviceNV_args[] = {"dpy", "video_slot", "video_device", "attrib_list"};
-static const PyGLCommand pygl_GLX_glXBindVideoDeviceNV_info = {"glXBindVideoDeviceNV", "glXBindVideoDeviceNV(dpy, video_slot, video_device, attrib_list) -> c_int", "($module, dpy, video_slot, video_device, attrib_list, /)", pygl_GLX_glXBindVideoDeviceNV_args, "GLX_NV_present_video", 4, 4314, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXBindVideoDeviceNV_info = {"glXBindVideoDeviceNV", "glXBindVideoDeviceNV(dpy, video_slot, video_device, attrib_list) -> c_int", "($module, dpy, video_slot, video_device, attrib_list, /)", pygl_GLX_glXBindVideoDeviceNV_args, "GLX_NV_present_video", 4, 4386, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXBindVideoDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -193,7 +193,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXBindVideoImageNV_args[] = {"dpy", "VideoDevice", "pbuf", "iVideoBuffer"};
-static const PyGLCommand pygl_GLX_glXBindVideoImageNV_info = {"glXBindVideoImageNV", "glXBindVideoImageNV(dpy, VideoDevice, pbuf, iVideoBuffer) -> c_int", "($module, dpy, VideoDevice, pbuf, iVideoBuffer, /)", pygl_GLX_glXBindVideoImageNV_args, "GLX_NV_video_out", 4, 4315, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXBindVideoImageNV_info = {"glXBindVideoImageNV", "glXBindVideoImageNV(dpy, VideoDevice, pbuf, iVideoBuffer) -> c_int", "($module, dpy, VideoDevice, pbuf, iVideoBuffer, /)", pygl_GLX_glXBindVideoImageNV_args, "GLX_NV_video_out", 4, 4387, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXBindVideoImageNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -217,7 +217,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXBlitContextFramebufferAMD_args[] = {"dstCtx", "srcX0", "srcY0", "srcX1", "srcY1", "dstX0", "dstY0", "dstX1", "dstY1", "mask", "filter"};
-static const PyGLCommand pygl_GLX_glXBlitContextFramebufferAMD_info = {"glXBlitContextFramebufferAMD", "glXBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> None", "($module, dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter, /)", pygl_GLX_glXBlitContextFramebufferAMD_args, "GLX_AMD_gpu_association", 11, 4316, PYGL_API_GLX, 0, 11, 0, 0};
+static const PyGLCommand pygl_GLX_glXBlitContextFramebufferAMD_info = {"glXBlitContextFramebufferAMD", "glXBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> None", "($module, dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter, /)", pygl_GLX_glXBlitContextFramebufferAMD_args, "GLX_AMD_gpu_association", 11, 4388, PYGL_API_GLX, 0, 11, 0, 0};
 
 static PyObject *
 pygl_GLX_glXBlitContextFramebufferAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -244,7 +244,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXChannelRectSGIX_args[] = {"display", "screen", "channel", "x", "y", "w", "h"};
-static const PyGLCommand pygl_GLX_glXChannelRectSGIX_info = {"glXChannelRectSGIX", "glXChannelRectSGIX(display, screen, channel, x, y, w, h) -> c_int", "($module, display, screen, channel, x, y, w, h, /)", pygl_GLX_glXChannelRectSGIX_args, "GLX_SGIX_video_resize", 7, 4317, PYGL_API_GLX, 0, 7, 1, 0};
+static const PyGLCommand pygl_GLX_glXChannelRectSGIX_info = {"glXChannelRectSGIX", "glXChannelRectSGIX(display, screen, channel, x, y, w, h) -> c_int", "($module, display, screen, channel, x, y, w, h, /)", pygl_GLX_glXChannelRectSGIX_args, "GLX_SGIX_video_resize", 7, 4389, PYGL_API_GLX, 0, 7, 1, 0};
 
 static PyObject *
 pygl_GLX_glXChannelRectSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -271,7 +271,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXChannelRectSyncSGIX_args[] = {"display", "screen", "channel", "synctype"};
-static const PyGLCommand pygl_GLX_glXChannelRectSyncSGIX_info = {"glXChannelRectSyncSGIX", "glXChannelRectSyncSGIX(display, screen, channel, synctype) -> c_int", "($module, display, screen, channel, synctype, /)", pygl_GLX_glXChannelRectSyncSGIX_args, "GLX_SGIX_video_resize", 4, 4318, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXChannelRectSyncSGIX_info = {"glXChannelRectSyncSGIX", "glXChannelRectSyncSGIX(display, screen, channel, synctype) -> c_int", "($module, display, screen, channel, synctype, /)", pygl_GLX_glXChannelRectSyncSGIX_args, "GLX_SGIX_video_resize", 4, 4390, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXChannelRectSyncSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -295,7 +295,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCopyBufferSubDataNV_args[] = {"dpy", "readCtx", "writeCtx", "readTarget", "writeTarget", "readOffset", "writeOffset", "size"};
-static const PyGLCommand pygl_GLX_glXCopyBufferSubDataNV_info = {"glXCopyBufferSubDataNV", "glXCopyBufferSubDataNV(dpy, readCtx, writeCtx, readTarget, writeTarget, readOffset, writeOffset, size) -> None", "($module, dpy, readCtx, writeCtx, readTarget, writeTarget, readOffset, writeOffset, size, /)", pygl_GLX_glXCopyBufferSubDataNV_args, "GLX_NV_copy_buffer", 8, 4319, PYGL_API_GLX, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLX_glXCopyBufferSubDataNV_info = {"glXCopyBufferSubDataNV", "glXCopyBufferSubDataNV(dpy, readCtx, writeCtx, readTarget, writeTarget, readOffset, writeOffset, size) -> None", "($module, dpy, readCtx, writeCtx, readTarget, writeTarget, readOffset, writeOffset, size, /)", pygl_GLX_glXCopyBufferSubDataNV_args, "GLX_NV_copy_buffer", 8, 4391, PYGL_API_GLX, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLX_glXCopyBufferSubDataNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -322,7 +322,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCopyContext_args[] = {"dpy", "src", "dst", "mask"};
-static const PyGLCommand pygl_GLX_glXCopyContext_info = {"glXCopyContext", "glXCopyContext(dpy, src, dst, mask) -> None", "($module, dpy, src, dst, mask, /)", pygl_GLX_glXCopyContext_args, "GLX_VERSION_GLX_1_0", 4, 4320, PYGL_API_GLX, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLX_glXCopyContext_info = {"glXCopyContext", "glXCopyContext(dpy, src, dst, mask) -> None", "($module, dpy, src, dst, mask, /)", pygl_GLX_glXCopyContext_args, "GLX_VERSION_GLX_1_0", 4, 4392, PYGL_API_GLX, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLX_glXCopyContext(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -345,7 +345,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCopyImageSubDataNV_args[] = {"dpy", "srcCtx", "srcName", "srcTarget", "srcLevel", "srcX", "srcY", "srcZ", "dstCtx", "dstName", "dstTarget", "dstLevel", "dstX", "dstY", "dstZ", "width", "height", "depth"};
-static const PyGLCommand pygl_GLX_glXCopyImageSubDataNV_info = {"glXCopyImageSubDataNV", "glXCopyImageSubDataNV(dpy, srcCtx, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstCtx, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth) -> None", "($module, dpy, srcCtx, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstCtx, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth, /)", pygl_GLX_glXCopyImageSubDataNV_args, "GLX_NV_copy_image", 18, 4321, PYGL_API_GLX, 0, 18, 0, 0};
+static const PyGLCommand pygl_GLX_glXCopyImageSubDataNV_info = {"glXCopyImageSubDataNV", "glXCopyImageSubDataNV(dpy, srcCtx, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstCtx, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth) -> None", "($module, dpy, srcCtx, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstCtx, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth, /)", pygl_GLX_glXCopyImageSubDataNV_args, "GLX_NV_copy_image", 18, 4393, PYGL_API_GLX, 0, 18, 0, 0};
 
 static PyObject *
 pygl_GLX_glXCopyImageSubDataNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -382,7 +382,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCopySubBufferMESA_args[] = {"dpy", "drawable", "x", "y", "width", "height"};
-static const PyGLCommand pygl_GLX_glXCopySubBufferMESA_info = {"glXCopySubBufferMESA", "glXCopySubBufferMESA(dpy, drawable, x, y, width, height) -> None", "($module, dpy, drawable, x, y, width, height, /)", pygl_GLX_glXCopySubBufferMESA_args, "GLX_MESA_copy_sub_buffer", 6, 4322, PYGL_API_GLX, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLX_glXCopySubBufferMESA_info = {"glXCopySubBufferMESA", "glXCopySubBufferMESA(dpy, drawable, x, y, width, height) -> None", "($module, dpy, drawable, x, y, width, height, /)", pygl_GLX_glXCopySubBufferMESA_args, "GLX_MESA_copy_sub_buffer", 6, 4394, PYGL_API_GLX, 0, 6, 0, 0};
 
 static PyObject *
 pygl_GLX_glXCopySubBufferMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -407,7 +407,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCreateAssociatedContextAMD_args[] = {"id", "share_list"};
-static const PyGLCommand pygl_GLX_glXCreateAssociatedContextAMD_info = {"glXCreateAssociatedContextAMD", "glXCreateAssociatedContextAMD(id, share_list) -> GLXContext", "($module, id, share_list, /)", pygl_GLX_glXCreateAssociatedContextAMD_args, "GLX_AMD_gpu_association", 2, 4323, PYGL_API_GLX, 0, 2, 4, 0};
+static const PyGLCommand pygl_GLX_glXCreateAssociatedContextAMD_info = {"glXCreateAssociatedContextAMD", "glXCreateAssociatedContextAMD(id, share_list) -> GLXContext", "($module, id, share_list, /)", pygl_GLX_glXCreateAssociatedContextAMD_args, "GLX_AMD_gpu_association", 2, 4395, PYGL_API_GLX, 0, 2, 4, 0};
 
 static PyObject *
 pygl_GLX_glXCreateAssociatedContextAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -425,7 +425,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCreateAssociatedContextAttribsAMD_args[] = {"id", "share_context", "attribList"};
-static const PyGLCommand pygl_GLX_glXCreateAssociatedContextAttribsAMD_info = {"glXCreateAssociatedContextAttribsAMD", "glXCreateAssociatedContextAttribsAMD(id, share_context, attribList) -> GLXContext", "($module, id, share_context, attribList, /)", pygl_GLX_glXCreateAssociatedContextAttribsAMD_args, "GLX_AMD_gpu_association", 3, 4324, PYGL_API_GLX, 0, 3, 4, 0};
+static const PyGLCommand pygl_GLX_glXCreateAssociatedContextAttribsAMD_info = {"glXCreateAssociatedContextAttribsAMD", "glXCreateAssociatedContextAttribsAMD(id, share_context, attribList) -> GLXContext", "($module, id, share_context, attribList, /)", pygl_GLX_glXCreateAssociatedContextAttribsAMD_args, "GLX_AMD_gpu_association", 3, 4396, PYGL_API_GLX, 0, 3, 4, 0};
 
 static PyObject *
 pygl_GLX_glXCreateAssociatedContextAttribsAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -448,7 +448,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCreateContext_args[] = {"dpy", "vis", "shareList", "direct"};
-static const PyGLCommand pygl_GLX_glXCreateContext_info = {"glXCreateContext", "glXCreateContext(dpy, vis, shareList, direct) -> GLXContext", "($module, dpy, vis, shareList, direct, /)", pygl_GLX_glXCreateContext_args, "GLX_VERSION_GLX_1_0", 4, 4325, PYGL_API_GLX, 0, 4, 4, 0};
+static const PyGLCommand pygl_GLX_glXCreateContext_info = {"glXCreateContext", "glXCreateContext(dpy, vis, shareList, direct) -> GLXContext", "($module, dpy, vis, shareList, direct, /)", pygl_GLX_glXCreateContext_args, "GLX_VERSION_GLX_1_0", 4, 4397, PYGL_API_GLX, 0, 4, 4, 0};
 
 static PyObject *
 pygl_GLX_glXCreateContext(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -472,7 +472,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCreateContextAttribsARB_args[] = {"dpy", "config", "share_context", "direct", "attrib_list"};
-static const PyGLCommand pygl_GLX_glXCreateContextAttribsARB_info = {"glXCreateContextAttribsARB", "glXCreateContextAttribsARB(dpy, config, share_context, direct, attrib_list) -> GLXContext", "($module, dpy, config, share_context, direct, attrib_list, /)", pygl_GLX_glXCreateContextAttribsARB_args, "GLX_ARB_create_context", 5, 4326, PYGL_API_GLX, 0, 5, 4, 0};
+static const PyGLCommand pygl_GLX_glXCreateContextAttribsARB_info = {"glXCreateContextAttribsARB", "glXCreateContextAttribsARB(dpy, config, share_context, direct, attrib_list) -> GLXContext", "($module, dpy, config, share_context, direct, attrib_list, /)", pygl_GLX_glXCreateContextAttribsARB_args, "GLX_ARB_create_context", 5, 4398, PYGL_API_GLX, 0, 5, 4, 0};
 
 static PyObject *
 pygl_GLX_glXCreateContextAttribsARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -497,7 +497,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCreateContextWithConfigSGIX_args[] = {"dpy", "config", "render_type", "share_list", "direct"};
-static const PyGLCommand pygl_GLX_glXCreateContextWithConfigSGIX_info = {"glXCreateContextWithConfigSGIX", "glXCreateContextWithConfigSGIX(dpy, config, render_type, share_list, direct) -> GLXContext", "($module, dpy, config, render_type, share_list, direct, /)", pygl_GLX_glXCreateContextWithConfigSGIX_args, "GLX_SGIX_fbconfig", 5, 4327, PYGL_API_GLX, 0, 5, 4, 0};
+static const PyGLCommand pygl_GLX_glXCreateContextWithConfigSGIX_info = {"glXCreateContextWithConfigSGIX", "glXCreateContextWithConfigSGIX(dpy, config, render_type, share_list, direct) -> GLXContext", "($module, dpy, config, render_type, share_list, direct, /)", pygl_GLX_glXCreateContextWithConfigSGIX_args, "GLX_SGIX_fbconfig", 5, 4399, PYGL_API_GLX, 0, 5, 4, 0};
 
 static PyObject *
 pygl_GLX_glXCreateContextWithConfigSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -522,7 +522,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCreateGLXPbufferSGIX_args[] = {"dpy", "config", "width", "height", "attrib_list"};
-static const PyGLCommand pygl_GLX_glXCreateGLXPbufferSGIX_info = {"glXCreateGLXPbufferSGIX", "glXCreateGLXPbufferSGIX(dpy, config, width, height, attrib_list) -> GLXPbufferSGIX", "($module, dpy, config, width, height, attrib_list, /)", pygl_GLX_glXCreateGLXPbufferSGIX_args, "GLX_SGIX_pbuffer", 5, 4328, PYGL_API_GLX, 0, 5, 4, 0};
+static const PyGLCommand pygl_GLX_glXCreateGLXPbufferSGIX_info = {"glXCreateGLXPbufferSGIX", "glXCreateGLXPbufferSGIX(dpy, config, width, height, attrib_list) -> GLXPbufferSGIX", "($module, dpy, config, width, height, attrib_list, /)", pygl_GLX_glXCreateGLXPbufferSGIX_args, "GLX_SGIX_pbuffer", 5, 4400, PYGL_API_GLX, 0, 5, 4, 0};
 
 static PyObject *
 pygl_GLX_glXCreateGLXPbufferSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -547,7 +547,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCreateGLXPixmap_args[] = {"dpy", "visual", "pixmap"};
-static const PyGLCommand pygl_GLX_glXCreateGLXPixmap_info = {"glXCreateGLXPixmap", "glXCreateGLXPixmap(dpy, visual, pixmap) -> GLXPixmap", "($module, dpy, visual, pixmap, /)", pygl_GLX_glXCreateGLXPixmap_args, "GLX_VERSION_GLX_1_0", 3, 4329, PYGL_API_GLX, 0, 3, 4, 0};
+static const PyGLCommand pygl_GLX_glXCreateGLXPixmap_info = {"glXCreateGLXPixmap", "glXCreateGLXPixmap(dpy, visual, pixmap) -> GLXPixmap", "($module, dpy, visual, pixmap, /)", pygl_GLX_glXCreateGLXPixmap_args, "GLX_VERSION_GLX_1_0", 3, 4401, PYGL_API_GLX, 0, 3, 4, 0};
 
 static PyObject *
 pygl_GLX_glXCreateGLXPixmap(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -570,7 +570,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCreateGLXPixmapMESA_args[] = {"dpy", "visual", "pixmap", "cmap"};
-static const PyGLCommand pygl_GLX_glXCreateGLXPixmapMESA_info = {"glXCreateGLXPixmapMESA", "glXCreateGLXPixmapMESA(dpy, visual, pixmap, cmap) -> GLXPixmap", "($module, dpy, visual, pixmap, cmap, /)", pygl_GLX_glXCreateGLXPixmapMESA_args, "GLX_MESA_pixmap_colormap", 4, 4330, PYGL_API_GLX, 0, 4, 4, 0};
+static const PyGLCommand pygl_GLX_glXCreateGLXPixmapMESA_info = {"glXCreateGLXPixmapMESA", "glXCreateGLXPixmapMESA(dpy, visual, pixmap, cmap) -> GLXPixmap", "($module, dpy, visual, pixmap, cmap, /)", pygl_GLX_glXCreateGLXPixmapMESA_args, "GLX_MESA_pixmap_colormap", 4, 4402, PYGL_API_GLX, 0, 4, 4, 0};
 
 static PyObject *
 pygl_GLX_glXCreateGLXPixmapMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -594,7 +594,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCreateGLXPixmapWithConfigSGIX_args[] = {"dpy", "config", "pixmap"};
-static const PyGLCommand pygl_GLX_glXCreateGLXPixmapWithConfigSGIX_info = {"glXCreateGLXPixmapWithConfigSGIX", "glXCreateGLXPixmapWithConfigSGIX(dpy, config, pixmap) -> GLXPixmap", "($module, dpy, config, pixmap, /)", pygl_GLX_glXCreateGLXPixmapWithConfigSGIX_args, "GLX_SGIX_fbconfig", 3, 4331, PYGL_API_GLX, 0, 3, 4, 0};
+static const PyGLCommand pygl_GLX_glXCreateGLXPixmapWithConfigSGIX_info = {"glXCreateGLXPixmapWithConfigSGIX", "glXCreateGLXPixmapWithConfigSGIX(dpy, config, pixmap) -> GLXPixmap", "($module, dpy, config, pixmap, /)", pygl_GLX_glXCreateGLXPixmapWithConfigSGIX_args, "GLX_SGIX_fbconfig", 3, 4403, PYGL_API_GLX, 0, 3, 4, 0};
 
 static PyObject *
 pygl_GLX_glXCreateGLXPixmapWithConfigSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -617,7 +617,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCreateGLXVideoSourceSGIX_args[] = {"display", "screen", "server", "path", "nodeClass", "drainNode"};
-static const PyGLCommand pygl_GLX_glXCreateGLXVideoSourceSGIX_info = {"glXCreateGLXVideoSourceSGIX", "glXCreateGLXVideoSourceSGIX(display, screen, server, path, nodeClass, drainNode) -> GLXVideoSourceSGIX", "($module, display, screen, server, path, nodeClass, drainNode, /)", pygl_GLX_glXCreateGLXVideoSourceSGIX_args, "GLX_SGIX_video_source", 6, 4332, PYGL_API_GLX, 0, 6, 4, 0};
+static const PyGLCommand pygl_GLX_glXCreateGLXVideoSourceSGIX_info = {"glXCreateGLXVideoSourceSGIX", "glXCreateGLXVideoSourceSGIX(display, screen, server, path, nodeClass, drainNode) -> GLXVideoSourceSGIX", "($module, display, screen, server, path, nodeClass, drainNode, /)", pygl_GLX_glXCreateGLXVideoSourceSGIX_args, "GLX_SGIX_video_source", 6, 4404, PYGL_API_GLX, 0, 6, 4, 0};
 
 static PyObject *
 pygl_GLX_glXCreateGLXVideoSourceSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -643,7 +643,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCreateNewContext_args[] = {"dpy", "config", "render_type", "share_list", "direct"};
-static const PyGLCommand pygl_GLX_glXCreateNewContext_info = {"glXCreateNewContext", "glXCreateNewContext(dpy, config, render_type, share_list, direct) -> GLXContext", "($module, dpy, config, render_type, share_list, direct, /)", pygl_GLX_glXCreateNewContext_args, "GLX_VERSION_GLX_1_3", 5, 4333, PYGL_API_GLX, 0, 5, 4, 0};
+static const PyGLCommand pygl_GLX_glXCreateNewContext_info = {"glXCreateNewContext", "glXCreateNewContext(dpy, config, render_type, share_list, direct) -> GLXContext", "($module, dpy, config, render_type, share_list, direct, /)", pygl_GLX_glXCreateNewContext_args, "GLX_VERSION_GLX_1_3", 5, 4405, PYGL_API_GLX, 0, 5, 4, 0};
 
 static PyObject *
 pygl_GLX_glXCreateNewContext(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -668,7 +668,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCreatePbuffer_args[] = {"dpy", "config", "attrib_list"};
-static const PyGLCommand pygl_GLX_glXCreatePbuffer_info = {"glXCreatePbuffer", "glXCreatePbuffer(dpy, config, attrib_list) -> GLXPbuffer", "($module, dpy, config, attrib_list, /)", pygl_GLX_glXCreatePbuffer_args, "GLX_VERSION_GLX_1_3", 3, 4334, PYGL_API_GLX, 0, 3, 4, 0};
+static const PyGLCommand pygl_GLX_glXCreatePbuffer_info = {"glXCreatePbuffer", "glXCreatePbuffer(dpy, config, attrib_list) -> GLXPbuffer", "($module, dpy, config, attrib_list, /)", pygl_GLX_glXCreatePbuffer_args, "GLX_VERSION_GLX_1_3", 3, 4406, PYGL_API_GLX, 0, 3, 4, 0};
 
 static PyObject *
 pygl_GLX_glXCreatePbuffer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -691,7 +691,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCreatePixmap_args[] = {"dpy", "config", "pixmap", "attrib_list"};
-static const PyGLCommand pygl_GLX_glXCreatePixmap_info = {"glXCreatePixmap", "glXCreatePixmap(dpy, config, pixmap, attrib_list) -> GLXPixmap", "($module, dpy, config, pixmap, attrib_list, /)", pygl_GLX_glXCreatePixmap_args, "GLX_VERSION_GLX_1_3", 4, 4335, PYGL_API_GLX, 0, 4, 4, 0};
+static const PyGLCommand pygl_GLX_glXCreatePixmap_info = {"glXCreatePixmap", "glXCreatePixmap(dpy, config, pixmap, attrib_list) -> GLXPixmap", "($module, dpy, config, pixmap, attrib_list, /)", pygl_GLX_glXCreatePixmap_args, "GLX_VERSION_GLX_1_3", 4, 4407, PYGL_API_GLX, 0, 4, 4, 0};
 
 static PyObject *
 pygl_GLX_glXCreatePixmap(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -715,7 +715,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCreateWindow_args[] = {"dpy", "config", "win", "attrib_list"};
-static const PyGLCommand pygl_GLX_glXCreateWindow_info = {"glXCreateWindow", "glXCreateWindow(dpy, config, win, attrib_list) -> GLXWindow", "($module, dpy, config, win, attrib_list, /)", pygl_GLX_glXCreateWindow_args, "GLX_VERSION_GLX_1_3", 4, 4336, PYGL_API_GLX, 0, 4, 4, 0};
+static const PyGLCommand pygl_GLX_glXCreateWindow_info = {"glXCreateWindow", "glXCreateWindow(dpy, config, win, attrib_list) -> GLXWindow", "($module, dpy, config, win, attrib_list, /)", pygl_GLX_glXCreateWindow_args, "GLX_VERSION_GLX_1_3", 4, 4408, PYGL_API_GLX, 0, 4, 4, 0};
 
 static PyObject *
 pygl_GLX_glXCreateWindow(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -739,7 +739,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXCushionSGI_args[] = {"dpy", "window", "cushion"};
-static const PyGLCommand pygl_GLX_glXCushionSGI_info = {"glXCushionSGI", "glXCushionSGI(dpy, window, cushion) -> None", "($module, dpy, window, cushion, /)", pygl_GLX_glXCushionSGI_args, "GLX_SGI_cushion", 3, 4337, PYGL_API_GLX, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLX_glXCushionSGI_info = {"glXCushionSGI", "glXCushionSGI(dpy, window, cushion) -> None", "($module, dpy, window, cushion, /)", pygl_GLX_glXCushionSGI_args, "GLX_SGI_cushion", 3, 4409, PYGL_API_GLX, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLX_glXCushionSGI(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -761,7 +761,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXDelayBeforeSwapNV_args[] = {"dpy", "drawable", "seconds"};
-static const PyGLCommand pygl_GLX_glXDelayBeforeSwapNV_info = {"glXDelayBeforeSwapNV", "glXDelayBeforeSwapNV(dpy, drawable, seconds) -> Bool", "($module, dpy, drawable, seconds, /)", pygl_GLX_glXDelayBeforeSwapNV_args, "GLX_NV_delay_before_swap", 3, 4338, PYGL_API_GLX, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLX_glXDelayBeforeSwapNV_info = {"glXDelayBeforeSwapNV", "glXDelayBeforeSwapNV(dpy, drawable, seconds) -> Bool", "($module, dpy, drawable, seconds, /)", pygl_GLX_glXDelayBeforeSwapNV_args, "GLX_NV_delay_before_swap", 3, 4410, PYGL_API_GLX, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLX_glXDelayBeforeSwapNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -784,7 +784,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXDeleteAssociatedContextAMD_args[] = {"ctx"};
-static const PyGLCommand pygl_GLX_glXDeleteAssociatedContextAMD_info = {"glXDeleteAssociatedContextAMD", "glXDeleteAssociatedContextAMD(ctx) -> Bool", "($module, ctx, /)", pygl_GLX_glXDeleteAssociatedContextAMD_args, "GLX_AMD_gpu_association", 1, 4339, PYGL_API_GLX, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLX_glXDeleteAssociatedContextAMD_info = {"glXDeleteAssociatedContextAMD", "glXDeleteAssociatedContextAMD(ctx) -> Bool", "($module, ctx, /)", pygl_GLX_glXDeleteAssociatedContextAMD_args, "GLX_AMD_gpu_association", 1, 4411, PYGL_API_GLX, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLX_glXDeleteAssociatedContextAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -801,7 +801,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXDestroyContext_args[] = {"dpy", "ctx"};
-static const PyGLCommand pygl_GLX_glXDestroyContext_info = {"glXDestroyContext", "glXDestroyContext(dpy, ctx) -> None", "($module, dpy, ctx, /)", pygl_GLX_glXDestroyContext_args, "GLX_VERSION_GLX_1_0", 2, 4340, PYGL_API_GLX, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLX_glXDestroyContext_info = {"glXDestroyContext", "glXDestroyContext(dpy, ctx) -> None", "($module, dpy, ctx, /)", pygl_GLX_glXDestroyContext_args, "GLX_VERSION_GLX_1_0", 2, 4412, PYGL_API_GLX, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLX_glXDestroyContext(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -822,7 +822,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXDestroyGLXPbufferSGIX_args[] = {"dpy", "pbuf"};
-static const PyGLCommand pygl_GLX_glXDestroyGLXPbufferSGIX_info = {"glXDestroyGLXPbufferSGIX", "glXDestroyGLXPbufferSGIX(dpy, pbuf) -> None", "($module, dpy, pbuf, /)", pygl_GLX_glXDestroyGLXPbufferSGIX_args, "GLX_SGIX_pbuffer", 2, 4341, PYGL_API_GLX, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLX_glXDestroyGLXPbufferSGIX_info = {"glXDestroyGLXPbufferSGIX", "glXDestroyGLXPbufferSGIX(dpy, pbuf) -> None", "($module, dpy, pbuf, /)", pygl_GLX_glXDestroyGLXPbufferSGIX_args, "GLX_SGIX_pbuffer", 2, 4413, PYGL_API_GLX, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLX_glXDestroyGLXPbufferSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -843,7 +843,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXDestroyGLXPixmap_args[] = {"dpy", "pixmap"};
-static const PyGLCommand pygl_GLX_glXDestroyGLXPixmap_info = {"glXDestroyGLXPixmap", "glXDestroyGLXPixmap(dpy, pixmap) -> None", "($module, dpy, pixmap, /)", pygl_GLX_glXDestroyGLXPixmap_args, "GLX_VERSION_GLX_1_0", 2, 4342, PYGL_API_GLX, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLX_glXDestroyGLXPixmap_info = {"glXDestroyGLXPixmap", "glXDestroyGLXPixmap(dpy, pixmap) -> None", "($module, dpy, pixmap, /)", pygl_GLX_glXDestroyGLXPixmap_args, "GLX_VERSION_GLX_1_0", 2, 4414, PYGL_API_GLX, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLX_glXDestroyGLXPixmap(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -864,7 +864,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXDestroyGLXVideoSourceSGIX_args[] = {"dpy", "glxvideosource"};
-static const PyGLCommand pygl_GLX_glXDestroyGLXVideoSourceSGIX_info = {"glXDestroyGLXVideoSourceSGIX", "glXDestroyGLXVideoSourceSGIX(dpy, glxvideosource) -> None", "($module, dpy, glxvideosource, /)", pygl_GLX_glXDestroyGLXVideoSourceSGIX_args, "GLX_SGIX_video_source", 2, 4343, PYGL_API_GLX, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLX_glXDestroyGLXVideoSourceSGIX_info = {"glXDestroyGLXVideoSourceSGIX", "glXDestroyGLXVideoSourceSGIX(dpy, glxvideosource) -> None", "($module, dpy, glxvideosource, /)", pygl_GLX_glXDestroyGLXVideoSourceSGIX_args, "GLX_SGIX_video_source", 2, 4415, PYGL_API_GLX, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLX_glXDestroyGLXVideoSourceSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -885,7 +885,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXDestroyHyperpipeConfigSGIX_args[] = {"dpy", "hpId"};
-static const PyGLCommand pygl_GLX_glXDestroyHyperpipeConfigSGIX_info = {"glXDestroyHyperpipeConfigSGIX", "glXDestroyHyperpipeConfigSGIX(dpy, hpId) -> c_int", "($module, dpy, hpId, /)", pygl_GLX_glXDestroyHyperpipeConfigSGIX_args, "GLX_SGIX_hyperpipe", 2, 4344, PYGL_API_GLX, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLX_glXDestroyHyperpipeConfigSGIX_info = {"glXDestroyHyperpipeConfigSGIX", "glXDestroyHyperpipeConfigSGIX(dpy, hpId) -> c_int", "($module, dpy, hpId, /)", pygl_GLX_glXDestroyHyperpipeConfigSGIX_args, "GLX_SGIX_hyperpipe", 2, 4416, PYGL_API_GLX, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLX_glXDestroyHyperpipeConfigSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -907,7 +907,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXDestroyPbuffer_args[] = {"dpy", "pbuf"};
-static const PyGLCommand pygl_GLX_glXDestroyPbuffer_info = {"glXDestroyPbuffer", "glXDestroyPbuffer(dpy, pbuf) -> None", "($module, dpy, pbuf, /)", pygl_GLX_glXDestroyPbuffer_args, "GLX_VERSION_GLX_1_3", 2, 4345, PYGL_API_GLX, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLX_glXDestroyPbuffer_info = {"glXDestroyPbuffer", "glXDestroyPbuffer(dpy, pbuf) -> None", "($module, dpy, pbuf, /)", pygl_GLX_glXDestroyPbuffer_args, "GLX_VERSION_GLX_1_3", 2, 4417, PYGL_API_GLX, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLX_glXDestroyPbuffer(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -928,7 +928,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXDestroyPixmap_args[] = {"dpy", "pixmap"};
-static const PyGLCommand pygl_GLX_glXDestroyPixmap_info = {"glXDestroyPixmap", "glXDestroyPixmap(dpy, pixmap) -> None", "($module, dpy, pixmap, /)", pygl_GLX_glXDestroyPixmap_args, "GLX_VERSION_GLX_1_3", 2, 4346, PYGL_API_GLX, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLX_glXDestroyPixmap_info = {"glXDestroyPixmap", "glXDestroyPixmap(dpy, pixmap) -> None", "($module, dpy, pixmap, /)", pygl_GLX_glXDestroyPixmap_args, "GLX_VERSION_GLX_1_3", 2, 4418, PYGL_API_GLX, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLX_glXDestroyPixmap(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -949,7 +949,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXDestroyWindow_args[] = {"dpy", "win"};
-static const PyGLCommand pygl_GLX_glXDestroyWindow_info = {"glXDestroyWindow", "glXDestroyWindow(dpy, win) -> None", "($module, dpy, win, /)", pygl_GLX_glXDestroyWindow_args, "GLX_VERSION_GLX_1_3", 2, 4347, PYGL_API_GLX, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLX_glXDestroyWindow_info = {"glXDestroyWindow", "glXDestroyWindow(dpy, win) -> None", "($module, dpy, win, /)", pygl_GLX_glXDestroyWindow_args, "GLX_VERSION_GLX_1_3", 2, 4419, PYGL_API_GLX, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLX_glXDestroyWindow(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -970,7 +970,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXFreeContextEXT_args[] = {"dpy", "context"};
-static const PyGLCommand pygl_GLX_glXFreeContextEXT_info = {"glXFreeContextEXT", "glXFreeContextEXT(dpy, context) -> None", "($module, dpy, context, /)", pygl_GLX_glXFreeContextEXT_args, "GLX_EXT_import_context", 2, 4348, PYGL_API_GLX, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLX_glXFreeContextEXT_info = {"glXFreeContextEXT", "glXFreeContextEXT(dpy, context) -> None", "($module, dpy, context, /)", pygl_GLX_glXFreeContextEXT_args, "GLX_EXT_import_context", 2, 4420, PYGL_API_GLX, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLX_glXFreeContextEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -991,7 +991,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetAGPOffsetMESA_args[] = {"pointer"};
-static const PyGLCommand pygl_GLX_glXGetAGPOffsetMESA_info = {"glXGetAGPOffsetMESA", "glXGetAGPOffsetMESA(pointer) -> c_uint", "($module, pointer, /)", pygl_GLX_glXGetAGPOffsetMESA_args, "GLX_MESA_agp_offset", 1, 4349, PYGL_API_GLX, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetAGPOffsetMESA_info = {"glXGetAGPOffsetMESA", "glXGetAGPOffsetMESA(pointer) -> c_uint", "($module, pointer, /)", pygl_GLX_glXGetAGPOffsetMESA_args, "GLX_MESA_agp_offset", 1, 4421, PYGL_API_GLX, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetAGPOffsetMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1012,7 +1012,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetClientString_args[] = {"dpy", "name"};
-static const PyGLCommand pygl_GLX_glXGetClientString_info = {"glXGetClientString", "glXGetClientString(dpy, name) -> GLchar", "($module, dpy, name, /)", pygl_GLX_glXGetClientString_args, "GLX_VERSION_GLX_1_1", 2, 4350, PYGL_API_GLX, 0, 2, 2, 0};
+static const PyGLCommand pygl_GLX_glXGetClientString_info = {"glXGetClientString", "glXGetClientString(dpy, name) -> GLchar", "($module, dpy, name, /)", pygl_GLX_glXGetClientString_args, "GLX_VERSION_GLX_1_1", 2, 4422, PYGL_API_GLX, 0, 2, 2, 0};
 
 static PyObject *
 pygl_GLX_glXGetClientString(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1034,7 +1034,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetConfig_args[] = {"dpy", "visual", "attrib", "value"};
-static const PyGLCommand pygl_GLX_glXGetConfig_info = {"glXGetConfig", "glXGetConfig(dpy, visual, attrib, value) -> c_int", "($module, dpy, visual, attrib, value, /)", pygl_GLX_glXGetConfig_args, "GLX_VERSION_GLX_1_0", 4, 4351, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetConfig_info = {"glXGetConfig", "glXGetConfig(dpy, visual, attrib, value) -> c_int", "($module, dpy, visual, attrib, value, /)", pygl_GLX_glXGetConfig_args, "GLX_VERSION_GLX_1_0", 4, 4423, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetConfig(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1058,7 +1058,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetContextGPUIDAMD_args[] = {"ctx"};
-static const PyGLCommand pygl_GLX_glXGetContextGPUIDAMD_info = {"glXGetContextGPUIDAMD", "glXGetContextGPUIDAMD(ctx) -> c_uint", "($module, ctx, /)", pygl_GLX_glXGetContextGPUIDAMD_args, "GLX_AMD_gpu_association", 1, 4352, PYGL_API_GLX, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetContextGPUIDAMD_info = {"glXGetContextGPUIDAMD", "glXGetContextGPUIDAMD(ctx) -> c_uint", "($module, ctx, /)", pygl_GLX_glXGetContextGPUIDAMD_args, "GLX_AMD_gpu_association", 1, 4424, PYGL_API_GLX, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetContextGPUIDAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1075,7 +1075,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetContextIDEXT_args[] = {"context"};
-static const PyGLCommand pygl_GLX_glXGetContextIDEXT_info = {"glXGetContextIDEXT", "glXGetContextIDEXT(context) -> GLXContextID", "($module, context, /)", pygl_GLX_glXGetContextIDEXT_args, "GLX_EXT_import_context", 1, 4353, PYGL_API_GLX, 0, 1, 4, 0};
+static const PyGLCommand pygl_GLX_glXGetContextIDEXT_info = {"glXGetContextIDEXT", "glXGetContextIDEXT(context) -> GLXContextID", "($module, context, /)", pygl_GLX_glXGetContextIDEXT_args, "GLX_EXT_import_context", 1, 4425, PYGL_API_GLX, 0, 1, 4, 0};
 
 static PyObject *
 pygl_GLX_glXGetContextIDEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1091,7 +1091,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXGetCurrentAssociatedContextAMD_info = {"glXGetCurrentAssociatedContextAMD", "glXGetCurrentAssociatedContextAMD() -> GLXContext", "($module, /)", NULL, "GLX_AMD_gpu_association", 0, 4354, PYGL_API_GLX, 0, 0, 4, 0};
+static const PyGLCommand pygl_GLX_glXGetCurrentAssociatedContextAMD_info = {"glXGetCurrentAssociatedContextAMD", "glXGetCurrentAssociatedContextAMD() -> GLXContext", "($module, /)", NULL, "GLX_AMD_gpu_association", 0, 4426, PYGL_API_GLX, 0, 0, 4, 0};
 
 static PyObject *
 pygl_GLX_glXGetCurrentAssociatedContextAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1106,7 +1106,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXGetCurrentContext_info = {"glXGetCurrentContext", "glXGetCurrentContext() -> GLXContext", "($module, /)", NULL, "GLX_VERSION_GLX_1_0", 0, 4355, PYGL_API_GLX, 0, 0, 4, 0};
+static const PyGLCommand pygl_GLX_glXGetCurrentContext_info = {"glXGetCurrentContext", "glXGetCurrentContext() -> GLXContext", "($module, /)", NULL, "GLX_VERSION_GLX_1_0", 0, 4427, PYGL_API_GLX, 0, 0, 4, 0};
 
 static PyObject *
 pygl_GLX_glXGetCurrentContext(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1121,7 +1121,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXGetCurrentDrawable_info = {"glXGetCurrentDrawable", "glXGetCurrentDrawable() -> GLXDrawable", "($module, /)", NULL, "GLX_VERSION_GLX_1_0", 0, 4356, PYGL_API_GLX, 0, 0, 4, 0};
+static const PyGLCommand pygl_GLX_glXGetCurrentDrawable_info = {"glXGetCurrentDrawable", "glXGetCurrentDrawable() -> GLXDrawable", "($module, /)", NULL, "GLX_VERSION_GLX_1_0", 0, 4428, PYGL_API_GLX, 0, 0, 4, 0};
 
 static PyObject *
 pygl_GLX_glXGetCurrentDrawable(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1136,7 +1136,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXGetCurrentReadDrawable_info = {"glXGetCurrentReadDrawable", "glXGetCurrentReadDrawable() -> GLXDrawable", "($module, /)", NULL, "GLX_VERSION_GLX_1_3", 0, 4357, PYGL_API_GLX, 0, 0, 4, 0};
+static const PyGLCommand pygl_GLX_glXGetCurrentReadDrawable_info = {"glXGetCurrentReadDrawable", "glXGetCurrentReadDrawable() -> GLXDrawable", "($module, /)", NULL, "GLX_VERSION_GLX_1_3", 0, 4429, PYGL_API_GLX, 0, 0, 4, 0};
 
 static PyObject *
 pygl_GLX_glXGetCurrentReadDrawable(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1151,7 +1151,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXGetCurrentReadDrawableSGI_info = {"glXGetCurrentReadDrawableSGI", "glXGetCurrentReadDrawableSGI() -> GLXDrawable", "($module, /)", NULL, "GLX_SGI_make_current_read", 0, 4358, PYGL_API_GLX, 0, 0, 4, 0};
+static const PyGLCommand pygl_GLX_glXGetCurrentReadDrawableSGI_info = {"glXGetCurrentReadDrawableSGI", "glXGetCurrentReadDrawableSGI() -> GLXDrawable", "($module, /)", NULL, "GLX_SGI_make_current_read", 0, 4430, PYGL_API_GLX, 0, 0, 4, 0};
 
 static PyObject *
 pygl_GLX_glXGetCurrentReadDrawableSGI(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1167,7 +1167,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetFBConfigAttrib_args[] = {"dpy", "config", "attribute", "value"};
-static const PyGLCommand pygl_GLX_glXGetFBConfigAttrib_info = {"glXGetFBConfigAttrib", "glXGetFBConfigAttrib(dpy, config, attribute, value) -> c_int", "($module, dpy, config, attribute, value, /)", pygl_GLX_glXGetFBConfigAttrib_args, "GLX_VERSION_GLX_1_3", 4, 4359, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetFBConfigAttrib_info = {"glXGetFBConfigAttrib", "glXGetFBConfigAttrib(dpy, config, attribute, value) -> c_int", "($module, dpy, config, attribute, value, /)", pygl_GLX_glXGetFBConfigAttrib_args, "GLX_VERSION_GLX_1_3", 4, 4431, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetFBConfigAttrib(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1191,7 +1191,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetFBConfigAttribSGIX_args[] = {"dpy", "config", "attribute", "value"};
-static const PyGLCommand pygl_GLX_glXGetFBConfigAttribSGIX_info = {"glXGetFBConfigAttribSGIX", "glXGetFBConfigAttribSGIX(dpy, config, attribute, value) -> c_int", "($module, dpy, config, attribute, value, /)", pygl_GLX_glXGetFBConfigAttribSGIX_args, "GLX_SGIX_fbconfig", 4, 4360, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetFBConfigAttribSGIX_info = {"glXGetFBConfigAttribSGIX", "glXGetFBConfigAttribSGIX(dpy, config, attribute, value) -> c_int", "($module, dpy, config, attribute, value, /)", pygl_GLX_glXGetFBConfigAttribSGIX_args, "GLX_SGIX_fbconfig", 4, 4432, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetFBConfigAttribSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1215,7 +1215,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetFBConfigFromVisualSGIX_args[] = {"dpy", "vis"};
-static const PyGLCommand pygl_GLX_glXGetFBConfigFromVisualSGIX_info = {"glXGetFBConfigFromVisualSGIX", "glXGetFBConfigFromVisualSGIX(dpy, vis) -> GLXFBConfigSGIX", "($module, dpy, vis, /)", pygl_GLX_glXGetFBConfigFromVisualSGIX_args, "GLX_SGIX_fbconfig", 2, 4361, PYGL_API_GLX, 0, 2, 4, 0};
+static const PyGLCommand pygl_GLX_glXGetFBConfigFromVisualSGIX_info = {"glXGetFBConfigFromVisualSGIX", "glXGetFBConfigFromVisualSGIX(dpy, vis) -> GLXFBConfigSGIX", "($module, dpy, vis, /)", pygl_GLX_glXGetFBConfigFromVisualSGIX_args, "GLX_SGIX_fbconfig", 2, 4433, PYGL_API_GLX, 0, 2, 4, 0};
 
 static PyObject *
 pygl_GLX_glXGetFBConfigFromVisualSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1237,7 +1237,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetGPUIDsAMD_args[] = {"maxCount", "ids"};
-static const PyGLCommand pygl_GLX_glXGetGPUIDsAMD_info = {"glXGetGPUIDsAMD", "glXGetGPUIDsAMD(maxCount, ids) -> c_uint", "($module, maxCount, ids, /)", pygl_GLX_glXGetGPUIDsAMD_args, "GLX_AMD_gpu_association", 2, 4362, PYGL_API_GLX, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetGPUIDsAMD_info = {"glXGetGPUIDsAMD", "glXGetGPUIDsAMD(maxCount, ids) -> c_uint", "($module, maxCount, ids, /)", pygl_GLX_glXGetGPUIDsAMD_args, "GLX_AMD_gpu_association", 2, 4434, PYGL_API_GLX, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetGPUIDsAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1259,7 +1259,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetGPUInfoAMD_args[] = {"id", "property", "dataType", "size", "data"};
-static const PyGLCommand pygl_GLX_glXGetGPUInfoAMD_info = {"glXGetGPUInfoAMD", "glXGetGPUInfoAMD(id, property, dataType, size, data) -> c_int", "($module, id, property, dataType, size, data, /)", pygl_GLX_glXGetGPUInfoAMD_args, "GLX_AMD_gpu_association", 5, 4363, PYGL_API_GLX, 0, 5, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetGPUInfoAMD_info = {"glXGetGPUInfoAMD", "glXGetGPUInfoAMD(id, property, dataType, size, data) -> c_int", "($module, id, property, dataType, size, data, /)", pygl_GLX_glXGetGPUInfoAMD_args, "GLX_AMD_gpu_association", 5, 4435, PYGL_API_GLX, 0, 5, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetGPUInfoAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1284,7 +1284,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetMscRateOML_args[] = {"dpy", "drawable", "numerator", "denominator"};
-static const PyGLCommand pygl_GLX_glXGetMscRateOML_info = {"glXGetMscRateOML", "glXGetMscRateOML(dpy, drawable, numerator, denominator) -> Bool", "($module, dpy, drawable, numerator, denominator, /)", pygl_GLX_glXGetMscRateOML_args, "GLX_OML_sync_control", 4, 4364, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetMscRateOML_info = {"glXGetMscRateOML", "glXGetMscRateOML(dpy, drawable, numerator, denominator) -> Bool", "($module, dpy, drawable, numerator, denominator, /)", pygl_GLX_glXGetMscRateOML_args, "GLX_OML_sync_control", 4, 4436, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetMscRateOML(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1308,7 +1308,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetProcAddress_args[] = {"procName"};
-static const PyGLCommand pygl_GLX_glXGetProcAddress_info = {"glXGetProcAddress", "glXGetProcAddress(procName) -> __GLXextFuncPtr", "($module, procName, /)", pygl_GLX_glXGetProcAddress_args, "GLX_VERSION_GLX_1_4", 1, 4365, PYGL_API_GLX, 0, 1, 4, 0};
+static const PyGLCommand pygl_GLX_glXGetProcAddress_info = {"glXGetProcAddress", "glXGetProcAddress(procName) -> __GLXextFuncPtr", "($module, procName, /)", pygl_GLX_glXGetProcAddress_args, "GLX_VERSION_GLX_1_4", 1, 4437, PYGL_API_GLX, 0, 1, 4, 0};
 
 static PyObject *
 pygl_GLX_glXGetProcAddress(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1329,7 +1329,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetProcAddressARB_args[] = {"procName"};
-static const PyGLCommand pygl_GLX_glXGetProcAddressARB_info = {"glXGetProcAddressARB", "glXGetProcAddressARB(procName) -> __GLXextFuncPtr", "($module, procName, /)", pygl_GLX_glXGetProcAddressARB_args, "GLX_ARB_get_proc_address", 1, 4366, PYGL_API_GLX, 0, 1, 4, 0};
+static const PyGLCommand pygl_GLX_glXGetProcAddressARB_info = {"glXGetProcAddressARB", "glXGetProcAddressARB(procName) -> __GLXextFuncPtr", "($module, procName, /)", pygl_GLX_glXGetProcAddressARB_args, "GLX_ARB_get_proc_address", 1, 4438, PYGL_API_GLX, 0, 1, 4, 0};
 
 static PyObject *
 pygl_GLX_glXGetProcAddressARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1350,7 +1350,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetSelectedEvent_args[] = {"dpy", "draw", "event_mask"};
-static const PyGLCommand pygl_GLX_glXGetSelectedEvent_info = {"glXGetSelectedEvent", "glXGetSelectedEvent(dpy, draw, event_mask) -> None", "($module, dpy, draw, event_mask, /)", pygl_GLX_glXGetSelectedEvent_args, "GLX_VERSION_GLX_1_3", 3, 4367, PYGL_API_GLX, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLX_glXGetSelectedEvent_info = {"glXGetSelectedEvent", "glXGetSelectedEvent(dpy, draw, event_mask) -> None", "($module, dpy, draw, event_mask, /)", pygl_GLX_glXGetSelectedEvent_args, "GLX_VERSION_GLX_1_3", 3, 4439, PYGL_API_GLX, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLX_glXGetSelectedEvent(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1372,7 +1372,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetSelectedEventSGIX_args[] = {"dpy", "drawable", "mask"};
-static const PyGLCommand pygl_GLX_glXGetSelectedEventSGIX_info = {"glXGetSelectedEventSGIX", "glXGetSelectedEventSGIX(dpy, drawable, mask) -> None", "($module, dpy, drawable, mask, /)", pygl_GLX_glXGetSelectedEventSGIX_args, "GLX_SGIX_pbuffer", 3, 4368, PYGL_API_GLX, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLX_glXGetSelectedEventSGIX_info = {"glXGetSelectedEventSGIX", "glXGetSelectedEventSGIX(dpy, drawable, mask) -> None", "($module, dpy, drawable, mask, /)", pygl_GLX_glXGetSelectedEventSGIX_args, "GLX_SGIX_pbuffer", 3, 4440, PYGL_API_GLX, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLX_glXGetSelectedEventSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1393,7 +1393,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXGetSwapIntervalMESA_info = {"glXGetSwapIntervalMESA", "glXGetSwapIntervalMESA() -> c_int", "($module, /)", NULL, "GLX_MESA_swap_control", 0, 4369, PYGL_API_GLX, 0, 0, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetSwapIntervalMESA_info = {"glXGetSwapIntervalMESA", "glXGetSwapIntervalMESA() -> c_int", "($module, /)", NULL, "GLX_MESA_swap_control", 0, 4441, PYGL_API_GLX, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetSwapIntervalMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1409,7 +1409,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetSyncValuesOML_args[] = {"dpy", "drawable", "ust", "msc", "sbc"};
-static const PyGLCommand pygl_GLX_glXGetSyncValuesOML_info = {"glXGetSyncValuesOML", "glXGetSyncValuesOML(dpy, drawable, ust, msc, sbc) -> Bool", "($module, dpy, drawable, ust, msc, sbc, /)", pygl_GLX_glXGetSyncValuesOML_args, "GLX_OML_sync_control", 5, 4370, PYGL_API_GLX, 0, 5, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetSyncValuesOML_info = {"glXGetSyncValuesOML", "glXGetSyncValuesOML(dpy, drawable, ust, msc, sbc) -> Bool", "($module, dpy, drawable, ust, msc, sbc, /)", pygl_GLX_glXGetSyncValuesOML_args, "GLX_OML_sync_control", 5, 4442, PYGL_API_GLX, 0, 5, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetSyncValuesOML(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1434,7 +1434,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetTransparentIndexSUN_args[] = {"dpy", "overlay", "underlay", "pTransparentIndex"};
-static const PyGLCommand pygl_GLX_glXGetTransparentIndexSUN_info = {"glXGetTransparentIndexSUN", "glXGetTransparentIndexSUN(dpy, overlay, underlay, pTransparentIndex) -> Status", "($module, dpy, overlay, underlay, pTransparentIndex, /)", pygl_GLX_glXGetTransparentIndexSUN_args, "GLX_SUN_get_transparent_index", 4, 4371, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetTransparentIndexSUN_info = {"glXGetTransparentIndexSUN", "glXGetTransparentIndexSUN(dpy, overlay, underlay, pTransparentIndex) -> Status", "($module, dpy, overlay, underlay, pTransparentIndex, /)", pygl_GLX_glXGetTransparentIndexSUN_args, "GLX_SUN_get_transparent_index", 4, 4443, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetTransparentIndexSUN(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1458,7 +1458,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetVideoDeviceNV_args[] = {"dpy", "screen", "numVideoDevices", "pVideoDevice"};
-static const PyGLCommand pygl_GLX_glXGetVideoDeviceNV_info = {"glXGetVideoDeviceNV", "glXGetVideoDeviceNV(dpy, screen, numVideoDevices, pVideoDevice) -> c_int", "($module, dpy, screen, numVideoDevices, pVideoDevice, /)", pygl_GLX_glXGetVideoDeviceNV_args, "GLX_NV_video_out", 4, 4372, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetVideoDeviceNV_info = {"glXGetVideoDeviceNV", "glXGetVideoDeviceNV(dpy, screen, numVideoDevices, pVideoDevice) -> c_int", "($module, dpy, screen, numVideoDevices, pVideoDevice, /)", pygl_GLX_glXGetVideoDeviceNV_args, "GLX_NV_video_out", 4, 4444, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetVideoDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1482,7 +1482,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetVideoInfoNV_args[] = {"dpy", "screen", "VideoDevice", "pulCounterOutputPbuffer", "pulCounterOutputVideo"};
-static const PyGLCommand pygl_GLX_glXGetVideoInfoNV_info = {"glXGetVideoInfoNV", "glXGetVideoInfoNV(dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo) -> c_int", "($module, dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo, /)", pygl_GLX_glXGetVideoInfoNV_args, "GLX_NV_video_out", 5, 4373, PYGL_API_GLX, 0, 5, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetVideoInfoNV_info = {"glXGetVideoInfoNV", "glXGetVideoInfoNV(dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo) -> c_int", "($module, dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo, /)", pygl_GLX_glXGetVideoInfoNV_args, "GLX_NV_video_out", 5, 4445, PYGL_API_GLX, 0, 5, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetVideoInfoNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1507,7 +1507,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXGetVideoSyncSGI_args[] = {"count"};
-static const PyGLCommand pygl_GLX_glXGetVideoSyncSGI_info = {"glXGetVideoSyncSGI", "glXGetVideoSyncSGI(count) -> c_int", "($module, count, /)", pygl_GLX_glXGetVideoSyncSGI_args, "GLX_SGI_video_sync", 1, 4374, PYGL_API_GLX, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetVideoSyncSGI_info = {"glXGetVideoSyncSGI", "glXGetVideoSyncSGI(count) -> c_int", "($module, count, /)", pygl_GLX_glXGetVideoSyncSGI_args, "GLX_SGI_video_sync", 1, 4446, PYGL_API_GLX, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetVideoSyncSGI(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1528,7 +1528,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXHyperpipeAttribSGIX_args[] = {"dpy", "timeSlice", "attrib", "size", "attribList"};
-static const PyGLCommand pygl_GLX_glXHyperpipeAttribSGIX_info = {"glXHyperpipeAttribSGIX", "glXHyperpipeAttribSGIX(dpy, timeSlice, attrib, size, attribList) -> c_int", "($module, dpy, timeSlice, attrib, size, attribList, /)", pygl_GLX_glXHyperpipeAttribSGIX_args, "GLX_SGIX_hyperpipe", 5, 4375, PYGL_API_GLX, 0, 5, 1, 0};
+static const PyGLCommand pygl_GLX_glXHyperpipeAttribSGIX_info = {"glXHyperpipeAttribSGIX", "glXHyperpipeAttribSGIX(dpy, timeSlice, attrib, size, attribList) -> c_int", "($module, dpy, timeSlice, attrib, size, attribList, /)", pygl_GLX_glXHyperpipeAttribSGIX_args, "GLX_SGIX_hyperpipe", 5, 4447, PYGL_API_GLX, 0, 5, 1, 0};
 
 static PyObject *
 pygl_GLX_glXHyperpipeAttribSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1553,7 +1553,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXHyperpipeConfigSGIX_args[] = {"dpy", "networkId", "npipes", "cfg", "hpId"};
-static const PyGLCommand pygl_GLX_glXHyperpipeConfigSGIX_info = {"glXHyperpipeConfigSGIX", "glXHyperpipeConfigSGIX(dpy, networkId, npipes, cfg, hpId) -> c_int", "($module, dpy, networkId, npipes, cfg, hpId, /)", pygl_GLX_glXHyperpipeConfigSGIX_args, "GLX_SGIX_hyperpipe", 5, 4376, PYGL_API_GLX, 0, 5, 1, 0};
+static const PyGLCommand pygl_GLX_glXHyperpipeConfigSGIX_info = {"glXHyperpipeConfigSGIX", "glXHyperpipeConfigSGIX(dpy, networkId, npipes, cfg, hpId) -> c_int", "($module, dpy, networkId, npipes, cfg, hpId, /)", pygl_GLX_glXHyperpipeConfigSGIX_args, "GLX_SGIX_hyperpipe", 5, 4448, PYGL_API_GLX, 0, 5, 1, 0};
 
 static PyObject *
 pygl_GLX_glXHyperpipeConfigSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1578,7 +1578,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXImportContextEXT_args[] = {"dpy", "contextID"};
-static const PyGLCommand pygl_GLX_glXImportContextEXT_info = {"glXImportContextEXT", "glXImportContextEXT(dpy, contextID) -> GLXContext", "($module, dpy, contextID, /)", pygl_GLX_glXImportContextEXT_args, "GLX_EXT_import_context", 2, 4377, PYGL_API_GLX, 0, 2, 4, 0};
+static const PyGLCommand pygl_GLX_glXImportContextEXT_info = {"glXImportContextEXT", "glXImportContextEXT(dpy, contextID) -> GLXContext", "($module, dpy, contextID, /)", pygl_GLX_glXImportContextEXT_args, "GLX_EXT_import_context", 2, 4449, PYGL_API_GLX, 0, 2, 4, 0};
 
 static PyObject *
 pygl_GLX_glXImportContextEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1600,7 +1600,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXIsDirect_args[] = {"dpy", "ctx"};
-static const PyGLCommand pygl_GLX_glXIsDirect_info = {"glXIsDirect", "glXIsDirect(dpy, ctx) -> Bool", "($module, dpy, ctx, /)", pygl_GLX_glXIsDirect_args, "GLX_VERSION_GLX_1_0", 2, 4378, PYGL_API_GLX, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLX_glXIsDirect_info = {"glXIsDirect", "glXIsDirect(dpy, ctx) -> Bool", "($module, dpy, ctx, /)", pygl_GLX_glXIsDirect_args, "GLX_VERSION_GLX_1_0", 2, 4450, PYGL_API_GLX, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLX_glXIsDirect(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1622,7 +1622,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXJoinSwapGroupNV_args[] = {"dpy", "drawable", "group"};
-static const PyGLCommand pygl_GLX_glXJoinSwapGroupNV_info = {"glXJoinSwapGroupNV", "glXJoinSwapGroupNV(dpy, drawable, group) -> Bool", "($module, dpy, drawable, group, /)", pygl_GLX_glXJoinSwapGroupNV_args, "GLX_NV_swap_group", 3, 4379, PYGL_API_GLX, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLX_glXJoinSwapGroupNV_info = {"glXJoinSwapGroupNV", "glXJoinSwapGroupNV(dpy, drawable, group) -> Bool", "($module, dpy, drawable, group, /)", pygl_GLX_glXJoinSwapGroupNV_args, "GLX_NV_swap_group", 3, 4451, PYGL_API_GLX, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLX_glXJoinSwapGroupNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1645,7 +1645,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXJoinSwapGroupSGIX_args[] = {"dpy", "drawable", "member"};
-static const PyGLCommand pygl_GLX_glXJoinSwapGroupSGIX_info = {"glXJoinSwapGroupSGIX", "glXJoinSwapGroupSGIX(dpy, drawable, member) -> None", "($module, dpy, drawable, member, /)", pygl_GLX_glXJoinSwapGroupSGIX_args, "GLX_SGIX_swap_group", 3, 4380, PYGL_API_GLX, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLX_glXJoinSwapGroupSGIX_info = {"glXJoinSwapGroupSGIX", "glXJoinSwapGroupSGIX(dpy, drawable, member) -> None", "($module, dpy, drawable, member, /)", pygl_GLX_glXJoinSwapGroupSGIX_args, "GLX_SGIX_swap_group", 3, 4452, PYGL_API_GLX, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLX_glXJoinSwapGroupSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1667,7 +1667,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXLockVideoCaptureDeviceNV_args[] = {"dpy", "device"};
-static const PyGLCommand pygl_GLX_glXLockVideoCaptureDeviceNV_info = {"glXLockVideoCaptureDeviceNV", "glXLockVideoCaptureDeviceNV(dpy, device) -> None", "($module, dpy, device, /)", pygl_GLX_glXLockVideoCaptureDeviceNV_args, "GLX_NV_video_capture", 2, 4381, PYGL_API_GLX, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLX_glXLockVideoCaptureDeviceNV_info = {"glXLockVideoCaptureDeviceNV", "glXLockVideoCaptureDeviceNV(dpy, device) -> None", "($module, dpy, device, /)", pygl_GLX_glXLockVideoCaptureDeviceNV_args, "GLX_NV_video_capture", 2, 4453, PYGL_API_GLX, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLX_glXLockVideoCaptureDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1688,7 +1688,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXMakeAssociatedContextCurrentAMD_args[] = {"ctx"};
-static const PyGLCommand pygl_GLX_glXMakeAssociatedContextCurrentAMD_info = {"glXMakeAssociatedContextCurrentAMD", "glXMakeAssociatedContextCurrentAMD(ctx) -> Bool", "($module, ctx, /)", pygl_GLX_glXMakeAssociatedContextCurrentAMD_args, "GLX_AMD_gpu_association", 1, 4382, PYGL_API_GLX, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLX_glXMakeAssociatedContextCurrentAMD_info = {"glXMakeAssociatedContextCurrentAMD", "glXMakeAssociatedContextCurrentAMD(ctx) -> Bool", "($module, ctx, /)", pygl_GLX_glXMakeAssociatedContextCurrentAMD_args, "GLX_AMD_gpu_association", 1, 4454, PYGL_API_GLX, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLX_glXMakeAssociatedContextCurrentAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1705,7 +1705,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXMakeContextCurrent_args[] = {"dpy", "draw", "read", "ctx"};
-static const PyGLCommand pygl_GLX_glXMakeContextCurrent_info = {"glXMakeContextCurrent", "glXMakeContextCurrent(dpy, draw, read, ctx) -> Bool", "($module, dpy, draw, read, ctx, /)", pygl_GLX_glXMakeContextCurrent_args, "GLX_VERSION_GLX_1_3", 4, 4383, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXMakeContextCurrent_info = {"glXMakeContextCurrent", "glXMakeContextCurrent(dpy, draw, read, ctx) -> Bool", "($module, dpy, draw, read, ctx, /)", pygl_GLX_glXMakeContextCurrent_args, "GLX_VERSION_GLX_1_3", 4, 4455, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXMakeContextCurrent(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1729,7 +1729,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXMakeCurrent_args[] = {"dpy", "drawable", "ctx"};
-static const PyGLCommand pygl_GLX_glXMakeCurrent_info = {"glXMakeCurrent", "glXMakeCurrent(dpy, drawable, ctx) -> Bool", "($module, dpy, drawable, ctx, /)", pygl_GLX_glXMakeCurrent_args, "GLX_VERSION_GLX_1_0", 3, 4384, PYGL_API_GLX, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLX_glXMakeCurrent_info = {"glXMakeCurrent", "glXMakeCurrent(dpy, drawable, ctx) -> Bool", "($module, dpy, drawable, ctx, /)", pygl_GLX_glXMakeCurrent_args, "GLX_VERSION_GLX_1_0", 3, 4456, PYGL_API_GLX, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLX_glXMakeCurrent(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1752,7 +1752,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXMakeCurrentReadSGI_args[] = {"dpy", "draw", "read", "ctx"};
-static const PyGLCommand pygl_GLX_glXMakeCurrentReadSGI_info = {"glXMakeCurrentReadSGI", "glXMakeCurrentReadSGI(dpy, draw, read, ctx) -> Bool", "($module, dpy, draw, read, ctx, /)", pygl_GLX_glXMakeCurrentReadSGI_args, "GLX_SGI_make_current_read", 4, 4385, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXMakeCurrentReadSGI_info = {"glXMakeCurrentReadSGI", "glXMakeCurrentReadSGI(dpy, draw, read, ctx) -> Bool", "($module, dpy, draw, read, ctx, /)", pygl_GLX_glXMakeCurrentReadSGI_args, "GLX_SGI_make_current_read", 4, 4457, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXMakeCurrentReadSGI(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1776,7 +1776,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXNamedCopyBufferSubDataNV_args[] = {"dpy", "readCtx", "writeCtx", "readBuffer", "writeBuffer", "readOffset", "writeOffset", "size"};
-static const PyGLCommand pygl_GLX_glXNamedCopyBufferSubDataNV_info = {"glXNamedCopyBufferSubDataNV", "glXNamedCopyBufferSubDataNV(dpy, readCtx, writeCtx, readBuffer, writeBuffer, readOffset, writeOffset, size) -> None", "($module, dpy, readCtx, writeCtx, readBuffer, writeBuffer, readOffset, writeOffset, size, /)", pygl_GLX_glXNamedCopyBufferSubDataNV_args, "GLX_NV_copy_buffer", 8, 4386, PYGL_API_GLX, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLX_glXNamedCopyBufferSubDataNV_info = {"glXNamedCopyBufferSubDataNV", "glXNamedCopyBufferSubDataNV(dpy, readCtx, writeCtx, readBuffer, writeBuffer, readOffset, writeOffset, size) -> None", "($module, dpy, readCtx, writeCtx, readBuffer, writeBuffer, readOffset, writeOffset, size, /)", pygl_GLX_glXNamedCopyBufferSubDataNV_args, "GLX_NV_copy_buffer", 8, 4458, PYGL_API_GLX, 0, 8, 0, 0};
 
 static PyObject *
 pygl_GLX_glXNamedCopyBufferSubDataNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1803,7 +1803,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryChannelDeltasSGIX_args[] = {"display", "screen", "channel", "x", "y", "w", "h"};
-static const PyGLCommand pygl_GLX_glXQueryChannelDeltasSGIX_info = {"glXQueryChannelDeltasSGIX", "glXQueryChannelDeltasSGIX(display, screen, channel, x, y, w, h) -> c_int", "($module, display, screen, channel, x, y, w, h, /)", pygl_GLX_glXQueryChannelDeltasSGIX_args, "GLX_SGIX_video_resize", 7, 4387, PYGL_API_GLX, 0, 7, 1, 0};
+static const PyGLCommand pygl_GLX_glXQueryChannelDeltasSGIX_info = {"glXQueryChannelDeltasSGIX", "glXQueryChannelDeltasSGIX(display, screen, channel, x, y, w, h) -> c_int", "($module, display, screen, channel, x, y, w, h, /)", pygl_GLX_glXQueryChannelDeltasSGIX_args, "GLX_SGIX_video_resize", 7, 4459, PYGL_API_GLX, 0, 7, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQueryChannelDeltasSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1830,7 +1830,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryChannelRectSGIX_args[] = {"display", "screen", "channel", "dx", "dy", "dw", "dh"};
-static const PyGLCommand pygl_GLX_glXQueryChannelRectSGIX_info = {"glXQueryChannelRectSGIX", "glXQueryChannelRectSGIX(display, screen, channel, dx, dy, dw, dh) -> c_int", "($module, display, screen, channel, dx, dy, dw, dh, /)", pygl_GLX_glXQueryChannelRectSGIX_args, "GLX_SGIX_video_resize", 7, 4388, PYGL_API_GLX, 0, 7, 1, 0};
+static const PyGLCommand pygl_GLX_glXQueryChannelRectSGIX_info = {"glXQueryChannelRectSGIX", "glXQueryChannelRectSGIX(display, screen, channel, dx, dy, dw, dh) -> c_int", "($module, display, screen, channel, dx, dy, dw, dh, /)", pygl_GLX_glXQueryChannelRectSGIX_args, "GLX_SGIX_video_resize", 7, 4460, PYGL_API_GLX, 0, 7, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQueryChannelRectSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1857,7 +1857,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryContext_args[] = {"dpy", "ctx", "attribute", "value"};
-static const PyGLCommand pygl_GLX_glXQueryContext_info = {"glXQueryContext", "glXQueryContext(dpy, ctx, attribute, value) -> c_int", "($module, dpy, ctx, attribute, value, /)", pygl_GLX_glXQueryContext_args, "GLX_VERSION_GLX_1_3", 4, 4389, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXQueryContext_info = {"glXQueryContext", "glXQueryContext(dpy, ctx, attribute, value) -> c_int", "($module, dpy, ctx, attribute, value, /)", pygl_GLX_glXQueryContext_args, "GLX_VERSION_GLX_1_3", 4, 4461, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQueryContext(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1881,7 +1881,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryContextInfoEXT_args[] = {"dpy", "context", "attribute", "value"};
-static const PyGLCommand pygl_GLX_glXQueryContextInfoEXT_info = {"glXQueryContextInfoEXT", "glXQueryContextInfoEXT(dpy, context, attribute, value) -> c_int", "($module, dpy, context, attribute, value, /)", pygl_GLX_glXQueryContextInfoEXT_args, "GLX_EXT_import_context", 4, 4390, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXQueryContextInfoEXT_info = {"glXQueryContextInfoEXT", "glXQueryContextInfoEXT(dpy, context, attribute, value) -> c_int", "($module, dpy, context, attribute, value, /)", pygl_GLX_glXQueryContextInfoEXT_args, "GLX_EXT_import_context", 4, 4462, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQueryContextInfoEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1905,7 +1905,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryCurrentRendererIntegerMESA_args[] = {"attribute", "value"};
-static const PyGLCommand pygl_GLX_glXQueryCurrentRendererIntegerMESA_info = {"glXQueryCurrentRendererIntegerMESA", "glXQueryCurrentRendererIntegerMESA(attribute, value) -> Bool", "($module, attribute, value, /)", pygl_GLX_glXQueryCurrentRendererIntegerMESA_args, "GLX_MESA_query_renderer", 2, 4391, PYGL_API_GLX, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLX_glXQueryCurrentRendererIntegerMESA_info = {"glXQueryCurrentRendererIntegerMESA", "glXQueryCurrentRendererIntegerMESA(attribute, value) -> Bool", "($module, attribute, value, /)", pygl_GLX_glXQueryCurrentRendererIntegerMESA_args, "GLX_MESA_query_renderer", 2, 4463, PYGL_API_GLX, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQueryCurrentRendererIntegerMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1927,7 +1927,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryCurrentRendererStringMESA_args[] = {"attribute"};
-static const PyGLCommand pygl_GLX_glXQueryCurrentRendererStringMESA_info = {"glXQueryCurrentRendererStringMESA", "glXQueryCurrentRendererStringMESA(attribute) -> GLchar", "($module, attribute, /)", pygl_GLX_glXQueryCurrentRendererStringMESA_args, "GLX_MESA_query_renderer", 1, 4392, PYGL_API_GLX, 0, 1, 2, 0};
+static const PyGLCommand pygl_GLX_glXQueryCurrentRendererStringMESA_info = {"glXQueryCurrentRendererStringMESA", "glXQueryCurrentRendererStringMESA(attribute) -> GLchar", "($module, attribute, /)", pygl_GLX_glXQueryCurrentRendererStringMESA_args, "GLX_MESA_query_renderer", 1, 4464, PYGL_API_GLX, 0, 1, 2, 0};
 
 static PyObject *
 pygl_GLX_glXQueryCurrentRendererStringMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1944,7 +1944,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryDrawable_args[] = {"dpy", "draw", "attribute", "value"};
-static const PyGLCommand pygl_GLX_glXQueryDrawable_info = {"glXQueryDrawable", "glXQueryDrawable(dpy, draw, attribute, value) -> None", "($module, dpy, draw, attribute, value, /)", pygl_GLX_glXQueryDrawable_args, "GLX_VERSION_GLX_1_3", 4, 4393, PYGL_API_GLX, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLX_glXQueryDrawable_info = {"glXQueryDrawable", "glXQueryDrawable(dpy, draw, attribute, value) -> None", "($module, dpy, draw, attribute, value, /)", pygl_GLX_glXQueryDrawable_args, "GLX_VERSION_GLX_1_3", 4, 4465, PYGL_API_GLX, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLX_glXQueryDrawable(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1967,7 +1967,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryExtension_args[] = {"dpy", "errorb", "event"};
-static const PyGLCommand pygl_GLX_glXQueryExtension_info = {"glXQueryExtension", "glXQueryExtension(dpy, errorb, event) -> Bool", "($module, dpy, errorb, event, /)", pygl_GLX_glXQueryExtension_args, "GLX_VERSION_GLX_1_0", 3, 4394, PYGL_API_GLX, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLX_glXQueryExtension_info = {"glXQueryExtension", "glXQueryExtension(dpy, errorb, event) -> Bool", "($module, dpy, errorb, event, /)", pygl_GLX_glXQueryExtension_args, "GLX_VERSION_GLX_1_0", 3, 4466, PYGL_API_GLX, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQueryExtension(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1990,7 +1990,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryExtensionsString_args[] = {"dpy", "screen"};
-static const PyGLCommand pygl_GLX_glXQueryExtensionsString_info = {"glXQueryExtensionsString", "glXQueryExtensionsString(dpy, screen) -> GLchar", "($module, dpy, screen, /)", pygl_GLX_glXQueryExtensionsString_args, "GLX_VERSION_GLX_1_1", 2, 4395, PYGL_API_GLX, 0, 2, 2, 0};
+static const PyGLCommand pygl_GLX_glXQueryExtensionsString_info = {"glXQueryExtensionsString", "glXQueryExtensionsString(dpy, screen) -> GLchar", "($module, dpy, screen, /)", pygl_GLX_glXQueryExtensionsString_args, "GLX_VERSION_GLX_1_1", 2, 4467, PYGL_API_GLX, 0, 2, 2, 0};
 
 static PyObject *
 pygl_GLX_glXQueryExtensionsString(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2012,7 +2012,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryFrameCountNV_args[] = {"dpy", "screen", "count"};
-static const PyGLCommand pygl_GLX_glXQueryFrameCountNV_info = {"glXQueryFrameCountNV", "glXQueryFrameCountNV(dpy, screen, count) -> Bool", "($module, dpy, screen, count, /)", pygl_GLX_glXQueryFrameCountNV_args, "GLX_NV_swap_group", 3, 4396, PYGL_API_GLX, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLX_glXQueryFrameCountNV_info = {"glXQueryFrameCountNV", "glXQueryFrameCountNV(dpy, screen, count) -> Bool", "($module, dpy, screen, count, /)", pygl_GLX_glXQueryFrameCountNV_args, "GLX_NV_swap_group", 3, 4468, PYGL_API_GLX, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQueryFrameCountNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2035,7 +2035,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryGLXPbufferSGIX_args[] = {"dpy", "pbuf", "attribute", "value"};
-static const PyGLCommand pygl_GLX_glXQueryGLXPbufferSGIX_info = {"glXQueryGLXPbufferSGIX", "glXQueryGLXPbufferSGIX(dpy, pbuf, attribute, value) -> None", "($module, dpy, pbuf, attribute, value, /)", pygl_GLX_glXQueryGLXPbufferSGIX_args, "GLX_SGIX_pbuffer", 4, 4397, PYGL_API_GLX, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLX_glXQueryGLXPbufferSGIX_info = {"glXQueryGLXPbufferSGIX", "glXQueryGLXPbufferSGIX(dpy, pbuf, attribute, value) -> None", "($module, dpy, pbuf, attribute, value, /)", pygl_GLX_glXQueryGLXPbufferSGIX_args, "GLX_SGIX_pbuffer", 4, 4469, PYGL_API_GLX, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLX_glXQueryGLXPbufferSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2058,7 +2058,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryHyperpipeAttribSGIX_args[] = {"dpy", "timeSlice", "attrib", "size", "returnAttribList"};
-static const PyGLCommand pygl_GLX_glXQueryHyperpipeAttribSGIX_info = {"glXQueryHyperpipeAttribSGIX", "glXQueryHyperpipeAttribSGIX(dpy, timeSlice, attrib, size, returnAttribList) -> c_int", "($module, dpy, timeSlice, attrib, size, returnAttribList, /)", pygl_GLX_glXQueryHyperpipeAttribSGIX_args, "GLX_SGIX_hyperpipe", 5, 4398, PYGL_API_GLX, 0, 5, 1, 0};
+static const PyGLCommand pygl_GLX_glXQueryHyperpipeAttribSGIX_info = {"glXQueryHyperpipeAttribSGIX", "glXQueryHyperpipeAttribSGIX(dpy, timeSlice, attrib, size, returnAttribList) -> c_int", "($module, dpy, timeSlice, attrib, size, returnAttribList, /)", pygl_GLX_glXQueryHyperpipeAttribSGIX_args, "GLX_SGIX_hyperpipe", 5, 4470, PYGL_API_GLX, 0, 5, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQueryHyperpipeAttribSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2083,7 +2083,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryHyperpipeBestAttribSGIX_args[] = {"dpy", "timeSlice", "attrib", "size", "attribList", "returnAttribList"};
-static const PyGLCommand pygl_GLX_glXQueryHyperpipeBestAttribSGIX_info = {"glXQueryHyperpipeBestAttribSGIX", "glXQueryHyperpipeBestAttribSGIX(dpy, timeSlice, attrib, size, attribList, returnAttribList) -> c_int", "($module, dpy, timeSlice, attrib, size, attribList, returnAttribList, /)", pygl_GLX_glXQueryHyperpipeBestAttribSGIX_args, "GLX_SGIX_hyperpipe", 6, 4399, PYGL_API_GLX, 0, 6, 1, 0};
+static const PyGLCommand pygl_GLX_glXQueryHyperpipeBestAttribSGIX_info = {"glXQueryHyperpipeBestAttribSGIX", "glXQueryHyperpipeBestAttribSGIX(dpy, timeSlice, attrib, size, attribList, returnAttribList) -> c_int", "($module, dpy, timeSlice, attrib, size, attribList, returnAttribList, /)", pygl_GLX_glXQueryHyperpipeBestAttribSGIX_args, "GLX_SGIX_hyperpipe", 6, 4471, PYGL_API_GLX, 0, 6, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQueryHyperpipeBestAttribSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2109,7 +2109,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryMaxSwapBarriersSGIX_args[] = {"dpy", "screen", "max"};
-static const PyGLCommand pygl_GLX_glXQueryMaxSwapBarriersSGIX_info = {"glXQueryMaxSwapBarriersSGIX", "glXQueryMaxSwapBarriersSGIX(dpy, screen, max) -> Bool", "($module, dpy, screen, max, /)", pygl_GLX_glXQueryMaxSwapBarriersSGIX_args, "GLX_SGIX_swap_barrier", 3, 4400, PYGL_API_GLX, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLX_glXQueryMaxSwapBarriersSGIX_info = {"glXQueryMaxSwapBarriersSGIX", "glXQueryMaxSwapBarriersSGIX(dpy, screen, max) -> Bool", "($module, dpy, screen, max, /)", pygl_GLX_glXQueryMaxSwapBarriersSGIX_args, "GLX_SGIX_swap_barrier", 3, 4472, PYGL_API_GLX, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQueryMaxSwapBarriersSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2132,7 +2132,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryMaxSwapGroupsNV_args[] = {"dpy", "screen", "maxGroups", "maxBarriers"};
-static const PyGLCommand pygl_GLX_glXQueryMaxSwapGroupsNV_info = {"glXQueryMaxSwapGroupsNV", "glXQueryMaxSwapGroupsNV(dpy, screen, maxGroups, maxBarriers) -> Bool", "($module, dpy, screen, maxGroups, maxBarriers, /)", pygl_GLX_glXQueryMaxSwapGroupsNV_args, "GLX_NV_swap_group", 4, 4401, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXQueryMaxSwapGroupsNV_info = {"glXQueryMaxSwapGroupsNV", "glXQueryMaxSwapGroupsNV(dpy, screen, maxGroups, maxBarriers) -> Bool", "($module, dpy, screen, maxGroups, maxBarriers, /)", pygl_GLX_glXQueryMaxSwapGroupsNV_args, "GLX_NV_swap_group", 4, 4473, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQueryMaxSwapGroupsNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2156,7 +2156,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryRendererIntegerMESA_args[] = {"dpy", "screen", "renderer", "attribute", "value"};
-static const PyGLCommand pygl_GLX_glXQueryRendererIntegerMESA_info = {"glXQueryRendererIntegerMESA", "glXQueryRendererIntegerMESA(dpy, screen, renderer, attribute, value) -> Bool", "($module, dpy, screen, renderer, attribute, value, /)", pygl_GLX_glXQueryRendererIntegerMESA_args, "GLX_MESA_query_renderer", 5, 4402, PYGL_API_GLX, 0, 5, 1, 0};
+static const PyGLCommand pygl_GLX_glXQueryRendererIntegerMESA_info = {"glXQueryRendererIntegerMESA", "glXQueryRendererIntegerMESA(dpy, screen, renderer, attribute, value) -> Bool", "($module, dpy, screen, renderer, attribute, value, /)", pygl_GLX_glXQueryRendererIntegerMESA_args, "GLX_MESA_query_renderer", 5, 4474, PYGL_API_GLX, 0, 5, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQueryRendererIntegerMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2181,7 +2181,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryRendererStringMESA_args[] = {"dpy", "screen", "renderer", "attribute"};
-static const PyGLCommand pygl_GLX_glXQueryRendererStringMESA_info = {"glXQueryRendererStringMESA", "glXQueryRendererStringMESA(dpy, screen, renderer, attribute) -> GLchar", "($module, dpy, screen, renderer, attribute, /)", pygl_GLX_glXQueryRendererStringMESA_args, "GLX_MESA_query_renderer", 4, 4403, PYGL_API_GLX, 0, 4, 2, 0};
+static const PyGLCommand pygl_GLX_glXQueryRendererStringMESA_info = {"glXQueryRendererStringMESA", "glXQueryRendererStringMESA(dpy, screen, renderer, attribute) -> GLchar", "($module, dpy, screen, renderer, attribute, /)", pygl_GLX_glXQueryRendererStringMESA_args, "GLX_MESA_query_renderer", 4, 4475, PYGL_API_GLX, 0, 4, 2, 0};
 
 static PyObject *
 pygl_GLX_glXQueryRendererStringMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2205,7 +2205,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryServerString_args[] = {"dpy", "screen", "name"};
-static const PyGLCommand pygl_GLX_glXQueryServerString_info = {"glXQueryServerString", "glXQueryServerString(dpy, screen, name) -> GLchar", "($module, dpy, screen, name, /)", pygl_GLX_glXQueryServerString_args, "GLX_VERSION_GLX_1_1", 3, 4404, PYGL_API_GLX, 0, 3, 2, 0};
+static const PyGLCommand pygl_GLX_glXQueryServerString_info = {"glXQueryServerString", "glXQueryServerString(dpy, screen, name) -> GLchar", "($module, dpy, screen, name, /)", pygl_GLX_glXQueryServerString_args, "GLX_VERSION_GLX_1_1", 3, 4476, PYGL_API_GLX, 0, 3, 2, 0};
 
 static PyObject *
 pygl_GLX_glXQueryServerString(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2228,7 +2228,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQuerySwapGroupNV_args[] = {"dpy", "drawable", "group", "barrier"};
-static const PyGLCommand pygl_GLX_glXQuerySwapGroupNV_info = {"glXQuerySwapGroupNV", "glXQuerySwapGroupNV(dpy, drawable, group, barrier) -> Bool", "($module, dpy, drawable, group, barrier, /)", pygl_GLX_glXQuerySwapGroupNV_args, "GLX_NV_swap_group", 4, 4405, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXQuerySwapGroupNV_info = {"glXQuerySwapGroupNV", "glXQuerySwapGroupNV(dpy, drawable, group, barrier) -> Bool", "($module, dpy, drawable, group, barrier, /)", pygl_GLX_glXQuerySwapGroupNV_args, "GLX_NV_swap_group", 4, 4477, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQuerySwapGroupNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2252,7 +2252,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryVersion_args[] = {"dpy", "maj", "min"};
-static const PyGLCommand pygl_GLX_glXQueryVersion_info = {"glXQueryVersion", "glXQueryVersion(dpy, maj, min) -> Bool", "($module, dpy, maj, min, /)", pygl_GLX_glXQueryVersion_args, "GLX_VERSION_GLX_1_0", 3, 4406, PYGL_API_GLX, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLX_glXQueryVersion_info = {"glXQueryVersion", "glXQueryVersion(dpy, maj, min) -> Bool", "($module, dpy, maj, min, /)", pygl_GLX_glXQueryVersion_args, "GLX_VERSION_GLX_1_0", 3, 4478, PYGL_API_GLX, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQueryVersion(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2275,7 +2275,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXQueryVideoCaptureDeviceNV_args[] = {"dpy", "device", "attribute", "value"};
-static const PyGLCommand pygl_GLX_glXQueryVideoCaptureDeviceNV_info = {"glXQueryVideoCaptureDeviceNV", "glXQueryVideoCaptureDeviceNV(dpy, device, attribute, value) -> c_int", "($module, dpy, device, attribute, value, /)", pygl_GLX_glXQueryVideoCaptureDeviceNV_args, "GLX_NV_video_capture", 4, 4407, PYGL_API_GLX, 0, 4, 1, 0};
+static const PyGLCommand pygl_GLX_glXQueryVideoCaptureDeviceNV_info = {"glXQueryVideoCaptureDeviceNV", "glXQueryVideoCaptureDeviceNV(dpy, device, attribute, value) -> c_int", "($module, dpy, device, attribute, value, /)", pygl_GLX_glXQueryVideoCaptureDeviceNV_args, "GLX_NV_video_capture", 4, 4479, PYGL_API_GLX, 0, 4, 1, 0};
 
 static PyObject *
 pygl_GLX_glXQueryVideoCaptureDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2299,7 +2299,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXReleaseBuffersMESA_args[] = {"dpy", "drawable"};
-static const PyGLCommand pygl_GLX_glXReleaseBuffersMESA_info = {"glXReleaseBuffersMESA", "glXReleaseBuffersMESA(dpy, drawable) -> Bool", "($module, dpy, drawable, /)", pygl_GLX_glXReleaseBuffersMESA_args, "GLX_MESA_release_buffers", 2, 4408, PYGL_API_GLX, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLX_glXReleaseBuffersMESA_info = {"glXReleaseBuffersMESA", "glXReleaseBuffersMESA(dpy, drawable) -> Bool", "($module, dpy, drawable, /)", pygl_GLX_glXReleaseBuffersMESA_args, "GLX_MESA_release_buffers", 2, 4480, PYGL_API_GLX, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLX_glXReleaseBuffersMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2321,7 +2321,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXReleaseTexImageEXT_args[] = {"dpy", "drawable", "buffer"};
-static const PyGLCommand pygl_GLX_glXReleaseTexImageEXT_info = {"glXReleaseTexImageEXT", "glXReleaseTexImageEXT(dpy, drawable, buffer) -> None", "($module, dpy, drawable, buffer, /)", pygl_GLX_glXReleaseTexImageEXT_args, "GLX_EXT_texture_from_pixmap", 3, 4409, PYGL_API_GLX, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLX_glXReleaseTexImageEXT_info = {"glXReleaseTexImageEXT", "glXReleaseTexImageEXT(dpy, drawable, buffer) -> None", "($module, dpy, drawable, buffer, /)", pygl_GLX_glXReleaseTexImageEXT_args, "GLX_EXT_texture_from_pixmap", 3, 4481, PYGL_API_GLX, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLX_glXReleaseTexImageEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2343,7 +2343,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXReleaseVideoCaptureDeviceNV_args[] = {"dpy", "device"};
-static const PyGLCommand pygl_GLX_glXReleaseVideoCaptureDeviceNV_info = {"glXReleaseVideoCaptureDeviceNV", "glXReleaseVideoCaptureDeviceNV(dpy, device) -> None", "($module, dpy, device, /)", pygl_GLX_glXReleaseVideoCaptureDeviceNV_args, "GLX_NV_video_capture", 2, 4410, PYGL_API_GLX, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLX_glXReleaseVideoCaptureDeviceNV_info = {"glXReleaseVideoCaptureDeviceNV", "glXReleaseVideoCaptureDeviceNV(dpy, device) -> None", "($module, dpy, device, /)", pygl_GLX_glXReleaseVideoCaptureDeviceNV_args, "GLX_NV_video_capture", 2, 4482, PYGL_API_GLX, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLX_glXReleaseVideoCaptureDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2364,7 +2364,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXReleaseVideoDeviceNV_args[] = {"dpy", "screen", "VideoDevice"};
-static const PyGLCommand pygl_GLX_glXReleaseVideoDeviceNV_info = {"glXReleaseVideoDeviceNV", "glXReleaseVideoDeviceNV(dpy, screen, VideoDevice) -> c_int", "($module, dpy, screen, VideoDevice, /)", pygl_GLX_glXReleaseVideoDeviceNV_args, "GLX_NV_video_out", 3, 4411, PYGL_API_GLX, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLX_glXReleaseVideoDeviceNV_info = {"glXReleaseVideoDeviceNV", "glXReleaseVideoDeviceNV(dpy, screen, VideoDevice) -> c_int", "($module, dpy, screen, VideoDevice, /)", pygl_GLX_glXReleaseVideoDeviceNV_args, "GLX_NV_video_out", 3, 4483, PYGL_API_GLX, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLX_glXReleaseVideoDeviceNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2387,7 +2387,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXReleaseVideoImageNV_args[] = {"dpy", "pbuf"};
-static const PyGLCommand pygl_GLX_glXReleaseVideoImageNV_info = {"glXReleaseVideoImageNV", "glXReleaseVideoImageNV(dpy, pbuf) -> c_int", "($module, dpy, pbuf, /)", pygl_GLX_glXReleaseVideoImageNV_args, "GLX_NV_video_out", 2, 4412, PYGL_API_GLX, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLX_glXReleaseVideoImageNV_info = {"glXReleaseVideoImageNV", "glXReleaseVideoImageNV(dpy, pbuf) -> c_int", "($module, dpy, pbuf, /)", pygl_GLX_glXReleaseVideoImageNV_args, "GLX_NV_video_out", 2, 4484, PYGL_API_GLX, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLX_glXReleaseVideoImageNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2409,7 +2409,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXResetFrameCountNV_args[] = {"dpy", "screen"};
-static const PyGLCommand pygl_GLX_glXResetFrameCountNV_info = {"glXResetFrameCountNV", "glXResetFrameCountNV(dpy, screen) -> Bool", "($module, dpy, screen, /)", pygl_GLX_glXResetFrameCountNV_args, "GLX_NV_swap_group", 2, 4413, PYGL_API_GLX, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLX_glXResetFrameCountNV_info = {"glXResetFrameCountNV", "glXResetFrameCountNV(dpy, screen) -> Bool", "($module, dpy, screen, /)", pygl_GLX_glXResetFrameCountNV_args, "GLX_NV_swap_group", 2, 4485, PYGL_API_GLX, 0, 2, 1, 0};
 
 static PyObject *
 pygl_GLX_glXResetFrameCountNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2431,7 +2431,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXSelectEvent_args[] = {"dpy", "draw", "event_mask"};
-static const PyGLCommand pygl_GLX_glXSelectEvent_info = {"glXSelectEvent", "glXSelectEvent(dpy, draw, event_mask) -> None", "($module, dpy, draw, event_mask, /)", pygl_GLX_glXSelectEvent_args, "GLX_VERSION_GLX_1_3", 3, 4414, PYGL_API_GLX, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLX_glXSelectEvent_info = {"glXSelectEvent", "glXSelectEvent(dpy, draw, event_mask) -> None", "($module, dpy, draw, event_mask, /)", pygl_GLX_glXSelectEvent_args, "GLX_VERSION_GLX_1_3", 3, 4486, PYGL_API_GLX, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLX_glXSelectEvent(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2453,7 +2453,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXSelectEventSGIX_args[] = {"dpy", "drawable", "mask"};
-static const PyGLCommand pygl_GLX_glXSelectEventSGIX_info = {"glXSelectEventSGIX", "glXSelectEventSGIX(dpy, drawable, mask) -> None", "($module, dpy, drawable, mask, /)", pygl_GLX_glXSelectEventSGIX_args, "GLX_SGIX_pbuffer", 3, 4415, PYGL_API_GLX, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLX_glXSelectEventSGIX_info = {"glXSelectEventSGIX", "glXSelectEventSGIX(dpy, drawable, mask) -> None", "($module, dpy, drawable, mask, /)", pygl_GLX_glXSelectEventSGIX_args, "GLX_SGIX_pbuffer", 3, 4487, PYGL_API_GLX, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLX_glXSelectEventSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2475,7 +2475,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXSendPbufferToVideoNV_args[] = {"dpy", "pbuf", "iBufferType", "pulCounterPbuffer", "bBlock"};
-static const PyGLCommand pygl_GLX_glXSendPbufferToVideoNV_info = {"glXSendPbufferToVideoNV", "glXSendPbufferToVideoNV(dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock) -> c_int", "($module, dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock, /)", pygl_GLX_glXSendPbufferToVideoNV_args, "GLX_NV_video_out", 5, 4416, PYGL_API_GLX, 0, 5, 1, 0};
+static const PyGLCommand pygl_GLX_glXSendPbufferToVideoNV_info = {"glXSendPbufferToVideoNV", "glXSendPbufferToVideoNV(dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock) -> c_int", "($module, dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock, /)", pygl_GLX_glXSendPbufferToVideoNV_args, "GLX_NV_video_out", 5, 4488, PYGL_API_GLX, 0, 5, 1, 0};
 
 static PyObject *
 pygl_GLX_glXSendPbufferToVideoNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2500,7 +2500,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXSet3DfxModeMESA_args[] = {"mode"};
-static const PyGLCommand pygl_GLX_glXSet3DfxModeMESA_info = {"glXSet3DfxModeMESA", "glXSet3DfxModeMESA(mode) -> GLboolean", "($module, mode, /)", pygl_GLX_glXSet3DfxModeMESA_args, "GLX_MESA_set_3dfx_mode", 1, 4417, PYGL_API_GLX, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLX_glXSet3DfxModeMESA_info = {"glXSet3DfxModeMESA", "glXSet3DfxModeMESA(mode) -> GLboolean", "($module, mode, /)", pygl_GLX_glXSet3DfxModeMESA_args, "GLX_MESA_set_3dfx_mode", 1, 4489, PYGL_API_GLX, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLX_glXSet3DfxModeMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2517,7 +2517,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXSwapBuffers_args[] = {"dpy", "drawable"};
-static const PyGLCommand pygl_GLX_glXSwapBuffers_info = {"glXSwapBuffers", "glXSwapBuffers(dpy, drawable) -> None", "($module, dpy, drawable, /)", pygl_GLX_glXSwapBuffers_args, "GLX_VERSION_GLX_1_0", 2, 4418, PYGL_API_GLX, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLX_glXSwapBuffers_info = {"glXSwapBuffers", "glXSwapBuffers(dpy, drawable) -> None", "($module, dpy, drawable, /)", pygl_GLX_glXSwapBuffers_args, "GLX_VERSION_GLX_1_0", 2, 4490, PYGL_API_GLX, 0, 2, 0, 0};
 
 static PyObject *
 pygl_GLX_glXSwapBuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2538,7 +2538,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXSwapBuffersMscOML_args[] = {"dpy", "drawable", "target_msc", "divisor", "remainder"};
-static const PyGLCommand pygl_GLX_glXSwapBuffersMscOML_info = {"glXSwapBuffersMscOML", "glXSwapBuffersMscOML(dpy, drawable, target_msc, divisor, remainder) -> int64_t", "($module, dpy, drawable, target_msc, divisor, remainder, /)", pygl_GLX_glXSwapBuffersMscOML_args, "GLX_OML_sync_control", 5, 4419, PYGL_API_GLX, 0, 5, 1, 0};
+static const PyGLCommand pygl_GLX_glXSwapBuffersMscOML_info = {"glXSwapBuffersMscOML", "glXSwapBuffersMscOML(dpy, drawable, target_msc, divisor, remainder) -> int64_t", "($module, dpy, drawable, target_msc, divisor, remainder, /)", pygl_GLX_glXSwapBuffersMscOML_args, "GLX_OML_sync_control", 5, 4491, PYGL_API_GLX, 0, 5, 1, 0};
 
 static PyObject *
 pygl_GLX_glXSwapBuffersMscOML(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2563,7 +2563,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXSwapIntervalEXT_args[] = {"dpy", "drawable", "interval"};
-static const PyGLCommand pygl_GLX_glXSwapIntervalEXT_info = {"glXSwapIntervalEXT", "glXSwapIntervalEXT(dpy, drawable, interval) -> None", "($module, dpy, drawable, interval, /)", pygl_GLX_glXSwapIntervalEXT_args, "GLX_EXT_swap_control", 3, 4420, PYGL_API_GLX, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLX_glXSwapIntervalEXT_info = {"glXSwapIntervalEXT", "glXSwapIntervalEXT(dpy, drawable, interval) -> None", "($module, dpy, drawable, interval, /)", pygl_GLX_glXSwapIntervalEXT_args, "GLX_EXT_swap_control", 3, 4492, PYGL_API_GLX, 0, 3, 0, 0};
 
 static PyObject *
 pygl_GLX_glXSwapIntervalEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2585,7 +2585,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXSwapIntervalMESA_args[] = {"interval"};
-static const PyGLCommand pygl_GLX_glXSwapIntervalMESA_info = {"glXSwapIntervalMESA", "glXSwapIntervalMESA(interval) -> c_int", "($module, interval, /)", pygl_GLX_glXSwapIntervalMESA_args, "GLX_MESA_swap_control", 1, 4421, PYGL_API_GLX, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLX_glXSwapIntervalMESA_info = {"glXSwapIntervalMESA", "glXSwapIntervalMESA(interval) -> c_int", "($module, interval, /)", pygl_GLX_glXSwapIntervalMESA_args, "GLX_MESA_swap_control", 1, 4493, PYGL_API_GLX, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLX_glXSwapIntervalMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2602,7 +2602,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXSwapIntervalSGI_args[] = {"interval"};
-static const PyGLCommand pygl_GLX_glXSwapIntervalSGI_info = {"glXSwapIntervalSGI", "glXSwapIntervalSGI(interval) -> c_int", "($module, interval, /)", pygl_GLX_glXSwapIntervalSGI_args, "GLX_SGI_swap_control", 1, 4422, PYGL_API_GLX, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLX_glXSwapIntervalSGI_info = {"glXSwapIntervalSGI", "glXSwapIntervalSGI(interval) -> c_int", "($module, interval, /)", pygl_GLX_glXSwapIntervalSGI_args, "GLX_SGI_swap_control", 1, 4494, PYGL_API_GLX, 0, 1, 1, 0};
 
 static PyObject *
 pygl_GLX_glXSwapIntervalSGI(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2619,7 +2619,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXUseXFont_args[] = {"font", "first", "count", "list"};
-static const PyGLCommand pygl_GLX_glXUseXFont_info = {"glXUseXFont", "glXUseXFont(font, first, count, list) -> None", "($module, font, first, count, list, /)", pygl_GLX_glXUseXFont_args, "GLX_VERSION_GLX_1_0", 4, 4423, PYGL_API_GLX, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLX_glXUseXFont_info = {"glXUseXFont", "glXUseXFont(font, first, count, list) -> None", "($module, font, first, count, list, /)", pygl_GLX_glXUseXFont_args, "GLX_VERSION_GLX_1_0", 4, 4495, PYGL_API_GLX, 0, 4, 0, 0};
 
 static PyObject *
 pygl_GLX_glXUseXFont(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2639,7 +2639,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXWaitForMscOML_args[] = {"dpy", "drawable", "target_msc", "divisor", "remainder", "ust", "msc", "sbc"};
-static const PyGLCommand pygl_GLX_glXWaitForMscOML_info = {"glXWaitForMscOML", "glXWaitForMscOML(dpy, drawable, target_msc, divisor, remainder, ust, msc, sbc) -> Bool", "($module, dpy, drawable, target_msc, divisor, remainder, ust, msc, sbc, /)", pygl_GLX_glXWaitForMscOML_args, "GLX_OML_sync_control", 8, 4424, PYGL_API_GLX, 0, 8, 1, 0};
+static const PyGLCommand pygl_GLX_glXWaitForMscOML_info = {"glXWaitForMscOML", "glXWaitForMscOML(dpy, drawable, target_msc, divisor, remainder, ust, msc, sbc) -> Bool", "($module, dpy, drawable, target_msc, divisor, remainder, ust, msc, sbc, /)", pygl_GLX_glXWaitForMscOML_args, "GLX_OML_sync_control", 8, 4496, PYGL_API_GLX, 0, 8, 1, 0};
 
 static PyObject *
 pygl_GLX_glXWaitForMscOML(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2667,7 +2667,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXWaitForSbcOML_args[] = {"dpy", "drawable", "target_sbc", "ust", "msc", "sbc"};
-static const PyGLCommand pygl_GLX_glXWaitForSbcOML_info = {"glXWaitForSbcOML", "glXWaitForSbcOML(dpy, drawable, target_sbc, ust, msc, sbc) -> Bool", "($module, dpy, drawable, target_sbc, ust, msc, sbc, /)", pygl_GLX_glXWaitForSbcOML_args, "GLX_OML_sync_control", 6, 4425, PYGL_API_GLX, 0, 6, 1, 0};
+static const PyGLCommand pygl_GLX_glXWaitForSbcOML_info = {"glXWaitForSbcOML", "glXWaitForSbcOML(dpy, drawable, target_sbc, ust, msc, sbc) -> Bool", "($module, dpy, drawable, target_sbc, ust, msc, sbc, /)", pygl_GLX_glXWaitForSbcOML_args, "GLX_OML_sync_control", 6, 4497, PYGL_API_GLX, 0, 6, 1, 0};
 
 static PyObject *
 pygl_GLX_glXWaitForSbcOML(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2692,7 +2692,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXWaitGL_info = {"glXWaitGL", "glXWaitGL() -> None", "($module, /)", NULL, "GLX_VERSION_GLX_1_0", 0, 4426, PYGL_API_GLX, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLX_glXWaitGL_info = {"glXWaitGL", "glXWaitGL() -> None", "($module, /)", NULL, "GLX_VERSION_GLX_1_0", 0, 4498, PYGL_API_GLX, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLX_glXWaitGL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2708,7 +2708,7 @@ _fail:
 
 
 static const char *const pygl_GLX_glXWaitVideoSyncSGI_args[] = {"divisor", "remainder", "count"};
-static const PyGLCommand pygl_GLX_glXWaitVideoSyncSGI_info = {"glXWaitVideoSyncSGI", "glXWaitVideoSyncSGI(divisor, remainder, count) -> c_int", "($module, divisor, remainder, count, /)", pygl_GLX_glXWaitVideoSyncSGI_args, "GLX_SGI_video_sync", 3, 4427, PYGL_API_GLX, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLX_glXWaitVideoSyncSGI_info = {"glXWaitVideoSyncSGI", "glXWaitVideoSyncSGI(divisor, remainder, count) -> c_int", "($module, divisor, remainder, count, /)", pygl_GLX_glXWaitVideoSyncSGI_args, "GLX_SGI_video_sync", 3, 4499, PYGL_API_GLX, 0, 3, 1, 0};
 
 static PyObject *
 pygl_GLX_glXWaitVideoSyncSGI(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2730,7 +2730,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXWaitX_info = {"glXWaitX", "glXWaitX() -> None", "($module, /)", NULL, "GLX_VERSION_GLX_1_0", 0, 4428, PYGL_API_GLX, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLX_glXWaitX_info = {"glXWaitX", "glXWaitX() -> None", "($module, /)", NULL, "GLX_VERSION_GLX_1_0", 0, 4500, PYGL_API_GLX, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLX_glXWaitX(GLProc *self, PyObject *const *_a, size_t _nargsf)
