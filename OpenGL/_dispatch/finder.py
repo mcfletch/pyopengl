@@ -35,9 +35,8 @@ imported to reach that point comes from files: for ``import OpenGL.GL`` that
 is GL_1_0 and GL_1_1.
 """
 
-import importlib.abc
+import importlib
 import importlib.machinery
-import importlib.util
 import os
 import sys
 
@@ -49,8 +48,15 @@ __all__ = ['RawModuleFinder', 'install']
 _installed = None
 
 
-class RawModuleFinder(importlib.abc.MetaPathFinder, importlib.abc.Loader):
-    """Finds and builds the generated modules from the dispatch tables."""
+class RawModuleFinder:
+    """Finds and builds the generated modules from the dispatch tables.
+
+    A meta-path finder is what it does, not what it inherits: the import
+    machinery asks for ``find_spec``, ``create_module`` and ``exec_module`` and
+    never for a base class.  Deriving from ``importlib.abc`` would pull in
+    ``importlib.resources`` and ``inspect`` -- 15 ms, on every import, for a
+    registration this file does not need.
+    """
 
     def __init__(self, extension, entry_points):
         self._extension = extension

@@ -114,9 +114,14 @@ def install():
     entry_points.update(_c.entry_points)
     configure()
 
-    from OpenGL._dispatch import finder
+    from OpenGL._configflags import VIRTUAL_MODULES
 
-    finder.install(_c, entry_points)
+    if VIRTUAL_MODULES:
+        # Imported here rather than at module level: a module nobody has
+        # switched on should cost nothing to leave switched off.
+        from OpenGL._dispatch import finder
+
+        finder.install(_c, entry_points)
 
     from OpenGL import platform, wrapper
 
@@ -178,8 +183,13 @@ def _handwritten_for(name, dll):
     return entry_points.get((_api_of_dll(dll), name))
 
 
-def entry_point_for(function, binding):
-    """The C entry point for a declaration, or None to keep the ctypes one."""
+def entry_point_for(function, build_binding):
+    """The C entry point for a declaration, or None to keep the ctypes one.
+
+    ``build_binding`` is a callable rather than a binding: what it builds is
+    only wanted where a client demotes, which is rare enough that building one
+    per entry point is the larger part of what importing costs.
+    """
     api = _api_of(function.__module__)
     name = function.__name__
     proc = entry_points.get((api, name))
@@ -187,7 +197,7 @@ def entry_point_for(function, binding):
         return None
     from OpenGL._dispatch import support
 
-    support.register_ctypes_binding(api, name, binding)
+    support.register_ctypes_factory(api, name, build_binding)
     support.register_module(api, name, function.__module__)
     return proc
 

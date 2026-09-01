@@ -118,24 +118,37 @@ def createFunction(
 ):
     """Allows the more compact declaration format to use the old-style constructor"""
     global _c_dispatch
-    binding = nullFunction(
-        function.__name__,
-        dll or PLATFORM.GL,
-        resultType=function.resultType,
-        argTypes=function.argTypes,
-        doc=None,
-        argNames=function.argNames,
-        extension=extension,
-        deprecated=deprecated,
-        module=function.__module__,
-        error_checker=error_checker,
-        force_extension=force_extension
-        or getattr(function, 'force_extension', force_extension),
-    )
     if _c_dispatch is None:
         _c_dispatch = _load_c_dispatch()
+
+    def build_binding():
+        """The ctypes binding this declaration describes."""
+        return nullFunction(
+            function.__name__,
+            dll or PLATFORM.GL,
+            resultType=function.resultType,
+            argTypes=function.argTypes,
+            doc=None,
+            argNames=function.argNames,
+            extension=extension,
+            deprecated=deprecated,
+            module=function.__module__,
+            error_checker=error_checker,
+            force_extension=force_extension
+            or getattr(function, 'force_extension', force_extension),
+        )
+
     if _c_dispatch:
-        # The ctypes binding stays reachable behind the C entry point: it is
-        # what argtypes, restype and DLL read, and what a client demotes to.
-        return _c_dispatch.entry_point_for(function, binding) or binding
-    return binding
+        # The ctypes binding stays reachable behind the C entry point -- it is
+        # what argtypes, restype and DLL read, and what a client demotes to --
+        # but it is built when something asks.  Almost nothing does, and
+        # building 4,819 of them to discard them is the bulk of what importing
+        # used to cost.
+        proc = _c_dispatch.entry_point_for(function, build_binding)
+        if proc is not None:
+            # `proc or binding` would be the obvious way to write this, and it
+            # would be wrong: truth for an entry point means "resolvable in the
+            # current context", so asking would resolve every entry point at
+            # import, against whatever context happens to be current then.
+            return proc
+    return build_binding()
