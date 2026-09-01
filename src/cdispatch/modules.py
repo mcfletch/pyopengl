@@ -323,8 +323,15 @@ def emit_declarations(modules):
     return by_api
 
 
-def write_declarations(package_root, modules):
-    """Write one marshalled file per API, and say what was written."""
+def write_declarations(package_root, modules, annotations=None):
+    """Write one marshalled file per API, and say what was written.
+
+    ``annotations`` is written beside them as ``_annotations.dat``, keyed the
+    same way the generator keys it.  It ships because the pure-Python path
+    needs it to rebuild what a friendly module's customisation chain used to
+    do; the C carries the same facts compiled in.  Written in the same pass as
+    everything else, so the two cannot drift.
+    """
     import marshal
 
     directory = os.path.join(package_root, DECLARATIONS)
@@ -335,4 +342,9 @@ def write_declarations(package_root, modules):
         with open(path, 'wb') as handle:
             marshal.dump(contents, handle, 4)
         written[api] = os.path.getsize(path)
+    if annotations is not None:
+        path = os.path.join(directory, '_annotations.dat')
+        with open(path, 'wb') as handle:
+            marshal.dump(annotations, handle, 4)
+        written['_annotations'] = os.path.getsize(path)
     return written

@@ -224,11 +224,16 @@ def generate(package_root, output_root, report=None, tables_path=None,
     # generator still recovers them by parsing the friendly modules -- but the
     # table is checked against that parse on every run, so the day it becomes
     # the source it will already be right.
-    annotations_.store(annotations_.dump(commands))
+    annotation_table = annotations_.dump(commands)
+    annotations_.store(annotation_table)
 
     raw_modules = modules_.read_modules(package_root, extract.APIS)
-    # The same facts as the C table, for a build with no compiled extension.
-    declarations = modules_.write_declarations(package_root, raw_modules)
+    # The same facts as the C table, for a build with no compiled extension --
+    # and the annotations, which the pure-Python path needs to rebuild what a
+    # customisation chain used to do.
+    declarations = modules_.write_declarations(
+        package_root, raw_modules, annotations=annotation_table
+    )
     _write(
         os.path.join(output_root, 'pygl_modules.c'),
         modules_.emit_modules(raw_modules),

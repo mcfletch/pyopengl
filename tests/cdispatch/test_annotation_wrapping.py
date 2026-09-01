@@ -128,3 +128,37 @@ class TestRebuildingFromTheTable:
         assert isinstance(declared['value'], ArrayDatatype.__class__) or hasattr(
             declared['value'], 'asArray'
         )
+
+
+class TestTheAnnotationsShip:
+    """The pure-Python path needs them at run time, so they have to be in the
+    wheel and readable without the generator."""
+
+    def test_they_are_written_beside_the_declarations(self):
+        import marshal
+
+        path = os.path.join(
+            PACKAGE, 'raw', '_declarations', '_annotations.dat'
+        )
+        assert os.path.exists(path), path
+        with open(path, 'rb') as handle:
+            shipped = marshal.load(handle)
+        assert len(shipped) > 1000
+
+    def test_what_ships_is_what_the_generator_produced(self, table):
+        import marshal
+
+        path = os.path.join(PACKAGE, 'raw', '_declarations', '_annotations.dat')
+        with open(path, 'rb') as handle:
+            shipped = marshal.load(handle)
+        assert shipped == table, (
+            'the shipped annotations differ from src/cdispatch/annotations.json; '
+            'regenerate with python src/regenerate_c.py'
+        )
+
+    def test_the_wheel_carries_them(self):
+        """package-data has to name the file, or it is built and left out --
+        which is what happened to the declarations themselves."""
+        with open(os.path.join(HERE, 'pyproject.toml'), encoding='utf-8') as handle:
+            text = handle.read()
+        assert 'raw/_declarations/*.dat' in text
