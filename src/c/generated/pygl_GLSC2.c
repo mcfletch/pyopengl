@@ -202,7 +202,7 @@ pygl_GLSC2_glBufferData(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_U(3, usage);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(2, data, &pygl_elem_any);
-    PYGL_CALL_V((unsigned int, ptrdiff_t, void *, unsigned int), (target, size, data, usage));
+    PYGL_CALL_V_BLOCKING((unsigned int, ptrdiff_t, void *, unsigned int), (target, size, data, usage));
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
@@ -225,7 +225,7 @@ pygl_GLSC2_glBufferSubData(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_IPTR(2, size);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(3, data, &pygl_elem_any);
-    PYGL_CALL_V((unsigned int, intptr_t, ptrdiff_t, void *), (target, offset, size, data));
+    PYGL_CALL_V_BLOCKING((unsigned int, intptr_t, ptrdiff_t, void *), (target, offset, size, data));
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
@@ -361,7 +361,7 @@ pygl_GLSC2_glCompressedTexSubImage2D(GLProc *self, PyObject *const *_a, size_t _
     PYGL_SZ(7, imageSize);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(8, data, &pygl_elem_any);
-    PYGL_CALL_V((unsigned int, int, int, int, int, int, unsigned int, int, void *), (target, level, xoffset, yoffset, width, height, format, imageSize, data));
+    PYGL_CALL_V_BLOCKING((unsigned int, int, int, int, int, int, unsigned int, int, void *), (target, level, xoffset, yoffset, width, height, format, imageSize, data));
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
@@ -574,7 +574,7 @@ pygl_GLSC2_glFinish(GLProc *self, PyObject *const *_a, size_t _nargsf)
 {
     PYGL_ARITY(0);
     PYGL_CONV_OK();
-    PYGL_CALL_V((void), ());
+    PYGL_CALL_V_BLOCKING((void), ());
     PYGL_CHECK();
     Py_RETURN_NONE;
 _fail:
@@ -589,7 +589,7 @@ pygl_GLSC2_glFlush(GLProc *self, PyObject *const *_a, size_t _nargsf)
 {
     PYGL_ARITY(0);
     PYGL_CONV_OK();
-    PYGL_CALL_V((void), ());
+    PYGL_CALL_V_BLOCKING((void), ());
     PYGL_CHECK();
     Py_RETURN_NONE;
 _fail:
@@ -1272,7 +1272,7 @@ pygl_GLSC2_glProgramBinary(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_SZ(3, length);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(2, binary, &pygl_elem_any);
-    PYGL_CALL_V((unsigned int, unsigned int, void *, int), (program, binaryFormat, binary, length));
+    PYGL_CALL_V_BLOCKING((unsigned int, unsigned int, void *, int), (program, binaryFormat, binary, length));
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
@@ -1299,7 +1299,7 @@ pygl_GLSC2_glReadnPixels(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_SZ(6, bufSize);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(7, data, &pygl_elem_any);
-    PYGL_CALL_V((int, int, int, int, unsigned int, unsigned int, int, void *), (x, y, width, height, format, type, bufSize, data));
+    PYGL_CALL_V_BLOCKING((int, int, int, int, unsigned int, unsigned int, int, void *), (x, y, width, height, format, type, bufSize, data));
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
@@ -1601,7 +1601,7 @@ pygl_GLSC2_glTexSubImage2D(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_U(7, type);
     PYGL_CONV_OK();
     PYGL_IMAGE_IN(8, pixels, format, type, 2, width, height, 0);
-    PYGL_CALL_V((unsigned int, int, int, int, int, int, unsigned int, unsigned int, void *), (target, level, xoffset, yoffset, width, height, format, type, pixels));
+    PYGL_CALL_V_BLOCKING((unsigned int, int, int, int, int, int, unsigned int, unsigned int, void *), (target, level, xoffset, yoffset, width, height, format, type, pixels));
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;

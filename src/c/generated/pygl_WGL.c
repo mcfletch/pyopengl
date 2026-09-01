@@ -2763,7 +2763,7 @@ pygl_WGL_wglSwapLayerBuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_OPAQUE(0, hdc);
     PYGL_U(1, fuFlags);
     PYGL_CONV_OK();
-    PYGL_CALL_R(_result, int, (void *, unsigned int), (hdc, fuFlags));
+    PYGL_CALL_R_BLOCKING(_result, int, (void *, unsigned int), (hdc, fuFlags));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
 _fail:

@@ -2527,7 +2527,7 @@ pygl_GLX_glXSwapBuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_OPAQUE(1, drawable);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(0, dpy, &pygl_elem_any);
-    PYGL_CALL_V((void *, void *), (dpy, drawable));
+    PYGL_CALL_V_BLOCKING((void *, void *), (dpy, drawable));
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
@@ -2699,7 +2699,7 @@ pygl_GLX_glXWaitGL(GLProc *self, PyObject *const *_a, size_t _nargsf)
 {
     PYGL_ARITY(0);
     PYGL_CONV_OK();
-    PYGL_CALL_V((void), ());
+    PYGL_CALL_V_BLOCKING((void), ());
     PYGL_CHECK();
     Py_RETURN_NONE;
 _fail:
@@ -2737,7 +2737,7 @@ pygl_GLX_glXWaitX(GLProc *self, PyObject *const *_a, size_t _nargsf)
 {
     PYGL_ARITY(0);
     PYGL_CONV_OK();
-    PYGL_CALL_V((void), ());
+    PYGL_CALL_V_BLOCKING((void), ());
     PYGL_CHECK();
     Py_RETURN_NONE;
 _fail:

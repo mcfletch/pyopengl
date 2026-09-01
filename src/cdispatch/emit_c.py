@@ -6,6 +6,7 @@ entry point needing something unusual gets a hand-written body sitting inline
 beside the generated ones.
 """
 
+from . import blocking
 from . import ctypes_model as cm
 from . import handwritten, model
 
@@ -389,14 +390,22 @@ def emit_stub(command):
         cm.abi_c_type(parameter.ctype) for parameter in command.parameters
     )
     arguments = ', '.join(parameter.c_name for parameter in command.parameters)
+    # A call that can wait releases the GIL for the duration.  See
+    # src/cdispatch/blocking.py for which, and why it is not all of them.
+    waits = '_BLOCKING' if blocking.blocks(command.name) else ''
     if command.returns_void:
         lines.append(
-            '    PYGL_CALL_V((%s), (%s));' % (signature or 'void', arguments)
+            '    PYGL_CALL_V%s((%s), (%s));' % (waits, signature or 'void', arguments)
         )
     else:
         lines.append(
-            '    PYGL_CALL_R(_result, %s, (%s), (%s));'
-            % (cm.abi_c_type(command.return_type), signature or 'void', arguments)
+            '    PYGL_CALL_R%s(_result, %s, (%s), (%s));'
+            % (
+                waits,
+                cm.abi_c_type(command.return_type),
+                signature or 'void',
+                arguments,
+            )
         )
     lines.append('    PYGL_CHECK();')
 

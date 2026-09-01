@@ -539,6 +539,26 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
         ((void (*) signature)_fp) arguments;                                   \
     } while (0)
 
+/* The same, for a call that can wait: on the GPU, on a compile, on a vertical
+ * blank.  ctypes releases the GIL around every foreign call, so holding it
+ * here would stop every other Python thread for as long as the driver takes --
+ * 36 ms for a large glReadPixels.  Releasing costs 15-25 ns, which is why only
+ * the calls in src/cdispatch/blocking.py pay it.
+ *
+ * Nothing between the two macros may touch a Python object: the pointers were
+ * taken before the release and the buffers are pinned by the frame's views,
+ * so the driver may write through them, but calling into CPython here would
+ * be a crash rather than a slow program. */
+#define PYGL_CALL_V_BLOCKING(signature, arguments)                             \
+    do {                                                                       \
+        void *_fp = pygl_slot(self);                                           \
+        if (PYGL_UNLIKELY(_fp == NULL))                                        \
+            goto _fail;                                                        \
+        Py_BEGIN_ALLOW_THREADS                                                 \
+        ((void (*) signature)_fp) arguments;                                   \
+        Py_END_ALLOW_THREADS                                                   \
+    } while (0)
+
 #define PYGL_CALL_R(result, type, signature, arguments)                        \
     type result;                                                               \
     do {                                                                       \
@@ -546,6 +566,17 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
         if (PYGL_UNLIKELY(_fp == NULL))                                        \
             goto _fail;                                                        \
         result = ((type(*) signature)_fp) arguments;                           \
+    } while (0)
+
+#define PYGL_CALL_R_BLOCKING(result, type, signature, arguments)               \
+    type result;                                                               \
+    do {                                                                       \
+        void *_fp = pygl_slot(self);                                           \
+        if (PYGL_UNLIKELY(_fp == NULL))                                        \
+            goto _fail;                                                        \
+        Py_BEGIN_ALLOW_THREADS                                                 \
+        result = ((type(*) signature)_fp) arguments;                           \
+        Py_END_ALLOW_THREADS                                                   \
     } while (0)
 
 #define PYGL_CHECK()                                                           \

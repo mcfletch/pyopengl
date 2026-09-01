@@ -125,7 +125,7 @@ pygl_EGL_eglClientWaitSync(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_I(2, flags);
     PYGL_U64(3, timeout);
     PYGL_CONV_OK();
-    PYGL_CALL_R(_result, int, (void *, void *, int, uint64_t), (dpy, sync, flags, timeout));
+    PYGL_CALL_R_BLOCKING(_result, int, (void *, void *, int, uint64_t), (dpy, sync, flags, timeout));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
 _fail:
@@ -145,7 +145,7 @@ pygl_EGL_eglClientWaitSyncKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_I(2, flags);
     PYGL_U64(3, timeout);
     PYGL_CONV_OK();
-    PYGL_CALL_R(_result, int, (void *, void *, int, uint64_t), (dpy, sync, flags, timeout));
+    PYGL_CALL_R_BLOCKING(_result, int, (void *, void *, int, uint64_t), (dpy, sync, flags, timeout));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
 _fail:
@@ -164,7 +164,7 @@ pygl_EGL_eglClientWaitSyncNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_I(1, flags);
     PYGL_U64(2, timeout);
     PYGL_CONV_OK();
-    PYGL_CALL_R(_result, int, (void *, int, uint64_t), (sync, flags, timeout));
+    PYGL_CALL_R_BLOCKING(_result, int, (void *, int, uint64_t), (sync, flags, timeout));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
 _fail:
@@ -789,7 +789,7 @@ pygl_EGL_eglCreateSync(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_U(1, type);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_any);
-    PYGL_CALL_R(_result, void *, (void *, unsigned int, void *), (dpy, type, attrib_list));
+    PYGL_CALL_R_BLOCKING(_result, void *, (void *, unsigned int, void *), (dpy, type, attrib_list));
     PYGL_CHECK();
     PyObject *_value = pygl_opaque((void *)_result, "EGLSync");
     PYGL_CLEANUP();
@@ -812,7 +812,7 @@ pygl_EGL_eglCreateSync64KHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_U(1, type);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_any);
-    PYGL_CALL_R(_result, void *, (void *, unsigned int, void *), (dpy, type, attrib_list));
+    PYGL_CALL_R_BLOCKING(_result, void *, (void *, unsigned int, void *), (dpy, type, attrib_list));
     PYGL_CHECK();
     PyObject *_value = pygl_opaque((void *)_result, "EGLSyncKHR");
     PYGL_CLEANUP();
@@ -835,7 +835,7 @@ pygl_EGL_eglCreateSyncKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_U(1, type);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_GLint);
-    PYGL_CALL_R(_result, void *, (void *, unsigned int, void *), (dpy, type, attrib_list));
+    PYGL_CALL_R_BLOCKING(_result, void *, (void *, unsigned int, void *), (dpy, type, attrib_list));
     PYGL_CHECK();
     PyObject *_value = pygl_opaque((void *)_result, "EGLSyncKHR");
     PYGL_CLEANUP();
@@ -1027,7 +1027,7 @@ pygl_EGL_eglDestroySync(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, sync);
     PYGL_CONV_OK();
-    PYGL_CALL_R(_result, unsigned int, (void *, void *), (dpy, sync));
+    PYGL_CALL_R_BLOCKING(_result, unsigned int, (void *, void *), (dpy, sync));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
 _fail:
@@ -1045,7 +1045,7 @@ pygl_EGL_eglDestroySyncKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, sync);
     PYGL_CONV_OK();
-    PYGL_CALL_R(_result, unsigned int, (void *, void *), (dpy, sync));
+    PYGL_CALL_R_BLOCKING(_result, unsigned int, (void *, void *), (dpy, sync));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
 _fail:
@@ -1062,7 +1062,7 @@ pygl_EGL_eglDestroySyncNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_ARITY(1);
     PYGL_OPAQUE(0, sync);
     PYGL_CONV_OK();
-    PYGL_CALL_R(_result, unsigned int, (void *), (sync));
+    PYGL_CALL_R_BLOCKING(_result, unsigned int, (void *), (sync));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
 _fail:
@@ -3027,7 +3027,7 @@ pygl_EGL_eglSwapBuffers(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, surface);
     PYGL_CONV_OK();
-    PYGL_CALL_R(_result, unsigned int, (void *, void *), (dpy, surface));
+    PYGL_CALL_R_BLOCKING(_result, unsigned int, (void *, void *), (dpy, surface));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
 _fail:
@@ -3096,7 +3096,7 @@ pygl_EGL_eglSwapBuffersWithDamageEXT(GLProc *self, PyObject *const *_a, size_t _
     PYGL_I(3, n_rects);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(2, rects, &pygl_elem_GLint);
-    PYGL_CALL_R(_result, unsigned int, (void *, void *, void *, int), (dpy, surface, rects, n_rects));
+    PYGL_CALL_R_BLOCKING(_result, unsigned int, (void *, void *, void *, int), (dpy, surface, rects, n_rects));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
@@ -3120,7 +3120,7 @@ pygl_EGL_eglSwapBuffersWithDamageKHR(GLProc *self, PyObject *const *_a, size_t _
     PYGL_I(3, n_rects);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(2, rects, &pygl_elem_GLint);
-    PYGL_CALL_R(_result, unsigned int, (void *, void *, void *, int), (dpy, surface, rects, n_rects));
+    PYGL_CALL_R_BLOCKING(_result, unsigned int, (void *, void *, void *, int), (dpy, surface, rects, n_rects));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
@@ -3236,7 +3236,7 @@ pygl_EGL_eglWaitClient(GLProc *self, PyObject *const *_a, size_t _nargsf)
 {
     PYGL_ARITY(0);
     PYGL_CONV_OK();
-    PYGL_CALL_R(_result, unsigned int, (void), ());
+    PYGL_CALL_R_BLOCKING(_result, unsigned int, (void), ());
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
 _fail:
@@ -3251,7 +3251,7 @@ pygl_EGL_eglWaitGL(GLProc *self, PyObject *const *_a, size_t _nargsf)
 {
     PYGL_ARITY(0);
     PYGL_CONV_OK();
-    PYGL_CALL_R(_result, unsigned int, (void), ());
+    PYGL_CALL_R_BLOCKING(_result, unsigned int, (void), ());
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
 _fail:
@@ -3268,7 +3268,7 @@ pygl_EGL_eglWaitNative(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_ARITY(1);
     PYGL_I(0, engine);
     PYGL_CONV_OK();
-    PYGL_CALL_R(_result, unsigned int, (int), (engine));
+    PYGL_CALL_R_BLOCKING(_result, unsigned int, (int), (engine));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
 _fail:
