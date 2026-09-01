@@ -234,6 +234,22 @@ class LinuxPlatform(baseplatform.BasePlatform):
         fn.restype = ctypes.c_void_p
         return fn
 
+    def currentContextAddress(self):
+        """The address of whichever of EGL/GLX owns the current context.
+
+        Which interface answers is a runtime fact here, so the C dispatch layer
+        is told the active one rather than a fixed symbol.
+        """
+        if self._active_api is None:
+            self.GetCurrentContext()
+        if self._active_api == 'egl':
+            function = self._eglGetCurrentContext
+        else:
+            function = self._glXGetCurrentContext
+        if function is None:
+            return None
+        return ctypes.cast(function, ctypes.c_void_p).value
+
     def GetCurrentContext(self):
         """Retrieve an opaque pointer for the current context
 

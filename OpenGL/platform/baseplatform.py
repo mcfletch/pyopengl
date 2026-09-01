@@ -406,6 +406,20 @@ class BasePlatform(object):
             """Platform does not define a GetCurrentContext function"""
         )
 
+    def currentContextAddress(self):
+        """The address of the platform's current-context function, or None.
+
+        The C dispatch layer calls it directly to decide which context's
+        entry-point table a thread dispatches through, so it needs the address
+        rather than the ctypes callable.  Returning None is not a failure: the
+        layer then dispatches through a single table, which is correct for a
+        process that only ever has one context current.
+        """
+        try:
+            return ctypes.cast(self.GetCurrentContext, ctypes.c_void_p).value
+        except (ctypes.ArgumentError, TypeError):
+            return None
+
     def getGLUTFontPointer(self, constant):
         """Retrieve a GLUT font pointer for this platform"""
         raise NotImplementedError(

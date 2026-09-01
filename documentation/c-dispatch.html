@@ -1,0 +1,264 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>The C dispatch layer</title><link rel="stylesheet" type="text/css" href="style/tutorial.css">
+</head>
+<body>
+
+<h1>The C dispatch layer</h1>
+
+<p>PyOpenGL has two implementations of the OpenGL entry points.  The
+<em>ctypes</em> implementation is the one it has always had and is the default.
+The <em>C</em> implementation is generated from the Khronos registry, compiled
+into an extension module, and selected with an environment variable:</p>
+
+<pre>PYOPENGL_DISPATCH=c   python yourprogram.py</pre>
+
+<p>Both implement the same API.  A call reaches the driver about seven times
+faster through the C implementation, and about eleven times faster for a call
+that passes an array; the numbers below are on a GeForce RTX 3060 Ti with
+CPython 3.12 and <code>OpenGL_accelerate</code> installed.</p>
+
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>call</th><th>ctypes</th><th>C</th></tr>
+<tr><td><code>glBindTexture(GL_TEXTURE_2D, 0)</code></td><td>407 ns</td><td>58 ns</td></tr>
+<tr><td><code>glUniform1f(loc, 1.0)</code></td><td>382 ns</td><td>51 ns</td></tr>
+<tr><td><code>glUniformMatrix4fv(loc, 1, False, m)</code></td><td>1184 ns</td><td>106 ns</td></tr>
+<tr><td>an empty Python function, for scale</td><td colspan="2">32 ns</td></tr>
+</table>
+
+<h2>Selecting an implementation</h2>
+
+<dl>
+<dt><code>PYOPENGL_DISPATCH=ctypes</code></dt>
+<dd>The default.  It is the reference semantics, the bootstrap route for a new
+platform, and what runs where no compiled wheel is available.  It is not
+scheduled for removal.</dd>
+
+<dt><code>PYOPENGL_DISPATCH=c</code></dt>
+<dd>Use the C implementation for every entry point that has one.  An entry
+point it does not implement keeps its ctypes binding, so the two coexist and
+you never have to choose per function.</dd>
+</dl>
+
+<p>Installing from source without a compiler is supported: the extension is
+optional, and its absence leaves the ctypes implementation in place.</p>
+
+<h2>What is implemented in C</h2>
+
+<p>4,574 of PyOpenGL's 4,839 bindings, across GL, GLES 1/2/3, GLSC2, GLX, WGL
+and EGL.  The rest keep their ctypes binding, and
+<code>python src/check_registry.py</code> lists them with the reason for each.
+The families still on ctypes are the ones whose behaviour is a computation
+rather than a description: images, whose size depends on format, type,
+dimensions and the current pixel-store state; the variadic entry points such as
+<code>glVertex</code> and <code>glColor</code>; the client-side array pointer
+family; and the string-array parameters.  <code>glShaderSource</code> is the
+one of those already done, by hand.</p>
+
+<h2>Contexts</h2>
+
+<p>Under the C implementation each OpenGL context holds its own function
+pointer for every entry point, resolved in that context.  This matters where
+two contexts differ: a discrete-GPU context beside a software one, a core
+context beside a compatibility one, or GLES beside desktop GL.  Under the
+ctypes implementation whichever context resolved an entry point first
+determines the binding for the whole process.</p>
+
+<p>Two consequences reach the Python surface.
+<code>bool(glFoo)</code> and <code>glInitXxx()</code> answer for the context
+that is current, so the same expression can correctly be true in one context
+and false in another.  And a binding held in a local variable across a context
+switch still dispatches correctly, because the entry point object holds a slot
+index rather than an address.</p>
+
+<h3>Knowing which context is current</h3>
+
+<p>An application makes a context current inside its windowing toolkit &#8212;
+glfw, Qt, pygame and SDL all call <code>glXMakeCurrent</code> or
+<code>eglMakeCurrent</code> themselves &#8212; and PyOpenGL is not on that call
+path, so it cannot observe the switch.  Asking the driver instead costs about
+97&nbsp;ns per call on the reference machine, more than a whole dispatch.</p>
+
+<p>The default therefore re-reads the current context whenever an entry point
+needs resolving, and otherwise assumes it has not changed.  <strong>This is not
+a new limitation.</strong>  The ctypes implementation holds one binding per
+process and cannot tell contexts apart at all, so a process with two contexts
+of differing capability has always had this exposure; per-context tables narrow
+it rather than widening it.</p>
+
+<p>Where it matters &#8212; a program that switches between contexts of genuinely
+different capability, such as a discrete-GPU context beside a software one
+&#8212; there are two ways to be exact:</p>
+
+<ul>
+<li><code>PYOPENGL_CONTEXT_TRACKING=verify</code> asks the driver on every call.
+Nothing to change in the program, and it costs the 97&nbsp;ns: about 177&nbsp;ns
+per call rather than 58, against 383 for ctypes.</li>
+<li><code>OpenGL._dispatch.make_current(handle)</code> after each switch, with
+the handle <code>OpenGL.platform.PLATFORM.GetCurrentContext()</code> returns.
+Exact and free, for a program willing to say so.</li>
+</ul>
+
+<p><code>OpenGL._dispatch.forget_context(handle)</code> releases a destroyed
+context's table.  A table is about 32 KB, so a hundred live contexts cost 3 MB.</p>
+
+<h2>Arrays</h2>
+
+<p>Nothing you can pass today stops being accepted.  Where an array is wanted,
+a buffer whose element type already matches is used directly; anything else
+&#8212; a different dtype, a non-contiguous array, a list, <code>bytes</code>, a
+ctypes object, a VBO, an object from a <code>FormatHandler</code> you
+registered yourself &#8212; is converted by <code>ArrayDatatype</code> exactly
+as it is today.  A type the C layer does not recognise is not an error; it is
+simply not accelerated.</p>
+
+<p>Registering a new array type therefore needs no knowledge of this layer, and
+a type registered against an older PyOpenGL keeps working.  Acceleration is
+optional; acceptance is not.</p>
+
+<h2>Error checking</h2>
+
+<p><code>OpenGL.ERROR_CHECKING</code> is read when the layer is configured and
+applies per entry point per context.  <code>glGetError</code> is called from C
+rather than through a Python callback, so checking costs the driver round trip
+and nothing else.  <code>OpenGL._dispatch.set_error_checking(enable,
+entry_point=None)</code> changes it at run time, for one entry point or for
+all &#8212; which the import-time flag cannot do.</p>
+
+<h3>Checking through GL_KHR_debug</h3>
+
+<p>The round trip <em>is</em> the cost of error checking.  Where the context
+offers <code>GL_KHR_debug</code>, the driver can report an error through a
+callback during the call instead, and the check afterwards becomes a read of
+the flag that callback set:</p>
+
+<pre>import OpenGL._dispatch as dispatch
+dispatch.use_debug_output(True)</pre>
+
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th><code>glBindTexture</code></th><th>ns</th></tr>
+<tr><td>checking via <code>glGetError</code></td><td>48.9</td></tr>
+<tr><td>checking via <code>GL_KHR_debug</code></td><td>38.4</td></tr>
+<tr><td>no checking at all</td><td>37.6</td></tr>
+</table>
+
+<p>Checking costs 0.8 ns rather than 11 ns, so leaving it on is no longer a
+trade against speed.  The exception is the same <code>GLError</code>, raised
+from the same call; the description is the driver's own message rather than a
+code looked up afterwards.</p>
+
+<p>It requires a context with <code>GL_KHR_debug</code>;
+<code>use_debug_output()</code> returns False and leaves checking as it was
+where there is none.  It turns on <code>GL_DEBUG_OUTPUT_SYNCHRONOUS</code>,
+because the callback has to run during the call it belongs to for the error to
+be attributed to the right entry point.  Messages that are not errors are not
+requested, so the driver does not spend time formatting them.</p>
+
+<h2>Docstrings and introspection</h2>
+
+<p>Entry points carry a docstring and a text signature under the C
+implementation, which they do not have under ctypes:</p>
+
+<pre>&gt;&gt;&gt; glBindTexture.__doc__
+'glBindTexture(target, texture) -&gt; None'
+&gt;&gt;&gt; glGenTextures.__doc__
+'glGenTextures(n) -&gt; textures'
+&gt;&gt;&gt; inspect.signature(glGenTextures)
+&lt;Signature (n, textures=None, /)&gt;</pre>
+
+<p>The signature is built from the registry, so it is available for every entry
+point without any external documentation source.</p>
+
+<h2>What differs from the ctypes implementation</h2>
+
+<p>These are the differences a program can observe.  Everything not listed here
+behaves identically, and the test suite runs under both implementations to keep
+it that way.</p>
+
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>behaviour</th><th>ctypes</th><th>C</th></tr>
+
+<tr><td><code>type(glBindTexture)</code></td>
+    <td>a ctypes function pointer, or <code>_NullFunctionPointer</code></td>
+    <td><code>GLProc</code>.  An <code>isinstance</code> check against
+        <code>ctypes._CFuncPtr</code> is the one idiom likely to notice.</td></tr>
+
+<tr><td><code>repr(glBindTexture)</code></td>
+    <td>ctypes' wording</td>
+    <td><code>&lt;OpenGL entry point glBindTexture&gt;</code></td></tr>
+
+<tr><td>exception message text for a bad argument</td>
+    <td>ctypes' wording</td>
+    <td>ours.  The exception <em>type</em> is preserved:
+        <code>ctypes.ArgumentError</code> for a bad argument,
+        <code>NullFunctionError</code> for an absent entry point.</td></tr>
+
+<tr><td><code>bool(glFoo)</code>, <code>glInitXxx()</code></td>
+    <td>resolved once, cached for the process</td>
+    <td>answered for the current context</td></tr>
+
+<tr><td><code>OpenGL.FULL_LOGGING</code></td>
+    <td>logs every call</td>
+    <td>not implemented in C.  Tracing selects the ctypes implementation for
+        the process.</td></tr>
+
+<tr><td><code>glFoo.__doc__</code> and <code>inspect.signature(glFoo)</code></td>
+    <td><code>None</code>; <code>signature()</code> raises</td>
+    <td>a signature line, and a Signature.  Gained, not changed.</td></tr>
+
+<tr><td><code>glFoo.extension</code> for a command promoted into core</td>
+    <td>whichever declaration the namespace ended up holding, which depends on
+        import order</td>
+    <td>the core declaration.  A command adopted into a GL version is declared
+        twice, by the extension that introduced it and by the version that
+        adopted it; the core one resolves without an extension check, so an
+        entry point resolves in a context that has the function but no longer
+        advertises the old extension string.  No entry point that resolves
+        under ctypes fails to resolve under C.</td></tr>
+</table>
+
+<p>The full list is not a matter of recollection:
+<code>tests/test_attribute_surface.py</code> surveys every entry point under
+both implementations in separate processes and compares the answers, so a
+difference that is not in the table above is a test failure.</p>
+
+<h3>Ways out</h3>
+
+<p>Assigning <code>errcheck</code> or <code>argtypes</code> to an entry point
+moves that one entry point to the ctypes implementation for the life of the
+process, so a debugging habit that relies on either keeps working.  Assigning
+<code>restype</code> the conversion the entry point already performs changes
+nothing; assigning a different one moves it likewise.
+<code>PYOPENGL_DISPATCH=ctypes</code> is the way out for everything else.</p>
+
+<h2>What is not implemented in C</h2>
+
+<p>GL, GLES&nbsp;1/2/3, GLSC2, GLX, WGL and EGL are generated from the
+registry.  <strong>GLU, GLUT, GLE and OSMesa are not</strong> &#8212; they are
+hand-maintained rather than registry-described, so there is no table to
+generate them from.  They keep their ctypes bindings, which is about 210 entry
+points, none of them on a hot path.</p>
+
+<h2>Regenerating and keeping up with the registry</h2>
+
+<pre>python src/regenerate_c.py     # registry and shipped tree in, C out
+python src/check_registry.py   # what changed, and what needs a person</pre>
+
+<p>Maintaining or extending the generator is covered separately, in
+<code>src/cdispatch/README.md</code>: how the pipeline fits together, how to add
+an entry point that needs hand-written C, and how to add an array element
+type.</p>
+
+<p><code>check_registry.py</code> reports registry commands with no binding,
+bindings whose signature no longer matches, enums with no constant, and every
+entry point still on the ctypes path with the reason.  Differences that are
+already known are recorded in <code>src/cdispatch/registry_baseline.json</code>
+with a reason for each, and the tool exits non-zero only for what is new since,
+so it can drive a scheduled job.</p>
+
+<p class="footer">&nbsp;
+<a href="http://pyopengl.sourceforge.net/"><img alt="PyOpenGL" src="images/pyopengl_icon.jpg" style="border: 0px solid ; width: 32px; height: 32px;" align="middle"></a>
+</p>
+
+</body></html>

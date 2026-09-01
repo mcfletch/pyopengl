@@ -53,7 +53,10 @@ class Registry(object):
                 if method:
                     method(element, context)
                 else:
-                    print('Expand', element.tag)
+                    # An element with no handler is descended into.  This is
+                    # ordinary for the registry's grouping elements, so it is
+                    # a debug note rather than something printed at a caller.
+                    log.debug('Expanding unhandled element %s', element.tag)
                     self.dispatch(element, context)
 
     def type(self, element, context=None):

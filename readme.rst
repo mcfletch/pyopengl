@@ -62,6 +62,25 @@ PyOpenGL calls.
 .. _`documentation pages`: https://mcfletch.github.io/pyopengl/documentation/index.html
 
 
+Choosing a dispatch implementation
+-----------------------------------
+
+PyOpenGL has two implementations of the OpenGL entry points.  The ctypes
+implementation is the default.  The C implementation is generated from the
+Khronos registry and reaches the driver roughly seven times faster, eleven
+times for a call that passes an array::
+
+    $ PYOPENGL_DISPATCH=c python yourprogram.py
+
+Both implement the same API and the test suite runs under both.  The C
+implementation additionally gives each OpenGL context its own function pointer
+for every entry point, which matters in a process holding contexts of differing
+capability.  See `the C dispatch layer`_ for what it covers, what differs, and
+how to tell it that the current context changed.
+
+.. _`the C dispatch layer`: https://mcfletch.github.io/pyopengl/documentation/c-dispatch.html
+
+
 Running Tests
 --------------
 

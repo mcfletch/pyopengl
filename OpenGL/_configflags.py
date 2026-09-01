@@ -17,3 +17,10 @@ from OpenGL import (
     MODULE_ANNOTATIONS,
     TYPE_ANNOTATIONS,
 )
+
+import os as _os
+
+#: Which implementation of the entry points to use: 'ctypes' (the reference
+#: semantics, and the default) or 'c' (the registry-generated C dispatch).
+#: See plans/C-DISPATCH.md and the documentation on PYOPENGL_DISPATCH.
+DISPATCH = _os.environ.get('PYOPENGL_DISPATCH', 'ctypes').strip().lower()

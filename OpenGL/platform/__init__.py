@@ -91,6 +91,23 @@ def unpack_constants(constants, namespace):
             namespace[name] = Constant(name, int(value, 16))
 
 
+# Resolved on the first entry point built: the C dispatch module if
+# PYOPENGL_DISPATCH selects it and it is present, otherwise False.  Deferred to
+# first use because installing it imports OpenGL.arrays and OpenGL.wrapper,
+# which cannot happen while this module is still being executed.
+_c_dispatch = None
+
+
+def _load_c_dispatch():
+    if _configflags.DISPATCH != 'c':
+        return False
+    try:
+        from OpenGL import _dispatch
+    except ImportError:
+        return False
+    return _dispatch if _dispatch.install() else False
+
+
 def createFunction(
     function,
     dll,
@@ -100,7 +117,8 @@ def createFunction(
     force_extension=False,
 ):
     """Allows the more compact declaration format to use the old-style constructor"""
-    return nullFunction(
+    global _c_dispatch
+    binding = nullFunction(
         function.__name__,
         dll or PLATFORM.GL,
         resultType=function.resultType,
@@ -114,3 +132,10 @@ def createFunction(
         force_extension=force_extension
         or getattr(function, 'force_extension', force_extension),
     )
+    if _c_dispatch is None:
+        _c_dispatch = _load_c_dispatch()
+    if _c_dispatch:
+        # The ctypes binding stays reachable behind the C entry point: it is
+        # what argtypes, restype and DLL read, and what a client demotes to.
+        return _c_dispatch.entry_point_for(function, binding) or binding
+    return binding
