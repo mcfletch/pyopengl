@@ -1308,10 +1308,12 @@ not express.
 | 9 virtual packages | built, and off by default: the exit criterion is not met (below) |
 | 10 flip the default | done: `PYOPENGL_DISPATCH` defaults to `c`, and `ctypes` remains selectable |
 | 11 retire what is dead | unblocked by phase 14: moving the extension into accelerate puts the superseded Cython modules beside it |
-| 12 annotations as data | next: one extraction, then the generator reads no Python |
-| 13 friendly modules reduced to definitions | 987 of 1,289 already are; 259 mechanical chains to absorb; 43 keep hand-written code |
+| 12 annotations as data | the table is written and checked against the parse on every run; the generator still parses, and stops once signatures come from the registry |
+| 13 friendly modules reduced to definitions | next: 987 of 1,289 already are; 259 carry only `setInputArraySize`/`setOutput`, both of which the table already expresses; 43 keep hand-written code |
 | 14 the extension moves to `pyopengl_accelerate` | keeps `pyopengl` a universal wheel and makes "is accelerate installed?" the whole dispatch question |
 | 15 delete `OpenGL/raw/**` | after 12 and 13, the files hold nothing that is not held elsewhere |
+| — EGL from its registry | done: both registries fetched on every generation, 41 commands and 4 types added, 158 covered by tests |
+| — test windows hidden | done: `TEST_VISIBLE` defaulted to mapping a window per context, which took over the screen of whoever ran the suite and held each frame 0.2 s; the run is 172 s → 21 s |
 
 The differential work found two divergences no functional test would have
 caught, both in attributes a client reads without calling anything:
@@ -1404,10 +1406,32 @@ definitions. The 43 that remain are where hand-written code belongs:
 `GLUT/freeglut.py` (67 statements), `GL_2_0.py`, `ARB/imaging.py`,
 `GL/shaders.py`.
 
-**4. Correct EGL.** 4.0 is the release in which previous errors are fixed
-rather than preserved. The EGL declarations are currently whatever the shipped
-tree happens to say, because its registry is not vendored; they should be made
-correct.
+The vocabulary to absorb is narrower than the count suggests. Across the whole
+friendly tree:
+
+| call | occurrences | modules |
+|---|---|---|
+| `setInputArraySize` | 2,027 | 259 |
+| `setOutput` | 687 | 122 |
+| everything else | ~80 | ~12 |
+
+The two that matter are the two the annotation table already expresses — a
+size spec and `out`. So this is not a matter of inventing vocabulary but of
+generating the friendly modules *from* the annotations that were extracted
+from them. The tail — `setPyConverter`, `setCConverter`,
+`setDimensionsAsInts`, `setCResolver`, `StringLengths`, and the 24
+`createBaseFunction` calls that all live in one module — stays hand-written,
+alongside the 43.
+
+**4. Correct EGL — done.** `src/fetch_registries.py` fetches both Khronos
+repositories (EGL is published separately), `src/regenerate_c.py` runs it
+first, and `src/generate_egl.py` binds what the registry declares and the tree
+lacks. Bindings 4,839 → 4,880. Four types were named by declarations and
+defined by nothing — `EGLDEBUGPROCKHR`, `EGLLabelKHR`, `EGLObjectKHR`,
+`EGLClientPixmapHI` — so the three `EGL_KHR_debug` entry points could not be
+built at all; and the registry's `EGL_CAST(EGLnsecsANDROID,-1)` values, which
+the older generator emitted commented out, are emitted as values.
+`tests/test_egl_bindings.py` covers all 158 commands.
 
 **5. Move the C build into `pyopengl_accelerate`.** It is the optional
 compiled companion, released from this repository alongside `pyopengl`, and

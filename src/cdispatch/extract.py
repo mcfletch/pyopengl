@@ -737,3 +737,66 @@ def extract_constants(root):
                             names.add(target.id)
         constants[api] = sorted(names)
     return constants
+
+
+def extract_customisations(root):
+    """Every ``wrapper.wrapper(x).setFoo(...)`` a friendly module applies.
+
+    ``{(api, command): [(call, arguments), ...]}``, read by parsing rather than
+    importing, as everything here is.  What it is for is checking that the
+    annotation table says everything these chains say -- because if it does,
+    the chains are a second copy and the modules can stop carrying them.
+
+    Arguments are recovered only where they are literals; anything else comes
+    back as ``None``, which is enough to know that the call was made and on
+    which parameter.
+    """
+    found = {}
+    for directory, folders, files in os.walk(root):
+        parts = directory.split(os.sep)
+        if 'raw' in parts or '__pycache__' in parts:
+            folders[:] = [name for name in folders if name != '__pycache__']
+            continue
+        api = _api_for_path(root, directory)
+        if api is None:
+            continue
+        for filename in sorted(files):
+            if not filename.endswith('.py'):
+                continue
+            path = os.path.join(directory, filename)
+            with open(path, 'r', encoding='utf-8') as handle:
+                try:
+                    tree = ast.parse(handle.read(), filename=path)
+                except SyntaxError:
+                    continue
+            for node in tree.body:
+                if not isinstance(node, ast.Assign) or len(node.targets) != 1:
+                    continue
+                target = node.targets[0]
+                if not isinstance(target, ast.Name):
+                    continue
+                calls = _customisation_chain(node.value)
+                if calls:
+                    found.setdefault((api, target.id), []).extend(reversed(calls))
+    return found
+
+
+def _customisation_chain(node):
+    """The ``.setFoo(...)`` calls in a chain, outermost first."""
+    calls = []
+    while isinstance(node, ast.Call):
+        function = node.func
+        if not isinstance(function, ast.Attribute):
+            break
+        if function.attr.startswith('set'):
+            calls.append((function.attr, tuple(_literal(a) for a in node.args)))
+        node = function.value
+    return calls
+
+
+def _literal(node):
+    """The value of an argument where it is a literal, else None."""
+    try:
+        return ast.literal_eval(node)
+    except (ValueError, TypeError, SyntaxError):
+        return None
