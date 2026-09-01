@@ -3,6 +3,7 @@
 import os
 
 from . import ctypes_model as cm
+from . import annotations as annotations_
 from . import emit_c, emit_pyi, extract, glgets, handwritten, modules as modules_
 
 __all__ = ['generate', 'allocate_slots', 'emit_elements_header']
@@ -198,6 +199,12 @@ def generate(package_root, output_root, report=None, tables_path=None,
     )
     glget_text, glget_apis = glgets.emit_tables(package_root, extract.APIS)
     _write(os.path.join(output_root, 'pygl_glgets.h'), glget_text)
+
+    # The annotations, written back as data.  Nothing reads them yet -- the
+    # generator still recovers them by parsing the friendly modules -- but the
+    # table is checked against that parse on every run, so the day it becomes
+    # the source it will already be right.
+    annotations_.store(annotations_.dump(commands))
 
     raw_modules = modules_.read_modules(package_root, extract.APIS)
     # The same facts as the C table, for a build with no compiled extension.
