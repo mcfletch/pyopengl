@@ -75,6 +75,24 @@ static PyGLDispatch pygl_default_table = {NULL, NULL, NULL, 0, 0, NULL};
 PYGL_THREAD_LOCAL PyGLDispatch *pygl_current = &pygl_default_table;
 
 static PyGLDispatch *pygl_tables = NULL; /* handle -> table, a short list */
+
+/* Tables whose context has been forgotten.
+ *
+ * They are not freed.  `pygl_current` is thread-local, so forgetting a context
+ * can only clear the pointer belonging to the thread that asked: every other
+ * thread that ever made that context current still points at the table, and
+ * its next dispatch reads it.  Freeing here is a use-after-free in any program
+ * that destroys a context from one thread while another is drawing -- which is
+ * the ordinary shape of a program with a window per thread, and the
+ * documentation recommends the call.
+ *
+ * So a forgotten table is emptied and retired instead.  Its slots read as
+ * PYGL_SLOT_UNRESOLVED, which sends a stale thread down the slow path, where
+ * syncing the context moves it to the right table; and its handle is cleared,
+ * so it can never be found again.  A retired table is about 23 KB and the
+ * count is bounded by the number of contexts the process ever made, which is
+ * a cheaper price than reading freed memory. */
+static PyGLDispatch *pygl_retired = NULL;
 static PyThread_type_lock pygl_tables_lock = NULL;
 
 static PyGLDispatch *pygl_table_new(void *handle)
@@ -1770,7 +1788,20 @@ static PyObject *pygl_py_forget_context(PyObject *module, PyObject *argument)
             if (pygl_current == table) {
                 pygl_current = &pygl_default_table;
             }
-            pygl_table_free(table);
+            /* Empty it rather than free it: another thread may still be
+             * pointing here.  Cleared slots read as unresolved, which sends
+             * that thread down the slow path, and the slow path syncs the
+             * context and moves it to the table it should be using. */
+            if (table->slots != NULL) {
+                memset(table->slots, 0, (size_t)pygl_command_count * sizeof(void *));
+            }
+            if (table->flags != NULL) {
+                memset(table->flags, 0, (size_t)pygl_command_count);
+            }
+            table->handle = NULL;
+            table->generation++;
+            table->next = pygl_retired;
+            pygl_retired = table;
             break;
         }
     }
