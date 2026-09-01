@@ -14,6 +14,23 @@
 #include <stddef.h>
 #include <stdint.h>
 
+/* Py_NewRef and Py_XNewRef arrived in 3.10, and the declared minimum is 3.9.
+ * They are the only thing in here that needed a newer interpreter, and a
+ * two-line shim is a great deal cheaper than telling 3.9 users to upgrade. */
+#if PY_VERSION_HEX < 0x030A0000
+static inline PyObject *Py_NewRef(PyObject *object)
+{
+    Py_INCREF(object);
+    return object;
+}
+
+static inline PyObject *Py_XNewRef(PyObject *object)
+{
+    Py_XINCREF(object);
+    return object;
+}
+#endif
+
 #if defined(__GNUC__) || defined(__clang__)
 #define PYGL_LIKELY(x) __builtin_expect(!!(x), 1)
 #define PYGL_UNLIKELY(x) __builtin_expect(!!(x), 0)
