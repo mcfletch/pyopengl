@@ -1,21 +1,46 @@
 """Describe the generated ``OpenGL/raw`` modules so they need not be files.
 
-All 1,431 of them are purely generated -- constants, entry-point declarations
-and re-exports, with no hand-written material anywhere (the hand-written
-sections all live in the friendly modules above them).  So what each one
-*contains* is data, and a module object can be built from that data on demand
-instead of a file being compiled, executed and kept resident.
+All but three of them are purely generated -- constants, entry-point
+declarations and re-exports, with no hand-written material anywhere (the
+hand-written sections all live in the friendly modules above them).  So what
+each one *contains* is data, and a module object can be built from that data
+on demand instead of a file being compiled, executed and kept resident.
 
-What is emitted is a C table rather than a Python one: 10,914 constants as
-Python source would cost more to import than the modules it replaces, and as
-``.rodata`` it costs nothing until something asks.
+What is emitted is a C table rather than a Python one: the constants as Python
+source would cost more to import than the modules they replace, and as
+``.rodata`` they cost nothing until something asks.
+
+Read one and you get its constants, its re-exports and, for each entry point,
+the signature its ``@_p.types(...)`` declaration stated.  The signature is
+carried because running that declaration is what used to record the ctypes
+binding a client demotes to, and nothing runs it when there is no file.
 """
 
 import ast
 import os
 from dataclasses import dataclass, field
 
-__all__ = ['RawModule', 'read_modules', 'emit_modules']
+__all__ = ['RawCommand', 'RawModule', 'emit_modules', 'read_modules']
+
+
+@dataclass
+class RawCommand:
+    """One entry-point declaration, as the data the file stated.
+
+    The signature is carried because a client can still demote to the ctypes
+    binding -- the Python layer does it wherever it derives a function whose
+    arity differs from the entry point's.  Running the file used to be what
+    recorded that signature, so with no file it has to be said here.
+    """
+
+    #: Its name, e.g. ``glTexImage3D``.
+    name: str
+    #: The parameter names, in order.
+    argument_names: tuple = ()
+    #: The ctypes type expressions, result first, exactly as written --
+    #: ``None``, ``_cs.GLenum``, ``ctypes.c_void_p``, ``arrays.GLfloatArray``.
+    #: They are resolved when a demotion asks for them and not before.
+    types: tuple = ()
 
 
 @dataclass
@@ -28,7 +53,7 @@ class RawModule:
     extension: str = ''
     #: ``{constant name: value}``.
     constants: dict = field(default_factory=dict)
-    #: The entry points it declares.
+    #: The entry points it declares, as :class:`RawCommand`.
     commands: list = field(default_factory=list)
     #: Modules it re-exports with ``from ... import *``.
     reexports: list = field(default_factory=list)
@@ -61,7 +86,11 @@ def read_module(root, path):
             # ``def _f(function): ...`` is the module's own binding helper.
             if node.name == '_f':
                 continue
-            module.commands.append(node.name)
+            command = _read_command(node)
+            if command is None:
+                module.hand_written = True
+                continue
+            module.commands.append(command)
             continue
         if isinstance(node, ast.Assign) and len(node.targets) == 1:
             target = node.targets[0]
@@ -83,6 +112,55 @@ def read_module(root, path):
         # A class, a conditional, an assertion: not something a table says.
         module.hand_written = True
     return module
+
+
+def _read_command(node):
+    """``@_f @_p.types(None, _cs.GLenum, ...) def glFoo(target): pass``."""
+    types = None
+    for decorator in node.decorator_list:
+        if not isinstance(decorator, ast.Call):
+            continue  # ``@_f``, which says only which DLL to look in
+        called = getattr(decorator.func, 'attr', None)
+        if called != 'types':
+            return None  # something a table does not describe
+        types = tuple(_type_source(argument) for argument in decorator.args)
+        if any(item is None for item in types):
+            return None
+    if types is None:
+        return None
+    arguments = node.args
+    if arguments.vararg or arguments.kwarg or arguments.kwonlyargs:
+        return None
+    names = tuple(item.arg for item in arguments.args)
+    if len(types) != len(names) + 1:
+        return None  # the result type plus one per parameter, or nothing said
+    return RawCommand(name=node.name, argument_names=names, types=types)
+
+
+#: What a type expression may be built from.  The declarations reach for the
+#: GL typedefs, ctypes itself and PyOpenGL's array types, and nothing else, so
+#: naming the three is what lets the text be resolved later without the
+#: resolver having to trust it.
+TYPE_NAMESPACES = frozenset(['_cs', 'ctypes', 'arrays'])
+
+
+def _type_source(node):
+    """A type expression as it was written.
+
+    ``_cs.GLenum``, ``arrays.GLfloatArray``, ``ctypes.POINTER(_cs.GLchar)``:
+    kept as text, so the table need not know what any of them mean and the
+    resolving happens once, in the one process that asks.
+    """
+    if isinstance(node, ast.Constant) and node.value is None:
+        return 'None'
+    for name in ast.walk(node):
+        if isinstance(name, ast.Name) and name.id not in TYPE_NAMESPACES:
+            return None
+        if not isinstance(
+            name, (ast.Attribute, ast.Call, ast.Name, ast.Load, ast.expr_context)
+        ):
+            return None
+    return ast.unparse(node)
 
 
 def _constant_value(node):
@@ -124,6 +202,17 @@ def read_modules(package_root, apis):
     return modules
 
 
+def _c_value(value):
+    """A constant as an initialiser, and whether to read it back signed.
+
+    The range runs from -6 to 2**64-1, which no one C integer type covers, so
+    the value is held unsigned and the flag says how to read it.
+    """
+    if value < 0:
+        return '(unsigned long long)(%dLL), 1' % (value,)
+    return '%dULL, 0' % (value,)
+
+
 def _c_string(value):
     escaped = value.replace('\\', '\\\\').replace('"', '\\"')
     return '"%s"' % (escaped,)
@@ -147,14 +236,21 @@ def emit_modules(modules):
             lines.append('static const PyGLEnum %s_enums[] = {' % (symbol,))
             for name in sorted(module.constants):
                 lines.append(
-                    '    {%s, %dULL},' % (_c_string(name), module.constants[name] & 0xFFFFFFFFFFFFFFFF)
+                    '    {%s, %s},' % (_c_string(name), _c_value(module.constants[name]))
                 )
             lines.append('};')
         if module.commands:
-            lines.append(
-                'static const char *const %s_commands[] = {%s};'
-                % (symbol, ', '.join(_c_string(n) for n in sorted(module.commands)))
-            )
+            lines.append('static const PyGLDeclaration %s_commands[] = {' % (symbol,))
+            for command in sorted(module.commands, key=lambda item: item.name):
+                lines.append(
+                    '    {%s, %s, %s},'
+                    % (
+                        _c_string(command.name),
+                        _c_string(','.join(command.argument_names)),
+                        _c_string(','.join(command.types)),
+                    )
+                )
+            lines.append('};')
         if module.reexports:
             lines.append(
                 'static const char *const %s_reexports[] = {%s};'

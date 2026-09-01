@@ -114,6 +114,10 @@ def install():
     entry_points.update(_c.entry_points)
     configure()
 
+    from OpenGL._dispatch import finder
+
+    finder.install(_c, entry_points)
+
     from OpenGL import platform, wrapper
 
     _base_wrapper = wrapper.wrapper

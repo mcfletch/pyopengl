@@ -48,6 +48,7 @@
     "GLvoidpArray"
   ],
   "emitted": 4819,
+  "generated_modules": 1278,
   "generator_version": "1.0",
   "glget_tables": [
     "GL",

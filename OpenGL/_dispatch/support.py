@@ -47,17 +47,22 @@ def _dll_for(api):
     return getattr(platform.PLATFORM, _DLL_ATTRIBUTE.get(api, 'GL'), None)
 
 
-def resolve(name, extension, _unused, api_index):
+def resolve(name, extension, alternates, api_index):
     """The address of an entry point *in the current context*, or None.
 
     This reproduces what ``BasePlatform.constructFunction`` decides, so that an
     entry point the ctypes path would have refused is refused here too.  It runs
     once per entry point per context.
+
+    ``alternates`` names the other extensions that declare the same command,
+    comma-joined.  A command is often declared by two -- ``glUniform1i64NV`` by
+    both ``GL_NV_gpu_shader5`` and ``GL_AMD_gpu_shader_int64`` -- and a driver
+    advertising either has the function, so any one of them is enough.
     """
     api = _API_NAMES[api_index]
     platform_ = platform.PLATFORM
     is_core = (not extension) or 'VERSION' in extension.split('_')
-    if not is_core and not platform_.checkExtension(extension):
+    if not is_core and not _any_extension_present(platform_, extension, alternates):
         return None
     dll = _dll_for(api)
     if is_core and dll is not None:
@@ -76,6 +81,18 @@ def resolve(name, extension, _unused, api_index):
     if pointer:
         return int(pointer)
     return None
+
+
+def _any_extension_present(platform_, extension, alternates):
+    """Whether the context advertises any extension that declares the command."""
+    for name in (extension, *(alternates or '').split(',')):
+        if not name:
+            continue
+        if 'VERSION' in name.split('_'):
+            return True  # a core version declares it; no string to check
+        if platform_.checkExtension(name):
+            return True
+    return False
 
 
 def as_pointer(value):
@@ -166,11 +183,28 @@ def register_module(api, name, module):
     _modules[(api, name)] = module
 
 
+#: How to build a ctypes binding for an entry point whose declaration has not
+#: been run.  Populated by the module finder, which stands in for the files
+#: that would have run them.
+_ctypes_factories = {}
+
+
+def register_ctypes_factory(api, name, factory):
+    """Remember how to build the ctypes binding an entry point demotes to."""
+    _ctypes_factories.setdefault((api, name), factory)
+
+
 def ctypes_callable(name):
     """The ctypes binding for an entry point, for demotion and attributes."""
     for api in _API_NAMES:
         binding = _ctypes_bindings.get((api, name))
         if binding is not None:
+            return binding
+    for api in _API_NAMES:
+        factory = _ctypes_factories.get((api, name))
+        if factory is not None:
+            binding = factory()
+            _ctypes_bindings[(api, name)] = binding
             return binding
     raise AttributeError('no ctypes binding recorded for %s' % (name,))
 

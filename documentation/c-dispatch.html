@@ -7,12 +7,13 @@
 
 <h1>The C dispatch layer</h1>
 
-<p>PyOpenGL has two implementations of the OpenGL entry points.  The
-<em>ctypes</em> implementation is the one it has always had and is the default.
-The <em>C</em> implementation is generated from the Khronos registry, compiled
-into an extension module, and selected with an environment variable:</p>
+<p>PyOpenGL has two implementations of the OpenGL entry points.  The <em>C</em>
+implementation is generated from the Khronos registry, compiled into an
+extension module, and is what runs by default.  The <em>ctypes</em>
+implementation is the one PyOpenGL has always had, and an environment variable
+selects it:</p>
 
-<pre>PYOPENGL_DISPATCH=c   python yourprogram.py</pre>
+<pre>PYOPENGL_DISPATCH=ctypes   python yourprogram.py</pre>
 
 <p>Both implement the same API.  A call reaches the driver about seven times
 faster through the C implementation, and about eleven times faster for a call
@@ -30,15 +31,15 @@ CPython 3.12 and <code>OpenGL_accelerate</code> installed.</p>
 <h2>Selecting an implementation</h2>
 
 <dl>
-<dt><code>PYOPENGL_DISPATCH=ctypes</code></dt>
-<dd>The default.  It is the reference semantics, the bootstrap route for a new
-platform, and what runs where no compiled wheel is available.  It is not
-scheduled for removal.</dd>
-
 <dt><code>PYOPENGL_DISPATCH=c</code></dt>
-<dd>Use the C implementation for every entry point that has one.  An entry
-point it does not implement keeps its ctypes binding, so the two coexist and
-you never have to choose per function.</dd>
+<dd>The default.  Every entry point that has a C implementation uses it; one
+that does not keeps its ctypes binding, so the two coexist and you never have
+to choose per function.</dd>
+
+<dt><code>PYOPENGL_DISPATCH=ctypes</code></dt>
+<dd>The reference semantics, the bootstrap route for a new platform, and what
+runs where no compiled wheel is available.  It is not scheduled for
+removal.</dd>
 </dl>
 
 <p>Installing from source without a compiler is supported: the extension is
@@ -46,15 +47,20 @@ optional, and its absence leaves the ctypes implementation in place.</p>
 
 <h2>What is implemented in C</h2>
 
-<p>4,574 of PyOpenGL's 4,839 bindings, across GL, GLES 1/2/3, GLSC2, GLX, WGL
-and EGL.  The rest keep their ctypes binding, and
-<code>python src/check_registry.py</code> lists them with the reason for each.
-The families still on ctypes are the ones whose behaviour is a computation
-rather than a description: images, whose size depends on format, type,
-dimensions and the current pixel-store state; the variadic entry points such as
-<code>glVertex</code> and <code>glColor</code>; the client-side array pointer
-family; and the string-array parameters.  <code>glShaderSource</code> is the
-one of those already done, by hand.</p>
+<p>4,819 of PyOpenGL's 4,839 bindings, across GL, GLES 1/2/3, GLSC2, GLX, WGL
+and EGL.  That includes the families whose length is a computation rather than
+a description &#8212; images, sized from format, type, dimensions and the
+current pixel-store state; arrays whose element type is an argument, such as
+<code>glDrawElements</code>; the client-side array pointers, whose memory the
+GL keeps after the call returns; and the string-array parameters.  The image
+sizing itself stays in Python, because
+<code>OpenGL.images.registerImage</code> is a public entry point a third party
+can add a format through, and the C calls it.</p>
+
+<p>The remaining twenty keep their ctypes binding, and
+<code>python src/check_registry.py</code> lists them with the reason for each:
+eleven GLX queries that return a pointer to an X11 struct, seven whose output
+argument is not the last one, and two others.</p>
 
 <h2>Contexts</h2>
 
@@ -155,6 +161,15 @@ because the callback has to run during the call it belongs to for the error to
 be attributed to the right entry point.  Messages that are not errors are not
 requested, so the driver does not spend time formatting them.</p>
 
+<h3>Extensions that declare the same function</h3>
+
+<p>A command is often declared by more than one extension &#8212;
+<code>glUniform1i64NV</code> by both <code>GL_NV_gpu_shader5</code> and
+<code>GL_AMD_gpu_shader_int64</code>, the EGL sync entry points by two KHR
+extensions each.  A context advertising any one of them has the function, and
+that is what resolution requires.  <code>proc.extension</code> reports the one
+the entry point is recorded under, which is a single name.</p>
+
 <h2>Docstrings and introspection</h2>
 
 <p>Entry points carry a docstring and a text signature under the C
@@ -239,6 +254,30 @@ registry.  <strong>GLU, GLUT, GLE and OSMesa are not</strong> &#8212; they are
 hand-maintained rather than registry-described, so there is no table to
 generate them from.  They keep their ctypes bindings, which is about 210 entry
 points, none of them on a hot path.</p>
+
+<h2>Where the OpenGL.raw modules come from</h2>
+
+<p>The modules under <code>OpenGL.raw</code> are generated &#8212; constants,
+entry-point declarations and re-exports, and nothing else.  The C extension
+carries the same definitions in its own tables, so those modules can be built
+from the tables rather than imported from files:</p>
+
+<pre>PYOPENGL_VIRTUAL_MODULES=1</pre>
+
+<p>It is off by default because it does not currently pay.  With the friendly
+modules importing the raw ones eagerly, <code>import OpenGL.GL</code> costs
+58&nbsp;ms and 62&nbsp;MB whichever way the modules are filled; cold, it is
+185&nbsp;ms from files against 166&nbsp;ms from the tables, and walking the
+whole raw tree is 333&nbsp;ms against 352&nbsp;ms.  What the option gives you
+is the same names from a different source, and a way to check that they really
+are the same.</p>
+
+<p>Two kinds keep their files whatever you set.  The packages and the private
+modules &#8212; <code>_types</code>, <code>_errors</code>,
+<code>_glgets</code> &#8212; carry classes and conditionals rather than data.
+And the finder cannot be installed until the extension is loaded, which is the
+first entry point built, so whatever was imported to reach that point comes
+from files: for <code>import OpenGL.GL</code> that is GL_1_0 and GL_1_1.</p>
 
 <h2>Regenerating and keeping up with the registry</h2>
 

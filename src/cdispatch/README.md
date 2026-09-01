@@ -43,12 +43,27 @@ modules above them are parsed the same way, and their
 
 Two things it does that are easy to miss:
 
+- A command declared twice keeps **both** extension names. The core
+  declaration wins where there is one, and the loser's name goes on the
+  winner's `extensions`, because 223 commands are declared by two extensions
+  with neither in core and a driver advertising either has the function.
 - A binding is keyed by **`(api, name)`**, not by name. `glTexImage2D` exists in
   GL and in GLES2 as separate bindings resolved from separate libraries.
 - It **cross-checks the Khronos registry** for parameter sizing. Reading the
   friendly modules alone marks `glReadPixels` as pass-through, because
   `images.py` reaches it through a differently-named wrapper; the registry's
   `COMPSIZE(format,type,…)` says what it really is.
+
+**1b. `modules.py` — read what the generated modules contain.** The same AST
+pass, asking a different question: not what an entry point's signature is but
+what each `OpenGL/raw` module *defines* — its constants, its re-exports, and
+for each entry point the `@_p.types(...)` signature its declaration stated.
+That becomes a C table (`pygl_modules.c`), which the finder in
+`OpenGL/_dispatch/finder.py` builds module objects from when
+`PYOPENGL_VIRTUAL_MODULES=1`. The signature is carried because running the
+declaration is what recorded the ctypes binding a client demotes to, and
+nothing runs it when there is no file. A module with a class or a conditional
+in it is not data, so it is marked hand-written and keeps its file.
 
 **2. `model.py` — the command record.** One record per entry point, and
 everything emitted is a field in it:
@@ -139,10 +154,12 @@ from the day the type appears.
 reason; none is there by accident, and `tests/cdispatch/test_coverage.py`
 asserts that.
 
-The families still excluded are the four Tier 3 ones the plan schedules one per
-release — images, the variadic entry points, client-side array pointers, string
-arrays — plus struct-pointer returns and five commands whose outputs are not
-their trailing arguments.
+Twenty remain. Eleven are GLX queries returning a pointer to an X11 struct —
+`XVisualInfo *`, `GLXFBConfig *`, `Display *` — which a caller passes back to
+Xlib rather than reads. Seven have an output argument that is not the last one,
+so no arity distinguishes "the caller omitted it". The other two are a
+converter and `glShaderSource`, which is hand-written beside the generated
+ones.
 
 ## Keeping up with upstream
 
@@ -169,6 +186,7 @@ since. After a deliberate regeneration, `python src/check_registry.py
 | `tests/gl/test_debug_error_checking.py` | `GL_KHR_debug` |
 | `tests/gl/test_no_context_calls.py` | `CONTEXT_CHECKING` |
 | `tests/gl/test_late_context_resolution.py` | probing before a context exists |
+| `tests/test_virtual_modules.py` | the built modules against the files, name for name |
 
 Run the suite under **both** implementations — that is what `tox`'s dispatch
 axis is for. A test that passes under one and not the other is a defect in

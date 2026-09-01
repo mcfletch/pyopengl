@@ -219,6 +219,11 @@ class Command:
     parameters: list = field(default_factory=list)
     #: The feature or extension that first required it, for ``extension``.
     feature: str = ''
+    #: Every feature or extension that declares it, ``feature`` among them.  A
+    #: command is often declared by two -- the extension that introduced it and
+    #: the version that adopted it, or two vendors' extensions for the same
+    #: function -- and a driver advertising any one of them has the function.
+    extensions: tuple = ()
     deprecated: str = ''
     #: Names a hand-written Tier 3 body rather than a generated one.
     helper: str = ''

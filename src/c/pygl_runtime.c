@@ -266,9 +266,13 @@ void *pygl_slot_slow(GLProc *self)
                 return NULL;
             }
         }
-        result = PyObject_CallMethod(pygl_support, "resolve", "sssi",
-                                     command->name, extension, "",
-                                     (int)command->api);
+        result = PyObject_CallMethod(
+            pygl_support, "resolve", "sssi", command->name, extension,
+            /* An override names one extension deliberately, so it stands
+             * alone; otherwise every extension that declares the command
+             * counts. */
+            self->has_extension_override ? "" : command->alternates,
+            (int)command->api);
     }
     if (result == NULL) {
         return NULL;
@@ -1938,6 +1942,95 @@ static PyObject *pygl_py_sync_context_fast(PyObject *module, PyObject *noargs)
     Py_RETURN_NONE;
 }
 
+/* What a generated module contains, so that it can be built rather than
+ * compiled and executed.  Reading a table is what makes 1,279 files
+ * unnecessary. */
+static PyObject *pygl_py_module_names(PyObject *module, PyObject *noargs)
+{
+    PyObject *result;
+    Py_ssize_t index;
+    (void)module;
+    (void)noargs;
+    result = PyList_New(pygl_module_count);
+    if (result == NULL) {
+        return NULL;
+    }
+    for (index = 0; index < pygl_module_count; index++) {
+        PyObject *name = PyUnicode_FromString(pygl_modules[index].module);
+        if (name == NULL) {
+            Py_DECREF(result);
+            return NULL;
+        }
+        PyList_SET_ITEM(result, index, name);
+    }
+    return result;
+}
+
+static PyObject *pygl_py_module_contents(PyObject *module, PyObject *argument)
+{
+    const char *wanted = PyUnicode_AsUTF8(argument);
+    Py_ssize_t index, item;
+    (void)module;
+    if (wanted == NULL) {
+        return NULL;
+    }
+    for (index = 0; index < pygl_module_count; index++) {
+        const PyGLModule *entry = &pygl_modules[index];
+        PyObject *enums, *commands, *reexports, *result;
+        if (strcmp(entry->module, wanted) != 0) {
+            continue;
+        }
+        enums = PyDict_New();
+        commands = PyList_New(entry->command_count);
+        reexports = PyList_New(entry->reexport_count);
+        if (enums == NULL || commands == NULL || reexports == NULL) {
+            Py_XDECREF(enums);
+            Py_XDECREF(commands);
+            Py_XDECREF(reexports);
+            return NULL;
+        }
+        for (item = 0; item < entry->enum_count; item++) {
+            PyObject *value =
+                entry->enums[item].is_signed
+                    ? PyLong_FromLongLong((long long)entry->enums[item].value)
+                    : PyLong_FromUnsignedLongLong(entry->enums[item].value);
+            if (value == NULL ||
+                PyDict_SetItemString(enums, entry->enums[item].name, value) < 0) {
+                Py_XDECREF(value);
+                Py_DECREF(enums);
+                Py_DECREF(commands);
+                Py_DECREF(reexports);
+                return NULL;
+            }
+            Py_DECREF(value);
+        }
+        for (item = 0; item < entry->command_count; item++) {
+            const PyGLDeclaration *command = &entry->commands[item];
+            /* name, argument names, ctypes type expressions -- the last two
+             * as the comma-joined text the declaration stated, split by the
+             * finder only for the few entry points that ever demote. */
+            PyObject *row = Py_BuildValue("(sss)", command->name,
+                                          command->arguments, command->types);
+            if (row == NULL) {
+                Py_DECREF(enums);
+                Py_DECREF(commands);
+                Py_DECREF(reexports);
+                return NULL;
+            }
+            PyList_SET_ITEM(commands, item, row);
+        }
+        for (item = 0; item < entry->reexport_count; item++) {
+            PyList_SET_ITEM(reexports, item,
+                            PyUnicode_FromString(entry->reexports[item]));
+        }
+        result = Py_BuildValue("{s:s,s:N,s:N,s:N}", "extension", entry->extension,
+                               "constants", enums, "commands", commands,
+                               "reexports", reexports);
+        return result;
+    }
+    Py_RETURN_NONE;
+}
+
 static PyObject *pygl_py_command_count(PyObject *module, PyObject *noargs)
 {
     (void)module;
@@ -1971,6 +2064,10 @@ static PyMethodDef pygl_methods[] = {
      "Re-read the current context from the platform and switch tables."},
     {"sync_context_fast", pygl_py_sync_context_fast, METH_NOARGS,
      "As sync_context, through the raw platform address."},
+    {"module_names", pygl_py_module_names, METH_NOARGS,
+     "Every generated module the layer can build without a file."},
+    {"module_contents", pygl_py_module_contents, METH_O,
+     "What one generated module contains, or None if it is not described."},
     {"command_count", pygl_py_command_count, METH_NOARGS,
      "How many entry points the dispatch table holds a slot for."},
     {NULL}};

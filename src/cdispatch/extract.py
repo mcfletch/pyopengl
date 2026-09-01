@@ -392,14 +392,33 @@ def _prefer(existing, candidate):
     declaration is the one to keep, because it resolves without an extension
     check -- a context that has the function but does not advertise the old
     extension string still gets it.
+
+    The one not kept is not discarded: both names go on the winner's
+    ``extensions``, because a driver advertising either has the function.
+    ``glUniform1i64NV`` is declared by ``GL_NV_gpu_shader5`` and by
+    ``GL_AMD_gpu_shader_int64``, and a context with the first and not the
+    second must not be told the function is absent.
     """
     if _is_core_feature(existing.feature) and not _is_core_feature(candidate.feature):
-        return existing
-    if _is_core_feature(candidate.feature) and not _is_core_feature(existing.feature):
-        return candidate
-    # Both core or both extensions: the earlier version wins, so that a
-    # command adopted in 4.1 is not re-attributed to 4.6.
-    return existing if existing.feature <= candidate.feature else candidate
+        winner = existing
+    elif _is_core_feature(candidate.feature) and not _is_core_feature(existing.feature):
+        winner = candidate
+    else:
+        # Both core or both extensions: the earlier version wins, so that a
+        # command adopted in 4.1 is not re-attributed to 4.6.
+        winner = existing if existing.feature <= candidate.feature else candidate
+    winner.extensions = _merged_extensions(existing, candidate)
+    return winner
+
+
+def _merged_extensions(*declarations):
+    """Every feature named by any of these declarations, in a stable order."""
+    names = []
+    for declaration in declarations:
+        for name in (declaration.extensions or (declaration.feature,)):
+            if name and name not in names:
+                names.append(name)
+    return tuple(names)
 
 
 def _api_for_path(root, path):
@@ -589,9 +608,13 @@ def extract_tree(root, registry_root=None):
                 ).items():
                     key = (api, command_name)
                     existing = commands.get(key)
-                    if existing is not None and _prefer(existing, command) is existing:
+                    if existing is None:
+                        command.extensions = _merged_extensions(command)
+                        commands[key] = command
                         continue
-                    commands[key] = command
+                    # _prefer records every declaring extension on whichever
+                    # it keeps, so the loser's name survives on the winner.
+                    commands[key] = _prefer(existing, command)
 
     for directory, _folders, files in os.walk(root):
         if 'raw' in directory.split(os.sep) or '__pycache__' in directory:

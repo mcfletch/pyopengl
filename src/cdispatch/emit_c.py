@@ -522,7 +522,7 @@ def emit_command_record(command, slot):
         doc = '%s\n\n%s' % (doc, command.purpose)
     lines.append(
         'static const PyGLCommand %s_info = '
-        '{%s, %s, %s, %s, %s, %d, %d, %s, %d, %d, %d, %d};'
+        '{%s, %s, %s, %s, %s, %s, %d, %d, %s, %d, %d, %d, %d};'
         % (
             symbol,
             _c_string(command.name),
@@ -534,6 +534,13 @@ def emit_command_record(command, slot):
         ),
             args,
             _c_string(command.feature),
+            # The other extensions that declare it.  A driver advertising any
+            # of them has the function, so resolution tries them all.
+            _c_string(
+                ','.join(
+                    name for name in command.extensions if name != command.feature
+                )
+            ),
             len(arg_names),
             slot,
             _API_ENUM[command.api],

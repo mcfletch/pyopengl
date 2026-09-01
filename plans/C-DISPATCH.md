@@ -1167,10 +1167,39 @@ what changed under measurement, and where the implementation stands.
   through a differently-named wrapper. The extractor cross-checks the
   registry's `COMPSIZE(format,type,…)` lengths, so the image family is
   identified by what it is.
-- **An output must be the trailing argument.** Five commands
+- **An output must be the trailing argument.** Seven commands
   (`glGetPerfMonitorGroupsAMD` and relatives) have an output in the middle,
   where no arity makes "the caller omitted it" unambiguous. They stay on
   ctypes with that reason recorded.
+- **A command is declared by more than one extension, and any of them will
+  do.** 223 entry points are declared by two extensions with neither in core —
+  `glUniform1i64NV` by both `GL_NV_gpu_shader5` and `GL_AMD_gpu_shader_int64`,
+  the EGL sync and image entry points by two KHR extensions each. Recording one
+  name and checking only that one refuses a function the context provides: an
+  NVIDIA driver advertises `GL_NV_gpu_shader5` and not the AMD extension, so
+  `glUniform1i64NV` resolved as absent. Each command now carries every
+  extension that declares it, and resolution accepts any one of them. What
+  `proc.extension` reports is unchanged, so the attribute surface does not
+  move.
+
+- **Virtual packages save nothing while the files are still imported.** Phase
+  9's exit asked for import time and resident size to improve. Built, they do
+  not: `import OpenGL.GL` takes 58 ms warm and 62 MB either way, and holds the
+  same 309 modules, because the friendly modules import the raw ones eagerly
+  and a module object is a module object however it was filled. Cold, the same
+  import is 185 ms from files against 166 ms from the tables, and a walk of the
+  whole raw tree is 333 ms against 352 — one gain, one loss. So the finder
+  ships **off by default**, under `PYOPENGL_VIRTUAL_MODULES=1`.
+
+  What it is for is the step after. The definitions now live in the C tables,
+  including the `@_p.types(...)` signature each declaration stated, so the
+  1,278 files have nothing in them that is not held elsewhere and can be
+  removed rather than shadowed — and removing them is what would pay. A test
+  compares the two module-for-module, which is what makes that a decision
+  rather than a gamble. Two kinds keep their files either way: the packages
+  and the private modules (`_types`, `_errors`, `_glgets`) carry classes and
+  conditionals, and whatever is imported before the first entry point is built
+  is loaded before the finder can exist.
 
 ### Measured
 
@@ -1189,18 +1218,21 @@ is left.
 
 ### Coverage
 
-**4,574 of 4,839 bindings (94.5%).** What remains, with the reason each is
+**4,819 of 4,839 bindings (99.6%).** What remains, with the reason each is
 still on ctypes, is what `src/check_registry.py` prints:
 
 | | |
 |---|---|
-| image family (`glTexImage*`, `glReadPixels`, …) | 174 |
-| variadic family (`glVertex`, `glColor`, …) | 55 |
-| struct-pointer returns (GLX queries) | 12 |
-| client-array pointer family | 8 |
-| string-array parameters | 8 |
-| outputs that are not trailing | 5 |
-| other converters | 3 |
+| outputs that are not the trailing arguments | 7 |
+| GLX queries returning a pointer to a struct | 11 |
+| other converters | 1 |
+| hand-written beside the generated ones (`glShaderSource`) | 1 |
+
+The struct-pointer returns hand back an `XVisualInfo *`, a `GLXFBConfig *` or a
+`Display *`, which is an X11 type rather than a GL one, and what a caller does
+with it is pass it back to Xlib.  Seven outputs sit among the inputs rather
+than after them, which the calling convention the stubs are written in does
+not express.
 
 ### Phases
 
@@ -1211,12 +1243,12 @@ still on ctypes, is what `src/check_registry.py` prints:
 | 2 differential harness | the attribute-surface comparison, the array-acceptance matrix, and both implementations over every suite; not a per-entry-point argument generator |
 | 3 Tier 1, arrays, opt-in switch | done |
 | 4 Tier 2 declarative annotations | done, including the 1,798-entry `_glgets` table |
-| 5 Tier 3, one family per release | one of five: `glShaderSource`, which established how a hand-written entry point registers beside the generated ones |
+| 5 Tier 3 families | done: images, typed arrays, string arrays, retained client pointers and `glShaderSource`, taking coverage to 99.6% |
 | 6 per-context dispatch | done, with the multi-context tests as its exit criterion |
 | 7 error checking | done, including `GL_KHR_debug` |
 | 8 docstrings and `.pyi` | done; mypy accepts client code using both the generated part and the fallback |
-| 9 virtual packages | not started |
-| 10 flip the default | deliberately not taken: ctypes remains the default |
+| 9 virtual packages | built, and off by default: the exit criterion is not met (below) |
+| 10 flip the default | done: `PYOPENGL_DISPATCH` defaults to `c`, and `ctypes` remains selectable |
 | 11 retire what is dead | not appropriate while both implementations ship |
 
 The differential work found two divergences no functional test would have

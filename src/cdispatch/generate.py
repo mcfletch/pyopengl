@@ -3,7 +3,7 @@
 import os
 
 from . import ctypes_model as cm
-from . import emit_c, emit_pyi, extract, glgets, handwritten
+from . import emit_c, emit_pyi, extract, glgets, handwritten, modules as modules_
 
 __all__ = ['generate', 'allocate_slots', 'emit_elements_header']
 
@@ -199,6 +199,12 @@ def generate(package_root, output_root, report=None, tables_path=None,
     glget_text, glget_apis = glgets.emit_tables(package_root, extract.APIS)
     _write(os.path.join(output_root, 'pygl_glgets.h'), glget_text)
 
+    raw_modules = modules_.read_modules(package_root, extract.APIS)
+    _write(
+        os.path.join(output_root, 'pygl_modules.c'),
+        modules_.emit_modules(raw_modules),
+    )
+
     stamp = provenance(
         os.path.join(
             os.path.dirname(os.path.abspath(package_root)), 'src', 'khronosapi'
@@ -256,6 +262,7 @@ def generate(package_root, output_root, report=None, tables_path=None,
                 'emitted': len(emittable),
                 'apis': by_api,
                 'glget_tables': glget_apis,
+                'generated_modules': len(raw_modules),
                 'array_types': emit_array_type_names(elements),
             }
         )

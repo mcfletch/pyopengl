@@ -209,3 +209,42 @@ class TestOutputOrdering:
     def test_a_single_output_needs_no_ordering(self, tree):
         command = tree['glGenTextures']
         assert [p.name for p in command.output_parameters] == ['textures']
+
+
+class TestAliasedExtensions:
+    """A command declared by several extensions resolves under any of them.
+
+    ``glUniform1i64NV`` is declared by both ``GL_NV_gpu_shader5`` and
+    ``GL_AMD_gpu_shader_int64``.  A driver advertising one and not the other
+    has the function, so recording a single extension string and checking only
+    that one refuses an entry point the context provides.
+    """
+
+    def test_a_command_carries_every_extension_that_declares_it(self, commands):
+        command = commands[('GL', 'glUniform1i64NV')]
+        assert set(command.extensions) == {
+            'GL_NV_gpu_shader5',
+            'GL_AMD_gpu_shader_int64',
+        }
+
+    def test_the_chosen_one_is_still_the_feature(self, commands):
+        """What a client reads from ``proc.extension`` does not change."""
+        command = commands[('GL', 'glUniform1i64NV')]
+        assert command.feature in command.extensions
+
+    def test_a_core_promotion_keeps_the_core_feature(self, commands):
+        """The alternates do not disturb the core-wins rule."""
+        command = commands[('GL', 'glClearDepthf')]
+        assert command.feature == 'GL_VERSION_GL_4_1'
+        assert 'GL_ARB_ES2_compatibility' in command.extensions
+
+    def test_a_single_extension_command_lists_only_it(self, commands):
+        command = commands[('GL', 'glBindTexture')]
+        assert len(command.extensions) == 1
+
+    def test_the_alternates_are_emitted(self, commands):
+        from cdispatch import emit_c
+
+        text = emit_c.emit_command_record(commands[('GL', 'glUniform1i64NV')], 0)
+        assert 'GL_AMD_gpu_shader_int64' in text
+        assert 'GL_NV_gpu_shader5' in text

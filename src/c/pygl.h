@@ -118,6 +118,11 @@ typedef struct {
     const char *text_signature; /* so inspect.signature() answers */
     const char *const *arg_names;
     const char *extension; /* the feature or extension that requires it */
+    /* The other extensions that declare the same command, comma-joined and
+     * usually empty.  A driver advertising any one of them has the function,
+     * so refusing on the strength of the first alone would refuse an entry
+     * point the context provides. */
+    const char *alternates;
     uint16_t arg_count;
     uint16_t slot; /* index into every context's dispatch table */
     uint8_t api;
@@ -129,6 +134,47 @@ typedef struct {
      * demoting the entry point to ctypes and undoing the work. */
     uint8_t hand_written;
 } PyGLCommand;
+
+/* ------------------------------------------------------------------ *
+ * the generated modules
+ *
+ * Every module under OpenGL/raw is purely generated -- constants, entry-point
+ * declarations and re-exports, with no hand-written material anywhere.  So
+ * what one contains is data, and the module object can be built from it on
+ * demand rather than a file being compiled and executed whether or not
+ * anything looks at it.
+ * ------------------------------------------------------------------ */
+typedef struct {
+    const char *name;
+    /* The range runs from -6 (GL_SKIP_COMPONENTS4_NV) to 2**64-1
+     * (GL_TIMEOUT_IGNORED), which no one C integer type covers.  So the value
+     * is held unsigned and is_signed says how to read it back. */
+    unsigned long long value;
+    uint8_t is_signed;
+} PyGLEnum;
+
+/* One entry-point declaration in a generated module.  The signature is here
+ * because a client can still demote to the ctypes binding, and running the
+ * file used to be what recorded it. */
+typedef struct {
+    const char *name;      /* glTexImage3D */
+    const char *arguments; /* "target,level,internalformat,..." */
+    const char *types;     /* "None,_cs.GLenum,_cs.GLint,..." */
+} PyGLDeclaration;
+
+typedef struct {
+    const char *module;    /* OpenGL.raw.GL.VERSION.GL_1_1 */
+    const char *extension; /* GL_VERSION_GL_1_1 */
+    const PyGLEnum *enums;
+    uint16_t enum_count;
+    const PyGLDeclaration *commands;
+    uint16_t command_count;
+    const char *const *reexports;
+    uint16_t reexport_count;
+} PyGLModule;
+
+extern const PyGLModule pygl_modules[];
+extern const Py_ssize_t pygl_module_count;
 
 /* ------------------------------------------------------------------ *
  * per-context dispatch

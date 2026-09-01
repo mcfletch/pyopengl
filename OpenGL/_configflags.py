@@ -27,3 +27,13 @@ import os as _os
 #: PYOPENGL_DISPATCH=ctypes selects the older implementation, which remains
 #: supported and is not scheduled for removal.
 DISPATCH = _os.environ.get('PYOPENGL_DISPATCH', 'c').strip().lower()
+
+#: Build the generated OpenGL.raw modules from the C dispatch layer's tables
+#: rather than importing their files.  Off by default: the files are still
+#: shipped, and with the friendly modules importing the raw ones eagerly there
+#: is nothing to be saved by shadowing them.  See OpenGL/_dispatch/finder.py.
+VIRTUAL_MODULES = _os.environ.get('PYOPENGL_VIRTUAL_MODULES', '0').strip().lower() in (
+    '1',
+    'true',
+    'yes',
+)
