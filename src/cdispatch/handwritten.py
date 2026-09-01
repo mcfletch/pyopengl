@@ -62,31 +62,18 @@ ENTRIES = (
 )
 
 
-#: Entry points that must keep their ctypes binding whatever the generator
-#: could describe about them.
+#: Entry points that keep their ctypes binding whatever the generator could
+#: describe about them.
 #:
-#: ``OpenGL/GL/pointers.py`` builds the client-array family, and its typed
-#: variants, with a helper that mutates a wrapper *in place* and discards the
-#: result -- ``function.setPyConverter(...)`` as a statement, not as part of a
-#: chain.  An entry point of ours cannot take part in that: there is no return
-#: value for the builder to pick up, so it would keep the object it was given
-#: and never see the one it needs, and glVertexPointerd(array) would come out
-#: with glVertexPointer's four-argument signature.
-#:
-#: Making them work means changing how pointers.py builds them, which is a
-#: larger change than this is worth and belongs with that module.
-EXCLUDED = frozenset(
-    [
-        'glVertexPointer',
-        'glNormalPointer',
-        'glColorPointer',
-        'glIndexPointer',
-        'glTexCoordPointer',
-        'glEdgeFlagPointer',
-        'glSecondaryColorPointer',
-        'glFogCoordPointer',
-    ]
-)
+#: Empty.  It held the bases that ``OpenGL/GL/pointers.py`` and
+#: ``OpenGL/GL/images.py`` derive typed variants from -- glVertexPointerd from
+#: glVertexPointer, glDrawPixelsub from glDrawPixels -- because those builders
+#: applied their customisations *in place* and discarded the result, which an
+#: entry point of ours cannot take part in.  Both builders now rebind instead,
+#: which is what a wrapper's setters have always returned something for, so
+#: the bases are described and generated like anything else and the variants
+#: still come out with their own signatures.
+EXCLUDED = frozenset()
 
 
 def lookup(api, name):

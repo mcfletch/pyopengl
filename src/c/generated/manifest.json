@@ -47,7 +47,7 @@
     "GLuintArray",
     "GLvoidpArray"
   ],
-  "emitted": 4807,
+  "emitted": 4819,
   "generator_version": "1.0",
   "glget_tables": [
     "GL",
@@ -57,6 +57,6 @@
     "GLSC2"
   ],
   "registry_commit": "a30033d3e812c9bf10094f1010374a6b15e192eb",
-  "slots": 4807,
+  "slots": 4819,
   "total": 4839
 }

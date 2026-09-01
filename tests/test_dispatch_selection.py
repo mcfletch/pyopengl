@@ -58,8 +58,7 @@ def report(dispatch, block=False):
     return available == 'True', active == 'True', kind
 
 
-def test_ctypes_is_the_default():
-    """Nothing changes for anyone who does not ask for the new path."""
+def _default():
     environment = dict(os.environ)
     environment.pop('PYOPENGL_DISPATCH', None)
     environment.setdefault('PYOPENGL_PLATFORM', 'glx')
@@ -72,8 +71,28 @@ def test_ctypes_is_the_default():
         timeout=300,
     )
     assert completed.returncode == 0, completed.stderr[-2000:]
-    _available, active, kind = completed.stdout.strip().split()
-    assert active == 'False'
+    available, active, kind = completed.stdout.strip().split()
+    return available == 'True', active == 'True', kind
+
+
+def test_the_c_implementation_is_the_default():
+    """From 4.0 it is what a caller gets without asking."""
+    available, active, kind = _default()
+    if not available:
+        pytest.skip('the C dispatch extension is not built')
+    assert active
+    assert kind == 'GLProc'
+
+
+def test_the_default_falls_back_where_nothing_was_built():
+    """A source install without a compiler still runs, on ctypes.
+
+    The default is safe to leave alone precisely because of this: asking for
+    the C implementation where there is no extension is not an error.
+    """
+    available, active, kind = report('c', block=True)
+    assert not available
+    assert not active
     assert kind != 'GLProc'
 
 

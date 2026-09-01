@@ -227,7 +227,7 @@ class TestSelection:
         """The size is computed in Python; the call belongs to the C."""
         assert emit_c.is_emittable(
             command(
-                name='glReadPixels',
+                name='glGetTexImageSomething',
                 parameters=[
                     ('format', 'GLenum', {}),
                     ('type', 'GLenum', {}),

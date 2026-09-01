@@ -394,8 +394,30 @@ static void
     pygl_debug_pending = 1;
 }
 
-int pygl_check_error(GLProc *self)
+/* The arguments the call was made with, for the exception to carry.  Clients
+ * read err.pyArgs, so an error that does not know them is a poorer report
+ * than the one they have today. */
+static PyObject *pygl_arg_tuple(PyObject *const *args, Py_ssize_t nargs)
 {
+    PyObject *tuple;
+    Py_ssize_t index;
+    if (args == NULL || nargs < 0) {
+        Py_RETURN_NONE;
+    }
+    tuple = PyTuple_New(nargs);
+    if (tuple == NULL) {
+        PyErr_Clear();
+        Py_RETURN_NONE;
+    }
+    for (index = 0; index < nargs; index++) {
+        PyTuple_SET_ITEM(tuple, index, Py_NewRef(args[index]));
+    }
+    return tuple;
+}
+
+int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs)
+{
+    PyObject *tuple;
     void *fp;
     unsigned int code;
     PyObject *result;
@@ -408,9 +430,11 @@ int pygl_check_error(GLProc *self)
             return 0;
         }
         pygl_debug_pending = 0;
-        result = PyObject_CallMethod(pygl_support, "raise_debug_error", "Iss",
+        tuple = pygl_arg_tuple(args, nargs);
+        result = PyObject_CallMethod(pygl_support, "raise_debug_error", "IssO",
                                      pygl_debug_id, pygl_debug_message,
-                                     self->info->name);
+                                     self->info->name, tuple);
+        Py_XDECREF(tuple);
         Py_XDECREF(result);
         return -1;
     }
@@ -433,8 +457,10 @@ int pygl_check_error(GLProc *self)
     if (code == 0) {
         return 0;
     }
-    result = PyObject_CallMethod(pygl_support, "raise_gl_error", "Is",
-                                 code, self->info->name);
+    tuple = pygl_arg_tuple(args, nargs);
+    result = PyObject_CallMethod(pygl_support, "raise_gl_error", "IsO", code,
+                                 self->info->name, tuple);
+    Py_XDECREF(tuple);
     Py_XDECREF(result);
     return -1;
 }
@@ -1001,6 +1027,17 @@ int pygl_array_typed(GLProc *self, PyObject *object, unsigned int type,
     if (object == NULL || object == Py_None) {
         return 0;
     }
+    if (pygl_is_ctypes_pointer(object)) {
+        /* Already a pointer: its address is what the entry point wants, and
+         * ArrayDatatype cannot answer for one. */
+        void *address = pygl_pointer_slow(object);
+        if (address == NULL && PyErr_Occurred()) {
+            return -1;
+        }
+        out->owner = Py_NewRef(object);
+        out->pointer = address;
+        return 0;
+    }
     converted = PyObject_CallMethod(pygl_support, "as_typed_array", "OI", object,
                                     type);
     if (converted == NULL) {
@@ -1081,6 +1118,19 @@ int pygl_string_array(GLProc *self, PyObject *object, Py_ssize_t index,
     out->block = NULL;
     out->pointer = NULL;
     if (object == NULL || object == Py_None) {
+        return 0;
+    }
+    if (!(PyUnicode_Check(object) || PyBytes_Check(object) ||
+          PyList_Check(object) || PyTuple_Check(object))) {
+        /* Already a char ** -- a friendly module that built the array itself,
+         * which several do.  Its address is what the entry point wants;
+         * rebuilding it from strings it no longer holds is not possible. */
+        void *address = pygl_pointer_slow(object);
+        if (address == NULL && PyErr_Occurred()) {
+            return -1;
+        }
+        out->owner = Py_NewRef(object);
+        out->pointer = address;
         return 0;
     }
     list = PyObject_CallMethod(pygl_support, "string_list", "O", object);

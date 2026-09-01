@@ -143,8 +143,18 @@ def opaque(address, type_name):
     return ctypes.cast(ctypes.c_void_p(address), cls)
 
 
-def raise_gl_error(code, name):
-    raise error.GLError(err=code, baseOperation=name)
+def raise_gl_error(code, name, arguments=None):
+    """The exception a failed call produces.
+
+    It carries the arguments the call was made with, because that is what
+    tells a reader which call went wrong -- clients read ``err.pyArgs``.
+    """
+    raise error.GLError(
+        err=code,
+        baseOperation=name,
+        pyArgs=arguments,
+        cArgs=arguments,
+    )
 
 
 def register_ctypes_binding(api, name, binding):
@@ -278,7 +288,7 @@ def signature_for(name, text_signature):
     return signature
 
 
-def raise_debug_error(identifier, message, name):
+def raise_debug_error(identifier, message, name, arguments=None):
     """Turn a GL_KHR_debug error report into the exception glGetError would.
 
     The driver has already said what went wrong, so the message is the
@@ -288,6 +298,8 @@ def raise_debug_error(identifier, message, name):
         err=identifier,
         description=message,
         baseOperation=name,
+        pyArgs=arguments,
+        cArgs=arguments,
     )
 
 

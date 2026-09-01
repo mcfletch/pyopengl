@@ -90,12 +90,17 @@ class TestEmissionCoverage:
         """A retained argument outlives the call, so the C has to keep it.
 
         Forgetting is a crash rather than a leak, which is why the family is
-        named rather than inferred.
+        derived from setStoreValues rather than guessed at.
         """
         commands = extract.extract_tree(PACKAGE)
-        command = commands[('GL', 'glInterleavedArrays')]
-        assert any(parameter.retain for parameter in command.parameters)
-        assert emit_c.is_emittable(command)
+        retaining = [
+            key
+            for key, command in commands.items()
+            if any(parameter.retain for parameter in command.parameters)
+        ]
+        assert retaining, 'the annotation stopped being derived at all'
+        for key in retaining:
+            assert emit_c.is_emittable(commands[key]), key
 
     def test_every_retained_parameter_is_honoured_or_excluded_for_a_reason(self):
         """Nothing carries the annotation without either the code that honours

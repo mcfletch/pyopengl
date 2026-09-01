@@ -146,7 +146,7 @@ PyObject *pygl_hand_glShaderSource(GLProc *self, PyObject *const *_a,
     ((void (*)(unsigned int, int, const char *const *, const int *))_fp)(
         shader, (int)sources.count, sources.text, sources.lengths);
     pygl_sources_free(&sources);
-    if (pygl_wants_error_check(self) && pygl_check_error(self) < 0) {
+    if (pygl_check_needed(self) && pygl_check_error(self, _a, _nargs) < 0) {
         return NULL;
     }
     Py_RETURN_NONE;

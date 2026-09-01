@@ -106,23 +106,29 @@ def wrapPointerFunction( name, baseFunction, glType, arrayType,startArgs, defaul
     else:
         pointer_name = 'pointer'
     assert not getattr( function, 'pyConverters', None ), """Reusing wrappers?"""
+    # Each customisation is *rebound*, not applied in place.  A wrapper is free
+    # to answer a setter with a different object -- and the C dispatch layer
+    # does exactly that when a call changes which arguments the entry point
+    # takes, as dropping size/type/stride here does.  Throwing the answer away
+    # would leave this holding the base and give the typed variant the base's
+    # signature.
     if arrayType:
         arrayModuleType = arraydatatype.GL_CONSTANT_TO_ARRAY_TYPE[ glType ]
-        function.setPyConverter( pointer_name, arrayhelpers.asArrayType(arrayModuleType) )
+        function = function.setPyConverter( pointer_name, arrayhelpers.asArrayType(arrayModuleType) )
     else:
-        function.setPyConverter( pointer_name, arrayhelpers.AsArrayOfType(pointer_name,'type') )
-    function.setCConverter( pointer_name, converters.getPyArgsName( pointer_name ) )
+        function = function.setPyConverter( pointer_name, arrayhelpers.AsArrayOfType(pointer_name,'type') )
+    function = function.setCConverter( pointer_name, converters.getPyArgsName( pointer_name ) )
     if 'size' in function.argNames:
-        function.setPyConverter( 'size' )
-        function.setCConverter( 'size', arrayhelpers.arraySizeOfFirstType(arrayModuleType,defaultSize) )
+        function = function.setPyConverter( 'size' )
+        function = function.setCConverter( 'size', arrayhelpers.arraySizeOfFirstType(arrayModuleType,defaultSize) )
     if 'type' in function.argNames:
-        function.setPyConverter( 'type' )
-        function.setCConverter( 'type', glType )
+        function = function.setPyConverter( 'type' )
+        function = function.setCConverter( 'type', glType )
     if 'stride' in function.argNames:
-        function.setPyConverter( 'stride' )
-        function.setCConverter( 'stride', 0 )
-    function.setStoreValues( arrayhelpers.storePointerType( pointer_name, arrayType ) )
-    function.setReturnValues( wrapper.returnPyArgument( pointer_name ) )
+        function = function.setPyConverter( 'stride' )
+        function = function.setCConverter( 'stride', 0 )
+    function = function.setStoreValues( arrayhelpers.storePointerType( pointer_name, arrayType ) )
+    function = function.setReturnValues( wrapper.returnPyArgument( pointer_name ) )
     return name,function
 
 

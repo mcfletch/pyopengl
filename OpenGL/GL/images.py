@@ -434,7 +434,7 @@ def setDimensionsAsInts( baseOperation ):
     argNames = getattr( baseOperation, 'pyConverterNames', baseOperation.argNames )
     for i,argName in enumerate(argNames):
         if argName in INT_DIMENSION_NAMES:
-            baseOperation.setPyConverter( argName, asIntConverter )
+            baseOperation = baseOperation.setPyConverter( argName, asIntConverter )
     return baseOperation
 
 
@@ -523,22 +523,28 @@ def setImageInput(
         argName for argName in baseOperation.argNames
         if argName in dimNames
     ]) + 1
+    # Each customisation is *rebound*, not applied in place.  A wrapper is free
+    # to answer a setter with a different object -- and the C dispatch layer
+    # does exactly that when a call changes which arguments the entry point
+    # takes, as dropping the dimensions and the type here does.  Throwing the
+    # answer away would leave this holding the base and give the typed variant
+    # the base's signature.
     if arrayType:
         converter = TypedImageInputConverter( rank, pixelName, arrayType, typeName=typeName )
         for i,argName in enumerate(baseOperation.argNames):
             if argName in dimNames:
-                baseOperation.setPyConverter( argName )
-                baseOperation.setCConverter( argName, getattr(converter,argName) )
+                baseOperation = baseOperation.setPyConverter( argName )
+                baseOperation = baseOperation.setCConverter( argName, getattr(converter,argName) )
             elif argName == 'type' and typeName is not None:
-                baseOperation.setPyConverter( argName )
-                baseOperation.setCConverter( argName, converter.type )
+                baseOperation = baseOperation.setPyConverter( argName )
+                baseOperation = baseOperation.setCConverter( argName, converter.type )
     else:
         converter = ImageInputConverter( rank, pixelsName=pixelName, typeName=typeName or 'type' )
     for argName in baseOperation.argNames:
         if argName in DATA_SIZE_NAMES:
-            baseOperation.setPyConverter( argName )
-            baseOperation.setCConverter( argName, converter.imageDataSize )
-    baseOperation.setPyConverter(
+            baseOperation = baseOperation.setPyConverter( argName )
+            baseOperation = baseOperation.setCConverter( argName, converter.imageDataSize )
+    baseOperation = baseOperation.setPyConverter(
         pixelName, converter,
     )
 #	baseOperation.setCResolver(

@@ -29,21 +29,22 @@ def commands():
 
 class TestTypedArrays:
     def test_draw_elements_indices_are_typed(self, commands):
-        command = commands[('GL', 'glDrawElements')]
-        indices = command.parameters[-1]
+        command = commands[('GL', 'glDrawElementsBaseVertex')]
+        indices = {p.name: p for p in command.parameters}['indices']
         assert isinstance(indices.size, model.TypedArray)
         names = [p.name for p in command.parameters]
         assert names[indices.size.type_argument] == 'type'
 
     def test_a_client_pointer_is_typed_and_retained(self, commands):
-        command = commands[('GL', 'glInterleavedArrays')]
+        command = commands[('GL', 'glVertexPointer')]
         pointer = command.parameters[-1]
         assert isinstance(pointer.size, model.TypedArray)
         assert pointer.retain
 
     def test_a_draw_call_is_not_retained(self, commands):
-        """glDrawElements reads its indices during the draw and keeps nothing."""
-        assert not commands[('GL', 'glDrawElements')].parameters[-1].retain
+        """A draw reads its indices during the draw and keeps nothing."""
+        command = commands[('GL', 'glDrawElementsBaseVertex')]
+        assert not any(p.retain for p in command.parameters)
 
     def test_the_pointer_family_keeps_its_ctypes_binding(self, commands):
         """pointers.py builds them by mutating a wrapper in place.
@@ -81,16 +82,17 @@ class TestEmission:
         assert 'PYGL_ARRAY_TYPED(3, indices, type, 0);' in text
 
     def test_a_retained_pointer_says_so(self, commands):
-        text = emit_c.emit_stub(commands[('GL', 'glInterleavedArrays')])
-        assert 'PYGL_ARRAY_TYPED(2, pointer, 0, 1);' in text
+        """The annotation is emitted even where the entry point is excluded,
+        because the exclusion is about how the Python layer builds it."""
+        text = emit_c.emit_stub(commands[('GL', 'glVertexPointer')])
+        assert 'PYGL_ARRAY_TYPED(3, pointer, type, 1);' in text
         assert 'pygl_retain' in text
 
     def test_both_families_are_emitted(self, commands):
         for name in (
-            'glDrawElements',
             'glDrawElementsBaseVertex',
             'glDrawRangeElements',
-            'glInterleavedArrays',
+            'glDrawElementsInstanced',
         ):
             assert emit_c.is_emittable(commands[('GL', name)]), name
 

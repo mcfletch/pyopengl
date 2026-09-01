@@ -26,9 +26,9 @@ __all__ = [
 ]
 
 #: Which implementation the process is using.  ``PYOPENGL_DISPATCH=ctypes``
-#: selects the current implementation wholesale and keeps doing so after the
-#: default flips.
-DISPATCH = os.environ.get('PYOPENGL_DISPATCH', 'ctypes').strip().lower()
+#: selects the older implementation wholesale, and keeps doing so: it is the
+#: reference semantics and is not scheduled for removal.
+DISPATCH = os.environ.get('PYOPENGL_DISPATCH', 'c').strip().lower()
 
 #: How the layer decides which context's table to dispatch through.
 #:

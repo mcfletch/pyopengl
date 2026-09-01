@@ -257,7 +257,7 @@ enum { PYGL_ERRORS_GETERROR = 0, PYGL_ERRORS_DEBUG = 1 };
 extern int pygl_error_mode;
 extern PYGL_THREAD_LOCAL int pygl_debug_pending;
 
-int pygl_check_error(GLProc *self);
+int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs);
 
 static inline int pygl_check_needed(GLProc *self)
 {
@@ -487,7 +487,7 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
 
 #define PYGL_CHECK()                                                           \
     if (PYGL_UNLIKELY(pygl_check_needed(self))) {                              \
-        if (pygl_check_error(self) < 0)                                        \
+        if (pygl_check_error(self, _a, _nargs) < 0)                            \
             goto _fail;                                                        \
     }
 

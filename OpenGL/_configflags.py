@@ -20,7 +20,10 @@ from OpenGL import (
 
 import os as _os
 
-#: Which implementation of the entry points to use: 'ctypes' (the reference
-#: semantics, and the default) or 'c' (the registry-generated C dispatch).
-#: See plans/C-DISPATCH.md and the documentation on PYOPENGL_DISPATCH.
-DISPATCH = _os.environ.get('PYOPENGL_DISPATCH', 'ctypes').strip().lower()
+#: Which implementation of the entry points to use: 'c', the
+#: registry-generated C dispatch, or 'ctypes', the one PyOpenGL has always
+#: had.  'c' is the default from 4.0; where the extension was not built the
+#: layer falls back to ctypes on its own, so this is safe to leave alone.
+#: PYOPENGL_DISPATCH=ctypes selects the older implementation, which remains
+#: supported and is not scheduled for removal.
+DISPATCH = _os.environ.get('PYOPENGL_DISPATCH', 'c').strip().lower()
