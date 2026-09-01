@@ -124,9 +124,9 @@ typedef struct {
     uint8_t deprecated;
     uint8_t required_args; /* arguments a caller must supply */
     uint8_t return_kind;
-    /* Set for an entry point written by hand rather than generated.  Its
-     * friendly behaviour is already complete, so a customisation call that
-     * restates it changes nothing rather than demoting to ctypes. */
+    /* Set where the C performs everything the Python wrapper would have.  A
+     * customisation call that restates it then changes nothing, rather than
+     * demoting the entry point to ctypes and undoing the work. */
     uint8_t hand_written;
 } PyGLCommand;
 
@@ -308,6 +308,20 @@ int pygl_image_out(GLProc *self, PyObject *object, unsigned int format,
                    PyGLBuf *out);
 PyObject *pygl_image_value(PyGLBuf *buffer, unsigned int type);
 
+/* An array whose element type is a value the caller passed rather than a
+ * property of the signature. */
+int pygl_array_typed(GLProc *self, PyObject *object, unsigned int type,
+                     Py_ssize_t index, PyGLBuf *out);
+
+/* Keep an argument alive against the current context, for the entry points
+ * where the GL goes on reading the memory after the call returns.  Losing
+ * this is a crash rather than a leak. */
+int pygl_retain(GLProc *self, Py_ssize_t index, PyGLBuf *buffer);
+
+/* What a client-array registration hands back: the converted array, which is
+ * what a caller keeps in order to change the data it is drawing from. */
+PyObject *pygl_retained_value(PyGLBuf *buffer);
+
 /* Return-value conversion.  The rule is that the C layer returns the same
  * Python object the ctypes layer returns today. */
 PyObject *pygl_bytes_or_none(const char *value);
@@ -408,6 +422,12 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
                                            (element), (i), (pname), (table),   \
                                            (table##_count), &_bufs[_nb],       \
                                            &name##_count) < 0))                \
+        goto _fail;                                                            \
+    void *name = _bufs[_nb++].pointer
+
+#define PYGL_ARRAY_TYPED(i, name, type, retained)                              \
+    if (PYGL_UNLIKELY(pygl_array_typed(self, (i) < _nargs ? _a[i] : NULL, (type),     \
+                                       (i), &_bufs[_nb]) < 0))                 \
         goto _fail;                                                            \
     void *name = _bufs[_nb++].pointer
 

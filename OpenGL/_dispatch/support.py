@@ -173,17 +173,44 @@ def module_for(name):
     return 'OpenGL'
 
 
+#: Customisation calls swallowed because the C already performs them, kept per
+#: entry point so that a demotion later in the same chain can replay them.
+_swallowed = {}
+
+
+def record_custom(proc, method, args):
+    """Remember a customisation the C already performs.
+
+    A friendly module may build a *derived* function from the same entry point
+    -- glVertexPointerd(array) out of glVertexPointer(size, type, stride,
+    pointer) -- by continuing the chain with a call that changes the arity.
+    That one has to demote, and the wrapper it demotes to needs whatever was
+    swallowed before it.
+    """
+    remembered = _swallowed.setdefault(proc.__name__, {})
+    # Keyed by what it customises, not by call order: a module builds several
+    # derived functions from one entry point and restates the same
+    # customisation for each, and applying it twice is an error.
+    key = (method, args[0] if args else None)
+    remembered.setdefault(key, tuple(args))
+    return None
+
+
 def demote_and_call(proc, method, args, keywords):
     """A customisation the C does not implement falls back to the wrapper.
 
-    Correctness before speed: if the generator ever emits an entry point whose
-    friendly behaviour it does not fully implement, the customisation call
-    lands here and the ctypes wrapper takes over for that one function.
+    Correctness before speed: a call the C cannot perform -- one that changes
+    which arguments the entry point takes -- rebuilds the whole wrapper over
+    the ctypes binding, replaying what was swallowed first so the result is
+    what it would have been without this layer at all.
     """
     from OpenGL import wrapper
 
     binding = ctypes_callable(proc.__name__)
-    return getattr(wrapper.wrapper(binding), method)(*args, **keywords)
+    built = wrapper.wrapper(binding)
+    for (earlier, _which), earlier_args in _swallowed.get(proc.__name__, {}).items():
+        built = getattr(built, earlier)(*earlier_args)
+    return getattr(built, method)(*args, **keywords)
 
 
 def array_type_list(names):
@@ -336,3 +363,51 @@ def image_result(array, type):
     from OpenGL import images
 
     return images.returnFormat(array, type)
+
+
+def as_typed_array(value, type):
+    """Convert to the array type the GL constant names.
+
+    ``glDrawElements`` and the client-side array pointers say what their data
+    is made of in an argument rather than in their signature, so the element
+    type is a value rather than a property of the entry point.  A type
+    registered in ``GL_CONSTANT_TO_ARRAY_TYPE`` works here without this
+    knowing about it.
+    """
+    from OpenGL.arrays import GL_CONSTANT_TO_ARRAY_TYPE
+
+    if value is None:
+        return None
+    array_type = GL_CONSTANT_TO_ARRAY_TYPE.get(type)
+    if array_type is None:
+        # No type named, or one that is not an array element type: hand it to
+        # the generic path, which accepts whatever the handlers accept.
+        return arrays.ArrayDatatype.asArray(value)
+    return array_type.asArray(value)
+
+
+#: Where each client-array entry point's pointer is stored against the
+#: context.  These are the constants OpenGL/GL/pointers.py uses, so a program
+#: that reads them back with glGetPointerv sees what it always has.
+_POINTER_CONSTANTS = {
+    'glVertexPointer': 0x808E,       # GL_VERTEX_ARRAY_POINTER
+    'glNormalPointer': 0x808F,       # GL_NORMAL_ARRAY_POINTER
+    'glColorPointer': 0x8090,        # GL_COLOR_ARRAY_POINTER
+    'glIndexPointer': 0x8091,        # GL_INDEX_ARRAY_POINTER
+    'glTexCoordPointer': 0x8092,     # GL_TEXTURE_COORD_ARRAY_POINTER
+    'glEdgeFlagPointer': 0x8093,     # GL_EDGE_FLAG_ARRAY_POINTER
+    'glInterleavedArrays': 0x8093,   # shares the edge-flag slot, as today
+}
+
+
+def retain(name, index, array):
+    """Keep an argument alive against the current context.
+
+    The GL goes on reading a client-side array after the call that registered
+    it returns, so dropping the reference is a crash rather than a leak.
+    """
+    from OpenGL import contextdata
+
+    constant = _POINTER_CONSTANTS.get(name, name)
+    contextdata.setValue(constant, array)
+    return array

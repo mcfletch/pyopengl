@@ -27,6 +27,7 @@ __all__ = [
     'FromArg',
     'GLGetTable',
     'ImageSize',
+    'TypedArray',
     'StringArray',
     'Computed',
     'Parameter',
@@ -90,6 +91,19 @@ class ImageSize(_SizeSpec):
     type_argument: int
     dimensions: tuple = ()
     declarative = False
+
+
+@dataclass(frozen=True)
+class TypedArray(_SizeSpec):
+    """The element type is a value the caller passes, not a fixed type.
+
+    ``glDrawElements(mode, count, type, indices)`` says what its indices are
+    made of in ``type``; the client-side array pointers do the same, and the
+    GL additionally keeps their memory after the call returns.
+    """
+
+    #: Which argument carries the GL constant, or -1 where there is none.
+    type_argument: int = -1
 
 
 @dataclass(frozen=True)
@@ -212,6 +226,9 @@ class Command:
     purpose: str = ''
     #: Which registry API the command belongs to: gl, gles1, gles2, glx, wgl.
     api: str = 'gl'
+    #: True where the friendly layer stores an argument against the context,
+    #: because the GL keeps reading it after the call returns.
+    retains: bool = False
 
     @property
     def arg_names(self):

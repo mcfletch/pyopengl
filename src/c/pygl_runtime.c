@@ -977,6 +977,73 @@ PyObject *pygl_image_value(PyGLBuf *buffer, unsigned int type)
                                type);
 }
 
+/* An array whose element type the caller named.  The GL constant maps to an
+ * ArrayDatatype through the same table the Python layer uses, so a type
+ * registered there works here without this knowing about it. */
+int pygl_array_typed(GLProc *self, PyObject *object, unsigned int type,
+                     Py_ssize_t index, PyGLBuf *out)
+{
+    PyObject *converted, *pointer;
+    void *address;
+    (void)index;
+
+    out->owner = NULL;
+    out->have_view = 0;
+    out->pointer = NULL;
+    if (object == NULL || object == Py_None) {
+        return 0;
+    }
+    converted = PyObject_CallMethod(pygl_support, "as_typed_array", "OI", object,
+                                    type);
+    if (converted == NULL) {
+        return -1;
+    }
+    if (converted == Py_None) {
+        Py_DECREF(converted);
+        return 0;
+    }
+    pointer = PyObject_CallMethod(pygl_support, "image_pointer", "O", converted);
+    if (pointer == NULL) {
+        Py_DECREF(converted);
+        return -1;
+    }
+    if (pygl_address_of(pointer, &address) < 0) {
+        Py_DECREF(pointer);
+        Py_DECREF(converted);
+        return -1;
+    }
+    Py_DECREF(pointer);
+    out->owner = converted;
+    out->pointer = address;
+    return 0;
+}
+
+/* Store an argument against the current context so that it outlives the call.
+ * contextdata stays a Python module: this is the once-per-batch path, not the
+ * per-call one. */
+int pygl_retain(GLProc *self, Py_ssize_t index, PyGLBuf *buffer)
+{
+    PyObject *result;
+    if (buffer->owner == NULL) {
+        return 0;
+    }
+    result = PyObject_CallMethod(pygl_support, "retain", "snO", self->info->name,
+                                 index, buffer->owner);
+    if (result == NULL) {
+        return -1;
+    }
+    Py_DECREF(result);
+    return 0;
+}
+
+PyObject *pygl_retained_value(PyGLBuf *buffer)
+{
+    if (buffer->owner == NULL) {
+        Py_RETURN_NONE;
+    }
+    return Py_NewRef(buffer->owner);
+}
+
 void pygl_release(PyGLBuf *buffer)
 {
     if (buffer->have_view) {
@@ -1362,9 +1429,32 @@ static PyObject *GLProc_fallback(GLProc *self, PyObject *args, PyObject *kwds,
     PyObject *keywords, *result;
 
     if (self->info->hand_written) {
-        /* A hand-written entry point already implements what the call
-         * describes, so restating it changes nothing. */
-        return Py_NewRef((PyObject *)self);
+        /* The C already performs what the call describes, so restating it
+         * changes nothing -- *unless* the call removes an argument.
+         *
+         * setPyConverter with a converter says how an argument is converted,
+         * which the C does.  setPyConverter with only a name says the
+         * argument is not taken from the caller at all, which builds a
+         * different function with a different arity -- glVertexPointerd(array)
+         * out of glVertexPointer(size, type, stride, pointer).  That is not a
+         * restatement and must not be swallowed. */
+        int drops_argument = (strcmp(method, "setPyConverter") == 0 &&
+                              args != NULL && PyTuple_Check(args) &&
+                              PyTuple_GET_SIZE(args) < 2);
+        if (!drops_argument) {
+            /* Remember it.  A module that builds a *derived* function from
+             * the same entry point -- glVertexPointerd(array) out of
+             * glVertexPointer(size, type, stride, pointer) -- continues the
+             * chain with a call that does change the arity, and the wrapper
+             * it demotes to needs the customisations swallowed before it. */
+            PyObject *record = PyObject_CallMethod(pygl_support, "record_custom",
+                                                   "OsO", self, method, args);
+            if (record == NULL) {
+                return NULL;
+            }
+            Py_DECREF(record);
+            return Py_NewRef((PyObject *)self);
+        }
     }
     keywords = kwds ? kwds : PyDict_New();
     if (keywords == NULL) {

@@ -103,8 +103,10 @@ class TestFriendlyAnnotations:
         assert command.parameters[0].size == model.Fixed(1)
 
     def test_unchecked_input_arrays_carry_no_size(self, tree):
-        command = tree['glDrawElements']
-        assert command.parameters[3].size is model.NO_SIZE
+        """``setInputArraySize(name, None)`` marks a size that is not checked."""
+        command = tree['glBufferData']
+        data = {p.name: p for p in command.parameters}['data']
+        assert data.size is model.NO_SIZE
 
     def test_glget_sized_outputs(self, tree):
         """``setOutput(..., size=_glgets.GLGET_SIZES, pnameArg='pname')``."""
@@ -120,10 +122,17 @@ class TestFriendlyAnnotations:
         assert length.direction == model.OUT
         assert length.size == model.Fixed(1)
 
-    def test_hand_written_families_are_marked(self, tree):
-        """A command the generator cannot describe names the family it needs."""
-        assert tree['glVertexPointer'].helper == 'client_pointer'
-        assert tree['glColor3f'].helper == 'variadic' or not tree['glColor3f'].helper
+    def test_a_command_the_generator_cannot_describe_names_its_family(self, tree):
+        """What is left is the variadic family, which dispatches on arity."""
+        assert tree['glCallLists'].helper == 'variadic'
+        assert tree['glBufferData'].helper == 'variadic'
+
+    def test_the_client_pointer_family_is_described_rather_than_named(self, tree):
+        """It was a hand-written family; the registry describes it instead."""
+        command = tree['glVertexPointer']
+        assert not command.helper
+        assert command.retains
+        assert command.parameters[-1].retain
 
     def test_client_array_pointers_are_retained(self, tree):
         """The GL reads these after the call returns, so they must outlive it."""
@@ -172,9 +181,11 @@ class TestRegistryCrossCheck:
             ]
             assert pixels, name
 
-    def test_compressed_image_commands_are_marked(self, tree):
-        """A compressed image carries its own size and no layout we can read."""
-        assert tree['glCompressedTexImage2D'].helper == 'image' 
+    def test_compressed_images_need_no_sizing(self, tree):
+        """A compressed image is given its size, so nothing is computed."""
+        command = tree['glCompressedTexImage2D']
+        assert not command.helper
+        assert command.parameters[-1].size is model.NO_SIZE
 
     def test_an_ordinary_command_is_not_marked(self, tree):
         assert not tree['glBindTexture'].helper

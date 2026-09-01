@@ -62,6 +62,33 @@ ENTRIES = (
 )
 
 
+#: Entry points that must keep their ctypes binding whatever the generator
+#: could describe about them.
+#:
+#: ``OpenGL/GL/pointers.py`` builds the client-array family, and its typed
+#: variants, with a helper that mutates a wrapper *in place* and discards the
+#: result -- ``function.setPyConverter(...)`` as a statement, not as part of a
+#: chain.  An entry point of ours cannot take part in that: there is no return
+#: value for the builder to pick up, so it would keep the object it was given
+#: and never see the one it needs, and glVertexPointerd(array) would come out
+#: with glVertexPointer's four-argument signature.
+#:
+#: Making them work means changing how pointers.py builds them, which is a
+#: larger change than this is worth and belongs with that module.
+EXCLUDED = frozenset(
+    [
+        'glVertexPointer',
+        'glNormalPointer',
+        'glColorPointer',
+        'glIndexPointer',
+        'glTexCoordPointer',
+        'glEdgeFlagPointer',
+        'glSecondaryColorPointer',
+        'glFogCoordPointer',
+    ]
+)
+
+
 def lookup(api, name):
     """The hand-written implementation for one binding, or None."""
     for entry in ENTRIES:

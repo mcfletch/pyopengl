@@ -121,15 +121,35 @@ def hand_written(command):
     return handwritten.lookup(command.api, command.name)
 
 
-def exclusion_reason(command):
+def implements_friendly(command):
+    """Whether the C does everything the Python wrapper would have done.
+
+    The friendly modules restate each entry point's behaviour as a chain of
+    customisation calls.  Where the C already performs what the call
+    describes, the call must be a no-op returning the entry point -- otherwise
+    it falls back to the ctypes wrapper and the work is undone.
+    """
     if hand_written(command) is not None:
-        return ''
+        return True
+    if command.retains:
+        return True
+    return any(
+        isinstance(parameter.size, (model.ImageSize, model.TypedArray))
+        for parameter in command.parameters
+    )
+
+
+def exclusion_reason(command):
     """Why the C does not implement this command, or '' when it does.
 
     Every command left on the ctypes path has a reason here, so that
     ``src/check_registry.py`` can account for all of them and nothing is left
     behind silently.
     """
+    if command.name in handwritten.EXCLUDED:
+        return 'built in place by the Python layer'
+    if hand_written(command) is not None:
+        return ''
     if command.helper:
         return 'hand-written family: %s' % (command.helper,)
     if command.return_type.pointers and not (
@@ -144,7 +164,7 @@ def exclusion_reason(command):
     ):
         return 'unknown return type: %s' % (command.return_type.base,)
     for parameter in command.parameters:
-        if isinstance(parameter.size, model.ImageSize):
+        if isinstance(parameter.size, (model.ImageSize, model.TypedArray)):
             continue
         if not parameter.size.declarative:
             return 'non-declarative size'
@@ -168,6 +188,8 @@ def is_emittable(command):
     friendly behaviour its Python wrapper provides.  The generator therefore
     refuses a command rather than emitting a stub that is nearly right.
     """
+    if command.name in handwritten.EXCLUDED:
+        return False
     if hand_written(command) is not None:
         return True
     if command.helper:
@@ -185,7 +207,7 @@ def is_emittable(command):
         if cm.scalar_macro(command.return_type) is None:
             return False
     for parameter in command.parameters:
-        if isinstance(parameter.size, model.ImageSize):
+        if isinstance(parameter.size, (model.ImageSize, model.TypedArray)):
             continue
         if not parameter.size.declarative:
             return False
@@ -304,7 +326,19 @@ def emit_stub(command):
         if not parameter.is_array:
             continue
         element = element_symbol(parameter)
-        if isinstance(parameter.size, model.ImageSize):
+        if isinstance(parameter.size, model.TypedArray):
+            lines.append(
+                '    PYGL_ARRAY_TYPED(%d, %s, %s, %d);'
+                % (
+                    index,
+                    parameter.c_name,
+                    command.parameters[parameter.size.type_argument].c_name
+                    if parameter.size.type_argument >= 0
+                    else '0',
+                    1 if parameter.retain else 0,
+                )
+            )
+        elif isinstance(parameter.size, model.ImageSize):
             size = parameter.size
             dimensions = [
                 command.parameters[index].c_name for index in size.dimensions
@@ -359,7 +393,24 @@ def emit_stub(command):
         )
     lines.append('    PYGL_CHECK();')
 
-    if len(outputs) > 1:
+    for index, parameter in enumerate(command.parameters):
+        if parameter.retain:
+            lines.append(
+                '    if (pygl_retain(self, %d, &_bufs[%d]) < 0) goto _fail;'
+                % (index, [p for p in command.parameters if p.is_array].index(parameter))
+            )
+
+    retained = [p for p in command.parameters if p.retain]
+    if retained and command.returns_void and not outputs:
+        # The friendly form hands back the converted array, which is what a
+        # caller keeps in order to change the data it is drawing from.
+        lines.append(
+            '    PyObject *_value = pygl_retained_value(&_bufs[%d]);'
+            % (frame_slots[retained[0].name],)
+        )
+        lines.append('    PYGL_CLEANUP();')
+        lines.append('    return _value;')
+    elif len(outputs) > 1:
         # A local rather than a static: a glGet-sized output's count is not
         # known until the table has been consulted.
         lines.append('    const PyGLOutput _outputs[] = {')
@@ -482,7 +533,7 @@ def emit_command_record(command, slot):
             1 if command.deprecated else 0,
             len(call_names),
             return_kind(command),
-            1 if hand else 0,
+            1 if implements_friendly(command) else 0,
         )
     )
     return '\n'.join(lines) + '\n'

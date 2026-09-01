@@ -272,8 +272,15 @@ def extract_friendly(path):
             if calls and calls[0][0] == 'wrapper':
                 annotations = []
                 hand = ''
+                stores = False
                 for method, call in calls[1:]:
-                    if method in _HAND_WRITTEN:
+                    if method == 'setStoreValues':
+                        # The GL keeps reading this argument after the call
+                        # returns, which is what storing it against the
+                        # context is for.
+                        stores = True
+                        hand = helper or 'converter'
+                    elif method in _HAND_WRITTEN:
                         hand = helper or 'converter'
                     elif method == 'setOutput':
                         annotations.append(('output', call))
@@ -281,7 +288,12 @@ def extract_friendly(path):
                         annotations.append(('input', call))
                 record(
                     name,
-                    {'annotations': annotations, 'helper': hand, 'file': path},
+                    {
+                        'annotations': annotations,
+                        'helper': hand,
+                        'file': path,
+                        'retains': stores,
+                    },
                 )
             elif helper:
                 # A module that owns a Tier 3 family rebinds its commands in
@@ -309,6 +321,8 @@ def _apply_annotations(command, entry):
     by_name = {parameter.name: index for index, parameter in enumerate(command.parameters)}
     if entry.get('helper'):
         command.helper = entry['helper']
+    if entry.get('retains'):
+        command.retains = True
     order = 0
     for kind, call in entry['annotations']:
         arguments = {
@@ -474,6 +488,20 @@ def _image_size(command, length):
     )
 
 
+def _typed_array(command, length):
+    """A COMPSIZE whose element type is one of the arguments."""
+    variables = [
+        variable.strip()
+        for variable in length[len('COMPSIZE'):].strip('()').split(',')
+    ]
+    if _TYPED_BY not in variables:
+        return None
+    index_of = {p.name: i for i, p in enumerate(command.parameters)}
+    if _TYPED_BY not in index_of:
+        return None
+    return model.TypedArray(type_argument=index_of[_TYPED_BY])
+
+
 def _is_image_length(length):
     """A ``COMPSIZE`` that depends on the pixel format is an image.
 
@@ -487,10 +515,10 @@ def _is_image_length(length):
     return any(variable.strip() in ('format', 'type', 'imageSize') for variable in variables)
 
 
-#: Commands whose sizing the registry describes but the shipped tree does not,
-#: matched by name because they take a compressed image whose size is given
-#: explicitly rather than computed.
-_IMAGE_PREFIXES = ('glCompressedTex', 'glCompressedMultiTex', 'glGetCompressedTex')
+#: A COMPSIZE naming `type` says the element type is a value the caller
+#: passes.  That covers the glDrawElements family and the client-side array
+#: pointers, which differ only in whether the GL keeps the memory afterwards.
+_TYPED_BY = 'type'
 
 
 def _apply_registry(commands, registry_root):
@@ -502,12 +530,12 @@ def _apply_registry(commands, registry_root):
     for name, group in by_name.items():
         sizes = lengths.get(name, {})
         for command in group:
-            if command.helper and command.helper != 'image':
-                continue
-            if name.startswith(_IMAGE_PREFIXES):
-                # A compressed image carries its own size, so there is nothing
-                # to compute -- but nothing here knows the layout either.
-                command.helper = 'image'
+            # A helper marker the registry can replace with a description is
+            # not a reason to skip.  The marker only records that the friendly
+            # layer did something; where the registry says precisely *what*,
+            # the description is better, and the marker is only cleared when a
+            # description was actually found.
+            if command.helper not in ('', 'image', 'client_pointer', 'converter'):
                 continue
             index_of = {p.name: i for i, p in enumerate(command.parameters)}
             for parameter_name, length in sizes.items():
@@ -517,6 +545,12 @@ def _apply_registry(commands, registry_root):
                     command.helper = 'image'
                     break
                 size = _image_size(command, length)
+                if size is None:
+                    typed = _typed_array(command, length)
+                    if typed is not None:
+                        command.parameters[index_of[parameter_name]].size = typed
+                        command.helper = ''
+                        continue
                 if size is None:
                     # No format and type to size it by: the extent comes from
                     # querying the object, which is the Python layer's job.
@@ -601,13 +635,27 @@ def api_view(commands, api):
 
 
 def _mark_retained(commands):
-    """Mark the parameters whose memory the GL keeps after the call returns."""
+    """Mark the parameters whose memory the GL keeps after the call returns.
+
+    Exactly the family ``OpenGL/GL/pointers.py`` owns.  A draw call is not in
+    it: glDrawElements reads its indices during the draw and holds nothing.
+    """
     for command in commands.values():
-        if command.helper != 'client_pointer':
+        if not command.retains:
+            if command.helper == 'client_pointer':
+                command.helper = ''
             continue
+        # A retaining entry point is a client-array registration.  Whatever
+        # marker it picked up on the way -- the pointers module, or a COMPSIZE
+        # that named a format but no type -- the pointer is an array whose
+        # element type the caller names, and that is describable.
+        command.helper = ''
         for parameter in command.parameters:
             if parameter.is_array and parameter.direction == model.IN:
                 parameter.retain = True
+                if parameter.size is model.NO_SIZE:
+                    # glEdgeFlagPointer has no type argument to read.
+                    parameter.size = model.TypedArray()
 
 
 def extract_constants(root):
