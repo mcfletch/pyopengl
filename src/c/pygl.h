@@ -198,6 +198,9 @@ typedef struct {
     Py_buffer view;
     PyObject *owner; /* strong reference when the slow path converted */
     void *pointer;
+    /* Memory this frame slot owns outright, such as the char ** a string
+     * array is assembled into. */
+    void *block;
     int have_view;
 } PyGLBuf;
 
@@ -322,6 +325,11 @@ int pygl_retain(GLProc *self, Py_ssize_t index, PyGLBuf *buffer);
  * what a caller keeps in order to change the data it is drawing from. */
 PyObject *pygl_retained_value(PyGLBuf *buffer);
 
+/* A list of strings becomes a char ** for the duration of the call.  One
+ * string on its own is a list of one, which is what callers pass. */
+int pygl_string_array(GLProc *self, PyObject *object, Py_ssize_t index,
+                      PyGLBuf *out);
+
 /* Return-value conversion.  The rule is that the C layer returns the same
  * Python object the ctypes layer returns today. */
 PyObject *pygl_bytes_or_none(const char *value);
@@ -422,6 +430,12 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
                                            (element), (i), (pname), (table),   \
                                            (table##_count), &_bufs[_nb],       \
                                            &name##_count) < 0))                \
+        goto _fail;                                                            \
+    void *name = _bufs[_nb++].pointer
+
+#define PYGL_STRING_ARRAY(i, name)                                             \
+    if (PYGL_UNLIKELY(pygl_string_array(self, (i) < _nargs ? _a[i] : NULL, (i),       \
+                                        &_bufs[_nb]) < 0))                     \
         goto _fail;                                                            \
     void *name = _bufs[_nb++].pointer
 

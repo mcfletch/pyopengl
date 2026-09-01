@@ -596,6 +596,7 @@ static int pygl_array_acquire(PyObject *object, const PyGLElement *element,
     int flags = PyBUF_C_CONTIGUOUS | PyBUF_FORMAT;
     out->owner = NULL;
     out->have_view = 0;
+    out->block = NULL;
     out->pointer = NULL;
 
     if (object == NULL || object == Py_None) {
@@ -775,6 +776,7 @@ int pygl_array_out(GLProc *self, PyObject *object, const PyGLElement *element,
 
     out->owner = NULL;
     out->have_view = 0;
+    out->block = NULL;
     out->pointer = NULL;
 
     if (element->itemsize == 0) {
@@ -859,6 +861,7 @@ int pygl_array_out_glget(GLProc *self, PyObject *object, const PyGLElement *elem
 
     out->owner = NULL;
     out->have_view = 0;
+    out->block = NULL;
     out->pointer = NULL;
 
     if (entry->lookup) {
@@ -923,6 +926,7 @@ static int pygl_image(GLProc *self, const char *method, PyObject *object,
 
     out->owner = NULL;
     out->have_view = 0;
+    out->block = NULL;
     out->pointer = NULL;
 
     converted = PyObject_CallMethod(pygl_support, method, "sIIiiiiO",
@@ -992,6 +996,7 @@ int pygl_array_typed(GLProc *self, PyObject *object, unsigned int type,
 
     out->owner = NULL;
     out->have_view = 0;
+    out->block = NULL;
     out->pointer = NULL;
     if (object == NULL || object == Py_None) {
         return 0;
@@ -1054,7 +1059,52 @@ void pygl_release(PyGLBuf *buffer)
         buffer->have_view = 0;
     }
     Py_CLEAR(buffer->owner);
+    PyMem_Free(buffer->block);
+    buffer->block = NULL;
     buffer->pointer = NULL;
+}
+
+/* A list of strings becomes a char ** for the duration of the call.  The
+ * bytes objects are kept alive by the list in `owner`; the array of pointers
+ * into them is this frame slot's own memory. */
+int pygl_string_array(GLProc *self, PyObject *object, Py_ssize_t index,
+                      PyGLBuf *out)
+{
+    PyObject *list;
+    const char **entries;
+    Py_ssize_t count, position;
+    (void)self;
+    (void)index;
+
+    out->owner = NULL;
+    out->have_view = 0;
+    out->block = NULL;
+    out->pointer = NULL;
+    if (object == NULL || object == Py_None) {
+        return 0;
+    }
+    list = PyObject_CallMethod(pygl_support, "string_list", "O", object);
+    if (list == NULL) {
+        return -1;
+    }
+    count = PyList_GET_SIZE(list);
+    if (count == 0) {
+        out->owner = list;
+        return 0;
+    }
+    entries = PyMem_Calloc((size_t)count, sizeof(const char *));
+    if (entries == NULL) {
+        Py_DECREF(list);
+        PyErr_NoMemory();
+        return -1;
+    }
+    for (position = 0; position < count; position++) {
+        entries[position] = PyBytes_AS_STRING(PyList_GET_ITEM(list, position));
+    }
+    out->owner = list;
+    out->block = entries;
+    out->pointer = entries;
+    return 0;
 }
 
 /* The value an output parameter contributes to the return.  A one-element

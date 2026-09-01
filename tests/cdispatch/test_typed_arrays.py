@@ -117,3 +117,29 @@ class TestVariadicConvenience:
         swallowed -- the C implements the entry point, not the wrapper.
         """
         assert not emit_c.implements_friendly(commands[('GL', 'glBufferData')])
+
+
+class TestStringArrays:
+    """``const GLchar *const *`` is a list of strings, not an array of them.
+
+    ``glTransformFeedbackVaryings(program, count, varyings, bufferMode)`` takes
+    the names as a sequence of strings and needs a ``char **`` built from them
+    for the duration of the call.
+    """
+
+    def test_the_parameter_is_recognised(self, commands):
+        command = commands[('GL', 'glTransformFeedbackVaryings')]
+        varyings = [p for p in command.parameters if p.is_string_pointer]
+        assert [p.name for p in varyings] == ['varyings']
+
+    def test_it_is_emitted(self, commands):
+        for name in (
+            'glTransformFeedbackVaryings',
+            'glCreateShaderProgramv',
+            'glCompileShaderIncludeARB',
+        ):
+            assert emit_c.is_emittable(commands[('GL', name)]), name
+
+    def test_the_macro_names_it(self, commands):
+        text = emit_c.emit_stub(commands[('GL', 'glTransformFeedbackVaryings')])
+        assert 'PYGL_STRING_ARRAY(2, varyings);' in text

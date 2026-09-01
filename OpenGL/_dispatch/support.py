@@ -358,10 +358,15 @@ def image_result(array, type):
     """What a read hands back.
 
     ``OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING`` turns an unsigned byte image into
-    bytes, which is what it does today.
+    bytes, which is what it does today -- but only for an image this layer
+    allocated.  A caller who passed a raw pointer, as ``OpenGL.GL.images``
+    does when it has already made the storage itself, gets it back unchanged:
+    formatting a pointer as an image reads from wherever it happens to point.
     """
     from OpenGL import images
 
+    if isinstance(array, (ctypes._SimpleCData, ctypes._Pointer)):
+        return array
     return images.returnFormat(array, type)
 
 
@@ -411,3 +416,26 @@ def retain(name, index, array):
     constant = _POINTER_CONSTANTS.get(name, name)
     contextdata.setValue(constant, array)
     return array
+
+
+def string_list(value):
+    """A list of bytes, from one string or a sequence of them.
+
+    ``glShaderSource`` and ``glTransformFeedbackVaryings`` both take either
+    form, and a caller who passes one string means a list of one.
+    """
+    if isinstance(value, (bytes, bytearray)):
+        return [bytes(value)]
+    if isinstance(value, str):
+        return [value.encode('utf-8')]
+    out = []
+    for index, item in enumerate(value):
+        if isinstance(item, str):
+            out.append(item.encode('utf-8'))
+        elif isinstance(item, (bytes, bytearray)):
+            out.append(bytes(item))
+        else:
+            raise TypeError(
+                'string %d is %s, not a string' % (index, type(item).__name__)
+            )
+    return out

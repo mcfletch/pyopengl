@@ -164,12 +164,12 @@ def exclusion_reason(command):
     ):
         return 'unknown return type: %s' % (command.return_type.base,)
     for parameter in command.parameters:
+        if parameter.is_string_pointer:
+            continue
         if isinstance(parameter.size, (model.ImageSize, model.TypedArray)):
             continue
         if not parameter.size.declarative:
             return 'non-declarative size'
-        if parameter.is_string_pointer:
-            return 'string-array parameter'
         if parameter.is_output and not isinstance(
             parameter.size, (model.Fixed, model.FromArg, model.GLGetTable, model.ImageSize)
         ):
@@ -210,11 +210,11 @@ def is_emittable(command):
         if cm.scalar_macro(command.return_type) is None:
             return False
     for parameter in command.parameters:
+        if parameter.is_string_pointer:
+            continue
         if isinstance(parameter.size, (model.ImageSize, model.TypedArray)):
             continue
         if not parameter.size.declarative:
-            return False
-        if parameter.is_string_pointer:
             return False
         if parameter.is_output and not isinstance(
             parameter.size, (model.Fixed, model.FromArg, model.GLGetTable)
@@ -290,7 +290,7 @@ def stub_symbol(command):
 def emit_stub(command):
     """The C function implementing one entry point."""
     lines = []
-    arrays = [p for p in command.parameters if p.is_array]
+    arrays = [p for p in command.parameters if p.is_array or p.is_string_pointer]
     outputs = command.output_parameters
     required = len(command.required_arguments)
     total = len(command.parameters)
@@ -300,7 +300,7 @@ def emit_stub(command):
     frame_slots = {
         parameter.name: slot
         for slot, parameter in enumerate(
-            p for p in command.parameters if p.is_array
+            p for p in command.parameters if p.is_array or p.is_string_pointer
         )
     }
 
@@ -318,7 +318,7 @@ def emit_stub(command):
         lines.append('    PYGL_FRAME(%d);' % (len(arrays),))
 
     for index, parameter in enumerate(command.parameters):
-        if parameter.is_array:
+        if parameter.is_array or parameter.is_string_pointer:
             continue
         lines.append(
             '    %s(%d, %s);' % (_scalar_macro(parameter), index, parameter.c_name)
@@ -326,10 +326,14 @@ def emit_stub(command):
     lines.append('    PYGL_CONV_OK();')
 
     for index, parameter in enumerate(command.parameters):
-        if not parameter.is_array:
+        if not (parameter.is_array or parameter.is_string_pointer):
             continue
         element = element_symbol(parameter)
-        if isinstance(parameter.size, model.TypedArray):
+        if parameter.is_string_pointer:
+            lines.append(
+                '    PYGL_STRING_ARRAY(%d, %s);' % (index, parameter.c_name)
+            )
+        elif isinstance(parameter.size, model.TypedArray):
             lines.append(
                 '    PYGL_ARRAY_TYPED(%d, %s, %s, %d);'
                 % (
@@ -400,7 +404,7 @@ def emit_stub(command):
         if parameter.retain:
             lines.append(
                 '    if (pygl_retain(self, %d, &_bufs[%d]) < 0) goto _fail;'
-                % (index, [p for p in command.parameters if p.is_array].index(parameter))
+                % (index, frame_slots[parameter.name])
             )
 
     retained = [p for p in command.parameters if p.retain]
