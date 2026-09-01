@@ -604,6 +604,13 @@ def extract_tree(root, registry_root=None):
     Keyed by ``(api, name)``: ``glTexImage2D`` exists in both GL and GLES2 as
     separate bindings resolved from separate libraries, so the name alone does
     not identify an entry point.
+
+    The annotations come from three places, in order: the friendly modules,
+    the registry, and ``annotations.json``.  The last is what makes a module
+    able to stop carrying its customisation chain -- once the chain is gone
+    there is nothing in the tree left to parse, and the table is the record.
+    Applying it over the parse is safe because for a module that still has its
+    chain the two say the same thing, which the round-trip test asserts.
     """
     commands = {}
     raw_root = os.path.join(root, 'raw')
@@ -650,6 +657,7 @@ def extract_tree(root, registry_root=None):
             os.path.dirname(os.path.abspath(root)), 'src', 'khronosapi', 'xml'
         )
     _apply_registry(commands, registry_root)
+    _apply_annotation_table(commands)
     _mark_retained(commands)
     return commands
 
@@ -800,3 +808,21 @@ def _literal(node):
         return ast.literal_eval(node)
     except (ValueError, TypeError, SyntaxError):
         return None
+
+
+def _apply_annotation_table(commands):
+    """Fold the checked-in annotation table into the records.
+
+    A friendly module that has handed its customisation chain to the table no
+    longer states it in Python, so parsing cannot recover it and the table is
+    the only record.  For a module that still carries its chain the table says
+    the same thing, so applying it changes nothing -- which is what makes the
+    migration safe to do a module at a time.
+    """
+    from . import annotations
+
+    try:
+        table = annotations.load()
+    except OSError:
+        return commands
+    return annotations.apply(commands, table)

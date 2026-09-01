@@ -32,6 +32,10 @@ DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'raw', '_declara
 #: One entry per API, filled on the first module of that API that asks.
 _data = {}
 
+#: The customisations, read from the shipped table on first use.  What a
+#: friendly module used to apply as a chain of wrapper.wrapper(...) calls.
+_annotations = None
+
 #: Resolved type expressions, keyed by ``(api, text)``.  The vocabulary is
 #: small and the uses are not: ``_cs.GLenum`` is written thousands of times
 #: across the tree, and evaluating it thousands of times was the largest single
@@ -118,8 +122,72 @@ def contents_for(module_name):
     }
 
 
-def define(namespace, module_name):
+def annotations():
+    """The customisation table, or an empty one where it was not shipped."""
+    global _annotations
+    if _annotations is None:
+        import marshal
+
+        try:
+            with open(os.path.join(DATA, '_annotations.dat'), 'rb') as handle:
+                _annotations = marshal.load(handle)
+        except OSError:
+            _annotations = {}
+    return _annotations
+
+
+def customise_entry(entry, api, name, declared):
+    """Apply what the table says about this entry point, and return it.
+
+    The rule, which took measuring to get right:
+
+    * a parameter takes an array conversion when its **declared type is an
+      array type**, or when the **table gives it a size spec**;
+    * the length comes from the table where there is one.
+
+    Both halves are needed.  A thousand ``setInputArraySize(x, None)`` calls
+    record no length, so the table holds nothing for them -- but they install
+    ``ArrayDatatype.asArray``, and rebuilding from the table alone hands the
+    driver a list.  And ``glDrawElements`` and relatives declare their array as
+    ``ctypes.c_void_p``, because it may be a client pointer or a buffer offset,
+    so there the type says nothing and only the table does.
+
+    A ``GLProc`` is returned untouched: the C already performs all of this,
+    which is what ``implements_friendly`` records.
+    """
+    entry_annotations = annotations().get('%s.%s' % (api, name))
+    parameters = (entry_annotations or {}).get('parameters', {})
+    if not parameters and not declared:
+        return entry
+    from OpenGL import wrapper
+
+    built = entry
+    for parameter, kind in declared:
+        bits = parameters.get(parameter, {})
+        if bits.get('out'):
+            continue          # an output is the friendly module's business
+        size = bits.get('size')
+        if size is None and kind != 'array':
+            continue
+        if size is not None and size.get('kind') == 'fixed':
+            length = size['count']
+        else:
+            length = None
+        if built is entry:
+            built = wrapper.wrapper(entry)
+        built = built.setInputArraySize(parameter, length)
+    return built
+
+
+def define(namespace, module_name, customise=False):
     """Define, in ``namespace``, everything ``module_name`` declared.
+
+    ``customise`` says that the friendly module has handed its customisation
+    chain over to the annotation table and no longer applies it itself.  It is
+    per module because applying a customisation twice is an error, not a
+    no-op -- ``wrapper`` raises ``Double wrapping of output parameter`` -- so
+    the modules can only be migrated one at a time if each says whether it has
+    been.  When they all have, the flag goes.
 
     Called from a friendly module in place of the ``import *`` that used to
     reach the generated module::
@@ -131,7 +199,42 @@ def define(namespace, module_name):
     """
     built, extension = _build(module_name)
     namespace.update(built)
+    if customise:
+        api = api_of(module_name)
+        contents = contents_for(module_name) or {}
+        for command, arguments, types in contents.get('commands', ()):
+            entry = namespace.get(command)
+            if entry is None:
+                continue
+            replacement = customise_entry(
+                entry, api, command, _array_parameters(arguments, types)
+            )
+            if replacement is not entry:
+                namespace[command] = replacement
     return extension
+
+
+def _array_parameters(arguments, types):
+    """``[(name, 'array' | 'scalar'), ...]`` from the declaration's text.
+
+    Array-ness is half the rebuild rule, and the half the table does not hold:
+    it is a property of the type the declaration stated.  Read from the text
+    rather than from the built binding, because on a C entry point reading
+    ``argtypes`` builds the ctypes binding the import path exists to avoid --
+    which is what made this cost 1,143 bindings the first time it was written.
+    """
+    if isinstance(arguments, str):
+        arguments = [name for name in arguments.split(',') if name]
+    if isinstance(types, str):
+        types = types.split(',')
+    # types is the result type followed by one per parameter.
+    parameter_types = list(types)[1:]
+    if len(parameter_types) != len(arguments):
+        return ()
+    return tuple(
+        (name, 'array' if text.startswith('arrays.') else 'scalar')
+        for name, text in zip(arguments, parameter_types)
+    )
 
 
 def _build(module_name):
