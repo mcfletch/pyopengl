@@ -47,24 +47,18 @@ class TestBufferLifetime(GLTestCase):
         assert exports_are_clear(values)
 
     def test_two_arrays_are_both_released(self):
-        """``glDrawElements`` takes an index array beside its scalars.
+        """``glMultiDrawArrays(mode, first, count, drawcount)`` takes two.
 
-        A deprecated entry point would be the obvious choice here, but
-        ``bool(glFoo)`` says the driver exports the symbol, not that the
-        current profile will accept a call to it -- and a compatibility-only
-        entry point called under a core profile faults inside the driver,
-        under either implementation.
+        With a draw count of zero it draws nothing, which is the point: what
+        is under test is the cleanup frame, not the drawing.  A legacy
+        client-side draw would exercise the same frame but faults inside the
+        driver outside a compatibility profile, under either implementation.
         """
-        indices = np.zeros(3, 'I')
-        buffer = np.zeros(9, 'f')
-        glEnableClientState(GL_VERTEX_ARRAY)
-        try:
-            glVertexPointer(3, GL_FLOAT, 0, buffer)
-            glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, indices)
-        finally:
-            glDisableClientState(GL_VERTEX_ARRAY)
-        assert exports_are_clear(indices)
-        assert exports_are_clear(buffer)
+        first = np.zeros(2, 'i')
+        count = np.zeros(2, 'i')
+        glMultiDrawArrays(GL_TRIANGLES, first, count, 0)
+        assert exports_are_clear(first)
+        assert exports_are_clear(count)
 
     def test_a_failure_after_a_successful_acquisition_releases_it(self):
         """The first array is acquired; the second cannot be converted.
@@ -72,15 +66,10 @@ class TestBufferLifetime(GLTestCase):
         This is the case the cleanup frame exists for: without it the first
         buffer stays exported for the life of the array.
         """
-        buffer = np.zeros(9, 'f')
-        glEnableClientState(GL_VERTEX_ARRAY)
-        try:
-            glVertexPointer(3, GL_FLOAT, 0, buffer)
-            with pytest.raises(Exception):
-                glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, object())
-        finally:
-            glDisableClientState(GL_VERTEX_ARRAY)
-        assert exports_are_clear(buffer)
+        first = np.zeros(2, 'i')
+        with pytest.raises(Exception):
+            glMultiDrawArrays(GL_TRIANGLES, first, object(), 0)
+        assert exports_are_clear(first)
 
     def test_the_argument_is_not_kept_alive_after_the_call(self):
         values = np.zeros(3, 'd')

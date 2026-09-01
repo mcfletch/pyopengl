@@ -86,6 +86,28 @@ class TestEmissionCoverage:
             'emission fell to %d from %d' % (len(emitted), self.MINIMUM)
         )
 
+    def test_no_emitted_command_needs_a_retained_parameter(self):
+        """The retain path is not implemented, so nothing may depend on it.
+
+        A parameter marked retained is one whose memory the GL keeps after the
+        call returns; forgetting to keep it alive is a crash rather than a
+        leak.  The family that needs it -- glVertexPointer and its relatives --
+        is not emitted, and this makes sure none arrives unnoticed.
+        """
+        commands = extract.extract_tree(PACKAGE)
+        needing = [
+            '%s.%s' % key
+            for key, command in commands.items()
+            if emit_c.is_emittable(command)
+            and any(parameter.retain for parameter in command.parameters)
+        ]
+        assert needing == [], needing[:20]
+
+    def test_the_family_that_does_need_it_is_marked(self):
+        commands = extract.extract_tree(PACKAGE)
+        pointers = commands[('GL', 'glVertexPointer')]
+        assert any(parameter.retain for parameter in pointers.parameters)
+
     def test_every_command_not_emitted_has_a_stated_reason(self):
         """Nothing is left on ctypes by accident."""
         commands = extract.extract_tree(PACKAGE)

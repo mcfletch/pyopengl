@@ -528,23 +528,19 @@ def api_view(commands, api):
 
 
 #: The client-array family: the GL reads the memory after the call returns, so
-#: the argument and its buffer must outlive the call.  Losing this is a
-#: segfault rather than a leak.
-_RETAINING = (
-    'Pointer',
-    'glDrawElements',
-    'glDrawRangeElements',
-    'glMultiDrawElements',
-    'glInterleavedArrays',
-)
+#: the argument and its buffer must outlive the call.  It is exactly the
+#: family ``OpenGL/GL/pointers.py`` owns -- glVertexPointer and its relatives,
+#: which register a pointer the GL keeps.
+#:
+#: A draw call is *not* in it.  glDrawElements reads its indices during the
+#: draw and holds nothing afterwards, so marking it retained would describe
+#: something that is not true.
 
 
 def _mark_retained(commands):
-    for key, command in commands.items():
-        name = key[1] if isinstance(key, tuple) else key
-        if command.helper != 'client_pointer' and not any(
-            name.startswith(prefix) or name == prefix for prefix in _RETAINING
-        ):
+    """Mark the parameters whose memory the GL keeps after the call returns."""
+    for command in commands.values():
+        if command.helper != 'client_pointer':
             continue
         for parameter in command.parameters:
             if parameter.is_array and parameter.direction == model.IN:
