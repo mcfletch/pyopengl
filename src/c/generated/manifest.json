@@ -47,6 +47,16 @@
     "GLuintArray",
     "GLvoidpArray"
   ],
+  "declaration_bytes": {
+    "EGL": 37673,
+    "GL": 611332,
+    "GLES1": 62273,
+    "GLES2": 191831,
+    "GLES3": 32519,
+    "GLSC2": 16968,
+    "GLX": 34681,
+    "WGL": 29936
+  },
   "emitted": 4819,
   "generated_modules": 1278,
   "generator_version": "1.0",

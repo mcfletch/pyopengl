@@ -11,8 +11,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GLX import _types, _glgets
-from OpenGL.raw.GLX.ARB.create_context_profile import *
-from OpenGL.raw.GLX.ARB.create_context_profile import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLX.ARB.create_context_profile')
 
 def glInitCreateContextProfileARB():
     '''Return boolean indicating whether this extension is available'''

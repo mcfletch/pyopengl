@@ -11,8 +11,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.EGL import _types, _glgets
-from OpenGL.raw.EGL.NOK.texture_from_pixmap import *
-from OpenGL.raw.EGL.NOK.texture_from_pixmap import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.EGL.NOK.texture_from_pixmap')
 
 def glInitTextureFromPixmapNOK():
     '''Return boolean indicating whether this extension is available'''

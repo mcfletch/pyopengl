@@ -59,6 +59,11 @@ def resolve(name, extension, alternates, api_index):
     both ``GL_NV_gpu_shader5`` and ``GL_AMD_gpu_shader_int64`` -- and a driver
     advertising either has the function, so any one of them is enough.
     """
+    from OpenGL import _dispatch
+
+    # The first resolution is the first moment a context exists, so it is
+    # where the layer learns how to ask which one is current.
+    _dispatch.install_context_getter()
     api = _API_NAMES[api_index]
     platform_ = platform.PLATFORM
     is_core = (not extension) or 'VERSION' in extension.split('_')
@@ -337,6 +342,17 @@ def raise_debug_error(identifier, message, name, arguments=None):
     )
 
 
+def probe_allowed():
+    """Whether the layer may load EGL/GLX in order to ask about contexts.
+
+    Only where the caller has asked to be told about a missing context, which
+    is the one case where "do not know" is not an acceptable answer.
+    """
+    from OpenGL import _configflags
+
+    return bool(_configflags.CONTEXT_CHECKING)
+
+
 def current_context():
     """Which context is current, as an integer handle.
 
@@ -345,7 +361,18 @@ def current_context():
     wrong one answers "none".
     """
     try:
-        return int(platform.PLATFORM.GetCurrentContext() or 0)
+        # Probing means loading EGL and GLX to ask each of them, and loading
+        # them costs 26 MB of driver.  A program that merely imports PyOpenGL
+        # should not pay that, so the question is normally answered only from
+        # an interface already loaded -- but CONTEXT_CHECKING is a caller
+        # asking to be told when no context is current, and that answer cannot
+        # be had without asking.  The flag is what buys the probe.
+        return int(platform.PLATFORM.GetCurrentContext(probe=probe_allowed()) or 0)
+    except TypeError:  # a platform whose signature predates the argument
+        try:
+            return int(platform.PLATFORM.GetCurrentContext() or 0)
+        except Exception:
+            return 0
     except Exception:
         return 0
 

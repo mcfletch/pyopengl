@@ -64,8 +64,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
-from OpenGL.raw.GL.NV.framebuffer_mixed_samples import *
-from OpenGL.raw.GL.NV.framebuffer_mixed_samples import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.NV.framebuffer_mixed_samples')
 
 def glInitFramebufferMixedSamplesNV():
     '''Return boolean indicating whether this extension is available'''

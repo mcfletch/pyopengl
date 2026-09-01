@@ -58,8 +58,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
-from OpenGL.raw.GL.EXT.shader_image_load_store import *
-from OpenGL.raw.GL.EXT.shader_image_load_store import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.EXT.shader_image_load_store')
 
 def glInitShaderImageLoadStoreEXT():
     '''Return boolean indicating whether this extension is available'''

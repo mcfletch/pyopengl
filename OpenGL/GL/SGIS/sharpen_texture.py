@@ -18,8 +18,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
-from OpenGL.raw.GL.SGIS.sharpen_texture import *
-from OpenGL.raw.GL.SGIS.sharpen_texture import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.SGIS.sharpen_texture')
 
 def glInitSharpenTextureSGIS():
     '''Return boolean indicating whether this extension is available'''

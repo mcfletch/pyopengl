@@ -234,13 +234,21 @@ class LinuxPlatform(baseplatform.BasePlatform):
         fn.restype = ctypes.c_void_p
         return fn
 
-    def currentContextAddress(self):
+    def currentContextAddress(self, probe=True):
         """The address of whichever of EGL/GLX owns the current context.
 
         Which interface answers is a runtime fact here, so the C dispatch layer
         is told the active one rather than a fixed symbol.
+
+        Finding out costs a probe of both, and a probe loads the driver: 26 MB
+        of it on an NVIDIA machine, for a question with no answer until an
+        application has made a context current.  With ``probe`` false, only an
+        interface already loaded into the process is considered, and ``None``
+        means "ask again later" rather than "there is none".
         """
         if self._active_api is None:
+            if not probe:
+                return None
             self.GetCurrentContext()
         if self._active_api == 'egl':
             function = self._eglGetCurrentContext
@@ -250,7 +258,11 @@ class LinuxPlatform(baseplatform.BasePlatform):
             return None
         return ctypes.cast(function, ctypes.c_void_p).value
 
-    def GetCurrentContext(self):
+    #: The two interfaces that can own a context here, and the name each is
+    #: remembered under once it has answered.
+    _CONTEXT_APIS = (('_eglGetCurrentContext', 'egl'), ('_glXGetCurrentContext', 'glx'))
+
+    def GetCurrentContext(self, probe=True):
         """Retrieve an opaque pointer for the current context
 
         Probes EGL first, then GLX.  Both queries read independent per-thread
@@ -258,7 +270,24 @@ class LinuxPlatform(baseplatform.BasePlatform):
         has no current context (they return a null pointer).  The API that
         returns a live context is remembered so extension lookups route to the
         matching get-proc-address function.
+
+        Probing loads both libraries, and on an NVIDIA machine loading GLX
+        brings 26 MB of driver with it.  With ``probe`` false only an interface
+        already loaded into this process is asked, so the question costs
+        nothing and the answer is ``None`` until something has loaded one --
+        by which time anything with a context has loaded the one it uses.
         """
+        if not probe:
+            for attribute, api in self._CONTEXT_APIS:
+                # The resolved lazy_property, if it has ever been resolved.
+                fn = self.__dict__.get(attribute)
+                if fn is None:
+                    continue
+                context = fn()
+                if context:
+                    self._active_api = api
+                    return context
+            return None
         fn = self._eglGetCurrentContext
         if fn is not None:
             context = fn()

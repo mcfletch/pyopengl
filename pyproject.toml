@@ -70,7 +70,10 @@ version = {attr = "OpenGL.version.__version__"}
 [tool.setuptools.package-data]
 # py.typed tells a type checker the package ships type information; without it
 # the .pyi stubs beside the modules are ignored.
-OpenGL = ["py.typed", "*/__init__.pyi"]
+# The declarations the pure-Python path reads where no extension was built.
+# The C extension holds the same facts; these are what an installation without
+# a compiler has instead, so they are not optional.
+OpenGL = ["py.typed", "*/__init__.pyi", "raw/_declarations/*.dat"]
 
 [tool.setuptools.packages.find]
 namespaces=false

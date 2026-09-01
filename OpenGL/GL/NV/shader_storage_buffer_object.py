@@ -22,8 +22,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
-from OpenGL.raw.GL.NV.shader_storage_buffer_object import *
-from OpenGL.raw.GL.NV.shader_storage_buffer_object import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.NV.shader_storage_buffer_object')
 
 def glInitShaderStorageBufferObjectNV():
     '''Return boolean indicating whether this extension is available'''

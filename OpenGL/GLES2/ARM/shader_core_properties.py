@@ -33,8 +33,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GLES2 import _types, _glgets
-from OpenGL.raw.GLES2.ARM.shader_core_properties import *
-from OpenGL.raw.GLES2.ARM.shader_core_properties import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLES2.ARM.shader_core_properties')
 
 def glInitShaderCorePropertiesARM():
     '''Return boolean indicating whether this extension is available'''

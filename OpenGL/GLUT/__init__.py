@@ -1,5 +1,6 @@
 """The GLUT library implementation via ctypes"""
-from OpenGL.raw.GLUT import *
+from OpenGL._declarations import define as _define
+_define(globals(), 'OpenGL.raw.GLUT')
 
 from OpenGL.GLUT.special import *
 from OpenGL.GLUT.fonts import *

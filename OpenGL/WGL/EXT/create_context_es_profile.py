@@ -11,8 +11,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.WGL import _types, _glgets
-from OpenGL.raw.WGL.EXT.create_context_es_profile import *
-from OpenGL.raw.WGL.EXT.create_context_es_profile import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.WGL.EXT.create_context_es_profile')
 
 def glInitCreateContextEsProfileEXT():
     '''Return boolean indicating whether this extension is available'''

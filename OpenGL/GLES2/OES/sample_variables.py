@@ -34,8 +34,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GLES2 import _types, _glgets
-from OpenGL.raw.GLES2.OES.sample_variables import *
-from OpenGL.raw.GLES2.OES.sample_variables import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLES2.OES.sample_variables')
 
 def glInitSampleVariablesOES():
     '''Return boolean indicating whether this extension is available'''

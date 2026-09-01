@@ -65,13 +65,54 @@ def _current_context_getter():
     Returning ``None`` is not a failure: without it the layer dispatches
     through one table, which is right for the single-context processes that are
     the overwhelming majority, and ``make_current`` remains available.
+
+    Not called at import.  Finding out whether EGL or GLX owns the current
+    context means probing both, and probing loads the driver -- 26 MB of
+    libnvidia here -- to answer a question that has no answer yet, because at
+    import there is no current context.  :func:`install_context_getter` calls
+    this at the first resolution instead, which is the first moment a context
+    exists to be asked about.
     """
     from OpenGL import platform
 
+    from OpenGL._dispatch import support
+
     try:
-        return platform.PLATFORM.currentContextAddress()
+        # Without probing unless the caller has asked for context checking:
+        # the application's own toolkit loads whichever of EGL and GLX it
+        # uses, so by the time a context exists the answer is usually there
+        # for the taking, and before that there is nothing to take.
+        return platform.PLATFORM.currentContextAddress(
+            probe=support.probe_allowed()
+        )
+    except TypeError:  # a platform whose signature predates the argument
+        try:
+            return platform.PLATFORM.currentContextAddress()
+        except Exception:
+            return None
     except Exception:
         return None
+
+
+#: Whether the address has been handed to the C layer yet.
+_context_getter_installed = False
+
+
+def install_context_getter():
+    """Tell the C layer how to ask which context is current.
+
+    Called from the first entry-point resolution.  Idempotent and cheap after
+    the first call, because it is on that path.
+    """
+    global _context_getter_installed
+    if _context_getter_installed or not AVAILABLE:
+        return
+    address = _current_context_getter()
+    if address:
+        # Only settled once there is an answer.  Before a context exists there
+        # is none, and asking again next time costs an attribute read.
+        _context_getter_installed = True
+        _c.set_context_getter(address)
 
 
 def configure():
@@ -89,7 +130,8 @@ def configure():
         ctypes_simple=ctypes._SimpleCData,
         ctypes_pointer=ctypes._Pointer,
         error_slot=error_slot,
-        get_current_context=_current_context_getter() or 0,
+        # Deferred: see install_context_getter().
+        get_current_context=0,
         strict_context=False,
         context_tracking=TRACKING,
         array_size_checking=_configflags.ARRAY_SIZE_CHECKING,

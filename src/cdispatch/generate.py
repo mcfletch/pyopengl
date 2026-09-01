@@ -200,6 +200,8 @@ def generate(package_root, output_root, report=None, tables_path=None,
     _write(os.path.join(output_root, 'pygl_glgets.h'), glget_text)
 
     raw_modules = modules_.read_modules(package_root, extract.APIS)
+    # The same facts as the C table, for a build with no compiled extension.
+    declarations = modules_.write_declarations(package_root, raw_modules)
     _write(
         os.path.join(output_root, 'pygl_modules.c'),
         modules_.emit_modules(raw_modules),
@@ -263,6 +265,7 @@ def generate(package_root, output_root, report=None, tables_path=None,
                 'apis': by_api,
                 'glget_tables': glget_apis,
                 'generated_modules': len(raw_modules),
+                'declaration_bytes': declarations,
                 'array_types': emit_array_type_names(elements),
             }
         )

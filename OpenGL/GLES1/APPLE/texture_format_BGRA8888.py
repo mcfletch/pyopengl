@@ -17,8 +17,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GLES1 import _types, _glgets
-from OpenGL.raw.GLES1.APPLE.texture_format_BGRA8888 import *
-from OpenGL.raw.GLES1.APPLE.texture_format_BGRA8888 import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLES1.APPLE.texture_format_BGRA8888')
 
 def glInitTextureFormatBgra8888APPLE():
     '''Return boolean indicating whether this extension is available'''

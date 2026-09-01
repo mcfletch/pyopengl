@@ -22,8 +22,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GLSC2 import _types, _glgets
-from OpenGL.raw.GLSC2.EXT.texture_compression_s3tc import *
-from OpenGL.raw.GLSC2.EXT.texture_compression_s3tc import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLSC2.EXT.texture_compression_s3tc')
 
 def glInitTextureCompressionS3TcEXT():
     '''Return boolean indicating whether this extension is available'''

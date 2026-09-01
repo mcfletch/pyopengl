@@ -1,0 +1,234 @@
+<html>
+<head>
+<title>How an OpenGL entry point becomes a Python function</title>
+<link rel="stylesheet" href="style/modern.css" type="text/css"/>
+</head>
+<body>
+<h1>How an OpenGL entry point becomes a Python function</h1>
+
+<p><code>glTexImage2D</code> takes eleven arguments in C, nine in PyOpenGL, and
+works out the length of the last one from four of the others and from GL state
+the caller never mentions.  Nothing about that is written down in one place: it
+is assembled from the Khronos registry, a generated declaration, a chain of
+wrapper customisations, and — for most entry points now — a C function
+generated from all of it.</p>
+
+<p>This page is the map.  It is for the person debugging why a call raises
+something unexpected, and for the person adding an entry point or an argument
+convention and wondering where the change belongs.</p>
+
+<h2>The four things that make an entry point</h2>
+
+<table border="1" cellpadding="5" cellspacing="0">
+<tr><th>what</th><th>where</th><th>says</th></tr>
+<tr>
+  <td><b>the registry</b></td>
+  <td><code>src/khronosapi/xml/{gl,glx,wgl}.xml</code></td>
+  <td>The C signature, which feature or extension declares it, and
+      <code>COMPSIZE(...)</code>: how long an array argument is in terms of the
+      other arguments.</td>
+</tr>
+<tr>
+  <td><b>the declaration</b></td>
+  <td>the generated <code>OpenGL.raw</code> tables</td>
+  <td>The ctypes signature — result type, argument types, argument names — and
+      the extension string.  Held in the C extension's <code>.rodata</code> and
+      in <code>OpenGL/raw/_declarations/&lt;API&gt;.dat</code>.</td>
+</tr>
+<tr>
+  <td><b>the customisation</b></td>
+  <td>the friendly module, e.g.
+      <code>OpenGL/GL/VERSION/GL_1_1.py</code></td>
+  <td>What makes the Python signature differ from the C one: which arguments
+      are outputs, which are sized from others, which are images.</td>
+</tr>
+<tr>
+  <td><b>the implementation</b></td>
+  <td><code>src/c/generated/pygl_&lt;API&gt;.c</code>, or
+      <code>OpenGL/wrapper.py</code></td>
+  <td>The code that actually converts arguments, calls the driver and converts
+      the result.</td>
+</tr>
+</table>
+
+<h2>Reading the customisation</h2>
+
+<p>A friendly module states the difference between the C signature and the
+Python one as a chain of calls on <code>wrapper.wrapper</code>.  There are only
+a handful of kinds, and each has a matching annotation in the generator:</p>
+
+<table border="1" cellpadding="5" cellspacing="0">
+<tr><th>call</th><th>means</th><th>generator sees</th></tr>
+<tr><td><code>.setOutput('data', size)</code></td>
+    <td>The caller does not pass <code>data</code>; it is allocated, filled by
+        the driver and returned.</td>
+    <td><code>Parameter.direction = OUT</code> with a size spec.</td></tr>
+<tr><td><code>.setOutput('data', _glgets.GL_GET_SIZES)</code></td>
+    <td>The length depends on which <code>pname</code> was asked for, through
+        the 1,798-entry table in <code>OpenGL/raw/&lt;API&gt;/_glgets.py</code>.</td>
+    <td><code>GLGetTable(pname_argument)</code>.</td></tr>
+<tr><td><code>.setInputArraySize('v', 4)</code></td>
+    <td>The array must hold exactly four elements.</td>
+    <td><code>Fixed(4)</code>.</td></tr>
+<tr><td><code>.setInputArraySize('v', None)</code></td>
+    <td>Any length; the caller is trusted.</td>
+    <td><code>NO_SIZE</code>.</td></tr>
+<tr><td><code>.setPyConverter('count')</code> then
+        <code>.setCConverter('count', ...)</code></td>
+    <td>The argument is dropped from the Python signature and computed from
+        another one.</td>
+    <td><code>FromArg(index, divisor)</code>.</td></tr>
+<tr><td><code>images.setImageInput(...)</code></td>
+    <td>The length is a function of format, type, the dimensions and the
+        pixel-store state.</td>
+    <td><code>ImageSize(format, type, dimensions)</code>, cross-checked against
+        the registry's <code>COMPSIZE</code>.</td></tr>
+<tr><td><code>.setStoreValues(...)</code></td>
+    <td>The GL keeps reading the memory after the call returns, so the array
+        must be held against the context.</td>
+    <td><code>Parameter.retain</code>.</td></tr>
+</table>
+
+<p>The generator reads these by parsing the friendly modules, never by
+importing them, so extraction needs no GL context and no working build.  It
+then cross-checks the registry, because reading the modules alone is not
+enough: <code>images.py</code> reaches <code>glReadPixels</code> through a
+differently-named wrapper, and only the registry's
+<code>COMPSIZE(format,type,width,height)</code> says what it really is.</p>
+
+<h2>What runs when you call one</h2>
+
+<p>Under the C implementation, calling <code>glTexImage2D(...)</code> reaches a
+generated C function which, in order:</p>
+
+<ol>
+<li>checks the argument count;</li>
+<li>converts each scalar with the CPython C API;</li>
+<li>for the image argument, calls back into
+    <code>OpenGL.images</code> to compute the length — because
+    <code>OpenGL.images.registerImage</code> is a public entry point a third
+    party can add a format through, so the sizing cannot be frozen into C;</li>
+<li>acquires a buffer over the array, taking the fast path when the element
+    type already matches and falling through to
+    <code>ArrayDatatype</code> and the format-handler registry when it does
+    not;</li>
+<li>loads the function pointer for the current context out of that context's
+    dispatch table and calls it;</li>
+<li>releases every buffer it acquired, on the failure paths as well as the
+    successful one;</li>
+<li>converts the result, and checks for an error if error checking is on.</li>
+</ol>
+
+<p>Under the ctypes implementation the same steps happen, built at import time
+as a chain of Python objects by <code>OpenGL/wrapper.py</code>.  The two are
+meant to be indistinguishable from outside, and
+<code>tests/test_attribute_surface.py</code> compares every entry point's
+attributes under both to keep them so.</p>
+
+<h2>Where a call can go wrong, and what it means</h2>
+
+<table border="1" cellpadding="5" cellspacing="0">
+<tr><th>symptom</th><th>usually means</th></tr>
+<tr><td><code>NullFunctionError</code></td>
+    <td>The entry point did not resolve in the current context: the driver does
+        not have it, or no context was current when it was first called.  Check
+        <code>bool(glFoo)</code> <em>with the context current</em>.</td></tr>
+<tr><td><code>NoContext</code> error</td>
+    <td><code>OpenGL.CONTEXT_CHECKING</code> is on and there was no current
+        context.  Off by default, because deleting objects from a cleanup
+        handler after the context has gone is ordinary and silently harmless.</td></tr>
+<tr><td>a <code>GLError</code> naming a call you did not make</td>
+    <td>Without <code>GL_KHR_debug</code>, an error is attributed to whichever
+        call next asks.  Switch on
+        <code>OpenGL._dispatch.use_debug_output()</code> to have the driver
+        report the offending call itself.</td></tr>
+<tr><td>an argument-count error mentioning more arguments than you passed</td>
+    <td>The entry point demoted to ctypes and lost a customisation.  See
+        below.</td></tr>
+<tr><td>wrong pixels, or a crash, from an image call</td>
+    <td>The pixel-store state at call time is part of the length calculation.
+        <code>glPixelStorei(GL_UNPACK_ALIGNMENT, ...)</code> changes how much
+        memory the driver reads.</td></tr>
+</table>
+
+<h2>Demotion: when the C hands the call back</h2>
+
+<p>The C implements the entry point, not the friendly module's whole chain.  If
+a friendly module applies a customisation the C does not perform — anything
+that changes which arguments the function takes — the entry point
+<em>demotes</em>: the ctypes binding is built, every customisation swallowed
+earlier is replayed onto it, and the result is what you would have had with no
+C layer at all.  Correctness before speed.</p>
+
+<p>This is why the ctypes binding still exists behind every C entry point.  It
+is built on the first demotion that asks for it rather than at import, because
+a few dozen entry points out of nearly five thousand ever demote.</p>
+
+<p>To see what an entry point is: <code>type(glFoo)</code> is
+<code>GLProc</code> where the C implements it, and something else where it does
+not.  <code>OpenGL/_dispatch/support.py</code> holds the machinery —
+<code>record_custom</code> for what was swallowed,
+<code>demote_and_call</code> for the fallback.</p>
+
+<h2>Adding or changing an entry point</h2>
+
+<ol>
+<li><b>A new entry point from the registry.</b> Nothing to do by hand: pull the
+    registry, run <code>python src/regenerate_c.py</code>, and it appears.  The
+    weekly workflow in <code>.github/workflows/registry-update.yml</code> does
+    this and opens a pull request when anything changed.</li>
+<li><b>A new argument convention</b> — a sizing rule no existing annotation
+    describes.  Add a size spec to <code>src/cdispatch/model.py</code>, teach
+    <code>src/cdispatch/extract.py</code> to recognise it, and add a macro to
+    <code>src/c/pygl.h</code> for the C to use.  There is a test file per family
+    in <code>tests/cdispatch/</code>; write that first.</li>
+<li><b>An entry point needing real C</b> — one whose behaviour is not a
+    description.  Add it to <code>src/cdispatch/handwritten.py</code> and write
+    the body in <code>src/c/pygl_handwritten.c</code>.
+    <code>glShaderSource</code> is the worked example.</li>
+<li><b>A new array element type.</b> One row in the element table and one
+    <code>ArrayDatatype</code> subclass; no new C and no change to any stub.</li>
+</ol>
+
+<p>Whatever the change, <code>python src/check_registry.py</code> reports what
+is not implemented in C and why, for every entry point, and fails on anything
+new since the recorded baseline.  Nothing is on the ctypes path by accident.</p>
+
+<h2>Where the names come from</h2>
+
+<p>A friendly module no longer imports a generated module.  It says:</p>
+
+<pre>from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.VERSION.GL_1_1')</pre>
+
+<p>and <code>define</code> writes the constants and entry points straight into
+the module's own namespace, from the C extension's tables where the C layer is
+in use and from <code>OpenGL/raw/_declarations/&lt;API&gt;.dat</code> otherwise.
+Both are written by the same generator pass, so they cannot drift.  The string
+is the name the generated module had, and it stays the identifier for where a
+declaration came from.</p>
+
+<h2>The files</h2>
+
+<table border="1" cellpadding="5" cellspacing="0">
+<tr><th>file</th><th>holds</th></tr>
+<tr><td><code>src/cdispatch/extract.py</code></td><td>Reading the shipped tree and the registry into command records.</td></tr>
+<tr><td><code>src/cdispatch/model.py</code></td><td>The command record: one field per thing that can be emitted.</td></tr>
+<tr><td><code>src/cdispatch/emit_c.py</code></td><td>Turning a record into a C function, and deciding when it cannot.</td></tr>
+<tr><td><code>src/cdispatch/modules.py</code></td><td>What each generated module declared, for the tables and the data file.</td></tr>
+<tr><td><code>src/cdispatch/handwritten.py</code></td><td>The entry points whose C is written by a person.</td></tr>
+<tr><td><code>src/c/pygl.h</code></td><td>The macro vocabulary every generated stub is written in.</td></tr>
+<tr><td><code>src/c/pygl_runtime.c</code></td><td>Dispatch tables, buffer acquisition, image and array helpers.</td></tr>
+<tr><td><code>OpenGL/_declarations.py</code></td><td>Filling a friendly module's namespace from either source.</td></tr>
+<tr><td><code>OpenGL/_dispatch/support.py</code></td><td>Resolution, demotion, and what the C calls back into.</td></tr>
+<tr><td><code>OpenGL/wrapper.py</code></td><td>The ctypes implementation of everything above.</td></tr>
+</table>
+
+<p>The maintainer's guide to the generator is
+<code>src/cdispatch/README.md</code>; the design record, including what was
+tried and measured, is <code>plans/C-DISPATCH.md</code>.  What the C layer
+covers and how it differs is <a href="c-dispatch.html">the C dispatch
+layer</a>.</p>
+
+</body>
+</html>

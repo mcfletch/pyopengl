@@ -11,8 +11,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.EGL import _types, _glgets
-from OpenGL.raw.EGL.KHR.swap_buffers_with_damage import *
-from OpenGL.raw.EGL.KHR.swap_buffers_with_damage import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.EGL.KHR.swap_buffers_with_damage')
 
 def glInitSwapBuffersWithDamageKHR():
     '''Return boolean indicating whether this extension is available'''

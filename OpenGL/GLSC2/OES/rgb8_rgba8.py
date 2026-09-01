@@ -16,8 +16,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GLSC2 import _types, _glgets
-from OpenGL.raw.GLSC2.OES.rgb8_rgba8 import *
-from OpenGL.raw.GLSC2.OES.rgb8_rgba8 import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLSC2.OES.rgb8_rgba8')
 
 def glInitRgb8Rgba8OES():
     '''Return boolean indicating whether this extension is available'''

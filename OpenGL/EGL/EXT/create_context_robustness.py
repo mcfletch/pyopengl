@@ -11,8 +11,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.EGL import _types, _glgets
-from OpenGL.raw.EGL.EXT.create_context_robustness import *
-from OpenGL.raw.EGL.EXT.create_context_robustness import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.EGL.EXT.create_context_robustness')
 
 def glInitCreateContextRobustnessEXT():
     '''Return boolean indicating whether this extension is available'''

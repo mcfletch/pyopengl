@@ -11,8 +11,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GLX import _types, _glgets
-from OpenGL.raw.GLX.MESA.set_3dfx_mode import *
-from OpenGL.raw.GLX.MESA.set_3dfx_mode import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLX.MESA.set_3dfx_mode')
 
 def glInitSet3DfxModeMESA():
     '''Return boolean indicating whether this extension is available'''

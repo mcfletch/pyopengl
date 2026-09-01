@@ -1,0 +1,290 @@
+"""What the generated ``OpenGL.raw`` modules used to declare.
+
+Every one of them held the same three things -- an extension name, a set of
+constants, and a set of entry-point declarations -- and nothing else.  A
+friendly module took them all with ``from OpenGL.raw.GL.VERSION.GL_1_1 import
+*``, which meant building a module object and a dictionary in order to copy
+that dictionary into another one.
+
+:func:`define` writes them into the friendly module's own namespace instead, so
+there is one dictionary rather than two and no module in between.
+
+Two sources hold the same facts, and which one answers depends only on what was
+built:
+
+* the C dispatch extension, where the declarations sit in ``.rodata`` and cost
+  nothing until asked for;
+* ``OpenGL/raw/_declarations/<API>.dat``, written by the generator in the same
+  pass, for an installation with no compiled extension.
+
+They are generated together from the registry and the shipped tree, so they
+cannot drift.  ``python src/regenerate_c.py`` writes both.
+"""
+
+import importlib
+import os
+
+__all__ = ['define', 'contents_for', 'clear_caches']
+
+#: Where the marshalled declarations live, relative to this file.
+DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'raw', '_declarations')
+
+#: One entry per API, filled on the first module of that API that asks.
+_data = {}
+
+#: Resolved type expressions, keyed by ``(api, text)``.  The vocabulary is
+#: small and the uses are not: ``_cs.GLenum`` is written thousands of times
+#: across the tree, and evaluating it thousands of times was the largest single
+#: cost of importing without the C extension.
+_types_cache = {}
+
+#: The C extension, once, or False when there is none to use.
+_extension = None
+
+#: The namespace each generated module declares, built on the first friendly
+#: module that asks and copied from thereafter.  GL_1_1 re-exports GL_1_0,
+#: GL_1_2 re-exports GL_1_1, and forty friendly modules stand on the chain; a
+#: module object used to be what stopped that from being rebuilt every time,
+#: and this is what stops it now.
+_namespaces = {}
+
+
+def _c_source():
+    """The dispatch extension, if it is the implementation in use."""
+    global _extension
+    if _extension is None:
+        from OpenGL import _configflags
+
+        _extension = False
+        if _configflags.DISPATCH == 'c':
+            try:
+                from OpenGL import _dispatch
+            except ImportError:
+                pass
+            else:
+                # Installing is what fills `entry_points`, and nothing else
+                # does it now: it used to happen on the first createFunction
+                # call, and no generated declaration runs any more.
+                if _dispatch.install():
+                    _extension = _dispatch._dispatch
+    return _extension
+
+
+def _data_source(api):
+    """The shipped declarations for one API, read once."""
+    if api not in _data:
+        import marshal
+
+        path = os.path.join(DATA, '%s.dat' % (api,))
+        try:
+            with open(path, 'rb') as handle:
+                _data[api] = marshal.load(handle)
+        except OSError:
+            _data[api] = {}
+    return _data[api]
+
+
+def api_of(module_name):
+    """``OpenGL.raw.GL.VERSION.GL_1_1`` names the GL API."""
+    parts = module_name.split('.')
+    return parts[2] if len(parts) > 2 else 'GL'
+
+
+def contents_for(module_name):
+    """What one generated module declared, or None if nothing describes it.
+
+    A mapping with ``extension``, ``constants``, ``commands`` and ``reexports``
+    -- the same shape from either source, so nothing above here has to know
+    which one answered.
+    """
+    extension = _c_source()
+    if extension:
+        # The two sources are generated together and describe the same set, so
+        # one that does not know a module says the module is not generated --
+        # reading the other to be told so again would mean loading half a
+        # megabyte to learn nothing.
+        return extension.module_contents(module_name)
+    blob = _data_source(api_of(module_name)).get(module_name)
+    if blob is None:
+        return None
+    import marshal
+
+    name, constants, commands, reexports = marshal.loads(blob)
+    return {
+        'extension': name,
+        'constants': constants,
+        'commands': commands,
+        'reexports': reexports,
+    }
+
+
+def define(namespace, module_name):
+    """Define, in ``namespace``, everything ``module_name`` declared.
+
+    Called from a friendly module in place of the ``import *`` that used to
+    reach the generated module::
+
+        _EXTENSION_NAME = define(globals(), 'OpenGL.raw.GL.VERSION.GL_1_1')
+
+    Returns the extension name, because the caller wants it under
+    ``_EXTENSION_NAME`` and it is the one thing the module says about itself.
+    """
+    built, extension = _build(module_name)
+    namespace.update(built)
+    return extension
+
+
+def _build(module_name):
+    """The names one generated module declares, and its extension name.
+
+    Built once and handed out by reference after that, which is what a module
+    object used to do for this.
+    """
+    remembered = _namespaces.get(module_name)
+    if remembered is not None:
+        return remembered
+
+    contents = contents_for(module_name)
+    if contents is None:
+        # Nothing describes it: the module is one of the hand-written few, or
+        # this is a checkout with neither the extension nor the data.  Importing
+        # it is what used to happen and still works.
+        module = importlib.import_module(module_name)
+        exported = getattr(module, '__all__', None)
+        if exported is None:
+            # What ``import *`` would have taken: a private name is the
+            # module's own working material, not something it defines.
+            exported = [key for key in vars(module) if not key.startswith('_')]
+        built = {key: getattr(module, key) for key in exported}
+        result = (built, getattr(module, '_EXTENSION_NAME', ''))
+        _namespaces[module_name] = result
+        return result
+
+    built = {}
+    # A module built on another one re-exported it, and a caller of the
+    # friendly module expects those names too.
+    for source in contents['reexports']:
+        built.update(_build(source)[0])
+
+    from OpenGL.constant import Constant
+
+    for key, value in contents['constants'].items():
+        built[key] = Constant(key, value)
+
+    api = api_of(module_name)
+    extension = contents['extension']
+    for command, arguments, types in contents['commands']:
+        built[command] = entry_point(
+            api, command, extension, module_name, arguments, types
+        )
+    result = (built, extension)
+    _namespaces[module_name] = result
+    return result
+
+
+def entry_point(api, name, extension, module_name, arguments, types):
+    """The callable a client gets for one entry point.
+
+    The C implementation where there is one, and the ctypes binding otherwise.
+    Either way the declaration is remembered rather than built, because what
+    builds a ctypes binding is only wanted where a client demotes -- which
+    happens for a few dozen entry points out of nearly five thousand.
+    """
+    from OpenGL._dispatch import entry_points, support
+
+    proc = entry_points.get((api, name))
+    if proc is None:
+        # No C entry point, so the ctypes binding is the entry point rather
+        # than something to fall back to: build it, and do not also record how
+        # to build it.
+        return Declaration(api, name, extension, module_name, arguments, types)()
+    # Where the C implements it, what the binding is for is demotion and the
+    # argtypes/restype/DLL attributes.  Few callers ever ask, so the
+    # declaration is remembered and the binding built if one does.
+    support.register_ctypes_factory(
+        api, name, Declaration(api, name, extension, module_name, arguments, types)
+    )
+    support.register_module(api, name, module_name)
+    return proc
+
+
+class Declaration:
+    """What a generated module's ``@_p.types(...) def glFoo(...)`` said.
+
+    Held as the text it was written in and turned into a ctypes binding on the
+    first call that asks for one, because most entry points never see one.
+    """
+
+    __slots__ = ('_arguments', '_types', 'api', 'extension', 'module', 'name')
+
+    def __init__(self, api, name, extension, module, arguments, types):
+        self.api = api
+        self.name = name
+        self.extension = extension
+        self.module = module
+        self._arguments = arguments
+        self._types = types
+
+    def _resolve_types(self):
+        """``('None', '_cs.GLenum', 'arrays.GLfloatArray')`` as the types."""
+        # ctypes and arrays are named by the expressions; the three names are
+        # the whole vocabulary a declaration is written in.
+        import ctypes
+
+        from OpenGL import arrays
+
+        types = self._types
+        if isinstance(types, str):  # from the C table, comma-joined
+            types = types.split(',')
+        namespace = None
+        resolved = []
+        for text in types:
+            key = (self.api, text)
+            found = _types_cache.get(key)
+            if found is None:
+                if namespace is None:
+                    namespace = {
+                        'ctypes': ctypes,
+                        'arrays': arrays,
+                        '_cs': importlib.import_module(
+                            'OpenGL.raw.%s._types' % (self.api,)
+                        ),
+                    }
+                # The text was written by the generator out of the shipped
+                # tree; it is our own source arriving by a longer road.
+                found = _types_cache[key] = eval(text, namespace)
+            resolved.append(found)
+        return resolved
+
+    def __call__(self):
+        """The ctypes binding the declaration describes."""
+        from OpenGL import platform
+
+        types = self._resolve_types()
+        errors = importlib.import_module('OpenGL.raw.%s._errors' % (self.api,))
+        arguments = self._arguments
+        if isinstance(arguments, str):
+            arguments = [name for name in arguments.split(',') if name]
+        # nullFunction rather than createFunction: createFunction hands back
+        # the C entry point where there is one, and what wants a binding here
+        # wants the thing underneath it.
+        return platform.nullFunction(
+            self.name,
+            getattr(platform.PLATFORM, self.api, None) or platform.PLATFORM.GL,
+            resultType=types[0],
+            argTypes=tuple(types[1:]),
+            doc=None,
+            argNames=tuple(arguments),
+            extension=self.extension,
+            module=self.module,
+            error_checker=errors._error_checker,
+        )
+
+
+def clear_caches():
+    """Forget which source answered.  For the tests that compare them."""
+    global _extension
+    _extension = None
+    _data.clear()
+    _namespaces.clear()
+    _types_cache.clear()

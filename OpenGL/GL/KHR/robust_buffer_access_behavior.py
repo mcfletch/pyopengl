@@ -24,8 +24,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
-from OpenGL.raw.GL.KHR.robust_buffer_access_behavior import *
-from OpenGL.raw.GL.KHR.robust_buffer_access_behavior import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.KHR.robust_buffer_access_behavior')
 
 def glInitRobustBufferAccessBehaviorKHR():
     '''Return boolean indicating whether this extension is available'''

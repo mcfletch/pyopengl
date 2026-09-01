@@ -11,8 +11,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GLES1 import _types, _glgets
-from OpenGL.raw.GLES1.OES.compressed_ETC1_RGB8_sub_texture import *
-from OpenGL.raw.GLES1.OES.compressed_ETC1_RGB8_sub_texture import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GLES1.OES.compressed_ETC1_RGB8_sub_texture')
 
 def glInitCompressedEtc1Rgb8SubTextureOES():
     '''Return boolean indicating whether this extension is available'''

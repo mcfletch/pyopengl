@@ -11,8 +11,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.EGL import _types, _glgets
-from OpenGL.raw.EGL.KHR.stream_fifo import *
-from OpenGL.raw.EGL.KHR.stream_fifo import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.EGL.KHR.stream_fifo')
 
 def glInitStreamFifoKHR():
     '''Return boolean indicating whether this extension is available'''

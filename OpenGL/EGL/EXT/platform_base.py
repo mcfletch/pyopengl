@@ -11,8 +11,8 @@ from OpenGL import constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.EGL import _types, _glgets
-from OpenGL.raw.EGL.EXT.platform_base import *
-from OpenGL.raw.EGL.EXT.platform_base import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.EGL.EXT.platform_base')
 
 # Cannot use this to check for the extension because the extension
 # checking requires a context

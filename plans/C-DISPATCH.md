@@ -1216,6 +1216,64 @@ Reference machine as above, `OpenGL_accelerate` active, error checking on.
 `glGetIntegerv` gains least because allocating the output array dominates what
 is left.
 
+**Per frame, which is the number that decides whether any of this matters.**
+A frame of 2,000 objects, each doing a bind, three uniforms and a draw — the
+shape a tutorial teaches and a great deal of shipped application code still
+has:
+
+| | ms/frame | ns/call | GL calls inside a 16.7 ms frame |
+|---|---|---|---|
+| ctypes | 6.77 | 677 | ~25,000 |
+| C | **0.78** | **78** | **~214,000** |
+
+8.7×. Under ctypes that frame spends 40% of a 60 fps budget in Python
+dispatch; under C, 4.7%.
+
+**Optimised code sees almost none of this, and that is the expected result.**
+A draw-call-bound frame went 5.00 ms to 0.48 ms, but glisteel gains 1.05× and
+`crowd_demo` about 1.0×, because both are GPU- and compute-bound and neither
+comes near the ceiling. OpenGLContext batches, so it is the *worst* case for
+demonstrating the work rather than the best. What moved is the ceiling: the
+gain belongs to naive client code, not to ours.
+
+**Import and resident size**, `import OpenGL.GL`, minimum of twelve runs:
+
+| | import | RSS |
+|---|---|---|
+| before this work | 72.2 ms | 60 MB |
+| ctypes | 53.5 ms | 34 MB |
+| **C** | **34.2 ms** | **30 MB** |
+
+Three defects account for the difference, none of them a trade:
+
+- `createFunction` ended in `entry_point_for(...) or binding`, and `or` asks
+  the left operand whether it is true — which for an entry point means
+  "resolvable in the current context". Importing asked the driver which
+  context was current **2,286 times** and attempted as many resolutions, at
+  the one moment when there is no context and no answer can be right.
+- A ctypes binding was built for every entry point and discarded on the line
+  that built it. **1,143 per import.** It exists for demotion and for the
+  `argtypes`/`restype`/`DLL` attributes, which few callers ever read, so it is
+  now built when something asks.
+- **The GL driver was loaded at import.** A module-level `if
+  _simple.glGetCompressedTexImage:` in `GL_1_3.py` asks whether an entry point
+  resolves; answering it asked which context was current; answering *that*
+  probed EGL and then GLX, which mapped `libnvidia-gpucomp` (19.5 MB) and
+  `libnvidia-glcore` (7.0 MB) before the program had a context. The context
+  question is now answered only from an interface already loaded in the
+  process, and `None` means "ask again later" rather than "there is none".
+
+### Wheel size
+
+| | before | after |
+|---|---|---|
+| `pyopengl` | 3.06 MB, `py3-none-any` | 6.39 MB, `cp312-linux_x86_64` |
+| `pyopengl_accelerate` | 3.08 MB | 3.08 MB, untouched |
+
+The extension is 2.89 MB of the increase. The larger change is that one
+universal wheel becomes one per platform × Python version. **This is why the C
+build belongs in `pyopengl_accelerate`** — see next steps.
+
 ### Coverage
 
 **4,819 of 4,839 bindings (99.6%).** What remains, with the reason each is
@@ -1246,10 +1304,14 @@ not express.
 | 5 Tier 3 families | done: images, typed arrays, string arrays, retained client pointers and `glShaderSource`, taking coverage to 99.6% |
 | 6 per-context dispatch | done, with the multi-context tests as its exit criterion |
 | 7 error checking | done, including `GL_KHR_debug` |
-| 8 docstrings and `.pyi` | done; mypy accepts client code using both the generated part and the fallback |
+| 8 docstrings and `.pyi` | done, and it serves **both** implementations: the stubs are emitted from the command record, cover all commands rather than the C-implemented subset, and `py.typed` ships, so a type checker uses them under `PYOPENGL_DISPATCH=ctypes` with nothing to port |
 | 9 virtual packages | built, and off by default: the exit criterion is not met (below) |
 | 10 flip the default | done: `PYOPENGL_DISPATCH` defaults to `c`, and `ctypes` remains selectable |
-| 11 retire what is dead | not appropriate while both implementations ship |
+| 11 retire what is dead | unblocked by phase 14: moving the extension into accelerate puts the superseded Cython modules beside it |
+| 12 annotations as data | next: one extraction, then the generator reads no Python |
+| 13 friendly modules reduced to definitions | 987 of 1,289 already are; 259 mechanical chains to absorb; 43 keep hand-written code |
+| 14 the extension moves to `pyopengl_accelerate` | keeps `pyopengl` a universal wheel and makes "is accelerate installed?" the whole dispatch question |
+| 15 delete `OpenGL/raw/**` | after 12 and 13, the files hold nothing that is not held elsewhere |
 
 The differential work found two divergences no functional test would have
 caught, both in attributes a client reads without calling anything:
@@ -1260,6 +1322,111 @@ second is now decided deliberately — the core declaration wins, because it
 resolves without an extension check — and the test asserts the property that
 matters rather than the string: no entry point that resolves under ctypes
 fails to resolve under C.
+
+### The generated modules, and what replaced them
+
+Every module under `OpenGL/raw` was purely generated. Two things now hold the
+same facts: the C extension, in `.rodata`, and
+`OpenGL/raw/_declarations/<API>.dat`, marshalled per module so that a program
+using forty of them does not parse the other twelve hundred. Both are written
+by the same generator pass, so they cannot drift.
+
+A friendly module no longer imports a generated one. It says:
+
+```python
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.VERSION.GL_1_1')
+```
+
+`src/migrate_raw_imports.py` performed that rewrite across 1,289 modules and is
+idempotent, so it can be run again as new ones are generated.
+
+**Verified by comparison, not by inspection.** Every public name and every
+constant value of all 1,208 importable friendly modules was captured before and
+after, under both implementations, and compared. Nothing moved, nothing broke,
+and **70 modules that had never imported at all now do** — `GL.NV.draw_vulkan_image`,
+`EGL.KHR.debug` and others died on types missing from `_types`, and the type
+text is now only evaluated if a ctypes binding is actually wanted.
+
+**It bought no speed, and that is worth recording.** Import went 43.6 ms to
+42.8 ms on the C path and 44.5 ms to 53.3 ms on the pure-Python one; the work
+the generated module bodies did moved into `define()` rather than disappearing.
+Most of the pure-Python regression came back by memoising type-expression
+evaluation and making the data file an index of per-module blobs. The
+justification for the change is not speed: it is that the declarations become
+data with one source, and that 1,287 machine-written Python modules — which
+were carrying the 70 dead modules above — stop being the source of truth.
+
+### Next steps
+
+**1. Invert the generator: annotations as data, nothing parsing Python.**
+
+The generator currently reads `OpenGL/raw/**` — which says *"Autogenerated by
+xml_generate script, do not edit"* at the top of every file — to recover facts
+that were in `gl.xml` one step earlier. That is a redundant hop, and it makes
+generated Python the source of truth for a generator. Of 4,839 commands:
+
+| | commands | where the information lives |
+|---|---|---|
+| plain pass-through | 3,660 | entirely in the registry XML |
+| carrying a customisation | 1,179 | hand-authored in the friendly modules |
+
+Only the 1,179 need reading. The plan is one extraction, then never again:
+
+- extract those customisations to a reviewed annotation table, checked in and
+  maintained as data;
+- capture into it the facts that live only in the shipped tree — EGL, whose
+  registry is not vendored, and the recorded drift (7 commands, 3 argument-name
+  differences, 158 enums);
+- thereafter `registry XML + annotation table -> C, .pyi, .dat, and the
+  declaration half of the friendly modules`. Nothing parses Python. A new
+  registry release regenerates everything; a new *convention* is an edit to the
+  table.
+
+**2. Drive the ctypes wrapping from the same annotations.** The annotations
+say what the Python signature is; today the C consumes them and the ctypes path
+gets the same information by executing procedural wrapper chains at import.
+Both should be generated from the one table, including the type-punned
+variants (`glVertex3f` and relatives, `glDrawPixelsub`) that
+`OpenGL/GL/pointers.py` and `OpenGL/GL/images.py` build procedurally today.
+
+**3. Reduce the friendly modules to the definitions.** Of the 1,289 that take
+definitions:
+
+| | count | |
+|---|---|---|
+| already just the definitions | 987 | 76.6% |
+| mechanical wrapper chains only — annotatable | 259 | 20.1% |
+| genuinely hand-written code | 43 | 3.3% |
+
+Absorbing the 259 leaves **1,246 of 1,289 (96.7%)** holding nothing but the
+definitions. The 43 that remain are where hand-written code belongs:
+`GLUT/freeglut.py` (67 statements), `GL_2_0.py`, `ARB/imaging.py`,
+`GL/shaders.py`.
+
+**4. Correct EGL.** 4.0 is the release in which previous errors are fixed
+rather than preserved. The EGL declarations are currently whatever the shipped
+tree happens to say, because its registry is not vendored; they should be made
+correct.
+
+**5. Move the C build into `pyopengl_accelerate`.** It is the optional
+compiled companion, released from this repository alongside `pyopengl`, and
+"is accelerate installed?" is already the question that selects the existing
+accelerators. Consequences: `pyopengl` stays `py3-none-any` with the `.dat`
+tables in it, `accelerate` carries the extension, PyPy simply does not install
+accelerate, and there is no wheel matrix on the core package. The two are built
+and released together from one checkout, so requiring exactly equal versions is
+acceptable and should be enforced. The Cython `wrapper`, `latebind`,
+`errorchecker` and `arraydatatype` in accelerate are largely superseded by the
+C dispatch, so this also puts them where they can be retired together
+(Phase 11).
+
+**6. Then delete `OpenGL/raw/**`.** Once the declarations are generated from
+the table and the friendly modules take them from `define()`, the 1,287
+generated files hold nothing that is not held elsewhere. Removing them takes
+0.70 MB off the wheel. `PYOPENGL_VIRTUAL_MODULES` becomes the compatibility
+path for third-party `from OpenGL.raw.X import *` and should then default on,
+since it would be the only thing making those names resolve.
 
 ### Beyond the phases
 

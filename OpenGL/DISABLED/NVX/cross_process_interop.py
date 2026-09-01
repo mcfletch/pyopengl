@@ -11,8 +11,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.DISABLED import _types, _glgets
-from OpenGL.raw.DISABLED.NVX.cross_process_interop import *
-from OpenGL.raw.DISABLED.NVX.cross_process_interop import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.DISABLED.NVX.cross_process_interop')
 
 def glInitCrossProcessInteropNVX():
     '''Return boolean indicating whether this extension is available'''

@@ -40,8 +40,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
-from OpenGL.raw.GL.ARB.sampler_objects import *
-from OpenGL.raw.GL.ARB.sampler_objects import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.ARB.sampler_objects')
 
 def glInitSamplerObjectsARB():
     '''Return boolean indicating whether this extension is available'''

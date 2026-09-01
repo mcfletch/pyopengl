@@ -11,8 +11,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
-from OpenGL.raw.GL.VERSION.GL_1_5 import *
-from OpenGL.raw.GL.VERSION.GL_1_5 import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.VERSION.GL_1_5')
 
 def glInitGl15VERSION():
     '''Return boolean indicating whether this extension is available'''

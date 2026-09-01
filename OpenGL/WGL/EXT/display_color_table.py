@@ -11,8 +11,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.WGL import _types, _glgets
-from OpenGL.raw.WGL.EXT.display_color_table import *
-from OpenGL.raw.WGL.EXT.display_color_table import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.WGL.EXT.display_color_table')
 
 def glInitDisplayColorTableEXT():
     '''Return boolean indicating whether this extension is available'''

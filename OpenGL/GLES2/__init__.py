@@ -1,6 +1,7 @@
 """OpenGL.EGL the portable interface to GL environments"""
 import ctypes as _ctypes
-from OpenGL.raw.GLES2._types import *
+from OpenGL._declarations import define as _define
+_define(globals(), 'OpenGL.raw.GLES2._types')
 from OpenGL.GLES2.VERSION.GLES2_2_0 import *
 
 from OpenGL.GLES2 import vboimplementation as _gles2_implementation

@@ -1945,6 +1945,21 @@ static PyObject *pygl_py_sync_context_fast(PyObject *module, PyObject *noargs)
 /* What a generated module contains, so that it can be built rather than
  * compiled and executed.  Reading a table is what makes 1,279 files
  * unnecessary. */
+/* Told to us once a context exists.  Asking the platform which of EGL and GLX
+ * owns the current context means probing both, and probing loads the driver --
+ * 26 MB of it on this machine -- so it is not a question to answer at import,
+ * when the honest answer is "none of them". */
+static PyObject *pygl_py_set_context_getter(PyObject *module, PyObject *argument)
+{
+    unsigned long long address = PyLong_AsUnsignedLongLong(argument);
+    (void)module;
+    if (PyErr_Occurred()) {
+        return NULL;
+    }
+    pygl_get_current_context = (void *(*)(void))(uintptr_t)address;
+    Py_RETURN_NONE;
+}
+
 static PyObject *pygl_py_module_names(PyObject *module, PyObject *noargs)
 {
     PyObject *result;
@@ -1966,19 +1981,41 @@ static PyObject *pygl_py_module_names(PyObject *module, PyObject *noargs)
     return result;
 }
 
+/* The rows are emitted in name order, so finding one is a binary search:
+ * eleven comparisons rather than the six hundred a scan averages, and every
+ * friendly module asks once as it is imported. */
+static const PyGLModule *pygl_module_for(const char *wanted)
+{
+    Py_ssize_t low = 0, high = pygl_module_count - 1;
+    while (low <= high) {
+        Py_ssize_t middle = low + (high - low) / 2;
+        int order = strcmp(pygl_modules[middle].module, wanted);
+        if (order == 0) {
+            return &pygl_modules[middle];
+        }
+        if (order < 0) {
+            low = middle + 1;
+        } else {
+            high = middle - 1;
+        }
+    }
+    return NULL;
+}
+
 static PyObject *pygl_py_module_contents(PyObject *module, PyObject *argument)
 {
     const char *wanted = PyUnicode_AsUTF8(argument);
-    Py_ssize_t index, item;
+    const PyGLModule *entry;
+    Py_ssize_t item;
     (void)module;
     if (wanted == NULL) {
         return NULL;
     }
-    for (index = 0; index < pygl_module_count; index++) {
-        const PyGLModule *entry = &pygl_modules[index];
+    {
         PyObject *enums, *commands, *reexports, *result;
-        if (strcmp(entry->module, wanted) != 0) {
-            continue;
+        entry = pygl_module_for(wanted);
+        if (entry == NULL) {
+            Py_RETURN_NONE;
         }
         enums = PyDict_New();
         commands = PyList_New(entry->command_count);
@@ -2064,6 +2101,8 @@ static PyMethodDef pygl_methods[] = {
      "Re-read the current context from the platform and switch tables."},
     {"sync_context_fast", pygl_py_sync_context_fast, METH_NOARGS,
      "As sync_context, through the raw platform address."},
+    {"set_context_getter", pygl_py_set_context_getter, METH_O,
+     "Address of the platform's current-context function, once one exists."},
     {"module_names", pygl_py_module_names, METH_NOARGS,
      "Every generated module the layer can build without a file."},
     {"module_contents", pygl_py_module_contents, METH_O,

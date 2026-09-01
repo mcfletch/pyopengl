@@ -111,8 +111,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
-from OpenGL.raw.GL.EXT.gpu_shader4 import *
-from OpenGL.raw.GL.EXT.gpu_shader4 import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.EXT.gpu_shader4')
 
 def glInitGpuShader4EXT():
     '''Return boolean indicating whether this extension is available'''

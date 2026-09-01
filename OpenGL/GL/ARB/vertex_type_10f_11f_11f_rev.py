@@ -23,8 +23,8 @@ from OpenGL import platform, constant, arrays
 from OpenGL import extensions, wrapper
 import ctypes
 from OpenGL.raw.GL import _types, _glgets
-from OpenGL.raw.GL.ARB.vertex_type_10f_11f_11f_rev import *
-from OpenGL.raw.GL.ARB.vertex_type_10f_11f_11f_rev import _EXTENSION_NAME
+from OpenGL._declarations import define as _define
+_EXTENSION_NAME = _define(globals(), 'OpenGL.raw.GL.ARB.vertex_type_10f_11f_11f_rev')
 
 def glInitVertexType10F11F11FRevARB():
     '''Return boolean indicating whether this extension is available'''

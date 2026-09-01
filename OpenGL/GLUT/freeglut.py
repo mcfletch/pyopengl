@@ -10,7 +10,8 @@ from OpenGL import constant
 FUNCTION_TYPE = platform.PLATFORM.functionTypeFor( platform.PLATFORM.GLUT )
 from OpenGL.GLUT import special
 from OpenGL import wrapper as _wrapper
-from OpenGL.raw.GL._types import *
+from OpenGL._declarations import define as _define
+_define(globals(), 'OpenGL.raw.GL._types')
 
 import ctypes
 c_int = ctypes.c_int 
