@@ -1,6 +1,11 @@
 #! /usr/bin/env python
 """Regenerate the C dispatch layer from the shipped PyOpenGL tree.
 
+The C is built by ``pyopengl_accelerate``, so that is where the generated
+sources land: ``accelerate/src/c/generated``.  Both packages live in this
+repository and are released together, which is what makes a generator in one
+and a build in the other reasonable.
+
 Run after changing anything in ``src/cdispatch``::
 
     python src/regenerate_c.py              # fetch the registries, then generate
@@ -11,8 +16,8 @@ generating from current inputs rather than from whatever was last cloned.  See
 ``src/fetch_registries.py``; where there is no network the existing checkouts
 are used and the run says so.
 
-The generated sources land in ``src/c/generated`` and are compiled into the
-``OpenGL._dispatch._dispatch`` extension module.
+The generated sources land in ``accelerate/src/c/generated`` and are compiled into the
+``OpenGL_accelerate.dispatch`` extension module.
 """
 
 import argparse
@@ -34,11 +39,15 @@ def main(argv=None):
         '--package', default=os.path.join(ROOT, 'OpenGL'), help='the OpenGL package'
     )
     parser.add_argument(
-        '--output', default=os.path.join(HERE, 'c', 'generated'), help='where to write'
+        '--output',
+        default=os.path.join(ROOT, 'accelerate', 'src', 'c', 'generated'),
+        help='where to write',
     )
     parser.add_argument(
         '--manifest',
-        default=os.path.join(HERE, 'c', 'generated', 'manifest.json'),
+        default=os.path.join(
+            ROOT, 'accelerate', 'src', 'c', 'generated', 'manifest.json'
+        ),
         help='where to record what was generated',
     )
     parser.add_argument(

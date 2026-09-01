@@ -49,14 +49,35 @@ AVAILABLE = False
 ACTIVE = False
 entry_points = {}
 
+#: Where the compiled layer lives.  It is built by ``pyopengl_accelerate``,
+#: the optional compiled companion released from the same repository, so that
+#: PyOpenGL itself stays a single universal wheel.  Without accelerate
+#: installed there is no extension and the ctypes implementation runs, which is
+#: exactly the arrangement PyOpenGL has always had for its accelerators.
 try:
-    from OpenGL._dispatch import _dispatch as _c
-except ImportError as _err:  # pragma: no cover - depends on the build
+    from OpenGL_accelerate import dispatch as _c
+except ImportError as _err:  # pragma: no cover - depends on what is installed
     _c = None
     _IMPORT_ERROR = _err
 else:
     AVAILABLE = True
     _IMPORT_ERROR = None
+
+
+def _versions_match():
+    """Whether the two packages are the pair they were generated as.
+
+    They share the generated slot numbering and table layout, so a mismatched
+    pair does not fail cleanly -- it dispatches through the wrong indices.
+    They are released together, so requiring equality costs nothing and turns
+    a confusing crash into a sentence.
+    """
+    if _c is None:
+        return True
+    from OpenGL.version import __version__ as ours
+
+    theirs = getattr(_c, '__pyopengl_version__', None)
+    return theirs is None or theirs == ours
 
 
 def _current_context_getter():
@@ -153,6 +174,16 @@ def install():
     global ACTIVE
     if ACTIVE or not AVAILABLE:
         return ACTIVE
+    if not _versions_match():
+        from OpenGL.version import __version__ as ours
+
+        raise ImportError(
+            'pyopengl %s and pyopengl_accelerate %s were not built together; '
+            'they share generated tables, so the pair must match exactly. '
+            'Install the same version of both, or uninstall '
+            'pyopengl_accelerate to run on ctypes.'
+            % (ours, getattr(_c, '__pyopengl_version__', 'unknown'))
+        )
     entry_points.update(_c.entry_points)
     configure()
 

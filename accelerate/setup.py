@@ -19,6 +19,61 @@ HERE = os.path.normpath(os.path.abspath(os.path.dirname(__file__)))
 extensions = []
 
 
+def dispatch_extension():
+    """The registry-generated C implementation of the OpenGL entry points.
+
+    It lives here rather than in ``pyopengl`` so that ``pyopengl`` stays a
+    single universal wheel: the C is what needs a compiler and a wheel per
+    platform, and this package is already the optional compiled companion.
+    "Is the fast path available?" is then the question it has always been --
+    is accelerate installed?
+
+    Both packages are released together from one repository, and the two
+    share generated tables, so the versions must match exactly; the module
+    checks that at import.
+    """
+    import glob
+
+    if os.environ.get('PYOPENGL_NO_C_DISPATCH'):
+        return []
+    generated = os.path.join(HERE, 'src', 'c', 'generated')
+    sources = sorted(
+        os.path.relpath(path, HERE).replace(os.sep, '/')
+        for path in glob.glob(os.path.join(generated, '*.c'))
+    )
+    if not sources:
+        return []
+    sources.insert(0, 'src/c/pygl_handwritten.c')
+    sources.insert(0, 'src/c/pygl_runtime.c')
+    # setuptools does not work out header dependencies, so a change to pygl.h
+    # would otherwise leave the generated objects stale and the build mixed:
+    # objects compiled against one version of a macro linked with a runtime
+    # compiled against another.
+    headers = [
+        'src/c/pygl.h',
+        'src/c/generated/pygl_elements.h',
+        'src/c/generated/pygl_glgets.h',
+    ]
+    return [
+        Extension(
+            'OpenGL_accelerate.dispatch',
+            sources=sources,
+            include_dirs=['src/c', 'src/c/generated'],
+            depends=[
+                path for path in headers if os.path.exists(os.path.join(HERE, path))
+            ],
+            # Optional so a source install without a compiler still yields a
+            # working accelerate; PyOpenGL falls back to ctypes on its own.
+            # Set PYOPENGL_REQUIRE_C_DISPATCH=1 while working on it, or a
+            # compile error is a warning and the stale object is kept.
+            optional=not os.environ.get('PYOPENGL_REQUIRE_C_DISPATCH'),
+        )
+    ]
+
+
+extensions.extend(dispatch_extension())
+
+
 def cython_extension(
     name,
     include_dirs=(),

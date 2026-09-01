@@ -2175,13 +2175,13 @@ static int pygl_init_errors(void)
 
 static struct PyModuleDef pygl_module_def = {
     PyModuleDef_HEAD_INIT,
-    "OpenGL._dispatch._dispatch",
+    "OpenGL_accelerate.dispatch",
     "Registry-generated C implementation of the OpenGL entry points.",
     -1,
     pygl_methods,
 };
 
-PyMODINIT_FUNC PyInit__dispatch(void)
+PyMODINIT_FUNC PyInit_dispatch(void)
 {
     PyObject *module, *entry_points;
 

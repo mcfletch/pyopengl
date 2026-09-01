@@ -74,7 +74,7 @@ class TestMultipleContexts(unittest.TestCase):
     def test_two_contexts_hold_two_tables(self):
         first = self._window(3, 3, core=True)
         second = self._window(2, 1)
-        from OpenGL._dispatch import _dispatch as extension
+        from OpenGL._dispatch import _c as extension
         from OpenGL.GL import GL_VERSION, glGetString
 
         a = self._become(first)
@@ -87,7 +87,7 @@ class TestMultipleContexts(unittest.TestCase):
 
     def test_an_entry_point_resolved_in_one_context_is_unresolved_in_the_other(self):
         """The table is per context, so resolution does not carry across."""
-        from OpenGL._dispatch import _dispatch as extension
+        from OpenGL._dispatch import _c as extension
         from OpenGL.GL import glBindTexture
 
         first = self._window(3, 3, core=True)
@@ -126,7 +126,7 @@ class TestMultipleContexts(unittest.TestCase):
         assert core_version and compat_version
 
     def test_forgetting_a_context_frees_its_table(self):
-        from OpenGL._dispatch import _dispatch as extension
+        from OpenGL._dispatch import _c as extension
         from OpenGL.GL import GL_VERSION, glGetString
 
         window = self._window(3, 3, core=True)

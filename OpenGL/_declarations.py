@@ -66,7 +66,7 @@ def _c_source():
                 # does it now: it used to happen on the first createFunction
                 # call, and no generated declaration runs any more.
                 if _dispatch.install():
-                    _extension = _dispatch._dispatch
+                    _extension = _dispatch._c
     return _extension
 
 

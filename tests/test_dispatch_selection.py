@@ -26,7 +26,7 @@ if %(block)r:
             return None
 
         def find_spec(self, name, target=None, path=None):
-            if name == 'OpenGL._dispatch._dispatch':
+            if name in ('OpenGL_accelerate.dispatch', 'OpenGL._dispatch._dispatch'):
                 raise ImportError('no extension in this build')
             return None
 

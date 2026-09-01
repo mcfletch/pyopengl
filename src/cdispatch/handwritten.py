@@ -2,7 +2,7 @@
 
 A few entry points promise their callers a computation rather than a
 description of their arguments, so no table can express them.  Each gets a C
-function in ``src/c/pygl_handwritten.c``, and is named here so the generator
+function in ``accelerate/src/c/pygl_handwritten.c``, and is named here so the generator
 emits its metadata and table entry pointing at that function.  A hand-written
 entry point is reached exactly as a generated one is.
 

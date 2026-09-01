@@ -87,7 +87,7 @@ class TestTheMacro:
 
     @pytest.fixture(scope='class')
     def header(self):
-        with open(os.path.join(HERE, 'src', 'c', 'pygl.h'), encoding='utf-8') as f:
+        with open(os.path.join(HERE, 'accelerate', 'src', 'c', 'pygl.h'), encoding='utf-8') as f:
             return f.read()
 
     @pytest.mark.parametrize(

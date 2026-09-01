@@ -104,7 +104,7 @@ def test_nothing_unexpected_is_added(both):
 
 
 def test_the_finder_covers_the_generated_tree():
-    from OpenGL._dispatch import _dispatch as extension
+    from OpenGL._dispatch import _c as extension
 
     names = extension.module_names()
     assert len(names) > 1200
@@ -112,7 +112,7 @@ def test_the_finder_covers_the_generated_tree():
 
 
 def test_a_built_module_carries_its_extension_name():
-    from OpenGL._dispatch import _dispatch as extension
+    from OpenGL._dispatch import _c as extension
 
     contents = extension.module_contents('OpenGL.raw.GL.VERSION.GL_1_1')
     assert contents['extension'] == 'GL_VERSION_GL_1_1'
@@ -122,7 +122,7 @@ def test_a_built_module_carries_its_extension_name():
 
 def test_a_built_module_re_exports_what_its_file_did():
     """GL_1_1 gets GL_TEXTURE_2D from GL_1_0, as the file's `import *` did."""
-    from OpenGL._dispatch import _dispatch as extension
+    from OpenGL._dispatch import _c as extension
 
     contents = extension.module_contents('OpenGL.raw.GL.VERSION.GL_1_1')
     assert 'OpenGL.raw.GL.VERSION.GL_1_0' in contents['reexports']
@@ -169,7 +169,7 @@ ROUNDTRIP = r'''
 import json, os, sys
 sys.path.insert(0, os.path.join(os.getcwd(), 'src'))
 from cdispatch import extract, modules
-from OpenGL._dispatch import _dispatch as extension
+from OpenGL._dispatch import _c as extension
 
 wrong = []
 for module in modules.read_modules(os.path.join(os.getcwd(), 'OpenGL'), extract.APIS):
