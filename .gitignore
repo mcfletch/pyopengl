@@ -6,6 +6,7 @@ __pycache__
 *.pyc
 *.pyd
 src/khronosapi
+src/eglapi
 accelerate/dist
 *.so
 mmap-test-data.dat

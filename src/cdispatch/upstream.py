@@ -25,6 +25,9 @@ BASELINE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
 #: against nothing here and are simply not reported on.
 REGISTRY_FILES = ('gl.xml', 'glx.xml', 'wgl.xml')
 
+#: EGL is a separate Khronos repository; extract.registry_files() knows where
+#: src/fetch_registries.py puts it.
+
 #: Which registry API name maps to which of PyOpenGL's namespaces.  A command
 #: can be required by several, so the comparison accepts a binding in any of
 #: the namespaces the registry offers it to.
@@ -86,10 +89,10 @@ def _registry_commands(registry_root):
 
     commands = {}
     enums = {}
-    for filename in REGISTRY_FILES:
-        path = os.path.join(registry_root, filename)
-        if not os.path.exists(path):
-            continue
+    from . import extract as _extract
+
+    for path in _extract.registry_files(registry_root):
+        filename = os.path.basename(path)
         registry = xmlreg.parse(path)
         api = os.path.splitext(filename)[0]
         for name, command in registry.command_set.items():

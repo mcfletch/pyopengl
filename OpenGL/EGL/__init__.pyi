@@ -43,6 +43,7 @@ UShortArrayResult: TypeAlias = Any
 AnyArrayResult: TypeAlias = Any
 
 # The enums.  They are Constant instances, which subclass int.
+EGL_ALLOC_NEW_DISPLAY_EXT: int
 EGL_ALPHA_FORMAT: int
 EGL_ALPHA_FORMAT_NONPRE: int
 EGL_ALPHA_FORMAT_PRE: int
@@ -97,6 +98,12 @@ EGL_COLOR_BUFFER_TYPE: int
 EGL_COLOR_FORMAT_HI: int
 EGL_COLOR_RGBA_HI: int
 EGL_COLOR_RGB_HI: int
+EGL_COMPOSITE_DEADLINE_ANDROID: int
+EGL_COMPOSITE_INTERVAL_ANDROID: int
+EGL_COMPOSITE_TO_PRESENT_LATENCY_ANDROID: int
+EGL_COMPOSITION_LATCH_TIME_ANDROID: int
+EGL_COMPOSITOR_DROP_NEWEST_FRAME_EXT: int
+EGL_COMPOSITOR_KEEP_NEWEST_FRAME_EXT: int
 EGL_CONDITION_SATISFIED: int
 EGL_CONDITION_SATISFIED_KHR: int
 EGL_CONDITION_SATISFIED_NV: int
@@ -157,19 +164,35 @@ EGL_DEPTH_ENCODING_NONE_NV: int
 EGL_DEPTH_ENCODING_NONLINEAR_NV: int
 EGL_DEPTH_ENCODING_NV: int
 EGL_DEPTH_SIZE: int
+EGL_DEQUEUE_READY_TIME_ANDROID: int
 EGL_DEVICE_EXT: int
+EGL_DEVICE_UUID_EXT: int
 EGL_DISCARD_SAMPLES_ARM: int
+EGL_DISPLAY_PRESENT_TIME_ANDROID: int
 EGL_DISPLAY_SCALING: int
 EGL_DMA_BUF_PLANE0_FD_EXT: int
+EGL_DMA_BUF_PLANE0_MODIFIER_HI_EXT: int
+EGL_DMA_BUF_PLANE0_MODIFIER_LO_EXT: int
 EGL_DMA_BUF_PLANE0_OFFSET_EXT: int
 EGL_DMA_BUF_PLANE0_PITCH_EXT: int
 EGL_DMA_BUF_PLANE1_FD_EXT: int
+EGL_DMA_BUF_PLANE1_MODIFIER_HI_EXT: int
+EGL_DMA_BUF_PLANE1_MODIFIER_LO_EXT: int
 EGL_DMA_BUF_PLANE1_OFFSET_EXT: int
 EGL_DMA_BUF_PLANE1_PITCH_EXT: int
 EGL_DMA_BUF_PLANE2_FD_EXT: int
+EGL_DMA_BUF_PLANE2_MODIFIER_HI_EXT: int
+EGL_DMA_BUF_PLANE2_MODIFIER_LO_EXT: int
 EGL_DMA_BUF_PLANE2_OFFSET_EXT: int
 EGL_DMA_BUF_PLANE2_PITCH_EXT: int
+EGL_DMA_BUF_PLANE3_FD_EXT: int
+EGL_DMA_BUF_PLANE3_MODIFIER_HI_EXT: int
+EGL_DMA_BUF_PLANE3_MODIFIER_LO_EXT: int
+EGL_DMA_BUF_PLANE3_OFFSET_EXT: int
+EGL_DMA_BUF_PLANE3_PITCH_EXT: int
 EGL_DRAW: int
+EGL_DRIVER_NAME_EXT: int
+EGL_DRIVER_UUID_EXT: int
 EGL_DRM_BUFFER_FORMAT_ARGB32_MESA: int
 EGL_DRM_BUFFER_FORMAT_MESA: int
 EGL_DRM_BUFFER_MESA: int
@@ -182,7 +205,10 @@ EGL_DRM_CRTC_EXT: int
 EGL_DRM_DEVICE_FILE_EXT: int
 EGL_DRM_PLANE_EXT: int
 EGL_EXTENSIONS: int
+EGL_EXTERNAL_REF_ID_EXT: int
 EGL_FALSE: int
+EGL_FIRST_COMPOSITION_GPU_FINISHED_TIME_ANDROID: int
+EGL_FIRST_COMPOSITION_START_TIME_ANDROID: int
 EGL_FIXED_SIZE_ANGLE: int
 EGL_FOREVER: int
 EGL_FOREVER_KHR: int
@@ -229,6 +255,7 @@ EGL_ITU_REC2020_EXT: int
 EGL_ITU_REC601_EXT: int
 EGL_ITU_REC709_EXT: int
 EGL_LARGEST_PBUFFER: int
+EGL_LAST_COMPOSITION_START_TIME_ANDROID: int
 EGL_LEVEL: int
 EGL_LINUX_DMA_BUF_EXT: int
 EGL_LINUX_DRM_FOURCC_EXT: int
@@ -268,6 +295,10 @@ EGL_MULTISAMPLE_RESOLVE_DEFAULT: int
 EGL_MULTIVIEW_VIEW_COUNT_EXT: int
 EGL_NATIVE_BUFFER_ANDROID: int
 EGL_NATIVE_BUFFER_TIZEN: int
+EGL_NATIVE_BUFFER_USAGE_ANDROID: int
+EGL_NATIVE_BUFFER_USAGE_PROTECTED_BIT_ANDROID: int
+EGL_NATIVE_BUFFER_USAGE_RENDERBUFFER_BIT_ANDROID: int
+EGL_NATIVE_BUFFER_USAGE_TEXTURE_BIT_ANDROID: int
 EGL_NATIVE_PIXMAP_KHR: int
 EGL_NATIVE_RENDERABLE: int
 EGL_NATIVE_SURFACE_TIZEN: int
@@ -317,15 +348,19 @@ EGL_PLATFORM_X11_KHR: int
 EGL_PLATFORM_X11_SCREEN_EXT: int
 EGL_PLATFORM_X11_SCREEN_KHR: int
 EGL_POST_SUB_BUFFER_SUPPORTED_NV: int
+EGL_PRIMARY_COMPOSITOR_CONTEXT_EXT: int
 EGL_PRODUCER_FRAME_KHR: int
 EGL_PRODUCER_METADATA_NV: int
 EGL_PROTECTED_CONTENT_EXT: int
 EGL_READ: int
+EGL_READS_DONE_TIME_ANDROID: int
 EGL_READ_SURFACE_BIT_KHR: int
 EGL_RECORDABLE_ANDROID: int
 EGL_RED_SIZE: int
 EGL_RENDERABLE_TYPE: int
+EGL_RENDERING_COMPLETE_TIME_ANDROID: int
 EGL_RENDER_BUFFER: int
+EGL_REQUESTED_PRESENT_TIME_ANDROID: int
 EGL_RGB_BUFFER: int
 EGL_SAMPLES: int
 EGL_SAMPLE_BUFFERS: int
@@ -337,7 +372,11 @@ EGL_SINGLE_BUFFER: int
 EGL_SLOW_CONFIG: int
 EGL_STENCIL_SIZE: int
 EGL_STREAM_BIT_KHR: int
+EGL_STREAM_CONSUMER_IMAGE_NV: int
 EGL_STREAM_FIFO_LENGTH_KHR: int
+EGL_STREAM_IMAGE_ADD_NV: int
+EGL_STREAM_IMAGE_AVAILABLE_NV: int
+EGL_STREAM_IMAGE_REMOVE_NV: int
 EGL_STREAM_STATE_CONNECTING_KHR: int
 EGL_STREAM_STATE_CREATED_KHR: int
 EGL_STREAM_STATE_DISCONNECTED_KHR: int
@@ -349,10 +388,31 @@ EGL_STREAM_TIME_CONSUMER_KHR: int
 EGL_STREAM_TIME_NOW_KHR: int
 EGL_STREAM_TIME_PRODUCER_KHR: int
 EGL_SUCCESS: int
+EGL_SUPPORT_RESET_NV: int
+EGL_SUPPORT_REUSE_NV: int
+EGL_SURFACE_COMPRESSION_EXT: int
+EGL_SURFACE_COMPRESSION_FIXED_RATE_10BPC_EXT: int
+EGL_SURFACE_COMPRESSION_FIXED_RATE_11BPC_EXT: int
+EGL_SURFACE_COMPRESSION_FIXED_RATE_12BPC_EXT: int
+EGL_SURFACE_COMPRESSION_FIXED_RATE_1BPC_EXT: int
+EGL_SURFACE_COMPRESSION_FIXED_RATE_2BPC_EXT: int
+EGL_SURFACE_COMPRESSION_FIXED_RATE_3BPC_EXT: int
+EGL_SURFACE_COMPRESSION_FIXED_RATE_4BPC_EXT: int
+EGL_SURFACE_COMPRESSION_FIXED_RATE_5BPC_EXT: int
+EGL_SURFACE_COMPRESSION_FIXED_RATE_6BPC_EXT: int
+EGL_SURFACE_COMPRESSION_FIXED_RATE_7BPC_EXT: int
+EGL_SURFACE_COMPRESSION_FIXED_RATE_8BPC_EXT: int
+EGL_SURFACE_COMPRESSION_FIXED_RATE_9BPC_EXT: int
+EGL_SURFACE_COMPRESSION_FIXED_RATE_DEFAULT_EXT: int
+EGL_SURFACE_COMPRESSION_FIXED_RATE_NONE_EXT: int
+EGL_SURFACE_COMPRESSION_PLANE1_EXT: int
+EGL_SURFACE_COMPRESSION_PLANE2_EXT: int
 EGL_SURFACE_TYPE: int
 EGL_SWAP_BEHAVIOR: int
 EGL_SWAP_BEHAVIOR_PRESERVED_BIT: int
 EGL_SWAP_INTERVAL_EXT: int
+EGL_SYNC_CLIENT_EXT: int
+EGL_SYNC_CLIENT_SIGNAL_EXT: int
 EGL_SYNC_CL_EVENT: int
 EGL_SYNC_CL_EVENT_COMPLETE: int
 EGL_SYNC_CL_EVENT_COMPLETE_KHR: int
@@ -383,13 +443,21 @@ EGL_SYNC_TYPE: int
 EGL_SYNC_TYPE_KHR: int
 EGL_SYNC_TYPE_NV: int
 EGL_TEXTURE_2D: int
+EGL_TEXTURE_EXTERNAL_WL: int
 EGL_TEXTURE_FORMAT: int
 EGL_TEXTURE_RGB: int
 EGL_TEXTURE_RGBA: int
 EGL_TEXTURE_TARGET: int
+EGL_TEXTURE_Y_UV_WL: int
+EGL_TEXTURE_Y_U_V_WL: int
+EGL_TEXTURE_Y_XUXV_WL: int
 EGL_TIMEOUT_EXPIRED: int
 EGL_TIMEOUT_EXPIRED_KHR: int
 EGL_TIMEOUT_EXPIRED_NV: int
+EGL_TIMESTAMPS_ANDROID: int
+EGL_TIMESTAMP_INVALID_ANDROID: int
+EGL_TIMESTAMP_PENDING_ANDROID: int
+EGL_TRACK_REFERENCES_KHR: int
 EGL_TRANSPARENT_BLUE_VALUE: int
 EGL_TRANSPARENT_GREEN_VALUE: int
 EGL_TRANSPARENT_RED_VALUE: int
@@ -414,6 +482,9 @@ EGL_VG_COLORSPACE_LINEAR_BIT: int
 EGL_VG_COLORSPACE_LINEAR_BIT_KHR: int
 EGL_VG_COLORSPACE_sRGB: int
 EGL_VG_PARENT_IMAGE_KHR: int
+EGL_WAYLAND_BUFFER_WL: int
+EGL_WAYLAND_PLANE_WL: int
+EGL_WAYLAND_Y_INVERTED_WL: int
 EGL_WIDTH: int
 EGL_WINDOW_BIT: int
 EGL_WRITE_SURFACE_BIT_KHR: int
@@ -460,8 +531,14 @@ def eglBindAPI(api: int) -> int:
 def eglBindTexImage(dpy: Any, surface: Any, buffer: int) -> int:
     """eglBindTexImage(dpy, surface, buffer) -> EGLBoolean"""
 
+def eglBindWaylandDisplayWL(dpy: Any, display: AnyArray) -> int:
+    """eglBindWaylandDisplayWL(dpy, display) -> EGLBoolean"""
+
 def eglChooseConfig(dpy: Any, attrib_list: IntArray, configs: AnyArray, config_size: int, num_config: IntArray) -> int:
     """eglChooseConfig(dpy, attrib_list, configs, config_size, num_config) -> EGLBoolean"""
+
+def eglClientSignalSyncEXT(dpy: Any, sync: Any, attrib_list: AnyArray) -> int:
+    """eglClientSignalSyncEXT(dpy, sync, attrib_list) -> EGLBoolean"""
 
 def eglClientWaitSync(dpy: Any, sync: Any, flags: int, timeout: int) -> int:
     """eglClientWaitSync(dpy, sync, flags, timeout) -> EGLint"""
@@ -471,6 +548,27 @@ def eglClientWaitSyncKHR(dpy: Any, sync: Any, flags: int, timeout: int) -> int:
 
 def eglClientWaitSyncNV(sync: Any, flags: int, timeout: int) -> int:
     """eglClientWaitSyncNV(sync, flags, timeout) -> EGLint"""
+
+def eglCompositorBindTexWindowEXT(external_win_id: int) -> int:
+    """eglCompositorBindTexWindowEXT(external_win_id) -> EGLBoolean"""
+
+def eglCompositorSetContextAttributesEXT(external_ref_id: int, context_attributes: IntArray, num_entries: int) -> int:
+    """eglCompositorSetContextAttributesEXT(external_ref_id, context_attributes, num_entries) -> EGLBoolean"""
+
+def eglCompositorSetContextListEXT(external_ref_ids: IntArray, num_entries: int) -> int:
+    """eglCompositorSetContextListEXT(external_ref_ids, num_entries) -> EGLBoolean"""
+
+def eglCompositorSetSizeEXT(external_win_id: int, width: int, height: int) -> int:
+    """eglCompositorSetSizeEXT(external_win_id, width, height) -> EGLBoolean"""
+
+def eglCompositorSetWindowAttributesEXT(external_win_id: int, window_attributes: IntArray, num_entries: int) -> int:
+    """eglCompositorSetWindowAttributesEXT(external_win_id, window_attributes, num_entries) -> EGLBoolean"""
+
+def eglCompositorSetWindowListEXT(external_ref_id: int, external_win_ids: IntArray, num_entries: int) -> int:
+    """eglCompositorSetWindowListEXT(external_ref_id, external_win_ids, num_entries) -> EGLBoolean"""
+
+def eglCompositorSwapPolicyEXT(external_win_id: int, policy: int) -> int:
+    """eglCompositorSwapPolicyEXT(external_win_id, policy) -> EGLBoolean"""
 
 def eglCopyBuffers(dpy: Any, surface: Any, target: Any) -> int:
     """eglCopyBuffers(dpy, surface, target) -> EGLBoolean"""
@@ -489,6 +587,9 @@ def eglCreateImage(dpy: Any, ctx: Any, target: int, buffer: Any, attrib_list: An
 
 def eglCreateImageKHR(dpy: Any, ctx: Any, target: int, buffer: Any, attrib_list: IntArray) -> Any:
     """eglCreateImageKHR(dpy, ctx, target, buffer, attrib_list) -> EGLImageKHR"""
+
+def eglCreateNativeClientBufferANDROID(attrib_list: IntArray) -> Any:
+    """eglCreateNativeClientBufferANDROID(attrib_list) -> EGLClientBuffer"""
 
 def eglCreatePbufferFromClientBuffer(dpy: Any, buftype: int, buffer: Any, config: Any, attrib_list: IntArray) -> Any:
     """eglCreatePbufferFromClientBuffer(dpy, buftype, buffer, config, attrib_list) -> EGLSurface"""
@@ -514,6 +615,9 @@ def eglCreatePlatformWindowSurface(dpy: Any, config: Any, native_window: AnyArra
 def eglCreatePlatformWindowSurfaceEXT(dpy: Any, config: Any, native_window: AnyArray, attrib_list: IntArray) -> Any:
     """eglCreatePlatformWindowSurfaceEXT(dpy, config, native_window, attrib_list) -> EGLSurface"""
 
+def eglCreateStreamAttribKHR(dpy: Any, attrib_list: AnyArray) -> Any:
+    """eglCreateStreamAttribKHR(dpy, attrib_list) -> EGLStreamKHR"""
+
 def eglCreateStreamFromFileDescriptorKHR(dpy: Any, file_descriptor: int) -> Any:
     """eglCreateStreamFromFileDescriptorKHR(dpy, file_descriptor) -> EGLStreamKHR"""
 
@@ -535,6 +639,9 @@ def eglCreateSync64KHR(dpy: Any, type: int, attrib_list: AnyArray) -> Any:
 def eglCreateSyncKHR(dpy: Any, type: int, attrib_list: IntArray) -> Any:
     """eglCreateSyncKHR(dpy, type, attrib_list) -> EGLSyncKHR"""
 
+def eglCreateWaylandBufferFromImageWL(dpy: Any, image: Any) -> int | None:
+    """eglCreateWaylandBufferFromImageWL(dpy, image) -> void"""
+
 def eglCreateWindowSurface(dpy: Any, config: Any, win: Any, attrib_list: IntArray) -> Any:
     """eglCreateWindowSurface(dpy, config, win, attrib_list) -> EGLSurface"""
 
@@ -543,6 +650,9 @@ def eglDebugMessageControlKHR(callback: Any, attrib_list: AnyArray) -> int:
 
 def eglDestroyContext(dpy: Any, ctx: Any) -> int:
     """eglDestroyContext(dpy, ctx) -> EGLBoolean"""
+
+def eglDestroyDisplayEXT(dpy: Any) -> int:
+    """eglDestroyDisplayEXT(dpy) -> EGLBoolean"""
 
 def eglDestroyImage(dpy: Any, image: Any) -> int:
     """eglDestroyImage(dpy, image) -> EGLBoolean"""
@@ -580,6 +690,12 @@ def eglExportDRMImageMESA(dpy: Any, image: Any, name: IntArray, handle: IntArray
 def eglFenceNV(sync: Any) -> int:
     """eglFenceNV(sync) -> EGLBoolean"""
 
+def eglGetCompositorTimingANDROID(dpy: Any, surface: Any, numTimestamps: int, names: IntArray, values: Int64Array) -> int:
+    """eglGetCompositorTimingANDROID(dpy, surface, numTimestamps, names, values) -> EGLBoolean"""
+
+def eglGetCompositorTimingSupportedANDROID(dpy: Any, surface: Any, name: int) -> int:
+    """eglGetCompositorTimingSupportedANDROID(dpy, surface, name) -> EGLBoolean"""
+
 def eglGetConfigAttrib(dpy: Any, config: Any, attribute: int, value: IntArray) -> int:
     """eglGetConfigAttrib(dpy, config, attribute, value) -> EGLBoolean"""
 
@@ -598,8 +714,29 @@ def eglGetCurrentSurface(readdraw: int) -> Any:
 def eglGetDisplay(display_id: Any) -> Any:
     """eglGetDisplay(display_id) -> EGLDisplay"""
 
+def eglGetDisplayDriverConfig(dpy: Any) -> bytes:
+    """eglGetDisplayDriverConfig(dpy) -> GLchar"""
+
+def eglGetDisplayDriverName(dpy: Any) -> bytes:
+    """eglGetDisplayDriverName(dpy) -> GLchar"""
+
 def eglGetError() -> int:
     """eglGetError() -> EGLint"""
+
+def eglGetFrameTimestampSupportedANDROID(dpy: Any, surface: Any, timestamp: int) -> int:
+    """eglGetFrameTimestampSupportedANDROID(dpy, surface, timestamp) -> EGLBoolean"""
+
+def eglGetFrameTimestampsANDROID(dpy: Any, surface: Any, frameId: int, numTimestamps: int, timestamps: IntArray, values: Int64Array) -> int:
+    """eglGetFrameTimestampsANDROID(dpy, surface, frameId, numTimestamps, timestamps, values) -> EGLBoolean"""
+
+def eglGetMscRateANGLE(dpy: Any, surface: Any, numerator: IntArray, denominator: IntArray) -> int:
+    """eglGetMscRateANGLE(dpy, surface, numerator, denominator) -> EGLBoolean"""
+
+def eglGetNativeClientBufferANDROID(buffer: AnyArray) -> Any:
+    """eglGetNativeClientBufferANDROID(buffer) -> EGLClientBuffer"""
+
+def eglGetNextFrameIdANDROID(dpy: Any, surface: Any, frameId: UInt64Array) -> int:
+    """eglGetNextFrameIdANDROID(dpy, surface, frameId) -> EGLBoolean"""
 
 def eglGetOutputLayersEXT(dpy: Any, attrib_list: AnyArray, layers: AnyArray, max_layers: int, num_layers: IntArray) -> int:
     """eglGetOutputLayersEXT(dpy, attrib_list, layers, max_layers, num_layers) -> EGLBoolean"""
@@ -655,6 +792,9 @@ def eglOutputPortAttribEXT(dpy: Any, port: Any, attribute: int, value: int) -> i
 def eglPostSubBufferNV(dpy: Any, surface: Any, x: int, y: int, width: int, height: int) -> int:
     """eglPostSubBufferNV(dpy, surface, x, y, width, height) -> EGLBoolean"""
 
+def eglPresentationTimeANDROID(dpy: Any, surface: Any, time: int) -> int:
+    """eglPresentationTimeANDROID(dpy, surface, time) -> EGLBoolean"""
+
 def eglQueryAPI() -> int:
     """eglQueryAPI() -> EGLenum"""
 
@@ -667,6 +807,9 @@ def eglQueryDebugKHR(attribute: int, value: AnyArray) -> int:
 def eglQueryDeviceAttribEXT(device: Any, attribute: int, value: AnyArray) -> int:
     """eglQueryDeviceAttribEXT(device, attribute, value) -> EGLBoolean"""
 
+def eglQueryDeviceBinaryEXT(device: Any, name: int, max_size: int, value: AnyArray, size: IntArray) -> int:
+    """eglQueryDeviceBinaryEXT(device, name, max_size, value, size) -> EGLBoolean"""
+
 def eglQueryDeviceStringEXT(device: Any, name: int) -> bytes:
     """eglQueryDeviceStringEXT(device, name) -> GLchar"""
 
@@ -676,8 +819,17 @@ def eglQueryDevicesEXT(max_devices: int, devices: AnyArray, num_devices: IntArra
 def eglQueryDisplayAttribEXT(dpy: Any, attribute: int, value: AnyArray) -> int:
     """eglQueryDisplayAttribEXT(dpy, attribute, value) -> EGLBoolean"""
 
+def eglQueryDisplayAttribKHR(dpy: Any, name: int, value: AnyArray) -> int:
+    """eglQueryDisplayAttribKHR(dpy, name, value) -> EGLBoolean"""
+
 def eglQueryDisplayAttribNV(dpy: Any, attribute: int, value: AnyArray) -> int:
     """eglQueryDisplayAttribNV(dpy, attribute, value) -> EGLBoolean"""
+
+def eglQueryDmaBufFormatsEXT(dpy: Any, max_formats: int, formats: IntArray, num_formats: IntArray) -> int:
+    """eglQueryDmaBufFormatsEXT(dpy, max_formats, formats, num_formats) -> EGLBoolean"""
+
+def eglQueryDmaBufModifiersEXT(dpy: Any, format: int, max_modifiers: int, modifiers: UInt64Array, external_only: AnyArray, num_modifiers: IntArray) -> int:
+    """eglQueryDmaBufModifiersEXT(dpy, format, max_modifiers, modifiers, external_only, num_modifiers) -> EGLBoolean"""
 
 def eglQueryNativeDisplayNV(dpy: Any, display_id: AnyArray) -> int:
     """eglQueryNativeDisplayNV(dpy, display_id) -> EGLBoolean"""
@@ -700,6 +852,12 @@ def eglQueryOutputPortAttribEXT(dpy: Any, port: Any, attribute: int, value: AnyA
 def eglQueryOutputPortStringEXT(dpy: Any, port: Any, name: int) -> bytes:
     """eglQueryOutputPortStringEXT(dpy, port, name) -> GLchar"""
 
+def eglQueryStreamAttribKHR(dpy: Any, stream: Any, attribute: int, value: AnyArray) -> int:
+    """eglQueryStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean"""
+
+def eglQueryStreamConsumerEventNV(dpy: Any, stream: Any, timeout: int, event: AnyArray, aux: AnyArray) -> int:
+    """eglQueryStreamConsumerEventNV(dpy, stream, timeout, event, aux) -> EGLint"""
+
 def eglQueryStreamKHR(dpy: Any, stream: Any, attribute: int, value: IntArray) -> int:
     """eglQueryStreamKHR(dpy, stream, attribute, value) -> EGLBoolean"""
 
@@ -715,6 +873,9 @@ def eglQueryStreamu64KHR(dpy: Any, stream: Any, attribute: int, value: UInt64Arr
 def eglQueryString(dpy: Any, name: int) -> bytes:
     """eglQueryString(dpy, name) -> GLchar"""
 
+def eglQuerySupportedCompressionRatesEXT(dpy: Any, config: Any, attrib_list: AnyArray, rates: IntArray, rate_size: int, num_rates: IntArray) -> int:
+    """eglQuerySupportedCompressionRatesEXT(dpy, config, attrib_list, rates, rate_size, num_rates) -> EGLBoolean"""
+
 def eglQuerySurface(dpy: Any, surface: Any, attribute: int, value: IntArray) -> int:
     """eglQuerySurface(dpy, surface, attribute, value) -> EGLBoolean"""
 
@@ -724,17 +885,26 @@ def eglQuerySurface64KHR(dpy: Any, surface: Any, attribute: int, value: AnyArray
 def eglQuerySurfacePointerANGLE(dpy: Any, surface: Any, attribute: int, value: AnyArray) -> int:
     """eglQuerySurfacePointerANGLE(dpy, surface, attribute, value) -> EGLBoolean"""
 
+def eglQueryWaylandBufferWL(dpy: Any, buffer: AnyArray, attribute: int, value: IntArray) -> int:
+    """eglQueryWaylandBufferWL(dpy, buffer, attribute, value) -> EGLBoolean"""
+
 def eglReleaseTexImage(dpy: Any, surface: Any, buffer: int) -> int:
     """eglReleaseTexImage(dpy, surface, buffer) -> EGLBoolean"""
 
 def eglReleaseThread() -> int:
     """eglReleaseThread() -> EGLBoolean"""
 
+def eglResetStreamNV(dpy: Any, stream: Any) -> int:
+    """eglResetStreamNV(dpy, stream) -> EGLBoolean"""
+
 def eglSetBlobCacheFuncsANDROID(dpy: Any, set: Any, get: Any) -> None:
     """eglSetBlobCacheFuncsANDROID(dpy, set, get) -> None"""
 
 def eglSetDamageRegionKHR(dpy: Any, surface: Any, rects: IntArray, n_rects: int) -> int:
     """eglSetDamageRegionKHR(dpy, surface, rects, n_rects) -> EGLBoolean"""
+
+def eglSetStreamAttribKHR(dpy: Any, stream: Any, attribute: int, value: int) -> int:
+    """eglSetStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean"""
 
 def eglSetStreamMetadataNV(dpy: Any, stream: Any, n: int, offset: int, size: int, data: AnyArray) -> int:
     """eglSetStreamMetadataNV(dpy, stream, n, offset, size, data) -> EGLBoolean"""
@@ -745,8 +915,14 @@ def eglSignalSyncKHR(dpy: Any, sync: Any, mode: int) -> int:
 def eglSignalSyncNV(sync: Any, mode: int) -> int:
     """eglSignalSyncNV(sync, mode) -> EGLBoolean"""
 
+def eglStreamAcquireImageNV(dpy: Any, stream: Any, pImage: AnyArray, sync: Any) -> int:
+    """eglStreamAcquireImageNV(dpy, stream, pImage, sync) -> EGLBoolean"""
+
 def eglStreamAttribKHR(dpy: Any, stream: Any, attribute: int, value: int) -> int:
     """eglStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean"""
+
+def eglStreamConsumerAcquireAttribKHR(dpy: Any, stream: Any, attrib_list: AnyArray) -> int:
+    """eglStreamConsumerAcquireAttribKHR(dpy, stream, attrib_list) -> EGLBoolean"""
 
 def eglStreamConsumerAcquireKHR(dpy: Any, stream: Any) -> int:
     """eglStreamConsumerAcquireKHR(dpy, stream) -> EGLBoolean"""
@@ -757,8 +933,20 @@ def eglStreamConsumerGLTextureExternalKHR(dpy: Any, stream: Any) -> int:
 def eglStreamConsumerOutputEXT(dpy: Any, stream: Any, layer: Any) -> int:
     """eglStreamConsumerOutputEXT(dpy, stream, layer) -> EGLBoolean"""
 
+def eglStreamConsumerReleaseAttribKHR(dpy: Any, stream: Any, attrib_list: AnyArray) -> int:
+    """eglStreamConsumerReleaseAttribKHR(dpy, stream, attrib_list) -> EGLBoolean"""
+
 def eglStreamConsumerReleaseKHR(dpy: Any, stream: Any) -> int:
     """eglStreamConsumerReleaseKHR(dpy, stream) -> EGLBoolean"""
+
+def eglStreamFlushNV(dpy: Any, stream: Any) -> int:
+    """eglStreamFlushNV(dpy, stream) -> EGLBoolean"""
+
+def eglStreamImageConsumerConnectNV(dpy: Any, stream: Any, num_modifiers: int, modifiers: UInt64Array, attrib_list: AnyArray) -> int:
+    """eglStreamImageConsumerConnectNV(dpy, stream, num_modifiers, modifiers, attrib_list) -> EGLBoolean"""
+
+def eglStreamReleaseImageNV(dpy: Any, stream: Any, image: Any, sync: Any) -> int:
+    """eglStreamReleaseImageNV(dpy, stream, image, sync) -> EGLBoolean"""
 
 def eglSurfaceAttrib(dpy: Any, surface: Any, attribute: int, value: int) -> int:
     """eglSurfaceAttrib(dpy, surface, attribute, value) -> EGLBoolean"""
@@ -784,8 +972,14 @@ def eglSwapInterval(dpy: Any, interval: int) -> int:
 def eglTerminate(dpy: Any) -> int:
     """eglTerminate(dpy) -> EGLBoolean"""
 
+def eglUnbindWaylandDisplayWL(dpy: Any, display: AnyArray) -> int:
+    """eglUnbindWaylandDisplayWL(dpy, display) -> EGLBoolean"""
+
 def eglUnlockSurfaceKHR(dpy: Any, surface: Any) -> int:
     """eglUnlockSurfaceKHR(dpy, surface) -> EGLBoolean"""
+
+def eglUnsignalSyncEXT(dpy: Any, sync: Any, attrib_list: AnyArray) -> int:
+    """eglUnsignalSyncEXT(dpy, sync, attrib_list) -> EGLBoolean"""
 
 def eglWaitClient() -> int:
     """eglWaitClient() -> EGLBoolean"""

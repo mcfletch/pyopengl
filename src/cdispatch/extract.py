@@ -439,6 +439,23 @@ def _api_for_path(root, path):
 #: the name-based fallback below still covers the shipped families.
 _REGISTRY_FILES = ('gl.xml', 'glx.xml', 'wgl.xml')
 
+#: EGL is published as its own repository, so it is fetched into its own
+#: checkout beside the OpenGL one -- ``src/eglapi`` next to ``src/khronosapi``.
+#: ``src/fetch_registries.py`` puts both there.
+_EGL_RELATIVE = os.path.join(os.pardir, os.pardir, 'eglapi', 'api', 'egl.xml')
+
+
+def registry_files(registry_root):
+    """Every registry XML the generator reads, in the order it reads them."""
+    if not registry_root or not os.path.isdir(registry_root):
+        return []
+    paths = [
+        os.path.join(registry_root, name)
+        for name in _REGISTRY_FILES
+    ]
+    paths.append(os.path.normpath(os.path.join(registry_root, _EGL_RELATIVE)))
+    return [path for path in paths if os.path.exists(path)]
+
 
 def _registry_lengths(registry_root):
     """``{command name: {parameter: len}}`` from the Khronos registry.
@@ -454,10 +471,7 @@ def _registry_lengths(registry_root):
         import xmlreg
     except ImportError:
         return lengths
-    for name in _REGISTRY_FILES:
-        path = os.path.join(registry_root, name)
-        if not os.path.exists(path):
-            continue
+    for path in registry_files(registry_root):
         try:
             registry = xmlreg.parse(path)
         except Exception:

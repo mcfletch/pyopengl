@@ -130,8 +130,11 @@ class ContextTestCase(unittest.TestCase):
     #: accumulation-buffer bits (legacy; request non-zero to use glAccum).
     accum_size = 0
     width = height = 128
-    #: show the window by default (set TEST_VISIBLE=0 for headless/CI runs).
-    visible = os.environ.get('TEST_VISIBLE', '1').lower() not in ('0', 'false', 'no')
+    #: Off by default: a suite that maps windows takes over the screen of
+    #: whoever runs it, and steals focus while they are doing something
+    #: else.  ``TEST_VISIBLE=1`` to watch a run.  A hidden window still
+    #: has a real context on the real driver, so nothing is given up.
+    visible = os.environ.get('TEST_VISIBLE', '0').lower() in ('1', 'true', 'yes')
     #: seconds to leave a visible window on screen after rendering.  Override
     #: with TEST_DWELL (e.g. TEST_DWELL=5 to eyeball the window/backend).
     dwell = float(os.environ.get('TEST_DWELL', '0.017' if not visible else '0.2'))

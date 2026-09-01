@@ -47,6 +47,38 @@ EGLNativeFileDescriptorKHR = ctypes.c_int
 
 EGLSyncKHR = EGLSyncNV = EGLSync = _opaque_pointer_cls( 'EGLSync' )
 EGLTimeKHR = EGLTimeNV = EGLTime = ctypes.c_ulonglong
+# EGL_ANDROID_presentation_time and the frame-timestamp extensions
+# measure in signed nanoseconds.
+EGLnsecsANDROID = ctypes.c_int64
+
+# EGL_KHR_debug and EGL_HI_clientpixmap name these; nothing defined them, so
+# the three EGL_KHR_debug entry points could not be declared at all.
+EGLLabelKHR = _opaque_pointer_cls( 'EGLLabelKHR' )
+EGLObjectKHR = _opaque_pointer_cls( 'EGLObjectKHR' )
+#: The debug callback: void (*)(EGLenum, const char *, EGLint, EGLLabelKHR,
+#: EGLLabelKHR, const char *).
+EGLDEBUGPROCKHR = ctypes.CFUNCTYPE(
+    None,
+    EGLenum,
+    ctypes.c_char_p,
+    EGLint,
+    EGLLabelKHR,
+    EGLLabelKHR,
+    ctypes.c_char_p,
+)
+
+
+class EGLClientPixmapHI(ctypes.Structure):
+    """The pixmap EGL_HI_clientpixmap hands the driver."""
+
+    _fields_ = [
+        ('pData', ctypes.c_void_p),
+        ('iWidth', EGLint),
+        ('iHeight', EGLint),
+        ('iStride', EGLint),
+    ]
+
+
 EGLuint64KHR = EGLuint64NV = ctypes.c_ulonglong
 EGLStreamKHR = _opaque_pointer_cls( 'EGLStream' )
 EGLsizeiANDROID = ctypes.c_size_t
@@ -93,6 +125,11 @@ _VERSION_PREFIX = 'EGL_VERSION_EGL_'
 
 [
     'EGLAttrib',
+    'EGLnsecsANDROID',
+    'EGLClientPixmapHI',
+    'EGLDEBUGPROCKHR',
+    'EGLObjectKHR',
+    'EGLLabelKHR',
     'EGLAttribKHR',
     'EGLBoolean',
     'EGLClientBuffer',
