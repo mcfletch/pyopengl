@@ -65,6 +65,15 @@ declaration is what recorded the ctypes binding a client demotes to, and
 nothing runs it when there is no file. A module with a class or a conditional
 in it is not data, so it is marked hand-written and keeps its file.
 
+**1c. `annotations.py` — the customisations as data.** The registry gives
+every signature; what it does not give is the difference between that and the
+Python one, which people wrote over 28 years as `wrapper.wrapper(...)` chains.
+`annotations.json` holds those: 1,214 entries, parameters keyed by name.
+Nothing consumes it yet — the generator still parses the friendly modules and
+writes the table beside its own results, so the table is checked against the
+parse on every run. `tests/cdispatch/test_annotations.py` does the round trip
+and asserts the emitted C is byte-identical from either source.
+
 **2. `model.py` — the command record.** One record per entry point, and
 everything emitted is a field in it:
 

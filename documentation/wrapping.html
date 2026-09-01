@@ -23,7 +23,8 @@ convention and wondering where the change belongs.</p>
 <tr><th>what</th><th>where</th><th>says</th></tr>
 <tr>
   <td><b>the registry</b></td>
-  <td><code>src/khronosapi/xml/{gl,glx,wgl}.xml</code></td>
+  <td><code>src/khronosapi/xml/{gl,glx,wgl}.xml</code> and
+      <code>src/eglapi/api/egl.xml</code></td>
   <td>The C signature, which feature or extension declares it, and
       <code>COMPSIZE(...)</code>: how long an array argument is in terms of the
       other arguments.</td>
@@ -50,6 +51,51 @@ convention and wondering where the change belongs.</p>
       the result.</td>
 </tr>
 </table>
+
+<h2>The annotation table</h2>
+
+<p>The customisations are also written down as data, in
+<code>src/cdispatch/annotations.json</code> &#8212; 1,214 entries, keyed
+<code>"&lt;API&gt;.&lt;command&gt;"</code>, with parameters keyed by name
+rather than by position, since a position moves when the registry adds an
+argument and a name does not:</p>
+
+<pre>"GL.glTexImage2D": {
+  "parameters": {
+    "pixels": {"size": {"kind": "image", "format": "format",
+                        "type": "type", "dimensions": ["width", "height"]}}}}</pre>
+
+<p>Of 4,839 commands, 3,660 are plain pass-throughs whose every fact is in the
+registry; 1,214 carry an annotation, and of those the registry supplies or
+corrects 136.  So about 1,078 facts exist nowhere but the hand-written
+friendly modules, and those are what the table is for.</p>
+
+<p>The generator still recovers them by parsing, and writes the table beside
+its own results on every run &#8212; so the table is checked against the parse
+continuously, by a round trip that strips every annotation and puts it back,
+and by an acceptance test that the C emitted from the table is byte-identical
+for all 4,819 stubs.  A copy ships as
+<code>OpenGL/raw/_declarations/_annotations.dat</code>, because the
+pure-Python path needs it.</p>
+
+<h3>Rebuilding a customisation from the table</h3>
+
+<p>A parameter takes an array conversion when its <b>declared type is an array
+type</b>, or when the <b>table gives it a size spec</b>.  The length comes from
+the table where there is one.  Both halves are needed:</p>
+
+<ul>
+<li><code>setInputArraySize('value', None)</code> records no length, so the
+table holds nothing for it &#8212; but it installs
+<code>ArrayDatatype.asArray</code>, and rebuilding from the table alone would
+drop the conversion and hand the driver a list.  The declared type supplies
+it.</li>
+<li><code>glDrawElements</code>, <code>glColorPointer</code> and
+<code>glDrawPixels</code> declare their array argument as
+<code>ctypes.c_void_p</code>, because it may be a client pointer <em>or</em> an
+offset into a bound buffer.  Array-ness is not in the type there; the table's
+<code>typed-array</code> and <code>image</code> kinds are what say so.</li>
+</ul>
 
 <h2>Reading the customisation</h2>
 
@@ -212,7 +258,10 @@ declaration came from.</p>
 
 <table border="1" cellpadding="5" cellspacing="0">
 <tr><th>file</th><th>holds</th></tr>
-<tr><td><code>src/cdispatch/extract.py</code></td><td>Reading the shipped tree and the registry into command records.</td></tr>
+<tr><td><code>src/fetch_registries.py</code></td><td>Fetching both Khronos registries; run first by <code>regenerate_c.py</code>.</td></tr>
+<tr><td><code>src/cdispatch/extract.py</code></td><td>Reading the shipped tree and the registries into command records.</td></tr>
+<tr><td><code>src/cdispatch/annotations.py</code></td><td>The customisations as data, and the round trip that checks them.</td></tr>
+<tr><td><code>src/cdispatch/eglgen.py</code></td><td>Bindings for what the EGL registry declares and the tree lacks.</td></tr>
 <tr><td><code>src/cdispatch/model.py</code></td><td>The command record: one field per thing that can be emitted.</td></tr>
 <tr><td><code>src/cdispatch/emit_c.py</code></td><td>Turning a record into a C function, and deciding when it cannot.</td></tr>
 <tr><td><code>src/cdispatch/modules.py</code></td><td>What each generated module declared, for the tables and the data file.</td></tr>
