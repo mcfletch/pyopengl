@@ -1418,7 +1418,30 @@ friendly tree:
 The two that matter are the two the annotation table already expresses — a
 size spec and `out`. So this is not a matter of inventing vocabulary but of
 generating the friendly modules *from* the annotations that were extracted
-from them. The tail — `setPyConverter`, `setCConverter`,
+from them.
+
+**The rebuild rule, established by comparing rebuilt wrappers against the real
+ones** (`tests/cdispatch/test_annotation_wrapping.py`, and a probe over every
+core GL entry point):
+
+> A parameter takes an array conversion when its **declared type is an array
+> type**, *or* when the **table gives it a size spec**. The length comes from
+> the table where there is one.
+
+Both halves are needed, and neither alone is enough:
+
+- Roughly a thousand `setInputArraySize(x, None)` calls record no length, so
+  the table holds nothing for them — but they install
+  `ArrayDatatype.asArray`, and rebuilding from the table alone drops the
+  conversion and hands the driver a list. The declared type supplies it: 47
+  of 178 comparable entry points were wrong until the type was consulted.
+- `glDrawElements`, `glColorPointer`, `glDrawPixels` and relatives declare
+  their array argument as `ctypes.c_void_p`, because it may be a client
+  pointer *or* an offset into a bound buffer. Array-ness is not in the type
+  there; the table's `typed-array` and `image` size kinds are what say so.
+
+With the type consulted, 161 of 178 rebuild identically and the remaining 16
+are exactly those typed and image families. The tail — `setPyConverter`, `setCConverter`,
 `setDimensionsAsInts`, `setCResolver`, `StringLengths`, and the 24
 `createBaseFunction` calls that all live in one module — stays hand-written,
 alongside the 43.
