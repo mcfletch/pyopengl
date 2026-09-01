@@ -150,7 +150,7 @@ def exclusion_reason(command):
         return 'built in place by the Python layer'
     if hand_written(command) is not None:
         return ''
-    if command.helper:
+    if command.helper and command.helper != 'variadic':
         return 'hand-written family: %s' % (command.helper,)
     if command.return_type.pointers and not (
         command.return_type.pointers == 1
@@ -192,7 +192,10 @@ def is_emittable(command):
         return False
     if hand_written(command) is not None:
         return True
-    if command.helper:
+    if command.helper and command.helper != 'variadic':
+        # A convenience signature on top is the Python layer's business; the
+        # entry point underneath is ordinary, and the marshalling belongs
+        # here either way.
         return False
     if command.return_type.pointers:
         # Only the string returns have a settled conversion so far; the rest --

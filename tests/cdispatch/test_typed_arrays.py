@@ -93,3 +93,27 @@ class TestEmission:
             'glInterleavedArrays',
         ):
             assert emit_c.is_emittable(commands[('GL', name)]), name
+
+class TestVariadicConvenience:
+    """A convenience signature on top does not stop the C implementing the
+    entry point underneath.
+
+    ``OpenGL.GL.exceptional`` gives glBufferData a three-argument form that
+    works the size out from the array.  That wrapper is a thin Python function
+    which calls the entry point; the entry point itself is ordinary, and the
+    marshalling belongs in the C either way.
+    """
+
+    def test_the_entry_point_is_still_emitted(self, commands):
+        for name in ('glBufferData', 'glCallLists', 'glDeleteTextures'):
+            command = commands[('GL', name)]
+            assert command.helper == 'variadic', name
+            assert emit_c.is_emittable(command), name
+
+    def test_it_is_not_marked_as_implementing_the_friendly_form(self, commands):
+        """The convenience signature is the Python layer's, and stays there.
+
+        So a customisation call on it must still demote rather than be
+        swallowed -- the C implements the entry point, not the wrapper.
+        """
+        assert not emit_c.implements_friendly(commands[('GL', 'glBufferData')])

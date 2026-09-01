@@ -531,15 +531,14 @@ static int pygl_format_matches(const PyGLElement *element, const char *format)
  * not what it means as a GL argument. */
 static int pygl_is_ctypes_pointer(PyObject *object)
 {
-    if (pygl_ctypes_simple != NULL &&
-        PyObject_TypeCheck(object, (PyTypeObject *)pygl_ctypes_simple)) {
-        return 1;
-    }
-    if (pygl_ctypes_pointer != NULL &&
-        PyObject_TypeCheck(object, (PyTypeObject *)pygl_ctypes_pointer)) {
-        return 1;
-    }
-    return 0;
+    return pygl_ctypes_pointer != NULL &&
+           PyObject_TypeCheck(object, (PyTypeObject *)pygl_ctypes_pointer);
+}
+
+static int pygl_is_ctypes_scalar(PyObject *object)
+{
+    return pygl_ctypes_simple != NULL &&
+           PyObject_TypeCheck(object, (PyTypeObject *)pygl_ctypes_simple);
 }
 
 static PyObject *pygl_array_type(const PyGLElement *element)
@@ -607,20 +606,24 @@ static int pygl_array_acquire(PyObject *object, const PyGLElement *element,
     if (writable) {
         flags |= PyBUF_WRITABLE;
     }
-    if (pygl_is_ctypes_pointer(object)) {
-        if (element->primary == '*') {
-            /* A void * parameter wants the address the ctypes object holds,
-             * which is what the ctypes layer passes.  ArrayDatatype cannot
-             * answer for the opaque pointer classes. */
-            void *address = pygl_pointer_slow(object);
-            if (address == NULL && PyErr_Occurred()) {
-                return -1;
-            }
-            out->owner = Py_NewRef(object);
-            out->pointer = address;
-            return 0;
+    if (pygl_is_ctypes_pointer(object) ||
+        (pygl_is_ctypes_scalar(object) && element->primary == '*')) {
+        /* A ctypes *pointer* means the address it holds, whatever the element
+         * type: that is what a caller handing over a typedPointer() intends.
+         *
+         * A ctypes *scalar* is different, and the difference matters.  Where a
+         * void * is wanted it means its value -- a c_void_p is an address.
+         * Where an array is wanted it means the storage it occupies, which is
+         * how GLint() serves as the output of glGetIntegerv, and reading its
+         * value there would hand the driver address zero to write to. */
+        void *address = pygl_pointer_slow(object);
+        if (address == NULL && PyErr_Occurred()) {
+            return -1;
         }
-    } else if (PyObject_CheckBuffer(object)) {
+        out->owner = Py_NewRef(object);
+        out->pointer = address;
+        return 0;
+    } else if (!pygl_is_ctypes_scalar(object) && PyObject_CheckBuffer(object)) {
         if (PyObject_GetBuffer(object, &out->view, flags) == 0) {
             if (pygl_format_matches(element, out->view.format)) {
                 out->have_view = 1;
@@ -1153,6 +1156,14 @@ static PyObject *GLProc_repr(GLProc *self)
 static int GLProc_bool(GLProc *self)
 {
     void *fp;
+    /* Cheap when the answer is already known.  A lazy wrapper asks this on
+     * every call it forwards, so re-reading the current context here -- which
+     * costs a call into the platform layer -- would put that cost on a path
+     * that has no need of it. */
+    fp = pygl_current->slots[self->info->slot];
+    if ((uintptr_t)fp >= PYGL_SLOT_MIN_REAL) {
+        return 1;
+    }
     pygl_sync_context();
     fp = pygl_current->slots[self->info->slot];
     if ((uintptr_t)fp >= PYGL_SLOT_MIN_REAL) {
