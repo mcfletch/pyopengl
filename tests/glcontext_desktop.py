@@ -9,6 +9,8 @@ supply ``self.gl`` / ``self.gl3`` and the desktop-/GLU-specific helpers.
 
 from __future__ import print_function
 
+import contextlib
+
 from OpenGL import GL as _gl
 from OpenGL import GLU as _glu
 
@@ -75,6 +77,23 @@ class DesktopGLTestCaseBase(ContextTestCase):
         program = shaders.compileProgram(*stages)
         self.check_error('compile_program')
         return program
+
+    # --- immediate mode ---------------------------------------------------
+    @contextlib.contextmanager
+    def begin(self, mode):
+        """A ``glBegin``/``glEnd`` block that is closed however the body ends.
+
+        ``glGetError`` is illegal between the two, so PyOpenGL suspends error
+        checking for the block and ``glEnd`` turns it back on.  A body that
+        raises -- an entry point the driver does not export, a bad vertex --
+        leaves the block open, and with it the checking that every later case
+        in the process depends on.
+        """
+        self.gl.glBegin(mode)
+        try:
+            yield
+        finally:
+            self.gl.glEnd()
 
 
 class GLUTestCaseBase(DesktopGLTestCaseBase):

@@ -151,8 +151,7 @@ class TestHalfFloatNV(GLTestCase):
     def test_half_float(self):
         self.require_extension('GL_NV_half_float')
         h = np.zeros(4, 'H')  # GLhalfNV is an unsigned short
-        with self.allow_missing():
-            glBegin(GL_POINTS)
+        with self.allow_missing(), self.begin(GL_POINTS):
             glColor3hNV(0, 0, 0)
             glColor3hvNV(h[:3])
             glColor4hNV(0, 0, 0, 0)
@@ -199,7 +198,6 @@ class TestHalfFloatNV(GLTestCase):
             glVertex3hvNV(h[:3])
             glVertex4hNV(0, 0, 0, 0)
             glVertex4hvNV(h)
-            glEnd()
         self.check_error('NV half float')
 
 

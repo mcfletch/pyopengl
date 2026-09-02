@@ -160,6 +160,31 @@ class GLUTError( Error ):
 class EGLError( GLError ):
     """EGL error implementation class"""
 
+
+def inside_begin_block( ):
+    """Whether a ``glBegin`` block is open on this thread.
+
+    ``glBegin`` switches error checking off for the block -- ``glGetError`` is
+    itself illegal between the two -- so that switch is the record of being in
+    one, whichever dispatch implementation is running.
+
+    It matters beyond error checking because *no* GL query is legal in a block,
+    the extension string included, and an immediate-mode extension command has
+    nowhere but a block to be first called from.  Entry-point resolution reads
+    this to know that the extension string cannot be asked for right now.
+
+    Read from ``sys.modules`` rather than imported: a process that has never
+    imported desktop GL has no ``glBegin`` to have called, and loading one to
+    find that out would load a driver to answer a question about a block that
+    cannot exist.
+    """
+    import sys
+
+    module = sys.modules.get( 'OpenGL.raw.GL._errors' )
+    checker = getattr( module, '_error_checker', None ) if module else None
+    return bool( checker is not None and getattr( checker, 'suspended', False ) )
+
+
 if _configflags.ERROR_CHECKING:
     from OpenGL import acceleratesupport
     _ErrorChecker = None
@@ -173,11 +198,15 @@ if _configflags.ERROR_CHECKING:
             """Per-API error-checking object
             
             Attributes:
-                _registeredChecker -- the checking function enabled when 
+                _registeredChecker -- the checking function enabled when
                     not doing onBegin/onEnd processing
                 _currentChecker -- currently active checking function
+                suspended -- whether a glBegin block currently has checking
+                    switched off, so that a caller can tell "no errors" from
+                    "not looking"
             """
             _getErrors = None
+            suspended = False
             def __init__( self, platform, baseOperation=None, noErrorResult=0, errorClass=GLError ):
                 """Initialize from a platform module/reference"""
                 self._isValid = platform.CurrentContextIsValid
@@ -237,9 +266,11 @@ if _configflags.ERROR_CHECKING:
             def onBegin( self ):
                 """Called by glBegin to record the fact that glGetError won't work"""
                 self._currentChecker = self.nullGetError
+                self.suspended = True
             def onEnd( self ):
                 """Called by glEnd to record the fact that glGetError will work"""
                 self._currentChecker = self._registeredChecker
+                self.suspended = False
 else:
     _ErrorChecker = None
 # Compatibility with PyOpenGL 2.x series

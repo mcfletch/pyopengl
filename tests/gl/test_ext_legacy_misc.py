@@ -234,11 +234,9 @@ class TestLegacyCompat(GLTestCase):
         with self.allow_missing():
             glPrimitiveRestartIndexNV(0xFFFF)
             glEnableClientState(GL_PRIMITIVE_RESTART_NV)
-            glBegin(
-                GL_TRIANGLE_STRIP
-            )  # glPrimitiveRestartNV is only valid inside Begin/End
-            glPrimitiveRestartNV()
-            glEnd()
+            # glPrimitiveRestartNV is only valid inside a Begin/End block
+            with self.begin(GL_TRIANGLE_STRIP):
+                glPrimitiveRestartNV()
             glDisableClientState(GL_PRIMITIVE_RESTART_NV)
 
     def test_compiled_vertex_array_ext(self):

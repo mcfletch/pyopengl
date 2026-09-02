@@ -179,6 +179,21 @@ static int pygl_make_current(void *handle)
     return 0;
 }
 
+/* A glBegin/glEnd block belongs to the context it was opened in, so an
+ * application saying it has switched or destroyed a context ends the block.
+ * Without this a block that never reached its glEnd -- an exception between
+ * the two -- leaves error checking off for the rest of the process, and every
+ * later context inherits the silence.
+ *
+ * Only what the application says counts, not pygl_sync_context noticing: the
+ * slow path runs *inside* the glBegin that opened the block, when the table
+ * for the new context is still being built, and treating that as a switch
+ * would tear down the suspension the call had just put up. */
+static void pygl_end_begin_block(void)
+{
+    pygl_error_suspended = 0;
+}
+
 /* Re-read the current context from the platform.
  *
  * On the resolution slow path this asks the platform layer in Python, because
@@ -1931,6 +1946,7 @@ static PyObject *pygl_py_make_current(PyObject *module, PyObject *argument)
     if (pygl_make_current((void *)(uintptr_t)handle) < 0) {
         return NULL;
     }
+    pygl_end_begin_block();
     Py_RETURN_NONE;
 }
 
@@ -1960,6 +1976,9 @@ static PyObject *pygl_py_forget_context(PyObject *module, PyObject *argument)
             }
             if (pygl_current == table) {
                 pygl_current = &pygl_default_table;
+                /* The context an unclosed glBegin block belonged to is gone,
+                 * so the block is over. */
+                pygl_end_begin_block();
             }
             /* Empty it rather than free it: another thread may still be
              * pointing here.  Cleared slots read as unresolved, which sends

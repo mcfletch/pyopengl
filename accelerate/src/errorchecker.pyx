@@ -10,6 +10,9 @@ cdef class _ErrorChecker:
     as for glBegin/glEnd checking.
     """
     cdef public int doChecks
+    #: whether a glBegin block currently has checking switched off, so that a
+    #: caller can tell "no errors" from "not looking"
+    cdef public int suspended
     cdef public int checkContext
     cdef public object _isValid
     cdef public object _getErrors
@@ -24,6 +27,7 @@ cdef class _ErrorChecker:
         self._errorClass = errorClass
         
         self.doChecks = bool( _configflags.ERROR_CHECKING and self._getErrors )
+        self.suspended = False
         self.checkContext = _configflags.CONTEXT_CHECKING
     
     def glCheckError( 
@@ -66,8 +70,10 @@ cdef class _ErrorChecker:
     def onBegin( self, target=None ):
         """Called by glBegin to record the fact that glGetError won't work"""
         self.doChecks = False
+        self.suspended = True
     def onEnd( self, target=None ):
         """Called by glEnd to record the fact that glGetError will work"""
         self.doChecks = bool( _configflags.ERROR_CHECKING and self._getErrors )
+        self.suspended = False
     def check( self ):
         return self.glCheckError( None, self._getErrors, [] )

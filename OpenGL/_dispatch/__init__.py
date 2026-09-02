@@ -393,18 +393,41 @@ def set_error_checking(enable=True, entry_point=None):
         _c.set_error_checking(bool(enable), entry_point)
 
 
+def _end_suspended_block():
+    """End the glBegin block, if any, error checking is suspended for.
+
+    A Begin/End block belongs to the context it was opened in, so a context
+    change ends it.  That matters because ``glEnd`` is otherwise the only
+    thing that turns checking back on, and an exception raised between the
+    two -- a bad vertex, an entry point the driver does not export -- means
+    ``glEnd`` never runs and every later call in the process goes unchecked.
+
+    Reads ``sys.modules`` rather than importing: a process using only ES or
+    EGL has no desktop-GL checker to resume, and importing one to find that
+    out would load a driver to answer a question about a block it cannot
+    have opened.  The compiled layer keeps the same switch of its own, which
+    ``make_current`` and ``forget_context`` clear for themselves.
+    """
+    module = sys.modules.get('OpenGL.raw.GL._errors')
+    checker = getattr(module, '_error_checker', None) if module else None
+    if checker is not None:
+        checker.onEnd()
+
+
 def make_current(handle):
     """Dispatch this thread through the table for ``handle``.
 
     Call this wherever the application makes a context current, so that N
     contexts in one process each resolve and hold their own entry points.
     """
+    _end_suspended_block()
     if AVAILABLE:
         _c.make_current(int(handle or 0))
 
 
 def forget_context(handle):
     """Free the dispatch table for a context that has been destroyed."""
+    _end_suspended_block()
     if AVAILABLE:
         _c.forget_context(int(handle or 0))
 
