@@ -6,6 +6,8 @@ rather than written; that is what makes shipping stubs worth doing rather than
 merely possible.
 """
 
+import pytest
+
 from cdispatch import emit_pyi, model
 from cdispatch.ctypes_model import parse_type
 
@@ -242,6 +244,37 @@ class TestConstants:
         assert 'GL_TEXTURE_2D' in constants['GL']
         assert 'GL_ARRAY_BUFFER' in constants['GL']
         assert len(constants['GL']) > 5000
+
+    @pytest.mark.parametrize(
+        'api,least', [('GL', 5000), ('GLES2', 1900), ('EGL', 450)]
+    )
+    def test_the_shipped_stub_carries_them(self, api, least):
+        """The checked-in .pyi, not the source it is generated from.
+
+        Checking the source says the constants can be emitted, which is a
+        different claim from the stub having them: a regeneration run against a
+        tree the extractor could not read once produced stubs missing every
+        enum -- 5,042 of them -- and every test still passed, because none of
+        them read the file a user's type checker reads.
+        """
+        import os
+        import re
+
+        here = os.path.dirname(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        )
+        path = os.path.join(here, 'OpenGL', api, '__init__.pyi')
+        with open(path, encoding='utf-8') as handle:
+            declared = set(re.findall(r'^(\w+):', handle.read(), re.M))
+        from cdispatch import extract
+
+        expected = set(extract.extract_constants(os.path.join(here, 'OpenGL'))[api])
+        missing = expected - declared
+        assert len(declared) >= least, (api, len(declared))
+        assert not missing, (
+            '%s/__init__.pyi is missing %d constants; regenerate with '
+            'python src/regenerate_c.py' % (api, len(missing))
+        )
 
 
 def test_a_stub_is_not_exhaustive():

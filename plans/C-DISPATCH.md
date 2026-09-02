@@ -1305,13 +1305,13 @@ not express.
 | 6 per-context dispatch | done, with the multi-context tests as its exit criterion |
 | 7 error checking | done, including `GL_KHR_debug` |
 | 8 docstrings and `.pyi` | done, and it serves **both** implementations: the stubs are emitted from the command record, cover all commands rather than the C-implemented subset, and `py.typed` ships, so a type checker uses them under `PYOPENGL_DISPATCH=ctypes` with nothing to port |
-| 9 virtual packages | built, and off by default: the exit criterion is not met (below) |
+| 9 virtual packages | **on by default, and the only thing that answers**: the generated modules are not shipped, so the exit criterion is met by phase 15 rather than argued about |
 | 10 flip the default | done: `PYOPENGL_DISPATCH` defaults to `c`, and `ctypes` remains selectable |
 | 11 retire what is dead | unblocked by phase 14: moving the extension into accelerate puts the superseded Cython modules beside it |
-| 12 annotations as data | the table is written and checked against the parse on every run; the generator still parses, and stops once signatures come from the registry |
-| 13 friendly modules reduced to definitions | next: 987 of 1,289 already are; 259 carry only `setInputArraySize`/`setOutput`, both of which the table already expresses; 43 keep hand-written code |
+| 12 annotations as data | **done**: generation reads the declaration tables, the Khronos registry and `annotations.json`, and parses no Python under `OpenGL/` at all. Two facts had to reach the table first -- `array`, which `setInputArraySize(name, None)` never recorded, and `retains`, which lived only in `setStoreValues` -- and the table had to be applied *before* the registry rather than after, or the registry decided as though the friendly layer had said nothing |
+| 13 friendly modules reduced to definitions | **done**: 257 modules migrated, 4,164 lines of chain gone. 44 keep hand-written code and one keeps an output whose size is an image; those are what the parse still exists to compare against |
 | 14 the extension moves to `pyopengl_accelerate` | keeps `pyopengl` a universal wheel and makes "is accelerate installed?" the whole dispatch question |
-| 15 delete `OpenGL/raw/**` | after 12 and 13, the files hold nothing that is not held elsewhere |
+| 15 delete `OpenGL/raw/**` | **done**: 1,298 generated modules removed, 60,273 lines. The 154 hand-written files stay -- the package `__init__`s, `_types`, `_glgets`, `_errors`, `_lookupint`, the GLU/GLUT/GLE tables, OSMesa |
 | — EGL from its registry | done: both registries fetched on every generation, 41 commands and 4 types added, 158 covered by tests |
 | — test windows hidden | done: `TEST_VISIBLE` defaulted to mapping a window per context, which took over the screen of whoever ran the suite and held each frame 0.2 s; the run is 172 s → 21 s |
 
