@@ -21,12 +21,39 @@ ROOT = os.path.dirname(HERE)
 #: Attributes the compatibility contract preserves.
 SURVEYED = ('__name__', 'argNames', 'deprecated')
 
-#: Attributes that differ by design, with the reason.  Listed rather than
-#: skipped silently, so the list is the statement of what changed.
-BY_DESIGN = {
-    '__doc__': 'the C implementation carries one; ctypes has None',
-    '__signature__': 'inspect.signature answers under the C implementation',
-    '__module__': 'reported from the entry point rather than the frame',
+#: Attributes that differ by design *and can be stated as a rule*, with the
+#: rule as a predicate over (ctypes value, C value).  A reason in prose records
+#: a claim; a predicate checks it, and this file is what the documentation
+#: means when it says a difference not in the table is a test failure.
+#:
+#: The survey serialises anything that is not a str/number/bool/None as the
+#: repr of its type name, and an attribute that raised as ``raised:<type>``.
+CHECKED_BY_DESIGN = {
+    '__doc__': (
+        'the C implementation carries one; ctypes has None',
+        lambda ref, got: ref is None and isinstance(got, str) and got.strip(),
+    ),
+    '__signature__': (
+        'inspect.signature answers under the C implementation',
+        lambda ref, got: (
+            isinstance(ref, str) and ref.startswith('raised:')
+            and got == repr('Signature')
+        ),
+    ),
+    '__module__': (
+        'reported from the entry point rather than the frame',
+        lambda ref, got: (
+            isinstance(got, str) and got.startswith('OpenGL.raw.')
+            and isinstance(ref, str) and not ref.startswith('OpenGL.raw.')
+        ),
+    ),
+}
+
+#: Attributes whose difference is real but *conditional* -- they agree for most
+#: entry points, so there is no rule to assert, only a reason for the cases
+#: where they part.  Kept separate from the ones above so that the distinction
+#: is visible rather than implied by an absent predicate.
+CONDITIONAL_BY_DESIGN = {
     'restype': 'the C implementation states its own conversion',
     'argtypes': 'built from the ctypes binding on demand',
     'extension': (
@@ -65,7 +92,13 @@ for name in names:
         except Exception as err:
             value = 'raised:%%s' %% (type(err).__name__,)
         if isinstance(value, (list, tuple)):
-            value = list(value)
+            # argtypes holds ctypes types, which json cannot encode; the name
+            # is what distinguishes one from another.
+            value = [
+                item if isinstance(item, (str, int, float, bool, type(None)))
+                else getattr(item, '__name__', repr(type(item).__name__))
+                for item in value
+            ]
         elif not isinstance(value, (str, int, float, bool, type(None))):
             value = repr(type(value).__name__)
         record[attribute] = value
@@ -75,7 +108,8 @@ for name in names:
     except Exception:
         out['resolves'][name] = 'raised'
 json.dump(out, sys.stdout)
-''' % {'surveyed': SURVEYED}
+''' % {'surveyed': SURVEYED + tuple(CHECKED_BY_DESIGN)
+       + tuple(CONDITIONAL_BY_DESIGN)}
 
 
 def survey(dispatch):
@@ -155,5 +189,45 @@ def test_the_attribute_agrees(surveys, attribute):
 
 def test_the_by_design_differences_are_stated():
     """Each difference the contract allows says why it is allowed."""
-    assert all(reason.strip() for reason in BY_DESIGN.values())
-    assert not set(BY_DESIGN) & set(SURVEYED)
+    assert all(reason.strip() for reason, _rule in CHECKED_BY_DESIGN.values())
+    assert all(reason.strip() for reason in CONDITIONAL_BY_DESIGN.values())
+    overlap = (set(CHECKED_BY_DESIGN) | set(CONDITIONAL_BY_DESIGN)) & set(SURVEYED)
+    assert not overlap
+    assert not set(CHECKED_BY_DESIGN) & set(CONDITIONAL_BY_DESIGN)
+
+
+@pytest.mark.parametrize('attribute', sorted(CHECKED_BY_DESIGN))
+def test_the_by_design_difference_is_the_stated_one(surveys, attribute):
+    """The reason is a claim; this is the claim checked.
+
+    A difference the table allows has to be the difference the table describes
+    -- otherwise the table licenses whatever happens to be true, and the page
+    saying "a difference that is not in the table is a test failure" is not
+    backed by anything.
+    """
+    reference, candidate = surveys
+    _reason, rule = CHECKED_BY_DESIGN[attribute]
+    # Only where the two actually differ.  Several hundred names in OpenGL.GL
+    # are Python-layer wrappers rather than entry points -- glBegin, glColor,
+    # glBufferData -- and those are the same object under either
+    # implementation, so the table is claiming nothing about them.
+    broken = {
+        name: (reference[name][attribute], candidate[name][attribute])
+        for name in sorted(reference)
+        if name in candidate
+        and reference[name][attribute] != candidate[name][attribute]
+        and not rule(reference[name][attribute], candidate[name][attribute])
+    }
+    assert broken == {}, sorted(broken.items())[:10]
+
+
+@pytest.mark.parametrize('attribute', sorted(CHECKED_BY_DESIGN))
+def test_the_by_design_difference_is_actually_observed(surveys, attribute):
+    """The rule above is vacuous if nothing ever differs."""
+    reference, candidate = surveys
+    differing = [
+        name for name in reference
+        if name in candidate
+        and reference[name][attribute] != candidate[name][attribute]
+    ]
+    assert len(differing) > 500, len(differing)

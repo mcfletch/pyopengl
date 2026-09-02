@@ -1,13 +1,15 @@
 """The C implementation of the OpenGL entry points.
 
-Selected with ``PYOPENGL_DISPATCH=c``.  The default is ``ctypes``, which is the
-reference semantics, the bootstrap route for a new platform, and what runs
-where no wheel exists; it is not scheduled for removal.
+It is compiled, so it ships in ``PyOpenGL_accelerate``; where that is installed
+on CPython it is what runs, and ``PYOPENGL_DISPATCH=ctypes`` selects the older
+implementation instead.  That one is the reference semantics, the bootstrap
+route for a new platform, and what runs with ``PyOpenGL`` alone; it is not
+scheduled for removal.
 
 Installing this layer replaces the ctypes binding for an entry point with a
 ``GLProc``, which implements the friendly API directly rather than wrapping a
 raw call.  An entry point the generator does not fully implement keeps its
-ctypes binding, so the two can coexist while the phases land.
+ctypes binding, so the two coexist.
 """
 
 import ctypes
