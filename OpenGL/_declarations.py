@@ -22,12 +22,75 @@ cannot drift.  ``python src/regenerate_c.py`` writes both.
 """
 
 import importlib
+import importlib.resources
 import os
 
-__all__ = ['define', 'contents_for', 'clear_caches']
+__all__ = ['define', 'contents_for', 'clear_caches', 'table_path']
 
-#: Where the marshalled declarations live, relative to this file.
-DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'raw', '_declarations')
+#: Where the marshalled declarations live inside the package, as path segments
+#: rather than as a path: they have to be reachable through whatever loader the
+#: package was imported by, and a zip or a frozen application is not a
+#: directory.
+DATA = ('raw', '_declarations')
+
+
+def _table(name):
+    """One shipped table, as a resource rather than as a filename.
+
+    A path built from ``__file__`` names nothing when the package is a zip, a
+    frozen application, or anything else that is not a directory on disk.  With
+    the generated modules no longer shipped these tables are the only
+    description of :mod:`OpenGL.raw` there is, so they are read the way package
+    data has to be read.
+    """
+    resource = importlib.resources.files('OpenGL')
+    for part in DATA + (name,):
+        resource = resource / part
+    return resource
+
+
+def _read_table(name):
+    """The unmarshalled contents of one shipped table.
+
+    Failure to read one is fatal rather than empty.  An empty table means "this
+    API declares nothing", which is indistinguishable from a working
+    installation right up to the point where a module that ought to exist
+    cannot be imported, several frames from the missing file.
+    """
+    import marshal
+
+    try:
+        blob = _table(name).read_bytes()
+    except (OSError, KeyError) as error:
+        raise ImportError(
+            'PyOpenGL cannot read its declaration table %r (%s). Every module '
+            'under OpenGL.raw is built from these tables, so this installation '
+            'cannot work; they are package data and something has dropped them.'
+            % (name, error)
+        ) from error
+    return marshal.loads(blob)
+
+
+#: One resolved path per API.  ``find_spec`` asks for every generated module
+#: imported, and resolving the resource means an import lookup and a stat --
+#: which is a cost per module, for an answer that cannot change during a run.
+_table_paths = {}
+
+
+def table_path(api):
+    """The filesystem path of one table, or ``None`` where it is not a file.
+
+    What a generated module reports as its ``__file__``.  Inside a zip or a
+    frozen application there is no path to report, and saying nothing is better
+    than naming something that cannot be opened.
+    """
+    if api not in _table_paths:
+        try:
+            path = os.fspath(_table('%s.dat' % (api,)))
+        except TypeError:  # a resource that is not a file on disk
+            path = None
+        _table_paths[api] = path if path and os.path.exists(path) else None
+    return _table_paths[api]
 
 #: The APIs a declaration table is shipped for.  GLU, GLUT, GLE and OSMesa are
 #: hand-maintained rather than registry-described, so they keep their modules.
@@ -79,16 +142,16 @@ def _c_source():
 
 
 def _data_source(api):
-    """The shipped declarations for one API, read once."""
-    if api not in _data:
-        import marshal
+    """The shipped declarations for one API, read once.
 
-        path = os.path.join(DATA, '%s.dat' % (api,))
-        try:
-            with open(path, 'rb') as handle:
-                _data[api] = marshal.load(handle)
-        except OSError:
-            _data[api] = {}
+    An API with no table is not an error: GLU, GLUT, GLE and OSMesa are
+    hand-maintained rather than registry-described, so nothing generates a
+    table for them and their modules are shipped as files.  It is a *missing*
+    table, for one of the APIs :data:`APIS` says is generated, that means a
+    broken installation -- and :func:`_read_table` raises for that.
+    """
+    if api not in _data:
+        _data[api] = _read_table('%s.dat' % (api,)) if api in APIS else {}
     return _data[api]
 
 
@@ -151,16 +214,10 @@ def contents_for(module_name):
 
 
 def annotations():
-    """The customisation table, or an empty one where it was not shipped."""
+    """The customisation table: what each entry point wraps its call in."""
     global _annotations
     if _annotations is None:
-        import marshal
-
-        try:
-            with open(os.path.join(DATA, '_annotations.dat'), 'rb') as handle:
-                _annotations = marshal.load(handle)
-        except OSError:
-            _annotations = {}
+        _annotations = _read_table('_annotations.dat')
     return _annotations
 
 
@@ -497,3 +554,4 @@ def clear_caches():
     _data.clear()
     _namespaces.clear()
     _types_cache.clear()
+    _table_paths.clear()

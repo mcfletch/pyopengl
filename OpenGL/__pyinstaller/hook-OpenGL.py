@@ -1,21 +1,26 @@
 """What a frozen application needs from PyOpenGL beyond its import statements
 
-Two things are invisible to a tool that follows imports:
+Three things are invisible to a tool that follows imports:
 
+* the declaration tables under ``OpenGL/raw/_declarations``, which every module
+  in :mod:`OpenGL.raw` is built from -- those modules are not shipped as files,
+  so nothing in the import graph points at the data that answers for them;
 * the plug-in registries (:mod:`OpenGL.plugins`), which name every platform
   module and array format handler as a string and import it only once
   something matches, and
 * the GLUT and GLE DLLs shipped for Windows, which
   :mod:`OpenGL.platform.ctypesloader` opens by path.
 
-Both are reported from the same source the running library uses, so a plug-in
-added to PyOpenGL is carried into a frozen application without an edit here.
+The last two are reported from the same source the running library uses, so a
+plug-in added to PyOpenGL is carried into a frozen application without an edit
+here.
 """
 
 import os
 
 from PyInstaller import isolated
 from PyInstaller.compat import is_win
+from PyInstaller.utils.hooks import collect_data_files
 
 
 @isolated.decorate
@@ -39,6 +44,12 @@ def _dll_directory():
 # frozen application that is told to use EGL or OSMesa needs the module to be
 # there. They are small and pure Python.
 hiddenimports = _plugin_modules()
+
+# Without these there is no OpenGL.raw at all: the finder that answers for
+# those names reads the tables to learn which names it can answer for, so an
+# application frozen without them fails on the first `from OpenGL.raw...
+# import`, several frames away from the missing data.
+datas = collect_data_files('OpenGL', includes=['raw/_declarations/*.dat'])
 
 if is_win:
     # `ctypesloader` opens these by path out of a directory beside the package,
