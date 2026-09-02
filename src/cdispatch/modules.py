@@ -362,6 +362,11 @@ def emit_declarations(modules):
         # Each module's declarations are marshalled on their own, so that
         # reading the file is reading an index: a program using forty modules
         # should not parse the other twelve hundred to find them.
+        #
+        # Version 4 explicitly, as for the file around them: the wheel is
+        # py3-none-any and has to load on every supported interpreter, so the
+        # format cannot be whichever one the interpreter that generated it
+        # happened to default to.
         by_api.setdefault(api, {})[module.name] = marshal.dumps(
             (
                 module.extension,

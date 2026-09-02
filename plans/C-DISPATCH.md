@@ -1333,6 +1333,25 @@ same facts: the C extension, in `.rodata`, and
 using forty of them does not parse the other twelve hundred. Both are written
 by the same generator pass, so they cannot drift.
 
+**Why `marshal`, and what it costs.** The alternatives were a generated Python
+module, JSON, and a packed binary format of our own. A Python module is what
+was just deleted — 1,298 files, parsed and compiled. JSON parses to strings and
+then needs a second pass to turn the tables back into tuples and ints, which is
+the largest part of the cost. A format of our own means writing and maintaining
+a parser for data whose only reader is us. `marshal` is in the standard
+library, loads the exact ints, strings and tuples that were written, and is the
+fastest of the four to read.
+
+Its two documented limits are both bounded here. It is *not* stable across
+Python versions: the wheel is `py3-none-any` and must load on 3.9 through 3.15,
+so both the file and the per-module blobs inside it are written at format
+version 4 explicitly rather than at whichever version the generating
+interpreter defaults to. Version 4 has been readable since 3.4. And it is *not*
+safe against malformed input — but these files ship inside the wheel and are
+not user data; anything able to rewrite them can already rewrite `OpenGL/*.py`.
+The payload is ints, strings and tuples only: no code objects, so a load
+constructs no callable.
+
 A friendly module no longer imports a generated one. It says:
 
 ```python

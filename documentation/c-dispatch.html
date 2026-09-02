@@ -28,26 +28,40 @@ CPython 3.12 and <code>OpenGL_accelerate</code> installed.</p>
 <tr><td>an empty Python function, for scale</td><td colspan="2">32 ns</td></tr>
 </table>
 
+<h2>Where the C implementation comes from</h2>
+
+<p>The C dispatch is compiled, so it ships in the
+<code>PyOpenGL_accelerate</code> distribution rather than in
+<code>PyOpenGL</code> itself:</p>
+
+<pre>pip install PyOpenGL PyOpenGL_accelerate</pre>
+
+<p><code>pip install PyOpenGL</code> on its own gives the ctypes
+implementation, on every platform.  That is a working PyOpenGL &#8212; the two
+implementations are the same bindings with the same semantics &#8212; and it is
+what runs where no compiled wheel is available and where there is no compiler
+to build one.</p>
+
 <h2>Selecting an implementation</h2>
 
 <dl>
 <dt><code>PYOPENGL_DISPATCH=c</code></dt>
-<dd>The default.  Every entry point that has a C implementation uses it; one
-that does not keeps its ctypes binding, so the two coexist and you never have
-to choose per function.</dd>
+<dd>The default where <code>PyOpenGL_accelerate</code> is installed.  Every
+entry point that has a C implementation uses it; one that does not keeps its
+ctypes binding, so the two coexist and you never have to choose per
+function.</dd>
 
 <dt><code>PYOPENGL_DISPATCH=ctypes</code></dt>
 <dd>The reference semantics, the bootstrap route for a new platform, and what
-runs where no compiled wheel is available.  It is not scheduled for
-removal.</dd>
+runs with <code>PyOpenGL</code> alone.  It is not scheduled for removal.</dd>
 </dl>
 
-<p>Installing from source without a compiler is supported: the extension is
-optional, and its absence leaves the ctypes implementation in place.</p>
+<p>With the extension absent, <code>PYOPENGL_DISPATCH=c</code> leaves the
+ctypes implementation in place rather than failing.</p>
 
 <h2>What is implemented in C</h2>
 
-<p>4,819 of PyOpenGL's 4,839 bindings, across GL, GLES 1/2/3, GLSC2, GLX, WGL
+<p>4,859 of PyOpenGL's 4,880 bindings, across GL, GLES 1/2/3, GLSC2, GLX, WGL
 and EGL.  That includes the families whose length is a computation rather than
 a description &#8212; images, sized from format, type, dimensions and the
 current pixel-store state; arrays whose element type is an argument, such as
@@ -57,10 +71,14 @@ sizing itself stays in Python, because
 <code>OpenGL.images.registerImage</code> is a public entry point a third party
 can add a format through, and the C calls it.</p>
 
-<p>The remaining twenty keep their ctypes binding, and
+<p>The remaining twenty-one keep their ctypes binding, and
 <code>python src/check_registry.py</code> lists them with the reason for each:
-eleven GLX queries that return a pointer to an X11 struct, seven whose output
-argument is not the last one, and two others.</p>
+twelve that return a pointer to a struct the binding has no element type for
+(mostly GLX and X11 &#8212; <code>XVisualInfo&nbsp;*</code>,
+<code>GLXFBConfig&nbsp;*</code>, <code>Display&nbsp;*</code>), seven whose
+output argument is not the last one, one with a parameter type the generator
+does not know (<code>EGLnsecsANDROID</code>), and one whose family is
+hand-written.</p>
 
 <h2>Contexts</h2>
 
@@ -122,6 +140,36 @@ simply not accelerated.</p>
 <p>Registering a new array type therefore needs no knowledge of this layer, and
 a type registered against an older PyOpenGL keeps working.  Acceleration is
 optional; acceptance is not.</p>
+
+<h3>A pass-in array of the wrong type</h3>
+
+<p>Entry points that fill an array take one you supply, and hand it back:</p>
+
+<pre>names = glGenTextures(4)              # allocated for you
+glGenTextures(4, names)               # or filled in an array you own</pre>
+
+<p><strong>Read the return value, not the array you passed.</strong>  Where the
+array you pass already has the element type the call wants, the GL writes
+directly into it and the two are the same object.  Where it does not &#8212; an
+<code>int32</code> array of four where <code>uint32</code> was wanted, or a
+list &#8212; the array is converted first, the GL writes into the converted
+copy, and <em>that</em> is what comes back.  Your original is left as it
+was:</p>
+
+<pre>a = numpy.zeros(4, 'int32')
+b = glGetFloatv(GL_COLOR_CLEAR_VALUE, a)
+# b holds the clear colour; a is still [0 0 0 0]</pre>
+
+<p>This is what passing an array has always meant, in this implementation and
+in the ctypes one, and a great deal of code relies on being able to pass a list
+or an array of a convenient type and read the result from the return value.  So
+it is not refused.  Passing <code>None</code>, or an array of the right type,
+are both ways to get an array written in place.</p>
+
+<p>Two cases are refused, because in them nothing usable comes back at all: a
+conversion that produced a <em>smaller</em> buffer than you passed, and an
+array too short for the number of elements the call was told to write &#8212;
+which would otherwise let the driver write past the end of it.</p>
 
 <h2>Error checking</h2>
 
@@ -215,13 +263,35 @@ nothing the driver is reading from can be collected while it reads.</p>
 
 <h3>Free-threaded builds</h3>
 
-<p>The layer declares itself compatible with the free-threaded builds of Python
-3.13 and later (<code>Py_mod_gil</code>), so importing it does not re-enable
-the GIL for the process.  What makes that safe is that a call touches only its
-own context's table; the registry of tables is guarded by a lock, and the
-configuration a call reads is set once at import.  Where two threads share a
-table &#8212; on a platform that cannot say which context is current &#8212;
-the value they race to write is the same resolved address.</p>
+<p>The dispatch layer itself declares compatibility with the free-threaded
+builds of Python 3.13 and later (<code>Py_mod_gil</code>).  What makes that
+safe is that a call touches only its own context's table; the registry of
+tables is guarded by a lock, and the configuration a call reads is set once at
+import.  Where two threads share a table &#8212; on a platform that cannot say
+which context is current &#8212; the value they race to write is the same
+resolved address.</p>
+
+<p><strong>Importing PyOpenGL on a free-threaded build re-enables the GIL
+anyway.</strong>  The dispatch layer ships in
+<code>PyOpenGL_accelerate</code> alongside that package's other compiled
+modules, and <code>import OpenGL.GL</code> loads six of them &#8212;
+<code>errorchecker</code>, <code>arraydatatype</code>,
+<code>formathandler</code>, <code>latebind</code>, <code>wrapper</code> and
+<code>vbo</code>.  None of those declares itself free-threading compatible, so
+each one turns the GIL back on as it loads, and the interpreter says so:</p>
+
+<pre>RuntimeWarning: The global interpreter lock (GIL) has been enabled to load
+module 'OpenGL_accelerate.errorchecker', which has not declared that it can
+run safely without the GIL.</pre>
+
+<p>Running <code>PyOpenGL</code> without
+<code>PyOpenGL_accelerate</code> keeps the GIL disabled, at the ctypes
+implementation's speed.  Getting both at once needs those six modules audited
+for free-threaded safety and declared, which is not something their current
+code supports: <code>LateBind</code>, for one, resolves its target by writing
+an attribute on first call, and two threads reaching that write together is a
+race on a reference count rather than on a value.  Until that work is done the
+combination is the GIL or the C dispatch, not both.</p>
 
 <p>Suspending error checking, which <code>glBegin</code> does, is a property of
 the calling thread rather than the process.  The ctypes implementation holds
@@ -308,27 +378,37 @@ points, none of them on a hot path.</p>
 
 <h2>Where the OpenGL.raw modules come from</h2>
 
-<p>The modules under <code>OpenGL.raw</code> are generated &#8212; constants,
-entry-point declarations and re-exports, and nothing else.  The C extension
-carries the same definitions in its own tables, so those modules can be built
-from the tables rather than imported from files:</p>
+<p>The modules under <code>OpenGL.raw</code> hold constants, entry-point
+declarations and re-exports, and nothing else.  They are not shipped as files.
+They are built on import from declaration tables &#8212;
+<code>OpenGL/raw/_declarations/&lt;API&gt;.dat</code>, one per API &#8212; by a
+finder that PyOpenGL puts on <code>sys.meta_path</code> for itself.  The tables
+describe 1,298 modules in 1.2&nbsp;MB; as files those modules were 1,298
+entries in the wheel, which is most of the difference between a 4.0&nbsp;MB
+wheel and a 2.9&nbsp;MB one.</p>
 
-<pre>PYOPENGL_VIRTUAL_MODULES=1</pre>
+<p>Nothing has to be switched on, and an importing program sees no difference:
+<code>from OpenGL.raw.GL.VERSION.GL_1_1 import *</code> works as it always
+has.  What changes is what a tool asking about the module finds &#8212;
+<code>__spec__.origin</code> is the table the definitions came from, and
+<code>__file__</code> names that table rather than a <code>.py</code>
+source.</p>
 
-<p>It is off by default because it does not currently pay.  With the friendly
-modules importing the raw ones eagerly, <code>import OpenGL.GL</code> costs
-58&nbsp;ms and 62&nbsp;MB whichever way the modules are filled; cold, it is
-185&nbsp;ms from files against 166&nbsp;ms from the tables, and walking the
-whole raw tree is 333&nbsp;ms against 352&nbsp;ms.  What the option gives you
-is the same names from a different source, and a way to check that they really
-are the same.</p>
+<p>Where the C extension is installed the same definitions are read from its
+own tables instead, since they are already resident; the two are generated
+together in one pass and describe the same set.</p>
 
-<p>Two kinds keep their files whatever you set.  The packages and the private
-modules &#8212; <code>_types</code>, <code>_errors</code>,
-<code>_glgets</code> &#8212; carry classes and conditionals rather than data.
-And the finder cannot be installed until the extension is loaded, which is the
-first entry point built, so whatever was imported to reach that point comes
-from files: for <code>import OpenGL.GL</code> that is GL_1_0 and GL_1_1.</p>
+<p>Two kinds are real files still.  The packages, which have
+<code>__init__.py</code> as before, and the private modules
+&#8212; <code>_types</code>, <code>_errors</code>, <code>_glgets</code>
+&#8212; which carry classes and conditionals rather than data, so there is
+nothing to tabulate.</p>
+
+<p><code>PYOPENGL_VIRTUAL_MODULES=0</code> turns the finder off.  That is
+useful only in a checkout that still has the generated files &#8212; the
+generator can write them, and comparing the two is how the tables are held
+honest &#8212; and it makes <code>OpenGL.raw</code> unimportable in an ordinary
+installation.</p>
 
 <h2>Regenerating and keeping up with the registry</h2>
 

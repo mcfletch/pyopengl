@@ -66,10 +66,15 @@ Choosing a dispatch implementation
 -----------------------------------
 
 PyOpenGL has two implementations of the OpenGL entry points.  The C
-implementation is generated from the Khronos registry, reaches the driver
-roughly seven times faster -- eleven times for a call that passes an array --
-and is the default.  The ctypes implementation is the one PyOpenGL has always
-had, and is selected with::
+implementation is generated from the Khronos registry and reaches the driver
+roughly seven times faster -- eleven times for a call that passes an array.
+Being compiled, it ships in ``PyOpenGL_accelerate``::
+
+    $ pip install PyOpenGL PyOpenGL_accelerate
+
+``pip install PyOpenGL`` on its own gives the ctypes implementation, which is
+the one PyOpenGL has always had.  Where both are installed the C
+implementation is used, and the ctypes one is selected with::
 
     $ PYOPENGL_DISPATCH=ctypes python yourprogram.py
 
