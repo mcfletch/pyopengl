@@ -7,15 +7,17 @@ as a chain of calls::
     glGetIntegerv = wrapper.wrapper(glGetIntegerv).setOutput(
         'data', _glgets.GL_GET_SIZES, pnameArg='pname', orPassIn=True)
 
-2,027 of those calls are ``setInputArraySize`` and 687 are ``setOutput``, across
-259 modules that contain nothing else.  Both are already in the annotation
-table -- a size spec and ``out`` -- because the table was extracted from these
-very chains.
+Both are in the annotation table -- a conversion, a size spec, ``out`` -- so a
+chain is a second copy of what the table holds, and 257 modules have stopped
+carrying theirs.  What has to be true for the next one to is that applying the
+table produces the same wrapper the chain produces, which is what these check,
+on the real entry points rather than on a mock.
 
-So the chains are a second copy of what the table holds, and the modules can
-stop carrying them.  What has to be true first is that applying the table
-produces the same wrapper the chain produces, which is what these check, on the
-real entry points rather than on a mock.
+The chains that remain are in modules the table cannot express: a hand-written
+converter, a resolver, an image size computed from a format and a type
+together.  They are the reason the parse still exists, and comparing the two
+copies is the only thing it is still for -- generation reads the table alone
+(``test_generation_is_data_driven.py``).
 """
 
 import os
@@ -69,15 +71,45 @@ class TestTheChainsAreASecondCopy:
                     missing.append((api, name, arguments[0]))
         assert missing == [], missing[:10]
 
-    def test_the_two_calls_dominate(self, chains):
-        """If the tail were large this would not be worth doing."""
+    def test_nothing_absorbable_is_still_carrying_a_chain(self):
+        """The migration is finished, and stays finished.
+
+        A module whose chain the table can express is one the absorber would
+        rewrite, so finding one means either a new module arrived carrying a
+        chain or something stopped being expressible.  Both want looking at.
+        """
+        import subprocess
+        import sys
+
+        completed = subprocess.run(
+            [sys.executable, os.path.join(HERE, 'src', 'absorb_chains.py')],
+            capture_output=True,
+            text=True,
+            cwd=HERE,
+            timeout=300,
+        )
+        assert completed.returncode == 0, completed.stderr
+        assert 'would rewrite 0 modules' in completed.stdout, completed.stdout
+
+    def test_what_still_carries_a_chain_is_what_the_table_cannot_say(self, chains):
+        """The remaining calls are the hand-written ones, plus their company.
+
+        A module is absorbed whole or not at all, so a ``setInputArraySize``
+        sitting beside a ``setPyConverter`` stays where it is.  What must not
+        appear is a module of nothing but mechanical calls.
+        """
         import collections
 
         counts = collections.Counter(
             call for calls in chains.values() for call, _arguments in calls
         )
-        mechanical = counts['setInputArraySize'] + counts['setOutput']
-        assert mechanical > 20 * (sum(counts.values()) - mechanical)
+        hand_written = sum(
+            count
+            for call, count in counts.items()
+            if call not in ('setInputArraySize', 'setOutput')
+        )
+        assert hand_written > 0, 'the parse has nothing left to check'
+        assert counts['setInputArraySize'] + counts['setOutput'] < 800
 
 
 class TestRebuildingFromTheTable:
