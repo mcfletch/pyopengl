@@ -176,8 +176,17 @@ class BasePlatform(object):
         """
         # Core/version modules name themselves e.g. GLES2_VERSION_GLES2_2_0 or
         # GLES2_ES_VERSION_3_2 -- the 'VERSION' token is not always at index 1.
+        from OpenGL.error import inside_begin_block
+
         is_core = (not extension) or 'VERSION' in extension.split('_')
-        if (not is_core) and not self.checkExtension(extension):
+        # The gate stands aside inside a glBegin block, where the extension
+        # string cannot be read -- see _dispatch.support._extension_gate_passes,
+        # which states the same rule for the compiled dispatch layer.
+        if (
+            (not is_core)
+            and not inside_begin_block()
+            and not self.checkExtension(extension)
+        ):
             raise AttributeError("""Extension not available""")
         argTypes = [self.finalArgType(t) for t in argTypes]
 

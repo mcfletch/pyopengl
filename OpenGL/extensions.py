@@ -217,6 +217,11 @@ class _GLQuerier(ExtensionQuerier):
         from OpenGL.raw.GL.VERSION.GL_1_1 import GL_VERSION
 
         new = glGetString(GL_VERSION)
+        if not new:
+            # A query the context would not answer -- between glBegin and
+            # glEnd, say, where none is legal.  "Not yet known" rather than an
+            # AttributeError on the way to decoding a null string.
+            return False
 
         self.version_string = new.decode('utf-8', errors='ignore')
         match = self.version_matcher.match(self.version_string)

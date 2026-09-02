@@ -7,6 +7,7 @@ client demotes it.
 """
 
 import ctypes
+import sys
 
 from OpenGL import arrays, error, platform
 from OpenGL._bytes import as_8_bit
@@ -67,7 +68,7 @@ def resolve(name, extension, alternates, api_index):
     api = _API_NAMES[api_index]
     platform_ = platform.PLATFORM
     is_core = (not extension) or 'VERSION' in extension.split('_')
-    if not is_core and not _any_extension_present(platform_, extension, alternates):
+    if not is_core and not _extension_gate_passes(platform_, extension, alternates):
         return None
     dll = _dll_for(api)
     if is_core and dll is not None:
@@ -86,6 +87,27 @@ def resolve(name, extension, alternates, api_index):
     if pointer:
         return int(pointer)
     return None
+
+
+def _extension_gate_passes(platform_, extension, alternates):
+    """Whether the extension gate lets this command through.
+
+    The gate reads the context's extension string, and no GL query is legal
+    between ``glBegin`` and ``glEnd``.  That is exactly where an immediate-mode
+    extension command -- ``glColor3hNV``, ``glPrimitiveRestartNV``,
+    ``glMultiTexCoord2fARB`` -- is first called, because a Begin/End block is
+    the only place it *may* be called.  Asking anyway answers "no extensions",
+    which reports a command the driver does have as undefined and leaves
+    GL_INVALID_OPERATION recorded against the block.
+
+    So inside a block the gate stands aside, and the address the windowing
+    system hands back decides instead -- a question that does have an answer
+    there.  The gate resumes as soon as the block closes, so a command first
+    reached outside one is refused exactly as before.
+    """
+    if error.inside_begin_block():
+        return True
+    return _any_extension_present(platform_, extension, alternates)
 
 
 def _any_extension_present(platform_, extension, alternates):
