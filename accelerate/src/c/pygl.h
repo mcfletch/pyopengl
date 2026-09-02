@@ -467,6 +467,11 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
     if (PYGL_UNLIKELY(_nargs < (low) || _nargs > (high)))                      \
     return pygl_arity_range_error(self, (low), (high), _nargs)
 
+/* Every macro from here to PYGL_CLEANUP expands to *statement; declaration*,
+ * so none of them can be wrapped in do { } while (0) and none may be used as
+ * the body of an unbraced if.  They belong at statement level in a function
+ * body, which is where the generator puts them; this is the constraint that
+ * makes that not an accident. */
 #define PYGL_FRAME(n)                                                          \
     PyGLBuf _bufs[(n)];                                                        \
     int _nb = 0

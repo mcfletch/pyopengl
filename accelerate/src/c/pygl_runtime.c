@@ -38,7 +38,12 @@ static int pygl_size_1_array_unpack = 1;
 /* glGetError inside a glBegin/glEnd block is itself an invalid operation, so
  * error checking is suspended for the duration.  The ctypes path does this
  * through _ErrorChecker.onBegin/onEnd; this is the same switch. */
-static int pygl_error_suspended = 0;
+/* Thread-local: a glBegin block is a property of the thread drawing, and one
+ * thread entering one must not silence error checking for another.  The
+ * ctypes _ErrorChecker.onBegin has the same global behaviour, so this is
+ * where the two diverge deliberately -- a rewrite is the moment to fix it
+ * rather than reproduce it. */
+static PYGL_THREAD_LOCAL int pygl_error_suspended = 0;
 
 /* GL_KHR_debug reporting.  The driver calls pygl_debug_callback during the GL
  * call itself when GL_DEBUG_OUTPUT_SYNCHRONOUS is on, so the callback records
@@ -2076,9 +2081,11 @@ static PyObject *pygl_py_configure(PyObject *module, PyObject *args, PyObject *k
             pygl_null_table.flags[index] = pygl_default_flags;
             pygl_default_table.flags[index] = pygl_default_flags;
         }
+        PyThread_acquire_lock(pygl_tables_lock, WAIT_LOCK);
         for (table = pygl_tables; table != NULL; table = table->next) {
             memset(table->flags, pygl_default_flags, (size_t)pygl_command_count);
         }
+        PyThread_release_lock(pygl_tables_lock);
     }
     Py_RETURN_NONE;
 }
@@ -2092,6 +2099,14 @@ static PyObject *pygl_py_suspend_error_checking(PyObject *module, PyObject *argu
     }
     pygl_error_suspended = suspend;
     Py_RETURN_NONE;
+}
+
+static PyObject *pygl_py_error_checking_suspended(PyObject *module,
+                                                  PyObject *unused)
+{
+    (void)module;
+    (void)unused;
+    return PyBool_FromLong(pygl_error_suspended);
 }
 
 /* The address of the callback, so the Python side can hand it to
@@ -2288,6 +2303,9 @@ static PyMethodDef pygl_methods[] = {
      "The address the current context has resolved an entry point to."},
     {"set_error_checking", pygl_py_set_error_checking, METH_VARARGS,
      "Turn per-call error checking on or off, for one entry point or all."},
+    {"error_checking_suspended", pygl_py_error_checking_suspended, METH_NOARGS,
+     PyDoc_STR("error_checking_suspended($module)\n--\n\n"
+               "Whether this thread is inside a glBegin block.")},
     {"suspend_error_checking", pygl_py_suspend_error_checking, METH_O,
      "Suspend per-call error checking, for the duration of a glBegin block."},
     {"debug_callback_address", pygl_py_debug_callback_address, METH_NOARGS,
@@ -2339,59 +2357,54 @@ static int pygl_init_errors(void)
                                                                                : -1;
 }
 
+static PyModuleDef_Slot pygl_module_slots[];
+
 static struct PyModuleDef pygl_module_def = {
     PyModuleDef_HEAD_INIT,
-    "OpenGL_accelerate.dispatch",
-    "Registry-generated C implementation of the OpenGL entry points.",
-    -1,
-    pygl_methods,
+    .m_name = "OpenGL_accelerate.dispatch",
+    .m_doc = "Registry-generated C implementation of the OpenGL entry points.",
+    .m_size = 0,
+    .m_methods = pygl_methods,
+    .m_slots = pygl_module_slots,
 };
 
-PyMODINIT_FUNC PyInit_dispatch(void)
+static int pygl_exec(PyObject *module)
 {
-    PyObject *module, *entry_points;
+    PyObject *entry_points;
 
     if (PyType_Ready(&PyGLProc_Type) < 0) {
-        return NULL;
+        return -1;
     }
     pygl_tables_lock = PyThread_allocate_lock();
     if (pygl_tables_lock == NULL) {
         PyErr_NoMemory();
-        return NULL;
+        return -1;
     }
     pygl_str_asArray = PyUnicode_InternFromString("asArray");
     pygl_str_dataPointer = PyUnicode_InternFromString("dataPointer");
     pygl_str_zeros = PyUnicode_InternFromString("zeros");
     if (!pygl_str_asArray || !pygl_str_dataPointer || !pygl_str_zeros) {
-        return NULL;
+        return -1;
     }
     if (pygl_init_errors() < 0) {
-        return NULL;
-    }
-    module = PyModule_Create(&pygl_module_def);
-    if (module == NULL) {
-        return NULL;
+        return -1;
     }
     Py_INCREF(&PyGLProc_Type);
     if (PyModule_AddObject(module, "GLProc", (PyObject *)&PyGLProc_Type) < 0) {
         Py_DECREF(&PyGLProc_Type);
-        Py_DECREF(module);
-        return NULL;
+        return -1;
     }
     entry_points = PyDict_New();
     if (entry_points == NULL) {
-        Py_DECREF(module);
-        return NULL;
+        return -1;
     }
     if (pygl_register_generated(entry_points) < 0) {
         Py_DECREF(entry_points);
-        Py_DECREF(module);
-        return NULL;
+        return -1;
     }
     if (PyModule_AddObject(module, "entry_points", entry_points) < 0) {
         Py_DECREF(entry_points);
-        Py_DECREF(module);
-        return NULL;
+        return -1;
     }
     /* Both static tables need the slot count the generated code declared. */
     pygl_null_table.slots = PyMem_Calloc((size_t)pygl_command_count, sizeof(void *));
@@ -2400,8 +2413,35 @@ PyMODINIT_FUNC PyInit_dispatch(void)
     pygl_default_table.flags = PyMem_Calloc((size_t)pygl_command_count, sizeof(uint8_t));
     if (pygl_null_table.slots == NULL || pygl_null_table.flags == NULL ||
         pygl_default_table.slots == NULL || pygl_default_table.flags == NULL) {
-        Py_DECREF(module);
-        return PyErr_NoMemory();
+        PyErr_NoMemory();
+        return -1;
     }
-    return module;
+    return 0;
+}
+
+/* Multi-phase init, for the sake of Py_mod_gil: a module without that slot
+ * makes a free-threaded interpreter re-enable the GIL for the whole process on
+ * import, and PyOpenGL runs free-threaded today.  What makes the claim true is
+ * that the per-context tables are the only mutable structure a call touches,
+ * pygl_tables_lock guards every mutation of the registry of them, and the
+ * remaining statics are set once at configure time.  The slot writes two
+ * threads sharing a table can race on write the same resolved address.
+ *
+ * Subinterpreters are refused rather than left to fail obscurely: that same
+ * process-wide state has one copy, and a second interpreter would share the
+ * first one's contexts. */
+static PyModuleDef_Slot pygl_module_slots[] = {
+    {Py_mod_exec, (void *)pygl_exec},
+#if PY_VERSION_HEX >= 0x030C0000
+    {Py_mod_multiple_interpreters, Py_MOD_MULTIPLE_INTERPRETERS_NOT_SUPPORTED},
+#endif
+#if PY_VERSION_HEX >= 0x030D0000
+    {Py_mod_gil, Py_MOD_GIL_NOT_USED},
+#endif
+    {0, NULL},
+};
+
+PyMODINIT_FUNC PyInit_dispatch(void)
+{
+    return PyModuleDef_Init(&pygl_module_def);
 }

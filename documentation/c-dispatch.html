@@ -185,6 +185,53 @@ implementation, which they do not have under ctypes:</p>
 <p>The signature is built from the registry, so it is available for every entry
 point without any external documentation source.</p>
 
+<h2>Threads</h2>
+
+<p>A GL context belongs to one thread at a time, so the usual arrangement is
+one rendering thread and other threads doing everything else.  Two properties
+of the dispatch layer matter to that arrangement.</p>
+
+<h3>Calls that can wait release the GIL</h3>
+
+<p>A call that waits on the driver &#8212; <code>glFinish</code>,
+<code>glReadPixels</code>, <code>glClientWaitSync</code>, a shader compile, a
+buffer mapping, a swap under vsync, a large texture or buffer upload &#8212;
+releases the GIL for the duration, so the other threads in the process keep
+running while it waits.  On a 4096&#215;4096 <code>glReadPixels</code> taking
+20&nbsp;ms, a second thread runs several hundred times during the call rather
+than once or twice.</p>
+
+<p>Releasing costs 15&#8211;25&nbsp;ns against the 57&nbsp;ns a
+<code>glBindTexture</code> takes, so it is done for the calls that can actually
+block rather than for all of them.  The list is
+<code>src/cdispatch/blocking.py</code>: about 30 exact names and 20 family
+patterns, 244 entry points in total, and the choice is made when the C is
+generated rather than tested on each call.  A call not in that list holds the
+GIL, which is the right trade for one that returns in tens of nanoseconds.</p>
+
+<p>Arguments converted for the call &#8212; the arrays, the strings, the
+buffers &#8212; are held by the calling frame across the released region, so
+nothing the driver is reading from can be collected while it reads.</p>
+
+<h3>Free-threaded builds</h3>
+
+<p>The layer declares itself compatible with the free-threaded builds of Python
+3.13 and later (<code>Py_mod_gil</code>), so importing it does not re-enable
+the GIL for the process.  What makes that safe is that a call touches only its
+own context's table; the registry of tables is guarded by a lock, and the
+configuration a call reads is set once at import.  Where two threads share a
+table &#8212; on a platform that cannot say which context is current &#8212;
+the value they race to write is the same resolved address.</p>
+
+<p>Suspending error checking, which <code>glBegin</code> does, is a property of
+the calling thread rather than the process.  The ctypes implementation holds
+that flag on a shared object, so there one thread's <code>glBegin</code> block
+silences error checking for every thread; under C it does not.</p>
+
+<p>Subinterpreters with their own GIL are refused at import.  The layer keeps
+one set of context tables for the process, and a second interpreter would share
+the first one's contexts rather than have its own.</p>
+
 <h2>What differs from the ctypes implementation</h2>
 
 <p>These are the differences a program can observe.  Everything not listed here
@@ -212,6 +259,10 @@ it that way.</p>
 <tr><td><code>bool(glFoo)</code>, <code>glInitXxx()</code></td>
     <td>resolved once, cached for the process</td>
     <td>answered for the current context</td></tr>
+
+<tr><td>error checking suspended by <code>glBegin</code></td>
+    <td>process-wide: one thread's block silences another's checking</td>
+    <td>per thread</td></tr>
 
 <tr><td><code>OpenGL.FULL_LOGGING</code></td>
     <td>logs every call</td>
