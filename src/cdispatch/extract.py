@@ -601,19 +601,22 @@ def _apply_registry(commands, registry_root):
                     parameter.direction = model.OUT
 
 
-def extract_tree(root, registry_root=None):
+def extract_tree(root, registry_root=None, read_chains=True):
     """Every command PyOpenGL ships, with the friendly layer's annotations.
 
     Keyed by ``(api, name)``: ``glTexImage2D`` exists in both GL and GLES2 as
     separate bindings resolved from separate libraries, so the name alone does
     not identify an entry point.
 
-    The annotations come from three places, in order: the friendly modules,
-    the registry, and ``annotations.json``.  The last is what makes a module
-    able to stop carrying its customisation chain -- once the chain is gone
-    there is nothing in the tree left to parse, and the table is the record.
-    Applying it over the parse is safe because for a module that still has its
-    chain the two say the same thing, which the round-trip test asserts.
+    Signatures come from the declarations, the sizes and families from the
+    registry, and what the friendly layer states from ``annotations.json``.
+
+    ``read_chains`` decides whether the friendly modules are parsed as well.
+    Generation passes ``False``: a chain is a *second* copy of what the table
+    holds, so reading it adds nothing and makes the generator depend on text
+    that migrating a module deletes.  The migration tooling and the tests pass
+    ``True``, because comparing the two copies is how the table is kept honest
+    while any chain remains.
     """
     commands = {}
     raw_root = os.path.join(root, 'raw')
@@ -640,27 +643,34 @@ def extract_tree(root, registry_root=None):
                     # it keeps, so the loser's name survives on the winner.
                     commands[key] = _prefer(existing, command)
 
-    for directory, _folders, files in os.walk(root):
-        if 'raw' in directory.split(os.sep) or '__pycache__' in directory:
-            continue
-        api = _api_for_path(root, directory)
-        if api is None:
-            continue
-        for name in sorted(files):
-            if not name.endswith('.py'):
+    if read_chains:
+        for directory, _folders, files in os.walk(root):
+            if 'raw' in directory.split(os.sep) or '__pycache__' in directory:
                 continue
-            path = os.path.join(directory, name)
-            for command_name, entry in extract_friendly(path).items():
-                command = commands.get((api, command_name))
-                if command is not None:
-                    _apply_annotations(command, entry)
+            api = _api_for_path(root, directory)
+            if api is None:
+                continue
+            for name in sorted(files):
+                if not name.endswith('.py'):
+                    continue
+                path = os.path.join(directory, name)
+                for command_name, entry in extract_friendly(path).items():
+                    command = commands.get((api, command_name))
+                    if command is not None:
+                        _apply_annotations(command, entry)
 
     if registry_root is None:
         registry_root = os.path.join(
             os.path.dirname(os.path.abspath(root)), 'src', 'khronosapi', 'xml'
         )
-    _apply_registry(commands, registry_root)
+    # The table goes on *before* the registry, in the place the chains would
+    # have occupied.  What the registry derives depends on what the friendly
+    # layer already said -- a command marked ``variadic`` keeps its own sizing
+    # -- so applying the table afterwards would let the registry decide as
+    # though nothing had been said, and the answer would depend on whether the
+    # chain happened to still be in the tree.
     _apply_annotation_table(commands)
+    _apply_registry(commands, registry_root)
     _mark_retained(commands)
     return commands
 

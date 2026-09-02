@@ -199,12 +199,19 @@ def _write(path, text):
 
 def generate(package_root, output_root, report=None, tables_path=None,
              stubs_root=None):
-    """Generate every C artifact from the shipped tree.
+    """Generate every C artifact from the declarations, registry and table.
+
+    The friendly modules are **not** read.  What they state is in
+    ``annotations.json``, and a customisation chain still in the tree is a
+    second copy of that -- so reading it would add nothing and would make the
+    generated C depend on text that migrating a module deletes.  The two copies
+    are compared by ``tests/cdispatch/test_annotation_wrapping.py`` for as long
+    as any chain remains.
 
     Returns the command records, so that callers can report on coverage without
     extracting a second time.
     """
-    commands = extract.extract_tree(package_root)
+    commands = extract.extract_tree(package_root, read_chains=False)
     emittable = {
         key: command
         for key, command in commands.items()

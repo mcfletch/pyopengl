@@ -71,6 +71,11 @@ def dump(commands):
         entry = {}
         if command.helper:
             entry['helper'] = command.helper
+        if command.retains:
+            # A command-level fact, not a parameter one: it is what marks a
+            # client-array registration, and _mark_retained reads it to decide
+            # both the family and the pointer's size.
+            entry['retains'] = True
         parameters = {}
         for parameter in command.parameters:
             bits = {}
@@ -160,6 +165,8 @@ def apply(commands, table):
             continue
         if 'helper' in entry:
             command.helper = entry['helper']
+        if entry.get('retains'):
+            command.retains = True
         names = [p.name for p in command.parameters]
         by_name = {p.name: p for p in command.parameters}
         for parameter_name, bits in entry.get('parameters', {}).items():
@@ -191,6 +198,7 @@ def without_annotations(commands):
     for key, command in commands.items():
         clone = copy.deepcopy(command)
         clone.helper = ''
+        clone.retains = False
         for parameter in clone.parameters:
             parameter.direction = model.IN
             parameter.size = model.NO_SIZE

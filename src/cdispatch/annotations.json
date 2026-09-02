@@ -802,7 +802,8 @@
      "type": "type"
     }
    }
-  }
+  },
+  "retains": true
  },
  "GL.glColorPointerEXT": {
   "parameters": {
@@ -1860,7 +1861,8 @@
      "type": -1
     }
    }
-  }
+  },
+  "retains": true
  },
  "GL.glEdgeFlagPointerEXT": {
   "parameters": {
@@ -7143,7 +7145,8 @@
      "type": "type"
     }
    }
-  }
+  },
+  "retains": true
  },
  "GL.glIndexPointerEXT": {
   "parameters": {
@@ -7255,7 +7258,8 @@
      "type": -1
     }
    }
-  }
+  },
+  "retains": true
  },
  "GL.glInvalidateFramebuffer": {
   "parameters": {
@@ -8880,7 +8884,8 @@
      "type": "type"
     }
    }
-  }
+  },
+  "retains": true
  },
  "GL.glNormalPointerEXT": {
   "parameters": {
@@ -11941,7 +11946,8 @@
      "type": "type"
     }
    }
-  }
+  },
+  "retains": true
  },
  "GL.glTexCoordPointerEXT": {
   "parameters": {
@@ -14703,7 +14709,8 @@
      "type": "type"
     }
    }
-  }
+  },
+  "retains": true
  },
  "GL.glVertexPointerEXT": {
   "parameters": {
