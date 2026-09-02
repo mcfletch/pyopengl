@@ -36,10 +36,21 @@ class TestGL46(GLTestCase):
                 np.array([(-1, -1), (1, -1), (0, 1)], 'f'),
                 GL_STATIC_DRAW,
             )
+            # An indexed draw reads its indices from a bound element array
+            # buffer, and generates INVALID_OPERATION where none is.
+            ebo = glGenBuffers(1)
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
+            glBufferData(
+                GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'I'), GL_STATIC_DRAW
+            )
             ind = glGenBuffers(1)
             glBindBuffer(GL_DRAW_INDIRECT_BUFFER, ind)
+            # Five uints: DrawArraysIndirect reads the first four (count,
+            # primCount, first, baseInstance) and DrawElementsIndirect all
+            # five (count, primCount, firstIndex, baseVertex, baseInstance),
+            # so one buffer serves both draws.
             glBufferData(
-                GL_DRAW_INDIRECT_BUFFER, np.array([3, 1, 0, 0], 'I'), GL_STATIC_DRAW
+                GL_DRAW_INDIRECT_BUFFER, np.array([3, 1, 0, 0, 0], 'I'), GL_STATIC_DRAW
             )
             cnt = glGenBuffers(1)
             glBindBuffer(GL_PARAMETER_BUFFER, cnt)

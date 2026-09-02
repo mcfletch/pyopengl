@@ -63,12 +63,16 @@ class TestARBExtra(GLTestCase):
         self.assertTrue(glIsImageHandleResidentARB(img))
         glMakeImageHandleNonResidentARB(img)
 
-        # uniform-handle setters need a program with a bindless sampler uniform
+        # The uniform-handle setters take a *bindless* sampler uniform.  A
+        # sampler declared without the layout qualifier is a bound one, whose
+        # value is a texture image unit, and handing it a handle is an
+        # INVALID_OPERATION -- the extension spec makes the qualifier what
+        # decides, and only a driver defaulting the other way lets it pass.
         program = self.compile_program(
             '#version 450 core\nvoid main(){gl_Position=vec4(0.0);}',
             '#version 450 core\n'
             '#extension GL_ARB_bindless_texture : require\n'
-            'uniform sampler2D s; out vec4 c;\n'
+            'layout(bindless_sampler) uniform sampler2D s; out vec4 c;\n'
             'void main(){ c = texture(s, vec2(0.5)); }',
         )
         loc = glGetUniformLocation(program, 's')
