@@ -15,6 +15,9 @@ import os
 from . import model
 from .ctypes_model import CType, parse_type
 
+#: Where the marshalled declaration tables live under ``OpenGL/raw``.
+DECLARATION_TABLES = '_declarations'
+
 __all__ = [
     'extract_tree',
     'extract_raw',
@@ -190,6 +193,70 @@ def extract_raw(path, api):
             api=api,
         )
     return commands
+
+
+def read_declarations(package_root, api):
+    """Every module of one API, from the shipped declaration table.
+
+    Yields ``(module_name, {command_name: Command})`` in module order, one
+    entry per generated module, because a command adopted into a GL version is
+    declared twice -- by the extension that introduced it and by the version
+    that adopted it -- and which declaration wins, with the loser recorded as
+    an alternate, is ``_prefer``'s decision to make rather than this one's.
+
+    The same facts ``extract_raw`` reads out of ``OpenGL/raw/**.py``, taken
+    from the marshalled table those files are generated alongside.  It is the
+    table rather than the files because the files are what phase 15 removes:
+    a generated module is data, and data does not need to be a module.
+
+    The types arrive as the text they were written in -- ``_cs.GLenum``,
+    ``ctypes.POINTER(_cs.GLchar)`` -- which is the grammar
+    ``_ctype_from_node`` already reads, so the two paths cannot disagree about
+    what a type means.
+    """
+    import marshal
+
+    path = os.path.join(package_root, 'raw', DECLARATION_TABLES, '%s.dat' % (api,))
+    try:
+        with open(path, 'rb') as handle:
+            table = marshal.load(handle)
+    except OSError:
+        return {}
+
+    for module_name in sorted(table):
+        feature, _constants, declared, _reexports = marshal.loads(table[module_name])
+        commands = {}
+        for name, arguments, types in declared:
+            # The C source hands these over comma-joined; the marshalled table
+            # keeps them as tuples.  Either way they are names and expressions.
+            if isinstance(arguments, str):
+                arguments = [item for item in arguments.split(',') if item]
+            if isinstance(types, str):
+                types = types.split(',')
+            argument_names = list(arguments)
+            type_texts = list(types)
+            if len(type_texts) != len(argument_names) + 1:
+                # Types and names disagreeing is a defect in the table; skip it
+                # rather than emit a stub that cannot be called correctly.
+                continue
+            try:
+                parsed = [
+                    _ctype_from_node(ast.parse(text, mode='eval').body)
+                    for text in type_texts
+                ]
+            except SyntaxError:
+                continue
+            commands[name] = model.Command(
+                name=name,
+                return_type=parsed[0],
+                parameters=[
+                    model.Parameter(name=argument_name, ctype=ctype)
+                    for argument_name, ctype in zip(argument_names, parsed[1:])
+                ],
+                feature=feature,
+                api=api,
+            )
+        yield module_name, commands
 
 
 # ----------------------------------------------------------- friendly modules
@@ -608,8 +675,10 @@ def extract_tree(root, registry_root=None, read_chains=True):
     separate bindings resolved from separate libraries, so the name alone does
     not identify an entry point.
 
-    Signatures come from the declarations, the sizes and families from the
-    registry, and what the friendly layer states from ``annotations.json``.
+    Signatures come from the marshalled declaration tables, the sizes and
+    families from the registry, and what the friendly layer states from
+    ``annotations.json``.  No Python under ``OpenGL/`` is parsed unless
+    ``read_chains`` asks for it, which is what lets the generated modules go.
 
     ``read_chains`` decides whether the friendly modules are parsed as well.
     Generation passes ``False``: a chain is a *second* copy of what the table
@@ -619,29 +688,18 @@ def extract_tree(root, registry_root=None, read_chains=True):
     while any chain remains.
     """
     commands = {}
-    raw_root = os.path.join(root, 'raw')
     for api in APIS:
-        api_root = os.path.join(raw_root, api)
-        if not os.path.isdir(api_root):
-            continue
-        for directory, _folders, files in os.walk(api_root):
-            if '__pycache__' in directory:
-                continue
-            for name in sorted(files):
-                if not name.endswith('.py'):
+        for _module_name, declared in read_declarations(root, api):
+            for command_name, command in declared.items():
+                key = (api, command_name)
+                existing = commands.get(key)
+                if existing is None:
+                    command.extensions = _merged_extensions(command)
+                    commands[key] = command
                     continue
-                for command_name, command in extract_raw(
-                    os.path.join(directory, name), api
-                ).items():
-                    key = (api, command_name)
-                    existing = commands.get(key)
-                    if existing is None:
-                        command.extensions = _merged_extensions(command)
-                        commands[key] = command
-                        continue
-                    # _prefer records every declaring extension on whichever
-                    # it keeps, so the loser's name survives on the winner.
-                    commands[key] = _prefer(existing, command)
+                # _prefer records every declaring extension on whichever it
+                # keeps, so the loser's name survives on the winner.
+                commands[key] = _prefer(existing, command)
 
     if read_chains:
         for directory, _folders, files in os.walk(root):

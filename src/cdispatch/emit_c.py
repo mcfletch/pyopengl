@@ -622,10 +622,16 @@ def emit_command_record(command, slot):
             args,
             _c_string(command.feature),
             # The other extensions that declare it.  A driver advertising any
-            # of them has the function, so resolution tries them all.
+            # of them has the function, so resolution tries them all, which
+            # makes the order arbitrary -- so it is sorted, rather than left as
+            # whatever order the declarations happened to be read in.
             _c_string(
                 ','.join(
-                    name for name in command.extensions if name != command.feature
+                    sorted(
+                        name
+                        for name in command.extensions
+                        if name != command.feature
+                    )
                 )
             ),
             len(arg_names),

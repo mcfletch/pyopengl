@@ -35323,7 +35323,7 @@ static const PyGLCommand pygl_GL_glGetPointerv_info = {
     .text_signature = "($module, pname, params=None, /)",
     .arg_names = pygl_GL_glGetPointerv_args,
     .extension = "GL_VERSION_GL_1_1",
-    .alternates = "GL_VERSION_GL_4_3,GL_KHR_debug",
+    .alternates = "GL_KHR_debug,GL_VERSION_GL_4_3",
     .arg_count = 2,
     .slot = 1103,
     .api = PYGL_API_GL,
