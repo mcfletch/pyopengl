@@ -86,6 +86,51 @@ GL_LINK_STATUS = GL.GL_LINK_STATUS
 GL_FALSE = GL.GL_FALSE
 GL_TRUE = GL.GL_TRUE
 
+def _sampler_types( ):
+    """Every uniform type that is a sampler, as a set of enum values.
+
+    Read off the constant names rather than listed, so a sampler target added
+    by a later GL version counts from the day its enum arrives.
+    """
+    return frozenset(
+        value
+        for name, value in vars( GL ).items()
+        if isinstance( value, int )
+        and name.startswith( 'GL_' )
+        and 'SAMPLER' in name.split( '_' )
+    )
+
+
+def _distinct_sampler_targets( program ):
+    """How many differently-targeted samplers the linked program declares.
+
+    Every sampler uniform reads texture image unit 0 until the program is
+    given its units, so a program declaring two targets sits, the moment it
+    links, in exactly the state ``glValidateProgram`` is required to reject:
+    "active samplers with a different type refer to the same texture image
+    unit".  A driver that answers strictly fails it; one that answers leniently
+    does not; neither answer says anything about the program, only that its
+    uniforms have not been set yet.  Ordinary shaders read a texture and a
+    buffer, or a texture and a shadow map, so this is not a corner.
+
+    Returns 0 where the count cannot be had, which reads as "nothing to skip".
+    """
+    try:
+        count = int( glGetProgramiv( program, GL.GL_ACTIVE_UNIFORMS ) )
+    except Exception:  # a program object the driver will not describe
+        return 0
+    samplers = _sampler_types( )
+    targets = set( )
+    for index in range( count ):
+        try:
+            _name, _size, type_ = GL.glGetActiveUniform( program, index )
+        except Exception:
+            continue
+        if int( type_ ) in samplers:
+            targets.add( int( type_ ) )
+    return len( targets )
+
+
 class ShaderProgram( int ):
     """Integer sub-class with context-manager operation"""
     validated = False
@@ -96,13 +141,23 @@ class ShaderProgram( int ):
         """Stop use of the program"""
         glUseProgram( 0 )
     
-    def check_validate( self ):
+    def check_validate( self, when_meaningful=False ):
         """Check that the program validates
-        
+
         Validation has to occur *after* linking/loading
-        
+
+        when_meaningful -- skip the check where the answer would be about the
+            program's uniforms not having been set rather than about the
+            program.  Used at link time, where that is always the case for a
+            program with samplers of two targets; see
+            :func:`_distinct_sampler_targets`.  An explicit call still checks
+            unconditionally, because by then the caller has set its state and
+            the answer means what it says.
+
         raises ShaderValidationError on failures
         """
+        if when_meaningful and _distinct_sampler_targets( self ) > 1:
+            return self
         glValidateProgram( self )
         validation = glGetProgramiv( self, GL_VALIDATE_STATUS )
         if validation == GL_FALSE:
@@ -155,9 +210,12 @@ class ShaderProgram( int ):
         See notes in retrieve
         """
         get_program_binary.glProgramBinary( self, format, binary, len(binary))
-        if validate:
-            self.check_validate()
+        # Linked first: validating a program that did not link fails for that
+        # reason, and reports it as a validation failure with the link log --
+        # the one thing that says what went wrong -- left unread.
         self.check_linked()
+        if validate:
+            self.check_validate( when_meaningful=True )
         return self
 
 def compileProgram(*shaders, **named):
@@ -210,9 +268,10 @@ def compileProgram(*shaders, **named):
         glAttachShader(program, shader)
     program = ShaderProgram( program )
     glLinkProgram(program)
-    if named.get('validate', True):
-        program.check_validate()
+    # Linked first: see ShaderProgram.load.
     program.check_linked()
+    if named.get('validate', True):
+        program.check_validate( when_meaningful=True )
     for shader in shaders:
         glDeleteShader(shader)
     return program
