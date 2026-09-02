@@ -90,7 +90,7 @@ def registered_modules( prefix=None ):
 
 class PlatformPlugin( Plugin ):
     """Platform-level plugin registration"""
-    registry = []
+    registry: "list[PlatformPlugin]" = []
     @classmethod
     def match( cls, key ):
         """Determine what platform module to load
@@ -106,7 +106,7 @@ class PlatformPlugin( Plugin ):
 
 class FormatHandler( Plugin ):
     """Data-type storage-format handler"""
-    registry = []
+    registry: "list[FormatHandler]" = []
     @classmethod
     def match( cls, value ):
         """Lookup appropriate handler based on value (a type)"""

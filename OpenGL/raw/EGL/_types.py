@@ -1,3 +1,7 @@
+# mypy: ignore-errors
+# The names in this module arrive from the declaration tables at import
+# time, so a checker reading this file sees calls to things it cannot
+# find.  The typed surface is the .pyi stub beside the package.
 """Data-type definitions for EGL/GLES"""
 import ctypes
 from OpenGL._opaque import opaque_pointer_cls as _opaque_pointer_cls

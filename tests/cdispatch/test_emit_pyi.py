@@ -149,7 +149,25 @@ class TestModule:
     def test_the_array_aliases_are_declared(self):
         text = emit_pyi.emit_module('GL', [])
         assert 'FloatArray' in text
-        assert 'from __future__ import annotations' in text
+
+    def test_an_alias_is_not_absorbed_into_any(self):
+        """``Any | X`` is ``Any``, so a union containing it checks nothing
+        while looking as though it does."""
+        text = emit_pyi.emit_module('GL', [])
+        for line in text.splitlines():
+            if ': TypeAlias =' in line and 'Result' not in line:
+                assert 'Any |' not in line, line
+                assert '| Any' not in line, line
+
+    def test_a_stub_does_not_import_from_future(self):
+        """Stub files are never evaluated, so it is a no-op that reads as
+        though it does something."""
+        text = emit_pyi.emit_module('GL', [])
+        assert 'from __future__ import annotations' not in text
+
+    def test_the_alias_explanation_appears_once(self):
+        text = emit_pyi.emit_module('GL', [])
+        assert text.count('is `Any` to a type checker') == 1
 
 
 class TestValidPython:

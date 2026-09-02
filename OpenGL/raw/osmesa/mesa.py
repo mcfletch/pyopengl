@@ -1,3 +1,7 @@
+# mypy: ignore-errors
+# The names in this module arrive from the declaration tables at import
+# time, so a checker reading this file sees calls to things it cannot
+# find.  The typed surface is the .pyi stub beside the package.
 from OpenGL import arrays
 from OpenGL.raw.GL._types import GLenum,GLboolean,GLsizei,GLint,GLuint
 from OpenGL.raw.osmesa._types import *
