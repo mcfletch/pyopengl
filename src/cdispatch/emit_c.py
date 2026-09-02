@@ -288,6 +288,28 @@ def stub_symbol(command):
     return 'pygl_%s_%s' % (command.api, command.name)
 
 
+#: Commands that return a value *and* fill output arguments.  The friendly
+#: form hands back the outputs; the return value is dropped, as the ctypes
+#: implementation drops it, so this is parity rather than loss.  Named here so
+#: that it is a decision on the record rather than a compiler warning nobody
+#: read -- and so check_registry can account for it.
+DISCARDED_RETURNS = frozenset(
+    [
+        'glAreProgramsResidentNV',
+        'glAreTexturesResident',
+        'glAreTexturesResidentEXT',
+        'glFinishAsyncSGIX',
+        'glGetDebugMessageLog',
+        'glGetDebugMessageLogAMD',
+        'glGetDebugMessageLogARB',
+        'glPointAlongPathNV',
+        'glPollAsyncSGIX',
+        'glPollInstrumentsSGIX',
+        'glQueryMatrixxOES',
+    ]
+)
+
+
 def emit_stub(command):
     """The C function implementing one entry point."""
     lines = []
@@ -393,7 +415,19 @@ def emit_stub(command):
     # A call that can wait releases the GIL for the duration.  See
     # src/cdispatch/blocking.py for which, and why it is not all of them.
     waits = '_BLOCKING' if blocking.blocks(command.name) else ''
-    if command.returns_void:
+    if outputs and not command.returns_void:
+        # The friendly form returns the outputs, and ctypes drops the return
+        # value, so this drops it too -- explicitly, see DISCARDED_RETURNS.
+        lines.append(
+            '    PYGL_CALL_D%s(%s, (%s), (%s));'
+            % (
+                waits,
+                cm.abi_c_type(command.return_type),
+                signature or 'void',
+                arguments,
+            )
+        )
+    elif command.returns_void:
         lines.append(
             '    PYGL_CALL_V%s((%s), (%s));' % (waits, signature or 'void', arguments)
         )

@@ -152,3 +152,33 @@ class TestTheGeneratedCIsUnchanged:
             assert emit_c.emit_stub(original) == emit_c.emit_stub(from_table), key
             checked += 1
         assert checked > 4500, checked
+
+
+class TestTextSignatures:
+    """``inspect.signature()`` has to answer for every entry point.
+
+    It strips the leading ``$module`` and parses the rest, so a call that takes
+    nothing cannot carry a positional-only marker: ``($module, /)`` leaves
+    ``(, /)``.
+    """
+
+    def test_a_call_with_no_arguments(self, commands):
+        assert commands[('GL', 'glFinish')].text_signature() == '($module)'
+
+    def test_a_call_with_arguments_keeps_the_marker(self, commands):
+        signature = commands[('GL', 'glBindTexture')].text_signature()
+        assert signature == '($module, target, texture, /)'
+
+    def test_every_signature_parses(self, commands):
+        import inspect
+
+        bad = []
+        for key, command in commands.items():
+            text = command.text_signature()
+            stripped = text.replace('$module', '', 1).lstrip('(').rstrip(')')
+            stripped = stripped.lstrip(', ')
+            try:
+                inspect.signature(eval('lambda %s: None' % (stripped or '',)))
+            except SyntaxError:
+                bad.append('%s.%s -> %s' % (key[0], key[1], text))
+        assert bad == [], bad[:10]

@@ -336,7 +336,15 @@ void *pygl_slot_checked(GLProc *self)
     void *fp;
     /* The raw platform address, not the Python one: this runs per call. */
     pygl_sync_context_fast();
-    if (pygl_current->is_null_context && pygl_needs_context(self->info)) {
+    /* Only where the caller asked to be told.  This path is also reached with
+     * PYOPENGL_CONTEXT_TRACKING=verify, which is an accuracy option and says
+     * nothing about wanting an exception: without the flag here, selecting
+     * verify would silently turn CONTEXT_CHECKING on and break the property
+     * the layer relies on -- that calling with no current context is a no-op,
+     * which is what a cleanup handler running after its context has gone
+     * depends on. */
+    if (pygl_context_checking && pygl_current->is_null_context &&
+        pygl_needs_context(self->info)) {
         PyErr_Format(pygl_no_context_error,
                      "Attempt to call %s with no current OpenGL context",
                      self->info->name);

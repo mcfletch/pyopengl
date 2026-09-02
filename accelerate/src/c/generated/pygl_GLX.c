@@ -1091,7 +1091,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXGetCurrentAssociatedContextAMD_info = {"glXGetCurrentAssociatedContextAMD", "glXGetCurrentAssociatedContextAMD() -> GLXContext", "($module, /)", NULL, "GLX_AMD_gpu_association", "", 0, 4639, PYGL_API_GLX, 0, 0, 4, 0};
+static const PyGLCommand pygl_GLX_glXGetCurrentAssociatedContextAMD_info = {"glXGetCurrentAssociatedContextAMD", "glXGetCurrentAssociatedContextAMD() -> GLXContext", "($module)", NULL, "GLX_AMD_gpu_association", "", 0, 4639, PYGL_API_GLX, 0, 0, 4, 0};
 
 static PyObject *
 pygl_GLX_glXGetCurrentAssociatedContextAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1106,7 +1106,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXGetCurrentContext_info = {"glXGetCurrentContext", "glXGetCurrentContext() -> GLXContext", "($module, /)", NULL, "GLX_VERSION_GLX_1_0", "", 0, 4640, PYGL_API_GLX, 0, 0, 4, 0};
+static const PyGLCommand pygl_GLX_glXGetCurrentContext_info = {"glXGetCurrentContext", "glXGetCurrentContext() -> GLXContext", "($module)", NULL, "GLX_VERSION_GLX_1_0", "", 0, 4640, PYGL_API_GLX, 0, 0, 4, 0};
 
 static PyObject *
 pygl_GLX_glXGetCurrentContext(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1121,7 +1121,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXGetCurrentDrawable_info = {"glXGetCurrentDrawable", "glXGetCurrentDrawable() -> GLXDrawable", "($module, /)", NULL, "GLX_VERSION_GLX_1_0", "", 0, 4641, PYGL_API_GLX, 0, 0, 4, 0};
+static const PyGLCommand pygl_GLX_glXGetCurrentDrawable_info = {"glXGetCurrentDrawable", "glXGetCurrentDrawable() -> GLXDrawable", "($module)", NULL, "GLX_VERSION_GLX_1_0", "", 0, 4641, PYGL_API_GLX, 0, 0, 4, 0};
 
 static PyObject *
 pygl_GLX_glXGetCurrentDrawable(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1136,7 +1136,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXGetCurrentReadDrawable_info = {"glXGetCurrentReadDrawable", "glXGetCurrentReadDrawable() -> GLXDrawable", "($module, /)", NULL, "GLX_VERSION_GLX_1_3", "", 0, 4642, PYGL_API_GLX, 0, 0, 4, 0};
+static const PyGLCommand pygl_GLX_glXGetCurrentReadDrawable_info = {"glXGetCurrentReadDrawable", "glXGetCurrentReadDrawable() -> GLXDrawable", "($module)", NULL, "GLX_VERSION_GLX_1_3", "", 0, 4642, PYGL_API_GLX, 0, 0, 4, 0};
 
 static PyObject *
 pygl_GLX_glXGetCurrentReadDrawable(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1151,7 +1151,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXGetCurrentReadDrawableSGI_info = {"glXGetCurrentReadDrawableSGI", "glXGetCurrentReadDrawableSGI() -> GLXDrawable", "($module, /)", NULL, "GLX_SGI_make_current_read", "", 0, 4643, PYGL_API_GLX, 0, 0, 4, 0};
+static const PyGLCommand pygl_GLX_glXGetCurrentReadDrawableSGI_info = {"glXGetCurrentReadDrawableSGI", "glXGetCurrentReadDrawableSGI() -> GLXDrawable", "($module)", NULL, "GLX_SGI_make_current_read", "", 0, 4643, PYGL_API_GLX, 0, 0, 4, 0};
 
 static PyObject *
 pygl_GLX_glXGetCurrentReadDrawableSGI(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1393,7 +1393,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXGetSwapIntervalMESA_info = {"glXGetSwapIntervalMESA", "glXGetSwapIntervalMESA() -> c_int", "($module, /)", NULL, "GLX_MESA_swap_control", "", 0, 4654, PYGL_API_GLX, 0, 0, 1, 0};
+static const PyGLCommand pygl_GLX_glXGetSwapIntervalMESA_info = {"glXGetSwapIntervalMESA", "glXGetSwapIntervalMESA() -> c_int", "($module)", NULL, "GLX_MESA_swap_control", "", 0, 4654, PYGL_API_GLX, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GLX_glXGetSwapIntervalMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2692,7 +2692,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXWaitGL_info = {"glXWaitGL", "glXWaitGL() -> None", "($module, /)", NULL, "GLX_VERSION_GLX_1_0", "", 0, 4711, PYGL_API_GLX, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLX_glXWaitGL_info = {"glXWaitGL", "glXWaitGL() -> None", "($module)", NULL, "GLX_VERSION_GLX_1_0", "", 0, 4711, PYGL_API_GLX, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLX_glXWaitGL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2730,7 +2730,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLX_glXWaitX_info = {"glXWaitX", "glXWaitX() -> None", "($module, /)", NULL, "GLX_VERSION_GLX_1_0", "", 0, 4713, PYGL_API_GLX, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLX_glXWaitX_info = {"glXWaitX", "glXWaitX() -> None", "($module)", NULL, "GLX_VERSION_GLX_1_0", "", 0, 4713, PYGL_API_GLX, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLX_glXWaitX(GLProc *self, PyObject *const *_a, size_t _nargsf)

@@ -19,6 +19,7 @@ from OpenGL import (
 )
 
 import os as _os
+import sys as _sys
 
 #: Which implementation of the entry points to use: 'c', the
 #: registry-generated C dispatch, or 'ctypes', the one PyOpenGL has always
@@ -26,7 +27,10 @@ import os as _os
 #: layer falls back to ctypes on its own, so this is safe to leave alone.
 #: PYOPENGL_DISPATCH=ctypes selects the older implementation, which remains
 #: supported and is not scheduled for removal.
-DISPATCH = _os.environ.get('PYOPENGL_DISPATCH', 'c').strip().lower()
+#: Off CPython the C layer is not built (see accelerate/setup.py) and would be
+#: slower than ctypes if it were, so the default follows the interpreter.
+_DEFAULT_DISPATCH = 'c' if _sys.implementation.name == 'cpython' else 'ctypes'
+DISPATCH = _os.environ.get('PYOPENGL_DISPATCH', _DEFAULT_DISPATCH).strip().lower()
 
 #: Build the generated OpenGL.raw modules from the C dispatch layer's tables
 #: rather than importing their files.  Off by default: the files are still

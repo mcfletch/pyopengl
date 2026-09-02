@@ -488,6 +488,7 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
 
 #define PYGL_ARRAY_OUT_GLGET(i, name, element, pname, table)                   \
     int name##_slot = _nb;                                                     \
+    (void)name##_slot;                                                         \
     Py_ssize_t name##_count = 0;                                               \
     if (PYGL_UNLIKELY(pygl_array_out_glget(self, (i) < _nargs ? _a[i] : NULL,   \
                                            (element), (i), (pname), (table),   \
@@ -517,6 +518,7 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
 
 #define PYGL_IMAGE_OUT(i, name, format, type, rank, d0, d1, d2)                \
     int name##_slot = _nb;                                                     \
+    (void)name##_slot;                                                         \
     if (PYGL_UNLIKELY(pygl_image_out(self, (i) < _nargs ? _a[i] : NULL, (format),     \
                                      (type), (rank), (d0), (d1), (d2),         \
                                      &_bufs[_nb]) < 0))                        \
@@ -525,6 +527,7 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
 
 #define PYGL_ARRAY_OUT(i, name, element, count)                                \
     int name##_slot = _nb;                                                     \
+    (void)name##_slot;                                                         \
     if (PYGL_UNLIKELY(pygl_array_out(self, (i) < _nargs ? _a[i] : NULL, (element),   \
                                      (i), (count), &_bufs[_nb]) < 0))          \
         goto _fail;                                                            \
@@ -566,6 +569,35 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
         if (PYGL_UNLIKELY(_fp == NULL))                                        \
             goto _fail;                                                        \
         result = ((type(*) signature)_fp) arguments;                           \
+    } while (0)
+
+/* Call, and discard the result deliberately.
+ *
+ * Fifteen commands return a value *and* have output arguments -- the
+ * glGetDebugMessageLog family, glAreTexturesResident, glQueryMatrixxOES and
+ * relatives.  The friendly form hands back the outputs, and the ctypes
+ * implementation drops the return value, so dropping it here is parity rather
+ * than loss.  Saying so with a cast is the difference between a decision and
+ * an oversight: assigning to a variable nobody reads makes the compiler warn,
+ * and thirteen real warnings then hide in the noise.
+ *
+ * src/cdispatch/emit_c.py:DISCARDED_RETURNS lists them and says why. */
+#define PYGL_CALL_D(type, signature, arguments)                                \
+    do {                                                                       \
+        void *_fp = pygl_slot(self);                                           \
+        if (PYGL_UNLIKELY(_fp == NULL))                                        \
+            goto _fail;                                                        \
+        (void)((type(*) signature)_fp) arguments;                              \
+    } while (0)
+
+#define PYGL_CALL_D_BLOCKING(type, signature, arguments)                       \
+    do {                                                                       \
+        void *_fp = pygl_slot(self);                                           \
+        if (PYGL_UNLIKELY(_fp == NULL))                                        \
+            goto _fail;                                                        \
+        Py_BEGIN_ALLOW_THREADS                                                 \
+        (void)((type(*) signature)_fp) arguments;                              \
+        Py_END_ALLOW_THREADS                                                   \
     } while (0)
 
 #define PYGL_CALL_R_BLOCKING(result, type, signature, arguments)               \

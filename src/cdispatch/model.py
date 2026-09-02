@@ -300,8 +300,17 @@ class Command:
         return '%s(%s) -> %s' % (self.name, arguments, result)
 
     def text_signature(self):
-        """``__text_signature__``, so ``inspect.signature()`` answers."""
+        """``__text_signature__``, so ``inspect.signature()`` answers.
+
+        ``inspect`` strips the leading ``$module`` and parses what is left, so
+        a call that takes nothing must not be given a positional-only marker:
+        ``($module, /)`` becomes ``(, /)``, which is a SyntaxError rather than
+        an empty signature.  Twenty-eight entry points -- ``glFinish``,
+        ``glFlush``, ``glCreateProgram`` among them -- take no arguments.
+        """
         parts = list(self.required_arguments)
         parts.extend('%s=None' % (p.name,) for p in self.output_parameters)
+        if not parts:
+            return '($module)'
         parts.append('/')
         return '($module, %s)' % (', '.join(parts),)

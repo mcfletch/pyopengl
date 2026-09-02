@@ -779,7 +779,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES3_glEndTransformFeedback_info = {"glEndTransformFeedback", "glEndTransformFeedback() -> None", "($module, /)", NULL, "GLES3_VERSION_GLES3_3_0", "", 0, 4346, PYGL_API_GLES3, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES3_glEndTransformFeedback_info = {"glEndTransformFeedback", "glEndTransformFeedback() -> None", "($module)", NULL, "GLES3_VERSION_GLES3_3_0", "", 0, 4346, PYGL_API_GLES3, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES3_glEndTransformFeedback(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2038,7 +2038,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES3_glPauseTransformFeedback_info = {"glPauseTransformFeedback", "glPauseTransformFeedback() -> None", "($module, /)", NULL, "GLES3_VERSION_GLES3_3_0", "", 0, 4402, PYGL_API_GLES3, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES3_glPauseTransformFeedback_info = {"glPauseTransformFeedback", "glPauseTransformFeedback() -> None", "($module)", NULL, "GLES3_VERSION_GLES3_3_0", "", 0, 4402, PYGL_API_GLES3, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES3_glPauseTransformFeedback(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2871,7 +2871,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES3_glResumeTransformFeedback_info = {"glResumeTransformFeedback", "glResumeTransformFeedback() -> None", "($module, /)", NULL, "GLES3_VERSION_GLES3_3_0", "", 0, 4440, PYGL_API_GLES3, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES3_glResumeTransformFeedback_info = {"glResumeTransformFeedback", "glResumeTransformFeedback() -> None", "($module)", NULL, "GLES3_VERSION_GLES3_3_0", "", 0, 4440, PYGL_API_GLES3, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLES3_glResumeTransformFeedback(GLProc *self, PyObject *const *_a, size_t _nargsf)

@@ -315,7 +315,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glApplyFramebufferAttachmentCMAAINTEL_info = {"glApplyFramebufferAttachmentCMAAINTEL", "glApplyFramebufferAttachmentCMAAINTEL() -> None", "($module, /)", NULL, "GL_INTEL_framebuffer_CMAA", "", 0, 172, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glApplyFramebufferAttachmentCMAAINTEL_info = {"glApplyFramebufferAttachmentCMAAINTEL", "glApplyFramebufferAttachmentCMAAINTEL() -> None", "($module)", NULL, "GL_INTEL_framebuffer_CMAA", "", 0, 172, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glApplyFramebufferAttachmentCMAAINTEL(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -359,7 +359,7 @@ pygl_GL_glAreProgramsResidentNV(GLProc *self, PyObject *const *_a, size_t _nargs
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(1, programs, &pygl_elem_GLuint);
     PYGL_ARRAY_OUT(2, residences, &pygl_elem_GLboolean, (Py_ssize_t)(n));
-    PYGL_CALL_R(_result, unsigned char, (int, void *, void *), (n, programs, residences));
+    PYGL_CALL_D(unsigned char, (int, void *, void *), (n, programs, residences));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[residences_slot], &pygl_elem_GLboolean, (Py_ssize_t)(n));
     PYGL_CLEANUP();
@@ -382,7 +382,7 @@ pygl_GL_glAreTexturesResident(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(1, textures, &pygl_elem_GLuint);
     PYGL_ARRAY_OUT(2, residences, &pygl_elem_GLboolean, (Py_ssize_t)(n));
-    PYGL_CALL_R(_result, unsigned char, (int, void *, void *), (n, textures, residences));
+    PYGL_CALL_D(unsigned char, (int, void *, void *), (n, textures, residences));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[residences_slot], &pygl_elem_GLboolean, (Py_ssize_t)(n));
     PYGL_CLEANUP();
@@ -405,7 +405,7 @@ pygl_GL_glAreTexturesResidentEXT(GLProc *self, PyObject *const *_a, size_t _narg
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(1, textures, &pygl_elem_GLuint);
     PYGL_ARRAY_OUT(2, residences, &pygl_elem_GLboolean, (Py_ssize_t)(n));
-    PYGL_CALL_R(_result, unsigned char, (int, void *, void *), (n, textures, residences));
+    PYGL_CALL_D(unsigned char, (int, void *, void *), (n, textures, residences));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[residences_slot], &pygl_elem_GLboolean, (Py_ssize_t)(n));
     PYGL_CLEANUP();
@@ -671,7 +671,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glBeginFragmentShaderATI_info = {"glBeginFragmentShaderATI", "glBeginFragmentShaderATI() -> None", "($module, /)", NULL, "GL_ATI_fragment_shader", "", 0, 189, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glBeginFragmentShaderATI_info = {"glBeginFragmentShaderATI", "glBeginFragmentShaderATI() -> None", "($module)", NULL, "GL_ATI_fragment_shader", "", 0, 189, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glBeginFragmentShaderATI(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -843,7 +843,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glBeginVertexShaderEXT_info = {"glBeginVertexShaderEXT", "glBeginVertexShaderEXT() -> None", "($module, /)", NULL, "GL_EXT_vertex_shader", "", 0, 199, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glBeginVertexShaderEXT_info = {"glBeginVertexShaderEXT", "glBeginVertexShaderEXT() -> None", "($module)", NULL, "GL_EXT_vertex_shader", "", 0, 199, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glBeginVertexShaderEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2140,7 +2140,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glBlendBarrierKHR_info = {"glBlendBarrierKHR", "glBlendBarrierKHR() -> None", "($module, /)", NULL, "GL_KHR_blend_equation_advanced", "", 0, 265, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glBlendBarrierKHR_info = {"glBlendBarrierKHR", "glBlendBarrierKHR() -> None", "($module)", NULL, "GL_KHR_blend_equation_advanced", "", 0, 265, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glBlendBarrierKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2155,7 +2155,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glBlendBarrierNV_info = {"glBlendBarrierNV", "glBlendBarrierNV() -> None", "($module, /)", NULL, "GL_NV_blend_equation_advanced", "", 0, 266, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glBlendBarrierNV_info = {"glBlendBarrierNV", "glBlendBarrierNV() -> None", "($module)", NULL, "GL_NV_blend_equation_advanced", "", 0, 266, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glBlendBarrierNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7972,7 +7972,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glCreateProgram_info = {"glCreateProgram", "glCreateProgram() -> GLuint", "($module, /)", NULL, "GL_VERSION_GL_2_0", "", 0, 533, PYGL_API_GL, 0, 0, 1, 0};
+static const PyGLCommand pygl_GL_glCreateProgram_info = {"glCreateProgram", "glCreateProgram() -> GLuint", "($module)", NULL, "GL_VERSION_GL_2_0", "", 0, 533, PYGL_API_GL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GL_glCreateProgram(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -7987,7 +7987,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glCreateProgramObjectARB_info = {"glCreateProgramObjectARB", "glCreateProgramObjectARB() -> GLhandleARB", "($module, /)", NULL, "GL_ARB_shader_objects", "", 0, 534, PYGL_API_GL, 0, 0, 1, 0};
+static const PyGLCommand pygl_GL_glCreateProgramObjectARB_info = {"glCreateProgramObjectARB", "glCreateProgramObjectARB() -> GLhandleARB", "($module)", NULL, "GL_ARB_shader_objects", "", 0, 534, PYGL_API_GL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GL_glCreateProgramObjectARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -8023,7 +8023,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glCreateProgressFenceNVX_info = {"glCreateProgressFenceNVX", "glCreateProgressFenceNVX() -> GLuint", "($module, /)", NULL, "GL_NVX_progress_fence", "", 0, 536, PYGL_API_GL, 0, 0, 1, 0};
+static const PyGLCommand pygl_GL_glCreateProgressFenceNVX_info = {"glCreateProgressFenceNVX", "glCreateProgressFenceNVX() -> GLuint", "($module)", NULL, "GL_NVX_progress_fence", "", 0, 536, PYGL_API_GL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GL_glCreateProgressFenceNVX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11518,7 +11518,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glEnd_info = {"glEnd", "glEnd() -> None", "($module, /)", NULL, "GL_VERSION_GL_1_0", "", 0, 707, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glEnd_info = {"glEnd", "glEnd() -> None", "($module)", NULL, "GL_VERSION_GL_1_0", "", 0, 707, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glEnd(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11533,7 +11533,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glEndConditionalRender_info = {"glEndConditionalRender", "glEndConditionalRender() -> None", "($module, /)", NULL, "GL_VERSION_GL_3_0", "", 0, 708, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glEndConditionalRender_info = {"glEndConditionalRender", "glEndConditionalRender() -> None", "($module)", NULL, "GL_VERSION_GL_3_0", "", 0, 708, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glEndConditionalRender(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11548,7 +11548,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glEndConditionalRenderNV_info = {"glEndConditionalRenderNV", "glEndConditionalRenderNV() -> None", "($module, /)", NULL, "GL_NV_conditional_render", "", 0, 709, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glEndConditionalRenderNV_info = {"glEndConditionalRenderNV", "glEndConditionalRenderNV() -> None", "($module)", NULL, "GL_NV_conditional_render", "", 0, 709, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glEndConditionalRenderNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11563,7 +11563,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glEndConditionalRenderNVX_info = {"glEndConditionalRenderNVX", "glEndConditionalRenderNVX() -> None", "($module, /)", NULL, "GL_NVX_conditional_render", "", 0, 710, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glEndConditionalRenderNVX_info = {"glEndConditionalRenderNVX", "glEndConditionalRenderNVX() -> None", "($module)", NULL, "GL_NVX_conditional_render", "", 0, 710, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glEndConditionalRenderNVX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11578,7 +11578,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glEndFragmentShaderATI_info = {"glEndFragmentShaderATI", "glEndFragmentShaderATI() -> None", "($module, /)", NULL, "GL_ATI_fragment_shader", "", 0, 711, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glEndFragmentShaderATI_info = {"glEndFragmentShaderATI", "glEndFragmentShaderATI() -> None", "($module)", NULL, "GL_ATI_fragment_shader", "", 0, 711, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glEndFragmentShaderATI(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11593,7 +11593,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glEndList_info = {"glEndList", "glEndList() -> None", "($module, /)", NULL, "GL_VERSION_GL_1_0", "", 0, 712, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glEndList_info = {"glEndList", "glEndList() -> None", "($module)", NULL, "GL_VERSION_GL_1_0", "", 0, 712, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glEndList(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11608,7 +11608,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glEndOcclusionQueryNV_info = {"glEndOcclusionQueryNV", "glEndOcclusionQueryNV() -> None", "($module, /)", NULL, "GL_NV_occlusion_query", "", 0, 713, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glEndOcclusionQueryNV_info = {"glEndOcclusionQueryNV", "glEndOcclusionQueryNV() -> None", "($module)", NULL, "GL_NV_occlusion_query", "", 0, 713, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glEndOcclusionQueryNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11709,7 +11709,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glEndTransformFeedback_info = {"glEndTransformFeedback", "glEndTransformFeedback() -> None", "($module, /)", NULL, "GL_VERSION_GL_3_0", "", 0, 719, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glEndTransformFeedback_info = {"glEndTransformFeedback", "glEndTransformFeedback() -> None", "($module)", NULL, "GL_VERSION_GL_3_0", "", 0, 719, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glEndTransformFeedback(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11724,7 +11724,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glEndTransformFeedbackEXT_info = {"glEndTransformFeedbackEXT", "glEndTransformFeedbackEXT() -> None", "($module, /)", NULL, "GL_EXT_transform_feedback", "", 0, 720, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glEndTransformFeedbackEXT_info = {"glEndTransformFeedbackEXT", "glEndTransformFeedbackEXT() -> None", "($module)", NULL, "GL_EXT_transform_feedback", "", 0, 720, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glEndTransformFeedbackEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11739,7 +11739,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glEndTransformFeedbackNV_info = {"glEndTransformFeedbackNV", "glEndTransformFeedbackNV() -> None", "($module, /)", NULL, "GL_NV_transform_feedback", "", 0, 721, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glEndTransformFeedbackNV_info = {"glEndTransformFeedbackNV", "glEndTransformFeedbackNV() -> None", "($module)", NULL, "GL_NV_transform_feedback", "", 0, 721, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glEndTransformFeedbackNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -11754,7 +11754,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glEndVertexShaderEXT_info = {"glEndVertexShaderEXT", "glEndVertexShaderEXT() -> None", "($module, /)", NULL, "GL_EXT_vertex_shader", "", 0, 722, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glEndVertexShaderEXT_info = {"glEndVertexShaderEXT", "glEndVertexShaderEXT() -> None", "($module)", NULL, "GL_EXT_vertex_shader", "", 0, 722, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glEndVertexShaderEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12104,7 +12104,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glEvaluateDepthValuesARB_info = {"glEvaluateDepthValuesARB", "glEvaluateDepthValuesARB() -> None", "($module, /)", NULL, "GL_ARB_sample_locations", "", 0, 741, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glEvaluateDepthValuesARB_info = {"glEvaluateDepthValuesARB", "glEvaluateDepthValuesARB() -> None", "($module)", NULL, "GL_ARB_sample_locations", "", 0, 741, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glEvaluateDepthValuesARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12243,7 +12243,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glFinish_info = {"glFinish", "glFinish() -> None", "($module, /)", NULL, "GL_VERSION_GL_1_0", "", 0, 748, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glFinish_info = {"glFinish", "glFinish() -> None", "($module)", NULL, "GL_VERSION_GL_1_0", "", 0, 748, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glFinish(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12268,7 +12268,7 @@ pygl_GL_glFinishAsyncSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_FRAME(1);
     PYGL_CONV_OK();
     PYGL_ARRAY_OUT(0, markerp, &pygl_elem_GLuint, (Py_ssize_t)(1));
-    PYGL_CALL_R(_result, int, (void *), (markerp));
+    PYGL_CALL_D(int, (void *), (markerp));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[markerp_slot], &pygl_elem_GLuint, (Py_ssize_t)(1));
     PYGL_CLEANUP();
@@ -12331,7 +12331,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glFinishTextureSUNX_info = {"glFinishTextureSUNX", "glFinishTextureSUNX() -> None", "($module, /)", NULL, "GL_SUNX_constant_data", "", 0, 753, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glFinishTextureSUNX_info = {"glFinishTextureSUNX", "glFinishTextureSUNX() -> None", "($module)", NULL, "GL_SUNX_constant_data", "", 0, 753, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glFinishTextureSUNX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12346,7 +12346,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glFlush_info = {"glFlush", "glFlush() -> None", "($module, /)", NULL, "GL_VERSION_GL_1_0", "", 0, 754, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glFlush_info = {"glFlush", "glFlush() -> None", "($module)", NULL, "GL_VERSION_GL_1_0", "", 0, 754, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glFlush(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12454,7 +12454,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glFlushRasterSGIX_info = {"glFlushRasterSGIX", "glFlushRasterSGIX() -> None", "($module, /)", NULL, "GL_SGIX_flush_raster", "", 0, 760, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glFlushRasterSGIX_info = {"glFlushRasterSGIX", "glFlushRasterSGIX() -> None", "($module)", NULL, "GL_SGIX_flush_raster", "", 0, 760, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glFlushRasterSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -12508,7 +12508,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glFlushVertexArrayRangeNV_info = {"glFlushVertexArrayRangeNV", "glFlushVertexArrayRangeNV() -> None", "($module, /)", NULL, "GL_NV_vertex_array_range", "", 0, 763, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glFlushVertexArrayRangeNV_info = {"glFlushVertexArrayRangeNV", "glFlushVertexArrayRangeNV() -> None", "($module)", NULL, "GL_NV_vertex_array_range", "", 0, 763, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glFlushVertexArrayRangeNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13208,7 +13208,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glFrameTerminatorGREMEDY_info = {"glFrameTerminatorGREMEDY", "glFrameTerminatorGREMEDY() -> None", "($module, /)", NULL, "GL_GREMEDY_frame_terminator", "", 0, 799, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glFrameTerminatorGREMEDY_info = {"glFrameTerminatorGREMEDY", "glFrameTerminatorGREMEDY() -> None", "($module)", NULL, "GL_GREMEDY_frame_terminator", "", 0, 799, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glFrameTerminatorGREMEDY(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -13280,7 +13280,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glFramebufferFetchBarrierEXT_info = {"glFramebufferFetchBarrierEXT", "glFramebufferFetchBarrierEXT() -> None", "($module, /)", NULL, "GL_EXT_shader_framebuffer_fetch_non_coherent", "", 0, 803, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glFramebufferFetchBarrierEXT_info = {"glFramebufferFetchBarrierEXT", "glFramebufferFetchBarrierEXT() -> None", "($module)", NULL, "GL_EXT_shader_framebuffer_fetch_non_coherent", "", 0, 803, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glFramebufferFetchBarrierEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -16146,7 +16146,7 @@ pygl_GL_glGetDebugMessageLog(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_ARRAY_OUT(5, severities, &pygl_elem_GLuint, (Py_ssize_t)(count));
     PYGL_ARRAY_OUT(6, lengths, &pygl_elem_GLsizei, (Py_ssize_t)(count));
     PYGL_ARRAY_OUT(7, messageLog, &pygl_elem_GLchar, (Py_ssize_t)(bufSize));
-    PYGL_CALL_R(_result, unsigned int, (unsigned int, int, void *, void *, void *, void *, void *, void *), (count, bufSize, sources, types, ids, severities, lengths, messageLog));
+    PYGL_CALL_D(unsigned int, (unsigned int, int, void *, void *, void *, void *, void *, void *), (count, bufSize, sources, types, ids, severities, lengths, messageLog));
     PYGL_CHECK();
     const PyGLOutput _outputs[] = {
         {2, &pygl_elem_GLuint, (Py_ssize_t)(count)},
@@ -16181,7 +16181,7 @@ pygl_GL_glGetDebugMessageLogAMD(GLProc *self, PyObject *const *_a, size_t _nargs
     PYGL_ARRAY_OUT(4, ids, &pygl_elem_GLuint, (Py_ssize_t)(count));
     PYGL_ARRAY_OUT(5, lengths, &pygl_elem_GLsizei, (Py_ssize_t)(count));
     PYGL_ARRAY_OUT(6, message, &pygl_elem_GLchar, (Py_ssize_t)(bufSize));
-    PYGL_CALL_R(_result, unsigned int, (unsigned int, int, void *, void *, void *, void *, void *), (count, bufSize, categories, severities, ids, lengths, message));
+    PYGL_CALL_D(unsigned int, (unsigned int, int, void *, void *, void *, void *, void *), (count, bufSize, categories, severities, ids, lengths, message));
     PYGL_CHECK();
     const PyGLOutput _outputs[] = {
         {0, &pygl_elem_GLuint, (Py_ssize_t)(count)},
@@ -16216,7 +16216,7 @@ pygl_GL_glGetDebugMessageLogARB(GLProc *self, PyObject *const *_a, size_t _nargs
     PYGL_ARRAY_OUT(5, severities, &pygl_elem_GLuint, (Py_ssize_t)(count));
     PYGL_ARRAY_OUT(6, lengths, &pygl_elem_GLsizei, (Py_ssize_t)(count));
     PYGL_ARRAY_OUT(7, messageLog, &pygl_elem_GLchar, (Py_ssize_t)(bufSize));
-    PYGL_CALL_R(_result, unsigned int, (unsigned int, int, void *, void *, void *, void *, void *, void *), (count, bufSize, sources, types, ids, severities, lengths, messageLog));
+    PYGL_CALL_D(unsigned int, (unsigned int, int, void *, void *, void *, void *, void *, void *), (count, bufSize, sources, types, ids, severities, lengths, messageLog));
     PYGL_CHECK();
     const PyGLOutput _outputs[] = {
         {2, &pygl_elem_GLuint, (Py_ssize_t)(count)},
@@ -16375,7 +16375,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glGetError_info = {"glGetError", "glGetError() -> GLenum", "($module, /)", NULL, "GL_VERSION_GL_1_0", "", 0, 939, PYGL_API_GL, 0, 0, 1, 0};
+static const PyGLCommand pygl_GL_glGetError_info = {"glGetError", "glGetError() -> GLenum", "($module)", NULL, "GL_VERSION_GL_1_0", "", 0, 939, PYGL_API_GL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GL_glGetError(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -16890,7 +16890,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glGetGraphicsResetStatus_info = {"glGetGraphicsResetStatus", "glGetGraphicsResetStatus() -> GLenum", "($module, /)", NULL, "GL_VERSION_GL_4_5", "GL_KHR_robustness", 0, 962, PYGL_API_GL, 0, 0, 1, 0};
+static const PyGLCommand pygl_GL_glGetGraphicsResetStatus_info = {"glGetGraphicsResetStatus", "glGetGraphicsResetStatus() -> GLenum", "($module)", NULL, "GL_VERSION_GL_4_5", "GL_KHR_robustness", 0, 962, PYGL_API_GL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GL_glGetGraphicsResetStatus(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -16905,7 +16905,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glGetGraphicsResetStatusARB_info = {"glGetGraphicsResetStatusARB", "glGetGraphicsResetStatusARB() -> GLenum", "($module, /)", NULL, "GL_ARB_robustness", "", 0, 963, PYGL_API_GL, 0, 0, 1, 0};
+static const PyGLCommand pygl_GL_glGetGraphicsResetStatusARB_info = {"glGetGraphicsResetStatusARB", "glGetGraphicsResetStatusARB() -> GLenum", "($module)", NULL, "GL_ARB_robustness", "", 0, 963, PYGL_API_GL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GL_glGetGraphicsResetStatusARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -16920,7 +16920,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glGetGraphicsResetStatusKHR_info = {"glGetGraphicsResetStatusKHR", "glGetGraphicsResetStatusKHR() -> GLenum", "($module, /)", NULL, "GL_KHR_robustness", "", 0, 964, PYGL_API_GL, 0, 0, 1, 0};
+static const PyGLCommand pygl_GL_glGetGraphicsResetStatusKHR_info = {"glGetGraphicsResetStatusKHR", "glGetGraphicsResetStatusKHR() -> GLenum", "($module)", NULL, "GL_KHR_robustness", "", 0, 964, PYGL_API_GL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GL_glGetGraphicsResetStatusKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -17233,7 +17233,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glGetInstrumentsSGIX_info = {"glGetInstrumentsSGIX", "glGetInstrumentsSGIX() -> GLint", "($module, /)", NULL, "GL_SGIX_instruments", "", 0, 978, PYGL_API_GL, 0, 0, 1, 0};
+static const PyGLCommand pygl_GL_glGetInstrumentsSGIX_info = {"glGetInstrumentsSGIX", "glGetInstrumentsSGIX() -> GLint", "($module)", NULL, "GL_SGIX_instruments", "", 0, 978, PYGL_API_GL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GL_glGetInstrumentsSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -26315,7 +26315,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glInitNames_info = {"glInitNames", "glInitNames() -> None", "($module, /)", NULL, "GL_VERSION_GL_1_0", "", 0, 1375, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glInitNames_info = {"glInitNames", "glInitNames() -> None", "($module)", NULL, "GL_VERSION_GL_1_0", "", 0, 1375, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glInitNames(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -27474,7 +27474,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glLGPUInterlockNVX_info = {"glLGPUInterlockNVX", "glLGPUInterlockNVX() -> None", "($module, /)", NULL, "GL_NVX_linked_gpu_multicast", "", 0, 1438, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glLGPUInterlockNVX_info = {"glLGPUInterlockNVX", "glLGPUInterlockNVX() -> None", "($module)", NULL, "GL_NVX_linked_gpu_multicast", "", 0, 1438, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glLGPUInterlockNVX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -28005,7 +28005,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glLoadIdentity_info = {"glLoadIdentity", "glLoadIdentity() -> None", "($module, /)", NULL, "GL_VERSION_GL_1_0", "", 0, 1465, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glLoadIdentity_info = {"glLoadIdentity", "glLoadIdentity() -> None", "($module)", NULL, "GL_VERSION_GL_1_0", "", 0, 1465, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glLoadIdentity(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -33271,7 +33271,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glMulticastBarrierNV_info = {"glMulticastBarrierNV", "glMulticastBarrierNV() -> None", "($module, /)", NULL, "GL_NV_gpu_multicast", "", 0, 1717, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glMulticastBarrierNV_info = {"glMulticastBarrierNV", "glMulticastBarrierNV() -> None", "($module)", NULL, "GL_NV_gpu_multicast", "", 0, 1717, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glMulticastBarrierNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -36214,7 +36214,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glPauseTransformFeedback_info = {"glPauseTransformFeedback", "glPauseTransformFeedback() -> None", "($module, /)", NULL, "GL_VERSION_GL_4_0", "GL_ARB_transform_feedback2", 0, 1854, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glPauseTransformFeedback_info = {"glPauseTransformFeedback", "glPauseTransformFeedback() -> None", "($module)", NULL, "GL_VERSION_GL_4_0", "GL_ARB_transform_feedback2", 0, 1854, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glPauseTransformFeedback(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -36229,7 +36229,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glPauseTransformFeedbackNV_info = {"glPauseTransformFeedbackNV", "glPauseTransformFeedbackNV() -> None", "($module, /)", NULL, "GL_NV_transform_feedback2", "", 0, 1855, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glPauseTransformFeedbackNV_info = {"glPauseTransformFeedbackNV", "glPauseTransformFeedbackNV() -> None", "($module)", NULL, "GL_NV_transform_feedback2", "", 0, 1855, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glPauseTransformFeedbackNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -36692,7 +36692,7 @@ pygl_GL_glPointAlongPathNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_ARRAY_OUT(5, y, &pygl_elem_GLfloat, (Py_ssize_t)(1));
     PYGL_ARRAY_OUT(6, tangentX, &pygl_elem_GLfloat, (Py_ssize_t)(1));
     PYGL_ARRAY_OUT(7, tangentY, &pygl_elem_GLfloat, (Py_ssize_t)(1));
-    PYGL_CALL_R(_result, unsigned char, (unsigned int, int, int, float, void *, void *, void *, void *), (path, startSegment, numSegments, distance, x, y, tangentX, tangentY));
+    PYGL_CALL_D(unsigned char, (unsigned int, int, int, float, void *, void *, void *, void *), (path, startSegment, numSegments, distance, x, y, tangentX, tangentY));
     PYGL_CHECK();
     const PyGLOutput _outputs[] = {
         {2, &pygl_elem_GLfloat, (Py_ssize_t)(1)},
@@ -37026,7 +37026,7 @@ pygl_GL_glPollAsyncSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_FRAME(1);
     PYGL_CONV_OK();
     PYGL_ARRAY_OUT(0, markerp, &pygl_elem_GLuint, (Py_ssize_t)(1));
-    PYGL_CALL_R(_result, int, (void *), (markerp));
+    PYGL_CALL_D(int, (void *), (markerp));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[markerp_slot], &pygl_elem_GLuint, (Py_ssize_t)(1));
     PYGL_CLEANUP();
@@ -37047,7 +37047,7 @@ pygl_GL_glPollInstrumentsSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_FRAME(1);
     PYGL_CONV_OK();
     PYGL_ARRAY_OUT(0, marker_p, &pygl_elem_GLint, (Py_ssize_t)(1));
-    PYGL_CALL_R(_result, int, (void *), (marker_p));
+    PYGL_CALL_D(int, (void *), (marker_p));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[marker_p_slot], &pygl_elem_GLint, (Py_ssize_t)(1));
     PYGL_CLEANUP();
@@ -37188,7 +37188,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glPopAttrib_info = {"glPopAttrib", "glPopAttrib() -> None", "($module, /)", NULL, "GL_VERSION_GL_1_0", "", 0, 1904, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glPopAttrib_info = {"glPopAttrib", "glPopAttrib() -> None", "($module)", NULL, "GL_VERSION_GL_1_0", "", 0, 1904, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glPopAttrib(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37203,7 +37203,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glPopClientAttrib_info = {"glPopClientAttrib", "glPopClientAttrib() -> None", "($module, /)", NULL, "GL_VERSION_GL_1_1", "", 0, 1905, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glPopClientAttrib_info = {"glPopClientAttrib", "glPopClientAttrib() -> None", "($module)", NULL, "GL_VERSION_GL_1_1", "", 0, 1905, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glPopClientAttrib(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37218,7 +37218,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glPopDebugGroup_info = {"glPopDebugGroup", "glPopDebugGroup() -> None", "($module, /)", NULL, "GL_VERSION_GL_4_3", "GL_KHR_debug", 0, 1906, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glPopDebugGroup_info = {"glPopDebugGroup", "glPopDebugGroup() -> None", "($module)", NULL, "GL_VERSION_GL_4_3", "GL_KHR_debug", 0, 1906, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glPopDebugGroup(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37233,7 +37233,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glPopDebugGroupKHR_info = {"glPopDebugGroupKHR", "glPopDebugGroupKHR() -> None", "($module, /)", NULL, "GL_KHR_debug", "", 0, 1907, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glPopDebugGroupKHR_info = {"glPopDebugGroupKHR", "glPopDebugGroupKHR() -> None", "($module)", NULL, "GL_KHR_debug", "", 0, 1907, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glPopDebugGroupKHR(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37248,7 +37248,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glPopGroupMarkerEXT_info = {"glPopGroupMarkerEXT", "glPopGroupMarkerEXT() -> None", "($module, /)", NULL, "GL_EXT_debug_marker", "", 0, 1908, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glPopGroupMarkerEXT_info = {"glPopGroupMarkerEXT", "glPopGroupMarkerEXT() -> None", "($module)", NULL, "GL_EXT_debug_marker", "", 0, 1908, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glPopGroupMarkerEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37263,7 +37263,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glPopMatrix_info = {"glPopMatrix", "glPopMatrix() -> None", "($module, /)", NULL, "GL_VERSION_GL_1_0", "", 0, 1909, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glPopMatrix_info = {"glPopMatrix", "glPopMatrix() -> None", "($module)", NULL, "GL_VERSION_GL_1_0", "", 0, 1909, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glPopMatrix(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37278,7 +37278,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glPopName_info = {"glPopName", "glPopName() -> None", "($module, /)", NULL, "GL_VERSION_GL_1_0", "", 0, 1910, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glPopName_info = {"glPopName", "glPopName() -> None", "($module)", NULL, "GL_VERSION_GL_1_0", "", 0, 1910, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glPopName(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -37407,7 +37407,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glPrimitiveRestartNV_info = {"glPrimitiveRestartNV", "glPrimitiveRestartNV() -> None", "($module, /)", NULL, "GL_NV_primitive_restart", "", 0, 1916, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glPrimitiveRestartNV_info = {"glPrimitiveRestartNV", "glPrimitiveRestartNV() -> None", "($module)", NULL, "GL_NV_primitive_restart", "", 0, 1916, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glPrimitiveRestartNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -41679,7 +41679,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glPushMatrix_info = {"glPushMatrix", "glPushMatrix() -> None", "($module, /)", NULL, "GL_VERSION_GL_1_0", "", 0, 2109, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glPushMatrix_info = {"glPushMatrix", "glPushMatrix() -> None", "($module)", NULL, "GL_VERSION_GL_1_0", "", 0, 2109, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glPushMatrix(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -41740,7 +41740,7 @@ pygl_GL_glQueryMatrixxOES(GLProc *self, PyObject *const *_a, size_t _nargsf)
     PYGL_CONV_OK();
     PYGL_ARRAY_OUT(0, mantissa, &pygl_elem_GLfixed, (Py_ssize_t)(16));
     PYGL_ARRAY_OUT(1, exponent, &pygl_elem_GLint, (Py_ssize_t)(16));
-    PYGL_CALL_R(_result, unsigned int, (void *, void *), (mantissa, exponent));
+    PYGL_CALL_D(unsigned int, (void *, void *), (mantissa, exponent));
     PYGL_CHECK();
     const PyGLOutput _outputs[] = {
         {1, &pygl_elem_GLint, (Py_ssize_t)(16)},
@@ -42809,7 +42809,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glReleaseShaderCompiler_info = {"glReleaseShaderCompiler", "glReleaseShaderCompiler() -> None", "($module, /)", NULL, "GL_VERSION_GL_4_1", "GL_ARB_ES2_compatibility", 0, 2165, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glReleaseShaderCompiler_info = {"glReleaseShaderCompiler", "glReleaseShaderCompiler() -> None", "($module)", NULL, "GL_VERSION_GL_4_1", "GL_ARB_ES2_compatibility", 0, 2165, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glReleaseShaderCompiler(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -43596,7 +43596,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glResizeBuffersMESA_info = {"glResizeBuffersMESA", "glResizeBuffersMESA() -> None", "($module, /)", NULL, "GL_MESA_resize_buffers", "", 0, 2203, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glResizeBuffersMESA_info = {"glResizeBuffersMESA", "glResizeBuffersMESA() -> None", "($module)", NULL, "GL_MESA_resize_buffers", "", 0, 2203, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glResizeBuffersMESA(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -43611,7 +43611,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glResolveDepthValuesNV_info = {"glResolveDepthValuesNV", "glResolveDepthValuesNV() -> None", "($module, /)", NULL, "GL_NV_sample_locations", "", 0, 2204, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glResolveDepthValuesNV_info = {"glResolveDepthValuesNV", "glResolveDepthValuesNV() -> None", "($module)", NULL, "GL_NV_sample_locations", "", 0, 2204, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glResolveDepthValuesNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -43626,7 +43626,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glResumeTransformFeedback_info = {"glResumeTransformFeedback", "glResumeTransformFeedback() -> None", "($module, /)", NULL, "GL_VERSION_GL_4_0", "GL_ARB_transform_feedback2", 0, 2205, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glResumeTransformFeedback_info = {"glResumeTransformFeedback", "glResumeTransformFeedback() -> None", "($module)", NULL, "GL_VERSION_GL_4_0", "GL_ARB_transform_feedback2", 0, 2205, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glResumeTransformFeedback(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -43641,7 +43641,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glResumeTransformFeedbackNV_info = {"glResumeTransformFeedbackNV", "glResumeTransformFeedbackNV() -> None", "($module, /)", NULL, "GL_NV_transform_feedback2", "", 0, 2206, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glResumeTransformFeedbackNV_info = {"glResumeTransformFeedbackNV", "glResumeTransformFeedbackNV() -> None", "($module)", NULL, "GL_NV_transform_feedback2", "", 0, 2206, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glResumeTransformFeedbackNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -45700,7 +45700,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glStartInstrumentsSGIX_info = {"glStartInstrumentsSGIX", "glStartInstrumentsSGIX() -> None", "($module, /)", NULL, "GL_SGIX_instruments", "", 0, 2310, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glStartInstrumentsSGIX_info = {"glStartInstrumentsSGIX", "glStartInstrumentsSGIX() -> None", "($module)", NULL, "GL_SGIX_instruments", "", 0, 2310, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glStartInstrumentsSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -46205,7 +46205,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glTagSampleBufferSGIX_info = {"glTagSampleBufferSGIX", "glTagSampleBufferSGIX() -> None", "($module, /)", NULL, "GL_SGIX_tag_sample_buffer", "", 0, 2335, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glTagSampleBufferSGIX_info = {"glTagSampleBufferSGIX", "glTagSampleBufferSGIX() -> None", "($module)", NULL, "GL_SGIX_tag_sample_buffer", "", 0, 2335, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glTagSampleBufferSGIX(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -49716,7 +49716,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glTextureBarrier_info = {"glTextureBarrier", "glTextureBarrier() -> None", "($module, /)", NULL, "GL_VERSION_GL_4_5", "GL_ARB_texture_barrier", 0, 2502, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glTextureBarrier_info = {"glTextureBarrier", "glTextureBarrier() -> None", "($module)", NULL, "GL_VERSION_GL_4_5", "GL_ARB_texture_barrier", 0, 2502, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glTextureBarrier(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -49731,7 +49731,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glTextureBarrierNV_info = {"glTextureBarrierNV", "glTextureBarrierNV() -> None", "($module, /)", NULL, "GL_NV_texture_barrier", "", 0, 2503, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glTextureBarrierNV_info = {"glTextureBarrierNV", "glTextureBarrierNV() -> None", "($module)", NULL, "GL_NV_texture_barrier", "", 0, 2503, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glTextureBarrierNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -53737,7 +53737,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glUnlockArraysEXT_info = {"glUnlockArraysEXT", "glUnlockArraysEXT() -> None", "($module, /)", NULL, "GL_EXT_compiled_vertex_array", "", 0, 2688, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glUnlockArraysEXT_info = {"glUnlockArraysEXT", "glUnlockArraysEXT() -> None", "($module)", NULL, "GL_EXT_compiled_vertex_array", "", 0, 2688, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glUnlockArraysEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -53986,7 +53986,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GL_glVDPAUFiniNV_info = {"glVDPAUFiniNV", "glVDPAUFiniNV() -> None", "($module, /)", NULL, "GL_NV_vdpau_interop", "", 0, 2702, PYGL_API_GL, 0, 0, 0, 0};
+static const PyGLCommand pygl_GL_glVDPAUFiniNV_info = {"glVDPAUFiniNV", "glVDPAUFiniNV() -> None", "($module)", NULL, "GL_NV_vdpau_interop", "", 0, 2702, PYGL_API_GL, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GL_glVDPAUFiniNV(GLProc *self, PyObject *const *_a, size_t _nargsf)

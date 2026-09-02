@@ -1272,7 +1272,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglGetCurrentContext_info = {"eglGetCurrentContext", "eglGetCurrentContext() -> EGLContext", "($module, /)", NULL, "EGL_VERSION_EGL_1_4", "", 0, 59, PYGL_API_EGL, 0, 0, 4, 0};
+static const PyGLCommand pygl_EGL_eglGetCurrentContext_info = {"eglGetCurrentContext", "eglGetCurrentContext() -> EGLContext", "($module)", NULL, "EGL_VERSION_EGL_1_4", "", 0, 59, PYGL_API_EGL, 0, 0, 4, 0};
 
 static PyObject *
 pygl_EGL_eglGetCurrentContext(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1287,7 +1287,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglGetCurrentDisplay_info = {"eglGetCurrentDisplay", "eglGetCurrentDisplay() -> EGLDisplay", "($module, /)", NULL, "EGL_VERSION_EGL_1_0", "", 0, 60, PYGL_API_EGL, 0, 0, 4, 0};
+static const PyGLCommand pygl_EGL_eglGetCurrentDisplay_info = {"eglGetCurrentDisplay", "eglGetCurrentDisplay() -> EGLDisplay", "($module)", NULL, "EGL_VERSION_EGL_1_0", "", 0, 60, PYGL_API_EGL, 0, 0, 4, 0};
 
 static PyObject *
 pygl_EGL_eglGetCurrentDisplay(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1370,7 +1370,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglGetError_info = {"eglGetError", "eglGetError() -> EGLint", "($module, /)", NULL, "EGL_VERSION_EGL_1_0", "", 0, 65, PYGL_API_EGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetError_info = {"eglGetError", "eglGetError() -> EGLint", "($module)", NULL, "EGL_VERSION_EGL_1_0", "", 0, 65, PYGL_API_EGL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_EGL_eglGetError(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1704,7 +1704,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglGetSystemTimeFrequencyNV_info = {"eglGetSystemTimeFrequencyNV", "eglGetSystemTimeFrequencyNV() -> EGLuint64NV", "($module, /)", NULL, "EGL_NV_system_time", "", 0, 80, PYGL_API_EGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetSystemTimeFrequencyNV_info = {"eglGetSystemTimeFrequencyNV", "eglGetSystemTimeFrequencyNV() -> EGLuint64NV", "($module)", NULL, "EGL_NV_system_time", "", 0, 80, PYGL_API_EGL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_EGL_eglGetSystemTimeFrequencyNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1719,7 +1719,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglGetSystemTimeNV_info = {"eglGetSystemTimeNV", "eglGetSystemTimeNV() -> EGLuint64NV", "($module, /)", NULL, "EGL_NV_system_time", "", 0, 81, PYGL_API_EGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetSystemTimeNV_info = {"eglGetSystemTimeNV", "eglGetSystemTimeNV() -> EGLuint64NV", "($module)", NULL, "EGL_NV_system_time", "", 0, 81, PYGL_API_EGL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_EGL_eglGetSystemTimeNV(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1882,7 +1882,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglQueryAPI_info = {"eglQueryAPI", "eglQueryAPI() -> EGLenum", "($module, /)", NULL, "EGL_VERSION_EGL_1_2", "", 0, 89, PYGL_API_EGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryAPI_info = {"eglQueryAPI", "eglQueryAPI() -> EGLenum", "($module)", NULL, "EGL_VERSION_EGL_1_2", "", 0, 89, PYGL_API_EGL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_EGL_eglQueryAPI(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -2612,7 +2612,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglReleaseThread_info = {"eglReleaseThread", "eglReleaseThread() -> EGLBoolean", "($module, /)", NULL, "EGL_VERSION_EGL_1_2", "", 0, 121, PYGL_API_EGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_EGL_eglReleaseThread_info = {"eglReleaseThread", "eglReleaseThread() -> EGLBoolean", "($module)", NULL, "EGL_VERSION_EGL_1_2", "", 0, 121, PYGL_API_EGL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_EGL_eglReleaseThread(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3229,7 +3229,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglWaitClient_info = {"eglWaitClient", "eglWaitClient() -> EGLBoolean", "($module, /)", NULL, "EGL_VERSION_EGL_1_2", "", 0, 151, PYGL_API_EGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_EGL_eglWaitClient_info = {"eglWaitClient", "eglWaitClient() -> EGLBoolean", "($module)", NULL, "EGL_VERSION_EGL_1_2", "", 0, 151, PYGL_API_EGL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_EGL_eglWaitClient(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -3244,7 +3244,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglWaitGL_info = {"eglWaitGL", "eglWaitGL() -> EGLBoolean", "($module, /)", NULL, "EGL_VERSION_EGL_1_0", "", 0, 152, PYGL_API_EGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_EGL_eglWaitGL_info = {"eglWaitGL", "eglWaitGL() -> EGLBoolean", "($module)", NULL, "EGL_VERSION_EGL_1_0", "", 0, 152, PYGL_API_EGL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_EGL_eglWaitGL(GLProc *self, PyObject *const *_a, size_t _nargsf)

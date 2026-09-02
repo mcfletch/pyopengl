@@ -371,7 +371,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLSC2_glCreateProgram_info = {"glCreateProgram", "glCreateProgram() -> GLuint", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", "", 0, 4500, PYGL_API_GLSC2, 0, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glCreateProgram_info = {"glCreateProgram", "glCreateProgram() -> GLuint", "($module)", NULL, "GLSC2_SC_VERSION_2_0", "", 0, 4500, PYGL_API_GLSC2, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GLSC2_glCreateProgram(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -567,7 +567,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLSC2_glFinish_info = {"glFinish", "glFinish() -> None", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", "", 0, 4511, PYGL_API_GLSC2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLSC2_glFinish_info = {"glFinish", "glFinish() -> None", "($module)", NULL, "GLSC2_SC_VERSION_2_0", "", 0, 4511, PYGL_API_GLSC2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glFinish(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -582,7 +582,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLSC2_glFlush_info = {"glFlush", "glFlush() -> None", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", "", 0, 4512, PYGL_API_GLSC2, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLSC2_glFlush_info = {"glFlush", "glFlush() -> None", "($module)", NULL, "GLSC2_SC_VERSION_2_0", "", 0, 4512, PYGL_API_GLSC2, 0, 0, 0, 0};
 
 static PyObject *
 pygl_GLSC2_glFlush(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -827,7 +827,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLSC2_glGetError_info = {"glGetError", "glGetError() -> GLenum", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", "", 0, 4524, PYGL_API_GLSC2, 0, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glGetError_info = {"glGetError", "glGetError() -> GLenum", "($module)", NULL, "GLSC2_SC_VERSION_2_0", "", 0, 4524, PYGL_API_GLSC2, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GLSC2_glGetError(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -888,7 +888,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLSC2_glGetGraphicsResetStatus_info = {"glGetGraphicsResetStatus", "glGetGraphicsResetStatus() -> GLenum", "($module, /)", NULL, "GLSC2_SC_VERSION_2_0", "", 0, 4527, PYGL_API_GLSC2, 0, 0, 1, 0};
+static const PyGLCommand pygl_GLSC2_glGetGraphicsResetStatus_info = {"glGetGraphicsResetStatus", "glGetGraphicsResetStatus() -> GLenum", "($module)", NULL, "GLSC2_SC_VERSION_2_0", "", 0, 4527, PYGL_API_GLSC2, 0, 0, 1, 0};
 
 static PyObject *
 pygl_GLSC2_glGetGraphicsResetStatus(GLProc *self, PyObject *const *_a, size_t _nargsf)

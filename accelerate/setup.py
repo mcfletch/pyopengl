@@ -36,6 +36,13 @@ def dispatch_extension():
 
     if os.environ.get('PYOPENGL_NO_C_DISPATCH'):
         return []
+    if sys.implementation.name != 'cpython':
+        # The extension reaches CPython's vectorcall protocol directly.  On
+        # PyPy it would compile, import, and route every call through an
+        # emulated vectorcall across the cpyext boundary -- the slowest path
+        # available, chosen by default, on the interpreter the ctypes
+        # implementation exists to serve.
+        return []
     generated = os.path.join(HERE, 'src', 'c', 'generated')
     sources = sorted(
         os.path.relpath(path, HERE).replace(os.sep, '/')

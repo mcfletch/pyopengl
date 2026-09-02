@@ -178,7 +178,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglBeginFrameTrackingI3D_info = {"wglBeginFrameTrackingI3D", "wglBeginFrameTrackingI3D() -> BOOL", "($module, /)", NULL, "WGL_I3D_swap_frame_usage", "", 0, 4722, PYGL_API_WGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_WGL_wglBeginFrameTrackingI3D_info = {"wglBeginFrameTrackingI3D", "wglBeginFrameTrackingI3D() -> BOOL", "($module)", NULL, "WGL_I3D_swap_frame_usage", "", 0, 4722, PYGL_API_WGL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_WGL_wglBeginFrameTrackingI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1009,7 +1009,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglDisableFrameLockI3D_info = {"wglDisableFrameLockI3D", "wglDisableFrameLockI3D() -> BOOL", "($module, /)", NULL, "WGL_I3D_swap_frame_lock", "", 0, 4763, PYGL_API_WGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_WGL_wglDisableFrameLockI3D_info = {"wglDisableFrameLockI3D", "wglDisableFrameLockI3D() -> BOOL", "($module)", NULL, "WGL_I3D_swap_frame_lock", "", 0, 4763, PYGL_API_WGL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_WGL_wglDisableFrameLockI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1041,7 +1041,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglEnableFrameLockI3D_info = {"wglEnableFrameLockI3D", "wglEnableFrameLockI3D() -> BOOL", "($module, /)", NULL, "WGL_I3D_swap_frame_lock", "", 0, 4765, PYGL_API_WGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_WGL_wglEnableFrameLockI3D_info = {"wglEnableFrameLockI3D", "wglEnableFrameLockI3D() -> BOOL", "($module)", NULL, "WGL_I3D_swap_frame_lock", "", 0, 4765, PYGL_API_WGL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_WGL_wglEnableFrameLockI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1073,7 +1073,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglEndFrameTrackingI3D_info = {"wglEndFrameTrackingI3D", "wglEndFrameTrackingI3D() -> BOOL", "($module, /)", NULL, "WGL_I3D_swap_frame_usage", "", 0, 4767, PYGL_API_WGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_WGL_wglEndFrameTrackingI3D_info = {"wglEndFrameTrackingI3D", "wglEndFrameTrackingI3D() -> BOOL", "($module)", NULL, "WGL_I3D_swap_frame_usage", "", 0, 4767, PYGL_API_WGL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_WGL_wglEndFrameTrackingI3D(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1305,7 +1305,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglGetCurrentAssociatedContextAMD_info = {"wglGetCurrentAssociatedContextAMD", "wglGetCurrentAssociatedContextAMD() -> HGLRC", "($module, /)", NULL, "WGL_AMD_gpu_association", "", 0, 4779, PYGL_API_WGL, 0, 0, 4, 0};
+static const PyGLCommand pygl_WGL_wglGetCurrentAssociatedContextAMD_info = {"wglGetCurrentAssociatedContextAMD", "wglGetCurrentAssociatedContextAMD() -> HGLRC", "($module)", NULL, "WGL_AMD_gpu_association", "", 0, 4779, PYGL_API_WGL, 0, 0, 4, 0};
 
 static PyObject *
 pygl_WGL_wglGetCurrentAssociatedContextAMD(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1320,7 +1320,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglGetCurrentContext_info = {"wglGetCurrentContext", "wglGetCurrentContext() -> HGLRC", "($module, /)", NULL, "WGL_VERSION_WGL_1_0", "", 0, 4780, PYGL_API_WGL, 0, 0, 4, 0};
+static const PyGLCommand pygl_WGL_wglGetCurrentContext_info = {"wglGetCurrentContext", "wglGetCurrentContext() -> HGLRC", "($module)", NULL, "WGL_VERSION_WGL_1_0", "", 0, 4780, PYGL_API_WGL, 0, 0, 4, 0};
 
 static PyObject *
 pygl_WGL_wglGetCurrentContext(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1335,7 +1335,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglGetCurrentDC_info = {"wglGetCurrentDC", "wglGetCurrentDC() -> HDC", "($module, /)", NULL, "WGL_VERSION_WGL_1_0", "", 0, 4781, PYGL_API_WGL, 0, 0, 4, 0};
+static const PyGLCommand pygl_WGL_wglGetCurrentDC_info = {"wglGetCurrentDC", "wglGetCurrentDC() -> HDC", "($module)", NULL, "WGL_VERSION_WGL_1_0", "", 0, 4781, PYGL_API_WGL, 0, 0, 4, 0};
 
 static PyObject *
 pygl_WGL_wglGetCurrentDC(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1350,7 +1350,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglGetCurrentReadDCARB_info = {"wglGetCurrentReadDCARB", "wglGetCurrentReadDCARB() -> HDC", "($module, /)", NULL, "WGL_ARB_make_current_read", "", 0, 4782, PYGL_API_WGL, 0, 0, 4, 0};
+static const PyGLCommand pygl_WGL_wglGetCurrentReadDCARB_info = {"wglGetCurrentReadDCARB", "wglGetCurrentReadDCARB() -> HDC", "($module)", NULL, "WGL_ARB_make_current_read", "", 0, 4782, PYGL_API_WGL, 0, 0, 4, 0};
 
 static PyObject *
 pygl_WGL_wglGetCurrentReadDCARB(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1365,7 +1365,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglGetCurrentReadDCEXT_info = {"wglGetCurrentReadDCEXT", "wglGetCurrentReadDCEXT() -> HDC", "($module, /)", NULL, "WGL_EXT_make_current_read", "", 0, 4783, PYGL_API_WGL, 0, 0, 4, 0};
+static const PyGLCommand pygl_WGL_wglGetCurrentReadDCEXT_info = {"wglGetCurrentReadDCEXT", "wglGetCurrentReadDCEXT() -> HDC", "($module)", NULL, "WGL_EXT_make_current_read", "", 0, 4783, PYGL_API_WGL, 0, 0, 4, 0};
 
 static PyObject *
 pygl_WGL_wglGetCurrentReadDCEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1420,7 +1420,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglGetExtensionsStringEXT_info = {"wglGetExtensionsStringEXT", "wglGetExtensionsStringEXT() -> GLchar", "($module, /)", NULL, "WGL_EXT_extensions_string", "", 0, 4786, PYGL_API_WGL, 0, 0, 2, 0};
+static const PyGLCommand pygl_WGL_wglGetExtensionsStringEXT_info = {"wglGetExtensionsStringEXT", "wglGetExtensionsStringEXT() -> GLchar", "($module)", NULL, "WGL_EXT_extensions_string", "", 0, 4786, PYGL_API_WGL, 0, 0, 2, 0};
 
 static PyObject *
 pygl_WGL_wglGetExtensionsStringEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
@@ -1842,7 +1842,7 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_WGL_wglGetSwapIntervalEXT_info = {"wglGetSwapIntervalEXT", "wglGetSwapIntervalEXT() -> c_int", "($module, /)", NULL, "WGL_EXT_swap_control", "", 0, 4805, PYGL_API_WGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_WGL_wglGetSwapIntervalEXT_info = {"wglGetSwapIntervalEXT", "wglGetSwapIntervalEXT() -> c_int", "($module)", NULL, "WGL_EXT_swap_control", "", 0, 4805, PYGL_API_WGL, 0, 0, 1, 0};
 
 static PyObject *
 pygl_WGL_wglGetSwapIntervalEXT(GLProc *self, PyObject *const *_a, size_t _nargsf)
