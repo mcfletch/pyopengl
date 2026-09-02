@@ -103,10 +103,16 @@ def _registry_commands(registry_root):
 
 
 def _shipped_enums(package_root):
-    """Every constant name the shipped raw modules define."""
+    """Every constant name the shipped bindings define.
+
+    From the declaration tables, and from any module still shipped beside them
+    -- ``_types`` and ``_glgets`` define names too, and OSMesa keeps its files.
+    """
     import ast
 
     names = set()
+    for api, api_names in extract.extract_constants(package_root).items():
+        names.update(api_names)
     raw_root = os.path.join(package_root, 'raw')
     for directory, _folders, files in os.walk(raw_root):
         if '__pycache__' in directory:

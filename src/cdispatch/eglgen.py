@@ -233,8 +233,17 @@ def undefined_types(registry, package_root, only_missing=False):
 
 
 def _shipped(package_root):
-    """Every EGL entry point the tree already declares."""
-    names = set()
+    """Every EGL entry point the tree already declares.
+
+    From the declaration table, and from any module still shipped beside it.
+    """
+    from . import extract
+
+    names = {
+        command.name
+        for _module, declared in extract.read_declarations(package_root, 'EGL')
+        for command in declared.values()
+    }
     root = os.path.join(package_root, 'raw', 'EGL')
     for directory, folders, files in os.walk(root):
         if '__pycache__' in directory:

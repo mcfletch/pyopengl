@@ -774,8 +774,29 @@ def _mark_retained(commands):
                     parameter.size = model.TypedArray()
 
 
+def _table_constants(package_root, api):
+    """Every enum name one API's declaration table carries."""
+    import marshal
+
+    path = os.path.join(package_root, 'raw', DECLARATION_TABLES, '%s.dat' % (api,))
+    try:
+        with open(path, 'rb') as handle:
+            table = marshal.load(handle)
+    except OSError:
+        return ()
+    names = set()
+    for blob in table.values():
+        _feature, constants, _commands, _reexports = marshal.loads(blob)
+        names.update(constants)
+    return names
+
+
 def extract_constants(root):
-    """``{api: [constant name]}`` for every enum the raw modules define.
+    """``{api: [constant name]}`` for every enum the API declares.
+
+    From the declaration tables, and from any generated module still shipped:
+    the tables are the record now, and the files were only ever a second copy
+    of what is in them.
 
     The stubs need these: the enums are most of what a caller writes, and a
     stub that declared only the functions would make a type checker reject
@@ -787,7 +808,7 @@ def extract_constants(root):
         api_root = os.path.join(raw_root, api)
         if not os.path.isdir(api_root):
             continue
-        names = set()
+        names = set(_table_constants(root, api))
         for directory, _folders, files in os.walk(api_root):
             if '__pycache__' in directory:
                 continue

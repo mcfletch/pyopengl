@@ -29,6 +29,10 @@ __all__ = ['define', 'contents_for', 'clear_caches']
 #: Where the marshalled declarations live, relative to this file.
 DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'raw', '_declarations')
 
+#: The APIs a declaration table is shipped for.  GLU, GLUT, GLE and OSMesa are
+#: hand-maintained rather than registry-described, so they keep their modules.
+APIS = ('GL', 'GLES1', 'GLES2', 'GLES3', 'GLSC2', 'EGL', 'GLX', 'WGL')
+
 #: One entry per API, filled on the first module of that API that asks.
 _data = {}
 
@@ -86,6 +90,30 @@ def _data_source(api):
         except OSError:
             _data[api] = {}
     return _data[api]
+
+
+class _DataDeclarations:
+    """The declaration tables, in the shape the finder asks the C for.
+
+    The finder was written against the extension because that was the only
+    source that could enumerate the generated modules.  With the modules gone
+    the finder has to answer on the ctypes path too, and the tables hold the
+    same facts -- so they answer the same two questions.
+    """
+
+    def module_names(self):
+        names = []
+        for api in APIS:
+            names.extend(_data_source(api))
+        return names
+
+    def module_contents(self, module_name):
+        return contents_for(module_name)
+
+
+def data_declarations():
+    """A declaration source backed by the shipped tables."""
+    return _DataDeclarations()
 
 
 def api_of(module_name):

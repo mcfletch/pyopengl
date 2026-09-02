@@ -163,6 +163,29 @@ def configure():
     )
 
 
+def install_finder():
+    """Answer for the generated module names, whichever implementation is used.
+
+    The modules under ``OpenGL/raw`` are not shipped -- they held nothing the
+    declaration tables do not -- so something has to answer when a program
+    imports one, and that is as true on ctypes as it is on C.
+
+    Which of the two answers is settled on the first module built, not here.
+    This runs at ``import OpenGL``, and a program sets ``OpenGL.ERROR_CHECKING``
+    and its neighbours in the lines *after* that import; deciding now would
+    read the configuration before it had been written.
+    """
+    # Imported here rather than at module level: a module nobody has switched
+    # on should cost nothing to leave switched off.  finder decides whether it
+    # is wanted without importing _configflags, which would read every flag off
+    # OpenGL before a program had finished setting them.
+    from OpenGL._dispatch import finder
+
+    if ACTIVE:
+        return finder.install(_c, entry_points)
+    return finder.install()
+
+
 def install():
     """Make the C layer the implementation of the entry points.
 
@@ -186,15 +209,6 @@ def install():
         )
     entry_points.update(_c.entry_points)
     configure()
-
-    from OpenGL._configflags import VIRTUAL_MODULES
-
-    if VIRTUAL_MODULES:
-        # Imported here rather than at module level: a module nobody has
-        # switched on should cost nothing to leave switched off.
-        from OpenGL._dispatch import finder
-
-        finder.install(_c, entry_points)
 
     from OpenGL import platform, wrapper
 
@@ -230,6 +244,9 @@ def install():
     wrapper.wrapper = wrapper_
     platform.createExtensionFunction = createExtensionFunction
     ACTIVE = True
+    # Last, because the finder hands out the C entry points and ACTIVE is what
+    # tells it there are any.
+    install_finder()
     return True
 
 

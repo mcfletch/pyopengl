@@ -41,7 +41,6 @@ import importlib.machinery
 import os
 import sys
 
-from OpenGL._configflags import VIRTUAL_MODULES
 from OpenGL._dispatch import support
 
 __all__ = ['RawModuleFinder', 'install']
@@ -59,14 +58,57 @@ class RawModuleFinder:
     registration this file does not need.
     """
 
-    def __init__(self, extension, entry_points):
+    def __init__(self, extension=None, entry_points=None):
         self._extension = extension
         self._entry_points = entry_points
-        self._names = frozenset(extension.module_names())
+        self._known = None
+
+    @property
+    def _names(self):
+        """The generated module names, read on the first import that asks.
+
+        From the tables even where the extension will answer, because the two
+        describe the same set and reading an index is cheaper than installing
+        the dispatch layer.  Read late rather than in ``__init__`` because this
+        object is built during ``import OpenGL``, and a program sets
+        ``OpenGL.ERROR_CHECKING`` and its neighbours in the lines after that --
+        anything read here would be read before it had been written.
+        """
+        if self._known is None:
+            from OpenGL import _declarations
+
+            self._known = frozenset(
+                _declarations.data_declarations().module_names()
+            )
+        return self._known
+
+    def _source(self):
+        """The extension where it is the implementation, the tables otherwise.
+
+        Resolved on the first module built rather than at construction: that
+        is the first moment the answer can be right, because deciding it
+        earlier would settle the configuration before a program has finished
+        writing it.
+        """
+        if self._extension is None:
+            from OpenGL import _declarations
+
+            extension = _declarations._c_source()
+            if extension:
+                from OpenGL._dispatch import entry_points
+
+                self._extension, self._entry_points = extension, entry_points
+            else:
+                self._extension = _declarations.data_declarations()
+                self._entry_points = {}
+        return self._extension, self._entry_points
 
     # -- finding ---------------------------------------------------------
     def find_spec(self, name, path=None, target=None):
-        if name not in self._names:
+        # The prefix test first, and without touching _names: this is asked
+        # about every import in the process, and reading the index is what
+        # imports OpenGL._declarations -- which would ask about itself.
+        if not name.startswith('OpenGL.raw.') or name not in self._names:
             return None
         return importlib.machinery.ModuleSpec(name, self, origin='<generated>')
 
@@ -76,7 +118,8 @@ class RawModuleFinder:
 
     def exec_module(self, module):
         name = module.__name__
-        contents = self._extension.module_contents(name)
+        extension, entry_points = self._source()
+        contents = extension.module_contents(name)
         if contents is None:  # pragma: no cover - find_spec filtered on this
             raise ImportError(name)
 
@@ -132,7 +175,7 @@ class RawModuleFinder:
             # way through createFunction, and a name that reports where it was
             # declared should not depend on how the module was filled.
             support.register_module(api, command, name)
-            entry = self._entry_points.get((api, command))
+            entry = entry_points.get((api, command))
             if entry is None:
                 # An entry point the C does not implement is what it always
                 # was, so build it now rather than describe it.
@@ -155,8 +198,13 @@ class _Declaration:
         self.name = name
         self.extension = extension
         self.module = module
-        self._arguments = arguments
-        self._types = types
+        # The C source hands these over comma-joined and the marshalled tables
+        # keep them as tuples.  Either way they are names and expressions, and
+        # the difference is not one anything below here should have to know.
+        self._arguments = tuple(
+            name for name in _as_sequence(arguments) if name
+        )
+        self._types = tuple(_as_sequence(types))
 
     def __call__(self):
         """The ctypes binding the declaration would have produced."""
@@ -171,7 +219,7 @@ class _Declaration:
         # The text was written by the generator out of the shipped tree, and
         # the namespace offers it three names; it is our own source arriving
         # by a longer road than usual.
-        types = [_resolve_type(text, namespace) for text in self._types.split(',')]
+        types = [_resolve_type(text, namespace) for text in self._types]
         errors = importlib.import_module('OpenGL.raw.%s._errors' % (self.api,))
 
         def declaration(*arguments):
@@ -181,9 +229,7 @@ class _Declaration:
         declaration = platform.types(types[0], *types[1:])(declaration)
         # types() reads the names off the code object, and this one has none
         # of its own -- the names are the declaration's, so state them.
-        argument_names = tuple(
-            name for name in self._arguments.split(',') if name
-        )
+        argument_names = self._arguments
         # nullFunction rather than createFunction: createFunction hands back
         # the C entry point where there is one, and what a demotion wants is
         # the thing underneath it.
@@ -198,6 +244,13 @@ class _Declaration:
             module=self.module,
             error_checker=errors._error_checker,
         )
+
+
+def _as_sequence(value):
+    """``'a,b'`` or ``('a', 'b')`` -- both are a sequence of items."""
+    if isinstance(value, str):
+        return value.split(',')
+    return list(value)
 
 
 #: The type expressions the table carries are our own, written by the
@@ -276,14 +329,30 @@ def _file_for(name):
     return path if os.path.exists(path) else ''
 
 
-def install(extension, entry_points):
+def _virtual_modules_wanted():
+    """``OpenGL._configflags.VIRTUAL_MODULES``, without importing it.
+
+    That module reads every flag off ``OpenGL`` when it is first imported, so
+    importing it here -- from the tail of ``import OpenGL`` -- would freeze
+    ``ERROR_CHECKING``, ``CONTEXT_CHECKING`` and the rest before a program had
+    set them.  This flag comes only from the environment, so the environment
+    can be asked instead.
+    """
+    return os.environ.get('PYOPENGL_VIRTUAL_MODULES', '1').strip().lower() in (
+        '1',
+        'true',
+        'yes',
+    )
+
+
+def install(extension=None, entry_points=None):
     """Put the finder ahead of the path finder.
 
-    Ahead, because the files are still there: what decides which is used is
-    which finder answers first, and that keeps the two comparable.
+    Ahead of it because there are no files for it to be behind: the generated
+    modules are not shipped, and this is what answers for their names.
     """
     global _installed
-    if _installed is not None or not VIRTUAL_MODULES:
+    if _installed is not None or not _virtual_modules_wanted():
         return _installed
     _installed = RawModuleFinder(extension, entry_points)
     sys.meta_path.insert(0, _installed)

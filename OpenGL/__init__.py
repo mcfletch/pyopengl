@@ -375,3 +375,15 @@ FormatHandler(
     ["OpenGL.arrays.vbo.VBOOffset", "OpenGL_accelerate.vbo.VBOOffset"],
     isOutput=False,
 )
+
+# The generated modules under OpenGL/raw are not shipped: they held nothing the
+# declaration tables beside them do not, and a module that is nothing but data
+# does not need to be a module.  Something still has to answer when a program
+# imports one -- PyOpenGL does it itself, three lines into importing OpenGL.GL
+# -- so a stand-in goes on sys.meta_path here and loads the real finder on the
+# first OpenGL.raw.* import.  A stand-in rather than the finder because the
+# flags above are set by a program in the lines after `import OpenGL`, and
+# anything imported here that reads them would read them too early.
+from OpenGL import _rawfinder as _rawfinder_module
+
+_rawfinder_module.install()

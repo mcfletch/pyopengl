@@ -180,8 +180,56 @@ def _constant_value(node):
     return value if isinstance(value, int) else None
 
 
+def read_declaration_tables(package_root, apis):
+    """Every generated module, from the marshalled tables.
+
+    The tables are the record once the files are gone, so this is what
+    regeneration reads.  It is a fixpoint: writing what this returns produces
+    the tables it was read from, which is the property that stops a
+    regeneration in a tree without the files from writing empty ones over the
+    data.
+    """
+    import marshal
+
+    modules = []
+    directory = os.path.join(package_root, DECLARATIONS)
+    for api in apis:
+        path = os.path.join(directory, '%s.dat' % (api,))
+        try:
+            with open(path, 'rb') as handle:
+                table = marshal.load(handle)
+        except OSError:
+            continue
+        for name in sorted(table):
+            extension, constants, commands, reexports = marshal.loads(table[name])
+            modules.append(
+                RawModule(
+                    name=name,
+                    extension=extension,
+                    constants=dict(constants),
+                    commands=[
+                        RawCommand(
+                            name=command,
+                            argument_names=tuple(arguments),
+                            types=tuple(types),
+                        )
+                        for command, arguments, types in commands
+                    ],
+                    reexports=list(reexports),
+                )
+            )
+    return modules
+
+
 def read_modules(package_root, apis):
-    """Every generated module under ``OpenGL/raw`` that a table can describe."""
+    """Every generated module a table can describe.
+
+    Read from the files where they are still shipped, and from the marshalled
+    tables where they are not.  The files are the source while they exist so
+    that generating from them can be compared with generating from the tables;
+    once they are gone the tables are the record, and reading them is what
+    makes regeneration in that tree reproduce the data rather than empty it.
+    """
     modules = []
     raw_root = os.path.join(package_root, 'raw')
     for api in apis:
@@ -199,6 +247,8 @@ def read_modules(package_root, apis):
                 module = read_module(package_root, os.path.join(directory, filename))
                 if module is not None and not module.hand_written:
                     modules.append(module)
+    if not modules:
+        return read_declaration_tables(package_root, apis)
     return modules
 
 
@@ -303,7 +353,11 @@ def emit_declarations(modules):
     import marshal
 
     by_api = {}
-    for module in modules:
+    # Sorted, so that the file is a function of the declarations rather than of
+    # the order they were read in.  Regeneration then reproduces it byte for
+    # byte, which is what lets a tree without the generated modules regenerate
+    # from these tables and get the same tables back.
+    for module in sorted(modules, key=lambda module: module.name):
         api = module.name.split('.')[2]
         # Each module's declarations are marshalled on their own, so that
         # reading the file is reading an index: a program using forty modules

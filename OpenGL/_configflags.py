@@ -41,10 +41,13 @@ if FULL_LOGGING and DISPATCH == 'c':
     DISPATCH = 'ctypes'
 
 #: Build the generated OpenGL.raw modules from the C dispatch layer's tables
-#: rather than importing their files.  Off by default: the files are still
-#: shipped, and with the friendly modules importing the raw ones eagerly there
-#: is nothing to be saved by shadowing them.  See OpenGL/_dispatch/finder.py.
-VIRTUAL_MODULES = _os.environ.get('PYOPENGL_VIRTUAL_MODULES', '0').strip().lower() in (
+#: rather than importing their files.  On, because there are no files: the
+#: 1,298 generated modules under OpenGL/raw hold nothing the declaration tables
+#: do not, and a module that is data does not need to be a module.  Setting it
+#: to 0 leaves ``from OpenGL.raw.GL.VERSION.GL_1_1 import *`` with nothing to
+#: import, so it is useful only to a tree that still has the files.
+#: See OpenGL/_dispatch/finder.py.
+VIRTUAL_MODULES = _os.environ.get('PYOPENGL_VIRTUAL_MODULES', '1').strip().lower() in (
     '1',
     'true',
     'yes',

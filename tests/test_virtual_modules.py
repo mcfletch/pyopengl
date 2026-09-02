@@ -48,6 +48,14 @@ for name in %(names)r:
 json.dump(out, sys.stdout)
 '''
 
+#: What the generated files defined, recorded from the tree that still had
+#: them.  The comparison used to run both halves live, which stopped being
+#: possible when the files went: there is no second source to survey any more.
+#: So the answer they gave is checked in, and the synthesised modules are held
+#: to it -- which is the same assertion, against a baseline that cannot drift
+#: because it is no longer derived from anything.
+BASELINE = os.path.join(HERE, 'data', 'generated_module_names.json')
+
 
 def _run(source):
     """Run a script in a fresh interpreter and hand back what it printed.
@@ -76,7 +84,9 @@ def survey(virtual):
 
 @pytest.fixture(scope='module')
 def both():
-    return survey('0'), survey('1')
+    with open(BASELINE, encoding='utf-8') as handle:
+        from_files = json.load(handle)
+    return from_files, survey('1')
 
 
 #: What a generated file leaves behind in its own namespace: the modules it
@@ -214,9 +224,14 @@ print(json.dumps({
 
 
 def test_an_entry_point_reports_where_it_was_declared():
-    """``proc.__module__`` must not depend on how the module was filled."""
-    from_files = json.loads(_run(MODULE_ATTR % {'virtual': '0'}))
+    """``proc.__module__`` names the module that declared it.
+
+    It used to be compared against the same answer read from the file, which
+    is the answer recorded here -- the file said
+    ``OpenGL.raw.GL.VERSION.GL_1_2`` because that is where the declaration was
+    written, and a synthesised module has to say the same, or a traceback and
+    a ``help()`` start naming somewhere that does not exist.
+    """
     from_tables = json.loads(_run(MODULE_ATTR % {'virtual': '1'}))
     assert from_tables['built'] is True
-    assert from_files['built'] is False
-    assert from_tables['module'] == from_files['module']
+    assert from_tables['module'] == 'OpenGL.raw.GL.VERSION.GL_1_2'
