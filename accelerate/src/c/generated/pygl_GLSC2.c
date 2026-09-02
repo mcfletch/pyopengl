@@ -665,7 +665,7 @@ pygl_GLSC2_glGenBuffers(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObj
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(1, buffers, &pygl_elem_GLuint, (Py_ssize_t)(n));
+    PYGL_ARRAY_OUT_N(1, buffers, &pygl_elem_GLuint, (Py_ssize_t)(n), 1);
     PYGL_CALL_V((int, void *), (n, buffers));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[buffers_slot], &pygl_elem_GLuint, (Py_ssize_t)(n));
@@ -687,7 +687,7 @@ pygl_GLSC2_glGenFramebuffers(GLProc *self, PyObject *const *_a, size_t _nargsf, 
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(1, framebuffers, &pygl_elem_GLuint, (Py_ssize_t)(n));
+    PYGL_ARRAY_OUT_N(1, framebuffers, &pygl_elem_GLuint, (Py_ssize_t)(n), 1);
     PYGL_CALL_V((int, void *), (n, framebuffers));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[framebuffers_slot], &pygl_elem_GLuint, (Py_ssize_t)(n));
@@ -709,7 +709,7 @@ pygl_GLSC2_glGenRenderbuffers(GLProc *self, PyObject *const *_a, size_t _nargsf,
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(1, renderbuffers, &pygl_elem_GLuint, (Py_ssize_t)(n));
+    PYGL_ARRAY_OUT_N(1, renderbuffers, &pygl_elem_GLuint, (Py_ssize_t)(n), 1);
     PYGL_CALL_V((int, void *), (n, renderbuffers));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[renderbuffers_slot], &pygl_elem_GLuint, (Py_ssize_t)(n));
@@ -731,7 +731,7 @@ pygl_GLSC2_glGenTextures(GLProc *self, PyObject *const *_a, size_t _nargsf, PyOb
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(1, textures, &pygl_elem_GLuint, (Py_ssize_t)(n));
+    PYGL_ARRAY_OUT_N(1, textures, &pygl_elem_GLuint, (Py_ssize_t)(n), 1);
     PYGL_CALL_V((int, void *), (n, textures));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[textures_slot], &pygl_elem_GLuint, (Py_ssize_t)(n));
@@ -1067,7 +1067,7 @@ pygl_GLSC2_glGetVertexAttribPointerv(GLProc *self, PyObject *const *_a, size_t _
     PYGL_U(0, index);
     PYGL_U(1, pname);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(2, pointer, &pygl_elem_voidp, (Py_ssize_t)(1));
+    PYGL_ARRAY_OUT_N(2, pointer, &pygl_elem_voidp, (Py_ssize_t)(1), 0);
     PYGL_CALL_V((unsigned int, unsigned int, void *), (index, pname, pointer));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[pointer_slot], &pygl_elem_voidp, (Py_ssize_t)(1));
@@ -1090,7 +1090,7 @@ pygl_GLSC2_glGetVertexAttribfv(GLProc *self, PyObject *const *_a, size_t _nargsf
     PYGL_U(0, index);
     PYGL_U(1, pname);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(2, params, &pygl_elem_GLfloat, (Py_ssize_t)(4));
+    PYGL_ARRAY_OUT_N(2, params, &pygl_elem_GLfloat, (Py_ssize_t)(4), 0);
     PYGL_CALL_V((unsigned int, unsigned int, void *), (index, pname, params));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLfloat, (Py_ssize_t)(4));
@@ -1113,7 +1113,7 @@ pygl_GLSC2_glGetVertexAttribiv(GLProc *self, PyObject *const *_a, size_t _nargsf
     PYGL_U(0, index);
     PYGL_U(1, pname);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(2, params, &pygl_elem_GLint, (Py_ssize_t)(4));
+    PYGL_ARRAY_OUT_N(2, params, &pygl_elem_GLint, (Py_ssize_t)(4), 0);
     PYGL_CALL_V((unsigned int, unsigned int, void *), (index, pname, params));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLint, (Py_ssize_t)(4));

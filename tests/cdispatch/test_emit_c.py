@@ -163,7 +163,12 @@ class TestOutputs:
             )
         )
         assert 'PYGL_ARITY_RANGE(1, 2);' in text
-        assert 'PYGL_ARRAY_OUT(1, textures, &pygl_elem_GLuint, (Py_ssize_t)(n));' in text
+        # 1: the count is the caller's own argument, so it is exact and the
+        # array they passed can be checked against it.
+        assert (
+            'PYGL_ARRAY_OUT_N(1, textures, &pygl_elem_GLuint, (Py_ssize_t)(n), 1);'
+            in text
+        )
         assert 'pygl_output_value' in text
 
     def test_output_with_a_divisor(self):
@@ -199,7 +204,11 @@ class TestOutputs:
                 ],
             )
         )
-        assert 'PYGL_ARRAY_OUT(1, length, &pygl_elem_GLsizei, (Py_ssize_t)(1));' in text
+        # 0: a fixed size is an upper bound, not a promise.
+        assert (
+            'PYGL_ARRAY_OUT_N(1, length, &pygl_elem_GLsizei, (Py_ssize_t)(1), 0);'
+            in text
+        )
 
 
 class TestSelection:
@@ -283,7 +292,7 @@ def test_void_pointer_output_is_a_ubyte_array():
             ],
         )
     )
-    assert 'PYGL_ARRAY_OUT(3, data, &pygl_elem_GLubyte,' in text
+    assert 'PYGL_ARRAY_OUT_N(3, data, &pygl_elem_GLubyte,' in text
 
 
 def test_void_pointer_input_still_accepts_any_buffer():
@@ -321,7 +330,9 @@ def test_pointer_array_output_uses_the_voidp_array_type():
             ],
         )
     )
-    assert 'PYGL_ARRAY_OUT(2, pointer, &pygl_elem_voidp, (Py_ssize_t)(1));' in text
+    assert (
+    'PYGL_ARRAY_OUT_N(2, pointer, &pygl_elem_voidp, (Py_ssize_t)(1), 0);' in text
+)
 
 
 class TestGLGetSizedOutputs:
@@ -388,8 +399,8 @@ class TestMultipleOutputs:
     def test_both_outputs_get_a_frame_slot(self):
         text = body(self.two_outputs())
         assert 'PYGL_FRAME(2);' in text
-        assert 'PYGL_ARRAY_OUT(1, first,' in text
-        assert 'PYGL_ARRAY_OUT(2, second,' in text
+        assert 'PYGL_ARRAY_OUT_N(1, first,' in text
+        assert 'PYGL_ARRAY_OUT_N(2, second,' in text
 
     def test_the_arity_range_covers_both(self):
         assert 'PYGL_ARITY_RANGE(1, 3);' in body(self.two_outputs())

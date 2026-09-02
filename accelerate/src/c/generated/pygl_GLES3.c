@@ -881,7 +881,7 @@ pygl_GLES3_glGenProgramPipelines(GLProc *self, PyObject *const *_a, size_t _narg
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(1, pipelines, &pygl_elem_GLuint, (Py_ssize_t)(n));
+    PYGL_ARRAY_OUT_N(1, pipelines, &pygl_elem_GLuint, (Py_ssize_t)(n), 1);
     PYGL_CALL_V((int, void *), (n, pipelines));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[pipelines_slot], &pygl_elem_GLuint, (Py_ssize_t)(n));
@@ -903,7 +903,7 @@ pygl_GLES3_glGenQueries(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObj
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(1, ids, &pygl_elem_GLuint, (Py_ssize_t)(n));
+    PYGL_ARRAY_OUT_N(1, ids, &pygl_elem_GLuint, (Py_ssize_t)(n), 1);
     PYGL_CALL_V((int, void *), (n, ids));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[ids_slot], &pygl_elem_GLuint, (Py_ssize_t)(n));
@@ -925,7 +925,7 @@ pygl_GLES3_glGenSamplers(GLProc *self, PyObject *const *_a, size_t _nargsf, PyOb
     PYGL_FRAME(1);
     PYGL_SZ(0, count);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(1, samplers, &pygl_elem_GLuint, (Py_ssize_t)(count));
+    PYGL_ARRAY_OUT_N(1, samplers, &pygl_elem_GLuint, (Py_ssize_t)(count), 1);
     PYGL_CALL_V((int, void *), (count, samplers));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[samplers_slot], &pygl_elem_GLuint, (Py_ssize_t)(count));
@@ -947,7 +947,7 @@ pygl_GLES3_glGenTransformFeedbacks(GLProc *self, PyObject *const *_a, size_t _na
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(1, ids, &pygl_elem_GLuint, (Py_ssize_t)(n));
+    PYGL_ARRAY_OUT_N(1, ids, &pygl_elem_GLuint, (Py_ssize_t)(n), 1);
     PYGL_CALL_V((int, void *), (n, ids));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[ids_slot], &pygl_elem_GLuint, (Py_ssize_t)(n));
@@ -969,7 +969,7 @@ pygl_GLES3_glGenVertexArrays(GLProc *self, PyObject *const *_a, size_t _nargsf, 
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(1, arrays, &pygl_elem_GLuint, (Py_ssize_t)(n));
+    PYGL_ARRAY_OUT_N(1, arrays, &pygl_elem_GLuint, (Py_ssize_t)(n), 1);
     PYGL_CALL_V((int, void *), (n, arrays));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[arrays_slot], &pygl_elem_GLuint, (Py_ssize_t)(n));
@@ -993,8 +993,8 @@ pygl_GLES3_glGetActiveUniformBlockName(GLProc *self, PyObject *const *_a, size_t
     PYGL_U(1, uniformBlockIndex);
     PYGL_SZ(2, bufSize);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(3, length, &pygl_elem_GLsizei, (Py_ssize_t)(1));
-    PYGL_ARRAY_OUT(4, uniformBlockName, &pygl_elem_GLchar, (Py_ssize_t)(bufSize));
+    PYGL_ARRAY_OUT_N(3, length, &pygl_elem_GLsizei, (Py_ssize_t)(1), 0);
+    PYGL_ARRAY_OUT_N(4, uniformBlockName, &pygl_elem_GLchar, (Py_ssize_t)(bufSize), 1);
     PYGL_CALL_V((unsigned int, unsigned int, int, void *, void *), (program, uniformBlockIndex, bufSize, length, uniformBlockName));
     PYGL_CHECK();
     const PyGLOutput _outputs[] = {
@@ -1114,7 +1114,7 @@ pygl_GLES3_glGetBufferPointerv(GLProc *self, PyObject *const *_a, size_t _nargsf
     PYGL_U(0, target);
     PYGL_U(1, pname);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(2, params, &pygl_elem_voidp, (Py_ssize_t)(1));
+    PYGL_ARRAY_OUT_N(2, params, &pygl_elem_voidp, (Py_ssize_t)(1), 0);
     PYGL_CALL_V((unsigned int, unsigned int, void *), (target, pname, params));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_voidp, (Py_ssize_t)(1));
@@ -1252,7 +1252,7 @@ pygl_GLES3_glGetInternalformativ(GLProc *self, PyObject *const *_a, size_t _narg
     PYGL_U(2, pname);
     PYGL_SZ(3, count);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(4, params, &pygl_elem_GLint, (Py_ssize_t)(count));
+    PYGL_ARRAY_OUT_N(4, params, &pygl_elem_GLint, (Py_ssize_t)(count), 1);
     PYGL_CALL_V((unsigned int, unsigned int, unsigned int, int, void *), (target, internalformat, pname, count, params));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLint, (Py_ssize_t)(count));
@@ -1298,9 +1298,9 @@ pygl_GLES3_glGetProgramBinary(GLProc *self, PyObject *const *_a, size_t _nargsf,
     PYGL_U(0, program);
     PYGL_SZ(1, bufSize);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(2, length, &pygl_elem_GLsizei, (Py_ssize_t)(1));
-    PYGL_ARRAY_OUT(3, binaryFormat, &pygl_elem_GLuint, (Py_ssize_t)(1));
-    PYGL_ARRAY_OUT(4, binary, &pygl_elem_GLubyte, (Py_ssize_t)(bufSize));
+    PYGL_ARRAY_OUT_N(2, length, &pygl_elem_GLsizei, (Py_ssize_t)(1), 0);
+    PYGL_ARRAY_OUT_N(3, binaryFormat, &pygl_elem_GLuint, (Py_ssize_t)(1), 0);
+    PYGL_ARRAY_OUT_N(4, binary, &pygl_elem_GLubyte, (Py_ssize_t)(bufSize), 1);
     PYGL_CALL_V_BLOCKING((unsigned int, int, void *, void *, void *), (program, bufSize, length, binaryFormat, binary));
     PYGL_CHECK();
     const PyGLOutput _outputs[] = {
@@ -1352,8 +1352,8 @@ pygl_GLES3_glGetProgramPipelineInfoLog(GLProc *self, PyObject *const *_a, size_t
     PYGL_U(0, pipeline);
     PYGL_SZ(1, bufSize);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(2, length, &pygl_elem_GLsizei, (Py_ssize_t)(1));
-    PYGL_ARRAY_OUT(3, infoLog, &pygl_elem_GLchar, (Py_ssize_t)(bufSize));
+    PYGL_ARRAY_OUT_N(2, length, &pygl_elem_GLsizei, (Py_ssize_t)(1), 0);
+    PYGL_ARRAY_OUT_N(3, infoLog, &pygl_elem_GLchar, (Py_ssize_t)(bufSize), 1);
     PYGL_CALL_V((unsigned int, int, void *, void *), (pipeline, bufSize, length, infoLog));
     PYGL_CHECK();
     const PyGLOutput _outputs[] = {
@@ -1451,8 +1451,8 @@ pygl_GLES3_glGetProgramResourceName(GLProc *self, PyObject *const *_a, size_t _n
     PYGL_U(2, index);
     PYGL_SZ(3, bufSize);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(4, length, &pygl_elem_GLsizei, (Py_ssize_t)(1));
-    PYGL_ARRAY_OUT(5, name, &pygl_elem_GLchar, (Py_ssize_t)(bufSize));
+    PYGL_ARRAY_OUT_N(4, length, &pygl_elem_GLsizei, (Py_ssize_t)(1), 0);
+    PYGL_ARRAY_OUT_N(5, name, &pygl_elem_GLchar, (Py_ssize_t)(bufSize), 1);
     PYGL_CALL_V((unsigned int, unsigned int, unsigned int, int, void *, void *), (program, programInterface, index, bufSize, length, name));
     PYGL_CHECK();
     const PyGLOutput _outputs[] = {
@@ -1483,8 +1483,8 @@ pygl_GLES3_glGetProgramResourceiv(GLProc *self, PyObject *const *_a, size_t _nar
     PYGL_SZ(5, count);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(4, props, &pygl_elem_GLuint);
-    PYGL_ARRAY_OUT(6, length, &pygl_elem_GLsizei, (Py_ssize_t)(1));
-    PYGL_ARRAY_OUT(7, params, &pygl_elem_GLint, (Py_ssize_t)(count));
+    PYGL_ARRAY_OUT_N(6, length, &pygl_elem_GLsizei, (Py_ssize_t)(1), 0);
+    PYGL_ARRAY_OUT_N(7, params, &pygl_elem_GLint, (Py_ssize_t)(count), 1);
     PYGL_CALL_V((unsigned int, unsigned int, unsigned int, int, void *, int, void *, void *), (program, programInterface, index, propCount, props, count, length, params));
     PYGL_CHECK();
     const PyGLOutput _outputs[] = {
@@ -1622,8 +1622,8 @@ pygl_GLES3_glGetSynciv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObje
     PYGL_U(1, pname);
     PYGL_SZ(2, count);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(3, length, &pygl_elem_GLsizei, (Py_ssize_t)(1));
-    PYGL_ARRAY_OUT(4, values, &pygl_elem_GLint, (Py_ssize_t)(count));
+    PYGL_ARRAY_OUT_N(3, length, &pygl_elem_GLsizei, (Py_ssize_t)(1), 0);
+    PYGL_ARRAY_OUT_N(4, values, &pygl_elem_GLint, (Py_ssize_t)(count), 1);
     PYGL_CALL_V_BLOCKING((void *, unsigned int, int, void *, void *), (sync, pname, count, length, values));
     PYGL_CHECK();
     const PyGLOutput _outputs[] = {
@@ -1699,10 +1699,10 @@ pygl_GLES3_glGetTransformFeedbackVarying(GLProc *self, PyObject *const *_a, size
     PYGL_U(1, index);
     PYGL_SZ(2, bufSize);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(3, length, &pygl_elem_GLsizei, (Py_ssize_t)(1));
-    PYGL_ARRAY_OUT(4, size, &pygl_elem_GLsizei, (Py_ssize_t)(1));
-    PYGL_ARRAY_OUT(5, type, &pygl_elem_GLuint, (Py_ssize_t)(1));
-    PYGL_ARRAY_OUT(6, name, &pygl_elem_GLchar, (Py_ssize_t)(bufSize));
+    PYGL_ARRAY_OUT_N(3, length, &pygl_elem_GLsizei, (Py_ssize_t)(1), 0);
+    PYGL_ARRAY_OUT_N(4, size, &pygl_elem_GLsizei, (Py_ssize_t)(1), 0);
+    PYGL_ARRAY_OUT_N(5, type, &pygl_elem_GLuint, (Py_ssize_t)(1), 0);
+    PYGL_ARRAY_OUT_N(6, name, &pygl_elem_GLchar, (Py_ssize_t)(bufSize), 1);
     PYGL_CALL_V((unsigned int, unsigned int, int, void *, void *, void *, void *), (program, index, bufSize, length, size, type, name));
     PYGL_CHECK();
     const PyGLOutput _outputs[] = {
@@ -1799,7 +1799,7 @@ pygl_GLES3_glGetVertexAttribIiv(GLProc *self, PyObject *const *_a, size_t _nargs
     PYGL_U(0, index);
     PYGL_U(1, pname);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(2, params, &pygl_elem_GLint, (Py_ssize_t)(1));
+    PYGL_ARRAY_OUT_N(2, params, &pygl_elem_GLint, (Py_ssize_t)(1), 0);
     PYGL_CALL_V((unsigned int, unsigned int, void *), (index, pname, params));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLint, (Py_ssize_t)(1));
@@ -1822,7 +1822,7 @@ pygl_GLES3_glGetVertexAttribIuiv(GLProc *self, PyObject *const *_a, size_t _narg
     PYGL_U(0, index);
     PYGL_U(1, pname);
     PYGL_CONV_OK();
-    PYGL_ARRAY_OUT(2, params, &pygl_elem_GLuint, (Py_ssize_t)(1));
+    PYGL_ARRAY_OUT_N(2, params, &pygl_elem_GLuint, (Py_ssize_t)(1), 0);
     PYGL_CALL_V((unsigned int, unsigned int, void *), (index, pname, params));
     PYGL_CHECK();
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLuint, (Py_ssize_t)(1));

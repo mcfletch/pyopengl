@@ -358,7 +358,7 @@ int pygl_array_out_glget(GLProc *self, PyObject *object, const PyGLElement *elem
 
 /* Allocate an output array of `count` elements, or accept the caller's. */
 int pygl_array_out(GLProc *self, PyObject *object, const PyGLElement *element,
-                   Py_ssize_t index, Py_ssize_t count, PyGLBuf *out);
+                   Py_ssize_t index, Py_ssize_t count, int exact, PyGLBuf *out);
 void pygl_release(PyGLBuf *buffer);
 
 /* Images.  Their length is a function of format, type, the extent and the
@@ -404,7 +404,10 @@ PyObject *pygl_opaque(void *value, const char *type_name);
 PyObject *pygl_output_value(PyGLBuf *buffer, const PyGLElement *element,
                             Py_ssize_t count);
 
-/* Several outputs compose into a tuple, in the order they were declared. */
+/* Several outputs compose into a list -- what the ctypes wrapper returns,
+ * so that indexing, appending and isinstance() behave as they always have --
+ * in the order that wrapper produced them, which is not always the order the
+ * registry declares. */
 typedef struct {
     int slot;
     const PyGLElement *element;
@@ -542,13 +545,24 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
         goto _fail;                                                            \
     void *name = _bufs[_nb++].pointer
 
-#define PYGL_ARRAY_OUT(i, name, element, count)                                \
+/* `exact` says whether `count` is how many the driver will write, or merely
+ * an upper bound.  Where it comes from an argument the caller passed --
+ * glGenTextures(n, textures) -- it is exact, and an array too small for it is
+ * the driver writing past the end: 64 names into a four-byte array is 256
+ * bytes of heap corruption noticed much later, if at all.  Where it comes
+ * from a fixed maximum, it is not: glGetVertexAttribiv declares four and
+ * writes one for most pnames, and a caller passing a one-element array is
+ * right to. */
+#define PYGL_ARRAY_OUT_N(i, name, element, count, exact)                       \
     int name##_slot = _nb;                                                     \
     (void)name##_slot;                                                         \
     if (PYGL_UNLIKELY(pygl_array_out(self, (i) < _nargs ? _a[i] : NULL, (element),   \
-                                     (i), (count), &_bufs[_nb]) < 0))          \
+                                     (i), (count), (exact), &_bufs[_nb]) < 0)) \
         goto _fail;                                                            \
     void *name = _bufs[_nb++].pointer
+
+#define PYGL_ARRAY_OUT(i, name, element, count)                                \
+    PYGL_ARRAY_OUT_N(i, name, element, count, 0)
 
 /* Load the slot for the current context and call through it. */
 #define PYGL_CALL_V(signature, arguments)                                      \

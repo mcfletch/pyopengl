@@ -165,17 +165,31 @@ def opaque(address, type_name):
     return ctypes.cast(ctypes.c_void_p(address), cls)
 
 
-def raise_gl_error(code, name, arguments=None):
+def raise_gl_error(code, name, arguments=None, api=None):
     """The exception a failed call produces.
 
     It carries the arguments the call was made with, because that is what
-    tells a reader which call went wrong -- clients read ``err.pyArgs``.
+    tells a reader which call went wrong -- clients read ``err.pyArgs``, which
+    the ctypes path leaves empty.
+
+    ``baseOperation`` is the entry point rather than its name, so that
+    ``err.baseOperation.__name__`` keeps working and ``error.py``'s own
+    ``format_baseOperation`` takes the branch it was written for.  And
+    ``cArguments`` is filled, because ``GLError``'s docstring documents it --
+    leaving it empty while putting the same tuple in ``cArgs`` reads as a
+    name mix-up rather than a decision.
     """
+    operation = name
+    if api is not None:
+        from OpenGL._dispatch import entry_points
+
+        operation = entry_points.get((api, name)) or name
     raise error.GLError(
         err=code,
-        baseOperation=name,
+        baseOperation=operation,
         pyArgs=arguments,
         cArgs=arguments,
+        cArguments=arguments,
     )
 
 

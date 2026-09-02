@@ -394,9 +394,19 @@ def emit_stub(command):
                 % (index, parameter.c_name, element, pname, command.api)
             )
         elif parameter.is_output:
+            # A size taken from one of the caller's own arguments is how many
+            # the driver will write; a fixed size is an upper bound.  Only the
+            # first can be checked against the array they passed.
+            exact = 1 if isinstance(parameter.size, model.FromArg) else 0
             lines.append(
-                '    PYGL_ARRAY_OUT(%d, %s, %s, (Py_ssize_t)(%s));'
-                % (index, parameter.c_name, element, _size_expression(command, parameter))
+                '    PYGL_ARRAY_OUT_N(%d, %s, %s, (Py_ssize_t)(%s), %d);'
+                % (
+                    index,
+                    parameter.c_name,
+                    element,
+                    _size_expression(command, parameter),
+                    exact,
+                )
             )
         elif isinstance(parameter.size, model.Fixed):
             lines.append(

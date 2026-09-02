@@ -498,8 +498,9 @@ int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs)
         return 0;
     }
     tuple = pygl_arg_tuple(args, nargs);
-    result = PyObject_CallMethod(pygl_support, "raise_gl_error", "IsO", code,
-                                 self->info->name, tuple);
+    result = PyObject_CallMethod(pygl_support, "raise_gl_error", "IsOs", code,
+                                 self->info->name, tuple,
+                                 pygl_api_name(self->info->api));
     Py_XDECREF(tuple);
     Py_XDECREF(result);
     return -1;
@@ -809,7 +810,7 @@ static int pygl_copy_shrank(PyObject *type, PyObject *original, PyObject *conver
 }
 
 int pygl_array_out(GLProc *self, PyObject *object, const PyGLElement *element,
-                   Py_ssize_t index, Py_ssize_t count, PyGLBuf *out)
+                   Py_ssize_t index, Py_ssize_t count, int exact, PyGLBuf *out)
 {
     PyObject *type, *allocated, *pointer;
     void *address;
@@ -824,7 +825,16 @@ int pygl_array_out(GLProc *self, PyObject *object, const PyGLElement *element,
         /* When the caller's array had to be copied to match, the GL writes
          * into the copy.  If that copy is smaller than what the caller passed,
          * the result never reaches them -- the silent "returns zeroes" bug --
-         * so refuse it and say what to pass instead. */
+         * so refuse it and say what to pass instead.
+         *
+         * A copy of the *same* size -- an int32 array of four where a float32
+         * array of four was wanted -- is not refused, and that is deliberate
+         * rather than an oversight.  Converting and handing the copy back as
+         * the return value is what orPassIn has always meant, here and in the
+         * ctypes implementation, and a great deal of code passes a list or an
+         * array of a convenient type and reads the result from the return
+         * value.  Refusing it breaks that contract; documentation/
+         * c-dispatch.html says so under "a pass-in array of the wrong type". */
         if (out->owner != NULL && out->owner != object &&
             pygl_copy_shrank(type_or_null(element), object, out->owner)) {
             PyErr_Format(PyExc_TypeError,
@@ -835,6 +845,25 @@ int pygl_array_out(GLProc *self, PyObject *object, const PyGLElement *element,
                          self->info->name);
             pygl_release(out);
             return -1;
+        }
+        /* And it has to be big enough.  Without this the driver writes count
+         * elements into whatever the caller supplied: glGenTextures(64, a)
+         * with a four-byte array is 256 bytes into 4, which corrupts the heap
+         * and is only noticed much later.  The input path has checked its
+         * sizes since this layer was written; the output path is where the
+         * damage is done. */
+        if (exact && count > 0 && element->itemsize > 0 && out->owner == object) {
+            Py_ssize_t needed = count * (Py_ssize_t)element->itemsize;
+            if (out->view.len < needed) {
+                PyErr_Format(PyExc_ValueError,
+                             "%s: output array holds %zd bytes, but the call "
+                             "writes %zd (%zd items of %u bytes). Pass a "
+                             "larger array, or None to have one allocated.",
+                             self->info->name, (Py_ssize_t)out->view.len,
+                             needed, count, (unsigned)element->itemsize);
+                pygl_release(out);
+                return -1;
+            }
         }
         return 0;
     }
@@ -917,7 +946,7 @@ int pygl_array_out_glget(GLProc *self, PyObject *object, const PyGLElement *elem
         *count = (entry == NULL || entry->lookup)
                      ? 0
                      : (Py_ssize_t)entry->dim0 * (entry->dim1 ? entry->dim1 : 1);
-        return pygl_array_out(self, object, element, index, *count, out);
+        return pygl_array_out(self, object, element, index, *count, 0, out);
     }
 
     if (entry == NULL) {
@@ -1220,10 +1249,12 @@ PyObject *pygl_output_value(PyGLBuf *buffer, const PyGLElement *element,
     return value;
 }
 
+/* A list, because that is what the ctypes wrapper returns and callers index,
+ * append to and isinstance-check it. */
 PyObject *pygl_output_tuple(PyGLBuf *buffers, const PyGLOutput *outputs,
                             Py_ssize_t count)
 {
-    PyObject *result = PyTuple_New(count);
+    PyObject *result = PyList_New(count);
     Py_ssize_t index;
     if (result == NULL) {
         return NULL;
@@ -1236,7 +1267,7 @@ PyObject *pygl_output_tuple(PyGLBuf *buffers, const PyGLOutput *outputs,
             Py_DECREF(result);
             return NULL;
         }
-        PyTuple_SET_ITEM(result, index, value);
+        PyList_SET_ITEM(result, index, value);
     }
     return result;
 }

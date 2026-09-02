@@ -109,3 +109,81 @@ class TestKeywordArguments:
         with pytest.raises(TypeError) as caught:
             GL.glBindTexture(1)
         assert 'keyword' not in str(caught.value)
+
+
+@pytest.fixture(scope='module')
+def context():
+    """A hidden context, for the checks that need the driver to answer."""
+    glfw = pytest.importorskip('glfw')
+    if not glfw.init():
+        pytest.skip('no glfw')
+    glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
+    window = glfw.create_window(64, 64, 'review-fixes', None, None)
+    if window is None:
+        pytest.skip('no usable GL context')
+    glfw.make_context_current(window)
+    yield window
+    glfw.destroy_window(window)
+    glfw.make_context_current(None)
+
+
+class TestOutputArraySafety:
+    """A caller-supplied output array has to be big enough for what the driver
+    will write into it."""
+
+    def test_an_undersized_array_is_refused_rather_than_overrun(self, context):
+        import numpy
+
+        import OpenGL.GL as GL
+
+        small = numpy.zeros(1, dtype='uint32')
+        with pytest.raises(ValueError, match='output array holds'):
+            GL.glGenTextures(64, small)
+
+    def test_a_correctly_sized_array_is_accepted(self, context):
+        import numpy
+
+        import OpenGL.GL as GL
+
+        enough = numpy.zeros(4, dtype='uint32')
+        GL.glGenTextures(4, enough)
+        assert enough.any()
+
+    def test_a_maximum_is_not_treated_as_a_promise(self, context):
+        """glGetVertexAttribiv declares four and writes one for most pnames,
+        so a one-element array is legitimate and must not be refused."""
+        import numpy
+
+        import OpenGL.GL as GL
+
+        one = numpy.zeros(1, dtype='int32')
+        GL.glGetIntegerv(GL.GL_MAX_TEXTURE_SIZE, one)
+        assert one[0] > 0
+
+
+class TestMultiOutputShape:
+    def test_several_outputs_come_back_as_a_list(self, context):
+        """What the ctypes wrapper returns, so indexing, appending and
+        isinstance() behave as they always have."""
+        import OpenGL.GL as GL
+
+        if not bool(GL.glGetDebugMessageLog):
+            pytest.skip('GL_KHR_debug not available')
+        result = GL.glGetDebugMessageLog(1, 128)
+        assert isinstance(result, list)
+
+
+class TestGLErrorAttributes:
+    def test_it_carries_what_the_documentation_says(self, context):
+        import OpenGL.GL as GL
+        from OpenGL import error
+
+        try:
+            GL.glEnable(0xDEAD)
+            GL.glGetError()
+        except error.GLError as raised:
+            assert raised.baseOperation.__name__ == 'glEnable'
+            assert raised.pyArgs == (0xDEAD,)
+            assert raised.cArguments == (0xDEAD,)
+        else:
+            pytest.skip('the driver did not report the bad enum')
