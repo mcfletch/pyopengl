@@ -199,24 +199,39 @@ def register_ctypes_factory(api, name, factory):
     _ctypes_factories.setdefault((api, name), factory)
 
 
-def ctypes_callable(name):
-    """The ctypes binding for an entry point, for demotion and attributes."""
-    for api in _API_NAMES:
-        binding = _ctypes_bindings.get((api, name))
+def ctypes_callable(name, api=None):
+    """The ctypes binding for an entry point, for demotion and attributes.
+
+    ``api`` identifies which one: ``glClear`` exists in GL and in GLES2 as
+    separate bindings resolved from separate libraries, so scanning for the
+    first name that matches can hand back the desktop GL function for a GLES2
+    entry point -- and on a system serving both, demoting then binds the wrong
+    library.  The C passes it; ``None`` keeps the old scan for any caller that
+    does not.
+    """
+    order = (api,) + tuple(_API_NAMES) if api else tuple(_API_NAMES)
+    for candidate in order:
+        binding = _ctypes_bindings.get((candidate, name))
         if binding is not None:
             return binding
-    for api in _API_NAMES:
-        factory = _ctypes_factories.get((api, name))
+    for candidate in order:
+        factory = _ctypes_factories.get((candidate, name))
         if factory is not None:
             binding = factory()
-            _ctypes_bindings[(api, name)] = binding
+            _ctypes_bindings[(candidate, name)] = binding
             return binding
     raise AttributeError('no ctypes binding recorded for %s' % (name,))
 
 
-def module_for(name):
-    for api in _API_NAMES:
-        module = _modules.get((api, name))
+def module_for(name, api=None):
+    """Which module declared this entry point.
+
+    ``api`` for the same reason as :func:`ctypes_callable`: without it,
+    ``GLES2.glClear.__module__`` reports the desktop GL module.
+    """
+    order = (api,) + tuple(_API_NAMES) if api else tuple(_API_NAMES)
+    for candidate in order:
+        module = _modules.get((candidate, name))
         if module is not None:
             return module
     return 'OpenGL'

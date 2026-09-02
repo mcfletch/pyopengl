@@ -53,6 +53,16 @@ static PYGL_THREAD_LOCAL unsigned int pygl_debug_id = 0;
 /* The flag byte a freshly created context table starts every slot at, so that
  * OpenGL.ERROR_CHECKING means the same thing in a context created later. */
 static uint8_t pygl_default_flags = 0;
+
+/* Which API an entry point belongs to, as a name.
+ *
+ * glClear exists in GL and in GLES2 as separate bindings resolved from
+ * separate libraries, so the name alone does not identify one.  Everything
+ * the C asks the Python layer about an entry point passes this too --
+ * otherwise demoting a GLES2 binding looks up the desktop GL function of the
+ * same name, from the GL library, which on a system serving both is a call
+ * into the wrong library. */
+static const char *pygl_api_name(uint8_t api);
 /* The glGetError entry point, so the error check can resolve its own slot in a
  * context that has not called it yet. */
 static PyObject *pygl_error_proc = NULL;
@@ -1262,8 +1272,35 @@ PyObject *pygl_opaque(void *value, const char *type_name)
  * the GLProc callable
  * ------------------------------------------------------------------ */
 
+/* A GLProc holds five references a client can set -- the ctypes binding it
+ * demotes to, errcheck, a docstring, an extension override, and its instance
+ * dict.  Any of them can close a cycle back to the entry point: a decorator,
+ * a cache keyed by the binding, `glFoo.wrapped = thing_holding_glFoo`.  A
+ * type with a settable dict and settable callbacks has to be traversable or
+ * those cycles are uncollectable for the life of the process. */
+static int GLProc_traverse(GLProc *self, visitproc visit, void *arg)
+{
+    Py_VISIT(self->ctypes_callable);
+    Py_VISIT(self->errcheck);
+    Py_VISIT(self->doc_override);
+    Py_VISIT(self->extension_override);
+    Py_VISIT(self->dict);
+    return 0;
+}
+
+static int GLProc_clear(GLProc *self)
+{
+    Py_CLEAR(self->ctypes_callable);
+    Py_CLEAR(self->errcheck);
+    Py_CLEAR(self->doc_override);
+    Py_CLEAR(self->extension_override);
+    Py_CLEAR(self->dict);
+    return 0;
+}
+
 static void GLProc_dealloc(GLProc *self)
 {
+    PyObject_GC_UnTrack(self);
     if (self->weakreflist != NULL) {
         PyObject_ClearWeakRefs((PyObject *)self);
     }
@@ -1272,7 +1309,7 @@ static void GLProc_dealloc(GLProc *self)
     Py_XDECREF(self->doc_override);
     Py_XDECREF(self->extension_override);
     Py_XDECREF(self->dict);
-    Py_TYPE(self)->tp_free((PyObject *)self);
+    PyObject_GC_Del(self);
 }
 
 static PyObject *GLProc_repr(GLProc *self)
@@ -1419,15 +1456,17 @@ static PyObject *GLProc_get_deprecated(GLProc *self, void *closure)
 static PyObject *GLProc_get_module(GLProc *self, void *closure)
 {
     (void)closure;
-    return PyObject_CallMethod(pygl_support, "module_for", "s", self->info->name);
+    return PyObject_CallMethod(pygl_support, "module_for", "ss",
+                              self->info->name, pygl_api_name(self->info->api));
 }
 
 /* argtypes, restype and DLL come from the ctypes binding, which clients read
  * and wrapper.py needs.  Built on demand: nothing on the call path uses them. */
 static PyObject *GLProc_ctypes_attribute(GLProc *self, const char *attribute)
 {
-    PyObject *callable = PyObject_CallMethod(pygl_support, "ctypes_callable", "s",
-                                             self->info->name);
+    PyObject *callable = PyObject_CallMethod(pygl_support, "ctypes_callable", "ss",
+                                             self->info->name,
+                                             pygl_api_name(self->info->api));
     PyObject *result;
     if (callable == NULL) {
         return NULL;
@@ -1500,8 +1539,9 @@ static int GLProc_demote(GLProc *self)
     if (self->ctypes_callable != NULL) {
         return 0;
     }
-    callable = PyObject_CallMethod(pygl_support, "ctypes_callable", "s",
-                                   self->info->name);
+    callable = PyObject_CallMethod(pygl_support, "ctypes_callable", "ss",
+                                   self->info->name,
+                                   pygl_api_name(self->info->api));
     if (callable == NULL) {
         return -1;
     }
@@ -1677,7 +1717,9 @@ PyTypeObject PyGLProc_Type = {
     .tp_repr = (reprfunc)GLProc_repr,
     .tp_as_number = &GLProc_as_number,
     .tp_call = PyVectorcall_Call,
-    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_VECTORCALL,
+    .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_HAVE_VECTORCALL | Py_TPFLAGS_HAVE_GC,
+    .tp_traverse = (traverseproc)GLProc_traverse,
+    .tp_clear = (inquiry)GLProc_clear,
     .tp_vectorcall_offset = offsetof(GLProc, vectorcall),
     .tp_weaklistoffset = offsetof(GLProc, weakreflist),
     .tp_dictoffset = offsetof(GLProc, dict),
@@ -1703,7 +1745,9 @@ int pygl_set_command_count(Py_ssize_t count)
 
 PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub)
 {
-    GLProc *proc = PyObject_New(GLProc, &PyGLProc_Type);
+    /* GC_New, not New: the type is tracked, and allocating a tracked object
+     * through the untracked path corrupts the collector's lists. */
+    GLProc *proc = PyObject_GC_New(GLProc, &PyGLProc_Type);
     if (proc == NULL) {
         return NULL;
     }
@@ -1716,11 +1760,17 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub)
     proc->extension_override = NULL;
     proc->has_extension_override = 0;
     proc->dict = NULL;
+    PyObject_GC_Track(proc);
     return (PyObject *)proc;
 }
 
 static const char *const pygl_api_names[PYGL_API_COUNT] = {
     "GL", "GLES1", "GLES2", "GLES3", "GLSC2", "GLX", "WGL", "EGL"};
+
+static const char *pygl_api_name(uint8_t api)
+{
+    return api < PYGL_API_COUNT ? pygl_api_names[api] : "GL";
+}
 
 int pygl_register_entries(PyObject *mapping, const PyGLEntry *entries)
 {
@@ -1846,6 +1896,55 @@ static PyObject *pygl_py_slot_address(PyObject *module, PyObject *argument)
         (unsigned long long)(uintptr_t)pygl_current->slots[proc->info->slot]);
 }
 
+/* Set or clear a flag on every table there is: the live ones, both static
+ * ones, and the default a new table is built from.  `slot` of -1 means every
+ * entry point. */
+static void pygl_set_flag_everywhere(int slot, uint8_t bit, int enable)
+{
+    PyGLDispatch *tables[2];
+    PyGLDispatch *table;
+    Py_ssize_t index, first, last;
+    size_t which;
+
+    first = slot < 0 ? 0 : slot;
+    last = slot < 0 ? pygl_command_count - 1 : slot;
+    if (enable) {
+        pygl_default_flags |= bit;
+    } else {
+        pygl_default_flags &= (uint8_t)~bit;
+    }
+
+    tables[0] = &pygl_default_table;
+    tables[1] = &pygl_null_table;
+    PyThread_acquire_lock(pygl_tables_lock, WAIT_LOCK);
+    for (table = pygl_tables; table != NULL; table = table->next) {
+        if (table->flags == NULL) {
+            continue;
+        }
+        for (index = first; index <= last; index++) {
+            if (enable) {
+                table->flags[index] |= bit;
+            } else {
+                table->flags[index] &= (uint8_t)~bit;
+            }
+        }
+    }
+    for (which = 0; which < 2; which++) {
+        if (tables[which]->flags == NULL) {
+            continue;
+        }
+        for (index = first; index <= last; index++) {
+            if (enable) {
+                tables[which]->flags[index] |= bit;
+            } else {
+                tables[which]->flags[index] &= (uint8_t)~bit;
+            }
+        }
+    }
+    PyThread_release_lock(pygl_tables_lock);
+}
+
+
 static PyObject *pygl_py_set_error_checking(PyObject *module, PyObject *args)
 {
     PyObject *target = Py_None;
@@ -1855,21 +1954,15 @@ static PyObject *pygl_py_set_error_checking(PyObject *module, PyObject *args)
     if (!PyArg_ParseTuple(args, "p|O", &enable, &target)) {
         return NULL;
     }
+    /* Every context, not merely the one that happens to be current: the call
+     * says "turn error checking on", and a program holding several contexts
+     * that got it in one of them has been told something untrue.  The default
+     * moves too, so a context created afterwards agrees. */
     if (target == Py_None) {
-        for (index = 0; index < pygl_command_count; index++) {
-            if (enable) {
-                pygl_current->flags[index] |= PYGL_F_CHECK_ERRORS;
-            } else {
-                pygl_current->flags[index] &= (uint8_t)~PYGL_F_CHECK_ERRORS;
-            }
-        }
+        pygl_set_flag_everywhere(-1, PYGL_F_CHECK_ERRORS, enable);
     } else if (PyObject_TypeCheck(target, &PyGLProc_Type)) {
-        uint16_t slot = ((GLProc *)target)->info->slot;
-        if (enable) {
-            pygl_current->flags[slot] |= PYGL_F_CHECK_ERRORS;
-        } else {
-            pygl_current->flags[slot] &= (uint8_t)~PYGL_F_CHECK_ERRORS;
-        }
+        pygl_set_flag_everywhere(
+            (int)((GLProc *)target)->info->slot, PYGL_F_CHECK_ERRORS, enable);
     } else {
         PyErr_SetString(PyExc_TypeError, "expected an OpenGL entry point or None");
         return NULL;

@@ -32,6 +32,14 @@ import sys as _sys
 _DEFAULT_DISPATCH = 'c' if _sys.implementation.name == 'cpython' else 'ctypes'
 DISPATCH = _os.environ.get('PYOPENGL_DISPATCH', _DEFAULT_DISPATCH).strip().lower()
 
+#: Call tracing is a ctypes-layer feature: the wrapper chain is where the log
+#: line is written, and the C calls the driver directly.  Somebody who turns
+#: tracing on to find out what their program is calling must not be handed
+#: silence and conclude the calls are not happening -- so asking for the trace
+#: selects the implementation that can produce it.
+if FULL_LOGGING and DISPATCH == 'c':
+    DISPATCH = 'ctypes'
+
 #: Build the generated OpenGL.raw modules from the C dispatch layer's tables
 #: rather than importing their files.  Off by default: the files are still
 #: shipped, and with the friendly modules importing the raw ones eagerly there
