@@ -336,6 +336,9 @@ def _apply_annotations(command, entry):
             continue
         parameter = command.parameters[by_name[name]]
         if kind == 'input':
+            # The call itself is the fact: this parameter is converted.  Its
+            # size is a separate question, and usually unanswered.
+            parameter.converts = True
             size_node = positional[1] if len(positional) > 1 else arguments.get('size')
             value = _literal(size_node) if size_node is not None else None
             if isinstance(value, int) and not isinstance(value, bool):

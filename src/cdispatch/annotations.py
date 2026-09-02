@@ -80,6 +80,8 @@ def dump(commands):
             if size is not None:
                 parameters_named(size, names)
                 bits['size'] = size
+            if parameter.converts:
+                bits['array'] = True
             if parameter.retain:
                 bits['retain'] = True
             if parameter.output_order:
@@ -168,6 +170,8 @@ def apply(commands, table):
                 parameter.direction = model.OUT
             if 'size' in bits:
                 parameter.size = _size_from_data(bits['size'], names)
+            if bits.get('array'):
+                parameter.converts = True
             if bits.get('retain'):
                 parameter.retain = True
             if 'output_order' in bits:
@@ -191,6 +195,7 @@ def without_annotations(commands):
             parameter.direction = model.IN
             parameter.size = model.NO_SIZE
             parameter.retain = False
+            parameter.converts = False
             parameter.output_order = 0
         stripped[key] = clone
     return stripped

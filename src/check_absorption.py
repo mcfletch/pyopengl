@@ -85,7 +85,7 @@ def main(argv=None):
     sys.path.insert(0, HERE)
     import absorb_chains
 
-    checked = mismatched = skipped = 0
+    checked = mismatched = skipped = skipped_commands = 0
     failures = []
     for directory, folders, files in os.walk(options.root):
         parts = directory.split(os.sep)
@@ -121,10 +121,17 @@ def main(argv=None):
             rebuilt = {}
             _declarations.define(rebuilt, raw_name, customise=True)
 
+            rebound = _rebound_by_star_imports(text, from_chain)
             for command, _arguments, _types in contents.get('commands', ()):
                 theirs = getattr(from_chain, command, None)
                 ours = rebuilt.get(command)
                 if theirs is None or ours is None:
+                    continue
+                if command in rebound:
+                    # A trailing ``from ... import *`` overwrites what the
+                    # chain built, so the module's own chain is dead code for
+                    # this command and there is nothing to compare.
+                    skipped_commands += 1
                     continue
                 checked += 1
                 if describe(theirs) != describe(ours):
@@ -133,7 +140,9 @@ def main(argv=None):
                 elif options.verbose:
                     print('  ok %s.%s' % (module_name, command))
 
-    print('%d entry points compared, %d modules skipped' % (checked, skipped))
+    print('%d entry points compared, %d modules skipped, '
+          '%d commands rebound by a later import *'
+          % (checked, skipped, skipped_commands))
     if failures:
         print('%d MISMATCHED:' % (mismatched,))
         for module_name, command in failures[:40]:
@@ -141,6 +150,37 @@ def main(argv=None):
         return 1
     print('every rebuilt wrapper matches the one its chain built')
     return 0
+
+
+def _rebound_by_star_imports(text, module):
+    """Commands a trailing ``from X import *`` overwrote in this module.
+
+    A friendly module often ends by re-exporting the extension modules its
+    version adopted, and that assignment lands after its own chain.  Where the
+    name the module finally holds is the one the imported module holds, the
+    chain never reaches a caller.
+    """
+    import ast as _ast
+
+    rebound = set()
+    try:
+        tree = _ast.parse(text)
+    except SyntaxError:
+        return rebound
+    for node in tree.body:
+        if not (isinstance(node, _ast.ImportFrom) and node.module):
+            continue
+        if not any(alias.name == '*' for alias in node.names):
+            continue
+        try:
+            source = importlib.import_module(node.module)
+        except Exception:
+            continue
+        for name in dir(source):
+            if name.startswith(('gl', 'egl', 'wgl', 'glX')):
+                if getattr(module, name, None) is getattr(source, name, None):
+                    rebound.add(name)
+    return rebound
 
 
 def _raw_name_of(text):

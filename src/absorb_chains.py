@@ -42,7 +42,7 @@ ROOT = os.path.dirname(HERE)
 #: ``src/check_absorption.py`` raised: rewriting a module applies the rebuild
 #: rule to *every* command in it, including ones whose chain said nothing, and
 #: on 123 of 2,273 that adds an array conversion the file did not have.
-ABSORBABLE = frozenset(['setInputArraySize'])
+ABSORBABLE = frozenset(['setInputArraySize', 'setOutput'])
 
 _DEFINE = re.compile(
     r"^(?P<head>_?E?X?T?E?N?S?I?O?N?_?N?A?M?E? ?=? ?)?"

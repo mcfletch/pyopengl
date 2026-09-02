@@ -173,6 +173,13 @@ class Parameter:
     direction: str = IN
     size: _SizeSpec = NO_SIZE
     retain: bool = False
+    #: The friendly layer passes this argument through an array conversion.
+    #: Independent of ``size``: ``setInputArraySize(name, None)`` says "convert
+    #: it" and states no length, and the length is the only part a size spec
+    #: holds.  Independent of the declared type too, because glDrawElements and
+    #: relatives declare their array ``ctypes.c_void_p`` -- it may be a client
+    #: pointer or a buffer offset -- so the type says nothing about it.
+    converts: bool = False
     #: Where this output falls in the returned tuple.  It is the order the
     #: friendly layer annotated the outputs in, which is not always the order
     #: the C signature declares them in.

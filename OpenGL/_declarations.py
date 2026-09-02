@@ -139,18 +139,18 @@ def annotations():
 def customise_entry(entry, api, name, declared):
     """Apply what the table says about this entry point, and return it.
 
-    The rule, which took measuring to get right:
+    The rule:
 
-    * a parameter takes an array conversion when its **declared type is an
-      array type**, or when the **table gives it a size spec**;
-    * the length comes from the table where there is one.
+    * a parameter takes an array conversion when the table says ``array``;
+    * the length comes from the table where there is one, and there usually is
+      not -- ``setInputArraySize(x, None)`` states a conversion and no length.
 
-    Both halves are needed.  A thousand ``setInputArraySize(x, None)`` calls
-    record no length, so the table holds nothing for them -- but they install
-    ``ArrayDatatype.asArray``, and rebuilding from the table alone hands the
-    driver a list.  And ``glDrawElements`` and relatives declare their array as
-    ``ctypes.c_void_p``, because it may be a client pointer or a buffer offset,
-    so there the type says nothing and only the table does.
+    The table says it rather than the declared type saying it, because the type
+    cannot: ``glDrawElements`` and relatives declare their array
+    ``ctypes.c_void_p``, since it may be a client pointer or a buffer offset.
+    Reading array-ness off the type instead both loses those and invents
+    conversions for parameters the friendly layer never wrapped, which is 171
+    entry points' worth of difference from what the modules did.
 
     An **output** parameter is rebuilt from the same table.  What ``setOutput``
     needs beyond a size is the argument whose value sizes it and whether a
@@ -178,13 +178,13 @@ def customise_entry(entry, api, name, declared):
         return entry
 
     built = entry
-    for parameter, kind in declared:
+    for parameter, _kind in declared:
         bits = parameters.get(parameter, {})
         if bits.get('out'):
             continue          # rebuilt below, in the order the chain used
-        size = bits.get('size')
-        if size is None and kind != 'array':
+        if not bits.get('array'):
             continue
+        size = bits.get('size')
         if size is not None and size.get('kind') == 'fixed':
             length = size['count']
         else:

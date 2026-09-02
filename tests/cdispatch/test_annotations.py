@@ -38,8 +38,8 @@ def table(commands):
 
 class TestWhatIsRecorded:
     def test_only_commands_that_carry_something(self, commands, table):
-        """Three quarters of the entry points are plain pass-throughs."""
-        assert 1000 < len(table) < 1600
+        """Over half the entry points are still plain pass-throughs."""
+        assert 1800 < len(table) < 2400
         assert len(table) < len(commands)
 
     def test_an_output_is_recorded(self, table):
@@ -55,10 +55,23 @@ class TestWhatIsRecorded:
         size = table['GL.glAreProgramsResidentNV']['parameters']['residences']['size']
         assert size == {'kind': 'from-argument', 'argument': 'n', 'divisor': 1}
 
-    def test_an_unchecked_array_is_not_an_annotation(self, table):
-        """``setInputArraySize('value', None)`` says "any length", which is
-        what a command with no entry already means."""
-        assert 'GL.glUniformMatrix4fv' not in table
+    def test_an_unchecked_array_is_still_an_annotation(self, table):
+        """``setInputArraySize('value', None)`` states a conversion, not a size.
+
+        Treating "no length" as "nothing to record" loses the conversion, and
+        the declared type cannot be asked instead: ``glBufferStorage`` declares
+        its ``data`` ``ctypes.c_void_p``, because it may be a client pointer or
+        a buffer offset.  Rebuilding such a command from a table that dropped
+        the call hands the driver a list.
+        """
+        assert table['GL.glUniformMatrix4fv']['parameters']['value']['array'] is True
+        assert table['GL.glBufferStorage']['parameters']['data']['array'] is True
+
+    def test_a_sized_array_is_marked_as_one_too(self, table):
+        """The flag says "converted"; the size says how many.  Separate facts."""
+        entry = table['GL.glBinormal3bvEXT']['parameters']['v']
+        assert entry['array'] is True
+        assert entry['size'] == {'kind': 'fixed', 'count': 3}
 
     def test_an_image_records_what_it_is_sized_from(self, table):
         size = table['GL.glTexImage2D']['parameters']['pixels']['size']
