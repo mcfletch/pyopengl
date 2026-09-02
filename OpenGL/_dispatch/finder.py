@@ -35,6 +35,7 @@ imported to reach that point comes from files: for ``import OpenGL.GL`` that
 is GL_1_0 and GL_1_1.
 """
 
+import ast
 import importlib
 import importlib.machinery
 import os
@@ -89,12 +90,26 @@ class RawModuleFinder:
         namespace['_EXTENSION_NAME'] = contents['extension']
 
         # A module re-exports the ones it was built on top of, as the file did
-        # with ``from ... import *``.
+        # with ``from ... import *`` -- which takes __all__ where the source
+        # defines one, and only falls back to "every public name" where it
+        # does not.  The two differ for _types and _glgets, which define it.
         for source in contents['reexports']:
             imported = importlib.import_module(source)
-            for key, value in vars(imported).items():
-                if not key.startswith('_'):
-                    namespace[key] = value
+            exported = getattr(imported, '__all__', None)
+            if exported is None:
+                for key, value in vars(imported).items():
+                    if not key.startswith('_'):
+                        namespace[key] = value
+            else:
+                for key in exported:
+                    try:
+                        namespace[key] = getattr(imported, key)
+                    except AttributeError:
+                        # ``import *`` raises for an __all__ naming something
+                        # absent, and so does this.
+                        raise ImportError(
+                            'cannot import name %r from %r' % (key, source)
+                        ) from None
 
         from OpenGL.constant import Constant
 
@@ -156,7 +171,7 @@ class _Declaration:
         # The text was written by the generator out of the shipped tree, and
         # the namespace offers it three names; it is our own source arriving
         # by a longer road than usual.
-        types = [eval(text, namespace) for text in self._types.split(',')]
+        types = [_resolve_type(text, namespace) for text in self._types.split(',')]
         errors = importlib.import_module('OpenGL.raw.%s._errors' % (self.api,))
 
         def declaration(*arguments):
@@ -185,16 +200,78 @@ class _Declaration:
         )
 
 
+#: The type expressions the table carries are our own, written by the
+#: generator out of the shipped tree and restricted there to attribute lookups
+#: and calls on three namespaces.  They are still read rather than executed:
+#: the text arrives from a data file, and a data file that can run code is a
+#: different kind of file.
+def _resolve_type(text, namespace):
+    """``_cs.GLenum``, ``ctypes.POINTER(_cs.GLchar)``, ``None`` -- as a value."""
+    try:
+        tree = ast.parse(text, mode='eval')
+    except SyntaxError:
+        raise ValueError('not a type expression: %r' % (text,)) from None
+    return _evaluate(tree.body, text, namespace)
+
+
+def _evaluate(node, text, namespace):
+    if isinstance(node, ast.Constant):
+        if node.value is None:
+            return None
+        raise ValueError('not a type expression: %r' % (text,))
+    if isinstance(node, ast.Name):
+        try:
+            return namespace[node.id]
+        except KeyError:
+            raise ValueError(
+                'unknown name %r in type expression %r' % (node.id, text)
+            ) from None
+    if isinstance(node, ast.Attribute):
+        return getattr(_evaluate(node.value, text, namespace), node.attr)
+    if isinstance(node, ast.Call):
+        if node.keywords:
+            raise ValueError('not a type expression: %r' % (text,))
+        function = _evaluate(node.func, text, namespace)
+        return function(
+            *[_evaluate(argument, text, namespace) for argument in node.args]
+        )
+    raise ValueError('not a type expression: %r' % (text,))
+
+
 def _api_of(name):
     parts = name.split('.')
     return parts[2] if len(parts) > 2 else 'GL'
 
 
+#: Whether the files these modules stand in for are shipped at all.  Resolved
+#: once: where they are not -- an installed wheel, a zipimport, a namespace
+#: package -- there is no point stating a file per module, still less a stat
+#: per module during import.
+_shipped_root = None
+
+
+def _shipped_raw_root():
+    """The directory holding ``OpenGL/raw``, or ``''`` if it is not on disk."""
+    global _shipped_root
+    if _shipped_root is None:
+        import OpenGL
+
+        paths = getattr(OpenGL, '__path__', None)
+        # A namespace package has no single directory and zipimport has none
+        # at all; both answer '' rather than a path that does not exist.
+        candidate = paths[0] if paths and len(paths) == 1 else ''
+        if candidate and os.path.isdir(os.path.join(candidate, 'raw')):
+            _shipped_root = os.path.dirname(os.path.abspath(candidate))
+        else:
+            _shipped_root = ''
+    return _shipped_root
+
+
 def _file_for(name):
     """The file this module stands in for, if it is still shipped."""
-    import OpenGL
-
-    root = os.path.dirname(os.path.dirname(os.path.abspath(OpenGL.__file__)))
+    root = _shipped_raw_root()
+    if not root:
+        return ''
     path = os.path.join(root, *name.split('.')) + '.py'
     return path if os.path.exists(path) else ''
 
