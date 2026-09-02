@@ -431,14 +431,31 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
  * the macro vocabulary
  * ------------------------------------------------------------------ */
 
+/* A vectorcall takes kwnames as its fourth argument.  Declaring the stubs with
+ * three and casting the pointer is undefined behaviour -- ISO C 6.3.2.3p8 --
+ * that happens to work on SysV and Win64 because the extra argument lands in a
+ * register the callee ignores; Clang's -fsanitize=function and CFI's
+ * cfi-icall check the callee's declared type at the indirect call, and
+ * WebAssembly's typed tables trap outright.  It also meant a keyword argument
+ * was silently dropped: glClear(GL_COLOR_BUFFER_BIT, nonsense=1) returned
+ * cleanly.  The stubs take the fourth argument and reject it. */
+#define PYGL_NO_KEYWORDS()                                                     \
+    if (PYGL_UNLIKELY(_kwnames != NULL && PyTuple_GET_SIZE(_kwnames) != 0)) {  \
+        PyErr_Format(PyExc_TypeError,                                          \
+                     "%s() takes no keyword arguments", self->info->name);     \
+        return NULL;                                                           \
+    }
+
 #define PYGL_ARITY(n)                                                          \
     Py_ssize_t _nargs = PyVectorcall_NARGS(_nargsf);                           \
+    PYGL_NO_KEYWORDS();                                                        \
     if (PYGL_UNLIKELY(_nargs != (n)))                                          \
     return pygl_arity_error(self, (n), _nargs)
 
 /* For the variadic entry points, which accept a range of argument counts. */
 #define PYGL_ARITY_RANGE(low, high)                                            \
     Py_ssize_t _nargs = PyVectorcall_NARGS(_nargsf);                           \
+    PYGL_NO_KEYWORDS();                                                        \
     if (PYGL_UNLIKELY(_nargs < (low) || _nargs > (high)))                      \
     return pygl_arity_range_error(self, (low), (high), _nargs)
 

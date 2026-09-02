@@ -89,3 +89,23 @@ class TestErrorCheckingReachesEveryContext:
         finally:
             _c.forget_context(0xC0FFEE)
             _c.set_error_checking(bool(_configflags.ERROR_CHECKING))
+
+
+class TestKeywordArguments:
+    """A vectorcall's fourth argument is kwnames.  The stubs used to be
+    declared with three parameters and the pointer cast, which is undefined
+    behaviour and silently discarded any keyword a caller passed."""
+
+    def test_a_keyword_argument_is_rejected_rather_than_ignored(self):
+        import OpenGL.GL as GL
+
+        with pytest.raises(TypeError, match='keyword'):
+            GL.glClear(GL.GL_COLOR_BUFFER_BIT, nonsense=1)
+
+    def test_positional_calls_are_unaffected(self):
+        import OpenGL.GL as GL
+
+        # Arity errors still read as arity errors, not keyword errors.
+        with pytest.raises(TypeError) as caught:
+            GL.glBindTexture(1)
+        assert 'keyword' not in str(caught.value)

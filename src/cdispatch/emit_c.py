@@ -329,7 +329,8 @@ def emit_stub(command):
 
     lines.append('static PyObject *')
     lines.append(
-        '%s(GLProc *self, PyObject *const *_a, size_t _nargsf)'
+        '%s(GLProc *self, PyObject *const *_a, size_t _nargsf,'
+        ' PyObject *_kwnames)'
         % (stub_symbol(command),)
     )
     lines.append('{')
@@ -617,7 +618,7 @@ def emit_translation_unit(api, commands, slots, provenance=''):
             if hand.symbol not in declared:
                 parts.append(
                     'PyObject *%s(GLProc *self, PyObject *const *_a, '
-                    'size_t _nargsf);' % (hand.symbol,)
+                    'size_t _nargsf, PyObject *_kwnames);' % (hand.symbol,)
                 )
                 declared.add(hand.symbol)
         else:
@@ -630,7 +631,7 @@ def emit_translation_unit(api, commands, slots, provenance=''):
         hand = hand_written(command)
         symbol = stub_symbol(command)
         parts.append(
-            '    {&%s_info, (vectorcallfunc)%s},'
+            '    {&%s_info, %s},'
             % (symbol, hand.symbol if hand else symbol)
         )
     parts.append('    {NULL, NULL}')
