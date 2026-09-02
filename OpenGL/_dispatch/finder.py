@@ -39,11 +39,13 @@ import ast
 import importlib
 import importlib.machinery
 import os
+import pkgutil
 import sys
 
+from OpenGL import _declarations
 from OpenGL._dispatch import support
 
-__all__ = ['RawModuleFinder', 'install']
+__all__ = ['RawModuleFinder', 'install', 'installed']
 
 _installed = None
 
@@ -75,8 +77,6 @@ class RawModuleFinder:
         anything read here would be read before it had been written.
         """
         if self._known is None:
-            from OpenGL import _declarations
-
             self._known = frozenset(
                 _declarations.data_declarations().module_names()
             )
@@ -91,8 +91,6 @@ class RawModuleFinder:
         writing it.
         """
         if self._extension is None:
-            from OpenGL import _declarations
-
             extension = _declarations._c_source()
             if extension:
                 from OpenGL._dispatch import entry_points
@@ -110,7 +108,14 @@ class RawModuleFinder:
         # imports OpenGL._declarations -- which would ask about itself.
         if not name.startswith('OpenGL.raw.') or name not in self._names:
             return None
-        return importlib.machinery.ModuleSpec(name, self, origin='<generated>')
+        # The origin is the table the definitions come from, which is the
+        # honest answer to "where did this module come from" and the only one
+        # there is.  has_location stays false: the file is marshalled data
+        # rather than the source of anything, so nothing should try to read it
+        # as source or count lines in it.
+        return importlib.machinery.ModuleSpec(
+            name, self, origin=_declarations.table_path(_api_of(name))
+        )
 
     # -- loading ---------------------------------------------------------
     def create_module(self, spec):
@@ -124,10 +129,12 @@ class RawModuleFinder:
             raise ImportError(name)
 
         namespace = module.__dict__
-        # __file__ is set to the file this stands in for, so that a tool
-        # asking where a definition came from gets a useful answer rather than
-        # nothing.  It is not read to load anything.
-        origin = _file_for(name)
+        # __file__ names the table the definitions were read from, so that a
+        # tool asking where they came from gets a useful answer rather than
+        # nothing.  It is not read to load anything, and where the package is
+        # not a directory on disk there is no path to give and the attribute
+        # is left unset -- which is a legitimate thing for a module to be.
+        origin = module.__spec__.origin if module.__spec__ else None
         if origin:
             namespace['__file__'] = origin
         namespace['_EXTENSION_NAME'] = contents['extension']
@@ -296,39 +303,6 @@ def _api_of(name):
     return parts[2] if len(parts) > 2 else 'GL'
 
 
-#: Whether the files these modules stand in for are shipped at all.  Resolved
-#: once: where they are not -- an installed wheel, a zipimport, a namespace
-#: package -- there is no point stating a file per module, still less a stat
-#: per module during import.
-_shipped_root = None
-
-
-def _shipped_raw_root():
-    """The directory holding ``OpenGL/raw``, or ``''`` if it is not on disk."""
-    global _shipped_root
-    if _shipped_root is None:
-        import OpenGL
-
-        paths = getattr(OpenGL, '__path__', None)
-        # A namespace package has no single directory and zipimport has none
-        # at all; both answer '' rather than a path that does not exist.
-        candidate = paths[0] if paths and len(paths) == 1 else ''
-        if candidate and os.path.isdir(os.path.join(candidate, 'raw')):
-            _shipped_root = os.path.dirname(os.path.abspath(candidate))
-        else:
-            _shipped_root = ''
-    return _shipped_root
-
-
-def _file_for(name):
-    """The file this module stands in for, if it is still shipped."""
-    root = _shipped_raw_root()
-    if not root:
-        return ''
-    path = os.path.join(root, *name.split('.')) + '.py'
-    return path if os.path.exists(path) else ''
-
-
 def _virtual_modules_wanted():
     """``OpenGL._configflags.VIRTUAL_MODULES``, without importing it.
 
@@ -345,6 +319,117 @@ def _virtual_modules_wanted():
     )
 
 
+class _RawDirectoryFinder:
+    """A path entry finder for one directory under ``OpenGL/raw``.
+
+    ``pkgutil.iter_modules`` and ``walk_packages`` ask the *path* finder for a
+    package's directory what it holds, never the meta-path finder that builds
+    the modules -- so with the generated files gone the ordinary
+    :class:`FileFinder` reports an empty directory and a walk of
+    ``OpenGL.raw.GL.ARB`` yields nothing at all.  Nothing raises: the caller is
+    told there are no extensions, which is the wrong answer rather than no
+    answer.
+
+    So this stands in front of the real finder for those directories, adds the
+    names the tables describe, and defers everything else -- finding and
+    loading included -- to the finder that would have handled the directory.
+    """
+
+    def __init__(self, path, delegate):
+        self.path = path
+        self._delegate = delegate
+
+    # -- the import protocol, which is entirely the real finder's job --------
+    def find_spec(self, name, target=None):
+        return self._delegate.find_spec(name, target)
+
+    def invalidate_caches(self):
+        self._delegate.invalidate_caches()
+
+    # -- what this exists for -----------------------------------------------
+    def iter_modules(self, prefix=''):
+        seen = set()
+        for name, ispkg in pkgutil.iter_importer_modules(self._delegate, ''):
+            seen.add(name)
+            yield prefix + name, ispkg
+        for name in sorted(self._generated()):
+            if name not in seen:
+                yield prefix + name, False
+
+    def _generated(self):
+        """The leaf names the tables describe for this directory."""
+        installed = _installed
+        if installed is None:
+            return ()
+        package = _package_for_directory(self.path)
+        if package is None:
+            return ()
+        prefix = package + '.'
+        return {
+            name[len(prefix) :]
+            for name in installed._names
+            if name.startswith(prefix) and '.' not in name[len(prefix) :]
+        }
+
+
+def _package_for_directory(path):
+    """``OpenGL.raw.GL.ARB`` for the directory that package lives in."""
+    root = _raw_directory()
+    if not root:
+        return None
+    relative = os.path.relpath(os.path.abspath(path), root)
+    if relative.startswith(os.pardir):
+        return None
+    parts = [] if relative == os.curdir else relative.split(os.sep)
+    return '.'.join(['OpenGL', 'raw'] + parts)
+
+
+#: The ``OpenGL/raw`` directory, or ``''`` where the package is not on disk.
+#: Resolved once: the hook below is asked about every path entry in the
+#: process, so the question it answers has to be cheap.
+_raw_root = None
+
+
+def _raw_directory():
+    global _raw_root
+    if _raw_root is None:
+        import OpenGL
+
+        paths = getattr(OpenGL, '__path__', None)
+        candidate = paths[0] if paths and len(paths) == 1 else ''
+        directory = os.path.join(candidate, 'raw') if candidate else ''
+        _raw_root = os.path.abspath(directory) if os.path.isdir(directory) else ''
+    return _raw_root
+
+
+def _path_hook(path):
+    """Claim the directories under ``OpenGL/raw``, decline everything else."""
+    root = _raw_directory()
+    if not root or not isinstance(path, str):
+        raise ImportError(path)
+    resolved = os.path.abspath(path)
+    if resolved != root and not resolved.startswith(root + os.sep):
+        raise ImportError(path)
+    return _RawDirectoryFinder(resolved, _default_path_finder(resolved))
+
+
+def _default_path_finder(path):
+    """The finder that would have handled this directory without the hook."""
+    for hook in sys.path_hooks:
+        if hook is _path_hook:
+            continue
+        try:
+            return hook(path)
+        except ImportError:
+            continue
+    raise ImportError(path)  # pragma: no cover - FileFinder always claims a dir
+
+
+def installed():
+    """The finder answering for the generated modules, or ``None``."""
+    return _installed
+
+
 def install(extension=None, entry_points=None):
     """Put the finder ahead of the path finder.
 
@@ -356,7 +441,20 @@ def install(extension=None, entry_points=None):
         return _installed
     _installed = RawModuleFinder(extension, entry_points)
     sys.meta_path.insert(0, _installed)
+    if _path_hook not in sys.path_hooks:
+        sys.path_hooks.insert(0, _path_hook)
+        # Directories already resolved carry the finder from before the hook.
+        for key in [k for k in sys.path_importer_cache if _claims(k)]:
+            del sys.path_importer_cache[key]
     return _installed
+
+
+def _claims(path):
+    try:
+        _path_hook(path)
+    except ImportError:
+        return False
+    return True
 
 
 def uninstall():
@@ -368,3 +466,7 @@ def uninstall():
         except ValueError:
             pass
         _installed = None
+    if _path_hook in sys.path_hooks:
+        sys.path_hooks.remove(_path_hook)
+        for key in [k for k in sys.path_importer_cache if _claims(k)]:
+            del sys.path_importer_cache[key]

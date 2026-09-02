@@ -150,7 +150,7 @@ from OpenGL.raw.GL.VERSION import GL_1_2
 
 binding = support.ctypes_callable('glTexImage3D')
 print(json.dumps({
-    'built': GL_1_2.__spec__.origin == '<generated>',
+    'built': str(GL_1_2.__spec__.origin).endswith('GL.dat'),
     'typed': GL.glTexImage3Dub is not None,
     'argnames': list(binding.argNames),
     'argtypes': [getattr(t, '__name__', str(t)) for t in binding.argtypes],
@@ -217,7 +217,7 @@ os.environ['PYOPENGL_VIRTUAL_MODULES'] = %(virtual)r
 import OpenGL.GL
 from OpenGL.raw.GL.VERSION import GL_1_2
 print(json.dumps({
-    'built': GL_1_2.__spec__.origin == '<generated>',
+    'built': str(GL_1_2.__spec__.origin).endswith('GL.dat'),
     'module': GL_1_2.glTexImage3D.__module__,
 }))
 '''

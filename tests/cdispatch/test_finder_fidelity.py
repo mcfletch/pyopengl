@@ -1,20 +1,23 @@
-"""A synthesised module has to behave like the file it stands in for.
+"""How the finder builds a module, checked at the seams a table cannot state.
 
-The finder answers for module names whose ``.py`` files the tree still ships,
-which is what makes the two comparable: anywhere the synthesised module and the
-file disagree, a program that upgrades sees a change it did not ask for.
+Re-exports have to follow ``from ... import *`` exactly, including the
+``__all__`` that two of the sources define; type expressions have to be read
+rather than executed, because the table is a data file and a data file must not
+be able to run code; and the path a module names has to cost nothing per
+import.
 """
 
 import ast
 import ctypes
 import importlib
+import importlib.resources
 import os
 import sys
 import types
 
 import pytest
 
-from OpenGL import arrays
+from OpenGL import _declarations, arrays
 from OpenGL._dispatch import finder
 
 
@@ -132,34 +135,41 @@ class TestTypeExpressionsAreReadNotExecuted:
         assert seen > 100
 
 
-class TestTheFileAModuleStandsIn:
-    def test_a_tree_without_the_files_states_no_file(self, monkeypatch):
-        """After the files are dropped, no path is invented and none is stat'd."""
-        monkeypatch.setattr(finder, '_shipped_root', None)
-        import OpenGL
+class TestTheTableAModuleNames:
+    """``__file__`` names the table the definitions were read from.
 
-        monkeypatch.setattr(OpenGL, '__path__', ['/nonexistent/OpenGL'])
-        assert finder._file_for('OpenGL.raw.GL.VERSION.GL_1_1') == ''
+    The full behaviour is in ``tests/test_raw_module_protocol.py``; what is
+    here is the two things that are properties of the *finder* rather than of
+    the module: that the answer costs nothing per import, and that a package
+    which is not a directory on disk reports no file rather than a wrong one.
+    """
 
-    def test_a_namespace_package_states_no_file(self, monkeypatch):
-        """Several path entries mean no single directory to name."""
-        monkeypatch.setattr(finder, '_shipped_root', None)
-        import OpenGL
-
-        monkeypatch.setattr(OpenGL, '__path__', ['/one', '/two'])
-        assert finder._file_for('OpenGL.raw.GL.VERSION.GL_1_1') == ''
-
-    def test_the_root_is_resolved_once(self, monkeypatch):
-        """Not a stat of the raw directory per module imported."""
-        monkeypatch.setattr(finder, '_shipped_root', None)
+    def test_the_path_is_resolved_once_per_api(self, monkeypatch):
+        """find_spec asks for every generated module imported."""
+        _declarations._table_paths.clear()
         calls = []
-        real = os.path.isdir
+        real = os.path.exists
         monkeypatch.setattr(
-            os.path, 'isdir', lambda path: calls.append(path) or real(path)
+            os.path, 'exists', lambda path: calls.append(path) or real(path)
         )
         for _ in range(5):
-            finder._file_for('OpenGL.raw.GL.VERSION.GL_1_1')
+            _declarations.table_path('GL')
         assert len(calls) == 1, calls
+
+    def test_a_package_that_is_not_a_directory_names_no_file(self, monkeypatch):
+        """Inside a zip there is no path, and absence is the honest answer."""
+
+        class _NotAFile:
+            """A resource that os.fspath cannot turn into a path."""
+
+            def __truediv__(self, other):
+                return self
+
+        _declarations._table_paths.clear()
+        monkeypatch.setattr(
+            importlib.resources, 'files', lambda package: _NotAFile()
+        )
+        assert _declarations.table_path('GL') is None
 
 
 class _FakeExtension:
