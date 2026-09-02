@@ -8,11 +8,27 @@
 #include "pygl_glgets.h"
 
 static const char *const pygl_EGL_eglBindAPI_args[] = {"api"};
-static const PyGLCommand pygl_EGL_eglBindAPI_info = {"eglBindAPI", "eglBindAPI(api) -> EGLBoolean", "($module, api, /)", pygl_EGL_eglBindAPI_args, "EGL_VERSION_EGL_1_2", "", 1, 0, PYGL_API_EGL, 0, 1, 1, 0};
+static const PyGLCommand pygl_EGL_eglBindAPI_info = {
+    .name = "eglBindAPI",
+    .doc = "eglBindAPI(api) -> EGLBoolean",
+    .text_signature = "($module, api, /)",
+    .arg_names = pygl_EGL_eglBindAPI_args,
+    .extension = "EGL_VERSION_EGL_1_2",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 0,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglBindAPI(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglBindAPI(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, api);
     PYGL_CONV_OK();
@@ -25,11 +41,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglBindTexImage_args[] = {"dpy", "surface", "buffer"};
-static const PyGLCommand pygl_EGL_eglBindTexImage_info = {"eglBindTexImage", "eglBindTexImage(dpy, surface, buffer) -> EGLBoolean", "($module, dpy, surface, buffer, /)", pygl_EGL_eglBindTexImage_args, "EGL_VERSION_EGL_1_1", "", 3, 1, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglBindTexImage_info = {
+    .name = "eglBindTexImage",
+    .doc = "eglBindTexImage(dpy, surface, buffer) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, buffer, /)",
+    .arg_names = pygl_EGL_eglBindTexImage_args,
+    .extension = "EGL_VERSION_EGL_1_1",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 1,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglBindTexImage(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglBindTexImage(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, surface);
@@ -44,11 +76,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglBindWaylandDisplayWL_args[] = {"dpy", "display"};
-static const PyGLCommand pygl_EGL_eglBindWaylandDisplayWL_info = {"eglBindWaylandDisplayWL", "eglBindWaylandDisplayWL(dpy, display) -> EGLBoolean", "($module, dpy, display, /)", pygl_EGL_eglBindWaylandDisplayWL_args, "EGL_WL_bind_wayland_display", "", 2, 2, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglBindWaylandDisplayWL_info = {
+    .name = "eglBindWaylandDisplayWL",
+    .doc = "eglBindWaylandDisplayWL(dpy, display) -> EGLBoolean",
+    .text_signature = "($module, dpy, display, /)",
+    .arg_names = pygl_EGL_eglBindWaylandDisplayWL_args,
+    .extension = "EGL_WL_bind_wayland_display",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 2,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglBindWaylandDisplayWL(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglBindWaylandDisplayWL(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -66,11 +114,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglChooseConfig_args[] = {"dpy", "attrib_list", "configs", "config_size", "num_config"};
-static const PyGLCommand pygl_EGL_eglChooseConfig_info = {"eglChooseConfig", "eglChooseConfig(dpy, attrib_list, configs, config_size, num_config) -> EGLBoolean", "($module, dpy, attrib_list, configs, config_size, num_config, /)", pygl_EGL_eglChooseConfig_args, "EGL_VERSION_EGL_1_0", "", 5, 3, PYGL_API_EGL, 0, 5, 1, 0};
+static const PyGLCommand pygl_EGL_eglChooseConfig_info = {
+    .name = "eglChooseConfig",
+    .doc = "eglChooseConfig(dpy, attrib_list, configs, config_size, num_config) -> EGLBoolean",
+    .text_signature = "($module, dpy, attrib_list, configs, config_size, num_config, /)",
+    .arg_names = pygl_EGL_eglChooseConfig_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglChooseConfig(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglChooseConfig(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(3);
     PYGL_OPAQUE(0, dpy);
@@ -91,11 +155,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglClientSignalSyncEXT_args[] = {"dpy", "sync", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglClientSignalSyncEXT_info = {"eglClientSignalSyncEXT", "eglClientSignalSyncEXT(dpy, sync, attrib_list) -> EGLBoolean", "($module, dpy, sync, attrib_list, /)", pygl_EGL_eglClientSignalSyncEXT_args, "EGL_EXT_client_sync", "", 3, 4, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglClientSignalSyncEXT_info = {
+    .name = "eglClientSignalSyncEXT",
+    .doc = "eglClientSignalSyncEXT(dpy, sync, attrib_list) -> EGLBoolean",
+    .text_signature = "($module, dpy, sync, attrib_list, /)",
+    .arg_names = pygl_EGL_eglClientSignalSyncEXT_args,
+    .extension = "EGL_EXT_client_sync",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 4,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglClientSignalSyncEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglClientSignalSyncEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -114,11 +194,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglClientWaitSync_args[] = {"dpy", "sync", "flags", "timeout"};
-static const PyGLCommand pygl_EGL_eglClientWaitSync_info = {"eglClientWaitSync", "eglClientWaitSync(dpy, sync, flags, timeout) -> EGLint", "($module, dpy, sync, flags, timeout, /)", pygl_EGL_eglClientWaitSync_args, "EGL_VERSION_EGL_1_5", "", 4, 5, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglClientWaitSync_info = {
+    .name = "eglClientWaitSync",
+    .doc = "eglClientWaitSync(dpy, sync, flags, timeout) -> EGLint",
+    .text_signature = "($module, dpy, sync, flags, timeout, /)",
+    .arg_names = pygl_EGL_eglClientWaitSync_args,
+    .extension = "EGL_VERSION_EGL_1_5",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 5,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglClientWaitSync(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglClientWaitSync(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, sync);
@@ -134,11 +230,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglClientWaitSyncKHR_args[] = {"dpy", "sync", "flags", "timeout"};
-static const PyGLCommand pygl_EGL_eglClientWaitSyncKHR_info = {"eglClientWaitSyncKHR", "eglClientWaitSyncKHR(dpy, sync, flags, timeout) -> EGLint", "($module, dpy, sync, flags, timeout, /)", pygl_EGL_eglClientWaitSyncKHR_args, "EGL_KHR_fence_sync", "EGL_KHR_reusable_sync", 4, 6, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglClientWaitSyncKHR_info = {
+    .name = "eglClientWaitSyncKHR",
+    .doc = "eglClientWaitSyncKHR(dpy, sync, flags, timeout) -> EGLint",
+    .text_signature = "($module, dpy, sync, flags, timeout, /)",
+    .arg_names = pygl_EGL_eglClientWaitSyncKHR_args,
+    .extension = "EGL_KHR_fence_sync",
+    .alternates = "EGL_KHR_reusable_sync",
+    .arg_count = 4,
+    .slot = 6,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglClientWaitSyncKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglClientWaitSyncKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, sync);
@@ -154,11 +266,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglClientWaitSyncNV_args[] = {"sync", "flags", "timeout"};
-static const PyGLCommand pygl_EGL_eglClientWaitSyncNV_info = {"eglClientWaitSyncNV", "eglClientWaitSyncNV(sync, flags, timeout) -> EGLint", "($module, sync, flags, timeout, /)", pygl_EGL_eglClientWaitSyncNV_args, "EGL_NV_sync", "", 3, 7, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglClientWaitSyncNV_info = {
+    .name = "eglClientWaitSyncNV",
+    .doc = "eglClientWaitSyncNV(sync, flags, timeout) -> EGLint",
+    .text_signature = "($module, sync, flags, timeout, /)",
+    .arg_names = pygl_EGL_eglClientWaitSyncNV_args,
+    .extension = "EGL_NV_sync",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 7,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglClientWaitSyncNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglClientWaitSyncNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, sync);
     PYGL_I(1, flags);
@@ -173,11 +301,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCompositorBindTexWindowEXT_args[] = {"external_win_id"};
-static const PyGLCommand pygl_EGL_eglCompositorBindTexWindowEXT_info = {"eglCompositorBindTexWindowEXT", "eglCompositorBindTexWindowEXT(external_win_id) -> EGLBoolean", "($module, external_win_id, /)", pygl_EGL_eglCompositorBindTexWindowEXT_args, "EGL_EXT_compositor", "", 1, 8, PYGL_API_EGL, 0, 1, 1, 0};
+static const PyGLCommand pygl_EGL_eglCompositorBindTexWindowEXT_info = {
+    .name = "eglCompositorBindTexWindowEXT",
+    .doc = "eglCompositorBindTexWindowEXT(external_win_id) -> EGLBoolean",
+    .text_signature = "($module, external_win_id, /)",
+    .arg_names = pygl_EGL_eglCompositorBindTexWindowEXT_args,
+    .extension = "EGL_EXT_compositor",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 8,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCompositorBindTexWindowEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCompositorBindTexWindowEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, external_win_id);
     PYGL_CONV_OK();
@@ -190,11 +334,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCompositorSetContextAttributesEXT_args[] = {"external_ref_id", "context_attributes", "num_entries"};
-static const PyGLCommand pygl_EGL_eglCompositorSetContextAttributesEXT_info = {"eglCompositorSetContextAttributesEXT", "eglCompositorSetContextAttributesEXT(external_ref_id, context_attributes, num_entries) -> EGLBoolean", "($module, external_ref_id, context_attributes, num_entries, /)", pygl_EGL_eglCompositorSetContextAttributesEXT_args, "EGL_EXT_compositor", "", 3, 9, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglCompositorSetContextAttributesEXT_info = {
+    .name = "eglCompositorSetContextAttributesEXT",
+    .doc = "eglCompositorSetContextAttributesEXT(external_ref_id, context_attributes, num_entries) -> EGLBoolean",
+    .text_signature = "($module, external_ref_id, context_attributes, num_entries, /)",
+    .arg_names = pygl_EGL_eglCompositorSetContextAttributesEXT_args,
+    .extension = "EGL_EXT_compositor",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 9,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCompositorSetContextAttributesEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCompositorSetContextAttributesEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_I(0, external_ref_id);
@@ -213,11 +373,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCompositorSetContextListEXT_args[] = {"external_ref_ids", "num_entries"};
-static const PyGLCommand pygl_EGL_eglCompositorSetContextListEXT_info = {"eglCompositorSetContextListEXT", "eglCompositorSetContextListEXT(external_ref_ids, num_entries) -> EGLBoolean", "($module, external_ref_ids, num_entries, /)", pygl_EGL_eglCompositorSetContextListEXT_args, "EGL_EXT_compositor", "", 2, 10, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglCompositorSetContextListEXT_info = {
+    .name = "eglCompositorSetContextListEXT",
+    .doc = "eglCompositorSetContextListEXT(external_ref_ids, num_entries) -> EGLBoolean",
+    .text_signature = "($module, external_ref_ids, num_entries, /)",
+    .arg_names = pygl_EGL_eglCompositorSetContextListEXT_args,
+    .extension = "EGL_EXT_compositor",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 10,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCompositorSetContextListEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCompositorSetContextListEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_I(1, num_entries);
@@ -235,11 +411,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCompositorSetSizeEXT_args[] = {"external_win_id", "width", "height"};
-static const PyGLCommand pygl_EGL_eglCompositorSetSizeEXT_info = {"eglCompositorSetSizeEXT", "eglCompositorSetSizeEXT(external_win_id, width, height) -> EGLBoolean", "($module, external_win_id, width, height, /)", pygl_EGL_eglCompositorSetSizeEXT_args, "EGL_EXT_compositor", "", 3, 11, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglCompositorSetSizeEXT_info = {
+    .name = "eglCompositorSetSizeEXT",
+    .doc = "eglCompositorSetSizeEXT(external_win_id, width, height) -> EGLBoolean",
+    .text_signature = "($module, external_win_id, width, height, /)",
+    .arg_names = pygl_EGL_eglCompositorSetSizeEXT_args,
+    .extension = "EGL_EXT_compositor",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 11,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCompositorSetSizeEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCompositorSetSizeEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_I(0, external_win_id);
     PYGL_I(1, width);
@@ -254,11 +446,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCompositorSetWindowAttributesEXT_args[] = {"external_win_id", "window_attributes", "num_entries"};
-static const PyGLCommand pygl_EGL_eglCompositorSetWindowAttributesEXT_info = {"eglCompositorSetWindowAttributesEXT", "eglCompositorSetWindowAttributesEXT(external_win_id, window_attributes, num_entries) -> EGLBoolean", "($module, external_win_id, window_attributes, num_entries, /)", pygl_EGL_eglCompositorSetWindowAttributesEXT_args, "EGL_EXT_compositor", "", 3, 12, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglCompositorSetWindowAttributesEXT_info = {
+    .name = "eglCompositorSetWindowAttributesEXT",
+    .doc = "eglCompositorSetWindowAttributesEXT(external_win_id, window_attributes, num_entries) -> EGLBoolean",
+    .text_signature = "($module, external_win_id, window_attributes, num_entries, /)",
+    .arg_names = pygl_EGL_eglCompositorSetWindowAttributesEXT_args,
+    .extension = "EGL_EXT_compositor",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 12,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCompositorSetWindowAttributesEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCompositorSetWindowAttributesEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_I(0, external_win_id);
@@ -277,11 +485,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCompositorSetWindowListEXT_args[] = {"external_ref_id", "external_win_ids", "num_entries"};
-static const PyGLCommand pygl_EGL_eglCompositorSetWindowListEXT_info = {"eglCompositorSetWindowListEXT", "eglCompositorSetWindowListEXT(external_ref_id, external_win_ids, num_entries) -> EGLBoolean", "($module, external_ref_id, external_win_ids, num_entries, /)", pygl_EGL_eglCompositorSetWindowListEXT_args, "EGL_EXT_compositor", "", 3, 13, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglCompositorSetWindowListEXT_info = {
+    .name = "eglCompositorSetWindowListEXT",
+    .doc = "eglCompositorSetWindowListEXT(external_ref_id, external_win_ids, num_entries) -> EGLBoolean",
+    .text_signature = "($module, external_ref_id, external_win_ids, num_entries, /)",
+    .arg_names = pygl_EGL_eglCompositorSetWindowListEXT_args,
+    .extension = "EGL_EXT_compositor",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 13,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCompositorSetWindowListEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCompositorSetWindowListEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_I(0, external_ref_id);
@@ -300,11 +524,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCompositorSwapPolicyEXT_args[] = {"external_win_id", "policy"};
-static const PyGLCommand pygl_EGL_eglCompositorSwapPolicyEXT_info = {"eglCompositorSwapPolicyEXT", "eglCompositorSwapPolicyEXT(external_win_id, policy) -> EGLBoolean", "($module, external_win_id, policy, /)", pygl_EGL_eglCompositorSwapPolicyEXT_args, "EGL_EXT_compositor", "", 2, 14, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglCompositorSwapPolicyEXT_info = {
+    .name = "eglCompositorSwapPolicyEXT",
+    .doc = "eglCompositorSwapPolicyEXT(external_win_id, policy) -> EGLBoolean",
+    .text_signature = "($module, external_win_id, policy, /)",
+    .arg_names = pygl_EGL_eglCompositorSwapPolicyEXT_args,
+    .extension = "EGL_EXT_compositor",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 14,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCompositorSwapPolicyEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCompositorSwapPolicyEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_I(0, external_win_id);
     PYGL_I(1, policy);
@@ -318,11 +558,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCopyBuffers_args[] = {"dpy", "surface", "target"};
-static const PyGLCommand pygl_EGL_eglCopyBuffers_info = {"eglCopyBuffers", "eglCopyBuffers(dpy, surface, target) -> EGLBoolean", "($module, dpy, surface, target, /)", pygl_EGL_eglCopyBuffers_args, "EGL_VERSION_EGL_1_0", "", 3, 15, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglCopyBuffers_info = {
+    .name = "eglCopyBuffers",
+    .doc = "eglCopyBuffers(dpy, surface, target) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, target, /)",
+    .arg_names = pygl_EGL_eglCopyBuffers_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 15,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCopyBuffers(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCopyBuffers(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, surface);
@@ -337,11 +593,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateContext_args[] = {"dpy", "config", "share_context", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateContext_info = {"eglCreateContext", "eglCreateContext(dpy, config, share_context, attrib_list) -> EGLContext", "($module, dpy, config, share_context, attrib_list, /)", pygl_EGL_eglCreateContext_args, "EGL_VERSION_EGL_1_0", "", 4, 16, PYGL_API_EGL, 0, 4, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateContext_info = {
+    .name = "eglCreateContext",
+    .doc = "eglCreateContext(dpy, config, share_context, attrib_list) -> EGLContext",
+    .text_signature = "($module, dpy, config, share_context, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreateContext_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 16,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateContext(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateContext(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -361,11 +633,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateDRMImageMESA_args[] = {"dpy", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateDRMImageMESA_info = {"eglCreateDRMImageMESA", "eglCreateDRMImageMESA(dpy, attrib_list) -> EGLImageKHR", "($module, dpy, attrib_list, /)", pygl_EGL_eglCreateDRMImageMESA_args, "EGL_MESA_drm_image", "", 2, 17, PYGL_API_EGL, 0, 2, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateDRMImageMESA_info = {
+    .name = "eglCreateDRMImageMESA",
+    .doc = "eglCreateDRMImageMESA(dpy, attrib_list) -> EGLImageKHR",
+    .text_signature = "($module, dpy, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreateDRMImageMESA_args,
+    .extension = "EGL_MESA_drm_image",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 17,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateDRMImageMESA(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateDRMImageMESA(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -383,11 +671,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateFenceSyncNV_args[] = {"dpy", "condition", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateFenceSyncNV_info = {"eglCreateFenceSyncNV", "eglCreateFenceSyncNV(dpy, condition, attrib_list) -> EGLSyncNV", "($module, dpy, condition, attrib_list, /)", pygl_EGL_eglCreateFenceSyncNV_args, "EGL_NV_sync", "", 3, 18, PYGL_API_EGL, 0, 3, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateFenceSyncNV_info = {
+    .name = "eglCreateFenceSyncNV",
+    .doc = "eglCreateFenceSyncNV(dpy, condition, attrib_list) -> EGLSyncNV",
+    .text_signature = "($module, dpy, condition, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreateFenceSyncNV_args,
+    .extension = "EGL_NV_sync",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 18,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateFenceSyncNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateFenceSyncNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -406,11 +710,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateImage_args[] = {"dpy", "ctx", "target", "buffer", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateImage_info = {"eglCreateImage", "eglCreateImage(dpy, ctx, target, buffer, attrib_list) -> EGLImage", "($module, dpy, ctx, target, buffer, attrib_list, /)", pygl_EGL_eglCreateImage_args, "EGL_VERSION_EGL_1_5", "", 5, 19, PYGL_API_EGL, 0, 5, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateImage_info = {
+    .name = "eglCreateImage",
+    .doc = "eglCreateImage(dpy, ctx, target, buffer, attrib_list) -> EGLImage",
+    .text_signature = "($module, dpy, ctx, target, buffer, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreateImage_args,
+    .extension = "EGL_VERSION_EGL_1_5",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 19,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateImage(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateImage(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -431,11 +751,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateImageKHR_args[] = {"dpy", "ctx", "target", "buffer", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateImageKHR_info = {"eglCreateImageKHR", "eglCreateImageKHR(dpy, ctx, target, buffer, attrib_list) -> EGLImageKHR", "($module, dpy, ctx, target, buffer, attrib_list, /)", pygl_EGL_eglCreateImageKHR_args, "EGL_KHR_image", "EGL_KHR_image_base", 5, 20, PYGL_API_EGL, 0, 5, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateImageKHR_info = {
+    .name = "eglCreateImageKHR",
+    .doc = "eglCreateImageKHR(dpy, ctx, target, buffer, attrib_list) -> EGLImageKHR",
+    .text_signature = "($module, dpy, ctx, target, buffer, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreateImageKHR_args,
+    .extension = "EGL_KHR_image",
+    .alternates = "EGL_KHR_image_base",
+    .arg_count = 5,
+    .slot = 20,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateImageKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateImageKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -456,11 +792,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateNativeClientBufferANDROID_args[] = {"attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateNativeClientBufferANDROID_info = {"eglCreateNativeClientBufferANDROID", "eglCreateNativeClientBufferANDROID(attrib_list) -> EGLClientBuffer", "($module, attrib_list, /)", pygl_EGL_eglCreateNativeClientBufferANDROID_args, "EGL_ANDROID_create_native_client_buffer", "", 1, 21, PYGL_API_EGL, 0, 1, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateNativeClientBufferANDROID_info = {
+    .name = "eglCreateNativeClientBufferANDROID",
+    .doc = "eglCreateNativeClientBufferANDROID(attrib_list) -> EGLClientBuffer",
+    .text_signature = "($module, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreateNativeClientBufferANDROID_args,
+    .extension = "EGL_ANDROID_create_native_client_buffer",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 21,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateNativeClientBufferANDROID(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateNativeClientBufferANDROID(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -477,11 +829,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreatePbufferFromClientBuffer_args[] = {"dpy", "buftype", "buffer", "config", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreatePbufferFromClientBuffer_info = {"eglCreatePbufferFromClientBuffer", "eglCreatePbufferFromClientBuffer(dpy, buftype, buffer, config, attrib_list) -> EGLSurface", "($module, dpy, buftype, buffer, config, attrib_list, /)", pygl_EGL_eglCreatePbufferFromClientBuffer_args, "EGL_VERSION_EGL_1_2", "", 5, 22, PYGL_API_EGL, 0, 5, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreatePbufferFromClientBuffer_info = {
+    .name = "eglCreatePbufferFromClientBuffer",
+    .doc = "eglCreatePbufferFromClientBuffer(dpy, buftype, buffer, config, attrib_list) -> EGLSurface",
+    .text_signature = "($module, dpy, buftype, buffer, config, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreatePbufferFromClientBuffer_args,
+    .extension = "EGL_VERSION_EGL_1_2",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 22,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreatePbufferFromClientBuffer(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreatePbufferFromClientBuffer(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -502,11 +870,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreatePbufferSurface_args[] = {"dpy", "config", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreatePbufferSurface_info = {"eglCreatePbufferSurface", "eglCreatePbufferSurface(dpy, config, attrib_list) -> EGLSurface", "($module, dpy, config, attrib_list, /)", pygl_EGL_eglCreatePbufferSurface_args, "EGL_VERSION_EGL_1_0", "", 3, 23, PYGL_API_EGL, 0, 3, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreatePbufferSurface_info = {
+    .name = "eglCreatePbufferSurface",
+    .doc = "eglCreatePbufferSurface(dpy, config, attrib_list) -> EGLSurface",
+    .text_signature = "($module, dpy, config, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreatePbufferSurface_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 23,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreatePbufferSurface(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreatePbufferSurface(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -525,11 +909,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreatePixmapSurface_args[] = {"dpy", "config", "pixmap", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreatePixmapSurface_info = {"eglCreatePixmapSurface", "eglCreatePixmapSurface(dpy, config, pixmap, attrib_list) -> EGLSurface", "($module, dpy, config, pixmap, attrib_list, /)", pygl_EGL_eglCreatePixmapSurface_args, "EGL_VERSION_EGL_1_0", "", 4, 24, PYGL_API_EGL, 0, 4, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreatePixmapSurface_info = {
+    .name = "eglCreatePixmapSurface",
+    .doc = "eglCreatePixmapSurface(dpy, config, pixmap, attrib_list) -> EGLSurface",
+    .text_signature = "($module, dpy, config, pixmap, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreatePixmapSurface_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 24,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreatePixmapSurface(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreatePixmapSurface(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -549,11 +949,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreatePixmapSurfaceHI_args[] = {"dpy", "config", "pixmap"};
-static const PyGLCommand pygl_EGL_eglCreatePixmapSurfaceHI_info = {"eglCreatePixmapSurfaceHI", "eglCreatePixmapSurfaceHI(dpy, config, pixmap) -> EGLSurface", "($module, dpy, config, pixmap, /)", pygl_EGL_eglCreatePixmapSurfaceHI_args, "EGL_HI_clientpixmap", "", 3, 25, PYGL_API_EGL, 0, 3, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreatePixmapSurfaceHI_info = {
+    .name = "eglCreatePixmapSurfaceHI",
+    .doc = "eglCreatePixmapSurfaceHI(dpy, config, pixmap) -> EGLSurface",
+    .text_signature = "($module, dpy, config, pixmap, /)",
+    .arg_names = pygl_EGL_eglCreatePixmapSurfaceHI_args,
+    .extension = "EGL_HI_clientpixmap",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 25,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreatePixmapSurfaceHI(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreatePixmapSurfaceHI(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -572,11 +988,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreatePlatformPixmapSurface_args[] = {"dpy", "config", "native_pixmap", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreatePlatformPixmapSurface_info = {"eglCreatePlatformPixmapSurface", "eglCreatePlatformPixmapSurface(dpy, config, native_pixmap, attrib_list) -> EGLSurface", "($module, dpy, config, native_pixmap, attrib_list, /)", pygl_EGL_eglCreatePlatformPixmapSurface_args, "EGL_VERSION_EGL_1_5", "", 4, 26, PYGL_API_EGL, 0, 4, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreatePlatformPixmapSurface_info = {
+    .name = "eglCreatePlatformPixmapSurface",
+    .doc = "eglCreatePlatformPixmapSurface(dpy, config, native_pixmap, attrib_list) -> EGLSurface",
+    .text_signature = "($module, dpy, config, native_pixmap, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreatePlatformPixmapSurface_args,
+    .extension = "EGL_VERSION_EGL_1_5",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 26,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreatePlatformPixmapSurface(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreatePlatformPixmapSurface(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, dpy);
@@ -596,11 +1028,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreatePlatformPixmapSurfaceEXT_args[] = {"dpy", "config", "native_pixmap", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreatePlatformPixmapSurfaceEXT_info = {"eglCreatePlatformPixmapSurfaceEXT", "eglCreatePlatformPixmapSurfaceEXT(dpy, config, native_pixmap, attrib_list) -> EGLSurface", "($module, dpy, config, native_pixmap, attrib_list, /)", pygl_EGL_eglCreatePlatformPixmapSurfaceEXT_args, "EGL_EXT_platform_base", "", 4, 27, PYGL_API_EGL, 0, 4, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreatePlatformPixmapSurfaceEXT_info = {
+    .name = "eglCreatePlatformPixmapSurfaceEXT",
+    .doc = "eglCreatePlatformPixmapSurfaceEXT(dpy, config, native_pixmap, attrib_list) -> EGLSurface",
+    .text_signature = "($module, dpy, config, native_pixmap, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreatePlatformPixmapSurfaceEXT_args,
+    .extension = "EGL_EXT_platform_base",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 27,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreatePlatformPixmapSurfaceEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreatePlatformPixmapSurfaceEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, dpy);
@@ -620,11 +1068,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreatePlatformWindowSurface_args[] = {"dpy", "config", "native_window", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreatePlatformWindowSurface_info = {"eglCreatePlatformWindowSurface", "eglCreatePlatformWindowSurface(dpy, config, native_window, attrib_list) -> EGLSurface", "($module, dpy, config, native_window, attrib_list, /)", pygl_EGL_eglCreatePlatformWindowSurface_args, "EGL_VERSION_EGL_1_5", "", 4, 28, PYGL_API_EGL, 0, 4, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreatePlatformWindowSurface_info = {
+    .name = "eglCreatePlatformWindowSurface",
+    .doc = "eglCreatePlatformWindowSurface(dpy, config, native_window, attrib_list) -> EGLSurface",
+    .text_signature = "($module, dpy, config, native_window, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreatePlatformWindowSurface_args,
+    .extension = "EGL_VERSION_EGL_1_5",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 28,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreatePlatformWindowSurface(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreatePlatformWindowSurface(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, dpy);
@@ -644,11 +1108,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreatePlatformWindowSurfaceEXT_args[] = {"dpy", "config", "native_window", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreatePlatformWindowSurfaceEXT_info = {"eglCreatePlatformWindowSurfaceEXT", "eglCreatePlatformWindowSurfaceEXT(dpy, config, native_window, attrib_list) -> EGLSurface", "($module, dpy, config, native_window, attrib_list, /)", pygl_EGL_eglCreatePlatformWindowSurfaceEXT_args, "EGL_EXT_platform_base", "", 4, 29, PYGL_API_EGL, 0, 4, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreatePlatformWindowSurfaceEXT_info = {
+    .name = "eglCreatePlatformWindowSurfaceEXT",
+    .doc = "eglCreatePlatformWindowSurfaceEXT(dpy, config, native_window, attrib_list) -> EGLSurface",
+    .text_signature = "($module, dpy, config, native_window, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreatePlatformWindowSurfaceEXT_args,
+    .extension = "EGL_EXT_platform_base",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 29,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreatePlatformWindowSurfaceEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreatePlatformWindowSurfaceEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, dpy);
@@ -668,11 +1148,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateStreamAttribKHR_args[] = {"dpy", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateStreamAttribKHR_info = {"eglCreateStreamAttribKHR", "eglCreateStreamAttribKHR(dpy, attrib_list) -> EGLStreamKHR", "($module, dpy, attrib_list, /)", pygl_EGL_eglCreateStreamAttribKHR_args, "EGL_KHR_stream_attrib", "", 2, 30, PYGL_API_EGL, 0, 2, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateStreamAttribKHR_info = {
+    .name = "eglCreateStreamAttribKHR",
+    .doc = "eglCreateStreamAttribKHR(dpy, attrib_list) -> EGLStreamKHR",
+    .text_signature = "($module, dpy, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreateStreamAttribKHR_args,
+    .extension = "EGL_KHR_stream_attrib",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 30,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateStreamAttribKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateStreamAttribKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -690,11 +1186,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateStreamFromFileDescriptorKHR_args[] = {"dpy", "file_descriptor"};
-static const PyGLCommand pygl_EGL_eglCreateStreamFromFileDescriptorKHR_info = {"eglCreateStreamFromFileDescriptorKHR", "eglCreateStreamFromFileDescriptorKHR(dpy, file_descriptor) -> EGLStreamKHR", "($module, dpy, file_descriptor, /)", pygl_EGL_eglCreateStreamFromFileDescriptorKHR_args, "EGL_KHR_stream_cross_process_fd", "", 2, 31, PYGL_API_EGL, 0, 2, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateStreamFromFileDescriptorKHR_info = {
+    .name = "eglCreateStreamFromFileDescriptorKHR",
+    .doc = "eglCreateStreamFromFileDescriptorKHR(dpy, file_descriptor) -> EGLStreamKHR",
+    .text_signature = "($module, dpy, file_descriptor, /)",
+    .arg_names = pygl_EGL_eglCreateStreamFromFileDescriptorKHR_args,
+    .extension = "EGL_KHR_stream_cross_process_fd",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 31,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateStreamFromFileDescriptorKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateStreamFromFileDescriptorKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_I(1, file_descriptor);
@@ -708,11 +1220,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateStreamKHR_args[] = {"dpy", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateStreamKHR_info = {"eglCreateStreamKHR", "eglCreateStreamKHR(dpy, attrib_list) -> EGLStreamKHR", "($module, dpy, attrib_list, /)", pygl_EGL_eglCreateStreamKHR_args, "EGL_KHR_stream", "", 2, 32, PYGL_API_EGL, 0, 2, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateStreamKHR_info = {
+    .name = "eglCreateStreamKHR",
+    .doc = "eglCreateStreamKHR(dpy, attrib_list) -> EGLStreamKHR",
+    .text_signature = "($module, dpy, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreateStreamKHR_args,
+    .extension = "EGL_KHR_stream",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 32,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateStreamKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateStreamKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -730,11 +1258,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateStreamProducerSurfaceKHR_args[] = {"dpy", "config", "stream", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateStreamProducerSurfaceKHR_info = {"eglCreateStreamProducerSurfaceKHR", "eglCreateStreamProducerSurfaceKHR(dpy, config, stream, attrib_list) -> EGLSurface", "($module, dpy, config, stream, attrib_list, /)", pygl_EGL_eglCreateStreamProducerSurfaceKHR_args, "EGL_KHR_stream_producer_eglsurface", "", 4, 33, PYGL_API_EGL, 0, 4, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateStreamProducerSurfaceKHR_info = {
+    .name = "eglCreateStreamProducerSurfaceKHR",
+    .doc = "eglCreateStreamProducerSurfaceKHR(dpy, config, stream, attrib_list) -> EGLSurface",
+    .text_signature = "($module, dpy, config, stream, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreateStreamProducerSurfaceKHR_args,
+    .extension = "EGL_KHR_stream_producer_eglsurface",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 33,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateStreamProducerSurfaceKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateStreamProducerSurfaceKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -754,11 +1298,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateStreamSyncNV_args[] = {"dpy", "stream", "type", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateStreamSyncNV_info = {"eglCreateStreamSyncNV", "eglCreateStreamSyncNV(dpy, stream, type, attrib_list) -> EGLSyncKHR", "($module, dpy, stream, type, attrib_list, /)", pygl_EGL_eglCreateStreamSyncNV_args, "EGL_NV_stream_sync", "", 4, 34, PYGL_API_EGL, 0, 4, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateStreamSyncNV_info = {
+    .name = "eglCreateStreamSyncNV",
+    .doc = "eglCreateStreamSyncNV(dpy, stream, type, attrib_list) -> EGLSyncKHR",
+    .text_signature = "($module, dpy, stream, type, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreateStreamSyncNV_args,
+    .extension = "EGL_NV_stream_sync",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 34,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateStreamSyncNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateStreamSyncNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -778,11 +1338,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateSync_args[] = {"dpy", "type", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateSync_info = {"eglCreateSync", "eglCreateSync(dpy, type, attrib_list) -> EGLSync", "($module, dpy, type, attrib_list, /)", pygl_EGL_eglCreateSync_args, "EGL_VERSION_EGL_1_5", "", 3, 35, PYGL_API_EGL, 0, 3, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateSync_info = {
+    .name = "eglCreateSync",
+    .doc = "eglCreateSync(dpy, type, attrib_list) -> EGLSync",
+    .text_signature = "($module, dpy, type, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreateSync_args,
+    .extension = "EGL_VERSION_EGL_1_5",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 35,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateSync(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateSync(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -801,11 +1377,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateSync64KHR_args[] = {"dpy", "type", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateSync64KHR_info = {"eglCreateSync64KHR", "eglCreateSync64KHR(dpy, type, attrib_list) -> EGLSyncKHR", "($module, dpy, type, attrib_list, /)", pygl_EGL_eglCreateSync64KHR_args, "EGL_KHR_cl_event2", "", 3, 36, PYGL_API_EGL, 0, 3, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateSync64KHR_info = {
+    .name = "eglCreateSync64KHR",
+    .doc = "eglCreateSync64KHR(dpy, type, attrib_list) -> EGLSyncKHR",
+    .text_signature = "($module, dpy, type, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreateSync64KHR_args,
+    .extension = "EGL_KHR_cl_event2",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 36,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateSync64KHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateSync64KHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -824,11 +1416,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateSyncKHR_args[] = {"dpy", "type", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateSyncKHR_info = {"eglCreateSyncKHR", "eglCreateSyncKHR(dpy, type, attrib_list) -> EGLSyncKHR", "($module, dpy, type, attrib_list, /)", pygl_EGL_eglCreateSyncKHR_args, "EGL_KHR_fence_sync", "EGL_KHR_reusable_sync", 3, 37, PYGL_API_EGL, 0, 3, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateSyncKHR_info = {
+    .name = "eglCreateSyncKHR",
+    .doc = "eglCreateSyncKHR(dpy, type, attrib_list) -> EGLSyncKHR",
+    .text_signature = "($module, dpy, type, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreateSyncKHR_args,
+    .extension = "EGL_KHR_fence_sync",
+    .alternates = "EGL_KHR_reusable_sync",
+    .arg_count = 3,
+    .slot = 37,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateSyncKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateSyncKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -847,11 +1455,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateWaylandBufferFromImageWL_args[] = {"dpy", "image"};
-static const PyGLCommand pygl_EGL_eglCreateWaylandBufferFromImageWL_info = {"eglCreateWaylandBufferFromImageWL", "eglCreateWaylandBufferFromImageWL(dpy, image) -> void", "($module, dpy, image, /)", pygl_EGL_eglCreateWaylandBufferFromImageWL_args, "EGL_WL_create_wayland_buffer_from_image", "", 2, 38, PYGL_API_EGL, 0, 2, 5, 0};
+static const PyGLCommand pygl_EGL_eglCreateWaylandBufferFromImageWL_info = {
+    .name = "eglCreateWaylandBufferFromImageWL",
+    .doc = "eglCreateWaylandBufferFromImageWL(dpy, image) -> void",
+    .text_signature = "($module, dpy, image, /)",
+    .arg_names = pygl_EGL_eglCreateWaylandBufferFromImageWL_args,
+    .extension = "EGL_WL_create_wayland_buffer_from_image",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 38,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 5,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateWaylandBufferFromImageWL(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateWaylandBufferFromImageWL(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, image);
@@ -865,11 +1489,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglCreateWindowSurface_args[] = {"dpy", "config", "win", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglCreateWindowSurface_info = {"eglCreateWindowSurface", "eglCreateWindowSurface(dpy, config, win, attrib_list) -> EGLSurface", "($module, dpy, config, win, attrib_list, /)", pygl_EGL_eglCreateWindowSurface_args, "EGL_VERSION_EGL_1_0", "", 4, 39, PYGL_API_EGL, 0, 4, 4, 0};
+static const PyGLCommand pygl_EGL_eglCreateWindowSurface_info = {
+    .name = "eglCreateWindowSurface",
+    .doc = "eglCreateWindowSurface(dpy, config, win, attrib_list) -> EGLSurface",
+    .text_signature = "($module, dpy, config, win, attrib_list, /)",
+    .arg_names = pygl_EGL_eglCreateWindowSurface_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 39,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglCreateWindowSurface(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglCreateWindowSurface(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -889,11 +1529,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglDebugMessageControlKHR_args[] = {"callback", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglDebugMessageControlKHR_info = {"eglDebugMessageControlKHR", "eglDebugMessageControlKHR(callback, attrib_list) -> EGLint", "($module, callback, attrib_list, /)", pygl_EGL_eglDebugMessageControlKHR_args, "EGL_KHR_debug", "", 2, 40, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglDebugMessageControlKHR_info = {
+    .name = "eglDebugMessageControlKHR",
+    .doc = "eglDebugMessageControlKHR(callback, attrib_list) -> EGLint",
+    .text_signature = "($module, callback, attrib_list, /)",
+    .arg_names = pygl_EGL_eglDebugMessageControlKHR_args,
+    .extension = "EGL_KHR_debug",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 40,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglDebugMessageControlKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglDebugMessageControlKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, callback);
@@ -911,11 +1567,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglDestroyContext_args[] = {"dpy", "ctx"};
-static const PyGLCommand pygl_EGL_eglDestroyContext_info = {"eglDestroyContext", "eglDestroyContext(dpy, ctx) -> EGLBoolean", "($module, dpy, ctx, /)", pygl_EGL_eglDestroyContext_args, "EGL_VERSION_EGL_1_0", "", 2, 41, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglDestroyContext_info = {
+    .name = "eglDestroyContext",
+    .doc = "eglDestroyContext(dpy, ctx) -> EGLBoolean",
+    .text_signature = "($module, dpy, ctx, /)",
+    .arg_names = pygl_EGL_eglDestroyContext_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 41,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglDestroyContext(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglDestroyContext(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, ctx);
@@ -929,11 +1601,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglDestroyDisplayEXT_args[] = {"dpy"};
-static const PyGLCommand pygl_EGL_eglDestroyDisplayEXT_info = {"eglDestroyDisplayEXT", "eglDestroyDisplayEXT(dpy) -> EGLBoolean", "($module, dpy, /)", pygl_EGL_eglDestroyDisplayEXT_args, "EGL_EXT_display_alloc", "", 1, 42, PYGL_API_EGL, 0, 1, 1, 0};
+static const PyGLCommand pygl_EGL_eglDestroyDisplayEXT_info = {
+    .name = "eglDestroyDisplayEXT",
+    .doc = "eglDestroyDisplayEXT(dpy) -> EGLBoolean",
+    .text_signature = "($module, dpy, /)",
+    .arg_names = pygl_EGL_eglDestroyDisplayEXT_args,
+    .extension = "EGL_EXT_display_alloc",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 42,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglDestroyDisplayEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglDestroyDisplayEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_OPAQUE(0, dpy);
     PYGL_CONV_OK();
@@ -946,11 +1634,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglDestroyImage_args[] = {"dpy", "image"};
-static const PyGLCommand pygl_EGL_eglDestroyImage_info = {"eglDestroyImage", "eglDestroyImage(dpy, image) -> EGLBoolean", "($module, dpy, image, /)", pygl_EGL_eglDestroyImage_args, "EGL_VERSION_EGL_1_5", "", 2, 43, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglDestroyImage_info = {
+    .name = "eglDestroyImage",
+    .doc = "eglDestroyImage(dpy, image) -> EGLBoolean",
+    .text_signature = "($module, dpy, image, /)",
+    .arg_names = pygl_EGL_eglDestroyImage_args,
+    .extension = "EGL_VERSION_EGL_1_5",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 43,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglDestroyImage(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglDestroyImage(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, image);
@@ -964,11 +1668,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglDestroyImageKHR_args[] = {"dpy", "image"};
-static const PyGLCommand pygl_EGL_eglDestroyImageKHR_info = {"eglDestroyImageKHR", "eglDestroyImageKHR(dpy, image) -> EGLBoolean", "($module, dpy, image, /)", pygl_EGL_eglDestroyImageKHR_args, "EGL_KHR_image", "EGL_KHR_image_base", 2, 44, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglDestroyImageKHR_info = {
+    .name = "eglDestroyImageKHR",
+    .doc = "eglDestroyImageKHR(dpy, image) -> EGLBoolean",
+    .text_signature = "($module, dpy, image, /)",
+    .arg_names = pygl_EGL_eglDestroyImageKHR_args,
+    .extension = "EGL_KHR_image",
+    .alternates = "EGL_KHR_image_base",
+    .arg_count = 2,
+    .slot = 44,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglDestroyImageKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglDestroyImageKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, image);
@@ -982,11 +1702,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglDestroyStreamKHR_args[] = {"dpy", "stream"};
-static const PyGLCommand pygl_EGL_eglDestroyStreamKHR_info = {"eglDestroyStreamKHR", "eglDestroyStreamKHR(dpy, stream) -> EGLBoolean", "($module, dpy, stream, /)", pygl_EGL_eglDestroyStreamKHR_args, "EGL_KHR_stream", "", 2, 45, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglDestroyStreamKHR_info = {
+    .name = "eglDestroyStreamKHR",
+    .doc = "eglDestroyStreamKHR(dpy, stream) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, /)",
+    .arg_names = pygl_EGL_eglDestroyStreamKHR_args,
+    .extension = "EGL_KHR_stream",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 45,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglDestroyStreamKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglDestroyStreamKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, stream);
@@ -1000,11 +1736,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglDestroySurface_args[] = {"dpy", "surface"};
-static const PyGLCommand pygl_EGL_eglDestroySurface_info = {"eglDestroySurface", "eglDestroySurface(dpy, surface) -> EGLBoolean", "($module, dpy, surface, /)", pygl_EGL_eglDestroySurface_args, "EGL_VERSION_EGL_1_0", "", 2, 46, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglDestroySurface_info = {
+    .name = "eglDestroySurface",
+    .doc = "eglDestroySurface(dpy, surface) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, /)",
+    .arg_names = pygl_EGL_eglDestroySurface_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 46,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglDestroySurface(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglDestroySurface(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, surface);
@@ -1018,11 +1770,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglDestroySync_args[] = {"dpy", "sync"};
-static const PyGLCommand pygl_EGL_eglDestroySync_info = {"eglDestroySync", "eglDestroySync(dpy, sync) -> EGLBoolean", "($module, dpy, sync, /)", pygl_EGL_eglDestroySync_args, "EGL_VERSION_EGL_1_5", "", 2, 47, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglDestroySync_info = {
+    .name = "eglDestroySync",
+    .doc = "eglDestroySync(dpy, sync) -> EGLBoolean",
+    .text_signature = "($module, dpy, sync, /)",
+    .arg_names = pygl_EGL_eglDestroySync_args,
+    .extension = "EGL_VERSION_EGL_1_5",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 47,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglDestroySync(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglDestroySync(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, sync);
@@ -1036,11 +1804,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglDestroySyncKHR_args[] = {"dpy", "sync"};
-static const PyGLCommand pygl_EGL_eglDestroySyncKHR_info = {"eglDestroySyncKHR", "eglDestroySyncKHR(dpy, sync) -> EGLBoolean", "($module, dpy, sync, /)", pygl_EGL_eglDestroySyncKHR_args, "EGL_KHR_fence_sync", "EGL_KHR_reusable_sync", 2, 48, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglDestroySyncKHR_info = {
+    .name = "eglDestroySyncKHR",
+    .doc = "eglDestroySyncKHR(dpy, sync) -> EGLBoolean",
+    .text_signature = "($module, dpy, sync, /)",
+    .arg_names = pygl_EGL_eglDestroySyncKHR_args,
+    .extension = "EGL_KHR_fence_sync",
+    .alternates = "EGL_KHR_reusable_sync",
+    .arg_count = 2,
+    .slot = 48,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglDestroySyncKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglDestroySyncKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, sync);
@@ -1054,11 +1838,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglDestroySyncNV_args[] = {"sync"};
-static const PyGLCommand pygl_EGL_eglDestroySyncNV_info = {"eglDestroySyncNV", "eglDestroySyncNV(sync) -> EGLBoolean", "($module, sync, /)", pygl_EGL_eglDestroySyncNV_args, "EGL_NV_sync", "", 1, 49, PYGL_API_EGL, 0, 1, 1, 0};
+static const PyGLCommand pygl_EGL_eglDestroySyncNV_info = {
+    .name = "eglDestroySyncNV",
+    .doc = "eglDestroySyncNV(sync) -> EGLBoolean",
+    .text_signature = "($module, sync, /)",
+    .arg_names = pygl_EGL_eglDestroySyncNV_args,
+    .extension = "EGL_NV_sync",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 49,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglDestroySyncNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglDestroySyncNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_OPAQUE(0, sync);
     PYGL_CONV_OK();
@@ -1071,11 +1871,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglDupNativeFenceFDANDROID_args[] = {"dpy", "sync"};
-static const PyGLCommand pygl_EGL_eglDupNativeFenceFDANDROID_info = {"eglDupNativeFenceFDANDROID", "eglDupNativeFenceFDANDROID(dpy, sync) -> EGLint", "($module, dpy, sync, /)", pygl_EGL_eglDupNativeFenceFDANDROID_args, "EGL_ANDROID_native_fence_sync", "", 2, 50, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglDupNativeFenceFDANDROID_info = {
+    .name = "eglDupNativeFenceFDANDROID",
+    .doc = "eglDupNativeFenceFDANDROID(dpy, sync) -> EGLint",
+    .text_signature = "($module, dpy, sync, /)",
+    .arg_names = pygl_EGL_eglDupNativeFenceFDANDROID_args,
+    .extension = "EGL_ANDROID_native_fence_sync",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 50,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglDupNativeFenceFDANDROID(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglDupNativeFenceFDANDROID(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, sync);
@@ -1089,11 +1905,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglExportDMABUFImageMESA_args[] = {"dpy", "image", "fds", "strides", "offsets"};
-static const PyGLCommand pygl_EGL_eglExportDMABUFImageMESA_info = {"eglExportDMABUFImageMESA", "eglExportDMABUFImageMESA(dpy, image, fds, strides, offsets) -> EGLBoolean", "($module, dpy, image, fds, strides, offsets, /)", pygl_EGL_eglExportDMABUFImageMESA_args, "EGL_MESA_image_dma_buf_export", "", 5, 51, PYGL_API_EGL, 0, 5, 1, 0};
+static const PyGLCommand pygl_EGL_eglExportDMABUFImageMESA_info = {
+    .name = "eglExportDMABUFImageMESA",
+    .doc = "eglExportDMABUFImageMESA(dpy, image, fds, strides, offsets) -> EGLBoolean",
+    .text_signature = "($module, dpy, image, fds, strides, offsets, /)",
+    .arg_names = pygl_EGL_eglExportDMABUFImageMESA_args,
+    .extension = "EGL_MESA_image_dma_buf_export",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 51,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglExportDMABUFImageMESA(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglExportDMABUFImageMESA(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(3);
     PYGL_OPAQUE(0, dpy);
@@ -1114,11 +1946,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglExportDMABUFImageQueryMESA_args[] = {"dpy", "image", "fourcc", "num_planes", "modifiers"};
-static const PyGLCommand pygl_EGL_eglExportDMABUFImageQueryMESA_info = {"eglExportDMABUFImageQueryMESA", "eglExportDMABUFImageQueryMESA(dpy, image, fourcc, num_planes, modifiers) -> EGLBoolean", "($module, dpy, image, fourcc, num_planes, modifiers, /)", pygl_EGL_eglExportDMABUFImageQueryMESA_args, "EGL_MESA_image_dma_buf_export", "", 5, 52, PYGL_API_EGL, 0, 5, 1, 0};
+static const PyGLCommand pygl_EGL_eglExportDMABUFImageQueryMESA_info = {
+    .name = "eglExportDMABUFImageQueryMESA",
+    .doc = "eglExportDMABUFImageQueryMESA(dpy, image, fourcc, num_planes, modifiers) -> EGLBoolean",
+    .text_signature = "($module, dpy, image, fourcc, num_planes, modifiers, /)",
+    .arg_names = pygl_EGL_eglExportDMABUFImageQueryMESA_args,
+    .extension = "EGL_MESA_image_dma_buf_export",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 52,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglExportDMABUFImageQueryMESA(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglExportDMABUFImageQueryMESA(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(3);
     PYGL_OPAQUE(0, dpy);
@@ -1139,11 +1987,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglExportDRMImageMESA_args[] = {"dpy", "image", "name", "handle", "stride"};
-static const PyGLCommand pygl_EGL_eglExportDRMImageMESA_info = {"eglExportDRMImageMESA", "eglExportDRMImageMESA(dpy, image, name, handle, stride) -> EGLBoolean", "($module, dpy, image, name, handle, stride, /)", pygl_EGL_eglExportDRMImageMESA_args, "EGL_MESA_drm_image", "", 5, 53, PYGL_API_EGL, 0, 5, 1, 0};
+static const PyGLCommand pygl_EGL_eglExportDRMImageMESA_info = {
+    .name = "eglExportDRMImageMESA",
+    .doc = "eglExportDRMImageMESA(dpy, image, name, handle, stride) -> EGLBoolean",
+    .text_signature = "($module, dpy, image, name, handle, stride, /)",
+    .arg_names = pygl_EGL_eglExportDRMImageMESA_args,
+    .extension = "EGL_MESA_drm_image",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 53,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglExportDRMImageMESA(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglExportDRMImageMESA(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(3);
     PYGL_OPAQUE(0, dpy);
@@ -1164,11 +2028,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglFenceNV_args[] = {"sync"};
-static const PyGLCommand pygl_EGL_eglFenceNV_info = {"eglFenceNV", "eglFenceNV(sync) -> EGLBoolean", "($module, sync, /)", pygl_EGL_eglFenceNV_args, "EGL_NV_sync", "", 1, 54, PYGL_API_EGL, 0, 1, 1, 0};
+static const PyGLCommand pygl_EGL_eglFenceNV_info = {
+    .name = "eglFenceNV",
+    .doc = "eglFenceNV(sync) -> EGLBoolean",
+    .text_signature = "($module, sync, /)",
+    .arg_names = pygl_EGL_eglFenceNV_args,
+    .extension = "EGL_NV_sync",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 54,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglFenceNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglFenceNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_OPAQUE(0, sync);
     PYGL_CONV_OK();
@@ -1181,11 +2061,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetCompositorTimingANDROID_args[] = {"dpy", "surface", "numTimestamps", "names", "values"};
-static const PyGLCommand pygl_EGL_eglGetCompositorTimingANDROID_info = {"eglGetCompositorTimingANDROID", "eglGetCompositorTimingANDROID(dpy, surface, numTimestamps, names, values) -> EGLBoolean", "($module, dpy, surface, numTimestamps, names, values, /)", pygl_EGL_eglGetCompositorTimingANDROID_args, "EGL_ANDROID_get_frame_timestamps", "", 5, 55, PYGL_API_EGL, 0, 5, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetCompositorTimingANDROID_info = {
+    .name = "eglGetCompositorTimingANDROID",
+    .doc = "eglGetCompositorTimingANDROID(dpy, surface, numTimestamps, names, values) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, numTimestamps, names, values, /)",
+    .arg_names = pygl_EGL_eglGetCompositorTimingANDROID_args,
+    .extension = "EGL_ANDROID_get_frame_timestamps",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 55,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetCompositorTimingANDROID(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetCompositorTimingANDROID(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, dpy);
@@ -1206,11 +2102,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetCompositorTimingSupportedANDROID_args[] = {"dpy", "surface", "name"};
-static const PyGLCommand pygl_EGL_eglGetCompositorTimingSupportedANDROID_info = {"eglGetCompositorTimingSupportedANDROID", "eglGetCompositorTimingSupportedANDROID(dpy, surface, name) -> EGLBoolean", "($module, dpy, surface, name, /)", pygl_EGL_eglGetCompositorTimingSupportedANDROID_args, "EGL_ANDROID_get_frame_timestamps", "", 3, 56, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetCompositorTimingSupportedANDROID_info = {
+    .name = "eglGetCompositorTimingSupportedANDROID",
+    .doc = "eglGetCompositorTimingSupportedANDROID(dpy, surface, name) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, name, /)",
+    .arg_names = pygl_EGL_eglGetCompositorTimingSupportedANDROID_args,
+    .extension = "EGL_ANDROID_get_frame_timestamps",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 56,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetCompositorTimingSupportedANDROID(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetCompositorTimingSupportedANDROID(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, surface);
@@ -1225,11 +2137,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetConfigAttrib_args[] = {"dpy", "config", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglGetConfigAttrib_info = {"eglGetConfigAttrib", "eglGetConfigAttrib(dpy, config, attribute, value) -> EGLBoolean", "($module, dpy, config, attribute, value, /)", pygl_EGL_eglGetConfigAttrib_args, "EGL_VERSION_EGL_1_0", "", 4, 57, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetConfigAttrib_info = {
+    .name = "eglGetConfigAttrib",
+    .doc = "eglGetConfigAttrib(dpy, config, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, config, attribute, value, /)",
+    .arg_names = pygl_EGL_eglGetConfigAttrib_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 57,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetConfigAttrib(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetConfigAttrib(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -1249,11 +2177,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetConfigs_args[] = {"dpy", "configs", "config_size", "num_config"};
-static const PyGLCommand pygl_EGL_eglGetConfigs_info = {"eglGetConfigs", "eglGetConfigs(dpy, configs, config_size, num_config) -> EGLBoolean", "($module, dpy, configs, config_size, num_config, /)", pygl_EGL_eglGetConfigs_args, "EGL_VERSION_EGL_1_0", "", 4, 58, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetConfigs_info = {
+    .name = "eglGetConfigs",
+    .doc = "eglGetConfigs(dpy, configs, config_size, num_config) -> EGLBoolean",
+    .text_signature = "($module, dpy, configs, config_size, num_config, /)",
+    .arg_names = pygl_EGL_eglGetConfigs_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 58,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetConfigs(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetConfigs(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, dpy);
@@ -1272,11 +2216,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglGetCurrentContext_info = {"eglGetCurrentContext", "eglGetCurrentContext() -> EGLContext", "($module)", NULL, "EGL_VERSION_EGL_1_4", "", 0, 59, PYGL_API_EGL, 0, 0, 4, 0};
+static const PyGLCommand pygl_EGL_eglGetCurrentContext_info = {
+    .name = "eglGetCurrentContext",
+    .doc = "eglGetCurrentContext() -> EGLContext",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "EGL_VERSION_EGL_1_4",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 59,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetCurrentContext(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetCurrentContext(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_R(_result, void *, (void), ());
@@ -1287,11 +2247,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglGetCurrentDisplay_info = {"eglGetCurrentDisplay", "eglGetCurrentDisplay() -> EGLDisplay", "($module)", NULL, "EGL_VERSION_EGL_1_0", "", 0, 60, PYGL_API_EGL, 0, 0, 4, 0};
+static const PyGLCommand pygl_EGL_eglGetCurrentDisplay_info = {
+    .name = "eglGetCurrentDisplay",
+    .doc = "eglGetCurrentDisplay() -> EGLDisplay",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 60,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetCurrentDisplay(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetCurrentDisplay(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_R(_result, void *, (void), ());
@@ -1303,11 +2279,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetCurrentSurface_args[] = {"readdraw"};
-static const PyGLCommand pygl_EGL_eglGetCurrentSurface_info = {"eglGetCurrentSurface", "eglGetCurrentSurface(readdraw) -> EGLSurface", "($module, readdraw, /)", pygl_EGL_eglGetCurrentSurface_args, "EGL_VERSION_EGL_1_0", "", 1, 61, PYGL_API_EGL, 0, 1, 4, 0};
+static const PyGLCommand pygl_EGL_eglGetCurrentSurface_info = {
+    .name = "eglGetCurrentSurface",
+    .doc = "eglGetCurrentSurface(readdraw) -> EGLSurface",
+    .text_signature = "($module, readdraw, /)",
+    .arg_names = pygl_EGL_eglGetCurrentSurface_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 61,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetCurrentSurface(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetCurrentSurface(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, readdraw);
     PYGL_CONV_OK();
@@ -1320,11 +2312,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetDisplay_args[] = {"display_id"};
-static const PyGLCommand pygl_EGL_eglGetDisplay_info = {"eglGetDisplay", "eglGetDisplay(display_id) -> EGLDisplay", "($module, display_id, /)", pygl_EGL_eglGetDisplay_args, "EGL_VERSION_EGL_1_0", "", 1, 62, PYGL_API_EGL, 0, 1, 4, 0};
+static const PyGLCommand pygl_EGL_eglGetDisplay_info = {
+    .name = "eglGetDisplay",
+    .doc = "eglGetDisplay(display_id) -> EGLDisplay",
+    .text_signature = "($module, display_id, /)",
+    .arg_names = pygl_EGL_eglGetDisplay_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 62,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetDisplay(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetDisplay(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_OPAQUE(0, display_id);
     PYGL_CONV_OK();
@@ -1337,11 +2345,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetDisplayDriverConfig_args[] = {"dpy"};
-static const PyGLCommand pygl_EGL_eglGetDisplayDriverConfig_info = {"eglGetDisplayDriverConfig", "eglGetDisplayDriverConfig(dpy) -> GLchar", "($module, dpy, /)", pygl_EGL_eglGetDisplayDriverConfig_args, "EGL_MESA_query_driver", "", 1, 63, PYGL_API_EGL, 0, 1, 2, 0};
+static const PyGLCommand pygl_EGL_eglGetDisplayDriverConfig_info = {
+    .name = "eglGetDisplayDriverConfig",
+    .doc = "eglGetDisplayDriverConfig(dpy) -> GLchar",
+    .text_signature = "($module, dpy, /)",
+    .arg_names = pygl_EGL_eglGetDisplayDriverConfig_args,
+    .extension = "EGL_MESA_query_driver",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 63,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 2,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetDisplayDriverConfig(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetDisplayDriverConfig(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_OPAQUE(0, dpy);
     PYGL_CONV_OK();
@@ -1354,11 +2378,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetDisplayDriverName_args[] = {"dpy"};
-static const PyGLCommand pygl_EGL_eglGetDisplayDriverName_info = {"eglGetDisplayDriverName", "eglGetDisplayDriverName(dpy) -> GLchar", "($module, dpy, /)", pygl_EGL_eglGetDisplayDriverName_args, "EGL_MESA_query_driver", "", 1, 64, PYGL_API_EGL, 0, 1, 2, 0};
+static const PyGLCommand pygl_EGL_eglGetDisplayDriverName_info = {
+    .name = "eglGetDisplayDriverName",
+    .doc = "eglGetDisplayDriverName(dpy) -> GLchar",
+    .text_signature = "($module, dpy, /)",
+    .arg_names = pygl_EGL_eglGetDisplayDriverName_args,
+    .extension = "EGL_MESA_query_driver",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 64,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 2,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetDisplayDriverName(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetDisplayDriverName(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_OPAQUE(0, dpy);
     PYGL_CONV_OK();
@@ -1370,11 +2410,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglGetError_info = {"eglGetError", "eglGetError() -> EGLint", "($module)", NULL, "EGL_VERSION_EGL_1_0", "", 0, 65, PYGL_API_EGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetError_info = {
+    .name = "eglGetError",
+    .doc = "eglGetError() -> EGLint",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 65,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetError(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetError(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_R(_result, int, (void), ());
@@ -1386,11 +2442,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetFrameTimestampSupportedANDROID_args[] = {"dpy", "surface", "timestamp"};
-static const PyGLCommand pygl_EGL_eglGetFrameTimestampSupportedANDROID_info = {"eglGetFrameTimestampSupportedANDROID", "eglGetFrameTimestampSupportedANDROID(dpy, surface, timestamp) -> EGLBoolean", "($module, dpy, surface, timestamp, /)", pygl_EGL_eglGetFrameTimestampSupportedANDROID_args, "EGL_ANDROID_get_frame_timestamps", "", 3, 66, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetFrameTimestampSupportedANDROID_info = {
+    .name = "eglGetFrameTimestampSupportedANDROID",
+    .doc = "eglGetFrameTimestampSupportedANDROID(dpy, surface, timestamp) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, timestamp, /)",
+    .arg_names = pygl_EGL_eglGetFrameTimestampSupportedANDROID_args,
+    .extension = "EGL_ANDROID_get_frame_timestamps",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 66,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetFrameTimestampSupportedANDROID(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetFrameTimestampSupportedANDROID(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, surface);
@@ -1405,11 +2477,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetFrameTimestampsANDROID_args[] = {"dpy", "surface", "frameId", "numTimestamps", "timestamps", "values"};
-static const PyGLCommand pygl_EGL_eglGetFrameTimestampsANDROID_info = {"eglGetFrameTimestampsANDROID", "eglGetFrameTimestampsANDROID(dpy, surface, frameId, numTimestamps, timestamps, values) -> EGLBoolean", "($module, dpy, surface, frameId, numTimestamps, timestamps, values, /)", pygl_EGL_eglGetFrameTimestampsANDROID_args, "EGL_ANDROID_get_frame_timestamps", "", 6, 67, PYGL_API_EGL, 0, 6, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetFrameTimestampsANDROID_info = {
+    .name = "eglGetFrameTimestampsANDROID",
+    .doc = "eglGetFrameTimestampsANDROID(dpy, surface, frameId, numTimestamps, timestamps, values) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, frameId, numTimestamps, timestamps, values, /)",
+    .arg_names = pygl_EGL_eglGetFrameTimestampsANDROID_args,
+    .extension = "EGL_ANDROID_get_frame_timestamps",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 67,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetFrameTimestampsANDROID(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetFrameTimestampsANDROID(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, dpy);
@@ -1431,11 +2519,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetMscRateANGLE_args[] = {"dpy", "surface", "numerator", "denominator"};
-static const PyGLCommand pygl_EGL_eglGetMscRateANGLE_info = {"eglGetMscRateANGLE", "eglGetMscRateANGLE(dpy, surface, numerator, denominator) -> EGLBoolean", "($module, dpy, surface, numerator, denominator, /)", pygl_EGL_eglGetMscRateANGLE_args, "EGL_ANGLE_sync_control_rate", "", 4, 68, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetMscRateANGLE_info = {
+    .name = "eglGetMscRateANGLE",
+    .doc = "eglGetMscRateANGLE(dpy, surface, numerator, denominator) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, numerator, denominator, /)",
+    .arg_names = pygl_EGL_eglGetMscRateANGLE_args,
+    .extension = "EGL_ANGLE_sync_control_rate",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 68,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetMscRateANGLE(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetMscRateANGLE(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, dpy);
@@ -1455,11 +2559,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetNativeClientBufferANDROID_args[] = {"buffer"};
-static const PyGLCommand pygl_EGL_eglGetNativeClientBufferANDROID_info = {"eglGetNativeClientBufferANDROID", "eglGetNativeClientBufferANDROID(buffer) -> EGLClientBuffer", "($module, buffer, /)", pygl_EGL_eglGetNativeClientBufferANDROID_args, "EGL_ANDROID_get_native_client_buffer", "", 1, 69, PYGL_API_EGL, 0, 1, 4, 0};
+static const PyGLCommand pygl_EGL_eglGetNativeClientBufferANDROID_info = {
+    .name = "eglGetNativeClientBufferANDROID",
+    .doc = "eglGetNativeClientBufferANDROID(buffer) -> EGLClientBuffer",
+    .text_signature = "($module, buffer, /)",
+    .arg_names = pygl_EGL_eglGetNativeClientBufferANDROID_args,
+    .extension = "EGL_ANDROID_get_native_client_buffer",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 69,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetNativeClientBufferANDROID(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetNativeClientBufferANDROID(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -1476,11 +2596,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetNextFrameIdANDROID_args[] = {"dpy", "surface", "frameId"};
-static const PyGLCommand pygl_EGL_eglGetNextFrameIdANDROID_info = {"eglGetNextFrameIdANDROID", "eglGetNextFrameIdANDROID(dpy, surface, frameId) -> EGLBoolean", "($module, dpy, surface, frameId, /)", pygl_EGL_eglGetNextFrameIdANDROID_args, "EGL_ANDROID_get_frame_timestamps", "", 3, 70, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetNextFrameIdANDROID_info = {
+    .name = "eglGetNextFrameIdANDROID",
+    .doc = "eglGetNextFrameIdANDROID(dpy, surface, frameId) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, frameId, /)",
+    .arg_names = pygl_EGL_eglGetNextFrameIdANDROID_args,
+    .extension = "EGL_ANDROID_get_frame_timestamps",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 70,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetNextFrameIdANDROID(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetNextFrameIdANDROID(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -1499,11 +2635,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetOutputLayersEXT_args[] = {"dpy", "attrib_list", "layers", "max_layers", "num_layers"};
-static const PyGLCommand pygl_EGL_eglGetOutputLayersEXT_info = {"eglGetOutputLayersEXT", "eglGetOutputLayersEXT(dpy, attrib_list, layers, max_layers, num_layers) -> EGLBoolean", "($module, dpy, attrib_list, layers, max_layers, num_layers, /)", pygl_EGL_eglGetOutputLayersEXT_args, "EGL_EXT_output_base", "", 5, 71, PYGL_API_EGL, 0, 5, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetOutputLayersEXT_info = {
+    .name = "eglGetOutputLayersEXT",
+    .doc = "eglGetOutputLayersEXT(dpy, attrib_list, layers, max_layers, num_layers) -> EGLBoolean",
+    .text_signature = "($module, dpy, attrib_list, layers, max_layers, num_layers, /)",
+    .arg_names = pygl_EGL_eglGetOutputLayersEXT_args,
+    .extension = "EGL_EXT_output_base",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 71,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetOutputLayersEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetOutputLayersEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(3);
     PYGL_OPAQUE(0, dpy);
@@ -1524,11 +2676,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetOutputPortsEXT_args[] = {"dpy", "attrib_list", "ports", "max_ports", "num_ports"};
-static const PyGLCommand pygl_EGL_eglGetOutputPortsEXT_info = {"eglGetOutputPortsEXT", "eglGetOutputPortsEXT(dpy, attrib_list, ports, max_ports, num_ports) -> EGLBoolean", "($module, dpy, attrib_list, ports, max_ports, num_ports, /)", pygl_EGL_eglGetOutputPortsEXT_args, "EGL_EXT_output_base", "", 5, 72, PYGL_API_EGL, 0, 5, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetOutputPortsEXT_info = {
+    .name = "eglGetOutputPortsEXT",
+    .doc = "eglGetOutputPortsEXT(dpy, attrib_list, ports, max_ports, num_ports) -> EGLBoolean",
+    .text_signature = "($module, dpy, attrib_list, ports, max_ports, num_ports, /)",
+    .arg_names = pygl_EGL_eglGetOutputPortsEXT_args,
+    .extension = "EGL_EXT_output_base",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 72,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetOutputPortsEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetOutputPortsEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(3);
     PYGL_OPAQUE(0, dpy);
@@ -1549,11 +2717,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetPlatformDisplay_args[] = {"platform", "native_display", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglGetPlatformDisplay_info = {"eglGetPlatformDisplay", "eglGetPlatformDisplay(platform, native_display, attrib_list) -> EGLDisplay", "($module, platform, native_display, attrib_list, /)", pygl_EGL_eglGetPlatformDisplay_args, "EGL_VERSION_EGL_1_5", "", 3, 73, PYGL_API_EGL, 0, 3, 4, 0};
+static const PyGLCommand pygl_EGL_eglGetPlatformDisplay_info = {
+    .name = "eglGetPlatformDisplay",
+    .doc = "eglGetPlatformDisplay(platform, native_display, attrib_list) -> EGLDisplay",
+    .text_signature = "($module, platform, native_display, attrib_list, /)",
+    .arg_names = pygl_EGL_eglGetPlatformDisplay_args,
+    .extension = "EGL_VERSION_EGL_1_5",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 73,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetPlatformDisplay(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetPlatformDisplay(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(2);
     PYGL_U(0, platform);
@@ -1572,11 +2756,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetPlatformDisplayEXT_args[] = {"platform", "native_display", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglGetPlatformDisplayEXT_info = {"eglGetPlatformDisplayEXT", "eglGetPlatformDisplayEXT(platform, native_display, attrib_list) -> EGLDisplay", "($module, platform, native_display, attrib_list, /)", pygl_EGL_eglGetPlatformDisplayEXT_args, "EGL_EXT_platform_base", "", 3, 74, PYGL_API_EGL, 0, 3, 4, 0};
+static const PyGLCommand pygl_EGL_eglGetPlatformDisplayEXT_info = {
+    .name = "eglGetPlatformDisplayEXT",
+    .doc = "eglGetPlatformDisplayEXT(platform, native_display, attrib_list) -> EGLDisplay",
+    .text_signature = "($module, platform, native_display, attrib_list, /)",
+    .arg_names = pygl_EGL_eglGetPlatformDisplayEXT_args,
+    .extension = "EGL_EXT_platform_base",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 74,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetPlatformDisplayEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetPlatformDisplayEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(2);
     PYGL_U(0, platform);
@@ -1595,11 +2795,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetProcAddress_args[] = {"procname"};
-static const PyGLCommand pygl_EGL_eglGetProcAddress_info = {"eglGetProcAddress", "eglGetProcAddress(procname) -> void", "($module, procname, /)", pygl_EGL_eglGetProcAddress_args, "EGL_VERSION_EGL_1_0", "", 1, 75, PYGL_API_EGL, 0, 1, 5, 0};
+static const PyGLCommand pygl_EGL_eglGetProcAddress_info = {
+    .name = "eglGetProcAddress",
+    .doc = "eglGetProcAddress(procname) -> void",
+    .text_signature = "($module, procname, /)",
+    .arg_names = pygl_EGL_eglGetProcAddress_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 75,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 5,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetProcAddress(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetProcAddress(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -1616,11 +2832,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetStreamFileDescriptorKHR_args[] = {"dpy", "stream"};
-static const PyGLCommand pygl_EGL_eglGetStreamFileDescriptorKHR_info = {"eglGetStreamFileDescriptorKHR", "eglGetStreamFileDescriptorKHR(dpy, stream) -> EGLNativeFileDescriptorKHR", "($module, dpy, stream, /)", pygl_EGL_eglGetStreamFileDescriptorKHR_args, "EGL_KHR_stream_cross_process_fd", "", 2, 76, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetStreamFileDescriptorKHR_info = {
+    .name = "eglGetStreamFileDescriptorKHR",
+    .doc = "eglGetStreamFileDescriptorKHR(dpy, stream) -> EGLNativeFileDescriptorKHR",
+    .text_signature = "($module, dpy, stream, /)",
+    .arg_names = pygl_EGL_eglGetStreamFileDescriptorKHR_args,
+    .extension = "EGL_KHR_stream_cross_process_fd",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 76,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetStreamFileDescriptorKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetStreamFileDescriptorKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, stream);
@@ -1634,11 +2866,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetSyncAttrib_args[] = {"dpy", "sync", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglGetSyncAttrib_info = {"eglGetSyncAttrib", "eglGetSyncAttrib(dpy, sync, attribute, value) -> EGLBoolean", "($module, dpy, sync, attribute, value, /)", pygl_EGL_eglGetSyncAttrib_args, "EGL_VERSION_EGL_1_5", "", 4, 77, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetSyncAttrib_info = {
+    .name = "eglGetSyncAttrib",
+    .doc = "eglGetSyncAttrib(dpy, sync, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, sync, attribute, value, /)",
+    .arg_names = pygl_EGL_eglGetSyncAttrib_args,
+    .extension = "EGL_VERSION_EGL_1_5",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 77,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetSyncAttrib(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetSyncAttrib(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -1658,11 +2906,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetSyncAttribKHR_args[] = {"dpy", "sync", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglGetSyncAttribKHR_info = {"eglGetSyncAttribKHR", "eglGetSyncAttribKHR(dpy, sync, attribute, value) -> EGLBoolean", "($module, dpy, sync, attribute, value, /)", pygl_EGL_eglGetSyncAttribKHR_args, "EGL_KHR_fence_sync", "EGL_KHR_reusable_sync", 4, 78, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetSyncAttribKHR_info = {
+    .name = "eglGetSyncAttribKHR",
+    .doc = "eglGetSyncAttribKHR(dpy, sync, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, sync, attribute, value, /)",
+    .arg_names = pygl_EGL_eglGetSyncAttribKHR_args,
+    .extension = "EGL_KHR_fence_sync",
+    .alternates = "EGL_KHR_reusable_sync",
+    .arg_count = 4,
+    .slot = 78,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetSyncAttribKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetSyncAttribKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -1682,11 +2946,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglGetSyncAttribNV_args[] = {"sync", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglGetSyncAttribNV_info = {"eglGetSyncAttribNV", "eglGetSyncAttribNV(sync, attribute, value) -> EGLBoolean", "($module, sync, attribute, value, /)", pygl_EGL_eglGetSyncAttribNV_args, "EGL_NV_sync", "", 3, 79, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetSyncAttribNV_info = {
+    .name = "eglGetSyncAttribNV",
+    .doc = "eglGetSyncAttribNV(sync, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, sync, attribute, value, /)",
+    .arg_names = pygl_EGL_eglGetSyncAttribNV_args,
+    .extension = "EGL_NV_sync",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 79,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetSyncAttribNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetSyncAttribNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, sync);
@@ -1704,11 +2984,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglGetSystemTimeFrequencyNV_info = {"eglGetSystemTimeFrequencyNV", "eglGetSystemTimeFrequencyNV() -> EGLuint64NV", "($module)", NULL, "EGL_NV_system_time", "", 0, 80, PYGL_API_EGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetSystemTimeFrequencyNV_info = {
+    .name = "eglGetSystemTimeFrequencyNV",
+    .doc = "eglGetSystemTimeFrequencyNV() -> EGLuint64NV",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "EGL_NV_system_time",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 80,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetSystemTimeFrequencyNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetSystemTimeFrequencyNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_R(_result, uint64_t, (void), ());
@@ -1719,11 +3015,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglGetSystemTimeNV_info = {"eglGetSystemTimeNV", "eglGetSystemTimeNV() -> EGLuint64NV", "($module)", NULL, "EGL_NV_system_time", "", 0, 81, PYGL_API_EGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_EGL_eglGetSystemTimeNV_info = {
+    .name = "eglGetSystemTimeNV",
+    .doc = "eglGetSystemTimeNV() -> EGLuint64NV",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "EGL_NV_system_time",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 81,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglGetSystemTimeNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglGetSystemTimeNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_R(_result, uint64_t, (void), ());
@@ -1735,11 +3047,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglInitialize_args[] = {"dpy", "major", "minor"};
-static const PyGLCommand pygl_EGL_eglInitialize_info = {"eglInitialize", "eglInitialize(dpy, major, minor) -> EGLBoolean", "($module, dpy, major, minor, /)", pygl_EGL_eglInitialize_args, "EGL_VERSION_EGL_1_0", "", 3, 82, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglInitialize_info = {
+    .name = "eglInitialize",
+    .doc = "eglInitialize(dpy, major, minor) -> EGLBoolean",
+    .text_signature = "($module, dpy, major, minor, /)",
+    .arg_names = pygl_EGL_eglInitialize_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 82,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglInitialize(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglInitialize(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, dpy);
@@ -1758,11 +3086,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglLabelObjectKHR_args[] = {"display", "objectType", "object", "label"};
-static const PyGLCommand pygl_EGL_eglLabelObjectKHR_info = {"eglLabelObjectKHR", "eglLabelObjectKHR(display, objectType, object, label) -> EGLint", "($module, display, objectType, object, label, /)", pygl_EGL_eglLabelObjectKHR_args, "EGL_KHR_debug", "", 4, 83, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglLabelObjectKHR_info = {
+    .name = "eglLabelObjectKHR",
+    .doc = "eglLabelObjectKHR(display, objectType, object, label) -> EGLint",
+    .text_signature = "($module, display, objectType, object, label, /)",
+    .arg_names = pygl_EGL_eglLabelObjectKHR_args,
+    .extension = "EGL_KHR_debug",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 83,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglLabelObjectKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglLabelObjectKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_OPAQUE(0, display);
     PYGL_U(1, objectType);
@@ -1778,11 +3122,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglLockSurfaceKHR_args[] = {"dpy", "surface", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglLockSurfaceKHR_info = {"eglLockSurfaceKHR", "eglLockSurfaceKHR(dpy, surface, attrib_list) -> EGLBoolean", "($module, dpy, surface, attrib_list, /)", pygl_EGL_eglLockSurfaceKHR_args, "EGL_KHR_lock_surface", "EGL_KHR_lock_surface3", 3, 84, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglLockSurfaceKHR_info = {
+    .name = "eglLockSurfaceKHR",
+    .doc = "eglLockSurfaceKHR(dpy, surface, attrib_list) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, attrib_list, /)",
+    .arg_names = pygl_EGL_eglLockSurfaceKHR_args,
+    .extension = "EGL_KHR_lock_surface",
+    .alternates = "EGL_KHR_lock_surface3",
+    .arg_count = 3,
+    .slot = 84,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglLockSurfaceKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglLockSurfaceKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -1801,11 +3161,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglMakeCurrent_args[] = {"dpy", "draw", "read", "ctx"};
-static const PyGLCommand pygl_EGL_eglMakeCurrent_info = {"eglMakeCurrent", "eglMakeCurrent(dpy, draw, read, ctx) -> EGLBoolean", "($module, dpy, draw, read, ctx, /)", pygl_EGL_eglMakeCurrent_args, "EGL_VERSION_EGL_1_0", "", 4, 85, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglMakeCurrent_info = {
+    .name = "eglMakeCurrent",
+    .doc = "eglMakeCurrent(dpy, draw, read, ctx) -> EGLBoolean",
+    .text_signature = "($module, dpy, draw, read, ctx, /)",
+    .arg_names = pygl_EGL_eglMakeCurrent_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 85,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglMakeCurrent(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglMakeCurrent(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, draw);
@@ -1821,11 +3197,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglOutputLayerAttribEXT_args[] = {"dpy", "layer", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglOutputLayerAttribEXT_info = {"eglOutputLayerAttribEXT", "eglOutputLayerAttribEXT(dpy, layer, attribute, value) -> EGLBoolean", "($module, dpy, layer, attribute, value, /)", pygl_EGL_eglOutputLayerAttribEXT_args, "EGL_EXT_output_base", "", 4, 86, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglOutputLayerAttribEXT_info = {
+    .name = "eglOutputLayerAttribEXT",
+    .doc = "eglOutputLayerAttribEXT(dpy, layer, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, layer, attribute, value, /)",
+    .arg_names = pygl_EGL_eglOutputLayerAttribEXT_args,
+    .extension = "EGL_EXT_output_base",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 86,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglOutputLayerAttribEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglOutputLayerAttribEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, layer);
@@ -1841,11 +3233,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglOutputPortAttribEXT_args[] = {"dpy", "port", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglOutputPortAttribEXT_info = {"eglOutputPortAttribEXT", "eglOutputPortAttribEXT(dpy, port, attribute, value) -> EGLBoolean", "($module, dpy, port, attribute, value, /)", pygl_EGL_eglOutputPortAttribEXT_args, "EGL_EXT_output_base", "", 4, 87, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglOutputPortAttribEXT_info = {
+    .name = "eglOutputPortAttribEXT",
+    .doc = "eglOutputPortAttribEXT(dpy, port, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, port, attribute, value, /)",
+    .arg_names = pygl_EGL_eglOutputPortAttribEXT_args,
+    .extension = "EGL_EXT_output_base",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 87,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglOutputPortAttribEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglOutputPortAttribEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, port);
@@ -1861,11 +3269,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglPostSubBufferNV_args[] = {"dpy", "surface", "x", "y", "width", "height"};
-static const PyGLCommand pygl_EGL_eglPostSubBufferNV_info = {"eglPostSubBufferNV", "eglPostSubBufferNV(dpy, surface, x, y, width, height) -> EGLBoolean", "($module, dpy, surface, x, y, width, height, /)", pygl_EGL_eglPostSubBufferNV_args, "EGL_NV_post_sub_buffer", "", 6, 88, PYGL_API_EGL, 0, 6, 1, 0};
+static const PyGLCommand pygl_EGL_eglPostSubBufferNV_info = {
+    .name = "eglPostSubBufferNV",
+    .doc = "eglPostSubBufferNV(dpy, surface, x, y, width, height) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, x, y, width, height, /)",
+    .arg_names = pygl_EGL_eglPostSubBufferNV_args,
+    .extension = "EGL_NV_post_sub_buffer",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 88,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglPostSubBufferNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglPostSubBufferNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, surface);
@@ -1882,11 +3306,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglQueryAPI_info = {"eglQueryAPI", "eglQueryAPI() -> EGLenum", "($module)", NULL, "EGL_VERSION_EGL_1_2", "", 0, 89, PYGL_API_EGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryAPI_info = {
+    .name = "eglQueryAPI",
+    .doc = "eglQueryAPI() -> EGLenum",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "EGL_VERSION_EGL_1_2",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 89,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryAPI(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryAPI(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_R(_result, unsigned int, (void), ());
@@ -1898,11 +3338,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryContext_args[] = {"dpy", "ctx", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQueryContext_info = {"eglQueryContext", "eglQueryContext(dpy, ctx, attribute, value) -> EGLBoolean", "($module, dpy, ctx, attribute, value, /)", pygl_EGL_eglQueryContext_args, "EGL_VERSION_EGL_1_0", "", 4, 90, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryContext_info = {
+    .name = "eglQueryContext",
+    .doc = "eglQueryContext(dpy, ctx, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, ctx, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQueryContext_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 90,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryContext(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryContext(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -1922,11 +3378,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryDebugKHR_args[] = {"attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQueryDebugKHR_info = {"eglQueryDebugKHR", "eglQueryDebugKHR(attribute, value) -> EGLBoolean", "($module, attribute, value, /)", pygl_EGL_eglQueryDebugKHR_args, "EGL_KHR_debug", "", 2, 91, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryDebugKHR_info = {
+    .name = "eglQueryDebugKHR",
+    .doc = "eglQueryDebugKHR(attribute, value) -> EGLBoolean",
+    .text_signature = "($module, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQueryDebugKHR_args,
+    .extension = "EGL_KHR_debug",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 91,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryDebugKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryDebugKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_I(0, attribute);
@@ -1944,11 +3416,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryDeviceAttribEXT_args[] = {"device", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQueryDeviceAttribEXT_info = {"eglQueryDeviceAttribEXT", "eglQueryDeviceAttribEXT(device, attribute, value) -> EGLBoolean", "($module, device, attribute, value, /)", pygl_EGL_eglQueryDeviceAttribEXT_args, "EGL_EXT_device_base", "EGL_EXT_device_query", 3, 92, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryDeviceAttribEXT_info = {
+    .name = "eglQueryDeviceAttribEXT",
+    .doc = "eglQueryDeviceAttribEXT(device, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, device, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQueryDeviceAttribEXT_args,
+    .extension = "EGL_EXT_device_base",
+    .alternates = "EGL_EXT_device_query",
+    .arg_count = 3,
+    .slot = 92,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryDeviceAttribEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryDeviceAttribEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, device);
@@ -1967,11 +3455,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryDeviceBinaryEXT_args[] = {"device", "name", "max_size", "value", "size"};
-static const PyGLCommand pygl_EGL_eglQueryDeviceBinaryEXT_info = {"eglQueryDeviceBinaryEXT", "eglQueryDeviceBinaryEXT(device, name, max_size, value, size) -> EGLBoolean", "($module, device, name, max_size, value, size, /)", pygl_EGL_eglQueryDeviceBinaryEXT_args, "EGL_EXT_device_persistent_id", "", 5, 93, PYGL_API_EGL, 0, 5, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryDeviceBinaryEXT_info = {
+    .name = "eglQueryDeviceBinaryEXT",
+    .doc = "eglQueryDeviceBinaryEXT(device, name, max_size, value, size) -> EGLBoolean",
+    .text_signature = "($module, device, name, max_size, value, size, /)",
+    .arg_names = pygl_EGL_eglQueryDeviceBinaryEXT_args,
+    .extension = "EGL_EXT_device_persistent_id",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 93,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryDeviceBinaryEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryDeviceBinaryEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, device);
@@ -1992,11 +3496,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryDeviceStringEXT_args[] = {"device", "name"};
-static const PyGLCommand pygl_EGL_eglQueryDeviceStringEXT_info = {"eglQueryDeviceStringEXT", "eglQueryDeviceStringEXT(device, name) -> GLchar", "($module, device, name, /)", pygl_EGL_eglQueryDeviceStringEXT_args, "EGL_EXT_device_base", "EGL_EXT_device_query", 2, 94, PYGL_API_EGL, 0, 2, 2, 0};
+static const PyGLCommand pygl_EGL_eglQueryDeviceStringEXT_info = {
+    .name = "eglQueryDeviceStringEXT",
+    .doc = "eglQueryDeviceStringEXT(device, name) -> GLchar",
+    .text_signature = "($module, device, name, /)",
+    .arg_names = pygl_EGL_eglQueryDeviceStringEXT_args,
+    .extension = "EGL_EXT_device_base",
+    .alternates = "EGL_EXT_device_query",
+    .arg_count = 2,
+    .slot = 94,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 2,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryDeviceStringEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryDeviceStringEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, device);
     PYGL_I(1, name);
@@ -2010,11 +3530,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryDevicesEXT_args[] = {"max_devices", "devices", "num_devices"};
-static const PyGLCommand pygl_EGL_eglQueryDevicesEXT_info = {"eglQueryDevicesEXT", "eglQueryDevicesEXT(max_devices, devices, num_devices) -> EGLBoolean", "($module, max_devices, devices, num_devices, /)", pygl_EGL_eglQueryDevicesEXT_args, "EGL_EXT_device_base", "EGL_EXT_device_enumeration", 3, 95, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryDevicesEXT_info = {
+    .name = "eglQueryDevicesEXT",
+    .doc = "eglQueryDevicesEXT(max_devices, devices, num_devices) -> EGLBoolean",
+    .text_signature = "($module, max_devices, devices, num_devices, /)",
+    .arg_names = pygl_EGL_eglQueryDevicesEXT_args,
+    .extension = "EGL_EXT_device_base",
+    .alternates = "EGL_EXT_device_enumeration",
+    .arg_count = 3,
+    .slot = 95,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryDevicesEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryDevicesEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(2);
     PYGL_I(0, max_devices);
@@ -2033,11 +3569,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryDisplayAttribEXT_args[] = {"dpy", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQueryDisplayAttribEXT_info = {"eglQueryDisplayAttribEXT", "eglQueryDisplayAttribEXT(dpy, attribute, value) -> EGLBoolean", "($module, dpy, attribute, value, /)", pygl_EGL_eglQueryDisplayAttribEXT_args, "EGL_EXT_device_base", "EGL_EXT_device_query", 3, 96, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryDisplayAttribEXT_info = {
+    .name = "eglQueryDisplayAttribEXT",
+    .doc = "eglQueryDisplayAttribEXT(dpy, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQueryDisplayAttribEXT_args,
+    .extension = "EGL_EXT_device_base",
+    .alternates = "EGL_EXT_device_query",
+    .arg_count = 3,
+    .slot = 96,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryDisplayAttribEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryDisplayAttribEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2056,11 +3608,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryDisplayAttribKHR_args[] = {"dpy", "name", "value"};
-static const PyGLCommand pygl_EGL_eglQueryDisplayAttribKHR_info = {"eglQueryDisplayAttribKHR", "eglQueryDisplayAttribKHR(dpy, name, value) -> EGLBoolean", "($module, dpy, name, value, /)", pygl_EGL_eglQueryDisplayAttribKHR_args, "EGL_KHR_display_reference", "", 3, 97, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryDisplayAttribKHR_info = {
+    .name = "eglQueryDisplayAttribKHR",
+    .doc = "eglQueryDisplayAttribKHR(dpy, name, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, name, value, /)",
+    .arg_names = pygl_EGL_eglQueryDisplayAttribKHR_args,
+    .extension = "EGL_KHR_display_reference",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 97,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryDisplayAttribKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryDisplayAttribKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2079,11 +3647,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryDisplayAttribNV_args[] = {"dpy", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQueryDisplayAttribNV_info = {"eglQueryDisplayAttribNV", "eglQueryDisplayAttribNV(dpy, attribute, value) -> EGLBoolean", "($module, dpy, attribute, value, /)", pygl_EGL_eglQueryDisplayAttribNV_args, "EGL_NV_stream_metadata", "", 3, 98, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryDisplayAttribNV_info = {
+    .name = "eglQueryDisplayAttribNV",
+    .doc = "eglQueryDisplayAttribNV(dpy, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQueryDisplayAttribNV_args,
+    .extension = "EGL_NV_stream_metadata",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 98,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryDisplayAttribNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryDisplayAttribNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2102,11 +3686,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryDmaBufFormatsEXT_args[] = {"dpy", "max_formats", "formats", "num_formats"};
-static const PyGLCommand pygl_EGL_eglQueryDmaBufFormatsEXT_info = {"eglQueryDmaBufFormatsEXT", "eglQueryDmaBufFormatsEXT(dpy, max_formats, formats, num_formats) -> EGLBoolean", "($module, dpy, max_formats, formats, num_formats, /)", pygl_EGL_eglQueryDmaBufFormatsEXT_args, "EGL_EXT_image_dma_buf_import_modifiers", "", 4, 99, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryDmaBufFormatsEXT_info = {
+    .name = "eglQueryDmaBufFormatsEXT",
+    .doc = "eglQueryDmaBufFormatsEXT(dpy, max_formats, formats, num_formats) -> EGLBoolean",
+    .text_signature = "($module, dpy, max_formats, formats, num_formats, /)",
+    .arg_names = pygl_EGL_eglQueryDmaBufFormatsEXT_args,
+    .extension = "EGL_EXT_image_dma_buf_import_modifiers",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 99,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryDmaBufFormatsEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryDmaBufFormatsEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, dpy);
@@ -2126,11 +3726,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryDmaBufModifiersEXT_args[] = {"dpy", "format", "max_modifiers", "modifiers", "external_only", "num_modifiers"};
-static const PyGLCommand pygl_EGL_eglQueryDmaBufModifiersEXT_info = {"eglQueryDmaBufModifiersEXT", "eglQueryDmaBufModifiersEXT(dpy, format, max_modifiers, modifiers, external_only, num_modifiers) -> EGLBoolean", "($module, dpy, format, max_modifiers, modifiers, external_only, num_modifiers, /)", pygl_EGL_eglQueryDmaBufModifiersEXT_args, "EGL_EXT_image_dma_buf_import_modifiers", "", 6, 100, PYGL_API_EGL, 0, 6, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryDmaBufModifiersEXT_info = {
+    .name = "eglQueryDmaBufModifiersEXT",
+    .doc = "eglQueryDmaBufModifiersEXT(dpy, format, max_modifiers, modifiers, external_only, num_modifiers) -> EGLBoolean",
+    .text_signature = "($module, dpy, format, max_modifiers, modifiers, external_only, num_modifiers, /)",
+    .arg_names = pygl_EGL_eglQueryDmaBufModifiersEXT_args,
+    .extension = "EGL_EXT_image_dma_buf_import_modifiers",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 100,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryDmaBufModifiersEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryDmaBufModifiersEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_FRAME(3);
     PYGL_OPAQUE(0, dpy);
@@ -2152,11 +3768,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryNativeDisplayNV_args[] = {"dpy", "display_id"};
-static const PyGLCommand pygl_EGL_eglQueryNativeDisplayNV_info = {"eglQueryNativeDisplayNV", "eglQueryNativeDisplayNV(dpy, display_id) -> EGLBoolean", "($module, dpy, display_id, /)", pygl_EGL_eglQueryNativeDisplayNV_args, "EGL_NV_native_query", "", 2, 101, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryNativeDisplayNV_info = {
+    .name = "eglQueryNativeDisplayNV",
+    .doc = "eglQueryNativeDisplayNV(dpy, display_id) -> EGLBoolean",
+    .text_signature = "($module, dpy, display_id, /)",
+    .arg_names = pygl_EGL_eglQueryNativeDisplayNV_args,
+    .extension = "EGL_NV_native_query",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 101,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryNativeDisplayNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryNativeDisplayNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2174,11 +3806,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryNativePixmapNV_args[] = {"dpy", "surf", "pixmap"};
-static const PyGLCommand pygl_EGL_eglQueryNativePixmapNV_info = {"eglQueryNativePixmapNV", "eglQueryNativePixmapNV(dpy, surf, pixmap) -> EGLBoolean", "($module, dpy, surf, pixmap, /)", pygl_EGL_eglQueryNativePixmapNV_args, "EGL_NV_native_query", "", 3, 102, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryNativePixmapNV_info = {
+    .name = "eglQueryNativePixmapNV",
+    .doc = "eglQueryNativePixmapNV(dpy, surf, pixmap) -> EGLBoolean",
+    .text_signature = "($module, dpy, surf, pixmap, /)",
+    .arg_names = pygl_EGL_eglQueryNativePixmapNV_args,
+    .extension = "EGL_NV_native_query",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 102,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryNativePixmapNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryNativePixmapNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2197,11 +3845,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryNativeWindowNV_args[] = {"dpy", "surf", "window"};
-static const PyGLCommand pygl_EGL_eglQueryNativeWindowNV_info = {"eglQueryNativeWindowNV", "eglQueryNativeWindowNV(dpy, surf, window) -> EGLBoolean", "($module, dpy, surf, window, /)", pygl_EGL_eglQueryNativeWindowNV_args, "EGL_NV_native_query", "", 3, 103, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryNativeWindowNV_info = {
+    .name = "eglQueryNativeWindowNV",
+    .doc = "eglQueryNativeWindowNV(dpy, surf, window) -> EGLBoolean",
+    .text_signature = "($module, dpy, surf, window, /)",
+    .arg_names = pygl_EGL_eglQueryNativeWindowNV_args,
+    .extension = "EGL_NV_native_query",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 103,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryNativeWindowNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryNativeWindowNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2220,11 +3884,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryOutputLayerAttribEXT_args[] = {"dpy", "layer", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQueryOutputLayerAttribEXT_info = {"eglQueryOutputLayerAttribEXT", "eglQueryOutputLayerAttribEXT(dpy, layer, attribute, value) -> EGLBoolean", "($module, dpy, layer, attribute, value, /)", pygl_EGL_eglQueryOutputLayerAttribEXT_args, "EGL_EXT_output_base", "", 4, 104, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryOutputLayerAttribEXT_info = {
+    .name = "eglQueryOutputLayerAttribEXT",
+    .doc = "eglQueryOutputLayerAttribEXT(dpy, layer, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, layer, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQueryOutputLayerAttribEXT_args,
+    .extension = "EGL_EXT_output_base",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 104,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryOutputLayerAttribEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryOutputLayerAttribEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2244,11 +3924,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryOutputLayerStringEXT_args[] = {"dpy", "layer", "name"};
-static const PyGLCommand pygl_EGL_eglQueryOutputLayerStringEXT_info = {"eglQueryOutputLayerStringEXT", "eglQueryOutputLayerStringEXT(dpy, layer, name) -> GLchar", "($module, dpy, layer, name, /)", pygl_EGL_eglQueryOutputLayerStringEXT_args, "EGL_EXT_output_base", "", 3, 105, PYGL_API_EGL, 0, 3, 2, 0};
+static const PyGLCommand pygl_EGL_eglQueryOutputLayerStringEXT_info = {
+    .name = "eglQueryOutputLayerStringEXT",
+    .doc = "eglQueryOutputLayerStringEXT(dpy, layer, name) -> GLchar",
+    .text_signature = "($module, dpy, layer, name, /)",
+    .arg_names = pygl_EGL_eglQueryOutputLayerStringEXT_args,
+    .extension = "EGL_EXT_output_base",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 105,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 2,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryOutputLayerStringEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryOutputLayerStringEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, layer);
@@ -2263,11 +3959,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryOutputPortAttribEXT_args[] = {"dpy", "port", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQueryOutputPortAttribEXT_info = {"eglQueryOutputPortAttribEXT", "eglQueryOutputPortAttribEXT(dpy, port, attribute, value) -> EGLBoolean", "($module, dpy, port, attribute, value, /)", pygl_EGL_eglQueryOutputPortAttribEXT_args, "EGL_EXT_output_base", "", 4, 106, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryOutputPortAttribEXT_info = {
+    .name = "eglQueryOutputPortAttribEXT",
+    .doc = "eglQueryOutputPortAttribEXT(dpy, port, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, port, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQueryOutputPortAttribEXT_args,
+    .extension = "EGL_EXT_output_base",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 106,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryOutputPortAttribEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryOutputPortAttribEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2287,11 +3999,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryOutputPortStringEXT_args[] = {"dpy", "port", "name"};
-static const PyGLCommand pygl_EGL_eglQueryOutputPortStringEXT_info = {"eglQueryOutputPortStringEXT", "eglQueryOutputPortStringEXT(dpy, port, name) -> GLchar", "($module, dpy, port, name, /)", pygl_EGL_eglQueryOutputPortStringEXT_args, "EGL_EXT_output_base", "", 3, 107, PYGL_API_EGL, 0, 3, 2, 0};
+static const PyGLCommand pygl_EGL_eglQueryOutputPortStringEXT_info = {
+    .name = "eglQueryOutputPortStringEXT",
+    .doc = "eglQueryOutputPortStringEXT(dpy, port, name) -> GLchar",
+    .text_signature = "($module, dpy, port, name, /)",
+    .arg_names = pygl_EGL_eglQueryOutputPortStringEXT_args,
+    .extension = "EGL_EXT_output_base",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 107,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 2,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryOutputPortStringEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryOutputPortStringEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, port);
@@ -2306,11 +4034,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryStreamAttribKHR_args[] = {"dpy", "stream", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQueryStreamAttribKHR_info = {"eglQueryStreamAttribKHR", "eglQueryStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean", "($module, dpy, stream, attribute, value, /)", pygl_EGL_eglQueryStreamAttribKHR_args, "EGL_KHR_stream_attrib", "", 4, 108, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryStreamAttribKHR_info = {
+    .name = "eglQueryStreamAttribKHR",
+    .doc = "eglQueryStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQueryStreamAttribKHR_args,
+    .extension = "EGL_KHR_stream_attrib",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 108,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryStreamAttribKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryStreamAttribKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2330,11 +4074,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryStreamConsumerEventNV_args[] = {"dpy", "stream", "timeout", "event", "aux"};
-static const PyGLCommand pygl_EGL_eglQueryStreamConsumerEventNV_info = {"eglQueryStreamConsumerEventNV", "eglQueryStreamConsumerEventNV(dpy, stream, timeout, event, aux) -> EGLint", "($module, dpy, stream, timeout, event, aux, /)", pygl_EGL_eglQueryStreamConsumerEventNV_args, "EGL_NV_stream_consumer_eglimage", "", 5, 109, PYGL_API_EGL, 0, 5, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryStreamConsumerEventNV_info = {
+    .name = "eglQueryStreamConsumerEventNV",
+    .doc = "eglQueryStreamConsumerEventNV(dpy, stream, timeout, event, aux) -> EGLint",
+    .text_signature = "($module, dpy, stream, timeout, event, aux, /)",
+    .arg_names = pygl_EGL_eglQueryStreamConsumerEventNV_args,
+    .extension = "EGL_NV_stream_consumer_eglimage",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 109,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryStreamConsumerEventNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryStreamConsumerEventNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, dpy);
@@ -2355,11 +4115,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryStreamKHR_args[] = {"dpy", "stream", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQueryStreamKHR_info = {"eglQueryStreamKHR", "eglQueryStreamKHR(dpy, stream, attribute, value) -> EGLBoolean", "($module, dpy, stream, attribute, value, /)", pygl_EGL_eglQueryStreamKHR_args, "EGL_KHR_stream", "", 4, 110, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryStreamKHR_info = {
+    .name = "eglQueryStreamKHR",
+    .doc = "eglQueryStreamKHR(dpy, stream, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQueryStreamKHR_args,
+    .extension = "EGL_KHR_stream",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 110,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryStreamKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryStreamKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2379,11 +4155,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryStreamMetadataNV_args[] = {"dpy", "stream", "name", "n", "offset", "size", "data"};
-static const PyGLCommand pygl_EGL_eglQueryStreamMetadataNV_info = {"eglQueryStreamMetadataNV", "eglQueryStreamMetadataNV(dpy, stream, name, n, offset, size, data) -> EGLBoolean", "($module, dpy, stream, name, n, offset, size, data, /)", pygl_EGL_eglQueryStreamMetadataNV_args, "EGL_NV_stream_metadata", "", 7, 111, PYGL_API_EGL, 0, 7, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryStreamMetadataNV_info = {
+    .name = "eglQueryStreamMetadataNV",
+    .doc = "eglQueryStreamMetadataNV(dpy, stream, name, n, offset, size, data) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, name, n, offset, size, data, /)",
+    .arg_names = pygl_EGL_eglQueryStreamMetadataNV_args,
+    .extension = "EGL_NV_stream_metadata",
+    .alternates = "",
+    .arg_count = 7,
+    .slot = 111,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 7,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryStreamMetadataNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryStreamMetadataNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(7);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2406,11 +4198,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryStreamTimeKHR_args[] = {"dpy", "stream", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQueryStreamTimeKHR_info = {"eglQueryStreamTimeKHR", "eglQueryStreamTimeKHR(dpy, stream, attribute, value) -> EGLBoolean", "($module, dpy, stream, attribute, value, /)", pygl_EGL_eglQueryStreamTimeKHR_args, "EGL_KHR_stream_fifo", "", 4, 112, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryStreamTimeKHR_info = {
+    .name = "eglQueryStreamTimeKHR",
+    .doc = "eglQueryStreamTimeKHR(dpy, stream, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQueryStreamTimeKHR_args,
+    .extension = "EGL_KHR_stream_fifo",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 112,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryStreamTimeKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryStreamTimeKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2430,11 +4238,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryStreamu64KHR_args[] = {"dpy", "stream", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQueryStreamu64KHR_info = {"eglQueryStreamu64KHR", "eglQueryStreamu64KHR(dpy, stream, attribute, value) -> EGLBoolean", "($module, dpy, stream, attribute, value, /)", pygl_EGL_eglQueryStreamu64KHR_args, "EGL_KHR_stream", "", 4, 113, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryStreamu64KHR_info = {
+    .name = "eglQueryStreamu64KHR",
+    .doc = "eglQueryStreamu64KHR(dpy, stream, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQueryStreamu64KHR_args,
+    .extension = "EGL_KHR_stream",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 113,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryStreamu64KHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryStreamu64KHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2454,11 +4278,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryString_args[] = {"dpy", "name"};
-static const PyGLCommand pygl_EGL_eglQueryString_info = {"eglQueryString", "eglQueryString(dpy, name) -> GLchar", "($module, dpy, name, /)", pygl_EGL_eglQueryString_args, "EGL_VERSION_EGL_1_0", "", 2, 114, PYGL_API_EGL, 0, 2, 2, 0};
+static const PyGLCommand pygl_EGL_eglQueryString_info = {
+    .name = "eglQueryString",
+    .doc = "eglQueryString(dpy, name) -> GLchar",
+    .text_signature = "($module, dpy, name, /)",
+    .arg_names = pygl_EGL_eglQueryString_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 114,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 2,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryString(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryString(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_I(1, name);
@@ -2472,11 +4312,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQuerySupportedCompressionRatesEXT_args[] = {"dpy", "config", "attrib_list", "rates", "rate_size", "num_rates"};
-static const PyGLCommand pygl_EGL_eglQuerySupportedCompressionRatesEXT_info = {"eglQuerySupportedCompressionRatesEXT", "eglQuerySupportedCompressionRatesEXT(dpy, config, attrib_list, rates, rate_size, num_rates) -> EGLBoolean", "($module, dpy, config, attrib_list, rates, rate_size, num_rates, /)", pygl_EGL_eglQuerySupportedCompressionRatesEXT_args, "EGL_EXT_surface_compression", "", 6, 115, PYGL_API_EGL, 0, 6, 1, 0};
+static const PyGLCommand pygl_EGL_eglQuerySupportedCompressionRatesEXT_info = {
+    .name = "eglQuerySupportedCompressionRatesEXT",
+    .doc = "eglQuerySupportedCompressionRatesEXT(dpy, config, attrib_list, rates, rate_size, num_rates) -> EGLBoolean",
+    .text_signature = "($module, dpy, config, attrib_list, rates, rate_size, num_rates, /)",
+    .arg_names = pygl_EGL_eglQuerySupportedCompressionRatesEXT_args,
+    .extension = "EGL_EXT_surface_compression",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 115,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQuerySupportedCompressionRatesEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQuerySupportedCompressionRatesEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_FRAME(3);
     PYGL_OPAQUE(0, dpy);
@@ -2498,11 +4354,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQuerySurface_args[] = {"dpy", "surface", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQuerySurface_info = {"eglQuerySurface", "eglQuerySurface(dpy, surface, attribute, value) -> EGLBoolean", "($module, dpy, surface, attribute, value, /)", pygl_EGL_eglQuerySurface_args, "EGL_VERSION_EGL_1_0", "", 4, 116, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglQuerySurface_info = {
+    .name = "eglQuerySurface",
+    .doc = "eglQuerySurface(dpy, surface, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQuerySurface_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 116,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQuerySurface(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQuerySurface(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2522,11 +4394,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQuerySurface64KHR_args[] = {"dpy", "surface", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQuerySurface64KHR_info = {"eglQuerySurface64KHR", "eglQuerySurface64KHR(dpy, surface, attribute, value) -> EGLBoolean", "($module, dpy, surface, attribute, value, /)", pygl_EGL_eglQuerySurface64KHR_args, "EGL_KHR_lock_surface3", "", 4, 117, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglQuerySurface64KHR_info = {
+    .name = "eglQuerySurface64KHR",
+    .doc = "eglQuerySurface64KHR(dpy, surface, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQuerySurface64KHR_args,
+    .extension = "EGL_KHR_lock_surface3",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 117,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQuerySurface64KHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQuerySurface64KHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2546,11 +4434,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQuerySurfacePointerANGLE_args[] = {"dpy", "surface", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQuerySurfacePointerANGLE_info = {"eglQuerySurfacePointerANGLE", "eglQuerySurfacePointerANGLE(dpy, surface, attribute, value) -> EGLBoolean", "($module, dpy, surface, attribute, value, /)", pygl_EGL_eglQuerySurfacePointerANGLE_args, "EGL_ANGLE_query_surface_pointer", "", 4, 118, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglQuerySurfacePointerANGLE_info = {
+    .name = "eglQuerySurfacePointerANGLE",
+    .doc = "eglQuerySurfacePointerANGLE(dpy, surface, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQuerySurfacePointerANGLE_args,
+    .extension = "EGL_ANGLE_query_surface_pointer",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 118,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQuerySurfacePointerANGLE(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQuerySurfacePointerANGLE(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2570,11 +4474,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglQueryWaylandBufferWL_args[] = {"dpy", "buffer", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglQueryWaylandBufferWL_info = {"eglQueryWaylandBufferWL", "eglQueryWaylandBufferWL(dpy, buffer, attribute, value) -> EGLBoolean", "($module, dpy, buffer, attribute, value, /)", pygl_EGL_eglQueryWaylandBufferWL_args, "EGL_WL_bind_wayland_display", "", 4, 119, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglQueryWaylandBufferWL_info = {
+    .name = "eglQueryWaylandBufferWL",
+    .doc = "eglQueryWaylandBufferWL(dpy, buffer, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, buffer, attribute, value, /)",
+    .arg_names = pygl_EGL_eglQueryWaylandBufferWL_args,
+    .extension = "EGL_WL_bind_wayland_display",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 119,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglQueryWaylandBufferWL(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglQueryWaylandBufferWL(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, dpy);
@@ -2594,11 +4514,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglReleaseTexImage_args[] = {"dpy", "surface", "buffer"};
-static const PyGLCommand pygl_EGL_eglReleaseTexImage_info = {"eglReleaseTexImage", "eglReleaseTexImage(dpy, surface, buffer) -> EGLBoolean", "($module, dpy, surface, buffer, /)", pygl_EGL_eglReleaseTexImage_args, "EGL_VERSION_EGL_1_1", "", 3, 120, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglReleaseTexImage_info = {
+    .name = "eglReleaseTexImage",
+    .doc = "eglReleaseTexImage(dpy, surface, buffer) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, buffer, /)",
+    .arg_names = pygl_EGL_eglReleaseTexImage_args,
+    .extension = "EGL_VERSION_EGL_1_1",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 120,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglReleaseTexImage(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglReleaseTexImage(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, surface);
@@ -2612,11 +4548,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglReleaseThread_info = {"eglReleaseThread", "eglReleaseThread() -> EGLBoolean", "($module)", NULL, "EGL_VERSION_EGL_1_2", "", 0, 121, PYGL_API_EGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_EGL_eglReleaseThread_info = {
+    .name = "eglReleaseThread",
+    .doc = "eglReleaseThread() -> EGLBoolean",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "EGL_VERSION_EGL_1_2",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 121,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglReleaseThread(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglReleaseThread(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_R(_result, unsigned int, (void), ());
@@ -2628,11 +4580,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglResetStreamNV_args[] = {"dpy", "stream"};
-static const PyGLCommand pygl_EGL_eglResetStreamNV_info = {"eglResetStreamNV", "eglResetStreamNV(dpy, stream) -> EGLBoolean", "($module, dpy, stream, /)", pygl_EGL_eglResetStreamNV_args, "EGL_NV_stream_reset", "", 2, 122, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglResetStreamNV_info = {
+    .name = "eglResetStreamNV",
+    .doc = "eglResetStreamNV(dpy, stream) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, /)",
+    .arg_names = pygl_EGL_eglResetStreamNV_args,
+    .extension = "EGL_NV_stream_reset",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 122,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglResetStreamNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglResetStreamNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, stream);
@@ -2646,11 +4614,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglSetBlobCacheFuncsANDROID_args[] = {"dpy", "set", "get"};
-static const PyGLCommand pygl_EGL_eglSetBlobCacheFuncsANDROID_info = {"eglSetBlobCacheFuncsANDROID", "eglSetBlobCacheFuncsANDROID(dpy, set, get) -> None", "($module, dpy, set, get, /)", pygl_EGL_eglSetBlobCacheFuncsANDROID_args, "EGL_ANDROID_blob_cache", "", 3, 123, PYGL_API_EGL, 0, 3, 0, 0};
+static const PyGLCommand pygl_EGL_eglSetBlobCacheFuncsANDROID_info = {
+    .name = "eglSetBlobCacheFuncsANDROID",
+    .doc = "eglSetBlobCacheFuncsANDROID(dpy, set, get) -> None",
+    .text_signature = "($module, dpy, set, get, /)",
+    .arg_names = pygl_EGL_eglSetBlobCacheFuncsANDROID_args,
+    .extension = "EGL_ANDROID_blob_cache",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 123,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglSetBlobCacheFuncsANDROID(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglSetBlobCacheFuncsANDROID(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, set);
@@ -2665,11 +4649,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglSetDamageRegionKHR_args[] = {"dpy", "surface", "rects", "n_rects"};
-static const PyGLCommand pygl_EGL_eglSetDamageRegionKHR_info = {"eglSetDamageRegionKHR", "eglSetDamageRegionKHR(dpy, surface, rects, n_rects) -> EGLBoolean", "($module, dpy, surface, rects, n_rects, /)", pygl_EGL_eglSetDamageRegionKHR_args, "EGL_KHR_partial_update", "", 4, 124, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglSetDamageRegionKHR_info = {
+    .name = "eglSetDamageRegionKHR",
+    .doc = "eglSetDamageRegionKHR(dpy, surface, rects, n_rects) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, rects, n_rects, /)",
+    .arg_names = pygl_EGL_eglSetDamageRegionKHR_args,
+    .extension = "EGL_KHR_partial_update",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 124,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglSetDamageRegionKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglSetDamageRegionKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2689,11 +4689,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglSetStreamAttribKHR_args[] = {"dpy", "stream", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglSetStreamAttribKHR_info = {"eglSetStreamAttribKHR", "eglSetStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean", "($module, dpy, stream, attribute, value, /)", pygl_EGL_eglSetStreamAttribKHR_args, "EGL_KHR_stream_attrib", "", 4, 125, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglSetStreamAttribKHR_info = {
+    .name = "eglSetStreamAttribKHR",
+    .doc = "eglSetStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, attribute, value, /)",
+    .arg_names = pygl_EGL_eglSetStreamAttribKHR_args,
+    .extension = "EGL_KHR_stream_attrib",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 125,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglSetStreamAttribKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglSetStreamAttribKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, stream);
@@ -2709,11 +4725,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglSetStreamMetadataNV_args[] = {"dpy", "stream", "n", "offset", "size", "data"};
-static const PyGLCommand pygl_EGL_eglSetStreamMetadataNV_info = {"eglSetStreamMetadataNV", "eglSetStreamMetadataNV(dpy, stream, n, offset, size, data) -> EGLBoolean", "($module, dpy, stream, n, offset, size, data, /)", pygl_EGL_eglSetStreamMetadataNV_args, "EGL_NV_stream_metadata", "", 6, 126, PYGL_API_EGL, 0, 6, 1, 0};
+static const PyGLCommand pygl_EGL_eglSetStreamMetadataNV_info = {
+    .name = "eglSetStreamMetadataNV",
+    .doc = "eglSetStreamMetadataNV(dpy, stream, n, offset, size, data) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, n, offset, size, data, /)",
+    .arg_names = pygl_EGL_eglSetStreamMetadataNV_args,
+    .extension = "EGL_NV_stream_metadata",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 126,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglSetStreamMetadataNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglSetStreamMetadataNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2735,11 +4767,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglSignalSyncKHR_args[] = {"dpy", "sync", "mode"};
-static const PyGLCommand pygl_EGL_eglSignalSyncKHR_info = {"eglSignalSyncKHR", "eglSignalSyncKHR(dpy, sync, mode) -> EGLBoolean", "($module, dpy, sync, mode, /)", pygl_EGL_eglSignalSyncKHR_args, "EGL_KHR_reusable_sync", "", 3, 127, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglSignalSyncKHR_info = {
+    .name = "eglSignalSyncKHR",
+    .doc = "eglSignalSyncKHR(dpy, sync, mode) -> EGLBoolean",
+    .text_signature = "($module, dpy, sync, mode, /)",
+    .arg_names = pygl_EGL_eglSignalSyncKHR_args,
+    .extension = "EGL_KHR_reusable_sync",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 127,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglSignalSyncKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglSignalSyncKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, sync);
@@ -2754,11 +4802,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglSignalSyncNV_args[] = {"sync", "mode"};
-static const PyGLCommand pygl_EGL_eglSignalSyncNV_info = {"eglSignalSyncNV", "eglSignalSyncNV(sync, mode) -> EGLBoolean", "($module, sync, mode, /)", pygl_EGL_eglSignalSyncNV_args, "EGL_NV_sync", "", 2, 128, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglSignalSyncNV_info = {
+    .name = "eglSignalSyncNV",
+    .doc = "eglSignalSyncNV(sync, mode) -> EGLBoolean",
+    .text_signature = "($module, sync, mode, /)",
+    .arg_names = pygl_EGL_eglSignalSyncNV_args,
+    .extension = "EGL_NV_sync",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 128,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglSignalSyncNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglSignalSyncNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, sync);
     PYGL_U(1, mode);
@@ -2772,11 +4836,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglStreamAcquireImageNV_args[] = {"dpy", "stream", "pImage", "sync"};
-static const PyGLCommand pygl_EGL_eglStreamAcquireImageNV_info = {"eglStreamAcquireImageNV", "eglStreamAcquireImageNV(dpy, stream, pImage, sync) -> EGLBoolean", "($module, dpy, stream, pImage, sync, /)", pygl_EGL_eglStreamAcquireImageNV_args, "EGL_NV_stream_consumer_eglimage", "", 4, 129, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglStreamAcquireImageNV_info = {
+    .name = "eglStreamAcquireImageNV",
+    .doc = "eglStreamAcquireImageNV(dpy, stream, pImage, sync) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, pImage, sync, /)",
+    .arg_names = pygl_EGL_eglStreamAcquireImageNV_args,
+    .extension = "EGL_NV_stream_consumer_eglimage",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 129,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglStreamAcquireImageNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglStreamAcquireImageNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2796,11 +4876,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglStreamAttribKHR_args[] = {"dpy", "stream", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglStreamAttribKHR_info = {"eglStreamAttribKHR", "eglStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean", "($module, dpy, stream, attribute, value, /)", pygl_EGL_eglStreamAttribKHR_args, "EGL_KHR_stream", "", 4, 130, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglStreamAttribKHR_info = {
+    .name = "eglStreamAttribKHR",
+    .doc = "eglStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, attribute, value, /)",
+    .arg_names = pygl_EGL_eglStreamAttribKHR_args,
+    .extension = "EGL_KHR_stream",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 130,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglStreamAttribKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglStreamAttribKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, stream);
@@ -2816,11 +4912,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglStreamConsumerAcquireAttribKHR_args[] = {"dpy", "stream", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglStreamConsumerAcquireAttribKHR_info = {"eglStreamConsumerAcquireAttribKHR", "eglStreamConsumerAcquireAttribKHR(dpy, stream, attrib_list) -> EGLBoolean", "($module, dpy, stream, attrib_list, /)", pygl_EGL_eglStreamConsumerAcquireAttribKHR_args, "EGL_KHR_stream_attrib", "", 3, 131, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglStreamConsumerAcquireAttribKHR_info = {
+    .name = "eglStreamConsumerAcquireAttribKHR",
+    .doc = "eglStreamConsumerAcquireAttribKHR(dpy, stream, attrib_list) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, attrib_list, /)",
+    .arg_names = pygl_EGL_eglStreamConsumerAcquireAttribKHR_args,
+    .extension = "EGL_KHR_stream_attrib",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 131,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglStreamConsumerAcquireAttribKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglStreamConsumerAcquireAttribKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2839,11 +4951,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglStreamConsumerAcquireKHR_args[] = {"dpy", "stream"};
-static const PyGLCommand pygl_EGL_eglStreamConsumerAcquireKHR_info = {"eglStreamConsumerAcquireKHR", "eglStreamConsumerAcquireKHR(dpy, stream) -> EGLBoolean", "($module, dpy, stream, /)", pygl_EGL_eglStreamConsumerAcquireKHR_args, "EGL_KHR_stream_consumer_gltexture", "", 2, 132, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglStreamConsumerAcquireKHR_info = {
+    .name = "eglStreamConsumerAcquireKHR",
+    .doc = "eglStreamConsumerAcquireKHR(dpy, stream) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, /)",
+    .arg_names = pygl_EGL_eglStreamConsumerAcquireKHR_args,
+    .extension = "EGL_KHR_stream_consumer_gltexture",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 132,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglStreamConsumerAcquireKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglStreamConsumerAcquireKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, stream);
@@ -2857,11 +4985,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglStreamConsumerGLTextureExternalKHR_args[] = {"dpy", "stream"};
-static const PyGLCommand pygl_EGL_eglStreamConsumerGLTextureExternalKHR_info = {"eglStreamConsumerGLTextureExternalKHR", "eglStreamConsumerGLTextureExternalKHR(dpy, stream) -> EGLBoolean", "($module, dpy, stream, /)", pygl_EGL_eglStreamConsumerGLTextureExternalKHR_args, "EGL_KHR_stream_consumer_gltexture", "", 2, 133, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglStreamConsumerGLTextureExternalKHR_info = {
+    .name = "eglStreamConsumerGLTextureExternalKHR",
+    .doc = "eglStreamConsumerGLTextureExternalKHR(dpy, stream) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, /)",
+    .arg_names = pygl_EGL_eglStreamConsumerGLTextureExternalKHR_args,
+    .extension = "EGL_KHR_stream_consumer_gltexture",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 133,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglStreamConsumerGLTextureExternalKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglStreamConsumerGLTextureExternalKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, stream);
@@ -2875,11 +5019,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglStreamConsumerOutputEXT_args[] = {"dpy", "stream", "layer"};
-static const PyGLCommand pygl_EGL_eglStreamConsumerOutputEXT_info = {"eglStreamConsumerOutputEXT", "eglStreamConsumerOutputEXT(dpy, stream, layer) -> EGLBoolean", "($module, dpy, stream, layer, /)", pygl_EGL_eglStreamConsumerOutputEXT_args, "EGL_EXT_stream_consumer_egloutput", "", 3, 134, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglStreamConsumerOutputEXT_info = {
+    .name = "eglStreamConsumerOutputEXT",
+    .doc = "eglStreamConsumerOutputEXT(dpy, stream, layer) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, layer, /)",
+    .arg_names = pygl_EGL_eglStreamConsumerOutputEXT_args,
+    .extension = "EGL_EXT_stream_consumer_egloutput",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 134,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglStreamConsumerOutputEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglStreamConsumerOutputEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, stream);
@@ -2894,11 +5054,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglStreamConsumerReleaseAttribKHR_args[] = {"dpy", "stream", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglStreamConsumerReleaseAttribKHR_info = {"eglStreamConsumerReleaseAttribKHR", "eglStreamConsumerReleaseAttribKHR(dpy, stream, attrib_list) -> EGLBoolean", "($module, dpy, stream, attrib_list, /)", pygl_EGL_eglStreamConsumerReleaseAttribKHR_args, "EGL_KHR_stream_attrib", "", 3, 135, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglStreamConsumerReleaseAttribKHR_info = {
+    .name = "eglStreamConsumerReleaseAttribKHR",
+    .doc = "eglStreamConsumerReleaseAttribKHR(dpy, stream, attrib_list) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, attrib_list, /)",
+    .arg_names = pygl_EGL_eglStreamConsumerReleaseAttribKHR_args,
+    .extension = "EGL_KHR_stream_attrib",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 135,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglStreamConsumerReleaseAttribKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglStreamConsumerReleaseAttribKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -2917,11 +5093,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglStreamConsumerReleaseKHR_args[] = {"dpy", "stream"};
-static const PyGLCommand pygl_EGL_eglStreamConsumerReleaseKHR_info = {"eglStreamConsumerReleaseKHR", "eglStreamConsumerReleaseKHR(dpy, stream) -> EGLBoolean", "($module, dpy, stream, /)", pygl_EGL_eglStreamConsumerReleaseKHR_args, "EGL_KHR_stream_consumer_gltexture", "", 2, 136, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglStreamConsumerReleaseKHR_info = {
+    .name = "eglStreamConsumerReleaseKHR",
+    .doc = "eglStreamConsumerReleaseKHR(dpy, stream) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, /)",
+    .arg_names = pygl_EGL_eglStreamConsumerReleaseKHR_args,
+    .extension = "EGL_KHR_stream_consumer_gltexture",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 136,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglStreamConsumerReleaseKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglStreamConsumerReleaseKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, stream);
@@ -2935,11 +5127,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglStreamFlushNV_args[] = {"dpy", "stream"};
-static const PyGLCommand pygl_EGL_eglStreamFlushNV_info = {"eglStreamFlushNV", "eglStreamFlushNV(dpy, stream) -> EGLBoolean", "($module, dpy, stream, /)", pygl_EGL_eglStreamFlushNV_args, "EGL_NV_stream_flush", "", 2, 137, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglStreamFlushNV_info = {
+    .name = "eglStreamFlushNV",
+    .doc = "eglStreamFlushNV(dpy, stream) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, /)",
+    .arg_names = pygl_EGL_eglStreamFlushNV_args,
+    .extension = "EGL_NV_stream_flush",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 137,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglStreamFlushNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglStreamFlushNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, stream);
@@ -2953,11 +5161,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglStreamImageConsumerConnectNV_args[] = {"dpy", "stream", "num_modifiers", "modifiers", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglStreamImageConsumerConnectNV_info = {"eglStreamImageConsumerConnectNV", "eglStreamImageConsumerConnectNV(dpy, stream, num_modifiers, modifiers, attrib_list) -> EGLBoolean", "($module, dpy, stream, num_modifiers, modifiers, attrib_list, /)", pygl_EGL_eglStreamImageConsumerConnectNV_args, "EGL_NV_stream_consumer_eglimage", "", 5, 138, PYGL_API_EGL, 0, 5, 1, 0};
+static const PyGLCommand pygl_EGL_eglStreamImageConsumerConnectNV_info = {
+    .name = "eglStreamImageConsumerConnectNV",
+    .doc = "eglStreamImageConsumerConnectNV(dpy, stream, num_modifiers, modifiers, attrib_list) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, num_modifiers, modifiers, attrib_list, /)",
+    .arg_names = pygl_EGL_eglStreamImageConsumerConnectNV_args,
+    .extension = "EGL_NV_stream_consumer_eglimage",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 138,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglStreamImageConsumerConnectNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglStreamImageConsumerConnectNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, dpy);
@@ -2978,11 +5202,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglStreamReleaseImageNV_args[] = {"dpy", "stream", "image", "sync"};
-static const PyGLCommand pygl_EGL_eglStreamReleaseImageNV_info = {"eglStreamReleaseImageNV", "eglStreamReleaseImageNV(dpy, stream, image, sync) -> EGLBoolean", "($module, dpy, stream, image, sync, /)", pygl_EGL_eglStreamReleaseImageNV_args, "EGL_NV_stream_consumer_eglimage", "", 4, 139, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglStreamReleaseImageNV_info = {
+    .name = "eglStreamReleaseImageNV",
+    .doc = "eglStreamReleaseImageNV(dpy, stream, image, sync) -> EGLBoolean",
+    .text_signature = "($module, dpy, stream, image, sync, /)",
+    .arg_names = pygl_EGL_eglStreamReleaseImageNV_args,
+    .extension = "EGL_NV_stream_consumer_eglimage",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 139,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglStreamReleaseImageNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglStreamReleaseImageNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, stream);
@@ -2998,11 +5238,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglSurfaceAttrib_args[] = {"dpy", "surface", "attribute", "value"};
-static const PyGLCommand pygl_EGL_eglSurfaceAttrib_info = {"eglSurfaceAttrib", "eglSurfaceAttrib(dpy, surface, attribute, value) -> EGLBoolean", "($module, dpy, surface, attribute, value, /)", pygl_EGL_eglSurfaceAttrib_args, "EGL_VERSION_EGL_1_1", "", 4, 140, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglSurfaceAttrib_info = {
+    .name = "eglSurfaceAttrib",
+    .doc = "eglSurfaceAttrib(dpy, surface, attribute, value) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, attribute, value, /)",
+    .arg_names = pygl_EGL_eglSurfaceAttrib_args,
+    .extension = "EGL_VERSION_EGL_1_1",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 140,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglSurfaceAttrib(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglSurfaceAttrib(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, surface);
@@ -3018,11 +5274,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglSwapBuffers_args[] = {"dpy", "surface"};
-static const PyGLCommand pygl_EGL_eglSwapBuffers_info = {"eglSwapBuffers", "eglSwapBuffers(dpy, surface) -> EGLBoolean", "($module, dpy, surface, /)", pygl_EGL_eglSwapBuffers_args, "EGL_VERSION_EGL_1_0", "", 2, 141, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglSwapBuffers_info = {
+    .name = "eglSwapBuffers",
+    .doc = "eglSwapBuffers(dpy, surface) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, /)",
+    .arg_names = pygl_EGL_eglSwapBuffers_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 141,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglSwapBuffers(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglSwapBuffers(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, surface);
@@ -3036,11 +5308,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglSwapBuffersRegion2NOK_args[] = {"dpy", "surface", "numRects", "rects"};
-static const PyGLCommand pygl_EGL_eglSwapBuffersRegion2NOK_info = {"eglSwapBuffersRegion2NOK", "eglSwapBuffersRegion2NOK(dpy, surface, numRects, rects) -> EGLBoolean", "($module, dpy, surface, numRects, rects, /)", pygl_EGL_eglSwapBuffersRegion2NOK_args, "EGL_NOK_swap_region2", "", 4, 142, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglSwapBuffersRegion2NOK_info = {
+    .name = "eglSwapBuffersRegion2NOK",
+    .doc = "eglSwapBuffersRegion2NOK(dpy, surface, numRects, rects) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, numRects, rects, /)",
+    .arg_names = pygl_EGL_eglSwapBuffersRegion2NOK_args,
+    .extension = "EGL_NOK_swap_region2",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 142,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglSwapBuffersRegion2NOK(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglSwapBuffersRegion2NOK(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -3060,11 +5348,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglSwapBuffersRegionNOK_args[] = {"dpy", "surface", "numRects", "rects"};
-static const PyGLCommand pygl_EGL_eglSwapBuffersRegionNOK_info = {"eglSwapBuffersRegionNOK", "eglSwapBuffersRegionNOK(dpy, surface, numRects, rects) -> EGLBoolean", "($module, dpy, surface, numRects, rects, /)", pygl_EGL_eglSwapBuffersRegionNOK_args, "EGL_NOK_swap_region", "", 4, 143, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglSwapBuffersRegionNOK_info = {
+    .name = "eglSwapBuffersRegionNOK",
+    .doc = "eglSwapBuffersRegionNOK(dpy, surface, numRects, rects) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, numRects, rects, /)",
+    .arg_names = pygl_EGL_eglSwapBuffersRegionNOK_args,
+    .extension = "EGL_NOK_swap_region",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 143,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglSwapBuffersRegionNOK(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglSwapBuffersRegionNOK(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -3084,11 +5388,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglSwapBuffersWithDamageEXT_args[] = {"dpy", "surface", "rects", "n_rects"};
-static const PyGLCommand pygl_EGL_eglSwapBuffersWithDamageEXT_info = {"eglSwapBuffersWithDamageEXT", "eglSwapBuffersWithDamageEXT(dpy, surface, rects, n_rects) -> EGLBoolean", "($module, dpy, surface, rects, n_rects, /)", pygl_EGL_eglSwapBuffersWithDamageEXT_args, "EGL_EXT_swap_buffers_with_damage", "", 4, 144, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglSwapBuffersWithDamageEXT_info = {
+    .name = "eglSwapBuffersWithDamageEXT",
+    .doc = "eglSwapBuffersWithDamageEXT(dpy, surface, rects, n_rects) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, rects, n_rects, /)",
+    .arg_names = pygl_EGL_eglSwapBuffersWithDamageEXT_args,
+    .extension = "EGL_EXT_swap_buffers_with_damage",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 144,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglSwapBuffersWithDamageEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglSwapBuffersWithDamageEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -3108,11 +5428,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglSwapBuffersWithDamageKHR_args[] = {"dpy", "surface", "rects", "n_rects"};
-static const PyGLCommand pygl_EGL_eglSwapBuffersWithDamageKHR_info = {"eglSwapBuffersWithDamageKHR", "eglSwapBuffersWithDamageKHR(dpy, surface, rects, n_rects) -> EGLBoolean", "($module, dpy, surface, rects, n_rects, /)", pygl_EGL_eglSwapBuffersWithDamageKHR_args, "EGL_KHR_swap_buffers_with_damage", "", 4, 145, PYGL_API_EGL, 0, 4, 1, 0};
+static const PyGLCommand pygl_EGL_eglSwapBuffersWithDamageKHR_info = {
+    .name = "eglSwapBuffersWithDamageKHR",
+    .doc = "eglSwapBuffersWithDamageKHR(dpy, surface, rects, n_rects) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, rects, n_rects, /)",
+    .arg_names = pygl_EGL_eglSwapBuffersWithDamageKHR_args,
+    .extension = "EGL_KHR_swap_buffers_with_damage",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 145,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglSwapBuffersWithDamageKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglSwapBuffersWithDamageKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -3132,11 +5468,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglSwapInterval_args[] = {"dpy", "interval"};
-static const PyGLCommand pygl_EGL_eglSwapInterval_info = {"eglSwapInterval", "eglSwapInterval(dpy, interval) -> EGLBoolean", "($module, dpy, interval, /)", pygl_EGL_eglSwapInterval_args, "EGL_VERSION_EGL_1_1", "", 2, 146, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglSwapInterval_info = {
+    .name = "eglSwapInterval",
+    .doc = "eglSwapInterval(dpy, interval) -> EGLBoolean",
+    .text_signature = "($module, dpy, interval, /)",
+    .arg_names = pygl_EGL_eglSwapInterval_args,
+    .extension = "EGL_VERSION_EGL_1_1",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 146,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglSwapInterval(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglSwapInterval(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_I(1, interval);
@@ -3150,11 +5502,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglTerminate_args[] = {"dpy"};
-static const PyGLCommand pygl_EGL_eglTerminate_info = {"eglTerminate", "eglTerminate(dpy) -> EGLBoolean", "($module, dpy, /)", pygl_EGL_eglTerminate_args, "EGL_VERSION_EGL_1_0", "", 1, 147, PYGL_API_EGL, 0, 1, 1, 0};
+static const PyGLCommand pygl_EGL_eglTerminate_info = {
+    .name = "eglTerminate",
+    .doc = "eglTerminate(dpy) -> EGLBoolean",
+    .text_signature = "($module, dpy, /)",
+    .arg_names = pygl_EGL_eglTerminate_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 147,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglTerminate(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglTerminate(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_OPAQUE(0, dpy);
     PYGL_CONV_OK();
@@ -3167,11 +5535,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglUnbindWaylandDisplayWL_args[] = {"dpy", "display"};
-static const PyGLCommand pygl_EGL_eglUnbindWaylandDisplayWL_info = {"eglUnbindWaylandDisplayWL", "eglUnbindWaylandDisplayWL(dpy, display) -> EGLBoolean", "($module, dpy, display, /)", pygl_EGL_eglUnbindWaylandDisplayWL_args, "EGL_WL_bind_wayland_display", "", 2, 148, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglUnbindWaylandDisplayWL_info = {
+    .name = "eglUnbindWaylandDisplayWL",
+    .doc = "eglUnbindWaylandDisplayWL(dpy, display) -> EGLBoolean",
+    .text_signature = "($module, dpy, display, /)",
+    .arg_names = pygl_EGL_eglUnbindWaylandDisplayWL_args,
+    .extension = "EGL_WL_bind_wayland_display",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 148,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglUnbindWaylandDisplayWL(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglUnbindWaylandDisplayWL(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -3189,11 +5573,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglUnlockSurfaceKHR_args[] = {"dpy", "surface"};
-static const PyGLCommand pygl_EGL_eglUnlockSurfaceKHR_info = {"eglUnlockSurfaceKHR", "eglUnlockSurfaceKHR(dpy, surface) -> EGLBoolean", "($module, dpy, surface, /)", pygl_EGL_eglUnlockSurfaceKHR_args, "EGL_KHR_lock_surface", "EGL_KHR_lock_surface3", 2, 149, PYGL_API_EGL, 0, 2, 1, 0};
+static const PyGLCommand pygl_EGL_eglUnlockSurfaceKHR_info = {
+    .name = "eglUnlockSurfaceKHR",
+    .doc = "eglUnlockSurfaceKHR(dpy, surface) -> EGLBoolean",
+    .text_signature = "($module, dpy, surface, /)",
+    .arg_names = pygl_EGL_eglUnlockSurfaceKHR_args,
+    .extension = "EGL_KHR_lock_surface",
+    .alternates = "EGL_KHR_lock_surface3",
+    .arg_count = 2,
+    .slot = 149,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglUnlockSurfaceKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglUnlockSurfaceKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, surface);
@@ -3207,11 +5607,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglUnsignalSyncEXT_args[] = {"dpy", "sync", "attrib_list"};
-static const PyGLCommand pygl_EGL_eglUnsignalSyncEXT_info = {"eglUnsignalSyncEXT", "eglUnsignalSyncEXT(dpy, sync, attrib_list) -> EGLBoolean", "($module, dpy, sync, attrib_list, /)", pygl_EGL_eglUnsignalSyncEXT_args, "EGL_EXT_sync_reuse", "", 3, 150, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglUnsignalSyncEXT_info = {
+    .name = "eglUnsignalSyncEXT",
+    .doc = "eglUnsignalSyncEXT(dpy, sync, attrib_list) -> EGLBoolean",
+    .text_signature = "($module, dpy, sync, attrib_list, /)",
+    .arg_names = pygl_EGL_eglUnsignalSyncEXT_args,
+    .extension = "EGL_EXT_sync_reuse",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 150,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglUnsignalSyncEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglUnsignalSyncEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
@@ -3229,11 +5645,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglWaitClient_info = {"eglWaitClient", "eglWaitClient() -> EGLBoolean", "($module)", NULL, "EGL_VERSION_EGL_1_2", "", 0, 151, PYGL_API_EGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_EGL_eglWaitClient_info = {
+    .name = "eglWaitClient",
+    .doc = "eglWaitClient() -> EGLBoolean",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "EGL_VERSION_EGL_1_2",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 151,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglWaitClient(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglWaitClient(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_R_BLOCKING(_result, unsigned int, (void), ());
@@ -3244,11 +5676,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_EGL_eglWaitGL_info = {"eglWaitGL", "eglWaitGL() -> EGLBoolean", "($module)", NULL, "EGL_VERSION_EGL_1_0", "", 0, 152, PYGL_API_EGL, 0, 0, 1, 0};
+static const PyGLCommand pygl_EGL_eglWaitGL_info = {
+    .name = "eglWaitGL",
+    .doc = "eglWaitGL() -> EGLBoolean",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 152,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglWaitGL(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglWaitGL(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_R_BLOCKING(_result, unsigned int, (void), ());
@@ -3260,11 +5708,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglWaitNative_args[] = {"engine"};
-static const PyGLCommand pygl_EGL_eglWaitNative_info = {"eglWaitNative", "eglWaitNative(engine) -> EGLBoolean", "($module, engine, /)", pygl_EGL_eglWaitNative_args, "EGL_VERSION_EGL_1_0", "", 1, 153, PYGL_API_EGL, 0, 1, 1, 0};
+static const PyGLCommand pygl_EGL_eglWaitNative_info = {
+    .name = "eglWaitNative",
+    .doc = "eglWaitNative(engine) -> EGLBoolean",
+    .text_signature = "($module, engine, /)",
+    .arg_names = pygl_EGL_eglWaitNative_args,
+    .extension = "EGL_VERSION_EGL_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 153,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglWaitNative(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglWaitNative(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, engine);
     PYGL_CONV_OK();
@@ -3277,11 +5741,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglWaitSync_args[] = {"dpy", "sync", "flags"};
-static const PyGLCommand pygl_EGL_eglWaitSync_info = {"eglWaitSync", "eglWaitSync(dpy, sync, flags) -> EGLBoolean", "($module, dpy, sync, flags, /)", pygl_EGL_eglWaitSync_args, "EGL_VERSION_EGL_1_5", "", 3, 154, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglWaitSync_info = {
+    .name = "eglWaitSync",
+    .doc = "eglWaitSync(dpy, sync, flags) -> EGLBoolean",
+    .text_signature = "($module, dpy, sync, flags, /)",
+    .arg_names = pygl_EGL_eglWaitSync_args,
+    .extension = "EGL_VERSION_EGL_1_5",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 154,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglWaitSync(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglWaitSync(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, sync);
@@ -3296,11 +5776,27 @@ _fail:
 
 
 static const char *const pygl_EGL_eglWaitSyncKHR_args[] = {"dpy", "sync", "flags"};
-static const PyGLCommand pygl_EGL_eglWaitSyncKHR_info = {"eglWaitSyncKHR", "eglWaitSyncKHR(dpy, sync, flags) -> EGLint", "($module, dpy, sync, flags, /)", pygl_EGL_eglWaitSyncKHR_args, "EGL_KHR_wait_sync", "", 3, 155, PYGL_API_EGL, 0, 3, 1, 0};
+static const PyGLCommand pygl_EGL_eglWaitSyncKHR_info = {
+    .name = "eglWaitSyncKHR",
+    .doc = "eglWaitSyncKHR(dpy, sync, flags) -> EGLint",
+    .text_signature = "($module, dpy, sync, flags, /)",
+    .arg_names = pygl_EGL_eglWaitSyncKHR_args,
+    .extension = "EGL_KHR_wait_sync",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 155,
+    .api = PYGL_API_EGL,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_EGL_eglWaitSyncKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_EGL_eglWaitSyncKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, sync);

@@ -329,11 +329,15 @@ def emit_stub(command):
 
     lines.append('static PyObject *')
     lines.append(
-        '%s(GLProc *self, PyObject *const *_a, size_t _nargsf,'
+        '%s(PyObject *_self, PyObject *const *_a, size_t _nargsf,'
         ' PyObject *_kwnames)'
         % (stub_symbol(command),)
     )
     lines.append('{')
+    # The signature is exactly vectorcallfunc's, so the entry table needs no
+    # cast and the compiler can check it.  The conversion happens here, where
+    # it is a fact about the object rather than an assertion about a pointer.
+    lines.append('    GLProc *self = (GLProc *)_self;')
     if outputs:
         lines.append('    PYGL_ARITY_RANGE(%d, %d);' % (required, total))
     else:
@@ -549,6 +553,21 @@ _API_ENUM = {
 }
 
 
+#: Entry points that mean something with no context current.  The
+#: window-system APIs are how a context is made in the first place, and these
+#: four GL queries are what a program calls to find out what it is talking to.
+_NO_CONTEXT_NEEDED = frozenset(
+    ['glGetString', 'glGetStringi', 'glGetIntegerv', 'glGetError']
+)
+
+
+def needs_context(command):
+    """Whether calling this without a current context is meaningless."""
+    if command.api in ('glx', 'wgl', 'egl', 'GLX', 'WGL', 'EGL'):
+        return False
+    return command.name not in _NO_CONTEXT_NEEDED
+
+
 def emit_command_record(command, slot):
     """The static metadata a GLProc exposes to Python."""
     symbol = stub_symbol(command)
@@ -575,17 +594,31 @@ def emit_command_record(command, slot):
     if command.purpose:
         doc = '%s\n\n%s' % (doc, command.purpose)
     lines.append(
-        'static const PyGLCommand %s_info = '
-        '{%s, %s, %s, %s, %s, %s, %d, %d, %s, %d, %d, %d, %d};'
+        'static const PyGLCommand %s_info = {\n'
+        '    .name = %s,\n'
+        '    .doc = %s,\n'
+        '    .text_signature = %s,\n'
+        '    .arg_names = %s,\n'
+        '    .extension = %s,\n'
+        '    .alternates = %s,\n'
+        '    .arg_count = %d,\n'
+        '    .slot = %d,\n'
+        '    .api = %s,\n'
+        '    .deprecated = %d,\n'
+        '    .required_args = %d,\n'
+        '    .return_kind = %d,\n'
+        '    .hand_written = %d,\n'
+        '    .needs_context = %d,\n'
+        '};'
         % (
             symbol,
             _c_string(command.name),
             _c_string(doc),
             _c_string(
-            '($module, %s, /)' % (', '.join(call_names),)
-            if hand
-            else command.text_signature()
-        ),
+                '($module, %s, /)' % (', '.join(call_names),)
+                if hand
+                else command.text_signature()
+            ),
             args,
             _c_string(command.feature),
             # The other extensions that declare it.  A driver advertising any
@@ -602,6 +635,7 @@ def emit_command_record(command, slot):
             len(call_names),
             return_kind(command),
             1 if implements_friendly(command) else 0,
+            1 if needs_context(command) else 0,
         )
     )
     return '\n'.join(lines) + '\n'
@@ -627,7 +661,7 @@ def emit_translation_unit(api, commands, slots, provenance=''):
         if hand is not None:
             if hand.symbol not in declared:
                 parts.append(
-                    'PyObject *%s(GLProc *self, PyObject *const *_a, '
+                    'PyObject *%s(PyObject *_self, PyObject *const *_a, '
                     'size_t _nargsf, PyObject *_kwnames);' % (hand.symbol,)
                 )
                 declared.add(hand.symbol)

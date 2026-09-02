@@ -120,9 +120,10 @@ static int pygl_sources_build(PyObject *argument, PyGLSources *sources)
     return 0;
 }
 
-PyObject *pygl_hand_glShaderSource(GLProc *self, PyObject *const *_a,
+PyObject *pygl_hand_glShaderSource(PyObject *_self, PyObject *const *_a,
                                    size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PyGLSources sources;
     Py_ssize_t _nargs = PyVectorcall_NARGS(_nargsf);
     unsigned int shader;

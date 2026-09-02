@@ -8,11 +8,27 @@
 #include "pygl_glgets.h"
 
 static const char *const pygl_GLES1_glAccumxOES_args[] = {"op", "value"};
-static const PyGLCommand pygl_GLES1_glAccumxOES_info = {"glAccumxOES", "glAccumxOES(op, value) -> None", "($module, op, value, /)", pygl_GLES1_glAccumxOES_args, "GLES1_OES_fixed_point", "", 2, 3156, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glAccumxOES_info = {
+    .name = "glAccumxOES",
+    .doc = "glAccumxOES(op, value) -> None",
+    .text_signature = "($module, op, value, /)",
+    .arg_names = pygl_GLES1_glAccumxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3156,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glAccumxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glAccumxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, op);
     PYGL_I(1, value);
@@ -26,11 +42,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glActiveTexture_args[] = {"texture"};
-static const PyGLCommand pygl_GLES1_glActiveTexture_info = {"glActiveTexture", "glActiveTexture(texture) -> None", "($module, texture, /)", pygl_GLES1_glActiveTexture_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3157, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glActiveTexture_info = {
+    .name = "glActiveTexture",
+    .doc = "glActiveTexture(texture) -> None",
+    .text_signature = "($module, texture, /)",
+    .arg_names = pygl_GLES1_glActiveTexture_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3157,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glActiveTexture(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glActiveTexture(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, texture);
     PYGL_CONV_OK();
@@ -43,11 +75,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glAlphaFunc_args[] = {"func", "ref"};
-static const PyGLCommand pygl_GLES1_glAlphaFunc_info = {"glAlphaFunc", "glAlphaFunc(func, ref) -> None", "($module, func, ref, /)", pygl_GLES1_glAlphaFunc_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3158, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glAlphaFunc_info = {
+    .name = "glAlphaFunc",
+    .doc = "glAlphaFunc(func, ref) -> None",
+    .text_signature = "($module, func, ref, /)",
+    .arg_names = pygl_GLES1_glAlphaFunc_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3158,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glAlphaFunc(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glAlphaFunc(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, func);
     PYGL_F(1, ref);
@@ -61,11 +109,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glAlphaFuncx_args[] = {"func", "ref"};
-static const PyGLCommand pygl_GLES1_glAlphaFuncx_info = {"glAlphaFuncx", "glAlphaFuncx(func, ref) -> None", "($module, func, ref, /)", pygl_GLES1_glAlphaFuncx_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3159, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glAlphaFuncx_info = {
+    .name = "glAlphaFuncx",
+    .doc = "glAlphaFuncx(func, ref) -> None",
+    .text_signature = "($module, func, ref, /)",
+    .arg_names = pygl_GLES1_glAlphaFuncx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3159,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glAlphaFuncx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glAlphaFuncx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, func);
     PYGL_I(1, ref);
@@ -79,11 +143,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glAlphaFuncxOES_args[] = {"func", "ref"};
-static const PyGLCommand pygl_GLES1_glAlphaFuncxOES_info = {"glAlphaFuncxOES", "glAlphaFuncxOES(func, ref) -> None", "($module, func, ref, /)", pygl_GLES1_glAlphaFuncxOES_args, "GLES1_OES_fixed_point", "", 2, 3160, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glAlphaFuncxOES_info = {
+    .name = "glAlphaFuncxOES",
+    .doc = "glAlphaFuncxOES(func, ref) -> None",
+    .text_signature = "($module, func, ref, /)",
+    .arg_names = pygl_GLES1_glAlphaFuncxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3160,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glAlphaFuncxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glAlphaFuncxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, func);
     PYGL_I(1, ref);
@@ -97,11 +177,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glBindBuffer_args[] = {"target", "buffer"};
-static const PyGLCommand pygl_GLES1_glBindBuffer_info = {"glBindBuffer", "glBindBuffer(target, buffer) -> None", "($module, target, buffer, /)", pygl_GLES1_glBindBuffer_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3161, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glBindBuffer_info = {
+    .name = "glBindBuffer",
+    .doc = "glBindBuffer(target, buffer) -> None",
+    .text_signature = "($module, target, buffer, /)",
+    .arg_names = pygl_GLES1_glBindBuffer_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3161,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glBindBuffer(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glBindBuffer(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, target);
     PYGL_U(1, buffer);
@@ -115,11 +211,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glBindFramebufferOES_args[] = {"target", "framebuffer"};
-static const PyGLCommand pygl_GLES1_glBindFramebufferOES_info = {"glBindFramebufferOES", "glBindFramebufferOES(target, framebuffer) -> None", "($module, target, framebuffer, /)", pygl_GLES1_glBindFramebufferOES_args, "GLES1_OES_framebuffer_object", "", 2, 3162, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glBindFramebufferOES_info = {
+    .name = "glBindFramebufferOES",
+    .doc = "glBindFramebufferOES(target, framebuffer) -> None",
+    .text_signature = "($module, target, framebuffer, /)",
+    .arg_names = pygl_GLES1_glBindFramebufferOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3162,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glBindFramebufferOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glBindFramebufferOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, target);
     PYGL_U(1, framebuffer);
@@ -133,11 +245,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glBindRenderbufferOES_args[] = {"target", "renderbuffer"};
-static const PyGLCommand pygl_GLES1_glBindRenderbufferOES_info = {"glBindRenderbufferOES", "glBindRenderbufferOES(target, renderbuffer) -> None", "($module, target, renderbuffer, /)", pygl_GLES1_glBindRenderbufferOES_args, "GLES1_OES_framebuffer_object", "", 2, 3163, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glBindRenderbufferOES_info = {
+    .name = "glBindRenderbufferOES",
+    .doc = "glBindRenderbufferOES(target, renderbuffer) -> None",
+    .text_signature = "($module, target, renderbuffer, /)",
+    .arg_names = pygl_GLES1_glBindRenderbufferOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3163,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glBindRenderbufferOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glBindRenderbufferOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, target);
     PYGL_U(1, renderbuffer);
@@ -151,11 +279,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glBindTexture_args[] = {"target", "texture"};
-static const PyGLCommand pygl_GLES1_glBindTexture_info = {"glBindTexture", "glBindTexture(target, texture) -> None", "($module, target, texture, /)", pygl_GLES1_glBindTexture_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3164, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glBindTexture_info = {
+    .name = "glBindTexture",
+    .doc = "glBindTexture(target, texture) -> None",
+    .text_signature = "($module, target, texture, /)",
+    .arg_names = pygl_GLES1_glBindTexture_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3164,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glBindTexture(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glBindTexture(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, target);
     PYGL_U(1, texture);
@@ -169,11 +313,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glBindVertexArrayOES_args[] = {"array"};
-static const PyGLCommand pygl_GLES1_glBindVertexArrayOES_info = {"glBindVertexArrayOES", "glBindVertexArrayOES(array) -> None", "($module, array, /)", pygl_GLES1_glBindVertexArrayOES_args, "GLES1_OES_vertex_array_object", "", 1, 3165, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glBindVertexArrayOES_info = {
+    .name = "glBindVertexArrayOES",
+    .doc = "glBindVertexArrayOES(array) -> None",
+    .text_signature = "($module, array, /)",
+    .arg_names = pygl_GLES1_glBindVertexArrayOES_args,
+    .extension = "GLES1_OES_vertex_array_object",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3165,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glBindVertexArrayOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glBindVertexArrayOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, array);
     PYGL_CONV_OK();
@@ -186,11 +346,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glBitmapxOES_args[] = {"width", "height", "xorig", "yorig", "xmove", "ymove", "bitmap"};
-static const PyGLCommand pygl_GLES1_glBitmapxOES_info = {"glBitmapxOES", "glBitmapxOES(width, height, xorig, yorig, xmove, ymove, bitmap) -> None", "($module, width, height, xorig, yorig, xmove, ymove, bitmap, /)", pygl_GLES1_glBitmapxOES_args, "GLES1_OES_fixed_point", "", 7, 3166, PYGL_API_GLES1, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES1_glBitmapxOES_info = {
+    .name = "glBitmapxOES",
+    .doc = "glBitmapxOES(width, height, xorig, yorig, xmove, ymove, bitmap) -> None",
+    .text_signature = "($module, width, height, xorig, yorig, xmove, ymove, bitmap, /)",
+    .arg_names = pygl_GLES1_glBitmapxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 7,
+    .slot = 3166,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 7,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glBitmapxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glBitmapxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(7);
     PYGL_FRAME(1);
     PYGL_SZ(0, width);
@@ -212,11 +388,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glBlendColorxOES_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLES1_glBlendColorxOES_info = {"glBlendColorxOES", "glBlendColorxOES(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES1_glBlendColorxOES_args, "GLES1_OES_fixed_point", "", 4, 3167, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glBlendColorxOES_info = {
+    .name = "glBlendColorxOES",
+    .doc = "glBlendColorxOES(red, green, blue, alpha) -> None",
+    .text_signature = "($module, red, green, blue, alpha, /)",
+    .arg_names = pygl_GLES1_glBlendColorxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3167,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glBlendColorxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glBlendColorxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, red);
     PYGL_I(1, green);
@@ -232,11 +424,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glBlendEquationEXT_args[] = {"mode"};
-static const PyGLCommand pygl_GLES1_glBlendEquationEXT_info = {"glBlendEquationEXT", "glBlendEquationEXT(mode) -> None", "($module, mode, /)", pygl_GLES1_glBlendEquationEXT_args, "GLES1_EXT_blend_minmax", "", 1, 3168, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glBlendEquationEXT_info = {
+    .name = "glBlendEquationEXT",
+    .doc = "glBlendEquationEXT(mode) -> None",
+    .text_signature = "($module, mode, /)",
+    .arg_names = pygl_GLES1_glBlendEquationEXT_args,
+    .extension = "GLES1_EXT_blend_minmax",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3168,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glBlendEquationEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glBlendEquationEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, mode);
     PYGL_CONV_OK();
@@ -249,11 +457,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glBlendEquationOES_args[] = {"mode"};
-static const PyGLCommand pygl_GLES1_glBlendEquationOES_info = {"glBlendEquationOES", "glBlendEquationOES(mode) -> None", "($module, mode, /)", pygl_GLES1_glBlendEquationOES_args, "GLES1_OES_blend_subtract", "", 1, 3169, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glBlendEquationOES_info = {
+    .name = "glBlendEquationOES",
+    .doc = "glBlendEquationOES(mode) -> None",
+    .text_signature = "($module, mode, /)",
+    .arg_names = pygl_GLES1_glBlendEquationOES_args,
+    .extension = "GLES1_OES_blend_subtract",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3169,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glBlendEquationOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glBlendEquationOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, mode);
     PYGL_CONV_OK();
@@ -266,11 +490,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glBlendEquationSeparateOES_args[] = {"modeRGB", "modeAlpha"};
-static const PyGLCommand pygl_GLES1_glBlendEquationSeparateOES_info = {"glBlendEquationSeparateOES", "glBlendEquationSeparateOES(modeRGB, modeAlpha) -> None", "($module, modeRGB, modeAlpha, /)", pygl_GLES1_glBlendEquationSeparateOES_args, "GLES1_OES_blend_equation_separate", "", 2, 3170, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glBlendEquationSeparateOES_info = {
+    .name = "glBlendEquationSeparateOES",
+    .doc = "glBlendEquationSeparateOES(modeRGB, modeAlpha) -> None",
+    .text_signature = "($module, modeRGB, modeAlpha, /)",
+    .arg_names = pygl_GLES1_glBlendEquationSeparateOES_args,
+    .extension = "GLES1_OES_blend_equation_separate",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3170,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glBlendEquationSeparateOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glBlendEquationSeparateOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, modeRGB);
     PYGL_U(1, modeAlpha);
@@ -284,11 +524,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glBlendFunc_args[] = {"sfactor", "dfactor"};
-static const PyGLCommand pygl_GLES1_glBlendFunc_info = {"glBlendFunc", "glBlendFunc(sfactor, dfactor) -> None", "($module, sfactor, dfactor, /)", pygl_GLES1_glBlendFunc_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3171, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glBlendFunc_info = {
+    .name = "glBlendFunc",
+    .doc = "glBlendFunc(sfactor, dfactor) -> None",
+    .text_signature = "($module, sfactor, dfactor, /)",
+    .arg_names = pygl_GLES1_glBlendFunc_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3171,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glBlendFunc(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glBlendFunc(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, sfactor);
     PYGL_U(1, dfactor);
@@ -302,11 +558,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glBlendFuncSeparateOES_args[] = {"srcRGB", "dstRGB", "srcAlpha", "dstAlpha"};
-static const PyGLCommand pygl_GLES1_glBlendFuncSeparateOES_info = {"glBlendFuncSeparateOES", "glBlendFuncSeparateOES(srcRGB, dstRGB, srcAlpha, dstAlpha) -> None", "($module, srcRGB, dstRGB, srcAlpha, dstAlpha, /)", pygl_GLES1_glBlendFuncSeparateOES_args, "GLES1_OES_blend_func_separate", "", 4, 3172, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glBlendFuncSeparateOES_info = {
+    .name = "glBlendFuncSeparateOES",
+    .doc = "glBlendFuncSeparateOES(srcRGB, dstRGB, srcAlpha, dstAlpha) -> None",
+    .text_signature = "($module, srcRGB, dstRGB, srcAlpha, dstAlpha, /)",
+    .arg_names = pygl_GLES1_glBlendFuncSeparateOES_args,
+    .extension = "GLES1_OES_blend_func_separate",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3172,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glBlendFuncSeparateOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glBlendFuncSeparateOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_U(0, srcRGB);
     PYGL_U(1, dstRGB);
@@ -322,11 +594,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glBufferData_args[] = {"target", "size", "data", "usage"};
-static const PyGLCommand pygl_GLES1_glBufferData_info = {"glBufferData", "glBufferData(target, size, data, usage) -> None", "($module, target, size, data, usage, /)", pygl_GLES1_glBufferData_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3173, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glBufferData_info = {
+    .name = "glBufferData",
+    .doc = "glBufferData(target, size, data, usage) -> None",
+    .text_signature = "($module, target, size, data, usage, /)",
+    .arg_names = pygl_GLES1_glBufferData_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3173,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glBufferData(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glBufferData(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -345,11 +633,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glBufferSubData_args[] = {"target", "offset", "size", "data"};
-static const PyGLCommand pygl_GLES1_glBufferSubData_info = {"glBufferSubData", "glBufferSubData(target, offset, size, data) -> None", "($module, target, offset, size, data, /)", pygl_GLES1_glBufferSubData_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3174, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glBufferSubData_info = {
+    .name = "glBufferSubData",
+    .doc = "glBufferSubData(target, offset, size, data) -> None",
+    .text_signature = "($module, target, offset, size, data, /)",
+    .arg_names = pygl_GLES1_glBufferSubData_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3174,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glBufferSubData(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glBufferSubData(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -368,11 +672,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glCheckFramebufferStatusOES_args[] = {"target"};
-static const PyGLCommand pygl_GLES1_glCheckFramebufferStatusOES_info = {"glCheckFramebufferStatusOES", "glCheckFramebufferStatusOES(target) -> GLenum", "($module, target, /)", pygl_GLES1_glCheckFramebufferStatusOES_args, "GLES1_OES_framebuffer_object", "", 1, 3175, PYGL_API_GLES1, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES1_glCheckFramebufferStatusOES_info = {
+    .name = "glCheckFramebufferStatusOES",
+    .doc = "glCheckFramebufferStatusOES(target) -> GLenum",
+    .text_signature = "($module, target, /)",
+    .arg_names = pygl_GLES1_glCheckFramebufferStatusOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3175,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glCheckFramebufferStatusOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glCheckFramebufferStatusOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, target);
     PYGL_CONV_OK();
@@ -385,11 +705,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClear_args[] = {"mask"};
-static const PyGLCommand pygl_GLES1_glClear_info = {"glClear", "glClear(mask) -> None", "($module, mask, /)", pygl_GLES1_glClear_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3176, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glClear_info = {
+    .name = "glClear",
+    .doc = "glClear(mask) -> None",
+    .text_signature = "($module, mask, /)",
+    .arg_names = pygl_GLES1_glClear_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3176,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClear(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClear(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, mask);
     PYGL_CONV_OK();
@@ -402,11 +738,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClearAccumxOES_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLES1_glClearAccumxOES_info = {"glClearAccumxOES", "glClearAccumxOES(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES1_glClearAccumxOES_args, "GLES1_OES_fixed_point", "", 4, 3177, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glClearAccumxOES_info = {
+    .name = "glClearAccumxOES",
+    .doc = "glClearAccumxOES(red, green, blue, alpha) -> None",
+    .text_signature = "($module, red, green, blue, alpha, /)",
+    .arg_names = pygl_GLES1_glClearAccumxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3177,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClearAccumxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClearAccumxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, red);
     PYGL_I(1, green);
@@ -422,11 +774,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClearColor_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLES1_glClearColor_info = {"glClearColor", "glClearColor(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES1_glClearColor_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3178, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glClearColor_info = {
+    .name = "glClearColor",
+    .doc = "glClearColor(red, green, blue, alpha) -> None",
+    .text_signature = "($module, red, green, blue, alpha, /)",
+    .arg_names = pygl_GLES1_glClearColor_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3178,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClearColor(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClearColor(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_F(0, red);
     PYGL_F(1, green);
@@ -442,11 +810,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClearColorx_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLES1_glClearColorx_info = {"glClearColorx", "glClearColorx(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES1_glClearColorx_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3179, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glClearColorx_info = {
+    .name = "glClearColorx",
+    .doc = "glClearColorx(red, green, blue, alpha) -> None",
+    .text_signature = "($module, red, green, blue, alpha, /)",
+    .arg_names = pygl_GLES1_glClearColorx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3179,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClearColorx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClearColorx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, red);
     PYGL_I(1, green);
@@ -462,11 +846,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClearColorxOES_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLES1_glClearColorxOES_info = {"glClearColorxOES", "glClearColorxOES(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES1_glClearColorxOES_args, "GLES1_OES_fixed_point", "", 4, 3180, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glClearColorxOES_info = {
+    .name = "glClearColorxOES",
+    .doc = "glClearColorxOES(red, green, blue, alpha) -> None",
+    .text_signature = "($module, red, green, blue, alpha, /)",
+    .arg_names = pygl_GLES1_glClearColorxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3180,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClearColorxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClearColorxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, red);
     PYGL_I(1, green);
@@ -482,11 +882,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClearDepthf_args[] = {"d"};
-static const PyGLCommand pygl_GLES1_glClearDepthf_info = {"glClearDepthf", "glClearDepthf(d) -> None", "($module, d, /)", pygl_GLES1_glClearDepthf_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3181, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glClearDepthf_info = {
+    .name = "glClearDepthf",
+    .doc = "glClearDepthf(d) -> None",
+    .text_signature = "($module, d, /)",
+    .arg_names = pygl_GLES1_glClearDepthf_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3181,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClearDepthf(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClearDepthf(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_F(0, d);
     PYGL_CONV_OK();
@@ -499,11 +915,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClearDepthfOES_args[] = {"depth"};
-static const PyGLCommand pygl_GLES1_glClearDepthfOES_info = {"glClearDepthfOES", "glClearDepthfOES(depth) -> None", "($module, depth, /)", pygl_GLES1_glClearDepthfOES_args, "GLES1_OES_single_precision", "", 1, 3182, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glClearDepthfOES_info = {
+    .name = "glClearDepthfOES",
+    .doc = "glClearDepthfOES(depth) -> None",
+    .text_signature = "($module, depth, /)",
+    .arg_names = pygl_GLES1_glClearDepthfOES_args,
+    .extension = "GLES1_OES_single_precision",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3182,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClearDepthfOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClearDepthfOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_F(0, depth);
     PYGL_CONV_OK();
@@ -516,11 +948,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClearDepthx_args[] = {"depth"};
-static const PyGLCommand pygl_GLES1_glClearDepthx_info = {"glClearDepthx", "glClearDepthx(depth) -> None", "($module, depth, /)", pygl_GLES1_glClearDepthx_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3183, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glClearDepthx_info = {
+    .name = "glClearDepthx",
+    .doc = "glClearDepthx(depth) -> None",
+    .text_signature = "($module, depth, /)",
+    .arg_names = pygl_GLES1_glClearDepthx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3183,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClearDepthx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClearDepthx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, depth);
     PYGL_CONV_OK();
@@ -533,11 +981,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClearDepthxOES_args[] = {"depth"};
-static const PyGLCommand pygl_GLES1_glClearDepthxOES_info = {"glClearDepthxOES", "glClearDepthxOES(depth) -> None", "($module, depth, /)", pygl_GLES1_glClearDepthxOES_args, "GLES1_OES_fixed_point", "", 1, 3184, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glClearDepthxOES_info = {
+    .name = "glClearDepthxOES",
+    .doc = "glClearDepthxOES(depth) -> None",
+    .text_signature = "($module, depth, /)",
+    .arg_names = pygl_GLES1_glClearDepthxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3184,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClearDepthxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClearDepthxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, depth);
     PYGL_CONV_OK();
@@ -550,11 +1014,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClearStencil_args[] = {"s"};
-static const PyGLCommand pygl_GLES1_glClearStencil_info = {"glClearStencil", "glClearStencil(s) -> None", "($module, s, /)", pygl_GLES1_glClearStencil_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3185, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glClearStencil_info = {
+    .name = "glClearStencil",
+    .doc = "glClearStencil(s) -> None",
+    .text_signature = "($module, s, /)",
+    .arg_names = pygl_GLES1_glClearStencil_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3185,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClearStencil(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClearStencil(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, s);
     PYGL_CONV_OK();
@@ -567,11 +1047,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClientActiveTexture_args[] = {"texture"};
-static const PyGLCommand pygl_GLES1_glClientActiveTexture_info = {"glClientActiveTexture", "glClientActiveTexture(texture) -> None", "($module, texture, /)", pygl_GLES1_glClientActiveTexture_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3186, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glClientActiveTexture_info = {
+    .name = "glClientActiveTexture",
+    .doc = "glClientActiveTexture(texture) -> None",
+    .text_signature = "($module, texture, /)",
+    .arg_names = pygl_GLES1_glClientActiveTexture_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3186,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClientActiveTexture(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClientActiveTexture(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, texture);
     PYGL_CONV_OK();
@@ -584,11 +1080,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClientWaitSyncAPPLE_args[] = {"sync", "flags", "timeout"};
-static const PyGLCommand pygl_GLES1_glClientWaitSyncAPPLE_info = {"glClientWaitSyncAPPLE", "glClientWaitSyncAPPLE(sync, flags, timeout) -> GLenum", "($module, sync, flags, timeout, /)", pygl_GLES1_glClientWaitSyncAPPLE_args, "GLES1_APPLE_sync", "", 3, 3187, PYGL_API_GLES1, 0, 3, 1, 0};
+static const PyGLCommand pygl_GLES1_glClientWaitSyncAPPLE_info = {
+    .name = "glClientWaitSyncAPPLE",
+    .doc = "glClientWaitSyncAPPLE(sync, flags, timeout) -> GLenum",
+    .text_signature = "($module, sync, flags, timeout, /)",
+    .arg_names = pygl_GLES1_glClientWaitSyncAPPLE_args,
+    .extension = "GLES1_APPLE_sync",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3187,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClientWaitSyncAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClientWaitSyncAPPLE(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, sync);
     PYGL_U(1, flags);
@@ -603,11 +1115,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClipPlanef_args[] = {"p", "eqn"};
-static const PyGLCommand pygl_GLES1_glClipPlanef_info = {"glClipPlanef", "glClipPlanef(p, eqn) -> None", "($module, p, eqn, /)", pygl_GLES1_glClipPlanef_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3188, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glClipPlanef_info = {
+    .name = "glClipPlanef",
+    .doc = "glClipPlanef(p, eqn) -> None",
+    .text_signature = "($module, p, eqn, /)",
+    .arg_names = pygl_GLES1_glClipPlanef_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3188,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClipPlanef(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClipPlanef(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, p);
@@ -624,11 +1152,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClipPlanefIMG_args[] = {"p", "eqn"};
-static const PyGLCommand pygl_GLES1_glClipPlanefIMG_info = {"glClipPlanefIMG", "glClipPlanefIMG(p, eqn) -> None", "($module, p, eqn, /)", pygl_GLES1_glClipPlanefIMG_args, "GLES1_IMG_user_clip_plane", "", 2, 3189, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glClipPlanefIMG_info = {
+    .name = "glClipPlanefIMG",
+    .doc = "glClipPlanefIMG(p, eqn) -> None",
+    .text_signature = "($module, p, eqn, /)",
+    .arg_names = pygl_GLES1_glClipPlanefIMG_args,
+    .extension = "GLES1_IMG_user_clip_plane",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3189,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClipPlanefIMG(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClipPlanefIMG(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, p);
@@ -645,11 +1189,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClipPlanefOES_args[] = {"plane", "equation"};
-static const PyGLCommand pygl_GLES1_glClipPlanefOES_info = {"glClipPlanefOES", "glClipPlanefOES(plane, equation) -> None", "($module, plane, equation, /)", pygl_GLES1_glClipPlanefOES_args, "GLES1_OES_single_precision", "", 2, 3190, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glClipPlanefOES_info = {
+    .name = "glClipPlanefOES",
+    .doc = "glClipPlanefOES(plane, equation) -> None",
+    .text_signature = "($module, plane, equation, /)",
+    .arg_names = pygl_GLES1_glClipPlanefOES_args,
+    .extension = "GLES1_OES_single_precision",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3190,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClipPlanefOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClipPlanefOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, plane);
@@ -666,11 +1226,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClipPlanex_args[] = {"plane", "equation"};
-static const PyGLCommand pygl_GLES1_glClipPlanex_info = {"glClipPlanex", "glClipPlanex(plane, equation) -> None", "($module, plane, equation, /)", pygl_GLES1_glClipPlanex_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3191, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glClipPlanex_info = {
+    .name = "glClipPlanex",
+    .doc = "glClipPlanex(plane, equation) -> None",
+    .text_signature = "($module, plane, equation, /)",
+    .arg_names = pygl_GLES1_glClipPlanex_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3191,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClipPlanex(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClipPlanex(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, plane);
@@ -687,11 +1263,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClipPlanexIMG_args[] = {"p", "eqn"};
-static const PyGLCommand pygl_GLES1_glClipPlanexIMG_info = {"glClipPlanexIMG", "glClipPlanexIMG(p, eqn) -> None", "($module, p, eqn, /)", pygl_GLES1_glClipPlanexIMG_args, "GLES1_IMG_user_clip_plane", "", 2, 3192, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glClipPlanexIMG_info = {
+    .name = "glClipPlanexIMG",
+    .doc = "glClipPlanexIMG(p, eqn) -> None",
+    .text_signature = "($module, p, eqn, /)",
+    .arg_names = pygl_GLES1_glClipPlanexIMG_args,
+    .extension = "GLES1_IMG_user_clip_plane",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3192,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClipPlanexIMG(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClipPlanexIMG(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, p);
@@ -708,11 +1300,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glClipPlanexOES_args[] = {"plane", "equation"};
-static const PyGLCommand pygl_GLES1_glClipPlanexOES_info = {"glClipPlanexOES", "glClipPlanexOES(plane, equation) -> None", "($module, plane, equation, /)", pygl_GLES1_glClipPlanexOES_args, "GLES1_OES_fixed_point", "", 2, 3193, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glClipPlanexOES_info = {
+    .name = "glClipPlanexOES",
+    .doc = "glClipPlanexOES(plane, equation) -> None",
+    .text_signature = "($module, plane, equation, /)",
+    .arg_names = pygl_GLES1_glClipPlanexOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3193,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glClipPlanexOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glClipPlanexOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, plane);
@@ -729,11 +1337,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glColor3xOES_args[] = {"red", "green", "blue"};
-static const PyGLCommand pygl_GLES1_glColor3xOES_info = {"glColor3xOES", "glColor3xOES(red, green, blue) -> None", "($module, red, green, blue, /)", pygl_GLES1_glColor3xOES_args, "GLES1_OES_fixed_point", "", 3, 3194, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glColor3xOES_info = {
+    .name = "glColor3xOES",
+    .doc = "glColor3xOES(red, green, blue) -> None",
+    .text_signature = "($module, red, green, blue, /)",
+    .arg_names = pygl_GLES1_glColor3xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3194,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glColor3xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glColor3xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_I(0, red);
     PYGL_I(1, green);
@@ -748,11 +1372,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glColor3xvOES_args[] = {"components"};
-static const PyGLCommand pygl_GLES1_glColor3xvOES_info = {"glColor3xvOES", "glColor3xvOES(components) -> None", "($module, components, /)", pygl_GLES1_glColor3xvOES_args, "GLES1_OES_fixed_point", "", 1, 3195, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glColor3xvOES_info = {
+    .name = "glColor3xvOES",
+    .doc = "glColor3xvOES(components) -> None",
+    .text_signature = "($module, components, /)",
+    .arg_names = pygl_GLES1_glColor3xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3195,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glColor3xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glColor3xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -768,11 +1408,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glColor4f_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLES1_glColor4f_info = {"glColor4f", "glColor4f(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES1_glColor4f_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3196, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glColor4f_info = {
+    .name = "glColor4f",
+    .doc = "glColor4f(red, green, blue, alpha) -> None",
+    .text_signature = "($module, red, green, blue, alpha, /)",
+    .arg_names = pygl_GLES1_glColor4f_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3196,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glColor4f(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glColor4f(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_F(0, red);
     PYGL_F(1, green);
@@ -788,11 +1444,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glColor4ub_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLES1_glColor4ub_info = {"glColor4ub", "glColor4ub(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES1_glColor4ub_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3197, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glColor4ub_info = {
+    .name = "glColor4ub",
+    .doc = "glColor4ub(red, green, blue, alpha) -> None",
+    .text_signature = "($module, red, green, blue, alpha, /)",
+    .arg_names = pygl_GLES1_glColor4ub_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3197,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glColor4ub(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glColor4ub(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_U(0, red);
     PYGL_U(1, green);
@@ -808,11 +1480,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glColor4x_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLES1_glColor4x_info = {"glColor4x", "glColor4x(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES1_glColor4x_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3198, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glColor4x_info = {
+    .name = "glColor4x",
+    .doc = "glColor4x(red, green, blue, alpha) -> None",
+    .text_signature = "($module, red, green, blue, alpha, /)",
+    .arg_names = pygl_GLES1_glColor4x_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3198,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glColor4x(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glColor4x(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, red);
     PYGL_I(1, green);
@@ -828,11 +1516,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glColor4xOES_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLES1_glColor4xOES_info = {"glColor4xOES", "glColor4xOES(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES1_glColor4xOES_args, "GLES1_OES_fixed_point", "", 4, 3199, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glColor4xOES_info = {
+    .name = "glColor4xOES",
+    .doc = "glColor4xOES(red, green, blue, alpha) -> None",
+    .text_signature = "($module, red, green, blue, alpha, /)",
+    .arg_names = pygl_GLES1_glColor4xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3199,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glColor4xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glColor4xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, red);
     PYGL_I(1, green);
@@ -848,11 +1552,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glColor4xvOES_args[] = {"components"};
-static const PyGLCommand pygl_GLES1_glColor4xvOES_info = {"glColor4xvOES", "glColor4xvOES(components) -> None", "($module, components, /)", pygl_GLES1_glColor4xvOES_args, "GLES1_OES_fixed_point", "", 1, 3200, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glColor4xvOES_info = {
+    .name = "glColor4xvOES",
+    .doc = "glColor4xvOES(components) -> None",
+    .text_signature = "($module, components, /)",
+    .arg_names = pygl_GLES1_glColor4xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3200,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glColor4xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glColor4xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -868,11 +1588,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glColorMask_args[] = {"red", "green", "blue", "alpha"};
-static const PyGLCommand pygl_GLES1_glColorMask_info = {"glColorMask", "glColorMask(red, green, blue, alpha) -> None", "($module, red, green, blue, alpha, /)", pygl_GLES1_glColorMask_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3201, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glColorMask_info = {
+    .name = "glColorMask",
+    .doc = "glColorMask(red, green, blue, alpha) -> None",
+    .text_signature = "($module, red, green, blue, alpha, /)",
+    .arg_names = pygl_GLES1_glColorMask_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3201,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glColorMask(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glColorMask(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_B(0, red);
     PYGL_B(1, green);
@@ -888,11 +1624,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glColorPointer_args[] = {"size", "type", "stride", "pointer"};
-static const PyGLCommand pygl_GLES1_glColorPointer_info = {"glColorPointer", "glColorPointer(size, type, stride, pointer) -> None", "($module, size, type, stride, pointer, /)", pygl_GLES1_glColorPointer_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3202, PYGL_API_GLES1, 0, 4, 0, 1};
+static const PyGLCommand pygl_GLES1_glColorPointer_info = {
+    .name = "glColorPointer",
+    .doc = "glColorPointer(size, type, stride, pointer) -> None",
+    .text_signature = "($module, size, type, stride, pointer, /)",
+    .arg_names = pygl_GLES1_glColorPointer_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3202,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 1,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glColorPointer(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glColorPointer(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_I(0, size);
@@ -911,11 +1663,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glCompressedTexImage2D_args[] = {"target", "level", "internalformat", "width", "height", "border", "imageSize", "data"};
-static const PyGLCommand pygl_GLES1_glCompressedTexImage2D_info = {"glCompressedTexImage2D", "glCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data) -> None", "($module, target, level, internalformat, width, height, border, imageSize, data, /)", pygl_GLES1_glCompressedTexImage2D_args, "GLES1_VERSION_GLES1_1_0", "", 8, 3203, PYGL_API_GLES1, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES1_glCompressedTexImage2D_info = {
+    .name = "glCompressedTexImage2D",
+    .doc = "glCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data) -> None",
+    .text_signature = "($module, target, level, internalformat, width, height, border, imageSize, data, /)",
+    .arg_names = pygl_GLES1_glCompressedTexImage2D_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 8,
+    .slot = 3203,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 8,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glCompressedTexImage2D(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glCompressedTexImage2D(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(8);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -938,11 +1706,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glCompressedTexSubImage2D_args[] = {"target", "level", "xoffset", "yoffset", "width", "height", "format", "imageSize", "data"};
-static const PyGLCommand pygl_GLES1_glCompressedTexSubImage2D_info = {"glCompressedTexSubImage2D", "glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data) -> None", "($module, target, level, xoffset, yoffset, width, height, format, imageSize, data, /)", pygl_GLES1_glCompressedTexSubImage2D_args, "GLES1_VERSION_GLES1_1_0", "", 9, 3204, PYGL_API_GLES1, 0, 9, 0, 0};
+static const PyGLCommand pygl_GLES1_glCompressedTexSubImage2D_info = {
+    .name = "glCompressedTexSubImage2D",
+    .doc = "glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data) -> None",
+    .text_signature = "($module, target, level, xoffset, yoffset, width, height, format, imageSize, data, /)",
+    .arg_names = pygl_GLES1_glCompressedTexSubImage2D_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 9,
+    .slot = 3204,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 9,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glCompressedTexSubImage2D(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glCompressedTexSubImage2D(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(9);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -966,11 +1750,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glConvolutionParameterxOES_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glConvolutionParameterxOES_info = {"glConvolutionParameterxOES", "glConvolutionParameterxOES(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES1_glConvolutionParameterxOES_args, "GLES1_OES_fixed_point", "", 3, 3205, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glConvolutionParameterxOES_info = {
+    .name = "glConvolutionParameterxOES",
+    .doc = "glConvolutionParameterxOES(target, pname, param) -> None",
+    .text_signature = "($module, target, pname, param, /)",
+    .arg_names = pygl_GLES1_glConvolutionParameterxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3205,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glConvolutionParameterxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glConvolutionParameterxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, target);
     PYGL_U(1, pname);
@@ -985,11 +1785,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glConvolutionParameterxvOES_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glConvolutionParameterxvOES_info = {"glConvolutionParameterxvOES", "glConvolutionParameterxvOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES1_glConvolutionParameterxvOES_args, "GLES1_OES_fixed_point", "", 3, 3206, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glConvolutionParameterxvOES_info = {
+    .name = "glConvolutionParameterxvOES",
+    .doc = "glConvolutionParameterxvOES(target, pname, params) -> None",
+    .text_signature = "($module, target, pname, params, /)",
+    .arg_names = pygl_GLES1_glConvolutionParameterxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3206,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glConvolutionParameterxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glConvolutionParameterxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -1007,11 +1823,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glCopyTexImage2D_args[] = {"target", "level", "internalformat", "x", "y", "width", "height", "border"};
-static const PyGLCommand pygl_GLES1_glCopyTexImage2D_info = {"glCopyTexImage2D", "glCopyTexImage2D(target, level, internalformat, x, y, width, height, border) -> None", "($module, target, level, internalformat, x, y, width, height, border, /)", pygl_GLES1_glCopyTexImage2D_args, "GLES1_VERSION_GLES1_1_0", "", 8, 3207, PYGL_API_GLES1, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES1_glCopyTexImage2D_info = {
+    .name = "glCopyTexImage2D",
+    .doc = "glCopyTexImage2D(target, level, internalformat, x, y, width, height, border) -> None",
+    .text_signature = "($module, target, level, internalformat, x, y, width, height, border, /)",
+    .arg_names = pygl_GLES1_glCopyTexImage2D_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 8,
+    .slot = 3207,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 8,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glCopyTexImage2D(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glCopyTexImage2D(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(8);
     PYGL_U(0, target);
     PYGL_I(1, level);
@@ -1031,11 +1863,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glCopyTexSubImage2D_args[] = {"target", "level", "xoffset", "yoffset", "x", "y", "width", "height"};
-static const PyGLCommand pygl_GLES1_glCopyTexSubImage2D_info = {"glCopyTexSubImage2D", "glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height) -> None", "($module, target, level, xoffset, yoffset, x, y, width, height, /)", pygl_GLES1_glCopyTexSubImage2D_args, "GLES1_VERSION_GLES1_1_0", "", 8, 3208, PYGL_API_GLES1, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES1_glCopyTexSubImage2D_info = {
+    .name = "glCopyTexSubImage2D",
+    .doc = "glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height) -> None",
+    .text_signature = "($module, target, level, xoffset, yoffset, x, y, width, height, /)",
+    .arg_names = pygl_GLES1_glCopyTexSubImage2D_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 8,
+    .slot = 3208,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 8,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glCopyTexSubImage2D(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glCopyTexSubImage2D(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(8);
     PYGL_U(0, target);
     PYGL_I(1, level);
@@ -1055,11 +1903,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glCopyTextureLevelsAPPLE_args[] = {"destinationTexture", "sourceTexture", "sourceBaseLevel", "sourceLevelCount"};
-static const PyGLCommand pygl_GLES1_glCopyTextureLevelsAPPLE_info = {"glCopyTextureLevelsAPPLE", "glCopyTextureLevelsAPPLE(destinationTexture, sourceTexture, sourceBaseLevel, sourceLevelCount) -> None", "($module, destinationTexture, sourceTexture, sourceBaseLevel, sourceLevelCount, /)", pygl_GLES1_glCopyTextureLevelsAPPLE_args, "GLES1_APPLE_copy_texture_levels", "", 4, 3209, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glCopyTextureLevelsAPPLE_info = {
+    .name = "glCopyTextureLevelsAPPLE",
+    .doc = "glCopyTextureLevelsAPPLE(destinationTexture, sourceTexture, sourceBaseLevel, sourceLevelCount) -> None",
+    .text_signature = "($module, destinationTexture, sourceTexture, sourceBaseLevel, sourceLevelCount, /)",
+    .arg_names = pygl_GLES1_glCopyTextureLevelsAPPLE_args,
+    .extension = "GLES1_APPLE_copy_texture_levels",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3209,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glCopyTextureLevelsAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glCopyTextureLevelsAPPLE(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_U(0, destinationTexture);
     PYGL_U(1, sourceTexture);
@@ -1075,11 +1939,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glCullFace_args[] = {"mode"};
-static const PyGLCommand pygl_GLES1_glCullFace_info = {"glCullFace", "glCullFace(mode) -> None", "($module, mode, /)", pygl_GLES1_glCullFace_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3210, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glCullFace_info = {
+    .name = "glCullFace",
+    .doc = "glCullFace(mode) -> None",
+    .text_signature = "($module, mode, /)",
+    .arg_names = pygl_GLES1_glCullFace_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3210,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glCullFace(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glCullFace(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, mode);
     PYGL_CONV_OK();
@@ -1092,11 +1972,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glCurrentPaletteMatrixOES_args[] = {"matrixpaletteindex"};
-static const PyGLCommand pygl_GLES1_glCurrentPaletteMatrixOES_info = {"glCurrentPaletteMatrixOES", "glCurrentPaletteMatrixOES(matrixpaletteindex) -> None", "($module, matrixpaletteindex, /)", pygl_GLES1_glCurrentPaletteMatrixOES_args, "GLES1_OES_matrix_palette", "", 1, 3211, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glCurrentPaletteMatrixOES_info = {
+    .name = "glCurrentPaletteMatrixOES",
+    .doc = "glCurrentPaletteMatrixOES(matrixpaletteindex) -> None",
+    .text_signature = "($module, matrixpaletteindex, /)",
+    .arg_names = pygl_GLES1_glCurrentPaletteMatrixOES_args,
+    .extension = "GLES1_OES_matrix_palette",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3211,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glCurrentPaletteMatrixOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glCurrentPaletteMatrixOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, matrixpaletteindex);
     PYGL_CONV_OK();
@@ -1109,11 +2005,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDebugMessageCallback_args[] = {"callback", "userParam"};
-static const PyGLCommand pygl_GLES1_glDebugMessageCallback_info = {"glDebugMessageCallback", "glDebugMessageCallback(callback, userParam) -> None", "($module, callback, userParam, /)", pygl_GLES1_glDebugMessageCallback_args, "GLES1_KHR_debug", "", 2, 3212, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glDebugMessageCallback_info = {
+    .name = "glDebugMessageCallback",
+    .doc = "glDebugMessageCallback(callback, userParam) -> None",
+    .text_signature = "($module, callback, userParam, /)",
+    .arg_names = pygl_GLES1_glDebugMessageCallback_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3212,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDebugMessageCallback(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDebugMessageCallback(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, callback);
@@ -1130,11 +2042,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDebugMessageCallbackKHR_args[] = {"callback", "userParam"};
-static const PyGLCommand pygl_GLES1_glDebugMessageCallbackKHR_info = {"glDebugMessageCallbackKHR", "glDebugMessageCallbackKHR(callback, userParam) -> None", "($module, callback, userParam, /)", pygl_GLES1_glDebugMessageCallbackKHR_args, "GLES1_KHR_debug", "", 2, 3213, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glDebugMessageCallbackKHR_info = {
+    .name = "glDebugMessageCallbackKHR",
+    .doc = "glDebugMessageCallbackKHR(callback, userParam) -> None",
+    .text_signature = "($module, callback, userParam, /)",
+    .arg_names = pygl_GLES1_glDebugMessageCallbackKHR_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3213,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDebugMessageCallbackKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDebugMessageCallbackKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, callback);
@@ -1151,11 +2079,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDebugMessageControl_args[] = {"source", "type", "severity", "count", "ids", "enabled"};
-static const PyGLCommand pygl_GLES1_glDebugMessageControl_info = {"glDebugMessageControl", "glDebugMessageControl(source, type, severity, count, ids, enabled) -> None", "($module, source, type, severity, count, ids, enabled, /)", pygl_GLES1_glDebugMessageControl_args, "GLES1_KHR_debug", "", 6, 3214, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glDebugMessageControl_info = {
+    .name = "glDebugMessageControl",
+    .doc = "glDebugMessageControl(source, type, severity, count, ids, enabled) -> None",
+    .text_signature = "($module, source, type, severity, count, ids, enabled, /)",
+    .arg_names = pygl_GLES1_glDebugMessageControl_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3214,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDebugMessageControl(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDebugMessageControl(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_FRAME(1);
     PYGL_U(0, source);
@@ -1176,11 +2120,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDebugMessageControlKHR_args[] = {"source", "type", "severity", "count", "ids", "enabled"};
-static const PyGLCommand pygl_GLES1_glDebugMessageControlKHR_info = {"glDebugMessageControlKHR", "glDebugMessageControlKHR(source, type, severity, count, ids, enabled) -> None", "($module, source, type, severity, count, ids, enabled, /)", pygl_GLES1_glDebugMessageControlKHR_args, "GLES1_KHR_debug", "", 6, 3215, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glDebugMessageControlKHR_info = {
+    .name = "glDebugMessageControlKHR",
+    .doc = "glDebugMessageControlKHR(source, type, severity, count, ids, enabled) -> None",
+    .text_signature = "($module, source, type, severity, count, ids, enabled, /)",
+    .arg_names = pygl_GLES1_glDebugMessageControlKHR_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3215,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDebugMessageControlKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDebugMessageControlKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_FRAME(1);
     PYGL_U(0, source);
@@ -1201,11 +2161,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDebugMessageInsert_args[] = {"source", "type", "id", "severity", "length", "buf"};
-static const PyGLCommand pygl_GLES1_glDebugMessageInsert_info = {"glDebugMessageInsert", "glDebugMessageInsert(source, type, id, severity, length, buf) -> None", "($module, source, type, id, severity, length, buf, /)", pygl_GLES1_glDebugMessageInsert_args, "GLES1_KHR_debug", "", 6, 3216, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glDebugMessageInsert_info = {
+    .name = "glDebugMessageInsert",
+    .doc = "glDebugMessageInsert(source, type, id, severity, length, buf) -> None",
+    .text_signature = "($module, source, type, id, severity, length, buf, /)",
+    .arg_names = pygl_GLES1_glDebugMessageInsert_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3216,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDebugMessageInsert(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDebugMessageInsert(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_FRAME(1);
     PYGL_U(0, source);
@@ -1226,11 +2202,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDebugMessageInsertKHR_args[] = {"source", "type", "id", "severity", "length", "buf"};
-static const PyGLCommand pygl_GLES1_glDebugMessageInsertKHR_info = {"glDebugMessageInsertKHR", "glDebugMessageInsertKHR(source, type, id, severity, length, buf) -> None", "($module, source, type, id, severity, length, buf, /)", pygl_GLES1_glDebugMessageInsertKHR_args, "GLES1_KHR_debug", "", 6, 3217, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glDebugMessageInsertKHR_info = {
+    .name = "glDebugMessageInsertKHR",
+    .doc = "glDebugMessageInsertKHR(source, type, id, severity, length, buf) -> None",
+    .text_signature = "($module, source, type, id, severity, length, buf, /)",
+    .arg_names = pygl_GLES1_glDebugMessageInsertKHR_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3217,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDebugMessageInsertKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDebugMessageInsertKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_FRAME(1);
     PYGL_U(0, source);
@@ -1251,11 +2243,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDeleteBuffers_args[] = {"n", "buffers"};
-static const PyGLCommand pygl_GLES1_glDeleteBuffers_info = {"glDeleteBuffers", "glDeleteBuffers(n, buffers) -> None", "($module, n, buffers, /)", pygl_GLES1_glDeleteBuffers_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3218, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glDeleteBuffers_info = {
+    .name = "glDeleteBuffers",
+    .doc = "glDeleteBuffers(n, buffers) -> None",
+    .text_signature = "($module, n, buffers, /)",
+    .arg_names = pygl_GLES1_glDeleteBuffers_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3218,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDeleteBuffers(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDeleteBuffers(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
@@ -1272,11 +2280,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDeleteFencesNV_args[] = {"n", "fences"};
-static const PyGLCommand pygl_GLES1_glDeleteFencesNV_info = {"glDeleteFencesNV", "glDeleteFencesNV(n, fences) -> None", "($module, n, fences, /)", pygl_GLES1_glDeleteFencesNV_args, "GLES1_NV_fence", "", 2, 3219, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glDeleteFencesNV_info = {
+    .name = "glDeleteFencesNV",
+    .doc = "glDeleteFencesNV(n, fences) -> None",
+    .text_signature = "($module, n, fences, /)",
+    .arg_names = pygl_GLES1_glDeleteFencesNV_args,
+    .extension = "GLES1_NV_fence",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3219,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDeleteFencesNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDeleteFencesNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
@@ -1293,11 +2317,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDeleteFramebuffersOES_args[] = {"n", "framebuffers"};
-static const PyGLCommand pygl_GLES1_glDeleteFramebuffersOES_info = {"glDeleteFramebuffersOES", "glDeleteFramebuffersOES(n, framebuffers) -> None", "($module, n, framebuffers, /)", pygl_GLES1_glDeleteFramebuffersOES_args, "GLES1_OES_framebuffer_object", "", 2, 3220, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glDeleteFramebuffersOES_info = {
+    .name = "glDeleteFramebuffersOES",
+    .doc = "glDeleteFramebuffersOES(n, framebuffers) -> None",
+    .text_signature = "($module, n, framebuffers, /)",
+    .arg_names = pygl_GLES1_glDeleteFramebuffersOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3220,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDeleteFramebuffersOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDeleteFramebuffersOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
@@ -1314,11 +2354,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDeleteRenderbuffersOES_args[] = {"n", "renderbuffers"};
-static const PyGLCommand pygl_GLES1_glDeleteRenderbuffersOES_info = {"glDeleteRenderbuffersOES", "glDeleteRenderbuffersOES(n, renderbuffers) -> None", "($module, n, renderbuffers, /)", pygl_GLES1_glDeleteRenderbuffersOES_args, "GLES1_OES_framebuffer_object", "", 2, 3221, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glDeleteRenderbuffersOES_info = {
+    .name = "glDeleteRenderbuffersOES",
+    .doc = "glDeleteRenderbuffersOES(n, renderbuffers) -> None",
+    .text_signature = "($module, n, renderbuffers, /)",
+    .arg_names = pygl_GLES1_glDeleteRenderbuffersOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3221,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDeleteRenderbuffersOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDeleteRenderbuffersOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
@@ -1335,11 +2391,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDeleteSyncAPPLE_args[] = {"sync"};
-static const PyGLCommand pygl_GLES1_glDeleteSyncAPPLE_info = {"glDeleteSyncAPPLE", "glDeleteSyncAPPLE(sync) -> None", "($module, sync, /)", pygl_GLES1_glDeleteSyncAPPLE_args, "GLES1_APPLE_sync", "", 1, 3222, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glDeleteSyncAPPLE_info = {
+    .name = "glDeleteSyncAPPLE",
+    .doc = "glDeleteSyncAPPLE(sync) -> None",
+    .text_signature = "($module, sync, /)",
+    .arg_names = pygl_GLES1_glDeleteSyncAPPLE_args,
+    .extension = "GLES1_APPLE_sync",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3222,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDeleteSyncAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDeleteSyncAPPLE(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_OPAQUE(0, sync);
     PYGL_CONV_OK();
@@ -1352,11 +2424,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDeleteTextures_args[] = {"n", "textures"};
-static const PyGLCommand pygl_GLES1_glDeleteTextures_info = {"glDeleteTextures", "glDeleteTextures(n, textures) -> None", "($module, n, textures, /)", pygl_GLES1_glDeleteTextures_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3223, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glDeleteTextures_info = {
+    .name = "glDeleteTextures",
+    .doc = "glDeleteTextures(n, textures) -> None",
+    .text_signature = "($module, n, textures, /)",
+    .arg_names = pygl_GLES1_glDeleteTextures_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3223,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDeleteTextures(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDeleteTextures(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
@@ -1373,11 +2461,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDeleteVertexArraysOES_args[] = {"n", "arrays"};
-static const PyGLCommand pygl_GLES1_glDeleteVertexArraysOES_info = {"glDeleteVertexArraysOES", "glDeleteVertexArraysOES(n, arrays) -> None", "($module, n, arrays, /)", pygl_GLES1_glDeleteVertexArraysOES_args, "GLES1_OES_vertex_array_object", "", 2, 3224, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glDeleteVertexArraysOES_info = {
+    .name = "glDeleteVertexArraysOES",
+    .doc = "glDeleteVertexArraysOES(n, arrays) -> None",
+    .text_signature = "($module, n, arrays, /)",
+    .arg_names = pygl_GLES1_glDeleteVertexArraysOES_args,
+    .extension = "GLES1_OES_vertex_array_object",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3224,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDeleteVertexArraysOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDeleteVertexArraysOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
@@ -1394,11 +2498,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDepthFunc_args[] = {"func"};
-static const PyGLCommand pygl_GLES1_glDepthFunc_info = {"glDepthFunc", "glDepthFunc(func) -> None", "($module, func, /)", pygl_GLES1_glDepthFunc_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3225, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glDepthFunc_info = {
+    .name = "glDepthFunc",
+    .doc = "glDepthFunc(func) -> None",
+    .text_signature = "($module, func, /)",
+    .arg_names = pygl_GLES1_glDepthFunc_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3225,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDepthFunc(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDepthFunc(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, func);
     PYGL_CONV_OK();
@@ -1411,11 +2531,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDepthMask_args[] = {"flag"};
-static const PyGLCommand pygl_GLES1_glDepthMask_info = {"glDepthMask", "glDepthMask(flag) -> None", "($module, flag, /)", pygl_GLES1_glDepthMask_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3226, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glDepthMask_info = {
+    .name = "glDepthMask",
+    .doc = "glDepthMask(flag) -> None",
+    .text_signature = "($module, flag, /)",
+    .arg_names = pygl_GLES1_glDepthMask_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3226,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDepthMask(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDepthMask(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_B(0, flag);
     PYGL_CONV_OK();
@@ -1428,11 +2564,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDepthRangef_args[] = {"n", "f"};
-static const PyGLCommand pygl_GLES1_glDepthRangef_info = {"glDepthRangef", "glDepthRangef(n, f) -> None", "($module, n, f, /)", pygl_GLES1_glDepthRangef_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3227, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glDepthRangef_info = {
+    .name = "glDepthRangef",
+    .doc = "glDepthRangef(n, f) -> None",
+    .text_signature = "($module, n, f, /)",
+    .arg_names = pygl_GLES1_glDepthRangef_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3227,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDepthRangef(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDepthRangef(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_F(0, n);
     PYGL_F(1, f);
@@ -1446,11 +2598,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDepthRangefOES_args[] = {"n", "f"};
-static const PyGLCommand pygl_GLES1_glDepthRangefOES_info = {"glDepthRangefOES", "glDepthRangefOES(n, f) -> None", "($module, n, f, /)", pygl_GLES1_glDepthRangefOES_args, "GLES1_OES_single_precision", "", 2, 3228, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glDepthRangefOES_info = {
+    .name = "glDepthRangefOES",
+    .doc = "glDepthRangefOES(n, f) -> None",
+    .text_signature = "($module, n, f, /)",
+    .arg_names = pygl_GLES1_glDepthRangefOES_args,
+    .extension = "GLES1_OES_single_precision",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3228,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDepthRangefOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDepthRangefOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_F(0, n);
     PYGL_F(1, f);
@@ -1464,11 +2632,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDepthRangex_args[] = {"n", "f"};
-static const PyGLCommand pygl_GLES1_glDepthRangex_info = {"glDepthRangex", "glDepthRangex(n, f) -> None", "($module, n, f, /)", pygl_GLES1_glDepthRangex_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3229, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glDepthRangex_info = {
+    .name = "glDepthRangex",
+    .doc = "glDepthRangex(n, f) -> None",
+    .text_signature = "($module, n, f, /)",
+    .arg_names = pygl_GLES1_glDepthRangex_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3229,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDepthRangex(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDepthRangex(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_I(0, n);
     PYGL_I(1, f);
@@ -1482,11 +2666,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDepthRangexOES_args[] = {"n", "f"};
-static const PyGLCommand pygl_GLES1_glDepthRangexOES_info = {"glDepthRangexOES", "glDepthRangexOES(n, f) -> None", "($module, n, f, /)", pygl_GLES1_glDepthRangexOES_args, "GLES1_OES_fixed_point", "", 2, 3230, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glDepthRangexOES_info = {
+    .name = "glDepthRangexOES",
+    .doc = "glDepthRangexOES(n, f) -> None",
+    .text_signature = "($module, n, f, /)",
+    .arg_names = pygl_GLES1_glDepthRangexOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3230,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDepthRangexOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDepthRangexOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_I(0, n);
     PYGL_I(1, f);
@@ -1500,11 +2700,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDisable_args[] = {"cap"};
-static const PyGLCommand pygl_GLES1_glDisable_info = {"glDisable", "glDisable(cap) -> None", "($module, cap, /)", pygl_GLES1_glDisable_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3231, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glDisable_info = {
+    .name = "glDisable",
+    .doc = "glDisable(cap) -> None",
+    .text_signature = "($module, cap, /)",
+    .arg_names = pygl_GLES1_glDisable_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3231,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDisable(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDisable(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, cap);
     PYGL_CONV_OK();
@@ -1517,11 +2733,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDisableClientState_args[] = {"array"};
-static const PyGLCommand pygl_GLES1_glDisableClientState_info = {"glDisableClientState", "glDisableClientState(array) -> None", "($module, array, /)", pygl_GLES1_glDisableClientState_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3232, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glDisableClientState_info = {
+    .name = "glDisableClientState",
+    .doc = "glDisableClientState(array) -> None",
+    .text_signature = "($module, array, /)",
+    .arg_names = pygl_GLES1_glDisableClientState_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3232,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDisableClientState(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDisableClientState(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, array);
     PYGL_CONV_OK();
@@ -1534,11 +2766,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDisableDriverControlQCOM_args[] = {"driverControl"};
-static const PyGLCommand pygl_GLES1_glDisableDriverControlQCOM_info = {"glDisableDriverControlQCOM", "glDisableDriverControlQCOM(driverControl) -> None", "($module, driverControl, /)", pygl_GLES1_glDisableDriverControlQCOM_args, "GLES1_QCOM_driver_control", "", 1, 3233, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glDisableDriverControlQCOM_info = {
+    .name = "glDisableDriverControlQCOM",
+    .doc = "glDisableDriverControlQCOM(driverControl) -> None",
+    .text_signature = "($module, driverControl, /)",
+    .arg_names = pygl_GLES1_glDisableDriverControlQCOM_args,
+    .extension = "GLES1_QCOM_driver_control",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3233,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDisableDriverControlQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDisableDriverControlQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, driverControl);
     PYGL_CONV_OK();
@@ -1551,11 +2799,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDiscardFramebufferEXT_args[] = {"target", "numAttachments", "attachments"};
-static const PyGLCommand pygl_GLES1_glDiscardFramebufferEXT_info = {"glDiscardFramebufferEXT", "glDiscardFramebufferEXT(target, numAttachments, attachments) -> None", "($module, target, numAttachments, attachments, /)", pygl_GLES1_glDiscardFramebufferEXT_args, "GLES1_EXT_discard_framebuffer", "", 3, 3234, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glDiscardFramebufferEXT_info = {
+    .name = "glDiscardFramebufferEXT",
+    .doc = "glDiscardFramebufferEXT(target, numAttachments, attachments) -> None",
+    .text_signature = "($module, target, numAttachments, attachments, /)",
+    .arg_names = pygl_GLES1_glDiscardFramebufferEXT_args,
+    .extension = "GLES1_EXT_discard_framebuffer",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3234,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDiscardFramebufferEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDiscardFramebufferEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -1573,11 +2837,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDrawArrays_args[] = {"mode", "first", "count"};
-static const PyGLCommand pygl_GLES1_glDrawArrays_info = {"glDrawArrays", "glDrawArrays(mode, first, count) -> None", "($module, mode, first, count, /)", pygl_GLES1_glDrawArrays_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3235, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glDrawArrays_info = {
+    .name = "glDrawArrays",
+    .doc = "glDrawArrays(mode, first, count) -> None",
+    .text_signature = "($module, mode, first, count, /)",
+    .arg_names = pygl_GLES1_glDrawArrays_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3235,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDrawArrays(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDrawArrays(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, mode);
     PYGL_I(1, first);
@@ -1592,11 +2872,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDrawElements_args[] = {"mode", "count", "type", "indices"};
-static const PyGLCommand pygl_GLES1_glDrawElements_info = {"glDrawElements", "glDrawElements(mode, count, type, indices) -> None", "($module, mode, count, type, indices, /)", pygl_GLES1_glDrawElements_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3236, PYGL_API_GLES1, 0, 4, 0, 1};
+static const PyGLCommand pygl_GLES1_glDrawElements_info = {
+    .name = "glDrawElements",
+    .doc = "glDrawElements(mode, count, type, indices) -> None",
+    .text_signature = "($module, mode, count, type, indices, /)",
+    .arg_names = pygl_GLES1_glDrawElements_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3236,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 1,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDrawElements(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDrawElements(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_U(0, mode);
@@ -1615,11 +2911,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDrawTexfOES_args[] = {"x", "y", "z", "width", "height"};
-static const PyGLCommand pygl_GLES1_glDrawTexfOES_info = {"glDrawTexfOES", "glDrawTexfOES(x, y, z, width, height) -> None", "($module, x, y, z, width, height, /)", pygl_GLES1_glDrawTexfOES_args, "GLES1_OES_draw_texture", "", 5, 3237, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glDrawTexfOES_info = {
+    .name = "glDrawTexfOES",
+    .doc = "glDrawTexfOES(x, y, z, width, height) -> None",
+    .text_signature = "($module, x, y, z, width, height, /)",
+    .arg_names = pygl_GLES1_glDrawTexfOES_args,
+    .extension = "GLES1_OES_draw_texture",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3237,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDrawTexfOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDrawTexfOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_F(0, x);
     PYGL_F(1, y);
@@ -1636,11 +2948,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDrawTexfvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glDrawTexfvOES_info = {"glDrawTexfvOES", "glDrawTexfvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glDrawTexfvOES_args, "GLES1_OES_draw_texture", "", 1, 3238, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glDrawTexfvOES_info = {
+    .name = "glDrawTexfvOES",
+    .doc = "glDrawTexfvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glDrawTexfvOES_args,
+    .extension = "GLES1_OES_draw_texture",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3238,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDrawTexfvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDrawTexfvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -1656,11 +2984,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDrawTexiOES_args[] = {"x", "y", "z", "width", "height"};
-static const PyGLCommand pygl_GLES1_glDrawTexiOES_info = {"glDrawTexiOES", "glDrawTexiOES(x, y, z, width, height) -> None", "($module, x, y, z, width, height, /)", pygl_GLES1_glDrawTexiOES_args, "GLES1_OES_draw_texture", "", 5, 3239, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glDrawTexiOES_info = {
+    .name = "glDrawTexiOES",
+    .doc = "glDrawTexiOES(x, y, z, width, height) -> None",
+    .text_signature = "($module, x, y, z, width, height, /)",
+    .arg_names = pygl_GLES1_glDrawTexiOES_args,
+    .extension = "GLES1_OES_draw_texture",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3239,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDrawTexiOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDrawTexiOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -1677,11 +3021,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDrawTexivOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glDrawTexivOES_info = {"glDrawTexivOES", "glDrawTexivOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glDrawTexivOES_args, "GLES1_OES_draw_texture", "", 1, 3240, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glDrawTexivOES_info = {
+    .name = "glDrawTexivOES",
+    .doc = "glDrawTexivOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glDrawTexivOES_args,
+    .extension = "GLES1_OES_draw_texture",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3240,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDrawTexivOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDrawTexivOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -1697,11 +3057,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDrawTexsOES_args[] = {"x", "y", "z", "width", "height"};
-static const PyGLCommand pygl_GLES1_glDrawTexsOES_info = {"glDrawTexsOES", "glDrawTexsOES(x, y, z, width, height) -> None", "($module, x, y, z, width, height, /)", pygl_GLES1_glDrawTexsOES_args, "GLES1_OES_draw_texture", "", 5, 3241, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glDrawTexsOES_info = {
+    .name = "glDrawTexsOES",
+    .doc = "glDrawTexsOES(x, y, z, width, height) -> None",
+    .text_signature = "($module, x, y, z, width, height, /)",
+    .arg_names = pygl_GLES1_glDrawTexsOES_args,
+    .extension = "GLES1_OES_draw_texture",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3241,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDrawTexsOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDrawTexsOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -1718,11 +3094,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDrawTexsvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glDrawTexsvOES_info = {"glDrawTexsvOES", "glDrawTexsvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glDrawTexsvOES_args, "GLES1_OES_draw_texture", "", 1, 3242, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glDrawTexsvOES_info = {
+    .name = "glDrawTexsvOES",
+    .doc = "glDrawTexsvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glDrawTexsvOES_args,
+    .extension = "GLES1_OES_draw_texture",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3242,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDrawTexsvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDrawTexsvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -1738,11 +3130,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDrawTexxOES_args[] = {"x", "y", "z", "width", "height"};
-static const PyGLCommand pygl_GLES1_glDrawTexxOES_info = {"glDrawTexxOES", "glDrawTexxOES(x, y, z, width, height) -> None", "($module, x, y, z, width, height, /)", pygl_GLES1_glDrawTexxOES_args, "GLES1_OES_draw_texture", "", 5, 3243, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glDrawTexxOES_info = {
+    .name = "glDrawTexxOES",
+    .doc = "glDrawTexxOES(x, y, z, width, height) -> None",
+    .text_signature = "($module, x, y, z, width, height, /)",
+    .arg_names = pygl_GLES1_glDrawTexxOES_args,
+    .extension = "GLES1_OES_draw_texture",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3243,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDrawTexxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDrawTexxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -1759,11 +3167,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glDrawTexxvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glDrawTexxvOES_info = {"glDrawTexxvOES", "glDrawTexxvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glDrawTexxvOES_args, "GLES1_OES_draw_texture", "", 1, 3244, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glDrawTexxvOES_info = {
+    .name = "glDrawTexxvOES",
+    .doc = "glDrawTexxvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glDrawTexxvOES_args,
+    .extension = "GLES1_OES_draw_texture",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3244,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glDrawTexxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glDrawTexxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -1779,11 +3203,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glEGLImageTargetRenderbufferStorageOES_args[] = {"target", "image"};
-static const PyGLCommand pygl_GLES1_glEGLImageTargetRenderbufferStorageOES_info = {"glEGLImageTargetRenderbufferStorageOES", "glEGLImageTargetRenderbufferStorageOES(target, image) -> None", "($module, target, image, /)", pygl_GLES1_glEGLImageTargetRenderbufferStorageOES_args, "GLES1_OES_EGL_image", "", 2, 3245, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glEGLImageTargetRenderbufferStorageOES_info = {
+    .name = "glEGLImageTargetRenderbufferStorageOES",
+    .doc = "glEGLImageTargetRenderbufferStorageOES(target, image) -> None",
+    .text_signature = "($module, target, image, /)",
+    .arg_names = pygl_GLES1_glEGLImageTargetRenderbufferStorageOES_args,
+    .extension = "GLES1_OES_EGL_image",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3245,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glEGLImageTargetRenderbufferStorageOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glEGLImageTargetRenderbufferStorageOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, target);
     PYGL_OPAQUE(1, image);
@@ -1797,11 +3237,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glEGLImageTargetTexture2DOES_args[] = {"target", "image"};
-static const PyGLCommand pygl_GLES1_glEGLImageTargetTexture2DOES_info = {"glEGLImageTargetTexture2DOES", "glEGLImageTargetTexture2DOES(target, image) -> None", "($module, target, image, /)", pygl_GLES1_glEGLImageTargetTexture2DOES_args, "GLES1_OES_EGL_image", "GLES1_OES_EGL_image_external", 2, 3246, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glEGLImageTargetTexture2DOES_info = {
+    .name = "glEGLImageTargetTexture2DOES",
+    .doc = "glEGLImageTargetTexture2DOES(target, image) -> None",
+    .text_signature = "($module, target, image, /)",
+    .arg_names = pygl_GLES1_glEGLImageTargetTexture2DOES_args,
+    .extension = "GLES1_OES_EGL_image",
+    .alternates = "GLES1_OES_EGL_image_external",
+    .arg_count = 2,
+    .slot = 3246,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glEGLImageTargetTexture2DOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glEGLImageTargetTexture2DOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, target);
     PYGL_OPAQUE(1, image);
@@ -1815,11 +3271,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glEnable_args[] = {"cap"};
-static const PyGLCommand pygl_GLES1_glEnable_info = {"glEnable", "glEnable(cap) -> None", "($module, cap, /)", pygl_GLES1_glEnable_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3247, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glEnable_info = {
+    .name = "glEnable",
+    .doc = "glEnable(cap) -> None",
+    .text_signature = "($module, cap, /)",
+    .arg_names = pygl_GLES1_glEnable_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3247,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glEnable(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glEnable(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, cap);
     PYGL_CONV_OK();
@@ -1832,11 +3304,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glEnableClientState_args[] = {"array"};
-static const PyGLCommand pygl_GLES1_glEnableClientState_info = {"glEnableClientState", "glEnableClientState(array) -> None", "($module, array, /)", pygl_GLES1_glEnableClientState_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3248, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glEnableClientState_info = {
+    .name = "glEnableClientState",
+    .doc = "glEnableClientState(array) -> None",
+    .text_signature = "($module, array, /)",
+    .arg_names = pygl_GLES1_glEnableClientState_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3248,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glEnableClientState(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glEnableClientState(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, array);
     PYGL_CONV_OK();
@@ -1849,11 +3337,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glEnableDriverControlQCOM_args[] = {"driverControl"};
-static const PyGLCommand pygl_GLES1_glEnableDriverControlQCOM_info = {"glEnableDriverControlQCOM", "glEnableDriverControlQCOM(driverControl) -> None", "($module, driverControl, /)", pygl_GLES1_glEnableDriverControlQCOM_args, "GLES1_QCOM_driver_control", "", 1, 3249, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glEnableDriverControlQCOM_info = {
+    .name = "glEnableDriverControlQCOM",
+    .doc = "glEnableDriverControlQCOM(driverControl) -> None",
+    .text_signature = "($module, driverControl, /)",
+    .arg_names = pygl_GLES1_glEnableDriverControlQCOM_args,
+    .extension = "GLES1_QCOM_driver_control",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3249,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glEnableDriverControlQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glEnableDriverControlQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, driverControl);
     PYGL_CONV_OK();
@@ -1866,11 +3370,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glEndTilingQCOM_args[] = {"preserveMask"};
-static const PyGLCommand pygl_GLES1_glEndTilingQCOM_info = {"glEndTilingQCOM", "glEndTilingQCOM(preserveMask) -> None", "($module, preserveMask, /)", pygl_GLES1_glEndTilingQCOM_args, "GLES1_QCOM_tiled_rendering", "", 1, 3250, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glEndTilingQCOM_info = {
+    .name = "glEndTilingQCOM",
+    .doc = "glEndTilingQCOM(preserveMask) -> None",
+    .text_signature = "($module, preserveMask, /)",
+    .arg_names = pygl_GLES1_glEndTilingQCOM_args,
+    .extension = "GLES1_QCOM_tiled_rendering",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3250,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glEndTilingQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glEndTilingQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, preserveMask);
     PYGL_CONV_OK();
@@ -1883,11 +3403,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glEvalCoord1xOES_args[] = {"u"};
-static const PyGLCommand pygl_GLES1_glEvalCoord1xOES_info = {"glEvalCoord1xOES", "glEvalCoord1xOES(u) -> None", "($module, u, /)", pygl_GLES1_glEvalCoord1xOES_args, "GLES1_OES_fixed_point", "", 1, 3251, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glEvalCoord1xOES_info = {
+    .name = "glEvalCoord1xOES",
+    .doc = "glEvalCoord1xOES(u) -> None",
+    .text_signature = "($module, u, /)",
+    .arg_names = pygl_GLES1_glEvalCoord1xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3251,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glEvalCoord1xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glEvalCoord1xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, u);
     PYGL_CONV_OK();
@@ -1900,11 +3436,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glEvalCoord1xvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glEvalCoord1xvOES_info = {"glEvalCoord1xvOES", "glEvalCoord1xvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glEvalCoord1xvOES_args, "GLES1_OES_fixed_point", "", 1, 3252, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glEvalCoord1xvOES_info = {
+    .name = "glEvalCoord1xvOES",
+    .doc = "glEvalCoord1xvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glEvalCoord1xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3252,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glEvalCoord1xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glEvalCoord1xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -1920,11 +3472,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glEvalCoord2xOES_args[] = {"u", "v"};
-static const PyGLCommand pygl_GLES1_glEvalCoord2xOES_info = {"glEvalCoord2xOES", "glEvalCoord2xOES(u, v) -> None", "($module, u, v, /)", pygl_GLES1_glEvalCoord2xOES_args, "GLES1_OES_fixed_point", "", 2, 3253, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glEvalCoord2xOES_info = {
+    .name = "glEvalCoord2xOES",
+    .doc = "glEvalCoord2xOES(u, v) -> None",
+    .text_signature = "($module, u, v, /)",
+    .arg_names = pygl_GLES1_glEvalCoord2xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3253,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glEvalCoord2xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glEvalCoord2xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_I(0, u);
     PYGL_I(1, v);
@@ -1938,11 +3506,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glEvalCoord2xvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glEvalCoord2xvOES_info = {"glEvalCoord2xvOES", "glEvalCoord2xvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glEvalCoord2xvOES_args, "GLES1_OES_fixed_point", "", 1, 3254, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glEvalCoord2xvOES_info = {
+    .name = "glEvalCoord2xvOES",
+    .doc = "glEvalCoord2xvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glEvalCoord2xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3254,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glEvalCoord2xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glEvalCoord2xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -1958,11 +3542,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glExtGetBufferPointervQCOM_args[] = {"target", "params"};
-static const PyGLCommand pygl_GLES1_glExtGetBufferPointervQCOM_info = {"glExtGetBufferPointervQCOM", "glExtGetBufferPointervQCOM(target, params) -> None", "($module, target, params, /)", pygl_GLES1_glExtGetBufferPointervQCOM_args, "GLES1_QCOM_extended_get", "", 2, 3255, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glExtGetBufferPointervQCOM_info = {
+    .name = "glExtGetBufferPointervQCOM",
+    .doc = "glExtGetBufferPointervQCOM(target, params) -> None",
+    .text_signature = "($module, target, params, /)",
+    .arg_names = pygl_GLES1_glExtGetBufferPointervQCOM_args,
+    .extension = "GLES1_QCOM_extended_get",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3255,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glExtGetBufferPointervQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glExtGetBufferPointervQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -1979,11 +3579,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glExtGetBuffersQCOM_args[] = {"buffers", "maxBuffers", "numBuffers"};
-static const PyGLCommand pygl_GLES1_glExtGetBuffersQCOM_info = {"glExtGetBuffersQCOM", "glExtGetBuffersQCOM(buffers, maxBuffers, numBuffers) -> None", "($module, buffers, maxBuffers, numBuffers, /)", pygl_GLES1_glExtGetBuffersQCOM_args, "GLES1_QCOM_extended_get", "", 3, 3256, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glExtGetBuffersQCOM_info = {
+    .name = "glExtGetBuffersQCOM",
+    .doc = "glExtGetBuffersQCOM(buffers, maxBuffers, numBuffers) -> None",
+    .text_signature = "($module, buffers, maxBuffers, numBuffers, /)",
+    .arg_names = pygl_GLES1_glExtGetBuffersQCOM_args,
+    .extension = "GLES1_QCOM_extended_get",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3256,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glExtGetBuffersQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glExtGetBuffersQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(2);
     PYGL_I(1, maxBuffers);
@@ -2001,11 +3617,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glExtGetFramebuffersQCOM_args[] = {"framebuffers", "maxFramebuffers", "numFramebuffers"};
-static const PyGLCommand pygl_GLES1_glExtGetFramebuffersQCOM_info = {"glExtGetFramebuffersQCOM", "glExtGetFramebuffersQCOM(framebuffers, maxFramebuffers, numFramebuffers) -> None", "($module, framebuffers, maxFramebuffers, numFramebuffers, /)", pygl_GLES1_glExtGetFramebuffersQCOM_args, "GLES1_QCOM_extended_get", "", 3, 3257, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glExtGetFramebuffersQCOM_info = {
+    .name = "glExtGetFramebuffersQCOM",
+    .doc = "glExtGetFramebuffersQCOM(framebuffers, maxFramebuffers, numFramebuffers) -> None",
+    .text_signature = "($module, framebuffers, maxFramebuffers, numFramebuffers, /)",
+    .arg_names = pygl_GLES1_glExtGetFramebuffersQCOM_args,
+    .extension = "GLES1_QCOM_extended_get",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3257,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glExtGetFramebuffersQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glExtGetFramebuffersQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(2);
     PYGL_I(1, maxFramebuffers);
@@ -2023,11 +3655,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glExtGetProgramBinarySourceQCOM_args[] = {"program", "shadertype", "source", "length"};
-static const PyGLCommand pygl_GLES1_glExtGetProgramBinarySourceQCOM_info = {"glExtGetProgramBinarySourceQCOM", "glExtGetProgramBinarySourceQCOM(program, shadertype, source, length) -> None", "($module, program, shadertype, source, length, /)", pygl_GLES1_glExtGetProgramBinarySourceQCOM_args, "GLES1_QCOM_extended_get2", "", 4, 3258, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glExtGetProgramBinarySourceQCOM_info = {
+    .name = "glExtGetProgramBinarySourceQCOM",
+    .doc = "glExtGetProgramBinarySourceQCOM(program, shadertype, source, length) -> None",
+    .text_signature = "($module, program, shadertype, source, length, /)",
+    .arg_names = pygl_GLES1_glExtGetProgramBinarySourceQCOM_args,
+    .extension = "GLES1_QCOM_extended_get2",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3258,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glExtGetProgramBinarySourceQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glExtGetProgramBinarySourceQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(2);
     PYGL_U(0, program);
@@ -2046,11 +3694,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glExtGetProgramsQCOM_args[] = {"programs", "maxPrograms", "numPrograms"};
-static const PyGLCommand pygl_GLES1_glExtGetProgramsQCOM_info = {"glExtGetProgramsQCOM", "glExtGetProgramsQCOM(programs, maxPrograms, numPrograms) -> None", "($module, programs, maxPrograms, numPrograms, /)", pygl_GLES1_glExtGetProgramsQCOM_args, "GLES1_QCOM_extended_get2", "", 3, 3259, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glExtGetProgramsQCOM_info = {
+    .name = "glExtGetProgramsQCOM",
+    .doc = "glExtGetProgramsQCOM(programs, maxPrograms, numPrograms) -> None",
+    .text_signature = "($module, programs, maxPrograms, numPrograms, /)",
+    .arg_names = pygl_GLES1_glExtGetProgramsQCOM_args,
+    .extension = "GLES1_QCOM_extended_get2",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3259,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glExtGetProgramsQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glExtGetProgramsQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(2);
     PYGL_I(1, maxPrograms);
@@ -2068,11 +3732,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glExtGetRenderbuffersQCOM_args[] = {"renderbuffers", "maxRenderbuffers", "numRenderbuffers"};
-static const PyGLCommand pygl_GLES1_glExtGetRenderbuffersQCOM_info = {"glExtGetRenderbuffersQCOM", "glExtGetRenderbuffersQCOM(renderbuffers, maxRenderbuffers, numRenderbuffers) -> None", "($module, renderbuffers, maxRenderbuffers, numRenderbuffers, /)", pygl_GLES1_glExtGetRenderbuffersQCOM_args, "GLES1_QCOM_extended_get", "", 3, 3260, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glExtGetRenderbuffersQCOM_info = {
+    .name = "glExtGetRenderbuffersQCOM",
+    .doc = "glExtGetRenderbuffersQCOM(renderbuffers, maxRenderbuffers, numRenderbuffers) -> None",
+    .text_signature = "($module, renderbuffers, maxRenderbuffers, numRenderbuffers, /)",
+    .arg_names = pygl_GLES1_glExtGetRenderbuffersQCOM_args,
+    .extension = "GLES1_QCOM_extended_get",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3260,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glExtGetRenderbuffersQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glExtGetRenderbuffersQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(2);
     PYGL_I(1, maxRenderbuffers);
@@ -2090,11 +3770,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glExtGetShadersQCOM_args[] = {"shaders", "maxShaders", "numShaders"};
-static const PyGLCommand pygl_GLES1_glExtGetShadersQCOM_info = {"glExtGetShadersQCOM", "glExtGetShadersQCOM(shaders, maxShaders, numShaders) -> None", "($module, shaders, maxShaders, numShaders, /)", pygl_GLES1_glExtGetShadersQCOM_args, "GLES1_QCOM_extended_get2", "", 3, 3261, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glExtGetShadersQCOM_info = {
+    .name = "glExtGetShadersQCOM",
+    .doc = "glExtGetShadersQCOM(shaders, maxShaders, numShaders) -> None",
+    .text_signature = "($module, shaders, maxShaders, numShaders, /)",
+    .arg_names = pygl_GLES1_glExtGetShadersQCOM_args,
+    .extension = "GLES1_QCOM_extended_get2",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3261,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glExtGetShadersQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glExtGetShadersQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(2);
     PYGL_I(1, maxShaders);
@@ -2112,11 +3808,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glExtGetTexLevelParameterivQCOM_args[] = {"texture", "face", "level", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glExtGetTexLevelParameterivQCOM_info = {"glExtGetTexLevelParameterivQCOM", "glExtGetTexLevelParameterivQCOM(texture, face, level, pname, params) -> None", "($module, texture, face, level, pname, params, /)", pygl_GLES1_glExtGetTexLevelParameterivQCOM_args, "GLES1_QCOM_extended_get", "", 5, 3262, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glExtGetTexLevelParameterivQCOM_info = {
+    .name = "glExtGetTexLevelParameterivQCOM",
+    .doc = "glExtGetTexLevelParameterivQCOM(texture, face, level, pname, params) -> None",
+    .text_signature = "($module, texture, face, level, pname, params, /)",
+    .arg_names = pygl_GLES1_glExtGetTexLevelParameterivQCOM_args,
+    .extension = "GLES1_QCOM_extended_get",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3262,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glExtGetTexLevelParameterivQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glExtGetTexLevelParameterivQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(1);
     PYGL_U(0, texture);
@@ -2136,11 +3848,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glExtGetTexSubImageQCOM_args[] = {"target", "level", "xoffset", "yoffset", "zoffset", "width", "height", "depth", "format", "type", "texels"};
-static const PyGLCommand pygl_GLES1_glExtGetTexSubImageQCOM_info = {"glExtGetTexSubImageQCOM", "glExtGetTexSubImageQCOM(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, texels) -> None", "($module, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, texels, /)", pygl_GLES1_glExtGetTexSubImageQCOM_args, "GLES1_QCOM_extended_get", "", 11, 3263, PYGL_API_GLES1, 0, 11, 0, 0};
+static const PyGLCommand pygl_GLES1_glExtGetTexSubImageQCOM_info = {
+    .name = "glExtGetTexSubImageQCOM",
+    .doc = "glExtGetTexSubImageQCOM(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, texels) -> None",
+    .text_signature = "($module, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, texels, /)",
+    .arg_names = pygl_GLES1_glExtGetTexSubImageQCOM_args,
+    .extension = "GLES1_QCOM_extended_get",
+    .alternates = "",
+    .arg_count = 11,
+    .slot = 3263,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 11,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glExtGetTexSubImageQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glExtGetTexSubImageQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(11);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -2166,11 +3894,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glExtGetTexturesQCOM_args[] = {"textures", "maxTextures", "numTextures"};
-static const PyGLCommand pygl_GLES1_glExtGetTexturesQCOM_info = {"glExtGetTexturesQCOM", "glExtGetTexturesQCOM(textures, maxTextures, numTextures) -> None", "($module, textures, maxTextures, numTextures, /)", pygl_GLES1_glExtGetTexturesQCOM_args, "GLES1_QCOM_extended_get", "", 3, 3264, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glExtGetTexturesQCOM_info = {
+    .name = "glExtGetTexturesQCOM",
+    .doc = "glExtGetTexturesQCOM(textures, maxTextures, numTextures) -> None",
+    .text_signature = "($module, textures, maxTextures, numTextures, /)",
+    .arg_names = pygl_GLES1_glExtGetTexturesQCOM_args,
+    .extension = "GLES1_QCOM_extended_get",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3264,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glExtGetTexturesQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glExtGetTexturesQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(2);
     PYGL_I(1, maxTextures);
@@ -2188,11 +3932,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glExtIsProgramBinaryQCOM_args[] = {"program"};
-static const PyGLCommand pygl_GLES1_glExtIsProgramBinaryQCOM_info = {"glExtIsProgramBinaryQCOM", "glExtIsProgramBinaryQCOM(program) -> GLboolean", "($module, program, /)", pygl_GLES1_glExtIsProgramBinaryQCOM_args, "GLES1_QCOM_extended_get2", "", 1, 3265, PYGL_API_GLES1, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES1_glExtIsProgramBinaryQCOM_info = {
+    .name = "glExtIsProgramBinaryQCOM",
+    .doc = "glExtIsProgramBinaryQCOM(program) -> GLboolean",
+    .text_signature = "($module, program, /)",
+    .arg_names = pygl_GLES1_glExtIsProgramBinaryQCOM_args,
+    .extension = "GLES1_QCOM_extended_get2",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3265,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glExtIsProgramBinaryQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glExtIsProgramBinaryQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, program);
     PYGL_CONV_OK();
@@ -2205,11 +3965,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glExtTexObjectStateOverrideiQCOM_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glExtTexObjectStateOverrideiQCOM_info = {"glExtTexObjectStateOverrideiQCOM", "glExtTexObjectStateOverrideiQCOM(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES1_glExtTexObjectStateOverrideiQCOM_args, "GLES1_QCOM_extended_get", "", 3, 3266, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glExtTexObjectStateOverrideiQCOM_info = {
+    .name = "glExtTexObjectStateOverrideiQCOM",
+    .doc = "glExtTexObjectStateOverrideiQCOM(target, pname, param) -> None",
+    .text_signature = "($module, target, pname, param, /)",
+    .arg_names = pygl_GLES1_glExtTexObjectStateOverrideiQCOM_args,
+    .extension = "GLES1_QCOM_extended_get",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3266,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glExtTexObjectStateOverrideiQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glExtTexObjectStateOverrideiQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, target);
     PYGL_U(1, pname);
@@ -2224,11 +4000,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFeedbackBufferxOES_args[] = {"n", "type", "buffer"};
-static const PyGLCommand pygl_GLES1_glFeedbackBufferxOES_info = {"glFeedbackBufferxOES", "glFeedbackBufferxOES(n, type, buffer) -> None", "($module, n, type, buffer, /)", pygl_GLES1_glFeedbackBufferxOES_args, "GLES1_OES_fixed_point", "", 3, 3267, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glFeedbackBufferxOES_info = {
+    .name = "glFeedbackBufferxOES",
+    .doc = "glFeedbackBufferxOES(n, type, buffer) -> None",
+    .text_signature = "($module, n, type, buffer, /)",
+    .arg_names = pygl_GLES1_glFeedbackBufferxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3267,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFeedbackBufferxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFeedbackBufferxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
@@ -2246,11 +4038,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFenceSyncAPPLE_args[] = {"condition", "flags"};
-static const PyGLCommand pygl_GLES1_glFenceSyncAPPLE_info = {"glFenceSyncAPPLE", "glFenceSyncAPPLE(condition, flags) -> GLsync", "($module, condition, flags, /)", pygl_GLES1_glFenceSyncAPPLE_args, "GLES1_APPLE_sync", "", 2, 3268, PYGL_API_GLES1, 0, 2, 4, 0};
+static const PyGLCommand pygl_GLES1_glFenceSyncAPPLE_info = {
+    .name = "glFenceSyncAPPLE",
+    .doc = "glFenceSyncAPPLE(condition, flags) -> GLsync",
+    .text_signature = "($module, condition, flags, /)",
+    .arg_names = pygl_GLES1_glFenceSyncAPPLE_args,
+    .extension = "GLES1_APPLE_sync",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3268,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 4,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFenceSyncAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFenceSyncAPPLE(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, condition);
     PYGL_U(1, flags);
@@ -2263,11 +4071,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES1_glFinish_info = {"glFinish", "glFinish() -> None", "($module)", NULL, "GLES1_VERSION_GLES1_1_0", "", 0, 3269, PYGL_API_GLES1, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES1_glFinish_info = {
+    .name = "glFinish",
+    .doc = "glFinish() -> None",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 3269,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFinish(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFinish(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_V_BLOCKING((void), ());
@@ -2279,11 +4103,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFinishFenceNV_args[] = {"fence"};
-static const PyGLCommand pygl_GLES1_glFinishFenceNV_info = {"glFinishFenceNV", "glFinishFenceNV(fence) -> None", "($module, fence, /)", pygl_GLES1_glFinishFenceNV_args, "GLES1_NV_fence", "", 1, 3270, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glFinishFenceNV_info = {
+    .name = "glFinishFenceNV",
+    .doc = "glFinishFenceNV(fence) -> None",
+    .text_signature = "($module, fence, /)",
+    .arg_names = pygl_GLES1_glFinishFenceNV_args,
+    .extension = "GLES1_NV_fence",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3270,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFinishFenceNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFinishFenceNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, fence);
     PYGL_CONV_OK();
@@ -2295,11 +4135,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES1_glFlush_info = {"glFlush", "glFlush() -> None", "($module)", NULL, "GLES1_VERSION_GLES1_1_0", "", 0, 3271, PYGL_API_GLES1, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES1_glFlush_info = {
+    .name = "glFlush",
+    .doc = "glFlush() -> None",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 3271,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFlush(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFlush(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_V_BLOCKING((void), ());
@@ -2311,11 +4167,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFlushMappedBufferRangeEXT_args[] = {"target", "offset", "length"};
-static const PyGLCommand pygl_GLES1_glFlushMappedBufferRangeEXT_info = {"glFlushMappedBufferRangeEXT", "glFlushMappedBufferRangeEXT(target, offset, length) -> None", "($module, target, offset, length, /)", pygl_GLES1_glFlushMappedBufferRangeEXT_args, "GLES1_EXT_map_buffer_range", "", 3, 3272, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glFlushMappedBufferRangeEXT_info = {
+    .name = "glFlushMappedBufferRangeEXT",
+    .doc = "glFlushMappedBufferRangeEXT(target, offset, length) -> None",
+    .text_signature = "($module, target, offset, length, /)",
+    .arg_names = pygl_GLES1_glFlushMappedBufferRangeEXT_args,
+    .extension = "GLES1_EXT_map_buffer_range",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3272,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFlushMappedBufferRangeEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFlushMappedBufferRangeEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, target);
     PYGL_IPTR(1, offset);
@@ -2330,11 +4202,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFogf_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glFogf_info = {"glFogf", "glFogf(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glFogf_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3273, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glFogf_info = {
+    .name = "glFogf",
+    .doc = "glFogf(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glFogf_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3273,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFogf(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFogf(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, pname);
     PYGL_F(1, param);
@@ -2348,11 +4236,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFogfv_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GLES1_glFogfv_info = {"glFogfv", "glFogfv(pname, params) -> None", "($module, pname, params, /)", pygl_GLES1_glFogfv_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3274, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glFogfv_info = {
+    .name = "glFogfv",
+    .doc = "glFogfv(pname, params) -> None",
+    .text_signature = "($module, pname, params, /)",
+    .arg_names = pygl_GLES1_glFogfv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3274,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFogfv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFogfv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -2369,11 +4273,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFogx_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glFogx_info = {"glFogx", "glFogx(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glFogx_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3275, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glFogx_info = {
+    .name = "glFogx",
+    .doc = "glFogx(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glFogx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3275,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFogx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFogx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, pname);
     PYGL_I(1, param);
@@ -2387,11 +4307,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFogxOES_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glFogxOES_info = {"glFogxOES", "glFogxOES(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glFogxOES_args, "GLES1_OES_fixed_point", "", 2, 3276, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glFogxOES_info = {
+    .name = "glFogxOES",
+    .doc = "glFogxOES(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glFogxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3276,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFogxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFogxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, pname);
     PYGL_I(1, param);
@@ -2405,11 +4341,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFogxv_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glFogxv_info = {"glFogxv", "glFogxv(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glFogxv_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3277, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glFogxv_info = {
+    .name = "glFogxv",
+    .doc = "glFogxv(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glFogxv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3277,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFogxv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFogxv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -2426,11 +4378,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFogxvOES_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glFogxvOES_info = {"glFogxvOES", "glFogxvOES(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glFogxvOES_args, "GLES1_OES_fixed_point", "", 2, 3278, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glFogxvOES_info = {
+    .name = "glFogxvOES",
+    .doc = "glFogxvOES(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glFogxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3278,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFogxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFogxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -2447,11 +4415,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFramebufferRenderbufferOES_args[] = {"target", "attachment", "renderbuffertarget", "renderbuffer"};
-static const PyGLCommand pygl_GLES1_glFramebufferRenderbufferOES_info = {"glFramebufferRenderbufferOES", "glFramebufferRenderbufferOES(target, attachment, renderbuffertarget, renderbuffer) -> None", "($module, target, attachment, renderbuffertarget, renderbuffer, /)", pygl_GLES1_glFramebufferRenderbufferOES_args, "GLES1_OES_framebuffer_object", "", 4, 3279, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glFramebufferRenderbufferOES_info = {
+    .name = "glFramebufferRenderbufferOES",
+    .doc = "glFramebufferRenderbufferOES(target, attachment, renderbuffertarget, renderbuffer) -> None",
+    .text_signature = "($module, target, attachment, renderbuffertarget, renderbuffer, /)",
+    .arg_names = pygl_GLES1_glFramebufferRenderbufferOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3279,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFramebufferRenderbufferOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFramebufferRenderbufferOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_U(0, target);
     PYGL_U(1, attachment);
@@ -2467,11 +4451,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFramebufferTexture2DMultisampleEXT_args[] = {"target", "attachment", "textarget", "texture", "level", "samples"};
-static const PyGLCommand pygl_GLES1_glFramebufferTexture2DMultisampleEXT_info = {"glFramebufferTexture2DMultisampleEXT", "glFramebufferTexture2DMultisampleEXT(target, attachment, textarget, texture, level, samples) -> None", "($module, target, attachment, textarget, texture, level, samples, /)", pygl_GLES1_glFramebufferTexture2DMultisampleEXT_args, "GLES1_EXT_multisampled_render_to_texture", "", 6, 3280, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glFramebufferTexture2DMultisampleEXT_info = {
+    .name = "glFramebufferTexture2DMultisampleEXT",
+    .doc = "glFramebufferTexture2DMultisampleEXT(target, attachment, textarget, texture, level, samples) -> None",
+    .text_signature = "($module, target, attachment, textarget, texture, level, samples, /)",
+    .arg_names = pygl_GLES1_glFramebufferTexture2DMultisampleEXT_args,
+    .extension = "GLES1_EXT_multisampled_render_to_texture",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3280,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFramebufferTexture2DMultisampleEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFramebufferTexture2DMultisampleEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_U(0, target);
     PYGL_U(1, attachment);
@@ -2489,11 +4489,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFramebufferTexture2DMultisampleIMG_args[] = {"target", "attachment", "textarget", "texture", "level", "samples"};
-static const PyGLCommand pygl_GLES1_glFramebufferTexture2DMultisampleIMG_info = {"glFramebufferTexture2DMultisampleIMG", "glFramebufferTexture2DMultisampleIMG(target, attachment, textarget, texture, level, samples) -> None", "($module, target, attachment, textarget, texture, level, samples, /)", pygl_GLES1_glFramebufferTexture2DMultisampleIMG_args, "GLES1_IMG_multisampled_render_to_texture", "", 6, 3281, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glFramebufferTexture2DMultisampleIMG_info = {
+    .name = "glFramebufferTexture2DMultisampleIMG",
+    .doc = "glFramebufferTexture2DMultisampleIMG(target, attachment, textarget, texture, level, samples) -> None",
+    .text_signature = "($module, target, attachment, textarget, texture, level, samples, /)",
+    .arg_names = pygl_GLES1_glFramebufferTexture2DMultisampleIMG_args,
+    .extension = "GLES1_IMG_multisampled_render_to_texture",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3281,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFramebufferTexture2DMultisampleIMG(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFramebufferTexture2DMultisampleIMG(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_U(0, target);
     PYGL_U(1, attachment);
@@ -2511,11 +4527,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFramebufferTexture2DOES_args[] = {"target", "attachment", "textarget", "texture", "level"};
-static const PyGLCommand pygl_GLES1_glFramebufferTexture2DOES_info = {"glFramebufferTexture2DOES", "glFramebufferTexture2DOES(target, attachment, textarget, texture, level) -> None", "($module, target, attachment, textarget, texture, level, /)", pygl_GLES1_glFramebufferTexture2DOES_args, "GLES1_OES_framebuffer_object", "", 5, 3282, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glFramebufferTexture2DOES_info = {
+    .name = "glFramebufferTexture2DOES",
+    .doc = "glFramebufferTexture2DOES(target, attachment, textarget, texture, level) -> None",
+    .text_signature = "($module, target, attachment, textarget, texture, level, /)",
+    .arg_names = pygl_GLES1_glFramebufferTexture2DOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3282,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFramebufferTexture2DOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFramebufferTexture2DOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_U(0, target);
     PYGL_U(1, attachment);
@@ -2532,11 +4564,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFrontFace_args[] = {"mode"};
-static const PyGLCommand pygl_GLES1_glFrontFace_info = {"glFrontFace", "glFrontFace(mode) -> None", "($module, mode, /)", pygl_GLES1_glFrontFace_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3283, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glFrontFace_info = {
+    .name = "glFrontFace",
+    .doc = "glFrontFace(mode) -> None",
+    .text_signature = "($module, mode, /)",
+    .arg_names = pygl_GLES1_glFrontFace_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3283,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFrontFace(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFrontFace(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, mode);
     PYGL_CONV_OK();
@@ -2549,11 +4597,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFrustumf_args[] = {"l", "r", "b", "t", "n", "f"};
-static const PyGLCommand pygl_GLES1_glFrustumf_info = {"glFrustumf", "glFrustumf(l, r, b, t, n, f) -> None", "($module, l, r, b, t, n, f, /)", pygl_GLES1_glFrustumf_args, "GLES1_VERSION_GLES1_1_0", "", 6, 3284, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glFrustumf_info = {
+    .name = "glFrustumf",
+    .doc = "glFrustumf(l, r, b, t, n, f) -> None",
+    .text_signature = "($module, l, r, b, t, n, f, /)",
+    .arg_names = pygl_GLES1_glFrustumf_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3284,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFrustumf(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFrustumf(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_F(0, l);
     PYGL_F(1, r);
@@ -2571,11 +4635,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFrustumfOES_args[] = {"l", "r", "b", "t", "n", "f"};
-static const PyGLCommand pygl_GLES1_glFrustumfOES_info = {"glFrustumfOES", "glFrustumfOES(l, r, b, t, n, f) -> None", "($module, l, r, b, t, n, f, /)", pygl_GLES1_glFrustumfOES_args, "GLES1_OES_single_precision", "", 6, 3285, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glFrustumfOES_info = {
+    .name = "glFrustumfOES",
+    .doc = "glFrustumfOES(l, r, b, t, n, f) -> None",
+    .text_signature = "($module, l, r, b, t, n, f, /)",
+    .arg_names = pygl_GLES1_glFrustumfOES_args,
+    .extension = "GLES1_OES_single_precision",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3285,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFrustumfOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFrustumfOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_F(0, l);
     PYGL_F(1, r);
@@ -2593,11 +4673,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFrustumx_args[] = {"l", "r", "b", "t", "n", "f"};
-static const PyGLCommand pygl_GLES1_glFrustumx_info = {"glFrustumx", "glFrustumx(l, r, b, t, n, f) -> None", "($module, l, r, b, t, n, f, /)", pygl_GLES1_glFrustumx_args, "GLES1_VERSION_GLES1_1_0", "", 6, 3286, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glFrustumx_info = {
+    .name = "glFrustumx",
+    .doc = "glFrustumx(l, r, b, t, n, f) -> None",
+    .text_signature = "($module, l, r, b, t, n, f, /)",
+    .arg_names = pygl_GLES1_glFrustumx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3286,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFrustumx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFrustumx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_I(0, l);
     PYGL_I(1, r);
@@ -2615,11 +4711,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glFrustumxOES_args[] = {"l", "r", "b", "t", "n", "f"};
-static const PyGLCommand pygl_GLES1_glFrustumxOES_info = {"glFrustumxOES", "glFrustumxOES(l, r, b, t, n, f) -> None", "($module, l, r, b, t, n, f, /)", pygl_GLES1_glFrustumxOES_args, "GLES1_OES_fixed_point", "", 6, 3287, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glFrustumxOES_info = {
+    .name = "glFrustumxOES",
+    .doc = "glFrustumxOES(l, r, b, t, n, f) -> None",
+    .text_signature = "($module, l, r, b, t, n, f, /)",
+    .arg_names = pygl_GLES1_glFrustumxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3287,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glFrustumxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glFrustumxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_I(0, l);
     PYGL_I(1, r);
@@ -2637,11 +4749,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGenBuffers_args[] = {"n", "buffers"};
-static const PyGLCommand pygl_GLES1_glGenBuffers_info = {"glGenBuffers", "glGenBuffers(n) -> buffers", "($module, n, buffers=None, /)", pygl_GLES1_glGenBuffers_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3288, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGenBuffers_info = {
+    .name = "glGenBuffers",
+    .doc = "glGenBuffers(n) -> buffers",
+    .text_signature = "($module, n, buffers=None, /)",
+    .arg_names = pygl_GLES1_glGenBuffers_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3288,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGenBuffers(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGenBuffers(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(1, 2);
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
@@ -2659,11 +4787,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGenFencesNV_args[] = {"n", "fences"};
-static const PyGLCommand pygl_GLES1_glGenFencesNV_info = {"glGenFencesNV", "glGenFencesNV(n) -> fences", "($module, n, fences=None, /)", pygl_GLES1_glGenFencesNV_args, "GLES1_NV_fence", "", 2, 3289, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGenFencesNV_info = {
+    .name = "glGenFencesNV",
+    .doc = "glGenFencesNV(n) -> fences",
+    .text_signature = "($module, n, fences=None, /)",
+    .arg_names = pygl_GLES1_glGenFencesNV_args,
+    .extension = "GLES1_NV_fence",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3289,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGenFencesNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGenFencesNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(1, 2);
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
@@ -2681,11 +4825,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGenFramebuffersOES_args[] = {"n", "framebuffers"};
-static const PyGLCommand pygl_GLES1_glGenFramebuffersOES_info = {"glGenFramebuffersOES", "glGenFramebuffersOES(n, framebuffers) -> None", "($module, n, framebuffers, /)", pygl_GLES1_glGenFramebuffersOES_args, "GLES1_OES_framebuffer_object", "", 2, 3290, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGenFramebuffersOES_info = {
+    .name = "glGenFramebuffersOES",
+    .doc = "glGenFramebuffersOES(n, framebuffers) -> None",
+    .text_signature = "($module, n, framebuffers, /)",
+    .arg_names = pygl_GLES1_glGenFramebuffersOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3290,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGenFramebuffersOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGenFramebuffersOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
@@ -2702,11 +4862,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGenRenderbuffersOES_args[] = {"n", "renderbuffers"};
-static const PyGLCommand pygl_GLES1_glGenRenderbuffersOES_info = {"glGenRenderbuffersOES", "glGenRenderbuffersOES(n, renderbuffers) -> None", "($module, n, renderbuffers, /)", pygl_GLES1_glGenRenderbuffersOES_args, "GLES1_OES_framebuffer_object", "", 2, 3291, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGenRenderbuffersOES_info = {
+    .name = "glGenRenderbuffersOES",
+    .doc = "glGenRenderbuffersOES(n, renderbuffers) -> None",
+    .text_signature = "($module, n, renderbuffers, /)",
+    .arg_names = pygl_GLES1_glGenRenderbuffersOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3291,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGenRenderbuffersOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGenRenderbuffersOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
@@ -2723,11 +4899,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGenTextures_args[] = {"n", "textures"};
-static const PyGLCommand pygl_GLES1_glGenTextures_info = {"glGenTextures", "glGenTextures(n) -> textures", "($module, n, textures=None, /)", pygl_GLES1_glGenTextures_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3292, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGenTextures_info = {
+    .name = "glGenTextures",
+    .doc = "glGenTextures(n) -> textures",
+    .text_signature = "($module, n, textures=None, /)",
+    .arg_names = pygl_GLES1_glGenTextures_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3292,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGenTextures(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGenTextures(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(1, 2);
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
@@ -2745,11 +4937,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGenVertexArraysOES_args[] = {"n", "arrays"};
-static const PyGLCommand pygl_GLES1_glGenVertexArraysOES_info = {"glGenVertexArraysOES", "glGenVertexArraysOES(n, arrays) -> None", "($module, n, arrays, /)", pygl_GLES1_glGenVertexArraysOES_args, "GLES1_OES_vertex_array_object", "", 2, 3293, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGenVertexArraysOES_info = {
+    .name = "glGenVertexArraysOES",
+    .doc = "glGenVertexArraysOES(n, arrays) -> None",
+    .text_signature = "($module, n, arrays, /)",
+    .arg_names = pygl_GLES1_glGenVertexArraysOES_args,
+    .extension = "GLES1_OES_vertex_array_object",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3293,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGenVertexArraysOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGenVertexArraysOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_SZ(0, n);
@@ -2766,11 +4974,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGenerateMipmapOES_args[] = {"target"};
-static const PyGLCommand pygl_GLES1_glGenerateMipmapOES_info = {"glGenerateMipmapOES", "glGenerateMipmapOES(target) -> None", "($module, target, /)", pygl_GLES1_glGenerateMipmapOES_args, "GLES1_OES_framebuffer_object", "", 1, 3294, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glGenerateMipmapOES_info = {
+    .name = "glGenerateMipmapOES",
+    .doc = "glGenerateMipmapOES(target) -> None",
+    .text_signature = "($module, target, /)",
+    .arg_names = pygl_GLES1_glGenerateMipmapOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3294,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGenerateMipmapOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGenerateMipmapOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, target);
     PYGL_CONV_OK();
@@ -2783,11 +5007,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetBooleanv_args[] = {"pname", "data"};
-static const PyGLCommand pygl_GLES1_glGetBooleanv_info = {"glGetBooleanv", "glGetBooleanv(pname) -> data", "($module, pname, data=None, /)", pygl_GLES1_glGetBooleanv_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3295, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetBooleanv_info = {
+    .name = "glGetBooleanv",
+    .doc = "glGetBooleanv(pname) -> data",
+    .text_signature = "($module, pname, data=None, /)",
+    .arg_names = pygl_GLES1_glGetBooleanv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3295,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetBooleanv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetBooleanv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(1, 2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -2805,11 +5045,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetBufferParameteriv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetBufferParameteriv_info = {"glGetBufferParameteriv", "glGetBufferParameteriv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES1_glGetBufferParameteriv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3296, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetBufferParameteriv_info = {
+    .name = "glGetBufferParameteriv",
+    .doc = "glGetBufferParameteriv(target, pname) -> params",
+    .text_signature = "($module, target, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetBufferParameteriv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3296,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetBufferParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetBufferParameteriv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -2828,11 +5084,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetBufferPointervOES_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetBufferPointervOES_info = {"glGetBufferPointervOES", "glGetBufferPointervOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES1_glGetBufferPointervOES_args, "GLES1_OES_mapbuffer", "", 3, 3297, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetBufferPointervOES_info = {
+    .name = "glGetBufferPointervOES",
+    .doc = "glGetBufferPointervOES(target, pname, params) -> None",
+    .text_signature = "($module, target, pname, params, /)",
+    .arg_names = pygl_GLES1_glGetBufferPointervOES_args,
+    .extension = "GLES1_OES_mapbuffer",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3297,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetBufferPointervOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetBufferPointervOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -2850,11 +5122,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetClipPlanef_args[] = {"plane", "equation"};
-static const PyGLCommand pygl_GLES1_glGetClipPlanef_info = {"glGetClipPlanef", "glGetClipPlanef(plane, equation) -> None", "($module, plane, equation, /)", pygl_GLES1_glGetClipPlanef_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3298, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetClipPlanef_info = {
+    .name = "glGetClipPlanef",
+    .doc = "glGetClipPlanef(plane, equation) -> None",
+    .text_signature = "($module, plane, equation, /)",
+    .arg_names = pygl_GLES1_glGetClipPlanef_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3298,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetClipPlanef(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetClipPlanef(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, plane);
@@ -2871,11 +5159,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetClipPlanefOES_args[] = {"plane", "equation"};
-static const PyGLCommand pygl_GLES1_glGetClipPlanefOES_info = {"glGetClipPlanefOES", "glGetClipPlanefOES(plane) -> equation", "($module, plane, equation=None, /)", pygl_GLES1_glGetClipPlanefOES_args, "GLES1_OES_single_precision", "", 2, 3299, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetClipPlanefOES_info = {
+    .name = "glGetClipPlanefOES",
+    .doc = "glGetClipPlanefOES(plane) -> equation",
+    .text_signature = "($module, plane, equation=None, /)",
+    .arg_names = pygl_GLES1_glGetClipPlanefOES_args,
+    .extension = "GLES1_OES_single_precision",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3299,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetClipPlanefOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetClipPlanefOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(1, 2);
     PYGL_FRAME(1);
     PYGL_U(0, plane);
@@ -2893,11 +5197,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetClipPlanex_args[] = {"plane", "equation"};
-static const PyGLCommand pygl_GLES1_glGetClipPlanex_info = {"glGetClipPlanex", "glGetClipPlanex(plane, equation) -> None", "($module, plane, equation, /)", pygl_GLES1_glGetClipPlanex_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3300, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetClipPlanex_info = {
+    .name = "glGetClipPlanex",
+    .doc = "glGetClipPlanex(plane, equation) -> None",
+    .text_signature = "($module, plane, equation, /)",
+    .arg_names = pygl_GLES1_glGetClipPlanex_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3300,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetClipPlanex(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetClipPlanex(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, plane);
@@ -2914,11 +5234,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetClipPlanexOES_args[] = {"plane", "equation"};
-static const PyGLCommand pygl_GLES1_glGetClipPlanexOES_info = {"glGetClipPlanexOES", "glGetClipPlanexOES(plane) -> equation", "($module, plane, equation=None, /)", pygl_GLES1_glGetClipPlanexOES_args, "GLES1_OES_fixed_point", "", 2, 3301, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetClipPlanexOES_info = {
+    .name = "glGetClipPlanexOES",
+    .doc = "glGetClipPlanexOES(plane) -> equation",
+    .text_signature = "($module, plane, equation=None, /)",
+    .arg_names = pygl_GLES1_glGetClipPlanexOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3301,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetClipPlanexOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetClipPlanexOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(1, 2);
     PYGL_FRAME(1);
     PYGL_U(0, plane);
@@ -2936,11 +5272,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetConvolutionParameterxvOES_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetConvolutionParameterxvOES_info = {"glGetConvolutionParameterxvOES", "glGetConvolutionParameterxvOES(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES1_glGetConvolutionParameterxvOES_args, "GLES1_OES_fixed_point", "", 3, 3302, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetConvolutionParameterxvOES_info = {
+    .name = "glGetConvolutionParameterxvOES",
+    .doc = "glGetConvolutionParameterxvOES(target, pname) -> params",
+    .text_signature = "($module, target, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetConvolutionParameterxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3302,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetConvolutionParameterxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetConvolutionParameterxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -2959,11 +5311,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetDebugMessageLog_args[] = {"count", "bufSize", "sources", "types", "ids", "severities", "lengths", "messageLog"};
-static const PyGLCommand pygl_GLES1_glGetDebugMessageLog_info = {"glGetDebugMessageLog", "glGetDebugMessageLog(count, bufSize) -> ids, lengths, messageLog, severities, sources, types", "($module, count, bufSize, ids=None, lengths=None, messageLog=None, severities=None, sources=None, types=None, /)", pygl_GLES1_glGetDebugMessageLog_args, "GLES1_KHR_debug", "", 8, 3303, PYGL_API_GLES1, 0, 8, 1, 0};
+static const PyGLCommand pygl_GLES1_glGetDebugMessageLog_info = {
+    .name = "glGetDebugMessageLog",
+    .doc = "glGetDebugMessageLog(count, bufSize) -> ids, lengths, messageLog, severities, sources, types",
+    .text_signature = "($module, count, bufSize, ids=None, lengths=None, messageLog=None, severities=None, sources=None, types=None, /)",
+    .arg_names = pygl_GLES1_glGetDebugMessageLog_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 8,
+    .slot = 3303,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 8,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetDebugMessageLog(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetDebugMessageLog(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 8);
     PYGL_FRAME(6);
     PYGL_U(0, count);
@@ -2995,11 +5363,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetDebugMessageLogKHR_args[] = {"count", "bufSize", "sources", "types", "ids", "severities", "lengths", "messageLog"};
-static const PyGLCommand pygl_GLES1_glGetDebugMessageLogKHR_info = {"glGetDebugMessageLogKHR", "glGetDebugMessageLogKHR(count, bufSize, sources, types, ids, severities, lengths, messageLog) -> GLuint", "($module, count, bufSize, sources, types, ids, severities, lengths, messageLog, /)", pygl_GLES1_glGetDebugMessageLogKHR_args, "GLES1_KHR_debug", "", 8, 3304, PYGL_API_GLES1, 0, 8, 1, 0};
+static const PyGLCommand pygl_GLES1_glGetDebugMessageLogKHR_info = {
+    .name = "glGetDebugMessageLogKHR",
+    .doc = "glGetDebugMessageLogKHR(count, bufSize, sources, types, ids, severities, lengths, messageLog) -> GLuint",
+    .text_signature = "($module, count, bufSize, sources, types, ids, severities, lengths, messageLog, /)",
+    .arg_names = pygl_GLES1_glGetDebugMessageLogKHR_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 8,
+    .slot = 3304,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 8,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetDebugMessageLogKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetDebugMessageLogKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(8);
     PYGL_FRAME(6);
     PYGL_U(0, count);
@@ -3023,11 +5407,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetDriverControlStringQCOM_args[] = {"driverControl", "bufSize", "length", "driverControlString"};
-static const PyGLCommand pygl_GLES1_glGetDriverControlStringQCOM_info = {"glGetDriverControlStringQCOM", "glGetDriverControlStringQCOM(driverControl, bufSize, length, driverControlString) -> None", "($module, driverControl, bufSize, length, driverControlString, /)", pygl_GLES1_glGetDriverControlStringQCOM_args, "GLES1_QCOM_driver_control", "", 4, 3305, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetDriverControlStringQCOM_info = {
+    .name = "glGetDriverControlStringQCOM",
+    .doc = "glGetDriverControlStringQCOM(driverControl, bufSize, length, driverControlString) -> None",
+    .text_signature = "($module, driverControl, bufSize, length, driverControlString, /)",
+    .arg_names = pygl_GLES1_glGetDriverControlStringQCOM_args,
+    .extension = "GLES1_QCOM_driver_control",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3305,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetDriverControlStringQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetDriverControlStringQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(2);
     PYGL_U(0, driverControl);
@@ -3046,11 +5446,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetDriverControlsQCOM_args[] = {"num", "size", "driverControls"};
-static const PyGLCommand pygl_GLES1_glGetDriverControlsQCOM_info = {"glGetDriverControlsQCOM", "glGetDriverControlsQCOM(num, size, driverControls) -> None", "($module, num, size, driverControls, /)", pygl_GLES1_glGetDriverControlsQCOM_args, "GLES1_QCOM_driver_control", "", 3, 3306, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetDriverControlsQCOM_info = {
+    .name = "glGetDriverControlsQCOM",
+    .doc = "glGetDriverControlsQCOM(num, size, driverControls) -> None",
+    .text_signature = "($module, num, size, driverControls, /)",
+    .arg_names = pygl_GLES1_glGetDriverControlsQCOM_args,
+    .extension = "GLES1_QCOM_driver_control",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3306,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetDriverControlsQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetDriverControlsQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(2);
     PYGL_SZ(1, size);
@@ -3067,11 +5483,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES1_glGetError_info = {"glGetError", "glGetError() -> GLenum", "($module)", NULL, "GLES1_VERSION_GLES1_1_0", "", 0, 3307, PYGL_API_GLES1, 0, 0, 1, 0};
+static const PyGLCommand pygl_GLES1_glGetError_info = {
+    .name = "glGetError",
+    .doc = "glGetError() -> GLenum",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 3307,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_GLES1_glGetError(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetError(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_R(_result, unsigned int, (void), ());
@@ -3083,11 +5515,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetFenceivNV_args[] = {"fence", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetFenceivNV_info = {"glGetFenceivNV", "glGetFenceivNV(fence, pname) -> params", "($module, fence, pname, params=None, /)", pygl_GLES1_glGetFenceivNV_args, "GLES1_NV_fence", "", 3, 3308, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetFenceivNV_info = {
+    .name = "glGetFenceivNV",
+    .doc = "glGetFenceivNV(fence, pname) -> params",
+    .text_signature = "($module, fence, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetFenceivNV_args,
+    .extension = "GLES1_NV_fence",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3308,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetFenceivNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetFenceivNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, fence);
@@ -3106,11 +5554,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetFixedv_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetFixedv_info = {"glGetFixedv", "glGetFixedv(pname, params) -> None", "($module, pname, params, /)", pygl_GLES1_glGetFixedv_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3309, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetFixedv_info = {
+    .name = "glGetFixedv",
+    .doc = "glGetFixedv(pname, params) -> None",
+    .text_signature = "($module, pname, params, /)",
+    .arg_names = pygl_GLES1_glGetFixedv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3309,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetFixedv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetFixedv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -3127,11 +5591,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetFixedvOES_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetFixedvOES_info = {"glGetFixedvOES", "glGetFixedvOES(pname) -> params", "($module, pname, params=None, /)", pygl_GLES1_glGetFixedvOES_args, "GLES1_OES_fixed_point", "", 2, 3310, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetFixedvOES_info = {
+    .name = "glGetFixedvOES",
+    .doc = "glGetFixedvOES(pname) -> params",
+    .text_signature = "($module, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetFixedvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3310,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetFixedvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetFixedvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(1, 2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -3149,11 +5629,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetFloatv_args[] = {"pname", "data"};
-static const PyGLCommand pygl_GLES1_glGetFloatv_info = {"glGetFloatv", "glGetFloatv(pname) -> data", "($module, pname, data=None, /)", pygl_GLES1_glGetFloatv_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3311, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetFloatv_info = {
+    .name = "glGetFloatv",
+    .doc = "glGetFloatv(pname) -> data",
+    .text_signature = "($module, pname, data=None, /)",
+    .arg_names = pygl_GLES1_glGetFloatv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3311,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetFloatv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetFloatv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(1, 2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -3171,11 +5667,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetFramebufferAttachmentParameterivOES_args[] = {"target", "attachment", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetFramebufferAttachmentParameterivOES_info = {"glGetFramebufferAttachmentParameterivOES", "glGetFramebufferAttachmentParameterivOES(target, attachment, pname, params) -> None", "($module, target, attachment, pname, params, /)", pygl_GLES1_glGetFramebufferAttachmentParameterivOES_args, "GLES1_OES_framebuffer_object", "", 4, 3312, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetFramebufferAttachmentParameterivOES_info = {
+    .name = "glGetFramebufferAttachmentParameterivOES",
+    .doc = "glGetFramebufferAttachmentParameterivOES(target, attachment, pname, params) -> None",
+    .text_signature = "($module, target, attachment, pname, params, /)",
+    .arg_names = pygl_GLES1_glGetFramebufferAttachmentParameterivOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3312,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetFramebufferAttachmentParameterivOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetFramebufferAttachmentParameterivOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -3193,11 +5705,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES1_glGetGraphicsResetStatusEXT_info = {"glGetGraphicsResetStatusEXT", "glGetGraphicsResetStatusEXT() -> GLenum", "($module)", NULL, "GLES1_EXT_robustness", "", 0, 3313, PYGL_API_GLES1, 0, 0, 1, 0};
+static const PyGLCommand pygl_GLES1_glGetGraphicsResetStatusEXT_info = {
+    .name = "glGetGraphicsResetStatusEXT",
+    .doc = "glGetGraphicsResetStatusEXT() -> GLenum",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "GLES1_EXT_robustness",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 3313,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetGraphicsResetStatusEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetGraphicsResetStatusEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_R(_result, unsigned int, (void), ());
@@ -3209,11 +5737,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetHistogramParameterxvOES_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetHistogramParameterxvOES_info = {"glGetHistogramParameterxvOES", "glGetHistogramParameterxvOES(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES1_glGetHistogramParameterxvOES_args, "GLES1_OES_fixed_point", "", 3, 3314, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetHistogramParameterxvOES_info = {
+    .name = "glGetHistogramParameterxvOES",
+    .doc = "glGetHistogramParameterxvOES(target, pname) -> params",
+    .text_signature = "($module, target, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetHistogramParameterxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3314,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetHistogramParameterxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetHistogramParameterxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -3232,11 +5776,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetInteger64vAPPLE_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetInteger64vAPPLE_info = {"glGetInteger64vAPPLE", "glGetInteger64vAPPLE(pname, params) -> None", "($module, pname, params, /)", pygl_GLES1_glGetInteger64vAPPLE_args, "GLES1_APPLE_sync", "", 2, 3315, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetInteger64vAPPLE_info = {
+    .name = "glGetInteger64vAPPLE",
+    .doc = "glGetInteger64vAPPLE(pname, params) -> None",
+    .text_signature = "($module, pname, params, /)",
+    .arg_names = pygl_GLES1_glGetInteger64vAPPLE_args,
+    .extension = "GLES1_APPLE_sync",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3315,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetInteger64vAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetInteger64vAPPLE(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -3253,11 +5813,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetIntegerv_args[] = {"pname", "data"};
-static const PyGLCommand pygl_GLES1_glGetIntegerv_info = {"glGetIntegerv", "glGetIntegerv(pname) -> data", "($module, pname, data=None, /)", pygl_GLES1_glGetIntegerv_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3316, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetIntegerv_info = {
+    .name = "glGetIntegerv",
+    .doc = "glGetIntegerv(pname) -> data",
+    .text_signature = "($module, pname, data=None, /)",
+    .arg_names = pygl_GLES1_glGetIntegerv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3316,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_GLES1_glGetIntegerv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetIntegerv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(1, 2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -3275,11 +5851,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetLightfv_args[] = {"light", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetLightfv_info = {"glGetLightfv", "glGetLightfv(light, pname) -> params", "($module, light, pname, params=None, /)", pygl_GLES1_glGetLightfv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3317, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetLightfv_info = {
+    .name = "glGetLightfv",
+    .doc = "glGetLightfv(light, pname) -> params",
+    .text_signature = "($module, light, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetLightfv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3317,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetLightfv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetLightfv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, light);
@@ -3298,11 +5890,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetLightxOES_args[] = {"light", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetLightxOES_info = {"glGetLightxOES", "glGetLightxOES(light, pname) -> params", "($module, light, pname, params=None, /)", pygl_GLES1_glGetLightxOES_args, "GLES1_OES_fixed_point", "", 3, 3318, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetLightxOES_info = {
+    .name = "glGetLightxOES",
+    .doc = "glGetLightxOES(light, pname) -> params",
+    .text_signature = "($module, light, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetLightxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3318,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetLightxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetLightxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, light);
@@ -3321,11 +5929,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetLightxv_args[] = {"light", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetLightxv_info = {"glGetLightxv", "glGetLightxv(light, pname, params) -> None", "($module, light, pname, params, /)", pygl_GLES1_glGetLightxv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3319, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetLightxv_info = {
+    .name = "glGetLightxv",
+    .doc = "glGetLightxv(light, pname, params) -> None",
+    .text_signature = "($module, light, pname, params, /)",
+    .arg_names = pygl_GLES1_glGetLightxv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3319,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetLightxv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetLightxv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, light);
@@ -3343,11 +5967,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetLightxvOES_args[] = {"light", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetLightxvOES_info = {"glGetLightxvOES", "glGetLightxvOES(light, pname, params) -> None", "($module, light, pname, params, /)", pygl_GLES1_glGetLightxvOES_args, "GLES1_OES_fixed_point", "", 3, 3320, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetLightxvOES_info = {
+    .name = "glGetLightxvOES",
+    .doc = "glGetLightxvOES(light, pname, params) -> None",
+    .text_signature = "($module, light, pname, params, /)",
+    .arg_names = pygl_GLES1_glGetLightxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3320,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetLightxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetLightxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, light);
@@ -3365,11 +6005,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetMapxvOES_args[] = {"target", "query", "v"};
-static const PyGLCommand pygl_GLES1_glGetMapxvOES_info = {"glGetMapxvOES", "glGetMapxvOES(target, query) -> v", "($module, target, query, v=None, /)", pygl_GLES1_glGetMapxvOES_args, "GLES1_OES_fixed_point", "", 3, 3321, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetMapxvOES_info = {
+    .name = "glGetMapxvOES",
+    .doc = "glGetMapxvOES(target, query) -> v",
+    .text_signature = "($module, target, query, v=None, /)",
+    .arg_names = pygl_GLES1_glGetMapxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3321,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetMapxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetMapxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -3388,11 +6044,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetMaterialfv_args[] = {"face", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetMaterialfv_info = {"glGetMaterialfv", "glGetMaterialfv(face, pname) -> params", "($module, face, pname, params=None, /)", pygl_GLES1_glGetMaterialfv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3322, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetMaterialfv_info = {
+    .name = "glGetMaterialfv",
+    .doc = "glGetMaterialfv(face, pname) -> params",
+    .text_signature = "($module, face, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetMaterialfv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3322,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetMaterialfv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetMaterialfv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, face);
@@ -3411,11 +6083,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetMaterialxOES_args[] = {"face", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glGetMaterialxOES_info = {"glGetMaterialxOES", "glGetMaterialxOES(face, pname, param) -> None", "($module, face, pname, param, /)", pygl_GLES1_glGetMaterialxOES_args, "GLES1_OES_fixed_point", "", 3, 3323, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetMaterialxOES_info = {
+    .name = "glGetMaterialxOES",
+    .doc = "glGetMaterialxOES(face, pname, param) -> None",
+    .text_signature = "($module, face, pname, param, /)",
+    .arg_names = pygl_GLES1_glGetMaterialxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3323,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetMaterialxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetMaterialxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, face);
     PYGL_U(1, pname);
@@ -3430,11 +6118,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetMaterialxv_args[] = {"face", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetMaterialxv_info = {"glGetMaterialxv", "glGetMaterialxv(face, pname, params) -> None", "($module, face, pname, params, /)", pygl_GLES1_glGetMaterialxv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3324, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetMaterialxv_info = {
+    .name = "glGetMaterialxv",
+    .doc = "glGetMaterialxv(face, pname, params) -> None",
+    .text_signature = "($module, face, pname, params, /)",
+    .arg_names = pygl_GLES1_glGetMaterialxv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3324,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetMaterialxv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetMaterialxv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, face);
@@ -3452,11 +6156,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetMaterialxvOES_args[] = {"face", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetMaterialxvOES_info = {"glGetMaterialxvOES", "glGetMaterialxvOES(face, pname, params) -> None", "($module, face, pname, params, /)", pygl_GLES1_glGetMaterialxvOES_args, "GLES1_OES_fixed_point", "", 3, 3325, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetMaterialxvOES_info = {
+    .name = "glGetMaterialxvOES",
+    .doc = "glGetMaterialxvOES(face, pname, params) -> None",
+    .text_signature = "($module, face, pname, params, /)",
+    .arg_names = pygl_GLES1_glGetMaterialxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3325,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetMaterialxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetMaterialxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, face);
@@ -3474,11 +6194,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetObjectLabel_args[] = {"identifier", "name", "bufSize", "length", "label"};
-static const PyGLCommand pygl_GLES1_glGetObjectLabel_info = {"glGetObjectLabel", "glGetObjectLabel(identifier, name, bufSize) -> label, length", "($module, identifier, name, bufSize, label=None, length=None, /)", pygl_GLES1_glGetObjectLabel_args, "GLES1_KHR_debug", "", 5, 3326, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetObjectLabel_info = {
+    .name = "glGetObjectLabel",
+    .doc = "glGetObjectLabel(identifier, name, bufSize) -> label, length",
+    .text_signature = "($module, identifier, name, bufSize, label=None, length=None, /)",
+    .arg_names = pygl_GLES1_glGetObjectLabel_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3326,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetObjectLabel(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetObjectLabel(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(3, 5);
     PYGL_FRAME(2);
     PYGL_U(0, identifier);
@@ -3503,11 +6239,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetObjectLabelKHR_args[] = {"identifier", "name", "bufSize", "length", "label"};
-static const PyGLCommand pygl_GLES1_glGetObjectLabelKHR_info = {"glGetObjectLabelKHR", "glGetObjectLabelKHR(identifier, name, bufSize, length, label) -> None", "($module, identifier, name, bufSize, length, label, /)", pygl_GLES1_glGetObjectLabelKHR_args, "GLES1_KHR_debug", "", 5, 3327, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetObjectLabelKHR_info = {
+    .name = "glGetObjectLabelKHR",
+    .doc = "glGetObjectLabelKHR(identifier, name, bufSize, length, label) -> None",
+    .text_signature = "($module, identifier, name, bufSize, length, label, /)",
+    .arg_names = pygl_GLES1_glGetObjectLabelKHR_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3327,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetObjectLabelKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetObjectLabelKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(2);
     PYGL_U(0, identifier);
@@ -3527,11 +6279,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetObjectPtrLabel_args[] = {"ptr", "bufSize", "length", "label"};
-static const PyGLCommand pygl_GLES1_glGetObjectPtrLabel_info = {"glGetObjectPtrLabel", "glGetObjectPtrLabel(ptr, bufSize) -> label, length", "($module, ptr, bufSize, label=None, length=None, /)", pygl_GLES1_glGetObjectPtrLabel_args, "GLES1_KHR_debug", "", 4, 3328, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetObjectPtrLabel_info = {
+    .name = "glGetObjectPtrLabel",
+    .doc = "glGetObjectPtrLabel(ptr, bufSize) -> label, length",
+    .text_signature = "($module, ptr, bufSize, label=None, length=None, /)",
+    .arg_names = pygl_GLES1_glGetObjectPtrLabel_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3328,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetObjectPtrLabel(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetObjectPtrLabel(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 4);
     PYGL_FRAME(3);
     PYGL_SZ(1, bufSize);
@@ -3555,11 +6323,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetObjectPtrLabelKHR_args[] = {"ptr", "bufSize", "length", "label"};
-static const PyGLCommand pygl_GLES1_glGetObjectPtrLabelKHR_info = {"glGetObjectPtrLabelKHR", "glGetObjectPtrLabelKHR(ptr, bufSize, length, label) -> None", "($module, ptr, bufSize, length, label, /)", pygl_GLES1_glGetObjectPtrLabelKHR_args, "GLES1_KHR_debug", "", 4, 3329, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetObjectPtrLabelKHR_info = {
+    .name = "glGetObjectPtrLabelKHR",
+    .doc = "glGetObjectPtrLabelKHR(ptr, bufSize, length, label) -> None",
+    .text_signature = "($module, ptr, bufSize, length, label, /)",
+    .arg_names = pygl_GLES1_glGetObjectPtrLabelKHR_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3329,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetObjectPtrLabelKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetObjectPtrLabelKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(3);
     PYGL_SZ(1, bufSize);
@@ -3578,11 +6362,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetPixelMapxv_args[] = {"map", "size", "values"};
-static const PyGLCommand pygl_GLES1_glGetPixelMapxv_info = {"glGetPixelMapxv", "glGetPixelMapxv(map, size) -> values", "($module, map, size, values=None, /)", pygl_GLES1_glGetPixelMapxv_args, "GLES1_OES_fixed_point", "", 3, 3330, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetPixelMapxv_info = {
+    .name = "glGetPixelMapxv",
+    .doc = "glGetPixelMapxv(map, size) -> values",
+    .text_signature = "($module, map, size, values=None, /)",
+    .arg_names = pygl_GLES1_glGetPixelMapxv_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3330,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetPixelMapxv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetPixelMapxv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, map);
@@ -3601,11 +6401,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetPointerv_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetPointerv_info = {"glGetPointerv", "glGetPointerv(pname) -> params", "($module, pname, params=None, /)", pygl_GLES1_glGetPointerv_args, "GLES1_VERSION_GLES1_1_0", "GLES1_KHR_debug", 2, 3331, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetPointerv_info = {
+    .name = "glGetPointerv",
+    .doc = "glGetPointerv(pname) -> params",
+    .text_signature = "($module, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetPointerv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "GLES1_KHR_debug",
+    .arg_count = 2,
+    .slot = 3331,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetPointerv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetPointerv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(1, 2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -3623,11 +6439,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetPointervKHR_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetPointervKHR_info = {"glGetPointervKHR", "glGetPointervKHR(pname, params) -> None", "($module, pname, params, /)", pygl_GLES1_glGetPointervKHR_args, "GLES1_KHR_debug", "", 2, 3332, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetPointervKHR_info = {
+    .name = "glGetPointervKHR",
+    .doc = "glGetPointervKHR(pname, params) -> None",
+    .text_signature = "($module, pname, params, /)",
+    .arg_names = pygl_GLES1_glGetPointervKHR_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3332,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetPointervKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetPointervKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -3644,11 +6476,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetRenderbufferParameterivOES_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetRenderbufferParameterivOES_info = {"glGetRenderbufferParameterivOES", "glGetRenderbufferParameterivOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES1_glGetRenderbufferParameterivOES_args, "GLES1_OES_framebuffer_object", "", 3, 3333, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetRenderbufferParameterivOES_info = {
+    .name = "glGetRenderbufferParameterivOES",
+    .doc = "glGetRenderbufferParameterivOES(target, pname, params) -> None",
+    .text_signature = "($module, target, pname, params, /)",
+    .arg_names = pygl_GLES1_glGetRenderbufferParameterivOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3333,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetRenderbufferParameterivOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetRenderbufferParameterivOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -3666,11 +6514,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetString_args[] = {"name"};
-static const PyGLCommand pygl_GLES1_glGetString_info = {"glGetString", "glGetString(name) -> GLubyte", "($module, name, /)", pygl_GLES1_glGetString_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3334, PYGL_API_GLES1, 0, 1, 2, 0};
+static const PyGLCommand pygl_GLES1_glGetString_info = {
+    .name = "glGetString",
+    .doc = "glGetString(name) -> GLubyte",
+    .text_signature = "($module, name, /)",
+    .arg_names = pygl_GLES1_glGetString_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3334,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 2,
+    .hand_written = 0,
+    .needs_context = 0,
+};
 
 static PyObject *
-pygl_GLES1_glGetString(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetString(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, name);
     PYGL_CONV_OK();
@@ -3683,11 +6547,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetSyncivAPPLE_args[] = {"sync", "pname", "count", "length", "values"};
-static const PyGLCommand pygl_GLES1_glGetSyncivAPPLE_info = {"glGetSyncivAPPLE", "glGetSyncivAPPLE(sync, pname, count, length, values) -> None", "($module, sync, pname, count, length, values, /)", pygl_GLES1_glGetSyncivAPPLE_args, "GLES1_APPLE_sync", "", 5, 3335, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetSyncivAPPLE_info = {
+    .name = "glGetSyncivAPPLE",
+    .doc = "glGetSyncivAPPLE(sync, pname, count, length, values) -> None",
+    .text_signature = "($module, sync, pname, count, length, values, /)",
+    .arg_names = pygl_GLES1_glGetSyncivAPPLE_args,
+    .extension = "GLES1_APPLE_sync",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3335,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetSyncivAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetSyncivAPPLE(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(2);
     PYGL_OPAQUE(0, sync);
@@ -3707,11 +6587,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetTexEnvfv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetTexEnvfv_info = {"glGetTexEnvfv", "glGetTexEnvfv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES1_glGetTexEnvfv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3336, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetTexEnvfv_info = {
+    .name = "glGetTexEnvfv",
+    .doc = "glGetTexEnvfv(target, pname) -> params",
+    .text_signature = "($module, target, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetTexEnvfv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3336,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetTexEnvfv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetTexEnvfv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -3730,11 +6626,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetTexEnviv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetTexEnviv_info = {"glGetTexEnviv", "glGetTexEnviv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES1_glGetTexEnviv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3337, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetTexEnviv_info = {
+    .name = "glGetTexEnviv",
+    .doc = "glGetTexEnviv(target, pname) -> params",
+    .text_signature = "($module, target, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetTexEnviv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3337,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetTexEnviv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetTexEnviv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -3753,11 +6665,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetTexEnvxv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetTexEnvxv_info = {"glGetTexEnvxv", "glGetTexEnvxv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES1_glGetTexEnvxv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3338, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetTexEnvxv_info = {
+    .name = "glGetTexEnvxv",
+    .doc = "glGetTexEnvxv(target, pname, params) -> None",
+    .text_signature = "($module, target, pname, params, /)",
+    .arg_names = pygl_GLES1_glGetTexEnvxv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3338,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetTexEnvxv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetTexEnvxv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -3775,11 +6703,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetTexEnvxvOES_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetTexEnvxvOES_info = {"glGetTexEnvxvOES", "glGetTexEnvxvOES(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES1_glGetTexEnvxvOES_args, "GLES1_OES_fixed_point", "", 3, 3339, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetTexEnvxvOES_info = {
+    .name = "glGetTexEnvxvOES",
+    .doc = "glGetTexEnvxvOES(target, pname) -> params",
+    .text_signature = "($module, target, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetTexEnvxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3339,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetTexEnvxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetTexEnvxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -3798,11 +6742,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetTexGenfvOES_args[] = {"coord", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetTexGenfvOES_info = {"glGetTexGenfvOES", "glGetTexGenfvOES(coord, pname, params) -> None", "($module, coord, pname, params, /)", pygl_GLES1_glGetTexGenfvOES_args, "GLES1_OES_texture_cube_map", "", 3, 3340, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetTexGenfvOES_info = {
+    .name = "glGetTexGenfvOES",
+    .doc = "glGetTexGenfvOES(coord, pname, params) -> None",
+    .text_signature = "($module, coord, pname, params, /)",
+    .arg_names = pygl_GLES1_glGetTexGenfvOES_args,
+    .extension = "GLES1_OES_texture_cube_map",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3340,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetTexGenfvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetTexGenfvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, coord);
@@ -3820,11 +6780,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetTexGenivOES_args[] = {"coord", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetTexGenivOES_info = {"glGetTexGenivOES", "glGetTexGenivOES(coord, pname, params) -> None", "($module, coord, pname, params, /)", pygl_GLES1_glGetTexGenivOES_args, "GLES1_OES_texture_cube_map", "", 3, 3341, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetTexGenivOES_info = {
+    .name = "glGetTexGenivOES",
+    .doc = "glGetTexGenivOES(coord, pname, params) -> None",
+    .text_signature = "($module, coord, pname, params, /)",
+    .arg_names = pygl_GLES1_glGetTexGenivOES_args,
+    .extension = "GLES1_OES_texture_cube_map",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3341,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetTexGenivOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetTexGenivOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, coord);
@@ -3842,11 +6818,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetTexGenxvOES_args[] = {"coord", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetTexGenxvOES_info = {"glGetTexGenxvOES", "glGetTexGenxvOES(coord, pname) -> params", "($module, coord, pname, params=None, /)", pygl_GLES1_glGetTexGenxvOES_args, "GLES1_OES_fixed_point", "GLES1_OES_texture_cube_map", 3, 3342, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetTexGenxvOES_info = {
+    .name = "glGetTexGenxvOES",
+    .doc = "glGetTexGenxvOES(coord, pname) -> params",
+    .text_signature = "($module, coord, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetTexGenxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "GLES1_OES_texture_cube_map",
+    .arg_count = 3,
+    .slot = 3342,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetTexGenxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetTexGenxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, coord);
@@ -3865,11 +6857,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetTexLevelParameterxvOES_args[] = {"target", "level", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetTexLevelParameterxvOES_info = {"glGetTexLevelParameterxvOES", "glGetTexLevelParameterxvOES(target, level, pname) -> params", "($module, target, level, pname, params=None, /)", pygl_GLES1_glGetTexLevelParameterxvOES_args, "GLES1_OES_fixed_point", "", 4, 3343, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetTexLevelParameterxvOES_info = {
+    .name = "glGetTexLevelParameterxvOES",
+    .doc = "glGetTexLevelParameterxvOES(target, level, pname) -> params",
+    .text_signature = "($module, target, level, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetTexLevelParameterxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3343,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetTexLevelParameterxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetTexLevelParameterxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(3, 4);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -3889,11 +6897,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetTexParameterfv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetTexParameterfv_info = {"glGetTexParameterfv", "glGetTexParameterfv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES1_glGetTexParameterfv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3344, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetTexParameterfv_info = {
+    .name = "glGetTexParameterfv",
+    .doc = "glGetTexParameterfv(target, pname) -> params",
+    .text_signature = "($module, target, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetTexParameterfv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3344,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetTexParameterfv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetTexParameterfv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -3912,11 +6936,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetTexParameteriv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetTexParameteriv_info = {"glGetTexParameteriv", "glGetTexParameteriv(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES1_glGetTexParameteriv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3345, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetTexParameteriv_info = {
+    .name = "glGetTexParameteriv",
+    .doc = "glGetTexParameteriv(target, pname) -> params",
+    .text_signature = "($module, target, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetTexParameteriv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3345,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetTexParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetTexParameteriv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -3935,11 +6975,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetTexParameterxv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetTexParameterxv_info = {"glGetTexParameterxv", "glGetTexParameterxv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES1_glGetTexParameterxv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3346, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetTexParameterxv_info = {
+    .name = "glGetTexParameterxv",
+    .doc = "glGetTexParameterxv(target, pname, params) -> None",
+    .text_signature = "($module, target, pname, params, /)",
+    .arg_names = pygl_GLES1_glGetTexParameterxv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3346,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetTexParameterxv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetTexParameterxv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -3957,11 +7013,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetTexParameterxvOES_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glGetTexParameterxvOES_info = {"glGetTexParameterxvOES", "glGetTexParameterxvOES(target, pname) -> params", "($module, target, pname, params=None, /)", pygl_GLES1_glGetTexParameterxvOES_args, "GLES1_OES_fixed_point", "", 3, 3347, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetTexParameterxvOES_info = {
+    .name = "glGetTexParameterxvOES",
+    .doc = "glGetTexParameterxvOES(target, pname) -> params",
+    .text_signature = "($module, target, pname, params=None, /)",
+    .arg_names = pygl_GLES1_glGetTexParameterxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3347,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetTexParameterxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetTexParameterxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(2, 3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -3980,11 +7052,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetnUniformfvEXT_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GLES1_glGetnUniformfvEXT_info = {"glGetnUniformfvEXT", "glGetnUniformfvEXT(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES1_glGetnUniformfvEXT_args, "GLES1_EXT_robustness", "", 4, 3348, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetnUniformfvEXT_info = {
+    .name = "glGetnUniformfvEXT",
+    .doc = "glGetnUniformfvEXT(program, location, bufSize, params) -> None",
+    .text_signature = "($module, program, location, bufSize, params, /)",
+    .arg_names = pygl_GLES1_glGetnUniformfvEXT_args,
+    .extension = "GLES1_EXT_robustness",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3348,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetnUniformfvEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetnUniformfvEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_U(0, program);
@@ -4003,11 +7091,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glGetnUniformivEXT_args[] = {"program", "location", "bufSize", "params"};
-static const PyGLCommand pygl_GLES1_glGetnUniformivEXT_info = {"glGetnUniformivEXT", "glGetnUniformivEXT(program, location, bufSize, params) -> None", "($module, program, location, bufSize, params, /)", pygl_GLES1_glGetnUniformivEXT_args, "GLES1_EXT_robustness", "", 4, 3349, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glGetnUniformivEXT_info = {
+    .name = "glGetnUniformivEXT",
+    .doc = "glGetnUniformivEXT(program, location, bufSize, params) -> None",
+    .text_signature = "($module, program, location, bufSize, params, /)",
+    .arg_names = pygl_GLES1_glGetnUniformivEXT_args,
+    .extension = "GLES1_EXT_robustness",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3349,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glGetnUniformivEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glGetnUniformivEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_U(0, program);
@@ -4026,11 +7130,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glHint_args[] = {"target", "mode"};
-static const PyGLCommand pygl_GLES1_glHint_info = {"glHint", "glHint(target, mode) -> None", "($module, target, mode, /)", pygl_GLES1_glHint_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3350, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glHint_info = {
+    .name = "glHint",
+    .doc = "glHint(target, mode) -> None",
+    .text_signature = "($module, target, mode, /)",
+    .arg_names = pygl_GLES1_glHint_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3350,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glHint(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glHint(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, target);
     PYGL_U(1, mode);
@@ -4044,11 +7164,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glIndexxOES_args[] = {"component"};
-static const PyGLCommand pygl_GLES1_glIndexxOES_info = {"glIndexxOES", "glIndexxOES(component) -> None", "($module, component, /)", pygl_GLES1_glIndexxOES_args, "GLES1_OES_fixed_point", "", 1, 3351, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glIndexxOES_info = {
+    .name = "glIndexxOES",
+    .doc = "glIndexxOES(component) -> None",
+    .text_signature = "($module, component, /)",
+    .arg_names = pygl_GLES1_glIndexxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3351,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glIndexxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glIndexxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, component);
     PYGL_CONV_OK();
@@ -4061,11 +7197,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glIndexxvOES_args[] = {"component"};
-static const PyGLCommand pygl_GLES1_glIndexxvOES_info = {"glIndexxvOES", "glIndexxvOES(component) -> None", "($module, component, /)", pygl_GLES1_glIndexxvOES_args, "GLES1_OES_fixed_point", "", 1, 3352, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glIndexxvOES_info = {
+    .name = "glIndexxvOES",
+    .doc = "glIndexxvOES(component) -> None",
+    .text_signature = "($module, component, /)",
+    .arg_names = pygl_GLES1_glIndexxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3352,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glIndexxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glIndexxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -4081,11 +7233,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glInsertEventMarkerEXT_args[] = {"length", "marker"};
-static const PyGLCommand pygl_GLES1_glInsertEventMarkerEXT_info = {"glInsertEventMarkerEXT", "glInsertEventMarkerEXT(length, marker) -> None", "($module, length, marker, /)", pygl_GLES1_glInsertEventMarkerEXT_args, "GLES1_EXT_debug_marker", "", 2, 3353, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glInsertEventMarkerEXT_info = {
+    .name = "glInsertEventMarkerEXT",
+    .doc = "glInsertEventMarkerEXT(length, marker) -> None",
+    .text_signature = "($module, length, marker, /)",
+    .arg_names = pygl_GLES1_glInsertEventMarkerEXT_args,
+    .extension = "GLES1_EXT_debug_marker",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3353,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glInsertEventMarkerEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glInsertEventMarkerEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_SZ(0, length);
@@ -4102,11 +7270,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glIsBuffer_args[] = {"buffer"};
-static const PyGLCommand pygl_GLES1_glIsBuffer_info = {"glIsBuffer", "glIsBuffer(buffer) -> GLboolean", "($module, buffer, /)", pygl_GLES1_glIsBuffer_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3354, PYGL_API_GLES1, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES1_glIsBuffer_info = {
+    .name = "glIsBuffer",
+    .doc = "glIsBuffer(buffer) -> GLboolean",
+    .text_signature = "($module, buffer, /)",
+    .arg_names = pygl_GLES1_glIsBuffer_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3354,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glIsBuffer(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glIsBuffer(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, buffer);
     PYGL_CONV_OK();
@@ -4119,11 +7303,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glIsEnabled_args[] = {"cap"};
-static const PyGLCommand pygl_GLES1_glIsEnabled_info = {"glIsEnabled", "glIsEnabled(cap) -> GLboolean", "($module, cap, /)", pygl_GLES1_glIsEnabled_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3355, PYGL_API_GLES1, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES1_glIsEnabled_info = {
+    .name = "glIsEnabled",
+    .doc = "glIsEnabled(cap) -> GLboolean",
+    .text_signature = "($module, cap, /)",
+    .arg_names = pygl_GLES1_glIsEnabled_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3355,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glIsEnabled(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glIsEnabled(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, cap);
     PYGL_CONV_OK();
@@ -4136,11 +7336,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glIsFenceNV_args[] = {"fence"};
-static const PyGLCommand pygl_GLES1_glIsFenceNV_info = {"glIsFenceNV", "glIsFenceNV(fence) -> GLboolean", "($module, fence, /)", pygl_GLES1_glIsFenceNV_args, "GLES1_NV_fence", "", 1, 3356, PYGL_API_GLES1, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES1_glIsFenceNV_info = {
+    .name = "glIsFenceNV",
+    .doc = "glIsFenceNV(fence) -> GLboolean",
+    .text_signature = "($module, fence, /)",
+    .arg_names = pygl_GLES1_glIsFenceNV_args,
+    .extension = "GLES1_NV_fence",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3356,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glIsFenceNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glIsFenceNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, fence);
     PYGL_CONV_OK();
@@ -4153,11 +7369,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glIsFramebufferOES_args[] = {"framebuffer"};
-static const PyGLCommand pygl_GLES1_glIsFramebufferOES_info = {"glIsFramebufferOES", "glIsFramebufferOES(framebuffer) -> GLboolean", "($module, framebuffer, /)", pygl_GLES1_glIsFramebufferOES_args, "GLES1_OES_framebuffer_object", "", 1, 3357, PYGL_API_GLES1, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES1_glIsFramebufferOES_info = {
+    .name = "glIsFramebufferOES",
+    .doc = "glIsFramebufferOES(framebuffer) -> GLboolean",
+    .text_signature = "($module, framebuffer, /)",
+    .arg_names = pygl_GLES1_glIsFramebufferOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3357,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glIsFramebufferOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glIsFramebufferOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, framebuffer);
     PYGL_CONV_OK();
@@ -4170,11 +7402,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glIsRenderbufferOES_args[] = {"renderbuffer"};
-static const PyGLCommand pygl_GLES1_glIsRenderbufferOES_info = {"glIsRenderbufferOES", "glIsRenderbufferOES(renderbuffer) -> GLboolean", "($module, renderbuffer, /)", pygl_GLES1_glIsRenderbufferOES_args, "GLES1_OES_framebuffer_object", "", 1, 3358, PYGL_API_GLES1, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES1_glIsRenderbufferOES_info = {
+    .name = "glIsRenderbufferOES",
+    .doc = "glIsRenderbufferOES(renderbuffer) -> GLboolean",
+    .text_signature = "($module, renderbuffer, /)",
+    .arg_names = pygl_GLES1_glIsRenderbufferOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3358,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glIsRenderbufferOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glIsRenderbufferOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, renderbuffer);
     PYGL_CONV_OK();
@@ -4187,11 +7435,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glIsSyncAPPLE_args[] = {"sync"};
-static const PyGLCommand pygl_GLES1_glIsSyncAPPLE_info = {"glIsSyncAPPLE", "glIsSyncAPPLE(sync) -> GLboolean", "($module, sync, /)", pygl_GLES1_glIsSyncAPPLE_args, "GLES1_APPLE_sync", "", 1, 3359, PYGL_API_GLES1, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES1_glIsSyncAPPLE_info = {
+    .name = "glIsSyncAPPLE",
+    .doc = "glIsSyncAPPLE(sync) -> GLboolean",
+    .text_signature = "($module, sync, /)",
+    .arg_names = pygl_GLES1_glIsSyncAPPLE_args,
+    .extension = "GLES1_APPLE_sync",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3359,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glIsSyncAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glIsSyncAPPLE(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_OPAQUE(0, sync);
     PYGL_CONV_OK();
@@ -4204,11 +7468,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glIsTexture_args[] = {"texture"};
-static const PyGLCommand pygl_GLES1_glIsTexture_info = {"glIsTexture", "glIsTexture(texture) -> GLboolean", "($module, texture, /)", pygl_GLES1_glIsTexture_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3360, PYGL_API_GLES1, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES1_glIsTexture_info = {
+    .name = "glIsTexture",
+    .doc = "glIsTexture(texture) -> GLboolean",
+    .text_signature = "($module, texture, /)",
+    .arg_names = pygl_GLES1_glIsTexture_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3360,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glIsTexture(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glIsTexture(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, texture);
     PYGL_CONV_OK();
@@ -4221,11 +7501,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glIsVertexArrayOES_args[] = {"array"};
-static const PyGLCommand pygl_GLES1_glIsVertexArrayOES_info = {"glIsVertexArrayOES", "glIsVertexArrayOES(array) -> GLboolean", "($module, array, /)", pygl_GLES1_glIsVertexArrayOES_args, "GLES1_OES_vertex_array_object", "", 1, 3361, PYGL_API_GLES1, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES1_glIsVertexArrayOES_info = {
+    .name = "glIsVertexArrayOES",
+    .doc = "glIsVertexArrayOES(array) -> GLboolean",
+    .text_signature = "($module, array, /)",
+    .arg_names = pygl_GLES1_glIsVertexArrayOES_args,
+    .extension = "GLES1_OES_vertex_array_object",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3361,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glIsVertexArrayOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glIsVertexArrayOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, array);
     PYGL_CONV_OK();
@@ -4238,11 +7534,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLightModelf_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glLightModelf_info = {"glLightModelf", "glLightModelf(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glLightModelf_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3362, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glLightModelf_info = {
+    .name = "glLightModelf",
+    .doc = "glLightModelf(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glLightModelf_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3362,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLightModelf(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLightModelf(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, pname);
     PYGL_F(1, param);
@@ -4256,11 +7568,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLightModelfv_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GLES1_glLightModelfv_info = {"glLightModelfv", "glLightModelfv(pname, params) -> None", "($module, pname, params, /)", pygl_GLES1_glLightModelfv_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3363, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glLightModelfv_info = {
+    .name = "glLightModelfv",
+    .doc = "glLightModelfv(pname, params) -> None",
+    .text_signature = "($module, pname, params, /)",
+    .arg_names = pygl_GLES1_glLightModelfv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3363,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLightModelfv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLightModelfv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -4277,11 +7605,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLightModelx_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glLightModelx_info = {"glLightModelx", "glLightModelx(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glLightModelx_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3364, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glLightModelx_info = {
+    .name = "glLightModelx",
+    .doc = "glLightModelx(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glLightModelx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3364,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLightModelx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLightModelx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, pname);
     PYGL_I(1, param);
@@ -4295,11 +7639,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLightModelxOES_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glLightModelxOES_info = {"glLightModelxOES", "glLightModelxOES(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glLightModelxOES_args, "GLES1_OES_fixed_point", "", 2, 3365, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glLightModelxOES_info = {
+    .name = "glLightModelxOES",
+    .doc = "glLightModelxOES(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glLightModelxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3365,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLightModelxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLightModelxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, pname);
     PYGL_I(1, param);
@@ -4313,11 +7673,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLightModelxv_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glLightModelxv_info = {"glLightModelxv", "glLightModelxv(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glLightModelxv_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3366, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glLightModelxv_info = {
+    .name = "glLightModelxv",
+    .doc = "glLightModelxv(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glLightModelxv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3366,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLightModelxv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLightModelxv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -4334,11 +7710,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLightModelxvOES_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glLightModelxvOES_info = {"glLightModelxvOES", "glLightModelxvOES(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glLightModelxvOES_args, "GLES1_OES_fixed_point", "", 2, 3367, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glLightModelxvOES_info = {
+    .name = "glLightModelxvOES",
+    .doc = "glLightModelxvOES(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glLightModelxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3367,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLightModelxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLightModelxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -4355,11 +7747,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLightf_args[] = {"light", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glLightf_info = {"glLightf", "glLightf(light, pname, param) -> None", "($module, light, pname, param, /)", pygl_GLES1_glLightf_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3368, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glLightf_info = {
+    .name = "glLightf",
+    .doc = "glLightf(light, pname, param) -> None",
+    .text_signature = "($module, light, pname, param, /)",
+    .arg_names = pygl_GLES1_glLightf_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3368,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLightf(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLightf(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, light);
     PYGL_U(1, pname);
@@ -4374,11 +7782,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLightfv_args[] = {"light", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glLightfv_info = {"glLightfv", "glLightfv(light, pname, params) -> None", "($module, light, pname, params, /)", pygl_GLES1_glLightfv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3369, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glLightfv_info = {
+    .name = "glLightfv",
+    .doc = "glLightfv(light, pname, params) -> None",
+    .text_signature = "($module, light, pname, params, /)",
+    .arg_names = pygl_GLES1_glLightfv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3369,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLightfv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLightfv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, light);
@@ -4396,11 +7820,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLightx_args[] = {"light", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glLightx_info = {"glLightx", "glLightx(light, pname, param) -> None", "($module, light, pname, param, /)", pygl_GLES1_glLightx_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3370, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glLightx_info = {
+    .name = "glLightx",
+    .doc = "glLightx(light, pname, param) -> None",
+    .text_signature = "($module, light, pname, param, /)",
+    .arg_names = pygl_GLES1_glLightx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3370,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLightx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLightx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, light);
     PYGL_U(1, pname);
@@ -4415,11 +7855,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLightxOES_args[] = {"light", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glLightxOES_info = {"glLightxOES", "glLightxOES(light, pname, param) -> None", "($module, light, pname, param, /)", pygl_GLES1_glLightxOES_args, "GLES1_OES_fixed_point", "", 3, 3371, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glLightxOES_info = {
+    .name = "glLightxOES",
+    .doc = "glLightxOES(light, pname, param) -> None",
+    .text_signature = "($module, light, pname, param, /)",
+    .arg_names = pygl_GLES1_glLightxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3371,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLightxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLightxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, light);
     PYGL_U(1, pname);
@@ -4434,11 +7890,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLightxv_args[] = {"light", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glLightxv_info = {"glLightxv", "glLightxv(light, pname, params) -> None", "($module, light, pname, params, /)", pygl_GLES1_glLightxv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3372, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glLightxv_info = {
+    .name = "glLightxv",
+    .doc = "glLightxv(light, pname, params) -> None",
+    .text_signature = "($module, light, pname, params, /)",
+    .arg_names = pygl_GLES1_glLightxv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3372,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLightxv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLightxv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, light);
@@ -4456,11 +7928,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLightxvOES_args[] = {"light", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glLightxvOES_info = {"glLightxvOES", "glLightxvOES(light, pname, params) -> None", "($module, light, pname, params, /)", pygl_GLES1_glLightxvOES_args, "GLES1_OES_fixed_point", "", 3, 3373, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glLightxvOES_info = {
+    .name = "glLightxvOES",
+    .doc = "glLightxvOES(light, pname, params) -> None",
+    .text_signature = "($module, light, pname, params, /)",
+    .arg_names = pygl_GLES1_glLightxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3373,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLightxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLightxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, light);
@@ -4478,11 +7966,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLineWidth_args[] = {"width"};
-static const PyGLCommand pygl_GLES1_glLineWidth_info = {"glLineWidth", "glLineWidth(width) -> None", "($module, width, /)", pygl_GLES1_glLineWidth_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3374, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glLineWidth_info = {
+    .name = "glLineWidth",
+    .doc = "glLineWidth(width) -> None",
+    .text_signature = "($module, width, /)",
+    .arg_names = pygl_GLES1_glLineWidth_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3374,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLineWidth(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLineWidth(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_F(0, width);
     PYGL_CONV_OK();
@@ -4495,11 +7999,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLineWidthx_args[] = {"width"};
-static const PyGLCommand pygl_GLES1_glLineWidthx_info = {"glLineWidthx", "glLineWidthx(width) -> None", "($module, width, /)", pygl_GLES1_glLineWidthx_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3375, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glLineWidthx_info = {
+    .name = "glLineWidthx",
+    .doc = "glLineWidthx(width) -> None",
+    .text_signature = "($module, width, /)",
+    .arg_names = pygl_GLES1_glLineWidthx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3375,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLineWidthx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLineWidthx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, width);
     PYGL_CONV_OK();
@@ -4512,11 +8032,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLineWidthxOES_args[] = {"width"};
-static const PyGLCommand pygl_GLES1_glLineWidthxOES_info = {"glLineWidthxOES", "glLineWidthxOES(width) -> None", "($module, width, /)", pygl_GLES1_glLineWidthxOES_args, "GLES1_OES_fixed_point", "", 1, 3376, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glLineWidthxOES_info = {
+    .name = "glLineWidthxOES",
+    .doc = "glLineWidthxOES(width) -> None",
+    .text_signature = "($module, width, /)",
+    .arg_names = pygl_GLES1_glLineWidthxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3376,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLineWidthxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLineWidthxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, width);
     PYGL_CONV_OK();
@@ -4528,11 +8064,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES1_glLoadIdentity_info = {"glLoadIdentity", "glLoadIdentity() -> None", "($module)", NULL, "GLES1_VERSION_GLES1_1_0", "", 0, 3377, PYGL_API_GLES1, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES1_glLoadIdentity_info = {
+    .name = "glLoadIdentity",
+    .doc = "glLoadIdentity() -> None",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 3377,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLoadIdentity(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLoadIdentity(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_V((void), ());
@@ -4544,11 +8096,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLoadMatrixf_args[] = {"m"};
-static const PyGLCommand pygl_GLES1_glLoadMatrixf_info = {"glLoadMatrixf", "glLoadMatrixf(m) -> None", "($module, m, /)", pygl_GLES1_glLoadMatrixf_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3378, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glLoadMatrixf_info = {
+    .name = "glLoadMatrixf",
+    .doc = "glLoadMatrixf(m) -> None",
+    .text_signature = "($module, m, /)",
+    .arg_names = pygl_GLES1_glLoadMatrixf_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3378,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLoadMatrixf(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLoadMatrixf(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -4564,11 +8132,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLoadMatrixx_args[] = {"m"};
-static const PyGLCommand pygl_GLES1_glLoadMatrixx_info = {"glLoadMatrixx", "glLoadMatrixx(m) -> None", "($module, m, /)", pygl_GLES1_glLoadMatrixx_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3379, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glLoadMatrixx_info = {
+    .name = "glLoadMatrixx",
+    .doc = "glLoadMatrixx(m) -> None",
+    .text_signature = "($module, m, /)",
+    .arg_names = pygl_GLES1_glLoadMatrixx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3379,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLoadMatrixx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLoadMatrixx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -4584,11 +8168,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLoadMatrixxOES_args[] = {"m"};
-static const PyGLCommand pygl_GLES1_glLoadMatrixxOES_info = {"glLoadMatrixxOES", "glLoadMatrixxOES(m) -> None", "($module, m, /)", pygl_GLES1_glLoadMatrixxOES_args, "GLES1_OES_fixed_point", "", 1, 3380, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glLoadMatrixxOES_info = {
+    .name = "glLoadMatrixxOES",
+    .doc = "glLoadMatrixxOES(m) -> None",
+    .text_signature = "($module, m, /)",
+    .arg_names = pygl_GLES1_glLoadMatrixxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3380,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLoadMatrixxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLoadMatrixxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -4603,11 +8203,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES1_glLoadPaletteFromModelViewMatrixOES_info = {"glLoadPaletteFromModelViewMatrixOES", "glLoadPaletteFromModelViewMatrixOES() -> None", "($module)", NULL, "GLES1_OES_matrix_palette", "", 0, 3381, PYGL_API_GLES1, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES1_glLoadPaletteFromModelViewMatrixOES_info = {
+    .name = "glLoadPaletteFromModelViewMatrixOES",
+    .doc = "glLoadPaletteFromModelViewMatrixOES() -> None",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "GLES1_OES_matrix_palette",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 3381,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLoadPaletteFromModelViewMatrixOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLoadPaletteFromModelViewMatrixOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_V((void), ());
@@ -4619,11 +8235,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLoadTransposeMatrixxOES_args[] = {"m"};
-static const PyGLCommand pygl_GLES1_glLoadTransposeMatrixxOES_info = {"glLoadTransposeMatrixxOES", "glLoadTransposeMatrixxOES(m) -> None", "($module, m, /)", pygl_GLES1_glLoadTransposeMatrixxOES_args, "GLES1_OES_fixed_point", "", 1, 3382, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glLoadTransposeMatrixxOES_info = {
+    .name = "glLoadTransposeMatrixxOES",
+    .doc = "glLoadTransposeMatrixxOES(m) -> None",
+    .text_signature = "($module, m, /)",
+    .arg_names = pygl_GLES1_glLoadTransposeMatrixxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3382,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLoadTransposeMatrixxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLoadTransposeMatrixxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -4639,11 +8271,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glLogicOp_args[] = {"opcode"};
-static const PyGLCommand pygl_GLES1_glLogicOp_info = {"glLogicOp", "glLogicOp(opcode) -> None", "($module, opcode, /)", pygl_GLES1_glLogicOp_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3383, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glLogicOp_info = {
+    .name = "glLogicOp",
+    .doc = "glLogicOp(opcode) -> None",
+    .text_signature = "($module, opcode, /)",
+    .arg_names = pygl_GLES1_glLogicOp_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3383,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glLogicOp(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glLogicOp(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, opcode);
     PYGL_CONV_OK();
@@ -4656,11 +8304,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMap1xOES_args[] = {"target", "u1", "u2", "stride", "order", "points"};
-static const PyGLCommand pygl_GLES1_glMap1xOES_info = {"glMap1xOES", "glMap1xOES(target, u1, u2, stride, order, points) -> None", "($module, target, u1, u2, stride, order, points, /)", pygl_GLES1_glMap1xOES_args, "GLES1_OES_fixed_point", "", 6, 3384, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glMap1xOES_info = {
+    .name = "glMap1xOES",
+    .doc = "glMap1xOES(target, u1, u2, stride, order, points) -> None",
+    .text_signature = "($module, target, u1, u2, stride, order, points, /)",
+    .arg_names = pygl_GLES1_glMap1xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3384,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMap1xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMap1xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_U(0, target);
     PYGL_I(1, u1);
@@ -4678,11 +8342,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMap2xOES_args[] = {"target", "u1", "u2", "ustride", "uorder", "v1", "v2", "vstride", "vorder", "points"};
-static const PyGLCommand pygl_GLES1_glMap2xOES_info = {"glMap2xOES", "glMap2xOES(target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) -> None", "($module, target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points, /)", pygl_GLES1_glMap2xOES_args, "GLES1_OES_fixed_point", "", 10, 3385, PYGL_API_GLES1, 0, 10, 0, 0};
+static const PyGLCommand pygl_GLES1_glMap2xOES_info = {
+    .name = "glMap2xOES",
+    .doc = "glMap2xOES(target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points) -> None",
+    .text_signature = "($module, target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points, /)",
+    .arg_names = pygl_GLES1_glMap2xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 10,
+    .slot = 3385,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 10,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMap2xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMap2xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(10);
     PYGL_U(0, target);
     PYGL_I(1, u1);
@@ -4704,11 +8384,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMapBufferOES_args[] = {"target", "access"};
-static const PyGLCommand pygl_GLES1_glMapBufferOES_info = {"glMapBufferOES", "glMapBufferOES(target, access) -> void", "($module, target, access, /)", pygl_GLES1_glMapBufferOES_args, "GLES1_OES_mapbuffer", "", 2, 3386, PYGL_API_GLES1, 0, 2, 5, 0};
+static const PyGLCommand pygl_GLES1_glMapBufferOES_info = {
+    .name = "glMapBufferOES",
+    .doc = "glMapBufferOES(target, access) -> void",
+    .text_signature = "($module, target, access, /)",
+    .arg_names = pygl_GLES1_glMapBufferOES_args,
+    .extension = "GLES1_OES_mapbuffer",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3386,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 5,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMapBufferOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMapBufferOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, target);
     PYGL_U(1, access);
@@ -4722,11 +8418,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMapBufferRangeEXT_args[] = {"target", "offset", "length", "access"};
-static const PyGLCommand pygl_GLES1_glMapBufferRangeEXT_info = {"glMapBufferRangeEXT", "glMapBufferRangeEXT(target, offset, length, access) -> void", "($module, target, offset, length, access, /)", pygl_GLES1_glMapBufferRangeEXT_args, "GLES1_EXT_map_buffer_range", "", 4, 3387, PYGL_API_GLES1, 0, 4, 5, 0};
+static const PyGLCommand pygl_GLES1_glMapBufferRangeEXT_info = {
+    .name = "glMapBufferRangeEXT",
+    .doc = "glMapBufferRangeEXT(target, offset, length, access) -> void",
+    .text_signature = "($module, target, offset, length, access, /)",
+    .arg_names = pygl_GLES1_glMapBufferRangeEXT_args,
+    .extension = "GLES1_EXT_map_buffer_range",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3387,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 5,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMapBufferRangeEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMapBufferRangeEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_U(0, target);
     PYGL_IPTR(1, offset);
@@ -4742,11 +8454,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMapGrid1xOES_args[] = {"n", "u1", "u2"};
-static const PyGLCommand pygl_GLES1_glMapGrid1xOES_info = {"glMapGrid1xOES", "glMapGrid1xOES(n, u1, u2) -> None", "($module, n, u1, u2, /)", pygl_GLES1_glMapGrid1xOES_args, "GLES1_OES_fixed_point", "", 3, 3388, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glMapGrid1xOES_info = {
+    .name = "glMapGrid1xOES",
+    .doc = "glMapGrid1xOES(n, u1, u2) -> None",
+    .text_signature = "($module, n, u1, u2, /)",
+    .arg_names = pygl_GLES1_glMapGrid1xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3388,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMapGrid1xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMapGrid1xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_I(0, n);
     PYGL_I(1, u1);
@@ -4761,11 +8489,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMapGrid2xOES_args[] = {"n", "u1", "u2", "v1", "v2"};
-static const PyGLCommand pygl_GLES1_glMapGrid2xOES_info = {"glMapGrid2xOES", "glMapGrid2xOES(n, u1, u2, v1, v2) -> None", "($module, n, u1, u2, v1, v2, /)", pygl_GLES1_glMapGrid2xOES_args, "GLES1_OES_fixed_point", "", 5, 3389, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glMapGrid2xOES_info = {
+    .name = "glMapGrid2xOES",
+    .doc = "glMapGrid2xOES(n, u1, u2, v1, v2) -> None",
+    .text_signature = "($module, n, u1, u2, v1, v2, /)",
+    .arg_names = pygl_GLES1_glMapGrid2xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3389,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMapGrid2xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMapGrid2xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_I(0, n);
     PYGL_I(1, u1);
@@ -4782,11 +8526,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMaterialf_args[] = {"face", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glMaterialf_info = {"glMaterialf", "glMaterialf(face, pname, param) -> None", "($module, face, pname, param, /)", pygl_GLES1_glMaterialf_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3390, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glMaterialf_info = {
+    .name = "glMaterialf",
+    .doc = "glMaterialf(face, pname, param) -> None",
+    .text_signature = "($module, face, pname, param, /)",
+    .arg_names = pygl_GLES1_glMaterialf_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3390,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMaterialf(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMaterialf(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, face);
     PYGL_U(1, pname);
@@ -4801,11 +8561,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMaterialfv_args[] = {"face", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glMaterialfv_info = {"glMaterialfv", "glMaterialfv(face, pname, params) -> None", "($module, face, pname, params, /)", pygl_GLES1_glMaterialfv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3391, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glMaterialfv_info = {
+    .name = "glMaterialfv",
+    .doc = "glMaterialfv(face, pname, params) -> None",
+    .text_signature = "($module, face, pname, params, /)",
+    .arg_names = pygl_GLES1_glMaterialfv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3391,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMaterialfv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMaterialfv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, face);
@@ -4823,11 +8599,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMaterialx_args[] = {"face", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glMaterialx_info = {"glMaterialx", "glMaterialx(face, pname, param) -> None", "($module, face, pname, param, /)", pygl_GLES1_glMaterialx_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3392, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glMaterialx_info = {
+    .name = "glMaterialx",
+    .doc = "glMaterialx(face, pname, param) -> None",
+    .text_signature = "($module, face, pname, param, /)",
+    .arg_names = pygl_GLES1_glMaterialx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3392,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMaterialx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMaterialx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, face);
     PYGL_U(1, pname);
@@ -4842,11 +8634,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMaterialxOES_args[] = {"face", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glMaterialxOES_info = {"glMaterialxOES", "glMaterialxOES(face, pname, param) -> None", "($module, face, pname, param, /)", pygl_GLES1_glMaterialxOES_args, "GLES1_OES_fixed_point", "", 3, 3393, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glMaterialxOES_info = {
+    .name = "glMaterialxOES",
+    .doc = "glMaterialxOES(face, pname, param) -> None",
+    .text_signature = "($module, face, pname, param, /)",
+    .arg_names = pygl_GLES1_glMaterialxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3393,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMaterialxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMaterialxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, face);
     PYGL_U(1, pname);
@@ -4861,11 +8669,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMaterialxv_args[] = {"face", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glMaterialxv_info = {"glMaterialxv", "glMaterialxv(face, pname, param) -> None", "($module, face, pname, param, /)", pygl_GLES1_glMaterialxv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3394, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glMaterialxv_info = {
+    .name = "glMaterialxv",
+    .doc = "glMaterialxv(face, pname, param) -> None",
+    .text_signature = "($module, face, pname, param, /)",
+    .arg_names = pygl_GLES1_glMaterialxv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3394,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMaterialxv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMaterialxv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, face);
@@ -4883,11 +8707,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMaterialxvOES_args[] = {"face", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glMaterialxvOES_info = {"glMaterialxvOES", "glMaterialxvOES(face, pname, param) -> None", "($module, face, pname, param, /)", pygl_GLES1_glMaterialxvOES_args, "GLES1_OES_fixed_point", "", 3, 3395, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glMaterialxvOES_info = {
+    .name = "glMaterialxvOES",
+    .doc = "glMaterialxvOES(face, pname, param) -> None",
+    .text_signature = "($module, face, pname, param, /)",
+    .arg_names = pygl_GLES1_glMaterialxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3395,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMaterialxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMaterialxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, face);
@@ -4905,11 +8745,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMatrixIndexPointerOES_args[] = {"size", "type", "stride", "pointer"};
-static const PyGLCommand pygl_GLES1_glMatrixIndexPointerOES_info = {"glMatrixIndexPointerOES", "glMatrixIndexPointerOES(size, type, stride, pointer) -> None", "($module, size, type, stride, pointer, /)", pygl_GLES1_glMatrixIndexPointerOES_args, "GLES1_OES_matrix_palette", "", 4, 3396, PYGL_API_GLES1, 0, 4, 0, 1};
+static const PyGLCommand pygl_GLES1_glMatrixIndexPointerOES_info = {
+    .name = "glMatrixIndexPointerOES",
+    .doc = "glMatrixIndexPointerOES(size, type, stride, pointer) -> None",
+    .text_signature = "($module, size, type, stride, pointer, /)",
+    .arg_names = pygl_GLES1_glMatrixIndexPointerOES_args,
+    .extension = "GLES1_OES_matrix_palette",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3396,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 1,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMatrixIndexPointerOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMatrixIndexPointerOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_I(0, size);
@@ -4928,11 +8784,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMatrixMode_args[] = {"mode"};
-static const PyGLCommand pygl_GLES1_glMatrixMode_info = {"glMatrixMode", "glMatrixMode(mode) -> None", "($module, mode, /)", pygl_GLES1_glMatrixMode_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3397, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glMatrixMode_info = {
+    .name = "glMatrixMode",
+    .doc = "glMatrixMode(mode) -> None",
+    .text_signature = "($module, mode, /)",
+    .arg_names = pygl_GLES1_glMatrixMode_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3397,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMatrixMode(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMatrixMode(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, mode);
     PYGL_CONV_OK();
@@ -4945,11 +8817,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultMatrixf_args[] = {"m"};
-static const PyGLCommand pygl_GLES1_glMultMatrixf_info = {"glMultMatrixf", "glMultMatrixf(m) -> None", "($module, m, /)", pygl_GLES1_glMultMatrixf_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3398, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultMatrixf_info = {
+    .name = "glMultMatrixf",
+    .doc = "glMultMatrixf(m) -> None",
+    .text_signature = "($module, m, /)",
+    .arg_names = pygl_GLES1_glMultMatrixf_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3398,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultMatrixf(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultMatrixf(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -4965,11 +8853,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultMatrixx_args[] = {"m"};
-static const PyGLCommand pygl_GLES1_glMultMatrixx_info = {"glMultMatrixx", "glMultMatrixx(m) -> None", "($module, m, /)", pygl_GLES1_glMultMatrixx_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3399, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultMatrixx_info = {
+    .name = "glMultMatrixx",
+    .doc = "glMultMatrixx(m) -> None",
+    .text_signature = "($module, m, /)",
+    .arg_names = pygl_GLES1_glMultMatrixx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3399,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultMatrixx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultMatrixx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -4985,11 +8889,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultMatrixxOES_args[] = {"m"};
-static const PyGLCommand pygl_GLES1_glMultMatrixxOES_info = {"glMultMatrixxOES", "glMultMatrixxOES(m) -> None", "($module, m, /)", pygl_GLES1_glMultMatrixxOES_args, "GLES1_OES_fixed_point", "", 1, 3400, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultMatrixxOES_info = {
+    .name = "glMultMatrixxOES",
+    .doc = "glMultMatrixxOES(m) -> None",
+    .text_signature = "($module, m, /)",
+    .arg_names = pygl_GLES1_glMultMatrixxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3400,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultMatrixxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultMatrixxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -5005,11 +8925,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultTransposeMatrixxOES_args[] = {"m"};
-static const PyGLCommand pygl_GLES1_glMultTransposeMatrixxOES_info = {"glMultTransposeMatrixxOES", "glMultTransposeMatrixxOES(m) -> None", "($module, m, /)", pygl_GLES1_glMultTransposeMatrixxOES_args, "GLES1_OES_fixed_point", "", 1, 3401, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultTransposeMatrixxOES_info = {
+    .name = "glMultTransposeMatrixxOES",
+    .doc = "glMultTransposeMatrixxOES(m) -> None",
+    .text_signature = "($module, m, /)",
+    .arg_names = pygl_GLES1_glMultTransposeMatrixxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3401,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultTransposeMatrixxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultTransposeMatrixxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -5025,11 +8961,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiDrawArraysEXT_args[] = {"mode", "first", "count", "primcount"};
-static const PyGLCommand pygl_GLES1_glMultiDrawArraysEXT_info = {"glMultiDrawArraysEXT", "glMultiDrawArraysEXT(mode, first, count, primcount) -> None", "($module, mode, first, count, primcount, /)", pygl_GLES1_glMultiDrawArraysEXT_args, "GLES1_EXT_multi_draw_arrays", "", 4, 3402, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiDrawArraysEXT_info = {
+    .name = "glMultiDrawArraysEXT",
+    .doc = "glMultiDrawArraysEXT(mode, first, count, primcount) -> None",
+    .text_signature = "($module, mode, first, count, primcount, /)",
+    .arg_names = pygl_GLES1_glMultiDrawArraysEXT_args,
+    .extension = "GLES1_EXT_multi_draw_arrays",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3402,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiDrawArraysEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiDrawArraysEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(2);
     PYGL_U(0, mode);
@@ -5048,11 +9000,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiDrawElementsEXT_args[] = {"mode", "count", "type", "indices", "primcount"};
-static const PyGLCommand pygl_GLES1_glMultiDrawElementsEXT_info = {"glMultiDrawElementsEXT", "glMultiDrawElementsEXT(mode, count, type, indices, primcount) -> None", "($module, mode, count, type, indices, primcount, /)", pygl_GLES1_glMultiDrawElementsEXT_args, "GLES1_EXT_multi_draw_arrays", "", 5, 3403, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiDrawElementsEXT_info = {
+    .name = "glMultiDrawElementsEXT",
+    .doc = "glMultiDrawElementsEXT(mode, count, type, indices, primcount) -> None",
+    .text_signature = "($module, mode, count, type, indices, primcount, /)",
+    .arg_names = pygl_GLES1_glMultiDrawElementsEXT_args,
+    .extension = "GLES1_EXT_multi_draw_arrays",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3403,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiDrawElementsEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiDrawElementsEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_FRAME(2);
     PYGL_U(0, mode);
@@ -5072,11 +9040,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord1bOES_args[] = {"texture", "s"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord1bOES_info = {"glMultiTexCoord1bOES", "glMultiTexCoord1bOES(texture, s) -> None", "($module, texture, s, /)", pygl_GLES1_glMultiTexCoord1bOES_args, "GLES1_OES_byte_coordinates", "", 2, 3404, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord1bOES_info = {
+    .name = "glMultiTexCoord1bOES",
+    .doc = "glMultiTexCoord1bOES(texture, s) -> None",
+    .text_signature = "($module, texture, s, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord1bOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3404,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord1bOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord1bOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, texture);
     PYGL_I(1, s);
@@ -5090,11 +9074,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord1bvOES_args[] = {"texture", "coords"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord1bvOES_info = {"glMultiTexCoord1bvOES", "glMultiTexCoord1bvOES(texture, coords) -> None", "($module, texture, coords, /)", pygl_GLES1_glMultiTexCoord1bvOES_args, "GLES1_OES_byte_coordinates", "", 2, 3405, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord1bvOES_info = {
+    .name = "glMultiTexCoord1bvOES",
+    .doc = "glMultiTexCoord1bvOES(texture, coords) -> None",
+    .text_signature = "($module, texture, coords, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord1bvOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3405,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord1bvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord1bvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, texture);
@@ -5111,11 +9111,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord1xOES_args[] = {"texture", "s"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord1xOES_info = {"glMultiTexCoord1xOES", "glMultiTexCoord1xOES(texture, s) -> None", "($module, texture, s, /)", pygl_GLES1_glMultiTexCoord1xOES_args, "GLES1_OES_fixed_point", "", 2, 3406, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord1xOES_info = {
+    .name = "glMultiTexCoord1xOES",
+    .doc = "glMultiTexCoord1xOES(texture, s) -> None",
+    .text_signature = "($module, texture, s, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord1xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3406,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord1xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord1xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, texture);
     PYGL_I(1, s);
@@ -5129,11 +9145,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord1xvOES_args[] = {"texture", "coords"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord1xvOES_info = {"glMultiTexCoord1xvOES", "glMultiTexCoord1xvOES(texture, coords) -> None", "($module, texture, coords, /)", pygl_GLES1_glMultiTexCoord1xvOES_args, "GLES1_OES_fixed_point", "", 2, 3407, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord1xvOES_info = {
+    .name = "glMultiTexCoord1xvOES",
+    .doc = "glMultiTexCoord1xvOES(texture, coords) -> None",
+    .text_signature = "($module, texture, coords, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord1xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3407,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord1xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord1xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, texture);
@@ -5150,11 +9182,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord2bOES_args[] = {"texture", "s", "t"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord2bOES_info = {"glMultiTexCoord2bOES", "glMultiTexCoord2bOES(texture, s, t) -> None", "($module, texture, s, t, /)", pygl_GLES1_glMultiTexCoord2bOES_args, "GLES1_OES_byte_coordinates", "", 3, 3408, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord2bOES_info = {
+    .name = "glMultiTexCoord2bOES",
+    .doc = "glMultiTexCoord2bOES(texture, s, t) -> None",
+    .text_signature = "($module, texture, s, t, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord2bOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3408,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord2bOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord2bOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, texture);
     PYGL_I(1, s);
@@ -5169,11 +9217,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord2bvOES_args[] = {"texture", "coords"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord2bvOES_info = {"glMultiTexCoord2bvOES", "glMultiTexCoord2bvOES(texture, coords) -> None", "($module, texture, coords, /)", pygl_GLES1_glMultiTexCoord2bvOES_args, "GLES1_OES_byte_coordinates", "", 2, 3409, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord2bvOES_info = {
+    .name = "glMultiTexCoord2bvOES",
+    .doc = "glMultiTexCoord2bvOES(texture, coords) -> None",
+    .text_signature = "($module, texture, coords, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord2bvOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3409,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord2bvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord2bvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, texture);
@@ -5190,11 +9254,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord2xOES_args[] = {"texture", "s", "t"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord2xOES_info = {"glMultiTexCoord2xOES", "glMultiTexCoord2xOES(texture, s, t) -> None", "($module, texture, s, t, /)", pygl_GLES1_glMultiTexCoord2xOES_args, "GLES1_OES_fixed_point", "", 3, 3410, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord2xOES_info = {
+    .name = "glMultiTexCoord2xOES",
+    .doc = "glMultiTexCoord2xOES(texture, s, t) -> None",
+    .text_signature = "($module, texture, s, t, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord2xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3410,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord2xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord2xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, texture);
     PYGL_I(1, s);
@@ -5209,11 +9289,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord2xvOES_args[] = {"texture", "coords"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord2xvOES_info = {"glMultiTexCoord2xvOES", "glMultiTexCoord2xvOES(texture, coords) -> None", "($module, texture, coords, /)", pygl_GLES1_glMultiTexCoord2xvOES_args, "GLES1_OES_fixed_point", "", 2, 3411, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord2xvOES_info = {
+    .name = "glMultiTexCoord2xvOES",
+    .doc = "glMultiTexCoord2xvOES(texture, coords) -> None",
+    .text_signature = "($module, texture, coords, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord2xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3411,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord2xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord2xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, texture);
@@ -5230,11 +9326,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord3bOES_args[] = {"texture", "s", "t", "r"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord3bOES_info = {"glMultiTexCoord3bOES", "glMultiTexCoord3bOES(texture, s, t, r) -> None", "($module, texture, s, t, r, /)", pygl_GLES1_glMultiTexCoord3bOES_args, "GLES1_OES_byte_coordinates", "", 4, 3412, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord3bOES_info = {
+    .name = "glMultiTexCoord3bOES",
+    .doc = "glMultiTexCoord3bOES(texture, s, t, r) -> None",
+    .text_signature = "($module, texture, s, t, r, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord3bOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3412,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord3bOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord3bOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_U(0, texture);
     PYGL_I(1, s);
@@ -5250,11 +9362,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord3bvOES_args[] = {"texture", "coords"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord3bvOES_info = {"glMultiTexCoord3bvOES", "glMultiTexCoord3bvOES(texture, coords) -> None", "($module, texture, coords, /)", pygl_GLES1_glMultiTexCoord3bvOES_args, "GLES1_OES_byte_coordinates", "", 2, 3413, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord3bvOES_info = {
+    .name = "glMultiTexCoord3bvOES",
+    .doc = "glMultiTexCoord3bvOES(texture, coords) -> None",
+    .text_signature = "($module, texture, coords, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord3bvOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3413,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord3bvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord3bvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, texture);
@@ -5271,11 +9399,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord3xOES_args[] = {"texture", "s", "t", "r"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord3xOES_info = {"glMultiTexCoord3xOES", "glMultiTexCoord3xOES(texture, s, t, r) -> None", "($module, texture, s, t, r, /)", pygl_GLES1_glMultiTexCoord3xOES_args, "GLES1_OES_fixed_point", "", 4, 3414, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord3xOES_info = {
+    .name = "glMultiTexCoord3xOES",
+    .doc = "glMultiTexCoord3xOES(texture, s, t, r) -> None",
+    .text_signature = "($module, texture, s, t, r, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord3xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3414,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord3xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord3xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_U(0, texture);
     PYGL_I(1, s);
@@ -5291,11 +9435,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord3xvOES_args[] = {"texture", "coords"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord3xvOES_info = {"glMultiTexCoord3xvOES", "glMultiTexCoord3xvOES(texture, coords) -> None", "($module, texture, coords, /)", pygl_GLES1_glMultiTexCoord3xvOES_args, "GLES1_OES_fixed_point", "", 2, 3415, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord3xvOES_info = {
+    .name = "glMultiTexCoord3xvOES",
+    .doc = "glMultiTexCoord3xvOES(texture, coords) -> None",
+    .text_signature = "($module, texture, coords, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord3xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3415,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord3xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord3xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, texture);
@@ -5312,11 +9472,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord4bOES_args[] = {"texture", "s", "t", "r", "q"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord4bOES_info = {"glMultiTexCoord4bOES", "glMultiTexCoord4bOES(texture, s, t, r, q) -> None", "($module, texture, s, t, r, q, /)", pygl_GLES1_glMultiTexCoord4bOES_args, "GLES1_OES_byte_coordinates", "", 5, 3416, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord4bOES_info = {
+    .name = "glMultiTexCoord4bOES",
+    .doc = "glMultiTexCoord4bOES(texture, s, t, r, q) -> None",
+    .text_signature = "($module, texture, s, t, r, q, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord4bOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3416,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord4bOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord4bOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_U(0, texture);
     PYGL_I(1, s);
@@ -5333,11 +9509,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord4bvOES_args[] = {"texture", "coords"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord4bvOES_info = {"glMultiTexCoord4bvOES", "glMultiTexCoord4bvOES(texture, coords) -> None", "($module, texture, coords, /)", pygl_GLES1_glMultiTexCoord4bvOES_args, "GLES1_OES_byte_coordinates", "", 2, 3417, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord4bvOES_info = {
+    .name = "glMultiTexCoord4bvOES",
+    .doc = "glMultiTexCoord4bvOES(texture, coords) -> None",
+    .text_signature = "($module, texture, coords, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord4bvOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3417,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord4bvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord4bvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, texture);
@@ -5354,11 +9546,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord4f_args[] = {"target", "s", "t", "r", "q"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord4f_info = {"glMultiTexCoord4f", "glMultiTexCoord4f(target, s, t, r, q) -> None", "($module, target, s, t, r, q, /)", pygl_GLES1_glMultiTexCoord4f_args, "GLES1_VERSION_GLES1_1_0", "", 5, 3418, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord4f_info = {
+    .name = "glMultiTexCoord4f",
+    .doc = "glMultiTexCoord4f(target, s, t, r, q) -> None",
+    .text_signature = "($module, target, s, t, r, q, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord4f_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3418,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord4f(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord4f(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_U(0, target);
     PYGL_F(1, s);
@@ -5375,11 +9583,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord4x_args[] = {"texture", "s", "t", "r", "q"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord4x_info = {"glMultiTexCoord4x", "glMultiTexCoord4x(texture, s, t, r, q) -> None", "($module, texture, s, t, r, q, /)", pygl_GLES1_glMultiTexCoord4x_args, "GLES1_VERSION_GLES1_1_0", "", 5, 3419, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord4x_info = {
+    .name = "glMultiTexCoord4x",
+    .doc = "glMultiTexCoord4x(texture, s, t, r, q) -> None",
+    .text_signature = "($module, texture, s, t, r, q, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord4x_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3419,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord4x(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord4x(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_U(0, texture);
     PYGL_I(1, s);
@@ -5396,11 +9620,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord4xOES_args[] = {"texture", "s", "t", "r", "q"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord4xOES_info = {"glMultiTexCoord4xOES", "glMultiTexCoord4xOES(texture, s, t, r, q) -> None", "($module, texture, s, t, r, q, /)", pygl_GLES1_glMultiTexCoord4xOES_args, "GLES1_OES_fixed_point", "", 5, 3420, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord4xOES_info = {
+    .name = "glMultiTexCoord4xOES",
+    .doc = "glMultiTexCoord4xOES(texture, s, t, r, q) -> None",
+    .text_signature = "($module, texture, s, t, r, q, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord4xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3420,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord4xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord4xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_U(0, texture);
     PYGL_I(1, s);
@@ -5417,11 +9657,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glMultiTexCoord4xvOES_args[] = {"texture", "coords"};
-static const PyGLCommand pygl_GLES1_glMultiTexCoord4xvOES_info = {"glMultiTexCoord4xvOES", "glMultiTexCoord4xvOES(texture, coords) -> None", "($module, texture, coords, /)", pygl_GLES1_glMultiTexCoord4xvOES_args, "GLES1_OES_fixed_point", "", 2, 3421, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glMultiTexCoord4xvOES_info = {
+    .name = "glMultiTexCoord4xvOES",
+    .doc = "glMultiTexCoord4xvOES(texture, coords) -> None",
+    .text_signature = "($module, texture, coords, /)",
+    .arg_names = pygl_GLES1_glMultiTexCoord4xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3421,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glMultiTexCoord4xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glMultiTexCoord4xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, texture);
@@ -5438,11 +9694,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glNormal3f_args[] = {"nx", "ny", "nz"};
-static const PyGLCommand pygl_GLES1_glNormal3f_info = {"glNormal3f", "glNormal3f(nx, ny, nz) -> None", "($module, nx, ny, nz, /)", pygl_GLES1_glNormal3f_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3422, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glNormal3f_info = {
+    .name = "glNormal3f",
+    .doc = "glNormal3f(nx, ny, nz) -> None",
+    .text_signature = "($module, nx, ny, nz, /)",
+    .arg_names = pygl_GLES1_glNormal3f_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3422,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glNormal3f(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glNormal3f(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_F(0, nx);
     PYGL_F(1, ny);
@@ -5457,11 +9729,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glNormal3x_args[] = {"nx", "ny", "nz"};
-static const PyGLCommand pygl_GLES1_glNormal3x_info = {"glNormal3x", "glNormal3x(nx, ny, nz) -> None", "($module, nx, ny, nz, /)", pygl_GLES1_glNormal3x_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3423, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glNormal3x_info = {
+    .name = "glNormal3x",
+    .doc = "glNormal3x(nx, ny, nz) -> None",
+    .text_signature = "($module, nx, ny, nz, /)",
+    .arg_names = pygl_GLES1_glNormal3x_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3423,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glNormal3x(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glNormal3x(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_I(0, nx);
     PYGL_I(1, ny);
@@ -5476,11 +9764,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glNormal3xOES_args[] = {"nx", "ny", "nz"};
-static const PyGLCommand pygl_GLES1_glNormal3xOES_info = {"glNormal3xOES", "glNormal3xOES(nx, ny, nz) -> None", "($module, nx, ny, nz, /)", pygl_GLES1_glNormal3xOES_args, "GLES1_OES_fixed_point", "", 3, 3424, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glNormal3xOES_info = {
+    .name = "glNormal3xOES",
+    .doc = "glNormal3xOES(nx, ny, nz) -> None",
+    .text_signature = "($module, nx, ny, nz, /)",
+    .arg_names = pygl_GLES1_glNormal3xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3424,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glNormal3xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glNormal3xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_I(0, nx);
     PYGL_I(1, ny);
@@ -5495,11 +9799,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glNormal3xvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glNormal3xvOES_info = {"glNormal3xvOES", "glNormal3xvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glNormal3xvOES_args, "GLES1_OES_fixed_point", "", 1, 3425, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glNormal3xvOES_info = {
+    .name = "glNormal3xvOES",
+    .doc = "glNormal3xvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glNormal3xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3425,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glNormal3xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glNormal3xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -5515,11 +9835,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glNormalPointer_args[] = {"type", "stride", "pointer"};
-static const PyGLCommand pygl_GLES1_glNormalPointer_info = {"glNormalPointer", "glNormalPointer(type, stride, pointer) -> None", "($module, type, stride, pointer, /)", pygl_GLES1_glNormalPointer_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3426, PYGL_API_GLES1, 0, 3, 0, 1};
+static const PyGLCommand pygl_GLES1_glNormalPointer_info = {
+    .name = "glNormalPointer",
+    .doc = "glNormalPointer(type, stride, pointer) -> None",
+    .text_signature = "($module, type, stride, pointer, /)",
+    .arg_names = pygl_GLES1_glNormalPointer_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3426,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 1,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glNormalPointer(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glNormalPointer(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, type);
@@ -5537,11 +9873,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glObjectLabel_args[] = {"identifier", "name", "length", "label"};
-static const PyGLCommand pygl_GLES1_glObjectLabel_info = {"glObjectLabel", "glObjectLabel(identifier, name, length, label) -> None", "($module, identifier, name, length, label, /)", pygl_GLES1_glObjectLabel_args, "GLES1_KHR_debug", "", 4, 3427, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glObjectLabel_info = {
+    .name = "glObjectLabel",
+    .doc = "glObjectLabel(identifier, name, length, label) -> None",
+    .text_signature = "($module, identifier, name, length, label, /)",
+    .arg_names = pygl_GLES1_glObjectLabel_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3427,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glObjectLabel(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glObjectLabel(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_U(0, identifier);
@@ -5560,11 +9912,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glObjectLabelKHR_args[] = {"identifier", "name", "length", "label"};
-static const PyGLCommand pygl_GLES1_glObjectLabelKHR_info = {"glObjectLabelKHR", "glObjectLabelKHR(identifier, name, length, label) -> None", "($module, identifier, name, length, label, /)", pygl_GLES1_glObjectLabelKHR_args, "GLES1_KHR_debug", "", 4, 3428, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glObjectLabelKHR_info = {
+    .name = "glObjectLabelKHR",
+    .doc = "glObjectLabelKHR(identifier, name, length, label) -> None",
+    .text_signature = "($module, identifier, name, length, label, /)",
+    .arg_names = pygl_GLES1_glObjectLabelKHR_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3428,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glObjectLabelKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glObjectLabelKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_U(0, identifier);
@@ -5583,11 +9951,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glObjectPtrLabel_args[] = {"ptr", "length", "label"};
-static const PyGLCommand pygl_GLES1_glObjectPtrLabel_info = {"glObjectPtrLabel", "glObjectPtrLabel(ptr, length, label) -> None", "($module, ptr, length, label, /)", pygl_GLES1_glObjectPtrLabel_args, "GLES1_KHR_debug", "", 3, 3429, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glObjectPtrLabel_info = {
+    .name = "glObjectPtrLabel",
+    .doc = "glObjectPtrLabel(ptr, length, label) -> None",
+    .text_signature = "($module, ptr, length, label, /)",
+    .arg_names = pygl_GLES1_glObjectPtrLabel_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3429,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glObjectPtrLabel(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glObjectPtrLabel(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(2);
     PYGL_SZ(1, length);
@@ -5605,11 +9989,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glObjectPtrLabelKHR_args[] = {"ptr", "length", "label"};
-static const PyGLCommand pygl_GLES1_glObjectPtrLabelKHR_info = {"glObjectPtrLabelKHR", "glObjectPtrLabelKHR(ptr, length, label) -> None", "($module, ptr, length, label, /)", pygl_GLES1_glObjectPtrLabelKHR_args, "GLES1_KHR_debug", "", 3, 3430, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glObjectPtrLabelKHR_info = {
+    .name = "glObjectPtrLabelKHR",
+    .doc = "glObjectPtrLabelKHR(ptr, length, label) -> None",
+    .text_signature = "($module, ptr, length, label, /)",
+    .arg_names = pygl_GLES1_glObjectPtrLabelKHR_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3430,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glObjectPtrLabelKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glObjectPtrLabelKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(2);
     PYGL_SZ(1, length);
@@ -5627,11 +10027,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glOrthof_args[] = {"l", "r", "b", "t", "n", "f"};
-static const PyGLCommand pygl_GLES1_glOrthof_info = {"glOrthof", "glOrthof(l, r, b, t, n, f) -> None", "($module, l, r, b, t, n, f, /)", pygl_GLES1_glOrthof_args, "GLES1_VERSION_GLES1_1_0", "", 6, 3431, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glOrthof_info = {
+    .name = "glOrthof",
+    .doc = "glOrthof(l, r, b, t, n, f) -> None",
+    .text_signature = "($module, l, r, b, t, n, f, /)",
+    .arg_names = pygl_GLES1_glOrthof_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3431,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glOrthof(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glOrthof(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_F(0, l);
     PYGL_F(1, r);
@@ -5649,11 +10065,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glOrthofOES_args[] = {"l", "r", "b", "t", "n", "f"};
-static const PyGLCommand pygl_GLES1_glOrthofOES_info = {"glOrthofOES", "glOrthofOES(l, r, b, t, n, f) -> None", "($module, l, r, b, t, n, f, /)", pygl_GLES1_glOrthofOES_args, "GLES1_OES_single_precision", "", 6, 3432, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glOrthofOES_info = {
+    .name = "glOrthofOES",
+    .doc = "glOrthofOES(l, r, b, t, n, f) -> None",
+    .text_signature = "($module, l, r, b, t, n, f, /)",
+    .arg_names = pygl_GLES1_glOrthofOES_args,
+    .extension = "GLES1_OES_single_precision",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3432,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glOrthofOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glOrthofOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_F(0, l);
     PYGL_F(1, r);
@@ -5671,11 +10103,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glOrthox_args[] = {"l", "r", "b", "t", "n", "f"};
-static const PyGLCommand pygl_GLES1_glOrthox_info = {"glOrthox", "glOrthox(l, r, b, t, n, f) -> None", "($module, l, r, b, t, n, f, /)", pygl_GLES1_glOrthox_args, "GLES1_VERSION_GLES1_1_0", "", 6, 3433, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glOrthox_info = {
+    .name = "glOrthox",
+    .doc = "glOrthox(l, r, b, t, n, f) -> None",
+    .text_signature = "($module, l, r, b, t, n, f, /)",
+    .arg_names = pygl_GLES1_glOrthox_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3433,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glOrthox(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glOrthox(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_I(0, l);
     PYGL_I(1, r);
@@ -5693,11 +10141,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glOrthoxOES_args[] = {"l", "r", "b", "t", "n", "f"};
-static const PyGLCommand pygl_GLES1_glOrthoxOES_info = {"glOrthoxOES", "glOrthoxOES(l, r, b, t, n, f) -> None", "($module, l, r, b, t, n, f, /)", pygl_GLES1_glOrthoxOES_args, "GLES1_OES_fixed_point", "", 6, 3434, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glOrthoxOES_info = {
+    .name = "glOrthoxOES",
+    .doc = "glOrthoxOES(l, r, b, t, n, f) -> None",
+    .text_signature = "($module, l, r, b, t, n, f, /)",
+    .arg_names = pygl_GLES1_glOrthoxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3434,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glOrthoxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glOrthoxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_I(0, l);
     PYGL_I(1, r);
@@ -5715,11 +10179,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPassThroughxOES_args[] = {"token"};
-static const PyGLCommand pygl_GLES1_glPassThroughxOES_info = {"glPassThroughxOES", "glPassThroughxOES(token) -> None", "($module, token, /)", pygl_GLES1_glPassThroughxOES_args, "GLES1_OES_fixed_point", "", 1, 3435, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glPassThroughxOES_info = {
+    .name = "glPassThroughxOES",
+    .doc = "glPassThroughxOES(token) -> None",
+    .text_signature = "($module, token, /)",
+    .arg_names = pygl_GLES1_glPassThroughxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3435,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPassThroughxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPassThroughxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, token);
     PYGL_CONV_OK();
@@ -5732,11 +10212,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPixelMapx_args[] = {"map", "size", "values"};
-static const PyGLCommand pygl_GLES1_glPixelMapx_info = {"glPixelMapx", "glPixelMapx(map, size, values) -> None", "($module, map, size, values, /)", pygl_GLES1_glPixelMapx_args, "GLES1_OES_fixed_point", "", 3, 3436, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glPixelMapx_info = {
+    .name = "glPixelMapx",
+    .doc = "glPixelMapx(map, size, values) -> None",
+    .text_signature = "($module, map, size, values, /)",
+    .arg_names = pygl_GLES1_glPixelMapx_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3436,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPixelMapx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPixelMapx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, map);
@@ -5754,11 +10250,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPixelStorei_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glPixelStorei_info = {"glPixelStorei", "glPixelStorei(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glPixelStorei_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3437, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glPixelStorei_info = {
+    .name = "glPixelStorei",
+    .doc = "glPixelStorei(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glPixelStorei_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3437,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPixelStorei(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPixelStorei(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, pname);
     PYGL_I(1, param);
@@ -5772,11 +10284,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPixelStorex_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glPixelStorex_info = {"glPixelStorex", "glPixelStorex(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glPixelStorex_args, "GLES1_OES_fixed_point", "", 2, 3438, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glPixelStorex_info = {
+    .name = "glPixelStorex",
+    .doc = "glPixelStorex(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glPixelStorex_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3438,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPixelStorex(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPixelStorex(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, pname);
     PYGL_I(1, param);
@@ -5790,11 +10318,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPixelTransferxOES_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glPixelTransferxOES_info = {"glPixelTransferxOES", "glPixelTransferxOES(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glPixelTransferxOES_args, "GLES1_OES_fixed_point", "", 2, 3439, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glPixelTransferxOES_info = {
+    .name = "glPixelTransferxOES",
+    .doc = "glPixelTransferxOES(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glPixelTransferxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3439,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPixelTransferxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPixelTransferxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, pname);
     PYGL_I(1, param);
@@ -5808,11 +10352,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPixelZoomxOES_args[] = {"xfactor", "yfactor"};
-static const PyGLCommand pygl_GLES1_glPixelZoomxOES_info = {"glPixelZoomxOES", "glPixelZoomxOES(xfactor, yfactor) -> None", "($module, xfactor, yfactor, /)", pygl_GLES1_glPixelZoomxOES_args, "GLES1_OES_fixed_point", "", 2, 3440, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glPixelZoomxOES_info = {
+    .name = "glPixelZoomxOES",
+    .doc = "glPixelZoomxOES(xfactor, yfactor) -> None",
+    .text_signature = "($module, xfactor, yfactor, /)",
+    .arg_names = pygl_GLES1_glPixelZoomxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3440,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPixelZoomxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPixelZoomxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_I(0, xfactor);
     PYGL_I(1, yfactor);
@@ -5826,11 +10386,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPointParameterf_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glPointParameterf_info = {"glPointParameterf", "glPointParameterf(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glPointParameterf_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3441, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glPointParameterf_info = {
+    .name = "glPointParameterf",
+    .doc = "glPointParameterf(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glPointParameterf_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3441,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPointParameterf(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPointParameterf(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, pname);
     PYGL_F(1, param);
@@ -5844,11 +10420,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPointParameterfv_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GLES1_glPointParameterfv_info = {"glPointParameterfv", "glPointParameterfv(pname, params) -> None", "($module, pname, params, /)", pygl_GLES1_glPointParameterfv_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3442, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glPointParameterfv_info = {
+    .name = "glPointParameterfv",
+    .doc = "glPointParameterfv(pname, params) -> None",
+    .text_signature = "($module, pname, params, /)",
+    .arg_names = pygl_GLES1_glPointParameterfv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3442,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPointParameterfv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPointParameterfv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -5865,11 +10457,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPointParameterx_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glPointParameterx_info = {"glPointParameterx", "glPointParameterx(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glPointParameterx_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3443, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glPointParameterx_info = {
+    .name = "glPointParameterx",
+    .doc = "glPointParameterx(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glPointParameterx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3443,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPointParameterx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPointParameterx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, pname);
     PYGL_I(1, param);
@@ -5883,11 +10491,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPointParameterxOES_args[] = {"pname", "param"};
-static const PyGLCommand pygl_GLES1_glPointParameterxOES_info = {"glPointParameterxOES", "glPointParameterxOES(pname, param) -> None", "($module, pname, param, /)", pygl_GLES1_glPointParameterxOES_args, "GLES1_OES_fixed_point", "", 2, 3444, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glPointParameterxOES_info = {
+    .name = "glPointParameterxOES",
+    .doc = "glPointParameterxOES(pname, param) -> None",
+    .text_signature = "($module, pname, param, /)",
+    .arg_names = pygl_GLES1_glPointParameterxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3444,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPointParameterxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPointParameterxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, pname);
     PYGL_I(1, param);
@@ -5901,11 +10525,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPointParameterxv_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GLES1_glPointParameterxv_info = {"glPointParameterxv", "glPointParameterxv(pname, params) -> None", "($module, pname, params, /)", pygl_GLES1_glPointParameterxv_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3445, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glPointParameterxv_info = {
+    .name = "glPointParameterxv",
+    .doc = "glPointParameterxv(pname, params) -> None",
+    .text_signature = "($module, pname, params, /)",
+    .arg_names = pygl_GLES1_glPointParameterxv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3445,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPointParameterxv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPointParameterxv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -5922,11 +10562,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPointParameterxvOES_args[] = {"pname", "params"};
-static const PyGLCommand pygl_GLES1_glPointParameterxvOES_info = {"glPointParameterxvOES", "glPointParameterxvOES(pname, params) -> None", "($module, pname, params, /)", pygl_GLES1_glPointParameterxvOES_args, "GLES1_OES_fixed_point", "", 2, 3446, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glPointParameterxvOES_info = {
+    .name = "glPointParameterxvOES",
+    .doc = "glPointParameterxvOES(pname, params) -> None",
+    .text_signature = "($module, pname, params, /)",
+    .arg_names = pygl_GLES1_glPointParameterxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3446,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPointParameterxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPointParameterxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_U(0, pname);
@@ -5943,11 +10599,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPointSize_args[] = {"size"};
-static const PyGLCommand pygl_GLES1_glPointSize_info = {"glPointSize", "glPointSize(size) -> None", "($module, size, /)", pygl_GLES1_glPointSize_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3447, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glPointSize_info = {
+    .name = "glPointSize",
+    .doc = "glPointSize(size) -> None",
+    .text_signature = "($module, size, /)",
+    .arg_names = pygl_GLES1_glPointSize_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3447,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPointSize(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPointSize(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_F(0, size);
     PYGL_CONV_OK();
@@ -5960,11 +10632,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPointSizePointerOES_args[] = {"type", "stride", "pointer"};
-static const PyGLCommand pygl_GLES1_glPointSizePointerOES_info = {"glPointSizePointerOES", "glPointSizePointerOES(type, stride, pointer) -> None", "($module, type, stride, pointer, /)", pygl_GLES1_glPointSizePointerOES_args, "GLES1_OES_point_size_array", "", 3, 3448, PYGL_API_GLES1, 0, 3, 0, 1};
+static const PyGLCommand pygl_GLES1_glPointSizePointerOES_info = {
+    .name = "glPointSizePointerOES",
+    .doc = "glPointSizePointerOES(type, stride, pointer) -> None",
+    .text_signature = "($module, type, stride, pointer, /)",
+    .arg_names = pygl_GLES1_glPointSizePointerOES_args,
+    .extension = "GLES1_OES_point_size_array",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3448,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 1,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPointSizePointerOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPointSizePointerOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, type);
@@ -5982,11 +10670,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPointSizex_args[] = {"size"};
-static const PyGLCommand pygl_GLES1_glPointSizex_info = {"glPointSizex", "glPointSizex(size) -> None", "($module, size, /)", pygl_GLES1_glPointSizex_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3449, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glPointSizex_info = {
+    .name = "glPointSizex",
+    .doc = "glPointSizex(size) -> None",
+    .text_signature = "($module, size, /)",
+    .arg_names = pygl_GLES1_glPointSizex_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3449,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPointSizex(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPointSizex(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, size);
     PYGL_CONV_OK();
@@ -5999,11 +10703,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPointSizexOES_args[] = {"size"};
-static const PyGLCommand pygl_GLES1_glPointSizexOES_info = {"glPointSizexOES", "glPointSizexOES(size) -> None", "($module, size, /)", pygl_GLES1_glPointSizexOES_args, "GLES1_OES_fixed_point", "", 1, 3450, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glPointSizexOES_info = {
+    .name = "glPointSizexOES",
+    .doc = "glPointSizexOES(size) -> None",
+    .text_signature = "($module, size, /)",
+    .arg_names = pygl_GLES1_glPointSizexOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3450,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPointSizexOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPointSizexOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, size);
     PYGL_CONV_OK();
@@ -6016,11 +10736,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPolygonOffset_args[] = {"factor", "units"};
-static const PyGLCommand pygl_GLES1_glPolygonOffset_info = {"glPolygonOffset", "glPolygonOffset(factor, units) -> None", "($module, factor, units, /)", pygl_GLES1_glPolygonOffset_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3451, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glPolygonOffset_info = {
+    .name = "glPolygonOffset",
+    .doc = "glPolygonOffset(factor, units) -> None",
+    .text_signature = "($module, factor, units, /)",
+    .arg_names = pygl_GLES1_glPolygonOffset_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3451,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPolygonOffset(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPolygonOffset(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_F(0, factor);
     PYGL_F(1, units);
@@ -6034,11 +10770,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPolygonOffsetx_args[] = {"factor", "units"};
-static const PyGLCommand pygl_GLES1_glPolygonOffsetx_info = {"glPolygonOffsetx", "glPolygonOffsetx(factor, units) -> None", "($module, factor, units, /)", pygl_GLES1_glPolygonOffsetx_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3452, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glPolygonOffsetx_info = {
+    .name = "glPolygonOffsetx",
+    .doc = "glPolygonOffsetx(factor, units) -> None",
+    .text_signature = "($module, factor, units, /)",
+    .arg_names = pygl_GLES1_glPolygonOffsetx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3452,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPolygonOffsetx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPolygonOffsetx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_I(0, factor);
     PYGL_I(1, units);
@@ -6052,11 +10804,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPolygonOffsetxOES_args[] = {"factor", "units"};
-static const PyGLCommand pygl_GLES1_glPolygonOffsetxOES_info = {"glPolygonOffsetxOES", "glPolygonOffsetxOES(factor, units) -> None", "($module, factor, units, /)", pygl_GLES1_glPolygonOffsetxOES_args, "GLES1_OES_fixed_point", "", 2, 3453, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glPolygonOffsetxOES_info = {
+    .name = "glPolygonOffsetxOES",
+    .doc = "glPolygonOffsetxOES(factor, units) -> None",
+    .text_signature = "($module, factor, units, /)",
+    .arg_names = pygl_GLES1_glPolygonOffsetxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3453,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPolygonOffsetxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPolygonOffsetxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_I(0, factor);
     PYGL_I(1, units);
@@ -6069,11 +10837,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES1_glPopDebugGroup_info = {"glPopDebugGroup", "glPopDebugGroup() -> None", "($module)", NULL, "GLES1_KHR_debug", "", 0, 3454, PYGL_API_GLES1, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES1_glPopDebugGroup_info = {
+    .name = "glPopDebugGroup",
+    .doc = "glPopDebugGroup() -> None",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 3454,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPopDebugGroup(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPopDebugGroup(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_V((void), ());
@@ -6084,11 +10868,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES1_glPopDebugGroupKHR_info = {"glPopDebugGroupKHR", "glPopDebugGroupKHR() -> None", "($module)", NULL, "GLES1_KHR_debug", "", 0, 3455, PYGL_API_GLES1, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES1_glPopDebugGroupKHR_info = {
+    .name = "glPopDebugGroupKHR",
+    .doc = "glPopDebugGroupKHR() -> None",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 3455,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPopDebugGroupKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPopDebugGroupKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_V((void), ());
@@ -6099,11 +10899,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES1_glPopGroupMarkerEXT_info = {"glPopGroupMarkerEXT", "glPopGroupMarkerEXT() -> None", "($module)", NULL, "GLES1_EXT_debug_marker", "", 0, 3456, PYGL_API_GLES1, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES1_glPopGroupMarkerEXT_info = {
+    .name = "glPopGroupMarkerEXT",
+    .doc = "glPopGroupMarkerEXT() -> None",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "GLES1_EXT_debug_marker",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 3456,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPopGroupMarkerEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPopGroupMarkerEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_V((void), ());
@@ -6114,11 +10930,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES1_glPopMatrix_info = {"glPopMatrix", "glPopMatrix() -> None", "($module)", NULL, "GLES1_VERSION_GLES1_1_0", "", 0, 3457, PYGL_API_GLES1, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES1_glPopMatrix_info = {
+    .name = "glPopMatrix",
+    .doc = "glPopMatrix() -> None",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 3457,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPopMatrix(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPopMatrix(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_V((void), ());
@@ -6130,11 +10962,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPrioritizeTexturesxOES_args[] = {"n", "textures", "priorities"};
-static const PyGLCommand pygl_GLES1_glPrioritizeTexturesxOES_info = {"glPrioritizeTexturesxOES", "glPrioritizeTexturesxOES(n, textures, priorities) -> None", "($module, n, textures, priorities, /)", pygl_GLES1_glPrioritizeTexturesxOES_args, "GLES1_OES_fixed_point", "", 3, 3458, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glPrioritizeTexturesxOES_info = {
+    .name = "glPrioritizeTexturesxOES",
+    .doc = "glPrioritizeTexturesxOES(n, textures, priorities) -> None",
+    .text_signature = "($module, n, textures, priorities, /)",
+    .arg_names = pygl_GLES1_glPrioritizeTexturesxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3458,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPrioritizeTexturesxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPrioritizeTexturesxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(2);
     PYGL_SZ(0, n);
@@ -6152,11 +11000,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPushDebugGroup_args[] = {"source", "id", "length", "message"};
-static const PyGLCommand pygl_GLES1_glPushDebugGroup_info = {"glPushDebugGroup", "glPushDebugGroup(source, id, length, message) -> None", "($module, source, id, length, message, /)", pygl_GLES1_glPushDebugGroup_args, "GLES1_KHR_debug", "", 4, 3459, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glPushDebugGroup_info = {
+    .name = "glPushDebugGroup",
+    .doc = "glPushDebugGroup(source, id, length, message) -> None",
+    .text_signature = "($module, source, id, length, message, /)",
+    .arg_names = pygl_GLES1_glPushDebugGroup_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3459,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPushDebugGroup(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPushDebugGroup(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_U(0, source);
@@ -6175,11 +11039,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPushDebugGroupKHR_args[] = {"source", "id", "length", "message"};
-static const PyGLCommand pygl_GLES1_glPushDebugGroupKHR_info = {"glPushDebugGroupKHR", "glPushDebugGroupKHR(source, id, length, message) -> None", "($module, source, id, length, message, /)", pygl_GLES1_glPushDebugGroupKHR_args, "GLES1_KHR_debug", "", 4, 3460, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glPushDebugGroupKHR_info = {
+    .name = "glPushDebugGroupKHR",
+    .doc = "glPushDebugGroupKHR(source, id, length, message) -> None",
+    .text_signature = "($module, source, id, length, message, /)",
+    .arg_names = pygl_GLES1_glPushDebugGroupKHR_args,
+    .extension = "GLES1_KHR_debug",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3460,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPushDebugGroupKHR(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPushDebugGroupKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_U(0, source);
@@ -6198,11 +11078,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glPushGroupMarkerEXT_args[] = {"length", "marker"};
-static const PyGLCommand pygl_GLES1_glPushGroupMarkerEXT_info = {"glPushGroupMarkerEXT", "glPushGroupMarkerEXT(length, marker) -> None", "($module, length, marker, /)", pygl_GLES1_glPushGroupMarkerEXT_args, "GLES1_EXT_debug_marker", "", 2, 3461, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glPushGroupMarkerEXT_info = {
+    .name = "glPushGroupMarkerEXT",
+    .doc = "glPushGroupMarkerEXT(length, marker) -> None",
+    .text_signature = "($module, length, marker, /)",
+    .arg_names = pygl_GLES1_glPushGroupMarkerEXT_args,
+    .extension = "GLES1_EXT_debug_marker",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3461,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPushGroupMarkerEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPushGroupMarkerEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(1);
     PYGL_SZ(0, length);
@@ -6218,11 +11114,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES1_glPushMatrix_info = {"glPushMatrix", "glPushMatrix() -> None", "($module)", NULL, "GLES1_VERSION_GLES1_1_0", "", 0, 3462, PYGL_API_GLES1, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES1_glPushMatrix_info = {
+    .name = "glPushMatrix",
+    .doc = "glPushMatrix() -> None",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 3462,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glPushMatrix(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glPushMatrix(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_V((void), ());
@@ -6234,11 +11146,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glQueryMatrixxOES_args[] = {"mantissa", "exponent"};
-static const PyGLCommand pygl_GLES1_glQueryMatrixxOES_info = {"glQueryMatrixxOES", "glQueryMatrixxOES() -> exponent, mantissa", "($module, exponent=None, mantissa=None, /)", pygl_GLES1_glQueryMatrixxOES_args, "GLES1_OES_query_matrix", "", 2, 3463, PYGL_API_GLES1, 0, 2, 1, 0};
+static const PyGLCommand pygl_GLES1_glQueryMatrixxOES_info = {
+    .name = "glQueryMatrixxOES",
+    .doc = "glQueryMatrixxOES() -> exponent, mantissa",
+    .text_signature = "($module, exponent=None, mantissa=None, /)",
+    .arg_names = pygl_GLES1_glQueryMatrixxOES_args,
+    .extension = "GLES1_OES_query_matrix",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3463,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glQueryMatrixxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glQueryMatrixxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(0, 2);
     PYGL_FRAME(2);
     PYGL_CONV_OK();
@@ -6260,11 +11188,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRasterPos2xOES_args[] = {"x", "y"};
-static const PyGLCommand pygl_GLES1_glRasterPos2xOES_info = {"glRasterPos2xOES", "glRasterPos2xOES(x, y) -> None", "($module, x, y, /)", pygl_GLES1_glRasterPos2xOES_args, "GLES1_OES_fixed_point", "", 2, 3464, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glRasterPos2xOES_info = {
+    .name = "glRasterPos2xOES",
+    .doc = "glRasterPos2xOES(x, y) -> None",
+    .text_signature = "($module, x, y, /)",
+    .arg_names = pygl_GLES1_glRasterPos2xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3464,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRasterPos2xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRasterPos2xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -6278,11 +11222,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRasterPos2xvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glRasterPos2xvOES_info = {"glRasterPos2xvOES", "glRasterPos2xvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glRasterPos2xvOES_args, "GLES1_OES_fixed_point", "", 1, 3465, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glRasterPos2xvOES_info = {
+    .name = "glRasterPos2xvOES",
+    .doc = "glRasterPos2xvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glRasterPos2xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3465,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRasterPos2xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRasterPos2xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -6298,11 +11258,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRasterPos3xOES_args[] = {"x", "y", "z"};
-static const PyGLCommand pygl_GLES1_glRasterPos3xOES_info = {"glRasterPos3xOES", "glRasterPos3xOES(x, y, z) -> None", "($module, x, y, z, /)", pygl_GLES1_glRasterPos3xOES_args, "GLES1_OES_fixed_point", "", 3, 3466, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glRasterPos3xOES_info = {
+    .name = "glRasterPos3xOES",
+    .doc = "glRasterPos3xOES(x, y, z) -> None",
+    .text_signature = "($module, x, y, z, /)",
+    .arg_names = pygl_GLES1_glRasterPos3xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3466,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRasterPos3xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRasterPos3xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -6317,11 +11293,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRasterPos3xvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glRasterPos3xvOES_info = {"glRasterPos3xvOES", "glRasterPos3xvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glRasterPos3xvOES_args, "GLES1_OES_fixed_point", "", 1, 3467, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glRasterPos3xvOES_info = {
+    .name = "glRasterPos3xvOES",
+    .doc = "glRasterPos3xvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glRasterPos3xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3467,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRasterPos3xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRasterPos3xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -6337,11 +11329,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRasterPos4xOES_args[] = {"x", "y", "z", "w"};
-static const PyGLCommand pygl_GLES1_glRasterPos4xOES_info = {"glRasterPos4xOES", "glRasterPos4xOES(x, y, z, w) -> None", "($module, x, y, z, w, /)", pygl_GLES1_glRasterPos4xOES_args, "GLES1_OES_fixed_point", "", 4, 3468, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glRasterPos4xOES_info = {
+    .name = "glRasterPos4xOES",
+    .doc = "glRasterPos4xOES(x, y, z, w) -> None",
+    .text_signature = "($module, x, y, z, w, /)",
+    .arg_names = pygl_GLES1_glRasterPos4xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3468,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRasterPos4xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRasterPos4xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -6357,11 +11365,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRasterPos4xvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glRasterPos4xvOES_info = {"glRasterPos4xvOES", "glRasterPos4xvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glRasterPos4xvOES_args, "GLES1_OES_fixed_point", "", 1, 3469, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glRasterPos4xvOES_info = {
+    .name = "glRasterPos4xvOES",
+    .doc = "glRasterPos4xvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glRasterPos4xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3469,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRasterPos4xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRasterPos4xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -6377,11 +11401,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glReadPixels_args[] = {"x", "y", "width", "height", "format", "type", "pixels"};
-static const PyGLCommand pygl_GLES1_glReadPixels_info = {"glReadPixels", "glReadPixels(x, y, width, height, format, type) -> pixels", "($module, x, y, width, height, format, type, pixels=None, /)", pygl_GLES1_glReadPixels_args, "GLES1_VERSION_GLES1_1_0", "", 7, 3470, PYGL_API_GLES1, 0, 7, 0, 1};
+static const PyGLCommand pygl_GLES1_glReadPixels_info = {
+    .name = "glReadPixels",
+    .doc = "glReadPixels(x, y, width, height, format, type) -> pixels",
+    .text_signature = "($module, x, y, width, height, format, type, pixels=None, /)",
+    .arg_names = pygl_GLES1_glReadPixels_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 7,
+    .slot = 3470,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 7,
+    .return_kind = 0,
+    .hand_written = 1,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glReadPixels(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glReadPixels(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY_RANGE(6, 7);
     PYGL_FRAME(1);
     PYGL_I(0, x);
@@ -6404,11 +11444,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glReadnPixelsEXT_args[] = {"x", "y", "width", "height", "format", "type", "bufSize", "data"};
-static const PyGLCommand pygl_GLES1_glReadnPixelsEXT_info = {"glReadnPixelsEXT", "glReadnPixelsEXT(x, y, width, height, format, type, bufSize, data) -> None", "($module, x, y, width, height, format, type, bufSize, data, /)", pygl_GLES1_glReadnPixelsEXT_args, "GLES1_EXT_robustness", "", 8, 3471, PYGL_API_GLES1, 0, 8, 0, 0};
+static const PyGLCommand pygl_GLES1_glReadnPixelsEXT_info = {
+    .name = "glReadnPixelsEXT",
+    .doc = "glReadnPixelsEXT(x, y, width, height, format, type, bufSize, data) -> None",
+    .text_signature = "($module, x, y, width, height, format, type, bufSize, data, /)",
+    .arg_names = pygl_GLES1_glReadnPixelsEXT_args,
+    .extension = "GLES1_EXT_robustness",
+    .alternates = "",
+    .arg_count = 8,
+    .slot = 3471,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 8,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glReadnPixelsEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glReadnPixelsEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(8);
     PYGL_FRAME(1);
     PYGL_I(0, x);
@@ -6431,11 +11487,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRectxOES_args[] = {"x1", "y1", "x2", "y2"};
-static const PyGLCommand pygl_GLES1_glRectxOES_info = {"glRectxOES", "glRectxOES(x1, y1, x2, y2) -> None", "($module, x1, y1, x2, y2, /)", pygl_GLES1_glRectxOES_args, "GLES1_OES_fixed_point", "", 4, 3472, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glRectxOES_info = {
+    .name = "glRectxOES",
+    .doc = "glRectxOES(x1, y1, x2, y2) -> None",
+    .text_signature = "($module, x1, y1, x2, y2, /)",
+    .arg_names = pygl_GLES1_glRectxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3472,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRectxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRectxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, x1);
     PYGL_I(1, y1);
@@ -6451,11 +11523,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRectxvOES_args[] = {"v1", "v2"};
-static const PyGLCommand pygl_GLES1_glRectxvOES_info = {"glRectxvOES", "glRectxvOES(v1, v2) -> None", "($module, v1, v2, /)", pygl_GLES1_glRectxvOES_args, "GLES1_OES_fixed_point", "", 2, 3473, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glRectxvOES_info = {
+    .name = "glRectxvOES",
+    .doc = "glRectxvOES(v1, v2) -> None",
+    .text_signature = "($module, v1, v2, /)",
+    .arg_names = pygl_GLES1_glRectxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3473,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRectxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRectxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_FRAME(2);
     PYGL_CONV_OK();
@@ -6472,11 +11560,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRenderbufferStorageMultisampleAPPLE_args[] = {"target", "samples", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES1_glRenderbufferStorageMultisampleAPPLE_info = {"glRenderbufferStorageMultisampleAPPLE", "glRenderbufferStorageMultisampleAPPLE(target, samples, internalformat, width, height) -> None", "($module, target, samples, internalformat, width, height, /)", pygl_GLES1_glRenderbufferStorageMultisampleAPPLE_args, "GLES1_APPLE_framebuffer_multisample", "", 5, 3474, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glRenderbufferStorageMultisampleAPPLE_info = {
+    .name = "glRenderbufferStorageMultisampleAPPLE",
+    .doc = "glRenderbufferStorageMultisampleAPPLE(target, samples, internalformat, width, height) -> None",
+    .text_signature = "($module, target, samples, internalformat, width, height, /)",
+    .arg_names = pygl_GLES1_glRenderbufferStorageMultisampleAPPLE_args,
+    .extension = "GLES1_APPLE_framebuffer_multisample",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3474,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRenderbufferStorageMultisampleAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRenderbufferStorageMultisampleAPPLE(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_U(0, target);
     PYGL_SZ(1, samples);
@@ -6493,11 +11597,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRenderbufferStorageMultisampleEXT_args[] = {"target", "samples", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES1_glRenderbufferStorageMultisampleEXT_info = {"glRenderbufferStorageMultisampleEXT", "glRenderbufferStorageMultisampleEXT(target, samples, internalformat, width, height) -> None", "($module, target, samples, internalformat, width, height, /)", pygl_GLES1_glRenderbufferStorageMultisampleEXT_args, "GLES1_EXT_multisampled_render_to_texture", "", 5, 3475, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glRenderbufferStorageMultisampleEXT_info = {
+    .name = "glRenderbufferStorageMultisampleEXT",
+    .doc = "glRenderbufferStorageMultisampleEXT(target, samples, internalformat, width, height) -> None",
+    .text_signature = "($module, target, samples, internalformat, width, height, /)",
+    .arg_names = pygl_GLES1_glRenderbufferStorageMultisampleEXT_args,
+    .extension = "GLES1_EXT_multisampled_render_to_texture",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3475,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRenderbufferStorageMultisampleEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRenderbufferStorageMultisampleEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_U(0, target);
     PYGL_SZ(1, samples);
@@ -6514,11 +11634,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRenderbufferStorageMultisampleIMG_args[] = {"target", "samples", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES1_glRenderbufferStorageMultisampleIMG_info = {"glRenderbufferStorageMultisampleIMG", "glRenderbufferStorageMultisampleIMG(target, samples, internalformat, width, height) -> None", "($module, target, samples, internalformat, width, height, /)", pygl_GLES1_glRenderbufferStorageMultisampleIMG_args, "GLES1_IMG_multisampled_render_to_texture", "", 5, 3476, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glRenderbufferStorageMultisampleIMG_info = {
+    .name = "glRenderbufferStorageMultisampleIMG",
+    .doc = "glRenderbufferStorageMultisampleIMG(target, samples, internalformat, width, height) -> None",
+    .text_signature = "($module, target, samples, internalformat, width, height, /)",
+    .arg_names = pygl_GLES1_glRenderbufferStorageMultisampleIMG_args,
+    .extension = "GLES1_IMG_multisampled_render_to_texture",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3476,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRenderbufferStorageMultisampleIMG(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRenderbufferStorageMultisampleIMG(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_U(0, target);
     PYGL_SZ(1, samples);
@@ -6535,11 +11671,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRenderbufferStorageOES_args[] = {"target", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES1_glRenderbufferStorageOES_info = {"glRenderbufferStorageOES", "glRenderbufferStorageOES(target, internalformat, width, height) -> None", "($module, target, internalformat, width, height, /)", pygl_GLES1_glRenderbufferStorageOES_args, "GLES1_OES_framebuffer_object", "", 4, 3477, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glRenderbufferStorageOES_info = {
+    .name = "glRenderbufferStorageOES",
+    .doc = "glRenderbufferStorageOES(target, internalformat, width, height) -> None",
+    .text_signature = "($module, target, internalformat, width, height, /)",
+    .arg_names = pygl_GLES1_glRenderbufferStorageOES_args,
+    .extension = "GLES1_OES_framebuffer_object",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3477,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRenderbufferStorageOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRenderbufferStorageOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_U(0, target);
     PYGL_U(1, internalformat);
@@ -6554,11 +11706,27 @@ _fail:
 }
 
 
-static const PyGLCommand pygl_GLES1_glResolveMultisampleFramebufferAPPLE_info = {"glResolveMultisampleFramebufferAPPLE", "glResolveMultisampleFramebufferAPPLE() -> None", "($module)", NULL, "GLES1_APPLE_framebuffer_multisample", "", 0, 3478, PYGL_API_GLES1, 0, 0, 0, 0};
+static const PyGLCommand pygl_GLES1_glResolveMultisampleFramebufferAPPLE_info = {
+    .name = "glResolveMultisampleFramebufferAPPLE",
+    .doc = "glResolveMultisampleFramebufferAPPLE() -> None",
+    .text_signature = "($module)",
+    .arg_names = NULL,
+    .extension = "GLES1_APPLE_framebuffer_multisample",
+    .alternates = "",
+    .arg_count = 0,
+    .slot = 3478,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 0,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glResolveMultisampleFramebufferAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glResolveMultisampleFramebufferAPPLE(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(0);
     PYGL_CONV_OK();
     PYGL_CALL_V((void), ());
@@ -6570,11 +11738,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRotatef_args[] = {"angle", "x", "y", "z"};
-static const PyGLCommand pygl_GLES1_glRotatef_info = {"glRotatef", "glRotatef(angle, x, y, z) -> None", "($module, angle, x, y, z, /)", pygl_GLES1_glRotatef_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3479, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glRotatef_info = {
+    .name = "glRotatef",
+    .doc = "glRotatef(angle, x, y, z) -> None",
+    .text_signature = "($module, angle, x, y, z, /)",
+    .arg_names = pygl_GLES1_glRotatef_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3479,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRotatef(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRotatef(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_F(0, angle);
     PYGL_F(1, x);
@@ -6590,11 +11774,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRotatex_args[] = {"angle", "x", "y", "z"};
-static const PyGLCommand pygl_GLES1_glRotatex_info = {"glRotatex", "glRotatex(angle, x, y, z) -> None", "($module, angle, x, y, z, /)", pygl_GLES1_glRotatex_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3480, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glRotatex_info = {
+    .name = "glRotatex",
+    .doc = "glRotatex(angle, x, y, z) -> None",
+    .text_signature = "($module, angle, x, y, z, /)",
+    .arg_names = pygl_GLES1_glRotatex_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3480,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRotatex(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRotatex(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, angle);
     PYGL_I(1, x);
@@ -6610,11 +11810,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glRotatexOES_args[] = {"angle", "x", "y", "z"};
-static const PyGLCommand pygl_GLES1_glRotatexOES_info = {"glRotatexOES", "glRotatexOES(angle, x, y, z) -> None", "($module, angle, x, y, z, /)", pygl_GLES1_glRotatexOES_args, "GLES1_OES_fixed_point", "", 4, 3481, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glRotatexOES_info = {
+    .name = "glRotatexOES",
+    .doc = "glRotatexOES(angle, x, y, z) -> None",
+    .text_signature = "($module, angle, x, y, z, /)",
+    .arg_names = pygl_GLES1_glRotatexOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3481,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glRotatexOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glRotatexOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, angle);
     PYGL_I(1, x);
@@ -6630,11 +11846,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glSampleCoverage_args[] = {"value", "invert"};
-static const PyGLCommand pygl_GLES1_glSampleCoverage_info = {"glSampleCoverage", "glSampleCoverage(value, invert) -> None", "($module, value, invert, /)", pygl_GLES1_glSampleCoverage_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3482, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glSampleCoverage_info = {
+    .name = "glSampleCoverage",
+    .doc = "glSampleCoverage(value, invert) -> None",
+    .text_signature = "($module, value, invert, /)",
+    .arg_names = pygl_GLES1_glSampleCoverage_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3482,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glSampleCoverage(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glSampleCoverage(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_F(0, value);
     PYGL_B(1, invert);
@@ -6648,11 +11880,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glSampleCoveragex_args[] = {"value", "invert"};
-static const PyGLCommand pygl_GLES1_glSampleCoveragex_info = {"glSampleCoveragex", "glSampleCoveragex(value, invert) -> None", "($module, value, invert, /)", pygl_GLES1_glSampleCoveragex_args, "GLES1_VERSION_GLES1_1_0", "", 2, 3483, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glSampleCoveragex_info = {
+    .name = "glSampleCoveragex",
+    .doc = "glSampleCoveragex(value, invert) -> None",
+    .text_signature = "($module, value, invert, /)",
+    .arg_names = pygl_GLES1_glSampleCoveragex_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3483,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glSampleCoveragex(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glSampleCoveragex(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_I(0, value);
     PYGL_B(1, invert);
@@ -6666,11 +11914,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glSampleCoveragexOES_args[] = {"value", "invert"};
-static const PyGLCommand pygl_GLES1_glSampleCoveragexOES_info = {"glSampleCoveragexOES", "glSampleCoveragexOES(value, invert) -> None", "($module, value, invert, /)", pygl_GLES1_glSampleCoveragexOES_args, "GLES1_OES_fixed_point", "", 2, 3484, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glSampleCoveragexOES_info = {
+    .name = "glSampleCoveragexOES",
+    .doc = "glSampleCoveragexOES(value, invert) -> None",
+    .text_signature = "($module, value, invert, /)",
+    .arg_names = pygl_GLES1_glSampleCoveragexOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3484,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glSampleCoveragexOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glSampleCoveragexOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_I(0, value);
     PYGL_B(1, invert);
@@ -6684,11 +11948,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glScalef_args[] = {"x", "y", "z"};
-static const PyGLCommand pygl_GLES1_glScalef_info = {"glScalef", "glScalef(x, y, z) -> None", "($module, x, y, z, /)", pygl_GLES1_glScalef_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3485, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glScalef_info = {
+    .name = "glScalef",
+    .doc = "glScalef(x, y, z) -> None",
+    .text_signature = "($module, x, y, z, /)",
+    .arg_names = pygl_GLES1_glScalef_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3485,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glScalef(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glScalef(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_F(0, x);
     PYGL_F(1, y);
@@ -6703,11 +11983,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glScalex_args[] = {"x", "y", "z"};
-static const PyGLCommand pygl_GLES1_glScalex_info = {"glScalex", "glScalex(x, y, z) -> None", "($module, x, y, z, /)", pygl_GLES1_glScalex_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3486, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glScalex_info = {
+    .name = "glScalex",
+    .doc = "glScalex(x, y, z) -> None",
+    .text_signature = "($module, x, y, z, /)",
+    .arg_names = pygl_GLES1_glScalex_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3486,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glScalex(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glScalex(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -6722,11 +12018,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glScalexOES_args[] = {"x", "y", "z"};
-static const PyGLCommand pygl_GLES1_glScalexOES_info = {"glScalexOES", "glScalexOES(x, y, z) -> None", "($module, x, y, z, /)", pygl_GLES1_glScalexOES_args, "GLES1_OES_fixed_point", "", 3, 3487, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glScalexOES_info = {
+    .name = "glScalexOES",
+    .doc = "glScalexOES(x, y, z) -> None",
+    .text_signature = "($module, x, y, z, /)",
+    .arg_names = pygl_GLES1_glScalexOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3487,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glScalexOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glScalexOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -6741,11 +12053,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glScissor_args[] = {"x", "y", "width", "height"};
-static const PyGLCommand pygl_GLES1_glScissor_info = {"glScissor", "glScissor(x, y, width, height) -> None", "($module, x, y, width, height, /)", pygl_GLES1_glScissor_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3488, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glScissor_info = {
+    .name = "glScissor",
+    .doc = "glScissor(x, y, width, height) -> None",
+    .text_signature = "($module, x, y, width, height, /)",
+    .arg_names = pygl_GLES1_glScissor_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3488,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glScissor(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glScissor(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -6761,11 +12089,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glSetFenceNV_args[] = {"fence", "condition"};
-static const PyGLCommand pygl_GLES1_glSetFenceNV_info = {"glSetFenceNV", "glSetFenceNV(fence, condition) -> None", "($module, fence, condition, /)", pygl_GLES1_glSetFenceNV_args, "GLES1_NV_fence", "", 2, 3489, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glSetFenceNV_info = {
+    .name = "glSetFenceNV",
+    .doc = "glSetFenceNV(fence, condition) -> None",
+    .text_signature = "($module, fence, condition, /)",
+    .arg_names = pygl_GLES1_glSetFenceNV_args,
+    .extension = "GLES1_NV_fence",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3489,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glSetFenceNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glSetFenceNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_U(0, fence);
     PYGL_U(1, condition);
@@ -6779,11 +12123,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glShadeModel_args[] = {"mode"};
-static const PyGLCommand pygl_GLES1_glShadeModel_info = {"glShadeModel", "glShadeModel(mode) -> None", "($module, mode, /)", pygl_GLES1_glShadeModel_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3490, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glShadeModel_info = {
+    .name = "glShadeModel",
+    .doc = "glShadeModel(mode) -> None",
+    .text_signature = "($module, mode, /)",
+    .arg_names = pygl_GLES1_glShadeModel_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3490,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glShadeModel(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glShadeModel(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, mode);
     PYGL_CONV_OK();
@@ -6796,11 +12156,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glStartTilingQCOM_args[] = {"x", "y", "width", "height", "preserveMask"};
-static const PyGLCommand pygl_GLES1_glStartTilingQCOM_info = {"glStartTilingQCOM", "glStartTilingQCOM(x, y, width, height, preserveMask) -> None", "($module, x, y, width, height, preserveMask, /)", pygl_GLES1_glStartTilingQCOM_args, "GLES1_QCOM_tiled_rendering", "", 5, 3491, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glStartTilingQCOM_info = {
+    .name = "glStartTilingQCOM",
+    .doc = "glStartTilingQCOM(x, y, width, height, preserveMask) -> None",
+    .text_signature = "($module, x, y, width, height, preserveMask, /)",
+    .arg_names = pygl_GLES1_glStartTilingQCOM_args,
+    .extension = "GLES1_QCOM_tiled_rendering",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3491,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glStartTilingQCOM(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glStartTilingQCOM(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_U(0, x);
     PYGL_U(1, y);
@@ -6817,11 +12193,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glStencilFunc_args[] = {"func", "ref", "mask"};
-static const PyGLCommand pygl_GLES1_glStencilFunc_info = {"glStencilFunc", "glStencilFunc(func, ref, mask) -> None", "($module, func, ref, mask, /)", pygl_GLES1_glStencilFunc_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3492, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glStencilFunc_info = {
+    .name = "glStencilFunc",
+    .doc = "glStencilFunc(func, ref, mask) -> None",
+    .text_signature = "($module, func, ref, mask, /)",
+    .arg_names = pygl_GLES1_glStencilFunc_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3492,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glStencilFunc(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glStencilFunc(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, func);
     PYGL_I(1, ref);
@@ -6836,11 +12228,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glStencilMask_args[] = {"mask"};
-static const PyGLCommand pygl_GLES1_glStencilMask_info = {"glStencilMask", "glStencilMask(mask) -> None", "($module, mask, /)", pygl_GLES1_glStencilMask_args, "GLES1_VERSION_GLES1_1_0", "", 1, 3493, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glStencilMask_info = {
+    .name = "glStencilMask",
+    .doc = "glStencilMask(mask) -> None",
+    .text_signature = "($module, mask, /)",
+    .arg_names = pygl_GLES1_glStencilMask_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3493,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glStencilMask(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glStencilMask(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, mask);
     PYGL_CONV_OK();
@@ -6853,11 +12261,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glStencilOp_args[] = {"fail", "zfail", "zpass"};
-static const PyGLCommand pygl_GLES1_glStencilOp_info = {"glStencilOp", "glStencilOp(fail, zfail, zpass) -> None", "($module, fail, zfail, zpass, /)", pygl_GLES1_glStencilOp_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3494, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glStencilOp_info = {
+    .name = "glStencilOp",
+    .doc = "glStencilOp(fail, zfail, zpass) -> None",
+    .text_signature = "($module, fail, zfail, zpass, /)",
+    .arg_names = pygl_GLES1_glStencilOp_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3494,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glStencilOp(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glStencilOp(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, fail);
     PYGL_U(1, zfail);
@@ -6872,11 +12296,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTestFenceNV_args[] = {"fence"};
-static const PyGLCommand pygl_GLES1_glTestFenceNV_info = {"glTestFenceNV", "glTestFenceNV(fence) -> GLboolean", "($module, fence, /)", pygl_GLES1_glTestFenceNV_args, "GLES1_NV_fence", "", 1, 3495, PYGL_API_GLES1, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES1_glTestFenceNV_info = {
+    .name = "glTestFenceNV",
+    .doc = "glTestFenceNV(fence) -> GLboolean",
+    .text_signature = "($module, fence, /)",
+    .arg_names = pygl_GLES1_glTestFenceNV_args,
+    .extension = "GLES1_NV_fence",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3495,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTestFenceNV(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTestFenceNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, fence);
     PYGL_CONV_OK();
@@ -6889,11 +12329,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord1bOES_args[] = {"s"};
-static const PyGLCommand pygl_GLES1_glTexCoord1bOES_info = {"glTexCoord1bOES", "glTexCoord1bOES(s) -> None", "($module, s, /)", pygl_GLES1_glTexCoord1bOES_args, "GLES1_OES_byte_coordinates", "", 1, 3496, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord1bOES_info = {
+    .name = "glTexCoord1bOES",
+    .doc = "glTexCoord1bOES(s) -> None",
+    .text_signature = "($module, s, /)",
+    .arg_names = pygl_GLES1_glTexCoord1bOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3496,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord1bOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord1bOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, s);
     PYGL_CONV_OK();
@@ -6906,11 +12362,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord1bvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glTexCoord1bvOES_info = {"glTexCoord1bvOES", "glTexCoord1bvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glTexCoord1bvOES_args, "GLES1_OES_byte_coordinates", "", 1, 3497, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord1bvOES_info = {
+    .name = "glTexCoord1bvOES",
+    .doc = "glTexCoord1bvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glTexCoord1bvOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3497,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord1bvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord1bvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -6926,11 +12398,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord1xOES_args[] = {"s"};
-static const PyGLCommand pygl_GLES1_glTexCoord1xOES_info = {"glTexCoord1xOES", "glTexCoord1xOES(s) -> None", "($module, s, /)", pygl_GLES1_glTexCoord1xOES_args, "GLES1_OES_fixed_point", "", 1, 3498, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord1xOES_info = {
+    .name = "glTexCoord1xOES",
+    .doc = "glTexCoord1xOES(s) -> None",
+    .text_signature = "($module, s, /)",
+    .arg_names = pygl_GLES1_glTexCoord1xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3498,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord1xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord1xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, s);
     PYGL_CONV_OK();
@@ -6943,11 +12431,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord1xvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glTexCoord1xvOES_info = {"glTexCoord1xvOES", "glTexCoord1xvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glTexCoord1xvOES_args, "GLES1_OES_fixed_point", "", 1, 3499, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord1xvOES_info = {
+    .name = "glTexCoord1xvOES",
+    .doc = "glTexCoord1xvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glTexCoord1xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3499,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord1xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord1xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -6963,11 +12467,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord2bOES_args[] = {"s", "t"};
-static const PyGLCommand pygl_GLES1_glTexCoord2bOES_info = {"glTexCoord2bOES", "glTexCoord2bOES(s, t) -> None", "($module, s, t, /)", pygl_GLES1_glTexCoord2bOES_args, "GLES1_OES_byte_coordinates", "", 2, 3500, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord2bOES_info = {
+    .name = "glTexCoord2bOES",
+    .doc = "glTexCoord2bOES(s, t) -> None",
+    .text_signature = "($module, s, t, /)",
+    .arg_names = pygl_GLES1_glTexCoord2bOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3500,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord2bOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord2bOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_I(0, s);
     PYGL_I(1, t);
@@ -6981,11 +12501,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord2bvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glTexCoord2bvOES_info = {"glTexCoord2bvOES", "glTexCoord2bvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glTexCoord2bvOES_args, "GLES1_OES_byte_coordinates", "", 1, 3501, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord2bvOES_info = {
+    .name = "glTexCoord2bvOES",
+    .doc = "glTexCoord2bvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glTexCoord2bvOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3501,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord2bvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord2bvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -7001,11 +12537,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord2xOES_args[] = {"s", "t"};
-static const PyGLCommand pygl_GLES1_glTexCoord2xOES_info = {"glTexCoord2xOES", "glTexCoord2xOES(s, t) -> None", "($module, s, t, /)", pygl_GLES1_glTexCoord2xOES_args, "GLES1_OES_fixed_point", "", 2, 3502, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord2xOES_info = {
+    .name = "glTexCoord2xOES",
+    .doc = "glTexCoord2xOES(s, t) -> None",
+    .text_signature = "($module, s, t, /)",
+    .arg_names = pygl_GLES1_glTexCoord2xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3502,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord2xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord2xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_I(0, s);
     PYGL_I(1, t);
@@ -7019,11 +12571,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord2xvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glTexCoord2xvOES_info = {"glTexCoord2xvOES", "glTexCoord2xvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glTexCoord2xvOES_args, "GLES1_OES_fixed_point", "", 1, 3503, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord2xvOES_info = {
+    .name = "glTexCoord2xvOES",
+    .doc = "glTexCoord2xvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glTexCoord2xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3503,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord2xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord2xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -7039,11 +12607,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord3bOES_args[] = {"s", "t", "r"};
-static const PyGLCommand pygl_GLES1_glTexCoord3bOES_info = {"glTexCoord3bOES", "glTexCoord3bOES(s, t, r) -> None", "($module, s, t, r, /)", pygl_GLES1_glTexCoord3bOES_args, "GLES1_OES_byte_coordinates", "", 3, 3504, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord3bOES_info = {
+    .name = "glTexCoord3bOES",
+    .doc = "glTexCoord3bOES(s, t, r) -> None",
+    .text_signature = "($module, s, t, r, /)",
+    .arg_names = pygl_GLES1_glTexCoord3bOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3504,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord3bOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord3bOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_I(0, s);
     PYGL_I(1, t);
@@ -7058,11 +12642,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord3bvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glTexCoord3bvOES_info = {"glTexCoord3bvOES", "glTexCoord3bvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glTexCoord3bvOES_args, "GLES1_OES_byte_coordinates", "", 1, 3505, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord3bvOES_info = {
+    .name = "glTexCoord3bvOES",
+    .doc = "glTexCoord3bvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glTexCoord3bvOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3505,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord3bvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord3bvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -7078,11 +12678,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord3xOES_args[] = {"s", "t", "r"};
-static const PyGLCommand pygl_GLES1_glTexCoord3xOES_info = {"glTexCoord3xOES", "glTexCoord3xOES(s, t, r) -> None", "($module, s, t, r, /)", pygl_GLES1_glTexCoord3xOES_args, "GLES1_OES_fixed_point", "", 3, 3506, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord3xOES_info = {
+    .name = "glTexCoord3xOES",
+    .doc = "glTexCoord3xOES(s, t, r) -> None",
+    .text_signature = "($module, s, t, r, /)",
+    .arg_names = pygl_GLES1_glTexCoord3xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3506,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord3xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord3xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_I(0, s);
     PYGL_I(1, t);
@@ -7097,11 +12713,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord3xvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glTexCoord3xvOES_info = {"glTexCoord3xvOES", "glTexCoord3xvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glTexCoord3xvOES_args, "GLES1_OES_fixed_point", "", 1, 3507, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord3xvOES_info = {
+    .name = "glTexCoord3xvOES",
+    .doc = "glTexCoord3xvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glTexCoord3xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3507,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord3xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord3xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -7117,11 +12749,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord4bOES_args[] = {"s", "t", "r", "q"};
-static const PyGLCommand pygl_GLES1_glTexCoord4bOES_info = {"glTexCoord4bOES", "glTexCoord4bOES(s, t, r, q) -> None", "($module, s, t, r, q, /)", pygl_GLES1_glTexCoord4bOES_args, "GLES1_OES_byte_coordinates", "", 4, 3508, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord4bOES_info = {
+    .name = "glTexCoord4bOES",
+    .doc = "glTexCoord4bOES(s, t, r, q) -> None",
+    .text_signature = "($module, s, t, r, q, /)",
+    .arg_names = pygl_GLES1_glTexCoord4bOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3508,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord4bOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord4bOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, s);
     PYGL_I(1, t);
@@ -7137,11 +12785,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord4bvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glTexCoord4bvOES_info = {"glTexCoord4bvOES", "glTexCoord4bvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glTexCoord4bvOES_args, "GLES1_OES_byte_coordinates", "", 1, 3509, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord4bvOES_info = {
+    .name = "glTexCoord4bvOES",
+    .doc = "glTexCoord4bvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glTexCoord4bvOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3509,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord4bvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord4bvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -7157,11 +12821,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord4xOES_args[] = {"s", "t", "r", "q"};
-static const PyGLCommand pygl_GLES1_glTexCoord4xOES_info = {"glTexCoord4xOES", "glTexCoord4xOES(s, t, r, q) -> None", "($module, s, t, r, q, /)", pygl_GLES1_glTexCoord4xOES_args, "GLES1_OES_fixed_point", "", 4, 3510, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord4xOES_info = {
+    .name = "glTexCoord4xOES",
+    .doc = "glTexCoord4xOES(s, t, r, q) -> None",
+    .text_signature = "($module, s, t, r, q, /)",
+    .arg_names = pygl_GLES1_glTexCoord4xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3510,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord4xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord4xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, s);
     PYGL_I(1, t);
@@ -7177,11 +12857,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoord4xvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glTexCoord4xvOES_info = {"glTexCoord4xvOES", "glTexCoord4xvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glTexCoord4xvOES_args, "GLES1_OES_fixed_point", "", 1, 3511, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexCoord4xvOES_info = {
+    .name = "glTexCoord4xvOES",
+    .doc = "glTexCoord4xvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glTexCoord4xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3511,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoord4xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoord4xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -7197,11 +12893,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexCoordPointer_args[] = {"size", "type", "stride", "pointer"};
-static const PyGLCommand pygl_GLES1_glTexCoordPointer_info = {"glTexCoordPointer", "glTexCoordPointer(size, type, stride, pointer) -> None", "($module, size, type, stride, pointer, /)", pygl_GLES1_glTexCoordPointer_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3512, PYGL_API_GLES1, 0, 4, 0, 1};
+static const PyGLCommand pygl_GLES1_glTexCoordPointer_info = {
+    .name = "glTexCoordPointer",
+    .doc = "glTexCoordPointer(size, type, stride, pointer) -> None",
+    .text_signature = "($module, size, type, stride, pointer, /)",
+    .arg_names = pygl_GLES1_glTexCoordPointer_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3512,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 1,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexCoordPointer(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexCoordPointer(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_I(0, size);
@@ -7220,11 +12932,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexEnvf_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glTexEnvf_info = {"glTexEnvf", "glTexEnvf(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES1_glTexEnvf_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3513, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexEnvf_info = {
+    .name = "glTexEnvf",
+    .doc = "glTexEnvf(target, pname, param) -> None",
+    .text_signature = "($module, target, pname, param, /)",
+    .arg_names = pygl_GLES1_glTexEnvf_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3513,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexEnvf(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexEnvf(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, target);
     PYGL_U(1, pname);
@@ -7239,11 +12967,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexEnvfv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glTexEnvfv_info = {"glTexEnvfv", "glTexEnvfv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES1_glTexEnvfv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3514, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexEnvfv_info = {
+    .name = "glTexEnvfv",
+    .doc = "glTexEnvfv(target, pname, params) -> None",
+    .text_signature = "($module, target, pname, params, /)",
+    .arg_names = pygl_GLES1_glTexEnvfv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3514,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexEnvfv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexEnvfv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -7261,11 +13005,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexEnvi_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glTexEnvi_info = {"glTexEnvi", "glTexEnvi(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES1_glTexEnvi_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3515, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexEnvi_info = {
+    .name = "glTexEnvi",
+    .doc = "glTexEnvi(target, pname, param) -> None",
+    .text_signature = "($module, target, pname, param, /)",
+    .arg_names = pygl_GLES1_glTexEnvi_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3515,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexEnvi(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexEnvi(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, target);
     PYGL_U(1, pname);
@@ -7280,11 +13040,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexEnviv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glTexEnviv_info = {"glTexEnviv", "glTexEnviv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES1_glTexEnviv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3516, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexEnviv_info = {
+    .name = "glTexEnviv",
+    .doc = "glTexEnviv(target, pname, params) -> None",
+    .text_signature = "($module, target, pname, params, /)",
+    .arg_names = pygl_GLES1_glTexEnviv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3516,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexEnviv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexEnviv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -7302,11 +13078,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexEnvx_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glTexEnvx_info = {"glTexEnvx", "glTexEnvx(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES1_glTexEnvx_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3517, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexEnvx_info = {
+    .name = "glTexEnvx",
+    .doc = "glTexEnvx(target, pname, param) -> None",
+    .text_signature = "($module, target, pname, param, /)",
+    .arg_names = pygl_GLES1_glTexEnvx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3517,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexEnvx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexEnvx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, target);
     PYGL_U(1, pname);
@@ -7321,11 +13113,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexEnvxOES_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glTexEnvxOES_info = {"glTexEnvxOES", "glTexEnvxOES(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES1_glTexEnvxOES_args, "GLES1_OES_fixed_point", "", 3, 3518, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexEnvxOES_info = {
+    .name = "glTexEnvxOES",
+    .doc = "glTexEnvxOES(target, pname, param) -> None",
+    .text_signature = "($module, target, pname, param, /)",
+    .arg_names = pygl_GLES1_glTexEnvxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3518,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexEnvxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexEnvxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, target);
     PYGL_U(1, pname);
@@ -7340,11 +13148,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexEnvxv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glTexEnvxv_info = {"glTexEnvxv", "glTexEnvxv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES1_glTexEnvxv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3519, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexEnvxv_info = {
+    .name = "glTexEnvxv",
+    .doc = "glTexEnvxv(target, pname, params) -> None",
+    .text_signature = "($module, target, pname, params, /)",
+    .arg_names = pygl_GLES1_glTexEnvxv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3519,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexEnvxv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexEnvxv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -7362,11 +13186,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexEnvxvOES_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glTexEnvxvOES_info = {"glTexEnvxvOES", "glTexEnvxvOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES1_glTexEnvxvOES_args, "GLES1_OES_fixed_point", "", 3, 3520, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexEnvxvOES_info = {
+    .name = "glTexEnvxvOES",
+    .doc = "glTexEnvxvOES(target, pname, params) -> None",
+    .text_signature = "($module, target, pname, params, /)",
+    .arg_names = pygl_GLES1_glTexEnvxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3520,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexEnvxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexEnvxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -7384,11 +13224,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexGenfOES_args[] = {"coord", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glTexGenfOES_info = {"glTexGenfOES", "glTexGenfOES(coord, pname, param) -> None", "($module, coord, pname, param, /)", pygl_GLES1_glTexGenfOES_args, "GLES1_OES_texture_cube_map", "", 3, 3521, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexGenfOES_info = {
+    .name = "glTexGenfOES",
+    .doc = "glTexGenfOES(coord, pname, param) -> None",
+    .text_signature = "($module, coord, pname, param, /)",
+    .arg_names = pygl_GLES1_glTexGenfOES_args,
+    .extension = "GLES1_OES_texture_cube_map",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3521,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexGenfOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexGenfOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, coord);
     PYGL_U(1, pname);
@@ -7403,11 +13259,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexGenfvOES_args[] = {"coord", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glTexGenfvOES_info = {"glTexGenfvOES", "glTexGenfvOES(coord, pname, params) -> None", "($module, coord, pname, params, /)", pygl_GLES1_glTexGenfvOES_args, "GLES1_OES_texture_cube_map", "", 3, 3522, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexGenfvOES_info = {
+    .name = "glTexGenfvOES",
+    .doc = "glTexGenfvOES(coord, pname, params) -> None",
+    .text_signature = "($module, coord, pname, params, /)",
+    .arg_names = pygl_GLES1_glTexGenfvOES_args,
+    .extension = "GLES1_OES_texture_cube_map",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3522,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexGenfvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexGenfvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, coord);
@@ -7425,11 +13297,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexGeniOES_args[] = {"coord", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glTexGeniOES_info = {"glTexGeniOES", "glTexGeniOES(coord, pname, param) -> None", "($module, coord, pname, param, /)", pygl_GLES1_glTexGeniOES_args, "GLES1_OES_texture_cube_map", "", 3, 3523, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexGeniOES_info = {
+    .name = "glTexGeniOES",
+    .doc = "glTexGeniOES(coord, pname, param) -> None",
+    .text_signature = "($module, coord, pname, param, /)",
+    .arg_names = pygl_GLES1_glTexGeniOES_args,
+    .extension = "GLES1_OES_texture_cube_map",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3523,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexGeniOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexGeniOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, coord);
     PYGL_U(1, pname);
@@ -7444,11 +13332,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexGenivOES_args[] = {"coord", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glTexGenivOES_info = {"glTexGenivOES", "glTexGenivOES(coord, pname, params) -> None", "($module, coord, pname, params, /)", pygl_GLES1_glTexGenivOES_args, "GLES1_OES_texture_cube_map", "", 3, 3524, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexGenivOES_info = {
+    .name = "glTexGenivOES",
+    .doc = "glTexGenivOES(coord, pname, params) -> None",
+    .text_signature = "($module, coord, pname, params, /)",
+    .arg_names = pygl_GLES1_glTexGenivOES_args,
+    .extension = "GLES1_OES_texture_cube_map",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3524,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexGenivOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexGenivOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, coord);
@@ -7466,11 +13370,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexGenxOES_args[] = {"coord", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glTexGenxOES_info = {"glTexGenxOES", "glTexGenxOES(coord, pname, param) -> None", "($module, coord, pname, param, /)", pygl_GLES1_glTexGenxOES_args, "GLES1_OES_fixed_point", "GLES1_OES_texture_cube_map", 3, 3525, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexGenxOES_info = {
+    .name = "glTexGenxOES",
+    .doc = "glTexGenxOES(coord, pname, param) -> None",
+    .text_signature = "($module, coord, pname, param, /)",
+    .arg_names = pygl_GLES1_glTexGenxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "GLES1_OES_texture_cube_map",
+    .arg_count = 3,
+    .slot = 3525,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexGenxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexGenxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, coord);
     PYGL_U(1, pname);
@@ -7485,11 +13405,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexGenxvOES_args[] = {"coord", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glTexGenxvOES_info = {"glTexGenxvOES", "glTexGenxvOES(coord, pname, params) -> None", "($module, coord, pname, params, /)", pygl_GLES1_glTexGenxvOES_args, "GLES1_OES_fixed_point", "GLES1_OES_texture_cube_map", 3, 3526, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexGenxvOES_info = {
+    .name = "glTexGenxvOES",
+    .doc = "glTexGenxvOES(coord, pname, params) -> None",
+    .text_signature = "($module, coord, pname, params, /)",
+    .arg_names = pygl_GLES1_glTexGenxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "GLES1_OES_texture_cube_map",
+    .arg_count = 3,
+    .slot = 3526,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexGenxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexGenxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, coord);
@@ -7507,11 +13443,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexImage2D_args[] = {"target", "level", "internalformat", "width", "height", "border", "format", "type", "pixels"};
-static const PyGLCommand pygl_GLES1_glTexImage2D_info = {"glTexImage2D", "glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels) -> None", "($module, target, level, internalformat, width, height, border, format, type, pixels, /)", pygl_GLES1_glTexImage2D_args, "GLES1_VERSION_GLES1_1_0", "", 9, 3527, PYGL_API_GLES1, 0, 9, 0, 1};
+static const PyGLCommand pygl_GLES1_glTexImage2D_info = {
+    .name = "glTexImage2D",
+    .doc = "glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels) -> None",
+    .text_signature = "($module, target, level, internalformat, width, height, border, format, type, pixels, /)",
+    .arg_names = pygl_GLES1_glTexImage2D_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 9,
+    .slot = 3527,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 9,
+    .return_kind = 0,
+    .hand_written = 1,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexImage2D(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexImage2D(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(9);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -7535,11 +13487,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexParameterf_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glTexParameterf_info = {"glTexParameterf", "glTexParameterf(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES1_glTexParameterf_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3528, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexParameterf_info = {
+    .name = "glTexParameterf",
+    .doc = "glTexParameterf(target, pname, param) -> None",
+    .text_signature = "($module, target, pname, param, /)",
+    .arg_names = pygl_GLES1_glTexParameterf_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3528,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexParameterf(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexParameterf(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, target);
     PYGL_U(1, pname);
@@ -7554,11 +13522,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexParameterfv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glTexParameterfv_info = {"glTexParameterfv", "glTexParameterfv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES1_glTexParameterfv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3529, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexParameterfv_info = {
+    .name = "glTexParameterfv",
+    .doc = "glTexParameterfv(target, pname, params) -> None",
+    .text_signature = "($module, target, pname, params, /)",
+    .arg_names = pygl_GLES1_glTexParameterfv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3529,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexParameterfv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexParameterfv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -7576,11 +13560,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexParameteri_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glTexParameteri_info = {"glTexParameteri", "glTexParameteri(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES1_glTexParameteri_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3530, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexParameteri_info = {
+    .name = "glTexParameteri",
+    .doc = "glTexParameteri(target, pname, param) -> None",
+    .text_signature = "($module, target, pname, param, /)",
+    .arg_names = pygl_GLES1_glTexParameteri_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3530,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexParameteri(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexParameteri(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, target);
     PYGL_U(1, pname);
@@ -7595,11 +13595,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexParameteriv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glTexParameteriv_info = {"glTexParameteriv", "glTexParameteriv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES1_glTexParameteriv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3531, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexParameteriv_info = {
+    .name = "glTexParameteriv",
+    .doc = "glTexParameteriv(target, pname, params) -> None",
+    .text_signature = "($module, target, pname, params, /)",
+    .arg_names = pygl_GLES1_glTexParameteriv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3531,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexParameteriv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexParameteriv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -7617,11 +13633,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexParameterx_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glTexParameterx_info = {"glTexParameterx", "glTexParameterx(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES1_glTexParameterx_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3532, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexParameterx_info = {
+    .name = "glTexParameterx",
+    .doc = "glTexParameterx(target, pname, param) -> None",
+    .text_signature = "($module, target, pname, param, /)",
+    .arg_names = pygl_GLES1_glTexParameterx_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3532,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexParameterx(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexParameterx(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, target);
     PYGL_U(1, pname);
@@ -7636,11 +13668,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexParameterxOES_args[] = {"target", "pname", "param"};
-static const PyGLCommand pygl_GLES1_glTexParameterxOES_info = {"glTexParameterxOES", "glTexParameterxOES(target, pname, param) -> None", "($module, target, pname, param, /)", pygl_GLES1_glTexParameterxOES_args, "GLES1_OES_fixed_point", "", 3, 3533, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexParameterxOES_info = {
+    .name = "glTexParameterxOES",
+    .doc = "glTexParameterxOES(target, pname, param) -> None",
+    .text_signature = "($module, target, pname, param, /)",
+    .arg_names = pygl_GLES1_glTexParameterxOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3533,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexParameterxOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexParameterxOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_U(0, target);
     PYGL_U(1, pname);
@@ -7655,11 +13703,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexParameterxv_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glTexParameterxv_info = {"glTexParameterxv", "glTexParameterxv(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES1_glTexParameterxv_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3534, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexParameterxv_info = {
+    .name = "glTexParameterxv",
+    .doc = "glTexParameterxv(target, pname, params) -> None",
+    .text_signature = "($module, target, pname, params, /)",
+    .arg_names = pygl_GLES1_glTexParameterxv_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3534,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexParameterxv(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexParameterxv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -7677,11 +13741,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexParameterxvOES_args[] = {"target", "pname", "params"};
-static const PyGLCommand pygl_GLES1_glTexParameterxvOES_info = {"glTexParameterxvOES", "glTexParameterxvOES(target, pname, params) -> None", "($module, target, pname, params, /)", pygl_GLES1_glTexParameterxvOES_args, "GLES1_OES_fixed_point", "", 3, 3535, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexParameterxvOES_info = {
+    .name = "glTexParameterxvOES",
+    .doc = "glTexParameterxvOES(target, pname, params) -> None",
+    .text_signature = "($module, target, pname, params, /)",
+    .arg_names = pygl_GLES1_glTexParameterxvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3535,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexParameterxvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexParameterxvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -7699,11 +13779,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexStorage1DEXT_args[] = {"target", "levels", "internalformat", "width"};
-static const PyGLCommand pygl_GLES1_glTexStorage1DEXT_info = {"glTexStorage1DEXT", "glTexStorage1DEXT(target, levels, internalformat, width) -> None", "($module, target, levels, internalformat, width, /)", pygl_GLES1_glTexStorage1DEXT_args, "GLES1_EXT_texture_storage", "", 4, 3536, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexStorage1DEXT_info = {
+    .name = "glTexStorage1DEXT",
+    .doc = "glTexStorage1DEXT(target, levels, internalformat, width) -> None",
+    .text_signature = "($module, target, levels, internalformat, width, /)",
+    .arg_names = pygl_GLES1_glTexStorage1DEXT_args,
+    .extension = "GLES1_EXT_texture_storage",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3536,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexStorage1DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexStorage1DEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_U(0, target);
     PYGL_SZ(1, levels);
@@ -7719,11 +13815,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexStorage2DEXT_args[] = {"target", "levels", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES1_glTexStorage2DEXT_info = {"glTexStorage2DEXT", "glTexStorage2DEXT(target, levels, internalformat, width, height) -> None", "($module, target, levels, internalformat, width, height, /)", pygl_GLES1_glTexStorage2DEXT_args, "GLES1_EXT_texture_storage", "", 5, 3537, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexStorage2DEXT_info = {
+    .name = "glTexStorage2DEXT",
+    .doc = "glTexStorage2DEXT(target, levels, internalformat, width, height) -> None",
+    .text_signature = "($module, target, levels, internalformat, width, height, /)",
+    .arg_names = pygl_GLES1_glTexStorage2DEXT_args,
+    .extension = "GLES1_EXT_texture_storage",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3537,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexStorage2DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexStorage2DEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_U(0, target);
     PYGL_SZ(1, levels);
@@ -7740,11 +13852,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexStorage3DEXT_args[] = {"target", "levels", "internalformat", "width", "height", "depth"};
-static const PyGLCommand pygl_GLES1_glTexStorage3DEXT_info = {"glTexStorage3DEXT", "glTexStorage3DEXT(target, levels, internalformat, width, height, depth) -> None", "($module, target, levels, internalformat, width, height, depth, /)", pygl_GLES1_glTexStorage3DEXT_args, "GLES1_EXT_texture_storage", "", 6, 3538, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glTexStorage3DEXT_info = {
+    .name = "glTexStorage3DEXT",
+    .doc = "glTexStorage3DEXT(target, levels, internalformat, width, height, depth) -> None",
+    .text_signature = "($module, target, levels, internalformat, width, height, depth, /)",
+    .arg_names = pygl_GLES1_glTexStorage3DEXT_args,
+    .extension = "GLES1_EXT_texture_storage",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3538,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexStorage3DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexStorage3DEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_U(0, target);
     PYGL_SZ(1, levels);
@@ -7762,11 +13890,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTexSubImage2D_args[] = {"target", "level", "xoffset", "yoffset", "width", "height", "format", "type", "pixels"};
-static const PyGLCommand pygl_GLES1_glTexSubImage2D_info = {"glTexSubImage2D", "glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels) -> None", "($module, target, level, xoffset, yoffset, width, height, format, type, pixels, /)", pygl_GLES1_glTexSubImage2D_args, "GLES1_VERSION_GLES1_1_0", "", 9, 3539, PYGL_API_GLES1, 0, 9, 0, 1};
+static const PyGLCommand pygl_GLES1_glTexSubImage2D_info = {
+    .name = "glTexSubImage2D",
+    .doc = "glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels) -> None",
+    .text_signature = "($module, target, level, xoffset, yoffset, width, height, format, type, pixels, /)",
+    .arg_names = pygl_GLES1_glTexSubImage2D_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 9,
+    .slot = 3539,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 9,
+    .return_kind = 0,
+    .hand_written = 1,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTexSubImage2D(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTexSubImage2D(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(9);
     PYGL_FRAME(1);
     PYGL_U(0, target);
@@ -7790,11 +13934,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTextureStorage1DEXT_args[] = {"texture", "target", "levels", "internalformat", "width"};
-static const PyGLCommand pygl_GLES1_glTextureStorage1DEXT_info = {"glTextureStorage1DEXT", "glTextureStorage1DEXT(texture, target, levels, internalformat, width) -> None", "($module, texture, target, levels, internalformat, width, /)", pygl_GLES1_glTextureStorage1DEXT_args, "GLES1_EXT_texture_storage", "", 5, 3540, PYGL_API_GLES1, 0, 5, 0, 0};
+static const PyGLCommand pygl_GLES1_glTextureStorage1DEXT_info = {
+    .name = "glTextureStorage1DEXT",
+    .doc = "glTextureStorage1DEXT(texture, target, levels, internalformat, width) -> None",
+    .text_signature = "($module, texture, target, levels, internalformat, width, /)",
+    .arg_names = pygl_GLES1_glTextureStorage1DEXT_args,
+    .extension = "GLES1_EXT_texture_storage",
+    .alternates = "",
+    .arg_count = 5,
+    .slot = 3540,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 5,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTextureStorage1DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTextureStorage1DEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(5);
     PYGL_U(0, texture);
     PYGL_U(1, target);
@@ -7811,11 +13971,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTextureStorage2DEXT_args[] = {"texture", "target", "levels", "internalformat", "width", "height"};
-static const PyGLCommand pygl_GLES1_glTextureStorage2DEXT_info = {"glTextureStorage2DEXT", "glTextureStorage2DEXT(texture, target, levels, internalformat, width, height) -> None", "($module, texture, target, levels, internalformat, width, height, /)", pygl_GLES1_glTextureStorage2DEXT_args, "GLES1_EXT_texture_storage", "", 6, 3541, PYGL_API_GLES1, 0, 6, 0, 0};
+static const PyGLCommand pygl_GLES1_glTextureStorage2DEXT_info = {
+    .name = "glTextureStorage2DEXT",
+    .doc = "glTextureStorage2DEXT(texture, target, levels, internalformat, width, height) -> None",
+    .text_signature = "($module, texture, target, levels, internalformat, width, height, /)",
+    .arg_names = pygl_GLES1_glTextureStorage2DEXT_args,
+    .extension = "GLES1_EXT_texture_storage",
+    .alternates = "",
+    .arg_count = 6,
+    .slot = 3541,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 6,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTextureStorage2DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTextureStorage2DEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(6);
     PYGL_U(0, texture);
     PYGL_U(1, target);
@@ -7833,11 +14009,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTextureStorage3DEXT_args[] = {"texture", "target", "levels", "internalformat", "width", "height", "depth"};
-static const PyGLCommand pygl_GLES1_glTextureStorage3DEXT_info = {"glTextureStorage3DEXT", "glTextureStorage3DEXT(texture, target, levels, internalformat, width, height, depth) -> None", "($module, texture, target, levels, internalformat, width, height, depth, /)", pygl_GLES1_glTextureStorage3DEXT_args, "GLES1_EXT_texture_storage", "", 7, 3542, PYGL_API_GLES1, 0, 7, 0, 0};
+static const PyGLCommand pygl_GLES1_glTextureStorage3DEXT_info = {
+    .name = "glTextureStorage3DEXT",
+    .doc = "glTextureStorage3DEXT(texture, target, levels, internalformat, width, height, depth) -> None",
+    .text_signature = "($module, texture, target, levels, internalformat, width, height, depth, /)",
+    .arg_names = pygl_GLES1_glTextureStorage3DEXT_args,
+    .extension = "GLES1_EXT_texture_storage",
+    .alternates = "",
+    .arg_count = 7,
+    .slot = 3542,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 7,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTextureStorage3DEXT(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTextureStorage3DEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(7);
     PYGL_U(0, texture);
     PYGL_U(1, target);
@@ -7856,11 +14048,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTranslatef_args[] = {"x", "y", "z"};
-static const PyGLCommand pygl_GLES1_glTranslatef_info = {"glTranslatef", "glTranslatef(x, y, z) -> None", "($module, x, y, z, /)", pygl_GLES1_glTranslatef_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3543, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTranslatef_info = {
+    .name = "glTranslatef",
+    .doc = "glTranslatef(x, y, z) -> None",
+    .text_signature = "($module, x, y, z, /)",
+    .arg_names = pygl_GLES1_glTranslatef_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3543,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTranslatef(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTranslatef(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_F(0, x);
     PYGL_F(1, y);
@@ -7875,11 +14083,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTranslatex_args[] = {"x", "y", "z"};
-static const PyGLCommand pygl_GLES1_glTranslatex_info = {"glTranslatex", "glTranslatex(x, y, z) -> None", "($module, x, y, z, /)", pygl_GLES1_glTranslatex_args, "GLES1_VERSION_GLES1_1_0", "", 3, 3544, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTranslatex_info = {
+    .name = "glTranslatex",
+    .doc = "glTranslatex(x, y, z) -> None",
+    .text_signature = "($module, x, y, z, /)",
+    .arg_names = pygl_GLES1_glTranslatex_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3544,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTranslatex(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTranslatex(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -7894,11 +14118,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glTranslatexOES_args[] = {"x", "y", "z"};
-static const PyGLCommand pygl_GLES1_glTranslatexOES_info = {"glTranslatexOES", "glTranslatexOES(x, y, z) -> None", "($module, x, y, z, /)", pygl_GLES1_glTranslatexOES_args, "GLES1_OES_fixed_point", "", 3, 3545, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glTranslatexOES_info = {
+    .name = "glTranslatexOES",
+    .doc = "glTranslatexOES(x, y, z) -> None",
+    .text_signature = "($module, x, y, z, /)",
+    .arg_names = pygl_GLES1_glTranslatexOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3545,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glTranslatexOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glTranslatexOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -7913,11 +14153,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glUnmapBufferOES_args[] = {"target"};
-static const PyGLCommand pygl_GLES1_glUnmapBufferOES_info = {"glUnmapBufferOES", "glUnmapBufferOES(target) -> GLboolean", "($module, target, /)", pygl_GLES1_glUnmapBufferOES_args, "GLES1_OES_mapbuffer", "", 1, 3546, PYGL_API_GLES1, 0, 1, 1, 0};
+static const PyGLCommand pygl_GLES1_glUnmapBufferOES_info = {
+    .name = "glUnmapBufferOES",
+    .doc = "glUnmapBufferOES(target) -> GLboolean",
+    .text_signature = "($module, target, /)",
+    .arg_names = pygl_GLES1_glUnmapBufferOES_args,
+    .extension = "GLES1_OES_mapbuffer",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3546,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 1,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glUnmapBufferOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glUnmapBufferOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_U(0, target);
     PYGL_CONV_OK();
@@ -7930,11 +14186,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glVertex2bOES_args[] = {"x", "y"};
-static const PyGLCommand pygl_GLES1_glVertex2bOES_info = {"glVertex2bOES", "glVertex2bOES(x, y) -> None", "($module, x, y, /)", pygl_GLES1_glVertex2bOES_args, "GLES1_OES_byte_coordinates", "", 2, 3547, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glVertex2bOES_info = {
+    .name = "glVertex2bOES",
+    .doc = "glVertex2bOES(x, y) -> None",
+    .text_signature = "($module, x, y, /)",
+    .arg_names = pygl_GLES1_glVertex2bOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3547,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glVertex2bOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glVertex2bOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -7948,11 +14220,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glVertex2bvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glVertex2bvOES_info = {"glVertex2bvOES", "glVertex2bvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glVertex2bvOES_args, "GLES1_OES_byte_coordinates", "", 1, 3548, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glVertex2bvOES_info = {
+    .name = "glVertex2bvOES",
+    .doc = "glVertex2bvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glVertex2bvOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3548,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glVertex2bvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glVertex2bvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -7968,11 +14256,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glVertex2xOES_args[] = {"x"};
-static const PyGLCommand pygl_GLES1_glVertex2xOES_info = {"glVertex2xOES", "glVertex2xOES(x) -> None", "($module, x, /)", pygl_GLES1_glVertex2xOES_args, "GLES1_OES_fixed_point", "", 1, 3549, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glVertex2xOES_info = {
+    .name = "glVertex2xOES",
+    .doc = "glVertex2xOES(x) -> None",
+    .text_signature = "($module, x, /)",
+    .arg_names = pygl_GLES1_glVertex2xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3549,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glVertex2xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glVertex2xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_I(0, x);
     PYGL_CONV_OK();
@@ -7985,11 +14289,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glVertex2xvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glVertex2xvOES_info = {"glVertex2xvOES", "glVertex2xvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glVertex2xvOES_args, "GLES1_OES_fixed_point", "", 1, 3550, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glVertex2xvOES_info = {
+    .name = "glVertex2xvOES",
+    .doc = "glVertex2xvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glVertex2xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3550,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glVertex2xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glVertex2xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -8005,11 +14325,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glVertex3bOES_args[] = {"x", "y", "z"};
-static const PyGLCommand pygl_GLES1_glVertex3bOES_info = {"glVertex3bOES", "glVertex3bOES(x, y, z) -> None", "($module, x, y, z, /)", pygl_GLES1_glVertex3bOES_args, "GLES1_OES_byte_coordinates", "", 3, 3551, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glVertex3bOES_info = {
+    .name = "glVertex3bOES",
+    .doc = "glVertex3bOES(x, y, z) -> None",
+    .text_signature = "($module, x, y, z, /)",
+    .arg_names = pygl_GLES1_glVertex3bOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3551,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glVertex3bOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glVertex3bOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -8024,11 +14360,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glVertex3bvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glVertex3bvOES_info = {"glVertex3bvOES", "glVertex3bvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glVertex3bvOES_args, "GLES1_OES_byte_coordinates", "", 1, 3552, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glVertex3bvOES_info = {
+    .name = "glVertex3bvOES",
+    .doc = "glVertex3bvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glVertex3bvOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3552,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glVertex3bvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glVertex3bvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -8044,11 +14396,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glVertex3xOES_args[] = {"x", "y"};
-static const PyGLCommand pygl_GLES1_glVertex3xOES_info = {"glVertex3xOES", "glVertex3xOES(x, y) -> None", "($module, x, y, /)", pygl_GLES1_glVertex3xOES_args, "GLES1_OES_fixed_point", "", 2, 3553, PYGL_API_GLES1, 0, 2, 0, 0};
+static const PyGLCommand pygl_GLES1_glVertex3xOES_info = {
+    .name = "glVertex3xOES",
+    .doc = "glVertex3xOES(x, y) -> None",
+    .text_signature = "($module, x, y, /)",
+    .arg_names = pygl_GLES1_glVertex3xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 2,
+    .slot = 3553,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 2,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glVertex3xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glVertex3xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(2);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -8062,11 +14430,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glVertex3xvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glVertex3xvOES_info = {"glVertex3xvOES", "glVertex3xvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glVertex3xvOES_args, "GLES1_OES_fixed_point", "", 1, 3554, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glVertex3xvOES_info = {
+    .name = "glVertex3xvOES",
+    .doc = "glVertex3xvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glVertex3xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3554,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glVertex3xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glVertex3xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -8082,11 +14466,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glVertex4bOES_args[] = {"x", "y", "z", "w"};
-static const PyGLCommand pygl_GLES1_glVertex4bOES_info = {"glVertex4bOES", "glVertex4bOES(x, y, z, w) -> None", "($module, x, y, z, w, /)", pygl_GLES1_glVertex4bOES_args, "GLES1_OES_byte_coordinates", "", 4, 3555, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glVertex4bOES_info = {
+    .name = "glVertex4bOES",
+    .doc = "glVertex4bOES(x, y, z, w) -> None",
+    .text_signature = "($module, x, y, z, w, /)",
+    .arg_names = pygl_GLES1_glVertex4bOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3555,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glVertex4bOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glVertex4bOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -8102,11 +14502,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glVertex4bvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glVertex4bvOES_info = {"glVertex4bvOES", "glVertex4bvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glVertex4bvOES_args, "GLES1_OES_byte_coordinates", "", 1, 3556, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glVertex4bvOES_info = {
+    .name = "glVertex4bvOES",
+    .doc = "glVertex4bvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glVertex4bvOES_args,
+    .extension = "GLES1_OES_byte_coordinates",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3556,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glVertex4bvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glVertex4bvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -8122,11 +14538,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glVertex4xOES_args[] = {"x", "y", "z"};
-static const PyGLCommand pygl_GLES1_glVertex4xOES_info = {"glVertex4xOES", "glVertex4xOES(x, y, z) -> None", "($module, x, y, z, /)", pygl_GLES1_glVertex4xOES_args, "GLES1_OES_fixed_point", "", 3, 3557, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glVertex4xOES_info = {
+    .name = "glVertex4xOES",
+    .doc = "glVertex4xOES(x, y, z) -> None",
+    .text_signature = "($module, x, y, z, /)",
+    .arg_names = pygl_GLES1_glVertex4xOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3557,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glVertex4xOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glVertex4xOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -8141,11 +14573,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glVertex4xvOES_args[] = {"coords"};
-static const PyGLCommand pygl_GLES1_glVertex4xvOES_info = {"glVertex4xvOES", "glVertex4xvOES(coords) -> None", "($module, coords, /)", pygl_GLES1_glVertex4xvOES_args, "GLES1_OES_fixed_point", "", 1, 3558, PYGL_API_GLES1, 0, 1, 0, 0};
+static const PyGLCommand pygl_GLES1_glVertex4xvOES_info = {
+    .name = "glVertex4xvOES",
+    .doc = "glVertex4xvOES(coords) -> None",
+    .text_signature = "($module, coords, /)",
+    .arg_names = pygl_GLES1_glVertex4xvOES_args,
+    .extension = "GLES1_OES_fixed_point",
+    .alternates = "",
+    .arg_count = 1,
+    .slot = 3558,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 1,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glVertex4xvOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glVertex4xvOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(1);
     PYGL_FRAME(1);
     PYGL_CONV_OK();
@@ -8161,11 +14609,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glVertexPointer_args[] = {"size", "type", "stride", "pointer"};
-static const PyGLCommand pygl_GLES1_glVertexPointer_info = {"glVertexPointer", "glVertexPointer(size, type, stride, pointer) -> None", "($module, size, type, stride, pointer, /)", pygl_GLES1_glVertexPointer_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3559, PYGL_API_GLES1, 0, 4, 0, 1};
+static const PyGLCommand pygl_GLES1_glVertexPointer_info = {
+    .name = "glVertexPointer",
+    .doc = "glVertexPointer(size, type, stride, pointer) -> None",
+    .text_signature = "($module, size, type, stride, pointer, /)",
+    .arg_names = pygl_GLES1_glVertexPointer_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3559,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 1,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glVertexPointer(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glVertexPointer(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_I(0, size);
@@ -8184,11 +14648,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glViewport_args[] = {"x", "y", "width", "height"};
-static const PyGLCommand pygl_GLES1_glViewport_info = {"glViewport", "glViewport(x, y, width, height) -> None", "($module, x, y, width, height, /)", pygl_GLES1_glViewport_args, "GLES1_VERSION_GLES1_1_0", "", 4, 3560, PYGL_API_GLES1, 0, 4, 0, 0};
+static const PyGLCommand pygl_GLES1_glViewport_info = {
+    .name = "glViewport",
+    .doc = "glViewport(x, y, width, height) -> None",
+    .text_signature = "($module, x, y, width, height, /)",
+    .arg_names = pygl_GLES1_glViewport_args,
+    .extension = "GLES1_VERSION_GLES1_1_0",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3560,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glViewport(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glViewport(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_I(0, x);
     PYGL_I(1, y);
@@ -8204,11 +14684,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glWaitSyncAPPLE_args[] = {"sync", "flags", "timeout"};
-static const PyGLCommand pygl_GLES1_glWaitSyncAPPLE_info = {"glWaitSyncAPPLE", "glWaitSyncAPPLE(sync, flags, timeout) -> None", "($module, sync, flags, timeout, /)", pygl_GLES1_glWaitSyncAPPLE_args, "GLES1_APPLE_sync", "", 3, 3561, PYGL_API_GLES1, 0, 3, 0, 0};
+static const PyGLCommand pygl_GLES1_glWaitSyncAPPLE_info = {
+    .name = "glWaitSyncAPPLE",
+    .doc = "glWaitSyncAPPLE(sync, flags, timeout) -> None",
+    .text_signature = "($module, sync, flags, timeout, /)",
+    .arg_names = pygl_GLES1_glWaitSyncAPPLE_args,
+    .extension = "GLES1_APPLE_sync",
+    .alternates = "",
+    .arg_count = 3,
+    .slot = 3561,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 3,
+    .return_kind = 0,
+    .hand_written = 0,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glWaitSyncAPPLE(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glWaitSyncAPPLE(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(3);
     PYGL_OPAQUE(0, sync);
     PYGL_U(1, flags);
@@ -8223,11 +14719,27 @@ _fail:
 
 
 static const char *const pygl_GLES1_glWeightPointerOES_args[] = {"size", "type", "stride", "pointer"};
-static const PyGLCommand pygl_GLES1_glWeightPointerOES_info = {"glWeightPointerOES", "glWeightPointerOES(size, type, stride, pointer) -> None", "($module, size, type, stride, pointer, /)", pygl_GLES1_glWeightPointerOES_args, "GLES1_OES_matrix_palette", "", 4, 3562, PYGL_API_GLES1, 0, 4, 0, 1};
+static const PyGLCommand pygl_GLES1_glWeightPointerOES_info = {
+    .name = "glWeightPointerOES",
+    .doc = "glWeightPointerOES(size, type, stride, pointer) -> None",
+    .text_signature = "($module, size, type, stride, pointer, /)",
+    .arg_names = pygl_GLES1_glWeightPointerOES_args,
+    .extension = "GLES1_OES_matrix_palette",
+    .alternates = "",
+    .arg_count = 4,
+    .slot = 3562,
+    .api = PYGL_API_GLES1,
+    .deprecated = 0,
+    .required_args = 4,
+    .return_kind = 0,
+    .hand_written = 1,
+    .needs_context = 1,
+};
 
 static PyObject *
-pygl_GLES1_glWeightPointerOES(GLProc *self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
+pygl_GLES1_glWeightPointerOES(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject *_kwnames)
 {
+    GLProc *self = (GLProc *)_self;
     PYGL_ARITY(4);
     PYGL_FRAME(1);
     PYGL_I(0, size);

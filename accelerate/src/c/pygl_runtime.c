@@ -29,7 +29,6 @@ static PyObject *pygl_ctypes_pointer = NULL;
 
 static Py_ssize_t pygl_command_count = 0;
 static int pygl_error_slot = -1;
-static int pygl_strict_context = 0;
 static int pygl_array_size_checking = 1;
 int pygl_context_checking = 0;
 int pygl_context_tracking = PYGL_TRACK_NOTIFY;
@@ -126,6 +125,10 @@ static PyGLDispatch *pygl_table_new(void *handle)
     return table;
 }
 
+/* Retained for module teardown: nothing frees a table during the process's
+ * life any more, because a forgotten one may still be pointed at. */
+static void pygl_table_free(PyGLDispatch *table) __attribute__((unused));
+
 static void pygl_table_free(PyGLDispatch *table)
 {
     PyMem_Free(table->slots);
@@ -151,6 +154,10 @@ static PyGLDispatch *pygl_table_for(void *handle)
     if (table != NULL) {
         table->next = pygl_tables;
         pygl_tables = table;
+    } else {
+        /* Out of memory.  Returning the no-context table would answer "no
+         * context is current", which is wrong rather than merely unhelpful. */
+        PyErr_NoMemory();
     }
     PyThread_release_lock(pygl_tables_lock);
     return table == NULL ? &pygl_null_table : table;
@@ -236,18 +243,7 @@ static void pygl_sync_context_fast(void)
  * same exemptions the ctypes path's context check applies. */
 static int pygl_needs_context(const PyGLCommand *command)
 {
-    const char *name = command->name;
-    if (command->api == PYGL_API_GLX || command->api == PYGL_API_WGL ||
-        command->api == PYGL_API_EGL) {
-        /* The window-system APIs are how a context is made in the first place,
-         * so they are meaningful with none current. */
-        return 0;
-    }
-    if (strcmp(name, "glGetString") == 0 || strcmp(name, "glGetStringi") == 0 ||
-        strcmp(name, "glGetIntegerv") == 0 || strcmp(name, "glGetError") == 0) {
-        return 0;
-    }
-    return 1;
+    return command->needs_context;
 }
 
 void *pygl_slot_slow(GLProc *self)
@@ -503,6 +499,13 @@ int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs)
                                  pygl_api_name(self->info->api));
     Py_XDECREF(tuple);
     Py_XDECREF(result);
+    if (!PyErr_Occurred()) {
+        /* raise_gl_error is supposed to raise.  Returning -1 with nothing set
+         * would surface much later as a SystemError about a function that
+         * "returned a result with an exception set" -- or worse, be missed. */
+        PyErr_Format(pygl_null_function_error,
+                     "%s failed with GL error 0x%X", self->info->name, code);
+    }
     return -1;
 }
 
@@ -554,6 +557,12 @@ void *pygl_pointer_slow(PyObject *object)
         return NULL;
     }
     value = PyLong_AsUnsignedLongLong(number);
+    if (value == (unsigned long long)-1 && PyErr_Occurred()) {
+        /* Without this the caller receives (void *)-1, and its own test --
+         * `address == NULL && PyErr_Occurred()` -- lets it straight through. */
+        Py_DECREF(number);
+        return NULL;
+    }
     Py_DECREF(number);
     return (void *)(uintptr_t)value;
 }
@@ -1206,6 +1215,17 @@ int pygl_string_array(GLProc *self, PyObject *object, Py_ssize_t index,
     if (list == NULL) {
         return -1;
     }
+    /* The contract with support.string_list is internal, which is a reason to
+     * assert it rather than to assume it: PyList_GET_SIZE and
+     * PyBytes_AS_STRING are unchecked macros, so a wrong return type here is a
+     * crash rather than a TypeError. */
+    if (!PyList_Check(list)) {
+        PyErr_Format(PyExc_SystemError,
+                     "%s: string_list returned %s, not a list",
+                     self->info->name, Py_TYPE(list)->tp_name);
+        Py_DECREF(list);
+        return -1;
+    }
     count = PyList_GET_SIZE(list);
     if (count == 0) {
         out->owner = list;
@@ -1218,7 +1238,16 @@ int pygl_string_array(GLProc *self, PyObject *object, Py_ssize_t index,
         return -1;
     }
     for (position = 0; position < count; position++) {
-        entries[position] = PyBytes_AS_STRING(PyList_GET_ITEM(list, position));
+        PyObject *item = PyList_GET_ITEM(list, position);
+        if (!PyBytes_Check(item)) {
+            PyErr_Format(PyExc_SystemError,
+                         "%s: string_list item %zd is %s, not bytes",
+                         self->info->name, position, Py_TYPE(item)->tp_name);
+            PyMem_Free(entries);
+            Py_DECREF(list);
+            return -1;
+        }
+        entries[position] = PyBytes_AS_STRING(item);
     }
     out->owner = list;
     out->block = entries;
@@ -1980,7 +2009,6 @@ static PyObject *pygl_py_set_error_checking(PyObject *module, PyObject *args)
 {
     PyObject *target = Py_None;
     int enable = 1;
-    Py_ssize_t index;
     (void)module;
     if (!PyArg_ParseTuple(args, "p|O", &enable, &target)) {
         return NULL;
@@ -2040,7 +2068,7 @@ static PyObject *pygl_py_configure(PyObject *module, PyObject *args, PyObject *k
     Py_XSETREF(pygl_array_types, Py_NewRef(array_types));
     pygl_error_slot = error_slot;
     pygl_get_current_context = (void *(*)(void))(uintptr_t)getter;
-    pygl_strict_context = strict;
+    (void)strict;  /* accepted for compatibility; the layer does not read it */
     if (pygl_default_flags) {
         Py_ssize_t index;
         PyGLDispatch *table;
@@ -2220,8 +2248,14 @@ static PyObject *pygl_py_module_contents(PyObject *module, PyObject *argument)
             PyList_SET_ITEM(commands, item, row);
         }
         for (item = 0; item < entry->reexport_count; item++) {
-            PyList_SET_ITEM(reexports, item,
-                            PyUnicode_FromString(entry->reexports[item]));
+            PyObject *name = PyUnicode_FromString(entry->reexports[item]);
+            if (name == NULL) {
+                Py_DECREF(enums);
+                Py_DECREF(commands);
+                Py_DECREF(reexports);
+                return NULL;
+            }
+            PyList_SET_ITEM(reexports, item, name);
         }
         result = Py_BuildValue("{s:s,s:N,s:N,s:N}", "extension", entry->extension,
                                "constants", enums, "commands", commands,

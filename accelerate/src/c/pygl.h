@@ -150,6 +150,11 @@ typedef struct {
      * customisation call that restates it then changes nothing, rather than
      * demoting the entry point to ctypes and undoing the work. */
     uint8_t hand_written;
+    /* Whether calling this without a current context is meaningless.  It is a
+     * property of the command, so the generator states it; working it out
+     * here cost four strcmps, and in verify mode that was on the per-call
+     * path. */
+    uint8_t needs_context;
 } PyGLCommand;
 
 /* ------------------------------------------------------------------ *
