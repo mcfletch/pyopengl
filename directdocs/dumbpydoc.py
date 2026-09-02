@@ -2,6 +2,12 @@
 """Extremely dumb replacement for pydoc"""
 from __future__ import absolute_import
 from __future__ import print_function
+import os
+# Before anything imports OpenGL: the dispatch is chosen once, when
+# OpenGL._configflags is first read, and the pages want the Python entry points
+# with their argument names and docstrings.  setdefault, so that a build asking
+# for the C implementation on the command line still gets it.
+os.environ.setdefault('PYOPENGL_DISPATCH', 'ctypes')
 from directdocs import model,references
 import OpenGL
 import six
@@ -21,6 +27,18 @@ from OpenGL import platform
 from . import dumbmarkup
 
 CythonMethod = type( platform.PLATFORM.GL.glGetString )
+
+# The entry-point type the C dispatch builds.  A build that documents the C
+# implementation finds every gl* name to be one of these, so a page set without
+# it is a page set with no functions in it.  Where that implementation is not
+# installed there is nothing to match, and isinstance reads a nested empty
+# tuple as exactly that.
+try:
+    from OpenGL._dispatch import _c as _dispatch_extension
+except ImportError:
+    GLProc = ()
+else:
+    GLProc = _dispatch_extension.GLProc
 
 import types,os,textwrap,glob,logging,pickle,inspect,shutil
 from genshi.template import TemplateLoader
@@ -43,6 +61,7 @@ class PyModule( object ):
         Lazy,
         CFunctionType,
         CythonMethod,
+        GLProc,
         #platform.PLATFORM.DEFAULT_FUNCTION_TYPE,
     )
     INTERESTING_TYPES = OPENGL_FUNCS + (
@@ -74,7 +93,13 @@ class PyModule( object ):
         return self.mod
     @property
     def is_package( self ):
-        base = os.path.splitext(os.path.basename( self.mod.__file__ ))[0]
+        # A module need not have a __file__ at all: the ones under OpenGL.raw
+        # are built from the shipped declaration tables, and a module with no
+        # file is a leaf rather than a package.
+        path = getattr( self.mod, '__file__', None )
+        if not path:
+            return False
+        base = os.path.splitext(os.path.basename( path ))[0]
         if base == "__init__":
             return True
         return False
