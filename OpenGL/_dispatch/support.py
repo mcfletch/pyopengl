@@ -115,10 +115,15 @@ def as_pointer(value):
     referent = getattr(value, '_obj', None)
     if referent is not None:
         return ctypes.addressof(referent)
-    for attribute in ('value', '_as_parameter_'):
-        inner = getattr(value, attribute, None)
-        if isinstance(inner, int):
-            return inner
+    # A c_void_p's value *is* an address; a c_int's is not.  Reading `.value`
+    # off anything that has one turns ctypes.c_int(1234) into address 1234 --
+    # so ask what the object is rather than what attributes it happens to
+    # carry.  Opaque handle classes are pointer subclasses and answer here too.
+    if isinstance(value, (ctypes.c_void_p, ctypes._Pointer)):
+        return ctypes.cast(value, ctypes.c_void_p).value or 0
+    inner = getattr(value, '_as_parameter_', None)
+    if isinstance(inner, int):
+        return inner
     try:
         return ctypes.cast(value, ctypes.c_void_p).value or 0
     except (ctypes.ArgumentError, TypeError):

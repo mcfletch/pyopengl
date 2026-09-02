@@ -50,12 +50,25 @@ Regenerate with:  python src/regenerate_c.py
 
 from __future__ import annotations
 
+import ctypes
+import sys
 from collections.abc import Sequence
 from typing import Any, TypeAlias
 
+if sys.version_info >= (3, 12):
+    from collections.abc import Buffer
+else:  # PEP 688 arrived in 3.12; before it there is no way to say "buffer".
+    from typing_extensions import Buffer
+
 #: Anything the layer accepts where an array of this element type is wanted.
 #: A matching buffer is used directly and anything else is converted, so the
-#: alias is deliberately wide.
+#: alias is wide -- but it does not include Any, because ``Any | X`` *is*
+#: ``Any`` to a type checker and the union would be absorbed, leaving every
+#: array parameter in these stubs unchecked while looking as though it were
+#: not.  ``Buffer`` (PEP 688) is what lets a numpy array satisfy it: a numpy
+#: array is neither a Sequence nor a memoryview to a type checker, and without
+#: it every numpy call in every program would be flagged -- a false positive
+#: being worse than the missed error it was meant to catch.
 %(aliases)s
 '''
 
@@ -83,11 +96,11 @@ def _alias_declarations():
     ]
     for alias in sorted(set(ARRAY_ALIASES.values())):
         lines.append(
-            '%s: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None'
+            '%s: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None'
             % (alias,)
         )
     lines.append(
-        'AnyArray: TypeAlias = Any | Sequence[Any] | bytes | memoryview | None'
+        'AnyArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None'
     )
     lines.append('')
     lines.append('# What is *returned*.  Which concrete type depends on the')
@@ -95,8 +108,12 @@ def _alias_declarations():
     lines.append('# records the element type and the alias stays open.  It must')
     lines.append('# not include None: an output array is always an array.')
     for alias in sorted(set(ARRAY_ALIASES.values())):
-        lines.append('%sResult: TypeAlias = Any' % (alias,))
-    lines.append('AnyArrayResult: TypeAlias = Any')
+        # A result is whatever the array handler produced -- a numpy array
+        # where numpy is installed, a ctypes array otherwise -- so it cannot
+        # be named precisely.  Sequence[Any] says the one thing that is always
+        # true and that a caller acts on: it has a length and it indexes.
+        lines.append('%sResult: TypeAlias = Sequence[Any]' % (alias,))
+    lines.append('AnyArrayResult: TypeAlias = Sequence[Any]')
     return '\n'.join(lines)
 
 
