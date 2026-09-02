@@ -95,17 +95,16 @@ def _alias_declarations():
         'AnyArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None'
     )
     lines.append('')
-    lines.append('# What is *returned*.  Which concrete type depends on the')
-    lines.append('# configured array module -- numpy by default -- so the name')
-    lines.append('# records the element type and the alias stays open.  It must')
-    lines.append('# not include None: an output array is always an array.')
+    lines.append('# What is *returned*.  Any, because the shape of the result')
+    lines.append('# follows the *value* of an argument rather than its type:')
+    lines.append('# glGenTextures(1) hands back a scalar and glGenTextures(3)')
+    lines.append('# an array, and neither is a Sequence -- a numpy array does')
+    lines.append('# not register as one.  Naming a container here makes the')
+    lines.append('# ordinary call, whose result goes straight into the next')
+    lines.append('# entry point as an int, an error in the caller\'s report.')
     for alias in sorted(set(ARRAY_ALIASES.values())):
-        # A result is whatever the array handler produced -- a numpy array
-        # where numpy is installed, a ctypes array otherwise -- so it cannot
-        # be named precisely.  Sequence[Any] says the one thing that is always
-        # true and that a caller acts on: it has a length and it indexes.
-        lines.append('%sResult: TypeAlias = Sequence[Any]' % (alias,))
-    lines.append('AnyArrayResult: TypeAlias = Sequence[Any]')
+        lines.append('%sResult: TypeAlias = Any' % (alias,))
+    lines.append('AnyArrayResult: TypeAlias = Any')
     return '\n'.join(lines)
 
 

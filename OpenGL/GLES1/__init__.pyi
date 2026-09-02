@@ -31,21 +31,24 @@ UIntArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None
 UShortArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None
 AnyArray: TypeAlias = Sequence[Any] | Buffer | ctypes._CData | None
 
-# What is *returned*.  Which concrete type depends on the
-# configured array module -- numpy by default -- so the name
-# records the element type and the alias stays open.  It must
-# not include None: an output array is always an array.
-ByteArrayResult: TypeAlias = Sequence[Any]
-DoubleArrayResult: TypeAlias = Sequence[Any]
-FloatArrayResult: TypeAlias = Sequence[Any]
-Int64ArrayResult: TypeAlias = Sequence[Any]
-IntArrayResult: TypeAlias = Sequence[Any]
-ShortArrayResult: TypeAlias = Sequence[Any]
-UByteArrayResult: TypeAlias = Sequence[Any]
-UInt64ArrayResult: TypeAlias = Sequence[Any]
-UIntArrayResult: TypeAlias = Sequence[Any]
-UShortArrayResult: TypeAlias = Sequence[Any]
-AnyArrayResult: TypeAlias = Sequence[Any]
+# What is *returned*.  Any, because the shape of the result
+# follows the *value* of an argument rather than its type:
+# glGenTextures(1) hands back a scalar and glGenTextures(3)
+# an array, and neither is a Sequence -- a numpy array does
+# not register as one.  Naming a container here makes the
+# ordinary call, whose result goes straight into the next
+# entry point as an int, an error in the caller's report.
+ByteArrayResult: TypeAlias = Any
+DoubleArrayResult: TypeAlias = Any
+FloatArrayResult: TypeAlias = Any
+Int64ArrayResult: TypeAlias = Any
+IntArrayResult: TypeAlias = Any
+ShortArrayResult: TypeAlias = Any
+UByteArrayResult: TypeAlias = Any
+UInt64ArrayResult: TypeAlias = Any
+UIntArrayResult: TypeAlias = Any
+UShortArrayResult: TypeAlias = Any
+AnyArrayResult: TypeAlias = Any
 
 # The enums.  They are Constant instances, which subclass int.
 GL_3DC_XY_AMD: int
