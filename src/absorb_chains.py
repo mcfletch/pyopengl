@@ -36,9 +36,12 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
-#: The calls the annotation table expresses.  ``setOutput`` is not here yet:
-#: an output needs the size object, the pname argument and the pass-in flag,
-#: which is more than a size spec says.
+#: The calls the annotation table expresses.  ``customise_entry`` rebuilds
+#: ``setOutput`` as well now, and ``_statable`` below refuses the image sizes it
+#: cannot state -- but absorbing them waits on the question
+#: ``src/check_absorption.py`` raised: rewriting a module applies the rebuild
+#: rule to *every* command in it, including ones whose chain said nothing, and
+#: on 123 of 2,273 that adds an array conversion the file did not have.
 ABSORBABLE = frozenset(['setInputArraySize'])
 
 _DEFINE = re.compile(
@@ -60,7 +63,26 @@ def _chain_calls(node):
     return names
 
 
-def classify(text):
+def _statable(name, chain_names):
+    """Whether ``customise_entry`` can rebuild what this chain says.
+
+    ``setOutput`` with an image size is the case it cannot: the size comes from
+    the format and type arguments together rather than from one value.  A
+    module holding one keeps its chain, because dropping it would leave a
+    wrapper that looks complete and is not.
+    """
+    if 'setOutput' not in chain_names:
+        return True
+    from OpenGL import _declarations
+
+    annotations = _declarations.annotations()
+    entry = annotations.get(name)
+    if entry is None:
+        return False
+    return _declarations._output_parameters(entry.get('parameters', {})) is not None
+
+
+def classify(text, api='GL'):
     """``('absorbable', lines)``, or a reason the module is left alone."""
     if '_define(globals()' not in text:
         return 'not a generated friendly module', ()
@@ -86,7 +108,11 @@ def classify(text):
                 continue
             names = set(_chain_calls(node.value))
             setters = {name for name in names if name.startswith('set')}
-            if setters and setters <= ABSORBABLE:
+            target = node.targets[0]
+            command = getattr(target, 'id', None)
+            if setters and setters <= ABSORBABLE and command:
+                if not _statable('%s.%s' % (api, command), setters):
+                    return 'has a size the table cannot state', ()
                 chain_lines.append((node.lineno, node.end_lineno))
                 calls |= setters
                 continue
@@ -116,6 +142,12 @@ def rewrite(text, chain_lines):
     )
 
 
+def _api_of(path, root):
+    """``GL``, ``GLES2``, ``EGL`` -- the first directory under the package."""
+    relative = os.path.relpath(path, root).split(os.sep)
+    return relative[0] if len(relative) > 1 else 'GL'
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--write', action='store_true')
@@ -134,7 +166,7 @@ def main(argv=None):
             path = os.path.join(directory, name)
             with open(path, 'r', encoding='utf-8') as handle:
                 text = handle.read()
-            verdict, chain_lines = classify(text)
+            verdict, chain_lines = classify(text, _api_of(path, options.root))
             counts[verdict] = counts.get(verdict, 0) + 1
             if verdict != 'absorbable':
                 continue

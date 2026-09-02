@@ -152,6 +152,15 @@ def customise_entry(entry, api, name, declared):
     ``ctypes.c_void_p``, because it may be a client pointer or a buffer offset,
     so there the type says nothing and only the table does.
 
+    An **output** parameter is rebuilt from the same table.  What ``setOutput``
+    needs beyond a size is the argument whose value sizes it and whether a
+    caller may pass the array in instead; the table holds the first and the
+    second is ``True`` for every one of the 688 calls in the tree, so it is not
+    recorded per entry.  Three of the four size kinds are expressed here --
+    a fixed count, a count read from another argument, and the ``_glgets``
+    table.  An **image** size is not: it is computed from the format and type
+    arguments together, and the modules that need one keep their own chain.
+
     A ``GLProc`` is returned untouched: the C already performs all of this,
     which is what ``implements_friendly`` records.
     """
@@ -161,11 +170,18 @@ def customise_entry(entry, api, name, declared):
         return entry
     from OpenGL import wrapper
 
+    outputs = _output_parameters(parameters)
+    if outputs is None:
+        # A size this rule cannot state.  Rebuilding the inputs and leaving the
+        # outputs would be worse than leaving the module its chain, because the
+        # result would be a wrapper that looks complete and is not.
+        return entry
+
     built = entry
     for parameter, kind in declared:
         bits = parameters.get(parameter, {})
         if bits.get('out'):
-            continue          # an output is the friendly module's business
+            continue          # rebuilt below, in the order the chain used
         size = bits.get('size')
         if size is None and kind != 'array':
             continue
@@ -176,7 +192,69 @@ def customise_entry(entry, api, name, declared):
         if built is entry:
             built = wrapper.wrapper(entry)
         built = built.setInputArraySize(parameter, length)
+
+    for _order, parameter, size in outputs:
+        if built is entry:
+            built = wrapper.wrapper(entry)
+        kind = size['kind']
+        if kind == 'fixed':
+            built = built.setOutput(
+                parameter, size=(size['count'],), orPassIn=True
+            )
+        elif kind == 'from-argument':
+            built = built.setOutput(
+                parameter,
+                size=_scaled_by(size.get('divisor', 1)),
+                pnameArg=size['argument'],
+                orPassIn=True,
+            )
+        else:
+            glgets = _import('OpenGL.raw.%s._glgets' % (api,))
+            built = built.setOutput(
+                parameter,
+                size=glgets._glget_size_mapping,
+                pnameArg=size['pname'],
+                orPassIn=True,
+            )
     return built
+
+
+#: The size kinds the rule states.  ``image`` is absent deliberately: an image
+#: size comes from the format and type arguments together rather than from one
+#: value, and the modules that need one keep their chain.
+_OUTPUT_SIZE_KINDS = frozenset(['fixed', 'from-argument', 'glget-table'])
+
+
+def _output_parameters(parameters):
+    """``[(order, name, size), ...]``, or ``None`` if one cannot be stated.
+
+    The order is the one the chain applied them in, which the table records
+    because ``setOutput`` builds the Python signature and the signature is
+    ordered.
+    """
+    outputs = []
+    for parameter, bits in parameters.items():
+        if not bits.get('out'):
+            continue
+        size = bits.get('size')
+        if size is None or size.get('kind') not in _OUTPUT_SIZE_KINDS:
+            return None
+        outputs.append((bits.get('output_order', 0), parameter, size))
+    outputs.sort(key=lambda item: item[0])
+    return outputs
+
+
+def _scaled_by(divisor):
+    """``setOutput``'s size function: the named argument's value, over N."""
+    if divisor == 1:
+        return lambda value: (value,)
+    return lambda value: (value // divisor,)
+
+
+def _import(name):
+    import importlib
+
+    return importlib.import_module(name)
 
 
 def define(namespace, module_name, customise=False):
