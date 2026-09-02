@@ -1,9 +1,16 @@
 name: Build PyOpenGL-accelerate wheels with manylinux
 
+# Both branches build the same set of distributions, and only master publishes
+# them.  A push to develop leaves the sdists and wheels as run artifacts, so a
+# release candidate can be downloaded and tested on each platform before
+# anything reaches an index.
+
 on:
   push:
     branches:
       - "master"
+      - "develop"
+  workflow_dispatch:
 
 jobs:
   tarballs:
@@ -71,19 +78,8 @@ jobs:
         with:
           platforms: all
 
-      - name: Build wheels (develop)
+      - name: Build wheels
         uses: pypa/cibuildwheel@v3.4.1
-        if: ${{ github.ref == 'refs/heads/develop' }}
-        with:
-          package-dir: "./accelerate"
-          output-dir: "./accelerate/dist"
-        env:
-          BUILD_EXTENSION: yes
-          CIBW_SKIP: "pp* cp36-* cp37-* cp38-*"
-
-      - name: Build wheels (master)
-        uses: pypa/cibuildwheel@v3.4.1
-        if: ${{ github.ref == 'refs/heads/master' }}
         with:
           package-dir: "./accelerate"
           output-dir: "./accelerate/dist"
@@ -98,13 +94,14 @@ jobs:
           path: accelerate/dist/*.whl
 
   pypi-publish-accel:
-    name: Upload Accelerate ${{matrix.repo}}
+    name: Upload Accelerate to PyPI
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/master' }}
+    # Only a push to master publishes; on develop, and on any manual run, the
+    # distributions stay as artifacts.
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     needs:
       - wheels
       - tarballs
-    # TODO: should be choosing the repo URL based on master/develop
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
       id-token: write
@@ -144,13 +141,14 @@ jobs:
           packages-dir: "dist"
 
   pypi-publish-core:
-    name: Upload Core to ${{matrix.repo}}
+    name: Upload Core to PyPI
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/master' }}
+    # Only a push to master publishes; on develop, and on any manual run, the
+    # distributions stay as artifacts.
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     needs:
       - wheels
       - tarballs
-    # TODO: should be choosing the repo URL based on master/develop
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
       id-token: write
