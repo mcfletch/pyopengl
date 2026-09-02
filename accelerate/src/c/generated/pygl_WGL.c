@@ -39,6 +39,8 @@ pygl_WGL_ChoosePixelFormat(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -79,6 +81,8 @@ pygl_WGL_DescribePixelFormat(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -118,6 +122,8 @@ pygl_WGL_GetEnhMetaFilePixelFormat(PyObject *_self, PyObject *const *_a, size_t 
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -152,6 +158,8 @@ pygl_WGL_GetPixelFormat(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_R(_result, int, (void *), (hdc));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -190,6 +198,8 @@ pygl_WGL_SetPixelFormat(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -224,6 +234,8 @@ pygl_WGL_SwapBuffers(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObj
     PYGL_CALL_R(_result, int, (void *), (hdc));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -260,6 +272,8 @@ pygl_WGL_wglAllocateMemoryNV(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_R(_result, void *, (int, float, float, float), (size, readfreq, writefreq, priority));
     PYGL_CHECK();
     return pygl_address_or_none(_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -300,6 +314,8 @@ pygl_WGL_wglAssociateImageBufferEventsI3D(PyObject *_self, PyObject *const *_a, 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -332,6 +348,8 @@ pygl_WGL_wglBeginFrameTrackingI3D(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_CALL_R(_result, int, (void), ());
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -365,6 +383,8 @@ pygl_WGL_wglBindDisplayColorTableEXT(PyObject *_self, PyObject *const *_a, size_
     PYGL_CALL_R(_result, unsigned char, (unsigned short), (id));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -399,6 +419,8 @@ pygl_WGL_wglBindSwapBarrierNV(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_R(_result, int, (unsigned int, unsigned int), (group, barrier));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -433,6 +455,8 @@ pygl_WGL_wglBindTexImageARB(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, int, (void *, int), (hPbuffer, iBuffer));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -467,6 +491,8 @@ pygl_WGL_wglBindVideoCaptureDeviceNV(PyObject *_self, PyObject *const *_a, size_
     PYGL_CALL_R(_result, int, (unsigned int, void *), (uVideoSlot, hDevice));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -506,6 +532,8 @@ pygl_WGL_wglBindVideoDeviceNV(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -542,6 +570,8 @@ pygl_WGL_wglBindVideoImageNV(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_R(_result, int, (void *, void *, int), (hVideoDevice, hPbuffer, iVideoBuffer));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -585,6 +615,8 @@ pygl_WGL_wglBlitContextFramebufferAMD(PyObject *_self, PyObject *const *_a, size
     PYGL_CALL_R(_result, void *, (void *, int, int, int, int, int, int, int, int, unsigned int, unsigned int), (dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "VOID");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -626,6 +658,8 @@ pygl_WGL_wglChoosePixelFormatARB(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -668,6 +702,8 @@ pygl_WGL_wglChoosePixelFormatEXT(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -704,6 +740,8 @@ pygl_WGL_wglCopyContext(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_R(_result, int, (void *, void *, unsigned int), (hglrcSrc, hglrcDst, mask));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -753,6 +791,8 @@ pygl_WGL_wglCopyImageSubDataNV(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_R(_result, int, (void *, unsigned int, unsigned int, int, int, int, int, void *, unsigned int, unsigned int, int, int, int, int, int, int, int), (hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -789,6 +829,8 @@ pygl_WGL_wglCreateAffinityDCNV(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = pygl_opaque((void *)_result, "HDC");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -823,6 +865,8 @@ pygl_WGL_wglCreateAssociatedContextAMD(PyObject *_self, PyObject *const *_a, siz
     PYGL_CALL_R(_result, void *, (unsigned int), (id));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "HGLRC");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -861,6 +905,8 @@ pygl_WGL_wglCreateAssociatedContextAttribsAMD(PyObject *_self, PyObject *const *
     PyObject *_value = pygl_opaque((void *)_result, "HGLRC");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -897,6 +943,8 @@ pygl_WGL_wglCreateBufferRegionARB(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_CALL_R(_result, void *, (void *, int, unsigned int), (hDC, iLayerPlane, uType));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "HANDLE");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -930,6 +978,8 @@ pygl_WGL_wglCreateContext(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_CALL_R(_result, void *, (void *), (hDc));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "HGLRC");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -968,6 +1018,8 @@ pygl_WGL_wglCreateContextAttribsARB(PyObject *_self, PyObject *const *_a, size_t
     PyObject *_value = pygl_opaque((void *)_result, "HGLRC");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1002,6 +1054,8 @@ pygl_WGL_wglCreateDisplayColorTableEXT(PyObject *_self, PyObject *const *_a, siz
     PYGL_CALL_R(_result, unsigned char, (unsigned short), (id));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1037,6 +1091,8 @@ pygl_WGL_wglCreateImageBufferI3D(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_R(_result, void *, (void *, unsigned int, unsigned int), (hDC, dwSize, uFlags));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "LPVOID");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1071,6 +1127,8 @@ pygl_WGL_wglCreateLayerContext(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_R(_result, void *, (void *, int), (hDc, level));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "HGLRC");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1111,6 +1169,8 @@ pygl_WGL_wglCreatePbufferARB(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = pygl_opaque((void *)_result, "HPBUFFERARB");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1152,6 +1212,8 @@ pygl_WGL_wglCreatePbufferEXT(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = pygl_opaque((void *)_result, "HPBUFFEREXT");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1186,6 +1248,8 @@ pygl_WGL_wglDXCloseDeviceNV(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, int, (void *), (hDevice));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1224,6 +1288,8 @@ pygl_WGL_wglDXLockObjectsNV(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1259,6 +1325,8 @@ pygl_WGL_wglDXObjectAccessNV(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_R(_result, int, (void *, unsigned int), (hObject, access));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1295,6 +1363,8 @@ pygl_WGL_wglDXOpenDeviceNV(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PyObject *_value = pygl_opaque((void *)_result, "HANDLE");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1336,6 +1406,8 @@ pygl_WGL_wglDXRegisterObjectNV(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = pygl_opaque((void *)_result, "HANDLE");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1374,6 +1446,8 @@ pygl_WGL_wglDXSetResourceShareHandleNV(PyObject *_self, PyObject *const *_a, siz
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1413,6 +1487,8 @@ pygl_WGL_wglDXUnlockObjectsNV(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1448,6 +1524,8 @@ pygl_WGL_wglDXUnregisterObjectNV(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_R(_result, int, (void *, void *), (hDevice, hObject));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1482,6 +1560,8 @@ pygl_WGL_wglDelayBeforeSwapNV(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_R(_result, int, (void *, float), (hDC, seconds));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1515,6 +1595,8 @@ pygl_WGL_wglDeleteAssociatedContextAMD(PyObject *_self, PyObject *const *_a, siz
     PYGL_CALL_R(_result, int, (void *), (hglrc));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1548,6 +1630,8 @@ pygl_WGL_wglDeleteBufferRegionARB(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_CALL_R(_result, void *, (void *), (hRegion));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "VOID");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1581,6 +1665,8 @@ pygl_WGL_wglDeleteContext(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_CALL_R(_result, int, (void *), (oldContext));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1614,6 +1700,8 @@ pygl_WGL_wglDeleteDCNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyO
     PYGL_CALL_R(_result, int, (void *), (hdc));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1654,6 +1742,8 @@ pygl_WGL_wglDescribeLayerPlane(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1688,6 +1778,8 @@ pygl_WGL_wglDestroyDisplayColorTableEXT(PyObject *_self, PyObject *const *_a, si
     PYGL_CALL_R(_result, void *, (unsigned short), (id));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "VOID");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1722,6 +1814,8 @@ pygl_WGL_wglDestroyImageBufferI3D(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_CALL_R(_result, int, (void *, void *), (hDC, pAddress));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1755,6 +1849,8 @@ pygl_WGL_wglDestroyPbufferARB(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_R(_result, int, (void *), (hPbuffer));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1788,6 +1884,8 @@ pygl_WGL_wglDestroyPbufferEXT(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_R(_result, int, (void *), (hPbuffer));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1819,6 +1917,8 @@ pygl_WGL_wglDisableFrameLockI3D(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CALL_R(_result, int, (void), ());
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1852,6 +1952,8 @@ pygl_WGL_wglDisableGenlockI3D(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_R(_result, int, (void *), (hDC));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1883,6 +1985,8 @@ pygl_WGL_wglEnableFrameLockI3D(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_R(_result, int, (void), ());
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1916,6 +2020,8 @@ pygl_WGL_wglEnableGenlockI3D(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_R(_result, int, (void *), (hDC));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1947,6 +2053,8 @@ pygl_WGL_wglEndFrameTrackingI3D(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CALL_R(_result, int, (void), ());
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1982,6 +2090,8 @@ pygl_WGL_wglEnumGpuDevicesNV(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_R(_result, int, (void *, unsigned int, void *), (hGpu, iDeviceIndex, lpGpuDevice));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2020,6 +2130,8 @@ pygl_WGL_wglEnumGpusFromAffinityDCNV(PyObject *_self, PyObject *const *_a, size_
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2058,6 +2170,8 @@ pygl_WGL_wglEnumGpusNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyO
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2096,6 +2210,8 @@ pygl_WGL_wglEnumerateVideoCaptureDevicesNV(PyObject *_self, PyObject *const *_a,
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2134,6 +2250,8 @@ pygl_WGL_wglEnumerateVideoDevicesNV(PyObject *_self, PyObject *const *_a, size_t
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2170,6 +2288,8 @@ pygl_WGL_wglFreeMemoryNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2205,6 +2325,8 @@ pygl_WGL_wglGenlockSampleRateI3D(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_R(_result, int, (void *, unsigned int), (hDC, uRate));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2239,6 +2361,8 @@ pygl_WGL_wglGenlockSourceDelayI3D(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_CALL_R(_result, int, (void *, unsigned int), (hDC, uDelay));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2273,6 +2397,8 @@ pygl_WGL_wglGenlockSourceEdgeI3D(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_R(_result, int, (void *, unsigned int), (hDC, uEdge));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2307,6 +2433,8 @@ pygl_WGL_wglGenlockSourceI3D(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_R(_result, int, (void *, unsigned int), (hDC, uSource));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2340,6 +2468,8 @@ pygl_WGL_wglGetContextGPUIDAMD(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_R(_result, unsigned int, (void *), (hglrc));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2371,6 +2501,8 @@ pygl_WGL_wglGetCurrentAssociatedContextAMD(PyObject *_self, PyObject *const *_a,
     PYGL_CALL_R(_result, void *, (void), ());
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "HGLRC");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2402,6 +2534,8 @@ pygl_WGL_wglGetCurrentContext(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_R(_result, void *, (void), ());
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "HGLRC");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2433,6 +2567,8 @@ pygl_WGL_wglGetCurrentDC(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_CALL_R(_result, void *, (void), ());
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "HDC");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2464,6 +2600,8 @@ pygl_WGL_wglGetCurrentReadDCARB(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CALL_R(_result, void *, (void), ());
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "HDC");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2495,6 +2633,8 @@ pygl_WGL_wglGetCurrentReadDCEXT(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CALL_R(_result, void *, (void), ());
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "HDC");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2533,6 +2673,8 @@ pygl_WGL_wglGetDigitalVideoParametersI3D(PyObject *_self, PyObject *const *_a, s
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2567,6 +2709,8 @@ pygl_WGL_wglGetExtensionsStringARB(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_CALL_R(_result, void *, (void *), (hdc));
     PYGL_CHECK();
     return pygl_bytes_or_none((const char *)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2598,6 +2742,8 @@ pygl_WGL_wglGetExtensionsStringEXT(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_CALL_R(_result, void *, (void), ());
     PYGL_CHECK();
     return pygl_bytes_or_none((const char *)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2634,6 +2780,8 @@ pygl_WGL_wglGetFrameUsageI3D(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2672,6 +2820,8 @@ pygl_WGL_wglGetGPUIDsAMD(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2713,6 +2863,8 @@ pygl_WGL_wglGetGPUInfoAMD(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2754,6 +2906,8 @@ pygl_WGL_wglGetGammaTableI3D(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2793,6 +2947,8 @@ pygl_WGL_wglGetGammaTableParametersI3D(PyObject *_self, PyObject *const *_a, siz
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2831,6 +2987,8 @@ pygl_WGL_wglGetGenlockSampleRateI3D(PyObject *_self, PyObject *const *_a, size_t
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2869,6 +3027,8 @@ pygl_WGL_wglGetGenlockSourceDelayI3D(PyObject *_self, PyObject *const *_a, size_
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2907,6 +3067,8 @@ pygl_WGL_wglGetGenlockSourceEdgeI3D(PyObject *_self, PyObject *const *_a, size_t
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2945,6 +3107,8 @@ pygl_WGL_wglGetGenlockSourceI3D(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2986,6 +3150,8 @@ pygl_WGL_wglGetLayerPaletteEntries(PyObject *_self, PyObject *const *_a, size_t 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3025,6 +3191,8 @@ pygl_WGL_wglGetMscRateOML(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3059,6 +3227,8 @@ pygl_WGL_wglGetPbufferDCARB(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, void *, (void *), (hPbuffer));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "HDC");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3092,6 +3262,8 @@ pygl_WGL_wglGetPbufferDCEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, void *, (void *), (hPbuffer));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "HDC");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3133,6 +3305,8 @@ pygl_WGL_wglGetPixelFormatAttribfvARB(PyObject *_self, PyObject *const *_a, size
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3175,6 +3349,8 @@ pygl_WGL_wglGetPixelFormatAttribfvEXT(PyObject *_self, PyObject *const *_a, size
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3217,6 +3393,8 @@ pygl_WGL_wglGetPixelFormatAttribivARB(PyObject *_self, PyObject *const *_a, size
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3259,6 +3437,8 @@ pygl_WGL_wglGetPixelFormatAttribivEXT(PyObject *_self, PyObject *const *_a, size
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3293,6 +3473,8 @@ pygl_WGL_wglGetProcAddress(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CALL_R(_result, void *, (void *), (lpszProc));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "PROC");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3324,6 +3506,8 @@ pygl_WGL_wglGetSwapIntervalEXT(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_R(_result, int, (void), ());
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3363,6 +3547,8 @@ pygl_WGL_wglGetSyncValuesOML(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3402,6 +3588,8 @@ pygl_WGL_wglGetVideoDeviceNV(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3441,6 +3629,8 @@ pygl_WGL_wglGetVideoInfoNV(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3478,6 +3668,8 @@ pygl_WGL_wglIsEnabledFrameLockI3D(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3516,6 +3708,8 @@ pygl_WGL_wglIsEnabledGenlockI3D(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3551,6 +3745,8 @@ pygl_WGL_wglJoinSwapGroupNV(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, int, (void *, unsigned int), (hDC, group));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3588,6 +3784,8 @@ pygl_WGL_wglLoadDisplayColorTableEXT(PyObject *_self, PyObject *const *_a, size_
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3623,6 +3821,8 @@ pygl_WGL_wglLockVideoCaptureDeviceNV(PyObject *_self, PyObject *const *_a, size_
     PYGL_CALL_R(_result, int, (void *, void *), (hDc, hDevice));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3656,6 +3856,8 @@ pygl_WGL_wglMakeAssociatedContextCurrentAMD(PyObject *_self, PyObject *const *_a
     PYGL_CALL_R(_result, int, (void *), (hglrc));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3691,6 +3893,8 @@ pygl_WGL_wglMakeContextCurrentARB(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_CALL_R(_result, int, (void *, void *, void *), (hDrawDC, hReadDC, hglrc));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3726,6 +3930,8 @@ pygl_WGL_wglMakeContextCurrentEXT(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_CALL_R(_result, int, (void *, void *, void *), (hDrawDC, hReadDC, hglrc));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3760,6 +3966,8 @@ pygl_WGL_wglMakeCurrent(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_R(_result, int, (void *, void *), (hDc, newContext));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3797,6 +4005,8 @@ pygl_WGL_wglQueryCurrentContextNV(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3835,6 +4045,8 @@ pygl_WGL_wglQueryFrameCountNV(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3872,6 +4084,8 @@ pygl_WGL_wglQueryFrameLockMasterI3D(PyObject *_self, PyObject *const *_a, size_t
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3911,6 +4125,8 @@ pygl_WGL_wglQueryFrameTrackingI3D(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3950,6 +4166,8 @@ pygl_WGL_wglQueryGenlockMaxSourceDelayI3D(PyObject *_self, PyObject *const *_a, 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3989,6 +4207,8 @@ pygl_WGL_wglQueryMaxSwapGroupsNV(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4028,6 +4248,8 @@ pygl_WGL_wglQueryPbufferARB(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4067,6 +4289,8 @@ pygl_WGL_wglQueryPbufferEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4106,6 +4330,8 @@ pygl_WGL_wglQuerySwapGroupNV(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4146,6 +4372,8 @@ pygl_WGL_wglQueryVideoCaptureDeviceNV(PyObject *_self, PyObject *const *_a, size
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4182,6 +4410,8 @@ pygl_WGL_wglRealizeLayerPalette(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CALL_R(_result, int, (void *, int, int), (hdc, iLayerPlane, bRealize));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4220,6 +4450,8 @@ pygl_WGL_wglReleaseImageBufferEventsI3D(PyObject *_self, PyObject *const *_a, si
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4255,6 +4487,8 @@ pygl_WGL_wglReleasePbufferDCARB(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CALL_R(_result, int, (void *, void *), (hPbuffer, hDC));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4289,6 +4523,8 @@ pygl_WGL_wglReleasePbufferDCEXT(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CALL_R(_result, int, (void *, void *), (hPbuffer, hDC));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4323,6 +4559,8 @@ pygl_WGL_wglReleaseTexImageARB(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_R(_result, int, (void *, int), (hPbuffer, iBuffer));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4357,6 +4595,8 @@ pygl_WGL_wglReleaseVideoCaptureDeviceNV(PyObject *_self, PyObject *const *_a, si
     PYGL_CALL_R(_result, int, (void *, void *), (hDc, hDevice));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4390,6 +4630,8 @@ pygl_WGL_wglReleaseVideoDeviceNV(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_R(_result, int, (void *), (hVideoDevice));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4424,6 +4666,8 @@ pygl_WGL_wglReleaseVideoImageNV(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CALL_R(_result, int, (void *, int), (hPbuffer, iVideoBuffer));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4457,6 +4701,8 @@ pygl_WGL_wglResetFrameCountNV(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_R(_result, int, (void *), (hDC));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4496,6 +4742,8 @@ pygl_WGL_wglRestoreBufferRegionARB(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_CALL_R(_result, int, (void *, int, int, int, int, int, int), (hRegion, x, y, width, height, xSrc, ySrc));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4533,6 +4781,8 @@ pygl_WGL_wglSaveBufferRegionARB(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CALL_R(_result, int, (void *, int, int, int, int), (hRegion, x, y, width, height));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4572,6 +4822,8 @@ pygl_WGL_wglSendPbufferToVideoNV(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4611,6 +4863,8 @@ pygl_WGL_wglSetDigitalVideoParametersI3D(PyObject *_self, PyObject *const *_a, s
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4652,6 +4906,8 @@ pygl_WGL_wglSetGammaTableI3D(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4691,6 +4947,8 @@ pygl_WGL_wglSetGammaTableParametersI3D(PyObject *_self, PyObject *const *_a, siz
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4732,6 +4990,8 @@ pygl_WGL_wglSetLayerPaletteEntries(PyObject *_self, PyObject *const *_a, size_t 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4770,6 +5030,8 @@ pygl_WGL_wglSetPbufferAttribARB(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4805,6 +5067,8 @@ pygl_WGL_wglSetStereoEmitterState3DL(PyObject *_self, PyObject *const *_a, size_
     PYGL_CALL_R(_result, int, (void *, unsigned int), (hDC, uState));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4839,6 +5103,8 @@ pygl_WGL_wglShareLists(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyO
     PYGL_CALL_R(_result, int, (void *, void *), (hrcSrvShare, hrcSrvSource));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4875,6 +5141,8 @@ pygl_WGL_wglSwapBuffersMscOML(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_R(_result, int64_t, (void *, int64_t, int64_t, int64_t), (hdc, target_msc, divisor, remainder));
     PYGL_CHECK();
     return PyLong_FromLongLong((long long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4908,6 +5176,8 @@ pygl_WGL_wglSwapIntervalEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, int, (int), (interval));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4942,6 +5212,8 @@ pygl_WGL_wglSwapLayerBuffers(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_R_BLOCKING(_result, int, (void *, unsigned int), (hdc, fuFlags));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4979,6 +5251,8 @@ pygl_WGL_wglSwapLayerBuffersMscOML(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_CALL_R(_result, int64_t, (void *, int, int64_t, int64_t, int64_t), (hdc, fuPlanes, target_msc, divisor, remainder));
     PYGL_CHECK();
     return PyLong_FromLongLong((long long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5015,6 +5289,8 @@ pygl_WGL_wglUseFontBitmaps(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CALL_R(_result, int, (void *, unsigned int, unsigned int, unsigned int), (hDC, first, count, listBase));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5051,6 +5327,8 @@ pygl_WGL_wglUseFontBitmapsA(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, int, (void *, unsigned int, unsigned int, unsigned int), (hDC, first, count, listBase));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5087,6 +5365,8 @@ pygl_WGL_wglUseFontBitmapsW(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, int, (void *, unsigned int, unsigned int, unsigned int), (hDC, first, count, listBase));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5127,6 +5407,8 @@ pygl_WGL_wglUseFontOutlines(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, int, (void *, unsigned int, unsigned int, unsigned int, float, float, int, void *), (hDC, first, count, listBase, deviation, extrusion, format, lpgmf));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5167,6 +5449,8 @@ pygl_WGL_wglUseFontOutlinesA(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_R(_result, int, (void *, unsigned int, unsigned int, unsigned int, float, float, int, void *), (hDC, first, count, listBase, deviation, extrusion, format, lpgmf));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5207,6 +5491,8 @@ pygl_WGL_wglUseFontOutlinesW(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_R(_result, int, (void *, unsigned int, unsigned int, unsigned int, float, float, int, void *), (hDC, first, count, listBase, deviation, extrusion, format, lpgmf));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5249,6 +5535,8 @@ pygl_WGL_wglWaitForMscOML(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5290,6 +5578,8 @@ pygl_WGL_wglWaitForSbcOML(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;

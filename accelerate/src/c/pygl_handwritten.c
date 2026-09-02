@@ -129,6 +129,11 @@ PyObject *pygl_hand_glShaderSource(PyObject *_self, PyObject *const *_a,
     unsigned int shader;
     void *_fp;
 
+    /* As a generated stub does: a keyword reaches here as a positional in _a
+     * with its name in _kwnames, so ignoring _kwnames would take
+     * glShaderSource(shader, string=s) as a one-argument call and report the
+     * arity rather than the keyword. */
+    PYGL_NO_KEYWORDS();
     if (_nargs != 2) {
         return pygl_arity_error(self, 2, _nargs);
     }

@@ -337,7 +337,7 @@ static inline int pygl_check_needed(GLProc *self)
 PyObject *pygl_arity_error(GLProc *self, Py_ssize_t want, Py_ssize_t got);
 PyObject *pygl_arity_range_error(GLProc *self, Py_ssize_t low, Py_ssize_t high,
                                  Py_ssize_t got);
-void pygl_argument_error(GLProc *self, Py_ssize_t index, const char *expected);
+void pygl_argument_error(GLProc *self);
 
 /* Acquire an input array.  Matching buffers are used directly; everything else
  * is handed to ArrayDatatype, which converts exactly as it does today. */
@@ -501,9 +501,14 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
     PyGL_GLhandleARB name = (PyGL_GLhandleARB)PyLong_AsUnsignedLongMask(_a[i])
 #endif
 
+/* One check for every scalar converted, rather than one per argument -- and
+ * its own label, because a scalar that would not convert has to come out as
+ * the ctypes.ArgumentError a caller of this library is entitled to catch,
+ * while everything else reaching _fail (a null entry point, no context, an
+ * array that would not convert) must be left exactly as it was raised. */
 #define PYGL_CONV_OK()                                                         \
     if (PYGL_UNLIKELY(PyErr_Occurred() != NULL))                               \
-    goto _fail
+    goto _argfail
 
 #define PYGL_ARRAY_IN(i, name, element)                                        \
     if (PYGL_UNLIKELY(pygl_array_in(self, _a[i], (element), (i), &_bufs[_nb]) < 0))  \
@@ -533,7 +538,10 @@ PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);
         goto _fail;                                                            \
     void *name = _bufs[_nb++].pointer
 
-#define PYGL_ARRAY_TYPED(i, name, type, retained)                              \
+/* Retention is not a parameter here: a pointer the GL keeps is retained by a
+ * pygl_retain() call emitted after the GL call, for every parameter that needs
+ * it whatever its size is described by. */
+#define PYGL_ARRAY_TYPED(i, name, type)                                        \
     if (PYGL_UNLIKELY(pygl_array_typed(self, (i) < _nargs ? _a[i] : NULL, (type),     \
                                        (i), &_bufs[_nb]) < 0))                 \
         goto _fail;                                                            \

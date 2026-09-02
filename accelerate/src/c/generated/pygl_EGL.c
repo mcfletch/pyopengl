@@ -35,6 +35,8 @@ pygl_EGL_eglBindAPI(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObje
     PYGL_CALL_R(_result, unsigned int, (unsigned int), (api));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -70,6 +72,8 @@ pygl_EGL_eglBindTexImage(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_CALL_R(_result, unsigned int, (void *, void *, int), (dpy, surface, buffer));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -107,6 +111,8 @@ pygl_EGL_eglBindWaylandDisplayWL(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -148,6 +154,8 @@ pygl_EGL_eglChooseConfig(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -187,6 +195,8 @@ pygl_EGL_eglClientSignalSyncEXT(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -224,6 +234,8 @@ pygl_EGL_eglClientWaitSync(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CALL_R_BLOCKING(_result, int, (void *, void *, int, uint64_t), (dpy, sync, flags, timeout));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -260,6 +272,8 @@ pygl_EGL_eglClientWaitSyncKHR(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_R_BLOCKING(_result, int, (void *, void *, int, uint64_t), (dpy, sync, flags, timeout));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -295,6 +309,8 @@ pygl_EGL_eglClientWaitSyncNV(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_R_BLOCKING(_result, int, (void *, int, uint64_t), (sync, flags, timeout));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -328,6 +344,8 @@ pygl_EGL_eglCompositorBindTexWindowEXT(PyObject *_self, PyObject *const *_a, siz
     PYGL_CALL_R(_result, unsigned int, (int), (external_win_id));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -366,6 +384,8 @@ pygl_EGL_eglCompositorSetContextAttributesEXT(PyObject *_self, PyObject *const *
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -404,6 +424,8 @@ pygl_EGL_eglCompositorSetContextListEXT(PyObject *_self, PyObject *const *_a, si
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -440,6 +462,8 @@ pygl_EGL_eglCompositorSetSizeEXT(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_R(_result, unsigned int, (int, int, int), (external_win_id, width, height));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -478,6 +502,8 @@ pygl_EGL_eglCompositorSetWindowAttributesEXT(PyObject *_self, PyObject *const *_
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -517,6 +543,8 @@ pygl_EGL_eglCompositorSetWindowListEXT(PyObject *_self, PyObject *const *_a, siz
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -552,6 +580,8 @@ pygl_EGL_eglCompositorSwapPolicyEXT(PyObject *_self, PyObject *const *_a, size_t
     PYGL_CALL_R(_result, unsigned int, (int, int), (external_win_id, policy));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -587,6 +617,8 @@ pygl_EGL_eglCopyBuffers(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_R(_result, unsigned int, (void *, void *, void *), (dpy, surface, target));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -626,6 +658,8 @@ pygl_EGL_eglCreateContext(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PyObject *_value = pygl_opaque((void *)_result, "EGLContext");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -664,6 +698,8 @@ pygl_EGL_eglCreateDRMImageMESA(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = pygl_opaque((void *)_result, "EGLImageKHR");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -703,6 +739,8 @@ pygl_EGL_eglCreateFenceSyncNV(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = pygl_opaque((void *)_result, "EGLSyncNV");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -744,6 +782,8 @@ pygl_EGL_eglCreateImage(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PyObject *_value = pygl_opaque((void *)_result, "EGLImage");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -785,6 +825,8 @@ pygl_EGL_eglCreateImageKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PyObject *_value = pygl_opaque((void *)_result, "EGLImageKHR");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -822,6 +864,8 @@ pygl_EGL_eglCreateNativeClientBufferANDROID(PyObject *_self, PyObject *const *_a
     PyObject *_value = pygl_opaque((void *)_result, "EGLClientBuffer");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -863,6 +907,8 @@ pygl_EGL_eglCreatePbufferFromClientBuffer(PyObject *_self, PyObject *const *_a, 
     PyObject *_value = pygl_opaque((void *)_result, "EGLSurface");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -902,6 +948,8 @@ pygl_EGL_eglCreatePbufferSurface(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = pygl_opaque((void *)_result, "EGLSurface");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -942,6 +990,8 @@ pygl_EGL_eglCreatePixmapSurface(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = pygl_opaque((void *)_result, "EGLSurface");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -981,6 +1031,8 @@ pygl_EGL_eglCreatePixmapSurfaceHI(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = pygl_opaque((void *)_result, "EGLSurface");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1021,6 +1073,8 @@ pygl_EGL_eglCreatePlatformPixmapSurface(PyObject *_self, PyObject *const *_a, si
     PyObject *_value = pygl_opaque((void *)_result, "EGLSurface");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1061,6 +1115,8 @@ pygl_EGL_eglCreatePlatformPixmapSurfaceEXT(PyObject *_self, PyObject *const *_a,
     PyObject *_value = pygl_opaque((void *)_result, "EGLSurface");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1101,6 +1157,8 @@ pygl_EGL_eglCreatePlatformWindowSurface(PyObject *_self, PyObject *const *_a, si
     PyObject *_value = pygl_opaque((void *)_result, "EGLSurface");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1141,6 +1199,8 @@ pygl_EGL_eglCreatePlatformWindowSurfaceEXT(PyObject *_self, PyObject *const *_a,
     PyObject *_value = pygl_opaque((void *)_result, "EGLSurface");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1179,6 +1239,8 @@ pygl_EGL_eglCreateStreamAttribKHR(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = pygl_opaque((void *)_result, "EGLStreamKHR");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1214,6 +1276,8 @@ pygl_EGL_eglCreateStreamFromFileDescriptorKHR(PyObject *_self, PyObject *const *
     PYGL_CALL_R(_result, void *, (void *, int), (dpy, file_descriptor));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "EGLStreamKHR");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1251,6 +1315,8 @@ pygl_EGL_eglCreateStreamKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = pygl_opaque((void *)_result, "EGLStreamKHR");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1291,6 +1357,8 @@ pygl_EGL_eglCreateStreamProducerSurfaceKHR(PyObject *_self, PyObject *const *_a,
     PyObject *_value = pygl_opaque((void *)_result, "EGLSurface");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1331,6 +1399,8 @@ pygl_EGL_eglCreateStreamSyncNV(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = pygl_opaque((void *)_result, "EGLSyncKHR");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1370,6 +1440,8 @@ pygl_EGL_eglCreateSync(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyO
     PyObject *_value = pygl_opaque((void *)_result, "EGLSync");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1409,6 +1481,8 @@ pygl_EGL_eglCreateSync64KHR(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = pygl_opaque((void *)_result, "EGLSyncKHR");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1448,6 +1522,8 @@ pygl_EGL_eglCreateSyncKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PyObject *_value = pygl_opaque((void *)_result, "EGLSyncKHR");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1483,6 +1559,8 @@ pygl_EGL_eglCreateWaylandBufferFromImageWL(PyObject *_self, PyObject *const *_a,
     PYGL_CALL_R(_result, void *, (void *, void *), (dpy, image));
     PYGL_CHECK();
     return pygl_address_or_none(_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1522,6 +1600,8 @@ pygl_EGL_eglCreateWindowSurface(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = pygl_opaque((void *)_result, "EGLSurface");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1560,6 +1640,8 @@ pygl_EGL_eglDebugMessageControlKHR(PyObject *_self, PyObject *const *_a, size_t 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1595,6 +1677,8 @@ pygl_EGL_eglDestroyContext(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CALL_R(_result, unsigned int, (void *, void *), (dpy, ctx));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1628,6 +1712,8 @@ pygl_EGL_eglDestroyDisplayEXT(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_R(_result, unsigned int, (void *), (dpy));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1662,6 +1748,8 @@ pygl_EGL_eglDestroyImage(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_CALL_R(_result, unsigned int, (void *, void *), (dpy, image));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1696,6 +1784,8 @@ pygl_EGL_eglDestroyImageKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, unsigned int, (void *, void *), (dpy, image));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1730,6 +1820,8 @@ pygl_EGL_eglDestroyStreamKHR(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_R(_result, unsigned int, (void *, void *), (dpy, stream));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1764,6 +1856,8 @@ pygl_EGL_eglDestroySurface(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CALL_R(_result, unsigned int, (void *, void *), (dpy, surface));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1798,6 +1892,8 @@ pygl_EGL_eglDestroySync(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_R_BLOCKING(_result, unsigned int, (void *, void *), (dpy, sync));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1832,6 +1928,8 @@ pygl_EGL_eglDestroySyncKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CALL_R_BLOCKING(_result, unsigned int, (void *, void *), (dpy, sync));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1865,6 +1963,8 @@ pygl_EGL_eglDestroySyncNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_CALL_R_BLOCKING(_result, unsigned int, (void *), (sync));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1899,6 +1999,8 @@ pygl_EGL_eglDupNativeFenceFDANDROID(PyObject *_self, PyObject *const *_a, size_t
     PYGL_CALL_R(_result, int, (void *, void *), (dpy, sync));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1939,6 +2041,8 @@ pygl_EGL_eglExportDMABUFImageMESA(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1980,6 +2084,8 @@ pygl_EGL_eglExportDMABUFImageQueryMESA(PyObject *_self, PyObject *const *_a, siz
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2021,6 +2127,8 @@ pygl_EGL_eglExportDRMImageMESA(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2055,6 +2163,8 @@ pygl_EGL_eglFenceNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObje
     PYGL_CALL_R(_result, unsigned int, (void *), (sync));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2095,6 +2205,8 @@ pygl_EGL_eglGetCompositorTimingANDROID(PyObject *_self, PyObject *const *_a, siz
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2131,6 +2243,8 @@ pygl_EGL_eglGetCompositorTimingSupportedANDROID(PyObject *_self, PyObject *const
     PYGL_CALL_R(_result, unsigned int, (void *, void *, int), (dpy, surface, name));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2170,6 +2284,8 @@ pygl_EGL_eglGetConfigAttrib(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2210,6 +2326,8 @@ pygl_EGL_eglGetConfigs(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyO
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2242,6 +2360,8 @@ pygl_EGL_eglGetCurrentContext(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_R(_result, void *, (void), ());
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "EGLContext");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2273,6 +2393,8 @@ pygl_EGL_eglGetCurrentDisplay(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_R(_result, void *, (void), ());
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "EGLDisplay");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2306,6 +2428,8 @@ pygl_EGL_eglGetCurrentSurface(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_R(_result, void *, (int), (readdraw));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "EGLSurface");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2339,6 +2463,8 @@ pygl_EGL_eglGetDisplay(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyO
     PYGL_CALL_R(_result, void *, (void *), (display_id));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "EGLDisplay");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2372,6 +2498,8 @@ pygl_EGL_eglGetDisplayDriverConfig(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_CALL_R(_result, void *, (void *), (dpy));
     PYGL_CHECK();
     return pygl_bytes_or_none((const char *)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2405,6 +2533,8 @@ pygl_EGL_eglGetDisplayDriverName(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_R(_result, void *, (void *), (dpy));
     PYGL_CHECK();
     return pygl_bytes_or_none((const char *)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2436,6 +2566,8 @@ pygl_EGL_eglGetError(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObj
     PYGL_CALL_R(_result, int, (void), ());
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2471,6 +2603,8 @@ pygl_EGL_eglGetFrameTimestampSupportedANDROID(PyObject *_self, PyObject *const *
     PYGL_CALL_R(_result, unsigned int, (void *, void *, int), (dpy, surface, timestamp));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2512,6 +2646,8 @@ pygl_EGL_eglGetFrameTimestampsANDROID(PyObject *_self, PyObject *const *_a, size
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2552,6 +2688,8 @@ pygl_EGL_eglGetMscRateANGLE(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2589,6 +2727,8 @@ pygl_EGL_eglGetNativeClientBufferANDROID(PyObject *_self, PyObject *const *_a, s
     PyObject *_value = pygl_opaque((void *)_result, "EGLClientBuffer");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2628,6 +2768,8 @@ pygl_EGL_eglGetNextFrameIdANDROID(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2669,6 +2811,8 @@ pygl_EGL_eglGetOutputLayersEXT(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2710,6 +2854,8 @@ pygl_EGL_eglGetOutputPortsEXT(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2749,6 +2895,8 @@ pygl_EGL_eglGetPlatformDisplay(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = pygl_opaque((void *)_result, "EGLDisplay");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2788,6 +2936,8 @@ pygl_EGL_eglGetPlatformDisplayEXT(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = pygl_opaque((void *)_result, "EGLDisplay");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2825,6 +2975,8 @@ pygl_EGL_eglGetProcAddress(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PyObject *_value = pygl_address_or_none(_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2860,6 +3012,8 @@ pygl_EGL_eglGetStreamFileDescriptorKHR(PyObject *_self, PyObject *const *_a, siz
     PYGL_CALL_R(_result, int, (void *, void *), (dpy, stream));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2899,6 +3053,8 @@ pygl_EGL_eglGetSyncAttrib(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2939,6 +3095,8 @@ pygl_EGL_eglGetSyncAttribKHR(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2978,6 +3136,8 @@ pygl_EGL_eglGetSyncAttribNV(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3010,6 +3170,8 @@ pygl_EGL_eglGetSystemTimeFrequencyNV(PyObject *_self, PyObject *const *_a, size_
     PYGL_CALL_R(_result, uint64_t, (void), ());
     PYGL_CHECK();
     return PyLong_FromUnsignedLongLong((unsigned long long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3041,6 +3203,8 @@ pygl_EGL_eglGetSystemTimeNV(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, uint64_t, (void), ());
     PYGL_CHECK();
     return PyLong_FromUnsignedLongLong((unsigned long long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3079,6 +3243,8 @@ pygl_EGL_eglInitialize(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyO
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3116,6 +3282,8 @@ pygl_EGL_eglLabelObjectKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CALL_R(_result, int, (void *, unsigned int, void *, void *), (display, objectType, object, label));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3154,6 +3322,8 @@ pygl_EGL_eglLockSurfaceKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3191,6 +3361,8 @@ pygl_EGL_eglMakeCurrent(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_R(_result, unsigned int, (void *, void *, void *, void *), (dpy, draw, read, ctx));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3227,6 +3399,8 @@ pygl_EGL_eglOutputLayerAttribEXT(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_R(_result, unsigned int, (void *, void *, int, intptr_t), (dpy, layer, attribute, value));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3263,6 +3437,8 @@ pygl_EGL_eglOutputPortAttribEXT(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CALL_R(_result, unsigned int, (void *, void *, int, intptr_t), (dpy, port, attribute, value));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3301,6 +3477,8 @@ pygl_EGL_eglPostSubBufferNV(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, unsigned int, (void *, void *, int, int, int, int), (dpy, surface, x, y, width, height));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3332,6 +3510,8 @@ pygl_EGL_eglQueryAPI(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObj
     PYGL_CALL_R(_result, unsigned int, (void), ());
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3371,6 +3551,8 @@ pygl_EGL_eglQueryContext(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3409,6 +3591,8 @@ pygl_EGL_eglQueryDebugKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3448,6 +3632,8 @@ pygl_EGL_eglQueryDeviceAttribEXT(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3489,6 +3675,8 @@ pygl_EGL_eglQueryDeviceBinaryEXT(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3524,6 +3712,8 @@ pygl_EGL_eglQueryDeviceStringEXT(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_R(_result, void *, (void *, int), (device, name));
     PYGL_CHECK();
     return pygl_bytes_or_none((const char *)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3562,6 +3752,8 @@ pygl_EGL_eglQueryDevicesEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3601,6 +3793,8 @@ pygl_EGL_eglQueryDisplayAttribEXT(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3640,6 +3834,8 @@ pygl_EGL_eglQueryDisplayAttribKHR(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3679,6 +3875,8 @@ pygl_EGL_eglQueryDisplayAttribNV(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3719,6 +3917,8 @@ pygl_EGL_eglQueryDmaBufFormatsEXT(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3761,6 +3961,8 @@ pygl_EGL_eglQueryDmaBufModifiersEXT(PyObject *_self, PyObject *const *_a, size_t
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3799,6 +4001,8 @@ pygl_EGL_eglQueryNativeDisplayNV(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3838,6 +4042,8 @@ pygl_EGL_eglQueryNativePixmapNV(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3877,6 +4083,8 @@ pygl_EGL_eglQueryNativeWindowNV(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3917,6 +4125,8 @@ pygl_EGL_eglQueryOutputLayerAttribEXT(PyObject *_self, PyObject *const *_a, size
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3953,6 +4163,8 @@ pygl_EGL_eglQueryOutputLayerStringEXT(PyObject *_self, PyObject *const *_a, size
     PYGL_CALL_R(_result, void *, (void *, void *, int), (dpy, layer, name));
     PYGL_CHECK();
     return pygl_bytes_or_none((const char *)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3992,6 +4204,8 @@ pygl_EGL_eglQueryOutputPortAttribEXT(PyObject *_self, PyObject *const *_a, size_
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4028,6 +4242,8 @@ pygl_EGL_eglQueryOutputPortStringEXT(PyObject *_self, PyObject *const *_a, size_
     PYGL_CALL_R(_result, void *, (void *, void *, int), (dpy, port, name));
     PYGL_CHECK();
     return pygl_bytes_or_none((const char *)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4067,6 +4283,8 @@ pygl_EGL_eglQueryStreamAttribKHR(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4108,6 +4326,8 @@ pygl_EGL_eglQueryStreamConsumerEventNV(PyObject *_self, PyObject *const *_a, siz
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4148,6 +4368,8 @@ pygl_EGL_eglQueryStreamKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4191,6 +4413,8 @@ pygl_EGL_eglQueryStreamMetadataNV(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4231,6 +4455,8 @@ pygl_EGL_eglQueryStreamTimeKHR(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4271,6 +4497,8 @@ pygl_EGL_eglQueryStreamu64KHR(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4306,6 +4534,8 @@ pygl_EGL_eglQueryString(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_R(_result, void *, (void *, int), (dpy, name));
     PYGL_CHECK();
     return pygl_bytes_or_none((const char *)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4347,6 +4577,8 @@ pygl_EGL_eglQuerySupportedCompressionRatesEXT(PyObject *_self, PyObject *const *
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4387,6 +4619,8 @@ pygl_EGL_eglQuerySurface(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4427,6 +4661,8 @@ pygl_EGL_eglQuerySurface64KHR(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4467,6 +4703,8 @@ pygl_EGL_eglQuerySurfacePointerANGLE(PyObject *_self, PyObject *const *_a, size_
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4507,6 +4745,8 @@ pygl_EGL_eglQueryWaylandBufferWL(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4543,6 +4783,8 @@ pygl_EGL_eglReleaseTexImage(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, unsigned int, (void *, void *, int), (dpy, surface, buffer));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4574,6 +4816,8 @@ pygl_EGL_eglReleaseThread(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_CALL_R(_result, unsigned int, (void), ());
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4608,6 +4852,8 @@ pygl_EGL_eglResetStreamNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_CALL_R(_result, unsigned int, (void *, void *), (dpy, stream));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4643,6 +4889,8 @@ pygl_EGL_eglSetBlobCacheFuncsANDROID(PyObject *_self, PyObject *const *_a, size_
     PYGL_CALL_V((void *, void *, void *), (dpy, set, get));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4682,6 +4930,8 @@ pygl_EGL_eglSetDamageRegionKHR(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4719,6 +4969,8 @@ pygl_EGL_eglSetStreamAttribKHR(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_R(_result, unsigned int, (void *, void *, unsigned int, intptr_t), (dpy, stream, attribute, value));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4760,6 +5012,8 @@ pygl_EGL_eglSetStreamMetadataNV(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4796,6 +5050,8 @@ pygl_EGL_eglSignalSyncKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_CALL_R(_result, unsigned int, (void *, void *, unsigned int), (dpy, sync, mode));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4830,6 +5086,8 @@ pygl_EGL_eglSignalSyncNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_CALL_R(_result, unsigned int, (void *, unsigned int), (sync, mode));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4869,6 +5127,8 @@ pygl_EGL_eglStreamAcquireImageNV(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4906,6 +5166,8 @@ pygl_EGL_eglStreamAttribKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, unsigned int, (void *, void *, unsigned int, int), (dpy, stream, attribute, value));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4944,6 +5206,8 @@ pygl_EGL_eglStreamConsumerAcquireAttribKHR(PyObject *_self, PyObject *const *_a,
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4979,6 +5243,8 @@ pygl_EGL_eglStreamConsumerAcquireKHR(PyObject *_self, PyObject *const *_a, size_
     PYGL_CALL_R(_result, unsigned int, (void *, void *), (dpy, stream));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5013,6 +5279,8 @@ pygl_EGL_eglStreamConsumerGLTextureExternalKHR(PyObject *_self, PyObject *const 
     PYGL_CALL_R(_result, unsigned int, (void *, void *), (dpy, stream));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5048,6 +5316,8 @@ pygl_EGL_eglStreamConsumerOutputEXT(PyObject *_self, PyObject *const *_a, size_t
     PYGL_CALL_R(_result, unsigned int, (void *, void *, void *), (dpy, stream, layer));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5086,6 +5356,8 @@ pygl_EGL_eglStreamConsumerReleaseAttribKHR(PyObject *_self, PyObject *const *_a,
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5121,6 +5393,8 @@ pygl_EGL_eglStreamConsumerReleaseKHR(PyObject *_self, PyObject *const *_a, size_
     PYGL_CALL_R(_result, unsigned int, (void *, void *), (dpy, stream));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5155,6 +5429,8 @@ pygl_EGL_eglStreamFlushNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_CALL_R(_result, unsigned int, (void *, void *), (dpy, stream));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5195,6 +5471,8 @@ pygl_EGL_eglStreamImageConsumerConnectNV(PyObject *_self, PyObject *const *_a, s
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5232,6 +5510,8 @@ pygl_EGL_eglStreamReleaseImageNV(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_R(_result, unsigned int, (void *, void *, void *, void *), (dpy, stream, image, sync));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5268,6 +5548,8 @@ pygl_EGL_eglSurfaceAttrib(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_CALL_R(_result, unsigned int, (void *, void *, int, int), (dpy, surface, attribute, value));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5302,6 +5584,8 @@ pygl_EGL_eglSwapBuffers(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_R_BLOCKING(_result, unsigned int, (void *, void *), (dpy, surface));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5341,6 +5625,8 @@ pygl_EGL_eglSwapBuffersRegion2NOK(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5381,6 +5667,8 @@ pygl_EGL_eglSwapBuffersRegionNOK(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5421,6 +5709,8 @@ pygl_EGL_eglSwapBuffersWithDamageEXT(PyObject *_self, PyObject *const *_a, size_
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5461,6 +5751,8 @@ pygl_EGL_eglSwapBuffersWithDamageKHR(PyObject *_self, PyObject *const *_a, size_
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5496,6 +5788,8 @@ pygl_EGL_eglSwapInterval(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_CALL_R(_result, unsigned int, (void *, int), (dpy, interval));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5529,6 +5823,8 @@ pygl_EGL_eglTerminate(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyOb
     PYGL_CALL_R(_result, unsigned int, (void *), (dpy));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5566,6 +5862,8 @@ pygl_EGL_eglUnbindWaylandDisplayWL(PyObject *_self, PyObject *const *_a, size_t 
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5601,6 +5899,8 @@ pygl_EGL_eglUnlockSurfaceKHR(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_R(_result, unsigned int, (void *, void *), (dpy, surface));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5639,6 +5939,8 @@ pygl_EGL_eglUnsignalSyncEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5671,6 +5973,8 @@ pygl_EGL_eglWaitClient(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyO
     PYGL_CALL_R_BLOCKING(_result, unsigned int, (void), ());
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5702,6 +6006,8 @@ pygl_EGL_eglWaitGL(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObjec
     PYGL_CALL_R_BLOCKING(_result, unsigned int, (void), ());
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5735,6 +6041,8 @@ pygl_EGL_eglWaitNative(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyO
     PYGL_CALL_R_BLOCKING(_result, unsigned int, (int), (engine));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5770,6 +6078,8 @@ pygl_EGL_eglWaitSync(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObj
     PYGL_CALL_R(_result, unsigned int, (void *, void *, int), (dpy, sync, flags));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5805,6 +6115,8 @@ pygl_EGL_eglWaitSyncKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_R(_result, int, (void *, void *, int), (dpy, sync, flags));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }

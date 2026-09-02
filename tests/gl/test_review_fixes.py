@@ -33,6 +33,55 @@ class TestTheEntryPointKnowsItsApi:
         assert GL.glClear is not ES.glClear
 
 
+class TestABadScalarRaisesWhatCtypesRaises:
+    """``ctypes.ArgumentError`` is part of PyOpenGL's own interface.
+
+    ``OpenGL.error`` re-exports it, and the ctypes wrapper catches it to add
+    the converted arguments, so a program is entitled to catch it -- and it
+    does not inherit from ``TypeError``, so a C stub raising ``TypeError``
+    instead is a difference that silently stops such a program working.  The
+    message is not part of the contract; the type is.
+    """
+
+    def test_an_unconvertible_scalar_raises_argument_error(self):
+        import ctypes
+
+        import OpenGL.GL as GL
+
+        with pytest.raises(ctypes.ArgumentError):
+            GL.glBindTexture('not-an-enum', 0)
+
+    def test_it_is_raised_for_a_float_argument_too(self):
+        import ctypes
+
+        import OpenGL.GL as GL
+
+        with pytest.raises(ctypes.ArgumentError):
+            GL.glUniform1f(0, 'not-a-float')
+
+    def test_the_original_message_is_carried_across(self):
+        import ctypes
+
+        import OpenGL.GL as GL
+
+        with pytest.raises(ctypes.ArgumentError) as caught:
+            GL.glBindTexture('not-an-enum', 0)
+        assert 'glBindTexture' in str(caught.value)
+        assert 'integer' in str(caught.value)
+
+    def test_something_that_is_not_an_argument_problem_is_left_alone(self):
+        """Calling a KeyboardInterrupt a bad argument would let a caller
+        catching ArgumentError swallow it."""
+        import OpenGL.GL as GL
+
+        class Hostile:
+            def __index__(self):
+                raise KeyboardInterrupt('not an argument problem')
+
+        with pytest.raises(KeyboardInterrupt):
+            GL.glBindTexture(Hostile(), 0)
+
+
 class TestGarbageCollection:
     """The type has a settable dict and settable callbacks, so a cycle through
     one of them must be collectable."""

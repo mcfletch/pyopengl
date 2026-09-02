@@ -41,6 +41,8 @@ pygl_GLX_glXAssociateDMPbufferSGIX(PyObject *_self, PyObject *const *_a, size_t 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -81,6 +83,8 @@ pygl_GLX_glXBindChannelToWindowSGIX(PyObject *_self, PyObject *const *_a, size_t
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -119,6 +123,8 @@ pygl_GLX_glXBindHyperpipeSGIX(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -158,6 +164,8 @@ pygl_GLX_glXBindSwapBarrierNV(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -196,6 +204,8 @@ pygl_GLX_glXBindSwapBarrierSGIX(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -235,6 +245,8 @@ pygl_GLX_glXBindTexImageEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -274,6 +286,8 @@ pygl_GLX_glXBindVideoCaptureDeviceNV(PyObject *_self, PyObject *const *_a, size_
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -314,6 +328,8 @@ pygl_GLX_glXBindVideoDeviceNV(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -354,6 +370,8 @@ pygl_GLX_glXBindVideoImageNV(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -398,6 +416,8 @@ pygl_GLX_glXBlitContextFramebufferAMD(PyObject *_self, PyObject *const *_a, size
     PYGL_CALL_V((void *, int, int, int, int, int, int, int, int, unsigned int, unsigned int), (dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -440,6 +460,8 @@ pygl_GLX_glXChannelRectSGIX(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -480,6 +502,8 @@ pygl_GLX_glXChannelRectSyncSGIX(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -523,6 +547,8 @@ pygl_GLX_glXCopyBufferSubDataNV(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -562,6 +588,8 @@ pygl_GLX_glXCopyContext(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -615,6 +643,8 @@ pygl_GLX_glXCopyImageSubDataNV(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -656,6 +686,8 @@ pygl_GLX_glXCopySubBufferMESA(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -691,6 +723,8 @@ pygl_GLX_glXCreateAssociatedContextAMD(PyObject *_self, PyObject *const *_a, siz
     PYGL_CALL_R(_result, void *, (unsigned int, void *), (id, share_list));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "GLXContext");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -729,6 +763,8 @@ pygl_GLX_glXCreateAssociatedContextAttribsAMD(PyObject *_self, PyObject *const *
     PyObject *_value = pygl_opaque((void *)_result, "GLXContext");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -769,6 +805,8 @@ pygl_GLX_glXCreateContext(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PyObject *_value = pygl_opaque((void *)_result, "GLXContext");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -810,6 +848,8 @@ pygl_GLX_glXCreateContextAttribsARB(PyObject *_self, PyObject *const *_a, size_t
     PyObject *_value = pygl_opaque((void *)_result, "GLXContext");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -851,6 +891,8 @@ pygl_GLX_glXCreateContextWithConfigSGIX(PyObject *_self, PyObject *const *_a, si
     PyObject *_value = pygl_opaque((void *)_result, "GLXContext");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -892,6 +934,8 @@ pygl_GLX_glXCreateGLXPbufferSGIX(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = pygl_opaque((void *)_result, "GLXPbufferSGIX");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -931,6 +975,8 @@ pygl_GLX_glXCreateGLXPixmap(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = pygl_opaque((void *)_result, "GLXPixmap");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -971,6 +1017,8 @@ pygl_GLX_glXCreateGLXPixmapMESA(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = pygl_opaque((void *)_result, "GLXPixmap");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1010,6 +1058,8 @@ pygl_GLX_glXCreateGLXPixmapWithConfigSGIX(PyObject *_self, PyObject *const *_a, 
     PyObject *_value = pygl_opaque((void *)_result, "GLXPixmap");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1052,6 +1102,8 @@ pygl_GLX_glXCreateGLXVideoSourceSGIX(PyObject *_self, PyObject *const *_a, size_
     PyObject *_value = pygl_opaque((void *)_result, "GLXVideoSourceSGIX");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1093,6 +1145,8 @@ pygl_GLX_glXCreateNewContext(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = pygl_opaque((void *)_result, "GLXContext");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1132,6 +1186,8 @@ pygl_GLX_glXCreatePbuffer(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PyObject *_value = pygl_opaque((void *)_result, "GLXPbuffer");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1172,6 +1228,8 @@ pygl_GLX_glXCreatePixmap(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PyObject *_value = pygl_opaque((void *)_result, "GLXPixmap");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1212,6 +1270,8 @@ pygl_GLX_glXCreateWindow(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PyObject *_value = pygl_opaque((void *)_result, "GLXWindow");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1250,6 +1310,8 @@ pygl_GLX_glXCushionSGI(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyO
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1289,6 +1351,8 @@ pygl_GLX_glXDelayBeforeSwapNV(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1323,6 +1387,8 @@ pygl_GLX_glXDeleteAssociatedContextAMD(PyObject *_self, PyObject *const *_a, siz
     PYGL_CALL_R(_result, int, (void *), (ctx));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1359,6 +1425,8 @@ pygl_GLX_glXDestroyContext(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1396,6 +1464,8 @@ pygl_GLX_glXDestroyGLXPbufferSGIX(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1433,6 +1503,8 @@ pygl_GLX_glXDestroyGLXPixmap(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1470,6 +1542,8 @@ pygl_GLX_glXDestroyGLXVideoSourceSGIX(PyObject *_self, PyObject *const *_a, size
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1508,6 +1582,8 @@ pygl_GLX_glXDestroyHyperpipeConfigSGIX(PyObject *_self, PyObject *const *_a, siz
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1545,6 +1621,8 @@ pygl_GLX_glXDestroyPbuffer(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1582,6 +1660,8 @@ pygl_GLX_glXDestroyPixmap(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1619,6 +1699,8 @@ pygl_GLX_glXDestroyWindow(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1656,6 +1738,8 @@ pygl_GLX_glXFreeContextEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1693,6 +1777,8 @@ pygl_GLX_glXGetAGPOffsetMESA(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1731,6 +1817,8 @@ pygl_GLX_glXGetClientString(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = pygl_bytes_or_none((const char *)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1771,6 +1859,8 @@ pygl_GLX_glXGetConfig(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyOb
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1805,6 +1895,8 @@ pygl_GLX_glXGetContextGPUIDAMD(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_R(_result, unsigned int, (void *), (ctx));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1838,6 +1930,8 @@ pygl_GLX_glXGetContextIDEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, void *, (void *), (context));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "GLXContextID");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1869,6 +1963,8 @@ pygl_GLX_glXGetCurrentAssociatedContextAMD(PyObject *_self, PyObject *const *_a,
     PYGL_CALL_R(_result, void *, (void), ());
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "GLXContext");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1900,6 +1996,8 @@ pygl_GLX_glXGetCurrentContext(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_R(_result, void *, (void), ());
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "GLXContext");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1931,6 +2029,8 @@ pygl_GLX_glXGetCurrentDrawable(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_R(_result, void *, (void), ());
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "GLXDrawable");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1962,6 +2062,8 @@ pygl_GLX_glXGetCurrentReadDrawable(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_CALL_R(_result, void *, (void), ());
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "GLXDrawable");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1993,6 +2095,8 @@ pygl_GLX_glXGetCurrentReadDrawableSGI(PyObject *_self, PyObject *const *_a, size
     PYGL_CALL_R(_result, void *, (void), ());
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "GLXDrawable");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2032,6 +2136,8 @@ pygl_GLX_glXGetFBConfigAttrib(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2072,6 +2178,8 @@ pygl_GLX_glXGetFBConfigAttribSGIX(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2110,6 +2218,8 @@ pygl_GLX_glXGetFBConfigFromVisualSGIX(PyObject *_self, PyObject *const *_a, size
     PyObject *_value = pygl_opaque((void *)_result, "GLXFBConfigSGIX");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2148,6 +2258,8 @@ pygl_GLX_glXGetGPUIDsAMD(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2189,6 +2301,8 @@ pygl_GLX_glXGetGPUInfoAMD(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2229,6 +2343,8 @@ pygl_GLX_glXGetMscRateOML(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2266,6 +2382,8 @@ pygl_GLX_glXGetProcAddress(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PyObject *_value = pygl_opaque((void *)_result, "__GLXextFuncPtr");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2303,6 +2421,8 @@ pygl_GLX_glXGetProcAddressARB(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = pygl_opaque((void *)_result, "__GLXextFuncPtr");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2341,6 +2461,8 @@ pygl_GLX_glXGetSelectedEvent(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2379,6 +2501,8 @@ pygl_GLX_glXGetSelectedEventSGIX(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2411,6 +2535,8 @@ pygl_GLX_glXGetSwapIntervalMESA(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CALL_R(_result, int, (void), ());
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2451,6 +2577,8 @@ pygl_GLX_glXGetSyncValuesOML(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2491,6 +2619,8 @@ pygl_GLX_glXGetTransparentIndexSUN(PyObject *_self, PyObject *const *_a, size_t 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2531,6 +2661,8 @@ pygl_GLX_glXGetVideoDeviceNV(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2572,6 +2704,8 @@ pygl_GLX_glXGetVideoInfoNV(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2609,6 +2743,8 @@ pygl_GLX_glXGetVideoSyncSGI(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2650,6 +2786,8 @@ pygl_GLX_glXHyperpipeAttribSGIX(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2691,6 +2829,8 @@ pygl_GLX_glXHyperpipeConfigSGIX(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2729,6 +2869,8 @@ pygl_GLX_glXImportContextEXT(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = pygl_opaque((void *)_result, "GLXContext");
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2767,6 +2909,8 @@ pygl_GLX_glXIsDirect(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObj
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2806,6 +2950,8 @@ pygl_GLX_glXJoinSwapGroupNV(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2844,6 +2990,8 @@ pygl_GLX_glXJoinSwapGroupSGIX(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2881,6 +3029,8 @@ pygl_GLX_glXLockVideoCaptureDeviceNV(PyObject *_self, PyObject *const *_a, size_
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2915,6 +3065,8 @@ pygl_GLX_glXMakeAssociatedContextCurrentAMD(PyObject *_self, PyObject *const *_a
     PYGL_CALL_R(_result, int, (void *), (ctx));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2954,6 +3106,8 @@ pygl_GLX_glXMakeContextCurrent(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2993,6 +3147,8 @@ pygl_GLX_glXMakeCurrent(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3033,6 +3189,8 @@ pygl_GLX_glXMakeCurrentReadSGI(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3076,6 +3234,8 @@ pygl_GLX_glXNamedCopyBufferSubDataNV(PyObject *_self, PyObject *const *_a, size_
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3119,6 +3279,8 @@ pygl_GLX_glXQueryChannelDeltasSGIX(PyObject *_self, PyObject *const *_a, size_t 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3162,6 +3324,8 @@ pygl_GLX_glXQueryChannelRectSGIX(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3202,6 +3366,8 @@ pygl_GLX_glXQueryContext(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3242,6 +3408,8 @@ pygl_GLX_glXQueryContextInfoEXT(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3280,6 +3448,8 @@ pygl_GLX_glXQueryCurrentRendererIntegerMESA(PyObject *_self, PyObject *const *_a
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3314,6 +3484,8 @@ pygl_GLX_glXQueryCurrentRendererStringMESA(PyObject *_self, PyObject *const *_a,
     PYGL_CALL_R(_result, void *, (int), (attribute));
     PYGL_CHECK();
     return pygl_bytes_or_none((const char *)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3352,6 +3524,8 @@ pygl_GLX_glXQueryDrawable(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3391,6 +3565,8 @@ pygl_GLX_glXQueryExtension(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3429,6 +3605,8 @@ pygl_GLX_glXQueryExtensionsString(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = pygl_bytes_or_none((const char *)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3468,6 +3646,8 @@ pygl_GLX_glXQueryFrameCountNV(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3507,6 +3687,8 @@ pygl_GLX_glXQueryGLXPbufferSGIX(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3548,6 +3730,8 @@ pygl_GLX_glXQueryHyperpipeAttribSGIX(PyObject *_self, PyObject *const *_a, size_
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3590,6 +3774,8 @@ pygl_GLX_glXQueryHyperpipeBestAttribSGIX(PyObject *_self, PyObject *const *_a, s
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3629,6 +3815,8 @@ pygl_GLX_glXQueryMaxSwapBarriersSGIX(PyObject *_self, PyObject *const *_a, size_
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3669,6 +3857,8 @@ pygl_GLX_glXQueryMaxSwapGroupsNV(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3710,6 +3900,8 @@ pygl_GLX_glXQueryRendererIntegerMESA(PyObject *_self, PyObject *const *_a, size_
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3750,6 +3942,8 @@ pygl_GLX_glXQueryRendererStringMESA(PyObject *_self, PyObject *const *_a, size_t
     PyObject *_value = pygl_bytes_or_none((const char *)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3789,6 +3983,8 @@ pygl_GLX_glXQueryServerString(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = pygl_bytes_or_none((const char *)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3829,6 +4025,8 @@ pygl_GLX_glXQuerySwapGroupNV(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3868,6 +4066,8 @@ pygl_GLX_glXQueryVersion(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3908,6 +4108,8 @@ pygl_GLX_glXQueryVideoCaptureDeviceNV(PyObject *_self, PyObject *const *_a, size
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3946,6 +4148,8 @@ pygl_GLX_glXReleaseBuffersMESA(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3984,6 +4188,8 @@ pygl_GLX_glXReleaseTexImageEXT(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4021,6 +4227,8 @@ pygl_GLX_glXReleaseVideoCaptureDeviceNV(PyObject *_self, PyObject *const *_a, si
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4060,6 +4268,8 @@ pygl_GLX_glXReleaseVideoDeviceNV(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4098,6 +4308,8 @@ pygl_GLX_glXReleaseVideoImageNV(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4136,6 +4348,8 @@ pygl_GLX_glXResetFrameCountNV(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4174,6 +4388,8 @@ pygl_GLX_glXSelectEvent(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4212,6 +4428,8 @@ pygl_GLX_glXSelectEventSGIX(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4253,6 +4471,8 @@ pygl_GLX_glXSendPbufferToVideoNV(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4287,6 +4507,8 @@ pygl_GLX_glXSet3DfxModeMESA(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, unsigned char, (int), (mode));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4323,6 +4545,8 @@ pygl_GLX_glXSwapBuffers(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4364,6 +4588,8 @@ pygl_GLX_glXSwapBuffersMscOML(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = PyLong_FromLongLong((long long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4402,6 +4628,8 @@ pygl_GLX_glXSwapIntervalEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4436,6 +4664,8 @@ pygl_GLX_glXSwapIntervalMESA(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_R(_result, int, (unsigned int), (interval));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4469,6 +4699,8 @@ pygl_GLX_glXSwapIntervalSGI(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R(_result, int, (int), (interval));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4505,6 +4737,8 @@ pygl_GLX_glXUseXFont(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObj
     PYGL_CALL_V((void *, int, int, int), (font, first, count, list));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4548,6 +4782,8 @@ pygl_GLX_glXWaitForMscOML(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4590,6 +4826,8 @@ pygl_GLX_glXWaitForSbcOML(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4622,6 +4860,8 @@ pygl_GLX_glXWaitGL(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObjec
     PYGL_CALL_V_BLOCKING((void), ());
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4660,6 +4900,8 @@ pygl_GLX_glXWaitVideoSyncSGI(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4692,6 +4934,8 @@ pygl_GLX_glXWaitX(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObject
     PYGL_CALL_V_BLOCKING((void), ());
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }

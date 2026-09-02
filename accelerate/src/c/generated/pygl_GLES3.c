@@ -36,6 +36,8 @@ pygl_GLES3_glActiveShaderProgram(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_V((unsigned int, unsigned int), (pipeline, program));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -70,6 +72,8 @@ pygl_GLES3_glBeginQuery(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_V((unsigned int, unsigned int), (target, id));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -103,6 +107,8 @@ pygl_GLES3_glBeginTransformFeedback(PyObject *_self, PyObject *const *_a, size_t
     PYGL_CALL_V((unsigned int), (primitiveMode));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -138,6 +144,8 @@ pygl_GLES3_glBindBufferBase(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_V((unsigned int, unsigned int, unsigned int), (target, index, buffer));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -175,6 +183,8 @@ pygl_GLES3_glBindBufferRange(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_V((unsigned int, unsigned int, unsigned int, intptr_t, ptrdiff_t), (target, index, buffer, offset, size));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -214,6 +224,8 @@ pygl_GLES3_glBindImageTexture(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_V((unsigned int, unsigned int, int, unsigned char, int, unsigned int, unsigned int), (unit, texture, level, layered, layer, access, format));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -247,6 +259,8 @@ pygl_GLES3_glBindProgramPipeline(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_V((unsigned int), (pipeline));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -281,6 +295,8 @@ pygl_GLES3_glBindSampler(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_CALL_V((unsigned int, unsigned int), (unit, sampler));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -315,6 +331,8 @@ pygl_GLES3_glBindTransformFeedback(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_CALL_V((unsigned int, unsigned int), (target, id));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -348,6 +366,8 @@ pygl_GLES3_glBindVertexArray(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_V((unsigned int), (array));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -384,6 +404,8 @@ pygl_GLES3_glBindVertexBuffer(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_V((unsigned int, unsigned int, intptr_t, int), (bindingindex, buffer, offset, stride));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -426,6 +448,8 @@ pygl_GLES3_glBlitFramebuffer(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_V_BLOCKING((int, int, int, int, int, int, int, int, unsigned int, unsigned int), (srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -462,6 +486,8 @@ pygl_GLES3_glClearBufferfi(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CALL_V((unsigned int, int, float, int), (buffer, drawbuffer, depth, stencil));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -499,6 +525,8 @@ pygl_GLES3_glClearBufferfv(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -537,6 +565,8 @@ pygl_GLES3_glClearBufferiv(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -575,6 +605,8 @@ pygl_GLES3_glClearBufferuiv(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -611,6 +643,8 @@ pygl_GLES3_glClientWaitSync(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R_BLOCKING(_result, unsigned int, (void *, unsigned int, uint64_t), (sync, flags, timeout));
     PYGL_CHECK();
     return PyLong_FromUnsignedLong((unsigned long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -654,6 +688,8 @@ pygl_GLES3_glCompressedTexImage3D(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -700,6 +736,8 @@ pygl_GLES3_glCompressedTexSubImage3D(PyObject *_self, PyObject *const *_a, size_
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -738,6 +776,8 @@ pygl_GLES3_glCopyBufferSubData(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_V((unsigned int, unsigned int, intptr_t, intptr_t, ptrdiff_t), (readTarget, writeTarget, readOffset, writeOffset, size));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -779,6 +819,8 @@ pygl_GLES3_glCopyTexSubImage3D(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_V_BLOCKING((unsigned int, int, int, int, int, int, int, int, int), (target, level, xoffset, yoffset, zoffset, x, y, width, height));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -817,6 +859,8 @@ pygl_GLES3_glCreateShaderProgramv(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -854,6 +898,8 @@ pygl_GLES3_glDeleteProgramPipelines(PyObject *_self, PyObject *const *_a, size_t
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -891,6 +937,8 @@ pygl_GLES3_glDeleteQueries(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -928,6 +976,8 @@ pygl_GLES3_glDeleteSamplers(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -962,6 +1012,8 @@ pygl_GLES3_glDeleteSync(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_V((void *), (sync));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -998,6 +1050,8 @@ pygl_GLES3_glDeleteTransformFeedbacks(PyObject *_self, PyObject *const *_a, size
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1035,6 +1089,8 @@ pygl_GLES3_glDeleteVertexArrays(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1071,6 +1127,8 @@ pygl_GLES3_glDispatchCompute(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_V_BLOCKING((unsigned int, unsigned int, unsigned int), (num_groups_x, num_groups_y, num_groups_z));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1104,6 +1162,8 @@ pygl_GLES3_glDispatchComputeIndirect(PyObject *_self, PyObject *const *_a, size_
     PYGL_CALL_V_BLOCKING((intptr_t), (indirect));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1140,6 +1200,8 @@ pygl_GLES3_glDrawArraysIndirect(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1177,6 +1239,8 @@ pygl_GLES3_glDrawArraysInstanced(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_V((unsigned int, int, int, int), (mode, first, count, instancecount));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1213,6 +1277,8 @@ pygl_GLES3_glDrawBuffers(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1251,6 +1317,8 @@ pygl_GLES3_glDrawElementsIndirect(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1286,11 +1354,13 @@ pygl_GLES3_glDrawElementsInstanced(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_U(2, type);
     PYGL_SZ(4, instancecount);
     PYGL_CONV_OK();
-    PYGL_ARRAY_TYPED(3, indices, type, 0);
+    PYGL_ARRAY_TYPED(3, indices, type);
     PYGL_CALL_V((unsigned int, int, unsigned int, void *, int), (mode, count, type, indices, instancecount));
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1327,11 +1397,13 @@ pygl_GLES3_glDrawRangeElements(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_SZ(3, count);
     PYGL_U(4, type);
     PYGL_CONV_OK();
-    PYGL_ARRAY_TYPED(5, indices, type, 0);
+    PYGL_ARRAY_TYPED(5, indices, type);
     PYGL_CALL_V((unsigned int, unsigned int, unsigned int, int, unsigned int, void *), (mode, start, end, count, type, indices));
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1366,6 +1438,8 @@ pygl_GLES3_glEndQuery(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyOb
     PYGL_CALL_V((unsigned int), (target));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1397,6 +1471,8 @@ pygl_GLES3_glEndTransformFeedback(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_CALL_V((void), ());
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1431,6 +1507,8 @@ pygl_GLES3_glFenceSync(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyO
     PYGL_CALL_R(_result, void *, (unsigned int, unsigned int), (condition, flags));
     PYGL_CHECK();
     return pygl_opaque((void *)_result, "GLsync");
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1466,6 +1544,8 @@ pygl_GLES3_glFlushMappedBufferRange(PyObject *_self, PyObject *const *_a, size_t
     PYGL_CALL_V_BLOCKING((unsigned int, intptr_t, ptrdiff_t), (target, offset, length));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1501,6 +1581,8 @@ pygl_GLES3_glFramebufferParameteri(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_CALL_V((unsigned int, unsigned int, int), (target, pname, param));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1538,6 +1620,8 @@ pygl_GLES3_glFramebufferTextureLayer(PyObject *_self, PyObject *const *_a, size_
     PYGL_CALL_V((unsigned int, unsigned int, unsigned int, int, int), (target, attachment, texture, level, layer));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -1575,6 +1659,8 @@ pygl_GLES3_glGenProgramPipelines(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = pygl_output_value(&_bufs[pipelines_slot], &pygl_elem_GLuint, (Py_ssize_t)(n));
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1613,6 +1699,8 @@ pygl_GLES3_glGenQueries(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PyObject *_value = pygl_output_value(&_bufs[ids_slot], &pygl_elem_GLuint, (Py_ssize_t)(n));
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1651,6 +1739,8 @@ pygl_GLES3_glGenSamplers(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PyObject *_value = pygl_output_value(&_bufs[samplers_slot], &pygl_elem_GLuint, (Py_ssize_t)(count));
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1689,6 +1779,8 @@ pygl_GLES3_glGenTransformFeedbacks(PyObject *_self, PyObject *const *_a, size_t 
     PyObject *_value = pygl_output_value(&_bufs[ids_slot], &pygl_elem_GLuint, (Py_ssize_t)(n));
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1727,6 +1819,8 @@ pygl_GLES3_glGenVertexArrays(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = pygl_output_value(&_bufs[arrays_slot], &pygl_elem_GLuint, (Py_ssize_t)(n));
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1772,6 +1866,8 @@ pygl_GLES3_glGetActiveUniformBlockName(PyObject *_self, PyObject *const *_a, siz
     PyObject *_value = pygl_output_tuple(_bufs, _outputs, 2);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1811,6 +1907,8 @@ pygl_GLES3_glGetActiveUniformBlockiv(PyObject *_self, PyObject *const *_a, size_
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1851,6 +1949,8 @@ pygl_GLES3_glGetActiveUniformsiv(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1890,6 +1990,8 @@ pygl_GLES3_glGetBooleani_v(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PyObject *_value = pygl_output_value(&_bufs[data_slot], &pygl_elem_GLboolean, data_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1929,6 +2031,8 @@ pygl_GLES3_glGetBufferParameteri64v(PyObject *_self, PyObject *const *_a, size_t
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLint64, params_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -1968,6 +2072,8 @@ pygl_GLES3_glGetBufferPointerv(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_voidp, (Py_ssize_t)(1));
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2006,6 +2112,8 @@ pygl_GLES3_glGetFragDataLocation(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2045,6 +2153,8 @@ pygl_GLES3_glGetFramebufferParameteriv(PyObject *_self, PyObject *const *_a, siz
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLint, params_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2084,6 +2194,8 @@ pygl_GLES3_glGetInteger64i_v(PyObject *_self, PyObject *const *_a, size_t _nargs
     PyObject *_value = pygl_output_value(&_bufs[data_slot], &pygl_elem_GLint64, data_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2122,6 +2234,8 @@ pygl_GLES3_glGetInteger64v(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PyObject *_value = pygl_output_value(&_bufs[data_slot], &pygl_elem_GLint64, data_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2161,6 +2275,8 @@ pygl_GLES3_glGetIntegeri_v(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PyObject *_value = pygl_output_value(&_bufs[data_slot], &pygl_elem_GLint, data_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2202,6 +2318,8 @@ pygl_GLES3_glGetInternalformativ(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLint, (Py_ssize_t)(count));
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2241,6 +2359,8 @@ pygl_GLES3_glGetMultisamplefv(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = pygl_output_value(&_bufs[val_slot], &pygl_elem_GLfloat, val_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2287,6 +2407,8 @@ pygl_GLES3_glGetProgramBinary(PyObject *_self, PyObject *const *_a, size_t _narg
     PyObject *_value = pygl_output_tuple(_bufs, _outputs, 3);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2327,6 +2449,8 @@ pygl_GLES3_glGetProgramInterfaceiv(PyObject *_self, PyObject *const *_a, size_t 
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLint, params_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2371,6 +2495,8 @@ pygl_GLES3_glGetProgramPipelineInfoLog(PyObject *_self, PyObject *const *_a, siz
     PyObject *_value = pygl_output_tuple(_bufs, _outputs, 2);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2410,6 +2536,8 @@ pygl_GLES3_glGetProgramPipelineiv(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLint, params_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2449,6 +2577,8 @@ pygl_GLES3_glGetProgramResourceIndex(PyObject *_self, PyObject *const *_a, size_
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2488,6 +2618,8 @@ pygl_GLES3_glGetProgramResourceLocation(PyObject *_self, PyObject *const *_a, si
     PyObject *_value = PyLong_FromLong((long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2534,6 +2666,8 @@ pygl_GLES3_glGetProgramResourceName(PyObject *_self, PyObject *const *_a, size_t
     PyObject *_value = pygl_output_tuple(_bufs, _outputs, 2);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2582,6 +2716,8 @@ pygl_GLES3_glGetProgramResourceiv(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = pygl_output_tuple(_bufs, _outputs, 2);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2621,6 +2757,8 @@ pygl_GLES3_glGetQueryObjectuiv(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLuint, params_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2660,6 +2798,8 @@ pygl_GLES3_glGetQueryiv(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLint, params_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2699,6 +2839,8 @@ pygl_GLES3_glGetSamplerParameterfv(PyObject *_self, PyObject *const *_a, size_t 
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLfloat, params_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2738,6 +2880,8 @@ pygl_GLES3_glGetSamplerParameteriv(PyObject *_self, PyObject *const *_a, size_t 
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLint, params_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2773,6 +2917,8 @@ pygl_GLES3_glGetStringi(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_R(_result, void *, (unsigned int, unsigned int), (name, index));
     PYGL_CHECK();
     return pygl_bytes_or_none((const char *)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -2817,6 +2963,8 @@ pygl_GLES3_glGetSynciv(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyO
     PyObject *_value = pygl_output_tuple(_bufs, _outputs, 2);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2857,6 +3005,8 @@ pygl_GLES3_glGetTexLevelParameterfv(PyObject *_self, PyObject *const *_a, size_t
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLfloat, params_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2897,6 +3047,8 @@ pygl_GLES3_glGetTexLevelParameteriv(PyObject *_self, PyObject *const *_a, size_t
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLint, params_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2946,6 +3098,8 @@ pygl_GLES3_glGetTransformFeedbackVarying(PyObject *_self, PyObject *const *_a, s
     PyObject *_value = pygl_output_tuple(_bufs, _outputs, 4);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -2984,6 +3138,8 @@ pygl_GLES3_glGetUniformBlockIndex(PyObject *_self, PyObject *const *_a, size_t _
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3024,6 +3180,8 @@ pygl_GLES3_glGetUniformIndices(PyObject *_self, PyObject *const *_a, size_t _nar
     PyObject *_value = pygl_output_value(&_bufs[uniformIndices_slot], &pygl_elem_GLuint, uniformIndices_count);
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3062,6 +3220,8 @@ pygl_GLES3_glGetUniformuiv(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3101,6 +3261,8 @@ pygl_GLES3_glGetVertexAttribIiv(PyObject *_self, PyObject *const *_a, size_t _na
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLint, (Py_ssize_t)(1));
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3140,6 +3302,8 @@ pygl_GLES3_glGetVertexAttribIuiv(PyObject *_self, PyObject *const *_a, size_t _n
     PyObject *_value = pygl_output_value(&_bufs[params_slot], &pygl_elem_GLuint, (Py_ssize_t)(1));
     PYGL_CLEANUP();
     return _value;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3178,6 +3342,8 @@ pygl_GLES3_glInvalidateFramebuffer(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3220,6 +3386,8 @@ pygl_GLES3_glInvalidateSubFramebuffer(PyObject *_self, PyObject *const *_a, size
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3254,6 +3422,8 @@ pygl_GLES3_glIsProgramPipeline(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_R(_result, unsigned char, (unsigned int), (pipeline));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3287,6 +3457,8 @@ pygl_GLES3_glIsQuery(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObj
     PYGL_CALL_R(_result, unsigned char, (unsigned int), (id));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3320,6 +3492,8 @@ pygl_GLES3_glIsSampler(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyO
     PYGL_CALL_R(_result, unsigned char, (unsigned int), (sampler));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3353,6 +3527,8 @@ pygl_GLES3_glIsSync(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyObje
     PYGL_CALL_R(_result, unsigned char, (void *), (sync));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3386,6 +3562,8 @@ pygl_GLES3_glIsTransformFeedback(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_R(_result, unsigned char, (unsigned int), (id));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3419,6 +3597,8 @@ pygl_GLES3_glIsVertexArray(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CALL_R(_result, unsigned char, (unsigned int), (array));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3455,6 +3635,8 @@ pygl_GLES3_glMapBufferRange(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_CALL_R_BLOCKING(_result, void *, (unsigned int, intptr_t, ptrdiff_t, unsigned int), (target, offset, length, access));
     PYGL_CHECK();
     return pygl_address_or_none(_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3488,6 +3670,8 @@ pygl_GLES3_glMemoryBarrier(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CALL_V((unsigned int), (barriers));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3521,6 +3705,8 @@ pygl_GLES3_glMemoryBarrierByRegion(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_CALL_V((unsigned int), (barriers));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3552,6 +3738,8 @@ pygl_GLES3_glPauseTransformFeedback(PyObject *_self, PyObject *const *_a, size_t
     PYGL_CALL_V((void), ());
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3590,6 +3778,8 @@ pygl_GLES3_glProgramBinary(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3626,6 +3816,8 @@ pygl_GLES3_glProgramParameteri(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_V((unsigned int, unsigned int, int), (program, pname, value));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3661,6 +3853,8 @@ pygl_GLES3_glProgramUniform1f(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_V((unsigned int, int, float), (program, location, v0));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3699,6 +3893,8 @@ pygl_GLES3_glProgramUniform1fv(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3735,6 +3931,8 @@ pygl_GLES3_glProgramUniform1i(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_V((unsigned int, int, int), (program, location, v0));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3773,6 +3971,8 @@ pygl_GLES3_glProgramUniform1iv(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3809,6 +4009,8 @@ pygl_GLES3_glProgramUniform1ui(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_V((unsigned int, int, unsigned int), (program, location, v0));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3847,6 +4049,8 @@ pygl_GLES3_glProgramUniform1uiv(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3884,6 +4088,8 @@ pygl_GLES3_glProgramUniform2f(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_V((unsigned int, int, float, float), (program, location, v0, v1));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3922,6 +4128,8 @@ pygl_GLES3_glProgramUniform2fv(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -3959,6 +4167,8 @@ pygl_GLES3_glProgramUniform2i(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_V((unsigned int, int, int, int), (program, location, v0, v1));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -3997,6 +4207,8 @@ pygl_GLES3_glProgramUniform2iv(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4034,6 +4246,8 @@ pygl_GLES3_glProgramUniform2ui(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_V((unsigned int, int, unsigned int, unsigned int), (program, location, v0, v1));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4072,6 +4286,8 @@ pygl_GLES3_glProgramUniform2uiv(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4110,6 +4326,8 @@ pygl_GLES3_glProgramUniform3f(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_V((unsigned int, int, float, float, float), (program, location, v0, v1, v2));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4148,6 +4366,8 @@ pygl_GLES3_glProgramUniform3fv(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4186,6 +4406,8 @@ pygl_GLES3_glProgramUniform3i(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_V((unsigned int, int, int, int, int), (program, location, v0, v1, v2));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4224,6 +4446,8 @@ pygl_GLES3_glProgramUniform3iv(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4262,6 +4486,8 @@ pygl_GLES3_glProgramUniform3ui(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_V((unsigned int, int, unsigned int, unsigned int, unsigned int), (program, location, v0, v1, v2));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4300,6 +4526,8 @@ pygl_GLES3_glProgramUniform3uiv(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4339,6 +4567,8 @@ pygl_GLES3_glProgramUniform4f(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_V((unsigned int, int, float, float, float, float), (program, location, v0, v1, v2, v3));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4377,6 +4607,8 @@ pygl_GLES3_glProgramUniform4fv(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4416,6 +4648,8 @@ pygl_GLES3_glProgramUniform4i(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_V((unsigned int, int, int, int, int, int), (program, location, v0, v1, v2, v3));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4454,6 +4688,8 @@ pygl_GLES3_glProgramUniform4iv(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4493,6 +4729,8 @@ pygl_GLES3_glProgramUniform4ui(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_V((unsigned int, int, unsigned int, unsigned int, unsigned int, unsigned int), (program, location, v0, v1, v2, v3));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4531,6 +4769,8 @@ pygl_GLES3_glProgramUniform4uiv(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4571,6 +4811,8 @@ pygl_GLES3_glProgramUniformMatrix2fv(PyObject *_self, PyObject *const *_a, size_
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4611,6 +4853,8 @@ pygl_GLES3_glProgramUniformMatrix2x3fv(PyObject *_self, PyObject *const *_a, siz
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4651,6 +4895,8 @@ pygl_GLES3_glProgramUniformMatrix2x4fv(PyObject *_self, PyObject *const *_a, siz
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4691,6 +4937,8 @@ pygl_GLES3_glProgramUniformMatrix3fv(PyObject *_self, PyObject *const *_a, size_
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4731,6 +4979,8 @@ pygl_GLES3_glProgramUniformMatrix3x2fv(PyObject *_self, PyObject *const *_a, siz
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4771,6 +5021,8 @@ pygl_GLES3_glProgramUniformMatrix3x4fv(PyObject *_self, PyObject *const *_a, siz
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4811,6 +5063,8 @@ pygl_GLES3_glProgramUniformMatrix4fv(PyObject *_self, PyObject *const *_a, size_
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4851,6 +5105,8 @@ pygl_GLES3_glProgramUniformMatrix4x2fv(PyObject *_self, PyObject *const *_a, siz
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4891,6 +5147,8 @@ pygl_GLES3_glProgramUniformMatrix4x3fv(PyObject *_self, PyObject *const *_a, siz
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -4925,6 +5183,8 @@ pygl_GLES3_glReadBuffer(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_V((unsigned int), (src));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4962,6 +5222,8 @@ pygl_GLES3_glRenderbufferStorageMultisample(PyObject *_self, PyObject *const *_a
     PYGL_CALL_V((unsigned int, int, unsigned int, int, int), (target, samples, internalformat, width, height));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -4993,6 +5255,8 @@ pygl_GLES3_glResumeTransformFeedback(PyObject *_self, PyObject *const *_a, size_
     PYGL_CALL_V((void), ());
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5027,6 +5291,8 @@ pygl_GLES3_glSampleMaski(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_CALL_V((unsigned int, unsigned int), (maskNumber, mask));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5062,6 +5328,8 @@ pygl_GLES3_glSamplerParameterf(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_V((unsigned int, unsigned int, float), (sampler, pname, param));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5099,6 +5367,8 @@ pygl_GLES3_glSamplerParameterfv(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5135,6 +5405,8 @@ pygl_GLES3_glSamplerParameteri(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CALL_V((unsigned int, unsigned int, int), (sampler, pname, param));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5172,6 +5444,8 @@ pygl_GLES3_glSamplerParameteriv(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5217,6 +5491,8 @@ pygl_GLES3_glTexImage3D(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5255,6 +5531,8 @@ pygl_GLES3_glTexStorage2D(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_CALL_V((unsigned int, int, unsigned int, int, int), (target, levels, internalformat, width, height));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5293,6 +5571,8 @@ pygl_GLES3_glTexStorage2DMultisample(PyObject *_self, PyObject *const *_a, size_
     PYGL_CALL_V((unsigned int, int, unsigned int, int, int, unsigned char), (target, samples, internalformat, width, height, fixedsamplelocations));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5331,6 +5611,8 @@ pygl_GLES3_glTexStorage3D(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_CALL_V((unsigned int, int, unsigned int, int, int, int), (target, levels, internalformat, width, height, depth));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5376,6 +5658,8 @@ pygl_GLES3_glTexSubImage3D(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5415,6 +5699,8 @@ pygl_GLES3_glTransformFeedbackVaryings(PyObject *_self, PyObject *const *_a, siz
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5450,6 +5736,8 @@ pygl_GLES3_glUniform1ui(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_V((int, unsigned int), (location, v0));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5487,6 +5775,8 @@ pygl_GLES3_glUniform1uiv(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5523,6 +5813,8 @@ pygl_GLES3_glUniform2ui(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_V((int, unsigned int, unsigned int), (location, v0, v1));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5560,6 +5852,8 @@ pygl_GLES3_glUniform2uiv(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5597,6 +5891,8 @@ pygl_GLES3_glUniform3ui(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_V((int, unsigned int, unsigned int, unsigned int), (location, v0, v1, v2));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5634,6 +5930,8 @@ pygl_GLES3_glUniform3uiv(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5672,6 +5970,8 @@ pygl_GLES3_glUniform4ui(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_CALL_V((int, unsigned int, unsigned int, unsigned int, unsigned int), (location, v0, v1, v2, v3));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5709,6 +6009,8 @@ pygl_GLES3_glUniform4uiv(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5745,6 +6047,8 @@ pygl_GLES3_glUniformBlockBinding(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_V((unsigned int, unsigned int, unsigned int), (program, uniformBlockIndex, uniformBlockBinding));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -5783,6 +6087,8 @@ pygl_GLES3_glUniformMatrix2x3fv(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5822,6 +6128,8 @@ pygl_GLES3_glUniformMatrix2x4fv(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5861,6 +6169,8 @@ pygl_GLES3_glUniformMatrix3x2fv(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5900,6 +6210,8 @@ pygl_GLES3_glUniformMatrix3x4fv(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5939,6 +6251,8 @@ pygl_GLES3_glUniformMatrix4x2fv(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -5978,6 +6292,8 @@ pygl_GLES3_glUniformMatrix4x3fv(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -6012,6 +6328,8 @@ pygl_GLES3_glUnmapBuffer(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_CALL_R_BLOCKING(_result, unsigned char, (unsigned int), (target));
     PYGL_CHECK();
     return PyLong_FromLong((long)_result);
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -6047,6 +6365,8 @@ pygl_GLES3_glUseProgramStages(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_V((unsigned int, unsigned int, unsigned int), (pipeline, stages, program));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -6080,6 +6400,8 @@ pygl_GLES3_glValidateProgramPipeline(PyObject *_self, PyObject *const *_a, size_
     PYGL_CALL_V((unsigned int), (pipeline));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -6114,6 +6436,8 @@ pygl_GLES3_glVertexAttribBinding(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_V((unsigned int, unsigned int), (attribindex, bindingindex));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -6148,6 +6472,8 @@ pygl_GLES3_glVertexAttribDivisor(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_V((unsigned int, unsigned int), (index, divisor));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -6185,6 +6511,8 @@ pygl_GLES3_glVertexAttribFormat(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_CALL_V((unsigned int, int, unsigned int, unsigned char, unsigned int), (attribindex, size, type, normalized, relativeoffset));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -6222,6 +6550,8 @@ pygl_GLES3_glVertexAttribI4i(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_CALL_V((unsigned int, int, int, int, int), (index, x, y, z, w));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -6258,6 +6588,8 @@ pygl_GLES3_glVertexAttribI4iv(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -6296,6 +6628,8 @@ pygl_GLES3_glVertexAttribI4ui(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_CALL_V((unsigned int, unsigned int, unsigned int, unsigned int, unsigned int), (index, x, y, z, w));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -6332,6 +6666,8 @@ pygl_GLES3_glVertexAttribI4uiv(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -6369,6 +6705,8 @@ pygl_GLES3_glVertexAttribIFormat(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_CALL_V((unsigned int, int, unsigned int, unsigned int), (attribindex, size, type, relativeoffset));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -6408,6 +6746,8 @@ pygl_GLES3_glVertexAttribIPointer(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_CHECK();
     PYGL_CLEANUP();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     PYGL_CLEANUP();
     return NULL;
@@ -6443,6 +6783,8 @@ pygl_GLES3_glVertexBindingDivisor(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_CALL_V((unsigned int, unsigned int), (bindingindex, divisor));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }
@@ -6478,6 +6820,8 @@ pygl_GLES3_glWaitSync(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyOb
     PYGL_CALL_V_BLOCKING((void *, unsigned int, uint64_t), (sync, flags, timeout));
     PYGL_CHECK();
     Py_RETURN_NONE;
+_argfail:
+    pygl_argument_error(self);
 _fail:
     return NULL;
 }

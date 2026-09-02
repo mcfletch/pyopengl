@@ -17,7 +17,6 @@ static PyObject *pygl_array_types = NULL;  /* list, indexed by array_index */
 static PyObject *pygl_ctypes_argument_error = NULL;
 static PyObject *pygl_null_function_error = NULL;
 static PyObject *pygl_no_context_error = NULL;
-static PyObject *pygl_gl_error = NULL;
 static PyObject *pygl_str_asArray = NULL;
 static PyObject *pygl_str_dataPointer = NULL;
 static PyObject *pygl_str_zeros = NULL;
@@ -388,13 +387,43 @@ PyObject *pygl_arity_range_error(GLProc *self, Py_ssize_t low, Py_ssize_t high,
     return NULL;
 }
 
-/* Bad scalar arguments raise ctypes.ArgumentError today.  Compatibility is the
- * point of the exercise, so the C stub raises the same type; the message text
- * is deliberately not part of the contract. */
-void pygl_argument_error(GLProc *self, Py_ssize_t index, const char *expected)
+/* Bad scalar arguments raise ctypes.ArgumentError.  That type is part of
+ * PyOpenGL's own interface -- OpenGL.error re-exports it, and the ctypes
+ * wrapper catches it to add the converted arguments -- so a program that
+ * catches it has to keep working here.  The type is the contract; the message
+ * is not, so whatever the conversion said is carried across rather than
+ * reconstructed.
+ *
+ * Only a conversion failure is translated.  A MemoryError or a
+ * KeyboardInterrupt that happened to land in the same window is left alone:
+ * calling either of those a bad argument would be a lie, and a caller
+ * catching ArgumentError would swallow it. */
+void pygl_argument_error(GLProc *self)
 {
-    PyErr_Format(pygl_ctypes_argument_error, "argument %zd: %s: expected %s",
-                 index + 1, "TypeError", expected);
+    PyObject *type = NULL, *value = NULL, *traceback = NULL, *text = NULL;
+
+    if (!PyErr_Occurred()) {
+        return;
+    }
+    if (!PyErr_ExceptionMatches(PyExc_TypeError)
+        && !PyErr_ExceptionMatches(PyExc_ValueError)
+        && !PyErr_ExceptionMatches(PyExc_OverflowError)) {
+        return;
+    }
+    PyErr_Fetch(&type, &value, &traceback);
+    PyErr_NormalizeException(&type, &value, &traceback);
+    if (value != NULL) {
+        text = PyObject_Str(value);
+    }
+    if (text == NULL) {
+        PyErr_Restore(type, value, traceback);
+        return;
+    }
+    PyErr_Format(pygl_ctypes_argument_error, "%s: %U", self->info->name, text);
+    Py_DECREF(text);
+    Py_XDECREF(type);
+    Py_XDECREF(value);
+    Py_XDECREF(traceback);
 }
 
 /* GL_DEBUG_TYPE_ERROR.  Declared here rather than included so that the runtime
@@ -1101,6 +1130,10 @@ int pygl_array_typed(GLProc *self, PyObject *object, unsigned int type,
 {
     PyObject *converted, *pointer;
     void *address;
+    /* The acquire helpers share one signature so that the macros can call them
+     * interchangeably; this one reports through the exception the conversion
+     * raised rather than composing its own, so it needs neither. */
+    (void)self;
     (void)index;
 
     out->owner = NULL;
@@ -1775,6 +1808,22 @@ static PyGetSetDef GLProc_getset[] = {
      NULL},
     {NULL}};
 
+/* An entry point is not a method, and binding it to whatever object it was
+ * reached through would be wrong -- so this hands back the entry point itself.
+ * It is here for what answering __get__ at all makes true:
+ * inspect.ismethoddescriptor, and so inspect.isroutine, which is the question
+ * pydoc, Sphinx autodoc and PyOpenGL's own documentation generator ask before
+ * deciding whether a name is a function or a piece of data.  Without it every
+ * entry point documents as an assignment. */
+static PyObject *GLProc_descr_get(PyObject *self, PyObject *object,
+                                  PyObject *type)
+{
+    (void)object;
+    (void)type;
+    Py_INCREF(self);
+    return self;
+}
+
 PyTypeObject PyGLProc_Type = {
     PyVarObject_HEAD_INIT(NULL, 0).tp_name = "OpenGL._dispatch.GLProc",
     .tp_basicsize = sizeof(GLProc),
@@ -1790,6 +1839,7 @@ PyTypeObject PyGLProc_Type = {
     .tp_dictoffset = offsetof(GLProc, dict),
     .tp_getattro = PyObject_GenericGetAttr,
     .tp_setattro = PyObject_GenericSetAttr,
+    .tp_descr_get = GLProc_descr_get,
     .tp_methods = GLProc_methods,
     .tp_getset = GLProc_getset,
     .tp_doc = "An OpenGL entry point, dispatched through the current context's "
@@ -2351,10 +2401,8 @@ static int pygl_init_errors(void)
     }
     pygl_null_function_error = PyObject_GetAttrString(error, "NullFunctionError");
     pygl_no_context_error = PyObject_GetAttrString(error, "NoContext");
-    pygl_gl_error = PyObject_GetAttrString(error, "GLError");
     Py_DECREF(error);
-    return (pygl_null_function_error && pygl_no_context_error && pygl_gl_error) ? 0
-                                                                               : -1;
+    return (pygl_null_function_error && pygl_no_context_error) ? 0 : -1;
 }
 
 static PyModuleDef_Slot pygl_module_slots[];

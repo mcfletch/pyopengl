@@ -79,13 +79,15 @@ class TestCompressedImages:
 class TestEmission:
     def test_a_typed_array_names_its_type_argument(self, commands):
         text = emit_c.emit_stub(commands[('GL', 'glDrawElements')])
-        assert 'PYGL_ARRAY_TYPED(3, indices, type, 0);' in text
+        assert 'PYGL_ARRAY_TYPED(3, indices, type);' in text
 
     def test_a_retained_pointer_says_so(self, commands):
-        """The annotation is emitted even where the entry point is excluded,
-        because the exclusion is about how the Python layer builds it."""
+        """Retention is a pygl_retain() call after the GL call, not a property
+        of how the array was acquired: the annotation is emitted even where the
+        entry point is excluded, because the exclusion is about how the Python
+        layer builds it."""
         text = emit_c.emit_stub(commands[('GL', 'glVertexPointer')])
-        assert 'PYGL_ARRAY_TYPED(3, pointer, type, 1);' in text
+        assert 'PYGL_ARRAY_TYPED(3, pointer, type);' in text
         assert 'pygl_retain' in text
 
     def test_both_families_are_emitted(self, commands):

@@ -363,14 +363,13 @@ def emit_stub(command):
             )
         elif isinstance(parameter.size, model.TypedArray):
             lines.append(
-                '    PYGL_ARRAY_TYPED(%d, %s, %s, %d);'
+                '    PYGL_ARRAY_TYPED(%d, %s, %s);'
                 % (
                     index,
                     parameter.c_name,
                     command.parameters[parameter.size.type_argument].c_name
                     if parameter.size.type_argument >= 0
                     else '0',
-                    1 if parameter.retain else 0,
                 )
             )
         elif isinstance(parameter.size, model.ImageSize):
@@ -524,6 +523,10 @@ def emit_stub(command):
         else:
             lines.append('    return %s;' % (statement,))
 
+    # Falls through into _fail: no array has been acquired at the point a
+    # scalar conversion fails, so there is nothing extra to release.
+    lines.append('_argfail:')
+    lines.append('    pygl_argument_error(self);')
     lines.append('_fail:')
     if arrays:
         lines.append('    PYGL_CLEANUP();')
