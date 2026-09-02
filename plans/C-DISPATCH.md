@@ -1475,6 +1475,41 @@ generated files hold nothing that is not held elsewhere. Removing them takes
 path for third-party `from OpenGL.raw.X import *` and should then default on,
 since it would be the only thing making those names resolve.
 
+### The intermittent crash, and what it was
+
+Three separate things, found in that order, and only the first two were ours.
+
+**`forget_context()` freed a table other threads were still dispatching
+through.** Found in review with a proof of concept that faulted 7 runs in 10.
+`pygl_current` is thread-local, so freeing cleared only the calling thread's
+pointer. A forgotten table is now emptied and retired rather than freed.
+
+**Two copies of the dispatch layer could be loaded at once.** After the
+extension moved to `pyopengl_accelerate`, a stale
+`OpenGL/_dispatch/_dispatch.so` remained and a test still imported it. Each
+copy has its own static tables and its own thread-local current pointer while
+sharing one slot numbering, so an entry point from one used against the
+other's tables reads a wild address.
+
+**The remainder is not ours.** AddressSanitizer gives the whole stack:
+
+```
+#0-#11  libnvidia-eglcore / libEGL_nvidia / libnvidia-egl-wayland
+#12     destroyContextEGL          (glfw wayland backend)
+#13     _glfwDestroyWindowWayland
+#14     glfwDestroyWindow
+#15+    ffi_call -> _ctypes_callproc   (glfw's own ctypes binding)
+```
+
+A NULL dereference inside the NVIDIA EGL/Wayland driver during GLFW's window
+destruction, reached through glfw's own ctypes binding. No frame of PyOpenGL
+appears, and it happens under `ctypes` as well as `c`. The X11 backend would
+avoid the Wayland path, but the installed glfw wheel is Wayland-only.
+
+Recorded because the hunt cost a great deal and the first three explanations —
+environmental, `faulthandler`, the duplicate extension — were each wrong or
+incomplete. What settled it was a stack, not a correlation.
+
 ### Beyond the phases
 
 `.github/workflows/registry-update.yml` pulls the registry weekly,

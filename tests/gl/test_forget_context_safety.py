@@ -39,7 +39,7 @@ RACE = textwrap.dedent(
     '''
     import threading
     import OpenGL.GL as GL
-    from OpenGL._dispatch import _dispatch as _c
+    from OpenGL._dispatch import _c
 
     HANDLE = 0x5EED
     ready, go = threading.Event(), threading.Event()
@@ -90,7 +90,7 @@ def test_forgetting_a_context_another_thread_uses_does_not_crash():
 
 def test_a_forgotten_context_is_no_longer_counted():
     """The point of the call is still served: the table stops being live."""
-    from OpenGL._dispatch import _dispatch as _c
+    from OpenGL._dispatch import _c
 
     before = _c.context_count()
     _c.make_current(0xBEEF)
@@ -101,7 +101,7 @@ def test_a_forgotten_context_is_no_longer_counted():
 
 def test_dispatching_after_a_forget_still_works():
     """A thread whose table was forgotten re-resolves rather than reading it."""
-    from OpenGL._dispatch import _dispatch as _c
+    from OpenGL._dispatch import _c
 
     _c.make_current(0xF00D)
     _c.forget_context(0xF00D)
