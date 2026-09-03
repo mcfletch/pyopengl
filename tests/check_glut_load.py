@@ -10,6 +10,14 @@ except ImportError as err:
         return findLib(string)[0]
 
 
+import checkutils
+
+# The Unix library names: this check is that a plain ctypes load of them works,
+# which is a question only a system that has them under those names can answer.
+for _wanted in ('GL', 'GLU', 'glut'):
+    if find_library(_wanted) is None:
+        checkutils.skip('no library named %r on this system' % (_wanted,))
+
 GL = OpenGL = ctypes.CDLL(find_library('GL'), mode=ctypes.RTLD_GLOBAL)
 GLU = ctypes.CDLL(find_library('GLU'), mode=ctypes.RTLD_GLOBAL)
 # glut shouldn't need to be global IIUC

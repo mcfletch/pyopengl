@@ -1,5 +1,10 @@
-from os_egl import egl_context, NoEGLSupport, NoConfig
 from checkutils import skip
+
+try:
+    from os_egl import egl_context, NoEGLSupport, NoConfig
+except ImportError as err:
+    # os_egl drives EGL through GBM, which is Linux graphics infrastructure.
+    skip('EGL device enumeration needs gbm: %s' % (err,))
 from OpenGL import EGL
 from OpenGL.raw.EGL._errors import EGLError
 from OpenGL.EGL.EXT import device_query, device_enumeration

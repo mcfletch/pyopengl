@@ -56,6 +56,25 @@ if _configflags.ERROR_CHECKING:
     @_lazy( full.glEnd )
     def glEnd( baseFunction ):
         """Finish GL geometry-definition mode, re-enable automatic error checking"""
+        from OpenGL import error as _error
+
+        if _error.take_lookup_inside_block( ):
+            # An address lookup PyOpenGL made inside the block recorded an
+            # error the caller did not cause, and it becomes visible only now.
+            # End the block with checking still off, then consume it -- there
+            # is no way to tell it apart from the caller's once the block is
+            # closed, and it is ours.
+            result = baseFunction( )
+            _errors._error_checker.onEnd( )
+            _suspend_c_checking( False )
+            # The platform's own entry point: unchecked, and the same call
+            # whichever error checker is in use.
+            from OpenGL.platform import PLATFORM as _platform
+
+            _get_error = getattr( _platform.GL, 'glGetError', None )
+            if _get_error is not None:
+                _get_error( )
+            return result
         _errors._error_checker.onEnd( )
         _suspend_c_checking( False )
         return baseFunction( )

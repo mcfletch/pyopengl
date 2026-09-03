@@ -72,7 +72,11 @@ class BasePlatform(object):
         EXPORTED_NAMES -- set of names exported via the platform
             module's namespace...
 
-        GL, GLU, GLUT, GLE, GLES1, GLES2, GLES3 -- ctypes libraries
+        GL, GLU, GLUT, GLE, GLES1, GLES2, GLES3, EGL, GLX -- ctypes
+            libraries, or None where this platform has no such library.
+            A subclass normally overrides the ones it can provide with a
+            lazy_property, so that a library is only loaded once something
+            asks for it.
 
         DEFAULT_FUNCTION_TYPE -- used as the default function
             type for functions unless overridden on a per-DLL
@@ -101,6 +105,23 @@ class BasePlatform(object):
     DEFAULT_FUNCTION_TYPE = None
     GLUT_GUARD_CALLBACKS = False
     EXTENSIONS_USE_BASE_FUNCTIONS = False
+
+    # The libraries every platform is asked about.  None means "this platform
+    # has no such library", which the OpenGL.raw modules read as "no entry
+    # points here": the namespace still imports, and calling into it raises
+    # NullFunctionError naming the function that is missing.  Leaving one
+    # undefined instead turns `import OpenGL.GLES2` into an AttributeError
+    # against the platform object, several frames from anything the caller
+    # wrote.
+    GL = None
+    GLU = None
+    GLUT = None
+    GLE = None
+    GLES1 = None
+    GLES2 = None
+    GLES3 = None
+    EGL = None
+    GLX = None
 
     def install(self, namespace):
         """Install this platform instance into the platform module"""

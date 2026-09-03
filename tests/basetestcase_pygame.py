@@ -25,15 +25,11 @@ OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING = True
 
 #from OpenGL._bytes import bytes, _NULL_8_BYTE, unicode, as_8_bit
 from OpenGL.GL import *
-try:
-    glGetError()
-except error.NoContext as err:
-    # good, should have got this error 
-    pass
-else:
-    print( 'WARNING: Failed to catch invalid context' )
-    #raise RuntimeError( """Did not catch invalid context!""" )
-#from OpenGL import error
+# What an entry point does with no current context is decided by
+# OpenGL.CONTEXT_CHECKING, which only takes effect if it is set before anything
+# builds the entry points -- so it cannot be asked here, where OpenGL.GL is
+# usually already imported by whatever was collected first.
+# tests/gl/test_no_context_calls.py settles it in a subprocess instead.
 from OpenGL.GLU import *
 #from OpenGL.arrays import arraydatatype
 import OpenGL

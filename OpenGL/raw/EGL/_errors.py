@@ -14,12 +14,13 @@ class EGLError( EGLError ):
     def err(self, value):
         self.__dict__['err'] = value
 
-if _ErrorChecker:
-    _error_checker = _ErrorChecker( 
-        _p.PLATFORM, 
-        _p.PLATFORM.EGL.eglGetError, 
+_get_error = getattr( _p.PLATFORM.EGL, 'eglGetError', None )
+if _get_error and _ErrorChecker:
+    _error_checker = _ErrorChecker(
+        _p.PLATFORM,
+        _get_error,
         0x3000, # EGL_SUCCESS,
         errorClass = EGLError,
     )
 else:
-    _ErrorChecker = None
+    _error_checker = None

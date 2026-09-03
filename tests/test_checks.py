@@ -272,10 +272,6 @@ def test_test_glgetactiveuniform():
     """Test use of gldouble array in ctypes"""
 
 
-@pytest.mark.xfail(
-    condition=sys.version_info[:2] > (3, 11),
-    reason='Python 3.12+ JIT consumes RAM during this test which the crude memory bookkeeping cannot track',
-)
 @check_test
 def test_test_glgetfloat_leak():
     """Test use of gldouble array in ctypes"""

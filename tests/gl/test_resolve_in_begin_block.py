@@ -91,5 +91,31 @@ class TestResolvingInsideABlock(GLTestCase):
         self.check_error('resolving inside a glBegin block')
 
 
+class TestTheAddressLookup(GLTestCase):
+    """Looking an address up is PyOpenGL's business, not the caller's.
+
+    Resolution asks the platform for an entry point's address, and inside a
+    block that lookup is the only GL-adjacent call the caller did not make.
+    On WGL it records GL_INVALID_OPERATION -- glGetError answers 0 while the
+    block is open, so nothing can see it until glEnd, which then raises for a
+    call the caller never wrote.  Every entry point above GL 1.1 goes through
+    this lookup, so an immediate-mode command first used inside a block hits it
+    every time.
+    """
+
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    def test_a_lookup_inside_a_block_leaves_no_error_behind(self):
+        from OpenGL import platform
+        from OpenGL._bytes import as_8_bit
+
+        glBegin(GL_POINTS)
+        platform.PLATFORM.getExtensionProcedure(as_8_bit('glFogCoordf'))
+        glVertex3f(0.0, 0.0, 0.0)
+        glEnd()
+        self.check_error('address lookup inside a glBegin block')
+
+
 if __name__ == '__main__':
     unittest.main()

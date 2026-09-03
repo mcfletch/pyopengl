@@ -5,7 +5,7 @@ gluBuild{1,2,3}DMipmapLevels texture-pyramid builders."""
 import unittest
 from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
-from glutestcase import GLUTestCase
+from glutestcase import GLUTestCase, requireEntryPoint
 from OpenGL.GL import (
     glGenTextures,
     glBindTexture,
@@ -81,24 +81,28 @@ class TestGLUImages(GLUTestCase):
         self.check_error('gluBuild2DMipmaps')
 
     def test_build_3d_mipmaps(self):
+        requireEntryPoint(gluBuild3DMipmaps, 'gluBuild3DMipmaps')
         self._texture(GL_TEXTURE_3D)
         gluBuild3DMipmaps(GL_TEXTURE_3D, GL_RGB, 8, 8, 8, GL_RGB, GL_UNSIGNED_BYTE,
                           _checker((8, 8, 8, 3)))
         self.check_error('gluBuild3DMipmaps')
 
     def test_build_1d_mipmap_levels(self):
+        requireEntryPoint(gluBuild1DMipmapLevels, 'gluBuild1DMipmapLevels')
         self._texture(GL_TEXTURE_1D)
         gluBuild1DMipmapLevels(GL_TEXTURE_1D, GL_RGB, 8, GL_RGB, GL_UNSIGNED_BYTE,
                                0, 0, 3, _checker((8, 3)))
         self.check_error('gluBuild1DMipmapLevels')
 
     def test_build_2d_mipmap_levels(self):
+        requireEntryPoint(gluBuild2DMipmapLevels, 'gluBuild2DMipmapLevels')
         self._texture(GL_TEXTURE_2D)
         gluBuild2DMipmapLevels(GL_TEXTURE_2D, GL_RGB, 8, 8, GL_RGB, GL_UNSIGNED_BYTE,
                                0, 0, 3, _checker((8, 8, 3)))
         self.check_error('gluBuild2DMipmapLevels')
 
     def test_build_3d_mipmap_levels(self):
+        requireEntryPoint(gluBuild3DMipmapLevels, 'gluBuild3DMipmapLevels')
         self._texture(GL_TEXTURE_3D)
         gluBuild3DMipmapLevels(GL_TEXTURE_3D, GL_RGB, 8, 8, 8, GL_RGB, GL_UNSIGNED_BYTE,
                                0, 0, 3, _checker((8, 8, 8, 3)))

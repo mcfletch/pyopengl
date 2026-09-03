@@ -350,6 +350,21 @@ FormatHandler(
         "numpy.float32",
         "numpy.float64",
         "numpy.float128",
+        # numpy names each scalar type twice: by width above, and after the C
+        # type of that width here.  Whether the two names are one object
+        # depends on the platform's C model -- on LLP64 (Windows) intc and
+        # uintc are types of their own, and an array built from a ctypes
+        # declaration yields them.
+        "numpy.byte",
+        "numpy.ubyte",
+        "numpy.short",
+        "numpy.ushort",
+        "numpy.intc",
+        "numpy.uintc",
+        "numpy.longlong",
+        "numpy.ulonglong",
+        "numpy.single",
+        "numpy.double",
     ],
     isOutput=True,
 )

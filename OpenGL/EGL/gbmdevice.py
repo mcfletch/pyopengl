@@ -7,7 +7,13 @@ import weakref, ctypes, logging, os, glob
 from OpenGL.platform import ctypesloader
 from OpenGL import _opaque
 log = logging.getLogger(__name__)
-gbm = ctypesloader.loadLibrary(ctypes.CDLL,"gbm")
+try:
+    gbm = ctypesloader.loadLibrary(ctypes.CDLL,"gbm")
+except OSError as err:
+    # libgbm is Linux graphics infrastructure; everything here is a wrapper
+    # around it, so without it there is no module.  ImportError is what a
+    # caller guards an optional import with.
+    raise ImportError("OpenGL.EGL.gbmdevice needs the gbm library: %s" % (err,)) from err
 __all__ = ('enumerate_devices','open_device','close_device','gbm')
 _DEVICE_HANDLES = {}
 GBM_BO_USE_SCANOUT = (1 << 0)

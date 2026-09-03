@@ -1290,8 +1290,8 @@ GL_PACK_SUBSAMPLE_RATE_SGIX	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl
 GL_PACK_SWAP_BYTES	(1,)
 GL_PARALLEL_ARRAYS_INTEL	(1,)
 GL_PARAMETER_BUFFER_BINDING_ARB	(1,)
-GL_PATCH_DEFAULT_INNER_LEVEL	(1,)
-GL_PATCH_DEFAULT_OUTER_LEVEL	(1,)
+GL_PATCH_DEFAULT_INNER_LEVEL	(2,)
+GL_PATCH_DEFAULT_OUTER_LEVEL	(4,)
 GL_PATCH_VERTICES	(1,)
 GL_PATH_COMMAND_COUNT_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/path_rendering.txt
 GL_PATH_COMPUTED_LENGTH_NV	(1,)	#TODO Review http://www.opengl.org/registry/specs//NV/path_rendering.txt

@@ -122,15 +122,20 @@ for dimensions in (1, 2, 3):
     except NameError as err:
         pass
 
-if glGetCompressedTexImageARB:
+from OpenGL.raw.GL.ARB import texture_compression as _simple
+from OpenGL.GL.VERSION.GL_1_1 import glGetTexLevelParameteriv as _glGetTexLevelParameteriv
+from OpenGL.raw.GL._types import GL_UNSIGNED_BYTE as _GL_UNSIGNED_BYTE
 
-    def glGetCompressedTexImageARB(target, level, img=None):
-        """Retrieve a compressed texture image"""
-        if img is None:
-            length = glget.glGetTexLevelParameteriv(
-                target,
-                0,
-                GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB,
-            )
-            img = arrays.ArrayDataType.zeros((length,), GL_1_0.GL_UNSIGNED_BYTE)
-        return glGetCompressedTexImageARB(target, 0, img)
+
+# Defined whether or not the entry point resolves right now: see the note in
+# OpenGL/GL/VERSION/GL_1_3.py, which carries the core version of this call.
+def glGetCompressedTexImageARB(target, level, img=None):
+    """Retrieve a compressed texture image"""
+    if img is None:
+        length = _glGetTexLevelParameteriv(
+            target,
+            level,
+            _simple.GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB,
+        )
+        img = arrays.ArrayDatatype.zeros((length,), _GL_UNSIGNED_BYTE)
+    return _simple.glGetCompressedTexImageARB(target, level, img)

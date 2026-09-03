@@ -4,7 +4,7 @@ gluPickMatrix, gluProject, gluUnProject, gluUnProject4."""
 
 import unittest
 
-from glutestcase import GLUTestCase
+from glutestcase import GLUTestCase, requireEntryPoint
 from OpenGL.GL import (
     glMatrixMode,
     glLoadIdentity,
@@ -85,6 +85,7 @@ class TestGLUProjection(GLUTestCase):
     def test_unproject4(self):
         # gluUnProject4 carries the homogeneous clip-w plus the near/far depth
         # range; the wrapper must forward all of them.
+        requireEntryPoint(gluUnProject4, 'gluUnProject4')
         self.set_projection()
         result = gluUnProject4(64.0, 64.0, 0.5, 1.0, near=0.0, far=1.0)
         self.assertEqual(len(result), 4)

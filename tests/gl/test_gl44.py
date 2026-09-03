@@ -7,6 +7,7 @@ from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL.raw.GL import _types
 
 
 def _ssize(*vals):
@@ -40,10 +41,16 @@ class TestGL44(GLTestCase):
             glBindBuffer(GL_UNIFORM_BUFFER, int(b))
             glBufferData(GL_UNIFORM_BUFFER, 64, None, GL_STATIC_DRAW)
         glBindBuffersBase(GL_UNIFORM_BUFFER, 0, 2, ids)
-        # GLintptr*/GLsizeiptr* args need ctypes arrays (numpy not accepted);
-        # PyOpenGL types offsets as c_ssize_t and sizes as c_ulong
+        # GLintptr*/GLsizeiptr* args need ctypes arrays (numpy not accepted).
+        # Built from the declared types rather than a fixed ctypes one: both
+        # are pointer-sized, which c_ulong is only where long is.
         glBindBuffersRange(
-            GL_UNIFORM_BUFFER, 0, 2, ids, _ssize(0, 0), (ctypes.c_ulong * 2)(64, 64)
+            GL_UNIFORM_BUFFER,
+            0,
+            2,
+            ids,
+            (_types.GLintptr * 2)(0, 0),
+            (_types.GLsizeiptr * 2)(64, 64),
         )
         texs = np.array([int(t) for t in glGenTextures(2)], 'I')
         for t in texs:
@@ -58,7 +65,9 @@ class TestGL44(GLTestCase):
         for b in vids:
             glBindBuffer(GL_ARRAY_BUFFER, int(b))
             glBufferData(GL_ARRAY_BUFFER, 64, None, GL_STATIC_DRAW)
-        glBindVertexBuffers(0, 2, vids, _ssize(0, 0), (ctypes.c_int * 2)(16, 16))
+        glBindVertexBuffers(
+            0, 2, vids, (_types.GLintptr * 2)(0, 0), (_types.GLsizei * 2)(16, 16)
+        )
         self.check_error('multi bind')
 
 

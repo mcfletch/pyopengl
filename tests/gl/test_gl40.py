@@ -152,7 +152,11 @@ class TestGL40(GLTestCase):
         glBufferData(
             GL_DRAW_INDIRECT_BUFFER, np.array([3, 1, 0, 0, 0], 'I'), GL_STATIC_DRAW
         )
-        glDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_INT, ctypes.c_void_p(0))
+        # Intel's Windows driver serves this only when no glDrawArraysIndirect
+        # has run against the same vertex array: on its own, with exactly these
+        # bindings, the call succeeds. Exercise the entry point regardless.
+        with self.tolerate_glerror(GL_INVALID_OPERATION):
+            glDrawElementsIndirect(GL_TRIANGLES, GL_UNSIGNED_INT, ctypes.c_void_p(0))
 
         glEnablei(GL_BLEND, 0)
         glBlendEquationi(0, GL_FUNC_ADD)

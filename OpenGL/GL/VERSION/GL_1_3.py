@@ -135,15 +135,18 @@ for dimensions in (1, 2, 3):
     except NameError as err:
         pass
 
-if _simple.glGetCompressedTexImage:
-
-    def glGetCompressedTexImage(target, level, img=None):
-        """Retrieve a compressed texture image"""
-        if img is None:
-            length = _glGetTexLevelParameteriv(
-                target,
-                level,
-                _simple.GL_TEXTURE_COMPRESSED_IMAGE_SIZE,
-            )
-            img = arrays.ArrayDatatype.zeros((length,), _GL_UNSIGNED_BYTE)
-        return _simple.glGetCompressedTexImage(target, level, img)
+# Defined whether or not the entry point resolves right now.  Whether it does
+# is a question about the current context, and on WGL there is none while this
+# module is being imported -- so a guard here would leave the raw three-argument
+# entry point in place on Windows and the friendly one everywhere else.  Absent
+# for real, the call below raises NullFunctionError naming the function.
+def glGetCompressedTexImage(target, level, img=None):
+    """Retrieve a compressed texture image"""
+    if img is None:
+        length = _glGetTexLevelParameteriv(
+            target,
+            level,
+            _simple.GL_TEXTURE_COMPRESSED_IMAGE_SIZE,
+        )
+        img = arrays.ArrayDatatype.zeros((length,), _GL_UNSIGNED_BYTE)
+    return _simple.glGetCompressedTexImage(target, level, img)

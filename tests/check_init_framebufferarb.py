@@ -4,7 +4,13 @@ checkutils.require('pygame')
 import pygame as pg
 import OpenGL
 
+# The bug this reproduces is a Wayland one, and the platform it names only
+# loads a GL library on Linux.
 OpenGL.setPlatform("wayland")
+from OpenGL.platform import PLATFORM as _platform
+
+if _platform.GL is None:
+    checkutils.skip('the wayland platform has no GL library on this system')
 import OpenGL.GL
 from pygame.locals import *
 from OpenGL.GL import *

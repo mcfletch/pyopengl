@@ -20,7 +20,9 @@ class _WGLQuerier( extensions.ExtensionQuerier ):
     def pullExtensions( self ):
         from OpenGL.platform import PLATFORM
         wglGetCurrentDC = PLATFORM.OpenGL.wglGetCurrentDC
-        wglGetCurrentDC.restyle = HDC
+        # Without this the handle comes back through the default c_int and
+        # loses its top half on a 64-bit build.
+        wglGetCurrentDC.restype = HDC
         try:
             dc = wglGetCurrentDC()
             proc_address = PLATFORM.getExtensionProcedure(b'wglGetExtensionsStringARB')
@@ -94,6 +96,14 @@ HDC = HANDLE 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:63
 PROC = CFUNCTYPE(INT_PTR) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:65
 HPBUFFERARB = HANDLE
 HPBUFFEREXT = HANDLE
+# The handles the NV extensions pass around: a GPU (WGL_NV_gpu_affinity), and
+# the video input/output devices (WGL_NV_video_capture, WGL_NV_present_video,
+# WGL_NV_video_output).  Each is DECLARE_HANDLE in the registry.
+HGPUNV = HANDLE
+HPGPUNV = HANDLE
+HVIDEOINPUTDEVICENV = HANDLE
+HVIDEOOUTPUTDEVICENV = HANDLE
+HPVIDEODEV = HANDLE
 
 class struct__POINTFLOAT(Structure):
     __slots__ = [
@@ -217,6 +227,24 @@ RECT = struct_tagRECT 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:202
 PRECT = POINTER(struct_tagRECT) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:202
 NPRECT = POINTER(struct_tagRECT) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:202
 LPRECT = POINTER(struct_tagRECT) 	# /home/mcfletch/pylive/OpenGL-ctypes/src/wgl.h:202
+
+class struct__GPU_DEVICE(Structure):
+    """One GPU as wglEnumGpuDevicesNV describes it
+
+    The name lengths are the registry's: 32 for the device, 128 for its
+    description.
+    """
+    _fields_ = [
+        ('cb', DWORD),
+        ('DeviceName', CHAR * 32),
+        ('DeviceString', CHAR * 128),
+        ('Flags', DWORD),
+        ('rcVirtualScreen', RECT),
+    ]
+
+_GPU_DEVICE = struct__GPU_DEVICE
+GPU_DEVICE = struct__GPU_DEVICE
+PGPU_DEVICE = POINTER(struct__GPU_DEVICE)
 
 class PIXELFORMATDESCRIPTOR(Structure):
     _fields_ = [

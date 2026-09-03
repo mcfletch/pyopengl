@@ -2546,17 +2546,6 @@ static int pygl_init_errors(void)
     return (pygl_null_function_error && pygl_no_context_error) ? 0 : -1;
 }
 
-static PyModuleDef_Slot pygl_module_slots[];
-
-static struct PyModuleDef pygl_module_def = {
-    PyModuleDef_HEAD_INIT,
-    .m_name = "OpenGL_accelerate.dispatch",
-    .m_doc = "Registry-generated C implementation of the OpenGL entry points.",
-    .m_size = 0,
-    .m_methods = pygl_methods,
-    .m_slots = pygl_module_slots,
-};
-
 /* The PyOpenGL version this extension's tables were generated from, supplied by
  * accelerate's setup.py.  Absent only in a build that has not been told, and a
  * build that cannot say which tables it holds is not one to dispatch through --
@@ -2640,6 +2629,17 @@ static PyModuleDef_Slot pygl_module_slots[] = {
     {Py_mod_gil, Py_MOD_GIL_NOT_USED},
 #endif
     {0, NULL},
+};
+
+/* After the slots, so that the slot array is a complete type here.  A
+ * forward declaration of an array without its size is a GNU extension. */
+static struct PyModuleDef pygl_module_def = {
+    PyModuleDef_HEAD_INIT,
+    .m_name = "OpenGL_accelerate.dispatch",
+    .m_doc = "Registry-generated C implementation of the OpenGL entry points.",
+    .m_size = 0,
+    .m_methods = pygl_methods,
+    .m_slots = pygl_module_slots,
 };
 
 PyMODINIT_FUNC PyInit_dispatch(void)

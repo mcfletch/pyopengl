@@ -280,6 +280,7 @@ class TestGL45(GLTestCase):
         tex = _create(glCreateTextures, GL_TEXTURE_2D)
         glTextureStorage2D(tex, 1, GL_RGBA8, 4, 4)
         glBindTexture(GL_TEXTURE_2D, tex)
+        self.require_entrypoint(glGetnTexImage, 'glGetnTexImage')
         glGetnTexImage(
             GL_TEXTURE_2D,
             0,
@@ -301,6 +302,7 @@ class TestGL45(GLTestCase):
         self.check_error('robustness/misc')
 
     def test_legacy_robustness(self):
+        self.require_entrypoint(glGetnPolygonStipple, 'glGetnPolygonStipple')
         glGetnPolygonStipple(128, np.zeros(128, 'B'))
         # NVIDIA advertises KHR_robustness but does not actually serve these
         # robust legacy getters -- the non-robust glGetPixelMap*/glGetMap*

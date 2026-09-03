@@ -185,6 +185,29 @@ def inside_begin_block( ):
     return bool( checker is not None and getattr( checker, 'suspended', False ) )
 
 
+#: Set when PyOpenGL's own entry-point lookup ran inside a glBegin block and
+#: the platform records an error for it.  Read and cleared by glEnd.
+_lookup_dirtied_block = False
+
+
+def note_lookup_inside_block( ):
+    """Record that an address lookup inside a block recorded an error.
+
+    Called by the platform whose lookup does that -- WGL's.  The error belongs
+    to a call the caller never made, and it is invisible until the block ends,
+    so glEnd consumes it rather than raising it at them.
+    """
+    global _lookup_dirtied_block
+    _lookup_dirtied_block = True
+
+
+def take_lookup_inside_block( ):
+    """Whether a lookup dirtied this block, clearing the record."""
+    global _lookup_dirtied_block
+    dirtied, _lookup_dirtied_block = _lookup_dirtied_block, False
+    return dirtied
+
+
 if _configflags.ERROR_CHECKING:
     from OpenGL import acceleratesupport
     _ErrorChecker = None

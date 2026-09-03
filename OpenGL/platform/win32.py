@@ -62,6 +62,39 @@ class Win32Platform( baseplatform.BasePlatform ):
                 break
         return None
 
+    def _optional_library( self, *names ):
+        """The first of names that loads, or None if this machine has none
+
+        The ES and EGL libraries are not part of Windows: they arrive with an
+        application that ships ANGLE, so their absence is ordinary rather than
+        an error.
+        """
+        for name in names:
+            try:
+                return ctypesloader.loadLibrary(
+                    ctypes.windll, name, mode = ctypes.RTLD_GLOBAL
+                )
+            except OSError:
+                continue
+        return None
+
+    # OpenGL-ES and EGL reach Windows through ANGLE, which installs beside the
+    # application that ships it (Chromium, Qt and Electron all do) under the
+    # names below.  The bare names are the ones an SDK or a driver vendor uses.
+    @baseplatform.lazy_property
+    def GLES1( self ):
+        return self._optional_library( 'libGLESv1_CM', 'GLESv1_CM' )
+    @baseplatform.lazy_property
+    def GLES2( self ):
+        return self._optional_library( 'libGLESv2', 'GLESv2' )
+    @baseplatform.lazy_property
+    def GLES3( self ):
+        # The implementer's guide says to ship ES3 in the ES2 library.
+        return self.GLES2
+    @baseplatform.lazy_property
+    def EGL( self ):
+        return self._optional_library( 'libEGL', 'EGL' )
+
     DEFAULT_FUNCTION_TYPE = staticmethod( ctypes.WINFUNCTYPE )
     # Win32 GLUT uses different types for callbacks and functions...
     GLUT_CALLBACK_TYPE = staticmethod( ctypes.CFUNCTYPE )
@@ -73,7 +106,23 @@ class Win32Platform( baseplatform.BasePlatform ):
     def getExtensionProcedure( self ):
         wglGetProcAddress = self.OpenGL.wglGetProcAddress
         wglGetProcAddress.restype = ctypes.c_void_p
-        return wglGetProcAddress
+
+        def getExtensionProcedure( name ):
+            """Address for name, noting the error a lookup in a block records
+
+            Every entry point above GL 1.1 is reached through this, so the
+            first call to one made inside a glBegin block resolves here -- and
+            wglGetProcAddress records GL_INVALID_OPERATION when it is called
+            there.  glGetError answers 0 until the block ends, so the error
+            would surface out of glEnd, for a call the caller never wrote.
+            """
+            from OpenGL import error
+
+            if error.inside_begin_block():
+                error.note_lookup_inside_block()
+            return wglGetProcAddress( name )
+
+        return getExtensionProcedure
 
     GLUT_FONT_CONSTANTS = {
         'GLUT_STROKE_ROMAN': ctypes.c_void_p( 0),

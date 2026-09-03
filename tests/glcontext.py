@@ -161,6 +161,13 @@ class ContextTestCase(unittest.TestCase):
     def setUp(self):
         """Create the requested context and leave it current and cleared."""
         self._create_context()
+        # Registered here rather than done in tearDown, for two reasons.
+        # unittest runs tearDown() before doCleanups(), so destroying the
+        # context there would destroy it before any addCleanup() the test
+        # registered -- and cleanups run newest-first, so registering this one
+        # now puts it last of all.  It also means a setUp that fails after this
+        # point still gives the context back.
+        self.addCleanup(self._destroy_context)
         self._cleanup = []
         self._setup_default_objects()
         self.gl.glViewport(0, 0, self.width, self.height)
@@ -172,17 +179,14 @@ class ContextTestCase(unittest.TestCase):
         """Hook for API-specific post-context setup (e.g. a core-profile VAO)."""
 
     def tearDown(self):
-        try:
-            for fn in reversed(getattr(self, '_cleanup', [])):
-                try:
-                    fn()
-                except Exception:
-                    pass
-            self._swap()  # present, so a visible run shows the frame
-            if self.visible and self.dwell:
-                time.sleep(self.dwell)
-        finally:
-            self._destroy_context()
+        for fn in reversed(getattr(self, '_cleanup', [])):
+            try:
+                fn()
+            except Exception:
+                pass
+        self._swap()  # present, so a visible run shows the frame
+        if self.visible and self.dwell:
+            time.sleep(self.dwell)
 
     def defer_cleanup(self, fn):
         """Register ``fn`` to run (best-effort) at teardown, newest first."""

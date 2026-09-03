@@ -43,7 +43,10 @@ if os.name == "nt":
     )
     __glutCreateWindowWithExit = platform.createBaseFunction(
         '__glutCreateWindowWithExit', dll=platform.PLATFORM.GLUT, resultType=ctypes.c_int,
-        argTypes=[ctypes.c_char_p,_exitfunctype],
+        # _simple.STRING rather than c_char_p: the title arrives as a str, and
+        # STRING is what the portable declaration of glutCreateWindow encodes
+        # it with.
+        argTypes=[_simple.STRING,_exitfunctype],
         doc='glutCreateWindow( STRING(title) ) -> c_int',
         argNames=('title',),
     )

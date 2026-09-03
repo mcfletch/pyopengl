@@ -4,7 +4,8 @@
 # find.  The typed surface is the .pyi stub beside the package.
 from OpenGL.platform import PLATFORM as _p
 from OpenGL.error import _ErrorChecker
-if _p.GLES1 and _p.GLES1.glGetError and _ErrorChecker:
-    _error_checker = _ErrorChecker( _p, _p.GLES1.glGetError )
+_get_error = getattr( _p.GLES1, 'glGetError', None )
+if _get_error and _ErrorChecker:
+    _error_checker = _ErrorChecker( _p, _get_error )
 else:
     _error_checker = None

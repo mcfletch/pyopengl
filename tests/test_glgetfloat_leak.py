@@ -12,22 +12,38 @@ except ImportError:
 
 
 class TestGLGetFloatLeak(BaseTest):
+    #: Calls made before the baseline, so that first-call allocation -- the
+    #: entry point resolving, the array type registering, the arena growing to
+    #: the size one call needs -- is not counted as growth.
+    WARMUP = 2000
+
+    #: Calls measured.  Each one returns a 4x4 array, so leaking even the array
+    #: costs ~64 bytes a call and this many calls would show megabytes.
+    MEASURED = 20000
+
+    #: RSS moves in page-sized steps and the process is doing other things;
+    #: this is far below what any per-call leak would reach over MEASURED calls.
+    BUDGET = 1024 * 1024
+
     @unittest.skipUnless(psutil, "psutil not installed")
     def test_glGetFloatv_no_leak(self):
-        """Repeated glGetFloatv(GL_MODELVIEW_MATRIX) must not leak memory"""
+        """Repeated glGetFloatv(GL_MODELVIEW_MATRIX) must not grow the process
+
+        Measured as resident bytes against the number of calls: what a leak
+        does is grow with the call count, which a fixed budget over a large
+        count detects and ordinary allocator noise does not reach.
+        """
         proc = psutil.Process(os.getpid())
-        mem = None
-        for i in range(0, 500):
-            if i == 10:
-                mem = proc.memory_percent()
-            if i > 400:
-                new_mem = proc.memory_percent()
-                # Allow small allocator/GC noise; a real leak grows orders of
-                # magnitude more.
-                assert math.isclose(new_mem, mem, rel_tol=1e-3), (new_mem, mem)
-                break
-            modelview_matrix = glGetFloatv(GL_MODELVIEW_MATRIX)
-            assert modelview_matrix is not None
+        for _ in range(self.WARMUP):
+            assert glGetFloatv(GL_MODELVIEW_MATRIX) is not None
+        before = proc.memory_info().rss
+        for _ in range(self.MEASURED):
+            glGetFloatv(GL_MODELVIEW_MATRIX)
+        growth = proc.memory_info().rss - before
+        assert growth < self.BUDGET, (
+            'resident memory grew %d bytes over %d calls (%.1f bytes a call)'
+            % (growth, self.MEASURED, growth / float(self.MEASURED))
+        )
 
 
 if __name__ == '__main__':

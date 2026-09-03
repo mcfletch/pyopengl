@@ -195,7 +195,12 @@ class TestEXTDSA(GLTestCase):
             glTextureImage1DEXT(
                 ct1, GL_TEXTURE_1D, 0, GL_RGBA8, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, PX1
             )
-            glCopyTextureImage1DEXT(ct1, GL_TEXTURE_1D, 0, GL_RGBA8, 0, 0, 4, 0)
+            # Intel's Windows driver serves this one only when some texture is
+            # already bound to GL_TEXTURE_1D on the active unit, which is the
+            # binding DSA exists to do without; binding one first makes the
+            # same call succeed. Exercise the entry point either way.
+            with self.tolerate_glerror(GL_INVALID_VALUE):
+                glCopyTextureImage1DEXT(ct1, GL_TEXTURE_1D, 0, GL_RGBA8, 0, 0, 4, 0)
             glCopyTextureSubImage1DEXT(ct1, GL_TEXTURE_1D, 0, 0, 0, 0, 4)
             glCopyTextureSubImage3DEXT(ts3, GL_TEXTURE_3D, 0, 0, 0, 0, 0, 0, 2, 2)
             tbr = int(glGenTextures(1))

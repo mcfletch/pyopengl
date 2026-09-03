@@ -6,6 +6,7 @@ data.  These cases hold the built module to what the file defines, which is
 the only thing that makes replacing one with the other safe.
 """
 
+import ctypes
 import importlib
 import json
 import os
@@ -170,8 +171,10 @@ def test_a_shadowed_module_still_supports_demotion():
     assert result['built'] is True
     assert result['typed'] is True
     assert result['argnames'][:3] == ['target', 'level', 'internalformat']
-    # GLenum is ctypes.c_uint, so that is the name it answers to.
-    assert result['argtypes'][0] == 'c_uint'
+    # GLenum is ctypes.c_uint -- asked for by that name, because where int and
+    # long are the same width ctypes makes c_uint an alias of c_ulong and the
+    # type answers to the other one.
+    assert result['argtypes'][0] == ctypes.c_uint.__name__
     assert len(result['argtypes']) == len(result['argnames'])
 
 

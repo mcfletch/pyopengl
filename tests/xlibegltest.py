@@ -1,5 +1,10 @@
 #! /usr/bin/env python3
 """Raw xlib based test setup"""
+import checkutils
+
+# python-xlib reaches for fcntl, so it is importable only on a Unix host; the
+# checks built on this run nowhere else.
+checkutils.require('Xlib.display')
 from Xlib import X, display, error
 import ctypes
 import os
@@ -165,8 +170,16 @@ def egltest(size=(300, 300), name=None, api="es2", attributes=DESIRED_ATTRIBUTES
 
         @wraps(function)
         def test_function(*args, **named):
+            # python-xlib defers the parts of itself that are Unix-only until a
+            # display is opened, so this is where a host with no X server says
+            # so -- as ImportError for the missing modules, DisplayError for a
+            # server it cannot reach.
+            try:
+                server = display.Display()
+            except (ImportError, error.DisplayError, OSError) as err:
+                checkutils.skip('no X display available: %s' % (err,))
             window = EGLWindow(
-                display.Display(),
+                server,
                 name or function.__name__,
                 api=api,
                 attributes=attributes,

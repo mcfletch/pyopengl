@@ -4,7 +4,7 @@ gluCheckExtension."""
 
 import unittest
 
-from glutestcase import GLUTestCase
+from glutestcase import GLUTestCase, requireEntryPoint
 from OpenGL.GLU import *
 from OpenGL.GLU import GLU_VERSION, GLU_EXTENSIONS
 
@@ -38,6 +38,7 @@ class TestGLUStrings(GLUTestCase):
         self.assertTrue(gluErrorString(GL_INVALID_VALUE))
 
     def test_check_extension_present(self):
+        requireEntryPoint(gluCheckExtension, 'gluCheckExtension')
         ext = gluGetString(GLU_EXTENSIONS) or b''
         names = (ext.decode('ascii') if isinstance(ext, bytes) else ext).split()
         if not names:
@@ -46,6 +47,7 @@ class TestGLUStrings(GLUTestCase):
         self.assertTrue(gluCheckExtension(present, ext))
 
     def test_check_extension_absent(self):
+        requireEntryPoint(gluCheckExtension, 'gluCheckExtension')
         ext = gluGetString(GLU_EXTENSIONS) or b''
         # A name that cannot be in the list must report False, not error.
         self.assertFalse(gluCheckExtension(b'GLU_not_a_real_extension', ext))

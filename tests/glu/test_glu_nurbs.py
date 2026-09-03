@@ -7,7 +7,7 @@ and stride), the gluBegin*/gluEnd* scoping, and gluPwlCurve trimming."""
 import unittest
 from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
-from glutestcase import GLUTestCase
+from glutestcase import GLUTestCase, requireEntryPoint
 from OpenGL.GL import GL_MAP1_VERTEX_3, GL_MAP2_VERTEX_3
 from OpenGL.GLU import (
     gluNewNurbsRenderer,
@@ -85,6 +85,7 @@ class TestGLUNurbs(GLUTestCase):
     def test_callback_data(self):
         # gluNurbsCallbackData notes a Python object for later original-object
         # return; the call must accept an arbitrary Python object.
+        requireEntryPoint(gluNurbsCallbackData, 'gluNurbsCallbackData')
         nurb = self.nurbs()
         gluNurbsCallbackData(nurb, {'tag': 'curve'})
         gluNurbsCallbackDataEXT(nurb, ['list', 'data'])

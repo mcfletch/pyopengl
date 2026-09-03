@@ -9,11 +9,11 @@ and the ES-specific shader helpers.
 
 from __future__ import print_function
 
-import os
-
-# OpenGL-ES is reached through the EGL platform; select it before anything
-# pulls in ``OpenGL`` for the first time.
-os.environ.setdefault('PYOPENGL_PLATFORM', 'egl')
+# OpenGL-ES is reached through the EGL platform, which PYOPENGL_PLATFORM has to
+# name before anything imports OpenGL at all.  tests/conftest.py sets it, since
+# that runs before any test module: setting it here would be both too late to
+# take effect and early enough to change the platform for every subprocess the
+# rest of the run starts.
 
 # The generic GL entry points we use for introspection / readback all live in
 # (and are shared by) the GLES2 namespace; individual tests still import the
@@ -35,6 +35,14 @@ class ESTestCaseBase(ContextTestCase):
     gl3 = _gl3
 
     def setUp(self):
+        # OpenGL-ES is not part of every platform: Windows and macOS have no ES
+        # library unless something has installed ANGLE beside the application,
+        # and the entry points then fall back to the desktop library, which is
+        # a different API wearing the same names.
+        from OpenGL.platform import PLATFORM
+
+        if PLATFORM.GLES2 is None:
+            self.skipTest('this platform has no OpenGL-ES library')
         # ES contexts are only reliably created through EGL; the pygame/SDL
         # backend cannot guarantee a usable ES context on desktop drivers, so
         # skip rather than fail when it is the selected backend.
