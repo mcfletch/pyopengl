@@ -134,7 +134,19 @@ PyOpenGL's own headless test backend
 <p>EGL is the GL binding on Linux and Android.  Windows has no EGL of its own
 &#8212; an installed ANGLE or Mesa provides one &#8212; and macOS has none at
 all.  <code>devices()</code> answers with an empty tuple wherever the
-enumeration extension is absent, so it is safe to call anywhere and the empty
-answer is the signal to fall back.</p>
+enumeration extension is absent, so the empty answer is the signal to fall
+back.</p>
+
+<p>Having no EGL <em>library</em> is a step earlier than that, and it is
+common: EGL ships with the graphics driver, so a machine with none installed
+&#8212; a virtual machine, a container, a build runner &#8212; has nothing for
+the bindings to call, as macOS and a Windows without ANGLE have nothing.
+Importing raises <code>ImportError</code> there, naming what is missing.  That
+import is how a program asks whether this machine has EGL at all:</p>
+
+<pre>try:
+    from OpenGL.EGL import devices
+except ImportError:
+    devices = None      # no EGL here: render through GLX, WGL or CGL instead</pre>
 
 </body></html>

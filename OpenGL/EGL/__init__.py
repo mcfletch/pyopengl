@@ -2,7 +2,13 @@
 # The names in this module arrive from the declaration tables at import
 # time, so a checker reading this file sees calls to things it cannot
 # find.  The typed surface is the .pyi stub beside the package.
-"""OpenGL.EGL the portable interface to GL environments"""
+"""OpenGL.EGL the portable interface to GL environments
+
+Every name here is one in an EGL library, so importing the package raises
+``ImportError`` where the platform has no EGL to load -- macOS, a Windows
+without ANGLE, a machine with no graphics driver installed. That import is
+therefore how a program asks whether this machine has EGL at all.
+"""
 from OpenGL._declarations import define as _define
 _define(globals(), 'OpenGL.raw.EGL._types')
 from OpenGL.raw.EGL._errors import EGLError
