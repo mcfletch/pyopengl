@@ -87,6 +87,24 @@ how to tell it that the current context changed.
 .. _`the C dispatch layer`: https://mcfletch.github.io/pyopengl/documentation/c-dispatch.html
 
 
+Rendering without a display server
+-----------------------------------
+
+``OpenGL.EGL.devices`` reports which EGL devices a system offers and which of
+them rasterise on the CPU, which is what a program needs before it can render
+offscreen on a named device::
+
+    from OpenGL.EGL import devices
+
+    for device in devices.devices():
+        print(device.index, device.driver, device.software)
+
+See `EGL devices`_ for what each field means, how the software question is
+decided, and the ``eglGetPlatformDisplayEXT`` call a handle is for.
+
+.. _`EGL devices`: https://mcfletch.github.io/pyopengl/documentation/egl-devices.html
+
+
 Running Tests
 --------------
 

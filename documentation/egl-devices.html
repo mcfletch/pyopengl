@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>EGL devices</title><link rel="stylesheet" type="text/css" href="style/tutorial.css">
+</head>
+<body>
+
+<h1>EGL devices</h1>
+
+<p><code>OpenGL.EGL.devices</code> reports the EGL devices a system offers:
+which exist, what each advertises, what its driver calls itself, and whether it
+rasterises on the CPU.  That is what a program needs before it can render
+without a display server &#8212; <code>EGL_EXT_device_enumeration</code> lets a
+program render on a device it names, which is how offscreen and headless
+rendering is done on EGL.</p>
+
+<p>Getting from "the extension exists" to "this handle is the one I want" takes
+three separate extensions and a pair of string queries, so this module does it
+once.</p>
+
+<pre>from OpenGL.EGL import devices
+
+for device in devices.devices():
+    print(device.index, device.driver, device.software)</pre>
+
+<h2>What it reports</h2>
+
+<dl>
+<dt><code>devices(query=...)</code></dt>
+<dd>Every device, in the order EGL reports them, as a tuple of
+<code>DeviceInfo</code>.  Empty where the system cannot enumerate devices at all
+&#8212; no <code>EGL_EXT_device_enumeration</code>, or none behind it.  A caller
+that needs a display in that case falls back to <code>eglGetDisplay</code> with
+<code>EGL_DEFAULT_DISPLAY</code>.  <code>query</code> is the enumeration step,
+exposed so it can be replaced in tests.</dd>
+
+<dt><code>DeviceInfo.handle</code></dt>
+<dd>The <code>EGLDeviceEXT</code> itself, which is what
+<code>eglGetPlatformDisplayEXT(EGL_PLATFORM_DEVICE_EXT, handle, None)</code>
+takes.  It is the device's identity: two <code>DeviceInfo</code> compare equal
+when they hold the same handle, whatever index each was enumerated at.</dd>
+
+<dt><code>DeviceInfo.index</code></dt>
+<dd>Where it appeared in this enumeration.  Useful for naming a device to a
+user or in an environment variable; not an identity, since another enumeration
+may number them differently.</dd>
+
+<dt><code>DeviceInfo.extensions</code></dt>
+<dd>What the device says it supports, as a tuple.  Empty where it does not
+answer the query, which is a device that does not implement the optional
+extension the query comes from rather than an error.</dd>
+
+<dt><code>DeviceInfo.driver</code></dt>
+<dd>What the driver calls itself &#8212; <code>EGL_DRIVER_NAME_EXT</code>.
+<code>''</code> where the device does not answer.</dd>
+
+<dt><code>DeviceInfo.software</code></dt>
+<dd>Whether this device rasterises on the CPU.  See below.</dd>
+</dl>
+
+<h2>Which device is software</h2>
+
+<p>The question is decided in two steps, in this order:</p>
+
+<ol>
+<li><code>EGL_MESA_device_software</code> among the device's extensions.  Where
+it is present it is definitive, which is why it is checked first.</li>
+<li>Otherwise the driver name, matched case-insensitively as a substring
+against <code>SOFTWARE_DRIVER_NAMES</code>: <code>llvmpipe</code>,
+<code>swrast</code>, <code>softpipe</code>, <code>swr</code>,
+<code>lavapipe</code>.  Substrings because drivers append versions and build
+details to the name.</li>
+</ol>
+
+<p>A device that answers neither is reported as hardware.  That is the safer
+answer: treating a real GPU as software costs performance, while the reverse can
+mean selecting a device that cannot do the work.</p>
+
+<p>The question is not cosmetic.  Asking Mesa for a display on a
+<em>hardware</em> device while <code>LIBGL_ALWAYS_SOFTWARE</code> demands
+software rendering is a contradiction it warns about and then crashes on, inside
+<code>driCreateNewScreen3</code>.  A caller that can ask which devices are
+software avoids it; one that cannot, and takes device 0, dumps core on any
+machine that has both a GPU and a software rasteriser.</p>
+
+<h2>Choosing is the caller's</h2>
+
+<p>This module reports fact.  <em>Choosing</em> between the devices is policy and
+stays with the caller, because a renderer wanting speed and a test wanting
+reproducibility disagree about which device is right.</p>
+
+<pre>from OpenGL.EGL import devices
+from OpenGL.EGL import EGL_NO_DISPLAY, eglInitialize
+from OpenGL.EGL.EXT.platform_base import eglGetPlatformDisplayEXT
+from OpenGL.EGL.EXT.platform_device import EGL_PLATFORM_DEVICE_EXT
+
+available = devices.devices()
+hardware = [device for device in available if not device.software]
+chosen = (hardware or available)[0]
+
+display = eglGetPlatformDisplayEXT(
+    EGL_PLATFORM_DEVICE_EXT, chosen.handle, None
+)</pre>
+
+<p><a href="https://github.com/mcfletch/openglcontext">OpenGLContext</a>'s
+offscreen backend is a worked example of the policy half: it honours
+<code>LIBGL_ALWAYS_SOFTWARE</code> and <code>GALLIUM_DRIVER</code>, and takes an
+explicit device index from an environment variable where a run has to be pinned
+to one GPU of several.</p>
+
+<h2>Where this works</h2>
+
+<p>EGL is the GL binding on Linux and Android.  Windows has no EGL of its own
+&#8212; an installed ANGLE or Mesa provides one &#8212; and macOS has none at
+all.  <code>devices()</code> answers with an empty tuple wherever the
+enumeration extension is absent, so it is safe to call anywhere and the empty
+answer is the signal to fall back.</p>
+
+</body></html>

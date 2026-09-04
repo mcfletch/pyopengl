@@ -19,9 +19,10 @@ Each :class:`DeviceInfo` keeps the handle it was built from, which is what
 ``eglGetPlatformDisplayEXT(EGL_PLATFORM_DEVICE_EXT, handle, None)`` takes.
 """
 
+import ctypes
 import logging
 
-from OpenGL.EGL import EGL_EXTENSIONS, EGLint
+from OpenGL.EGL import EGL_EXTENSIONS, EGLint, eglGetError
 from OpenGL.EGL.EXT.device_base import EGLDeviceEXT, eglQueryDeviceStringEXT
 from OpenGL.EGL.EXT.device_enumeration import eglQueryDevicesEXT
 from OpenGL.EGL.EXT.device_persistent_id import EGL_DRIVER_NAME_EXT
@@ -89,25 +90,55 @@ class DeviceInfo:
         return hash(self._key())
 
     def _key(self):
-        return (self.index, self.extensions, self.driver)
+        """The handle, as an address.
+
+        The device is the handle: ``index`` is a property of one enumeration,
+        and two enumerations of one system may number the same devices
+        differently.  The handle is an ``EGLDeviceEXT``, which is a pointer
+        class rather than something hashable, so it is compared as the address
+        it holds.
+        """
+        return _address_of(self.handle)
+
+
+def _address_of(handle) -> int:
+    """The address an ``EGLDeviceEXT`` holds, or 0 where there is none."""
+    if handle is None:
+        return 0
+    try:
+        return ctypes.cast(handle, ctypes.c_void_p).value or 0
+    except (ctypes.ArgumentError, TypeError):
+        return id(handle)
 
 
 def _device_string(handle, token) -> str:
     """One string query, or ``''`` when the device declines to answer.
 
     Both tokens come from optional extensions, so a device that does not
-    implement them is expected rather than exceptional.
+    implement them is expected rather than exceptional.  The EGL error the
+    failed query recorded is taken with it: EGL keeps one error per thread, and
+    a caller's next ``eglGetError`` would otherwise read this module's.
     """
     try:
         value = eglQueryDeviceStringEXT(handle, token)
     except Exception as error:  # noqa: BLE001 - any failure here means "no answer"
         log.debug('eglQueryDeviceStringEXT(%s) failed: %s', token, error)
+        _clear_egl_error()
         return ''
     if not value:
+        _clear_egl_error()
         return ''
     if isinstance(value, bytes):
         return value.decode('utf-8', 'replace')
     return str(value)
+
+
+def _clear_egl_error() -> None:
+    """Read and discard the error a query of ours recorded."""
+    try:
+        eglGetError()
+    except Exception as error:  # noqa: BLE001 - no EGL to ask is not a failure
+        log.debug('eglGetError unavailable: %s', error)
 
 
 def _query_handles():

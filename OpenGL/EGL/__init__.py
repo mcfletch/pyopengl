@@ -12,3 +12,8 @@ from OpenGL.EGL.VERSION.EGL_1_2 import *
 from OpenGL.EGL.VERSION.EGL_1_3 import *
 from OpenGL.EGL.VERSION.EGL_1_4 import *
 from OpenGL.EGL.VERSION.EGL_1_5 import *
+# Which devices this system offers, and which of them rasterise on the CPU.
+# Bound here so that a caller who has imported the package can reach it as
+# ``EGL.devices.devices()``; the module's own imports are the three device
+# extensions, which cost nothing until one is called.
+from OpenGL.EGL import devices

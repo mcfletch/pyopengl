@@ -5,10 +5,15 @@ advertises and the name its driver gives itself -- so most of this runs with no
 EGL implementation to hand.  The enumeration cases need one and skip without it.
 """
 
+import ctypes
+import os
+
 import pytest
 
 from OpenGL.EGL import devices as devices_module
 from OpenGL.EGL.devices import DeviceInfo
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 def info(**overrides):
@@ -96,3 +101,77 @@ class TestEnumeration:
     def test_enumeration_without_the_extension_reports_nothing(self):
         """A system with no device enumeration has no devices to report, not an error."""
         assert devices_module.devices(query=lambda: None) == ()
+
+
+class TestADeviceIsIdentifiedByItsHandle:
+    """``index`` is a property of one enumeration and ``handle`` is the device.
+    Comparing on the first and not the second says two different devices are
+    the same when their drivers are, and that the same device re-enumerated at
+    a different index is a different one."""
+
+    def _device(self, index, address, driver='nvidia'):
+        from OpenGL.EGL.devices import DeviceInfo
+
+        return DeviceInfo(
+            index=index,
+            handle=ctypes.c_void_p(address),
+            extensions=('EGL_EXT_device_drm',),
+            driver=driver,
+        )
+
+    def test_two_devices_with_one_driver_are_not_equal(self):
+        assert self._device(0, 0x1000) != self._device(1, 0x2000)
+
+    def test_the_same_device_at_another_index_is_the_same_device(self):
+        assert self._device(0, 0x1000) == self._device(1, 0x1000)
+
+    def test_equal_devices_hash_alike(self):
+        assert hash(self._device(0, 0x1000)) == hash(self._device(1, 0x1000))
+        assert len({self._device(0, 0x1000), self._device(1, 0x1000)}) == 1
+
+    def test_a_different_device_is_a_different_key(self):
+        assert len({self._device(0, 0x1000), self._device(0, 0x2000)}) == 2
+
+
+class TestAFailedQueryLeavesNoErrorBehind:
+    """``_device_string`` expects a device that does not implement the query,
+    so it swallows the failure -- but EGL records an error code that the next
+    ``eglGetError`` any caller makes would read as its own."""
+
+    def test_it_clears_the_egl_error_it_caused(self, monkeypatch):
+        from OpenGL.EGL import devices
+
+        cleared = []
+
+        def refuses(handle, token):
+            raise RuntimeError('no such query')
+
+        monkeypatch.setattr(devices, 'eglQueryDeviceStringEXT', refuses)
+        monkeypatch.setattr(
+            devices, 'eglGetError', lambda: cleared.append(True) or 0x3000
+        )
+        assert devices._device_string(object(), 0x3055) == ''
+        assert cleared == [True]
+
+
+class TestTheModuleIsDocumented:
+    """A public module nobody can find is a module nobody uses."""
+
+    def test_there_is_a_page_for_it(self):
+        page = os.path.join(ROOT, 'documentation', 'egl-devices.html')
+        assert os.path.exists(page), page
+        text = open(page, encoding='utf-8').read()
+        for named in (
+            'OpenGL.EGL.devices',
+            'DeviceInfo',
+            'software',
+            'eglGetPlatformDisplayEXT',
+            'EGL_PLATFORM_DEVICE_EXT',
+        ):
+            assert named in text, named
+
+    def test_the_package_offers_it_without_a_deeper_import(self):
+        from OpenGL import EGL
+
+        assert EGL.devices is not None
+        assert callable(EGL.devices.devices)
