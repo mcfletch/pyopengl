@@ -1,19 +1,19 @@
 name: Tests
 
-# The suite against two unrelated OpenGL implementations, on every push to
-# develop.
+# tox is how this project's suite is run -- it owns the interpreter matrix, the
+# numpy / accelerate / dispatch axes and the variables a windowing backend needs
+# (passenv). CI drives tox rather than pytest so that what runs here is what
+# runs on a developer's machine, in a configuration the project already
+# describes. A hand-rolled `pip install` here would be a second definition of
+# the environment, and the one nobody else exercises.
 #
-#   * Mesa's llvmpipe on Linux, reached headless through EGL's device platform
-#     (TEST_WINDOWING=egl).  No X server, no GPU, and the same renderer on every
-#     run -- which is what makes it the place a difference between runs means
-#     something.
-#   * Apple's GL on the macOS runners, which are real machines with real GPUs.
-#     A second vendor's driver is the half llvmpipe cannot cover: a call we get
-#     away with under Mesa because Mesa is lenient fails there.
+# The renderer is Mesa's llvmpipe, reached headless through EGL's device
+# platform (TEST_WINDOWING=egl): no X server, no GPU, and the same renderer on
+# every run -- which is what makes a difference between runs mean something.
 #
-# Both are free for public repositories.  A GPU runner is not: GitHub's is a
-# larger runner, billed per minute on Team/Enterprise plans and never free,
-# whatever the repository's visibility.
+# GitHub's GPU runner is a larger runner, billed per minute on Team and
+# Enterprise plans and never free whatever the repository's visibility, so no
+# job here can use one.
 
 on:
   push:
@@ -24,21 +24,41 @@ concurrency:
   group: tests-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  # Never map a window: a runner has no screen to put one on, and the suite
-  # renders and reads back identically without.
-  TEST_VISIBLE: '0'
-
 jobs:
-  llvmpipe:
-    name: Linux / llvmpipe (EGL)
+  tox:
+    name: ${{ matrix.toxenv }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # The interpreter sweep, on the ordinary configuration: numpy present,
+          # no compiled extension, ctypes entry points.
+          - {python: '3.10', toxenv: py310-num1-accel0-dispctypes}
+          - {python: '3.12', toxenv: py312-num1-accel0-dispctypes}
+          - {python: '3.13', toxenv: py313-num1-accel0-dispctypes}
+          - {python: '3.14', toxenv: py314-num1-accel0-dispctypes}
+          # The compiled configuration: PyOpenGL_accelerate built, and the C
+          # dispatch layer it carries actually selected.  conftest refuses this
+          # combination if the extension did not build, so the axis cannot pass
+          # while testing ctypes under another name.
+          - {python: '3.12', toxenv: py312-num1-accel1-dispc}
+          # Without numpy, which is an optional dependency and so a supported
+          # way to have PyOpenGL installed.
+          - {python: '3.12', toxenv: py312-num0-accel0-dispctypes}
+    env:
+      # The headless EGL-device backend, on the software device.  Both are read
+      # by tests/glcontext_egl.py, and tox passes them through.
+      TEST_WINDOWING: egl
+      LIBGL_ALWAYS_SOFTWARE: '1'
+      TEST_VISIBLE: '0'
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: ${{ matrix.python }}
 
       - name: Install Mesa
         # libegl-mesa0 is the one that matters: it provides the EGL device
@@ -51,10 +71,8 @@ jobs:
             libegl1 libegl-mesa0 libgl1 libglx-mesa0 libgl1-mesa-dri \
             libx11-6 libxrandr2 libxinerama1 libxcursor1 libxi6
 
-      - name: Install PyOpenGL and its test dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -e .[test]
+      - name: Install tox
+        run: python -m pip install --upgrade pip "tox" "tox-uv>=1"
 
       - name: Report the renderer under test
         # A suite that silently found no GL would skip its way to green, so say
@@ -62,24 +80,28 @@ jobs:
         run: python tests/check_egl_device_enumeration.py
         env:
           PYOPENGL_PLATFORM: egl
-          LIBGL_ALWAYS_SOFTWARE: '1'
 
       - name: Run the tests
         # `not performance` is a claim about how fast something draws, and a CPU
         # rasteriser cannot answer one.  Nothing carries the marker yet; the
         # deselection is here so that the first test to need it is right.
-        run: python -m pytest tests/ -v -rxXs -m "not performance"
-        env:
-          TEST_WINDOWING: egl
-          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: python -m tox -e ${{ matrix.toxenv }} -- tests/ -m "not performance"
 
   macos:
-    name: macOS ${{ matrix.os }} / Apple GL
+    name: macOS ${{ matrix.os }} / CGL
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
         os: [macos-14, macos-15]
+    env:
+      # CGL, not GLFW: GLFW's NSGL path asks for an accelerated pixel format
+      # unconditionally, and these runners have no accelerated renderer to give
+      # -- so no GLFW context can be created on one at all.  CGL is the layer
+      # underneath and will hand out a context with no window server.
+      TEST_WINDOWING: cgl
+      TEST_VISIBLE: '0'
     steps:
       - uses: actions/checkout@v4
 
@@ -87,26 +109,16 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install PyOpenGL and its test dependencies
-        run: |
-          python -m pip install --upgrade pip
-          python -m pip install -e .[test]
+      - name: Install tox
+        run: python -m pip install --upgrade pip "tox" "tox-uv>=1"
 
       - name: Report the renderer under test
-        run: |
-          python -c "
-          import glfw
-          glfw.init()
-          glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
-          window = glfw.create_window(64, 64, 'probe', None, None)
-          glfw.make_context_current(window)
-          from OpenGL.GL import GL_RENDERER, GL_VENDOR, GL_VERSION, glGetString
-          for name, token in (('vendor', GL_VENDOR), ('renderer', GL_RENDERER),
-                              ('version', GL_VERSION)):
-              print('%-9s %s' % (name, glGetString(token).decode()))
-          "
+        # In the env the tests will run in, and non-zero where no context can be
+        # made: a suite that found no GL would skip its way to green having
+        # rendered nothing, which reads the same as a pass.
+        run: >
+          python -m tox exec -e py312-num1-accel0-dispctypes --
+          python tests/check_cgl_context.py
 
       - name: Run the tests
-        run: python -m pytest tests/ -v -rxXs
-        env:
-          TEST_WINDOWING: glfw
+        run: python -m tox -e py312-num1-accel0-dispctypes -- tests/ -m "not performance"

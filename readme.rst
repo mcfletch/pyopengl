@@ -104,6 +104,23 @@ decided, and the ``eglGetPlatformDisplayEXT`` call a handle is for.
 
 .. _`EGL devices`: https://mcfletch.github.io/pyopengl/documentation/egl-devices.html
 
+On macOS the equivalent is ``OpenGL.CGL``, which creates a context with no
+window and no window server -- CGL is the layer NSGL and AGL are built on, and
+the only one of the three that will::
+
+    from OpenGL.CGL import OffscreenTarget, headless_context
+
+    with headless_context(profile='core3'):
+        target = OffscreenTarget(256, 256)
+        ...                      # there is no framebuffer zero; draw into this
+        target.release()
+
+See `Offscreen OpenGL on macOS`_ for the profiles available, how the renderer is
+chosen on a machine with no accelerated one, and why a framebuffer object is not
+optional there.
+
+.. _`Offscreen OpenGL on macOS`: https://mcfletch.github.io/pyopengl/documentation/cgl-offscreen.html
+
 
 Running Tests
 --------------
@@ -172,6 +189,17 @@ The ``TEST_WINDOWING`` flag selects the windowing backend used by the
 * ``glfw`` (the default) and ``pygame`` create an on-screen window.  On a
   desktop these render on your GPU; inside a container whose compositor is
   software-rendered they will use llvmpipe regardless of the GPU present.
+* ``cgl`` is the *headless* backend on macOS: a CGL context with no window and
+  no window server, which is the only kind those runners and remote shells can
+  have.  ``TEST_CGL_RENDERER`` pins the renderer kind (``accelerated`` /
+  ``any`` / ``software``); unset, an accelerated renderer is preferred and the
+  CPU one taken where there is no other.  OpenGL-ES and a compatibility profile
+  above 2.1 do not exist there, so cases wanting either are skipped with the
+  reason.  ``python tests/check_cgl_context.py`` reports what a given Mac can
+  give::
+
+      $ TEST_WINDOWING=cgl uv run --with tox,tox-uv tox
+
 * ``egl`` is a *headless* backend that renders directly on a GPU through the
   ``EGL_EXT_platform_device`` extension, with no window system at all::
 
@@ -197,11 +225,14 @@ Every push to ``develop`` runs the suite against two unrelated OpenGL
 implementations, both free for a public repository:
 
 * Mesa's llvmpipe on a Linux runner, reached headless through the EGL device
-  platform -- no X server and no GPU, and the same renderer on every run.
-* Apple's GL on the ``macos-14`` and ``macos-15`` runners, which are real
-  machines with real GPUs.  A second vendor's driver is the half llvmpipe
-  cannot cover: a call we get away with under Mesa because Mesa is lenient
-  fails there.
+  platform -- no X server and no GPU, and the same renderer on every run.  The
+  interpreters 3.10 to 3.14, both dispatch implementations, with and without
+  numpy, and with and without ``PyOpenGL_accelerate``: one tox environment per
+  job, so a failure names the axis it happened on.
+* Apple's GL on the ``macos-14`` and ``macos-15`` runners, through ``CGL``.
+  A second vendor's implementation is the half llvmpipe cannot cover: a call we
+  get away with under Mesa because Mesa is lenient fails there.  Those runners
+  have no accelerated renderer, so what answers is Apple's CPU one.
 
 GitHub's GPU runner is not an option for either: it is a larger runner, billed
 per minute on Team and Enterprise plans and never free, whatever the
