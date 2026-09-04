@@ -29,6 +29,22 @@ class TestWGL(unittest.TestCase):
 
     def test_wgl_imported(self):
         assert bool(wglCreateContext)
+
+    def test_the_gdi_entry_points_resolve(self):
+        """The calls a WGL program makes that GDI owns rather than OpenGL.
+
+        opengl32 exports none of these and wglGetProcAddress answers for none
+        of them -- it returns extension entry points, and these are not
+        extensions -- so they resolve only where the search knows to look in
+        gdi32 as well. Both ways of binding a function have to know that: the
+        C dispatcher found none of these while the ctypes path found all five,
+        which is a program that cannot set a pixel format or show a frame.
+        """
+        missing = [name for name in ('ChoosePixelFormat', 'DescribePixelFormat',
+                                     'GetPixelFormat', 'SetPixelFormat',
+                                     'SwapBuffers')
+                   if not bool(globals().get(name))]
+        assert not missing, 'unresolved GDI entry points: %s' % (missing,)
     def test_create_context(self):
         window = pygame.display.get_wm_info()['window']
         wglCreateContext(window)

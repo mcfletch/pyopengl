@@ -99,6 +99,18 @@ class Win32Platform( baseplatform.BasePlatform ):
     # Win32 GLUT uses different types for callbacks and functions...
     GLUT_CALLBACK_TYPE = staticmethod( ctypes.CFUNCTYPE )
     GDI32 = ctypes.windll.gdi32
+
+    def secondaryLibraries(self):
+        """gdi32, where the pixel-format calls and SwapBuffers actually live.
+
+        A WGL program reaches ChoosePixelFormat, DescribePixelFormat,
+        GetPixelFormat, SetPixelFormat and SwapBuffers through OpenGL.WGL, but
+        they are GDI entry points and opengl32 does not export them. Nor does
+        wglGetProcAddress answer for them -- it returns extension entry points,
+        and these are not extensions -- so a search that does not know about
+        gdi32 finds them nowhere.
+        """
+        return (self.GDI32,)
     @baseplatform.lazy_property
     def WGL( self ):
         return self.OpenGL

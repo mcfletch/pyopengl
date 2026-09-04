@@ -71,13 +71,21 @@ def resolve(name, extension, alternates, api_index):
     is_core = (not extension) or 'VERSION' in extension.split('_')
     if not is_core and not _extension_gate_passes(platform_, extension, alternates):
         return None
-    dll = _dll_for(api)
-    if is_core and dll is not None:
-        try:
-            function = getattr(dll, name)
-        except AttributeError:
-            pass
-        else:
+    if is_core:
+        # The API's own library first, then whatever else this platform says
+        # holds its entry points -- on Windows the pixel-format calls and
+        # SwapBuffers are GDI rather than OpenGL, and opengl32 does not export
+        # them. constructFunction has always fallen back that way; asking the
+        # platform means both paths bind the same set rather than one of them
+        # quietly finding fewer.
+        dll = _dll_for(api)
+        libraries = [dll] if dll is not None else []
+        libraries.extend(platform_.secondaryLibraries())
+        for library in libraries:
+            try:
+                function = getattr(library, name)
+            except AttributeError:
+                continue
             address = ctypes.cast(function, ctypes.c_void_p).value
             if address:
                 return address

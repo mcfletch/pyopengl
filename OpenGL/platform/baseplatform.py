@@ -123,6 +123,20 @@ class BasePlatform(object):
     EGL = None
     GLX = None
 
+    def secondaryLibraries(self):
+        """Libraries to search when an API's own does not export a name.
+
+        Empty for a platform whose libraries each hold their own entry points.
+        Windows is the exception and says so for itself: the pixel-format calls
+        and SwapBuffers that a WGL program makes are GDI entry points rather
+        than OpenGL ones, and live in gdi32 instead of opengl32.
+
+        Both ways of binding a function ask this -- ``constructFunction`` here
+        and the dispatcher's own resolver -- so that an entry point one of them
+        can reach is not missing from the other.
+        """
+        return ()
+
     def install(self, namespace):
         """Install this platform instance into the platform module"""
         for name in self.EXPORTED_NAMES:
