@@ -52,9 +52,12 @@ def _installed(name):
         return False
 
 
-#: backends that need an installed windowing toolkit (vs. the headless 'egl').
+#: backends that need an installed windowing toolkit (vs. the headless ones).
 _WINDOWED = ('glfw', 'pygame')
-_ALL_BACKENDS = _WINDOWED + ('egl',)
+#: the two headless backends, one per platform: EGL's device platform on Linux,
+#: CGL on macOS.  Neither needs a display server.
+_HEADLESS = ('egl', 'cgl')
+_ALL_BACKENDS = _WINDOWED + _HEADLESS
 
 
 def pick_backend():
@@ -62,8 +65,9 @@ def pick_backend():
 
     Selection order:
 
-    1. ``TEST_WINDOWING=egl`` -> the headless EGL-device backend (no toolkit
-       needed; renders directly on the GPU -- see glcontext_egl).
+    1. A headless backend when one is asked for by name: ``TEST_WINDOWING=egl``
+       renders on an EGL device (see glcontext_egl) and ``cgl`` on a macOS CGL
+       context (see glcontext_cgl).  Neither needs a toolkit or a display.
     2. Otherwise probe which windowed backends are importable (``glfw``,
        ``pygame``), honour ``TEST_WINDOWING`` when set and available, and
        default to glfw then pygame.
@@ -79,6 +83,11 @@ def pick_backend():
         log.info('Test windowing backend: egl (headless EGL device)')
         from glcontext_egl import EGLDeviceBackend
         return EGLDeviceBackend
+
+    if requested == 'cgl':
+        log.info('Test windowing backend: cgl (headless macOS context)')
+        from glcontext_cgl import CGLBackend
+        return CGLBackend
 
     available = [name for name in _WINDOWED if _installed(name)]
     if not available:

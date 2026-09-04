@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>Offscreen OpenGL on macOS</title><link rel="stylesheet" type="text/css" href="style/tutorial.css">
+</head>
+<body>
+
+<h1>Offscreen OpenGL on macOS</h1>
+
+<p><code>OpenGL.CGL</code> creates an OpenGL context on macOS with no window and
+no window server.  CGL is the layer NSGL and AGL are built on, and the only one
+of the three that will do this &#8212; which makes it what an offscreen
+renderer, a batch tool, a remote shell or a CI job needs.</p>
+
+<pre>from OpenGL.CGL import OffscreenTarget, headless_context
+from OpenGL.GL import *
+
+with headless_context(profile='core3') as context:
+    target = OffscreenTarget(256, 256)
+    try:
+        glClearColor(0.0, 0.0, 0.25, 1.0)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        pixels = glReadPixels(0, 0, 256, 256, GL_RGBA, GL_UNSIGNED_BYTE)
+    finally:
+        target.release()</pre>
+
+<h2>There is no default framebuffer</h2>
+
+<p>Framebuffer zero belongs to a drawable, and a context made this way has
+none.  A <code>glClear</code> or a <code>glReadPixels</code> against it draws
+nowhere and reads nothing &#8212; it does not fail, which is the trap.  Render
+into a framebuffer object instead.</p>
+
+<p><code>OffscreenTarget</code> is one, built and bound inside a current
+context: an <code>GL_RGBA8</code> colour attachment and a
+<code>GL_DEPTH24_STENCIL8</code> depth/stencil one at the size asked for, with
+the viewport set to match.  While it is bound, drawing and reading back behave
+as they do on a window, so nothing else in a program has to know.
+<code>release()</code> gives the names back.</p>
+
+<h2>Which renderer answers</h2>
+
+<p>A Mac with a GPU has an accelerated renderer.  A virtual machine, or a
+session with no window server, has only Apple's CPU renderer &#8212; and asking
+for acceleration there <em>fails</em> rather than falling back, which is why a
+library that requires the accelerated attribute cannot get a context on such a
+machine at all.</p>
+
+<p><code>headless_context</code> and <code>choose_pixel_format</code> therefore
+try three kinds in order and take the first the machine offers:</p>
+
+<dl>
+<dt><code>accelerated</code></dt>
+<dd>Asks for <code>kCGLPFAAccelerated</code>: a GPU, where there is one.</dd>
+<dt><code>any</code></dt>
+<dd>Names no renderer at all and lets CGL answer with what it has.  This is
+what a machine with no accelerated renderer needs.</dd>
+<dt><code>software</code></dt>
+<dd>Names <code>kCGLRendererGenericFloatID</code>, Apple's CPU renderer, by id.
+There is no "not accelerated" attribute, so asking for it explicitly means
+naming it.</dd>
+</dl>
+
+<p><code>choose_pixel_format</code> returns the kind it settled on alongside the
+format, so a program can report what it got.  Pass <code>renderer=</code> to try
+one kind and no other.</p>
+
+<h2>Profiles</h2>
+
+<p>macOS gives a legacy 2.1 context unless asked otherwise, and it has no
+compatibility profile above that: <code>PROFILES</code> holds the three CGL
+offers.</p>
+
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>Name</th><th>CGL profile</th><th>What it is</th></tr>
+<tr><td><code>legacy</code></td><td><code>kCGLOGLPVersion_Legacy</code></td>
+    <td>GL 2.1, and the only one with the fixed-function pipeline in it</td></tr>
+<tr><td><code>core3</code></td><td><code>kCGLOGLPVersion_3_2_Core</code></td>
+    <td>GL 3.2 core</td></tr>
+<tr><td><code>core4</code></td><td><code>kCGLOGLPVersion_GL4_Core</code></td>
+    <td>GL 4.1 core, which is as far as macOS goes</td></tr>
+</table>
+
+<h2>Building the attribute list yourself</h2>
+
+<p><code>pixel_format_attributes</code> is the list
+<code>CGLChoosePixelFormat</code> takes, as plain integers, and it is pure: what
+a call asked for can be read off without a Mac to ask.  A program driving CGL
+directly can build the list with it and make its own call.</p>
+
+<pre>from OpenGL.CGL import pixel_format_attributes
+
+pixel_format_attributes(profile='core4', renderer='software',
+                        color_size=24, alpha_size=8,
+                        depth_size=24, stencil_size=8)</pre>
+
+<h2>Errors</h2>
+
+<p>Every call answers with a <code>CGLError</code> value, and a failure raises
+<code>OpenGL.CGL.CGLError</code> carrying it.  <code>code</code> is the number
+and <code>operation</code> the call, so "this machine offers no such pixel
+format" (<code>kCGLBadPixelFormat</code>) and "the arguments were wrong"
+(<code>kCGLBadAttribute</code>) can be told apart without reading the
+message.</p>
+
+<h2>Checking a machine</h2>
+
+<p><code>tests/check_cgl_context.py</code> reports whether a context can be made
+here and by which renderer, for each of the three profiles, and exits non-zero
+when none can.  It is the first thing to run when a suite skips every GL case on
+a Mac.</p>
+
+<pre>python tests/check_cgl_context.py</pre>
+
+<h2>Where this works</h2>
+
+<p>CGL is macOS only.  The module imports anywhere &#8212; the attribute-building
+half is arithmetic and has no platform in it &#8212; and the first call that
+needs the framework raises <code>CGLError</code> elsewhere.  The Linux and
+Android counterpart is EGL: see <a href="egl-devices.html">EGL devices</a> for
+rendering on a named device with no display server there.</p>
+
+</body></html>
