@@ -18,6 +18,8 @@ import zipfile
 
 import pytest
 
+from childenv import child_environment
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 PACKAGE = os.path.join(ROOT, 'OpenGL')
@@ -33,8 +35,7 @@ print('ok', OpenGL.__version__, hex(int(GL_TRIANGLES)), glBegin is not None)
 
 
 def _environment(**pinned):
-    environment = dict(os.environ)
-    environment.setdefault('PYOPENGL_PLATFORM', 'glx')
+    environment = child_environment()
     # The compiled dispatch cannot be imported out of a zip, and this is about
     # the tables rather than about which implementation reads them.
     environment['PYOPENGL_DISPATCH'] = 'ctypes'

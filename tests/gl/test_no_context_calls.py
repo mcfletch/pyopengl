@@ -16,6 +16,8 @@ import unittest
 
 import pytest
 
+from childenv import child_environment
+
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT = os.path.dirname(HERE)
 
@@ -53,9 +55,7 @@ else:
 
 
 def behaviour(dispatch, checking):
-    environment = dict(os.environ)
-    environment['PYOPENGL_DISPATCH'] = dispatch
-    environment.setdefault('PYOPENGL_PLATFORM', 'glx')
+    environment = child_environment(PYOPENGL_DISPATCH=dispatch)
     completed = subprocess.run(
         [sys.executable, '-c', SCRIPT % {'checking': checking}],
         capture_output=True,

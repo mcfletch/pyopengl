@@ -16,6 +16,8 @@ import sys
 
 import pytest
 
+from childenv import child_environment
+
 import OpenGL._dispatch as dispatch
 from OpenGL import _configflags
 
@@ -29,8 +31,7 @@ pytestmark = pytest.mark.skipif(
 
 
 def run(source):
-    environment = dict(os.environ)
-    environment.setdefault('PYOPENGL_PLATFORM', 'glx')
+    environment = child_environment()
     completed = subprocess.run(
         [sys.executable, '-c', source],
         capture_output=True,

@@ -15,6 +15,8 @@ import sys
 
 import pytest
 
+from childenv import child_environment
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
@@ -113,9 +115,7 @@ json.dump(out, sys.stdout)
 
 
 def survey(dispatch):
-    environment = dict(os.environ)
-    environment['PYOPENGL_DISPATCH'] = dispatch
-    environment.setdefault('PYOPENGL_PLATFORM', 'glx')
+    environment = child_environment(PYOPENGL_DISPATCH=dispatch)
     completed = subprocess.run(
         [sys.executable, '-c', SURVEY],
         capture_output=True,

@@ -15,6 +15,8 @@ import sys
 
 import pytest
 
+from childenv import child_environment
+
 import OpenGL._dispatch as dispatch
 from OpenGL import _configflags
 
@@ -65,8 +67,7 @@ def _run(source):
     the point of these is to compare the two.  A failure is reported as a
     failure: a survey that cannot run is the breakage, not a reason to skip.
     """
-    environment = dict(os.environ)
-    environment.setdefault('PYOPENGL_PLATFORM', 'glx')
+    environment = child_environment()
     completed = subprocess.run(
         [sys.executable, '-c', source],
         capture_output=True,

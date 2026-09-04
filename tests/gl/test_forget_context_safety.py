@@ -20,6 +20,8 @@ import textwrap
 
 import pytest
 
+from childenv import child_environment
+
 import OpenGL._dispatch as dispatch
 from OpenGL import _configflags
 
@@ -63,8 +65,7 @@ RACE = textwrap.dedent(
 
 
 def run_race():
-    environment = dict(os.environ)
-    environment.setdefault('PYOPENGL_PLATFORM', 'glx')
+    environment = child_environment()
     completed = subprocess.run(
         [sys.executable, '-c', RACE],
         capture_output=True,

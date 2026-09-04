@@ -17,6 +17,8 @@ import sys
 
 import pytest
 
+from childenv import child_environment
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 
@@ -54,8 +56,7 @@ else:
 
 
 def run(checking, scope=''):
-    environment = dict(os.environ)
-    environment.setdefault('PYOPENGL_PLATFORM', 'glx')
+    environment = child_environment()
     completed = subprocess.run(
         [sys.executable, '-c', PROGRAM % {'checking': checking, 'scope': scope}],
         capture_output=True,
@@ -144,8 +145,7 @@ def test_a_raiser_that_declines_does_not_become_a_SystemError(debug, raiser):
     """Both notice mechanisms return -1 to say "an exception is set".  A raiser
     that returns instead leaves the stub returning NULL with nothing raised,
     which CPython reports as a SystemError from an unrelated frame."""
-    environment = dict(os.environ)
-    environment.setdefault('PYOPENGL_PLATFORM', 'glx')
+    environment = child_environment()
     completed = subprocess.run(
         [sys.executable, '-c', RAISER_DECLINES % {'debug': debug, 'raiser': raiser}],
         capture_output=True,
@@ -198,8 +198,7 @@ def test_turning_debug_output_off_undoes_what_turning_it_on_did():
     """The synchronous debug output it enables serialises the driver, so
     leaving it on costs exactly what switching the mode off asked to stop
     paying -- and each enable must not add another callback to hold forever."""
-    environment = dict(os.environ)
-    environment.setdefault('PYOPENGL_PLATFORM', 'glx')
+    environment = child_environment()
     completed = subprocess.run(
         [sys.executable, '-c', DISABLE],
         capture_output=True,
