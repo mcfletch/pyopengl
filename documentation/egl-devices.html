@@ -89,24 +89,45 @@ machine that has both a GPU and a software rasteriser.</p>
 stays with the caller, because a renderer wanting speed and a test wanting
 reproducibility disagree about which device is right.</p>
 
-<pre>from OpenGL.EGL import devices
-from OpenGL.EGL import EGL_NO_DISPLAY, eglInitialize
+<p>A policy has one hard constraint, which is the crash above: where the
+environment demands software rendering, the device chosen has to be a software
+one.  So read that first and let it decide which kind to look for, rather than
+preferring hardware and hoping.</p>
+
+<pre>import os
+
+from OpenGL.EGL import devices
 from OpenGL.EGL.EXT.platform_base import eglGetPlatformDisplayEXT
 from OpenGL.EGL.EXT.platform_device import EGL_PLATFORM_DEVICE_EXT
 
 available = devices.devices()
-hardware = [device for device in available if not device.software]
-chosen = (hardware or available)[0]
+# Mesa reads the variable as set-or-not, so read it the same way.
+software = os.environ.get('LIBGL_ALWAYS_SOFTWARE', '').lower() not in (
+    '', '0', 'false', 'no', 'off'
+)
+wanted = [device for device in available if device.software == software]
+if not wanted and software:
+    raise RuntimeError(
+        'software rendering was demanded and there is no software device: %s'
+        % (available,)
+    )
+chosen = (wanted or available)[0]
 
 display = eglGetPlatformDisplayEXT(
     EGL_PLATFORM_DEVICE_EXT, chosen.handle, None
 )</pre>
 
+<p>The fallback runs one way only.  Wanting a GPU and finding a CPU rasteriser
+is slow, so it renders; wanting software and finding a GPU is the pair that
+dumps core, so it stops.</p>
+
 <p><a href="https://github.com/mcfletch/openglcontext">OpenGLContext</a>'s
 offscreen backend is a worked example of the policy half: it honours
-<code>LIBGL_ALWAYS_SOFTWARE</code> and <code>GALLIUM_DRIVER</code>, and takes an
+<code>LIBGL_ALWAYS_SOFTWARE</code> and <code>GALLIUM_DRIVER</code>, takes an
 explicit device index from an environment variable where a run has to be pinned
-to one GPU of several.</p>
+to one GPU of several, and refuses the contradiction rather than serving it.
+PyOpenGL's own headless test backend
+(<code>tests/glcontext_egl.py</code>) is the same policy at a smaller size.</p>
 
 <h2>Where this works</h2>
 

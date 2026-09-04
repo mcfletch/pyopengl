@@ -10,8 +10,9 @@ colour-depth-stencil sizes; a context the driver will not provide skips the test
 
 Selected with ``TEST_WINDOWING=egl``.  ``conftest.py`` forces
 ``PYOPENGL_PLATFORM=egl`` for that case so the GL entry points load through EGL.
-Set ``TEST_EGL_DEVICE=<index>`` to pin a specific device; by default the first
-non-software device is used (falling back to device 0).
+A GPU is used where there is one; ``LIBGL_ALWAYS_SOFTWARE=1`` asks for the
+software device instead, which is how a run reproduces what a CI runner with no
+GPU renders.  ``TEST_EGL_DEVICE=<index>`` pins one device outright.
 
 There is no window, so this backend is always headless: ``visible`` is forced
 False and the inter-test dwell is skipped.
@@ -20,7 +21,6 @@ False and the inter-test dwell is skipped.
 from __future__ import print_function
 
 import os
-import ctypes
 import logging
 
 from OpenGL.EGL import (
@@ -62,66 +62,98 @@ from OpenGL.EGL import (
     eglQueryString,
     EGL_VENDOR,
 )
-from OpenGL.EGL.EXT.device_enumeration import eglQueryDevicesEXT
-from OpenGL.EGL.EXT.device_base import EGLDeviceEXT, eglQueryDeviceStringEXT
 from OpenGL.EGL.EXT.platform_base import eglGetPlatformDisplayEXT
 from OpenGL.EGL.EXT.platform_device import EGL_PLATFORM_DEVICE_EXT
+from OpenGL.EGL.devices import devices as enumerate_devices
 
 log = logging.getLogger(__name__)
 
 _ES_APIS = ('gles', 'es')
 
-# EGL_EXT_device_query / device_string tokens (not always exported by name).
-_EGL_DRIVER_NAME_EXT = 0x335F
-_SOFTWARE_MARKERS = ('llvmpipe', 'swrast', 'softpipe', 'software')
+#: Values Mesa reads as "no" in a boolean environment variable.  An unset
+#: variable and an empty one agree, which is what an unexported shell variable
+#: expands to.
+_FALSE_VALUES = frozenset(('', '0', 'false', 'no', 'n', 'f', 'off'))
+
+#: ``GALLIUM_DRIVER`` values that name a CPU rasteriser.
+_SOFTWARE_DRIVERS = frozenset(('llvmpipe', 'softpipe', 'swr', 'swrast', 'lavapipe'))
 
 #: cached (display) once initialised -- the device display is reused per test.
 _display = None
 
 
-def _enumerate_devices():
-    num = EGLint()
-    if not eglQueryDevicesEXT(0, None, num) or num.value < 1:
-        raise RuntimeError('eglQueryDevicesEXT reported no EGL devices')
-    devices = (EGLDeviceEXT * num.value)()
-    eglQueryDevicesEXT(num.value, devices, num)
-    return [devices[i] for i in range(num.value)]
+class NoSuitableDevice(RuntimeError):
+    """No EGL device can serve what the environment asked for."""
 
 
-def _device_label(device):
-    """Best-effort human label for an EGL device (may be empty)."""
-    for token in (_EGL_DRIVER_NAME_EXT,):
-        try:
-            value = eglQueryDeviceStringEXT(device, token)
-        except Exception:
-            value = None
-        if value:
-            return value.decode('ascii', 'replace') if isinstance(value, bytes) else str(value)
-    return ''
+def software_forced(env=None):
+    """Whether the environment asks for CPU rasterisation.
 
-
-def _pick_device(devices):
-    """Choose the device to render on.
-
-    ``TEST_EGL_DEVICE`` pins an explicit index; otherwise prefer the first
-    device that does not look software-rendered, falling back to device 0.
+    ``LIBGL_ALWAYS_SOFTWARE`` is read the way Mesa itself reads it, because the
+    point of asking is to predict what Mesa will do with the display this
+    backend hands it.  ``GALLIUM_DRIVER`` naming a CPU rasteriser counts as the
+    same request: it does not reach the device path by itself, so a run that
+    pinned llvmpipe that way and was given the GPU would be measuring something
+    it did not ask for.
     """
-    override = os.environ.get('TEST_EGL_DEVICE')
-    if override is not None:
-        return devices[int(override)], int(override)
-    for index, device in enumerate(devices):
-        label = _device_label(device).lower()
-        if label and not any(marker in label for marker in _SOFTWARE_MARKERS):
-            return device, index
-    return devices[0], 0
+    env = os.environ if env is None else env
+    if env.get('LIBGL_ALWAYS_SOFTWARE', '').strip().lower() not in _FALSE_VALUES:
+        return True
+    return env.get('GALLIUM_DRIVER', '').strip().lower() in _SOFTWARE_DRIVERS
+
+
+def pick_device(found, env=None):
+    """Choose which of ``found`` to render on, or say why none will do.
+
+    A GPU is preferred, since that is what the suite is usually here to
+    exercise.  ``LIBGL_ALWAYS_SOFTWARE`` reverses that and selects the software
+    device: the two settings must agree, because Mesa will not force software
+    rasterisation onto a display built on a hardware device and crashes in
+    ``eglInitialize`` rather than refusing it.  ``TEST_EGL_DEVICE`` pins an
+    index, and is held to the same agreement for the same reason.
+    """
+    env = os.environ if env is None else env
+    software = software_forced(env)
+    pinned = env.get('TEST_EGL_DEVICE')
+
+    if pinned is not None:
+        try:
+            device = found[int(pinned)]
+        except (ValueError, IndexError):
+            raise NoSuitableDevice(
+                'TEST_EGL_DEVICE=%r does not name one of the %d EGL devices'
+                % (pinned, len(found))
+            ) from None
+        if software and not device.software:
+            raise NoSuitableDevice(
+                'TEST_EGL_DEVICE=%s names %r, but LIBGL_ALWAYS_SOFTWARE asks for '
+                'software rendering, and Mesa crashes rather than forcing it onto '
+                'a hardware device.  Drop one of the two settings.' % (pinned, device)
+            )
+        return device
+
+    if not found:
+        raise NoSuitableDevice('EGL reports no devices to render on')
+
+    wanted = [device for device in found if device.software == software]
+    if wanted:
+        return wanted[0]
+    if software:
+        raise NoSuitableDevice(
+            'LIBGL_ALWAYS_SOFTWARE asks for software rendering and EGL reports no '
+            'software device (%s).  Mesa crashes rather than forcing it onto a '
+            'hardware device, so unset the variable to use one of these.'
+            % ', '.join(repr(device) for device in found)
+        )
+    # Only software devices: that is the whole offer, and nothing contradicts it.
+    return found[0]
 
 
 def _ensure_display():
     global _display
     if _display is None:
-        devices = _enumerate_devices()
-        device, index = _pick_device(devices)
-        display = eglGetPlatformDisplayEXT(EGL_PLATFORM_DEVICE_EXT, device, None)
+        device = pick_device(enumerate_devices())
+        display = eglGetPlatformDisplayEXT(EGL_PLATFORM_DEVICE_EXT, device.handle, None)
         if display == EGL_NO_DISPLAY:
             raise RuntimeError('eglGetPlatformDisplayEXT returned EGL_NO_DISPLAY')
         major, minor = EGLint(), EGLint()
@@ -129,9 +161,8 @@ def _ensure_display():
             raise RuntimeError('eglInitialize failed for the EGL device display')
         vendor = eglQueryString(display, EGL_VENDOR)
         log.info(
-            'EGL device backend: device[%d] %r, EGL %d.%d, vendor=%r',
-            index, _device_label(devices[index]) or '<unknown>',
-            major.value, minor.value, vendor,
+            'EGL device backend: %r, EGL %d.%d, vendor=%r',
+            device, major.value, minor.value, vendor,
         )
         _display = display
     return _display
