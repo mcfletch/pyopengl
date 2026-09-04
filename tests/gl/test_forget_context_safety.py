@@ -108,3 +108,43 @@ def test_dispatching_after_a_forget_still_works():
     # The handle is gone, so the next dispatch has to fall back and resolve
     # again rather than trusting what the retired table held.
     assert _c.current_handle() in (0, 0xF00D)
+
+
+class TestRetiredTablesCanBeReclaimed:
+    """A forgotten context's table is retired rather than freed, because another
+    thread may still be pointing at it.  A program that opens and closes many
+    contexts accumulates them, so there has to be a way to say "no thread is
+    holding one now"."""
+
+    def test_reclaim_reports_how_many_it_freed(self):
+        dispatch = pytest.importorskip('OpenGL._dispatch')
+        if not dispatch.AVAILABLE:
+            pytest.skip('the C dispatch extension is not built')
+        c = dispatch._c
+
+        c.reclaim_retired()                      # start from a known state
+        before = c.context_count()
+        c.make_current(0xF00D0001)
+        c.make_current(0xF00D0002)
+        assert c.context_count() == before + 2
+        c.forget_context(0xF00D0001)
+        c.forget_context(0xF00D0002)
+        assert c.context_count() == before
+        assert c.reclaim_retired() == 2
+        assert c.reclaim_retired() == 0
+        c.make_current(0)
+
+    def test_reclaiming_does_not_touch_a_live_table(self):
+        dispatch = pytest.importorskip('OpenGL._dispatch')
+        if not dispatch.AVAILABLE:
+            pytest.skip('the C dispatch extension is not built')
+        c = dispatch._c
+
+        c.reclaim_retired()
+        c.make_current(0xF00D0003)
+        before = c.context_count()
+        assert c.reclaim_retired() == 0
+        assert c.context_count() == before
+        c.forget_context(0xF00D0003)
+        c.reclaim_retired()
+        c.make_current(0)

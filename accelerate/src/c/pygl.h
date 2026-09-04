@@ -144,7 +144,12 @@ typedef struct {
     uint16_t slot; /* index into every context's dispatch table */
     uint8_t api;
     uint8_t deprecated;
-    uint8_t required_args; /* arguments a caller must supply */
+    /* How many arguments the friendly call takes, which for a hand-written
+     * entry point is fewer than arg_count: glVertexPointerd(array) is built
+     * from glVertexPointer(size, type, stride, pointer).  Which of them a
+     * caller must supply is in text_signature, where an output array a caller
+     * may pass in carries "=None". */
+    uint8_t required_args;
     uint8_t return_kind;
     /* Set where the C performs everything the Python wrapper would have.  A
      * customisation call that restates it then changes nothing, rather than
@@ -220,8 +225,10 @@ enum {
 typedef struct PyGLDispatch {
     void **slots;
     uint8_t *flags;
-    void *handle;         /* the platform context handle this table serves */
-    unsigned generation;  /* guards a handle the driver reused */
+    /* The platform context handle this table serves, cleared when the context
+     * is forgotten.  A handle the driver hands out again therefore finds no
+     * table and gets a fresh one, rather than the dead context's addresses. */
+    void *handle;
     int is_null_context;  /* the table used when no context is current */
     struct PyGLDispatch *next;
 } PyGLDispatch;
@@ -327,12 +334,20 @@ extern PYGL_THREAD_LOCAL int pygl_debug_pending;
 
 int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs);
 
+/* GL_KHR_debug is a cheaper way to *notice* an error, not a different policy
+ * about which entry points are checked: an entry point the caller turned
+ * checking off for -- OpenGL.ERROR_CHECKING, or set_error_checking(False,
+ * glFoo) -- stays unchecked either way.  Reading the flag first is what keeps
+ * "what a caller sees does not change" true. */
 static inline int pygl_check_needed(GLProc *self)
 {
+    if (!(pygl_current->flags[self->info->slot] & PYGL_F_CHECK_ERRORS)) {
+        return 0;
+    }
     if (pygl_error_mode == PYGL_ERRORS_DEBUG) {
         return pygl_debug_pending;
     }
-    return pygl_current->flags[self->info->slot] & PYGL_F_CHECK_ERRORS;
+    return 1;
 }
 PyObject *pygl_arity_error(GLProc *self, Py_ssize_t want, Py_ssize_t got);
 PyObject *pygl_arity_range_error(GLProc *self, Py_ssize_t low, Py_ssize_t high,

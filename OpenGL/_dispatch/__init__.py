@@ -73,13 +73,17 @@ def _versions_match():
     pair does not fail cleanly -- it dispatches through the wrong indices.
     They are released together, so requiring equality costs nothing and turns
     a confusing crash into a sentence.
+
+    An extension that does not say which version it holds is a mismatch, not a
+    pass.  The pair this exists to refuse is an accelerate left behind by a
+    partial upgrade, and an accelerate old enough to be dangerous is exactly the
+    one that would not carry the attribute.
     """
     if _c is None:
         return True
     from OpenGL.version import __version__ as ours
 
-    theirs = getattr(_c, '__pyopengl_version__', None)
-    return theirs is None or theirs == ours
+    return getattr(_c, '__pyopengl_version__', None) == ours
 
 
 def _current_context_getter():
@@ -337,24 +341,37 @@ def use_debug_output(enable=True):
     of error checking.  With this on, the driver reports an error through a
     callback during the call itself, and the check afterwards is a read of the
     flag that callback set.  What a caller sees does not change: the same
-    exception, raised from the same call.
+    entry points are checked -- ``OpenGL.ERROR_CHECKING`` and
+    :func:`set_error_checking` decide that either way -- and the same exception
+    is raised from the same call, carrying the same GL error code.
+
+    Switching it off undoes what switching it on did, callback and driver state
+    together: synchronous debug output serialises the driver, which is the cost
+    the switch exists to stop paying.
 
     Returns True when it took effect.  It needs a context offering
     ``GL_KHR_debug``; without one, error checking stays as it was.
     """
     if not ACTIVE:
         return False
-    if not enable:
-        _c.set_error_mode(0)
-        return True
-    if not debug_output_available():
-        return False
 
     from OpenGL.GL import (
         glDebugMessageCallback,
         glDebugMessageControl,
+        glDisable,
         glEnable,
     )
+
+    key = _c.current_handle()
+    if not enable:
+        _c.set_error_mode(0)
+        if _installed_callbacks.pop(key, None) is not None:
+            glDisable(_DEBUG_OUTPUT_SYNCHRONOUS)
+            glDisable(_DEBUG_OUTPUT)
+            glDebugMessageCallback(None, None)
+        return True
+    if not debug_output_available():
+        return False
 
     address = _c.debug_callback_address()
     callback = ctypes.cast(ctypes.c_void_p(address), _debug_callback_type())
@@ -369,12 +386,16 @@ def use_debug_output(enable=True):
         _DONT_CARE, _DONT_CARE, _DEBUG_SEVERITY_NOTIFICATION, 0, None, False
     )
     _c.set_error_mode(1)
-    # The callback holds the reference the driver will call through.
-    _installed_callbacks.append(callback)
+    # The callback holds the reference the driver will call through, for as
+    # long as that context has it installed.
+    _installed_callbacks[key] = callback
     return True
 
 
-_installed_callbacks = []
+#: The live callback per context handle.  A dict rather than a list because the
+#: reference has to outlive the enabling call and no longer: keeping every one
+#: ever made would hold a callback per context for the life of the process.
+_installed_callbacks = {}
 
 
 def _debug_callback_type():
@@ -421,14 +442,38 @@ def make_current(handle):
     contexts in one process each resolve and hold their own entry points.
     """
     _end_suspended_block()
-    if AVAILABLE:
+    if ACTIVE:
         _c.make_current(int(handle or 0))
 
 
 def forget_context(handle):
-    """Free the dispatch table for a context that has been destroyed."""
+    """Retire the dispatch table for a context that has been destroyed.
+
+    The table is emptied and set aside rather than freed: ``make_current`` is
+    per thread, so a thread that never noticed the context go still points at
+    it, and freeing here would be a use-after-free in the ordinary shape of a
+    program with a window per thread.  :func:`reclaim_retired` frees the set
+    aside ones at a moment the caller says is quiet.
+    """
     _end_suspended_block()
-    if AVAILABLE:
+    if ACTIVE:
         _c.forget_context(int(handle or 0))
+
+
+def reclaim_retired():
+    """Free the tables of contexts that have been forgotten; returns how many.
+
+    A retired table costs about 43 KB and is unreachable, so a program with one
+    or two contexts need never call this.  A program that opens and closes a
+    context per document window over a long session accumulates them, and this
+    is how it says they can go.
+
+    **Only call this where no thread is still dispatching through a context
+    this process has destroyed** -- that is the judgement retirement exists to
+    avoid making on the caller's behalf, and nothing here can make it.
+    """
+    if ACTIVE:
+        return _c.reclaim_retired()
+    return 0
 
 

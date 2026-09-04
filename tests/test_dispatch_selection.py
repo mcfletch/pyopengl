@@ -116,3 +116,42 @@ def test_asking_for_ctypes_selects_it_even_when_c_is_available():
     _available, active, kind = report('ctypes')
     assert not active
     assert kind != 'GLProc'
+
+
+class TestVersionPairing:
+    """The two packages share the generated slot numbering and table layout, so
+    a mismatched pair does not fail cleanly -- it dispatches through the wrong
+    indices.  The check that stops that has to be able to fail."""
+
+    def test_the_extension_states_the_version_it_was_generated_with(self):
+        dispatch = pytest.importorskip('OpenGL._dispatch')
+        if not dispatch.AVAILABLE:
+            pytest.skip('the C dispatch extension is not built')
+        from OpenGL.version import __version__
+
+        assert dispatch._c.__pyopengl_version__ == __version__
+
+    def test_an_extension_that_will_not_say_is_a_mismatch(self, monkeypatch):
+        """An older accelerate is exactly the pair this exists to refuse, and
+        an older accelerate is what would not carry the attribute -- so
+        'it did not say' must not read as 'it agrees'."""
+        dispatch = pytest.importorskip('OpenGL._dispatch')
+        if not dispatch.AVAILABLE:
+            pytest.skip('the C dispatch extension is not built')
+
+        class Silent:
+            pass
+
+        monkeypatch.setattr(dispatch, '_c', Silent())
+        assert not dispatch._versions_match()
+
+    def test_a_different_version_is_a_mismatch(self, monkeypatch):
+        dispatch = pytest.importorskip('OpenGL._dispatch')
+        if not dispatch.AVAILABLE:
+            pytest.skip('the C dispatch extension is not built')
+
+        class Older:
+            __pyopengl_version__ = '3.1.9'
+
+        monkeypatch.setattr(dispatch, '_c', Older())
+        assert not dispatch._versions_match()

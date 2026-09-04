@@ -176,18 +176,64 @@ def context():
     glfw.make_context_current(None)
 
 
+def _undersized_arrays():
+    """One undersized output array per shape the acquire path distinguishes.
+
+    A guard against memory corruption has to be tested against the *kinds* of
+    input the acquire function branches on, not against one representative
+    value: each kind reaches the check through a different set of fields, and a
+    check that reads the wrong one is right for the kind it was written against
+    and silent for the rest.
+    """
+    import numpy
+
+    return [
+        # A matching contiguous buffer: taken by the buffer-protocol fast path,
+        # so the frame holds a Py_buffer over the caller's own memory.
+        pytest.param(lambda: numpy.zeros(1, dtype='uint32'), id='matched-buffer'),
+        # The right element type, but not contiguous, so the buffer request
+        # fails and ArrayDatatype makes a copy.  The GL writes into the copy,
+        # which is sized from the caller's length.
+        pytest.param(lambda: numpy.zeros(8, dtype='uint32')[::2], id='converted-copy'),
+        # The wrong element type: converted for that reason instead.
+        pytest.param(lambda: numpy.zeros(4, dtype='int8'), id='converted-type'),
+        # A list, which has no buffer at all.
+        pytest.param(lambda: [0, 0, 0, 0], id='converted-list'),
+    ]
+
+
 class TestOutputArraySafety:
     """A caller-supplied output array has to be big enough for what the driver
     will write into it."""
 
-    def test_an_undersized_array_is_refused_rather_than_overrun(self, context):
-        import numpy
+    @pytest.mark.parametrize('make', _undersized_arrays())
+    def test_an_undersized_array_is_refused_rather_than_overrun(self, context, make):
+        import OpenGL.GL as GL
+
+        with pytest.raises(ValueError, match='output array holds'):
+            GL.glGenTextures(64, make())
+
+    def test_a_raw_pointer_is_measured_or_left_alone_but_never_guessed(self, context):
+        """A ctypes pointer carries no length, so there is nothing to check it
+        against.  What must not happen is a *different* answer each time, which
+        is what reading an uninitialised frame slot produces."""
+        import ctypes
 
         import OpenGL.GL as GL
 
-        small = numpy.zeros(1, dtype='uint32')
-        with pytest.raises(ValueError, match='output array holds'):
-            GL.glGenTextures(64, small)
+        buffer = (ctypes.c_uint * 64)()
+        pointer = ctypes.cast(buffer, ctypes.POINTER(ctypes.c_uint))
+        answers = set()
+        for _ in range(8):
+            try:
+                GL.glGenTextures(2, pointer)
+            except ValueError as raised:
+                answers.add(str(raised))
+            else:
+                answers.add(None)
+        assert len(answers) == 1, (
+            'the same call answered differently across repeats: %r' % (answers,)
+        )
 
     def test_a_correctly_sized_array_is_accepted(self, context):
         import numpy
@@ -197,6 +243,13 @@ class TestOutputArraySafety:
         enough = numpy.zeros(4, dtype='uint32')
         GL.glGenTextures(4, enough)
         assert enough.any()
+
+    def test_a_correctly_sized_converted_array_is_accepted(self, context):
+        """The conversion path is not a rejection path: a list of the right
+        length is what a great deal of code passes."""
+        import OpenGL.GL as GL
+
+        assert len(GL.glGenTextures(4, [0, 0, 0, 0])) == 4
 
     def test_a_maximum_is_not_treated_as_a_promise(self, context):
         """glGetVertexAttribiv declares four and writes one for most pnames,

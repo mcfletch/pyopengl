@@ -80,11 +80,11 @@ static void *(*pygl_get_current_context)(void) = NULL;
  * ------------------------------------------------------------------ */
 
 /* Used when the platform reports that no context is current. */
-static PyGLDispatch pygl_null_table = {NULL, NULL, NULL, 0, 1, NULL};
+static PyGLDispatch pygl_null_table = {NULL, NULL, NULL, 1, NULL};
 /* Used when the platform offers no way to ask which context is current.  It
  * behaves as an ordinary table, because "we cannot tell" must not be reported
  * as "there is none". */
-static PyGLDispatch pygl_default_table = {NULL, NULL, NULL, 0, 0, NULL};
+static PyGLDispatch pygl_default_table = {NULL, NULL, NULL, 0, NULL};
 PYGL_THREAD_LOCAL PyGLDispatch *pygl_current = &pygl_default_table;
 
 static PyGLDispatch *pygl_tables = NULL; /* handle -> table, a short list */
@@ -102,9 +102,15 @@ static PyGLDispatch *pygl_tables = NULL; /* handle -> table, a short list */
  * So a forgotten table is emptied and retired instead.  Its slots read as
  * PYGL_SLOT_UNRESOLVED, which sends a stale thread down the slow path, where
  * syncing the context moves it to the right table; and its handle is cleared,
- * so it can never be found again.  A retired table is about 23 KB and the
- * count is bounded by the number of contexts the process ever made, which is
- * a cheaper price than reading freed memory. */
+ * so it can never be found again.
+ *
+ * A retired table costs nine bytes per entry point -- 43 KB against the 4,859
+ * commands of a current registry -- and the count is bounded by the number of
+ * contexts the process ever made.  For the ordinary program that is one or two;
+ * for one that opens a context per document window over a long session it
+ * accumulates, so pygl_reclaim_retired() frees the lot at a moment the caller
+ * declares quiescent.  Nothing frees them on its own, because nothing here can
+ * see whether a thread still holds the pointer. */
 static PyGLDispatch *pygl_retired = NULL;
 static PyThread_type_lock pygl_tables_lock = NULL;
 
@@ -128,10 +134,6 @@ static PyGLDispatch *pygl_table_new(void *handle)
     table->handle = handle;
     return table;
 }
-
-/* Retained for module teardown: nothing frees a table during the process's
- * life any more, because a forgotten one may still be pointed at. */
-static void pygl_table_free(PyGLDispatch *table) __attribute__((unused));
 
 static void pygl_table_free(PyGLDispatch *table)
 {
@@ -431,6 +433,10 @@ void pygl_argument_error(GLProc *self)
         text = PyObject_Str(value);
     }
     if (text == NULL) {
+        /* Whatever __str__ raised is discarded so that the original argument
+         * error is what the caller sees.  PyErr_Restore overwrites rather than
+         * chains, so clearing first is what makes that a decision. */
+        PyErr_Clear();
         PyErr_Restore(type, value, traceback);
         return;
     }
@@ -464,14 +470,18 @@ static void
     if (type != PYGL_DEBUG_TYPE_ERROR || pygl_error_suspended) {
         return;
     }
-    limit = (size_t)(length < 0 ? 0 : length);
+    /* A driver may report a length with no text -- one it could not format,
+     * say.  Terminating at that length rather than at zero would leave the
+     * previous callback's bytes in front of the terminator, and the exception
+     * would carry the previous error's message. */
+    limit = (message == NULL) ? 0 : (size_t)(length < 0 ? 0 : length);
     if (limit == 0 && message != NULL) {
         limit = strlen(message);
     }
     if (limit >= PYGL_DEBUG_MESSAGE_MAX) {
         limit = PYGL_DEBUG_MESSAGE_MAX - 1;
     }
-    if (message != NULL && limit) {
+    if (limit) {
         memcpy(pygl_debug_message, message, limit);
     }
     pygl_debug_message[limit] = '\0';
@@ -500,29 +510,16 @@ static PyObject *pygl_arg_tuple(PyObject *const *args, Py_ssize_t nargs)
     return tuple;
 }
 
-int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs)
+/* The code the driver has recorded, or 0.
+ *
+ * Both notice mechanisms want it.  GL_KHR_debug says *that* an error happened
+ * and what the driver called it in prose; the code itself still comes from
+ * glGetError, and it is the code that GLError.err documents and that a caller
+ * branches on.  Asking costs a driver round trip, which is why it is asked only
+ * once an error is known to be there. */
+static unsigned int pygl_error_code(void)
 {
-    PyObject *tuple;
     void *fp;
-    unsigned int code;
-    PyObject *result;
-
-    if (pygl_error_suspended) {
-        return 0;
-    }
-    if (pygl_error_mode == PYGL_ERRORS_DEBUG) {
-        if (!pygl_debug_pending) {
-            return 0;
-        }
-        pygl_debug_pending = 0;
-        tuple = pygl_arg_tuple(args, nargs);
-        result = PyObject_CallMethod(pygl_support, "raise_debug_error", "IssO",
-                                     pygl_debug_id, pygl_debug_message,
-                                     self->info->name, tuple);
-        Py_XDECREF(tuple);
-        Py_XDECREF(result);
-        return -1;
-    }
     if (pygl_error_slot < 0) {
         return 0;
     }
@@ -538,7 +535,46 @@ int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs)
             return 0;
         }
     }
-    code = ((unsigned int (*)(void))fp)();
+    return ((unsigned int (*)(void))fp)();
+}
+
+/* The support layer's two raisers are supposed to raise.  Returning -1 with
+ * nothing set would surface much later as a SystemError about a function that
+ * "returned a result with an exception set" -- or worse, be missed.  Both
+ * branches guard it, through here, so the two cannot drift. */
+static void pygl_ensure_raised(GLProc *self, unsigned int code)
+{
+    if (!PyErr_Occurred()) {
+        PyErr_Format(pygl_null_function_error,
+                     "%s failed with GL error 0x%X", self->info->name, code);
+    }
+}
+
+int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs)
+{
+    PyObject *tuple;
+    unsigned int code;
+    PyObject *result;
+
+    if (pygl_error_suspended) {
+        return 0;
+    }
+    if (pygl_error_mode == PYGL_ERRORS_DEBUG) {
+        if (!pygl_debug_pending) {
+            return 0;
+        }
+        pygl_debug_pending = 0;
+        code = pygl_error_code();
+        tuple = pygl_arg_tuple(args, nargs);
+        result = PyObject_CallMethod(pygl_support, "raise_debug_error", "IIssO",
+                                     code, pygl_debug_id, pygl_debug_message,
+                                     self->info->name, tuple);
+        Py_XDECREF(tuple);
+        Py_XDECREF(result);
+        pygl_ensure_raised(self, code);
+        return -1;
+    }
+    code = pygl_error_code();
     if (code == 0) {
         return 0;
     }
@@ -548,13 +584,7 @@ int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs)
                                  pygl_api_name(self->info->api));
     Py_XDECREF(tuple);
     Py_XDECREF(result);
-    if (!PyErr_Occurred()) {
-        /* raise_gl_error is supposed to raise.  Returning -1 with nothing set
-         * would surface much later as a SystemError about a function that
-         * "returned a result with an exception set" -- or worse, be missed. */
-        PyErr_Format(pygl_null_function_error,
-                     "%s failed with GL error 0x%X", self->info->name, code);
-    }
+    pygl_ensure_raised(self, code);
     return -1;
 }
 
@@ -625,6 +655,23 @@ void *pygl_pointer_slow(PyObject *object)
  * cheap branch, not an error.
  * ------------------------------------------------------------------ */
 
+/* A frame slot, before anything has been acquired into it.
+ *
+ * `_bufs` is an uninitialised array on the stack, so every field a later reader
+ * may consult has to be written here -- `view` included.  It is only *valid*
+ * where `have_view` is set, but a reader that forgets to ask reads a stale
+ * stack slot rather than something obviously wrong, which is the hardest kind
+ * of mistake to see: the answer differs between two identical calls. */
+static void pygl_buf_reset(PyGLBuf *out)
+{
+    out->owner = NULL;
+    out->have_view = 0;
+    out->block = NULL;
+    out->pointer = NULL;
+    out->view.buf = NULL;
+    out->view.len = 0;
+}
+
 static int pygl_format_matches(const PyGLElement *element, const char *format)
 {
     char code;
@@ -676,6 +723,48 @@ static PyObject *pygl_array_type(const PyGLElement *element)
     return type;
 }
 
+/* How many bytes of storage an acquired argument holds, or -1 where that
+ * cannot be had -- a raw pointer carries no length, and neither does an object
+ * ArrayDatatype declines to measure.
+ *
+ * "Cannot be had" is not "zero": a size check that treats the two alike either
+ * refuses every raw pointer or accepts every undersized one, depending which way
+ * round it reads the answer.  It is also the buffer the *driver* is handed that
+ * has to be measured, not the object the caller passed: where a conversion
+ * copied, the copy is what is written into and the caller's object says nothing
+ * about how large it is. */
+static Py_ssize_t pygl_byte_count(const PyGLElement *element, PyGLBuf *buffer)
+{
+    PyObject *type, *size;
+    Py_ssize_t count;
+
+    if (buffer->have_view) {
+        return buffer->view.len;
+    }
+    /* A raw pointer is an address and nothing else -- ArrayDatatype cannot
+     * measure one, and asking would only reach the same answer the long way. */
+    if (buffer->owner == NULL || pygl_is_ctypes_pointer(buffer->owner)) {
+        return -1;
+    }
+    type = pygl_array_type(element);
+    if (type == NULL) {
+        PyErr_Clear();
+        return -1;
+    }
+    size = PyObject_CallMethod(type, "arrayByteCount", "O", buffer->owner);
+    if (size == NULL) {
+        PyErr_Clear();
+        return -1;
+    }
+    count = PyLong_AsSsize_t(size);
+    Py_DECREF(size);
+    if (PyErr_Occurred()) {
+        PyErr_Clear();
+        return -1;
+    }
+    return count < 0 ? -1 : count;
+}
+
 /* The fall-through: hand the object to ArrayDatatype exactly as wrapper.py
  * does, keep what comes back alive for the duration of the call, and take the
  * data pointer from it.  This is what makes VBO offsets, ctypes objects,
@@ -719,10 +808,7 @@ static int pygl_array_acquire(PyObject *object, const PyGLElement *element,
                               PyGLBuf *out, int writable)
 {
     int flags = PyBUF_C_CONTIGUOUS | PyBUF_FORMAT;
-    out->owner = NULL;
-    out->have_view = 0;
-    out->block = NULL;
-    out->pointer = NULL;
+    pygl_buf_reset(out);
 
     if (object == NULL || object == Py_None) {
         /* None is a null pointer, which is meaningful for a great many entry
@@ -798,21 +884,11 @@ int pygl_array_in_sized(GLProc *self, PyObject *object, const PyGLElement *eleme
          * check the caller's length against. */
         return 0;
     }
-    if (out->have_view) {
-        count = out->view.len;
-    } else {
-        PyObject *size = PyObject_CallMethod(pygl_array_type(element),
-                                             "arrayByteCount", "O", out->owner);
-        if (size == NULL) {
-            PyErr_Clear();
-            return 0;
-        }
-        count = PyLong_AsSsize_t(size);
-        Py_DECREF(size);
-        if (count < 0) {
-            PyErr_Clear();
-            return 0;
-        }
+    count = pygl_byte_count(element, out);
+    if (count < 0) {
+        /* Nothing here can say how long it is -- a raw pointer, or an object
+         * ArrayDatatype declines to measure. */
+        return 0;
     }
     /* The check is on the byte count and it is exact, which is what
      * arrayhelpers.asArrayTypeSize asserts today: an array of the wrong length
@@ -909,15 +985,27 @@ int pygl_array_out(GLProc *self, PyObject *object, const PyGLElement *element,
          * with a four-byte array is 256 bytes into 4, which corrupts the heap
          * and is only noticed much later.  The input path has checked its
          * sizes since this layer was written; the output path is where the
-         * damage is done. */
-        if (exact && count > 0 && element->itemsize > 0 && out->owner == object) {
+         * damage is done.
+         *
+         * What is measured is the buffer the driver is about to be handed --
+         * `out`, whatever produced it -- and not the object the caller passed.
+         * Where the acquire copied, the copy is what is written into, and it is
+         * sized from the caller's length rather than from `count`; a check
+         * against the caller's object skips that case entirely, which is the
+         * one that corrupts a PyOpenGL-allocated block rather than the
+         * caller's. */
+        if (exact && count > 0 && element->itemsize > 0) {
             Py_ssize_t needed = count * (Py_ssize_t)element->itemsize;
-            if (out->view.len < needed) {
+            Py_ssize_t have = pygl_byte_count(element, out);
+            /* A negative answer is "nothing here can say", which a raw pointer
+             * genuinely is.  It is left unchecked deliberately rather than
+             * refused, and never confused with a length of zero. */
+            if (have >= 0 && have < needed) {
                 PyErr_Format(PyExc_ValueError,
                              "%s: output array holds %zd bytes, but the call "
                              "writes %zd (%zd items of %u bytes). Pass a "
                              "larger array, or None to have one allocated.",
-                             self->info->name, (Py_ssize_t)out->view.len,
+                             self->info->name, have,
                              needed, count, (unsigned)element->itemsize);
                 pygl_release(out);
                 return -1;
@@ -927,10 +1015,7 @@ int pygl_array_out(GLProc *self, PyObject *object, const PyGLElement *element,
     }
     (void)self;
 
-    out->owner = NULL;
-    out->have_view = 0;
-    out->block = NULL;
-    out->pointer = NULL;
+    pygl_buf_reset(out);
 
     if (element->itemsize == 0) {
         /* Nothing here knows how wide an element is, so an allocation would be
@@ -1012,10 +1097,7 @@ int pygl_array_out_glget(GLProc *self, PyObject *object, const PyGLElement *elem
         return -1;
     }
 
-    out->owner = NULL;
-    out->have_view = 0;
-    out->block = NULL;
-    out->pointer = NULL;
+    pygl_buf_reset(out);
 
     if (entry->lookup) {
         /* The size itself comes from a runtime query.  Six pnames in the
@@ -1077,10 +1159,7 @@ static int pygl_image(GLProc *self, const char *method, PyObject *object,
     PyObject *converted, *pointer;
     void *address;
 
-    out->owner = NULL;
-    out->have_view = 0;
-    out->block = NULL;
-    out->pointer = NULL;
+    pygl_buf_reset(out);
 
     converted = PyObject_CallMethod(pygl_support, method, "sIIiiiiO",
                                     self->info->name, format, type, rank, d0, d1,
@@ -1151,10 +1230,7 @@ int pygl_array_typed(GLProc *self, PyObject *object, unsigned int type,
     (void)self;
     (void)index;
 
-    out->owner = NULL;
-    out->have_view = 0;
-    out->block = NULL;
-    out->pointer = NULL;
+    pygl_buf_reset(out);
     if (object == NULL || object == Py_None) {
         return 0;
     }
@@ -1244,10 +1320,7 @@ int pygl_string_array(GLProc *self, PyObject *object, Py_ssize_t index,
     (void)self;
     (void)index;
 
-    out->owner = NULL;
-    out->have_view = 0;
-    out->block = NULL;
-    out->pointer = NULL;
+    pygl_buf_reset(out);
     if (object == NULL || object == Py_None) {
         return 0;
     }
@@ -1502,8 +1575,11 @@ static PyObject *GLProc_get_text_signature(GLProc *self, void *closure)
 }
 
 /* inspect.signature() only reads __text_signature__ from the builtin callable
- * types, so an entry point answers with a Signature it builds from the same
- * string.  It is built on demand: nothing on the call path reads it. */
+ * types, so an entry point answers with a Signature of its own.  It is built
+ * from the parts the command already carries -- the names, and how many of them
+ * a caller must supply -- rather than from the text, because a Signature built
+ * out of its parts cannot fail to parse.  Built on demand: nothing on the call
+ * path reads it. */
 static PyObject *GLProc_get_signature(GLProc *self, void *closure)
 {
     (void)closure;
@@ -1511,8 +1587,7 @@ static PyObject *GLProc_get_signature(GLProc *self, void *closure)
         PyErr_SetString(PyExc_AttributeError, "__signature__");
         return NULL;
     }
-    return PyObject_CallMethod(pygl_support, "signature_for", "ss",
-                               self->info->name, self->info->text_signature);
+    return PyObject_CallMethod(pygl_support, "signature_for", "O", self);
 }
 
 static PyObject *GLProc_get_arg_names(GLProc *self, void *closure)
@@ -1564,6 +1639,16 @@ static PyObject *GLProc_get_deprecated(GLProc *self, void *closure)
 {
     (void)closure;
     return PyBool_FromLong(self->info->deprecated);
+}
+
+/* Which API this entry point belongs to.  glClear exists in GL and in GLES2 as
+ * separate bindings resolved from separate libraries, so a name does not
+ * identify one -- and everything in the Python layer that looks an entry point
+ * up by name needs this to say which it is asking about. */
+static PyObject *GLProc_get_api(GLProc *self, void *closure)
+{
+    (void)closure;
+    return PyUnicode_FromString(pygl_api_name(self->info->api));
 }
 
 static PyObject *GLProc_get_module(GLProc *self, void *closure)
@@ -1819,6 +1904,8 @@ static PyGetSetDef GLProc_getset[] = {
     {"extension", (getter)GLProc_get_extension, (setter)GLProc_set_extension,
      NULL, NULL},
     {"deprecated", (getter)GLProc_get_deprecated, NULL, NULL, NULL},
+    {"api", (getter)GLProc_get_api, NULL,
+     "Which API this entry point belongs to: GL, GLES2, EGL and so on.", NULL},
     {"errcheck", (getter)GLProc_get_errcheck, (setter)GLProc_set_errcheck, NULL,
      NULL},
     {NULL}};
@@ -1991,7 +2078,6 @@ static PyObject *pygl_py_forget_context(PyObject *module, PyObject *argument)
                 memset(table->flags, 0, (size_t)pygl_command_count);
             }
             table->handle = NULL;
-            table->generation++;
             table->next = pygl_retired;
             pygl_retired = table;
             break;
@@ -1999,6 +2085,37 @@ static PyObject *pygl_py_forget_context(PyObject *module, PyObject *argument)
     }
     PyThread_release_lock(pygl_tables_lock);
     Py_RETURN_NONE;
+}
+
+/* Free every retired table, and say how many that was.
+ *
+ * A retired table is unreachable -- its handle is cleared, so nothing can find
+ * it again -- but it is not necessarily unused: a thread that never noticed its
+ * context go still points at one, and freeing under it is the use-after-free
+ * retirement exists to avoid.  Nothing here can see whether such a thread
+ * exists, so the judgement is the caller's, and the call is the caller making
+ * it: "no thread of mine is inside a GL call, and none is dispatching through a
+ * context I have destroyed".
+ *
+ * A program that never says so pays 43 KB per context it has destroyed, which
+ * for the ordinary one or two contexts is nothing worth a decision. */
+static PyObject *pygl_py_reclaim_retired(PyObject *module, PyObject *noargs)
+{
+    PyGLDispatch *table, *next;
+    Py_ssize_t freed = 0;
+    (void)module;
+    (void)noargs;
+    PyThread_acquire_lock(pygl_tables_lock, WAIT_LOCK);
+    table = pygl_retired;
+    pygl_retired = NULL;
+    PyThread_release_lock(pygl_tables_lock);
+    while (table != NULL) {
+        next = table->next;
+        pygl_table_free(table);
+        freed++;
+        table = next;
+    }
+    return PyLong_FromSsize_t(freed);
 }
 
 static PyObject *pygl_py_context_count(PyObject *module, PyObject *noargs)
@@ -2368,6 +2485,11 @@ static PyMethodDef pygl_methods[] = {
      "Free the dispatch table for a context that has been destroyed."},
     {"context_count", pygl_py_context_count, METH_NOARGS,
      "How many context dispatch tables are live."},
+    {"reclaim_retired", pygl_py_reclaim_retired, METH_NOARGS,
+     PyDoc_STR("reclaim_retired($module)\n--\n\n"
+               "Free the tables of forgotten contexts; returns how many.\n\n"
+               "Only safe where no thread is still dispatching through a "
+               "context this process has destroyed.")},
     {"slot_address", pygl_py_slot_address, METH_O,
      "The address the current context has resolved an entry point to."},
     {"set_error_checking", pygl_py_set_error_checking, METH_VARARGS,
@@ -2435,11 +2557,23 @@ static struct PyModuleDef pygl_module_def = {
     .m_slots = pygl_module_slots,
 };
 
+/* The PyOpenGL version this extension's tables were generated from, supplied by
+ * accelerate's setup.py.  Absent only in a build that has not been told, and a
+ * build that cannot say which tables it holds is not one to dispatch through --
+ * see OpenGL._dispatch._versions_match. */
+#ifndef PYOPENGL_VERSION
+#define PYOPENGL_VERSION "unknown"
+#endif
+
 static int pygl_exec(PyObject *module)
 {
     PyObject *entry_points;
 
     if (PyType_Ready(&PyGLProc_Type) < 0) {
+        return -1;
+    }
+    if (PyModule_AddStringConstant(module, "__pyopengl_version__",
+                                   PYOPENGL_VERSION) < 0) {
         return -1;
     }
     pygl_tables_lock = PyThread_allocate_lock();

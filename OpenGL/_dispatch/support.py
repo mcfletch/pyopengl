@@ -20,6 +20,7 @@ __all__ = [
     'ctypes_callable',
     'module_for',
     'array_type_list',
+    'swallowed_for',
 ]
 
 #: (api, name) -> the ctypes binding, recorded when the C entry point is
@@ -280,7 +281,25 @@ def module_for(name, api=None):
 
 #: Customisation calls swallowed because the C already performs them, kept per
 #: entry point so that a demotion later in the same chain can replay them.
+#: Keyed by (api, name) for the same reason :func:`ctypes_callable` takes an
+#: api: two APIs declare ``glClear``, and they are different entry points with
+#: different customisations.
 _swallowed = {}
+
+
+def _key_for(proc):
+    """``(api, name)`` for an entry point, whichever implementation it is.
+
+    A ``GLProc`` states its api; a ctypes binding reached through the same
+    chain does not, and ``None`` there keeps the old name-only behaviour rather
+    than inventing an answer.
+    """
+    return (getattr(proc, 'api', None), proc.__name__)
+
+
+def swallowed_for(proc):
+    """The customisations swallowed for this entry point, as a mapping."""
+    return _swallowed.get(_key_for(proc), {})
 
 
 def record_custom(proc, method, args):
@@ -292,7 +311,7 @@ def record_custom(proc, method, args):
     That one has to demote, and the wrapper it demotes to needs whatever was
     swallowed before it.
     """
-    remembered = _swallowed.setdefault(proc.__name__, {})
+    remembered = _swallowed.setdefault(_key_for(proc), {})
     # Keyed by what it customises, not by call order: a module builds several
     # derived functions from one entry point and restates the same
     # customisation for each, and applying it twice is an error.
@@ -311,9 +330,9 @@ def demote_and_call(proc, method, args, keywords):
     """
     from OpenGL import wrapper
 
-    binding = ctypes_callable(proc.__name__)
+    binding = ctypes_callable(proc.__name__, getattr(proc, 'api', None))
     built = wrapper.wrapper(binding)
-    for (earlier, _which), earlier_args in _swallowed.get(proc.__name__, {}).items():
+    for (earlier, _which), earlier_args in swallowed_for(proc).items():
         built = getattr(built, earlier)(*earlier_args)
     return getattr(built, method)(*args, **keywords)
 
@@ -361,41 +380,94 @@ def lookup_int(pname):
 _signatures = {}
 
 
-def signature_for(name, text_signature):
+def signature_for(proc):
     """An ``inspect.Signature`` for an entry point.
 
     ``inspect.signature()`` reads ``__text_signature__`` only from the builtin
     callable types, so an entry point answers with the Signature itself, built
     from the same string the C carries.
+
+    The string is *read* rather than compiled and run.  This is what pydoc,
+    Sphinx autodoc and PyOpenGL's own documentation generator ask for, and a
+    generated signature that would not parse should not surface there as a
+    SyntaxError raised against whatever they were documenting.
+
+    Cached per ``(api, name)``: two APIs declare ``glClear``, and an entry
+    point's signature is not something to hand out by name alone.
     """
     import inspect
 
-    signature = _signatures.get(name)
+    key = (getattr(proc, 'api', None), proc.__name__)
+    signature = _signatures.get(key)
     if signature is None:
-        # The leading $module is the convention for a bound self; strip it, as
-        # the entry point takes no such argument.
-        text = text_signature.replace('($module, ', '(').replace('($module)', '()')
-        namespace = {}
-        exec(compile('def %s%s: pass' % (name, text), '<signature>', 'exec'),
-             namespace)
-        signature = inspect.signature(namespace[name])
-        _signatures[name] = signature
+        signature = _signatures[key] = inspect.Signature(
+            _parameters(proc.__text_signature__)
+        )
     return signature
 
 
-def raise_debug_error(identifier, message, name, arguments=None):
+def _parameters(text_signature):
+    """The parameters a ``__text_signature__`` describes.
+
+    The whole vocabulary the generator writes is ``$module``, argument names,
+    ``=None`` for an output array a caller may supply, and the ``/`` that makes
+    them positional-only -- which is what the stubs implement, since they reject
+    a keyword rather than dropping it.  Anything else is not something this
+    library produced.
+    """
+    import inspect
+
+    inside = text_signature.strip()
+    if not (inside.startswith('(') and inside.endswith(')')):
+        raise ValueError('not a text signature: %r' % (text_signature,))
+    parameters = []
+    for part in inside[1:-1].split(','):
+        part = part.strip()
+        if not part or part in ('/', '$module'):
+            # The leading $module is the convention for a bound self, and the
+            # entry point takes no such argument.
+            continue
+        name, _, default = part.partition('=')
+        name = name.strip()
+        if not name.isidentifier():
+            raise ValueError(
+                'not a parameter name in %r: %r' % (text_signature, name)
+            )
+        if default and default.strip() != 'None':
+            raise ValueError(
+                'not a default this library writes in %r: %r'
+                % (text_signature, default.strip())
+            )
+        parameters.append(
+            inspect.Parameter(
+                name,
+                inspect.Parameter.POSITIONAL_ONLY,
+                default=None if default else inspect.Parameter.empty,
+            )
+        )
+    return parameters
+
+
+def raise_debug_error(code, identifier, message, name, arguments=None):
     """Turn a GL_KHR_debug error report into the exception glGetError would.
 
-    The driver has already said what went wrong, so the message is the
-    driver's rather than a code looked up after the fact.
+    The driver has already said what went wrong in prose, so ``description`` is
+    the driver's own message rather than a code looked up after the fact.
+    ``err`` stays the GL error code, because that is what ``GLError`` documents
+    it as and what a caller branches on; the driver's message identifier is a
+    per-driver, per-message number and rides along as ``debugMessageID`` for
+    anyone who wants it.
     """
-    raise error.GLError(
-        err=identifier,
+    raised = error.GLError(
+        err=code,
         description=message,
         baseOperation=name,
         pyArgs=arguments,
         cArgs=arguments,
+        cArguments=arguments,
     )
+    raised.debugMessageID = identifier
+    raise raised
 
 
 def probe_allowed():

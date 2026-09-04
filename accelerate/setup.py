@@ -19,6 +19,24 @@ HERE = os.path.normpath(os.path.abspath(os.path.dirname(__file__)))
 extensions = []
 
 
+def _our_version():
+    """This package's version, read without importing it.
+
+    Importing ``OpenGL_accelerate`` during its own build would need the
+    extensions that are not built yet, so the assignment is read out of the
+    source the way the build backend reads it.
+    """
+    import re
+
+    source = open(
+        os.path.join(HERE, 'OpenGL_accelerate', '__init__.py'), encoding='utf-8'
+    ).read()
+    found = re.search(r'^__version__\s*=\s*["\']([^"\']+)["\']', source, re.M)
+    if not found:
+        raise RuntimeError('OpenGL_accelerate/__init__.py states no __version__')
+    return found.group(1)
+
+
 def dispatch_extension():
     """The registry-generated C implementation of the OpenGL entry points.
 
@@ -66,6 +84,12 @@ def dispatch_extension():
             'OpenGL_accelerate.dispatch',
             sources=sources,
             include_dirs=['src/c', 'src/c/generated'],
+            # The extension states which PyOpenGL its tables were generated
+            # from, so that a mismatched pair is refused with a sentence rather
+            # than dispatching through the wrong slot indices.  The two are
+            # released together and carry the same number, so this is the
+            # accelerate version.
+            define_macros=[('PYOPENGL_VERSION', '"%s"' % (_our_version(),))],
             depends=[
                 path for path in headers if os.path.exists(os.path.join(HERE, path))
             ],
