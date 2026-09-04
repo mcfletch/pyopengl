@@ -235,3 +235,54 @@ def test_an_entry_point_reports_where_it_was_declared():
     from_tables = json.loads(_run(MODULE_ATTR % {'virtual': '1'}))
     assert from_tables['built'] is True
     assert from_tables['module'] == 'OpenGL.raw.GL.VERSION.GL_1_2'
+
+
+class TestTheFlagIsParsedInOneplace:
+    """``_configflags.VIRTUAL_MODULES`` and the finder's own reading of the
+    variable are the same expression, so the two cannot answer differently.
+
+    The finder cannot import ``_configflags`` -- that module reads every flag
+    off ``OpenGL`` when it is first imported, and the finder is constructed from
+    the tail of ``import OpenGL``, before a program has set them -- so the
+    parse lives where the finder can reach it and ``_configflags`` reads it
+    from there.
+    """
+
+    def test_the_two_agree(self):
+        from OpenGL import _configflags
+        from OpenGL._dispatch import finder
+
+        assert finder.virtual_modules_wanted() == _configflags.VIRTUAL_MODULES
+
+    def test_configflags_does_not_parse_the_variable_itself(self):
+        import os.path
+
+        from OpenGL import _configflags
+
+        source = open(_configflags.__file__, encoding='utf-8').read()
+        assert 'PYOPENGL_VIRTUAL_MODULES' not in source, (
+            'two parses of one variable can disagree after an edit'
+        )
+        assert os.path.basename(_configflags.__file__) == '_configflags.py'
+
+    @pytest.mark.parametrize(
+        'value,wanted',
+        [
+            (None, True),          # unset: on, because there are no files
+            ('', True),
+            ('1', True),
+            ('true', True),
+            ('YES', True),
+            ('0', False),
+            ('no', False),
+            ('off', False),
+        ],
+    )
+    def test_what_each_setting_means(self, monkeypatch, value, wanted):
+        from OpenGL._dispatch import finder
+
+        if value is None:
+            monkeypatch.delenv('PYOPENGL_VIRTUAL_MODULES', raising=False)
+        else:
+            monkeypatch.setenv('PYOPENGL_VIRTUAL_MODULES', value)
+        assert finder.virtual_modules_wanted() is wanted

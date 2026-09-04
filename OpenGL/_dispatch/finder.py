@@ -12,20 +12,23 @@ clients import and that PyOpenGL's own friendly modules import from, so the
 names go on resolving -- built from the same tables the C is generated from,
 on demand.
 
-``PYOPENGL_VIRTUAL_MODULES=1`` uses it.  It is off by default, and the
-measurement is why: with the friendly modules importing the raw ones eagerly,
-the module objects exist either way, so nothing is saved at run time --
+This is on, because there is nothing for it to be off in favour of: the
+generated files are not shipped, so these names resolve here or not at all.
+``PYOPENGL_VIRTUAL_MODULES=0`` goes back to importing files, which is useful
+only to a tree that still has them.
+
+Shadowing files would not have been worth an import hook, and the measurement
+is why -- with the friendly modules importing the raw ones eagerly, the module
+objects exist either way:
 
     import OpenGL.GL, warm      58 ms both ways, 62 MB both ways, 309 modules
     import OpenGL.GL, cold     185 ms from files, 166 ms from tables
     the whole raw tree, cold   333 ms from files, 352 ms from tables
 
-A 10% cold-start saving on one import and a loss on another is not a reason to
-put an import hook in everyone's process.  What this is for is the step after:
-with the definitions in the tables, the 1,278 files become removable, and it
-is removing them -- not shadowing them -- that pays.  The files are still
-shipped, and a test asserts that what is built here defines exactly what they
-define, which is what makes removing them a decision rather than a gamble.
+What pays is *removing* the 1,278 files, which the definitions being in the
+tables is what allows.  A test asserts that what is built here defines exactly
+what a file defined, which is what made removing them a decision rather than a
+gamble.
 
 Two kinds keep their files either way.  The packages and the private modules
 -- ``_types``, ``_errors``, ``_glgets`` -- carry classes and conditionals, so
@@ -35,17 +38,26 @@ imported to reach that point comes from files: for ``import OpenGL.GL`` that
 is GL_1_0 and GL_1_1.
 """
 
-import ast
 import importlib
 import importlib.machinery
 import os
 import pkgutil
 import sys
 
-from OpenGL import _declarations
+from OpenGL import _declarations, _rawfinder
+from OpenGL._declarations import Declaration, resolve_type  # noqa: F401
 from OpenGL._dispatch import support
 
-__all__ = ['RawModuleFinder', 'install', 'installed']
+#: One reader, one declaration class, for both routes into the same
+#: declarations: see :mod:`OpenGL._declarations`.  Re-exported here because
+#: this is where a reader of the import hook looks for them.
+__all__ = [
+    'RawModuleFinder',
+    'Declaration',
+    'resolve_type',
+    'install',
+    'installed',
+]
 
 _installed = None
 
@@ -169,7 +181,7 @@ class RawModuleFinder:
         api = _api_of(name)
         extension = contents['extension']
         for command, arguments, types in contents['commands']:
-            declaration = _Declaration(
+            declaration = Declaration(
                 api, command, extension, name, arguments, types
             )
             # A derived function whose arity differs from the entry point's
@@ -191,132 +203,15 @@ class RawModuleFinder:
             namespace[command] = entry
 
 
-class _Declaration:
-    """What the file's ``@_p.types(...) def glFoo(...)`` said.
-
-    Held as the text it was written in and resolved on the first demotion that
-    asks, because most entry points never see one.
-    """
-
-    __slots__ = ('_arguments', '_types', 'api', 'extension', 'module', 'name')
-
-    def __init__(self, api, name, extension, module, arguments, types):
-        self.api = api
-        self.name = name
-        self.extension = extension
-        self.module = module
-        # The C source hands these over comma-joined and the marshalled tables
-        # keep them as tuples.  Either way they are names and expressions, and
-        # the difference is not one anything below here should have to know.
-        self._arguments = tuple(
-            name for name in _as_sequence(arguments) if name
-        )
-        self._types = tuple(_as_sequence(types))
-
-    def __call__(self):
-        """The ctypes binding the declaration would have produced."""
-        # ctypes and arrays are named by the type expressions, platform
-        # builds the binding.
-        import ctypes
-
-        from OpenGL import arrays, platform
-
-        _cs = importlib.import_module('OpenGL.raw.%s._types' % (self.api,))
-        namespace = {'ctypes': ctypes, 'arrays': arrays, '_cs': _cs}
-        # The text was written by the generator out of the shipped tree, and
-        # the namespace offers it three names; it is our own source arriving
-        # by a longer road than usual.
-        types = [_resolve_type(text, namespace) for text in self._types]
-        errors = importlib.import_module('OpenGL.raw.%s._errors' % (self.api,))
-
-        def declaration(*arguments):
-            """Stands where the generated ``def glFoo(a, b): pass`` stood."""
-
-        declaration.__name__ = self.name
-        declaration = platform.types(types[0], *types[1:])(declaration)
-        # types() reads the names off the code object, and this one has none
-        # of its own -- the names are the declaration's, so state them.
-        argument_names = self._arguments
-        # nullFunction rather than createFunction: createFunction hands back
-        # the C entry point where there is one, and what a demotion wants is
-        # the thing underneath it.
-        return platform.nullFunction(
-            self.name,
-            getattr(platform.PLATFORM, self.api, None) or platform.PLATFORM.GL,
-            resultType=types[0],
-            argTypes=tuple(types[1:]),
-            doc=None,
-            argNames=argument_names,
-            extension=self.extension,
-            module=self.module,
-            error_checker=errors._error_checker,
-        )
-
-
-def _as_sequence(value):
-    """``'a,b'`` or ``('a', 'b')`` -- both are a sequence of items."""
-    if isinstance(value, str):
-        return value.split(',')
-    return list(value)
-
-
-#: The type expressions the table carries are our own, written by the
-#: generator out of the shipped tree and restricted there to attribute lookups
-#: and calls on three namespaces.  They are still read rather than executed:
-#: the text arrives from a data file, and a data file that can run code is a
-#: different kind of file.
-def _resolve_type(text, namespace):
-    """``_cs.GLenum``, ``ctypes.POINTER(_cs.GLchar)``, ``None`` -- as a value."""
-    try:
-        tree = ast.parse(text, mode='eval')
-    except SyntaxError:
-        raise ValueError('not a type expression: %r' % (text,)) from None
-    return _evaluate(tree.body, text, namespace)
-
-
-def _evaluate(node, text, namespace):
-    if isinstance(node, ast.Constant):
-        if node.value is None:
-            return None
-        raise ValueError('not a type expression: %r' % (text,))
-    if isinstance(node, ast.Name):
-        try:
-            return namespace[node.id]
-        except KeyError:
-            raise ValueError(
-                'unknown name %r in type expression %r' % (node.id, text)
-            ) from None
-    if isinstance(node, ast.Attribute):
-        return getattr(_evaluate(node.value, text, namespace), node.attr)
-    if isinstance(node, ast.Call):
-        if node.keywords:
-            raise ValueError('not a type expression: %r' % (text,))
-        function = _evaluate(node.func, text, namespace)
-        return function(
-            *[_evaluate(argument, text, namespace) for argument in node.args]
-        )
-    raise ValueError('not a type expression: %r' % (text,))
-
-
 def _api_of(name):
     parts = name.split('.')
     return parts[2] if len(parts) > 2 else 'GL'
 
 
-def _virtual_modules_wanted():
-    """``OpenGL._configflags.VIRTUAL_MODULES``, without importing it.
-
-    That module reads every flag off ``OpenGL`` when it is first imported, so
-    importing it here -- from the tail of ``import OpenGL`` -- would freeze
-    ``ERROR_CHECKING``, ``CONTEXT_CHECKING`` and the rest before a program had
-    set them.  This flag comes only from the environment, so the environment
-    can be asked instead.
-    """
-    return os.environ.get('PYOPENGL_VIRTUAL_MODULES', '1').strip().lower() in (
-        '1',
-        'true',
-        'yes',
-    )
+#: Whether the generated modules are built from the tables.  The expression
+#: lives in :mod:`OpenGL._rawfinder`, which imports nothing from PyOpenGL, so
+#: that this module and ``_configflags`` cannot come to different answers.
+virtual_modules_wanted = _rawfinder.virtual_modules_wanted
 
 
 class _RawDirectoryFinder:
@@ -437,7 +332,7 @@ def install(extension=None, entry_points=None):
     modules are not shipped, and this is what answers for their names.
     """
     global _installed
-    if _installed is not None or not _virtual_modules_wanted():
+    if _installed is not None or not virtual_modules_wanted():
         return _installed
     _installed = RawModuleFinder(extension, entry_points)
     sys.meta_path.insert(0, _installed)

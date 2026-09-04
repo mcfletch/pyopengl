@@ -13,13 +13,37 @@ until an ``OpenGL.raw.*`` name is actually asked for.  By then the program has
 finished configuring, and the real finder can be built and asked to answer.
 """
 
+import os
 import sys
 
-__all__ = ['install', 'uninstall']
+__all__ = ['install', 'uninstall', 'virtual_modules_wanted']
 
 #: Every name the real finder can answer for is under here, so a name that is
 #: not is one to decline without loading anything to find that out.
 PREFIX = 'OpenGL.raw.'
+
+_YES = ('1', 'true', 'yes', 'on')
+
+
+def virtual_modules_wanted():
+    """Whether ``OpenGL.raw.*`` is built from the tables rather than imported.
+
+    On, because there are no files to import: the generated modules under
+    ``OpenGL/raw`` hold nothing the declaration tables do not, and a module that
+    is data does not need to be a module.  ``PYOPENGL_VIRTUAL_MODULES=0`` goes
+    back to the files, which is useful only to a tree that still has them.
+
+    The parse lives here, in the one module that imports nothing from PyOpenGL,
+    because both readers of the flag need it and two parses of one variable can
+    disagree after an edit.  ``OpenGL._configflags`` cannot be one of them: it
+    reads every flag off ``OpenGL`` the first time it is imported, and the
+    finder is reached before a program has finished setting them.
+
+    An empty value means unset, because that is what an unexported shell
+    variable expands to.
+    """
+    value = os.environ.get('PYOPENGL_VIRTUAL_MODULES', '').strip().lower()
+    return (value or '1') in _YES
 
 _installed = None
 

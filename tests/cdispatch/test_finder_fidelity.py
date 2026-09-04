@@ -1,14 +1,14 @@
 """How the finder builds a module, checked at the seams a table cannot state.
 
 Re-exports have to follow ``from ... import *`` exactly, including the
-``__all__`` that two of the sources define; type expressions have to be read
-rather than executed, because the table is a data file and a data file must not
-be able to run code; and the path a module names has to cost nothing per
-import.
+``__all__`` that two of the sources define, and the path a module names has to
+cost nothing per import.
+
+How a declaration's type expressions are read is
+``tests/test_declaration_types.py``: the reader is shared with the ctypes route
+and lives in :mod:`OpenGL._declarations`.
 """
 
-import ast
-import ctypes
 import importlib
 import importlib.resources
 import os
@@ -17,7 +17,7 @@ import types
 
 import pytest
 
-from OpenGL import _declarations, arrays
+from OpenGL import _declarations
 from OpenGL._dispatch import finder
 
 
@@ -62,77 +62,9 @@ class TestReExportsFollowStarImport:
             self.synthesise(['pygl_fake_source'])
 
 
-class TestTypeExpressionsAreReadNotExecuted:
-    """The table is a data file, and a data file must not be able to run code."""
-
-    @pytest.fixture
-    def namespace(self):
-        _cs = importlib.import_module('OpenGL.raw.GL._types')
-        return {'ctypes': ctypes, 'arrays': arrays, '_cs': _cs}
-
-    @pytest.mark.parametrize(
-        'text,expected',
-        [
-            ('None', None),
-            ('ctypes.c_void_p', ctypes.c_void_p),
-        ],
-    )
-    def test_a_plain_expression_resolves(self, namespace, text, expected):
-        assert finder._resolve_type(text, namespace) is expected
-
-    def test_a_gl_typedef_resolves(self, namespace):
-        assert finder._resolve_type('_cs.GLenum', namespace) is namespace['_cs'].GLenum
-
-    def test_an_array_type_resolves(self, namespace):
-        assert finder._resolve_type('arrays.GLfloatArray', namespace) is (
-            arrays.GLfloatArray
-        )
-
-    def test_a_call_resolves(self, namespace):
-        result = finder._resolve_type('ctypes.POINTER(_cs.GLchar)', namespace)
-        assert result is ctypes.POINTER(namespace['_cs'].GLchar)
-
-    @pytest.mark.parametrize(
-        'text',
-        [
-            '__import__("os").system("true")',
-            '(lambda: 1)()',
-            'ctypes.c_int if 1 else None',
-            '[ctypes.c_int]',
-            'ctypes.CFUNCTYPE(restype=None)',
-            '1 + 1',
-        ],
-    )
-    def test_anything_that_is_not_a_type_expression_is_refused(
-        self, namespace, text
-    ):
-        with pytest.raises(ValueError):
-            finder._resolve_type(text, namespace)
-
-    def test_an_unknown_name_is_refused_rather_than_looked_up(self, namespace):
-        with pytest.raises(ValueError, match='unknown name'):
-            finder._resolve_type('os.getcwd', namespace)
-
-    def test_nothing_in_the_shipped_table_fails_to_resolve(self, namespace):
-        """Every expression the generator wrote is one this evaluator reads."""
-        from cdispatch import modules
-
-        root = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.dirname(
-                os.path.abspath(__file__)))), 'OpenGL'
-        )
-        if not os.path.isdir(os.path.join(root, 'raw', 'GL')):
-            pytest.skip('no raw tree to read declarations from')
-        seen = 0
-        for module in modules.read_modules(root, ['GL'])[:60]:
-            for command in module.commands:
-                for text in command.types:
-                    parsed = ast.parse(text, mode='eval')
-                    assert finder._evaluate(parsed.body, text, namespace) is not (
-                        Ellipsis
-                    )
-                    seen += 1
-        assert seen > 100
+# The type-expression reader lives in OpenGL._declarations and serves both
+# routes into the same declarations; tests/test_declaration_types.py holds it to
+# its vocabulary, and to every expression the shipped tables carry.
 
 
 class TestTheTableAModuleNames:

@@ -1,4 +1,5 @@
 """Holds the import-time constants for various configuration flags"""
+from OpenGL import _rawfinder
 from OpenGL import (
     ERROR_CHECKING,
     ERROR_LOGGING,
@@ -46,9 +47,8 @@ if FULL_LOGGING and DISPATCH == 'c':
 #: do not, and a module that is data does not need to be a module.  Setting it
 #: to 0 leaves ``from OpenGL.raw.GL.VERSION.GL_1_1 import *`` with nothing to
 #: import, so it is useful only to a tree that still has the files.
-#: See OpenGL/_dispatch/finder.py.
-VIRTUAL_MODULES = _os.environ.get('PYOPENGL_VIRTUAL_MODULES', '1').strip().lower() in (
-    '1',
-    'true',
-    'yes',
-)
+#:
+#: Read from :mod:`OpenGL._rawfinder` rather than parsed here: the finder needs
+#: the same answer before this module may be imported, and one expression is
+#: what keeps the two from disagreeing.
+VIRTUAL_MODULES = _rawfinder.virtual_modules_wanted()

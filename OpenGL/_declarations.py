@@ -21,11 +21,19 @@ They are generated together from the registry and the shipped tree, so they
 cannot drift.  ``python src/regenerate_c.py`` writes both.
 """
 
+import ast
 import importlib
 import importlib.resources
 import os
 
-__all__ = ['define', 'contents_for', 'clear_caches', 'table_path']
+__all__ = [
+    'define',
+    'contents_for',
+    'clear_caches',
+    'table_path',
+    'Declaration',
+    'resolve_type',
+]
 
 #: Where the marshalled declarations live inside the package, as path segments
 #: rather than as a path: they have to be reachable through whatever loader the
@@ -56,19 +64,26 @@ def _read_table(name):
     API declares nothing", which is indistinguishable from a working
     installation right up to the point where a module that ought to exist
     cannot be imported, several frames from the missing file.
+
+    A table that is *there* but damaged -- a truncated extraction, a bad mirror,
+    a filesystem that lost a block -- has to say so the same way.  ``marshal``
+    is what reads these because it is the fastest thing in the standard library
+    at the job, and the price is that malformed input raises whatever it happens
+    to raise rather than one named error; catching the set is what turns that
+    back into the sentence above.
     """
     import marshal
 
     try:
         blob = _table(name).read_bytes()
-    except (OSError, KeyError) as error:
+        return marshal.loads(blob)
+    except (OSError, KeyError, EOFError, ValueError, TypeError) as error:
         raise ImportError(
             'PyOpenGL cannot read its declaration table %r (%s). Every module '
             'under OpenGL.raw is built from these tables, so this installation '
-            'cannot work; they are package data and something has dropped them.'
-            % (name, error)
+            'cannot work; they are package data and something has dropped or '
+            'damaged them.' % (name, error)
         ) from error
-    return marshal.loads(blob)
 
 
 #: One resolved path per API.  ``find_spec`` asks for every generated module
@@ -204,7 +219,14 @@ def contents_for(module_name):
         return None
     import marshal
 
-    name, constants, commands, reexports = marshal.loads(blob)
+    try:
+        name, constants, commands, reexports = marshal.loads(blob)
+    except (EOFError, ValueError, TypeError) as error:
+        raise ImportError(
+            'PyOpenGL cannot read the declarations for %r from its table (%s); '
+            'the table is package data and something has damaged it.'
+            % (module_name, error)
+        ) from error
     return {
         'extension': name,
         'constants': constants,
@@ -474,11 +496,84 @@ def entry_point(api, name, extension, module_name, arguments, types):
     return proc
 
 
+#: The constructors a declared type may be built with.  A declaration's whole
+#: vocabulary is an attribute lookup on one of three namespaces, or one of
+#: these applied to such lookups -- and holding it to that is what makes
+#: "the text is read, not executed" a fact rather than an intention.  Anything
+#: else reachable from ``ctypes`` is a way for a data file to run code.
+_TYPE_CONSTRUCTORS = ('POINTER', 'CFUNCTYPE', 'WINFUNCTYPE')
+
+
+def resolve_type(text, namespace):
+    """``_cs.GLenum``, ``ctypes.POINTER(_cs.GLchar)``, ``None`` -- as a value.
+
+    ``namespace`` offers the three names a declaration is written against:
+    ``ctypes``, ``arrays`` and ``_cs``, the API's own types module.
+    """
+    try:
+        tree = ast.parse(text, mode='eval')
+    except SyntaxError:
+        raise ValueError('not a type expression: %r' % (text,)) from None
+    return _evaluate(tree.body, text, namespace)
+
+
+def _evaluate(node, text, namespace):
+    if isinstance(node, ast.Constant):
+        if node.value is None:
+            return None
+        raise ValueError('not a type expression: %r' % (text,))
+    if isinstance(node, ast.Name):
+        try:
+            return namespace[node.id]
+        except KeyError:
+            raise ValueError(
+                'unknown name %r in type expression %r' % (node.id, text)
+            ) from None
+    if isinstance(node, ast.Attribute):
+        # A dunder is Python's own machinery -- __class__, __globals__,
+        # __subclasses__ -- and reaching it from a data file is a way out of the
+        # three namespaces.  Leading underscores alone are not: GLX declares
+        # __GLXextFuncPtr, which is an ordinary type of ours.
+        if node.attr.startswith('__') and node.attr.endswith('__'):
+            raise ValueError(
+                'not a type expression: %r names %r' % (text, node.attr)
+            )
+        return getattr(_evaluate(node.value, text, namespace), node.attr)
+    if isinstance(node, ast.Call):
+        if node.keywords or not isinstance(node.func, ast.Attribute):
+            raise ValueError('not a type expression: %r' % (text,))
+        if node.func.attr not in _TYPE_CONSTRUCTORS:
+            raise ValueError(
+                'not a type constructor: %r calls %r' % (text, node.func.attr)
+            )
+        function = _evaluate(node.func, text, namespace)
+        return function(
+            *[_evaluate(argument, text, namespace) for argument in node.args]
+        )
+    raise ValueError('not a type expression: %r' % (text,))
+
+
+def as_sequence(value):
+    """``'a,b'`` or ``('a', 'b')`` -- both are a sequence of items.
+
+    The C table hands these over comma-joined and the marshalled tables keep
+    them as tuples.  Either way they are names and expressions, and the
+    difference is not one anything below here should have to know.
+    """
+    if isinstance(value, str):
+        return value.split(',')
+    return list(value)
+
+
 class Declaration:
     """What a generated module's ``@_p.types(...) def glFoo(...)`` said.
 
     Held as the text it was written in and turned into a ctypes binding on the
     first call that asks for one, because most entry points never see one.
+
+    One class for both routes into it: the C extension carries the declarations
+    in ``.rodata`` and the shipped tables carry the same ones marshalled, and
+    they describe the same entry points.
     """
 
     __slots__ = ('_arguments', '_types', 'api', 'extension', 'module', 'name')
@@ -488,8 +583,8 @@ class Declaration:
         self.name = name
         self.extension = extension
         self.module = module
-        self._arguments = arguments
-        self._types = types
+        self._arguments = tuple(name for name in as_sequence(arguments) if name)
+        self._types = tuple(as_sequence(types))
 
     def _resolve_types(self):
         """``('None', '_cs.GLenum', 'arrays.GLfloatArray')`` as the types."""
@@ -499,12 +594,9 @@ class Declaration:
 
         from OpenGL import arrays
 
-        types = self._types
-        if isinstance(types, str):  # from the C table, comma-joined
-            types = types.split(',')
         namespace = None
         resolved = []
-        for text in types:
+        for text in self._types:
             key = (self.api, text)
             found = _types_cache.get(key)
             if found is None:
@@ -516,9 +608,7 @@ class Declaration:
                             'OpenGL.raw.%s._types' % (self.api,)
                         ),
                     }
-                # The text was written by the generator out of the shipped
-                # tree; it is our own source arriving by a longer road.
-                found = _types_cache[key] = eval(text, namespace)
+                found = _types_cache[key] = resolve_type(text, namespace)
             resolved.append(found)
         return resolved
 
@@ -528,9 +618,6 @@ class Declaration:
 
         types = self._resolve_types()
         errors = importlib.import_module('OpenGL.raw.%s._errors' % (self.api,))
-        arguments = self._arguments
-        if isinstance(arguments, str):
-            arguments = [name for name in arguments.split(',') if name]
         # nullFunction rather than createFunction: createFunction hands back
         # the C entry point where there is one, and what wants a binding here
         # wants the thing underneath it.
@@ -540,7 +627,7 @@ class Declaration:
             resultType=types[0],
             argTypes=tuple(types[1:]),
             doc=None,
-            argNames=tuple(arguments),
+            argNames=self._arguments,
             extension=self.extension,
             module=self.module,
             error_checker=errors._error_checker,
@@ -549,8 +636,9 @@ class Declaration:
 
 def clear_caches():
     """Forget which source answered.  For the tests that compare them."""
-    global _extension
+    global _extension, _annotations
     _extension = None
+    _annotations = None
     _data.clear()
     _namespaces.clear()
     _types_cache.clear()

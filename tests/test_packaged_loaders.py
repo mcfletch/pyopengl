@@ -122,3 +122,50 @@ class TestFreezingAnApplication:
         root = frozen.parent
         tables = list(root.rglob('_declarations/*.dat'))
         assert tables, 'no declaration tables in %s' % (root,)
+
+
+class TestADamagedTableSaysSo:
+    """The declaration tables are the only description of ``OpenGL.raw`` there
+    is, so one that cannot be read is a broken installation.  What a user must
+    not get is ``ValueError: bad marshal data`` from inside an import of
+    ``OpenGL.GL``, several frames from the file that is wrong."""
+
+    @pytest.fixture
+    def read_table(self):
+        from OpenGL import _declarations
+
+        _declarations.clear_caches()
+        yield _declarations._read_table
+        _declarations.clear_caches()
+
+    @pytest.mark.parametrize(
+        'blob',
+        [
+            pytest.param(b'', id='empty'),
+            pytest.param(b'\xe3\x00', id='truncated'),
+            pytest.param(b'not marshalled data at all', id='wrong-format'),
+        ],
+    )
+    def test_a_corrupt_table_raises_ImportError_naming_the_file(
+        self, read_table, blob, tmp_path, monkeypatch
+    ):
+        from OpenGL import _declarations
+
+        damaged = tmp_path / 'GL.dat'
+        damaged.write_bytes(blob)
+        monkeypatch.setattr(_declarations, '_table', lambda name: damaged)
+        with pytest.raises(ImportError) as caught:
+            read_table('GL.dat')
+        assert 'GL.dat' in str(caught.value)
+        assert 'declaration table' in str(caught.value)
+
+    def test_a_missing_table_still_raises_ImportError(
+        self, read_table, tmp_path, monkeypatch
+    ):
+        from OpenGL import _declarations
+
+        monkeypatch.setattr(
+            _declarations, '_table', lambda name: tmp_path / 'absent.dat'
+        )
+        with pytest.raises(ImportError):
+            read_table('GL.dat')
