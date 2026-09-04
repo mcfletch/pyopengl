@@ -1,0 +1,14 @@
+{
+  "comment": "The Khronos registries the shipped bindings were generated from. Written by src/regenerate_c.py --update-registries; src/fetch_registries.py explains why.",
+  "generated": "2026-09-03",
+  "registries": {
+    "eglapi": {
+      "commit": "5961a7fe64cf8a126890ced6f13d69e0a1e1b83e",
+      "url": "https://github.com/KhronosGroup/EGL-Registry.git"
+    },
+    "khronosapi": {
+      "commit": "1cdd228e34966dd6b95bd203e9f84faba0f371a1",
+      "url": "https://github.com/KhronosGroup/OpenGL-Registry.git"
+    }
+  }
+}
