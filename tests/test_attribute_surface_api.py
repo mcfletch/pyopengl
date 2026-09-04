@@ -46,9 +46,16 @@ class TestLookupsKeyOnTheAPI:
         from OpenGL import platform
         from OpenGL._dispatch import support
 
+        gles2 = getattr(platform.PLATFORM, 'GLES2', None)
+        if gles2 is None:
+            # Windows ships no OpenGL-ES: it arrives only with an application
+            # carrying ANGLE, and the platform answers None where the machine
+            # has none.  There is then a single library for every entry point,
+            # so which one a demotion binds is not observable here.
+            pytest.skip('this platform offers no separate OpenGL-ES library')
         embedded = dispatch.entry_points[('GLES2', 'glClear')]
         binding = support.ctypes_callable(embedded.__name__, embedded.api)
-        assert binding.DLL is getattr(platform.PLATFORM, 'GLES2', None) or (
+        assert binding.DLL is gles2 or (
             binding.DLL is not getattr(platform.PLATFORM, 'GL', None)
         )
 
