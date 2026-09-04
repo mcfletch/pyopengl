@@ -13,6 +13,19 @@ pytestmark = pytest.mark.skipif(
     reason='the C dispatch layer is not the selected implementation',
 )
 
+try:
+    import numpy
+except ImportError:                        # numpy is an optional dependency
+    numpy = None
+
+#: For the cases that are *about* a numpy array's memory.  Most of this file
+#: holds without numpy, and PyOpenGL supports being installed without it, so a
+#: whole-module skip would hide the rest.  Imported here rather than in the
+#: bodies because a parametrize argument is evaluated while the class is being
+#: built, which is collection: an ImportError there ends the run for every
+#: module, not just this one.
+needs_numpy = pytest.mark.skipif(numpy is None, reason='needs numpy')
+
 
 class TestTheEntryPointKnowsItsApi:
     """glClear exists in GL and GLES2 as separate bindings from separate
@@ -185,18 +198,19 @@ def _undersized_arrays():
     check that reads the wrong one is right for the kind it was written against
     and silent for the rest.
     """
-    import numpy
-
     return [
         # A matching contiguous buffer: taken by the buffer-protocol fast path,
         # so the frame holds a Py_buffer over the caller's own memory.
-        pytest.param(lambda: numpy.zeros(1, dtype='uint32'), id='matched-buffer'),
+        pytest.param(lambda: numpy.zeros(1, dtype='uint32'), id='matched-buffer',
+                     marks=needs_numpy),
         # The right element type, but not contiguous, so the buffer request
         # fails and ArrayDatatype makes a copy.  The GL writes into the copy,
         # which is sized from the caller's length.
-        pytest.param(lambda: numpy.zeros(8, dtype='uint32')[::2], id='converted-copy'),
+        pytest.param(lambda: numpy.zeros(8, dtype='uint32')[::2], id='converted-copy',
+                     marks=needs_numpy),
         # The wrong element type: converted for that reason instead.
-        pytest.param(lambda: numpy.zeros(4, dtype='int8'), id='converted-type'),
+        pytest.param(lambda: numpy.zeros(4, dtype='int8'), id='converted-type',
+                     marks=needs_numpy),
         # A list, which has no buffer at all.
         pytest.param(lambda: [0, 0, 0, 0], id='converted-list'),
     ]
@@ -235,9 +249,8 @@ class TestOutputArraySafety:
             'the same call answered differently across repeats: %r' % (answers,)
         )
 
+    @needs_numpy
     def test_a_correctly_sized_array_is_accepted(self, context):
-        import numpy
-
         import OpenGL.GL as GL
 
         enough = numpy.zeros(4, dtype='uint32')
@@ -251,11 +264,10 @@ class TestOutputArraySafety:
 
         assert len(GL.glGenTextures(4, [0, 0, 0, 0])) == 4
 
+    @needs_numpy
     def test_a_maximum_is_not_treated_as_a_promise(self, context):
         """glGetVertexAttribiv declares four and writes one for most pnames,
         so a one-element array is legitimate and must not be refused."""
-        import numpy
-
         import OpenGL.GL as GL
 
         one = numpy.zeros(1, dtype='int32')

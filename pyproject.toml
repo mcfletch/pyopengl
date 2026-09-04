@@ -42,6 +42,8 @@ test = [
     "psutil",
     "xlib",
     "glfw",
+    # tests/cdispatch reads the Khronos registry XML through src/xmlreg.py.
+    "lxml",
 ]
 dev = [
     "cython >= 0.28",

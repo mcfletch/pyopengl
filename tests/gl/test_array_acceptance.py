@@ -25,7 +25,15 @@ class TestArrayAcceptance(GLTestCase):
         glVertex3dv(np.zeros(3, 'd'))
 
     def test_mismatched_dtype_is_converted(self):
-        """Passing float32 where float64 is wanted is ordinary client code."""
+        """Passing float32 where float64 is wanted is ordinary client code.
+
+        numpy's own, since converting between element types is what its handler
+        does. ``arraycompat``'s no-numpy shim hands back a plain ctypes array of
+        the GL type asked for, and a ``c_float * 3`` where three doubles are
+        wanted is twelve bytes against twenty-four -- a size error to refuse,
+        not a dtype to convert.
+        """
+        pytest.importorskip('numpy')
         glVertex3dv(np.zeros(3, 'f'))
         glVertex3dv(np.zeros(3, 'i'))
 

@@ -10,3 +10,5 @@ pygame-ce >= 2.1.3; python_version >= '3.11'
 psutil
 xlib
 glfw
+# The code-generator tests read the Khronos registry XML through src/xmlreg.py.
+lxml
