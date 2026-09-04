@@ -182,9 +182,38 @@ The ``TEST_WINDOWING`` flag selects the windowing backend used by the
   fall back to llvmpipe.  It forces ``PYOPENGL_PLATFORM=egl`` and serves both
   desktop OpenGL and OpenGL-ES contexts via an offscreen pbuffer; because there
   is no window, ``TEST_VISIBLE`` and the inter-test dwell do not apply.  By
-  default it picks the first non-software EGL device; set ``TEST_EGL_DEVICE=<n>``
-  to pin a specific device index.  The legacy root-level ``tests/*.py`` have no
+  default it picks the first non-software EGL device; ``LIBGL_ALWAYS_SOFTWARE=1``
+  (or ``GALLIUM_DRIVER=llvmpipe``) asks for the software one instead, and
+  ``TEST_EGL_DEVICE=<n>`` pins a device index.  The two have to agree: Mesa
+  refuses to force software rasterisation onto a display built on a hardware
+  device and crashes rather than saying no, so a run that demands software and
+  pins a GPU is refused by name.  The legacy root-level ``tests/*.py`` have no
   headless equivalent and fall back to a windowed backend under this setting.
+
+Continuous integration
+~~~~~~~~~~~~~~~~~~~~~~
+
+Every push to ``develop`` runs the suite against two unrelated OpenGL
+implementations, both free for a public repository:
+
+* Mesa's llvmpipe on a Linux runner, reached headless through the EGL device
+  platform -- no X server and no GPU, and the same renderer on every run.
+* Apple's GL on the ``macos-14`` and ``macos-15`` runners, which are real
+  machines with real GPUs.  A second vendor's driver is the half llvmpipe
+  cannot cover: a call we get away with under Mesa because Mesa is lenient
+  fails there.
+
+GitHub's GPU runner is not an option for either: it is a larger runner, billed
+per minute on Team and Enterprise plans and never free, whatever the
+repository's visibility.
+
+Reproduce the Linux job on a machine that has a GPU with::
+
+    $ LIBGL_ALWAYS_SOFTWARE=1 TEST_WINDOWING=egl python -m pytest tests/
+
+Tests carrying the ``performance`` marker assert how fast something draws, which
+a CPU rasteriser cannot answer, so that job deselects them with
+``-m "not performance"``.
 
 .. image:: https://travis-ci.org/mcfletch/pyopengl.svg?branch=master
     :target: https://travis-ci.org/mcfletch/pyopengl

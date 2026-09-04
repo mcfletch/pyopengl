@@ -1,0 +1,112 @@
+name: Tests
+
+# The suite against two unrelated OpenGL implementations, on every push to
+# develop.
+#
+#   * Mesa's llvmpipe on Linux, reached headless through EGL's device platform
+#     (TEST_WINDOWING=egl).  No X server, no GPU, and the same renderer on every
+#     run -- which is what makes it the place a difference between runs means
+#     something.
+#   * Apple's GL on the macOS runners, which are real machines with real GPUs.
+#     A second vendor's driver is the half llvmpipe cannot cover: a call we get
+#     away with under Mesa because Mesa is lenient fails there.
+#
+# Both are free for public repositories.  A GPU runner is not: GitHub's is a
+# larger runner, billed per minute on Team/Enterprise plans and never free,
+# whatever the repository's visibility.
+
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch:
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Never map a window: a runner has no screen to put one on, and the suite
+  # renders and reads back identically without.
+  TEST_VISIBLE: '0'
+
+jobs:
+  llvmpipe:
+    name: Linux / llvmpipe (EGL)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Mesa
+        # libegl-mesa0 is the one that matters: it provides the EGL device
+        # platform, and with it the software device the suite renders on.  The
+        # X libraries are for the glfw wheel, which links them whether or not a
+        # display is ever opened.
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libegl1 libegl-mesa0 libgl1 libglx-mesa0 libgl1-mesa-dri \
+            libx11-6 libxrandr2 libxinerama1 libxcursor1 libxi6
+
+      - name: Install PyOpenGL and its test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .[test]
+
+      - name: Report the renderer under test
+        # A suite that silently found no GL would skip its way to green, so say
+        # what is about to render before anything runs.
+        run: python tests/check_egl_device_enumeration.py
+        env:
+          PYOPENGL_PLATFORM: egl
+          LIBGL_ALWAYS_SOFTWARE: '1'
+
+      - name: Run the tests
+        # `not performance` is a claim about how fast something draws, and a CPU
+        # rasteriser cannot answer one.  Nothing carries the marker yet; the
+        # deselection is here so that the first test to need it is right.
+        run: python -m pytest tests/ -v -rxXs -m "not performance"
+        env:
+          TEST_WINDOWING: egl
+          LIBGL_ALWAYS_SOFTWARE: '1'
+
+  macos:
+    name: macOS ${{ matrix.os }} / Apple GL
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-14, macos-15]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install PyOpenGL and its test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .[test]
+
+      - name: Report the renderer under test
+        run: |
+          python -c "
+          import glfw
+          glfw.init()
+          glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
+          window = glfw.create_window(64, 64, 'probe', None, None)
+          glfw.make_context_current(window)
+          from OpenGL.GL import GL_RENDERER, GL_VENDOR, GL_VERSION, glGetString
+          for name, token in (('vendor', GL_VENDOR), ('renderer', GL_RENDERER),
+                              ('version', GL_VERSION)):
+              print('%-9s %s' % (name, glGetString(token).decode()))
+          "
+
+      - name: Run the tests
+        run: python -m pytest tests/ -v -rxXs
+        env:
+          TEST_WINDOWING: glfw
