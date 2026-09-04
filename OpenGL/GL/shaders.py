@@ -86,19 +86,37 @@ GL_LINK_STATUS = GL.GL_LINK_STATUS
 GL_FALSE = GL.GL_FALSE
 GL_TRUE = GL.GL_TRUE
 
+#: Enums whose name carries the word SAMPLER but which are not uniform types:
+#: a pname, an object-type token for debug labels, and a limit.  A set that
+#: claims a pname is a uniform type is one nothing can be reasoned about.
+_NOT_SAMPLER_TYPES = ( 'GL_SAMPLER', 'GL_SAMPLER_BINDING', 'GL_MAX_SAMPLES' )
+
+#: Built on the first ask and kept: it describes the GL enums, not any program.
+_SAMPLER_TYPES = None
+
+
 def _sampler_types( ):
     """Every uniform type that is a sampler, as a set of enum values.
 
     Read off the constant names rather than listed, so a sampler target added
     by a later GL version counts from the day its enum arrives.
     """
-    return frozenset(
-        value
-        for name, value in vars( GL ).items()
-        if isinstance( value, int )
-        and name.startswith( 'GL_' )
-        and 'SAMPLER' in name.split( '_' )
-    )
+    global _SAMPLER_TYPES
+    if _SAMPLER_TYPES is None:
+        excluded = frozenset(
+            int( getattr( GL, name ) )
+            for name in _NOT_SAMPLER_TYPES
+            if getattr( GL, name, None ) is not None
+        )
+        _SAMPLER_TYPES = frozenset(
+            int( value )
+            for name, value in vars( GL ).items()
+            if isinstance( value, int )
+            and name.startswith( 'GL_' )
+            and 'SAMPLER' in name.split( '_' )
+            and int( value ) not in excluded
+        )
+    return _SAMPLER_TYPES
 
 
 def _distinct_sampler_targets( program ):
@@ -112,6 +130,10 @@ def _distinct_sampler_targets( program ):
     does not; neither answer says anything about the program, only that its
     uniforms have not been set yet.  Ordinary shaders read a texture and a
     buffer, or a texture and a shadow map, so this is not a corner.
+
+    Counts to two and stops, because two is the whole of what the caller asks:
+    the alternative is a ``glGetActiveUniform`` round trip per uniform in the
+    program, at every link.
 
     Returns 0 where the count cannot be had, which reads as "nothing to skip".
     """
@@ -128,12 +150,18 @@ def _distinct_sampler_targets( program ):
             continue
         if int( type_ ) in samplers:
             targets.add( int( type_ ) )
+            if len( targets ) > 1:
+                break
     return len( targets )
 
 
 class ShaderProgram( int ):
     """Integer sub-class with context-manager operation"""
     validated = False
+    #: True where a validation the caller asked for was not performed because
+    #: the answer would have been about the program's uniforms rather than
+    #: about the program.  See :meth:`check_validate`.
+    validation_deferred = False
     def __enter__( self ):
         """Start use of the program"""
         glUseProgram( self )
@@ -154,9 +182,21 @@ class ShaderProgram( int ):
             unconditionally, because by then the caller has set its state and
             the answer means what it says.
 
+        A skip is recorded on :attr:`validation_deferred` and logged, because
+        the caller asked for a check and did not get one -- and the answer they
+        did not get may have said something else about the program as well.
+
         raises ShaderValidationError on failures
         """
         if when_meaningful and _distinct_sampler_targets( self ) > 1:
+            self.validation_deferred = True
+            log.info(
+                'Validation of program %s deferred: it declares samplers of '
+                'two targets, which all read texture image unit 0 until the '
+                'program is given its units. Call check_validate() once they '
+                'are set.',
+                int( self ),
+            )
             return self
         glValidateProgram( self )
         validation = glGetProgramiv( self, GL_VALIDATE_STATUS )
@@ -167,6 +207,7 @@ class ShaderProgram( int ):
                 glGetProgramInfoLog( self ),
             ))
         self.validated = True
+        self.validation_deferred = False
         return self
 
     def check_linked( self ):

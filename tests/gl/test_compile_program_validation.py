@@ -16,6 +16,7 @@ the program, so ``compileProgram`` does not ask at link time, and an explicit
 import unittest
 
 from gltestcase import GLTestCase
+from OpenGL import GL
 from OpenGL.GL import *  # noqa: F401,F403
 from OpenGL.GL import shaders
 
@@ -99,6 +100,60 @@ class TestCompileProgramValidation(GLTestCase):
     def test_counting_the_targets(self):
         assert shaders._distinct_sampler_targets(self.program(TWO_TARGETS)) == 2
         assert shaders._distinct_sampler_targets(self.program(ONE_TARGET)) == 1
+
+    def test_the_skip_is_recorded_rather_than_silent(self):
+        """A caller who asked for validation and did not get it has to be able
+        to find that out: the answer was withheld, not given."""
+        skipped = self.program(TWO_TARGETS)
+        assert skipped.validation_deferred is True
+        assert skipped.validated is False
+
+        checked = self.program(ONE_TARGET)
+        assert checked.validation_deferred is False
+
+    def test_an_explicit_check_clears_the_deferral(self):
+        program = self.program(TWO_TARGETS)
+        assert program.validation_deferred
+        glUseProgram(program)
+        glUniform1i(glGetUniformLocation(program, 'colour'), 0)
+        glUniform1i(glGetUniformLocation(program, 'table'), 1)
+        program.check_validate()
+        glUseProgram(0)
+        assert program.validation_deferred is False
+
+
+class TestTheSamplerTypeSet(GLTestCase):
+    """``_sampler_types`` describes the GL enums, not this program, so it is a
+    property of the module rather than something to work out per link."""
+
+    profile = 'core'
+    gl_version = (3, 3)
+
+    def test_it_is_built_once(self):
+        first = shaders._sampler_types()
+        assert shaders._sampler_types() is first
+
+    def test_it_holds_the_targets_a_shader_declares(self):
+        types = shaders._sampler_types()
+        for name in (
+            'GL_SAMPLER_2D',
+            'GL_SAMPLER_CUBE',
+            'GL_SAMPLER_2D_SHADOW',
+            'GL_SAMPLER_2D_ARRAY',
+            'GL_INT_SAMPLER_2D',
+            'GL_UNSIGNED_INT_SAMPLER_2D',
+        ):
+            assert int(getattr(GL, name)) in types, name
+
+    def test_it_holds_no_enum_that_is_not_a_uniform_type(self):
+        """``GL_SAMPLER_BINDING`` is a pname and ``GL_SAMPLER`` an object-type
+        token; neither is ever a ``glGetActiveUniform`` answer, and a set that
+        claims otherwise is one nothing can be reasoned about."""
+        types = shaders._sampler_types()
+        for name in ('GL_SAMPLER_BINDING', 'GL_SAMPLER', 'GL_MAX_SAMPLES'):
+            constant = getattr(GL, name, None)
+            if constant is not None:
+                assert int(constant) not in types, name
 
 
 if __name__ == '__main__':
