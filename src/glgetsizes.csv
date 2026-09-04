@@ -1452,9 +1452,9 @@ GL_POST_TEXTURE_FILTER_BIAS_SGIX	(1,)
 GL_POST_TEXTURE_FILTER_SCALE_RANGE_SGIX	(1,)
 GL_POST_TEXTURE_FILTER_SCALE_SGIX	(1,)
 GL_PREVIOUS_TEXTURE_INPUT_NV	(1,)
-GL_PRIMITIVE_BOUNDING_BOX_ARB	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/ARB/ARB_ES3_2_compatibility.txt
-GL_PRIMITIVE_BOUNDING_BOX_EXT	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/EXT/EXT_primitive_bounding_box.txt
-GL_PRIMITIVE_BOUNDING_BOX_OES	(1,)	#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/OES/OES_primitive_bounding_box.txt
+GL_PRIMITIVE_BOUNDING_BOX_ARB	(8,)
+GL_PRIMITIVE_BOUNDING_BOX_EXT	(8,)
+GL_PRIMITIVE_BOUNDING_BOX_OES	(8,)
 GL_PRIMITIVE_RESTART	(1,)
 GL_PRIMITIVE_RESTART_FIXED_INDEX	(1,)
 GL_PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED	(1,)
