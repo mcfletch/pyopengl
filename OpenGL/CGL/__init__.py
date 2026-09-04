@@ -312,21 +312,30 @@ class OffscreenTarget:
     """A framebuffer object to draw into, since there is no framebuffer zero.
 
     Built and bound inside a current context, and torn down with
-    :meth:`release`.  The colour attachment is ``GL_RGBA8`` and the
-    depth/stencil one ``GL_DEPTH24_STENCIL8``, which is what a test rendering a
-    frame and reading it back wants.  ``glReadPixels`` reads from it while it is
-    bound, so nothing else about a caller's drawing has to change.
+    :meth:`release`.  ``color_format`` is the colour attachment's internal
+    format, ``GL_RGBA8`` unless a caller wants something else -- ``GL_RGB8``
+    for a target whose readback should have no alpha in it -- and the
+    depth/stencil attachment is ``GL_DEPTH24_STENCIL8``.  ``glReadPixels``
+    reads from it while it is bound, so nothing else about a caller's drawing
+    has to change.
+
+    Its colour is at ``GL_COLOR_ATTACHMENT0`` rather than ``GL_BACK_LEFT``,
+    which is what a caller asking the framebuffer about its own buffers has to
+    name.
     """
 
-    def __init__(self, width, height):
+    def __init__(self, width, height, color_format=None):
         from OpenGL import GL as gl
 
+        if color_format is None:
+            color_format = gl.GL_RGBA8
+        self.color_format = color_format
         self.width, self.height = width, height
         self.framebuffer = int(gl.glGenFramebuffers(1))
         gl.glBindFramebuffer(gl.GL_FRAMEBUFFER, self.framebuffer)
         self.color = int(gl.glGenRenderbuffers(1))
         gl.glBindRenderbuffer(gl.GL_RENDERBUFFER, self.color)
-        gl.glRenderbufferStorage(gl.GL_RENDERBUFFER, gl.GL_RGBA8, width, height)
+        gl.glRenderbufferStorage(gl.GL_RENDERBUFFER, color_format, width, height)
         gl.glFramebufferRenderbuffer(
             gl.GL_FRAMEBUFFER, gl.GL_COLOR_ATTACHMENT0,
             gl.GL_RENDERBUFFER, self.color)
