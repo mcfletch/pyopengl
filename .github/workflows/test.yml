@@ -74,10 +74,19 @@ jobs:
       - name: Install tox
         run: python -m pip install --upgrade pip "tox" "tox-uv>=1"
 
+      - name: Build the test environment
+        # `tox exec` runs a command in an environment but does not build one --
+        # it says so and carries on with the package missing -- so the
+        # environment the report below runs in is made here.
+        run: python -m tox -e ${{ matrix.toxenv }} --notest
+
       - name: Report the renderer under test
-        # A suite that silently found no GL would skip its way to green, so say
-        # what is about to render before anything runs.
-        run: python tests/check_egl_device_enumeration.py
+        # In the environment the tests will run in, so it is that PyOpenGL
+        # being asked.  A suite that silently found no GL would skip its way to
+        # green, so say what is about to render before anything runs.
+        run: >
+          python -m tox exec -e ${{ matrix.toxenv }} --
+          python tests/check_egl_device_enumeration.py
         env:
           PYOPENGL_PLATFORM: egl
 
@@ -112,10 +121,16 @@ jobs:
       - name: Install tox
         run: python -m pip install --upgrade pip "tox" "tox-uv>=1"
 
+      - name: Build the test environment
+        # `tox exec` runs a command in an environment but does not build one --
+        # it says so and carries on with the package missing -- so the
+        # environment the report below runs in is made here.
+        run: python -m tox -e py312-num1-accel0-dispctypes --notest
+
       - name: Report the renderer under test
-        # In the env the tests will run in, and non-zero where no context can be
-        # made: a suite that found no GL would skip its way to green having
-        # rendered nothing, which reads the same as a pass.
+        # In the environment the tests will run in, and non-zero where no
+        # context can be made: a suite that found no GL would skip its way to
+        # green having rendered nothing, which reads the same as a pass.
         run: >
           python -m tox exec -e py312-num1-accel0-dispctypes --
           python tests/check_cgl_context.py
