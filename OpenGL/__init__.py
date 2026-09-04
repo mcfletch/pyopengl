@@ -113,6 +113,24 @@ import occurs the flags should no longer be changed.
 
         Default: False
 
+        With it off, what a call made *after* the context has gone
+        does is the platform's to decide, and the platforms differ.
+        A cleanup handler deleting GL objects is the ordinary case:
+
+        - On Linux, libGL answers glGetError with zero when no
+          context is current, so the call is silent and the handler
+          finishes.
+        - On Windows, opengl32 reports GL_INVALID_OPERATION for the
+          same call, so ERROR_CHECKING turns it into a GLError.
+          A handler that must run to the end there should either
+          delete its objects while the context is still current, or
+          catch GLError around the calls that may follow it.
+
+        PyOpenGL does not paper over the difference: hiding it would
+        mean a context check on every call, which is what this flag
+        is and what it costs.  Both dispatch implementations, C and
+        ctypes, behave identically on each platform.
+
     STORE_POINTERS -- if set to True, PyOpenGL array operations
         will attempt to store references to pointers which are
         being passed in order to prevent memory-access failures
