@@ -13,6 +13,7 @@ try:
 except ImportError as err:
     raise ImportError( """No numpy module present: %s"""%(err))
 from OpenGL.arrays import buffers
+from OpenGL.arrays import _arrayconstants
 from OpenGL.raw.GL import _types 
 from OpenGL.raw.GL.VERSION import GL_1_1
 from OpenGL import constant, error
@@ -111,6 +112,12 @@ GL_TYPE_TO_ARRAY_MAPPING = {
     GL_1_1.GL_UNSIGNED_BYTE: lookupDtype('B'),
     GL_1_1.GL_UNSIGNED_SHORT: lookupDtype(USHORT_TYPE),
     _types.GL_VOID_P: lookupDtype('P'),
+    # GLintptr is as wide as a pointer, and numpy's 'p' is the dtype for
+    # that.  One-directional, as GL_VOID_P is: on a 64-bit build 'p' is
+    # indistinguishable from 'q', so the reverse mapping would answer
+    # GL_INTPTR for every 64-bit integer array.
+    _arrayconstants.GL_INTPTR: lookupDtype('p'),
+    _arrayconstants.GL_SIZEIPTR: lookupDtype('P'),
     None: None,
     'f': lookupDtype('f'),
     'd': lookupDtype('d'),

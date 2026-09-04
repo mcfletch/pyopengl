@@ -5283,7 +5283,7 @@ def glBindBufferRangeNV(target: int, index: int, buffer: int, offset: int, size:
 def glBindBuffersBase(target: int, first: int, count: int, buffers: UIntArray) -> None:
     """glBindBuffersBase(target, first, count, buffers) -> None"""
 
-def glBindBuffersRange(target: int, first: int, count: int, buffers: UIntArray, offsets: AnyArray, sizes: AnyArray) -> None:
+def glBindBuffersRange(target: int, first: int, count: int, buffers: UIntArray, offsets: Int64Array, sizes: UInt64Array) -> None:
     """glBindBuffersRange(target, first, count, buffers, offsets, sizes) -> None"""
 
 def glBindFragDataLocation(program: int, color: int, name: ByteArray) -> None:
@@ -5385,7 +5385,7 @@ def glBindVertexArrayAPPLE(array: int) -> None:
 def glBindVertexBuffer(bindingindex: int, buffer: int, offset: int, stride: int) -> None:
     """glBindVertexBuffer(bindingindex, buffer, offset, stride) -> None"""
 
-def glBindVertexBuffers(first: int, count: int, buffers: UIntArray, offsets: AnyArray, strides: IntArray) -> None:
+def glBindVertexBuffers(first: int, count: int, buffers: UIntArray, offsets: Int64Array, strides: IntArray) -> None:
     """glBindVertexBuffers(first, count, buffers, offsets, strides) -> None"""
 
 def glBindVertexShaderEXT(id: int) -> None:
@@ -6603,13 +6603,13 @@ def glDrawBuffersATI(n: int, bufs: UIntArray) -> None:
 def glDrawCommandsAddressNV(primitiveMode: int, indirects: UInt64Array, sizes: IntArray, count: int) -> None:
     """glDrawCommandsAddressNV(primitiveMode, indirects, sizes, count) -> None"""
 
-def glDrawCommandsNV(primitiveMode: int, buffer: int, indirects: AnyArray, sizes: IntArray, count: int) -> None:
+def glDrawCommandsNV(primitiveMode: int, buffer: int, indirects: Int64Array, sizes: IntArray, count: int) -> None:
     """glDrawCommandsNV(primitiveMode, buffer, indirects, sizes, count) -> None"""
 
 def glDrawCommandsStatesAddressNV(indirects: UInt64Array, sizes: IntArray, states: UIntArray, fbos: UIntArray, count: int) -> None:
     """glDrawCommandsStatesAddressNV(indirects, sizes, states, fbos, count) -> None"""
 
-def glDrawCommandsStatesNV(buffer: int, indirects: AnyArray, sizes: IntArray, states: UIntArray, fbos: UIntArray, count: int) -> None:
+def glDrawCommandsStatesNV(buffer: int, indirects: Int64Array, sizes: IntArray, states: UIntArray, fbos: UIntArray, count: int) -> None:
     """glDrawCommandsStatesNV(buffer, indirects, sizes, states, fbos, count) -> None"""
 
 def glDrawElementArrayAPPLE(mode: int, first: int, count: int) -> None:
@@ -12774,7 +12774,7 @@ def glVDPAUInitNV(vdpDevice: AnyArray, getProcAddress: AnyArray) -> None:
 def glVDPAUIsSurfaceNV(surface: int) -> int:
     """glVDPAUIsSurfaceNV(surface) -> GLboolean"""
 
-def glVDPAUMapSurfacesNV(numSurfaces: int, surfaces: AnyArray) -> None:
+def glVDPAUMapSurfacesNV(numSurfaces: int, surfaces: Int64Array) -> None:
     """glVDPAUMapSurfacesNV(numSurfaces, surfaces) -> None"""
 
 def glVDPAURegisterOutputSurfaceNV(vdpSurface: AnyArray, target: int, numTextureNames: int, textureNames: UIntArray) -> int:
@@ -12789,7 +12789,7 @@ def glVDPAURegisterVideoSurfaceWithPictureStructureNV(vdpSurface: AnyArray, targ
 def glVDPAUSurfaceAccessNV(surface: int, access: int) -> None:
     """glVDPAUSurfaceAccessNV(surface, access) -> None"""
 
-def glVDPAUUnmapSurfacesNV(numSurface: int, surfaces: AnyArray) -> None:
+def glVDPAUUnmapSurfacesNV(numSurface: int, surfaces: Int64Array) -> None:
     """glVDPAUUnmapSurfacesNV(numSurface, surfaces) -> None"""
 
 def glVDPAUUnregisterSurfaceNV(surface: int) -> None:
@@ -13047,7 +13047,7 @@ def glVertexArrayVertexBindingDivisorEXT(vaobj: int, bindingindex: int, divisor:
 def glVertexArrayVertexBuffer(vaobj: int, bindingindex: int, buffer: int, offset: int, stride: int) -> None:
     """glVertexArrayVertexBuffer(vaobj, bindingindex, buffer, offset, stride) -> None"""
 
-def glVertexArrayVertexBuffers(vaobj: int, first: int, count: int, buffers: UIntArray, offsets: AnyArray, strides: IntArray) -> None:
+def glVertexArrayVertexBuffers(vaobj: int, first: int, count: int, buffers: UIntArray, offsets: Int64Array, strides: IntArray) -> None:
     """glVertexArrayVertexBuffers(vaobj, first, count, buffers, offsets, strides) -> None"""
 
 def glVertexArrayVertexOffsetEXT(vaobj: int, buffer: int, size: int, type: int, stride: int, offset: int) -> None:

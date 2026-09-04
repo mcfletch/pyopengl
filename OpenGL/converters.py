@@ -354,6 +354,33 @@ if CallFuncPyConverter is None:
             return pyArgs[self.index]
 
 
+class getPyArgsPointer(CConverter):
+    """CConverter returning a typed pointer into a named Python argument
+
+    For a parameter the declaration gives as a plain ctypes pointer rather
+    than as an array class -- ``GLintptr`` and ``GLsizeiptr`` parameters
+    are -- ctypes has no ``from_param`` to reach for, so the pointer is
+    made here.  The converted array itself stays in ``pyArgs``, which is
+    what keeps it alive for the duration of the call: handing the pointer
+    over without it would leave the GL reading freed memory.
+    """
+
+    argNames = ('name', 'arrayType')
+    indexLookups = [
+        ('index', 'name', 'pyArgIndex'),
+    ]
+    __slots__ = ('index', 'name', 'arrayType')
+
+    def __call__(self, pyArgs, index, baseOperation):
+        try:
+            value = pyArgs[self.index]
+        except AttributeError:
+            raise RuntimeError(
+                """"Did not resolve parameter index for %r""" % (self.name)
+            )
+        return self.arrayType.typedPointer(value)
+
+
 class StringLengths(CConverter):
     """CConverter for processing array-of-pointers-to-strings data-type
 

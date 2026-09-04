@@ -2211,8 +2211,8 @@ pygl_GL_glBindBuffersRange(PyObject *_self, PyObject *const *_a, size_t _nargsf,
     PYGL_SZ(2, count);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(3, buffers, &pygl_elem_GLuint);
-    PYGL_ARRAY_IN(4, offsets, &pygl_elem_any);
-    PYGL_ARRAY_IN(5, sizes, &pygl_elem_any);
+    PYGL_ARRAY_IN(4, offsets, &pygl_elem_GLintptr);
+    PYGL_ARRAY_IN(5, sizes, &pygl_elem_GLsizeiptr);
     PYGL_CALL_V((unsigned int, unsigned int, int, void *, void *, void *), (target, first, count, buffers, offsets, sizes));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -3473,7 +3473,7 @@ pygl_GL_glBindVertexBuffers(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_SZ(1, count);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(2, buffers, &pygl_elem_GLuint);
-    PYGL_ARRAY_IN(3, offsets, &pygl_elem_any);
+    PYGL_ARRAY_IN(3, offsets, &pygl_elem_GLintptr);
     PYGL_ARRAY_IN(4, strides, &pygl_elem_GLsizei);
     PYGL_CALL_V((unsigned int, int, void *, void *, void *), (first, count, buffers, offsets, strides));
     PYGL_CHECK();
@@ -19403,7 +19403,7 @@ pygl_GL_glDrawCommandsNV(PyObject *_self, PyObject *const *_a, size_t _nargsf, P
     PYGL_U(1, buffer);
     PYGL_U(4, count);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, indirects, &pygl_elem_any);
+    PYGL_ARRAY_IN(2, indirects, &pygl_elem_GLintptr);
     PYGL_ARRAY_IN(3, sizes, &pygl_elem_GLsizei);
     PYGL_CALL_V((unsigned int, unsigned int, void *, void *, unsigned int), (primitiveMode, buffer, indirects, sizes, count));
     PYGL_CHECK();
@@ -19486,7 +19486,7 @@ pygl_GL_glDrawCommandsStatesNV(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_U(0, buffer);
     PYGL_U(5, count);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, indirects, &pygl_elem_any);
+    PYGL_ARRAY_IN(1, indirects, &pygl_elem_GLintptr);
     PYGL_ARRAY_IN(2, sizes, &pygl_elem_GLsizei);
     PYGL_ARRAY_IN(3, states, &pygl_elem_GLuint);
     PYGL_ARRAY_IN(4, fbos, &pygl_elem_GLuint);
@@ -99984,7 +99984,7 @@ pygl_GL_glVDPAUMapSurfacesNV(PyObject *_self, PyObject *const *_a, size_t _nargs
     PYGL_FRAME(1);
     PYGL_SZ(0, numSurfaces);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, surfaces, &pygl_elem_any);
+    PYGL_ARRAY_IN(1, surfaces, &pygl_elem_GLvdpauSurfaceNV);
     PYGL_CALL_V((int, void *), (numSurfaces, surfaces));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -100186,7 +100186,7 @@ pygl_GL_glVDPAUUnmapSurfacesNV(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_FRAME(1);
     PYGL_SZ(0, numSurface);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, surfaces, &pygl_elem_any);
+    PYGL_ARRAY_IN(1, surfaces, &pygl_elem_GLvdpauSurfaceNV);
     PYGL_CALL_V((int, void *), (numSurface, surfaces));
     PYGL_CHECK();
     PYGL_CLEANUP();
@@ -103457,7 +103457,7 @@ pygl_GL_glVertexArrayVertexBuffers(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_SZ(2, count);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(3, buffers, &pygl_elem_GLuint);
-    PYGL_ARRAY_IN(4, offsets, &pygl_elem_any);
+    PYGL_ARRAY_IN(4, offsets, &pygl_elem_GLintptr);
     PYGL_ARRAY_IN(5, strides, &pygl_elem_GLsizei);
     PYGL_CALL_V((unsigned int, unsigned int, int, void *, void *, void *), (vaobj, first, count, buffers, offsets, strides));
     PYGL_CHECK();

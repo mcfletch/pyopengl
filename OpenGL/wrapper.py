@@ -240,6 +240,7 @@ class Wrapper(LateBind):
             only wrapping if we intend to do a size check on the array.
             """
             arrayType = self.typeOfArg(argName)
+            pointerCConverter = None
             if not hasattr(arrayType, 'asArray'):
                 if arrayType == ctypes.c_void_p:
                     # special case, we will convert to a void * array...
@@ -251,13 +252,31 @@ class Wrapper(LateBind):
                     )
                     self.setCConverter(argName, converters.getPyArgsName(argName))
                     return self
-                elif hasattr(arrayType, '_type_') and hasattr(
-                    arrayType._type_, '_type_'
-                ):
-                    # is a ctypes array-of-pointers data-type...
-                    # requires special handling no matter what...
-                    return self
-                else:
+                element = getattr(arrayType, '_type_', None)
+                if element is not None:
+                    byElement = arraydatatype.arrayTypeForElement(element)
+                    if byElement is not None:
+                        # A pointer to a type an array class covers.  The
+                        # declaration names the pointer rather than the array
+                        # -- GLintptr and GLsizeiptr parameters do -- and the
+                        # conversion is the array class's all the same.
+                        arrayType = byElement
+                        pointerCConverter = converters.getPyArgsPointer(
+                            argName, byElement)
+                    elif hasattr(element, '_type_'):
+                        # is a ctypes array-of-pointers data-type...
+                        # requires special handling no matter what...
+                        #
+                        # Only where the element is itself a pointer: a simple
+                        # ctypes type also carries a ``_type_``, which is its
+                        # struct format character, so testing for the attribute
+                        # alone sent every pointer-to-simple-type down here to
+                        # be silently left unconverted.
+                        if hasattr(element, 'contents') or hasattr(
+                            getattr(element, '_type_', None), '_type_'
+                        ):
+                            return self
+                if not hasattr(arrayType, 'asArray'):
                     raise TypeError(
                         "Should only have array types for output parameters: got %s"
                         % (arrayType,)
@@ -268,7 +287,9 @@ class Wrapper(LateBind):
                 )
             else:
                 self.setPyConverter(argName, arrayhelpers.asArrayType(arrayType))
-            self.setCConverter(argName, converters.getPyArgsName(argName))
+            self.setCConverter(
+                argName, pointerCConverter or converters.getPyArgsName(argName)
+            )
             return self
 
     else:

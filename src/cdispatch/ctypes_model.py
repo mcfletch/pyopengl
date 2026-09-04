@@ -301,10 +301,24 @@ _ELEMENTS = {
     'int64_t': _element('int64_t', 'q', 8, 'GLint64Array', ('l',)),
     'GLuint64': _element('GLuint64', 'Q', 8, 'GLuint64Array', ('L',)),
     'GLuint64EXT': _element('GLuint64EXT', 'Q', 8, 'GLuint64Array', ('L',)),
-    # GLhalfNV, GLintptr and GLsizeiptr arrays have no ArrayDatatype class:
-    # PyOpenGL declares those parameters as ctypes pointers rather than array
-    # types.  Leaving them out of this table means they take the generic path,
-    # which is what they take today.
+    # As wide as a pointer, which is why neither is GLint64Array: the two
+    # agree on a 64-bit build and not on a 32-bit one.  GLvdpauSurfaceNV is
+    # GLintptr under another name.
+    # Pointer-sized, and eight because that is the build this table describes,
+    # as EGLAttrib above already assumes.  numpy writes 'l' for an intp on LP64
+    # and 'n' is the native-mode struct code for one, so both are accepted.
+    # Neither is GLint64Array: the two agree on a 64-bit build and not on a
+    # 32-bit one.  GLvdpauSurfaceNV is GLintptr under another name.
+    'GLintptr': _element('GLintptr', 'q', 8, 'GLintptrArray', ('l', 'n')),
+    'GLintptrARB': _element('GLintptrARB', 'q', 8, 'GLintptrArray', ('l', 'n')),
+    'GLvdpauSurfaceNV': _element('GLvdpauSurfaceNV', 'q', 8, 'GLintptrArray',
+                                 ('l', 'n')),
+    'GLsizeiptr': _element('GLsizeiptr', 'Q', 8, 'GLsizeiptrArray', ('L', 'N')),
+    'GLsizeiptrARB': _element('GLsizeiptrARB', 'Q', 8, 'GLsizeiptrArray',
+                              ('L', 'N')),
+    # GLhalfNV arrays have no ArrayDatatype class: PyOpenGL declares those
+    # parameters as ctypes pointers rather than array types.  Leaving it out of
+    # this table means it takes the generic path, which is what it takes today.
 }
 
 

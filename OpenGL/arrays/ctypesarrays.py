@@ -137,6 +137,8 @@ ARRAY_TO_GL_TYPE_MAPPING = {
 }
 GL_TYPE_TO_ARRAY_MAPPING = {
     _types.GL_VOID_P: _types.GLvoidp,
+    GL_1_1.GL_INTPTR: _types.GLintptr,
+    GL_1_1.GL_SIZEIPTR: _types.GLsizeiptr,
     GL_1_1.GL_DOUBLE: _types.GLdouble,
     GL_1_1.GL_FLOAT: _types.GLfloat,
     GL_1_1.GL_INT: _types.GLint,

@@ -32,25 +32,30 @@ static const PyGLElement pygl_elem_GLhandleARB = {'I', 'L', 0, 4, 16, "GLuintArr
 static const PyGLElement pygl_elem_GLint = {'i', 'l', 0, 4, 17, "GLintArray"};
 static const PyGLElement pygl_elem_GLint64 = {'q', 'l', 0, 8, 18, "GLint64Array"};
 static const PyGLElement pygl_elem_GLint64EXT = {'q', 'l', 0, 8, 19, "GLint64Array"};
-static const PyGLElement pygl_elem_GLshort = {'h', 0, 0, 2, 20, "GLshortArray"};
-static const PyGLElement pygl_elem_GLsizei = {'i', 'l', 0, 4, 21, "GLsizeiArray"};
-static const PyGLElement pygl_elem_GLubyte = {'B', 'c', 0, 1, 22, "GLubyteArray"};
-static const PyGLElement pygl_elem_GLuint = {'I', 'L', 0, 4, 23, "GLuintArray"};
-static const PyGLElement pygl_elem_GLuint64 = {'Q', 'L', 0, 8, 24, "GLuint64Array"};
-static const PyGLElement pygl_elem_GLuint64EXT = {'Q', 'L', 0, 8, 25, "GLuint64Array"};
-static const PyGLElement pygl_elem_GLushort = {'H', 0, 0, 2, 26, "GLushortArray"};
-static const PyGLElement pygl_elem_c_int = {'i', 'l', 0, 4, 27, "GLintArray"};
-static const PyGLElement pygl_elem_c_uint = {'I', 'L', 0, 4, 28, "GLuintArray"};
-static const PyGLElement pygl_elem_char = {'b', 'c', 0, 1, 29, "GLbyteArray"};
-static const PyGLElement pygl_elem_double = {'d', 0, 0, 8, 30, "GLdoubleArray"};
-static const PyGLElement pygl_elem_float = {'f', 0, 0, 4, 31, "GLfloatArray"};
-static const PyGLElement pygl_elem_int = {'i', 'l', 0, 4, 32, "GLintArray"};
-static const PyGLElement pygl_elem_int64_t = {'q', 'l', 0, 8, 33, "GLint64Array"};
-static const PyGLElement pygl_elem_unsigned_int = {'I', 'L', 0, 4, 34, "GLuintArray"};
+static const PyGLElement pygl_elem_GLintptr = {'q', 'l', 'n', 8, 20, "GLintptrArray"};
+static const PyGLElement pygl_elem_GLintptrARB = {'q', 'l', 'n', 8, 21, "GLintptrArray"};
+static const PyGLElement pygl_elem_GLshort = {'h', 0, 0, 2, 22, "GLshortArray"};
+static const PyGLElement pygl_elem_GLsizei = {'i', 'l', 0, 4, 23, "GLsizeiArray"};
+static const PyGLElement pygl_elem_GLsizeiptr = {'Q', 'L', 'N', 8, 24, "GLsizeiptrArray"};
+static const PyGLElement pygl_elem_GLsizeiptrARB = {'Q', 'L', 'N', 8, 25, "GLsizeiptrArray"};
+static const PyGLElement pygl_elem_GLubyte = {'B', 'c', 0, 1, 26, "GLubyteArray"};
+static const PyGLElement pygl_elem_GLuint = {'I', 'L', 0, 4, 27, "GLuintArray"};
+static const PyGLElement pygl_elem_GLuint64 = {'Q', 'L', 0, 8, 28, "GLuint64Array"};
+static const PyGLElement pygl_elem_GLuint64EXT = {'Q', 'L', 0, 8, 29, "GLuint64Array"};
+static const PyGLElement pygl_elem_GLushort = {'H', 0, 0, 2, 30, "GLushortArray"};
+static const PyGLElement pygl_elem_GLvdpauSurfaceNV = {'q', 'l', 'n', 8, 31, "GLintptrArray"};
+static const PyGLElement pygl_elem_c_int = {'i', 'l', 0, 4, 32, "GLintArray"};
+static const PyGLElement pygl_elem_c_uint = {'I', 'L', 0, 4, 33, "GLuintArray"};
+static const PyGLElement pygl_elem_char = {'b', 'c', 0, 1, 34, "GLbyteArray"};
+static const PyGLElement pygl_elem_double = {'d', 0, 0, 8, 35, "GLdoubleArray"};
+static const PyGLElement pygl_elem_float = {'f', 0, 0, 4, 36, "GLfloatArray"};
+static const PyGLElement pygl_elem_int = {'i', 'l', 0, 4, 37, "GLintArray"};
+static const PyGLElement pygl_elem_int64_t = {'q', 'l', 0, 8, 38, "GLint64Array"};
+static const PyGLElement pygl_elem_unsigned_int = {'I', 'L', 0, 4, 39, "GLuintArray"};
 
 /* An array of pointers.  No struct code matches it on the fast path,
  * so every call converts through GLvoidpArray -- which is what can
  * size an allocation of them. */
-static const PyGLElement pygl_elem_voidp = {0, 0, 0, (uint8_t)sizeof(void *), 35, "GLvoidpArray"};
+static const PyGLElement pygl_elem_voidp = {0, 0, 0, (uint8_t)sizeof(void *), 40, "GLvoidpArray"};
 
 #endif /* PYGL_ELEMENTS_H */

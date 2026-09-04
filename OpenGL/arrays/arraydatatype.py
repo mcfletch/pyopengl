@@ -321,6 +321,22 @@ if ADT is None:
         baseType = _types.GLuint64
         typeConstant = _types.GL_UNSIGNED_INT64
 
+    class GLintptrArray(ArrayDatatype, ctypes.POINTER(_types.GLintptr)):
+        """Array datatype for GLintptr types (buffer offsets, VDPAU handles)
+
+        As wide as a pointer, which is what distinguishes it from
+        GLint64Array: the two agree on a 64-bit build and not on a 32-bit one.
+        """
+
+        baseType = _types.GLintptr
+        typeConstant = GL_1_1.GL_INTPTR
+
+    class GLsizeiptrArray(ArrayDatatype, ctypes.POINTER(_types.GLsizeiptr)):
+        """Array datatype for GLsizeiptr types (buffer sizes)"""
+
+        baseType = _types.GLsizeiptr
+        typeConstant = GL_1_1.GL_SIZEIPTR
+
     class GLenumArray(ArrayDatatype, ctypes.POINTER(_types.GLenum)):
         """Array datatype for GLenum types"""
 
@@ -361,6 +377,8 @@ else:
     GLuintArray = ADT(GL_1_1.GL_UNSIGNED_INT, _types.GLuint)
     GLint64Array = ADT(GL_1_1.GL_INT64, _types.GLint64)
     GLuint64Array = ADT(GL_1_1.GL_UNSIGNED_INT64, _types.GLuint64)
+    GLintptrArray = ADT(GL_1_1.GL_INTPTR, _types.GLintptr)
+    GLsizeiptrArray = ADT(GL_1_1.GL_SIZEIPTR, _types.GLsizeiptr)
     GLenumArray = ADT(GL_1_1.GL_UNSIGNED_INT, _types.GLenum)
     GLsizeiArray = ADT(GL_1_1.GL_INT, _types.GLsizei)
     GLvoidpArray = ADT(_types.GL_VOID_P, _types.GLvoidp)
@@ -384,5 +402,34 @@ GL_CONSTANT_TO_ARRAY_TYPE = {
     GL_1_1.GL_UNSIGNED_INT64: GLuint64Array,
     GL_1_1.GL_INT64: GLint64Array,
     _types.GL_FIXED: GLfixedArray,
+    GL_1_1.GL_INTPTR: GLintptrArray,
+    GL_1_1.GL_SIZEIPTR: GLsizeiptrArray,
     # GL_1_1.GL_UNSIGNED_INT : GLenumArray,
 }
+
+
+#: Every array class by the ctypes element type it holds, built once.  A
+#: declaration that names ``ctypes.POINTER(GLintptr)`` rather than
+#: ``arrays.GLintptrArray`` still describes an array of that element, and this
+#: is how the conversion for it is found.
+_BY_ELEMENT = None
+
+
+def arrayTypeForElement(element):
+    """The array class whose elements are ``element``, or ``None``.
+
+    ``None`` is an answer rather than an error: not every ctypes type an
+    argument may be declared as has an array class, and the caller decides what
+    to do about that.
+    """
+    global _BY_ELEMENT
+    if _BY_ELEMENT is None:
+        found = {}
+        for name, value in list(globals().items()):
+            if not name.endswith('Array'):
+                continue
+            baseType = getattr(value, 'baseType', None)
+            if baseType is not None and hasattr(value, 'asArray'):
+                found.setdefault(baseType, value)
+        _BY_ELEMENT = found
+    return _BY_ELEMENT.get(element)

@@ -189,7 +189,7 @@ pygl_EGL_eglClientSignalSyncEXT(PyObject *_self, PyObject *const *_a, size_t _na
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, sync);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, unsigned int, (void *, void *, void *), (dpy, sync, attrib_list));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
@@ -776,7 +776,7 @@ pygl_EGL_eglCreateImage(PyObject *_self, PyObject *const *_a, size_t _nargsf, Py
     PYGL_U(2, target);
     PYGL_OPAQUE(3, buffer);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(4, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(4, attrib_list, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, void *, (void *, void *, unsigned int, void *, void *), (dpy, ctx, target, buffer, attrib_list));
     PYGL_CHECK();
     PyObject *_value = pygl_opaque((void *)_result, "EGLImage");
@@ -1067,7 +1067,7 @@ pygl_EGL_eglCreatePlatformPixmapSurface(PyObject *_self, PyObject *const *_a, si
     PYGL_OPAQUE(1, config);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(2, native_pixmap, &pygl_elem_any);
-    PYGL_ARRAY_IN(3, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(3, attrib_list, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, void *, (void *, void *, void *, void *), (dpy, config, native_pixmap, attrib_list));
     PYGL_CHECK();
     PyObject *_value = pygl_opaque((void *)_result, "EGLSurface");
@@ -1151,7 +1151,7 @@ pygl_EGL_eglCreatePlatformWindowSurface(PyObject *_self, PyObject *const *_a, si
     PYGL_OPAQUE(1, config);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(2, native_window, &pygl_elem_any);
-    PYGL_ARRAY_IN(3, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(3, attrib_list, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, void *, (void *, void *, void *, void *), (dpy, config, native_window, attrib_list));
     PYGL_CHECK();
     PyObject *_value = pygl_opaque((void *)_result, "EGLSurface");
@@ -1233,7 +1233,7 @@ pygl_EGL_eglCreateStreamAttribKHR(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, dpy);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(1, attrib_list, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, void *, (void *, void *), (dpy, attrib_list));
     PYGL_CHECK();
     PyObject *_value = pygl_opaque((void *)_result, "EGLStreamKHR");
@@ -1434,7 +1434,7 @@ pygl_EGL_eglCreateSync(PyObject *_self, PyObject *const *_a, size_t _nargsf, PyO
     PYGL_OPAQUE(0, dpy);
     PYGL_U(1, type);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_GLintptr);
     PYGL_CALL_R_BLOCKING(_result, void *, (void *, unsigned int, void *), (dpy, type, attrib_list));
     PYGL_CHECK();
     PyObject *_value = pygl_opaque((void *)_result, "EGLSync");
@@ -1634,7 +1634,7 @@ pygl_EGL_eglDebugMessageControlKHR(PyObject *_self, PyObject *const *_a, size_t 
     PYGL_FRAME(1);
     PYGL_OPAQUE(0, callback);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(1, attrib_list, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, int, (void *, void *), (callback, attrib_list));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromLong((long)_result);
@@ -2803,7 +2803,7 @@ pygl_EGL_eglGetOutputLayersEXT(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_OPAQUE(0, dpy);
     PYGL_I(3, max_layers);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(1, attrib_list, &pygl_elem_GLintptr);
     PYGL_ARRAY_IN(2, layers, &pygl_elem_any);
     PYGL_ARRAY_IN(4, num_layers, &pygl_elem_GLint);
     PYGL_CALL_R(_result, unsigned int, (void *, void *, void *, int, void *), (dpy, attrib_list, layers, max_layers, num_layers));
@@ -2846,7 +2846,7 @@ pygl_EGL_eglGetOutputPortsEXT(PyObject *_self, PyObject *const *_a, size_t _narg
     PYGL_OPAQUE(0, dpy);
     PYGL_I(3, max_ports);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(1, attrib_list, &pygl_elem_GLintptr);
     PYGL_ARRAY_IN(2, ports, &pygl_elem_any);
     PYGL_ARRAY_IN(4, num_ports, &pygl_elem_GLint);
     PYGL_CALL_R(_result, unsigned int, (void *, void *, void *, int, void *), (dpy, attrib_list, ports, max_ports, num_ports));
@@ -2889,7 +2889,7 @@ pygl_EGL_eglGetPlatformDisplay(PyObject *_self, PyObject *const *_a, size_t _nar
     PYGL_U(0, platform);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(1, native_display, &pygl_elem_any);
-    PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, void *, (unsigned int, void *, void *), (platform, native_display, attrib_list));
     PYGL_CHECK();
     PyObject *_value = pygl_opaque((void *)_result, "EGLDisplay");
@@ -3047,7 +3047,7 @@ pygl_EGL_eglGetSyncAttrib(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_OPAQUE(1, sync);
     PYGL_I(2, attribute);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(3, value, &pygl_elem_any);
+    PYGL_ARRAY_IN(3, value, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, unsigned int, (void *, void *, int, void *), (dpy, sync, attribute, value));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
@@ -3585,7 +3585,7 @@ pygl_EGL_eglQueryDebugKHR(PyObject *_self, PyObject *const *_a, size_t _nargsf, 
     PYGL_FRAME(1);
     PYGL_I(0, attribute);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(1, value, &pygl_elem_any);
+    PYGL_ARRAY_IN(1, value, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, unsigned int, (int, void *), (attribute, value));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
@@ -3626,7 +3626,7 @@ pygl_EGL_eglQueryDeviceAttribEXT(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_OPAQUE(0, device);
     PYGL_I(1, attribute);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, value, &pygl_elem_any);
+    PYGL_ARRAY_IN(2, value, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, unsigned int, (void *, int, void *), (device, attribute, value));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
@@ -3787,7 +3787,7 @@ pygl_EGL_eglQueryDisplayAttribEXT(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_OPAQUE(0, dpy);
     PYGL_I(1, attribute);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, value, &pygl_elem_any);
+    PYGL_ARRAY_IN(2, value, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, unsigned int, (void *, int, void *), (dpy, attribute, value));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
@@ -3828,7 +3828,7 @@ pygl_EGL_eglQueryDisplayAttribKHR(PyObject *_self, PyObject *const *_a, size_t _
     PYGL_OPAQUE(0, dpy);
     PYGL_I(1, name);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, value, &pygl_elem_any);
+    PYGL_ARRAY_IN(2, value, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, unsigned int, (void *, int, void *), (dpy, name, value));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
@@ -3869,7 +3869,7 @@ pygl_EGL_eglQueryDisplayAttribNV(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_OPAQUE(0, dpy);
     PYGL_I(1, attribute);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, value, &pygl_elem_any);
+    PYGL_ARRAY_IN(2, value, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, unsigned int, (void *, int, void *), (dpy, attribute, value));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
@@ -4119,7 +4119,7 @@ pygl_EGL_eglQueryOutputLayerAttribEXT(PyObject *_self, PyObject *const *_a, size
     PYGL_OPAQUE(1, layer);
     PYGL_I(2, attribute);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(3, value, &pygl_elem_any);
+    PYGL_ARRAY_IN(3, value, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, unsigned int, (void *, void *, int, void *), (dpy, layer, attribute, value));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
@@ -4198,7 +4198,7 @@ pygl_EGL_eglQueryOutputPortAttribEXT(PyObject *_self, PyObject *const *_a, size_
     PYGL_OPAQUE(1, port);
     PYGL_I(2, attribute);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(3, value, &pygl_elem_any);
+    PYGL_ARRAY_IN(3, value, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, unsigned int, (void *, void *, int, void *), (dpy, port, attribute, value));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
@@ -4277,7 +4277,7 @@ pygl_EGL_eglQueryStreamAttribKHR(PyObject *_self, PyObject *const *_a, size_t _n
     PYGL_OPAQUE(1, stream);
     PYGL_U(2, attribute);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(3, value, &pygl_elem_any);
+    PYGL_ARRAY_IN(3, value, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, unsigned int, (void *, void *, unsigned int, void *), (dpy, stream, attribute, value));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
@@ -4320,7 +4320,7 @@ pygl_EGL_eglQueryStreamConsumerEventNV(PyObject *_self, PyObject *const *_a, siz
     PYGL_U64(2, timeout);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(3, event, &pygl_elem_voidp);
-    PYGL_ARRAY_IN(4, aux, &pygl_elem_any);
+    PYGL_ARRAY_IN(4, aux, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, int, (void *, void *, uint64_t, void *, void *), (dpy, stream, timeout, event, aux));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromLong((long)_result);
@@ -4569,7 +4569,7 @@ pygl_EGL_eglQuerySupportedCompressionRatesEXT(PyObject *_self, PyObject *const *
     PYGL_OPAQUE(1, config);
     PYGL_I(4, rate_size);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_GLintptr);
     PYGL_ARRAY_IN(3, rates, &pygl_elem_GLint);
     PYGL_ARRAY_IN(5, num_rates, &pygl_elem_GLint);
     PYGL_CALL_R(_result, unsigned int, (void *, void *, void *, void *, int, void *), (dpy, config, attrib_list, rates, rate_size, num_rates));
@@ -5200,7 +5200,7 @@ pygl_EGL_eglStreamConsumerAcquireAttribKHR(PyObject *_self, PyObject *const *_a,
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, stream);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, unsigned int, (void *, void *, void *), (dpy, stream, attrib_list));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
@@ -5350,7 +5350,7 @@ pygl_EGL_eglStreamConsumerReleaseAttribKHR(PyObject *_self, PyObject *const *_a,
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, stream);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, unsigned int, (void *, void *, void *), (dpy, stream, attrib_list));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
@@ -5465,7 +5465,7 @@ pygl_EGL_eglStreamImageConsumerConnectNV(PyObject *_self, PyObject *const *_a, s
     PYGL_I(2, num_modifiers);
     PYGL_CONV_OK();
     PYGL_ARRAY_IN(3, modifiers, &pygl_elem_GLuint64);
-    PYGL_ARRAY_IN(4, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(4, attrib_list, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, unsigned int, (void *, void *, int, void *, void *), (dpy, stream, num_modifiers, modifiers, attrib_list));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
@@ -5933,7 +5933,7 @@ pygl_EGL_eglUnsignalSyncEXT(PyObject *_self, PyObject *const *_a, size_t _nargsf
     PYGL_OPAQUE(0, dpy);
     PYGL_OPAQUE(1, sync);
     PYGL_CONV_OK();
-    PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_any);
+    PYGL_ARRAY_IN(2, attrib_list, &pygl_elem_GLintptr);
     PYGL_CALL_R(_result, unsigned int, (void *, void *, void *), (dpy, sync, attrib_list));
     PYGL_CHECK();
     PyObject *_value = PyLong_FromUnsignedLong((unsigned long)_result);
