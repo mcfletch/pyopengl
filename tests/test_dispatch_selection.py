@@ -12,6 +12,8 @@ import sys
 
 import pytest
 
+from childenv import child_environment
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
@@ -42,9 +44,7 @@ print(
 
 
 def report(dispatch, block=False):
-    environment = dict(os.environ)
-    environment['PYOPENGL_DISPATCH'] = dispatch
-    environment.setdefault('PYOPENGL_PLATFORM', 'glx')
+    environment = child_environment(PYOPENGL_DISPATCH=dispatch)
     completed = subprocess.run(
         [sys.executable, '-c', REPORT % {'block': block}],
         capture_output=True,
@@ -59,9 +59,8 @@ def report(dispatch, block=False):
 
 
 def _default():
-    environment = dict(os.environ)
+    environment = child_environment()
     environment.pop('PYOPENGL_DISPATCH', None)
-    environment.setdefault('PYOPENGL_PLATFORM', 'glx')
     completed = subprocess.run(
         [sys.executable, '-c', REPORT % {'block': False}],
         capture_output=True,
@@ -155,3 +154,63 @@ class TestVersionPairing:
 
         monkeypatch.setattr(dispatch, '_c', Older())
         assert not dispatch._versions_match()
+
+
+MISMATCH = r'''
+import OpenGL
+from OpenGL import _dispatch
+
+
+class Older:
+    """An accelerate from a different release, which is what the guard exists for."""
+
+    __pyopengl_version__ = '3.1.9'
+
+
+if not _dispatch.AVAILABLE:
+    print('UNBUILT')
+else:
+    _dispatch._c = Older()
+    try:
+        print('RETURNED', _dispatch.install())
+    except ImportError as error:
+        print('RAISED', error)
+'''
+
+
+def _mismatched(**environment_overrides):
+    """Ask a fresh interpreter to install a deliberately mismatched extension."""
+    environment = child_environment()
+    environment.pop('PYOPENGL_DISPATCH', None)
+    environment.pop('PYOPENGL_USE_ACCELERATE', None)
+    environment.update(environment_overrides)
+    completed = subprocess.run(
+        [sys.executable, '-c', MISMATCH],
+        capture_output=True, text=True, cwd=ROOT, env=environment, timeout=300,
+        check=False,        # the child's own report is what this reads
+    )
+    assert completed.returncode == 0, completed.stderr[-2000:]
+    answer = completed.stdout.strip()
+    if answer == 'UNBUILT':
+        pytest.skip('the C dispatch extension is not built')
+    return answer
+
+
+class TestAskingForCtypesInstead:
+    """USE_ACCELERATE is the switch PyOpenGL has always had for "do not use the
+    compiled layer", and somebody whose pair does not match reaches for it to
+    get running again.  It has to be honoured before the pair is judged, or the
+    answer to "I do not want the extension" is an error about the extension."""
+
+    def test_a_mismatched_pair_is_refused_when_the_extension_is_wanted(self):
+        assert _mismatched().startswith('RAISED')
+
+    def test_the_error_names_a_way_out_that_works(self):
+        message = _mismatched()
+        assert 'PYOPENGL_USE_ACCELERATE' in message or 'PYOPENGL_DISPATCH' in message
+
+    def test_turning_the_flag_off_runs_on_ctypes_rather_than_raising(self):
+        assert _mismatched(PYOPENGL_USE_ACCELERATE='0') == 'RETURNED False'
+
+    def test_the_older_dispatch_switch_still_works_too(self):
+        assert _mismatched(PYOPENGL_DISPATCH='ctypes') == 'RETURNED False'

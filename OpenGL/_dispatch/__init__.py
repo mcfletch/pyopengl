@@ -192,6 +192,24 @@ def install_finder():
     return finder.install()
 
 
+def _wanted():
+    """Whether the caller has asked for the compiled layer at all.
+
+    Both switches are read here rather than at import.  A program sets
+    ``OpenGL.USE_ACCELERATE`` in the lines *after* ``import OpenGL``, and this
+    runs later still, when the first entry point is built -- reading either one
+    at import would see the configuration before it had been written.
+
+    Asking this *before* the pair is judged is what keeps somebody who has said
+    they do not want the extension from being handed an error about the
+    extension.  A mismatched accelerate left behind by a partial upgrade is
+    exactly when a person reaches for the switch, and it has to work.
+    """
+    from OpenGL import _configflags
+
+    return bool(_configflags.USE_ACCELERATE) and _configflags.DISPATCH == 'c'
+
+
 def install():
     """Make the C layer the implementation of the entry points.
 
@@ -203,14 +221,18 @@ def install():
     global ACTIVE
     if ACTIVE or not AVAILABLE:
         return ACTIVE
+    if not _wanted():
+        return False
     if not _versions_match():
         from OpenGL.version import __version__ as ours
 
         raise ImportError(
             'pyopengl %s and pyopengl_accelerate %s were not built together; '
             'they share generated tables, so the pair must match exactly. '
-            'Install the same version of both, or uninstall '
-            'pyopengl_accelerate to run on ctypes.'
+            'Install the same version of both, or run on ctypes by setting '
+            'PYOPENGL_USE_ACCELERATE=0 in the environment (or '
+            'OpenGL.USE_ACCELERATE = False before the first entry point is '
+            'used).'
             % (ours, getattr(_c, '__pyopengl_version__', 'unknown'))
         )
     entry_points.update(_c.entry_points)
