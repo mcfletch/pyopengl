@@ -115,37 +115,22 @@ class GLFWBackend(object):
         if self._window is not None:
             glfw.swap_buffers(self._window)
 
-    def _forget_context(self, handle):
-        """Tell the dispatch layer a context is gone.
+    def _context_handle(self):
+        """This window's GL context handle, read while it is current.
 
-        Its table is keyed by the GL context handle, and a handle is an
-        address the driver is free to hand out again.  Leaving the table
-        behind means the next context that lands on that address inherits a
-        dead context's resolved function pointers -- not a leak but a wrong
-        answer, and one that shows up as a test passing for the wrong reason
-        or a call into a function the new context does not have.
+        Another test's window may have been made current since; the handle the
+        dispatch table is keyed by is this context's, not whichever one happens
+        to be current now.
         """
-        if not handle:
-            return
+        if self._window is None:
+            return None
         try:
-            from OpenGL import _dispatch
-        except ImportError:  # pragma: no cover - ctypes-only build
-            return
-        _dispatch.forget_context(int(handle))
+            glfw.make_context_current(self._window)
+        except Exception:  # pragma: no cover - a context already gone
+            return None
+        return super()._context_handle()
 
     def _destroy_context(self):
         if self._window is not None:
-            # Read the GL context's own handle while the window is still
-            # current: that, not the window pointer, is what the table is
-            # keyed by.
-            handle = None
-            try:
-                from OpenGL import platform
-
-                glfw.make_context_current(self._window)
-                handle = platform.PLATFORM.GetCurrentContext()
-            except Exception:  # pragma: no cover - a context already gone
-                handle = None
             glfw.destroy_window(self._window)
             self._window = None
-            self._forget_context(handle)

@@ -143,3 +143,48 @@ class TestTheDecoratorFinishesTheFrame:
         """Not a swap of its own: the dwell and the cleanup order come with
         it."""
         assert self._run_counting('tearDown') == ['tearDown']
+
+
+class TestAContextThatGoesIsForgotten:
+    """The dispatch layer's table of resolved entry points is keyed by the GL
+    context handle, and a handle is an address the driver hands out again --
+    300 contexts through this fixture reuse 22 addresses on this machine. A
+    context torn down without saying so leaves its resolved pointers behind for
+    whichever context lands on its address next, which then answers about a
+    context that no longer exists.
+
+    Every backend has to say it, so the fixture says it for all of them.
+    """
+
+    def test_tearing_one_down_forgets_its_handle(self):
+        import glcontext
+        from glcontext_desktop import DesktopGLTestCaseBase
+
+        forgotten = []
+
+        class Case(glcontext.pick_backend(), DesktopGLTestCaseBase):
+            def runTest(self):
+                return None
+
+        from OpenGL import _dispatch, platform
+
+        real = _dispatch.forget_context
+        handles = []
+        try:
+            _dispatch.forget_context = forgotten.append
+            case = Case()
+            case.setUp()
+            handles.append(int(platform.PLATFORM.GetCurrentContext() or 0))
+            case.tearDown()
+            case.doCleanups()
+        except Exception as error:
+            pytest.skip('no GL context here: %s' % (error,))
+        finally:
+            _dispatch.forget_context = real
+            # The spy stood in for the real one, so this context is still in
+            # the table; give it back, or this test leaves behind exactly what
+            # it exists to prevent.
+            for handle in forgotten:
+                real(handle)
+        assert handles[0], 'no context handle to forget'
+        assert forgotten == [handles[0]], (forgotten, handles)

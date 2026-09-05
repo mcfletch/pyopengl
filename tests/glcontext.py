@@ -119,6 +119,30 @@ def pick_backend():
 _VERSION = re.compile(r'(?:OpenGL\s+ES(?:-CM|-SC)?\s+)?(\d+)\.(\d+)')
 
 
+def forget_context(handle):
+    """Tell the dispatch layer a context is gone.
+
+    Its table of resolved entry points is keyed by the context handle, and a
+    handle is an address the driver hands out again -- three hundred contexts
+    through this suite reuse a couple of dozen addresses.  A context torn down
+    without saying so leaves its resolved pointers behind for whichever context
+    lands on that address next, which then answers about a context that no
+    longer exists: not a leak but a wrong answer, and one that surfaces as an
+    entry point reported missing where it is supported, or present where it is
+    not.
+
+    :class:`ContextTestCase` does this for every context it makes; a test that
+    makes its own calls this.
+    """
+    if not handle:
+        return
+    try:
+        from OpenGL import _dispatch
+    except ImportError:                    # pragma: no cover - ctypes-only build
+        return
+    _dispatch.forget_context(int(handle))
+
+
 def parse_gl_version(reported):
     """``(major, minor)`` from a GL_VERSION string, or ``None``.
 
@@ -209,6 +233,40 @@ class ContextTestCase(unittest.TestCase):
     def _destroy_context(self):
         raise NotImplementedError
 
+    # --- giving a context back -------------------------------------------
+    def _context_handle(self):
+        """The GL context handle the dispatch table is keyed by, or ``None``.
+
+        Read while the context is still current.  A backend whose context is
+        not necessarily current at teardown makes it so first.
+        """
+        try:
+            from OpenGL import platform
+
+            return platform.PLATFORM.GetCurrentContext()
+        except Exception:              # pragma: no cover - a context already gone
+            return None
+
+    def _release_context(self):
+        """Destroy the context and tell the dispatch layer it is gone.
+
+        The layer's table of resolved entry points is keyed by the context
+        handle, and a handle is an address the driver is free to hand out
+        again -- three hundred contexts through this fixture reuse a couple of
+        dozen addresses.  A context torn down without saying so leaves its
+        resolved pointers behind for whichever context lands on that address
+        next, which then answers about a context that no longer exists: not a
+        leak but a wrong answer, showing up as a test passing for the wrong
+        reason or a call into a function the new context does not have.
+
+        Here rather than in each backend, because it is true of all of them.
+        """
+        handle = self._context_handle()
+        try:
+            self._destroy_context()
+        finally:
+            forget_context(handle)
+
     # --- fixture ----------------------------------------------------------
     def setUp(self):
         """Create the requested context and leave it current and cleared.
@@ -226,7 +284,7 @@ class ContextTestCase(unittest.TestCase):
         # registered -- and cleanups run newest-first, so registering this one
         # now puts it last of all.  It also means a setUp that fails after this
         # point still gives the context back.
-        self.addCleanup(self._destroy_context)
+        self.addCleanup(self._release_context)
         self._cleanup = []
         if self.profile != 'any':
             shortfall = version_shortfall(

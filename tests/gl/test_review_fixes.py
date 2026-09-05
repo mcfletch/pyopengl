@@ -185,6 +185,11 @@ def context():
         pytest.skip('no usable GL context')
     glfw.make_context_current(window)
     yield window
+    from glcontext import forget_context
+    from OpenGL import platform
+
+    glfw.make_context_current(window)
+    forget_context(platform.PLATFORM.GetCurrentContext())
     glfw.destroy_window(window)
     glfw.make_context_current(None)
 

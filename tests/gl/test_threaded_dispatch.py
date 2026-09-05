@@ -31,6 +31,11 @@ class TestThreadedDispatch(unittest.TestCase):
             self.skipTest('could not create a context')
 
     def tearDown(self):
+        from glcontext import forget_context
+        from OpenGL import platform
+
+        glfw.make_context_current(self.window)
+        forget_context(platform.PLATFORM.GetCurrentContext())
         glfw.make_context_current(None)
         glfw.destroy_window(self.window)
         # Deliberately not glfw.terminate(): see test_multi_context.
