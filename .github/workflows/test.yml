@@ -79,7 +79,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
             libegl1 libegl-mesa0 libgl1 libglx-mesa0 libgl1-mesa-dri \
-            libglu1-mesa freeglut3-dev \
+            libglu1-mesa freeglut3-dev xvfb \
             libx11-6 libxrandr2 libxinerama1 libxcursor1 libxi6
 
       - name: Install tox
@@ -105,7 +105,13 @@ jobs:
         # `not performance` is a claim about how fast something draws, and a CPU
         # rasteriser cannot answer one.  Nothing carries the marker yet; the
         # deselection is here so that the first test to need it is right.
+        #
+        # Under Xvfb because the GL suites reach their context through EGL and
+        # need no display, but the stand-alone check scripts open a window and
+        # skip where they cannot -- twenty of them, which is a green run that
+        # exercised no windowing at all.  `-a` picks a free server number.
         run: >
+          xvfb-run -a
           python -m tox -e ${{ matrix.toxenv }} --
           ${{ inputs.tests || 'tests/' }} -m "not performance"
 
