@@ -29,6 +29,16 @@ __all__ = [
 _ctypes_bindings = {}
 _modules = {}
 
+#: The exception each API raises for its own errors, by API name.  EGL's codes
+#: are not GL's and are named by a class of its own, so the class comes from the
+#: API whose call failed rather than from one shared default.
+_error_classes = {}
+
+
+def register_error_class(api, errorClass):
+    """Remember which exception ``api`` reports its errors with."""
+    _error_classes[api] = errorClass
+
 _API_NAMES = ('GL', 'GLES1', 'GLES2', 'GLES3', 'GLSC2', 'GLX', 'WGL', 'EGL')
 
 #: Which entry point the C layer is currently resolving.  The C passes the API
@@ -216,11 +226,13 @@ def raise_gl_error(code, name, arguments=None, api=None):
     name mix-up rather than a decision.
     """
     operation = name
+    errorClass = error.GLError
     if api is not None:
         from OpenGL._dispatch import entry_points
 
         operation = entry_points.get((api, name)) or name
-    raise error.GLError(
+        errorClass = _error_classes.get(api, error.GLError)
+    raise errorClass(
         err=code,
         baseOperation=operation,
         pyArgs=arguments,

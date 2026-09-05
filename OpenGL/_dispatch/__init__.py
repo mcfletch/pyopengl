@@ -169,6 +169,52 @@ def configure():
     )
 
 
+#: The APIs whose errors are GL's: reported by the GL_KHR_debug callback, and
+#: suspended inside a glBegin block, which is a GL construct.
+_GL_FAMILY = ('GL', 'GLES1', 'GLES2', 'GLES3', 'GLSC2')
+
+
+def register_error_source(api, checker):
+    """Say how ``api`` is asked for its errors, from the checker it declares.
+
+    ``OpenGL/raw/<api>/_errors.py`` builds one checker per API stating which
+    function is asked, which code means success and which exception carries the
+    answer.  Both implementations read that one statement: the ctypes bindings
+    call the checker, and this hands the same three facts to the compiled
+    layer, which does the call itself.
+
+    A checker with nothing to ask -- GLX's, and WGL's absence of one -- leaves
+    the API unpolled, which is what it does under ctypes, where such a checker
+    answers its no-error result and never raises.
+    """
+    from OpenGL._dispatch import _tables, support
+
+    getter = getattr(checker, '_getErrors', None) if checker is not None else None
+    errorClass = getattr(checker, '_errorClass', None) if getter else None
+    support.register_error_class(api, errorClass or error_module().GLError)
+    if not AVAILABLE:
+        return
+    if getter is None:
+        _c.set_error_source(api, -1, None, 0, api in _GL_FAMILY)
+        return
+    name = getattr(getter, '__name__', None)
+    proc = entry_points.get((api, name)) if name else None
+    slot = _tables.SLOTS.get((api, name), -1) if name else -1
+    _c.set_error_source(
+        api,
+        slot,
+        proc,
+        int(getattr(checker, '_noErrorResult', 0)),
+        api in _GL_FAMILY,
+    )
+
+
+def error_module():
+    from OpenGL import error
+
+    return error
+
+
 def install_finder():
     """Answer for the generated module names, whichever implementation is used.
 

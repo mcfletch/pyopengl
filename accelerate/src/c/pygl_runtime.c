@@ -30,7 +30,9 @@ static PyObject *pygl_ctypes_simple = NULL;
 static PyObject *pygl_ctypes_pointer = NULL;
 
 static Py_ssize_t pygl_command_count = 0;
-static int pygl_error_slot = -1;
+/* One per API; see PyGLErrorSource.  Inactive until an API says how it is
+ * asked, so an API nobody registered is not polled with another's getError. */
+PyGLErrorSource pygl_error_sources[PYGL_API_COUNT];
 static int pygl_array_size_checking = 1;
 int pygl_context_checking = 0;
 int pygl_context_tracking = PYGL_TRACK_NOTIFY;
@@ -69,9 +71,21 @@ static uint8_t pygl_default_flags = 0;
  * same name, from the GL library, which on a system serving both is a call
  * into the wrong library. */
 static const char *pygl_api_name(uint8_t api);
-/* The glGetError entry point, so the error check can resolve its own slot in a
- * context that has not called it yet. */
-static PyObject *pygl_error_proc = NULL;
+
+/* Install how one API is asked for its errors.  `proc` is that API's getError
+ * entry point, kept so the check can resolve its own slot in a context that
+ * has not called it yet.  An API with neither slot nor proc is not polled. */
+static void pygl_install_error_source(uint8_t api, int slot, PyObject *proc,
+                                      unsigned int no_error, int gl_family)
+{
+    PyGLErrorSource *source = &pygl_error_sources[api];
+    PyObject *held = (proc == NULL || proc == Py_None) ? NULL : Py_NewRef(proc);
+    Py_XSETREF(source->proc, held);
+    source->slot = slot;
+    source->no_error = no_error;
+    source->gl_family = gl_family;
+    source->active = (slot >= 0 || source->proc != NULL);
+}
 
 /* The platform's "which context is current" function, as a raw address, so the
  * strict-tracking mode does not pay a Python call.  Costs about 95ns on the
@@ -520,22 +534,22 @@ static PyObject *pygl_arg_tuple(PyObject *const *args, Py_ssize_t nargs)
  * glGetError, and it is the code that GLError.err documents and that a caller
  * branches on.  Asking costs a driver round trip, which is why it is asked only
  * once an error is known to be there. */
-static unsigned int pygl_error_code(void)
+static unsigned int pygl_error_code(const PyGLErrorSource *source)
 {
     void *fp;
-    if (pygl_error_slot < 0) {
-        return 0;
+    if (source->slot < 0) {
+        return source->no_error;
     }
-    fp = pygl_current->slots[pygl_error_slot];
+    fp = pygl_current->slots[source->slot];
     if ((uintptr_t)fp < PYGL_SLOT_MIN_REAL) {
-        /* This context has not resolved glGetError yet. */
-        if (pygl_error_proc == NULL) {
-            return 0;
+        /* This context has not resolved this API's getError yet. */
+        if (source->proc == NULL) {
+            return source->no_error;
         }
-        fp = pygl_slot((GLProc *)pygl_error_proc);
+        fp = pygl_slot((GLProc *)source->proc);
         if (fp == NULL) {
             PyErr_Clear();
-            return 0;
+            return source->no_error;
         }
     }
     return ((unsigned int (*)(void))fp)();
@@ -558,16 +572,22 @@ int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs)
     PyObject *tuple;
     unsigned int code;
     PyObject *result;
+    const PyGLErrorSource *source = &pygl_error_sources[self->info->api];
 
-    if (pygl_error_suspended) {
+    if (!source->active) {
         return 0;
     }
-    if (pygl_error_mode == PYGL_ERRORS_DEBUG) {
+    /* A glBegin block suspends GL's checking, and only GL's: it is a GL
+     * construct, and the ctypes path suspends the one checker it belongs to. */
+    if (pygl_error_suspended && source->gl_family) {
+        return 0;
+    }
+    if (pygl_error_mode == PYGL_ERRORS_DEBUG && source->gl_family) {
         if (!pygl_debug_pending) {
             return 0;
         }
         pygl_debug_pending = 0;
-        code = pygl_error_code();
+        code = pygl_error_code(source);
         tuple = pygl_arg_tuple(args, nargs);
         result = PyObject_CallMethod(pygl_support, "raise_debug_error", "IIssO",
                                      code, pygl_debug_id, pygl_debug_message,
@@ -577,8 +597,8 @@ int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs)
         pygl_ensure_raised(self, code);
         return -1;
     }
-    code = pygl_error_code();
-    if (code == 0) {
+    code = pygl_error_code(source);
+    if (code == source->no_error) {
         return 0;
     }
     tuple = pygl_arg_tuple(args, nargs);
@@ -2207,6 +2227,60 @@ static void pygl_set_flag_everywhere(int slot, uint8_t bit, int enable)
 }
 
 
+static PyObject *pygl_py_set_error_source(PyObject *module, PyObject *args)
+{
+    const char *api_name;
+    PyObject *proc = Py_None;
+    int slot = -1, gl_family = 0;
+    unsigned int no_error = 0;
+    uint8_t api;
+    (void)module;
+    if (!PyArg_ParseTuple(args, "siOIp", &api_name, &slot, &proc, &no_error,
+                          &gl_family)) {
+        return NULL;
+    }
+    for (api = 0; api < PYGL_API_COUNT; api++) {
+        if (strcmp(pygl_api_name(api), api_name) == 0) {
+            break;
+        }
+    }
+    if (api >= PYGL_API_COUNT) {
+        PyErr_Format(PyExc_ValueError, "no such API: %s", api_name);
+        return NULL;
+    }
+    if (proc != Py_None && !PyObject_TypeCheck(proc, &PyGLProc_Type)) {
+        PyErr_SetString(PyExc_TypeError,
+                        "expected an OpenGL entry point or None");
+        return NULL;
+    }
+    pygl_install_error_source(api, slot, proc, no_error, gl_family);
+    Py_RETURN_NONE;
+}
+
+
+static PyObject *pygl_py_error_source(PyObject *module, PyObject *name)
+{
+    const char *api_name = PyUnicode_AsUTF8(name);
+    uint8_t api;
+    (void)module;
+    if (api_name == NULL) {
+        return NULL;
+    }
+    for (api = 0; api < PYGL_API_COUNT; api++) {
+        if (strcmp(pygl_api_name(api), api_name) == 0) {
+            const PyGLErrorSource *source = &pygl_error_sources[api];
+            return Py_BuildValue("{sisIsOsO}", "slot", source->slot, "no_error",
+                                 source->no_error, "active",
+                                 source->active ? Py_True : Py_False,
+                                 "gl_family",
+                                 source->gl_family ? Py_True : Py_False);
+        }
+    }
+    PyErr_Format(PyExc_ValueError, "no such API: %s", api_name);
+    return NULL;
+}
+
+
 static PyObject *pygl_py_set_error_checking(PyObject *module, PyObject *args)
 {
     PyObject *target = Py_None;
@@ -2258,8 +2332,6 @@ static PyObject *pygl_py_configure(PyObject *module, PyObject *args, PyObject *k
     pygl_array_size_checking = size_checking;
     pygl_size_1_array_unpack = unpack;
     pygl_default_flags = error_checking ? PYGL_F_CHECK_ERRORS : 0;
-    Py_XSETREF(pygl_error_proc,
-               error_proc == Py_None ? NULL : Py_NewRef(error_proc));
     Py_XSETREF(pygl_ctypes_simple, Py_NewRef(simple));
     Py_XSETREF(pygl_ctypes_pointer, Py_NewRef(pointer));
     Py_XSETREF(pygl_support, Py_NewRef(support));
@@ -2297,7 +2369,24 @@ static PyObject *pygl_py_configure(PyObject *module, PyObject *args, PyObject *k
         }
         Py_XSETREF(pygl_array_types, resolved);
     }
-    pygl_error_slot = error_slot;
+    /* glGetError answers for the GL family until each of them says otherwise
+     * through set_error_source.  Nothing else is polled: an API whose errors
+     * this cannot ask for is better unchecked than checked with GL's, which
+     * would report a GL error against whichever of its calls asked next. */
+    {
+        static const uint8_t gl_family[] = {PYGL_API_GL, PYGL_API_GLES1,
+                                            PYGL_API_GLES2, PYGL_API_GLES3,
+                                            PYGL_API_GLSC2};
+        size_t index;
+        uint8_t api;
+        for (api = 0; api < PYGL_API_COUNT; api++) {
+            pygl_install_error_source(api, -1, NULL, 0u, 0);
+        }
+        for (index = 0; index < sizeof(gl_family) / sizeof(gl_family[0]); index++) {
+            pygl_install_error_source(gl_family[index], error_slot, error_proc,
+                                      0u, 1);
+        }
+    }
     pygl_get_current_context = (void *(*)(void))(uintptr_t)getter;
     (void)strict;  /* accepted for compatibility; the layer does not read it */
     if (pygl_default_flags) {
@@ -2534,6 +2623,14 @@ static PyMethodDef pygl_methods[] = {
      "The address the current context has resolved an entry point to."},
     {"set_error_checking", pygl_py_set_error_checking, METH_VARARGS,
      "Turn per-call error checking on or off, for one entry point or all."},
+    {"set_error_source", pygl_py_set_error_source, METH_VARARGS,
+     PyDoc_STR("set_error_source($module, api, slot, proc, no_error, "
+               "gl_family)\n--\n\n"
+               "How one API is asked for its errors: its getError entry "
+               "point, the code that means success, and whether its errors "
+               "are GL's.")},
+    {"error_source", pygl_py_error_source, METH_O,
+     "What an API's error checking is set to, for tests to read back."},
     {"error_checking_suspended", pygl_py_error_checking_suspended, METH_NOARGS,
      PyDoc_STR("error_checking_suspended($module)\n--\n\n"
                "Whether this thread is inside a glBegin block.")},

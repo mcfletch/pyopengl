@@ -332,6 +332,31 @@ enum { PYGL_ERRORS_GETERROR = 0, PYGL_ERRORS_DEBUG = 1 };
 extern int pygl_error_mode;
 extern PYGL_THREAD_LOCAL int pygl_debug_pending;
 
+/* How one API is asked for its errors.
+ *
+ * The APIs do not agree on the question or on the answer: GL asks glGetError
+ * and calls zero success, EGL asks eglGetError and calls EGL_SUCCESS (0x3000)
+ * success, and GLX and WGL have nothing to poll at all.  One getError standing
+ * in for all of them reports none of EGL's errors and attributes GL's to
+ * whichever EGL call asks next, so each API carries its own.
+ *
+ * `OpenGL/raw/<api>/_errors.py` is where the policy is stated; these are
+ * filled in from the checker it builds, so both implementations read one
+ * statement of it.
+ */
+typedef struct {
+    int slot;              /* dispatch slot of this API's getError */
+    PyObject *proc;        /* its GLProc, so an unresolved slot can resolve */
+    unsigned int no_error; /* the code that means "nothing went wrong" */
+    int active;            /* whether this API is polled at all */
+    /* Whether this API's errors are GL's: only those are reported by the
+     * GL_KHR_debug callback, and only those are suspended inside a glBegin
+     * block, which is a GL construct. */
+    int gl_family;
+} PyGLErrorSource;
+
+extern PyGLErrorSource pygl_error_sources[PYGL_API_COUNT];
+
 int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs);
 
 /* GL_KHR_debug is a cheaper way to *notice* an error, not a different policy
@@ -341,10 +366,17 @@ int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs);
  * "what a caller sees does not change" true. */
 static inline int pygl_check_needed(GLProc *self)
 {
+    const PyGLErrorSource *source;
     if (!(pygl_current->flags[self->info->slot] & PYGL_F_CHECK_ERRORS)) {
         return 0;
     }
-    if (pygl_error_mode == PYGL_ERRORS_DEBUG) {
+    source = &pygl_error_sources[self->info->api];
+    if (!source->active) {
+        /* Nothing to ask.  GLX and WGL are here, as they are under ctypes,
+         * where their checker answers its no-error result and never raises. */
+        return 0;
+    }
+    if (pygl_error_mode == PYGL_ERRORS_DEBUG && source->gl_family) {
         return pygl_debug_pending;
     }
     return 1;

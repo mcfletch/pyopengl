@@ -28,3 +28,9 @@ if _get_error and _ErrorChecker:
     )
 else:
     _error_checker = None
+
+# Both implementations read this one statement of the policy: the ctypes
+# bindings call the checker, and the compiled dispatch layer is handed the
+# function it asks, the code it calls success and the class it raises.
+from OpenGL import _dispatch as _d
+_d.register_error_source('EGL', _error_checker)

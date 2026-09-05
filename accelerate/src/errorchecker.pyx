@@ -18,6 +18,10 @@ cdef class _ErrorChecker:
     cdef public object _getErrors
     cdef public object _errorClass
     cdef public int _noErrorResult 
+    #: whether this API's calls are made with a GL context current; read
+    #: by callers and by the dispatch layer, so both implementations
+    #: answer for it.
+    cdef public int needs_context
     
     def __init__( self, platform, baseOperation, noErrorResult=0, errorClass=None, needs_context=True ):
         """Initialize from a platform module/reference
@@ -34,6 +38,7 @@ cdef class _ErrorChecker:
         
         self.doChecks = bool( _configflags.ERROR_CHECKING and self._getErrors )
         self.suspended = False
+        self.needs_context = bool( needs_context )
         self.checkContext = bool( _configflags.CONTEXT_CHECKING and needs_context )
     
     def glCheckError( 

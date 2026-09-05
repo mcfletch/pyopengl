@@ -174,11 +174,36 @@ which would otherwise let the driver write past the end of it.</p>
 <h2>Error checking</h2>
 
 <p><code>OpenGL.ERROR_CHECKING</code> is read when the layer is configured and
-applies per entry point per context.  <code>glGetError</code> is called from C
-rather than through a Python callback, so checking costs the driver round trip
-and nothing else.  <code>OpenGL._dispatch.set_error_checking(enable,
+applies per entry point per context.  The API's <code>getError</code> is called
+from C rather than through a Python callback, so checking costs the driver
+round trip and nothing else.  <code>OpenGL._dispatch.set_error_checking(enable,
 entry_point=None)</code> changes it at run time, for one entry point or for
 all &#8212; which the import-time flag cannot do.</p>
+
+<p>Which function is asked is a property of the API the entry point belongs to,
+because the APIs do not agree on the question or on the answer:</p>
+
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>API</th><th>asked</th><th>means success</th><th>raises</th></tr>
+<tr><td>GL, GLES1/2/3, GLSC2</td><td><code>glGetError</code></td>
+    <td><code>GL_NO_ERROR</code> (0)</td><td><code>GLError</code></td></tr>
+<tr><td>EGL</td><td><code>eglGetError</code></td>
+    <td><code>EGL_SUCCESS</code> (0x3000)</td><td><code>EGLError</code></td></tr>
+<tr><td>GLX, WGL</td><td>nothing to poll</td><td>&#8212;</td>
+    <td>not checked</td></tr>
+</table>
+
+<p>Each API states this once, in <code>OpenGL/raw/&lt;api&gt;/_errors.py</code>,
+and both implementations read that statement: the ctypes bindings call the
+checker it builds, and <code>register_error_source</code> hands the same three
+facts to the compiled layer, which does the call itself.  A single
+<code>glGetError</code> answering for all of them would report none of EGL's
+errors, and where a GL context happened to be current would report a GL error
+against whichever EGL call asked next.</p>
+
+<p><code>GL_KHR_debug</code> below, and the suspension <code>glBegin</code>
+performs, apply to the GL family alone: both are GL constructs, and an EGL call
+is checked by asking EGL either way.</p>
 
 <h3>Checking through GL_KHR_debug</h3>
 
