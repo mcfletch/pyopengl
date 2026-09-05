@@ -4,6 +4,7 @@ import os, sys, subprocess, logging
 import pytest
 from functools import wraps
 from OpenGL.GLUT import glutInit
+import backends
 from checkutils import SKIP_EXIT_CODE
 
 WAYLAND = os.environ.get('XDG_SESSION_TYPE') == 'wayland'
@@ -66,11 +67,13 @@ def check_test(func):
     @wraps(func)
     def test_x():
         log.info('Starting test: %s', filename)
-        # These are stand-alone *windowed* scripts; the headless egl backend
-        # (PYOPENGL_PLATFORM=egl + no window) has no equivalent for them, so run
-        # them in the default windowed mode rather than propagating egl.
+        # These are stand-alone *windowed* scripts, and a headless backend has
+        # no equivalent for them -- egl brings PYOPENGL_PLATFORM=egl and no
+        # window, cgl has no window server to ask.  Run them in the default
+        # windowed mode rather than propagating one, since a child that skipped
+        # would produce no output and read here as a failure.
         env = dict(os.environ)
-        if env.get('TEST_WINDOWING', '').strip().lower() == 'egl':
+        if backends.is_headless(backends.requested(env)):
             env.pop('TEST_WINDOWING', None)
         pipe = subprocess.Popen(
             [

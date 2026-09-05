@@ -8,8 +8,9 @@ Selection order matches ``basetestcase``:
 3. Default preference when ``TEST_WINDOWING`` is unset: glfw, then pygame.
 """
 from __future__ import print_function
-import os
 import importlib.util
+
+import backends
 
 
 def _installed(name):
@@ -24,35 +25,34 @@ def _installed(name):
         return False
 
 
-_AVAILABLE = [name for name in ('glfw', 'pygame') if _installed(name)]
+_AVAILABLE = [name for name in backends.WINDOWED if _installed(name)]
 
 if not _AVAILABLE:
     raise ImportError(
         'No windowing backend available for tests; install pygame or glfw'
     )
 
-_REQUESTED = os.environ.get('TEST_WINDOWING', '').strip().lower() or None
-if _REQUESTED and _REQUESTED not in ('pygame', 'glfw', 'egl'):
-    raise ValueError(
-        'TEST_WINDOWING=%r is not recognised (expected "pygame", "glfw" or "egl")'
-        % (_REQUESTED,)
-    )
-if _REQUESTED == 'egl':
-    # The headless egl backend forces PYOPENGL_PLATFORM=egl process-wide, which is
-    # incompatible with the windowed context this decorator creates.  Provide a
-    # gltest that skips rather than crashing.
+_REQUESTED = backends.requested()
+if _REQUESTED is not None and backends.is_headless(_REQUESTED):
+    # A headless backend has no window for the context this decorator creates:
+    # egl forces PYOPENGL_PLATFORM=egl process-wide, and cgl has no window
+    # server to ask.  Provide a gltest that skips rather than crashing.
     import functools
     import unittest
+
+    _HEADLESS_REASON = (
+        'windowed gltest is unavailable under the headless %s backend'
+        % (_REQUESTED,)
+    )
 
     def gltest(maybe_function=None, *args, **named):
         def wrap(function):
             @functools.wraps(function)
             def skipped(*a, **k):
-                raise unittest.SkipTest(
-                    'windowed gltest is unavailable under the headless egl backend')
+                raise unittest.SkipTest(_HEADLESS_REASON)
             return skipped
         return wrap(maybe_function) if callable(maybe_function) else wrap
-    _BACKEND = 'egl'
+    _BACKEND = _REQUESTED
 else:
     if _REQUESTED and _REQUESTED not in _AVAILABLE:
         raise ImportError(
@@ -61,7 +61,7 @@ else:
         )
     _BACKEND = _REQUESTED or _AVAILABLE[0]
 
-if _BACKEND == 'egl':
+if backends.is_headless(_BACKEND):
     pass
 elif _BACKEND == 'pygame':
     from testdecorator_pygame import *  # noqa: F401,F403

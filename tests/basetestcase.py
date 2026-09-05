@@ -9,8 +9,9 @@ Selection order:
 """
 
 from __future__ import print_function
-import os
 import importlib.util
+
+import backends
 
 
 def _installed(name):
@@ -25,33 +26,35 @@ def _installed(name):
         return False
 
 
-_AVAILABLE = [name for name in ('glfw', 'pygame') if _installed(name)]
+_AVAILABLE = [name for name in backends.WINDOWED if _installed(name)]
 
 if not _AVAILABLE:
     raise ImportError(
         'No windowing backend available for tests; install pygame or glfw'
     )
 
-_REQUESTED = os.environ.get('TEST_WINDOWING', '').strip().lower() or None
-if _REQUESTED and _REQUESTED not in ('pygame', 'glfw', 'egl'):
-    raise ValueError(
-        'TEST_WINDOWING=%r is not recognised (expected "pygame", "glfw" or "egl")'
-        % (_REQUESTED,)
-    )
-if _REQUESTED == 'egl':
-    # The headless egl backend forces PYOPENGL_PLATFORM=egl process-wide; these
-    # legacy root-level tests create their own *windowed* GL context, which is
-    # incompatible with that platform (a window + egl-device platform segfaults).
-    # There is no windowed equivalent here, so provide a BaseTest that skips.
+_REQUESTED = backends.requested()
+if _REQUESTED is not None and backends.is_headless(_REQUESTED):
+    # A headless backend renders with no window at all -- egl forces
+    # PYOPENGL_PLATFORM=egl process-wide, and cgl has no window server to ask.
+    # These legacy root-level tests create their own *windowed* GL context,
+    # which is incompatible with either (a window plus the egl-device platform
+    # segfaults).  There is no windowed equivalent here, so provide a BaseTest
+    # that skips.
     import unittest
 
+    _HEADLESS_REASON = (
+        'windowed BaseTest is unavailable under the headless %s backend'
+        % (_REQUESTED,)
+    )
+
     class BaseTest(unittest.TestCase):
-        """Placeholder under TEST_WINDOWING=egl: windowed tests can't run headless."""
+        """Placeholder under a headless backend: windowed tests cannot run."""
 
         def setUp(self):
-            self.skipTest('windowed BaseTest is unavailable under the headless egl backend')
+            self.skipTest(_HEADLESS_REASON)
 
-    _BACKEND = 'egl'
+    _BACKEND = _REQUESTED
 else:
     if _REQUESTED and _REQUESTED not in _AVAILABLE:
         raise ImportError(
@@ -59,7 +62,7 @@ else:
         )
     _BACKEND = _REQUESTED or _AVAILABLE[0]
 
-if _BACKEND == 'egl':
+if backends.is_headless(_BACKEND):
     pass
 elif _BACKEND == 'pygame':
     from basetestcase_pygame import *  # noqa: F401,F403

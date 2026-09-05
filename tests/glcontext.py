@@ -30,6 +30,8 @@ import os
 import time
 import ctypes
 import logging
+
+import backends
 import unittest
 import contextlib
 import importlib.util
@@ -52,12 +54,11 @@ def _installed(name):
         return False
 
 
-#: backends that need an installed windowing toolkit (vs. the headless ones).
-_WINDOWED = ('glfw', 'pygame')
-#: the two headless backends, one per platform: EGL's device platform on Linux,
-#: CGL on macOS.  Neither needs a display server.
-_HEADLESS = ('egl', 'cgl')
-_ALL_BACKENDS = _WINDOWED + _HEADLESS
+#: The vocabulary is :mod:`backends`', so that this module, ``basetestcase``
+#: and ``testdecorator`` cannot disagree about which names TEST_WINDOWING may
+#: take -- a name one accepts and another does not is a collection error.
+_WINDOWED = backends.WINDOWED
+_ALL_BACKENDS = backends.ALL
 
 
 def pick_backend():
@@ -72,12 +73,7 @@ def pick_backend():
        ``pygame``), honour ``TEST_WINDOWING`` when set and available, and
        default to glfw then pygame.
     """
-    requested = os.environ.get('TEST_WINDOWING', '').strip().lower() or None
-    if requested and requested not in _ALL_BACKENDS:
-        raise ValueError(
-            'TEST_WINDOWING=%r is not recognised (expected one of %s)'
-            % (requested, ', '.join(_ALL_BACKENDS))
-        )
+    requested = backends.requested()
 
     if requested == 'egl':
         log.info('Test windowing backend: egl (headless EGL device)')
