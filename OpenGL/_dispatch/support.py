@@ -19,7 +19,7 @@ __all__ = [
     'raise_gl_error',
     'ctypes_callable',
     'module_for',
-    'array_type_list',
+    'array_type_map',
     'swallowed_for',
 ]
 
@@ -345,9 +345,27 @@ def demote_and_call(proc, method, args, keywords):
     return getattr(built, method)(*args, **keywords)
 
 
-def array_type_list(names):
-    """The ``OpenGL.arrays`` classes, in the order the element table indexes."""
-    return [getattr(arrays, name) for name in names]
+def array_type_map():
+    """Every ``OpenGL.arrays`` class, by the name the C element table names it.
+
+    The C table carries a name per element and resolves it here at configure
+    time, filling its own table in its own order -- so the two sides share a
+    name and never a position.  They did share one, and adding an element type
+    shifted every index after it: a tree whose Python was newer than its built
+    extension converted with the wrong class and said nothing.
+
+    Built from the package rather than from a generated list, so a class the
+    table names is found if it exists at all, and reported by name if it does
+    not.
+    """
+    found = {'ArrayDatatype': arrays.ArrayDatatype}
+    for name in dir(arrays):
+        if not name.endswith('Array'):
+            continue
+        value = getattr(arrays, name)
+        if hasattr(value, 'asArray'):
+            found[name] = value
+    return found
 
 
 #: Mirrors the PYGL_RET_* enum in src/c/pygl.h.

@@ -153,7 +153,7 @@ def configure():
         error_slot = _tables.SLOTS[('GL', 'glGetError')]
     _c._configure(
         support,
-        support.array_type_list(_tables.ARRAY_TYPES),
+        support.array_type_map(),
         ctypes_simple=ctypes._SimpleCData,
         ctypes_pointer=ctypes._Pointer,
         error_slot=error_slot,

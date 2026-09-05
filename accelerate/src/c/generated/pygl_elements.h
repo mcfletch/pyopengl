@@ -58,4 +58,52 @@ static const PyGLElement pygl_elem_unsigned_int = {'I', 'L', 0, 4, 39, "GLuintAr
  * size an allocation of them. */
 static const PyGLElement pygl_elem_voidp = {0, 0, 0, (uint8_t)sizeof(void *), 40, "GLvoidpArray"};
 
+/* The OpenGL.arrays class each index above means, resolved by
+ * name at configure time.  Nothing outside this file depends
+ * on the order. */
+static const char *const pygl_array_type_names[] = {
+    "ArrayDatatype",
+    "EGLAttribArray",
+    "GLuintArray",
+    "GLintArray",
+    "GLuintArray",
+    "GLbooleanArray",
+    "GLbyteArray",
+    "GLcharArray",
+    "GLcharARBArray",
+    "GLdoubleArray",
+    "GLclampfArray",
+    "GLfixedArray",
+    "GLdoubleArray",
+    "GLuintArray",
+    "GLfixedArray",
+    "GLfloatArray",
+    "GLuintArray",
+    "GLintArray",
+    "GLint64Array",
+    "GLint64Array",
+    "GLintptrArray",
+    "GLintptrArray",
+    "GLshortArray",
+    "GLsizeiArray",
+    "GLsizeiptrArray",
+    "GLsizeiptrArray",
+    "GLubyteArray",
+    "GLuintArray",
+    "GLuint64Array",
+    "GLuint64Array",
+    "GLushortArray",
+    "GLintptrArray",
+    "GLintArray",
+    "GLuintArray",
+    "GLbyteArray",
+    "GLdoubleArray",
+    "GLfloatArray",
+    "GLintArray",
+    "GLint64Array",
+    "GLuintArray",
+    "GLvoidpArray",
+};
+#define PYGL_ARRAY_TYPE_COUNT ((Py_ssize_t)(sizeof(pygl_array_type_names) / sizeof(pygl_array_type_names[0])))
+
 #endif /* PYGL_ELEMENTS_H */

@@ -6,6 +6,9 @@
  * into this file through the macros in pygl.h.
  */
 #include "pygl.h"
+/* pygl_array_type_names: which OpenGL.arrays class each element index
+ * means, so this file can fill its own table by name. */
+#include "generated/pygl_elements.h"
 
 /* ------------------------------------------------------------------ *
  * module-level state
@@ -2252,11 +2255,40 @@ static PyObject *pygl_py_configure(PyObject *module, PyObject *args, PyObject *k
     Py_XSETREF(pygl_ctypes_simple, Py_NewRef(simple));
     Py_XSETREF(pygl_ctypes_pointer, Py_NewRef(pointer));
     Py_XSETREF(pygl_support, Py_NewRef(support));
-    if (!PyList_Check(array_types)) {
-        PyErr_SetString(PyExc_TypeError, "array_types must be a list");
+    /* Resolve the array classes by name into this build's own order.  The
+     * index in the element table is compiled in and is ours alone; sharing a
+     * *position* with a Python list meant that adding an element type there
+     * silently shifted every class after it. */
+    if (!PyDict_Check(array_types)) {
+        PyErr_SetString(PyExc_TypeError,
+                        "array_types must be a mapping of name to array class");
         return NULL;
     }
-    Py_XSETREF(pygl_array_types, Py_NewRef(array_types));
+    {
+        Py_ssize_t index;
+        PyObject *resolved = PyList_New(PYGL_ARRAY_TYPE_COUNT);
+        if (resolved == NULL) {
+            return NULL;
+        }
+        for (index = 0; index < PYGL_ARRAY_TYPE_COUNT; index++) {
+            PyObject *type =
+                PyDict_GetItemString(array_types, pygl_array_type_names[index]);
+            if (type == NULL) {
+                Py_DECREF(resolved);
+                if (!PyErr_Occurred()) {
+                    PyErr_Format(PyExc_RuntimeError,
+                                 "this build of the dispatch extension needs "
+                                 "OpenGL.arrays.%s and it is not there; the "
+                                 "extension and OpenGL are out of step, so "
+                                 "rebuild PyOpenGL_accelerate",
+                                 pygl_array_type_names[index]);
+                }
+                return NULL;
+            }
+            PyList_SET_ITEM(resolved, index, Py_NewRef(type));
+        }
+        Py_XSETREF(pygl_array_types, resolved);
+    }
     pygl_error_slot = error_slot;
     pygl_get_current_context = (void *(*)(void))(uintptr_t)getter;
     (void)strict;  /* accepted for compatibility; the layer does not read it */
