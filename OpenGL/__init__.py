@@ -76,6 +76,13 @@ import occurs the flags should no longer be changed.
         has been initialized (something later Linux GLs are
         very picky about).
 
+        GL and GLU only.  EGL, GLX and WGL manage the display,
+        the config and the context itself, so their calls are
+        made before a GL context exists and by definition;
+        their errors are checked whether or not one is
+        current, since the part of a program that calls them
+        is the part that has none.
+
         Default: False
 
     STORE_POINTERS -- if set to True, PyOpenGL array operations

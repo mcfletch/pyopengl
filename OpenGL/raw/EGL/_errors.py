@@ -21,6 +21,10 @@ if _get_error and _ErrorChecker:
         _get_error,
         0x3000, # EGL_SUCCESS,
         errorClass = EGLError,
+        # EGL is how a program *gets* a GL context, so its calls are made
+        # before there is one.  Gating on a current GL context would report no
+        # EGL errors in the part of a program where every EGL call happens.
+        needs_context = False,
     )
 else:
     _error_checker = None

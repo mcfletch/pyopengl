@@ -19,8 +19,14 @@ cdef class _ErrorChecker:
     cdef public object _errorClass
     cdef public int _noErrorResult 
     
-    def __init__( self, platform, baseOperation, noErrorResult=0, errorClass=None ):
-        """Initialize from a platform module/reference"""
+    def __init__( self, platform, baseOperation, noErrorResult=0, errorClass=None, needs_context=True ):
+        """Initialize from a platform module/reference
+        
+        needs_context -- whether this API's calls are made with a GL context
+        current.  EGL, GLX and WGL manage the display, the config and the
+        context itself, so theirs are made before one exists and by definition;
+        waiting for a context there would report none of their errors.
+        """
         self._isValid = platform.CurrentContextIsValid
         self._getErrors = baseOperation
         self._noErrorResult = noErrorResult
@@ -28,7 +34,7 @@ cdef class _ErrorChecker:
         
         self.doChecks = bool( _configflags.ERROR_CHECKING and self._getErrors )
         self.suspended = False
-        self.checkContext = _configflags.CONTEXT_CHECKING
+        self.checkContext = bool( _configflags.CONTEXT_CHECKING and needs_context )
     
     def glCheckError( 
         self,
@@ -53,7 +59,10 @@ cdef class _ErrorChecker:
         if self.doChecks:
             if self.checkContext:
                 if not self._isValid():
-                    return 
+                    # Nothing to ask, so nothing to report -- but errcheck's
+                    # return value *is* the call's result, so returning here
+                    # without it would answer None for every such call.
+                    return result
             err = self._getErrors()
             if err != self._noErrorResult:
                 if self._errorClass is None:

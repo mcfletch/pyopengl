@@ -230,14 +230,23 @@ if _configflags.ERROR_CHECKING:
             """
             _getErrors = None
             suspended = False
-            def __init__( self, platform, baseOperation=None, noErrorResult=0, errorClass=GLError ):
-                """Initialize from a platform module/reference"""
+            def __init__( self, platform, baseOperation=None, noErrorResult=0, errorClass=GLError, needs_context=True ):
+                """Initialize from a platform module/reference
+                
+                needs_context -- whether this API's calls are made with a GL
+                    context current.  EGL, GLX and WGL manage the display, the
+                    config and the context itself, so theirs are made before
+                    one exists and by definition; waiting for a context there
+                    would report none of their errors, since the part of a
+                    program that calls them is the part with no GL context.
+                """
                 self._isValid = platform.CurrentContextIsValid
                 self._getErrors = baseOperation
                 self._noErrorResult = noErrorResult
                 self._errorClass = errorClass
+                self.needs_context = needs_context
                 if self._getErrors:
-                    if _configflags.CONTEXT_CHECKING:
+                    if _configflags.CONTEXT_CHECKING and needs_context:
                         self._registeredChecker = self.safeGetError 
                     else:
                         self._registeredChecker = self._getErrors
@@ -250,10 +259,15 @@ if _configflags.ERROR_CHECKING:
                     return False 
                 return True
             def safeGetError( self ):
-                """Check for error, testing for context before operation"""
+                """Check for error, testing for context before operation
+                
+                With no context there is nothing to ask, which is "no error to
+                report" rather than an error of its own: answering None instead
+                would be unequal to _noErrorResult and raise one.
+                """
                 if self._isValid():
                     return self._getErrors()
-                return None 
+                return self._noErrorResult 
             def nullGetError( self ):
                 """Used as error-checker when no error checking should be done"""
                 return self._noErrorResult

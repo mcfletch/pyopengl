@@ -5,6 +5,8 @@
 from OpenGL.platform import PLATFORM as _p
 from OpenGL.error import _ErrorChecker
 if _ErrorChecker:
-    _error_checker = _ErrorChecker( _p, None )
+    # GLX manages the display and the context, so its calls are made
+    # before a GL context exists; see the EGL checker beside this one.
+    _error_checker = _ErrorChecker( _p, None, needs_context = False )
 else:
     _error_checker = None
