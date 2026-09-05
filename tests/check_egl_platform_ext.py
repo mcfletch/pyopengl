@@ -10,8 +10,19 @@ from OpenGL.EGL.EXT import platform_base
 from OpenGL.EGL.MESA import platform_gbm
 import ctypes, glob
 
+import checkutils
+from glcontext_egl import software_forced
+
 
 def main():
+    # This opens a hardware render node and builds a GBM display on it, which
+    # is the one thing LIBGL_ALWAYS_SOFTWARE rules out: Mesa declines to force
+    # software rasterisation onto a hardware device and then dereferences the
+    # screen it declined to build, taking the process down with it.
+    if software_forced():
+        checkutils.skip(
+            'LIBGL_ALWAYS_SOFTWARE rules out the hardware device this opens'
+        )
     cards = sorted(glob.glob("/dev/dri/renderD*"))
     if not cards:
         print('SKIP')
