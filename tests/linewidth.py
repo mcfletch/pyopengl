@@ -1,5 +1,6 @@
 import testdecorator
 from OpenGL.GL import *
+import checkutils
 
 
 def drawOneLine(x1, y1, x2, y2, width):
@@ -25,4 +26,4 @@ def test_linewidth():
 
 
 if __name__ == "__main__":
-    test_linewidth()
+    checkutils.run_check(test_linewidth)

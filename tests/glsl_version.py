@@ -3,6 +3,7 @@ from __future__ import print_function
 import testdecorator
 from OpenGL.GL import glGetString, GL_SHADING_LANGUAGE_VERSION
 from OpenGL._bytes import as_8_bit
+import checkutils
 
 @testdecorator.gltest(name='Get GL_SHADING_LANGUAGE_VERSION')
 def show_glsl_version():
@@ -12,5 +13,5 @@ def show_glsl_version():
     return version 
 
 if __name__ == "__main__":
-    print( show_glsl_version() )
+    checkutils.run_check(lambda: print(show_glsl_version()))
 

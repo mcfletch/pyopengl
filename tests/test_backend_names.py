@@ -88,3 +88,36 @@ class TestOnlyOneModuleReadsTheVariable:
             source = handle.read()
         assert 'backends.' in source, (
             '%s does not read the shared list' % (module,))
+
+
+class TestWhetherThereIsAWindowServer:
+    """The windowed check-scripts open a window, and freeglut answers a
+    display it cannot open by writing to stderr and calling ``exit()``.  The
+    process is gone before it can say what happened, so the harness sees a
+    script that produced no output and reports a failure:
+
+        freeglut (foo): failed to open display ''
+        RuntimeError: Test script failure on test_check_crash_on_glutinit
+
+    Having the library installed is a different question from having somewhere
+    to put a window, so the gate has to ask both.
+    """
+
+    def test_an_x_display_is_a_window_server(self):
+        assert backends.has_window_server({'DISPLAY': ':0'}) is True
+
+    def test_so_is_a_wayland_one(self):
+        assert backends.has_window_server({'WAYLAND_DISPLAY': 'wayland-0'}) is True
+
+    def test_neither_is_not(self):
+        """What a CI runner has: the libraries, and nowhere to draw."""
+        assert backends.has_window_server({}) is False
+
+    def test_an_empty_setting_is_no_setting(self):
+        """An unexported shell variable expands to the empty string."""
+        assert backends.has_window_server({'DISPLAY': ''}) is False
+
+    def test_it_reads_the_environment_by_default(self):
+        import os
+
+        assert backends.has_window_server() == backends.has_window_server(os.environ)

@@ -4,6 +4,7 @@ from __future__ import print_function
 import testdecorator
 from OpenGL.GL import *
 from OpenGL.GL import shaders
+import checkutils
 
 vertex_shader = """#version 150 core
     in float inValue;
@@ -71,4 +72,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    checkutils.run_check(main)

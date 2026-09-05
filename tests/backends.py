@@ -47,3 +47,29 @@ def requested(environ=None):
 def is_headless(name):
     """Whether ``name`` renders without a window or a display server."""
     return name in HEADLESS
+
+
+def has_window_server(environ=None):
+    """Whether there is somewhere to open a window.
+
+    Having a windowing library installed is a different question from having a
+    display to use it on, and the windowed check-scripts need both: freeglut
+    answers a display it cannot open by writing to stderr and calling
+    ``exit()``, which leaves the harness a script that produced no output.
+
+    On Linux the answer is whether X11 or Wayland named a display.  Elsewhere
+    the window server is part of the running session and there is no equivalent
+    variable to read, so the answer is yes and what cannot be opened says so
+    when it is opened.
+    """
+    import os
+    import sys
+
+    if environ is None:
+        environ = os.environ
+    if not sys.platform.startswith('linux'):
+        return True
+    return bool(
+        environ.get('DISPLAY', '').strip()
+        or environ.get('WAYLAND_DISPLAY', '').strip()
+    )

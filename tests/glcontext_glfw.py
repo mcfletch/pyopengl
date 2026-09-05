@@ -26,11 +26,15 @@ _glfw_ready = False
 
 
 def _ensure_glfw():
+    """Whether glfw is initialised, initialising it once if it is not.
+
+    It fails where there is no display server to talk to, which is the same
+    thing as a window it cannot open and is reported the same way.
+    """
     global _glfw_ready
     if not _glfw_ready:
-        if not glfw.init():
-            raise RuntimeError('Failed to initialise glfw')
-        _glfw_ready = True
+        _glfw_ready = bool(glfw.init())
+    return _glfw_ready
 
 
 class GLFWBackend(object):
@@ -42,7 +46,8 @@ class GLFWBackend(object):
     _window = None
 
     def _create_context(self):
-        _ensure_glfw()
+        if not _ensure_glfw():
+            self.skipTest('glfw could not initialise: no display server?')
         glfw.default_window_hints()
 
         api = getattr(self, 'api', 'gl').lower()

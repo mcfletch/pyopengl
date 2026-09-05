@@ -17,6 +17,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 log = logging.getLogger(__name__)
 
 
+#: Skip reason for a machine with the libraries but nowhere to draw.  These
+#: scripts open a window, and what they call answers a display it cannot open
+#: by ending the process -- freeglut writes "failed to open display" to stderr
+#: and calls exit() -- which reaches the harness as a script that produced no
+#: output rather than as the absent display it is.
+NO_WINDOW_SERVER = 'No display server to open a window on'
+
+
 def glx_only(func):
     @wraps(func)
     def glx_only_test(*args, **named):
@@ -24,6 +32,8 @@ def glx_only(func):
             pytest.skip('GLX is not wayland compatible generally')
         if not sys.platform in ('linux', 'linux2'):
             pytest.skip('Linux-only')
+        if not backends.has_window_server():
+            pytest.skip(NO_WINDOW_SERVER)
         return func(*args, **named)
 
     return glx_only_test
@@ -33,6 +43,8 @@ def xlib_only(func):
     def xlib_only_test(*args, **named):
         if WAYLAND:
             pytest.skip('Raw XLIB operations do not work on wayland')
+        if not backends.has_window_server():
+            pytest.skip(NO_WINDOW_SERVER)
         return func(*args, **named)
 
     return xlib_only_test
@@ -45,6 +57,8 @@ def glut_only(func):
             pytest.skip('GLUT has poor wayland support')
         if not glutInit:
             pytest.skip('No GLUT installed')
+        if not backends.has_window_server():
+            pytest.skip(NO_WINDOW_SERVER)
         return func(*args, **named)
 
     return glut_only_test

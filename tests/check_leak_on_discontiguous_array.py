@@ -49,4 +49,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    checkutils.run_check(main)

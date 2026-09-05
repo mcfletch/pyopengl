@@ -22,6 +22,22 @@ def skip(reason):
     raise SystemExit(SKIP_EXIT_CODE)
 
 
+def run_check(function, *args, **named):
+    """Call ``function``, turning a skip into the runner's skip return code.
+
+    A script reaches its context through the same fixture the test cases use,
+    and that fixture skips -- there is no display, the driver will not give the
+    profile asked for -- by raising :exc:`unittest.SkipTest`.  Uncaught in a
+    script, that is a traceback and an empty stdout, which the runner reads as
+    a failure.  Anything else the script raises is its own defect and is left
+    to propagate.
+    """
+    try:
+        return function(*args, **named)
+    except unittest.SkipTest as err:
+        skip(err)
+
+
 def require(module_name):
     """Return ``module_name`` if importable, otherwise skip the check."""
     try:
