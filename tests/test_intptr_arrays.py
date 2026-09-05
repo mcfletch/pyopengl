@@ -3,8 +3,8 @@
 ``GLintptr`` is a whole element type in the API -- buffer offsets
 (``glBindVertexBuffers``), and VDPAU surface handles under the alias
 ``GLvdpauSurfaceNV`` -- and an argument declared ``const GLintptr *`` is an
-array like any other. Without a datatype for it, the ctypes path has nothing to
-convert with and hands a numpy array straight to ctypes, which refuses it:
+array like any other. With no datatype for it the ctypes path has nothing to
+convert with, and hands a numpy array straight to ctypes, which refuses it:
 
     ctypes.ArgumentError: argument 2: expected LP_c_long instance instead of
     numpy.ndarray
@@ -69,11 +69,11 @@ class TestAPointerArgumentGetsItsConversion:
     table -- ``{'offsets': {'array': True}}`` -- and has to find an array type
     for the declared pointer to make one.
 
-    Its escape hatch for a pointer *to a pointer* tested ``_type_`` twice, and
-    a simple ctypes type has a ``_type_`` of its own: it is the struct format
-    character, ``'l'`` for a ``c_long``. So every pointer-to-simple-type took
-    the escape and was silently left unconverted -- no exception, no converter,
-    and a numpy array handed to ctypes as it stands.
+    Its escape hatch for a pointer *to a pointer* has to distinguish one from a
+    pointer to a simple type, and testing for a ``_type_`` attribute does not:
+    a simple ctypes type carries one of its own, the struct format character,
+    ``'l'`` for a ``c_long``. Matching there costs no exception and no
+    converter -- the array reaches ctypes as it stands and is refused.
     """
 
     def _wrapped(self, argtype):

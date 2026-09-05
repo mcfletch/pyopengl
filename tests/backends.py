@@ -1,16 +1,15 @@
 """Which windowing backends the suite knows, and what ``TEST_WINDOWING`` names.
 
-Three modules dispatch on that variable -- :mod:`glcontext` for the
-API-agnostic gl/gles/glu suites, :mod:`basetestcase` and :mod:`testdecorator`
-for the legacy root-level ones -- and all three read the vocabulary from here.
-They each used to carry their own copy, so a backend added to one left the
-others raising ``ValueError`` at import: a collection error rather than a test
-result, and one that names the module nobody changed.
+Everything that reads that variable reads it here: :mod:`glcontext`, which
+chooses the backend; :mod:`conftest`, which sets ``PYOPENGL_PLATFORM`` for the
+one backend that needs it; and ``test_checks``, which decides what to hand a
+subprocess.  A name one of them accepts and another refuses is not a wrong
+answer but a suite that will not collect, since two of them refuse by raising
+at import.
 
 A **windowed** backend opens a window on a display server.  A **headless** one
 needs neither, and there is one per platform: EGL's device platform on Linux,
-CGL on macOS.  The legacy root-level tests create their own windowed context
-and have no headless equivalent, so under a headless request they skip.
+CGL on macOS.
 """
 
 #: Backends that open a window, in the order preferred when nothing is asked

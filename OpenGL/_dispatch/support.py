@@ -349,10 +349,10 @@ def array_type_map():
     """Every ``OpenGL.arrays`` class, by the name the C element table names it.
 
     The C table carries a name per element and resolves it here at configure
-    time, filling its own table in its own order -- so the two sides share a
-    name and never a position.  They did share one, and adding an element type
-    shifted every index after it: a tree whose Python was newer than its built
-    extension converted with the wrong class and said nothing.
+    time, filling its own table in its own order, so the two sides share a name
+    and never a position.  A position would have to be agreed by a generated
+    Python list and a compiled index, and a tree whose Python is newer than its
+    built extension would then convert with the wrong class and say nothing.
 
     Built from the package rather than from a generated list, so a class the
     table names is found if it exists at all, and reported by name if it does

@@ -5,12 +5,12 @@ that name against a mapping the Python side hands it at configure time. It fills
 its own table in its own order, so the two sides share a *name* and never an
 index.
 
-They used to share a position: Python passed a list built from a generated
-``ARRAY_TYPES``, and the C read it at a compile-time index. Adding an element
-type shifted every index after it, so a tree whose Python was newer than its
-built extension handed out the wrong class -- ``GLubyteArray`` came back as
-``GLshortArray``, and a 64-byte ``glGetBufferSubData`` returned 128. No error;
-the failure surfaced three call frames away, on a reshape.
+A shared *position* cannot survive an element type being added: every index
+after it moves, so a tree whose Python is newer than its built extension
+converts with the wrong class. That is a wrong answer rather than a crash --
+``GLubyteArray`` answering as ``GLshortArray`` makes a 64-byte
+``glGetBufferSubData`` return 128 -- and it surfaces call frames away from the
+cause. A name survives it, which is why the name is what crosses.
 """
 
 import os
@@ -74,8 +74,8 @@ class TestTheMappingIsByName:
 
 
 class TestAClassTheBuildNeedsAndCannotFind:
-    """The whole point of resolving by name: what used to be a wrong answer is
-    now a refusal that names the class and says what to do."""
+    """Resolving by name makes this a refusal that names the class and says
+    what to do, where an index would quietly answer with the wrong one."""
 
     def test_configure_refuses_a_mapping_that_is_missing_one(self):
         dispatch = pytest.importorskip('OpenGL._dispatch')

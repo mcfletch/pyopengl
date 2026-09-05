@@ -22,18 +22,19 @@ import OpenGL
 if os.environ.get('TEST_NO_ACCELERATE'):
     OpenGL.USE_ACCELERATE = False
 # OpenGL.FULL_LOGGING = True
-OpenGL.CONTEXT_CHECKING = True
 OpenGL.FORWARD_COMPATIBLE_ONLY = False
 OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING = True
 
+# OpenGL.CONTEXT_CHECKING is deliberately not set here.  What an entry point
+# does with no current context is decided before anything builds the entry
+# points, so a module this late cannot ask the question -- and setting it
+# anyway reaches calls that legitimately have no context: EGL enumerates its
+# devices before there is one, and a refused enumeration reads as a machine
+# with no devices on it.  tests/gl/test_no_context_calls.py settles the
+# question in a subprocess instead.
+
 # from OpenGL._bytes import bytes, _NULL_8_BYTE, unicode, as_8_bit
 from OpenGL.GL import *
-
-# What an entry point does with no current context is decided by
-# OpenGL.CONTEXT_CHECKING, which only takes effect if it is set before anything
-# builds the entry points -- so it cannot be asked here, where OpenGL.GL is
-# usually already imported by whatever was collected first.
-# tests/gl/test_no_context_calls.py settles it in a subprocess instead.
 from OpenGL import error
 from OpenGL.GLU import *
 import OpenGL

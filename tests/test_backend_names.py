@@ -1,16 +1,13 @@
 """What ``TEST_WINDOWING`` may name, and who has to agree about it.
 
-Three modules dispatch on it -- ``glcontext`` for the API-agnostic suites,
-``basetestcase`` and ``testdecorator`` for the legacy root-level ones -- and
-each used to carry its own list of the names it accepted. Adding ``cgl`` to one
-left the other two raising ``ValueError`` at import, which is a collection
-error rather than a test result:
+Several modules read it, and :mod:`backends` is the list they read.  Two of
+them refuse an unknown name by raising at import, so a name one accepts and
+another does not is a collection error rather than a test result:
 
     ValueError: TEST_WINDOWING='cgl' is not recognised
-    (expected "pygame", "glfw" or "egl")
 
-They read one list now. These hold them to it, because the failure is not a
-wrong answer but a suite that will not collect at all.
+These hold every reader to the one list, because the cost of a disagreement is
+a suite that will not run at all.
 """
 
 import backends
@@ -57,18 +54,37 @@ class TestReadingTheRequest:
         assert not backends.is_headless('glfw')
 
 
-class TestTheThreeDispatchersAgree:
-    """Each of these imports at collection time, so a name one accepts and
-    another does not is a suite that will not collect."""
+class TestOnlyOneModuleReadsTheVariable:
+    """``glcontext.pick_backend`` chooses the backend for everything now, so a
+    module that read ``TEST_WINDOWING`` for itself would be a second answer to
+    a question with one."""
 
-    @pytest.mark.parametrize('module', ['glcontext', 'basetestcase',
-                                        'testdecorator'])
-    def test_none_of_them_keeps_its_own_list(self, module):
-        import importlib
-        import inspect
+    def test_nobody_compares_it_against_a_literal(self):
+        import os
 
-        source = inspect.getsource(importlib.import_module(module))
-        assert "'pygame', 'glfw', 'egl'" not in source, (
-            '%s carries its own copy of the accepted names' % (module,))
-        assert 'backends' in source, (
+        here = os.path.dirname(os.path.abspath(__file__))
+        offenders = []
+        for name in sorted(os.listdir(here)):
+            if not name.endswith('.py') or name in ('backends.py',
+                                                    'test_backend_names.py'):
+                continue
+            with open(os.path.join(here, name), encoding='utf-8') as handle:
+                source = handle.read()
+            if "TEST_WINDOWING', ''" in source or '"TEST_WINDOWING", ""' in source:
+                offenders.append(name)
+        assert offenders == [], (
+            'these read TEST_WINDOWING themselves rather than through '
+            'backends.requested(): %s' % (', '.join(offenders),))
+
+    @pytest.mark.parametrize('module', ['glcontext.py', 'conftest.py',
+                                        'test_checks.py', 'glget_audit.py'])
+    def test_the_readers_go_through_the_shared_module(self, module):
+        """By path: ``conftest`` as an importable name is the *root* one, and
+        the module meant here is this directory's."""
+        import os
+
+        here = os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(here, module), encoding='utf-8') as handle:
+            source = handle.read()
+        assert 'backends.' in source, (
             '%s does not read the shared list' % (module,))

@@ -15,12 +15,14 @@ import os
 import sys
 import ctypes
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 # Mirror conftest.py: the headless EGL-device backend loads GL entry points
 # through EGL, so PYOPENGL_PLATFORM must be set before anything imports OpenGL.
-if os.environ.get('TEST_WINDOWING', '').strip().lower() == 'egl':
-    os.environ.setdefault('PYOPENGL_PLATFORM', 'egl')
+import backends  # noqa: E402 -- needs the sys.path entry above
 
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+if backends.requested() == 'egl':
+    os.environ.setdefault('PYOPENGL_PLATFORM', 'egl')
 
 import glcontext
 from glget_check import (

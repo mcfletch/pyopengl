@@ -1,73 +1,69 @@
-"""Dispatch the test decorator to a windowing-system specific implementation.
+"""``gltest``: a GL context around a plain function.
 
-Selection order matches ``basetestcase``:
+The stand-alone check scripts in this directory are not test cases -- they are
+programs ``test_checks.py`` runs in a subprocess and reads the output of -- but
+they still need a context.  This gives them one from the same place a test case
+gets one: a backend chosen by :func:`glcontext.pick_backend`, driving
+:class:`glcontext.ContextTestCase`'s fixture.
 
-1. Determine which backends are importable (``pygame``, ``glfw``).
-2. If the ``TEST_WINDOWING`` env var is set, honour it when that backend
-   is available; otherwise fall through to the first available backend.
-3. Default preference when ``TEST_WINDOWING`` is unset: glfw, then pygame.
+    from testdecorator import gltest
+
+    @gltest
+    def function():
+        '''Runs with a 300x300 context current.'''
+
+    @gltest(size=(640, 480), name='Cool Test')
+    def function():
+        '''Runs with a specifically configured one.'''
+
+It borrows that fixture by making one throwaway case and calling its ``setUp``
+and its cleanups, so the lifecycle -- which backend, which profile, tearing the
+context down afterwards -- is the one every other test in the suite gets, and a
+backend is wired up in one place.
 """
-from __future__ import print_function
-import importlib.util
 
-import backends
+from functools import wraps
+
+from glcontext import pick_backend
+from glcontext_desktop import DesktopGLTestCaseBase
 
 
-def _installed(name):
-    """Check whether ``name`` is importable without actually importing it.
+class _DecoratorCase(pick_backend(), DesktopGLTestCaseBase):
+    """A case that exists only for its fixture; nothing collects it."""
 
-    Importing pygame/glfw has side effects (initialises subsystems, allocates
-    memory), so we only probe for the package metadata here.
+    #: What to call the window, where the backend opens one.  The backends ask
+    #: for this through ``_window_title()``, so it is overridden rather than
+    #: assigned over.
+    title = 'gltest'
+
+    def _window_title(self):
+        return self.title
+
+    def runTest(self):                      # pragma: no cover - never run
+        """``unittest.TestCase()`` insists on a method name."""
+
+
+def gltest(maybe_function=None, *, size=(300, 300), name=None):
+    """Run ``function`` with a GL context current, and take it away after.
+
+    Supports both ``@gltest`` and ``@gltest(size=..., name=...)``.  ``name`` is
+    the window title, where the backend has a window to title.
     """
-    try:
-        return importlib.util.find_spec(name) is not None
-    except (ImportError, ValueError):
-        return False
 
+    def make_wrapper(function):
+        @wraps(function)
+        def test_function(*args, **named):
+            case = _DecoratorCase()
+            case.width, case.height = size
+            case.title = name or function.__name__
+            case.setUp()
+            try:
+                return function(*args, **named)
+            finally:
+                case.doCleanups()
 
-_AVAILABLE = [name for name in backends.WINDOWED if _installed(name)]
+        return test_function
 
-if not _AVAILABLE:
-    raise ImportError(
-        'No windowing backend available for tests; install pygame or glfw'
-    )
-
-_REQUESTED = backends.requested()
-if _REQUESTED is not None and backends.is_headless(_REQUESTED):
-    # A headless backend has no window for the context this decorator creates:
-    # egl forces PYOPENGL_PLATFORM=egl process-wide, and cgl has no window
-    # server to ask.  Provide a gltest that skips rather than crashing.
-    import functools
-    import unittest
-
-    _HEADLESS_REASON = (
-        'windowed gltest is unavailable under the headless %s backend'
-        % (_REQUESTED,)
-    )
-
-    def gltest(maybe_function=None, *args, **named):
-        def wrap(function):
-            @functools.wraps(function)
-            def skipped(*a, **k):
-                raise unittest.SkipTest(_HEADLESS_REASON)
-            return skipped
-        return wrap(maybe_function) if callable(maybe_function) else wrap
-    _BACKEND = _REQUESTED
-else:
-    if _REQUESTED and _REQUESTED not in _AVAILABLE:
-        raise ImportError(
-            'TEST_WINDOWING=%s requested but %s is not installed'
-            % (_REQUESTED, _REQUESTED)
-        )
-    _BACKEND = _REQUESTED or _AVAILABLE[0]
-
-if backends.is_headless(_BACKEND):
-    pass
-elif _BACKEND == 'pygame':
-    from testdecorator_pygame import *  # noqa: F401,F403
-    from testdecorator_pygame import gltest  # noqa: F401
-elif _BACKEND == 'glfw':
-    from testdecorator_glfw import *  # noqa: F401,F403
-    from testdecorator_glfw import gltest  # noqa: F401
-else:
-    raise RuntimeError('Unhandled backend: %s' % (_BACKEND,))
+    if callable(maybe_function):
+        return make_wrapper(maybe_function)
+    return make_wrapper

@@ -1,74 +1,89 @@
-"""Dispatch BaseTest to a windowing-system specific implementation.
+"""``BaseTest``: the legacy root-level suites' GL fixture.
 
-Selection order:
+One mechanism puts a context under a test -- :class:`glcontext.ContextTestCase`
+with a backend mixin from :func:`glcontext.pick_backend` -- and this is that,
+with the settings the root-level ``tests/test_*.py`` were written against: a
+300x300 compatibility-profile context, and a perspective already set up on the
+matrix stack.
 
-1. Determine which backends are importable (``pygame``, ``glfw``).
-2. If the ``TEST_WINDOWING`` env var is set, honour it when that backend
-   is available; otherwise fall through to the first available backend.
-3. Default preference when ``TEST_WINDOWING`` is unset: glfw, then pygame.
+The backend comes from :func:`glcontext.pick_backend` rather than from a
+windowing library named here, so these suites run wherever any other test does:
+on a headless runner, that is the EGL device platform or CGL rather than a
+window.
+
+``from basetestcase import *`` brings the GL namespace with it, which is how the
+legacy modules are written.
 """
 
-from __future__ import print_function
-import importlib.util
+import logging
+import os
+import pickle
 
-import backends
+logging.basicConfig(level=logging.INFO)
+HERE = os.path.dirname(__file__)
+
+cPickle = pickle
+
+try:
+    from numpy import *
+except ImportError:
+    array = None
+
+import OpenGL
+
+if os.environ.get('TEST_NO_ACCELERATE'):
+    OpenGL.USE_ACCELERATE = False
+OpenGL.FORWARD_COMPATIBLE_ONLY = False
+OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING = True
+
+# OpenGL.CONTEXT_CHECKING is deliberately not set here.  What an entry point
+# does with no current context is decided before anything builds the entry
+# points, so a module this late cannot ask the question -- and setting it
+# anyway reaches calls that legitimately have no context: EGL enumerates its
+# devices before there is one, and a refused enumeration reads as a machine
+# with no devices on it.  tests/gl/test_no_context_calls.py settles the
+# question in a subprocess instead.
+
+from glcontext import pick_backend
+from glcontext_desktop import DesktopGLTestCaseBase
+
+from OpenGL.extensions import alternate
+from OpenGL.GL import *
+from OpenGL.GL.ARB.imaging import *
+from OpenGL.GL.EXT.multi_draw_arrays import *
+from OpenGL.GL.framebufferobjects import *
+from OpenGL.GLU import *
+
+glMultiDrawElements = alternate(
+    glMultiDrawElementsEXT, glMultiDrawElements,
+)
 
 
-def _installed(name):
-    """Check whether ``name`` is importable without actually importing it.
+class BaseTest(pick_backend(), DesktopGLTestCaseBase):
+    """A 300x300 compatibility context with a perspective already set up.
 
-    Importing pygame/glfw has side effects (initialises subsystems, allocates
-    memory), so we only probe for the package metadata here.
+    The projection and the eye point are part of the fixture because the
+    reference values in these suites were measured through them.
     """
-    try:
-        return importlib.util.find_spec(name) is not None
-    except (ImportError, ValueError):
-        return False
 
+    width = height = 300
 
-_AVAILABLE = [name for name in backends.WINDOWED if _installed(name)]
-
-if not _AVAILABLE:
-    raise ImportError(
-        'No windowing backend available for tests; install pygame or glfw'
-    )
-
-_REQUESTED = backends.requested()
-if _REQUESTED is not None and backends.is_headless(_REQUESTED):
-    # A headless backend renders with no window at all -- egl forces
-    # PYOPENGL_PLATFORM=egl process-wide, and cgl has no window server to ask.
-    # These legacy root-level tests create their own *windowed* GL context,
-    # which is incompatible with either (a window plus the egl-device platform
-    # segfaults).  There is no windowed equivalent here, so provide a BaseTest
-    # that skips.
-    import unittest
-
-    _HEADLESS_REASON = (
-        'windowed BaseTest is unavailable under the headless %s backend'
-        % (_REQUESTED,)
-    )
-
-    class BaseTest(unittest.TestCase):
-        """Placeholder under a headless backend: windowed tests cannot run."""
-
-        def setUp(self):
-            self.skipTest(_HEADLESS_REASON)
-
-    _BACKEND = _REQUESTED
-else:
-    if _REQUESTED and _REQUESTED not in _AVAILABLE:
-        raise ImportError(
-            'TEST_WINDOWING=%s requested but %s is not installed' % (_REQUESTED, _REQUESTED)
+    def setUp(self):
+        super().setUp()
+        glMatrixMode(GL_PROJECTION)
+        glLoadIdentity()
+        gluPerspective(40.0, float(self.width) / self.height, 1.0, 20.0)
+        glMatrixMode(GL_MODELVIEW)
+        glLoadIdentity()
+        gluLookAt(
+            -2, 0, 3,    # eyepoint
+            0, 0, 0,     # center-of-view
+            0, 1, 0,     # up-vector
         )
-    _BACKEND = _REQUESTED or _AVAILABLE[0]
+        glClearColor(0, 0, .25, 0)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
-if backends.is_headless(_BACKEND):
-    pass
-elif _BACKEND == 'pygame':
-    from basetestcase_pygame import *  # noqa: F401,F403
-    from basetestcase_pygame import BaseTest  # noqa: F401
-elif _BACKEND == 'glfw':
-    from basetestcase_glfw import *  # noqa: F401,F403
-    from basetestcase_glfw import BaseTest  # noqa: F401
-else:
-    raise RuntimeError('Unhandled backend: %s' % (_BACKEND,))
+    def flip(self):
+        """Present what was drawn, for a run somebody is watching."""
+        glFlush()
+        self._swap()

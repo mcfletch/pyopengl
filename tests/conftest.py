@@ -15,10 +15,15 @@ _HERE = os.path.dirname(os.path.abspath(__file__))
 if _HERE not in sys.path:
     sys.path.insert(0, _HERE)
 
-# The headless EGL-device backend (TEST_WINDOWING=egl) loads the GL entry points
-# through EGL, so PYOPENGL_PLATFORM must be 'egl' before anything imports OpenGL.
-# conftest runs before any test module, so this is the safe place to set it.
-if os.environ.get('TEST_WINDOWING', '').strip().lower() == 'egl':
+# The headless EGL-device backend loads the GL entry points through EGL, so
+# PYOPENGL_PLATFORM must be 'egl' before anything imports OpenGL.  conftest runs
+# before any test module, so this is the safe place to set it.  Named rather
+# than compared as a string: `backends` is where TEST_WINDOWING is read, and
+# this is the one backend that needs the platform set -- the other headless one,
+# cgl, is macOS's own and needs nothing.
+import backends  # noqa: E402 -- needs the sys.path entry above
+
+if backends.requested() == 'egl':
     os.environ.setdefault('PYOPENGL_PLATFORM', 'egl')
 
 

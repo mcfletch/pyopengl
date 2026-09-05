@@ -1,9 +1,9 @@
 #! /usr/bin/env python3
 """Shared, windowing- and API-agnostic base class for rendering tests.
 
-The tests/gl, tests/glu and tests/gles suites used to each carry their own
-near-identical base TestCase plus a per-suite glfw backend.  This module holds
-the common machinery so those suites differ only where they genuinely must:
+Every suite here rests on this: the gl, glu and gles ones, and the legacy
+root-level tests through ``basetestcase`` and ``testdecorator``.  It holds the
+machinery they share so they differ only where they genuinely must:
 
 * :class:`ContextTestCase` -- the API-agnostic base.  It owns the fixture
   (create a context, clear it, tear it down), the ``TEST_VISIBLE`` / dwell
@@ -14,10 +14,11 @@ the common machinery so those suites differ only where they genuinely must:
   API-specific subclasses set.  GL enum *values* are identical across the
   modules, so ``self.gl.GL_RGBA`` and friends work for every backend.
 
-* :func:`pick_backend` -- chooses the windowing backend mixin (glfw / pygame)
-  from ``TEST_WINDOWING`` and what is installed, mirroring basetestcase.py and
-  testdecorator.py.  The backend module is imported lazily so e.g. a glfw run
-  never imports pygame.
+* :func:`pick_backend` -- chooses the backend mixin from ``TEST_WINDOWING`` and
+  what is installed: glfw or pygame for a window, egl or cgl for none.  It is
+  the suite's one backend choice -- ``basetestcase`` and ``testdecorator`` ask
+  it too -- and the backend module is imported lazily, so a glfw run never
+  imports pygame.
 
 A concrete test case is ``class Case(pick_backend(), SomeAPIBase)`` -- the
 backend mixin supplies ``_create_context`` / ``_swap`` / ``_destroy_context``;
