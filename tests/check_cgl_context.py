@@ -19,7 +19,10 @@ with no window server has.
 import os
 import sys
 
+from glcontext import version_shortfall
+
 from OpenGL.CGL import (
+    PROFILE_VERSIONS,
     CGLError,
     OffscreenTarget,
     choose_pixel_format,
@@ -51,12 +54,22 @@ def main():
             with headless_context(profile=profile, renderer=renderer):
                 target = OffscreenTarget(64, 64)
                 try:
+                    reported = glGetString(GL_VERSION).decode()
                     print('%-7s %s | %s | %s' % (
                         profile,
                         glGetString(GL_VENDOR).decode(),
                         glGetString(GL_RENDERER).decode(),
-                        glGetString(GL_VERSION).decode(),
+                        reported,
                     ))
+                    # The condition that segfaults if a test then calls into
+                    # it, so say so rather than leaving it to be read off the
+                    # version above.  Not fatal: what the profile *does*
+                    # provide is still worth testing, and the cases that need
+                    # more skip with this same sentence.
+                    short = version_shortfall(reported, PROFILE_VERSIONS[profile])
+                    if short:
+                        print('%-7s WARNING: the %s profile %s'
+                              % ('', profile, short.replace('the context ', '')))
                 finally:
                     target.release()
         except CGLError as err:

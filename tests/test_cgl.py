@@ -123,6 +123,37 @@ class TestTheConstantsAreApples:
         assert getattr(CGL, name) == value
 
 
+class TestWhatEachProfilePromises:
+    """CGL accepts a pixel format naming a profile the renderer cannot provide
+    and answers with a lower context rather than refusing, so what a profile
+    promises has to be written down to be compared against."""
+
+    @pytest.mark.parametrize('profile,version', [
+        ('legacy', (2, 1)),
+        ('core3', (3, 2)),
+        ('core4', (4, 1)),
+    ])
+    def test_each_names_the_version_it_provides(self, profile, version):
+        assert CGL.PROFILE_VERSIONS[profile] == version
+
+    def test_every_profile_has_one(self):
+        assert set(CGL.PROFILE_VERSIONS) == set(CGL.PROFILES)
+
+    def test_a_downgraded_core_profile_is_detected(self):
+        """The condition that segfaulted: a core profile answering with 2.1,
+        after which a GL 3.1 entry point resolves and is called."""
+        from glcontext import version_shortfall
+
+        assert version_shortfall('2.1 APPLE-20.0.44',
+                                 CGL.PROFILE_VERSIONS['core3'])
+
+    def test_and_a_profile_that_kept_its_promise_is_not(self):
+        from glcontext import version_shortfall
+
+        assert version_shortfall('4.1 APPLE-20.0.44',
+                                 CGL.PROFILE_VERSIONS['core4']) is None
+
+
 class TestAnErrorSaysWhichCallAndWhy:
     def test_it_names_the_call_and_the_error(self):
         error = CGL.CGLError('CGLCreateContext', 10004)

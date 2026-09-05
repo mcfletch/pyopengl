@@ -154,7 +154,7 @@ def version_shortfall(reported, wanted):
     found = parse_gl_version(reported)
     if found is None or found >= tuple(wanted):
         return None
-    return ('the context provides GL %d.%d, and this case needs %d.%d'
+    return ('the context provides GL %d.%d, short of the %d.%d asked for'
             % (found + tuple(wanted)))
 
 

@@ -31,6 +31,7 @@ import ctypes
 __all__ = (
     'CGL_ERROR_NAMES',
     'PROFILES',
+    'PROFILE_VERSIONS',
     'RENDERER_KINDS',
     'CGLError',
     'OffscreenTarget',
@@ -96,6 +97,18 @@ PROFILES = {
     'legacy': kCGLOGLPVersion_Legacy,
     'core3': kCGLOGLPVersion_3_2_Core,
     'core4': kCGLOGLPVersion_GL4_Core,
+}
+
+#: The GL version each profile promises.  Worth comparing against what the
+#: context reports: CGL accepts a pixel format naming a profile the renderer
+#: cannot provide and hands back a lower context rather than refusing, and
+#: macOS resolves every entry point from the framework whether or not the
+#: current context implements it -- so a call the context does not have
+#: segfaults instead of failing.
+PROFILE_VERSIONS = {
+    'legacy': (2, 1),
+    'core3': (3, 2),
+    'core4': (4, 1),
 }
 
 # -- renderer ids (CGLRenderers.h) -----------------------------------------

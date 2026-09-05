@@ -52,6 +52,9 @@ class TestWhetherItIsEnough:
         request for 3.3."""
         reason = version_shortfall('2.1 APPLE-20.0.44', (3, 3))
         assert reason and '2.1' in reason and '3.3' in reason
+        # The same sentence the CGL diagnostic prints, so a skip in the suite
+        # and the warning that explains it read alike.
+        assert 'short of' in reason
 
     def test_a_lower_minor_counts_too(self):
         assert version_shortfall('3.2 Mesa', (3, 3)) is not None
@@ -100,7 +103,7 @@ class TestTheFixtureActsOnIt:
         if result.errors:
             pytest.skip('no GL context here: %s' % (result.errors[0][1][-300:],))
         assert result.skipped, result.failures
-        assert 'needs 3.3' in result.skipped[0][1]
+        assert '3.3 asked for' in result.skipped[0][1]
 
     def test_a_context_that_meets_it_runs(self):
         result = self._case(None, (2, 1))
