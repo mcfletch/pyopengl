@@ -28,6 +28,7 @@ from OpenGL.CGL import (
     choose_pixel_format,
     headless_context,
     library,
+    renderers,
 )
 
 
@@ -38,6 +39,16 @@ def main():
     except CGLError as err:
         print('no CGL here: %s' % (err,))
         return 1
+
+    # What the machine offers, asked of it rather than inferred from what a
+    # context turned out to be.  This needs no context and no window, so it
+    # answers even where nothing else here would, and `GL major` is what says
+    # in advance whether a core profile will come back as one.
+    try:
+        for found in renderers():
+            print('renderer %s' % (found,))
+    except CGLError as err:
+        print('renderers unavailable: %s' % (err,))
 
     try:
         pixel_format, kind = choose_pixel_format(profile='legacy', renderer=renderer)

@@ -154,6 +154,56 @@ class TestWhatEachProfilePromises:
                                  CGL.PROFILE_VERSIONS['core4']) is None
 
 
+class TestWhatTheMachineCanRender:
+    """Asked of the machine rather than inferred from what a context turned out
+    to be: ``CGLQueryRendererInfo`` describes every renderer without creating
+    anything, and says which GL major version each supports.  On a machine
+    nobody can log into, that is the difference between knowing what is there
+    and guessing from a crash."""
+
+    def info(self, **overrides):
+        fields = {
+            'index': 0,
+            'renderer_id': CGL.kCGLRendererAppleSWID,
+            'accelerated': False,
+            'online': False,
+            'major_gl_version': 2,
+            'video_memory': 0,
+        }
+        fields.update(overrides)
+        return CGL.RendererInfo(**fields)
+
+    def test_a_renderer_that_is_not_accelerated_is_software(self):
+        assert self.info(accelerated=False).software
+
+    def test_and_one_that_is_is_not(self):
+        assert not self.info(accelerated=True).software
+
+    def test_it_says_the_gl_major_it_supports(self):
+        assert self.info(major_gl_version=4).major_gl_version == 4
+
+    def test_the_repr_names_what_a_reader_needs(self):
+        text = repr(self.info(major_gl_version=2, accelerated=False))
+        assert 'software' in text and 'GL 2' in text
+
+    @pytest.mark.parametrize('name,value', [
+        ('kCGLRPRendererID', 70),
+        ('kCGLRPAccelerated', 73),
+        ('kCGLRPOnline', 129),
+        ('kCGLRPVideoMemoryMegabytes', 131),
+        ('kCGLRPMajorGLVersion', 133),
+    ])
+    def test_the_property_constants_are_apples(self, name, value):
+        assert getattr(CGL, name) == value
+
+    def test_enumerating_answers_or_says_there_is_no_cgl(self):
+        try:
+            found = CGL.renderers()
+        except CGL.CGLError:
+            pytest.skip('no CGL on this platform')
+        assert isinstance(found, tuple)
+
+
 class TestAnErrorSaysWhichCallAndWhy:
     def test_it_names_the_call_and_the_error(self):
         error = CGL.CGLError('CGLCreateContext', 10004)

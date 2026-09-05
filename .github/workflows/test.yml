@@ -19,6 +19,13 @@ on:
   push:
     branches: [develop]
   workflow_dispatch:
+    inputs:
+      tests:
+        description: >-
+          What to run instead of the whole suite -- a path, or several.
+          For iterating on one failure without waiting for the rest.
+        default: ''
+        required: false
 
 concurrency:
   group: tests-${{ github.ref }}
@@ -97,7 +104,9 @@ jobs:
         # `not performance` is a claim about how fast something draws, and a CPU
         # rasteriser cannot answer one.  Nothing carries the marker yet; the
         # deselection is here so that the first test to need it is right.
-        run: python -m tox -e ${{ matrix.toxenv }} -- tests/ -m "not performance"
+        run: >
+          python -m tox -e ${{ matrix.toxenv }} --
+          ${{ inputs.tests || 'tests/' }} -m "not performance"
 
   macos:
     name: macOS ${{ matrix.os }} / CGL / ${{ matrix.toxenv }}
@@ -146,5 +155,55 @@ jobs:
           python -m tox exec -e ${{ matrix.toxenv }} --
           python tests/check_cgl_context.py
 
-      - name: Run the tests
-        run: python -m tox -e ${{ matrix.toxenv }} -- tests/ -m "not performance"
+      # One area per step, each allowed to fail, because a segfault ends the
+      # process it happens in: run as one command and the first crash costs
+      # every test after it, so a machine none of us can log into becomes one
+      # crash per push to learn about.  The gate below is what fails the job.
+      - name: Run the tests -- root
+        id: root
+        continue-on-error: true
+        run: >
+          python -m tox -e ${{ matrix.toxenv }} --
+          ${{ inputs.tests || 'tests/ --ignore=tests/gl --ignore=tests/glu --ignore=tests/gles --ignore=tests/cdispatch' }}
+          -m "not performance"
+
+      - name: Run the tests -- cdispatch
+        id: cdispatch
+        if: inputs.tests == ''
+        continue-on-error: true
+        run: python -m tox -e ${{ matrix.toxenv }} -- tests/cdispatch -m "not performance"
+
+      - name: Run the tests -- gl
+        id: gl
+        if: inputs.tests == ''
+        continue-on-error: true
+        run: python -m tox -e ${{ matrix.toxenv }} -- tests/gl -m "not performance"
+
+      - name: Run the tests -- glu
+        id: glu
+        if: inputs.tests == ''
+        continue-on-error: true
+        run: python -m tox -e ${{ matrix.toxenv }} -- tests/glu -m "not performance"
+
+      - name: Run the tests -- gles
+        id: gles
+        if: inputs.tests == ''
+        continue-on-error: true
+        run: python -m tox -e ${{ matrix.toxenv }} -- tests/gles -m "not performance"
+
+      - name: Fail the job if any area did
+        if: always()
+        run: |
+          printf 'root       %s\n' '${{ steps.root.outcome }}'
+          printf 'cdispatch  %s\n' '${{ steps.cdispatch.outcome }}'
+          printf 'gl         %s\n' '${{ steps.gl.outcome }}'
+          printf 'glu        %s\n' '${{ steps.glu.outcome }}'
+          printf 'gles       %s\n' '${{ steps.gles.outcome }}'
+          for outcome in '${{ steps.root.outcome }}' '${{ steps.cdispatch.outcome }}' \
+                         '${{ steps.gl.outcome }}' '${{ steps.glu.outcome }}' \
+                         '${{ steps.gles.outcome }}'; do
+            case "$outcome" in
+              success|skipped) ;;
+              *) echo "::error::an area did not pass: $outcome"; exit 1 ;;
+            esac
+          done

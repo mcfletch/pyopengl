@@ -35,9 +35,11 @@ __all__ = (
     'RENDERER_KINDS',
     'CGLError',
     'OffscreenTarget',
+    'RendererInfo',
     'choose_pixel_format',
     'headless_context',
     'pixel_format_attributes',
+    'renderers',
 )
 
 # -- types -----------------------------------------------------------------
@@ -124,6 +126,118 @@ kCGLRendererIDMatchingMask = 0x00FE7F00
 #: rather than falling back.
 RENDERER_KINDS = ('accelerated', 'any', 'software')
 
+# -- renderer properties (CGLTypes.h) --------------------------------------
+#
+# CGLQueryRendererInfo describes what this machine can render *without*
+# creating anything, which is the only way to know what a context would have
+# been before asking for one.
+
+kCGLRPOffScreen = 53
+kCGLRPFullScreen = 54
+kCGLRPRendererID = 70
+kCGLRPAccelerated = 73
+kCGLRPRobust = 75
+kCGLRPBackingStore = 76
+kCGLRPMPSafe = 78
+kCGLRPWindow = 80
+kCGLRPMultiScreen = 81
+kCGLRPCompliant = 83
+kCGLRPDisplayMask = 84
+kCGLRPBufferModes = 100
+kCGLRPColorModes = 103
+kCGLRPAccumModes = 104
+kCGLRPDepthModes = 105
+kCGLRPStencilModes = 106
+kCGLRPMaxAuxBuffers = 107
+kCGLRPMaxSampleBuffers = 108
+kCGLRPMaxSamples = 109
+kCGLRPSampleModes = 110
+kCGLRPSampleAlpha = 111
+kCGLRPGPUVertProcCapable = 122
+kCGLRPGPUFragProcCapable = 123
+kCGLRPRendererCount = 128
+kCGLRPOnline = 129
+kCGLRPAcceleratedCompute = 130
+kCGLRPVideoMemoryMegabytes = 131
+kCGLRPTextureMemoryMegabytes = 132
+kCGLRPMajorGLVersion = 133
+kCGLRPRegistryIDLow = 140
+kCGLRPRegistryIDHigh = 141
+kCGLRPRemovable = 142
+
+#: Query every renderer, whatever display it belongs to.
+kCGLDisplayMaskAll = 0xFFFFFFFF
+
+
+class RendererInfo:
+    """One renderer this machine offers, and what it can do.
+
+    ``major_gl_version`` is the highest GL major version it supports, which is
+    what decides whether a core profile asked of it will be the profile that
+    comes back: CGL accepts a pixel format naming one this renderer cannot
+    provide and answers with a lower context rather than refusing.
+    """
+
+    __slots__ = ('accelerated', 'index', 'major_gl_version', 'online',
+                 'renderer_id', 'video_memory')
+
+    def __init__(self, index, renderer_id, accelerated, online,
+                 major_gl_version, video_memory):
+        self.index = index
+        self.renderer_id = renderer_id
+        self.accelerated = bool(accelerated)
+        self.online = bool(online)
+        self.major_gl_version = major_gl_version
+        self.video_memory = video_memory
+
+    @property
+    def software(self):
+        """Whether this renderer rasterises on the CPU."""
+        return not self.accelerated
+
+    def __repr__(self):
+        return '<%s %d id=0x%08X %s, GL %s, %s MB>' % (
+            self.__class__.__name__, self.index, self.renderer_id,
+            'software' if self.software else 'accelerated',
+            self.major_gl_version, self.video_memory)
+
+
+def renderers(display_mask=kCGLDisplayMaskAll):
+    """Every renderer this machine offers, as :class:`RendererInfo`.
+
+    Creates no context and opens no window, so it answers on a machine where
+    nothing else here would -- which is what makes it the first thing to ask
+    when a context turns out not to be what was requested.
+    """
+    cgl = library()
+    info = ctypes.c_void_p()
+    count = GLint()
+    _check('CGLQueryRendererInfo',
+           cgl.CGLQueryRendererInfo(display_mask, ctypes.byref(info),
+                                    ctypes.byref(count)))
+    try:
+        found = []
+        for index in range(count.value):
+            def describe(prop, _index=index):
+                value = GLint()
+                if cgl.CGLDescribeRenderer(info, _index, prop,
+                                           ctypes.byref(value)) != 0:
+                    return 0
+                return value.value
+
+            found.append(RendererInfo(
+                index=index,
+                renderer_id=describe(kCGLRPRendererID),
+                accelerated=describe(kCGLRPAccelerated),
+                online=describe(kCGLRPOnline),
+                major_gl_version=describe(kCGLRPMajorGLVersion),
+                video_memory=describe(kCGLRPVideoMemoryMegabytes),
+            ))
+        return tuple(found)
+    finally:
+        cgl.CGLDestroyRendererInfo(info)
+
+
 # -- errors (CGLTypes.h) ---------------------------------------------------
 
 CGL_ERROR_NAMES = {
@@ -206,6 +320,17 @@ def library():
             ctypes.POINTER(GLint),
         ]
         cgl.CGLDescribePixelFormat.restype = ctypes.c_int32
+        cgl.CGLQueryRendererInfo.argtypes = [
+            ctypes.c_uint32, ctypes.POINTER(ctypes.c_void_p),
+            ctypes.POINTER(GLint),
+        ]
+        cgl.CGLQueryRendererInfo.restype = ctypes.c_int32
+        cgl.CGLDescribeRenderer.argtypes = [
+            ctypes.c_void_p, GLint, ctypes.c_uint32, ctypes.POINTER(GLint),
+        ]
+        cgl.CGLDescribeRenderer.restype = ctypes.c_int32
+        cgl.CGLDestroyRendererInfo.argtypes = [ctypes.c_void_p]
+        cgl.CGLDestroyRendererInfo.restype = ctypes.c_int32
         _cgl = cgl
     return _cgl
 
