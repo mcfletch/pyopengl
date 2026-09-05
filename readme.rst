@@ -223,6 +223,10 @@ The ``TEST_WINDOWING`` flag selects the windowing backend used by the
   device and crashes rather than saying no, so a run that demands software and
   pins a GPU is refused by name.  The legacy root-level ``tests/*.py`` have no
   headless equivalent and fall back to a windowed backend under this setting.
+  They need a display server to open their window on, and skip where there is
+  none; run them under a virtual one to have them run::
+
+      $ xvfb-run -a uv run --with tox,tox-uv tox
 
 Continuous integration
 ~~~~~~~~~~~~~~~~~~~~~~
