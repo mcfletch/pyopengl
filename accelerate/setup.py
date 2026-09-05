@@ -37,6 +37,21 @@ def _our_version():
     return found.group(1)
 
 
+def pyopengl_requirement():
+    """The PyOpenGL this accelerate pairs with, as a requirement string.
+
+    Exact, because the two are released together from one repository and the
+    dispatch extension's tables are generated from that PyOpenGL: a mismatched
+    pair does not degrade, it dispatches through the wrong slot indices.
+    ``OpenGL._dispatch`` refuses one at import; this stops pip assembling one
+    in the first place, which is a better place to learn it than the first
+    entry point a program calls.
+
+    Read from this package's own version so there is one number to bump.
+    """
+    return 'PyOpenGL==%s' % (_our_version(),)
+
+
 def dispatch_extension():
     """The registry-generated C implementation of the OpenGL entry points.
 
@@ -196,6 +211,7 @@ if (  # Prevents running of setup during code introspection imports
         }
     setup(
         build_requires=['cython'],
+        install_requires=[pyopengl_requirement()],
         options={
             "sdist": {
                 "formats": ["gztar"],

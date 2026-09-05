@@ -3,7 +3,14 @@
 import logging
 from OpenGL import _configflags
 
-needed_version = (3, 1, 10)
+#: The oldest accelerate whose wrapper, array-datatype and format-handler
+#: accelerators track this PyOpenGL's internals.  Those do not share the
+#: generated tables the dispatch extension does -- that pair is held to exact
+#: equality in OpenGL._dispatch -- but they follow the same internals, so the
+#: floor moves with the major version.  PyOpenGL-accelerate pins the pairing
+#: from its own side; this is the backstop for an installation assembled
+#: without a resolver.
+needed_version = (4, 0, 0)
 _log = logging.getLogger("OpenGL.acceleratesupport")
 try:
     import OpenGL_accelerate

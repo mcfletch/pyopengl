@@ -9,9 +9,15 @@ You can install this repository by branching/cloning and running
 ``pip``::
 
     $ cd pyopengl
-    $ pip install -e .
-    $ cd accelerate
-    $ pip install -e .
+    $ pip install -e . ./accelerate
+
+Both at once, because ``PyOpenGL_accelerate`` requires the *exact* PyOpenGL it
+pairs with: the two are released together and its dispatch extension's tables
+are generated from that PyOpenGL, so a mismatched pair does not degrade, it
+dispatches through the wrong slot indices.  Between releases that version is in
+this tree and on no index, so installing accelerate on its own asks PyPI for a
+version that is not there yet and the resolver refuses.  Installing both from
+the checkout in one command resolves them against each other.
 
 Note that to compile PyOpenGL_accelerate you will need to have 
 a functioning Python extension-compiling environment.

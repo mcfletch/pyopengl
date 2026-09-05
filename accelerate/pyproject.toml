@@ -1,6 +1,6 @@
 [project]
 name="PyOpenGL-accelerate"
-dynamic=["version"]
+dynamic=["version", "dependencies"]
 description = "Cython-coded accelerators for PyOpenGL"
 authors = [
     {name="Mike C. Fletcher",email="mcfletch@vrplumber.com"},
@@ -47,6 +47,9 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.dynamic]
 version = {attr = "OpenGL_accelerate.__version__"}
+# The dependency on PyOpenGL is an exact pin on this package's own version, so
+# setup.py builds it from the one number rather than a second copy living here
+# to drift -- see pyopengl_requirement().
 
 [tool.setuptools.packages.find]
 namespaces=false
@@ -59,4 +62,11 @@ exclude=["tests","src"]
 # version bump leaves uv answering with the previous number, and a dependent
 # requiring the new one resolves against PyPI rather than this checkout.
 [tool.uv]
-cache-keys = [{ file = "pyproject.toml" }, { file = "OpenGL_accelerate/__init__.py" }]
+# setup.py too: the dependency on PyOpenGL is built there, from the version
+# in OpenGL_accelerate/__init__.py, so both files decide this package's
+# metadata and a change to either has to invalidate the cached answer.
+cache-keys = [
+    { file = "pyproject.toml" },
+    { file = "setup.py" },
+    { file = "OpenGL_accelerate/__init__.py" },
+]

@@ -196,6 +196,61 @@ def _mismatched(**environment_overrides):
     return answer
 
 
+class TestThePairIsPinnedBeforeItIsInstalled:
+    """The runtime check refuses a mismatched pair; the metadata stops one
+    being assembled. Both are wanted: an ImportError at the first entry point
+    is a worse place to learn this than the resolver."""
+
+    def test_accelerate_requires_pyopengl_at_its_own_version(self):
+        """They are released together and share generated tables, so the
+        version that pairs with this accelerate is this accelerate's own."""
+        import re
+
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        setup = os.path.join(root, 'accelerate', 'setup.py')
+        if not os.path.exists(setup):
+            pytest.skip('the accelerate source tree is not in this checkout')
+        with open(setup, encoding='utf-8') as handle:
+            source = handle.read()
+        assert re.search(r'install_requires\s*=', source), (
+            'accelerate declares no dependency on PyOpenGL, so pip will '
+            'assemble any pair of versions it is asked for')
+
+    def test_the_declared_pin_is_the_version_it_was_built_from(self):
+        sys.path.insert(0, os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'accelerate'))
+        try:
+            import setup as accelerate_setup
+        except Exception:                       # pragma: no cover - no source tree
+            pytest.skip('accelerate/setup.py is not importable here')
+        finally:
+            sys.path.pop(0)
+        requirements = accelerate_setup.pyopengl_requirement()
+        assert requirements == 'PyOpenGL==%s' % (accelerate_setup._our_version(),)
+
+
+class TestTheFloorForTheOtherAccelerators:
+    """``acceleratesupport`` gates the accelerators that do *not* share the
+    generated tables -- the wrapper, the array datatypes, the format handlers.
+    They track PyOpenGL's internals all the same, so the floor has to keep up
+    with the version that is being released."""
+
+    def test_it_is_not_left_behind_by_a_major_version(self):
+        from OpenGL import acceleratesupport
+        from OpenGL.version import __version__
+
+        ours = tuple(int(part) for part in __version__.split('.')[:1]
+                     if part.isdigit())
+        assert acceleratesupport.needed_version[:1] == ours, (
+            'the floor names %r while PyOpenGL is %s'
+            % (acceleratesupport.needed_version, __version__))
+
+    def test_an_accelerate_from_the_previous_major_is_below_it(self):
+        from OpenGL import acceleratesupport
+
+        assert (3, 1, 10) < acceleratesupport.needed_version
+
+
 class TestAskingForCtypesInstead:
     """USE_ACCELERATE is the switch PyOpenGL has always had for "do not use the
     compiled layer", and somebody whose pair does not match reaches for it to
