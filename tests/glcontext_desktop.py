@@ -25,9 +25,24 @@ class DesktopGLTestCaseBase(ContextTestCase):
     gl_version = (2, 1)
     stencil_size = 8
 
+    #: Whether this case calls into GLU.  It is a separate library and a
+    #: deprecated one -- an image carrying Mesa's GL often has no libGLU at
+    #: all -- so a case that needs it says so and is skipped where it is
+    #: absent, rather than raising NullFunctionError from its own setUp and
+    #: reading as a broken test instead of an absent dependency.
+    needs_glu = False
+
     #: desktop GL exports both the core entry points and the indexed query.
     gl = _gl
     gl3 = _gl
+
+    def setUp(self):
+        if self.needs_glu:
+            from OpenGL import platform
+
+            if getattr(platform.PLATFORM, 'GLU', None) is None:
+                self.skipTest('this case needs GLU and the library is not here')
+        super().setUp()
 
     def _setup_default_objects(self):
         # The core profile requires a bound VAO for any vertex operation.
@@ -108,6 +123,7 @@ class GLUTestCaseBase(DesktopGLTestCaseBase):
     profile = 'compatibility'
     #: 2.1 is the highest pure-compat target.
     gl_version = (2, 1)
+    needs_glu = True
 
     # --- GLU object factories (registered for teardown cleanup) ----------
     def quadric(self):

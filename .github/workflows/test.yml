@@ -62,13 +62,16 @@ jobs:
 
       - name: Install Mesa
         # libegl-mesa0 is the one that matters: it provides the EGL device
-        # platform, and with it the software device the suite renders on.  The
-        # X libraries are for the glfw wheel, which links them whether or not a
-        # display is ever opened.
+        # platform, and with it the software device the suite renders on.
+        # libglu1-mesa is a separate library and not pulled in by any of the
+        # others; without it the GLU suites and the legacy fixture's own
+        # perspective have nothing to call.  The X libraries are for the glfw
+        # wheel, which links them whether or not a display is ever opened.
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
             libegl1 libegl-mesa0 libgl1 libglx-mesa0 libgl1-mesa-dri \
+            libglu1-mesa \
             libx11-6 libxrandr2 libxinerama1 libxcursor1 libxi6
 
       - name: Install tox

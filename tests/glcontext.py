@@ -31,6 +31,7 @@ import os
 import time
 import ctypes
 import logging
+import re
 
 import backends
 import unittest
@@ -112,6 +113,51 @@ def pick_backend():
     raise RuntimeError('Unhandled backend: %s' % (backend,))
 
 
+#: The leading ``major.minor`` of a GL_VERSION string, past any API name.
+#: Desktop GL starts with the number; OpenGL-ES puts "OpenGL ES" (or
+#: "OpenGL ES-CM") in front of it.
+_VERSION = re.compile(r'(?:OpenGL\s+ES(?:-CM|-SC)?\s+)?(\d+)\.(\d+)')
+
+
+def parse_gl_version(reported):
+    """``(major, minor)`` from a GL_VERSION string, or ``None``.
+
+    Everything after the number is the driver describing itself and differs by
+    vendor, so only the front is read.
+    """
+    if not reported:
+        return None
+    found = _VERSION.match(reported.strip())
+    if not found:
+        return None
+    return (int(found.group(1)), int(found.group(2)))
+
+
+def version_shortfall(reported, wanted):
+    """Why ``reported`` does not meet ``wanted``, or ``None`` where it does.
+
+    Asking for a version is not getting it.  GLFW refuses a request its driver
+    cannot meet, so a window either has the version or was never made; CGL
+    accepts a pixel format naming the 3.2 core profile on a renderer that
+    implements 2.1 and hands back a 2.1 context.
+
+    That gap is not a failed test but a dead process: macOS exports every entry
+    point from the framework whether or not the current context implements it,
+    so a GL 3.1 call on a 2.1 context resolves, is called, and segfaults.
+
+    A version this cannot read is let through.  Refusing there would turn one
+    unrecognised driver string into a skip on every test it runs, and the entry
+    points still answer for themselves.
+    """
+    if not wanted:
+        return None
+    found = parse_gl_version(reported)
+    if found is None or found >= tuple(wanted):
+        return None
+    return ('the context provides GL %d.%d, and this case needs %d.%d'
+            % (found + tuple(wanted)))
+
+
 # ---------------------------------------------------------------------------
 # API-agnostic base test case
 # ---------------------------------------------------------------------------
@@ -165,7 +211,14 @@ class ContextTestCase(unittest.TestCase):
 
     # --- fixture ----------------------------------------------------------
     def setUp(self):
-        """Create the requested context and leave it current and cleared."""
+        """Create the requested context and leave it current and cleared.
+
+        A context that does not provide the version the case asked for skips
+        it: not every backend refuses such a request, and calling an entry
+        point the context does not implement is a crash rather than a failure
+        on a platform whose entry points resolve regardless -- see
+        :func:`version_shortfall`.
+        """
         self._create_context()
         # Registered here rather than done in tearDown, for two reasons.
         # unittest runs tearDown() before doCleanups(), so destroying the
@@ -175,6 +228,11 @@ class ContextTestCase(unittest.TestCase):
         # point still gives the context back.
         self.addCleanup(self._destroy_context)
         self._cleanup = []
+        if self.profile != 'any':
+            shortfall = version_shortfall(
+                self.getString(self.gl.GL_VERSION), self.gl_version)
+            if shortfall:
+                self.skipTest(shortfall)
         self._setup_default_objects()
         self.gl.glViewport(0, 0, self.width, self.height)
         self.gl.glClearColor(0.0, 0.0, 0.25, 1.0)

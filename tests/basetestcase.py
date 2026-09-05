@@ -68,6 +68,10 @@ class BaseTest(pick_backend(), DesktopGLTestCaseBase):
 
     width = height = 300
 
+    #: setUp puts a perspective on the matrix stack with gluPerspective and
+    #: gluLookAt, so these cases need the library like any other GLU one.
+    needs_glu = True
+
     def setUp(self):
         super().setUp()
         glMatrixMode(GL_PROJECTION)
