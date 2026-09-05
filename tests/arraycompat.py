@@ -29,16 +29,22 @@ from __future__ import print_function
 try:
     import numpy as np  # noqa: F401  (re-exported)
 except ImportError:
+    from OpenGL.arrays._arrayconstants import GL_INTPTR, GL_SIZEIPTR
     from OpenGL.arrays.ctypesarrays import CtypesArrayHandler as _handler
 
-    # numpy dtype names -> the typecode strings PyOpenGL's ctypes handler
-    # understands.  Exposed as attributes so ``np.uint8`` & co. work as dtype
-    # arguments (``np.zeros(shape, np.uint8)``) just like real numpy scalars.
+    # numpy dtype names -> the typecodes PyOpenGL's ctypes handler understands.
+    # Exposed as attributes so ``np.uint8`` & co. work as dtype arguments
+    # (``np.zeros(shape, np.uint8)``) just like real numpy scalars.
+    #
+    # ``intp``/``uintp`` are numpy's pointer-sized integers, which is what GL
+    # calls GLintptr and GLsizeiptr; those are the handler's keys for the type,
+    # and there is no character code for it to use instead.
     _DTYPES = {
         'int8': 'b', 'uint8': 'B', 'byte': 'b', 'ubyte': 'B',
         'int16': 'h', 'uint16': 'H', 'short': 'h', 'ushort': 'H',
         'int32': 'i', 'uint32': 'I', 'intc': 'i', 'uintc': 'I',
         'int64': 'q', 'uint64': 'Q',
+        'intp': GL_INTPTR, 'uintp': GL_SIZEIPTR,
         'float32': 'f', 'float64': 'd', 'single': 'f', 'double': 'd',
     }
 
