@@ -513,8 +513,18 @@ class _NullFunctionPointer(object):
     resolved = False
 
     def __nonzero__(self):
-        """Make this object appear to be NULL"""
-        if (not self.resolved) and (self.extension or self.force_extension):
+        """Whether calling this entry point will reach the library
+
+        This is the check :class:`OpenGL.error.NullFunctionError` names, so it
+        has to answer for the call rather than for the bookkeeping: an entry
+        point the library exports but nothing has called yet is present, and
+        saying otherwise sends the caller past work the driver would have done.
+        Trying to resolve it is the only thing that can tell them apart.
+
+        A no is about the moment it was asked -- an entry point that needs a
+        current context resolves once there is one -- so it is not remembered.
+        """
+        if not self.resolved:
             self.load()
         return self.resolved
 
@@ -570,6 +580,16 @@ class _NullFunctionPointer(object):
 
 class _DeprecatedFunctionPointer(_NullFunctionPointer):
     deprecated = True
+
+    def __nonzero__(self):
+        """Always absent: the call is refused whatever the driver exports
+
+        ``FORWARD_COMPATIBLE_ONLY`` is what puts an entry point here, and it
+        refuses the call rather than resolving it, so resolving it is not the
+        question.
+        """
+        return False
+    __bool__ = __nonzero__
 
     def __call__(self, *args, **named):
         from OpenGL import error

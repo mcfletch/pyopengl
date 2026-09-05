@@ -197,6 +197,28 @@ attributes under both to keep them so.</p>
         memory the driver reads.</td></tr>
 </table>
 
+<h2>Asking whether an entry point is there</h2>
+
+<p><code>bool(glFoo)</code> answers whether calling <code>glFoo</code> will
+reach the driver, and it is the check to make before an optional call:</p>
+
+<pre>if glDrawArraysInstanced:
+    glDrawArraysInstanced(GL_TRIANGLES, 0, 3, count)
+else:
+    ...draw them one at a time...</pre>
+
+<p>Asking resolves the entry point, so ask it <em>with the context current</em>
+— what a driver exports depends on the context, and a question asked before
+there is one can only be answered no.  The answer is not remembered: an entry
+point that has nothing to resolve against now resolves once there is a context,
+and asking again is how you find out.  Resolving is done once per entry point,
+so asking repeatedly costs nothing after the first yes.</p>
+
+<p>A few entry points are Python-coded wrappers rather than bindings —
+<code>glutInit</code> collects <code>argv</code> before calling, for instance.
+They answer for the function they call, so the check reads the same whichever
+kind you have.</p>
+
 <h2>Demotion: when the C hands the call back</h2>
 
 <p>The C implements the entry point, not the friendly module's whole chain.  If

@@ -24,6 +24,7 @@ from OpenGL.platform import CurrentContextIsValid, GLUT_GUARD_CALLBACKS, PLATFOR
 GLUT = PLATFORM.GLUT
 from OpenGL import contextdata, error, platform, logs
 from OpenGL.raw import GLUT as _simple
+from OpenGL.lazywrapper import lazy
 from OpenGL._bytes import bytes, unicode,as_8_bit
 import ctypes, os, sys, traceback
 PLATFORM = platform.PLATFORM
@@ -98,6 +99,17 @@ _base_glutDestroyWindow = getattr(GLUT, 'glutDestroyWindow', None)
 
 class GLUTCallback( object ):
     """Class implementing GLUT Callback registration functions"""
+
+    #: whether GLUT exports the registration function this stands for; the
+    #: error raised on calling one it does not says to check for it, so it
+    #: has to be checkable.
+    resolved = False
+
+    def __nonzero__( self ):
+        """Whether GLUT provides this registration function"""
+        return self.resolved
+    __bool__ = __nonzero__
+
     def __init__( self, typeName, parameterTypes, parameterNames ):
         """Initialise the glut callback instance"""
         self.typeName = typeName
@@ -120,6 +132,8 @@ class GLUTCallback( object ):
                     )
                 )
             self.wrappedOperation = failFunction
+        else:
+            self.resolved = True
         self.callbackType = FUNCTION_TYPE( None, *parameterTypes )
         self.CONTEXT_DATA_KEY = 'glut%sFunc'%(typeName, )
     argNames = ('function',)
@@ -296,7 +310,8 @@ glutTimerFunc = GLUTTimerCallback(
 )
 
 INITIALIZED = False
-def glutInit( *args ):
+@lazy( _base_glutInit )
+def glutInit( baseOperation, *args ):
     """Initialise the GLUT library"""
     global INITIALIZED
     if INITIALIZED:
@@ -333,15 +348,15 @@ def glutInit( *args ):
     currentDirectory = os.getcwd()
     try:
         # XXX need to check for error condition here...
-        _base_glutInit( ctypes.byref(count), holder )
+        baseOperation( ctypes.byref(count), holder )
     finally:
         os.chdir( currentDirectory )
     return [
         holder[i] for i in range( count.value )
     ]
-glutInit.wrappedOperation = _simple.glutInit
 
-def glutDestroyWindow( window ):
+@lazy( _base_glutDestroyWindow )
+def glutDestroyWindow( baseOperation, window ):
     """Want to destroy the window, we need to do some cleanup..."""
     context = 0
     try:
@@ -351,5 +366,4 @@ def glutDestroyWindow( window ):
         _log.info( """Cleaning up context data for window %s: %s""", window, result )
     except Exception as err:
         _log.error( """Error attempting to clean up context data for GLUT window %s: %s""", window, result )
-    return _base_glutDestroyWindow( window )
-glutDestroyWindow.wrappedOperation = _simple.glutDestroyWindow
+    return baseOperation( window )
