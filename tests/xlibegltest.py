@@ -40,6 +40,14 @@ API_BITS = {
     "es1": EGL_OPENGL_ES_BIT,
     "es": EGL_OPENGL_ES_BIT,
 }
+#: The client version an ES context has to ask for by name.  EGL defaults to
+#: version 1, so an ``es2`` request left unsaid comes back as an ES1 context and
+#: the first ES2 shader handed to it is what finds out.  Desktop GL takes its
+#: version from the config and wants no attribute here.
+API_CLIENT_VERSIONS = {
+    EGL_OPENGL_ES2_BIT: 2,
+    EGL_OPENGL_ES_BIT: 1,
+}
 API_NAMES = dict(
     [
         (
@@ -112,6 +120,13 @@ class EGLWindow(object):
         local_attributes = self.attributes[:]
         local_attributes.extend(
             [
+                # EGL_RENDERABLE_TYPE is what says which client API a config
+                # can make a context for; EGL_CONFORMANT only says which it is
+                # conformant to.  Asked for conformance alone, the match falls
+                # back on the default renderable type -- desktop GL -- and the
+                # ES context that config yields cannot be made current.
+                EGL_RENDERABLE_TYPE,
+                API_BITS[self.api.lower()],
                 EGL_CONFORMANT,
                 API_BITS[self.api.lower()],
                 EGL_NONE,
@@ -127,7 +142,17 @@ class EGLWindow(object):
         window = self.window.id
         self.egl_surface = eglCreateWindowSurface(display, configs[0], window, None)
 
-        self.egl_ctx = eglCreateContext(display, configs[0], EGL_NO_CONTEXT, None)
+        client_version = API_CLIENT_VERSIONS.get(API_BITS[self.api.lower()])
+        context_attributes = None
+        if client_version is not None:
+            context_attributes = arrays.GLintArray.asArray([
+                EGL_CONTEXT_CLIENT_VERSION,
+                client_version,
+                EGL_NONE,
+            ])
+        self.egl_ctx = eglCreateContext(
+            display, configs[0], EGL_NO_CONTEXT, context_attributes
+        )
         if self.egl_ctx == EGL_NO_CONTEXT:
             raise RuntimeError("Unable to create context")
 
@@ -143,12 +168,29 @@ class EGLWindow(object):
 
                 if e.type == X.Expose:
                     self.eglSetup()
-                    eglMakeCurrent(
+                    if not eglMakeCurrent(
                         self.egl_display,
                         self.egl_surface,
                         self.egl_surface,
                         self.egl_ctx,
-                    )
+                    ):
+                        # Unchecked, the target draws into no context at all:
+                        # every glGet answers None and the first shader fails
+                        # to compile with an empty log, which says nothing
+                        # about the context never having been made current.
+                        err = eglGetError()
+                        if err == EGL_BAD_MATCH:
+                            # The config was chosen renderable for this API and
+                            # the driver made the context, so a refusal to pair
+                            # them is the driver declining to provide the API
+                            # rather than a mismatch this asked for.
+                            checkutils.skip(
+                                '%s contexts cannot be made current on this '
+                                'driver (EGL_BAD_MATCH)' % (self.api,)
+                            )
+                        raise RuntimeError(
+                            'eglMakeCurrent failed (EGL error 0x%x)' % (err,)
+                        )
                     target(*args, **named)
                     eglSwapBuffers(self.egl_display, self.egl_surface)
                     if exit_on_render:

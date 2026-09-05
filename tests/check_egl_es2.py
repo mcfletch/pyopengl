@@ -15,18 +15,21 @@ def test_gl():
 
     print('Error before compilation?', glGetError())
     shader = shaders.compileProgram(
+        # #version 100 is the shading language of an ES2 context, and a
+        # fragment shader there has no default float precision to fall back on.
         shaders.compileShader(
-            '''#version 130
+            '''#version 100
     attribute vec3 position;
     void main() {
-        gl_Position = vec4( position, 0 );
+        gl_Position = vec4( position, 0.0 );
     }''',
             GL_VERTEX_SHADER,
         ),
         shaders.compileShader(
-            '''#version 130
+            '''#version 100
+    precision mediump float;
     void main() {
-        gl_FragColor = vec4( 0,1,0,.5 );
+        gl_FragColor = vec4( 0.0, 1.0, 0.0, 0.5 );
     }''',
             GL_FRAGMENT_SHADER,
         ),
