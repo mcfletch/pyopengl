@@ -15,6 +15,7 @@ TEST_VISIBLE = os.environ.get('TEST_VISIBLE', '1').lower() not in ('0', 'false',
 
 from OpenGL import arrays
 from OpenGL.EGL import *
+from OpenGL.error import EGLError
 
 DESIRED_ATTRIBUTES = [
     EGL_BLUE_SIZE,
@@ -150,11 +151,25 @@ class EGLWindow(object):
                 client_version,
                 EGL_NONE,
             ])
-        self.egl_ctx = eglCreateContext(
-            display, configs[0], EGL_NO_CONTEXT, context_attributes
-        )
+        # A config was matched as renderable for this API, so a driver that
+        # will not build a context on it is saying it does not implement the
+        # API here.  It says so in more than one way -- an EGL error raised by
+        # the error check, or EGL_NO_CONTEXT handed back -- and both mean the
+        # same thing to a script that wanted to draw with it.
+        try:
+            self.egl_ctx = eglCreateContext(
+                display, configs[0], EGL_NO_CONTEXT, context_attributes
+            )
+        except EGLError as err:
+            self.unavailable('the driver refused the context (%s)' % (err.err,))
         if self.egl_ctx == EGL_NO_CONTEXT:
-            raise RuntimeError("Unable to create context")
+            self.unavailable('the driver returned no context')
+
+    def unavailable(self, detail):
+        """Report that this driver does not offer the requested API."""
+        checkutils.skip(
+            '%s is not available on this driver: %s' % (self.api, detail)
+        )
 
     def loop(self, target, args, named, exit_on_render=False):
         do_close = True
@@ -184,9 +199,9 @@ class EGLWindow(object):
                             # the driver made the context, so a refusal to pair
                             # them is the driver declining to provide the API
                             # rather than a mismatch this asked for.
-                            checkutils.skip(
-                                '%s contexts cannot be made current on this '
-                                'driver (EGL_BAD_MATCH)' % (self.api,)
+                            self.unavailable(
+                                'the context cannot be made current '
+                                '(EGL_BAD_MATCH)'
                             )
                         raise RuntimeError(
                             'eglMakeCurrent failed (EGL error 0x%x)' % (err,)
