@@ -204,10 +204,18 @@ def _wanted():
     they do not want the extension from being handed an error about the
     extension.  A mismatched accelerate left behind by a partial upgrade is
     exactly when a person reaches for the switch, and it has to work.
+
+    ``USE_ACCELERATE`` is read from the package rather than from
+    ``_configflags``, which snapshots it when *it* is first imported -- and the
+    first import may be a framework's, a profiler's, or another binding
+    stacked on PyOpenGL, none of which the caller controls.  The snapshot would
+    then predate the assignment and the switch would do nothing, with no error
+    to say so.  ``DISPATCH`` comes from the environment and has no such setter.
     """
+    import OpenGL
     from OpenGL import _configflags
 
-    return bool(_configflags.USE_ACCELERATE) and _configflags.DISPATCH == 'c'
+    return bool(OpenGL.USE_ACCELERATE) and _configflags.DISPATCH == 'c'
 
 
 def install():
@@ -367,9 +375,13 @@ def use_debug_output(enable=True):
     :func:`set_error_checking` decide that either way -- and the same exception
     is raised from the same call, carrying the same GL error code.
 
-    Switching it off undoes what switching it on did, callback and driver state
-    together: synchronous debug output serialises the driver, which is the cost
-    the switch exists to stop paying.
+    Switching it off undoes what switching it on did for *this* context,
+    callback and driver state together: synchronous debug output serialises the
+    driver, which is the cost the switch exists to stop paying.  The error mode
+    it reads is one for the process, so it goes back to the per-call check when
+    the last context has given its callback up and not before -- taking it away
+    sooner would leave every other context paying for debug output and using
+    neither mechanism it installed.
 
     Returns True when it took effect.  It needs a context offering
     ``GL_KHR_debug``; without one, error checking stays as it was.
@@ -386,8 +398,7 @@ def use_debug_output(enable=True):
 
     key = _c.current_handle()
     if not enable:
-        _c.set_error_mode(0)
-        if _installed_callbacks.pop(key, None) is not None:
+        if _release_debug_callback(key):
             glDisable(_DEBUG_OUTPUT_SYNCHRONOUS)
             glDisable(_DEBUG_OUTPUT)
             glDebugMessageCallback(None, None)
@@ -418,6 +429,19 @@ def use_debug_output(enable=True):
 #: reference has to outlive the enabling call and no longer: keeping every one
 #: ever made would hold a callback per context for the life of the process.
 _installed_callbacks = {}
+
+
+def _release_debug_callback(key):
+    """Give up ``key``'s callback; return whether it had one.
+
+    The error mode is the process's, so it is only handed back once nothing
+    holds a callback any more.  Every context that installed one has its own
+    entry here, and each takes its own away.
+    """
+    held = _installed_callbacks.pop(key, None) is not None
+    if not _installed_callbacks:
+        _c.set_error_mode(0)
+    return held
 
 
 def _debug_callback_type():

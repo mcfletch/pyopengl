@@ -16,10 +16,11 @@ gets one: a backend chosen by :func:`glcontext.pick_backend`, driving
     def function():
         '''Runs with a specifically configured one.'''
 
-It borrows that fixture by making one throwaway case and calling its ``setUp``
-and its cleanups, so the lifecycle -- which backend, which profile, tearing the
-context down afterwards -- is the one every other test in the suite gets, and a
-backend is wired up in one place.
+It borrows that fixture by making one throwaway case and driving its ``setUp``,
+``tearDown`` and cleanups in the order unittest would, so the lifecycle --
+which backend, which profile, presenting the frame, the dwell that holds it on
+screen under ``TEST_VISIBLE``, tearing the context down -- is the one every
+other test in the suite gets, and a backend is wired up in one place.
 """
 
 from functools import wraps
@@ -60,6 +61,10 @@ def gltest(maybe_function=None, *, size=(300, 300), name=None):
             try:
                 return function(*args, **named)
             finally:
+                # tearDown presents the frame and holds it for the dwell, which
+                # is what TEST_VISIBLE is for; doCleanups gives the context
+                # back.  unittest runs them in that order and so does this.
+                case.tearDown()
                 case.doCleanups()
 
         return test_function

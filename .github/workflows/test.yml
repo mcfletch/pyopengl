@@ -97,13 +97,21 @@ jobs:
         run: python -m tox -e ${{ matrix.toxenv }} -- tests/ -m "not performance"
 
   macos:
-    name: macOS ${{ matrix.os }} / CGL
+    name: macOS ${{ matrix.os }} / CGL / ${{ matrix.toxenv }}
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
         os: [macos-14, macos-15]
+        # Both implementations, because the compiled one is the release's
+        # substance and Linux is otherwise the only platform it is ever run on.
+        # The wheel job compiles it for macOS already; nothing there loads what
+        # it built, and a wrong table or a missing symbol is a load-time
+        # failure.  CGL needs no window server for either.
+        toxenv:
+          - py312-num1-accel0-dispctypes
+          - py312-num1-accel1-dispc
     env:
       # CGL, not GLFW: GLFW's NSGL path asks for an accelerated pixel format
       # unconditionally, and these runners have no accelerated renderer to give
@@ -125,15 +133,15 @@ jobs:
         # `tox exec` runs a command in an environment but does not build one --
         # it says so and carries on with the package missing -- so the
         # environment the report below runs in is made here.
-        run: python -m tox -e py312-num1-accel0-dispctypes --notest
+        run: python -m tox -e ${{ matrix.toxenv }} --notest
 
       - name: Report the renderer under test
         # In the environment the tests will run in, and non-zero where no
         # context can be made: a suite that found no GL would skip its way to
         # green having rendered nothing, which reads the same as a pass.
         run: >
-          python -m tox exec -e py312-num1-accel0-dispctypes --
+          python -m tox exec -e ${{ matrix.toxenv }} --
           python tests/check_cgl_context.py
 
       - name: Run the tests
-        run: python -m tox -e py312-num1-accel0-dispctypes -- tests/ -m "not performance"
+        run: python -m tox -e ${{ matrix.toxenv }} -- tests/ -m "not performance"

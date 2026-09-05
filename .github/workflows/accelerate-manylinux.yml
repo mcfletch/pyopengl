@@ -86,6 +86,18 @@ jobs:
         env:
           BUILD_EXTENSION: yes
           CIBW_SKIP: "pp* cp36-* cp37-* cp38-*"
+          # Load the wheel that was just built.  Compiling is not the whole of
+          # working: a missing symbol or a table the extension disagrees with
+          # is a load-time failure, and without this the wheel would be
+          # published having never been imported on the platform it is for.
+          # PyOpenGL comes from the checkout because accelerate pins the exact
+          # version it pairs with, which is on no index between releases.
+          CIBW_TEST_REQUIRES: "./"
+          CIBW_TEST_COMMAND: >-
+            python -c "import OpenGL_accelerate, OpenGL_accelerate.dispatch;
+            import OpenGL._dispatch as d;
+            print('accelerate', OpenGL_accelerate.__version__, 'dispatch', d.AVAILABLE);
+            assert d.AVAILABLE, 'the dispatch extension did not load'"
 
       - name: Save wheels
         uses: actions/upload-artifact@v4

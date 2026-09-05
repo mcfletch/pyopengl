@@ -93,7 +93,13 @@ GLclampx = _defineType('GLclampx', ctypes.c_int32, int )
 GLsizei = _defineType( 'GLsizei', ctypes.c_uint, long )
 # Signed 2's complement binary integer with sizeof( void * )
 GLintptr = _defineType( 'GLintptr', ctypes.c_ssize_t, int )
-# Unsigned size-of-x
+# Unsigned size-of-x.  Khronos declares this signed -- glcorearb.h has
+# `typedef khronos_ssize_t GLsizeiptr` -- and GLintptr above follows that while
+# this does not.  A size or a length arrives non-negative, so the two agree on
+# every value the API produces, and everything built on this one is unsigned to
+# match: the numpy dtype, the buffer format the C element table accepts, and
+# GLsizeiptrArray.  Changing the type alone would leave those disagreeing with
+# it, so change them together or not at all.
 GLsizeiptr = _defineType( 'GLsizeiptr', ctypes.c_size_t, int )
 
 GLubyte = ctypes.c_ubyte

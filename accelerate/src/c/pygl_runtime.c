@@ -591,6 +591,14 @@ int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs)
     return -1;
 }
 
+/* Truth of an object that is not already a Python bool.
+ *
+ * On failure -- an object whose truth is ambiguous, as a numpy array's is --
+ * this returns 0 and *leaves the exception set*.  That is the contract, and it
+ * has two halves: the pending exception survives the return, and every caller
+ * checks PYGL_CONV_OK (which is PyErr_Occurred()) before using the value.
+ * Clearing the error here would turn a conversion failure into a silent false;
+ * a caller that reordered its checks past the conversion would do the same. */
 int pygl_boolean_slow(PyObject *object)
 {
     int result = PyObject_IsTrue(object);

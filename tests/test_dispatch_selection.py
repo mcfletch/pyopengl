@@ -11,7 +11,6 @@ import subprocess
 import sys
 
 import pytest
-
 from childenv import child_environment
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -194,6 +193,58 @@ def _mismatched(**environment_overrides):
     if answer == 'UNBUILT':
         pytest.skip('the C dispatch extension is not built')
     return answer
+
+
+class TestTheSwitchIsReadWhenItIsAsked:
+    """``OpenGL.USE_ACCELERATE = False`` is the documented way to run on ctypes,
+    and it is what the version-mismatch error tells a caller to reach for. A
+    program sets it in the lines after ``import OpenGL``, so it has to be read
+    then and not at whatever moment ``_configflags`` first happened to load --
+    a framework, a profiler or another binding stacked on PyOpenGL may have
+    imported that already, and the switch would silently do nothing."""
+
+    def _active(self, preamble=''):
+        script = (
+            '%simport OpenGL\n'
+            'OpenGL.USE_ACCELERATE = False\n'
+            'import OpenGL.GL\n'
+            'import OpenGL._dispatch as dispatch\n'
+            'print("ACTIVE", dispatch.ACTIVE)\n' % (preamble,)
+        )
+        completed = subprocess.run(
+            [sys.executable, '-c', script], capture_output=True, text=True,
+            check=False)
+        line = [x for x in completed.stdout.splitlines()
+                if x.startswith('ACTIVE')]
+        assert line, completed
+        return line[0].split()[1]
+
+    def test_setting_it_runs_on_ctypes(self):
+        assert self._active() == 'False'
+
+    def test_and_still_does_where_something_read_the_flags_first(self):
+        """The import that freezes the snapshot need not be the caller's."""
+        assert self._active('import OpenGL._configflags\n') == 'False'
+
+    @pytest.mark.parametrize('preamble', ['', 'import OpenGL._configflags\n'])
+    def test_the_cython_accelerators_answer_to_it_too(self, preamble):
+        """The same switch turns off the wrapper, array-datatype and
+        format-handler accelerators, which decide at their own import."""
+        script = (
+            '%simport OpenGL\n'
+            'OpenGL.USE_ACCELERATE = False\n'
+            'import OpenGL.GL\n'
+            'from OpenGL import acceleratesupport\n'
+            'print("AVAILABLE", acceleratesupport.ACCELERATE_AVAILABLE)\n'
+            % (preamble,)
+        )
+        completed = subprocess.run(
+            [sys.executable, '-c', script], capture_output=True, text=True,
+            check=False)
+        line = [x for x in completed.stdout.splitlines()
+                if x.startswith('AVAILABLE')]
+        assert line, completed
+        assert line[0].split()[1] == 'False'
 
 
 class TestThePairIsPinnedBeforeItIsInstalled:

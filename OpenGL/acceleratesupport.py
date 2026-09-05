@@ -1,7 +1,8 @@
 """Common code for accelerated modules"""
 
 import logging
-from OpenGL import _configflags
+
+import OpenGL
 
 #: The oldest accelerate whose wrapper, array-datatype and format-handler
 #: accelerators track this PyOpenGL's internals.  Those do not share the
@@ -15,7 +16,11 @@ _log = logging.getLogger("OpenGL.acceleratesupport")
 try:
     import OpenGL_accelerate
 
-    if _configflags.USE_ACCELERATE:
+    # Read from the package, not from the _configflags snapshot: that is taken
+    # when _configflags is first imported, which may be a framework's import
+    # rather than the caller's, and would then predate the assignment this
+    # switch exists for.
+    if OpenGL.USE_ACCELERATE:
         if OpenGL_accelerate.__version_tuple__ < needed_version:
             _log.warning(
                 """Incompatible version of OpenGL_accelerate found, need at least %s found %s""",

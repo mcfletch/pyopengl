@@ -98,3 +98,48 @@ class TestNoBackendIsImplementedTwice:
             if candidate.startswith(('basetestcase_', 'testdecorator_'))
         )
         assert left == [], left
+
+
+class TestTheDecoratorFinishesTheFrame:
+    """``TEST_VISIBLE`` exists so somebody can look at what the suite drew, and
+    the stand-alone check scripts are the ones most worth looking at.  A frame
+    that is never presented cannot be looked at, and the dwell that holds it on
+    screen belongs to the same teardown."""
+
+    def _run_counting(self, hook):
+        """Count calls to ``hook`` during one decorated run.
+
+        Counted on the decorator's own case class, since that is where the
+        backend mixin's override resolves -- patching the base would be
+        shadowed by it and count nothing.
+        """
+        import testdecorator
+
+        calls = []
+        real = getattr(testdecorator._DecoratorCase, hook)
+
+        def counted(self, *args, **named):
+            calls.append(hook)
+            return real(self, *args, **named)
+
+        setattr(testdecorator._DecoratorCase, hook, counted)
+        try:
+            @testdecorator.gltest
+            def draw():
+                return None
+
+            try:
+                draw()
+            except Exception as error:          # no GL here at all
+                pytest.skip(str(error))
+        finally:
+            setattr(testdecorator._DecoratorCase, hook, real)
+        return calls
+
+    def test_the_frame_is_presented(self):
+        assert self._run_counting('_swap') == ['_swap']
+
+    def test_through_the_teardown_every_other_test_uses(self):
+        """Not a swap of its own: the dwell and the cleanup order come with
+        it."""
+        assert self._run_counting('tearDown') == ['tearDown']
