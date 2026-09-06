@@ -143,6 +143,21 @@ def _any_extension_present(platform_, extension, alternates):
     return False
 
 
+def is_pointer_sized(value):
+    """Whether ``value`` is a ctypes scalar whose value *is* an address.
+
+    ``c_void_p`` is the familiar one, and WGL's handles -- ``HDC``, ``HGLRC``,
+    ``HPBUFFERARB`` -- are the reason this asks about the declaration rather
+    than naming a class.  They are pointer-sized simple types rather than
+    pointer classes, because ctypes shares every reference to ``c_void_p`` and
+    a shared one would disable the array machinery for everything else.  So
+    ``isinstance(handle, c_void_p)`` is False for them while ``.value`` is the
+    handle itself.
+    """
+    return (isinstance(value, ctypes._SimpleCData)
+            and getattr(type(value), '_type_', None) == 'P')
+
+
 def as_pointer(value):
     """The address of anything a client may pass where a pointer is wanted.
 
@@ -161,8 +176,14 @@ def as_pointer(value):
     # A c_void_p's value *is* an address; a c_int's is not.  Reading `.value`
     # off anything that has one turns ctypes.c_int(1234) into address 1234 --
     # so ask what the object is rather than what attributes it happens to
-    # carry.  Opaque handle classes are pointer subclasses and answer here too.
-    if isinstance(value, (ctypes.c_void_p, ctypes._Pointer)):
+    # carry.  The pointer-sized scalars answer here, and the opaque handle
+    # classes are pointer subclasses and answer here too.  Anything that
+    # reaches the fallbacks below is answered with the address *of* itself,
+    # which for a handle would be a pointer into the interpreter's heap handed
+    # to a display driver, with nothing raising to say so.
+    if is_pointer_sized(value):
+        return value.value or 0
+    if isinstance(value, ctypes._Pointer):
         return ctypes.cast(value, ctypes.c_void_p).value or 0
     inner = getattr(value, '_as_parameter_', None)
     if isinstance(inner, int):
@@ -184,32 +205,60 @@ def as_pointer(value):
 _opaque_classes = {}
 
 
-#: Where the opaque pointer classes are declared.  It has to be *these*
-#: classes rather than freshly built ones: they are what the ctypes bindings
-#: name in their argtypes, so a GLsync built from a different class of the same
-#: name is rejected by any entry point still on the ctypes path.
-_OPAQUE_MODULES = ('OpenGL.raw.GL._types', 'OpenGL.raw.EGL._types')
+#: Where the handle classes are declared.  It has to be *these* classes rather
+#: than freshly built ones: they are what the ctypes bindings name in their
+#: argtypes and restypes, so a GLsync built from a different class of the same
+#: name is rejected by any entry point still on the ctypes path, and a WGL
+#: handle found nowhere would come back as a fabricated pointer class instead
+#: of the integer ctypes produces.
+_OPAQUE_MODULES = (
+    'OpenGL.raw.GL._types',
+    'OpenGL.raw.EGL._types',
+    'OpenGL.raw.WGL._types',
+    'OpenGL.raw.GLX._types',
+)
 
 
-def opaque(address, type_name):
-    """Rebuild the opaque pointer object this return type produces today."""
+def _declared_class(type_name):
+    """The class the bindings declare for ``type_name``, cached.
+
+    A name none of the modules declares gets a freshly built opaque pointer
+    class, which is what the ctypes path does with it.
+    """
     import importlib
 
     cls = _opaque_classes.get(type_name)
+    if cls is not None:
+        return cls
+    for module_name in _OPAQUE_MODULES:
+        try:
+            module = importlib.import_module(module_name)
+        except ImportError:
+            continue
+        cls = getattr(module, type_name, None)
+        if cls is not None:
+            break
     if cls is None:
-        for module_name in _OPAQUE_MODULES:
-            try:
-                module = importlib.import_module(module_name)
-            except ImportError:
-                continue
-            cls = getattr(module, type_name, None)
-            if cls is not None:
-                break
-        if cls is None:
-            from OpenGL import _opaque
+        from OpenGL import _opaque
 
-            cls = _opaque.opaque_pointer_cls(type_name)
-        _opaque_classes[type_name] = cls
+        cls = _opaque.opaque_pointer_cls(type_name)
+    _opaque_classes[type_name] = cls
+    return cls
+
+
+def opaque(address, type_name):
+    """The object this return type produces, as the ctypes path produces it.
+
+    A pointer class -- GL's ``GLsync``, EGL's ``EGLDisplay`` -- gives an
+    instance of itself, which is what a caller comparing two of them relies on.
+    A pointer-sized scalar, which is how WGL declares ``HDC`` and its
+    neighbours, gives a plain integer, because that is what ctypes converts
+    such a result to.  The two implementations are alternatives, so a program
+    must not be able to tell from an answer which one it is on.
+    """
+    cls = _declared_class(type_name)
+    if issubclass(cls, ctypes._SimpleCData) and getattr(cls, '_type_', None) == 'P':
+        return address
     return ctypes.cast(ctypes.c_void_p(address), cls)
 
 

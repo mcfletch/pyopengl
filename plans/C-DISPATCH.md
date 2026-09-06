@@ -674,6 +674,29 @@ rather than anyone's recollection. Current behaviour, measured:
 - **`GLhandleARB` is `void *` on macOS and `unsigned int` elsewhere.** The
   generator emits this one platform-conditionally. It is the only such
   divergence in the registry and it is worth a named test.
+- **A handle declared as a pointer-sized *scalar* crosses as an integer, both
+  ways.** WGL declares `HDC`, `HGLRC` and the pbuffer handles as
+  `_SimpleCData` subclasses with `_type_ = 'P'` rather than as pointer classes
+  -- deliberately, because ctypes shares every reference to `c_void_p` and a
+  shared one disables the array machinery for everything else. So
+  `isinstance(handle, c_void_p)` is False for them while `.value` is the handle,
+  and ctypes converts such a *return* to a plain integer rather than to an
+  instance. `support.is_pointer_sized` is the one place that distinction is
+  made; `support.as_pointer` and `support.opaque` both read it, and
+  `_OPAQUE_MODULES` names `OpenGL.raw.WGL._types` and `OpenGL.raw.GLX._types`
+  alongside GL's and EGL's so the class a return names is found at all.
+
+  *Found 2026-09-05, by writing `OpenGL.WGL.offscreen`.* Neither half was
+  right: an argument fell through `as_pointer` to `ctypes.addressof(wrapper)`,
+  so every WGL entry point under the compiled layer was handed a pointer into
+  the interpreter's heap -- `wglCreateContext` answered NULL with
+  ERROR_INVALID_HANDLE and nothing raised -- and a return came back as a
+  freshly fabricated `HDC_pointer` class, which the ctypes bindings then
+  refused. The whole of WGL was unusable under the default dispatch on Windows
+  and no test said so, because the suite's WGL cases need a device context and
+  the platform-independent ones only ask what is *declared*.
+  `tests/cdispatch/test_pointer_conversion.py` holds both halves to what ctypes
+  produces, and runs on any platform.
 
 **Decision on exception types.** Bad scalar arguments currently raise
 `ctypes.ArgumentError`; wrong arity raises `TypeError`. A C stub would naturally
