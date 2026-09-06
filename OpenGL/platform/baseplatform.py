@@ -450,6 +450,26 @@ class BasePlatform(object):
             """Platform does not define a GetCurrentContext function"""
         )
 
+    def releaseCurrentContext(self):
+        """Let go of the GL context this thread holds; answer whether there was one
+
+        **A thread may have one current context, and a platform's GL binding
+        APIs do not know about each other.**  On Linux, asking EGL to make a
+        context current while GLX holds the thread is ``EGL_BAD_ACCESS``, and
+        the reverse is an X ``BadAccess`` on ``X_GLXMakeCurrent`` -- which
+        Xlib's default error handler turns into a process exit rather than an
+        exception anything can catch.
+
+        So a program with two GL views in it -- two windowing toolkits in one
+        process, an engine's suite exercising one backend while a helper opens
+        a window through another -- needs to be able to say "let go" before it
+        takes the thread.  Safe to call when nothing is current, which is why a
+        caller can simply always call it.
+
+        A platform with one binding API and no way to release answers False.
+        """
+        return False
+
     def currentContextAddress(self):
         """The address of the platform's current-context function, or None.
 

@@ -302,6 +302,56 @@ class LinuxPlatform(baseplatform.BasePlatform):
                 return context
         return None
 
+    def releaseCurrentContext(self):
+        """Let go of the context this thread holds, EGL's or GLX's
+
+        Answers whether there was one.  See
+        :meth:`OpenGL.platform.baseplatform.BasePlatform.releaseCurrentContext`
+        for why a program with two GL bindings in it needs this: neither API
+        knows about the other, and the one that finds the thread taken refuses
+        -- GLX by way of an X error that ends the process.
+
+        Both are asked, because either may be holding it and asking is cheap
+        beside making a context.
+        """
+        released = False
+        if self._releaseEGL():
+            released = True
+        if self._releaseGLX():
+            released = True
+        return released
+
+    def _releaseEGL(self):
+        """Release a current EGL context; answer whether there was one"""
+        fn = self._eglGetCurrentContext
+        if fn is None or not fn():
+            return False
+        try:
+            from OpenGL import EGL
+        except ImportError:                 # pragma: no cover - no EGL here
+            return False
+        display = EGL.eglGetCurrentDisplay()
+        if not display:
+            return False
+        EGL.eglMakeCurrent(display, EGL.EGL_NO_SURFACE, EGL.EGL_NO_SURFACE,
+                           EGL.EGL_NO_CONTEXT)
+        return True
+
+    def _releaseGLX(self):
+        """Release a current GLX context; answer whether there was one"""
+        fn = self._glXGetCurrentContext
+        if fn is None or not fn():
+            return False
+        try:
+            from OpenGL import GLX
+        except ImportError:                 # pragma: no cover - no GLX here
+            return False
+        display = GLX.glXGetCurrentDisplay()
+        if not display:
+            return False
+        GLX.glXMakeCurrent(display, 0, None)
+        return True
+
     def getGLUTFontPointer(self, constant):
         """Platform specific function to retrieve a GLUT font pointer
 
