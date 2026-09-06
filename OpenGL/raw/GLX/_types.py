@@ -10,45 +10,113 @@ c_void = None
 void = None 
 Bool = c_uint
 
+def displayName():
+    """The X display to connect to, as ``XOpenDisplay`` wants it
+
+    Bytes, because the parameter is a ``char *``: handed a ``str`` with no
+    ``argtypes`` set, ctypes passes ``wchar_t *``, X reads a display name out
+    of the wrong encoding and the connection fails -- which is reported as an
+    X server with GLX version 0.0 and no extensions at all.
+
+    ``None`` where nothing names one, which X reads as "whatever this session
+    is using".  That is not the same as an empty name, which it refuses.
+    """
+    import os
+
+    name = os.environ.get('DISPLAY', '').strip()
+    return name.encode('utf-8') if name else None
+
+
+def _x11():
+    """The Xlib entry points this module calls, with their signatures set"""
+    from OpenGL.raw.GLX import _types
+    from OpenGL.platform import ctypesloader
+    import ctypes
+
+    library = ctypesloader.loadLibrary(ctypes.cdll, 'X11')
+    library.XOpenDisplay.argtypes = [ctypes.c_char_p]
+    library.XOpenDisplay.restype = ctypes.POINTER(_types.Display)
+    library.XCloseDisplay.argtypes = [ctypes.POINTER(_types.Display)]
+    library.XDefaultScreen.argtypes = [ctypes.POINTER(_types.Display)]
+    library.XDefaultScreen.restype = ctypes.c_int
+    return library
+
+
 class _GLXQuerier( extensions.ExtensionQuerier ):
+    """What GLX's version and extension list are asked through
+
+    Every GLX extension entry point is resolved through this: the gate in
+    ``OpenGL._dispatch.support`` asks ``checkExtension('GLX_...')``, which ends
+    up here.  So an answer of "no extensions" makes every GLX extension read as
+    absent -- which is not a small thing, since ``GLX_ARB_create_context`` is
+    how a context is asked for a version or a profile.
+
+    It answers **without a current context**, by opening a display connection
+    of its own, because it has to: the extension that creates a context cannot
+    be gated on already having one.
+    """
     prefix = as_8_bit('GLX_')
     assumed_version = [1,1]
     version_prefix = as_8_bit('GLX_VERSION_GLX_')
+
+    def display( self ):
+        """A display connection for the length of the ``with`` block
+
+        Closed on the way out.  Each query used to open one and drop it, so a
+        program that probed a few extensions leaked a file descriptor apiece.
+        """
+        import contextlib
+
+        @contextlib.contextmanager
+        def opened():
+            library = _x11()
+            connection = library.XOpenDisplay(displayName())
+            try:
+                yield connection
+            finally:
+                if connection:
+                    library.XCloseDisplay(connection)
+
+        return opened()
+
     def getDisplay( self ):
-        from OpenGL.raw.GLX import _types
-        from OpenGL.platform import ctypesloader
-        import ctypes, os
-        X11 = ctypesloader.loadLibrary( ctypes.cdll, 'X11' )
-        XOpenDisplay = X11.XOpenDisplay 
-        XOpenDisplay.restype = ctypes.POINTER(_types.Display)
-        return XOpenDisplay( os.environ.get( 'DISPLAY' ))
+        """A display connection the caller then owns and must close
+
+        :meth:`display` is the form that closes it; this stays for callers
+        that already had it.
+        """
+        return _x11().XOpenDisplay(displayName())
+
     def getScreen( self, display ):
-        from OpenGL.platform import ctypesloader
-        from OpenGL.raw.GLX import _types
-        import ctypes, os
-        X11 = ctypesloader.loadLibrary( ctypes.cdll, 'X11' )
-        XDefaultScreen = X11.XDefaultScreen
-        XDefaultScreen.argtypes = [ctypes.POINTER(_types.Display)]
-        return XDefaultScreen( display )
-        
+        return _x11().XDefaultScreen( display )
+
     def pullVersion( self ):
         from OpenGL.GLX import glXQueryVersion
         import ctypes
-        if glXQueryVersion:
-            display = self.getDisplay()
-            major,minor = ctypes.c_int(),ctypes.c_int()
-            glXQueryVersion(display, major, minor)
-            return [major.value,minor.value]
-        else:
+        if not glXQueryVersion:
             return [1,1]
+        with self.display() as connection:
+            if not connection:
+                return [1,1]        # no server to ask; assume the base version
+            major,minor = ctypes.c_int(),ctypes.c_int()
+            if not glXQueryVersion(connection, major, minor):
+                return [1,1]        # the server has no GLX at all
+            return [major.value,minor.value]
+
     def pullExtensions( self ):
         if self.getVersion() >= [1,2]:
             from OpenGL.GLX import glXQueryExtensionsString
-            display = self.getDisplay()
-            screen = self.getScreen( display )
-            
-            if glXQueryExtensionsString:
-                return glXQueryExtensionsString( display,screen ).split()
+
+            if not glXQueryExtensionsString:
+                return []
+            with self.display() as connection:
+                if not connection:
+                    return []
+                reported = glXQueryExtensionsString(
+                    connection, self.getScreen( connection ))
+                # A ctypes c_char_p result is already a copy, but the split
+                # happens here anyway: the string belongs to the connection.
+                return reported.split() if reported else []
         return []
 GLXQuerier=_GLXQuerier()
 
