@@ -30,11 +30,39 @@ class TestTheVocabulary:
         assert backends.module_for('tk') == 'tkinter'
 
     def test_the_headless_ones_need_no_display(self):
-        """One per platform: EGL's device platform on Linux, CGL on macOS."""
-        assert backends.HEADLESS == ('egl', 'cgl')
+        """One per platform: EGL's device platform on Linux, CGL on macOS, a
+        WGL pbuffer on Windows."""
+        assert backends.HEADLESS == ('egl', 'cgl', 'wgl')
 
     def test_every_name_is_one_or_the_other(self):
         assert set(backends.ALL) == set(backends.WINDOWED) | set(backends.HEADLESS)
+
+
+class TestWhichHeadlessBackendAPlatformHas:
+    """A test meaning "run without a window" asks rather than names one: each
+    of the three answers only on its own platform, and naming the wrong one
+    selects a platform module with no GL library behind it, which skips every
+    case and reads as green."""
+
+    @pytest.mark.parametrize('platform,name', [
+        ('linux', 'egl'), ('linux2', 'egl'),
+        ('darwin', 'cgl'),
+        ('win32', 'wgl'), ('cygwin', 'wgl'),
+    ])
+    def test_each_platform_gets_its_own(self, platform, name):
+        assert backends.headless_for(platform) == name
+
+    def test_a_platform_with_none_says_so(self):
+        assert backends.headless_for('sunos5') is None
+
+    def test_every_answer_is_one_of_the_headless_names(self):
+        named = [name for _, name in backends.HEADLESS_BY_PLATFORM]
+        assert set(named) <= set(backends.HEADLESS)
+
+    def test_it_reads_the_platform_by_default(self):
+        import sys
+
+        assert backends.headless_for() == backends.headless_for(sys.platform)
 
 
 class TestReadingTheRequest:
@@ -141,6 +169,14 @@ class TestWhetherThereIsAWindowServer:
     case that asked whichever machine it happened to run on would be asserting
     the Linux rule of a Mac.
     """
+
+    @pytest.mark.parametrize('platform', ['win32', 'cygwin'])
+    def test_a_session_owned_window_server_needs_no_variable(self, platform):
+        """Asking for DISPLAY on Windows answers "headless" for a machine with
+        a screen, and every windowed check then skips.  macOS is not among
+        these: its window server belongs to the session too, but a job under
+        launchd has none, so that one is asked rather than assumed."""
+        assert backends.has_window_server({}, platform) is True
 
     def test_an_x_display_is_a_window_server(self):
         assert backends.has_window_server(

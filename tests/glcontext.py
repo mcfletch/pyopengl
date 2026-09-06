@@ -81,8 +81,9 @@ def pick_backend():
     Selection order:
 
     1. A headless backend when one is asked for by name: ``TEST_WINDOWING=egl``
-       renders on an EGL device (see glcontext_egl) and ``cgl`` on a macOS CGL
-       context (see glcontext_cgl).  Neither needs a toolkit or a display.
+       renders on an EGL device (see glcontext_egl), ``cgl`` on a macOS CGL
+       context (see glcontext_cgl) and ``wgl`` on a Windows pbuffer (see
+       glcontext_wgl).  None needs a toolkit or a display.
     2. Otherwise probe which windowed backends are importable (``glfw``,
        ``pygame``, ``tk``), honour ``TEST_WINDOWING`` when set and available,
        and default to glfw, then pygame, then tk.
@@ -98,6 +99,11 @@ def pick_backend():
         log.info('Test windowing backend: cgl (headless macOS context)')
         from glcontext_cgl import CGLBackend
         return CGLBackend
+
+    if requested == 'wgl':
+        log.info('Test windowing backend: wgl (headless Windows pbuffer)')
+        from glcontext_wgl import WGLBackend
+        return WGLBackend
 
     available = [name for name in _WINDOWED
                  if _installed(backends.module_for(name))]

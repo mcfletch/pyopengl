@@ -23,7 +23,18 @@ ROOT = paths.ROOT
 
 
 class TestItRunsWhereThereIsNoWindow:
-    """The point of the unification: a headless runner is what CI has."""
+    """The point of the unification: a headless runner is what CI has.
+
+    Which backend that means is a question of platform -- EGL on Linux, CGL on
+    macOS, a WGL pbuffer on Windows -- so these ask :mod:`backends` for the one
+    this machine has rather than naming it.  Naming ``egl`` here ran the Linux
+    platform module on Windows, which found no GL library, skipped all
+    twenty-eight cases and left the assertion measuring nothing.
+    """
+
+    #: The headless backend of the machine running this, or None where it has
+    #: none.  A platform with no headless backend cannot answer the question.
+    HEADLESS = backends.headless_for()
 
     def _run(self, windowing):
         environment = dict(os.environ)
@@ -35,17 +46,23 @@ class TestItRunsWhereThereIsNoWindow:
             cwd=ROOT, env=environment, capture_output=True, text=True,
             check=False)
 
-    @pytest.mark.parametrize('windowing', ['egl'])
-    def test_the_gl_suite_is_not_skipped_wholesale(self, windowing):
-        completed = self._run(windowing)
+    def test_this_platform_has_a_headless_backend(self):
+        """The premise of the two below, said once and by name: without one,
+        every headless claim this suite makes is untested here."""
+        assert self.HEADLESS in backends.HEADLESS, (
+            'no headless backend for %s' % (sys.platform,))
+
+    def test_the_gl_suite_is_not_skipped_wholesale(self):
+        completed = self._run(self.HEADLESS)
         assert 'unavailable under the headless' not in completed.stdout, (
             'tests/gl still skips under %s: %s'
-            % (windowing, completed.stdout[-2000:]))
+            % (self.HEADLESS, completed.stdout[-2000:]))
 
     def test_and_it_actually_passes_there(self):
-        completed = self._run('egl')
-        if 'no usable GL' in completed.stdout or 'no EGL' in completed.stdout:
-            pytest.skip('no headless GL on this machine')
+        completed = self._run(self.HEADLESS)
+        for absent in ('no usable GL', 'no EGL', 'no offscreen'):
+            if absent in completed.stdout:
+                pytest.skip('no headless GL on this machine')
         assert ' passed' in completed.stdout, completed.stdout[-2000:]
         assert 'failed' not in completed.stdout, completed.stdout[-2000:]
 
@@ -161,4 +178,11 @@ class TestAContextThatGoesIsForgotten:
             for handle in forgotten:
                 real(handle)
         assert handles[0], 'no context handle to forget'
-        assert forgotten == [handles[0]], (forgotten, handles)
+        # That it was said, and about this context, rather than how many times.
+        # Retiring a table twice is retiring it and then finding nothing to
+        # retire, and a backend may sit on a library that owns contexts too:
+        # `OpenGL.WGL.offscreen.OffscreenContext` tells the dispatch layer when
+        # it destroys its own context, which it has to, because a caller
+        # reaching for it directly has no fixture doing it for them.
+        assert forgotten, (forgotten, handles)
+        assert set(forgotten) == {handles[0]}, (forgotten, handles)

@@ -9,7 +9,7 @@ at import.
 
 A **windowed** backend opens a window on a display server.  A **headless** one
 needs neither, and there is one per platform: EGL's device platform on Linux,
-CGL on macOS.
+CGL on macOS, WGL pbuffers on Windows.
 """
 
 #: Backends that open a window, in the order preferred when nothing is asked
@@ -20,7 +20,18 @@ CGL on macOS.
 WINDOWED = ('glfw', 'pygame', 'tk')
 
 #: Backends that need no window and no display server, one per platform.
-HEADLESS = ('egl', 'cgl')
+HEADLESS = ('egl', 'cgl', 'wgl')
+
+#: Which of them serves each platform, by the prefix ``sys.platform`` takes
+#: there.  A run that wants "headless, whatever that means here" asks
+#: :func:`headless_for` rather than naming one, since a name is only ever
+#: right on one platform.
+HEADLESS_BY_PLATFORM = (
+    ('linux', 'egl'),
+    ('darwin', 'cgl'),
+    ('win32', 'wgl'),
+    ('cygwin', 'wgl'),
+)
 
 #: Every name ``TEST_WINDOWING`` may take.
 ALL = WINDOWED + HEADLESS
@@ -60,6 +71,27 @@ def requested(environ=None):
 def is_headless(name):
     """Whether ``name`` renders without a window or a display server."""
     return name in HEADLESS
+
+
+def headless_for(platform=None):
+    """The headless backend this platform has, or ``None`` where it has none.
+
+    A test that means "run without a window" has to ask rather than name one:
+    ``egl`` is the answer on Linux and nowhere else, and a run that named it on
+    Windows would select the Linux platform module, find no GL library, and
+    skip every case while reporting green.
+
+    ``platform`` defaults to ``sys.platform``; pass one to ask about another,
+    which is what lets the mapping be checked anywhere.
+    """
+    import sys
+
+    if platform is None:
+        platform = sys.platform
+    for prefix, name in HEADLESS_BY_PLATFORM:
+        if platform.startswith(prefix):
+            return name
+    return None
 
 
 def macos_gui_session():
