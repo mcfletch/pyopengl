@@ -65,26 +65,21 @@ class TestCompileProgramValidation(GLTestCase):
         assert program.validated
 
     def test_a_link_failure_is_still_reported(self):
-        """Skipping validation must not skip the link check with it."""
-        # The same varying declared with two types: a link error by the rules,
-        # not a driver opinion.  Two sampler targets as well, so the skip is in
-        # play and the link check is what has to catch it.
+        """Skipping validation must not skip the link check with it.
+
+        The vertex shader defines no ``main``, which compiles and cannot link:
+        GLSL requires one per stage present, so every driver refuses it.  Two
+        sampler targets in the fragment shader as well, so the validation skip
+        is in play and the link check is what has to catch this.
+        """
         with self.assertRaises(shaders.ShaderLinkError):
             shaders.compileProgram(
                 shaders.compileShader(
-                    '#version 330 core\nout vec2 shared_varying;\n'
-                    'void main(){ shared_varying = vec2(0.0);'
-                    ' gl_Position = vec4(0.0); }',
+                    '#version 330 core\n'
+                    'void not_main(){ gl_Position = vec4(0.0); }',
                     GL_VERTEX_SHADER,
                 ),
-                shaders.compileShader(
-                    '#version 330 core\nin vec4 shared_varying;\n'
-                    'uniform sampler2D colour;\nuniform samplerBuffer table;\n'
-                    'out vec4 f;\n'
-                    'void main(){ f = shared_varying + texture(colour, vec2(0.5))'
-                    ' + texelFetch(table, 0); }',
-                    GL_FRAGMENT_SHADER,
-                ),
+                shaders.compileShader(TWO_TARGETS, GL_FRAGMENT_SHADER),
             )
 
     def test_an_explicit_check_still_asks(self):

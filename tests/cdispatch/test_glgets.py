@@ -39,6 +39,17 @@ class TestReading:
         assert entry.lookup == 0x86A2
         assert entry.shape == ()
 
+    def test_a_lookup_can_be_multiplied(self, table):
+        """``(2, _L(0x8E11))`` -- a pair of values per unit the query counts.
+
+        GL_MULTISAMPLE_COVERAGE_MODES_NV returns
+        MAX_MULTISAMPLE_COVERAGE_MODES_NV pairs, so an array sized from the
+        query alone is half of what the driver writes into it.
+        """
+        entry = table[0x8E12]
+        assert entry.lookup == 0x8E11
+        assert entry.shape == (2,)
+
     def test_covers_the_whole_table(self, table):
         """Fewer entries than assignments: aliased enums share a pname."""
         assert len(table) > 1700

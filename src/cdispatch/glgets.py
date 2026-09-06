@@ -24,7 +24,9 @@ class Entry:
     #: The array shape to allocate, e.g. ``(1,)`` or ``(4, 4)``.
     shape: tuple = ()
     #: When set, the size is not static: query this pname with glGetIntegerv
-    #: and use the answer as the element count.
+    #: and use the answer as the element count.  ``shape`` may still carry a
+    #: multiplier -- ``GL_MULTISAMPLE_COVERAGE_MODES_NV`` returns a *pair* per
+    #: mode, so the count is twice what its lookup answers.
     lookup: int = 0
 
     @property
@@ -53,7 +55,10 @@ def _entry_from_node(node):
             if name in ('_L', 'LookupInt') and element.args:
                 pname = element.args[0]
                 if isinstance(pname, ast.Constant):
-                    return Entry(lookup=int(pname.value))
+                    # Whatever preceded the lookup multiplies it: the table
+                    # reads left to right, exactly as the friendly layer's own
+                    # size calculation does.
+                    return Entry(shape=tuple(dimensions), lookup=int(pname.value))
         return None
     return Entry(shape=tuple(dimensions))
 
