@@ -40,8 +40,14 @@ def _declared_count(dimensions):
     for dimension in dimensions:
         try:
             count *= int(dimension)
-        except (TypeError, ValueError):
-            return None  # a size read from another query, not a fixed claim
+        except (TypeError, ValueError, error.GLError):
+            # Not a fixed claim: either the shape is read from another query,
+            # or the query itself is one this driver will not answer.  A
+            # lookup enum belonging to an extension the driver does not
+            # implement is GL_INVALID_ENUM -- GL_MAX_MULTISAMPLE_COVERAGE_
+            # MODES_NV on anything but NVIDIA -- and there is no recorded size
+            # to hold against what the driver writes.
+            return None
     return count
 
 
