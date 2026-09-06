@@ -94,7 +94,12 @@ class TestLegacyCompat(GLTestCase):
         self.require_extension('GL_ARB_texture_compression')
         fmt = GL_COMPRESSED_RGB8_ETC2
         data = np.zeros(8, 'B')  # one ETC2 4x4 block; friendly form derives imageSize
-        with self.allow_missing():
+        # Which compressed formats exist is the implementation's to say, and
+        # ETC2 arrived in GL 4.3: a 2.1 context that answers GL_INVALID_ENUM
+        # for it is within the specification, and macOS does.  The entry points
+        # and the imageSize the friendly form derives are the subject here, so
+        # that answer is tolerated rather than failed on.
+        with self.allow_missing(), self.tolerate_glerror(GL_INVALID_ENUM):
             tex = int(glGenTextures(1))
             glBindTexture(GL_TEXTURE_2D, tex)
             glCompressedTexImage2DARB(GL_TEXTURE_2D, 0, fmt, 4, 4, 0, data)

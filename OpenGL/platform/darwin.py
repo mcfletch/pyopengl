@@ -63,6 +63,48 @@ class DarwinPlatform( baseplatform.BasePlatform ):
         CGLGetCurrentContext.restype = ctypes.c_void_p
         return CGLGetCurrentContext
 
+    @baseplatform.lazy_property
+    def SetCurrentContext( self ):
+        CGLSetCurrentContext = self.CGL.CGLSetCurrentContext
+        CGLSetCurrentContext.argtypes = [ ctypes.c_void_p ]
+        CGLSetCurrentContext.restype = ctypes.c_int
+        return CGLSetCurrentContext
+
+    def releaseCurrentContext( self ):
+        """Let go of the context this thread holds; answer whether there was one
+
+        CGL is the layer NSGL and AGL are built on, so a context made through
+        any of the three is the one this releases.  See
+        :meth:`OpenGL.platform.baseplatform.BasePlatform.releaseCurrentContext`
+        for why a program with two GL bindings in it needs to be able to say
+        this.
+
+        The answer is what the platform reports afterwards rather than that the
+        call was made: a caller releases so that another binding API may take
+        the thread, and takes the answer as permission to.
+        """
+        if not self.GetCurrentContext():
+            return False
+        self.SetCurrentContext( None )
+        return not self.GetCurrentContext()
+
+    def getExtensionProcedure( self, name ):
+        """The address of an entry point, or None where the framework has none
+
+        macOS has no get-proc-address call: CGL provides none, and the OpenGL
+        framework exports every entry point it serves as an ordinary symbol,
+        which is what EXTENSIONS_USE_BASE_FUNCTIONS says.  So the dynamic
+        loader is asked, and a caller that wants an address rather than a
+        callable does not have to know which platform it is on.
+        """
+        if not isinstance( name, str ):
+            name = name.decode( 'ascii' )
+        try:
+            pointer = getattr( self.GL, name )
+        except AttributeError:
+            return None
+        return ctypes.cast( pointer, ctypes.c_void_p ).value
+
     def getGLUTFontPointer( self, constant ):
         """Platform specific function to retrieve a GLUT font pointer
         
