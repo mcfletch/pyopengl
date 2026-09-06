@@ -16,16 +16,20 @@ cdef class _ErrorChecker:
     cdef public int checkContext
     cdef public object _isValid
     cdef public object _getErrors
+    cdef public object _baseGetErrors
     cdef public object _errorClass
-    cdef public int _noErrorResult 
+    cdef public int _noErrorResult
     #: whether this API's calls are made with a GL context current; read
     #: by callers and by the dispatch layer, so both implementations
     #: answer for it.
     cdef public int needs_context
-    
+    #: Whether the error code comes from a GL_KHR_debug callback rather than
+    #: from a glGetError round trip.  OpenGL.dispatch switches it.
+    cdef public int readsDebugOutput
+
     def __init__( self, platform, baseOperation, noErrorResult=0, errorClass=None, needs_context=True ):
         """Initialize from a platform module/reference
-        
+
         needs_context -- whether this API's calls are made with a GL context
         current.  EGL, GLX and WGL manage the display, the config and the
         context itself, so theirs are made before one exists and by definition;
@@ -33,15 +37,34 @@ cdef class _ErrorChecker:
         """
         self._isValid = platform.CurrentContextIsValid
         self._getErrors = baseOperation
+        self._baseGetErrors = baseOperation
         self._noErrorResult = noErrorResult
         self._errorClass = errorClass
-        
+
         self.doChecks = bool( _configflags.ERROR_CHECKING and self._getErrors )
         self.suspended = False
         self.needs_context = bool( needs_context )
         self.checkContext = bool( _configflags.CONTEXT_CHECKING and needs_context )
-    
-    def glCheckError( 
+        self.readsDebugOutput = False
+
+    def baseGetErrors( self ):
+        """The driver's own glGetError, whatever is reading errors now."""
+        return self._baseGetErrors()
+
+    def setErrorReader( self, reader=None ):
+        """Read error codes from `reader`, or from glGetError again.
+
+        A GL_KHR_debug callback notices the error during the call, so the check
+        afterwards is a flag read rather than a round trip.
+        `OpenGL.dispatch.use_debug_output` is the way in; this is where the
+        choice takes effect.
+        """
+        self._getErrors = reader if reader is not None else self._baseGetErrors
+        self.readsDebugOutput = reader is not None
+        if not self.suspended:
+            self.doChecks = bool( _configflags.ERROR_CHECKING and self._getErrors )
+
+    def glCheckError(
         self,
         result,
         baseOperation=None,

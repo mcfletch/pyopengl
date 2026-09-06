@@ -13,8 +13,18 @@ import pytest
 
 dispatch = pytest.importorskip('OpenGL._dispatch')
 
-if not dispatch.AVAILABLE:  # pragma: no cover - depends on what is installed
-    pytest.skip('the C dispatch extension is not built', allow_module_level=True)
+from OpenGL import dispatch as _dispatch_api  # noqa: E402
+
+# Built is not the same as running: PYOPENGL_DISPATCH=ctypes leaves the
+# extension importable and its entry points uninstalled, and everything below
+# reads them.  settle() makes the choice now rather than at the first entry
+# point, which is what lets this be asked before the imports underneath.
+if _dispatch_api.settle() != 'c':  # pragma: no cover - depends on the axis
+    pytest.skip(
+        'the C dispatch layer is not the implementation running: %s'
+        % (_dispatch_api.status().reason,),
+        allow_module_level=True,
+    )
 
 # Both, because the point is that they are different entry points: importing
 # one installs the C layer over its bindings and leaves the other's alone.

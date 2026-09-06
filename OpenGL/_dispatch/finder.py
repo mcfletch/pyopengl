@@ -12,10 +12,9 @@ clients import and that PyOpenGL's own friendly modules import from, so the
 names go on resolving -- built from the same tables the C is generated from,
 on demand.
 
-This is on, because there is nothing for it to be off in favour of: the
-generated files are not shipped, so these names resolve here or not at all.
-``PYOPENGL_VIRTUAL_MODULES=0`` goes back to importing files, which is useful
-only to a tree that still has them.
+There is nothing for this to be switched off in favour of: the generated files
+are not shipped and the generator does not write them, so these names resolve
+here or not at all.
 
 Shadowing files would not have been worth an import hook, and the measurement
 is why -- with the friendly modules importing the raw ones eagerly, the module
@@ -44,7 +43,7 @@ import os
 import pkgutil
 import sys
 
-from OpenGL import _declarations, _rawfinder
+from OpenGL import _declarations
 from OpenGL._declarations import Declaration, resolve_type  # noqa: F401
 from OpenGL._dispatch import support
 
@@ -208,12 +207,6 @@ def _api_of(name):
     return parts[2] if len(parts) > 2 else 'GL'
 
 
-#: Whether the generated modules are built from the tables.  The expression
-#: lives in :mod:`OpenGL._rawfinder`, which imports nothing from PyOpenGL, so
-#: that this module and ``_configflags`` cannot come to different answers.
-virtual_modules_wanted = _rawfinder.virtual_modules_wanted
-
-
 class _RawDirectoryFinder:
     """A path entry finder for one directory under ``OpenGL/raw``.
 
@@ -332,7 +325,7 @@ def install(extension=None, entry_points=None):
     modules are not shipped, and this is what answers for their names.
     """
     global _installed
-    if _installed is not None or not virtual_modules_wanted():
+    if _installed is not None:
         return _installed
     _installed = RawModuleFinder(extension, entry_points)
     sys.meta_path.insert(0, _installed)

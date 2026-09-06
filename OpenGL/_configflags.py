@@ -1,7 +1,7 @@
 """Holds the import-time constants for various configuration flags"""
-from OpenGL import _rawfinder
 from OpenGL import (
     ERROR_CHECKING,
+    ERROR_DEBUG_OUTPUT,
     ERROR_LOGGING,
     ERROR_ON_COPY,
     ARRAY_SIZE_CHECKING,
@@ -23,10 +23,11 @@ import os as _os
 import sys as _sys
 
 #: Which implementation of the entry points to use: 'c', the
-#: registry-generated C dispatch, or 'ctypes', the one PyOpenGL has always
-#: had.  'c' is the default from 4.0; where the extension was not built the
-#: layer falls back to ctypes on its own, so this is safe to leave alone.
-#: PYOPENGL_DISPATCH=ctypes selects the older implementation, which remains
+#: registry-generated C dispatch, or 'ctypes', the pure-Python one.  'c' is
+#: the default from 4.0 on CPython, and takes effect where
+#: PyOpenGL_accelerate is installed; where the extension is absent the layer
+#: falls back to ctypes on its own, so this is safe to leave alone.
+#: PYOPENGL_DISPATCH=ctypes selects the ctypes implementation, which remains
 #: supported and is not scheduled for removal.
 #: Off CPython the C layer is not built (see accelerate/setup.py) and would be
 #: slower than ctypes if it were, so the default follows the interpreter.
@@ -41,14 +42,3 @@ DISPATCH = _os.environ.get('PYOPENGL_DISPATCH', _DEFAULT_DISPATCH).strip().lower
 if FULL_LOGGING and DISPATCH == 'c':
     DISPATCH = 'ctypes'
 
-#: Build the generated OpenGL.raw modules from the C dispatch layer's tables
-#: rather than importing their files.  On, because there are no files: the
-#: 1,298 generated modules under OpenGL/raw hold nothing the declaration tables
-#: do not, and a module that is data does not need to be a module.  Setting it
-#: to 0 leaves ``from OpenGL.raw.GL.VERSION.GL_1_1 import *`` with nothing to
-#: import, so it is useful only to a tree that still has the files.
-#:
-#: Read from :mod:`OpenGL._rawfinder` rather than parsed here: the finder needs
-#: the same answer before this module may be imported, and one expression is
-#: what keeps the two from disagreeing.
-VIRTUAL_MODULES = _rawfinder.virtual_modules_wanted()

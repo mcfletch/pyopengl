@@ -230,9 +230,12 @@ if _configflags.ERROR_CHECKING:
             """
             _getErrors = None
             suspended = False
+            #: Whether the error code comes from a GL_KHR_debug callback rather
+            #: than from a glGetError round trip.  OpenGL.dispatch switches it.
+            readsDebugOutput = False
             def __init__( self, platform, baseOperation=None, noErrorResult=0, errorClass=GLError, needs_context=True ):
                 """Initialize from a platform module/reference
-                
+
                 needs_context -- whether this API's calls are made with a GL
                     context current.  EGL, GLX and WGL manage the display, the
                     config and the context itself, so theirs are made before
@@ -242,17 +245,37 @@ if _configflags.ERROR_CHECKING:
                 """
                 self._isValid = platform.CurrentContextIsValid
                 self._getErrors = baseOperation
+                self._baseGetErrors = baseOperation
                 self._noErrorResult = noErrorResult
                 self._errorClass = errorClass
                 self.needs_context = needs_context
+                self._install()
+                self._currentChecker = self._registeredChecker
+            def _install( self ):
+                """Settle which callable a check calls, from `_getErrors`."""
                 if self._getErrors:
-                    if _configflags.CONTEXT_CHECKING and needs_context:
-                        self._registeredChecker = self.safeGetError 
+                    if _configflags.CONTEXT_CHECKING and self.needs_context:
+                        self._registeredChecker = self.safeGetError
                     else:
                         self._registeredChecker = self._getErrors
                 else:
                     self._registeredChecker = self.nullGetError
-                self._currentChecker = self._registeredChecker
+            def baseGetErrors( self ):
+                """The driver's own glGetError, whatever is reading errors now."""
+                return self._baseGetErrors()
+            def setErrorReader( self, reader=None ):
+                """Read error codes from `reader`, or from glGetError again.
+
+                A GL_KHR_debug callback notices the error during the call, so
+                the check afterwards is a flag read rather than a round trip.
+                `OpenGL.dispatch.use_debug_output` is the way in; this is where
+                the choice takes effect.
+                """
+                self._getErrors = reader or self._baseGetErrors
+                self.readsDebugOutput = reader is not None
+                self._install()
+                if not self.suspended:
+                    self._currentChecker = self._registeredChecker
             def __bool__( self ):
                 """We are "true" if we actually do anything"""
                 if self._registeredChecker is self.nullGetError:

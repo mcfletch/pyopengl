@@ -14,9 +14,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
-/* Py_NewRef and Py_XNewRef arrived in 3.10, and the declared minimum is 3.9.
- * They are the only thing in here that needed a newer interpreter, and a
- * two-line shim is a great deal cheaper than telling 3.9 users to upgrade. */
+/* Py_NewRef and Py_XNewRef arrived in 3.10; the declared minimum is 3.9, so
+ * 3.9 builds get them from here. */
 #if PY_VERSION_HEX < 0x030A0000
 static inline PyObject *Py_NewRef(PyObject *object)
 {
@@ -84,9 +83,9 @@ typedef unsigned int PyGL_GLhandleARB;
  * The fast path is a match test, never a validation: a buffer whose format
  * matches is used directly, and anything else -- a different element type, a
  * non-contiguous buffer, an object with no buffer protocol at all -- falls
- * through to ArrayDatatype and the format-handler registry, which behaves
- * exactly as it does today.  A new element type is a new row here plus a new
- * ArrayDatatype subclass; it needs no new C and no change to any stub.
+ * through to ArrayDatatype and the format-handler registry, which handle it as
+ * they do for the ctypes bindings.  A new element type is a new row here plus
+ * a new ArrayDatatype subclass; it needs no new C and no change to any stub.
  * ------------------------------------------------------------------ */
 typedef struct {
     /* struct-module format codes this element accepts.  '\0' in primary means
@@ -156,9 +155,9 @@ typedef struct {
      * demoting the entry point to ctypes and undoing the work. */
     uint8_t hand_written;
     /* Whether calling this without a current context is meaningless.  It is a
-     * property of the command, so the generator states it; working it out
-     * here cost four strcmps, and in verify mode that was on the per-call
-     * path. */
+     * property of the command, so the generator states it rather than the
+     * runtime deriving it from the name: that would be four strcmps, and in
+     * verify mode they land on the per-call path. */
     uint8_t needs_context;
 } PyGLCommand;
 
@@ -181,8 +180,7 @@ typedef struct {
 } PyGLEnum;
 
 /* One entry-point declaration in a generated module.  The signature is here
- * because a client can still demote to the ctypes binding, and running the
- * file used to be what recorded it. */
+ * because a client can still demote to the ctypes binding, which needs it. */
 typedef struct {
     const char *name;      /* glTexImage3D */
     const char *arguments; /* "target,level,internalformat,..." */
@@ -230,6 +228,19 @@ typedef struct PyGLDispatch {
      * table and gets a fresh one, rather than the dead context's addresses. */
     void *handle;
     int is_null_context;  /* the table used when no context is current */
+    /* How errors are noticed in *this* context.  GL_KHR_debug is a context's
+     * own capability and its callback is installed per context, so a process
+     * holding one context that offers it beside one that does not has to
+     * check each of them the way that one can be checked. */
+    int error_mode;
+    /* Calls left before the debug-output check asks the driver anyway.  A
+     * context handle is an address the driver is free to hand out again, so a
+     * program that destroys a context without saying so can leave this table
+     * describing a context that never had our callback -- and a check that
+     * only reads a flag nobody sets is a check that passes everything.  The
+     * audit bounds that to PYGL_DEBUG_AUDIT_INTERVAL calls and puts the
+     * context back on glGetError when it finds it. */
+    int audit_countdown;
     struct PyGLDispatch *next;
 } PyGLDispatch;
 
@@ -247,7 +258,11 @@ extern PYGL_THREAD_LOCAL PyGLDispatch *pygl_current;
 typedef struct {
     PyObject_HEAD vectorcallfunc vectorcall;
     const PyGLCommand *info;
-    /* Set only when the entry point has been demoted to ctypes by assigning
+    /* Every PyObject * below is a strong reference, dropped in GLProc_clear
+     * and GLProc_dealloc; each is also visited by GLProc_traverse, since any
+     * of them can close a cycle back to the entry point.
+     *
+     * Set only when the entry point has been demoted to ctypes by assigning
      * errcheck or argtypes.  Demotion is per function, for the life of the
      * process. */
     PyObject *ctypes_callable;
@@ -268,9 +283,27 @@ extern PyTypeObject PyGLProc_Type;
 
 /* ------------------------------------------------------------------ *
  * runtime entry points the generated code calls
+ *
+ * Two reference conventions hold throughout this section, so that neither has
+ * to be restated on each declaration:
+ *
+ * - Every PyObject * returned is a new reference, or NULL with an exception
+ *   set.  Nothing here hands back a borrowed one.
+ * - An acquire -- pygl_array_in, pygl_array_in_sized, pygl_array_out,
+ *   pygl_array_out_glget, pygl_array_typed, pygl_image_in, pygl_image_out,
+ *   pygl_string_array -- fills a PyGLBuf the caller then owns and must hand to
+ *   pygl_release.  On failure it leaves the slot holding nothing, which is what
+ *   entitles PYGL_ARRAY_* to count a slot only once its acquire has returned:
+ *   a failed acquire that kept a reference would leak it, since the frame never
+ *   learns the slot exists.
  * ------------------------------------------------------------------ */
+
+/* One acquired argument.  Each of the three fields below owns what it holds
+ * until pygl_release, and `pointer` is a borrowed view of whichever of them
+ * produced it. */
 typedef struct {
-    Py_buffer view;
+    Py_buffer view; /* valid only where have_view; holds a reference to the
+                     * exporter and a claim on its export count */
     PyObject *owner; /* strong reference when the slow path converted */
     void *pointer;
     /* Memory this frame slot owns outright, such as the char ** a string
@@ -283,7 +316,7 @@ typedef struct {
  * once-per-context-per-entry-point path. */
 void *pygl_slot_slow(GLProc *self);
 
-/* OpenGL.CONTEXT_CHECKING.  Off by default, as it is today: calling an entry
+/* OpenGL.CONTEXT_CHECKING.  Off by default: calling an entry
  * point with no current context is a no-op, which is what a cleanup handler
  * running after its context was destroyed relies on.  With it on, every call
  * verifies -- checking only where a slot happened to be unresolved would
@@ -327,9 +360,14 @@ static inline int pygl_wants_error_check(GLProc *self)
 
 /* How errors are noticed.  GL_KHR_debug reports them through a callback the
  * driver invokes during the call, so checking becomes a read of a flag rather
- * than a glGetError round trip. */
+ * than a glGetError round trip.  Held per context: see PyGLDispatch. */
 enum { PYGL_ERRORS_GETERROR = 0, PYGL_ERRORS_DEBUG = 1 };
-extern int pygl_error_mode;
+/* How often a context checking through GL_KHR_debug asks the driver anyway.
+ * One glGetError per this many calls: at 64 it costs about a sixth of a
+ * nanosecond per call, against the ~11 ns checking every call costs, and it
+ * bounds to 64 calls the window in which a context whose callback is not ours
+ * goes unchecked. */
+#define PYGL_DEBUG_AUDIT_INTERVAL 64
 extern PYGL_THREAD_LOCAL int pygl_debug_pending;
 
 /* How one API is asked for its errors.
@@ -376,18 +414,23 @@ static inline int pygl_check_needed(GLProc *self)
          * where their checker answers its no-error result and never raises. */
         return 0;
     }
-    if (pygl_error_mode == PYGL_ERRORS_DEBUG && source->gl_family) {
-        return pygl_debug_pending;
+    if (pygl_current->error_mode == PYGL_ERRORS_DEBUG && source->gl_family) {
+        /* The audit is the second half of the test: a flag that is never set
+         * is indistinguishable from a context with nothing wrong. */
+        return pygl_debug_pending || --pygl_current->audit_countdown <= 0;
     }
     return 1;
 }
+/* These two raise and return NULL, so that a stub can `return
+ * pygl_arity_error(...)` -- the one place in the section where a PyObject *
+ * return is never an object. */
 PyObject *pygl_arity_error(GLProc *self, Py_ssize_t want, Py_ssize_t got);
 PyObject *pygl_arity_range_error(GLProc *self, Py_ssize_t low, Py_ssize_t high,
                                  Py_ssize_t got);
 void pygl_argument_error(GLProc *self);
 
 /* Acquire an input array.  Matching buffers are used directly; everything else
- * is handed to ArrayDatatype, which converts exactly as it does today. */
+ * is handed to ArrayDatatype to convert. */
 int pygl_array_in(GLProc *self, PyObject *object, const PyGLElement *element,
                   Py_ssize_t index, PyGLBuf *out);
 /* As above, and additionally check the element count. */
@@ -408,9 +451,17 @@ int pygl_array_out_glget(GLProc *self, PyObject *object, const PyGLElement *elem
                          const PyGLGetSize *table, Py_ssize_t table_count,
                          PyGLBuf *out, Py_ssize_t *count);
 
-/* Allocate an output array of `count` elements, or accept the caller's. */
+/* Allocate an output array of `count` elements, or accept the caller's.  Where
+ * the caller supplied one, the slot holds their object, so what the return
+ * conversion hands back is the array they passed rather than a copy. */
 int pygl_array_out(GLProc *self, PyObject *object, const PyGLElement *element,
                    Py_ssize_t index, Py_ssize_t count, int exact, PyGLBuf *out);
+
+/* Give up everything a slot holds -- the view, the reference, the block -- and
+ * reset it, so calling it twice is harmless and so is calling it on a slot an
+ * acquire failed into.  An *unwritten* slot is a different matter: PYGL_FRAME
+ * leaves the array uninitialised, and PYGL_CLEANUP releases only the slots the
+ * acquires counted. */
 void pygl_release(PyGLBuf *buffer);
 
 /* Images.  Their length is a function of format, type, the extent and the
@@ -433,7 +484,9 @@ int pygl_array_typed(GLProc *self, PyObject *object, unsigned int type,
 
 /* Keep an argument alive against the current context, for the entry points
  * where the GL goes on reading the memory after the call returns.  Losing
- * this is a crash rather than a leak. */
+ * this is a crash rather than a leak.  The reference that outlives the call is
+ * the context data's own; this slot is still released with the rest of the
+ * frame. */
 int pygl_retain(GLProc *self, Py_ssize_t index, PyGLBuf *buffer);
 
 /* What a client-array registration hands back: the converted array, which is
@@ -446,13 +499,15 @@ int pygl_string_array(GLProc *self, PyObject *object, Py_ssize_t index,
                       PyGLBuf *out);
 
 /* Return-value conversion.  The rule is that the C layer returns the same
- * Python object the ctypes layer returns today. */
+ * Python object the ctypes layer returns. */
 PyObject *pygl_bytes_or_none(const char *value);
 PyObject *pygl_address_or_none(void *value);
 PyObject *pygl_opaque(void *value, const char *type_name);
 
 /* The output-array return.  A one-element result is unpacked to a scalar,
- * which is what the friendly API does today. */
+ * which is what the friendly API does.  The array itself is what comes back
+ * where it is not, with a reference of its own, so the frame releasing the
+ * slot afterwards leaves the caller holding a live array. */
 PyObject *pygl_output_value(PyGLBuf *buffer, const PyGLElement *element,
                             Py_ssize_t count);
 
@@ -477,7 +532,8 @@ typedef struct {
 
 /* Build one GLProc per entry and file it under (api, name) in the module's
  * entry-point mapping.  The Python side reads that mapping when it installs
- * the C implementation over the ctypes one. */
+ * the C implementation over the ctypes one.  The mapping is left holding the
+ * only reference to each proc. */
 int pygl_register_entries(PyObject *mapping, const PyGLEntry *entries);
 int pygl_set_command_count(Py_ssize_t count);
 PyObject *pygl_make_proc(const PyGLCommand *command, vectorcallfunc stub);

@@ -53,7 +53,6 @@ static PYGL_THREAD_LOCAL int pygl_error_suspended = 0;
  * call itself when GL_DEBUG_OUTPUT_SYNCHRONOUS is on, so the callback records
  * what happened and the stub's check becomes a read of `pygl_debug_pending`
  * rather than a glGetError round trip. */
-int pygl_error_mode = PYGL_ERRORS_GETERROR;
 PYGL_THREAD_LOCAL int pygl_debug_pending = 0;
 #define PYGL_DEBUG_MESSAGE_MAX 1024
 static PYGL_THREAD_LOCAL char pygl_debug_message[PYGL_DEBUG_MESSAGE_MAX];
@@ -96,12 +95,24 @@ static void *(*pygl_get_current_context)(void) = NULL;
  * per-context dispatch tables
  * ------------------------------------------------------------------ */
 
+/* The fields are named rather than counted: these two are the only tables not
+ * built by pygl_table_for, so a field added to PyGLDispatch would otherwise
+ * silently shift what the values here initialise. */
+
 /* Used when the platform reports that no context is current. */
-static PyGLDispatch pygl_null_table = {NULL, NULL, NULL, 1, NULL};
+static PyGLDispatch pygl_null_table = {
+    .is_null_context = 1,
+    .error_mode = PYGL_ERRORS_GETERROR,
+    .audit_countdown = PYGL_DEBUG_AUDIT_INTERVAL,
+};
 /* Used when the platform offers no way to ask which context is current.  It
  * behaves as an ordinary table, because "we cannot tell" must not be reported
  * as "there is none". */
-static PyGLDispatch pygl_default_table = {NULL, NULL, NULL, 0, NULL};
+static PyGLDispatch pygl_default_table = {
+    .is_null_context = 0,
+    .error_mode = PYGL_ERRORS_GETERROR,
+    .audit_countdown = PYGL_DEBUG_AUDIT_INTERVAL,
+};
 PYGL_THREAD_LOCAL PyGLDispatch *pygl_current = &pygl_default_table;
 
 static PyGLDispatch *pygl_tables = NULL; /* handle -> table, a short list */
@@ -195,6 +206,14 @@ static int pygl_make_current(void *handle)
         return -1;
     }
     pygl_current = table;
+    /* A table this thread is coming back to was armed for the context it
+     * described when it was last used, and a handle is an address the driver
+     * reuses.  So the first check after a switch asks the driver rather than
+     * trusting the flag; if the callback is still this context's, the audit
+     * costs one glGetError and the flag is trusted again. */
+    if (table->error_mode == PYGL_ERRORS_DEBUG) {
+        table->audit_countdown = 1;
+    }
     return 0;
 }
 
@@ -582,16 +601,44 @@ int pygl_check_error(GLProc *self, PyObject *const *args, Py_ssize_t nargs)
     if (pygl_error_suspended && source->gl_family) {
         return 0;
     }
-    if (pygl_error_mode == PYGL_ERRORS_DEBUG && source->gl_family) {
+    if (pygl_current->error_mode == PYGL_ERRORS_DEBUG && source->gl_family) {
         if (!pygl_debug_pending) {
-            return 0;
+            /* Reached on the audit, which pygl_check_needed lets through every
+             * PYGL_DEBUG_AUDIT_INTERVAL calls.  An error the driver has not
+             * reported through the callback means the callback is not this
+             * context's -- the handle was recycled, or something installed
+             * over it -- so the context goes back to glGetError, where a check
+             * cannot be silently wrong. */
+            pygl_current->audit_countdown = PYGL_DEBUG_AUDIT_INTERVAL;
+            code = pygl_error_code(source);
+            if (code == source->no_error) {
+                return 0;
+            }
+            pygl_current->error_mode = PYGL_ERRORS_GETERROR;
+            tuple = pygl_arg_tuple(args, nargs);
+            result = PyObject_CallMethod(pygl_support, "raise_gl_error", "IsOs",
+                                         code, self->info->name, tuple,
+                                         pygl_api_name(self->info->api));
+            Py_XDECREF(tuple);
+            Py_XDECREF(result);
+            pygl_ensure_raised(self, code);
+            return -1;
         }
         pygl_debug_pending = 0;
         code = pygl_error_code(source);
+        if (code == source->no_error) {
+            /* The callback fired but the queue is empty, so the error has
+             * already been reported to somebody: a ctypes entry point in the
+             * same context raised it through its own checker, or the caller
+             * drained the queue with glGetError.  Raising here would attribute
+             * a spent error to an innocent call, with err = 0 in it. */
+            return 0;
+        }
         tuple = pygl_arg_tuple(args, nargs);
-        result = PyObject_CallMethod(pygl_support, "raise_debug_error", "IIssO",
+        result = PyObject_CallMethod(pygl_support, "raise_debug_error", "IIssOs",
                                      code, pygl_debug_id, pygl_debug_message,
-                                     self->info->name, tuple);
+                                     self->info->name, tuple,
+                                     pygl_api_name(self->info->api));
         Py_XDECREF(tuple);
         Py_XDECREF(result);
         pygl_ensure_raised(self, code);
@@ -1131,8 +1178,10 @@ int pygl_array_out_glget(GLProc *self, PyObject *object, const PyGLElement *elem
     pygl_buf_reset(out);
 
     if (entry->lookup) {
-        /* The size itself comes from a runtime query.  Six pnames in the
-         * desktop table do this, so a Python call is the right cost. */
+        /* The size itself comes from a runtime query.  Seven pnames in the
+         * desktop table do this, so a Python call is the right cost.  dim0 is
+         * how many values there are per unit the query counts:
+         * MULTISAMPLE_COVERAGE_MODES_NV answers with a *pair* per mode. */
         PyObject *size = PyObject_CallMethod(pygl_support, "lookup_int", "I",
                                              entry->lookup);
         if (size == NULL) {
@@ -1142,6 +1191,9 @@ int pygl_array_out_glget(GLProc *self, PyObject *object, const PyGLElement *elem
         Py_DECREF(size);
         if (PyErr_Occurred()) {
             return -1;
+        }
+        if (entry->dim0) {
+            *count *= (Py_ssize_t)entry->dim0;
         }
         shape = Py_BuildValue("(n)", *count);
     } else if (entry->dim1) {
@@ -2433,6 +2485,9 @@ static PyObject *pygl_py_debug_callback_address(PyObject *module, PyObject *noar
     return PyLong_FromVoidPtr((void *)pygl_debug_callback);
 }
 
+/* The mode belongs to the context, so which context is current decides which
+ * table this writes -- and the caller is Python, which may have made a
+ * different one current since the last dispatch. */
 static PyObject *pygl_py_set_error_mode(PyObject *module, PyObject *argument)
 {
     long mode = PyLong_AsLong(argument);
@@ -2440,9 +2495,21 @@ static PyObject *pygl_py_set_error_mode(PyObject *module, PyObject *argument)
     if (PyErr_Occurred()) {
         return NULL;
     }
-    pygl_error_mode = (int)mode;
+    pygl_sync_context();
+    pygl_current->error_mode = (int)mode;
+    pygl_current->audit_countdown = PYGL_DEBUG_AUDIT_INTERVAL;
     pygl_debug_pending = 0;
     Py_RETURN_NONE;
+}
+
+/* Which mechanism this context checks errors with, so the Python layer can
+ * report it rather than keep a second record of what it asked for. */
+static PyObject *pygl_py_error_mode(PyObject *module, PyObject *noargs)
+{
+    (void)module;
+    (void)noargs;
+    pygl_sync_context();
+    return PyLong_FromLong((long)pygl_current->error_mode);
 }
 
 static PyObject *pygl_py_sync_context(PyObject *module, PyObject *noargs)
@@ -2638,6 +2705,8 @@ static PyMethodDef pygl_methods[] = {
      "Suspend per-call error checking, for the duration of a glBegin block."},
     {"debug_callback_address", pygl_py_debug_callback_address, METH_NOARGS,
      "The address of the GL_KHR_debug callback, for glDebugMessageCallback."},
+    {"error_mode", pygl_py_error_mode, METH_NOARGS,
+     "Which mechanism the current context notices GL errors with."},
     {"set_error_mode", pygl_py_set_error_mode, METH_O,
      "0 to check with glGetError, 1 to check the GL_KHR_debug flag."},
     {"sync_context", pygl_py_sync_context, METH_NOARGS,

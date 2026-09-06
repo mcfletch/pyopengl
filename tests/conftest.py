@@ -51,14 +51,13 @@ def pytest_configure(config):
     if os.environ.get('PYOPENGL_DISPATCH', '').strip().lower() != 'c':
         return
 
-    import OpenGL._dispatch as dispatch
+    from OpenGL import dispatch
 
-    dispatch.install()
-    if not dispatch.ACTIVE:
+    if dispatch.settle() != 'c':
         raise pytest.UsageError(
-            'PYOPENGL_DISPATCH=c but the C layer is not active: the extension '
-            'was not built or failed to import, so this run would test ctypes '
-            'while claiming to test C.  Build it with '
-            'PYOPENGL_REQUIRE_C_DISPATCH=1 to see why, or set '
+            'PYOPENGL_DISPATCH=c but the C layer is not active: %s.  So this '
+            'run would test ctypes while claiming to test C.  Build the '
+            'extension with PYOPENGL_REQUIRE_C_DISPATCH=1 to see why, or set '
             'PYOPENGL_DISPATCH_STRICT=0 if the fallback is what you want.'
+            % (dispatch.status().reason,)
         )

@@ -119,7 +119,9 @@ from OpenGL._dispatch import support
 if not _dispatch.ACTIVE:
     raise SystemExit(77)
 GL.glGetString(GL.GL_VERSION)
-if %(debug)r and not _dispatch.use_debug_output():
+# A context offering GL_KHR_debug is given it without asking, so the
+# glGetError half of this comparison has to say it wants the other one.
+if not _dispatch.use_debug_output(%(debug)r):
     raise SystemExit(77)
 
 # A client that replaced the raiser with one that returns instead of raising.
@@ -174,20 +176,20 @@ if window is None:
 glfw.make_context_current(window)
 
 import OpenGL.GL as GL
-from OpenGL import _dispatch
+from OpenGL import _dispatch, dispatch
 
 if not _dispatch.ACTIVE:
     raise SystemExit(77)
 GL.glGetString(GL.GL_VERSION)
 
 for _ in range(4):
-    if not _dispatch.use_debug_output():
+    if not dispatch.use_debug_output():
         raise SystemExit(77)
-held_after_enabling = len(_dispatch._installed_callbacks)
-_dispatch.use_debug_output(False)
+held_after_enabling = len(dispatch._installed_callbacks)
+dispatch.use_debug_output(False)
 print(
     held_after_enabling,
-    len(_dispatch._installed_callbacks),
+    len(dispatch._installed_callbacks),
     bool(GL.glIsEnabled(0x92E0)),          # GL_DEBUG_OUTPUT
     bool(GL.glIsEnabled(0x8242)),          # GL_DEBUG_OUTPUT_SYNCHRONOUS
 )

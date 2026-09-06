@@ -66,6 +66,24 @@ import occurs the flags should no longer be changed.
 
         Default: False
 
+    ERROR_DEBUG_OUTPUT -- if True, a context offering GL_KHR_debug
+        notices errors through the driver's callback rather than
+        through a glGetError after every call.  The callback runs
+        during the failing call, so the check on the ordinary path
+        is a flag read; the same GLError is raised from the same
+        call either way.
+
+        Switching it off leaves error checking on the glGetError
+        round trip, which is what a program wants if it installs a
+        GL_KHR_debug callback of its own -- though PyOpenGL leaves
+        an existing callback alone in any case -- or if it does not
+        want the driver put into synchronous debug output.
+
+        OpenGL.dispatch.error_checking_mode() reports which
+        mechanism a context ended up with.
+
+        Default: True
+
     CONTEXT_CHECKING -- if set to True, PyOpenGL will wrap
         *every* GL and GLU call with a check to see if there
         is a valid context.  If there is no valid context
@@ -210,6 +228,7 @@ FORWARD_COMPATIBLE_ONLY = False
 SIZE_1_ARRAY_UNPACK = True
 USE_ACCELERATE = environ_key("USE_ACCELERATE", True)
 CONTEXT_CHECKING = environ_key("CONTEXT_CHECKING", False)
+ERROR_DEBUG_OUTPUT = environ_key("ERROR_DEBUG_OUTPUT", True)
 
 FULL_LOGGING = environ_key("FULL_LOGGING", False)
 ALLOW_NUMPY_SCALARS = environ_key("ALLOW_NUMPY_SCALARS", False)

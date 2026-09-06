@@ -1,10 +1,10 @@
 """The C implementation of the OpenGL entry points.
 
 It is compiled, so it ships in ``PyOpenGL_accelerate``; where that is installed
-on CPython it is what runs, and ``PYOPENGL_DISPATCH=ctypes`` selects the older
+on CPython it is what runs, and ``PYOPENGL_DISPATCH=ctypes`` selects the ctypes
 implementation instead.  That one is the reference semantics, the bootstrap
-route for a new platform, and what runs with ``PyOpenGL`` alone; it is not
-scheduled for removal.
+route for a new platform, and what runs with ``PyOpenGL`` alone and on every
+interpreter other than CPython; it is not scheduled for removal.
 
 Installing this layer replaces the ctypes binding for an entry point with a
 ``GLProc``, which implements the friendly API directly rather than wrapping a
@@ -14,7 +14,6 @@ ctypes binding, so the two coexist.
 
 import ctypes
 import os
-import sys
 
 __all__ = [
     'AVAILABLE',
@@ -26,11 +25,6 @@ __all__ = [
     'debug_output_available',
     'set_error_checking',
 ]
-
-#: Which implementation the process is using.  ``PYOPENGL_DISPATCH=ctypes``
-#: selects the older implementation wholesale, and keeps doing so: it is the
-#: reference semantics and is not scheduled for removal.
-DISPATCH = os.environ.get('PYOPENGL_DISPATCH', 'c').strip().lower()
 
 #: How the layer decides which context's table to dispatch through.
 #:
@@ -55,7 +49,7 @@ entry_points = {}
 #: the optional compiled companion released from the same repository, so that
 #: PyOpenGL itself stays a single universal wheel.  Without accelerate
 #: installed there is no extension and the ctypes implementation runs, which is
-#: exactly the arrangement PyOpenGL has always had for its accelerators.
+#: the arrangement the rest of PyOpenGL's accelerators are in.
 try:
     from OpenGL_accelerate import dispatch as _c
 except ImportError as _err:  # pragma: no cover - depends on what is installed
@@ -186,10 +180,17 @@ def register_error_source(api, checker):
     A checker with nothing to ask -- GLX's, and WGL's absence of one -- leaves
     the API unpolled, which is what it does under ctypes, where such a checker
     answers its no-error result and never raises.
+
+    The function taken is the driver's own, ``_baseGetErrors``, and not
+    whichever reader the checker is pointed at now: ``setErrorReader`` swaps
+    ``_getErrors`` for a Python callable reading the GL_KHR_debug flag, which
+    is the ctypes implementation's business and names no entry point.  Handing
+    that one over would leave the compiled layer with no slot to ask and the
+    API unpolled -- error checking off for every call it makes.
     """
     from OpenGL._dispatch import _tables, support
 
-    getter = getattr(checker, '_getErrors', None) if checker is not None else None
+    getter = getattr(checker, '_baseGetErrors', None) if checker is not None else None
     errorClass = getattr(checker, '_errorClass', None) if getter else None
     support.register_error_class(api, errorClass or error_module().GLError)
     if not AVAILABLE:
@@ -394,178 +395,17 @@ def suspend_error_checking(suspend):
         _c.suspend_error_checking(bool(suspend))
 
 
-#: GL_KHR_debug enums, so that turning the mechanism on needs no import from
-#: a particular API module.
-_DEBUG_OUTPUT = 0x92E0
-_DEBUG_OUTPUT_SYNCHRONOUS = 0x8242
-_DEBUG_SEVERITY_NOTIFICATION = 0x826B
-_DONT_CARE = 0x1100
-
-
-def debug_output_available():
-    """Whether the current context reports errors through GL_KHR_debug."""
-    if not ACTIVE:
-        return False
-    proc = entry_points.get(('GL', 'glDebugMessageCallback'))
-    return bool(proc) if proc is not None else False
-
-
-def use_debug_output(enable=True):
-    """Notice GL errors through GL_KHR_debug rather than a glGetError per call.
-
-    A per-call ``glGetError`` is a driver round trip and it is the whole cost
-    of error checking.  With this on, the driver reports an error through a
-    callback during the call itself, and the check afterwards is a read of the
-    flag that callback set.  What a caller sees does not change: the same
-    entry points are checked -- ``OpenGL.ERROR_CHECKING`` and
-    :func:`set_error_checking` decide that either way -- and the same exception
-    is raised from the same call, carrying the same GL error code.
-
-    Switching it off undoes what switching it on did for *this* context,
-    callback and driver state together: synchronous debug output serialises the
-    driver, which is the cost the switch exists to stop paying.  The error mode
-    it reads is one for the process, so it goes back to the per-call check when
-    the last context has given its callback up and not before -- taking it away
-    sooner would leave every other context paying for debug output and using
-    neither mechanism it installed.
-
-    Returns True when it took effect.  It needs a context offering
-    ``GL_KHR_debug``; without one, error checking stays as it was.
-    """
-    if not ACTIVE:
-        return False
-
-    from OpenGL.GL import (
-        glDebugMessageCallback,
-        glDebugMessageControl,
-        glDisable,
-        glEnable,
-    )
-
-    key = _c.current_handle()
-    if not enable:
-        if _release_debug_callback(key):
-            glDisable(_DEBUG_OUTPUT_SYNCHRONOUS)
-            glDisable(_DEBUG_OUTPUT)
-            glDebugMessageCallback(None, None)
-        return True
-    if not debug_output_available():
-        return False
-
-    address = _c.debug_callback_address()
-    callback = ctypes.cast(ctypes.c_void_p(address), _debug_callback_type())
-    glEnable(_DEBUG_OUTPUT)
-    # Synchronous, because the callback has to run during the call it belongs
-    # to for the stub to attribute the error to the right entry point.
-    glEnable(_DEBUG_OUTPUT_SYNCHRONOUS)
-    glDebugMessageCallback(callback, None)
-    # Notifications are chatter; the callback only cares about errors, and not
-    # asking for the rest keeps the driver from formatting them.
-    glDebugMessageControl(
-        _DONT_CARE, _DONT_CARE, _DEBUG_SEVERITY_NOTIFICATION, 0, None, False
-    )
-    _c.set_error_mode(1)
-    # The callback holds the reference the driver will call through, for as
-    # long as that context has it installed.
-    _installed_callbacks[key] = callback
-    return True
-
-
-#: The live callback per context handle.  A dict rather than a list because the
-#: reference has to outlive the enabling call and no longer: keeping every one
-#: ever made would hold a callback per context for the life of the process.
-_installed_callbacks = {}
-
-
-def _release_debug_callback(key):
-    """Give up ``key``'s callback; return whether it had one.
-
-    The error mode is the process's, so it is only handed back once nothing
-    holds a callback any more.  Every context that installed one has its own
-    entry here, and each takes its own away.
-    """
-    held = _installed_callbacks.pop(key, None) is not None
-    if not _installed_callbacks:
-        _c.set_error_mode(0)
-    return held
-
-
-def _debug_callback_type():
-    from OpenGL.raw.GL._types import GLDEBUGPROC
-
-    return GLDEBUGPROC
-
-
-def set_error_checking(enable=True, entry_point=None):
-    """Turn per-call error checking on or off, for one entry point or all.
-
-    Unlike ``OpenGL.ERROR_CHECKING``, which is read once at import, this takes
-    effect immediately and can be scoped to a single entry point.
-    """
-    if ACTIVE:
-        _c.set_error_checking(bool(enable), entry_point)
-
-
-def _end_suspended_block():
-    """End the glBegin block, if any, error checking is suspended for.
-
-    A Begin/End block belongs to the context it was opened in, so a context
-    change ends it.  That matters because ``glEnd`` is otherwise the only
-    thing that turns checking back on, and an exception raised between the
-    two -- a bad vertex, an entry point the driver does not export -- means
-    ``glEnd`` never runs and every later call in the process goes unchecked.
-
-    Reads ``sys.modules`` rather than importing: a process using only ES or
-    EGL has no desktop-GL checker to resume, and importing one to find that
-    out would load a driver to answer a question about a block it cannot
-    have opened.  The compiled layer keeps the same switch of its own, which
-    ``make_current`` and ``forget_context`` clear for themselves.
-    """
-    module = sys.modules.get('OpenGL.raw.GL._errors')
-    checker = getattr(module, '_error_checker', None) if module else None
-    if checker is not None:
-        checker.onEnd()
-
-
-def make_current(handle):
-    """Dispatch this thread through the table for ``handle``.
-
-    Call this wherever the application makes a context current, so that N
-    contexts in one process each resolve and hold their own entry points.
-    """
-    _end_suspended_block()
-    if ACTIVE:
-        _c.make_current(int(handle or 0))
-
-
-def forget_context(handle):
-    """Retire the dispatch table for a context that has been destroyed.
-
-    The table is emptied and set aside rather than freed: ``make_current`` is
-    per thread, so a thread that never noticed the context go still points at
-    it, and freeing here would be a use-after-free in the ordinary shape of a
-    program with a window per thread.  :func:`reclaim_retired` frees the set
-    aside ones at a moment the caller says is quiet.
-    """
-    _end_suspended_block()
-    if ACTIVE:
-        _c.forget_context(int(handle or 0))
-
-
-def reclaim_retired():
-    """Free the tables of contexts that have been forgotten; returns how many.
-
-    A retired table costs about 43 KB and is unreachable, so a program with one
-    or two contexts need never call this.  A program that opens and closes a
-    context per document window over a long session accumulates them, and this
-    is how it says they can go.
-
-    **Only call this where no thread is still dispatching through a context
-    this process has destroyed** -- that is the judgement retirement exists to
-    avoid making on the caller's behalf, and nothing here can make it.
-    """
-    if ACTIVE:
-        return _c.reclaim_retired()
-    return 0
+#: The names a program calls live in :mod:`OpenGL.dispatch`, which is where
+#: their implementation lives too.  They are re-exported here because that is
+#: the module the documentation named before there was a public one, and code
+#: written against it keeps working.
+from OpenGL.dispatch import (  # noqa: E402  -- after the layer it reads
+    debug_output_available,
+    forget_context,
+    make_current,
+    reclaim_retired,
+    set_error_checking,
+    use_debug_output,
+)
 
 

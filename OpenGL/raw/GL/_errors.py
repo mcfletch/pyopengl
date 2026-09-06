@@ -7,6 +7,11 @@ from OpenGL.error import _ErrorChecker
 _get_error = getattr( _p.GL, 'glGetError', None )
 if _get_error and _ErrorChecker:
     _error_checker = _ErrorChecker( _p, _get_error )
+    # Desktop GL is the API GL_KHR_debug belongs to, so this checker is the one
+    # that can stop paying for a glGetError per call.  The offer is made when
+    # it first checks, because that is the first moment a context exists.
+    from OpenGL import dispatch as _dispatch
+    _dispatch.offer_on_first_check( _error_checker )
 else:
     _error_checker = None
 

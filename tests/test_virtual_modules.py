@@ -241,52 +241,29 @@ def test_an_entry_point_reports_where_it_was_declared():
     assert from_tables['module'] == 'OpenGL.raw.GL.VERSION.GL_1_2'
 
 
-class TestTheFlagIsParsedInOneplace:
-    """``_configflags.VIRTUAL_MODULES`` and the finder's own reading of the
-    variable are the same expression, so the two cannot answer differently.
+IMPORTS_RAW = r'''
+import OpenGL.GL
+from OpenGL.raw.GL.VERSION import GL_1_1
+print(int(GL_1_1.GL_TEXTURE_2D))
+'''
 
-    The finder cannot import ``_configflags`` -- that module reads every flag
-    off ``OpenGL`` when it is first imported, and the finder is constructed from
-    the tail of ``import OpenGL``, before a program has set them -- so the
-    parse lives where the finder can reach it and ``_configflags`` reads it
-    from there.
+
+class TestTheNamesResolveWhateverTheEnvironmentSays:
+    """There is nothing for the finder to be switched off in favour of.
+
+    The generated files are not shipped and the generator does not write them,
+    so these names resolve from the tables or not at all.  A variable that
+    could stop them resolving would have one setting that works and one that
+    breaks every installation, so there is no such variable -- and a stale one
+    left in somebody's environment must not be able to break their program.
     """
 
-    def test_the_two_agree(self):
-        from OpenGL import _configflags
-        from OpenGL._dispatch import finder
-
-        assert finder.virtual_modules_wanted() == _configflags.VIRTUAL_MODULES
-
-    def test_configflags_does_not_parse_the_variable_itself(self):
-        import os.path
-
-        from OpenGL import _configflags
-
-        source = open(_configflags.__file__, encoding='utf-8').read()
-        assert 'PYOPENGL_VIRTUAL_MODULES' not in source, (
-            'two parses of one variable can disagree after an edit'
+    @pytest.mark.parametrize('value', ['0', 'no', 'off', '1'])
+    def test_a_setting_left_over_in_the_environment_changes_nothing(self, value):
+        environment = child_environment(PYOPENGL_VIRTUAL_MODULES=value)
+        completed = subprocess.run(
+            [sys.executable, '-c', IMPORTS_RAW],
+            capture_output=True, text=True, cwd=ROOT, env=environment, timeout=300,
         )
-        assert os.path.basename(_configflags.__file__) == '_configflags.py'
-
-    @pytest.mark.parametrize(
-        'value,wanted',
-        [
-            (None, True),          # unset: on, because there are no files
-            ('', True),
-            ('1', True),
-            ('true', True),
-            ('YES', True),
-            ('0', False),
-            ('no', False),
-            ('off', False),
-        ],
-    )
-    def test_what_each_setting_means(self, monkeypatch, value, wanted):
-        from OpenGL._dispatch import finder
-
-        if value is None:
-            monkeypatch.delenv('PYOPENGL_VIRTUAL_MODULES', raising=False)
-        else:
-            monkeypatch.setenv('PYOPENGL_VIRTUAL_MODULES', value)
-        assert finder.virtual_modules_wanted() is wanted
+        assert completed.returncode == 0, completed.stderr[-2000:]
+        assert completed.stdout.strip() == str(0x0DE1)

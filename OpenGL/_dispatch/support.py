@@ -71,11 +71,13 @@ def resolve(name, extension, alternates, api_index):
     both ``GL_NV_gpu_shader5`` and ``GL_AMD_gpu_shader_int64`` -- and a driver
     advertising either has the function, so any one of them is enough.
     """
-    from OpenGL import _dispatch
+    from OpenGL import _dispatch, dispatch as _dispatch_api
 
     # The first resolution is the first moment a context exists, so it is
-    # where the layer learns how to ask which one is current.
+    # where the layer learns how to ask which one is current, and where a
+    # context is offered the cheaper of the two error checks.
     _dispatch.install_context_getter()
+    _dispatch_api.offer_debug_output()
     api = _API_NAMES[api_index]
     platform_ = platform.PLATFORM
     is_core = (not extension) or 'VERSION' in extension.split('_')
@@ -225,20 +227,27 @@ def raise_gl_error(code, name, arguments=None, api=None):
     leaving it empty while putting the same tuple in ``cArgs`` reads as a
     name mix-up rather than a decision.
     """
-    operation = name
-    errorClass = error.GLError
-    if api is not None:
-        from OpenGL._dispatch import entry_points
-
-        operation = entry_points.get((api, name)) or name
-        errorClass = _error_classes.get(api, error.GLError)
-    raise errorClass(
+    raise _error_classes.get(api, error.GLError)(
         err=code,
-        baseOperation=operation,
+        baseOperation=_entry_point_or_name(api, name),
         pyArgs=arguments,
         cArgs=arguments,
         cArguments=arguments,
     )
+
+
+def _entry_point_or_name(api, name):
+    """The entry point that failed, or its name where the API is not known.
+
+    ``err.baseOperation.__name__`` is what clients read and what
+    ``error.py``'s ``format_baseOperation`` is written for, so the object is
+    what an exception carries wherever there is one to carry.
+    """
+    if api is None:
+        return name
+    from OpenGL._dispatch import entry_points
+
+    return entry_points.get((api, name)) or name
 
 
 def register_ctypes_binding(api, name, binding):
@@ -486,7 +495,7 @@ def _parameters(text_signature):
     return parameters
 
 
-def raise_debug_error(code, identifier, message, name, arguments=None):
+def raise_debug_error(code, identifier, message, name, arguments=None, api=None):
     """Turn a GL_KHR_debug error report into the exception glGetError would.
 
     The driver has already said what went wrong in prose, so ``description`` is
@@ -495,11 +504,17 @@ def raise_debug_error(code, identifier, message, name, arguments=None):
     it as and what a caller branches on; the driver's message identifier is a
     per-driver, per-message number and rides along as ``debugMessageID`` for
     anyone who wants it.
+
+    ``baseOperation`` is the entry point rather than its name, as it is in
+    :func:`raise_gl_error`: which mechanism noticed an error is not something a
+    caller reading the exception should have to know.  The class comes from the
+    same table for the same reason -- one call cannot raise two classes
+    depending on which mechanism saw it.
     """
-    raised = error.GLError(
+    raised = _error_classes.get(api, error.GLError)(
         err=code,
         description=message,
-        baseOperation=name,
+        baseOperation=_entry_point_or_name(api, name),
         pyArgs=arguments,
         cArgs=arguments,
         cArguments=arguments,

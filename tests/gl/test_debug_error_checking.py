@@ -65,27 +65,31 @@ class TestDebugErrorChecking(GLTestCase):
         glDisable(GL_DEPTH_TEST)
 
     def test_it_costs_less_than_a_glGetError_per_call(self):
-        """The point of the exercise: checking stops being a round trip."""
+        """The point of the exercise: checking stops being a round trip.
+
+        Measured by alternating the two mechanisms rather than timing one and
+        then the other.  What a driver has just been asked to do it keeps doing
+        cheaply for a while, so a run of one followed by a run of the other
+        compares two different machine states as much as two mechanisms.
+        """
 
         def measure(count=20000):
             glBindTexture(GL_TEXTURE_2D, 0)
-            best = None
-            for _ in range(3):
-                start = time.perf_counter()
-                for _ in range(count):
-                    glBindTexture(GL_TEXTURE_2D, 0)
-                elapsed = time.perf_counter() - start
-                best = elapsed if best is None else min(best, elapsed)
-            return best / count * 1e9
+            start = time.perf_counter()
+            for _ in range(count):
+                glBindTexture(GL_TEXTURE_2D, 0)
+            return (time.perf_counter() - start) / count * 1e9
 
-        dispatch.use_debug_output(False)
         dispatch.set_error_checking(True)
-        with_get_error = measure()
+        get_error, debug = [], []
+        for _ in range(5):
+            dispatch.use_debug_output(False)
+            get_error.append(measure())
+            assert dispatch.use_debug_output(True)
+            debug.append(measure())
 
-        dispatch.use_debug_output(True)
-        with_debug = measure()
-
-        assert with_debug < with_get_error, (with_debug, with_get_error)
+        with_get_error, with_debug = min(get_error), min(debug)
+        assert with_debug < with_get_error, (debug, get_error)
 
 
 if __name__ == '__main__':
