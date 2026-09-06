@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>Offscreen OpenGL on Windows</title><link rel="stylesheet" type="text/css" href="style/tutorial.css">
+</head>
+<body>
+
+<h1>Offscreen OpenGL on Windows</h1>
+
+<p><code>OpenGL.WGL.offscreen</code> creates an OpenGL context on Windows with
+nothing on screen.  WGL binds a context to a <em>device context</em>, and
+Windows hands those out for things it can draw on &#8212; there is no "give me a
+context on this adapter" call as EGL has, and no windowless context as CGL has.
+What Windows offers instead is the <strong>pbuffer</strong>: a drawable the
+display driver allocates out of its own memory, with a device context of its own
+that belongs to no window and appears nowhere.</p>
+
+<pre>from OpenGL.WGL.offscreen import headless_context
+from OpenGL.GL import *
+
+with headless_context(width=256, height=256) as context:
+    glClearColor(0.0, 0.0, 0.25, 1.0)
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    pixels = glReadPixels(0, 0, 256, 256, GL_RGBA, GL_UNSIGNED_BYTE)</pre>
+
+<h2>The pbuffer is the default framebuffer</h2>
+
+<p>Unlike the macOS path, this needs no framebuffer object: framebuffer zero is
+the pbuffer, so <code>glClear</code>, <code>glReadPixels</code> and anything else
+drawing to it behave as they do on a window and nothing in a program has to know
+where it is.</p>
+
+<p>It is <strong>single-buffered</strong>, since nothing presents it, so the
+finished frame is in <code>GL_FRONT</code> and not <code>GL_BACK</code>.  Naming
+a buffer a framebuffer does not have is <code>GL_INVALID_OPERATION</code> rather
+than a quiet fallback, so a program reading the frame back asks
+<code>glGetIntegerv(GL_DOUBLEBUFFER)</code> rather than assuming.  Pass
+<code>double_buffer=True</code> for a pbuffer with a back buffer.</p>
+
+<h2>One window, created and never shown</h2>
+
+<p>The calls that build all of this &#8212;
+<code>wglChoosePixelFormatARB</code>, <code>wglCreatePbufferARB</code>,
+<code>wglCreateContextAttribsARB</code> &#8212; are WGL extensions, and an
+extension entry point is resolved through <code>wglGetProcAddress</code>, which
+answers only while a context is current.  That is a chicken and egg, and Windows
+gives one way out of it: a window, a pixel format on its device context, and an
+OpenGL 1.1 context on that, used for nothing but resolving the entry points that
+build the real thing.</p>
+
+<p><code>bootstrap()</code> makes one of those per process &#8212; 1&times;1,
+<code>WS_POPUP</code>, never shown, never given a message loop &#8212; and the
+pbuffer outlives it.  What it costs is a window station and a desktop, which a
+service running in session 0 has.  What it does not need is anything on screen,
+a compositor, a logged-in session, or a remote-desktop connection that stays
+open.  <code>release_bootstrap()</code> gives the window back; contexts already
+made are unaffected, because a pbuffer is not tied to the window it was created
+through.</p>
+
+<h2>Which pixel formats are accepted</h2>
+
+<p>By default only a fully accelerated format is taken, since that is what
+anything caring about speed wants.  An unusual or virtualised adapter may
+advertise no pbuffer format calling itself fully accelerated, and rendering
+slowly beats refusing:</p>
+
+<pre>from OpenGL.WGL.offscreen import OffscreenContext
+
+context = OffscreenContext(640, 480, acceleration='any')</pre>
+
+<h2>Profiles</h2>
+
+<p><code>profile</code> is one of <code>PROFILES</code>, and
+<code>version</code> the GL version asked for.</p>
+
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>Name</th><th>What it asks for</th></tr>
+<tr><td><code>core</code></td>
+    <td><code>WGL_CONTEXT_CORE_PROFILE_BIT_ARB</code>; the default, at GL
+        3.3</td></tr>
+<tr><td><code>compatibility</code></td>
+    <td><code>WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB</code>: the
+        fixed-function pipeline alongside the modern one</td></tr>
+<tr><td><code>legacy</code></td>
+    <td>No profile bit at all, which is what a request below GL 3.2 must do
+        &#8212; the profile mask did not exist there, and a driver handed one
+        refuses the whole request rather than ignoring it</td></tr>
+</table>
+
+<h2>Resizing</h2>
+
+<p>A pbuffer is created at a fixed size and cannot be resized, so
+<code>resize()</code> builds a replacement on the same pixel format and drops the
+old one.  The GL context survives &#8212; textures, buffers and programs are all
+still there afterwards &#8212; because a context binds to any drawable sharing
+its format.</p>
+
+<p><code>context.lost</code> reports the one case where Windows discards what a
+pbuffer held, on a display-mode change or a remote-desktop disconnect.  The
+pbuffer is still there and still the right size; the answer is to draw the frame
+again rather than to rebuild anything.</p>
+
+<h2>Building the attribute lists yourself</h2>
+
+<p><code>pixel_format_attributes</code> and <code>context_attributes</code> are
+the lists <code>wglChoosePixelFormatARB</code> and
+<code>wglCreateContextAttribsARB</code> take, as plain integers, and both are
+pure: what a call asked for can be read off without a Windows machine to ask.  A
+program driving WGL directly can build the lists with them and make its own
+calls.</p>
+
+<pre>from OpenGL.WGL.offscreen import context_attributes, pixel_format_attributes
+
+pixel_format_attributes(color_bits=24, alpha_bits=8,
+                        depth_bits=24, stencil_bits=8, samples=4)
+context_attributes(profile='core', version=(4, 6), debug=True)</pre>
+
+<h2>Where this works</h2>
+
+<p><code>WGL_ARB_pbuffer</code>, <code>WGL_ARB_pixel_format</code> and
+<code>WGL_ARB_create_context</code> are what a driver has to offer, and every
+hardware OpenGL driver for Windows has offered them since about 2009.
+Microsoft's own fallback rasteriser &#8212; the GDI generic implementation, which
+is what a machine with no vendor driver installed has &#8212; offers none of them
+and is OpenGL 1.1 besides.</p>
+
+<p><code>available()</code> answers before anything is created, returning the
+names of the extensions this machine lacks, so a program can choose between this
+and a window before committing to either.  Construction raises
+<code>WGLError</code> naming what is missing rather than failing obscurely.</p>
+
+<pre>from OpenGL.WGL.offscreen import available, wgl_extensions
+
+if available():
+    print('no offscreen GL here:', ', '.join(available()))
+print(len(wgl_extensions()), 'WGL extensions')</pre>
+
+<p>The module imports anywhere &#8212; the attribute-building half is arithmetic
+and has no platform in it &#8212; and the first call that needs the Win32 API
+raises <code>WGLError</code> elsewhere.  The Linux and Android counterpart is
+EGL: see <a href="egl-devices.html">EGL devices</a>.  The macOS one is
+<a href="cgl-offscreen.html">CGL</a>.  The Mesa and ANGLE builds shipped for
+Windows provide EGL instead, and <code>OpenGL.EGL</code> reaches those; ANGLE
+offers OpenGL ES rather than desktop GL.</p>
+
+<h2>Checking a machine</h2>
+
+<p><code>tests/test_wgl_offscreen.py</code> holds the cases: the attribute lists
+run on any platform, and the rendering ones on Windows, skipping where the driver
+offers no pbuffers.</p>
+
+</body></html>
