@@ -13,82 +13,42 @@
  * The C entry point takes four arguments -- shader, count, an array of
  * pointers to the sources, and an array of their lengths -- and the friendly
  * form takes two, computing the other two from what it was given.  A caller
- * may pass one string or a sequence of them, as `str` or as `bytes`.
+ * may pass one string or a sequence of them, in any of the forms
+ * OpenGL._string_array accepts.
  * ------------------------------------------------------------------ */
 
+/* What one call assembles, and owns until pygl_sources_free.  It is the same
+ * bargain PyGLBuf strikes for a generated stub: a strong reference plus the
+ * blocks pointing into it, released on every path out. */
 typedef struct {
     PyObject *owner;   /* the list of bytes objects keeping the text alive */
-    const char **text;
-    int *lengths;
+    const char **text; /* this struct's own memory, pointing into that list */
+    int *lengths;      /* likewise */
     Py_ssize_t count;
 } PyGLSources;
 
+/* Give up all three, and leave the struct able to take it again.  Safe on a
+ * struct pygl_sources_build zeroed and then failed in, which is how the
+ * allocation failure below unwinds. */
 static void pygl_sources_free(PyGLSources *sources)
 {
     PyMem_Free(sources->text);
+    sources->text = NULL;
     PyMem_Free(sources->lengths);
+    sources->lengths = NULL;
     Py_CLEAR(sources->owner);
 }
 
-/* Normalise the argument to a list of bytes, whatever shape it arrived in. */
-static PyObject *pygl_source_list(PyObject *argument)
-{
-    PyObject *list, *item;
-
-    if (PyUnicode_Check(argument) || PyBytes_Check(argument)) {
-        list = PyList_New(1);
-        if (list == NULL) {
-            return NULL;
-        }
-        item = PyUnicode_Check(argument)
-                   ? PyUnicode_AsUTF8String(argument)
-                   : Py_NewRef(argument);
-        if (item == NULL) {
-            Py_DECREF(list);
-            return NULL;
-        }
-        PyList_SET_ITEM(list, 0, item);
-        return list;
-    }
-
-    {
-        PyObject *sequence = PySequence_Fast(
-            argument, "glShaderSource: expected a string or a sequence of them");
-        Py_ssize_t index, count;
-        if (sequence == NULL) {
-            return NULL;
-        }
-        count = PySequence_Fast_GET_SIZE(sequence);
-        list = PyList_New(count);
-        if (list == NULL) {
-            Py_DECREF(sequence);
-            return NULL;
-        }
-        for (index = 0; index < count; index++) {
-            PyObject *entry = PySequence_Fast_GET_ITEM(sequence, index);
-            if (PyUnicode_Check(entry)) {
-                item = PyUnicode_AsUTF8String(entry);
-            } else if (PyBytes_Check(entry)) {
-                item = Py_NewRef(entry);
-            } else {
-                PyErr_Format(PyExc_TypeError,
-                             "glShaderSource: source %zd is %s, not a string",
-                             index, Py_TYPE(entry)->tp_name);
-                item = NULL;
-            }
-            if (item == NULL) {
-                Py_DECREF(list);
-                Py_DECREF(sequence);
-                return NULL;
-            }
-            PyList_SET_ITEM(list, index, item);
-        }
-        Py_DECREF(sequence);
-        return list;
-    }
-}
-
-static int pygl_sources_build(PyObject *argument, PyGLSources *sources)
+/* Fill `sources` from whatever the caller passed.  On success it owns the list
+ * and the two blocks and the caller must free it; on failure it owns nothing,
+ * so a stub that returns straight out leaks none of it.
+ *
+ * The strings arrive through pygl_string_list, which is where every entry
+ * point taking an array of strings gets them: what counts as one is a single
+ * rule in OpenGL._string_array, and a hand-written body restating it in C
+ * would be a second answer to the same question. */
+static int pygl_sources_build(const char *name, PyObject *argument,
+                              PyGLSources *sources)
 {
     Py_ssize_t index;
 
@@ -97,7 +57,7 @@ static int pygl_sources_build(PyObject *argument, PyGLSources *sources)
     sources->lengths = NULL;
     sources->count = 0;
 
-    sources->owner = pygl_source_list(argument);
+    sources->owner = pygl_string_list(name, argument);
     if (sources->owner == NULL) {
         return -1;
     }
@@ -141,7 +101,7 @@ PyObject *pygl_hand_glShaderSource(PyObject *_self, PyObject *const *_a,
     if (PyErr_Occurred()) {
         return NULL;
     }
-    if (pygl_sources_build(_a[1], &sources) < 0) {
+    if (pygl_sources_build(self->info->name, _a[1], &sources) < 0) {
         return NULL;
     }
     _fp = pygl_slot(self);

@@ -152,7 +152,10 @@ typedef struct {
     uint8_t return_kind;
     /* Set where the C performs everything the Python wrapper would have.  A
      * customisation call that restates it then changes nothing, rather than
-     * demoting the entry point to ctypes and undoing the work. */
+     * demoting the entry point to ctypes and undoing the work.  A call that
+     * drops an argument is judged against text_signature: one the C form has
+     * already dropped is part of that restatement, one it still takes builds a
+     * different function and demotes. */
     uint8_t hand_written;
     /* Whether calling this without a current context is meaningless.  It is a
      * property of the command, so the generator states it rather than the
@@ -497,6 +500,15 @@ PyObject *pygl_retained_value(PyGLBuf *buffer);
  * string on its own is a list of one, which is what callers pass. */
 int pygl_string_array(GLProc *self, PyObject *object, Py_ssize_t index,
                       PyGLBuf *out);
+
+/* The caller's strings as a list of bytes objects, for an entry point that
+ * needs them rather than the char ** built over them -- glShaderSource wants
+ * their lengths too.  `name` is the entry point's, for the message.
+ *
+ * Which Python values count as strings is OpenGL._string_array's to say, and
+ * every implementation of every such entry point asks it, so that what a
+ * caller may pass does not depend on which one answers. */
+PyObject *pygl_string_list(const char *name, PyObject *object);
 
 /* Return-value conversion.  The rule is that the C layer returns the same
  * Python object the ctypes layer returns. */

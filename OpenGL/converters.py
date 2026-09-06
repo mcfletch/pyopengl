@@ -419,10 +419,27 @@ class StringLengths(CConverter):
         return len(pyArgs[self.index])
 
     def stringArray(self, arg, baseOperation, args):
-        """Create basic array-of-strings object from pyArg"""
-        if isinstance(arg, (bytes, unicode)):
+        """Create basic array-of-strings object from pyArg
+
+        One string is a set of one, which is how callers pass a single shader
+        source.  Anything in the set that is not a string is refused rather
+        than rendered: ``str(value)`` of something that is not text compiles
+        as GLSL source, and the error the driver then reports names a line of
+        the shader rather than the argument.
+        """
+        from OpenGL._string_array import as_bytes
+
+        if isinstance(arg, (bytes, bytearray, unicode)):
             arg = [arg]
-        value = [as_8_bit(x) for x in arg]
+        value = []
+        for index, item in enumerate(arg):
+            text = as_bytes(item)
+            if text is None:
+                raise TypeError(
+                    'string %d is %s, not a string'
+                    % (index, type(item).__name__)
+                )
+            value.append(text)
         return value
 
     def stringArrayForC(self, strings):

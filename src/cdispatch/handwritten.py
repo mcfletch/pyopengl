@@ -32,6 +32,11 @@ class HandWritten:
     #: They go into the docstring and the text signature.  ``argNames`` keeps
     #: reporting the C entry point's names, which is what it reports today and
     #: what the compatibility contract preserves.
+    #:
+    #: The text signature they produce is also what tells the runtime that a
+    #: friendly module dropping ``count`` and ``length`` is describing what
+    #: this body already does, rather than building a narrower function out of
+    #: it -- so naming them wrongly hands the entry point back to ctypes.
     arg_names: tuple
     #: Its docstring's first line.
     signature: str

@@ -224,6 +224,34 @@ conversion that produced a <em>smaller</em> buffer than you passed, and an
 array too short for the number of elements the call was told to write &#8212;
 which would otherwise let the driver write past the end of it.</p>
 
+<h2>Strings</h2>
+
+<p>The entry points that take several strings &#8212;
+<code>glShaderSource</code>, <code>glTransformFeedbackVaryings</code>,
+<code>glGetUniformIndices</code>, <code>glCreateShaderProgramv</code>,
+<code>glCompileShaderIncludeARB</code> and their <code>ARB</code>/<code>EXT</code>
+spellings &#8212; are declared as an array of pointers to nul-terminated
+strings.  Four forms are accepted for one:</p>
+
+<pre>glShaderSource(shader, source)                  # one str
+glShaderSource(shader, source.encode())         # one bytes, or a bytearray
+glShaderSource(shader, [header, body])          # a list or tuple of any of those
+glShaderSource(shader, prepared_char_pp)        # a pointer array you built</pre>
+
+<p>A <code>str</code> is encoded as UTF-8; <code>bytes</code> and
+<code>bytearray</code> are taken as the bytes they hold.  One string on its own
+is an array of one, which is how a single shader source or a single varying
+name is usually passed.  An item that is not a string is refused &#8212;
+rendering it would compile the text of a Python repr as GLSL, and the error the
+driver then reports names a line of the shader rather than the argument.</p>
+
+<p>The same forms are accepted under both implementations, and by every entry
+point in the list.  What counts as a string is decided in one place,
+<code>OpenGL._string_array</code>, which the C layer calls back into and the
+ctypes bindings convert with; the two differ only in which exception carries a
+refusal, since ctypes wraps what a conversion raises in
+<code>ctypes.ArgumentError</code>.</p>
+
 <h2>Error checking</h2>
 
 <p><code>OpenGL.ERROR_CHECKING</code> is read when the layer is configured and

@@ -504,6 +504,23 @@ def entry_point(api, name, extension, module_name, arguments, types):
 _TYPE_CONSTRUCTORS = ('POINTER', 'CFUNCTYPE', 'WINFUNCTYPE')
 
 
+def _accepting(kind):
+    """The binding's form of a declared type: the same C type, taking more.
+
+    A declaration states the C signature, and for most parameters that is also
+    what Python passes.  Where it is not -- an array of strings is declared
+    ``GLchar *const *``, and a caller has a list of strings -- the type the
+    binding is built with is one that converts, so that the ctypes path accepts
+    what the C dispatch path accepts.  It is the same C type either way, and
+    what a caller could pass before is still passed unchanged.
+    """
+    from OpenGL import _string_array
+
+    if kind is _string_array.CHAR_POINTER_ARRAY:
+        return _string_array.StringArray
+    return kind
+
+
 def resolve_type(text, namespace):
     """``_cs.GLenum``, ``ctypes.POINTER(_cs.GLchar)``, ``None`` -- as a value.
 
@@ -608,7 +625,9 @@ class Declaration:
                             'OpenGL.raw.%s._types' % (self.api,)
                         ),
                     }
-                found = _types_cache[key] = resolve_type(text, namespace)
+                found = _types_cache[key] = _accepting(
+                    resolve_type(text, namespace)
+                )
             resolved.append(found)
         return resolved
 

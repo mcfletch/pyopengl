@@ -1325,6 +1325,33 @@ resolves without an extension check — and the test asserts the property that
 matters rather than the string: no entry point that resolves under ctypes
 fails to resolve under C.
 
+A third divergence was in what the two accept. A friendly module that rebuilds
+an entry point describes the arguments its friendly form drops, and the
+runtime read *any* such call as building a different function — so
+`glShaderSource`, whose whole reason for a hand-written body is that its
+friendly form takes two arguments where the entry point takes four, described
+what the C already did and was handed back to ctypes for it. The text
+signature is what separates the two cases, because it names the arguments the
+C form actually takes: dropping one of those builds a different function, and
+dropping one it has already dropped is a restatement. Underneath that sat a
+second half of the same divergence: the C accepted a string or a list of them
+for a `GLchar *const *` parameter and the ctypes bindings accepted only a
+pointer array, so code written with the extension installed failed without it.
+The bindings now take the same forms, converted in the argument type the
+declaration is built with — no wrapper, so nothing is demoted to reach it.
+
+What counts as one of those strings had four answers in the tree — the
+hand-written C, the runtime's string array, the ctypes wrapper's converter and
+the new argument type — and they disagreed about `bytearray`: three of the
+twelve combinations of form and entry point refused it, and one compiled
+`bytearray(b'...')` as GLSL. There is one answer now, in
+`OpenGL._string_array`, which all four ask. Two defects fell out of writing the
+cases down: `PyObject_CallMethod(..., "O", value)` passes a caller's *tuple* as
+the argument tuple itself, so three sources arrived as three arguments (every
+such call now says `"(O)"`), and demoting an entry point whose customisations
+the C had swallowed handed back the four-argument binding rather than the
+two-argument function the friendly module describes.
+
 ### The generated modules, and what replaced them
 
 Every module under `OpenGL/raw` was purely generated. Two things now hold the

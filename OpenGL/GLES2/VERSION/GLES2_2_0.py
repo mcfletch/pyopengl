@@ -260,7 +260,7 @@ glShaderSource = platform.createExtensionFunction(
         ctypes.POINTER(ctypes.c_char_p),
         arrays.GLintArray,
     ),
-    doc='glShaderSource( GLhandle(shaderObj),[bytes(string),...]) -> None',
+    doc='glShaderSource(shader, string) -> None',
     argNames=(
         'shaderObj',
         'count',

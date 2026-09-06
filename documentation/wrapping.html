@@ -264,7 +264,12 @@ not.  <code>OpenGL/_dispatch/support.py</code> holds the machinery —
 <li><b>An entry point needing real C</b> — one whose behaviour is not a
     description.  Add it to <code>src/cdispatch/handwritten.py</code> and write
     the body in <code>accelerate/src/c/pygl_handwritten.c</code>.
-    <code>glShaderSource</code> is the worked example.</li>
+    <code>glShaderSource</code> is the worked example: its friendly form takes
+    two arguments where the C entry point takes four, and the friendly module
+    describes that by dropping the other two.  Naming the friendly form's
+    arguments in <code>handwritten.py</code> is what lets the C recognise such
+    a description as a restatement of what it already does, and so keep the
+    entry point rather than hand it back to ctypes.</li>
 <li><b>A new array element type.</b> One row in the element table and one
     <code>ArrayDatatype</code> subclass; no new C and no change to any stub.</li>
 </ol>

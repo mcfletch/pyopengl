@@ -95,24 +95,15 @@ static void *(*pygl_get_current_context)(void) = NULL;
  * per-context dispatch tables
  * ------------------------------------------------------------------ */
 
-/* The fields are named rather than counted: these two are the only tables not
- * built by pygl_table_for, so a field added to PyGLDispatch would otherwise
- * silently shift what the values here initialise. */
-
-/* Used when the platform reports that no context is current. */
-static PyGLDispatch pygl_null_table = {
-    .is_null_context = 1,
-    .error_mode = PYGL_ERRORS_GETERROR,
-    .audit_countdown = PYGL_DEBUG_AUDIT_INTERVAL,
-};
+/* Used when the platform reports that no context is current.  Named fields,
+ * because a positional initialiser has to be revisited every time the struct
+ * gains one -- and the compiler only says so when the types happen to
+ * disagree. */
+static PyGLDispatch pygl_null_table = {.is_null_context = 1};
 /* Used when the platform offers no way to ask which context is current.  It
  * behaves as an ordinary table, because "we cannot tell" must not be reported
  * as "there is none". */
-static PyGLDispatch pygl_default_table = {
-    .is_null_context = 0,
-    .error_mode = PYGL_ERRORS_GETERROR,
-    .audit_countdown = PYGL_DEBUG_AUDIT_INTERVAL,
-};
+static PyGLDispatch pygl_default_table = {.is_null_context = 0};
 PYGL_THREAD_LOCAL PyGLDispatch *pygl_current = &pygl_default_table;
 
 static PyGLDispatch *pygl_tables = NULL; /* handle -> table, a short list */
@@ -684,7 +675,7 @@ static int pygl_address_of(PyObject *object, void **out)
     }
     PyErr_Clear();
     {
-        PyObject *number = PyObject_CallMethod(pygl_support, "as_pointer", "O",
+        PyObject *number = PyObject_CallMethod(pygl_support, "as_pointer", "(O)",
                                                object);
         if (number == NULL) {
             return -1;
@@ -709,7 +700,7 @@ void *pygl_pointer_slow(PyObject *object)
     /* ctypes objects, opaque pointer instances and anything else that can
      * produce an address go through the support layer, which knows about the
      * whole set. */
-    number = PyObject_CallMethod(pygl_support, "as_pointer", "O", object);
+    number = PyObject_CallMethod(pygl_support, "as_pointer", "(O)", object);
     if (number == NULL) {
         return NULL;
     }
@@ -829,7 +820,7 @@ static Py_ssize_t pygl_byte_count(const PyGLElement *element, PyGLBuf *buffer)
         PyErr_Clear();
         return -1;
     }
-    size = PyObject_CallMethod(type, "arrayByteCount", "O", buffer->owner);
+    size = PyObject_CallMethod(type, "arrayByteCount", "(O)", buffer->owner);
     if (size == NULL) {
         PyErr_Clear();
         return -1;
@@ -999,12 +990,12 @@ static int pygl_copy_shrank(PyObject *type, PyObject *original, PyObject *conver
     if (type == NULL) {
         return 0;
     }
-    before = PyObject_CallMethod(type, "arrayByteCount", "O", original);
+    before = PyObject_CallMethod(type, "arrayByteCount", "(O)", original);
     if (before == NULL) {
         PyErr_Clear();
         return 0;
     }
-    after = PyObject_CallMethod(type, "arrayByteCount", "O", converted);
+    after = PyObject_CallMethod(type, "arrayByteCount", "(O)", converted);
     if (after == NULL) {
         PyErr_Clear();
         Py_DECREF(before);
@@ -1256,7 +1247,7 @@ static int pygl_image(GLProc *self, const char *method, PyObject *object,
         Py_DECREF(converted);
         return 0;
     }
-    pointer = PyObject_CallMethod(pygl_support, "image_pointer", "O", converted);
+    pointer = PyObject_CallMethod(pygl_support, "image_pointer", "(O)", converted);
     if (pointer == NULL) {
         Py_DECREF(converted);
         return -1;
@@ -1337,7 +1328,7 @@ int pygl_array_typed(GLProc *self, PyObject *object, unsigned int type,
         Py_DECREF(converted);
         return 0;
     }
-    pointer = PyObject_CallMethod(pygl_support, "image_pointer", "O", converted);
+    pointer = PyObject_CallMethod(pygl_support, "image_pointer", "(O)", converted);
     if (pointer == NULL) {
         Py_DECREF(converted);
         return -1;
@@ -1391,6 +1382,53 @@ void pygl_release(PyGLBuf *buffer)
     buffer->pointer = NULL;
 }
 
+/* Whether `object` is the caller's strings rather than an array of pointers
+ * they built themselves: the three string types OpenGL._string_array converts,
+ * and the two it takes a sequence of them in. */
+static int pygl_is_strings(PyObject *object)
+{
+    return PyUnicode_Check(object) || PyBytes_Check(object) ||
+           PyByteArray_Check(object) || PyList_Check(object) ||
+           PyTuple_Check(object);
+}
+
+PyObject *pygl_string_list(const char *name, PyObject *object)
+{
+    PyObject *list;
+    Py_ssize_t count, position;
+
+    /* "(O)" and not "O": the format builds the argument tuple, so a caller's
+     * tuple of three sources passed as "O" *is* that tuple and arrives as
+     * three arguments.  Every call into the support module that passes a value
+     * a caller chose says "(O)" for the same reason. */
+    list = PyObject_CallMethod(pygl_support, "string_list", "(O)", object);
+    if (list == NULL) {
+        return NULL;
+    }
+    /* The contract with support.string_list is internal, which is a reason to
+     * assert it rather than to assume it: PyList_GET_SIZE and
+     * PyBytes_AS_STRING are unchecked macros, so a wrong return type here is a
+     * crash rather than a TypeError. */
+    if (!PyList_Check(list)) {
+        PyErr_Format(PyExc_SystemError, "%s: string_list returned %s, not a list",
+                     name, Py_TYPE(list)->tp_name);
+        Py_DECREF(list);
+        return NULL;
+    }
+    count = PyList_GET_SIZE(list);
+    for (position = 0; position < count; position++) {
+        PyObject *item = PyList_GET_ITEM(list, position);
+        if (!PyBytes_Check(item)) {
+            PyErr_Format(PyExc_SystemError,
+                         "%s: string_list item %zd is %s, not bytes", name,
+                         position, Py_TYPE(item)->tp_name);
+            Py_DECREF(list);
+            return NULL;
+        }
+    }
+    return list;
+}
+
 /* A list of strings becomes a char ** for the duration of the call.  The
  * bytes objects are kept alive by the list in `owner`; the array of pointers
  * into them is this frame slot's own memory. */
@@ -1400,15 +1438,13 @@ int pygl_string_array(GLProc *self, PyObject *object, Py_ssize_t index,
     PyObject *list;
     const char **entries;
     Py_ssize_t count, position;
-    (void)self;
     (void)index;
 
     pygl_buf_reset(out);
     if (object == NULL || object == Py_None) {
         return 0;
     }
-    if (!(PyUnicode_Check(object) || PyBytes_Check(object) ||
-          PyList_Check(object) || PyTuple_Check(object))) {
+    if (!pygl_is_strings(object)) {
         /* Already a char ** -- a friendly module that built the array itself,
          * which several do.  Its address is what the entry point wants;
          * rebuilding it from strings it no longer holds is not possible. */
@@ -1420,19 +1456,8 @@ int pygl_string_array(GLProc *self, PyObject *object, Py_ssize_t index,
         out->pointer = address;
         return 0;
     }
-    list = PyObject_CallMethod(pygl_support, "string_list", "O", object);
+    list = pygl_string_list(self->info->name, object);
     if (list == NULL) {
-        return -1;
-    }
-    /* The contract with support.string_list is internal, which is a reason to
-     * assert it rather than to assume it: PyList_GET_SIZE and
-     * PyBytes_AS_STRING are unchecked macros, so a wrong return type here is a
-     * crash rather than a TypeError. */
-    if (!PyList_Check(list)) {
-        PyErr_Format(PyExc_SystemError,
-                     "%s: string_list returned %s, not a list",
-                     self->info->name, Py_TYPE(list)->tp_name);
-        Py_DECREF(list);
         return -1;
     }
     count = PyList_GET_SIZE(list);
@@ -1447,16 +1472,7 @@ int pygl_string_array(GLProc *self, PyObject *object, Py_ssize_t index,
         return -1;
     }
     for (position = 0; position < count; position++) {
-        PyObject *item = PyList_GET_ITEM(list, position);
-        if (!PyBytes_Check(item)) {
-            PyErr_Format(PyExc_SystemError,
-                         "%s: string_list item %zd is %s, not bytes",
-                         self->info->name, position, Py_TYPE(item)->tp_name);
-            PyMem_Free(entries);
-            Py_DECREF(list);
-            return -1;
-        }
-        entries[position] = PyBytes_AS_STRING(item);
+        entries[position] = PyBytes_AS_STRING(PyList_GET_ITEM(list, position));
     }
     out->owner = list;
     out->block = entries;
@@ -1670,7 +1686,7 @@ static PyObject *GLProc_get_signature(GLProc *self, void *closure)
         PyErr_SetString(PyExc_AttributeError, "__signature__");
         return NULL;
     }
-    return PyObject_CallMethod(pygl_support, "signature_for", "O", self);
+    return PyObject_CallMethod(pygl_support, "signature_for", "(O)", self);
 }
 
 static PyObject *GLProc_get_arg_names(GLProc *self, void *closure)
@@ -1820,9 +1836,12 @@ static int GLProc_demote(GLProc *self)
     if (self->ctypes_callable != NULL) {
         return 0;
     }
-    callable = PyObject_CallMethod(pygl_support, "ctypes_callable", "ss",
-                                   self->info->name,
-                                   pygl_api_name(self->info->api));
+    /* Not ctypes_callable: where the friendly module described customisations
+     * this entry point performs in C, they were swallowed rather than applied,
+     * and the binding underneath takes the arguments the registry declares
+     * rather than the ones a caller passes.  support decides which of the two
+     * this one is. */
+    callable = PyObject_CallMethod(pygl_support, "demoted_callable", "(O)", self);
     if (callable == NULL) {
         return -1;
     }
@@ -1885,6 +1904,55 @@ static PyObject *GLProc_declarative(GLProc *self, PyObject *args, PyObject *kwds
     return Py_NewRef((PyObject *)self);
 }
 
+/* Whether `signature` -- a __text_signature__, "($module, shader, string, /)"
+ * -- names `argument` as one of the arguments the entry point takes.
+ *
+ * A whole name, not a substring: "count" must not match "uniformCount".  What
+ * may follow a name is the separator, the end of the list, or the "=None" an
+ * optional output array carries. */
+static int pygl_signature_takes(const char *signature, const char *argument)
+{
+    size_t length = strlen(argument);
+    const char *at = signature;
+
+    if (signature == NULL || length == 0) {
+        return 0;
+    }
+    while ((at = strstr(at, argument)) != NULL) {
+        char before = at == signature ? '\0' : at[-1];
+        char after = at[length];
+        if ((before == ' ' || before == '(') &&
+            (after == ',' || after == ')' || after == ' ' || after == '=')) {
+            return 1;
+        }
+        at += length;
+    }
+    return 0;
+}
+
+/* The argument a customisation call names, where it names exactly one -- the
+ * 'count' of setPyConverter('count').  NULL for anything else, which the
+ * caller reads as "cannot tell" and treats as the case that demotes. */
+static const char *pygl_customised_argument(PyObject *args)
+{
+    PyObject *name;
+    const char *text;
+    if (args == NULL || !PyTuple_Check(args) || PyTuple_GET_SIZE(args) != 1) {
+        return NULL;
+    }
+    name = PyTuple_GET_ITEM(args, 0);
+    if (!PyUnicode_Check(name)) {
+        return NULL;
+    }
+    text = PyUnicode_AsUTF8(name);
+    if (text == NULL) {
+        /* An undecodable name is one this cannot judge, not an error to
+         * report: the customisation itself is about to be carried out. */
+        PyErr_Clear();
+    }
+    return text;
+}
+
 static PyObject *GLProc_fallback(GLProc *self, PyObject *args, PyObject *kwds,
                                  const char *method)
 {
@@ -1892,17 +1960,28 @@ static PyObject *GLProc_fallback(GLProc *self, PyObject *args, PyObject *kwds,
 
     if (self->info->hand_written) {
         /* The C already performs what the call describes, so restating it
-         * changes nothing -- *unless* the call removes an argument.
+         * changes nothing -- *unless* the call removes an argument the C form
+         * still takes.
          *
          * setPyConverter with a converter says how an argument is converted,
          * which the C does.  setPyConverter with only a name says the
-         * argument is not taken from the caller at all, which builds a
+         * argument is not taken from the caller at all.  Which of those two
+         * that is depends on the argument: glShaderSource's C form is already
+         * the two-argument one, so the module dropping `count` and `length`
+         * describes what it does; dropping one it still takes builds a
          * different function with a different arity -- glVertexPointerd(array)
-         * out of glVertexPointer(size, type, stride, pointer).  That is not a
-         * restatement and must not be swallowed. */
-        int drops_argument = (strcmp(method, "setPyConverter") == 0 &&
-                              args != NULL && PyTuple_Check(args) &&
-                              PyTuple_GET_SIZE(args) < 2);
+         * out of glVertexPointer(size, type, stride, pointer) -- which the C
+         * cannot answer for.  The text signature is what separates them,
+         * because it names the arguments the C form actually takes. */
+        int names_one_argument =
+            (strcmp(method, "setPyConverter") == 0 && args != NULL &&
+             PyTuple_Check(args) && PyTuple_GET_SIZE(args) < 2);
+        const char *dropped =
+            names_one_argument ? pygl_customised_argument(args) : NULL;
+        int drops_argument =
+            names_one_argument &&
+            (dropped == NULL ||
+             pygl_signature_takes(self->info->text_signature, dropped));
         if (!drops_argument) {
             /* Remember it.  A module that builds a *derived* function from
              * the same entry point -- glVertexPointerd(array) out of

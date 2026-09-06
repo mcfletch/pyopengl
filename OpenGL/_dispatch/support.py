@@ -349,6 +349,17 @@ def record_custom(proc, method, args):
     return None
 
 
+def _replayed(proc):
+    """The ctypes wrapper for `proc`, carrying what the C swallowed."""
+    from OpenGL import wrapper
+
+    binding = ctypes_callable(proc.__name__, getattr(proc, 'api', None))
+    built = wrapper.wrapper(binding)
+    for (earlier, _which), earlier_args in swallowed_for(proc).items():
+        built = getattr(built, earlier)(*earlier_args)
+    return built
+
+
 def demote_and_call(proc, method, args, keywords):
     """A customisation the C does not implement falls back to the wrapper.
 
@@ -357,13 +368,26 @@ def demote_and_call(proc, method, args, keywords):
     the ctypes binding, replaying what was swallowed first so the result is
     what it would have been without this layer at all.
     """
-    from OpenGL import wrapper
+    return getattr(_replayed(proc), method)(*args, **keywords)
 
-    binding = ctypes_callable(proc.__name__, getattr(proc, 'api', None))
-    built = wrapper.wrapper(binding)
-    for (earlier, _which), earlier_args in swallowed_for(proc).items():
-        built = getattr(built, earlier)(*earlier_args)
-    return getattr(built, method)(*args, **keywords)
+
+def demoted_callable(proc):
+    """What an entry point becomes when a client demotes it.
+
+    Assigning ``errcheck`` or ``argtypes`` moves one entry point to the ctypes
+    path, and what it moves to has to be the function the friendly module
+    would have built -- so where customisations were swallowed because the C
+    performs them, the wrapper that performs them is what answers.
+    ``glShaderSource(shader, string)`` demoted must still take two arguments;
+    the binding underneath it takes the four the registry declares.
+
+    Everything else -- the great majority, which the friendly modules describe
+    declaratively or not at all -- demotes to the binding itself, as it always
+    has, so ``argtypes``, ``DLL`` and the rest are read straight off it.
+    """
+    if not swallowed_for(proc):
+        return ctypes_callable(proc.__name__, getattr(proc, 'api', None))
+    return _replayed(proc)
 
 
 def array_type_map():
@@ -676,20 +700,21 @@ def string_list(value):
     """A list of bytes, from one string or a sequence of them.
 
     ``glShaderSource`` and ``glTransformFeedbackVaryings`` both take either
-    form, and a caller who passes one string means a list of one.
+    form, and a caller who passes one string means a list of one.  What counts
+    as a string is ``OpenGL._string_array``'s to say, so that this answers as
+    the ctypes bindings do.
     """
-    if isinstance(value, (bytes, bytearray)):
-        return [bytes(value)]
-    if isinstance(value, str):
-        return [value.encode('utf-8')]
+    from OpenGL._string_array import as_bytes
+
+    one = as_bytes(value)
+    if one is not None:
+        return [one]
     out = []
     for index, item in enumerate(value):
-        if isinstance(item, str):
-            out.append(item.encode('utf-8'))
-        elif isinstance(item, (bytes, bytearray)):
-            out.append(bytes(item))
-        else:
+        text = as_bytes(item)
+        if text is None:
             raise TypeError(
                 'string %d is %s, not a string' % (index, type(item).__name__)
             )
+        out.append(text)
     return out
