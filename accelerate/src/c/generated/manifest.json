@@ -73,6 +73,7 @@
     "GLES3",
     "GLSC2"
   ],
+  "module_stubs": 1298,
   "registry_commit": "1cdd228e34966dd6b95bd203e9f84faba0f371a1",
   "registry_commits": {
     "egl": "5961a7fe64cf8a126890ced6f13d69e0a1e1b83e",
