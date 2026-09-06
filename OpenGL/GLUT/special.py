@@ -355,15 +355,30 @@ def glutInit( baseOperation, *args ):
         holder[i] for i in range( count.value )
     ]
 
+def cleanupWindowContext( window ):
+    """Let go of the data stored against a GLUT window's context
+
+    The names in it -- textures, buffers, arrays -- belong to a context that is
+    about to stop existing, so they are dropped before the window is destroyed.
+
+    Answers whether the cleanup ran.  It raises nothing: the window has to be
+    destroyed either way, and a cleanup that could not find its context is a
+    thing to report rather than a reason to leave the window in place.
+    """
+    try:
+        GLUT.glutSetWindow(window)
+        result = contextdata.cleanupContext( contextdata.getContext() )
+    except Exception as err:
+        _log.error(
+            """Error attempting to clean up context data for GLUT window %s: %s""",
+            window, err,
+        )
+        return False
+    _log.info( """Cleaning up context data for window %s: %s""", window, result )
+    return True
+
 @lazy( _base_glutDestroyWindow )
 def glutDestroyWindow( baseOperation, window ):
     """Want to destroy the window, we need to do some cleanup..."""
-    context = 0
-    try:
-        GLUT.glutSetWindow(window)
-        context = contextdata.getContext()
-        result = contextdata.cleanupContext( context )
-        _log.info( """Cleaning up context data for window %s: %s""", window, result )
-    except Exception as err:
-        _log.error( """Error attempting to clean up context data for GLUT window %s: %s""", window, result )
+    cleanupWindowContext( window )
     return baseOperation( window )
