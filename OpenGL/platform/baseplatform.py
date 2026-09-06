@@ -218,9 +218,20 @@ class BasePlatform(object):
         deprecated=False,
         module=None,
         force_extension=False,
+        force_base=False,
         error_checker=None,
     ):
         """Core operation to create a new base ctypes function
+
+        A name is normally looked for where its declaration says it lives: a
+        core entry point in the library, an extension one through the
+        platform's ``getExtensionProcedure``.  ``force_extension`` and
+        ``force_base`` override that either way, for a platform whose loader
+        does not divide them where the declarations do -- see
+        :class:`OpenGL.platform.win32.Win32Platform`, which tries both.
+        ``force_base`` also stands the extension gate aside, since a name the
+        library exports is present whether or not the extension that
+        re-specified it is advertised.
 
         raises AttributeError if can't find the procedure...
         """
@@ -231,17 +242,22 @@ class BasePlatform(object):
         is_core = (not extension) or 'VERSION' in extension.split('_')
         # The gate stands aside inside a glBegin block, where the extension
         # string cannot be read -- see _dispatch.support._extension_gate_passes,
-        # which states the same rule for the compiled dispatch layer.
+        # which states the same rule for the compiled dispatch layer.  And for
+        # force_base, which says the name is one the library exports: what an
+        # extension re-specifies about a GL 1.1 entry point is which arguments
+        # it takes, and the entry point is there either way.
         if (
             (not is_core)
+            and not force_base
             and not inside_begin_block()
             and not self.checkExtension(extension)
         ):
             raise AttributeError("""Extension not available""")
         argTypes = [self.finalArgType(t) for t in argTypes]
 
-        if force_extension or (
-            (not is_core) and (not self.EXTENSIONS_USE_BASE_FUNCTIONS)
+        if not force_base and (
+            force_extension
+            or ((not is_core) and (not self.EXTENSIONS_USE_BASE_FUNCTIONS))
         ):
             # what about the VERSION values???
             pointer = self.getExtensionProcedure(as_8_bit(functionName))

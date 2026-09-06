@@ -697,6 +697,48 @@ rather than anyone's recollection. Current behaviour, measured:
   the platform-independent ones only ask what is *declared*.
   `tests/cdispatch/test_pointer_conversion.py` holds both halves to what ctypes
   produces, and runs on any platform.
+- **A name a core version and an extension both declare is found in both
+  places.** `glGetPointerv` is GL 1.1, and `GL_KHR_debug` re-specifies it for
+  the pnames that report a debug callback. Which declaration `OpenGL.GL` ends
+  up holding is settled by import order, so it must not decide whether the
+  entry point works -- and on Windows it did: `opengl32` exports GL 1.1 and
+  nothing above it, `wglGetProcAddress` answers for everything above GL 1.1 and
+  returns NULL for the 1.1 set, and an extension-declared name was looked for
+  in the second place only. `OpenGL.GL.glGetPointerv` was an undefined function
+  under the ctypes layer while `OpenGL.GL.VERSION.GL_1_1.glGetPointerv` beside
+  it worked. `Win32Platform.constructFunction` tries it each way round now --
+  `force_base` is the mirror of `force_extension` -- and
+  `tests/gl/test_core_entry_point_resolution.py` holds the two implementations
+  to the same answer.
+
+  *Found 2026-09-06, by `test_debug_output_default.py` on Windows.* The visible
+  symptom was PyOpenGL installing its error-checking callback over an
+  application's own: the check for one asks `glGetPointerv` what the context
+  already has, and an undefined function cannot answer. A context that will not
+  answer is offered the cheaper check rather than refused it forever, so the
+  silence read as "nothing installed there".
+- **Which context is current is the driver's to say, not the record's.** Both
+  ends of the debug-output mechanism make GL calls and so need a context
+  current, and both decided they had one by reading a handle the layer was
+  last *told* about. That handle is what `make_current` said, and what it said
+  stops being true the moment the context goes -- which is exactly the moment
+  each of these runs.
+
+  `forget_context` hands a context's callback back before retiring its table,
+  and asked `handle == _context_key()`. A context destroyed without a
+  `make_current` after it is still the one on record, so the test passed
+  precisely when it should have failed.  `offer_debug_output` arms a context
+  the first time an entry point resolves in it, and checked whether one was
+  current only where it had *no* name for it -- so a name left over from a
+  context since destroyed sent `glEnable(GL_DEBUG_OUTPUT)` into nothing.
+
+  `libGL` answers `glGetError` with zero with no context current, so neither
+  showed on Linux. `opengl32` reports GL_INVALID_OPERATION: the first failed
+  every GL test in the suite in teardown, 622 of them, and the second failed
+  one test in one mode, from an ordering that left no context current where
+  another had left one. `_current_context()` asks the platform which context is
+  current, `offer_debug_output` asks `_has_current_context()` whatever it is
+  called, and `tests/test_debug_output_scope.py` holds both decisions.
 
 **Decision on exception types.** Bad scalar arguments currently raise
 `ctypes.ArgumentError`; wrong arity raises `TypeError`. A C stub would naturally

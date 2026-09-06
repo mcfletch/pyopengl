@@ -179,37 +179,43 @@ class Win32Platform( baseplatform.BasePlatform ):
         force_extension = False,
         error_checker = None,
     ):
-        """Override construct function to do win32-specific hacks to find entry points"""
-        try:
-            return super( Win32Platform, self ).constructFunction(
-                functionName, dll,
-                resultType, argTypes,
-                doc, argNames,
-                extension,
-                deprecated,
-                module,
-                error_checker=error_checker,
-            )
-        except AttributeError:
+        """Override construct function to do win32-specific hacks to find entry points
+
+        Windows splits the entry points between two places and the split does
+        not follow the declarations.  ``opengl32`` exports GL 1.1 and nothing
+        above it; ``wglGetProcAddress`` answers for everything above GL 1.1 and
+        returns NULL for the 1.1 set, and the pixel-format calls are in gdi32.
+        So each is tried in turn, and the last two are each other's mirror:
+        a core-declared name the driver only offers as an extension, and an
+        extension-declared name that is in the 1.1 export set.
+
+        The second is what ``GL_KHR_debug`` does to ``glGetPointerv``.  A name
+        declared by both a core version and an extension is held once in
+        ``OpenGL.GL``, by whichever module imported last, and which one that is
+        must not decide whether the entry point works.
+
+        Every route is tried here, so a caller's ``force_extension`` cannot
+        change what is found and is not passed on.
+        """
+        attempts = (
+            dict(dll=dll),
+            dict(dll=self.GDI32),
+            dict(dll=dll, force_extension=True),
+            dict(dll=dll, force_base=True),
+        )
+        for index, attempt in enumerate(attempts):
             try:
-                return super( Win32Platform, self ).constructFunction(
-                    functionName, self.GDI32,
-                    resultType, argTypes,
-                    doc, argNames,
-                    extension,
-                    deprecated,
-                    module,
+                return super().constructFunction(
+                    functionName,
+                    resultType=resultType, argTypes=argTypes,
+                    doc=doc, argNames=argNames,
+                    extension=extension,
+                    deprecated=deprecated,
+                    module=module,
                     error_checker=error_checker,
+                    **attempt
                 )
             except AttributeError:
-                return super( Win32Platform, self ).constructFunction(
-                    functionName, dll,
-                    resultType, argTypes,
-                    doc, argNames,
-                    extension,
-                    deprecated,
-                    module,
-                    force_extension = True,
-                    error_checker=error_checker,
-                )
+                if index == len(attempts) - 1:
+                    raise
             

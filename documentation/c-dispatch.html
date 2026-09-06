@@ -373,6 +373,15 @@ extensions each.  A context advertising any one of them has the function, and
 that is what resolution requires.  <code>proc.extension</code> reports the one
 the entry point is recorded under, which is a single name.</p>
 
+<p>A command may also be declared by a core version <em>and</em> by an
+extension: <code>glGetPointerv</code> is GL 1.1, and <code>GL_KHR_debug</code>
+re-specifies it to report a debug callback.  Which declaration
+<code>OpenGL.GL</code> holds is settled by import order, and it does not change
+where the entry point is found.  That matters most on Windows, where the split
+is real: <code>opengl32</code> exports GL 1.1 and nothing above it, while
+<code>wglGetProcAddress</code> answers for everything above GL 1.1 and returns
+NULL for the 1.1 set.  A name is looked for in both.</p>
+
 <h2>Docstrings and introspection</h2>
 
 <p>Entry points carry a docstring and a text signature under the C
