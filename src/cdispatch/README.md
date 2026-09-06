@@ -35,11 +35,12 @@ PYOPENGL_DISPATCH=c python -m pytest tests/
 
 Five steps, each its own module, each tested in `tests/cdispatch/`.
 
-**1. `extract.py` — read the shipped tree.** `OpenGL/raw/**` is parsed by AST,
-not imported, so extraction needs no GL context and no working build. Each
-`@_f @_p.types(...) def glFoo(a, b): pass` becomes a `Command`. The friendly
-modules above them are parsed the same way, and their
-`wrapper.wrapper(x).setOutput(...)` chains become the annotations.
+**1. `extract.py` — read the shipped tree.** One `Command` per entry point,
+built from the marshalled declaration tables (`OpenGL/raw/_declarations/*.dat`)
+and the annotation table. Nothing is imported, so extraction needs no GL
+context and no working build. The AST pass that reads a friendly module's
+`wrapper.wrapper(x).setOutput(...)` chains is still here, behind
+`read_chains=True`; generation does not use it (see 1c).
 
 Two things it does that are easy to miss:
 
@@ -59,8 +60,7 @@ pass, asking a different question: not what an entry point's signature is but
 what each `OpenGL/raw` module *defines* — its constants, its re-exports, and
 for each entry point the `@_p.types(...)` signature its declaration stated.
 That becomes a C table (`pygl_modules.c`), which the finder in
-`OpenGL/_dispatch/finder.py` builds module objects from when
-`PYOPENGL_VIRTUAL_MODULES=1`. The signature is carried because running the
+`OpenGL/_dispatch/finder.py` builds module objects from. The signature is carried because running the
 declaration is what recorded the ctypes binding a client demotes to, and
 nothing runs it when there is no file. A module with a class or a conditional
 in it is not data, so it is marked hand-written and keeps its file.
@@ -68,11 +68,13 @@ in it is not data, so it is marked hand-written and keeps its file.
 **1c. `annotations.py` — the customisations as data.** The registry gives
 every signature; what it does not give is the difference between that and the
 Python one, which people wrote over 28 years as `wrapper.wrapper(...)` chains.
-`annotations.json` holds those: 1,214 entries, parameters keyed by name.
-Nothing consumes it yet — the generator still parses the friendly modules and
-writes the table beside its own results, so the table is checked against the
-parse on every run. `tests/cdispatch/test_annotations.py` does the round trip
-and asserts the emitted C is byte-identical from either source.
+`annotations.json` holds those: 2,079 entries, parameters keyed by name, and it
+is what generation reads — `extract_tree(read_chains=False)`, no Python under
+`OpenGL/` parsed at all. The parse survives for the 28 modules whose chains the
+table cannot express, and for the tests that hold the two copies to each other:
+`test_generation_is_data_driven.py` emits every stub from each source and
+compares the C, `test_annotation_wrapping.py` checks that applying the table
+builds the wrapper the chain builds.
 
 **2. `model.py` — the command record.** One record per entry point, and
 everything emitted is a field in it:

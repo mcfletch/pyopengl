@@ -8,10 +8,12 @@
 <h1>The C dispatch layer</h1>
 
 <p>PyOpenGL has two implementations of the OpenGL entry points.  The <em>C</em>
-implementation is generated from the Khronos registry, compiled into an
-extension module, and is what runs by default.  The <em>ctypes</em>
-implementation is the one PyOpenGL has always had, and an environment variable
-selects it:</p>
+implementation is generated from the Khronos registry and compiled into an
+extension module; it ships in <code>PyOpenGL_accelerate</code>, and it is what
+runs where that package is installed under CPython.  The <em>ctypes</em>
+implementation is pure Python, needs nothing compiled, and is what runs
+otherwise.  Where the C implementation is available, an environment variable
+selects the ctypes one instead:</p>
 
 <pre>PYOPENGL_DISPATCH=ctypes   python yourprogram.py</pre>
 
@@ -28,6 +30,16 @@ CPython 3.12 and <code>OpenGL_accelerate</code> installed.</p>
 <tr><td>an empty Python function, for scale</td><td colspan="2">32 ns</td></tr>
 </table>
 
+<p>Those are per-call figures, and a program gains from them in proportion to
+how much of its frame goes on dispatch.  A program structured around modern GL
+&#8212; shaders, vertex array objects, uniform buffers, instancing &#8212;
+issues few calls per frame and spends its time in the driver and on the GPU:
+measured uplift on optimised PyOpenGL applications is about 5%.  The table's
+ratios are what a program approaches as its calls per frame rise &#8212;
+immediate-mode drawing, a uniform set per object, geometry pushed through the
+client-side arrays every frame &#8212; and a program between the two sees a
+figure between the two.</p>
+
 <h2>Where the C implementation comes from</h2>
 
 <p>The C dispatch is compiled, so it ships in the
@@ -42,22 +54,63 @@ implementations are the same bindings with the same semantics &#8212; and it is
 what runs where no compiled wheel is available and where there is no compiler
 to build one.</p>
 
+<p>The extension is built for CPython only.  Another interpreter reaches
+CPython's vectorcall protocol through an emulation layer, where the C
+implementation would be slower than ctypes, so
+<code>PyOpenGL_accelerate</code> does not build it there and ctypes is what
+runs.</p>
+
 <h2>Selecting an implementation</h2>
 
 <dl>
 <dt><code>PYOPENGL_DISPATCH=c</code></dt>
-<dd>The default where <code>PyOpenGL_accelerate</code> is installed.  Every
-entry point that has a C implementation uses it; one that does not keeps its
-ctypes binding, so the two coexist and you never have to choose per
-function.</dd>
+<dd>The default on CPython, taking effect where
+<code>PyOpenGL_accelerate</code> is installed.  Every entry point that has a C
+implementation uses it; one that does not keeps its ctypes binding, so the two
+coexist and you never have to choose per function.</dd>
 
 <dt><code>PYOPENGL_DISPATCH=ctypes</code></dt>
-<dd>The reference semantics, the bootstrap route for a new platform, and what
-runs with <code>PyOpenGL</code> alone.  It is not scheduled for removal.</dd>
+<dd>The reference semantics, the bootstrap route for a new platform, and the
+default on every interpreter other than CPython.  It is what runs with
+<code>PyOpenGL</code> alone, and it is not scheduled for removal.</dd>
 </dl>
 
 <p>With the extension absent, <code>PYOPENGL_DISPATCH=c</code> leaves the
-ctypes implementation in place rather than failing.</p>
+ctypes implementation in place rather than failing.  Two other settings select
+ctypes for the process: <code>OpenGL.USE_ACCELERATE = False</code>, which turns
+off every compiled accelerator, and <code>OpenGL.FULL_LOGGING</code>, since the
+call trace is written by the ctypes wrapper chain.</p>
+
+<h3>Asking which one you got</h3>
+
+<p>Since asking for the C implementation and running without it is not an
+error, a program that means to be on it has to ask.
+<code>OpenGL.dispatch</code> is where:</p>
+
+<pre>&gt;&gt;&gt; from OpenGL import dispatch
+&gt;&gt;&gt; dispatch.requested()          # what the configuration asks for
+'c'
+&gt;&gt;&gt; dispatch.active()             # what the entry points built so far use
+'c'
+&gt;&gt;&gt; dispatch.status()
+Status(requested='c', active='c', available=True, reason=None)</pre>
+
+<p><code>status().reason</code> is a sentence naming whatever chose ctypes
+&#8212; an absent extension, <code>USE_ACCELERATE</code>,
+<code>FULL_LOGGING</code>, an interpreter the extension is not built for
+&#8212; so a program can put it in the error it raises:</p>
+
+<pre>state = dispatch.status()
+if state.active != 'c':
+    raise SystemExit('this program needs the C dispatch: %s' % state.reason)</pre>
+
+<p>The choice is made when the first entry point is built, so
+<code>active()</code> answers <code>'ctypes'</code> in a process that has
+imported nothing from <code>OpenGL.GL</code> yet, however it is configured.
+<code>dispatch.settle()</code> makes the choice rather than reporting it, for a
+test suite or a program that has to know before it has anything to draw with.
+It reads <code>OpenGL.ERROR_CHECKING</code> and its neighbours as the first
+entry point would, so call it after setting them.</p>
 
 <h2>What is implemented in C</h2>
 
@@ -105,11 +158,11 @@ path, so it cannot observe the switch.  Asking the driver instead costs about
 97&nbsp;ns per call on the reference machine, more than a whole dispatch.</p>
 
 <p>The default therefore re-reads the current context whenever an entry point
-needs resolving, and otherwise assumes it has not changed.  <strong>This is not
-a new limitation.</strong>  The ctypes implementation holds one binding per
-process and cannot tell contexts apart at all, so a process with two contexts
-of differing capability has always had this exposure; per-context tables narrow
-it rather than widening it.</p>
+needs resolving, and otherwise assumes it has not changed.  The ctypes
+implementation holds one binding per process and cannot tell contexts apart at
+all, so under it a process with two contexts of differing capability is exposed
+on every entry point; per-context tables narrow that rather than widening
+it.</p>
 
 <p>Where it matters &#8212; a program that switches between contexts of genuinely
 different capability, such as a discrete-GPU context beside a software one
@@ -119,13 +172,14 @@ different capability, such as a discrete-GPU context beside a software one
 <li><code>PYOPENGL_CONTEXT_TRACKING=verify</code> asks the driver on every call.
 Nothing to change in the program, and it costs the 97&nbsp;ns: about 177&nbsp;ns
 per call rather than 58, against 383 for ctypes.</li>
-<li><code>OpenGL._dispatch.make_current(handle)</code> after each switch, with
+<li><code>OpenGL.dispatch.make_current(handle)</code> after each switch, with
 the handle <code>OpenGL.platform.PLATFORM.GetCurrentContext()</code> returns.
 Exact and free, for a program willing to say so.</li>
 </ul>
 
-<p><code>OpenGL._dispatch.forget_context(handle)</code> releases a destroyed
-context's table.  A table is about 32 KB, so a hundred live contexts cost 3 MB.</p>
+<p><code>OpenGL.dispatch.forget_context(handle)</code> releases a destroyed
+context's table.  A table is a slot and a flag per entry point, about
+43 KB, so a hundred live contexts cost 4.3 MB.</p>
 
 <h2>Arrays</h2>
 
@@ -160,10 +214,9 @@ was:</p>
 b = glGetFloatv(GL_COLOR_CLEAR_VALUE, a)
 # b holds the clear colour; a is still [0 0 0 0]</pre>
 
-<p>This is what passing an array has always meant, in this implementation and
-in the ctypes one, and a great deal of code relies on being able to pass a list
-or an array of a convenient type and read the result from the return value.  So
-it is not refused.  Passing <code>None</code>, or an array of the right type,
+<p>Passing an array means this in both implementations, and a great deal of
+code relies on being able to pass a list or an array of a convenient type and
+read the result from the return value.  So it is not refused.  Passing <code>None</code>, or an array of the right type,
 are both ways to get an array written in place.</p>
 
 <p>Two cases are refused, because in them nothing usable comes back at all: a
@@ -176,7 +229,7 @@ which would otherwise let the driver write past the end of it.</p>
 <p><code>OpenGL.ERROR_CHECKING</code> is read when the layer is configured and
 applies per entry point per context.  The API's <code>getError</code> is called
 from C rather than through a Python callback, so checking costs the driver
-round trip and nothing else.  <code>OpenGL._dispatch.set_error_checking(enable,
+round trip and nothing else.  <code>OpenGL.dispatch.set_error_checking(enable,
 entry_point=None)</code> changes it at run time, for one entry point or for
 all &#8212; which the import-time flag cannot do.</p>
 
@@ -208,12 +261,14 @@ is checked by asking EGL either way.</p>
 <h3>Checking through GL_KHR_debug</h3>
 
 <p>The round trip <em>is</em> the cost of error checking.  Where the context
-offers <code>GL_KHR_debug</code>, the driver can report an error through a
-callback during the call instead, and the check afterwards becomes a read of
-the flag that callback set:</p>
+offers <code>GL_KHR_debug</code>, the driver reports an error through a
+callback during the call instead, and the check afterwards is a read of the
+flag that callback set.  <strong>A context that offers it is given it</strong>,
+under either implementation, without the program asking:</p>
 
-<pre>import OpenGL._dispatch as dispatch
-dispatch.use_debug_output(True)</pre>
+<pre>&gt;&gt;&gt; from OpenGL import dispatch
+&gt;&gt;&gt; dispatch.error_checking_mode()
+'debug-output'</pre>
 
 <table border="1" cellpadding="4" cellspacing="0">
 <tr><th><code>glBindTexture</code></th><th>ns</th></tr>
@@ -222,17 +277,64 @@ dispatch.use_debug_output(True)</pre>
 <tr><td>no checking at all</td><td>37.6</td></tr>
 </table>
 
-<p>Checking costs 0.8 ns rather than 11 ns, so leaving it on is no longer a
-trade against speed.  The exception is the same <code>GLError</code>, raised
-from the same call; the description is the driver's own message rather than a
-code looked up afterwards.</p>
+<p>Checking costs 0.8 ns rather than 11 ns, so leaving it on is not a trade
+against speed.  The exception is the same <code>GLError</code> with the same
+<code>err</code> and the same <code>baseOperation</code>, raised from the same
+call; what is added is <code>description</code>, the driver's own account of
+what was wrong, and <code>debugMessageID</code>.</p>
 
-<p>It requires a context with <code>GL_KHR_debug</code>;
-<code>use_debug_output()</code> returns False and leaves checking as it was
-where there is none.  It turns on <code>GL_DEBUG_OUTPUT_SYNCHRONOUS</code>,
-because the callback has to run during the call it belongs to for the error to
-be attributed to the right entry point.  Messages that are not errors are not
+<p><code>GL_DEBUG_OUTPUT_SYNCHRONOUS</code> is turned on with it, because the
+callback has to run during the call it belongs to for the error to be
+attributed to the right entry point.  Messages that are not errors are not
 requested, so the driver does not spend time formatting them.</p>
+
+<h4>Turning it off</h4>
+
+<dl>
+<dt><code>OpenGL.ERROR_DEBUG_OUTPUT = False</code></dt>
+<dd>Before the first call, for a program that does not want the driver put
+into synchronous debug output at all.  Checking stays the
+<code>glGetError</code> round trip.</dd>
+<dt><code>dispatch.use_debug_output(False)</code></dt>
+<dd>At any point, for the current context: the callback is removed and the
+driver state undone.  A context a program has spoken for is left alone
+afterwards.</dd>
+</dl>
+
+<p>A context that already has a debug callback installed keeps it: PyOpenGL
+looks before it installs, and where somebody else is using
+<code>GL_KHR_debug</code> the context stays on <code>glGetError</code>.  Taking
+that callback over would silence the program's own diagnostics, and its next
+<code>glDebugMessageCallback</code> would silence PyOpenGL's checking.</p>
+
+<h4>Why it audits itself</h4>
+
+<p>A flag that is never set looks exactly like a context with nothing wrong.
+So a context checking this way asks the driver anyway, once every 64 calls, and
+what that finds decides whether the flag is still to be trusted: an error the
+callback never reported means the callback is not this context's, and the
+context goes back to <code>glGetError</code> for good.</p>
+
+<p>That is what makes it safe to leave on.  A context handle is an address the
+driver hands out again, so a program that destroys a context without saying so
+can leave a table describing a context that no longer exists &#8212; and
+checking that reads only the flag would pass everything.  The audit bounds that
+to 64 calls and repairs it, and a thread returning to a context it left audits
+on its first call back.  It costs about a sixth of a nanosecond per call.</p>
+
+<p>The ctypes implementation has no handle to record against until a program
+gives it one, so a context it arms before then is recorded as unnamed.  That
+record is given up as soon as the program says the situation has changed
+&#8212; <code>forget_context</code>, or <code>make_current</code> naming a
+context &#8212; because whatever is current afterwards cannot be shown to be
+the context that was armed.  The next context is offered the mechanism
+afresh.</p>
+
+<p>Telling PyOpenGL is still better than being caught by the audit:
+<code>dispatch.forget_context(handle)</code> when a context goes, and
+<code>dispatch.make_current(handle)</code> when one becomes current.  Neither
+is required &#8212; nothing breaks without them &#8212; and both are worth
+calling under either implementation.</p>
 
 <h3>Extensions that declare the same function</h3>
 
@@ -249,14 +351,19 @@ the entry point is recorded under, which is a single name.</p>
 implementation, which they do not have under ctypes:</p>
 
 <pre>&gt;&gt;&gt; glBindTexture.__doc__
-'glBindTexture(target, texture) -&gt; None'
+'glBindTexture(target: GLenum, texture: GLuint) -&gt; None'
 &gt;&gt;&gt; glGenTextures.__doc__
-'glGenTextures(n) -&gt; textures'
+'glGenTextures(n: GLsizei) -&gt; textures: GLuint[]'
 &gt;&gt;&gt; inspect.signature(glGenTextures)
 &lt;Signature (n, textures=None, /)&gt;</pre>
 
 <p>The signature is built from the registry, so it is available for every entry
-point without any external documentation source.</p>
+point without any external documentation source.  The types are the registry's
+own, because <code>GLenum</code> and <code>GLuint</code> are a distinction the
+caller makes and the man page they read next uses; an array argument is written
+<code>GLfloat[]</code>, one level of <code>[]</code> per level of indirection.
+The <code>.pyi</code> stubs beside the package state the same signatures in
+Python types, which is what a type checker can use.</p>
 
 <h2>Threads</h2>
 
@@ -277,7 +384,7 @@ than once or twice.</p>
 <p>Releasing costs 15&#8211;25&nbsp;ns against the 57&nbsp;ns a
 <code>glBindTexture</code> takes, so it is done for the calls that can actually
 block rather than for all of them.  The list is
-<code>src/cdispatch/blocking.py</code>: about 30 exact names and 20 family
+<code>src/cdispatch/blocking.py</code>: 26 exact names and 19 family
 patterns, 244 entry points in total, and the choice is made when the C is
 generated rather than tested on each call.  A call not in that list holds the
 GIL, which is the right trade for one that returns in tens of nanoseconds.</p>
@@ -429,11 +536,12 @@ together in one pass and describe the same set.</p>
 &#8212; which carry classes and conditionals rather than data, so there is
 nothing to tabulate.</p>
 
-<p><code>PYOPENGL_VIRTUAL_MODULES=0</code> turns the finder off.  That is
-useful only in a checkout that still has the generated files &#8212; the
-generator can write them, and comparing the two is how the tables are held
-honest &#8212; and it makes <code>OpenGL.raw</code> unimportable in an ordinary
-installation.</p>
+<p>There is no switch for this, because there is nothing to switch to: the
+files are not shipped and the generator does not write them, so these names
+resolve from the tables or not at all.  What the tables hold is held to what
+the files defined by
+<code>tests/test_virtual_modules.py</code>, which compares every constant and
+every signature against a recorded survey of the modules as files.</p>
 
 <h2>Regenerating and keeping up with the registry</h2>
 

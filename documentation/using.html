@@ -409,6 +409,14 @@ debug a PyOpenGL application.</p>
 applies per entry point per context, and the check is made from C rather than
 through a Python callback, so it costs the driver round trip and nothing
 else.</p>
+<p>The round trip is most of what checking costs, and a context offering
+<code>GL_KHR_debug</code> does not pay it: the driver reports the error through
+a callback during the call, so the check is a read of the flag that callback
+set.  Both implementations use it where a context offers it, without being
+asked.  <code>OpenGL.dispatch.error_checking_mode()</code> says which mechanism
+a context ended up with, and
+<a href="c-dispatch.html">the C dispatch layer</a> describes how to decline
+it.</p>
 <p>You can also customise the error-checking functionality rather than disabling it, for
 instance, if you will always have a valid context, you could register
 the raw glGetError function as the error checker to avoid the overhead

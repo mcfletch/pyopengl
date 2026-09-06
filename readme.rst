@@ -73,22 +73,34 @@ Choosing a dispatch implementation
 
 PyOpenGL has two implementations of the OpenGL entry points.  The C
 implementation is generated from the Khronos registry and reaches the driver
-roughly seven times faster -- eleven times for a call that passes an array.
-Being compiled, it ships in ``PyOpenGL_accelerate``::
+roughly seven times faster per call -- eleven times for a call that passes an
+array.  What a program gains from that depends on how much of its frame goes on
+dispatch: one structured around shaders and buffer objects makes few calls per
+frame, and the measured uplift on optimised PyOpenGL applications is about 5%.
+Being compiled, the C implementation ships in ``PyOpenGL_accelerate``::
 
     $ pip install PyOpenGL PyOpenGL_accelerate
 
 ``pip install PyOpenGL`` on its own gives the ctypes implementation, which is
-the one PyOpenGL has always had.  Where both are installed the C
-implementation is used, and the ctypes one is selected with::
+pure Python and needs nothing compiled.  The extension is built for CPython
+only, so the C implementation runs where ``PyOpenGL_accelerate`` is installed
+under CPython, and ctypes runs everywhere else.  Where the C implementation is
+available, ctypes is selected with::
 
     $ PYOPENGL_DISPATCH=ctypes python yourprogram.py
 
-Both implement the same API and the test suite runs under both.  The C
-implementation additionally gives each OpenGL context its own function pointer
-for every entry point, which matters in a process holding contexts of differing
-capability.  See `the C dispatch layer`_ for what it covers, what differs, and
-how to tell it that the current context changed.
+Both implement the same API and the test suite runs under both.  Asking for the
+C implementation where none was built is not an error -- the ctypes one stays in
+place -- so a program that means to be on it asks::
+
+    >>> from OpenGL import dispatch
+    >>> dispatch.status()
+    Status(requested='c', active='c', available=True, reason=None)
+
+``OpenGL.dispatch`` is also where a program says a context has become current or
+been destroyed, which is what gives each context its own function pointer for
+every entry point.  See `the C dispatch layer`_ for what it covers, what
+differs, and how to tell it that the current context changed.
 
 .. _`the C dispatch layer`: https://mcfletch.github.io/pyopengl/documentation/c-dispatch.html
 

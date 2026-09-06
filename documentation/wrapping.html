@@ -9,9 +9,9 @@
 <p><code>glTexImage2D</code> takes eleven arguments in C, nine in PyOpenGL, and
 works out the length of the last one from four of the others and from GL state
 the caller never mentions.  Nothing about that is written down in one place: it
-is assembled from the Khronos registry, a generated declaration, a chain of
-wrapper customisations, and — for most entry points now — a C function
-generated from all of it.</p>
+is assembled from the Khronos registry, a generated declaration, an annotation
+that states what the Python signature does differently, and — for most entry
+points now — a C function generated from all three.</p>
 
 <p>This page is the map.  It is for the person debugging why a call raises
 something unexpected, and for the person adding an entry point or an argument
@@ -38,14 +38,14 @@ convention and wondering where the change belongs.</p>
 </tr>
 <tr>
   <td><b>the customisation</b></td>
-  <td>the friendly module, e.g.
-      <code>OpenGL/GL/VERSION/GL_1_1.py</code></td>
+  <td><code>src/cdispatch/annotations.json</code>, shipped as
+      <code>OpenGL/raw/_declarations/_annotations.dat</code></td>
   <td>What makes the Python signature differ from the C one: which arguments
       are outputs, which are sized from others, which are images.</td>
 </tr>
 <tr>
   <td><b>the implementation</b></td>
-  <td><code>src/c/generated/pygl_&lt;API&gt;.c</code>, or
+  <td><code>accelerate/src/c/generated/pygl_&lt;API&gt;.c</code>, or
       <code>OpenGL/wrapper.py</code></td>
   <td>The code that actually converts arguments, calls the driver and converts
       the result.</td>
@@ -54,8 +54,8 @@ convention and wondering where the change belongs.</p>
 
 <h2>The annotation table</h2>
 
-<p>The customisations are also written down as data, in
-<code>src/cdispatch/annotations.json</code> &#8212; 1,214 entries, keyed
+<p>The customisations are written down as data, in
+<code>src/cdispatch/annotations.json</code> &#8212; 2,079 entries, keyed
 <code>"&lt;API&gt;.&lt;command&gt;"</code>, with parameters keyed by name
 rather than by position, since a position moves when the registry adds an
 argument and a name does not:</p>
@@ -65,18 +65,26 @@ argument and a name does not:</p>
     "pixels": {"size": {"kind": "image", "format": "format",
                         "type": "type", "dimensions": ["width", "height"]}}}}</pre>
 
-<p>Of 4,839 commands, 3,660 are plain pass-throughs whose every fact is in the
-registry; 1,214 carry an annotation, and of those the registry supplies or
-corrects 136.  So about 1,078 facts exist nowhere but the hand-written
-friendly modules, and those are what the table is for.</p>
+<p>Of 4,880 commands, 2,801 are plain pass-throughs whose every fact is in the
+registry; the other 2,079 carry an annotation, and what it states exists
+nowhere else in machine-readable form.  That is what the table is for.</p>
 
-<p>The generator still recovers them by parsing, and writes the table beside
-its own results on every run &#8212; so the table is checked against the parse
-continuously, by a round trip that strips every annotation and puts it back,
-and by an acceptance test that the C emitted from the table is byte-identical
-for all 4,819 stubs.  A copy ships as
-<code>OpenGL/raw/_declarations/_annotations.dat</code>, because the
-pure-Python path needs it.</p>
+<p>Generation reads the registry, the declaration tables and this table.  It
+does not read the friendly modules: a customisation chain is a second copy of
+what the table holds, and migrating a module deletes the chain, so anything
+only the chain held would go with it.
+<code>tests/cdispatch/test_generation_is_data_driven.py</code> holds generation
+to that, by emitting every stub from each source and comparing the C.</p>
+
+<p>Twenty-eight modules still carry a chain, for customisations the table
+cannot express &#8212; a hand-written converter, a resolver, an image size
+computed from a format and a type together.  While they remain, the two copies
+can be compared, and
+<code>tests/cdispatch/test_annotation_wrapping.py</code> does: applying the
+table has to produce the wrapper the chain produces, on the real entry points.
+A copy of the table ships as
+<code>OpenGL/raw/_declarations/_annotations.dat</code>, because the pure-Python
+path needs it.</p>
 
 <h3>Rebuilding a customisation from the table</h3>
 
@@ -99,9 +107,11 @@ offset into a bound buffer.  Array-ness is not in the type there; the table's
 
 <h2>Reading the customisation</h2>
 
-<p>A friendly module states the difference between the C signature and the
-Python one as a chain of calls on <code>wrapper.wrapper</code>.  There are only
-a handful of kinds, and each has a matching annotation in the generator:</p>
+<p>Under the ctypes implementation the difference between the C signature and
+the Python one is applied by a chain of calls on <code>wrapper.wrapper</code>,
+built either from the table or, in the twenty-eight modules that still carry
+one, from the chain written in the module.  There are only a handful of kinds,
+and each is one annotation:</p>
 
 <table border="1" cellpadding="5" cellspacing="0">
 <tr><th>call</th><th>means</th><th>generator sees</th></tr>
@@ -135,12 +145,13 @@ a handful of kinds, and each has a matching annotation in the generator:</p>
     <td><code>Parameter.retain</code>.</td></tr>
 </table>
 
-<p>The generator reads these by parsing the friendly modules, never by
-importing them, so extraction needs no GL context and no working build.  It
-then cross-checks the registry, because reading the modules alone is not
-enough: <code>images.py</code> reaches <code>glReadPixels</code> through a
-differently-named wrapper, and only the registry's
-<code>COMPSIZE(format,type,width,height)</code> says what it really is.</p>
+<p>The table was built by parsing these chains, never by importing the modules,
+so extraction needs no GL context and no working build.  It reads the registry
+as well, because the chains alone are not enough: <code>images.py</code>
+reaches <code>glReadPixels</code> through a differently-named wrapper, and only
+the registry's <code>COMPSIZE(format,type,width,height)</code> says what it
+really is.  The parse still runs in the migration tooling and in the test that
+compares the two copies; it is no part of generating anything.</p>
 
 <h2>What runs when you call one</h2>
 
@@ -186,7 +197,7 @@ attributes under both to keep them so.</p>
 <tr><td>a <code>GLError</code> naming a call you did not make</td>
     <td>Without <code>GL_KHR_debug</code>, an error is attributed to whichever
         call next asks.  Switch on
-        <code>OpenGL._dispatch.use_debug_output()</code> to have the driver
+        <code>OpenGL.dispatch.use_debug_output()</code> to have the driver
         report the offending call itself.</td></tr>
 <tr><td>an argument-count error mentioning more arguments than you passed</td>
     <td>The entry point demoted to ctypes and lost a customisation.  See
@@ -248,11 +259,11 @@ not.  <code>OpenGL/_dispatch/support.py</code> holds the machinery —
 <li><b>A new argument convention</b> — a sizing rule no existing annotation
     describes.  Add a size spec to <code>src/cdispatch/model.py</code>, teach
     <code>src/cdispatch/extract.py</code> to recognise it, and add a macro to
-    <code>src/c/pygl.h</code> for the C to use.  There is a test file per family
+    <code>accelerate/src/c/pygl.h</code> for the C to use.  There is a test file per family
     in <code>tests/cdispatch/</code>; write that first.</li>
 <li><b>An entry point needing real C</b> — one whose behaviour is not a
     description.  Add it to <code>src/cdispatch/handwritten.py</code> and write
-    the body in <code>src/c/pygl_handwritten.c</code>.
+    the body in <code>accelerate/src/c/pygl_handwritten.c</code>.
     <code>glShaderSource</code> is the worked example.</li>
 <li><b>A new array element type.</b> One row in the element table and one
     <code>ArrayDatatype</code> subclass; no new C and no change to any stub.</li>
@@ -288,8 +299,8 @@ declaration came from.</p>
 <tr><td><code>src/cdispatch/emit_c.py</code></td><td>Turning a record into a C function, and deciding when it cannot.</td></tr>
 <tr><td><code>src/cdispatch/modules.py</code></td><td>What each generated module declared, for the tables and the data file.</td></tr>
 <tr><td><code>src/cdispatch/handwritten.py</code></td><td>The entry points whose C is written by a person.</td></tr>
-<tr><td><code>src/c/pygl.h</code></td><td>The macro vocabulary every generated stub is written in.</td></tr>
-<tr><td><code>src/c/pygl_runtime.c</code></td><td>Dispatch tables, buffer acquisition, image and array helpers.</td></tr>
+<tr><td><code>accelerate/src/c/pygl.h</code></td><td>The macro vocabulary every generated stub is written in.</td></tr>
+<tr><td><code>accelerate/src/c/pygl_runtime.c</code></td><td>Dispatch tables, buffer acquisition, image and array helpers.</td></tr>
 <tr><td><code>OpenGL/_declarations.py</code></td><td>Filling a friendly module's namespace from either source.</td></tr>
 <tr><td><code>OpenGL/_dispatch/support.py</code></td><td>Resolution, demotion, and what the C calls back into.</td></tr>
 <tr><td><code>OpenGL/wrapper.py</code></td><td>The ctypes implementation of everything above.</td></tr>
