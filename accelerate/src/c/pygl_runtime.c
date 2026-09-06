@@ -294,6 +294,38 @@ static int pygl_needs_context(const PyGLCommand *command)
     return command->needs_context;
 }
 
+/* Resolve this API's getError in this table, before the call it will report on
+ * is made.
+ *
+ * The check runs after the call, and resolving an entry point makes calls of
+ * its own -- eglGetProcAddress among them, which sets EGL_SUCCESS.  A getter
+ * first resolved from inside the check therefore clears the very error the
+ * check was about to read, and the call answers its result with nothing
+ * raised.  The call that lands there is the first failing one of a process,
+ * which is the one a program is most likely to have written a diagnostic
+ * around.
+ *
+ * Once per API per context, on the path that already resolves. */
+static void pygl_prime_error_source(const PyGLCommand *command)
+{
+    const PyGLErrorSource *source = &pygl_error_sources[command->api];
+
+    if (!source->active || source->slot < 0 || source->proc == NULL) {
+        return;
+    }
+    if (source->slot == command->slot) {
+        return; /* this is the getter itself, resolving now */
+    }
+    if ((uintptr_t)pygl_current->slots[source->slot] >= PYGL_SLOT_MIN_REAL) {
+        return;
+    }
+    if (pygl_slot((GLProc *)source->proc) == NULL) {
+        /* A getter the driver will not hand over leaves the API unchecked,
+         * which is what pygl_error_code already answers for. */
+        PyErr_Clear();
+    }
+}
+
 void *pygl_slot_slow(GLProc *self)
 {
     const PyGLCommand *command = self->info;
@@ -380,6 +412,7 @@ void *pygl_slot_slow(GLProc *self)
         return NULL;
     }
     pygl_current->slots[command->slot] = address;
+    pygl_prime_error_source(command);
     return address;
 }
 

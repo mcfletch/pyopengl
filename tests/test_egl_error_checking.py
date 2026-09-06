@@ -172,3 +172,46 @@ class TestTheClassComesFromTheApiThatFailed:
 
     def test_and_they_are_not_the_same_class(self):
         assert self._classes()['EGL'] is not self._classes()['GL']
+
+
+#: The first EGL call of a process, made and reported on.  In a child because
+#: what is under test is what happens before anything has resolved: the parent
+#: has been making EGL calls since it imported the module.
+FIRST_CALL = '''
+import ctypes
+from OpenGL import EGL, error
+
+major, minor = ctypes.c_long(), ctypes.c_long()
+try:
+    EGL.eglInitialize(EGL.EGL_NO_DISPLAY, major, minor)
+except error.GLError as raised:
+    print('raised', raised.err)
+else:
+    print('silent')
+'''
+
+
+class TestTheFirstCallOfAProcessIsCheckedToo:
+    """The check runs after the call, and asks the API's ``getError`` for the
+    code.  Resolving an entry point makes calls of its own -- among them
+    ``eglGetProcAddress``, which sets ``EGL_SUCCESS`` -- so a getter first
+    resolved from inside the check clears the error the check was about to
+    read, and the call answers ``0`` with nothing raised.
+
+    It is the first failing call of a process that lands there, which is the
+    one a program is most likely to have written a diagnostic around.
+    """
+
+    def test_it_raises_rather_than_returning_false(self):
+        import subprocess
+        import sys
+
+        from childenv import child_environment
+
+        completed = subprocess.run(
+            [sys.executable, '-c', FIRST_CALL],
+            capture_output=True, text=True, env=child_environment(),
+            timeout=300,
+        )
+        assert completed.returncode == 0, completed.stderr[-2000:]
+        assert 'EGL_BAD_DISPLAY' in completed.stdout, completed.stdout
