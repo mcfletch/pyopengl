@@ -123,12 +123,62 @@ nothing needs unwinding while only scalars have been converted.
 
 **5. `emit_pyi.py` — the stubs.** From the same record, so
 `glGenTextures(n, textures=None) -> UIntArrayResult` falls out of the size and
-direction annotations rather than being written. Two kinds: one per API
-namespace, carrying the docstrings, and one beside every friendly module,
-carrying signatures alone. The second kind is what an editor reads to know
-what `OpenGL.GL.ARB.vertex_array_object` contains, since the module itself
-fills its namespace at import from the tables. `tests/test_module_stubs.py`
-holds each stub to the names its module actually ends up with.
+direction annotations rather than being written. Two kinds, described below.
+
+## The type stubs
+
+Two kinds, from one emitter, both written by the `stubs_root` half of
+`generate()`:
+
+| what | from | holds |
+|---|---|---|
+| `OpenGL/<API>/__init__.pyi` | `emit_pyi.emit_module` | every entry point in the namespace, with docstrings |
+| `OpenGL/<API>/**/*.pyi` | `emit_pyi.emit_submodule` | one module's names, signatures only |
+| `OpenGL/_typing.pyi` | `emit_pyi.emit_typing_stub` | the array aliases both annotate with |
+
+The per-module kind exists because **a friendly module has no names in its
+source**. `OpenGL/GL/ARB/vertex_array_object.py` says
+`_define(globals(), 'OpenGL.raw.GL.ARB.vertex_array_object')` and its namespace
+arrives from the declaration tables at import. Nothing reading the file can
+follow that, so without a stub an editor offers no completion inside the module
+and a checker types every name in it as `Any` — which is what the generated
+files used to provide by existing. Deleting them took that with it; these put
+it back without the files.
+
+`generate._write_submodule_stubs` walks the module table, so what a stub
+declares is what the module will actually be given: `module.constants`,
+`module.commands` looked up in the command records for their signatures, and
+`module.reexports` mapped from `OpenGL.raw.X` to `OpenGL.X` — except the
+private ones (`_types`, `_errors`, `_glgets`), which have no friendly module
+above them and are named where they are.
+
+`generate._module_definitions` then parses the friendly module itself, for what
+it states in Python rather than taking from a table: its `glInitXxx`, the
+constants it aliases by hand (`GL_DEPTH_BUFFER = GL_DEPTH`), any helper it
+defines. **A name the tables already describe is skipped** — a module that
+customises an entry point rebinds its name, and describing that as `Any` would
+throw away the signature the record knows.
+
+Four decisions worth keeping:
+
+- **Signatures, no docstrings.** The API-level stub carries the prose; 1,300
+  copies of it would be most of the wheel. As it stands the per-module stubs
+  are 1.1 MB of source and 0.38 MB of a 4.3 MB wheel.
+- **No `__all__`.** A stub exports what it defines, so listing the names again
+  would be a second copy of every module in every module.
+- **Aliases imported by name**, not `import *`: a stub re-exports an import
+  only when asked to, so naming them keeps `FloatArray` out of what
+  `from OpenGL.GL.VERSION.GL_1_1 import *` means.
+- **`OpenGL/_typing.pyi` is stub-only.** There is no such module at run time
+  and nothing imports it; a checker resolves it like any other stub, and one
+  copy of the aliases beats 1,300. `from OpenGL._typing import ...` in real
+  code is an ImportError.
+
+Both `pyproject.toml`'s `package-data` and `MANIFEST.in` have to list them, or
+they are generated and never shipped. `tests/test_module_stubs.py` holds every
+stub to the names its module actually ends up with — following re-exports the
+way a checker does, so a name that arrives through one counts as described —
+and `tests/cdispatch/test_emit_pyi.py` covers the emitter itself.
 
 ## The rule everything else follows
 
@@ -205,6 +255,7 @@ since. After a deliberate regeneration, `python src/check_registry.py
 | `tests/gl/test_no_context_calls.py` | `CONTEXT_CHECKING` |
 | `tests/gl/test_late_context_resolution.py` | probing before a context exists |
 | `tests/test_virtual_modules.py` | the built modules against the files, name for name |
+| `tests/test_module_stubs.py` | every module's stub against the names the module has |
 
 Run the suite under **both** implementations — that is what `tox`'s dispatch
 axis is for. A test that passes under one and not the other is a defect in

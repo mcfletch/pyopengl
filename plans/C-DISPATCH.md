@@ -1541,3 +1541,43 @@ It found the shipped tree already lags: **7 registry commands with no binding,
 3 argument-name differences and 158 enums with no constant**, none of them
 caused by this work. They are recorded in `registry_baseline.json` with a
 reason, so the tool reports only what is new since.
+
+### After the tables replaced the files
+
+Removing the generated modules took two things with them that nothing replaced
+at the time, and both are back:
+
+**Introspection.** A friendly module's names arrive from the declaration tables
+at import, so an editor completing inside
+`OpenGL.GL.ARB.vertex_array_object` was offered nothing and a checker typed
+every name in it as `Any`. Every module now ships a `.pyi` beside it, generated
+from the module table in the same pass as the C — its constants, its entry
+points with signatures, and what the module states in Python rather than taking
+from a table. 1,299 stubs, 0.38 MB of wheel. Signatures without docstrings and
+without `__all__`, because both would be a second copy of every module in every
+module; the array aliases live once, in the stub-only `OpenGL/_typing.pyi`.
+`src/cdispatch/README.md` has the maintainer's account.
+
+**A named surface.** `make_current`, `forget_context` and their neighbours were
+documented under `OpenGL._dispatch`, which is a private module. They are
+`OpenGL.dispatch` now, along with `requested()`, `active()`, `settle()` and
+`status()`: the extension is optional, so asking for the C implementation and
+running without it is a state a caller may need to see rather than an error.
+
+### GL_KHR_debug by default
+
+A context that offers it is given it, under either implementation, because a
+callback the driver invokes during the failing call is a cheaper way to notice
+the same error than a `glGetError` round trip after every call — about 11 ns.
+
+What makes the default safe is that the check audits itself. A flag that is
+never set looks exactly like a context with nothing wrong, and a context can
+stop being ours without saying so: a handle is an address the driver hands out
+again, so a program that destroys a context silently can leave a table
+describing one that no longer exists. So the check asks the driver anyway every
+64 calls, and an error the callback never reported puts that context back on
+`glGetError` for good. `forget_context` is worth calling and is not required.
+
+The error mode moved into the context table with it. It had been a process-wide
+`int`, which is wrong the moment a process holds a context offering
+`GL_KHR_debug` beside one that does not.
