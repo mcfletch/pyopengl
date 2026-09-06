@@ -198,6 +198,39 @@ jobs:
         continue-on-error: true
         run: python -m tox -e ${{ matrix.toxenv }} -- tests/gles -m "not performance"
 
+      # A crash on a machine none of us can log into is only as debuggable as
+      # what the run took away with it.  faulthandler prints the Python frame;
+      # the faulting native frame -- driver, library, offset -- is in the
+      # crash report macOS writes, so collect it here while it still exists.
+      - name: Collect crash reports
+        if: always()
+        run: |
+          # The runner is fresh, so everything in these directories belongs to
+          # this run.
+          mkdir -p crash-reports
+          for dir in "$HOME/Library/Logs/DiagnosticReports" \
+                     /Library/Logs/DiagnosticReports; do
+            [ -d "$dir" ] || continue
+            find "$dir" -name '*.ips' -exec cp {} crash-reports/ \; || true
+          done
+          if [ -z "$(ls -A crash-reports 2>/dev/null)" ]; then
+            echo 'no crash report was written'
+          else
+            for report in crash-reports/*; do
+              echo "::group::$report"
+              cat "$report"
+              echo '::endgroup::'
+            done
+          fi
+
+      - name: Upload crash reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: crash-reports-${{ matrix.os }}-${{ matrix.toxenv }}
+          path: crash-reports/
+          if-no-files-found: ignore
+
       - name: Fail the job if any area did
         if: always()
         run: |

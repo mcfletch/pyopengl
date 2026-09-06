@@ -154,6 +154,15 @@ pins a specific EGL device. Under the `egl` backend the legacy root-level
 7. If a specific entry point cannot succeed here (external interop, multi-GPU, a
    window-system-only path), `skipTest('<why>')` and do **not** reference its
    name where the coverage scanner would count it.
+8. **Back every interface block a draw or dispatch will execute.** An active
+   uniform block, shader storage block or atomic counter buffer with no buffer
+   object bound to its binding point leaves the results of shader execution
+   undefined, and the specification allows a driver to interrupt or terminate on
+   it (GL 4.6 core, 7.6.3 and 7.8) — a segfault rather than a `glGetError`
+   result, on the drivers that take the licence. `glGetError` reports nothing,
+   and the tolerant drivers say nothing either, so a case that draws with an
+   unbacked block passes everywhere until it reaches the one that does not.
+   Either bind a buffer for the block or give the case a program without one.
 
 Run it on a real GPU (`TEST_WINDOWING=egl` in a container, or windowed on the
 host) **and** on the software path, and confirm it skips where it should.

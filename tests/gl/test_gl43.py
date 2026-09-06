@@ -172,6 +172,15 @@ class TestGL43(GLTestCase):
         block = glGetProgramResourceIndex(prog, GL_SHADER_STORAGE_BLOCK, 'B')
         glShaderStorageBlockBinding(prog, block, 0)
         glUseProgram(prog)
+        # The indirect draws below run this fragment shader, so binding 0 needs
+        # a buffer behind it: an active storage block with none leaves the
+        # results of shader execution undefined, and the specification allows a
+        # driver to interrupt or terminate on it (GL 4.6 core, 7.8 "Shader
+        # Buffer Variables and Shader Storage Blocks").
+        draw_ssbo = glGenBuffers(1)
+        glBindBuffer(GL_SHADER_STORAGE_BUFFER, draw_ssbo)
+        glBufferData(GL_SHADER_STORAGE_BUFFER, np.zeros(8, 'I'), GL_DYNAMIC_DRAW)
+        glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, draw_ssbo)
         vbo = glGenBuffers(1)
         glBindBuffer(GL_ARRAY_BUFFER, vbo)
         glBufferData(
