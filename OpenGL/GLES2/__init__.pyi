@@ -1999,70 +1999,70 @@ GL_ZERO: int
 GL_ZERO_TO_ONE_EXT: int
 
 def glAcquireKeyedMutexWin32EXT(memory: int, key: int, timeout: int) -> int:
-    """glAcquireKeyedMutexWin32EXT(memory, key, timeout) -> GLboolean"""
+    """glAcquireKeyedMutexWin32EXT(memory: GLuint, key: GLuint64, timeout: GLuint) -> GLboolean"""
 
 def glActiveProgramEXT(program: int) -> None:
-    """glActiveProgramEXT(program) -> None"""
+    """glActiveProgramEXT(program: GLuint) -> None"""
 
 def glActiveShaderProgramEXT(pipeline: int, program: int) -> None:
-    """glActiveShaderProgramEXT(pipeline, program) -> None"""
+    """glActiveShaderProgramEXT(pipeline: GLuint, program: GLuint) -> None"""
 
 def glActiveTexture(texture: int) -> None:
-    """glActiveTexture(texture) -> None"""
+    """glActiveTexture(texture: GLenum) -> None"""
 
 def glAlphaFuncQCOM(func: int, ref: float) -> None:
-    """glAlphaFuncQCOM(func, ref) -> None"""
+    """glAlphaFuncQCOM(func: GLenum, ref: GLclampf) -> None"""
 
 def glApplyFramebufferAttachmentCMAAINTEL() -> None:
     """glApplyFramebufferAttachmentCMAAINTEL() -> None"""
 
 def glAttachShader(program: int, shader: int) -> None:
-    """glAttachShader(program, shader) -> None"""
+    """glAttachShader(program: GLuint, shader: GLuint) -> None"""
 
 def glBeginConditionalRenderNV(id: int, mode: int) -> None:
-    """glBeginConditionalRenderNV(id, mode) -> None"""
+    """glBeginConditionalRenderNV(id: GLuint, mode: GLenum) -> None"""
 
 def glBeginPerfMonitorAMD(monitor: int) -> None:
-    """glBeginPerfMonitorAMD(monitor) -> None"""
+    """glBeginPerfMonitorAMD(monitor: GLuint) -> None"""
 
 def glBeginPerfQueryINTEL(queryHandle: int) -> None:
-    """glBeginPerfQueryINTEL(queryHandle) -> None"""
+    """glBeginPerfQueryINTEL(queryHandle: GLuint) -> None"""
 
 def glBeginQueryEXT(target: int, id: int) -> None:
-    """glBeginQueryEXT(target, id) -> None"""
+    """glBeginQueryEXT(target: GLenum, id: GLuint) -> None"""
 
 def glBindAttribLocation(program: int, index: int, name: ByteArray) -> None:
-    """glBindAttribLocation(program, index, name) -> None"""
+    """glBindAttribLocation(program: GLuint, index: GLuint, name: GLchar[]) -> None"""
 
 def glBindBuffer(target: int, buffer: int) -> None:
-    """glBindBuffer(target, buffer) -> None"""
+    """glBindBuffer(target: GLenum, buffer: GLuint) -> None"""
 
 def glBindFragDataLocationEXT(program: int, color: int, name: ByteArray) -> None:
-    """glBindFragDataLocationEXT(program, color, name) -> None"""
+    """glBindFragDataLocationEXT(program: GLuint, color: GLuint, name: GLchar[]) -> None"""
 
 def glBindFragDataLocationIndexedEXT(program: int, colorNumber: int, index: int, name: ByteArray) -> None:
-    """glBindFragDataLocationIndexedEXT(program, colorNumber, index, name) -> None"""
+    """glBindFragDataLocationIndexedEXT(program: GLuint, colorNumber: GLuint, index: GLuint, name: GLchar[]) -> None"""
 
 def glBindFramebuffer(target: int, framebuffer: int) -> None:
-    """glBindFramebuffer(target, framebuffer) -> None"""
+    """glBindFramebuffer(target: GLenum, framebuffer: GLuint) -> None"""
 
 def glBindProgramPipelineEXT(pipeline: int) -> None:
-    """glBindProgramPipelineEXT(pipeline) -> None"""
+    """glBindProgramPipelineEXT(pipeline: GLuint) -> None"""
 
 def glBindRenderbuffer(target: int, renderbuffer: int) -> None:
-    """glBindRenderbuffer(target, renderbuffer) -> None"""
+    """glBindRenderbuffer(target: GLenum, renderbuffer: GLuint) -> None"""
 
 def glBindSampler(unit: int, sampler: int) -> None:
-    """glBindSampler(unit, sampler) -> None"""
+    """glBindSampler(unit: GLuint, sampler: GLuint) -> None"""
 
 def glBindShadingRateImageNV(texture: int) -> None:
-    """glBindShadingRateImageNV(texture) -> None"""
+    """glBindShadingRateImageNV(texture: GLuint) -> None"""
 
 def glBindTexture(target: int, texture: int) -> None:
-    """glBindTexture(target, texture) -> None"""
+    """glBindTexture(target: GLenum, texture: GLuint) -> None"""
 
 def glBindVertexArrayOES(array: int) -> None:
-    """glBindVertexArrayOES(array) -> None"""
+    """glBindVertexArrayOES(array: GLuint) -> None"""
 
 def glBlendBarrier() -> None:
     """glBlendBarrier() -> None"""
@@ -2074,535 +2074,535 @@ def glBlendBarrierNV() -> None:
     """glBlendBarrierNV() -> None"""
 
 def glBlendColor(red: float, green: float, blue: float, alpha: float) -> None:
-    """glBlendColor(red, green, blue, alpha) -> None"""
+    """glBlendColor(red: GLfloat, green: GLfloat, blue: GLfloat, alpha: GLfloat) -> None"""
 
 def glBlendEquation(mode: int) -> None:
-    """glBlendEquation(mode) -> None"""
+    """glBlendEquation(mode: GLenum) -> None"""
 
 def glBlendEquationEXT(mode: int) -> None:
-    """glBlendEquationEXT(mode) -> None"""
+    """glBlendEquationEXT(mode: GLenum) -> None"""
 
 def glBlendEquationSeparate(modeRGB: int, modeAlpha: int) -> None:
-    """glBlendEquationSeparate(modeRGB, modeAlpha) -> None"""
+    """glBlendEquationSeparate(modeRGB: GLenum, modeAlpha: GLenum) -> None"""
 
 def glBlendEquationSeparatei(buf: int, modeRGB: int, modeAlpha: int) -> None:
-    """glBlendEquationSeparatei(buf, modeRGB, modeAlpha) -> None"""
+    """glBlendEquationSeparatei(buf: GLuint, modeRGB: GLenum, modeAlpha: GLenum) -> None"""
 
 def glBlendEquationSeparateiEXT(buf: int, modeRGB: int, modeAlpha: int) -> None:
-    """glBlendEquationSeparateiEXT(buf, modeRGB, modeAlpha) -> None"""
+    """glBlendEquationSeparateiEXT(buf: GLuint, modeRGB: GLenum, modeAlpha: GLenum) -> None"""
 
 def glBlendEquationSeparateiOES(buf: int, modeRGB: int, modeAlpha: int) -> None:
-    """glBlendEquationSeparateiOES(buf, modeRGB, modeAlpha) -> None"""
+    """glBlendEquationSeparateiOES(buf: GLuint, modeRGB: GLenum, modeAlpha: GLenum) -> None"""
 
 def glBlendEquationi(buf: int, mode: int) -> None:
-    """glBlendEquationi(buf, mode) -> None"""
+    """glBlendEquationi(buf: GLuint, mode: GLenum) -> None"""
 
 def glBlendEquationiEXT(buf: int, mode: int) -> None:
-    """glBlendEquationiEXT(buf, mode) -> None"""
+    """glBlendEquationiEXT(buf: GLuint, mode: GLenum) -> None"""
 
 def glBlendEquationiOES(buf: int, mode: int) -> None:
-    """glBlendEquationiOES(buf, mode) -> None"""
+    """glBlendEquationiOES(buf: GLuint, mode: GLenum) -> None"""
 
 def glBlendFunc(sfactor: int, dfactor: int) -> None:
-    """glBlendFunc(sfactor, dfactor) -> None"""
+    """glBlendFunc(sfactor: GLenum, dfactor: GLenum) -> None"""
 
 def glBlendFuncSeparate(sfactorRGB: int, dfactorRGB: int, sfactorAlpha: int, dfactorAlpha: int) -> None:
-    """glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha) -> None"""
+    """glBlendFuncSeparate(sfactorRGB: GLenum, dfactorRGB: GLenum, sfactorAlpha: GLenum, dfactorAlpha: GLenum) -> None"""
 
 def glBlendFuncSeparatei(buf: int, srcRGB: int, dstRGB: int, srcAlpha: int, dstAlpha: int) -> None:
-    """glBlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha) -> None"""
+    """glBlendFuncSeparatei(buf: GLuint, srcRGB: GLenum, dstRGB: GLenum, srcAlpha: GLenum, dstAlpha: GLenum) -> None"""
 
 def glBlendFuncSeparateiEXT(buf: int, srcRGB: int, dstRGB: int, srcAlpha: int, dstAlpha: int) -> None:
-    """glBlendFuncSeparateiEXT(buf, srcRGB, dstRGB, srcAlpha, dstAlpha) -> None"""
+    """glBlendFuncSeparateiEXT(buf: GLuint, srcRGB: GLenum, dstRGB: GLenum, srcAlpha: GLenum, dstAlpha: GLenum) -> None"""
 
 def glBlendFuncSeparateiOES(buf: int, srcRGB: int, dstRGB: int, srcAlpha: int, dstAlpha: int) -> None:
-    """glBlendFuncSeparateiOES(buf, srcRGB, dstRGB, srcAlpha, dstAlpha) -> None"""
+    """glBlendFuncSeparateiOES(buf: GLuint, srcRGB: GLenum, dstRGB: GLenum, srcAlpha: GLenum, dstAlpha: GLenum) -> None"""
 
 def glBlendFunci(buf: int, src: int, dst: int) -> None:
-    """glBlendFunci(buf, src, dst) -> None"""
+    """glBlendFunci(buf: GLuint, src: GLenum, dst: GLenum) -> None"""
 
 def glBlendFunciEXT(buf: int, src: int, dst: int) -> None:
-    """glBlendFunciEXT(buf, src, dst) -> None"""
+    """glBlendFunciEXT(buf: GLuint, src: GLenum, dst: GLenum) -> None"""
 
 def glBlendFunciOES(buf: int, src: int, dst: int) -> None:
-    """glBlendFunciOES(buf, src, dst) -> None"""
+    """glBlendFunciOES(buf: GLuint, src: GLenum, dst: GLenum) -> None"""
 
 def glBlendParameteriNV(pname: int, value: int) -> None:
-    """glBlendParameteriNV(pname, value) -> None"""
+    """glBlendParameteriNV(pname: GLenum, value: GLint) -> None"""
 
 def glBlitFramebufferANGLE(srcX0: int, srcY0: int, srcX1: int, srcY1: int, dstX0: int, dstY0: int, dstX1: int, dstY1: int, mask: int, filter: int) -> None:
-    """glBlitFramebufferANGLE(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> None"""
+    """glBlitFramebufferANGLE(srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: GLbitfield, filter: GLenum) -> None"""
 
 def glBlitFramebufferLayerEXT(srcX0: int, srcY0: int, srcX1: int, srcY1: int, srcLayer: int, dstX0: int, dstY0: int, dstX1: int, dstY1: int, dstLayer: int, mask: int, filter: int) -> None:
-    """glBlitFramebufferLayerEXT(srcX0, srcY0, srcX1, srcY1, srcLayer, dstX0, dstY0, dstX1, dstY1, dstLayer, mask, filter) -> None"""
+    """glBlitFramebufferLayerEXT(srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, srcLayer: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, dstLayer: GLint, mask: GLbitfield, filter: GLenum) -> None"""
 
 def glBlitFramebufferLayersEXT(srcX0: int, srcY0: int, srcX1: int, srcY1: int, dstX0: int, dstY0: int, dstX1: int, dstY1: int, mask: int, filter: int) -> None:
-    """glBlitFramebufferLayersEXT(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> None"""
+    """glBlitFramebufferLayersEXT(srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: GLbitfield, filter: GLenum) -> None"""
 
 def glBlitFramebufferNV(srcX0: int, srcY0: int, srcX1: int, srcY1: int, dstX0: int, dstY0: int, dstX1: int, dstY1: int, mask: int, filter: int) -> None:
-    """glBlitFramebufferNV(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> None"""
+    """glBlitFramebufferNV(srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: GLbitfield, filter: GLenum) -> None"""
 
 def glBufferAttachMemoryNV(target: int, memory: int, offset: int) -> None:
-    """glBufferAttachMemoryNV(target, memory, offset) -> None"""
+    """glBufferAttachMemoryNV(target: GLenum, memory: GLuint, offset: GLuint64) -> None"""
 
 def glBufferData(target: int, size: int, data: AnyArray, usage: int) -> None:
-    """glBufferData(target, size, data, usage) -> None"""
+    """glBufferData(target: GLenum, size: GLsizeiptr, data: void[], usage: GLenum) -> None"""
 
 def glBufferPageCommitmentMemNV(target: int, offset: int, size: int, memory: int, memOffset: int, commit: bool) -> None:
-    """glBufferPageCommitmentMemNV(target, offset, size, memory, memOffset, commit) -> None"""
+    """glBufferPageCommitmentMemNV(target: GLenum, offset: GLintptr, size: GLsizeiptr, memory: GLuint, memOffset: GLuint64, commit: GLboolean) -> None"""
 
 def glBufferStorageEXT(target: int, size: int, data: AnyArray, flags: int) -> None:
-    """glBufferStorageEXT(target, size, data, flags) -> None"""
+    """glBufferStorageEXT(target: GLenum, size: GLsizeiptr, data: void[], flags: GLbitfield) -> None"""
 
 def glBufferStorageExternalEXT(target: int, offset: int, size: int, clientBuffer: Any, flags: int) -> None:
-    """glBufferStorageExternalEXT(target, offset, size, clientBuffer, flags) -> None"""
+    """glBufferStorageExternalEXT(target: GLenum, offset: GLintptr, size: GLsizeiptr, clientBuffer: GLeglClientBufferEXT, flags: GLbitfield) -> None"""
 
 def glBufferStorageMemEXT(target: int, size: int, memory: int, offset: int) -> None:
-    """glBufferStorageMemEXT(target, size, memory, offset) -> None"""
+    """glBufferStorageMemEXT(target: GLenum, size: GLsizeiptr, memory: GLuint, offset: GLuint64) -> None"""
 
 def glBufferSubData(target: int, offset: int, size: int, data: AnyArray) -> None:
-    """glBufferSubData(target, offset, size, data) -> None"""
+    """glBufferSubData(target: GLenum, offset: GLintptr, size: GLsizeiptr, data: void[]) -> None"""
 
 def glCheckFramebufferStatus(target: int) -> int:
-    """glCheckFramebufferStatus(target) -> GLenum"""
+    """glCheckFramebufferStatus(target: GLenum) -> GLenum"""
 
 def glClear(mask: int) -> None:
-    """glClear(mask) -> None"""
+    """glClear(mask: GLbitfield) -> None"""
 
 def glClearColor(red: float, green: float, blue: float, alpha: float) -> None:
-    """glClearColor(red, green, blue, alpha) -> None"""
+    """glClearColor(red: GLfloat, green: GLfloat, blue: GLfloat, alpha: GLfloat) -> None"""
 
 def glClearDepthf(d: float) -> None:
-    """glClearDepthf(d) -> None"""
+    """glClearDepthf(d: GLfloat) -> None"""
 
 def glClearPixelLocalStorageuiEXT(offset: int, n: int, values: UIntArray) -> None:
-    """glClearPixelLocalStorageuiEXT(offset, n, values) -> None"""
+    """glClearPixelLocalStorageuiEXT(offset: GLsizei, n: GLsizei, values: GLuint[]) -> None"""
 
 def glClearStencil(s: int) -> None:
-    """glClearStencil(s) -> None"""
+    """glClearStencil(s: GLint) -> None"""
 
 def glClearTexImageEXT(texture: int, level: int, format: int, type: int, data: AnyArray) -> None:
-    """glClearTexImageEXT(texture, level, format, type, data) -> None"""
+    """glClearTexImageEXT(texture: GLuint, level: GLint, format: GLenum, type: GLenum, data: void[]) -> None"""
 
 def glClearTexSubImageEXT(texture: int, level: int, xoffset: int, yoffset: int, zoffset: int, width: int, height: int, depth: int, format: int, type: int, data: AnyArray) -> None:
-    """glClearTexSubImageEXT(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data) -> None"""
+    """glClearTexSubImageEXT(texture: GLuint, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: GLenum, type: GLenum, data: void[]) -> None"""
 
 def glClientWaitSyncAPPLE(sync: Any, flags: int, timeout: int) -> int:
-    """glClientWaitSyncAPPLE(sync, flags, timeout) -> GLenum"""
+    """glClientWaitSyncAPPLE(sync: GLsync, flags: GLbitfield, timeout: GLuint64) -> GLenum"""
 
 def glClipControlEXT(origin: int, depth: int) -> None:
-    """glClipControlEXT(origin, depth) -> None"""
+    """glClipControlEXT(origin: GLenum, depth: GLenum) -> None"""
 
 def glColorMask(red: bool, green: bool, blue: bool, alpha: bool) -> None:
-    """glColorMask(red, green, blue, alpha) -> None"""
+    """glColorMask(red: GLboolean, green: GLboolean, blue: GLboolean, alpha: GLboolean) -> None"""
 
 def glColorMaski(index: int, r: bool, g: bool, b: bool, a: bool) -> None:
-    """glColorMaski(index, r, g, b, a) -> None"""
+    """glColorMaski(index: GLuint, r: GLboolean, g: GLboolean, b: GLboolean, a: GLboolean) -> None"""
 
 def glColorMaskiEXT(index: int, r: bool, g: bool, b: bool, a: bool) -> None:
-    """glColorMaskiEXT(index, r, g, b, a) -> None"""
+    """glColorMaskiEXT(index: GLuint, r: GLboolean, g: GLboolean, b: GLboolean, a: GLboolean) -> None"""
 
 def glColorMaskiOES(index: int, r: bool, g: bool, b: bool, a: bool) -> None:
-    """glColorMaskiOES(index, r, g, b, a) -> None"""
+    """glColorMaskiOES(index: GLuint, r: GLboolean, g: GLboolean, b: GLboolean, a: GLboolean) -> None"""
 
 def glCompileShader(shader: int) -> None:
-    """glCompileShader(shader) -> None"""
+    """glCompileShader(shader: GLuint) -> None"""
 
 def glCompressedTexImage2D(target: int, level: int, internalformat: int, width: int, height: int, border: int, imageSize: int, data: AnyArray) -> None:
-    """glCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data) -> None"""
+    """glCompressedTexImage2D(target: GLenum, level: GLint, internalformat: GLenum, width: GLsizei, height: GLsizei, border: GLint, imageSize: GLsizei, data: void[]) -> None"""
 
 def glCompressedTexImage3DOES(target: int, level: int, internalformat: int, width: int, height: int, depth: int, border: int, imageSize: int, data: AnyArray) -> None:
-    """glCompressedTexImage3DOES(target, level, internalformat, width, height, depth, border, imageSize, data) -> None"""
+    """glCompressedTexImage3DOES(target: GLenum, level: GLint, internalformat: GLenum, width: GLsizei, height: GLsizei, depth: GLsizei, border: GLint, imageSize: GLsizei, data: void[]) -> None"""
 
 def glCompressedTexSubImage2D(target: int, level: int, xoffset: int, yoffset: int, width: int, height: int, format: int, imageSize: int, data: AnyArray) -> None:
-    """glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data) -> None"""
+    """glCompressedTexSubImage2D(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: GLenum, imageSize: GLsizei, data: void[]) -> None"""
 
 def glCompressedTexSubImage3DOES(target: int, level: int, xoffset: int, yoffset: int, zoffset: int, width: int, height: int, depth: int, format: int, imageSize: int, data: AnyArray) -> None:
-    """glCompressedTexSubImage3DOES(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data) -> None"""
+    """glCompressedTexSubImage3DOES(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: GLenum, imageSize: GLsizei, data: void[]) -> None"""
 
 def glConservativeRasterParameteriNV(pname: int, param: int) -> None:
-    """glConservativeRasterParameteriNV(pname, param) -> None"""
+    """glConservativeRasterParameteriNV(pname: GLenum, param: GLint) -> None"""
 
 def glCopyBufferSubDataNV(readTarget: int, writeTarget: int, readOffset: int, writeOffset: int, size: int) -> None:
-    """glCopyBufferSubDataNV(readTarget, writeTarget, readOffset, writeOffset, size) -> None"""
+    """glCopyBufferSubDataNV(readTarget: GLenum, writeTarget: GLenum, readOffset: GLintptr, writeOffset: GLintptr, size: GLsizeiptr) -> None"""
 
 def glCopyImageSubData(srcName: int, srcTarget: int, srcLevel: int, srcX: int, srcY: int, srcZ: int, dstName: int, dstTarget: int, dstLevel: int, dstX: int, dstY: int, dstZ: int, srcWidth: int, srcHeight: int, srcDepth: int) -> None:
-    """glCopyImageSubData(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth) -> None"""
+    """glCopyImageSubData(srcName: GLuint, srcTarget: GLenum, srcLevel: GLint, srcX: GLint, srcY: GLint, srcZ: GLint, dstName: GLuint, dstTarget: GLenum, dstLevel: GLint, dstX: GLint, dstY: GLint, dstZ: GLint, srcWidth: GLsizei, srcHeight: GLsizei, srcDepth: GLsizei) -> None"""
 
 def glCopyImageSubDataEXT(srcName: int, srcTarget: int, srcLevel: int, srcX: int, srcY: int, srcZ: int, dstName: int, dstTarget: int, dstLevel: int, dstX: int, dstY: int, dstZ: int, srcWidth: int, srcHeight: int, srcDepth: int) -> None:
-    """glCopyImageSubDataEXT(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth) -> None"""
+    """glCopyImageSubDataEXT(srcName: GLuint, srcTarget: GLenum, srcLevel: GLint, srcX: GLint, srcY: GLint, srcZ: GLint, dstName: GLuint, dstTarget: GLenum, dstLevel: GLint, dstX: GLint, dstY: GLint, dstZ: GLint, srcWidth: GLsizei, srcHeight: GLsizei, srcDepth: GLsizei) -> None"""
 
 def glCopyImageSubDataOES(srcName: int, srcTarget: int, srcLevel: int, srcX: int, srcY: int, srcZ: int, dstName: int, dstTarget: int, dstLevel: int, dstX: int, dstY: int, dstZ: int, srcWidth: int, srcHeight: int, srcDepth: int) -> None:
-    """glCopyImageSubDataOES(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth) -> None"""
+    """glCopyImageSubDataOES(srcName: GLuint, srcTarget: GLenum, srcLevel: GLint, srcX: GLint, srcY: GLint, srcZ: GLint, dstName: GLuint, dstTarget: GLenum, dstLevel: GLint, dstX: GLint, dstY: GLint, dstZ: GLint, srcWidth: GLsizei, srcHeight: GLsizei, srcDepth: GLsizei) -> None"""
 
 def glCopyPathNV(resultPath: int, srcPath: int) -> None:
-    """glCopyPathNV(resultPath, srcPath) -> None"""
+    """glCopyPathNV(resultPath: GLuint, srcPath: GLuint) -> None"""
 
 def glCopyTexImage2D(target: int, level: int, internalformat: int, x: int, y: int, width: int, height: int, border: int) -> None:
-    """glCopyTexImage2D(target, level, internalformat, x, y, width, height, border) -> None"""
+    """glCopyTexImage2D(target: GLenum, level: GLint, internalformat: GLenum, x: GLint, y: GLint, width: GLsizei, height: GLsizei, border: GLint) -> None"""
 
 def glCopyTexSubImage2D(target: int, level: int, xoffset: int, yoffset: int, x: int, y: int, width: int, height: int) -> None:
-    """glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height) -> None"""
+    """glCopyTexSubImage2D(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) -> None"""
 
 def glCopyTexSubImage3DOES(target: int, level: int, xoffset: int, yoffset: int, zoffset: int, x: int, y: int, width: int, height: int) -> None:
-    """glCopyTexSubImage3DOES(target, level, xoffset, yoffset, zoffset, x, y, width, height) -> None"""
+    """glCopyTexSubImage3DOES(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) -> None"""
 
 def glCopyTextureLevelsAPPLE(destinationTexture: int, sourceTexture: int, sourceBaseLevel: int, sourceLevelCount: int) -> None:
-    """glCopyTextureLevelsAPPLE(destinationTexture, sourceTexture, sourceBaseLevel, sourceLevelCount) -> None"""
+    """glCopyTextureLevelsAPPLE(destinationTexture: GLuint, sourceTexture: GLuint, sourceBaseLevel: GLint, sourceLevelCount: GLsizei) -> None"""
 
 def glCoverFillPathInstancedNV(numPaths: int, pathNameType: int, paths: AnyArray, pathBase: int, coverMode: int, transformType: int, transformValues: FloatArray) -> None:
-    """glCoverFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues) -> None"""
+    """glCoverFillPathInstancedNV(numPaths: GLsizei, pathNameType: GLenum, paths: void[], pathBase: GLuint, coverMode: GLenum, transformType: GLenum, transformValues: GLfloat[]) -> None"""
 
 def glCoverFillPathNV(path: int, coverMode: int) -> None:
-    """glCoverFillPathNV(path, coverMode) -> None"""
+    """glCoverFillPathNV(path: GLuint, coverMode: GLenum) -> None"""
 
 def glCoverStrokePathInstancedNV(numPaths: int, pathNameType: int, paths: AnyArray, pathBase: int, coverMode: int, transformType: int, transformValues: FloatArray) -> None:
-    """glCoverStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, coverMode, transformType, transformValues) -> None"""
+    """glCoverStrokePathInstancedNV(numPaths: GLsizei, pathNameType: GLenum, paths: void[], pathBase: GLuint, coverMode: GLenum, transformType: GLenum, transformValues: GLfloat[]) -> None"""
 
 def glCoverStrokePathNV(path: int, coverMode: int) -> None:
-    """glCoverStrokePathNV(path, coverMode) -> None"""
+    """glCoverStrokePathNV(path: GLuint, coverMode: GLenum) -> None"""
 
 def glCoverageMaskNV(mask: bool) -> None:
-    """glCoverageMaskNV(mask) -> None"""
+    """glCoverageMaskNV(mask: GLboolean) -> None"""
 
 def glCoverageModulationNV(components: int) -> None:
-    """glCoverageModulationNV(components) -> None"""
+    """glCoverageModulationNV(components: GLenum) -> None"""
 
 def glCoverageModulationTableNV(n: int, v: FloatArray) -> None:
-    """glCoverageModulationTableNV(n, v) -> None"""
+    """glCoverageModulationTableNV(n: GLsizei, v: GLfloat[]) -> None"""
 
 def glCoverageOperationNV(operation: int) -> None:
-    """glCoverageOperationNV(operation) -> None"""
+    """glCoverageOperationNV(operation: GLenum) -> None"""
 
 def glCreateMemoryObjectsEXT(n: int, memoryObjects: UIntArray) -> None:
-    """glCreateMemoryObjectsEXT(n, memoryObjects) -> None"""
+    """glCreateMemoryObjectsEXT(n: GLsizei, memoryObjects: GLuint[]) -> None"""
 
 def glCreatePerfQueryINTEL(queryId: int, queryHandle: UIntArray) -> None:
-    """glCreatePerfQueryINTEL(queryId, queryHandle) -> None"""
+    """glCreatePerfQueryINTEL(queryId: GLuint, queryHandle: GLuint[]) -> None"""
 
 def glCreateProgram() -> int:
     """glCreateProgram() -> GLuint"""
 
 def glCreateSemaphoresNV(n: int, semaphores: UIntArray) -> None:
-    """glCreateSemaphoresNV(n, semaphores) -> None"""
+    """glCreateSemaphoresNV(n: GLsizei, semaphores: GLuint[]) -> None"""
 
 def glCreateShader(type: int) -> int:
-    """glCreateShader(type) -> GLuint"""
+    """glCreateShader(type: GLenum) -> GLuint"""
 
 def glCreateShaderProgramEXT(type: int, string: ByteArray) -> int:
-    """glCreateShaderProgramEXT(type, string) -> GLuint"""
+    """glCreateShaderProgramEXT(type: GLenum, string: GLchar[]) -> GLuint"""
 
 def glCreateShaderProgramvEXT(type: int, count: int, strings: AnyArray) -> int:
-    """glCreateShaderProgramvEXT(type, count, strings) -> GLuint"""
+    """glCreateShaderProgramvEXT(type: GLenum, count: GLsizei, strings: GLchar[][]) -> GLuint"""
 
 def glCullFace(mode: int) -> None:
-    """glCullFace(mode) -> None"""
+    """glCullFace(mode: GLenum) -> None"""
 
 def glDebugMessageCallback(callback: Any, userParam: AnyArray) -> None:
-    """glDebugMessageCallback(callback, userParam) -> None"""
+    """glDebugMessageCallback(callback: GLDEBUGPROC, userParam: void[]) -> None"""
 
 def glDebugMessageCallbackKHR(callback: Any, userParam: AnyArray) -> None:
-    """glDebugMessageCallbackKHR(callback, userParam) -> None"""
+    """glDebugMessageCallbackKHR(callback: GLDEBUGPROCKHR, userParam: void[]) -> None"""
 
 def glDebugMessageControl(source: int, type: int, severity: int, count: int, ids: UIntArray, enabled: bool) -> None:
-    """glDebugMessageControl(source, type, severity, count, ids, enabled) -> None"""
+    """glDebugMessageControl(source: GLenum, type: GLenum, severity: GLenum, count: GLsizei, ids: GLuint[], enabled: GLboolean) -> None"""
 
 def glDebugMessageControlKHR(source: int, type: int, severity: int, count: int, ids: UIntArray, enabled: bool) -> None:
-    """glDebugMessageControlKHR(source, type, severity, count, ids, enabled) -> None"""
+    """glDebugMessageControlKHR(source: GLenum, type: GLenum, severity: GLenum, count: GLsizei, ids: GLuint[], enabled: GLboolean) -> None"""
 
 def glDebugMessageInsert(source: int, type: int, id: int, severity: int, length: int, buf: ByteArray) -> None:
-    """glDebugMessageInsert(source, type, id, severity, length, buf) -> None"""
+    """glDebugMessageInsert(source: GLenum, type: GLenum, id: GLuint, severity: GLenum, length: GLsizei, buf: GLchar[]) -> None"""
 
 def glDebugMessageInsertKHR(source: int, type: int, id: int, severity: int, length: int, buf: ByteArray) -> None:
-    """glDebugMessageInsertKHR(source, type, id, severity, length, buf) -> None"""
+    """glDebugMessageInsertKHR(source: GLenum, type: GLenum, id: GLuint, severity: GLenum, length: GLsizei, buf: GLchar[]) -> None"""
 
 def glDeleteBuffers(n: int, buffers: UIntArray) -> None:
-    """glDeleteBuffers(n, buffers) -> None"""
+    """glDeleteBuffers(n: GLsizei, buffers: GLuint[]) -> None"""
 
 def glDeleteFencesNV(n: int, fences: UIntArray) -> None:
-    """glDeleteFencesNV(n, fences) -> None"""
+    """glDeleteFencesNV(n: GLsizei, fences: GLuint[]) -> None"""
 
 def glDeleteFramebuffers(n: int, framebuffers: UIntArray) -> None:
-    """glDeleteFramebuffers(n, framebuffers) -> None"""
+    """glDeleteFramebuffers(n: GLsizei, framebuffers: GLuint[]) -> None"""
 
 def glDeleteMemoryObjectsEXT(n: int, memoryObjects: UIntArray) -> None:
-    """glDeleteMemoryObjectsEXT(n, memoryObjects) -> None"""
+    """glDeleteMemoryObjectsEXT(n: GLsizei, memoryObjects: GLuint[]) -> None"""
 
 def glDeletePathsNV(path: int, range: int) -> None:
-    """glDeletePathsNV(path, range) -> None"""
+    """glDeletePathsNV(path: GLuint, range: GLsizei) -> None"""
 
 def glDeletePerfMonitorsAMD(n: int, monitors: UIntArray | None = None) -> UIntArrayResult:
-    """glDeletePerfMonitorsAMD(n) -> monitors"""
+    """glDeletePerfMonitorsAMD(n: GLsizei) -> monitors: GLuint[]"""
 
 def glDeletePerfQueryINTEL(queryHandle: int) -> None:
-    """glDeletePerfQueryINTEL(queryHandle) -> None"""
+    """glDeletePerfQueryINTEL(queryHandle: GLuint) -> None"""
 
 def glDeleteProgram(program: int) -> None:
-    """glDeleteProgram(program) -> None"""
+    """glDeleteProgram(program: GLuint) -> None"""
 
 def glDeleteProgramPipelinesEXT(n: int, pipelines: UIntArray) -> None:
-    """glDeleteProgramPipelinesEXT(n, pipelines) -> None"""
+    """glDeleteProgramPipelinesEXT(n: GLsizei, pipelines: GLuint[]) -> None"""
 
 def glDeleteQueriesEXT(n: int, ids: UIntArray) -> None:
-    """glDeleteQueriesEXT(n, ids) -> None"""
+    """glDeleteQueriesEXT(n: GLsizei, ids: GLuint[]) -> None"""
 
 def glDeleteRenderbuffers(n: int, renderbuffers: UIntArray) -> None:
-    """glDeleteRenderbuffers(n, renderbuffers) -> None"""
+    """glDeleteRenderbuffers(n: GLsizei, renderbuffers: GLuint[]) -> None"""
 
 def glDeleteSamplers(count: int, samplers: UIntArray) -> None:
-    """glDeleteSamplers(count, samplers) -> None"""
+    """glDeleteSamplers(count: GLsizei, samplers: GLuint[]) -> None"""
 
 def glDeleteSemaphoresEXT(n: int, semaphores: UIntArray) -> None:
-    """glDeleteSemaphoresEXT(n, semaphores) -> None"""
+    """glDeleteSemaphoresEXT(n: GLsizei, semaphores: GLuint[]) -> None"""
 
 def glDeleteShader(shader: int) -> None:
-    """glDeleteShader(shader) -> None"""
+    """glDeleteShader(shader: GLuint) -> None"""
 
 def glDeleteSyncAPPLE(sync: Any) -> None:
-    """glDeleteSyncAPPLE(sync) -> None"""
+    """glDeleteSyncAPPLE(sync: GLsync) -> None"""
 
 def glDeleteTextures(n: int, textures: UIntArray) -> None:
-    """glDeleteTextures(n, textures) -> None"""
+    """glDeleteTextures(n: GLsizei, textures: GLuint[]) -> None"""
 
 def glDeleteVertexArraysOES(n: int, arrays: UIntArray) -> None:
-    """glDeleteVertexArraysOES(n, arrays) -> None"""
+    """glDeleteVertexArraysOES(n: GLsizei, arrays: GLuint[]) -> None"""
 
 def glDepthFunc(func: int) -> None:
-    """glDepthFunc(func) -> None"""
+    """glDepthFunc(func: GLenum) -> None"""
 
 def glDepthMask(flag: bool) -> None:
-    """glDepthMask(flag) -> None"""
+    """glDepthMask(flag: GLboolean) -> None"""
 
 def glDepthRangeArrayfvNV(first: int, count: int, v: FloatArray) -> None:
-    """glDepthRangeArrayfvNV(first, count, v) -> None"""
+    """glDepthRangeArrayfvNV(first: GLuint, count: GLsizei, v: GLfloat[]) -> None"""
 
 def glDepthRangeArrayfvOES(first: int, count: int, v: FloatArray) -> None:
-    """glDepthRangeArrayfvOES(first, count, v) -> None"""
+    """glDepthRangeArrayfvOES(first: GLuint, count: GLsizei, v: GLfloat[]) -> None"""
 
 def glDepthRangeIndexedfNV(index: int, n: float, f: float) -> None:
-    """glDepthRangeIndexedfNV(index, n, f) -> None"""
+    """glDepthRangeIndexedfNV(index: GLuint, n: GLfloat, f: GLfloat) -> None"""
 
 def glDepthRangeIndexedfOES(index: int, n: float, f: float) -> None:
-    """glDepthRangeIndexedfOES(index, n, f) -> None"""
+    """glDepthRangeIndexedfOES(index: GLuint, n: GLfloat, f: GLfloat) -> None"""
 
 def glDepthRangef(n: float, f: float) -> None:
-    """glDepthRangef(n, f) -> None"""
+    """glDepthRangef(n: GLfloat, f: GLfloat) -> None"""
 
 def glDetachShader(program: int, shader: int) -> None:
-    """glDetachShader(program, shader) -> None"""
+    """glDetachShader(program: GLuint, shader: GLuint) -> None"""
 
 def glDisable(cap: int) -> None:
-    """glDisable(cap) -> None"""
+    """glDisable(cap: GLenum) -> None"""
 
 def glDisableDriverControlQCOM(driverControl: int) -> None:
-    """glDisableDriverControlQCOM(driverControl) -> None"""
+    """glDisableDriverControlQCOM(driverControl: GLuint) -> None"""
 
 def glDisableVertexAttribArray(index: int) -> None:
-    """glDisableVertexAttribArray(index) -> None"""
+    """glDisableVertexAttribArray(index: GLuint) -> None"""
 
 def glDisablei(target: int, index: int) -> None:
-    """glDisablei(target, index) -> None"""
+    """glDisablei(target: GLenum, index: GLuint) -> None"""
 
 def glDisableiEXT(target: int, index: int) -> None:
-    """glDisableiEXT(target, index) -> None"""
+    """glDisableiEXT(target: GLenum, index: GLuint) -> None"""
 
 def glDisableiNV(target: int, index: int) -> None:
-    """glDisableiNV(target, index) -> None"""
+    """glDisableiNV(target: GLenum, index: GLuint) -> None"""
 
 def glDisableiOES(target: int, index: int) -> None:
-    """glDisableiOES(target, index) -> None"""
+    """glDisableiOES(target: GLenum, index: GLuint) -> None"""
 
 def glDiscardFramebufferEXT(target: int, numAttachments: int, attachments: UIntArray) -> None:
-    """glDiscardFramebufferEXT(target, numAttachments, attachments) -> None"""
+    """glDiscardFramebufferEXT(target: GLenum, numAttachments: GLsizei, attachments: GLuint[]) -> None"""
 
 def glDrawArrays(mode: int, first: int, count: int) -> None:
-    """glDrawArrays(mode, first, count) -> None"""
+    """glDrawArrays(mode: GLenum, first: GLint, count: GLsizei) -> None"""
 
 def glDrawArraysInstancedANGLE(mode: int, first: int, count: int, primcount: int) -> None:
-    """glDrawArraysInstancedANGLE(mode, first, count, primcount) -> None"""
+    """glDrawArraysInstancedANGLE(mode: GLenum, first: GLint, count: GLsizei, primcount: GLsizei) -> None"""
 
 def glDrawArraysInstancedBaseInstanceEXT(mode: int, first: int, count: int, instancecount: int, baseinstance: int) -> None:
-    """glDrawArraysInstancedBaseInstanceEXT(mode, first, count, instancecount, baseinstance) -> None"""
+    """glDrawArraysInstancedBaseInstanceEXT(mode: GLenum, first: GLint, count: GLsizei, instancecount: GLsizei, baseinstance: GLuint) -> None"""
 
 def glDrawArraysInstancedEXT(mode: int, start: int, count: int, primcount: int) -> None:
-    """glDrawArraysInstancedEXT(mode, start, count, primcount) -> None"""
+    """glDrawArraysInstancedEXT(mode: GLenum, start: GLint, count: GLsizei, primcount: GLsizei) -> None"""
 
 def glDrawArraysInstancedNV(mode: int, first: int, count: int, primcount: int) -> None:
-    """glDrawArraysInstancedNV(mode, first, count, primcount) -> None"""
+    """glDrawArraysInstancedNV(mode: GLenum, first: GLint, count: GLsizei, primcount: GLsizei) -> None"""
 
 def glDrawBuffersEXT(n: int, bufs: UIntArray) -> None:
-    """glDrawBuffersEXT(n, bufs) -> None"""
+    """glDrawBuffersEXT(n: GLsizei, bufs: GLuint[]) -> None"""
 
 def glDrawBuffersIndexedEXT(n: int, location: UIntArray, indices: IntArray) -> None:
-    """glDrawBuffersIndexedEXT(n, location, indices) -> None"""
+    """glDrawBuffersIndexedEXT(n: GLint, location: GLuint[], indices: GLint[]) -> None"""
 
 def glDrawBuffersNV(n: int, bufs: UIntArray) -> None:
-    """glDrawBuffersNV(n, bufs) -> None"""
+    """glDrawBuffersNV(n: GLsizei, bufs: GLuint[]) -> None"""
 
 def glDrawElements(mode: int, count: int, type: int, indices: AnyArray) -> None:
-    """glDrawElements(mode, count, type, indices) -> None"""
+    """glDrawElements(mode: GLenum, count: GLsizei, type: GLenum, indices: void[]) -> None"""
 
 def glDrawElementsBaseVertex(mode: int, count: int, type: int, indices: AnyArray, basevertex: int) -> None:
-    """glDrawElementsBaseVertex(mode, count, type, indices, basevertex) -> None"""
+    """glDrawElementsBaseVertex(mode: GLenum, count: GLsizei, type: GLenum, indices: void[], basevertex: GLint) -> None"""
 
 def glDrawElementsBaseVertexEXT(mode: int, count: int, type: int, indices: AnyArray, basevertex: int) -> None:
-    """glDrawElementsBaseVertexEXT(mode, count, type, indices, basevertex) -> None"""
+    """glDrawElementsBaseVertexEXT(mode: GLenum, count: GLsizei, type: GLenum, indices: void[], basevertex: GLint) -> None"""
 
 def glDrawElementsBaseVertexOES(mode: int, count: int, type: int, indices: AnyArray, basevertex: int) -> None:
-    """glDrawElementsBaseVertexOES(mode, count, type, indices, basevertex) -> None"""
+    """glDrawElementsBaseVertexOES(mode: GLenum, count: GLsizei, type: GLenum, indices: void[], basevertex: GLint) -> None"""
 
 def glDrawElementsInstancedANGLE(mode: int, count: int, type: int, indices: AnyArray, primcount: int) -> None:
-    """glDrawElementsInstancedANGLE(mode, count, type, indices, primcount) -> None"""
+    """glDrawElementsInstancedANGLE(mode: GLenum, count: GLsizei, type: GLenum, indices: void[], primcount: GLsizei) -> None"""
 
 def glDrawElementsInstancedBaseInstanceEXT(mode: int, count: int, type: int, indices: AnyArray, instancecount: int, baseinstance: int) -> None:
-    """glDrawElementsInstancedBaseInstanceEXT(mode, count, type, indices, instancecount, baseinstance) -> None"""
+    """glDrawElementsInstancedBaseInstanceEXT(mode: GLenum, count: GLsizei, type: GLenum, indices: void[], instancecount: GLsizei, baseinstance: GLuint) -> None"""
 
 def glDrawElementsInstancedBaseVertex(mode: int, count: int, type: int, indices: AnyArray, instancecount: int, basevertex: int) -> None:
-    """glDrawElementsInstancedBaseVertex(mode, count, type, indices, instancecount, basevertex) -> None"""
+    """glDrawElementsInstancedBaseVertex(mode: GLenum, count: GLsizei, type: GLenum, indices: void[], instancecount: GLsizei, basevertex: GLint) -> None"""
 
 def glDrawElementsInstancedBaseVertexBaseInstanceEXT(mode: int, count: int, type: int, indices: AnyArray, instancecount: int, basevertex: int, baseinstance: int) -> None:
-    """glDrawElementsInstancedBaseVertexBaseInstanceEXT(mode, count, type, indices, instancecount, basevertex, baseinstance) -> None"""
+    """glDrawElementsInstancedBaseVertexBaseInstanceEXT(mode: GLenum, count: GLsizei, type: GLenum, indices: void[], instancecount: GLsizei, basevertex: GLint, baseinstance: GLuint) -> None"""
 
 def glDrawElementsInstancedBaseVertexEXT(mode: int, count: int, type: int, indices: AnyArray, instancecount: int, basevertex: int) -> None:
-    """glDrawElementsInstancedBaseVertexEXT(mode, count, type, indices, instancecount, basevertex) -> None"""
+    """glDrawElementsInstancedBaseVertexEXT(mode: GLenum, count: GLsizei, type: GLenum, indices: void[], instancecount: GLsizei, basevertex: GLint) -> None"""
 
 def glDrawElementsInstancedBaseVertexOES(mode: int, count: int, type: int, indices: AnyArray, instancecount: int, basevertex: int) -> None:
-    """glDrawElementsInstancedBaseVertexOES(mode, count, type, indices, instancecount, basevertex) -> None"""
+    """glDrawElementsInstancedBaseVertexOES(mode: GLenum, count: GLsizei, type: GLenum, indices: void[], instancecount: GLsizei, basevertex: GLint) -> None"""
 
 def glDrawElementsInstancedEXT(mode: int, count: int, type: int, indices: AnyArray, primcount: int) -> None:
-    """glDrawElementsInstancedEXT(mode, count, type, indices, primcount) -> None"""
+    """glDrawElementsInstancedEXT(mode: GLenum, count: GLsizei, type: GLenum, indices: void[], primcount: GLsizei) -> None"""
 
 def glDrawElementsInstancedNV(mode: int, count: int, type: int, indices: AnyArray, primcount: int) -> None:
-    """glDrawElementsInstancedNV(mode, count, type, indices, primcount) -> None"""
+    """glDrawElementsInstancedNV(mode: GLenum, count: GLsizei, type: GLenum, indices: void[], primcount: GLsizei) -> None"""
 
 def glDrawMeshTasksIndirectNV(indirect: int) -> None:
-    """glDrawMeshTasksIndirectNV(indirect) -> None"""
+    """glDrawMeshTasksIndirectNV(indirect: GLintptr) -> None"""
 
 def glDrawMeshTasksNV(first: int, count: int) -> None:
-    """glDrawMeshTasksNV(first, count) -> None"""
+    """glDrawMeshTasksNV(first: GLuint, count: GLuint) -> None"""
 
 def glDrawRangeElementsBaseVertex(mode: int, start: int, end: int, count: int, type: int, indices: AnyArray, basevertex: int) -> None:
-    """glDrawRangeElementsBaseVertex(mode, start, end, count, type, indices, basevertex) -> None"""
+    """glDrawRangeElementsBaseVertex(mode: GLenum, start: GLuint, end: GLuint, count: GLsizei, type: GLenum, indices: void[], basevertex: GLint) -> None"""
 
 def glDrawRangeElementsBaseVertexEXT(mode: int, start: int, end: int, count: int, type: int, indices: AnyArray, basevertex: int) -> None:
-    """glDrawRangeElementsBaseVertexEXT(mode, start, end, count, type, indices, basevertex) -> None"""
+    """glDrawRangeElementsBaseVertexEXT(mode: GLenum, start: GLuint, end: GLuint, count: GLsizei, type: GLenum, indices: void[], basevertex: GLint) -> None"""
 
 def glDrawRangeElementsBaseVertexOES(mode: int, start: int, end: int, count: int, type: int, indices: AnyArray, basevertex: int) -> None:
-    """glDrawRangeElementsBaseVertexOES(mode, start, end, count, type, indices, basevertex) -> None"""
+    """glDrawRangeElementsBaseVertexOES(mode: GLenum, start: GLuint, end: GLuint, count: GLsizei, type: GLenum, indices: void[], basevertex: GLint) -> None"""
 
 def glDrawTransformFeedbackEXT(mode: int, id: int) -> None:
-    """glDrawTransformFeedbackEXT(mode, id) -> None"""
+    """glDrawTransformFeedbackEXT(mode: GLenum, id: GLuint) -> None"""
 
 def glDrawTransformFeedbackInstancedEXT(mode: int, id: int, instancecount: int) -> None:
-    """glDrawTransformFeedbackInstancedEXT(mode, id, instancecount) -> None"""
+    """glDrawTransformFeedbackInstancedEXT(mode: GLenum, id: GLuint, instancecount: GLsizei) -> None"""
 
 def glDrawVkImageNV(vkImage: int, sampler: int, x0: float, y0: float, x1: float, y1: float, z: float, s0: float, t0: float, s1: float, t1: float) -> None:
-    """glDrawVkImageNV(vkImage, sampler, x0, y0, x1, y1, z, s0, t0, s1, t1) -> None"""
+    """glDrawVkImageNV(vkImage: GLuint64, sampler: GLuint, x0: GLfloat, y0: GLfloat, x1: GLfloat, y1: GLfloat, z: GLfloat, s0: GLfloat, t0: GLfloat, s1: GLfloat, t1: GLfloat) -> None"""
 
 def glEGLImageTargetRenderbufferStorageOES(target: int, image: Any) -> None:
-    """glEGLImageTargetRenderbufferStorageOES(target, image) -> None"""
+    """glEGLImageTargetRenderbufferStorageOES(target: GLenum, image: GLeglImageOES) -> None"""
 
 def glEGLImageTargetTexStorageEXT(target: int, image: Any, attrib_list: IntArray) -> None:
-    """glEGLImageTargetTexStorageEXT(target, image, attrib_list) -> None"""
+    """glEGLImageTargetTexStorageEXT(target: GLenum, image: GLeglImageOES, attrib_list: GLint[]) -> None"""
 
 def glEGLImageTargetTexture2DOES(target: int, image: Any) -> None:
-    """glEGLImageTargetTexture2DOES(target, image) -> None"""
+    """glEGLImageTargetTexture2DOES(target: GLenum, image: GLeglImageOES) -> None"""
 
 def glEGLImageTargetTextureStorageEXT(texture: int, image: Any, attrib_list: IntArray) -> None:
-    """glEGLImageTargetTextureStorageEXT(texture, image, attrib_list) -> None"""
+    """glEGLImageTargetTextureStorageEXT(texture: GLuint, image: GLeglImageOES, attrib_list: GLint[]) -> None"""
 
 def glEnable(cap: int) -> None:
-    """glEnable(cap) -> None"""
+    """glEnable(cap: GLenum) -> None"""
 
 def glEnableDriverControlQCOM(driverControl: int) -> None:
-    """glEnableDriverControlQCOM(driverControl) -> None"""
+    """glEnableDriverControlQCOM(driverControl: GLuint) -> None"""
 
 def glEnableVertexAttribArray(index: int) -> None:
-    """glEnableVertexAttribArray(index) -> None"""
+    """glEnableVertexAttribArray(index: GLuint) -> None"""
 
 def glEnablei(target: int, index: int) -> None:
-    """glEnablei(target, index) -> None"""
+    """glEnablei(target: GLenum, index: GLuint) -> None"""
 
 def glEnableiEXT(target: int, index: int) -> None:
-    """glEnableiEXT(target, index) -> None"""
+    """glEnableiEXT(target: GLenum, index: GLuint) -> None"""
 
 def glEnableiNV(target: int, index: int) -> None:
-    """glEnableiNV(target, index) -> None"""
+    """glEnableiNV(target: GLenum, index: GLuint) -> None"""
 
 def glEnableiOES(target: int, index: int) -> None:
-    """glEnableiOES(target, index) -> None"""
+    """glEnableiOES(target: GLenum, index: GLuint) -> None"""
 
 def glEndConditionalRenderNV() -> None:
     """glEndConditionalRenderNV() -> None"""
 
 def glEndPerfMonitorAMD(monitor: int) -> None:
-    """glEndPerfMonitorAMD(monitor) -> None"""
+    """glEndPerfMonitorAMD(monitor: GLuint) -> None"""
 
 def glEndPerfQueryINTEL(queryHandle: int) -> None:
-    """glEndPerfQueryINTEL(queryHandle) -> None"""
+    """glEndPerfQueryINTEL(queryHandle: GLuint) -> None"""
 
 def glEndQueryEXT(target: int) -> None:
-    """glEndQueryEXT(target) -> None"""
+    """glEndQueryEXT(target: GLenum) -> None"""
 
 def glEndTilingQCOM(preserveMask: int) -> None:
-    """glEndTilingQCOM(preserveMask) -> None"""
+    """glEndTilingQCOM(preserveMask: GLbitfield) -> None"""
 
 def glExtGetBufferPointervQCOM(target: int, params: AnyArray) -> None:
-    """glExtGetBufferPointervQCOM(target, params) -> None"""
+    """glExtGetBufferPointervQCOM(target: GLenum, params: void[][]) -> None"""
 
 def glExtGetBuffersQCOM(buffers: UIntArray, maxBuffers: int, numBuffers: IntArray) -> None:
-    """glExtGetBuffersQCOM(buffers, maxBuffers, numBuffers) -> None"""
+    """glExtGetBuffersQCOM(buffers: GLuint[], maxBuffers: GLint, numBuffers: GLint[]) -> None"""
 
 def glExtGetFramebuffersQCOM(framebuffers: UIntArray, maxFramebuffers: int, numFramebuffers: IntArray) -> None:
-    """glExtGetFramebuffersQCOM(framebuffers, maxFramebuffers, numFramebuffers) -> None"""
+    """glExtGetFramebuffersQCOM(framebuffers: GLuint[], maxFramebuffers: GLint, numFramebuffers: GLint[]) -> None"""
 
 def glExtGetProgramBinarySourceQCOM(program: int, shadertype: int, source: ByteArray, length: IntArray) -> None:
-    """glExtGetProgramBinarySourceQCOM(program, shadertype, source, length) -> None"""
+    """glExtGetProgramBinarySourceQCOM(program: GLuint, shadertype: GLenum, source: GLchar[], length: GLint[]) -> None"""
 
 def glExtGetProgramsQCOM(programs: UIntArray, maxPrograms: int, numPrograms: IntArray) -> None:
-    """glExtGetProgramsQCOM(programs, maxPrograms, numPrograms) -> None"""
+    """glExtGetProgramsQCOM(programs: GLuint[], maxPrograms: GLint, numPrograms: GLint[]) -> None"""
 
 def glExtGetRenderbuffersQCOM(renderbuffers: UIntArray, maxRenderbuffers: int, numRenderbuffers: IntArray) -> None:
-    """glExtGetRenderbuffersQCOM(renderbuffers, maxRenderbuffers, numRenderbuffers) -> None"""
+    """glExtGetRenderbuffersQCOM(renderbuffers: GLuint[], maxRenderbuffers: GLint, numRenderbuffers: GLint[]) -> None"""
 
 def glExtGetShadersQCOM(shaders: UIntArray, maxShaders: int, numShaders: IntArray) -> None:
-    """glExtGetShadersQCOM(shaders, maxShaders, numShaders) -> None"""
+    """glExtGetShadersQCOM(shaders: GLuint[], maxShaders: GLint, numShaders: GLint[]) -> None"""
 
 def glExtGetTexLevelParameterivQCOM(texture: int, face: int, level: int, pname: int, params: IntArray) -> None:
-    """glExtGetTexLevelParameterivQCOM(texture, face, level, pname, params) -> None"""
+    """glExtGetTexLevelParameterivQCOM(texture: GLuint, face: GLenum, level: GLint, pname: GLenum, params: GLint[]) -> None"""
 
 def glExtGetTexSubImageQCOM(target: int, level: int, xoffset: int, yoffset: int, zoffset: int, width: int, height: int, depth: int, format: int, type: int, texels: AnyArray) -> None:
-    """glExtGetTexSubImageQCOM(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, texels) -> None"""
+    """glExtGetTexSubImageQCOM(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: GLenum, type: GLenum, texels: void[]) -> None"""
 
 def glExtGetTexturesQCOM(textures: UIntArray, maxTextures: int, numTextures: IntArray) -> None:
-    """glExtGetTexturesQCOM(textures, maxTextures, numTextures) -> None"""
+    """glExtGetTexturesQCOM(textures: GLuint[], maxTextures: GLint, numTextures: GLint[]) -> None"""
 
 def glExtIsProgramBinaryQCOM(program: int) -> int:
-    """glExtIsProgramBinaryQCOM(program) -> GLboolean"""
+    """glExtIsProgramBinaryQCOM(program: GLuint) -> GLboolean"""
 
 def glExtTexObjectStateOverrideiQCOM(target: int, pname: int, param: int) -> None:
-    """glExtTexObjectStateOverrideiQCOM(target, pname, param) -> None"""
+    """glExtTexObjectStateOverrideiQCOM(target: GLenum, pname: GLenum, param: GLint) -> None"""
 
 def glExtrapolateTex2DQCOM(src1: int, src2: int, output: int, scaleFactor: float) -> None:
-    """glExtrapolateTex2DQCOM(src1, src2, output, scaleFactor) -> None"""
+    """glExtrapolateTex2DQCOM(src1: GLuint, src2: GLuint, output: GLuint, scaleFactor: GLfloat) -> None"""
 
 def glFenceSyncAPPLE(condition: int, flags: int) -> Any:
-    """glFenceSyncAPPLE(condition, flags) -> GLsync"""
+    """glFenceSyncAPPLE(condition: GLenum, flags: GLbitfield) -> GLsync"""
 
 def glFinish() -> None:
     """glFinish() -> None"""
 
 def glFinishFenceNV(fence: int) -> None:
-    """glFinishFenceNV(fence) -> None"""
+    """glFinishFenceNV(fence: GLuint) -> None"""
 
 def glFlush() -> None:
     """glFlush() -> None"""
 
 def glFlushMappedBufferRangeEXT(target: int, offset: int, length: int) -> None:
-    """glFlushMappedBufferRangeEXT(target, offset, length) -> None"""
+    """glFlushMappedBufferRangeEXT(target: GLenum, offset: GLintptr, length: GLsizeiptr) -> None"""
 
 def glFragmentCoverageColorNV(color: int) -> None:
-    """glFragmentCoverageColorNV(color) -> None"""
+    """glFragmentCoverageColorNV(color: GLuint) -> None"""
 
 def glFramebufferFetchBarrierEXT() -> None:
     """glFramebufferFetchBarrierEXT() -> None"""
@@ -2611,169 +2611,169 @@ def glFramebufferFetchBarrierQCOM() -> None:
     """glFramebufferFetchBarrierQCOM() -> None"""
 
 def glFramebufferFoveationConfigQCOM(framebuffer: int, numLayers: int, focalPointsPerLayer: int, requestedFeatures: int, providedFeatures: UIntArray) -> None:
-    """glFramebufferFoveationConfigQCOM(framebuffer, numLayers, focalPointsPerLayer, requestedFeatures, providedFeatures) -> None"""
+    """glFramebufferFoveationConfigQCOM(framebuffer: GLuint, numLayers: GLuint, focalPointsPerLayer: GLuint, requestedFeatures: GLuint, providedFeatures: GLuint[]) -> None"""
 
 def glFramebufferFoveationParametersQCOM(framebuffer: int, layer: int, focalPoint: int, focalX: float, focalY: float, gainX: float, gainY: float, foveaArea: float) -> None:
-    """glFramebufferFoveationParametersQCOM(framebuffer, layer, focalPoint, focalX, focalY, gainX, gainY, foveaArea) -> None"""
+    """glFramebufferFoveationParametersQCOM(framebuffer: GLuint, layer: GLuint, focalPoint: GLuint, focalX: GLfloat, focalY: GLfloat, gainX: GLfloat, gainY: GLfloat, foveaArea: GLfloat) -> None"""
 
 def glFramebufferParameteriMESA(target: int, pname: int, param: int) -> None:
-    """glFramebufferParameteriMESA(target, pname, param) -> None"""
+    """glFramebufferParameteriMESA(target: GLenum, pname: GLenum, param: GLint) -> None"""
 
 def glFramebufferPixelLocalStorageSizeEXT(target: int, size: int) -> None:
-    """glFramebufferPixelLocalStorageSizeEXT(target, size) -> None"""
+    """glFramebufferPixelLocalStorageSizeEXT(target: GLuint, size: GLsizei) -> None"""
 
 def glFramebufferRenderbuffer(target: int, attachment: int, renderbuffertarget: int, renderbuffer: int) -> None:
-    """glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) -> None"""
+    """glFramebufferRenderbuffer(target: GLenum, attachment: GLenum, renderbuffertarget: GLenum, renderbuffer: GLuint) -> None"""
 
 def glFramebufferSampleLocationsfvNV(target: int, start: int, count: int, v: FloatArray) -> None:
-    """glFramebufferSampleLocationsfvNV(target, start, count, v) -> None"""
+    """glFramebufferSampleLocationsfvNV(target: GLenum, start: GLuint, count: GLsizei, v: GLfloat[]) -> None"""
 
 def glFramebufferShadingRateEXT(target: int, attachment: int, texture: int, baseLayer: int, numLayers: int, texelWidth: int, texelHeight: int) -> None:
-    """glFramebufferShadingRateEXT(target, attachment, texture, baseLayer, numLayers, texelWidth, texelHeight) -> None"""
+    """glFramebufferShadingRateEXT(target: GLenum, attachment: GLenum, texture: GLuint, baseLayer: GLint, numLayers: GLsizei, texelWidth: GLsizei, texelHeight: GLsizei) -> None"""
 
 def glFramebufferTexture(target: int, attachment: int, texture: int, level: int) -> None:
-    """glFramebufferTexture(target, attachment, texture, level) -> None"""
+    """glFramebufferTexture(target: GLenum, attachment: GLenum, texture: GLuint, level: GLint) -> None"""
 
 def glFramebufferTexture2D(target: int, attachment: int, textarget: int, texture: int, level: int) -> None:
-    """glFramebufferTexture2D(target, attachment, textarget, texture, level) -> None"""
+    """glFramebufferTexture2D(target: GLenum, attachment: GLenum, textarget: GLenum, texture: GLuint, level: GLint) -> None"""
 
 def glFramebufferTexture2DDownsampleIMG(target: int, attachment: int, textarget: int, texture: int, level: int, xscale: int, yscale: int) -> None:
-    """glFramebufferTexture2DDownsampleIMG(target, attachment, textarget, texture, level, xscale, yscale) -> None"""
+    """glFramebufferTexture2DDownsampleIMG(target: GLenum, attachment: GLenum, textarget: GLenum, texture: GLuint, level: GLint, xscale: GLint, yscale: GLint) -> None"""
 
 def glFramebufferTexture2DMultisampleEXT(target: int, attachment: int, textarget: int, texture: int, level: int, samples: int) -> None:
-    """glFramebufferTexture2DMultisampleEXT(target, attachment, textarget, texture, level, samples) -> None"""
+    """glFramebufferTexture2DMultisampleEXT(target: GLenum, attachment: GLenum, textarget: GLenum, texture: GLuint, level: GLint, samples: GLsizei) -> None"""
 
 def glFramebufferTexture2DMultisampleIMG(target: int, attachment: int, textarget: int, texture: int, level: int, samples: int) -> None:
-    """glFramebufferTexture2DMultisampleIMG(target, attachment, textarget, texture, level, samples) -> None"""
+    """glFramebufferTexture2DMultisampleIMG(target: GLenum, attachment: GLenum, textarget: GLenum, texture: GLuint, level: GLint, samples: GLsizei) -> None"""
 
 def glFramebufferTexture3DOES(target: int, attachment: int, textarget: int, texture: int, level: int, zoffset: int) -> None:
-    """glFramebufferTexture3DOES(target, attachment, textarget, texture, level, zoffset) -> None"""
+    """glFramebufferTexture3DOES(target: GLenum, attachment: GLenum, textarget: GLenum, texture: GLuint, level: GLint, zoffset: GLint) -> None"""
 
 def glFramebufferTextureEXT(target: int, attachment: int, texture: int, level: int) -> None:
-    """glFramebufferTextureEXT(target, attachment, texture, level) -> None"""
+    """glFramebufferTextureEXT(target: GLenum, attachment: GLenum, texture: GLuint, level: GLint) -> None"""
 
 def glFramebufferTextureLayerDownsampleIMG(target: int, attachment: int, texture: int, level: int, layer: int, xscale: int, yscale: int) -> None:
-    """glFramebufferTextureLayerDownsampleIMG(target, attachment, texture, level, layer, xscale, yscale) -> None"""
+    """glFramebufferTextureLayerDownsampleIMG(target: GLenum, attachment: GLenum, texture: GLuint, level: GLint, layer: GLint, xscale: GLint, yscale: GLint) -> None"""
 
 def glFramebufferTextureMultisampleMultiviewOVR(target: int, attachment: int, texture: int, level: int, samples: int, baseViewIndex: int, numViews: int) -> None:
-    """glFramebufferTextureMultisampleMultiviewOVR(target, attachment, texture, level, samples, baseViewIndex, numViews) -> None"""
+    """glFramebufferTextureMultisampleMultiviewOVR(target: GLenum, attachment: GLenum, texture: GLuint, level: GLint, samples: GLsizei, baseViewIndex: GLint, numViews: GLsizei) -> None"""
 
 def glFramebufferTextureMultiviewOVR(target: int, attachment: int, texture: int, level: int, baseViewIndex: int, numViews: int) -> None:
-    """glFramebufferTextureMultiviewOVR(target, attachment, texture, level, baseViewIndex, numViews) -> None"""
+    """glFramebufferTextureMultiviewOVR(target: GLenum, attachment: GLenum, texture: GLuint, level: GLint, baseViewIndex: GLint, numViews: GLsizei) -> None"""
 
 def glFramebufferTextureOES(target: int, attachment: int, texture: int, level: int) -> None:
-    """glFramebufferTextureOES(target, attachment, texture, level) -> None"""
+    """glFramebufferTextureOES(target: GLenum, attachment: GLenum, texture: GLuint, level: GLint) -> None"""
 
 def glFrontFace(mode: int) -> None:
-    """glFrontFace(mode) -> None"""
+    """glFrontFace(mode: GLenum) -> None"""
 
 def glGenBuffers(n: int, buffers: UIntArray | None = None) -> UIntArrayResult:
-    """glGenBuffers(n) -> buffers"""
+    """glGenBuffers(n: GLsizei) -> buffers: GLuint[]"""
 
 def glGenFencesNV(n: int, fences: UIntArray | None = None) -> UIntArrayResult:
-    """glGenFencesNV(n) -> fences"""
+    """glGenFencesNV(n: GLsizei) -> fences: GLuint[]"""
 
 def glGenFramebuffers(n: int, framebuffers: UIntArray | None = None) -> UIntArrayResult:
-    """glGenFramebuffers(n) -> framebuffers"""
+    """glGenFramebuffers(n: GLsizei) -> framebuffers: GLuint[]"""
 
 def glGenPathsNV(range: int) -> int:
-    """glGenPathsNV(range) -> GLuint"""
+    """glGenPathsNV(range: GLsizei) -> GLuint"""
 
 def glGenPerfMonitorsAMD(n: int, monitors: UIntArray | None = None) -> UIntArrayResult:
-    """glGenPerfMonitorsAMD(n) -> monitors"""
+    """glGenPerfMonitorsAMD(n: GLsizei) -> monitors: GLuint[]"""
 
 def glGenProgramPipelinesEXT(n: int, pipelines: UIntArray) -> None:
-    """glGenProgramPipelinesEXT(n, pipelines) -> None"""
+    """glGenProgramPipelinesEXT(n: GLsizei, pipelines: GLuint[]) -> None"""
 
 def glGenQueriesEXT(n: int, ids: UIntArray) -> None:
-    """glGenQueriesEXT(n, ids) -> None"""
+    """glGenQueriesEXT(n: GLsizei, ids: GLuint[]) -> None"""
 
 def glGenRenderbuffers(n: int, renderbuffers: UIntArray | None = None) -> UIntArrayResult:
-    """glGenRenderbuffers(n) -> renderbuffers"""
+    """glGenRenderbuffers(n: GLsizei) -> renderbuffers: GLuint[]"""
 
 def glGenSamplers(count: int, samplers: UIntArray | None = None) -> UIntArrayResult:
-    """glGenSamplers(count) -> samplers"""
+    """glGenSamplers(count: GLsizei) -> samplers: GLuint[]"""
 
 def glGenSemaphoresEXT(n: int, semaphores: UIntArray) -> None:
-    """glGenSemaphoresEXT(n, semaphores) -> None"""
+    """glGenSemaphoresEXT(n: GLsizei, semaphores: GLuint[]) -> None"""
 
 def glGenTextures(n: int, textures: UIntArray | None = None) -> UIntArrayResult:
-    """glGenTextures(n) -> textures"""
+    """glGenTextures(n: GLsizei) -> textures: GLuint[]"""
 
 def glGenVertexArraysOES(n: int, arrays: UIntArray) -> None:
-    """glGenVertexArraysOES(n, arrays) -> None"""
+    """glGenVertexArraysOES(n: GLsizei, arrays: GLuint[]) -> None"""
 
 def glGenerateMipmap(target: int) -> None:
-    """glGenerateMipmap(target) -> None"""
+    """glGenerateMipmap(target: GLenum) -> None"""
 
 def glGetActiveAttrib(program: int, index: int, bufSize: int, length: IntArray | None = None, size: IntArray | None = None, type: UIntArray | None = None, name: ByteArray | None = None) -> tuple[IntArrayResult, ByteArrayResult, IntArrayResult, UIntArrayResult]:
-    """glGetActiveAttrib(program, index, bufSize) -> length, name, size, type"""
+    """glGetActiveAttrib(program: GLuint, index: GLuint, bufSize: GLsizei) -> length: GLsizei[], name: GLchar[], size: GLint[], type: GLuint[]"""
 
 def glGetActiveUniform(program: int, index: int, bufSize: int, length: IntArray | None = None, size: IntArray | None = None, type: UIntArray | None = None, name: ByteArray | None = None) -> tuple[IntArrayResult, ByteArrayResult, IntArrayResult, UIntArrayResult]:
-    """glGetActiveUniform(program, index, bufSize) -> length, name, size, type"""
+    """glGetActiveUniform(program: GLuint, index: GLuint, bufSize: GLsizei) -> length: GLsizei[], name: GLchar[], size: GLint[], type: GLuint[]"""
 
 def glGetAttachedShaders(program: int, maxCount: int, count: IntArray, shaders: UIntArray) -> IntArrayResult:
-    """glGetAttachedShaders(program, maxCount, shaders) -> count"""
+    """glGetAttachedShaders(program: GLuint, maxCount: GLsizei, shaders: GLuint[]) -> count: GLsizei[]"""
 
 def glGetAttribLocation(program: int, name: ByteArray) -> int:
-    """glGetAttribLocation(program, name) -> GLint"""
+    """glGetAttribLocation(program: GLuint, name: GLchar[]) -> GLint"""
 
 def glGetBooleanv(pname: int, data: UByteArray | None = None) -> UByteArrayResult:
-    """glGetBooleanv(pname) -> data"""
+    """glGetBooleanv(pname: GLenum) -> data: GLboolean[]"""
 
 def glGetBufferParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetBufferParameteriv(target, pname) -> params"""
+    """glGetBufferParameteriv(target: GLenum, pname: GLenum) -> params: GLint[]"""
 
 def glGetBufferPointervOES(target: int, pname: int, params: AnyArray) -> None:
-    """glGetBufferPointervOES(target, pname, params) -> None"""
+    """glGetBufferPointervOES(target: GLenum, pname: GLenum, params: void[][]) -> None"""
 
 def glGetCoverageModulationTableNV(bufSize: int, v: FloatArray) -> None:
-    """glGetCoverageModulationTableNV(bufSize, v) -> None"""
+    """glGetCoverageModulationTableNV(bufSize: GLsizei, v: GLfloat[]) -> None"""
 
 def glGetDebugMessageLog(count: int, bufSize: int, sources: UIntArray | None = None, types: UIntArray | None = None, ids: UIntArray | None = None, severities: UIntArray | None = None, lengths: IntArray | None = None, messageLog: ByteArray | None = None) -> tuple[UIntArrayResult, IntArrayResult, ByteArrayResult, UIntArrayResult, UIntArrayResult, UIntArrayResult]:
-    """glGetDebugMessageLog(count, bufSize) -> ids, lengths, messageLog, severities, sources, types"""
+    """glGetDebugMessageLog(count: GLuint, bufSize: GLsizei) -> ids: GLuint[], lengths: GLsizei[], messageLog: GLchar[], severities: GLuint[], sources: GLuint[], types: GLuint[]"""
 
 def glGetDebugMessageLogKHR(count: int, bufSize: int, sources: UIntArray, types: UIntArray, ids: UIntArray, severities: UIntArray, lengths: IntArray, messageLog: ByteArray) -> int:
-    """glGetDebugMessageLogKHR(count, bufSize, sources, types, ids, severities, lengths, messageLog) -> GLuint"""
+    """glGetDebugMessageLogKHR(count: GLuint, bufSize: GLsizei, sources: GLuint[], types: GLuint[], ids: GLuint[], severities: GLuint[], lengths: GLsizei[], messageLog: GLchar[]) -> GLuint"""
 
 def glGetDriverControlStringQCOM(driverControl: int, bufSize: int, length: IntArray, driverControlString: ByteArray) -> None:
-    """glGetDriverControlStringQCOM(driverControl, bufSize, length, driverControlString) -> None"""
+    """glGetDriverControlStringQCOM(driverControl: GLuint, bufSize: GLsizei, length: GLsizei[], driverControlString: GLchar[]) -> None"""
 
 def glGetDriverControlsQCOM(num: IntArray, size: int, driverControls: UIntArray) -> None:
-    """glGetDriverControlsQCOM(num, size, driverControls) -> None"""
+    """glGetDriverControlsQCOM(num: GLint[], size: GLsizei, driverControls: GLuint[]) -> None"""
 
 def glGetError() -> int:
     """glGetError() -> GLenum"""
 
 def glGetFenceivNV(fence: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetFenceivNV(fence, pname) -> params"""
+    """glGetFenceivNV(fence: GLuint, pname: GLenum) -> params: GLint[]"""
 
 def glGetFirstPerfQueryIdINTEL(queryId: UIntArray) -> None:
-    """glGetFirstPerfQueryIdINTEL(queryId) -> None"""
+    """glGetFirstPerfQueryIdINTEL(queryId: GLuint[]) -> None"""
 
 def glGetFloati_vNV(target: int, index: int, data: FloatArray) -> None:
-    """glGetFloati_vNV(target, index, data) -> None"""
+    """glGetFloati_vNV(target: GLenum, index: GLuint, data: GLfloat[]) -> None"""
 
 def glGetFloati_vOES(target: int, index: int, data: FloatArray) -> None:
-    """glGetFloati_vOES(target, index, data) -> None"""
+    """glGetFloati_vOES(target: GLenum, index: GLuint, data: GLfloat[]) -> None"""
 
 def glGetFloatv(pname: int, data: FloatArray | None = None) -> FloatArrayResult:
-    """glGetFloatv(pname) -> data"""
+    """glGetFloatv(pname: GLenum) -> data: GLfloat[]"""
 
 def glGetFragDataIndexEXT(program: int, name: ByteArray) -> int:
-    """glGetFragDataIndexEXT(program, name) -> GLint"""
+    """glGetFragDataIndexEXT(program: GLuint, name: GLchar[]) -> GLint"""
 
 def glGetFragmentShadingRatesEXT(samples: int, maxCount: int, count: IntArray, shadingRates: UIntArray) -> None:
-    """glGetFragmentShadingRatesEXT(samples, maxCount, count, shadingRates) -> None"""
+    """glGetFragmentShadingRatesEXT(samples: GLsizei, maxCount: GLsizei, count: GLsizei[], shadingRates: GLuint[]) -> None"""
 
 def glGetFramebufferAttachmentParameteriv(target: int, attachment: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetFramebufferAttachmentParameteriv(target, attachment, pname) -> params"""
+    """glGetFramebufferAttachmentParameteriv(target: GLenum, attachment: GLenum, pname: GLenum) -> params: GLint[]"""
 
 def glGetFramebufferParameterivMESA(target: int, pname: int, params: IntArray) -> None:
-    """glGetFramebufferParameterivMESA(target, pname, params) -> None"""
+    """glGetFramebufferParameterivMESA(target: GLenum, pname: GLenum, params: GLint[]) -> None"""
 
 def glGetFramebufferPixelLocalStorageSizeEXT(target: int) -> int:
-    """glGetFramebufferPixelLocalStorageSizeEXT(target) -> GLsizei"""
+    """glGetFramebufferPixelLocalStorageSizeEXT(target: GLuint) -> GLsizei"""
 
 def glGetGraphicsResetStatus() -> int:
     """glGetGraphicsResetStatus() -> GLenum"""
@@ -2785,664 +2785,664 @@ def glGetGraphicsResetStatusKHR() -> int:
     """glGetGraphicsResetStatusKHR() -> GLenum"""
 
 def glGetImageHandleNV(texture: int, level: int, layered: bool, layer: int, format: int) -> int:
-    """glGetImageHandleNV(texture, level, layered, layer, format) -> GLuint64"""
+    """glGetImageHandleNV(texture: GLuint, level: GLint, layered: GLboolean, layer: GLint, format: GLenum) -> GLuint64"""
 
 def glGetInteger64vAPPLE(pname: int, params: Int64Array) -> None:
-    """glGetInteger64vAPPLE(pname, params) -> None"""
+    """glGetInteger64vAPPLE(pname: GLenum, params: GLint64[]) -> None"""
 
 def glGetInteger64vEXT(pname: int, data: Int64Array) -> None:
-    """glGetInteger64vEXT(pname, data) -> None"""
+    """glGetInteger64vEXT(pname: GLenum, data: GLint64[]) -> None"""
 
 def glGetIntegeri_vEXT(target: int, index: int, data: IntArray) -> None:
-    """glGetIntegeri_vEXT(target, index, data) -> None"""
+    """glGetIntegeri_vEXT(target: GLenum, index: GLuint, data: GLint[]) -> None"""
 
 def glGetIntegerv(pname: int, data: IntArray | None = None) -> IntArrayResult:
-    """glGetIntegerv(pname) -> data"""
+    """glGetIntegerv(pname: GLenum) -> data: GLint[]"""
 
 def glGetInternalformatSampleivNV(target: int, internalformat: int, samples: int, pname: int, count: int, params: IntArray) -> None:
-    """glGetInternalformatSampleivNV(target, internalformat, samples, pname, count, params) -> None"""
+    """glGetInternalformatSampleivNV(target: GLenum, internalformat: GLenum, samples: GLsizei, pname: GLenum, count: GLsizei, params: GLint[]) -> None"""
 
 def glGetMemoryObjectDetachedResourcesuivNV(memory: int, pname: int, first: int, count: int, params: UIntArray) -> None:
-    """glGetMemoryObjectDetachedResourcesuivNV(memory, pname, first, count, params) -> None"""
+    """glGetMemoryObjectDetachedResourcesuivNV(memory: GLuint, pname: GLenum, first: GLint, count: GLsizei, params: GLuint[]) -> None"""
 
 def glGetMemoryObjectParameterivEXT(memoryObject: int, pname: int, params: IntArray) -> None:
-    """glGetMemoryObjectParameterivEXT(memoryObject, pname, params) -> None"""
+    """glGetMemoryObjectParameterivEXT(memoryObject: GLuint, pname: GLenum, params: GLint[]) -> None"""
 
 def glGetNextPerfQueryIdINTEL(queryId: int, nextQueryId: UIntArray) -> None:
-    """glGetNextPerfQueryIdINTEL(queryId, nextQueryId) -> None"""
+    """glGetNextPerfQueryIdINTEL(queryId: GLuint, nextQueryId: GLuint[]) -> None"""
 
 def glGetObjectLabel(identifier: int, name: int, bufSize: int, length: IntArray | None = None, label: ByteArray | None = None) -> tuple[ByteArrayResult, IntArrayResult]:
-    """glGetObjectLabel(identifier, name, bufSize) -> label, length"""
+    """glGetObjectLabel(identifier: GLenum, name: GLuint, bufSize: GLsizei) -> label: GLchar[], length: GLsizei[]"""
 
 def glGetObjectLabelEXT(type: int, object: int, bufSize: int, length: IntArray, label: ByteArray) -> None:
-    """glGetObjectLabelEXT(type, object, bufSize, length, label) -> None"""
+    """glGetObjectLabelEXT(type: GLenum, object: GLuint, bufSize: GLsizei, length: GLsizei[], label: GLchar[]) -> None"""
 
 def glGetObjectLabelKHR(identifier: int, name: int, bufSize: int, length: IntArray, label: ByteArray) -> None:
-    """glGetObjectLabelKHR(identifier, name, bufSize, length, label) -> None"""
+    """glGetObjectLabelKHR(identifier: GLenum, name: GLuint, bufSize: GLsizei, length: GLsizei[], label: GLchar[]) -> None"""
 
 def glGetObjectPtrLabel(ptr: AnyArray, bufSize: int, length: IntArray | None = None, label: ByteArray | None = None) -> tuple[ByteArrayResult, IntArrayResult]:
-    """glGetObjectPtrLabel(ptr, bufSize) -> label, length"""
+    """glGetObjectPtrLabel(ptr: void[], bufSize: GLsizei) -> label: GLchar[], length: GLsizei[]"""
 
 def glGetObjectPtrLabelKHR(ptr: AnyArray, bufSize: int, length: IntArray, label: ByteArray) -> None:
-    """glGetObjectPtrLabelKHR(ptr, bufSize, length, label) -> None"""
+    """glGetObjectPtrLabelKHR(ptr: void[], bufSize: GLsizei, length: GLsizei[], label: GLchar[]) -> None"""
 
 def glGetPathColorGenfvNV(color: int, pname: int, value: FloatArray | None = None) -> FloatArrayResult:
-    """glGetPathColorGenfvNV(color, pname) -> value"""
+    """glGetPathColorGenfvNV(color: GLenum, pname: GLenum) -> value: GLfloat[]"""
 
 def glGetPathColorGenivNV(color: int, pname: int, value: IntArray | None = None) -> IntArrayResult:
-    """glGetPathColorGenivNV(color, pname) -> value"""
+    """glGetPathColorGenivNV(color: GLenum, pname: GLenum) -> value: GLint[]"""
 
 def glGetPathCommandsNV(path: int, commands: UByteArray | None = None) -> UByteArrayResult:
-    """glGetPathCommandsNV(path) -> commands"""
+    """glGetPathCommandsNV(path: GLuint) -> commands: GLubyte[]"""
 
 def glGetPathCoordsNV(path: int, coords: FloatArray | None = None) -> FloatArrayResult:
-    """glGetPathCoordsNV(path) -> coords"""
+    """glGetPathCoordsNV(path: GLuint) -> coords: GLfloat[]"""
 
 def glGetPathDashArrayNV(path: int, dashArray: FloatArray | None = None) -> FloatArrayResult:
-    """glGetPathDashArrayNV(path) -> dashArray"""
+    """glGetPathDashArrayNV(path: GLuint) -> dashArray: GLfloat[]"""
 
 def glGetPathLengthNV(path: int, startSegment: int, numSegments: int) -> float:
-    """glGetPathLengthNV(path, startSegment, numSegments) -> GLfloat"""
+    """glGetPathLengthNV(path: GLuint, startSegment: GLsizei, numSegments: GLsizei) -> GLfloat"""
 
 def glGetPathMetricRangeNV(metricQueryMask: int, firstPathName: int, numPaths: int, stride: int, metrics: FloatArray) -> None:
-    """glGetPathMetricRangeNV(metricQueryMask, firstPathName, numPaths, stride, metrics) -> None"""
+    """glGetPathMetricRangeNV(metricQueryMask: GLbitfield, firstPathName: GLuint, numPaths: GLsizei, stride: GLsizei, metrics: GLfloat[]) -> None"""
 
 def glGetPathMetricsNV(metricQueryMask: int, numPaths: int, pathNameType: int, paths: AnyArray, pathBase: int, stride: int, metrics: FloatArray) -> None:
-    """glGetPathMetricsNV(metricQueryMask, numPaths, pathNameType, paths, pathBase, stride, metrics) -> None"""
+    """glGetPathMetricsNV(metricQueryMask: GLbitfield, numPaths: GLsizei, pathNameType: GLenum, paths: void[], pathBase: GLuint, stride: GLsizei, metrics: GLfloat[]) -> None"""
 
 def glGetPathParameterfvNV(path: int, pname: int, value: FloatArray | None = None) -> FloatArrayResult:
-    """glGetPathParameterfvNV(path, pname) -> value"""
+    """glGetPathParameterfvNV(path: GLuint, pname: GLenum) -> value: GLfloat[]"""
 
 def glGetPathParameterivNV(path: int, pname: int, value: IntArray | None = None) -> IntArrayResult:
-    """glGetPathParameterivNV(path, pname) -> value"""
+    """glGetPathParameterivNV(path: GLuint, pname: GLenum) -> value: GLint[]"""
 
 def glGetPathSpacingNV(pathListMode: int, numPaths: int, pathNameType: int, paths: AnyArray, pathBase: int, advanceScale: float, kerningScale: float, transformType: int, returnedSpacing: FloatArray) -> None:
-    """glGetPathSpacingNV(pathListMode, numPaths, pathNameType, paths, pathBase, advanceScale, kerningScale, transformType, returnedSpacing) -> None"""
+    """glGetPathSpacingNV(pathListMode: GLenum, numPaths: GLsizei, pathNameType: GLenum, paths: void[], pathBase: GLuint, advanceScale: GLfloat, kerningScale: GLfloat, transformType: GLenum, returnedSpacing: GLfloat[]) -> None"""
 
 def glGetPathTexGenfvNV(texCoordSet: int, pname: int, value: FloatArray | None = None) -> FloatArrayResult:
-    """glGetPathTexGenfvNV(texCoordSet, pname) -> value"""
+    """glGetPathTexGenfvNV(texCoordSet: GLenum, pname: GLenum) -> value: GLfloat[]"""
 
 def glGetPathTexGenivNV(texCoordSet: int, pname: int, value: IntArray | None = None) -> IntArrayResult:
-    """glGetPathTexGenivNV(texCoordSet, pname) -> value"""
+    """glGetPathTexGenivNV(texCoordSet: GLenum, pname: GLenum) -> value: GLint[]"""
 
 def glGetPerfCounterInfoINTEL(queryId: int, counterId: int, counterNameLength: int, counterName: ByteArray, counterDescLength: int, counterDesc: ByteArray, counterOffset: UIntArray, counterDataSize: UIntArray, counterTypeEnum: UIntArray, counterDataTypeEnum: UIntArray, rawCounterMaxValue: UInt64Array) -> None:
-    """glGetPerfCounterInfoINTEL(queryId, counterId, counterNameLength, counterName, counterDescLength, counterDesc, counterOffset, counterDataSize, counterTypeEnum, counterDataTypeEnum, rawCounterMaxValue) -> None"""
+    """glGetPerfCounterInfoINTEL(queryId: GLuint, counterId: GLuint, counterNameLength: GLuint, counterName: GLchar[], counterDescLength: GLuint, counterDesc: GLchar[], counterOffset: GLuint[], counterDataSize: GLuint[], counterTypeEnum: GLuint[], counterDataTypeEnum: GLuint[], rawCounterMaxValue: GLuint64[]) -> None"""
 
 def glGetPerfMonitorCounterDataAMD(monitor: int, pname: int, dataSize: int, data: UIntArray | None = None, bytesWritten: IntArray | None = None) -> tuple[IntArrayResult, UIntArrayResult]:
-    """glGetPerfMonitorCounterDataAMD(monitor, pname, dataSize) -> bytesWritten, data"""
+    """glGetPerfMonitorCounterDataAMD(monitor: GLuint, pname: GLenum, dataSize: GLsizei) -> bytesWritten: GLint[], data: GLuint[]"""
 
 def glGetPerfMonitorCounterInfoAMD(group: int, counter: int, pname: int, data: AnyArray | None = None) -> AnyArrayResult:
-    """glGetPerfMonitorCounterInfoAMD(group, counter, pname) -> data"""
+    """glGetPerfMonitorCounterInfoAMD(group: GLuint, counter: GLuint, pname: GLenum) -> data: void[]"""
 
 def glGetPerfMonitorCounterStringAMD(group: int, counter: int, bufSize: int, length: IntArray | None = None, counterString: ByteArray | None = None) -> tuple[ByteArrayResult, IntArrayResult]:
-    """glGetPerfMonitorCounterStringAMD(group, counter, bufSize) -> counterString, length"""
+    """glGetPerfMonitorCounterStringAMD(group: GLuint, counter: GLuint, bufSize: GLsizei) -> counterString: GLchar[], length: GLsizei[]"""
 
 def glGetPerfMonitorCountersAMD(group: int, numCounters: IntArray, maxActiveCounters: IntArray, counterSize: int, counters: UIntArray | None = None) -> tuple[UIntArrayResult, IntArrayResult, IntArrayResult]:
-    """glGetPerfMonitorCountersAMD(group, counterSize) -> counters, maxActiveCounters, numCounters"""
+    """glGetPerfMonitorCountersAMD(group: GLuint, counterSize: GLsizei) -> counters: GLuint[], maxActiveCounters: GLint[], numCounters: GLint[]"""
 
 def glGetPerfMonitorGroupStringAMD(group: int, bufSize: int, length: IntArray | None = None, groupString: ByteArray | None = None) -> tuple[ByteArrayResult, IntArrayResult]:
-    """glGetPerfMonitorGroupStringAMD(group, bufSize) -> groupString, length"""
+    """glGetPerfMonitorGroupStringAMD(group: GLuint, bufSize: GLsizei) -> groupString: GLchar[], length: GLsizei[]"""
 
 def glGetPerfMonitorGroupsAMD(numGroups: IntArray, groupsSize: int, groups: UIntArray | None = None) -> tuple[UIntArrayResult, IntArrayResult]:
-    """glGetPerfMonitorGroupsAMD(groupsSize) -> groups, numGroups"""
+    """glGetPerfMonitorGroupsAMD(groupsSize: GLsizei) -> groups: GLuint[], numGroups: GLint[]"""
 
 def glGetPerfQueryDataINTEL(queryHandle: int, flags: int, dataSize: int, data: AnyArray, bytesWritten: UIntArray) -> None:
-    """glGetPerfQueryDataINTEL(queryHandle, flags, dataSize, data, bytesWritten) -> None"""
+    """glGetPerfQueryDataINTEL(queryHandle: GLuint, flags: GLuint, dataSize: GLsizei, data: void[], bytesWritten: GLuint[]) -> None"""
 
 def glGetPerfQueryIdByNameINTEL(queryName: ByteArray, queryId: UIntArray) -> None:
-    """glGetPerfQueryIdByNameINTEL(queryName, queryId) -> None"""
+    """glGetPerfQueryIdByNameINTEL(queryName: GLchar[], queryId: GLuint[]) -> None"""
 
 def glGetPerfQueryInfoINTEL(queryId: int, queryNameLength: int, queryName: ByteArray, dataSize: UIntArray, noCounters: UIntArray, noInstances: UIntArray, capsMask: UIntArray) -> None:
-    """glGetPerfQueryInfoINTEL(queryId, queryNameLength, queryName, dataSize, noCounters, noInstances, capsMask) -> None"""
+    """glGetPerfQueryInfoINTEL(queryId: GLuint, queryNameLength: GLuint, queryName: GLchar[], dataSize: GLuint[], noCounters: GLuint[], noInstances: GLuint[], capsMask: GLuint[]) -> None"""
 
 def glGetPointerv(pname: int, params: AnyArray | None = None) -> AnyArrayResult:
-    """glGetPointerv(pname) -> params"""
+    """glGetPointerv(pname: GLenum) -> params: void[][]"""
 
 def glGetPointervKHR(pname: int, params: AnyArray) -> None:
-    """glGetPointervKHR(pname, params) -> None"""
+    """glGetPointervKHR(pname: GLenum, params: void[][]) -> None"""
 
 def glGetProgramBinaryOES(program: int, bufSize: int, length: IntArray, binaryFormat: UIntArray, binary: AnyArray) -> None:
-    """glGetProgramBinaryOES(program, bufSize, length, binaryFormat, binary) -> None"""
+    """glGetProgramBinaryOES(program: GLuint, bufSize: GLsizei, length: GLsizei[], binaryFormat: GLuint[], binary: void[]) -> None"""
 
 def glGetProgramInfoLog(program: int, bufSize: int, length: IntArray | None = None, infoLog: ByteArray | None = None) -> tuple[ByteArrayResult, IntArrayResult]:
-    """glGetProgramInfoLog(program, bufSize) -> infoLog, length"""
+    """glGetProgramInfoLog(program: GLuint, bufSize: GLsizei) -> infoLog: GLchar[], length: GLsizei[]"""
 
 def glGetProgramPipelineInfoLogEXT(pipeline: int, bufSize: int, length: IntArray, infoLog: ByteArray) -> None:
-    """glGetProgramPipelineInfoLogEXT(pipeline, bufSize, length, infoLog) -> None"""
+    """glGetProgramPipelineInfoLogEXT(pipeline: GLuint, bufSize: GLsizei, length: GLsizei[], infoLog: GLchar[]) -> None"""
 
 def glGetProgramPipelineivEXT(pipeline: int, pname: int, params: IntArray) -> None:
-    """glGetProgramPipelineivEXT(pipeline, pname, params) -> None"""
+    """glGetProgramPipelineivEXT(pipeline: GLuint, pname: GLenum, params: GLint[]) -> None"""
 
 def glGetProgramResourceLocationIndexEXT(program: int, programInterface: int, name: ByteArray) -> int:
-    """glGetProgramResourceLocationIndexEXT(program, programInterface, name) -> GLint"""
+    """glGetProgramResourceLocationIndexEXT(program: GLuint, programInterface: GLenum, name: GLchar[]) -> GLint"""
 
 def glGetProgramResourcefvNV(program: int, programInterface: int, index: int, propCount: int, props: UIntArray, count: int, length: IntArray, params: FloatArray) -> None:
-    """glGetProgramResourcefvNV(program, programInterface, index, propCount, props, count, length, params) -> None"""
+    """glGetProgramResourcefvNV(program: GLuint, programInterface: GLenum, index: GLuint, propCount: GLsizei, props: GLuint[], count: GLsizei, length: GLsizei[], params: GLfloat[]) -> None"""
 
 def glGetProgramiv(program: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetProgramiv(program, pname) -> params"""
+    """glGetProgramiv(program: GLuint, pname: GLenum) -> params: GLint[]"""
 
 def glGetQueryObjecti64vEXT(id: int, pname: int, params: Int64Array | None = None) -> Int64ArrayResult:
-    """glGetQueryObjecti64vEXT(id, pname) -> params"""
+    """glGetQueryObjecti64vEXT(id: GLuint, pname: GLenum) -> params: GLint64[]"""
 
 def glGetQueryObjectivEXT(id: int, pname: int, params: IntArray) -> None:
-    """glGetQueryObjectivEXT(id, pname, params) -> None"""
+    """glGetQueryObjectivEXT(id: GLuint, pname: GLenum, params: GLint[]) -> None"""
 
 def glGetQueryObjectui64vEXT(id: int, pname: int, params: UInt64Array | None = None) -> UInt64ArrayResult:
-    """glGetQueryObjectui64vEXT(id, pname) -> params"""
+    """glGetQueryObjectui64vEXT(id: GLuint, pname: GLenum) -> params: GLuint64[]"""
 
 def glGetQueryObjectuivEXT(id: int, pname: int, params: UIntArray) -> None:
-    """glGetQueryObjectuivEXT(id, pname, params) -> None"""
+    """glGetQueryObjectuivEXT(id: GLuint, pname: GLenum, params: GLuint[]) -> None"""
 
 def glGetQueryivEXT(target: int, pname: int, params: IntArray) -> None:
-    """glGetQueryivEXT(target, pname, params) -> None"""
+    """glGetQueryivEXT(target: GLenum, pname: GLenum, params: GLint[]) -> None"""
 
 def glGetRenderbufferParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetRenderbufferParameteriv(target, pname) -> params"""
+    """glGetRenderbufferParameteriv(target: GLenum, pname: GLenum) -> params: GLint[]"""
 
 def glGetSamplerParameterIiv(sampler: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetSamplerParameterIiv(sampler, pname) -> params"""
+    """glGetSamplerParameterIiv(sampler: GLuint, pname: GLenum) -> params: GLint[]"""
 
 def glGetSamplerParameterIivEXT(sampler: int, pname: int, params: IntArray) -> None:
-    """glGetSamplerParameterIivEXT(sampler, pname, params) -> None"""
+    """glGetSamplerParameterIivEXT(sampler: GLuint, pname: GLenum, params: GLint[]) -> None"""
 
 def glGetSamplerParameterIivOES(sampler: int, pname: int, params: IntArray) -> None:
-    """glGetSamplerParameterIivOES(sampler, pname, params) -> None"""
+    """glGetSamplerParameterIivOES(sampler: GLuint, pname: GLenum, params: GLint[]) -> None"""
 
 def glGetSamplerParameterIuiv(sampler: int, pname: int, params: UIntArray | None = None) -> UIntArrayResult:
-    """glGetSamplerParameterIuiv(sampler, pname) -> params"""
+    """glGetSamplerParameterIuiv(sampler: GLuint, pname: GLenum) -> params: GLuint[]"""
 
 def glGetSamplerParameterIuivEXT(sampler: int, pname: int, params: UIntArray) -> None:
-    """glGetSamplerParameterIuivEXT(sampler, pname, params) -> None"""
+    """glGetSamplerParameterIuivEXT(sampler: GLuint, pname: GLenum, params: GLuint[]) -> None"""
 
 def glGetSamplerParameterIuivOES(sampler: int, pname: int, params: UIntArray) -> None:
-    """glGetSamplerParameterIuivOES(sampler, pname, params) -> None"""
+    """glGetSamplerParameterIuivOES(sampler: GLuint, pname: GLenum, params: GLuint[]) -> None"""
 
 def glGetSamplerParameterfv(sampler: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
-    """glGetSamplerParameterfv(sampler, pname) -> params"""
+    """glGetSamplerParameterfv(sampler: GLuint, pname: GLenum) -> params: GLfloat[]"""
 
 def glGetSamplerParameteriv(sampler: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetSamplerParameteriv(sampler, pname) -> params"""
+    """glGetSamplerParameteriv(sampler: GLuint, pname: GLenum) -> params: GLint[]"""
 
 def glGetSemaphoreParameterivNV(semaphore: int, pname: int, params: IntArray) -> None:
-    """glGetSemaphoreParameterivNV(semaphore, pname, params) -> None"""
+    """glGetSemaphoreParameterivNV(semaphore: GLuint, pname: GLenum, params: GLint[]) -> None"""
 
 def glGetSemaphoreParameterui64vEXT(semaphore: int, pname: int, params: UInt64Array) -> None:
-    """glGetSemaphoreParameterui64vEXT(semaphore, pname, params) -> None"""
+    """glGetSemaphoreParameterui64vEXT(semaphore: GLuint, pname: GLenum, params: GLuint64[]) -> None"""
 
 def glGetShaderInfoLog(shader: int, bufSize: int, length: IntArray | None = None, infoLog: ByteArray | None = None) -> tuple[ByteArrayResult, IntArrayResult]:
-    """glGetShaderInfoLog(shader, bufSize) -> infoLog, length"""
+    """glGetShaderInfoLog(shader: GLuint, bufSize: GLsizei) -> infoLog: GLchar[], length: GLsizei[]"""
 
 def glGetShaderPrecisionFormat(shadertype: int, precisiontype: int, range: IntArray | None = None, precision: IntArray | None = None) -> tuple[IntArrayResult, IntArrayResult]:
-    """glGetShaderPrecisionFormat(shadertype, precisiontype) -> precision, range"""
+    """glGetShaderPrecisionFormat(shadertype: GLenum, precisiontype: GLenum) -> precision: GLint[], range: GLint[]"""
 
 def glGetShaderSource(shader: int, bufSize: int, length: IntArray | None = None, source: ByteArray | None = None) -> tuple[IntArrayResult, ByteArrayResult]:
-    """glGetShaderSource(shader, bufSize) -> length, source"""
+    """glGetShaderSource(shader: GLuint, bufSize: GLsizei) -> length: GLsizei[], source: GLchar[]"""
 
 def glGetShaderiv(shader: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetShaderiv(shader, pname) -> params"""
+    """glGetShaderiv(shader: GLuint, pname: GLenum) -> params: GLint[]"""
 
 def glGetShadingRateImagePaletteNV(viewport: int, entry: int, rate: UIntArray) -> None:
-    """glGetShadingRateImagePaletteNV(viewport, entry, rate) -> None"""
+    """glGetShadingRateImagePaletteNV(viewport: GLuint, entry: GLuint, rate: GLuint[]) -> None"""
 
 def glGetShadingRateSampleLocationivNV(rate: int, samples: int, index: int, location: IntArray) -> None:
-    """glGetShadingRateSampleLocationivNV(rate, samples, index, location) -> None"""
+    """glGetShadingRateSampleLocationivNV(rate: GLenum, samples: GLuint, index: GLuint, location: GLint[]) -> None"""
 
 def glGetString(name: int) -> bytes:
-    """glGetString(name) -> GLubyte"""
+    """glGetString(name: GLenum) -> GLubyte"""
 
 def glGetSyncivAPPLE(sync: Any, pname: int, count: int, length: IntArray, values: IntArray) -> None:
-    """glGetSyncivAPPLE(sync, pname, count, length, values) -> None"""
+    """glGetSyncivAPPLE(sync: GLsync, pname: GLenum, count: GLsizei, length: GLsizei[], values: GLint[]) -> None"""
 
 def glGetTexParameterIiv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetTexParameterIiv(target, pname) -> params"""
+    """glGetTexParameterIiv(target: GLenum, pname: GLenum) -> params: GLint[]"""
 
 def glGetTexParameterIivEXT(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetTexParameterIivEXT(target, pname) -> params"""
+    """glGetTexParameterIivEXT(target: GLenum, pname: GLenum) -> params: GLint[]"""
 
 def glGetTexParameterIivOES(target: int, pname: int, params: IntArray) -> None:
-    """glGetTexParameterIivOES(target, pname, params) -> None"""
+    """glGetTexParameterIivOES(target: GLenum, pname: GLenum, params: GLint[]) -> None"""
 
 def glGetTexParameterIuiv(target: int, pname: int, params: UIntArray | None = None) -> UIntArrayResult:
-    """glGetTexParameterIuiv(target, pname) -> params"""
+    """glGetTexParameterIuiv(target: GLenum, pname: GLenum) -> params: GLuint[]"""
 
 def glGetTexParameterIuivEXT(target: int, pname: int, params: UIntArray | None = None) -> UIntArrayResult:
-    """glGetTexParameterIuivEXT(target, pname) -> params"""
+    """glGetTexParameterIuivEXT(target: GLenum, pname: GLenum) -> params: GLuint[]"""
 
 def glGetTexParameterIuivOES(target: int, pname: int, params: UIntArray) -> None:
-    """glGetTexParameterIuivOES(target, pname, params) -> None"""
+    """glGetTexParameterIuivOES(target: GLenum, pname: GLenum, params: GLuint[]) -> None"""
 
 def glGetTexParameterfv(target: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
-    """glGetTexParameterfv(target, pname) -> params"""
+    """glGetTexParameterfv(target: GLenum, pname: GLenum) -> params: GLfloat[]"""
 
 def glGetTexParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetTexParameteriv(target, pname) -> params"""
+    """glGetTexParameteriv(target: GLenum, pname: GLenum) -> params: GLint[]"""
 
 def glGetTextureHandleIMG(texture: int) -> int:
-    """glGetTextureHandleIMG(texture) -> GLuint64"""
+    """glGetTextureHandleIMG(texture: GLuint) -> GLuint64"""
 
 def glGetTextureHandleNV(texture: int) -> int:
-    """glGetTextureHandleNV(texture) -> GLuint64"""
+    """glGetTextureHandleNV(texture: GLuint) -> GLuint64"""
 
 def glGetTextureSamplerHandleIMG(texture: int, sampler: int) -> int:
-    """glGetTextureSamplerHandleIMG(texture, sampler) -> GLuint64"""
+    """glGetTextureSamplerHandleIMG(texture: GLuint, sampler: GLuint) -> GLuint64"""
 
 def glGetTextureSamplerHandleNV(texture: int, sampler: int) -> int:
-    """glGetTextureSamplerHandleNV(texture, sampler) -> GLuint64"""
+    """glGetTextureSamplerHandleNV(texture: GLuint, sampler: GLuint) -> GLuint64"""
 
 def glGetTranslatedShaderSourceANGLE(shader: int, bufSize: int, length: IntArray, source: ByteArray) -> None:
-    """glGetTranslatedShaderSourceANGLE(shader, bufSize, length, source) -> None"""
+    """glGetTranslatedShaderSourceANGLE(shader: GLuint, bufSize: GLsizei, length: GLsizei[], source: GLchar[]) -> None"""
 
 def glGetUniformLocation(program: int, name: ByteArray) -> int:
-    """glGetUniformLocation(program, name) -> GLint"""
+    """glGetUniformLocation(program: GLuint, name: GLchar[]) -> GLint"""
 
 def glGetUniformfv(program: int, location: int, params: FloatArray) -> None:
-    """glGetUniformfv(program, location, params) -> None"""
+    """glGetUniformfv(program: GLuint, location: GLint, params: GLfloat[]) -> None"""
 
 def glGetUniformi64vNV(program: int, location: int, params: Int64Array) -> None:
-    """glGetUniformi64vNV(program, location, params) -> None"""
+    """glGetUniformi64vNV(program: GLuint, location: GLint, params: GLint64[]) -> None"""
 
 def glGetUniformiv(program: int, location: int, params: IntArray) -> None:
-    """glGetUniformiv(program, location, params) -> None"""
+    """glGetUniformiv(program: GLuint, location: GLint, params: GLint[]) -> None"""
 
 def glGetUnsignedBytei_vEXT(target: int, index: int, data: UByteArray) -> None:
-    """glGetUnsignedBytei_vEXT(target, index, data) -> None"""
+    """glGetUnsignedBytei_vEXT(target: GLenum, index: GLuint, data: GLubyte[]) -> None"""
 
 def glGetUnsignedBytevEXT(pname: int, data: UByteArray) -> None:
-    """glGetUnsignedBytevEXT(pname, data) -> None"""
+    """glGetUnsignedBytevEXT(pname: GLenum, data: GLubyte[]) -> None"""
 
 def glGetVertexAttribPointerv(index: int, pname: int, pointer: AnyArray | None = None) -> AnyArrayResult:
-    """glGetVertexAttribPointerv(index, pname) -> pointer"""
+    """glGetVertexAttribPointerv(index: GLuint, pname: GLenum) -> pointer: void[][]"""
 
 def glGetVertexAttribfv(index: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
-    """glGetVertexAttribfv(index, pname) -> params"""
+    """glGetVertexAttribfv(index: GLuint, pname: GLenum) -> params: GLfloat[]"""
 
 def glGetVertexAttribiv(index: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetVertexAttribiv(index, pname) -> params"""
+    """glGetVertexAttribiv(index: GLuint, pname: GLenum) -> params: GLint[]"""
 
 def glGetVkProcAddrNV(name: ByteArray) -> Any:
-    """glGetVkProcAddrNV(name) -> GLVULKANPROCNV"""
+    """glGetVkProcAddrNV(name: GLchar[]) -> GLVULKANPROCNV"""
 
 def glGetnUniformfv(program: int, location: int, bufSize: int, params: FloatArray) -> None:
-    """glGetnUniformfv(program, location, bufSize, params) -> None"""
+    """glGetnUniformfv(program: GLuint, location: GLint, bufSize: GLsizei, params: GLfloat[]) -> None"""
 
 def glGetnUniformfvEXT(program: int, location: int, bufSize: int, params: FloatArray) -> None:
-    """glGetnUniformfvEXT(program, location, bufSize, params) -> None"""
+    """glGetnUniformfvEXT(program: GLuint, location: GLint, bufSize: GLsizei, params: GLfloat[]) -> None"""
 
 def glGetnUniformfvKHR(program: int, location: int, bufSize: int, params: FloatArray) -> None:
-    """glGetnUniformfvKHR(program, location, bufSize, params) -> None"""
+    """glGetnUniformfvKHR(program: GLuint, location: GLint, bufSize: GLsizei, params: GLfloat[]) -> None"""
 
 def glGetnUniformiv(program: int, location: int, bufSize: int, params: IntArray) -> None:
-    """glGetnUniformiv(program, location, bufSize, params) -> None"""
+    """glGetnUniformiv(program: GLuint, location: GLint, bufSize: GLsizei, params: GLint[]) -> None"""
 
 def glGetnUniformivEXT(program: int, location: int, bufSize: int, params: IntArray) -> None:
-    """glGetnUniformivEXT(program, location, bufSize, params) -> None"""
+    """glGetnUniformivEXT(program: GLuint, location: GLint, bufSize: GLsizei, params: GLint[]) -> None"""
 
 def glGetnUniformivKHR(program: int, location: int, bufSize: int, params: IntArray) -> None:
-    """glGetnUniformivKHR(program, location, bufSize, params) -> None"""
+    """glGetnUniformivKHR(program: GLuint, location: GLint, bufSize: GLsizei, params: GLint[]) -> None"""
 
 def glGetnUniformuiv(program: int, location: int, bufSize: int, params: UIntArray) -> None:
-    """glGetnUniformuiv(program, location, bufSize, params) -> None"""
+    """glGetnUniformuiv(program: GLuint, location: GLint, bufSize: GLsizei, params: GLuint[]) -> None"""
 
 def glGetnUniformuivKHR(program: int, location: int, bufSize: int, params: UIntArray) -> None:
-    """glGetnUniformuivKHR(program, location, bufSize, params) -> None"""
+    """glGetnUniformuivKHR(program: GLuint, location: GLint, bufSize: GLsizei, params: GLuint[]) -> None"""
 
 def glHint(target: int, mode: int) -> None:
-    """glHint(target, mode) -> None"""
+    """glHint(target: GLenum, mode: GLenum) -> None"""
 
 def glImportMemoryFdEXT(memory: int, size: int, handleType: int, fd: int) -> None:
-    """glImportMemoryFdEXT(memory, size, handleType, fd) -> None"""
+    """glImportMemoryFdEXT(memory: GLuint, size: GLuint64, handleType: GLenum, fd: GLint) -> None"""
 
 def glImportMemoryWin32HandleEXT(memory: int, size: int, handleType: int, handle: AnyArray) -> None:
-    """glImportMemoryWin32HandleEXT(memory, size, handleType, handle) -> None"""
+    """glImportMemoryWin32HandleEXT(memory: GLuint, size: GLuint64, handleType: GLenum, handle: void[]) -> None"""
 
 def glImportMemoryWin32NameEXT(memory: int, size: int, handleType: int, name: AnyArray) -> None:
-    """glImportMemoryWin32NameEXT(memory, size, handleType, name) -> None"""
+    """glImportMemoryWin32NameEXT(memory: GLuint, size: GLuint64, handleType: GLenum, name: void[]) -> None"""
 
 def glImportSemaphoreFdEXT(semaphore: int, handleType: int, fd: int) -> None:
-    """glImportSemaphoreFdEXT(semaphore, handleType, fd) -> None"""
+    """glImportSemaphoreFdEXT(semaphore: GLuint, handleType: GLenum, fd: GLint) -> None"""
 
 def glImportSemaphoreWin32HandleEXT(semaphore: int, handleType: int, handle: AnyArray) -> None:
-    """glImportSemaphoreWin32HandleEXT(semaphore, handleType, handle) -> None"""
+    """glImportSemaphoreWin32HandleEXT(semaphore: GLuint, handleType: GLenum, handle: void[]) -> None"""
 
 def glImportSemaphoreWin32NameEXT(semaphore: int, handleType: int, name: AnyArray) -> None:
-    """glImportSemaphoreWin32NameEXT(semaphore, handleType, name) -> None"""
+    """glImportSemaphoreWin32NameEXT(semaphore: GLuint, handleType: GLenum, name: void[]) -> None"""
 
 def glInsertEventMarkerEXT(length: int, marker: ByteArray) -> None:
-    """glInsertEventMarkerEXT(length, marker) -> None"""
+    """glInsertEventMarkerEXT(length: GLsizei, marker: GLchar[]) -> None"""
 
 def glInterpolatePathsNV(resultPath: int, pathA: int, pathB: int, weight: float) -> None:
-    """glInterpolatePathsNV(resultPath, pathA, pathB, weight) -> None"""
+    """glInterpolatePathsNV(resultPath: GLuint, pathA: GLuint, pathB: GLuint, weight: GLfloat) -> None"""
 
 def glIsBuffer(buffer: int) -> int:
-    """glIsBuffer(buffer) -> GLboolean"""
+    """glIsBuffer(buffer: GLuint) -> GLboolean"""
 
 def glIsEnabled(cap: int) -> int:
-    """glIsEnabled(cap) -> GLboolean"""
+    """glIsEnabled(cap: GLenum) -> GLboolean"""
 
 def glIsEnabledi(target: int, index: int) -> int:
-    """glIsEnabledi(target, index) -> GLboolean"""
+    """glIsEnabledi(target: GLenum, index: GLuint) -> GLboolean"""
 
 def glIsEnablediEXT(target: int, index: int) -> int:
-    """glIsEnablediEXT(target, index) -> GLboolean"""
+    """glIsEnablediEXT(target: GLenum, index: GLuint) -> GLboolean"""
 
 def glIsEnablediNV(target: int, index: int) -> int:
-    """glIsEnablediNV(target, index) -> GLboolean"""
+    """glIsEnablediNV(target: GLenum, index: GLuint) -> GLboolean"""
 
 def glIsEnablediOES(target: int, index: int) -> int:
-    """glIsEnablediOES(target, index) -> GLboolean"""
+    """glIsEnablediOES(target: GLenum, index: GLuint) -> GLboolean"""
 
 def glIsFenceNV(fence: int) -> int:
-    """glIsFenceNV(fence) -> GLboolean"""
+    """glIsFenceNV(fence: GLuint) -> GLboolean"""
 
 def glIsFramebuffer(framebuffer: int) -> int:
-    """glIsFramebuffer(framebuffer) -> GLboolean"""
+    """glIsFramebuffer(framebuffer: GLuint) -> GLboolean"""
 
 def glIsImageHandleResidentNV(handle: int) -> int:
-    """glIsImageHandleResidentNV(handle) -> GLboolean"""
+    """glIsImageHandleResidentNV(handle: GLuint64) -> GLboolean"""
 
 def glIsMemoryObjectEXT(memoryObject: int) -> int:
-    """glIsMemoryObjectEXT(memoryObject) -> GLboolean"""
+    """glIsMemoryObjectEXT(memoryObject: GLuint) -> GLboolean"""
 
 def glIsPathNV(path: int) -> int:
-    """glIsPathNV(path) -> GLboolean"""
+    """glIsPathNV(path: GLuint) -> GLboolean"""
 
 def glIsPointInFillPathNV(path: int, mask: int, x: float, y: float) -> int:
-    """glIsPointInFillPathNV(path, mask, x, y) -> GLboolean"""
+    """glIsPointInFillPathNV(path: GLuint, mask: GLuint, x: GLfloat, y: GLfloat) -> GLboolean"""
 
 def glIsPointInStrokePathNV(path: int, x: float, y: float) -> int:
-    """glIsPointInStrokePathNV(path, x, y) -> GLboolean"""
+    """glIsPointInStrokePathNV(path: GLuint, x: GLfloat, y: GLfloat) -> GLboolean"""
 
 def glIsProgram(program: int) -> int:
-    """glIsProgram(program) -> GLboolean"""
+    """glIsProgram(program: GLuint) -> GLboolean"""
 
 def glIsProgramPipelineEXT(pipeline: int) -> int:
-    """glIsProgramPipelineEXT(pipeline) -> GLboolean"""
+    """glIsProgramPipelineEXT(pipeline: GLuint) -> GLboolean"""
 
 def glIsQueryEXT(id: int) -> int:
-    """glIsQueryEXT(id) -> GLboolean"""
+    """glIsQueryEXT(id: GLuint) -> GLboolean"""
 
 def glIsRenderbuffer(renderbuffer: int) -> int:
-    """glIsRenderbuffer(renderbuffer) -> GLboolean"""
+    """glIsRenderbuffer(renderbuffer: GLuint) -> GLboolean"""
 
 def glIsSampler(sampler: int) -> int:
-    """glIsSampler(sampler) -> GLboolean"""
+    """glIsSampler(sampler: GLuint) -> GLboolean"""
 
 def glIsSemaphoreEXT(semaphore: int) -> int:
-    """glIsSemaphoreEXT(semaphore) -> GLboolean"""
+    """glIsSemaphoreEXT(semaphore: GLuint) -> GLboolean"""
 
 def glIsShader(shader: int) -> int:
-    """glIsShader(shader) -> GLboolean"""
+    """glIsShader(shader: GLuint) -> GLboolean"""
 
 def glIsSyncAPPLE(sync: Any) -> int:
-    """glIsSyncAPPLE(sync) -> GLboolean"""
+    """glIsSyncAPPLE(sync: GLsync) -> GLboolean"""
 
 def glIsTexture(texture: int) -> int:
-    """glIsTexture(texture) -> GLboolean"""
+    """glIsTexture(texture: GLuint) -> GLboolean"""
 
 def glIsTextureHandleResidentNV(handle: int) -> int:
-    """glIsTextureHandleResidentNV(handle) -> GLboolean"""
+    """glIsTextureHandleResidentNV(handle: GLuint64) -> GLboolean"""
 
 def glIsVertexArrayOES(array: int) -> int:
-    """glIsVertexArrayOES(array) -> GLboolean"""
+    """glIsVertexArrayOES(array: GLuint) -> GLboolean"""
 
 def glLabelObjectEXT(type: int, object: int, length: int, label: ByteArray) -> None:
-    """glLabelObjectEXT(type, object, length, label) -> None"""
+    """glLabelObjectEXT(type: GLenum, object: GLuint, length: GLsizei, label: GLchar[]) -> None"""
 
 def glLineWidth(width: float) -> None:
-    """glLineWidth(width) -> None"""
+    """glLineWidth(width: GLfloat) -> None"""
 
 def glLinkProgram(program: int) -> None:
-    """glLinkProgram(program) -> None"""
+    """glLinkProgram(program: GLuint) -> None"""
 
 def glMakeImageHandleNonResidentNV(handle: int) -> None:
-    """glMakeImageHandleNonResidentNV(handle) -> None"""
+    """glMakeImageHandleNonResidentNV(handle: GLuint64) -> None"""
 
 def glMakeImageHandleResidentNV(handle: int, access: int) -> None:
-    """glMakeImageHandleResidentNV(handle, access) -> None"""
+    """glMakeImageHandleResidentNV(handle: GLuint64, access: GLenum) -> None"""
 
 def glMakeTextureHandleNonResidentNV(handle: int) -> None:
-    """glMakeTextureHandleNonResidentNV(handle) -> None"""
+    """glMakeTextureHandleNonResidentNV(handle: GLuint64) -> None"""
 
 def glMakeTextureHandleResidentNV(handle: int) -> None:
-    """glMakeTextureHandleResidentNV(handle) -> None"""
+    """glMakeTextureHandleResidentNV(handle: GLuint64) -> None"""
 
 def glMapBufferOES(target: int, access: int) -> int | None:
-    """glMapBufferOES(target, access) -> void"""
+    """glMapBufferOES(target: GLenum, access: GLenum) -> void"""
 
 def glMapBufferRangeEXT(target: int, offset: int, length: int, access: int) -> int | None:
-    """glMapBufferRangeEXT(target, offset, length, access) -> void"""
+    """glMapBufferRangeEXT(target: GLenum, offset: GLintptr, length: GLsizeiptr, access: GLbitfield) -> void"""
 
 def glMatrixFrustumEXT(mode: int, left: float, right: float, bottom: float, top: float, zNear: float, zFar: float) -> None:
-    """glMatrixFrustumEXT(mode, left, right, bottom, top, zNear, zFar) -> None"""
+    """glMatrixFrustumEXT(mode: GLenum, left: GLdouble, right: GLdouble, bottom: GLdouble, top: GLdouble, zNear: GLdouble, zFar: GLdouble) -> None"""
 
 def glMatrixLoad3x2fNV(matrixMode: int, m: FloatArray) -> None:
-    """glMatrixLoad3x2fNV(matrixMode, m) -> None"""
+    """glMatrixLoad3x2fNV(matrixMode: GLenum, m: GLfloat[]) -> None"""
 
 def glMatrixLoad3x3fNV(matrixMode: int, m: FloatArray) -> None:
-    """glMatrixLoad3x3fNV(matrixMode, m) -> None"""
+    """glMatrixLoad3x3fNV(matrixMode: GLenum, m: GLfloat[]) -> None"""
 
 def glMatrixLoadIdentityEXT(mode: int) -> None:
-    """glMatrixLoadIdentityEXT(mode) -> None"""
+    """glMatrixLoadIdentityEXT(mode: GLenum) -> None"""
 
 def glMatrixLoadTranspose3x3fNV(matrixMode: int, m: FloatArray) -> None:
-    """glMatrixLoadTranspose3x3fNV(matrixMode, m) -> None"""
+    """glMatrixLoadTranspose3x3fNV(matrixMode: GLenum, m: GLfloat[]) -> None"""
 
 def glMatrixLoadTransposedEXT(mode: int, m: DoubleArray) -> None:
-    """glMatrixLoadTransposedEXT(mode, m) -> None"""
+    """glMatrixLoadTransposedEXT(mode: GLenum, m: GLdouble[]) -> None"""
 
 def glMatrixLoadTransposefEXT(mode: int, m: FloatArray) -> None:
-    """glMatrixLoadTransposefEXT(mode, m) -> None"""
+    """glMatrixLoadTransposefEXT(mode: GLenum, m: GLfloat[]) -> None"""
 
 def glMatrixLoaddEXT(mode: int, m: DoubleArray) -> None:
-    """glMatrixLoaddEXT(mode, m) -> None"""
+    """glMatrixLoaddEXT(mode: GLenum, m: GLdouble[]) -> None"""
 
 def glMatrixLoadfEXT(mode: int, m: FloatArray) -> None:
-    """glMatrixLoadfEXT(mode, m) -> None"""
+    """glMatrixLoadfEXT(mode: GLenum, m: GLfloat[]) -> None"""
 
 def glMatrixMult3x2fNV(matrixMode: int, m: FloatArray) -> None:
-    """glMatrixMult3x2fNV(matrixMode, m) -> None"""
+    """glMatrixMult3x2fNV(matrixMode: GLenum, m: GLfloat[]) -> None"""
 
 def glMatrixMult3x3fNV(matrixMode: int, m: FloatArray) -> None:
-    """glMatrixMult3x3fNV(matrixMode, m) -> None"""
+    """glMatrixMult3x3fNV(matrixMode: GLenum, m: GLfloat[]) -> None"""
 
 def glMatrixMultTranspose3x3fNV(matrixMode: int, m: FloatArray) -> None:
-    """glMatrixMultTranspose3x3fNV(matrixMode, m) -> None"""
+    """glMatrixMultTranspose3x3fNV(matrixMode: GLenum, m: GLfloat[]) -> None"""
 
 def glMatrixMultTransposedEXT(mode: int, m: DoubleArray) -> None:
-    """glMatrixMultTransposedEXT(mode, m) -> None"""
+    """glMatrixMultTransposedEXT(mode: GLenum, m: GLdouble[]) -> None"""
 
 def glMatrixMultTransposefEXT(mode: int, m: FloatArray) -> None:
-    """glMatrixMultTransposefEXT(mode, m) -> None"""
+    """glMatrixMultTransposefEXT(mode: GLenum, m: GLfloat[]) -> None"""
 
 def glMatrixMultdEXT(mode: int, m: DoubleArray) -> None:
-    """glMatrixMultdEXT(mode, m) -> None"""
+    """glMatrixMultdEXT(mode: GLenum, m: GLdouble[]) -> None"""
 
 def glMatrixMultfEXT(mode: int, m: FloatArray) -> None:
-    """glMatrixMultfEXT(mode, m) -> None"""
+    """glMatrixMultfEXT(mode: GLenum, m: GLfloat[]) -> None"""
 
 def glMatrixOrthoEXT(mode: int, left: float, right: float, bottom: float, top: float, zNear: float, zFar: float) -> None:
-    """glMatrixOrthoEXT(mode, left, right, bottom, top, zNear, zFar) -> None"""
+    """glMatrixOrthoEXT(mode: GLenum, left: GLdouble, right: GLdouble, bottom: GLdouble, top: GLdouble, zNear: GLdouble, zFar: GLdouble) -> None"""
 
 def glMatrixPopEXT(mode: int) -> None:
-    """glMatrixPopEXT(mode) -> None"""
+    """glMatrixPopEXT(mode: GLenum) -> None"""
 
 def glMatrixPushEXT(mode: int) -> None:
-    """glMatrixPushEXT(mode) -> None"""
+    """glMatrixPushEXT(mode: GLenum) -> None"""
 
 def glMatrixRotatedEXT(mode: int, angle: float, x: float, y: float, z: float) -> None:
-    """glMatrixRotatedEXT(mode, angle, x, y, z) -> None"""
+    """glMatrixRotatedEXT(mode: GLenum, angle: GLdouble, x: GLdouble, y: GLdouble, z: GLdouble) -> None"""
 
 def glMatrixRotatefEXT(mode: int, angle: float, x: float, y: float, z: float) -> None:
-    """glMatrixRotatefEXT(mode, angle, x, y, z) -> None"""
+    """glMatrixRotatefEXT(mode: GLenum, angle: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) -> None"""
 
 def glMatrixScaledEXT(mode: int, x: float, y: float, z: float) -> None:
-    """glMatrixScaledEXT(mode, x, y, z) -> None"""
+    """glMatrixScaledEXT(mode: GLenum, x: GLdouble, y: GLdouble, z: GLdouble) -> None"""
 
 def glMatrixScalefEXT(mode: int, x: float, y: float, z: float) -> None:
-    """glMatrixScalefEXT(mode, x, y, z) -> None"""
+    """glMatrixScalefEXT(mode: GLenum, x: GLfloat, y: GLfloat, z: GLfloat) -> None"""
 
 def glMatrixTranslatedEXT(mode: int, x: float, y: float, z: float) -> None:
-    """glMatrixTranslatedEXT(mode, x, y, z) -> None"""
+    """glMatrixTranslatedEXT(mode: GLenum, x: GLdouble, y: GLdouble, z: GLdouble) -> None"""
 
 def glMatrixTranslatefEXT(mode: int, x: float, y: float, z: float) -> None:
-    """glMatrixTranslatefEXT(mode, x, y, z) -> None"""
+    """glMatrixTranslatefEXT(mode: GLenum, x: GLfloat, y: GLfloat, z: GLfloat) -> None"""
 
 def glMaxActiveShaderCoresARM(count: int) -> None:
-    """glMaxActiveShaderCoresARM(count) -> None"""
+    """glMaxActiveShaderCoresARM(count: GLuint) -> None"""
 
 def glMaxShaderCompilerThreadsKHR(count: int) -> None:
-    """glMaxShaderCompilerThreadsKHR(count) -> None"""
+    """glMaxShaderCompilerThreadsKHR(count: GLuint) -> None"""
 
 def glMemoryObjectParameterivEXT(memoryObject: int, pname: int, params: IntArray) -> None:
-    """glMemoryObjectParameterivEXT(memoryObject, pname, params) -> None"""
+    """glMemoryObjectParameterivEXT(memoryObject: GLuint, pname: GLenum, params: GLint[]) -> None"""
 
 def glMinSampleShading(value: float) -> None:
-    """glMinSampleShading(value) -> None"""
+    """glMinSampleShading(value: GLfloat) -> None"""
 
 def glMinSampleShadingOES(value: float) -> None:
-    """glMinSampleShadingOES(value) -> None"""
+    """glMinSampleShadingOES(value: GLfloat) -> None"""
 
 def glMultiDrawArraysEXT(mode: int, first: IntArray, count: IntArray, primcount: int) -> None:
-    """glMultiDrawArraysEXT(mode, first, count, primcount) -> None"""
+    """glMultiDrawArraysEXT(mode: GLenum, first: GLint[], count: GLsizei[], primcount: GLsizei) -> None"""
 
 def glMultiDrawArraysIndirectEXT(mode: int, indirect: AnyArray, drawcount: int, stride: int) -> None:
-    """glMultiDrawArraysIndirectEXT(mode, indirect, drawcount, stride) -> None"""
+    """glMultiDrawArraysIndirectEXT(mode: GLenum, indirect: void[], drawcount: GLsizei, stride: GLsizei) -> None"""
 
 def glMultiDrawElementsBaseVertexEXT(mode: int, count: IntArray, type: int, indices: AnyArray, drawcount: int, basevertex: IntArray) -> None:
-    """glMultiDrawElementsBaseVertexEXT(mode, count, type, indices, drawcount, basevertex) -> None"""
+    """glMultiDrawElementsBaseVertexEXT(mode: GLenum, count: GLsizei[], type: GLenum, indices: void[][], drawcount: GLsizei, basevertex: GLint[]) -> None"""
 
 def glMultiDrawElementsEXT(mode: int, count: IntArray, type: int, indices: AnyArray, primcount: int) -> None:
-    """glMultiDrawElementsEXT(mode, count, type, indices, primcount) -> None"""
+    """glMultiDrawElementsEXT(mode: GLenum, count: GLsizei[], type: GLenum, indices: void[][], primcount: GLsizei) -> None"""
 
 def glMultiDrawElementsIndirectEXT(mode: int, type: int, indirect: AnyArray, drawcount: int, stride: int) -> None:
-    """glMultiDrawElementsIndirectEXT(mode, type, indirect, drawcount, stride) -> None"""
+    """glMultiDrawElementsIndirectEXT(mode: GLenum, type: GLenum, indirect: void[], drawcount: GLsizei, stride: GLsizei) -> None"""
 
 def glMultiDrawMeshTasksIndirectCountNV(indirect: int, drawcount: int, maxdrawcount: int, stride: int) -> None:
-    """glMultiDrawMeshTasksIndirectCountNV(indirect, drawcount, maxdrawcount, stride) -> None"""
+    """glMultiDrawMeshTasksIndirectCountNV(indirect: GLintptr, drawcount: GLintptr, maxdrawcount: GLsizei, stride: GLsizei) -> None"""
 
 def glMultiDrawMeshTasksIndirectNV(indirect: int, drawcount: int, stride: int) -> None:
-    """glMultiDrawMeshTasksIndirectNV(indirect, drawcount, stride) -> None"""
+    """glMultiDrawMeshTasksIndirectNV(indirect: GLintptr, drawcount: GLsizei, stride: GLsizei) -> None"""
 
 def glNamedBufferAttachMemoryNV(buffer: int, memory: int, offset: int) -> None:
-    """glNamedBufferAttachMemoryNV(buffer, memory, offset) -> None"""
+    """glNamedBufferAttachMemoryNV(buffer: GLuint, memory: GLuint, offset: GLuint64) -> None"""
 
 def glNamedBufferPageCommitmentMemNV(buffer: int, offset: int, size: int, memory: int, memOffset: int, commit: bool) -> None:
-    """glNamedBufferPageCommitmentMemNV(buffer, offset, size, memory, memOffset, commit) -> None"""
+    """glNamedBufferPageCommitmentMemNV(buffer: GLuint, offset: GLintptr, size: GLsizeiptr, memory: GLuint, memOffset: GLuint64, commit: GLboolean) -> None"""
 
 def glNamedBufferStorageExternalEXT(buffer: int, offset: int, size: int, clientBuffer: Any, flags: int) -> None:
-    """glNamedBufferStorageExternalEXT(buffer, offset, size, clientBuffer, flags) -> None"""
+    """glNamedBufferStorageExternalEXT(buffer: GLuint, offset: GLintptr, size: GLsizeiptr, clientBuffer: GLeglClientBufferEXT, flags: GLbitfield) -> None"""
 
 def glNamedBufferStorageMemEXT(buffer: int, size: int, memory: int, offset: int) -> None:
-    """glNamedBufferStorageMemEXT(buffer, size, memory, offset) -> None"""
+    """glNamedBufferStorageMemEXT(buffer: GLuint, size: GLsizeiptr, memory: GLuint, offset: GLuint64) -> None"""
 
 def glNamedFramebufferSampleLocationsfvNV(framebuffer: int, start: int, count: int, v: FloatArray) -> None:
-    """glNamedFramebufferSampleLocationsfvNV(framebuffer, start, count, v) -> None"""
+    """glNamedFramebufferSampleLocationsfvNV(framebuffer: GLuint, start: GLuint, count: GLsizei, v: GLfloat[]) -> None"""
 
 def glNamedFramebufferTextureMultiviewOVR(framebuffer: int, attachment: int, texture: int, level: int, baseViewIndex: int, numViews: int) -> None:
-    """glNamedFramebufferTextureMultiviewOVR(framebuffer, attachment, texture, level, baseViewIndex, numViews) -> None"""
+    """glNamedFramebufferTextureMultiviewOVR(framebuffer: GLuint, attachment: GLenum, texture: GLuint, level: GLint, baseViewIndex: GLint, numViews: GLsizei) -> None"""
 
 def glNamedRenderbufferStorageMultisampleAdvancedAMD(renderbuffer: int, samples: int, storageSamples: int, internalformat: int, width: int, height: int) -> None:
-    """glNamedRenderbufferStorageMultisampleAdvancedAMD(renderbuffer, samples, storageSamples, internalformat, width, height) -> None"""
+    """glNamedRenderbufferStorageMultisampleAdvancedAMD(renderbuffer: GLuint, samples: GLsizei, storageSamples: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None"""
 
 def glObjectLabel(identifier: int, name: int, length: int, label: ByteArray) -> None:
-    """glObjectLabel(identifier, name, length, label) -> None"""
+    """glObjectLabel(identifier: GLenum, name: GLuint, length: GLsizei, label: GLchar[]) -> None"""
 
 def glObjectLabelKHR(identifier: int, name: int, length: int, label: ByteArray) -> None:
-    """glObjectLabelKHR(identifier, name, length, label) -> None"""
+    """glObjectLabelKHR(identifier: GLenum, name: GLuint, length: GLsizei, label: GLchar[]) -> None"""
 
 def glObjectPtrLabel(ptr: AnyArray, length: int, label: ByteArray) -> None:
-    """glObjectPtrLabel(ptr, length, label) -> None"""
+    """glObjectPtrLabel(ptr: void[], length: GLsizei, label: GLchar[]) -> None"""
 
 def glObjectPtrLabelKHR(ptr: AnyArray, length: int, label: ByteArray) -> None:
-    """glObjectPtrLabelKHR(ptr, length, label) -> None"""
+    """glObjectPtrLabelKHR(ptr: void[], length: GLsizei, label: GLchar[]) -> None"""
 
 def glPatchParameteri(pname: int, value: int) -> None:
-    """glPatchParameteri(pname, value) -> None"""
+    """glPatchParameteri(pname: GLenum, value: GLint) -> None"""
 
 def glPatchParameteriEXT(pname: int, value: int) -> None:
-    """glPatchParameteriEXT(pname, value) -> None"""
+    """glPatchParameteriEXT(pname: GLenum, value: GLint) -> None"""
 
 def glPatchParameteriOES(pname: int, value: int) -> None:
-    """glPatchParameteriOES(pname, value) -> None"""
+    """glPatchParameteriOES(pname: GLenum, value: GLint) -> None"""
 
 def glPathColorGenNV(color: int, genMode: int, colorFormat: int, coeffs: FloatArray) -> None:
-    """glPathColorGenNV(color, genMode, colorFormat, coeffs) -> None"""
+    """glPathColorGenNV(color: GLenum, genMode: GLenum, colorFormat: GLenum, coeffs: GLfloat[]) -> None"""
 
 def glPathCommandsNV(path: int, numCommands: int, commands: UByteArray, numCoords: int, coordType: int, coords: AnyArray) -> None:
-    """glPathCommandsNV(path, numCommands, commands, numCoords, coordType, coords) -> None"""
+    """glPathCommandsNV(path: GLuint, numCommands: GLsizei, commands: GLubyte[], numCoords: GLsizei, coordType: GLenum, coords: void[]) -> None"""
 
 def glPathCoordsNV(path: int, numCoords: int, coordType: int, coords: AnyArray) -> None:
-    """glPathCoordsNV(path, numCoords, coordType, coords) -> None"""
+    """glPathCoordsNV(path: GLuint, numCoords: GLsizei, coordType: GLenum, coords: void[]) -> None"""
 
 def glPathCoverDepthFuncNV(func: int) -> None:
-    """glPathCoverDepthFuncNV(func) -> None"""
+    """glPathCoverDepthFuncNV(func: GLenum) -> None"""
 
 def glPathDashArrayNV(path: int, dashCount: int, dashArray: FloatArray) -> None:
-    """glPathDashArrayNV(path, dashCount, dashArray) -> None"""
+    """glPathDashArrayNV(path: GLuint, dashCount: GLsizei, dashArray: GLfloat[]) -> None"""
 
 def glPathFogGenNV(genMode: int) -> None:
-    """glPathFogGenNV(genMode) -> None"""
+    """glPathFogGenNV(genMode: GLenum) -> None"""
 
 def glPathGlyphIndexArrayNV(firstPathName: int, fontTarget: int, fontName: AnyArray, fontStyle: int, firstGlyphIndex: int, numGlyphs: int, pathParameterTemplate: int, emScale: float) -> int:
-    """glPathGlyphIndexArrayNV(firstPathName, fontTarget, fontName, fontStyle, firstGlyphIndex, numGlyphs, pathParameterTemplate, emScale) -> GLenum"""
+    """glPathGlyphIndexArrayNV(firstPathName: GLuint, fontTarget: GLenum, fontName: void[], fontStyle: GLbitfield, firstGlyphIndex: GLuint, numGlyphs: GLsizei, pathParameterTemplate: GLuint, emScale: GLfloat) -> GLenum"""
 
 def glPathGlyphIndexRangeNV(fontTarget: int, fontName: AnyArray, fontStyle: int, pathParameterTemplate: int, emScale: float, baseAndCount: UIntArray) -> int:
-    """glPathGlyphIndexRangeNV(fontTarget, fontName, fontStyle, pathParameterTemplate, emScale, baseAndCount) -> GLenum"""
+    """glPathGlyphIndexRangeNV(fontTarget: GLenum, fontName: void[], fontStyle: GLbitfield, pathParameterTemplate: GLuint, emScale: GLfloat, baseAndCount: GLuint[]) -> GLenum"""
 
 def glPathGlyphRangeNV(firstPathName: int, fontTarget: int, fontName: AnyArray, fontStyle: int, firstGlyph: int, numGlyphs: int, handleMissingGlyphs: int, pathParameterTemplate: int, emScale: float) -> None:
-    """glPathGlyphRangeNV(firstPathName, fontTarget, fontName, fontStyle, firstGlyph, numGlyphs, handleMissingGlyphs, pathParameterTemplate, emScale) -> None"""
+    """glPathGlyphRangeNV(firstPathName: GLuint, fontTarget: GLenum, fontName: void[], fontStyle: GLbitfield, firstGlyph: GLuint, numGlyphs: GLsizei, handleMissingGlyphs: GLenum, pathParameterTemplate: GLuint, emScale: GLfloat) -> None"""
 
 def glPathGlyphsNV(firstPathName: int, fontTarget: int, fontName: AnyArray, fontStyle: int, numGlyphs: int, type: int, charcodes: AnyArray, handleMissingGlyphs: int, pathParameterTemplate: int, emScale: float) -> None:
-    """glPathGlyphsNV(firstPathName, fontTarget, fontName, fontStyle, numGlyphs, type, charcodes, handleMissingGlyphs, pathParameterTemplate, emScale) -> None"""
+    """glPathGlyphsNV(firstPathName: GLuint, fontTarget: GLenum, fontName: void[], fontStyle: GLbitfield, numGlyphs: GLsizei, type: GLenum, charcodes: void[], handleMissingGlyphs: GLenum, pathParameterTemplate: GLuint, emScale: GLfloat) -> None"""
 
 def glPathMemoryGlyphIndexArrayNV(firstPathName: int, fontTarget: int, fontSize: int, fontData: AnyArray, faceIndex: int, firstGlyphIndex: int, numGlyphs: int, pathParameterTemplate: int, emScale: float) -> int:
-    """glPathMemoryGlyphIndexArrayNV(firstPathName, fontTarget, fontSize, fontData, faceIndex, firstGlyphIndex, numGlyphs, pathParameterTemplate, emScale) -> GLenum"""
+    """glPathMemoryGlyphIndexArrayNV(firstPathName: GLuint, fontTarget: GLenum, fontSize: GLsizeiptr, fontData: void[], faceIndex: GLsizei, firstGlyphIndex: GLuint, numGlyphs: GLsizei, pathParameterTemplate: GLuint, emScale: GLfloat) -> GLenum"""
 
 def glPathParameterfNV(path: int, pname: int, value: float) -> None:
-    """glPathParameterfNV(path, pname, value) -> None"""
+    """glPathParameterfNV(path: GLuint, pname: GLenum, value: GLfloat) -> None"""
 
 def glPathParameterfvNV(path: int, pname: int, value: FloatArray) -> None:
-    """glPathParameterfvNV(path, pname, value) -> None"""
+    """glPathParameterfvNV(path: GLuint, pname: GLenum, value: GLfloat[]) -> None"""
 
 def glPathParameteriNV(path: int, pname: int, value: int) -> None:
-    """glPathParameteriNV(path, pname, value) -> None"""
+    """glPathParameteriNV(path: GLuint, pname: GLenum, value: GLint) -> None"""
 
 def glPathParameterivNV(path: int, pname: int, value: IntArray) -> None:
-    """glPathParameterivNV(path, pname, value) -> None"""
+    """glPathParameterivNV(path: GLuint, pname: GLenum, value: GLint[]) -> None"""
 
 def glPathStencilDepthOffsetNV(factor: float, units: float) -> None:
-    """glPathStencilDepthOffsetNV(factor, units) -> None"""
+    """glPathStencilDepthOffsetNV(factor: GLfloat, units: GLfloat) -> None"""
 
 def glPathStencilFuncNV(func: int, ref: int, mask: int) -> None:
-    """glPathStencilFuncNV(func, ref, mask) -> None"""
+    """glPathStencilFuncNV(func: GLenum, ref: GLint, mask: GLuint) -> None"""
 
 def glPathStringNV(path: int, format: int, length: int, pathString: AnyArray) -> None:
-    """glPathStringNV(path, format, length, pathString) -> None"""
+    """glPathStringNV(path: GLuint, format: GLenum, length: GLsizei, pathString: void[]) -> None"""
 
 def glPathSubCommandsNV(path: int, commandStart: int, commandsToDelete: int, numCommands: int, commands: UByteArray, numCoords: int, coordType: int, coords: AnyArray) -> None:
-    """glPathSubCommandsNV(path, commandStart, commandsToDelete, numCommands, commands, numCoords, coordType, coords) -> None"""
+    """glPathSubCommandsNV(path: GLuint, commandStart: GLsizei, commandsToDelete: GLsizei, numCommands: GLsizei, commands: GLubyte[], numCoords: GLsizei, coordType: GLenum, coords: void[]) -> None"""
 
 def glPathSubCoordsNV(path: int, coordStart: int, numCoords: int, coordType: int, coords: AnyArray) -> None:
-    """glPathSubCoordsNV(path, coordStart, numCoords, coordType, coords) -> None"""
+    """glPathSubCoordsNV(path: GLuint, coordStart: GLsizei, numCoords: GLsizei, coordType: GLenum, coords: void[]) -> None"""
 
 def glPathTexGenNV(texCoordSet: int, genMode: int, components: int, coeffs: FloatArray) -> None:
-    """glPathTexGenNV(texCoordSet, genMode, components, coeffs) -> None"""
+    """glPathTexGenNV(texCoordSet: GLenum, genMode: GLenum, components: GLint, coeffs: GLfloat[]) -> None"""
 
 def glPixelStorei(pname: int, param: int) -> None:
-    """glPixelStorei(pname, param) -> None"""
+    """glPixelStorei(pname: GLenum, param: GLint) -> None"""
 
 def glPointAlongPathNV(path: int, startSegment: int, numSegments: int, distance: float, x: FloatArray | None = None, y: FloatArray | None = None, tangentX: FloatArray | None = None, tangentY: FloatArray | None = None) -> tuple[FloatArrayResult, FloatArrayResult, FloatArrayResult, FloatArrayResult]:
-    """glPointAlongPathNV(path, startSegment, numSegments, distance) -> tangentX, tangentY, x, y"""
+    """glPointAlongPathNV(path: GLuint, startSegment: GLsizei, numSegments: GLsizei, distance: GLfloat) -> tangentX: GLfloat[], tangentY: GLfloat[], x: GLfloat[], y: GLfloat[]"""
 
 def glPolygonModeNV(face: int, mode: int) -> None:
-    """glPolygonModeNV(face, mode) -> None"""
+    """glPolygonModeNV(face: GLenum, mode: GLenum) -> None"""
 
 def glPolygonOffset(factor: float, units: float) -> None:
-    """glPolygonOffset(factor, units) -> None"""
+    """glPolygonOffset(factor: GLfloat, units: GLfloat) -> None"""
 
 def glPolygonOffsetClampEXT(factor: float, units: float, clamp: float) -> None:
-    """glPolygonOffsetClampEXT(factor, units, clamp) -> None"""
+    """glPolygonOffsetClampEXT(factor: GLfloat, units: GLfloat, clamp: GLfloat) -> None"""
 
 def glPopDebugGroup() -> None:
     """glPopDebugGroup() -> None"""
@@ -3454,244 +3454,244 @@ def glPopGroupMarkerEXT() -> None:
     """glPopGroupMarkerEXT() -> None"""
 
 def glPrimitiveBoundingBox(minX: float, minY: float, minZ: float, minW: float, maxX: float, maxY: float, maxZ: float, maxW: float) -> None:
-    """glPrimitiveBoundingBox(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW) -> None"""
+    """glPrimitiveBoundingBox(minX: GLfloat, minY: GLfloat, minZ: GLfloat, minW: GLfloat, maxX: GLfloat, maxY: GLfloat, maxZ: GLfloat, maxW: GLfloat) -> None"""
 
 def glPrimitiveBoundingBoxEXT(minX: float, minY: float, minZ: float, minW: float, maxX: float, maxY: float, maxZ: float, maxW: float) -> None:
-    """glPrimitiveBoundingBoxEXT(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW) -> None"""
+    """glPrimitiveBoundingBoxEXT(minX: GLfloat, minY: GLfloat, minZ: GLfloat, minW: GLfloat, maxX: GLfloat, maxY: GLfloat, maxZ: GLfloat, maxW: GLfloat) -> None"""
 
 def glPrimitiveBoundingBoxOES(minX: float, minY: float, minZ: float, minW: float, maxX: float, maxY: float, maxZ: float, maxW: float) -> None:
-    """glPrimitiveBoundingBoxOES(minX, minY, minZ, minW, maxX, maxY, maxZ, maxW) -> None"""
+    """glPrimitiveBoundingBoxOES(minX: GLfloat, minY: GLfloat, minZ: GLfloat, minW: GLfloat, maxX: GLfloat, maxY: GLfloat, maxZ: GLfloat, maxW: GLfloat) -> None"""
 
 def glProgramBinaryOES(program: int, binaryFormat: int, binary: AnyArray, length: int) -> None:
-    """glProgramBinaryOES(program, binaryFormat, binary, length) -> None"""
+    """glProgramBinaryOES(program: GLuint, binaryFormat: GLenum, binary: void[], length: GLint) -> None"""
 
 def glProgramParameteriEXT(program: int, pname: int, value: int) -> None:
-    """glProgramParameteriEXT(program, pname, value) -> None"""
+    """glProgramParameteriEXT(program: GLuint, pname: GLenum, value: GLint) -> None"""
 
 def glProgramPathFragmentInputGenNV(program: int, location: int, genMode: int, components: int, coeffs: FloatArray) -> None:
-    """glProgramPathFragmentInputGenNV(program, location, genMode, components, coeffs) -> None"""
+    """glProgramPathFragmentInputGenNV(program: GLuint, location: GLint, genMode: GLenum, components: GLint, coeffs: GLfloat[]) -> None"""
 
 def glProgramUniform1fEXT(program: int, location: int, v0: float) -> None:
-    """glProgramUniform1fEXT(program, location, v0) -> None"""
+    """glProgramUniform1fEXT(program: GLuint, location: GLint, v0: GLfloat) -> None"""
 
 def glProgramUniform1fvEXT(program: int, location: int, count: int, value: FloatArray) -> None:
-    """glProgramUniform1fvEXT(program, location, count, value) -> None"""
+    """glProgramUniform1fvEXT(program: GLuint, location: GLint, count: GLsizei, value: GLfloat[]) -> None"""
 
 def glProgramUniform1i64NV(program: int, location: int, x: int) -> None:
-    """glProgramUniform1i64NV(program, location, x) -> None"""
+    """glProgramUniform1i64NV(program: GLuint, location: GLint, x: GLint64EXT) -> None"""
 
 def glProgramUniform1i64vNV(program: int, location: int, count: int, value: Int64Array) -> None:
-    """glProgramUniform1i64vNV(program, location, count, value) -> None"""
+    """glProgramUniform1i64vNV(program: GLuint, location: GLint, count: GLsizei, value: GLint64[]) -> None"""
 
 def glProgramUniform1iEXT(program: int, location: int, v0: int) -> None:
-    """glProgramUniform1iEXT(program, location, v0) -> None"""
+    """glProgramUniform1iEXT(program: GLuint, location: GLint, v0: GLint) -> None"""
 
 def glProgramUniform1ivEXT(program: int, location: int, count: int, value: IntArray) -> None:
-    """glProgramUniform1ivEXT(program, location, count, value) -> None"""
+    """glProgramUniform1ivEXT(program: GLuint, location: GLint, count: GLsizei, value: GLint[]) -> None"""
 
 def glProgramUniform1ui64NV(program: int, location: int, x: int) -> None:
-    """glProgramUniform1ui64NV(program, location, x) -> None"""
+    """glProgramUniform1ui64NV(program: GLuint, location: GLint, x: GLuint64EXT) -> None"""
 
 def glProgramUniform1ui64vNV(program: int, location: int, count: int, value: UInt64Array) -> None:
-    """glProgramUniform1ui64vNV(program, location, count, value) -> None"""
+    """glProgramUniform1ui64vNV(program: GLuint, location: GLint, count: GLsizei, value: GLuint64[]) -> None"""
 
 def glProgramUniform1uiEXT(program: int, location: int, v0: int) -> None:
-    """glProgramUniform1uiEXT(program, location, v0) -> None"""
+    """glProgramUniform1uiEXT(program: GLuint, location: GLint, v0: GLuint) -> None"""
 
 def glProgramUniform1uivEXT(program: int, location: int, count: int, value: UIntArray) -> None:
-    """glProgramUniform1uivEXT(program, location, count, value) -> None"""
+    """glProgramUniform1uivEXT(program: GLuint, location: GLint, count: GLsizei, value: GLuint[]) -> None"""
 
 def glProgramUniform2fEXT(program: int, location: int, v0: float, v1: float) -> None:
-    """glProgramUniform2fEXT(program, location, v0, v1) -> None"""
+    """glProgramUniform2fEXT(program: GLuint, location: GLint, v0: GLfloat, v1: GLfloat) -> None"""
 
 def glProgramUniform2fvEXT(program: int, location: int, count: int, value: FloatArray) -> None:
-    """glProgramUniform2fvEXT(program, location, count, value) -> None"""
+    """glProgramUniform2fvEXT(program: GLuint, location: GLint, count: GLsizei, value: GLfloat[]) -> None"""
 
 def glProgramUniform2i64NV(program: int, location: int, x: int, y: int) -> None:
-    """glProgramUniform2i64NV(program, location, x, y) -> None"""
+    """glProgramUniform2i64NV(program: GLuint, location: GLint, x: GLint64EXT, y: GLint64EXT) -> None"""
 
 def glProgramUniform2i64vNV(program: int, location: int, count: int, value: Int64Array) -> None:
-    """glProgramUniform2i64vNV(program, location, count, value) -> None"""
+    """glProgramUniform2i64vNV(program: GLuint, location: GLint, count: GLsizei, value: GLint64[]) -> None"""
 
 def glProgramUniform2iEXT(program: int, location: int, v0: int, v1: int) -> None:
-    """glProgramUniform2iEXT(program, location, v0, v1) -> None"""
+    """glProgramUniform2iEXT(program: GLuint, location: GLint, v0: GLint, v1: GLint) -> None"""
 
 def glProgramUniform2ivEXT(program: int, location: int, count: int, value: IntArray) -> None:
-    """glProgramUniform2ivEXT(program, location, count, value) -> None"""
+    """glProgramUniform2ivEXT(program: GLuint, location: GLint, count: GLsizei, value: GLint[]) -> None"""
 
 def glProgramUniform2ui64NV(program: int, location: int, x: int, y: int) -> None:
-    """glProgramUniform2ui64NV(program, location, x, y) -> None"""
+    """glProgramUniform2ui64NV(program: GLuint, location: GLint, x: GLuint64EXT, y: GLuint64EXT) -> None"""
 
 def glProgramUniform2ui64vNV(program: int, location: int, count: int, value: UInt64Array) -> None:
-    """glProgramUniform2ui64vNV(program, location, count, value) -> None"""
+    """glProgramUniform2ui64vNV(program: GLuint, location: GLint, count: GLsizei, value: GLuint64[]) -> None"""
 
 def glProgramUniform2uiEXT(program: int, location: int, v0: int, v1: int) -> None:
-    """glProgramUniform2uiEXT(program, location, v0, v1) -> None"""
+    """glProgramUniform2uiEXT(program: GLuint, location: GLint, v0: GLuint, v1: GLuint) -> None"""
 
 def glProgramUniform2uivEXT(program: int, location: int, count: int, value: UIntArray) -> None:
-    """glProgramUniform2uivEXT(program, location, count, value) -> None"""
+    """glProgramUniform2uivEXT(program: GLuint, location: GLint, count: GLsizei, value: GLuint[]) -> None"""
 
 def glProgramUniform3fEXT(program: int, location: int, v0: float, v1: float, v2: float) -> None:
-    """glProgramUniform3fEXT(program, location, v0, v1, v2) -> None"""
+    """glProgramUniform3fEXT(program: GLuint, location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat) -> None"""
 
 def glProgramUniform3fvEXT(program: int, location: int, count: int, value: FloatArray) -> None:
-    """glProgramUniform3fvEXT(program, location, count, value) -> None"""
+    """glProgramUniform3fvEXT(program: GLuint, location: GLint, count: GLsizei, value: GLfloat[]) -> None"""
 
 def glProgramUniform3i64NV(program: int, location: int, x: int, y: int, z: int) -> None:
-    """glProgramUniform3i64NV(program, location, x, y, z) -> None"""
+    """glProgramUniform3i64NV(program: GLuint, location: GLint, x: GLint64EXT, y: GLint64EXT, z: GLint64EXT) -> None"""
 
 def glProgramUniform3i64vNV(program: int, location: int, count: int, value: Int64Array) -> None:
-    """glProgramUniform3i64vNV(program, location, count, value) -> None"""
+    """glProgramUniform3i64vNV(program: GLuint, location: GLint, count: GLsizei, value: GLint64[]) -> None"""
 
 def glProgramUniform3iEXT(program: int, location: int, v0: int, v1: int, v2: int) -> None:
-    """glProgramUniform3iEXT(program, location, v0, v1, v2) -> None"""
+    """glProgramUniform3iEXT(program: GLuint, location: GLint, v0: GLint, v1: GLint, v2: GLint) -> None"""
 
 def glProgramUniform3ivEXT(program: int, location: int, count: int, value: IntArray) -> None:
-    """glProgramUniform3ivEXT(program, location, count, value) -> None"""
+    """glProgramUniform3ivEXT(program: GLuint, location: GLint, count: GLsizei, value: GLint[]) -> None"""
 
 def glProgramUniform3ui64NV(program: int, location: int, x: int, y: int, z: int) -> None:
-    """glProgramUniform3ui64NV(program, location, x, y, z) -> None"""
+    """glProgramUniform3ui64NV(program: GLuint, location: GLint, x: GLuint64EXT, y: GLuint64EXT, z: GLuint64EXT) -> None"""
 
 def glProgramUniform3ui64vNV(program: int, location: int, count: int, value: UInt64Array) -> None:
-    """glProgramUniform3ui64vNV(program, location, count, value) -> None"""
+    """glProgramUniform3ui64vNV(program: GLuint, location: GLint, count: GLsizei, value: GLuint64[]) -> None"""
 
 def glProgramUniform3uiEXT(program: int, location: int, v0: int, v1: int, v2: int) -> None:
-    """glProgramUniform3uiEXT(program, location, v0, v1, v2) -> None"""
+    """glProgramUniform3uiEXT(program: GLuint, location: GLint, v0: GLuint, v1: GLuint, v2: GLuint) -> None"""
 
 def glProgramUniform3uivEXT(program: int, location: int, count: int, value: UIntArray) -> None:
-    """glProgramUniform3uivEXT(program, location, count, value) -> None"""
+    """glProgramUniform3uivEXT(program: GLuint, location: GLint, count: GLsizei, value: GLuint[]) -> None"""
 
 def glProgramUniform4fEXT(program: int, location: int, v0: float, v1: float, v2: float, v3: float) -> None:
-    """glProgramUniform4fEXT(program, location, v0, v1, v2, v3) -> None"""
+    """glProgramUniform4fEXT(program: GLuint, location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat, v3: GLfloat) -> None"""
 
 def glProgramUniform4fvEXT(program: int, location: int, count: int, value: FloatArray) -> None:
-    """glProgramUniform4fvEXT(program, location, count, value) -> None"""
+    """glProgramUniform4fvEXT(program: GLuint, location: GLint, count: GLsizei, value: GLfloat[]) -> None"""
 
 def glProgramUniform4i64NV(program: int, location: int, x: int, y: int, z: int, w: int) -> None:
-    """glProgramUniform4i64NV(program, location, x, y, z, w) -> None"""
+    """glProgramUniform4i64NV(program: GLuint, location: GLint, x: GLint64EXT, y: GLint64EXT, z: GLint64EXT, w: GLint64EXT) -> None"""
 
 def glProgramUniform4i64vNV(program: int, location: int, count: int, value: Int64Array) -> None:
-    """glProgramUniform4i64vNV(program, location, count, value) -> None"""
+    """glProgramUniform4i64vNV(program: GLuint, location: GLint, count: GLsizei, value: GLint64[]) -> None"""
 
 def glProgramUniform4iEXT(program: int, location: int, v0: int, v1: int, v2: int, v3: int) -> None:
-    """glProgramUniform4iEXT(program, location, v0, v1, v2, v3) -> None"""
+    """glProgramUniform4iEXT(program: GLuint, location: GLint, v0: GLint, v1: GLint, v2: GLint, v3: GLint) -> None"""
 
 def glProgramUniform4ivEXT(program: int, location: int, count: int, value: IntArray) -> None:
-    """glProgramUniform4ivEXT(program, location, count, value) -> None"""
+    """glProgramUniform4ivEXT(program: GLuint, location: GLint, count: GLsizei, value: GLint[]) -> None"""
 
 def glProgramUniform4ui64NV(program: int, location: int, x: int, y: int, z: int, w: int) -> None:
-    """glProgramUniform4ui64NV(program, location, x, y, z, w) -> None"""
+    """glProgramUniform4ui64NV(program: GLuint, location: GLint, x: GLuint64EXT, y: GLuint64EXT, z: GLuint64EXT, w: GLuint64EXT) -> None"""
 
 def glProgramUniform4ui64vNV(program: int, location: int, count: int, value: UInt64Array) -> None:
-    """glProgramUniform4ui64vNV(program, location, count, value) -> None"""
+    """glProgramUniform4ui64vNV(program: GLuint, location: GLint, count: GLsizei, value: GLuint64[]) -> None"""
 
 def glProgramUniform4uiEXT(program: int, location: int, v0: int, v1: int, v2: int, v3: int) -> None:
-    """glProgramUniform4uiEXT(program, location, v0, v1, v2, v3) -> None"""
+    """glProgramUniform4uiEXT(program: GLuint, location: GLint, v0: GLuint, v1: GLuint, v2: GLuint, v3: GLuint) -> None"""
 
 def glProgramUniform4uivEXT(program: int, location: int, count: int, value: UIntArray) -> None:
-    """glProgramUniform4uivEXT(program, location, count, value) -> None"""
+    """glProgramUniform4uivEXT(program: GLuint, location: GLint, count: GLsizei, value: GLuint[]) -> None"""
 
 def glProgramUniformHandleui64IMG(program: int, location: int, value: int) -> None:
-    """glProgramUniformHandleui64IMG(program, location, value) -> None"""
+    """glProgramUniformHandleui64IMG(program: GLuint, location: GLint, value: GLuint64) -> None"""
 
 def glProgramUniformHandleui64NV(program: int, location: int, value: int) -> None:
-    """glProgramUniformHandleui64NV(program, location, value) -> None"""
+    """glProgramUniformHandleui64NV(program: GLuint, location: GLint, value: GLuint64) -> None"""
 
 def glProgramUniformHandleui64vIMG(program: int, location: int, count: int, values: UInt64Array) -> None:
-    """glProgramUniformHandleui64vIMG(program, location, count, values) -> None"""
+    """glProgramUniformHandleui64vIMG(program: GLuint, location: GLint, count: GLsizei, values: GLuint64[]) -> None"""
 
 def glProgramUniformHandleui64vNV(program: int, location: int, count: int, values: UInt64Array) -> None:
-    """glProgramUniformHandleui64vNV(program, location, count, values) -> None"""
+    """glProgramUniformHandleui64vNV(program: GLuint, location: GLint, count: GLsizei, values: GLuint64[]) -> None"""
 
 def glProgramUniformMatrix2fvEXT(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glProgramUniformMatrix2fvEXT(program, location, count, transpose, value) -> None"""
+    """glProgramUniformMatrix2fvEXT(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glProgramUniformMatrix2x3fvEXT(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glProgramUniformMatrix2x3fvEXT(program, location, count, transpose, value) -> None"""
+    """glProgramUniformMatrix2x3fvEXT(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glProgramUniformMatrix2x4fvEXT(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glProgramUniformMatrix2x4fvEXT(program, location, count, transpose, value) -> None"""
+    """glProgramUniformMatrix2x4fvEXT(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glProgramUniformMatrix3fvEXT(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glProgramUniformMatrix3fvEXT(program, location, count, transpose, value) -> None"""
+    """glProgramUniformMatrix3fvEXT(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glProgramUniformMatrix3x2fvEXT(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glProgramUniformMatrix3x2fvEXT(program, location, count, transpose, value) -> None"""
+    """glProgramUniformMatrix3x2fvEXT(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glProgramUniformMatrix3x4fvEXT(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glProgramUniformMatrix3x4fvEXT(program, location, count, transpose, value) -> None"""
+    """glProgramUniformMatrix3x4fvEXT(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glProgramUniformMatrix4fvEXT(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glProgramUniformMatrix4fvEXT(program, location, count, transpose, value) -> None"""
+    """glProgramUniformMatrix4fvEXT(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glProgramUniformMatrix4x2fvEXT(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glProgramUniformMatrix4x2fvEXT(program, location, count, transpose, value) -> None"""
+    """glProgramUniformMatrix4x2fvEXT(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glProgramUniformMatrix4x3fvEXT(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glProgramUniformMatrix4x3fvEXT(program, location, count, transpose, value) -> None"""
+    """glProgramUniformMatrix4x3fvEXT(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glPushDebugGroup(source: int, id: int, length: int, message: ByteArray) -> None:
-    """glPushDebugGroup(source, id, length, message) -> None"""
+    """glPushDebugGroup(source: GLenum, id: GLuint, length: GLsizei, message: GLchar[]) -> None"""
 
 def glPushDebugGroupKHR(source: int, id: int, length: int, message: ByteArray) -> None:
-    """glPushDebugGroupKHR(source, id, length, message) -> None"""
+    """glPushDebugGroupKHR(source: GLenum, id: GLuint, length: GLsizei, message: GLchar[]) -> None"""
 
 def glPushGroupMarkerEXT(length: int, marker: ByteArray) -> None:
-    """glPushGroupMarkerEXT(length, marker) -> None"""
+    """glPushGroupMarkerEXT(length: GLsizei, marker: GLchar[]) -> None"""
 
 def glQueryCounterEXT(id: int, target: int) -> None:
-    """glQueryCounterEXT(id, target) -> None"""
+    """glQueryCounterEXT(id: GLuint, target: GLenum) -> None"""
 
 def glRasterSamplesEXT(samples: int, fixedsamplelocations: bool) -> None:
-    """glRasterSamplesEXT(samples, fixedsamplelocations) -> None"""
+    """glRasterSamplesEXT(samples: GLuint, fixedsamplelocations: GLboolean) -> None"""
 
 def glReadBufferIndexedEXT(src: int, index: int) -> None:
-    """glReadBufferIndexedEXT(src, index) -> None"""
+    """glReadBufferIndexedEXT(src: GLenum, index: GLint) -> None"""
 
 def glReadBufferNV(mode: int) -> None:
-    """glReadBufferNV(mode) -> None"""
+    """glReadBufferNV(mode: GLenum) -> None"""
 
 def glReadPixels(x: int, y: int, width: int, height: int, format: int, type: int, pixels: AnyArray | None = None) -> AnyArrayResult:
-    """glReadPixels(x, y, width, height, format, type) -> pixels"""
+    """glReadPixels(x: GLint, y: GLint, width: GLsizei, height: GLsizei, format: GLenum, type: GLenum) -> pixels: void[]"""
 
 def glReadnPixels(x: int, y: int, width: int, height: int, format: int, type: int, bufSize: int, data: AnyArray) -> None:
-    """glReadnPixels(x, y, width, height, format, type, bufSize, data) -> None"""
+    """glReadnPixels(x: GLint, y: GLint, width: GLsizei, height: GLsizei, format: GLenum, type: GLenum, bufSize: GLsizei, data: void[]) -> None"""
 
 def glReadnPixelsEXT(x: int, y: int, width: int, height: int, format: int, type: int, bufSize: int, data: AnyArray) -> None:
-    """glReadnPixelsEXT(x, y, width, height, format, type, bufSize, data) -> None"""
+    """glReadnPixelsEXT(x: GLint, y: GLint, width: GLsizei, height: GLsizei, format: GLenum, type: GLenum, bufSize: GLsizei, data: void[]) -> None"""
 
 def glReadnPixelsKHR(x: int, y: int, width: int, height: int, format: int, type: int, bufSize: int, data: AnyArray) -> None:
-    """glReadnPixelsKHR(x, y, width, height, format, type, bufSize, data) -> None"""
+    """glReadnPixelsKHR(x: GLint, y: GLint, width: GLsizei, height: GLsizei, format: GLenum, type: GLenum, bufSize: GLsizei, data: void[]) -> None"""
 
 def glReleaseKeyedMutexWin32EXT(memory: int, key: int) -> int:
-    """glReleaseKeyedMutexWin32EXT(memory, key) -> GLboolean"""
+    """glReleaseKeyedMutexWin32EXT(memory: GLuint, key: GLuint64) -> GLboolean"""
 
 def glReleaseShaderCompiler() -> None:
     """glReleaseShaderCompiler() -> None"""
 
 def glRenderbufferStorage(target: int, internalformat: int, width: int, height: int) -> None:
-    """glRenderbufferStorage(target, internalformat, width, height) -> None"""
+    """glRenderbufferStorage(target: GLenum, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None"""
 
 def glRenderbufferStorageMultisampleANGLE(target: int, samples: int, internalformat: int, width: int, height: int) -> None:
-    """glRenderbufferStorageMultisampleANGLE(target, samples, internalformat, width, height) -> None"""
+    """glRenderbufferStorageMultisampleANGLE(target: GLenum, samples: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None"""
 
 def glRenderbufferStorageMultisampleAPPLE(target: int, samples: int, internalformat: int, width: int, height: int) -> None:
-    """glRenderbufferStorageMultisampleAPPLE(target, samples, internalformat, width, height) -> None"""
+    """glRenderbufferStorageMultisampleAPPLE(target: GLenum, samples: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None"""
 
 def glRenderbufferStorageMultisampleAdvancedAMD(target: int, samples: int, storageSamples: int, internalformat: int, width: int, height: int) -> None:
-    """glRenderbufferStorageMultisampleAdvancedAMD(target, samples, storageSamples, internalformat, width, height) -> None"""
+    """glRenderbufferStorageMultisampleAdvancedAMD(target: GLenum, samples: GLsizei, storageSamples: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None"""
 
 def glRenderbufferStorageMultisampleEXT(target: int, samples: int, internalformat: int, width: int, height: int) -> None:
-    """glRenderbufferStorageMultisampleEXT(target, samples, internalformat, width, height) -> None"""
+    """glRenderbufferStorageMultisampleEXT(target: GLenum, samples: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None"""
 
 def glRenderbufferStorageMultisampleIMG(target: int, samples: int, internalformat: int, width: int, height: int) -> None:
-    """glRenderbufferStorageMultisampleIMG(target, samples, internalformat, width, height) -> None"""
+    """glRenderbufferStorageMultisampleIMG(target: GLenum, samples: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None"""
 
 def glRenderbufferStorageMultisampleNV(target: int, samples: int, internalformat: int, width: int, height: int) -> None:
-    """glRenderbufferStorageMultisampleNV(target, samples, internalformat, width, height) -> None"""
+    """glRenderbufferStorageMultisampleNV(target: GLenum, samples: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None"""
 
 def glResetMemoryObjectParameterNV(memory: int, pname: int) -> None:
-    """glResetMemoryObjectParameterNV(memory, pname) -> None"""
+    """glResetMemoryObjectParameterNV(memory: GLuint, pname: GLenum) -> None"""
 
 def glResolveDepthValuesNV() -> None:
     """glResolveDepthValuesNV() -> None"""
@@ -3700,550 +3700,550 @@ def glResolveMultisampleFramebufferAPPLE() -> None:
     """glResolveMultisampleFramebufferAPPLE() -> None"""
 
 def glSampleCoverage(value: float, invert: bool) -> None:
-    """glSampleCoverage(value, invert) -> None"""
+    """glSampleCoverage(value: GLfloat, invert: GLboolean) -> None"""
 
 def glSamplerParameterIiv(sampler: int, pname: int, param: IntArray) -> None:
-    """glSamplerParameterIiv(sampler, pname, param) -> None"""
+    """glSamplerParameterIiv(sampler: GLuint, pname: GLenum, param: GLint[]) -> None"""
 
 def glSamplerParameterIivEXT(sampler: int, pname: int, param: IntArray) -> None:
-    """glSamplerParameterIivEXT(sampler, pname, param) -> None"""
+    """glSamplerParameterIivEXT(sampler: GLuint, pname: GLenum, param: GLint[]) -> None"""
 
 def glSamplerParameterIivOES(sampler: int, pname: int, param: IntArray) -> None:
-    """glSamplerParameterIivOES(sampler, pname, param) -> None"""
+    """glSamplerParameterIivOES(sampler: GLuint, pname: GLenum, param: GLint[]) -> None"""
 
 def glSamplerParameterIuiv(sampler: int, pname: int, param: UIntArray) -> None:
-    """glSamplerParameterIuiv(sampler, pname, param) -> None"""
+    """glSamplerParameterIuiv(sampler: GLuint, pname: GLenum, param: GLuint[]) -> None"""
 
 def glSamplerParameterIuivEXT(sampler: int, pname: int, param: UIntArray) -> None:
-    """glSamplerParameterIuivEXT(sampler, pname, param) -> None"""
+    """glSamplerParameterIuivEXT(sampler: GLuint, pname: GLenum, param: GLuint[]) -> None"""
 
 def glSamplerParameterIuivOES(sampler: int, pname: int, param: UIntArray) -> None:
-    """glSamplerParameterIuivOES(sampler, pname, param) -> None"""
+    """glSamplerParameterIuivOES(sampler: GLuint, pname: GLenum, param: GLuint[]) -> None"""
 
 def glSamplerParameterf(sampler: int, pname: int, param: float) -> None:
-    """glSamplerParameterf(sampler, pname, param) -> None"""
+    """glSamplerParameterf(sampler: GLuint, pname: GLenum, param: GLfloat) -> None"""
 
 def glSamplerParameterfv(sampler: int, pname: int, param: FloatArray) -> None:
-    """glSamplerParameterfv(sampler, pname, param) -> None"""
+    """glSamplerParameterfv(sampler: GLuint, pname: GLenum, param: GLfloat[]) -> None"""
 
 def glSamplerParameteri(sampler: int, pname: int, param: int) -> None:
-    """glSamplerParameteri(sampler, pname, param) -> None"""
+    """glSamplerParameteri(sampler: GLuint, pname: GLenum, param: GLint) -> None"""
 
 def glSamplerParameteriv(sampler: int, pname: int, param: IntArray) -> None:
-    """glSamplerParameteriv(sampler, pname, param) -> None"""
+    """glSamplerParameteriv(sampler: GLuint, pname: GLenum, param: GLint[]) -> None"""
 
 def glScissor(x: int, y: int, width: int, height: int) -> None:
-    """glScissor(x, y, width, height) -> None"""
+    """glScissor(x: GLint, y: GLint, width: GLsizei, height: GLsizei) -> None"""
 
 def glScissorArrayvNV(first: int, count: int, v: IntArray) -> None:
-    """glScissorArrayvNV(first, count, v) -> None"""
+    """glScissorArrayvNV(first: GLuint, count: GLsizei, v: GLint[]) -> None"""
 
 def glScissorArrayvOES(first: int, count: int, v: IntArray) -> None:
-    """glScissorArrayvOES(first, count, v) -> None"""
+    """glScissorArrayvOES(first: GLuint, count: GLsizei, v: GLint[]) -> None"""
 
 def glScissorExclusiveArrayvNV(first: int, count: int, v: IntArray) -> None:
-    """glScissorExclusiveArrayvNV(first, count, v) -> None"""
+    """glScissorExclusiveArrayvNV(first: GLuint, count: GLsizei, v: GLint[]) -> None"""
 
 def glScissorExclusiveNV(x: int, y: int, width: int, height: int) -> None:
-    """glScissorExclusiveNV(x, y, width, height) -> None"""
+    """glScissorExclusiveNV(x: GLint, y: GLint, width: GLsizei, height: GLsizei) -> None"""
 
 def glScissorIndexedNV(index: int, left: int, bottom: int, width: int, height: int) -> None:
-    """glScissorIndexedNV(index, left, bottom, width, height) -> None"""
+    """glScissorIndexedNV(index: GLuint, left: GLint, bottom: GLint, width: GLsizei, height: GLsizei) -> None"""
 
 def glScissorIndexedOES(index: int, left: int, bottom: int, width: int, height: int) -> None:
-    """glScissorIndexedOES(index, left, bottom, width, height) -> None"""
+    """glScissorIndexedOES(index: GLuint, left: GLint, bottom: GLint, width: GLsizei, height: GLsizei) -> None"""
 
 def glScissorIndexedvNV(index: int, v: IntArray) -> None:
-    """glScissorIndexedvNV(index, v) -> None"""
+    """glScissorIndexedvNV(index: GLuint, v: GLint[]) -> None"""
 
 def glScissorIndexedvOES(index: int, v: IntArray) -> None:
-    """glScissorIndexedvOES(index, v) -> None"""
+    """glScissorIndexedvOES(index: GLuint, v: GLint[]) -> None"""
 
 def glSelectPerfMonitorCountersAMD(monitor: int, enable: bool, group: int, numCounters: int, counterList: UIntArray | None = None) -> UIntArrayResult:
-    """glSelectPerfMonitorCountersAMD(monitor, enable, group, numCounters) -> counterList"""
+    """glSelectPerfMonitorCountersAMD(monitor: GLuint, enable: GLboolean, group: GLuint, numCounters: GLint) -> counterList: GLuint[]"""
 
 def glSemaphoreParameterivNV(semaphore: int, pname: int, params: IntArray) -> None:
-    """glSemaphoreParameterivNV(semaphore, pname, params) -> None"""
+    """glSemaphoreParameterivNV(semaphore: GLuint, pname: GLenum, params: GLint[]) -> None"""
 
 def glSemaphoreParameterui64vEXT(semaphore: int, pname: int, params: UInt64Array) -> None:
-    """glSemaphoreParameterui64vEXT(semaphore, pname, params) -> None"""
+    """glSemaphoreParameterui64vEXT(semaphore: GLuint, pname: GLenum, params: GLuint64[]) -> None"""
 
 def glSetFenceNV(fence: int, condition: int) -> None:
-    """glSetFenceNV(fence, condition) -> None"""
+    """glSetFenceNV(fence: GLuint, condition: GLenum) -> None"""
 
 def glShaderBinary(count: int, shaders: UIntArray, binaryFormat: int, binary: AnyArray, length: int) -> None:
-    """glShaderBinary(count, shaders, binaryFormat, binary, length) -> None"""
+    """glShaderBinary(count: GLsizei, shaders: GLuint[], binaryFormat: GLenum, binary: void[], length: GLsizei) -> None"""
 
 def glShaderSource(shader: Any, string: Any) -> None:
     """glShaderSource(shader, string) -> None"""
 
 def glShadingRateCombinerOpsEXT(combinerOp0: int, combinerOp1: int) -> None:
-    """glShadingRateCombinerOpsEXT(combinerOp0, combinerOp1) -> None"""
+    """glShadingRateCombinerOpsEXT(combinerOp0: GLenum, combinerOp1: GLenum) -> None"""
 
 def glShadingRateEXT(rate: int) -> None:
-    """glShadingRateEXT(rate) -> None"""
+    """glShadingRateEXT(rate: GLenum) -> None"""
 
 def glShadingRateImageBarrierNV(synchronize: bool) -> None:
-    """glShadingRateImageBarrierNV(synchronize) -> None"""
+    """glShadingRateImageBarrierNV(synchronize: GLboolean) -> None"""
 
 def glShadingRateImagePaletteNV(viewport: int, first: int, count: int, rates: UIntArray) -> None:
-    """glShadingRateImagePaletteNV(viewport, first, count, rates) -> None"""
+    """glShadingRateImagePaletteNV(viewport: GLuint, first: GLuint, count: GLsizei, rates: GLuint[]) -> None"""
 
 def glShadingRateQCOM(rate: int) -> None:
-    """glShadingRateQCOM(rate) -> None"""
+    """glShadingRateQCOM(rate: GLenum) -> None"""
 
 def glShadingRateSampleOrderCustomNV(rate: int, samples: int, locations: IntArray) -> None:
-    """glShadingRateSampleOrderCustomNV(rate, samples, locations) -> None"""
+    """glShadingRateSampleOrderCustomNV(rate: GLenum, samples: GLuint, locations: GLint[]) -> None"""
 
 def glShadingRateSampleOrderNV(order: int) -> None:
-    """glShadingRateSampleOrderNV(order) -> None"""
+    """glShadingRateSampleOrderNV(order: GLenum) -> None"""
 
 def glSignalSemaphoreEXT(semaphore: int, numBufferBarriers: int, buffers: UIntArray, numTextureBarriers: int, textures: UIntArray, dstLayouts: UIntArray) -> None:
-    """glSignalSemaphoreEXT(semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, dstLayouts) -> None"""
+    """glSignalSemaphoreEXT(semaphore: GLuint, numBufferBarriers: GLuint, buffers: GLuint[], numTextureBarriers: GLuint, textures: GLuint[], dstLayouts: GLuint[]) -> None"""
 
 def glSignalVkFenceNV(vkFence: int) -> None:
-    """glSignalVkFenceNV(vkFence) -> None"""
+    """glSignalVkFenceNV(vkFence: GLuint64) -> None"""
 
 def glSignalVkSemaphoreNV(vkSemaphore: int) -> None:
-    """glSignalVkSemaphoreNV(vkSemaphore) -> None"""
+    """glSignalVkSemaphoreNV(vkSemaphore: GLuint64) -> None"""
 
 def glStartTilingQCOM(x: int, y: int, width: int, height: int, preserveMask: int) -> None:
-    """glStartTilingQCOM(x, y, width, height, preserveMask) -> None"""
+    """glStartTilingQCOM(x: GLuint, y: GLuint, width: GLuint, height: GLuint, preserveMask: GLbitfield) -> None"""
 
 def glStencilFillPathInstancedNV(numPaths: int, pathNameType: int, paths: AnyArray, pathBase: int, fillMode: int, mask: int, transformType: int, transformValues: FloatArray) -> None:
-    """glStencilFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, fillMode, mask, transformType, transformValues) -> None"""
+    """glStencilFillPathInstancedNV(numPaths: GLsizei, pathNameType: GLenum, paths: void[], pathBase: GLuint, fillMode: GLenum, mask: GLuint, transformType: GLenum, transformValues: GLfloat[]) -> None"""
 
 def glStencilFillPathNV(path: int, fillMode: int, mask: int) -> None:
-    """glStencilFillPathNV(path, fillMode, mask) -> None"""
+    """glStencilFillPathNV(path: GLuint, fillMode: GLenum, mask: GLuint) -> None"""
 
 def glStencilFunc(func: int, ref: int, mask: int) -> None:
-    """glStencilFunc(func, ref, mask) -> None"""
+    """glStencilFunc(func: GLenum, ref: GLint, mask: GLuint) -> None"""
 
 def glStencilFuncSeparate(face: int, func: int, ref: int, mask: int) -> None:
-    """glStencilFuncSeparate(face, func, ref, mask) -> None"""
+    """glStencilFuncSeparate(face: GLenum, func: GLenum, ref: GLint, mask: GLuint) -> None"""
 
 def glStencilMask(mask: int) -> None:
-    """glStencilMask(mask) -> None"""
+    """glStencilMask(mask: GLuint) -> None"""
 
 def glStencilMaskSeparate(face: int, mask: int) -> None:
-    """glStencilMaskSeparate(face, mask) -> None"""
+    """glStencilMaskSeparate(face: GLenum, mask: GLuint) -> None"""
 
 def glStencilOp(fail: int, zfail: int, zpass: int) -> None:
-    """glStencilOp(fail, zfail, zpass) -> None"""
+    """glStencilOp(fail: GLenum, zfail: GLenum, zpass: GLenum) -> None"""
 
 def glStencilOpSeparate(face: int, sfail: int, dpfail: int, dppass: int) -> None:
-    """glStencilOpSeparate(face, sfail, dpfail, dppass) -> None"""
+    """glStencilOpSeparate(face: GLenum, sfail: GLenum, dpfail: GLenum, dppass: GLenum) -> None"""
 
 def glStencilStrokePathInstancedNV(numPaths: int, pathNameType: int, paths: AnyArray, pathBase: int, reference: int, mask: int, transformType: int, transformValues: FloatArray) -> None:
-    """glStencilStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, reference, mask, transformType, transformValues) -> None"""
+    """glStencilStrokePathInstancedNV(numPaths: GLsizei, pathNameType: GLenum, paths: void[], pathBase: GLuint, reference: GLint, mask: GLuint, transformType: GLenum, transformValues: GLfloat[]) -> None"""
 
 def glStencilStrokePathNV(path: int, reference: int, mask: int) -> None:
-    """glStencilStrokePathNV(path, reference, mask) -> None"""
+    """glStencilStrokePathNV(path: GLuint, reference: GLint, mask: GLuint) -> None"""
 
 def glStencilThenCoverFillPathInstancedNV(numPaths: int, pathNameType: int, paths: AnyArray, pathBase: int, fillMode: int, mask: int, coverMode: int, transformType: int, transformValues: FloatArray) -> None:
-    """glStencilThenCoverFillPathInstancedNV(numPaths, pathNameType, paths, pathBase, fillMode, mask, coverMode, transformType, transformValues) -> None"""
+    """glStencilThenCoverFillPathInstancedNV(numPaths: GLsizei, pathNameType: GLenum, paths: void[], pathBase: GLuint, fillMode: GLenum, mask: GLuint, coverMode: GLenum, transformType: GLenum, transformValues: GLfloat[]) -> None"""
 
 def glStencilThenCoverFillPathNV(path: int, fillMode: int, mask: int, coverMode: int) -> None:
-    """glStencilThenCoverFillPathNV(path, fillMode, mask, coverMode) -> None"""
+    """glStencilThenCoverFillPathNV(path: GLuint, fillMode: GLenum, mask: GLuint, coverMode: GLenum) -> None"""
 
 def glStencilThenCoverStrokePathInstancedNV(numPaths: int, pathNameType: int, paths: AnyArray, pathBase: int, reference: int, mask: int, coverMode: int, transformType: int, transformValues: FloatArray) -> None:
-    """glStencilThenCoverStrokePathInstancedNV(numPaths, pathNameType, paths, pathBase, reference, mask, coverMode, transformType, transformValues) -> None"""
+    """glStencilThenCoverStrokePathInstancedNV(numPaths: GLsizei, pathNameType: GLenum, paths: void[], pathBase: GLuint, reference: GLint, mask: GLuint, coverMode: GLenum, transformType: GLenum, transformValues: GLfloat[]) -> None"""
 
 def glStencilThenCoverStrokePathNV(path: int, reference: int, mask: int, coverMode: int) -> None:
-    """glStencilThenCoverStrokePathNV(path, reference, mask, coverMode) -> None"""
+    """glStencilThenCoverStrokePathNV(path: GLuint, reference: GLint, mask: GLuint, coverMode: GLenum) -> None"""
 
 def glSubpixelPrecisionBiasNV(xbits: int, ybits: int) -> None:
-    """glSubpixelPrecisionBiasNV(xbits, ybits) -> None"""
+    """glSubpixelPrecisionBiasNV(xbits: GLuint, ybits: GLuint) -> None"""
 
 def glTestFenceNV(fence: int) -> int:
-    """glTestFenceNV(fence) -> GLboolean"""
+    """glTestFenceNV(fence: GLuint) -> GLboolean"""
 
 def glTexAttachMemoryNV(target: int, memory: int, offset: int) -> None:
-    """glTexAttachMemoryNV(target, memory, offset) -> None"""
+    """glTexAttachMemoryNV(target: GLenum, memory: GLuint, offset: GLuint64) -> None"""
 
 def glTexBuffer(target: int, internalformat: int, buffer: int) -> None:
-    """glTexBuffer(target, internalformat, buffer) -> None"""
+    """glTexBuffer(target: GLenum, internalformat: GLenum, buffer: GLuint) -> None"""
 
 def glTexBufferEXT(target: int, internalformat: int, buffer: int) -> None:
-    """glTexBufferEXT(target, internalformat, buffer) -> None"""
+    """glTexBufferEXT(target: GLenum, internalformat: GLenum, buffer: GLuint) -> None"""
 
 def glTexBufferOES(target: int, internalformat: int, buffer: int) -> None:
-    """glTexBufferOES(target, internalformat, buffer) -> None"""
+    """glTexBufferOES(target: GLenum, internalformat: GLenum, buffer: GLuint) -> None"""
 
 def glTexBufferRange(target: int, internalformat: int, buffer: int, offset: int, size: int) -> None:
-    """glTexBufferRange(target, internalformat, buffer, offset, size) -> None"""
+    """glTexBufferRange(target: GLenum, internalformat: GLenum, buffer: GLuint, offset: GLintptr, size: GLsizeiptr) -> None"""
 
 def glTexBufferRangeEXT(target: int, internalformat: int, buffer: int, offset: int, size: int) -> None:
-    """glTexBufferRangeEXT(target, internalformat, buffer, offset, size) -> None"""
+    """glTexBufferRangeEXT(target: GLenum, internalformat: GLenum, buffer: GLuint, offset: GLintptr, size: GLsizeiptr) -> None"""
 
 def glTexBufferRangeOES(target: int, internalformat: int, buffer: int, offset: int, size: int) -> None:
-    """glTexBufferRangeOES(target, internalformat, buffer, offset, size) -> None"""
+    """glTexBufferRangeOES(target: GLenum, internalformat: GLenum, buffer: GLuint, offset: GLintptr, size: GLsizeiptr) -> None"""
 
 def glTexEstimateMotionQCOM(ref: int, target: int, output: int) -> None:
-    """glTexEstimateMotionQCOM(ref, target, output) -> None"""
+    """glTexEstimateMotionQCOM(ref: GLuint, target: GLuint, output: GLuint) -> None"""
 
 def glTexEstimateMotionRegionsQCOM(ref: int, target: int, output: int, mask: int) -> None:
-    """glTexEstimateMotionRegionsQCOM(ref, target, output, mask) -> None"""
+    """glTexEstimateMotionRegionsQCOM(ref: GLuint, target: GLuint, output: GLuint, mask: GLuint) -> None"""
 
 def glTexImage2D(target: int, level: int, internalformat: int, width: int, height: int, border: int, format: int, type: int, pixels: AnyArray) -> None:
-    """glTexImage2D(target, level, internalformat, width, height, border, format, type, pixels) -> None"""
+    """glTexImage2D(target: GLenum, level: GLint, internalformat: GLint, width: GLsizei, height: GLsizei, border: GLint, format: GLenum, type: GLenum, pixels: void[]) -> None"""
 
 def glTexImage3DOES(target: int, level: int, internalformat: int, width: int, height: int, depth: int, border: int, format: int, type: int, pixels: AnyArray) -> None:
-    """glTexImage3DOES(target, level, internalformat, width, height, depth, border, format, type, pixels) -> None"""
+    """glTexImage3DOES(target: GLenum, level: GLint, internalformat: GLenum, width: GLsizei, height: GLsizei, depth: GLsizei, border: GLint, format: GLenum, type: GLenum, pixels: void[]) -> None"""
 
 def glTexPageCommitmentEXT(target: int, level: int, xoffset: int, yoffset: int, zoffset: int, width: int, height: int, depth: int, commit: bool) -> None:
-    """glTexPageCommitmentEXT(target, level, xoffset, yoffset, zoffset, width, height, depth, commit) -> None"""
+    """glTexPageCommitmentEXT(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, commit: GLboolean) -> None"""
 
 def glTexPageCommitmentMemNV(target: int, layer: int, level: int, xoffset: int, yoffset: int, zoffset: int, width: int, height: int, depth: int, memory: int, offset: int, commit: bool) -> None:
-    """glTexPageCommitmentMemNV(target, layer, level, xoffset, yoffset, zoffset, width, height, depth, memory, offset, commit) -> None"""
+    """glTexPageCommitmentMemNV(target: GLenum, layer: GLint, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, memory: GLuint, offset: GLuint64, commit: GLboolean) -> None"""
 
 def glTexParameterIiv(target: int, pname: int, params: IntArray) -> None:
-    """glTexParameterIiv(target, pname, params) -> None"""
+    """glTexParameterIiv(target: GLenum, pname: GLenum, params: GLint[]) -> None"""
 
 def glTexParameterIivEXT(target: int, pname: int, params: IntArray) -> None:
-    """glTexParameterIivEXT(target, pname, params) -> None"""
+    """glTexParameterIivEXT(target: GLenum, pname: GLenum, params: GLint[]) -> None"""
 
 def glTexParameterIivOES(target: int, pname: int, params: IntArray) -> None:
-    """glTexParameterIivOES(target, pname, params) -> None"""
+    """glTexParameterIivOES(target: GLenum, pname: GLenum, params: GLint[]) -> None"""
 
 def glTexParameterIuiv(target: int, pname: int, params: UIntArray) -> None:
-    """glTexParameterIuiv(target, pname, params) -> None"""
+    """glTexParameterIuiv(target: GLenum, pname: GLenum, params: GLuint[]) -> None"""
 
 def glTexParameterIuivEXT(target: int, pname: int, params: UIntArray) -> None:
-    """glTexParameterIuivEXT(target, pname, params) -> None"""
+    """glTexParameterIuivEXT(target: GLenum, pname: GLenum, params: GLuint[]) -> None"""
 
 def glTexParameterIuivOES(target: int, pname: int, params: UIntArray) -> None:
-    """glTexParameterIuivOES(target, pname, params) -> None"""
+    """glTexParameterIuivOES(target: GLenum, pname: GLenum, params: GLuint[]) -> None"""
 
 def glTexParameterf(target: int, pname: int, param: float) -> None:
-    """glTexParameterf(target, pname, param) -> None"""
+    """glTexParameterf(target: GLenum, pname: GLenum, param: GLfloat) -> None"""
 
 def glTexParameterfv(target: int, pname: int, params: FloatArray) -> None:
-    """glTexParameterfv(target, pname, params) -> None"""
+    """glTexParameterfv(target: GLenum, pname: GLenum, params: GLfloat[]) -> None"""
 
 def glTexParameteri(target: int, pname: int, param: int) -> None:
-    """glTexParameteri(target, pname, param) -> None"""
+    """glTexParameteri(target: GLenum, pname: GLenum, param: GLint) -> None"""
 
 def glTexParameteriv(target: int, pname: int, params: IntArray) -> None:
-    """glTexParameteriv(target, pname, params) -> None"""
+    """glTexParameteriv(target: GLenum, pname: GLenum, params: GLint[]) -> None"""
 
 def glTexStorage1DEXT(target: int, levels: int, internalformat: int, width: int) -> None:
-    """glTexStorage1DEXT(target, levels, internalformat, width) -> None"""
+    """glTexStorage1DEXT(target: GLenum, levels: GLsizei, internalformat: GLenum, width: GLsizei) -> None"""
 
 def glTexStorage2DEXT(target: int, levels: int, internalformat: int, width: int, height: int) -> None:
-    """glTexStorage2DEXT(target, levels, internalformat, width, height) -> None"""
+    """glTexStorage2DEXT(target: GLenum, levels: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None"""
 
 def glTexStorage3DEXT(target: int, levels: int, internalformat: int, width: int, height: int, depth: int) -> None:
-    """glTexStorage3DEXT(target, levels, internalformat, width, height, depth) -> None"""
+    """glTexStorage3DEXT(target: GLenum, levels: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei, depth: GLsizei) -> None"""
 
 def glTexStorage3DMultisample(target: int, samples: int, internalformat: int, width: int, height: int, depth: int, fixedsamplelocations: bool) -> None:
-    """glTexStorage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations) -> None"""
+    """glTexStorage3DMultisample(target: GLenum, samples: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei, depth: GLsizei, fixedsamplelocations: GLboolean) -> None"""
 
 def glTexStorage3DMultisampleOES(target: int, samples: int, internalformat: int, width: int, height: int, depth: int, fixedsamplelocations: bool) -> None:
-    """glTexStorage3DMultisampleOES(target, samples, internalformat, width, height, depth, fixedsamplelocations) -> None"""
+    """glTexStorage3DMultisampleOES(target: GLenum, samples: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei, depth: GLsizei, fixedsamplelocations: GLboolean) -> None"""
 
 def glTexStorageAttribs2DEXT(target: int, levels: int, internalformat: int, width: int, height: int, attrib_list: IntArray) -> None:
-    """glTexStorageAttribs2DEXT(target, levels, internalformat, width, height, attrib_list) -> None"""
+    """glTexStorageAttribs2DEXT(target: GLenum, levels: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei, attrib_list: GLint[]) -> None"""
 
 def glTexStorageAttribs3DEXT(target: int, levels: int, internalformat: int, width: int, height: int, depth: int, attrib_list: IntArray) -> None:
-    """glTexStorageAttribs3DEXT(target, levels, internalformat, width, height, depth, attrib_list) -> None"""
+    """glTexStorageAttribs3DEXT(target: GLenum, levels: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei, depth: GLsizei, attrib_list: GLint[]) -> None"""
 
 def glTexStorageMem1DEXT(target: int, levels: int, internalFormat: int, width: int, memory: int, offset: int) -> None:
-    """glTexStorageMem1DEXT(target, levels, internalFormat, width, memory, offset) -> None"""
+    """glTexStorageMem1DEXT(target: GLenum, levels: GLsizei, internalFormat: GLenum, width: GLsizei, memory: GLuint, offset: GLuint64) -> None"""
 
 def glTexStorageMem2DEXT(target: int, levels: int, internalFormat: int, width: int, height: int, memory: int, offset: int) -> None:
-    """glTexStorageMem2DEXT(target, levels, internalFormat, width, height, memory, offset) -> None"""
+    """glTexStorageMem2DEXT(target: GLenum, levels: GLsizei, internalFormat: GLenum, width: GLsizei, height: GLsizei, memory: GLuint, offset: GLuint64) -> None"""
 
 def glTexStorageMem2DMultisampleEXT(target: int, samples: int, internalFormat: int, width: int, height: int, fixedSampleLocations: bool, memory: int, offset: int) -> None:
-    """glTexStorageMem2DMultisampleEXT(target, samples, internalFormat, width, height, fixedSampleLocations, memory, offset) -> None"""
+    """glTexStorageMem2DMultisampleEXT(target: GLenum, samples: GLsizei, internalFormat: GLenum, width: GLsizei, height: GLsizei, fixedSampleLocations: GLboolean, memory: GLuint, offset: GLuint64) -> None"""
 
 def glTexStorageMem3DEXT(target: int, levels: int, internalFormat: int, width: int, height: int, depth: int, memory: int, offset: int) -> None:
-    """glTexStorageMem3DEXT(target, levels, internalFormat, width, height, depth, memory, offset) -> None"""
+    """glTexStorageMem3DEXT(target: GLenum, levels: GLsizei, internalFormat: GLenum, width: GLsizei, height: GLsizei, depth: GLsizei, memory: GLuint, offset: GLuint64) -> None"""
 
 def glTexStorageMem3DMultisampleEXT(target: int, samples: int, internalFormat: int, width: int, height: int, depth: int, fixedSampleLocations: bool, memory: int, offset: int) -> None:
-    """glTexStorageMem3DMultisampleEXT(target, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset) -> None"""
+    """glTexStorageMem3DMultisampleEXT(target: GLenum, samples: GLsizei, internalFormat: GLenum, width: GLsizei, height: GLsizei, depth: GLsizei, fixedSampleLocations: GLboolean, memory: GLuint, offset: GLuint64) -> None"""
 
 def glTexSubImage2D(target: int, level: int, xoffset: int, yoffset: int, width: int, height: int, format: int, type: int, pixels: AnyArray) -> None:
-    """glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels) -> None"""
+    """glTexSubImage2D(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: GLenum, type: GLenum, pixels: void[]) -> None"""
 
 def glTexSubImage3DOES(target: int, level: int, xoffset: int, yoffset: int, zoffset: int, width: int, height: int, depth: int, format: int, type: int, pixels: AnyArray) -> None:
-    """glTexSubImage3DOES(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels) -> None"""
+    """glTexSubImage3DOES(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: GLenum, type: GLenum, pixels: void[]) -> None"""
 
 def glTextureAttachMemoryNV(texture: int, memory: int, offset: int) -> None:
-    """glTextureAttachMemoryNV(texture, memory, offset) -> None"""
+    """glTextureAttachMemoryNV(texture: GLuint, memory: GLuint, offset: GLuint64) -> None"""
 
 def glTextureBarrierNV() -> None:
     """glTextureBarrierNV() -> None"""
 
 def glTextureFoveationParametersQCOM(texture: int, layer: int, focalPoint: int, focalX: float, focalY: float, gainX: float, gainY: float, foveaArea: float) -> None:
-    """glTextureFoveationParametersQCOM(texture, layer, focalPoint, focalX, focalY, gainX, gainY, foveaArea) -> None"""
+    """glTextureFoveationParametersQCOM(texture: GLuint, layer: GLuint, focalPoint: GLuint, focalX: GLfloat, focalY: GLfloat, gainX: GLfloat, gainY: GLfloat, foveaArea: GLfloat) -> None"""
 
 def glTexturePageCommitmentMemNV(texture: int, layer: int, level: int, xoffset: int, yoffset: int, zoffset: int, width: int, height: int, depth: int, memory: int, offset: int, commit: bool) -> None:
-    """glTexturePageCommitmentMemNV(texture, layer, level, xoffset, yoffset, zoffset, width, height, depth, memory, offset, commit) -> None"""
+    """glTexturePageCommitmentMemNV(texture: GLuint, layer: GLint, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, memory: GLuint, offset: GLuint64, commit: GLboolean) -> None"""
 
 def glTextureStorage1DEXT(texture: int, target: int, levels: int, internalformat: int, width: int) -> None:
-    """glTextureStorage1DEXT(texture, target, levels, internalformat, width) -> None"""
+    """glTextureStorage1DEXT(texture: GLuint, target: GLenum, levels: GLsizei, internalformat: GLenum, width: GLsizei) -> None"""
 
 def glTextureStorage2DEXT(texture: int, target: int, levels: int, internalformat: int, width: int, height: int) -> None:
-    """glTextureStorage2DEXT(texture, target, levels, internalformat, width, height) -> None"""
+    """glTextureStorage2DEXT(texture: GLuint, target: GLenum, levels: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None"""
 
 def glTextureStorage3DEXT(texture: int, target: int, levels: int, internalformat: int, width: int, height: int, depth: int) -> None:
-    """glTextureStorage3DEXT(texture, target, levels, internalformat, width, height, depth) -> None"""
+    """glTextureStorage3DEXT(texture: GLuint, target: GLenum, levels: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei, depth: GLsizei) -> None"""
 
 def glTextureStorageMem1DEXT(texture: int, levels: int, internalFormat: int, width: int, memory: int, offset: int) -> None:
-    """glTextureStorageMem1DEXT(texture, levels, internalFormat, width, memory, offset) -> None"""
+    """glTextureStorageMem1DEXT(texture: GLuint, levels: GLsizei, internalFormat: GLenum, width: GLsizei, memory: GLuint, offset: GLuint64) -> None"""
 
 def glTextureStorageMem2DEXT(texture: int, levels: int, internalFormat: int, width: int, height: int, memory: int, offset: int) -> None:
-    """glTextureStorageMem2DEXT(texture, levels, internalFormat, width, height, memory, offset) -> None"""
+    """glTextureStorageMem2DEXT(texture: GLuint, levels: GLsizei, internalFormat: GLenum, width: GLsizei, height: GLsizei, memory: GLuint, offset: GLuint64) -> None"""
 
 def glTextureStorageMem2DMultisampleEXT(texture: int, samples: int, internalFormat: int, width: int, height: int, fixedSampleLocations: bool, memory: int, offset: int) -> None:
-    """glTextureStorageMem2DMultisampleEXT(texture, samples, internalFormat, width, height, fixedSampleLocations, memory, offset) -> None"""
+    """glTextureStorageMem2DMultisampleEXT(texture: GLuint, samples: GLsizei, internalFormat: GLenum, width: GLsizei, height: GLsizei, fixedSampleLocations: GLboolean, memory: GLuint, offset: GLuint64) -> None"""
 
 def glTextureStorageMem3DEXT(texture: int, levels: int, internalFormat: int, width: int, height: int, depth: int, memory: int, offset: int) -> None:
-    """glTextureStorageMem3DEXT(texture, levels, internalFormat, width, height, depth, memory, offset) -> None"""
+    """glTextureStorageMem3DEXT(texture: GLuint, levels: GLsizei, internalFormat: GLenum, width: GLsizei, height: GLsizei, depth: GLsizei, memory: GLuint, offset: GLuint64) -> None"""
 
 def glTextureStorageMem3DMultisampleEXT(texture: int, samples: int, internalFormat: int, width: int, height: int, depth: int, fixedSampleLocations: bool, memory: int, offset: int) -> None:
-    """glTextureStorageMem3DMultisampleEXT(texture, samples, internalFormat, width, height, depth, fixedSampleLocations, memory, offset) -> None"""
+    """glTextureStorageMem3DMultisampleEXT(texture: GLuint, samples: GLsizei, internalFormat: GLenum, width: GLsizei, height: GLsizei, depth: GLsizei, fixedSampleLocations: GLboolean, memory: GLuint, offset: GLuint64) -> None"""
 
 def glTextureViewEXT(texture: int, target: int, origtexture: int, internalformat: int, minlevel: int, numlevels: int, minlayer: int, numlayers: int) -> None:
-    """glTextureViewEXT(texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers) -> None"""
+    """glTextureViewEXT(texture: GLuint, target: GLenum, origtexture: GLuint, internalformat: GLenum, minlevel: GLuint, numlevels: GLuint, minlayer: GLuint, numlayers: GLuint) -> None"""
 
 def glTextureViewOES(texture: int, target: int, origtexture: int, internalformat: int, minlevel: int, numlevels: int, minlayer: int, numlayers: int) -> None:
-    """glTextureViewOES(texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers) -> None"""
+    """glTextureViewOES(texture: GLuint, target: GLenum, origtexture: GLuint, internalformat: GLenum, minlevel: GLuint, numlevels: GLuint, minlayer: GLuint, numlayers: GLuint) -> None"""
 
 def glTransformPathNV(resultPath: int, srcPath: int, transformType: int, transformValues: FloatArray) -> None:
-    """glTransformPathNV(resultPath, srcPath, transformType, transformValues) -> None"""
+    """glTransformPathNV(resultPath: GLuint, srcPath: GLuint, transformType: GLenum, transformValues: GLfloat[]) -> None"""
 
 def glUniform1f(location: int, v0: float) -> None:
-    """glUniform1f(location, v0) -> None"""
+    """glUniform1f(location: GLint, v0: GLfloat) -> None"""
 
 def glUniform1fv(location: int, count: int, value: FloatArray) -> None:
-    """glUniform1fv(location, count, value) -> None"""
+    """glUniform1fv(location: GLint, count: GLsizei, value: GLfloat[]) -> None"""
 
 def glUniform1i(location: int, v0: int) -> None:
-    """glUniform1i(location, v0) -> None"""
+    """glUniform1i(location: GLint, v0: GLint) -> None"""
 
 def glUniform1i64NV(location: int, x: int) -> None:
-    """glUniform1i64NV(location, x) -> None"""
+    """glUniform1i64NV(location: GLint, x: GLint64EXT) -> None"""
 
 def glUniform1i64vNV(location: int, count: int, value: Int64Array) -> None:
-    """glUniform1i64vNV(location, count, value) -> None"""
+    """glUniform1i64vNV(location: GLint, count: GLsizei, value: GLint64[]) -> None"""
 
 def glUniform1iv(location: int, count: int, value: IntArray) -> None:
-    """glUniform1iv(location, count, value) -> None"""
+    """glUniform1iv(location: GLint, count: GLsizei, value: GLint[]) -> None"""
 
 def glUniform1ui64NV(location: int, x: int) -> None:
-    """glUniform1ui64NV(location, x) -> None"""
+    """glUniform1ui64NV(location: GLint, x: GLuint64EXT) -> None"""
 
 def glUniform1ui64vNV(location: int, count: int, value: UInt64Array) -> None:
-    """glUniform1ui64vNV(location, count, value) -> None"""
+    """glUniform1ui64vNV(location: GLint, count: GLsizei, value: GLuint64[]) -> None"""
 
 def glUniform2f(location: int, v0: float, v1: float) -> None:
-    """glUniform2f(location, v0, v1) -> None"""
+    """glUniform2f(location: GLint, v0: GLfloat, v1: GLfloat) -> None"""
 
 def glUniform2fv(location: int, count: int, value: FloatArray) -> None:
-    """glUniform2fv(location, count, value) -> None"""
+    """glUniform2fv(location: GLint, count: GLsizei, value: GLfloat[]) -> None"""
 
 def glUniform2i(location: int, v0: int, v1: int) -> None:
-    """glUniform2i(location, v0, v1) -> None"""
+    """glUniform2i(location: GLint, v0: GLint, v1: GLint) -> None"""
 
 def glUniform2i64NV(location: int, x: int, y: int) -> None:
-    """glUniform2i64NV(location, x, y) -> None"""
+    """glUniform2i64NV(location: GLint, x: GLint64EXT, y: GLint64EXT) -> None"""
 
 def glUniform2i64vNV(location: int, count: int, value: Int64Array) -> None:
-    """glUniform2i64vNV(location, count, value) -> None"""
+    """glUniform2i64vNV(location: GLint, count: GLsizei, value: GLint64[]) -> None"""
 
 def glUniform2iv(location: int, count: int, value: IntArray) -> None:
-    """glUniform2iv(location, count, value) -> None"""
+    """glUniform2iv(location: GLint, count: GLsizei, value: GLint[]) -> None"""
 
 def glUniform2ui64NV(location: int, x: int, y: int) -> None:
-    """glUniform2ui64NV(location, x, y) -> None"""
+    """glUniform2ui64NV(location: GLint, x: GLuint64EXT, y: GLuint64EXT) -> None"""
 
 def glUniform2ui64vNV(location: int, count: int, value: UInt64Array) -> None:
-    """glUniform2ui64vNV(location, count, value) -> None"""
+    """glUniform2ui64vNV(location: GLint, count: GLsizei, value: GLuint64[]) -> None"""
 
 def glUniform3f(location: int, v0: float, v1: float, v2: float) -> None:
-    """glUniform3f(location, v0, v1, v2) -> None"""
+    """glUniform3f(location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat) -> None"""
 
 def glUniform3fv(location: int, count: int, value: FloatArray) -> None:
-    """glUniform3fv(location, count, value) -> None"""
+    """glUniform3fv(location: GLint, count: GLsizei, value: GLfloat[]) -> None"""
 
 def glUniform3i(location: int, v0: int, v1: int, v2: int) -> None:
-    """glUniform3i(location, v0, v1, v2) -> None"""
+    """glUniform3i(location: GLint, v0: GLint, v1: GLint, v2: GLint) -> None"""
 
 def glUniform3i64NV(location: int, x: int, y: int, z: int) -> None:
-    """glUniform3i64NV(location, x, y, z) -> None"""
+    """glUniform3i64NV(location: GLint, x: GLint64EXT, y: GLint64EXT, z: GLint64EXT) -> None"""
 
 def glUniform3i64vNV(location: int, count: int, value: Int64Array) -> None:
-    """glUniform3i64vNV(location, count, value) -> None"""
+    """glUniform3i64vNV(location: GLint, count: GLsizei, value: GLint64[]) -> None"""
 
 def glUniform3iv(location: int, count: int, value: IntArray) -> None:
-    """glUniform3iv(location, count, value) -> None"""
+    """glUniform3iv(location: GLint, count: GLsizei, value: GLint[]) -> None"""
 
 def glUniform3ui64NV(location: int, x: int, y: int, z: int) -> None:
-    """glUniform3ui64NV(location, x, y, z) -> None"""
+    """glUniform3ui64NV(location: GLint, x: GLuint64EXT, y: GLuint64EXT, z: GLuint64EXT) -> None"""
 
 def glUniform3ui64vNV(location: int, count: int, value: UInt64Array) -> None:
-    """glUniform3ui64vNV(location, count, value) -> None"""
+    """glUniform3ui64vNV(location: GLint, count: GLsizei, value: GLuint64[]) -> None"""
 
 def glUniform4f(location: int, v0: float, v1: float, v2: float, v3: float) -> None:
-    """glUniform4f(location, v0, v1, v2, v3) -> None"""
+    """glUniform4f(location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat, v3: GLfloat) -> None"""
 
 def glUniform4fv(location: int, count: int, value: FloatArray) -> None:
-    """glUniform4fv(location, count, value) -> None"""
+    """glUniform4fv(location: GLint, count: GLsizei, value: GLfloat[]) -> None"""
 
 def glUniform4i(location: int, v0: int, v1: int, v2: int, v3: int) -> None:
-    """glUniform4i(location, v0, v1, v2, v3) -> None"""
+    """glUniform4i(location: GLint, v0: GLint, v1: GLint, v2: GLint, v3: GLint) -> None"""
 
 def glUniform4i64NV(location: int, x: int, y: int, z: int, w: int) -> None:
-    """glUniform4i64NV(location, x, y, z, w) -> None"""
+    """glUniform4i64NV(location: GLint, x: GLint64EXT, y: GLint64EXT, z: GLint64EXT, w: GLint64EXT) -> None"""
 
 def glUniform4i64vNV(location: int, count: int, value: Int64Array) -> None:
-    """glUniform4i64vNV(location, count, value) -> None"""
+    """glUniform4i64vNV(location: GLint, count: GLsizei, value: GLint64[]) -> None"""
 
 def glUniform4iv(location: int, count: int, value: IntArray) -> None:
-    """glUniform4iv(location, count, value) -> None"""
+    """glUniform4iv(location: GLint, count: GLsizei, value: GLint[]) -> None"""
 
 def glUniform4ui64NV(location: int, x: int, y: int, z: int, w: int) -> None:
-    """glUniform4ui64NV(location, x, y, z, w) -> None"""
+    """glUniform4ui64NV(location: GLint, x: GLuint64EXT, y: GLuint64EXT, z: GLuint64EXT, w: GLuint64EXT) -> None"""
 
 def glUniform4ui64vNV(location: int, count: int, value: UInt64Array) -> None:
-    """glUniform4ui64vNV(location, count, value) -> None"""
+    """glUniform4ui64vNV(location: GLint, count: GLsizei, value: GLuint64[]) -> None"""
 
 def glUniformHandleui64IMG(location: int, value: int) -> None:
-    """glUniformHandleui64IMG(location, value) -> None"""
+    """glUniformHandleui64IMG(location: GLint, value: GLuint64) -> None"""
 
 def glUniformHandleui64NV(location: int, value: int) -> None:
-    """glUniformHandleui64NV(location, value) -> None"""
+    """glUniformHandleui64NV(location: GLint, value: GLuint64) -> None"""
 
 def glUniformHandleui64vIMG(location: int, count: int, value: UInt64Array) -> None:
-    """glUniformHandleui64vIMG(location, count, value) -> None"""
+    """glUniformHandleui64vIMG(location: GLint, count: GLsizei, value: GLuint64[]) -> None"""
 
 def glUniformHandleui64vNV(location: int, count: int, value: UInt64Array) -> None:
-    """glUniformHandleui64vNV(location, count, value) -> None"""
+    """glUniformHandleui64vNV(location: GLint, count: GLsizei, value: GLuint64[]) -> None"""
 
 def glUniformMatrix2fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glUniformMatrix2fv(location, count, transpose, value) -> None"""
+    """glUniformMatrix2fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glUniformMatrix2x3fvNV(location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glUniformMatrix2x3fvNV(location, count, transpose, value) -> None"""
+    """glUniformMatrix2x3fvNV(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glUniformMatrix2x4fvNV(location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glUniformMatrix2x4fvNV(location, count, transpose, value) -> None"""
+    """glUniformMatrix2x4fvNV(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glUniformMatrix3fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glUniformMatrix3fv(location, count, transpose, value) -> None"""
+    """glUniformMatrix3fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glUniformMatrix3x2fvNV(location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glUniformMatrix3x2fvNV(location, count, transpose, value) -> None"""
+    """glUniformMatrix3x2fvNV(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glUniformMatrix3x4fvNV(location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glUniformMatrix3x4fvNV(location, count, transpose, value) -> None"""
+    """glUniformMatrix3x4fvNV(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glUniformMatrix4fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glUniformMatrix4fv(location, count, transpose, value) -> None"""
+    """glUniformMatrix4fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glUniformMatrix4x2fvNV(location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glUniformMatrix4x2fvNV(location, count, transpose, value) -> None"""
+    """glUniformMatrix4x2fvNV(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glUniformMatrix4x3fvNV(location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glUniformMatrix4x3fvNV(location, count, transpose, value) -> None"""
+    """glUniformMatrix4x3fvNV(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glUnmapBufferOES(target: int) -> int:
-    """glUnmapBufferOES(target) -> GLboolean"""
+    """glUnmapBufferOES(target: GLenum) -> GLboolean"""
 
 def glUseProgram(program: int) -> None:
-    """glUseProgram(program) -> None"""
+    """glUseProgram(program: GLuint) -> None"""
 
 def glUseProgramStagesEXT(pipeline: int, stages: int, program: int) -> None:
-    """glUseProgramStagesEXT(pipeline, stages, program) -> None"""
+    """glUseProgramStagesEXT(pipeline: GLuint, stages: GLbitfield, program: GLuint) -> None"""
 
 def glUseShaderProgramEXT(type: int, program: int) -> None:
-    """glUseShaderProgramEXT(type, program) -> None"""
+    """glUseShaderProgramEXT(type: GLenum, program: GLuint) -> None"""
 
 def glValidateProgram(program: int) -> None:
-    """glValidateProgram(program) -> None"""
+    """glValidateProgram(program: GLuint) -> None"""
 
 def glValidateProgramPipelineEXT(pipeline: int) -> None:
-    """glValidateProgramPipelineEXT(pipeline) -> None"""
+    """glValidateProgramPipelineEXT(pipeline: GLuint) -> None"""
 
 def glVertexAttrib1f(index: int, x: float) -> None:
-    """glVertexAttrib1f(index, x) -> None"""
+    """glVertexAttrib1f(index: GLuint, x: GLfloat) -> None"""
 
 def glVertexAttrib1fv(index: int, v: FloatArray) -> None:
-    """glVertexAttrib1fv(index, v) -> None"""
+    """glVertexAttrib1fv(index: GLuint, v: GLfloat[]) -> None"""
 
 def glVertexAttrib2f(index: int, x: float, y: float) -> None:
-    """glVertexAttrib2f(index, x, y) -> None"""
+    """glVertexAttrib2f(index: GLuint, x: GLfloat, y: GLfloat) -> None"""
 
 def glVertexAttrib2fv(index: int, v: FloatArray) -> None:
-    """glVertexAttrib2fv(index, v) -> None"""
+    """glVertexAttrib2fv(index: GLuint, v: GLfloat[]) -> None"""
 
 def glVertexAttrib3f(index: int, x: float, y: float, z: float) -> None:
-    """glVertexAttrib3f(index, x, y, z) -> None"""
+    """glVertexAttrib3f(index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat) -> None"""
 
 def glVertexAttrib3fv(index: int, v: FloatArray) -> None:
-    """glVertexAttrib3fv(index, v) -> None"""
+    """glVertexAttrib3fv(index: GLuint, v: GLfloat[]) -> None"""
 
 def glVertexAttrib4f(index: int, x: float, y: float, z: float, w: float) -> None:
-    """glVertexAttrib4f(index, x, y, z, w) -> None"""
+    """glVertexAttrib4f(index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) -> None"""
 
 def glVertexAttrib4fv(index: int, v: FloatArray) -> None:
-    """glVertexAttrib4fv(index, v) -> None"""
+    """glVertexAttrib4fv(index: GLuint, v: GLfloat[]) -> None"""
 
 def glVertexAttribDivisorANGLE(index: int, divisor: int) -> None:
-    """glVertexAttribDivisorANGLE(index, divisor) -> None"""
+    """glVertexAttribDivisorANGLE(index: GLuint, divisor: GLuint) -> None"""
 
 def glVertexAttribDivisorEXT(index: int, divisor: int) -> None:
-    """glVertexAttribDivisorEXT(index, divisor) -> None"""
+    """glVertexAttribDivisorEXT(index: GLuint, divisor: GLuint) -> None"""
 
 def glVertexAttribDivisorNV(index: int, divisor: int) -> None:
-    """glVertexAttribDivisorNV(index, divisor) -> None"""
+    """glVertexAttribDivisorNV(index: GLuint, divisor: GLuint) -> None"""
 
 def glVertexAttribPointer(index: int, size: int, type: int, normalized: bool, stride: int, pointer: AnyArray) -> None:
-    """glVertexAttribPointer(index, size, type, normalized, stride, pointer) -> None"""
+    """glVertexAttribPointer(index: GLuint, size: GLint, type: GLenum, normalized: GLboolean, stride: GLsizei, pointer: void[]) -> None"""
 
 def glViewport(x: int, y: int, width: int, height: int) -> None:
-    """glViewport(x, y, width, height) -> None"""
+    """glViewport(x: GLint, y: GLint, width: GLsizei, height: GLsizei) -> None"""
 
 def glViewportArrayvNV(first: int, count: int, v: FloatArray) -> None:
-    """glViewportArrayvNV(first, count, v) -> None"""
+    """glViewportArrayvNV(first: GLuint, count: GLsizei, v: GLfloat[]) -> None"""
 
 def glViewportArrayvOES(first: int, count: int, v: FloatArray) -> None:
-    """glViewportArrayvOES(first, count, v) -> None"""
+    """glViewportArrayvOES(first: GLuint, count: GLsizei, v: GLfloat[]) -> None"""
 
 def glViewportIndexedfNV(index: int, x: float, y: float, w: float, h: float) -> None:
-    """glViewportIndexedfNV(index, x, y, w, h) -> None"""
+    """glViewportIndexedfNV(index: GLuint, x: GLfloat, y: GLfloat, w: GLfloat, h: GLfloat) -> None"""
 
 def glViewportIndexedfOES(index: int, x: float, y: float, w: float, h: float) -> None:
-    """glViewportIndexedfOES(index, x, y, w, h) -> None"""
+    """glViewportIndexedfOES(index: GLuint, x: GLfloat, y: GLfloat, w: GLfloat, h: GLfloat) -> None"""
 
 def glViewportIndexedfvNV(index: int, v: FloatArray) -> None:
-    """glViewportIndexedfvNV(index, v) -> None"""
+    """glViewportIndexedfvNV(index: GLuint, v: GLfloat[]) -> None"""
 
 def glViewportIndexedfvOES(index: int, v: FloatArray) -> None:
-    """glViewportIndexedfvOES(index, v) -> None"""
+    """glViewportIndexedfvOES(index: GLuint, v: GLfloat[]) -> None"""
 
 def glViewportPositionWScaleNV(index: int, xcoeff: float, ycoeff: float) -> None:
-    """glViewportPositionWScaleNV(index, xcoeff, ycoeff) -> None"""
+    """glViewportPositionWScaleNV(index: GLuint, xcoeff: GLfloat, ycoeff: GLfloat) -> None"""
 
 def glViewportSwizzleNV(index: int, swizzlex: int, swizzley: int, swizzlez: int, swizzlew: int) -> None:
-    """glViewportSwizzleNV(index, swizzlex, swizzley, swizzlez, swizzlew) -> None"""
+    """glViewportSwizzleNV(index: GLuint, swizzlex: GLenum, swizzley: GLenum, swizzlez: GLenum, swizzlew: GLenum) -> None"""
 
 def glWaitSemaphoreEXT(semaphore: int, numBufferBarriers: int, buffers: UIntArray, numTextureBarriers: int, textures: UIntArray, srcLayouts: UIntArray) -> None:
-    """glWaitSemaphoreEXT(semaphore, numBufferBarriers, buffers, numTextureBarriers, textures, srcLayouts) -> None"""
+    """glWaitSemaphoreEXT(semaphore: GLuint, numBufferBarriers: GLuint, buffers: GLuint[], numTextureBarriers: GLuint, textures: GLuint[], srcLayouts: GLuint[]) -> None"""
 
 def glWaitSyncAPPLE(sync: Any, flags: int, timeout: int) -> None:
-    """glWaitSyncAPPLE(sync, flags, timeout) -> None"""
+    """glWaitSyncAPPLE(sync: GLsync, flags: GLbitfield, timeout: GLuint64) -> None"""
 
 def glWaitVkSemaphoreNV(vkSemaphore: int) -> None:
-    """glWaitVkSemaphoreNV(vkSemaphore) -> None"""
+    """glWaitVkSemaphoreNV(vkSemaphore: GLuint64) -> None"""
 
 def glWeightPathsNV(resultPath: int, numPaths: int, paths: UIntArray, weights: FloatArray) -> None:
-    """glWeightPathsNV(resultPath, numPaths, paths, weights) -> None"""
+    """glWeightPathsNV(resultPath: GLuint, numPaths: GLsizei, paths: GLuint[], weights: GLfloat[]) -> None"""
 
 def glWindowRectanglesEXT(mode: int, count: int, box: IntArray) -> None:
-    """glWindowRectanglesEXT(mode, count, box) -> None"""
+    """glWindowRectanglesEXT(mode: GLenum, count: GLsizei, box: GLint[]) -> None"""
 
 
 def __getattr__(name: str) -> Any:

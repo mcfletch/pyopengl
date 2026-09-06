@@ -534,181 +534,181 @@ EGL_YUV_SUBSAMPLE_EXT: int
 EGL_Y_INVERTED_NOK: int
 
 def eglBindAPI(api: int) -> int:
-    """eglBindAPI(api) -> EGLBoolean"""
+    """eglBindAPI(api: EGLenum) -> EGLBoolean"""
 
 def eglBindTexImage(dpy: Any, surface: Any, buffer: int) -> int:
-    """eglBindTexImage(dpy, surface, buffer) -> EGLBoolean"""
+    """eglBindTexImage(dpy: EGLDisplay, surface: EGLSurface, buffer: EGLint) -> EGLBoolean"""
 
 def eglBindWaylandDisplayWL(dpy: Any, display: AnyArray) -> int:
-    """eglBindWaylandDisplayWL(dpy, display) -> EGLBoolean"""
+    """eglBindWaylandDisplayWL(dpy: EGLDisplay, display: void[]) -> EGLBoolean"""
 
 def eglChooseConfig(dpy: Any, attrib_list: IntArray, configs: AnyArray, config_size: int, num_config: IntArray) -> int:
-    """eglChooseConfig(dpy, attrib_list, configs, config_size, num_config) -> EGLBoolean"""
+    """eglChooseConfig(dpy: EGLDisplay, attrib_list: GLint[], configs: void[][], config_size: EGLint, num_config: GLint[]) -> EGLBoolean"""
 
 def eglClientSignalSyncEXT(dpy: Any, sync: Any, attrib_list: Int64Array) -> int:
-    """eglClientSignalSyncEXT(dpy, sync, attrib_list) -> EGLBoolean"""
+    """eglClientSignalSyncEXT(dpy: EGLDisplay, sync: EGLSync, attrib_list: GLintptr[]) -> EGLBoolean"""
 
 def eglClientWaitSync(dpy: Any, sync: Any, flags: int, timeout: int) -> int:
-    """eglClientWaitSync(dpy, sync, flags, timeout) -> EGLint"""
+    """eglClientWaitSync(dpy: EGLDisplay, sync: EGLSync, flags: EGLint, timeout: EGLTime) -> EGLint"""
 
 def eglClientWaitSyncKHR(dpy: Any, sync: Any, flags: int, timeout: int) -> int:
-    """eglClientWaitSyncKHR(dpy, sync, flags, timeout) -> EGLint"""
+    """eglClientWaitSyncKHR(dpy: EGLDisplay, sync: EGLSyncKHR, flags: EGLint, timeout: EGLTimeKHR) -> EGLint"""
 
 def eglClientWaitSyncNV(sync: Any, flags: int, timeout: int) -> int:
-    """eglClientWaitSyncNV(sync, flags, timeout) -> EGLint"""
+    """eglClientWaitSyncNV(sync: EGLSyncNV, flags: EGLint, timeout: EGLTimeNV) -> EGLint"""
 
 def eglCompositorBindTexWindowEXT(external_win_id: int) -> int:
-    """eglCompositorBindTexWindowEXT(external_win_id) -> EGLBoolean"""
+    """eglCompositorBindTexWindowEXT(external_win_id: EGLint) -> EGLBoolean"""
 
 def eglCompositorSetContextAttributesEXT(external_ref_id: int, context_attributes: IntArray, num_entries: int) -> int:
-    """eglCompositorSetContextAttributesEXT(external_ref_id, context_attributes, num_entries) -> EGLBoolean"""
+    """eglCompositorSetContextAttributesEXT(external_ref_id: EGLint, context_attributes: GLint[], num_entries: EGLint) -> EGLBoolean"""
 
 def eglCompositorSetContextListEXT(external_ref_ids: IntArray, num_entries: int) -> int:
-    """eglCompositorSetContextListEXT(external_ref_ids, num_entries) -> EGLBoolean"""
+    """eglCompositorSetContextListEXT(external_ref_ids: GLint[], num_entries: EGLint) -> EGLBoolean"""
 
 def eglCompositorSetSizeEXT(external_win_id: int, width: int, height: int) -> int:
-    """eglCompositorSetSizeEXT(external_win_id, width, height) -> EGLBoolean"""
+    """eglCompositorSetSizeEXT(external_win_id: EGLint, width: EGLint, height: EGLint) -> EGLBoolean"""
 
 def eglCompositorSetWindowAttributesEXT(external_win_id: int, window_attributes: IntArray, num_entries: int) -> int:
-    """eglCompositorSetWindowAttributesEXT(external_win_id, window_attributes, num_entries) -> EGLBoolean"""
+    """eglCompositorSetWindowAttributesEXT(external_win_id: EGLint, window_attributes: GLint[], num_entries: EGLint) -> EGLBoolean"""
 
 def eglCompositorSetWindowListEXT(external_ref_id: int, external_win_ids: IntArray, num_entries: int) -> int:
-    """eglCompositorSetWindowListEXT(external_ref_id, external_win_ids, num_entries) -> EGLBoolean"""
+    """eglCompositorSetWindowListEXT(external_ref_id: EGLint, external_win_ids: GLint[], num_entries: EGLint) -> EGLBoolean"""
 
 def eglCompositorSwapPolicyEXT(external_win_id: int, policy: int) -> int:
-    """eglCompositorSwapPolicyEXT(external_win_id, policy) -> EGLBoolean"""
+    """eglCompositorSwapPolicyEXT(external_win_id: EGLint, policy: EGLint) -> EGLBoolean"""
 
 def eglCopyBuffers(dpy: Any, surface: Any, target: Any) -> int:
-    """eglCopyBuffers(dpy, surface, target) -> EGLBoolean"""
+    """eglCopyBuffers(dpy: EGLDisplay, surface: EGLSurface, target: EGLNativePixmapType) -> EGLBoolean"""
 
 def eglCreateContext(dpy: Any, config: Any, share_context: Any, attrib_list: IntArray) -> Any:
-    """eglCreateContext(dpy, config, share_context, attrib_list) -> EGLContext"""
+    """eglCreateContext(dpy: EGLDisplay, config: EGLConfig, share_context: EGLContext, attrib_list: GLint[]) -> EGLContext"""
 
 def eglCreateDRMImageMESA(dpy: Any, attrib_list: IntArray) -> Any:
-    """eglCreateDRMImageMESA(dpy, attrib_list) -> EGLImageKHR"""
+    """eglCreateDRMImageMESA(dpy: EGLDisplay, attrib_list: GLint[]) -> EGLImageKHR"""
 
 def eglCreateFenceSyncNV(dpy: Any, condition: int, attrib_list: IntArray) -> Any:
-    """eglCreateFenceSyncNV(dpy, condition, attrib_list) -> EGLSyncNV"""
+    """eglCreateFenceSyncNV(dpy: EGLDisplay, condition: EGLenum, attrib_list: GLint[]) -> EGLSyncNV"""
 
 def eglCreateImage(dpy: Any, ctx: Any, target: int, buffer: Any, attrib_list: Int64Array) -> Any:
-    """eglCreateImage(dpy, ctx, target, buffer, attrib_list) -> EGLImage"""
+    """eglCreateImage(dpy: EGLDisplay, ctx: EGLContext, target: EGLenum, buffer: EGLClientBuffer, attrib_list: GLintptr[]) -> EGLImage"""
 
 def eglCreateImageKHR(dpy: Any, ctx: Any, target: int, buffer: Any, attrib_list: IntArray) -> Any:
-    """eglCreateImageKHR(dpy, ctx, target, buffer, attrib_list) -> EGLImageKHR"""
+    """eglCreateImageKHR(dpy: EGLDisplay, ctx: EGLContext, target: EGLenum, buffer: EGLClientBuffer, attrib_list: GLint[]) -> EGLImageKHR"""
 
 def eglCreateNativeClientBufferANDROID(attrib_list: IntArray) -> Any:
-    """eglCreateNativeClientBufferANDROID(attrib_list) -> EGLClientBuffer"""
+    """eglCreateNativeClientBufferANDROID(attrib_list: GLint[]) -> EGLClientBuffer"""
 
 def eglCreatePbufferFromClientBuffer(dpy: Any, buftype: int, buffer: Any, config: Any, attrib_list: IntArray) -> Any:
-    """eglCreatePbufferFromClientBuffer(dpy, buftype, buffer, config, attrib_list) -> EGLSurface"""
+    """eglCreatePbufferFromClientBuffer(dpy: EGLDisplay, buftype: EGLenum, buffer: EGLClientBuffer, config: EGLConfig, attrib_list: GLint[]) -> EGLSurface"""
 
 def eglCreatePbufferSurface(dpy: Any, config: Any, attrib_list: IntArray) -> Any:
-    """eglCreatePbufferSurface(dpy, config, attrib_list) -> EGLSurface"""
+    """eglCreatePbufferSurface(dpy: EGLDisplay, config: EGLConfig, attrib_list: GLint[]) -> EGLSurface"""
 
 def eglCreatePixmapSurface(dpy: Any, config: Any, pixmap: Any, attrib_list: IntArray) -> Any:
-    """eglCreatePixmapSurface(dpy, config, pixmap, attrib_list) -> EGLSurface"""
+    """eglCreatePixmapSurface(dpy: EGLDisplay, config: EGLConfig, pixmap: EGLNativePixmapType, attrib_list: GLint[]) -> EGLSurface"""
 
 def eglCreatePixmapSurfaceHI(dpy: Any, config: Any, pixmap: AnyArray) -> Any:
-    """eglCreatePixmapSurfaceHI(dpy, config, pixmap) -> EGLSurface"""
+    """eglCreatePixmapSurfaceHI(dpy: EGLDisplay, config: EGLConfig, pixmap: EGLClientPixmapHI[]) -> EGLSurface"""
 
 def eglCreatePlatformPixmapSurface(dpy: Any, config: Any, native_pixmap: AnyArray, attrib_list: Int64Array) -> Any:
-    """eglCreatePlatformPixmapSurface(dpy, config, native_pixmap, attrib_list) -> EGLSurface"""
+    """eglCreatePlatformPixmapSurface(dpy: EGLDisplay, config: EGLConfig, native_pixmap: void[], attrib_list: GLintptr[]) -> EGLSurface"""
 
 def eglCreatePlatformPixmapSurfaceEXT(dpy: Any, config: Any, native_pixmap: AnyArray, attrib_list: IntArray) -> Any:
-    """eglCreatePlatformPixmapSurfaceEXT(dpy, config, native_pixmap, attrib_list) -> EGLSurface"""
+    """eglCreatePlatformPixmapSurfaceEXT(dpy: EGLDisplay, config: EGLConfig, native_pixmap: void[], attrib_list: GLint[]) -> EGLSurface"""
 
 def eglCreatePlatformWindowSurface(dpy: Any, config: Any, native_window: AnyArray, attrib_list: Int64Array) -> Any:
-    """eglCreatePlatformWindowSurface(dpy, config, native_window, attrib_list) -> EGLSurface"""
+    """eglCreatePlatformWindowSurface(dpy: EGLDisplay, config: EGLConfig, native_window: void[], attrib_list: GLintptr[]) -> EGLSurface"""
 
 def eglCreatePlatformWindowSurfaceEXT(dpy: Any, config: Any, native_window: AnyArray, attrib_list: IntArray) -> Any:
-    """eglCreatePlatformWindowSurfaceEXT(dpy, config, native_window, attrib_list) -> EGLSurface"""
+    """eglCreatePlatformWindowSurfaceEXT(dpy: EGLDisplay, config: EGLConfig, native_window: void[], attrib_list: GLint[]) -> EGLSurface"""
 
 def eglCreateStreamAttribKHR(dpy: Any, attrib_list: Int64Array) -> Any:
-    """eglCreateStreamAttribKHR(dpy, attrib_list) -> EGLStreamKHR"""
+    """eglCreateStreamAttribKHR(dpy: EGLDisplay, attrib_list: GLintptr[]) -> EGLStreamKHR"""
 
 def eglCreateStreamFromFileDescriptorKHR(dpy: Any, file_descriptor: int) -> Any:
-    """eglCreateStreamFromFileDescriptorKHR(dpy, file_descriptor) -> EGLStreamKHR"""
+    """eglCreateStreamFromFileDescriptorKHR(dpy: EGLDisplay, file_descriptor: EGLNativeFileDescriptorKHR) -> EGLStreamKHR"""
 
 def eglCreateStreamKHR(dpy: Any, attrib_list: IntArray) -> Any:
-    """eglCreateStreamKHR(dpy, attrib_list) -> EGLStreamKHR"""
+    """eglCreateStreamKHR(dpy: EGLDisplay, attrib_list: GLint[]) -> EGLStreamKHR"""
 
 def eglCreateStreamProducerSurfaceKHR(dpy: Any, config: Any, stream: Any, attrib_list: IntArray) -> Any:
-    """eglCreateStreamProducerSurfaceKHR(dpy, config, stream, attrib_list) -> EGLSurface"""
+    """eglCreateStreamProducerSurfaceKHR(dpy: EGLDisplay, config: EGLConfig, stream: EGLStreamKHR, attrib_list: GLint[]) -> EGLSurface"""
 
 def eglCreateStreamSyncNV(dpy: Any, stream: Any, type: int, attrib_list: IntArray) -> Any:
-    """eglCreateStreamSyncNV(dpy, stream, type, attrib_list) -> EGLSyncKHR"""
+    """eglCreateStreamSyncNV(dpy: EGLDisplay, stream: EGLStreamKHR, type: EGLenum, attrib_list: GLint[]) -> EGLSyncKHR"""
 
 def eglCreateSync(dpy: Any, type: int, attrib_list: Int64Array) -> Any:
-    """eglCreateSync(dpy, type, attrib_list) -> EGLSync"""
+    """eglCreateSync(dpy: EGLDisplay, type: EGLenum, attrib_list: GLintptr[]) -> EGLSync"""
 
 def eglCreateSync64KHR(dpy: Any, type: int, attrib_list: AnyArray) -> Any:
-    """eglCreateSync64KHR(dpy, type, attrib_list) -> EGLSyncKHR"""
+    """eglCreateSync64KHR(dpy: EGLDisplay, type: EGLenum, attrib_list: EGLAttribKHR[]) -> EGLSyncKHR"""
 
 def eglCreateSyncKHR(dpy: Any, type: int, attrib_list: IntArray) -> Any:
-    """eglCreateSyncKHR(dpy, type, attrib_list) -> EGLSyncKHR"""
+    """eglCreateSyncKHR(dpy: EGLDisplay, type: EGLenum, attrib_list: GLint[]) -> EGLSyncKHR"""
 
 def eglCreateWaylandBufferFromImageWL(dpy: Any, image: Any) -> int | None:
-    """eglCreateWaylandBufferFromImageWL(dpy, image) -> void"""
+    """eglCreateWaylandBufferFromImageWL(dpy: EGLDisplay, image: EGLImageKHR) -> void"""
 
 def eglCreateWindowSurface(dpy: Any, config: Any, win: Any, attrib_list: IntArray) -> Any:
-    """eglCreateWindowSurface(dpy, config, win, attrib_list) -> EGLSurface"""
+    """eglCreateWindowSurface(dpy: EGLDisplay, config: EGLConfig, win: EGLNativeWindowType, attrib_list: GLint[]) -> EGLSurface"""
 
 def eglDebugMessageControlKHR(callback: Any, attrib_list: Int64Array) -> int:
-    """eglDebugMessageControlKHR(callback, attrib_list) -> EGLint"""
+    """eglDebugMessageControlKHR(callback: EGLDEBUGPROCKHR, attrib_list: GLintptr[]) -> EGLint"""
 
 def eglDestroyContext(dpy: Any, ctx: Any) -> int:
-    """eglDestroyContext(dpy, ctx) -> EGLBoolean"""
+    """eglDestroyContext(dpy: EGLDisplay, ctx: EGLContext) -> EGLBoolean"""
 
 def eglDestroyDisplayEXT(dpy: Any) -> int:
-    """eglDestroyDisplayEXT(dpy) -> EGLBoolean"""
+    """eglDestroyDisplayEXT(dpy: EGLDisplay) -> EGLBoolean"""
 
 def eglDestroyImage(dpy: Any, image: Any) -> int:
-    """eglDestroyImage(dpy, image) -> EGLBoolean"""
+    """eglDestroyImage(dpy: EGLDisplay, image: EGLImage) -> EGLBoolean"""
 
 def eglDestroyImageKHR(dpy: Any, image: Any) -> int:
-    """eglDestroyImageKHR(dpy, image) -> EGLBoolean"""
+    """eglDestroyImageKHR(dpy: EGLDisplay, image: EGLImageKHR) -> EGLBoolean"""
 
 def eglDestroyStreamKHR(dpy: Any, stream: Any) -> int:
-    """eglDestroyStreamKHR(dpy, stream) -> EGLBoolean"""
+    """eglDestroyStreamKHR(dpy: EGLDisplay, stream: EGLStreamKHR) -> EGLBoolean"""
 
 def eglDestroySurface(dpy: Any, surface: Any) -> int:
-    """eglDestroySurface(dpy, surface) -> EGLBoolean"""
+    """eglDestroySurface(dpy: EGLDisplay, surface: EGLSurface) -> EGLBoolean"""
 
 def eglDestroySync(dpy: Any, sync: Any) -> int:
-    """eglDestroySync(dpy, sync) -> EGLBoolean"""
+    """eglDestroySync(dpy: EGLDisplay, sync: EGLSync) -> EGLBoolean"""
 
 def eglDestroySyncKHR(dpy: Any, sync: Any) -> int:
-    """eglDestroySyncKHR(dpy, sync) -> EGLBoolean"""
+    """eglDestroySyncKHR(dpy: EGLDisplay, sync: EGLSyncKHR) -> EGLBoolean"""
 
 def eglDestroySyncNV(sync: Any) -> int:
-    """eglDestroySyncNV(sync) -> EGLBoolean"""
+    """eglDestroySyncNV(sync: EGLSyncNV) -> EGLBoolean"""
 
 def eglDupNativeFenceFDANDROID(dpy: Any, sync: Any) -> int:
-    """eglDupNativeFenceFDANDROID(dpy, sync) -> EGLint"""
+    """eglDupNativeFenceFDANDROID(dpy: EGLDisplay, sync: EGLSyncKHR) -> EGLint"""
 
 def eglExportDMABUFImageMESA(dpy: Any, image: Any, fds: IntArray, strides: IntArray, offsets: IntArray) -> int:
-    """eglExportDMABUFImageMESA(dpy, image, fds, strides, offsets) -> EGLBoolean"""
+    """eglExportDMABUFImageMESA(dpy: EGLDisplay, image: EGLImageKHR, fds: c_int[], strides: GLint[], offsets: GLint[]) -> EGLBoolean"""
 
 def eglExportDMABUFImageQueryMESA(dpy: Any, image: Any, fourcc: IntArray, num_planes: IntArray, modifiers: UInt64Array) -> int:
-    """eglExportDMABUFImageQueryMESA(dpy, image, fourcc, num_planes, modifiers) -> EGLBoolean"""
+    """eglExportDMABUFImageQueryMESA(dpy: EGLDisplay, image: EGLImageKHR, fourcc: c_int[], num_planes: c_int[], modifiers: GLuint64[]) -> EGLBoolean"""
 
 def eglExportDRMImageMESA(dpy: Any, image: Any, name: IntArray, handle: IntArray, stride: IntArray) -> int:
-    """eglExportDRMImageMESA(dpy, image, name, handle, stride) -> EGLBoolean"""
+    """eglExportDRMImageMESA(dpy: EGLDisplay, image: EGLImageKHR, name: GLint[], handle: GLint[], stride: GLint[]) -> EGLBoolean"""
 
 def eglFenceNV(sync: Any) -> int:
-    """eglFenceNV(sync) -> EGLBoolean"""
+    """eglFenceNV(sync: EGLSyncNV) -> EGLBoolean"""
 
 def eglGetCompositorTimingANDROID(dpy: Any, surface: Any, numTimestamps: int, names: IntArray, values: Int64Array) -> int:
-    """eglGetCompositorTimingANDROID(dpy, surface, numTimestamps, names, values) -> EGLBoolean"""
+    """eglGetCompositorTimingANDROID(dpy: EGLDisplay, surface: EGLSurface, numTimestamps: EGLint, names: GLint[], values: GLint64[]) -> EGLBoolean"""
 
 def eglGetCompositorTimingSupportedANDROID(dpy: Any, surface: Any, name: int) -> int:
-    """eglGetCompositorTimingSupportedANDROID(dpy, surface, name) -> EGLBoolean"""
+    """eglGetCompositorTimingSupportedANDROID(dpy: EGLDisplay, surface: EGLSurface, name: EGLint) -> EGLBoolean"""
 
 def eglGetConfigAttrib(dpy: Any, config: Any, attribute: int, value: IntArray) -> int:
-    """eglGetConfigAttrib(dpy, config, attribute, value) -> EGLBoolean"""
+    """eglGetConfigAttrib(dpy: EGLDisplay, config: EGLConfig, attribute: EGLint, value: GLint[]) -> EGLBoolean"""
 
 def eglGetConfigs(dpy: Any, configs: AnyArray, config_size: int, num_config: IntArray) -> int:
-    """eglGetConfigs(dpy, configs, config_size, num_config) -> EGLBoolean"""
+    """eglGetConfigs(dpy: EGLDisplay, configs: void[][], config_size: EGLint, num_config: GLint[]) -> EGLBoolean"""
 
 def eglGetCurrentContext() -> Any:
     """eglGetCurrentContext() -> EGLContext"""
@@ -717,61 +717,61 @@ def eglGetCurrentDisplay() -> Any:
     """eglGetCurrentDisplay() -> EGLDisplay"""
 
 def eglGetCurrentSurface(readdraw: int) -> Any:
-    """eglGetCurrentSurface(readdraw) -> EGLSurface"""
+    """eglGetCurrentSurface(readdraw: EGLint) -> EGLSurface"""
 
 def eglGetDisplay(display_id: Any) -> Any:
-    """eglGetDisplay(display_id) -> EGLDisplay"""
+    """eglGetDisplay(display_id: EGLNativeDisplayType) -> EGLDisplay"""
 
 def eglGetDisplayDriverConfig(dpy: Any) -> bytes:
-    """eglGetDisplayDriverConfig(dpy) -> GLchar"""
+    """eglGetDisplayDriverConfig(dpy: EGLDisplay) -> GLchar"""
 
 def eglGetDisplayDriverName(dpy: Any) -> bytes:
-    """eglGetDisplayDriverName(dpy) -> GLchar"""
+    """eglGetDisplayDriverName(dpy: EGLDisplay) -> GLchar"""
 
 def eglGetError() -> int:
     """eglGetError() -> EGLint"""
 
 def eglGetFrameTimestampSupportedANDROID(dpy: Any, surface: Any, timestamp: int) -> int:
-    """eglGetFrameTimestampSupportedANDROID(dpy, surface, timestamp) -> EGLBoolean"""
+    """eglGetFrameTimestampSupportedANDROID(dpy: EGLDisplay, surface: EGLSurface, timestamp: EGLint) -> EGLBoolean"""
 
 def eglGetFrameTimestampsANDROID(dpy: Any, surface: Any, frameId: int, numTimestamps: int, timestamps: IntArray, values: Int64Array) -> int:
-    """eglGetFrameTimestampsANDROID(dpy, surface, frameId, numTimestamps, timestamps, values) -> EGLBoolean"""
+    """eglGetFrameTimestampsANDROID(dpy: EGLDisplay, surface: EGLSurface, frameId: EGLuint64KHR, numTimestamps: EGLint, timestamps: GLint[], values: GLint64[]) -> EGLBoolean"""
 
 def eglGetMscRateANGLE(dpy: Any, surface: Any, numerator: IntArray, denominator: IntArray) -> int:
-    """eglGetMscRateANGLE(dpy, surface, numerator, denominator) -> EGLBoolean"""
+    """eglGetMscRateANGLE(dpy: EGLDisplay, surface: EGLSurface, numerator: GLint[], denominator: GLint[]) -> EGLBoolean"""
 
 def eglGetNativeClientBufferANDROID(buffer: AnyArray) -> Any:
-    """eglGetNativeClientBufferANDROID(buffer) -> EGLClientBuffer"""
+    """eglGetNativeClientBufferANDROID(buffer: void[]) -> EGLClientBuffer"""
 
 def eglGetNextFrameIdANDROID(dpy: Any, surface: Any, frameId: UInt64Array) -> int:
-    """eglGetNextFrameIdANDROID(dpy, surface, frameId) -> EGLBoolean"""
+    """eglGetNextFrameIdANDROID(dpy: EGLDisplay, surface: EGLSurface, frameId: GLuint64[]) -> EGLBoolean"""
 
 def eglGetOutputLayersEXT(dpy: Any, attrib_list: Int64Array, layers: AnyArray, max_layers: int, num_layers: IntArray) -> int:
-    """eglGetOutputLayersEXT(dpy, attrib_list, layers, max_layers, num_layers) -> EGLBoolean"""
+    """eglGetOutputLayersEXT(dpy: EGLDisplay, attrib_list: GLintptr[], layers: EGLOutputLayerEXT[], max_layers: EGLint, num_layers: GLint[]) -> EGLBoolean"""
 
 def eglGetOutputPortsEXT(dpy: Any, attrib_list: Int64Array, ports: AnyArray, max_ports: int, num_ports: IntArray) -> int:
-    """eglGetOutputPortsEXT(dpy, attrib_list, ports, max_ports, num_ports) -> EGLBoolean"""
+    """eglGetOutputPortsEXT(dpy: EGLDisplay, attrib_list: GLintptr[], ports: EGLOutputPortEXT[], max_ports: EGLint, num_ports: GLint[]) -> EGLBoolean"""
 
 def eglGetPlatformDisplay(platform: int, native_display: AnyArray, attrib_list: Int64Array) -> Any:
-    """eglGetPlatformDisplay(platform, native_display, attrib_list) -> EGLDisplay"""
+    """eglGetPlatformDisplay(platform: EGLenum, native_display: void[], attrib_list: GLintptr[]) -> EGLDisplay"""
 
 def eglGetPlatformDisplayEXT(platform: int, native_display: AnyArray, attrib_list: IntArray) -> Any:
-    """eglGetPlatformDisplayEXT(platform, native_display, attrib_list) -> EGLDisplay"""
+    """eglGetPlatformDisplayEXT(platform: EGLenum, native_display: void[], attrib_list: GLint[]) -> EGLDisplay"""
 
 def eglGetProcAddress(procname: ByteArray) -> int | None:
-    """eglGetProcAddress(procname) -> void"""
+    """eglGetProcAddress(procname: GLbyte[]) -> void"""
 
 def eglGetStreamFileDescriptorKHR(dpy: Any, stream: Any) -> int:
-    """eglGetStreamFileDescriptorKHR(dpy, stream) -> EGLNativeFileDescriptorKHR"""
+    """eglGetStreamFileDescriptorKHR(dpy: EGLDisplay, stream: EGLStreamKHR) -> EGLNativeFileDescriptorKHR"""
 
 def eglGetSyncAttrib(dpy: Any, sync: Any, attribute: int, value: Int64Array) -> int:
-    """eglGetSyncAttrib(dpy, sync, attribute, value) -> EGLBoolean"""
+    """eglGetSyncAttrib(dpy: EGLDisplay, sync: EGLSync, attribute: EGLint, value: GLintptr[]) -> EGLBoolean"""
 
 def eglGetSyncAttribKHR(dpy: Any, sync: Any, attribute: int, value: IntArray) -> int:
-    """eglGetSyncAttribKHR(dpy, sync, attribute, value) -> EGLBoolean"""
+    """eglGetSyncAttribKHR(dpy: EGLDisplay, sync: EGLSyncKHR, attribute: EGLint, value: GLint[]) -> EGLBoolean"""
 
 def eglGetSyncAttribNV(sync: Any, attribute: int, value: IntArray) -> int:
-    """eglGetSyncAttribNV(sync, attribute, value) -> EGLBoolean"""
+    """eglGetSyncAttribNV(sync: EGLSyncNV, attribute: EGLint, value: GLint[]) -> EGLBoolean"""
 
 def eglGetSystemTimeFrequencyNV() -> int:
     """eglGetSystemTimeFrequencyNV() -> EGLuint64NV"""
@@ -780,214 +780,214 @@ def eglGetSystemTimeNV() -> int:
     """eglGetSystemTimeNV() -> EGLuint64NV"""
 
 def eglInitialize(dpy: Any, major: IntArray, minor: IntArray) -> int:
-    """eglInitialize(dpy, major, minor) -> EGLBoolean"""
+    """eglInitialize(dpy: EGLDisplay, major: GLint[], minor: GLint[]) -> EGLBoolean"""
 
 def eglLabelObjectKHR(display: Any, objectType: int, object: Any, label: Any) -> int:
-    """eglLabelObjectKHR(display, objectType, object, label) -> EGLint"""
+    """eglLabelObjectKHR(display: EGLDisplay, objectType: EGLenum, object: EGLObjectKHR, label: EGLLabelKHR) -> EGLint"""
 
 def eglLockSurfaceKHR(dpy: Any, surface: Any, attrib_list: IntArray) -> int:
-    """eglLockSurfaceKHR(dpy, surface, attrib_list) -> EGLBoolean"""
+    """eglLockSurfaceKHR(dpy: EGLDisplay, surface: EGLSurface, attrib_list: GLint[]) -> EGLBoolean"""
 
 def eglMakeCurrent(dpy: Any, draw: Any, read: Any, ctx: Any) -> int:
-    """eglMakeCurrent(dpy, draw, read, ctx) -> EGLBoolean"""
+    """eglMakeCurrent(dpy: EGLDisplay, draw: EGLSurface, read: EGLSurface, ctx: EGLContext) -> EGLBoolean"""
 
 def eglOutputLayerAttribEXT(dpy: Any, layer: Any, attribute: int, value: int) -> int:
-    """eglOutputLayerAttribEXT(dpy, layer, attribute, value) -> EGLBoolean"""
+    """eglOutputLayerAttribEXT(dpy: EGLDisplay, layer: EGLOutputLayerEXT, attribute: EGLint, value: EGLAttrib) -> EGLBoolean"""
 
 def eglOutputPortAttribEXT(dpy: Any, port: Any, attribute: int, value: int) -> int:
-    """eglOutputPortAttribEXT(dpy, port, attribute, value) -> EGLBoolean"""
+    """eglOutputPortAttribEXT(dpy: EGLDisplay, port: EGLOutputPortEXT, attribute: EGLint, value: EGLAttrib) -> EGLBoolean"""
 
 def eglPostSubBufferNV(dpy: Any, surface: Any, x: int, y: int, width: int, height: int) -> int:
-    """eglPostSubBufferNV(dpy, surface, x, y, width, height) -> EGLBoolean"""
+    """eglPostSubBufferNV(dpy: EGLDisplay, surface: EGLSurface, x: EGLint, y: EGLint, width: EGLint, height: EGLint) -> EGLBoolean"""
 
 def eglPresentationTimeANDROID(dpy: Any, surface: Any, time: int) -> int:
-    """eglPresentationTimeANDROID(dpy, surface, time) -> EGLBoolean"""
+    """eglPresentationTimeANDROID(dpy: EGLDisplay, surface: EGLSurface, time: EGLnsecsANDROID) -> EGLBoolean"""
 
 def eglQueryAPI() -> int:
     """eglQueryAPI() -> EGLenum"""
 
 def eglQueryContext(dpy: Any, ctx: Any, attribute: int, value: IntArray) -> int:
-    """eglQueryContext(dpy, ctx, attribute, value) -> EGLBoolean"""
+    """eglQueryContext(dpy: EGLDisplay, ctx: EGLContext, attribute: EGLint, value: GLint[]) -> EGLBoolean"""
 
 def eglQueryDebugKHR(attribute: int, value: Int64Array) -> int:
-    """eglQueryDebugKHR(attribute, value) -> EGLBoolean"""
+    """eglQueryDebugKHR(attribute: EGLint, value: GLintptr[]) -> EGLBoolean"""
 
 def eglQueryDeviceAttribEXT(device: Any, attribute: int, value: Int64Array) -> int:
-    """eglQueryDeviceAttribEXT(device, attribute, value) -> EGLBoolean"""
+    """eglQueryDeviceAttribEXT(device: EGLDeviceEXT, attribute: EGLint, value: GLintptr[]) -> EGLBoolean"""
 
 def eglQueryDeviceBinaryEXT(device: Any, name: int, max_size: int, value: AnyArray, size: IntArray) -> int:
-    """eglQueryDeviceBinaryEXT(device, name, max_size, value, size) -> EGLBoolean"""
+    """eglQueryDeviceBinaryEXT(device: EGLDeviceEXT, name: EGLint, max_size: EGLint, value: void[], size: GLint[]) -> EGLBoolean"""
 
 def eglQueryDeviceStringEXT(device: Any, name: int) -> bytes:
-    """eglQueryDeviceStringEXT(device, name) -> GLchar"""
+    """eglQueryDeviceStringEXT(device: EGLDeviceEXT, name: EGLint) -> GLchar"""
 
 def eglQueryDevicesEXT(max_devices: int, devices: AnyArray, num_devices: IntArray) -> int:
-    """eglQueryDevicesEXT(max_devices, devices, num_devices) -> EGLBoolean"""
+    """eglQueryDevicesEXT(max_devices: EGLint, devices: EGLDeviceEXT[], num_devices: GLint[]) -> EGLBoolean"""
 
 def eglQueryDisplayAttribEXT(dpy: Any, attribute: int, value: Int64Array) -> int:
-    """eglQueryDisplayAttribEXT(dpy, attribute, value) -> EGLBoolean"""
+    """eglQueryDisplayAttribEXT(dpy: EGLDisplay, attribute: EGLint, value: GLintptr[]) -> EGLBoolean"""
 
 def eglQueryDisplayAttribKHR(dpy: Any, name: int, value: Int64Array) -> int:
-    """eglQueryDisplayAttribKHR(dpy, name, value) -> EGLBoolean"""
+    """eglQueryDisplayAttribKHR(dpy: EGLDisplay, name: EGLint, value: GLintptr[]) -> EGLBoolean"""
 
 def eglQueryDisplayAttribNV(dpy: Any, attribute: int, value: Int64Array) -> int:
-    """eglQueryDisplayAttribNV(dpy, attribute, value) -> EGLBoolean"""
+    """eglQueryDisplayAttribNV(dpy: EGLDisplay, attribute: EGLint, value: GLintptr[]) -> EGLBoolean"""
 
 def eglQueryDmaBufFormatsEXT(dpy: Any, max_formats: int, formats: IntArray, num_formats: IntArray) -> int:
-    """eglQueryDmaBufFormatsEXT(dpy, max_formats, formats, num_formats) -> EGLBoolean"""
+    """eglQueryDmaBufFormatsEXT(dpy: EGLDisplay, max_formats: EGLint, formats: GLint[], num_formats: GLint[]) -> EGLBoolean"""
 
 def eglQueryDmaBufModifiersEXT(dpy: Any, format: int, max_modifiers: int, modifiers: UInt64Array, external_only: AnyArray, num_modifiers: IntArray) -> int:
-    """eglQueryDmaBufModifiersEXT(dpy, format, max_modifiers, modifiers, external_only, num_modifiers) -> EGLBoolean"""
+    """eglQueryDmaBufModifiersEXT(dpy: EGLDisplay, format: EGLint, max_modifiers: EGLint, modifiers: GLuint64[], external_only: void[][], num_modifiers: GLint[]) -> EGLBoolean"""
 
 def eglQueryNativeDisplayNV(dpy: Any, display_id: AnyArray) -> int:
-    """eglQueryNativeDisplayNV(dpy, display_id) -> EGLBoolean"""
+    """eglQueryNativeDisplayNV(dpy: EGLDisplay, display_id: void[][]) -> EGLBoolean"""
 
 def eglQueryNativePixmapNV(dpy: Any, surf: Any, pixmap: AnyArray) -> int:
-    """eglQueryNativePixmapNV(dpy, surf, pixmap) -> EGLBoolean"""
+    """eglQueryNativePixmapNV(dpy: EGLDisplay, surf: EGLSurface, pixmap: void[][]) -> EGLBoolean"""
 
 def eglQueryNativeWindowNV(dpy: Any, surf: Any, window: AnyArray) -> int:
-    """eglQueryNativeWindowNV(dpy, surf, window) -> EGLBoolean"""
+    """eglQueryNativeWindowNV(dpy: EGLDisplay, surf: EGLSurface, window: void[][]) -> EGLBoolean"""
 
 def eglQueryOutputLayerAttribEXT(dpy: Any, layer: Any, attribute: int, value: Int64Array) -> int:
-    """eglQueryOutputLayerAttribEXT(dpy, layer, attribute, value) -> EGLBoolean"""
+    """eglQueryOutputLayerAttribEXT(dpy: EGLDisplay, layer: EGLOutputLayerEXT, attribute: EGLint, value: GLintptr[]) -> EGLBoolean"""
 
 def eglQueryOutputLayerStringEXT(dpy: Any, layer: Any, name: int) -> bytes:
-    """eglQueryOutputLayerStringEXT(dpy, layer, name) -> GLchar"""
+    """eglQueryOutputLayerStringEXT(dpy: EGLDisplay, layer: EGLOutputLayerEXT, name: EGLint) -> GLchar"""
 
 def eglQueryOutputPortAttribEXT(dpy: Any, port: Any, attribute: int, value: Int64Array) -> int:
-    """eglQueryOutputPortAttribEXT(dpy, port, attribute, value) -> EGLBoolean"""
+    """eglQueryOutputPortAttribEXT(dpy: EGLDisplay, port: EGLOutputPortEXT, attribute: EGLint, value: GLintptr[]) -> EGLBoolean"""
 
 def eglQueryOutputPortStringEXT(dpy: Any, port: Any, name: int) -> bytes:
-    """eglQueryOutputPortStringEXT(dpy, port, name) -> GLchar"""
+    """eglQueryOutputPortStringEXT(dpy: EGLDisplay, port: EGLOutputPortEXT, name: EGLint) -> GLchar"""
 
 def eglQueryStreamAttribKHR(dpy: Any, stream: Any, attribute: int, value: Int64Array) -> int:
-    """eglQueryStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean"""
+    """eglQueryStreamAttribKHR(dpy: EGLDisplay, stream: EGLStreamKHR, attribute: EGLenum, value: GLintptr[]) -> EGLBoolean"""
 
 def eglQueryStreamConsumerEventNV(dpy: Any, stream: Any, timeout: int, event: AnyArray, aux: Int64Array) -> int:
-    """eglQueryStreamConsumerEventNV(dpy, stream, timeout, event, aux) -> EGLint"""
+    """eglQueryStreamConsumerEventNV(dpy: EGLDisplay, stream: EGLStreamKHR, timeout: EGLTime, event: void[][], aux: GLintptr[]) -> EGLint"""
 
 def eglQueryStreamKHR(dpy: Any, stream: Any, attribute: int, value: IntArray) -> int:
-    """eglQueryStreamKHR(dpy, stream, attribute, value) -> EGLBoolean"""
+    """eglQueryStreamKHR(dpy: EGLDisplay, stream: EGLStreamKHR, attribute: EGLenum, value: GLint[]) -> EGLBoolean"""
 
 def eglQueryStreamMetadataNV(dpy: Any, stream: Any, name: int, n: int, offset: int, size: int, data: AnyArray) -> int:
-    """eglQueryStreamMetadataNV(dpy, stream, name, n, offset, size, data) -> EGLBoolean"""
+    """eglQueryStreamMetadataNV(dpy: EGLDisplay, stream: EGLStreamKHR, name: EGLenum, n: EGLint, offset: EGLint, size: EGLint, data: void[]) -> EGLBoolean"""
 
 def eglQueryStreamTimeKHR(dpy: Any, stream: Any, attribute: int, value: UInt64Array) -> int:
-    """eglQueryStreamTimeKHR(dpy, stream, attribute, value) -> EGLBoolean"""
+    """eglQueryStreamTimeKHR(dpy: EGLDisplay, stream: EGLStreamKHR, attribute: EGLenum, value: GLuint64[]) -> EGLBoolean"""
 
 def eglQueryStreamu64KHR(dpy: Any, stream: Any, attribute: int, value: UInt64Array) -> int:
-    """eglQueryStreamu64KHR(dpy, stream, attribute, value) -> EGLBoolean"""
+    """eglQueryStreamu64KHR(dpy: EGLDisplay, stream: EGLStreamKHR, attribute: EGLenum, value: GLuint64[]) -> EGLBoolean"""
 
 def eglQueryString(dpy: Any, name: int) -> bytes:
-    """eglQueryString(dpy, name) -> GLchar"""
+    """eglQueryString(dpy: EGLDisplay, name: EGLint) -> GLchar"""
 
 def eglQuerySupportedCompressionRatesEXT(dpy: Any, config: Any, attrib_list: Int64Array, rates: IntArray, rate_size: int, num_rates: IntArray) -> int:
-    """eglQuerySupportedCompressionRatesEXT(dpy, config, attrib_list, rates, rate_size, num_rates) -> EGLBoolean"""
+    """eglQuerySupportedCompressionRatesEXT(dpy: EGLDisplay, config: EGLConfig, attrib_list: GLintptr[], rates: GLint[], rate_size: EGLint, num_rates: GLint[]) -> EGLBoolean"""
 
 def eglQuerySurface(dpy: Any, surface: Any, attribute: int, value: IntArray) -> int:
-    """eglQuerySurface(dpy, surface, attribute, value) -> EGLBoolean"""
+    """eglQuerySurface(dpy: EGLDisplay, surface: EGLSurface, attribute: EGLint, value: GLint[]) -> EGLBoolean"""
 
 def eglQuerySurface64KHR(dpy: Any, surface: Any, attribute: int, value: AnyArray) -> int:
-    """eglQuerySurface64KHR(dpy, surface, attribute, value) -> EGLBoolean"""
+    """eglQuerySurface64KHR(dpy: EGLDisplay, surface: EGLSurface, attribute: EGLint, value: EGLAttribKHR[]) -> EGLBoolean"""
 
 def eglQuerySurfacePointerANGLE(dpy: Any, surface: Any, attribute: int, value: AnyArray) -> int:
-    """eglQuerySurfacePointerANGLE(dpy, surface, attribute, value) -> EGLBoolean"""
+    """eglQuerySurfacePointerANGLE(dpy: EGLDisplay, surface: EGLSurface, attribute: EGLint, value: void[][]) -> EGLBoolean"""
 
 def eglQueryWaylandBufferWL(dpy: Any, buffer: AnyArray, attribute: int, value: IntArray) -> int:
-    """eglQueryWaylandBufferWL(dpy, buffer, attribute, value) -> EGLBoolean"""
+    """eglQueryWaylandBufferWL(dpy: EGLDisplay, buffer: void[], attribute: EGLint, value: GLint[]) -> EGLBoolean"""
 
 def eglReleaseTexImage(dpy: Any, surface: Any, buffer: int) -> int:
-    """eglReleaseTexImage(dpy, surface, buffer) -> EGLBoolean"""
+    """eglReleaseTexImage(dpy: EGLDisplay, surface: EGLSurface, buffer: EGLint) -> EGLBoolean"""
 
 def eglReleaseThread() -> int:
     """eglReleaseThread() -> EGLBoolean"""
 
 def eglResetStreamNV(dpy: Any, stream: Any) -> int:
-    """eglResetStreamNV(dpy, stream) -> EGLBoolean"""
+    """eglResetStreamNV(dpy: EGLDisplay, stream: EGLStreamKHR) -> EGLBoolean"""
 
 def eglSetBlobCacheFuncsANDROID(dpy: Any, set: Any, get: Any) -> None:
-    """eglSetBlobCacheFuncsANDROID(dpy, set, get) -> None"""
+    """eglSetBlobCacheFuncsANDROID(dpy: EGLDisplay, set: EGLSetBlobFuncANDROID, get: EGLGetBlobFuncANDROID) -> None"""
 
 def eglSetDamageRegionKHR(dpy: Any, surface: Any, rects: IntArray, n_rects: int) -> int:
-    """eglSetDamageRegionKHR(dpy, surface, rects, n_rects) -> EGLBoolean"""
+    """eglSetDamageRegionKHR(dpy: EGLDisplay, surface: EGLSurface, rects: GLint[], n_rects: EGLint) -> EGLBoolean"""
 
 def eglSetStreamAttribKHR(dpy: Any, stream: Any, attribute: int, value: int) -> int:
-    """eglSetStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean"""
+    """eglSetStreamAttribKHR(dpy: EGLDisplay, stream: EGLStreamKHR, attribute: EGLenum, value: EGLAttrib) -> EGLBoolean"""
 
 def eglSetStreamMetadataNV(dpy: Any, stream: Any, n: int, offset: int, size: int, data: AnyArray) -> int:
-    """eglSetStreamMetadataNV(dpy, stream, n, offset, size, data) -> EGLBoolean"""
+    """eglSetStreamMetadataNV(dpy: EGLDisplay, stream: EGLStreamKHR, n: EGLint, offset: EGLint, size: EGLint, data: void[]) -> EGLBoolean"""
 
 def eglSignalSyncKHR(dpy: Any, sync: Any, mode: int) -> int:
-    """eglSignalSyncKHR(dpy, sync, mode) -> EGLBoolean"""
+    """eglSignalSyncKHR(dpy: EGLDisplay, sync: EGLSyncKHR, mode: EGLenum) -> EGLBoolean"""
 
 def eglSignalSyncNV(sync: Any, mode: int) -> int:
-    """eglSignalSyncNV(sync, mode) -> EGLBoolean"""
+    """eglSignalSyncNV(sync: EGLSyncNV, mode: EGLenum) -> EGLBoolean"""
 
 def eglStreamAcquireImageNV(dpy: Any, stream: Any, pImage: AnyArray, sync: Any) -> int:
-    """eglStreamAcquireImageNV(dpy, stream, pImage, sync) -> EGLBoolean"""
+    """eglStreamAcquireImageNV(dpy: EGLDisplay, stream: EGLStreamKHR, pImage: void[][], sync: EGLSync) -> EGLBoolean"""
 
 def eglStreamAttribKHR(dpy: Any, stream: Any, attribute: int, value: int) -> int:
-    """eglStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean"""
+    """eglStreamAttribKHR(dpy: EGLDisplay, stream: EGLStreamKHR, attribute: EGLenum, value: EGLint) -> EGLBoolean"""
 
 def eglStreamConsumerAcquireAttribKHR(dpy: Any, stream: Any, attrib_list: Int64Array) -> int:
-    """eglStreamConsumerAcquireAttribKHR(dpy, stream, attrib_list) -> EGLBoolean"""
+    """eglStreamConsumerAcquireAttribKHR(dpy: EGLDisplay, stream: EGLStreamKHR, attrib_list: GLintptr[]) -> EGLBoolean"""
 
 def eglStreamConsumerAcquireKHR(dpy: Any, stream: Any) -> int:
-    """eglStreamConsumerAcquireKHR(dpy, stream) -> EGLBoolean"""
+    """eglStreamConsumerAcquireKHR(dpy: EGLDisplay, stream: EGLStreamKHR) -> EGLBoolean"""
 
 def eglStreamConsumerGLTextureExternalKHR(dpy: Any, stream: Any) -> int:
-    """eglStreamConsumerGLTextureExternalKHR(dpy, stream) -> EGLBoolean"""
+    """eglStreamConsumerGLTextureExternalKHR(dpy: EGLDisplay, stream: EGLStreamKHR) -> EGLBoolean"""
 
 def eglStreamConsumerOutputEXT(dpy: Any, stream: Any, layer: Any) -> int:
-    """eglStreamConsumerOutputEXT(dpy, stream, layer) -> EGLBoolean"""
+    """eglStreamConsumerOutputEXT(dpy: EGLDisplay, stream: EGLStreamKHR, layer: EGLOutputLayerEXT) -> EGLBoolean"""
 
 def eglStreamConsumerReleaseAttribKHR(dpy: Any, stream: Any, attrib_list: Int64Array) -> int:
-    """eglStreamConsumerReleaseAttribKHR(dpy, stream, attrib_list) -> EGLBoolean"""
+    """eglStreamConsumerReleaseAttribKHR(dpy: EGLDisplay, stream: EGLStreamKHR, attrib_list: GLintptr[]) -> EGLBoolean"""
 
 def eglStreamConsumerReleaseKHR(dpy: Any, stream: Any) -> int:
-    """eglStreamConsumerReleaseKHR(dpy, stream) -> EGLBoolean"""
+    """eglStreamConsumerReleaseKHR(dpy: EGLDisplay, stream: EGLStreamKHR) -> EGLBoolean"""
 
 def eglStreamFlushNV(dpy: Any, stream: Any) -> int:
-    """eglStreamFlushNV(dpy, stream) -> EGLBoolean"""
+    """eglStreamFlushNV(dpy: EGLDisplay, stream: EGLStreamKHR) -> EGLBoolean"""
 
 def eglStreamImageConsumerConnectNV(dpy: Any, stream: Any, num_modifiers: int, modifiers: UInt64Array, attrib_list: Int64Array) -> int:
-    """eglStreamImageConsumerConnectNV(dpy, stream, num_modifiers, modifiers, attrib_list) -> EGLBoolean"""
+    """eglStreamImageConsumerConnectNV(dpy: EGLDisplay, stream: EGLStreamKHR, num_modifiers: EGLint, modifiers: GLuint64[], attrib_list: GLintptr[]) -> EGLBoolean"""
 
 def eglStreamReleaseImageNV(dpy: Any, stream: Any, image: Any, sync: Any) -> int:
-    """eglStreamReleaseImageNV(dpy, stream, image, sync) -> EGLBoolean"""
+    """eglStreamReleaseImageNV(dpy: EGLDisplay, stream: EGLStreamKHR, image: EGLImage, sync: EGLSync) -> EGLBoolean"""
 
 def eglSurfaceAttrib(dpy: Any, surface: Any, attribute: int, value: int) -> int:
-    """eglSurfaceAttrib(dpy, surface, attribute, value) -> EGLBoolean"""
+    """eglSurfaceAttrib(dpy: EGLDisplay, surface: EGLSurface, attribute: EGLint, value: EGLint) -> EGLBoolean"""
 
 def eglSwapBuffers(dpy: Any, surface: Any) -> int:
-    """eglSwapBuffers(dpy, surface) -> EGLBoolean"""
+    """eglSwapBuffers(dpy: EGLDisplay, surface: EGLSurface) -> EGLBoolean"""
 
 def eglSwapBuffersRegion2NOK(dpy: Any, surface: Any, numRects: int, rects: IntArray) -> int:
-    """eglSwapBuffersRegion2NOK(dpy, surface, numRects, rects) -> EGLBoolean"""
+    """eglSwapBuffersRegion2NOK(dpy: EGLDisplay, surface: EGLSurface, numRects: EGLint, rects: GLint[]) -> EGLBoolean"""
 
 def eglSwapBuffersRegionNOK(dpy: Any, surface: Any, numRects: int, rects: IntArray) -> int:
-    """eglSwapBuffersRegionNOK(dpy, surface, numRects, rects) -> EGLBoolean"""
+    """eglSwapBuffersRegionNOK(dpy: EGLDisplay, surface: EGLSurface, numRects: EGLint, rects: GLint[]) -> EGLBoolean"""
 
 def eglSwapBuffersWithDamageEXT(dpy: Any, surface: Any, rects: IntArray, n_rects: int) -> int:
-    """eglSwapBuffersWithDamageEXT(dpy, surface, rects, n_rects) -> EGLBoolean"""
+    """eglSwapBuffersWithDamageEXT(dpy: EGLDisplay, surface: EGLSurface, rects: GLint[], n_rects: EGLint) -> EGLBoolean"""
 
 def eglSwapBuffersWithDamageKHR(dpy: Any, surface: Any, rects: IntArray, n_rects: int) -> int:
-    """eglSwapBuffersWithDamageKHR(dpy, surface, rects, n_rects) -> EGLBoolean"""
+    """eglSwapBuffersWithDamageKHR(dpy: EGLDisplay, surface: EGLSurface, rects: GLint[], n_rects: EGLint) -> EGLBoolean"""
 
 def eglSwapInterval(dpy: Any, interval: int) -> int:
-    """eglSwapInterval(dpy, interval) -> EGLBoolean"""
+    """eglSwapInterval(dpy: EGLDisplay, interval: EGLint) -> EGLBoolean"""
 
 def eglTerminate(dpy: Any) -> int:
-    """eglTerminate(dpy) -> EGLBoolean"""
+    """eglTerminate(dpy: EGLDisplay) -> EGLBoolean"""
 
 def eglUnbindWaylandDisplayWL(dpy: Any, display: AnyArray) -> int:
-    """eglUnbindWaylandDisplayWL(dpy, display) -> EGLBoolean"""
+    """eglUnbindWaylandDisplayWL(dpy: EGLDisplay, display: void[]) -> EGLBoolean"""
 
 def eglUnlockSurfaceKHR(dpy: Any, surface: Any) -> int:
-    """eglUnlockSurfaceKHR(dpy, surface) -> EGLBoolean"""
+    """eglUnlockSurfaceKHR(dpy: EGLDisplay, surface: EGLSurface) -> EGLBoolean"""
 
 def eglUnsignalSyncEXT(dpy: Any, sync: Any, attrib_list: Int64Array) -> int:
-    """eglUnsignalSyncEXT(dpy, sync, attrib_list) -> EGLBoolean"""
+    """eglUnsignalSyncEXT(dpy: EGLDisplay, sync: EGLSync, attrib_list: GLintptr[]) -> EGLBoolean"""
 
 def eglWaitClient() -> int:
     """eglWaitClient() -> EGLBoolean"""
@@ -996,13 +996,13 @@ def eglWaitGL() -> int:
     """eglWaitGL() -> EGLBoolean"""
 
 def eglWaitNative(engine: int) -> int:
-    """eglWaitNative(engine) -> EGLBoolean"""
+    """eglWaitNative(engine: EGLint) -> EGLBoolean"""
 
 def eglWaitSync(dpy: Any, sync: Any, flags: int) -> int:
-    """eglWaitSync(dpy, sync, flags) -> EGLBoolean"""
+    """eglWaitSync(dpy: EGLDisplay, sync: EGLSync, flags: EGLint) -> EGLBoolean"""
 
 def eglWaitSyncKHR(dpy: Any, sync: Any, flags: int) -> int:
-    """eglWaitSyncKHR(dpy, sync, flags) -> EGLint"""
+    """eglWaitSyncKHR(dpy: EGLDisplay, sync: EGLSyncKHR, flags: EGLint) -> EGLint"""
 
 
 def __getattr__(name: str) -> Any:

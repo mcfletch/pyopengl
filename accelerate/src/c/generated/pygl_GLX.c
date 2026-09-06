@@ -10,7 +10,7 @@
 static const char *const pygl_GLX_glXAssociateDMPbufferSGIX_args[] = {"dpy", "pbuffer", "params", "dmbuffer"};
 static const PyGLCommand pygl_GLX_glXAssociateDMPbufferSGIX_info = {
     .name = "glXAssociateDMPbufferSGIX",
-    .doc = "glXAssociateDMPbufferSGIX(dpy, pbuffer, params, dmbuffer) -> Bool",
+    .doc = "glXAssociateDMPbufferSGIX(dpy: Display[], pbuffer: GLXPbufferSGIX, params: DMparams[], dmbuffer: DMbuffer) -> Bool",
     .text_signature = "($module, dpy, pbuffer, params, dmbuffer, /)",
     .arg_names = pygl_GLX_glXAssociateDMPbufferSGIX_args,
     .extension = "GLX_SGIX_dmbuffer",
@@ -52,7 +52,7 @@ _fail:
 static const char *const pygl_GLX_glXBindChannelToWindowSGIX_args[] = {"display", "screen", "channel", "window"};
 static const PyGLCommand pygl_GLX_glXBindChannelToWindowSGIX_info = {
     .name = "glXBindChannelToWindowSGIX",
-    .doc = "glXBindChannelToWindowSGIX(display, screen, channel, window) -> c_int",
+    .doc = "glXBindChannelToWindowSGIX(display: Display[], screen: c_int, channel: c_int, window: Window) -> c_int",
     .text_signature = "($module, display, screen, channel, window, /)",
     .arg_names = pygl_GLX_glXBindChannelToWindowSGIX_args,
     .extension = "GLX_SGIX_video_resize",
@@ -94,7 +94,7 @@ _fail:
 static const char *const pygl_GLX_glXBindHyperpipeSGIX_args[] = {"dpy", "hpId"};
 static const PyGLCommand pygl_GLX_glXBindHyperpipeSGIX_info = {
     .name = "glXBindHyperpipeSGIX",
-    .doc = "glXBindHyperpipeSGIX(dpy, hpId) -> c_int",
+    .doc = "glXBindHyperpipeSGIX(dpy: Display[], hpId: c_int) -> c_int",
     .text_signature = "($module, dpy, hpId, /)",
     .arg_names = pygl_GLX_glXBindHyperpipeSGIX_args,
     .extension = "GLX_SGIX_hyperpipe",
@@ -134,7 +134,7 @@ _fail:
 static const char *const pygl_GLX_glXBindSwapBarrierNV_args[] = {"dpy", "group", "barrier"};
 static const PyGLCommand pygl_GLX_glXBindSwapBarrierNV_info = {
     .name = "glXBindSwapBarrierNV",
-    .doc = "glXBindSwapBarrierNV(dpy, group, barrier) -> Bool",
+    .doc = "glXBindSwapBarrierNV(dpy: Display[], group: GLuint, barrier: GLuint) -> Bool",
     .text_signature = "($module, dpy, group, barrier, /)",
     .arg_names = pygl_GLX_glXBindSwapBarrierNV_args,
     .extension = "GLX_NV_swap_group",
@@ -175,7 +175,7 @@ _fail:
 static const char *const pygl_GLX_glXBindSwapBarrierSGIX_args[] = {"dpy", "drawable", "barrier"};
 static const PyGLCommand pygl_GLX_glXBindSwapBarrierSGIX_info = {
     .name = "glXBindSwapBarrierSGIX",
-    .doc = "glXBindSwapBarrierSGIX(dpy, drawable, barrier) -> None",
+    .doc = "glXBindSwapBarrierSGIX(dpy: Display[], drawable: GLXDrawable, barrier: c_int) -> None",
     .text_signature = "($module, dpy, drawable, barrier, /)",
     .arg_names = pygl_GLX_glXBindSwapBarrierSGIX_args,
     .extension = "GLX_SGIX_swap_barrier",
@@ -215,7 +215,7 @@ _fail:
 static const char *const pygl_GLX_glXBindTexImageEXT_args[] = {"dpy", "drawable", "buffer", "attrib_list"};
 static const PyGLCommand pygl_GLX_glXBindTexImageEXT_info = {
     .name = "glXBindTexImageEXT",
-    .doc = "glXBindTexImageEXT(dpy, drawable, buffer, attrib_list) -> None",
+    .doc = "glXBindTexImageEXT(dpy: Display[], drawable: GLXDrawable, buffer: c_int, attrib_list: c_int[]) -> None",
     .text_signature = "($module, dpy, drawable, buffer, attrib_list, /)",
     .arg_names = pygl_GLX_glXBindTexImageEXT_args,
     .extension = "GLX_EXT_texture_from_pixmap",
@@ -256,7 +256,7 @@ _fail:
 static const char *const pygl_GLX_glXBindVideoCaptureDeviceNV_args[] = {"dpy", "video_capture_slot", "device"};
 static const PyGLCommand pygl_GLX_glXBindVideoCaptureDeviceNV_info = {
     .name = "glXBindVideoCaptureDeviceNV",
-    .doc = "glXBindVideoCaptureDeviceNV(dpy, video_capture_slot, device) -> c_int",
+    .doc = "glXBindVideoCaptureDeviceNV(dpy: Display[], video_capture_slot: c_uint, device: GLXVideoCaptureDeviceNV) -> c_int",
     .text_signature = "($module, dpy, video_capture_slot, device, /)",
     .arg_names = pygl_GLX_glXBindVideoCaptureDeviceNV_args,
     .extension = "GLX_NV_video_capture",
@@ -297,7 +297,7 @@ _fail:
 static const char *const pygl_GLX_glXBindVideoDeviceNV_args[] = {"dpy", "video_slot", "video_device", "attrib_list"};
 static const PyGLCommand pygl_GLX_glXBindVideoDeviceNV_info = {
     .name = "glXBindVideoDeviceNV",
-    .doc = "glXBindVideoDeviceNV(dpy, video_slot, video_device, attrib_list) -> c_int",
+    .doc = "glXBindVideoDeviceNV(dpy: Display[], video_slot: c_uint, video_device: c_uint, attrib_list: c_int[]) -> c_int",
     .text_signature = "($module, dpy, video_slot, video_device, attrib_list, /)",
     .arg_names = pygl_GLX_glXBindVideoDeviceNV_args,
     .extension = "GLX_NV_present_video",
@@ -339,7 +339,7 @@ _fail:
 static const char *const pygl_GLX_glXBindVideoImageNV_args[] = {"dpy", "VideoDevice", "pbuf", "iVideoBuffer"};
 static const PyGLCommand pygl_GLX_glXBindVideoImageNV_info = {
     .name = "glXBindVideoImageNV",
-    .doc = "glXBindVideoImageNV(dpy, VideoDevice, pbuf, iVideoBuffer) -> c_int",
+    .doc = "glXBindVideoImageNV(dpy: Display[], VideoDevice: GLXVideoDeviceNV, pbuf: GLXPbuffer, iVideoBuffer: c_int) -> c_int",
     .text_signature = "($module, dpy, VideoDevice, pbuf, iVideoBuffer, /)",
     .arg_names = pygl_GLX_glXBindVideoImageNV_args,
     .extension = "GLX_NV_video_out",
@@ -381,7 +381,7 @@ _fail:
 static const char *const pygl_GLX_glXBlitContextFramebufferAMD_args[] = {"dstCtx", "srcX0", "srcY0", "srcX1", "srcY1", "dstX0", "dstY0", "dstX1", "dstY1", "mask", "filter"};
 static const PyGLCommand pygl_GLX_glXBlitContextFramebufferAMD_info = {
     .name = "glXBlitContextFramebufferAMD",
-    .doc = "glXBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> None",
+    .doc = "glXBlitContextFramebufferAMD(dstCtx: GLXContext, srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: GLbitfield, filter: GLenum) -> None",
     .text_signature = "($module, dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter, /)",
     .arg_names = pygl_GLX_glXBlitContextFramebufferAMD_args,
     .extension = "GLX_AMD_gpu_association",
@@ -426,7 +426,7 @@ _fail:
 static const char *const pygl_GLX_glXChannelRectSGIX_args[] = {"display", "screen", "channel", "x", "y", "w", "h"};
 static const PyGLCommand pygl_GLX_glXChannelRectSGIX_info = {
     .name = "glXChannelRectSGIX",
-    .doc = "glXChannelRectSGIX(display, screen, channel, x, y, w, h) -> c_int",
+    .doc = "glXChannelRectSGIX(display: Display[], screen: c_int, channel: c_int, x: c_int, y: c_int, w: c_int, h: c_int) -> c_int",
     .text_signature = "($module, display, screen, channel, x, y, w, h, /)",
     .arg_names = pygl_GLX_glXChannelRectSGIX_args,
     .extension = "GLX_SGIX_video_resize",
@@ -471,7 +471,7 @@ _fail:
 static const char *const pygl_GLX_glXChannelRectSyncSGIX_args[] = {"display", "screen", "channel", "synctype"};
 static const PyGLCommand pygl_GLX_glXChannelRectSyncSGIX_info = {
     .name = "glXChannelRectSyncSGIX",
-    .doc = "glXChannelRectSyncSGIX(display, screen, channel, synctype) -> c_int",
+    .doc = "glXChannelRectSyncSGIX(display: Display[], screen: c_int, channel: c_int, synctype: GLenum) -> c_int",
     .text_signature = "($module, display, screen, channel, synctype, /)",
     .arg_names = pygl_GLX_glXChannelRectSyncSGIX_args,
     .extension = "GLX_SGIX_video_resize",
@@ -513,7 +513,7 @@ _fail:
 static const char *const pygl_GLX_glXCopyBufferSubDataNV_args[] = {"dpy", "readCtx", "writeCtx", "readTarget", "writeTarget", "readOffset", "writeOffset", "size"};
 static const PyGLCommand pygl_GLX_glXCopyBufferSubDataNV_info = {
     .name = "glXCopyBufferSubDataNV",
-    .doc = "glXCopyBufferSubDataNV(dpy, readCtx, writeCtx, readTarget, writeTarget, readOffset, writeOffset, size) -> None",
+    .doc = "glXCopyBufferSubDataNV(dpy: Display[], readCtx: GLXContext, writeCtx: GLXContext, readTarget: GLenum, writeTarget: GLenum, readOffset: GLintptr, writeOffset: GLintptr, size: GLsizeiptr) -> None",
     .text_signature = "($module, dpy, readCtx, writeCtx, readTarget, writeTarget, readOffset, writeOffset, size, /)",
     .arg_names = pygl_GLX_glXCopyBufferSubDataNV_args,
     .extension = "GLX_NV_copy_buffer",
@@ -558,7 +558,7 @@ _fail:
 static const char *const pygl_GLX_glXCopyContext_args[] = {"dpy", "src", "dst", "mask"};
 static const PyGLCommand pygl_GLX_glXCopyContext_info = {
     .name = "glXCopyContext",
-    .doc = "glXCopyContext(dpy, src, dst, mask) -> None",
+    .doc = "glXCopyContext(dpy: Display[], src: GLXContext, dst: GLXContext, mask: c_ulong) -> None",
     .text_signature = "($module, dpy, src, dst, mask, /)",
     .arg_names = pygl_GLX_glXCopyContext_args,
     .extension = "GLX_VERSION_GLX_1_0",
@@ -599,7 +599,7 @@ _fail:
 static const char *const pygl_GLX_glXCopyImageSubDataNV_args[] = {"dpy", "srcCtx", "srcName", "srcTarget", "srcLevel", "srcX", "srcY", "srcZ", "dstCtx", "dstName", "dstTarget", "dstLevel", "dstX", "dstY", "dstZ", "width", "height", "depth"};
 static const PyGLCommand pygl_GLX_glXCopyImageSubDataNV_info = {
     .name = "glXCopyImageSubDataNV",
-    .doc = "glXCopyImageSubDataNV(dpy, srcCtx, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstCtx, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth) -> None",
+    .doc = "glXCopyImageSubDataNV(dpy: Display[], srcCtx: GLXContext, srcName: GLuint, srcTarget: GLenum, srcLevel: GLint, srcX: GLint, srcY: GLint, srcZ: GLint, dstCtx: GLXContext, dstName: GLuint, dstTarget: GLenum, dstLevel: GLint, dstX: GLint, dstY: GLint, dstZ: GLint, width: GLsizei, height: GLsizei, depth: GLsizei) -> None",
     .text_signature = "($module, dpy, srcCtx, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstCtx, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth, /)",
     .arg_names = pygl_GLX_glXCopyImageSubDataNV_args,
     .extension = "GLX_NV_copy_image",
@@ -654,7 +654,7 @@ _fail:
 static const char *const pygl_GLX_glXCopySubBufferMESA_args[] = {"dpy", "drawable", "x", "y", "width", "height"};
 static const PyGLCommand pygl_GLX_glXCopySubBufferMESA_info = {
     .name = "glXCopySubBufferMESA",
-    .doc = "glXCopySubBufferMESA(dpy, drawable, x, y, width, height) -> None",
+    .doc = "glXCopySubBufferMESA(dpy: Display[], drawable: GLXDrawable, x: c_int, y: c_int, width: c_int, height: c_int) -> None",
     .text_signature = "($module, dpy, drawable, x, y, width, height, /)",
     .arg_names = pygl_GLX_glXCopySubBufferMESA_args,
     .extension = "GLX_MESA_copy_sub_buffer",
@@ -697,7 +697,7 @@ _fail:
 static const char *const pygl_GLX_glXCreateAssociatedContextAMD_args[] = {"id", "share_list"};
 static const PyGLCommand pygl_GLX_glXCreateAssociatedContextAMD_info = {
     .name = "glXCreateAssociatedContextAMD",
-    .doc = "glXCreateAssociatedContextAMD(id, share_list) -> GLXContext",
+    .doc = "glXCreateAssociatedContextAMD(id: c_uint, share_list: GLXContext) -> GLXContext",
     .text_signature = "($module, id, share_list, /)",
     .arg_names = pygl_GLX_glXCreateAssociatedContextAMD_args,
     .extension = "GLX_AMD_gpu_association",
@@ -733,7 +733,7 @@ _fail:
 static const char *const pygl_GLX_glXCreateAssociatedContextAttribsAMD_args[] = {"id", "share_context", "attribList"};
 static const PyGLCommand pygl_GLX_glXCreateAssociatedContextAttribsAMD_info = {
     .name = "glXCreateAssociatedContextAttribsAMD",
-    .doc = "glXCreateAssociatedContextAttribsAMD(id, share_context, attribList) -> GLXContext",
+    .doc = "glXCreateAssociatedContextAttribsAMD(id: c_uint, share_context: GLXContext, attribList: c_int[]) -> GLXContext",
     .text_signature = "($module, id, share_context, attribList, /)",
     .arg_names = pygl_GLX_glXCreateAssociatedContextAttribsAMD_args,
     .extension = "GLX_AMD_gpu_association",
@@ -774,7 +774,7 @@ _fail:
 static const char *const pygl_GLX_glXCreateContext_args[] = {"dpy", "vis", "shareList", "direct"};
 static const PyGLCommand pygl_GLX_glXCreateContext_info = {
     .name = "glXCreateContext",
-    .doc = "glXCreateContext(dpy, vis, shareList, direct) -> GLXContext",
+    .doc = "glXCreateContext(dpy: Display[], vis: XVisualInfo[], shareList: GLXContext, direct: Bool) -> GLXContext",
     .text_signature = "($module, dpy, vis, shareList, direct, /)",
     .arg_names = pygl_GLX_glXCreateContext_args,
     .extension = "GLX_VERSION_GLX_1_0",
@@ -816,7 +816,7 @@ _fail:
 static const char *const pygl_GLX_glXCreateContextAttribsARB_args[] = {"dpy", "config", "share_context", "direct", "attrib_list"};
 static const PyGLCommand pygl_GLX_glXCreateContextAttribsARB_info = {
     .name = "glXCreateContextAttribsARB",
-    .doc = "glXCreateContextAttribsARB(dpy, config, share_context, direct, attrib_list) -> GLXContext",
+    .doc = "glXCreateContextAttribsARB(dpy: Display[], config: GLXFBConfig, share_context: GLXContext, direct: Bool, attrib_list: c_int[]) -> GLXContext",
     .text_signature = "($module, dpy, config, share_context, direct, attrib_list, /)",
     .arg_names = pygl_GLX_glXCreateContextAttribsARB_args,
     .extension = "GLX_ARB_create_context",
@@ -859,7 +859,7 @@ _fail:
 static const char *const pygl_GLX_glXCreateContextWithConfigSGIX_args[] = {"dpy", "config", "render_type", "share_list", "direct"};
 static const PyGLCommand pygl_GLX_glXCreateContextWithConfigSGIX_info = {
     .name = "glXCreateContextWithConfigSGIX",
-    .doc = "glXCreateContextWithConfigSGIX(dpy, config, render_type, share_list, direct) -> GLXContext",
+    .doc = "glXCreateContextWithConfigSGIX(dpy: Display[], config: GLXFBConfigSGIX, render_type: c_int, share_list: GLXContext, direct: Bool) -> GLXContext",
     .text_signature = "($module, dpy, config, render_type, share_list, direct, /)",
     .arg_names = pygl_GLX_glXCreateContextWithConfigSGIX_args,
     .extension = "GLX_SGIX_fbconfig",
@@ -902,7 +902,7 @@ _fail:
 static const char *const pygl_GLX_glXCreateGLXPbufferSGIX_args[] = {"dpy", "config", "width", "height", "attrib_list"};
 static const PyGLCommand pygl_GLX_glXCreateGLXPbufferSGIX_info = {
     .name = "glXCreateGLXPbufferSGIX",
-    .doc = "glXCreateGLXPbufferSGIX(dpy, config, width, height, attrib_list) -> GLXPbufferSGIX",
+    .doc = "glXCreateGLXPbufferSGIX(dpy: Display[], config: GLXFBConfigSGIX, width: c_uint, height: c_uint, attrib_list: c_int[]) -> GLXPbufferSGIX",
     .text_signature = "($module, dpy, config, width, height, attrib_list, /)",
     .arg_names = pygl_GLX_glXCreateGLXPbufferSGIX_args,
     .extension = "GLX_SGIX_pbuffer",
@@ -945,7 +945,7 @@ _fail:
 static const char *const pygl_GLX_glXCreateGLXPixmap_args[] = {"dpy", "visual", "pixmap"};
 static const PyGLCommand pygl_GLX_glXCreateGLXPixmap_info = {
     .name = "glXCreateGLXPixmap",
-    .doc = "glXCreateGLXPixmap(dpy, visual, pixmap) -> GLXPixmap",
+    .doc = "glXCreateGLXPixmap(dpy: Display[], visual: XVisualInfo[], pixmap: Pixmap) -> GLXPixmap",
     .text_signature = "($module, dpy, visual, pixmap, /)",
     .arg_names = pygl_GLX_glXCreateGLXPixmap_args,
     .extension = "GLX_VERSION_GLX_1_0",
@@ -986,7 +986,7 @@ _fail:
 static const char *const pygl_GLX_glXCreateGLXPixmapMESA_args[] = {"dpy", "visual", "pixmap", "cmap"};
 static const PyGLCommand pygl_GLX_glXCreateGLXPixmapMESA_info = {
     .name = "glXCreateGLXPixmapMESA",
-    .doc = "glXCreateGLXPixmapMESA(dpy, visual, pixmap, cmap) -> GLXPixmap",
+    .doc = "glXCreateGLXPixmapMESA(dpy: Display[], visual: XVisualInfo[], pixmap: Pixmap, cmap: Colormap) -> GLXPixmap",
     .text_signature = "($module, dpy, visual, pixmap, cmap, /)",
     .arg_names = pygl_GLX_glXCreateGLXPixmapMESA_args,
     .extension = "GLX_MESA_pixmap_colormap",
@@ -1028,7 +1028,7 @@ _fail:
 static const char *const pygl_GLX_glXCreateGLXPixmapWithConfigSGIX_args[] = {"dpy", "config", "pixmap"};
 static const PyGLCommand pygl_GLX_glXCreateGLXPixmapWithConfigSGIX_info = {
     .name = "glXCreateGLXPixmapWithConfigSGIX",
-    .doc = "glXCreateGLXPixmapWithConfigSGIX(dpy, config, pixmap) -> GLXPixmap",
+    .doc = "glXCreateGLXPixmapWithConfigSGIX(dpy: Display[], config: GLXFBConfigSGIX, pixmap: Pixmap) -> GLXPixmap",
     .text_signature = "($module, dpy, config, pixmap, /)",
     .arg_names = pygl_GLX_glXCreateGLXPixmapWithConfigSGIX_args,
     .extension = "GLX_SGIX_fbconfig",
@@ -1069,7 +1069,7 @@ _fail:
 static const char *const pygl_GLX_glXCreateGLXVideoSourceSGIX_args[] = {"display", "screen", "server", "path", "nodeClass", "drainNode"};
 static const PyGLCommand pygl_GLX_glXCreateGLXVideoSourceSGIX_info = {
     .name = "glXCreateGLXVideoSourceSGIX",
-    .doc = "glXCreateGLXVideoSourceSGIX(display, screen, server, path, nodeClass, drainNode) -> GLXVideoSourceSGIX",
+    .doc = "glXCreateGLXVideoSourceSGIX(display: Display[], screen: c_int, server: VLServer, path: VLPath, nodeClass: c_int, drainNode: VLNode) -> GLXVideoSourceSGIX",
     .text_signature = "($module, display, screen, server, path, nodeClass, drainNode, /)",
     .arg_names = pygl_GLX_glXCreateGLXVideoSourceSGIX_args,
     .extension = "GLX_SGIX_video_source",
@@ -1113,7 +1113,7 @@ _fail:
 static const char *const pygl_GLX_glXCreateNewContext_args[] = {"dpy", "config", "render_type", "share_list", "direct"};
 static const PyGLCommand pygl_GLX_glXCreateNewContext_info = {
     .name = "glXCreateNewContext",
-    .doc = "glXCreateNewContext(dpy, config, render_type, share_list, direct) -> GLXContext",
+    .doc = "glXCreateNewContext(dpy: Display[], config: GLXFBConfig, render_type: c_int, share_list: GLXContext, direct: Bool) -> GLXContext",
     .text_signature = "($module, dpy, config, render_type, share_list, direct, /)",
     .arg_names = pygl_GLX_glXCreateNewContext_args,
     .extension = "GLX_VERSION_GLX_1_3",
@@ -1156,7 +1156,7 @@ _fail:
 static const char *const pygl_GLX_glXCreatePbuffer_args[] = {"dpy", "config", "attrib_list"};
 static const PyGLCommand pygl_GLX_glXCreatePbuffer_info = {
     .name = "glXCreatePbuffer",
-    .doc = "glXCreatePbuffer(dpy, config, attrib_list) -> GLXPbuffer",
+    .doc = "glXCreatePbuffer(dpy: Display[], config: GLXFBConfig, attrib_list: c_int[]) -> GLXPbuffer",
     .text_signature = "($module, dpy, config, attrib_list, /)",
     .arg_names = pygl_GLX_glXCreatePbuffer_args,
     .extension = "GLX_VERSION_GLX_1_3",
@@ -1197,7 +1197,7 @@ _fail:
 static const char *const pygl_GLX_glXCreatePixmap_args[] = {"dpy", "config", "pixmap", "attrib_list"};
 static const PyGLCommand pygl_GLX_glXCreatePixmap_info = {
     .name = "glXCreatePixmap",
-    .doc = "glXCreatePixmap(dpy, config, pixmap, attrib_list) -> GLXPixmap",
+    .doc = "glXCreatePixmap(dpy: Display[], config: GLXFBConfig, pixmap: Pixmap, attrib_list: c_int[]) -> GLXPixmap",
     .text_signature = "($module, dpy, config, pixmap, attrib_list, /)",
     .arg_names = pygl_GLX_glXCreatePixmap_args,
     .extension = "GLX_VERSION_GLX_1_3",
@@ -1239,7 +1239,7 @@ _fail:
 static const char *const pygl_GLX_glXCreateWindow_args[] = {"dpy", "config", "win", "attrib_list"};
 static const PyGLCommand pygl_GLX_glXCreateWindow_info = {
     .name = "glXCreateWindow",
-    .doc = "glXCreateWindow(dpy, config, win, attrib_list) -> GLXWindow",
+    .doc = "glXCreateWindow(dpy: Display[], config: GLXFBConfig, win: Window, attrib_list: c_int[]) -> GLXWindow",
     .text_signature = "($module, dpy, config, win, attrib_list, /)",
     .arg_names = pygl_GLX_glXCreateWindow_args,
     .extension = "GLX_VERSION_GLX_1_3",
@@ -1281,7 +1281,7 @@ _fail:
 static const char *const pygl_GLX_glXCushionSGI_args[] = {"dpy", "window", "cushion"};
 static const PyGLCommand pygl_GLX_glXCushionSGI_info = {
     .name = "glXCushionSGI",
-    .doc = "glXCushionSGI(dpy, window, cushion) -> None",
+    .doc = "glXCushionSGI(dpy: Display[], window: Window, cushion: float) -> None",
     .text_signature = "($module, dpy, window, cushion, /)",
     .arg_names = pygl_GLX_glXCushionSGI_args,
     .extension = "GLX_SGI_cushion",
@@ -1321,7 +1321,7 @@ _fail:
 static const char *const pygl_GLX_glXDelayBeforeSwapNV_args[] = {"dpy", "drawable", "seconds"};
 static const PyGLCommand pygl_GLX_glXDelayBeforeSwapNV_info = {
     .name = "glXDelayBeforeSwapNV",
-    .doc = "glXDelayBeforeSwapNV(dpy, drawable, seconds) -> Bool",
+    .doc = "glXDelayBeforeSwapNV(dpy: Display[], drawable: GLXDrawable, seconds: GLfloat) -> Bool",
     .text_signature = "($module, dpy, drawable, seconds, /)",
     .arg_names = pygl_GLX_glXDelayBeforeSwapNV_args,
     .extension = "GLX_NV_delay_before_swap",
@@ -1362,7 +1362,7 @@ _fail:
 static const char *const pygl_GLX_glXDeleteAssociatedContextAMD_args[] = {"ctx"};
 static const PyGLCommand pygl_GLX_glXDeleteAssociatedContextAMD_info = {
     .name = "glXDeleteAssociatedContextAMD",
-    .doc = "glXDeleteAssociatedContextAMD(ctx) -> Bool",
+    .doc = "glXDeleteAssociatedContextAMD(ctx: GLXContext) -> Bool",
     .text_signature = "($module, ctx, /)",
     .arg_names = pygl_GLX_glXDeleteAssociatedContextAMD_args,
     .extension = "GLX_AMD_gpu_association",
@@ -1397,7 +1397,7 @@ _fail:
 static const char *const pygl_GLX_glXDestroyContext_args[] = {"dpy", "ctx"};
 static const PyGLCommand pygl_GLX_glXDestroyContext_info = {
     .name = "glXDestroyContext",
-    .doc = "glXDestroyContext(dpy, ctx) -> None",
+    .doc = "glXDestroyContext(dpy: Display[], ctx: GLXContext) -> None",
     .text_signature = "($module, dpy, ctx, /)",
     .arg_names = pygl_GLX_glXDestroyContext_args,
     .extension = "GLX_VERSION_GLX_1_0",
@@ -1436,7 +1436,7 @@ _fail:
 static const char *const pygl_GLX_glXDestroyGLXPbufferSGIX_args[] = {"dpy", "pbuf"};
 static const PyGLCommand pygl_GLX_glXDestroyGLXPbufferSGIX_info = {
     .name = "glXDestroyGLXPbufferSGIX",
-    .doc = "glXDestroyGLXPbufferSGIX(dpy, pbuf) -> None",
+    .doc = "glXDestroyGLXPbufferSGIX(dpy: Display[], pbuf: GLXPbufferSGIX) -> None",
     .text_signature = "($module, dpy, pbuf, /)",
     .arg_names = pygl_GLX_glXDestroyGLXPbufferSGIX_args,
     .extension = "GLX_SGIX_pbuffer",
@@ -1475,7 +1475,7 @@ _fail:
 static const char *const pygl_GLX_glXDestroyGLXPixmap_args[] = {"dpy", "pixmap"};
 static const PyGLCommand pygl_GLX_glXDestroyGLXPixmap_info = {
     .name = "glXDestroyGLXPixmap",
-    .doc = "glXDestroyGLXPixmap(dpy, pixmap) -> None",
+    .doc = "glXDestroyGLXPixmap(dpy: Display[], pixmap: GLXPixmap) -> None",
     .text_signature = "($module, dpy, pixmap, /)",
     .arg_names = pygl_GLX_glXDestroyGLXPixmap_args,
     .extension = "GLX_VERSION_GLX_1_0",
@@ -1514,7 +1514,7 @@ _fail:
 static const char *const pygl_GLX_glXDestroyGLXVideoSourceSGIX_args[] = {"dpy", "glxvideosource"};
 static const PyGLCommand pygl_GLX_glXDestroyGLXVideoSourceSGIX_info = {
     .name = "glXDestroyGLXVideoSourceSGIX",
-    .doc = "glXDestroyGLXVideoSourceSGIX(dpy, glxvideosource) -> None",
+    .doc = "glXDestroyGLXVideoSourceSGIX(dpy: Display[], glxvideosource: GLXVideoSourceSGIX) -> None",
     .text_signature = "($module, dpy, glxvideosource, /)",
     .arg_names = pygl_GLX_glXDestroyGLXVideoSourceSGIX_args,
     .extension = "GLX_SGIX_video_source",
@@ -1553,7 +1553,7 @@ _fail:
 static const char *const pygl_GLX_glXDestroyHyperpipeConfigSGIX_args[] = {"dpy", "hpId"};
 static const PyGLCommand pygl_GLX_glXDestroyHyperpipeConfigSGIX_info = {
     .name = "glXDestroyHyperpipeConfigSGIX",
-    .doc = "glXDestroyHyperpipeConfigSGIX(dpy, hpId) -> c_int",
+    .doc = "glXDestroyHyperpipeConfigSGIX(dpy: Display[], hpId: c_int) -> c_int",
     .text_signature = "($module, dpy, hpId, /)",
     .arg_names = pygl_GLX_glXDestroyHyperpipeConfigSGIX_args,
     .extension = "GLX_SGIX_hyperpipe",
@@ -1593,7 +1593,7 @@ _fail:
 static const char *const pygl_GLX_glXDestroyPbuffer_args[] = {"dpy", "pbuf"};
 static const PyGLCommand pygl_GLX_glXDestroyPbuffer_info = {
     .name = "glXDestroyPbuffer",
-    .doc = "glXDestroyPbuffer(dpy, pbuf) -> None",
+    .doc = "glXDestroyPbuffer(dpy: Display[], pbuf: GLXPbuffer) -> None",
     .text_signature = "($module, dpy, pbuf, /)",
     .arg_names = pygl_GLX_glXDestroyPbuffer_args,
     .extension = "GLX_VERSION_GLX_1_3",
@@ -1632,7 +1632,7 @@ _fail:
 static const char *const pygl_GLX_glXDestroyPixmap_args[] = {"dpy", "pixmap"};
 static const PyGLCommand pygl_GLX_glXDestroyPixmap_info = {
     .name = "glXDestroyPixmap",
-    .doc = "glXDestroyPixmap(dpy, pixmap) -> None",
+    .doc = "glXDestroyPixmap(dpy: Display[], pixmap: GLXPixmap) -> None",
     .text_signature = "($module, dpy, pixmap, /)",
     .arg_names = pygl_GLX_glXDestroyPixmap_args,
     .extension = "GLX_VERSION_GLX_1_3",
@@ -1671,7 +1671,7 @@ _fail:
 static const char *const pygl_GLX_glXDestroyWindow_args[] = {"dpy", "win"};
 static const PyGLCommand pygl_GLX_glXDestroyWindow_info = {
     .name = "glXDestroyWindow",
-    .doc = "glXDestroyWindow(dpy, win) -> None",
+    .doc = "glXDestroyWindow(dpy: Display[], win: GLXWindow) -> None",
     .text_signature = "($module, dpy, win, /)",
     .arg_names = pygl_GLX_glXDestroyWindow_args,
     .extension = "GLX_VERSION_GLX_1_3",
@@ -1710,7 +1710,7 @@ _fail:
 static const char *const pygl_GLX_glXFreeContextEXT_args[] = {"dpy", "context"};
 static const PyGLCommand pygl_GLX_glXFreeContextEXT_info = {
     .name = "glXFreeContextEXT",
-    .doc = "glXFreeContextEXT(dpy, context) -> None",
+    .doc = "glXFreeContextEXT(dpy: Display[], context: GLXContext) -> None",
     .text_signature = "($module, dpy, context, /)",
     .arg_names = pygl_GLX_glXFreeContextEXT_args,
     .extension = "GLX_EXT_import_context",
@@ -1749,7 +1749,7 @@ _fail:
 static const char *const pygl_GLX_glXGetAGPOffsetMESA_args[] = {"pointer"};
 static const PyGLCommand pygl_GLX_glXGetAGPOffsetMESA_info = {
     .name = "glXGetAGPOffsetMESA",
-    .doc = "glXGetAGPOffsetMESA(pointer) -> c_uint",
+    .doc = "glXGetAGPOffsetMESA(pointer: void[]) -> c_uint",
     .text_signature = "($module, pointer, /)",
     .arg_names = pygl_GLX_glXGetAGPOffsetMESA_args,
     .extension = "GLX_MESA_agp_offset",
@@ -1788,7 +1788,7 @@ _fail:
 static const char *const pygl_GLX_glXGetClientString_args[] = {"dpy", "name"};
 static const PyGLCommand pygl_GLX_glXGetClientString_info = {
     .name = "glXGetClientString",
-    .doc = "glXGetClientString(dpy, name) -> GLchar",
+    .doc = "glXGetClientString(dpy: Display[], name: c_int) -> GLchar",
     .text_signature = "($module, dpy, name, /)",
     .arg_names = pygl_GLX_glXGetClientString_args,
     .extension = "GLX_VERSION_GLX_1_1",
@@ -1828,7 +1828,7 @@ _fail:
 static const char *const pygl_GLX_glXGetConfig_args[] = {"dpy", "visual", "attrib", "value"};
 static const PyGLCommand pygl_GLX_glXGetConfig_info = {
     .name = "glXGetConfig",
-    .doc = "glXGetConfig(dpy, visual, attrib, value) -> c_int",
+    .doc = "glXGetConfig(dpy: Display[], visual: XVisualInfo[], attrib: c_int, value: c_int[]) -> c_int",
     .text_signature = "($module, dpy, visual, attrib, value, /)",
     .arg_names = pygl_GLX_glXGetConfig_args,
     .extension = "GLX_VERSION_GLX_1_0",
@@ -1870,7 +1870,7 @@ _fail:
 static const char *const pygl_GLX_glXGetContextGPUIDAMD_args[] = {"ctx"};
 static const PyGLCommand pygl_GLX_glXGetContextGPUIDAMD_info = {
     .name = "glXGetContextGPUIDAMD",
-    .doc = "glXGetContextGPUIDAMD(ctx) -> c_uint",
+    .doc = "glXGetContextGPUIDAMD(ctx: GLXContext) -> c_uint",
     .text_signature = "($module, ctx, /)",
     .arg_names = pygl_GLX_glXGetContextGPUIDAMD_args,
     .extension = "GLX_AMD_gpu_association",
@@ -1905,7 +1905,7 @@ _fail:
 static const char *const pygl_GLX_glXGetContextIDEXT_args[] = {"context"};
 static const PyGLCommand pygl_GLX_glXGetContextIDEXT_info = {
     .name = "glXGetContextIDEXT",
-    .doc = "glXGetContextIDEXT(context) -> GLXContextID",
+    .doc = "glXGetContextIDEXT(context: GLXContext) -> GLXContextID",
     .text_signature = "($module, context, /)",
     .arg_names = pygl_GLX_glXGetContextIDEXT_args,
     .extension = "GLX_EXT_import_context",
@@ -2105,7 +2105,7 @@ _fail:
 static const char *const pygl_GLX_glXGetFBConfigAttrib_args[] = {"dpy", "config", "attribute", "value"};
 static const PyGLCommand pygl_GLX_glXGetFBConfigAttrib_info = {
     .name = "glXGetFBConfigAttrib",
-    .doc = "glXGetFBConfigAttrib(dpy, config, attribute, value) -> c_int",
+    .doc = "glXGetFBConfigAttrib(dpy: Display[], config: GLXFBConfig, attribute: c_int, value: c_int[]) -> c_int",
     .text_signature = "($module, dpy, config, attribute, value, /)",
     .arg_names = pygl_GLX_glXGetFBConfigAttrib_args,
     .extension = "GLX_VERSION_GLX_1_3",
@@ -2147,7 +2147,7 @@ _fail:
 static const char *const pygl_GLX_glXGetFBConfigAttribSGIX_args[] = {"dpy", "config", "attribute", "value"};
 static const PyGLCommand pygl_GLX_glXGetFBConfigAttribSGIX_info = {
     .name = "glXGetFBConfigAttribSGIX",
-    .doc = "glXGetFBConfigAttribSGIX(dpy, config, attribute, value) -> c_int",
+    .doc = "glXGetFBConfigAttribSGIX(dpy: Display[], config: GLXFBConfigSGIX, attribute: c_int, value: c_int[]) -> c_int",
     .text_signature = "($module, dpy, config, attribute, value, /)",
     .arg_names = pygl_GLX_glXGetFBConfigAttribSGIX_args,
     .extension = "GLX_SGIX_fbconfig",
@@ -2189,7 +2189,7 @@ _fail:
 static const char *const pygl_GLX_glXGetFBConfigFromVisualSGIX_args[] = {"dpy", "vis"};
 static const PyGLCommand pygl_GLX_glXGetFBConfigFromVisualSGIX_info = {
     .name = "glXGetFBConfigFromVisualSGIX",
-    .doc = "glXGetFBConfigFromVisualSGIX(dpy, vis) -> GLXFBConfigSGIX",
+    .doc = "glXGetFBConfigFromVisualSGIX(dpy: Display[], vis: XVisualInfo[]) -> GLXFBConfigSGIX",
     .text_signature = "($module, dpy, vis, /)",
     .arg_names = pygl_GLX_glXGetFBConfigFromVisualSGIX_args,
     .extension = "GLX_SGIX_fbconfig",
@@ -2229,7 +2229,7 @@ _fail:
 static const char *const pygl_GLX_glXGetGPUIDsAMD_args[] = {"maxCount", "ids"};
 static const PyGLCommand pygl_GLX_glXGetGPUIDsAMD_info = {
     .name = "glXGetGPUIDsAMD",
-    .doc = "glXGetGPUIDsAMD(maxCount, ids) -> c_uint",
+    .doc = "glXGetGPUIDsAMD(maxCount: c_uint, ids: c_uint[]) -> c_uint",
     .text_signature = "($module, maxCount, ids, /)",
     .arg_names = pygl_GLX_glXGetGPUIDsAMD_args,
     .extension = "GLX_AMD_gpu_association",
@@ -2269,7 +2269,7 @@ _fail:
 static const char *const pygl_GLX_glXGetGPUInfoAMD_args[] = {"id", "property", "dataType", "size", "data"};
 static const PyGLCommand pygl_GLX_glXGetGPUInfoAMD_info = {
     .name = "glXGetGPUInfoAMD",
-    .doc = "glXGetGPUInfoAMD(id, property, dataType, size, data) -> c_int",
+    .doc = "glXGetGPUInfoAMD(id: c_uint, property: c_int, dataType: GLenum, size: c_uint, data: void[]) -> c_int",
     .text_signature = "($module, id, property, dataType, size, data, /)",
     .arg_names = pygl_GLX_glXGetGPUInfoAMD_args,
     .extension = "GLX_AMD_gpu_association",
@@ -2312,7 +2312,7 @@ _fail:
 static const char *const pygl_GLX_glXGetMscRateOML_args[] = {"dpy", "drawable", "numerator", "denominator"};
 static const PyGLCommand pygl_GLX_glXGetMscRateOML_info = {
     .name = "glXGetMscRateOML",
-    .doc = "glXGetMscRateOML(dpy, drawable, numerator, denominator) -> Bool",
+    .doc = "glXGetMscRateOML(dpy: Display[], drawable: GLXDrawable, numerator: int32_t[], denominator: int32_t[]) -> Bool",
     .text_signature = "($module, dpy, drawable, numerator, denominator, /)",
     .arg_names = pygl_GLX_glXGetMscRateOML_args,
     .extension = "GLX_OML_sync_control",
@@ -2354,7 +2354,7 @@ _fail:
 static const char *const pygl_GLX_glXGetProcAddress_args[] = {"procName"};
 static const PyGLCommand pygl_GLX_glXGetProcAddress_info = {
     .name = "glXGetProcAddress",
-    .doc = "glXGetProcAddress(procName) -> __GLXextFuncPtr",
+    .doc = "glXGetProcAddress(procName: GLubyte[]) -> __GLXextFuncPtr",
     .text_signature = "($module, procName, /)",
     .arg_names = pygl_GLX_glXGetProcAddress_args,
     .extension = "GLX_VERSION_GLX_1_4",
@@ -2393,7 +2393,7 @@ _fail:
 static const char *const pygl_GLX_glXGetProcAddressARB_args[] = {"procName"};
 static const PyGLCommand pygl_GLX_glXGetProcAddressARB_info = {
     .name = "glXGetProcAddressARB",
-    .doc = "glXGetProcAddressARB(procName) -> __GLXextFuncPtr",
+    .doc = "glXGetProcAddressARB(procName: GLubyte[]) -> __GLXextFuncPtr",
     .text_signature = "($module, procName, /)",
     .arg_names = pygl_GLX_glXGetProcAddressARB_args,
     .extension = "GLX_ARB_get_proc_address",
@@ -2432,7 +2432,7 @@ _fail:
 static const char *const pygl_GLX_glXGetSelectedEvent_args[] = {"dpy", "draw", "event_mask"};
 static const PyGLCommand pygl_GLX_glXGetSelectedEvent_info = {
     .name = "glXGetSelectedEvent",
-    .doc = "glXGetSelectedEvent(dpy, draw, event_mask) -> None",
+    .doc = "glXGetSelectedEvent(dpy: Display[], draw: GLXDrawable, event_mask: c_ulong[]) -> None",
     .text_signature = "($module, dpy, draw, event_mask, /)",
     .arg_names = pygl_GLX_glXGetSelectedEvent_args,
     .extension = "GLX_VERSION_GLX_1_3",
@@ -2472,7 +2472,7 @@ _fail:
 static const char *const pygl_GLX_glXGetSelectedEventSGIX_args[] = {"dpy", "drawable", "mask"};
 static const PyGLCommand pygl_GLX_glXGetSelectedEventSGIX_info = {
     .name = "glXGetSelectedEventSGIX",
-    .doc = "glXGetSelectedEventSGIX(dpy, drawable, mask) -> None",
+    .doc = "glXGetSelectedEventSGIX(dpy: Display[], drawable: GLXDrawable, mask: c_ulong[]) -> None",
     .text_signature = "($module, dpy, drawable, mask, /)",
     .arg_names = pygl_GLX_glXGetSelectedEventSGIX_args,
     .extension = "GLX_SGIX_pbuffer",
@@ -2545,7 +2545,7 @@ _fail:
 static const char *const pygl_GLX_glXGetSyncValuesOML_args[] = {"dpy", "drawable", "ust", "msc", "sbc"};
 static const PyGLCommand pygl_GLX_glXGetSyncValuesOML_info = {
     .name = "glXGetSyncValuesOML",
-    .doc = "glXGetSyncValuesOML(dpy, drawable, ust, msc, sbc) -> Bool",
+    .doc = "glXGetSyncValuesOML(dpy: Display[], drawable: GLXDrawable, ust: int64_t[], msc: int64_t[], sbc: int64_t[]) -> Bool",
     .text_signature = "($module, dpy, drawable, ust, msc, sbc, /)",
     .arg_names = pygl_GLX_glXGetSyncValuesOML_args,
     .extension = "GLX_OML_sync_control",
@@ -2588,7 +2588,7 @@ _fail:
 static const char *const pygl_GLX_glXGetTransparentIndexSUN_args[] = {"dpy", "overlay", "underlay", "pTransparentIndex"};
 static const PyGLCommand pygl_GLX_glXGetTransparentIndexSUN_info = {
     .name = "glXGetTransparentIndexSUN",
-    .doc = "glXGetTransparentIndexSUN(dpy, overlay, underlay, pTransparentIndex) -> Status",
+    .doc = "glXGetTransparentIndexSUN(dpy: Display[], overlay: Window, underlay: Window, pTransparentIndex: c_ulong[]) -> Status",
     .text_signature = "($module, dpy, overlay, underlay, pTransparentIndex, /)",
     .arg_names = pygl_GLX_glXGetTransparentIndexSUN_args,
     .extension = "GLX_SUN_get_transparent_index",
@@ -2630,7 +2630,7 @@ _fail:
 static const char *const pygl_GLX_glXGetVideoDeviceNV_args[] = {"dpy", "screen", "numVideoDevices", "pVideoDevice"};
 static const PyGLCommand pygl_GLX_glXGetVideoDeviceNV_info = {
     .name = "glXGetVideoDeviceNV",
-    .doc = "glXGetVideoDeviceNV(dpy, screen, numVideoDevices, pVideoDevice) -> c_int",
+    .doc = "glXGetVideoDeviceNV(dpy: Display[], screen: c_int, numVideoDevices: c_int, pVideoDevice: GLXVideoDeviceNV[]) -> c_int",
     .text_signature = "($module, dpy, screen, numVideoDevices, pVideoDevice, /)",
     .arg_names = pygl_GLX_glXGetVideoDeviceNV_args,
     .extension = "GLX_NV_video_out",
@@ -2672,7 +2672,7 @@ _fail:
 static const char *const pygl_GLX_glXGetVideoInfoNV_args[] = {"dpy", "screen", "VideoDevice", "pulCounterOutputPbuffer", "pulCounterOutputVideo"};
 static const PyGLCommand pygl_GLX_glXGetVideoInfoNV_info = {
     .name = "glXGetVideoInfoNV",
-    .doc = "glXGetVideoInfoNV(dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo) -> c_int",
+    .doc = "glXGetVideoInfoNV(dpy: Display[], screen: c_int, VideoDevice: GLXVideoDeviceNV, pulCounterOutputPbuffer: c_ulong[], pulCounterOutputVideo: c_ulong[]) -> c_int",
     .text_signature = "($module, dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo, /)",
     .arg_names = pygl_GLX_glXGetVideoInfoNV_args,
     .extension = "GLX_NV_video_out",
@@ -2715,7 +2715,7 @@ _fail:
 static const char *const pygl_GLX_glXGetVideoSyncSGI_args[] = {"count"};
 static const PyGLCommand pygl_GLX_glXGetVideoSyncSGI_info = {
     .name = "glXGetVideoSyncSGI",
-    .doc = "glXGetVideoSyncSGI(count) -> c_int",
+    .doc = "glXGetVideoSyncSGI(count: c_uint[]) -> c_int",
     .text_signature = "($module, count, /)",
     .arg_names = pygl_GLX_glXGetVideoSyncSGI_args,
     .extension = "GLX_SGI_video_sync",
@@ -2754,7 +2754,7 @@ _fail:
 static const char *const pygl_GLX_glXHyperpipeAttribSGIX_args[] = {"dpy", "timeSlice", "attrib", "size", "attribList"};
 static const PyGLCommand pygl_GLX_glXHyperpipeAttribSGIX_info = {
     .name = "glXHyperpipeAttribSGIX",
-    .doc = "glXHyperpipeAttribSGIX(dpy, timeSlice, attrib, size, attribList) -> c_int",
+    .doc = "glXHyperpipeAttribSGIX(dpy: Display[], timeSlice: c_int, attrib: c_int, size: c_int, attribList: void[]) -> c_int",
     .text_signature = "($module, dpy, timeSlice, attrib, size, attribList, /)",
     .arg_names = pygl_GLX_glXHyperpipeAttribSGIX_args,
     .extension = "GLX_SGIX_hyperpipe",
@@ -2797,7 +2797,7 @@ _fail:
 static const char *const pygl_GLX_glXHyperpipeConfigSGIX_args[] = {"dpy", "networkId", "npipes", "cfg", "hpId"};
 static const PyGLCommand pygl_GLX_glXHyperpipeConfigSGIX_info = {
     .name = "glXHyperpipeConfigSGIX",
-    .doc = "glXHyperpipeConfigSGIX(dpy, networkId, npipes, cfg, hpId) -> c_int",
+    .doc = "glXHyperpipeConfigSGIX(dpy: Display[], networkId: c_int, npipes: c_int, cfg: GLXHyperpipeConfigSGIX[], hpId: c_int[]) -> c_int",
     .text_signature = "($module, dpy, networkId, npipes, cfg, hpId, /)",
     .arg_names = pygl_GLX_glXHyperpipeConfigSGIX_args,
     .extension = "GLX_SGIX_hyperpipe",
@@ -2840,7 +2840,7 @@ _fail:
 static const char *const pygl_GLX_glXImportContextEXT_args[] = {"dpy", "contextID"};
 static const PyGLCommand pygl_GLX_glXImportContextEXT_info = {
     .name = "glXImportContextEXT",
-    .doc = "glXImportContextEXT(dpy, contextID) -> GLXContext",
+    .doc = "glXImportContextEXT(dpy: Display[], contextID: GLXContextID) -> GLXContext",
     .text_signature = "($module, dpy, contextID, /)",
     .arg_names = pygl_GLX_glXImportContextEXT_args,
     .extension = "GLX_EXT_import_context",
@@ -2880,7 +2880,7 @@ _fail:
 static const char *const pygl_GLX_glXIsDirect_args[] = {"dpy", "ctx"};
 static const PyGLCommand pygl_GLX_glXIsDirect_info = {
     .name = "glXIsDirect",
-    .doc = "glXIsDirect(dpy, ctx) -> Bool",
+    .doc = "glXIsDirect(dpy: Display[], ctx: GLXContext) -> Bool",
     .text_signature = "($module, dpy, ctx, /)",
     .arg_names = pygl_GLX_glXIsDirect_args,
     .extension = "GLX_VERSION_GLX_1_0",
@@ -2920,7 +2920,7 @@ _fail:
 static const char *const pygl_GLX_glXJoinSwapGroupNV_args[] = {"dpy", "drawable", "group"};
 static const PyGLCommand pygl_GLX_glXJoinSwapGroupNV_info = {
     .name = "glXJoinSwapGroupNV",
-    .doc = "glXJoinSwapGroupNV(dpy, drawable, group) -> Bool",
+    .doc = "glXJoinSwapGroupNV(dpy: Display[], drawable: GLXDrawable, group: GLuint) -> Bool",
     .text_signature = "($module, dpy, drawable, group, /)",
     .arg_names = pygl_GLX_glXJoinSwapGroupNV_args,
     .extension = "GLX_NV_swap_group",
@@ -2961,7 +2961,7 @@ _fail:
 static const char *const pygl_GLX_glXJoinSwapGroupSGIX_args[] = {"dpy", "drawable", "member"};
 static const PyGLCommand pygl_GLX_glXJoinSwapGroupSGIX_info = {
     .name = "glXJoinSwapGroupSGIX",
-    .doc = "glXJoinSwapGroupSGIX(dpy, drawable, member) -> None",
+    .doc = "glXJoinSwapGroupSGIX(dpy: Display[], drawable: GLXDrawable, member: GLXDrawable) -> None",
     .text_signature = "($module, dpy, drawable, member, /)",
     .arg_names = pygl_GLX_glXJoinSwapGroupSGIX_args,
     .extension = "GLX_SGIX_swap_group",
@@ -3001,7 +3001,7 @@ _fail:
 static const char *const pygl_GLX_glXLockVideoCaptureDeviceNV_args[] = {"dpy", "device"};
 static const PyGLCommand pygl_GLX_glXLockVideoCaptureDeviceNV_info = {
     .name = "glXLockVideoCaptureDeviceNV",
-    .doc = "glXLockVideoCaptureDeviceNV(dpy, device) -> None",
+    .doc = "glXLockVideoCaptureDeviceNV(dpy: Display[], device: GLXVideoCaptureDeviceNV) -> None",
     .text_signature = "($module, dpy, device, /)",
     .arg_names = pygl_GLX_glXLockVideoCaptureDeviceNV_args,
     .extension = "GLX_NV_video_capture",
@@ -3040,7 +3040,7 @@ _fail:
 static const char *const pygl_GLX_glXMakeAssociatedContextCurrentAMD_args[] = {"ctx"};
 static const PyGLCommand pygl_GLX_glXMakeAssociatedContextCurrentAMD_info = {
     .name = "glXMakeAssociatedContextCurrentAMD",
-    .doc = "glXMakeAssociatedContextCurrentAMD(ctx) -> Bool",
+    .doc = "glXMakeAssociatedContextCurrentAMD(ctx: GLXContext) -> Bool",
     .text_signature = "($module, ctx, /)",
     .arg_names = pygl_GLX_glXMakeAssociatedContextCurrentAMD_args,
     .extension = "GLX_AMD_gpu_association",
@@ -3075,7 +3075,7 @@ _fail:
 static const char *const pygl_GLX_glXMakeContextCurrent_args[] = {"dpy", "draw", "read", "ctx"};
 static const PyGLCommand pygl_GLX_glXMakeContextCurrent_info = {
     .name = "glXMakeContextCurrent",
-    .doc = "glXMakeContextCurrent(dpy, draw, read, ctx) -> Bool",
+    .doc = "glXMakeContextCurrent(dpy: Display[], draw: GLXDrawable, read: GLXDrawable, ctx: GLXContext) -> Bool",
     .text_signature = "($module, dpy, draw, read, ctx, /)",
     .arg_names = pygl_GLX_glXMakeContextCurrent_args,
     .extension = "GLX_VERSION_GLX_1_3",
@@ -3117,7 +3117,7 @@ _fail:
 static const char *const pygl_GLX_glXMakeCurrent_args[] = {"dpy", "drawable", "ctx"};
 static const PyGLCommand pygl_GLX_glXMakeCurrent_info = {
     .name = "glXMakeCurrent",
-    .doc = "glXMakeCurrent(dpy, drawable, ctx) -> Bool",
+    .doc = "glXMakeCurrent(dpy: Display[], drawable: GLXDrawable, ctx: GLXContext) -> Bool",
     .text_signature = "($module, dpy, drawable, ctx, /)",
     .arg_names = pygl_GLX_glXMakeCurrent_args,
     .extension = "GLX_VERSION_GLX_1_0",
@@ -3158,7 +3158,7 @@ _fail:
 static const char *const pygl_GLX_glXMakeCurrentReadSGI_args[] = {"dpy", "draw", "read", "ctx"};
 static const PyGLCommand pygl_GLX_glXMakeCurrentReadSGI_info = {
     .name = "glXMakeCurrentReadSGI",
-    .doc = "glXMakeCurrentReadSGI(dpy, draw, read, ctx) -> Bool",
+    .doc = "glXMakeCurrentReadSGI(dpy: Display[], draw: GLXDrawable, read: GLXDrawable, ctx: GLXContext) -> Bool",
     .text_signature = "($module, dpy, draw, read, ctx, /)",
     .arg_names = pygl_GLX_glXMakeCurrentReadSGI_args,
     .extension = "GLX_SGI_make_current_read",
@@ -3200,7 +3200,7 @@ _fail:
 static const char *const pygl_GLX_glXNamedCopyBufferSubDataNV_args[] = {"dpy", "readCtx", "writeCtx", "readBuffer", "writeBuffer", "readOffset", "writeOffset", "size"};
 static const PyGLCommand pygl_GLX_glXNamedCopyBufferSubDataNV_info = {
     .name = "glXNamedCopyBufferSubDataNV",
-    .doc = "glXNamedCopyBufferSubDataNV(dpy, readCtx, writeCtx, readBuffer, writeBuffer, readOffset, writeOffset, size) -> None",
+    .doc = "glXNamedCopyBufferSubDataNV(dpy: Display[], readCtx: GLXContext, writeCtx: GLXContext, readBuffer: GLuint, writeBuffer: GLuint, readOffset: GLintptr, writeOffset: GLintptr, size: GLsizeiptr) -> None",
     .text_signature = "($module, dpy, readCtx, writeCtx, readBuffer, writeBuffer, readOffset, writeOffset, size, /)",
     .arg_names = pygl_GLX_glXNamedCopyBufferSubDataNV_args,
     .extension = "GLX_NV_copy_buffer",
@@ -3245,7 +3245,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryChannelDeltasSGIX_args[] = {"display", "screen", "channel", "x", "y", "w", "h"};
 static const PyGLCommand pygl_GLX_glXQueryChannelDeltasSGIX_info = {
     .name = "glXQueryChannelDeltasSGIX",
-    .doc = "glXQueryChannelDeltasSGIX(display, screen, channel, x, y, w, h) -> c_int",
+    .doc = "glXQueryChannelDeltasSGIX(display: Display[], screen: c_int, channel: c_int, x: c_int[], y: c_int[], w: c_int[], h: c_int[]) -> c_int",
     .text_signature = "($module, display, screen, channel, x, y, w, h, /)",
     .arg_names = pygl_GLX_glXQueryChannelDeltasSGIX_args,
     .extension = "GLX_SGIX_video_resize",
@@ -3290,7 +3290,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryChannelRectSGIX_args[] = {"display", "screen", "channel", "dx", "dy", "dw", "dh"};
 static const PyGLCommand pygl_GLX_glXQueryChannelRectSGIX_info = {
     .name = "glXQueryChannelRectSGIX",
-    .doc = "glXQueryChannelRectSGIX(display, screen, channel, dx, dy, dw, dh) -> c_int",
+    .doc = "glXQueryChannelRectSGIX(display: Display[], screen: c_int, channel: c_int, dx: c_int[], dy: c_int[], dw: c_int[], dh: c_int[]) -> c_int",
     .text_signature = "($module, display, screen, channel, dx, dy, dw, dh, /)",
     .arg_names = pygl_GLX_glXQueryChannelRectSGIX_args,
     .extension = "GLX_SGIX_video_resize",
@@ -3335,7 +3335,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryContext_args[] = {"dpy", "ctx", "attribute", "value"};
 static const PyGLCommand pygl_GLX_glXQueryContext_info = {
     .name = "glXQueryContext",
-    .doc = "glXQueryContext(dpy, ctx, attribute, value) -> c_int",
+    .doc = "glXQueryContext(dpy: Display[], ctx: GLXContext, attribute: c_int, value: c_int[]) -> c_int",
     .text_signature = "($module, dpy, ctx, attribute, value, /)",
     .arg_names = pygl_GLX_glXQueryContext_args,
     .extension = "GLX_VERSION_GLX_1_3",
@@ -3377,7 +3377,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryContextInfoEXT_args[] = {"dpy", "context", "attribute", "value"};
 static const PyGLCommand pygl_GLX_glXQueryContextInfoEXT_info = {
     .name = "glXQueryContextInfoEXT",
-    .doc = "glXQueryContextInfoEXT(dpy, context, attribute, value) -> c_int",
+    .doc = "glXQueryContextInfoEXT(dpy: Display[], context: GLXContext, attribute: c_int, value: c_int[]) -> c_int",
     .text_signature = "($module, dpy, context, attribute, value, /)",
     .arg_names = pygl_GLX_glXQueryContextInfoEXT_args,
     .extension = "GLX_EXT_import_context",
@@ -3419,7 +3419,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryCurrentRendererIntegerMESA_args[] = {"attribute", "value"};
 static const PyGLCommand pygl_GLX_glXQueryCurrentRendererIntegerMESA_info = {
     .name = "glXQueryCurrentRendererIntegerMESA",
-    .doc = "glXQueryCurrentRendererIntegerMESA(attribute, value) -> Bool",
+    .doc = "glXQueryCurrentRendererIntegerMESA(attribute: c_int, value: c_uint[]) -> Bool",
     .text_signature = "($module, attribute, value, /)",
     .arg_names = pygl_GLX_glXQueryCurrentRendererIntegerMESA_args,
     .extension = "GLX_MESA_query_renderer",
@@ -3459,7 +3459,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryCurrentRendererStringMESA_args[] = {"attribute"};
 static const PyGLCommand pygl_GLX_glXQueryCurrentRendererStringMESA_info = {
     .name = "glXQueryCurrentRendererStringMESA",
-    .doc = "glXQueryCurrentRendererStringMESA(attribute) -> GLchar",
+    .doc = "glXQueryCurrentRendererStringMESA(attribute: c_int) -> GLchar",
     .text_signature = "($module, attribute, /)",
     .arg_names = pygl_GLX_glXQueryCurrentRendererStringMESA_args,
     .extension = "GLX_MESA_query_renderer",
@@ -3494,7 +3494,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryDrawable_args[] = {"dpy", "draw", "attribute", "value"};
 static const PyGLCommand pygl_GLX_glXQueryDrawable_info = {
     .name = "glXQueryDrawable",
-    .doc = "glXQueryDrawable(dpy, draw, attribute, value) -> None",
+    .doc = "glXQueryDrawable(dpy: Display[], draw: GLXDrawable, attribute: c_int, value: c_uint[]) -> None",
     .text_signature = "($module, dpy, draw, attribute, value, /)",
     .arg_names = pygl_GLX_glXQueryDrawable_args,
     .extension = "GLX_VERSION_GLX_1_3",
@@ -3535,7 +3535,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryExtension_args[] = {"dpy", "errorb", "event"};
 static const PyGLCommand pygl_GLX_glXQueryExtension_info = {
     .name = "glXQueryExtension",
-    .doc = "glXQueryExtension(dpy, errorb, event) -> Bool",
+    .doc = "glXQueryExtension(dpy: Display[], errorb: c_int[], event: c_int[]) -> Bool",
     .text_signature = "($module, dpy, errorb, event, /)",
     .arg_names = pygl_GLX_glXQueryExtension_args,
     .extension = "GLX_VERSION_GLX_1_0",
@@ -3576,7 +3576,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryExtensionsString_args[] = {"dpy", "screen"};
 static const PyGLCommand pygl_GLX_glXQueryExtensionsString_info = {
     .name = "glXQueryExtensionsString",
-    .doc = "glXQueryExtensionsString(dpy, screen) -> GLchar",
+    .doc = "glXQueryExtensionsString(dpy: Display[], screen: c_int) -> GLchar",
     .text_signature = "($module, dpy, screen, /)",
     .arg_names = pygl_GLX_glXQueryExtensionsString_args,
     .extension = "GLX_VERSION_GLX_1_1",
@@ -3616,7 +3616,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryFrameCountNV_args[] = {"dpy", "screen", "count"};
 static const PyGLCommand pygl_GLX_glXQueryFrameCountNV_info = {
     .name = "glXQueryFrameCountNV",
-    .doc = "glXQueryFrameCountNV(dpy, screen, count) -> Bool",
+    .doc = "glXQueryFrameCountNV(dpy: Display[], screen: c_int, count: GLuint[]) -> Bool",
     .text_signature = "($module, dpy, screen, count, /)",
     .arg_names = pygl_GLX_glXQueryFrameCountNV_args,
     .extension = "GLX_NV_swap_group",
@@ -3657,7 +3657,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryGLXPbufferSGIX_args[] = {"dpy", "pbuf", "attribute", "value"};
 static const PyGLCommand pygl_GLX_glXQueryGLXPbufferSGIX_info = {
     .name = "glXQueryGLXPbufferSGIX",
-    .doc = "glXQueryGLXPbufferSGIX(dpy, pbuf, attribute, value) -> None",
+    .doc = "glXQueryGLXPbufferSGIX(dpy: Display[], pbuf: GLXPbufferSGIX, attribute: c_int, value: c_uint[]) -> None",
     .text_signature = "($module, dpy, pbuf, attribute, value, /)",
     .arg_names = pygl_GLX_glXQueryGLXPbufferSGIX_args,
     .extension = "GLX_SGIX_pbuffer",
@@ -3698,7 +3698,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryHyperpipeAttribSGIX_args[] = {"dpy", "timeSlice", "attrib", "size", "returnAttribList"};
 static const PyGLCommand pygl_GLX_glXQueryHyperpipeAttribSGIX_info = {
     .name = "glXQueryHyperpipeAttribSGIX",
-    .doc = "glXQueryHyperpipeAttribSGIX(dpy, timeSlice, attrib, size, returnAttribList) -> c_int",
+    .doc = "glXQueryHyperpipeAttribSGIX(dpy: Display[], timeSlice: c_int, attrib: c_int, size: c_int, returnAttribList: void[]) -> c_int",
     .text_signature = "($module, dpy, timeSlice, attrib, size, returnAttribList, /)",
     .arg_names = pygl_GLX_glXQueryHyperpipeAttribSGIX_args,
     .extension = "GLX_SGIX_hyperpipe",
@@ -3741,7 +3741,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryHyperpipeBestAttribSGIX_args[] = {"dpy", "timeSlice", "attrib", "size", "attribList", "returnAttribList"};
 static const PyGLCommand pygl_GLX_glXQueryHyperpipeBestAttribSGIX_info = {
     .name = "glXQueryHyperpipeBestAttribSGIX",
-    .doc = "glXQueryHyperpipeBestAttribSGIX(dpy, timeSlice, attrib, size, attribList, returnAttribList) -> c_int",
+    .doc = "glXQueryHyperpipeBestAttribSGIX(dpy: Display[], timeSlice: c_int, attrib: c_int, size: c_int, attribList: void[], returnAttribList: void[]) -> c_int",
     .text_signature = "($module, dpy, timeSlice, attrib, size, attribList, returnAttribList, /)",
     .arg_names = pygl_GLX_glXQueryHyperpipeBestAttribSGIX_args,
     .extension = "GLX_SGIX_hyperpipe",
@@ -3785,7 +3785,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryMaxSwapBarriersSGIX_args[] = {"dpy", "screen", "max"};
 static const PyGLCommand pygl_GLX_glXQueryMaxSwapBarriersSGIX_info = {
     .name = "glXQueryMaxSwapBarriersSGIX",
-    .doc = "glXQueryMaxSwapBarriersSGIX(dpy, screen, max) -> Bool",
+    .doc = "glXQueryMaxSwapBarriersSGIX(dpy: Display[], screen: c_int, max: c_int[]) -> Bool",
     .text_signature = "($module, dpy, screen, max, /)",
     .arg_names = pygl_GLX_glXQueryMaxSwapBarriersSGIX_args,
     .extension = "GLX_SGIX_swap_barrier",
@@ -3826,7 +3826,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryMaxSwapGroupsNV_args[] = {"dpy", "screen", "maxGroups", "maxBarriers"};
 static const PyGLCommand pygl_GLX_glXQueryMaxSwapGroupsNV_info = {
     .name = "glXQueryMaxSwapGroupsNV",
-    .doc = "glXQueryMaxSwapGroupsNV(dpy, screen, maxGroups, maxBarriers) -> Bool",
+    .doc = "glXQueryMaxSwapGroupsNV(dpy: Display[], screen: c_int, maxGroups: GLuint[], maxBarriers: GLuint[]) -> Bool",
     .text_signature = "($module, dpy, screen, maxGroups, maxBarriers, /)",
     .arg_names = pygl_GLX_glXQueryMaxSwapGroupsNV_args,
     .extension = "GLX_NV_swap_group",
@@ -3868,7 +3868,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryRendererIntegerMESA_args[] = {"dpy", "screen", "renderer", "attribute", "value"};
 static const PyGLCommand pygl_GLX_glXQueryRendererIntegerMESA_info = {
     .name = "glXQueryRendererIntegerMESA",
-    .doc = "glXQueryRendererIntegerMESA(dpy, screen, renderer, attribute, value) -> Bool",
+    .doc = "glXQueryRendererIntegerMESA(dpy: Display[], screen: c_int, renderer: c_int, attribute: c_int, value: c_uint[]) -> Bool",
     .text_signature = "($module, dpy, screen, renderer, attribute, value, /)",
     .arg_names = pygl_GLX_glXQueryRendererIntegerMESA_args,
     .extension = "GLX_MESA_query_renderer",
@@ -3911,7 +3911,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryRendererStringMESA_args[] = {"dpy", "screen", "renderer", "attribute"};
 static const PyGLCommand pygl_GLX_glXQueryRendererStringMESA_info = {
     .name = "glXQueryRendererStringMESA",
-    .doc = "glXQueryRendererStringMESA(dpy, screen, renderer, attribute) -> GLchar",
+    .doc = "glXQueryRendererStringMESA(dpy: Display[], screen: c_int, renderer: c_int, attribute: c_int) -> GLchar",
     .text_signature = "($module, dpy, screen, renderer, attribute, /)",
     .arg_names = pygl_GLX_glXQueryRendererStringMESA_args,
     .extension = "GLX_MESA_query_renderer",
@@ -3953,7 +3953,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryServerString_args[] = {"dpy", "screen", "name"};
 static const PyGLCommand pygl_GLX_glXQueryServerString_info = {
     .name = "glXQueryServerString",
-    .doc = "glXQueryServerString(dpy, screen, name) -> GLchar",
+    .doc = "glXQueryServerString(dpy: Display[], screen: c_int, name: c_int) -> GLchar",
     .text_signature = "($module, dpy, screen, name, /)",
     .arg_names = pygl_GLX_glXQueryServerString_args,
     .extension = "GLX_VERSION_GLX_1_1",
@@ -3994,7 +3994,7 @@ _fail:
 static const char *const pygl_GLX_glXQuerySwapGroupNV_args[] = {"dpy", "drawable", "group", "barrier"};
 static const PyGLCommand pygl_GLX_glXQuerySwapGroupNV_info = {
     .name = "glXQuerySwapGroupNV",
-    .doc = "glXQuerySwapGroupNV(dpy, drawable, group, barrier) -> Bool",
+    .doc = "glXQuerySwapGroupNV(dpy: Display[], drawable: GLXDrawable, group: GLuint[], barrier: GLuint[]) -> Bool",
     .text_signature = "($module, dpy, drawable, group, barrier, /)",
     .arg_names = pygl_GLX_glXQuerySwapGroupNV_args,
     .extension = "GLX_NV_swap_group",
@@ -4036,7 +4036,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryVersion_args[] = {"dpy", "maj", "min"};
 static const PyGLCommand pygl_GLX_glXQueryVersion_info = {
     .name = "glXQueryVersion",
-    .doc = "glXQueryVersion(dpy, maj, min) -> Bool",
+    .doc = "glXQueryVersion(dpy: Display[], maj: c_int[], min: c_int[]) -> Bool",
     .text_signature = "($module, dpy, maj, min, /)",
     .arg_names = pygl_GLX_glXQueryVersion_args,
     .extension = "GLX_VERSION_GLX_1_0",
@@ -4077,7 +4077,7 @@ _fail:
 static const char *const pygl_GLX_glXQueryVideoCaptureDeviceNV_args[] = {"dpy", "device", "attribute", "value"};
 static const PyGLCommand pygl_GLX_glXQueryVideoCaptureDeviceNV_info = {
     .name = "glXQueryVideoCaptureDeviceNV",
-    .doc = "glXQueryVideoCaptureDeviceNV(dpy, device, attribute, value) -> c_int",
+    .doc = "glXQueryVideoCaptureDeviceNV(dpy: Display[], device: GLXVideoCaptureDeviceNV, attribute: c_int, value: c_int[]) -> c_int",
     .text_signature = "($module, dpy, device, attribute, value, /)",
     .arg_names = pygl_GLX_glXQueryVideoCaptureDeviceNV_args,
     .extension = "GLX_NV_video_capture",
@@ -4119,7 +4119,7 @@ _fail:
 static const char *const pygl_GLX_glXReleaseBuffersMESA_args[] = {"dpy", "drawable"};
 static const PyGLCommand pygl_GLX_glXReleaseBuffersMESA_info = {
     .name = "glXReleaseBuffersMESA",
-    .doc = "glXReleaseBuffersMESA(dpy, drawable) -> Bool",
+    .doc = "glXReleaseBuffersMESA(dpy: Display[], drawable: GLXDrawable) -> Bool",
     .text_signature = "($module, dpy, drawable, /)",
     .arg_names = pygl_GLX_glXReleaseBuffersMESA_args,
     .extension = "GLX_MESA_release_buffers",
@@ -4159,7 +4159,7 @@ _fail:
 static const char *const pygl_GLX_glXReleaseTexImageEXT_args[] = {"dpy", "drawable", "buffer"};
 static const PyGLCommand pygl_GLX_glXReleaseTexImageEXT_info = {
     .name = "glXReleaseTexImageEXT",
-    .doc = "glXReleaseTexImageEXT(dpy, drawable, buffer) -> None",
+    .doc = "glXReleaseTexImageEXT(dpy: Display[], drawable: GLXDrawable, buffer: c_int) -> None",
     .text_signature = "($module, dpy, drawable, buffer, /)",
     .arg_names = pygl_GLX_glXReleaseTexImageEXT_args,
     .extension = "GLX_EXT_texture_from_pixmap",
@@ -4199,7 +4199,7 @@ _fail:
 static const char *const pygl_GLX_glXReleaseVideoCaptureDeviceNV_args[] = {"dpy", "device"};
 static const PyGLCommand pygl_GLX_glXReleaseVideoCaptureDeviceNV_info = {
     .name = "glXReleaseVideoCaptureDeviceNV",
-    .doc = "glXReleaseVideoCaptureDeviceNV(dpy, device) -> None",
+    .doc = "glXReleaseVideoCaptureDeviceNV(dpy: Display[], device: GLXVideoCaptureDeviceNV) -> None",
     .text_signature = "($module, dpy, device, /)",
     .arg_names = pygl_GLX_glXReleaseVideoCaptureDeviceNV_args,
     .extension = "GLX_NV_video_capture",
@@ -4238,7 +4238,7 @@ _fail:
 static const char *const pygl_GLX_glXReleaseVideoDeviceNV_args[] = {"dpy", "screen", "VideoDevice"};
 static const PyGLCommand pygl_GLX_glXReleaseVideoDeviceNV_info = {
     .name = "glXReleaseVideoDeviceNV",
-    .doc = "glXReleaseVideoDeviceNV(dpy, screen, VideoDevice) -> c_int",
+    .doc = "glXReleaseVideoDeviceNV(dpy: Display[], screen: c_int, VideoDevice: GLXVideoDeviceNV) -> c_int",
     .text_signature = "($module, dpy, screen, VideoDevice, /)",
     .arg_names = pygl_GLX_glXReleaseVideoDeviceNV_args,
     .extension = "GLX_NV_video_out",
@@ -4279,7 +4279,7 @@ _fail:
 static const char *const pygl_GLX_glXReleaseVideoImageNV_args[] = {"dpy", "pbuf"};
 static const PyGLCommand pygl_GLX_glXReleaseVideoImageNV_info = {
     .name = "glXReleaseVideoImageNV",
-    .doc = "glXReleaseVideoImageNV(dpy, pbuf) -> c_int",
+    .doc = "glXReleaseVideoImageNV(dpy: Display[], pbuf: GLXPbuffer) -> c_int",
     .text_signature = "($module, dpy, pbuf, /)",
     .arg_names = pygl_GLX_glXReleaseVideoImageNV_args,
     .extension = "GLX_NV_video_out",
@@ -4319,7 +4319,7 @@ _fail:
 static const char *const pygl_GLX_glXResetFrameCountNV_args[] = {"dpy", "screen"};
 static const PyGLCommand pygl_GLX_glXResetFrameCountNV_info = {
     .name = "glXResetFrameCountNV",
-    .doc = "glXResetFrameCountNV(dpy, screen) -> Bool",
+    .doc = "glXResetFrameCountNV(dpy: Display[], screen: c_int) -> Bool",
     .text_signature = "($module, dpy, screen, /)",
     .arg_names = pygl_GLX_glXResetFrameCountNV_args,
     .extension = "GLX_NV_swap_group",
@@ -4359,7 +4359,7 @@ _fail:
 static const char *const pygl_GLX_glXSelectEvent_args[] = {"dpy", "draw", "event_mask"};
 static const PyGLCommand pygl_GLX_glXSelectEvent_info = {
     .name = "glXSelectEvent",
-    .doc = "glXSelectEvent(dpy, draw, event_mask) -> None",
+    .doc = "glXSelectEvent(dpy: Display[], draw: GLXDrawable, event_mask: c_ulong) -> None",
     .text_signature = "($module, dpy, draw, event_mask, /)",
     .arg_names = pygl_GLX_glXSelectEvent_args,
     .extension = "GLX_VERSION_GLX_1_3",
@@ -4399,7 +4399,7 @@ _fail:
 static const char *const pygl_GLX_glXSelectEventSGIX_args[] = {"dpy", "drawable", "mask"};
 static const PyGLCommand pygl_GLX_glXSelectEventSGIX_info = {
     .name = "glXSelectEventSGIX",
-    .doc = "glXSelectEventSGIX(dpy, drawable, mask) -> None",
+    .doc = "glXSelectEventSGIX(dpy: Display[], drawable: GLXDrawable, mask: c_ulong) -> None",
     .text_signature = "($module, dpy, drawable, mask, /)",
     .arg_names = pygl_GLX_glXSelectEventSGIX_args,
     .extension = "GLX_SGIX_pbuffer",
@@ -4439,7 +4439,7 @@ _fail:
 static const char *const pygl_GLX_glXSendPbufferToVideoNV_args[] = {"dpy", "pbuf", "iBufferType", "pulCounterPbuffer", "bBlock"};
 static const PyGLCommand pygl_GLX_glXSendPbufferToVideoNV_info = {
     .name = "glXSendPbufferToVideoNV",
-    .doc = "glXSendPbufferToVideoNV(dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock) -> c_int",
+    .doc = "glXSendPbufferToVideoNV(dpy: Display[], pbuf: GLXPbuffer, iBufferType: c_int, pulCounterPbuffer: c_ulong[], bBlock: GLboolean) -> c_int",
     .text_signature = "($module, dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock, /)",
     .arg_names = pygl_GLX_glXSendPbufferToVideoNV_args,
     .extension = "GLX_NV_video_out",
@@ -4482,7 +4482,7 @@ _fail:
 static const char *const pygl_GLX_glXSet3DfxModeMESA_args[] = {"mode"};
 static const PyGLCommand pygl_GLX_glXSet3DfxModeMESA_info = {
     .name = "glXSet3DfxModeMESA",
-    .doc = "glXSet3DfxModeMESA(mode) -> GLboolean",
+    .doc = "glXSet3DfxModeMESA(mode: GLint) -> GLboolean",
     .text_signature = "($module, mode, /)",
     .arg_names = pygl_GLX_glXSet3DfxModeMESA_args,
     .extension = "GLX_MESA_set_3dfx_mode",
@@ -4517,7 +4517,7 @@ _fail:
 static const char *const pygl_GLX_glXSwapBuffers_args[] = {"dpy", "drawable"};
 static const PyGLCommand pygl_GLX_glXSwapBuffers_info = {
     .name = "glXSwapBuffers",
-    .doc = "glXSwapBuffers(dpy, drawable) -> None",
+    .doc = "glXSwapBuffers(dpy: Display[], drawable: GLXDrawable) -> None",
     .text_signature = "($module, dpy, drawable, /)",
     .arg_names = pygl_GLX_glXSwapBuffers_args,
     .extension = "GLX_VERSION_GLX_1_0",
@@ -4556,7 +4556,7 @@ _fail:
 static const char *const pygl_GLX_glXSwapBuffersMscOML_args[] = {"dpy", "drawable", "target_msc", "divisor", "remainder"};
 static const PyGLCommand pygl_GLX_glXSwapBuffersMscOML_info = {
     .name = "glXSwapBuffersMscOML",
-    .doc = "glXSwapBuffersMscOML(dpy, drawable, target_msc, divisor, remainder) -> int64_t",
+    .doc = "glXSwapBuffersMscOML(dpy: Display[], drawable: GLXDrawable, target_msc: int64_t, divisor: int64_t, remainder: int64_t) -> int64_t",
     .text_signature = "($module, dpy, drawable, target_msc, divisor, remainder, /)",
     .arg_names = pygl_GLX_glXSwapBuffersMscOML_args,
     .extension = "GLX_OML_sync_control",
@@ -4599,7 +4599,7 @@ _fail:
 static const char *const pygl_GLX_glXSwapIntervalEXT_args[] = {"dpy", "drawable", "interval"};
 static const PyGLCommand pygl_GLX_glXSwapIntervalEXT_info = {
     .name = "glXSwapIntervalEXT",
-    .doc = "glXSwapIntervalEXT(dpy, drawable, interval) -> None",
+    .doc = "glXSwapIntervalEXT(dpy: Display[], drawable: GLXDrawable, interval: c_int) -> None",
     .text_signature = "($module, dpy, drawable, interval, /)",
     .arg_names = pygl_GLX_glXSwapIntervalEXT_args,
     .extension = "GLX_EXT_swap_control",
@@ -4639,7 +4639,7 @@ _fail:
 static const char *const pygl_GLX_glXSwapIntervalMESA_args[] = {"interval"};
 static const PyGLCommand pygl_GLX_glXSwapIntervalMESA_info = {
     .name = "glXSwapIntervalMESA",
-    .doc = "glXSwapIntervalMESA(interval) -> c_int",
+    .doc = "glXSwapIntervalMESA(interval: c_uint) -> c_int",
     .text_signature = "($module, interval, /)",
     .arg_names = pygl_GLX_glXSwapIntervalMESA_args,
     .extension = "GLX_MESA_swap_control",
@@ -4674,7 +4674,7 @@ _fail:
 static const char *const pygl_GLX_glXSwapIntervalSGI_args[] = {"interval"};
 static const PyGLCommand pygl_GLX_glXSwapIntervalSGI_info = {
     .name = "glXSwapIntervalSGI",
-    .doc = "glXSwapIntervalSGI(interval) -> c_int",
+    .doc = "glXSwapIntervalSGI(interval: c_int) -> c_int",
     .text_signature = "($module, interval, /)",
     .arg_names = pygl_GLX_glXSwapIntervalSGI_args,
     .extension = "GLX_SGI_swap_control",
@@ -4709,7 +4709,7 @@ _fail:
 static const char *const pygl_GLX_glXUseXFont_args[] = {"font", "first", "count", "list"};
 static const PyGLCommand pygl_GLX_glXUseXFont_info = {
     .name = "glXUseXFont",
-    .doc = "glXUseXFont(font, first, count, list) -> None",
+    .doc = "glXUseXFont(font: Font, first: c_int, count: c_int, list: c_int) -> None",
     .text_signature = "($module, font, first, count, list, /)",
     .arg_names = pygl_GLX_glXUseXFont_args,
     .extension = "GLX_VERSION_GLX_1_0",
@@ -4747,7 +4747,7 @@ _fail:
 static const char *const pygl_GLX_glXWaitForMscOML_args[] = {"dpy", "drawable", "target_msc", "divisor", "remainder", "ust", "msc", "sbc"};
 static const PyGLCommand pygl_GLX_glXWaitForMscOML_info = {
     .name = "glXWaitForMscOML",
-    .doc = "glXWaitForMscOML(dpy, drawable, target_msc, divisor, remainder, ust, msc, sbc) -> Bool",
+    .doc = "glXWaitForMscOML(dpy: Display[], drawable: GLXDrawable, target_msc: int64_t, divisor: int64_t, remainder: int64_t, ust: int64_t[], msc: int64_t[], sbc: int64_t[]) -> Bool",
     .text_signature = "($module, dpy, drawable, target_msc, divisor, remainder, ust, msc, sbc, /)",
     .arg_names = pygl_GLX_glXWaitForMscOML_args,
     .extension = "GLX_OML_sync_control",
@@ -4793,7 +4793,7 @@ _fail:
 static const char *const pygl_GLX_glXWaitForSbcOML_args[] = {"dpy", "drawable", "target_sbc", "ust", "msc", "sbc"};
 static const PyGLCommand pygl_GLX_glXWaitForSbcOML_info = {
     .name = "glXWaitForSbcOML",
-    .doc = "glXWaitForSbcOML(dpy, drawable, target_sbc, ust, msc, sbc) -> Bool",
+    .doc = "glXWaitForSbcOML(dpy: Display[], drawable: GLXDrawable, target_sbc: int64_t, ust: int64_t[], msc: int64_t[], sbc: int64_t[]) -> Bool",
     .text_signature = "($module, dpy, drawable, target_sbc, ust, msc, sbc, /)",
     .arg_names = pygl_GLX_glXWaitForSbcOML_args,
     .extension = "GLX_OML_sync_control",
@@ -4870,7 +4870,7 @@ _fail:
 static const char *const pygl_GLX_glXWaitVideoSyncSGI_args[] = {"divisor", "remainder", "count"};
 static const PyGLCommand pygl_GLX_glXWaitVideoSyncSGI_info = {
     .name = "glXWaitVideoSyncSGI",
-    .doc = "glXWaitVideoSyncSGI(divisor, remainder, count) -> c_int",
+    .doc = "glXWaitVideoSyncSGI(divisor: c_int, remainder: c_int, count: c_uint[]) -> c_int",
     .text_signature = "($module, divisor, remainder, count, /)",
     .arg_names = pygl_GLX_glXWaitVideoSyncSGI_args,
     .extension = "GLX_SGI_video_sync",

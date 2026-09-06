@@ -10,7 +10,7 @@
 static const char *const pygl_EGL_eglBindAPI_args[] = {"api"};
 static const PyGLCommand pygl_EGL_eglBindAPI_info = {
     .name = "eglBindAPI",
-    .doc = "eglBindAPI(api) -> EGLBoolean",
+    .doc = "eglBindAPI(api: EGLenum) -> EGLBoolean",
     .text_signature = "($module, api, /)",
     .arg_names = pygl_EGL_eglBindAPI_args,
     .extension = "EGL_VERSION_EGL_1_2",
@@ -45,7 +45,7 @@ _fail:
 static const char *const pygl_EGL_eglBindTexImage_args[] = {"dpy", "surface", "buffer"};
 static const PyGLCommand pygl_EGL_eglBindTexImage_info = {
     .name = "eglBindTexImage",
-    .doc = "eglBindTexImage(dpy, surface, buffer) -> EGLBoolean",
+    .doc = "eglBindTexImage(dpy: EGLDisplay, surface: EGLSurface, buffer: EGLint) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, buffer, /)",
     .arg_names = pygl_EGL_eglBindTexImage_args,
     .extension = "EGL_VERSION_EGL_1_1",
@@ -82,7 +82,7 @@ _fail:
 static const char *const pygl_EGL_eglBindWaylandDisplayWL_args[] = {"dpy", "display"};
 static const PyGLCommand pygl_EGL_eglBindWaylandDisplayWL_info = {
     .name = "eglBindWaylandDisplayWL",
-    .doc = "eglBindWaylandDisplayWL(dpy, display) -> EGLBoolean",
+    .doc = "eglBindWaylandDisplayWL(dpy: EGLDisplay, display: void[]) -> EGLBoolean",
     .text_signature = "($module, dpy, display, /)",
     .arg_names = pygl_EGL_eglBindWaylandDisplayWL_args,
     .extension = "EGL_WL_bind_wayland_display",
@@ -122,7 +122,7 @@ _fail:
 static const char *const pygl_EGL_eglChooseConfig_args[] = {"dpy", "attrib_list", "configs", "config_size", "num_config"};
 static const PyGLCommand pygl_EGL_eglChooseConfig_info = {
     .name = "eglChooseConfig",
-    .doc = "eglChooseConfig(dpy, attrib_list, configs, config_size, num_config) -> EGLBoolean",
+    .doc = "eglChooseConfig(dpy: EGLDisplay, attrib_list: GLint[], configs: void[][], config_size: EGLint, num_config: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, attrib_list, configs, config_size, num_config, /)",
     .arg_names = pygl_EGL_eglChooseConfig_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -165,7 +165,7 @@ _fail:
 static const char *const pygl_EGL_eglClientSignalSyncEXT_args[] = {"dpy", "sync", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglClientSignalSyncEXT_info = {
     .name = "eglClientSignalSyncEXT",
-    .doc = "eglClientSignalSyncEXT(dpy, sync, attrib_list) -> EGLBoolean",
+    .doc = "eglClientSignalSyncEXT(dpy: EGLDisplay, sync: EGLSync, attrib_list: GLintptr[]) -> EGLBoolean",
     .text_signature = "($module, dpy, sync, attrib_list, /)",
     .arg_names = pygl_EGL_eglClientSignalSyncEXT_args,
     .extension = "EGL_EXT_client_sync",
@@ -206,7 +206,7 @@ _fail:
 static const char *const pygl_EGL_eglClientWaitSync_args[] = {"dpy", "sync", "flags", "timeout"};
 static const PyGLCommand pygl_EGL_eglClientWaitSync_info = {
     .name = "eglClientWaitSync",
-    .doc = "eglClientWaitSync(dpy, sync, flags, timeout) -> EGLint",
+    .doc = "eglClientWaitSync(dpy: EGLDisplay, sync: EGLSync, flags: EGLint, timeout: EGLTime) -> EGLint",
     .text_signature = "($module, dpy, sync, flags, timeout, /)",
     .arg_names = pygl_EGL_eglClientWaitSync_args,
     .extension = "EGL_VERSION_EGL_1_5",
@@ -244,7 +244,7 @@ _fail:
 static const char *const pygl_EGL_eglClientWaitSyncKHR_args[] = {"dpy", "sync", "flags", "timeout"};
 static const PyGLCommand pygl_EGL_eglClientWaitSyncKHR_info = {
     .name = "eglClientWaitSyncKHR",
-    .doc = "eglClientWaitSyncKHR(dpy, sync, flags, timeout) -> EGLint",
+    .doc = "eglClientWaitSyncKHR(dpy: EGLDisplay, sync: EGLSyncKHR, flags: EGLint, timeout: EGLTimeKHR) -> EGLint",
     .text_signature = "($module, dpy, sync, flags, timeout, /)",
     .arg_names = pygl_EGL_eglClientWaitSyncKHR_args,
     .extension = "EGL_KHR_fence_sync",
@@ -282,7 +282,7 @@ _fail:
 static const char *const pygl_EGL_eglClientWaitSyncNV_args[] = {"sync", "flags", "timeout"};
 static const PyGLCommand pygl_EGL_eglClientWaitSyncNV_info = {
     .name = "eglClientWaitSyncNV",
-    .doc = "eglClientWaitSyncNV(sync, flags, timeout) -> EGLint",
+    .doc = "eglClientWaitSyncNV(sync: EGLSyncNV, flags: EGLint, timeout: EGLTimeNV) -> EGLint",
     .text_signature = "($module, sync, flags, timeout, /)",
     .arg_names = pygl_EGL_eglClientWaitSyncNV_args,
     .extension = "EGL_NV_sync",
@@ -319,7 +319,7 @@ _fail:
 static const char *const pygl_EGL_eglCompositorBindTexWindowEXT_args[] = {"external_win_id"};
 static const PyGLCommand pygl_EGL_eglCompositorBindTexWindowEXT_info = {
     .name = "eglCompositorBindTexWindowEXT",
-    .doc = "eglCompositorBindTexWindowEXT(external_win_id) -> EGLBoolean",
+    .doc = "eglCompositorBindTexWindowEXT(external_win_id: EGLint) -> EGLBoolean",
     .text_signature = "($module, external_win_id, /)",
     .arg_names = pygl_EGL_eglCompositorBindTexWindowEXT_args,
     .extension = "EGL_EXT_compositor",
@@ -354,7 +354,7 @@ _fail:
 static const char *const pygl_EGL_eglCompositorSetContextAttributesEXT_args[] = {"external_ref_id", "context_attributes", "num_entries"};
 static const PyGLCommand pygl_EGL_eglCompositorSetContextAttributesEXT_info = {
     .name = "eglCompositorSetContextAttributesEXT",
-    .doc = "eglCompositorSetContextAttributesEXT(external_ref_id, context_attributes, num_entries) -> EGLBoolean",
+    .doc = "eglCompositorSetContextAttributesEXT(external_ref_id: EGLint, context_attributes: GLint[], num_entries: EGLint) -> EGLBoolean",
     .text_signature = "($module, external_ref_id, context_attributes, num_entries, /)",
     .arg_names = pygl_EGL_eglCompositorSetContextAttributesEXT_args,
     .extension = "EGL_EXT_compositor",
@@ -395,7 +395,7 @@ _fail:
 static const char *const pygl_EGL_eglCompositorSetContextListEXT_args[] = {"external_ref_ids", "num_entries"};
 static const PyGLCommand pygl_EGL_eglCompositorSetContextListEXT_info = {
     .name = "eglCompositorSetContextListEXT",
-    .doc = "eglCompositorSetContextListEXT(external_ref_ids, num_entries) -> EGLBoolean",
+    .doc = "eglCompositorSetContextListEXT(external_ref_ids: GLint[], num_entries: EGLint) -> EGLBoolean",
     .text_signature = "($module, external_ref_ids, num_entries, /)",
     .arg_names = pygl_EGL_eglCompositorSetContextListEXT_args,
     .extension = "EGL_EXT_compositor",
@@ -435,7 +435,7 @@ _fail:
 static const char *const pygl_EGL_eglCompositorSetSizeEXT_args[] = {"external_win_id", "width", "height"};
 static const PyGLCommand pygl_EGL_eglCompositorSetSizeEXT_info = {
     .name = "eglCompositorSetSizeEXT",
-    .doc = "eglCompositorSetSizeEXT(external_win_id, width, height) -> EGLBoolean",
+    .doc = "eglCompositorSetSizeEXT(external_win_id: EGLint, width: EGLint, height: EGLint) -> EGLBoolean",
     .text_signature = "($module, external_win_id, width, height, /)",
     .arg_names = pygl_EGL_eglCompositorSetSizeEXT_args,
     .extension = "EGL_EXT_compositor",
@@ -472,7 +472,7 @@ _fail:
 static const char *const pygl_EGL_eglCompositorSetWindowAttributesEXT_args[] = {"external_win_id", "window_attributes", "num_entries"};
 static const PyGLCommand pygl_EGL_eglCompositorSetWindowAttributesEXT_info = {
     .name = "eglCompositorSetWindowAttributesEXT",
-    .doc = "eglCompositorSetWindowAttributesEXT(external_win_id, window_attributes, num_entries) -> EGLBoolean",
+    .doc = "eglCompositorSetWindowAttributesEXT(external_win_id: EGLint, window_attributes: GLint[], num_entries: EGLint) -> EGLBoolean",
     .text_signature = "($module, external_win_id, window_attributes, num_entries, /)",
     .arg_names = pygl_EGL_eglCompositorSetWindowAttributesEXT_args,
     .extension = "EGL_EXT_compositor",
@@ -513,7 +513,7 @@ _fail:
 static const char *const pygl_EGL_eglCompositorSetWindowListEXT_args[] = {"external_ref_id", "external_win_ids", "num_entries"};
 static const PyGLCommand pygl_EGL_eglCompositorSetWindowListEXT_info = {
     .name = "eglCompositorSetWindowListEXT",
-    .doc = "eglCompositorSetWindowListEXT(external_ref_id, external_win_ids, num_entries) -> EGLBoolean",
+    .doc = "eglCompositorSetWindowListEXT(external_ref_id: EGLint, external_win_ids: GLint[], num_entries: EGLint) -> EGLBoolean",
     .text_signature = "($module, external_ref_id, external_win_ids, num_entries, /)",
     .arg_names = pygl_EGL_eglCompositorSetWindowListEXT_args,
     .extension = "EGL_EXT_compositor",
@@ -554,7 +554,7 @@ _fail:
 static const char *const pygl_EGL_eglCompositorSwapPolicyEXT_args[] = {"external_win_id", "policy"};
 static const PyGLCommand pygl_EGL_eglCompositorSwapPolicyEXT_info = {
     .name = "eglCompositorSwapPolicyEXT",
-    .doc = "eglCompositorSwapPolicyEXT(external_win_id, policy) -> EGLBoolean",
+    .doc = "eglCompositorSwapPolicyEXT(external_win_id: EGLint, policy: EGLint) -> EGLBoolean",
     .text_signature = "($module, external_win_id, policy, /)",
     .arg_names = pygl_EGL_eglCompositorSwapPolicyEXT_args,
     .extension = "EGL_EXT_compositor",
@@ -590,7 +590,7 @@ _fail:
 static const char *const pygl_EGL_eglCopyBuffers_args[] = {"dpy", "surface", "target"};
 static const PyGLCommand pygl_EGL_eglCopyBuffers_info = {
     .name = "eglCopyBuffers",
-    .doc = "eglCopyBuffers(dpy, surface, target) -> EGLBoolean",
+    .doc = "eglCopyBuffers(dpy: EGLDisplay, surface: EGLSurface, target: EGLNativePixmapType) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, target, /)",
     .arg_names = pygl_EGL_eglCopyBuffers_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -627,7 +627,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateContext_args[] = {"dpy", "config", "share_context", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreateContext_info = {
     .name = "eglCreateContext",
-    .doc = "eglCreateContext(dpy, config, share_context, attrib_list) -> EGLContext",
+    .doc = "eglCreateContext(dpy: EGLDisplay, config: EGLConfig, share_context: EGLContext, attrib_list: GLint[]) -> EGLContext",
     .text_signature = "($module, dpy, config, share_context, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreateContext_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -669,7 +669,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateDRMImageMESA_args[] = {"dpy", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreateDRMImageMESA_info = {
     .name = "eglCreateDRMImageMESA",
-    .doc = "eglCreateDRMImageMESA(dpy, attrib_list) -> EGLImageKHR",
+    .doc = "eglCreateDRMImageMESA(dpy: EGLDisplay, attrib_list: GLint[]) -> EGLImageKHR",
     .text_signature = "($module, dpy, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreateDRMImageMESA_args,
     .extension = "EGL_MESA_drm_image",
@@ -709,7 +709,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateFenceSyncNV_args[] = {"dpy", "condition", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreateFenceSyncNV_info = {
     .name = "eglCreateFenceSyncNV",
-    .doc = "eglCreateFenceSyncNV(dpy, condition, attrib_list) -> EGLSyncNV",
+    .doc = "eglCreateFenceSyncNV(dpy: EGLDisplay, condition: EGLenum, attrib_list: GLint[]) -> EGLSyncNV",
     .text_signature = "($module, dpy, condition, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreateFenceSyncNV_args,
     .extension = "EGL_NV_sync",
@@ -750,7 +750,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateImage_args[] = {"dpy", "ctx", "target", "buffer", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreateImage_info = {
     .name = "eglCreateImage",
-    .doc = "eglCreateImage(dpy, ctx, target, buffer, attrib_list) -> EGLImage",
+    .doc = "eglCreateImage(dpy: EGLDisplay, ctx: EGLContext, target: EGLenum, buffer: EGLClientBuffer, attrib_list: GLintptr[]) -> EGLImage",
     .text_signature = "($module, dpy, ctx, target, buffer, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreateImage_args,
     .extension = "EGL_VERSION_EGL_1_5",
@@ -793,7 +793,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateImageKHR_args[] = {"dpy", "ctx", "target", "buffer", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreateImageKHR_info = {
     .name = "eglCreateImageKHR",
-    .doc = "eglCreateImageKHR(dpy, ctx, target, buffer, attrib_list) -> EGLImageKHR",
+    .doc = "eglCreateImageKHR(dpy: EGLDisplay, ctx: EGLContext, target: EGLenum, buffer: EGLClientBuffer, attrib_list: GLint[]) -> EGLImageKHR",
     .text_signature = "($module, dpy, ctx, target, buffer, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreateImageKHR_args,
     .extension = "EGL_KHR_image",
@@ -836,7 +836,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateNativeClientBufferANDROID_args[] = {"attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreateNativeClientBufferANDROID_info = {
     .name = "eglCreateNativeClientBufferANDROID",
-    .doc = "eglCreateNativeClientBufferANDROID(attrib_list) -> EGLClientBuffer",
+    .doc = "eglCreateNativeClientBufferANDROID(attrib_list: GLint[]) -> EGLClientBuffer",
     .text_signature = "($module, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreateNativeClientBufferANDROID_args,
     .extension = "EGL_ANDROID_create_native_client_buffer",
@@ -875,7 +875,7 @@ _fail:
 static const char *const pygl_EGL_eglCreatePbufferFromClientBuffer_args[] = {"dpy", "buftype", "buffer", "config", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreatePbufferFromClientBuffer_info = {
     .name = "eglCreatePbufferFromClientBuffer",
-    .doc = "eglCreatePbufferFromClientBuffer(dpy, buftype, buffer, config, attrib_list) -> EGLSurface",
+    .doc = "eglCreatePbufferFromClientBuffer(dpy: EGLDisplay, buftype: EGLenum, buffer: EGLClientBuffer, config: EGLConfig, attrib_list: GLint[]) -> EGLSurface",
     .text_signature = "($module, dpy, buftype, buffer, config, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreatePbufferFromClientBuffer_args,
     .extension = "EGL_VERSION_EGL_1_2",
@@ -918,7 +918,7 @@ _fail:
 static const char *const pygl_EGL_eglCreatePbufferSurface_args[] = {"dpy", "config", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreatePbufferSurface_info = {
     .name = "eglCreatePbufferSurface",
-    .doc = "eglCreatePbufferSurface(dpy, config, attrib_list) -> EGLSurface",
+    .doc = "eglCreatePbufferSurface(dpy: EGLDisplay, config: EGLConfig, attrib_list: GLint[]) -> EGLSurface",
     .text_signature = "($module, dpy, config, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreatePbufferSurface_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -959,7 +959,7 @@ _fail:
 static const char *const pygl_EGL_eglCreatePixmapSurface_args[] = {"dpy", "config", "pixmap", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreatePixmapSurface_info = {
     .name = "eglCreatePixmapSurface",
-    .doc = "eglCreatePixmapSurface(dpy, config, pixmap, attrib_list) -> EGLSurface",
+    .doc = "eglCreatePixmapSurface(dpy: EGLDisplay, config: EGLConfig, pixmap: EGLNativePixmapType, attrib_list: GLint[]) -> EGLSurface",
     .text_signature = "($module, dpy, config, pixmap, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreatePixmapSurface_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -1001,7 +1001,7 @@ _fail:
 static const char *const pygl_EGL_eglCreatePixmapSurfaceHI_args[] = {"dpy", "config", "pixmap"};
 static const PyGLCommand pygl_EGL_eglCreatePixmapSurfaceHI_info = {
     .name = "eglCreatePixmapSurfaceHI",
-    .doc = "eglCreatePixmapSurfaceHI(dpy, config, pixmap) -> EGLSurface",
+    .doc = "eglCreatePixmapSurfaceHI(dpy: EGLDisplay, config: EGLConfig, pixmap: EGLClientPixmapHI[]) -> EGLSurface",
     .text_signature = "($module, dpy, config, pixmap, /)",
     .arg_names = pygl_EGL_eglCreatePixmapSurfaceHI_args,
     .extension = "EGL_HI_clientpixmap",
@@ -1042,7 +1042,7 @@ _fail:
 static const char *const pygl_EGL_eglCreatePlatformPixmapSurface_args[] = {"dpy", "config", "native_pixmap", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreatePlatformPixmapSurface_info = {
     .name = "eglCreatePlatformPixmapSurface",
-    .doc = "eglCreatePlatformPixmapSurface(dpy, config, native_pixmap, attrib_list) -> EGLSurface",
+    .doc = "eglCreatePlatformPixmapSurface(dpy: EGLDisplay, config: EGLConfig, native_pixmap: void[], attrib_list: GLintptr[]) -> EGLSurface",
     .text_signature = "($module, dpy, config, native_pixmap, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreatePlatformPixmapSurface_args,
     .extension = "EGL_VERSION_EGL_1_5",
@@ -1084,7 +1084,7 @@ _fail:
 static const char *const pygl_EGL_eglCreatePlatformPixmapSurfaceEXT_args[] = {"dpy", "config", "native_pixmap", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreatePlatformPixmapSurfaceEXT_info = {
     .name = "eglCreatePlatformPixmapSurfaceEXT",
-    .doc = "eglCreatePlatformPixmapSurfaceEXT(dpy, config, native_pixmap, attrib_list) -> EGLSurface",
+    .doc = "eglCreatePlatformPixmapSurfaceEXT(dpy: EGLDisplay, config: EGLConfig, native_pixmap: void[], attrib_list: GLint[]) -> EGLSurface",
     .text_signature = "($module, dpy, config, native_pixmap, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreatePlatformPixmapSurfaceEXT_args,
     .extension = "EGL_EXT_platform_base",
@@ -1126,7 +1126,7 @@ _fail:
 static const char *const pygl_EGL_eglCreatePlatformWindowSurface_args[] = {"dpy", "config", "native_window", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreatePlatformWindowSurface_info = {
     .name = "eglCreatePlatformWindowSurface",
-    .doc = "eglCreatePlatformWindowSurface(dpy, config, native_window, attrib_list) -> EGLSurface",
+    .doc = "eglCreatePlatformWindowSurface(dpy: EGLDisplay, config: EGLConfig, native_window: void[], attrib_list: GLintptr[]) -> EGLSurface",
     .text_signature = "($module, dpy, config, native_window, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreatePlatformWindowSurface_args,
     .extension = "EGL_VERSION_EGL_1_5",
@@ -1168,7 +1168,7 @@ _fail:
 static const char *const pygl_EGL_eglCreatePlatformWindowSurfaceEXT_args[] = {"dpy", "config", "native_window", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreatePlatformWindowSurfaceEXT_info = {
     .name = "eglCreatePlatformWindowSurfaceEXT",
-    .doc = "eglCreatePlatformWindowSurfaceEXT(dpy, config, native_window, attrib_list) -> EGLSurface",
+    .doc = "eglCreatePlatformWindowSurfaceEXT(dpy: EGLDisplay, config: EGLConfig, native_window: void[], attrib_list: GLint[]) -> EGLSurface",
     .text_signature = "($module, dpy, config, native_window, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreatePlatformWindowSurfaceEXT_args,
     .extension = "EGL_EXT_platform_base",
@@ -1210,7 +1210,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateStreamAttribKHR_args[] = {"dpy", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreateStreamAttribKHR_info = {
     .name = "eglCreateStreamAttribKHR",
-    .doc = "eglCreateStreamAttribKHR(dpy, attrib_list) -> EGLStreamKHR",
+    .doc = "eglCreateStreamAttribKHR(dpy: EGLDisplay, attrib_list: GLintptr[]) -> EGLStreamKHR",
     .text_signature = "($module, dpy, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreateStreamAttribKHR_args,
     .extension = "EGL_KHR_stream_attrib",
@@ -1250,7 +1250,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateStreamFromFileDescriptorKHR_args[] = {"dpy", "file_descriptor"};
 static const PyGLCommand pygl_EGL_eglCreateStreamFromFileDescriptorKHR_info = {
     .name = "eglCreateStreamFromFileDescriptorKHR",
-    .doc = "eglCreateStreamFromFileDescriptorKHR(dpy, file_descriptor) -> EGLStreamKHR",
+    .doc = "eglCreateStreamFromFileDescriptorKHR(dpy: EGLDisplay, file_descriptor: EGLNativeFileDescriptorKHR) -> EGLStreamKHR",
     .text_signature = "($module, dpy, file_descriptor, /)",
     .arg_names = pygl_EGL_eglCreateStreamFromFileDescriptorKHR_args,
     .extension = "EGL_KHR_stream_cross_process_fd",
@@ -1286,7 +1286,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateStreamKHR_args[] = {"dpy", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreateStreamKHR_info = {
     .name = "eglCreateStreamKHR",
-    .doc = "eglCreateStreamKHR(dpy, attrib_list) -> EGLStreamKHR",
+    .doc = "eglCreateStreamKHR(dpy: EGLDisplay, attrib_list: GLint[]) -> EGLStreamKHR",
     .text_signature = "($module, dpy, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreateStreamKHR_args,
     .extension = "EGL_KHR_stream",
@@ -1326,7 +1326,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateStreamProducerSurfaceKHR_args[] = {"dpy", "config", "stream", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreateStreamProducerSurfaceKHR_info = {
     .name = "eglCreateStreamProducerSurfaceKHR",
-    .doc = "eglCreateStreamProducerSurfaceKHR(dpy, config, stream, attrib_list) -> EGLSurface",
+    .doc = "eglCreateStreamProducerSurfaceKHR(dpy: EGLDisplay, config: EGLConfig, stream: EGLStreamKHR, attrib_list: GLint[]) -> EGLSurface",
     .text_signature = "($module, dpy, config, stream, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreateStreamProducerSurfaceKHR_args,
     .extension = "EGL_KHR_stream_producer_eglsurface",
@@ -1368,7 +1368,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateStreamSyncNV_args[] = {"dpy", "stream", "type", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreateStreamSyncNV_info = {
     .name = "eglCreateStreamSyncNV",
-    .doc = "eglCreateStreamSyncNV(dpy, stream, type, attrib_list) -> EGLSyncKHR",
+    .doc = "eglCreateStreamSyncNV(dpy: EGLDisplay, stream: EGLStreamKHR, type: EGLenum, attrib_list: GLint[]) -> EGLSyncKHR",
     .text_signature = "($module, dpy, stream, type, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreateStreamSyncNV_args,
     .extension = "EGL_NV_stream_sync",
@@ -1410,7 +1410,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateSync_args[] = {"dpy", "type", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreateSync_info = {
     .name = "eglCreateSync",
-    .doc = "eglCreateSync(dpy, type, attrib_list) -> EGLSync",
+    .doc = "eglCreateSync(dpy: EGLDisplay, type: EGLenum, attrib_list: GLintptr[]) -> EGLSync",
     .text_signature = "($module, dpy, type, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreateSync_args,
     .extension = "EGL_VERSION_EGL_1_5",
@@ -1451,7 +1451,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateSync64KHR_args[] = {"dpy", "type", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreateSync64KHR_info = {
     .name = "eglCreateSync64KHR",
-    .doc = "eglCreateSync64KHR(dpy, type, attrib_list) -> EGLSyncKHR",
+    .doc = "eglCreateSync64KHR(dpy: EGLDisplay, type: EGLenum, attrib_list: EGLAttribKHR[]) -> EGLSyncKHR",
     .text_signature = "($module, dpy, type, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreateSync64KHR_args,
     .extension = "EGL_KHR_cl_event2",
@@ -1492,7 +1492,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateSyncKHR_args[] = {"dpy", "type", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreateSyncKHR_info = {
     .name = "eglCreateSyncKHR",
-    .doc = "eglCreateSyncKHR(dpy, type, attrib_list) -> EGLSyncKHR",
+    .doc = "eglCreateSyncKHR(dpy: EGLDisplay, type: EGLenum, attrib_list: GLint[]) -> EGLSyncKHR",
     .text_signature = "($module, dpy, type, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreateSyncKHR_args,
     .extension = "EGL_KHR_fence_sync",
@@ -1533,7 +1533,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateWaylandBufferFromImageWL_args[] = {"dpy", "image"};
 static const PyGLCommand pygl_EGL_eglCreateWaylandBufferFromImageWL_info = {
     .name = "eglCreateWaylandBufferFromImageWL",
-    .doc = "eglCreateWaylandBufferFromImageWL(dpy, image) -> void",
+    .doc = "eglCreateWaylandBufferFromImageWL(dpy: EGLDisplay, image: EGLImageKHR) -> void",
     .text_signature = "($module, dpy, image, /)",
     .arg_names = pygl_EGL_eglCreateWaylandBufferFromImageWL_args,
     .extension = "EGL_WL_create_wayland_buffer_from_image",
@@ -1569,7 +1569,7 @@ _fail:
 static const char *const pygl_EGL_eglCreateWindowSurface_args[] = {"dpy", "config", "win", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglCreateWindowSurface_info = {
     .name = "eglCreateWindowSurface",
-    .doc = "eglCreateWindowSurface(dpy, config, win, attrib_list) -> EGLSurface",
+    .doc = "eglCreateWindowSurface(dpy: EGLDisplay, config: EGLConfig, win: EGLNativeWindowType, attrib_list: GLint[]) -> EGLSurface",
     .text_signature = "($module, dpy, config, win, attrib_list, /)",
     .arg_names = pygl_EGL_eglCreateWindowSurface_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -1611,7 +1611,7 @@ _fail:
 static const char *const pygl_EGL_eglDebugMessageControlKHR_args[] = {"callback", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglDebugMessageControlKHR_info = {
     .name = "eglDebugMessageControlKHR",
-    .doc = "eglDebugMessageControlKHR(callback, attrib_list) -> EGLint",
+    .doc = "eglDebugMessageControlKHR(callback: EGLDEBUGPROCKHR, attrib_list: GLintptr[]) -> EGLint",
     .text_signature = "($module, callback, attrib_list, /)",
     .arg_names = pygl_EGL_eglDebugMessageControlKHR_args,
     .extension = "EGL_KHR_debug",
@@ -1651,7 +1651,7 @@ _fail:
 static const char *const pygl_EGL_eglDestroyContext_args[] = {"dpy", "ctx"};
 static const PyGLCommand pygl_EGL_eglDestroyContext_info = {
     .name = "eglDestroyContext",
-    .doc = "eglDestroyContext(dpy, ctx) -> EGLBoolean",
+    .doc = "eglDestroyContext(dpy: EGLDisplay, ctx: EGLContext) -> EGLBoolean",
     .text_signature = "($module, dpy, ctx, /)",
     .arg_names = pygl_EGL_eglDestroyContext_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -1687,7 +1687,7 @@ _fail:
 static const char *const pygl_EGL_eglDestroyDisplayEXT_args[] = {"dpy"};
 static const PyGLCommand pygl_EGL_eglDestroyDisplayEXT_info = {
     .name = "eglDestroyDisplayEXT",
-    .doc = "eglDestroyDisplayEXT(dpy) -> EGLBoolean",
+    .doc = "eglDestroyDisplayEXT(dpy: EGLDisplay) -> EGLBoolean",
     .text_signature = "($module, dpy, /)",
     .arg_names = pygl_EGL_eglDestroyDisplayEXT_args,
     .extension = "EGL_EXT_display_alloc",
@@ -1722,7 +1722,7 @@ _fail:
 static const char *const pygl_EGL_eglDestroyImage_args[] = {"dpy", "image"};
 static const PyGLCommand pygl_EGL_eglDestroyImage_info = {
     .name = "eglDestroyImage",
-    .doc = "eglDestroyImage(dpy, image) -> EGLBoolean",
+    .doc = "eglDestroyImage(dpy: EGLDisplay, image: EGLImage) -> EGLBoolean",
     .text_signature = "($module, dpy, image, /)",
     .arg_names = pygl_EGL_eglDestroyImage_args,
     .extension = "EGL_VERSION_EGL_1_5",
@@ -1758,7 +1758,7 @@ _fail:
 static const char *const pygl_EGL_eglDestroyImageKHR_args[] = {"dpy", "image"};
 static const PyGLCommand pygl_EGL_eglDestroyImageKHR_info = {
     .name = "eglDestroyImageKHR",
-    .doc = "eglDestroyImageKHR(dpy, image) -> EGLBoolean",
+    .doc = "eglDestroyImageKHR(dpy: EGLDisplay, image: EGLImageKHR) -> EGLBoolean",
     .text_signature = "($module, dpy, image, /)",
     .arg_names = pygl_EGL_eglDestroyImageKHR_args,
     .extension = "EGL_KHR_image",
@@ -1794,7 +1794,7 @@ _fail:
 static const char *const pygl_EGL_eglDestroyStreamKHR_args[] = {"dpy", "stream"};
 static const PyGLCommand pygl_EGL_eglDestroyStreamKHR_info = {
     .name = "eglDestroyStreamKHR",
-    .doc = "eglDestroyStreamKHR(dpy, stream) -> EGLBoolean",
+    .doc = "eglDestroyStreamKHR(dpy: EGLDisplay, stream: EGLStreamKHR) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, /)",
     .arg_names = pygl_EGL_eglDestroyStreamKHR_args,
     .extension = "EGL_KHR_stream",
@@ -1830,7 +1830,7 @@ _fail:
 static const char *const pygl_EGL_eglDestroySurface_args[] = {"dpy", "surface"};
 static const PyGLCommand pygl_EGL_eglDestroySurface_info = {
     .name = "eglDestroySurface",
-    .doc = "eglDestroySurface(dpy, surface) -> EGLBoolean",
+    .doc = "eglDestroySurface(dpy: EGLDisplay, surface: EGLSurface) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, /)",
     .arg_names = pygl_EGL_eglDestroySurface_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -1866,7 +1866,7 @@ _fail:
 static const char *const pygl_EGL_eglDestroySync_args[] = {"dpy", "sync"};
 static const PyGLCommand pygl_EGL_eglDestroySync_info = {
     .name = "eglDestroySync",
-    .doc = "eglDestroySync(dpy, sync) -> EGLBoolean",
+    .doc = "eglDestroySync(dpy: EGLDisplay, sync: EGLSync) -> EGLBoolean",
     .text_signature = "($module, dpy, sync, /)",
     .arg_names = pygl_EGL_eglDestroySync_args,
     .extension = "EGL_VERSION_EGL_1_5",
@@ -1902,7 +1902,7 @@ _fail:
 static const char *const pygl_EGL_eglDestroySyncKHR_args[] = {"dpy", "sync"};
 static const PyGLCommand pygl_EGL_eglDestroySyncKHR_info = {
     .name = "eglDestroySyncKHR",
-    .doc = "eglDestroySyncKHR(dpy, sync) -> EGLBoolean",
+    .doc = "eglDestroySyncKHR(dpy: EGLDisplay, sync: EGLSyncKHR) -> EGLBoolean",
     .text_signature = "($module, dpy, sync, /)",
     .arg_names = pygl_EGL_eglDestroySyncKHR_args,
     .extension = "EGL_KHR_fence_sync",
@@ -1938,7 +1938,7 @@ _fail:
 static const char *const pygl_EGL_eglDestroySyncNV_args[] = {"sync"};
 static const PyGLCommand pygl_EGL_eglDestroySyncNV_info = {
     .name = "eglDestroySyncNV",
-    .doc = "eglDestroySyncNV(sync) -> EGLBoolean",
+    .doc = "eglDestroySyncNV(sync: EGLSyncNV) -> EGLBoolean",
     .text_signature = "($module, sync, /)",
     .arg_names = pygl_EGL_eglDestroySyncNV_args,
     .extension = "EGL_NV_sync",
@@ -1973,7 +1973,7 @@ _fail:
 static const char *const pygl_EGL_eglDupNativeFenceFDANDROID_args[] = {"dpy", "sync"};
 static const PyGLCommand pygl_EGL_eglDupNativeFenceFDANDROID_info = {
     .name = "eglDupNativeFenceFDANDROID",
-    .doc = "eglDupNativeFenceFDANDROID(dpy, sync) -> EGLint",
+    .doc = "eglDupNativeFenceFDANDROID(dpy: EGLDisplay, sync: EGLSyncKHR) -> EGLint",
     .text_signature = "($module, dpy, sync, /)",
     .arg_names = pygl_EGL_eglDupNativeFenceFDANDROID_args,
     .extension = "EGL_ANDROID_native_fence_sync",
@@ -2009,7 +2009,7 @@ _fail:
 static const char *const pygl_EGL_eglExportDMABUFImageMESA_args[] = {"dpy", "image", "fds", "strides", "offsets"};
 static const PyGLCommand pygl_EGL_eglExportDMABUFImageMESA_info = {
     .name = "eglExportDMABUFImageMESA",
-    .doc = "eglExportDMABUFImageMESA(dpy, image, fds, strides, offsets) -> EGLBoolean",
+    .doc = "eglExportDMABUFImageMESA(dpy: EGLDisplay, image: EGLImageKHR, fds: c_int[], strides: GLint[], offsets: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, image, fds, strides, offsets, /)",
     .arg_names = pygl_EGL_eglExportDMABUFImageMESA_args,
     .extension = "EGL_MESA_image_dma_buf_export",
@@ -2052,7 +2052,7 @@ _fail:
 static const char *const pygl_EGL_eglExportDMABUFImageQueryMESA_args[] = {"dpy", "image", "fourcc", "num_planes", "modifiers"};
 static const PyGLCommand pygl_EGL_eglExportDMABUFImageQueryMESA_info = {
     .name = "eglExportDMABUFImageQueryMESA",
-    .doc = "eglExportDMABUFImageQueryMESA(dpy, image, fourcc, num_planes, modifiers) -> EGLBoolean",
+    .doc = "eglExportDMABUFImageQueryMESA(dpy: EGLDisplay, image: EGLImageKHR, fourcc: c_int[], num_planes: c_int[], modifiers: GLuint64[]) -> EGLBoolean",
     .text_signature = "($module, dpy, image, fourcc, num_planes, modifiers, /)",
     .arg_names = pygl_EGL_eglExportDMABUFImageQueryMESA_args,
     .extension = "EGL_MESA_image_dma_buf_export",
@@ -2095,7 +2095,7 @@ _fail:
 static const char *const pygl_EGL_eglExportDRMImageMESA_args[] = {"dpy", "image", "name", "handle", "stride"};
 static const PyGLCommand pygl_EGL_eglExportDRMImageMESA_info = {
     .name = "eglExportDRMImageMESA",
-    .doc = "eglExportDRMImageMESA(dpy, image, name, handle, stride) -> EGLBoolean",
+    .doc = "eglExportDRMImageMESA(dpy: EGLDisplay, image: EGLImageKHR, name: GLint[], handle: GLint[], stride: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, image, name, handle, stride, /)",
     .arg_names = pygl_EGL_eglExportDRMImageMESA_args,
     .extension = "EGL_MESA_drm_image",
@@ -2138,7 +2138,7 @@ _fail:
 static const char *const pygl_EGL_eglFenceNV_args[] = {"sync"};
 static const PyGLCommand pygl_EGL_eglFenceNV_info = {
     .name = "eglFenceNV",
-    .doc = "eglFenceNV(sync) -> EGLBoolean",
+    .doc = "eglFenceNV(sync: EGLSyncNV) -> EGLBoolean",
     .text_signature = "($module, sync, /)",
     .arg_names = pygl_EGL_eglFenceNV_args,
     .extension = "EGL_NV_sync",
@@ -2173,7 +2173,7 @@ _fail:
 static const char *const pygl_EGL_eglGetCompositorTimingANDROID_args[] = {"dpy", "surface", "numTimestamps", "names", "values"};
 static const PyGLCommand pygl_EGL_eglGetCompositorTimingANDROID_info = {
     .name = "eglGetCompositorTimingANDROID",
-    .doc = "eglGetCompositorTimingANDROID(dpy, surface, numTimestamps, names, values) -> EGLBoolean",
+    .doc = "eglGetCompositorTimingANDROID(dpy: EGLDisplay, surface: EGLSurface, numTimestamps: EGLint, names: GLint[], values: GLint64[]) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, numTimestamps, names, values, /)",
     .arg_names = pygl_EGL_eglGetCompositorTimingANDROID_args,
     .extension = "EGL_ANDROID_get_frame_timestamps",
@@ -2216,7 +2216,7 @@ _fail:
 static const char *const pygl_EGL_eglGetCompositorTimingSupportedANDROID_args[] = {"dpy", "surface", "name"};
 static const PyGLCommand pygl_EGL_eglGetCompositorTimingSupportedANDROID_info = {
     .name = "eglGetCompositorTimingSupportedANDROID",
-    .doc = "eglGetCompositorTimingSupportedANDROID(dpy, surface, name) -> EGLBoolean",
+    .doc = "eglGetCompositorTimingSupportedANDROID(dpy: EGLDisplay, surface: EGLSurface, name: EGLint) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, name, /)",
     .arg_names = pygl_EGL_eglGetCompositorTimingSupportedANDROID_args,
     .extension = "EGL_ANDROID_get_frame_timestamps",
@@ -2253,7 +2253,7 @@ _fail:
 static const char *const pygl_EGL_eglGetConfigAttrib_args[] = {"dpy", "config", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglGetConfigAttrib_info = {
     .name = "eglGetConfigAttrib",
-    .doc = "eglGetConfigAttrib(dpy, config, attribute, value) -> EGLBoolean",
+    .doc = "eglGetConfigAttrib(dpy: EGLDisplay, config: EGLConfig, attribute: EGLint, value: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, config, attribute, value, /)",
     .arg_names = pygl_EGL_eglGetConfigAttrib_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -2295,7 +2295,7 @@ _fail:
 static const char *const pygl_EGL_eglGetConfigs_args[] = {"dpy", "configs", "config_size", "num_config"};
 static const PyGLCommand pygl_EGL_eglGetConfigs_info = {
     .name = "eglGetConfigs",
-    .doc = "eglGetConfigs(dpy, configs, config_size, num_config) -> EGLBoolean",
+    .doc = "eglGetConfigs(dpy: EGLDisplay, configs: void[][], config_size: EGLint, num_config: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, configs, config_size, num_config, /)",
     .arg_names = pygl_EGL_eglGetConfigs_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -2403,7 +2403,7 @@ _fail:
 static const char *const pygl_EGL_eglGetCurrentSurface_args[] = {"readdraw"};
 static const PyGLCommand pygl_EGL_eglGetCurrentSurface_info = {
     .name = "eglGetCurrentSurface",
-    .doc = "eglGetCurrentSurface(readdraw) -> EGLSurface",
+    .doc = "eglGetCurrentSurface(readdraw: EGLint) -> EGLSurface",
     .text_signature = "($module, readdraw, /)",
     .arg_names = pygl_EGL_eglGetCurrentSurface_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -2438,7 +2438,7 @@ _fail:
 static const char *const pygl_EGL_eglGetDisplay_args[] = {"display_id"};
 static const PyGLCommand pygl_EGL_eglGetDisplay_info = {
     .name = "eglGetDisplay",
-    .doc = "eglGetDisplay(display_id) -> EGLDisplay",
+    .doc = "eglGetDisplay(display_id: EGLNativeDisplayType) -> EGLDisplay",
     .text_signature = "($module, display_id, /)",
     .arg_names = pygl_EGL_eglGetDisplay_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -2473,7 +2473,7 @@ _fail:
 static const char *const pygl_EGL_eglGetDisplayDriverConfig_args[] = {"dpy"};
 static const PyGLCommand pygl_EGL_eglGetDisplayDriverConfig_info = {
     .name = "eglGetDisplayDriverConfig",
-    .doc = "eglGetDisplayDriverConfig(dpy) -> GLchar",
+    .doc = "eglGetDisplayDriverConfig(dpy: EGLDisplay) -> GLchar",
     .text_signature = "($module, dpy, /)",
     .arg_names = pygl_EGL_eglGetDisplayDriverConfig_args,
     .extension = "EGL_MESA_query_driver",
@@ -2508,7 +2508,7 @@ _fail:
 static const char *const pygl_EGL_eglGetDisplayDriverName_args[] = {"dpy"};
 static const PyGLCommand pygl_EGL_eglGetDisplayDriverName_info = {
     .name = "eglGetDisplayDriverName",
-    .doc = "eglGetDisplayDriverName(dpy) -> GLchar",
+    .doc = "eglGetDisplayDriverName(dpy: EGLDisplay) -> GLchar",
     .text_signature = "($module, dpy, /)",
     .arg_names = pygl_EGL_eglGetDisplayDriverName_args,
     .extension = "EGL_MESA_query_driver",
@@ -2576,7 +2576,7 @@ _fail:
 static const char *const pygl_EGL_eglGetFrameTimestampSupportedANDROID_args[] = {"dpy", "surface", "timestamp"};
 static const PyGLCommand pygl_EGL_eglGetFrameTimestampSupportedANDROID_info = {
     .name = "eglGetFrameTimestampSupportedANDROID",
-    .doc = "eglGetFrameTimestampSupportedANDROID(dpy, surface, timestamp) -> EGLBoolean",
+    .doc = "eglGetFrameTimestampSupportedANDROID(dpy: EGLDisplay, surface: EGLSurface, timestamp: EGLint) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, timestamp, /)",
     .arg_names = pygl_EGL_eglGetFrameTimestampSupportedANDROID_args,
     .extension = "EGL_ANDROID_get_frame_timestamps",
@@ -2613,7 +2613,7 @@ _fail:
 static const char *const pygl_EGL_eglGetFrameTimestampsANDROID_args[] = {"dpy", "surface", "frameId", "numTimestamps", "timestamps", "values"};
 static const PyGLCommand pygl_EGL_eglGetFrameTimestampsANDROID_info = {
     .name = "eglGetFrameTimestampsANDROID",
-    .doc = "eglGetFrameTimestampsANDROID(dpy, surface, frameId, numTimestamps, timestamps, values) -> EGLBoolean",
+    .doc = "eglGetFrameTimestampsANDROID(dpy: EGLDisplay, surface: EGLSurface, frameId: EGLuint64KHR, numTimestamps: EGLint, timestamps: GLint[], values: GLint64[]) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, frameId, numTimestamps, timestamps, values, /)",
     .arg_names = pygl_EGL_eglGetFrameTimestampsANDROID_args,
     .extension = "EGL_ANDROID_get_frame_timestamps",
@@ -2657,7 +2657,7 @@ _fail:
 static const char *const pygl_EGL_eglGetMscRateANGLE_args[] = {"dpy", "surface", "numerator", "denominator"};
 static const PyGLCommand pygl_EGL_eglGetMscRateANGLE_info = {
     .name = "eglGetMscRateANGLE",
-    .doc = "eglGetMscRateANGLE(dpy, surface, numerator, denominator) -> EGLBoolean",
+    .doc = "eglGetMscRateANGLE(dpy: EGLDisplay, surface: EGLSurface, numerator: GLint[], denominator: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, numerator, denominator, /)",
     .arg_names = pygl_EGL_eglGetMscRateANGLE_args,
     .extension = "EGL_ANGLE_sync_control_rate",
@@ -2699,7 +2699,7 @@ _fail:
 static const char *const pygl_EGL_eglGetNativeClientBufferANDROID_args[] = {"buffer"};
 static const PyGLCommand pygl_EGL_eglGetNativeClientBufferANDROID_info = {
     .name = "eglGetNativeClientBufferANDROID",
-    .doc = "eglGetNativeClientBufferANDROID(buffer) -> EGLClientBuffer",
+    .doc = "eglGetNativeClientBufferANDROID(buffer: void[]) -> EGLClientBuffer",
     .text_signature = "($module, buffer, /)",
     .arg_names = pygl_EGL_eglGetNativeClientBufferANDROID_args,
     .extension = "EGL_ANDROID_get_native_client_buffer",
@@ -2738,7 +2738,7 @@ _fail:
 static const char *const pygl_EGL_eglGetNextFrameIdANDROID_args[] = {"dpy", "surface", "frameId"};
 static const PyGLCommand pygl_EGL_eglGetNextFrameIdANDROID_info = {
     .name = "eglGetNextFrameIdANDROID",
-    .doc = "eglGetNextFrameIdANDROID(dpy, surface, frameId) -> EGLBoolean",
+    .doc = "eglGetNextFrameIdANDROID(dpy: EGLDisplay, surface: EGLSurface, frameId: GLuint64[]) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, frameId, /)",
     .arg_names = pygl_EGL_eglGetNextFrameIdANDROID_args,
     .extension = "EGL_ANDROID_get_frame_timestamps",
@@ -2779,7 +2779,7 @@ _fail:
 static const char *const pygl_EGL_eglGetOutputLayersEXT_args[] = {"dpy", "attrib_list", "layers", "max_layers", "num_layers"};
 static const PyGLCommand pygl_EGL_eglGetOutputLayersEXT_info = {
     .name = "eglGetOutputLayersEXT",
-    .doc = "eglGetOutputLayersEXT(dpy, attrib_list, layers, max_layers, num_layers) -> EGLBoolean",
+    .doc = "eglGetOutputLayersEXT(dpy: EGLDisplay, attrib_list: GLintptr[], layers: EGLOutputLayerEXT[], max_layers: EGLint, num_layers: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, attrib_list, layers, max_layers, num_layers, /)",
     .arg_names = pygl_EGL_eglGetOutputLayersEXT_args,
     .extension = "EGL_EXT_output_base",
@@ -2822,7 +2822,7 @@ _fail:
 static const char *const pygl_EGL_eglGetOutputPortsEXT_args[] = {"dpy", "attrib_list", "ports", "max_ports", "num_ports"};
 static const PyGLCommand pygl_EGL_eglGetOutputPortsEXT_info = {
     .name = "eglGetOutputPortsEXT",
-    .doc = "eglGetOutputPortsEXT(dpy, attrib_list, ports, max_ports, num_ports) -> EGLBoolean",
+    .doc = "eglGetOutputPortsEXT(dpy: EGLDisplay, attrib_list: GLintptr[], ports: EGLOutputPortEXT[], max_ports: EGLint, num_ports: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, attrib_list, ports, max_ports, num_ports, /)",
     .arg_names = pygl_EGL_eglGetOutputPortsEXT_args,
     .extension = "EGL_EXT_output_base",
@@ -2865,7 +2865,7 @@ _fail:
 static const char *const pygl_EGL_eglGetPlatformDisplay_args[] = {"platform", "native_display", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglGetPlatformDisplay_info = {
     .name = "eglGetPlatformDisplay",
-    .doc = "eglGetPlatformDisplay(platform, native_display, attrib_list) -> EGLDisplay",
+    .doc = "eglGetPlatformDisplay(platform: EGLenum, native_display: void[], attrib_list: GLintptr[]) -> EGLDisplay",
     .text_signature = "($module, platform, native_display, attrib_list, /)",
     .arg_names = pygl_EGL_eglGetPlatformDisplay_args,
     .extension = "EGL_VERSION_EGL_1_5",
@@ -2906,7 +2906,7 @@ _fail:
 static const char *const pygl_EGL_eglGetPlatformDisplayEXT_args[] = {"platform", "native_display", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglGetPlatformDisplayEXT_info = {
     .name = "eglGetPlatformDisplayEXT",
-    .doc = "eglGetPlatformDisplayEXT(platform, native_display, attrib_list) -> EGLDisplay",
+    .doc = "eglGetPlatformDisplayEXT(platform: EGLenum, native_display: void[], attrib_list: GLint[]) -> EGLDisplay",
     .text_signature = "($module, platform, native_display, attrib_list, /)",
     .arg_names = pygl_EGL_eglGetPlatformDisplayEXT_args,
     .extension = "EGL_EXT_platform_base",
@@ -2947,7 +2947,7 @@ _fail:
 static const char *const pygl_EGL_eglGetProcAddress_args[] = {"procname"};
 static const PyGLCommand pygl_EGL_eglGetProcAddress_info = {
     .name = "eglGetProcAddress",
-    .doc = "eglGetProcAddress(procname) -> void",
+    .doc = "eglGetProcAddress(procname: GLbyte[]) -> void",
     .text_signature = "($module, procname, /)",
     .arg_names = pygl_EGL_eglGetProcAddress_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -2986,7 +2986,7 @@ _fail:
 static const char *const pygl_EGL_eglGetStreamFileDescriptorKHR_args[] = {"dpy", "stream"};
 static const PyGLCommand pygl_EGL_eglGetStreamFileDescriptorKHR_info = {
     .name = "eglGetStreamFileDescriptorKHR",
-    .doc = "eglGetStreamFileDescriptorKHR(dpy, stream) -> EGLNativeFileDescriptorKHR",
+    .doc = "eglGetStreamFileDescriptorKHR(dpy: EGLDisplay, stream: EGLStreamKHR) -> EGLNativeFileDescriptorKHR",
     .text_signature = "($module, dpy, stream, /)",
     .arg_names = pygl_EGL_eglGetStreamFileDescriptorKHR_args,
     .extension = "EGL_KHR_stream_cross_process_fd",
@@ -3022,7 +3022,7 @@ _fail:
 static const char *const pygl_EGL_eglGetSyncAttrib_args[] = {"dpy", "sync", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglGetSyncAttrib_info = {
     .name = "eglGetSyncAttrib",
-    .doc = "eglGetSyncAttrib(dpy, sync, attribute, value) -> EGLBoolean",
+    .doc = "eglGetSyncAttrib(dpy: EGLDisplay, sync: EGLSync, attribute: EGLint, value: GLintptr[]) -> EGLBoolean",
     .text_signature = "($module, dpy, sync, attribute, value, /)",
     .arg_names = pygl_EGL_eglGetSyncAttrib_args,
     .extension = "EGL_VERSION_EGL_1_5",
@@ -3064,7 +3064,7 @@ _fail:
 static const char *const pygl_EGL_eglGetSyncAttribKHR_args[] = {"dpy", "sync", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglGetSyncAttribKHR_info = {
     .name = "eglGetSyncAttribKHR",
-    .doc = "eglGetSyncAttribKHR(dpy, sync, attribute, value) -> EGLBoolean",
+    .doc = "eglGetSyncAttribKHR(dpy: EGLDisplay, sync: EGLSyncKHR, attribute: EGLint, value: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, sync, attribute, value, /)",
     .arg_names = pygl_EGL_eglGetSyncAttribKHR_args,
     .extension = "EGL_KHR_fence_sync",
@@ -3106,7 +3106,7 @@ _fail:
 static const char *const pygl_EGL_eglGetSyncAttribNV_args[] = {"sync", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglGetSyncAttribNV_info = {
     .name = "eglGetSyncAttribNV",
-    .doc = "eglGetSyncAttribNV(sync, attribute, value) -> EGLBoolean",
+    .doc = "eglGetSyncAttribNV(sync: EGLSyncNV, attribute: EGLint, value: GLint[]) -> EGLBoolean",
     .text_signature = "($module, sync, attribute, value, /)",
     .arg_names = pygl_EGL_eglGetSyncAttribNV_args,
     .extension = "EGL_NV_sync",
@@ -3213,7 +3213,7 @@ _fail:
 static const char *const pygl_EGL_eglInitialize_args[] = {"dpy", "major", "minor"};
 static const PyGLCommand pygl_EGL_eglInitialize_info = {
     .name = "eglInitialize",
-    .doc = "eglInitialize(dpy, major, minor) -> EGLBoolean",
+    .doc = "eglInitialize(dpy: EGLDisplay, major: GLint[], minor: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, major, minor, /)",
     .arg_names = pygl_EGL_eglInitialize_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -3254,7 +3254,7 @@ _fail:
 static const char *const pygl_EGL_eglLabelObjectKHR_args[] = {"display", "objectType", "object", "label"};
 static const PyGLCommand pygl_EGL_eglLabelObjectKHR_info = {
     .name = "eglLabelObjectKHR",
-    .doc = "eglLabelObjectKHR(display, objectType, object, label) -> EGLint",
+    .doc = "eglLabelObjectKHR(display: EGLDisplay, objectType: EGLenum, object: EGLObjectKHR, label: EGLLabelKHR) -> EGLint",
     .text_signature = "($module, display, objectType, object, label, /)",
     .arg_names = pygl_EGL_eglLabelObjectKHR_args,
     .extension = "EGL_KHR_debug",
@@ -3292,7 +3292,7 @@ _fail:
 static const char *const pygl_EGL_eglLockSurfaceKHR_args[] = {"dpy", "surface", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglLockSurfaceKHR_info = {
     .name = "eglLockSurfaceKHR",
-    .doc = "eglLockSurfaceKHR(dpy, surface, attrib_list) -> EGLBoolean",
+    .doc = "eglLockSurfaceKHR(dpy: EGLDisplay, surface: EGLSurface, attrib_list: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, attrib_list, /)",
     .arg_names = pygl_EGL_eglLockSurfaceKHR_args,
     .extension = "EGL_KHR_lock_surface",
@@ -3333,7 +3333,7 @@ _fail:
 static const char *const pygl_EGL_eglMakeCurrent_args[] = {"dpy", "draw", "read", "ctx"};
 static const PyGLCommand pygl_EGL_eglMakeCurrent_info = {
     .name = "eglMakeCurrent",
-    .doc = "eglMakeCurrent(dpy, draw, read, ctx) -> EGLBoolean",
+    .doc = "eglMakeCurrent(dpy: EGLDisplay, draw: EGLSurface, read: EGLSurface, ctx: EGLContext) -> EGLBoolean",
     .text_signature = "($module, dpy, draw, read, ctx, /)",
     .arg_names = pygl_EGL_eglMakeCurrent_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -3371,7 +3371,7 @@ _fail:
 static const char *const pygl_EGL_eglOutputLayerAttribEXT_args[] = {"dpy", "layer", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglOutputLayerAttribEXT_info = {
     .name = "eglOutputLayerAttribEXT",
-    .doc = "eglOutputLayerAttribEXT(dpy, layer, attribute, value) -> EGLBoolean",
+    .doc = "eglOutputLayerAttribEXT(dpy: EGLDisplay, layer: EGLOutputLayerEXT, attribute: EGLint, value: EGLAttrib) -> EGLBoolean",
     .text_signature = "($module, dpy, layer, attribute, value, /)",
     .arg_names = pygl_EGL_eglOutputLayerAttribEXT_args,
     .extension = "EGL_EXT_output_base",
@@ -3409,7 +3409,7 @@ _fail:
 static const char *const pygl_EGL_eglOutputPortAttribEXT_args[] = {"dpy", "port", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglOutputPortAttribEXT_info = {
     .name = "eglOutputPortAttribEXT",
-    .doc = "eglOutputPortAttribEXT(dpy, port, attribute, value) -> EGLBoolean",
+    .doc = "eglOutputPortAttribEXT(dpy: EGLDisplay, port: EGLOutputPortEXT, attribute: EGLint, value: EGLAttrib) -> EGLBoolean",
     .text_signature = "($module, dpy, port, attribute, value, /)",
     .arg_names = pygl_EGL_eglOutputPortAttribEXT_args,
     .extension = "EGL_EXT_output_base",
@@ -3447,7 +3447,7 @@ _fail:
 static const char *const pygl_EGL_eglPostSubBufferNV_args[] = {"dpy", "surface", "x", "y", "width", "height"};
 static const PyGLCommand pygl_EGL_eglPostSubBufferNV_info = {
     .name = "eglPostSubBufferNV",
-    .doc = "eglPostSubBufferNV(dpy, surface, x, y, width, height) -> EGLBoolean",
+    .doc = "eglPostSubBufferNV(dpy: EGLDisplay, surface: EGLSurface, x: EGLint, y: EGLint, width: EGLint, height: EGLint) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, x, y, width, height, /)",
     .arg_names = pygl_EGL_eglPostSubBufferNV_args,
     .extension = "EGL_NV_post_sub_buffer",
@@ -3520,7 +3520,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryContext_args[] = {"dpy", "ctx", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQueryContext_info = {
     .name = "eglQueryContext",
-    .doc = "eglQueryContext(dpy, ctx, attribute, value) -> EGLBoolean",
+    .doc = "eglQueryContext(dpy: EGLDisplay, ctx: EGLContext, attribute: EGLint, value: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, ctx, attribute, value, /)",
     .arg_names = pygl_EGL_eglQueryContext_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -3562,7 +3562,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryDebugKHR_args[] = {"attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQueryDebugKHR_info = {
     .name = "eglQueryDebugKHR",
-    .doc = "eglQueryDebugKHR(attribute, value) -> EGLBoolean",
+    .doc = "eglQueryDebugKHR(attribute: EGLint, value: GLintptr[]) -> EGLBoolean",
     .text_signature = "($module, attribute, value, /)",
     .arg_names = pygl_EGL_eglQueryDebugKHR_args,
     .extension = "EGL_KHR_debug",
@@ -3602,7 +3602,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryDeviceAttribEXT_args[] = {"device", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQueryDeviceAttribEXT_info = {
     .name = "eglQueryDeviceAttribEXT",
-    .doc = "eglQueryDeviceAttribEXT(device, attribute, value) -> EGLBoolean",
+    .doc = "eglQueryDeviceAttribEXT(device: EGLDeviceEXT, attribute: EGLint, value: GLintptr[]) -> EGLBoolean",
     .text_signature = "($module, device, attribute, value, /)",
     .arg_names = pygl_EGL_eglQueryDeviceAttribEXT_args,
     .extension = "EGL_EXT_device_base",
@@ -3643,7 +3643,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryDeviceBinaryEXT_args[] = {"device", "name", "max_size", "value", "size"};
 static const PyGLCommand pygl_EGL_eglQueryDeviceBinaryEXT_info = {
     .name = "eglQueryDeviceBinaryEXT",
-    .doc = "eglQueryDeviceBinaryEXT(device, name, max_size, value, size) -> EGLBoolean",
+    .doc = "eglQueryDeviceBinaryEXT(device: EGLDeviceEXT, name: EGLint, max_size: EGLint, value: void[], size: GLint[]) -> EGLBoolean",
     .text_signature = "($module, device, name, max_size, value, size, /)",
     .arg_names = pygl_EGL_eglQueryDeviceBinaryEXT_args,
     .extension = "EGL_EXT_device_persistent_id",
@@ -3686,7 +3686,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryDeviceStringEXT_args[] = {"device", "name"};
 static const PyGLCommand pygl_EGL_eglQueryDeviceStringEXT_info = {
     .name = "eglQueryDeviceStringEXT",
-    .doc = "eglQueryDeviceStringEXT(device, name) -> GLchar",
+    .doc = "eglQueryDeviceStringEXT(device: EGLDeviceEXT, name: EGLint) -> GLchar",
     .text_signature = "($module, device, name, /)",
     .arg_names = pygl_EGL_eglQueryDeviceStringEXT_args,
     .extension = "EGL_EXT_device_base",
@@ -3722,7 +3722,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryDevicesEXT_args[] = {"max_devices", "devices", "num_devices"};
 static const PyGLCommand pygl_EGL_eglQueryDevicesEXT_info = {
     .name = "eglQueryDevicesEXT",
-    .doc = "eglQueryDevicesEXT(max_devices, devices, num_devices) -> EGLBoolean",
+    .doc = "eglQueryDevicesEXT(max_devices: EGLint, devices: EGLDeviceEXT[], num_devices: GLint[]) -> EGLBoolean",
     .text_signature = "($module, max_devices, devices, num_devices, /)",
     .arg_names = pygl_EGL_eglQueryDevicesEXT_args,
     .extension = "EGL_EXT_device_base",
@@ -3763,7 +3763,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryDisplayAttribEXT_args[] = {"dpy", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQueryDisplayAttribEXT_info = {
     .name = "eglQueryDisplayAttribEXT",
-    .doc = "eglQueryDisplayAttribEXT(dpy, attribute, value) -> EGLBoolean",
+    .doc = "eglQueryDisplayAttribEXT(dpy: EGLDisplay, attribute: EGLint, value: GLintptr[]) -> EGLBoolean",
     .text_signature = "($module, dpy, attribute, value, /)",
     .arg_names = pygl_EGL_eglQueryDisplayAttribEXT_args,
     .extension = "EGL_EXT_device_base",
@@ -3804,7 +3804,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryDisplayAttribKHR_args[] = {"dpy", "name", "value"};
 static const PyGLCommand pygl_EGL_eglQueryDisplayAttribKHR_info = {
     .name = "eglQueryDisplayAttribKHR",
-    .doc = "eglQueryDisplayAttribKHR(dpy, name, value) -> EGLBoolean",
+    .doc = "eglQueryDisplayAttribKHR(dpy: EGLDisplay, name: EGLint, value: GLintptr[]) -> EGLBoolean",
     .text_signature = "($module, dpy, name, value, /)",
     .arg_names = pygl_EGL_eglQueryDisplayAttribKHR_args,
     .extension = "EGL_KHR_display_reference",
@@ -3845,7 +3845,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryDisplayAttribNV_args[] = {"dpy", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQueryDisplayAttribNV_info = {
     .name = "eglQueryDisplayAttribNV",
-    .doc = "eglQueryDisplayAttribNV(dpy, attribute, value) -> EGLBoolean",
+    .doc = "eglQueryDisplayAttribNV(dpy: EGLDisplay, attribute: EGLint, value: GLintptr[]) -> EGLBoolean",
     .text_signature = "($module, dpy, attribute, value, /)",
     .arg_names = pygl_EGL_eglQueryDisplayAttribNV_args,
     .extension = "EGL_NV_stream_metadata",
@@ -3886,7 +3886,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryDmaBufFormatsEXT_args[] = {"dpy", "max_formats", "formats", "num_formats"};
 static const PyGLCommand pygl_EGL_eglQueryDmaBufFormatsEXT_info = {
     .name = "eglQueryDmaBufFormatsEXT",
-    .doc = "eglQueryDmaBufFormatsEXT(dpy, max_formats, formats, num_formats) -> EGLBoolean",
+    .doc = "eglQueryDmaBufFormatsEXT(dpy: EGLDisplay, max_formats: EGLint, formats: GLint[], num_formats: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, max_formats, formats, num_formats, /)",
     .arg_names = pygl_EGL_eglQueryDmaBufFormatsEXT_args,
     .extension = "EGL_EXT_image_dma_buf_import_modifiers",
@@ -3928,7 +3928,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryDmaBufModifiersEXT_args[] = {"dpy", "format", "max_modifiers", "modifiers", "external_only", "num_modifiers"};
 static const PyGLCommand pygl_EGL_eglQueryDmaBufModifiersEXT_info = {
     .name = "eglQueryDmaBufModifiersEXT",
-    .doc = "eglQueryDmaBufModifiersEXT(dpy, format, max_modifiers, modifiers, external_only, num_modifiers) -> EGLBoolean",
+    .doc = "eglQueryDmaBufModifiersEXT(dpy: EGLDisplay, format: EGLint, max_modifiers: EGLint, modifiers: GLuint64[], external_only: void[][], num_modifiers: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, format, max_modifiers, modifiers, external_only, num_modifiers, /)",
     .arg_names = pygl_EGL_eglQueryDmaBufModifiersEXT_args,
     .extension = "EGL_EXT_image_dma_buf_import_modifiers",
@@ -3972,7 +3972,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryNativeDisplayNV_args[] = {"dpy", "display_id"};
 static const PyGLCommand pygl_EGL_eglQueryNativeDisplayNV_info = {
     .name = "eglQueryNativeDisplayNV",
-    .doc = "eglQueryNativeDisplayNV(dpy, display_id) -> EGLBoolean",
+    .doc = "eglQueryNativeDisplayNV(dpy: EGLDisplay, display_id: void[][]) -> EGLBoolean",
     .text_signature = "($module, dpy, display_id, /)",
     .arg_names = pygl_EGL_eglQueryNativeDisplayNV_args,
     .extension = "EGL_NV_native_query",
@@ -4012,7 +4012,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryNativePixmapNV_args[] = {"dpy", "surf", "pixmap"};
 static const PyGLCommand pygl_EGL_eglQueryNativePixmapNV_info = {
     .name = "eglQueryNativePixmapNV",
-    .doc = "eglQueryNativePixmapNV(dpy, surf, pixmap) -> EGLBoolean",
+    .doc = "eglQueryNativePixmapNV(dpy: EGLDisplay, surf: EGLSurface, pixmap: void[][]) -> EGLBoolean",
     .text_signature = "($module, dpy, surf, pixmap, /)",
     .arg_names = pygl_EGL_eglQueryNativePixmapNV_args,
     .extension = "EGL_NV_native_query",
@@ -4053,7 +4053,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryNativeWindowNV_args[] = {"dpy", "surf", "window"};
 static const PyGLCommand pygl_EGL_eglQueryNativeWindowNV_info = {
     .name = "eglQueryNativeWindowNV",
-    .doc = "eglQueryNativeWindowNV(dpy, surf, window) -> EGLBoolean",
+    .doc = "eglQueryNativeWindowNV(dpy: EGLDisplay, surf: EGLSurface, window: void[][]) -> EGLBoolean",
     .text_signature = "($module, dpy, surf, window, /)",
     .arg_names = pygl_EGL_eglQueryNativeWindowNV_args,
     .extension = "EGL_NV_native_query",
@@ -4094,7 +4094,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryOutputLayerAttribEXT_args[] = {"dpy", "layer", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQueryOutputLayerAttribEXT_info = {
     .name = "eglQueryOutputLayerAttribEXT",
-    .doc = "eglQueryOutputLayerAttribEXT(dpy, layer, attribute, value) -> EGLBoolean",
+    .doc = "eglQueryOutputLayerAttribEXT(dpy: EGLDisplay, layer: EGLOutputLayerEXT, attribute: EGLint, value: GLintptr[]) -> EGLBoolean",
     .text_signature = "($module, dpy, layer, attribute, value, /)",
     .arg_names = pygl_EGL_eglQueryOutputLayerAttribEXT_args,
     .extension = "EGL_EXT_output_base",
@@ -4136,7 +4136,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryOutputLayerStringEXT_args[] = {"dpy", "layer", "name"};
 static const PyGLCommand pygl_EGL_eglQueryOutputLayerStringEXT_info = {
     .name = "eglQueryOutputLayerStringEXT",
-    .doc = "eglQueryOutputLayerStringEXT(dpy, layer, name) -> GLchar",
+    .doc = "eglQueryOutputLayerStringEXT(dpy: EGLDisplay, layer: EGLOutputLayerEXT, name: EGLint) -> GLchar",
     .text_signature = "($module, dpy, layer, name, /)",
     .arg_names = pygl_EGL_eglQueryOutputLayerStringEXT_args,
     .extension = "EGL_EXT_output_base",
@@ -4173,7 +4173,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryOutputPortAttribEXT_args[] = {"dpy", "port", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQueryOutputPortAttribEXT_info = {
     .name = "eglQueryOutputPortAttribEXT",
-    .doc = "eglQueryOutputPortAttribEXT(dpy, port, attribute, value) -> EGLBoolean",
+    .doc = "eglQueryOutputPortAttribEXT(dpy: EGLDisplay, port: EGLOutputPortEXT, attribute: EGLint, value: GLintptr[]) -> EGLBoolean",
     .text_signature = "($module, dpy, port, attribute, value, /)",
     .arg_names = pygl_EGL_eglQueryOutputPortAttribEXT_args,
     .extension = "EGL_EXT_output_base",
@@ -4215,7 +4215,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryOutputPortStringEXT_args[] = {"dpy", "port", "name"};
 static const PyGLCommand pygl_EGL_eglQueryOutputPortStringEXT_info = {
     .name = "eglQueryOutputPortStringEXT",
-    .doc = "eglQueryOutputPortStringEXT(dpy, port, name) -> GLchar",
+    .doc = "eglQueryOutputPortStringEXT(dpy: EGLDisplay, port: EGLOutputPortEXT, name: EGLint) -> GLchar",
     .text_signature = "($module, dpy, port, name, /)",
     .arg_names = pygl_EGL_eglQueryOutputPortStringEXT_args,
     .extension = "EGL_EXT_output_base",
@@ -4252,7 +4252,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryStreamAttribKHR_args[] = {"dpy", "stream", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQueryStreamAttribKHR_info = {
     .name = "eglQueryStreamAttribKHR",
-    .doc = "eglQueryStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean",
+    .doc = "eglQueryStreamAttribKHR(dpy: EGLDisplay, stream: EGLStreamKHR, attribute: EGLenum, value: GLintptr[]) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, attribute, value, /)",
     .arg_names = pygl_EGL_eglQueryStreamAttribKHR_args,
     .extension = "EGL_KHR_stream_attrib",
@@ -4294,7 +4294,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryStreamConsumerEventNV_args[] = {"dpy", "stream", "timeout", "event", "aux"};
 static const PyGLCommand pygl_EGL_eglQueryStreamConsumerEventNV_info = {
     .name = "eglQueryStreamConsumerEventNV",
-    .doc = "eglQueryStreamConsumerEventNV(dpy, stream, timeout, event, aux) -> EGLint",
+    .doc = "eglQueryStreamConsumerEventNV(dpy: EGLDisplay, stream: EGLStreamKHR, timeout: EGLTime, event: void[][], aux: GLintptr[]) -> EGLint",
     .text_signature = "($module, dpy, stream, timeout, event, aux, /)",
     .arg_names = pygl_EGL_eglQueryStreamConsumerEventNV_args,
     .extension = "EGL_NV_stream_consumer_eglimage",
@@ -4337,7 +4337,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryStreamKHR_args[] = {"dpy", "stream", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQueryStreamKHR_info = {
     .name = "eglQueryStreamKHR",
-    .doc = "eglQueryStreamKHR(dpy, stream, attribute, value) -> EGLBoolean",
+    .doc = "eglQueryStreamKHR(dpy: EGLDisplay, stream: EGLStreamKHR, attribute: EGLenum, value: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, attribute, value, /)",
     .arg_names = pygl_EGL_eglQueryStreamKHR_args,
     .extension = "EGL_KHR_stream",
@@ -4379,7 +4379,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryStreamMetadataNV_args[] = {"dpy", "stream", "name", "n", "offset", "size", "data"};
 static const PyGLCommand pygl_EGL_eglQueryStreamMetadataNV_info = {
     .name = "eglQueryStreamMetadataNV",
-    .doc = "eglQueryStreamMetadataNV(dpy, stream, name, n, offset, size, data) -> EGLBoolean",
+    .doc = "eglQueryStreamMetadataNV(dpy: EGLDisplay, stream: EGLStreamKHR, name: EGLenum, n: EGLint, offset: EGLint, size: EGLint, data: void[]) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, name, n, offset, size, data, /)",
     .arg_names = pygl_EGL_eglQueryStreamMetadataNV_args,
     .extension = "EGL_NV_stream_metadata",
@@ -4424,7 +4424,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryStreamTimeKHR_args[] = {"dpy", "stream", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQueryStreamTimeKHR_info = {
     .name = "eglQueryStreamTimeKHR",
-    .doc = "eglQueryStreamTimeKHR(dpy, stream, attribute, value) -> EGLBoolean",
+    .doc = "eglQueryStreamTimeKHR(dpy: EGLDisplay, stream: EGLStreamKHR, attribute: EGLenum, value: GLuint64[]) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, attribute, value, /)",
     .arg_names = pygl_EGL_eglQueryStreamTimeKHR_args,
     .extension = "EGL_KHR_stream_fifo",
@@ -4466,7 +4466,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryStreamu64KHR_args[] = {"dpy", "stream", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQueryStreamu64KHR_info = {
     .name = "eglQueryStreamu64KHR",
-    .doc = "eglQueryStreamu64KHR(dpy, stream, attribute, value) -> EGLBoolean",
+    .doc = "eglQueryStreamu64KHR(dpy: EGLDisplay, stream: EGLStreamKHR, attribute: EGLenum, value: GLuint64[]) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, attribute, value, /)",
     .arg_names = pygl_EGL_eglQueryStreamu64KHR_args,
     .extension = "EGL_KHR_stream",
@@ -4508,7 +4508,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryString_args[] = {"dpy", "name"};
 static const PyGLCommand pygl_EGL_eglQueryString_info = {
     .name = "eglQueryString",
-    .doc = "eglQueryString(dpy, name) -> GLchar",
+    .doc = "eglQueryString(dpy: EGLDisplay, name: EGLint) -> GLchar",
     .text_signature = "($module, dpy, name, /)",
     .arg_names = pygl_EGL_eglQueryString_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -4544,7 +4544,7 @@ _fail:
 static const char *const pygl_EGL_eglQuerySupportedCompressionRatesEXT_args[] = {"dpy", "config", "attrib_list", "rates", "rate_size", "num_rates"};
 static const PyGLCommand pygl_EGL_eglQuerySupportedCompressionRatesEXT_info = {
     .name = "eglQuerySupportedCompressionRatesEXT",
-    .doc = "eglQuerySupportedCompressionRatesEXT(dpy, config, attrib_list, rates, rate_size, num_rates) -> EGLBoolean",
+    .doc = "eglQuerySupportedCompressionRatesEXT(dpy: EGLDisplay, config: EGLConfig, attrib_list: GLintptr[], rates: GLint[], rate_size: EGLint, num_rates: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, config, attrib_list, rates, rate_size, num_rates, /)",
     .arg_names = pygl_EGL_eglQuerySupportedCompressionRatesEXT_args,
     .extension = "EGL_EXT_surface_compression",
@@ -4588,7 +4588,7 @@ _fail:
 static const char *const pygl_EGL_eglQuerySurface_args[] = {"dpy", "surface", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQuerySurface_info = {
     .name = "eglQuerySurface",
-    .doc = "eglQuerySurface(dpy, surface, attribute, value) -> EGLBoolean",
+    .doc = "eglQuerySurface(dpy: EGLDisplay, surface: EGLSurface, attribute: EGLint, value: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, attribute, value, /)",
     .arg_names = pygl_EGL_eglQuerySurface_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -4630,7 +4630,7 @@ _fail:
 static const char *const pygl_EGL_eglQuerySurface64KHR_args[] = {"dpy", "surface", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQuerySurface64KHR_info = {
     .name = "eglQuerySurface64KHR",
-    .doc = "eglQuerySurface64KHR(dpy, surface, attribute, value) -> EGLBoolean",
+    .doc = "eglQuerySurface64KHR(dpy: EGLDisplay, surface: EGLSurface, attribute: EGLint, value: EGLAttribKHR[]) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, attribute, value, /)",
     .arg_names = pygl_EGL_eglQuerySurface64KHR_args,
     .extension = "EGL_KHR_lock_surface3",
@@ -4672,7 +4672,7 @@ _fail:
 static const char *const pygl_EGL_eglQuerySurfacePointerANGLE_args[] = {"dpy", "surface", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQuerySurfacePointerANGLE_info = {
     .name = "eglQuerySurfacePointerANGLE",
-    .doc = "eglQuerySurfacePointerANGLE(dpy, surface, attribute, value) -> EGLBoolean",
+    .doc = "eglQuerySurfacePointerANGLE(dpy: EGLDisplay, surface: EGLSurface, attribute: EGLint, value: void[][]) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, attribute, value, /)",
     .arg_names = pygl_EGL_eglQuerySurfacePointerANGLE_args,
     .extension = "EGL_ANGLE_query_surface_pointer",
@@ -4714,7 +4714,7 @@ _fail:
 static const char *const pygl_EGL_eglQueryWaylandBufferWL_args[] = {"dpy", "buffer", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglQueryWaylandBufferWL_info = {
     .name = "eglQueryWaylandBufferWL",
-    .doc = "eglQueryWaylandBufferWL(dpy, buffer, attribute, value) -> EGLBoolean",
+    .doc = "eglQueryWaylandBufferWL(dpy: EGLDisplay, buffer: void[], attribute: EGLint, value: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, buffer, attribute, value, /)",
     .arg_names = pygl_EGL_eglQueryWaylandBufferWL_args,
     .extension = "EGL_WL_bind_wayland_display",
@@ -4756,7 +4756,7 @@ _fail:
 static const char *const pygl_EGL_eglReleaseTexImage_args[] = {"dpy", "surface", "buffer"};
 static const PyGLCommand pygl_EGL_eglReleaseTexImage_info = {
     .name = "eglReleaseTexImage",
-    .doc = "eglReleaseTexImage(dpy, surface, buffer) -> EGLBoolean",
+    .doc = "eglReleaseTexImage(dpy: EGLDisplay, surface: EGLSurface, buffer: EGLint) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, buffer, /)",
     .arg_names = pygl_EGL_eglReleaseTexImage_args,
     .extension = "EGL_VERSION_EGL_1_1",
@@ -4826,7 +4826,7 @@ _fail:
 static const char *const pygl_EGL_eglResetStreamNV_args[] = {"dpy", "stream"};
 static const PyGLCommand pygl_EGL_eglResetStreamNV_info = {
     .name = "eglResetStreamNV",
-    .doc = "eglResetStreamNV(dpy, stream) -> EGLBoolean",
+    .doc = "eglResetStreamNV(dpy: EGLDisplay, stream: EGLStreamKHR) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, /)",
     .arg_names = pygl_EGL_eglResetStreamNV_args,
     .extension = "EGL_NV_stream_reset",
@@ -4862,7 +4862,7 @@ _fail:
 static const char *const pygl_EGL_eglSetBlobCacheFuncsANDROID_args[] = {"dpy", "set", "get"};
 static const PyGLCommand pygl_EGL_eglSetBlobCacheFuncsANDROID_info = {
     .name = "eglSetBlobCacheFuncsANDROID",
-    .doc = "eglSetBlobCacheFuncsANDROID(dpy, set, get) -> None",
+    .doc = "eglSetBlobCacheFuncsANDROID(dpy: EGLDisplay, set: EGLSetBlobFuncANDROID, get: EGLGetBlobFuncANDROID) -> None",
     .text_signature = "($module, dpy, set, get, /)",
     .arg_names = pygl_EGL_eglSetBlobCacheFuncsANDROID_args,
     .extension = "EGL_ANDROID_blob_cache",
@@ -4899,7 +4899,7 @@ _fail:
 static const char *const pygl_EGL_eglSetDamageRegionKHR_args[] = {"dpy", "surface", "rects", "n_rects"};
 static const PyGLCommand pygl_EGL_eglSetDamageRegionKHR_info = {
     .name = "eglSetDamageRegionKHR",
-    .doc = "eglSetDamageRegionKHR(dpy, surface, rects, n_rects) -> EGLBoolean",
+    .doc = "eglSetDamageRegionKHR(dpy: EGLDisplay, surface: EGLSurface, rects: GLint[], n_rects: EGLint) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, rects, n_rects, /)",
     .arg_names = pygl_EGL_eglSetDamageRegionKHR_args,
     .extension = "EGL_KHR_partial_update",
@@ -4941,7 +4941,7 @@ _fail:
 static const char *const pygl_EGL_eglSetStreamAttribKHR_args[] = {"dpy", "stream", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglSetStreamAttribKHR_info = {
     .name = "eglSetStreamAttribKHR",
-    .doc = "eglSetStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean",
+    .doc = "eglSetStreamAttribKHR(dpy: EGLDisplay, stream: EGLStreamKHR, attribute: EGLenum, value: EGLAttrib) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, attribute, value, /)",
     .arg_names = pygl_EGL_eglSetStreamAttribKHR_args,
     .extension = "EGL_KHR_stream_attrib",
@@ -4979,7 +4979,7 @@ _fail:
 static const char *const pygl_EGL_eglSetStreamMetadataNV_args[] = {"dpy", "stream", "n", "offset", "size", "data"};
 static const PyGLCommand pygl_EGL_eglSetStreamMetadataNV_info = {
     .name = "eglSetStreamMetadataNV",
-    .doc = "eglSetStreamMetadataNV(dpy, stream, n, offset, size, data) -> EGLBoolean",
+    .doc = "eglSetStreamMetadataNV(dpy: EGLDisplay, stream: EGLStreamKHR, n: EGLint, offset: EGLint, size: EGLint, data: void[]) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, n, offset, size, data, /)",
     .arg_names = pygl_EGL_eglSetStreamMetadataNV_args,
     .extension = "EGL_NV_stream_metadata",
@@ -5023,7 +5023,7 @@ _fail:
 static const char *const pygl_EGL_eglSignalSyncKHR_args[] = {"dpy", "sync", "mode"};
 static const PyGLCommand pygl_EGL_eglSignalSyncKHR_info = {
     .name = "eglSignalSyncKHR",
-    .doc = "eglSignalSyncKHR(dpy, sync, mode) -> EGLBoolean",
+    .doc = "eglSignalSyncKHR(dpy: EGLDisplay, sync: EGLSyncKHR, mode: EGLenum) -> EGLBoolean",
     .text_signature = "($module, dpy, sync, mode, /)",
     .arg_names = pygl_EGL_eglSignalSyncKHR_args,
     .extension = "EGL_KHR_reusable_sync",
@@ -5060,7 +5060,7 @@ _fail:
 static const char *const pygl_EGL_eglSignalSyncNV_args[] = {"sync", "mode"};
 static const PyGLCommand pygl_EGL_eglSignalSyncNV_info = {
     .name = "eglSignalSyncNV",
-    .doc = "eglSignalSyncNV(sync, mode) -> EGLBoolean",
+    .doc = "eglSignalSyncNV(sync: EGLSyncNV, mode: EGLenum) -> EGLBoolean",
     .text_signature = "($module, sync, mode, /)",
     .arg_names = pygl_EGL_eglSignalSyncNV_args,
     .extension = "EGL_NV_sync",
@@ -5096,7 +5096,7 @@ _fail:
 static const char *const pygl_EGL_eglStreamAcquireImageNV_args[] = {"dpy", "stream", "pImage", "sync"};
 static const PyGLCommand pygl_EGL_eglStreamAcquireImageNV_info = {
     .name = "eglStreamAcquireImageNV",
-    .doc = "eglStreamAcquireImageNV(dpy, stream, pImage, sync) -> EGLBoolean",
+    .doc = "eglStreamAcquireImageNV(dpy: EGLDisplay, stream: EGLStreamKHR, pImage: void[][], sync: EGLSync) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, pImage, sync, /)",
     .arg_names = pygl_EGL_eglStreamAcquireImageNV_args,
     .extension = "EGL_NV_stream_consumer_eglimage",
@@ -5138,7 +5138,7 @@ _fail:
 static const char *const pygl_EGL_eglStreamAttribKHR_args[] = {"dpy", "stream", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglStreamAttribKHR_info = {
     .name = "eglStreamAttribKHR",
-    .doc = "eglStreamAttribKHR(dpy, stream, attribute, value) -> EGLBoolean",
+    .doc = "eglStreamAttribKHR(dpy: EGLDisplay, stream: EGLStreamKHR, attribute: EGLenum, value: EGLint) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, attribute, value, /)",
     .arg_names = pygl_EGL_eglStreamAttribKHR_args,
     .extension = "EGL_KHR_stream",
@@ -5176,7 +5176,7 @@ _fail:
 static const char *const pygl_EGL_eglStreamConsumerAcquireAttribKHR_args[] = {"dpy", "stream", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglStreamConsumerAcquireAttribKHR_info = {
     .name = "eglStreamConsumerAcquireAttribKHR",
-    .doc = "eglStreamConsumerAcquireAttribKHR(dpy, stream, attrib_list) -> EGLBoolean",
+    .doc = "eglStreamConsumerAcquireAttribKHR(dpy: EGLDisplay, stream: EGLStreamKHR, attrib_list: GLintptr[]) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, attrib_list, /)",
     .arg_names = pygl_EGL_eglStreamConsumerAcquireAttribKHR_args,
     .extension = "EGL_KHR_stream_attrib",
@@ -5217,7 +5217,7 @@ _fail:
 static const char *const pygl_EGL_eglStreamConsumerAcquireKHR_args[] = {"dpy", "stream"};
 static const PyGLCommand pygl_EGL_eglStreamConsumerAcquireKHR_info = {
     .name = "eglStreamConsumerAcquireKHR",
-    .doc = "eglStreamConsumerAcquireKHR(dpy, stream) -> EGLBoolean",
+    .doc = "eglStreamConsumerAcquireKHR(dpy: EGLDisplay, stream: EGLStreamKHR) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, /)",
     .arg_names = pygl_EGL_eglStreamConsumerAcquireKHR_args,
     .extension = "EGL_KHR_stream_consumer_gltexture",
@@ -5253,7 +5253,7 @@ _fail:
 static const char *const pygl_EGL_eglStreamConsumerGLTextureExternalKHR_args[] = {"dpy", "stream"};
 static const PyGLCommand pygl_EGL_eglStreamConsumerGLTextureExternalKHR_info = {
     .name = "eglStreamConsumerGLTextureExternalKHR",
-    .doc = "eglStreamConsumerGLTextureExternalKHR(dpy, stream) -> EGLBoolean",
+    .doc = "eglStreamConsumerGLTextureExternalKHR(dpy: EGLDisplay, stream: EGLStreamKHR) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, /)",
     .arg_names = pygl_EGL_eglStreamConsumerGLTextureExternalKHR_args,
     .extension = "EGL_KHR_stream_consumer_gltexture",
@@ -5289,7 +5289,7 @@ _fail:
 static const char *const pygl_EGL_eglStreamConsumerOutputEXT_args[] = {"dpy", "stream", "layer"};
 static const PyGLCommand pygl_EGL_eglStreamConsumerOutputEXT_info = {
     .name = "eglStreamConsumerOutputEXT",
-    .doc = "eglStreamConsumerOutputEXT(dpy, stream, layer) -> EGLBoolean",
+    .doc = "eglStreamConsumerOutputEXT(dpy: EGLDisplay, stream: EGLStreamKHR, layer: EGLOutputLayerEXT) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, layer, /)",
     .arg_names = pygl_EGL_eglStreamConsumerOutputEXT_args,
     .extension = "EGL_EXT_stream_consumer_egloutput",
@@ -5326,7 +5326,7 @@ _fail:
 static const char *const pygl_EGL_eglStreamConsumerReleaseAttribKHR_args[] = {"dpy", "stream", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglStreamConsumerReleaseAttribKHR_info = {
     .name = "eglStreamConsumerReleaseAttribKHR",
-    .doc = "eglStreamConsumerReleaseAttribKHR(dpy, stream, attrib_list) -> EGLBoolean",
+    .doc = "eglStreamConsumerReleaseAttribKHR(dpy: EGLDisplay, stream: EGLStreamKHR, attrib_list: GLintptr[]) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, attrib_list, /)",
     .arg_names = pygl_EGL_eglStreamConsumerReleaseAttribKHR_args,
     .extension = "EGL_KHR_stream_attrib",
@@ -5367,7 +5367,7 @@ _fail:
 static const char *const pygl_EGL_eglStreamConsumerReleaseKHR_args[] = {"dpy", "stream"};
 static const PyGLCommand pygl_EGL_eglStreamConsumerReleaseKHR_info = {
     .name = "eglStreamConsumerReleaseKHR",
-    .doc = "eglStreamConsumerReleaseKHR(dpy, stream) -> EGLBoolean",
+    .doc = "eglStreamConsumerReleaseKHR(dpy: EGLDisplay, stream: EGLStreamKHR) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, /)",
     .arg_names = pygl_EGL_eglStreamConsumerReleaseKHR_args,
     .extension = "EGL_KHR_stream_consumer_gltexture",
@@ -5403,7 +5403,7 @@ _fail:
 static const char *const pygl_EGL_eglStreamFlushNV_args[] = {"dpy", "stream"};
 static const PyGLCommand pygl_EGL_eglStreamFlushNV_info = {
     .name = "eglStreamFlushNV",
-    .doc = "eglStreamFlushNV(dpy, stream) -> EGLBoolean",
+    .doc = "eglStreamFlushNV(dpy: EGLDisplay, stream: EGLStreamKHR) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, /)",
     .arg_names = pygl_EGL_eglStreamFlushNV_args,
     .extension = "EGL_NV_stream_flush",
@@ -5439,7 +5439,7 @@ _fail:
 static const char *const pygl_EGL_eglStreamImageConsumerConnectNV_args[] = {"dpy", "stream", "num_modifiers", "modifiers", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglStreamImageConsumerConnectNV_info = {
     .name = "eglStreamImageConsumerConnectNV",
-    .doc = "eglStreamImageConsumerConnectNV(dpy, stream, num_modifiers, modifiers, attrib_list) -> EGLBoolean",
+    .doc = "eglStreamImageConsumerConnectNV(dpy: EGLDisplay, stream: EGLStreamKHR, num_modifiers: EGLint, modifiers: GLuint64[], attrib_list: GLintptr[]) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, num_modifiers, modifiers, attrib_list, /)",
     .arg_names = pygl_EGL_eglStreamImageConsumerConnectNV_args,
     .extension = "EGL_NV_stream_consumer_eglimage",
@@ -5482,7 +5482,7 @@ _fail:
 static const char *const pygl_EGL_eglStreamReleaseImageNV_args[] = {"dpy", "stream", "image", "sync"};
 static const PyGLCommand pygl_EGL_eglStreamReleaseImageNV_info = {
     .name = "eglStreamReleaseImageNV",
-    .doc = "eglStreamReleaseImageNV(dpy, stream, image, sync) -> EGLBoolean",
+    .doc = "eglStreamReleaseImageNV(dpy: EGLDisplay, stream: EGLStreamKHR, image: EGLImage, sync: EGLSync) -> EGLBoolean",
     .text_signature = "($module, dpy, stream, image, sync, /)",
     .arg_names = pygl_EGL_eglStreamReleaseImageNV_args,
     .extension = "EGL_NV_stream_consumer_eglimage",
@@ -5520,7 +5520,7 @@ _fail:
 static const char *const pygl_EGL_eglSurfaceAttrib_args[] = {"dpy", "surface", "attribute", "value"};
 static const PyGLCommand pygl_EGL_eglSurfaceAttrib_info = {
     .name = "eglSurfaceAttrib",
-    .doc = "eglSurfaceAttrib(dpy, surface, attribute, value) -> EGLBoolean",
+    .doc = "eglSurfaceAttrib(dpy: EGLDisplay, surface: EGLSurface, attribute: EGLint, value: EGLint) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, attribute, value, /)",
     .arg_names = pygl_EGL_eglSurfaceAttrib_args,
     .extension = "EGL_VERSION_EGL_1_1",
@@ -5558,7 +5558,7 @@ _fail:
 static const char *const pygl_EGL_eglSwapBuffers_args[] = {"dpy", "surface"};
 static const PyGLCommand pygl_EGL_eglSwapBuffers_info = {
     .name = "eglSwapBuffers",
-    .doc = "eglSwapBuffers(dpy, surface) -> EGLBoolean",
+    .doc = "eglSwapBuffers(dpy: EGLDisplay, surface: EGLSurface) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, /)",
     .arg_names = pygl_EGL_eglSwapBuffers_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -5594,7 +5594,7 @@ _fail:
 static const char *const pygl_EGL_eglSwapBuffersRegion2NOK_args[] = {"dpy", "surface", "numRects", "rects"};
 static const PyGLCommand pygl_EGL_eglSwapBuffersRegion2NOK_info = {
     .name = "eglSwapBuffersRegion2NOK",
-    .doc = "eglSwapBuffersRegion2NOK(dpy, surface, numRects, rects) -> EGLBoolean",
+    .doc = "eglSwapBuffersRegion2NOK(dpy: EGLDisplay, surface: EGLSurface, numRects: EGLint, rects: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, numRects, rects, /)",
     .arg_names = pygl_EGL_eglSwapBuffersRegion2NOK_args,
     .extension = "EGL_NOK_swap_region2",
@@ -5636,7 +5636,7 @@ _fail:
 static const char *const pygl_EGL_eglSwapBuffersRegionNOK_args[] = {"dpy", "surface", "numRects", "rects"};
 static const PyGLCommand pygl_EGL_eglSwapBuffersRegionNOK_info = {
     .name = "eglSwapBuffersRegionNOK",
-    .doc = "eglSwapBuffersRegionNOK(dpy, surface, numRects, rects) -> EGLBoolean",
+    .doc = "eglSwapBuffersRegionNOK(dpy: EGLDisplay, surface: EGLSurface, numRects: EGLint, rects: GLint[]) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, numRects, rects, /)",
     .arg_names = pygl_EGL_eglSwapBuffersRegionNOK_args,
     .extension = "EGL_NOK_swap_region",
@@ -5678,7 +5678,7 @@ _fail:
 static const char *const pygl_EGL_eglSwapBuffersWithDamageEXT_args[] = {"dpy", "surface", "rects", "n_rects"};
 static const PyGLCommand pygl_EGL_eglSwapBuffersWithDamageEXT_info = {
     .name = "eglSwapBuffersWithDamageEXT",
-    .doc = "eglSwapBuffersWithDamageEXT(dpy, surface, rects, n_rects) -> EGLBoolean",
+    .doc = "eglSwapBuffersWithDamageEXT(dpy: EGLDisplay, surface: EGLSurface, rects: GLint[], n_rects: EGLint) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, rects, n_rects, /)",
     .arg_names = pygl_EGL_eglSwapBuffersWithDamageEXT_args,
     .extension = "EGL_EXT_swap_buffers_with_damage",
@@ -5720,7 +5720,7 @@ _fail:
 static const char *const pygl_EGL_eglSwapBuffersWithDamageKHR_args[] = {"dpy", "surface", "rects", "n_rects"};
 static const PyGLCommand pygl_EGL_eglSwapBuffersWithDamageKHR_info = {
     .name = "eglSwapBuffersWithDamageKHR",
-    .doc = "eglSwapBuffersWithDamageKHR(dpy, surface, rects, n_rects) -> EGLBoolean",
+    .doc = "eglSwapBuffersWithDamageKHR(dpy: EGLDisplay, surface: EGLSurface, rects: GLint[], n_rects: EGLint) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, rects, n_rects, /)",
     .arg_names = pygl_EGL_eglSwapBuffersWithDamageKHR_args,
     .extension = "EGL_KHR_swap_buffers_with_damage",
@@ -5762,7 +5762,7 @@ _fail:
 static const char *const pygl_EGL_eglSwapInterval_args[] = {"dpy", "interval"};
 static const PyGLCommand pygl_EGL_eglSwapInterval_info = {
     .name = "eglSwapInterval",
-    .doc = "eglSwapInterval(dpy, interval) -> EGLBoolean",
+    .doc = "eglSwapInterval(dpy: EGLDisplay, interval: EGLint) -> EGLBoolean",
     .text_signature = "($module, dpy, interval, /)",
     .arg_names = pygl_EGL_eglSwapInterval_args,
     .extension = "EGL_VERSION_EGL_1_1",
@@ -5798,7 +5798,7 @@ _fail:
 static const char *const pygl_EGL_eglTerminate_args[] = {"dpy"};
 static const PyGLCommand pygl_EGL_eglTerminate_info = {
     .name = "eglTerminate",
-    .doc = "eglTerminate(dpy) -> EGLBoolean",
+    .doc = "eglTerminate(dpy: EGLDisplay) -> EGLBoolean",
     .text_signature = "($module, dpy, /)",
     .arg_names = pygl_EGL_eglTerminate_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -5833,7 +5833,7 @@ _fail:
 static const char *const pygl_EGL_eglUnbindWaylandDisplayWL_args[] = {"dpy", "display"};
 static const PyGLCommand pygl_EGL_eglUnbindWaylandDisplayWL_info = {
     .name = "eglUnbindWaylandDisplayWL",
-    .doc = "eglUnbindWaylandDisplayWL(dpy, display) -> EGLBoolean",
+    .doc = "eglUnbindWaylandDisplayWL(dpy: EGLDisplay, display: void[]) -> EGLBoolean",
     .text_signature = "($module, dpy, display, /)",
     .arg_names = pygl_EGL_eglUnbindWaylandDisplayWL_args,
     .extension = "EGL_WL_bind_wayland_display",
@@ -5873,7 +5873,7 @@ _fail:
 static const char *const pygl_EGL_eglUnlockSurfaceKHR_args[] = {"dpy", "surface"};
 static const PyGLCommand pygl_EGL_eglUnlockSurfaceKHR_info = {
     .name = "eglUnlockSurfaceKHR",
-    .doc = "eglUnlockSurfaceKHR(dpy, surface) -> EGLBoolean",
+    .doc = "eglUnlockSurfaceKHR(dpy: EGLDisplay, surface: EGLSurface) -> EGLBoolean",
     .text_signature = "($module, dpy, surface, /)",
     .arg_names = pygl_EGL_eglUnlockSurfaceKHR_args,
     .extension = "EGL_KHR_lock_surface",
@@ -5909,7 +5909,7 @@ _fail:
 static const char *const pygl_EGL_eglUnsignalSyncEXT_args[] = {"dpy", "sync", "attrib_list"};
 static const PyGLCommand pygl_EGL_eglUnsignalSyncEXT_info = {
     .name = "eglUnsignalSyncEXT",
-    .doc = "eglUnsignalSyncEXT(dpy, sync, attrib_list) -> EGLBoolean",
+    .doc = "eglUnsignalSyncEXT(dpy: EGLDisplay, sync: EGLSync, attrib_list: GLintptr[]) -> EGLBoolean",
     .text_signature = "($module, dpy, sync, attrib_list, /)",
     .arg_names = pygl_EGL_eglUnsignalSyncEXT_args,
     .extension = "EGL_EXT_sync_reuse",
@@ -6016,7 +6016,7 @@ _fail:
 static const char *const pygl_EGL_eglWaitNative_args[] = {"engine"};
 static const PyGLCommand pygl_EGL_eglWaitNative_info = {
     .name = "eglWaitNative",
-    .doc = "eglWaitNative(engine) -> EGLBoolean",
+    .doc = "eglWaitNative(engine: EGLint) -> EGLBoolean",
     .text_signature = "($module, engine, /)",
     .arg_names = pygl_EGL_eglWaitNative_args,
     .extension = "EGL_VERSION_EGL_1_0",
@@ -6051,7 +6051,7 @@ _fail:
 static const char *const pygl_EGL_eglWaitSync_args[] = {"dpy", "sync", "flags"};
 static const PyGLCommand pygl_EGL_eglWaitSync_info = {
     .name = "eglWaitSync",
-    .doc = "eglWaitSync(dpy, sync, flags) -> EGLBoolean",
+    .doc = "eglWaitSync(dpy: EGLDisplay, sync: EGLSync, flags: EGLint) -> EGLBoolean",
     .text_signature = "($module, dpy, sync, flags, /)",
     .arg_names = pygl_EGL_eglWaitSync_args,
     .extension = "EGL_VERSION_EGL_1_5",
@@ -6088,7 +6088,7 @@ _fail:
 static const char *const pygl_EGL_eglWaitSyncKHR_args[] = {"dpy", "sync", "flags"};
 static const PyGLCommand pygl_EGL_eglWaitSyncKHR_info = {
     .name = "eglWaitSyncKHR",
-    .doc = "eglWaitSyncKHR(dpy, sync, flags) -> EGLint",
+    .doc = "eglWaitSyncKHR(dpy: EGLDisplay, sync: EGLSyncKHR, flags: EGLint) -> EGLint",
     .text_signature = "($module, dpy, sync, flags, /)",
     .arg_names = pygl_EGL_eglWaitSyncKHR_args,
     .extension = "EGL_KHR_wait_sync",

@@ -347,160 +347,160 @@ GLX_Y_INVERTED_EXT: int
 __GLX_NUMBER_EVENTS: int
 
 def glXAssociateDMPbufferSGIX(dpy: AnyArray, pbuffer: Any, params: AnyArray, dmbuffer: Any) -> int:
-    """glXAssociateDMPbufferSGIX(dpy, pbuffer, params, dmbuffer) -> Bool"""
+    """glXAssociateDMPbufferSGIX(dpy: Display[], pbuffer: GLXPbufferSGIX, params: DMparams[], dmbuffer: DMbuffer) -> Bool"""
 
 def glXBindChannelToWindowSGIX(display: AnyArray, screen: int, channel: int, window: Any) -> int:
-    """glXBindChannelToWindowSGIX(display, screen, channel, window) -> c_int"""
+    """glXBindChannelToWindowSGIX(display: Display[], screen: c_int, channel: c_int, window: Window) -> c_int"""
 
 def glXBindHyperpipeSGIX(dpy: AnyArray, hpId: int) -> int:
-    """glXBindHyperpipeSGIX(dpy, hpId) -> c_int"""
+    """glXBindHyperpipeSGIX(dpy: Display[], hpId: c_int) -> c_int"""
 
 def glXBindSwapBarrierNV(dpy: AnyArray, group: int, barrier: int) -> int:
-    """glXBindSwapBarrierNV(dpy, group, barrier) -> Bool"""
+    """glXBindSwapBarrierNV(dpy: Display[], group: GLuint, barrier: GLuint) -> Bool"""
 
 def glXBindSwapBarrierSGIX(dpy: AnyArray, drawable: Any, barrier: int) -> None:
-    """glXBindSwapBarrierSGIX(dpy, drawable, barrier) -> None"""
+    """glXBindSwapBarrierSGIX(dpy: Display[], drawable: GLXDrawable, barrier: c_int) -> None"""
 
 def glXBindTexImageEXT(dpy: AnyArray, drawable: Any, buffer: int, attrib_list: IntArray) -> None:
-    """glXBindTexImageEXT(dpy, drawable, buffer, attrib_list) -> None"""
+    """glXBindTexImageEXT(dpy: Display[], drawable: GLXDrawable, buffer: c_int, attrib_list: c_int[]) -> None"""
 
 def glXBindVideoCaptureDeviceNV(dpy: AnyArray, video_capture_slot: int, device: Any) -> int:
-    """glXBindVideoCaptureDeviceNV(dpy, video_capture_slot, device) -> c_int"""
+    """glXBindVideoCaptureDeviceNV(dpy: Display[], video_capture_slot: c_uint, device: GLXVideoCaptureDeviceNV) -> c_int"""
 
 def glXBindVideoDeviceNV(dpy: AnyArray, video_slot: int, video_device: int, attrib_list: IntArray) -> int:
-    """glXBindVideoDeviceNV(dpy, video_slot, video_device, attrib_list) -> c_int"""
+    """glXBindVideoDeviceNV(dpy: Display[], video_slot: c_uint, video_device: c_uint, attrib_list: c_int[]) -> c_int"""
 
 def glXBindVideoImageNV(dpy: AnyArray, VideoDevice: Any, pbuf: Any, iVideoBuffer: int) -> int:
-    """glXBindVideoImageNV(dpy, VideoDevice, pbuf, iVideoBuffer) -> c_int"""
+    """glXBindVideoImageNV(dpy: Display[], VideoDevice: GLXVideoDeviceNV, pbuf: GLXPbuffer, iVideoBuffer: c_int) -> c_int"""
 
 def glXBlitContextFramebufferAMD(dstCtx: Any, srcX0: int, srcY0: int, srcX1: int, srcY1: int, dstX0: int, dstY0: int, dstX1: int, dstY1: int, mask: int, filter: int) -> None:
-    """glXBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> None"""
+    """glXBlitContextFramebufferAMD(dstCtx: GLXContext, srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: GLbitfield, filter: GLenum) -> None"""
 
 def glXChannelRectSGIX(display: AnyArray, screen: int, channel: int, x: int, y: int, w: int, h: int) -> int:
-    """glXChannelRectSGIX(display, screen, channel, x, y, w, h) -> c_int"""
+    """glXChannelRectSGIX(display: Display[], screen: c_int, channel: c_int, x: c_int, y: c_int, w: c_int, h: c_int) -> c_int"""
 
 def glXChannelRectSyncSGIX(display: AnyArray, screen: int, channel: int, synctype: int) -> int:
-    """glXChannelRectSyncSGIX(display, screen, channel, synctype) -> c_int"""
+    """glXChannelRectSyncSGIX(display: Display[], screen: c_int, channel: c_int, synctype: GLenum) -> c_int"""
 
 def glXChooseFBConfig(dpy: AnyArray, screen: int, attrib_list: IntArray, nelements: IntArray) -> bytes:
-    """glXChooseFBConfig(dpy, screen, attrib_list, nelements) -> GLXFBConfig"""
+    """glXChooseFBConfig(dpy: Display[], screen: c_int, attrib_list: c_int[], nelements: c_int[]) -> GLXFBConfig"""
 
 def glXChooseFBConfigSGIX(dpy: AnyArray, screen: int, attrib_list: IntArray, nelements: IntArray) -> bytes:
-    """glXChooseFBConfigSGIX(dpy, screen, attrib_list, nelements) -> GLXFBConfigSGIX"""
+    """glXChooseFBConfigSGIX(dpy: Display[], screen: c_int, attrib_list: c_int[], nelements: c_int[]) -> GLXFBConfigSGIX"""
 
 def glXChooseVisual(dpy: AnyArray, screen: int, attribList: IntArray) -> bytes:
-    """glXChooseVisual(dpy, screen, attribList) -> XVisualInfo"""
+    """glXChooseVisual(dpy: Display[], screen: c_int, attribList: c_int[]) -> XVisualInfo"""
 
 def glXCopyBufferSubDataNV(dpy: AnyArray, readCtx: Any, writeCtx: Any, readTarget: int, writeTarget: int, readOffset: int, writeOffset: int, size: int) -> None:
-    """glXCopyBufferSubDataNV(dpy, readCtx, writeCtx, readTarget, writeTarget, readOffset, writeOffset, size) -> None"""
+    """glXCopyBufferSubDataNV(dpy: Display[], readCtx: GLXContext, writeCtx: GLXContext, readTarget: GLenum, writeTarget: GLenum, readOffset: GLintptr, writeOffset: GLintptr, size: GLsizeiptr) -> None"""
 
 def glXCopyContext(dpy: AnyArray, src: Any, dst: Any, mask: int) -> None:
-    """glXCopyContext(dpy, src, dst, mask) -> None"""
+    """glXCopyContext(dpy: Display[], src: GLXContext, dst: GLXContext, mask: c_ulong) -> None"""
 
 def glXCopyImageSubDataNV(dpy: AnyArray, srcCtx: Any, srcName: int, srcTarget: int, srcLevel: int, srcX: int, srcY: int, srcZ: int, dstCtx: Any, dstName: int, dstTarget: int, dstLevel: int, dstX: int, dstY: int, dstZ: int, width: int, height: int, depth: int) -> None:
-    """glXCopyImageSubDataNV(dpy, srcCtx, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstCtx, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth) -> None"""
+    """glXCopyImageSubDataNV(dpy: Display[], srcCtx: GLXContext, srcName: GLuint, srcTarget: GLenum, srcLevel: GLint, srcX: GLint, srcY: GLint, srcZ: GLint, dstCtx: GLXContext, dstName: GLuint, dstTarget: GLenum, dstLevel: GLint, dstX: GLint, dstY: GLint, dstZ: GLint, width: GLsizei, height: GLsizei, depth: GLsizei) -> None"""
 
 def glXCopySubBufferMESA(dpy: AnyArray, drawable: Any, x: int, y: int, width: int, height: int) -> None:
-    """glXCopySubBufferMESA(dpy, drawable, x, y, width, height) -> None"""
+    """glXCopySubBufferMESA(dpy: Display[], drawable: GLXDrawable, x: c_int, y: c_int, width: c_int, height: c_int) -> None"""
 
 def glXCreateAssociatedContextAMD(id: int, share_list: Any) -> Any:
-    """glXCreateAssociatedContextAMD(id, share_list) -> GLXContext"""
+    """glXCreateAssociatedContextAMD(id: c_uint, share_list: GLXContext) -> GLXContext"""
 
 def glXCreateAssociatedContextAttribsAMD(id: int, share_context: Any, attribList: IntArray) -> Any:
-    """glXCreateAssociatedContextAttribsAMD(id, share_context, attribList) -> GLXContext"""
+    """glXCreateAssociatedContextAttribsAMD(id: c_uint, share_context: GLXContext, attribList: c_int[]) -> GLXContext"""
 
 def glXCreateContext(dpy: AnyArray, vis: AnyArray, shareList: Any, direct: int) -> Any:
-    """glXCreateContext(dpy, vis, shareList, direct) -> GLXContext"""
+    """glXCreateContext(dpy: Display[], vis: XVisualInfo[], shareList: GLXContext, direct: Bool) -> GLXContext"""
 
 def glXCreateContextAttribsARB(dpy: AnyArray, config: Any, share_context: Any, direct: int, attrib_list: IntArray) -> Any:
-    """glXCreateContextAttribsARB(dpy, config, share_context, direct, attrib_list) -> GLXContext"""
+    """glXCreateContextAttribsARB(dpy: Display[], config: GLXFBConfig, share_context: GLXContext, direct: Bool, attrib_list: c_int[]) -> GLXContext"""
 
 def glXCreateContextWithConfigSGIX(dpy: AnyArray, config: Any, render_type: int, share_list: Any, direct: int) -> Any:
-    """glXCreateContextWithConfigSGIX(dpy, config, render_type, share_list, direct) -> GLXContext"""
+    """glXCreateContextWithConfigSGIX(dpy: Display[], config: GLXFBConfigSGIX, render_type: c_int, share_list: GLXContext, direct: Bool) -> GLXContext"""
 
 def glXCreateGLXPbufferSGIX(dpy: AnyArray, config: Any, width: int, height: int, attrib_list: IntArray) -> Any:
-    """glXCreateGLXPbufferSGIX(dpy, config, width, height, attrib_list) -> GLXPbufferSGIX"""
+    """glXCreateGLXPbufferSGIX(dpy: Display[], config: GLXFBConfigSGIX, width: c_uint, height: c_uint, attrib_list: c_int[]) -> GLXPbufferSGIX"""
 
 def glXCreateGLXPixmap(dpy: AnyArray, visual: AnyArray, pixmap: Any) -> Any:
-    """glXCreateGLXPixmap(dpy, visual, pixmap) -> GLXPixmap"""
+    """glXCreateGLXPixmap(dpy: Display[], visual: XVisualInfo[], pixmap: Pixmap) -> GLXPixmap"""
 
 def glXCreateGLXPixmapMESA(dpy: AnyArray, visual: AnyArray, pixmap: Any, cmap: Any) -> Any:
-    """glXCreateGLXPixmapMESA(dpy, visual, pixmap, cmap) -> GLXPixmap"""
+    """glXCreateGLXPixmapMESA(dpy: Display[], visual: XVisualInfo[], pixmap: Pixmap, cmap: Colormap) -> GLXPixmap"""
 
 def glXCreateGLXPixmapWithConfigSGIX(dpy: AnyArray, config: Any, pixmap: Any) -> Any:
-    """glXCreateGLXPixmapWithConfigSGIX(dpy, config, pixmap) -> GLXPixmap"""
+    """glXCreateGLXPixmapWithConfigSGIX(dpy: Display[], config: GLXFBConfigSGIX, pixmap: Pixmap) -> GLXPixmap"""
 
 def glXCreateGLXVideoSourceSGIX(display: AnyArray, screen: int, server: Any, path: Any, nodeClass: int, drainNode: Any) -> Any:
-    """glXCreateGLXVideoSourceSGIX(display, screen, server, path, nodeClass, drainNode) -> GLXVideoSourceSGIX"""
+    """glXCreateGLXVideoSourceSGIX(display: Display[], screen: c_int, server: VLServer, path: VLPath, nodeClass: c_int, drainNode: VLNode) -> GLXVideoSourceSGIX"""
 
 def glXCreateNewContext(dpy: AnyArray, config: Any, render_type: int, share_list: Any, direct: int) -> Any:
-    """glXCreateNewContext(dpy, config, render_type, share_list, direct) -> GLXContext"""
+    """glXCreateNewContext(dpy: Display[], config: GLXFBConfig, render_type: c_int, share_list: GLXContext, direct: Bool) -> GLXContext"""
 
 def glXCreatePbuffer(dpy: AnyArray, config: Any, attrib_list: IntArray) -> Any:
-    """glXCreatePbuffer(dpy, config, attrib_list) -> GLXPbuffer"""
+    """glXCreatePbuffer(dpy: Display[], config: GLXFBConfig, attrib_list: c_int[]) -> GLXPbuffer"""
 
 def glXCreatePixmap(dpy: AnyArray, config: Any, pixmap: Any, attrib_list: IntArray) -> Any:
-    """glXCreatePixmap(dpy, config, pixmap, attrib_list) -> GLXPixmap"""
+    """glXCreatePixmap(dpy: Display[], config: GLXFBConfig, pixmap: Pixmap, attrib_list: c_int[]) -> GLXPixmap"""
 
 def glXCreateWindow(dpy: AnyArray, config: Any, win: Any, attrib_list: IntArray) -> Any:
-    """glXCreateWindow(dpy, config, win, attrib_list) -> GLXWindow"""
+    """glXCreateWindow(dpy: Display[], config: GLXFBConfig, win: Window, attrib_list: c_int[]) -> GLXWindow"""
 
 def glXCushionSGI(dpy: AnyArray, window: Any, cushion: float) -> None:
-    """glXCushionSGI(dpy, window, cushion) -> None"""
+    """glXCushionSGI(dpy: Display[], window: Window, cushion: float) -> None"""
 
 def glXDelayBeforeSwapNV(dpy: AnyArray, drawable: Any, seconds: float) -> int:
-    """glXDelayBeforeSwapNV(dpy, drawable, seconds) -> Bool"""
+    """glXDelayBeforeSwapNV(dpy: Display[], drawable: GLXDrawable, seconds: GLfloat) -> Bool"""
 
 def glXDeleteAssociatedContextAMD(ctx: Any) -> int:
-    """glXDeleteAssociatedContextAMD(ctx) -> Bool"""
+    """glXDeleteAssociatedContextAMD(ctx: GLXContext) -> Bool"""
 
 def glXDestroyContext(dpy: AnyArray, ctx: Any) -> None:
-    """glXDestroyContext(dpy, ctx) -> None"""
+    """glXDestroyContext(dpy: Display[], ctx: GLXContext) -> None"""
 
 def glXDestroyGLXPbufferSGIX(dpy: AnyArray, pbuf: Any) -> None:
-    """glXDestroyGLXPbufferSGIX(dpy, pbuf) -> None"""
+    """glXDestroyGLXPbufferSGIX(dpy: Display[], pbuf: GLXPbufferSGIX) -> None"""
 
 def glXDestroyGLXPixmap(dpy: AnyArray, pixmap: Any) -> None:
-    """glXDestroyGLXPixmap(dpy, pixmap) -> None"""
+    """glXDestroyGLXPixmap(dpy: Display[], pixmap: GLXPixmap) -> None"""
 
 def glXDestroyGLXVideoSourceSGIX(dpy: AnyArray, glxvideosource: Any) -> None:
-    """glXDestroyGLXVideoSourceSGIX(dpy, glxvideosource) -> None"""
+    """glXDestroyGLXVideoSourceSGIX(dpy: Display[], glxvideosource: GLXVideoSourceSGIX) -> None"""
 
 def glXDestroyHyperpipeConfigSGIX(dpy: AnyArray, hpId: int) -> int:
-    """glXDestroyHyperpipeConfigSGIX(dpy, hpId) -> c_int"""
+    """glXDestroyHyperpipeConfigSGIX(dpy: Display[], hpId: c_int) -> c_int"""
 
 def glXDestroyPbuffer(dpy: AnyArray, pbuf: Any) -> None:
-    """glXDestroyPbuffer(dpy, pbuf) -> None"""
+    """glXDestroyPbuffer(dpy: Display[], pbuf: GLXPbuffer) -> None"""
 
 def glXDestroyPixmap(dpy: AnyArray, pixmap: Any) -> None:
-    """glXDestroyPixmap(dpy, pixmap) -> None"""
+    """glXDestroyPixmap(dpy: Display[], pixmap: GLXPixmap) -> None"""
 
 def glXDestroyWindow(dpy: AnyArray, win: Any) -> None:
-    """glXDestroyWindow(dpy, win) -> None"""
+    """glXDestroyWindow(dpy: Display[], win: GLXWindow) -> None"""
 
 def glXEnumerateVideoCaptureDevicesNV(dpy: AnyArray, screen: int, nelements: IntArray) -> bytes:
-    """glXEnumerateVideoCaptureDevicesNV(dpy, screen, nelements) -> GLXVideoCaptureDeviceNV"""
+    """glXEnumerateVideoCaptureDevicesNV(dpy: Display[], screen: c_int, nelements: c_int[]) -> GLXVideoCaptureDeviceNV"""
 
 def glXEnumerateVideoDevicesNV(dpy: AnyArray, screen: int, nelements: IntArray) -> bytes:
-    """glXEnumerateVideoDevicesNV(dpy, screen, nelements) -> c_uint"""
+    """glXEnumerateVideoDevicesNV(dpy: Display[], screen: c_int, nelements: c_int[]) -> c_uint"""
 
 def glXFreeContextEXT(dpy: AnyArray, context: Any) -> None:
-    """glXFreeContextEXT(dpy, context) -> None"""
+    """glXFreeContextEXT(dpy: Display[], context: GLXContext) -> None"""
 
 def glXGetAGPOffsetMESA(pointer: AnyArray) -> int:
-    """glXGetAGPOffsetMESA(pointer) -> c_uint"""
+    """glXGetAGPOffsetMESA(pointer: void[]) -> c_uint"""
 
 def glXGetClientString(dpy: AnyArray, name: int) -> bytes:
-    """glXGetClientString(dpy, name) -> GLchar"""
+    """glXGetClientString(dpy: Display[], name: c_int) -> GLchar"""
 
 def glXGetConfig(dpy: AnyArray, visual: AnyArray, attrib: int, value: IntArray) -> int:
-    """glXGetConfig(dpy, visual, attrib, value) -> c_int"""
+    """glXGetConfig(dpy: Display[], visual: XVisualInfo[], attrib: c_int, value: c_int[]) -> c_int"""
 
 def glXGetContextGPUIDAMD(ctx: Any) -> int:
-    """glXGetContextGPUIDAMD(ctx) -> c_uint"""
+    """glXGetContextGPUIDAMD(ctx: GLXContext) -> c_uint"""
 
 def glXGetContextIDEXT(context: Any) -> Any:
-    """glXGetContextIDEXT(context) -> GLXContextID"""
+    """glXGetContextIDEXT(context: GLXContext) -> GLXContextID"""
 
 def glXGetCurrentAssociatedContextAMD() -> Any:
     """glXGetCurrentAssociatedContextAMD() -> GLXContext"""
@@ -524,226 +524,226 @@ def glXGetCurrentReadDrawableSGI() -> Any:
     """glXGetCurrentReadDrawableSGI() -> GLXDrawable"""
 
 def glXGetFBConfigAttrib(dpy: AnyArray, config: Any, attribute: int, value: IntArray) -> int:
-    """glXGetFBConfigAttrib(dpy, config, attribute, value) -> c_int"""
+    """glXGetFBConfigAttrib(dpy: Display[], config: GLXFBConfig, attribute: c_int, value: c_int[]) -> c_int"""
 
 def glXGetFBConfigAttribSGIX(dpy: AnyArray, config: Any, attribute: int, value: IntArray) -> int:
-    """glXGetFBConfigAttribSGIX(dpy, config, attribute, value) -> c_int"""
+    """glXGetFBConfigAttribSGIX(dpy: Display[], config: GLXFBConfigSGIX, attribute: c_int, value: c_int[]) -> c_int"""
 
 def glXGetFBConfigFromVisualSGIX(dpy: AnyArray, vis: AnyArray) -> Any:
-    """glXGetFBConfigFromVisualSGIX(dpy, vis) -> GLXFBConfigSGIX"""
+    """glXGetFBConfigFromVisualSGIX(dpy: Display[], vis: XVisualInfo[]) -> GLXFBConfigSGIX"""
 
 def glXGetFBConfigs(dpy: AnyArray, screen: int, nelements: IntArray) -> bytes:
-    """glXGetFBConfigs(dpy, screen, nelements) -> GLXFBConfig"""
+    """glXGetFBConfigs(dpy: Display[], screen: c_int, nelements: c_int[]) -> GLXFBConfig"""
 
 def glXGetGPUIDsAMD(maxCount: int, ids: UIntArray) -> int:
-    """glXGetGPUIDsAMD(maxCount, ids) -> c_uint"""
+    """glXGetGPUIDsAMD(maxCount: c_uint, ids: c_uint[]) -> c_uint"""
 
 def glXGetGPUInfoAMD(id: int, property: int, dataType: int, size: int, data: AnyArray) -> int:
-    """glXGetGPUInfoAMD(id, property, dataType, size, data) -> c_int"""
+    """glXGetGPUInfoAMD(id: c_uint, property: c_int, dataType: GLenum, size: c_uint, data: void[]) -> c_int"""
 
 def glXGetMscRateOML(dpy: AnyArray, drawable: Any, numerator: AnyArray, denominator: AnyArray) -> int:
-    """glXGetMscRateOML(dpy, drawable, numerator, denominator) -> Bool"""
+    """glXGetMscRateOML(dpy: Display[], drawable: GLXDrawable, numerator: int32_t[], denominator: int32_t[]) -> Bool"""
 
 def glXGetProcAddress(procName: UByteArray) -> Any:
-    """glXGetProcAddress(procName) -> __GLXextFuncPtr"""
+    """glXGetProcAddress(procName: GLubyte[]) -> __GLXextFuncPtr"""
 
 def glXGetProcAddressARB(procName: UByteArray) -> Any:
-    """glXGetProcAddressARB(procName) -> __GLXextFuncPtr"""
+    """glXGetProcAddressARB(procName: GLubyte[]) -> __GLXextFuncPtr"""
 
 def glXGetSelectedEvent(dpy: AnyArray, draw: Any, event_mask: AnyArray) -> None:
-    """glXGetSelectedEvent(dpy, draw, event_mask) -> None"""
+    """glXGetSelectedEvent(dpy: Display[], draw: GLXDrawable, event_mask: c_ulong[]) -> None"""
 
 def glXGetSelectedEventSGIX(dpy: AnyArray, drawable: Any, mask: AnyArray) -> None:
-    """glXGetSelectedEventSGIX(dpy, drawable, mask) -> None"""
+    """glXGetSelectedEventSGIX(dpy: Display[], drawable: GLXDrawable, mask: c_ulong[]) -> None"""
 
 def glXGetSwapIntervalMESA() -> int:
     """glXGetSwapIntervalMESA() -> c_int"""
 
 def glXGetSyncValuesOML(dpy: AnyArray, drawable: Any, ust: Int64Array, msc: Int64Array, sbc: Int64Array) -> int:
-    """glXGetSyncValuesOML(dpy, drawable, ust, msc, sbc) -> Bool"""
+    """glXGetSyncValuesOML(dpy: Display[], drawable: GLXDrawable, ust: int64_t[], msc: int64_t[], sbc: int64_t[]) -> Bool"""
 
 def glXGetTransparentIndexSUN(dpy: AnyArray, overlay: Any, underlay: Any, pTransparentIndex: AnyArray) -> int:
-    """glXGetTransparentIndexSUN(dpy, overlay, underlay, pTransparentIndex) -> Status"""
+    """glXGetTransparentIndexSUN(dpy: Display[], overlay: Window, underlay: Window, pTransparentIndex: c_ulong[]) -> Status"""
 
 def glXGetVideoDeviceNV(dpy: AnyArray, screen: int, numVideoDevices: int, pVideoDevice: AnyArray) -> int:
-    """glXGetVideoDeviceNV(dpy, screen, numVideoDevices, pVideoDevice) -> c_int"""
+    """glXGetVideoDeviceNV(dpy: Display[], screen: c_int, numVideoDevices: c_int, pVideoDevice: GLXVideoDeviceNV[]) -> c_int"""
 
 def glXGetVideoInfoNV(dpy: AnyArray, screen: int, VideoDevice: Any, pulCounterOutputPbuffer: AnyArray, pulCounterOutputVideo: AnyArray) -> int:
-    """glXGetVideoInfoNV(dpy, screen, VideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo) -> c_int"""
+    """glXGetVideoInfoNV(dpy: Display[], screen: c_int, VideoDevice: GLXVideoDeviceNV, pulCounterOutputPbuffer: c_ulong[], pulCounterOutputVideo: c_ulong[]) -> c_int"""
 
 def glXGetVideoSyncSGI(count: UIntArray) -> int:
-    """glXGetVideoSyncSGI(count) -> c_int"""
+    """glXGetVideoSyncSGI(count: c_uint[]) -> c_int"""
 
 def glXGetVisualFromFBConfig(dpy: AnyArray, config: Any) -> bytes:
-    """glXGetVisualFromFBConfig(dpy, config) -> XVisualInfo"""
+    """glXGetVisualFromFBConfig(dpy: Display[], config: GLXFBConfig) -> XVisualInfo"""
 
 def glXGetVisualFromFBConfigSGIX(dpy: AnyArray, config: Any) -> bytes:
-    """glXGetVisualFromFBConfigSGIX(dpy, config) -> XVisualInfo"""
+    """glXGetVisualFromFBConfigSGIX(dpy: Display[], config: GLXFBConfigSGIX) -> XVisualInfo"""
 
 def glXHyperpipeAttribSGIX(dpy: AnyArray, timeSlice: int, attrib: int, size: int, attribList: AnyArray) -> int:
-    """glXHyperpipeAttribSGIX(dpy, timeSlice, attrib, size, attribList) -> c_int"""
+    """glXHyperpipeAttribSGIX(dpy: Display[], timeSlice: c_int, attrib: c_int, size: c_int, attribList: void[]) -> c_int"""
 
 def glXHyperpipeConfigSGIX(dpy: AnyArray, networkId: int, npipes: int, cfg: AnyArray, hpId: IntArray) -> int:
-    """glXHyperpipeConfigSGIX(dpy, networkId, npipes, cfg, hpId) -> c_int"""
+    """glXHyperpipeConfigSGIX(dpy: Display[], networkId: c_int, npipes: c_int, cfg: GLXHyperpipeConfigSGIX[], hpId: c_int[]) -> c_int"""
 
 def glXImportContextEXT(dpy: AnyArray, contextID: Any) -> Any:
-    """glXImportContextEXT(dpy, contextID) -> GLXContext"""
+    """glXImportContextEXT(dpy: Display[], contextID: GLXContextID) -> GLXContext"""
 
 def glXIsDirect(dpy: AnyArray, ctx: Any) -> int:
-    """glXIsDirect(dpy, ctx) -> Bool"""
+    """glXIsDirect(dpy: Display[], ctx: GLXContext) -> Bool"""
 
 def glXJoinSwapGroupNV(dpy: AnyArray, drawable: Any, group: int) -> int:
-    """glXJoinSwapGroupNV(dpy, drawable, group) -> Bool"""
+    """glXJoinSwapGroupNV(dpy: Display[], drawable: GLXDrawable, group: GLuint) -> Bool"""
 
 def glXJoinSwapGroupSGIX(dpy: AnyArray, drawable: Any, member: Any) -> None:
-    """glXJoinSwapGroupSGIX(dpy, drawable, member) -> None"""
+    """glXJoinSwapGroupSGIX(dpy: Display[], drawable: GLXDrawable, member: GLXDrawable) -> None"""
 
 def glXLockVideoCaptureDeviceNV(dpy: AnyArray, device: Any) -> None:
-    """glXLockVideoCaptureDeviceNV(dpy, device) -> None"""
+    """glXLockVideoCaptureDeviceNV(dpy: Display[], device: GLXVideoCaptureDeviceNV) -> None"""
 
 def glXMakeAssociatedContextCurrentAMD(ctx: Any) -> int:
-    """glXMakeAssociatedContextCurrentAMD(ctx) -> Bool"""
+    """glXMakeAssociatedContextCurrentAMD(ctx: GLXContext) -> Bool"""
 
 def glXMakeContextCurrent(dpy: AnyArray, draw: Any, read: Any, ctx: Any) -> int:
-    """glXMakeContextCurrent(dpy, draw, read, ctx) -> Bool"""
+    """glXMakeContextCurrent(dpy: Display[], draw: GLXDrawable, read: GLXDrawable, ctx: GLXContext) -> Bool"""
 
 def glXMakeCurrent(dpy: AnyArray, drawable: Any, ctx: Any) -> int:
-    """glXMakeCurrent(dpy, drawable, ctx) -> Bool"""
+    """glXMakeCurrent(dpy: Display[], drawable: GLXDrawable, ctx: GLXContext) -> Bool"""
 
 def glXMakeCurrentReadSGI(dpy: AnyArray, draw: Any, read: Any, ctx: Any) -> int:
-    """glXMakeCurrentReadSGI(dpy, draw, read, ctx) -> Bool"""
+    """glXMakeCurrentReadSGI(dpy: Display[], draw: GLXDrawable, read: GLXDrawable, ctx: GLXContext) -> Bool"""
 
 def glXNamedCopyBufferSubDataNV(dpy: AnyArray, readCtx: Any, writeCtx: Any, readBuffer: int, writeBuffer: int, readOffset: int, writeOffset: int, size: int) -> None:
-    """glXNamedCopyBufferSubDataNV(dpy, readCtx, writeCtx, readBuffer, writeBuffer, readOffset, writeOffset, size) -> None"""
+    """glXNamedCopyBufferSubDataNV(dpy: Display[], readCtx: GLXContext, writeCtx: GLXContext, readBuffer: GLuint, writeBuffer: GLuint, readOffset: GLintptr, writeOffset: GLintptr, size: GLsizeiptr) -> None"""
 
 def glXQueryChannelDeltasSGIX(display: AnyArray, screen: int, channel: int, x: IntArray, y: IntArray, w: IntArray, h: IntArray) -> int:
-    """glXQueryChannelDeltasSGIX(display, screen, channel, x, y, w, h) -> c_int"""
+    """glXQueryChannelDeltasSGIX(display: Display[], screen: c_int, channel: c_int, x: c_int[], y: c_int[], w: c_int[], h: c_int[]) -> c_int"""
 
 def glXQueryChannelRectSGIX(display: AnyArray, screen: int, channel: int, dx: IntArray, dy: IntArray, dw: IntArray, dh: IntArray) -> int:
-    """glXQueryChannelRectSGIX(display, screen, channel, dx, dy, dw, dh) -> c_int"""
+    """glXQueryChannelRectSGIX(display: Display[], screen: c_int, channel: c_int, dx: c_int[], dy: c_int[], dw: c_int[], dh: c_int[]) -> c_int"""
 
 def glXQueryContext(dpy: AnyArray, ctx: Any, attribute: int, value: IntArray) -> int:
-    """glXQueryContext(dpy, ctx, attribute, value) -> c_int"""
+    """glXQueryContext(dpy: Display[], ctx: GLXContext, attribute: c_int, value: c_int[]) -> c_int"""
 
 def glXQueryContextInfoEXT(dpy: AnyArray, context: Any, attribute: int, value: IntArray) -> int:
-    """glXQueryContextInfoEXT(dpy, context, attribute, value) -> c_int"""
+    """glXQueryContextInfoEXT(dpy: Display[], context: GLXContext, attribute: c_int, value: c_int[]) -> c_int"""
 
 def glXQueryCurrentRendererIntegerMESA(attribute: int, value: UIntArray) -> int:
-    """glXQueryCurrentRendererIntegerMESA(attribute, value) -> Bool"""
+    """glXQueryCurrentRendererIntegerMESA(attribute: c_int, value: c_uint[]) -> Bool"""
 
 def glXQueryCurrentRendererStringMESA(attribute: int) -> bytes:
-    """glXQueryCurrentRendererStringMESA(attribute) -> GLchar"""
+    """glXQueryCurrentRendererStringMESA(attribute: c_int) -> GLchar"""
 
 def glXQueryDrawable(dpy: AnyArray, draw: Any, attribute: int, value: UIntArray) -> None:
-    """glXQueryDrawable(dpy, draw, attribute, value) -> None"""
+    """glXQueryDrawable(dpy: Display[], draw: GLXDrawable, attribute: c_int, value: c_uint[]) -> None"""
 
 def glXQueryExtension(dpy: AnyArray, errorb: IntArray, event: IntArray) -> int:
-    """glXQueryExtension(dpy, errorb, event) -> Bool"""
+    """glXQueryExtension(dpy: Display[], errorb: c_int[], event: c_int[]) -> Bool"""
 
 def glXQueryExtensionsString(dpy: AnyArray, screen: int) -> bytes:
-    """glXQueryExtensionsString(dpy, screen) -> GLchar"""
+    """glXQueryExtensionsString(dpy: Display[], screen: c_int) -> GLchar"""
 
 def glXQueryFrameCountNV(dpy: AnyArray, screen: int, count: UIntArray) -> int:
-    """glXQueryFrameCountNV(dpy, screen, count) -> Bool"""
+    """glXQueryFrameCountNV(dpy: Display[], screen: c_int, count: GLuint[]) -> Bool"""
 
 def glXQueryGLXPbufferSGIX(dpy: AnyArray, pbuf: Any, attribute: int, value: UIntArray) -> None:
-    """glXQueryGLXPbufferSGIX(dpy, pbuf, attribute, value) -> None"""
+    """glXQueryGLXPbufferSGIX(dpy: Display[], pbuf: GLXPbufferSGIX, attribute: c_int, value: c_uint[]) -> None"""
 
 def glXQueryHyperpipeAttribSGIX(dpy: AnyArray, timeSlice: int, attrib: int, size: int, returnAttribList: AnyArray) -> int:
-    """glXQueryHyperpipeAttribSGIX(dpy, timeSlice, attrib, size, returnAttribList) -> c_int"""
+    """glXQueryHyperpipeAttribSGIX(dpy: Display[], timeSlice: c_int, attrib: c_int, size: c_int, returnAttribList: void[]) -> c_int"""
 
 def glXQueryHyperpipeBestAttribSGIX(dpy: AnyArray, timeSlice: int, attrib: int, size: int, attribList: AnyArray, returnAttribList: AnyArray) -> int:
-    """glXQueryHyperpipeBestAttribSGIX(dpy, timeSlice, attrib, size, attribList, returnAttribList) -> c_int"""
+    """glXQueryHyperpipeBestAttribSGIX(dpy: Display[], timeSlice: c_int, attrib: c_int, size: c_int, attribList: void[], returnAttribList: void[]) -> c_int"""
 
 def glXQueryHyperpipeConfigSGIX(dpy: AnyArray, hpId: int, npipes: IntArray) -> bytes:
-    """glXQueryHyperpipeConfigSGIX(dpy, hpId, npipes) -> GLXHyperpipeConfigSGIX"""
+    """glXQueryHyperpipeConfigSGIX(dpy: Display[], hpId: c_int, npipes: c_int[]) -> GLXHyperpipeConfigSGIX"""
 
 def glXQueryHyperpipeNetworkSGIX(dpy: AnyArray, npipes: IntArray) -> bytes:
-    """glXQueryHyperpipeNetworkSGIX(dpy, npipes) -> GLXHyperpipeNetworkSGIX"""
+    """glXQueryHyperpipeNetworkSGIX(dpy: Display[], npipes: c_int[]) -> GLXHyperpipeNetworkSGIX"""
 
 def glXQueryMaxSwapBarriersSGIX(dpy: AnyArray, screen: int, max: IntArray) -> int:
-    """glXQueryMaxSwapBarriersSGIX(dpy, screen, max) -> Bool"""
+    """glXQueryMaxSwapBarriersSGIX(dpy: Display[], screen: c_int, max: c_int[]) -> Bool"""
 
 def glXQueryMaxSwapGroupsNV(dpy: AnyArray, screen: int, maxGroups: UIntArray, maxBarriers: UIntArray) -> int:
-    """glXQueryMaxSwapGroupsNV(dpy, screen, maxGroups, maxBarriers) -> Bool"""
+    """glXQueryMaxSwapGroupsNV(dpy: Display[], screen: c_int, maxGroups: GLuint[], maxBarriers: GLuint[]) -> Bool"""
 
 def glXQueryRendererIntegerMESA(dpy: AnyArray, screen: int, renderer: int, attribute: int, value: UIntArray) -> int:
-    """glXQueryRendererIntegerMESA(dpy, screen, renderer, attribute, value) -> Bool"""
+    """glXQueryRendererIntegerMESA(dpy: Display[], screen: c_int, renderer: c_int, attribute: c_int, value: c_uint[]) -> Bool"""
 
 def glXQueryRendererStringMESA(dpy: AnyArray, screen: int, renderer: int, attribute: int) -> bytes:
-    """glXQueryRendererStringMESA(dpy, screen, renderer, attribute) -> GLchar"""
+    """glXQueryRendererStringMESA(dpy: Display[], screen: c_int, renderer: c_int, attribute: c_int) -> GLchar"""
 
 def glXQueryServerString(dpy: AnyArray, screen: int, name: int) -> bytes:
-    """glXQueryServerString(dpy, screen, name) -> GLchar"""
+    """glXQueryServerString(dpy: Display[], screen: c_int, name: c_int) -> GLchar"""
 
 def glXQuerySwapGroupNV(dpy: AnyArray, drawable: Any, group: UIntArray, barrier: UIntArray) -> int:
-    """glXQuerySwapGroupNV(dpy, drawable, group, barrier) -> Bool"""
+    """glXQuerySwapGroupNV(dpy: Display[], drawable: GLXDrawable, group: GLuint[], barrier: GLuint[]) -> Bool"""
 
 def glXQueryVersion(dpy: AnyArray, maj: IntArray, min: IntArray) -> int:
-    """glXQueryVersion(dpy, maj, min) -> Bool"""
+    """glXQueryVersion(dpy: Display[], maj: c_int[], min: c_int[]) -> Bool"""
 
 def glXQueryVideoCaptureDeviceNV(dpy: AnyArray, device: Any, attribute: int, value: IntArray) -> int:
-    """glXQueryVideoCaptureDeviceNV(dpy, device, attribute, value) -> c_int"""
+    """glXQueryVideoCaptureDeviceNV(dpy: Display[], device: GLXVideoCaptureDeviceNV, attribute: c_int, value: c_int[]) -> c_int"""
 
 def glXReleaseBuffersMESA(dpy: AnyArray, drawable: Any) -> int:
-    """glXReleaseBuffersMESA(dpy, drawable) -> Bool"""
+    """glXReleaseBuffersMESA(dpy: Display[], drawable: GLXDrawable) -> Bool"""
 
 def glXReleaseTexImageEXT(dpy: AnyArray, drawable: Any, buffer: int) -> None:
-    """glXReleaseTexImageEXT(dpy, drawable, buffer) -> None"""
+    """glXReleaseTexImageEXT(dpy: Display[], drawable: GLXDrawable, buffer: c_int) -> None"""
 
 def glXReleaseVideoCaptureDeviceNV(dpy: AnyArray, device: Any) -> None:
-    """glXReleaseVideoCaptureDeviceNV(dpy, device) -> None"""
+    """glXReleaseVideoCaptureDeviceNV(dpy: Display[], device: GLXVideoCaptureDeviceNV) -> None"""
 
 def glXReleaseVideoDeviceNV(dpy: AnyArray, screen: int, VideoDevice: Any) -> int:
-    """glXReleaseVideoDeviceNV(dpy, screen, VideoDevice) -> c_int"""
+    """glXReleaseVideoDeviceNV(dpy: Display[], screen: c_int, VideoDevice: GLXVideoDeviceNV) -> c_int"""
 
 def glXReleaseVideoImageNV(dpy: AnyArray, pbuf: Any) -> int:
-    """glXReleaseVideoImageNV(dpy, pbuf) -> c_int"""
+    """glXReleaseVideoImageNV(dpy: Display[], pbuf: GLXPbuffer) -> c_int"""
 
 def glXResetFrameCountNV(dpy: AnyArray, screen: int) -> int:
-    """glXResetFrameCountNV(dpy, screen) -> Bool"""
+    """glXResetFrameCountNV(dpy: Display[], screen: c_int) -> Bool"""
 
 def glXSelectEvent(dpy: AnyArray, draw: Any, event_mask: int) -> None:
-    """glXSelectEvent(dpy, draw, event_mask) -> None"""
+    """glXSelectEvent(dpy: Display[], draw: GLXDrawable, event_mask: c_ulong) -> None"""
 
 def glXSelectEventSGIX(dpy: AnyArray, drawable: Any, mask: int) -> None:
-    """glXSelectEventSGIX(dpy, drawable, mask) -> None"""
+    """glXSelectEventSGIX(dpy: Display[], drawable: GLXDrawable, mask: c_ulong) -> None"""
 
 def glXSendPbufferToVideoNV(dpy: AnyArray, pbuf: Any, iBufferType: int, pulCounterPbuffer: AnyArray, bBlock: bool) -> int:
-    """glXSendPbufferToVideoNV(dpy, pbuf, iBufferType, pulCounterPbuffer, bBlock) -> c_int"""
+    """glXSendPbufferToVideoNV(dpy: Display[], pbuf: GLXPbuffer, iBufferType: c_int, pulCounterPbuffer: c_ulong[], bBlock: GLboolean) -> c_int"""
 
 def glXSet3DfxModeMESA(mode: int) -> int:
-    """glXSet3DfxModeMESA(mode) -> GLboolean"""
+    """glXSet3DfxModeMESA(mode: GLint) -> GLboolean"""
 
 def glXSwapBuffers(dpy: AnyArray, drawable: Any) -> None:
-    """glXSwapBuffers(dpy, drawable) -> None"""
+    """glXSwapBuffers(dpy: Display[], drawable: GLXDrawable) -> None"""
 
 def glXSwapBuffersMscOML(dpy: AnyArray, drawable: Any, target_msc: int, divisor: int, remainder: int) -> int:
-    """glXSwapBuffersMscOML(dpy, drawable, target_msc, divisor, remainder) -> int64_t"""
+    """glXSwapBuffersMscOML(dpy: Display[], drawable: GLXDrawable, target_msc: int64_t, divisor: int64_t, remainder: int64_t) -> int64_t"""
 
 def glXSwapIntervalEXT(dpy: AnyArray, drawable: Any, interval: int) -> None:
-    """glXSwapIntervalEXT(dpy, drawable, interval) -> None"""
+    """glXSwapIntervalEXT(dpy: Display[], drawable: GLXDrawable, interval: c_int) -> None"""
 
 def glXSwapIntervalMESA(interval: int) -> int:
-    """glXSwapIntervalMESA(interval) -> c_int"""
+    """glXSwapIntervalMESA(interval: c_uint) -> c_int"""
 
 def glXSwapIntervalSGI(interval: int) -> int:
-    """glXSwapIntervalSGI(interval) -> c_int"""
+    """glXSwapIntervalSGI(interval: c_int) -> c_int"""
 
 def glXUseXFont(font: Any, first: int, count: int, list: int) -> None:
-    """glXUseXFont(font, first, count, list) -> None"""
+    """glXUseXFont(font: Font, first: c_int, count: c_int, list: c_int) -> None"""
 
 def glXWaitForMscOML(dpy: AnyArray, drawable: Any, target_msc: int, divisor: int, remainder: int, ust: Int64Array, msc: Int64Array, sbc: Int64Array) -> int:
-    """glXWaitForMscOML(dpy, drawable, target_msc, divisor, remainder, ust, msc, sbc) -> Bool"""
+    """glXWaitForMscOML(dpy: Display[], drawable: GLXDrawable, target_msc: int64_t, divisor: int64_t, remainder: int64_t, ust: int64_t[], msc: int64_t[], sbc: int64_t[]) -> Bool"""
 
 def glXWaitForSbcOML(dpy: AnyArray, drawable: Any, target_sbc: int, ust: Int64Array, msc: Int64Array, sbc: Int64Array) -> int:
-    """glXWaitForSbcOML(dpy, drawable, target_sbc, ust, msc, sbc) -> Bool"""
+    """glXWaitForSbcOML(dpy: Display[], drawable: GLXDrawable, target_sbc: int64_t, ust: int64_t[], msc: int64_t[], sbc: int64_t[]) -> Bool"""
 
 def glXWaitGL() -> None:
     """glXWaitGL() -> None"""
 
 def glXWaitVideoSyncSGI(divisor: int, remainder: int, count: UIntArray) -> int:
-    """glXWaitVideoSyncSGI(divisor, remainder, count) -> c_int"""
+    """glXWaitVideoSyncSGI(divisor: c_int, remainder: c_int, count: c_uint[]) -> c_int"""
 
 def glXWaitX() -> None:
     """glXWaitX() -> None"""

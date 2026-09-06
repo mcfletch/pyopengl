@@ -339,94 +339,94 @@ GL_VIEWPORT: int
 GL_ZERO: int
 
 def glActiveTexture(texture: int) -> None:
-    """glActiveTexture(texture) -> None"""
+    """glActiveTexture(texture: GLenum) -> None"""
 
 def glBindBuffer(target: int, buffer: int) -> None:
-    """glBindBuffer(target, buffer) -> None"""
+    """glBindBuffer(target: GLenum, buffer: GLuint) -> None"""
 
 def glBindFramebuffer(target: int, framebuffer: int) -> None:
-    """glBindFramebuffer(target, framebuffer) -> None"""
+    """glBindFramebuffer(target: GLenum, framebuffer: GLuint) -> None"""
 
 def glBindRenderbuffer(target: int, renderbuffer: int) -> None:
-    """glBindRenderbuffer(target, renderbuffer) -> None"""
+    """glBindRenderbuffer(target: GLenum, renderbuffer: GLuint) -> None"""
 
 def glBindTexture(target: int, texture: int) -> None:
-    """glBindTexture(target, texture) -> None"""
+    """glBindTexture(target: GLenum, texture: GLuint) -> None"""
 
 def glBlendColor(red: float, green: float, blue: float, alpha: float) -> None:
-    """glBlendColor(red, green, blue, alpha) -> None"""
+    """glBlendColor(red: GLfloat, green: GLfloat, blue: GLfloat, alpha: GLfloat) -> None"""
 
 def glBlendEquation(mode: int) -> None:
-    """glBlendEquation(mode) -> None"""
+    """glBlendEquation(mode: GLenum) -> None"""
 
 def glBlendEquationSeparate(modeRGB: int, modeAlpha: int) -> None:
-    """glBlendEquationSeparate(modeRGB, modeAlpha) -> None"""
+    """glBlendEquationSeparate(modeRGB: GLenum, modeAlpha: GLenum) -> None"""
 
 def glBlendFunc(sfactor: int, dfactor: int) -> None:
-    """glBlendFunc(sfactor, dfactor) -> None"""
+    """glBlendFunc(sfactor: GLenum, dfactor: GLenum) -> None"""
 
 def glBlendFuncSeparate(sfactorRGB: int, dfactorRGB: int, sfactorAlpha: int, dfactorAlpha: int) -> None:
-    """glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha) -> None"""
+    """glBlendFuncSeparate(sfactorRGB: GLenum, dfactorRGB: GLenum, sfactorAlpha: GLenum, dfactorAlpha: GLenum) -> None"""
 
 def glBufferData(target: int, size: int, data: AnyArray, usage: int) -> None:
-    """glBufferData(target, size, data, usage) -> None"""
+    """glBufferData(target: GLenum, size: GLsizeiptr, data: void[], usage: GLenum) -> None"""
 
 def glBufferSubData(target: int, offset: int, size: int, data: AnyArray) -> None:
-    """glBufferSubData(target, offset, size, data) -> None"""
+    """glBufferSubData(target: GLenum, offset: GLintptr, size: GLsizeiptr, data: void[]) -> None"""
 
 def glCheckFramebufferStatus(target: int) -> int:
-    """glCheckFramebufferStatus(target) -> GLenum"""
+    """glCheckFramebufferStatus(target: GLenum) -> GLenum"""
 
 def glClear(mask: int) -> None:
-    """glClear(mask) -> None"""
+    """glClear(mask: GLbitfield) -> None"""
 
 def glClearColor(red: float, green: float, blue: float, alpha: float) -> None:
-    """glClearColor(red, green, blue, alpha) -> None"""
+    """glClearColor(red: GLfloat, green: GLfloat, blue: GLfloat, alpha: GLfloat) -> None"""
 
 def glClearDepthf(d: float) -> None:
-    """glClearDepthf(d) -> None"""
+    """glClearDepthf(d: GLfloat) -> None"""
 
 def glClearStencil(s: int) -> None:
-    """glClearStencil(s) -> None"""
+    """glClearStencil(s: GLint) -> None"""
 
 def glColorMask(red: bool, green: bool, blue: bool, alpha: bool) -> None:
-    """glColorMask(red, green, blue, alpha) -> None"""
+    """glColorMask(red: GLboolean, green: GLboolean, blue: GLboolean, alpha: GLboolean) -> None"""
 
 def glCompressedTexSubImage2D(target: int, level: int, xoffset: int, yoffset: int, width: int, height: int, format: int, imageSize: int, data: AnyArray) -> None:
-    """glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data) -> None"""
+    """glCompressedTexSubImage2D(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: GLenum, imageSize: GLsizei, data: void[]) -> None"""
 
 def glCreateProgram() -> int:
     """glCreateProgram() -> GLuint"""
 
 def glCullFace(mode: int) -> None:
-    """glCullFace(mode) -> None"""
+    """glCullFace(mode: GLenum) -> None"""
 
 def glDepthFunc(func: int) -> None:
-    """glDepthFunc(func) -> None"""
+    """glDepthFunc(func: GLenum) -> None"""
 
 def glDepthMask(flag: bool) -> None:
-    """glDepthMask(flag) -> None"""
+    """glDepthMask(flag: GLboolean) -> None"""
 
 def glDepthRangef(n: float, f: float) -> None:
-    """glDepthRangef(n, f) -> None"""
+    """glDepthRangef(n: GLfloat, f: GLfloat) -> None"""
 
 def glDisable(cap: int) -> None:
-    """glDisable(cap) -> None"""
+    """glDisable(cap: GLenum) -> None"""
 
 def glDisableVertexAttribArray(index: int) -> None:
-    """glDisableVertexAttribArray(index) -> None"""
+    """glDisableVertexAttribArray(index: GLuint) -> None"""
 
 def glDrawArrays(mode: int, first: int, count: int) -> None:
-    """glDrawArrays(mode, first, count) -> None"""
+    """glDrawArrays(mode: GLenum, first: GLint, count: GLsizei) -> None"""
 
 def glDrawRangeElements(mode: int, start: int, end: int, count: int, type: int, indices: AnyArray) -> None:
-    """glDrawRangeElements(mode, start, end, count, type, indices) -> None"""
+    """glDrawRangeElements(mode: GLenum, start: GLuint, end: GLuint, count: GLsizei, type: GLenum, indices: void[]) -> None"""
 
 def glEnable(cap: int) -> None:
-    """glEnable(cap) -> None"""
+    """glEnable(cap: GLenum) -> None"""
 
 def glEnableVertexAttribArray(index: int) -> None:
-    """glEnableVertexAttribArray(index) -> None"""
+    """glEnableVertexAttribArray(index: GLuint) -> None"""
 
 def glFinish() -> None:
     """glFinish() -> None"""
@@ -435,241 +435,241 @@ def glFlush() -> None:
     """glFlush() -> None"""
 
 def glFramebufferRenderbuffer(target: int, attachment: int, renderbuffertarget: int, renderbuffer: int) -> None:
-    """glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) -> None"""
+    """glFramebufferRenderbuffer(target: GLenum, attachment: GLenum, renderbuffertarget: GLenum, renderbuffer: GLuint) -> None"""
 
 def glFramebufferTexture2D(target: int, attachment: int, textarget: int, texture: int, level: int) -> None:
-    """glFramebufferTexture2D(target, attachment, textarget, texture, level) -> None"""
+    """glFramebufferTexture2D(target: GLenum, attachment: GLenum, textarget: GLenum, texture: GLuint, level: GLint) -> None"""
 
 def glFrontFace(mode: int) -> None:
-    """glFrontFace(mode) -> None"""
+    """glFrontFace(mode: GLenum) -> None"""
 
 def glGenBuffers(n: int, buffers: UIntArray | None = None) -> UIntArrayResult:
-    """glGenBuffers(n) -> buffers"""
+    """glGenBuffers(n: GLsizei) -> buffers: GLuint[]"""
 
 def glGenFramebuffers(n: int, framebuffers: UIntArray | None = None) -> UIntArrayResult:
-    """glGenFramebuffers(n) -> framebuffers"""
+    """glGenFramebuffers(n: GLsizei) -> framebuffers: GLuint[]"""
 
 def glGenRenderbuffers(n: int, renderbuffers: UIntArray | None = None) -> UIntArrayResult:
-    """glGenRenderbuffers(n) -> renderbuffers"""
+    """glGenRenderbuffers(n: GLsizei) -> renderbuffers: GLuint[]"""
 
 def glGenTextures(n: int, textures: UIntArray | None = None) -> UIntArrayResult:
-    """glGenTextures(n) -> textures"""
+    """glGenTextures(n: GLsizei) -> textures: GLuint[]"""
 
 def glGenerateMipmap(target: int) -> None:
-    """glGenerateMipmap(target) -> None"""
+    """glGenerateMipmap(target: GLenum) -> None"""
 
 def glGetAttribLocation(program: int, name: ByteArray) -> int:
-    """glGetAttribLocation(program, name) -> GLint"""
+    """glGetAttribLocation(program: GLuint, name: GLchar[]) -> GLint"""
 
 def glGetBooleanv(pname: int, data: UByteArray | None = None) -> UByteArrayResult:
-    """glGetBooleanv(pname) -> data"""
+    """glGetBooleanv(pname: GLenum) -> data: GLboolean[]"""
 
 def glGetBufferParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetBufferParameteriv(target, pname) -> params"""
+    """glGetBufferParameteriv(target: GLenum, pname: GLenum) -> params: GLint[]"""
 
 def glGetError() -> int:
     """glGetError() -> GLenum"""
 
 def glGetFloatv(pname: int, data: FloatArray | None = None) -> FloatArrayResult:
-    """glGetFloatv(pname) -> data"""
+    """glGetFloatv(pname: GLenum) -> data: GLfloat[]"""
 
 def glGetFramebufferAttachmentParameteriv(target: int, attachment: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetFramebufferAttachmentParameteriv(target, attachment, pname) -> params"""
+    """glGetFramebufferAttachmentParameteriv(target: GLenum, attachment: GLenum, pname: GLenum) -> params: GLint[]"""
 
 def glGetGraphicsResetStatus() -> int:
     """glGetGraphicsResetStatus() -> GLenum"""
 
 def glGetIntegerv(pname: int, data: IntArray | None = None) -> IntArrayResult:
-    """glGetIntegerv(pname) -> data"""
+    """glGetIntegerv(pname: GLenum) -> data: GLint[]"""
 
 def glGetProgramiv(program: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetProgramiv(program, pname) -> params"""
+    """glGetProgramiv(program: GLuint, pname: GLenum) -> params: GLint[]"""
 
 def glGetRenderbufferParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetRenderbufferParameteriv(target, pname) -> params"""
+    """glGetRenderbufferParameteriv(target: GLenum, pname: GLenum) -> params: GLint[]"""
 
 def glGetString(name: int) -> bytes:
-    """glGetString(name) -> GLubyte"""
+    """glGetString(name: GLenum) -> GLubyte"""
 
 def glGetTexParameterfv(target: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
-    """glGetTexParameterfv(target, pname) -> params"""
+    """glGetTexParameterfv(target: GLenum, pname: GLenum) -> params: GLfloat[]"""
 
 def glGetTexParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetTexParameteriv(target, pname) -> params"""
+    """glGetTexParameteriv(target: GLenum, pname: GLenum) -> params: GLint[]"""
 
 def glGetUniformLocation(program: int, name: ByteArray) -> int:
-    """glGetUniformLocation(program, name) -> GLint"""
+    """glGetUniformLocation(program: GLuint, name: GLchar[]) -> GLint"""
 
 def glGetVertexAttribPointerv(index: int, pname: int, pointer: AnyArray | None = None) -> AnyArrayResult:
-    """glGetVertexAttribPointerv(index, pname) -> pointer"""
+    """glGetVertexAttribPointerv(index: GLuint, pname: GLenum) -> pointer: void[][]"""
 
 def glGetVertexAttribfv(index: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult:
-    """glGetVertexAttribfv(index, pname) -> params"""
+    """glGetVertexAttribfv(index: GLuint, pname: GLenum) -> params: GLfloat[]"""
 
 def glGetVertexAttribiv(index: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
-    """glGetVertexAttribiv(index, pname) -> params"""
+    """glGetVertexAttribiv(index: GLuint, pname: GLenum) -> params: GLint[]"""
 
 def glGetnUniformfv(program: int, location: int, bufSize: int, params: FloatArray) -> None:
-    """glGetnUniformfv(program, location, bufSize, params) -> None"""
+    """glGetnUniformfv(program: GLuint, location: GLint, bufSize: GLsizei, params: GLfloat[]) -> None"""
 
 def glGetnUniformiv(program: int, location: int, bufSize: int, params: IntArray) -> None:
-    """glGetnUniformiv(program, location, bufSize, params) -> None"""
+    """glGetnUniformiv(program: GLuint, location: GLint, bufSize: GLsizei, params: GLint[]) -> None"""
 
 def glHint(target: int, mode: int) -> None:
-    """glHint(target, mode) -> None"""
+    """glHint(target: GLenum, mode: GLenum) -> None"""
 
 def glIsEnabled(cap: int) -> int:
-    """glIsEnabled(cap) -> GLboolean"""
+    """glIsEnabled(cap: GLenum) -> GLboolean"""
 
 def glLineWidth(width: float) -> None:
-    """glLineWidth(width) -> None"""
+    """glLineWidth(width: GLfloat) -> None"""
 
 def glPixelStorei(pname: int, param: int) -> None:
-    """glPixelStorei(pname, param) -> None"""
+    """glPixelStorei(pname: GLenum, param: GLint) -> None"""
 
 def glPolygonOffset(factor: float, units: float) -> None:
-    """glPolygonOffset(factor, units) -> None"""
+    """glPolygonOffset(factor: GLfloat, units: GLfloat) -> None"""
 
 def glProgramBinary(program: int, binaryFormat: int, binary: AnyArray, length: int) -> None:
-    """glProgramBinary(program, binaryFormat, binary, length) -> None"""
+    """glProgramBinary(program: GLuint, binaryFormat: GLenum, binary: void[], length: GLsizei) -> None"""
 
 def glReadnPixels(x: int, y: int, width: int, height: int, format: int, type: int, bufSize: int, data: AnyArray) -> None:
-    """glReadnPixels(x, y, width, height, format, type, bufSize, data) -> None"""
+    """glReadnPixels(x: GLint, y: GLint, width: GLsizei, height: GLsizei, format: GLenum, type: GLenum, bufSize: GLsizei, data: void[]) -> None"""
 
 def glRenderbufferStorage(target: int, internalformat: int, width: int, height: int) -> None:
-    """glRenderbufferStorage(target, internalformat, width, height) -> None"""
+    """glRenderbufferStorage(target: GLenum, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None"""
 
 def glSampleCoverage(value: float, invert: bool) -> None:
-    """glSampleCoverage(value, invert) -> None"""
+    """glSampleCoverage(value: GLfloat, invert: GLboolean) -> None"""
 
 def glScissor(x: int, y: int, width: int, height: int) -> None:
-    """glScissor(x, y, width, height) -> None"""
+    """glScissor(x: GLint, y: GLint, width: GLsizei, height: GLsizei) -> None"""
 
 def glStencilFunc(func: int, ref: int, mask: int) -> None:
-    """glStencilFunc(func, ref, mask) -> None"""
+    """glStencilFunc(func: GLenum, ref: GLint, mask: GLuint) -> None"""
 
 def glStencilFuncSeparate(face: int, func: int, ref: int, mask: int) -> None:
-    """glStencilFuncSeparate(face, func, ref, mask) -> None"""
+    """glStencilFuncSeparate(face: GLenum, func: GLenum, ref: GLint, mask: GLuint) -> None"""
 
 def glStencilMask(mask: int) -> None:
-    """glStencilMask(mask) -> None"""
+    """glStencilMask(mask: GLuint) -> None"""
 
 def glStencilMaskSeparate(face: int, mask: int) -> None:
-    """glStencilMaskSeparate(face, mask) -> None"""
+    """glStencilMaskSeparate(face: GLenum, mask: GLuint) -> None"""
 
 def glStencilOp(fail: int, zfail: int, zpass: int) -> None:
-    """glStencilOp(fail, zfail, zpass) -> None"""
+    """glStencilOp(fail: GLenum, zfail: GLenum, zpass: GLenum) -> None"""
 
 def glStencilOpSeparate(face: int, sfail: int, dpfail: int, dppass: int) -> None:
-    """glStencilOpSeparate(face, sfail, dpfail, dppass) -> None"""
+    """glStencilOpSeparate(face: GLenum, sfail: GLenum, dpfail: GLenum, dppass: GLenum) -> None"""
 
 def glTexParameterf(target: int, pname: int, param: float) -> None:
-    """glTexParameterf(target, pname, param) -> None"""
+    """glTexParameterf(target: GLenum, pname: GLenum, param: GLfloat) -> None"""
 
 def glTexParameterfv(target: int, pname: int, params: FloatArray) -> None:
-    """glTexParameterfv(target, pname, params) -> None"""
+    """glTexParameterfv(target: GLenum, pname: GLenum, params: GLfloat[]) -> None"""
 
 def glTexParameteri(target: int, pname: int, param: int) -> None:
-    """glTexParameteri(target, pname, param) -> None"""
+    """glTexParameteri(target: GLenum, pname: GLenum, param: GLint) -> None"""
 
 def glTexParameteriv(target: int, pname: int, params: IntArray) -> None:
-    """glTexParameteriv(target, pname, params) -> None"""
+    """glTexParameteriv(target: GLenum, pname: GLenum, params: GLint[]) -> None"""
 
 def glTexStorage2D(target: int, levels: int, internalformat: int, width: int, height: int) -> None:
-    """glTexStorage2D(target, levels, internalformat, width, height) -> None"""
+    """glTexStorage2D(target: GLenum, levels: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None"""
 
 def glTexSubImage2D(target: int, level: int, xoffset: int, yoffset: int, width: int, height: int, format: int, type: int, pixels: AnyArray) -> None:
-    """glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels) -> None"""
+    """glTexSubImage2D(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: GLenum, type: GLenum, pixels: void[]) -> None"""
 
 def glUniform1f(location: int, v0: float) -> None:
-    """glUniform1f(location, v0) -> None"""
+    """glUniform1f(location: GLint, v0: GLfloat) -> None"""
 
 def glUniform1fv(location: int, count: int, value: FloatArray) -> None:
-    """glUniform1fv(location, count, value) -> None"""
+    """glUniform1fv(location: GLint, count: GLsizei, value: GLfloat[]) -> None"""
 
 def glUniform1i(location: int, v0: int) -> None:
-    """glUniform1i(location, v0) -> None"""
+    """glUniform1i(location: GLint, v0: GLint) -> None"""
 
 def glUniform1iv(location: int, count: int, value: IntArray) -> None:
-    """glUniform1iv(location, count, value) -> None"""
+    """glUniform1iv(location: GLint, count: GLsizei, value: GLint[]) -> None"""
 
 def glUniform2f(location: int, v0: float, v1: float) -> None:
-    """glUniform2f(location, v0, v1) -> None"""
+    """glUniform2f(location: GLint, v0: GLfloat, v1: GLfloat) -> None"""
 
 def glUniform2fv(location: int, count: int, value: FloatArray) -> None:
-    """glUniform2fv(location, count, value) -> None"""
+    """glUniform2fv(location: GLint, count: GLsizei, value: GLfloat[]) -> None"""
 
 def glUniform2i(location: int, v0: int, v1: int) -> None:
-    """glUniform2i(location, v0, v1) -> None"""
+    """glUniform2i(location: GLint, v0: GLint, v1: GLint) -> None"""
 
 def glUniform2iv(location: int, count: int, value: IntArray) -> None:
-    """glUniform2iv(location, count, value) -> None"""
+    """glUniform2iv(location: GLint, count: GLsizei, value: GLint[]) -> None"""
 
 def glUniform3f(location: int, v0: float, v1: float, v2: float) -> None:
-    """glUniform3f(location, v0, v1, v2) -> None"""
+    """glUniform3f(location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat) -> None"""
 
 def glUniform3fv(location: int, count: int, value: FloatArray) -> None:
-    """glUniform3fv(location, count, value) -> None"""
+    """glUniform3fv(location: GLint, count: GLsizei, value: GLfloat[]) -> None"""
 
 def glUniform3i(location: int, v0: int, v1: int, v2: int) -> None:
-    """glUniform3i(location, v0, v1, v2) -> None"""
+    """glUniform3i(location: GLint, v0: GLint, v1: GLint, v2: GLint) -> None"""
 
 def glUniform3iv(location: int, count: int, value: IntArray) -> None:
-    """glUniform3iv(location, count, value) -> None"""
+    """glUniform3iv(location: GLint, count: GLsizei, value: GLint[]) -> None"""
 
 def glUniform4f(location: int, v0: float, v1: float, v2: float, v3: float) -> None:
-    """glUniform4f(location, v0, v1, v2, v3) -> None"""
+    """glUniform4f(location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat, v3: GLfloat) -> None"""
 
 def glUniform4fv(location: int, count: int, value: FloatArray) -> None:
-    """glUniform4fv(location, count, value) -> None"""
+    """glUniform4fv(location: GLint, count: GLsizei, value: GLfloat[]) -> None"""
 
 def glUniform4i(location: int, v0: int, v1: int, v2: int, v3: int) -> None:
-    """glUniform4i(location, v0, v1, v2, v3) -> None"""
+    """glUniform4i(location: GLint, v0: GLint, v1: GLint, v2: GLint, v3: GLint) -> None"""
 
 def glUniform4iv(location: int, count: int, value: IntArray) -> None:
-    """glUniform4iv(location, count, value) -> None"""
+    """glUniform4iv(location: GLint, count: GLsizei, value: GLint[]) -> None"""
 
 def glUniformMatrix2fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glUniformMatrix2fv(location, count, transpose, value) -> None"""
+    """glUniformMatrix2fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glUniformMatrix3fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glUniformMatrix3fv(location, count, transpose, value) -> None"""
+    """glUniformMatrix3fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glUniformMatrix4fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
-    """glUniformMatrix4fv(location, count, transpose, value) -> None"""
+    """glUniformMatrix4fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glUseProgram(program: int) -> None:
-    """glUseProgram(program) -> None"""
+    """glUseProgram(program: GLuint) -> None"""
 
 def glVertexAttrib1f(index: int, x: float) -> None:
-    """glVertexAttrib1f(index, x) -> None"""
+    """glVertexAttrib1f(index: GLuint, x: GLfloat) -> None"""
 
 def glVertexAttrib1fv(index: int, v: FloatArray) -> None:
-    """glVertexAttrib1fv(index, v) -> None"""
+    """glVertexAttrib1fv(index: GLuint, v: GLfloat[]) -> None"""
 
 def glVertexAttrib2f(index: int, x: float, y: float) -> None:
-    """glVertexAttrib2f(index, x, y) -> None"""
+    """glVertexAttrib2f(index: GLuint, x: GLfloat, y: GLfloat) -> None"""
 
 def glVertexAttrib2fv(index: int, v: FloatArray) -> None:
-    """glVertexAttrib2fv(index, v) -> None"""
+    """glVertexAttrib2fv(index: GLuint, v: GLfloat[]) -> None"""
 
 def glVertexAttrib3f(index: int, x: float, y: float, z: float) -> None:
-    """glVertexAttrib3f(index, x, y, z) -> None"""
+    """glVertexAttrib3f(index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat) -> None"""
 
 def glVertexAttrib3fv(index: int, v: FloatArray) -> None:
-    """glVertexAttrib3fv(index, v) -> None"""
+    """glVertexAttrib3fv(index: GLuint, v: GLfloat[]) -> None"""
 
 def glVertexAttrib4f(index: int, x: float, y: float, z: float, w: float) -> None:
-    """glVertexAttrib4f(index, x, y, z, w) -> None"""
+    """glVertexAttrib4f(index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) -> None"""
 
 def glVertexAttrib4fv(index: int, v: FloatArray) -> None:
-    """glVertexAttrib4fv(index, v) -> None"""
+    """glVertexAttrib4fv(index: GLuint, v: GLfloat[]) -> None"""
 
 def glVertexAttribPointer(index: int, size: int, type: int, normalized: bool, stride: int, pointer: AnyArray) -> None:
-    """glVertexAttribPointer(index, size, type, normalized, stride, pointer) -> None"""
+    """glVertexAttribPointer(index: GLuint, size: GLint, type: GLenum, normalized: GLboolean, stride: GLsizei, pointer: void[]) -> None"""
 
 def glViewport(x: int, y: int, width: int, height: int) -> None:
-    """glViewport(x, y, width, height) -> None"""
+    """glViewport(x: GLint, y: GLint, width: GLsizei, height: GLsizei) -> None"""
 
 
 def __getattr__(name: str) -> Any:

@@ -146,7 +146,7 @@ class TestModule:
             'GL',
             [command(parameters=[('target', 'GLenum', {}), ('texture', 'GLuint', {})])],
         )
-        assert '"""glBindTexture(target, texture) -> None"""' in text
+        assert '"""glBindTexture(target: GLenum, texture: GLuint) -> None"""' in text
 
     def test_the_array_aliases_are_declared(self):
         text = emit_pyi.emit_module('GL', [])

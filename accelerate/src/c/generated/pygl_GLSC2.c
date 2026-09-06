@@ -10,7 +10,7 @@
 static const char *const pygl_GLSC2_glActiveTexture_args[] = {"texture"};
 static const PyGLCommand pygl_GLSC2_glActiveTexture_info = {
     .name = "glActiveTexture",
-    .doc = "glActiveTexture(texture) -> None",
+    .doc = "glActiveTexture(texture: GLenum) -> None",
     .text_signature = "($module, texture, /)",
     .arg_names = pygl_GLSC2_glActiveTexture_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -45,7 +45,7 @@ _fail:
 static const char *const pygl_GLSC2_glBindBuffer_args[] = {"target", "buffer"};
 static const PyGLCommand pygl_GLSC2_glBindBuffer_info = {
     .name = "glBindBuffer",
-    .doc = "glBindBuffer(target, buffer) -> None",
+    .doc = "glBindBuffer(target: GLenum, buffer: GLuint) -> None",
     .text_signature = "($module, target, buffer, /)",
     .arg_names = pygl_GLSC2_glBindBuffer_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -81,7 +81,7 @@ _fail:
 static const char *const pygl_GLSC2_glBindFramebuffer_args[] = {"target", "framebuffer"};
 static const PyGLCommand pygl_GLSC2_glBindFramebuffer_info = {
     .name = "glBindFramebuffer",
-    .doc = "glBindFramebuffer(target, framebuffer) -> None",
+    .doc = "glBindFramebuffer(target: GLenum, framebuffer: GLuint) -> None",
     .text_signature = "($module, target, framebuffer, /)",
     .arg_names = pygl_GLSC2_glBindFramebuffer_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -117,7 +117,7 @@ _fail:
 static const char *const pygl_GLSC2_glBindRenderbuffer_args[] = {"target", "renderbuffer"};
 static const PyGLCommand pygl_GLSC2_glBindRenderbuffer_info = {
     .name = "glBindRenderbuffer",
-    .doc = "glBindRenderbuffer(target, renderbuffer) -> None",
+    .doc = "glBindRenderbuffer(target: GLenum, renderbuffer: GLuint) -> None",
     .text_signature = "($module, target, renderbuffer, /)",
     .arg_names = pygl_GLSC2_glBindRenderbuffer_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -153,7 +153,7 @@ _fail:
 static const char *const pygl_GLSC2_glBindTexture_args[] = {"target", "texture"};
 static const PyGLCommand pygl_GLSC2_glBindTexture_info = {
     .name = "glBindTexture",
-    .doc = "glBindTexture(target, texture) -> None",
+    .doc = "glBindTexture(target: GLenum, texture: GLuint) -> None",
     .text_signature = "($module, target, texture, /)",
     .arg_names = pygl_GLSC2_glBindTexture_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -189,7 +189,7 @@ _fail:
 static const char *const pygl_GLSC2_glBlendColor_args[] = {"red", "green", "blue", "alpha"};
 static const PyGLCommand pygl_GLSC2_glBlendColor_info = {
     .name = "glBlendColor",
-    .doc = "glBlendColor(red, green, blue, alpha) -> None",
+    .doc = "glBlendColor(red: GLfloat, green: GLfloat, blue: GLfloat, alpha: GLfloat) -> None",
     .text_signature = "($module, red, green, blue, alpha, /)",
     .arg_names = pygl_GLSC2_glBlendColor_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -227,7 +227,7 @@ _fail:
 static const char *const pygl_GLSC2_glBlendEquation_args[] = {"mode"};
 static const PyGLCommand pygl_GLSC2_glBlendEquation_info = {
     .name = "glBlendEquation",
-    .doc = "glBlendEquation(mode) -> None",
+    .doc = "glBlendEquation(mode: GLenum) -> None",
     .text_signature = "($module, mode, /)",
     .arg_names = pygl_GLSC2_glBlendEquation_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -262,7 +262,7 @@ _fail:
 static const char *const pygl_GLSC2_glBlendEquationSeparate_args[] = {"modeRGB", "modeAlpha"};
 static const PyGLCommand pygl_GLSC2_glBlendEquationSeparate_info = {
     .name = "glBlendEquationSeparate",
-    .doc = "glBlendEquationSeparate(modeRGB, modeAlpha) -> None",
+    .doc = "glBlendEquationSeparate(modeRGB: GLenum, modeAlpha: GLenum) -> None",
     .text_signature = "($module, modeRGB, modeAlpha, /)",
     .arg_names = pygl_GLSC2_glBlendEquationSeparate_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -298,7 +298,7 @@ _fail:
 static const char *const pygl_GLSC2_glBlendFunc_args[] = {"sfactor", "dfactor"};
 static const PyGLCommand pygl_GLSC2_glBlendFunc_info = {
     .name = "glBlendFunc",
-    .doc = "glBlendFunc(sfactor, dfactor) -> None",
+    .doc = "glBlendFunc(sfactor: GLenum, dfactor: GLenum) -> None",
     .text_signature = "($module, sfactor, dfactor, /)",
     .arg_names = pygl_GLSC2_glBlendFunc_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -334,7 +334,7 @@ _fail:
 static const char *const pygl_GLSC2_glBlendFuncSeparate_args[] = {"sfactorRGB", "dfactorRGB", "sfactorAlpha", "dfactorAlpha"};
 static const PyGLCommand pygl_GLSC2_glBlendFuncSeparate_info = {
     .name = "glBlendFuncSeparate",
-    .doc = "glBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha) -> None",
+    .doc = "glBlendFuncSeparate(sfactorRGB: GLenum, dfactorRGB: GLenum, sfactorAlpha: GLenum, dfactorAlpha: GLenum) -> None",
     .text_signature = "($module, sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha, /)",
     .arg_names = pygl_GLSC2_glBlendFuncSeparate_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -372,7 +372,7 @@ _fail:
 static const char *const pygl_GLSC2_glBufferData_args[] = {"target", "size", "data", "usage"};
 static const PyGLCommand pygl_GLSC2_glBufferData_info = {
     .name = "glBufferData",
-    .doc = "glBufferData(target, size, data, usage) -> None",
+    .doc = "glBufferData(target: GLenum, size: GLsizeiptr, data: void[], usage: GLenum) -> None",
     .text_signature = "($module, target, size, data, usage, /)",
     .arg_names = pygl_GLSC2_glBufferData_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -413,7 +413,7 @@ _fail:
 static const char *const pygl_GLSC2_glBufferSubData_args[] = {"target", "offset", "size", "data"};
 static const PyGLCommand pygl_GLSC2_glBufferSubData_info = {
     .name = "glBufferSubData",
-    .doc = "glBufferSubData(target, offset, size, data) -> None",
+    .doc = "glBufferSubData(target: GLenum, offset: GLintptr, size: GLsizeiptr, data: void[]) -> None",
     .text_signature = "($module, target, offset, size, data, /)",
     .arg_names = pygl_GLSC2_glBufferSubData_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -454,7 +454,7 @@ _fail:
 static const char *const pygl_GLSC2_glCheckFramebufferStatus_args[] = {"target"};
 static const PyGLCommand pygl_GLSC2_glCheckFramebufferStatus_info = {
     .name = "glCheckFramebufferStatus",
-    .doc = "glCheckFramebufferStatus(target) -> GLenum",
+    .doc = "glCheckFramebufferStatus(target: GLenum) -> GLenum",
     .text_signature = "($module, target, /)",
     .arg_names = pygl_GLSC2_glCheckFramebufferStatus_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -489,7 +489,7 @@ _fail:
 static const char *const pygl_GLSC2_glClear_args[] = {"mask"};
 static const PyGLCommand pygl_GLSC2_glClear_info = {
     .name = "glClear",
-    .doc = "glClear(mask) -> None",
+    .doc = "glClear(mask: GLbitfield) -> None",
     .text_signature = "($module, mask, /)",
     .arg_names = pygl_GLSC2_glClear_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -524,7 +524,7 @@ _fail:
 static const char *const pygl_GLSC2_glClearColor_args[] = {"red", "green", "blue", "alpha"};
 static const PyGLCommand pygl_GLSC2_glClearColor_info = {
     .name = "glClearColor",
-    .doc = "glClearColor(red, green, blue, alpha) -> None",
+    .doc = "glClearColor(red: GLfloat, green: GLfloat, blue: GLfloat, alpha: GLfloat) -> None",
     .text_signature = "($module, red, green, blue, alpha, /)",
     .arg_names = pygl_GLSC2_glClearColor_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -562,7 +562,7 @@ _fail:
 static const char *const pygl_GLSC2_glClearDepthf_args[] = {"d"};
 static const PyGLCommand pygl_GLSC2_glClearDepthf_info = {
     .name = "glClearDepthf",
-    .doc = "glClearDepthf(d) -> None",
+    .doc = "glClearDepthf(d: GLfloat) -> None",
     .text_signature = "($module, d, /)",
     .arg_names = pygl_GLSC2_glClearDepthf_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -597,7 +597,7 @@ _fail:
 static const char *const pygl_GLSC2_glClearStencil_args[] = {"s"};
 static const PyGLCommand pygl_GLSC2_glClearStencil_info = {
     .name = "glClearStencil",
-    .doc = "glClearStencil(s) -> None",
+    .doc = "glClearStencil(s: GLint) -> None",
     .text_signature = "($module, s, /)",
     .arg_names = pygl_GLSC2_glClearStencil_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -632,7 +632,7 @@ _fail:
 static const char *const pygl_GLSC2_glColorMask_args[] = {"red", "green", "blue", "alpha"};
 static const PyGLCommand pygl_GLSC2_glColorMask_info = {
     .name = "glColorMask",
-    .doc = "glColorMask(red, green, blue, alpha) -> None",
+    .doc = "glColorMask(red: GLboolean, green: GLboolean, blue: GLboolean, alpha: GLboolean) -> None",
     .text_signature = "($module, red, green, blue, alpha, /)",
     .arg_names = pygl_GLSC2_glColorMask_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -670,7 +670,7 @@ _fail:
 static const char *const pygl_GLSC2_glCompressedTexSubImage2D_args[] = {"target", "level", "xoffset", "yoffset", "width", "height", "format", "imageSize", "data"};
 static const PyGLCommand pygl_GLSC2_glCompressedTexSubImage2D_info = {
     .name = "glCompressedTexSubImage2D",
-    .doc = "glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data) -> None",
+    .doc = "glCompressedTexSubImage2D(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: GLenum, imageSize: GLsizei, data: void[]) -> None",
     .text_signature = "($module, target, level, xoffset, yoffset, width, height, format, imageSize, data, /)",
     .arg_names = pygl_GLSC2_glCompressedTexSubImage2D_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -749,7 +749,7 @@ _fail:
 static const char *const pygl_GLSC2_glCullFace_args[] = {"mode"};
 static const PyGLCommand pygl_GLSC2_glCullFace_info = {
     .name = "glCullFace",
-    .doc = "glCullFace(mode) -> None",
+    .doc = "glCullFace(mode: GLenum) -> None",
     .text_signature = "($module, mode, /)",
     .arg_names = pygl_GLSC2_glCullFace_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -784,7 +784,7 @@ _fail:
 static const char *const pygl_GLSC2_glDepthFunc_args[] = {"func"};
 static const PyGLCommand pygl_GLSC2_glDepthFunc_info = {
     .name = "glDepthFunc",
-    .doc = "glDepthFunc(func) -> None",
+    .doc = "glDepthFunc(func: GLenum) -> None",
     .text_signature = "($module, func, /)",
     .arg_names = pygl_GLSC2_glDepthFunc_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -819,7 +819,7 @@ _fail:
 static const char *const pygl_GLSC2_glDepthMask_args[] = {"flag"};
 static const PyGLCommand pygl_GLSC2_glDepthMask_info = {
     .name = "glDepthMask",
-    .doc = "glDepthMask(flag) -> None",
+    .doc = "glDepthMask(flag: GLboolean) -> None",
     .text_signature = "($module, flag, /)",
     .arg_names = pygl_GLSC2_glDepthMask_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -854,7 +854,7 @@ _fail:
 static const char *const pygl_GLSC2_glDepthRangef_args[] = {"n", "f"};
 static const PyGLCommand pygl_GLSC2_glDepthRangef_info = {
     .name = "glDepthRangef",
-    .doc = "glDepthRangef(n, f) -> None",
+    .doc = "glDepthRangef(n: GLfloat, f: GLfloat) -> None",
     .text_signature = "($module, n, f, /)",
     .arg_names = pygl_GLSC2_glDepthRangef_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -890,7 +890,7 @@ _fail:
 static const char *const pygl_GLSC2_glDisable_args[] = {"cap"};
 static const PyGLCommand pygl_GLSC2_glDisable_info = {
     .name = "glDisable",
-    .doc = "glDisable(cap) -> None",
+    .doc = "glDisable(cap: GLenum) -> None",
     .text_signature = "($module, cap, /)",
     .arg_names = pygl_GLSC2_glDisable_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -925,7 +925,7 @@ _fail:
 static const char *const pygl_GLSC2_glDisableVertexAttribArray_args[] = {"index"};
 static const PyGLCommand pygl_GLSC2_glDisableVertexAttribArray_info = {
     .name = "glDisableVertexAttribArray",
-    .doc = "glDisableVertexAttribArray(index) -> None",
+    .doc = "glDisableVertexAttribArray(index: GLuint) -> None",
     .text_signature = "($module, index, /)",
     .arg_names = pygl_GLSC2_glDisableVertexAttribArray_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -960,7 +960,7 @@ _fail:
 static const char *const pygl_GLSC2_glDrawArrays_args[] = {"mode", "first", "count"};
 static const PyGLCommand pygl_GLSC2_glDrawArrays_info = {
     .name = "glDrawArrays",
-    .doc = "glDrawArrays(mode, first, count) -> None",
+    .doc = "glDrawArrays(mode: GLenum, first: GLint, count: GLsizei) -> None",
     .text_signature = "($module, mode, first, count, /)",
     .arg_names = pygl_GLSC2_glDrawArrays_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -997,7 +997,7 @@ _fail:
 static const char *const pygl_GLSC2_glDrawRangeElements_args[] = {"mode", "start", "end", "count", "type", "indices"};
 static const PyGLCommand pygl_GLSC2_glDrawRangeElements_info = {
     .name = "glDrawRangeElements",
-    .doc = "glDrawRangeElements(mode, start, end, count, type, indices) -> None",
+    .doc = "glDrawRangeElements(mode: GLenum, start: GLuint, end: GLuint, count: GLsizei, type: GLenum, indices: void[]) -> None",
     .text_signature = "($module, mode, start, end, count, type, indices, /)",
     .arg_names = pygl_GLSC2_glDrawRangeElements_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1040,7 +1040,7 @@ _fail:
 static const char *const pygl_GLSC2_glEnable_args[] = {"cap"};
 static const PyGLCommand pygl_GLSC2_glEnable_info = {
     .name = "glEnable",
-    .doc = "glEnable(cap) -> None",
+    .doc = "glEnable(cap: GLenum) -> None",
     .text_signature = "($module, cap, /)",
     .arg_names = pygl_GLSC2_glEnable_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1075,7 +1075,7 @@ _fail:
 static const char *const pygl_GLSC2_glEnableVertexAttribArray_args[] = {"index"};
 static const PyGLCommand pygl_GLSC2_glEnableVertexAttribArray_info = {
     .name = "glEnableVertexAttribArray",
-    .doc = "glEnableVertexAttribArray(index) -> None",
+    .doc = "glEnableVertexAttribArray(index: GLuint) -> None",
     .text_signature = "($module, index, /)",
     .arg_names = pygl_GLSC2_glEnableVertexAttribArray_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1176,7 +1176,7 @@ _fail:
 static const char *const pygl_GLSC2_glFramebufferRenderbuffer_args[] = {"target", "attachment", "renderbuffertarget", "renderbuffer"};
 static const PyGLCommand pygl_GLSC2_glFramebufferRenderbuffer_info = {
     .name = "glFramebufferRenderbuffer",
-    .doc = "glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer) -> None",
+    .doc = "glFramebufferRenderbuffer(target: GLenum, attachment: GLenum, renderbuffertarget: GLenum, renderbuffer: GLuint) -> None",
     .text_signature = "($module, target, attachment, renderbuffertarget, renderbuffer, /)",
     .arg_names = pygl_GLSC2_glFramebufferRenderbuffer_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1214,7 +1214,7 @@ _fail:
 static const char *const pygl_GLSC2_glFramebufferTexture2D_args[] = {"target", "attachment", "textarget", "texture", "level"};
 static const PyGLCommand pygl_GLSC2_glFramebufferTexture2D_info = {
     .name = "glFramebufferTexture2D",
-    .doc = "glFramebufferTexture2D(target, attachment, textarget, texture, level) -> None",
+    .doc = "glFramebufferTexture2D(target: GLenum, attachment: GLenum, textarget: GLenum, texture: GLuint, level: GLint) -> None",
     .text_signature = "($module, target, attachment, textarget, texture, level, /)",
     .arg_names = pygl_GLSC2_glFramebufferTexture2D_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1253,7 +1253,7 @@ _fail:
 static const char *const pygl_GLSC2_glFrontFace_args[] = {"mode"};
 static const PyGLCommand pygl_GLSC2_glFrontFace_info = {
     .name = "glFrontFace",
-    .doc = "glFrontFace(mode) -> None",
+    .doc = "glFrontFace(mode: GLenum) -> None",
     .text_signature = "($module, mode, /)",
     .arg_names = pygl_GLSC2_glFrontFace_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1288,7 +1288,7 @@ _fail:
 static const char *const pygl_GLSC2_glGenBuffers_args[] = {"n", "buffers"};
 static const PyGLCommand pygl_GLSC2_glGenBuffers_info = {
     .name = "glGenBuffers",
-    .doc = "glGenBuffers(n) -> buffers",
+    .doc = "glGenBuffers(n: GLsizei) -> buffers: GLuint[]",
     .text_signature = "($module, n, buffers=None, /)",
     .arg_names = pygl_GLSC2_glGenBuffers_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1328,7 +1328,7 @@ _fail:
 static const char *const pygl_GLSC2_glGenFramebuffers_args[] = {"n", "framebuffers"};
 static const PyGLCommand pygl_GLSC2_glGenFramebuffers_info = {
     .name = "glGenFramebuffers",
-    .doc = "glGenFramebuffers(n) -> framebuffers",
+    .doc = "glGenFramebuffers(n: GLsizei) -> framebuffers: GLuint[]",
     .text_signature = "($module, n, framebuffers=None, /)",
     .arg_names = pygl_GLSC2_glGenFramebuffers_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1368,7 +1368,7 @@ _fail:
 static const char *const pygl_GLSC2_glGenRenderbuffers_args[] = {"n", "renderbuffers"};
 static const PyGLCommand pygl_GLSC2_glGenRenderbuffers_info = {
     .name = "glGenRenderbuffers",
-    .doc = "glGenRenderbuffers(n) -> renderbuffers",
+    .doc = "glGenRenderbuffers(n: GLsizei) -> renderbuffers: GLuint[]",
     .text_signature = "($module, n, renderbuffers=None, /)",
     .arg_names = pygl_GLSC2_glGenRenderbuffers_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1408,7 +1408,7 @@ _fail:
 static const char *const pygl_GLSC2_glGenTextures_args[] = {"n", "textures"};
 static const PyGLCommand pygl_GLSC2_glGenTextures_info = {
     .name = "glGenTextures",
-    .doc = "glGenTextures(n) -> textures",
+    .doc = "glGenTextures(n: GLsizei) -> textures: GLuint[]",
     .text_signature = "($module, n, textures=None, /)",
     .arg_names = pygl_GLSC2_glGenTextures_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1448,7 +1448,7 @@ _fail:
 static const char *const pygl_GLSC2_glGenerateMipmap_args[] = {"target"};
 static const PyGLCommand pygl_GLSC2_glGenerateMipmap_info = {
     .name = "glGenerateMipmap",
-    .doc = "glGenerateMipmap(target) -> None",
+    .doc = "glGenerateMipmap(target: GLenum) -> None",
     .text_signature = "($module, target, /)",
     .arg_names = pygl_GLSC2_glGenerateMipmap_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1483,7 +1483,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetAttribLocation_args[] = {"program", "name"};
 static const PyGLCommand pygl_GLSC2_glGetAttribLocation_info = {
     .name = "glGetAttribLocation",
-    .doc = "glGetAttribLocation(program, name) -> GLint",
+    .doc = "glGetAttribLocation(program: GLuint, name: GLchar[]) -> GLint",
     .text_signature = "($module, program, name, /)",
     .arg_names = pygl_GLSC2_glGetAttribLocation_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1523,7 +1523,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetBooleanv_args[] = {"pname", "data"};
 static const PyGLCommand pygl_GLSC2_glGetBooleanv_info = {
     .name = "glGetBooleanv",
-    .doc = "glGetBooleanv(pname) -> data",
+    .doc = "glGetBooleanv(pname: GLenum) -> data: GLboolean[]",
     .text_signature = "($module, pname, data=None, /)",
     .arg_names = pygl_GLSC2_glGetBooleanv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1563,7 +1563,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetBufferParameteriv_args[] = {"target", "pname", "params"};
 static const PyGLCommand pygl_GLSC2_glGetBufferParameteriv_info = {
     .name = "glGetBufferParameteriv",
-    .doc = "glGetBufferParameteriv(target, pname) -> params",
+    .doc = "glGetBufferParameteriv(target: GLenum, pname: GLenum) -> params: GLint[]",
     .text_signature = "($module, target, pname, params=None, /)",
     .arg_names = pygl_GLSC2_glGetBufferParameteriv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1637,7 +1637,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetFloatv_args[] = {"pname", "data"};
 static const PyGLCommand pygl_GLSC2_glGetFloatv_info = {
     .name = "glGetFloatv",
-    .doc = "glGetFloatv(pname) -> data",
+    .doc = "glGetFloatv(pname: GLenum) -> data: GLfloat[]",
     .text_signature = "($module, pname, data=None, /)",
     .arg_names = pygl_GLSC2_glGetFloatv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1677,7 +1677,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetFramebufferAttachmentParameteriv_args[] = {"target", "attachment", "pname", "params"};
 static const PyGLCommand pygl_GLSC2_glGetFramebufferAttachmentParameteriv_info = {
     .name = "glGetFramebufferAttachmentParameteriv",
-    .doc = "glGetFramebufferAttachmentParameteriv(target, attachment, pname) -> params",
+    .doc = "glGetFramebufferAttachmentParameteriv(target: GLenum, attachment: GLenum, pname: GLenum) -> params: GLint[]",
     .text_signature = "($module, target, attachment, pname, params=None, /)",
     .arg_names = pygl_GLSC2_glGetFramebufferAttachmentParameteriv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1752,7 +1752,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetIntegerv_args[] = {"pname", "data"};
 static const PyGLCommand pygl_GLSC2_glGetIntegerv_info = {
     .name = "glGetIntegerv",
-    .doc = "glGetIntegerv(pname) -> data",
+    .doc = "glGetIntegerv(pname: GLenum) -> data: GLint[]",
     .text_signature = "($module, pname, data=None, /)",
     .arg_names = pygl_GLSC2_glGetIntegerv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1792,7 +1792,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetProgramiv_args[] = {"program", "pname", "params"};
 static const PyGLCommand pygl_GLSC2_glGetProgramiv_info = {
     .name = "glGetProgramiv",
-    .doc = "glGetProgramiv(program, pname) -> params",
+    .doc = "glGetProgramiv(program: GLuint, pname: GLenum) -> params: GLint[]",
     .text_signature = "($module, program, pname, params=None, /)",
     .arg_names = pygl_GLSC2_glGetProgramiv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1833,7 +1833,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetRenderbufferParameteriv_args[] = {"target", "pname", "params"};
 static const PyGLCommand pygl_GLSC2_glGetRenderbufferParameteriv_info = {
     .name = "glGetRenderbufferParameteriv",
-    .doc = "glGetRenderbufferParameteriv(target, pname) -> params",
+    .doc = "glGetRenderbufferParameteriv(target: GLenum, pname: GLenum) -> params: GLint[]",
     .text_signature = "($module, target, pname, params=None, /)",
     .arg_names = pygl_GLSC2_glGetRenderbufferParameteriv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1874,7 +1874,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetString_args[] = {"name"};
 static const PyGLCommand pygl_GLSC2_glGetString_info = {
     .name = "glGetString",
-    .doc = "glGetString(name) -> GLubyte",
+    .doc = "glGetString(name: GLenum) -> GLubyte",
     .text_signature = "($module, name, /)",
     .arg_names = pygl_GLSC2_glGetString_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1909,7 +1909,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetTexParameterfv_args[] = {"target", "pname", "params"};
 static const PyGLCommand pygl_GLSC2_glGetTexParameterfv_info = {
     .name = "glGetTexParameterfv",
-    .doc = "glGetTexParameterfv(target, pname) -> params",
+    .doc = "glGetTexParameterfv(target: GLenum, pname: GLenum) -> params: GLfloat[]",
     .text_signature = "($module, target, pname, params=None, /)",
     .arg_names = pygl_GLSC2_glGetTexParameterfv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1950,7 +1950,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetTexParameteriv_args[] = {"target", "pname", "params"};
 static const PyGLCommand pygl_GLSC2_glGetTexParameteriv_info = {
     .name = "glGetTexParameteriv",
-    .doc = "glGetTexParameteriv(target, pname) -> params",
+    .doc = "glGetTexParameteriv(target: GLenum, pname: GLenum) -> params: GLint[]",
     .text_signature = "($module, target, pname, params=None, /)",
     .arg_names = pygl_GLSC2_glGetTexParameteriv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -1991,7 +1991,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetUniformLocation_args[] = {"program", "name"};
 static const PyGLCommand pygl_GLSC2_glGetUniformLocation_info = {
     .name = "glGetUniformLocation",
-    .doc = "glGetUniformLocation(program, name) -> GLint",
+    .doc = "glGetUniformLocation(program: GLuint, name: GLchar[]) -> GLint",
     .text_signature = "($module, program, name, /)",
     .arg_names = pygl_GLSC2_glGetUniformLocation_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2031,7 +2031,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetVertexAttribPointerv_args[] = {"index", "pname", "pointer"};
 static const PyGLCommand pygl_GLSC2_glGetVertexAttribPointerv_info = {
     .name = "glGetVertexAttribPointerv",
-    .doc = "glGetVertexAttribPointerv(index, pname) -> pointer",
+    .doc = "glGetVertexAttribPointerv(index: GLuint, pname: GLenum) -> pointer: void[][]",
     .text_signature = "($module, index, pname, pointer=None, /)",
     .arg_names = pygl_GLSC2_glGetVertexAttribPointerv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2072,7 +2072,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetVertexAttribfv_args[] = {"index", "pname", "params"};
 static const PyGLCommand pygl_GLSC2_glGetVertexAttribfv_info = {
     .name = "glGetVertexAttribfv",
-    .doc = "glGetVertexAttribfv(index, pname) -> params",
+    .doc = "glGetVertexAttribfv(index: GLuint, pname: GLenum) -> params: GLfloat[]",
     .text_signature = "($module, index, pname, params=None, /)",
     .arg_names = pygl_GLSC2_glGetVertexAttribfv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2113,7 +2113,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetVertexAttribiv_args[] = {"index", "pname", "params"};
 static const PyGLCommand pygl_GLSC2_glGetVertexAttribiv_info = {
     .name = "glGetVertexAttribiv",
-    .doc = "glGetVertexAttribiv(index, pname) -> params",
+    .doc = "glGetVertexAttribiv(index: GLuint, pname: GLenum) -> params: GLint[]",
     .text_signature = "($module, index, pname, params=None, /)",
     .arg_names = pygl_GLSC2_glGetVertexAttribiv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2154,7 +2154,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetnUniformfv_args[] = {"program", "location", "bufSize", "params"};
 static const PyGLCommand pygl_GLSC2_glGetnUniformfv_info = {
     .name = "glGetnUniformfv",
-    .doc = "glGetnUniformfv(program, location, bufSize, params) -> None",
+    .doc = "glGetnUniformfv(program: GLuint, location: GLint, bufSize: GLsizei, params: GLfloat[]) -> None",
     .text_signature = "($module, program, location, bufSize, params, /)",
     .arg_names = pygl_GLSC2_glGetnUniformfv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2195,7 +2195,7 @@ _fail:
 static const char *const pygl_GLSC2_glGetnUniformiv_args[] = {"program", "location", "bufSize", "params"};
 static const PyGLCommand pygl_GLSC2_glGetnUniformiv_info = {
     .name = "glGetnUniformiv",
-    .doc = "glGetnUniformiv(program, location, bufSize, params) -> None",
+    .doc = "glGetnUniformiv(program: GLuint, location: GLint, bufSize: GLsizei, params: GLint[]) -> None",
     .text_signature = "($module, program, location, bufSize, params, /)",
     .arg_names = pygl_GLSC2_glGetnUniformiv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2236,7 +2236,7 @@ _fail:
 static const char *const pygl_GLSC2_glHint_args[] = {"target", "mode"};
 static const PyGLCommand pygl_GLSC2_glHint_info = {
     .name = "glHint",
-    .doc = "glHint(target, mode) -> None",
+    .doc = "glHint(target: GLenum, mode: GLenum) -> None",
     .text_signature = "($module, target, mode, /)",
     .arg_names = pygl_GLSC2_glHint_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2272,7 +2272,7 @@ _fail:
 static const char *const pygl_GLSC2_glIsEnabled_args[] = {"cap"};
 static const PyGLCommand pygl_GLSC2_glIsEnabled_info = {
     .name = "glIsEnabled",
-    .doc = "glIsEnabled(cap) -> GLboolean",
+    .doc = "glIsEnabled(cap: GLenum) -> GLboolean",
     .text_signature = "($module, cap, /)",
     .arg_names = pygl_GLSC2_glIsEnabled_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2307,7 +2307,7 @@ _fail:
 static const char *const pygl_GLSC2_glLineWidth_args[] = {"width"};
 static const PyGLCommand pygl_GLSC2_glLineWidth_info = {
     .name = "glLineWidth",
-    .doc = "glLineWidth(width) -> None",
+    .doc = "glLineWidth(width: GLfloat) -> None",
     .text_signature = "($module, width, /)",
     .arg_names = pygl_GLSC2_glLineWidth_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2342,7 +2342,7 @@ _fail:
 static const char *const pygl_GLSC2_glPixelStorei_args[] = {"pname", "param"};
 static const PyGLCommand pygl_GLSC2_glPixelStorei_info = {
     .name = "glPixelStorei",
-    .doc = "glPixelStorei(pname, param) -> None",
+    .doc = "glPixelStorei(pname: GLenum, param: GLint) -> None",
     .text_signature = "($module, pname, param, /)",
     .arg_names = pygl_GLSC2_glPixelStorei_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2378,7 +2378,7 @@ _fail:
 static const char *const pygl_GLSC2_glPolygonOffset_args[] = {"factor", "units"};
 static const PyGLCommand pygl_GLSC2_glPolygonOffset_info = {
     .name = "glPolygonOffset",
-    .doc = "glPolygonOffset(factor, units) -> None",
+    .doc = "glPolygonOffset(factor: GLfloat, units: GLfloat) -> None",
     .text_signature = "($module, factor, units, /)",
     .arg_names = pygl_GLSC2_glPolygonOffset_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2414,7 +2414,7 @@ _fail:
 static const char *const pygl_GLSC2_glProgramBinary_args[] = {"program", "binaryFormat", "binary", "length"};
 static const PyGLCommand pygl_GLSC2_glProgramBinary_info = {
     .name = "glProgramBinary",
-    .doc = "glProgramBinary(program, binaryFormat, binary, length) -> None",
+    .doc = "glProgramBinary(program: GLuint, binaryFormat: GLenum, binary: void[], length: GLsizei) -> None",
     .text_signature = "($module, program, binaryFormat, binary, length, /)",
     .arg_names = pygl_GLSC2_glProgramBinary_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2455,7 +2455,7 @@ _fail:
 static const char *const pygl_GLSC2_glReadnPixels_args[] = {"x", "y", "width", "height", "format", "type", "bufSize", "data"};
 static const PyGLCommand pygl_GLSC2_glReadnPixels_info = {
     .name = "glReadnPixels",
-    .doc = "glReadnPixels(x, y, width, height, format, type, bufSize, data) -> None",
+    .doc = "glReadnPixels(x: GLint, y: GLint, width: GLsizei, height: GLsizei, format: GLenum, type: GLenum, bufSize: GLsizei, data: void[]) -> None",
     .text_signature = "($module, x, y, width, height, format, type, bufSize, data, /)",
     .arg_names = pygl_GLSC2_glReadnPixels_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2500,7 +2500,7 @@ _fail:
 static const char *const pygl_GLSC2_glRenderbufferStorage_args[] = {"target", "internalformat", "width", "height"};
 static const PyGLCommand pygl_GLSC2_glRenderbufferStorage_info = {
     .name = "glRenderbufferStorage",
-    .doc = "glRenderbufferStorage(target, internalformat, width, height) -> None",
+    .doc = "glRenderbufferStorage(target: GLenum, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None",
     .text_signature = "($module, target, internalformat, width, height, /)",
     .arg_names = pygl_GLSC2_glRenderbufferStorage_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2538,7 +2538,7 @@ _fail:
 static const char *const pygl_GLSC2_glSampleCoverage_args[] = {"value", "invert"};
 static const PyGLCommand pygl_GLSC2_glSampleCoverage_info = {
     .name = "glSampleCoverage",
-    .doc = "glSampleCoverage(value, invert) -> None",
+    .doc = "glSampleCoverage(value: GLfloat, invert: GLboolean) -> None",
     .text_signature = "($module, value, invert, /)",
     .arg_names = pygl_GLSC2_glSampleCoverage_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2574,7 +2574,7 @@ _fail:
 static const char *const pygl_GLSC2_glScissor_args[] = {"x", "y", "width", "height"};
 static const PyGLCommand pygl_GLSC2_glScissor_info = {
     .name = "glScissor",
-    .doc = "glScissor(x, y, width, height) -> None",
+    .doc = "glScissor(x: GLint, y: GLint, width: GLsizei, height: GLsizei) -> None",
     .text_signature = "($module, x, y, width, height, /)",
     .arg_names = pygl_GLSC2_glScissor_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2612,7 +2612,7 @@ _fail:
 static const char *const pygl_GLSC2_glStencilFunc_args[] = {"func", "ref", "mask"};
 static const PyGLCommand pygl_GLSC2_glStencilFunc_info = {
     .name = "glStencilFunc",
-    .doc = "glStencilFunc(func, ref, mask) -> None",
+    .doc = "glStencilFunc(func: GLenum, ref: GLint, mask: GLuint) -> None",
     .text_signature = "($module, func, ref, mask, /)",
     .arg_names = pygl_GLSC2_glStencilFunc_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2649,7 +2649,7 @@ _fail:
 static const char *const pygl_GLSC2_glStencilFuncSeparate_args[] = {"face", "func", "ref", "mask"};
 static const PyGLCommand pygl_GLSC2_glStencilFuncSeparate_info = {
     .name = "glStencilFuncSeparate",
-    .doc = "glStencilFuncSeparate(face, func, ref, mask) -> None",
+    .doc = "glStencilFuncSeparate(face: GLenum, func: GLenum, ref: GLint, mask: GLuint) -> None",
     .text_signature = "($module, face, func, ref, mask, /)",
     .arg_names = pygl_GLSC2_glStencilFuncSeparate_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2687,7 +2687,7 @@ _fail:
 static const char *const pygl_GLSC2_glStencilMask_args[] = {"mask"};
 static const PyGLCommand pygl_GLSC2_glStencilMask_info = {
     .name = "glStencilMask",
-    .doc = "glStencilMask(mask) -> None",
+    .doc = "glStencilMask(mask: GLuint) -> None",
     .text_signature = "($module, mask, /)",
     .arg_names = pygl_GLSC2_glStencilMask_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2722,7 +2722,7 @@ _fail:
 static const char *const pygl_GLSC2_glStencilMaskSeparate_args[] = {"face", "mask"};
 static const PyGLCommand pygl_GLSC2_glStencilMaskSeparate_info = {
     .name = "glStencilMaskSeparate",
-    .doc = "glStencilMaskSeparate(face, mask) -> None",
+    .doc = "glStencilMaskSeparate(face: GLenum, mask: GLuint) -> None",
     .text_signature = "($module, face, mask, /)",
     .arg_names = pygl_GLSC2_glStencilMaskSeparate_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2758,7 +2758,7 @@ _fail:
 static const char *const pygl_GLSC2_glStencilOp_args[] = {"fail", "zfail", "zpass"};
 static const PyGLCommand pygl_GLSC2_glStencilOp_info = {
     .name = "glStencilOp",
-    .doc = "glStencilOp(fail, zfail, zpass) -> None",
+    .doc = "glStencilOp(fail: GLenum, zfail: GLenum, zpass: GLenum) -> None",
     .text_signature = "($module, fail, zfail, zpass, /)",
     .arg_names = pygl_GLSC2_glStencilOp_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2795,7 +2795,7 @@ _fail:
 static const char *const pygl_GLSC2_glStencilOpSeparate_args[] = {"face", "sfail", "dpfail", "dppass"};
 static const PyGLCommand pygl_GLSC2_glStencilOpSeparate_info = {
     .name = "glStencilOpSeparate",
-    .doc = "glStencilOpSeparate(face, sfail, dpfail, dppass) -> None",
+    .doc = "glStencilOpSeparate(face: GLenum, sfail: GLenum, dpfail: GLenum, dppass: GLenum) -> None",
     .text_signature = "($module, face, sfail, dpfail, dppass, /)",
     .arg_names = pygl_GLSC2_glStencilOpSeparate_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2833,7 +2833,7 @@ _fail:
 static const char *const pygl_GLSC2_glTexParameterf_args[] = {"target", "pname", "param"};
 static const PyGLCommand pygl_GLSC2_glTexParameterf_info = {
     .name = "glTexParameterf",
-    .doc = "glTexParameterf(target, pname, param) -> None",
+    .doc = "glTexParameterf(target: GLenum, pname: GLenum, param: GLfloat) -> None",
     .text_signature = "($module, target, pname, param, /)",
     .arg_names = pygl_GLSC2_glTexParameterf_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2870,7 +2870,7 @@ _fail:
 static const char *const pygl_GLSC2_glTexParameterfv_args[] = {"target", "pname", "params"};
 static const PyGLCommand pygl_GLSC2_glTexParameterfv_info = {
     .name = "glTexParameterfv",
-    .doc = "glTexParameterfv(target, pname, params) -> None",
+    .doc = "glTexParameterfv(target: GLenum, pname: GLenum, params: GLfloat[]) -> None",
     .text_signature = "($module, target, pname, params, /)",
     .arg_names = pygl_GLSC2_glTexParameterfv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2910,7 +2910,7 @@ _fail:
 static const char *const pygl_GLSC2_glTexParameteri_args[] = {"target", "pname", "param"};
 static const PyGLCommand pygl_GLSC2_glTexParameteri_info = {
     .name = "glTexParameteri",
-    .doc = "glTexParameteri(target, pname, param) -> None",
+    .doc = "glTexParameteri(target: GLenum, pname: GLenum, param: GLint) -> None",
     .text_signature = "($module, target, pname, param, /)",
     .arg_names = pygl_GLSC2_glTexParameteri_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2947,7 +2947,7 @@ _fail:
 static const char *const pygl_GLSC2_glTexParameteriv_args[] = {"target", "pname", "params"};
 static const PyGLCommand pygl_GLSC2_glTexParameteriv_info = {
     .name = "glTexParameteriv",
-    .doc = "glTexParameteriv(target, pname, params) -> None",
+    .doc = "glTexParameteriv(target: GLenum, pname: GLenum, params: GLint[]) -> None",
     .text_signature = "($module, target, pname, params, /)",
     .arg_names = pygl_GLSC2_glTexParameteriv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -2987,7 +2987,7 @@ _fail:
 static const char *const pygl_GLSC2_glTexStorage2D_args[] = {"target", "levels", "internalformat", "width", "height"};
 static const PyGLCommand pygl_GLSC2_glTexStorage2D_info = {
     .name = "glTexStorage2D",
-    .doc = "glTexStorage2D(target, levels, internalformat, width, height) -> None",
+    .doc = "glTexStorage2D(target: GLenum, levels: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None",
     .text_signature = "($module, target, levels, internalformat, width, height, /)",
     .arg_names = pygl_GLSC2_glTexStorage2D_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3026,7 +3026,7 @@ _fail:
 static const char *const pygl_GLSC2_glTexSubImage2D_args[] = {"target", "level", "xoffset", "yoffset", "width", "height", "format", "type", "pixels"};
 static const PyGLCommand pygl_GLSC2_glTexSubImage2D_info = {
     .name = "glTexSubImage2D",
-    .doc = "glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels) -> None",
+    .doc = "glTexSubImage2D(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: GLenum, type: GLenum, pixels: void[]) -> None",
     .text_signature = "($module, target, level, xoffset, yoffset, width, height, format, type, pixels, /)",
     .arg_names = pygl_GLSC2_glTexSubImage2D_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3072,7 +3072,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform1f_args[] = {"location", "v0"};
 static const PyGLCommand pygl_GLSC2_glUniform1f_info = {
     .name = "glUniform1f",
-    .doc = "glUniform1f(location, v0) -> None",
+    .doc = "glUniform1f(location: GLint, v0: GLfloat) -> None",
     .text_signature = "($module, location, v0, /)",
     .arg_names = pygl_GLSC2_glUniform1f_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3108,7 +3108,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform1fv_args[] = {"location", "count", "value"};
 static const PyGLCommand pygl_GLSC2_glUniform1fv_info = {
     .name = "glUniform1fv",
-    .doc = "glUniform1fv(location, count, value) -> None",
+    .doc = "glUniform1fv(location: GLint, count: GLsizei, value: GLfloat[]) -> None",
     .text_signature = "($module, location, count, value, /)",
     .arg_names = pygl_GLSC2_glUniform1fv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3148,7 +3148,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform1i_args[] = {"location", "v0"};
 static const PyGLCommand pygl_GLSC2_glUniform1i_info = {
     .name = "glUniform1i",
-    .doc = "glUniform1i(location, v0) -> None",
+    .doc = "glUniform1i(location: GLint, v0: GLint) -> None",
     .text_signature = "($module, location, v0, /)",
     .arg_names = pygl_GLSC2_glUniform1i_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3184,7 +3184,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform1iv_args[] = {"location", "count", "value"};
 static const PyGLCommand pygl_GLSC2_glUniform1iv_info = {
     .name = "glUniform1iv",
-    .doc = "glUniform1iv(location, count, value) -> None",
+    .doc = "glUniform1iv(location: GLint, count: GLsizei, value: GLint[]) -> None",
     .text_signature = "($module, location, count, value, /)",
     .arg_names = pygl_GLSC2_glUniform1iv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3224,7 +3224,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform2f_args[] = {"location", "v0", "v1"};
 static const PyGLCommand pygl_GLSC2_glUniform2f_info = {
     .name = "glUniform2f",
-    .doc = "glUniform2f(location, v0, v1) -> None",
+    .doc = "glUniform2f(location: GLint, v0: GLfloat, v1: GLfloat) -> None",
     .text_signature = "($module, location, v0, v1, /)",
     .arg_names = pygl_GLSC2_glUniform2f_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3261,7 +3261,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform2fv_args[] = {"location", "count", "value"};
 static const PyGLCommand pygl_GLSC2_glUniform2fv_info = {
     .name = "glUniform2fv",
-    .doc = "glUniform2fv(location, count, value) -> None",
+    .doc = "glUniform2fv(location: GLint, count: GLsizei, value: GLfloat[]) -> None",
     .text_signature = "($module, location, count, value, /)",
     .arg_names = pygl_GLSC2_glUniform2fv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3301,7 +3301,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform2i_args[] = {"location", "v0", "v1"};
 static const PyGLCommand pygl_GLSC2_glUniform2i_info = {
     .name = "glUniform2i",
-    .doc = "glUniform2i(location, v0, v1) -> None",
+    .doc = "glUniform2i(location: GLint, v0: GLint, v1: GLint) -> None",
     .text_signature = "($module, location, v0, v1, /)",
     .arg_names = pygl_GLSC2_glUniform2i_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3338,7 +3338,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform2iv_args[] = {"location", "count", "value"};
 static const PyGLCommand pygl_GLSC2_glUniform2iv_info = {
     .name = "glUniform2iv",
-    .doc = "glUniform2iv(location, count, value) -> None",
+    .doc = "glUniform2iv(location: GLint, count: GLsizei, value: GLint[]) -> None",
     .text_signature = "($module, location, count, value, /)",
     .arg_names = pygl_GLSC2_glUniform2iv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3378,7 +3378,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform3f_args[] = {"location", "v0", "v1", "v2"};
 static const PyGLCommand pygl_GLSC2_glUniform3f_info = {
     .name = "glUniform3f",
-    .doc = "glUniform3f(location, v0, v1, v2) -> None",
+    .doc = "glUniform3f(location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat) -> None",
     .text_signature = "($module, location, v0, v1, v2, /)",
     .arg_names = pygl_GLSC2_glUniform3f_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3416,7 +3416,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform3fv_args[] = {"location", "count", "value"};
 static const PyGLCommand pygl_GLSC2_glUniform3fv_info = {
     .name = "glUniform3fv",
-    .doc = "glUniform3fv(location, count, value) -> None",
+    .doc = "glUniform3fv(location: GLint, count: GLsizei, value: GLfloat[]) -> None",
     .text_signature = "($module, location, count, value, /)",
     .arg_names = pygl_GLSC2_glUniform3fv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3456,7 +3456,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform3i_args[] = {"location", "v0", "v1", "v2"};
 static const PyGLCommand pygl_GLSC2_glUniform3i_info = {
     .name = "glUniform3i",
-    .doc = "glUniform3i(location, v0, v1, v2) -> None",
+    .doc = "glUniform3i(location: GLint, v0: GLint, v1: GLint, v2: GLint) -> None",
     .text_signature = "($module, location, v0, v1, v2, /)",
     .arg_names = pygl_GLSC2_glUniform3i_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3494,7 +3494,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform3iv_args[] = {"location", "count", "value"};
 static const PyGLCommand pygl_GLSC2_glUniform3iv_info = {
     .name = "glUniform3iv",
-    .doc = "glUniform3iv(location, count, value) -> None",
+    .doc = "glUniform3iv(location: GLint, count: GLsizei, value: GLint[]) -> None",
     .text_signature = "($module, location, count, value, /)",
     .arg_names = pygl_GLSC2_glUniform3iv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3534,7 +3534,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform4f_args[] = {"location", "v0", "v1", "v2", "v3"};
 static const PyGLCommand pygl_GLSC2_glUniform4f_info = {
     .name = "glUniform4f",
-    .doc = "glUniform4f(location, v0, v1, v2, v3) -> None",
+    .doc = "glUniform4f(location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat, v3: GLfloat) -> None",
     .text_signature = "($module, location, v0, v1, v2, v3, /)",
     .arg_names = pygl_GLSC2_glUniform4f_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3573,7 +3573,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform4fv_args[] = {"location", "count", "value"};
 static const PyGLCommand pygl_GLSC2_glUniform4fv_info = {
     .name = "glUniform4fv",
-    .doc = "glUniform4fv(location, count, value) -> None",
+    .doc = "glUniform4fv(location: GLint, count: GLsizei, value: GLfloat[]) -> None",
     .text_signature = "($module, location, count, value, /)",
     .arg_names = pygl_GLSC2_glUniform4fv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3613,7 +3613,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform4i_args[] = {"location", "v0", "v1", "v2", "v3"};
 static const PyGLCommand pygl_GLSC2_glUniform4i_info = {
     .name = "glUniform4i",
-    .doc = "glUniform4i(location, v0, v1, v2, v3) -> None",
+    .doc = "glUniform4i(location: GLint, v0: GLint, v1: GLint, v2: GLint, v3: GLint) -> None",
     .text_signature = "($module, location, v0, v1, v2, v3, /)",
     .arg_names = pygl_GLSC2_glUniform4i_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3652,7 +3652,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniform4iv_args[] = {"location", "count", "value"};
 static const PyGLCommand pygl_GLSC2_glUniform4iv_info = {
     .name = "glUniform4iv",
-    .doc = "glUniform4iv(location, count, value) -> None",
+    .doc = "glUniform4iv(location: GLint, count: GLsizei, value: GLint[]) -> None",
     .text_signature = "($module, location, count, value, /)",
     .arg_names = pygl_GLSC2_glUniform4iv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3692,7 +3692,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniformMatrix2fv_args[] = {"location", "count", "transpose", "value"};
 static const PyGLCommand pygl_GLSC2_glUniformMatrix2fv_info = {
     .name = "glUniformMatrix2fv",
-    .doc = "glUniformMatrix2fv(location, count, transpose, value) -> None",
+    .doc = "glUniformMatrix2fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None",
     .text_signature = "($module, location, count, transpose, value, /)",
     .arg_names = pygl_GLSC2_glUniformMatrix2fv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3733,7 +3733,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniformMatrix3fv_args[] = {"location", "count", "transpose", "value"};
 static const PyGLCommand pygl_GLSC2_glUniformMatrix3fv_info = {
     .name = "glUniformMatrix3fv",
-    .doc = "glUniformMatrix3fv(location, count, transpose, value) -> None",
+    .doc = "glUniformMatrix3fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None",
     .text_signature = "($module, location, count, transpose, value, /)",
     .arg_names = pygl_GLSC2_glUniformMatrix3fv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3774,7 +3774,7 @@ _fail:
 static const char *const pygl_GLSC2_glUniformMatrix4fv_args[] = {"location", "count", "transpose", "value"};
 static const PyGLCommand pygl_GLSC2_glUniformMatrix4fv_info = {
     .name = "glUniformMatrix4fv",
-    .doc = "glUniformMatrix4fv(location, count, transpose, value) -> None",
+    .doc = "glUniformMatrix4fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None",
     .text_signature = "($module, location, count, transpose, value, /)",
     .arg_names = pygl_GLSC2_glUniformMatrix4fv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3815,7 +3815,7 @@ _fail:
 static const char *const pygl_GLSC2_glUseProgram_args[] = {"program"};
 static const PyGLCommand pygl_GLSC2_glUseProgram_info = {
     .name = "glUseProgram",
-    .doc = "glUseProgram(program) -> None",
+    .doc = "glUseProgram(program: GLuint) -> None",
     .text_signature = "($module, program, /)",
     .arg_names = pygl_GLSC2_glUseProgram_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3850,7 +3850,7 @@ _fail:
 static const char *const pygl_GLSC2_glVertexAttrib1f_args[] = {"index", "x"};
 static const PyGLCommand pygl_GLSC2_glVertexAttrib1f_info = {
     .name = "glVertexAttrib1f",
-    .doc = "glVertexAttrib1f(index, x) -> None",
+    .doc = "glVertexAttrib1f(index: GLuint, x: GLfloat) -> None",
     .text_signature = "($module, index, x, /)",
     .arg_names = pygl_GLSC2_glVertexAttrib1f_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3886,7 +3886,7 @@ _fail:
 static const char *const pygl_GLSC2_glVertexAttrib1fv_args[] = {"index", "v"};
 static const PyGLCommand pygl_GLSC2_glVertexAttrib1fv_info = {
     .name = "glVertexAttrib1fv",
-    .doc = "glVertexAttrib1fv(index, v) -> None",
+    .doc = "glVertexAttrib1fv(index: GLuint, v: GLfloat[]) -> None",
     .text_signature = "($module, index, v, /)",
     .arg_names = pygl_GLSC2_glVertexAttrib1fv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3925,7 +3925,7 @@ _fail:
 static const char *const pygl_GLSC2_glVertexAttrib2f_args[] = {"index", "x", "y"};
 static const PyGLCommand pygl_GLSC2_glVertexAttrib2f_info = {
     .name = "glVertexAttrib2f",
-    .doc = "glVertexAttrib2f(index, x, y) -> None",
+    .doc = "glVertexAttrib2f(index: GLuint, x: GLfloat, y: GLfloat) -> None",
     .text_signature = "($module, index, x, y, /)",
     .arg_names = pygl_GLSC2_glVertexAttrib2f_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -3962,7 +3962,7 @@ _fail:
 static const char *const pygl_GLSC2_glVertexAttrib2fv_args[] = {"index", "v"};
 static const PyGLCommand pygl_GLSC2_glVertexAttrib2fv_info = {
     .name = "glVertexAttrib2fv",
-    .doc = "glVertexAttrib2fv(index, v) -> None",
+    .doc = "glVertexAttrib2fv(index: GLuint, v: GLfloat[]) -> None",
     .text_signature = "($module, index, v, /)",
     .arg_names = pygl_GLSC2_glVertexAttrib2fv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -4001,7 +4001,7 @@ _fail:
 static const char *const pygl_GLSC2_glVertexAttrib3f_args[] = {"index", "x", "y", "z"};
 static const PyGLCommand pygl_GLSC2_glVertexAttrib3f_info = {
     .name = "glVertexAttrib3f",
-    .doc = "glVertexAttrib3f(index, x, y, z) -> None",
+    .doc = "glVertexAttrib3f(index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat) -> None",
     .text_signature = "($module, index, x, y, z, /)",
     .arg_names = pygl_GLSC2_glVertexAttrib3f_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -4039,7 +4039,7 @@ _fail:
 static const char *const pygl_GLSC2_glVertexAttrib3fv_args[] = {"index", "v"};
 static const PyGLCommand pygl_GLSC2_glVertexAttrib3fv_info = {
     .name = "glVertexAttrib3fv",
-    .doc = "glVertexAttrib3fv(index, v) -> None",
+    .doc = "glVertexAttrib3fv(index: GLuint, v: GLfloat[]) -> None",
     .text_signature = "($module, index, v, /)",
     .arg_names = pygl_GLSC2_glVertexAttrib3fv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -4078,7 +4078,7 @@ _fail:
 static const char *const pygl_GLSC2_glVertexAttrib4f_args[] = {"index", "x", "y", "z", "w"};
 static const PyGLCommand pygl_GLSC2_glVertexAttrib4f_info = {
     .name = "glVertexAttrib4f",
-    .doc = "glVertexAttrib4f(index, x, y, z, w) -> None",
+    .doc = "glVertexAttrib4f(index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) -> None",
     .text_signature = "($module, index, x, y, z, w, /)",
     .arg_names = pygl_GLSC2_glVertexAttrib4f_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -4117,7 +4117,7 @@ _fail:
 static const char *const pygl_GLSC2_glVertexAttrib4fv_args[] = {"index", "v"};
 static const PyGLCommand pygl_GLSC2_glVertexAttrib4fv_info = {
     .name = "glVertexAttrib4fv",
-    .doc = "glVertexAttrib4fv(index, v) -> None",
+    .doc = "glVertexAttrib4fv(index: GLuint, v: GLfloat[]) -> None",
     .text_signature = "($module, index, v, /)",
     .arg_names = pygl_GLSC2_glVertexAttrib4fv_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -4156,7 +4156,7 @@ _fail:
 static const char *const pygl_GLSC2_glVertexAttribPointer_args[] = {"index", "size", "type", "normalized", "stride", "pointer"};
 static const PyGLCommand pygl_GLSC2_glVertexAttribPointer_info = {
     .name = "glVertexAttribPointer",
-    .doc = "glVertexAttribPointer(index, size, type, normalized, stride, pointer) -> None",
+    .doc = "glVertexAttribPointer(index: GLuint, size: GLint, type: GLenum, normalized: GLboolean, stride: GLsizei, pointer: void[]) -> None",
     .text_signature = "($module, index, size, type, normalized, stride, pointer, /)",
     .arg_names = pygl_GLSC2_glVertexAttribPointer_args,
     .extension = "GLSC2_SC_VERSION_2_0",
@@ -4199,7 +4199,7 @@ _fail:
 static const char *const pygl_GLSC2_glViewport_args[] = {"x", "y", "width", "height"};
 static const PyGLCommand pygl_GLSC2_glViewport_info = {
     .name = "glViewport",
-    .doc = "glViewport(x, y, width, height) -> None",
+    .doc = "glViewport(x: GLint, y: GLint, width: GLsizei, height: GLsizei) -> None",
     .text_signature = "($module, x, y, width, height, /)",
     .arg_names = pygl_GLSC2_glViewport_args,
     .extension = "GLSC2_SC_VERSION_2_0",

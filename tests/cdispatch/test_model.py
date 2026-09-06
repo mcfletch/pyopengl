@@ -176,7 +176,13 @@ class TestCommand:
 
 
 class TestSignatureLine:
-    """Phase 8: buildable from the command record alone, no external source."""
+    """Phase 8: buildable from the command record alone, no external source.
+
+    The types are the registry's own -- ``GLenum`` where an argument takes an
+    enum, ``GLuint`` where it takes a name -- because that is the distinction a
+    caller makes and the one the man page they read next uses.  The ``.pyi``
+    stubs carry the Python types beside them, for a type checker.
+    """
 
     def test_void_return(self):
         command = model.Command(
@@ -187,7 +193,9 @@ class TestSignatureLine:
                 make_parameter('texture', 'GLuint'),
             ],
         )
-        assert command.signature_line() == 'glBindTexture(target, texture) -> None'
+        assert command.signature_line() == (
+            'glBindTexture(target: GLenum, texture: GLuint) -> None'
+        )
 
     def test_output_parameter_becomes_the_return(self):
         command = model.Command(
@@ -203,7 +211,46 @@ class TestSignatureLine:
                 ),
             ],
         )
-        assert command.signature_line() == 'glGenTextures(n) -> textures'
+        assert command.signature_line() == (
+            'glGenTextures(n: GLsizei) -> textures: GLuint[]'
+        )
+
+    def test_an_array_argument_says_it_is_an_array(self):
+        """``GLfloat[]`` rather than ``GLfloat``: the caller passes a sequence."""
+        command = model.Command(
+            name='glUniform4fv',
+            return_type=parse_type('void'),
+            parameters=[
+                make_parameter('location', 'GLint'),
+                make_parameter('count', 'GLsizei'),
+                make_parameter('value', 'const GLfloat *'),
+            ],
+        )
+        assert command.signature_line() == (
+            'glUniform4fv(location: GLint, count: GLsizei, value: GLfloat[])'
+            ' -> None'
+        )
+
+    def test_a_returned_value_keeps_its_own_type(self):
+        command = model.Command(
+            name='glCreateProgram',
+            return_type=parse_type('GLuint'),
+            parameters=[],
+        )
+        assert command.signature_line() == 'glCreateProgram() -> GLuint'
+
+    def test_a_list_of_strings_is_two_deep(self):
+        command = model.Command(
+            name='glShaderSource',
+            return_type=parse_type('void'),
+            parameters=[
+                make_parameter('shader', 'GLuint'),
+                make_parameter('string', 'const GLchar *const*'),
+            ],
+        )
+        assert command.signature_line() == (
+            'glShaderSource(shader: GLuint, string: GLchar[][]) -> None'
+        )
 
     def test_text_signature_is_a_valid_python_signature(self):
         command = model.Command(

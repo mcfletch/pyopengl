@@ -193,6 +193,20 @@ class Parameter:
         return self.name
 
     @property
+    def annotated(self):
+        """``name: type`` for the docstring, in the registry's type names.
+
+        A pointer is written ``[]`` per level of indirection, because what the
+        caller passes at each is a sequence: ``GLfloat[]`` an array of floats,
+        ``GLchar[][]`` a list of strings.
+        """
+        return '%s: %s%s' % (
+            self.name,
+            self.ctype.base,
+            '[]' * self.ctype.pointers,
+        )
+
+    @property
     def is_array(self):
         """True when the argument arrives as a buffer rather than a value."""
         return self.ctype.pointers > 0 and not self.is_string_pointer
@@ -295,9 +309,19 @@ class Command:
         return 1
 
     def signature_line(self):
-        """The docstring's first line, from the record alone."""
-        arguments = ', '.join(self.required_arguments)
-        outputs = [p.name for p in self.output_parameters]
+        """The docstring's first line, from the record alone.
+
+        Typed with the registry's own names, because ``GLenum`` and ``GLuint``
+        are the distinction a caller makes and ``int`` is not.  The ``.pyi``
+        stubs state the Python types for a type checker; this states what the
+        GL documentation states.
+        """
+        arguments = ', '.join(
+            parameter.annotated
+            for parameter in self.parameters
+            if not parameter.is_output
+        )
+        outputs = [parameter.annotated for parameter in self.output_parameters]
         if outputs:
             result = ', '.join(outputs)
         elif self.returns_void:

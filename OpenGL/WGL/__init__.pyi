@@ -351,199 +351,199 @@ WGL_VIDEO_OUT_STACKED_FIELDS_1_2: int
 WGL_VIDEO_OUT_STACKED_FIELDS_2_1: int
 
 def ChoosePixelFormat(hDc: Any, pPfd: AnyArray) -> int:
-    """ChoosePixelFormat(hDc, pPfd) -> c_int"""
+    """ChoosePixelFormat(hDc: HDC, pPfd: PIXELFORMATDESCRIPTOR[]) -> c_int"""
 
 def DescribePixelFormat(hdc: Any, ipfd: int, cjpfd: int, ppfd: AnyArray) -> int:
-    """DescribePixelFormat(hdc, ipfd, cjpfd, ppfd) -> c_int"""
+    """DescribePixelFormat(hdc: HDC, ipfd: c_int, cjpfd: UINT, ppfd: PIXELFORMATDESCRIPTOR[]) -> c_int"""
 
 def GetEnhMetaFilePixelFormat(hemf: Any, cbBuffer: int, ppfd: AnyArray) -> int:
-    """GetEnhMetaFilePixelFormat(hemf, cbBuffer, ppfd) -> UINT"""
+    """GetEnhMetaFilePixelFormat(hemf: HENHMETAFILE, cbBuffer: UINT, ppfd: PIXELFORMATDESCRIPTOR[]) -> UINT"""
 
 def GetPixelFormat(hdc: Any) -> int:
-    """GetPixelFormat(hdc) -> c_int"""
+    """GetPixelFormat(hdc: HDC) -> c_int"""
 
 def SetPixelFormat(hdc: Any, ipfd: int, ppfd: AnyArray) -> int:
-    """SetPixelFormat(hdc, ipfd, ppfd) -> BOOL"""
+    """SetPixelFormat(hdc: HDC, ipfd: c_int, ppfd: PIXELFORMATDESCRIPTOR[]) -> BOOL"""
 
 def SwapBuffers(hdc: Any) -> int:
-    """SwapBuffers(hdc) -> BOOL"""
+    """SwapBuffers(hdc: HDC) -> BOOL"""
 
 def wglAllocateMemoryNV(size: int, readfreq: float, writefreq: float, priority: float) -> int | None:
-    """wglAllocateMemoryNV(size, readfreq, writefreq, priority) -> void"""
+    """wglAllocateMemoryNV(size: GLsizei, readfreq: GLfloat, writefreq: GLfloat, priority: GLfloat) -> void"""
 
 def wglAssociateImageBufferEventsI3D(hDC: Any, pEvent: AnyArray, pAddress: AnyArray, pSize: AnyArray, count: int) -> int:
-    """wglAssociateImageBufferEventsI3D(hDC, pEvent, pAddress, pSize, count) -> BOOL"""
+    """wglAssociateImageBufferEventsI3D(hDC: HDC, pEvent: HANDLE[], pAddress: LPVOID[], pSize: DWORD[], count: UINT) -> BOOL"""
 
 def wglBeginFrameTrackingI3D() -> int:
     """wglBeginFrameTrackingI3D() -> BOOL"""
 
 def wglBindDisplayColorTableEXT(id: int) -> int:
-    """wglBindDisplayColorTableEXT(id) -> GLboolean"""
+    """wglBindDisplayColorTableEXT(id: GLushort) -> GLboolean"""
 
 def wglBindSwapBarrierNV(group: int, barrier: int) -> int:
-    """wglBindSwapBarrierNV(group, barrier) -> BOOL"""
+    """wglBindSwapBarrierNV(group: GLuint, barrier: GLuint) -> BOOL"""
 
 def wglBindTexImageARB(hPbuffer: Any, iBuffer: int) -> int:
-    """wglBindTexImageARB(hPbuffer, iBuffer) -> BOOL"""
+    """wglBindTexImageARB(hPbuffer: HPBUFFERARB, iBuffer: c_int) -> BOOL"""
 
 def wglBindVideoCaptureDeviceNV(uVideoSlot: int, hDevice: Any) -> int:
-    """wglBindVideoCaptureDeviceNV(uVideoSlot, hDevice) -> BOOL"""
+    """wglBindVideoCaptureDeviceNV(uVideoSlot: UINT, hDevice: HVIDEOINPUTDEVICENV) -> BOOL"""
 
 def wglBindVideoDeviceNV(hDc: Any, uVideoSlot: int, hVideoDevice: Any, piAttribList: IntArray) -> int:
-    """wglBindVideoDeviceNV(hDc, uVideoSlot, hVideoDevice, piAttribList) -> BOOL"""
+    """wglBindVideoDeviceNV(hDc: HDC, uVideoSlot: c_uint, hVideoDevice: HVIDEOOUTPUTDEVICENV, piAttribList: c_int[]) -> BOOL"""
 
 def wglBindVideoImageNV(hVideoDevice: Any, hPbuffer: Any, iVideoBuffer: int) -> int:
-    """wglBindVideoImageNV(hVideoDevice, hPbuffer, iVideoBuffer) -> BOOL"""
+    """wglBindVideoImageNV(hVideoDevice: HPVIDEODEV, hPbuffer: HPBUFFERARB, iVideoBuffer: c_int) -> BOOL"""
 
 def wglBlitContextFramebufferAMD(dstCtx: Any, srcX0: int, srcY0: int, srcX1: int, srcY1: int, dstX0: int, dstY0: int, dstX1: int, dstY1: int, mask: int, filter: int) -> Any:
-    """wglBlitContextFramebufferAMD(dstCtx, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter) -> VOID"""
+    """wglBlitContextFramebufferAMD(dstCtx: HGLRC, srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: GLbitfield, filter: GLenum) -> VOID"""
 
 def wglChoosePixelFormatARB(hdc: Any, piAttribIList: IntArray, pfAttribFList: AnyArray, nMaxFormats: int, piFormats: IntArray, nNumFormats: AnyArray) -> int:
-    """wglChoosePixelFormatARB(hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats) -> BOOL"""
+    """wglChoosePixelFormatARB(hdc: HDC, piAttribIList: c_int[], pfAttribFList: FLOAT[], nMaxFormats: UINT, piFormats: c_int[], nNumFormats: UINT[]) -> BOOL"""
 
 def wglChoosePixelFormatEXT(hdc: Any, piAttribIList: IntArray, pfAttribFList: AnyArray, nMaxFormats: int, piFormats: IntArray, nNumFormats: AnyArray) -> int:
-    """wglChoosePixelFormatEXT(hdc, piAttribIList, pfAttribFList, nMaxFormats, piFormats, nNumFormats) -> BOOL"""
+    """wglChoosePixelFormatEXT(hdc: HDC, piAttribIList: c_int[], pfAttribFList: FLOAT[], nMaxFormats: UINT, piFormats: c_int[], nNumFormats: UINT[]) -> BOOL"""
 
 def wglCopyContext(hglrcSrc: Any, hglrcDst: Any, mask: int) -> int:
-    """wglCopyContext(hglrcSrc, hglrcDst, mask) -> BOOL"""
+    """wglCopyContext(hglrcSrc: HGLRC, hglrcDst: HGLRC, mask: UINT) -> BOOL"""
 
 def wglCopyImageSubDataNV(hSrcRC: Any, srcName: int, srcTarget: int, srcLevel: int, srcX: int, srcY: int, srcZ: int, hDstRC: Any, dstName: int, dstTarget: int, dstLevel: int, dstX: int, dstY: int, dstZ: int, width: int, height: int, depth: int) -> int:
-    """wglCopyImageSubDataNV(hSrcRC, srcName, srcTarget, srcLevel, srcX, srcY, srcZ, hDstRC, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, width, height, depth) -> BOOL"""
+    """wglCopyImageSubDataNV(hSrcRC: HGLRC, srcName: GLuint, srcTarget: GLenum, srcLevel: GLint, srcX: GLint, srcY: GLint, srcZ: GLint, hDstRC: HGLRC, dstName: GLuint, dstTarget: GLenum, dstLevel: GLint, dstX: GLint, dstY: GLint, dstZ: GLint, width: GLsizei, height: GLsizei, depth: GLsizei) -> BOOL"""
 
 def wglCreateAffinityDCNV(phGpuList: AnyArray) -> Any:
-    """wglCreateAffinityDCNV(phGpuList) -> HDC"""
+    """wglCreateAffinityDCNV(phGpuList: HGPUNV[]) -> HDC"""
 
 def wglCreateAssociatedContextAMD(id: int) -> Any:
-    """wglCreateAssociatedContextAMD(id) -> HGLRC"""
+    """wglCreateAssociatedContextAMD(id: UINT) -> HGLRC"""
 
 def wglCreateAssociatedContextAttribsAMD(id: int, hShareContext: Any, attribList: IntArray) -> Any:
-    """wglCreateAssociatedContextAttribsAMD(id, hShareContext, attribList) -> HGLRC"""
+    """wglCreateAssociatedContextAttribsAMD(id: UINT, hShareContext: HGLRC, attribList: c_int[]) -> HGLRC"""
 
 def wglCreateBufferRegionARB(hDC: Any, iLayerPlane: int, uType: int) -> Any:
-    """wglCreateBufferRegionARB(hDC, iLayerPlane, uType) -> HANDLE"""
+    """wglCreateBufferRegionARB(hDC: HDC, iLayerPlane: c_int, uType: UINT) -> HANDLE"""
 
 def wglCreateContext(hDc: Any) -> Any:
-    """wglCreateContext(hDc) -> HGLRC"""
+    """wglCreateContext(hDc: HDC) -> HGLRC"""
 
 def wglCreateContextAttribsARB(hDC: Any, hShareContext: Any, attribList: IntArray) -> Any:
-    """wglCreateContextAttribsARB(hDC, hShareContext, attribList) -> HGLRC"""
+    """wglCreateContextAttribsARB(hDC: HDC, hShareContext: HGLRC, attribList: c_int[]) -> HGLRC"""
 
 def wglCreateDisplayColorTableEXT(id: int) -> int:
-    """wglCreateDisplayColorTableEXT(id) -> GLboolean"""
+    """wglCreateDisplayColorTableEXT(id: GLushort) -> GLboolean"""
 
 def wglCreateImageBufferI3D(hDC: Any, dwSize: int, uFlags: int) -> Any:
-    """wglCreateImageBufferI3D(hDC, dwSize, uFlags) -> LPVOID"""
+    """wglCreateImageBufferI3D(hDC: HDC, dwSize: DWORD, uFlags: UINT) -> LPVOID"""
 
 def wglCreateLayerContext(hDc: Any, level: int) -> Any:
-    """wglCreateLayerContext(hDc, level) -> HGLRC"""
+    """wglCreateLayerContext(hDc: HDC, level: c_int) -> HGLRC"""
 
 def wglCreatePbufferARB(hDC: Any, iPixelFormat: int, iWidth: int, iHeight: int, piAttribList: IntArray) -> Any:
-    """wglCreatePbufferARB(hDC, iPixelFormat, iWidth, iHeight, piAttribList) -> HPBUFFERARB"""
+    """wglCreatePbufferARB(hDC: HDC, iPixelFormat: c_int, iWidth: c_int, iHeight: c_int, piAttribList: c_int[]) -> HPBUFFERARB"""
 
 def wglCreatePbufferEXT(hDC: Any, iPixelFormat: int, iWidth: int, iHeight: int, piAttribList: IntArray) -> Any:
-    """wglCreatePbufferEXT(hDC, iPixelFormat, iWidth, iHeight, piAttribList) -> HPBUFFEREXT"""
+    """wglCreatePbufferEXT(hDC: HDC, iPixelFormat: c_int, iWidth: c_int, iHeight: c_int, piAttribList: c_int[]) -> HPBUFFEREXT"""
 
 def wglDXCloseDeviceNV(hDevice: Any) -> int:
-    """wglDXCloseDeviceNV(hDevice) -> BOOL"""
+    """wglDXCloseDeviceNV(hDevice: HANDLE) -> BOOL"""
 
 def wglDXLockObjectsNV(hDevice: Any, count: int, hObjects: AnyArray) -> int:
-    """wglDXLockObjectsNV(hDevice, count, hObjects) -> BOOL"""
+    """wglDXLockObjectsNV(hDevice: HANDLE, count: GLint, hObjects: HANDLE[]) -> BOOL"""
 
 def wglDXObjectAccessNV(hObject: Any, access: int) -> int:
-    """wglDXObjectAccessNV(hObject, access) -> BOOL"""
+    """wglDXObjectAccessNV(hObject: HANDLE, access: GLenum) -> BOOL"""
 
 def wglDXOpenDeviceNV(dxDevice: AnyArray) -> Any:
-    """wglDXOpenDeviceNV(dxDevice) -> HANDLE"""
+    """wglDXOpenDeviceNV(dxDevice: void[]) -> HANDLE"""
 
 def wglDXRegisterObjectNV(hDevice: Any, dxObject: AnyArray, name: int, type: int, access: int) -> Any:
-    """wglDXRegisterObjectNV(hDevice, dxObject, name, type, access) -> HANDLE"""
+    """wglDXRegisterObjectNV(hDevice: HANDLE, dxObject: void[], name: GLuint, type: GLenum, access: GLenum) -> HANDLE"""
 
 def wglDXSetResourceShareHandleNV(dxObject: AnyArray, shareHandle: Any) -> int:
-    """wglDXSetResourceShareHandleNV(dxObject, shareHandle) -> BOOL"""
+    """wglDXSetResourceShareHandleNV(dxObject: void[], shareHandle: HANDLE) -> BOOL"""
 
 def wglDXUnlockObjectsNV(hDevice: Any, count: int, hObjects: AnyArray) -> int:
-    """wglDXUnlockObjectsNV(hDevice, count, hObjects) -> BOOL"""
+    """wglDXUnlockObjectsNV(hDevice: HANDLE, count: GLint, hObjects: HANDLE[]) -> BOOL"""
 
 def wglDXUnregisterObjectNV(hDevice: Any, hObject: Any) -> int:
-    """wglDXUnregisterObjectNV(hDevice, hObject) -> BOOL"""
+    """wglDXUnregisterObjectNV(hDevice: HANDLE, hObject: HANDLE) -> BOOL"""
 
 def wglDelayBeforeSwapNV(hDC: Any, seconds: float) -> int:
-    """wglDelayBeforeSwapNV(hDC, seconds) -> BOOL"""
+    """wglDelayBeforeSwapNV(hDC: HDC, seconds: GLfloat) -> BOOL"""
 
 def wglDeleteAssociatedContextAMD(hglrc: Any) -> int:
-    """wglDeleteAssociatedContextAMD(hglrc) -> BOOL"""
+    """wglDeleteAssociatedContextAMD(hglrc: HGLRC) -> BOOL"""
 
 def wglDeleteBufferRegionARB(hRegion: Any) -> Any:
-    """wglDeleteBufferRegionARB(hRegion) -> VOID"""
+    """wglDeleteBufferRegionARB(hRegion: HANDLE) -> VOID"""
 
 def wglDeleteContext(oldContext: Any) -> int:
-    """wglDeleteContext(oldContext) -> BOOL"""
+    """wglDeleteContext(oldContext: HGLRC) -> BOOL"""
 
 def wglDeleteDCNV(hdc: Any) -> int:
-    """wglDeleteDCNV(hdc) -> BOOL"""
+    """wglDeleteDCNV(hdc: HDC) -> BOOL"""
 
 def wglDescribeLayerPlane(hDc: Any, pixelFormat: int, layerPlane: int, nBytes: int, plpd: AnyArray) -> int:
-    """wglDescribeLayerPlane(hDc, pixelFormat, layerPlane, nBytes, plpd) -> BOOL"""
+    """wglDescribeLayerPlane(hDc: HDC, pixelFormat: c_int, layerPlane: c_int, nBytes: UINT, plpd: LAYERPLANEDESCRIPTOR[]) -> BOOL"""
 
 def wglDestroyDisplayColorTableEXT(id: int) -> Any:
-    """wglDestroyDisplayColorTableEXT(id) -> VOID"""
+    """wglDestroyDisplayColorTableEXT(id: GLushort) -> VOID"""
 
 def wglDestroyImageBufferI3D(hDC: Any, pAddress: Any) -> int:
-    """wglDestroyImageBufferI3D(hDC, pAddress) -> BOOL"""
+    """wglDestroyImageBufferI3D(hDC: HDC, pAddress: LPVOID) -> BOOL"""
 
 def wglDestroyPbufferARB(hPbuffer: Any) -> int:
-    """wglDestroyPbufferARB(hPbuffer) -> BOOL"""
+    """wglDestroyPbufferARB(hPbuffer: HPBUFFERARB) -> BOOL"""
 
 def wglDestroyPbufferEXT(hPbuffer: Any) -> int:
-    """wglDestroyPbufferEXT(hPbuffer) -> BOOL"""
+    """wglDestroyPbufferEXT(hPbuffer: HPBUFFEREXT) -> BOOL"""
 
 def wglDisableFrameLockI3D() -> int:
     """wglDisableFrameLockI3D() -> BOOL"""
 
 def wglDisableGenlockI3D(hDC: Any) -> int:
-    """wglDisableGenlockI3D(hDC) -> BOOL"""
+    """wglDisableGenlockI3D(hDC: HDC) -> BOOL"""
 
 def wglEnableFrameLockI3D() -> int:
     """wglEnableFrameLockI3D() -> BOOL"""
 
 def wglEnableGenlockI3D(hDC: Any) -> int:
-    """wglEnableGenlockI3D(hDC) -> BOOL"""
+    """wglEnableGenlockI3D(hDC: HDC) -> BOOL"""
 
 def wglEndFrameTrackingI3D() -> int:
     """wglEndFrameTrackingI3D() -> BOOL"""
 
 def wglEnumGpuDevicesNV(hGpu: Any, iDeviceIndex: int, lpGpuDevice: Any) -> int:
-    """wglEnumGpuDevicesNV(hGpu, iDeviceIndex, lpGpuDevice) -> BOOL"""
+    """wglEnumGpuDevicesNV(hGpu: HGPUNV, iDeviceIndex: UINT, lpGpuDevice: PGPU_DEVICE) -> BOOL"""
 
 def wglEnumGpusFromAffinityDCNV(hAffinityDC: Any, iGpuIndex: int, hGpu: AnyArray) -> int:
-    """wglEnumGpusFromAffinityDCNV(hAffinityDC, iGpuIndex, hGpu) -> BOOL"""
+    """wglEnumGpusFromAffinityDCNV(hAffinityDC: HDC, iGpuIndex: UINT, hGpu: HGPUNV[]) -> BOOL"""
 
 def wglEnumGpusNV(iGpuIndex: int, phGpu: AnyArray) -> int:
-    """wglEnumGpusNV(iGpuIndex, phGpu) -> BOOL"""
+    """wglEnumGpusNV(iGpuIndex: UINT, phGpu: HGPUNV[]) -> BOOL"""
 
 def wglEnumerateVideoCaptureDevicesNV(hDc: Any, phDeviceList: AnyArray) -> int:
-    """wglEnumerateVideoCaptureDevicesNV(hDc, phDeviceList) -> UINT"""
+    """wglEnumerateVideoCaptureDevicesNV(hDc: HDC, phDeviceList: HVIDEOINPUTDEVICENV[]) -> UINT"""
 
 def wglEnumerateVideoDevicesNV(hDc: Any, phDeviceList: AnyArray) -> int:
-    """wglEnumerateVideoDevicesNV(hDc, phDeviceList) -> c_int"""
+    """wglEnumerateVideoDevicesNV(hDc: HDC, phDeviceList: HVIDEOOUTPUTDEVICENV[]) -> c_int"""
 
 def wglFreeMemoryNV(pointer: AnyArray) -> None:
-    """wglFreeMemoryNV(pointer) -> None"""
+    """wglFreeMemoryNV(pointer: void[]) -> None"""
 
 def wglGenlockSampleRateI3D(hDC: Any, uRate: int) -> int:
-    """wglGenlockSampleRateI3D(hDC, uRate) -> BOOL"""
+    """wglGenlockSampleRateI3D(hDC: HDC, uRate: UINT) -> BOOL"""
 
 def wglGenlockSourceDelayI3D(hDC: Any, uDelay: int) -> int:
-    """wglGenlockSourceDelayI3D(hDC, uDelay) -> BOOL"""
+    """wglGenlockSourceDelayI3D(hDC: HDC, uDelay: UINT) -> BOOL"""
 
 def wglGenlockSourceEdgeI3D(hDC: Any, uEdge: int) -> int:
-    """wglGenlockSourceEdgeI3D(hDC, uEdge) -> BOOL"""
+    """wglGenlockSourceEdgeI3D(hDC: HDC, uEdge: UINT) -> BOOL"""
 
 def wglGenlockSourceI3D(hDC: Any, uSource: int) -> int:
-    """wglGenlockSourceI3D(hDC, uSource) -> BOOL"""
+    """wglGenlockSourceI3D(hDC: HDC, uSource: UINT) -> BOOL"""
 
 def wglGetContextGPUIDAMD(hglrc: Any) -> int:
-    """wglGetContextGPUIDAMD(hglrc) -> UINT"""
+    """wglGetContextGPUIDAMD(hglrc: HGLRC) -> UINT"""
 
 def wglGetCurrentAssociatedContextAMD() -> Any:
     """wglGetCurrentAssociatedContextAMD() -> HGLRC"""
@@ -561,229 +561,229 @@ def wglGetCurrentReadDCEXT() -> Any:
     """wglGetCurrentReadDCEXT() -> HDC"""
 
 def wglGetDigitalVideoParametersI3D(hDC: Any, iAttribute: int, piValue: IntArray) -> int:
-    """wglGetDigitalVideoParametersI3D(hDC, iAttribute, piValue) -> BOOL"""
+    """wglGetDigitalVideoParametersI3D(hDC: HDC, iAttribute: c_int, piValue: c_int[]) -> BOOL"""
 
 def wglGetExtensionsStringARB(hdc: Any) -> bytes:
-    """wglGetExtensionsStringARB(hdc) -> GLchar"""
+    """wglGetExtensionsStringARB(hdc: HDC) -> GLchar"""
 
 def wglGetExtensionsStringEXT() -> bytes:
     """wglGetExtensionsStringEXT() -> GLchar"""
 
 def wglGetFrameUsageI3D(pUsage: FloatArray) -> int:
-    """wglGetFrameUsageI3D(pUsage) -> BOOL"""
+    """wglGetFrameUsageI3D(pUsage: GLfloat[]) -> BOOL"""
 
 def wglGetGPUIDsAMD(maxCount: int, ids: AnyArray) -> int:
-    """wglGetGPUIDsAMD(maxCount, ids) -> UINT"""
+    """wglGetGPUIDsAMD(maxCount: UINT, ids: UINT[]) -> UINT"""
 
 def wglGetGPUInfoAMD(id: int, property: int, dataType: int, size: int, data: AnyArray) -> int:
-    """wglGetGPUInfoAMD(id, property, dataType, size, data) -> INT"""
+    """wglGetGPUInfoAMD(id: UINT, property: INT, dataType: GLenum, size: UINT, data: void[]) -> INT"""
 
 def wglGetGammaTableI3D(hDC: Any, iEntries: int, puRed: AnyArray, puGreen: AnyArray, puBlue: AnyArray) -> int:
-    """wglGetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue) -> BOOL"""
+    """wglGetGammaTableI3D(hDC: HDC, iEntries: c_int, puRed: USHORT[], puGreen: USHORT[], puBlue: USHORT[]) -> BOOL"""
 
 def wglGetGammaTableParametersI3D(hDC: Any, iAttribute: int, piValue: IntArray) -> int:
-    """wglGetGammaTableParametersI3D(hDC, iAttribute, piValue) -> BOOL"""
+    """wglGetGammaTableParametersI3D(hDC: HDC, iAttribute: c_int, piValue: c_int[]) -> BOOL"""
 
 def wglGetGenlockSampleRateI3D(hDC: Any, uRate: AnyArray) -> int:
-    """wglGetGenlockSampleRateI3D(hDC, uRate) -> BOOL"""
+    """wglGetGenlockSampleRateI3D(hDC: HDC, uRate: UINT[]) -> BOOL"""
 
 def wglGetGenlockSourceDelayI3D(hDC: Any, uDelay: AnyArray) -> int:
-    """wglGetGenlockSourceDelayI3D(hDC, uDelay) -> BOOL"""
+    """wglGetGenlockSourceDelayI3D(hDC: HDC, uDelay: UINT[]) -> BOOL"""
 
 def wglGetGenlockSourceEdgeI3D(hDC: Any, uEdge: AnyArray) -> int:
-    """wglGetGenlockSourceEdgeI3D(hDC, uEdge) -> BOOL"""
+    """wglGetGenlockSourceEdgeI3D(hDC: HDC, uEdge: UINT[]) -> BOOL"""
 
 def wglGetGenlockSourceI3D(hDC: Any, uSource: AnyArray) -> int:
-    """wglGetGenlockSourceI3D(hDC, uSource) -> BOOL"""
+    """wglGetGenlockSourceI3D(hDC: HDC, uSource: UINT[]) -> BOOL"""
 
 def wglGetLayerPaletteEntries(hdc: Any, iLayerPlane: int, iStart: int, cEntries: int, pcr: AnyArray) -> int:
-    """wglGetLayerPaletteEntries(hdc, iLayerPlane, iStart, cEntries, pcr) -> c_int"""
+    """wglGetLayerPaletteEntries(hdc: HDC, iLayerPlane: c_int, iStart: c_int, cEntries: c_int, pcr: COLORREF[]) -> c_int"""
 
 def wglGetMscRateOML(hdc: Any, numerator: AnyArray, denominator: AnyArray) -> int:
-    """wglGetMscRateOML(hdc, numerator, denominator) -> BOOL"""
+    """wglGetMscRateOML(hdc: HDC, numerator: INT32[], denominator: INT32[]) -> BOOL"""
 
 def wglGetPbufferDCARB(hPbuffer: Any) -> Any:
-    """wglGetPbufferDCARB(hPbuffer) -> HDC"""
+    """wglGetPbufferDCARB(hPbuffer: HPBUFFERARB) -> HDC"""
 
 def wglGetPbufferDCEXT(hPbuffer: Any) -> Any:
-    """wglGetPbufferDCEXT(hPbuffer) -> HDC"""
+    """wglGetPbufferDCEXT(hPbuffer: HPBUFFEREXT) -> HDC"""
 
 def wglGetPixelFormatAttribfvARB(hdc: Any, iPixelFormat: int, iLayerPlane: int, nAttributes: int, piAttributes: IntArray, pfValues: AnyArray) -> int:
-    """wglGetPixelFormatAttribfvARB(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues) -> BOOL"""
+    """wglGetPixelFormatAttribfvARB(hdc: HDC, iPixelFormat: c_int, iLayerPlane: c_int, nAttributes: UINT, piAttributes: c_int[], pfValues: FLOAT[]) -> BOOL"""
 
 def wglGetPixelFormatAttribfvEXT(hdc: Any, iPixelFormat: int, iLayerPlane: int, nAttributes: int, piAttributes: IntArray, pfValues: AnyArray) -> int:
-    """wglGetPixelFormatAttribfvEXT(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, pfValues) -> BOOL"""
+    """wglGetPixelFormatAttribfvEXT(hdc: HDC, iPixelFormat: c_int, iLayerPlane: c_int, nAttributes: UINT, piAttributes: c_int[], pfValues: FLOAT[]) -> BOOL"""
 
 def wglGetPixelFormatAttribivARB(hdc: Any, iPixelFormat: int, iLayerPlane: int, nAttributes: int, piAttributes: IntArray, piValues: IntArray) -> int:
-    """wglGetPixelFormatAttribivARB(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues) -> BOOL"""
+    """wglGetPixelFormatAttribivARB(hdc: HDC, iPixelFormat: c_int, iLayerPlane: c_int, nAttributes: UINT, piAttributes: c_int[], piValues: c_int[]) -> BOOL"""
 
 def wglGetPixelFormatAttribivEXT(hdc: Any, iPixelFormat: int, iLayerPlane: int, nAttributes: int, piAttributes: IntArray, piValues: IntArray) -> int:
-    """wglGetPixelFormatAttribivEXT(hdc, iPixelFormat, iLayerPlane, nAttributes, piAttributes, piValues) -> BOOL"""
+    """wglGetPixelFormatAttribivEXT(hdc: HDC, iPixelFormat: c_int, iLayerPlane: c_int, nAttributes: UINT, piAttributes: c_int[], piValues: c_int[]) -> BOOL"""
 
 def wglGetProcAddress(lpszProc: Any) -> Any:
-    """wglGetProcAddress(lpszProc) -> PROC"""
+    """wglGetProcAddress(lpszProc: LPCSTR) -> PROC"""
 
 def wglGetSwapIntervalEXT() -> int:
     """wglGetSwapIntervalEXT() -> c_int"""
 
 def wglGetSyncValuesOML(hdc: Any, ust: AnyArray, msc: AnyArray, sbc: AnyArray) -> int:
-    """wglGetSyncValuesOML(hdc, ust, msc, sbc) -> BOOL"""
+    """wglGetSyncValuesOML(hdc: HDC, ust: INT64[], msc: INT64[], sbc: INT64[]) -> BOOL"""
 
 def wglGetVideoDeviceNV(hDC: Any, numDevices: int, hVideoDevice: AnyArray) -> int:
-    """wglGetVideoDeviceNV(hDC, numDevices, hVideoDevice) -> BOOL"""
+    """wglGetVideoDeviceNV(hDC: HDC, numDevices: c_int, hVideoDevice: HPVIDEODEV[]) -> BOOL"""
 
 def wglGetVideoInfoNV(hpVideoDevice: Any, pulCounterOutputPbuffer: AnyArray, pulCounterOutputVideo: AnyArray) -> int:
-    """wglGetVideoInfoNV(hpVideoDevice, pulCounterOutputPbuffer, pulCounterOutputVideo) -> BOOL"""
+    """wglGetVideoInfoNV(hpVideoDevice: HPVIDEODEV, pulCounterOutputPbuffer: c_ulong[], pulCounterOutputVideo: c_ulong[]) -> BOOL"""
 
 def wglIsEnabledFrameLockI3D(pFlag: AnyArray) -> int:
-    """wglIsEnabledFrameLockI3D(pFlag) -> BOOL"""
+    """wglIsEnabledFrameLockI3D(pFlag: BOOL[]) -> BOOL"""
 
 def wglIsEnabledGenlockI3D(hDC: Any, pFlag: AnyArray) -> int:
-    """wglIsEnabledGenlockI3D(hDC, pFlag) -> BOOL"""
+    """wglIsEnabledGenlockI3D(hDC: HDC, pFlag: BOOL[]) -> BOOL"""
 
 def wglJoinSwapGroupNV(hDC: Any, group: int) -> int:
-    """wglJoinSwapGroupNV(hDC, group) -> BOOL"""
+    """wglJoinSwapGroupNV(hDC: HDC, group: GLuint) -> BOOL"""
 
 def wglLoadDisplayColorTableEXT(table: UShortArray, length: int) -> int:
-    """wglLoadDisplayColorTableEXT(table, length) -> GLboolean"""
+    """wglLoadDisplayColorTableEXT(table: GLushort[], length: GLuint) -> GLboolean"""
 
 def wglLockVideoCaptureDeviceNV(hDc: Any, hDevice: Any) -> int:
-    """wglLockVideoCaptureDeviceNV(hDc, hDevice) -> BOOL"""
+    """wglLockVideoCaptureDeviceNV(hDc: HDC, hDevice: HVIDEOINPUTDEVICENV) -> BOOL"""
 
 def wglMakeAssociatedContextCurrentAMD(hglrc: Any) -> int:
-    """wglMakeAssociatedContextCurrentAMD(hglrc) -> BOOL"""
+    """wglMakeAssociatedContextCurrentAMD(hglrc: HGLRC) -> BOOL"""
 
 def wglMakeContextCurrentARB(hDrawDC: Any, hReadDC: Any, hglrc: Any) -> int:
-    """wglMakeContextCurrentARB(hDrawDC, hReadDC, hglrc) -> BOOL"""
+    """wglMakeContextCurrentARB(hDrawDC: HDC, hReadDC: HDC, hglrc: HGLRC) -> BOOL"""
 
 def wglMakeContextCurrentEXT(hDrawDC: Any, hReadDC: Any, hglrc: Any) -> int:
-    """wglMakeContextCurrentEXT(hDrawDC, hReadDC, hglrc) -> BOOL"""
+    """wglMakeContextCurrentEXT(hDrawDC: HDC, hReadDC: HDC, hglrc: HGLRC) -> BOOL"""
 
 def wglMakeCurrent(hDc: Any, newContext: Any) -> int:
-    """wglMakeCurrent(hDc, newContext) -> BOOL"""
+    """wglMakeCurrent(hDc: HDC, newContext: HGLRC) -> BOOL"""
 
 def wglQueryCurrentContextNV(iAttribute: int, piValue: IntArray) -> int:
-    """wglQueryCurrentContextNV(iAttribute, piValue) -> BOOL"""
+    """wglQueryCurrentContextNV(iAttribute: c_int, piValue: c_int[]) -> BOOL"""
 
 def wglQueryFrameCountNV(hDC: Any, count: UIntArray) -> int:
-    """wglQueryFrameCountNV(hDC, count) -> BOOL"""
+    """wglQueryFrameCountNV(hDC: HDC, count: GLuint[]) -> BOOL"""
 
 def wglQueryFrameLockMasterI3D(pFlag: AnyArray) -> int:
-    """wglQueryFrameLockMasterI3D(pFlag) -> BOOL"""
+    """wglQueryFrameLockMasterI3D(pFlag: BOOL[]) -> BOOL"""
 
 def wglQueryFrameTrackingI3D(pFrameCount: AnyArray, pMissedFrames: AnyArray, pLastMissedUsage: FloatArray) -> int:
-    """wglQueryFrameTrackingI3D(pFrameCount, pMissedFrames, pLastMissedUsage) -> BOOL"""
+    """wglQueryFrameTrackingI3D(pFrameCount: DWORD[], pMissedFrames: DWORD[], pLastMissedUsage: GLfloat[]) -> BOOL"""
 
 def wglQueryGenlockMaxSourceDelayI3D(hDC: Any, uMaxLineDelay: AnyArray, uMaxPixelDelay: AnyArray) -> int:
-    """wglQueryGenlockMaxSourceDelayI3D(hDC, uMaxLineDelay, uMaxPixelDelay) -> BOOL"""
+    """wglQueryGenlockMaxSourceDelayI3D(hDC: HDC, uMaxLineDelay: UINT[], uMaxPixelDelay: UINT[]) -> BOOL"""
 
 def wglQueryMaxSwapGroupsNV(hDC: Any, maxGroups: UIntArray, maxBarriers: UIntArray) -> int:
-    """wglQueryMaxSwapGroupsNV(hDC, maxGroups, maxBarriers) -> BOOL"""
+    """wglQueryMaxSwapGroupsNV(hDC: HDC, maxGroups: GLuint[], maxBarriers: GLuint[]) -> BOOL"""
 
 def wglQueryPbufferARB(hPbuffer: Any, iAttribute: int, piValue: IntArray) -> int:
-    """wglQueryPbufferARB(hPbuffer, iAttribute, piValue) -> BOOL"""
+    """wglQueryPbufferARB(hPbuffer: HPBUFFERARB, iAttribute: c_int, piValue: c_int[]) -> BOOL"""
 
 def wglQueryPbufferEXT(hPbuffer: Any, iAttribute: int, piValue: IntArray) -> int:
-    """wglQueryPbufferEXT(hPbuffer, iAttribute, piValue) -> BOOL"""
+    """wglQueryPbufferEXT(hPbuffer: HPBUFFEREXT, iAttribute: c_int, piValue: c_int[]) -> BOOL"""
 
 def wglQuerySwapGroupNV(hDC: Any, group: UIntArray, barrier: UIntArray) -> int:
-    """wglQuerySwapGroupNV(hDC, group, barrier) -> BOOL"""
+    """wglQuerySwapGroupNV(hDC: HDC, group: GLuint[], barrier: GLuint[]) -> BOOL"""
 
 def wglQueryVideoCaptureDeviceNV(hDc: Any, hDevice: Any, iAttribute: int, piValue: IntArray) -> int:
-    """wglQueryVideoCaptureDeviceNV(hDc, hDevice, iAttribute, piValue) -> BOOL"""
+    """wglQueryVideoCaptureDeviceNV(hDc: HDC, hDevice: HVIDEOINPUTDEVICENV, iAttribute: c_int, piValue: c_int[]) -> BOOL"""
 
 def wglRealizeLayerPalette(hdc: Any, iLayerPlane: int, bRealize: int) -> int:
-    """wglRealizeLayerPalette(hdc, iLayerPlane, bRealize) -> BOOL"""
+    """wglRealizeLayerPalette(hdc: HDC, iLayerPlane: c_int, bRealize: BOOL) -> BOOL"""
 
 def wglReleaseImageBufferEventsI3D(hDC: Any, pAddress: AnyArray, count: int) -> int:
-    """wglReleaseImageBufferEventsI3D(hDC, pAddress, count) -> BOOL"""
+    """wglReleaseImageBufferEventsI3D(hDC: HDC, pAddress: LPVOID[], count: UINT) -> BOOL"""
 
 def wglReleasePbufferDCARB(hPbuffer: Any, hDC: Any) -> int:
-    """wglReleasePbufferDCARB(hPbuffer, hDC) -> c_int"""
+    """wglReleasePbufferDCARB(hPbuffer: HPBUFFERARB, hDC: HDC) -> c_int"""
 
 def wglReleasePbufferDCEXT(hPbuffer: Any, hDC: Any) -> int:
-    """wglReleasePbufferDCEXT(hPbuffer, hDC) -> c_int"""
+    """wglReleasePbufferDCEXT(hPbuffer: HPBUFFEREXT, hDC: HDC) -> c_int"""
 
 def wglReleaseTexImageARB(hPbuffer: Any, iBuffer: int) -> int:
-    """wglReleaseTexImageARB(hPbuffer, iBuffer) -> BOOL"""
+    """wglReleaseTexImageARB(hPbuffer: HPBUFFERARB, iBuffer: c_int) -> BOOL"""
 
 def wglReleaseVideoCaptureDeviceNV(hDc: Any, hDevice: Any) -> int:
-    """wglReleaseVideoCaptureDeviceNV(hDc, hDevice) -> BOOL"""
+    """wglReleaseVideoCaptureDeviceNV(hDc: HDC, hDevice: HVIDEOINPUTDEVICENV) -> BOOL"""
 
 def wglReleaseVideoDeviceNV(hVideoDevice: Any) -> int:
-    """wglReleaseVideoDeviceNV(hVideoDevice) -> BOOL"""
+    """wglReleaseVideoDeviceNV(hVideoDevice: HPVIDEODEV) -> BOOL"""
 
 def wglReleaseVideoImageNV(hPbuffer: Any, iVideoBuffer: int) -> int:
-    """wglReleaseVideoImageNV(hPbuffer, iVideoBuffer) -> BOOL"""
+    """wglReleaseVideoImageNV(hPbuffer: HPBUFFERARB, iVideoBuffer: c_int) -> BOOL"""
 
 def wglResetFrameCountNV(hDC: Any) -> int:
-    """wglResetFrameCountNV(hDC) -> BOOL"""
+    """wglResetFrameCountNV(hDC: HDC) -> BOOL"""
 
 def wglRestoreBufferRegionARB(hRegion: Any, x: int, y: int, width: int, height: int, xSrc: int, ySrc: int) -> int:
-    """wglRestoreBufferRegionARB(hRegion, x, y, width, height, xSrc, ySrc) -> BOOL"""
+    """wglRestoreBufferRegionARB(hRegion: HANDLE, x: c_int, y: c_int, width: c_int, height: c_int, xSrc: c_int, ySrc: c_int) -> BOOL"""
 
 def wglSaveBufferRegionARB(hRegion: Any, x: int, y: int, width: int, height: int) -> int:
-    """wglSaveBufferRegionARB(hRegion, x, y, width, height) -> BOOL"""
+    """wglSaveBufferRegionARB(hRegion: HANDLE, x: c_int, y: c_int, width: c_int, height: c_int) -> BOOL"""
 
 def wglSendPbufferToVideoNV(hPbuffer: Any, iBufferType: int, pulCounterPbuffer: AnyArray, bBlock: int) -> int:
-    """wglSendPbufferToVideoNV(hPbuffer, iBufferType, pulCounterPbuffer, bBlock) -> BOOL"""
+    """wglSendPbufferToVideoNV(hPbuffer: HPBUFFERARB, iBufferType: c_int, pulCounterPbuffer: c_ulong[], bBlock: BOOL) -> BOOL"""
 
 def wglSetDigitalVideoParametersI3D(hDC: Any, iAttribute: int, piValue: IntArray) -> int:
-    """wglSetDigitalVideoParametersI3D(hDC, iAttribute, piValue) -> BOOL"""
+    """wglSetDigitalVideoParametersI3D(hDC: HDC, iAttribute: c_int, piValue: c_int[]) -> BOOL"""
 
 def wglSetGammaTableI3D(hDC: Any, iEntries: int, puRed: AnyArray, puGreen: AnyArray, puBlue: AnyArray) -> int:
-    """wglSetGammaTableI3D(hDC, iEntries, puRed, puGreen, puBlue) -> BOOL"""
+    """wglSetGammaTableI3D(hDC: HDC, iEntries: c_int, puRed: USHORT[], puGreen: USHORT[], puBlue: USHORT[]) -> BOOL"""
 
 def wglSetGammaTableParametersI3D(hDC: Any, iAttribute: int, piValue: IntArray) -> int:
-    """wglSetGammaTableParametersI3D(hDC, iAttribute, piValue) -> BOOL"""
+    """wglSetGammaTableParametersI3D(hDC: HDC, iAttribute: c_int, piValue: c_int[]) -> BOOL"""
 
 def wglSetLayerPaletteEntries(hdc: Any, iLayerPlane: int, iStart: int, cEntries: int, pcr: AnyArray) -> int:
-    """wglSetLayerPaletteEntries(hdc, iLayerPlane, iStart, cEntries, pcr) -> c_int"""
+    """wglSetLayerPaletteEntries(hdc: HDC, iLayerPlane: c_int, iStart: c_int, cEntries: c_int, pcr: COLORREF[]) -> c_int"""
 
 def wglSetPbufferAttribARB(hPbuffer: Any, piAttribList: IntArray) -> int:
-    """wglSetPbufferAttribARB(hPbuffer, piAttribList) -> BOOL"""
+    """wglSetPbufferAttribARB(hPbuffer: HPBUFFERARB, piAttribList: c_int[]) -> BOOL"""
 
 def wglSetStereoEmitterState3DL(hDC: Any, uState: int) -> int:
-    """wglSetStereoEmitterState3DL(hDC, uState) -> BOOL"""
+    """wglSetStereoEmitterState3DL(hDC: HDC, uState: UINT) -> BOOL"""
 
 def wglShareLists(hrcSrvShare: Any, hrcSrvSource: Any) -> int:
-    """wglShareLists(hrcSrvShare, hrcSrvSource) -> BOOL"""
+    """wglShareLists(hrcSrvShare: HGLRC, hrcSrvSource: HGLRC) -> BOOL"""
 
 def wglSwapBuffersMscOML(hdc: Any, target_msc: int, divisor: int, remainder: int) -> int:
-    """wglSwapBuffersMscOML(hdc, target_msc, divisor, remainder) -> INT64"""
+    """wglSwapBuffersMscOML(hdc: HDC, target_msc: INT64, divisor: INT64, remainder: INT64) -> INT64"""
 
 def wglSwapIntervalEXT(interval: int) -> int:
-    """wglSwapIntervalEXT(interval) -> BOOL"""
+    """wglSwapIntervalEXT(interval: c_int) -> BOOL"""
 
 def wglSwapLayerBuffers(hdc: Any, fuFlags: int) -> int:
-    """wglSwapLayerBuffers(hdc, fuFlags) -> BOOL"""
+    """wglSwapLayerBuffers(hdc: HDC, fuFlags: UINT) -> BOOL"""
 
 def wglSwapLayerBuffersMscOML(hdc: Any, fuPlanes: int, target_msc: int, divisor: int, remainder: int) -> int:
-    """wglSwapLayerBuffersMscOML(hdc, fuPlanes, target_msc, divisor, remainder) -> INT64"""
+    """wglSwapLayerBuffersMscOML(hdc: HDC, fuPlanes: INT, target_msc: INT64, divisor: INT64, remainder: INT64) -> INT64"""
 
 def wglUseFontBitmaps(hDC: Any, first: int, count: int, listBase: int) -> int:
-    """wglUseFontBitmaps(hDC, first, count, listBase) -> BOOL"""
+    """wglUseFontBitmaps(hDC: HDC, first: DWORD, count: DWORD, listBase: DWORD) -> BOOL"""
 
 def wglUseFontBitmapsA(hDC: Any, first: int, count: int, listBase: int) -> int:
-    """wglUseFontBitmapsA(hDC, first, count, listBase) -> BOOL"""
+    """wglUseFontBitmapsA(hDC: HDC, first: DWORD, count: DWORD, listBase: DWORD) -> BOOL"""
 
 def wglUseFontBitmapsW(hDC: Any, first: int, count: int, listBase: int) -> int:
-    """wglUseFontBitmapsW(hDC, first, count, listBase) -> BOOL"""
+    """wglUseFontBitmapsW(hDC: HDC, first: DWORD, count: DWORD, listBase: DWORD) -> BOOL"""
 
 def wglUseFontOutlines(hDC: Any, first: int, count: int, listBase: int, deviation: float, extrusion: float, format: int, lpgmf: Any) -> int:
-    """wglUseFontOutlines(hDC, first, count, listBase, deviation, extrusion, format, lpgmf) -> BOOL"""
+    """wglUseFontOutlines(hDC: HDC, first: DWORD, count: DWORD, listBase: DWORD, deviation: FLOAT, extrusion: FLOAT, format: c_int, lpgmf: LPGLYPHMETRICSFLOAT) -> BOOL"""
 
 def wglUseFontOutlinesA(hDC: Any, first: int, count: int, listBase: int, deviation: float, extrusion: float, format: int, lpgmf: Any) -> int:
-    """wglUseFontOutlinesA(hDC, first, count, listBase, deviation, extrusion, format, lpgmf) -> BOOL"""
+    """wglUseFontOutlinesA(hDC: HDC, first: DWORD, count: DWORD, listBase: DWORD, deviation: FLOAT, extrusion: FLOAT, format: c_int, lpgmf: LPGLYPHMETRICSFLOAT) -> BOOL"""
 
 def wglUseFontOutlinesW(hDC: Any, first: int, count: int, listBase: int, deviation: float, extrusion: float, format: int, lpgmf: Any) -> int:
-    """wglUseFontOutlinesW(hDC, first, count, listBase, deviation, extrusion, format, lpgmf) -> BOOL"""
+    """wglUseFontOutlinesW(hDC: HDC, first: DWORD, count: DWORD, listBase: DWORD, deviation: FLOAT, extrusion: FLOAT, format: c_int, lpgmf: LPGLYPHMETRICSFLOAT) -> BOOL"""
 
 def wglWaitForMscOML(hdc: Any, target_msc: int, divisor: int, remainder: int, ust: AnyArray, msc: AnyArray, sbc: AnyArray) -> int:
-    """wglWaitForMscOML(hdc, target_msc, divisor, remainder, ust, msc, sbc) -> BOOL"""
+    """wglWaitForMscOML(hdc: HDC, target_msc: INT64, divisor: INT64, remainder: INT64, ust: INT64[], msc: INT64[], sbc: INT64[]) -> BOOL"""
 
 def wglWaitForSbcOML(hdc: Any, target_sbc: int, ust: AnyArray, msc: AnyArray, sbc: AnyArray) -> int:
-    """wglWaitForSbcOML(hdc, target_sbc, ust, msc, sbc) -> BOOL"""
+    """wglWaitForSbcOML(hdc: HDC, target_sbc: INT64, ust: INT64[], msc: INT64[], sbc: INT64[]) -> BOOL"""
 
 
 def __getattr__(name: str) -> Any:
