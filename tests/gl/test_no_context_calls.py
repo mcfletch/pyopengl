@@ -52,11 +52,12 @@ else:
 '''
 
 
-def behaviour(dispatch, checking):
+def behaviour(dispatch, checking, debug_output=True):
     completed = run_in_child(
         SCRIPT % {'checking': checking},
         check=False,
         PYOPENGL_DISPATCH=dispatch, PYOPENGL_USE_ACCELERATE=None,
+        PYOPENGL_ERROR_DEBUG_OUTPUT=('1' if debug_output else '0'),
     )
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context to lose here: %s' % (completed.stderr.strip(),))
@@ -65,16 +66,36 @@ def behaviour(dispatch, checking):
     return completed.stdout.strip().splitlines()[-1]
 
 
-def test_the_default_is_quiet_under_both_implementations():
-    """The flag is off by default, so the call is a no-op, as it is today."""
-    assert behaviour('ctypes', False) == 'quiet'
-    assert behaviour('c', False) == 'quiet'
+@pytest.mark.parametrize('debug_output', [True, False],
+                         ids=['debug-output', 'get-error'])
+def test_the_default_is_quiet_under_both_implementations(debug_output):
+    """The flag is off by default, so the call is a no-op, as it is today.
+
+    **The parity is what this defends**: the C implementation must not diverge
+    from ctypes, under either error-checking mechanism.
+
+    What "no-op" comes out as is not PyOpenGL's to decide, and it varies. On the
+    ``glGetError`` round trip it is the platform's answer: ``libGL`` answers
+    zero with no context current, so the call is silent, while ``opengl32``
+    reports GL_INVALID_OPERATION and the checker turns that into a GLError --
+    the shutdown-time exception a Windows application meets. Through
+    GL_KHR_debug there is no round trip to answer: the check reads a flag the
+    driver's callback sets, no callback runs where there is no context to run
+    it, and the call is silent everywhere.
+    """
+    ctypes_says = behaviour('ctypes', False, debug_output)
+    assert behaviour('c', False, debug_output) == ctypes_says
+    windows_round_trip = sys.platform == 'win32' and not debug_output
+    assert ctypes_says == ('other:GLError' if windows_round_trip else 'quiet')
 
 
-def test_context_checking_raises_under_both_implementations():
-    """With the flag on, both say what went wrong."""
-    assert behaviour('ctypes', True) == 'raised'
-    assert behaviour('c', True) == 'raised'
+@pytest.mark.parametrize('debug_output', [True, False],
+                         ids=['debug-output', 'get-error'])
+def test_context_checking_raises_under_both_implementations(debug_output):
+    """With the flag on, both say what went wrong -- it is asked before the
+    call, so neither mechanism is reached."""
+    assert behaviour('ctypes', True, debug_output) == 'raised'
+    assert behaviour('c', True, debug_output) == 'raised'
 
 
 if __name__ == '__main__':
