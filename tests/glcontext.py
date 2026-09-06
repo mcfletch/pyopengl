@@ -72,8 +72,8 @@ def pick_backend():
        renders on an EGL device (see glcontext_egl) and ``cgl`` on a macOS CGL
        context (see glcontext_cgl).  Neither needs a toolkit or a display.
     2. Otherwise probe which windowed backends are importable (``glfw``,
-       ``pygame``), honour ``TEST_WINDOWING`` when set and available, and
-       default to glfw then pygame.
+       ``pygame``, ``tk``), honour ``TEST_WINDOWING`` when set and available,
+       and default to glfw, then pygame, then tk.
     """
     requested = backends.requested()
 
@@ -87,11 +87,12 @@ def pick_backend():
         from glcontext_cgl import CGLBackend
         return CGLBackend
 
-    available = [name for name in _WINDOWED if _installed(name)]
+    available = [name for name in _WINDOWED
+                 if _installed(backends.module_for(name))]
     if not available:
         raise ImportError(
-            'No windowing backend available for tests; install glfw or pygame '
-            '(or run headless with TEST_WINDOWING=egl)'
+            'No windowing backend available for tests; install glfw, pygame '
+            'or tkinter (or run headless with TEST_WINDOWING=egl)'
         )
     if requested and requested not in available:
         raise ImportError(
@@ -110,6 +111,9 @@ def pick_backend():
     elif backend == 'pygame':
         from glcontext_pygame import PygameBackend
         return PygameBackend
+    elif backend == 'tk':
+        from glcontext_tk import TkBackend
+        return TkBackend
     raise RuntimeError('Unhandled backend: %s' % (backend,))
 
 

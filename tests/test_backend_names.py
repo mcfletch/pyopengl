@@ -16,7 +16,15 @@ import pytest
 
 class TestTheVocabulary:
     def test_the_windowed_backends_open_a_window(self):
-        assert backends.WINDOWED == ('glfw', 'pygame')
+        assert backends.WINDOWED == ('glfw', 'pygame', 'tk')
+
+    def test_a_backend_named_for_its_module_needs_no_translation(self):
+        assert backends.module_for('glfw') == 'glfw'
+
+    def test_tk_is_served_by_tkinter(self):
+        """The standard library's name for it, which some distributions
+        package separately from Python itself."""
+        assert backends.module_for('tk') == 'tkinter'
 
     def test_the_headless_ones_need_no_display(self):
         """One per platform: EGL's device platform on Linux, CGL on macOS."""
@@ -34,7 +42,7 @@ class TestReadingTheRequest:
         """What an unexported shell variable expands to."""
         assert backends.requested({'TEST_WINDOWING': ''}) is None
 
-    @pytest.mark.parametrize('name', ['glfw', 'pygame', 'egl', 'cgl'])
+    @pytest.mark.parametrize('name', ['glfw', 'pygame', 'tk', 'egl', 'cgl'])
     def test_each_name_is_accepted(self, name):
         assert backends.requested({'TEST_WINDOWING': name}) == name
 

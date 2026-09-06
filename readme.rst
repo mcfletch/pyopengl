@@ -140,6 +140,36 @@ optional there.
 .. _`Offscreen OpenGL on macOS`: https://mcfletch.github.io/pyopengl/documentation/cgl-offscreen.html
 
 
+OpenGL in a Tkinter window
+---------------------------
+
+``OpenGL.Tk.GLFrame`` is an ordinary ``tkinter.Frame`` that owns an OpenGL
+context on its own native window.  Tkinter ships with Python, so this is the
+one GUI toolkit that needs nothing installed, and the context is a core profile
+by default -- shaders and vertex array objects, in a Tk application::
+
+    import tkinter
+    from OpenGL.GL import GL_COLOR_BUFFER_BIT, glClear, glClearColor
+    from OpenGL.Tk import GLFrame
+
+    class Scene(GLFrame):
+        def initgl(self):              # once, with the context current
+            glClearColor(0.2, 0.3, 0.3, 1.0)
+        def redraw(self):              # per frame
+            glClear(GL_COLOR_BUFFER_BIT)
+
+    root = tkinter.Tk()
+    Scene(root, width=640, height=480).pack(fill='both', expand=True)
+    root.mainloop()
+
+``examples/tk_shader.py`` is a longer one.  See `OpenGL in a Tkinter widget`_
+for what the context can be asked for, when it arrives, what happens when a
+driver refuses one, and what became of the Togl-based widgets (they keep their
+names and no longer need Togl).
+
+.. _`OpenGL in a Tkinter widget`: https://mcfletch.github.io/pyopengl/documentation/tk-widget.html
+
+
 Running Tests
 --------------
 

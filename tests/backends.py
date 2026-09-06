@@ -13,14 +13,27 @@ CGL on macOS.
 """
 
 #: Backends that open a window, in the order preferred when nothing is asked
-#: for.
-WINDOWED = ('glfw', 'pygame')
+#: for.  ``tk`` is last because it is the widget this package ships rather than
+#: a third-party toolkit: running the suite on it is how that widget is held to
+#: the same behaviour as everything else, which is a thing to ask for by name
+#: rather than to fall into.
+WINDOWED = ('glfw', 'pygame', 'tk')
 
 #: Backends that need no window and no display server, one per platform.
 HEADLESS = ('egl', 'cgl')
 
 #: Every name ``TEST_WINDOWING`` may take.
 ALL = WINDOWED + HEADLESS
+
+#: The module whose presence means a backend can be used, where it is not the
+#: backend's own name.  ``tk`` is served by the standard library's ``tkinter``,
+#: which some distributions package separately from Python itself.
+MODULES = {'tk': 'tkinter'}
+
+
+def module_for(name):
+    """The importable module a backend needs, given the backend's name."""
+    return MODULES.get(name, name)
 
 
 def requested(environ=None):

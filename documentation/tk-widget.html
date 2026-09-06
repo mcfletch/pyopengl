@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>OpenGL in a Tkinter widget</title><link rel="stylesheet" type="text/css" href="style/tutorial.css">
+</head>
+<body>
+
+<h1>OpenGL in a Tkinter widget</h1>
+
+<p><code>OpenGL.Tk.GLFrame</code> is an ordinary <code>tkinter.Frame</code> that
+owns an OpenGL context on its own native window.  It packs, grids, resizes and
+is destroyed like any other widget, and it needs nothing outside Python: Tk
+hands out the platform's window handle and the context is made against it
+through the window system's own API.</p>
+
+<pre>import tkinter
+from OpenGL.GL import GL_COLOR_BUFFER_BIT, glClear, glClearColor
+from OpenGL.Tk import GLFrame
+
+class Scene(GLFrame):
+    def initgl(self):                  # once, with the context current
+        glClearColor(0.2, 0.3, 0.3, 1.0)
+
+    def redraw(self):                  # per frame
+        glClear(GL_COLOR_BUFFER_BIT)
+
+root = tkinter.Tk()
+Scene(root, width=640, height=480).pack(fill='both', expand=True)
+root.mainloop()</pre>
+
+<p><code>examples/tk_shader.py</code> in the source distribution is a longer
+one: a shaded triangle through a GLSL 3.30 program, a vertex array object and a
+uniform matrix, in a window beside ordinary Tk widgets.</p>
+
+<h2>The context is a core profile by default</h2>
+
+<p>What the context is asked for is
+<code>OpenGL.Tk.ContextAttributes</code> &#8212; profile, version, buffer sizes,
+multisampling, stereo, a debug context, a context to share with &#8212; given
+either as keywords to the widget or as a ready-made object:</p>
+
+<pre>frame = GLFrame(root, width=640, height=480,
+                profile='core', version=(4, 1),
+                depthSize=24, samples=4)</pre>
+
+<p>The default is OpenGL 3.3 core, so shaders and vertex array objects are
+available without asking.  <code>profile='compatibility'</code> keeps the
+fixed-function pipeline; <code>profile='legacy'</code> asks for no version and
+no profile at all, which is the only thing a driver without
+<code>ARB_create_context</code> will answer.</p>
+
+<p>A profile is a GL 3.2 idea, so a request naming a version below that is sent
+without one &#8212; a driver handed a profile mask for GL 2.1 refuses the whole
+request rather than ignoring the part of it that means nothing.</p>
+
+<h2>The context arrives when the window does</h2>
+
+<p>A Tk window has no native handle until the window system has mapped it, so
+there is nothing to make a context against before then.  The widget makes one
+from its <code>&lt;Map&gt;</code> binding and runs <code>initgl</code>; a
+program that wants to use GL straight after building the widget &#8212; to load
+textures, or because it drives its own loop &#8212; asks for it:</p>
+
+<pre>frame = Scene(root, width=640, height=480)
+frame.pack()
+frame.waitForMap()                     # pumps Tk until there is a context
+frame.render()                         # make current, redraw, swap</pre>
+
+<p><code>initgl</code> runs <strong>once</strong>.  A resize sets the viewport
+and redraws; it does not run <code>initgl</code> again, which would rebuild
+every texture and shader each time somebody dragged a corner.</p>
+
+<p><code>startAnimation(milliseconds)</code> renders on a timer for a scene
+that changes on its own; a program with a loop of its own calls
+<code>render()</code> from it and leaves the timer alone.</p>
+
+<h2>When a context cannot be had</h2>
+
+<p>Making one can fail for ordinary reasons: a driver without
+<code>ARB_create_context</code>, a version it will not give, eight multisample
+samples nobody offers.  The widget raises
+<code>OpenGL.Tk.TkContextError</code>, and goes on working as an ordinary
+frame, so a program can catch it and offer something else.</p>
+
+<pre>from OpenGL.Tk import GLFrame, TkContextError
+
+frame = Scene(root, version=(4, 6))
+frame.pack()
+try:
+    frame.waitForMap()
+except TkContextError as error:
+    fallBackToSomethingElse(error)</pre>
+
+<p>The failure arrives from <code>waitForMap()</code> or
+<code>makeCurrent()</code> rather than out of the <code>&lt;Map&gt;</code>
+binding, where an exception would surface as a Tk callback error with nothing
+to connect it to the code that built the widget.</p>
+
+<h2>Which platforms</h2>
+
+<table border="1" cellpadding="4" cellspacing="0">
+<tr><th>Tk windowing system</th><th>How</th><th>State</th></tr>
+<tr><td><code>x11</code></td>
+    <td><code>glXCreateContextAttribsARB</code> on the window
+        <code>winfo_id()</code> names</td>
+    <td>Implemented</td></tr>
+<tr><td><code>win32</code></td>
+    <td><code>wglCreateContextAttribsARB</code> on that window's device
+        context</td>
+    <td>Implemented</td></tr>
+<tr><td><code>aqua</code></td>
+    <td><code>NSOpenGLContext.setView:</code> on the <code>NSView</code> Tk
+        owns</td>
+    <td>Raises, naming what it needs</td></tr>
+</table>
+
+<p>The choice is made from Tk's own <code>tk windowingsystem</code> rather than
+from <code>sys.platform</code>, so an X11 build of Tk on macOS gets GLX and is
+right.</p>
+
+<h2>Togl, and the widgets that used it</h2>
+
+<p><code>OpenGL.Tk</code> was a wrapper around <a
+href="http://togl.sourceforge.net/">Togl</a>, a Tcl C extension that has to be
+installed separately.  <code>Togl</code>, <code>RawOpengl</code> and
+<code>Opengl</code> keep their names, their constructors and their methods, and
+Togl's own widget options go on meaning what they meant:</p>
+
+<pre>viewer = Opengl(root, width=400, height=400, double=1, depth=1)
+viewer.redraw = drawTheScene
+viewer.pack(fill='both', expand=True)</pre>
+
+<p>What changed underneath is that <code>RawOpengl</code> and
+<code>Opengl</code> are <code>GLFrame</code> subclasses and need no Tcl
+extension.  They draw with the fixed-function pipeline &#8212;
+<code>glMatrixMode</code>, <code>gluPerspective</code>,
+<code>glLightfv</code> &#8212; so they ask for a compatibility profile.
+<code>Togl</code> itself still needs Togl, and loads it the first time one is
+made rather than when the module is imported.</p>
+
+<p>Importing <code>OpenGL.Tk</code> now opens no window, needs no display and
+loads no Tcl package.</p>
+
+</body></html>

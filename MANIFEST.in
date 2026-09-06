@@ -3,6 +3,7 @@ include ./*.rst
 exclude src/*.h src/*.xml src/*.zip src/*.pdf src/*.zip src/*.txt
 include src/win32deps.py src/toglinstall/get_togl.py src/*.py 
 include tests/*.py tests/*.png
+include examples/*.py
 include metadata.py
 include OpenGL/DLLS/*
 include license.txt
