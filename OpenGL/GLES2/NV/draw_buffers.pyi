@@ -1,0 +1,46 @@
+"""OpenGL.GLES2.NV.draw_buffers -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import UIntArray
+
+from OpenGL.raw.GLES2._types import *
+
+GL_COLOR_ATTACHMENT0_NV: int
+GL_COLOR_ATTACHMENT10_NV: int
+GL_COLOR_ATTACHMENT11_NV: int
+GL_COLOR_ATTACHMENT12_NV: int
+GL_COLOR_ATTACHMENT13_NV: int
+GL_COLOR_ATTACHMENT14_NV: int
+GL_COLOR_ATTACHMENT15_NV: int
+GL_COLOR_ATTACHMENT1_NV: int
+GL_COLOR_ATTACHMENT2_NV: int
+GL_COLOR_ATTACHMENT3_NV: int
+GL_COLOR_ATTACHMENT4_NV: int
+GL_COLOR_ATTACHMENT5_NV: int
+GL_COLOR_ATTACHMENT6_NV: int
+GL_COLOR_ATTACHMENT7_NV: int
+GL_COLOR_ATTACHMENT8_NV: int
+GL_COLOR_ATTACHMENT9_NV: int
+GL_DRAW_BUFFER0_NV: int
+GL_DRAW_BUFFER10_NV: int
+GL_DRAW_BUFFER11_NV: int
+GL_DRAW_BUFFER12_NV: int
+GL_DRAW_BUFFER13_NV: int
+GL_DRAW_BUFFER14_NV: int
+GL_DRAW_BUFFER15_NV: int
+GL_DRAW_BUFFER1_NV: int
+GL_DRAW_BUFFER2_NV: int
+GL_DRAW_BUFFER3_NV: int
+GL_DRAW_BUFFER4_NV: int
+GL_DRAW_BUFFER5_NV: int
+GL_DRAW_BUFFER6_NV: int
+GL_DRAW_BUFFER7_NV: int
+GL_DRAW_BUFFER8_NV: int
+GL_DRAW_BUFFER9_NV: int
+GL_MAX_DRAW_BUFFERS_NV: int
+
+def glDrawBuffersNV(n: int, bufs: UIntArray) -> None: ...
+
+def glInitDrawBuffersNV() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

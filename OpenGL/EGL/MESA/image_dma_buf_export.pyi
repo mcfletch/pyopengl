@@ -1,0 +1,13 @@
+"""OpenGL.EGL.MESA.image_dma_buf_export -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import IntArray, UInt64Array
+
+from OpenGL.raw.EGL._types import *
+
+def eglExportDMABUFImageMESA(dpy: Any, image: Any, fds: IntArray, strides: IntArray, offsets: IntArray) -> int: ...
+def eglExportDMABUFImageQueryMESA(dpy: Any, image: Any, fourcc: IntArray, num_planes: IntArray, modifiers: UInt64Array) -> int: ...
+
+def glInitImageDmaBufExportMESA() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

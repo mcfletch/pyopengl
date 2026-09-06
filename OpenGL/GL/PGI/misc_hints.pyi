@@ -1,0 +1,32 @@
+"""OpenGL.GL.PGI.misc_hints -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+
+from OpenGL.raw.GL._types import *
+
+GL_ALLOW_DRAW_FRG_HINT_PGI: int
+GL_ALLOW_DRAW_MEM_HINT_PGI: int
+GL_ALLOW_DRAW_OBJ_HINT_PGI: int
+GL_ALLOW_DRAW_WIN_HINT_PGI: int
+GL_ALWAYS_FAST_HINT_PGI: int
+GL_ALWAYS_SOFT_HINT_PGI: int
+GL_BACK_NORMALS_HINT_PGI: int
+GL_CLIP_FAR_HINT_PGI: int
+GL_CLIP_NEAR_HINT_PGI: int
+GL_CONSERVE_MEMORY_HINT_PGI: int
+GL_FULL_STIPPLE_HINT_PGI: int
+GL_NATIVE_GRAPHICS_BEGIN_HINT_PGI: int
+GL_NATIVE_GRAPHICS_END_HINT_PGI: int
+GL_NATIVE_GRAPHICS_HANDLE_PGI: int
+GL_PREFER_DOUBLEBUFFER_HINT_PGI: int
+GL_RECLAIM_MEMORY_HINT_PGI: int
+GL_STRICT_DEPTHFUNC_HINT_PGI: int
+GL_STRICT_LIGHTING_HINT_PGI: int
+GL_STRICT_SCISSOR_HINT_PGI: int
+GL_WIDE_LINE_HINT_PGI: int
+
+def glHintPGI(target: int, mode: int) -> None: ...
+
+def glInitMiscHintsPGI() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

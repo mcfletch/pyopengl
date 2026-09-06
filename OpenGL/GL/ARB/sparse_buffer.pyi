@@ -1,0 +1,16 @@
+"""OpenGL.GL.ARB.sparse_buffer -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+
+from OpenGL.raw.GL._types import *
+
+GL_SPARSE_BUFFER_PAGE_SIZE_ARB: int
+GL_SPARSE_STORAGE_BIT_ARB: int
+
+def glBufferPageCommitmentARB(target: int, offset: int, size: int, commit: bool) -> None: ...
+def glNamedBufferPageCommitmentARB(buffer: int, offset: int, size: int, commit: bool) -> None: ...
+def glNamedBufferPageCommitmentEXT(buffer: int, offset: int, size: int, commit: bool) -> None: ...
+
+def glInitSparseBufferARB() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

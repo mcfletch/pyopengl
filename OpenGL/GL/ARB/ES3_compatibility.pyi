@@ -1,0 +1,23 @@
+"""OpenGL.GL.ARB.ES3_compatibility -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+
+from OpenGL.raw.GL._types import *
+
+GL_ANY_SAMPLES_PASSED_CONSERVATIVE: int
+GL_COMPRESSED_R11_EAC: int
+GL_COMPRESSED_RG11_EAC: int
+GL_COMPRESSED_RGB8_ETC2: int
+GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2: int
+GL_COMPRESSED_RGBA8_ETC2_EAC: int
+GL_COMPRESSED_SIGNED_R11_EAC: int
+GL_COMPRESSED_SIGNED_RG11_EAC: int
+GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC: int
+GL_COMPRESSED_SRGB8_ETC2: int
+GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2: int
+GL_MAX_ELEMENT_INDEX: int
+GL_PRIMITIVE_RESTART_FIXED_INDEX: int
+
+def glInitEs3CompatibilityARB() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

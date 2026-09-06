@@ -1,0 +1,16 @@
+"""OpenGL.WGL.NV.present_video -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray, IntArray
+
+from OpenGL.raw.WGL._types import *
+
+WGL_NUM_VIDEO_SLOTS_NV: int
+
+def wglBindVideoDeviceNV(hDc: Any, uVideoSlot: int, hVideoDevice: Any, piAttribList: IntArray) -> int: ...
+def wglEnumerateVideoDevicesNV(hDc: Any, phDeviceList: AnyArray) -> int: ...
+def wglQueryCurrentContextNV(iAttribute: int, piValue: IntArray) -> int: ...
+
+def glInitPresentVideoNV() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

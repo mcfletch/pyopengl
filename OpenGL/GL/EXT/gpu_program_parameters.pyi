@@ -1,0 +1,13 @@
+"""OpenGL.GL.EXT.gpu_program_parameters -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import FloatArray
+
+from OpenGL.raw.GL._types import *
+
+def glProgramEnvParameters4fvEXT(target: int, index: int, count: int, params: FloatArray) -> None: ...
+def glProgramLocalParameters4fvEXT(target: int, index: int, count: int, params: FloatArray) -> None: ...
+
+def glInitGpuProgramParametersEXT() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

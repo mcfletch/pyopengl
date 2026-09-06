@@ -1,0 +1,13 @@
+"""OpenGL.GLX.SGIX.video_source -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray
+
+from OpenGL.raw.GLX._types import *
+
+def glXCreateGLXVideoSourceSGIX(display: AnyArray, screen: int, server: Any, path: Any, nodeClass: int, drainNode: Any) -> Any: ...
+def glXDestroyGLXVideoSourceSGIX(dpy: AnyArray, glxvideosource: Any) -> None: ...
+
+def glInitVideoSourceSGIX() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

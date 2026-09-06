@@ -1,0 +1,21 @@
+"""OpenGL.GL.ARB.pipeline_statistics_query -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+
+from OpenGL.raw.GL._types import *
+
+GL_CLIPPING_INPUT_PRIMITIVES_ARB: int
+GL_CLIPPING_OUTPUT_PRIMITIVES_ARB: int
+GL_COMPUTE_SHADER_INVOCATIONS_ARB: int
+GL_FRAGMENT_SHADER_INVOCATIONS_ARB: int
+GL_GEOMETRY_SHADER_INVOCATIONS: int
+GL_GEOMETRY_SHADER_PRIMITIVES_EMITTED_ARB: int
+GL_PRIMITIVES_SUBMITTED_ARB: int
+GL_TESS_CONTROL_SHADER_PATCHES_ARB: int
+GL_TESS_EVALUATION_SHADER_INVOCATIONS_ARB: int
+GL_VERTEX_SHADER_INVOCATIONS_ARB: int
+GL_VERTICES_SUBMITTED_ARB: int
+
+def glInitPipelineStatisticsQueryARB() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

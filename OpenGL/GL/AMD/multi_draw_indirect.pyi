@@ -1,0 +1,13 @@
+"""OpenGL.GL.AMD.multi_draw_indirect -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray
+
+from OpenGL.raw.GL._types import *
+
+def glMultiDrawArraysIndirectAMD(mode: int, indirect: AnyArray, primcount: int, stride: int) -> None: ...
+def glMultiDrawElementsIndirectAMD(mode: int, type: int, indirect: AnyArray, primcount: int, stride: int) -> None: ...
+
+def glInitMultiDrawIndirectAMD() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

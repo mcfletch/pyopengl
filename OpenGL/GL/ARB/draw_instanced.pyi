@@ -1,0 +1,13 @@
+"""OpenGL.GL.ARB.draw_instanced -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray
+
+from OpenGL.raw.GL._types import *
+
+def glDrawArraysInstancedARB(mode: int, first: int, count: int, primcount: int) -> None: ...
+def glDrawElementsInstancedARB(mode: int, count: int, type: int, indices: AnyArray, primcount: int) -> None: ...
+
+def glInitDrawInstancedARB() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

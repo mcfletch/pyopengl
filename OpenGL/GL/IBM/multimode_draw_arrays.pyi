@@ -1,0 +1,13 @@
+"""OpenGL.GL.IBM.multimode_draw_arrays -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray, IntArray, UIntArray
+
+from OpenGL.raw.GL._types import *
+
+def glMultiModeDrawArraysIBM(mode: UIntArray, first: IntArray, count: IntArray, primcount: int, modestride: int) -> None: ...
+def glMultiModeDrawElementsIBM(mode: UIntArray, count: IntArray, type: int, indices: AnyArray, primcount: int, modestride: int) -> None: ...
+
+def glInitMultimodeDrawArraysIBM() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

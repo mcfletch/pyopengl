@@ -1,0 +1,13 @@
+"""OpenGL.GLES2.EXT.EGL_image_storage -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import IntArray
+
+from OpenGL.raw.GLES2._types import *
+
+def glEGLImageTargetTexStorageEXT(target: int, image: Any, attrib_list: IntArray) -> None: ...
+def glEGLImageTargetTextureStorageEXT(texture: int, image: Any, attrib_list: IntArray) -> None: ...
+
+def glInitEglImageStorageEXT() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

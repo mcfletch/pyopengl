@@ -1,0 +1,13 @@
+"""OpenGL.GL.EXT.multi_draw_arrays -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray, IntArray
+
+from OpenGL.raw.GL._types import *
+
+def glMultiDrawArraysEXT(mode: int, first: IntArray, count: IntArray, primcount: int) -> None: ...
+def glMultiDrawElementsEXT(mode: int, count: IntArray, type: int, indices: AnyArray, primcount: int) -> None: ...
+
+def glInitMultiDrawArraysEXT() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

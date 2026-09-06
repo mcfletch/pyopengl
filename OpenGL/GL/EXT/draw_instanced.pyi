@@ -1,0 +1,13 @@
+"""OpenGL.GL.EXT.draw_instanced -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray
+
+from OpenGL.raw.GL._types import *
+
+def glDrawArraysInstancedEXT(mode: int, start: int, count: int, primcount: int) -> None: ...
+def glDrawElementsInstancedEXT(mode: int, count: int, type: int, indices: AnyArray, primcount: int) -> None: ...
+
+def glInitDrawInstancedEXT() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

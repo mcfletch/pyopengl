@@ -199,6 +199,101 @@ def emit_tables_module(slots):
     return '\n'.join(lines)
 
 
+def _write_submodule_stubs(package_root, stubs_root, commands):
+    """A stub beside every friendly module, from the module table.
+
+    ``OpenGL.GL.ARB.vertex_array_object`` calls ``_define`` and its namespace
+    arrives from the declaration tables, so nothing reading the file can say
+    what is in it -- an editor offers no completion there and a checker types
+    every name as ``Any``.  The table knows exactly: it is what the module
+    would have been.
+
+    The friendly module is read for the names it adds itself, which is the
+    ``glInitXxx`` availability check.  That is one AST parse per module and no
+    part of generating the C, which reads data alone.
+    """
+    written = 0
+    for module in modules_.read_modules(package_root, extract.APIS):
+        parts = module.name.split('.')
+        if len(parts) < 4 or parts[1] != 'raw':
+            continue
+        api = parts[2]
+        # OpenGL.raw.GL.ARB.foo -> OpenGL/GL/ARB/foo, the friendly module.
+        relative = os.path.join(*parts[2:])
+        source = os.path.join(stubs_root, relative + '.py')
+        if not os.path.exists(source):
+            # A generated module with no friendly module above it: nothing for
+            # a stub to describe, because nothing imports that name.
+            continue
+        selected = [
+            commands[(api, declared.name)]
+            for declared in module.commands
+            if (api, declared.name) in commands
+        ]
+        tabulated = set(module.constants) | {c.name for c in module.commands}
+        _write(
+            os.path.join(stubs_root, relative + '.pyi'),
+            emit_pyi.emit_submodule(
+                'OpenGL.%s' % (relative.replace(os.sep, '.'),),
+                selected,
+                constants=sorted(module.constants),
+                extras=_module_definitions(source, tabulated),
+                reexports=module.reexports,
+            ),
+        )
+        written += 1
+    return written
+
+
+def _module_definitions(path, tabulated):
+    """What a friendly module states in Python rather than taking from a table.
+
+    Its ``glInitXxx`` availability check, the constants it aliases by hand
+    (``GL_DEPTH_BUFFER = GL_DEPTH``), and any helper it defines.  A name the
+    tables already describe is left to them: a module that customises an entry
+    point rebinds its name, and describing that as ``Any`` would throw away the
+    signature the record knows.
+    """
+    import ast
+
+    with open(path, 'r', encoding='utf-8') as handle:
+        tree = ast.parse(handle.read(), filename=path)
+    declarations = []
+    for node in tree.body:
+        if isinstance(node, ast.FunctionDef):
+            if node.name.startswith('_') or node.name in tabulated:
+                continue
+            if node.name.startswith('glInit'):
+                # The extension check: it takes nothing and answers a bool,
+                # which is the whole of its signature.
+                declarations.append('def %s() -> bool: ...' % (node.name,))
+            else:
+                declarations.append(
+                    'def %s(*args: Any, **named: Any) -> Any: ...' % (node.name,)
+                )
+            continue
+        if not isinstance(node, ast.Assign):
+            continue
+        for target in node.targets:
+            if not isinstance(target, ast.Name) or target.id.startswith('_'):
+                continue
+            if target.id in tabulated:
+                continue
+            declarations.append(
+                '%s: %s' % (target.id, 'int' if _is_enum_name(target.id) else 'Any')
+            )
+    return tuple(declarations)
+
+
+#: The prefixes an enum name carries in every API PyOpenGL binds.  A constant
+#: is an int; anything else a module binds could be any object at all.
+_ENUM_PREFIXES = ('GL_', 'EGL_', 'WGL_', 'GLX_')
+
+
+def _is_enum_name(name):
+    return name.startswith(_ENUM_PREFIXES)
+
+
 def _write(path, text):
     existing = None
     if os.path.exists(path):
@@ -299,6 +394,12 @@ def generate(package_root, output_root, report=None, tables_path=None,
                 os.path.join(directory, '__init__.pyi'),
                 emit_pyi.emit_module(api, selected, constants.get(api, ())),
             )
+        _write(
+            os.path.join(stubs_root, '_typing.pyi'), emit_pyi.emit_typing_stub()
+        )
+        stub_count = _write_submodule_stubs(package_root, stubs_root, commands)
+        if report is not None:
+            report['module_stubs'] = stub_count
     if tables_path is not None:
         _write(tables_path, emit_tables_module(slots))
 

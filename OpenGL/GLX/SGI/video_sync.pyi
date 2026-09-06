@@ -1,0 +1,13 @@
+"""OpenGL.GLX.SGI.video_sync -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import UIntArray
+
+from OpenGL.raw.GLX._types import *
+
+def glXGetVideoSyncSGI(count: UIntArray) -> int: ...
+def glXWaitVideoSyncSGI(divisor: int, remainder: int, count: UIntArray) -> int: ...
+
+def glInitVideoSyncSGI() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

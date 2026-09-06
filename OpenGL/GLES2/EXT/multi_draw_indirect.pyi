@@ -1,0 +1,13 @@
+"""OpenGL.GLES2.EXT.multi_draw_indirect -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray
+
+from OpenGL.raw.GLES2._types import *
+
+def glMultiDrawArraysIndirectEXT(mode: int, indirect: AnyArray, drawcount: int, stride: int) -> None: ...
+def glMultiDrawElementsIndirectEXT(mode: int, type: int, indirect: AnyArray, drawcount: int, stride: int) -> None: ...
+
+def glInitMultiDrawIndirectEXT() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

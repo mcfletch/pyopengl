@@ -1,0 +1,13 @@
+"""OpenGL.GL.NV.bindless_multi_draw_indirect_count -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray
+
+from OpenGL.raw.GL._types import *
+
+def glMultiDrawArraysIndirectBindlessCountNV(mode: int, indirect: AnyArray, drawCount: int, maxDrawCount: int, stride: int, vertexBufferCount: int) -> None: ...
+def glMultiDrawElementsIndirectBindlessCountNV(mode: int, type: int, indirect: AnyArray, drawCount: int, maxDrawCount: int, stride: int, vertexBufferCount: int) -> None: ...
+
+def glInitBindlessMultiDrawIndirectCountNV() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

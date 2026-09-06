@@ -1,0 +1,19 @@
+"""OpenGL.EGL.KHR.fence_sync -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import IntArray
+
+from OpenGL.raw.EGL._types import *
+
+EGL_SYNC_CONDITION_KHR: int
+EGL_SYNC_FENCE_KHR: int
+EGL_SYNC_PRIOR_COMMANDS_COMPLETE_KHR: int
+
+def eglClientWaitSyncKHR(dpy: Any, sync: Any, flags: int, timeout: int) -> int: ...
+def eglCreateSyncKHR(dpy: Any, type: int, attrib_list: IntArray) -> Any: ...
+def eglDestroySyncKHR(dpy: Any, sync: Any) -> int: ...
+def eglGetSyncAttribKHR(dpy: Any, sync: Any, attribute: int, value: IntArray) -> int: ...
+
+def glInitFenceSyncKHR() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

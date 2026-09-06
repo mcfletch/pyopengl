@@ -1,0 +1,39 @@
+"""OpenGL.GL.KHR.robustness -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray, FloatArray, IntArray, UIntArray
+
+from OpenGL.raw.GL._types import *
+
+GL_CONTEXT_LOST: int
+GL_CONTEXT_LOST_KHR: int
+GL_CONTEXT_ROBUST_ACCESS: int
+GL_CONTEXT_ROBUST_ACCESS_KHR: int
+GL_GUILTY_CONTEXT_RESET: int
+GL_GUILTY_CONTEXT_RESET_KHR: int
+GL_INNOCENT_CONTEXT_RESET: int
+GL_INNOCENT_CONTEXT_RESET_KHR: int
+GL_LOSE_CONTEXT_ON_RESET: int
+GL_LOSE_CONTEXT_ON_RESET_KHR: int
+GL_NO_ERROR: int
+GL_NO_RESET_NOTIFICATION: int
+GL_NO_RESET_NOTIFICATION_KHR: int
+GL_RESET_NOTIFICATION_STRATEGY: int
+GL_RESET_NOTIFICATION_STRATEGY_KHR: int
+GL_UNKNOWN_CONTEXT_RESET: int
+GL_UNKNOWN_CONTEXT_RESET_KHR: int
+
+def glGetGraphicsResetStatus() -> int: ...
+def glGetGraphicsResetStatusKHR() -> int: ...
+def glGetnUniformfv(program: int, location: int, bufSize: int, params: FloatArray) -> None: ...
+def glGetnUniformfvKHR(program: int, location: int, bufSize: int, params: FloatArray) -> None: ...
+def glGetnUniformiv(program: int, location: int, bufSize: int, params: IntArray) -> None: ...
+def glGetnUniformivKHR(program: int, location: int, bufSize: int, params: IntArray) -> None: ...
+def glGetnUniformuiv(program: int, location: int, bufSize: int, params: UIntArray) -> None: ...
+def glGetnUniformuivKHR(program: int, location: int, bufSize: int, params: UIntArray) -> None: ...
+def glReadnPixels(x: int, y: int, width: int, height: int, format: int, type: int, bufSize: int, data: AnyArray) -> None: ...
+def glReadnPixelsKHR(x: int, y: int, width: int, height: int, format: int, type: int, bufSize: int, data: AnyArray) -> None: ...
+
+def glInitRobustnessKHR() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

@@ -1,0 +1,13 @@
+"""OpenGL.GLES2.EXT.clear_texture -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray
+
+from OpenGL.raw.GLES2._types import *
+
+def glClearTexImageEXT(texture: int, level: int, format: int, type: int, data: AnyArray) -> None: ...
+def glClearTexSubImageEXT(texture: int, level: int, xoffset: int, yoffset: int, zoffset: int, width: int, height: int, depth: int, format: int, type: int, data: AnyArray) -> None: ...
+
+def glInitClearTextureEXT() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

@@ -1,0 +1,489 @@
+"""OpenGL.GLES1.VERSION.GLES1_1_0 -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray, AnyArrayResult, FloatArray, FloatArrayResult, IntArray, IntArrayResult, UByteArray, UByteArrayResult, UIntArray, UIntArrayResult
+
+from OpenGL.raw.GLES1._types import *
+
+GL_ACTIVE_TEXTURE: int
+GL_ADD: int
+GL_ADD_SIGNED: int
+GL_ALIASED_LINE_WIDTH_RANGE: int
+GL_ALIASED_POINT_SIZE_RANGE: int
+GL_ALPHA: int
+GL_ALPHA_BITS: int
+GL_ALPHA_SCALE: int
+GL_ALPHA_TEST: int
+GL_ALPHA_TEST_FUNC: int
+GL_ALPHA_TEST_REF: int
+GL_ALWAYS: int
+GL_AMBIENT: int
+GL_AMBIENT_AND_DIFFUSE: int
+GL_AND: int
+GL_AND_INVERTED: int
+GL_AND_REVERSE: int
+GL_ARRAY_BUFFER: int
+GL_ARRAY_BUFFER_BINDING: int
+GL_BACK: int
+GL_BLEND: int
+GL_BLEND_DST: int
+GL_BLEND_SRC: int
+GL_BLUE_BITS: int
+GL_BUFFER_SIZE: int
+GL_BUFFER_USAGE: int
+GL_BYTE: int
+GL_CCW: int
+GL_CLAMP_TO_EDGE: int
+GL_CLEAR: int
+GL_CLIENT_ACTIVE_TEXTURE: int
+GL_CLIP_PLANE0: int
+GL_CLIP_PLANE1: int
+GL_CLIP_PLANE2: int
+GL_CLIP_PLANE3: int
+GL_CLIP_PLANE4: int
+GL_CLIP_PLANE5: int
+GL_COLOR_ARRAY: int
+GL_COLOR_ARRAY_BUFFER_BINDING: int
+GL_COLOR_ARRAY_POINTER: int
+GL_COLOR_ARRAY_SIZE: int
+GL_COLOR_ARRAY_STRIDE: int
+GL_COLOR_ARRAY_TYPE: int
+GL_COLOR_BUFFER_BIT: int
+GL_COLOR_CLEAR_VALUE: int
+GL_COLOR_LOGIC_OP: int
+GL_COLOR_MATERIAL: int
+GL_COLOR_WRITEMASK: int
+GL_COMBINE: int
+GL_COMBINE_ALPHA: int
+GL_COMBINE_RGB: int
+GL_COMPRESSED_TEXTURE_FORMATS: int
+GL_CONSTANT: int
+GL_CONSTANT_ATTENUATION: int
+GL_COPY: int
+GL_COPY_INVERTED: int
+GL_CULL_FACE: int
+GL_CULL_FACE_MODE: int
+GL_CURRENT_COLOR: int
+GL_CURRENT_NORMAL: int
+GL_CURRENT_TEXTURE_COORDS: int
+GL_CW: int
+GL_DECAL: int
+GL_DECR: int
+GL_DEPTH_BITS: int
+GL_DEPTH_BUFFER_BIT: int
+GL_DEPTH_CLEAR_VALUE: int
+GL_DEPTH_FUNC: int
+GL_DEPTH_RANGE: int
+GL_DEPTH_TEST: int
+GL_DEPTH_WRITEMASK: int
+GL_DIFFUSE: int
+GL_DITHER: int
+GL_DONT_CARE: int
+GL_DOT3_RGB: int
+GL_DOT3_RGBA: int
+GL_DST_ALPHA: int
+GL_DST_COLOR: int
+GL_DYNAMIC_DRAW: int
+GL_ELEMENT_ARRAY_BUFFER: int
+GL_ELEMENT_ARRAY_BUFFER_BINDING: int
+GL_EMISSION: int
+GL_EQUAL: int
+GL_EQUIV: int
+GL_EXP: int
+GL_EXP2: int
+GL_EXTENSIONS: int
+GL_FALSE: int
+GL_FASTEST: int
+GL_FIXED: int
+GL_FLAT: int
+GL_FLOAT: int
+GL_FOG: int
+GL_FOG_COLOR: int
+GL_FOG_DENSITY: int
+GL_FOG_END: int
+GL_FOG_HINT: int
+GL_FOG_MODE: int
+GL_FOG_START: int
+GL_FRONT: int
+GL_FRONT_AND_BACK: int
+GL_FRONT_FACE: int
+GL_GENERATE_MIPMAP: int
+GL_GENERATE_MIPMAP_HINT: int
+GL_GEQUAL: int
+GL_GREATER: int
+GL_GREEN_BITS: int
+GL_INCR: int
+GL_INTERPOLATE: int
+GL_INVALID_ENUM: int
+GL_INVALID_OPERATION: int
+GL_INVALID_VALUE: int
+GL_INVERT: int
+GL_KEEP: int
+GL_LEQUAL: int
+GL_LESS: int
+GL_LIGHT0: int
+GL_LIGHT1: int
+GL_LIGHT2: int
+GL_LIGHT3: int
+GL_LIGHT4: int
+GL_LIGHT5: int
+GL_LIGHT6: int
+GL_LIGHT7: int
+GL_LIGHTING: int
+GL_LIGHT_MODEL_AMBIENT: int
+GL_LIGHT_MODEL_TWO_SIDE: int
+GL_LINEAR: int
+GL_LINEAR_ATTENUATION: int
+GL_LINEAR_MIPMAP_LINEAR: int
+GL_LINEAR_MIPMAP_NEAREST: int
+GL_LINES: int
+GL_LINE_LOOP: int
+GL_LINE_SMOOTH: int
+GL_LINE_SMOOTH_HINT: int
+GL_LINE_STRIP: int
+GL_LINE_WIDTH: int
+GL_LOGIC_OP_MODE: int
+GL_LUMINANCE: int
+GL_LUMINANCE_ALPHA: int
+GL_MATRIX_MODE: int
+GL_MAX_CLIP_PLANES: int
+GL_MAX_LIGHTS: int
+GL_MAX_MODELVIEW_STACK_DEPTH: int
+GL_MAX_PROJECTION_STACK_DEPTH: int
+GL_MAX_TEXTURE_SIZE: int
+GL_MAX_TEXTURE_STACK_DEPTH: int
+GL_MAX_TEXTURE_UNITS: int
+GL_MAX_VIEWPORT_DIMS: int
+GL_MODELVIEW: int
+GL_MODELVIEW_MATRIX: int
+GL_MODELVIEW_STACK_DEPTH: int
+GL_MODULATE: int
+GL_MULTISAMPLE: int
+GL_NAND: int
+GL_NEAREST: int
+GL_NEAREST_MIPMAP_LINEAR: int
+GL_NEAREST_MIPMAP_NEAREST: int
+GL_NEVER: int
+GL_NICEST: int
+GL_NOOP: int
+GL_NOR: int
+GL_NORMALIZE: int
+GL_NORMAL_ARRAY: int
+GL_NORMAL_ARRAY_BUFFER_BINDING: int
+GL_NORMAL_ARRAY_POINTER: int
+GL_NORMAL_ARRAY_STRIDE: int
+GL_NORMAL_ARRAY_TYPE: int
+GL_NOTEQUAL: int
+GL_NO_ERROR: int
+GL_NUM_COMPRESSED_TEXTURE_FORMATS: int
+GL_ONE: int
+GL_ONE_MINUS_DST_ALPHA: int
+GL_ONE_MINUS_DST_COLOR: int
+GL_ONE_MINUS_SRC_ALPHA: int
+GL_ONE_MINUS_SRC_COLOR: int
+GL_OPERAND0_ALPHA: int
+GL_OPERAND0_RGB: int
+GL_OPERAND1_ALPHA: int
+GL_OPERAND1_RGB: int
+GL_OPERAND2_ALPHA: int
+GL_OPERAND2_RGB: int
+GL_OR: int
+GL_OR_INVERTED: int
+GL_OR_REVERSE: int
+GL_OUT_OF_MEMORY: int
+GL_PACK_ALIGNMENT: int
+GL_PERSPECTIVE_CORRECTION_HINT: int
+GL_POINTS: int
+GL_POINT_DISTANCE_ATTENUATION: int
+GL_POINT_FADE_THRESHOLD_SIZE: int
+GL_POINT_SIZE: int
+GL_POINT_SIZE_MAX: int
+GL_POINT_SIZE_MIN: int
+GL_POINT_SMOOTH: int
+GL_POINT_SMOOTH_HINT: int
+GL_POLYGON_OFFSET_FACTOR: int
+GL_POLYGON_OFFSET_FILL: int
+GL_POLYGON_OFFSET_UNITS: int
+GL_POSITION: int
+GL_PREVIOUS: int
+GL_PRIMARY_COLOR: int
+GL_PROJECTION: int
+GL_PROJECTION_MATRIX: int
+GL_PROJECTION_STACK_DEPTH: int
+GL_QUADRATIC_ATTENUATION: int
+GL_RED_BITS: int
+GL_RENDERER: int
+GL_REPEAT: int
+GL_REPLACE: int
+GL_RESCALE_NORMAL: int
+GL_RGB: int
+GL_RGBA: int
+GL_RGB_SCALE: int
+GL_SAMPLES: int
+GL_SAMPLE_ALPHA_TO_COVERAGE: int
+GL_SAMPLE_ALPHA_TO_ONE: int
+GL_SAMPLE_BUFFERS: int
+GL_SAMPLE_COVERAGE: int
+GL_SAMPLE_COVERAGE_INVERT: int
+GL_SAMPLE_COVERAGE_VALUE: int
+GL_SCISSOR_BOX: int
+GL_SCISSOR_TEST: int
+GL_SET: int
+GL_SHADE_MODEL: int
+GL_SHININESS: int
+GL_SHORT: int
+GL_SMOOTH: int
+GL_SMOOTH_LINE_WIDTH_RANGE: int
+GL_SMOOTH_POINT_SIZE_RANGE: int
+GL_SPECULAR: int
+GL_SPOT_CUTOFF: int
+GL_SPOT_DIRECTION: int
+GL_SPOT_EXPONENT: int
+GL_SRC0_ALPHA: int
+GL_SRC0_RGB: int
+GL_SRC1_ALPHA: int
+GL_SRC1_RGB: int
+GL_SRC2_ALPHA: int
+GL_SRC2_RGB: int
+GL_SRC_ALPHA: int
+GL_SRC_ALPHA_SATURATE: int
+GL_SRC_COLOR: int
+GL_STACK_OVERFLOW: int
+GL_STACK_UNDERFLOW: int
+GL_STATIC_DRAW: int
+GL_STENCIL_BITS: int
+GL_STENCIL_BUFFER_BIT: int
+GL_STENCIL_CLEAR_VALUE: int
+GL_STENCIL_FAIL: int
+GL_STENCIL_FUNC: int
+GL_STENCIL_PASS_DEPTH_FAIL: int
+GL_STENCIL_PASS_DEPTH_PASS: int
+GL_STENCIL_REF: int
+GL_STENCIL_TEST: int
+GL_STENCIL_VALUE_MASK: int
+GL_STENCIL_WRITEMASK: int
+GL_SUBPIXEL_BITS: int
+GL_SUBTRACT: int
+GL_TEXTURE: int
+GL_TEXTURE0: int
+GL_TEXTURE1: int
+GL_TEXTURE10: int
+GL_TEXTURE11: int
+GL_TEXTURE12: int
+GL_TEXTURE13: int
+GL_TEXTURE14: int
+GL_TEXTURE15: int
+GL_TEXTURE16: int
+GL_TEXTURE17: int
+GL_TEXTURE18: int
+GL_TEXTURE19: int
+GL_TEXTURE2: int
+GL_TEXTURE20: int
+GL_TEXTURE21: int
+GL_TEXTURE22: int
+GL_TEXTURE23: int
+GL_TEXTURE24: int
+GL_TEXTURE25: int
+GL_TEXTURE26: int
+GL_TEXTURE27: int
+GL_TEXTURE28: int
+GL_TEXTURE29: int
+GL_TEXTURE3: int
+GL_TEXTURE30: int
+GL_TEXTURE31: int
+GL_TEXTURE4: int
+GL_TEXTURE5: int
+GL_TEXTURE6: int
+GL_TEXTURE7: int
+GL_TEXTURE8: int
+GL_TEXTURE9: int
+GL_TEXTURE_2D: int
+GL_TEXTURE_BINDING_2D: int
+GL_TEXTURE_COORD_ARRAY: int
+GL_TEXTURE_COORD_ARRAY_BUFFER_BINDING: int
+GL_TEXTURE_COORD_ARRAY_POINTER: int
+GL_TEXTURE_COORD_ARRAY_SIZE: int
+GL_TEXTURE_COORD_ARRAY_STRIDE: int
+GL_TEXTURE_COORD_ARRAY_TYPE: int
+GL_TEXTURE_ENV: int
+GL_TEXTURE_ENV_COLOR: int
+GL_TEXTURE_ENV_MODE: int
+GL_TEXTURE_MAG_FILTER: int
+GL_TEXTURE_MATRIX: int
+GL_TEXTURE_MIN_FILTER: int
+GL_TEXTURE_STACK_DEPTH: int
+GL_TEXTURE_WRAP_S: int
+GL_TEXTURE_WRAP_T: int
+GL_TRIANGLES: int
+GL_TRIANGLE_FAN: int
+GL_TRIANGLE_STRIP: int
+GL_TRUE: int
+GL_UNPACK_ALIGNMENT: int
+GL_UNSIGNED_BYTE: int
+GL_UNSIGNED_SHORT: int
+GL_UNSIGNED_SHORT_4_4_4_4: int
+GL_UNSIGNED_SHORT_5_5_5_1: int
+GL_UNSIGNED_SHORT_5_6_5: int
+GL_VENDOR: int
+GL_VERSION: int
+GL_VERSION_ES_CL_1_0: int
+GL_VERSION_ES_CL_1_1: int
+GL_VERSION_ES_CM_1_1: int
+GL_VERTEX_ARRAY: int
+GL_VERTEX_ARRAY_BUFFER_BINDING: int
+GL_VERTEX_ARRAY_POINTER: int
+GL_VERTEX_ARRAY_SIZE: int
+GL_VERTEX_ARRAY_STRIDE: int
+GL_VERTEX_ARRAY_TYPE: int
+GL_VIEWPORT: int
+GL_XOR: int
+GL_ZERO: int
+
+def glActiveTexture(texture: int) -> None: ...
+def glAlphaFunc(func: int, ref: float) -> None: ...
+def glAlphaFuncx(func: int, ref: int) -> None: ...
+def glBindBuffer(target: int, buffer: int) -> None: ...
+def glBindTexture(target: int, texture: int) -> None: ...
+def glBlendFunc(sfactor: int, dfactor: int) -> None: ...
+def glBufferData(target: int, size: int, data: AnyArray, usage: int) -> None: ...
+def glBufferSubData(target: int, offset: int, size: int, data: AnyArray) -> None: ...
+def glClear(mask: int) -> None: ...
+def glClearColor(red: float, green: float, blue: float, alpha: float) -> None: ...
+def glClearColorx(red: int, green: int, blue: int, alpha: int) -> None: ...
+def glClearDepthf(d: float) -> None: ...
+def glClearDepthx(depth: int) -> None: ...
+def glClearStencil(s: int) -> None: ...
+def glClientActiveTexture(texture: int) -> None: ...
+def glClipPlanef(p: int, eqn: FloatArray) -> None: ...
+def glClipPlanex(plane: int, equation: IntArray) -> None: ...
+def glColor4f(red: float, green: float, blue: float, alpha: float) -> None: ...
+def glColor4ub(red: int, green: int, blue: int, alpha: int) -> None: ...
+def glColor4x(red: int, green: int, blue: int, alpha: int) -> None: ...
+def glColorMask(red: bool, green: bool, blue: bool, alpha: bool) -> None: ...
+def glColorPointer(size: int, type: int, stride: int, pointer: AnyArray) -> None: ...
+def glCompressedTexImage2D(target: int, level: int, internalformat: int, width: int, height: int, border: int, imageSize: int, data: AnyArray) -> None: ...
+def glCompressedTexSubImage2D(target: int, level: int, xoffset: int, yoffset: int, width: int, height: int, format: int, imageSize: int, data: AnyArray) -> None: ...
+def glCopyTexImage2D(target: int, level: int, internalformat: int, x: int, y: int, width: int, height: int, border: int) -> None: ...
+def glCopyTexSubImage2D(target: int, level: int, xoffset: int, yoffset: int, x: int, y: int, width: int, height: int) -> None: ...
+def glCullFace(mode: int) -> None: ...
+def glDeleteBuffers(n: int, buffers: UIntArray) -> None: ...
+def glDeleteTextures(n: int, textures: UIntArray) -> None: ...
+def glDepthFunc(func: int) -> None: ...
+def glDepthMask(flag: bool) -> None: ...
+def glDepthRangef(n: float, f: float) -> None: ...
+def glDepthRangex(n: int, f: int) -> None: ...
+def glDisable(cap: int) -> None: ...
+def glDisableClientState(array: int) -> None: ...
+def glDrawArrays(mode: int, first: int, count: int) -> None: ...
+def glDrawElements(mode: int, count: int, type: int, indices: AnyArray) -> None: ...
+def glEnable(cap: int) -> None: ...
+def glEnableClientState(array: int) -> None: ...
+def glFinish() -> None: ...
+def glFlush() -> None: ...
+def glFogf(pname: int, param: float) -> None: ...
+def glFogfv(pname: int, params: FloatArray) -> None: ...
+def glFogx(pname: int, param: int) -> None: ...
+def glFogxv(pname: int, param: IntArray) -> None: ...
+def glFrontFace(mode: int) -> None: ...
+def glFrustumf(l: float, r: float, b: float, t: float, n: float, f: float) -> None: ...
+def glFrustumx(l: int, r: int, b: int, t: int, n: int, f: int) -> None: ...
+def glGenBuffers(n: int, buffers: UIntArray | None = None) -> UIntArrayResult: ...
+def glGenTextures(n: int, textures: UIntArray | None = None) -> UIntArrayResult: ...
+def glGetBooleanv(pname: int, data: UByteArray | None = None) -> UByteArrayResult: ...
+def glGetBufferParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult: ...
+def glGetClipPlanef(plane: int, equation: FloatArray) -> None: ...
+def glGetClipPlanex(plane: int, equation: IntArray) -> None: ...
+def glGetError() -> int: ...
+def glGetFixedv(pname: int, params: IntArray) -> None: ...
+def glGetFloatv(pname: int, data: FloatArray | None = None) -> FloatArrayResult: ...
+def glGetIntegerv(pname: int, data: IntArray | None = None) -> IntArrayResult: ...
+def glGetLightfv(light: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult: ...
+def glGetLightxv(light: int, pname: int, params: IntArray) -> None: ...
+def glGetMaterialfv(face: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult: ...
+def glGetMaterialxv(face: int, pname: int, params: IntArray) -> None: ...
+def glGetPointerv(pname: int, params: AnyArray | None = None) -> AnyArrayResult: ...
+def glGetString(name: int) -> bytes: ...
+def glGetTexEnvfv(target: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult: ...
+def glGetTexEnviv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult: ...
+def glGetTexEnvxv(target: int, pname: int, params: IntArray) -> None: ...
+def glGetTexParameterfv(target: int, pname: int, params: FloatArray | None = None) -> FloatArrayResult: ...
+def glGetTexParameteriv(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult: ...
+def glGetTexParameterxv(target: int, pname: int, params: IntArray) -> None: ...
+def glHint(target: int, mode: int) -> None: ...
+def glIsBuffer(buffer: int) -> int: ...
+def glIsEnabled(cap: int) -> int: ...
+def glIsTexture(texture: int) -> int: ...
+def glLightModelf(pname: int, param: float) -> None: ...
+def glLightModelfv(pname: int, params: FloatArray) -> None: ...
+def glLightModelx(pname: int, param: int) -> None: ...
+def glLightModelxv(pname: int, param: IntArray) -> None: ...
+def glLightf(light: int, pname: int, param: float) -> None: ...
+def glLightfv(light: int, pname: int, params: FloatArray) -> None: ...
+def glLightx(light: int, pname: int, param: int) -> None: ...
+def glLightxv(light: int, pname: int, params: IntArray) -> None: ...
+def glLineWidth(width: float) -> None: ...
+def glLineWidthx(width: int) -> None: ...
+def glLoadIdentity() -> None: ...
+def glLoadMatrixf(m: FloatArray) -> None: ...
+def glLoadMatrixx(m: IntArray) -> None: ...
+def glLogicOp(opcode: int) -> None: ...
+def glMaterialf(face: int, pname: int, param: float) -> None: ...
+def glMaterialfv(face: int, pname: int, params: FloatArray) -> None: ...
+def glMaterialx(face: int, pname: int, param: int) -> None: ...
+def glMaterialxv(face: int, pname: int, param: IntArray) -> None: ...
+def glMatrixMode(mode: int) -> None: ...
+def glMultMatrixf(m: FloatArray) -> None: ...
+def glMultMatrixx(m: IntArray) -> None: ...
+def glMultiTexCoord4f(target: int, s: float, t: float, r: float, q: float) -> None: ...
+def glMultiTexCoord4x(texture: int, s: int, t: int, r: int, q: int) -> None: ...
+def glNormal3f(nx: float, ny: float, nz: float) -> None: ...
+def glNormal3x(nx: int, ny: int, nz: int) -> None: ...
+def glNormalPointer(type: int, stride: int, pointer: AnyArray) -> None: ...
+def glOrthof(l: float, r: float, b: float, t: float, n: float, f: float) -> None: ...
+def glOrthox(l: int, r: int, b: int, t: int, n: int, f: int) -> None: ...
+def glPixelStorei(pname: int, param: int) -> None: ...
+def glPointParameterf(pname: int, param: float) -> None: ...
+def glPointParameterfv(pname: int, params: FloatArray) -> None: ...
+def glPointParameterx(pname: int, param: int) -> None: ...
+def glPointParameterxv(pname: int, params: IntArray) -> None: ...
+def glPointSize(size: float) -> None: ...
+def glPointSizex(size: int) -> None: ...
+def glPolygonOffset(factor: float, units: float) -> None: ...
+def glPolygonOffsetx(factor: int, units: int) -> None: ...
+def glPopMatrix() -> None: ...
+def glPushMatrix() -> None: ...
+def glReadPixels(x: int, y: int, width: int, height: int, format: int, type: int, pixels: AnyArray | None = None) -> AnyArrayResult: ...
+def glRotatef(angle: float, x: float, y: float, z: float) -> None: ...
+def glRotatex(angle: int, x: int, y: int, z: int) -> None: ...
+def glSampleCoverage(value: float, invert: bool) -> None: ...
+def glSampleCoveragex(value: int, invert: bool) -> None: ...
+def glScalef(x: float, y: float, z: float) -> None: ...
+def glScalex(x: int, y: int, z: int) -> None: ...
+def glScissor(x: int, y: int, width: int, height: int) -> None: ...
+def glShadeModel(mode: int) -> None: ...
+def glStencilFunc(func: int, ref: int, mask: int) -> None: ...
+def glStencilMask(mask: int) -> None: ...
+def glStencilOp(fail: int, zfail: int, zpass: int) -> None: ...
+def glTexCoordPointer(size: int, type: int, stride: int, pointer: AnyArray) -> None: ...
+def glTexEnvf(target: int, pname: int, param: float) -> None: ...
+def glTexEnvfv(target: int, pname: int, params: FloatArray) -> None: ...
+def glTexEnvi(target: int, pname: int, param: int) -> None: ...
+def glTexEnviv(target: int, pname: int, params: IntArray) -> None: ...
+def glTexEnvx(target: int, pname: int, param: int) -> None: ...
+def glTexEnvxv(target: int, pname: int, params: IntArray) -> None: ...
+def glTexImage2D(target: int, level: int, internalformat: int, width: int, height: int, border: int, format: int, type: int, pixels: AnyArray) -> None: ...
+def glTexParameterf(target: int, pname: int, param: float) -> None: ...
+def glTexParameterfv(target: int, pname: int, params: FloatArray) -> None: ...
+def glTexParameteri(target: int, pname: int, param: int) -> None: ...
+def glTexParameteriv(target: int, pname: int, params: IntArray) -> None: ...
+def glTexParameterx(target: int, pname: int, param: int) -> None: ...
+def glTexParameterxv(target: int, pname: int, params: IntArray) -> None: ...
+def glTexSubImage2D(target: int, level: int, xoffset: int, yoffset: int, width: int, height: int, format: int, type: int, pixels: AnyArray) -> None: ...
+def glTranslatef(x: float, y: float, z: float) -> None: ...
+def glTranslatex(x: int, y: int, z: int) -> None: ...
+def glVertexPointer(size: int, type: int, stride: int, pointer: AnyArray) -> None: ...
+def glViewport(x: int, y: int, width: int, height: int) -> None: ...
+
+def glInitGles110VERSION() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

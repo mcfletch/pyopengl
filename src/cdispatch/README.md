@@ -16,13 +16,15 @@ changes, so running it on an unchanged tree produces an empty diff. It writes:
 
 | output | what it is |
 |---|---|
-| `src/c/generated/pygl_<API>.c` | one C function per entry point, per namespace |
-| `src/c/generated/pygl_elements.h` | the array element descriptions stubs name |
-| `src/c/generated/pygl_glgets.h` | the pname → output-size tables |
-| `src/c/generated/pygl_generated.c` | registration of every table |
-| `src/c/generated/manifest.json` | counts, generator version, registry commit |
+| `accelerate/src/c/generated/pygl_<API>.c` | one C function per entry point, per namespace |
+| `accelerate/src/c/generated/pygl_elements.h` | the array element descriptions stubs name |
+| `accelerate/src/c/generated/pygl_glgets.h` | the pname → output-size tables |
+| `accelerate/src/c/generated/pygl_generated.c` | registration of every table |
+| `accelerate/src/c/generated/manifest.json` | counts, generator version, registry commit |
 | `OpenGL/_dispatch/_tables.py` | array-type names and slot assignments |
-| `OpenGL/<API>/__init__.pyi` | the type stubs |
+| `OpenGL/<API>/__init__.pyi` | the type stubs for the whole namespace |
+| `OpenGL/<API>/**/*.pyi` | one per friendly module, so an editor can see into it |
+| `OpenGL/_typing.pyi` | the array aliases those annotate with; stub-only |
 
 Rebuild afterwards; an editable install compiles the extension in place:
 
@@ -114,14 +116,19 @@ _fail:
 }
 ```
 
-The macro vocabulary is in `src/c/pygl.h`. The shape is always the same: check
+The macro vocabulary is in `accelerate/src/c/pygl.h`. The shape is always the same: check
 the arity, declare the cleanup frame, convert the scalars, one `PYGL_CONV_OK`,
 acquire the arrays, call, check, clean up. Scalars come before arrays so that
 nothing needs unwinding while only scalars have been converted.
 
 **5. `emit_pyi.py` — the stubs.** From the same record, so
 `glGenTextures(n, textures=None) -> UIntArrayResult` falls out of the size and
-direction annotations rather than being written.
+direction annotations rather than being written. Two kinds: one per API
+namespace, carrying the docstrings, and one beside every friendly module,
+carrying signatures alone. The second kind is what an editor reads to know
+what `OpenGL.GL.ARB.vertex_array_object` contains, since the module itself
+fills its namespace at import from the tables. `tests/test_module_stubs.py`
+holds each stub to the names its module actually ends up with.
 
 ## The rule everything else follows
 
@@ -139,7 +146,7 @@ Some entry points promise a computation rather than a description of their
 arguments. `glShaderSource` takes one string or several, as `str` or `bytes`,
 and works out the count and the lengths. No table expresses that.
 
-1. Write `pygl_hand_glFoo` in `src/c/pygl_handwritten.c`.
+1. Write `pygl_hand_glFoo` in `accelerate/src/c/pygl_handwritten.c`.
 2. Add a row to `ENTRIES` in `handwritten.py`: which APIs it serves, the C
    symbol, the argument names the friendly form takes, its signature line, and
    `c_arg_names` — what `argNames` should keep reporting, which is what it

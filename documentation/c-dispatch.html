@@ -365,6 +365,30 @@ caller makes and the man page they read next uses; an array argument is written
 The <code>.pyi</code> stubs beside the package state the same signatures in
 Python types, which is what a type checker can use.</p>
 
+<h3>What an editor sees</h3>
+
+<p>A friendly module fills its namespace when it is imported, from the same
+tables the entry points come from &#8212;
+<code>_define(globals(), 'OpenGL.raw.GL.ARB.vertex_array_object')</code>.
+Nothing reading the file can follow that, so every module ships a stub beside
+it saying what the import leaves in it:</p>
+
+<pre>OpenGL/GL/ARB/vertex_array_object.pyi
+
+GL_VERTEX_ARRAY_BINDING: int
+
+def glBindVertexArray(array: int) -&gt; None: ...
+def glGenVertexArrays(n: int, arrays: UIntArray | None = None) -&gt; UIntArrayResult: ...
+def glInitVertexArrayObjectARB() -&gt; bool: ...</pre>
+
+<p>Completion in
+<code>from OpenGL.GL.ARB import vertex_array_object</code> therefore offers what
+that extension declares, and a type checker knows the signatures rather than
+answering <code>Any</code>.  1,299 of them, generated from the module table in
+the same pass as the C, so a registry update carries them along; the array
+aliases they annotate with are in <code>OpenGL/_typing.pyi</code>, which is a
+stub and not a module to import.</p>
+
 <h2>Threads</h2>
 
 <p>A GL context belongs to one thread at a time, so the usual arrangement is

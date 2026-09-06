@@ -1,0 +1,22 @@
+"""OpenGL.GL.SGIX.clipmap -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+
+from OpenGL.raw.GL._types import *
+
+GL_LINEAR_CLIPMAP_LINEAR_SGIX: int
+GL_LINEAR_CLIPMAP_NEAREST_SGIX: int
+GL_MAX_CLIPMAP_DEPTH_SGIX: int
+GL_MAX_CLIPMAP_VIRTUAL_DEPTH_SGIX: int
+GL_NEAREST_CLIPMAP_LINEAR_SGIX: int
+GL_NEAREST_CLIPMAP_NEAREST_SGIX: int
+GL_TEXTURE_CLIPMAP_CENTER_SGIX: int
+GL_TEXTURE_CLIPMAP_DEPTH_SGIX: int
+GL_TEXTURE_CLIPMAP_FRAME_SGIX: int
+GL_TEXTURE_CLIPMAP_LOD_OFFSET_SGIX: int
+GL_TEXTURE_CLIPMAP_OFFSET_SGIX: int
+GL_TEXTURE_CLIPMAP_VIRTUAL_DEPTH_SGIX: int
+
+def glInitClipmapSGIX() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

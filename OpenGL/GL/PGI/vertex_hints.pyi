@@ -1,0 +1,32 @@
+"""OpenGL.GL.PGI.vertex_hints -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+
+from OpenGL.raw.GL._types import *
+
+GL_COLOR3_BIT_PGI: int
+GL_COLOR4_BIT_PGI: int
+GL_EDGEFLAG_BIT_PGI: int
+GL_INDEX_BIT_PGI: int
+GL_MATERIAL_SIDE_HINT_PGI: int
+GL_MAT_AMBIENT_AND_DIFFUSE_BIT_PGI: int
+GL_MAT_AMBIENT_BIT_PGI: int
+GL_MAT_COLOR_INDEXES_BIT_PGI: int
+GL_MAT_DIFFUSE_BIT_PGI: int
+GL_MAT_EMISSION_BIT_PGI: int
+GL_MAT_SHININESS_BIT_PGI: int
+GL_MAT_SPECULAR_BIT_PGI: int
+GL_MAX_VERTEX_HINT_PGI: int
+GL_NORMAL_BIT_PGI: int
+GL_TEXCOORD1_BIT_PGI: int
+GL_TEXCOORD2_BIT_PGI: int
+GL_TEXCOORD3_BIT_PGI: int
+GL_TEXCOORD4_BIT_PGI: int
+GL_VERTEX23_BIT_PGI: int
+GL_VERTEX4_BIT_PGI: int
+GL_VERTEX_CONSISTENT_HINT_PGI: int
+GL_VERTEX_DATA_HINT_PGI: int
+
+def glInitVertexHintsPGI() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

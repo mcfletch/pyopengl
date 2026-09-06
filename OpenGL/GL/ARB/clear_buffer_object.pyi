@@ -1,0 +1,13 @@
+"""OpenGL.GL.ARB.clear_buffer_object -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray
+
+from OpenGL.raw.GL._types import *
+
+def glClearBufferData(target: int, internalformat: int, format: int, type: int, data: AnyArray) -> None: ...
+def glClearBufferSubData(target: int, internalformat: int, offset: int, size: int, format: int, type: int, data: AnyArray) -> None: ...
+
+def glInitClearBufferObjectARB() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

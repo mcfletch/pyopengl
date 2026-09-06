@@ -1,0 +1,13 @@
+"""OpenGL.WGL.NV.vertex_array_range -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray
+
+from OpenGL.raw.WGL._types import *
+
+def wglAllocateMemoryNV(size: int, readfreq: float, writefreq: float, priority: float) -> int | None: ...
+def wglFreeMemoryNV(pointer: AnyArray) -> None: ...
+
+def glInitVertexArrayRangeNV() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

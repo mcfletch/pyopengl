@@ -1,0 +1,13 @@
+"""OpenGL.GLX.SGI.make_current_read -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray
+
+from OpenGL.raw.GLX._types import *
+
+def glXGetCurrentReadDrawableSGI() -> Any: ...
+def glXMakeCurrentReadSGI(dpy: AnyArray, draw: Any, read: Any, ctx: Any) -> int: ...
+
+def glInitMakeCurrentReadSGI() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

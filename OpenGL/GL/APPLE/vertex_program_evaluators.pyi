@@ -1,0 +1,29 @@
+"""OpenGL.GL.APPLE.vertex_program_evaluators -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import DoubleArray, FloatArray
+
+from OpenGL.raw.GL._types import *
+
+GL_VERTEX_ATTRIB_MAP1_APPLE: int
+GL_VERTEX_ATTRIB_MAP1_COEFF_APPLE: int
+GL_VERTEX_ATTRIB_MAP1_DOMAIN_APPLE: int
+GL_VERTEX_ATTRIB_MAP1_ORDER_APPLE: int
+GL_VERTEX_ATTRIB_MAP1_SIZE_APPLE: int
+GL_VERTEX_ATTRIB_MAP2_APPLE: int
+GL_VERTEX_ATTRIB_MAP2_COEFF_APPLE: int
+GL_VERTEX_ATTRIB_MAP2_DOMAIN_APPLE: int
+GL_VERTEX_ATTRIB_MAP2_ORDER_APPLE: int
+GL_VERTEX_ATTRIB_MAP2_SIZE_APPLE: int
+
+def glDisableVertexAttribAPPLE(index: int, pname: int) -> None: ...
+def glEnableVertexAttribAPPLE(index: int, pname: int) -> None: ...
+def glIsVertexAttribEnabledAPPLE(index: int, pname: int) -> int: ...
+def glMapVertexAttrib1dAPPLE(index: int, size: int, u1: float, u2: float, stride: int, order: int, points: DoubleArray) -> None: ...
+def glMapVertexAttrib1fAPPLE(index: int, size: int, u1: float, u2: float, stride: int, order: int, points: FloatArray) -> None: ...
+def glMapVertexAttrib2dAPPLE(index: int, size: int, u1: float, u2: float, ustride: int, uorder: int, v1: float, v2: float, vstride: int, vorder: int, points: DoubleArray) -> None: ...
+def glMapVertexAttrib2fAPPLE(index: int, size: int, u1: float, u2: float, ustride: int, uorder: int, v1: float, v2: float, vstride: int, vorder: int, points: FloatArray) -> None: ...
+
+def glInitVertexProgramEvaluatorsAPPLE() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

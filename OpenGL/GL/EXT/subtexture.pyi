@@ -1,0 +1,13 @@
+"""OpenGL.GL.EXT.subtexture -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray
+
+from OpenGL.raw.GL._types import *
+
+def glTexSubImage1DEXT(target: int, level: int, xoffset: int, width: int, format: int, type: int, pixels: AnyArray) -> None: ...
+def glTexSubImage2DEXT(target: int, level: int, xoffset: int, yoffset: int, width: int, height: int, format: int, type: int, pixels: AnyArray) -> None: ...
+
+def glInitSubtextureEXT() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

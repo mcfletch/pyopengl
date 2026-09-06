@@ -1,0 +1,13 @@
+"""OpenGL.GL.EXT.color_subtable -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray
+
+from OpenGL.raw.GL._types import *
+
+def glColorSubTableEXT(target: int, start: int, count: int, format: int, type: int, data: AnyArray) -> None: ...
+def glCopyColorSubTableEXT(target: int, start: int, x: int, y: int, width: int) -> None: ...
+
+def glInitColorSubtableEXT() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

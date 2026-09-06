@@ -75,7 +75,10 @@ version = {attr = "OpenGL.version.__version__"}
 # The declarations the pure-Python path reads where no extension was built.
 # The C extension holds the same facts; these are what an installation without
 # a compiler has instead, so they are not optional.
-OpenGL = ["py.typed", "*/__init__.pyi", "raw/_declarations/*.dat"]
+# A stub per generated module as well as per API package: a friendly module
+# fills its namespace from the tables at import, so the stub beside it is
+# what an editor and a type checker have to read.
+OpenGL = ["py.typed", "_typing.pyi", "**/*.pyi", "raw/_declarations/*.dat"]
 
 [tool.setuptools.packages.find]
 namespaces=false

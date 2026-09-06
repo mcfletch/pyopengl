@@ -1,0 +1,13 @@
+"""OpenGL.GLX.SGIX.swap_barrier -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray, IntArray
+
+from OpenGL.raw.GLX._types import *
+
+def glXBindSwapBarrierSGIX(dpy: AnyArray, drawable: Any, barrier: int) -> None: ...
+def glXQueryMaxSwapBarriersSGIX(dpy: AnyArray, screen: int, max: IntArray) -> int: ...
+
+def glInitSwapBarrierSGIX() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

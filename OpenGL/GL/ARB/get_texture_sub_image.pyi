@@ -1,0 +1,13 @@
+"""OpenGL.GL.ARB.get_texture_sub_image -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray
+
+from OpenGL.raw.GL._types import *
+
+def glGetCompressedTextureSubImage(texture: int, level: int, xoffset: int, yoffset: int, zoffset: int, width: int, height: int, depth: int, bufSize: int, pixels: AnyArray) -> None: ...
+def glGetTextureSubImage(texture: int, level: int, xoffset: int, yoffset: int, zoffset: int, width: int, height: int, depth: int, format: int, type: int, bufSize: int, pixels: AnyArray) -> None: ...
+
+def glInitGetTextureSubImageARB() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

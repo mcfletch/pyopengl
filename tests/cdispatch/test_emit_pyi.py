@@ -140,6 +140,81 @@ class TestSignatures:
         assert 'lambda:' not in text
 
 
+class TestSubmodule:
+    """One stub per friendly module, so an editor can see what it defines.
+
+    ``OpenGL.GL.ARB.vertex_array_object`` fills its namespace from the
+    declaration tables when it is imported, which is nothing a tool reading the
+    file can follow: without a stub beside it, every name in it is invisible to
+    completion and untyped to a checker.
+    """
+
+    def test_it_declares_the_entry_points_the_module_defines(self):
+        text = emit_pyi.emit_submodule(
+            'OpenGL.GL.ARB.vertex_array_object',
+            [command(name='glBindVertexArray',
+                     parameters=[('array', 'GLuint', {})])],
+            constants=('GL_VERTEX_ARRAY_BINDING',),
+        )
+        assert 'def glBindVertexArray(array: int) -> None:' in text
+        assert 'GL_VERTEX_ARRAY_BINDING: int' in text
+
+    def test_it_does_not_repeat_itself_in_an_all(self):
+        """A stub exports what it defines, so an __all__ would be a second
+        copy of every name -- across 1,300 modules, most of their weight."""
+        text = emit_pyi.emit_submodule(
+            'OpenGL.GL.ARB.vertex_array_object',
+            [command(name='glBindVertexArray',
+                     parameters=[('array', 'GLuint', {})])],
+            constants=('GL_VERTEX_ARRAY_BINDING',),
+            extras=('def glInitVertexArrayObjectARB() -> bool: ...',),
+        )
+        assert '__all__' not in text
+        assert text.count('glBindVertexArray') == 1
+
+    def test_the_aliases_it_uses_are_imported_by_name(self):
+        """Named rather than starred: a stub re-exports an import only when
+        asked to, so ``from this import *`` does not offer the aliases."""
+        text = emit_pyi.emit_submodule(
+            'OpenGL.GL.VERSION.GL_1_1',
+            [command(name='glUniform1fv',
+                     parameters=[('value', 'const GLfloat *', {})])],
+        )
+        assert 'from OpenGL._typing import FloatArray' in text
+        assert 'import *' not in text
+
+    def test_it_carries_what_the_module_states_itself(self):
+        """The availability check and the constants a module aliases by hand
+        are in the module, not in the tables, and are still names it has."""
+        text = emit_pyi.emit_submodule(
+            'OpenGL.GL.ARB.vertex_array_object',
+            [],
+            extras=(
+                'def glInitVertexArrayObjectARB() -> bool: ...',
+                'GL_INFO_LOG_LENGTH_ARB: int',
+            ),
+        )
+        assert 'def glInitVertexArrayObjectARB() -> bool: ...' in text
+        assert 'GL_INFO_LOG_LENGTH_ARB: int' in text
+
+    def test_it_re_exports_what_the_module_re_exports(self):
+        """A module that imports * from another has that one's names too."""
+        text = emit_pyi.emit_submodule(
+            'OpenGL.GL.VERSION.GL_1_1',
+            [],
+            reexports=('OpenGL.raw.GL.VERSION.GL_1_0',),
+        )
+        assert 'from OpenGL.GL.VERSION.GL_1_0 import *' in text
+
+    def test_the_array_aliases_are_available_to_it(self):
+        text = emit_pyi.emit_submodule(
+            'OpenGL.GL.VERSION.GL_1_1',
+            [command(name='glUniform1fv',
+                     parameters=[('value', 'const GLfloat *', {})])],
+        )
+        assert 'FloatArray' in text
+
+
 class TestModule:
     def test_a_stub_module_carries_its_docstrings(self):
         text = emit_pyi.emit_module(

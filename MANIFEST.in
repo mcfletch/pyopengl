@@ -13,4 +13,4 @@ exclude directdocs
 # The type stubs and the marker that tells a checker to use them.
 include OpenGL/py.typed
 include OpenGL/raw/_declarations/*.dat
-include OpenGL/*/__init__.pyi
+recursive-include OpenGL *.pyi

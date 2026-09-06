@@ -1,0 +1,13 @@
+"""OpenGL.GLX.NV.copy_buffer -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+from OpenGL._typing import AnyArray
+
+from OpenGL.raw.GLX._types import *
+
+def glXCopyBufferSubDataNV(dpy: AnyArray, readCtx: Any, writeCtx: Any, readTarget: int, writeTarget: int, readOffset: int, writeOffset: int, size: int) -> None: ...
+def glXNamedCopyBufferSubDataNV(dpy: AnyArray, readCtx: Any, writeCtx: Any, readBuffer: int, writeBuffer: int, readOffset: int, writeOffset: int, size: int) -> None: ...
+
+def glInitCopyBufferNV() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

@@ -1,0 +1,19 @@
+"""OpenGL.WGL.ARB.buffer_region -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+
+from OpenGL.raw.WGL._types import *
+
+WGL_BACK_COLOR_BUFFER_BIT_ARB: int
+WGL_DEPTH_BUFFER_BIT_ARB: int
+WGL_FRONT_COLOR_BUFFER_BIT_ARB: int
+WGL_STENCIL_BUFFER_BIT_ARB: int
+
+def wglCreateBufferRegionARB(hDC: Any, iLayerPlane: int, uType: int) -> Any: ...
+def wglDeleteBufferRegionARB(hRegion: Any) -> Any: ...
+def wglRestoreBufferRegionARB(hRegion: Any, x: int, y: int, width: int, height: int, xSrc: int, ySrc: int) -> int: ...
+def wglSaveBufferRegionARB(hRegion: Any, x: int, y: int, width: int, height: int) -> int: ...
+
+def glInitBufferRegionARB() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

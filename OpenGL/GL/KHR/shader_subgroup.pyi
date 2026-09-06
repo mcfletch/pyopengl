@@ -1,0 +1,22 @@
+"""OpenGL.GL.KHR.shader_subgroup -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+
+from OpenGL.raw.GL._types import *
+
+GL_SUBGROUP_FEATURE_ARITHMETIC_BIT_KHR: int
+GL_SUBGROUP_FEATURE_BALLOT_BIT_KHR: int
+GL_SUBGROUP_FEATURE_BASIC_BIT_KHR: int
+GL_SUBGROUP_FEATURE_CLUSTERED_BIT_KHR: int
+GL_SUBGROUP_FEATURE_QUAD_BIT_KHR: int
+GL_SUBGROUP_FEATURE_SHUFFLE_BIT_KHR: int
+GL_SUBGROUP_FEATURE_SHUFFLE_RELATIVE_BIT_KHR: int
+GL_SUBGROUP_FEATURE_VOTE_BIT_KHR: int
+GL_SUBGROUP_QUAD_ALL_STAGES_KHR: int
+GL_SUBGROUP_SIZE_KHR: int
+GL_SUBGROUP_SUPPORTED_FEATURES_KHR: int
+GL_SUBGROUP_SUPPORTED_STAGES_KHR: int
+
+def glInitShaderSubgroupKHR() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...

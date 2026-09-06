@@ -1,0 +1,26 @@
+"""OpenGL.GL.EXT.texture_sRGB -- generated; regenerate with src/regenerate_c.py."""
+
+from typing import Any
+
+from OpenGL.raw.GL._types import *
+
+GL_COMPRESSED_SLUMINANCE_ALPHA_EXT: int
+GL_COMPRESSED_SLUMINANCE_EXT: int
+GL_COMPRESSED_SRGB_ALPHA_EXT: int
+GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT: int
+GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT: int
+GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT: int
+GL_COMPRESSED_SRGB_EXT: int
+GL_COMPRESSED_SRGB_S3TC_DXT1_EXT: int
+GL_SLUMINANCE8_ALPHA8_EXT: int
+GL_SLUMINANCE8_EXT: int
+GL_SLUMINANCE_ALPHA_EXT: int
+GL_SLUMINANCE_EXT: int
+GL_SRGB8_ALPHA8_EXT: int
+GL_SRGB8_EXT: int
+GL_SRGB_ALPHA_EXT: int
+GL_SRGB_EXT: int
+
+def glInitTextureSrgbEXT() -> bool: ...
+
+def __getattr__(name: str) -> Any: ...
