@@ -142,19 +142,53 @@ class TestAWrapperFollowsItsEntryPoint:
 
         assert bool(glutDestroyWindow) == bool(special._base_glutDestroyWindow)
 
+    def _wrapper_over(self, base):
+        """A lazy wrapper of the shape ``glutInit`` and its neighbours have."""
+        from OpenGL.lazywrapper import lazy
+
+        @lazy(base)
+        def someWrapper(baseOperation, *args):     # pragma: no cover - never called
+            return baseOperation(*args)
+
+        return someWrapper
+
     def test_a_wrapper_over_an_absent_entry_point_is_false(self, monkeypatch):
         """What a runner with no GLUT on it has to see, so that the suite's
-        own ``if not glutInit: skip`` reaches the skip."""
-        from OpenGL.GLUT import glutInit, special
+        own ``if not glutInit: skip`` reaches the skip.
+
+        Built here rather than reached for through ``OpenGL.GLUT``: what
+        ``_base_glutInit`` *is* differs by platform -- freeglut on Windows
+        exports the exit-function-aware form, and the module wraps that in a
+        plain Python function, which no amount of monkeypatching can make
+        report absent.  The rule is about the wrapper, so the wrapper is what
+        this builds.
+        """
+        absent = platform.PLATFORM.nullFunction(
+            'someAbsentFunction', dll=None, resultType=None,
+            argTypes=(), argNames=(),
+        )
 
         def constructFunction(name, dll, **named):
             raise AttributeError(name)
 
         monkeypatch.setattr(platform.PLATFORM, 'constructFunction',
                             constructFunction)
-        monkeypatch.setattr(special._base_glutInit, 'resolved', False,
-                            raising=False)
-        assert not bool(glutInit)
+        assert not bool(absent), 'the entry point under the wrapper is present'
+        assert not bool(self._wrapper_over(absent))
+
+    def test_a_wrapper_over_a_present_entry_point_is_true(self, monkeypatch):
+        """The other half: answering for the entry point means both answers."""
+        def constructFunction(name, dll, **named):
+            return lambda *args: None
+
+        monkeypatch.setattr(platform.PLATFORM, 'constructFunction',
+                            constructFunction)
+        present = platform.PLATFORM.nullFunction(
+            'somePresentFunction', dll=None, resultType=None,
+            argTypes=(), argNames=(),
+        )
+        assert bool(present)
+        assert bool(self._wrapper_over(present))
 
     def test_the_wrapper_is_still_callable(self):
         """Answering for the entry point does not stop it being the wrapper."""

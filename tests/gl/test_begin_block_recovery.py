@@ -12,6 +12,18 @@ notifications an application already makes when it switches or destroys a
 context are what turn checking back on.  Within a single context ``glEnd`` is
 still the only thing that closes a block, which is why the exception-safe form
 is ``glBegin(...)`` followed by ``try: ... finally: glEnd()``.
+
+**On Windows these two cases print a GLFW warning, and it is the point rather
+than a fault.**  Changing the current context inside an open Begin block is
+what they set up on purpose, and WGL refuses it: ``wglMakeCurrent`` answers
+false with ``ERROR_GEN_FAILURE``, which Windows spells "A device attached to
+the system is not functioning", and GLFW passes that on::
+
+    GLFWError: (65544) b'WGL: Failed to make context current: A device
+    attached to the system is not functioning. '
+
+The same call outside a block succeeds.  What the cases assert is what happens
+next -- that error checking came back -- and it does.
 """
 
 import unittest

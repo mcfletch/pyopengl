@@ -28,17 +28,29 @@ ROOT = paths.ROOT
 
 #: What a child needs to find an interpreter, a library and a renderer, and
 #: nothing else: the settings under test are passed explicitly, so an inherited
-#: one cannot decide the answer.
+#: one cannot decide the answer.  The Windows half is what an interpreter needs
+#: to start at all -- without SystemRoot the DLL search and the random seed
+#: both fail, and the child dies before it can report anything.
 _KEEP = ('PATH', 'HOME', 'LD_LIBRARY_PATH', 'DISPLAY', 'WAYLAND_DISPLAY',
          'XDG_RUNTIME_DIR', 'LIBGL_ALWAYS_SOFTWARE', 'GALLIUM_DRIVER',
-         'VIRTUAL_ENV', 'PYTHONPATH')
+         'VIRTUAL_ENV', 'PYTHONPATH',
+         'SystemRoot', 'SYSTEMROOT', 'WINDIR', 'TEMP', 'TMP', 'PATHEXT',
+         'COMSPEC', 'USERPROFILE', 'APPDATA', 'LOCALAPPDATA')
+
+#: EGL is the display API to pin only where the platform chooses between EGL
+#: and GLX at run time.  Windows reaches GL through WGL and macOS through CGL,
+#: and asking either for the Linux platform module gets a process with no GL
+#: library at all -- so every checker is None and the answers below say nothing
+#: about context checking.
+_PIN_EGL = sys.platform.startswith('linux')
 
 
 def in_child(body, **environment):
     """Run ``body`` with a fresh interpreter, since the flag is read once."""
     child = {key: os.environ[key] for key in _KEEP if key in os.environ}
     child.update({key: str(value) for key, value in environment.items()})
-    child.setdefault('PYOPENGL_PLATFORM', 'egl')
+    if _PIN_EGL:
+        child.setdefault('PYOPENGL_PLATFORM', 'egl')
     return subprocess.run([sys.executable, '-c', body], cwd=ROOT, env=child,
                           capture_output=True, text=True, check=False)
 
