@@ -37,6 +37,11 @@ pytestmark = pytest.mark.skipif(
     reason='no EGL registry checked out; run python src/fetch_registries.py',
 )
 
+# The declarations are only there to read where there is an EGL library to
+# declare against -- importing the bindings is how a program asks that, and the
+# raw modules answer it as the friendly one does.
+pytest.importorskip('OpenGL.raw.EGL', exc_type=ImportError)
+
 
 def registry():
     import sys

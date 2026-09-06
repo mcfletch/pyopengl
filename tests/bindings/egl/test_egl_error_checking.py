@@ -12,7 +12,9 @@ GL context happens to be current a GL error is reported against whichever EGL
 call asked next.
 
 These run against whichever implementation is installed, so they say the same
-thing to both.
+thing to both, and skip where there is no EGL library to ask -- which the
+import says, since importing the bindings is how a program asks whether this
+machine has EGL at all.
 """
 
 import ctypes
@@ -22,20 +24,6 @@ import pytest
 EGL = pytest.importorskip('OpenGL.EGL', exc_type=ImportError)
 
 from OpenGL import error
-
-
-def _egl_available():
-    from OpenGL import platform
-
-    try:
-        return getattr(platform.PLATFORM, 'EGL', None) is not None
-    except Exception:                       # pragma: no cover - no EGL here
-        return False
-
-
-pytestmark = pytest.mark.skipif(
-    not _egl_available(), reason='no EGL library to ask'
-)
 
 
 class TestAFailedEglCallRaises:

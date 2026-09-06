@@ -104,12 +104,18 @@ class TestAHandleComesBackAsWhatCtypesGives:
         assert support.as_pointer(answered) == WIDE
 
     def test_a_pointer_class_still_comes_back_as_an_instance(self):
-        """EGL and GL are unchanged: their handles are pointer classes, and a
-        caller comparing two of them relies on getting the class back."""
-        from OpenGL.raw.EGL import _types
+        """GL and EGL are unchanged: their handles are pointer classes, and a
+        caller comparing two of them relies on getting the class back.
 
-        result = support.opaque(NARROW, 'EGLDisplay')
-        assert isinstance(result, _types.EGLDisplay)
+        ``GLsync`` rather than one of EGL's, so that this asks the question
+        everywhere: EGL's declarations import only where there is an EGL
+        library to declare against, and the answer is about the shape of the
+        class, which is the same for both.
+        """
+        from OpenGL.raw.GL import _types
+
+        result = support.opaque(NARROW, 'GLsync')
+        assert isinstance(result, _types.GLsync)
 
 
 class TestTheDeclarationsThisRestsOn:
