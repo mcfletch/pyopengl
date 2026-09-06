@@ -247,10 +247,13 @@ def forget_context(handle):
     """
     _end_suspended_block()
     handle = int(handle or 0)
-    if handle in _installed_callbacks and handle == _context_key():
+    if handle and handle in _installed_callbacks and handle == _current_context():
         # Take our callback back out while there is still a context to take it
         # out of.  The driver holds the address until something replaces it,
-        # and a context is destroyed with whatever it was last given.
+        # and a context is destroyed with whatever it was last given.  Which
+        # context is current is the driver's to say and not the record's: this
+        # is called for a context that has gone, and nothing makes another
+        # current after it, so the record still names the dead one.
         use_debug_output(False)
     _offered.discard(handle)
     _installed_callbacks.pop(handle, None)
@@ -448,6 +451,28 @@ def _has_current_context():
         return True
 
 
+def _current_context():
+    """Which context the platform says is current, or None where it cannot say.
+
+    :func:`_context_key` answers what the layer was last *told*, which is what
+    a callback is filed under and all the ctypes implementation has.  Which
+    context is current now is a different question, and a destroyed one is
+    where they part: nothing is made current after it, so the record goes on
+    naming it while the driver names none.
+
+    None rather than 0 where there is no way to ask, because the caller is
+    deciding whether to call GL and a guess either way is wrong -- unlike
+    :func:`_has_current_context`, whose caller is deciding whether to *offer*
+    and would otherwise decline forever on such a platform.
+    """
+    from OpenGL import platform
+
+    try:
+        return int(platform.PLATFORM.GetCurrentContext() or 0)
+    except Exception:  # pragma: no cover - a platform with no way to ask
+        return None
+
+
 def _debug_output_wanted():
     """Whether the layer should offer debug output to a context at all.
 
@@ -483,11 +508,13 @@ def offer_debug_output():
     handle = _context_key()
     if handle in _offered:
         return
-    if not handle and not _has_current_context():
+    if not _has_current_context():
         # Nothing to offer anything to.  Entry points are resolved before a
         # context exists -- a probe for what a platform has, a cleanup handler
         # after the window has gone -- and the GL calls that arm debug output
-        # would be made into no context at all.
+        # would be made into no context at all.  Having a handle for it is not
+        # evidence to the contrary: that is what make_current was last told,
+        # and the context it named is exactly what may since have gone.
         return
     _offering = True
     try:
