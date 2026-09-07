@@ -78,6 +78,53 @@ class TestReadingPixelsBack(GLTestCase):
         self.check_error('glReadPixels into a caller array')
 
 
+class TestReadingATextureBack(GLTestCase):
+    """``glGetTexImage`` sizes its result from the texture, not from a count.
+
+    The rectangle is not an argument: the wrapper asks the texture how big it
+    is and allocates from that, which is one more place the format/type
+    arithmetic has to be right.  The typed spelling and the general one have to
+    agree about the element type they hand back.
+    """
+
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    SIDE = 4
+
+    def uploaded(self):
+        texture = int(glGenTextures(1))
+        self.defer_cleanup(lambda: glDeleteTextures(1, [texture]))
+        glBindTexture(GL_TEXTURE_2D, texture)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+        pixels = np.zeros((self.SIDE, self.SIDE, 4), 'B')
+        glTexImage2D(
+            GL_TEXTURE_2D, 0, GL_RGBA8, self.SIDE, self.SIDE, 0,
+            GL_RGBA, GL_UNSIGNED_BYTE, pixels,
+        )
+        self.check_error('glTexImage2D')
+        return texture
+
+    def test_the_unsigned_byte_form_is_bytes_of_the_right_length(self):
+        import OpenGL
+
+        self.uploaded()
+        image = glGetTexImageub(GL_TEXTURE_2D, 0, GL_RGBA)
+        if OpenGL.UNSIGNED_BYTE_IMAGES_AS_STRING:
+            self.assertIsInstance(image, bytes, type(image))
+            self.assertEqual(len(image), self.SIDE * self.SIDE * 4)
+        self.check_error('glGetTexImageub')
+
+    def test_the_general_form_agrees_with_the_typed_one(self):
+        self.uploaded()
+        typed = glGetTexImageub(GL_TEXTURE_2D, 0, GL_RGBA)
+        general = glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE)
+        self.assertEqual(type(typed), type(general))
+        self.assertEqual(bytes(typed), bytes(general))
+        self.check_error('glGetTexImage')
+
+
 class TestSizingATargetArray(GLTestCase):
     """``toplevel_images.createTargetArray`` sizes an array for a format/type pair."""
 
