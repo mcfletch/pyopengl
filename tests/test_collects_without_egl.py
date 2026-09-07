@@ -20,14 +20,28 @@ child that answers every ``OpenGL.raw.EGL`` import the way a machine with no
 library does, collecting the same suite.
 """
 
+import importlib.util
 import os
 import subprocess
 import sys
+
+import pytest
 
 from childenv import child_environment
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
+
+#: A windowed backend to run the child on, since the headless one it would
+#: otherwise choose is EGL's -- and a machine with no EGL library is not running
+#: the EGL backend.  ``TEST_WINDOWING=egl`` in this process says what *this*
+#: machine renders on and must not follow the child, which is pretending to be
+#: a different machine.
+def windowed_backend():
+    for name, module in (('glfw', 'glfw'), ('pygame', 'pygame')):
+        if importlib.util.find_spec(module) is not None:
+            return name
+    return None
 
 COLLECT = r'''
 import sys
@@ -54,12 +68,19 @@ sys.exit(pytest.main(['-q', '--collect-only', %r]))
 
 def collect(target):
     """Collect `target` on a machine with no EGL; answer what pytest said."""
+    backend = windowed_backend()
+    if backend is None:
+        pytest.skip('no windowed backend installed to collect the GL suites on')
+    environment = child_environment(TEST_WINDOWING=backend)
+    # conftest sets this for the egl backend, and it names the interface the
+    # entry points load through -- which is the one being taken away.
+    environment.pop('PYOPENGL_PLATFORM', None)
     return subprocess.run(
         [sys.executable, '-c', COLLECT % (target,)],
         capture_output=True,
         text=True,
         cwd=ROOT,
-        env=child_environment(),
+        env=environment,
         timeout=300,
     )
 
