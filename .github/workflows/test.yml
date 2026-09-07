@@ -158,9 +158,16 @@ jobs:
         # In the environment the tests will run in, and non-zero where no
         # context can be made: a suite that found no GL would skip its way to
         # green having rendered nothing, which reads the same as a pass.
-        run: >
-          python -m tox exec -e ${{ matrix.toxenv }} --
-          python tests/check_cgl_context.py
+        #
+        # Kept with the test logs as well as printed, because which GL version
+        # each profile actually hands back is the first thing any macOS-only
+        # failure has to be read against -- CGL will accept a pixel format
+        # naming a profile the renderer cannot serve and give a lower context.
+        run: |
+          mkdir -p test-logs
+          set -o pipefail
+          python -m tox exec -e ${{ matrix.toxenv }} -- \
+            python tests/check_cgl_context.py 2>&1 | tee test-logs/renderer.log
 
       # One area per step, each allowed to fail, because a segfault ends the
       # process it happens in: run as one command and the first crash costs
@@ -169,34 +176,52 @@ jobs:
       - name: Run the tests -- root
         id: root
         continue-on-error: true
-        run: >
-          python -m tox -e ${{ matrix.toxenv }} --
-          ${{ inputs.tests || 'tests/ --ignore=tests/gl --ignore=tests/glu --ignore=tests/gles --ignore=tests/cdispatch' }}
-          -m "not performance"
+        run: |
+          mkdir -p test-logs
+          set -o pipefail
+          python -m tox -e ${{ matrix.toxenv }} -- \
+            ${{ inputs.tests || 'tests/ --ignore=tests/gl --ignore=tests/glu --ignore=tests/gles --ignore=tests/cdispatch' }} \
+            -m "not performance" 2>&1 | tee test-logs/root.log
 
       - name: Run the tests -- cdispatch
         id: cdispatch
         if: inputs.tests == ''
         continue-on-error: true
-        run: python -m tox -e ${{ matrix.toxenv }} -- tests/cdispatch -m "not performance"
+        run: |
+          mkdir -p test-logs
+          set -o pipefail
+          python -m tox -e ${{ matrix.toxenv }} -- tests/cdispatch -m "not performance" \
+            2>&1 | tee test-logs/cdispatch.log
 
       - name: Run the tests -- gl
         id: gl
         if: inputs.tests == ''
         continue-on-error: true
-        run: python -m tox -e ${{ matrix.toxenv }} -- tests/gl -m "not performance"
+        run: |
+          mkdir -p test-logs
+          set -o pipefail
+          python -m tox -e ${{ matrix.toxenv }} -- tests/gl -m "not performance" \
+            2>&1 | tee test-logs/gl.log
 
       - name: Run the tests -- glu
         id: glu
         if: inputs.tests == ''
         continue-on-error: true
-        run: python -m tox -e ${{ matrix.toxenv }} -- tests/glu -m "not performance"
+        run: |
+          mkdir -p test-logs
+          set -o pipefail
+          python -m tox -e ${{ matrix.toxenv }} -- tests/glu -m "not performance" \
+            2>&1 | tee test-logs/glu.log
 
       - name: Run the tests -- gles
         id: gles
         if: inputs.tests == ''
         continue-on-error: true
-        run: python -m tox -e ${{ matrix.toxenv }} -- tests/gles -m "not performance"
+        run: |
+          mkdir -p test-logs
+          set -o pipefail
+          python -m tox -e ${{ matrix.toxenv }} -- tests/gles -m "not performance" \
+            2>&1 | tee test-logs/gles.log
 
       # A crash on a machine none of us can log into is only as debuggable as
       # what the run took away with it.  faulthandler prints the Python frame;
@@ -229,6 +254,19 @@ jobs:
         with:
           name: crash-reports-${{ matrix.os }}-${{ matrix.toxenv }}
           path: crash-reports/
+          if-no-files-found: ignore
+
+      # The whole output of each area, as a file.  A failure on a machine none
+      # of us can log into is read from what the run took away with it, and a
+      # traceback copied out of the web log arrives with the frames of the
+      # failure after it spliced into the middle -- which reads as one
+      # impossible failure rather than two ordinary ones.
+      - name: Upload the test logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs-${{ matrix.os }}-${{ matrix.toxenv }}
+          path: test-logs/
           if-no-files-found: ignore
 
       - name: Fail the job if any area did
