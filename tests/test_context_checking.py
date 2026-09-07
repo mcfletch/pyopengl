@@ -46,30 +46,49 @@ class TestTheCheckerKnowsWhichApiItIsFor:
     """The checkers are built when their module is imported, so the flag has to
     be on before that -- hence a child interpreter for each."""
 
-    def _check_context_of(self, api):
+    def _check_context_of(self, api, accelerate=True):
         completed = in_child(
             'import OpenGL\n'
             'OpenGL.CONTEXT_CHECKING = True\n'
+            'OpenGL.USE_ACCELERATE = %r\n'
             'from OpenGL.raw.%s import _errors\n'
             'checker = _errors._error_checker\n'
             'print("CHECKS", "none" if checker is None else '
-            'int(bool(checker.checkContext)))\n' % (api,)
+            'int(bool(checker.checkContext)))\n' % (accelerate, api)
         )
         line = [x for x in completed.stdout.splitlines()
                 if x.startswith('CHECKS')]
         if not line:
-            pytest.skip('no %s error checker here: %s'
-                        % (api, completed.stderr[-400:]))
+            # A platform without these bindings has nothing to answer, and
+            # says so by failing to import them.  Anything else is this case
+            # unable to ask its question, which is a broken test rather than
+            # an absent platform -- and skipping it hid a stale attribute name
+            # here for as long as the name has been wrong.
+            if 'ImportError' in completed.stderr:
+                pytest.skip('no %s bindings on this platform: %s'
+                            % (api, completed.stderr.strip().splitlines()[-1]))
+            raise AssertionError(
+                'the %s checker could not be asked whether it wants a '
+                'context:\n%s' % (api, completed.stderr[-800:])
+            )
         return line[0].split()[1]
 
-    def test_the_gl_checker_asks_about_a_context(self):
-        """GL is what the question is about, so it stays on."""
-        assert self._check_context_of('GL') == '1'
+    #: Both checkers are held to this.  ``checkContext`` is the switch the
+    #: compiled one gates on, and PyOpenGL is supported with and without the
+    #: compiled one -- so a checker that answers only in one of the two builds
+    #: is a difference a program would meet and this file would not.
+    IMPLEMENTATIONS = [True, False]
 
+    @pytest.mark.parametrize('accelerate', IMPLEMENTATIONS)
+    def test_the_gl_checker_asks_about_a_context(self, accelerate):
+        """GL is what the question is about, so it stays on."""
+        assert self._check_context_of('GL', accelerate) == '1'
+
+    @pytest.mark.parametrize('accelerate', IMPLEMENTATIONS)
     @pytest.mark.parametrize('api', ['EGL', 'GLX'])
-    def test_the_display_apis_do_not(self, api):
+    def test_the_display_apis_do_not(self, api, accelerate):
         """Their calls are what a program makes *to get* a context."""
-        answer = self._check_context_of(api)
+        answer = self._check_context_of(api, accelerate)
         if answer == 'none':
             pytest.skip('no %s error checker on this platform' % (api,))
         assert answer == '0', (

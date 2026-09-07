@@ -253,6 +253,13 @@ if _configflags.ERROR_CHECKING:
                 self._currentChecker = self._registeredChecker
             def _install( self ):
                 """Settle which callable a check calls, from `_getErrors`."""
+                #: Whether a check asks the platform for a context before
+                #: reading the error.  The compiled checker publishes the same
+                #: name for the same thing and gates on it, so a program -- or
+                #: a test -- reads either implementation the same way.
+                self.checkContext = bool(
+                    _configflags.CONTEXT_CHECKING and self.needs_context
+                )
                 if self._getErrors:
                     if _configflags.CONTEXT_CHECKING and self.needs_context:
                         self._registeredChecker = self.safeGetError
