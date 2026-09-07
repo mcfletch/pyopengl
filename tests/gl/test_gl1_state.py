@@ -71,8 +71,11 @@ class TestGL1State(GLTestCase):
         self.check_error('rasterization state')
 
     def test_buffers_and_queries(self):
-        glDrawBuffer(GL_BACK)
-        glReadBuffer(GL_BACK)
+        # Named rather than assumed: this backend may be drawing into a
+        # framebuffer object, which takes GL_COLOR_ATTACHMENTi and not
+        # GL_BACK.
+        glDrawBuffer(self.colour_buffer_name())
+        glReadBuffer(self.colour_buffer_name())
         self.assertGreaterEqual(int(glGetIntegerv(GL_MAX_TEXTURE_SIZE)), 64)
         glGetBooleanv(GL_DEPTH_WRITEMASK, (ctypes.c_ubyte * 1)())
         glGetFloatv(GL_COLOR_CLEAR_VALUE, (ctypes.c_float * 4)())

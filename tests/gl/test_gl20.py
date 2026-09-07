@@ -157,10 +157,11 @@ class TestGL20(GLTestCase):
         self.check_error('shader deletion')
 
     def test_separate_state(self):
-        # GL_BACK_LEFT rather than GL_BACK: the plural glDrawBuffers takes the
-        # per-buffer names for the default framebuffer, and GL_BACK was only
-        # added to the set it accepts in GL 4.5.
-        glDrawBuffers(1, [GL_BACK_LEFT])
+        # Which name is right depends on what is bound to draw into, and
+        # that is the backend's choice: a framebuffer object takes
+        # GL_COLOR_ATTACHMENTi, the default framebuffer the per-buffer
+        # names (glDrawBuffers did not accept GL_BACK until GL 4.5).
+        glDrawBuffers(1, [self.colour_buffer_name()])
         glStencilFuncSeparate(GL_FRONT, GL_ALWAYS, 1, 0xFF)
         glStencilMaskSeparate(GL_FRONT, 0xFF)
         glStencilOpSeparate(GL_FRONT, GL_KEEP, GL_KEEP, GL_KEEP)

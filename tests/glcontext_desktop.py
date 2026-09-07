@@ -80,6 +80,31 @@ class DesktopGLTestCaseBase(ContextTestCase):
             )
 
     # --- shader helper ----------------------------------------------------
+    def colour_buffer_name(self):
+        """The colour buffer to select on the framebuffer bound for drawing.
+
+        ``GL_BACK`` and the per-eye names belong to the default framebuffer; a
+        framebuffer object accepts only ``GL_NONE`` and
+        ``GL_COLOR_ATTACHMENT``*i* and answers ``GL_INVALID_OPERATION`` for
+        anything else.  Which is bound is the backend's choice rather than the
+        case's -- the CGL backend draws into a framebuffer object, because
+        framebuffer zero belongs to a drawable and a headless macOS context has
+        none -- so a case that selects a buffer asks instead of naming one.
+
+        ``GL_BACK_LEFT`` rather than ``GL_BACK`` for the default framebuffer:
+        ``glDrawBuffer`` takes either, and the plural ``glDrawBuffers`` takes
+        only the per-buffer names until GL 4.5 adopted ``GL_BACK``.
+        """
+        bound = 0
+        with self.tolerate_glerror():
+            # Below GL 3.0 the query is the EXT one, of the same value, and a
+            # context with no framebuffer objects at all cannot answer -- which
+            # is the default framebuffer by another route.
+            bound = self.getInteger(_gl.GL_FRAMEBUFFER_BINDING)
+        if bound:
+            return _gl.GL_COLOR_ATTACHMENT0
+        return _gl.GL_BACK_LEFT
+
     def compile_program(self, vertex_src, fragment_src, extra_stages=()):
         from OpenGL.GL import shaders, GL_VERTEX_SHADER, GL_FRAGMENT_SHADER
 

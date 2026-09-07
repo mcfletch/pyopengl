@@ -283,8 +283,9 @@ class TestLegacyCompat(GLTestCase):
     def test_draw_buffers_ati(self):
         self.require_extension('GL_ATI_draw_buffers')
         with self.allow_missing():
-            # GL_BACK is not a valid glDrawBuffers entry pre-4.5; use BACK_LEFT
-            glDrawBuffersATI(1, np.array([GL_BACK_LEFT], 'I'))
+            glDrawBuffersATI(
+                1, np.array([self.colour_buffer_name()], 'I')
+            )
 
     def test_blend_color_ext(self):
         self.require_extension('GL_EXT_blend_color')
