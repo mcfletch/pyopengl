@@ -34,6 +34,20 @@ from OpenGL.GL import *  # noqa: F401,F403
 from OpenGL import _dispatch
 
 
+def own(text):
+    """A string equal to `text` that this process built, rather than interned.
+
+    ``sys.getrefcount`` of a literal counts the references the whole process
+    holds to the one interned object, so a count taken around a call reports
+    whatever else happened to name the same string.  And from Python 3.12 such
+    a literal is immortal (PEP 683): its count is a fixed sentinel that never
+    moves, so an assertion about it cannot fail and cannot pass for a reason.
+    Neither is true of a string built here, which is the only kind worth
+    counting.
+    """
+    return ''.join(text)
+
+
 @contextlib.contextmanager
 def no_references_kept(*objects):
     """Assert the block gives back every reference it took to `objects`.
@@ -242,7 +256,7 @@ class TestStringListLifetime(VaryingsTestCase):
     """
 
     def test_a_list_of_names_is_given_back(self):
-        names = ['position', 'colour']
+        names = [own(name) for name in ('position', 'colour')]
         with no_references_kept(names, names[0], names[1]):
             glTransformFeedbackVaryings(
                 self.program, len(names), names, GL_SEPARATE_ATTRIBS
@@ -250,7 +264,7 @@ class TestStringListLifetime(VaryingsTestCase):
 
     def test_one_name_on_its_own_is_given_back(self):
         """A single string is a list of one, and callers pass it that way."""
-        name = 'position'
+        name = own('position')
         with no_references_kept(name):
             glTransformFeedbackVaryings(self.program, 1, name, GL_SEPARATE_ATTRIBS)
 
@@ -261,7 +275,7 @@ class TestStringListLifetime(VaryingsTestCase):
         way out, which is the same obligation the array frame has and a
         different piece of code.
         """
-        names = ['position', 42]
+        names = [own('position'), 42]
         with no_references_kept(names, names[0]):
             # ctypes wraps what a conversion raises in its own ArgumentError,
             # so which exception carries the refusal depends on the
@@ -272,14 +286,20 @@ class TestStringListLifetime(VaryingsTestCase):
                 )
 
     def test_repeating_the_call_does_not_accumulate(self):
-        names = ['position', 'colour']
-        before = sys.getrefcount(names[0])
-        for _ in range(100):
-            glTransformFeedbackVaryings(
-                self.program, len(names), names, GL_SEPARATE_ATTRIBS
-            )
-        gc.collect()
-        assert sys.getrefcount(names[0]) == before
+        """A hundred calls hold no more than one does.
+
+        Through :func:`no_references_kept` rather than a count either side: the
+        second reading was inside an ``assert``, which pytest rewrites into
+        temporaries that hold the object while it is counted, so it read one
+        higher than the plain assignment before the loop and reported a leak of
+        exactly one on a call that leaks none.
+        """
+        names = [own(name) for name in ('position', 'colour')]
+        with no_references_kept(names[0], names[1]):
+            for _ in range(100):
+                glTransformFeedbackVaryings(
+                    self.program, len(names), names, GL_SEPARATE_ATTRIBS
+                )
 
 
 class TestReturnedValues(GLTestCase):
