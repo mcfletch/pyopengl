@@ -1,0 +1,72 @@
+=================================== FAILURES ===================================
+_____________________ TestGLUImages.test_build_1d_mipmaps ______________________
+
+self = <test_glu_mipmaps.TestGLUImages testMethod=test_build_1d_mipmaps>
+
+    def test_build_1d_mipmaps(self):
+        self._texture(GL_TEXTURE_1D)
+>       gluBuild1DMipmaps(GL_TEXTURE_1D, GL_RGB, 8, GL_RGB, GL_UNSIGNED_BYTE, _checker((8, 3)))
+
+tests/glu/test_glu_mipmaps.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <OpenGL.platform.baseplatform.gluBuild1DMipmaps object at 0x7fb40b3c5d00>
+args = (GL_TEXTURE_1D, GL_RGB, 8, GL_RGB, GL_UNSIGNED_BYTE, array([[255,   0,   0],
+       [255,   0,   0],
+       [255,   0,...0,   0],
+       [255,   0,   0],
+       [255,   0,   0],
+       [255,   0,   0],
+       [255,   0,   0]], dtype=uint8))
+named = {}
+
+OpenGL/platform/baseplatform.py:562: NullFunctionError
+_________________________ TestTextures.test_rg_format __________________________
+tests/basetestcase.py:75: in setUp
+    gluPerspective(40.0, float(self.width) / self.height, 1.0, 20.0)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <OpenGL.platform.baseplatform.gluPerspective object at 0x7fb40b3c6ba0>
+args = (40.0, 1.0, 1.0, 20.0), named = {}
+
+    def __call__(self, *args, **named):
+        if self.load():
+            return self(*args, **named)
+        else:
+            try:
+                from OpenGL import error
+            except ImportError as err:
+                # Python interpreter is shutting down...
+                pass
+            else:
+>               raise error.NullFunctionError(
+                    """Attempt to call an undefined function %s, check for bool(%s) before calling"""
+                    % (
+                        self.__name__,
+                        self.__name__,
+                    )
+                )
+E               OpenGL.error.NullFunctionError: Attempt to call an undefined function gluPerspective, check for bool(gluPerspective) before calling
+
+OpenGL/platform/baseplatform.py:562: NullFunctionError
+=============================== warnings summary ===============================
+.tox/py312-num1-accel0-dispctypes/lib/python3.12/site-packages/numpy/_pytesttester.py:79
+  /home/runner/work/pyopengl/pyopengl/.tox/py312-num1-accel0-dispctypes/lib/python3.12/site-packages/numpy/_pytesttester.py:79: PytestCollectionWarning: cannot collect 'test' because it is not a function.
+    def __call__(self, label='fast', verbose=1, extra_argv=None,
+
+tests/gl/test_begin_block_recovery.py::TestAnAbandonedBeginBlock::test_checking_is_suspended_inside_the_block
+tests/gl/test_begin_block_recovery.py::TestAnAbandonedBeginBlock::test_forgetting_the_context_ends_an_abandoned_block
+tests/gl/test_begin_block_recovery.py::TestAnAbandonedBeginBlock::test_glend_turns_checking_back_on
+tests/gl/test_begin_block_recovery.py::TestAnAbandonedBeginBlock::test_making_another_context_current_ends_an_abandoned_block
+tests/gl/test_threaded_dispatch.py::TestThreadedDispatch::test_a_fresh_thread_dispatches_correctly
+tests/gl/test_threaded_dispatch.py::TestThreadedDispatch::test_several_threads_in_turn_all_resolve
+tests/gl/test_threaded_dispatch.py::TestThreadedDispatch::test_the_main_thread_still_works_afterwards
+  /home/runner/work/pyopengl/pyopengl/.tox/py312-num1-accel0-dispctypes/lib/python3.12/site-packages/glfw/__init__.py:917: GLFWError: (65550) b'X11: The DISPLAY environment variable is missing'
+    warnings.warn(message, GLFWError)
+
+tests/test_dispatch_selection.py::TestThePairIsPinnedBeforeItIsInstalled::test_the_declared_pin_is_the_version_it_was_built_from
+  /home/runner/work/pyopengl/pyopengl/.tox/py312-num1-accel0-dispctypes/lib/python3.12/site-packages/setuptools/_distutils/_dataclass.py:43: UserWarning: 
+                  Please remove unknown `Extension` options: 'compiler_directives'
+                  this kind of usage is deprecated and may cause errors in the future.
+                  
+    warnings.warn(msg)

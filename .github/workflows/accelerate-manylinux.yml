@@ -116,13 +116,56 @@ jobs:
           name: accel-binary-${{ matrix.os }}
           path: accelerate/dist/*.whl
 
+  # Whether there is anything to publish. Asked before the publish jobs rather
+  # than left to PyPI to reject, so a push to master that does not bump the
+  # version is an ordinary build rather than a failed upload.
+  #
+  # Both distributions are checked and either being new is enough: they are built
+  # from one repository, carry one version, and `skip-existing` on the upload
+  # takes care of the one that is already out.
+  version:
+    name: version
+    runs-on: ubuntu-latest
+    outputs:
+      publish: ${{ steps.check.outputs.publish }}
+      version: ${{ steps.check.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - id: check
+        name: Are these versions already on PyPI?
+        run: |
+          VERSION=$(python -c "import re,pathlib,sys; t=pathlib.Path('OpenGL/version.py').read_text(); m=re.search(r'^__version__\s*=\s*[\'\"]([^\'\"]+)', t, re.M); sys.exit('no __version__ in OpenGL/version.py') if not m else print(m.group(1))")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+          PUBLISH=false
+          for DIST in PyOpenGL PyOpenGL-accelerate; do
+            # Only 200 and 404 are answers. Anything else -- a 5xx, a timeout, a
+            # DNS failure -- means PyPI did not tell us, and guessing "not
+            # published" would turn an outage into a failed upload against a
+            # version that cannot be replaced.
+            CODE=$(curl -sS -o /dev/null -w '%{http_code}' --retry 3 --retry-delay 5 \
+                   "https://pypi.org/pypi/$DIST/$VERSION/json" || echo 000)
+            case "$CODE" in
+              200) echo "$DIST $VERSION is already on PyPI." ;;
+              404) echo "$DIST $VERSION is not on PyPI; it will be published."; PUBLISH=true ;;
+              *)   echo "PyPI answered HTTP $CODE for $DIST $VERSION; refusing to guess."; exit 1 ;;
+            esac
+          done
+          echo "publish=$PUBLISH" >> "$GITHUB_OUTPUT"
+
   pypi-publish-accel:
     name: Upload Accelerate to PyPI
     runs-on: ubuntu-latest
-    # Only a push to master publishes; on develop, and on any manual run, the
-    # distributions stay as artifacts.
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+    # Only a push to master publishes, and only a version that is not already
+    # out; on develop, and on any manual run, the distributions stay as run
+    # artifacts.
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'
+            && needs.version.outputs.publish == 'true' }}
     needs:
+      - version
       - wheels
       - tarballs
     permissions:
@@ -158,18 +201,29 @@ jobs:
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
+          # The one project in the workspace still uploading with an API token.
+          # To convert it, add a trusted publisher on PyPI for this repository
+          # naming workflow `accelerate-manylinux.yml`, environment blank -- once
+          # for `PyOpenGL` and once for `PyOpenGL-accelerate`, they being separate
+          # projects there -- and then delete these two lines.
           user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
+          # A second net under the version job: a re-run of an already-published
+          # commit is a no-op rather than a failure.
+          skip-existing: true
           # Note: this is apparently different than the package-dir meaning in the cibuildwheel
           packages-dir: "dist"
 
   pypi-publish-core:
     name: Upload Core to PyPI
     runs-on: ubuntu-latest
-    # Only a push to master publishes; on develop, and on any manual run, the
-    # distributions stay as artifacts.
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+    # Only a push to master publishes, and only a version that is not already
+    # out; on develop, and on any manual run, the distributions stay as run
+    # artifacts.
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master'
+            && needs.version.outputs.publish == 'true' }}
     needs:
+      - version
       - wheels
       - tarballs
     permissions:
@@ -187,7 +241,15 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         id: upload
         with:
+          # The one project in the workspace still uploading with an API token.
+          # To convert it, add a trusted publisher on PyPI for this repository
+          # naming workflow `accelerate-manylinux.yml`, environment blank -- once
+          # for `PyOpenGL` and once for `PyOpenGL-accelerate`, they being separate
+          # projects there -- and then delete these two lines.
           user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
+          # A second net under the version job: a re-run of an already-published
+          # commit is a no-op rather than a failure.
+          skip-existing: true
           # Note: this is apparently different than the package-dir meaning in the cibuildwheel
           packages-dir: "dist"
