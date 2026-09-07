@@ -28,8 +28,13 @@ def test_it_imports_or_says_why_not(name):
 
 @pytest.mark.parametrize('name', OPTIONAL_MODULES)
 def test_the_reason_names_the_library(name):
-    """A bare ImportError leaves the reader guessing which library is missing."""
+    """A bare ImportError leaves the reader guessing which library is missing.
+
+    Either library satisfies that.  On a platform with no EGL at all -- macOS
+    -- the EGL binding refuses before gbm is ever reached, and it names EGL,
+    which is the library the reader has to find first.
+    """
     try:
         importlib.import_module(name)
     except ImportError as raised:
-        assert 'gbm' in str(raised), str(raised)
+        assert 'gbm' in str(raised) or 'EGL' in str(raised), str(raised)

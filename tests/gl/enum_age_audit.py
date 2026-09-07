@@ -53,8 +53,19 @@ def enums_named(node):
     return found
 
 
-def core_versions(registry=REGISTRY):
-    """``{enum name: (major, minor)}`` -- the first desktop GL version with it."""
+def core_versions(registry=None):
+    """``{enum name: (major, minor)}`` -- the first desktop GL version with it.
+
+    The registry is not checked in -- ``src/khronosapi`` is ignored, and a
+    fresh clone does not have it -- so say how to get it rather than failing
+    with a path nobody recognises.
+    """
+    registry = REGISTRY if registry is None else pathlib.Path(registry)
+    if not registry.exists():
+        raise SystemExit(
+            'no GL registry at %s.\nRun python src/fetch_registries.py to '
+            'fetch it, which is what the generators use too.' % (registry,)
+        )
     root = ElementTree.parse(registry).getroot()
     introduced = {}
     for feature in root.iter('feature'):

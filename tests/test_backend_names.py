@@ -109,26 +109,36 @@ class TestWhetherThereIsAWindowServer:
 
     Having the library installed is a different question from having somewhere
     to put a window, so the gate has to ask both.
+
+    These are the Linux rule, and they name the platform rather than relying on
+    being run on one: the answer is read from the environment only there, and a
+    case that asked whichever machine it happened to run on would be asserting
+    the Linux rule of a Mac.
     """
 
     def test_an_x_display_is_a_window_server(self):
-        assert backends.has_window_server({'DISPLAY': ':0'}) is True
+        assert backends.has_window_server(
+            {'DISPLAY': ':0'}, platform='linux') is True
 
     def test_so_is_a_wayland_one(self):
-        assert backends.has_window_server({'WAYLAND_DISPLAY': 'wayland-0'}) is True
+        assert backends.has_window_server(
+            {'WAYLAND_DISPLAY': 'wayland-0'}, platform='linux') is True
 
     def test_neither_is_not(self):
         """What a CI runner has: the libraries, and nowhere to draw."""
-        assert backends.has_window_server({}) is False
+        assert backends.has_window_server({}, platform='linux') is False
 
     def test_an_empty_setting_is_no_setting(self):
         """An unexported shell variable expands to the empty string."""
-        assert backends.has_window_server({'DISPLAY': ''}) is False
+        assert backends.has_window_server(
+            {'DISPLAY': ''}, platform='linux') is False
 
     def test_it_reads_the_environment_by_default(self):
         import os
 
-        assert backends.has_window_server() == backends.has_window_server(os.environ)
+        assert backends.has_window_server(platform='linux') == (
+            backends.has_window_server(os.environ, platform='linux')
+        )
 
 
 class TestAskingMacOS:

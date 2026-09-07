@@ -24,6 +24,12 @@ EVENT_TIMEOUT = float(os.environ.get('TEST_X_EVENT_TIMEOUT', '30'))
 TEST_VISIBLE = os.environ.get('TEST_VISIBLE', '1').lower() not in ('0', 'false', 'no')
 
 from OpenGL import arrays
+
+# EGL ships with the graphics driver, and a platform with none -- macOS -- says
+# so with an ImportError.  Without this the script dies on the import, produces
+# no output, and reads to the harness as a failed check rather than one there
+# is nothing here to run.
+checkutils.require('OpenGL.EGL')
 from OpenGL.EGL import *
 from OpenGL.error import EGLError
 

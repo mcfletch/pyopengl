@@ -19,9 +19,11 @@ from OpenGL.platform import PLATFORM, baseplatform
 LIBRARIES = ('GL', 'GLU', 'GLUT', 'GLE', 'GLES1', 'GLES2', 'GLES3')
 
 #: The namespaces that read a platform library attribute to build themselves.
-#: Windows is the case that keeps them honest: it has no OpenGL-ES and no EGL
-#: unless an application has installed ANGLE beside it.
-ES_NAMESPACES = ('OpenGL.GLES1', 'OpenGL.GLES2', 'OpenGL.GLES3', 'OpenGL.EGL')
+#: Windows is the case that keeps them honest: it has no OpenGL-ES unless an
+#: application has installed ANGLE beside it, and these still import.
+#:
+#: OpenGL.EGL is not among them because it does not fall back; see below.
+ES_NAMESPACES = ('OpenGL.GLES1', 'OpenGL.GLES2', 'OpenGL.GLES3')
 
 
 @pytest.mark.parametrize('name', LIBRARIES)
@@ -40,6 +42,21 @@ def test_current_platform_answers_every_documented_library(name):
 def test_es_namespace_imports(name):
     """The ES namespaces import whether or not this machine has the library."""
     __import__(name)
+
+
+def test_the_egl_namespace_imports_or_names_the_library():
+    """EGL is the one with nowhere to fall back to.
+
+    An ES namespace reaches for the desktop library where the machine has no
+    ES one, so it imports anywhere.  EGL ships with the graphics driver and has
+    no such second source: where there is none it raises ImportError naming it,
+    deliberately, because ``try: from OpenGL import EGL`` is how a program asks
+    whether this machine has EGL.  macOS is a platform that answers no.
+    """
+    try:
+        import OpenGL.EGL
+    except ImportError as raised:
+        assert 'EGL' in str(raised), str(raised)
 
 
 def test_absent_entry_point_raises_pyopengls_own_error():

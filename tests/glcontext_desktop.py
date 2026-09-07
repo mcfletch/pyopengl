@@ -95,15 +95,24 @@ class DesktopGLTestCaseBase(ContextTestCase):
         ``glDrawBuffer`` takes either, and the plural ``glDrawBuffers`` takes
         only the per-buffer names until GL 4.5 adopted ``GL_BACK``.
         """
-        bound = 0
-        with self.tolerate_glerror():
-            # Below GL 3.0 the query is the EXT one, of the same value, and a
-            # context with no framebuffer objects at all cannot answer -- which
-            # is the default framebuffer by another route.
-            bound = self.getInteger(_gl.GL_FRAMEBUFFER_BINDING)
-        if bound:
+        if self.draw_framebuffer():
             return _gl.GL_COLOR_ATTACHMENT0
         return _gl.GL_BACK_LEFT
+
+    def draw_framebuffer(self):
+        """The framebuffer object bound for drawing, or 0 for the default one.
+
+        ``GL_FRAMEBUFFER_BINDING`` arrived with GL 3.0, and below that it is
+        ``GL_FRAMEBUFFER_BINDING_EXT`` of the same value, from
+        ``EXT_framebuffer_object``.  A context with no framebuffer objects at
+        all answers ``GL_INVALID_ENUM`` rather than a binding -- which is the
+        default framebuffer by another route, since there is nothing else it
+        could be drawing into.
+        """
+        bound = 0
+        with self.tolerate_glerror():
+            bound = self.getInteger(_gl.GL_FRAMEBUFFER_BINDING)
+        return int(bound)
 
     def compile_program(self, vertex_src, fragment_src, extra_stages=()):
         from OpenGL.GL import shaders, GL_VERTEX_SHADER, GL_FRAGMENT_SHADER

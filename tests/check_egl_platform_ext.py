@@ -1,5 +1,13 @@
 """This checking script from https://github.com/mcfletch/pyopengl/issues/6"""
 
+import checkutils
+
+# EGL ships with the graphics driver, and a platform with none -- macOS -- says
+# so with an ImportError.  Without this the script dies on the import below,
+# produces no output, and reads to the harness as a failed check rather than
+# one there is nothing here to run.
+checkutils.require('OpenGL.EGL')
+
 import OpenGL
 import OpenGL.platform.egl
 
@@ -10,7 +18,6 @@ from OpenGL.EGL.EXT import platform_base
 from OpenGL.EGL.MESA import platform_gbm
 import ctypes, glob
 
-import checkutils
 from glcontext_egl import software_forced
 
 
