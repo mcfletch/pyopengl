@@ -150,14 +150,21 @@ if not _dispatch.ACTIVE:
     raise SystemExit(NOTHING_TO_TEST_WITH)
 GL.glGetString(GL.GL_VERSION)
 
+# Counted as a change rather than a total: how many contexts a process holds
+# is the backend's business.  A pbuffer needs a second one to resolve the
+# extension entry points it is built and torn down with, and that one is armed
+# like any other, so the total says as much about the backend as about the
+# question here.  The call above has already armed this context, which is the
+# offer every context gets, so the baseline is taken after it.
+held_before = len(dispatch._installed_callbacks)
 for _ in range(4):
     if not dispatch.use_debug_output():
         raise SystemExit(NOTHING_TO_TEST_WITH)
-held_after_enabling = len(dispatch._installed_callbacks)
+added_by_enabling = len(dispatch._installed_callbacks) - held_before
 dispatch.use_debug_output(False)
 print(
-    held_after_enabling,
-    len(dispatch._installed_callbacks),
+    added_by_enabling,
+    held_before - len(dispatch._installed_callbacks),
     bool(GL.glIsEnabled(0x92E0)),          # GL_DEBUG_OUTPUT
     bool(GL.glIsEnabled(0x8242)),          # GL_DEBUG_OUTPUT_SYNCHRONOUS
 )
@@ -172,8 +179,11 @@ def test_turning_debug_output_off_undoes_what_turning_it_on_did():
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
     assert completed.returncode == 0, completed.stderr[-2000:]
-    held, left, output, synchronous = completed.stdout.split()
-    assert held == '1', 'four enables held %s callbacks' % (held,)
-    assert left == '0'
+    added, released, output, synchronous = completed.stdout.split()
+    assert added == '0', (
+        'four enables added %s callbacks to the one the context already had'
+        % (added,))
+    assert released == '1', (
+        'switching off gave back %s callbacks, not the one it holds' % (released,))
     assert output == 'False'
     assert synchronous == 'False'

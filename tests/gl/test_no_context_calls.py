@@ -17,8 +17,25 @@ import unittest
 import paths
 import pytest
 
+import backends
 from childenv import run_in_child
 from glcontext import CHILD_PREAMBLE, NOTHING_TO_TEST_WITH
+
+#: Backends whose teardown is itself GL calls made in *another* context.
+#: Destroying a pbuffer needs a context current to resolve
+#: ``wglDestroyPbufferARB`` through, and it cannot be the one being destroyed,
+#: so ``OpenGL.WGL.offscreen`` borrows its bootstrap context to do it.  The
+#: compiled layer follows whichever context it last dispatched in, so what a
+#: call meets afterwards is that context's table rather than the dead one's --
+#: and the situation these cases are about, where nothing has dispatched since
+#: the context went, is one such a backend cannot be put in.
+_TEARS_DOWN_ELSEWHERE = ('wgl',)
+
+tears_down_elsewhere = pytest.mark.skipif(
+    backends.requested() in _TEARS_DOWN_ELSEWHERE,
+    reason='this backend tears its context down through another one, so the '
+           'call under test does not meet a context that has merely gone',
+)
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT = paths.ROOT
@@ -66,6 +83,7 @@ def behaviour(dispatch, checking, debug_output=True):
     return completed.stdout.strip().splitlines()[-1]
 
 
+@tears_down_elsewhere
 @pytest.mark.parametrize('debug_output', [True, False],
                          ids=['debug-output', 'get-error'])
 def test_the_default_is_quiet_under_both_implementations(debug_output):
