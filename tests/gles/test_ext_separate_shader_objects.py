@@ -3,7 +3,7 @@
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from egltestcase import ESTestCase
 
@@ -146,7 +146,7 @@ class TestEXTSeparateShaderObjects(ESTestCase):
         self.check_error('ext program uniforms')
 
         glBindProgramPipelineEXT(0)
-        glDeleteProgramPipelinesEXT(1, [pipeline])
+        glDeleteProgramPipelinesEXT(1, object_names(pipeline))
 
 
 if __name__ == '__main__':

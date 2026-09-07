@@ -4,7 +4,7 @@ indirect draw, tessellation patch params, per-buffer blend, indexed queries."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -125,7 +125,7 @@ class TestGL40(GLTestCase):
         glDrawTransformFeedback(GL_TRIANGLES, tfo)
         glDrawTransformFeedbackStream(GL_TRIANGLES, tfo, 0)
         glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, 0)
-        glDeleteTransformFeedbacks(1, [tfo])
+        glDeleteTransformFeedbacks(1, object_names(tfo))
         self.check_error('transform feedback objects')
 
     def test_indirect_blend_patch_query(self):
@@ -175,7 +175,7 @@ class TestGL40(GLTestCase):
         glGetQueryIndexediv(
             GL_PRIMITIVES_GENERATED, 0, GL_CURRENT_QUERY, np.zeros(1, 'i')
         )
-        glDeleteQueries(1, [q])
+        glDeleteQueries(1, object_names(q))
         self.check_error('indirect/blend/patch/query')
 
 

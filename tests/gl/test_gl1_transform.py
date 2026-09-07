@@ -4,6 +4,7 @@
 import unittest
 from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
+from arraycompat import copy_safe
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
 
@@ -44,7 +45,7 @@ class TestGL1Transform(GLTestCase):
 
     def test_clip_planes(self):
         glEnable(GL_CLIP_PLANE0)
-        glClipPlane(GL_CLIP_PLANE0, [0.0, 1.0, 0.0, 0.0])
+        glClipPlane(GL_CLIP_PLANE0, copy_safe([0.0, 1.0, 0.0, 0.0], 'd'))
         plane = glGetClipPlane(GL_CLIP_PLANE0)
         self.assertEqual(len(plane), 4)
         glDisable(GL_CLIP_PLANE0)

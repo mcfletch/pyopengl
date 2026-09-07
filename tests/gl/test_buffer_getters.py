@@ -120,9 +120,16 @@ class TestReadingBufferContentsBack(BufferGetterTestCase):
         self.check_error('glGetBufferSubData')
 
     def test_an_array_of_the_wrong_type_is_refused(self):
-        """Not silently answered with zeroes, which is what was reported."""
+        """Not silently answered with zeroes, which is what was reported.
+
+        A run with ERROR_ON_COPY set refuses the same array for the same
+        reason and says so as a CopyError, which is the third way of spelling
+        the one outcome this is about.
+        """
+        from OpenGL import error
+
         source, nbytes = self.uploaded()
-        with self.assertRaises((TypeError, ValueError)):
+        with self.assertRaises((TypeError, ValueError, error.CopyError)):
             glGetBufferSubData(
                 GL_ARRAY_BUFFER, 0, nbytes, np.zeros(3, 'uint32')
             )

@@ -16,6 +16,14 @@ from OpenGL._configflags import ERROR_ON_COPY
 import pytest
 pytestmark = pytest.mark.skipif(not numpy, reason="No numpy installed in order to run tests")
 
+#: The handler converts on the way in; ERROR_ON_COPY is a caller refusing
+#: exactly that, so under it these have no conversion to assert.  (The handler
+#: the *other* cases here use is constructed with the refusal switched on
+#: explicitly, which is how they test both sides in one process.)
+converts_by_copying = pytest.mark.skipif(
+    ERROR_ON_COPY, reason='ERROR_ON_COPY refuses the conversion this case is about'
+)
+
 class _AccelArray( object ):
     handler_class = None
     def setUp( self ):
@@ -57,6 +65,7 @@ class TestNumpyNative(_AccelArray,unittest.TestCase):
     def test_asArray( self ):
         p = self.handler.asArray( self.array )
         assert p is self.array 
+    @converts_by_copying
     def test_downconvert( self ):
         p = self.handler.asArray( numpy.array( [1,2,3],'d'), GL.GL_FLOAT )
         assert p.dtype == numpy.float32
@@ -76,12 +85,16 @@ class TestNumpyNative(_AccelArray,unittest.TestCase):
             self.eoc_handler.asArray,
                 a2
         )
-    def test_asArrayConvert( self ):
-        self.failUnlessRaises(
+    def test_asArrayConvertIsRefusedByAHandlerThatWillNotCopy( self ):
+        # Named apart from the case below, which used to shadow it: two methods
+        # of the same name in one class body leaves only the second, and this
+        # one had not run since it was written.
+        self.assertRaises(
             error.CopyError,
             self.eoc_handler.asArray,
                 self.array, GL.GL_DOUBLE 
         )
+    @converts_by_copying
     def test_asArrayConvert( self ):
         p = self.handler.asArray( self.array, GL.GL_DOUBLE )
         assert p is not self.array 

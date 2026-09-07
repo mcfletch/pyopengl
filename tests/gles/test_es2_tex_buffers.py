@@ -2,8 +2,9 @@
 """GLES2: texture parameters, buffer objects, renderbuffers and FBO queries."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
+from arraycompat import copy_safe
 from egltestcase import ESTestCase
 
 from OpenGL.GLES2 import (
@@ -68,8 +69,14 @@ class TestES2TexBuffers(ESTestCase):
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, float(GL_LINEAR))
-        glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, [float(GL_CLAMP_TO_EDGE)])
-        glTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, [int(GL_CLAMP_TO_EDGE)])
+        glTexParameterfv(
+            GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,
+            copy_safe([float(GL_CLAMP_TO_EDGE)], 'f'),
+        )
+        glTexParameteriv(
+            GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,
+            copy_safe([int(GL_CLAMP_TO_EDGE)], 'i'),
+        )
         self.assertEqual(
             int(glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER)),
             int(GL_NEAREST),
@@ -84,7 +91,7 @@ class TestES2TexBuffers(ESTestCase):
         glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 16, 16, 0)
         glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, 8, 8)
         self.check_error('texture')
-        glDeleteTextures(1, [tex])
+        glDeleteTextures(1, object_names(tex))
 
     def test_buffers(self):
         buf = glGenBuffers(1)
@@ -96,7 +103,7 @@ class TestES2TexBuffers(ESTestCase):
         )
         self.assertTrue(glIsBuffer(buf))
         self.check_error('buffers')
-        glDeleteBuffers(1, [buf])
+        glDeleteBuffers(1, object_names(buf))
         self.assertFalse(glIsBuffer(buf))
 
     def test_friendly_buffer_and_delete_forms(self):
@@ -107,7 +114,7 @@ class TestES2TexBuffers(ESTestCase):
         self.assertEqual(
             int(glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE)), 64
         )
-        glDeleteBuffers([buf])  # no count
+        glDeleteBuffers(object_names(buf))  # no count
         self.assertFalse(glIsBuffer(buf))
 
         tex = glGenTextures(2)
@@ -136,8 +143,8 @@ class TestES2TexBuffers(ESTestCase):
         self.check_error('renderbuffer/fbo')
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0)
-        glDeleteFramebuffers(1, [fbo])
-        glDeleteRenderbuffers(1, [rb])
+        glDeleteFramebuffers(1, object_names(fbo))
+        glDeleteRenderbuffers(1, object_names(rb))
 
 
 if __name__ == '__main__':

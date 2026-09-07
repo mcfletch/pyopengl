@@ -23,6 +23,7 @@ this stays in lock-step with the registry.  A size mismatch is a bug in
 import ctypes
 import unittest
 
+from arraycompat import object_names
 from gltestcase import GLTestCase
 from glget_check import GLGetCheckMixin, feature_glgets
 
@@ -76,7 +77,7 @@ class TestComputeGLGet(GLGetCheckMixin, GLTestCase):
     def test_dispatch_indirect_buffer_binding_roundtrip(self):
         """state pname with a setter: bind a buffer, read the binding back."""
         buf = int(glGenBuffers(1))
-        self.addCleanup(glDeleteBuffers, 1, [buf])
+        self.addCleanup(glDeleteBuffers, 1, object_names(buf))
         glBindBuffer(GL_DISPATCH_INDIRECT_BUFFER, buf)
         got = int(glGetIntegerv(GL_DISPATCH_INDIRECT_BUFFER_BINDING))
         self.assertEqual(got, buf)

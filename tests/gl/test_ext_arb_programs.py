@@ -5,7 +5,7 @@ program-object query entry points in a compatibility context."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -67,7 +67,7 @@ class TestARBPrograms(GLTestCase):
         out = (ctypes.c_char * len(VP))()
         glGetProgramStringARB(GL_VERTEX_PROGRAM_ARB, GL_PROGRAM_STRING_ARB, out)
         glDisable(GL_VERTEX_PROGRAM_ARB)
-        glDeleteProgramsARB(1, [vp])
+        glDeleteProgramsARB(1, object_names(vp))
         self.check_error('ARB vertex program')
 
     def test_fragment_program(self):
@@ -82,7 +82,7 @@ class TestARBPrograms(GLTestCase):
             GL_FRAGMENT_PROGRAM_ARB, GL_PROGRAM_FORMAT_ARB, np.zeros(1, 'i')
         )
         glDisable(GL_FRAGMENT_PROGRAM_ARB)
-        glDeleteProgramsARB(1, [fp])
+        glDeleteProgramsARB(1, object_names(fp))
         self.check_error('ARB fragment program')
 
 

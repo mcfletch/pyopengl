@@ -3,7 +3,7 @@
 dual-source fragment output, packed (P-type) vertex specification."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -30,7 +30,7 @@ class TestGL33(GLTestCase):
         glGetSamplerParameterIiv(s, GL_TEXTURE_BORDER_COLOR, np.zeros(4, 'i'))
         glGetSamplerParameterIuiv(s, GL_TEXTURE_BORDER_COLOR, np.zeros(4, 'I'))
         self.assertTrue(glIsSampler(s))
-        glDeleteSamplers(1, [s])
+        glDeleteSamplers(1, object_names(s))
         self.check_error('samplers')
 
     def test_divisor_and_query(self):
@@ -40,7 +40,7 @@ class TestGL33(GLTestCase):
         glQueryCounter(q, GL_TIMESTAMP)
         glGetQueryObjecti64v(q, GL_QUERY_RESULT, np.zeros(1, 'q'))
         glGetQueryObjectui64v(q, GL_QUERY_RESULT, np.zeros(1, 'Q'))
-        glDeleteQueries(1, [q])
+        glDeleteQueries(1, object_names(q))
         self.check_error('divisor/query')
 
     def test_dual_source(self):

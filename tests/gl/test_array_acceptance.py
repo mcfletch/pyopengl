@@ -14,10 +14,10 @@ import unittest
 
 import pytest
 
-from arraycompat import np
+from arraycompat import np, object_names
 from gltestcase import GLTestCase
 import OpenGL
-from OpenGL import acceleratesupport, arrays, _configflags
+from OpenGL import acceleratesupport, arrays, error, _configflags
 from OpenGL.GL import *  # noqa: F401,F403
 
 #: ``ARRAY_SIZE_CHECKING`` is what makes a wrongly sized array an exception
@@ -31,6 +31,16 @@ needs_size_checking = pytest.mark.skipif(
     reason='ARRAY_SIZE_CHECKING is off, so a wrongly sized array is not refused',
 )
 
+#: For the cases whose subject *is* the conversion: a Python sequence, or an
+#: array of the wrong element type, is copied into a buffer of the right one.
+#: ``ERROR_ON_COPY`` is a caller refusing exactly that, so under it there is no
+#: conversion to assert -- what there is instead is
+#: ``TestWhatARunThatRefusesCopiesGets`` below.
+converts_by_copying = pytest.mark.skipif(
+    _configflags.ERROR_ON_COPY,
+    reason='ERROR_ON_COPY refuses the copy this case is about',
+)
+
 
 class TestArrayAcceptance(GLTestCase):
     profile = 'compat'
@@ -38,6 +48,7 @@ class TestArrayAcceptance(GLTestCase):
     def test_matching_dtype_is_accepted(self):
         glVertex3dv(np.zeros(3, 'd'))
 
+    @converts_by_copying
     def test_mismatched_dtype_is_converted(self):
         """Passing float32 where float64 is wanted is ordinary client code.
 
@@ -51,6 +62,7 @@ class TestArrayAcceptance(GLTestCase):
         glVertex3dv(np.zeros(3, 'f'))
         glVertex3dv(np.zeros(3, 'i'))
 
+    @converts_by_copying
     def test_sequences_are_converted(self):
         glVertex3dv([1.0, 2.0, 3.0])
         glVertex3dv((1.0, 2.0, 3.0))
@@ -69,8 +81,11 @@ class TestArrayAcceptance(GLTestCase):
         zero-length array whose data pointer is null, and a size check that
         skipped null pointers would let the driver read from address zero.
         """
+        # A run that has refused implicit copies refuses the two sequences
+        # before their size is looked at, which is the same outcome by a
+        # different route -- CopyError rather than ValueError.
         for bad in ([], (), np.zeros(2, 'd'), np.zeros(0, 'd')):
-            with pytest.raises((ValueError, TypeError)):
+            with pytest.raises((ValueError, TypeError, error.CopyError)):
                 glVertex3dv(bad)
 
     @needs_size_checking
@@ -273,7 +288,7 @@ class TestWhereTheResultGoes(GLTestCase):
         self.require_vertex_arrays()
         allocated = glGenVertexArrays(1)
         self.assertTrue(int(allocated), 'no name was generated')
-        glDeleteVertexArrays(1, [int(allocated)])
+        glDeleteVertexArrays(1, object_names(int(allocated)))
 
     def test_a_generator_fills_a_variable_it_is_given(self):
         self.require_vertex_arrays()
@@ -281,7 +296,7 @@ class TestWhereTheResultGoes(GLTestCase):
         returned = glGenVertexArrays(1, target)
         self.assertTrue(target.value, 'the caller variable was not written to')
         self.assertTrue(returned)
-        glDeleteVertexArrays(1, [int(target.value)])
+        glDeleteVertexArrays(1, object_names(int(target.value)))
 
     def test_a_getter_answers_the_same_either_way(self):
         allocated = glGetFloatv(GL_FOG_COLOR)
@@ -289,6 +304,102 @@ class TestWhereTheResultGoes(GLTestCase):
         glGetFloatv(GL_FOG_COLOR, given)
         self.assertEqual(list(allocated), list(given))
         self.check_error('glGetFloatv')
+
+
+class TestWhatARunThatRefusesCopiesGets(GLTestCase):
+    """``ERROR_ON_COPY``: the caller has said it will not pay for a conversion.
+
+    PyOpenGL copies a Python sequence into a buffer of the right element type,
+    and converts an array whose type does not match.  Both are conveniences a
+    program optimising its data path wants to be told about rather than have
+    performed, which is what the flag is for -- and what it does had no test at
+    the entry-point boundary at all.
+
+    The flag is read while ``OpenGL/arrays/lists.py`` is being imported, so the
+    decorator that raises is applied once per process: the two configurations
+    are two cases, each skipping under the other.
+    """
+
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    @pytest.mark.skipif(
+        not _configflags.ERROR_ON_COPY, reason='the run allows copies'
+    )
+    def test_a_list_is_refused_rather_than_copied(self):
+        with self.assertRaises(error.CopyError):
+            glVertex3dv([1.0, 2.0, 3.0])
+
+    @pytest.mark.skipif(
+        not _configflags.ERROR_ON_COPY, reason='the run allows copies'
+    )
+    def test_the_message_says_what_to_pass_instead(self):
+        """A caller reading it has to be able to act on it."""
+        with self.assertRaises(error.CopyError) as caught:
+            glVertex3dv([1.0, 2.0, 3.0])
+        message = str(caught.exception)
+        self.assertIn('ERROR_ON_COPY', message)
+        self.assertIn('numpy', message)
+
+    @pytest.mark.skipif(
+        not _configflags.ERROR_ON_COPY, reason='the run allows copies'
+    )
+    def test_an_array_of_the_right_type_is_still_accepted(self):
+        """The flag refuses conversions, not arrays: the fast path still works."""
+        glVertex3dv(np.zeros(3, 'd'))
+        glVertex3dv((ctypes.c_double * 3)(1.0, 2.0, 3.0))
+        self.check_error('passing an array of the declared type')
+
+    @converts_by_copying
+    def test_without_it_the_same_list_is_accepted(self):
+        glVertex3dv([1.0, 2.0, 3.0])
+        self.check_error('passing a list where copies are allowed')
+
+
+class TestAnOutputArrayIsMeasuredAgainstTheCount(GLTestCase):
+    """``glGenTextures(n, array)`` writes ``n`` names, whatever ``array`` holds.
+
+    The count and the array are separate arguments and nothing in the call ties
+    them together, so an array shorter than the count is written past the end:
+    not an exception but a heap overrun, which surfaces later somewhere
+    unrelated.  ``tests/README.md`` calls this out as the recurring
+    memory-corrupting class of bug, and it is why ``get_checked`` exists.
+
+    Asserted here rather than in ``test_review_fixes.py``, which asks the same
+    question of the C dispatch layer alone: the guard has to hold under
+    whichever implementation is selected, and on the pure-ctypes path -- what a
+    ``pip install PyOpenGL`` without a compiler runs -- there was none.
+    """
+
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    #: Every form a caller might reasonably pass, since they reach the
+    #: converter by different routes: an array of the declared type is used
+    #: as-is, one of another type is converted, and a list is built into one.
+    def short_arrays(self):
+        yield 'declared type', np.zeros(4, 'I')
+        yield 'converted type', np.zeros(4, 'i')
+        yield 'list', [0, 0, 0, 0]
+
+    def test_an_array_shorter_than_the_count_is_refused(self):
+        for label, target in self.short_arrays():
+            with self.subTest(passing=label):
+                with self.assertRaises((ValueError, TypeError, error.CopyError)):
+                    glGenTextures(64, target)
+
+    def test_an_array_long_enough_is_accepted(self):
+        """A larger buffer is a caller reusing one, which is ordinary."""
+        target = np.zeros(64, 'I')
+        glGenTextures(4, target)
+        self.check_error('glGenTextures into a larger array')
+        glDeleteTextures(4, target)
+
+    def test_asking_for_none_still_allocates(self):
+        allocated = glGenTextures(4)
+        self.assertEqual(len(allocated), 4)
+        glDeleteTextures(4, allocated)
+        self.check_error('glGenTextures allocating its own array')
 
 
 if __name__ == '__main__':

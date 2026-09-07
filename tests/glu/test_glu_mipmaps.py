@@ -3,7 +3,7 @@
 gluBuild{1,2,3}DMipmapLevels texture-pyramid builders."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from glutestcase import GLUTestCase, requireEntryPoint
 from OpenGL.GL import (
@@ -51,7 +51,7 @@ class TestGLUImages(GLUTestCase):
     def _texture(self, target):
         tex = glGenTextures(1)
         glBindTexture(target, int(tex))
-        self._cleanup.append(lambda: glDeleteTextures([tex]))
+        self._cleanup.append(lambda: glDeleteTextures(object_names(tex)))
         return tex
 
     def test_scale_image(self):

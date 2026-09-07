@@ -160,6 +160,17 @@ def copy_safe(data, dtype):
     return data
 
 
+def object_names(*values):
+    """GL object names as an entry point that takes an array of them wants.
+
+    ``glDeleteTextures(2, object_names(*textures))``.  The values are whatever the
+    generator handed back -- a numpy scalar, a ctypes value, an int -- and what
+    goes down is an array of ``GLuint``, so the call reads the same whether or
+    not the run has refused implicit copies.
+    """
+    return copy_safe([int(value) for value in values], 'I')
+
+
 # --- backend-agnostic helpers -------------------------------------------------
 # A few tests need operations that numpy arrays provide as methods/attributes.
 # These helpers work whether ``np`` is real numpy or the ctypes shim, so the

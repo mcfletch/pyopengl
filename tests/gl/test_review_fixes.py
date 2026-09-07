@@ -213,8 +213,16 @@ class TestOutputArraySafety:
 
     @pytest.mark.parametrize('make', _undersized_arrays())
     def test_an_undersized_array_is_refused_rather_than_overrun(self, context, make):
+        """A run that has refused implicit copies refuses the list form
+        earlier and for a different reason, which is the same protection by
+        another route."""
         import OpenGL.GL as GL
+        from OpenGL import error
 
+        if _configflags.ERROR_ON_COPY:
+            with pytest.raises((ValueError, error.CopyError)):
+                GL.glGenTextures(64, make())
+            return
         with pytest.raises(ValueError, match='output array holds'):
             GL.glGenTextures(64, make())
 
@@ -248,6 +256,10 @@ class TestOutputArraySafety:
         GL.glGenTextures(4, enough)
         assert enough.any()
 
+    @pytest.mark.skipif(
+        _configflags.ERROR_ON_COPY,
+        reason='ERROR_ON_COPY refuses the conversion this case is about',
+    )
     def test_a_correctly_sized_converted_array_is_accepted(self, context):
         """The conversion path is not a rejection path: a list of the right
         length is what a great deal of code passes."""

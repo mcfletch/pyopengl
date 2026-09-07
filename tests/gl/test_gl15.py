@@ -3,7 +3,7 @@
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -30,7 +30,7 @@ class TestGL15(GLTestCase):
             GL_ARRAY_BUFFER, GL_BUFFER_MAP_POINTER, ctypes.byref(ctypes.c_void_p())
         )
         glUnmapBuffer(GL_ARRAY_BUFFER)
-        glDeleteBuffers(1, [buf])
+        glDeleteBuffers(1, object_names(buf))
         self.check_error('buffers')
 
     def test_queries(self):
@@ -42,7 +42,7 @@ class TestGL15(GLTestCase):
         glGetQueryiv(GL_SAMPLES_PASSED, GL_CURRENT_QUERY, np.zeros(1, 'i'))
         glGetQueryObjectiv(q, GL_QUERY_RESULT, np.zeros(1, 'i'))
         glGetQueryObjectuiv(q, GL_QUERY_RESULT, np.zeros(1, 'I'))
-        glDeleteQueries(1, [q])
+        glDeleteQueries(1, object_names(q))
         self.check_error('queries')
 
 

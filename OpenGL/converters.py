@@ -251,7 +251,10 @@ if CallFuncPyConverter is None:
                     rbytes = self.arrayType.arrayByteCount(result)
                     vbytes = self.arrayType.arrayByteCount(value)
                 except Exception:
-                    return result   # can't measure; keep old behaviour
+                    # Not measurable -- a list has no byte count of its own --
+                    # so there is no shrinking coercion to detect here.  The
+                    # size the call will write is still checked below.
+                    rbytes = vbytes = 0
                 if rbytes < vbytes:
                     raise TypeError(
                         '%s: pass-in output array was coerced to a smaller buffer '
@@ -259,7 +262,61 @@ if CallFuncPyConverter is None:
                         'into your array. Pass a correctly-typed array, or None to '
                         'have one allocated.' % (self.name, rbytes, vbytes)
                     )
+            self.checkOutputSize(result, pyArgs)
             return result
+
+        def expectedElements(self, pyArgs):
+            """How many elements the call will write, or ``None``.
+
+            ``getSize`` answers a shape -- ``(n,)`` for the count arguments,
+            ``(1,)`` for the fixed single-value getters -- and what is wanted
+            here is the number of elements that shape holds.  ``None`` where
+            the size cannot be worked out, which is not an error: an unsized
+            output is a different (and unchecked) case.
+            """
+            try:
+                shape = self.getSize(pyArgs)
+            except Exception:
+                return None
+            if isinstance(shape, int):
+                return shape
+            if not isinstance(shape, (tuple, list)):
+                return None
+            total = 1
+            for dimension in shape:
+                try:
+                    total *= int(dimension)
+                except (TypeError, ValueError):
+                    return None
+            return total
+
+        def checkOutputSize(self, array, pyArgs):
+            """Refuse an output array smaller than the call will write into it.
+
+            The count is an argument -- ``glGenTextures(n, textures)`` writes
+            ``n`` names -- and nothing ties it to the array the caller passed
+            alongside.  Where the array is short, the driver writes past its
+            end: not an exception but a heap overrun, which surfaces much later
+            somewhere unrelated, and on the pure-ctypes path there was nothing
+            to stop it.
+
+            Only a *shortfall* is refused.  A larger array is a caller
+            deliberately reusing one buffer for several calls, which is
+            ordinary and safe.
+            """
+            wanted = self.expectedElements(pyArgs)
+            if not wanted:
+                return
+            try:
+                held = self.arrayType.arraySize(array)
+            except Exception:
+                return          # not measurable; nothing to compare against
+            if held < wanted:
+                raise ValueError(
+                    '%s: output array holds %d element(s), but the call will '
+                    'write %d. Pass an array of at least that many, or None to '
+                    'have one allocated.' % (self.name, held, wanted)
+                )
 
         def oldStyleReturn(self, result, baseOperation, pyArgs, cArgs):
             """Retrieve cArgs[ self.index ]"""

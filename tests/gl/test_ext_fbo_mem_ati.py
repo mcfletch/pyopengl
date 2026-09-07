@@ -6,7 +6,7 @@ import) and GL_ATI_fragment_shader (legacy register combiners)."""
 import unittest
 
 from OpenGL import acceleratesupport
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -85,8 +85,8 @@ class TestEXTFramebufferObject(GLTestCase):
                 GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_3D, t3, 0, 0
             )
             glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0)
-            glDeleteFramebuffersEXT(1, [fbo])
-            glDeleteRenderbuffersEXT(1, [rbo])
+            glDeleteFramebuffersEXT(1, object_names(fbo))
+            glDeleteRenderbuffersEXT(1, object_names(rbo))
         self.check_error('EXT framebuffer object')
 
 
@@ -158,7 +158,7 @@ class TestEXTMemoryObject(GLTestCase):
             glGetMemoryObjectParameterivEXT(
                 mem, GL_DEDICATED_MEMORY_OBJECT_EXT, np.zeros(1, 'i')
             )
-            glDeleteMemoryObjectsEXT(1, [mem])
+            glDeleteMemoryObjectsEXT(1, object_names(mem))
         # storage-from-memory needs an imported allocation we cannot make here,
         # so the calls fail GL validation -- but they still drive the wrapper's
         # argument marshalling, which is what we are testing; exercise() tolerates
@@ -324,8 +324,8 @@ class TestAttachingATextureToAnEXTFramebuffer(GLTestCase):
                 GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, tex, 0
             )
         self.check_error('attaching a texture to an EXT framebuffer')
-        glDeleteTextures(1, [tex])
-        glDeleteFramebuffersEXT(1, [fbo])
+        glDeleteTextures(1, object_names(tex))
+        glDeleteFramebuffersEXT(1, object_names(fbo))
 
 
 if __name__ == '__main__':

@@ -2,7 +2,7 @@
 """GL 1.0 (compatibility): texture images, parameters, env, texgen, queries."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -75,7 +75,7 @@ class TestTextureNamesAndResidence(GLTestCase):
         texture = glGenTextures(1)
         self.assertTrue(texture)
         self.assertTrue(int(texture))
-        glDeleteTextures(1, [int(texture)])
+        glDeleteTextures(1, object_names(int(texture)))
 
     def test_a_generated_name_may_be_passed_straight_back_in(self):
         """``glGenTextures(2)`` hands back array elements, not Python ints.
@@ -93,7 +93,7 @@ class TestTextureNamesAndResidence(GLTestCase):
             glBindTexture(GL_TEXTURE_2D, texture)
         self.check_error('binding a texture by the name glGenTextures returned')
         glBindTexture(GL_TEXTURE_2D, 0)
-        glDeleteTextures(2, [int(t) for t in textures])
+        glDeleteTextures(2, object_names(*textures))
 
     def test_residence_is_reported_for_every_texture_asked_about(self):
         """``glAreTexturesResident`` answers one flag per name.
@@ -111,7 +111,7 @@ class TestTextureNamesAndResidence(GLTestCase):
         residence = glAreTexturesResident(textures)
         self.assertEqual(len(residence), 2, residence)
         glBindTexture(GL_TEXTURE_2D, 0)
-        glDeleteTextures(2, [int(t) for t in textures])
+        glDeleteTextures(2, object_names(*textures))
 
 
 class TestQueryingTextureState(GLTestCase):

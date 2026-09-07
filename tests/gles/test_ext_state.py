@@ -3,7 +3,7 @@
 arrays, polygon-offset clamp, clip control, framebuffer attach, multiview."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from egltestcase import ESTestCase
 from OpenGL.GLES3 import (
@@ -225,7 +225,7 @@ class TestStateExtensions(ESTestCase):
         self.require_extension('GL_EXT_draw_buffers')
         with self.exercise():
             self._color_fbo()
-            ext_db.glDrawBuffersEXT(1, [GL_COLOR_ATTACHMENT0])
+            ext_db.glDrawBuffersEXT(1, object_names(GL_COLOR_ATTACHMENT0))
 
 
 if __name__ == '__main__':

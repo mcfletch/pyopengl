@@ -47,7 +47,7 @@ class TestES31ProgramInterface(ESTestCase):
         name = bytes(bytearray(int(c) for c in chars[: int(length)])).decode()
         self.assertEqual(name, 'color')
 
-        props = np.array([GL_TYPE], 'i')
+        props = np.array([GL_TYPE], 'I')
         params = np.zeros(1, 'i')
         glGetProgramResourceiv(program, GL_UNIFORM, index, 1, props, 1, None, params)
         self.assertGreater(int(params[0]), 0)

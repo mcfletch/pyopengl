@@ -13,7 +13,7 @@ covered.
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from gltestcase import GLTestCase
 
@@ -133,7 +133,7 @@ class TestEXTExtra(GLTestCase):
         glProgramUniformMatrix4x3fvEXT(p, loc('m43'), 1, False, np.zeros((4, 3), 'f'))
 
         glBindProgramPipelineEXT(0)
-        glDeleteProgramPipelinesEXT(1, [pipeline])
+        glDeleteProgramPipelinesEXT(1, object_names(pipeline))
         glDeleteProgram(p)
         glDeleteProgram(p2)
         self.check_error('ext separate shader objects')

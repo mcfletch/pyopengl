@@ -4,7 +4,7 @@ conditional render, APPLE fence sync, parallel shader compile."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from egltestcase import ESTestCase
 from OpenGL.GLES2.EXT import disjoint_timer_query as timer
@@ -50,7 +50,7 @@ class TestQueryExtensions(ESTestCase):
             # an elapsed-time query around nothing
             timer.glBeginQueryEXT(timer.GL_TIME_ELAPSED_EXT, q)
             timer.glEndQueryEXT(timer.GL_TIME_ELAPSED_EXT)
-            timer.glDeleteQueriesEXT(1, [q])
+            timer.glDeleteQueriesEXT(1, object_names(q))
             self.check_error('timer query')
 
     def test_occlusion_query_boolean(self):
@@ -68,7 +68,7 @@ class TestQueryExtensions(ESTestCase):
             )
             res = np.zeros(1, 'u4')
             occ.glGetQueryObjectuivEXT(q, occ.GL_QUERY_RESULT_EXT, res)
-            occ.glDeleteQueriesEXT(1, [q])
+            occ.glDeleteQueriesEXT(1, object_names(q))
             self.check_error('occlusion query')
 
     def test_nv_conditional_render(self):
@@ -79,7 +79,7 @@ class TestQueryExtensions(ESTestCase):
             q = glGenQueries(1)
             cond.glBeginConditionalRenderNV(q, cond.GL_QUERY_WAIT_NV)
             cond.glEndConditionalRenderNV()
-            glDeleteQueries(1, [q])
+            glDeleteQueries(1, object_names(q))
             self.check_error('conditional render')
 
     def test_khr_parallel_shader_compile(self):

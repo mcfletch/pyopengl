@@ -3,8 +3,9 @@
 
 import unittest
 import ctypes
-from arraycompat import np, nbytes  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import nbytes, np, object_names
 
+from arraycompat import copy_safe
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
 
@@ -149,7 +150,7 @@ class TestGL45(GLTestCase):
         fbo = _create(glCreateFramebuffers)
         glNamedFramebufferTexture(fbo, GL_COLOR_ATTACHMENT0, tex, 0)
         glNamedFramebufferDrawBuffer(fbo, GL_COLOR_ATTACHMENT0)
-        glNamedFramebufferDrawBuffers(fbo, 1, [GL_COLOR_ATTACHMENT0])
+        glNamedFramebufferDrawBuffers(fbo, 1, object_names(GL_COLOR_ATTACHMENT0))
         glNamedFramebufferReadBuffer(fbo, GL_COLOR_ATTACHMENT0)
         self.assertEqual(
             glCheckNamedFramebufferStatus(fbo, GL_FRAMEBUFFER), GL_FRAMEBUFFER_COMPLETE
@@ -196,8 +197,10 @@ class TestGL45(GLTestCase):
         glBlitNamedFramebuffer(
             fbo, fbo2, 0, 0, 16, 16, 0, 0, 16, 16, GL_COLOR_BUFFER_BIT, GL_NEAREST
         )
-        glInvalidateNamedFramebufferData(fbo, 1, [GL_COLOR_ATTACHMENT0])
-        glInvalidateNamedFramebufferSubData(fbo, 1, [GL_COLOR_ATTACHMENT0], 0, 0, 8, 8)
+        glInvalidateNamedFramebufferData(fbo, 1, copy_safe([GL_COLOR_ATTACHMENT0], 'I'))
+        glInvalidateNamedFramebufferSubData(
+            fbo, 1, copy_safe([GL_COLOR_ATTACHMENT0], 'I'), 0, 0, 8, 8
+        )
         arrtex = _create(glCreateTextures, GL_TEXTURE_2D_ARRAY)
         glTextureStorage3D(arrtex, 1, GL_RGBA8, 16, 16, 2)
         glNamedFramebufferTextureLayer(fbo, GL_COLOR_ATTACHMENT0, arrtex, 0, 1)

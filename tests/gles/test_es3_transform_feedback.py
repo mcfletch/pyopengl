@@ -6,6 +6,7 @@ import ctypes
 import pytest
 np = pytest.importorskip('numpy')  # numpy-specific test: skip without numpy
 
+from arraycompat import object_names
 from egltestcase import ESTestCase
 
 from OpenGL.GLES3 import (
@@ -118,7 +119,7 @@ class TestES3TransformFeedback(ESTestCase):
             glUnmapBuffer(GL_TRANSFORM_FEEDBACK_BUFFER)
         np.testing.assert_array_almost_equal(result, [2.0, 4.0, 6.0])
 
-        glDeleteTransformFeedbacks(1, [tfo])
+        glDeleteTransformFeedbacks(1, object_names(tfo))
 
 
 if __name__ == '__main__':

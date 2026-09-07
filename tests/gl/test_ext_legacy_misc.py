@@ -5,7 +5,7 @@ predate-core aliases of functions already covered by the version suites."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -59,7 +59,7 @@ class TestLegacyCompat(GLTestCase):
             )
             glMapBufferARB(GL_ARRAY_BUFFER, GL_READ_ONLY)
             glUnmapBufferARB(GL_ARRAY_BUFFER)
-            glDeleteBuffersARB(1, [buf])
+            glDeleteBuffersARB(1, object_names(buf))
 
     def test_vertex_array_ext(self):
         self.require_extension('GL_EXT_vertex_array')
@@ -88,7 +88,7 @@ class TestLegacyCompat(GLTestCase):
             glGetQueryivARB(GL_SAMPLES_PASSED, GL_CURRENT_QUERY, np.zeros(1, 'i'))
             glGetQueryObjectivARB(q, GL_QUERY_RESULT, np.zeros(1, 'i'))
             glGetQueryObjectuivARB(q, GL_QUERY_RESULT, np.zeros(1, 'I'))
-            glDeleteQueriesARB(1, [q])
+            glDeleteQueriesARB(1, object_names(q))
 
     def test_texture_compression_arb(self):
         self.require_extension('GL_ARB_texture_compression')

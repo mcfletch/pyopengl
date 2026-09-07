@@ -4,7 +4,7 @@ scissor/depth-range arrays, double vertex attribs, program binary, ES compat."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -109,7 +109,7 @@ class TestGL41(GLTestCase):
         glProgramUniformMatrix4x3dv(p, loc('dm43'), 1, False, np.zeros((4, 3), 'd'))
         self.check_error('program uniforms')
         glBindProgramPipeline(0)
-        glDeleteProgramPipelines(1, [pipe])
+        glDeleteProgramPipelines(1, object_names(pipe))
 
     def test_viewport_scissor_depth_arrays(self):
         glViewportArrayv(0, 1, np.array([0, 0, 16, 16], 'f'))

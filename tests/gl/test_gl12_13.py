@@ -2,7 +2,7 @@
 """GL 1.2 / 1.3 (compatibility): 3D textures, multitexture, compressed, transpose."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -148,7 +148,7 @@ class TestTheImagingAdditions(GLTestCase):
             256, 256, 0, blocks,
         )
         self.check_error('glCompressedTexImage2D')
-        glDeleteTextures(1, [texture])
+        glDeleteTextures(1, object_names(texture))
 
 
 if __name__ == '__main__':

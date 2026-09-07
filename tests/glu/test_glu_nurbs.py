@@ -121,7 +121,7 @@ class TestGLUNurbs(GLUTestCase):
 
     def test_load_sampling_matrices(self):
         from OpenGL.GL import (
-            glGetDoublev,
+            glGetFloatv,
             glGetIntegerv,
             GL_MODELVIEW_MATRIX,
             GL_PROJECTION_MATRIX,
@@ -131,8 +131,12 @@ class TestGLUNurbs(GLUTestCase):
 
         nurb = self.nurbs()
         gluNurbsProperty(nurb, GLU_NURBS_MODE, GLU_NURBS_TESSELLATOR)
-        model = glGetDoublev(GL_MODELVIEW_MATRIX)
-        proj = glGetDoublev(GL_PROJECTION_MATRIX)
+        # Read as floats, which is what gluLoadSamplingMatrices takes: the
+        # double spelling is a conversion PyOpenGL would make on the way in,
+        # and a caller that has refused implicit copies has to read the type
+        # the call wants.
+        model = glGetFloatv(GL_MODELVIEW_MATRIX)
+        proj = glGetFloatv(GL_PROJECTION_MATRIX)
         view = glGetIntegerv(GL_VIEWPORT)
         gluLoadSamplingMatrices(nurb, model, proj, view)
         self.check_error('gluLoadSamplingMatrices')

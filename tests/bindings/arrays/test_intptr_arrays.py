@@ -18,10 +18,21 @@ import ctypes
 
 import pytest
 
+from OpenGL import _configflags
+
 from OpenGL import arrays
 from OpenGL.raw.GL import _types
 
 np = pytest.importorskip('numpy')
+
+
+#: For the cases whose subject *is* the conversion PyOpenGL performs on the way
+#: in.  ``ERROR_ON_COPY`` is a caller refusing exactly that, so under it there
+#: is nothing here to assert.
+converts_by_copying = pytest.mark.skipif(
+    _configflags.ERROR_ON_COPY,
+    reason='ERROR_ON_COPY refuses the conversion this case is about',
+)
 
 
 class TestTheDatatypeExists:
@@ -53,11 +64,13 @@ class TestConvertingAnArray:
         assert (arrays.GLintptrArray.arrayByteCount(converted)
                 == 3 * ctypes.sizeof(_types.GLintptr))
 
+    @converts_by_copying
     def test_a_list_converts_too(self):
         """A list of handles is what a great deal of calling code passes."""
         converted = arrays.GLintptrArray.asArray([4, 5])
         assert arrays.GLintptrArray.arraySize(converted) == 2
 
+    @converts_by_copying
     def test_a_narrower_array_is_converted_rather_than_reinterpreted(self):
         converted = arrays.GLintptrArray.asArray(np.array([7, 8], dtype='int32'))
         assert (arrays.GLintptrArray.arrayByteCount(converted)
@@ -90,11 +103,13 @@ class TestAPointerArgumentGetsItsConversion:
 
         return wrapper.wrapper(Stub()).setInputArraySize('values', None)
 
+    @converts_by_copying
     def test_a_pointer_to_a_pointer_sized_integer_is_converted(self):
         built = self._wrapped(ctypes.POINTER(_types.GLintptr))
         assert built.pyConverters is not None
         assert built.pyConverters[1] is not None
 
+    @converts_by_copying
     def test_so_is_one_the_datatype_already_existed_for(self):
         """The same escape swallowed these too; only nobody had noticed,
         because the declarations name an array type for most of them."""
@@ -110,8 +125,16 @@ class TestAPointerArgumentGetsItsConversion:
         assert isinstance(built, wrapper.Wrapper)
         assert 'pyConverters' not in built.__dict__
 
+    @converts_by_copying
     def test_a_type_with_no_array_datatype_says_so(self):
         """Rather than passing it through unconverted, which is what made this
-        invisible."""
+        invisible.
+
+        The guard belongs to the converting implementation.  ``ERROR_ON_COPY``
+        selects a second ``setInputArraySize`` that installs no converter at
+        all unless a size was given, so there is nothing there to refuse an
+        unconvertible declaration -- which is the flag doing what it says
+        rather than a gap to assert against.
+        """
         with pytest.raises(TypeError, match='array'):
             self._wrapped(ctypes.POINTER(ctypes.c_wchar))

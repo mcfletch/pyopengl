@@ -2,7 +2,7 @@
 """GL 2.0: programmable shaders, uniforms, vertex attributes, separate stencil."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from gltestcase import GLTestCase
 from OpenGL import error
@@ -168,7 +168,7 @@ class TestGL20(GLTestCase):
         # that is the backend's choice: a framebuffer object takes
         # GL_COLOR_ATTACHMENTi, the default framebuffer the per-buffer
         # names (glDrawBuffers did not accept GL_BACK until GL 4.5).
-        glDrawBuffers(1, [self.colour_buffer_name()])
+        glDrawBuffers(1, object_names(self.colour_buffer_name()))
         glStencilFuncSeparate(GL_FRONT, GL_ALWAYS, 1, 0xFF)
         glStencilMaskSeparate(GL_FRONT, 0xFF)
         glStencilOpSeparate(GL_FRONT, GL_KEEP, GL_KEEP, GL_KEEP)
@@ -231,7 +231,7 @@ class TestSelectingSeveralDrawBuffers(GLTestCase):
                              'GL_ARB_framebuffer_object')
         previous = glGetIntegerv(GL_READ_BUFFER)
         fbo = int(glGenFramebuffers(1))
-        self.defer_cleanup(lambda: glDeleteFramebuffers(1, [fbo]))
+        self.defer_cleanup(lambda: glDeleteFramebuffers(1, object_names(fbo)))
         with self.framebuffer(fbo):
             textures = glGenTextures(2)
             for index, texture in enumerate(textures):
@@ -250,7 +250,7 @@ class TestSelectingSeveralDrawBuffers(GLTestCase):
                 glReadBuffer(GL_COLOR_ATTACHMENT1)
                 pixels = glReadPixels(0, 0, 10, 10, GL_RGB, GL_UNSIGNED_BYTE)
                 self.assertEqual(len(pixels), 300, len(pixels))
-            glDeleteTextures(2, [int(t) for t in textures])
+            glDeleteTextures(2, object_names(*textures))
         # Back on the framebuffer the fixture draws into, so the buffer read
         # off it at the start is one it still accepts.
         glReadBuffer(previous)

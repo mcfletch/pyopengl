@@ -2,7 +2,7 @@
 """GL 1.0 (compatibility): display lists, selection, feedback, accumulation."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from arraycompat import copy_safe
 from gltestcase import GLTestCase
@@ -64,10 +64,6 @@ class TestCallingAListOfLists(GLTestCase):
     profile = 'compatibility'
     gl_version = (2, 1)
 
-    def names(self, sequence):
-        """``sequence`` as glCallLists wants it, honouring ERROR_ON_COPY."""
-        return copy_safe(sequence, 'I')
-
     def test_a_one_element_list_runs_its_list_once(self):
         glRenderMode(GL_RENDER)
         # The point the list draws has to fall inside the viewing volume or
@@ -88,7 +84,7 @@ class TestCallingAListOfLists(GLTestCase):
         # glCallLists; `second` pushes exactly one name.
         glNewList(first, GL_COMPILE_AND_EXECUTE)
         glInitNames()
-        glCallLists(self.names([second]))
+        glCallLists(copy_safe([second], 'I'))
         glEndList()
 
         glNewList(second, GL_COMPILE)

@@ -2,8 +2,9 @@
 """GLES3.0: sampler objects and fence sync objects."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
+from arraycompat import copy_safe
 from egltestcase import ESTestCase
 
 from OpenGL.GLES3 import (
@@ -50,8 +51,12 @@ class TestES3SamplersSync(ESTestCase):
         glBindSampler(0, sampler)
         glSamplerParameteri(sampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
         glSamplerParameterf(sampler, GL_TEXTURE_MAG_FILTER, float(GL_LINEAR))
-        glSamplerParameteriv(sampler, GL_TEXTURE_WRAP_S, [int(GL_CLAMP_TO_EDGE)])
-        glSamplerParameterfv(sampler, GL_TEXTURE_WRAP_S, [float(GL_CLAMP_TO_EDGE)])
+        glSamplerParameteriv(
+            sampler, GL_TEXTURE_WRAP_S, copy_safe([int(GL_CLAMP_TO_EDGE)], 'i')
+        )
+        glSamplerParameterfv(
+            sampler, GL_TEXTURE_WRAP_S, copy_safe([float(GL_CLAMP_TO_EDGE)], 'f')
+        )
         self.assertTrue(glIsSampler(sampler))
 
         ibuf = np.zeros(1, 'i')
@@ -63,7 +68,7 @@ class TestES3SamplersSync(ESTestCase):
         self.check_error('samplers')
 
         glBindSampler(0, 0)
-        glDeleteSamplers(1, [sampler])
+        glDeleteSamplers(1, object_names(sampler))
 
     def test_sync(self):
         sync = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0)

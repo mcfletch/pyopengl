@@ -119,7 +119,8 @@ class TestDrawingSeveralRangesAtOnce(GLTestCase):
         pointers = arrays.GLvoidpArray.zeros((2,))
         pointers[0] = arrays.GLbyteArray.dataPointer(indices)
         pointers[1] = arrays.GLbyteArray.dataPointer(indices[1])
-        counts = copy_safe([len(row) for row in indices], 'I')
+        # GLsizei, so signed.
+        counts = copy_safe([len(row) for row in indices], 'i')
 
         glDisable(GL_LIGHTING)
         glEnableClientState(GL_VERTEX_ARRAY)

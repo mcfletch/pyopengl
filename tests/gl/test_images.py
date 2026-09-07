@@ -17,7 +17,7 @@ import unittest
 
 import pytest
 
-from arraycompat import np
+from arraycompat import np, object_names
 from gltestcase import GLTestCase
 from OpenGL.arrays import arraydatatype
 from OpenGL.GL import *  # noqa: F401,F403
@@ -94,7 +94,7 @@ class TestReadingATextureBack(GLTestCase):
 
     def uploaded(self):
         texture = int(glGenTextures(1))
-        self.defer_cleanup(lambda: glDeleteTextures(1, [texture]))
+        self.defer_cleanup(lambda: glDeleteTextures(1, object_names(texture)))
         glBindTexture(GL_TEXTURE_2D, texture)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
@@ -182,7 +182,7 @@ class TestDrawingPixels(GLTestCase):
         glBindTexture(GL_TEXTURE_2D, texture)
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, 512, 512, 0, GL_RGB, GL_INT, None)
         self.check_error('glTexImage2D with no data')
-        glDeleteTextures(1, [texture])
+        glDeleteTextures(1, object_names(texture))
 
 
 class TestTwoComponentTextures(GLTestCase):
@@ -197,10 +197,10 @@ class TestTwoComponentTextures(GLTestCase):
         glBindTexture(GL_TEXTURE_2D, texture)
         glTexImage2D(
             GL_TEXTURE_2D, 0, texture_rg.GL_RG, 1, 1, 0, GL_RG, GL_FLOAT,
-            arraydatatype.GLfloatArray.asArray([0.3, 0.5]),
+            np.array([0.3, 0.5], 'f'),
         )
         self.check_error('GL_RG texture upload')
-        glDeleteTextures(1, [texture])
+        glDeleteTextures(1, object_names(texture))
 
 
 if __name__ == '__main__':

@@ -3,8 +3,9 @@
 blit/invalidate and layered-FBO entry points."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
+from arraycompat import copy_safe
 from egltestcase import ESTestCase
 
 from OpenGL.GLES3 import (
@@ -92,7 +93,7 @@ class TestES3FBOStorage(ESTestCase):
             glFramebufferTexture2D(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0
             )
-            glDrawBuffers(1, [GL_COLOR_ATTACHMENT0])
+            glDrawBuffers(1, object_names(GL_COLOR_ATTACHMENT0))
             clear(GL_COLOR, 0, value)
             self.check_error('integer clear')
             glBindFramebuffer(GL_FRAMEBUFFER, 0)
@@ -114,11 +115,14 @@ class TestES3FBOStorage(ESTestCase):
         glBindFramebuffer(GL_READ_FRAMEBUFFER, src)
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, dst)
         glReadBuffer(GL_COLOR_ATTACHMENT0)
-        glDrawBuffers(1, [GL_COLOR_ATTACHMENT0])
+        glDrawBuffers(1, object_names(GL_COLOR_ATTACHMENT0))
         glBlitFramebuffer(0, 0, 16, 16, 0, 0, 16, 16, GL_COLOR_BUFFER_BIT, GL_NEAREST)
-        glInvalidateFramebuffer(GL_READ_FRAMEBUFFER, 1, [GL_COLOR_ATTACHMENT0])
+        glInvalidateFramebuffer(
+                GL_READ_FRAMEBUFFER, 1, copy_safe([GL_COLOR_ATTACHMENT0], 'I')
+            )
         glInvalidateSubFramebuffer(
-            GL_DRAW_FRAMEBUFFER, 1, [GL_COLOR_ATTACHMENT0], 0, 0, 8, 8
+            GL_DRAW_FRAMEBUFFER, 1, copy_safe([GL_COLOR_ATTACHMENT0], 'I'),
+            0, 0, 8, 8,
         )
         self.check_error('blit/invalidate')
 

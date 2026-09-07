@@ -3,7 +3,7 @@
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from egltestcase import ESTestCase
 
@@ -91,7 +91,7 @@ class TestES3Misc(ESTestCase):
         glBindVertexArray(int(vao))
         self.assertTrue(glIsVertexArray(vao))
         glBindVertexArray(0)
-        glDeleteVertexArrays(1, [vao])
+        glDeleteVertexArrays(1, object_names(vao))
         self.assertFalse(glIsVertexArray(vao))
 
     def test_uniform_indices(self):

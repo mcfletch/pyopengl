@@ -26,25 +26,34 @@ from OpenGL.GL import *  # noqa: F401,F403
 
 #: A four-segment path.  GLE reads the first and last points as direction hints
 #: and draws the segments between the rest, so a path needs at least four.
-POLYLINE = [
+#:
+#: Arrays of the element type each parameter takes, rather than lists: this is
+#: geometry, and building it as the array the call wants is what a caller does.
+#: A list, or the wrong element type, would be converted on the way in -- which
+#: a run with ERROR_ON_COPY set has refused.
+#:
+#: The types are not uniform, and that is GLE's signature rather than an
+#: oversight here: a path and its radii are ``gleDouble``, and the colours
+#: alongside them are ``float``.
+POLYLINE = np.array([
     (-6.0, 6.0, 0.0),
     (6.0, 6.0, 0.0),
     (6.0, -6.0, 0.0),
     (-6.0, -6.0, 0.0),
     (-6.0, 6.0, 0.0),
     (6.0, 6.0, 0.0),
-]
+], 'd')
 
-COLOURS = [
+COLOURS = np.array([
     (0.0, 0.0, 0.0),
     (0.0, 0.8, 0.3),
     (0.8, 0.3, 0.0),
     (0.2, 0.3, 0.9),
     (0.2, 0.8, 0.5),
     (0.0, 0.0, 0.0),
-]
+], 'f')
 
-RADII = [1.0, 1.0, 3.0, 0.5, 2.0, 1.0]
+RADII = np.array([1.0, 1.0, 3.0, 0.5, 2.0, 1.0], 'd')
 
 #: Half-width of the orthographic view the feedback helper sets up: the
 #: geometry below reaches +/-6 and the tubing swept around it a little
@@ -52,7 +61,9 @@ RADII = [1.0, 1.0, 3.0, 0.5, 2.0, 1.0]
 EXTENT = 20.0
 
 #: A closed square contour to sweep along a path.
-CONTOUR = [(-1.0, -1.0), (1.0, -1.0), (1.0, 1.0), (-1.0, 1.0), (-1.0, -1.0)]
+CONTOUR = np.array(
+    [(-1.0, -1.0), (1.0, -1.0), (1.0, 1.0), (-1.0, 1.0), (-1.0, -1.0)], 'd'
+)
 
 
 class GLETestCase(GLTestCase):
@@ -125,17 +136,14 @@ class TestSweepingAlongAPath(GLETestCase):
         Four arrays, each of whose lengths PyOpenGL derives rather than being
         told, which is what makes this the case worth having.
         """
-        contour = np.array(CONTOUR, 'd')
+        contour = CONTOUR
         normals = np.array(
             [(-1.0, 0.0), (0.0, -1.0), (1.0, 0.0), (0.0, 1.0), (-1.0, 0.0)], 'd'
         )
         up = np.array([0.0, 1.0, 0.0], 'd')
 
         def draw():
-            GLE.gleExtrusion(
-                contour, normals, up,
-                np.array(POLYLINE, 'd'), np.array(COLOURS, 'd'),
-            )
+            GLE.gleExtrusion(contour, normals, up, POLYLINE, COLOURS)
 
         self.assertGreater(self.feedback(draw), 0)
         self.check_error('gleExtrusion')

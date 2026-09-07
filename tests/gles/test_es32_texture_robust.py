@@ -4,7 +4,7 @@ storage and the KHR_robustness sized queries."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from egltestcase import ESTestCase
 
@@ -98,7 +98,7 @@ class TestES32TextureRobust(ESTestCase):
         glGetSamplerParameterIiv(sampler, GL_TEXTURE_BORDER_COLOR, ibuf)
         glGetSamplerParameterIuiv(sampler, GL_TEXTURE_BORDER_COLOR, ubuf)
         self.check_error('integer params')
-        glDeleteSamplers(1, [sampler])
+        glDeleteSamplers(1, object_names(sampler))
 
     def test_multisample_array_storage(self):
         tex = glGenTextures(1)

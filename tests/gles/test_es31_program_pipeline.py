@@ -3,7 +3,7 @@
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from egltestcase import ESTestCase
 
@@ -114,7 +114,7 @@ class TestES31ProgramPipeline(ESTestCase):
 
         self._set_uniforms(fprog)
         glBindProgramPipeline(0)
-        glDeleteProgramPipelines(1, [pipeline])
+        glDeleteProgramPipelines(1, object_names(pipeline))
 
     def _set_uniforms(self, p):
         def loc(n):

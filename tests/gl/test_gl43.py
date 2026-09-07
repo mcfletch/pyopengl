@@ -48,7 +48,9 @@ class TestGL43(GLTestCase):
         )
         idx = glGetProgramResourceIndex(program, GL_PROGRAM_INPUT, 'position')
         glGetProgramResourceName(program, GL_PROGRAM_INPUT, idx, 64)
-        props = np.array([GL_TYPE], 'i')
+        # GLenum, so unsigned: the signed spelling is a conversion the driver
+        # never sees and ERROR_ON_COPY refuses.
+        props = np.array([GL_TYPE], 'I')
         glGetProgramResourceiv(
             program, GL_PROGRAM_INPUT, idx, 1, props, 1, None, np.zeros(1, 'i')
         )

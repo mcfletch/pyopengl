@@ -7,7 +7,7 @@ it runs where the driver exports the entry points and skips otherwise.
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from egltestcase import ESTestCase
 from OpenGL.GLES3 import (
@@ -150,7 +150,7 @@ class TestDrawExtensions(ESTestCase):
     def test_nv_draw_buffers(self):
         self.require_extension('GL_NV_draw_buffers')
         with self.exercise():
-            nv_draw_buffers.glDrawBuffersNV(1, [GL_COLOR_ATTACHMENT0])
+            nv_draw_buffers.glDrawBuffersNV(1, object_names(GL_COLOR_ATTACHMENT0))
             self.check_error('nv_draw_buffers')
 
 

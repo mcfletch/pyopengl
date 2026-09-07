@@ -3,7 +3,7 @@
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from egltestcase import ESTestCase
 
@@ -105,7 +105,7 @@ class TestES3QueryDraws(ESTestCase):
         result = np.zeros(1, 'u4')
         glGetQueryObjectuiv(query, GL_QUERY_RESULT, result)
         self.check_error('queries')
-        glDeleteQueries(1, [query])
+        glDeleteQueries(1, object_names(query))
 
     def test_buffer_copy_and_query(self):
         dst = glGenBuffers(1)

@@ -3,6 +3,7 @@ from OpenGL.arrays import arraydatatype as adt
 from OpenGL.arrays import vbo
 from OpenGL import GL
 from OpenGL._bytes import integer_types
+from OpenGL._configflags import ERROR_ON_COPY
 import pytest
 try:
     import numpy 
@@ -12,6 +13,12 @@ try:
     import OpenGL_accelerate
 except ImportError:
     pytest.skip('Accelerate not installed, skipping', allow_module_level=True)
+
+#: ERROR_ON_COPY is a caller refusing the conversion these are about.
+converts_by_copying = pytest.mark.skipif(
+    ERROR_ON_COPY, reason='ERROR_ON_COPY refuses the conversion this case is about'
+)
+
 
 class _BaseTest( object ):
     array = None
@@ -62,6 +69,7 @@ class TestNumpy( _BaseTest, unittest.TestCase ):
         p = self.handler.zeros( (2,3,4), 'f' )
         assert p.shape == (2,3,4)
         assert p.dtype == numpy.float32
+    @converts_by_copying
     def test_asArrayConvert( self ):
         p = self.handler.asArray( self.array, GL.GL_DOUBLE )
         assert p is not self.array 
@@ -73,6 +81,7 @@ class TestNumpy( _BaseTest, unittest.TestCase ):
         z = self.handler.zeros( (2,3,4), GL.GL_FLOAT)
         assert z.shape == (2,3,4)
         assert z.dtype == numpy.float32
+    @converts_by_copying
     def test_downconvert( self ):
         p = self.handler.asArray( numpy.array( [1,2,3],'d'), GL.GL_FLOAT )
         assert p.dtype == numpy.float32

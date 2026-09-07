@@ -84,7 +84,10 @@ def choose_config(display, attributes):
     """utility to choose config for the display based on attributes"""
     num_configs = EGLint()
     configs = (EGLConfig * 1)()
-    local_attributes = arrays.GLintArray.asArray(attributes)
+    # An EGLint array built explicitly rather than converted: `attributes` is
+    # assembled here as a list, and asArray copying it is what a run with
+    # ERROR_ON_COPY set has refused.
+    local_attributes = (EGLint * len(attributes))(*attributes)
     success = eglChooseConfig(display, local_attributes, configs, 1, num_configs)
     if not success:
         raise NoConfig("Unable to complete config filtering", attributes)
@@ -157,13 +160,14 @@ def egl_context(
             "Selected config:\n%s",
             debug.format_debug_configs(debug.debug_configs(display, configs=[config])),
         )
-        surface_attributes = [
+        # An EGLint array, for the same reason as choose_config above.
+        surface_attributes = (EGLint * 5)(
             EGL_WIDTH,
             width,
             EGL_HEIGHT,
             height,
             EGL_NONE,
-        ]
+        )
         if pbuffer:
             surface = eglCreatePbufferSurface(display, config, surface_attributes,)
         else:

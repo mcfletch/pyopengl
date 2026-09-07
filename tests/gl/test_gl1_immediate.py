@@ -181,6 +181,11 @@ class TestWhatAVertexCallAccepts(GLTestCase):
     profile = 'compatibility'
     gl_version = (2, 1)
 
+    @unittest.skipIf(
+        _configflags.ERROR_ON_COPY,
+        'the list spellings here are among the ones under test, and a run that '
+        'has refused implicit copies refuses them',
+    )
     def test_the_typed_spellings_agree_inside_one_primitive(self):
         glDisable(GL_LIGHTING)
         glBegin(GL_TRIANGLES)
@@ -195,6 +200,10 @@ class TestWhatAVertexCallAccepts(GLTestCase):
     @unittest.skipIf(
         not _configflags.ARRAY_SIZE_CHECKING,
         'ARRAY_SIZE_CHECKING is off, so a four-element vertex is not refused',
+    )
+    @unittest.skipIf(
+        _configflags.ERROR_ON_COPY,
+        'ERROR_ON_COPY refuses the list before its size is looked at',
     )
     def test_a_wrongly_sized_vertex_is_refused(self):
         """``glVertex3dv`` takes three doubles, and four is a caller's error."""

@@ -4,8 +4,9 @@ sampler objects, framebuffer discard and external memory objects."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
+from arraycompat import copy_safe
 from egltestcase import ESTestCase
 from OpenGL.GLES3 import (
     GL_ARRAY_BUFFER,
@@ -87,7 +88,7 @@ class TestBufferExtensions(ESTestCase):
                 s, GL_TEXTURE_MIN_FILTER, np.zeros(1, 'f')
             )
             self.assertTrue(mesa_samplers.glIsSampler(s))
-            mesa_samplers.glDeleteSamplers(1, [s])
+            mesa_samplers.glDeleteSamplers(1, object_names(s))
             self.check_error('mesa sampler objects')
 
     def test_oes_vertex_array_object(self):
@@ -99,7 +100,7 @@ class TestBufferExtensions(ESTestCase):
             oes_vao.glBindVertexArrayOES(vao)
             self.assertTrue(oes_vao.glIsVertexArrayOES(vao))
             oes_vao.glBindVertexArrayOES(0)
-            oes_vao.glDeleteVertexArraysOES(1, [vao])
+            oes_vao.glDeleteVertexArraysOES(1, object_names(vao))
             self.check_error('oes vao')
 
     def test_oes_get_program_binary(self):
@@ -162,7 +163,7 @@ class TestBufferExtensions(ESTestCase):
         self.require_extension('GL_EXT_discard_framebuffer')
         with self.exercise():
             ext_discard.glDiscardFramebufferEXT(
-                GL_FRAMEBUFFER, 1, [GL_COLOR_ATTACHMENT0]
+                GL_FRAMEBUFFER, 1, copy_safe([GL_COLOR_ATTACHMENT0], 'I')
             )
             self.check_error('discard framebuffer')
 
@@ -183,7 +184,7 @@ class TestBufferExtensions(ESTestCase):
             ext_memory.glGetUnsignedBytei_vEXT(
                 GL_DRIVER_UUID_EXT, 0, np.zeros(16, 'u1')
             )
-            ext_memory.glDeleteMemoryObjectsEXT(1, [mem])
+            ext_memory.glDeleteMemoryObjectsEXT(1, object_names(mem))
             self.check_error('memory object basics')
         # storage-from-memory needs an imported external allocation we cannot make
         # here, so these fail GL validation -- but they still drive the wrappers'

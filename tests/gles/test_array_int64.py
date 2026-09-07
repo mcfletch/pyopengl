@@ -10,6 +10,7 @@ numpy uint64 array and a ctypes c_uint64 buffer.
 import unittest
 import ctypes
 
+from arraycompat import object_names
 from egltestcase import ESTestCase
 from OpenGL.raw.GL.VERSION.GL_1_1 import GL_UNSIGNED_INT64
 
@@ -94,7 +95,7 @@ class TestArrayInt64Live(ESTestCase):
             self.assertEqual(np.asarray(auto_i).dtype, np.dtype('int64'))
             self.assertEqual(np.asarray(auto_u).dtype, np.dtype('uint64'))
 
-            timer.glDeleteQueriesEXT(1, [q])
+            timer.glDeleteQueriesEXT(1, object_names(q))
             self.check_error('timer query 64-bit')
 
     def test_auto_alloc_int64_getter(self):

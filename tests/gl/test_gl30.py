@@ -4,7 +4,7 @@ unsigned uniforms, per-buffer clears and conditional render."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, object_names
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -113,9 +113,9 @@ class TestGL30(GLTestCase):
         )
         glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, ta, 0, 1)
         glBindFramebuffer(GL_FRAMEBUFFER, 0)
-        glDeleteFramebuffers(1, [fbo])
-        glDeleteRenderbuffers(1, [depth])
-        glDeleteVertexArrays(1, [int(vao)])
+        glDeleteFramebuffers(1, object_names(fbo))
+        glDeleteRenderbuffers(1, object_names(depth))
+        glDeleteVertexArrays(1, object_names(int(vao)))
         self.check_error('vao/fbo')
 
     def test_clear_and_masks(self):
@@ -302,11 +302,11 @@ class TestRenderingIntoAFramebufferObject(GLTestCase):
         self.require_feature('framebuffer objects', (3, 0),
                              'GL_ARB_framebuffer_object')
         fbo = int(glGenFramebuffers(1))
-        self.defer_cleanup(lambda: glDeleteFramebuffers(1, [fbo]))
+        self.defer_cleanup(lambda: glDeleteFramebuffers(1, object_names(fbo)))
 
         with self.framebuffer(fbo):
             depth = int(glGenRenderbuffers(1))
-            self.defer_cleanup(lambda: glDeleteRenderbuffers(1, [depth]))
+            self.defer_cleanup(lambda: glDeleteRenderbuffers(1, object_names(depth)))
             glBindRenderbuffer(GL_RENDERBUFFER, depth)
             glRenderbufferStorage(
                 GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, self.SIDE, self.SIDE
@@ -316,7 +316,7 @@ class TestRenderingIntoAFramebufferObject(GLTestCase):
             )
 
             colour = int(glGenTextures(1))
-            self.defer_cleanup(lambda: glDeleteTextures(1, [colour]))
+            self.defer_cleanup(lambda: glDeleteTextures(1, object_names(colour)))
             glBindTexture(GL_TEXTURE_2D, colour)
             # Without a filter the texture is incomplete and the driver
             # answers GL_FRAMEBUFFER_UNSUPPORTED rather than saying why.
