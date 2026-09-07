@@ -77,6 +77,19 @@ def no_references_kept(*objects):
     )
 
 
+def clean_reading():
+    """What ``getrefcount`` answers for a value one local holds and nothing else.
+
+    Two through Python 3.13 -- the local, and the argument the call is handed --
+    and one from 3.14, which does not take a reference for that argument.  So it
+    is measured rather than written down, in the same shape
+    :func:`call_and_count` reads in: a value bound to one local, counted by name.
+    Whatever the interpreter's convention, the difference cancels.
+    """
+    value = [1, 2, 3]
+    return sys.getrefcount(value)
+
+
 def call_and_count(call):
     """Run `call`, and say how many references its result has beyond the one.
 
@@ -84,9 +97,7 @@ def call_and_count(call):
     it did not.  The counting happens here rather than in the test, because a
     count read in the caller's frame includes whatever the caller is holding:
     an assertion rewritten by pytest binds the value it is about to describe,
-    and a registered cleanup keeps it for the length of the test.  Two is the
-    clean reading -- the local below, and the argument ``getrefcount`` is
-    passed -- so both are subtracted.
+    and a registered cleanup keeps it for the length of the test.
 
     The count goes into a local of its own before anything is built from it:
     ``return value, sys.getrefcount(value)`` would push `value` as the first
@@ -95,7 +106,7 @@ def call_and_count(call):
     """
     value = call()
     count = sys.getrefcount(value)
-    return value, count - 2
+    return value, count - clean_reading()
 
 
 class TestTheCounting(unittest.TestCase):
