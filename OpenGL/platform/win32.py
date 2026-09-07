@@ -168,6 +168,55 @@ class Win32Platform( baseplatform.BasePlatform ):
         wglGetCurrentContext.restype = ctypes.c_void_p
         return wglGetCurrentContext
 
+    def releaseCurrentContext( self ):
+        """Let go of the context this thread holds, WGL's or EGL's
+
+        Answers whether there was one.  See
+        :meth:`OpenGL.platform.baseplatform.BasePlatform.releaseCurrentContext`
+        for why a program with two GL bindings in it needs this.  Windows has
+        the same pair as Linux does whenever an application ships ANGLE, which
+        is how OpenGL-ES and EGL reach this platform at all.
+
+        Both are asked, because either may be holding it and asking is cheap
+        beside making a context.
+        """
+        released = False
+        if self._releaseWGL():
+            released = True
+        if self._releaseEGL():
+            released = True
+        return released
+
+    def _releaseWGL( self ):
+        """Release a current WGL context; answer whether there was one"""
+        if not self.GetCurrentContext():
+            return False
+        from OpenGL.raw.WGL._types import HDC, HGLRC
+
+        self.GL.wglMakeCurrent( HDC( 0 ), HGLRC( 0 ) )
+        return True
+
+    def _releaseEGL( self ):
+        """Release a current EGL context; answer whether there was one
+
+        Only where an EGL library was found, and asked of the platform rather
+        than of the import: a machine with no ANGLE beside it is the ordinary
+        case here, this is called before every context a program makes, and a
+        failed import is not remembered -- so importing to find out would run
+        the whole of ``OpenGL.raw.EGL`` again on each one.
+        """
+        if self.EGL is None:
+            return False
+        from OpenGL import EGL
+        if not EGL.eglGetCurrentContext():
+            return False
+        display = EGL.eglGetCurrentDisplay()
+        if not display:                     # pragma: no cover - needs ANGLE
+            return False
+        EGL.eglMakeCurrent( display, EGL.EGL_NO_SURFACE, EGL.EGL_NO_SURFACE,
+                            EGL.EGL_NO_CONTEXT )
+        return True
+
     def constructFunction(
         self,
         functionName, dll, 
