@@ -102,6 +102,42 @@ under `tests/` edits `sys.path`.
 > of the message, and `.` does not match a newline — a message that opens with
 > one needs `(?s)`, or the entry silently matches nothing.
 
+### Where a test belongs
+
+Find the row that describes what the test is *about*. Nothing in this suite is
+filed by when it was written or by which bug it came from — a module named for
+its provenance stops being findable the moment the provenance stops mattering,
+and that is how thirty context-backed GL tests came to live beside the fixture
+that serves them.
+
+| What the test is about | Where it goes |
+|---|---|
+| A desktop GL entry point introduced at a version | `gl/test_gl<major><minor>.py`, or `gl/test_gl1_<area>.py` for the fixed-function ones |
+| A desktop GL extension | `gl/test_ext_*.py`, grouped by vendor and era |
+| The size a `glGet*` writes | `gl/test_glget_*.py`, and the pname in `gl/glget_groups.json` |
+| Pixel data crossing the boundary — readback shape, target-array sizing | `gl/test_images.py` |
+| GLE tubing and extrusion | `gl/test_gle.py` |
+| An OpenGL-ES entry point or extension | `gles/` |
+| GLU — quadrics, NURBS, tessellation, projection, mipmaps | `glu/test_glu_<area>.py` |
+| The code generator: the registry, the annotations, the C and stubs it emits | `cdispatch/` |
+| The suite's own fixtures and backends | beside the module under test (`test_glcontext_*.py`, `test_backend_names.py`, `test_shared_context_setup.py`) |
+| A program needing a toolkit main loop, a window of its own, or a fresh process | a `check_*.py` script — see [Check scripts](#check-scripts) |
+| A report about what the machine has, for CI to print | a `report_*.py` script; nothing collects these |
+| Anything else about the library itself | a root-level `test_*.py` named for the subject |
+
+Three questions decide most of it:
+
+1. **Does it need a GL context?** If so it belongs in `gl/`, `gles/` or `glu/`
+   behind one of the base cases, not at the root. A test that takes a context
+   it does not use costs every run the context and hides the fact that the
+   subject needs no GL at all.
+2. **Is the answer settled once per process?** Which dispatch implementation is
+   installed, what an import costs, what a call with no context does: those run
+   in a child, through `glcontext.CHILD_PREAMBLE` and
+   `childenv.child_environment()`.
+3. **Does it need a window, or a main loop?** Then it is a check script, not a
+   test case.
+
 ### Markers
 
 | Marker | What it means | Deselect with |

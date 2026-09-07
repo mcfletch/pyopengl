@@ -67,5 +67,79 @@ class TestGL1Texture(GLTestCase):
         self.check_error('texenv/texgen')
 
 
+class TestTextureNamesAndResidence(GLTestCase):
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    def test_generating_one_name_gives_a_usable_integer(self):
+        texture = glGenTextures(1)
+        self.assertTrue(texture)
+        self.assertTrue(int(texture))
+        glDeleteTextures(1, [int(texture)])
+
+    def test_a_generated_name_may_be_passed_straight_back_in(self):
+        """``glGenTextures(2)`` hands back array elements, not Python ints.
+
+        With numpy installed those elements are ``numpy.uint32``, and passing
+        one to the next call is the obvious thing to write.  ``OpenGL.__init__``
+        documents an ``ALLOW_NUMPY_SCALARS`` flag for this and defaults it off;
+        nothing in the library reads the flag, and the scalars are accepted
+        either way.  This records the behaviour a caller actually gets, which
+        is the one worth not breaking.
+        """
+        textures = glGenTextures(2)
+        for texture in textures:
+            glBindTexture(GL_TEXTURE_2D, texture)
+        self.check_error('binding a texture by the name glGenTextures returned')
+        glBindTexture(GL_TEXTURE_2D, 0)
+        glDeleteTextures(2, [int(t) for t in textures])
+
+    def test_residence_is_reported_for_every_texture_asked_about(self):
+        """``glAreTexturesResident`` answers one flag per name.
+
+        The output array is sized from the input, so a binding that sized it
+        from something else overruns; what each flag *says* is the driver's
+        business and varies with what else is on the card.
+        """
+        textures = glGenTextures(2)
+        data = np.array([(0, 255, 0)], 'i')
+        for texture in textures:
+            glBindTexture(GL_TEXTURE_2D, int(texture))
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, 1, 1, 0, GL_RGB, GL_INT, data)
+        glGetError()  # drain: an unsupported format above is not what is asked
+        residence = glAreTexturesResident(textures)
+        self.assertEqual(len(residence), 2, residence)
+        glBindTexture(GL_TEXTURE_2D, 0)
+        glDeleteTextures(2, [int(t) for t in textures])
+
+
+class TestQueryingTextureState(GLTestCase):
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    def test_an_enable_bit_reads_back_as_a_boolean(self):
+        """``glGetBoolean(GL_TEXTURE_2D)`` is a one-element query."""
+        glEnable(GL_TEXTURE_2D)
+        self.assertTrue(glGetBoolean(GL_TEXTURE_2D))
+        glDisable(GL_TEXTURE_2D)
+        self.assertFalse(glGetBoolean(GL_TEXTURE_2D))
+        self.check_error('glGetBoolean(GL_TEXTURE_2D)')
+
+    def test_the_image_unit_count_is_positive(self):
+        """SF#2895081: this pname read back as nothing at all."""
+        units = glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS)
+        self.assertTrue(units, units)
+        self.assertGreaterEqual(int(units), 2)
+
+    def test_the_histogram_of_the_imaging_subset_switches_on_and_off(self):
+        """``GL_ARB_imaging`` is an optional block of the compatibility profile."""
+        if not glInitImagingARB():
+            self.skipTest('the ARB_imaging subset is not available here')
+        glHistogram(GL_HISTOGRAM, 256, GL_LUMINANCE, GL_FALSE)
+        glEnable(GL_HISTOGRAM)
+        glDisable(GL_HISTOGRAM)
+        self.check_error('glHistogram')
+
+
 if __name__ == '__main__':
     unittest.main()
