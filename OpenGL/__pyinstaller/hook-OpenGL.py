@@ -7,7 +7,9 @@ Three things are invisible to a tool that follows imports:
   so nothing in the import graph points at the data that answers for them;
 * the plug-in registries (:mod:`OpenGL.plugins`), which name every platform
   module and array format handler as a string and import it only once
-  something matches, and
+  something matches -- and the same for each API's error checker, which every
+  binding is built against, and for the Tk widget's context implementations
+  (:data:`OpenGL.Tk.context.IMPLEMENTATIONS`), and
 * the GLUT and GLE DLLs shipped for Windows, which
   :mod:`OpenGL.platform.ctypesloader` opens by path.
 
@@ -32,6 +34,52 @@ def _plugin_modules():
 
 
 @isolated.decorate
+def _error_modules():
+    """The per-API error checkers, which every binding imports by name
+
+    :mod:`OpenGL._declarations` builds each binding against
+    ``OpenGL.raw.<api>._errors``, named as a string and imported when the
+    binding is first built.  Only GL's and EGL's are imported anywhere
+    statically, so an application frozen without the rest opens its window and
+    fails on the first call into GLU, GLX, WGL or an ES binding.
+
+    Found by looking for them, so an API added to the library is carried
+    without an edit here.
+    """
+    import os
+
+    import OpenGL.raw
+
+    root = os.path.dirname(OpenGL.raw.__file__)
+    return sorted(
+        'OpenGL.raw.%s._errors' % (name,)
+        for name in os.listdir(root)
+        if os.path.exists(os.path.join(root, name, '_errors.py'))
+    )
+
+
+@isolated.decorate
+def _tk_context_modules():
+    """Modules the Tk GL widget would import to make a context
+
+    It makes one through the window system's own API -- GLX or WGL -- and which
+    of them is settled at run time from the windowing system Tk turns out to be
+    running on, so both are named as strings and neither is in the import graph.
+    An application frozen without them builds cleanly, opens its window, and
+    fails on the context.
+
+    Nothing where tkinter is not installed: an application that does not use the
+    Tk backend has no use for these, and a build host without tkinter is exactly
+    such an application.
+    """
+    try:
+        from OpenGL.Tk.context import IMPLEMENTATIONS
+    except ImportError:
+        return []
+    return sorted({module for module, _class in IMPLEMENTATIONS.values()})
+
+
+@isolated.decorate
 def _dll_directory():
     """Where the running library looks for its bundled Windows DLLs"""
     from OpenGL.platform import ctypesloader
@@ -42,8 +90,9 @@ def _dll_directory():
 # Every platform's module, not only the one being built for: which is used is
 # settled at run time from ``PYOPENGL_PLATFORM`` and the session type, so a
 # frozen application that is told to use EGL or OSMesa needs the module to be
-# there. They are small and pure Python.
-hiddenimports = _plugin_modules()
+# there. They are small and pure Python. The Tk widget's context
+# implementations are chosen the same way and are the same size.
+hiddenimports = _plugin_modules() + _error_modules() + _tk_context_modules()
 
 # Without these there is no OpenGL.raw at all: the finder that answers for
 # those names reads the tables to learn which names it can answer for, so an

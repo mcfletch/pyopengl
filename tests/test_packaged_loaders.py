@@ -125,6 +125,58 @@ class TestFreezingAnApplication:
         assert tables, 'no declaration tables in %s' % (root,)
 
 
+class TestTheHookDeclaresWhatIsReachedByName:
+    """A module a string names is a module a freezer cannot see.
+
+    The Tk GL widget makes its context through the window system's own API and
+    chooses which implementation to use at run time, from the windowing system
+    Tk turns out to be running on -- so an application frozen without them
+    builds cleanly, opens its window and fails on the context.
+    """
+
+    def _hook(self):
+        """``hiddenimports`` as PyInstaller would read them"""
+        pytest.importorskip('PyInstaller')
+        completed = subprocess.run(
+            [sys.executable, '-c',
+             'import runpy, json, os;'
+             'declared = runpy.run_path(os.path.join('
+             '%r, "OpenGL", "__pyinstaller", "hook-OpenGL.py"));'
+             'print(json.dumps(declared["hiddenimports"]))' % (ROOT,)],
+            capture_output=True, text=True, timeout=600, cwd=ROOT,
+            env=_environment(),
+        )
+        assert completed.returncode == 0, completed.stderr
+        import json
+
+        return json.loads(completed.stdout.splitlines()[-1])
+
+    def test_every_tk_context_implementation_is_carried(self):
+        from OpenGL.Tk import context
+
+        pytest.importorskip('tkinter')
+        declared = self._hook()
+        for module, _ in context.IMPLEMENTATIONS.values():
+            assert module in declared, (
+                '%s is chosen by name at run time and would not be frozen'
+                % (module,))
+
+    def test_every_apis_error_checker_is_carried(self):
+        """Every binding `_declarations` builds imports `OpenGL.raw.<api>._errors`
+        by name, so an API whose checker was left out fails on the first call
+        into it -- and only GL's and EGL's are imported anywhere statically."""
+        declared = self._hook()
+        for api in ('GL', 'GLU', 'GLX', 'EGL', 'WGL', 'GLES2'):
+            module = 'OpenGL.raw.%s._errors' % (api,)
+            assert module in declared, (
+                '%s is imported by name and would not be frozen' % (module,))
+
+    def test_the_platform_modules_are_still_carried(self):
+        """The registries this has always reported; named so that adding the
+        above cannot quietly replace them."""
+        assert 'OpenGL.platform.linux' in self._hook()
+
+
 class TestADamagedTableSaysSo:
     """The declaration tables are the only description of ``OpenGL.raw`` there
     is, so one that cannot be read is a broken installation.  What a user must
