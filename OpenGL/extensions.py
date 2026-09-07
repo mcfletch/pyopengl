@@ -213,9 +213,16 @@ class _GLQuerier(ExtensionQuerier):
 
         if not platform.PLATFORM.CurrentContextIsValid():
             return False
+        import ctypes
         from OpenGL.raw.GL.VERSION.GL_1_1 import glGetString
         from OpenGL.raw.GL.VERSION.GL_1_1 import GL_VERSION
 
+        # The raw entry point's declared restype is an array type, and only the
+        # C dispatch layer turns that into the string this actually is -- under
+        # ctypes it answers with the array, which has nothing to decode.  Say
+        # what the return is, as pullExtensions does: either may be the first
+        # to run, so neither can rely on the other having said it.
+        glGetString.restype = ctypes.c_char_p
         new = glGetString(GL_VERSION)
         if not new:
             # A query the context would not answer -- between glBegin and

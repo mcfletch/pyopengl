@@ -404,8 +404,11 @@ TEST_VISIBLE=0 python -m pytest -q tests/
 case reaching the same outcome as a serial run. Two options are not optional:
 
 ```
-python -m pytest -q -n logical --dist loadfile --max-worker-restart=0
+python -m pytest -q -n 4 --dist loadfile --max-worker-restart=0
 ```
+
+Four workers rather than `-n logical`: they share one renderer, and twenty
+of them on a large machine fail cases that four do not.
 
 `--dist loadfile` keeps a module in one process. A test class creates its
 context in `setUp`, so the cases of one class have to share a process to share

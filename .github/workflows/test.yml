@@ -140,7 +140,10 @@ jobs:
         # suites came to run in no job at all.
         #
         # In parallel, which halves each job: the suite is 67s serially and 35s
-        # on four workers, with every case reaching the same outcome.
+        # on four workers, with every case reaching the same outcome.  Four
+        # rather than `-n logical`, which is the same number on a runner and a
+        # great many more on a developer's machine -- twenty workers sharing
+        # one software renderer fail cases that four do not.
         # `--dist loadfile` keeps a module's contexts in one process, since a
         # test class makes its context in setUp and the cases of one class must
         # share a process to share it.  `--max-worker-restart=0` fails the run
@@ -151,7 +154,7 @@ jobs:
           xvfb-run -a
           python -m tox -e ${{ matrix.toxenv }} --
           ${{ inputs.tests || matrix.paths || 'tests/' }} -m "not performance"
-          -n logical --dist loadfile --max-worker-restart=0
+          -n 4 --dist loadfile --max-worker-restart=0
 
   macos:
     name: macOS ${{ matrix.os }} / CGL / ${{ matrix.toxenv }}

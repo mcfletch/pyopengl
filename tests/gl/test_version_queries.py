@@ -15,6 +15,7 @@ known until there is a context, deferred until something asks for it.
 import unittest
 
 from arraycompat import one
+from childenv import json_from_child
 from gltestcase import GLTestCase
 from OpenGL.extensions import GLQuerier, hasGLExtension
 from OpenGL.GL import *  # noqa: F401,F403
@@ -46,6 +47,56 @@ class TestTheContextIdentifiesItself(GLTestCase):
         else:
             self.assertFalse(glShaderSource)
             self.assertFalse(glUniform1f)
+
+
+#: Ask the querier for the version and nothing else, in a fresh process.  The
+#: order is the point: ``pullExtensions`` sets the raw ``glGetString``'s restype
+#: to the string it returns, and that is a lasting change to a shared entry
+#: point -- so a process that has pulled the extensions first cannot show
+#: whether ``pullVersion`` can stand on its own.
+VERSION_FIRST = r'''
+import json
+import os
+
+os.environ.setdefault('PYOPENGL_PLATFORM', 'egl')
+
+report = {}
+from glcontext import Context
+
+with Context(profile='compatibility', gl_version=(2, 1)):
+    from OpenGL.extensions import GLQuerier
+
+    try:
+        report['version'] = GLQuerier.pullVersion()
+    except Exception as err:
+        report['error'] = '%s: %s' % (type(err).__name__, err)
+print(json.dumps(report))
+'''
+
+
+class TestTheVersionIsReadableOnItsOwn(unittest.TestCase):
+    """``pullVersion`` must not need ``pullExtensions`` to have run first.
+
+    The two read the same raw entry point, whose declared return is an array
+    type: only the C dispatch layer turns that into the string it is, so under
+    ctypes the version read answers with an array. That was invisible for as
+    long as the extensions were always pulled first, since pulling them sets
+    the restype for whatever runs afterwards.
+    """
+
+    def answer(self, **environment):
+        return json_from_child(VERSION_FIRST, **environment)
+
+    def test_the_querier_answers_under_ctypes(self):
+        answered = self.answer(PYOPENGL_DISPATCH='ctypes')
+        self.assertNotIn('error', answered, answered.get('error'))
+        self.assertTrue(answered['version'], answered)
+
+    def test_the_querier_answers_with_the_accelerators_off(self):
+        """The configuration every `accel0` axis runs in."""
+        answered = self.answer(PYOPENGL_USE_ACCELERATE='0')
+        self.assertNotIn('error', answered, answered.get('error'))
+        self.assertTrue(answered['version'], answered)
 
 
 class TestAConstantResolvedAgainstTheContext(GLTestCase):
