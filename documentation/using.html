@@ -635,6 +635,11 @@ in&nbsp;situations where numpy data-arrays are being copied. &nbsp;You
 can use these error messages to optimise your application data-paths to
 eliminate the copying.To enable the checking do the following before any other OpenGL imports: </p>
 
+<p>The flag is about array <em>data</em>. A string parameter &mdash; a
+uniform or attribute name, a debug label, GLSL source &mdash; still takes a
+<code>str</code> and is encoded for you, since it is encoded once and read
+before the call returns.</p>
+
 
 
 

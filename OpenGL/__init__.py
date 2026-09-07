@@ -59,6 +59,16 @@ import occurs the flags should no longer be changed.
         This effectively disables all list/tuple array
         support, as they are inherently copy-based.
 
+        Array *data* is what this is about: the per-frame
+        vertex or pixel copy that costs a program its speed,
+        and whose temporary can be freed while the driver
+        still holds the pointer.  A string parameter -- a
+        uniform or attribute name, a debug label, GLSL source
+        -- is not that, and a str is still accepted and
+        encoded for one: it happens once, the driver reads it
+        before the call returns, and there is no other way to
+        pass a str.
+
         This feature allows for optimisation of your
         application.  It should only be enabled during
         testing stages to prevent raising errors on

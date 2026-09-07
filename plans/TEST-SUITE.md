@@ -873,3 +873,72 @@ On Mesa's software device — what CI renders on — ten consecutive four-worker
 runs were identical to each other and to a serial run, 67.5s to 35.1s. So CI
 runs in parallel, `tox` stays serial for a developer, and `tests/README.md` says
 why under "Running in parallel".
+
+## A fourth pass — every axis green
+
+The axes added in the third pass had never run: an `install_command` naming
+pip had been made live in the same work, and tox-uv builds these environments
+with `uv venv`, which has no pip for one to call. Removing the override was the
+whole of that fix; what it uncovered was the rest of this section.
+
+**Building an environment is not the same as reading its configuration.** The
+third pass verified those axes by setting environment variables in the
+development virtualenv. That is not the configuration the axis names: `num0`
+cannot be reached with a variable at all, and `accel0`, `dispctypes` and the
+flag axes each select code the development environment does not run. Every
+defect below was invisible until a real environment was built and run.
+
+### In the library
+
+- **Every multi-output query, with `SIZE_1_ARRAY_UNPACK` off.** A wrapper
+  finalises its `returnValues` to turn argument names into indices; with one
+  output that is the converter, with several it is a `MultiReturn`, which had
+  no `finalise`. The children were never reached and each answered about
+  argument zero, so `glGetActiveUniform` returned the program once per output.
+  Both implementations had the gap.
+- **Every GLSL name, with `ERROR_ON_COPY` on, under ctypes.** The C layer
+  encodes a `str`; the ctypes path refused one. The flag refuses the copy of
+  array *data* — the per-frame copy that costs speed and can dangle a pointer
+  — and a name is neither. The two implementations now agree, and the flag is
+  usable by a program that looks up a uniform by name.
+- **`glEdgeFlagPointer` declared its array `GLushort`**, with a comment saying
+  the type was wrong. Edge flags are `GLboolean`, so a caller passing the
+  correct array had every element widened and the driver read flags that were
+  not the ones given. Silent in every configuration but the one that refuses
+  the widening rather than performing it.
+- **`pullVersion` decoded a raw `glGetString` return** that only the C layer
+  turns into a string, and worked only because `pullExtensions` sets that
+  entry point's restype for whatever runs next.
+- **Reading a size-1 result** decided the shape from how `int()` failed, which
+  is not one thing: `ValueError` on a ctypes array, and on a numpy one either
+  a raise or a warning depending on the version — and a warning is an error
+  here. Both helpers ask the shape now.
+
+### In the suite
+
+`gl_coverage.py` read the declaration tables from the compiled extension,
+absent on four jobs; `arraycompat.np` is numpy *or a shim*, so `not np` never
+fired and three cases meant to want numpy ran without it; the GLE cases asked
+for one entry point and called another, which macOS exports selectively; and
+`accelerate/tests` ran in no CI job, because tox names it in a posargs default
+that `-m "not performance"` displaces.
+
+### Where it stands
+
+Eight tox environments, each built from scratch, all green:
+
+| environment | |
+|---|---|
+| `num1-accel0-dispctypes` | 2737 passed |
+| `num0-accel0-dispctypes` | 2680 passed |
+| `num1-accel1-dispc` | 3067 passed |
+| `num1-accel1-dispctypes` | 2828 passed |
+| `num1-accel1-dispctypes-useaccel0` | 2759 passed |
+| `num1-accel1-dispctypes-flagerrorcopy` | 2814 passed |
+| `num1-accel1-dispctypes-flagnosizecheck` | 2823 passed |
+| `num1-accel1-dispctypes-flagnounpack` | 2826 passed |
+
+and on the GPU, every documented flag: default, `dispctypes`, `USE_ACCELERATE=0`,
+`ERROR_ON_COPY`, `SIZE_1_ARRAY_UNPACK=0`, `ARRAY_SIZE_CHECKING=0`,
+`STORE_POINTERS=0` — 0 failures in each.
+
