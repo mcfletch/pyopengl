@@ -1,14 +1,22 @@
 """What ``OpenGL.EGL.devices`` reports about the EGL devices present.
 
 The classification is pure -- a device is described by the extensions it
-advertises and the name its driver gives itself -- so most of this runs with no
-EGL implementation to hand.  The enumeration cases need one and skip without it.
+advertises and the name its driver gives itself -- so most of these cases need
+no EGL implementation to answer.  They still need the binding to import, which
+wants a library behind it, so the module skips where there is none; the
+enumeration cases need a working one and skip on their own besides.
 """
 
 import ctypes
 import os
 
 import pytest
+
+#: EGL ships with the graphics driver, and a platform with none -- macOS --
+#: raises ImportError rather than ModuleNotFoundError, which is what
+#: importorskip catches unless told otherwise.  Without `exc_type` this is a
+#: collection error, and pytest abandons the whole run rather than this module.
+pytest.importorskip('OpenGL.EGL', exc_type=ImportError)
 
 from OpenGL.EGL import devices as devices_module
 from OpenGL.EGL.devices import DeviceInfo

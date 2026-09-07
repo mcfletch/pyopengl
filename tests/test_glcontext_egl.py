@@ -1,7 +1,9 @@
 """Which EGL device the headless test backend renders on.
 
-The choice is policy over the facts :mod:`OpenGL.EGL.devices` reports, so it is
-pure and runs with no EGL implementation present.
+The choice is policy over the facts :mod:`OpenGL.EGL.devices` reports, so no EGL
+implementation has to answer for these to run -- but the binding they read the
+facts through needs a library to import at all, so the module skips where the
+platform has none.
 
 One combination is not merely a poor choice but a crash: Mesa refuses to force
 software rendering onto a display that was created on a *hardware* device
@@ -12,8 +14,16 @@ therefore select a software device, and where there is none the backend says so
 instead of handing back a device that would take the process down.
 """
 
-import glcontext_egl
 import pytest
+
+#: EGL ships with the graphics driver, and a platform with none -- macOS --
+#: raises ImportError rather than ModuleNotFoundError, which is what
+#: importorskip catches unless told otherwise.  Without `exc_type` this is a
+#: collection error, and pytest abandons the whole run rather than this module.
+pytest.importorskip('OpenGL.EGL', exc_type=ImportError)
+
+# Importing the headless EGL backend is importing EGL, so it follows the guard.
+import glcontext_egl
 
 from OpenGL.EGL.devices import DeviceInfo
 

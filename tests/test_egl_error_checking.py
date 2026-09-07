@@ -19,7 +19,7 @@ import ctypes
 
 import pytest
 
-EGL = pytest.importorskip('OpenGL.EGL')
+EGL = pytest.importorskip('OpenGL.EGL', exc_type=ImportError)
 
 from OpenGL import error
 

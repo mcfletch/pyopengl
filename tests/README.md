@@ -171,7 +171,19 @@ pins a specific EGL device. Under the `egl` backend the legacy root-level
 7. If a specific entry point cannot succeed here (external interop, multi-GPU, a
    window-system-only path), `skipTest('<why>')` and do **not** reference its
    name where the coverage scanner would count it.
-8. **Back every interface block a draw or dispatch will execute.** An active
+8. **Reach for `OpenGL.EGL` only behind
+   `pytest.importorskip('OpenGL.EGL', exc_type=ImportError)`.** EGL ships with
+   the graphics driver and macOS has none, so the binding raises `ImportError`
+   naming the missing library — deliberately, because `try: from OpenGL import
+   EGL` is how a program asks whether the machine has it. Since pytest 8.2
+   `importorskip` catches only `ModuleNotFoundError`, so without `exc_type` that
+   is a *collection* error, and pytest abandons the whole run rather than the
+   one module. Importing `glcontext_egl` counts: it is the EGL backend. No other
+   PyOpenGL subpackage does this — `OpenGL.GLUT` and friends import fine with no
+   library and answer `NullFunctionError` when called.
+   `tests/test_collects_without_egl.py` collects the suite on a machine
+   pretending to have no EGL, which is where this is caught.
+9. **Back every interface block a draw or dispatch will execute.** An active
    uniform block, shader storage block or atomic counter buffer with no buffer
    object bound to its binding point leaves the results of shader execution
    undefined, and the specification allows a driver to interrupt or terminate on
