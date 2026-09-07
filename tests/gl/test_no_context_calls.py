@@ -53,7 +53,10 @@ else:
 
 
 def behaviour(dispatch, checking):
-    completed = run_in_child(SCRIPT % {'checking': checking}, PYOPENGL_DISPATCH=dispatch)
+    completed = run_in_child(
+        SCRIPT % {'checking': checking},
+        PYOPENGL_DISPATCH=dispatch, PYOPENGL_USE_ACCELERATE=None,
+    )
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context to lose here: %s' % (completed.stderr.strip(),))
     if completed.returncode != 0:

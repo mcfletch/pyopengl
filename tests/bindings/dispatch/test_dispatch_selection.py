@@ -44,14 +44,22 @@ print(
 
 
 def report(dispatch, block=False):
-    completed = run_in_child(REPORT % {'block': block}, PYOPENGL_DISPATCH=dispatch)
+    # USE_ACCELERATE off would decide the answer before PYOPENGL_DISPATCH is
+    # looked at, so the child is given neither but the one under test.
+    completed = run_in_child(
+        REPORT % {'block': block},
+        PYOPENGL_DISPATCH=dispatch, PYOPENGL_USE_ACCELERATE=None,
+    )
     available, active, kind = completed.stdout.strip().split()
     return available == 'True', active == 'True', kind
 
 
 def _default():
     """What a child chooses with no PYOPENGL_DISPATCH set at all."""
-    completed = run_in_child(REPORT % {'block': False}, PYOPENGL_DISPATCH=None)
+    completed = run_in_child(
+        REPORT % {'block': False},
+        PYOPENGL_DISPATCH=None, PYOPENGL_USE_ACCELERATE=None,
+    )
     available, active, kind = completed.stdout.strip().split()
     return available == 'True', active == 'True', kind
 

@@ -24,13 +24,14 @@ import pytest
 from childenv import run_in_child
 
 import OpenGL._dispatch as dispatch
+from OpenGL import dispatch as dispatch_api
 from OpenGL import _configflags
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT = paths.ROOT
 
 pytestmark = pytest.mark.skipif(
-    not dispatch.AVAILABLE or _configflags.DISPATCH != 'c',
+    dispatch_api.settle() != 'c',
     reason='per-context tables exist only in the C implementation',
 )
 

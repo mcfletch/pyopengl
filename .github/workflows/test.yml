@@ -54,6 +54,13 @@ jobs:
           # Without numpy, which is an optional dependency and so a supported
           # way to have PyOpenGL installed.
           - {python: '3.12', toxenv: py312-num0-accel0-dispctypes}
+          # The configuration flags OpenGL/__init__.py documents, which nothing
+          # here used to vary -- so a NameError that ended the whole run under
+          # ERROR_ON_COPY, and a heap overrun reachable without the compiled
+          # accelerator, both went unreported.  One interpreter is enough: a
+          # flag about array conversion is not a claim about the interpreter.
+          - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-flagerrorcopy}
+          - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-flagnosizecheck}
     env:
       # The headless EGL-device backend, on the software device.  Both are read
       # by tests/glcontext_egl.py, and tox passes them through.

@@ -5,11 +5,12 @@ import gc
 import pytest
 
 import OpenGL._dispatch as dispatch
+from OpenGL import dispatch as dispatch_api
 from OpenGL import _configflags
 from glcontext import Context
 
 pytestmark = pytest.mark.skipif(
-    not dispatch.AVAILABLE or _configflags.DISPATCH != 'c',
+    dispatch_api.settle() != 'c',
     reason='the C dispatch layer is not the selected implementation',
 )
 

@@ -17,10 +17,11 @@ import threading
 import pytest
 
 import OpenGL._dispatch as dispatch
+from OpenGL import dispatch as dispatch_api
 from OpenGL import _configflags
 
 pytestmark = pytest.mark.skipif(
-    not dispatch.AVAILABLE or _configflags.DISPATCH != 'c',
+    dispatch_api.settle() != 'c',
     reason='thread-local suspension is the C implementation',
 )
 

@@ -57,6 +57,7 @@ def run(implementation, preamble='', body=''):
     completed = run_in_child(
         DEFAULT % {'preamble': preamble, 'body': body},
         PYOPENGL_DISPATCH=implementation, PYOPENGL_DISPATCH_STRICT='0',
+        PYOPENGL_USE_ACCELERATE=None,
     )
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
@@ -176,6 +177,7 @@ def test_an_error_is_noticed_even_where_the_callback_is_no_longer_ours(implement
     completed = run_in_child(
         DISPLACED,
         PYOPENGL_DISPATCH=implementation, PYOPENGL_DISPATCH_STRICT='0',
+        PYOPENGL_USE_ACCELERATE=None,
     )
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
@@ -193,6 +195,7 @@ def test_an_application_callback_is_not_taken_over(implementation):
     completed = run_in_child(
         FOREIGN,
         PYOPENGL_DISPATCH=implementation, PYOPENGL_DISPATCH_STRICT='0',
+        PYOPENGL_USE_ACCELERATE=None,
     )
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
