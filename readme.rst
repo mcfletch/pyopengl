@@ -5,6 +5,9 @@ PyOpenGL is normally distributed via PyPI using standard pip::
 
     $ pip install PyOpenGL PyOpenGL_accelerate
 
+`RELEASE-NOTES-4.0.md <RELEASE-NOTES-4.0.md>`_ covers what changed between the
+3.x series and 4.0, including the requirements a 3.x program has to meet.
+
 You can install this repository by branching/cloning and running
 ``pip``::
 
