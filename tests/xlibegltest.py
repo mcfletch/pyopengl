@@ -8,7 +8,17 @@ checkutils.require('Xlib.display')
 from Xlib import X, display, error
 import ctypes
 import os
+import select
+import time
 from functools import wraps
+
+#: How long to wait for the X server to send anything before giving up.
+#:
+#: The event these scripts wait for is an Expose, and a server that never shows
+#: the window never sends one.  Waiting for it blocks forever, which stops the
+#: whole run rather than the script, so the wait is bounded and a server that
+#: says nothing is a skip with the reason.
+EVENT_TIMEOUT = float(os.environ.get('TEST_X_EVENT_TIMEOUT', '30'))
 
 #: show the window by default (set TEST_VISIBLE=0 for headless/CI runs).
 TEST_VISIBLE = os.environ.get('TEST_VISIBLE', '1').lower() not in ('0', 'false', 'no')
@@ -173,8 +183,15 @@ class EGLWindow(object):
 
     def loop(self, target, args, named, exit_on_render=False):
         do_close = True
+        deadline = time.time() + EVENT_TIMEOUT
         try:
             while True:
+                if not self.wait_for_an_event(deadline):
+                    checkutils.skip(
+                        'no X event arrived in %g seconds: this server never '
+                        'exposed the window, so there was nothing to draw into'
+                        % (EVENT_TIMEOUT,)
+                    )
                 try:
                     e = self.display.next_event()
                 except error.ConnectionClosedError as err:
@@ -216,6 +233,22 @@ class EGLWindow(object):
         finally:
             if do_close:
                 self.close()
+
+    def wait_for_an_event(self, deadline):
+        """Whether an event is there to read before `deadline`.
+
+        ``next_event`` blocks, and the event this waits for is an Expose --
+        which a server that never showed the window never sends.  Blocking on
+        one that will not come stops the whole run rather than this script, and
+        says nothing about which script it was waiting in.
+        """
+        while not self.display.pending_events():
+            left = deadline - time.time()
+            if left <= 0:
+                return False
+            if not select.select([self.display], (), (), left)[0]:
+                return False
+        return True
 
     def close(self):
         self.window.destroy()

@@ -129,3 +129,44 @@ class TestWhetherThereIsAWindowServer:
         import os
 
         assert backends.has_window_server() == backends.has_window_server(os.environ)
+
+
+class TestAskingMacOS:
+    """A Mac has no DISPLAY to read, and the answer is not simply yes.
+
+    A Mac in front of somebody always has a window server; a Mac running a CI
+    job under launchd has none -- and Apple's GLUT does not answer that by
+    failing.  ``glutInit`` waits for a window server that will not arrive,
+    which stops the run rather than the case, and says nothing about which
+    script it was waiting in.
+    """
+
+    def test_a_gui_session_is_a_window_server(self, monkeypatch):
+        monkeypatch.setattr(backends, 'macos_gui_session', lambda: True)
+        assert backends.has_window_server({}, platform='darwin') is True
+
+    def test_and_a_launchd_job_without_one_is_not(self, monkeypatch):
+        monkeypatch.setattr(backends, 'macos_gui_session', lambda: False)
+        assert backends.has_window_server({}, platform='darwin') is False
+
+    def test_a_mac_that_cannot_be_asked_is_taken_at_its_word(self, monkeypatch):
+        """Answering no would skip every windowed case on a working desktop;
+        the probe failing is not evidence that there is nothing there."""
+        monkeypatch.setattr(backends, 'macos_gui_session', lambda: None)
+        assert backends.has_window_server({}, platform='darwin') is True
+
+    def test_the_display_variables_are_not_read_there(self):
+        """They mean nothing on a Mac: XQuartz sets DISPLAY and is not the
+        window server the GLUT framework talks to."""
+        import os
+
+        monkey = dict(os.environ, DISPLAY=':0')
+        assert backends.has_window_server(
+            monkey, platform='darwin'
+        ) is backends.has_window_server({}, platform='darwin')
+
+
+class TestAskingElsewhere:
+    def test_windows_has_one(self):
+        """There is no variable to read and no equivalent failure to avoid."""
+        assert backends.has_window_server({}, platform='win32') is True

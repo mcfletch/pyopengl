@@ -62,7 +62,49 @@ def is_headless(name):
     return name in HEADLESS
 
 
-def has_window_server(environ=None):
+def macos_gui_session():
+    """Whether this process is in a macOS GUI login session; None if unasked.
+
+    ``CGSessionCopyCurrentDictionary`` is the documented way to tell: it
+    answers a dictionary describing the session a window server is running
+    for, and NULL outside one -- which is what a job under launchd is, and
+    what a CI runner gives.
+
+    None where the question could not be put at all, so a caller can tell
+    "there is no window server" from "this Mac would not say".
+    """
+    import ctypes
+    import ctypes.util
+
+    frameworks = {}
+    for name, fallback in (
+        ('CoreGraphics',
+         '/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics'),
+        ('CoreFoundation',
+         '/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation'),
+    ):
+        try:
+            frameworks[name] = ctypes.cdll.LoadLibrary(
+                ctypes.util.find_library(name) or fallback
+            )
+        except OSError:
+            return None
+    try:
+        current = frameworks['CoreGraphics'].CGSessionCopyCurrentDictionary
+        release = frameworks['CoreFoundation'].CFRelease
+    except AttributeError:
+        return None
+    current.restype = ctypes.c_void_p
+    current.argtypes = []
+    release.argtypes = [ctypes.c_void_p]
+    session = current()
+    if session:
+        release(ctypes.c_void_p(session))
+        return True
+    return False
+
+
+def has_window_server(environ=None, platform=None):
     """Whether there is somewhere to open a window.
 
     Having a windowing library installed is a different question from having a
@@ -70,17 +112,35 @@ def has_window_server(environ=None):
     answers a display it cannot open by writing to stderr and calling
     ``exit()``, which leaves the harness a script that produced no output.
 
-    On Linux the answer is whether X11 or Wayland named a display.  Elsewhere
-    the window server is part of the running session and there is no equivalent
-    variable to read, so the answer is yes and what cannot be opened says so
-    when it is opened.
+    On Linux the answer is whether X11 or Wayland named a display.
+
+    On macOS there is no such variable -- ``DISPLAY`` there is XQuartz's and
+    not the window server the GLUT framework talks to -- so the session is
+    asked directly.  It has to be: a Mac running a CI job under launchd has no
+    window server, and Apple's GLUT does not answer that by failing the way
+    freeglut does.  ``glutInit`` waits for one that will not arrive, which
+    stops the run rather than the case.  A Mac that will not say is taken at
+    its word, since answering no would skip every windowed case on a working
+    desktop.
+
+    Anywhere else the window server is part of the running session and there is
+    no equivalent to read, so the answer is yes and what cannot be opened says
+    so when it is opened.
+
+    `platform` names the machine being asked about, for a case asking on
+    another's behalf; it defaults to this one.
     """
     import os
     import sys
 
     if environ is None:
         environ = os.environ
-    if not sys.platform.startswith('linux'):
+    if platform is None:
+        platform = sys.platform
+    if platform == 'darwin':
+        answer = macos_gui_session()
+        return True if answer is None else answer
+    if not platform.startswith('linux'):
         return True
     return bool(
         environ.get('DISPLAY', '').strip()
