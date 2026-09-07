@@ -15,7 +15,19 @@ import pytest
 
 from arraycompat import np
 from gltestcase import GLTestCase
+from OpenGL import _configflags
 from OpenGL.GL import *  # noqa: F401,F403
+
+#: ``ARRAY_SIZE_CHECKING`` is what makes a wrongly sized array an exception
+#: rather than a short read the driver performs.  A run that has switched it
+#: off has asked for the unchecked call, so the cases below are asserting a
+#: refusal that is not this configuration's to make.  Read from
+#: ``_configflags`` rather than ``OpenGL``: the flag is fixed when the wrappers
+#: are built, and that is the module holding the value they were built with.
+needs_size_checking = pytest.mark.skipif(
+    not _configflags.ARRAY_SIZE_CHECKING,
+    reason='ARRAY_SIZE_CHECKING is off, so a wrongly sized array is not refused',
+)
 
 
 class TestArrayAcceptance(GLTestCase):
@@ -47,6 +59,7 @@ class TestArrayAcceptance(GLTestCase):
     def test_memoryview_is_accepted(self):
         glVertex3dv(memoryview(np.zeros(3, 'd')))
 
+    @needs_size_checking
     def test_too_short_is_refused_rather_than_read_past(self):
         """A wrongly sized array must raise, not hand the driver a short read.
 
@@ -58,6 +71,7 @@ class TestArrayAcceptance(GLTestCase):
             with pytest.raises((ValueError, TypeError)):
                 glVertex3dv(bad)
 
+    @needs_size_checking
     def test_too_long_is_refused(self):
         with pytest.raises((ValueError, TypeError)):
             glVertex3dv(np.zeros(4, 'd'))

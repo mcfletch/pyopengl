@@ -1,5 +1,6 @@
 import basetestcase
 import os, logging
+import pytest
 import OpenGL
 from OpenGL.GL import *
 from OpenGL import GLU
@@ -10,29 +11,38 @@ except ImportError as err:
 HERE = os.path.abspath(os.path.dirname(__file__))
 log = logging.getLogger(__name__)
 
+#: A run that has refused implicit copies cannot pass a list of control points,
+#: so these cases want numpy to build one with.  Stated as a skip rather than a
+#: conditional ``def``, which leaves no record of the case that is not there.
+needs_a_non_copying_array = pytest.mark.skipif(
+    OpenGL.ERROR_ON_COPY and np is None,
+    reason='ERROR_ON_COPY refuses a list of control points and there is no numpy',
+)
+
 class TestEvaluators(basetestcase.BaseTest):
     evaluator_ctrlpoints = [[[ -1.5, -1.5, 4.0], [-0.5, -1.5, 2.0], [0.5, -1.5,
         -1.0], [1.5, -1.5, 2.0]], [[-1.5, -0.5, 1.0], [-0.5, -0.5, 3.0], [0.5, -0.5,
         0.0], [1.5, -0.5, -1.0]], [[-1.5, 0.5, 4.0], [-0.5, 0.5, 0.0], [0.5, 0.5,
         3.0], [1.5, 0.5, 4.0]], [[-1.5, 1.5, -2.0], [-0.5, 1.5, -2.0], [0.5, 1.5,
         0.0], [1.5, 1.5, -1.0]]]
-    if (not OpenGL.ERROR_ON_COPY) or array:	
-        def test_evaluator( self ):
-            """Test whether the evaluator functions work"""
-            glDisable(GL_CULL_FACE)
-            glEnable(GL_MAP2_VERTEX_3)
-            glEnable(GL_DEPTH_TEST)
-            glEnable(GL_NORMALIZE)
-            if np:
-                ctrl_points = np.array( self.evaluator_ctrlpoints,'f')
-            else:
-                ctrl_points = self.evaluator_ctrlpoints
-            glMap2f(GL_MAP2_VERTEX_3, 0, 1, 0, 1, ctrl_points)
-            glMapGrid2f(20, 0.0, 1.0, 20, 0.0, 1.0)
-            glShadeModel(GL_FLAT)
-            glEvalMesh2(GL_FILL, 0, 20, 0, 20)
-            glTranslatef( 0,0.001, 0 )
-            glEvalMesh2(GL_POINT, 0, 20, 0, 20)
+    @needs_a_non_copying_array
+    def test_evaluator( self ):
+        """Test whether the evaluator functions work"""
+        glDisable(GL_CULL_FACE)
+        glEnable(GL_MAP2_VERTEX_3)
+        glEnable(GL_DEPTH_TEST)
+        glEnable(GL_NORMALIZE)
+        if np:
+            ctrl_points = np.array( self.evaluator_ctrlpoints,'f')
+        else:
+            ctrl_points = self.evaluator_ctrlpoints
+        glMap2f(GL_MAP2_VERTEX_3, 0, 1, 0, 1, ctrl_points)
+        glMapGrid2f(20, 0.0, 1.0, 20, 0.0, 1.0)
+        glShadeModel(GL_FLAT)
+        glEvalMesh2(GL_FILL, 0, 20, 0, 20)
+        glTranslatef( 0,0.001, 0 )
+        glEvalMesh2(GL_POINT, 0, 20, 0, 20)
+
     def test_nurbs_raw( self ):
         """Test nurbs rendering using raw API calls"""
         from OpenGL.raw import GLU as GLU_raw
@@ -139,33 +149,41 @@ class TestEvaluators(basetestcase.BaseTest):
         glColor3f( 1,0, 0 )
         GLU.gluSphere( quad, 1.0, 16, 16 )
 
-    if not OpenGL.ERROR_ON_COPY:
-        def test_gluNurbsCurve( self ):
-            """Test that gluNurbsCurve raises error on invalid arguments"""
-            nurb = GLU.gluNewNurbsRenderer()
-            GLU.gluBeginCurve( nurb )
-            if OpenGL.ERROR_CHECKING:
-                self.assertRaises( error.GLUerror,
-                    GLU.gluNurbsCurve,
-                        nurb, 
-                        [0, 1.0],
-                        [[0,0,0],[1,0,0],[1,1,0]],
-                        GL_MAP1_VERTEX_3,
-                )
-                self.assertRaises( error.GLUerror,
-                    GLU.gluNurbsCurve,
-                        nurb, 
-                        [],
-                        [[0,0,0],[1,0,0],[1,1,0]],
-                        GL_MAP1_VERTEX_3,
-                )
-                self.assertRaises( error.GLUerror,
-                    GLU.gluNurbsCurve,
-                        nurb, 
-                        [],
-                        [],
-                        GL_MAP1_VERTEX_3,
-                )
+    #: The lists here are the argument under test -- a knot vector too short
+    #: for the control points GLU is given -- so there is no array form of
+    #: them to use instead: converting them would be testing something else.
+    #: A run that has refused implicit copies raises CopyError before GLU is
+    #: reached, which is that run behaving correctly and not this case failing.
+    @pytest.mark.skipif(
+        OpenGL.ERROR_ON_COPY,
+        reason='the malformed argument under test is a list, which ERROR_ON_COPY refuses',
+    )
+    def test_gluNurbsCurve( self ):
+        """Test that gluNurbsCurve raises error on invalid arguments"""
+        nurb = GLU.gluNewNurbsRenderer()
+        GLU.gluBeginCurve( nurb )
+        if OpenGL.ERROR_CHECKING:
+            self.assertRaises( error.GLUerror,
+                GLU.gluNurbsCurve,
+                    nurb,
+                    [0, 1.0],
+                    [[0,0,0],[1,0,0],[1,1,0]],
+                    GL_MAP1_VERTEX_3,
+            )
+            self.assertRaises( error.GLUerror,
+                GLU.gluNurbsCurve,
+                    nurb,
+                    [],
+                    [[0,0,0],[1,0,0],[1,1,0]],
+                    GL_MAP1_VERTEX_3,
+            )
+            self.assertRaises( error.GLUerror,
+                GLU.gluNurbsCurve,
+                    nurb,
+                    [],
+                    [],
+                    GL_MAP1_VERTEX_3,
+            )
 
     def test_gle( self ):
         from OpenGL.GLE import (

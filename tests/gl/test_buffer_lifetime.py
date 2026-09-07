@@ -31,6 +31,7 @@ import pytest
 from arraycompat import np
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
+from OpenGL import _configflags
 from OpenGL import _dispatch
 
 
@@ -149,6 +150,10 @@ class TestBufferLifetime(GLTestCase):
         with no_references_kept(values):
             glVertex3dv(values)
 
+    @pytest.mark.skipif(
+        not _configflags.ARRAY_SIZE_CHECKING,
+        reason='ARRAY_SIZE_CHECKING is off, so there is no size check to fail',
+    )
     def test_a_failing_size_check_releases_its_buffer(self):
         values = np.zeros(4, 'd')
         with no_references_kept(values):
