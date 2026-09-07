@@ -9,10 +9,16 @@ try:
     import numpy 
 except ImportError:
     numpy = None
-try:
-    import OpenGL_accelerate
-except ImportError:
-    pytest.skip('Accelerate not installed, skipping', allow_module_level=True)
+from OpenGL import acceleratesupport
+
+# Importable is not the same as in use: PYOPENGL_USE_ACCELERATE=0 leaves the
+# extension on disk and switches it off, and everything here asks what the
+# accelerated handlers do.  ACCELERATE_AVAILABLE is the answer to the question
+# these cases are about.
+if not acceleratesupport.ACCELERATE_AVAILABLE:
+    pytest.skip(
+        'the accelerators are not in use here', allow_module_level=True
+    )
 
 #: ERROR_ON_COPY is a caller refusing the conversion these are about.
 converts_by_copying = pytest.mark.skipif(

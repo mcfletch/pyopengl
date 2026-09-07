@@ -14,6 +14,12 @@ from OpenGL import GL
 from OpenGL._bytes import integer_types
 from OpenGL._configflags import ERROR_ON_COPY
 import pytest
+from OpenGL import acceleratesupport
+
+# As above: switched off is as good as absent for what these ask.
+if not acceleratesupport.ACCELERATE_AVAILABLE:
+    pytest.skip('the accelerators are not in use here', allow_module_level=True)
+
 pytestmark = pytest.mark.skipif(not numpy, reason="No numpy installed in order to run tests")
 
 #: The handler converts on the way in; ERROR_ON_COPY is a caller refusing

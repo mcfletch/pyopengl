@@ -333,6 +333,16 @@ cdef class Output(cArgConverter):
         return result
 
     cdef int c_checkOutputSize( self, object array, tuple pyArgs ) except -1:
+        """Nothing to check: a fixed declared size is a maximum.
+
+        Which of it a call fills depends on the pname -- glGetVertexAttribiv
+        declares four and writes one for most of them -- so a shorter array is
+        legitimate here.  :class:`SizedOutput` overrides this, because its size
+        is a count the caller passed and so says what will be written.
+        """
+        return 0
+
+    cdef int c_checkPromisedSize( self, object array, tuple pyArgs ) except -1:
         """Refuse an output array smaller than the call will write into it.
 
         Only a shortfall: a larger array is a caller deliberately reusing one
@@ -352,15 +362,26 @@ cdef class Output(cArgConverter):
                 return 0
         if wanted <= 0:
             return 0
+        # Compared in bytes, not elements.  The count is in units of the type
+        # the *declaration* names -- glGetBufferSubData's `size` is a byte
+        # count, glGenTextures' `n` is a count of GLuint -- and the caller may
+        # pass an array of some other type holding the same bytes.
+        # Only what carries its own length.  A bare ctypes pointer does not --
+        # the hand-written wrappers in OpenGL/GL/exceptional.py pass
+        # `typedPointer` results straight down -- and arrayByteCount answers
+        # for one anyway, with the size of a single element.
+        if not hasattr( array, '__len__' ):
+            return 0
         try:
-            held = self.arrayType.arraySize( array )
+            wanted_bytes = wanted * ctypes.sizeof( self.arrayType.baseType )
+            held_bytes = self.arrayType.arrayByteCount( array )
         except Exception:
             return 0
-        if held < wanted:
+        if held_bytes < wanted_bytes:
             raise ValueError(
-                '%s: output array holds %d element(s), but the call will '
-                'write %d. Pass an array of at least that many, or None to '
-                'have one allocated.' % ( self.name, held, wanted )
+                '%s: output array holds %d byte(s), but the call will '
+                'write %d. Pass a larger array, or None to have one '
+                'allocated.' % ( self.name, held_bytes, wanted_bytes )
             )
         return 0
 
@@ -405,6 +426,24 @@ cdef class SizedOutput( Output ):
     def finalise( self, wrapper ):
         super( SizedOutput,self).finalise( wrapper )
         self.index = wrapper.pyArgIndex( self.specifier )
+    cdef int c_checkOutputSize( self, object array, tuple pyArgs ) except -1:
+        """Check the size only where it says what this call will write.
+
+        It does when it comes from a *count* the caller passed --
+        glGenTextures(n, names) writes n, glGetBufferSubData writes `size`
+        bytes -- which the declaration spells `size=lambda x: (x,)`.
+
+        It does not when it comes from a table keyed on a *pname*, which says
+        how large that piece of state is in total; how much of it a call fills
+        is the call's business, and glGetIntegeri_v writes one element of a
+        three-element pname at a time.  The declaration spells that
+        `size=<a dict>`, handed on as its `__getitem__` -- so the dict it is
+        bound to is what tells the two apart.
+        """
+        if isinstance( getattr( self.lookup, '__self__', None ), dict ):
+            return 0
+        return self.c_checkPromisedSize( array, pyArgs )
+
     cdef tuple c_getSize( self, tuple pyArgs ):
         """Retrieve the array size for this argument"""
         try:

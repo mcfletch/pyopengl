@@ -290,6 +290,14 @@ if CallFuncPyConverter is None:
                     return None
             return total
 
+        #: Whether :meth:`getSize` answers what the call *will* write, rather
+        #: than the most it *could*.  False here: a fixed declared size is a
+        #: maximum, and which of it a call fills depends on the pname --
+        #: ``glGetVertexAttribiv`` declares four and writes one for most of
+        #: them, so a one-element array is legitimate.  True on
+        #: :class:`SizedOutput`, whose size is a count the caller passed.
+        SIZE_IS_A_PROMISE = False
+
         def checkOutputSize(self, array, pyArgs):
             """Refuse an output array smaller than the call will write into it.
 
@@ -304,18 +312,34 @@ if CallFuncPyConverter is None:
             deliberately reusing one buffer for several calls, which is
             ordinary and safe.
             """
+            if not self.SIZE_IS_A_PROMISE:
+                return
             wanted = self.expectedElements(pyArgs)
             if not wanted:
                 return
+            # Compared in bytes, not elements.  The count is in units of the
+            # type the *declaration* names -- glGetBufferSubData's `size` is a
+            # byte count, glGenTextures' `n` is a count of GLuint -- and the
+            # caller may pass an array of some other type that holds the same
+            # bytes.  A GLfloat[5] is a legitimate destination for twenty
+            # bytes; counting its five elements against twenty is not.
+            # Only what carries its own length.  A bare ctypes pointer does
+            # not -- the hand-written wrappers in OpenGL/GL/exceptional.py pass
+            # `typedPointer` results straight down -- and arrayByteCount
+            # answers for one anyway, with the size of a single element.  A
+            # confident wrong number is worse here than no number.
+            if not hasattr(array, '__len__'):
+                return
             try:
-                held = self.arrayType.arraySize(array)
+                wanted_bytes = wanted * ctypes.sizeof(self.arrayType.baseType)
+                held_bytes = self.arrayType.arrayByteCount(array)
             except Exception:
                 return          # not measurable; nothing to compare against
-            if held < wanted:
+            if held_bytes < wanted_bytes:
                 raise ValueError(
-                    '%s: output array holds %d element(s), but the call will '
-                    'write %d. Pass an array of at least that many, or None to '
-                    'have one allocated.' % (self.name, held, wanted)
+                    '%s: output array holds %d byte(s), but the call will '
+                    'write %d. Pass a larger array, or None to have one '
+                    'allocated.' % (self.name, held_bytes, wanted_bytes)
                 )
 
         def oldStyleReturn(self, result, baseOperation, pyArgs, cArgs):
@@ -351,6 +375,25 @@ if CallFuncPyConverter is None:
         a Python argument to be passed to the lookup function in order
         to determine the appropriate size for the output array.
         """
+
+        @property
+        def SIZE_IS_A_PROMISE(self):
+            """Whether the looked-up size says what this call will write.
+
+            It does when the size comes from a *count* the caller passed --
+            ``glGenTextures(n, names)`` writes n, ``glGetBufferSubData(target,
+            offset, size, data)`` writes size bytes -- and the declaration
+            spells that ``size=lambda x: (x,)``.
+
+            It does not when the size comes from a table keyed on a *pname*,
+            which says how large that piece of state is in total.  How much of
+            it a call fills is the call's business: ``glGetIntegeri_v`` writes
+            one element of a three-element pname, one index at a time.  The
+            declaration spells that ``size=<a dict>``, which ``setOutput`` hands
+            on as its ``__getitem__`` -- so the dict it is bound to is what
+            tells the two apart.
+            """
+            return not isinstance(getattr(self.lookup, '__self__', None), dict)
 
         argNames = ('name', 'specifier', 'lookup', 'arrayType')
         indexLookups = [
