@@ -279,6 +279,29 @@ class TestTheOldWidgets:
         made.render()
         assert drawn, 'the widget never called its redraw'
 
+    def test_rendering_puts_the_matrix_mode_back(self, root):
+        """And does not raise doing it.
+
+        The mode is an enum, and it was read with the double getter -- which
+        answers 5888.0, a float the enum parameter refuses.  That came out of
+        the finally that restores it, and the buffers are swapped after that
+        block, so the frame was lost with it.  A Tk callback prints such an
+        exception and carries on, which is why nothing here noticed.
+        """
+        from OpenGL.GL import GL_MATRIX_MODE, glGetIntegerv
+        from OpenGL.Tk import RawOpengl
+
+        # RawOpengl's render is the one that saves and restores the mode;
+        # Opengl overrides it with its own.
+        made = RawOpengl(root, width=120, height=90, double=1)
+        made.pack()
+        made.waitForMap()
+        made.makeCurrent()
+        before = int(glGetIntegerv(GL_MATRIX_MODE))
+        made.render()
+        made.makeCurrent()
+        assert int(glGetIntegerv(GL_MATRIX_MODE)) == before
+
     def test_it_gets_a_compatibility_context(self, root):
         """It draws with glMatrixMode and gluPerspective."""
         from OpenGL.GL import (

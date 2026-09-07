@@ -27,7 +27,8 @@ from OpenGL.GL import (
     GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_DEPTH_TEST, GL_LESS,
     GL_LIGHT0, GL_LIGHTING, GL_MATRIX_MODE, GL_MODELVIEW, GL_MODELVIEW_MATRIX,
     GL_POSITION, GL_PROJECTION, glClear, glClearColor, glDepthFunc, glEnable,
-    glFlush, glGetDoublev, glLightfv, glLoadIdentity, glMatrixMode,
+    glFlush, glGetDoublev, glGetIntegerv, glLightfv, glLoadIdentity,
+    glMatrixMode,
     glMultMatrixd, glPopMatrix, glPushMatrix, glRotatef, glTranslatef,
     glViewport,
 )
@@ -288,7 +289,11 @@ class RawOpengl(GLFrame, Misc):
         if not self.makeCurrent():
             return False
         self.update_idletasks()
-        mode = glGetDoublev(GL_MATRIX_MODE)
+        # An enum, so the integer getter: the double one answers 5888.0,
+        # and restoring the mode with a float is a ctypes.ArgumentError
+        # out of the finally below -- which loses the frame, since the
+        # buffers are swapped after it.
+        mode = int(glGetIntegerv(GL_MATRIX_MODE))
         try:
             glMatrixMode(GL_PROJECTION)
             glPushMatrix()
