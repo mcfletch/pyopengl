@@ -16,13 +16,14 @@ import os
 import subprocess
 import sys
 
+import paths
 import pytest
 
 from childenv import child_environment
 from glcontext import CHILD_PREAMBLE, NOTHING_TO_TEST_WITH
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(os.path.dirname(HERE))
+ROOT = paths.ROOT
 
 #: The preamble runs before the context is made, because what it sets --
 #: OpenGL.ERROR_DEBUG_OUTPUT and friends -- is read as the entry points are

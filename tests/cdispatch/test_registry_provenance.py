@@ -13,10 +13,11 @@ import os
 import subprocess
 import sys
 
+import paths
 import pytest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(os.path.dirname(HERE))
+ROOT = paths.ROOT
 SRC = os.path.join(ROOT, 'src')
 
 sys.path.insert(0, SRC)

@@ -539,7 +539,7 @@ it that way.</p>
 </table>
 
 <p>The full list is not a matter of recollection:
-<code>tests/test_attribute_surface.py</code> surveys every entry point under
+<code>tests/bindings/dispatch/test_attribute_surface.py</code> surveys every entry point under
 both implementations in separate processes and compares the answers, so a
 difference that is not in the table above is a test failure.</p>
 
@@ -592,7 +592,7 @@ nothing to tabulate.</p>
 files are not shipped and the generator does not write them, so these names
 resolve from the tables or not at all.  What the tables hold is held to what
 the files defined by
-<code>tests/test_virtual_modules.py</code>, which compares every constant and
+<code>tests/bindings/generated/test_virtual_modules.py</code>, which compares every constant and
 every signature against a recorded survey of the modules as files.</p>
 
 <h2>Regenerating and keeping up with the registry</h2>

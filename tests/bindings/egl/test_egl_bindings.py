@@ -21,13 +21,14 @@ import ctypes
 import importlib
 import os
 
+import paths
 import pytest
 
 import OpenGL._dispatch as dispatch
 from OpenGL import _configflags
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = paths.ROOT
 EGL_XML = os.path.join(ROOT, 'src', 'eglapi', 'api', 'egl.xml')
 
 pytestmark = pytest.mark.skipif(

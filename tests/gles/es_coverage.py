@@ -8,6 +8,7 @@ ES_COVERAGE.md.
 """
 
 import os
+import paths
 import re
 import sys
 import glob
@@ -15,7 +16,7 @@ import json
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 # repo root holding the ``OpenGL`` package (this file lives in tests/gles/)
-ROOT = os.path.dirname(os.path.dirname(HERE))
+ROOT = paths.ROOT
 
 # Per-level source modules; each bucket holds the commands *introduced* at that
 # level (3.x builds on 2.0, so the buckets are disjoint).

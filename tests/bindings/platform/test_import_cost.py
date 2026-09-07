@@ -14,6 +14,7 @@ import os
 import subprocess
 import sys
 
+import paths
 import pytest
 
 from childenv import child_environment
@@ -22,7 +23,7 @@ import OpenGL._dispatch as dispatch
 from OpenGL import _configflags
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = paths.ROOT
 
 #: A budget in seconds and in module count is as much a measurement of the
 #: machine as of the library, so it is deselectable on one that is busy.

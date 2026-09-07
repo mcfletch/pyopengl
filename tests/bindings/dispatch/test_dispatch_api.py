@@ -14,12 +14,13 @@ import os
 import subprocess
 import sys
 
+import paths
 import pytest
 
 from childenv import child_environment
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = paths.ROOT
 
 #: Stands in for a build that produced no extension, so the fallback can be
 #: tested where the extension *is* built.  Mirrors tests/test_dispatch_selection.

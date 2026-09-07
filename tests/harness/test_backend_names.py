@@ -11,6 +11,9 @@ a suite that will not run at all.
 """
 
 import backends
+import os
+
+import paths
 import pytest
 
 
@@ -67,35 +70,58 @@ class TestOnlyOneModuleReadsTheVariable:
     module that read ``TEST_WINDOWING`` for itself would be a second answer to
     a question with one."""
 
-    def test_nobody_compares_it_against_a_literal(self):
+    #: Scanned rather than listed, and over the whole suite rather than one
+    #: directory: a second reader is most likely to appear in a sub-suite that
+    #: nobody thought to add here.
+    EXEMPT = ('backends.py', 'test_backend_names.py')
+
+    def sources(self):
+        """Every ``.py`` under ``tests/``, as ``(relative path, source)``."""
         import os
 
-        here = os.path.dirname(os.path.abspath(__file__))
-        offenders = []
-        for name in sorted(os.listdir(here)):
-            if not name.endswith('.py') or name in ('backends.py',
-                                                    'test_backend_names.py'):
-                continue
-            with open(os.path.join(here, name), encoding='utf-8') as handle:
-                source = handle.read()
-            if "TEST_WINDOWING', ''" in source or '"TEST_WINDOWING", ""' in source:
-                offenders.append(name)
+        for directory, folders, names in os.walk(paths.TESTS):
+            folders[:] = [f for f in folders if f != '__pycache__']
+            for name in sorted(names):
+                if not name.endswith('.py') or name in self.EXEMPT:
+                    continue
+                full = os.path.join(directory, name)
+                with open(full, encoding='utf-8') as handle:
+                    yield os.path.relpath(full, paths.TESTS), handle.read()
+
+    def test_nobody_compares_it_against_a_literal(self):
+        offenders = [
+            name for name, source in self.sources()
+            if "TEST_WINDOWING', ''" in source or '"TEST_WINDOWING", ""' in source
+        ]
         assert offenders == [], (
             'these read TEST_WINDOWING themselves rather than through '
             'backends.requested(): %s' % (', '.join(offenders),))
 
-    @pytest.mark.parametrize('module', ['glcontext.py', 'conftest.py',
-                                        'test_checks.py', 'glget_audit.py'])
-    def test_the_readers_go_through_the_shared_module(self, module):
-        """By path: ``conftest`` as an importable name is the *root* one, and
-        the module meant here is this directory's."""
-        import os
+    def test_nobody_reads_it_out_of_the_environment_directly(self):
+        """Naming it in prose is fine; reaching into os.environ for it is not.
 
-        here = os.path.dirname(os.path.abspath(__file__))
-        with open(os.path.join(here, module), encoding='utf-8') as handle:
-            source = handle.read()
-        assert 'backends.' in source, (
-            '%s does not read the shared list' % (module,))
+        ``backends.requested()`` is the one place that reads it, so that the
+        vocabulary and the default live together.  A module that read it
+        itself would be a second answer to a question with one.
+        """
+        offenders = [
+            name for name, source in self.sources()
+            if 'TEST_WINDOWING' in source
+            and ("environ['TEST_WINDOWING']" in source
+                 or 'environ["TEST_WINDOWING"]' in source
+                 or "environ.get('TEST_WINDOWING'" in source
+                 or 'environ.get("TEST_WINDOWING"' in source)
+        ]
+        assert offenders == [], (
+            'these read TEST_WINDOWING out of the environment rather than '
+            'through backends.requested(): %s' % (', '.join(offenders),))
+
+    def test_the_scan_reaches_the_modules_it_is_about(self):
+        """A walk that found nothing would pass the two above trivially."""
+        found = {name for name, _ in self.sources()}
+        for expected in ('glcontext.py', 'conftest.py',
+                         os.path.join('checks', 'test_checks.py')):
+            assert expected in found, (expected, sorted(found)[:20])
 
 
 class TestWhetherThereIsAWindowServer:

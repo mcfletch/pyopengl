@@ -10,11 +10,12 @@ import os
 import subprocess
 import sys
 
+import paths
 import pytest
 from childenv import child_environment
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = paths.ROOT
 
 REPORT = r'''
 import sys
@@ -257,7 +258,7 @@ class TestThePairIsPinnedBeforeItIsInstalled:
         version that pairs with this accelerate is this accelerate's own."""
         import re
 
-        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        root = paths.ROOT
         setup = os.path.join(root, 'accelerate', 'setup.py')
         if not os.path.exists(setup):
             pytest.skip('the accelerate source tree is not in this checkout')
@@ -269,7 +270,7 @@ class TestThePairIsPinnedBeforeItIsInstalled:
 
     def test_the_declared_pin_is_the_version_it_was_built_from(self):
         sys.path.insert(0, os.path.join(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'accelerate'))
+            paths.ROOT, 'accelerate'))
         try:
             import setup as accelerate_setup
         except ImportError as err:              # pragma: no cover - no source tree

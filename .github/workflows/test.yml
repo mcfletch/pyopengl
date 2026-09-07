@@ -173,14 +173,14 @@ jobs:
       # process it happens in: run as one command and the first crash costs
       # every test after it, so a machine none of us can log into becomes one
       # crash per push to learn about.  The gate below is what fails the job.
-      - name: Run the tests -- root
+      - name: Run the tests -- bindings, harness and checks
         id: root
         continue-on-error: true
         run: |
           mkdir -p test-logs
           set -o pipefail
           python -m tox -e ${{ matrix.toxenv }} -- \
-            ${{ inputs.tests || 'tests/ --ignore=tests/gl --ignore=tests/glu --ignore=tests/gles --ignore=tests/cdispatch' }} \
+            ${{ inputs.tests || 'tests/bindings tests/harness tests/checks tests/directdocs' }} \
             -m "not performance" 2>&1 | tee test-logs/root.log
 
       - name: Run the tests -- cdispatch

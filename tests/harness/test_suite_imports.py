@@ -14,15 +14,16 @@ import os
 import subprocess
 import sys
 
+import paths
 import pytest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = paths.ROOT
 
 
 def _run(body):
     """Run ``body`` in a fresh interpreter with tests/ importable."""
-    script = 'import sys\nsys.path.insert(0, %r)\n%s' % (HERE, body)
+    script = 'import sys\nsys.path.insert(0, %r)\n%s' % (paths.TESTS, body)
     return subprocess.run(
         [sys.executable, '-c', script],
         capture_output=True,

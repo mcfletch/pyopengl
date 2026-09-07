@@ -18,6 +18,7 @@ import subprocess
 import sys
 import textwrap
 
+import paths
 import pytest
 
 from childenv import child_environment
@@ -26,7 +27,7 @@ import OpenGL._dispatch as dispatch
 from OpenGL import _configflags
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-ROOT = os.path.dirname(HERE)
+ROOT = paths.ROOT
 
 pytestmark = pytest.mark.skipif(
     not dispatch.AVAILABLE or _configflags.DISPATCH != 'c',

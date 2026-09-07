@@ -15,10 +15,11 @@ a failure here rather than a report from somebody's editor.
 import ast
 import os
 
+import paths
 import pytest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = paths.ROOT
 PACKAGE = os.path.join(ROOT, 'OpenGL')
 
 #: A spread: a core version, two extensions, and a second API namespace.

@@ -10,6 +10,7 @@ enumeration cases need a working one and skip on their own besides.
 import ctypes
 import os
 
+import paths
 import pytest
 
 #: EGL ships with the graphics driver, and a platform with none -- macOS --
@@ -21,7 +22,7 @@ pytest.importorskip('OpenGL.EGL', exc_type=ImportError)
 from OpenGL.EGL import devices as devices_module
 from OpenGL.EGL.devices import DeviceInfo
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = paths.ROOT
 
 
 def info(**overrides):

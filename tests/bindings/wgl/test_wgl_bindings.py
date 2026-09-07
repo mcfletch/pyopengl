@@ -21,10 +21,11 @@ import importlib
 import os
 import xml.etree.ElementTree as ElementTree
 
+import paths
 import pytest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = paths.ROOT
 WGL_XML = os.path.join(ROOT, 'src', 'khronosapi', 'xml', 'wgl.xml')
 
 pytestmark = pytest.mark.skipif(

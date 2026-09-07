@@ -26,11 +26,12 @@ import os
 import subprocess
 import sys
 
+import paths
 import pytest
 
 from childenv import child_environment
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = paths.ROOT
 
 #: Report, as JSON, every command a GL version declares that ``OpenGL.GL``
 #: exports under an extension gate.  ``constructFunction`` reads the gate the

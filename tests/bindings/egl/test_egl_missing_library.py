@@ -14,10 +14,11 @@ import os
 import subprocess
 import sys
 
+import paths
 import pytest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = paths.ROOT
 
 #: Each of these reaches for the library directly, so each has to answer for
 #: itself: ``OpenGL.EGL`` is the friendly package, ``_types`` holds the

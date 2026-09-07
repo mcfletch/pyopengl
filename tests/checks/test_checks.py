@@ -34,6 +34,7 @@ import sys
 import pytest
 
 import backends
+import paths
 from checkutils import SKIP_EXIT_CODE
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -170,6 +171,13 @@ def run_check(filename):
     env = dict(os.environ)
     if backends.is_headless(backends.requested(env)):
         env.pop('TEST_WINDOWING', None)
+    # The scripts import the suite's helpers -- checkutils, testdecorator,
+    # glcontext -- by bare name.  `pythonpath` in pyproject.toml puts tests/ on
+    # the path of the *pytest* process; a child gets only its own directory,
+    # which is this one, so it is named here.
+    env['PYTHONPATH'] = os.pathsep.join(
+        [paths.TESTS] + ([env['PYTHONPATH']] if env.get('PYTHONPATH') else [])
+    )
     pipe = subprocess.Popen(
         [sys.executable, os.path.join(HERE, filename)],
         stdout=subprocess.PIPE,

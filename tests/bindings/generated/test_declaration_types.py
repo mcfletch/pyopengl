@@ -116,8 +116,10 @@ class TestEveryExpressionTheGeneratorWrote:
         import os
         import sys
 
-        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        sys.path.insert(0, os.path.join(root, 'src'))
+        import paths
+
+        root = paths.ROOT
+        sys.path.insert(0, paths.SRC)
         try:
             from cdispatch import modules
         except ImportError:  # pragma: no cover - a wheel install has no src/

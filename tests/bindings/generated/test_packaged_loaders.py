@@ -16,12 +16,13 @@ import subprocess
 import sys
 import zipfile
 
+import paths
 import pytest
 
 from childenv import child_environment
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = paths.ROOT
 PACKAGE = os.path.join(ROOT, 'OpenGL')
 
 #: Enough to prove the tables were read: a raw module that is synthesised, a

@@ -15,13 +15,14 @@ import os
 import subprocess
 import sys
 
+import paths
 import pytest
 
 from childenv import child_environment
 from glcontext import CHILD_PREAMBLE, NOTHING_TO_TEST_WITH
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(os.path.dirname(HERE))
+ROOT = paths.ROOT
 
 PROGRAM = CHILD_PREAMBLE + r'''
 import OpenGL

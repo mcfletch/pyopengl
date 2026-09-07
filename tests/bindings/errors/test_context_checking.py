@@ -20,9 +20,10 @@ import os
 import subprocess
 import sys
 
+import paths
 import pytest
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = paths.ROOT
 
 
 #: What a child needs to find an interpreter, a library and a renderer, and

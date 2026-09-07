@@ -14,6 +14,7 @@ import os
 import subprocess
 import sys
 
+import paths
 import pytest
 
 pytest.importorskip('tkinter')
@@ -81,7 +82,7 @@ class TestImportingItDoesNothing:
     def test_it_registers_no_atexit_hook(self):
         """One that destroyed `tkinter._default_root`, whoever made it and
         whatever else was using it."""
-        here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        here = paths.ROOT
         for name in ('__init__.py', 'widget.py', 'togl.py'):
             with open(os.path.join(here, 'OpenGL', 'Tk', name),
                       encoding='utf-8') as handle:

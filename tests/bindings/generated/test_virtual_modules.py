@@ -13,6 +13,7 @@ import os
 import subprocess
 import sys
 
+import paths
 import pytest
 
 from childenv import child_environment
@@ -21,7 +22,7 @@ import OpenGL._dispatch as dispatch
 from OpenGL import _configflags
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = paths.ROOT
 
 #: The finder is built from the C layer's tables, so it exists only where that
 #: layer is the one running.  Selecting ctypes is not a failure of anything
@@ -57,7 +58,7 @@ json.dump(out, sys.stdout)
 #: So the answer they gave is checked in, and the synthesised modules are held
 #: to it -- which is the same assertion, against a baseline that cannot drift
 #: because it is no longer derived from anything.
-BASELINE = os.path.join(HERE, 'data', 'generated_module_names.json')
+BASELINE = os.path.join(paths.DATA, 'generated_module_names.json')
 
 
 def _run(source):

@@ -77,17 +77,40 @@ tests/
 │                             Khronos registry out of `src/` and emits the
 │                             C, the stubs and the tables `OpenGL/raw` is
 │                             built from
+│
+├── bindings/               the library itself, with no GL context -- or one
+│   │                         taken in a child process
+│   ├── dispatch/             which implementation is installed, what an entry
+│   │                           point exposes, alternate(), demotion
+│   ├── generated/            OpenGL.raw: the virtual modules, the declaration
+│   │                           tables, the stubs, the plug-in registry
+│   ├── arrays/               ArrayDatatype and the format handlers
+│   ├── platform/             which library each platform dispatches to
+│   ├── egl/ wgl/ glx/        the window-system bindings
+│   ├── tk/ glut/             the toolkits PyOpenGL ships an integration for
+│   └── errors/               error checking and the debug-output policy
+├── harness/                tests OF the fixtures above, rather than of the
+│                             library: the backends, the context requirements,
+│                             what collects where
+├── checks/                 stand-alone check scripts and the runner that
+│                             discovers them
+├── directdocs/             the documentation build tool
 ├── data/                   fixtures the suites read rather than build
 │
+├── paths.py                ROOT / TESTS / SRC / PACKAGE, worked out once
 ├── testdecorator.py        `@gltest`: the same fixture around a plain function,
 │                             for the stand-alone check scripts
-├── test_*.py               tests of the library itself -- no GL context, or
-│                             one taken in a child process
-├── check_*.py              stand-alone check scripts, discovered and run
-│                             out-of-process by test_checks.py
 └── report_*.py             programs CI runs to say what the machine has;
                               nothing collects these
 ```
+
+> **Do not compute the checkout's location from `__file__`.** `from paths import
+> ROOT` — counting `os.path.dirname` calls encodes how deep the file happens to
+> sit, so moving a module changes what the name means without breaking it. That
+> is not hypothetical: it is what the move into these directories did to a dozen
+> modules, and the symptoms were a registry that parsed as empty, a parametrised
+> case that collapsed to one `NOTSET`, and a test that skipped saying there was
+> no raw tree to read.
 
 `pyproject.toml` holds the settings that shape a run: `pythonpath` (which is
 what puts this directory and the suite directories on the path, so the helpers
@@ -121,17 +144,23 @@ that serves them.
 | An OpenGL-ES entry point or extension | `gles/` |
 | GLU — quadrics, NURBS, tessellation, projection, mipmaps | `glu/test_glu_<area>.py` |
 | The code generator: the registry, the annotations, the C and stubs it emits | `cdispatch/` |
-| The suite's own fixtures and backends | beside the module under test (`test_glcontext_*.py`, `test_backend_names.py`, `test_shared_context_setup.py`) |
-| A program needing a toolkit main loop, a window of its own, or a fresh process | a `check_*.py` script — see [Check scripts](#check-scripts) |
+| Which implementation is installed, what an entry point exposes, `alternate()`, demotion | `bindings/dispatch/` |
+| `OpenGL.raw`: virtual modules, declaration tables, stubs, constants, the plug-in registry | `bindings/generated/` |
+| `ArrayDatatype`, the format handlers, the buffer protocol | `bindings/arrays/` |
+| Which library a platform dispatches to, and what it costs to import | `bindings/platform/` |
+| EGL, WGL or GLX as a binding rather than as a backend | `bindings/egl/`, `bindings/wgl/`, `bindings/glx/` |
+| The Tk widget or the GLUT integration | `bindings/tk/`, `bindings/glut/` |
+| Error checking, `CONTEXT_CHECKING`, the debug-output policy | `bindings/errors/` |
+| The suite's own fixtures, backends and collection | `harness/` |
+| A program needing a toolkit main loop, a window of its own, or a fresh process | a `checks/check_*.py` script — see [Check scripts](#check-scripts) |
 | A report about what the machine has, for CI to print | a `report_*.py` script; nothing collects these |
-| Anything else about the library itself | a root-level `test_*.py` named for the subject |
 
 Three questions decide most of it:
 
 1. **Does it need a GL context?** If so it belongs in `gl/`, `gles/` or `glu/`
-   behind one of the base cases, not at the root. A test that takes a context
-   it does not use costs every run the context and hides the fact that the
-   subject needs no GL at all.
+   behind one of the base cases, and not in `bindings/`. A test that takes a
+   context it does not use costs every run the context and hides the fact that
+   the subject needs no GL at all.
 2. **Is the answer settled once per process?** Which dispatch implementation is
    installed, what an import costs, what a call with no context does: those run
    in a child, through `glcontext.CHILD_PREAMBLE` and

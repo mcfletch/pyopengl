@@ -10,11 +10,12 @@ class of bug fixed for GL_CURRENT_SECONDARY_COLOR, GL_BUFFER_USAGE, etc.
 """
 
 import os
+import paths
 import re
 import glob
 import unittest
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = paths.ROOT
 _LINE = re.compile(r'^_m\[([^\]]+)\]\s*=\s*(.*?)\s*#\s*([A-Za-z0-9_]+)\s*$')
 
 

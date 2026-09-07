@@ -25,12 +25,13 @@ import os
 import subprocess
 import sys
 
+import paths
 import pytest
 
 from childenv import child_environment
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = paths.ROOT
 
 #: A windowed backend to run the child on, since the headless one it would
 #: otherwise choose is EGL's -- and a machine with no EGL library is not running

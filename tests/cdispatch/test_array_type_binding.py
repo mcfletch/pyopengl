@@ -19,12 +19,13 @@ import subprocess
 import sys
 import textwrap
 
+import paths
 import pytest
 
 from OpenGL._dispatch import support
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(os.path.dirname(HERE))
+ROOT = paths.ROOT
 ELEMENTS = os.path.join(ROOT, 'accelerate', 'src', 'c', 'generated',
                         'pygl_elements.h')
 

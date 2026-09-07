@@ -6,6 +6,7 @@ rather than written; that is what makes shipping stubs worth doing rather than
 merely possible.
 """
 
+import paths
 import pytest
 
 from cdispatch import emit_pyi, model
@@ -284,9 +285,7 @@ class TestValidPython:
 
         from cdispatch import extract
 
-        here = os.path.dirname(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        )
+        here = paths.ROOT
         commands = extract.extract_tree(os.path.join(here, 'OpenGL'))
         for api in ('GL', 'GLES2', 'EGL'):
             selected = [c for key, c in commands.items() if key[0] == api]
@@ -312,9 +311,7 @@ class TestConstants:
 
         from cdispatch import extract
 
-        here = os.path.dirname(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        )
+        here = paths.ROOT
         constants = extract.extract_constants(os.path.join(here, 'OpenGL'))
         assert 'GL_TEXTURE_2D' in constants['GL']
         assert 'GL_ARRAY_BUFFER' in constants['GL']
@@ -335,9 +332,7 @@ class TestConstants:
         import os
         import re
 
-        here = os.path.dirname(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        )
+        here = paths.ROOT
         path = os.path.join(here, 'OpenGL', api, '__init__.pyi')
         with open(path, encoding='utf-8') as handle:
             declared = set(re.findall(r'^(\w+):', handle.read(), re.M))

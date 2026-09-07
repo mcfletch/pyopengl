@@ -15,10 +15,11 @@ import subprocess
 import sys
 
 import backends
+import paths
 import pytest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)
+ROOT = paths.ROOT
 
 
 class TestItRunsWhereThereIsNoWindow:
@@ -56,7 +57,7 @@ class TestNoBackendIsImplementedTwice:
     @pytest.mark.parametrize('name', backends.WINDOWED)
     def test_only_glcontext_implements_it(self, name):
         duplicates = sorted(
-            candidate for candidate in os.listdir(HERE)
+            candidate for candidate in os.listdir(paths.TESTS)
             if candidate.endswith('_%s.py' % (name,))
             and candidate.startswith(('glcontext_', 'testdecorator_'))
         )
@@ -67,7 +68,7 @@ class TestNoBackendIsImplementedTwice:
         windowing library.  A backend is wired up in `glcontext_<name>.py` and
         nowhere else."""
         left = sorted(
-            candidate for candidate in os.listdir(HERE)
+            candidate for candidate in os.listdir(paths.TESTS)
             if candidate.startswith(('basetestcase', 'testdecorator_'))
         )
         assert left == [], left
