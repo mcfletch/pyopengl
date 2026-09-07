@@ -1,9 +1,9 @@
 #! /usr/bin/env python3
 """Shared, windowing- and API-agnostic base class for rendering tests.
 
-Every suite here rests on this: the gl, glu and gles ones, and the legacy
-root-level tests through ``basetestcase`` and ``testdecorator``.  It holds the
-machinery they share so they differ only where they genuinely must:
+Every suite here rests on this: the gl, glu and gles ones, and the stand-alone
+check scripts through ``testdecorator``.  It holds the machinery they share so
+they differ only where they genuinely must:
 
 * :class:`ContextTestCase` -- the API-agnostic base.  It owns the fixture
   (create a context, clear it, tear it down), the ``TEST_VISIBLE`` / dwell
@@ -16,8 +16,8 @@ machinery they share so they differ only where they genuinely must:
 
 * :func:`pick_backend` -- chooses the backend mixin from ``TEST_WINDOWING`` and
   what is installed: glfw or pygame for a window, egl or cgl for none.  It is
-  the suite's one backend choice -- ``basetestcase`` and ``testdecorator`` ask
-  it too -- and the backend module is imported lazily, so a glfw run never
+  the suite's one backend choice -- the suite base cases and ``testdecorator``
+  all ask it -- and the backend module is imported lazily, so a glfw run never
   imports pygame.
 
 A concrete test case is ``class Case(pick_backend(), SomeAPIBase)`` -- the
@@ -43,7 +43,7 @@ log = logging.getLogger(__name__)
 
 
 # ---------------------------------------------------------------------------
-# Backend selection (mirrors basetestcase.py / testdecorator.py)
+# Backend selection
 # ---------------------------------------------------------------------------
 def _installed(name):
     """Return True if ``name`` is importable, without importing it.
@@ -57,8 +57,8 @@ def _installed(name):
         return False
 
 
-#: The vocabulary is :mod:`backends`', so that this module, ``basetestcase``
-#: and ``testdecorator`` cannot disagree about which names TEST_WINDOWING may
+#: The vocabulary is :mod:`backends`', so that this module and
+#: ``testdecorator`` cannot disagree about which names TEST_WINDOWING may
 #: take -- a name one accepts and another does not is a collection error.
 _WINDOWED = backends.WINDOWED
 _ALL_BACKENDS = backends.ALL

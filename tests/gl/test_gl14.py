@@ -6,7 +6,9 @@ import unittest
 import ctypes
 from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
+from arraycompat import copy_safe
 from gltestcase import GLTestCase
+from OpenGL import arrays
 from OpenGL.GL import *  # noqa: F401,F403
 
 
@@ -92,6 +94,46 @@ class TestGL14(GLTestCase):
         )
         glDisableClientState(GL_VERTEX_ARRAY)
         self.check_error('multi draw')
+
+
+class TestDrawingSeveralRangesAtOnce(GLTestCase):
+    """``glMultiDrawElements`` takes an array *of pointers* to index arrays.
+
+    Which is the reason it is worth a case of its own: every other draw call
+    takes one array, and this one takes a GLvoid** the caller has to fill with
+    data pointers PyOpenGL handed it.  The element counts come alongside as a
+    second array, and the two have to stay the same length.
+    """
+
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    def test_two_index_ranges_are_drawn_from_one_call(self):
+        self.require_feature('multi-draw', (1, 4), 'GL_EXT_multi_draw_arrays')
+        points = np.array(
+            [(i, 0, 0) for i in range(8)] + [(i, 1, 0) for i in range(8)], 'd'
+        )
+        indices = np.array(
+            [[0, 8, 9, 1, 2, 10, 11, 3], [4, 12, 13, 5, 6, 14, 15, 7]], 'B'
+        )
+        pointers = arrays.GLvoidpArray.zeros((2,))
+        pointers[0] = arrays.GLbyteArray.dataPointer(indices)
+        pointers[1] = arrays.GLbyteArray.dataPointer(indices[1])
+        counts = copy_safe([len(row) for row in indices], 'I')
+
+        glDisable(GL_LIGHTING)
+        glEnableClientState(GL_VERTEX_ARRAY)
+        glDisableClientState(GL_COLOR_ARRAY)
+        glDisableClientState(GL_NORMAL_ARRAY)
+        try:
+            glVertexPointerd(points)
+            glMultiDrawElements(
+                GL_QUAD_STRIP, counts, GL_UNSIGNED_BYTE, pointers, 2
+            )
+        finally:
+            glDisableClientState(GL_VERTEX_ARRAY)
+            glEnable(GL_LIGHTING)
+        self.check_error('glMultiDrawElements')
 
 
 if __name__ == '__main__':

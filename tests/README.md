@@ -79,13 +79,14 @@ tests/
 │                             built from
 ├── data/                   fixtures the suites read rather than build
 │
-├── basetestcase.py         legacy root-level GL fixture (300x300, a perspective
-│                             already on the stack)
 ├── testdecorator.py        `@gltest`: the same fixture around a plain function,
 │                             for the stand-alone check scripts
-├── test_*.py               legacy root-level tests (use basetestcase/testdecorator)
-└── check_*.py / *.py       stand-alone check scripts run out-of-process by
-                              test_checks.py
+├── test_*.py               tests of the library itself -- no GL context, or
+│                             one taken in a child process
+├── check_*.py              stand-alone check scripts, discovered and run
+│                             out-of-process by test_checks.py
+└── report_*.py             programs CI runs to say what the machine has;
+                              nothing collects these
 ```
 
 `pyproject.toml` holds the settings that shape a run: `pythonpath` (which is

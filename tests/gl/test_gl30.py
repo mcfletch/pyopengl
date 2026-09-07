@@ -284,5 +284,66 @@ def _build_uint_program():
     )
 
 
+class TestRenderingIntoAFramebufferObject(GLTestCase):
+    """A colour texture and a depth renderbuffer, drawn into and textured from.
+
+    The round trip rather than the pieces: an attachment set up wrongly is
+    reported by glCheckFramebufferStatus, and one set up in a way the driver
+    accepts but PyOpenGL described wrongly shows up as a draw that goes
+    nowhere.
+    """
+
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    SIDE = 128
+
+    def test_a_texture_attachment_can_be_drawn_into_and_then_read_from(self):
+        self.require_feature('framebuffer objects', (3, 0),
+                             'GL_ARB_framebuffer_object')
+        fbo = int(glGenFramebuffers(1))
+        self.defer_cleanup(lambda: glDeleteFramebuffers(1, [fbo]))
+
+        with self.framebuffer(fbo):
+            depth = int(glGenRenderbuffers(1))
+            self.defer_cleanup(lambda: glDeleteRenderbuffers(1, [depth]))
+            glBindRenderbuffer(GL_RENDERBUFFER, depth)
+            glRenderbufferStorage(
+                GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, self.SIDE, self.SIDE
+            )
+            glFramebufferRenderbuffer(
+                GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depth
+            )
+
+            colour = int(glGenTextures(1))
+            self.defer_cleanup(lambda: glDeleteTextures(1, [colour]))
+            glBindTexture(GL_TEXTURE_2D, colour)
+            # Without a filter the texture is incomplete and the driver
+            # answers GL_FRAMEBUFFER_UNSUPPORTED rather than saying why.
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+            glTexImage2D(
+                GL_TEXTURE_2D, 0, GL_RGB8, self.SIDE, self.SIDE, 0,
+                GL_RGB, GL_UNSIGNED_BYTE, None,
+            )
+            glFramebufferTexture2D(
+                GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colour, 0
+            )
+
+            self.assertEqual(
+                glCheckFramebufferStatus(GL_FRAMEBUFFER), GL_FRAMEBUFFER_COMPLETE
+            )
+
+            glPushAttrib(GL_VIEWPORT_BIT)  # the viewport is the context's
+            try:
+                glViewport(0, 0, self.SIDE, self.SIDE)
+                glClearColor(1.0, 0.0, 0.0, 1.0)
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+                self.assert_pixel(self.SIDE // 2, self.SIDE // 2, (255, 0, 0, 255))
+            finally:
+                glPopAttrib()
+        self.check_error('rendering into a framebuffer object')
+
+
 if __name__ == '__main__':
     unittest.main()

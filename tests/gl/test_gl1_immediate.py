@@ -9,6 +9,7 @@ import unittest
 from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
+from OpenGL import _configflags
 from OpenGL.GL import *  # noqa: F401,F403  (legacy suite touches hundreds of names)
 
 
@@ -172,6 +173,48 @@ class TestGL1Immediate(GLTestCase):
         glRectfv(np.array([-1, -1], 'f'), np.array([1, 1], 'f'))
         glRectdv(np.array([-1, -1], 'd'), np.array([1, 1], 'd'))
         self.check_error('rect')
+
+
+class TestWhatAVertexCallAccepts(GLTestCase):
+    """The immediate-mode calls take several spellings of the same vertex."""
+
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    def test_the_typed_spellings_agree_inside_one_primitive(self):
+        glDisable(GL_LIGHTING)
+        glBegin(GL_TRIANGLES)
+        try:
+            glVertex3f(0.0, 1.0, 0.0)
+            glVertex3fv([-1, 0, 0])
+            glVertex3dv([1, 0, 0])
+        finally:
+            glEnd()
+        self.check_error('immediate-mode vertex spellings')
+
+    @unittest.skipIf(
+        not _configflags.ARRAY_SIZE_CHECKING,
+        'ARRAY_SIZE_CHECKING is off, so a four-element vertex is not refused',
+    )
+    def test_a_wrongly_sized_vertex_is_refused(self):
+        """``glVertex3dv`` takes three doubles, and four is a caller's error."""
+        glBegin(GL_TRIANGLES)
+        try:
+            with self.assertRaises(ValueError):
+                glVertex3dv([1, 0, 4, 5])
+        finally:
+            glEnd()
+
+    def test_a_colour_component_that_is_not_a_number_is_refused(self):
+        """``glColor4f`` takes floats; an object is not one.
+
+        Zero is, though -- an int converts -- so the case asserts both, or it
+        would pass on a wrapper that refused everything.
+        """
+        glColor4f(0, 1, 1, 0)
+        for rejected in (object(), object):
+            with self.assertRaises(Exception):
+                glColor4f(0, 1, 1, rejected)
 
 
 if __name__ == '__main__':

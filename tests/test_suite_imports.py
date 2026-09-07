@@ -1,6 +1,6 @@
 """The suite's own support modules import without disturbing the run.
 
-These are the modules the test cases build on -- ``basetestcase``,
+These are the modules the test cases build on -- ``glcontext``,
 ``glcontext_es`` and friends.  Under pytest none of them is the first thing to
 touch ``OpenGL``, and none of them is imported in isolation: collection imports
 every one of them into a single process, in whatever order the directories
@@ -32,14 +32,16 @@ def _run(body):
     )
 
 
-def test_basetestcase_imports_after_opengl_gl():
+def test_the_desktop_fixture_imports_after_opengl_gl():
     """Importing OpenGL.GL first is the normal case, not a special one.
 
     The sub-suites collected ahead of the windowed tests have already imported
     OpenGL.GL, which builds the entry points and fixes the configuration they
     were built with.
     """
-    completed = _run('import OpenGL.GL\nimport basetestcase\nprint("ok")\n')
+    completed = _run(
+        'import OpenGL.GL\nimport glcontext_desktop\nprint("ok")\n'
+    )
     if 'Failed to initialise GLFW' in completed.stderr:
         pytest.skip('no windowing system available to initialise')
     assert completed.returncode == 0, completed.stderr[-2000:]

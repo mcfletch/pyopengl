@@ -120,5 +120,36 @@ class TestGL12_13(GLTestCase):
         self.check_error('gl1.3 compressed')
 
 
+class TestTheImagingAdditions(GLTestCase):
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    def test_the_blend_colour_of_1_2_is_settable(self):
+        """``glBlendColor`` is the 1.2 promotion of GL_EXT_blend_color."""
+        self.require_version(1, 2)
+        glBlendColor(0.3, 0.4, 1.0, 0.3)
+        self.check_error('glBlendColor')
+
+    def test_a_compressed_texture_uploads_from_a_sized_block(self):
+        """S3TC DXT5 is one byte a texel, so 256x256 is 65536 bytes.
+
+        The size is not derivable from the format alone, which is why
+        glCompressedTexImage2D takes it -- and why a wrapper that guessed it
+        would hand the driver the wrong length.
+        """
+        self.require_extension('GL_EXT_texture_compression_s3tc')
+        from OpenGL.GL.EXT import texture_compression_s3tc as s3tc
+
+        texture = int(glGenTextures(1))
+        glBindTexture(GL_TEXTURE_2D, texture)
+        blocks = (GLubyte * (256 * 256))()
+        glCompressedTexImage2D(
+            GL_TEXTURE_2D, 0, s3tc.GL_COMPRESSED_RGBA_S3TC_DXT5_EXT,
+            256, 256, 0, blocks,
+        )
+        self.check_error('glCompressedTexImage2D')
+        glDeleteTextures(1, [texture])
+
+
 if __name__ == '__main__':
     unittest.main()

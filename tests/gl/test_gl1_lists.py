@@ -4,6 +4,7 @@
 import unittest
 from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
+from arraycompat import copy_safe
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
 
@@ -48,6 +49,71 @@ class TestGL1Lists(GLTestCase):
         glAccum(GL_ACCUM, 1.0)
         glAccum(GL_RETURN, 1.0)
         self.check_error('accumulation')
+
+
+class TestCallingAListOfLists(GLTestCase):
+    """SF#2829309: ``glCallLists`` executed its argument twice.
+
+    The list is given as a sequence of names, and a wrapper that both passed
+    the count *and* iterated would run each one again.  What that looks like
+    from outside is a name stack one deeper than it should be, and a selection
+    buffer with a record that should not be there -- so the count is what is
+    asserted, in GL_SELECT where the name stack is observable.
+    """
+
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    def names(self, sequence):
+        """``sequence`` as glCallLists wants it, honouring ERROR_ON_COPY."""
+        return copy_safe(sequence, 'I')
+
+    def test_a_one_element_list_runs_its_list_once(self):
+        glRenderMode(GL_RENDER)
+        # The point the list draws has to fall inside the viewing volume or
+        # GL_SELECT produces no record at all and the count below is trivially
+        # met.  Orthographic and set by hand, so the case needs no GLU.
+        glMatrixMode(GL_PROJECTION)
+        glLoadIdentity()
+        glOrtho(-1, 1, -1, 1, 1, 10)
+        glMatrixMode(GL_MODELVIEW)
+        glLoadIdentity()
+        glTranslatef(0, 0, -3)
+
+        first = glGenLists(2)
+        second = first + 1
+        self.defer_cleanup(lambda: glDeleteLists(first, 2))
+
+        # `first` initialises the name stack and then calls `second` through
+        # glCallLists; `second` pushes exactly one name.
+        glNewList(first, GL_COMPILE_AND_EXECUTE)
+        glInitNames()
+        glCallLists(self.names([second]))
+        glEndList()
+
+        glNewList(second, GL_COMPILE)
+        glPushName(1)
+        glBegin(GL_POINTS)
+        glVertex3f(0, 0, 0)
+        glEnd()
+        glEndList()
+
+        glCallList(second)
+        glPopName()
+        self.assertEqual(
+            int(glGetIntegerv(GL_NAME_STACK_DEPTH)), 0,
+            'the name stack is not empty before the selection pass',
+        )
+
+        glSelectBuffer(100)
+        glRenderMode(GL_SELECT)
+        glCallList(first)
+        depth = int(glGetIntegerv(GL_NAME_STACK_DEPTH))
+        glPopName()
+        records = glRenderMode(GL_RENDER)
+
+        self.assertEqual(depth, 1, 'the single name was pushed %d times' % (depth,))
+        self.assertEqual(len(records), 1, records)
 
 
 if __name__ == '__main__':

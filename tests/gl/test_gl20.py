@@ -5,7 +5,14 @@ import unittest
 from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
+from OpenGL import error
 from OpenGL.GL import *  # noqa: F401,F403
+
+#: The smallest legal 3.30 vertex shader, for the case about `glShaderSource`
+#: taking a `str` rather than about what the shader does.
+SIMPLE_VERTEX_SHADER = '''#version 330 core
+void main() { gl_Position = vec4(0, 0, 0, 1); }
+'''
 
 VERTEX = '''#version 110
 attribute vec4 position;
@@ -167,6 +174,86 @@ class TestGL20(GLTestCase):
         glStencilOpSeparate(GL_FRONT, GL_KEEP, GL_KEEP, GL_KEEP)
         glBlendEquationSeparate(GL_FUNC_ADD, GL_FUNC_SUBTRACT)
         self.check_error('separate state')
+
+
+class TestCompilingAShaderFromAString(GLTestCase):
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    def test_a_source_string_reaches_the_compiler(self):
+        """``glShaderSource`` takes str, and has to encode it itself.
+
+        The driver wants a char** and a length; what it is given here is one
+        Python string, so the wrapper builds both.  A compile failure is
+        reported with the driver's own log, since a shader this small failing
+        is a fact about the wrapper rather than about the shader.
+        """
+        self.require_feature('shaders', (2, 0), 'GL_ARB_shader_objects')
+        glsl = self.getString(GL_SHADING_LANGUAGE_VERSION)
+        leading = glsl.split(' ')[0].split('.')[:2]
+        if [int(part) for part in leading] < [3, 3]:
+            self.skipTest('this driver offers GLSL %s, below the 3.30 asked for'
+                          % (glsl,))
+
+        shader = glCreateShader(GL_VERTEX_SHADER)
+        self.defer_cleanup(lambda: glDeleteShader(shader))
+        glShaderSource(shader, SIMPLE_VERTEX_SHADER)
+        glCompileShader(shader)
+        self.assertTrue(
+            glGetShaderiv(shader, GL_COMPILE_STATUS),
+            'the shader did not compile: %s' % (glGetShaderInfoLog(shader),),
+        )
+
+
+class TestSelectingSeveralDrawBuffers(GLTestCase):
+    """``glDrawBuffers`` takes a count and an array of buffer names."""
+
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    def test_naming_attachments_the_default_framebuffer_has_not_got(self):
+        """Framebuffer zero has no colour attachments, so this is an error.
+
+        Which is the point: the call has to reach the driver and be refused by
+        it, rather than being refused by the wrapper for the wrong reason.
+        """
+        self.require_feature('glDrawBuffers', (2, 0), 'GL_ARB_draw_buffers')
+        if self.draw_framebuffer():
+            self.skipTest('this backend draws into a framebuffer object, which '
+                          'does accept colour attachments')
+        names = (GLenum * 2)(GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1)
+        with self.assertRaises(error.GLError) as caught:
+            glDrawBuffers(2, names)
+        self.assertEqual(caught.exception.err, GL_INVALID_OPERATION)
+
+    def test_naming_attachments_a_framebuffer_object_does_have(self):
+        self.require_feature('framebuffer objects', (3, 0),
+                             'GL_ARB_framebuffer_object')
+        previous = glGetIntegerv(GL_READ_BUFFER)
+        fbo = int(glGenFramebuffers(1))
+        self.defer_cleanup(lambda: glDeleteFramebuffers(1, [fbo]))
+        with self.framebuffer(fbo):
+            textures = glGenTextures(2)
+            for index, texture in enumerate(textures):
+                glBindTexture(GL_TEXTURE_2D, int(texture))
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, 32, 32, 0,
+                             GL_RGB, GL_UNSIGNED_BYTE, None)
+                glFramebufferTexture2D(
+                    GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + index,
+                    GL_TEXTURE_2D, int(texture), 0,
+                )
+            names = (GLenum * 2)(GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1)
+            glDrawBuffers(2, names)
+            self.check_error('glDrawBuffers on a framebuffer object')
+
+            if glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE:
+                glReadBuffer(GL_COLOR_ATTACHMENT1)
+                pixels = glReadPixels(0, 0, 10, 10, GL_RGB, GL_UNSIGNED_BYTE)
+                self.assertEqual(len(pixels), 300, len(pixels))
+            glDeleteTextures(2, [int(t) for t in textures])
+        # Back on the framebuffer the fixture draws into, so the buffer read
+        # off it at the start is one it still accepts.
+        glReadBuffer(previous)
 
 
 if __name__ == '__main__':

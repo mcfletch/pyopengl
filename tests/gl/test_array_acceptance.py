@@ -259,5 +259,37 @@ class TestArraysReachingTheEntryPoints(GLTestCase):
             pass
 
 
+class TestWhereTheResultGoes(GLTestCase):
+    """A getter may allocate the result, or fill something the caller passed.
+
+    Both are supported spellings of the same call, and they have to agree: a
+    caller migrating from one to the other should not find the numbers change.
+    """
+
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    def test_a_generator_allocates_when_it_is_not_given_somewhere(self):
+        self.require_vertex_arrays()
+        allocated = glGenVertexArrays(1)
+        self.assertTrue(int(allocated), 'no name was generated')
+        glDeleteVertexArrays(1, [int(allocated)])
+
+    def test_a_generator_fills_a_variable_it_is_given(self):
+        self.require_vertex_arrays()
+        target = GLuint()
+        returned = glGenVertexArrays(1, target)
+        self.assertTrue(target.value, 'the caller variable was not written to')
+        self.assertTrue(returned)
+        glDeleteVertexArrays(1, [int(target.value)])
+
+    def test_a_getter_answers_the_same_either_way(self):
+        allocated = glGetFloatv(GL_FOG_COLOR)
+        given = (GLfloat * 4)()
+        glGetFloatv(GL_FOG_COLOR, given)
+        self.assertEqual(list(allocated), list(given))
+        self.check_error('glGetFloatv')
+
+
 if __name__ == '__main__':
     unittest.main()

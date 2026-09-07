@@ -17,14 +17,20 @@ own ctypes array handler (``OpenGL.arrays.ctypesarrays``); the arrays it returns
 are plain ctypes arrays of the matching GL type, which PyOpenGL accepts
 natively, including as output buffers for ``glGet*``.
 
-The directory holding this module is placed on ``sys.path`` by the top-level
-``conftest.py`` so every test directory (gl, gles, glu, ...) can import it.
+The directory holding this module is named by ``pythonpath`` in
+``pyproject.toml``, so every test directory (gl, gles, glu, ...) can import it.
 
 Tests that need numpy proper (dtype objects, ``frombuffer``, ``np.testing``,
 ...) should instead ``pytest.importorskip('numpy')`` so they skip cleanly in the
 no-numpy environments rather than relying on this shim.
+
+:func:`copy_safe` is here for the other configuration axis: a case that passes
+a plain Python list because a list is the readable way to write the data, and
+that must build an array instead where the run has refused implicit copies.
 """
 from __future__ import print_function
+
+from OpenGL._configflags import ERROR_ON_COPY
 
 try:
     import numpy as np  # noqa: F401  (re-exported)
@@ -130,6 +136,28 @@ except ImportError:
         setattr(_CtypesNumpyShim, _name, _code)
 
     np = _CtypesNumpyShim()
+
+
+def copy_safe(data, dtype):
+    """``data`` as a plain list, or as an array where the run refuses copies.
+
+    Passing a list to an entry point is how the list handler gets exercised,
+    and PyOpenGL copying it into a buffer is the documented default -- so most
+    cases should keep passing one, and this returns it unchanged.
+
+    ``ERROR_ON_COPY`` is a caller saying it will not accept that copy, and
+    under it the same list is a ``CopyError`` before the call is reached.  For
+    a case where the list is *incidental* -- it needed some data and a list was
+    the readable way to write it -- that is the run behaving correctly rather
+    than the case failing, so it gets an array instead, which is what a program
+    running under the flag has to do.
+
+    A case that is *about* the flag, or about what the list handler does, does
+    not use this: it passes a list on purpose and says what it expects.
+    """
+    if ERROR_ON_COPY:
+        return np.array(data, dtype)
+    return data
 
 
 # --- backend-agnostic helpers -------------------------------------------------
