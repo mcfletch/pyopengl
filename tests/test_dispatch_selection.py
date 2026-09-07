@@ -272,8 +272,11 @@ class TestThePairIsPinnedBeforeItIsInstalled:
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'accelerate'))
         try:
             import setup as accelerate_setup
-        except Exception:                       # pragma: no cover - no source tree
-            pytest.skip('accelerate/setup.py is not importable here')
+        except ImportError as err:              # pragma: no cover - no source tree
+            # ImportError alone, and with the reason: a bare `except Exception`
+            # here turned anything at all -- including a warning the run had
+            # asked to be an error -- into a skip that named the source tree.
+            pytest.skip('accelerate/setup.py is not importable here: %s' % (err,))
         finally:
             sys.path.pop(0)
         requirements = accelerate_setup.pyopengl_requirement()

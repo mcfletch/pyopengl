@@ -13,7 +13,17 @@ except ImportError as err:
     cPickle = pickle
 
 try:
-    from numpy import *
+    # Named rather than star-imported: `from numpy import *` also brings in
+    # numpy's own test runner as `test`, which pytest then tries to collect and
+    # warns that it cannot.
+    from numpy import (
+        allclose,
+        array,
+        ascontiguousarray,
+        eye,
+        isscalar,
+        memmap,
+    )
 except ImportError as err:
     array = None
 

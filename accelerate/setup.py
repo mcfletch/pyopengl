@@ -28,9 +28,10 @@ def _our_version():
     """
     import re
 
-    source = open(
+    with open(
         os.path.join(HERE, 'OpenGL_accelerate', '__init__.py'), encoding='utf-8'
-    ).read()
+    ) as handle:
+        source = handle.read()
     found = re.search(r'^__version__\s*=\s*["\']([^"\']+)["\']', source, re.M)
     if not found:
         raise RuntimeError('OpenGL_accelerate/__init__.py states no __version__')

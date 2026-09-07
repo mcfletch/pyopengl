@@ -56,9 +56,10 @@ class TestReading:
 
     def test_a_repeated_pname_takes_the_last_assignment(self, table):
         """``_m[pname] = ...`` twice is a dict overwrite, and must stay one."""
-        source = open(
+        with open(
             os.path.join(PACKAGE, 'raw', 'GL', '_glgets.py'), encoding='utf-8'
-        ).read()
+        ) as handle:
+            source = handle.read()
         namespace = {}
         exec(compile(source, '_glgets.py', 'exec'), namespace)
         assert len(table) == len(namespace['_glget_size_mapping'])

@@ -122,7 +122,8 @@ class TestSignaturesAreBuiltNotCompiled:
     def test_the_module_compiles_no_source(self):
         from OpenGL._dispatch import support
 
-        source = open(support.__file__, encoding='utf-8').read()
+        with open(support.__file__, encoding='utf-8') as handle:
+            source = handle.read()
         assert 'exec(' not in source
         assert "compile(" not in source
 

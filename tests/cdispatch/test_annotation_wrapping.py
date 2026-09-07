@@ -44,7 +44,8 @@ class TestTheChainsAreASecondCopy:
     """Every customisation a module applies is already in the table."""
 
     @pytest.fixture(scope='class')
-    def chains(self):
+    @staticmethod
+    def chains():
         """``{(api, command): [(call, arguments), ...]}`` from the modules."""
         return extract.extract_customisations(PACKAGE)
 

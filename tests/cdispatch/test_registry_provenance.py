@@ -28,6 +28,12 @@ finally:
 LOCK = os.path.join(SRC, 'cdispatch', 'registry_lock.json')
 
 
+def _recorded():
+    """What the lock file says, with the file closed again."""
+    with open(LOCK, encoding='utf-8') as handle:
+        return json.load(handle)
+
+
 class TestTheLockFile:
     def test_it_is_shipped(self):
         assert os.path.exists(LOCK), (
@@ -35,7 +41,7 @@ class TestTheLockFile:
         )
 
     def test_it_names_a_commit_for_every_registry(self):
-        recorded = json.load(open(LOCK, encoding='utf-8'))
+        recorded = _recorded()
         for directory, url in fetch_registries.REGISTRIES:
             assert directory in recorded['registries'], directory
             entry = recorded['registries'][directory]
@@ -44,7 +50,7 @@ class TestTheLockFile:
             assert all(c in '0123456789abcdef' for c in entry['commit'])
 
     def test_it_says_when(self):
-        recorded = json.load(open(LOCK, encoding='utf-8'))
+        recorded = _recorded()
         assert recorded['generated']  # an ISO date
 
 

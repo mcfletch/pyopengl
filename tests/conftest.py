@@ -1,19 +1,17 @@
-"""Make the shared tests/ helper modules importable from every sub-suite.
+"""What has to be decided before any test module is imported.
 
-The gl / glu / gles suites live in sub-directories and import shared modules
-(glcontext, glcontext_desktop, ...) by bare name.  pytest's prepend import mode
-adds each test file's own directory to sys.path but not necessarily this one, so
-add it here explicitly.  This conftest is loaded before any test under tests/.
+Which platform the entry points are built for, and whether the implementation
+under test is the one the run asked for: both are settled once per process, and
+this file is the last place either can be said. It is loaded before any test
+module under ``tests/``.
+
+The directories the suites import their helpers from are named by
+``pythonpath`` in ``pyproject.toml``, so nothing here edits ``sys.path``.
 """
 
 import os
-import sys
 
 import pytest
-
-_HERE = os.path.dirname(os.path.abspath(__file__))
-if _HERE not in sys.path:
-    sys.path.insert(0, _HERE)
 
 # The headless EGL-device backend loads the GL entry points through EGL, so
 # PYOPENGL_PLATFORM must be 'egl' before anything imports OpenGL.  conftest runs
@@ -21,7 +19,7 @@ if _HERE not in sys.path:
 # than compared as a string: `backends` is where TEST_WINDOWING is read, and
 # this is the one backend that needs the platform set -- the other headless one,
 # cgl, is macOS's own and needs nothing.
-import backends  # noqa: E402 -- needs the sys.path entry above
+import backends
 
 if backends.requested() == 'egl':
     os.environ.setdefault('PYOPENGL_PLATFORM', 'egl')

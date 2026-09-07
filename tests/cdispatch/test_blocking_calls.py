@@ -86,7 +86,8 @@ class TestTheMacro:
     CPython with the GIL released is a crash rather than a slow program."""
 
     @pytest.fixture(scope='class')
-    def header(self):
+    @staticmethod
+    def header():
         with open(os.path.join(HERE, 'accelerate', 'src', 'c', 'pygl.h'), encoding='utf-8') as f:
             return f.read()
 

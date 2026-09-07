@@ -36,8 +36,13 @@ test = [
     "tox-uv >= 1",
     "pip >= 23 ; python_version >= '3.12'",
     "pytest",
+    # A hang inside a test is otherwise bounded only by the CI job limit, which
+    # reports a cancelled job rather than the name of what it was waiting for.
+    "pytest-timeout",
     "setuptools >= 77",
-    "pygame < 2.1.3; python_version < '3.11'",
+    # pygame-ce is the maintained fork and the only one with wheels for the
+    # interpreters the matrix runs; below 3.11 the suite uses glfw or the
+    # headless backends, and the pygame windowing backend is simply absent.
     "pygame-ce >= 2.1.3; python_version >= '3.11'",
     "psutil",
     "xlib",
@@ -86,8 +91,52 @@ include=["OpenGL*"]
 exclude=["tests","accelerate","directdocs","documentation"]
 
 [tool.pytest.ini_options]
+# Where the suites are, so a bare `pytest` runs what CI runs.
+testpaths = ["tests", "accelerate/tests"]
+
+# The suites import their shared helpers by bare name -- `from arraycompat
+# import np` from anywhere, `from gltestcase import GLTestCase` from within a
+# suite -- and tests/cdispatch reads the build-time generator out of src/.
+# Naming them here is what puts them on the path; these directories used to be
+# reached by three conftest.py files editing sys.path and by pytest's prepend
+# import mode adding each test file's own directory, which importlib mode
+# (below) does not do.
+pythonpath = ["tests", "tests/gl", "tests/gles", "tests/glu", "src"]
+
+# importlib import mode gives each test module a name derived from its path, so
+# two suites may hold the same basename: tests/gl and tests/gles cover the same
+# extensions under two APIs and want to say so with the same file name. Under
+# the default prepend mode a duplicate basename is a collection error, which is
+# why the ES copies carried a `test_es_` prefix. There is no ini key for it,
+# only the command-line option, so it goes in addopts.
+addopts = "--import-mode=importlib"
+
+# A test that hangs -- a driver waiting on a compositor that will not answer, a
+# window that never maps -- otherwise runs until the CI job's own limit, which
+# cancels the job and names nothing. Generous, because the point is to bound a
+# hang rather than to time anything: the slowest case here builds a frozen
+# application and takes about eight seconds.
+timeout = 300
+
+# An xfail that starts passing is a result, not a quiet success: say so, so the
+# marker comes off in the same change that fixed it.
+xfail_strict = true
+
+filterwarnings = [
+    "error",
+    # setuptools reads the accelerate extension's `compiler_directives` keyword,
+    # which is Cython's rather than distutils'. Raised while a test imports
+    # accelerate/setup.py; the keyword is honoured by the Cython build.
+    # `(?s)` because the message opens with a newline, and `.` does not match
+    # one -- without it the pattern silently matches nothing and the warning is
+    # still an error.
+    "ignore:(?s).*Please remove unknown .Extension. options.*:UserWarning",
+]
+
 markers = [
     "performance: asserts how fast something draws, so it needs a GPU to draw it. Deselected with '-m \"not performance\"' where the renderer rasterises on the CPU -- llvmpipe answers a question about speed wrongly by three orders of magnitude.",
+    "resources: asserts a budget in memory or import time rather than a result, so it measures the machine as much as the library. Deselected with '-m \"not resources\"' on a machine doing something else at the same time.",
+    "slow: takes seconds rather than milliseconds, because it builds something -- a frozen application, an archive. Deselected with '-m \"not slow\"' while iterating.",
 ]
 
 [tool.black]

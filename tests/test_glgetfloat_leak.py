@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from __future__ import print_function
 import os, math, unittest
+import pytest
 import checkutils
 from basetestcase import BaseTest
 from OpenGL.GL import *
@@ -11,6 +12,7 @@ except ImportError:
     psutil = None
 
 
+@pytest.mark.resources
 class TestGLGetFloatLeak(BaseTest):
     #: Calls made before the baseline, so that first-call allocation -- the
     #: entry point resolving, the array type registering, the arena growing to

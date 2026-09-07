@@ -36,9 +36,10 @@ class Registry(object):
         self.apis = {}
         self.feature_set = {}
         self.extension_set = {}
-        self.output_mapping = json.loads(
-            open(os.path.join(HERE, 'gl_out_parameters.json')).read()
-        )
+        with open(
+            os.path.join(HERE, 'gl_out_parameters.json'), encoding='utf-8'
+        ) as handle:
+            self.output_mapping = json.load(handle)
         self.output_enum_groups = {}
 
     def load(self, tree):
@@ -478,7 +479,8 @@ class Remove(list):
 
 def parse(xmlfile):
     registry = Registry()
-    registry.load(ET.fromstring(open(xmlfile, 'rb').read()))
+    with open(xmlfile, 'rb') as handle:
+        registry.load(ET.fromstring(handle.read()))
     return registry
 
 

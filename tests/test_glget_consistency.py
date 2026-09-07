@@ -25,7 +25,9 @@ def _bare(size):
 
 def _conflicts(path):
     by_value = {}
-    for line in open(path):
+    with open(path, encoding='utf-8') as handle:
+        lines = handle.readlines()
+    for line in lines:
         m = _LINE.match(line.strip())
         if not m:
             continue

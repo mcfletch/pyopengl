@@ -51,8 +51,10 @@ tests/
 │                             no window) — for CI / containers
 ├── glcontext_desktop.py    DesktopGLTestCaseBase (OpenGL.GL) + GLUTestCaseBase
 ├── glcontext_es.py         ESTestCaseBase (OpenGL.GLES2 / GLES3)
-├── conftest.py             puts tests/ on sys.path; forces PYOPENGL_PLATFORM=egl
-│                             for the egl backend
+├── conftest.py             what must be settled before any test module is
+│                             imported: PYOPENGL_PLATFORM=egl for the egl
+│                             backend, and that the dispatch implementation is
+│                             the one the run asked for
 ├── arraycompat.py          `from arraycompat import np` — numpy, or a ctypes
 │                             fallback for the no-numpy (num0) tox environments
 │
@@ -71,17 +73,42 @@ tests/
 │   ├── glu_coverage.py
 │   └── test_*.py
 │
-├── basetestcase*.py        legacy root-level windowing dispatch + glfw/pygame
-├── testdecorator*.py       legacy `@gltest` decorator dispatch
+├── cdispatch/              the build-time code generator, which reads the
+│                             Khronos registry out of `src/` and emits the
+│                             C, the stubs and the tables `OpenGL/raw` is
+│                             built from
+├── data/                   fixtures the suites read rather than build
+│
+├── basetestcase.py         legacy root-level GL fixture (300x300, a perspective
+│                             already on the stack)
+├── testdecorator.py        `@gltest`: the same fixture around a plain function,
+│                             for the stand-alone check scripts
 ├── test_*.py               legacy root-level tests (use basetestcase/testdecorator)
 └── check_*.py / *.py       stand-alone check scripts run out-of-process by
                               test_checks.py
 ```
 
-> **Note on file names:** the suites are collected without `__init__.py`
-> (pytest *prepend* import mode), so **every `test_*.py` basename must be unique
-> across the whole tree** — e.g. the ES copies are `test_es_nv_state.py`, not a
-> second `test_ext_nv_state.py`.
+`pyproject.toml` holds the settings that shape a run: `pythonpath` (which is
+what puts this directory and the suite directories on the path, so the helpers
+import by bare name), `--import-mode=importlib`, `xfail_strict`,
+`filterwarnings = error`, a per-test `timeout`, and the markers below. Nothing
+under `tests/` edits `sys.path`.
+
+> **Warnings are errors.** A `ResourceWarning` for a file the test left open, a
+> deprecation with a deadline: the run fails on it rather than printing it into
+> a summary nobody reads. A warning that is genuinely not ours goes in the
+> `filterwarnings` list in `pyproject.toml`, with the reason. Two things to know
+> about writing one of those: the message pattern is matched against the *start*
+> of the message, and `.` does not match a newline — a message that opens with
+> one needs `(?s)`, or the entry silently matches nothing.
+
+### Markers
+
+| Marker | What it means | Deselect with |
+|---|---|---|
+| `performance` | asserts how fast something draws, so it needs a GPU | `-m "not performance"` |
+| `resources` | asserts a budget in memory or import time, so it measures the machine as much as the library | `-m "not resources"` |
+| `slow` | takes seconds because it builds something — a frozen application, an archive | `-m "not slow"` |
 
 ## The base test cases
 
@@ -183,8 +210,10 @@ through the context that is not there answers zero. Write `if not window`, or
 
 Other knobs: `TEST_VISIBLE=0` runs headless-ish (hidden windows, no dwell);
 `TEST_DWELL=<seconds>` controls the per-test on-screen pause; `TEST_EGL_DEVICE=<n>`
-pins a specific EGL device. Under the `egl` backend the legacy root-level
-*windowed* tests skip (a window plus the egl-device platform is incompatible).
+pins a specific EGL device; `TEST_CHECK_TIMEOUT=<seconds>` bounds one check
+script (120 by default) where the per-test `timeout` in `pyproject.toml` bounds
+everything else. Under the `egl` backend the legacy root-level *windowed* tests
+skip (a window plus the egl-device platform is incompatible).
 
 ## Adding a test
 

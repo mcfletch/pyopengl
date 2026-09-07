@@ -168,7 +168,8 @@ class TestTheModuleIsDocumented:
     def test_there_is_a_page_for_it(self):
         page = os.path.join(ROOT, 'documentation', 'egl-devices.html')
         assert os.path.exists(page), page
-        text = open(page, encoding='utf-8').read()
+        with open(page, encoding='utf-8') as handle:
+            text = handle.read()
         for named in (
             'OpenGL.EGL.devices',
             'DeviceInfo',

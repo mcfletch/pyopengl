@@ -36,7 +36,8 @@ class TestRegistryCoverage:
     """
 
     @pytest.fixture(scope='class')
-    def drift(self, report):
+    @staticmethod
+    def drift(report):
         return upstream.new_drift(report)
 
     def test_no_new_registry_command_lacks_a_binding(self, drift):

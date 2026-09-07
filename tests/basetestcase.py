@@ -24,11 +24,6 @@ HERE = os.path.dirname(__file__)
 
 cPickle = pickle
 
-try:
-    from numpy import *
-except ImportError:
-    array = None
-
 import OpenGL
 
 if os.environ.get('TEST_NO_ACCELERATE'):

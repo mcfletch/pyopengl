@@ -105,6 +105,7 @@ class TestImportingFromAZip:
         assert archive in completed.stdout, completed.stdout
 
 
+@pytest.mark.slow
 class TestFreezingAnApplication:
     """PyInstaller, through the hook PyOpenGL ships for itself."""
 

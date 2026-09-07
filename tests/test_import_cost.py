@@ -24,10 +24,15 @@ from OpenGL import _configflags
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 
-pytestmark = pytest.mark.skipif(
-    not dispatch.AVAILABLE or _configflags.DISPATCH != 'c',
-    reason='the C dispatch layer is not the selected implementation',
-)
+#: A budget in seconds and in module count is as much a measurement of the
+#: machine as of the library, so it is deselectable on one that is busy.
+pytestmark = [
+    pytest.mark.resources,
+    pytest.mark.skipif(
+        not dispatch.AVAILABLE or _configflags.DISPATCH != 'c',
+        reason='the C dispatch layer is not the selected implementation',
+    ),
+]
 
 
 def run(source):

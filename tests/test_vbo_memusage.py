@@ -28,6 +28,7 @@ def get_current_memory():
     return psutil.Process(os.getpid()).memory_info().rss
 
 
+@pytest.mark.resources
 @pytest.mark.skipif(not psutil, reason="No psutil available")
 @pytest.mark.skipif(not np, reason="No Numpy available")
 @testdecorator.gltest
