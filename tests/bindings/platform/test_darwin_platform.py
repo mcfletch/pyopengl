@@ -14,10 +14,24 @@ layer's.
 """
 
 import ctypes
+import sys
 
 import pytest
 
 from OpenGL.platform import darwin
+
+
+@pytest.fixture
+def c_library():
+    """A library this process can look a symbol up in, whichever platform.
+
+    ``CDLL(None)`` is the process itself, which is POSIX's way of reaching the
+    C library; Windows has no such handle and names the C runtime instead.
+    What the cases below need is only a real library with a symbol they can
+    name, since the lookup is what is under test rather than anything about
+    which library answered.
+    """
+    return ctypes.CDLL('msvcrt' if sys.platform == 'win32' else None)
 
 
 @pytest.fixture
@@ -34,23 +48,23 @@ def platform():
 class TestLookingUpAnEntryPoint:
     """The framework has no get-proc-address, so the loader is asked."""
 
-    def test_it_answers_the_address_of_a_symbol_that_exists(self, platform):
-        platform.GL = ctypes.CDLL(None)  # this process, and so the C library
+    def test_it_answers_the_address_of_a_symbol_that_exists(
+        self, platform, c_library
+    ):
+        platform.GL = c_library
         address = platform.getExtensionProcedure(b'malloc')
-        assert address == ctypes.cast(
-            ctypes.CDLL(None).malloc, ctypes.c_void_p
-        ).value
+        assert address == ctypes.cast(c_library.malloc, ctypes.c_void_p).value
 
     def test_a_name_nothing_exports_is_no_address_rather_than_an_error(
-        self, platform
+        self, platform, c_library
     ):
         """Which is what the callers expect: `constructFunction` reads the
         answer as "the extension is claimed but the function is not there"."""
-        platform.GL = ctypes.CDLL(None)
+        platform.GL = c_library
         assert platform.getExtensionProcedure(b'glNoSuchEntryPointExists') is None
 
-    def test_the_name_may_be_text_as_well_as_bytes(self, platform):
-        platform.GL = ctypes.CDLL(None)
+    def test_the_name_may_be_text_as_well_as_bytes(self, platform, c_library):
+        platform.GL = c_library
         assert platform.getExtensionProcedure('malloc') == (
             platform.getExtensionProcedure(b'malloc')
         )
