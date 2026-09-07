@@ -364,6 +364,41 @@ def _import(name):
     return importlib.import_module(name)
 
 
+def also(namespace, *modules):
+    """Take from each of ``modules`` only the names ``namespace`` lacks.
+
+    The modules are passed as objects rather than named, so the ``import`` that
+    fetched them is an ordinary static one: a freezer reads those and bundles
+    what they name, and a dynamic import here leaves the extension modules out
+    of the bundle and the frozen application dying on its first import.
+
+    A GL version adopts extensions wholesale -- 4.1 is
+    ``ARB_separate_shader_objects`` and five others -- and the version module
+    carries their names so that a client importing ``OpenGL.GL`` finds them.
+    It must not take their *entry points* over its own.
+
+    A command declared by both is declared twice, and the two differ in the one
+    way that matters: the extension declaration is gated on the driver
+    advertising the extension string, and the core one is not.  A driver is
+    entitled to stop advertising an extension it has promoted, and a core
+    profile commonly does -- macOS's 4.1 core profile does not list
+    ``GL_ARB_separate_shader_objects`` -- so the gated declaration answers
+    ``NullFunctionError`` for a function the context implements.
+
+    Which is why this is not ``import *``: that runs after :func:`define` has
+    put the version's own declarations in place, and takes them back out.  The
+    C dispatch layer records the same pair the same way round, with the core
+    name as the declaration and the extension as an alternate.
+    """
+    for module in modules:
+        exported = getattr(module, '__all__', None)
+        if exported is None:
+            # What ``import *`` would have taken.
+            exported = [key for key in vars(module) if not key.startswith('_')]
+        for key in exported:
+            namespace.setdefault(key, getattr(module, key))
+
+
 def define(namespace, module_name, customise=False):
     """Define, in ``namespace``, everything ``module_name`` declared.
 

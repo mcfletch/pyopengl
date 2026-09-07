@@ -61,11 +61,13 @@ CONDITIONAL_BY_DESIGN = {
     'argtypes': 'built from the ctypes binding on demand',
     'extension': (
         'a command promoted into core is declared twice, once by the extension '
-        'that introduced it and once by the version that adopted it.  Which '
-        'declaration the ctypes namespace ends up holding depends on import '
-        'order; the C layer picks the core one deterministically, because it '
-        'resolves without an extension check.  What matters is that the same '
-        'entry points resolve, which test_resolution_agrees asserts.'
+        'that introduced it and once by the version that adopted it, and a '
+        'command adopted by two versions three times.  Both implementations '
+        'hold a core declaration -- which is what makes the entry point '
+        'resolve without an extension check, and so survive a driver that has '
+        'stopped advertising an extension it promoted -- but they may name a '
+        'different version of it.  Either answers the same question the same '
+        'way, and test_resolution_agrees asserts the part that matters.'
     ),
 }
 

@@ -318,6 +318,20 @@ current machine before using any of the functions in the extension
 
 <p>or more reasonably, to trigger the use of fallback code for the missing functionality from the extension.</p>
 
+<p>Most extensions are eventually adopted into a GL version, and a command
+that has been is declared twice: once by the extension that introduced it,
+and once by the version that adopted it. <code>OpenGL.GL</code> exports the
+version's declaration, which is available whenever the context provides that
+version. The extension module keeps its own, which is available only while
+the driver advertises the extension string &mdash; and a driver is free to
+stop advertising one it has promoted, as a core profile commonly does. So:</p>
+
+<pre>from OpenGL.GL import glCreateShaderProgramv    # GL 4.1; asks the context<br>from OpenGL.GL.ARB.separate_shader_objects import glCreateShaderProgramv<br>                                               # asks for the extension string</pre>
+
+<p>Import from <code>OpenGL.GL</code> for a command your context's version
+provides, and from the extension module when the extension itself is what you
+are depending on.</p>
+
 
 
 
