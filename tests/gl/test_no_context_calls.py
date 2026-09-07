@@ -51,6 +51,11 @@ from OpenGL.GL import glCreateProgram, glDeleteProgram, glGetError
 from OpenGL import error
 
 program = glCreateProgram()
+# Resolve glDeleteProgram while a context is still current. Everything above
+# GL 1.1 comes from wglGetProcAddress on Windows, and that needs one -- so an
+# entry point first *reached* after the context has gone fails at the lookup,
+# which is a step earlier than the behaviour under test.
+glDeleteProgram(glCreateProgram())
 glGetError()
 
 # What a cleanup handler faces: the context is gone by the time it runs, and
