@@ -16,10 +16,11 @@ about the suite.  It needs a GL context, and opens a hidden one.
 import os
 import re
 import sys
-import glob
+import coverage_scan
 import json
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+TESTS = os.path.dirname(HERE)
 ROOT = os.path.dirname(os.path.dirname(HERE))  # repo root holding ``OpenGL``
 
 _CALL = re.compile(r'\b(gl[A-Z][A-Za-z0-9_]*)\b')
@@ -72,19 +73,16 @@ def provided_by_driver():
 #: read_pixel is glReadPixels, getStringi is glGetStringi.  A case using a
 #: helper has exercised what the helper calls, and counting only the case files
 #: reported those two as never called by anything.
-_FRAMEWORK = ('gltestcase.py', '../glcontext.py', '../glcontext_desktop.py')
+#: The shared framework the suite calls GL through, which lives above this
+#: directory and would otherwise read as uncovered.
+_FRAMEWORK = ('glcontext.py', 'glcontext_desktop.py')
 
 
 def called_funcs():
-    used = set()
-    paths = glob.glob(os.path.join(HERE, 'test_*.py'))
-    paths += [os.path.join(HERE, name) for name in _FRAMEWORK]
-    for path in paths:
-        if not os.path.exists(path):
-            continue
-        with open(path) as fh:
-            used.update(_CALL.findall(fh.read()))
-    return used
+    """Commands the suite names, including through the shared framework."""
+    return coverage_scan.called(
+        HERE, 'gl', [os.path.join(TESTS, name) for name in _FRAMEWORK]
+    )
 
 
 def level_report():

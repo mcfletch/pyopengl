@@ -2,16 +2,15 @@
 """Measure OpenGL-ES entry-point test coverage for this checkout.
 
 Counts the ``gl*`` commands defined per ES level (and per supported extension
-module), scans the ``check_es*.py`` tests for the commands they call, and
-reports coverage.  Run directly to print a summary, or with ``--md`` to (re)write
-ES_COVERAGE.md.
+module), scans the suite for the commands it calls, and reports coverage.  Run
+directly to print a summary; ``--uncovered`` lists what nothing calls.
 """
 
 import os
 import paths
 import re
 import sys
-import glob
+import coverage_scan
 import json
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -41,15 +40,8 @@ def defined_funcs(rel_path):
 
 
 def called_funcs():
-    """Commands called by the tests, including the shared base-class helpers."""
-    used = set()
-    paths = glob.glob(os.path.join(HERE, 'test_es*.py'))
-    paths += glob.glob(os.path.join(HERE, 'test_ext*.py'))
-    paths += [os.path.join(HERE, 'egltestcase.py')]
-    for path in paths:
-        with open(path) as fh:
-            used.update(_CALL.findall(fh.read()))
-    return used
+    """Commands the suite names, including through the shared base class."""
+    return coverage_scan.called(HERE, 'gl')
 
 
 def extension_sources():

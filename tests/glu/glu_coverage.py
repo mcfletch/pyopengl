@@ -10,7 +10,7 @@ entry points no test touches.
 import os
 import re
 import sys
-import glob
+import coverage_scan
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))  # repo root holding ``OpenGL``
@@ -31,13 +31,8 @@ def defined_funcs():
 
 
 def called_funcs():
-    used = set()
-    paths = glob.glob(os.path.join(HERE, 'test_glu_*.py'))
-    paths += [os.path.join(HERE, 'glutestcase.py')]
-    for path in paths:
-        with open(path) as fh:
-            used.update(_CALL.findall(fh.read()))
-    return used
+    """Commands the suite names, including through the shared base class."""
+    return coverage_scan.called(HERE, 'glu')
 
 
 def main():
