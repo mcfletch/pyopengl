@@ -2,17 +2,19 @@
 """An entry point the GL library exports resolves, whoever declares it.
 
 A name can be declared twice: ``glGetPointerv`` is GL 1.1 and ``GL_KHR_debug``
-re-specifies it, giving it the pnames that report a debug callback.  Which
-declaration ``OpenGL.GL`` ends up holding is settled by import order and is not
-something a caller can see -- so it must not decide whether the entry point
-works.
+re-specifies it, giving it the pnames that report a debug callback.  Which of
+the two a caller reaches is settled by which module they import from, and on
+Windows that decided whether the entry point worked at all: ``opengl32``
+exports GL 1.1 and ``wglGetProcAddress`` answers for everything *above* it,
+returning NULL for the 1.1 set, and an extension-declared name was looked for
+in the second place only.  Nothing said so -- the name is defined, and only
+calling it reports anything.
 
-It did on Windows.  ``wglGetProcAddress`` answers for entry points above GL 1.1
-and returns NULL for the ones ``opengl32`` exports itself, which is the whole
-of GL 1.1; an extension-declared name is looked up there and nowhere else, so
-``OpenGL.GL.glGetPointerv`` was an undefined function while
-``OpenGL.GL.VERSION.GL_1_1.glGetPointerv`` beside it worked.  Nothing said so:
-the name is defined, and only calling it reports anything.
+``OpenGL.GL`` exports the core declaration, so what it holds is resolved as
+core; ``OpenGL.GL.KHR.debug`` holds the extension's own, and that one is the
+name this rule is still what answers for.  Both are asked here, because the
+point is that the choice of module is not a choice about whether the function
+exists.
 
 The parity case runs in subprocesses, because which implementation is installed
 is settled once per process and the two resolve entry points by different
@@ -36,10 +38,13 @@ from OpenGL.platform.baseplatform import BasePlatform
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 
-#: Entry points declared by a core version *and* by an extension, so that the
-#: two declarations resolve by different routes and only one of them can be the
-#: one a caller reaches.
-DOUBLY_DECLARED = ['glGetPointerv']
+#: ``(module, name)`` for an entry point a core version *and* an extension both
+#: declare.  The two modules hold different declarations of it, resolved by
+#: different routes, and a caller reaches whichever they imported.
+DOUBLY_DECLARED = [
+    ('OpenGL.GL', 'glGetPointerv'),
+    ('OpenGL.GL.KHR.debug', 'glGetPointerv'),
+]
 
 IMPLEMENTATIONS = ['c', 'ctypes']
 
@@ -53,18 +58,20 @@ if window is None:
     raise SystemExit(77)
 glfw.make_context_current(window)
 
+import importlib
+
 import OpenGL.GL as GL
 
 GL.glGetString(GL.GL_VERSION)
-entry = getattr(GL, %(name)r)
+entry = getattr(importlib.import_module(%(module)r), %(name)r)
 print(bool(entry))
 '''
 
 
-def defined(name, implementation):
-    """Whether ``OpenGL.GL.<name>`` resolves under `implementation`."""
+def defined(module, name, implementation):
+    """Whether ``<module>.<name>`` resolves under `implementation`."""
     completed = subprocess.run(
-        [sys.executable, '-c', SCRIPT % {'name': name}],
+        [sys.executable, '-c', SCRIPT % {'module': module, 'name': name}],
         capture_output=True,
         text=True,
         cwd=ROOT,
@@ -79,11 +86,12 @@ def defined(name, implementation):
     return completed.stdout.strip().splitlines()[-1]
 
 
-@pytest.mark.parametrize('name', DOUBLY_DECLARED)
+@pytest.mark.parametrize('module,name', DOUBLY_DECLARED)
 @pytest.mark.parametrize('implementation', IMPLEMENTATIONS)
-def test_it_resolves_under_either_implementation(name, implementation):
-    assert defined(name, implementation) == 'True', (
-        '%s is undefined under the %s implementation' % (name, implementation)
+def test_it_resolves_under_either_implementation(module, name, implementation):
+    assert defined(module, name, implementation) == 'True', (
+        '%s.%s is undefined under the %s implementation'
+        % (module, name, implementation)
     )
 
 
