@@ -51,6 +51,8 @@ from OpenGL.EGL import (
     EGL_CONTEXT_OPENGL_PROFILE_MASK,
     EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT,
     EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT,
+    EGL_CONTEXT_OPENGL_DEBUG,
+    EGL_TRUE,
     eglInitialize,
     eglChooseConfig,
     eglBindAPI,
@@ -62,6 +64,7 @@ from OpenGL.EGL import (
     eglQueryString,
     EGL_VENDOR,
 )
+from OpenGL.raw.EGL._errors import EGLError
 from OpenGL.EGL.EXT.platform_base import eglGetPlatformDisplayEXT
 from OpenGL.EGL.EXT.platform_device import EGL_PLATFORM_DEVICE_EXT
 from OpenGL.EGL.devices import devices as enumerate_devices
@@ -230,12 +233,27 @@ class EGLDeviceBackend(object):
                 if profile == 'core'
                 else EGL_CONTEXT_OPENGL_COMPATIBILITY_PROFILE_BIT,
             ))
+        if getattr(self, 'debug_context', False):
+            context_pairs.append((EGL_CONTEXT_OPENGL_DEBUG, EGL_TRUE))
         context_attrs = _attrib_array(context_pairs)
 
-        context = eglCreateContext(display, config[0], EGL_NO_CONTEXT, context_attrs)
+        # A request the driver will not serve is EGL_BAD_MATCH or
+        # EGL_BAD_ATTRIBUTE, which PyOpenGL's error checking raises rather than
+        # returning -- so the EGL_NO_CONTEXT check below never sees it.  Both
+        # mean the same thing here: this machine has no such context, which is
+        # a skip and not a failure.
+        try:
+            context = eglCreateContext(
+                display, config[0], EGL_NO_CONTEXT, context_attrs)
+        except EGLError as err:
+            context = EGL_NO_CONTEXT
+            reason = str(err.err)
+        else:
+            reason = 'the driver returned EGL_NO_CONTEXT'
         if context == EGL_NO_CONTEXT:
             self.skipTest(
-                'Driver did not provide an EGL %s %d.%d context' % (api, major, minor)
+                'No EGL %s %d.%d context on this device: %s'
+                % (api, major, minor, reason)
             )
 
         surface = eglCreatePbufferSurface(
@@ -258,6 +276,15 @@ class EGLDeviceBackend(object):
         # Offscreen pbuffer: nothing to present.  Tests read back with
         # glReadPixels, which implicitly finishes the pipeline.
         pass
+
+    def _make_current(self):
+        if self._egl_context is None:
+            raise RuntimeError('this backend has no context to make current')
+        display = _ensure_display()
+        if not eglMakeCurrent(
+            display, self._egl_surface, self._egl_surface, self._egl_context
+        ):
+            raise RuntimeError('eglMakeCurrent failed for this context')
 
     def _destroy_context(self):
         display = _display

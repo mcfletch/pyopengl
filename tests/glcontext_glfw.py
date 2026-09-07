@@ -87,6 +87,10 @@ class GLFWBackend(object):
             glfw.window_hint(getattr(glfw, hint), accum)
 
         glfw.window_hint(glfw.VISIBLE, glfw.TRUE if self.visible else glfw.FALSE)
+        glfw.window_hint(
+            glfw.OPENGL_DEBUG_CONTEXT,
+            glfw.TRUE if getattr(self, 'debug_context', False) else glfw.FALSE,
+        )
 
         try:
             window = glfw.create_window(
@@ -120,20 +124,10 @@ class GLFWBackend(object):
         if self._window is not None:
             glfw.swap_buffers(self._window)
 
-    def _context_handle(self):
-        """This window's GL context handle, read while it is current.
-
-        Another test's window may have been made current since; the handle the
-        dispatch table is keyed by is this context's, not whichever one happens
-        to be current now.
-        """
+    def _make_current(self):
         if self._window is None:
-            return None
-        try:
-            glfw.make_context_current(self._window)
-        except Exception:  # pragma: no cover - a context already gone
-            return None
-        return super()._context_handle()
+            raise RuntimeError('this backend has no window to make current')
+        glfw.make_context_current(self._window)
 
     def _destroy_context(self):
         if self._window is not None:

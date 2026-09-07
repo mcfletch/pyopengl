@@ -25,8 +25,7 @@ from OpenGL import _configflags, error, platform
 # which one is in use.
 import OpenGL.GL  # noqa: F401
 from OpenGL.GL import GL_NO_ERROR, GL_POINTS, glBegin, glEnable, glEnd, glGetError
-
-glfw = pytest.importorskip('glfw')
+from glcontext import Context
 
 pytestmark = pytest.mark.skipif(
     not _configflags.ERROR_CHECKING,
@@ -59,36 +58,20 @@ def suspension_flags():
 
 class TestAnAbandonedBeginBlock(unittest.TestCase):
     def setUp(self):
-        if not glfw.init():
-            self.skipTest('no glfw')
-        glfw.default_window_hints()
-        glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
-        self.windows = []
+        self.contexts = []
 
     def tearDown(self):
-        for window in self.windows:
-            glfw.make_context_current(window)
-            handle = platform.PLATFORM.GetCurrentContext()
-            if handle:
-                dispatch.forget_context(handle)
-            glfw.destroy_window(window)
-        glfw.make_context_current(None)
-        # Deliberately not glfw.terminate(): the library is initialised once
-        # for the whole run and shared with every other test.
+        for context in self.contexts:
+            context.release()
 
-    def _window(self):
+    def _context(self):
         """A compatibility context, since Begin/End only exists in one."""
-        glfw.window_hint(glfw.CONTEXT_VERSION_MAJOR, 2)
-        glfw.window_hint(glfw.CONTEXT_VERSION_MINOR, 1)
-        glfw.window_hint(glfw.OPENGL_PROFILE, glfw.OPENGL_ANY_PROFILE)
-        window = glfw.create_window(64, 64, 'begin-block', None, None)
-        if not window:
-            self.skipTest('could not create a 2.1 context')
-        self.windows.append(window)
-        return window
+        made = Context(gl_version=(2, 1), profile='compatibility')
+        self.contexts.append(made)
+        return made
 
-    def _become(self, window):
-        glfw.make_context_current(window)
+    def _become(self, context):
+        context.make_current()
         handle = platform.PLATFORM.GetCurrentContext()
         dispatch.make_current(handle)
         return handle
@@ -112,7 +95,7 @@ class TestAnAbandonedBeginBlock(unittest.TestCase):
         all, which would trade a silenced checker for a GL error on every
         vertex.
         """
-        self._become(self._window())
+        self._become(self._context())
         assert not any(suspension_flags().values())
         glBegin(GL_POINTS)
         try:
@@ -121,17 +104,17 @@ class TestAnAbandonedBeginBlock(unittest.TestCase):
             glEnd()
 
     def test_glend_turns_checking_back_on(self):
-        self._become(self._window())
+        self._become(self._context())
         glBegin(GL_POINTS)
         glEnd()
         assert not any(suspension_flags().values())
         assert self._checking_is_live()
 
     def test_making_another_context_current_ends_an_abandoned_block(self):
-        self._become(self._window())
+        self._become(self._context())
         glBegin(GL_POINTS)  # abandoned: what an exception in the block leaves
 
-        self._become(self._window())
+        self._become(self._context())
         assert self._checking_is_live(), (
             'a context created after an abandoned glBegin block inherited its '
             'suspended error checking'
@@ -143,15 +126,15 @@ class TestAnAbandonedBeginBlock(unittest.TestCase):
         Nothing calls ``make_current`` here -- the teardown reports the context
         is gone and the toolkit makes the next one current by itself.
         """
-        window = self._window()
-        handle = self._become(window)
+        context = self._context()
+        handle = self._become(context)
         glBegin(GL_POINTS)
 
         dispatch.forget_context(handle)
-        glfw.destroy_window(window)
-        self.windows.remove(window)
+        context.release()
+        self.contexts.remove(context)
 
-        glfw.make_context_current(self._window())
+        self._context().make_current()
         assert self._checking_is_live(), (
             'error checking stayed suspended after the context holding the '
             'abandoned block was destroyed'

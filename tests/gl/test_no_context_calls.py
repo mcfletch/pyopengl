@@ -17,24 +17,17 @@ import unittest
 import pytest
 
 from childenv import child_environment
+from glcontext import CHILD_PREAMBLE, NOTHING_TO_TEST_WITH
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT = os.path.dirname(HERE)
 
-SCRIPT = r'''
-import os, sys
+SCRIPT = CHILD_PREAMBLE + r'''
 if %(checking)r:
     import OpenGL
     OpenGL.CONTEXT_CHECKING = True
 
-import glfw
-if not glfw.init():
-    raise SystemExit(77)
-glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
-window = glfw.create_window(64, 64, 'no-context', None, None)
-if not window:                          # falsy, and not None: see glcontext
-    raise SystemExit(77)
-glfw.make_context_current(window)
+context = context_or_exit()
 
 from OpenGL.GL import glCreateProgram, glDeleteProgram, glGetError
 from OpenGL import error
@@ -42,9 +35,10 @@ from OpenGL import error
 program = glCreateProgram()
 glGetError()
 
-# What a cleanup handler faces: the context is gone by the time it runs.
-glfw.make_context_current(None)
-glfw.destroy_window(window)
+# What a cleanup handler faces: the context is gone by the time it runs, and
+# nothing told PyOpenGL -- which is the case this is about, so the layer is
+# deliberately not notified.
+context.release(forget=False)
 
 try:
     glDeleteProgram(program)
@@ -67,8 +61,8 @@ def behaviour(dispatch, checking):
         env=environment,
         timeout=300,
     )
-    if completed.returncode == 77:
-        pytest.skip('no GL context to lose: GLFW made none here')
+    if completed.returncode == NOTHING_TO_TEST_WITH:
+        pytest.skip('no GL context to lose here: %s' % (completed.stderr.strip(),))
     if completed.returncode != 0:
         pytest.skip('could not run under %s: %s' % (dispatch, completed.stderr[-400:]))
     return completed.stdout.strip().splitlines()[-1]

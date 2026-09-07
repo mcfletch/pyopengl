@@ -18,32 +18,25 @@ import sys
 import pytest
 
 from childenv import child_environment
+from glcontext import CHILD_PREAMBLE, NOTHING_TO_TEST_WITH
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 
-PROGRAM = r'''
+PROGRAM = CHILD_PREAMBLE + r'''
 import OpenGL
 OpenGL.ERROR_CHECKING = %(checking)r
 
-import glfw
-if not glfw.init():
-    raise SystemExit(77)
-glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
-glfw.window_hint(glfw.OPENGL_DEBUG_CONTEXT, glfw.TRUE)
-window = glfw.create_window(64, 64, 'debug-parity', None, None)
-if not window:
-    raise SystemExit(77)
-glfw.make_context_current(window)
+context = context_or_exit(debug_context=True)
 
 import OpenGL.GL as GL
 from OpenGL import error, _dispatch
 
 if not _dispatch.ACTIVE:
-    raise SystemExit(77)
+    raise SystemExit(NOTHING_TO_TEST_WITH)
 GL.glGetString(GL.GL_VERSION)
 if not _dispatch.use_debug_output():
-    raise SystemExit(77)
+    raise SystemExit(NOTHING_TO_TEST_WITH)
 %(scope)s
 
 try:
@@ -65,7 +58,7 @@ def run(checking, scope=''):
         env=environment,
         timeout=300,
     )
-    if completed.returncode == 77:
+    if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
     assert completed.returncode == 0, completed.stderr[-2000:]
     return completed.stdout.strip()
@@ -98,31 +91,23 @@ class TestDebugOutputReportsAGLErrorCode:
         assert run(checking=True) == 'raised %s' % (hex(0x0500),)  # GL_INVALID_ENUM
 
 
-RAISER_DECLINES = r'''
+RAISER_DECLINES = CHILD_PREAMBLE + r'''
 import OpenGL
 OpenGL.ERROR_CHECKING = True
 
-import glfw
-if not glfw.init():
-    raise SystemExit(77)
-glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
-glfw.window_hint(glfw.OPENGL_DEBUG_CONTEXT, glfw.TRUE)
-window = glfw.create_window(64, 64, 'declines', None, None)
-if not window:
-    raise SystemExit(77)
-glfw.make_context_current(window)
+context = context_or_exit(debug_context=True)
 
 import OpenGL.GL as GL
 from OpenGL import _dispatch
 from OpenGL._dispatch import support
 
 if not _dispatch.ACTIVE:
-    raise SystemExit(77)
+    raise SystemExit(NOTHING_TO_TEST_WITH)
 GL.glGetString(GL.GL_VERSION)
 # A context offering GL_KHR_debug is given it without asking, so the
 # glGetError half of this comparison has to say it wants the other one.
 if not _dispatch.use_debug_output(%(debug)r):
-    raise SystemExit(77)
+    raise SystemExit(NOTHING_TO_TEST_WITH)
 
 # A client that replaced the raiser with one that returns instead of raising.
 support.%(raiser)s = lambda *args, **named: None
@@ -156,7 +141,7 @@ def test_a_raiser_that_declines_does_not_become_a_SystemError(debug, raiser):
         env=environment,
         timeout=300,
     )
-    if completed.returncode == 77:
+    if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
     assert completed.returncode == 0, completed.stderr[-2000:]
     answer = completed.stdout.strip()
@@ -164,27 +149,19 @@ def test_a_raiser_that_declines_does_not_become_a_SystemError(debug, raiser):
     assert answer.startswith('NullFunctionError'), answer
 
 
-DISABLE = r'''
-import glfw
-if not glfw.init():
-    raise SystemExit(77)
-glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
-glfw.window_hint(glfw.OPENGL_DEBUG_CONTEXT, glfw.TRUE)
-window = glfw.create_window(64, 64, 'disable', None, None)
-if not window:
-    raise SystemExit(77)
-glfw.make_context_current(window)
+DISABLE = CHILD_PREAMBLE + r'''
+context = context_or_exit(debug_context=True)
 
 import OpenGL.GL as GL
 from OpenGL import _dispatch, dispatch
 
 if not _dispatch.ACTIVE:
-    raise SystemExit(77)
+    raise SystemExit(NOTHING_TO_TEST_WITH)
 GL.glGetString(GL.GL_VERSION)
 
 for _ in range(4):
     if not dispatch.use_debug_output():
-        raise SystemExit(77)
+        raise SystemExit(NOTHING_TO_TEST_WITH)
 held_after_enabling = len(dispatch._installed_callbacks)
 dispatch.use_debug_output(False)
 print(
@@ -209,7 +186,7 @@ def test_turning_debug_output_off_undoes_what_turning_it_on_did():
         env=environment,
         timeout=300,
     )
-    if completed.returncode == 77:
+    if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
     assert completed.returncode == 0, completed.stderr[-2000:]
     held, left, output, synchronous = completed.stdout.split()

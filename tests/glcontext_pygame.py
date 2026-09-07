@@ -110,6 +110,13 @@ class PygameBackend(object):
         if self._screen is not None:
             pygame.display.flip()
 
+    def _make_current(self):
+        """SDL keeps its one display context current, so there is nothing to
+        switch to: a second context is a second display, which pygame does not
+        offer.  A case wanting two at once asks for a backend that has them."""
+        if self._screen is None:
+            raise RuntimeError('this backend has no context to make current')
+
     def _destroy_context(self):
         if self._screen is not None:
             pygame.display.quit()

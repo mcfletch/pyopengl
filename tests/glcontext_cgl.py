@@ -20,7 +20,9 @@ and nothing in the test has to know.
 What macOS does not have, this skips rather than pretends: there is no OpenGL-ES
 through CGL, and no compatibility profile above 2.1 -- so a case wanting either
 is skipped with the reason, which is what a platform that cannot serve it should
-give.
+give.  A pixel format has no debug-context attribute either, so ``debug_context``
+makes an ordinary context here; macOS caps at GL 4.1 and has no ``GL_KHR_debug``
+to report through, and a case that needs the reporting checks for it.
 """
 
 from __future__ import annotations
@@ -119,6 +121,11 @@ class CGLBackend(object):
         # Nothing is presented from a framebuffer object.  Tests read back with
         # glReadPixels, which finishes the pipeline on its own.
         pass
+
+    def _make_current(self):
+        if self._cgl_context is None:
+            raise RuntimeError('this backend has no context to make current')
+        CGL.library().CGLSetCurrentContext(self._cgl_context)
 
     def _destroy_context(self):
         if self._target is not None:

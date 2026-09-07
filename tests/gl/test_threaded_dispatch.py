@@ -10,35 +10,33 @@ whatever the thread that created it was using.
 import threading
 import unittest
 
-import pytest
-
 import OpenGL._dispatch as dispatch
 import OpenGL.GL  # noqa: F401  -- installs the implementation under test
 from OpenGL import platform
-
-glfw = pytest.importorskip('glfw')
+from glcontext import Context
 
 
 class TestThreadedDispatch(unittest.TestCase):
     def setUp(self):
-        if not glfw.init():
-            self.skipTest('no glfw')
-        glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
-        glfw.window_hint(glfw.CONTEXT_VERSION_MAJOR, 3)
-        glfw.window_hint(glfw.CONTEXT_VERSION_MINOR, 3)
-        self.window = glfw.create_window(64, 64, 'threaded', None, None)
-        if not self.window:
-            self.skipTest('could not create a context')
+        self.context = Context()
+        # A context is current on the thread that made it, and a thread cannot
+        # take one another thread holds -- so this one lets go before handing
+        # it to a worker, which is what an application with a render thread
+        # does too.
+        self._let_go()
 
     def tearDown(self):
-        from glcontext import forget_context
-        from OpenGL import platform
+        self.context.release()
 
-        glfw.make_context_current(self.window)
-        forget_context(platform.PLATFORM.GetCurrentContext())
-        glfw.make_context_current(None)
-        glfw.destroy_window(self.window)
-        # Deliberately not glfw.terminate(): see test_multi_context.
+    def _take(self):
+        """Take the context on this thread, and say so."""
+        self.context.make_current()
+        if dispatch.ACTIVE:
+            dispatch.make_current(platform.PLATFORM.GetCurrentContext())
+
+    def _let_go(self):
+        """Give the thread back, so the next one may take it."""
+        platform.PLATFORM.releaseCurrentContext()
 
     def test_a_fresh_thread_dispatches_correctly(self):
         """The context is made current *on the worker*, as the GL requires."""
@@ -47,14 +45,12 @@ class TestThreadedDispatch(unittest.TestCase):
         answers = {}
 
         def worker():
-            glfw.make_context_current(self.window)
-            if dispatch.ACTIVE:
-                dispatch.make_current(platform.PLATFORM.GetCurrentContext())
+            self._take()
             try:
                 answers['version'] = glGetString(GL_VERSION)
             except Exception as raised:  # noqa: BLE001 - recorded, then asserted
                 answers['error'] = raised
-            glfw.make_context_current(None)
+            self._let_go()
 
         thread = threading.Thread(target=worker)
         thread.start()
@@ -67,9 +63,7 @@ class TestThreadedDispatch(unittest.TestCase):
         from OpenGL.GL import GL_VERSION, glGetString
 
         self.test_a_fresh_thread_dispatches_correctly()
-        glfw.make_context_current(self.window)
-        if dispatch.ACTIVE:
-            dispatch.make_current(platform.PLATFORM.GetCurrentContext())
+        self._take()
         assert glGetString(GL_VERSION)
 
     def test_several_threads_in_turn_all_resolve(self):
@@ -81,11 +75,9 @@ class TestThreadedDispatch(unittest.TestCase):
 
         def worker(index):
             with lock:
-                glfw.make_context_current(self.window)
-                if dispatch.ACTIVE:
-                    dispatch.make_current(platform.PLATFORM.GetCurrentContext())
+                self._take()
                 results.append((index, glGetString(GL_VERSION)))
-                glfw.make_context_current(None)
+                self._let_go()
 
         threads = [threading.Thread(target=worker, args=(i,)) for i in range(4)]
         for thread in threads:

@@ -28,6 +28,7 @@ the API base supplies ``self.gl`` and any API-specific helpers.
 from __future__ import print_function
 
 import os
+import sys
 import time
 import ctypes
 import logging
@@ -121,6 +122,138 @@ def pick_backend():
 #: Desktop GL starts with the number; OpenGL-ES puts "OpenGL ES" (or
 #: "OpenGL ES-CM") in front of it.
 _VERSION = re.compile(r'(?:OpenGL\s+ES(?:-CM|-SC)?\s+)?(\d+)\.(\d+)')
+
+
+class Context(object):
+    """A GL context outside a TestCase, on whichever backend this machine has.
+
+    :func:`pick_backend` hands out a mixin for a rendering case; this is the
+    same backend, the same ``TEST_WINDOWING`` choice and the same skips, for
+    the cases that cannot be one -- a fixture holding two contexts at once, a
+    worker thread taking one, a child process settling a question that is
+    settled once per process.  Such a case that opens a GLFW window of its own
+    is absent on every machine whose contexts come from somewhere else: an EGL
+    device in a container, CGL on a macOS runner with no window server.
+
+    Requirements are :class:`ContextTestCase`'s, as keywords::
+
+        with Context(profile='core', gl_version=(3, 3)) as context:
+            ...
+
+    Raises :exc:`unittest.SkipTest` where the machine cannot serve the
+    request -- which is what the backends raise, and what pytest and unittest
+    both read as a skip -- including where the context that came back is older
+    than the one asked for.  See :func:`version_shortfall` for why that gap is
+    a skip and not a failure.
+    """
+
+    #: the entry-point module each API's version string is read through.
+    _API_MODULES = {'gl': 'OpenGL.GL', 'gles': 'OpenGL.GLES2', 'es': 'OpenGL.GLES2'}
+
+    def __init__(self, **requirements):
+        namespace = dict(requirements, runTest=lambda self: None)
+        self._case = type(
+            'StandaloneContext', (pick_backend(), ContextTestCase), namespace,
+        )('runTest')
+        self._case._create_context()
+        self._released = False
+        try:
+            self._check_version()
+        except BaseException:
+            self.release()
+            raise
+
+    def _check_version(self):
+        """Refuse a context older than the one asked for, as setUp does."""
+        case = self._case
+        if case.profile == 'any':
+            return
+        module = importlib.import_module(
+            self._API_MODULES[getattr(case, 'api', 'gl').lower()]
+        )
+        case.gl = case.gl3 = module
+        shortfall = version_shortfall(
+            case.getString(module.GL_VERSION), case.gl_version)
+        if shortfall:
+            raise unittest.SkipTest(shortfall)
+
+    @property
+    def gl_version(self):
+        return self._case.gl_version
+
+    @property
+    def profile(self):
+        return self._case.profile
+
+    @property
+    def handle(self):
+        """This context's handle, whichever context is current now."""
+        return self._case._context_handle()
+
+    def make_current(self):
+        """Make this the context the calling thread draws through."""
+        self._case._make_current()
+        return self
+
+    def release(self, forget=True):
+        """Destroy the context and tell the dispatch layer it is gone.
+
+        Safe to call twice, so a caller that released explicitly can still
+        leave the ``with`` block.
+
+        ``forget=False`` destroys it *without* saying so, which is the state a
+        program is in when it tears a context down and does not notify
+        PyOpenGL -- what a cleanup handler running after its context has gone
+        actually faces.  A case about that behaviour asks for it; everything
+        else wants the notification, since the handle is an address the driver
+        hands out again.
+        """
+        if not self._released:
+            self._released = True
+            if forget:
+                self._case._release_context()
+            else:
+                self._case._destroy_context()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *exception):
+        self.release()
+
+
+#: What a child process exits with to say there is nothing here to test with.
+NOTHING_TO_TEST_WITH = 77
+
+#: The first lines of a child process that needs a context.
+#:
+#: Several cases run in a fresh interpreter, because what they check is settled
+#: once per process: which dispatch implementation is installed, what a call
+#: with no context does, what the attribute surface looks like.  They need a
+#: context on the same backend the in-process suites use, or they are absent on
+#: every machine whose contexts do not come from GLFW.  This puts this
+#: directory on the child's path and hands it :func:`context_or_exit`;
+#: interpolate it at the top of the script.
+CHILD_PREAMBLE = (
+    'import sys\n'
+    'sys.path.insert(0, %r)\n'
+    'from glcontext import context_or_exit, NOTHING_TO_TEST_WITH\n'
+) % (os.path.dirname(os.path.abspath(__file__)),)
+
+
+def context_or_exit(**requirements):
+    """A :class:`Context` for a child process, or exit saying there is none.
+
+    A child cannot skip itself -- the parent reads its exit status -- so a
+    machine that cannot serve the request ends the child with
+    :data:`NOTHING_TO_TEST_WITH` and the reason on stderr, which the parents
+    here turn into a skip.
+    """
+    try:
+        return Context(**requirements)
+    except unittest.SkipTest as reason:
+        print(reason, file=sys.stderr)
+        raise SystemExit(NOTHING_TO_TEST_WITH)
 
 
 def window_was_made(window):
@@ -226,6 +359,11 @@ class ContextTestCase(unittest.TestCase):
     stencil_size = 8
     #: accumulation-buffer bits (legacy; request non-zero to use glAccum).
     accum_size = 0
+    #: Ask for a debug context, so the driver will report through
+    #: GL_KHR_debug.  A backend with no way to ask makes an ordinary context:
+    #: the extension is the authority on whether reporting is available, and a
+    #: case that needs it checks for it.
+    debug_context = False
     width = height = 128
     #: Off by default: a suite that maps windows takes over the screen of
     #: whoever runs it, and steals focus while they are doing something
@@ -251,6 +389,15 @@ class ContextTestCase(unittest.TestCase):
     def _swap(self):
         raise NotImplementedError
 
+    def _make_current(self):
+        """Make this instance's context current on the calling thread.
+
+        Every backend can, and a case that holds more than one context at a
+        time -- or hands one to a worker thread -- has no other way to say
+        which context it means.
+        """
+        raise NotImplementedError
+
     def _destroy_context(self):
         raise NotImplementedError
 
@@ -258,12 +405,15 @@ class ContextTestCase(unittest.TestCase):
     def _context_handle(self):
         """The GL context handle the dispatch table is keyed by, or ``None``.
 
-        Read while the context is still current.  A backend whose context is
-        not necessarily current at teardown makes it so first.
+        This instance's, not whichever context happens to be current: another
+        case's may have been made current since, and the table to forget is
+        the one belonging to the context about to be destroyed.  So the
+        context is made current first.
         """
         try:
             from OpenGL import platform
 
+            self._make_current()
             return platform.PLATFORM.GetCurrentContext()
         except Exception:              # pragma: no cover - a context already gone
             return None

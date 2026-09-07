@@ -20,8 +20,7 @@ from OpenGL import platform
 # the first thing to build an entry point.  These cases ask which one is in
 # use, so the import has to have happened first.
 import OpenGL.GL  # noqa: F401
-
-glfw = pytest.importorskip('glfw')
+from glcontext import Context
 
 pytestmark = pytest.mark.skipif(
     not dispatch.AVAILABLE, reason='the C dispatch extension is not built'
@@ -32,48 +31,31 @@ class TestMultipleContexts(unittest.TestCase):
     def setUp(self):
         if not dispatch.ACTIVE:
             self.skipTest('PYOPENGL_DISPATCH=c selects the implementation under test')
-        if not glfw.init():
-            self.skipTest('no glfw')
-        glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
-        self.windows = []
+        self.contexts = []
 
     def tearDown(self):
-        for window in self.windows:
-            handle = self._handle_of(window)
-            if handle:
-                dispatch.forget_context(handle)
-            glfw.destroy_window(window)
-        glfw.make_context_current(None)
-        # Deliberately not glfw.terminate(): the library is initialised once
-        # for the whole run and shared with every other test, and tearing it
-        # down here leaves them calling into an uninitialised GLFW.
+        # Context.release() forgets each table as its context goes, which is
+        # what these cases are counting.
+        for context in self.contexts:
+            context.release()
 
-    def _handle_of(self, window):
-        glfw.make_context_current(window)
-        return platform.PLATFORM.GetCurrentContext()
-
-    def _window(self, major, minor, core=False):
-        glfw.window_hint(glfw.CONTEXT_VERSION_MAJOR, major)
-        glfw.window_hint(glfw.CONTEXT_VERSION_MINOR, minor)
-        glfw.window_hint(
-            glfw.OPENGL_PROFILE,
-            glfw.OPENGL_CORE_PROFILE if core else glfw.OPENGL_ANY_PROFILE,
+    def _context(self, major, minor, core=False):
+        made = Context(
+            gl_version=(major, minor),
+            profile='core' if core else 'compatibility',
         )
-        window = glfw.create_window(64, 64, 'ctx', None, None)
-        if not window:
-            self.skipTest('could not create a %d.%d context' % (major, minor))
-        self.windows.append(window)
-        return window
+        self.contexts.append(made)
+        return made
 
-    def _become(self, window):
-        glfw.make_context_current(window)
+    def _become(self, context):
+        context.make_current()
         handle = platform.PLATFORM.GetCurrentContext()
         dispatch.make_current(handle)
         return handle
 
     def test_two_contexts_hold_two_tables(self):
-        first = self._window(3, 3, core=True)
-        second = self._window(2, 1)
+        first = self._context(3, 3, core=True)
+        second = self._context(2, 1)
         from OpenGL._dispatch import _c as extension
         from OpenGL.GL import GL_VERSION, glGetString
 
@@ -90,8 +72,8 @@ class TestMultipleContexts(unittest.TestCase):
         from OpenGL._dispatch import _c as extension
         from OpenGL.GL import glBindTexture
 
-        first = self._window(3, 3, core=True)
-        second = self._window(3, 3, core=True)
+        first = self._context(3, 3, core=True)
+        second = self._context(3, 3, core=True)
 
         self._become(first)
         glBindTexture(0x0DE1, 0)
@@ -113,8 +95,8 @@ class TestMultipleContexts(unittest.TestCase):
         """
         from OpenGL.GL import GL_VERSION, glGetString
 
-        first = self._window(3, 3, core=True)
-        second = self._window(2, 1)
+        first = self._context(3, 3, core=True)
+        second = self._context(2, 1)
 
         self._become(first)
         hoisted = glGetString
@@ -129,7 +111,7 @@ class TestMultipleContexts(unittest.TestCase):
         from OpenGL._dispatch import _c as extension
         from OpenGL.GL import GL_VERSION, glGetString
 
-        window = self._window(3, 3, core=True)
+        window = self._context(3, 3, core=True)
         handle = self._become(window)
         glGetString(GL_VERSION)
         before = extension.context_count()

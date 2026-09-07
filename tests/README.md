@@ -133,6 +133,14 @@ Selected by `pick_backend()` from the `TEST_WINDOWING` environment variable
 | `egl`            | **headless EGL device** (`glcontext_egl.py`) | renders directly on a GPU with no window system — the right choice for CI / containers where the compositor is software-rendered. Forces `PYOPENGL_PLATFORM=egl`; ES vs GL both work via an offscreen pbuffer. |
 | `cgl`            | **headless macOS context** (`glcontext_cgl.py`) | CGL is the layer NSGL and AGL are built on and the only one that hands out a context with no window server, which is what a macOS CI runner has. Framebuffer zero belongs to a drawable and there is none, so the backend binds a framebuffer object of the requested size. No OpenGL-ES, and no compatibility profile above 2.1; `TEST_CGL_RENDERER` pins the renderer kind. |
 
+On an NVIDIA driver, roughly one run in ten dies with SIGSEGV while a context is
+torn down. The faulting frame is inside `libnvidia-eglcore`, reached through
+`eglDestroyContext` (or, under `glfw`, through `glfwDestroyWindow` →
+`destroyContextEGL`, which calls it); no frame between the fault and the call
+belongs to PyOpenGL. `gdb -q -batch -ex run -ex 'bt 40' --args python -m pytest
+…` catches it in a few attempts. Mesa and the macOS backends do not show it, so
+neither does CI.
+
 A fixture or a child script that opens its own window — several must, for a
 hint `pick_backend` does not take or a question that is settled once per
 process — has one trap to avoid: **`glfw.create_window` answers a NULL

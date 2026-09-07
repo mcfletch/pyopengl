@@ -1,13 +1,12 @@
 """Fixes for defects found in review, each with the property it restores."""
 
 import gc
-import os
 
 import pytest
 
 import OpenGL._dispatch as dispatch
 from OpenGL import _configflags
-from glcontext import window_was_made
+from glcontext import Context
 
 pytestmark = pytest.mark.skipif(
     not dispatch.AVAILABLE or _configflags.DISPATCH != 'c',
@@ -176,23 +175,9 @@ class TestKeywordArguments:
 
 @pytest.fixture(scope='module')
 def context():
-    """A hidden context, for the checks that need the driver to answer."""
-    glfw = pytest.importorskip('glfw')
-    if not glfw.init():
-        pytest.skip('no glfw')
-    glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
-    window = glfw.create_window(64, 64, 'review-fixes', None, None)
-    if not window_was_made(window):
-        pytest.skip('no usable GL context')
-    glfw.make_context_current(window)
-    yield window
-    from glcontext import forget_context
-    from OpenGL import platform
-
-    glfw.make_context_current(window)
-    forget_context(platform.PLATFORM.GetCurrentContext())
-    glfw.destroy_window(window)
-    glfw.make_context_current(None)
+    """A context, for the checks that need the driver to answer."""
+    with Context() as made:
+        yield made
 
 
 def _undersized_arrays():

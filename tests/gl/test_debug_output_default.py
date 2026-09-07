@@ -19,33 +19,25 @@ import sys
 import pytest
 
 from childenv import child_environment
+from glcontext import CHILD_PREAMBLE, NOTHING_TO_TEST_WITH
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 
-#: A window with a debug context, or exit 77 to say there is nothing to test
-#: with.  Same shape as tests/gl/test_debug_output_parity.py uses.
-CONTEXT = '''
-import glfw
-if not glfw.init():
-    raise SystemExit(77)
-glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
-glfw.window_hint(glfw.OPENGL_DEBUG_CONTEXT, glfw.TRUE)
-window = glfw.create_window(64, 64, 'debug-default', None, None)
-if not window:
-    raise SystemExit(77)
-glfw.make_context_current(window)
-'''
-
-DEFAULT = '''
+#: The preamble runs before the context is made, because what it sets --
+#: OpenGL.ERROR_DEBUG_OUTPUT and friends -- is read as the entry points are
+#: built.
+DEFAULT = CHILD_PREAMBLE + '''
 %(preamble)s
-''' + CONTEXT + '''
+
+context = context_or_exit(debug_context=True)
+
 import OpenGL.GL as GL
 from OpenGL import dispatch, error
 
 GL.glGetString(GL.GL_VERSION)
 if not dispatch.debug_output_available():
-    raise SystemExit(77)
+    raise SystemExit(NOTHING_TO_TEST_WITH)
 %(body)s
 print(dispatch.error_checking_mode())
 try:
@@ -72,7 +64,7 @@ def run(implementation, preamble='', body=''):
         env=environment,
         timeout=300,
     )
-    if completed.returncode == 77:
+    if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
     assert completed.returncode == 0, completed.stderr[-2000:]
     mode, raised = completed.stdout.strip().splitlines()
@@ -117,8 +109,9 @@ def test_turning_it_on_again_is_the_way_back(implementation):
     assert raised == 'raised 0x500'
 
 
-FOREIGN = '''
-''' + CONTEXT + '''
+FOREIGN = CHILD_PREAMBLE + '''
+context = context_or_exit(debug_context=True)
+
 import ctypes
 
 import OpenGL.GL as GL
@@ -127,7 +120,7 @@ from OpenGL.raw.GL._types import GLDEBUGPROC
 
 GL.glGetString(GL.GL_VERSION)
 if not dispatch.debug_output_available():
-    raise SystemExit(77)
+    raise SystemExit(NOTHING_TO_TEST_WITH)
 
 # What an application using GL_KHR_debug for its own diagnostics does.
 seen = []
@@ -147,15 +140,16 @@ else:
 '''
 
 
-DISPLACED = '''
-''' + CONTEXT + '''
+DISPLACED = CHILD_PREAMBLE + '''
+context = context_or_exit(debug_context=True)
+
 import OpenGL.GL as GL
 from OpenGL import dispatch, error
 from OpenGL.raw.GL._types import GLDEBUGPROC
 
 GL.glGetString(GL.GL_VERSION)
 if dispatch.error_checking_mode() != 'debug-output':
-    raise SystemExit(77)
+    raise SystemExit(NOTHING_TO_TEST_WITH)
 
 # An application that installs its own callback *after* PyOpenGL armed the
 # context -- or, indistinguishably, a context whose handle was recycled from a
@@ -196,7 +190,7 @@ def test_an_error_is_noticed_even_where_the_callback_is_no_longer_ours(implement
         env=environment,
         timeout=300,
     )
-    if completed.returncode == 77:
+    if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
     assert completed.returncode == 0, completed.stderr[-2000:]
     noticed, code, mode = completed.stdout.strip().split()
@@ -220,7 +214,7 @@ def test_an_application_callback_is_not_taken_over(implementation):
         env=environment,
         timeout=300,
     )
-    if completed.returncode == 77:
+    if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
     assert completed.returncode == 0, completed.stderr[-2000:]
     took, mode, raised = completed.stdout.strip().splitlines()
