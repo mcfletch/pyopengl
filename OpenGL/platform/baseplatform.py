@@ -12,12 +12,27 @@ log = logging.getLogger(__name__)
 
 
 class lazy_property(object):
+    """An attribute worked out when it is first read, then cached on the instance
+
+    The platform objects describe libraries, and finding one means loading it.
+    Doing that for every attribute at import would load libraries the program
+    never asks about.
+    """
+
     def __init__(self, function):
         self.fget = function
+        self.__name__ = function.__name__
+        self.__doc__ = function.__doc__
 
-    def __get__(self, obj, cls):
+    def __get__(self, obj, cls=None):
+        if obj is None:
+            # Read from the class, where there is no instance to work anything
+            # out for.  Answering with the descriptor is what every other
+            # descriptor in Python does, and it is how help(), inspect and a
+            # documentation build ask a class what it has without owning one.
+            return self
         value = self.fget(obj)
-        setattr(obj, self.fget.__name__, value)
+        setattr(obj, self.__name__, value)
         return value
 
 
