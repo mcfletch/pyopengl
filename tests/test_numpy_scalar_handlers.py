@@ -54,3 +54,74 @@ def test_the_scalar_type_has_a_handler(name):
     if scalar_type is None:
         pytest.skip('this numpy has no %s' % (name,))
     ArrayDatatype.getHandler(scalar_type(1))
+
+
+class TestPassingAScalarAsAnArgument:
+    """A numpy scalar where a plain ``GLint`` / ``GLfloat`` is wanted.
+
+    ctypes converts a numpy *integer* scalar itself, through ``__index__``, so
+    ``glBindTexture(GL_TEXTURE_2D, glGenTextures(2)[0])`` works with nothing
+    doing anything on its behalf.  A numpy *float* where an integer is wanted
+    is a caller's mistake and is refused.
+
+    ``ALLOW_NUMPY_SCALARS`` used to switch on a retry through ``long()`` that
+    accepted the float and truncated it.  It has no effect from 4.0, and these
+    run in children because the flag is read while the types are being built.
+    """
+
+    #: Reported as three words on stdout: whether the flag was set, whether an
+    #: integer scalar converted, whether a float scalar converted.
+    REPORT = r'''
+import json
+import numpy
+
+from OpenGL import _configflags
+from OpenGL.raw.GL import _types
+
+
+def converts(value):
+    try:
+        _types.GLint.from_param(value)
+    except TypeError:
+        return False
+    return True
+
+
+print(json.dumps({
+    'flag': bool(_configflags.ALLOW_NUMPY_SCALARS),
+    'integer': converts(numpy.uint32(7)),
+    'float': converts(numpy.float32(1.5)),
+}))
+'''
+
+    def report(self, **environment):
+        import json
+        import os
+        import subprocess
+        import sys
+
+        from childenv import child_environment
+
+        completed = subprocess.run(
+            [sys.executable, '-c', self.REPORT],
+            capture_output=True, text=True, timeout=300,
+            env=child_environment(**environment),
+        )
+        assert completed.returncode == 0, completed.stderr[-2000:]
+        return json.loads(completed.stdout)
+
+    def test_an_integer_scalar_is_accepted(self):
+        assert self.report()['integer']
+
+    def test_a_float_scalar_is_refused_where_an_integer_is_wanted(self):
+        assert not self.report()['float']
+
+    def test_asking_for_the_old_behaviour_does_not_bring_it_back(self):
+        """The flag is readable, and reading it is all it does now."""
+        answered = self.report(PYOPENGL_ALLOW_NUMPY_SCALARS='1')
+        assert answered['flag'], 'the flag no longer reads back at all'
+        assert answered['integer']
+        assert not answered['float'], (
+            'ALLOW_NUMPY_SCALARS still installs the long() retry, which '
+            'accepts a numpy float where an integer is wanted'
+        )

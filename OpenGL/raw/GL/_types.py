@@ -37,37 +37,17 @@ def _get_ctypes_version():
     return [int(i) for i in ctypes.__version__.split('.')[:3]]
 ctypes_version = _get_ctypes_version()
 
+
 # Basic OpenGL data-types as ctypes declarations...
-def _defineType( name, baseType, convertFunc = long ):
-    from OpenGL import _configflags
-    do_wrapping = (
-        _configflags.ALLOW_NUMPY_SCALARS or # explicitly require
-        (( # or we are using Python 2.5.x ctypes which doesn't support uint type numpy scalars
-            ctypes_version < [1,1,0]
-            and baseType in (ctypes.c_uint,ctypes.c_uint64,ctypes.c_ulong,ctypes.c_ushort)
-        ) or
-        ( # or we are using Python 2.5.x (x < 2) ctypes which doesn't support any numpy int scalars
-            ctypes_version < [1,0,2]
-            and baseType in (ctypes.c_int,ctypes.c_int64,ctypes.c_long,ctypes.c_short)
-        ))
-    )
-    if do_wrapping:
-        original = baseType.from_param
-        if not getattr( original, 'from_param_numpy_scalar', False ):
-            def from_param( x, typeCode=None ):
-                try:
-                    return original( x )
-                except TypeError as err:
-                    try:
-                        return original( convertFunc(x) )
-                    except TypeError:
-                        raise err
-            from_param = staticmethod( from_param )
-            setattr( baseType, 'from_param', from_param )
-            baseType.from_param_numpy_scalar = True
-        return baseType
-    else:
-        return baseType
+def _defineType(name, baseType, convertFunc=long):
+    """Name a GL scalar type after the ctypes type that carries it.
+
+    ``convertFunc`` is kept in the signature because the generated modules and
+    OpenGL.raw.GLES1 pass it positionally; nothing reads it.  It named the
+    conversion ``ALLOW_NUMPY_SCALARS`` used to retry through, which is gone --
+    see that flag in ``OpenGL/__init__.py``.
+    """
+    return baseType
 
 GLvoid = None
 GLboolean = _defineType( 'GLboolean', ctypes.c_ubyte, bool )

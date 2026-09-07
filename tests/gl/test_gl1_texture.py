@@ -81,11 +81,12 @@ class TestTextureNamesAndResidence(GLTestCase):
         """``glGenTextures(2)`` hands back array elements, not Python ints.
 
         With numpy installed those elements are ``numpy.uint32``, and passing
-        one to the next call is the obvious thing to write.  ``OpenGL.__init__``
-        documents an ``ALLOW_NUMPY_SCALARS`` flag for this and defaults it off;
-        nothing in the library reads the flag, and the scalars are accepted
-        either way.  This records the behaviour a caller actually gets, which
-        is the one worth not breaking.
+        one to the next call is the obvious thing to write.  It works, and
+        without help: ctypes converts any numpy *integer* scalar itself, so the
+        ``ALLOW_NUMPY_SCALARS`` flag that ``OpenGL/__init__.py`` documents for
+        this is not what makes it work and defaults off.  What the flag adds is
+        a retry through ``long()``, which reaches a numpy *float* where an
+        integer is wanted -- see ``OpenGL/raw/GL/_types.py``.
         """
         textures = glGenTextures(2)
         for texture in textures:

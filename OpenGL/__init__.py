@@ -153,16 +153,23 @@ import occurs the flags should no longer be changed.
 
         Default: False
 
-    ALLOW_NUMPY_SCALARS -- if True, we will wrap
-        all GLint/GLfloat calls conversions with wrappers
-        that allow for passing numpy scalar values.
+    ALLOW_NUMPY_SCALARS -- no effect from 4.0; the flag is
+        still readable so that setting it is not an error.
 
-        Note that this is experimental, *not* reliable,
-        and very slow!
+        A numpy integer scalar is accepted wherever an
+        integer is wanted, with this or without it: ctypes
+        converts it through __index__.  So the value a call
+        handed back may be passed straight to the next one,
+        which is what the flag was wanted for:
 
-        Note that byte/char types are not wrapped.
+            textures = glGenTextures(2)
+            glBindTexture(GL_TEXTURE_2D, textures[0])
 
-        Default: False
+        What the flag switched on beyond that was a further
+        retry through int(), which also accepted a numpy
+        *float* where an integer was wanted and truncated it
+        silently. That is a caller's mistake rather than a
+        conversion to make for them, so it is gone.
 
     UNSIGNED_BYTE_IMAGES_AS_STRING -- if True, we will return
         GL_UNSIGNED_BYTE image-data as strings, instead of arrays
