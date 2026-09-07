@@ -71,11 +71,14 @@ CONDITIONAL_BY_DESIGN = {
 SURVEY = r'''
 import json, sys
 import glfw
-glfw.init()
+if not glfw.init():
+    raise SystemExit(77)
 glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
 glfw.window_hint(glfw.CONTEXT_VERSION_MAJOR, 4)
 glfw.window_hint(glfw.CONTEXT_VERSION_MINOR, 6)
 window = glfw.create_window(64, 64, 'survey', None, None)
+if not window:                          # falsy, and not None: see glcontext
+    raise SystemExit(77)
 glfw.make_context_current(window)
 
 import OpenGL.GL as GL
@@ -124,6 +127,8 @@ def survey(dispatch):
         env=environment,
         timeout=300,
     )
+    if completed.returncode == 77:
+        pytest.skip('no GL context to survey through: GLFW made none here')
     if completed.returncode != 0:
         pytest.skip('could not survey under %s: %s' % (dispatch, completed.stderr[-400:]))
     return json.loads(completed.stdout)

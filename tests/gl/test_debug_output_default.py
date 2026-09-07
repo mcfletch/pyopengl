@@ -32,7 +32,7 @@ if not glfw.init():
 glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
 glfw.window_hint(glfw.OPENGL_DEBUG_CONTEXT, glfw.TRUE)
 window = glfw.create_window(64, 64, 'debug-default', None, None)
-if window is None:
+if not window:
     raise SystemExit(77)
 glfw.make_context_current(window)
 '''

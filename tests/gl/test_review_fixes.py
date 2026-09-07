@@ -7,6 +7,7 @@ import pytest
 
 import OpenGL._dispatch as dispatch
 from OpenGL import _configflags
+from glcontext import window_was_made
 
 pytestmark = pytest.mark.skipif(
     not dispatch.AVAILABLE or _configflags.DISPATCH != 'c',
@@ -181,7 +182,7 @@ def context():
         pytest.skip('no glfw')
     glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
     window = glfw.create_window(64, 64, 'review-fixes', None, None)
-    if window is None:
+    if not window_was_made(window):
         pytest.skip('no usable GL context')
     glfw.make_context_current(window)
     yield window

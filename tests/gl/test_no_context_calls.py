@@ -28,9 +28,12 @@ if %(checking)r:
     OpenGL.CONTEXT_CHECKING = True
 
 import glfw
-glfw.init()
+if not glfw.init():
+    raise SystemExit(77)
 glfw.window_hint(glfw.VISIBLE, glfw.FALSE)
 window = glfw.create_window(64, 64, 'no-context', None, None)
+if not window:                          # falsy, and not None: see glcontext
+    raise SystemExit(77)
 glfw.make_context_current(window)
 
 from OpenGL.GL import glCreateProgram, glDeleteProgram, glGetError
@@ -64,6 +67,8 @@ def behaviour(dispatch, checking):
         env=environment,
         timeout=300,
     )
+    if completed.returncode == 77:
+        pytest.skip('no GL context to lose: GLFW made none here')
     if completed.returncode != 0:
         pytest.skip('could not run under %s: %s' % (dispatch, completed.stderr[-400:]))
     return completed.stdout.strip().splitlines()[-1]

@@ -123,6 +123,23 @@ def pick_backend():
 _VERSION = re.compile(r'(?:OpenGL\s+ES(?:-CM|-SC)?\s+)?(\d+)\.(\d+)')
 
 
+def window_was_made(window):
+    """Whether GLFW actually made the window it was asked for.
+
+    ``glfw.create_window`` answers a **NULL** ``LP__GLFWwindow`` where it could
+    not -- no accelerated pixel format, no display, a version the driver will
+    not give -- and a NULL ctypes pointer is falsy but *not* ``None``.  So
+    ``window is None`` reads a refusal as a window: the caller makes it
+    current, gets no context, and every call through it answers zero.  The
+    cases that follow then fail on what they assert rather than skipping on
+    what they have, and the reason is nowhere in the failure.
+
+    Used by the fixtures here; a child-process script writes ``if not window``,
+    which is the same test.
+    """
+    return bool(window)
+
+
 def forget_context(handle):
     """Tell the dispatch layer a context is gone.
 
@@ -337,10 +354,24 @@ class ContextTestCase(unittest.TestCase):
         return buf[0] if count == 1 else list(buf)
 
     def version(self):
-        """Return the context version as a (major, minor) int tuple."""
-        major = self.getInteger(self.gl.GL_MAJOR_VERSION)
-        minor = self.getInteger(self.gl.GL_MINOR_VERSION)
-        return (major, minor)
+        """The context's version as a ``(major, minor)`` int tuple.
+
+        Read from ``GL_VERSION``, which every context answers.
+        ``GL_MAJOR_VERSION`` arrived with GL 3.0 and ES 3.0, so asking a 2.1
+        context for it is ``GL_INVALID_ENUM`` rather than a version -- and 2.1
+        is the only profile macOS gives with fixed function in it, which is the
+        one every compatibility case here runs on.
+
+        The integer queries answer where the driver's string cannot be read;
+        they exist wherever such a string does.
+        """
+        found = parse_gl_version(self.getString(self.gl.GL_VERSION))
+        if found is not None:
+            return found
+        return (
+            self.getInteger(self.gl.GL_MAJOR_VERSION),
+            self.getInteger(self.gl.GL_MINOR_VERSION),
+        )
 
     def extensions(self):
         """Return the set of supported extension strings.
