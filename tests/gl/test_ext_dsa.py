@@ -208,10 +208,11 @@ class TestEXTDSA(GLTestCase):
             glNamedBufferDataEXT(bb, 64, None, GL_STATIC_DRAW)
             glTextureBufferRangeEXT(tbr, GL_TEXTURE_BUFFER, GL_R32F, bb, 0, 64)
         self.check_error('dsa texture dims')
-        # the EXT_DSA multisample-storage, texture-from-renderbuffer and sparse
-        # page-commitment paths are not implemented by this driver; the calls
-        # still drive the wrappers, and exercise() tolerates the GLError
-        with self.exercise():
+        with self.exercise(
+            'the EXT_DSA multisample-storage, texture-from-renderbuffer and '
+            'sparse page-commitment paths are not implemented by this driver; '
+            'the calls still drive the wrappers'
+        ):
             tms = one(glGenTextures(1))
             glTextureStorage2DMultisampleEXT(
                 tms, GL_TEXTURE_2D_MULTISAMPLE, 4, GL_RGBA8, 4, 4, GL_TRUE
@@ -244,7 +245,10 @@ class TestEXTDSA(GLTestCase):
         self.check_error('dsa compressed texture')
         # compressed 1D/3D targets are not valid for ETC2; the calls still drive
         # the wrappers, and exercise() tolerates the resulting GLError
-        with self.exercise():
+        with self.exercise(
+            'compressed 1D/3D targets are not valid for ETC2; the calls still '
+            'drive the wrappers'
+        ):
             t1 = one(glGenTextures(1))
             glCompressedTextureImage1DEXT(
                 t1, GL_TEXTURE_1D, 0, fmt, 4, 0, nbytes(cdata), cdata
@@ -432,7 +436,11 @@ class TestEXTDSA(GLTestCase):
         self.check_error('dsa multitex variants')
         # generic GL_COMPRESSED_RGBA is not a valid compressed upload format and
         # multitex-renderbuffer is unimplemented here; calls drive the wrappers
-        with self.exercise():
+        with self.exercise(
+            'generic GL_COMPRESSED_RGBA is not a valid compressed upload format '
+            'and multitex-renderbuffer is unimplemented here; calls drive the '
+            'wrappers'
+        ):
             glCompressedMultiTexImage1DEXT(
                 GL_TEXTURE0,
                 GL_TEXTURE_1D,
@@ -645,7 +653,11 @@ class TestEXTDSA(GLTestCase):
         self.check_error('dsa vertex array')
         # the EXT_DSA vertex-array getters only accept the legacy client-array
         # enums this driver does not map here; calls still drive the wrappers
-        with self.exercise():
+        with self.exercise(
+            'the EXT_DSA vertex-array getters only accept the legacy client- '
+            'array enums this driver does not map here; calls still drive the '
+            'wrappers'
+        ):
             glGetVertexArrayIntegervEXT(
                 vao, GL_ELEMENT_ARRAY_BUFFER_BINDING, np.zeros(1, 'i')
             )
@@ -771,7 +783,9 @@ class TestEXTDSA(GLTestCase):
             glPopClientAttrib()
         self.check_error('dsa indexed state')
         # the indexed client-array pointer targets are not accepted here
-        with self.exercise():
+        with self.exercise(
+            'the indexed client-array pointer targets are not accepted here'
+        ):
             ptr = ctypes.c_void_p()
             glGetPointeri_vEXT(GL_VERTEX_ARRAY_POINTER, 0, ctypes.byref(ptr))
             glGetPointerIndexedvEXT(GL_VERTEX_ARRAY_POINTER, 0, ctypes.byref(ptr))

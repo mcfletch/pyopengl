@@ -64,7 +64,9 @@ class TestTextureExtensions(ESTestCase):
 
     def test_ext_texture_border_clamp(self):
         self.require_extension('GL_EXT_texture_border_clamp')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_texture_border_clamp is advertised; a driver need not serve every entry point in it'
+        ):
             self._tex()
             ext_border.glTexParameterIivEXT(
                 GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR_EXT, BORDER_I
@@ -97,7 +99,9 @@ class TestTextureExtensions(ESTestCase):
 
     def test_oes_texture_border_clamp(self):
         self.require_extension('GL_OES_texture_border_clamp')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_texture_border_clamp is advertised; a driver need not serve every entry point in it'
+        ):
             self._tex()
             oes_border.glTexParameterIivOES(
                 GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR_OES, BORDER_I
@@ -130,7 +134,9 @@ class TestTextureExtensions(ESTestCase):
 
     def test_oes_texture_3d(self):
         self.require_extension('GL_OES_texture_3D')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_texture_3D is advertised; a driver need not serve every entry point in it'
+        ):
             self._tex(GL_TEXTURE_3D)
             vol = np.zeros((2, 2, 2, 4), np.uint8)
             oes_3d.glTexImage3DOES(
@@ -178,7 +184,9 @@ class TestTextureExtensions(ESTestCase):
 
     def test_ext_clear_texture(self):
         self.require_extension('GL_EXT_clear_texture')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_clear_texture is advertised; a driver need not serve every entry point in it'
+        ):
             tex = self._tex()
             glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4)
             ext_clear.glClearTexImageEXT(
@@ -191,7 +199,9 @@ class TestTextureExtensions(ESTestCase):
 
     def test_ext_texture_buffer(self):
         self.require_extension('GL_EXT_texture_buffer')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_texture_buffer is advertised; a driver need not serve every entry point in it'
+        ):
             buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             glBufferData(GL_ARRAY_BUFFER, 64, np.zeros(16, 'u4'), GL_STATIC_DRAW)
@@ -202,7 +212,9 @@ class TestTextureExtensions(ESTestCase):
 
     def test_oes_texture_buffer(self):
         self.require_extension('GL_OES_texture_buffer')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_texture_buffer is advertised; a driver need not serve every entry point in it'
+        ):
             buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             glBufferData(GL_ARRAY_BUFFER, 64, np.zeros(16, 'u4'), GL_STATIC_DRAW)
@@ -213,7 +225,9 @@ class TestTextureExtensions(ESTestCase):
 
     def test_texture_view(self):
         self.require_extension('GL_EXT_texture_view')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_texture_view is advertised; a driver need not serve every entry point in it'
+        ):
             orig = self._tex()
             glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4)
             view = one(glGenTextures(1))
@@ -222,7 +236,9 @@ class TestTextureExtensions(ESTestCase):
 
     def test_oes_texture_view(self):
         self.require_extension('GL_OES_texture_view')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_texture_view is advertised; a driver need not serve every entry point in it'
+        ):
             orig = self._tex()
             glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4)
             view = one(glGenTextures(1))
@@ -231,7 +247,9 @@ class TestTextureExtensions(ESTestCase):
 
     def test_ext_texture_storage(self):
         self.require_extension('GL_EXT_texture_storage')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_texture_storage is advertised; a driver need not serve every entry point in it'
+        ):
             self._tex()
             ext_storage.glTexStorage2DEXT(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4)
             self._tex(GL_TEXTURE_3D)
@@ -253,7 +271,9 @@ class TestTextureExtensions(ESTestCase):
 
     def test_copy_image(self):
         self.require_extension('GL_EXT_copy_image')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_copy_image is advertised; a driver need not serve every entry point in it'
+        ):
             a = self._tex()
             glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 8, 8)
             b = self._tex()
@@ -265,7 +285,9 @@ class TestTextureExtensions(ESTestCase):
 
     def test_oes_copy_image(self):
         self.require_extension('GL_OES_copy_image')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_copy_image is advertised; a driver need not serve every entry point in it'
+        ):
             a = self._tex()
             glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 8, 8)
             b = self._tex()
@@ -277,7 +299,9 @@ class TestTextureExtensions(ESTestCase):
 
     def test_oes_msaa_array_storage(self):
         self.require_extension('GL_OES_texture_storage_multisample_2d_array')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_texture_storage_multisample_2d_array is advertised; a driver need not serve every entry point in it'
+        ):
             self._tex(GL_TEXTURE_2D_MULTISAMPLE_ARRAY_OES)
             oes_msaa.glTexStorage3DMultisampleOES(
                 GL_TEXTURE_2D_MULTISAMPLE_ARRAY_OES, 4, GL_RGBA8, 8, 8, 2, True
@@ -286,7 +310,9 @@ class TestTextureExtensions(ESTestCase):
 
     def test_ext_texture_storage_compression(self):
         self.require_extension('GL_EXT_texture_storage_compression')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_texture_storage_compression is advertised; a driver need not serve every entry point in it'
+        ):
             self._tex()
             ext_comp.glTexStorageAttribs2DEXT(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4, None)
             self._tex(GL_TEXTURE_3D)

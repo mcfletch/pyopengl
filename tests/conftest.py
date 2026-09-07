@@ -59,3 +59,20 @@ def pytest_configure(config):
             'PYOPENGL_DISPATCH_STRICT=0 if the fallback is what you want.'
             % (dispatch.status().reason,)
         )
+
+
+def pytest_terminal_summary(terminalreporter):
+    """Say what ``exercise()`` swallowed, so the number is not invisible."""
+    try:
+        from glcontext import FORGIVEN
+    except Exception:
+        return
+    if not FORGIVEN:
+        return
+    cases = {entry[0] for entry in FORGIVEN}
+    terminalreporter.write_sep(
+        '-', 'exercise() forgave %d GL error(s) across %d case(s)'
+        % (len(FORGIVEN), len(cases))
+    )
+    for entry in FORGIVEN:
+        terminalreporter.write_line('  %s %s %r' % entry)

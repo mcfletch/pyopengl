@@ -87,7 +87,9 @@ class TestEXTSeparateShaderObjects(ESTestCase):
 
     def test_ext_pipeline(self):
         self.require_extension('GL_EXT_separate_shader_objects')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_separate_shader_objects is advertised; a driver need not serve every entry point in it'
+        ):
             self._run()
 
     def _run(self):

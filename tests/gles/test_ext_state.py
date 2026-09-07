@@ -73,7 +73,9 @@ class TestStateExtensions(ESTestCase):
 
     def test_ext_blend_func_extended(self):
         self.require_extension('GL_EXT_blend_func_extended')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_blend_func_extended is advertised; a driver need not serve every entry point in it'
+        ):
             program = self.compile_program(VERTEX, FRAGMENT)
             bfe.glBindFragDataLocationEXT(program, 0, 'c')
             bfe.glBindFragDataLocationIndexedEXT(program, 0, 0, 'c')
@@ -82,64 +84,88 @@ class TestStateExtensions(ESTestCase):
 
     def test_ext_blend_minmax(self):
         self.require_extension('GL_EXT_blend_minmax')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_blend_minmax is advertised; a driver need not serve every entry point in it'
+        ):
             bmm.glBlendEquationEXT(GL_FUNC_ADD)
 
     def test_khr_blend_equation_advanced(self):
         self.require_extension('GL_KHR_blend_equation_advanced')
-        with self.exercise():
+        with self.exercise(
+            'GL_KHR_blend_equation_advanced is advertised; a driver need not serve every entry point in it'
+        ):
             bea.glBlendBarrierKHR()
 
     def test_geometry_shader_attach(self):
         self.require_extension('GL_EXT_geometry_shader')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_geometry_shader is advertised; a driver need not serve every entry point in it'
+        ):
             tex = self._color_fbo()
             ext_geom.glFramebufferTextureEXT(GL_FRAMEBUFFER, ATTACH, tex, 0)
 
     def test_oes_geometry_shader_attach(self):
         self.require_extension('GL_OES_geometry_shader')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_geometry_shader is advertised; a driver need not serve every entry point in it'
+        ):
             tex = self._color_fbo()
             oes_geom.glFramebufferTextureOES(GL_FRAMEBUFFER, ATTACH, tex, 0)
 
     def test_tessellation_patch(self):
         self.require_extension('GL_EXT_tessellation_shader')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_tessellation_shader is advertised; a driver need not serve every entry point in it'
+        ):
             ext_tess.glPatchParameteriEXT(GL_PATCH_VERTICES_EXT, 3)
 
     def test_oes_tessellation_patch(self):
         self.require_extension('GL_OES_tessellation_shader')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_tessellation_shader is advertised; a driver need not serve every entry point in it'
+        ):
             oes_tess.glPatchParameteriOES(GL_PATCH_VERTICES_OES, 3)
 
     def test_oes_sample_shading(self):
         self.require_extension('GL_OES_sample_shading')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_sample_shading is advertised; a driver need not serve every entry point in it'
+        ):
             oes_ss.glMinSampleShadingOES(1.0)
 
     def test_primitive_bounding_box(self):
         self.require_extension('GL_EXT_primitive_bounding_box')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_primitive_bounding_box is advertised; a driver need not serve every entry point in it'
+        ):
             ext_pbb.glPrimitiveBoundingBoxEXT(-1, -1, -1, 1, 1, 1, 1, 1)
 
     def test_oes_primitive_bounding_box(self):
         self.require_extension('GL_OES_primitive_bounding_box')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_primitive_bounding_box is advertised; a driver need not serve every entry point in it'
+        ):
             oes_pbb.glPrimitiveBoundingBoxOES(-1, -1, -1, 1, 1, 1, 1, 1)
 
     def test_ext_polygon_offset_clamp(self):
         self.require_extension('GL_EXT_polygon_offset_clamp')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_polygon_offset_clamp is advertised; a driver need not serve every entry point in it'
+        ):
             ext_poc.glPolygonOffsetClampEXT(1.0, 1.0, 0.0)
 
     def test_ext_clip_control(self):
         self.require_extension('GL_EXT_clip_control')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_clip_control is advertised; a driver need not serve every entry point in it'
+        ):
             ext_clip.glClipControlEXT(GL_LOWER_LEFT_EXT, GL_ZERO_TO_ONE_EXT)
 
     def test_oes_viewport_array(self):
         self.require_extension('GL_OES_viewport_array')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_viewport_array is advertised; a driver need not serve every entry point in it'
+        ):
             oes_vp.glViewportArrayvOES(0, 1, np.array([0, 0, 16, 16], 'f'))
             oes_vp.glViewportIndexedfOES(0, 0.0, 0.0, 16.0, 16.0)
             oes_vp.glViewportIndexedfvOES(0, np.array([0, 0, 16, 16], 'f'))
@@ -155,7 +181,9 @@ class TestStateExtensions(ESTestCase):
 
     def test_mesa_framebuffer_flip_y(self):
         self.require_extension('GL_MESA_framebuffer_flip_y')
-        with self.exercise():
+        with self.exercise(
+            'GL_MESA_framebuffer_flip_y is advertised; a driver need not serve every entry point in it'
+        ):
             self._color_fbo()
             mesa_flip.glFramebufferParameteriMESA(
                 GL_FRAMEBUFFER, GL_FRAMEBUFFER_FLIP_Y_MESA, GL_TRUE
@@ -166,12 +194,16 @@ class TestStateExtensions(ESTestCase):
 
     def test_nv_texture_barrier(self):
         self.require_extension('GL_NV_texture_barrier')
-        with self.exercise():
+        with self.exercise(
+            'GL_NV_texture_barrier is advertised; a driver need not serve every entry point in it'
+        ):
             nv_barrier.glTextureBarrierNV()
 
     def test_ovr_multiview(self):
         self.require_extension('GL_OVR_multiview')
-        with self.exercise():
+        with self.exercise(
+            'GL_OVR_multiview is advertised; a driver need not serve every entry point in it'
+        ):
             from OpenGL.GLES3 import GL_TEXTURE_2D_ARRAY, glTexStorage3D
 
             tex = one(glGenTextures(1))
@@ -187,19 +219,25 @@ class TestStateExtensions(ESTestCase):
 
     def test_ext_shader_framebuffer_fetch(self):
         self.require_extension('GL_EXT_shader_framebuffer_fetch_non_coherent')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_shader_framebuffer_fetch_non_coherent is advertised; a driver need not serve every entry point in it'
+        ):
             ext_fbf.glFramebufferFetchBarrierEXT()
 
     def test_nv_read_buffer(self):
         self.require_extension('GL_NV_read_buffer')
-        with self.exercise():
+        with self.exercise(
+            'GL_NV_read_buffer is advertised; a driver need not serve every entry point in it'
+        ):
             from OpenGL.GLES3 import GL_BACK
 
             nv_read.glReadBufferNV(GL_BACK)
 
     def test_ext_draw_buffers_indexed(self):
         self.require_extension('GL_EXT_draw_buffers_indexed')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_draw_buffers_indexed is advertised; a driver need not serve every entry point in it'
+        ):
             ext_dbi.glEnableiEXT(GL_BLEND, 0)
             ext_dbi.glIsEnablediEXT(GL_BLEND, 0)
             ext_dbi.glBlendEquationiEXT(0, GL_FUNC_ADD)
@@ -211,7 +249,9 @@ class TestStateExtensions(ESTestCase):
 
     def test_oes_draw_buffers_indexed(self):
         self.require_extension('GL_OES_draw_buffers_indexed')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_draw_buffers_indexed is advertised; a driver need not serve every entry point in it'
+        ):
             oes_dbi.glEnableiOES(GL_BLEND, 0)
             oes_dbi.glIsEnablediOES(GL_BLEND, 0)
             oes_dbi.glBlendEquationiOES(0, GL_FUNC_ADD)
@@ -223,7 +263,9 @@ class TestStateExtensions(ESTestCase):
 
     def test_ext_draw_buffers(self):
         self.require_extension('GL_EXT_draw_buffers')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_draw_buffers is advertised; a driver need not serve every entry point in it'
+        ):
             self._color_fbo()
             ext_db.glDrawBuffersEXT(1, object_names(GL_COLOR_ATTACHMENT0))
 

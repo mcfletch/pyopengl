@@ -136,9 +136,10 @@ class TestMiscCore(GLTestCase):
                 len(name), name, GL_NAMED_STRING_LENGTH_ARB, np.zeros(1, 'i')
             )
             glDeleteNamedStringARB(len(name), name)
-        # glCompileShaderIncludeARB's include-path tree validation is finicky;
-        # the call drives the wrapper and exercise() tolerates the GLError
-        with self.exercise():
+        with self.exercise(
+            "glCompileShaderIncludeARB's include-path tree validation is "
+            'finicky'
+        ):
             sh = glCreateShader(GL_FRAGMENT_SHADER)
             glShaderSource(
                 sh,
@@ -321,7 +322,10 @@ class TestMiscCore(GLTestCase):
             )
         # the DSA multiview form is not implemented here; the call drives the
         # wrapper and exercise() tolerates the GLError
-        with self.exercise():
+        with self.exercise(
+            'the DSA multiview form is not implemented here; the call drives '
+            'the wrapper'
+        ):
             glNamedFramebufferTextureMultiviewOVR(
                 one(glGenFramebuffers(1)), GL_COLOR_ATTACHMENT0, arr, 0, 0, 2
             )
@@ -340,7 +344,9 @@ class TestDrawExtensions(GLTestCase):
         buf = one(glGenBuffers(1))
         glBindBuffer(GL_DRAW_INDIRECT_BUFFER, buf)
         glBufferData(GL_DRAW_INDIRECT_BUFFER, np.array([3, 1, 0, 0], 'I'), GL_STATIC_DRAW)
-        with self.exercise():
+        with self.exercise(
+            'GL_AMD_multi_draw_indirect is advertised; a driver need not serve every entry point in it'
+        ):
             glMultiDrawArraysIndirectAMD(GL_TRIANGLES, None, 1, 0)
         # DrawElementsIndirectCommand: count, primCount, firstIndex, baseVertex, baseInstance
         glBufferData(
@@ -349,7 +355,10 @@ class TestDrawExtensions(GLTestCase):
         ibo = one(glGenBuffers(1))
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'I'), GL_STATIC_DRAW)
-        with self.exercise():
+        with self.exercise(
+            'GL_AMD_multi_draw_indirect is advertised; an indirect draw with no '
+            'parameter buffer bound may be refused'
+        ):
             glMultiDrawElementsIndirectAMD(GL_TRIANGLES, GL_UNSIGNED_INT, None, 1, 0)
 
     def test_arb_indirect_parameters(self):
@@ -361,7 +370,9 @@ class TestDrawExtensions(GLTestCase):
         pbuf = one(glGenBuffers(1))
         glBindBuffer(GL_PARAMETER_BUFFER_ARB, pbuf)
         glBufferData(GL_PARAMETER_BUFFER_ARB, np.array([1], 'I'), GL_STATIC_DRAW)
-        with self.exercise():
+        with self.exercise(
+            'GL_ARB_indirect_parameters is advertised; a driver need not serve every entry point in it'
+        ):
             glMultiDrawArraysIndirectCountARB(GL_TRIANGLES, None, 0, 1, 0)
         glBufferData(
             GL_DRAW_INDIRECT_BUFFER, np.array([3, 1, 0, 0, 0], 'I'), GL_STATIC_DRAW
@@ -369,7 +380,10 @@ class TestDrawExtensions(GLTestCase):
         ibo = one(glGenBuffers(1))
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'I'), GL_STATIC_DRAW)
-        with self.exercise():
+        with self.exercise(
+            'GL_ARB_indirect_parameters is advertised; the count-buffer draws '
+            'need a parameter buffer the driver may not accept here'
+        ):
             glMultiDrawElementsIndirectCountARB(
                 GL_TRIANGLES, GL_UNSIGNED_INT, None, 0, 1, 0
             )
@@ -414,12 +428,16 @@ class TestBlendExtensions(GLTestCase):
 
     def test_khr_blend_equation_advanced_barrier(self):
         self.require_extension('GL_KHR_blend_equation_advanced')
-        with self.exercise():
+        with self.exercise(
+            'GL_KHR_blend_equation_advanced is advertised; a driver need not serve every entry point in it'
+        ):
             glBlendBarrierKHR()
 
     def test_nv_alpha_to_coverage_dither_control(self):
         self.require_extension('GL_NV_alpha_to_coverage_dither_control')
-        with self.exercise():
+        with self.exercise(
+            'GL_NV_alpha_to_coverage_dither_control is advertised; a driver need not serve every entry point in it'
+        ):
             glAlphaToCoverageDitherControlNV(GL_ALPHA_TO_COVERAGE_DITHER_DEFAULT_NV)
 
 
@@ -445,7 +463,9 @@ class TestTextureExtensions(GLTestCase):
         glBindTexture(GL_TEXTURE_1D, one(glGenTextures(1)))
         glBindTexture(GL_TEXTURE_2D, one(glGenTextures(1)))
         glBindTexture(GL_TEXTURE_3D, one(glGenTextures(1)))
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_texture_storage is advertised; a driver need not serve every entry point in it'
+        ):
             glTexStorage1DEXT(GL_TEXTURE_1D, 1, GL_RGBA8, 16)
             glTexStorage2DEXT(GL_TEXTURE_2D, 1, GL_RGBA8, 16, 16)
             glTexStorage3DEXT(GL_TEXTURE_3D, 1, GL_RGBA8, 16, 16, 16)
@@ -455,9 +475,13 @@ class TestTextureExtensions(GLTestCase):
         tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         # No EGLImage is available headless; a null image GLErrors, tolerated here.
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_EGL_image_storage is advertised; a driver need not serve every entry point in it'
+        ):
             glEGLImageTargetTexStorageEXT(GL_TEXTURE_2D, None, None)
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_EGL_image_storage is advertised; a driver need not serve every entry point in it'
+        ):
             glEGLImageTargetTextureStorageEXT(tex, None, None)
 
     def test_nv_copy_image(self):
@@ -468,7 +492,9 @@ class TestTextureExtensions(GLTestCase):
         dst = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, dst)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 16, 16)
-        with self.exercise():
+        with self.exercise(
+            'GL_NV_copy_image is advertised; a driver need not serve every entry point in it'
+        ):
             glCopyImageSubDataNV(
                 src, GL_TEXTURE_2D, 0, 0, 0, 0,
                 dst, GL_TEXTURE_2D, 0, 0, 0, 0,
@@ -477,7 +503,9 @@ class TestTextureExtensions(GLTestCase):
 
     def test_nv_texture_barrier(self):
         self.require_extension('GL_NV_texture_barrier')
-        with self.exercise():
+        with self.exercise(
+            'GL_NV_texture_barrier is advertised; a driver need not serve every entry point in it'
+        ):
             glTextureBarrierNV()
 
 
@@ -503,13 +531,17 @@ class TestShaderCompileExtensions(GLTestCase):
         self.require_extension('GL_ARB_gl_spirv')
         # No SPIR-V binary is loaded, so specialisation GLErrors; the call still
         # drives the wrapper's argument marshalling, which is what we cover here.
-        with self.exercise():
+        with self.exercise(
+            'GL_ARB_gl_spirv is advertised; a driver need not serve every entry point in it'
+        ):
             sh = glCreateShader(GL_FRAGMENT_SHADER)
             glSpecializeShaderARB(sh, b'main', 0, np.zeros(0, 'I'), np.zeros(0, 'I'))
 
     def test_ext_shader_framebuffer_fetch_non_coherent(self):
         self.require_extension('GL_EXT_shader_framebuffer_fetch_non_coherent')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_shader_framebuffer_fetch_non_coherent is advertised; a driver need not serve every entry point in it'
+        ):
             glFramebufferFetchBarrierEXT()
 
 

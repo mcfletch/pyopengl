@@ -25,7 +25,9 @@ class TestQueryExtensions(ESTestCase):
 
     def test_disjoint_timer_query(self):
         self.require_extension('GL_EXT_disjoint_timer_query')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_disjoint_timer_query is advertised; a driver need not serve every entry point in it'
+        ):
             ids = np.zeros(1, 'u4')
             timer.glGenQueriesEXT(1, ids)
             q = int(ids[0])
@@ -55,7 +57,9 @@ class TestQueryExtensions(ESTestCase):
 
     def test_occlusion_query_boolean(self):
         self.require_extension('GL_EXT_occlusion_query_boolean')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_occlusion_query_boolean is advertised; a driver need not serve every entry point in it'
+        ):
             ids = np.zeros(1, 'u4')
             occ.glGenQueriesEXT(1, ids)
             q = int(ids[0])
@@ -73,7 +77,9 @@ class TestQueryExtensions(ESTestCase):
 
     def test_nv_conditional_render(self):
         self.require_extension('GL_NV_conditional_render')
-        with self.exercise():
+        with self.exercise(
+            'GL_NV_conditional_render is advertised; a driver need not serve every entry point in it'
+        ):
             from OpenGL.GLES3 import glGenQueries, glDeleteQueries
 
             q = one(glGenQueries(1))
@@ -84,13 +90,17 @@ class TestQueryExtensions(ESTestCase):
 
     def test_khr_parallel_shader_compile(self):
         self.require_extension('GL_KHR_parallel_shader_compile')
-        with self.exercise():
+        with self.exercise(
+            'GL_KHR_parallel_shader_compile is advertised; a driver need not serve every entry point in it'
+        ):
             psc.glMaxShaderCompilerThreadsKHR(2)
             self.check_error('parallel shader compile')
 
     def test_apple_sync(self):
         self.require_extension('GL_APPLE_sync')
-        with self.exercise():
+        with self.exercise(
+            'GL_APPLE_sync is advertised; a driver need not serve every entry point in it'
+        ):
             sync = apple.glFenceSyncAPPLE(GL_SYNC_GPU_COMMANDS_COMPLETE, 0)
             apple.glIsSyncAPPLE(sync)
             apple.glClientWaitSyncAPPLE(sync, 0, 0)

@@ -105,9 +105,9 @@ class TestLegacyCompat(GLTestCase):
             glCompressedTexImage2DARB(GL_TEXTURE_2D, 0, fmt, 4, 4, 0, data)
             glCompressedTexSubImage2DARB(GL_TEXTURE_2D, 0, 0, 0, 4, 4, fmt, data)
             glGetCompressedTexImageARB(GL_TEXTURE_2D, 0, np.zeros(8, 'B'))
-        # 1D/3D targets are not valid for ETC2; calls drive the wrappers and
-        # exercise() tolerates the resulting GLError
-        with self.exercise():
+        with self.exercise(
+            '1D/3D targets are not valid for ETC2; calls drive the wrappers'
+        ):
             glBindTexture(GL_TEXTURE_1D, one(glGenTextures(1)))
             glCompressedTexImage1DARB(GL_TEXTURE_1D, 0, fmt, 4, 0, data)
             glCompressedTexSubImage1DARB(GL_TEXTURE_1D, 0, 0, 4, fmt, data)

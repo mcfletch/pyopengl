@@ -58,9 +58,10 @@ class TestARBRobustness(GLTestCase):
             glGetnPixelMapusvARB(GL_PIXEL_MAP_R_TO_R, 4, np.zeros(4, 'H'))
             glGetnPolygonStippleARB(128, np.zeros(128, 'B'))
         self.check_error('arb robustness')
-        # the ARB_imaging getters need histogram/minmax/table state set up first;
-        # the calls drive the wrappers and exercise() tolerates the state GLError
-        with self.exercise():
+        with self.exercise(
+            'the ARB_imaging getters need histogram/minmax/table state set up '
+            'first; the calls drive the wrappers'
+        ):
             glGetnColorTableARB(
                 GL_COLOR_TABLE, GL_RGBA, GL_UNSIGNED_BYTE, 16, np.zeros(16, 'B')
             )

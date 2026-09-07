@@ -67,7 +67,9 @@ class TestDrawExtensions(ESTestCase):
 
     def test_ext_draw_instanced(self):
         self.require_extension('GL_EXT_draw_instanced')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_draw_instanced is advertised; a driver need not serve every entry point in it'
+        ):
             draw_instanced.glDrawArraysInstancedEXT(GL_TRIANGLES, 0, 3, 2)
             draw_instanced.glDrawElementsInstancedEXT(
                 GL_TRIANGLES, 3, GL_UNSIGNED_INT, None, 2
@@ -76,14 +78,18 @@ class TestDrawExtensions(ESTestCase):
 
     def test_ext_instanced_arrays(self):
         self.require_extension('GL_EXT_instanced_arrays')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_instanced_arrays is advertised; a driver need not serve every entry point in it'
+        ):
             instanced_arrays.glVertexAttribDivisorEXT(0, 0)
             instanced_arrays.glDrawArraysInstancedEXT(GL_TRIANGLES, 0, 3, 2)
             self.check_error('instanced_arrays')
 
     def test_ext_base_instance(self):
         self.require_extension('GL_EXT_base_instance')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_base_instance is advertised; a driver need not serve every entry point in it'
+        ):
             base_instance.glDrawArraysInstancedBaseInstanceEXT(GL_TRIANGLES, 0, 3, 1, 0)
             base_instance.glDrawElementsInstancedBaseInstanceEXT(
                 GL_TRIANGLES, 3, GL_UNSIGNED_INT, None, 1, 0
@@ -95,7 +101,9 @@ class TestDrawExtensions(ESTestCase):
 
     def test_ext_draw_elements_base_vertex(self):
         self.require_extension('GL_EXT_draw_elements_base_vertex')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_draw_elements_base_vertex is advertised; a driver need not serve every entry point in it'
+        ):
             draw_elements_base_vertex.glDrawElementsBaseVertexEXT(
                 GL_TRIANGLES, 3, GL_UNSIGNED_INT, None, 0
             )
@@ -109,7 +117,9 @@ class TestDrawExtensions(ESTestCase):
 
     def test_oes_draw_elements_base_vertex(self):
         self.require_extension('GL_OES_draw_elements_base_vertex')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_draw_elements_base_vertex is advertised; a driver need not serve every entry point in it'
+        ):
             oes_debv.glDrawElementsBaseVertexOES(
                 GL_TRIANGLES, 3, GL_UNSIGNED_INT, None, 0
             )
@@ -123,7 +133,9 @@ class TestDrawExtensions(ESTestCase):
 
     def test_ext_multi_draw_arrays(self):
         self.require_extension('GL_EXT_multi_draw_arrays')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_multi_draw_arrays is advertised; a driver need not serve every entry point in it'
+        ):
             firsts = np.array([0], 'i')
             counts = np.array([3], 'i')
             multi_draw_arrays.glMultiDrawArraysEXT(GL_TRIANGLES, firsts, counts, 1)
@@ -131,7 +143,9 @@ class TestDrawExtensions(ESTestCase):
 
     def test_ext_multi_draw_indirect(self):
         self.require_extension('GL_EXT_multi_draw_indirect')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_multi_draw_indirect is advertised; a driver need not serve every entry point in it'
+        ):
             from OpenGL.GLES3 import GL_DRAW_INDIRECT_BUFFER
 
             indirect = one(glGenBuffers(1))
@@ -149,7 +163,9 @@ class TestDrawExtensions(ESTestCase):
 
     def test_nv_draw_buffers(self):
         self.require_extension('GL_NV_draw_buffers')
-        with self.exercise():
+        with self.exercise(
+            'GL_NV_draw_buffers is advertised; a driver need not serve every entry point in it'
+        ):
             nv_draw_buffers.glDrawBuffersNV(1, object_names(GL_COLOR_ATTACHMENT0))
             self.check_error('nv_draw_buffers')
 

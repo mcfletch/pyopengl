@@ -133,7 +133,10 @@ class TestGL45(GLTestCase):
         glGetCompressedTextureSubImage(
             ctex, 0, 0, 0, 0, 4, 4, 1, nbytes(block), np.zeros(8, 'B')
         )
-        with self.exercise():  # 1D/3D compressed targets are format-restricted
+        with self.exercise(
+            'the 1D and 3D compressed targets are format-restricted, and a '
+            'driver need not accept this one'
+        ):
             c1 = _create(glCreateTextures, GL_TEXTURE_1D)
             glCompressedTextureSubImage1D(
                 c1, 0, 0, 4, GL_COMPRESSED_RGB8_ETC2, nbytes(block), block
@@ -334,7 +337,9 @@ class TestGL45(GLTestCase):
         self.require_extension('GL_ARB_imaging')
         # the imaging getters need histogram/minmax/table state; exercise()
         # runs the wrapper and tolerates the resulting state GLErrors
-        with self.exercise():
+        with self.exercise(
+            'GL_ARB_imaging is advertised; a driver need not serve every entry point in it'
+        ):
             glGetnColorTable(
                 GL_COLOR_TABLE, GL_RGBA, GL_UNSIGNED_BYTE, 16, np.zeros(16, 'B')
             )

@@ -112,7 +112,11 @@ class TestEXTFramebufferAliases(GLTestCase):
             )
         glBindFramebuffer(GL_READ_FRAMEBUFFER, src)
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, dst)
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_framebuffer_blit is advertised; a blit between two '
+            'framebuffers this case built may still be refused for their '
+            'formats'
+        ):
             glBlitFramebufferEXT(
                 0, 0, 16, 16, 0, 0, 16, 16, GL_COLOR_BUFFER_BIT, GL_NEAREST
             )
@@ -121,7 +125,9 @@ class TestEXTFramebufferAliases(GLTestCase):
         self.require_extension('GL_EXT_framebuffer_multisample')
         rb = one(glGenRenderbuffers(1))
         glBindRenderbuffer(GL_RENDERBUFFER, rb)
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_framebuffer_multisample is advertised; a driver need not serve every entry point in it'
+        ):
             glRenderbufferStorageMultisampleEXT(GL_RENDERBUFFER, 4, GL_RGBA8, 16, 16)
 
     def test_texture_array_layer_attach(self):
@@ -131,7 +137,9 @@ class TestEXTFramebufferAliases(GLTestCase):
         glTexStorage3D(GL_TEXTURE_2D_ARRAY, 1, GL_RGBA8, 16, 16, 2)
         fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_texture_array is advertised; a driver need not serve every entry point in it'
+        ):
             glFramebufferTextureLayerEXT(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, arr, 0, 0
             )
@@ -159,10 +167,11 @@ class TestEXTMemoryObject(GLTestCase):
                 mem, GL_DEDICATED_MEMORY_OBJECT_EXT, np.zeros(1, 'i')
             )
             glDeleteMemoryObjectsEXT(1, object_names(mem))
-        # storage-from-memory needs an imported allocation we cannot make here,
-        # so the calls fail GL validation -- but they still drive the wrapper's
-        # argument marshalling, which is what we are testing; exercise() tolerates
-        with self.exercise():
+        with self.exercise(
+            'storage-from-memory needs an imported allocation we cannot make '
+            'here, so the calls fail GL validation -- but they still drive the '
+            "wrapper's argument marshalling, which is what we are testing"
+        ):
             mids2 = np.zeros(1, 'I')
             glCreateMemoryObjectsEXT(1, mids2)
             m2 = int(mids2[0])
@@ -198,7 +207,9 @@ class TestEXTMemoryObject(GLTestCase):
         self.require_extension('GL_EXT_memory_object_fd')
         # No opaque-fd handle is available headless; fd=-1 is rejected with a
         # GLError, which exercise() tolerates -- the wrapper still runs.
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_memory_object_fd is advertised; a driver need not serve every entry point in it'
+        ):
             mids = np.zeros(1, 'I')
             glCreateMemoryObjectsEXT(1, mids)
             glImportMemoryFdEXT(

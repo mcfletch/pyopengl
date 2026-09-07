@@ -63,9 +63,10 @@ class TestGL46(GLTestCase):
 
     def test_specialize_shader(self):
         self.require_version(4, 6)
-        # no SPIR-V blob loaded, so specialization fails; the call still drives
-        # the wrapper (entry name -> uint arrays) and exercise() tolerates it
-        with self.exercise():
+        with self.exercise(
+            'no SPIR-V blob loaded, so specialization fails; the call still '
+            'drives the wrapper (entry name -> uint arrays)'
+        ):
             sh = glCreateShader(GL_VERTEX_SHADER)
             glSpecializeShader(sh, b'main', 0, np.zeros(0, 'I'), np.zeros(0, 'I'))
 

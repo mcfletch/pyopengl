@@ -104,9 +104,10 @@ class TestGL12_13(GLTestCase):
         glCompressedTexImage2D(GL_TEXTURE_2D, 0, fmt, 4, 4, 0, np.zeros(8, 'B'))
         glCompressedTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 4, 4, fmt, np.zeros(8, 'B'))
         glGetCompressedTexImage(GL_TEXTURE_2D, 0)
-        # S3TC is a 2D-only format, so the 1D/3D entry points raise GL errors;
-        # the calls still drive the wrappers and exercise() tolerates the error
-        with self.exercise():
+        with self.exercise(
+            's3TC is a 2D-only format, so the 1D/3D entry points raise GL '
+            'errors'
+        ):
             t1 = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_1D, t1)
             glCompressedTexImage1D(GL_TEXTURE_1D, 0, fmt, 4, 0, np.zeros(8, 'B'))

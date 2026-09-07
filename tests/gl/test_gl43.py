@@ -59,7 +59,10 @@ class TestGL43(GLTestCase):
         self.check_error('program interface')
 
     def test_debug(self):
-        with self.exercise():
+        with self.exercise(
+            'GL_KHR_debug is core in 4.3, and a driver that reports through '
+            'it need not accept every message-control combination'
+        ):
             captured = []
 
             @GLDEBUGPROC

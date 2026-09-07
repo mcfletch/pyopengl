@@ -239,9 +239,20 @@ Helpers on the base classes:
   silently overruns the heap and crashes much later somewhere unrelated.
 - `require_entrypoint(fn, name)` — skip if an ES-only EXT command collides with a
   desktop-GL name and PyOpenGL cached a null for it under the shared egl process.
-- `exercise()` / `tolerate_glerror(*codes)` — narrowly tolerate a *documented*,
-  expected GLError (a known driver gap). Not a general crutch; the surrounding
-  calls must still succeed.
+- `exercise(reason)` / `tolerate_glerror(*codes)` — narrowly tolerate a
+  *documented*, expected GLError (a known driver gap). Not a general crutch;
+  the surrounding calls must still succeed. `exercise` takes a **required
+  reason** naming what is being forgiven and why — usually that an extension is
+  advertised and a driver need not serve every entry point in it — and it
+  tolerates only `GL_INVALID_ENUM`, `GL_INVALID_VALUE` and
+  `GL_INVALID_OPERATION`, which are how a driver says "not really, no".
+  `GL_OUT_OF_MEMORY`, `GL_INVALID_FRAMEBUFFER_OPERATION` and `GL_CONTEXT_LOST`
+  say the call went wrong or the case set its context up wrong, and are never a
+  known gap, so they propagate. Every error it forgives is counted, and the run
+  prints the tally — so how much of a run proved reachability rather than
+  behaviour is a number rather than a guess. Prefer `tolerate_glerror` where
+  the code is known exactly, and a plain call with `check_error` where the
+  driver should simply succeed.
 
 ## Windowing backends — `TEST_WINDOWING`
 

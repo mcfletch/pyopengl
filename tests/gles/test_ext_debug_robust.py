@@ -62,7 +62,9 @@ class TestDebugRobustExtensions(ESTestCase):
 
     def test_khr_debug(self):
         self.require_extension('GL_KHR_debug')
-        with self.exercise():
+        with self.exercise(
+            'GL_KHR_debug is advertised; a driver need not serve every entry point in it'
+        ):
             captured = []
 
             @khr_debug.GLDEBUGPROCKHR
@@ -120,7 +122,9 @@ class TestDebugRobustExtensions(ESTestCase):
 
     def test_khr_robustness(self):
         self.require_extension('GL_KHR_robustness')
-        with self.exercise():
+        with self.exercise(
+            'GL_KHR_robustness is advertised; a driver need not serve every entry point in it'
+        ):
             khr_rob.glGetGraphicsResetStatusKHR()
             size = self.width * self.height * 4
             khr_rob.glReadnPixelsKHR(
@@ -147,7 +151,9 @@ class TestDebugRobustExtensions(ESTestCase):
 
     def test_ext_robustness(self):
         self.require_extension('GL_EXT_robustness')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_robustness is advertised; a driver need not serve every entry point in it'
+        ):
             ext_rob.glGetGraphicsResetStatusEXT()
             size = self.width * self.height * 4
             ext_rob.glReadnPixelsEXT(
@@ -173,7 +179,9 @@ class TestDebugRobustExtensions(ESTestCase):
 
     def test_ext_debug_label(self):
         self.require_extension('GL_EXT_debug_label')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_debug_label is advertised; a driver need not serve every entry point in it'
+        ):
             buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             ext_label.glLabelObjectEXT(GL_BUFFER, buf, -1, b'lbl')
@@ -183,7 +191,9 @@ class TestDebugRobustExtensions(ESTestCase):
 
     def test_ext_separate_shader_objects_legacy(self):
         self.require_extension('GL_EXT_separate_shader_objects')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_separate_shader_objects is advertised; a driver need not serve every entry point in it'
+        ):
             p = sso.glCreateShaderProgramEXT(
                 GL_VERTEX_SHADER, 'void main(){gl_Position=vec4(0);}'
             )
@@ -194,7 +204,9 @@ class TestDebugRobustExtensions(ESTestCase):
         self.require_extension('GL_OES_EGL_image')
         # no real EGLImage handle here, so these fail GL validation; the calls
         # still drive the wrappers (handle/target marshalling) -- exercise() tolerates
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_EGL_image is advertised; a driver need not serve every entry point in it'
+        ):
             glBindTexture(GL_TEXTURE_2D, one(glGenTextures(1)))
             img = ctypes.c_void_p(0)
             oes_eglimage.glEGLImageTargetTexture2DOES(GL_TEXTURE_2D, img)
@@ -209,7 +221,9 @@ class TestDebugRobustExtensions(ESTestCase):
 
     def test_multi_draw_elements_leftovers(self):
         self.require_extension('GL_EXT_multi_draw_arrays')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_multi_draw_arrays is advertised; a driver need not serve every entry point in it'
+        ):
             ebo = one(glGenBuffers(1))
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
             glBufferData(
@@ -233,7 +247,9 @@ class TestDebugRobustExtensions(ESTestCase):
         from OpenGL.GLES2.EXT.memory_object_fd import GL_HANDLE_TYPE_OPAQUE_FD_EXT
 
         # fd=-1 is invalid so the import fails GL validation; the wrapper still runs
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_memory_object_fd is advertised; a driver need not serve every entry point in it'
+        ):
             ids = np.zeros(1, 'u4')
             _mem.glCreateMemoryObjectsEXT(1, ids)
             mem_fd.glImportMemoryFdEXT(

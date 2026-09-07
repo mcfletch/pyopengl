@@ -145,9 +145,10 @@ class TestGL41(GLTestCase):
         glGetShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_HIGH_FLOAT, rng, prec)
         glReleaseShaderCompiler()
         self.assertGreaterEqual(self.getInteger(GL_NUM_SHADER_BINARY_FORMATS), 0)
-        # no portable binary format/blob here, so the load is expected to fail;
-        # the call still drives the wrapper and exercise() tolerates the GLError
-        with self.exercise():
+        with self.exercise(
+            'no portable binary format/blob here, so the load is expected to '
+            'fail; the call still drives the wrapper'
+        ):
             sh = glCreateShader(GL_VERTEX_SHADER)
             glShaderBinary(
                 1,

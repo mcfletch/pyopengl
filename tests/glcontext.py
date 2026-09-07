@@ -41,6 +41,17 @@ import importlib.util
 
 log = logging.getLogger(__name__)
 
+#: The GL errors a driver uses to say it will not serve an entry point it
+#: advertised: GL_INVALID_ENUM, GL_INVALID_VALUE, GL_INVALID_OPERATION.  These
+#: are what `ContextTestCase.exercise` tolerates, and no others -- an
+#: out-of-memory or an incomplete framebuffer says the call went wrong rather
+#: than that the driver declined it.
+TOLERATED = frozenset((0x0500, 0x0501, 0x0502))
+
+#: ``(test id, reason, code)`` for every error `exercise()` forgave, so the
+#: run can say how much of it proved reachability rather than behaviour.
+FORGIVEN = []
+
 
 # ---------------------------------------------------------------------------
 # Backend selection
@@ -574,18 +585,56 @@ class ContextTestCase(unittest.TestCase):
             self.skipTest('entry point not exported: %s' % (err,))
 
     @contextlib.contextmanager
-    def exercise(self):
-        """Smoke-test entry points: skip if unexported, tolerate GLErrors."""
+    def exercise(self, reason):
+        """Reach an entry point, tolerating a driver that does not serve it.
+
+        For the case where what is being asked is *reachability*: the binding
+        exists, the arguments convert, the call gets to the driver.  A driver
+        that advertises an extension and then refuses one of its entry points
+        is a real and common thing, and that refusal is not this suite's to
+        fail on -- but it is worth naming, which is what `reason` is for and
+        why it is required.
+
+        Only the three codes a driver uses to say "not really, no" are
+        tolerated.  ``GL_OUT_OF_MEMORY``, ``GL_INVALID_FRAMEBUFFER_OPERATION``
+        and ``GL_CONTEXT_LOST`` are never a known gap: they say the call went
+        wrong, or the case set its context up wrong, and swallowing them is how
+        a suite passes while proving nothing.
+
+        Every error forgiven here is recorded in :data:`FORGIVEN`, and the run
+        prints the tally, so how much of the suite is proving reachability
+        rather than behaviour stays visible.
+
+        Prefer :meth:`tolerate_glerror` where the code is known exactly, and
+        plain calls with :meth:`check_error` where the driver should succeed.
+        """
         from OpenGL import error
 
+        assert reason, 'exercise() needs a reason: what is being tolerated, and why'
         try:
             yield
         except error.NullFunctionError as err:
             self.skipTest('entry point not exported: %s' % (err,))
-        except error.GLError:
-            pass
-        while self.gl.glGetError() != self.gl.GL_NO_ERROR:
-            pass
+        except error.GLError as err:
+            code = getattr(err, 'err', None)
+            if code not in TOLERATED:
+                raise
+            FORGIVEN.append((self.id(), reason, int(code)))
+        drained = []
+        while True:
+            code = self.gl.glGetError()
+            if code == self.gl.GL_NO_ERROR:
+                break
+            drained.append(int(code))
+        unexpected = [code for code in drained if code not in TOLERATED]
+        if unexpected:
+            raise AssertionError(
+                'the driver reported %s, which is not a refusal to serve an '
+                'entry point: %s'
+                % (', '.join('0x%x' % code for code in unexpected), reason)
+            )
+        if drained:
+            FORGIVEN.append((self.id(), reason, tuple(drained)))
 
     @contextlib.contextmanager
     def tolerate_glerror(self, *codes):

@@ -67,7 +67,9 @@ class TestBufferExtensions(ESTestCase):
 
     def test_mesa_sampler_objects(self):
         self.require_extension('GL_MESA_sampler_objects')
-        with self.exercise():
+        with self.exercise(
+            'GL_MESA_sampler_objects is advertised; a driver need not serve every entry point in it'
+        ):
             ids = one(mesa_samplers.glGenSamplers(1))
             s = int(ids)
             mesa_samplers.glBindSampler(0, s)
@@ -93,7 +95,9 @@ class TestBufferExtensions(ESTestCase):
 
     def test_oes_vertex_array_object(self):
         self.require_extension('GL_OES_vertex_array_object')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_vertex_array_object is advertised; a driver need not serve every entry point in it'
+        ):
             ids = np.zeros(1, 'u4')
             oes_vao.glGenVertexArraysOES(1, ids)
             vao = int(ids[0])
@@ -105,7 +109,9 @@ class TestBufferExtensions(ESTestCase):
 
     def test_oes_get_program_binary(self):
         self.require_extension('GL_OES_get_program_binary')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_get_program_binary is advertised; a driver need not serve every entry point in it'
+        ):
             from OpenGL.GLES3 import (
                 glGetProgramiv,
                 glCreateProgram,
@@ -126,7 +132,9 @@ class TestBufferExtensions(ESTestCase):
 
     def test_oes_mapbuffer(self):
         self.require_extension('GL_OES_mapbuffer')
-        with self.exercise():
+        with self.exercise(
+            'GL_OES_mapbuffer is advertised; a driver need not serve every entry point in it'
+        ):
             self._array_buffer()
             oes_map.glMapBufferOES(GL_ARRAY_BUFFER, GL_WRITE_ONLY_OES)
             ptr = ctypes.c_void_p()
@@ -138,7 +146,9 @@ class TestBufferExtensions(ESTestCase):
 
     def test_ext_buffer_storage(self):
         self.require_extension('GL_EXT_buffer_storage')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_buffer_storage is advertised; a driver need not serve every entry point in it'
+        ):
             buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             ext_bufstore.glBufferStorageEXT(
@@ -148,7 +158,9 @@ class TestBufferExtensions(ESTestCase):
 
     def test_ext_map_buffer_range(self):
         self.require_extension('GL_EXT_map_buffer_range')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_map_buffer_range is advertised; a driver need not serve every entry point in it'
+        ):
             self._array_buffer()
             ext_maprange.glMapBufferRangeEXT(
                 GL_ARRAY_BUFFER, 0, 32, GL_MAP_WRITE_BIT | GL_MAP_FLUSH_EXPLICIT_BIT
@@ -161,7 +173,9 @@ class TestBufferExtensions(ESTestCase):
 
     def test_ext_discard_framebuffer(self):
         self.require_extension('GL_EXT_discard_framebuffer')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_discard_framebuffer is advertised; a driver need not serve every entry point in it'
+        ):
             ext_discard.glDiscardFramebufferEXT(
                 GL_FRAMEBUFFER, 1, copy_safe([GL_COLOR_ATTACHMENT0], 'I')
             )
@@ -169,7 +183,9 @@ class TestBufferExtensions(ESTestCase):
 
     def test_ext_memory_object(self):
         self.require_extension('GL_EXT_memory_object')
-        with self.exercise():
+        with self.exercise(
+            'GL_EXT_memory_object is advertised; a driver need not serve every entry point in it'
+        ):
             ids = np.zeros(1, 'u4')
             ext_memory.glCreateMemoryObjectsEXT(1, ids)
             mem = int(ids[0])
@@ -186,10 +202,11 @@ class TestBufferExtensions(ESTestCase):
             )
             ext_memory.glDeleteMemoryObjectsEXT(1, object_names(mem))
             self.check_error('memory object basics')
-        # storage-from-memory needs an imported external allocation we cannot make
-        # here, so these fail GL validation -- but they still drive the wrappers'
-        # argument marshalling, which is what we test; exercise() tolerates the error
-        with self.exercise():
+        with self.exercise(
+            'storage-from-memory needs an imported external allocation we '
+            'cannot make here, so these fail GL validation -- but they still '
+            "drive the wrappers' argument marshalling, which is what we test"
+        ):
             m2 = np.zeros(1, 'u4')
             ext_memory.glCreateMemoryObjectsEXT(1, m2)
             mm = int(m2[0])
