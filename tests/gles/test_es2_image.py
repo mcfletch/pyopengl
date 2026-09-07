@@ -8,7 +8,7 @@ checks each quadrant against the source texels.
 """
 
 import unittest
-from arraycompat import np, shape  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one, shape  # numpy, or a ctypes fallback when numpy is absent
 
 from egltestcase import ESTestCase
 
@@ -74,7 +74,7 @@ class TestES2Image(ESTestCase):
         program = self.compile_program(VERTEX_SHADER, FRAGMENT_SHADER)
         glUseProgram(program)
 
-        texture = glGenTextures(1)
+        texture = one(glGenTextures(1))
         glActiveTexture(GL_TEXTURE0)
         glBindTexture(GL_TEXTURE_2D, texture)
         for pname in (GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MAG_FILTER):
@@ -130,7 +130,7 @@ class TestES2Image(ESTestCase):
 
     def test_undersized_upload_raises(self):
         """An array too small for the declared dimensions is rejected."""
-        texture = glGenTextures(1)
+        texture = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, texture)
         too_small = np.zeros((2, 2, 4), np.uint8)  # 16 bytes; an 8x8 image needs 256
         with self.assertRaises(ValueError):

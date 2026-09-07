@@ -734,10 +734,19 @@ def _as_address(value):
     """A pointer the GL handed back, as a plain integer.
 
     ``glGetPointerv`` answers with whatever the array handler in use returns --
-    a numpy scalar where numpy is installed, a ctypes pointer where it is not.
+    a numpy scalar where numpy is installed, a ctypes pointer where it is not,
+    and a one-element array holding either where ``SIZE_1_ARRAY_UNPACK`` is
+    off.  Reading that last one as zero would say no application callback is
+    installed, and PyOpenGL would take one over that is not its to take.
     """
     if value is None:
         return 0
+    # A one-element array holding the pointer.  Unwrapped by length rather than
+    # by trying to index: a ctypes pointer answers indexing by dereferencing
+    # what it points at, so asking it for element zero reads memory instead of
+    # saying it is not a sequence.
+    if hasattr(value, '__len__') and len(value) == 1:
+        value = value[0]
     try:
         return int(value)
     except (TypeError, ValueError):

@@ -5,7 +5,7 @@ program-object query entry points in a compatibility context."""
 
 import unittest
 import ctypes
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -25,7 +25,7 @@ class TestARBPrograms(GLTestCase):
     gl_version = (2, 1)
 
     def _load(self, target, source):
-        pid = glGenProgramsARB(1)
+        pid = one(glGenProgramsARB(1))
         pid = int(pid[0]) if hasattr(pid, '__len__') else int(pid)
         glBindProgramARB(target, pid)
         glProgramStringARB(target, GL_PROGRAM_FORMAT_ASCII_ARB, len(source), source)

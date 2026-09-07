@@ -4,6 +4,7 @@
 import unittest
 import ctypes
 
+from arraycompat import one
 from egltestcase import ESTestCase
 
 from OpenGL.GLES2 import (
@@ -93,7 +94,7 @@ class TestES32Debug(ESTestCase):
         glPushDebugGroup(GL_DEBUG_SOURCE_APPLICATION, 0, -1, b'group')
         glPopDebugGroup()
 
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glObjectLabel(GL_BUFFER, buf, -1, b'my-buffer')
         self.assertEqual(

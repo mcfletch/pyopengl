@@ -6,7 +6,7 @@ import ctypes
 import pytest
 np = pytest.importorskip('numpy')  # numpy-specific test: skip without numpy
 
-from arraycompat import object_names
+from arraycompat import object_names, one
 from egltestcase import ESTestCase
 
 from OpenGL.GLES3 import (
@@ -82,18 +82,18 @@ class TestES3TransformFeedback(ESTestCase):
 
         glGetTransformFeedbackVarying(program, 0, 64)  # introspect the varying
 
-        tfo = glGenTransformFeedbacks(1)
+        tfo = one(glGenTransformFeedbacks(1))
         glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, tfo)
         self.assertTrue(glIsTransformFeedback(tfo))
 
-        src = glGenBuffers(1)
+        src = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, src)
         glBufferData(GL_ARRAY_BUFFER, 12, np.array([1, 2, 3], 'f'), GL_STATIC_DRAW)
         loc = glGetAttribLocation(program, 'inValue')
         glEnableVertexAttribArray(loc)
         glVertexAttribPointer(loc, 1, GL_FLOAT, False, 0, None)
 
-        dst = glGenBuffers(1)
+        dst = one(glGenBuffers(1))
         glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, dst)
         glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, 12, None, GL_DYNAMIC_COPY)
         glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, dst)

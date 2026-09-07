@@ -3,7 +3,7 @@
 and GL_KHR_robustness.  Compatibility context so the imaging getters resolve."""
 
 import unittest
-from arraycompat import np, nbytes  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import nbytes, np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -32,7 +32,7 @@ class TestARBRobustness(GLTestCase):
             glGetnUniformivARB(prog, ui, 4, np.zeros(1, 'i'))
             glGetnUniformuivARB(prog, ui, 4, np.zeros(1, 'I'))
             glGetnUniformdvARB(prog, uf, 8, np.zeros(1, 'd'))
-            tex = int(glGenTextures(1))
+            tex = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_2D, tex)
             glTexImage2D(
                 GL_TEXTURE_2D,
@@ -87,7 +87,7 @@ class TestARBRobustness(GLTestCase):
             glGetnMapdvARB(GL_MAP1_VERTEX_3, GL_COEFF, 6, np.zeros(6, 'd'))
             glGetnMapfvARB(GL_MAP1_VERTEX_3, GL_COEFF, 6, np.zeros(6, 'f'))
             glGetnMapivARB(GL_MAP1_VERTEX_3, GL_ORDER, 1, np.zeros(1, 'i'))
-            ctex = int(glGenTextures(1))
+            ctex = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_2D, ctex)
             glGetnCompressedTexImageARB(GL_TEXTURE_2D, 0, 16, np.zeros(16, 'B'))
 

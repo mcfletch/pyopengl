@@ -6,7 +6,7 @@ Skipped where the driver tops out below 4.6 / lacks the entry points.
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -29,7 +29,7 @@ class TestGL46(GLTestCase):
         with self.allow_missing():
             program = self.compile_program(VS, FS)
             glUseProgram(program)
-            vbo = glGenBuffers(1)
+            vbo = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, vbo)
             glBufferData(
                 GL_ARRAY_BUFFER,
@@ -38,12 +38,12 @@ class TestGL46(GLTestCase):
             )
             # An indexed draw reads its indices from a bound element array
             # buffer, and generates INVALID_OPERATION where none is.
-            ebo = glGenBuffers(1)
+            ebo = one(glGenBuffers(1))
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
             glBufferData(
                 GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'I'), GL_STATIC_DRAW
             )
-            ind = glGenBuffers(1)
+            ind = one(glGenBuffers(1))
             glBindBuffer(GL_DRAW_INDIRECT_BUFFER, ind)
             # Five uints: DrawArraysIndirect reads the first four (count,
             # primCount, first, baseInstance) and DrawElementsIndirect all
@@ -52,7 +52,7 @@ class TestGL46(GLTestCase):
             glBufferData(
                 GL_DRAW_INDIRECT_BUFFER, np.array([3, 1, 0, 0, 0], 'I'), GL_STATIC_DRAW
             )
-            cnt = glGenBuffers(1)
+            cnt = one(glGenBuffers(1))
             glBindBuffer(GL_PARAMETER_BUFFER, cnt)
             glBufferData(GL_PARAMETER_BUFFER, np.array([1], 'I'), GL_STATIC_DRAW)
             glMultiDrawArraysIndirectCount(GL_TRIANGLES, ctypes.c_void_p(0), 0, 1, 0)

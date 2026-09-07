@@ -121,6 +121,7 @@ from OpenGL.raw.GL.VERSION import GL_1_3 as _simple
 from OpenGL.GL import images
 from OpenGL.GL.VERSION.GL_1_1 import glGetTexLevelParameteriv as _glGetTexLevelParameteriv
 from OpenGL.raw.GL._types import GL_UNSIGNED_BYTE as _GL_UNSIGNED_BYTE
+from OpenGL._scalar import as_int
 
 for dimensions in (1, 2, 3):
     for function in ('glCompressedTexImage%sD', 'glCompressedTexSubImage%sD'):
@@ -143,10 +144,10 @@ for dimensions in (1, 2, 3):
 def glGetCompressedTexImage(target, level, img=None):
     """Retrieve a compressed texture image"""
     if img is None:
-        length = _glGetTexLevelParameteriv(
+        length = as_int(_glGetTexLevelParameteriv(
             target,
             level,
             _simple.GL_TEXTURE_COMPRESSED_IMAGE_SIZE,
-        )
+        ))
         img = arrays.ArrayDatatype.zeros((length,), _GL_UNSIGNED_BYTE)
     return _simple.glGetCompressedTexImage(target, level, img)

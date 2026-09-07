@@ -14,7 +14,7 @@ import unittest
 
 import pytest
 
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 from gltestcase import GLTestCase
 import OpenGL
 from OpenGL import acceleratesupport, arrays, error, _configflags
@@ -286,7 +286,7 @@ class TestWhereTheResultGoes(GLTestCase):
 
     def test_a_generator_allocates_when_it_is_not_given_somewhere(self):
         self.require_vertex_arrays()
-        allocated = glGenVertexArrays(1)
+        allocated = one(glGenVertexArrays(1))
         self.assertTrue(int(allocated), 'no name was generated')
         glDeleteVertexArrays(1, object_names(int(allocated)))
 

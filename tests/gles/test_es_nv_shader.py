@@ -8,7 +8,7 @@ Memory-object and Vulkan interop extensions are skipped with a reason.
 """
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from egltestcase import ESTestCase
 
@@ -50,15 +50,15 @@ class TestESNVShader(ESTestCase):
             glUniformHandleui64vNV, glProgramUniformHandleui64NV,
             glProgramUniformHandleui64vNV,
         )
-        tex = int(glGenTextures(1)); glBindTexture(GL_TEXTURE_2D, tex)
+        tex = one(glGenTextures(1)); glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4)
-        sampler = int(glGenSamplers(1)); glSamplerParameteri(sampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
-        handle = int(glGetTextureHandleNV(tex))
+        sampler = one(glGenSamplers(1)); glSamplerParameteri(sampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+        handle = one(glGetTextureHandleNV(tex))
         self.assertTrue(handle)
-        self.assertTrue(int(glGetTextureSamplerHandleNV(tex, sampler)))
+        self.assertTrue(one(glGetTextureSamplerHandleNV(tex, sampler)))
         glMakeTextureHandleResidentNV(handle)
         self.assertTrue(glIsTextureHandleResidentNV(handle))
-        img = int(glGetImageHandleNV(tex, 0, GL_FALSE, 0, GL_RGBA8))
+        img = one(glGetImageHandleNV(tex, 0, GL_FALSE, 0, GL_RGBA8))
         glMakeImageHandleResidentNV(img, GL_READ_ONLY)
         self.assertTrue(glIsImageHandleResidentNV(img))
         glMakeImageHandleNonResidentNV(img)
@@ -133,7 +133,7 @@ class TestESNVShader(ESTestCase):
             GL_SHADING_RATE_1_INVOCATION_PER_PIXEL_NV,
             GL_SHADING_RATE_SAMPLE_ORDER_DEFAULT_NV,
         )
-        tex = int(glGenTextures(1)); glBindTexture(GL_TEXTURE_2D, tex)
+        tex = one(glGenTextures(1)); glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_R8UI, 4, 4)
         glBindShadingRateImageNV(tex)
         glShadingRateImageBarrierNV(GL_TRUE)
@@ -157,19 +157,19 @@ class TestESNVShader(ESTestCase):
         program = shaders.compileProgram(
             shaders.compileShader(MESH, GL_MESH_SHADER_NV),
             shaders.compileShader(MESH_FRAG, GL_FRAGMENT_SHADER), validate=False)
-        tex = int(glGenTextures(1)); glBindTexture(GL_TEXTURE_2D, tex)
+        tex = one(glGenTextures(1)); glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 8, 8)
-        fbo = int(glGenFramebuffers(1)); glBindFramebuffer(GL_FRAMEBUFFER, fbo)
+        fbo = one(glGenFramebuffers(1)); glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0)
         glViewport(0, 0, 8, 8)
         glUseProgram(program)
         glDrawMeshTasksNV(0, 1)
-        ind = int(glGenBuffers(1)); glBindBuffer(GL_DRAW_INDIRECT_BUFFER, ind)
+        ind = one(glGenBuffers(1)); glBindBuffer(GL_DRAW_INDIRECT_BUFFER, ind)
         glBufferData(GL_DRAW_INDIRECT_BUFFER, np.array([1, 0], 'u4'), GL_STATIC_DRAW)
         glDrawMeshTasksIndirectNV(0)
         glMultiDrawMeshTasksIndirectNV(0, 1, 0)
         param_buffer = 0x80EE  # GL_PARAMETER_BUFFER (indirect-parameters binding)
-        pbuf = int(glGenBuffers(1)); glBindBuffer(param_buffer, pbuf)
+        pbuf = one(glGenBuffers(1)); glBindBuffer(param_buffer, pbuf)
         glBufferData(param_buffer, np.array([0], 'u4'), GL_STATIC_DRAW)
         glMultiDrawMeshTasksIndirectCountNV(0, 0, 0, 0)
         glBindBuffer(param_buffer, 0); glBindBuffer(GL_DRAW_INDIRECT_BUFFER, 0)

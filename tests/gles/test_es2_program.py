@@ -3,6 +3,7 @@
 
 import unittest
 
+from arraycompat import one
 from egltestcase import ESTestCase
 
 from OpenGL.GLES2 import (
@@ -114,7 +115,7 @@ class TestES2Program(ESTestCase):
         # precision query + compiler release
         precision, rng = glGetShaderPrecisionFormat(GL_FRAGMENT_SHADER, GL_HIGH_FLOAT)
         self.assertEqual(len(rng), 2)
-        self.assertGreaterEqual(int(precision), 0)
+        self.assertGreaterEqual(one(precision), 0)
         glReleaseShaderCompiler()
 
         glDetachShader(program, vs)

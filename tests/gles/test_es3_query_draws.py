@@ -3,7 +3,7 @@
 
 import unittest
 import ctypes
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from egltestcase import ESTestCase
 
@@ -69,9 +69,9 @@ class TestES3QueryDraws(ESTestCase):
         super(TestES3QueryDraws, self).setUp()
         self.program = self.compile_program(VERTEX, FRAGMENT)
         glUseProgram(self.program)
-        self.vao = glGenVertexArrays(1)
+        self.vao = one(glGenVertexArrays(1))
         glBindVertexArray(int(self.vao))
-        self.vbo = glGenBuffers(1)
+        self.vbo = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, self.vbo)
         glBufferData(
             GL_ARRAY_BUFFER,
@@ -81,7 +81,7 @@ class TestES3QueryDraws(ESTestCase):
         )
         glEnableVertexAttribArray(0)
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, None)
-        self.ebo = glGenBuffers(1)
+        self.ebo = one(glGenBuffers(1))
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.ebo)
         glBufferData(
             GL_ELEMENT_ARRAY_BUFFER,
@@ -91,7 +91,7 @@ class TestES3QueryDraws(ESTestCase):
         )
 
     def test_queries_and_instanced(self):
-        query = glGenQueries(1)
+        query = one(glGenQueries(1))
         glBeginQuery(GL_ANY_SAMPLES_PASSED, query)
         glDrawArraysInstanced(GL_TRIANGLES, 0, 3, 2)
         glDrawElementsInstanced(GL_TRIANGLES, 3, GL_UNSIGNED_INT, None, 2)
@@ -108,7 +108,7 @@ class TestES3QueryDraws(ESTestCase):
         glDeleteQueries(1, object_names(query))
 
     def test_buffer_copy_and_query(self):
-        dst = glGenBuffers(1)
+        dst = one(glGenBuffers(1))
         glBindBuffer(GL_COPY_WRITE_BUFFER, dst)
         glBufferData(GL_COPY_WRITE_BUFFER, 24, None, GL_STATIC_DRAW)
         glBindBuffer(GL_ARRAY_BUFFER, self.vbo)

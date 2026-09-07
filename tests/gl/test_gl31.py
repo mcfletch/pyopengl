@@ -3,7 +3,7 @@
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -52,7 +52,7 @@ class TestGL31(GLTestCase):
         glGetUniformIndices(program, 1, names, indices)
         glGetActiveUniformsiv(program, 1, indices, GL_UNIFORM_TYPE, np.zeros(1, 'i'))
         glGetActiveUniformName(program, int(indices[0]), 64)
-        ubo = glGenBuffers(1)
+        ubo = one(glGenBuffers(1))
         glBindBuffer(GL_UNIFORM_BUFFER, ubo)
         glBufferData(GL_UNIFORM_BUFFER, np.ones(4, 'f'), GL_STATIC_DRAW)
         glBindBufferBase(GL_UNIFORM_BUFFER, 0, ubo)
@@ -63,7 +63,7 @@ class TestGL31(GLTestCase):
     def test_instanced_and_copy(self):
         program = self.compile_program(PLAIN_VERTEX, FRAGMENT)
         glUseProgram(program)
-        vbo = glGenBuffers(1)
+        vbo = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, vbo)
         glBufferData(
             GL_ARRAY_BUFFER, np.array([(-1, -1), (1, -1), (0, 1)], 'f'), GL_STATIC_DRAW
@@ -71,12 +71,12 @@ class TestGL31(GLTestCase):
         loc = glGetAttribLocation(program, 'position')
         glEnableVertexAttribArray(loc)
         glVertexAttribPointer(loc, 2, GL_FLOAT, False, 0, None)
-        ebo = glGenBuffers(1)
+        ebo = one(glGenBuffers(1))
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'I'), GL_STATIC_DRAW)
         glDrawArraysInstanced(GL_TRIANGLES, 0, 3, 2)
         glDrawElementsInstanced(GL_TRIANGLES, 3, GL_UNSIGNED_INT, None, 2)
-        dst = glGenBuffers(1)
+        dst = one(glGenBuffers(1))
         glBindBuffer(GL_COPY_WRITE_BUFFER, dst)
         glBufferData(GL_COPY_WRITE_BUFFER, 24, None, GL_STATIC_DRAW)
         glBindBuffer(GL_ARRAY_BUFFER, vbo)
@@ -85,10 +85,10 @@ class TestGL31(GLTestCase):
         self.check_error('instanced/copy')
 
     def test_texture_buffer(self):
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_TEXTURE_BUFFER, buf)
         glBufferData(GL_TEXTURE_BUFFER, np.zeros(16, 'f'), GL_STATIC_DRAW)
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_BUFFER, tex)
         glTexBuffer(GL_TEXTURE_BUFFER, GL_R32F, buf)
         self.check_error('texture buffer')

@@ -160,6 +160,22 @@ def copy_safe(data, dtype):
     return data
 
 
+def one(generated):
+    """The single name a ``glGen*(1)``-style call produced.
+
+    ``SIZE_1_ARRAY_UNPACK`` decides whether a call that makes one object hands
+    back the name or a one-element array holding it, so a caller that has not
+    pinned the flag has to read both.  ``int()`` alone does not: numpy refuses
+    to convert an array that is not zero-dimensional, so
+    ``int(glGenTextures(1))`` -- which reads like the careful spelling -- works
+    only while the flag is on.
+    """
+    try:
+        return int(generated)
+    except TypeError:
+        return int(generated[0])
+
+
 def object_names(*values):
     """GL object names as an entry point that takes an array of them wants.
 

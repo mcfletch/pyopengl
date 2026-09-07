@@ -3,7 +3,7 @@
 blit/invalidate and layered-FBO entry points."""
 
 import unittest
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from arraycompat import copy_safe
 from egltestcase import ESTestCase
@@ -55,10 +55,10 @@ class TestES3FBOStorage(ESTestCase):
     stencil_size = 8
 
     def test_immutable_storage(self):
-        tex2d = glGenTextures(1)
+        tex2d = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex2d)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 16, 16)
-        tex3d = glGenTextures(1)
+        tex3d = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_3D, tex3d)
         glTexStorage3D(GL_TEXTURE_3D, 1, GL_RGBA8, 4, 4, 4)
 
@@ -70,7 +70,7 @@ class TestES3FBOStorage(ESTestCase):
         self.check_error('immutable storage')
 
     def test_multisample_renderbuffer(self):
-        rb = glGenRenderbuffers(1)
+        rb = one(glGenRenderbuffers(1))
         glBindRenderbuffer(GL_RENDERBUFFER, rb)
         glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_RGBA8, 16, 16)
         self.check_error('multisample renderbuffer')
@@ -85,10 +85,10 @@ class TestES3FBOStorage(ESTestCase):
             (GL_RGBA8I, glClearBufferiv, np.array([1, 2, 3, 4], 'i')),
             (GL_RGBA8UI, glClearBufferuiv, np.array([1, 2, 3, 4], 'u4')),
         ):
-            tex = glGenTextures(1)
+            tex = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_2D, tex)
             glTexStorage2D(GL_TEXTURE_2D, 1, internal, 4, 4)
-            fbo = glGenFramebuffers(1)
+            fbo = one(glGenFramebuffers(1))
             glBindFramebuffer(GL_FRAMEBUFFER, fbo)
             glFramebufferTexture2D(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0
@@ -100,10 +100,10 @@ class TestES3FBOStorage(ESTestCase):
 
     def test_blit_invalidate_layer(self):
         def color_fbo():
-            tex = glGenTextures(1)
+            tex = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_2D, tex)
             glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 16, 16)
-            fbo = glGenFramebuffers(1)
+            fbo = one(glGenFramebuffers(1))
             glBindFramebuffer(GL_FRAMEBUFFER, fbo)
             glFramebufferTexture2D(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0
@@ -127,10 +127,10 @@ class TestES3FBOStorage(ESTestCase):
         self.check_error('blit/invalidate')
 
         # layered attachment from a 2D array texture
-        arr = glGenTextures(1)
+        arr = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D_ARRAY, arr)
         glTexStorage3D(GL_TEXTURE_2D_ARRAY, 1, GL_RGBA8, 16, 16, 2)
-        layered = glGenFramebuffers(1)
+        layered = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, layered)
         glFramebufferTextureLayer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, arr, 0, 1)
         self.check_error('framebuffer texture layer')

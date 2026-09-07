@@ -23,7 +23,7 @@ this stays in lock-step with the registry.  A size mismatch is a bug in
 import ctypes
 import unittest
 
-from arraycompat import object_names
+from arraycompat import object_names, one
 from gltestcase import GLTestCase
 from glget_check import GLGetCheckMixin, feature_glgets
 
@@ -76,10 +76,10 @@ class TestComputeGLGet(GLGetCheckMixin, GLTestCase):
 
     def test_dispatch_indirect_buffer_binding_roundtrip(self):
         """state pname with a setter: bind a buffer, read the binding back."""
-        buf = int(glGenBuffers(1))
+        buf = one(glGenBuffers(1))
         self.addCleanup(glDeleteBuffers, 1, object_names(buf))
         glBindBuffer(GL_DISPATCH_INDIRECT_BUFFER, buf)
-        got = int(glGetIntegerv(GL_DISPATCH_INDIRECT_BUFFER_BINDING))
+        got = one(glGetIntegerv(GL_DISPATCH_INDIRECT_BUFFER_BINDING))
         self.assertEqual(got, buf)
 
     # --- Layer 2: object-scoped, spec-driven round-trips -----------------
@@ -104,7 +104,7 @@ class TestComputeGLGet(GLGetCheckMixin, GLTestCase):
             'layout(std140) uniform Blk { float value; } blk;\n'
             'layout(std430) buffer Out { float v; };\n',
         )
-        idx = int(glGetUniformBlockIndex(prog, 'Blk'))
+        idx = one(glGetUniformBlockIndex(prog, 'Blk'))
         self.assertNotEqual(idx, GL_INVALID_INDEX)
         # NB: glGetActiveUniformBlockiv has no PyOpenGL output wrapper, so it does
         # not consume the _glget_size_mapping entry -- the caller must pass the
@@ -116,18 +116,18 @@ class TestComputeGLGet(GLGetCheckMixin, GLTestCase):
         self.assertEqual(out[0], GL_TRUE)
 
     def test_atomic_counter_buffer_referenced_by_compute(self):
-        if int(glGetIntegerv(GL_MAX_COMPUTE_ATOMIC_COUNTERS)) < 1:
+        if one(glGetIntegerv(GL_MAX_COMPUTE_ATOMIC_COUNTERS)) < 1:
             self.skipTest('no compute atomic counters')
         prog = self._link_compute(
             'atomicCounterIncrement(counter);\n',
             'layout(binding=0, offset=0) uniform atomic_uint counter;\n',
         )
-        nbuf = int(glGetProgramiv(prog, GL_ACTIVE_ATOMIC_COUNTER_BUFFERS))
+        nbuf = one(glGetProgramiv(prog, GL_ACTIVE_ATOMIC_COUNTER_BUFFERS))
         self.assertGreaterEqual(nbuf, 1)
         ref = glGetActiveAtomicCounterBufferiv(
             prog, 0, GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER
         )
-        self.assertEqual(int(ref), GL_TRUE)
+        self.assertEqual(one(ref), GL_TRUE)
         self.assert_dims(
             'GL_ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER', ref, (1,)
         )

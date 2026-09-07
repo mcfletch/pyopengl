@@ -11,7 +11,7 @@ handles and are skipped with a reason (not counted as covered).
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from egltestcase import ESTestCase
 
@@ -33,10 +33,10 @@ class TestESNVIDIAExtra(ESTestCase):
             glRenderbufferStorageMultisampleEXT, 'glRenderbufferStorageMultisampleEXT'
         )
 
-        rbo = int(glGenRenderbuffers(1))
+        rbo = one(glGenRenderbuffers(1))
         glBindRenderbuffer(GL_RENDERBUFFER, rbo)
         glRenderbufferStorageMultisampleEXT(GL_RENDERBUFFER, 4, GL_RGBA8, 8, 8)
-        fbo = int(glGenFramebuffers(1))
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferRenderbuffer(
             GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, rbo
@@ -93,7 +93,7 @@ class TestESNVIDIAExtra(ESTestCase):
         # name collides with a desktop-GL command; see require_entrypoint
         self.require_entrypoint(glTexPageCommitmentEXT, 'glTexPageCommitmentEXT')
 
-        tex = int(glGenTextures(1))
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SPARSE_EXT, GL_TRUE)
         buf = np.zeros(1, 'i')
@@ -151,11 +151,11 @@ class TestESNVIDIAExtra(ESTestCase):
         glLinkProgram(program)
         glUseProgram(program)
 
-        vao = int(glGenVertexArrays(1))
+        vao = one(glGenVertexArrays(1))
         glBindVertexArray(vao)
-        tf = int(glGenTransformFeedbacks(1))
+        tf = one(glGenTransformFeedbacks(1))
         glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, tf)
-        tbo = int(glGenBuffers(1))
+        tbo = one(glGenBuffers(1))
         glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, tbo)
         glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, 16 * 4, None, GL_DYNAMIC_COPY)
         glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, tbo)

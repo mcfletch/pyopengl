@@ -2,7 +2,7 @@
 """GL 1.0 (compatibility): texture images, parameters, env, texgen, queries."""
 
 import unittest
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -13,7 +13,7 @@ class TestGL1Texture(GLTestCase):
     gl_version = (2, 1)
 
     def test_image_and_parameters(self):
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexImage2D(
             GL_TEXTURE_2D,
@@ -72,7 +72,7 @@ class TestTextureNamesAndResidence(GLTestCase):
     gl_version = (2, 1)
 
     def test_generating_one_name_gives_a_usable_integer(self):
-        texture = glGenTextures(1)
+        texture = one(glGenTextures(1))
         self.assertTrue(texture)
         self.assertTrue(int(texture))
         glDeleteTextures(1, object_names(int(texture)))
@@ -130,7 +130,7 @@ class TestQueryingTextureState(GLTestCase):
         """SF#2895081: this pname read back as nothing at all."""
         units = glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS)
         self.assertTrue(units, units)
-        self.assertGreaterEqual(int(units), 2)
+        self.assertGreaterEqual(one(units), 2)
 
     def test_the_histogram_of_the_imaging_subset_switches_on_and_off(self):
         """``GL_ARB_imaging`` is an optional block of the compatibility profile."""

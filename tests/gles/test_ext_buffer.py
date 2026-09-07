@@ -4,7 +4,7 @@ sampler objects, framebuffer discard and external memory objects."""
 
 import unittest
 import ctypes
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from arraycompat import copy_safe
 from egltestcase import ESTestCase
@@ -58,7 +58,7 @@ class TestBufferExtensions(ESTestCase):
     gl_version = (3, 0)
 
     def _array_buffer(self, nbytes=64):
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(
             GL_ARRAY_BUFFER, nbytes, np.zeros(nbytes // 4, 'f'), GL_STATIC_DRAW
@@ -68,7 +68,7 @@ class TestBufferExtensions(ESTestCase):
     def test_mesa_sampler_objects(self):
         self.require_extension('GL_MESA_sampler_objects')
         with self.exercise():
-            ids = mesa_samplers.glGenSamplers(1)
+            ids = one(mesa_samplers.glGenSamplers(1))
             s = int(ids)
             mesa_samplers.glBindSampler(0, s)
             mesa_samplers.glSamplerParameteri(s, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
@@ -113,7 +113,7 @@ class TestBufferExtensions(ESTestCase):
             )
 
             program = self.compile_program(VERTEX, FRAGMENT)
-            length = int(glGetProgramiv(program, GL_PROGRAM_BINARY_LENGTH))
+            length = one(glGetProgramiv(program, GL_PROGRAM_BINARY_LENGTH))
             if length < 1:
                 self.skipTest('no retrievable binary')
             out_len = (ctypes.c_int * 1)()
@@ -139,7 +139,7 @@ class TestBufferExtensions(ESTestCase):
     def test_ext_buffer_storage(self):
         self.require_extension('GL_EXT_buffer_storage')
         with self.exercise():
-            buf = glGenBuffers(1)
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             ext_bufstore.glBufferStorageEXT(
                 GL_ARRAY_BUFFER, 64, None, GL_DYNAMIC_STORAGE_BIT_EXT
@@ -193,35 +193,35 @@ class TestBufferExtensions(ESTestCase):
             m2 = np.zeros(1, 'u4')
             ext_memory.glCreateMemoryObjectsEXT(1, m2)
             mm = int(m2[0])
-            buf2 = int(glGenBuffers(1))
+            buf2 = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf2)
             ext_memory.glBufferStorageMemEXT(GL_ARRAY_BUFFER, 64, mm, 0)
-            ext_memory.glNamedBufferStorageMemEXT(int(glGenBuffers(1)), 64, mm, 0)
-            glBindTexture(GL_TEXTURE_2D, int(glGenTextures(1)))
+            ext_memory.glNamedBufferStorageMemEXT(one(glGenBuffers(1)), 64, mm, 0)
+            glBindTexture(GL_TEXTURE_2D, one(glGenTextures(1)))
             ext_memory.glTexStorageMem1DEXT(GL_TEXTURE_2D, 1, GL_RGBA8, 4, mm, 0)
             ext_memory.glTexStorageMem2DEXT(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4, mm, 0)
             ext_memory.glTexStorageMem2DMultisampleEXT(
                 GL_TEXTURE_2D_MULTISAMPLE, 4, GL_RGBA8, 4, 4, GL_TRUE, mm, 0
             )
-            glBindTexture(GL_TEXTURE_3D, int(glGenTextures(1)))
+            glBindTexture(GL_TEXTURE_3D, one(glGenTextures(1)))
             ext_memory.glTexStorageMem3DEXT(GL_TEXTURE_3D, 1, GL_RGBA8, 4, 4, 4, mm, 0)
             ext_memory.glTexStorageMem3DMultisampleEXT(
                 GL_TEXTURE_3D, 4, GL_RGBA8, 4, 4, 4, GL_TRUE, mm, 0
             )
             ext_memory.glTextureStorageMem1DEXT(
-                int(glGenTextures(1)), 1, GL_RGBA8, 4, mm, 0
+                one(glGenTextures(1)), 1, GL_RGBA8, 4, mm, 0
             )
             ext_memory.glTextureStorageMem2DEXT(
-                int(glGenTextures(1)), 1, GL_RGBA8, 4, 4, mm, 0
+                one(glGenTextures(1)), 1, GL_RGBA8, 4, 4, mm, 0
             )
             ext_memory.glTextureStorageMem2DMultisampleEXT(
-                int(glGenTextures(1)), 4, GL_RGBA8, 4, 4, GL_TRUE, mm, 0
+                one(glGenTextures(1)), 4, GL_RGBA8, 4, 4, GL_TRUE, mm, 0
             )
             ext_memory.glTextureStorageMem3DEXT(
-                int(glGenTextures(1)), 1, GL_RGBA8, 4, 4, 4, mm, 0
+                one(glGenTextures(1)), 1, GL_RGBA8, 4, 4, 4, mm, 0
             )
             ext_memory.glTextureStorageMem3DMultisampleEXT(
-                int(glGenTextures(1)), 4, GL_RGBA8, 4, 4, 4, GL_TRUE, mm, 0
+                one(glGenTextures(1)), 4, GL_RGBA8, 4, 4, 4, GL_TRUE, mm, 0
             )
 
 

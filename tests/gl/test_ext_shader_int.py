@@ -5,7 +5,7 @@ GL_EXT_gpu_shader4 -- exercised against real programs in a core context."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -138,7 +138,7 @@ class TestGPUShaderInt64(GLTestCase):
             glVertexAttribL3dvEXT(1, np.zeros(3, 'd'))
             glVertexAttribL4dEXT(1, 1, 2, 3, 4)
             glVertexAttribL4dvEXT(1, np.zeros(4, 'd'))
-            buf = int(glGenBuffers(1))
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             glBufferData(GL_ARRAY_BUFFER, np.zeros(8, 'd'), GL_STATIC_DRAW)
             glVertexAttribLPointerEXT(1, 4, GL_DOUBLE, 0, None)
@@ -202,7 +202,7 @@ class TestGPUShader4(GLTestCase):
             glGetVertexAttribIuivEXT(
                 ai, GL_VERTEX_ATTRIB_ARRAY_ENABLED, np.zeros(1, 'I')
             )
-            buf = int(glGenBuffers(1))
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             glBufferData(GL_ARRAY_BUFFER, np.zeros(16, 'i'), GL_STATIC_DRAW)
             glVertexAttribIPointerEXT(ai, 4, GL_INT, 0, None)

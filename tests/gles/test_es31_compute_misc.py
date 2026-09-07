@@ -4,7 +4,7 @@ attachments, multisample textures, texture-level and vertex-binding state."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from egltestcase import ESTestCase
 
@@ -88,13 +88,13 @@ class TestES31ComputeMisc(ESTestCase):
 
     def test_image_and_indirect_dispatch(self):
         program = self.compile_compute(COMPUTE)
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_R32UI, 4, 4)
         glBindImageTexture(0, tex, 0, GL_FALSE, 0, GL_WRITE_ONLY, GL_R32UI)
         glUseProgram(program)
 
-        indirect = glGenBuffers(1)
+        indirect = one(glGenBuffers(1))
         glBindBuffer(GL_DISPATCH_INDIRECT_BUFFER, indirect)
         glBufferData(
             GL_DISPATCH_INDIRECT_BUFFER, 12, np.array([1, 1, 1], 'u4'), GL_STATIC_DRAW
@@ -106,9 +106,9 @@ class TestES31ComputeMisc(ESTestCase):
     def test_indirect_draws(self):
         program = self.compile_program(VERTEX, FRAGMENT)
         glUseProgram(program)
-        vao = glGenVertexArrays(1)
+        vao = one(glGenVertexArrays(1))
         glBindVertexArray(int(vao))
-        vbo = glGenBuffers(1)
+        vbo = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, vbo)
         glBufferData(
             GL_ARRAY_BUFFER,
@@ -118,13 +118,13 @@ class TestES31ComputeMisc(ESTestCase):
         )
         glEnableVertexAttribArray(0)
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, None)
-        ebo = glGenBuffers(1)
+        ebo = one(glGenBuffers(1))
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
         glBufferData(
             GL_ELEMENT_ARRAY_BUFFER, 12, np.array([0, 1, 2], 'u4'), GL_STATIC_DRAW
         )
 
-        indirect = glGenBuffers(1)
+        indirect = one(glGenBuffers(1))
         glBindBuffer(GL_DRAW_INDIRECT_BUFFER, indirect)
         # arrays-indirect: count, instanceCount, first, baseInstance
         glBufferData(
@@ -139,7 +139,7 @@ class TestES31ComputeMisc(ESTestCase):
         self.check_error('indirect draws')
 
     def test_framebuffer_no_attachments(self):
-        fbo = glGenFramebuffers(1)
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferParameteri(GL_FRAMEBUFFER, GL_FRAMEBUFFER_DEFAULT_WIDTH, 16)
         glFramebufferParameteri(GL_FRAMEBUFFER, GL_FRAMEBUFFER_DEFAULT_HEIGHT, 16)
@@ -150,7 +150,7 @@ class TestES31ComputeMisc(ESTestCase):
         self.check_error('framebuffer params')
 
     def test_multisample_and_levels(self):
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, tex)
         glTexStorage2DMultisample(
             GL_TEXTURE_2D_MULTISAMPLE, 4, GL_RGBA8, 16, 16, GL_TRUE
@@ -163,7 +163,7 @@ class TestES31ComputeMisc(ESTestCase):
         glSampleMaski(0, 0xFF)
 
         # sample-position query needs a bound multisample framebuffer
-        fbo = glGenFramebuffers(1)
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferTexture2D(
             GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, tex, 0
@@ -177,9 +177,9 @@ class TestES31ComputeMisc(ESTestCase):
         self.check_error('multisample / levels')
 
     def test_vertex_binding(self):
-        vao = glGenVertexArrays(1)
+        vao = one(glGenVertexArrays(1))
         glBindVertexArray(int(vao))
-        vbo = glGenBuffers(1)
+        vbo = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, vbo)
         glBufferData(GL_ARRAY_BUFFER, 64, np.zeros(16, 'f'), GL_STATIC_DRAW)
         glBindVertexBuffer(0, vbo, 0, 16)

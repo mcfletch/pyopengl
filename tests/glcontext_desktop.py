@@ -14,6 +14,7 @@ import contextlib
 from OpenGL import GL as _gl
 from OpenGL import GLU as _glu
 
+from arraycompat import one
 from glcontext import ContextTestCase
 
 
@@ -48,7 +49,7 @@ class DesktopGLTestCaseBase(ContextTestCase):
         # The core profile requires a bound VAO for any vertex operation.
         self._vao = None
         if self.profile.lower() == 'core' and self.gl_version >= (3, 0):
-            self._vao = _gl.glGenVertexArrays(1)
+            self._vao = one(_gl.glGenVertexArrays(1))
             _gl.glBindVertexArray(self._vao)
 
     def assert_profile(self, expected):

@@ -4,7 +4,7 @@ secondary-colour, fog-coord, NV half-float.  These predate (or mirror) core
 entry points; exercised in a compatibility context, skipped where unexported."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -137,7 +137,7 @@ class TestSecondaryColorEXT(GLTestCase):
             glSecondaryColor3uivEXT(np.zeros(3, 'I'))
             glSecondaryColor3usEXT(1, 1, 1)
             glSecondaryColor3usvEXT(np.zeros(3, 'H'))
-            buf = glGenBuffers(1)
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             glBufferData(GL_ARRAY_BUFFER, np.zeros(12, 'f'), GL_STATIC_DRAW)
             glSecondaryColorPointerEXT(3, GL_FLOAT, 0, None)

@@ -3,7 +3,7 @@
 dual-source fragment output, packed (P-type) vertex specification."""
 
 import unittest
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -16,7 +16,7 @@ class TestGL33(GLTestCase):
     gl_version = (3, 3)
 
     def test_samplers(self):
-        s = glGenSamplers(1)
+        s = one(glGenSamplers(1))
         s = int(s[0]) if hasattr(s, '__len__') else int(s)
         glBindSampler(0, s)
         glSamplerParameteri(s, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
@@ -35,7 +35,7 @@ class TestGL33(GLTestCase):
 
     def test_divisor_and_query(self):
         glVertexAttribDivisor(0, 1)
-        q = glGenQueries(1)
+        q = one(glGenQueries(1))
         q = int(q[0]) if hasattr(q, '__len__') else int(q)
         glQueryCounter(q, GL_TIMESTAMP)
         glGetQueryObjecti64v(q, GL_QUERY_RESULT, np.zeros(1, 'q'))

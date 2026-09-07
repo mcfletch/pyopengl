@@ -4,7 +4,7 @@ scissor/depth-range arrays, double vertex attribs, program binary, ES compat."""
 
 import unittest
 import ctypes
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -44,7 +44,7 @@ class TestGL41(GLTestCase):
         self.assertEqual(
             glGetProgramiv(p, GL_LINK_STATUS), GL_TRUE, glGetProgramInfoLog(p)
         )
-        pipe = glGenProgramPipelines(1)
+        pipe = one(glGenProgramPipelines(1))
         pipe = int(pipe[0]) if hasattr(pipe, '__len__') else int(pipe)
         glBindProgramPipeline(pipe)
         glUseProgramStages(pipe, GL_FRAGMENT_SHADER_BIT, p)
@@ -133,7 +133,7 @@ class TestGL41(GLTestCase):
         glVertexAttribL2dv(2, np.zeros(2, 'd'))
         glVertexAttribL3dv(2, np.zeros(3, 'd'))
         glVertexAttribL4dv(2, np.zeros(4, 'd'))
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(GL_ARRAY_BUFFER, np.zeros(8, 'd'), GL_STATIC_DRAW)
         glVertexAttribLPointer(2, 4, GL_DOUBLE, 0, None)
@@ -162,7 +162,7 @@ class TestGL41(GLTestCase):
         p = glCreateShaderProgramv(GL_FRAGMENT_SHADER, 1, _char_pp([FRAGMENT]))
         glProgramParameteri(p, GL_PROGRAM_BINARY_RETRIEVABLE_HINT, GL_TRUE)
         glLinkProgram(p)
-        length = int(glGetProgramiv(p, GL_PROGRAM_BINARY_LENGTH))
+        length = one(glGetProgramiv(p, GL_PROGRAM_BINARY_LENGTH))
         if length < 1:
             self.skipTest('no retrievable binary')
         out_len = (ctypes.c_int * 1)()

@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 import testdecorator
+from arraycompat import one
 from OpenGL.GL import *
 from OpenGL.GL import shaders
 import checkutils
@@ -31,12 +32,12 @@ def main():
     glLinkProgram(program)
     glUseProgram(program)
 
-    vao = glGenVertexArrays(1)
+    vao = one(glGenVertexArrays(1))
     glBindVertexArray(vao)
 
     data = (GLfloat * 5)(1.0, 2.0, 3.0, 4.0, 5.0)
 
-    vbo = glGenBuffers(1)
+    vbo = one(glGenBuffers(1))
     glBindBuffer(GL_ARRAY_BUFFER, vbo)
     glBufferData(GL_ARRAY_BUFFER, ctypes.sizeof(data), data, GL_STATIC_DRAW)
 
@@ -45,7 +46,7 @@ def main():
     # Note the need to cast 0 to a GLvoidp here!
     glVertexAttribPointer(inputAttrib, 1, GL_FLOAT, GL_FALSE, 0, GLvoidp(0))
 
-    tbo = glGenBuffers(1)
+    tbo = one(glGenBuffers(1))
     glBindBuffer(GL_ARRAY_BUFFER, tbo)
     glBufferData(GL_ARRAY_BUFFER, ctypes.sizeof(data), None, GL_STATIC_READ)
 

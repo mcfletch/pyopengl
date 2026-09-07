@@ -17,7 +17,7 @@ import unittest
 
 import pytest
 
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 from gltestcase import GLTestCase
 from OpenGL.arrays import arraydatatype
 from OpenGL.GL import *  # noqa: F401,F403
@@ -93,7 +93,7 @@ class TestReadingATextureBack(GLTestCase):
     SIDE = 4
 
     def uploaded(self):
-        texture = int(glGenTextures(1))
+        texture = one(glGenTextures(1))
         self.defer_cleanup(lambda: glDeleteTextures(1, object_names(texture)))
         glBindTexture(GL_TEXTURE_2D, texture)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
@@ -178,7 +178,7 @@ class TestDrawingPixels(GLTestCase):
         self.check_error('glDrawPixels with GL_BITMAP')
 
     def test_a_null_texture_image_allocates_without_data(self):
-        texture = int(glGenTextures(1))
+        texture = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, texture)
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, 512, 512, 0, GL_RGB, GL_INT, None)
         self.check_error('glTexImage2D with no data')
@@ -193,7 +193,7 @@ class TestTwoComponentTextures(GLTestCase):
 
     def test_a_two_channel_float_texture_uploads(self):
         self.require_extension('GL_ARB_texture_rg')
-        texture = int(glGenTextures(1))
+        texture = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, texture)
         glTexImage2D(
             GL_TEXTURE_2D, 0, texture_rg.GL_RG, 1, 1, 0, GL_RG, GL_FLOAT,

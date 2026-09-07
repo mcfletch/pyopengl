@@ -10,7 +10,7 @@ skipped with a reason rather than smoke-probed.
 """
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 
@@ -37,10 +37,10 @@ class TestNVAdvanced(GLTestCase):
     gl_version = (4, 5)
 
     def _color_fbo(self, w=8, h=8):
-        tex = int(glGenTextures(1))
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, w, h)
-        fbo = int(glGenFramebuffers(1))
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0)
         glViewport(0, 0, w, h)
@@ -64,13 +64,13 @@ class TestNVAdvanced(GLTestCase):
         glUseProgram(program)
         glDrawMeshTasksNV(0, 1)
 
-        indirect = int(glGenBuffers(1))
+        indirect = one(glGenBuffers(1))
         glBindBuffer(GL_DRAW_INDIRECT_BUFFER, indirect)
         glBufferData(GL_DRAW_INDIRECT_BUFFER, np.array([1, 0], 'u4'), GL_STATIC_DRAW)
         glDrawMeshTasksIndirectNV(0)
         glMultiDrawMeshTasksIndirectNV(0, 1, 0)
 
-        param = int(glGenBuffers(1))
+        param = one(glGenBuffers(1))
         glBindBuffer(GL_PARAMETER_BUFFER, param)
         glBufferData(GL_PARAMETER_BUFFER, np.array([0], 'u4'), GL_STATIC_DRAW)
         glMultiDrawMeshTasksIndirectCountNV(0, 0, 0, 0)
@@ -111,7 +111,7 @@ class TestNVAdvanced(GLTestCase):
             '#version 450 core\nout vec4 c;void main(){c=vec4(1.0);}',
         )
         glUseProgram(program)
-        vao = int(glGenVertexArrays(1))
+        vao = one(glGenVertexArrays(1))
         glBindVertexArray(vao)
         glStateCaptureNV(state, GL_TRIANGLES)
 

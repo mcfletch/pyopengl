@@ -28,7 +28,7 @@ import weakref
 
 import pytest
 
-from arraycompat import np
+from arraycompat import np, one
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
 from OpenGL import _configflags
@@ -341,12 +341,12 @@ class TestReturnedValues(GLTestCase):
     def test_a_returned_scalar_output_is_the_callers_alone(self):
         """A one-element result is unpacked, so the array must not linger."""
         value, extra = call_and_count(lambda: glGetIntegerv(GL_MAX_TEXTURE_SIZE))
-        assert int(value) > 0
+        assert one(value) > 0
         assert extra == 0
 
     def test_a_returned_address_is_the_callers_alone(self):
         """A mapped buffer comes back as the address itself."""
-        buffers = glGenBuffers(1)
+        buffers = one(glGenBuffers(1))
         self.addCleanup(glDeleteBuffers, 1, buffers)
         glBindBuffer(GL_ARRAY_BUFFER, buffers)
         self.addCleanup(glBindBuffer, GL_ARRAY_BUFFER, 0)

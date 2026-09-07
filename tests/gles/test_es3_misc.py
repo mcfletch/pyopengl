@@ -3,7 +3,7 @@
 
 import unittest
 import ctypes
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from egltestcase import ESTestCase
 
@@ -61,7 +61,7 @@ class TestES3Misc(ESTestCase):
     gl_version = (3, 0)
 
     def test_compressed_3d_and_copy(self):
-        arr = glGenTextures(1)
+        arr = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D_ARRAY, arr)
         glCompressedTexImage3D(
             GL_TEXTURE_2D_ARRAY, 0, GL_COMPRESSED_RGB8_ETC2, 4, 4, 1, 0, 8, ETC2_BLOCK
@@ -80,14 +80,14 @@ class TestES3Misc(ESTestCase):
             ETC2_BLOCK,
         )
         # copy the (cleared) framebuffer into an uncompressed array layer
-        copy = glGenTextures(1)
+        copy = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D_ARRAY, copy)
         glTexStorage3D(GL_TEXTURE_2D_ARRAY, 1, GL_RGBA8, 16, 16, 2)
         glCopyTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, 0, 0, 0, 16, 16)
         self.check_error('compressed 3d / copy')
 
     def test_vertex_array_objects(self):
-        vao = glGenVertexArrays(1)
+        vao = one(glGenVertexArrays(1))
         glBindVertexArray(int(vao))
         self.assertTrue(glIsVertexArray(vao))
         glBindVertexArray(0)
@@ -97,7 +97,7 @@ class TestES3Misc(ESTestCase):
     def test_uniform_indices(self):
         program = self.compile_program(VERTEX, FRAGMENT)
         n = glGetProgramiv(program, GL_ACTIVE_UNIFORMS)
-        self.assertGreaterEqual(int(n), 1)
+        self.assertGreaterEqual(one(n), 1)
         indices = glGetUniformIndices(program, ['uf'])
         self.assertNotEqual(int(indices[0]), 0xFFFFFFFF)
         types = np.zeros(1, 'i')
@@ -118,7 +118,7 @@ class TestES3Misc(ESTestCase):
         glLinkProgram(program)
         self.assertEqual(glGetProgramiv(program, GL_LINK_STATUS), GL_TRUE)
 
-        length = int(glGetProgramiv(program, GL_PROGRAM_BINARY_LENGTH))
+        length = one(glGetProgramiv(program, GL_PROGRAM_BINARY_LENGTH))
         if length < 1:
             self.skipTest('driver reports no retrievable program binary')
         out_len = (ctypes.c_int * 1)()

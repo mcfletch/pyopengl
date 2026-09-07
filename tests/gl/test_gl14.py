@@ -4,7 +4,7 @@ secondary color, window pos."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from arraycompat import copy_safe
 from gltestcase import GLTestCase
@@ -84,7 +84,7 @@ class TestGL14(GLTestCase):
         glEnableClientState(GL_VERTEX_ARRAY)
         glVertexPointer(2, GL_FLOAT, 0, verts)
         glMultiDrawArrays(GL_TRIANGLES, np.array([0], 'i'), np.array([3], 'i'), 1)
-        ebo = glGenBuffers(1)
+        ebo = one(glGenBuffers(1))
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'I'), GL_STATIC_DRAW)
         # const void*const* indices -> array of byte offsets into the bound EBO

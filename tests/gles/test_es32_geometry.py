@@ -7,7 +7,7 @@ Skips where an ES3.2 context is unavailable.
 """
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from egltestcase import ESTestCase
 
@@ -62,7 +62,7 @@ class TestES32Geometry(ESTestCase):
         )
         glUseProgram(program)
 
-        vao = glGenVertexArrays(1)
+        vao = one(glGenVertexArrays(1))
         glBindVertexArray(int(vao))
         vbo = VBO(np.array([(0.0, 0.0)], dtype='f'))
         # The geometry shader emits fixed positions and never reads the vertex

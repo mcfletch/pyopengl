@@ -15,7 +15,7 @@ zero.  So a case that selects a buffer asks
 
 import unittest
 
-from arraycompat import object_names
+from arraycompat import object_names, one
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
 
@@ -32,7 +32,7 @@ class TestTheColourBufferName(GLTestCase):
 
     def test_a_framebuffer_object_is_named_by_its_attachment(self):
         self.require_extension('GL_ARB_framebuffer_object')
-        fbo = int(glGenFramebuffers(1))
+        fbo = one(glGenFramebuffers(1))
         self.defer_cleanup(lambda: glDeleteFramebuffers(1, object_names(fbo)))
         with self.framebuffer(fbo):
             assert self.colour_buffer_name() == GL_COLOR_ATTACHMENT0

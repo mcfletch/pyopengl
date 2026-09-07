@@ -8,7 +8,7 @@ parameter state, with a clean error state.
 """
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 
@@ -29,7 +29,7 @@ class TestNVARBPrograms(GLTestCase):
     gl_version = (4, 5)
 
     def _bind_vp4(self):
-        prog = int(glGenProgramsARB(1))
+        prog = one(glGenProgramsARB(1))
         glBindProgramARB(T, prog)
         glProgramStringARB(T, GL_PROGRAM_FORMAT_ASCII_ARB, len(ASM4), ASM4)
         return prog
@@ -76,7 +76,7 @@ class TestNVARBPrograms(GLTestCase):
         self._bind_vp4()
         pb = GL_VERTEX_PROGRAM_PARAMETER_BUFFER_NV
         # a buffer must be bound to the parameter-buffer binding point first
-        pbuf = int(glGenBuffers(1))
+        pbuf = one(glGenBuffers(1))
         glBindBufferBase(pb, 0, pbuf)
         glBufferData(pb, 4 * 16, None, GL_DYNAMIC_DRAW)
         glProgramBufferParametersfvNV(pb, 0, 0, 1, np.array([1, 2, 3, 4], 'f'))

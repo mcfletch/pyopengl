@@ -7,7 +7,7 @@ for state reasons still exercise the wrapper and are tolerated by exercise()."""
 
 import unittest
 import ctypes
-from arraycompat import np, nbytes  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import nbytes, np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -73,15 +73,15 @@ class TestEXTDSA(GLTestCase):
     def test_named_buffer(self):
         self.require()
         with self.allow_missing():
-            buf = int(glGenBuffers(1))
+            buf = one(glGenBuffers(1))
             glNamedBufferDataEXT(buf, 64, np.zeros(16, 'f'), GL_DYNAMIC_DRAW)
-            glNamedBufferStorageEXT(int(glGenBuffers(1)), 64, None, GL_MAP_READ_BIT)
+            glNamedBufferStorageEXT(one(glGenBuffers(1)), 64, None, GL_MAP_READ_BIT)
             glNamedBufferSubDataEXT(buf, 0, 16, np.ones(4, 'f'))
             glGetNamedBufferParameterivEXT(buf, GL_BUFFER_SIZE, np.zeros(1, 'i'))
             glGetNamedBufferSubDataEXT(buf, 0, 16, np.zeros(16, 'B'))
             ptr = ctypes.c_void_p()
             glGetNamedBufferPointervEXT(buf, GL_BUFFER_MAP_POINTER, ctypes.byref(ptr))
-            other = int(glGenBuffers(1))
+            other = one(glGenBuffers(1))
             glNamedBufferDataEXT(other, 64, None, GL_DYNAMIC_DRAW)
             glNamedCopyBufferSubDataEXT(buf, other, 0, 0, 16)
             glClearNamedBufferDataEXT(buf, GL_R32F, GL_RED, GL_FLOAT, None)
@@ -98,7 +98,7 @@ class TestEXTDSA(GLTestCase):
     def test_texture(self):
         self.require()
         with self.allow_missing():
-            tex = int(glGenTextures(1))
+            tex = one(glGenTextures(1))
             glTextureImage2DEXT(
                 tex, GL_TEXTURE_2D, 0, GL_RGBA8, 4, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, PX
             )
@@ -148,14 +148,14 @@ class TestEXTDSA(GLTestCase):
                 GL_UNSIGNED_BYTE,
                 np.zeros((4, 4, 4), 'B'),
             )
-            st = int(glGenTextures(1))
+            st = one(glGenTextures(1))
             glTextureStorage2DEXT(st, GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4)
             glBindMultiTextureEXT(GL_TEXTURE0, GL_TEXTURE_2D, tex)
-            ct = int(glGenTextures(1))
+            ct = one(glGenTextures(1))
             glCopyTextureImage2DEXT(ct, GL_TEXTURE_2D, 0, GL_RGBA8, 0, 0, 4, 4, 0)
             glCopyTextureSubImage2DEXT(ct, GL_TEXTURE_2D, 0, 0, 0, 0, 0, 4, 4)
-            tb = int(glGenTextures(1))
-            tbb = int(glGenBuffers(1))
+            tb = one(glGenTextures(1))
+            tbb = one(glGenBuffers(1))
             glNamedBufferDataEXT(tbb, 64, None, GL_STATIC_DRAW)
             glTextureBufferEXT(tb, GL_TEXTURE_BUFFER, GL_R32F, tbb)
         self.check_error('dsa texture')
@@ -163,16 +163,16 @@ class TestEXTDSA(GLTestCase):
     def test_texture_dim_variants(self):
         self.require()
         with self.allow_missing():
-            t1 = int(glGenTextures(1))
+            t1 = one(glGenTextures(1))
             glTextureImage1DEXT(
                 t1, GL_TEXTURE_1D, 0, GL_RGBA8, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, PX1
             )
             glTextureSubImage1DEXT(
                 t1, GL_TEXTURE_1D, 0, 0, 4, GL_RGBA, GL_UNSIGNED_BYTE, PX1
             )
-            ts1 = int(glGenTextures(1))
+            ts1 = one(glGenTextures(1))
             glTextureStorage1DEXT(ts1, GL_TEXTURE_1D, 1, GL_RGBA8, 4)
-            t3 = int(glGenTextures(1))
+            t3 = one(glGenTextures(1))
             glTextureImage3DEXT(
                 t3,
                 GL_TEXTURE_3D,
@@ -189,9 +189,9 @@ class TestEXTDSA(GLTestCase):
             glTextureSubImage3DEXT(
                 t3, GL_TEXTURE_3D, 0, 0, 0, 0, 2, 2, 2, GL_RGBA, GL_UNSIGNED_BYTE, PX3
             )
-            ts3 = int(glGenTextures(1))
+            ts3 = one(glGenTextures(1))
             glTextureStorage3DEXT(ts3, GL_TEXTURE_3D, 1, GL_RGBA8, 2, 2, 2)
-            ct1 = int(glGenTextures(1))
+            ct1 = one(glGenTextures(1))
             glTextureImage1DEXT(
                 ct1, GL_TEXTURE_1D, 0, GL_RGBA8, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, PX1
             )
@@ -203,8 +203,8 @@ class TestEXTDSA(GLTestCase):
                 glCopyTextureImage1DEXT(ct1, GL_TEXTURE_1D, 0, GL_RGBA8, 0, 0, 4, 0)
             glCopyTextureSubImage1DEXT(ct1, GL_TEXTURE_1D, 0, 0, 0, 0, 4)
             glCopyTextureSubImage3DEXT(ts3, GL_TEXTURE_3D, 0, 0, 0, 0, 0, 0, 2, 2)
-            tbr = int(glGenTextures(1))
-            bb = int(glGenBuffers(1))
+            tbr = one(glGenTextures(1))
+            bb = one(glGenBuffers(1))
             glNamedBufferDataEXT(bb, 64, None, GL_STATIC_DRAW)
             glTextureBufferRangeEXT(tbr, GL_TEXTURE_BUFFER, GL_R32F, bb, 0, 64)
         self.check_error('dsa texture dims')
@@ -212,19 +212,19 @@ class TestEXTDSA(GLTestCase):
         # page-commitment paths are not implemented by this driver; the calls
         # still drive the wrappers, and exercise() tolerates the GLError
         with self.exercise():
-            tms = int(glGenTextures(1))
+            tms = one(glGenTextures(1))
             glTextureStorage2DMultisampleEXT(
                 tms, GL_TEXTURE_2D_MULTISAMPLE, 4, GL_RGBA8, 4, 4, GL_TRUE
             )
-            tms3 = int(glGenTextures(1))
+            tms3 = one(glGenTextures(1))
             glTextureStorage3DMultisampleEXT(
                 tms3, GL_TEXTURE_2D_MULTISAMPLE_ARRAY, 4, GL_RGBA8, 4, 4, 2, GL_TRUE
             )
-            trb = int(glGenTextures(1))
-            rb = int(glGenRenderbuffers(1))
+            trb = one(glGenTextures(1))
+            rb = one(glGenRenderbuffers(1))
             glNamedRenderbufferStorageEXT(rb, GL_RGBA8, 4, 4)
             glTextureRenderbufferEXT(trb, explicit_multisample.GL_TEXTURE_RENDERBUFFER_NV, rb)
-            tsp = int(glGenTextures(1))
+            tsp = one(glGenTextures(1))
             glTextureStorage2DEXT(tsp, GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4)
             glTexturePageCommitmentEXT(tsp, 0, 0, 0, 0, 4, 4, 1, GL_TRUE)
 
@@ -233,7 +233,7 @@ class TestEXTDSA(GLTestCase):
         fmt = GL_COMPRESSED_RGB8_ETC2
         cdata = np.zeros(8, 'B')  # one ETC2 4x4 RGB block
         with self.allow_missing():
-            t2 = int(glGenTextures(1))
+            t2 = one(glGenTextures(1))
             glCompressedTextureImage2DEXT(
                 t2, GL_TEXTURE_2D, 0, fmt, 4, 4, 0, nbytes(cdata), cdata
             )
@@ -245,14 +245,14 @@ class TestEXTDSA(GLTestCase):
         # compressed 1D/3D targets are not valid for ETC2; the calls still drive
         # the wrappers, and exercise() tolerates the resulting GLError
         with self.exercise():
-            t1 = int(glGenTextures(1))
+            t1 = one(glGenTextures(1))
             glCompressedTextureImage1DEXT(
                 t1, GL_TEXTURE_1D, 0, fmt, 4, 0, nbytes(cdata), cdata
             )
             glCompressedTextureSubImage1DEXT(
                 t1, GL_TEXTURE_1D, 0, 0, 4, fmt, nbytes(cdata), cdata
             )
-            t3 = int(glGenTextures(1))
+            t3 = one(glGenTextures(1))
             glCompressedTextureImage3DEXT(
                 t3, GL_TEXTURE_3D, 0, fmt, 4, 4, 1, 0, nbytes(cdata), cdata
             )
@@ -425,7 +425,7 @@ class TestEXTDSA(GLTestCase):
             glCopyMultiTexSubImage3DEXT(
                 GL_TEXTURE0, GL_TEXTURE_3D, 0, 0, 0, 0, 0, 0, 2, 2
             )
-            cbuf = int(glGenBuffers(1))
+            cbuf = one(glGenBuffers(1))
             glNamedBufferDataEXT(cbuf, 32, np.zeros(8, 'f'), GL_STATIC_DRAW)
             glBindBuffer(GL_ARRAY_BUFFER, cbuf)
             glMultiTexCoordPointerEXT(GL_TEXTURE0, 2, GL_FLOAT, 0, None)
@@ -505,24 +505,24 @@ class TestEXTDSA(GLTestCase):
             glGetCompressedMultiTexImageEXT(
                 GL_TEXTURE0, GL_TEXTURE_2D, 0, np.zeros(8, 'B')
             )
-            mbuf = int(glGenBuffers(1))
+            mbuf = one(glGenBuffers(1))
             glNamedBufferDataEXT(mbuf, 64, None, GL_STATIC_DRAW)
             glMultiTexBufferEXT(GL_TEXTURE0, GL_TEXTURE_BUFFER, GL_R32F, mbuf)
-            mrb = int(glGenRenderbuffers(1))
+            mrb = one(glGenRenderbuffers(1))
             glNamedRenderbufferStorageEXT(mrb, GL_RGBA8, 4, 4)
             glMultiTexRenderbufferEXT(GL_TEXTURE0, explicit_multisample.GL_TEXTURE_RENDERBUFFER_NV, mrb)
 
     def test_named_framebuffer(self):
         self.require()
         with self.allow_missing():
-            fbo = int(glGenFramebuffers(1))
-            rbo = int(glGenRenderbuffers(1))
+            fbo = one(glGenFramebuffers(1))
+            rbo = one(glGenRenderbuffers(1))
             glNamedRenderbufferStorageEXT(rbo, GL_RGBA8, 16, 16)
             glNamedRenderbufferStorageMultisampleEXT(
-                int(glGenRenderbuffers(1)), 4, GL_RGBA8, 16, 16
+                one(glGenRenderbuffers(1)), 4, GL_RGBA8, 16, 16
             )
             glNamedRenderbufferStorageMultisampleCoverageEXT(
-                int(glGenRenderbuffers(1)), 4, 4, GL_RGBA8, 16, 16
+                one(glGenRenderbuffers(1)), 4, 4, GL_RGBA8, 16, 16
             )
             glGetNamedRenderbufferParameterivEXT(
                 rbo, GL_RENDERBUFFER_WIDTH, np.zeros(1, 'i')
@@ -530,7 +530,7 @@ class TestEXTDSA(GLTestCase):
             glNamedFramebufferRenderbufferEXT(
                 fbo, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, rbo
             )
-            tex = int(glGenTextures(1))
+            tex = one(glGenTextures(1))
             glTextureImage2DEXT(
                 tex,
                 GL_TEXTURE_2D,
@@ -547,14 +547,14 @@ class TestEXTDSA(GLTestCase):
                 fbo, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0
             )
             glNamedFramebufferTextureEXT(fbo, GL_COLOR_ATTACHMENT0, tex, 0)
-            t1 = int(glGenTextures(1))
+            t1 = one(glGenTextures(1))
             glTextureImage1DEXT(
                 t1, GL_TEXTURE_1D, 0, GL_RGBA8, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, None
             )
             glNamedFramebufferTexture1DEXT(
-                int(glGenFramebuffers(1)), GL_COLOR_ATTACHMENT0, GL_TEXTURE_1D, t1, 0
+                one(glGenFramebuffers(1)), GL_COLOR_ATTACHMENT0, GL_TEXTURE_1D, t1, 0
             )
-            t3 = int(glGenTextures(1))
+            t3 = one(glGenTextures(1))
             glTextureImage3DEXT(
                 t3,
                 GL_TEXTURE_3D,
@@ -569,9 +569,9 @@ class TestEXTDSA(GLTestCase):
                 None,
             )
             glNamedFramebufferTexture3DEXT(
-                int(glGenFramebuffers(1)), GL_COLOR_ATTACHMENT0, GL_TEXTURE_3D, t3, 0, 0
+                one(glGenFramebuffers(1)), GL_COLOR_ATTACHMENT0, GL_TEXTURE_3D, t3, 0, 0
             )
-            arr = int(glGenTextures(1))
+            arr = one(glGenTextures(1))
             glTextureImage3DEXT(
                 arr,
                 GL_TEXTURE_2D_ARRAY,
@@ -586,18 +586,18 @@ class TestEXTDSA(GLTestCase):
                 None,
             )
             glNamedFramebufferTextureLayerEXT(
-                int(glGenFramebuffers(1)), GL_COLOR_ATTACHMENT0, arr, 0, 0
+                one(glGenFramebuffers(1)), GL_COLOR_ATTACHMENT0, arr, 0, 0
             )
             # A cube-map face attach needs an actual cube-map texture; attaching
             # a 2D texture here is invalid and NVIDIA (correctly) rejects it.
-            cube = int(glGenTextures(1))
+            cube = one(glGenTextures(1))
             for face in range(6):
                 glTextureImage2DEXT(
                     cube, GL_TEXTURE_CUBE_MAP_POSITIVE_X + face, 0, GL_RGBA8,
                     4, 4, 0, GL_RGBA, GL_UNSIGNED_BYTE, None,
                 )
             glNamedFramebufferTextureFaceEXT(
-                int(glGenFramebuffers(1)),
+                one(glGenFramebuffers(1)),
                 GL_COLOR_ATTACHMENT0,
                 cube,
                 0,
@@ -623,8 +623,8 @@ class TestEXTDSA(GLTestCase):
     def test_vertex_array(self):
         self.require()
         with self.allow_missing():
-            vao = int(glGenVertexArrays(1))
-            buf = int(glGenBuffers(1))
+            vao = one(glGenVertexArrays(1))
+            buf = one(glGenBuffers(1))
             glNamedBufferDataEXT(buf, 64, np.zeros(16, 'f'), GL_STATIC_DRAW)
             glEnableVertexArrayEXT(vao, GL_VERTEX_ARRAY)
             glDisableVertexArrayEXT(vao, GL_VERTEX_ARRAY)
@@ -661,8 +661,8 @@ class TestEXTDSA(GLTestCase):
     def test_vertex_array_legacy_offsets(self):
         self.require()
         with self.allow_missing():
-            vao = int(glGenVertexArrays(1))
-            buf = int(glGenBuffers(1))
+            vao = one(glGenVertexArrays(1))
+            buf = one(glGenBuffers(1))
             glNamedBufferDataEXT(buf, 256, np.zeros(64, 'f'), GL_STATIC_DRAW)
             glVertexArrayVertexOffsetEXT(vao, buf, 3, GL_FLOAT, 0, 0)
             glVertexArrayColorOffsetEXT(vao, buf, 4, GL_FLOAT, 0, 0)
@@ -790,7 +790,7 @@ class TestEXTDSA(GLTestCase):
         T = GL_VERTEX_PROGRAM_ARB
         src = b'!!ARBvp1.0\nMOV result.position, vertex.position;\nEND'
         with self.allow_missing():
-            pid = int(glGenProgramsARB(1))
+            pid = one(glGenProgramsARB(1))
             glNamedProgramStringEXT(pid, T, GL_PROGRAM_FORMAT_ASCII_ARB, len(src), src)
             glNamedProgramLocalParameter4fEXT(pid, T, 0, 1, 2, 3, 4)
             glNamedProgramLocalParameter4fvEXT(pid, T, 1, np.array([1, 2, 3, 4], 'f'))

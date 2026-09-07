@@ -17,6 +17,7 @@ from OpenGL.GL.ARB import (
 )
 from OpenGL.extensions import alternate
 from OpenGL._bytes import bytes,unicode,as_8_bit
+from OpenGL._scalar import as_int
 
 __all__ = [
     'glAttachShader',
@@ -138,7 +139,7 @@ def _distinct_sampler_targets( program ):
     Returns 0 where the count cannot be had, which reads as "nothing to skip".
     """
     try:
-        count = int( glGetProgramiv( program, GL.GL_ACTIVE_UNIFORMS ) )
+        count = as_int(glGetProgramiv( program, GL.GL_ACTIVE_UNIFORMS ))
     except Exception:  # a program object the driver will not describe
         return 0
     samplers = _sampler_types( )
@@ -148,8 +149,10 @@ def _distinct_sampler_targets( program ):
             _name, _size, type_ = GL.glGetActiveUniform( program, index )
         except Exception:
             continue
-        if int( type_ ) in samplers:
-            targets.add( int( type_ ) )
+        # as_int rather than int: glGetActiveUniform's size and type come back
+        # as size-1 arrays where SIZE_1_ARRAY_UNPACK is off.
+        if as_int( type_ ) in samplers:
+            targets.add( as_int( type_ ) )
             if len( targets ) > 1:
                 break
     return len( targets )
@@ -199,7 +202,7 @@ class ShaderProgram( int ):
             )
             return self
         glValidateProgram( self )
-        validation = glGetProgramiv( self, GL_VALIDATE_STATUS )
+        validation = as_int(glGetProgramiv( self, GL_VALIDATE_STATUS ))
         if validation == GL_FALSE:
             raise ShaderValidationError(
                 """Validation failure (%r): %s"""%(
@@ -215,7 +218,7 @@ class ShaderProgram( int ):
         
         raises ShaderLinkError on failures
         """
-        link_status = glGetProgramiv( self, GL_LINK_STATUS )
+        link_status = as_int(glGetProgramiv( self, GL_LINK_STATUS ))
         if link_status == GL_FALSE:
             raise ShaderLinkError(
                 """Link failure (%s): %s"""%(
@@ -331,7 +334,7 @@ def compileShader( source, shaderType ):
     shader = glCreateShader(shaderType)
     glShaderSource( shader, source )
     glCompileShader( shader )
-    result = glGetShaderiv( shader, GL_COMPILE_STATUS )
+    result = as_int(glGetShaderiv( shader, GL_COMPILE_STATUS ))
     if not(result):
         # TODO: this will be wrong if the user has
         # disabled traditional unpacking array support.

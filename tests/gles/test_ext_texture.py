@@ -4,7 +4,7 @@ storage, copy-image and EGL-image targets."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from egltestcase import ESTestCase
 from OpenGL.GLES3 import (
@@ -58,7 +58,7 @@ class TestTextureExtensions(ESTestCase):
     gl_version = (3, 0)
 
     def _tex(self, target=GL_TEXTURE_2D):
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(target, tex)
         return tex
 
@@ -80,7 +80,7 @@ class TestTextureExtensions(ESTestCase):
             )
             from OpenGL.GLES3 import glGenSamplers
 
-            s = glGenSamplers(1)
+            s = one(glGenSamplers(1))
             ext_border.glSamplerParameterIivEXT(
                 s, GL_TEXTURE_BORDER_COLOR_EXT, BORDER_I
             )
@@ -113,7 +113,7 @@ class TestTextureExtensions(ESTestCase):
             )
             from OpenGL.GLES3 import glGenSamplers
 
-            s = glGenSamplers(1)
+            s = one(glGenSamplers(1))
             oes_border.glSamplerParameterIivOES(
                 s, GL_TEXTURE_BORDER_COLOR_OES, BORDER_I
             )
@@ -164,7 +164,7 @@ class TestTextureExtensions(ESTestCase):
                 8,
                 np.zeros(8, 'u1'),
             )
-            fbo = glGenFramebuffers(1)
+            fbo = one(glGenFramebuffers(1))
             glBindFramebuffer(GL_FRAMEBUFFER, fbo)
             oes_3d.glFramebufferTexture3DOES(
                 GL_FRAMEBUFFER,
@@ -192,7 +192,7 @@ class TestTextureExtensions(ESTestCase):
     def test_ext_texture_buffer(self):
         self.require_extension('GL_EXT_texture_buffer')
         with self.exercise():
-            buf = glGenBuffers(1)
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             glBufferData(GL_ARRAY_BUFFER, 64, np.zeros(16, 'u4'), GL_STATIC_DRAW)
             self._tex(GL_TEXTURE_BUFFER_EXT)
@@ -203,7 +203,7 @@ class TestTextureExtensions(ESTestCase):
     def test_oes_texture_buffer(self):
         self.require_extension('GL_OES_texture_buffer')
         with self.exercise():
-            buf = glGenBuffers(1)
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             glBufferData(GL_ARRAY_BUFFER, 64, np.zeros(16, 'u4'), GL_STATIC_DRAW)
             self._tex(GL_TEXTURE_BUFFER_OES)
@@ -216,7 +216,7 @@ class TestTextureExtensions(ESTestCase):
         with self.exercise():
             orig = self._tex()
             glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4)
-            view = glGenTextures(1)
+            view = one(glGenTextures(1))
             ext_view.glTextureViewEXT(view, GL_TEXTURE_2D, orig, GL_RGBA8, 0, 1, 0, 1)
             self.check_error('ext texture view')
 
@@ -225,7 +225,7 @@ class TestTextureExtensions(ESTestCase):
         with self.exercise():
             orig = self._tex()
             glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4)
-            view = glGenTextures(1)
+            view = one(glGenTextures(1))
             oes_view.glTextureViewOES(view, GL_TEXTURE_2D, orig, GL_RGBA8, 0, 1, 0, 1)
             self.check_error('oes texture view')
 
@@ -241,13 +241,13 @@ class TestTextureExtensions(ESTestCase):
             # validation; the calls still drive the wrappers -- exercise() tolerates
             ext_storage.glTexStorage1DEXT(GL_TEXTURE_2D, 1, GL_RGBA8, 4)
             ext_storage.glTextureStorage1DEXT(
-                int(glGenTextures(1)), GL_TEXTURE_2D, 1, GL_RGBA8, 4
+                one(glGenTextures(1)), GL_TEXTURE_2D, 1, GL_RGBA8, 4
             )
             ext_storage.glTextureStorage2DEXT(
-                int(glGenTextures(1)), GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4
+                one(glGenTextures(1)), GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4
             )
             ext_storage.glTextureStorage3DEXT(
-                int(glGenTextures(1)), GL_TEXTURE_3D, 1, GL_RGBA8, 4, 4, 4
+                one(glGenTextures(1)), GL_TEXTURE_3D, 1, GL_RGBA8, 4, 4, 4
             )
             self.check_error('ext texture storage')
 

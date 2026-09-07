@@ -4,7 +4,7 @@ multi-draw / separate-program entry points."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from egltestcase import ESTestCase
 from OpenGL.GLES2 import (
@@ -85,7 +85,7 @@ class TestDebugRobustExtensions(ESTestCase):
             )
             khr_debug.glPushDebugGroupKHR(GL_DEBUG_SOURCE_APPLICATION, 0, -1, b'grp')
             khr_debug.glPopDebugGroupKHR()
-            buf = glGenBuffers(1)
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             khr_debug.glObjectLabelKHR(GL_BUFFER, buf, -1, b'lbl')
             khr_debug.glGetObjectLabelKHR(
@@ -174,7 +174,7 @@ class TestDebugRobustExtensions(ESTestCase):
     def test_ext_debug_label(self):
         self.require_extension('GL_EXT_debug_label')
         with self.exercise():
-            buf = glGenBuffers(1)
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             ext_label.glLabelObjectEXT(GL_BUFFER, buf, -1, b'lbl')
             ext_label.glGetObjectLabelEXT(
@@ -195,22 +195,22 @@ class TestDebugRobustExtensions(ESTestCase):
         # no real EGLImage handle here, so these fail GL validation; the calls
         # still drive the wrappers (handle/target marshalling) -- exercise() tolerates
         with self.exercise():
-            glBindTexture(GL_TEXTURE_2D, int(glGenTextures(1)))
+            glBindTexture(GL_TEXTURE_2D, one(glGenTextures(1)))
             img = ctypes.c_void_p(0)
             oes_eglimage.glEGLImageTargetTexture2DOES(GL_TEXTURE_2D, img)
-            rb = int(glGenRenderbuffers(1))
+            rb = one(glGenRenderbuffers(1))
             glBindRenderbuffer(GL_RENDERBUFFER, rb)
             oes_eglimage.glEGLImageTargetRenderbufferStorageOES(GL_RENDERBUFFER, img)
             oes_eglimage_ext.glEGLImageTargetTexture2DOES(GL_TEXTURE_2D, img)
             ext_eglstore.glEGLImageTargetTexStorageEXT(GL_TEXTURE_2D, img, None)
             ext_eglstore.glEGLImageTargetTextureStorageEXT(
-                int(glGenTextures(1)), img, None
+                one(glGenTextures(1)), img, None
             )
 
     def test_multi_draw_elements_leftovers(self):
         self.require_extension('GL_EXT_multi_draw_arrays')
         with self.exercise():
-            ebo = int(glGenBuffers(1))
+            ebo = one(glGenBuffers(1))
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
             glBufferData(
                 GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'I'), GL_STATIC_DRAW

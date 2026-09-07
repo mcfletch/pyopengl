@@ -19,7 +19,7 @@ import unittest
 
 import pytest
 
-from arraycompat import np
+from arraycompat import np, one
 from gltestcase import GLTestCase
 from OpenGL import _configflags
 from OpenGL.GL import *  # noqa: F401,F403
@@ -41,7 +41,7 @@ class BufferGetterTestCase(GLTestCase):
     def bound_buffer(self):
         """A buffer bound to GL_ARRAY_BUFFER, unbound and deleted afterwards."""
         self.require_vertex_arrays()
-        buffer = glGenBuffers(1)
+        buffer = one(glGenBuffers(1))
         vertex_array = glGenVertexArrays(1, buffer)
         glBindBuffer(GL_ARRAY_BUFFER, buffer)
 
@@ -88,7 +88,7 @@ class TestAskingABufferAboutItself(BufferGetterTestCase):
     def test_a_generated_name_is_a_scalar(self):
         """``glGenBuffers(1)`` is one name, and unpacks to one number."""
         self.require_vertex_arrays()
-        buffer = glGenBuffers(1)
+        buffer = one(glGenBuffers(1))
         self.assertTrue(np.isscalar(buffer) if hasattr(np, 'isscalar') else True,
                         type(buffer))
         self.assertEqual(int(buffer), buffer)

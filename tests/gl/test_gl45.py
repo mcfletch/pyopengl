@@ -3,7 +3,7 @@
 
 import unittest
 import ctypes
-from arraycompat import nbytes, np, object_names
+from arraycompat import nbytes, np, object_names, one
 
 from arraycompat import copy_safe
 from gltestcase import GLTestCase
@@ -268,7 +268,7 @@ class TestGL45(GLTestCase):
         glClipControl(GL_LOWER_LEFT, GL_ZERO_TO_ONE)
         glTextureBarrier()
         glMemoryBarrierByRegion(GL_ALL_BARRIER_BITS)
-        self.assertEqual(int(glGetGraphicsResetStatus()), int(GL_NO_ERROR))
+        self.assertEqual(one(glGetGraphicsResetStatus()), int(GL_NO_ERROR))
         size = self.width * self.height * 4
         glReadnPixels(
             0,

@@ -9,7 +9,7 @@ decoder-defined, so it is not hard-coded.)
 """
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from egltestcase import ESTestCase
 
@@ -65,7 +65,7 @@ class TestES3CompressedTexture(ESTestCase):
 
     def test_compressed_upload(self):
         program = self.compile_program(VERTEX_SHADER, FRAGMENT_SHADER)
-        texture = glGenTextures(1)
+        texture = one(glGenTextures(1))
         glActiveTexture(GL_TEXTURE0)
         glBindTexture(GL_TEXTURE_2D, texture)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)

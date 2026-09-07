@@ -4,7 +4,7 @@ indirect draw, tessellation patch params, per-buffer blend, indexed queries."""
 
 import unittest
 import ctypes
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -99,15 +99,15 @@ class TestGL40(GLTestCase):
         glTransformFeedbackVaryings(prog, 1, _char_pp(['vout']), GL_INTERLEAVED_ATTRIBS)
         glLinkProgram(prog)
         glUseProgram(prog)
-        tfo = glGenTransformFeedbacks(1)
+        tfo = one(glGenTransformFeedbacks(1))
         tfo = int(tfo[0]) if hasattr(tfo, '__len__') else int(tfo)
         glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, tfo)
         self.assertTrue(glIsTransformFeedback(tfo))
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, buf)
         glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, 256, None, GL_DYNAMIC_COPY)
         glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, buf)
-        vbo = glGenBuffers(1)
+        vbo = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, vbo)
         glBufferData(
             GL_ARRAY_BUFFER, np.array([(-1, -1), (1, -1), (0, 1)], 'f'), GL_STATIC_DRAW
@@ -131,7 +131,7 @@ class TestGL40(GLTestCase):
     def test_indirect_blend_patch_query(self):
         program = self.compile_program(VS, FS)
         glUseProgram(program)
-        vbo = glGenBuffers(1)
+        vbo = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, vbo)
         glBufferData(
             GL_ARRAY_BUFFER, np.array([(-1, -1), (1, -1), (0, 1)], 'f'), GL_STATIC_DRAW
@@ -139,13 +139,13 @@ class TestGL40(GLTestCase):
         loc = glGetAttribLocation(program, 'position')
         glEnableVertexAttribArray(loc)
         glVertexAttribPointer(loc, 2, GL_FLOAT, False, 0, None)
-        ind = glGenBuffers(1)
+        ind = one(glGenBuffers(1))
         glBindBuffer(GL_DRAW_INDIRECT_BUFFER, ind)
         glBufferData(
             GL_DRAW_INDIRECT_BUFFER, np.array([3, 1, 0, 0], 'I'), GL_STATIC_DRAW
         )
         glDrawArraysIndirect(GL_TRIANGLES, ctypes.c_void_p(0))
-        ebo = glGenBuffers(1)
+        ebo = one(glGenBuffers(1))
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'I'), GL_STATIC_DRAW)
         glBindBuffer(GL_DRAW_INDIRECT_BUFFER, ind)
@@ -168,7 +168,7 @@ class TestGL40(GLTestCase):
         glPatchParameteri(GL_PATCH_VERTICES, 3)
         glPatchParameterfv(GL_PATCH_DEFAULT_OUTER_LEVEL, np.array([1, 1, 1, 1], 'f'))
 
-        q = glGenQueries(1)
+        q = one(glGenQueries(1))
         q = int(q[0]) if hasattr(q, '__len__') else int(q)
         glBeginQueryIndexed(GL_PRIMITIVES_GENERATED, 0, q)
         glEndQueryIndexed(GL_PRIMITIVES_GENERATED, 0)

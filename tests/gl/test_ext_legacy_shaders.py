@@ -3,7 +3,7 @@
 objects), exercised against a real compile/link in a compatibility context."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -119,7 +119,7 @@ class TestLegacyShaders(GLTestCase):
         glVertexAttrib4NubvARB(1, np.zeros(4, 'B'))
         glVertexAttrib4NuivARB(1, np.zeros(4, 'I'))
         glVertexAttrib4NusvARB(1, np.zeros(4, 'H'))
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(GL_ARRAY_BUFFER, np.zeros(16, 'f'), GL_STATIC_DRAW)
         glVertexAttribPointerARB(0, 4, GL_FLOAT, GL_FALSE, 0, None)

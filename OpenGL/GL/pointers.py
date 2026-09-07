@@ -19,6 +19,7 @@ def glVertexPointerd( array ):
 from OpenGL import platform, error, wrapper, contextdata, converters, constant
 from OpenGL.arrays import arrayhelpers, arraydatatype
 from OpenGL.raw.GL.VERSION import GL_1_1 as _simple
+from OpenGL._scalar import as_int
 import ctypes
 
 GLsizei = ctypes.c_int
@@ -258,8 +259,10 @@ def glRenderMode( newMode ):
     if currentMode in (_simple.GL_RENDER,0):
         # no array needs to be returned...
         return _simple.glRenderMode( newMode )
-    result = _simple.glRenderMode( newMode )
-    # result is now an integer telling us how many elements were copied...
+    # The count of elements copied, which is a size-1 query like any other:
+    # SIZE_1_ARRAY_UNPACK decides whether it arrives as the number or as a
+    # one-element array holding it, and everything below compares it.
+    result = as_int(_simple.glRenderMode( newMode ))
 
     if result < 0:
         if currentMode == _simple.GL_SELECT:

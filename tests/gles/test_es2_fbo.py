@@ -9,7 +9,7 @@ render-to-texture, and using the rendered texture as input -- the ES way to
 """
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from egltestcase import ESTestCase
 
@@ -88,7 +88,7 @@ class TestES2FBO(ESTestCase):
     def test_render_to_texture(self):
         fbo_size = 64
         # texture that backs the FBO colour attachment
-        texture = glGenTextures(1)
+        texture = one(glGenTextures(1))
         glActiveTexture(GL_TEXTURE0)
         glBindTexture(GL_TEXTURE_2D, texture)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
@@ -107,7 +107,7 @@ class TestES2FBO(ESTestCase):
             None,
         )
 
-        fbo = glGenFramebuffers(1)
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferTexture2D(
             GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texture, 0

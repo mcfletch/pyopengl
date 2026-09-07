@@ -4,7 +4,7 @@ base-instance draws, internal-format queries."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -24,13 +24,13 @@ class TestGL42(GLTestCase):
     gl_version = (4, 5)
 
     def test_storage_and_image(self):
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 16, 16)
-        tex1 = glGenTextures(1)
+        tex1 = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_1D, tex1)
         glTexStorage1D(GL_TEXTURE_1D, 1, GL_RGBA8, 16)
-        tex3 = glGenTextures(1)
+        tex3 = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_3D, tex3)
         glTexStorage3D(GL_TEXTURE_3D, 1, GL_RGBA8, 4, 4, 4)
         glBindImageTexture(0, tex, 0, GL_FALSE, 0, GL_READ_WRITE, GL_RGBA8)
@@ -44,8 +44,8 @@ class TestGL42(GLTestCase):
     def test_base_instance_draws(self):
         program = self.compile_program(VS, FS)
         glUseProgram(program)
-        glBindVertexArray(int(glGenVertexArrays(1)))
-        vbo = glGenBuffers(1)
+        glBindVertexArray(one(glGenVertexArrays(1)))
+        vbo = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, vbo)
         glBufferData(
             GL_ARRAY_BUFFER, np.array([(-1, -1), (1, -1), (0, 1)], 'f'), GL_STATIC_DRAW
@@ -53,7 +53,7 @@ class TestGL42(GLTestCase):
         loc = glGetAttribLocation(program, 'position')
         glEnableVertexAttribArray(loc)
         glVertexAttribPointer(loc, 2, GL_FLOAT, False, 0, None)
-        ebo = glGenBuffers(1)
+        ebo = one(glGenBuffers(1))
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'I'), GL_STATIC_DRAW)
         glDrawArraysInstancedBaseInstance(GL_TRIANGLES, 0, 3, 1, 0)
@@ -86,8 +86,8 @@ class TestGL42(GLTestCase):
         glTransformFeedbackVaryings(fb, 1, _char_pp(['vout']), GL_INTERLEAVED_ATTRIBS)
         glLinkProgram(fb)
         glUseProgram(fb)
-        glBindVertexArray(int(glGenVertexArrays(1)))
-        vbo = glGenBuffers(1)
+        glBindVertexArray(one(glGenVertexArrays(1)))
+        vbo = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, vbo)
         glBufferData(
             GL_ARRAY_BUFFER, np.array([(-1, -1), (1, -1), (0, 1)], 'f'), GL_STATIC_DRAW
@@ -95,10 +95,10 @@ class TestGL42(GLTestCase):
         ploc = glGetAttribLocation(fb, 'position')
         glEnableVertexAttribArray(ploc)
         glVertexAttribPointer(ploc, 2, GL_FLOAT, False, 0, None)
-        tfo = glGenTransformFeedbacks(1)
+        tfo = one(glGenTransformFeedbacks(1))
         tfo = int(tfo[0]) if hasattr(tfo, '__len__') else int(tfo)
         glBindTransformFeedback(GL_TRANSFORM_FEEDBACK, tfo)
-        tbuf = glGenBuffers(1)
+        tbuf = one(glGenBuffers(1))
         glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, tbuf)
         glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, 256, None, GL_DYNAMIC_COPY)
         glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, tbuf)

@@ -2,7 +2,7 @@
 """GLES3.0: sampler objects and fence sync objects."""
 
 import unittest
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from arraycompat import copy_safe
 from egltestcase import ESTestCase
@@ -47,7 +47,7 @@ class TestES3SamplersSync(ESTestCase):
     gl_version = (3, 0)
 
     def test_samplers(self):
-        sampler = glGenSamplers(1)
+        sampler = one(glGenSamplers(1))
         glBindSampler(0, sampler)
         glSamplerParameteri(sampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
         glSamplerParameterf(sampler, GL_TEXTURE_MAG_FILTER, float(GL_LINEAR))

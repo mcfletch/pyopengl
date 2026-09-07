@@ -10,7 +10,7 @@ calls, asserting a clean GL error state -- not entry-point reachability probes.
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 
@@ -43,21 +43,21 @@ class TestARBExtra(GLTestCase):
             glGetVertexAttribLui64vARB,
         )
 
-        tex = int(glGenTextures(1))
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4)
-        sampler = int(glGenSamplers(1))
+        sampler = one(glGenSamplers(1))
         glSamplerParameteri(sampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
 
-        handle = int(glGetTextureHandleARB(tex))
+        handle = one(glGetTextureHandleARB(tex))
         self.assertTrue(handle)
-        shandle = int(glGetTextureSamplerHandleARB(tex, sampler))
+        shandle = one(glGetTextureSamplerHandleARB(tex, sampler))
         self.assertTrue(shandle)
         glMakeTextureHandleResidentARB(handle)
         self.assertTrue(glIsTextureHandleResidentARB(handle))
         glMakeTextureHandleNonResidentARB(handle)
 
-        img = int(glGetImageHandleARB(tex, 0, GL_FALSE, 0, GL_RGBA8))
+        img = one(glGetImageHandleARB(tex, 0, GL_FALSE, 0, GL_RGBA8))
         self.assertTrue(img)
         glMakeImageHandleResidentARB(img, GL_READ_ONLY)
         self.assertTrue(glIsImageHandleResidentARB(img))
@@ -86,7 +86,7 @@ class TestARBExtra(GLTestCase):
         glMakeTextureHandleNonResidentARB(handle)
 
         # uint64 generic vertex attribute round-trip
-        vao = int(glGenVertexArrays(1))
+        vao = one(glGenVertexArrays(1))
         glBindVertexArray(vao)
         glVertexAttribL1ui64ARB(1, handle)
         glVertexAttribL1ui64vARB(1, np.array([handle], 'uint64'))
@@ -115,7 +115,7 @@ class TestARBExtra(GLTestCase):
         program = shaders.compileProgram(
             shaders.compileShader(source, GL_COMPUTE_SHADER)
         )
-        ssbo = int(glGenBuffers(1))
+        ssbo = one(glGenBuffers(1))
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ssbo)
         glBufferData(GL_SHADER_STORAGE_BUFFER, 256, None, GL_DYNAMIC_DRAW)
         glUseProgram(program)
@@ -141,19 +141,19 @@ class TestARBExtra(GLTestCase):
         glProgramParameteriARB(program, GL_GEOMETRY_INPUT_TYPE_ARB, GL_POINTS)
         glProgramParameteriARB(program, GL_GEOMETRY_OUTPUT_TYPE_ARB, GL_TRIANGLE_STRIP)
 
-        fbo = int(glGenFramebuffers(1))
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
-        flat = int(glGenTextures(1))
+        flat = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, flat)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4)
         glFramebufferTextureARB(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, flat, 0)
 
-        layered = int(glGenTextures(1))
+        layered = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D_ARRAY, layered)
         glTexStorage3D(GL_TEXTURE_2D_ARRAY, 1, GL_RGBA8, 4, 4, 2)
         glFramebufferTextureLayerARB(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, layered, 0, 1)
 
-        cube = int(glGenTextures(1))
+        cube = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_CUBE_MAP, cube)
         for face in range(6):
             glTexImage2D(
@@ -247,7 +247,7 @@ class TestARBExtra(GLTestCase):
             glEvaluateDepthValuesARB,
         )
 
-        fbo = int(glGenFramebuffers(1))
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         locations = np.array([0.5, 0.5], 'f')
         glFramebufferSampleLocationsfvARB(GL_FRAMEBUFFER, 0, 1, locations)
@@ -270,7 +270,7 @@ class TestARBExtra(GLTestCase):
         page = int(self.getInteger(GL_SPARSE_BUFFER_PAGE_SIZE_ARB))
         size = page * 2
         for ctor in (None, 'named', 'named_ext'):
-            buf = int(glGenBuffers(1))
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             glBufferStorage(GL_ARRAY_BUFFER, size, None, GL_SPARSE_STORAGE_BIT_ARB)
             if ctor is None:
@@ -292,7 +292,7 @@ class TestARBExtra(GLTestCase):
             GL_VIRTUAL_PAGE_SIZE_Y_ARB,
         )
 
-        tex = int(glGenTextures(1))
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_SPARSE_ARB, GL_TRUE)
         buf = np.zeros(1, 'i')

@@ -3,7 +3,7 @@
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -76,7 +76,7 @@ class TestGL1State(GLTestCase):
         # GL_BACK.
         glDrawBuffer(self.colour_buffer_name())
         glReadBuffer(self.colour_buffer_name())
-        self.assertGreaterEqual(int(glGetIntegerv(GL_MAX_TEXTURE_SIZE)), 64)
+        self.assertGreaterEqual(one(glGetIntegerv(GL_MAX_TEXTURE_SIZE)), 64)
         glGetBooleanv(GL_DEPTH_WRITEMASK, (ctypes.c_ubyte * 1)())
         glGetFloatv(GL_COLOR_CLEAR_VALUE, (ctypes.c_float * 4)())
         glGetDoublev(GL_DEPTH_CLEAR_VALUE, (ctypes.c_double * 1)())

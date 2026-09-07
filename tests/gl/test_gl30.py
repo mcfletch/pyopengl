@@ -4,7 +4,7 @@ unsigned uniforms, per-buffer clears and conditional render."""
 
 import unittest
 import ctypes
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -29,29 +29,29 @@ class TestGL30(GLTestCase):
         self.check_error('introspection')
 
     def test_vertex_arrays_and_fbo(self):
-        vao = glGenVertexArrays(1)
+        vao = one(glGenVertexArrays(1))
         glBindVertexArray(int(vao))
         self.assertTrue(glIsVertexArray(int(vao)))
 
         # a multisample renderbuffer (exercises the multisample storage call)
-        ms = glGenRenderbuffers(1)
+        ms = one(glGenRenderbuffers(1))
         glBindRenderbuffer(GL_RENDERBUFFER, ms)
         glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_RGBA8, 16, 16)
         # a depth renderbuffer for the FBO
-        depth = glGenRenderbuffers(1)
+        depth = one(glGenRenderbuffers(1))
         glBindRenderbuffer(GL_RENDERBUFFER, depth)
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, 16, 16)
         self.assertTrue(glIsRenderbuffer(depth))
         glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH)
 
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexImage2D(
             GL_TEXTURE_2D, 0, GL_RGBA8, 16, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, None
         )
         glGenerateMipmap(GL_TEXTURE_2D)
 
-        fbo = glGenFramebuffers(1)
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferTexture2D(
             GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0
@@ -68,12 +68,12 @@ class TestGL30(GLTestCase):
         )
 
         # blit into a second colour FBO
-        tex2 = glGenTextures(1)
+        tex2 = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex2)
         glTexImage2D(
             GL_TEXTURE_2D, 0, GL_RGBA8, 16, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, None
         )
-        fbo2 = glGenFramebuffers(1)
+        fbo2 = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo2)
         glFramebufferTexture2D(
             GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex2, 0
@@ -81,15 +81,15 @@ class TestGL30(GLTestCase):
         glBindFramebuffer(GL_READ_FRAMEBUFFER, fbo)
         glBlitFramebuffer(0, 0, 16, 16, 0, 0, 16, 16, GL_COLOR_BUFFER_BIT, GL_NEAREST)
         # 1D/3D/array colour attachments via the dimension-specific entry points
-        f3 = glGenFramebuffers(1)
+        f3 = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, f3)
-        t1 = glGenTextures(1)
+        t1 = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_1D, t1)
         glTexImage1D(GL_TEXTURE_1D, 0, GL_RGBA8, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, None)
         glFramebufferTexture1D(
             GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_1D, t1, 0
         )
-        t3 = glGenTextures(1)
+        t3 = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_3D, t3)
         glTexImage3D(
             GL_TEXTURE_3D, 0, GL_RGBA8, 16, 16, 2, 0, GL_RGBA, GL_UNSIGNED_BYTE, None
@@ -97,7 +97,7 @@ class TestGL30(GLTestCase):
         glFramebufferTexture3D(
             GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_3D, t3, 0, 0
         )
-        ta = glGenTextures(1)
+        ta = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D_ARRAY, ta)
         glTexImage3D(
             GL_TEXTURE_2D_ARRAY,
@@ -127,18 +127,18 @@ class TestGL30(GLTestCase):
         glDisablei(GL_BLEND, 0)
         glClampColor(GL_CLAMP_READ_COLOR, GL_FALSE)
         # integer/unsigned clears need correctly-typed colour attachments
-        itex = glGenTextures(1)
+        itex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, itex)
         glTexImage2D(
             GL_TEXTURE_2D, 0, GL_RGBA32I, 4, 4, 0, GL_RGBA_INTEGER, GL_INT, None
         )
-        ifbo = glGenFramebuffers(1)
+        ifbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, ifbo)
         glFramebufferTexture2D(
             GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, itex, 0
         )
         glClearBufferiv(GL_COLOR, 0, np.zeros(4, 'i'))
-        utex = glGenTextures(1)
+        utex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, utex)
         glTexImage2D(
             GL_TEXTURE_2D,
@@ -151,7 +151,7 @@ class TestGL30(GLTestCase):
             GL_UNSIGNED_INT,
             None,
         )
-        ufbo = glGenFramebuffers(1)
+        ufbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, ufbo)
         glFramebufferTexture2D(
             GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, utex, 0
@@ -197,7 +197,7 @@ class TestGL30(GLTestCase):
         glVertexAttribI4sv(3, np.zeros(4, 'h'))
         glVertexAttribI4ubv(3, np.zeros(4, 'B'))
         glVertexAttribI4usv(3, np.zeros(4, 'H'))
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(GL_ARRAY_BUFFER, np.zeros(16, 'i'), GL_STATIC_DRAW)
         glVertexAttribIPointer(3, 4, GL_INT, 0, None)
@@ -206,7 +206,7 @@ class TestGL30(GLTestCase):
         self.check_error('uint/integer attribs')
 
     def test_integer_texture_params(self):
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexParameterIiv(
             GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, np.array([1, 2, 3, 4], 'i')
@@ -233,13 +233,13 @@ class TestGL30(GLTestCase):
         glUseProgram(prog)
         glGetTransformFeedbackVarying(prog, 0, 64)
 
-        src = glGenBuffers(1)
+        src = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, src)
         glBufferData(GL_ARRAY_BUFFER, np.array([1, 2, 3], 'f'), GL_STATIC_DRAW)
         loc = glGetAttribLocation(prog, 'v')
         glEnableVertexAttribArray(loc)
         glVertexAttribPointer(loc, 1, GL_FLOAT, False, 0, None)
-        dst = glGenBuffers(1)
+        dst = one(glGenBuffers(1))
         glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, dst)
         glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, 12, None, GL_DYNAMIC_COPY)
         glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, dst)
@@ -258,7 +258,7 @@ class TestGL30(GLTestCase):
         )
         glFlushMappedBufferRange(GL_ARRAY_BUFFER, 0, 12)
         glUnmapBuffer(GL_ARRAY_BUFFER)
-        q = glGenQueries(1)
+        q = one(glGenQueries(1))
         q = int(q[0]) if hasattr(q, '__len__') else int(q)
         glBeginQuery(GL_SAMPLES_PASSED, q)
         glEndQuery(GL_SAMPLES_PASSED)
@@ -301,11 +301,11 @@ class TestRenderingIntoAFramebufferObject(GLTestCase):
     def test_a_texture_attachment_can_be_drawn_into_and_then_read_from(self):
         self.require_feature('framebuffer objects', (3, 0),
                              'GL_ARB_framebuffer_object')
-        fbo = int(glGenFramebuffers(1))
+        fbo = one(glGenFramebuffers(1))
         self.defer_cleanup(lambda: glDeleteFramebuffers(1, object_names(fbo)))
 
         with self.framebuffer(fbo):
-            depth = int(glGenRenderbuffers(1))
+            depth = one(glGenRenderbuffers(1))
             self.defer_cleanup(lambda: glDeleteRenderbuffers(1, object_names(depth)))
             glBindRenderbuffer(GL_RENDERBUFFER, depth)
             glRenderbufferStorage(
@@ -315,7 +315,7 @@ class TestRenderingIntoAFramebufferObject(GLTestCase):
                 GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depth
             )
 
-            colour = int(glGenTextures(1))
+            colour = one(glGenTextures(1))
             self.defer_cleanup(lambda: glDeleteTextures(1, object_names(colour)))
             glBindTexture(GL_TEXTURE_2D, colour)
             # Without a filter the texture is incomplete and the driver

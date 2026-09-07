@@ -3,7 +3,7 @@
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -33,8 +33,8 @@ class TestGL32(GLTestCase):
     def test_base_vertex_draws(self):
         program = self.compile_program(VERTEX, FRAGMENT)
         glUseProgram(program)
-        glBindVertexArray(int(glGenVertexArrays(1)))
-        vbo = glGenBuffers(1)
+        glBindVertexArray(one(glGenVertexArrays(1)))
+        vbo = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, vbo)
         glBufferData(
             GL_ARRAY_BUFFER, np.array([(-1, -1), (1, -1), (0, 1)], 'f'), GL_STATIC_DRAW
@@ -42,7 +42,7 @@ class TestGL32(GLTestCase):
         loc = glGetAttribLocation(program, 'position')
         glEnableVertexAttribArray(loc)
         glVertexAttribPointer(loc, 2, GL_FLOAT, False, 0, None)
-        ebo = glGenBuffers(1)
+        ebo = one(glGenBuffers(1))
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'I'), GL_STATIC_DRAW)
         glDrawElementsBaseVertex(GL_TRIANGLES, 3, GL_UNSIGNED_INT, None, 0)
@@ -61,16 +61,16 @@ class TestGL32(GLTestCase):
         self.check_error('base-vertex draws')
 
     def test_multisample_textures(self):
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, tex)
         glTexImage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, 4, GL_RGBA8, 16, 16, GL_TRUE)
-        arr = glGenTextures(1)
+        arr = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D_MULTISAMPLE_ARRAY, arr)
         glTexImage3DMultisample(
             GL_TEXTURE_2D_MULTISAMPLE_ARRAY, 4, GL_RGBA8, 16, 16, 2, GL_TRUE
         )
         glSampleMaski(0, 0xFF)
-        fbo = glGenFramebuffers(1)
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, tex, 0)
         glGetMultisamplefv(GL_SAMPLE_POSITION, 0, np.zeros(2, 'f'))
@@ -84,7 +84,7 @@ class TestGL32(GLTestCase):
         # case asks for, whatever a lenient driver answers.
         glGetInteger64v(GL_MAX_SERVER_WAIT_TIMEOUT)
         glGetInteger64i_v(GL_UNIFORM_BUFFER_BINDING, 0, np.zeros(1, 'q'))
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(GL_ARRAY_BUFFER, np.zeros(4, 'f'), GL_STATIC_DRAW)
         glGetBufferParameteri64v(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, np.zeros(1, 'q'))

@@ -14,6 +14,7 @@ known until there is a context, deferred until something asks for it.
 
 import unittest
 
+from arraycompat import one
 from gltestcase import GLTestCase
 from OpenGL.extensions import GLQuerier, hasGLExtension
 from OpenGL.GL import *  # noqa: F401,F403
@@ -55,7 +56,7 @@ class TestAConstantResolvedAgainstTheContext(GLTestCase):
 
     def test_it_reads_the_value_the_driver_reports(self):
         deferred = _lookupint.LookupInt(GL_NUM_COMPRESSED_TEXTURE_FORMATS, GLint)
-        direct = int(glGetIntegerv(GL_NUM_COMPRESSED_TEXTURE_FORMATS))
+        direct = one(glGetIntegerv(GL_NUM_COMPRESSED_TEXTURE_FORMATS))
         self.assertEqual(int(deferred), direct)
         self.check_error('GL_NUM_COMPRESSED_TEXTURE_FORMATS')
 
@@ -75,7 +76,7 @@ class TestTheFramebufferBindingQuery(GLTestCase):
         """``GL_READ_FRAMEBUFFER_BINDING`` arrived with GL 3.0."""
         self.require_version(3, 0)
         binding = glGetInteger(GL_READ_FRAMEBUFFER_BINDING)
-        self.assertEqual(int(binding), int(self.draw_framebuffer()))
+        self.assertEqual(one(binding), int(self.draw_framebuffer()))
         self.check_error('GL_READ_FRAMEBUFFER_BINDING')
 
 

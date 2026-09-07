@@ -3,7 +3,7 @@
 arrays, polygon-offset clamp, clip control, framebuffer attach, multiview."""
 
 import unittest
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from egltestcase import ESTestCase
 from OpenGL.GLES3 import (
@@ -64,10 +64,10 @@ class TestStateExtensions(ESTestCase):
     gl_version = (3, 0)
 
     def _color_fbo(self):
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 16, 16)
-        fbo = glGenFramebuffers(1)
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         return tex
 
@@ -174,15 +174,15 @@ class TestStateExtensions(ESTestCase):
         with self.exercise():
             from OpenGL.GLES3 import GL_TEXTURE_2D_ARRAY, glTexStorage3D
 
-            tex = glGenTextures(1)
+            tex = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_2D_ARRAY, tex)
             glTexStorage3D(GL_TEXTURE_2D_ARRAY, 1, GL_RGBA8, 16, 16, 2)
-            glBindFramebuffer(GL_FRAMEBUFFER, glGenFramebuffers(1))
+            glBindFramebuffer(GL_FRAMEBUFFER, one(glGenFramebuffers(1)))
             ovr.glFramebufferTextureMultiviewOVR(GL_FRAMEBUFFER, ATTACH, tex, 0, 0, 2)
             # the DSA form is unsupported in ES, so this fails GL validation; the
             # call still drives the wrapper -- exercise() tolerates the error
             ovr.glNamedFramebufferTextureMultiviewOVR(
-                int(glGenFramebuffers(1)), ATTACH, tex, 0, 0, 2
+                one(glGenFramebuffers(1)), ATTACH, tex, 0, 0, 2
             )
 
     def test_ext_shader_framebuffer_fetch(self):

@@ -5,7 +5,7 @@ render, timer query, instanced draws, KHR_debug aliases and assorted singles."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -93,7 +93,7 @@ class TestMiscCore(GLTestCase):
                 np.zeros(1, 'I'),
                 (ctypes.c_char * 64)(),
             )
-            buf = int(glGenBuffers(1))
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, buf)
             glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, 64, None, GL_DYNAMIC_DRAW)
             glBindBufferBaseEXT(GL_TRANSFORM_FEEDBACK_BUFFER, 0, buf)
@@ -105,7 +105,7 @@ class TestMiscCore(GLTestCase):
     def test_texture_integer_ext(self):
         self.require_extension('GL_EXT_texture_integer')
         with self.allow_missing():
-            tex = int(glGenTextures(1))
+            tex = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_2D, tex)
             glTexParameterIivEXT(
                 GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, np.zeros(4, 'i')
@@ -196,7 +196,7 @@ class TestMiscCore(GLTestCase):
     def test_conditional_render_nv(self):
         self.require_extension('GL_NV_conditional_render')
         with self.allow_missing():
-            q = _first(glGenQueries(1))
+            q = _first(one(glGenQueries(1)))
             glBeginQuery(GL_SAMPLES_PASSED, q)
             glEndQuery(GL_SAMPLES_PASSED)
             glBeginConditionalRenderNV(q, GL_QUERY_WAIT_NV)
@@ -205,7 +205,7 @@ class TestMiscCore(GLTestCase):
     def test_timer_query_ext(self):
         self.require_extension('GL_EXT_timer_query')
         with self.allow_missing():
-            q = _first(glGenQueries(1))
+            q = _first(one(glGenQueries(1)))
             glBeginQuery(GL_TIME_ELAPSED, q)
             glEndQuery(GL_TIME_ELAPSED)
             glGetQueryObjecti64vEXT(q, GL_QUERY_RESULT, np.zeros(1, 'q'))
@@ -218,7 +218,7 @@ class TestMiscCore(GLTestCase):
                 '#version 150\nin vec4 p; void main(){ gl_Position = p; }', FS
             )
             glUseProgram(prog)
-            buf = int(glGenBuffers(1))
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             glBufferData(
                 GL_ARRAY_BUFFER,
@@ -229,7 +229,7 @@ class TestMiscCore(GLTestCase):
             glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, None)
             glDrawArraysInstancedEXT(GL_TRIANGLES, 0, 3, 2)
             idx = np.array([0, 1, 2], 'I')
-            ibo = int(glGenBuffers(1))
+            ibo = one(glGenBuffers(1))
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo)
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, idx, GL_STATIC_DRAW)
             glDrawElementsInstancedEXT(GL_TRIANGLES, 3, GL_UNSIGNED_INT, None, 2)
@@ -239,7 +239,7 @@ class TestMiscCore(GLTestCase):
     def test_debug_label_ext(self):
         self.require_extension('GL_EXT_debug_label')
         with self.allow_missing():
-            buf = int(glGenBuffers(1))
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             glLabelObjectEXT(
                 GL_BUFFER_OBJECT_EXT, buf, 0, b'mybuf'
@@ -271,7 +271,7 @@ class TestMiscCore(GLTestCase):
             )
             glPushDebugGroupKHR(GL_DEBUG_SOURCE_APPLICATION, 0, -1, b'g')
             glPopDebugGroupKHR()
-            buf = int(glGenBuffers(1))
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             glObjectLabelKHR(GL_BUFFER, buf, -1, b'l')
             glGetObjectLabelKHR(
@@ -299,7 +299,7 @@ class TestMiscCore(GLTestCase):
     def test_framebuffer_flip_y_mesa(self):
         self.require_extension('GL_MESA_framebuffer_flip_y')
         with self.allow_missing():
-            fbo = int(glGenFramebuffers(1))
+            fbo = one(glGenFramebuffers(1))
             glBindFramebuffer(GL_FRAMEBUFFER, fbo)
             glFramebufferParameteriMESA(
                 GL_FRAMEBUFFER, GL_FRAMEBUFFER_FLIP_Y_MESA, GL_TRUE
@@ -311,10 +311,10 @@ class TestMiscCore(GLTestCase):
     def test_multiview_ovr(self):
         self.require_extension('GL_OVR_multiview')
         with self.allow_missing():
-            arr = int(glGenTextures(1))
+            arr = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_2D_ARRAY, arr)
             glTexStorage3D(GL_TEXTURE_2D_ARRAY, 1, GL_RGBA8, 16, 16, 2)
-            fbo = int(glGenFramebuffers(1))
+            fbo = one(glGenFramebuffers(1))
             glBindFramebuffer(GL_FRAMEBUFFER, fbo)
             glFramebufferTextureMultiviewOVR(
                 GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, arr, 0, 0, 2
@@ -323,7 +323,7 @@ class TestMiscCore(GLTestCase):
         # wrapper and exercise() tolerates the GLError
         with self.exercise():
             glNamedFramebufferTextureMultiviewOVR(
-                int(glGenFramebuffers(1)), GL_COLOR_ATTACHMENT0, arr, 0, 0, 2
+                one(glGenFramebuffers(1)), GL_COLOR_ATTACHMENT0, arr, 0, 0, 2
             )
 
 
@@ -337,7 +337,7 @@ class TestDrawExtensions(GLTestCase):
     def test_amd_multi_draw_indirect(self):
         self.require_extension('GL_AMD_multi_draw_indirect')
         # DrawArraysIndirectCommand: count, primCount, first, baseInstance
-        buf = int(glGenBuffers(1))
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_DRAW_INDIRECT_BUFFER, buf)
         glBufferData(GL_DRAW_INDIRECT_BUFFER, np.array([3, 1, 0, 0], 'I'), GL_STATIC_DRAW)
         with self.exercise():
@@ -346,7 +346,7 @@ class TestDrawExtensions(GLTestCase):
         glBufferData(
             GL_DRAW_INDIRECT_BUFFER, np.array([3, 1, 0, 0, 0], 'I'), GL_STATIC_DRAW
         )
-        ibo = int(glGenBuffers(1))
+        ibo = one(glGenBuffers(1))
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'I'), GL_STATIC_DRAW)
         with self.exercise():
@@ -354,11 +354,11 @@ class TestDrawExtensions(GLTestCase):
 
     def test_arb_indirect_parameters(self):
         self.require_extension('GL_ARB_indirect_parameters')
-        dib = int(glGenBuffers(1))
+        dib = one(glGenBuffers(1))
         glBindBuffer(GL_DRAW_INDIRECT_BUFFER, dib)
         glBufferData(GL_DRAW_INDIRECT_BUFFER, np.array([3, 1, 0, 0], 'I'), GL_STATIC_DRAW)
         # GL_PARAMETER_BUFFER_ARB supplies the GPU-side draw count.
-        pbuf = int(glGenBuffers(1))
+        pbuf = one(glGenBuffers(1))
         glBindBuffer(GL_PARAMETER_BUFFER_ARB, pbuf)
         glBufferData(GL_PARAMETER_BUFFER_ARB, np.array([1], 'I'), GL_STATIC_DRAW)
         with self.exercise():
@@ -366,7 +366,7 @@ class TestDrawExtensions(GLTestCase):
         glBufferData(
             GL_DRAW_INDIRECT_BUFFER, np.array([3, 1, 0, 0, 0], 'I'), GL_STATIC_DRAW
         )
-        ibo = int(glGenBuffers(1))
+        ibo = one(glGenBuffers(1))
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'I'), GL_STATIC_DRAW)
         with self.exercise():
@@ -376,7 +376,7 @@ class TestDrawExtensions(GLTestCase):
 
     def test_arb_instanced_arrays(self):
         self.require_extension('GL_ARB_instanced_arrays')
-        buf = int(glGenBuffers(1))
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(GL_ARRAY_BUFFER, np.zeros(8, 'f'), GL_STATIC_DRAW)
         glEnableVertexAttribArray(0)
@@ -387,7 +387,7 @@ class TestDrawExtensions(GLTestCase):
 
     def test_arb_draw_buffers(self):
         self.require_extension('GL_ARB_draw_buffers')
-        fbo = int(glGenFramebuffers(1))
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         with self.allow_missing():
             glDrawBuffersARB(1, np.array([GL_NONE], 'I'))
@@ -431,10 +431,10 @@ class TestTextureExtensions(GLTestCase):
 
     def test_arb_texture_buffer_object(self):
         self.require_extension('GL_ARB_texture_buffer_object')
-        tbuf = int(glGenBuffers(1))
+        tbuf = one(glGenBuffers(1))
         glBindBuffer(GL_TEXTURE_BUFFER, tbuf)
         glBufferData(GL_TEXTURE_BUFFER, np.zeros(16, 'f'), GL_STATIC_DRAW)
-        tex = int(glGenTextures(1))
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_BUFFER, tex)
         with self.allow_missing():
             glTexBufferARB(GL_TEXTURE_BUFFER, GL_RGBA32F, tbuf)
@@ -442,9 +442,9 @@ class TestTextureExtensions(GLTestCase):
 
     def test_ext_texture_storage(self):
         self.require_extension('GL_EXT_texture_storage')
-        glBindTexture(GL_TEXTURE_1D, int(glGenTextures(1)))
-        glBindTexture(GL_TEXTURE_2D, int(glGenTextures(1)))
-        glBindTexture(GL_TEXTURE_3D, int(glGenTextures(1)))
+        glBindTexture(GL_TEXTURE_1D, one(glGenTextures(1)))
+        glBindTexture(GL_TEXTURE_2D, one(glGenTextures(1)))
+        glBindTexture(GL_TEXTURE_3D, one(glGenTextures(1)))
         with self.exercise():
             glTexStorage1DEXT(GL_TEXTURE_1D, 1, GL_RGBA8, 16)
             glTexStorage2DEXT(GL_TEXTURE_2D, 1, GL_RGBA8, 16, 16)
@@ -452,7 +452,7 @@ class TestTextureExtensions(GLTestCase):
 
     def test_ext_egl_image_storage(self):
         self.require_extension('GL_EXT_EGL_image_storage')
-        tex = int(glGenTextures(1))
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         # No EGLImage is available headless; a null image GLErrors, tolerated here.
         with self.exercise():
@@ -462,10 +462,10 @@ class TestTextureExtensions(GLTestCase):
 
     def test_nv_copy_image(self):
         self.require_extension('GL_NV_copy_image')
-        src = int(glGenTextures(1))
+        src = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, src)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 16, 16)
-        dst = int(glGenTextures(1))
+        dst = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, dst)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 16, 16)
         with self.exercise():

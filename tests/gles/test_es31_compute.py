@@ -10,6 +10,7 @@ import ctypes
 import pytest
 np = pytest.importorskip('numpy')  # numpy-specific test: skip without numpy
 
+from arraycompat import one
 from egltestcase import ESTestCase
 
 from OpenGL.GLES3 import (
@@ -50,7 +51,7 @@ class TestES31Compute(ESTestCase):
         program = self.compile_compute(COMPUTE_SHADER)
 
         size = COUNT * 4
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_SHADER_STORAGE_BUFFER, buf)
         glBufferData(
             GL_SHADER_STORAGE_BUFFER, size, np.zeros(COUNT, np.uint32), GL_DYNAMIC_DRAW

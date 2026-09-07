@@ -3,7 +3,7 @@
 integer vertex attributes and indexed/64-bit state queries."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from egltestcase import ESTestCase
 
@@ -94,7 +94,7 @@ class TestES3UBO(ESTestCase):
         glGetActiveUniformBlockiv(program, index, GL_UNIFORM_BLOCK_DATA_SIZE, size)
         self.assertGreaterEqual(int(size[0]), 16)
         length, chars = glGetActiveUniformBlockName(program, index, 64)
-        name = bytes(bytearray(int(c) for c in chars[: int(length)])).decode()
+        name = bytes(bytearray(int(c) for c in chars[: one(length)])).decode()
         self.assertIn('Block', name)
         glUniformBlockBinding(program, index, 0)
 
@@ -102,7 +102,7 @@ class TestES3UBO(ESTestCase):
         glGetActiveUniformsiv(program, 1, np.array([0], 'u4'), GL_UNIFORM_TYPE, params)
         self.assertGreater(int(params[0]), 0)
 
-        ubo = glGenBuffers(1)
+        ubo = one(glGenBuffers(1))
         glBindBuffer(GL_UNIFORM_BUFFER, ubo)
         glBufferData(GL_UNIFORM_BUFFER, 16, np.ones(4, 'f'), GL_STATIC_DRAW)
         glBindBufferBase(GL_UNIFORM_BUFFER, 0, ubo)
@@ -150,7 +150,7 @@ class TestES3UBO(ESTestCase):
         glGetVertexAttribIiv(2, GL_CURRENT_VERTEX_ATTRIB)
         glGetVertexAttribIuiv(2, GL_CURRENT_VERTEX_ATTRIB)
         # bind an integer attribute pointer from a buffer
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(GL_ARRAY_BUFFER, 64, np.zeros(16, 'i'), GL_STATIC_DRAW)
         glVertexAttribIPointer(2, 4, GL_INT, 0, None)

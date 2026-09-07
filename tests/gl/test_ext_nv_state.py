@@ -10,7 +10,7 @@ Functional tests -- real objects and real calls with a clean error state.
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 
@@ -22,10 +22,10 @@ class TestNVState(GLTestCase):
     gl_version = (4, 5)
 
     def _color_fbo(self, fmt=GL_RGBA8, w=8, h=8):
-        tex = int(glGenTextures(1))
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, fmt, w, h)
-        fbo = int(glGenFramebuffers(1))
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0)
         return fbo, tex
@@ -37,7 +37,7 @@ class TestNVState(GLTestCase):
             glBeginConditionalRenderNVX, glEndConditionalRenderNVX,
         )
 
-        q = int(glGenQueries(1)[0])
+        q = one(glGenQueries(1))
         glBeginQuery(GL_SAMPLES_PASSED, q)
         glEndQuery(GL_SAMPLES_PASSED)
         glBeginConditionalRenderNVX(q)
@@ -57,18 +57,18 @@ class TestNVState(GLTestCase):
             glProgramUniformHandleui64vNV,
         )
 
-        tex = int(glGenTextures(1))
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4)
-        sampler = int(glGenSamplers(1))
+        sampler = one(glGenSamplers(1))
         glSamplerParameteri(sampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
 
-        handle = int(glGetTextureHandleNV(tex))
+        handle = one(glGetTextureHandleNV(tex))
         self.assertTrue(handle)
-        self.assertTrue(int(glGetTextureSamplerHandleNV(tex, sampler)))
+        self.assertTrue(one(glGetTextureSamplerHandleNV(tex, sampler)))
         glMakeTextureHandleResidentNV(handle)
         self.assertTrue(glIsTextureHandleResidentNV(handle))
-        img = int(glGetImageHandleNV(tex, 0, GL_FALSE, 0, GL_RGBA8))
+        img = one(glGetImageHandleNV(tex, 0, GL_FALSE, 0, GL_RGBA8))
         glMakeImageHandleResidentNV(img, GL_READ_ONLY)
         self.assertTrue(glIsImageHandleResidentNV(img))
         glMakeImageHandleNonResidentNV(img)
@@ -147,7 +147,7 @@ class TestNVState(GLTestCase):
         from OpenGL.GL.NV.draw_texture import glDrawTextureNV
 
         self._color_fbo()
-        tex = int(glGenTextures(1))
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
@@ -259,7 +259,7 @@ class TestNVState(GLTestCase):
             GL_SHADING_RATE_SAMPLE_ORDER_DEFAULT_NV,
         )
 
-        tex = int(glGenTextures(1))
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_R8UI, 4, 4)
         glBindShadingRateImageNV(tex)

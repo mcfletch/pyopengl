@@ -35,6 +35,7 @@ from OpenGL.GL import (
 from OpenGL.GLU import gluLookAt, gluPerspective, gluProject, gluUnProject
 from OpenGL.Tk.attributes import ContextAttributes
 from OpenGL.Tk.widget import GLFrame
+from OpenGL._scalar import as_int
 
 log = logging.getLogger(__name__)
 
@@ -293,7 +294,7 @@ class RawOpengl(GLFrame, Misc):
         # and restoring the mode with a float is a ctypes.ArgumentError
         # out of the finally below -- which loses the frame, since the
         # buffers are swapped after it.
-        mode = int(glGetIntegerv(GL_MATRIX_MODE))
+        mode = as_int(glGetIntegerv(GL_MATRIX_MODE))
         try:
             glMatrixMode(GL_PROJECTION)
             glPushMatrix()

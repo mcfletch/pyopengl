@@ -3,7 +3,7 @@
 
 import unittest
 import ctypes
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from egltestcase import ESTestCase
 
@@ -99,7 +99,7 @@ class TestES31ProgramPipeline(ESTestCase):
         self.assertEqual(glGetProgramiv(vprog, GL_LINK_STATUS), GL_TRUE)
         self.assertEqual(glGetProgramiv(fprog, GL_LINK_STATUS), GL_TRUE)
 
-        pipeline = glGenProgramPipelines(1)
+        pipeline = one(glGenProgramPipelines(1))
         glBindProgramPipeline(pipeline)
         glUseProgramStages(pipeline, GL_VERTEX_SHADER_BIT, vprog)
         glUseProgramStages(pipeline, GL_FRAGMENT_SHADER_BIT, fprog)

@@ -2,7 +2,7 @@
 """GL 1.0 (compatibility): display lists, selection, feedback, accumulation."""
 
 import unittest
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from arraycompat import copy_safe
 from gltestcase import GLTestCase
@@ -97,14 +97,14 @@ class TestCallingAListOfLists(GLTestCase):
         glCallList(second)
         glPopName()
         self.assertEqual(
-            int(glGetIntegerv(GL_NAME_STACK_DEPTH)), 0,
+            one(glGetIntegerv(GL_NAME_STACK_DEPTH)), 0,
             'the name stack is not empty before the selection pass',
         )
 
         glSelectBuffer(100)
         glRenderMode(GL_SELECT)
         glCallList(first)
-        depth = int(glGetIntegerv(GL_NAME_STACK_DEPTH))
+        depth = one(glGetIntegerv(GL_NAME_STACK_DEPTH))
         glPopName()
         records = glRenderMode(GL_RENDER)
 

@@ -5,7 +5,7 @@ predate-core aliases of functions already covered by the version suites."""
 
 import unittest
 import ctypes
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -46,7 +46,7 @@ class TestLegacyCompat(GLTestCase):
     def test_vertex_buffer_object_arb(self):
         self.require_extension('GL_ARB_vertex_buffer_object')
         with self.allow_missing():
-            buf = int(glGenBuffersARB(1))
+            buf = one(glGenBuffersARB(1))
             glBindBufferARB(GL_ARRAY_BUFFER, buf)
             self.assertTrue(glIsBufferARB(buf))
             glBufferDataARB(GL_ARRAY_BUFFER, 64, np.zeros(16, 'f'), GL_STATIC_DRAW)
@@ -81,7 +81,7 @@ class TestLegacyCompat(GLTestCase):
     def test_occlusion_query_arb(self):
         self.require_extension('GL_ARB_occlusion_query')
         with self.allow_missing():
-            q = int(glGenQueriesARB(1))
+            q = one(glGenQueriesARB(1))
             glBeginQueryARB(GL_SAMPLES_PASSED, q)
             glEndQueryARB(GL_SAMPLES_PASSED)
             self.assertTrue(glIsQueryARB(q))  # only a query name once begun
@@ -100,7 +100,7 @@ class TestLegacyCompat(GLTestCase):
         # and the imageSize the friendly form derives are the subject here, so
         # that answer is tolerated rather than failed on.
         with self.allow_missing(), self.tolerate_glerror(GL_INVALID_ENUM):
-            tex = int(glGenTextures(1))
+            tex = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_2D, tex)
             glCompressedTexImage2DARB(GL_TEXTURE_2D, 0, fmt, 4, 4, 0, data)
             glCompressedTexSubImage2DARB(GL_TEXTURE_2D, 0, 0, 0, 4, 4, fmt, data)
@@ -108,17 +108,17 @@ class TestLegacyCompat(GLTestCase):
         # 1D/3D targets are not valid for ETC2; calls drive the wrappers and
         # exercise() tolerates the resulting GLError
         with self.exercise():
-            glBindTexture(GL_TEXTURE_1D, int(glGenTextures(1)))
+            glBindTexture(GL_TEXTURE_1D, one(glGenTextures(1)))
             glCompressedTexImage1DARB(GL_TEXTURE_1D, 0, fmt, 4, 0, data)
             glCompressedTexSubImage1DARB(GL_TEXTURE_1D, 0, 0, 4, fmt, data)
-            glBindTexture(GL_TEXTURE_3D, int(glGenTextures(1)))
+            glBindTexture(GL_TEXTURE_3D, one(glGenTextures(1)))
             glCompressedTexImage3DARB(GL_TEXTURE_3D, 0, fmt, 4, 4, 1, 0, data)
             glCompressedTexSubImage3DARB(GL_TEXTURE_3D, 0, 0, 0, 0, 4, 4, 1, fmt, data)
 
     def test_texture_object_ext(self):
         self.require_extension('GL_EXT_texture_object')
         with self.allow_missing():
-            tex = int(glGenTexturesEXT(1))
+            tex = one(glGenTexturesEXT(1))
             glBindTextureEXT(GL_TEXTURE_2D, tex)
             self.assertTrue(glIsTextureEXT(tex))
             glPrioritizeTexturesEXT(1, np.array([tex], 'I'), np.array([1.0], 'f'))
@@ -133,7 +133,7 @@ class TestLegacyCompat(GLTestCase):
             glFogCoorddEXT(1.0)
             glFogCoordfvEXT(np.ones(1, 'f'))
             glFogCoorddvEXT(np.ones(1, 'd'))
-            buf = int(glGenBuffers(1))
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             glBufferData(GL_ARRAY_BUFFER, np.zeros(4, 'f'), GL_STATIC_DRAW)
             glFogCoordPointerEXT(GL_FLOAT, 0, None)
@@ -141,18 +141,18 @@ class TestLegacyCompat(GLTestCase):
     def test_copy_texture_ext(self):
         self.require_extension('GL_EXT_copy_texture')
         with self.allow_missing():
-            tex = int(glGenTextures(1))
+            tex = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_2D, tex)
             glTexImage2D(
                 GL_TEXTURE_2D, 0, GL_RGBA8, 8, 8, 0, GL_RGBA, GL_UNSIGNED_BYTE, None
             )
             glCopyTexSubImage2DEXT(GL_TEXTURE_2D, 0, 0, 0, 0, 0, 4, 4)
             glCopyTexImage2DEXT(GL_TEXTURE_2D, 0, GL_RGBA8, 0, 0, 4, 4, 0)
-            t1 = int(glGenTextures(1))
+            t1 = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_1D, t1)
             glCopyTexImage1DEXT(GL_TEXTURE_1D, 0, GL_RGBA8, 0, 0, 4, 0)
             glCopyTexSubImage1DEXT(GL_TEXTURE_1D, 0, 0, 0, 0, 4)
-            t3 = int(glGenTextures(1))
+            t3 = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_3D, t3)
             glTexImage3D(
                 GL_TEXTURE_3D, 0, GL_RGBA8, 4, 4, 1, 0, GL_RGBA, GL_UNSIGNED_BYTE, None
@@ -186,7 +186,7 @@ class TestLegacyCompat(GLTestCase):
             first = np.array([0], 'i')
             count = np.array([3], 'i')
             glMultiDrawArraysEXT(GL_TRIANGLES, first, count, 1)
-            ebo = int(glGenBuffers(1))
+            ebo = one(glGenBuffers(1))
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
             glBufferData(
                 GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'I'), GL_STATIC_DRAW
@@ -200,7 +200,7 @@ class TestLegacyCompat(GLTestCase):
     def test_texture3d_subtexture_ext(self):
         self.require_extension('GL_EXT_texture3D')
         with self.allow_missing():
-            tex = int(glGenTextures(1))
+            tex = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_3D, tex)
             px = np.zeros((2, 2, 2, 4), 'B')
             glTexImage3DEXT(
@@ -209,7 +209,7 @@ class TestLegacyCompat(GLTestCase):
             glTexSubImage3DEXT(
                 GL_TEXTURE_3D, 0, 0, 0, 0, 2, 2, 2, GL_RGBA, GL_UNSIGNED_BYTE, px
             )
-            t2 = int(glGenTextures(1))
+            t2 = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_2D, t2)
             glTexImage2D(
                 GL_TEXTURE_2D, 0, GL_RGBA8, 2, 2, 0, GL_RGBA, GL_UNSIGNED_BYTE, None
@@ -225,7 +225,7 @@ class TestLegacyCompat(GLTestCase):
                 GL_UNSIGNED_BYTE,
                 np.zeros((2, 2, 4), 'B'),
             )
-            t1 = int(glGenTextures(1))
+            t1 = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_1D, t1)
             glTexImage1D(
                 GL_TEXTURE_1D, 0, GL_RGBA8, 2, 0, GL_RGBA, GL_UNSIGNED_BYTE, None
@@ -334,10 +334,10 @@ class TestLegacyCompat(GLTestCase):
     def test_texture_buffer_object_ext(self):
         self.require_extension('GL_EXT_texture_buffer_object')
         with self.allow_missing():
-            buf = int(glGenBuffers(1))
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_TEXTURE_BUFFER_EXT, buf)
             glBufferData(GL_TEXTURE_BUFFER_EXT, np.zeros(16, 'f'), GL_STATIC_DRAW)
-            tex = int(glGenTextures(1))
+            tex = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_BUFFER_EXT, tex)
             glTexBufferEXT(GL_TEXTURE_BUFFER_EXT, GL_RGBA32F, buf)
             glTexBufferEXT(GL_TEXTURE_BUFFER_EXT, GL_RGBA32F, 0)  # detach

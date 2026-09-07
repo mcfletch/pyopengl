@@ -4,7 +4,7 @@ invalidation, copy-image, multi-draw-indirect, texture storage/views."""
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -26,13 +26,13 @@ class TestGL43(GLTestCase):
 
         prog = shaders.compileProgram(shaders.compileShader(COMPUTE, GL_COMPUTE_SHADER))
         glUseProgram(prog)
-        ssbo = glGenBuffers(1)
+        ssbo = one(glGenBuffers(1))
         glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo)
         glBufferData(GL_SHADER_STORAGE_BUFFER, np.zeros(8, 'I'), GL_DYNAMIC_DRAW)
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ssbo)
         glDispatchCompute(8, 1, 1)
         glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT)
-        ind = glGenBuffers(1)
+        ind = one(glGenBuffers(1))
         glBindBuffer(GL_DISPATCH_INDIRECT_BUFFER, ind)
         glBufferData(
             GL_DISPATCH_INDIRECT_BUFFER, np.array([1, 1, 1], 'I'), GL_STATIC_DRAW
@@ -83,7 +83,7 @@ class TestGL43(GLTestCase):
             )
             glPushDebugGroup(GL_DEBUG_SOURCE_APPLICATION, 0, -1, b'grp')
             glPopDebugGroup()
-            buf = glGenBuffers(1)
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             glObjectLabel(GL_BUFFER, buf, -1, b'lbl')
             glGetObjectLabel(
@@ -107,8 +107,8 @@ class TestGL43(GLTestCase):
             glDeleteSync(sync)
 
     def test_vertex_attrib_binding(self):
-        glBindVertexArray(int(glGenVertexArrays(1)))
-        buf = glGenBuffers(1)
+        glBindVertexArray(one(glGenVertexArrays(1)))
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(GL_ARRAY_BUFFER, np.zeros(16, 'f'), GL_STATIC_DRAW)
         glBindVertexBuffer(0, buf, 0, 16)
@@ -118,7 +118,7 @@ class TestGL43(GLTestCase):
         glVertexAttribBinding(0, 0)
         glVertexBindingDivisor(0, 1)
         # no-attachment framebuffer: default geometry is settable
-        fbo = glGenFramebuffers(1)
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferParameteri(GL_FRAMEBUFFER, GL_FRAMEBUFFER_DEFAULT_WIDTH, 16)
         glFramebufferParameteri(GL_FRAMEBUFFER, GL_FRAMEBUFFER_DEFAULT_HEIGHT, 16)
@@ -126,28 +126,28 @@ class TestGL43(GLTestCase):
         self.check_error('vertex attrib binding')
 
     def test_storage_views_and_misc(self):
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 16, 16)
-        msa = glGenTextures(1)
+        msa = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, msa)
         glTexStorage2DMultisample(
             GL_TEXTURE_2D_MULTISAMPLE, 4, GL_RGBA8, 16, 16, GL_TRUE
         )
-        arr = glGenTextures(1)
+        arr = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D_MULTISAMPLE_ARRAY, arr)
         glTexStorage3DMultisample(
             GL_TEXTURE_2D_MULTISAMPLE_ARRAY, 4, GL_RGBA8, 16, 16, 2, GL_TRUE
         )
-        view = glGenTextures(1)
+        view = one(glGenTextures(1))
         glTextureView(view, GL_TEXTURE_2D, tex, GL_RGBA8, 0, 1, 0, 1)
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_TEXTURE_BUFFER, buf)
         glBufferData(GL_TEXTURE_BUFFER, np.zeros(64, 'f'), GL_STATIC_DRAW)
-        tb = glGenTextures(1)
+        tb = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_BUFFER, tb)
         glTexBufferRange(GL_TEXTURE_BUFFER, GL_R32F, buf, 0, 64)
-        cp = glGenTextures(1)
+        cp = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, cp)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 16, 16)
         glCopyImageSubData(
@@ -179,11 +179,11 @@ class TestGL43(GLTestCase):
         # results of shader execution undefined, and the specification allows a
         # driver to interrupt or terminate on it (GL 4.6 core, 7.8 "Shader
         # Buffer Variables and Shader Storage Blocks").
-        draw_ssbo = glGenBuffers(1)
+        draw_ssbo = one(glGenBuffers(1))
         glBindBuffer(GL_SHADER_STORAGE_BUFFER, draw_ssbo)
         glBufferData(GL_SHADER_STORAGE_BUFFER, np.zeros(8, 'I'), GL_DYNAMIC_DRAW)
         glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, draw_ssbo)
-        vbo = glGenBuffers(1)
+        vbo = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, vbo)
         glBufferData(
             GL_ARRAY_BUFFER, np.array([(-1, -1), (1, -1), (0, 1)], 'f'), GL_STATIC_DRAW
@@ -191,16 +191,16 @@ class TestGL43(GLTestCase):
         ploc = glGetAttribLocation(prog, 'position')
         glEnableVertexAttribArray(ploc)
         glVertexAttribPointer(ploc, 2, GL_FLOAT, False, 0, None)
-        ind = glGenBuffers(1)
+        ind = one(glGenBuffers(1))
         glBindBuffer(GL_DRAW_INDIRECT_BUFFER, ind)
         glBufferData(
             GL_DRAW_INDIRECT_BUFFER, np.array([3, 1, 0, 0], 'I'), GL_STATIC_DRAW
         )
         glMultiDrawArraysIndirect(GL_TRIANGLES, None, 1, 0)
-        ebo = glGenBuffers(1)
+        ebo = one(glGenBuffers(1))
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'I'), GL_STATIC_DRAW)
-        eind = glGenBuffers(1)
+        eind = one(glGenBuffers(1))
         glBindBuffer(GL_DRAW_INDIRECT_BUFFER, eind)
         glBufferData(
             GL_DRAW_INDIRECT_BUFFER, np.array([3, 1, 0, 0, 0], 'I'), GL_STATIC_DRAW
@@ -210,7 +210,7 @@ class TestGL43(GLTestCase):
         glInvalidateSubFramebuffer(
             GL_FRAMEBUFFER, 1, np.array([GL_COLOR], 'I'), 0, 0, 8, 8
         )
-        nfbo = glGenFramebuffers(1)
+        nfbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, nfbo)
         glFramebufferParameteri(GL_FRAMEBUFFER, GL_FRAMEBUFFER_DEFAULT_WIDTH, 16)
         glBindFramebuffer(GL_FRAMEBUFFER, 0)

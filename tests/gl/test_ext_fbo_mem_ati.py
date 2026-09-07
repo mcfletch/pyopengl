@@ -6,7 +6,7 @@ import) and GL_ATI_fragment_shader (legacy register combiners)."""
 import unittest
 
 from OpenGL import acceleratesupport
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -26,10 +26,10 @@ class TestEXTFramebufferObject(GLTestCase):
     def test_framebuffer_object(self):
         self.require_extension('GL_EXT_framebuffer_object')
         with self.allow_missing():
-            fbo = int(glGenFramebuffersEXT(1))
+            fbo = one(glGenFramebuffersEXT(1))
             glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fbo)
             self.assertTrue(glIsFramebufferEXT(fbo))
-            rbo = int(glGenRenderbuffersEXT(1))
+            rbo = one(glGenRenderbuffersEXT(1))
             glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, rbo)
             self.assertTrue(glIsRenderbufferEXT(rbo))
             glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_RGBA8, 16, 16)
@@ -39,7 +39,7 @@ class TestEXTFramebufferObject(GLTestCase):
             glFramebufferRenderbufferEXT(
                 GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_RENDERBUFFER_EXT, rbo
             )
-            tex = int(glGenTextures(1))
+            tex = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_2D, tex)
             glTexImage2D(
                 GL_TEXTURE_2D, 0, GL_RGBA8, 16, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, None
@@ -55,17 +55,17 @@ class TestEXTFramebufferObject(GLTestCase):
             )
             glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT)
             glGenerateMipmapEXT(GL_TEXTURE_2D)
-            t1 = int(glGenTextures(1))
+            t1 = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_1D, t1)
             glTexImage1D(
                 GL_TEXTURE_1D, 0, GL_RGBA8, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, None
             )
-            f1 = int(glGenFramebuffersEXT(1))
+            f1 = one(glGenFramebuffersEXT(1))
             glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, f1)
             glFramebufferTexture1DEXT(
                 GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_1D, t1, 0
             )
-            t3 = int(glGenTextures(1))
+            t3 = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_3D, t3)
             glTexImage3D(
                 GL_TEXTURE_3D,
@@ -79,7 +79,7 @@ class TestEXTFramebufferObject(GLTestCase):
                 GL_UNSIGNED_BYTE,
                 None,
             )
-            f3 = int(glGenFramebuffersEXT(1))
+            f3 = one(glGenFramebuffersEXT(1))
             glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, f3)
             glFramebufferTexture3DEXT(
                 GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_3D, t3, 0, 0
@@ -100,11 +100,11 @@ class TestEXTFramebufferAliases(GLTestCase):
 
     def test_framebuffer_blit(self):
         self.require_extension('GL_EXT_framebuffer_blit')
-        src = int(glGenFramebuffers(1))
-        dst = int(glGenFramebuffers(1))
+        src = one(glGenFramebuffers(1))
+        dst = one(glGenFramebuffers(1))
         for fbo in (src, dst):
             glBindFramebuffer(GL_FRAMEBUFFER, fbo)
-            rb = int(glGenRenderbuffers(1))
+            rb = one(glGenRenderbuffers(1))
             glBindRenderbuffer(GL_RENDERBUFFER, rb)
             glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA8, 16, 16)
             glFramebufferRenderbuffer(
@@ -119,17 +119,17 @@ class TestEXTFramebufferAliases(GLTestCase):
 
     def test_framebuffer_multisample(self):
         self.require_extension('GL_EXT_framebuffer_multisample')
-        rb = int(glGenRenderbuffers(1))
+        rb = one(glGenRenderbuffers(1))
         glBindRenderbuffer(GL_RENDERBUFFER, rb)
         with self.exercise():
             glRenderbufferStorageMultisampleEXT(GL_RENDERBUFFER, 4, GL_RGBA8, 16, 16)
 
     def test_texture_array_layer_attach(self):
         self.require_extension('GL_EXT_texture_array')
-        arr = int(glGenTextures(1))
+        arr = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D_ARRAY, arr)
         glTexStorage3D(GL_TEXTURE_2D_ARRAY, 1, GL_RGBA8, 16, 16, 2)
-        fbo = int(glGenFramebuffers(1))
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         with self.exercise():
             glFramebufferTextureLayerEXT(
@@ -166,32 +166,32 @@ class TestEXTMemoryObject(GLTestCase):
             mids2 = np.zeros(1, 'I')
             glCreateMemoryObjectsEXT(1, mids2)
             m2 = int(mids2[0])
-            buf = int(glGenBuffers(1))
+            buf = one(glGenBuffers(1))
             glBindBuffer(GL_ARRAY_BUFFER, buf)
             glBufferStorageMemEXT(GL_ARRAY_BUFFER, 64, m2, 0)
-            glNamedBufferStorageMemEXT(int(glGenBuffers(1)), 64, m2, 0)
-            glBindTexture(GL_TEXTURE_1D, int(glGenTextures(1)))
+            glNamedBufferStorageMemEXT(one(glGenBuffers(1)), 64, m2, 0)
+            glBindTexture(GL_TEXTURE_1D, one(glGenTextures(1)))
             glTexStorageMem1DEXT(GL_TEXTURE_1D, 1, GL_RGBA8, 4, m2, 0)
-            glBindTexture(GL_TEXTURE_2D, int(glGenTextures(1)))
+            glBindTexture(GL_TEXTURE_2D, one(glGenTextures(1)))
             glTexStorageMem2DEXT(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4, m2, 0)
-            glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, int(glGenTextures(1)))
+            glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, one(glGenTextures(1)))
             glTexStorageMem2DMultisampleEXT(
                 GL_TEXTURE_2D_MULTISAMPLE, 4, GL_RGBA8, 4, 4, GL_TRUE, m2, 0
             )
-            glBindTexture(GL_TEXTURE_3D, int(glGenTextures(1)))
+            glBindTexture(GL_TEXTURE_3D, one(glGenTextures(1)))
             glTexStorageMem3DEXT(GL_TEXTURE_3D, 1, GL_RGBA8, 4, 4, 4, m2, 0)
-            glBindTexture(GL_TEXTURE_2D_MULTISAMPLE_ARRAY, int(glGenTextures(1)))
+            glBindTexture(GL_TEXTURE_2D_MULTISAMPLE_ARRAY, one(glGenTextures(1)))
             glTexStorageMem3DMultisampleEXT(
                 GL_TEXTURE_2D_MULTISAMPLE_ARRAY, 4, GL_RGBA8, 4, 4, 2, GL_TRUE, m2, 0
             )
-            glTextureStorageMem1DEXT(int(glGenTextures(1)), 1, GL_RGBA8, 4, m2, 0)
-            glTextureStorageMem2DEXT(int(glGenTextures(1)), 1, GL_RGBA8, 4, 4, m2, 0)
+            glTextureStorageMem1DEXT(one(glGenTextures(1)), 1, GL_RGBA8, 4, m2, 0)
+            glTextureStorageMem2DEXT(one(glGenTextures(1)), 1, GL_RGBA8, 4, 4, m2, 0)
             glTextureStorageMem2DMultisampleEXT(
-                int(glGenTextures(1)), 4, GL_RGBA8, 4, 4, GL_TRUE, m2, 0
+                one(glGenTextures(1)), 4, GL_RGBA8, 4, 4, GL_TRUE, m2, 0
             )
-            glTextureStorageMem3DEXT(int(glGenTextures(1)), 1, GL_RGBA8, 4, 4, 4, m2, 0)
+            glTextureStorageMem3DEXT(one(glGenTextures(1)), 1, GL_RGBA8, 4, 4, 4, m2, 0)
             glTextureStorageMem3DMultisampleEXT(
-                int(glGenTextures(1)), 4, GL_RGBA8, 4, 4, 2, GL_TRUE, m2, 0
+                one(glGenTextures(1)), 4, GL_RGBA8, 4, 4, 2, GL_TRUE, m2, 0
             )
 
     def test_memory_object_fd(self):
@@ -213,7 +213,7 @@ class TestATIFragmentShader(GLTestCase):
     def test_ati_fragment_shader(self):
         self.require_extension('GL_ATI_fragment_shader')
         with self.allow_missing():
-            sid = glGenFragmentShadersATI(1)
+            sid = one(glGenFragmentShadersATI(1))
             glBindFragmentShaderATI(sid)
             glBeginFragmentShaderATI()
             glPassTexCoordATI(GL_REG_0_ATI, GL_TEXTURE0, GL_SWIZZLE_STR_ATI)
@@ -310,14 +310,14 @@ class TestAttachingATextureToAnEXTFramebuffer(GLTestCase):
     )
     def test_attaching_a_texture_does_not_raise(self):
         self.require_extension('GL_EXT_framebuffer_object')
-        tex = int(glGenTextures(1))
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexImage2D(
             GL_TEXTURE_2D, 0, GL_RGBA8, 512, 512, 0, GL_RGBA, GL_UNSIGNED_BYTE, None
         )
         glBindTexture(GL_TEXTURE_2D, 0)
 
-        fbo = int(glGenFramebuffersEXT(1))
+        fbo = one(glGenFramebuffersEXT(1))
         with self.framebuffer(fbo):
             glBindTexture(GL_TEXTURE_2D, tex)
             glFramebufferTexture2DEXT(

@@ -7,6 +7,7 @@ import OpenGL
 OpenGL.FORWARD_COMPATIBLE_ONLY = True
 OpenGL.ERROR_CHECKING = True
 # OpenGL.USE_ACCELERATE = False
+from arraycompat import one
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
@@ -53,7 +54,7 @@ def display():
 def get_debug_messages():
     messages = []
     count = glGetIntegerv(GL_DEBUG_LOGGED_MESSAGES)
-    max_size = int(glGetIntegerv(GL_MAX_DEBUG_MESSAGE_LENGTH))
+    max_size = one(glGetIntegerv(GL_MAX_DEBUG_MESSAGE_LENGTH))
     source = GLenum()
     type = GLenum()
     id = GLenum()

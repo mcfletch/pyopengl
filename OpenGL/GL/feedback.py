@@ -1,6 +1,7 @@
 """Utility module to parse a Feedback buffer"""
 from OpenGL import contextdata
 from OpenGL.GL.VERSION import GL_1_1 as _simple
+from OpenGL._scalar import as_int
 
 def parseFeedback( buffer, entryCount ):
     """Parse the feedback buffer into Python object records"""
@@ -59,7 +60,7 @@ class Vertex( object ):
 def createGetVertex( ):
     mode = contextdata.getValue( "GL_FEEDBACK_BUFFER_TYPE" )
     indexMode = _simple.glGetBooleanv( _simple.GL_INDEX_MODE )
-    colorSize = [ 4,1 ][ int(indexMode) ]
+    colorSize = [ 4,1 ][ as_int(indexMode) ]
     if mode in (_simple.GL_2D,_simple.GL_3D):
         if mode == _simple.GL_2D:
             size = 2

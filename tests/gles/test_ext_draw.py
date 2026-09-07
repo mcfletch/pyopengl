@@ -7,7 +7,7 @@ it runs where the driver exports the entry points and skips otherwise.
 
 import unittest
 import ctypes
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from egltestcase import ESTestCase
 from OpenGL.GLES3 import (
@@ -48,8 +48,8 @@ class TestDrawExtensions(ESTestCase):
     def setUp(self):
         super(TestDrawExtensions, self).setUp()
         glUseProgram(self.compile_program(VERTEX, FRAGMENT))
-        glBindVertexArray(int(glGenVertexArrays(1)))
-        vbo = glGenBuffers(1)
+        glBindVertexArray(one(glGenVertexArrays(1)))
+        vbo = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, vbo)
         glBufferData(
             GL_ARRAY_BUFFER,
@@ -59,7 +59,7 @@ class TestDrawExtensions(ESTestCase):
         )
         glEnableVertexAttribArray(0)
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, None)
-        ebo = glGenBuffers(1)
+        ebo = one(glGenBuffers(1))
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
         glBufferData(
             GL_ELEMENT_ARRAY_BUFFER, 12, np.array([0, 1, 2], 'u4'), GL_STATIC_DRAW
@@ -134,7 +134,7 @@ class TestDrawExtensions(ESTestCase):
         with self.exercise():
             from OpenGL.GLES3 import GL_DRAW_INDIRECT_BUFFER
 
-            indirect = glGenBuffers(1)
+            indirect = one(glGenBuffers(1))
             glBindBuffer(GL_DRAW_INDIRECT_BUFFER, indirect)
             glBufferData(
                 GL_DRAW_INDIRECT_BUFFER,

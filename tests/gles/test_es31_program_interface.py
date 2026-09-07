@@ -2,7 +2,7 @@
 """GLES3.1: program interface query (glGetProgramResource*) entry points."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one
 
 from egltestcase import ESTestCase
 
@@ -44,7 +44,7 @@ class TestES31ProgramInterface(ESTestCase):
         self.assertNotEqual(int(index), 0xFFFFFFFF)
 
         length, chars = glGetProgramResourceName(program, GL_UNIFORM, index, 64)
-        name = bytes(bytearray(int(c) for c in chars[: int(length)])).decode()
+        name = bytes(bytearray(int(c) for c in chars[: one(length)])).decode()
         self.assertEqual(name, 'color')
 
         props = np.array([GL_TYPE], 'I')

@@ -189,6 +189,11 @@ import occurs the flags should no longer be changed.
         if a glGenList( 1 ) is done, return a uint rather than
         an array of uints.
 
+        Settable as PYOPENGL_SIZE_1_ARRAY_UNPACK, as the flags
+        around it are; until 4.0 it was the one among them that
+        was not, so setting the variable did nothing and only
+        assigning to this name before the first import worked.
+
         Default: True
 
     USE_ACCELERATE -- if True, attempt to use the OpenGL_accelerate
@@ -232,7 +237,7 @@ ARRAY_SIZE_CHECKING = environ_key("ARRAY_SIZE_CHECKING", True)
 STORE_POINTERS = environ_key("STORE_POINTERS", True)
 WARN_ON_FORMAT_UNAVAILABLE = False
 FORWARD_COMPATIBLE_ONLY = False
-SIZE_1_ARRAY_UNPACK = True
+SIZE_1_ARRAY_UNPACK = environ_key("SIZE_1_ARRAY_UNPACK", True)
 USE_ACCELERATE = environ_key("USE_ACCELERATE", True)
 CONTEXT_CHECKING = environ_key("CONTEXT_CHECKING", False)
 ERROR_DEBUG_OUTPUT = environ_key("ERROR_DEBUG_OUTPUT", True)

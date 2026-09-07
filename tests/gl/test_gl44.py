@@ -3,7 +3,7 @@
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -19,12 +19,12 @@ class TestGL44(GLTestCase):
     gl_version = (4, 5)
 
     def test_buffer_storage_and_clear(self):
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferStorage(
             GL_ARRAY_BUFFER, 64, None, GL_MAP_READ_BIT | GL_DYNAMIC_STORAGE_BIT
         )
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 16, 16)
         glClearTexImage(tex, 0, GL_RGBA, GL_UNSIGNED_BYTE, np.zeros(4, 'B'))
@@ -34,7 +34,7 @@ class TestGL44(GLTestCase):
         self.check_error('storage/clear')
 
     def test_multi_bind(self):
-        glBindVertexArray(int(glGenVertexArrays(1)))
+        glBindVertexArray(one(glGenVertexArrays(1)))
         bufs = glGenBuffers(2)
         ids = np.array([int(b) for b in bufs], 'I')
         for b in ids:

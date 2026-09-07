@@ -61,6 +61,7 @@ jobs:
           # flag about array conversion is not a claim about the interpreter.
           - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-flagerrorcopy}
           - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-flagnosizecheck}
+          - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-flagnounpack}
     env:
       # The headless EGL-device backend, on the software device.  Both are read
       # by tests/glcontext_egl.py, and tox passes them through.

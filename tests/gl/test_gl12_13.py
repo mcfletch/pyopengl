@@ -2,7 +2,7 @@
 """GL 1.2 / 1.3 (compatibility): 3D textures, multitexture, compressed, transpose."""
 
 import unittest
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -13,7 +13,7 @@ class TestGL12_13(GLTestCase):
     gl_version = (2, 1)
 
     def test_gl12_3d_textures(self):
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_3D, tex)
         glTexImage3D(
             GL_TEXTURE_3D,
@@ -98,7 +98,7 @@ class TestGL12_13(GLTestCase):
         if 'GL_EXT_texture_compression_s3tc' not in self.extensions():
             self.skipTest('no S3TC')
         fmt = 0x83F1  # GL_COMPRESSED_RGBA_S3TC_DXT1_EXT
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         # PyOpenGL's friendly wrapper derives imageSize from the data array
         glCompressedTexImage2D(GL_TEXTURE_2D, 0, fmt, 4, 4, 0, np.zeros(8, 'B'))
@@ -107,11 +107,11 @@ class TestGL12_13(GLTestCase):
         # S3TC is a 2D-only format, so the 1D/3D entry points raise GL errors;
         # the calls still drive the wrappers and exercise() tolerates the error
         with self.exercise():
-            t1 = glGenTextures(1)
+            t1 = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_1D, t1)
             glCompressedTexImage1D(GL_TEXTURE_1D, 0, fmt, 4, 0, np.zeros(8, 'B'))
             glCompressedTexSubImage1D(GL_TEXTURE_1D, 0, 0, 4, fmt, np.zeros(8, 'B'))
-            t3 = glGenTextures(1)
+            t3 = one(glGenTextures(1))
             glBindTexture(GL_TEXTURE_3D, t3)
             glCompressedTexImage3D(GL_TEXTURE_3D, 0, fmt, 4, 4, 1, 0, np.zeros(8, 'B'))
             glCompressedTexSubImage3D(
@@ -140,7 +140,7 @@ class TestTheImagingAdditions(GLTestCase):
         self.require_extension('GL_EXT_texture_compression_s3tc')
         from OpenGL.GL.EXT import texture_compression_s3tc as s3tc
 
-        texture = int(glGenTextures(1))
+        texture = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, texture)
         blocks = (GLubyte * (256 * 256))()
         glCompressedTexImage2D(

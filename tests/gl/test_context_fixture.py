@@ -12,7 +12,7 @@ with none, the call raises NullFunctionError from inside a cleanup handler,
 where a test can neither see it coming nor do anything about it.
 """
 
-from arraycompat import object_names
+from arraycompat import object_names, one
 from gltestcase import GLTestCase
 
 from OpenGL.GL import (
@@ -37,7 +37,7 @@ class TestCleanupOrdering(GLTestCase):
 
     def test_defer_cleanup_runs_while_the_context_is_current(self):
         """The fixture's own mechanism, which runs during tearDown."""
-        buffers = glGenBuffers(1)
+        buffers = one(glGenBuffers(1))
         self.defer_cleanup(lambda: glDeleteBuffers(1, object_names(buffers)))
         assert buffers is not None
 
@@ -61,7 +61,7 @@ class TestPuttingTheFramebufferBack(GLTestCase):
         self.require_extension('GL_ARB_framebuffer_object')
 
     def _framebuffer(self):
-        fbo = int(glGenFramebuffers(1))
+        fbo = one(glGenFramebuffers(1))
         self.defer_cleanup(lambda: glDeleteFramebuffers(1, object_names(fbo)))
         return fbo
 

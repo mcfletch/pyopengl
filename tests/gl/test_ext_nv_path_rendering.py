@@ -8,7 +8,7 @@ they skip with a reason when no font is available.
 """
 
 import unittest
-from arraycompat import np, ravel  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one, ravel  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 
@@ -24,13 +24,13 @@ class TestNVPathRendering(GLTestCase):
     gl_version = (4, 5)
 
     def _stencil_fbo(self, w=16, h=16):
-        color = int(glGenTextures(1))
+        color = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, color)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, w, h)
-        ds = int(glGenRenderbuffers(1))
+        ds = one(glGenRenderbuffers(1))
         glBindRenderbuffer(GL_RENDERBUFFER, ds)
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, w, h)
-        fbo = int(glGenFramebuffers(1))
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, color, 0)
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, ds)
@@ -38,7 +38,7 @@ class TestNVPathRendering(GLTestCase):
         return fbo
 
     def _make_path(self):
-        p = int(glGenPathsNV(1))
+        p = one(glGenPathsNV(1))
         glPathCommandsNV(p, 4, CMDS, 6, GL_FLOAT, COORDS)
         return p
 
@@ -48,7 +48,7 @@ class TestNVPathRendering(GLTestCase):
         p = self._make_path()
         self.assertTrue(glIsPathNV(p))
 
-        svg = int(glGenPathsNV(1))
+        svg = one(glGenPathsNV(1))
         s = b'M0,0 L6,0 L3,6 Z'
         glPathStringNV(svg, GL_PATH_FORMAT_SVG_NV, len(s), s)
 
@@ -65,11 +65,11 @@ class TestNVPathRendering(GLTestCase):
         glPathDashArrayNV(p, 2, np.array([2.0, 1.0], 'f'))
 
         # derive new paths from existing ones (weighting needs >1 compatible path)
-        copy = int(glGenPathsNV(1))
+        copy = one(glGenPathsNV(1))
         glCopyPathNV(copy, p)
-        weighted = int(glGenPathsNV(1))
+        weighted = one(glGenPathsNV(1))
         glWeightPathsNV(weighted, 2, np.array([p, copy], 'u4'), np.array([0.5, 0.5], 'f'))
-        interp = int(glGenPathsNV(1))
+        interp = one(glGenPathsNV(1))
         glInterpolatePathsNV(interp, p, copy, 0.5)
         glTransformPathNV(copy, p, GL_TRANSLATE_X_NV, np.array([1.0], 'f'))
 
@@ -202,7 +202,7 @@ class TestNVPathRendering(GLTestCase):
         glLinkProgram(program)
         if not glGetProgramiv(program, GL_LINK_STATUS):
             self.skipTest('path fragment-input program did not link')
-        idx = int(glGetProgramResourceIndex(program, GL_FRAGMENT_INPUT_NV, b'tc'))
+        idx = one(glGetProgramResourceIndex(program, GL_FRAGMENT_INPUT_NV, b'tc'))
         # explicit layout(location=0) on the fragment input
         glProgramPathFragmentInputGenNV(program, 0, GL_OBJECT_LINEAR_NV, 2,
                                         np.zeros((2, 3), 'f'))

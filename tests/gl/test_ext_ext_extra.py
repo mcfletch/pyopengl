@@ -13,7 +13,7 @@ covered.
 
 import unittest
 import ctypes
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
 
@@ -176,7 +176,7 @@ class TestEXTExtra(GLTestCase):
             GL_ALL_BARRIER_BITS_EXT,
         )
 
-        tex = int(glGenTextures(1))
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, 4, 4)
         glBindImageTextureEXT(0, tex, 0, GL_FALSE, 0, GL_READ_WRITE, GL_RGBA8)
@@ -198,10 +198,10 @@ class TestEXTExtra(GLTestCase):
             '#version 120\nvoid main(){ gl_FragColor = vec4(1.0); }',
         )
         loc = glGetUniformLocation(program, 'bu')
-        size = int(glGetUniformBufferSizeEXT(program, loc))
+        size = one(glGetUniformBufferSizeEXT(program, loc))
         self.assertGreater(size, 0)
         glGetUniformOffsetEXT(program, loc)
-        buf = int(glGenBuffers(1))
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_UNIFORM_BUFFER, buf)
         glBufferData(GL_UNIFORM_BUFFER, size, None, GL_DYNAMIC_DRAW)
         glUseProgram(program)

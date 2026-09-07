@@ -8,7 +8,7 @@ query.
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from egltestcase import ESTestCase
 
@@ -54,7 +54,7 @@ class TestES3VAOElements(ESTestCase):
         program = self.compile_program(VERTEX_SHADER, FRAGMENT_SHADER)
         glUseProgram(program)
 
-        vao = glGenVertexArrays(1)
+        vao = one(glGenVertexArrays(1))
         glBindVertexArray(int(vao))
 
         vertices = VBO(

@@ -2,7 +2,7 @@
 """Smoke tests: core-profile shader render and compatibility immediate-mode."""
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 
@@ -56,7 +56,7 @@ class TestCoreSmoke(GLTestCase):
     def test_triangle(self):
         program = self.compile_program(CORE_VS, CORE_FS)
         glUseProgram(program)
-        vbo = glGenBuffers(1)
+        vbo = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, vbo)
         glBufferData(
             GL_ARRAY_BUFFER,

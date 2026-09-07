@@ -11,6 +11,7 @@ feature and the other from the extension.
 
 import unittest
 
+from arraycompat import one
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
 from OpenGL.GL.ARB.shader_objects import glGetActiveUniformARB
@@ -43,7 +44,7 @@ class TestTheActiveUniformQuery(GLTestCase):
 
     def test_the_core_query_names_the_uniform(self):
         program = self.program()
-        count = glGetProgramiv(program, GL_ACTIVE_UNIFORMS)
+        count = one(glGetProgramiv(program, GL_ACTIVE_UNIFORMS))
         self.assertGreaterEqual(count, 1, count)
         names = []
         for index in range(count):
@@ -56,7 +57,7 @@ class TestTheActiveUniformQuery(GLTestCase):
         """The two bindings are separately generated, so they can disagree."""
         self.require_extension('GL_ARB_shader_objects')
         program = self.program()
-        count = glGetProgramiv(program, GL_ACTIVE_UNIFORMS)
+        count = one(glGetProgramiv(program, GL_ACTIVE_UNIFORMS))
         for index in range(count):
             core = glGetActiveUniform(program, index)
             arb = glGetActiveUniformARB(program, index)

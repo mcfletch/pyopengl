@@ -2,7 +2,7 @@
 """GLES2: texture parameters, buffer objects, renderbuffers and FBO queries."""
 
 import unittest
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from arraycompat import copy_safe
 from egltestcase import ESTestCase
@@ -65,7 +65,7 @@ class TestES2TexBuffers(ESTestCase):
     gl_version = (2, 0)
 
     def test_texture_parameters(self):
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, float(GL_LINEAR))
@@ -78,11 +78,11 @@ class TestES2TexBuffers(ESTestCase):
             copy_safe([int(GL_CLAMP_TO_EDGE)], 'i'),
         )
         self.assertEqual(
-            int(glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER)),
+            one(glGetTexParameteriv(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER)),
             int(GL_NEAREST),
         )
         self.assertEqual(
-            int(glGetTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER)),
+            one(glGetTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER)),
             int(GL_LINEAR),
         )
         self.assertTrue(glIsTexture(tex))
@@ -94,12 +94,12 @@ class TestES2TexBuffers(ESTestCase):
         glDeleteTextures(1, object_names(tex))
 
     def test_buffers(self):
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(GL_ARRAY_BUFFER, 64, np.zeros(16, 'f'), GL_STATIC_DRAW)
         glBufferSubData(GL_ARRAY_BUFFER, 0, 16, np.ones(4, 'f'))
         self.assertEqual(
-            int(glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE)), 64
+            one(glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE)), 64
         )
         self.assertTrue(glIsBuffer(buf))
         self.check_error('buffers')
@@ -107,12 +107,12 @@ class TestES2TexBuffers(ESTestCase):
         self.assertFalse(glIsBuffer(buf))
 
     def test_friendly_buffer_and_delete_forms(self):
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(GL_ARRAY_BUFFER, np.zeros(16, 'f'), GL_STATIC_DRAW)  # no size
         glBufferSubData(GL_ARRAY_BUFFER, 0, np.ones(4, 'f'))  # no size
         self.assertEqual(
-            int(glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE)), 64
+            one(glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE)), 64
         )
         glDeleteBuffers(object_names(buf))  # no count
         self.assertFalse(glIsBuffer(buf))
@@ -122,16 +122,16 @@ class TestES2TexBuffers(ESTestCase):
         self.check_error('friendly forms')
 
     def test_renderbuffer_and_fbo(self):
-        rb = glGenRenderbuffers(1)
+        rb = one(glGenRenderbuffers(1))
         glBindRenderbuffer(GL_RENDERBUFFER, rb)
         glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA4, 16, 16)
         self.assertEqual(
-            int(glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH)),
+            one(glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH)),
             16,
         )
         self.assertTrue(glIsRenderbuffer(rb))
 
-        fbo = glGenFramebuffers(1)
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferRenderbuffer(
             GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, rb

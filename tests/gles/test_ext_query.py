@@ -4,7 +4,7 @@ conditional render, APPLE fence sync, parallel shader compile."""
 
 import unittest
 import ctypes
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from egltestcase import ESTestCase
 from OpenGL.GLES2.EXT import disjoint_timer_query as timer
@@ -76,7 +76,7 @@ class TestQueryExtensions(ESTestCase):
         with self.exercise():
             from OpenGL.GLES3 import glGenQueries, glDeleteQueries
 
-            q = glGenQueries(1)
+            q = one(glGenQueries(1))
             cond.glBeginConditionalRenderNV(q, cond.GL_QUERY_WAIT_NV)
             cond.glEndConditionalRenderNV()
             glDeleteQueries(1, object_names(q))

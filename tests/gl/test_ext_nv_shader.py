@@ -8,7 +8,7 @@ Functional tests -- real objects, real calls, clean error state.
 """
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 
@@ -105,7 +105,7 @@ class TestNVShader(GLTestCase):
             GL_MAX_SHADER_BUFFER_ADDRESS_NV,
         )
 
-        buf = int(glGenBuffers(1))
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(GL_ARRAY_BUFFER, 256, None, GL_STATIC_DRAW)
         glMakeBufferResidentNV(GL_ARRAY_BUFFER, GL_READ_ONLY)
@@ -153,7 +153,7 @@ class TestNVShader(GLTestCase):
             glGetVertexAttribLi64vNV, glGetVertexAttribLui64vNV, GL_INT64_NV,
         )
 
-        vao = int(glGenVertexArrays(1))
+        vao = one(glGenVertexArrays(1))
         glBindVertexArray(vao)
         glVertexAttribL1i64NV(1, 1)
         glVertexAttribL2i64NV(1, 1, 2)
@@ -194,7 +194,7 @@ class TestNVShader(GLTestCase):
             GL_VERTEX_ATTRIB_ARRAY_UNIFIED_NV, GL_VERTEX_ATTRIB_ARRAY_ADDRESS_NV,
         )
 
-        buf = int(glGenBuffers(1))
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(GL_ARRAY_BUFFER, 256, None, GL_STATIC_DRAW)
         glMakeBufferResidentNV(GL_ARRAY_BUFFER, GL_READ_ONLY)
@@ -225,7 +225,7 @@ class TestNVShader(GLTestCase):
             glMultiDrawArraysIndirectBindlessNV, glMultiDrawElementsIndirectBindlessNV,
         )
 
-        vao = int(glGenVertexArrays(1))
+        vao = one(glGenVertexArrays(1))
         glBindVertexArray(vao)
         # a zero-draw multi-draw is a well-defined no-op that still drives the
         # entry point through the driver
@@ -243,10 +243,10 @@ class TestNVShader(GLTestCase):
             glMultiDrawElementsIndirectBindlessCountNV,
         )
 
-        vao = int(glGenVertexArrays(1))
+        vao = one(glGenVertexArrays(1))
         glBindVertexArray(vao)
         # the *Count* variants read the draw count from a bound parameter buffer
-        pbuf = int(glGenBuffers(1))
+        pbuf = one(glGenBuffers(1))
         glBindBuffer(GL_PARAMETER_BUFFER, pbuf)
         glBufferData(GL_PARAMETER_BUFFER, 4, np.zeros(1, 'u4'), GL_STATIC_DRAW)
         glMultiDrawArraysIndirectBindlessCountNV(GL_TRIANGLES, None, 0, 0, 0, 0)

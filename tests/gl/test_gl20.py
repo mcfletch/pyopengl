@@ -2,7 +2,7 @@
 """GL 2.0: programmable shaders, uniforms, vertex attributes, separate stencil."""
 
 import unittest
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
 from OpenGL import error
@@ -140,7 +140,7 @@ class TestGL20(GLTestCase):
         glVertexAttrib4Nubv(1, np.zeros(4, 'B'))
         glVertexAttrib4Nuiv(1, np.zeros(4, 'I'))
         glVertexAttrib4Nusv(1, np.zeros(4, 'H'))
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(GL_ARRAY_BUFFER, np.zeros(12, 'f'), GL_STATIC_DRAW)
         glEnableVertexAttribArray(1)
@@ -229,8 +229,8 @@ class TestSelectingSeveralDrawBuffers(GLTestCase):
     def test_naming_attachments_a_framebuffer_object_does_have(self):
         self.require_feature('framebuffer objects', (3, 0),
                              'GL_ARB_framebuffer_object')
-        previous = glGetIntegerv(GL_READ_BUFFER)
-        fbo = int(glGenFramebuffers(1))
+        previous = one(glGetIntegerv(GL_READ_BUFFER))
+        fbo = one(glGenFramebuffers(1))
         self.defer_cleanup(lambda: glDeleteFramebuffers(1, object_names(fbo)))
         with self.framebuffer(fbo):
             textures = glGenTextures(2)

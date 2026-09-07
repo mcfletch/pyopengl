@@ -4,7 +4,7 @@ storage and the KHR_robustness sized queries."""
 
 import unittest
 import ctypes
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from egltestcase import ESTestCase
 
@@ -65,17 +65,17 @@ class TestES32TextureRobust(ESTestCase):
     gl_version = (3, 2)
 
     def test_texture_buffer(self):
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(GL_ARRAY_BUFFER, 64, np.zeros(16, 'u4'), GL_STATIC_DRAW)
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_BUFFER, tex)
         glTexBuffer(GL_TEXTURE_BUFFER, GL_R32UI, buf)
         glTexBufferRange(GL_TEXTURE_BUFFER, GL_R32UI, buf, 0, 64)
         self.check_error('texture buffer')
 
     def test_integer_params(self):
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexParameterIiv(
             GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, np.array([1, 2, 3, 4], 'i')
@@ -88,7 +88,7 @@ class TestES32TextureRobust(ESTestCase):
         ubuf = np.zeros(4, 'u4')
         glGetTexParameterIuiv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ubuf)
 
-        sampler = glGenSamplers(1)
+        sampler = one(glGenSamplers(1))
         glSamplerParameterIiv(
             sampler, GL_TEXTURE_BORDER_COLOR, np.array([1, 2, 3, 4], 'i')
         )
@@ -101,7 +101,7 @@ class TestES32TextureRobust(ESTestCase):
         glDeleteSamplers(1, object_names(sampler))
 
     def test_multisample_array_storage(self):
-        tex = glGenTextures(1)
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D_MULTISAMPLE_ARRAY, tex)
         glTexStorage3DMultisample(
             GL_TEXTURE_2D_MULTISAMPLE_ARRAY, 4, GL_RGBA8, 8, 8, 2, True
@@ -109,7 +109,7 @@ class TestES32TextureRobust(ESTestCase):
         self.check_error('multisample array storage')
 
     def test_robustness_queries(self):
-        self.assertEqual(int(glGetGraphicsResetStatus()), int(GL_NO_ERROR))
+        self.assertEqual(one(glGetGraphicsResetStatus()), int(GL_NO_ERROR))
 
         size = self.width * self.height * 4
         buf = (ctypes.c_ubyte * size)()

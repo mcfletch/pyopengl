@@ -8,7 +8,7 @@ Functional tests -- real objects and real calls with a clean error state.
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 
@@ -94,7 +94,7 @@ class TestNVLegacyMisc(GLTestCase):
             glRenderbufferStorageMultisampleCoverageNV,
         )
 
-        rbo = int(glGenRenderbuffers(1))
+        rbo = one(glGenRenderbuffers(1))
         glBindRenderbuffer(GL_RENDERBUFFER, rbo)
         glRenderbufferStorageMultisampleCoverageNV(GL_RENDERBUFFER, 8, 4, GL_RGBA8, 8, 8)
         self.check_error('nv framebuffer multisample coverage')
@@ -107,16 +107,16 @@ class TestNVLegacyMisc(GLTestCase):
             GL_SAMPLE_POSITION_NV, GL_TEXTURE_RENDERBUFFER_NV,
         )
 
-        rbo = int(glGenRenderbuffers(1))
+        rbo = one(glGenRenderbuffers(1))
         glBindRenderbuffer(GL_RENDERBUFFER, rbo)
         glRenderbufferStorageMultisample(GL_RENDERBUFFER, 4, GL_RGBA8, 8, 8)
         # sample-position query reads the bound multisample draw framebuffer
-        fbo = int(glGenFramebuffers(1))
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, rbo)
         glGetMultisamplefvNV(GL_SAMPLE_POSITION_NV, 0, np.zeros(2, 'f'))
         glSampleMaskIndexedNV(0, 0xFF)
-        tex = int(glGenTextures(1))
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_RENDERBUFFER_NV, tex)
         glTexRenderbufferNV(GL_TEXTURE_RENDERBUFFER_NV, rbo)
         self.check_error('nv explicit multisample')
@@ -130,20 +130,20 @@ class TestNVLegacyMisc(GLTestCase):
             glTextureImage3DMultisampleNV, glTextureImage3DMultisampleCoverageNV,
         )
 
-        t = int(glGenTextures(1))
+        t = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, t)
         glTexImage2DMultisampleCoverageNV(GL_TEXTURE_2D_MULTISAMPLE, 8, 4, GL_RGBA8, 8, 8, GL_TRUE)
-        ta = int(glGenTextures(1))
+        ta = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D_MULTISAMPLE_ARRAY, ta)
         glTexImage3DMultisampleCoverageNV(GL_TEXTURE_2D_MULTISAMPLE_ARRAY, 8, 4, GL_RGBA8, 8, 8, 2, GL_TRUE)
 
-        d2 = int(glGenTextures(1))
+        d2 = one(glGenTextures(1))
         glTextureImage2DMultisampleNV(d2, GL_TEXTURE_2D_MULTISAMPLE, 4, GL_RGBA8, 8, 8, GL_TRUE)
-        d2c = int(glGenTextures(1))
+        d2c = one(glGenTextures(1))
         glTextureImage2DMultisampleCoverageNV(d2c, GL_TEXTURE_2D_MULTISAMPLE, 8, 4, GL_RGBA8, 8, 8, GL_TRUE)
-        d3 = int(glGenTextures(1))
+        d3 = one(glGenTextures(1))
         glTextureImage3DMultisampleNV(d3, GL_TEXTURE_2D_MULTISAMPLE_ARRAY, 4, GL_RGBA8, 8, 8, 2, GL_TRUE)
-        d3c = int(glGenTextures(1))
+        d3c = one(glGenTextures(1))
         glTextureImage3DMultisampleCoverageNV(d3c, GL_TEXTURE_2D_MULTISAMPLE_ARRAY, 8, 4, GL_RGBA8, 8, 8, 2, GL_TRUE)
         self.check_error('nv texture multisample')
 
@@ -178,7 +178,7 @@ class TestNVLegacyMisc(GLTestCase):
         tf = int(tfs[0])
         glBindTransformFeedbackNV(GL_TRANSFORM_FEEDBACK, tf)
         self.assertTrue(glIsTransformFeedbackNV(tf))
-        tbo = int(glGenBuffers(1))
+        tbo = one(glGenBuffers(1))
         glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, tbo)
         glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, 64, None, GL_DYNAMIC_COPY)
         glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, tbo)

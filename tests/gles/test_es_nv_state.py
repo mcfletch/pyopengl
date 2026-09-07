@@ -10,7 +10,7 @@ Functional tests -- real objects and real calls with a clean error state.
 """
 
 import unittest
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from egltestcase import ESTestCase
 
@@ -22,10 +22,10 @@ class TestESNVState(ESTestCase):
     gl_version = (3, 2)
 
     def _color_fbo(self, w=8, h=8):
-        tex = int(glGenTextures(1))
+        tex = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, w, h)
-        fbo = int(glGenFramebuffers(1))
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0)
         return fbo
@@ -76,9 +76,9 @@ class TestESNVState(ESTestCase):
     def test_nv_copy_buffer(self):
         self.require_extension('GL_NV_copy_buffer')
         from OpenGL.GLES2.NV.copy_buffer import glCopyBufferSubDataNV
-        a = int(glGenBuffers(1)); glBindBuffer(GL_ARRAY_BUFFER, a)
+        a = one(glGenBuffers(1)); glBindBuffer(GL_ARRAY_BUFFER, a)
         glBufferData(GL_ARRAY_BUFFER, 64, None, GL_STATIC_DRAW)
-        b = int(glGenBuffers(1)); glBindBuffer(GL_COPY_WRITE_BUFFER, b)
+        b = one(glGenBuffers(1)); glBindBuffer(GL_COPY_WRITE_BUFFER, b)
         glBufferData(GL_COPY_WRITE_BUFFER, 64, None, GL_STATIC_DRAW)
         glCopyBufferSubDataNV(GL_ARRAY_BUFFER, GL_COPY_WRITE_BUFFER, 0, 0, 64)
         self.check_error('es nv copy buffer')
@@ -89,9 +89,9 @@ class TestESNVState(ESTestCase):
             glDrawArraysInstancedNV, glDrawElementsInstancedNV,
         )
         glUseProgram(self._program())
-        vao = int(glGenVertexArrays(1)); glBindVertexArray(vao)
+        vao = one(glGenVertexArrays(1)); glBindVertexArray(vao)
         glDrawArraysInstancedNV(GL_TRIANGLES, 0, 3, 2)
-        idx = int(glGenBuffers(1)); glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, idx)
+        idx = one(glGenBuffers(1)); glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, idx)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, np.array([0, 1, 2], 'u4'), GL_STATIC_DRAW)
         glDrawElementsInstancedNV(GL_TRIANGLES, 3, GL_UNSIGNED_INT, None, 2)
         glUseProgram(0)
@@ -100,9 +100,9 @@ class TestESNVState(ESTestCase):
     def test_nv_fragment_coverage_to_color(self):
         self.require_extension('GL_NV_fragment_coverage_to_color')
         from OpenGL.GLES2.NV.fragment_coverage_to_color import glFragmentCoverageColorNV
-        tex = int(glGenTextures(1)); glBindTexture(GL_TEXTURE_2D, tex)
+        tex = one(glGenTextures(1)); glBindTexture(GL_TEXTURE_2D, tex)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_R32UI, 8, 8)
-        fbo = int(glGenFramebuffers(1)); glBindFramebuffer(GL_FRAMEBUFFER, fbo)
+        fbo = one(glGenFramebuffers(1)); glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0)
         glFragmentCoverageColorNV(0)
         glBindFramebuffer(GL_FRAMEBUFFER, 0)
@@ -139,14 +139,14 @@ class TestESNVState(ESTestCase):
     def test_nv_framebuffer_multisample(self):
         self.require_extension('GL_NV_framebuffer_multisample')
         from OpenGL.GLES2.NV.framebuffer_multisample import glRenderbufferStorageMultisampleNV
-        rbo = int(glGenRenderbuffers(1)); glBindRenderbuffer(GL_RENDERBUFFER, rbo)
+        rbo = one(glGenRenderbuffers(1)); glBindRenderbuffer(GL_RENDERBUFFER, rbo)
         glRenderbufferStorageMultisampleNV(GL_RENDERBUFFER, 4, GL_RGBA8, 8, 8)
         self.check_error('es nv framebuffer multisample')
 
     def test_nv_instanced_arrays(self):
         self.require_extension('GL_NV_instanced_arrays')
         from OpenGL.GLES2.NV.instanced_arrays import glVertexAttribDivisorNV
-        vao = int(glGenVertexArrays(1)); glBindVertexArray(vao)
+        vao = one(glGenVertexArrays(1)); glBindVertexArray(vao)
         glVertexAttribDivisorNV(0, 1)
         glBindVertexArray(0)
         self.check_error('es nv instanced arrays')

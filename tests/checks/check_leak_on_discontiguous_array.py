@@ -17,6 +17,7 @@ OpenGL.SIZE_1_ARRAY_UNPACK = False  # just for convenience
 OpenGL.ERROR_ON_COPY = False  # we are checking a leak in the copying
 import testdecorator
 import numpy as np
+from arraycompat import one
 from OpenGL.GL import *
 from OpenGL.GL import shaders
 from sys import getrefcount
@@ -26,8 +27,8 @@ from sys import getrefcount
 def main():
     data = np.zeros([256, 256, 3], dtype='b')
     glEnable(GL_TEXTURE_2D)
-    textures = glGenTextures(1)
-    glBindTexture(GL_TEXTURE_2D, textures[0])
+    texture = one(glGenTextures(1))
+    glBindTexture(GL_TEXTURE_2D, texture)
     reversed_data = data[::-1]
     assert not reversed_data.flags['C_CONTIGUOUS']
     rc1 = getrefcount(reversed_data)

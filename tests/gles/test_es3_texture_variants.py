@@ -12,6 +12,7 @@ import unittest
 import pytest
 np = pytest.importorskip('numpy')  # numpy-specific test: skip without numpy
 
+from arraycompat import one
 from egltestcase import ESTestCase
 
 from OpenGL.GLES3 import (
@@ -112,7 +113,7 @@ class TestES3TextureVariants(ESTestCase):
 
     def test_subimage_and_mipmap(self):
         program = self.compile_program(VERTEX_SHADER, FRAGMENT_2D)
-        texture = glGenTextures(1)
+        texture = one(glGenTextures(1))
         glActiveTexture(GL_TEXTURE0)
         glBindTexture(GL_TEXTURE_2D, texture)
         self._nearest_clamp(GL_TEXTURE_2D, (GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T))
@@ -147,7 +148,7 @@ class TestES3TextureVariants(ESTestCase):
 
     def test_3d_texture(self):
         program = self.compile_program(VERTEX_SHADER, FRAGMENT_3D)
-        texture = glGenTextures(1)
+        texture = one(glGenTextures(1))
         glActiveTexture(GL_TEXTURE0)
         glBindTexture(GL_TEXTURE_3D, texture)
         self._nearest_clamp(
@@ -173,7 +174,7 @@ class TestES3TextureVariants(ESTestCase):
 
     def test_undersized_3d_upload_raises(self):
         """A 3D array too small for the declared volume is rejected."""
-        texture = glGenTextures(1)
+        texture = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_3D, texture)
         too_small = np.zeros((2, 2, 2, 4), np.uint8)  # 32 bytes; 4x4x4 needs 256
         with self.assertRaises(ValueError):

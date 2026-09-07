@@ -9,7 +9,7 @@ not exercised.
 """
 
 import unittest
-from arraycompat import np, ravel  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one, ravel  # numpy, or a ctypes fallback when numpy is absent
 
 from egltestcase import ESTestCase
 
@@ -25,13 +25,13 @@ class TestESNVPathRendering(ESTestCase):
     gl_version = (3, 2)
 
     def _stencil_fbo(self, w=16, h=16):
-        color = int(glGenTextures(1))
+        color = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, color)
         glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA8, w, h)
-        ds = int(glGenRenderbuffers(1))
+        ds = one(glGenRenderbuffers(1))
         glBindRenderbuffer(GL_RENDERBUFFER, ds)
         glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, w, h)
-        fbo = int(glGenFramebuffers(1))
+        fbo = one(glGenFramebuffers(1))
         glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, color, 0)
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, ds)
@@ -39,7 +39,7 @@ class TestESNVPathRendering(ESTestCase):
         return fbo
 
     def _make_path(self):
-        p = int(glGenPathsNV(1))
+        p = one(glGenPathsNV(1))
         glPathCommandsNV(p, 4, CMDS, 6, GL_FLOAT, COORDS)
         return p
 
@@ -47,7 +47,7 @@ class TestESNVPathRendering(ESTestCase):
         self.require_extension('GL_NV_path_rendering')
         p = self._make_path()
         self.assertTrue(glIsPathNV(p))
-        svg = int(glGenPathsNV(1))
+        svg = one(glGenPathsNV(1))
         s = b'M0,0 L6,0 L3,6 Z'
         glPathStringNV(svg, GL_PATH_FORMAT_SVG_NV, len(s), s)
         glPathSubCommandsNV(p, 0, 0, 1, np.array([GL_MOVE_TO_NV], 'u1'), 2, GL_FLOAT, np.array([0.0, 0.0], 'f'))
@@ -57,10 +57,10 @@ class TestESNVPathRendering(ESTestCase):
         glPathParameterfvNV(p, GL_PATH_STROKE_WIDTH_NV, np.array([1.5], 'f'))
         glPathParameterivNV(p, GL_PATH_JOIN_STYLE_NV, np.array([GL_ROUND_NV], 'i'))
         glPathDashArrayNV(p, 2, np.array([2.0, 1.0], 'f'))
-        copy = int(glGenPathsNV(1)); glCopyPathNV(copy, p)
-        weighted = int(glGenPathsNV(1))
+        copy = one(glGenPathsNV(1)); glCopyPathNV(copy, p)
+        weighted = one(glGenPathsNV(1))
         glWeightPathsNV(weighted, 2, np.array([p, copy], 'u4'), np.array([0.5, 0.5], 'f'))
-        interp = int(glGenPathsNV(1)); glInterpolatePathsNV(interp, p, copy, 0.5)
+        interp = one(glGenPathsNV(1)); glInterpolatePathsNV(interp, p, copy, 0.5)
         glTransformPathNV(copy, p, GL_TRANSLATE_X_NV, np.array([1.0], 'f'))
         glGetPathParameterfvNV(p, GL_PATH_STROKE_WIDTH_NV, np.zeros(1, 'f'))
         glGetPathParameterivNV(p, GL_PATH_JOIN_STYLE_NV, np.zeros(1, 'i'))
@@ -160,7 +160,7 @@ class TestESNVPathRendering(ESTestCase):
         glLinkProgram(program)
         if not glGetProgramiv(program, GL_LINK_STATUS):
             self.skipTest('path fragment-input program did not link')
-        idx = int(glGetProgramResourceIndex(program, GL_FRAGMENT_INPUT_NV, b'tc'))
+        idx = one(glGetProgramResourceIndex(program, GL_FRAGMENT_INPUT_NV, b'tc'))
         glProgramPathFragmentInputGenNV(program, 0, GL_OBJECT_LINEAR_NV, 2, np.zeros((2, 3), 'f'))
         glGetProgramResourcefvNV(program, GL_FRAGMENT_INPUT_NV, idx, 1,
                                  np.array([GL_PATH_GEN_COEFF_NV], 'u4'), 4,

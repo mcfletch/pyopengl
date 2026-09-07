@@ -14,6 +14,7 @@ import os
 import subprocess
 import sys
 
+from arraycompat import one
 import paths
 import pytest
 
@@ -43,7 +44,7 @@ def assert_the_old_pipeline_is_there():
         GL_NO_ERROR, glGetError, glGetIntegerv, glMatrixMode,
     )
 
-    mask = int(glGetIntegerv(GL_CONTEXT_PROFILE_MASK))
+    mask = one(glGetIntegerv(GL_CONTEXT_PROFILE_MASK))
     assert not mask & GL_CONTEXT_CORE_PROFILE_BIT, (
         'asked for compatibility and the context says it is core (mask 0x%x)'
         % (mask,)
@@ -150,7 +151,7 @@ class TestTheContext:
         )
 
         scene.makeCurrent()
-        assert int(glGetIntegerv(GL_CONTEXT_PROFILE_MASK)) \
+        assert one(glGetIntegerv(GL_CONTEXT_PROFILE_MASK)) \
             & GL_CONTEXT_CORE_PROFILE_BIT
 
     def test_a_compatibility_request_gets_the_old_pipeline(self, root):
@@ -172,7 +173,7 @@ class TestTheContext:
         made.pack()
         made.waitForMap()
         made.makeCurrent()
-        assert int(glGetIntegerv(GL_MAJOR_VERSION)) >= 3
+        assert one(glGetIntegerv(GL_MAJOR_VERSION)) >= 3
 
     def test_an_impossible_request_is_an_error_rather_than_an_exit(self, root):
         """Xlib's default error handler prints and calls exit(); a library
@@ -344,10 +345,10 @@ class TestTheOldWidgets:
         made.pack()
         made.waitForMap()
         made.makeCurrent()
-        before = int(glGetIntegerv(GL_MATRIX_MODE))
+        before = one(glGetIntegerv(GL_MATRIX_MODE))
         made.render()
         made.makeCurrent()
-        assert int(glGetIntegerv(GL_MATRIX_MODE)) == before
+        assert one(glGetIntegerv(GL_MATRIX_MODE)) == before
 
     def test_it_gets_a_compatibility_context(self, root):
         """It draws with glMatrixMode and gluPerspective, so it needs them."""

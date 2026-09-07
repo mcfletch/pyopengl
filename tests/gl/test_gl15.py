@@ -3,7 +3,7 @@
 
 import unittest
 import ctypes
-from arraycompat import np, object_names
+from arraycompat import np, object_names, one
 
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
@@ -14,12 +14,12 @@ class TestGL15(GLTestCase):
     gl_version = (2, 1)
 
     def test_buffers(self):
-        buf = glGenBuffers(1)
+        buf = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, buf)
         glBufferData(GL_ARRAY_BUFFER, np.zeros(16, 'f'), GL_STATIC_DRAW)
         glBufferSubData(GL_ARRAY_BUFFER, 0, np.ones(4, 'f'))
         self.assertEqual(
-            int(glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE)), 64
+            one(glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE)), 64
         )
         out = glGetBufferSubData(GL_ARRAY_BUFFER, 0, 16)
         self.assertTrue(len(out) >= 0)
@@ -34,7 +34,7 @@ class TestGL15(GLTestCase):
         self.check_error('buffers')
 
     def test_queries(self):
-        ids = glGenQueries(1)
+        ids = one(glGenQueries(1))
         q = int(ids[0]) if hasattr(ids, '__len__') else int(ids)
         glBeginQuery(GL_SAMPLES_PASSED, q)
         glEndQuery(GL_SAMPLES_PASSED)

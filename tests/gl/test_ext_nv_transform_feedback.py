@@ -8,7 +8,7 @@ buffer object, with a clean error state.
 
 import unittest
 import ctypes
-from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
+from arraycompat import np, one  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
 
@@ -41,7 +41,7 @@ class TestNVTransformFeedback(GLTestCase):
         glActiveVaryingNV(program, b'v')
         glLinkProgram(program)
 
-        loc = int(glGetVaryingLocationNV(program, b'v'))
+        loc = one(glGetVaryingLocationNV(program, b'v'))
         glTransformFeedbackVaryingsNV(program, 1, np.array([loc], 'i'),
                                       GL_INTERLEAVED_ATTRIBS_NV)
         length = (ctypes.c_int * 1)()
@@ -52,7 +52,7 @@ class TestNVTransformFeedback(GLTestCase):
         glGetTransformFeedbackVaryingNV(program, 0, np.zeros(1, 'i'))
 
         glUseProgram(program)
-        tbo = int(glGenBuffers(1))
+        tbo = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, tbo)
         glBufferData(GL_ARRAY_BUFFER, 64, None, GL_DYNAMIC_COPY)
         glBindBufferBaseNV(GL_TRANSFORM_FEEDBACK_BUFFER_NV, 0, tbo)
