@@ -28,7 +28,7 @@ import weakref
 
 import pytest
 
-from arraycompat import np, one
+from arraycompat import np, object_names, one
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
 from OpenGL import _configflags
@@ -347,7 +347,7 @@ class TestReturnedValues(GLTestCase):
     def test_a_returned_address_is_the_callers_alone(self):
         """A mapped buffer comes back as the address itself."""
         buffers = one(glGenBuffers(1))
-        self.addCleanup(glDeleteBuffers, 1, buffers)
+        self.addCleanup(glDeleteBuffers, 1, object_names(buffers))
         glBindBuffer(GL_ARRAY_BUFFER, buffers)
         self.addCleanup(glBindBuffer, GL_ARRAY_BUFFER, 0)
         glBufferData(GL_ARRAY_BUFFER, 64, None, GL_STATIC_DRAW)

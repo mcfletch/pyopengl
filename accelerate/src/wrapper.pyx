@@ -418,6 +418,17 @@ cdef class MultiReturn(object):
         self.children = list(children)
     def append(self, child ):
         self.children.append( child )
+    def finalise(self, wrapper):
+        """Resolve each child's argument names to indices
+
+        The wrapper finalises whatever its returnValues is, and for a single
+        output that is the converter itself.  For several it is this, so the
+        children are only reached through here -- and a child that returns a
+        named argument answers about argument zero until it has been reached.
+        """
+        for child in self.children:
+            if hasattr( child, 'finalise' ):
+                child.finalise( wrapper )
     def __call__(self,*args,**named):
         cdef list result = []
         for child in self.children:

@@ -768,7 +768,7 @@ class TestEXTDSA(GLTestCase):
             glEnableIndexedEXT(GL_BLEND, 0)
             glIsEnabledIndexedEXT(GL_BLEND, 0)
             glDisableIndexedEXT(GL_BLEND, 0)
-            glGetBooleanIndexedvEXT(GL_BLEND, 0, np.zeros(1, '?'))
+            glGetBooleanIndexedvEXT(GL_BLEND, 0, np.zeros(1, 'B'))
             glGetIntegerIndexedvEXT(GL_BLEND, 0, np.zeros(1, 'i'))
             glGetFloati_vEXT(GL_VIEWPORT, 0, np.zeros(4, 'f'))
             glGetDoublei_vEXT(GL_DEPTH_RANGE, 0, np.zeros(2, 'd'))

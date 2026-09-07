@@ -278,5 +278,38 @@ class TestShaderProgramv(GLTestCase):
         self.links(FRAGMENT_150.replace('in vec4 carried;', 'vec4 carried;'))
 
 
+class TestASingleNameTakesTheSameForms(GLTestCase):
+    """A ``GLchar *`` name accepts a ``str``, whatever else is configured.
+
+    The same rule as the arrays above, for the far commoner single-name
+    parameter: ``glBindAttribLocation``, ``glGetUniformLocation`` and their
+    neighbours.  ``ERROR_ON_COPY`` refuses the copy of array data, and a name
+    is not that -- it is encoded once at setup and read before the call
+    returns.  The C dispatch layer has always encoded one; the ctypes path
+    refusing it made a program that ran under one implementation fail under
+    the other, and made the flag unusable for any code that looks up a uniform
+    by name.
+    """
+
+    profile = 'core'
+    gl_version = (3, 3)
+
+    def test_a_str_name_is_accepted(self):
+        program = glCreateProgram()
+        try:
+            glBindAttribLocation(program, 0, 'position')
+            self.check_error('glBindAttribLocation with a str')
+        finally:
+            glDeleteProgram(program)
+
+    def test_a_bytes_name_is_accepted(self):
+        program = glCreateProgram()
+        try:
+            glBindAttribLocation(program, 0, b'position')
+            self.check_error('glBindAttribLocation with bytes')
+        finally:
+            glDeleteProgram(program)
+
+
 if __name__ == '__main__':
     unittest.main()

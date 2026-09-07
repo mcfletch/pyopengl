@@ -4,8 +4,7 @@ from OpenGL.raw.GL import _types
 from OpenGL.raw.GL.VERSION import GL_1_1
 from OpenGL.arrays import formathandler
 import ctypes
-from OpenGL import _bytes, error
-from OpenGL._configflags import ERROR_ON_COPY
+from OpenGL import _bytes
 
 
 def dataPointer(value, typeCode=None):
@@ -71,18 +70,26 @@ class StringHandler(formathandler.FormatHandler):
 
 
 class UnicodeHandler(StringHandler):
+    """A ``str`` where the driver wants bytes: a name, a label, GLSL source.
+
+    ``ERROR_ON_COPY`` is not consulted here.  It exists to refuse the copy of
+    *array data* -- the per-frame vertex or pixel copy that costs a program its
+    speed, and whose temporary can be freed while the driver still holds the
+    pointer.  Encoding a name is neither: it happens once at setup, the driver
+    reads it before the call returns, and there is no other way to pass a
+    ``str``.  The C dispatch layer encodes one whatever the flag says, and a
+    form that works must not depend on which implementation a call goes
+    through, so this does the same.  A list or tuple passed as array data is
+    still refused; see ``OpenGL/arrays/lists.py``.
+    """
+
     HANDLED_TYPES = (_bytes.unicode,)
 
     @classmethod
     def from_param(cls, value, typeCode=None):
-        # TODO: raise CopyError if the flag is set!
         converted = _bytes.as_8_bit(value)
         result = StringHandler.from_param(converted)
         if converted is not value:
-            if ERROR_ON_COPY:
-                raise error.CopyError(
-                    """Unicode string passed, cannot copy with ERROR_ON_COPY set, please use 8-bit strings"""
-                )
             result._temporary_array_ = converted
         return result
 

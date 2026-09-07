@@ -173,8 +173,10 @@ glIndexPointer = wrapper.wrapper( _simple.glIndexPointer ).setPyConverter(
     wrapper.returnPyArgument( 'pointer' )
 )
 glEdgeFlagPointer = wrapper.wrapper( _simple.glEdgeFlagPointer ).setPyConverter(
-    # XXX type is wrong!
-    'pointer', arrayhelpers.AsArrayTyped( 'pointer', arraydatatype.GLushortArray ),
+    # An edge-flag array is GLboolean, which is an unsigned byte.  Declared as
+    # GLushort here for a long time, which silently widened a correct caller's
+    # array to two bytes an element and handed the driver that.
+    'pointer', arrayhelpers.AsArrayTyped( 'pointer', arraydatatype.GLbooleanArray ),
 ).setStoreValues(
     arrayhelpers.storePointerType( 'pointer', _simple.GL_EDGE_FLAG_ARRAY_POINTER )
 ).setReturnValues(

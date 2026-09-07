@@ -19,7 +19,7 @@ import unittest
 
 import pytest
 
-from arraycompat import np, one
+from arraycompat import np, object_names, one
 from gltestcase import GLTestCase
 from OpenGL import _configflags
 from OpenGL.GL import *  # noqa: F401,F403
@@ -48,7 +48,7 @@ class BufferGetterTestCase(GLTestCase):
         def release():
             glBindBuffer(GL_ARRAY_BUFFER, 0)
             glDeleteVertexArrays(1, vertex_array)
-            glDeleteBuffers(1, buffer)
+            glDeleteBuffers(1, object_names(buffer))
 
         self.defer_cleanup(release)
         return buffer
@@ -92,7 +92,7 @@ class TestAskingABufferAboutItself(BufferGetterTestCase):
         self.assertTrue(np.isscalar(buffer) if hasattr(np, 'isscalar') else True,
                         type(buffer))
         self.assertEqual(int(buffer), buffer)
-        glDeleteBuffers(1, buffer)
+        glDeleteBuffers(1, object_names(buffer))
 
 
 class TestReadingBufferContentsBack(BufferGetterTestCase):

@@ -77,6 +77,18 @@ class GLETestCase(GLTestCase):
         if not GLE.gleSetJoinStyle:
             self.skipTest('the GLE extrusion library is not installed here')
 
+    def require(self, *names):
+        """Skip unless the library here serves each named entry point.
+
+        A GLE that is present is not a GLE that is complete: macOS exports
+        the ones its framework carries and nothing for the rest, so a case
+        has to ask for what it calls rather than trust the one the fixture
+        asked for.
+        """
+        for name in names:
+            if not getattr(GLE, name, None):
+                self.skipTest('this GLE does not serve %s' % (name,))
+
     def feedback(self, draw, size=1 << 16):
         """The number of floats ``draw`` fed back, having drawn nothing.
 
@@ -151,12 +163,14 @@ class TestSweepingAlongAPath(GLETestCase):
 
 class TestTheJoinStyleIsReadBack(GLETestCase):
     def test_what_was_set_is_what_is_reported(self):
+        self.require('gleSetJoinStyle', 'gleGetJoinStyle')
         wanted = GLE.TUBE_NORM_EDGE | GLE.TUBE_JN_ANGLE | GLE.TUBE_JN_CAP
         GLE.gleSetJoinStyle(wanted)
         self.assertEqual(GLE.gleGetJoinStyle(), wanted)
         self.check_error('gleGetJoinStyle')
 
     def test_the_side_count_is_read_back(self):
+        self.require('gleSetNumSides', 'gleGetNumSides')
         GLE.gleSetNumSides(12)
         self.assertEqual(GLE.gleGetNumSides(), 12)
         self.check_error('gleGetNumSides')

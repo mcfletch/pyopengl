@@ -4,9 +4,8 @@ sampler objects, framebuffer discard and external memory objects."""
 
 import unittest
 import ctypes
-from arraycompat import np, object_names, one
+from arraycompat import copy_safe, np, object_names, one
 
-from arraycompat import copy_safe
 from egltestcase import ESTestCase
 from OpenGL.GLES3 import (
     GL_ARRAY_BUFFER,
@@ -78,10 +77,10 @@ class TestBufferExtensions(ESTestCase):
                 s, GL_TEXTURE_MIN_FILTER, float(GL_NEAREST)
             )
             mesa_samplers.glSamplerParameteriv(
-                s, GL_TEXTURE_MIN_FILTER, [int(GL_NEAREST)]
+                s, GL_TEXTURE_MIN_FILTER, copy_safe([int(GL_NEAREST)], 'i')
             )
             mesa_samplers.glSamplerParameterfv(
-                s, GL_TEXTURE_MIN_FILTER, [float(GL_NEAREST)]
+                s, GL_TEXTURE_MIN_FILTER, copy_safe([float(GL_NEAREST)], 'f')
             )
             mesa_samplers.glGetSamplerParameteriv(
                 s, GL_TEXTURE_MIN_FILTER, np.zeros(1, 'i')
