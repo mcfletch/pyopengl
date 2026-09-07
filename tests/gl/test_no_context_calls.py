@@ -55,6 +55,7 @@ else:
 def behaviour(dispatch, checking):
     completed = run_in_child(
         SCRIPT % {'checking': checking},
+        check=False,
         PYOPENGL_DISPATCH=dispatch, PYOPENGL_USE_ACCELERATE=None,
     )
     if completed.returncode == NOTHING_TO_TEST_WITH:

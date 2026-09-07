@@ -12,7 +12,7 @@ import sys
 
 import paths
 import pytest
-from childenv import run_in_child
+from childenv import json_from_child, run_in_child
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = paths.ROOT
@@ -233,6 +233,87 @@ class TestTheSwitchIsReadWhenItIsAsked:
                 if x.startswith('AVAILABLE')]
         assert line, completed
         assert line[0].split()[1] == 'False'
+
+
+class TestTheSwitchBeatsAnAccelerateThatIsThere:
+    """Switching the accelerators off has to work where they *can* be used.
+
+    A test that passes because nothing was installed proves nothing, so each of
+    these asks the child whether the extension was importable and skips if it
+    was not -- what is under test is the flag winning against an accelerator
+    that is present and would otherwise be chosen.
+
+    ``PYOPENGL_USE_ACCELERATE=0`` rather than the assignment the class above
+    covers: that is what a caller sets who is not editing the program, and it
+    is read in ``OpenGL/__init__.py`` before anything consults it.
+    """
+
+    REPORT = '''
+import json
+
+report = {}
+try:
+    import OpenGL_accelerate            # noqa: F401
+except ImportError:
+    report['installed'] = False
+else:
+    report['installed'] = True
+
+import OpenGL.GL as GL
+from OpenGL import acceleratesupport, dispatch, _configflags
+from OpenGL.arrays import arraydatatype
+
+report['flag'] = bool(_configflags.USE_ACCELERATE)
+report['available'] = bool(acceleratesupport.ACCELERATE_AVAILABLE)
+report['settled'] = dispatch.settle()
+report['entry_point'] = type(GL.glGenTextures).__name__
+report['datatype_accelerated'] = bool(
+    getattr(arraydatatype.ArrayDatatype, 'isAccelerated', False)
+)
+print(json.dumps(report))
+'''
+
+    def report(self, **environment):
+        answered = json_from_child(self.REPORT, **environment)
+        if not answered['installed']:
+            pytest.skip('OpenGL_accelerate is not installed to be overridden')
+        return answered
+
+    def test_it_is_available_when_nothing_turns_it_off(self):
+        """The control: without this the assertions below could all hold
+        because the accelerator was never there."""
+        answered = self.report(PYOPENGL_USE_ACCELERATE=None, PYOPENGL_DISPATCH=None)
+        assert answered['available'] is True
+        assert answered['datatype_accelerated'] is True
+
+    def test_the_variable_turns_the_accelerators_off(self):
+        answered = self.report(PYOPENGL_USE_ACCELERATE='0', PYOPENGL_DISPATCH=None)
+        assert answered['flag'] is False
+        assert answered['available'] is False, (
+            'the extension was importable and was used anyway'
+        )
+        assert answered['datatype_accelerated'] is False
+
+    def test_the_entry_points_are_the_ctypes_ones(self):
+        """Not just the report: what a call actually goes through."""
+        accelerated = self.report(
+            PYOPENGL_USE_ACCELERATE=None, PYOPENGL_DISPATCH=None
+        )['entry_point']
+        plain = self.report(
+            PYOPENGL_USE_ACCELERATE='0', PYOPENGL_DISPATCH=None
+        )['entry_point']
+        assert plain != accelerated, (
+            'the entry points are the same object either way, so the switch '
+            'reached the report and not the call'
+        )
+
+    def test_it_wins_against_an_explicit_request_for_the_c_layer(self):
+        """``PYOPENGL_DISPATCH=c`` asks for the compiled entry points and this
+        says there are none to have.  The switch is the broader statement, so
+        it decides -- and says so rather than raising."""
+        answered = self.report(PYOPENGL_USE_ACCELERATE='0', PYOPENGL_DISPATCH='c')
+        assert answered['settled'] == 'ctypes'
+        assert answered['available'] is False
 
 
 class TestThePairIsPinnedBeforeItIsInstalled:

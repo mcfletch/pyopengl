@@ -117,7 +117,7 @@ json.dump(out, sys.stdout)
 
 
 def survey(dispatch):
-    completed = run_in_child(SURVEY, PYOPENGL_DISPATCH=dispatch)
+    completed = run_in_child(SURVEY, check=False, PYOPENGL_DISPATCH=dispatch)
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no context to survey through: %s' % (completed.stderr.strip(),))
     if completed.returncode != 0:

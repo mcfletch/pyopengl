@@ -303,6 +303,13 @@ cdef class Output(cArgConverter):
         never reaches the caller's array -- the silent "returns zeroes" bug.
         Detect the shrinking copy and raise. Correctly-typed arrays are not
         copied, so they never trip this.
+
+        Then the other question, which the count answers: an array shorter than
+        the call will write into is a heap overrun rather than an exception, so
+        it is refused. See ``Output.checkOutputSize`` in OpenGL/converters.py,
+        which is the same check for the pure-Python converter -- this one is
+        what runs where accelerate is installed, whichever dispatch layer the
+        entry points come from.
         """
         value = pyArgs[index]
         result = self.arrayType.asArray( value )
@@ -311,7 +318,10 @@ cdef class Output(cArgConverter):
                 rbytes = self.arrayType.arrayByteCount( result )
                 vbytes = self.arrayType.arrayByteCount( value )
             except Exception:
-                return result
+                # Not measurable -- a list has no byte count of its own -- so
+                # there is no shrinking coercion to detect. The size the call
+                # will write is still checked below.
+                rbytes = vbytes = 0
             if rbytes < vbytes:
                 raise TypeError(
                     '%s: pass-in output array was coerced to a smaller buffer '
@@ -319,7 +329,40 @@ cdef class Output(cArgConverter):
                     'into your array. Pass a correctly-typed array, or None to '
                     'have one allocated.' % ( self.name, rbytes, vbytes )
                 )
+        self.c_checkOutputSize( result, pyArgs )
         return result
+
+    cdef int c_checkOutputSize( self, object array, tuple pyArgs ) except -1:
+        """Refuse an output array smaller than the call will write into it.
+
+        Only a shortfall: a larger array is a caller deliberately reusing one
+        buffer for several calls, which is ordinary and safe.
+        """
+        cdef long wanted = 1
+        try:
+            shape = self.c_getSize( pyArgs )
+        except Exception:
+            return 0
+        if shape is None:
+            return 0
+        for dimension in shape:
+            try:
+                wanted = wanted * int(dimension)
+            except (TypeError, ValueError):
+                return 0
+        if wanted <= 0:
+            return 0
+        try:
+            held = self.arrayType.arraySize( array )
+        except Exception:
+            return 0
+        if held < wanted:
+            raise ValueError(
+                '%s: output array holds %d element(s), but the call will '
+                'write %d. Pass an array of at least that many, or None to '
+                'have one allocated.' % ( self.name, held, wanted )
+            )
+        return 0
 
     def oldStyleReturn( self, object result, object baseOperation, tuple pyArgs, tuple cArgs ):
         """Retrieve cArgs[ self.index ]"""

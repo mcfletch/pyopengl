@@ -56,6 +56,7 @@ def run(implementation, preamble='', body=''):
     """Run the program under one dispatch implementation."""
     completed = run_in_child(
         DEFAULT % {'preamble': preamble, 'body': body},
+        check=False,
         PYOPENGL_DISPATCH=implementation, PYOPENGL_DISPATCH_STRICT='0',
         PYOPENGL_USE_ACCELERATE=None,
     )
@@ -176,6 +177,7 @@ def test_an_error_is_noticed_even_where_the_callback_is_no_longer_ours(implement
     """
     completed = run_in_child(
         DISPLACED,
+        check=False,
         PYOPENGL_DISPATCH=implementation, PYOPENGL_DISPATCH_STRICT='0',
         PYOPENGL_USE_ACCELERATE=None,
     )
@@ -194,6 +196,7 @@ def test_an_application_callback_is_not_taken_over(implementation):
     its next glDebugMessageCallback would silence our checking."""
     completed = run_in_child(
         FOREIGN,
+        check=False,
         PYOPENGL_DISPATCH=implementation, PYOPENGL_DISPATCH_STRICT='0',
         PYOPENGL_USE_ACCELERATE=None,
     )

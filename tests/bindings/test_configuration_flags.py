@@ -56,13 +56,39 @@ def test_the_environment_variable_reaches_the_configuration(name):
     )
 
 
-@pytest.mark.parametrize('name', sorted(SETTABLE))
-def test_the_default_is_what_the_documentation_says(name):
-    """With nothing set, the flag is whatever OpenGL/__init__.py assigns."""
-    import OpenGL
+def declared_defaults():
+    """``NAME: default`` as ``OpenGL/__init__.py`` assigns them.
 
+    Read from the source rather than from this process: a run started with one
+    of these variables set has a different value in front of it, and the
+    question is what a caller who set nothing gets.
+    """
+    import os
+    import re
+
+    import paths
+
+    with open(os.path.join(paths.PACKAGE, '__init__.py'), encoding='utf-8') as handle:
+        source = handle.read()
+    return {
+        name: value == 'True'
+        for name, value in re.findall(
+            r'^([A-Z][A-Z0-9_]+) = environ_key\(\s*"[A-Z0-9_]+"\s*,\s*(True|False)\s*\)$',
+            source, re.M,
+        )
+    }
+
+
+@pytest.mark.parametrize('name', sorted(SETTABLE))
+def test_the_default_is_what_the_source_declares(name):
+    """With nothing set, the flag is the default named in the environ_key call."""
+    defaults = declared_defaults()
+    assert name in defaults, (
+        '%s is not declared with environ_key, so it cannot be set from the '
+        'environment' % (name,)
+    )
     answered = json_from_child(REPORT % (name,), **{'PYOPENGL_%s' % (name,): None})
-    assert answered['value'] == bool(getattr(OpenGL, name))
+    assert answered['value'] is defaults[name]
 
 
 def test_every_documented_flag_is_covered_here():

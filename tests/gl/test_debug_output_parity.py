@@ -54,6 +54,7 @@ def run(checking, scope=''):
     # an ambient PYOPENGL_USE_ACCELERATE would decide for them.
     completed = run_in_child(
         PROGRAM % {'checking': checking, 'scope': scope},
+        check=False,
         PYOPENGL_USE_ACCELERATE=None,
     )
     if completed.returncode == NOTHING_TO_TEST_WITH:
@@ -130,7 +131,7 @@ def test_a_raiser_that_declines_does_not_become_a_SystemError(debug, raiser):
     """Both notice mechanisms return -1 to say "an exception is set".  A raiser
     that returns instead leaves the stub returning NULL with nothing raised,
     which CPython reports as a SystemError from an unrelated frame."""
-    completed = run_in_child(RAISER_DECLINES % {'debug': debug, 'raiser': raiser}, PYOPENGL_USE_ACCELERATE=None)
+    completed = run_in_child(RAISER_DECLINES % {'debug': debug, 'raiser': raiser}, check=False, PYOPENGL_USE_ACCELERATE=None)
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
     assert completed.returncode == 0, completed.stderr[-2000:]
@@ -167,7 +168,7 @@ def test_turning_debug_output_off_undoes_what_turning_it_on_did():
     """The synchronous debug output it enables serialises the driver, so
     leaving it on costs exactly what switching the mode off asked to stop
     paying -- and each enable must not add another callback to hold forever."""
-    completed = run_in_child(DISABLE, PYOPENGL_USE_ACCELERATE=None)
+    completed = run_in_child(DISABLE, check=False, PYOPENGL_USE_ACCELERATE=None)
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
     assert completed.returncode == 0, completed.stderr[-2000:]

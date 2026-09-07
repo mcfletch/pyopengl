@@ -254,11 +254,72 @@ def forget_context(handle):
         use_debug_output(False)
     _offered.discard(handle)
     _installed_callbacks.pop(handle, None)
+    _forget_context_data(handle)
     layer = _layer()
     if layer is not None:
         layer.forget_context(handle)
     else:
         _drop_unnamed_arming()
+
+
+def _forget_context_data(handle):
+    """Drop what is cached *about* a context, as well as its dispatch table.
+
+    A context's extension list and version are cached against its handle, and a
+    handle is an address the driver hands out again -- a destroyed context and
+    the next one can share it.  The dispatch table is retired here already; the
+    caches were not, so the new context read the dead one's extension list and
+    every entry point gated on an extension only the new one has was refused.
+
+    That is not a rare shape: a program that closes a window and opens another,
+    or one that makes a GL context and then an OpenGL-ES context, hits it.  It
+    surfaced as `bool(glTexParameterIivEXT)` answering False under an ES
+    context that exports it, because a desktop-GL context had held the handle
+    first and had not.
+
+    Only what *describes* the context, and not everything held against it:
+    ``contextdata.cleanupContext`` releases the client array pointers too, and
+    its own docstring warns that doing so while the driver may still be reading
+    them is a protection fault.  The queriers' answers are ours and describe
+    nothing the driver holds.
+
+    Best effort: this runs while a context is being torn down, and a failure to
+    tidy up must not become the caller's exception.
+    """
+    if not handle:
+        return
+    try:
+        from OpenGL import contextdata
+    except ImportError:                # pragma: no cover - interpreter shutdown
+        return
+    for storage in contextdata.STORAGES:
+        held = storage.get(handle)
+        if not held:
+            continue
+        for key in [k for k in held if _describes_a_context(k)]:
+            try:
+                del held[key]
+            except KeyError:           # pragma: no cover - raced with a cleanup
+                pass
+
+
+#: Keys under which a context's own description is cached: the queriers'
+#: version and extension lists, keyed
+#: ``('OpenGL.extensions', <kind>, <prefix>)`` one per API, and the per-name
+#: answers ``BasePlatform.checkExtension`` memoises under ``'extensions'``.
+_CONTEXT_DESCRIPTION_KEY = 'OpenGL.extensions'
+
+
+def _describes_a_context(key):
+    """Whether `key` names something cached *about* a context.
+
+    Everything else held against a context is the caller's -- client array
+    pointers the driver may still be reading -- and dropping those is what
+    ``contextdata.cleanupContext`` warns about, so only these go.
+    """
+    if key == 'extensions':
+        return True
+    return isinstance(key, tuple) and key[:1] == (_CONTEXT_DESCRIPTION_KEY,)
 
 
 def _drop_unnamed_arming():
