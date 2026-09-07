@@ -133,6 +133,12 @@ Selected by `pick_backend()` from the `TEST_WINDOWING` environment variable
 | `egl`            | **headless EGL device** (`glcontext_egl.py`) | renders directly on a GPU with no window system — the right choice for CI / containers where the compositor is software-rendered. Forces `PYOPENGL_PLATFORM=egl`; ES vs GL both work via an offscreen pbuffer. |
 | `cgl`            | **headless macOS context** (`glcontext_cgl.py`) | CGL is the layer NSGL and AGL are built on and the only one that hands out a context with no window server, which is what a macOS CI runner has. Framebuffer zero belongs to a drawable and there is none, so the backend binds a framebuffer object of the requested size. No OpenGL-ES, and no compatibility profile above 2.1; `TEST_CGL_RENDERER` pins the renderer kind. |
 
+On a Wayland session with the NVIDIA driver, `glReadPixels` from an on-screen
+window answers black however the frame was drawn, so the cases that read back
+what a widget rendered fail there and pass under `xvfb-run`. The Linux CI runs
+the whole suite under `xvfb-run -a` already; a developer on such a session wants
+the same for the windowed suites.
+
 On an NVIDIA driver, roughly one run in ten dies with SIGSEGV while a context is
 torn down. The faulting frame is inside `libnvidia-eglcore`, reached through
 `eglDestroyContext` (or, under `glfw`, through `glfwDestroyWindow` →

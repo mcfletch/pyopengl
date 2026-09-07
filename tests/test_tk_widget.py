@@ -23,6 +23,36 @@ needs_display = pytest.mark.skipif(
     not HAS_DISPLAY, reason='no X display to open a Tk window on')
 
 
+def assert_the_old_pipeline_is_there():
+    """The current context has fixed function in it, and does not say it is core.
+
+    Not ``GL_CONTEXT_PROFILE_MASK & GL_CONTEXT_COMPATIBILITY_PROFILE_BIT``: a
+    context created without profile attributes declares no profile at all, and
+    NVIDIA answers 0 there where Mesa answers the compatibility bit.  Both are
+    within the specification, so the mask is held only to *not* naming the core
+    profile -- which a core context always does name, and which the case above
+    asserts of one.
+
+    What a compatibility request is actually asking for is the fixed-function
+    pipeline, so that is asked directly: ``glMatrixMode`` exists in no core
+    profile, and a driver that has taken it away says so.
+    """
+    from OpenGL.GL import (
+        GL_CONTEXT_CORE_PROFILE_BIT, GL_CONTEXT_PROFILE_MASK, GL_MODELVIEW,
+        GL_NO_ERROR, glGetError, glGetIntegerv, glMatrixMode,
+    )
+
+    mask = int(glGetIntegerv(GL_CONTEXT_PROFILE_MASK))
+    assert not mask & GL_CONTEXT_CORE_PROFILE_BIT, (
+        'asked for compatibility and the context says it is core (mask 0x%x)'
+        % (mask,)
+    )
+    while glGetError() != GL_NO_ERROR:
+        pass
+    glMatrixMode(GL_MODELVIEW)
+    assert glGetError() == GL_NO_ERROR, 'glMatrixMode is not available here'
+
+
 class TestImportingItDoesNothing:
     """It used to create a root window, need a display and load a Tcl package,
     all at import.  A library that opens a window when it is imported cannot be
@@ -124,10 +154,6 @@ class TestTheContext:
 
     def test_a_compatibility_request_gets_the_old_pipeline(self, root):
         """Which is what the fixed-function widgets need."""
-        from OpenGL.GL import (
-            GL_CONTEXT_COMPATIBILITY_PROFILE_BIT, GL_CONTEXT_PROFILE_MASK,
-            glGetIntegerv,
-        )
         from OpenGL.Tk import GLFrame
 
         made = GLFrame(root, width=64, height=64, profile='compatibility',
@@ -135,8 +161,7 @@ class TestTheContext:
         made.pack()
         made.waitForMap()
         made.makeCurrent()
-        assert int(glGetIntegerv(GL_CONTEXT_PROFILE_MASK)) \
-            & GL_CONTEXT_COMPATIBILITY_PROFILE_BIT
+        assert_the_old_pipeline_is_there()
 
     def test_a_version_the_driver_has_is_given(self, root):
         from OpenGL.GL import GL_MAJOR_VERSION, glGetIntegerv
@@ -183,11 +208,23 @@ class TestDrawing:
         assert scene.drawn == before + 1
 
     def test_what_was_drawn_is_in_the_buffer(self, scene):
+        """The clear colour the fixture set, read back.
+
+        Within one count per channel, because the conversion from float to
+        eight bits is the implementation's: 0.5 is 127.5 of 255, exactly
+        between two values, and Mesa rounds it up where NVIDIA rounds it down.
+        A driver is required to be near, not exact -- so asking for exact is
+        asking one driver's arithmetic of every driver.
+        """
         from OpenGL.GL import GL_RGB, GL_UNSIGNED_BYTE, glReadPixels
 
         scene.render()
         pixel = list(bytes(glReadPixels(2, 2, 1, 1, GL_RGB, GL_UNSIGNED_BYTE)))
-        assert pixel == [64, 128, 191], pixel
+        assert len(pixel) == 3, pixel
+        for channel, (found, wanted) in enumerate(zip(pixel, (64, 128, 191))):
+            assert abs(found - wanted) <= 1, (
+                'channel %d read back %d, not %d' % (channel, found, wanted)
+            )
 
     def test_a_resize_does_not_run_initgl_again(self, scene):
         """It would rebuild every texture and shader each time somebody
@@ -303,19 +340,14 @@ class TestTheOldWidgets:
         assert int(glGetIntegerv(GL_MATRIX_MODE)) == before
 
     def test_it_gets_a_compatibility_context(self, root):
-        """It draws with glMatrixMode and gluPerspective."""
-        from OpenGL.GL import (
-            GL_CONTEXT_COMPATIBILITY_PROFILE_BIT, GL_CONTEXT_PROFILE_MASK,
-            glGetIntegerv,
-        )
+        """It draws with glMatrixMode and gluPerspective, so it needs them."""
         from OpenGL.Tk import RawOpengl
 
         made = RawOpengl(root, width=64, height=64)
         made.pack()
         made.waitForMap()
         made.makeCurrent()
-        assert int(glGetIntegerv(GL_CONTEXT_PROFILE_MASK)) \
-            & GL_CONTEXT_COMPATIBILITY_PROFILE_BIT
+        assert_the_old_pipeline_is_there()
 
     def test_it_needs_no_togl(self, root):
         """Which is the whole point: Togl is a Tcl extension nobody has."""

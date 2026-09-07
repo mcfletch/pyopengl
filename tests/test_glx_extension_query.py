@@ -79,9 +79,17 @@ class TestAgainstARealServer:
         import subprocess
         import sys
 
+        # The first query is not measured.  A driver opens its own device
+        # nodes the first time it is asked anything -- NVIDIA's takes fourteen
+        # of them, /dev/nvidiactl and /dev/nvidia0 and the rest -- and holds
+        # them for the life of the process.  Counting those as growth reports
+        # a leak of fourteen descriptors on a driver that leaks none, which is
+        # what this measured before.  What it is about is the *per query* cost,
+        # so the baseline is taken once the driver has settled.
         script = (
             'import os\n'
             'from OpenGL.raw.GLX._types import GLXQuerier\n'
+            'GLXQuerier.pullExtensions()\n'
             'before = len(os.listdir("/proc/self/fd"))\n'
             'for _ in range(20):\n'
             '    GLXQuerier.pullExtensions()\n'
