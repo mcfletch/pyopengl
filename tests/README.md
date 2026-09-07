@@ -398,6 +398,40 @@ TEST_WINDOWING=egl python -m pytest -q tests/gl tests/gles tests/glu
 TEST_VISIBLE=0 python -m pytest -q tests/
 ```
 
+### Running in parallel
+
+`pytest-xdist` roughly halves the run — 67s to 35s on four workers, with every
+case reaching the same outcome as a serial run. Two options are not optional:
+
+```
+python -m pytest -q -n logical --dist loadfile --max-worker-restart=0
+```
+
+`--dist loadfile` keeps a module in one process. A test class creates its
+context in `setUp`, so the cases of one class have to share a process to share
+it; the default `--dist load` hands single cases to whichever worker is free.
+
+`--max-worker-restart=0` fails the run when a worker dies instead of replacing
+it. A replaced worker leaves the controller waiting on a queue nothing will
+drain, so the run stops making progress and reports nothing — a hang where
+there was a crash.
+
+**On the NVIDIA driver, do not run in parallel.** With several processes
+rendering on the device at once, one worker's rendering stops working part-way
+through a run and does not come back: from that point every case in that
+process that reads a pixel gets `(0, 0, 0, 0)` with `GL_NO_ERROR`, from draws
+the driver accepts, including in contexts made afterwards. The cases that fail
+are therefore whatever that worker had left, which is why the set looks
+different every time. It happens at something like one run in eight; `glFinish`
+before the read does not change it, and neither a serial run nor one confined to
+`tests/gles` reproduces it. A reset context behaves exactly like this, so
+`assert_pixel` asks `glGetGraphicsResetStatus` when a frame reads back empty and
+reports the answer with the failure; caught in the act it says no reset, which
+leaves the cause open. The teardown SIGSEGV below is the same configuration's
+other symptom. Mesa shows neither: ten consecutive four-worker
+runs on the software device were identical to each other and to a serial run,
+which is why CI runs in parallel and this paragraph is about a developer's GPU.
+
 ## Check scripts
 
 A check script is a program rather than a test case: it opens a window, drives

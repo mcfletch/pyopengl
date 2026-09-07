@@ -794,3 +794,82 @@ is a separate change.
   again, against these counts.
 - The `accelerate/tests` array contract, still run only where the extension is
   installed.
+
+## A third pass — the two red configurations, and xdist
+
+### The output-size guard fired where the size was a maximum
+
+The 6 ctypes-with-accelerate failures were the guard from the second pass, not
+a pre-existing difference between the paths. It read every declared output size
+as the number of elements the call would write, and most declared sizes are a
+ceiling: `glGetVertexAttribivARB`'s fixed four, and every `_glget_size_mapping`
+lookup, mean "no more than this", so a caller passing a one-element array for a
+pname that returns one value was refused for doing nothing wrong.
+
+`SIZE_IS_A_PROMISE` now separates the two, and on `SizedOutput` asks whether the
+size came from a dict lookup. Three further corrections came out of chasing it:
+the comparison is in **bytes**, because `glGetBufferSubData`'s promise is a byte
+count and not an element count; an object with no `__len__` is declined, because
+`typedPointer` hands back a raw `ctypes` pointer that cannot be measured; and
+the Cython converters carry the same distinction, so the three dispatch paths
+agree. `PYOPENGL_DISPATCH=ctypes` is 2900 passed, 0 failed.
+
+### `accelerate/tests` asked whether the extension was importable
+
+The 33 failures under `PYOPENGL_USE_ACCELERATE=0` were the same bug class as
+`_dispatch.AVAILABLE`: `try: import OpenGL_accelerate` answers yes for a build
+that is on disk and switched off. They ask `acceleratesupport.ACCELERATE_AVAILABLE`
+now and skip.
+
+### The configurations were not being run
+
+`accelerate/tests` ran in **no CI job**. tox names it in its posargs default,
+every job passes `-m "not performance"`, and a posargs default renders only when
+posargs is empty — so the paths silently became `tests/` everywhere. CI names
+the paths per matrix entry now.
+
+Two axes were missing outright: `accel1-dispctypes`, which is what an installed
+accelerate gives a caller who asked for ctypes and which neither accelerate job
+covered; and accelerate built and then declined, added as the `useaccel0`
+factor. With the extension absent there is no way to tell a guard that asks
+whether it is *in use* from one that asks whether it can be *imported*, which is
+why `accel0` could not have caught the previous item.
+
+### `pytest-xdist`: adopted on CI, not on an NVIDIA GPU
+
+Measured again, against the counts above. `-n 4 --dist loadfile` takes the suite
+from 67.6s to 36.2s, and all 3218 cases reach the same outcome as a serial run —
+compared per case out of `--junitxml`, not by the totals. The fourteen ES cases
+that used to skip no longer do, so the reason the second pass rejected it is
+gone.
+
+It is not stable **on the NVIDIA device**, and both symptoms are that driver's:
+
+- Roughly one run in eight, **one worker's rendering dies part-way through and
+  stays dead**. Every case in that process that reads a pixel afterwards gets
+  `(0, 0, 0, 0)` with `GL_NO_ERROR` — desktop core, compatibility and ES alike,
+  in contexts created after the event as well — while the other workers finish
+  clean. The failing set is therefore whatever that worker had left, which is
+  what made it look like a different handful of cases each time. `glFinish`
+  before the read does not change it; no serial run reproduces it, nor four
+  concurrent copies of the failing file, nor all of `tests/gles` on four
+  workers.
+
+  A context the driver has reset behaves exactly this way — it accepts every
+  call, reports no error and draws nothing — so `assert_pixel` asks
+  `glGetGraphicsResetStatus` when a frame reads back empty, and reports the
+  answer with the failure. Caught in the act, it says **no reset**: the context
+  is nominally healthy, error-free and blind. So a lost context is not the
+  explanation, and what is remains open. The query stays in the harness, since
+  an empty frame is otherwise unattributable, and finding it on ES took a
+  correction worth keeping — `GLES2` and `GLES3` do not carry the entry point
+  at all, and it has to be reached through `OpenGL.GLES2.KHR.robustness`.
+- The teardown SIGSEGV already documented in `tests/README.md` becomes a
+  **hang** rather than a failure: xdist replaces the dead worker and then waits
+  on a queue nothing will drain. `--max-worker-restart=0` turns it back into a
+  reported crash, and is not optional.
+
+On Mesa's software device — what CI renders on — ten consecutive four-worker
+runs were identical to each other and to a serial run, 67.5s to 35.1s. So CI
+runs in parallel, `tox` stays serial for a developer, and `tests/README.md` says
+why under "Running in parallel".

@@ -39,6 +39,10 @@ test = [
     # A hang inside a test is otherwise bounded only by the CI job limit, which
     # reports a cancelled job rather than the name of what it was waiting for.
     "pytest-timeout",
+    # Parallel runs, which CI uses and a developer can ask for.  See "Running
+    # in parallel" in tests/README.md for the distribution mode it needs and
+    # the driver it is not stable on.
+    "pytest-xdist",
     "setuptools >= 77",
     # pygame-ce is the maintained fork and the only one with wheels for the
     # interpreters the matrix runs; below 3.11 the suite uses glfw or the

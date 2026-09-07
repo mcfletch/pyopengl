@@ -726,12 +726,74 @@ class ContextTestCase(unittest.TestCase):
         self.check_error('glReadPixels')
         return image
 
+    #: What ``glGetGraphicsResetStatus`` answers, by the value it returns.  A
+    #: context that has been reset keeps accepting calls and drawing nothing,
+    #: so this is the only place the difference is visible.
+    _RESET_STATUS = {
+        0x8253: 'GL_GUILTY_CONTEXT_RESET -- this context caused a reset',
+        0x8254: 'GL_INNOCENT_CONTEXT_RESET -- another context caused a reset',
+        0x8255: 'GL_UNKNOWN_CONTEXT_RESET -- a reset of unattributed cause',
+    }
+
+    def reset_status(self):
+        """Say whether the driver has reset this context, or ``None``.
+
+        ``None`` where the query is not available: it is core desktop GL from
+        4.5 and comes with ``KHR_robustness`` / ``ARB_robustness`` before that,
+        while on ES it lives only in the extension modules -- the ``GLES2`` and
+        ``GLES3`` namespaces do not carry it.  ``''`` where the driver reports
+        no reset.
+        """
+        for holder, name in self._reset_queries():
+            query = getattr(holder, name, None)
+            if query is None or not bool(query):
+                continue
+            try:
+                status = query()
+            except Exception:
+                continue
+            if not status:
+                return ''
+            return self._RESET_STATUS.get(status, 'reset status 0x%x' % (status,))
+        return None
+
+    #: Where the query lives on ES, since the API namespace does not carry it.
+    _ES_ROBUSTNESS = (
+        ('OpenGL.GLES2.KHR.robustness', 'glGetGraphicsResetStatusKHR'),
+        ('OpenGL.GLES2.EXT.robustness', 'glGetGraphicsResetStatusEXT'),
+    )
+
+    def _reset_queries(self):
+        """``(module, name)`` pairs that might answer, best first."""
+        found = [
+            (self.gl, 'glGetGraphicsResetStatus'),
+            (self.gl, 'glGetGraphicsResetStatusKHR'),
+            (self.gl, 'glGetGraphicsResetStatusARB'),
+        ]
+        if getattr(self, 'api', 'gl').lower().startswith('gles'):
+            for name, entry in self._ES_ROBUSTNESS:
+                try:
+                    found.append((importlib.import_module(name), entry))
+                except ImportError:
+                    pass
+        return found
+
     def assert_pixel(self, x, y, expected, tolerance=8):
         actual = self.read_pixel(x, y)
+        # A frame that read back entirely empty is the shape a reset context
+        # gives -- it accepts every call, reports no error and draws nothing --
+        # so ask before reporting it as a wrong colour.
+        note = ''
+        if not any(actual):
+            status = self.reset_status()
+            if status:
+                note = '; %s' % (status,)
+            elif status == '':
+                note = '; the driver reports no context reset'
         for chan, (a, e) in enumerate(zip(actual, expected)):
             self.assertLessEqual(
                 abs(a - e),
                 tolerance,
-                'pixel (%d,%d) channel %d = %r, expected ~%r (got %r)'
-                % (x, y, chan, a, e, actual),
+                'pixel (%d,%d) channel %d = %r, expected ~%r (got %r)%s'
+                % (x, y, chan, a, e, actual, note),
             )

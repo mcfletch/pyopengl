@@ -138,10 +138,20 @@ jobs:
         # because `-m` below is itself a positional argument: with anything in
         # posargs the default never renders, which is how the accelerate
         # suites came to run in no job at all.
+        #
+        # In parallel, which halves each job: the suite is 67s serially and 35s
+        # on four workers, with every case reaching the same outcome.
+        # `--dist loadfile` keeps a module's contexts in one process, since a
+        # test class makes its context in setUp and the cases of one class must
+        # share a process to share it.  `--max-worker-restart=0` fails the run
+        # if a worker dies rather than replacing it: a replaced worker leaves
+        # the run waiting on a queue nothing will drain, which is a job that
+        # hangs to its timeout instead of reporting the crash.
         run: >
           xvfb-run -a
           python -m tox -e ${{ matrix.toxenv }} --
           ${{ inputs.tests || matrix.paths || 'tests/' }} -m "not performance"
+          -n logical --dist loadfile --max-worker-restart=0
 
   macos:
     name: macOS ${{ matrix.os }} / CGL / ${{ matrix.toxenv }}
