@@ -742,7 +742,7 @@ class OffscreenContext:
             pbuffer.wglReleasePbufferDCARB(handle, HDC(dc))
         pbuffer.wglDestroyPbufferARB(handle)
 
-    def release(self):
+    def release(self, forget=True):
         """Destroy the context and the pbuffer.
 
         Written to be callable part-way through construction, where some of
@@ -757,7 +757,11 @@ class OffscreenContext:
         The dispatch layer is told the context has gone: it keeps a table of
         resolved entry points per context handle, and a handle the driver hands
         out again would otherwise arrive with the dead context's function
-        pointers already in it.
+        pointers already in it.  ``forget=False`` leaves that to the caller,
+        which is for a caller that manages the layer itself -- one holding
+        several contexts and retiring their tables together, or one
+        reproducing what a program that never notifies PyOpenGL actually
+        faces.  A caller that simply wants the context gone wants the default.
         """
         from OpenGL import WGL
         from OpenGL.raw.WGL._types import HDC, HGLRC
@@ -769,13 +773,20 @@ class OffscreenContext:
         # Only worth putting back if it belongs to somebody else; this one is
         # about to stop existing.
         restore = was_context and int(was_context) != int(self.context or 0)
+        from OpenGL import _dispatch
+
         booted = bootstrap()
         WGL.wglMakeCurrent(HDC(booted.dc), HGLRC(booted.context))
+        # Said whatever `forget` asks, because the teardown below is itself
+        # dispatched: ``wglReleasePbufferDCARB`` has to resolve, and it
+        # resolves in whichever context the layer believes is current.  Left
+        # unsaid, that is the context being destroyed, whose table does not
+        # have it.
+        _dispatch.make_current(int(booted.context or 0))
         try:
             if self.context:
-                from OpenGL import _dispatch
-
-                _dispatch.forget_context(int(self.context))
+                if forget:
+                    _dispatch.forget_context(int(self.context))
                 WGL.wglDeleteContext(HGLRC(self.context))
                 self.context = None
             self._release_pbuffer(self.handle, self.dc)
@@ -785,6 +796,11 @@ class OffscreenContext:
                 HDC(was_dc or 0) if restore else HDC(0),
                 HGLRC(was_context or 0) if restore else HGLRC(0),
             )
+            # And say so, since the bootstrap was named above: left standing,
+            # the layer goes on dispatching through the bootstrap's table -- a
+            # legacy context that has resolved almost nothing -- and reports
+            # entry points the caller's own context had as undefined.
+            _dispatch.make_current(int(was_context or 0) if restore else 0)
 
     def __enter__(self):
         return self
