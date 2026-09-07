@@ -84,15 +84,26 @@ jobs:
           package-dir: "./accelerate"
           output-dir: "./accelerate/dist"
         env:
-          BUILD_EXTENSION: yes
           CIBW_SKIP: "pp* cp36-* cp37-* cp38-*"
+          # The C dispatch extension is optional in a source install, so that a
+          # machine with no compiler still gets a working accelerate.  A
+          # release is the other case: there the compiler is the point, and a
+          # build that quietly dropped the extension would publish a wheel
+          # without the thing it is for.  CIBW_ENVIRONMENT rather than the job
+          # environment, which does not reach the Linux container.
+          CIBW_ENVIRONMENT: "PYOPENGL_REQUIRE_C_DISPATCH=1"
           # Load the wheel that was just built.  Compiling is not the whole of
           # working: a missing symbol or a table the extension disagrees with
           # is a load-time failure, and without this the wheel would be
           # published having never been imported on the platform it is for.
-          # PyOpenGL comes from the checkout because accelerate pins the exact
-          # version it pairs with, which is on no index between releases.
-          CIBW_TEST_REQUIRES: "./"
+          #
+          # PyOpenGL goes into the test environment first, from the checkout,
+          # because accelerate pins the exact version it pairs with and that
+          # version is on no index until this run publishes it.  `before-test`
+          # rather than `test-requires`: cibuildwheel installs test-requires
+          # *after* the wheel, by which time pip has already gone looking for
+          # the pin and found the newest release instead.
+          CIBW_BEFORE_TEST: "pip install {project}"
           CIBW_TEST_COMMAND: >-
             python -c "import OpenGL_accelerate, OpenGL_accelerate.dispatch;
             import OpenGL._dispatch as d;
