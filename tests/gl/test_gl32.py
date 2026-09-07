@@ -78,7 +78,11 @@ class TestGL32(GLTestCase):
         self.check_error('multisample textures')
 
     def test_64bit_queries(self):
-        glGetInteger64v(GL_MAX_ELEMENT_INDEX)
+        # GL_MAX_SERVER_WAIT_TIMEOUT is 3.2's own 64-bit limit, arriving with
+        # the sync objects glGetInteger64v was added for.  A 4.3 enum -- which
+        # GL_MAX_ELEMENT_INDEX is -- is GL_INVALID_ENUM in the 3.3 context this
+        # case asks for, whatever a lenient driver answers.
+        glGetInteger64v(GL_MAX_SERVER_WAIT_TIMEOUT)
         glGetInteger64i_v(GL_UNIFORM_BUFFER_BINDING, 0, np.zeros(1, 'q'))
         buf = glGenBuffers(1)
         glBindBuffer(GL_ARRAY_BUFFER, buf)

@@ -200,6 +200,16 @@ python gl/gl_coverage.py --ext     # per-extension
 python gl/gl_coverage.py --ext-uncovered
 ```
 
+`gl/enum_age_audit.py` reports enums a case names that the context it asks for
+predates — a 4.3 enum in a 3.3 context is `GL_INVALID_ENUM`, and Mesa accepts it
+where macOS does not, so the case passes here and fails on someone else's
+machine. It exits non-zero only for a use outside a block that tolerates the
+error or asks the context its version first.
+
+```
+python gl/enum_age_audit.py
+```
+
 ## Running
 
 ```
