@@ -16,7 +16,7 @@ import sys
 import paths
 import pytest
 
-from childenv import child_environment
+from childenv import run_in_child
 
 import OpenGL._dispatch as dispatch
 from OpenGL import _configflags
@@ -68,15 +68,7 @@ def _run(source):
     the point of these is to compare the two.  A failure is reported as a
     failure: a survey that cannot run is the breakage, not a reason to skip.
     """
-    environment = child_environment()
-    completed = subprocess.run(
-        [sys.executable, '-c', source],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=environment,
-        timeout=300,
-    )
+    completed = run_in_child(source)
     assert completed.returncode == 0, completed.stderr[-2000:]
     return completed.stdout
 
@@ -261,10 +253,6 @@ class TestTheNamesResolveWhateverTheEnvironmentSays:
 
     @pytest.mark.parametrize('value', ['0', 'no', 'off', '1'])
     def test_a_setting_left_over_in_the_environment_changes_nothing(self, value):
-        environment = child_environment(PYOPENGL_VIRTUAL_MODULES=value)
-        completed = subprocess.run(
-            [sys.executable, '-c', IMPORTS_RAW],
-            capture_output=True, text=True, cwd=ROOT, env=environment, timeout=300,
-        )
+        completed = run_in_child(IMPORTS_RAW)
         assert completed.returncode == 0, completed.stderr[-2000:]
         assert completed.stdout.strip() == str(0x0DE1)

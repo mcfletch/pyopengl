@@ -17,7 +17,7 @@ import sys
 import paths
 import pytest
 
-from childenv import child_environment
+from childenv import run_in_child
 
 import OpenGL._dispatch as dispatch
 from OpenGL import _configflags
@@ -37,15 +37,7 @@ pytestmark = [
 
 
 def run(source):
-    environment = child_environment()
-    completed = subprocess.run(
-        [sys.executable, '-c', source],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=environment,
-        timeout=300,
-    )
+    completed = run_in_child(source)
     assert completed.returncode == 0, completed.stderr[-2000:]
     return json.loads(completed.stdout)
 

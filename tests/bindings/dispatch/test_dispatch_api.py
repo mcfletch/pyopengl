@@ -17,7 +17,7 @@ import sys
 import paths
 import pytest
 
-from childenv import child_environment
+from childenv import run_in_child
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = paths.ROOT
@@ -45,20 +45,16 @@ sys.meta_path.insert(0, Absent())
 
 
 def run(source, block=False, **environment_overrides):
-    """Run `source` in a fresh interpreter and hand back what it printed."""
-    environment = child_environment()
-    environment.pop('PYOPENGL_DISPATCH', None)
-    environment.pop('PYOPENGL_USE_ACCELERATE', None)
-    environment.update(environment_overrides)
-    completed = subprocess.run(
-        [sys.executable, '-c', (BLOCK if block else '') + source],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=environment,
-        timeout=300,
-    )
-    assert completed.returncode == 0, completed.stderr[-2000:]
+    """Run `source` in a fresh interpreter and hand back what it printed.
+
+    The two switches this module is about are taken away first, so that what a
+    child sees is what the case set and not what the outer run was started
+    with -- a tox axis exporting PYOPENGL_DISPATCH would otherwise decide every
+    answer here.
+    """
+    overrides = {'PYOPENGL_DISPATCH': None, 'PYOPENGL_USE_ACCELERATE': None}
+    overrides.update(environment_overrides)
+    completed = run_in_child((BLOCK if block else '') + source, **overrides)
     return completed.stdout.strip()
 
 

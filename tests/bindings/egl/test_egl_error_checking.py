@@ -206,12 +206,8 @@ class TestTheFirstCallOfAProcessIsCheckedToo:
         import subprocess
         import sys
 
-        from childenv import child_environment
+        from childenv import run_in_child
 
-        completed = subprocess.run(
-            [sys.executable, '-c', FIRST_CALL],
-            capture_output=True, text=True, env=child_environment(),
-            timeout=300,
-        )
+        completed = run_in_child(FIRST_CALL)
         assert completed.returncode == 0, completed.stderr[-2000:]
         assert 'EGL_BAD_DISPLAY' in completed.stdout, completed.stdout

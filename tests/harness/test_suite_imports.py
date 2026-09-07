@@ -17,6 +17,8 @@ import sys
 import paths
 import pytest
 
+from childenv import run_in_child
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = paths.ROOT
 
@@ -24,13 +26,7 @@ ROOT = paths.ROOT
 def _run(body):
     """Run ``body`` in a fresh interpreter with tests/ importable."""
     script = 'import sys\nsys.path.insert(0, %r)\n%s' % (paths.TESTS, body)
-    return subprocess.run(
-        [sys.executable, '-c', script],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        timeout=300,
-    )
+    return run_in_child(script)
 
 
 def test_the_desktop_fixture_imports_after_opengl_gl():

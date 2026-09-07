@@ -28,7 +28,7 @@ import sys
 import paths
 import pytest
 
-from childenv import child_environment
+from childenv import run_in_child
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = paths.ROOT
@@ -72,17 +72,12 @@ def collect(target):
     backend = windowed_backend()
     if backend is None:
         pytest.skip('no windowed backend installed to collect the GL suites on')
-    environment = child_environment(TEST_WINDOWING=backend)
-    # conftest sets this for the egl backend, and it names the interface the
-    # entry points load through -- which is the one being taken away.
-    environment.pop('PYOPENGL_PLATFORM', None)
-    return subprocess.run(
-        [sys.executable, '-c', COLLECT % (target,)],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=environment,
-        timeout=300,
+    # conftest sets PYOPENGL_PLATFORM for the egl backend, and it names the
+    # interface the entry points load through -- which is the one being taken
+    # away, so the child is given none.
+    return run_in_child(
+        COLLECT % (target,), check=False,
+        TEST_WINDOWING=backend, PYOPENGL_PLATFORM=None,
     )
 
 

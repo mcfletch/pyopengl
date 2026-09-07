@@ -16,7 +16,7 @@ import sys
 import paths
 import pytest
 
-from childenv import child_environment
+from childenv import run_in_child
 from glcontext import CHILD_PREAMBLE, NOTHING_TO_TEST_WITH
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -117,15 +117,7 @@ json.dump(out, sys.stdout)
 
 
 def survey(dispatch):
-    environment = child_environment(PYOPENGL_DISPATCH=dispatch)
-    completed = subprocess.run(
-        [sys.executable, '-c', SURVEY],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=environment,
-        timeout=300,
-    )
+    completed = run_in_child(SURVEY, PYOPENGL_DISPATCH=dispatch)
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no context to survey through: %s' % (completed.stderr.strip(),))
     if completed.returncode != 0:

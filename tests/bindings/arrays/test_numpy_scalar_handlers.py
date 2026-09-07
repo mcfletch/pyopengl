@@ -100,13 +100,9 @@ print(json.dumps({
         import subprocess
         import sys
 
-        from childenv import child_environment
+        from childenv import run_in_child
 
-        completed = subprocess.run(
-            [sys.executable, '-c', self.REPORT],
-            capture_output=True, text=True, timeout=300,
-            env=child_environment(**environment),
-        )
+        completed = run_in_child(self.REPORT, **environment)
         assert completed.returncode == 0, completed.stderr[-2000:]
         return json.loads(completed.stdout)
 

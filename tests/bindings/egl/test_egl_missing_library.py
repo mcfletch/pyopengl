@@ -17,6 +17,8 @@ import sys
 import paths
 import pytest
 
+from childenv import run_in_child
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = paths.ROOT
 
@@ -57,13 +59,7 @@ vars(platform.PLATFORM).pop('EGL', None)
 
 def run(source):
     """Run `source` in a fresh interpreter and return what it printed."""
-    completed = subprocess.run(
-        [sys.executable, '-c', source],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        timeout=300,
-    )
+    completed = run_in_child(source)
     assert completed.returncode == 0, completed.stderr[-2000:] or completed.stdout
     return completed.stdout
 

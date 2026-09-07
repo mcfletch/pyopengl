@@ -19,7 +19,7 @@ import sys
 import paths
 import pytest
 
-from childenv import child_environment
+from childenv import run_in_child
 from glcontext import CHILD_PREAMBLE, NOTHING_TO_TEST_WITH
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -54,16 +54,9 @@ IMPLEMENTATIONS = ['c', 'ctypes']
 
 def run(implementation, preamble='', body=''):
     """Run the program under one dispatch implementation."""
-    environment = child_environment(
-        PYOPENGL_DISPATCH=implementation, PYOPENGL_DISPATCH_STRICT='0'
-    )
-    completed = subprocess.run(
-        [sys.executable, '-c', DEFAULT % {'preamble': preamble, 'body': body}],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=environment,
-        timeout=300,
+    completed = run_in_child(
+        DEFAULT % {'preamble': preamble, 'body': body},
+        PYOPENGL_DISPATCH=implementation, PYOPENGL_DISPATCH_STRICT='0',
     )
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
@@ -180,16 +173,9 @@ def test_an_error_is_noticed_even_where_the_callback_is_no_longer_ours(implement
     driver anyway every AUDIT_INTERVAL calls.  What it finds there puts the
     context back on glGetError, where a check cannot be silently wrong.
     """
-    environment = child_environment(
-        PYOPENGL_DISPATCH=implementation, PYOPENGL_DISPATCH_STRICT='0'
-    )
-    completed = subprocess.run(
-        [sys.executable, '-c', DISPLACED],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=environment,
-        timeout=300,
+    completed = run_in_child(
+        DISPLACED,
+        PYOPENGL_DISPATCH=implementation, PYOPENGL_DISPATCH_STRICT='0',
     )
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
@@ -204,16 +190,9 @@ def test_an_error_is_noticed_even_where_the_callback_is_no_longer_ours(implement
 def test_an_application_callback_is_not_taken_over(implementation):
     """Installing over it would silence the application's own diagnostics, and
     its next glDebugMessageCallback would silence our checking."""
-    environment = child_environment(
-        PYOPENGL_DISPATCH=implementation, PYOPENGL_DISPATCH_STRICT='0'
-    )
-    completed = subprocess.run(
-        [sys.executable, '-c', FOREIGN],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=environment,
-        timeout=300,
+    completed = run_in_child(
+        FOREIGN,
+        PYOPENGL_DISPATCH=implementation, PYOPENGL_DISPATCH_STRICT='0',
     )
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')

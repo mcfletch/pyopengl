@@ -29,7 +29,7 @@ import sys
 import paths
 import pytest
 
-from childenv import child_environment
+from childenv import run_in_child
 
 ROOT = paths.ROOT
 
@@ -90,14 +90,7 @@ json.dump(
 
 @pytest.fixture(scope='module')
 def survey():
-    completed = subprocess.run(
-        [sys.executable, '-c', SURVEY],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=child_environment(PYOPENGL_DISPATCH='ctypes'),
-        timeout=300,
-    )
+    completed = run_in_child(SURVEY, PYOPENGL_DISPATCH='ctypes')
     assert completed.returncode == 0, completed.stderr[-2000:]
     return json.loads(completed.stdout)
 

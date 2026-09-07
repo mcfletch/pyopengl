@@ -12,7 +12,7 @@ import sys
 
 import paths
 import pytest
-from childenv import child_environment
+from childenv import run_in_child
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = paths.ROOT
@@ -44,32 +44,14 @@ print(
 
 
 def report(dispatch, block=False):
-    environment = child_environment(PYOPENGL_DISPATCH=dispatch)
-    completed = subprocess.run(
-        [sys.executable, '-c', REPORT % {'block': block}],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=environment,
-        timeout=300,
-    )
-    assert completed.returncode == 0, completed.stderr[-2000:]
+    completed = run_in_child(REPORT % {'block': block}, PYOPENGL_DISPATCH=dispatch)
     available, active, kind = completed.stdout.strip().split()
     return available == 'True', active == 'True', kind
 
 
 def _default():
-    environment = child_environment()
-    environment.pop('PYOPENGL_DISPATCH', None)
-    completed = subprocess.run(
-        [sys.executable, '-c', REPORT % {'block': False}],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=environment,
-        timeout=300,
-    )
-    assert completed.returncode == 0, completed.stderr[-2000:]
+    """What a child chooses with no PYOPENGL_DISPATCH set at all."""
+    completed = run_in_child(REPORT % {'block': False}, PYOPENGL_DISPATCH=None)
     available, active, kind = completed.stdout.strip().split()
     return available == 'True', active == 'True', kind
 
@@ -179,17 +161,14 @@ else:
 
 
 def _mismatched(**environment_overrides):
-    """Ask a fresh interpreter to install a deliberately mismatched extension."""
-    environment = child_environment()
-    environment.pop('PYOPENGL_DISPATCH', None)
-    environment.pop('PYOPENGL_USE_ACCELERATE', None)
-    environment.update(environment_overrides)
-    completed = subprocess.run(
-        [sys.executable, '-c', MISMATCH],
-        capture_output=True, text=True, cwd=ROOT, env=environment, timeout=300,
-        check=False,        # the child's own report is what this reads
-    )
-    assert completed.returncode == 0, completed.stderr[-2000:]
+    """Ask a fresh interpreter to install a deliberately mismatched extension.
+
+    The two switches are taken away first: what a child answers has to be what
+    the case asked for rather than what the outer run was started with.
+    """
+    overrides = {'PYOPENGL_DISPATCH': None, 'PYOPENGL_USE_ACCELERATE': None}
+    overrides.update(environment_overrides)
+    completed = run_in_child(MISMATCH, **overrides)
     answer = completed.stdout.strip()
     if answer == 'UNBUILT':
         pytest.skip('the C dispatch extension is not built')

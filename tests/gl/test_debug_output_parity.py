@@ -18,7 +18,7 @@ import sys
 import paths
 import pytest
 
-from childenv import child_environment
+from childenv import run_in_child
 from glcontext import CHILD_PREAMBLE, NOTHING_TO_TEST_WITH
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -50,15 +50,7 @@ else:
 
 
 def run(checking, scope=''):
-    environment = child_environment()
-    completed = subprocess.run(
-        [sys.executable, '-c', PROGRAM % {'checking': checking, 'scope': scope}],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=environment,
-        timeout=300,
-    )
+    completed = run_in_child(PROGRAM % {'checking': checking, 'scope': scope})
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
     assert completed.returncode == 0, completed.stderr[-2000:]
@@ -133,15 +125,7 @@ def test_a_raiser_that_declines_does_not_become_a_SystemError(debug, raiser):
     """Both notice mechanisms return -1 to say "an exception is set".  A raiser
     that returns instead leaves the stub returning NULL with nothing raised,
     which CPython reports as a SystemError from an unrelated frame."""
-    environment = child_environment()
-    completed = subprocess.run(
-        [sys.executable, '-c', RAISER_DECLINES % {'debug': debug, 'raiser': raiser}],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=environment,
-        timeout=300,
-    )
+    completed = run_in_child(RAISER_DECLINES % {'debug': debug, 'raiser': raiser})
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
     assert completed.returncode == 0, completed.stderr[-2000:]
@@ -178,15 +162,7 @@ def test_turning_debug_output_off_undoes_what_turning_it_on_did():
     """The synchronous debug output it enables serialises the driver, so
     leaving it on costs exactly what switching the mode off asked to stop
     paying -- and each enable must not add another callback to hold forever."""
-    environment = child_environment()
-    completed = subprocess.run(
-        [sys.executable, '-c', DISABLE],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=environment,
-        timeout=300,
-    )
+    completed = run_in_child(DISABLE)
     if completed.returncode == NOTHING_TO_TEST_WITH:
         pytest.skip('no GL context offering GL_KHR_debug')
     assert completed.returncode == 0, completed.stderr[-2000:]

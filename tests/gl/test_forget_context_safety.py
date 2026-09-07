@@ -21,7 +21,7 @@ import textwrap
 import paths
 import pytest
 
-from childenv import child_environment
+from childenv import run_in_child
 
 import OpenGL._dispatch as dispatch
 from OpenGL import _configflags
@@ -66,15 +66,7 @@ RACE = textwrap.dedent(
 
 
 def run_race():
-    environment = child_environment()
-    completed = subprocess.run(
-        [sys.executable, '-c', RACE],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
-        env=environment,
-        timeout=120,
-    )
+    completed = run_in_child(RACE, timeout=120)
     return completed.returncode, completed.stdout.strip()
 
 
