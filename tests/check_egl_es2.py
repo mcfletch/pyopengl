@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+# requires: xlib numpy
 from __future__ import print_function
 import xlibegltest as egltest
 from numpy import array

@@ -5,7 +5,7 @@ Run it to find out whether headless EGL rendering is possible here and on which
 device -- the first thing to ask when the suite's ``TEST_WINDOWING=egl`` backend
 finds nothing to render on::
 
-    python tests/check_egl_device_enumeration.py
+    python tests/report_egl_device_enumeration.py
 
 Each device is described from :mod:`OpenGL.EGL.devices`, which needs no display
 and no initialisation.  Only then is a display opened on it, since that is the

@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+# requires: xlib numpy
 """Implements the functionality in MESA's EGL + OpenGL demo1:
 
     http://cgit.freedesktop.org/mesa/demos/tree/src/egl/opengl/demo1.c
@@ -114,7 +115,11 @@ def main(displayfunc, api):
     configs = (EGLConfig * num_configs.value)()
     eglGetConfigs(display, configs, num_configs.value, num_configs)
 
-    bit = EGL_OPENGL_API
+    # EGL_CONFORMANT takes a bitmask of the renderable-type bits, not one of
+    # the API enums eglBindAPI takes: EGL_OPENGL_API is 0x30A2 and no
+    # combination of the bits, so asking for it is EGL_BAD_ATTRIBUTE and no
+    # configuration at all.
+    bit = EGL_OPENGL_BIT
     if api == 'gles':
         bit = EGL_OPENGL_ES_BIT
     elif api == 'gles2':
@@ -148,9 +153,28 @@ def main(displayfunc, api):
     # now need to get a raw X window handle...
     pygame.init()
 
-    pygame.display.set_mode((500, 500), flags=pygame.NOFRAME | pygame.SHOWN)
-    # pygame.display.init()
-    window = pygame.display.get_wm_info()["window"]
+    try:
+        pygame.display.set_mode((500, 500), flags=pygame.NOFRAME | pygame.SHOWN)
+    except pygame.error as err:
+        # No display SDL will open: nothing to make a window surface on.
+        checkutils.skip('pygame could not open a display: %s' % (err,))
+
+    # eglCreateWindowSurface below wants a native window id, which is an X11
+    # notion; a Wayland session has none to give.  Asked for one anyway,
+    # pygame-ce 2.5.8 segfaults inside its own pg_get_wm_info -- it builds the
+    # dict from what SDL returned without checking that SDL returned it -- so
+    # the driver is asked first rather than the window.  The `# requires: xlib`
+    # line above keeps the harness off this path; this keeps a developer
+    # running the script by hand off it too.
+    driver = pygame.display.get_driver()
+    if driver != 'x11':
+        checkutils.skip(
+            'a native window id is an X11 notion and the SDL video driver is '
+            '%r' % (driver,)
+        )
+    window = pygame.display.get_wm_info().get("window")
+    if not window:
+        checkutils.skip('SDL gave no native window id to make a surface on')
 
     # print("Clearing current context")
     # eglMakeCurrent(display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT)

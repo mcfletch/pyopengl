@@ -1,3 +1,4 @@
+# requires: numpy
 """Test for github issue #47"""
 
 import sys

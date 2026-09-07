@@ -296,15 +296,42 @@ TEST_WINDOWING=egl python -m pytest -q tests/gl tests/gles tests/glu
 TEST_VISIBLE=0 python -m pytest -q tests/
 ```
 
-The legacy `test_checks.py` runs `check_*.py` scripts out-of-process; those are
-windowed and are run in the default windowed mode even when the outer run uses
-the headless `egl` backend.
+## Check scripts
 
-A script that cannot run here says so by exiting 77 — `checkutils.skip(reason)`,
-or `checkutils.require('some.module')` for a dependency — which the harness
-reports as a skip. A script that instead dies on an import or a null entry point
-prints nothing, and no output is a *failure*, since that is how the harness
-tells a working check from a broken one.
+A check script is a program rather than a test case: it opens a window, drives
+a toolkit's main loop, or settles a question that can only be asked once per
+process. `test_checks.py` runs each of them out-of-process, and they are run in
+the default windowed mode even when the outer run uses the headless `egl`
+backend.
+
+**Every `check_*.py` beside `test_checks.py` is run — the runner globs, it does
+not keep a list.** So adding a script is adding a file, and a script that
+nothing runs cannot happen. (It used to: `check_autocomplete.py` and
+`check_querier_version_parse.py` sat in this directory for years under a runner
+that named its scripts by hand, and neither was ever launched.) A program that
+*reports* rather than checks — `report_cgl_context.py`,
+`report_egl_device_enumeration.py`, both of which CI runs to say what the
+machine has — is named `report_*` and is not collected.
+
+A script says what it needs in a `# requires:` line among its first forty:
+
+```python
+#! /usr/bin/env python
+# requires: glut numpy
+```
+
+read out of the file rather than imported, since whether it imports at all is
+part of what running it answers. The vocabulary is `numpy`, `window-server`,
+`xlib`, `glx` and `glut`; a word outside it fails the run rather than quietly
+skipping, so a typo cannot become a check that never runs.
+
+A script that cannot run on *this particular* machine — a driver that refuses
+the context, an SDL that will not open a display — says so at run time by
+exiting 77: `checkutils.skip(reason)`, or `checkutils.require('some.module')`
+for a dependency, which the harness reports as a skip. A script that instead
+dies on an import or a null entry point prints nothing, and no output is a
+*failure*, since that is how the harness tells a working check from a broken
+one. On success it prints `OK`.
 
 Two things a GLUT check script has to ask about, both of which classic GLUT
 (macOS's) answers differently from freeglut:

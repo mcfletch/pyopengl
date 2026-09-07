@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+# requires: glut
 """Test that GLUT.glutInit accepts 0 arguments"""
 from __future__ import print_function
 from OpenGL import GLUT

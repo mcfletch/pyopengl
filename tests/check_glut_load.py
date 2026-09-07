@@ -1,3 +1,4 @@
+# requires: glut
 from __future__ import print_function
 import ctypes, sys
 

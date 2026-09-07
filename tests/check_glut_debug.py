@@ -1,3 +1,4 @@
+# requires: glut
 """Test GLUT forward-compatible mode..."""
 
 from __future__ import print_function

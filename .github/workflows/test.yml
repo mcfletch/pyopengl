@@ -97,7 +97,7 @@ jobs:
         # green, so say what is about to render before anything runs.
         run: >
           python -m tox exec -e ${{ matrix.toxenv }} --
-          python tests/check_egl_device_enumeration.py
+          python tests/report_egl_device_enumeration.py
         env:
           PYOPENGL_PLATFORM: egl
 
@@ -167,7 +167,7 @@ jobs:
           mkdir -p test-logs
           set -o pipefail
           python -m tox exec -e ${{ matrix.toxenv }} -- \
-            python tests/check_cgl_context.py 2>&1 | tee test-logs/renderer.log
+            python tests/report_cgl_context.py 2>&1 | tee test-logs/renderer.log
 
       # One area per step, each allowed to fail, because a segfault ends the
       # process it happens in: run as one command and the first crash costs

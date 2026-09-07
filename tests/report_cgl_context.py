@@ -4,7 +4,7 @@
 Run it to find out whether ``TEST_WINDOWING=cgl`` has anything to render on --
 the first thing to ask when the suite skips every GL case on macOS::
 
-    python tests/check_cgl_context.py
+    python tests/report_cgl_context.py
 
 It exits non-zero when no context can be created, so a CI job can use it as a
 gate: a suite with no GL target skips its way to green having drawn nothing,

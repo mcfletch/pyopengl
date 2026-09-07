@@ -1,3 +1,4 @@
+# requires: glut
 """Test simple functions (i.e. no pointers involved)"""
 
 from __future__ import print_function

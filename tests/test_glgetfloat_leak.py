@@ -2,7 +2,6 @@
 from __future__ import print_function
 import os, math, unittest
 import pytest
-import checkutils
 from basetestcase import BaseTest
 from OpenGL.GL import *
 
@@ -47,7 +46,3 @@ class TestGLGetFloatLeak(BaseTest):
             % (growth, self.MEASURED, growth / float(self.MEASURED))
         )
 
-
-if __name__ == '__main__':
-    checkutils.require('OpenGL_accelerate')
-    checkutils.run()

@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+# requires: xlib numpy
 import xlibegltest as egltest
 import numpy
 from OpenGL import GL

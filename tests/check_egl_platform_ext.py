@@ -1,3 +1,4 @@
+# requires: xlib
 """This checking script from https://github.com/mcfletch/pyopengl/issues/6"""
 
 import checkutils

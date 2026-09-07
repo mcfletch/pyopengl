@@ -1,6 +1,5 @@
 import unittest
 import OpenGL
-import checkutils
 from basetestcase import BaseTest
 from OpenGL.GL import *
 from OpenGL.GL.EXT.framebuffer_object import *
@@ -41,7 +40,3 @@ class TestSF2946226(BaseTest):
         )
         glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0)
 
-
-if __name__ == "__main__":
-    checkutils.require('OpenGL_accelerate')
-    checkutils.run()

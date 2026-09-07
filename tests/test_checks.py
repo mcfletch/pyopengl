@@ -1,11 +1,43 @@
-"""Test cases that run stand-alone check-scripts"""
+"""Run the stand-alone check scripts, and report what each of them said.
 
-import os, sys, subprocess, logging
+A check script is a program rather than a test case: it opens a window, drives
+a toolkit's main loop, or settles a question that can only be asked once per
+process, and it says how it went by what it prints and the status it exits
+with.  ``OK`` on stdout is a pass, exit status 77 is a skip
+(``checkutils.skip``), and no output at all is a failure -- which is how the
+harness tells a working check from one that died on an import or a null entry
+point.
+
+**The scripts are discovered, not listed.** Every ``check_*.py`` beside this
+file is run.  A script that lists what it needs but is never run is the shape
+this replaced: ``check_autocomplete.py`` and
+``check_querier_version_parse.py`` sat here for years under a runner that
+enumerated its scripts by hand, and neither was ever launched.
+
+A script says what it needs in a ``# requires:`` line in its first few lines::
+
+    # requires: glut numpy
+
+which is read out of the file rather than imported, since importing it is the
+thing being tested.  The vocabulary is :data:`REQUIREMENTS`; an unknown word is
+an error rather than a silent pass, so a typo cannot turn into a check that
+never runs.
+"""
+
+import glob
+import logging
+import os
+import re
+import subprocess
+import sys
+
 import pytest
-from functools import wraps
-from OpenGL.GLUT import glutInit
+
 import backends
 from checkutils import SKIP_EXIT_CODE
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+log = logging.getLogger(__name__)
 
 WAYLAND = os.environ.get('XDG_SESSION_TYPE') == 'wayland'
 
@@ -20,296 +52,194 @@ WAYLAND = os.environ.get('XDG_SESSION_TYPE') == 'wayland'
 #: about five seconds on a software rasteriser.
 CHECK_TIMEOUT = float(os.environ.get('TEST_CHECK_TIMEOUT', '120'))
 
-try:
-    import numpy
-except ImportError:
-    numpy = None
-HERE = os.path.dirname(os.path.abspath(__file__))
-log = logging.getLogger(__name__)
+#: ``# requires: a b c`` anywhere in the first lines of a script.
+_REQUIRES = re.compile(r'^#\s*requires:\s*(.*)$', re.M)
+
+#: How many lines of a script are read looking for that line.
+_HEADER_LINES = 40
 
 
-#: Skip reason for a machine with the libraries but nowhere to draw.  These
-#: scripts open a window, and what they call answers a display it cannot open
-#: by ending the process -- freeglut writes "failed to open display" to stderr
-#: and calls exit() -- which reaches the harness as a script that produced no
-#: output rather than as the absent display it is.
-NO_WINDOW_SERVER = 'No display server to open a window on'
+def _numpy_installed():
+    try:
+        import numpy  # noqa: F401
+    except ImportError:
+        return False
+    return True
 
 
-def glx_only(func):
-    @wraps(func)
-    def glx_only_test(*args, **named):
-        if WAYLAND:
-            pytest.skip('GLX is not wayland compatible generally')
-        if not sys.platform in ('linux', 'linux2'):
-            pytest.skip('Linux-only')
-        if not backends.has_window_server():
-            pytest.skip(NO_WINDOW_SERVER)
-        return func(*args, **named)
+def _window_server():
+    """Somewhere to open a window on, that the scripts can actually use.
 
-    return glx_only_test
-
-def xlib_only(func):
-    @wraps(func)
-    def xlib_only_test(*args, **named):
-        if WAYLAND:
-            pytest.skip('Raw XLIB operations do not work on wayland')
-        if not backends.has_window_server():
-            pytest.skip(NO_WINDOW_SERVER)
-        return func(*args, **named)
-
-    return xlib_only_test
+    Wayland counts as nowhere here.  These are X11 and GLUT programs: raw Xlib
+    calls have no Wayland equivalent, and GLUT's support for it is poor enough
+    that a window either does not appear or does not answer.  Under a compositor
+    the run wants ``xvfb-run``, which is what the Linux CI job does.
+    """
+    if WAYLAND:
+        return 'GLUT and raw X11 have no usable Wayland path; run under xvfb-run'
+    if not backends.has_window_server():
+        # A machine with the libraries but nowhere to draw.  freeglut answers a
+        # display it cannot open by writing to stderr and calling exit(), which
+        # reaches the harness as a script that produced no output rather than
+        # as the absent display it is.
+        return 'no display server to open a window on'
+    return None
 
 
-def glut_only(func):
-    @wraps(func)
-    def glut_only_test(*args, **named):
-        if WAYLAND:
-            pytest.skip('GLUT has poor wayland support')
-        if not glutInit:
-            pytest.skip('No GLUT installed')
-        if not backends.has_window_server():
-            pytest.skip(NO_WINDOW_SERVER)
-        return func(*args, **named)
+def _glut():
+    from OpenGL.GLUT import glutInit
 
-    return glut_only_test
+    if not glutInit:
+        return 'no GLUT installed'
+    return None
 
 
-def numpy_only(func):
-    @wraps(func)
-    def glut_only_test(*args, **named):
-        if not numpy:
-            pytest.skip('No GLUT installed')
-        return func(*args, **named)
-
-    return glut_only_test
+def _linux():
+    if not sys.platform.startswith('linux'):
+        return 'Linux only'
+    return None
 
 
-def check_test(func):
-    filename = func.__name__[5:] + '.py'
-    file = os.path.join(HERE, filename)
+#: What a ``# requires:`` word means, as a function answering the reason it is
+#: not satisfied (or ``None``).  ``implies`` chains them, so ``glx`` need not
+#: restate that raw X11 needs a window server.
+REQUIREMENTS = {
+    'numpy': (lambda: None if _numpy_installed() else 'no numpy installed', ()),
+    'window-server': (_window_server, ()),
+    'xlib': (lambda: None, ('window-server',)),
+    'glx': (_linux, ('xlib',)),
+    'glut': (_glut, ('window-server',)),
+}
 
-    @wraps(func)
-    def test_x():
-        log.info('Starting test: %s', filename)
-        # These are stand-alone *windowed* scripts, and a headless backend has
-        # no equivalent for them -- egl brings PYOPENGL_PLATFORM=egl and no
-        # window, cgl has no window server to ask.  Run them in the default
-        # windowed mode rather than propagating one, since a child that skipped
-        # would produce no output and read here as a failure.
-        env = dict(os.environ)
-        if backends.is_headless(backends.requested(env)):
-            env.pop('TEST_WINDOWING', None)
-        pipe = subprocess.Popen(
-            [
-                sys.executable,
-                file,
-            ],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            env=env,
+
+def requirements_of(path):
+    """The words in a script's ``# requires:`` line, as a list.
+
+    Read from the file rather than imported: whether the script imports at all
+    is part of what running it answers.
+    """
+    with open(path, encoding='utf-8') as handle:
+        header = ''.join(handle.readlines()[:_HEADER_LINES])
+    found = _REQUIRES.search(header)
+    if not found:
+        return []
+    return found.group(1).replace(',', ' ').split()
+
+
+def unsatisfied(names):
+    """Why ``names`` cannot be satisfied here, or ``None``.
+
+    An unknown word raises: a requirement nobody implements would otherwise be
+    a check that quietly always runs, or quietly never does.
+    """
+    seen = set()
+    pending = list(names)
+    while pending:
+        name = pending.pop(0)
+        if name in seen:
+            continue
+        seen.add(name)
+        if name not in REQUIREMENTS:
+            raise KeyError(
+                '%r is not one of the requirements a check script may ask for '
+                '(%s)' % (name, ', '.join(sorted(REQUIREMENTS)))
+            )
+        answer, implies = REQUIREMENTS[name]
+        pending.extend(implies)
+        reason = answer()
+        if reason:
+            return reason
+    return None
+
+
+def scripts():
+    """Every check script beside this file, by name, sorted."""
+    return sorted(
+        os.path.basename(path)
+        for path in glob.glob(os.path.join(HERE, 'check_*.py'))
+    )
+
+
+def run_check(filename):
+    """Run one script and return ``(returncode, stdout, stderr)``."""
+    # These are stand-alone *windowed* scripts, and a headless backend has no
+    # equivalent for them -- egl brings PYOPENGL_PLATFORM=egl and no window,
+    # cgl has no window server to ask.  Run them in the default windowed mode
+    # rather than propagating one, since a child that skipped would produce no
+    # output and read here as a failure.
+    env = dict(os.environ)
+    if backends.is_headless(backends.requested(env)):
+        env.pop('TEST_WINDOWING', None)
+    pipe = subprocess.Popen(
+        [sys.executable, os.path.join(HERE, filename)],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        env=env,
+    )
+    try:
+        stdout, stderr = pipe.communicate(timeout=CHECK_TIMEOUT)
+    except subprocess.TimeoutExpired:
+        pipe.kill()
+        stdout, stderr = pipe.communicate()
+        raise AssertionError(
+            '%s did not finish within %d seconds, and was killed.\n'
+            'stdout: %s\nstderr: %s'
+            % (
+                filename,
+                CHECK_TIMEOUT,
+                stdout.decode('utf-8', errors='ignore').strip(),
+                stderr.decode('utf-8', errors='ignore').strip(),
+            )
+        ) from None
+    return (
+        pipe.returncode,
+        stdout.decode('utf-8', errors='ignore'),
+        stderr.decode('utf-8', errors='ignore'),
+    )
+
+
+@pytest.mark.parametrize('filename', scripts())
+def test_the_check_script_says_it_worked(filename):
+    reason = unsatisfied(requirements_of(os.path.join(HERE, filename)))
+    if reason:
+        pytest.skip('%s: %s' % (filename, reason))
+
+    log.info('Starting check: %s', filename)
+    returncode, stdout, stderr = run_check(filename)
+
+    if returncode == SKIP_EXIT_CODE:
+        pytest.skip(
+            'the script signalled skip: %s' % (stdout.strip() or stderr.strip(),)
         )
-        try:
-            stdout, stderr = pipe.communicate(timeout=CHECK_TIMEOUT)
-        except subprocess.TimeoutExpired:
-            log.warning('TIMEOUT on %s', filename)
-            pipe.kill()
-            stdout, stderr = pipe.communicate()
-            raise AssertionError(
-                '%s did not finish within %d seconds, and was killed.\n'
-                'stdout: %s\nstderr: %s'
-                % (
-                    filename,
-                    CHECK_TIMEOUT,
-                    stdout.decode('utf-8', errors='ignore').strip(),
-                    stderr.decode('utf-8', errors='ignore').strip(),
-                )
-            ) from None
-        except subprocess.CalledProcessError as err:
-            log.warning('ERROR reported by process: %s', err)
-            raise
-        output = stdout.decode('utf-8', errors='ignore')
-        if pipe.returncode == SKIP_EXIT_CODE:
-            pytest.skip(
-                'Check script signalled skip on %s: %s'
-                % (func.__name__, output.strip() or stderr.decode('utf-8', errors='ignore').strip())
-            )
-        lines = [x.strip() for x in output.strip().splitlines()]
-        if not lines:
-            log.error(
-                'Test did not produce output: %s',
-                stderr.decode('utf-8', errors='ignore'),
-            )
-            raise RuntimeError('Test script failure on %s' % (func.__name__))
-        if 'SKIP' in lines:
-            raise pytest.skip('Skipped by executable on %s' % (func.__name__))
-        elif 'OK' in lines:
-            return
-        else:
-            log.error(
-                'Failing check script stderr: %s',
-                stderr.decode('utf-8', errors='ignore'),
-            )
-            log.error(
-                'Failing check script stdout: %s',
-                output,
-            )
-            raise RuntimeError('Test Failed')
-
-    return test_x
+    lines = [line.strip() for line in stdout.strip().splitlines()]
+    if not lines:
+        raise AssertionError(
+            '%s produced no output, which is how a script that died on an '
+            'import or a null entry point looks.\nstderr: %s'
+            % (filename, stderr.strip())
+        )
+    if 'SKIP' in lines:
+        pytest.skip('the script skipped itself: %s' % (stdout.strip(),))
+    if 'OK' not in lines:
+        raise AssertionError(
+            '%s did not print OK.\nstdout: %s\nstderr: %s'
+            % (filename, stdout.strip(), stderr.strip())
+        )
 
 
-@glut_only
-@check_test
-def test_check_crash_on_glutinit():
-    """Checks that basic glut init works"""
+class TestTheScriptsAreDiscovered:
+    """The discovery itself, since a runner that finds nothing passes."""
 
+    def test_there_are_scripts_to_run(self):
+        assert len(scripts()) > 10, scripts()
 
-@numpy_only
-@xlib_only
-@check_test
-def test_check_egl_es1():
-    """Checks egl with es1 under pygame"""
+    @pytest.mark.parametrize('filename', scripts())
+    def test_every_script_asks_for_requirements_that_exist(self, filename):
+        """A typo in a ``# requires:`` line is an error, not a silent skip."""
+        names = requirements_of(os.path.join(HERE, filename))
+        for name in names:
+            assert name in REQUIREMENTS, (filename, name)
 
-
-@numpy_only
-@xlib_only
-@check_test
-def test_check_egl_es2():
-    """Checks egl with es2 under pygame"""
-
-
-@numpy_only
-@xlib_only
-@check_test
-def test_check_egl_opengl():
-    """Checks egl with opengl under pygame"""
-
-
-@xlib_only
-@check_test
-def test_check_egl_platform_ext():
-    """Checks egl display platform directly from render devices"""
-
-
-@glut_only
-@check_test
-def test_check_glutwindow():
-    """Checks GLUT window manipulation functions"""
-
-
-@pytest.mark.xfail
-@check_test
-def test_check_egl_pygame():
-    """Checks egl running over a pygame context"""
-
-
-@glut_only
-@check_test
-def test_check_freeglut_deinit():
-    """Checks free-glut deinitialise"""
-
-
-@check_test
-def test_check_import_err():
-    """Checks that the GLU module can be imported"""
-
-
-@numpy_only
-@check_test
-def test_check_leak_on_discontiguous_array():
-    """Checks that discontiguous array copy doesn't leak the copy"""
-
-
-@check_test
-def test_check_init_framebufferarb():
-    """Checks that framebufferarb init function is non-null"""
-
-
-@check_test
-def test_check_gles_imports():
-    """Checks that we can import GLES without crashing"""
-
-
-@glut_only
-@check_test
-def test_check_glut_debug():
-    """Tests GLUT debug function"""
-
-
-@glut_only
-@check_test
-def test_check_glut_fc():
-    """Tests GLUT forward-compatible-only"""
-
-
-@glut_only
-@check_test
-def test_check_glut_load():
-    """Tests GLUT forward-compatible-only"""
-
-
-@glut_only
-@check_test
-def test_check_glutinit():
-    """Tests GLUT init"""
-
-
-@glut_only
-@check_test
-def test_check_glutinit_0args():
-    """Tests GLUT init with no arguments"""
-
-
-@glut_only
-@check_test
-def test_check_glutinit_single():
-    """Tests GLUT init with single argument"""
-
-
-@glut_only
-@check_test
-def test_check_glutinit_simplest():
-    """Tests GLUT init in simplest possible case"""
-
-
-@check_test
-def test_check_silence_numpy_warning():
-    """Tests GLUT init in simplest possible case"""
-
-
-@check_test
-def test_egl_ext_enumerate():
-    """Tests that EGL can retrieve extension list"""
-
-
-@check_test
-def test_feedbackvarying():
-    """Tests that feedback varying buffer operations work"""
-
-
-@check_test
-def test_test_sf2946226():
-    """Test sourceforge bug vs. regressions"""
-
-
-@glut_only
-@check_test
-def test_test_instanced_draw_detect():
-    """Test that instanced draw extension can be identified"""
-
-
-@glut_only
-@check_test
-def test_test_gldouble_ctypes():
-    """Test use of gldouble array in ctypes"""
-
-
-@check_test
-def test_test_glgetactiveuniform():
-    """Test use of gldouble array in ctypes"""
-
-
-@check_test
-def test_test_glgetfloat_leak():
-    """Test use of gldouble array in ctypes"""
+    def test_an_unknown_requirement_is_refused(self):
+        with pytest.raises(KeyError):
+            unsatisfied(['not-a-requirement'])

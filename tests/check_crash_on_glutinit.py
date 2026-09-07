@@ -1,3 +1,4 @@
+# requires: glut
 from OpenGL.GLUT import *
 from OpenGL.GL import *
 
