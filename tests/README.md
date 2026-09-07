@@ -267,14 +267,18 @@ Helpers on the base classes:
 ## Windowing backends — `TEST_WINDOWING`
 
 Selected by `pick_backend()` from the `TEST_WINDOWING` environment variable
-(default: glfw, then pygame). All three serve both desktop GL and ES.
+(default: glfw, then pygame, then tk). `backends.headless_for()` answers which
+of the windowless ones a platform has, for a case that means "run without a
+window" rather than any particular one.
 
 | `TEST_WINDOWING` | Backend | Notes |
 |------------------|---------|-------|
 | `glfw` (default) | on-screen glfw window | desktop GPU, or llvmpipe under a software compositor |
 | `pygame`         | on-screen pygame/SDL window | same |
+| `tk`             | on-screen Tk window (`glcontext_tk.py`) | through `OpenGL.Tk.GLFrame`, which makes its own core-profile context on the window Tk hands out. Needs no package installed and needs an X display on Linux, Tk having no Wayland backend. |
 | `egl`            | **headless EGL device** (`glcontext_egl.py`) | renders directly on a GPU with no window system — the right choice for CI / containers where the compositor is software-rendered. Forces `PYOPENGL_PLATFORM=egl`; ES vs GL both work via an offscreen pbuffer. |
 | `cgl`            | **headless macOS context** (`glcontext_cgl.py`) | CGL is the layer NSGL and AGL are built on and the only one that hands out a context with no window server, which is what a macOS CI runner has. Framebuffer zero belongs to a drawable and there is none, so the backend binds a framebuffer object of the requested size. No OpenGL-ES, and no compatibility profile above 2.1; `TEST_CGL_RENDERER` pins the renderer kind. |
+| `wgl`            | **headless Windows pbuffer** (`glcontext_wgl.py`) | a drawable the display driver allocates out of its own memory, belonging to no window. It *is* framebuffer zero, so nothing has to be bound in its place; it is asked for double-buffered, because the suite is written against a window and the GL 1.x and 2.0 state cases call `glDrawBuffer(GL_BACK)`. No OpenGL-ES: WGL provides none. `python tests/check_wgl_offscreen.py` says whether a machine can serve it, and names the WGL extensions it lacks if not — Windows' own GDI Generic fallback has none of them. |
 
 On a Wayland session with the NVIDIA driver, `glReadPixels` from an on-screen
 window answers black however the frame was drawn, so the cases that read back

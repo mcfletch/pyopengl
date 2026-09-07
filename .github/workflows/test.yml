@@ -7,9 +7,16 @@ name: Tests
 # describes. A hand-rolled `pip install` here would be a second definition of
 # the environment, and the one nobody else exercises.
 #
-# The renderer is Mesa's llvmpipe, reached headless through EGL's device
-# platform (TEST_WINDOWING=egl): no X server, no GPU, and the same renderer on
-# every run -- which is what makes a difference between runs mean something.
+# None of the three platforms has a window server or a GPU, so each renders
+# through whatever its own layer offers without one, and each names it:
+#
+#   Linux    Mesa's llvmpipe through EGL's device platform (TEST_WINDOWING=egl)
+#   macOS    CGL, which hands out a context with no window server (=cgl)
+#   Windows  a WGL pbuffer, on the llvmpipe this job installs (=wgl)
+#
+# The same renderer on every run is what makes a difference between runs mean
+# something, and each job reports which one answered before it runs anything:
+# a suite that found no GL skips its way to green, which reads as a pass.
 #
 # GitHub's GPU runner is a larger runner, billed per minute on Team and
 # Enterprise plans and never free whatever the repository's visibility, so no
@@ -155,6 +162,99 @@ jobs:
           python -m tox -e ${{ matrix.toxenv }} --
           ${{ inputs.tests || matrix.paths || 'tests/' }}
           -n 4 --dist loadfile --max-worker-restart=0
+
+  windows:
+    name: Windows / WGL pbuffer / ${{ matrix.toxenv }}
+    runs-on: windows-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        # Both implementations, for the reason the macOS job gives: the
+        # compiled one is the release's substance, and WGL is where its
+        # pointer conversions differ from every other API -- the handles are
+        # pointer-sized scalars rather than pointer classes.
+        toxenv:
+          - py312-num1-accel0-dispctypes
+          - py312-num1-accel1-dispc
+    env:
+      # A pbuffer: a drawable the display driver allocates out of its own
+      # memory, belonging to no window and appearing nowhere.  Nothing is
+      # presented from it, so there is no window server to need and no session
+      # to be logged into.
+      TEST_WINDOWING: wgl
+      TEST_VISIBLE: '0'
+      # llvmpipe is the only renderer here; naming it means a driver that finds
+      # nothing else does not go looking.
+      GALLIUM_DRIVER: llvmpipe
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install tox
+        run: python -m pip install --upgrade pip "tox" "tox-uv>=1"
+
+      - name: Build the test environment
+        # As on the other two jobs: `tox exec` runs a command in an environment
+        # but does not build one, so the environment the steps below use is
+        # made here.
+        run: python -m tox -e ${{ matrix.toxenv }} --notest
+
+      - name: Install Mesa's software renderer
+        # A runner has no GPU, and Windows' own fallback is the GDI Generic
+        # implementation: OpenGL 1.1, with neither WGL_ARB_pbuffer nor
+        # WGL_ARB_create_context.  It can serve no windowless context at all,
+        # so without a renderer installed this job would skip every GL case.
+        #
+        # opengl32.dll is found beside the executable before it is found in
+        # System32, which is the only search order that puts Mesa's ahead of
+        # Windows' own -- so the DLLs go next to the interpreter tox built,
+        # asked for rather than assumed.
+        shell: pwsh
+        run: |
+          $version = '24.3.4'
+          $archive = "$env:RUNNER_TEMP\mesa.7z"
+          $url = "https://github.com/pal1000/mesa-dist-win/releases/download/$version/mesa3d-$version-release-msvc.7z"
+          Write-Host "Mesa $version from $url"
+          Invoke-WebRequest -Uri $url -OutFile $archive
+          & 7z x $archive -o"$env:RUNNER_TEMP\mesa" -y | Out-Null
+          # Asked of the interpreter rather than assumed from tox's layout, and
+          # through a file rather than through stdout, which carries tox's own
+          # lines as well as this answer.
+          & python -m tox exec -e ${{ matrix.toxenv }} -- `
+            python -c "import sys, pathlib; pathlib.Path('interpreter.txt').write_text(sys.executable)"
+          if (-not (Test-Path interpreter.txt)) {
+            throw 'the test environment did not say where its interpreter is'
+          }
+          $target = Split-Path -Parent (Get-Content interpreter.txt -Raw).Trim()
+          Remove-Item interpreter.txt
+          Write-Host "installing into $target"
+          Get-ChildItem "$env:RUNNER_TEMP\mesa\x64" -Filter *.dll |
+            ForEach-Object { Copy-Item $_.FullName $target -Force }
+          Get-ChildItem $target -Filter opengl32.dll | Select-Object Name, Length
+
+      - name: Report the renderer under test
+        # In the environment the tests will run in, and non-zero where no
+        # windowless context can be made: a suite that found no GL would skip
+        # its way to green having drawn nothing, which reads the same as a
+        # pass.  It names the extensions a machine lacks, so a failure here
+        # says whether Mesa landed or the step above put it somewhere the
+        # loader does not look.
+        run: >
+          python -m tox exec -e ${{ matrix.toxenv }} --
+          python tests/check_wgl_offscreen.py
+
+      - name: Run the tests
+        # No Xvfb and no display: the windowed check scripts ask
+        # `backends.has_window_server()`, which answers yes on Windows because
+        # the window server belongs to the session, and skip on their own where
+        # a window cannot actually be opened.
+        run: >
+          python -m tox -e ${{ matrix.toxenv }} --
+          ${{ inputs.tests || 'tests/' }} -m "not performance"
 
   macos:
     name: macOS ${{ matrix.os }} / CGL / ${{ matrix.toxenv }}
