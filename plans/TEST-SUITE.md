@@ -397,8 +397,18 @@ markers = [
   marker may be the honest answer — or remove the machinery. A deselection that
   deselects nothing is a claim the configuration makes and does not keep.
 
-**An axis for the configuration flags**, once section I has established which
-configurations pass.
+**Axes for the configuration flags**, once section I has established which
+configurations pass. Crossing five flags with six interpreters would multiply
+the matrix by 32; the flags are not interpreter-sensitive, so pin them to the
+newest Python and vary only what they interact with:
+
+```
+py<newest>-num{0,1}-accel{0,1}-disp{ctypes,c}-flag{errorcopy,sizecheck,...}
+```
+
+— one interpreter, crossed with numpy/no-numpy and accelerate/no-accelerate,
+because an array flag is exactly a claim about those two. The interpreter sweep
+stays on the ordinary configuration, where it is a claim about the interpreter.
 
 **Two definitions of the test environment.** `test-requirements.txt` and
 `[project.optional-dependencies] test` list the same packages, and already
@@ -619,3 +629,101 @@ Every step is checked the same way, since the suite is its own oracle:
   `macos` job in CI.
 - `python gl/gl_coverage.py --ext` before and after section E's coverage merge,
   to show the numbers are the same ones.
+
+
+---
+
+## What landed
+
+Steps 0–7 and 9, in eleven commits on `develop`. Step 8 is not started; the
+notes below say what else is left.
+
+| | before | after |
+|---|---|---|
+| Test modules at `tests/` root | 63 | 0 — the root holds the framework |
+| Modules nothing runs | 14 | 0 |
+| Files named `test_*` holding no tests | 4 | 0 |
+| Modules run twice | 3 | 0 |
+| `conftest.py` editing `sys.path` | 3 | 0 |
+| Warnings in a run | 5 | 0 |
+| Default run | 3,007 passed / 482 skipped | 3,113 / 485 |
+| `PYOPENGL_ERROR_ON_COPY=1` | collection aborts, then 59 failed | 3,096 passed / 502 skipped |
+| `PYOPENGL_ARRAY_SIZE_CHECKING=0` | 3 failed | green |
+| `PYOPENGL_STORE_POINTERS=0` | 1 failed | green |
+| `PYOPENGL_USE_ACCELERATE=0` | **segfault**, 69 failed | 6 failed, no crash |
+
+### Defects found, in the library
+
+- **An output array was never measured against the count the call would write.**
+  `glGenTextures(64, numpy.zeros(4, 'I'))` wrote 256 bytes into 16 — a heap
+  overrun with no exception, on the pure-ctypes path, which is what a
+  `pip install PyOpenGL` without a compiler runs. The C layer had the check;
+  nothing else did. Fixed in `converters.Output.checkOutputSize`.
+- **Six entry points were being handed the wrong element type** and getting a
+  silent conversion: `GL_TYPE` as signed where the call takes `GLenum`, the
+  multi-draw counts as unsigned where `GLsizei` is signed, the GLU sampling
+  matrices as doubles where the call takes floats, and the GLE geometry as one
+  type where GLE asks for `gleDouble` paths and `float` colours.
+- **`ALLOW_NUMPY_SCALARS` bought nothing but a silent float→int truncation**;
+  integer scalars are converted by ctypes itself. Dropped for 4.0.
+- **`check_egl_pygame.py` asked `eglChooseConfig` for `EGL_CONFORMANT=
+  EGL_OPENGL_API`**, an `eglBindAPI` enum and no combination of the
+  conformance bits, so the call was `EGL_BAD_ATTRIBUTE`. An `xfail` had been
+  covering it.
+- **`check_glx_raw_x.py` passed `DISPLAY` to `XOpenDisplay` with no argtypes**,
+  so ctypes handed a `char *` parameter a `wchar_t *` and every display looked
+  closed.
+- Eight leaked file handles, in `src/xmlreg.py`, `accelerate/setup.py` and six
+  test modules.
+
+### Defects found, in the suite
+
+- A test cleared `support._swallowed` — the process's record of customisations
+  the C layer performed — and its `finally` cleared it again rather than
+  restoring it, so anything collected afterwards got the raw binding. It
+  surfaced in a different suite, about a different call.
+- Six modules asked `dispatch.AVAILABLE` (is the extension importable) where
+  they meant `dispatch.settle()` (is it what is running), so under
+  `USE_ACCELERATE=0` they ran against the implementation they were the control
+  for.
+- `accelerate/tests/test_numpyaccel.py` had two methods named
+  `test_asArrayConvert`; the first had never run.
+- `test_arraydatatype.py::test_texture`'s body was inside an `else:` after
+  importing `OpenGLContext` and PIL, so it had never executed.
+- `TEST_NO_ACCELERATE` only works if it beats the first import of
+  `acceleratesupport`, so the one case that used it had never run.
+- `test_passBackResults` claimed to test `ALLOW_NUMPY_SCALARS` and bound a
+  texture.
+
+### Decided against
+
+**`pytest-xdist`.** Measured: 66.8s to 36.2s with four workers and
+`--dist loadfile` — 1.85x rather than 4x, because the GL device serialises most
+of it. But fourteen ES cases *skip* under it that run serially, all of them
+`entry point ... did not resolve in this process`: an ES-only EXT command whose
+name collides with a desktop-GL one takes a cached null when the desktop module
+is imported first, and which files a worker gets decides the order. So the
+faster run quietly tests less, which is the trade this suite exists to refuse.
+
+Worth revisiting only after that collision is fixed in the library rather than
+worked around by `require_entrypoint` — which is its own piece of work, and a
+better one.
+
+### Left to do
+
+- **Step 8, `exercise()`.** Untouched. Still 98 sites swallowing any `GLError`
+  against 19 uses of the narrower `tolerate_glerror(*codes)`.
+- **The two near-duplicate files**, `gl/test_ext_nv_path_rendering.py` and its
+  ES copy (99.2% identical), and the `glget_extensions` pair (89.5%).
+- **The `accelerate/tests` array contract**, still run only where the extension
+  is installed.
+- **Six failures under `PYOPENGL_USE_ACCELERATE=0`** with accelerate installed:
+  differences between the compiled and ctypes paths in NV path rendering, the
+  legacy ARB shader and program extensions, and one check script. Not a
+  configuration the matrix defines — `accel0` means accelerate is *not
+  installed* — so it is a separate investigation rather than a red axis.
+- **`SIZE_1_ARRAY_UNPACK` cannot be set from the environment**, alone among the
+  flags documented beside it in `OpenGL/__init__.py`. Setting
+  `OpenGL.SIZE_1_ARRAY_UNPACK` in code before the first import works; the
+  `PYOPENGL_` variable does nothing. Either it should be an `environ_key` like
+  its neighbours or the documentation should say it is not one.
