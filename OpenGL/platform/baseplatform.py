@@ -178,7 +178,15 @@ class BasePlatform(object):
         return func
 
     def wrapContextCheck(self, func, dll):
-        """Wrap function with context-checking if appropriate"""
+        """Wrap function with context-checking if appropriate
+
+        ``CONTEXT_CHECKING`` is a question about *GL*, and two display APIs
+        ship in the GL library rather than in one of their own: ``libGL``
+        exports ``glX*`` and ``opengl32`` exports ``wgl*``.  Their calls are
+        what a program makes to *get* a context, so a guard on one asks for a
+        context before there can be one and leaves no way to make the first.
+        EGL and CGL need no exemption, being libraries of their own.
+        """
         if (
             _configflags.CONTEXT_CHECKING
             and dll is self.GL
@@ -188,7 +196,7 @@ class BasePlatform(object):
                 'glGetStringi',
                 'glGetIntegerv',
             )
-            and not func.__name__.startswith('glX')
+            and not func.__name__.startswith(('glX', 'wgl'))
         ):
             return _CheckContext(func, self.CurrentContextIsValid)
         return func

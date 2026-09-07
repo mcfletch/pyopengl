@@ -109,6 +109,47 @@ class TestTheCheckerKnowsWhichApiItIsFor:
             'is where %s calls are made' % (api, api))
 
 
+class TestTheGuardIsNotPutOnTheCallsThatMakeAContext:
+    """The same rule, applied where the wrapper is put on rather than where the
+    checker is built.
+
+    GLX and WGL are the two display APIs that live in the *GL* library --
+    ``libGL`` exports ``glX*`` and ``opengl32`` exports ``wgl*`` -- so they are
+    the two that reach this wrapper at all, EGL and CGL being libraries of
+    their own.  A guard on either is a guard on the calls a program makes to
+    get a context in the first place, so with ``CONTEXT_CHECKING`` on there is
+    no way to make one.
+    """
+
+    def _entry(self, name):
+        """Something with a name, which is all the wrapper decides on."""
+        def entry():                       # pragma: no cover - never called
+            return None
+        entry.__name__ = name
+        return entry
+
+    @pytest.fixture
+    def checking(self, monkeypatch):
+        from OpenGL import _configflags
+
+        monkeypatch.setattr(_configflags, 'CONTEXT_CHECKING', True)
+        from OpenGL import platform
+
+        return platform.PLATFORM
+
+    def test_a_gl_call_is_guarded(self, checking):
+        """The discriminating case: GL is what the flag is for."""
+        entry = self._entry('glBindTexture')
+        assert checking.wrapContextCheck(entry, checking.GL) is not entry
+
+    @pytest.mark.parametrize('name', ['glXCreateContext', 'wglCreateContext'])
+    def test_a_display_api_call_is_not(self, name, checking):
+        entry = self._entry(name)
+        assert checking.wrapContextCheck(entry, checking.GL) is entry, (
+            '%s is how a context is made, so guarding it on one already being '
+            'current leaves no way to make the first' % (name,))
+
+
 #: Both entry-point implementations are held to this: whichever is selected,
 #: a call answers with its own result.
 DISPATCH = ['ctypes', 'c']
