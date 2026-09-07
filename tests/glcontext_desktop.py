@@ -114,6 +114,36 @@ class DesktopGLTestCaseBase(ContextTestCase):
             bound = self.getInteger(_gl.GL_FRAMEBUFFER_BINDING)
         return int(bound)
 
+    @contextlib.contextmanager
+    def framebuffer(self, fbo):
+        """Bind `fbo` for the block, and put back whatever was bound before.
+
+        Putting it back means rebinding what was there, not binding zero.
+        Framebuffer zero is the drawable's, and a headless CGL context has no
+        drawable: binding zero leaves the context with nothing complete to draw
+        into, and the next call that needs a framebuffer answers
+        ``GL_INVALID_FRAMEBUFFER_OPERATION`` -- reported against the drawing
+        call, which says nothing about the unbind that caused it.
+        """
+        started_with = self.draw_framebuffer()
+        _gl.glBindFramebuffer(_gl.GL_FRAMEBUFFER, fbo)
+        try:
+            yield fbo
+        finally:
+            _gl.glBindFramebuffer(_gl.GL_FRAMEBUFFER, started_with)
+
+    def require_vertex_arrays(self):
+        """Skip unless this context has vertex array objects.
+
+        Core since GL 3.0, and before that ``ARB_vertex_array_object``.  macOS
+        offers neither on the 2.1 profile that carries its fixed-function
+        pipeline: it has ``APPLE_vertex_array_object``, whose entry points are
+        the ``…APPLE`` ones.
+        """
+        self.require_feature(
+            'vertex array objects', (3, 0), 'GL_ARB_vertex_array_object'
+        )
+
     def compile_program(self, vertex_src, fragment_src, extra_stages=()):
         from OpenGL.GL import shaders, GL_VERTEX_SHADER, GL_FRAGMENT_SHADER
 

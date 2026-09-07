@@ -539,6 +539,26 @@ class ContextTestCase(unittest.TestCase):
         if name not in self.extensions():
             self.skipTest('extension %s not available' % (name,))
 
+    def require_feature(self, name, core, extension):
+        """Skip unless this context implements `name`, by version or extension.
+
+        ``bool(some_entry_point)`` answers a different question: whether the
+        *library* exports the symbol.  macOS exports every one of them from the
+        framework whatever the current context implements, so a 2.1 context
+        there resolves ``glGenVertexArrays``, calls it, and answers
+        ``GL_INVALID_OPERATION`` -- a GL error naming a call the guard had
+        already decided was available.  What a context implements is said by
+        its own version, or by an extension it lists.
+        """
+        found = self.version()
+        if found >= tuple(core) or extension in self.extensions():
+            return
+        self.skipTest(
+            'this context has no %s: it is GL %d.%d, below the %d.%d that '
+            'introduced them, and does not offer %s'
+            % (name, found[0], found[1], core[0], core[1], extension)
+        )
+
     def require_version(self, major, minor):
         if self.version() < (major, minor):
             self.skipTest('GL %d.%d required' % (major, minor))

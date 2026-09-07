@@ -111,6 +111,18 @@ def idle(*args, **named):
 if __name__ == "__main__":
     import sys
 
+    # The context-creation calls below are freeglut's addition; classic GLUT
+    # -- which is what macOS ships -- has no way to ask for a version, a
+    # profile or a flag, and no glutLeaveMainLoop to end on.  There is nothing
+    # here for this check to run against.
+    import checkutils
+
+    if not glutInitContextVersion:
+        checkutils.skip(
+            'this needs freeglut: the GLUT here exports no '
+            'glutInitContextVersion'
+        )
+
     newArgv = glutInit(sys.argv)
     glutInitContextVersion(3, 1)
     glutInitContextFlags(GLUT_FORWARD_COMPATIBLE | GLUT_DEBUG)

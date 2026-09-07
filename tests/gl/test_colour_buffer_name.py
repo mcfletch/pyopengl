@@ -31,14 +31,10 @@ class TestTheColourBufferName(GLTestCase):
 
     def test_a_framebuffer_object_is_named_by_its_attachment(self):
         self.require_extension('GL_ARB_framebuffer_object')
-        started_with = self.draw_framebuffer()
         fbo = int(glGenFramebuffers(1))
-        glBindFramebuffer(GL_FRAMEBUFFER, fbo)
         self.defer_cleanup(lambda: glDeleteFramebuffers(1, [fbo]))
-        try:
+        with self.framebuffer(fbo):
             assert self.colour_buffer_name() == GL_COLOR_ATTACHMENT0
-        finally:
-            glBindFramebuffer(GL_FRAMEBUFFER, started_with)
 
     def test_and_the_default_framebuffer_by_its_back_buffer(self):
         """Only where this backend has one to bind -- CGL does not."""

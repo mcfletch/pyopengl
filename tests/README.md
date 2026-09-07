@@ -107,10 +107,18 @@ Useful class attributes (override per test): `profile` (`'core'` /
 Helpers on the base classes:
 
 - `require_extension(name)` / `require_version(major, minor)` — skip if absent.
+- `require_feature(name, core, extension)` — skip unless the *context* has the
+  feature, either by being new enough or by listing the extension. Ask this
+  rather than `bool(some_entry_point)`, which is a question about the library:
+  see “A resolved entry point is not an implemented feature” below.
+  `require_vertex_arrays()` is the desktop shorthand for the common one.
 - `check_error(context='')` — assert no pending GL error.
 - `read_pixel` / `read_image` / `assert_pixel` — framebuffer readback.
 - `getString` / `getStringi` / `getInteger` / `version` / `extensions`.
 - `compile_program(vs, fs, extra_stages=())` — compile + link a program.
+- `framebuffer(fbo)` — a `with` block that binds `fbo` and then rebinds
+  whatever was bound before it, rather than binding zero. `colour_buffer_name()`
+  / `draw_framebuffer()` answer what this context draws into.
 - **`get_checked(fn, args, count, dtype)`** — call a `glGet*v` getter with an
   oversized, canary-filled buffer and assert it wrote no further than `count`
   elements. Use this when the output size is uncertain: a too-small buffer
@@ -146,6 +154,24 @@ torn down. The faulting frame is inside `libnvidia-eglcore`, reached through
 belongs to PyOpenGL. `gdb -q -batch -ex run -ex 'bt 40' --args python -m pytest
 …` catches it in a few attempts. Mesa and the macOS backends do not show it, so
 neither does CI.
+
+**Framebuffer zero is the drawable's, and a headless CGL context has no
+drawable.** So `glBindFramebuffer(GL_FRAMEBUFFER, 0)` — the usual shorthand for
+finishing with a framebuffer object — leaves a macOS context with nothing
+complete to draw into, and the next call that needs a framebuffer answers
+`GL_INVALID_FRAMEBUFFER_OPERATION` against itself, saying nothing about the
+unbind that caused it. Use `with self.framebuffer(fbo):`, which puts back
+whatever was bound before; where a case must bind by hand, restore
+`self.draw_framebuffer()` read *before* the bind, not zero.
+
+**A resolved entry point is not an implemented feature.** macOS exports every
+entry point from its framework whatever the current context implements, so
+`bool(glGenVertexArrays)` is true on the 2.1 legacy profile that carries its
+fixed-function pipeline — and the call then answers `GL_INVALID_OPERATION`,
+after the guard has already decided the feature was there. Ask the context:
+`require_feature(...)`, `require_extension(...)` or `require_version(...)`. On a
+driver that resolves only what it implements, the symbol guard hides this
+completely.
 
 A fixture or a child script that opens its own window — several must, for a
 hint `pick_backend` does not take or a question that is settled once per
@@ -244,3 +270,21 @@ TEST_VISIBLE=0 python -m pytest -q tests/
 The legacy `test_checks.py` runs `check_*.py` scripts out-of-process; those are
 windowed and are run in the default windowed mode even when the outer run uses
 the headless `egl` backend.
+
+A script that cannot run here says so by exiting 77 — `checkutils.skip(reason)`,
+or `checkutils.require('some.module')` for a dependency — which the harness
+reports as a skip. A script that instead dies on an import or a null entry point
+prints nothing, and no output is a *failure*, since that is how the harness
+tells a working check from a broken one.
+
+Two things a GLUT check script has to ask about, both of which classic GLUT
+(macOS's) answers differently from freeglut:
+
+- **Context creation.** `glutInitContextVersion`, `glutInitContextFlags`,
+  `glutInitContextProfile` and `glutSetOption` are freeglut's. A script that
+  needs them checks `if not glutInitContextVersion` and skips.
+- **Leaving the main loop.** Classic GLUT has no way out of `glutMainLoop`;
+  that gap is why freeglut added `glutLeaveMainLoop`. A script whose callback
+  ends the run must fall back to `os._exit(0)` where that entry point is
+  absent, or it spins until the harness times it out — having printed its `OK`,
+  so the log says the check succeeded and the run says it failed.

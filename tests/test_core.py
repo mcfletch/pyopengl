@@ -237,8 +237,7 @@ class TestCore(basetestcase.BaseTest):
             d.delete()
 
         def test_glgetbufferparameter(self):
-            if not glGenBuffers or not glGenVertexArrays:
-                return None
+            self.require_vertex_arrays()
             buffer = glGenBuffers(1)
             vertex_array = glGenVertexArrays(1, buffer)
             glBindBuffer(GL_ARRAY_BUFFER, buffer)
@@ -257,15 +256,13 @@ class TestCore(basetestcase.BaseTest):
             reason="Tests array unpack that is not configured",
         )
         def test_scalars_mapped_to_arrays(self):
-            if not glGenBuffers or not glGenVertexArrays:
-                return None
+            self.require_vertex_arrays()
             buffer = glGenBuffers(1)
             assert isscalar(buffer), type(buffer)
             glDeleteBuffers(1, buffer)
 
     def test_glbufferparameter_create(self):
-        if not glGenBuffers or not glGenVertexArrays:
-            return None
+        self.require_vertex_arrays()
         for create in [True, False]:
             buffer = glGenBuffers(1)
             vertex_array = glGenVertexArrays(1, buffer)
@@ -349,57 +346,55 @@ class TestCore(basetestcase.BaseTest):
             return False
         width = height = 128
         fbo = glGenFramebuffers(1)
-        glBindFramebuffer(GL_FRAMEBUFFER, fbo)
-        depthbuffer = glGenRenderbuffers(1)
-        glBindRenderbuffer(GL_RENDERBUFFER, depthbuffer)
-        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, width, height)
-        glFramebufferRenderbuffer(
-            GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthbuffer
-        )
+        with self.framebuffer(fbo):
+            depthbuffer = glGenRenderbuffers(1)
+            glBindRenderbuffer(GL_RENDERBUFFER, depthbuffer)
+            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, width, height)
+            glFramebufferRenderbuffer(
+                GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthbuffer
+            )
 
-        img = glGenTextures(1)
-        glBindTexture(GL_TEXTURE_2D, img)
-        # NOTE: these lines are *key*, without them you'll likely get an unsupported format error,
-        # ie. GL_FRAMEBUFFER_UNSUPPORTED
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
-        glTexImage2D(
-            GL_TEXTURE_2D,
-            0,
-            GL_RGB8,
-            width,
-            height,
-            0,
-            GL_RGB,
-            GL_INT,
-            None,  # no data transferred
-        )
-        glFramebufferTexture2D(
-            GL_FRAMEBUFFER,
-            GL_COLOR_ATTACHMENT0,
-            GL_TEXTURE_2D,
-            img,
-            0,  # mipmap level, normally 0
-        )
-        status = glCheckFramebufferStatus(GL_FRAMEBUFFER)
-        assert status == GL_FRAMEBUFFER_COMPLETE, status
-        glBindFramebuffer(GL_FRAMEBUFFER, fbo)
-        glPushAttrib(GL_VIEWPORT_BIT)  # viewport is shared with the main context
-        try:
-            glViewport(0, 0, width, height)
+            img = glGenTextures(1)
+            glBindTexture(GL_TEXTURE_2D, img)
+            # NOTE: these lines are *key*, without them you'll likely get an unsupported format error,
+            # ie. GL_FRAMEBUFFER_UNSUPPORTED
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+            glTexImage2D(
+                GL_TEXTURE_2D,
+                0,
+                GL_RGB8,
+                width,
+                height,
+                0,
+                GL_RGB,
+                GL_INT,
+                None,  # no data transferred
+            )
+            glFramebufferTexture2D(
+                GL_FRAMEBUFFER,
+                GL_COLOR_ATTACHMENT0,
+                GL_TEXTURE_2D,
+                img,
+                0,  # mipmap level, normally 0
+            )
+            status = glCheckFramebufferStatus(GL_FRAMEBUFFER)
+            assert status == GL_FRAMEBUFFER_COMPLETE, status
+            glPushAttrib(GL_VIEWPORT_BIT)  # viewport is shared with the main context
+            try:
+                glViewport(0, 0, width, height)
 
-            # rendering to the texture here...
-            glColor3f(1, 0, 0)
-            glNormal3f(0, 0, 1)
-            glBegin(GL_QUADS)
-            for v in [[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]]:
-                glColor3f(*v)
-                glVertex3d(*v)
-            glEnd()
-        finally:
-            glPopAttrib()
-            # restore viewport
-        glBindFramebuffer(GL_FRAMEBUFFER, 0)  # unbind
+                # rendering to the texture here...
+                glColor3f(1, 0, 0)
+                glNormal3f(0, 0, 1)
+                glBegin(GL_QUADS)
+                for v in [[0, 0, 0], [0, 1, 0], [1, 1, 0], [1, 0, 0]]:
+                    glColor3f(*v)
+                    glVertex3d(*v)
+                glEnd()
+            finally:
+                glPopAttrib()
+                # restore viewport
 
         glBindTexture(GL_TEXTURE_2D, img)
 
@@ -491,8 +486,7 @@ class TestCore(basetestcase.BaseTest):
             return
         previous = glGetIntegerv(GL_READ_BUFFER)
         fbo = glGenFramebuffers(1)
-        glBindFramebuffer(GL_FRAMEBUFFER, fbo)
-        try:
+        with self.framebuffer(fbo):
             img1, img2 = glGenTextures(2)
             for img in img1, img2:
                 glBindTexture(GL_TEXTURE_2D, img)
@@ -528,9 +522,9 @@ class TestCore(basetestcase.BaseTest):
                 glReadBuffer(GL_COLOR_ATTACHMENT1)
                 pixels = glReadPixels(0, 0, 10, 10, GL_RGB, GL_UNSIGNED_BYTE)
                 assert len(pixels) == 300, len(pixels)
-        finally:
-            glBindFramebuffer(GL_FRAMEBUFFER, 0)
 
+        # Back on the framebuffer the fixture drew into, so the buffer read off
+        # it at the start is one it still accepts.
         glReadBuffer(previous)
 
     def test_get_version(self):
@@ -652,8 +646,7 @@ class TestCore(basetestcase.BaseTest):
         assert len(records) == 1, records
 
     def test_orinput_handling(self):
-        if not glGenVertexArrays:
-            return None
+        self.require_vertex_arrays()
         x = glGenVertexArrays(1)
         x = int(x)  # check that we got x as an integer-compatible value
         x2 = GLuint()

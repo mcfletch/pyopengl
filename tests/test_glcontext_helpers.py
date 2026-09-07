@@ -6,6 +6,8 @@ they test: a version query the context does not serve, and a window GLFW
 refused reading as a window it made.
 """
 
+import unittest
+
 import glcontext
 import pytest
 
@@ -80,3 +82,69 @@ class TestWhetherGLFWMadeTheWindow:
 
     def test_nothing_at_all_is_not_a_window_either(self):
         assert not glcontext.window_was_made(None)
+
+
+class TestAskingWhetherTheContextHasIt:
+    """``bool(some_entry_point)`` is a question about the library, not the
+    context.  macOS exports every entry point from the framework whatever the
+    current context implements, so a guard written against the symbol admits a
+    2.1 context to a call that answers ``GL_INVALID_OPERATION`` -- reported
+    against the call, after the guard has already decided it was there.
+    """
+
+    class FakeContext:
+        require_feature = glcontext.ContextTestCase.require_feature
+
+        def __init__(self, version, extensions):
+            self._version = version
+            self._extensions = set(extensions)
+
+        def version(self):
+            return self._version
+
+        def extensions(self):
+            return self._extensions
+
+        def skipTest(self, reason):
+            raise unittest.SkipTest(reason)
+
+    def _ask(self, version, extensions):
+        self.FakeContext(version, extensions).require_feature(
+            'vertex array objects', (3, 0), 'GL_ARB_vertex_array_object'
+        )
+
+    def _expect_it_runs(self, version, extensions):
+        """Assert no skip, as an assertion rather than by not raising.
+
+        pytest turns a ``SkipTest`` raised inside a test into a skipped test,
+        so a case that only calls ``_ask`` reports green whichever way the
+        helper answers, and the half of this that says a context *has* the
+        feature would never fail.
+        """
+        try:
+            self._ask(version, extensions)
+        except unittest.SkipTest as err:
+            raise AssertionError(
+                'skipped a context that has vertex array objects: %s' % (err,)
+            ) from None
+
+    def test_a_context_with_it_in_core_runs(self):
+        self._expect_it_runs((3, 3), [])
+
+    def test_and_the_version_that_introduced_it_counts(self):
+        self._expect_it_runs((3, 0), [])
+
+    def test_an_older_one_offering_the_extension_runs_too(self):
+        self._expect_it_runs((2, 1), ['GL_ARB_vertex_array_object'])
+
+    def test_an_older_one_without_it_skips(self):
+        """macOS's legacy profile: 2.1, and the vendor extension instead."""
+        with pytest.raises(unittest.SkipTest) as caught:
+            self._ask((2, 1), ['GL_APPLE_vertex_array_object'])
+        reason = str(caught.value)
+        # what the context is, what would have been enough, and what it was
+        # asked for -- a skip saying only that something was absent leaves the
+        # reader to find out which of the three was the problem.
+        assert '2.1' in reason and '3.0' in reason, reason
+        assert 'GL_ARB_vertex_array_object' in reason, reason
+        assert 'vertex array objects' in reason, reason

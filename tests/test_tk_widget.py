@@ -208,7 +208,15 @@ class TestDrawing:
         assert scene.drawn == before + 1
 
     def test_what_was_drawn_is_in_the_buffer(self, scene):
-        """The clear colour the fixture set, read back.
+        """The clear colour the fixture set, read back while it is still there.
+
+        Read after ``render()`` instead, this would be asking for something no
+        driver promises: ``render`` ends in ``swapBuffers``, and what a swap
+        leaves in the back buffer is undefined.  A driver that flips rather
+        than copies leaves whatever was on screen -- here, zeros on the first
+        frame and the frame before on every one after, which is the same colour
+        and so reads as a pass for the wrong reason.  So the frame is drawn the
+        way ``render`` draws it and read before the swap.
 
         Within one count per channel, because the conversion from float to
         eight bits is the implementation's: 0.5 is 127.5 of 255, exactly
@@ -218,7 +226,8 @@ class TestDrawing:
         """
         from OpenGL.GL import GL_RGB, GL_UNSIGNED_BYTE, glReadPixels
 
-        scene.render()
+        assert scene.makeCurrent(), 'the widget is mapped, so it has a context'
+        scene.redraw()
         pixel = list(bytes(glReadPixels(2, 2, 1, 1, GL_RGB, GL_UNSIGNED_BYTE)))
         assert len(pixel) == 3, pixel
         for channel, (found, wanted) in enumerate(zip(pixel, (64, 128, 191))):

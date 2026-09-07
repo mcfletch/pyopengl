@@ -73,14 +73,14 @@ class TestTheFixtureActsOnIt:
     """The comparison is only worth having if setUp acts on it, and what it
     must do is skip: the case cannot run, and running it is the crash."""
 
-    def _case(self, reported, wanted):
+    def _case(self, reported, wanted, want_profile='core'):
         import unittest
 
         import glcontext
         from glcontext_desktop import DesktopGLTestCaseBase
 
         class Case(glcontext.pick_backend(), DesktopGLTestCaseBase):
-            profile = 'core'
+            profile = want_profile
             gl_version = wanted
 
             def getString(self, enum):
@@ -106,7 +106,10 @@ class TestTheFixtureActsOnIt:
         assert '3.3 asked for' in result.skipped[0][1]
 
     def test_a_context_that_meets_it_runs(self):
-        result = self._case(None, (2, 1))
+        # 2.1 in the compatibility profile: GL made the core/compatibility
+        # split at 3.2, so a core profile below it is not a thing to ask any
+        # driver for, and the backends that check say so before this does.
+        result = self._case(None, (2, 1), want_profile='compatibility')
         if result.errors:
             pytest.skip('no GL context here: %s' % (result.errors[0][1][-300:],))
         assert not result.skipped, result.skipped

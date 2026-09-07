@@ -2,7 +2,7 @@ from __future__ import print_function
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-import time, sys
+import os, time, sys
 
 resX, resY = (400, 300)
 
@@ -17,6 +17,12 @@ def display():
     sys.stdout.flush()
     if glutLeaveMainLoop:
         glutLeaveMainLoop()
+    else:
+        # Classic GLUT -- macOS's -- has no way out of glutMainLoop; that gap
+        # is why freeglut added glutLeaveMainLoop.  Everything this check set
+        # out to do is done and printed by here, so end the process rather than
+        # spin in the loop until the harness times the script out.
+        os._exit(0)
 
 
 if __name__ == "__main__":
