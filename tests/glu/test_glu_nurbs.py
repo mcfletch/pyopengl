@@ -138,5 +138,86 @@ class TestGLUNurbs(GLUTestCase):
         self.check_error('gluLoadSamplingMatrices')
 
 
+class TestTheRawBindingTakesItsOwnSizes(GLUTestCase):
+    """``OpenGL.raw.GLU`` is the same library without the size derivation.
+
+    The friendly ``gluNurbsSurface`` computes the knot counts, the strides and
+    the orders from the arrays it was handed; the raw binding takes all of them
+    as arguments and the caller's pointers as pointers.  A program embedding
+    PyOpenGL in existing C-shaped code uses that one, so a change to the
+    generated signature has to keep working here even though nothing about it
+    is convenient.
+    """
+
+    def setUp(self):
+        super().setUp()
+        self.set_projection()
+
+    def test_a_surface_through_the_raw_entry_points(self):
+        import ctypes
+
+        from OpenGL.GL import GLfloat
+        from OpenGL.raw import GLU as raw
+
+        knots = (GLfloat * 8)(0, 0, 0, 0, 1, 1, 1, 1)
+        control = (GLfloat * (3 * 4 * 4))(
+            -3., -3., -3.,  -3., -1., -3.,  -3.,  1., -3.,  -3.,  3., -3.,
+            -1., -3., -3.,  -1., -1.,  3.,  -1.,  1.,  3.,  -1.,  3., -3.,
+             1., -3., -3.,   1., -1.,  3.,   1.,  1.,  3.,   1.,  3., -3.,
+             3., -3., -3.,   3., -1., -3.,   3.,  1., -3.,   3.,  3., -3.,
+        )
+        nurb = raw.gluNewNurbsRenderer()
+        self.defer_cleanup(lambda: raw.gluDeleteNurbsRenderer(nurb))
+        raw.gluBeginSurface(nurb)
+        raw.gluNurbsSurface(
+            nurb,
+            8, ctypes.byref(knots),      # u knots
+            8, ctypes.byref(knots),      # v knots
+            4 * 3, 3,                    # u stride, v stride
+            ctypes.byref(control),
+            4, 4,                        # u order, v order
+            GL_MAP2_VERTEX_3,
+        )
+        raw.gluEndSurface(nurb)
+        self.check_error('raw gluNurbsSurface')
+
+
+class TestAMalformedCurveIsRefused(GLUTestCase):
+    """GLU reports a knot vector that does not fit its control points.
+
+    The counts are derived from the arrays, so a mismatch between them is
+    something only GLU can catch -- and it catches it by calling the error
+    callback, which PyOpenGL turns into a ``GLUerror``.  A binding that lost
+    that turns a caller's malformed data into a silent nothing.
+    """
+
+    def setUp(self):
+        super().setUp()
+        self.set_projection()
+
+    def malformed(self, knots, control):
+        from OpenGL import error
+
+        nurb = self.nurbs()
+        gluBeginCurve(nurb)
+        try:
+            with self.assertRaises(error.GLUerror):
+                gluNurbsCurve(nurb, knots, control, GL_MAP1_VERTEX_3)
+        finally:
+            gluEndCurve(nurb)
+
+    def test_too_few_knots_for_the_control_points(self):
+        self.malformed(
+            np.array([0, 1.0], 'f'),
+            np.array([[0, 0, 0], [1, 0, 0], [1, 1, 0]], 'f'),
+        )
+
+    def test_no_knots_at_all(self):
+        self.malformed(
+            np.array([], 'f'),
+            np.array([[0, 0, 0], [1, 0, 0], [1, 1, 0]], 'f'),
+        )
+
+
 if __name__ == '__main__':
     unittest.main()

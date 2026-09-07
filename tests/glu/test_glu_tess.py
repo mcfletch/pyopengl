@@ -8,6 +8,13 @@ import unittest
 from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
 from glutestcase import GLUTestCase
+from OpenGL.GL import (
+    GL_TRIANGLES,
+    glBegin,
+    glEnd,
+    glNormal3f,
+    glVertex3dv,
+)
 from OpenGL.GLU import (
     gluNewTess,
     gluDeleteTess,
@@ -35,6 +42,8 @@ from OpenGL.GLU import (
     GLU_TESS_WINDING_RULE,
     GLU_TESS_WINDING_ODD,
     GLU_TESS_WINDING_NONZERO,
+    GLU_TESS_WINDING_ABS_GEQ_TWO,
+    gluErrorString,
     GLU_TESS_BOUNDARY_ONLY,
     GLU_TESS_TOLERANCE,
     GLU_UNKNOWN,
@@ -204,6 +213,92 @@ class TestGLUTess(GLUTestCase):
         gluEndPolygon(tess)
         self.check_error('legacy contour api')
         self.assertTrue(events)
+
+
+    def test_a_callback_may_be_a_gl_entry_point(self):
+        """The classic arrangement: tessellate straight into immediate mode.
+
+        ``gluTessCallback(tess, GLU_TESS_BEGIN, glBegin)`` hands GLU the
+        wrapper itself, so GLU calls into PyOpenGL from a C callback with the
+        primitive enum it chose.  A Python function in between would convert
+        the argument on the way; this way the wrapper is what receives it.
+        """
+        tess = self.tessellator()
+        gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_ODD)
+        gluTessNormal(tess, 0.0, 0.0, 1.0)
+        gluTessCallback(tess, GLU_TESS_BEGIN, glBegin)
+        gluTessCallback(tess, GLU_TESS_VERTEX, glVertex3dv)
+        gluTessCallback(tess, GLU_TESS_END, glEnd)
+        gluTessCallback(tess, GLU_TESS_COMBINE, lambda coords, data, weight: coords)
+
+        glNormal3f(0.0, 0.0, 1.0)
+        gluTessBeginPolygon(tess, None)
+        gluTessBeginContour(tess)
+        for point in SQUARE:
+            gluTessVertex(tess, np.array(point, 'd'), np.array(point, 'd'))
+        gluTessEndContour(tess)
+        gluTessEndPolygon(tess)
+        self.check_error('tessellating into immediate mode')
+
+    def test_two_overlapping_contours_combine_at_both_crossings(self):
+        """SF#2354596: what the combine callback returns has to reach the
+        vertex callback, and be distinguishable there from an original vertex.
+
+        Two squares overlapping in one corner, tessellated in the
+        intersection-only winding rule, cross at exactly two points -- so the
+        combine callback is called twice, and the objects it returns arrive at
+        the vertex callback alongside the originals.  The count is the
+        assertion the report was about: collecting the results once and losing
+        them on the second crossing is the shape of the defect.
+        """
+        tess = self.tessellator()
+        arrived = []
+        crossings = []
+
+        def vertex(vertex_data, polygon_data=None):
+            arrived.append(vertex_data)
+            return polygon_data
+
+        def combine(coords, vertex_data, weights, _=None):
+            crossings.append(coords)
+            return ('combined', coords)
+
+        def error(code):
+            raise AssertionError(gluErrorString(code))
+
+        gluTessProperty(tess, GLU_TESS_WINDING_RULE, GLU_TESS_WINDING_ABS_GEQ_TWO)
+        gluTessCallback(tess, GLU_TESS_BEGIN, lambda which: None)
+        gluTessCallback(tess, GLU_TESS_END, lambda: None)
+        # An edge-flag callback switches strips and fans off, so every vertex
+        # arrives once as part of an independent triangle.
+        gluTessCallback(tess, GLU_TESS_EDGE_FLAG, lambda flag: None)
+        gluTessCallback(tess, GLU_TESS_VERTEX, vertex)
+        gluTessCallback(tess, GLU_TESS_ERROR, error)
+        gluTessCallback(tess, GLU_TESS_COMBINE, combine)
+
+        gluTessBeginPolygon(tess, arrived)
+        for contour in (
+            [(-1, 0, -1), (1, 0, -1), (1, 0, 1), (-1, 0, 1)],
+            [(0.5, 0, -0.5), (1.5, 0, -0.5), (1.5, 0, 0.5), (0.5, 0, 0.5)],
+        ):
+            gluTessBeginContour(tess)
+            for point in contour:
+                data = np.array(point, 'd')
+                gluTessVertex(tess, data, ('original', data))
+            gluTessEndContour(tess)
+        gluTessEndPolygon(tess)
+        self.check_error('intersecting two contours')
+
+        self.assertTrue(arrived, 'no vertex reached the callback')
+        combined = [v for v in arrived if v[0] == 'combined']
+        original = [v for v in arrived if v[0] == 'original']
+        self.assertTrue(combined, ('no combined vertex arrived', arrived))
+        self.assertTrue(original, ('no original vertex arrived', arrived))
+        self.assertEqual(
+            len(crossings), 2,
+            'two squares overlapping in one corner cross at two points; the '
+            'combine callback saw %d' % (len(crossings),),
+        )
 
 
 if __name__ == '__main__':

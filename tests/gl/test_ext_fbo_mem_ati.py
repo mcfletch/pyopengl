@@ -4,6 +4,8 @@ core blit/multisample/layered-attachment, GL_EXT_memory_object (+ _fd external
 import) and GL_ATI_fragment_shader (legacy register combiners)."""
 
 import unittest
+
+from OpenGL import acceleratesupport
 from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
 from gltestcase import GLTestCase
@@ -284,6 +286,46 @@ class TestATIFragmentShader(GLTestCase):
             glSetFragmentShaderConstantATI(GL_CON_0_ATI, np.zeros(4, 'f'))
             glDeleteFragmentShaderATI(sid)
         self.check_error('ATI fragment shader')
+
+
+class TestAttachingATextureToAnEXTFramebuffer(GLTestCase):
+    """SF#2946228: attaching a texture used to raise where nothing was wrong.
+
+    ``glFramebufferTexture2DEXT`` raised spuriously with the C accelerator
+    switched off, so the configuration this is about is the one without it.
+    Whether the accelerator is in use is decided when the wrappers are built
+    and cannot be changed from here, so this asks rather than sets: run with
+    ``PYOPENGL_USE_ACCELERATE=0``, which ``OpenGL/__init__.py`` reads before
+    anything consults it, or on a tox ``accel0`` axis, where it is not
+    installed at all.
+    """
+
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    @unittest.skipIf(
+        acceleratesupport.ACCELERATE_AVAILABLE,
+        'the defect was in the path without the C accelerator; run with '
+        'PYOPENGL_USE_ACCELERATE=0',
+    )
+    def test_attaching_a_texture_does_not_raise(self):
+        self.require_extension('GL_EXT_framebuffer_object')
+        tex = int(glGenTextures(1))
+        glBindTexture(GL_TEXTURE_2D, tex)
+        glTexImage2D(
+            GL_TEXTURE_2D, 0, GL_RGBA8, 512, 512, 0, GL_RGBA, GL_UNSIGNED_BYTE, None
+        )
+        glBindTexture(GL_TEXTURE_2D, 0)
+
+        fbo = int(glGenFramebuffersEXT(1))
+        with self.framebuffer(fbo):
+            glBindTexture(GL_TEXTURE_2D, tex)
+            glFramebufferTexture2DEXT(
+                GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, tex, 0
+            )
+        self.check_error('attaching a texture to an EXT framebuffer')
+        glDeleteTextures(1, [tex])
+        glDeleteFramebuffersEXT(1, [fbo])
 
 
 if __name__ == '__main__':
