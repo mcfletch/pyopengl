@@ -9,6 +9,17 @@ from checkutils import SKIP_EXIT_CODE
 
 WAYLAND = os.environ.get('XDG_SESSION_TYPE') == 'wayland'
 
+#: How long one check script may take before it is killed and the case fails.
+#:
+#: These open a window and talk to a driver, so any of them can wait forever on
+#: a machine none of us can log into: a GLUT window that never maps, a driver
+#: waiting on a compositor that will not answer.  Without a limit that is not a
+#: failed case but a job that runs until the whole run is cancelled, saying
+#: nothing about which script it was waiting for.  Generous, because the point
+#: is to bound a hang rather than to time anything: the slowest of these takes
+#: about five seconds on a software rasteriser.
+CHECK_TIMEOUT = float(os.environ.get('TEST_CHECK_TIMEOUT', '120'))
+
 try:
     import numpy
 except ImportError:
@@ -99,11 +110,21 @@ def check_test(func):
             env=env,
         )
         try:
-            stdout, stderr = pipe.communicate()
+            stdout, stderr = pipe.communicate(timeout=CHECK_TIMEOUT)
         except subprocess.TimeoutExpired:
             log.warning('TIMEOUT on %s', filename)
             pipe.kill()
-            raise
+            stdout, stderr = pipe.communicate()
+            raise AssertionError(
+                '%s did not finish within %d seconds, and was killed.\n'
+                'stdout: %s\nstderr: %s'
+                % (
+                    filename,
+                    CHECK_TIMEOUT,
+                    stdout.decode('utf-8', errors='ignore').strip(),
+                    stderr.decode('utf-8', errors='ignore').strip(),
+                )
+            ) from None
         except subprocess.CalledProcessError as err:
             log.warning('ERROR reported by process: %s', err)
             raise
