@@ -727,3 +727,70 @@ better one.
   `OpenGL.SIZE_1_ARRAY_UNPACK` in code before the first import works; the
   `PYOPENGL_` variable does nothing. Either it should be an `environ_key` like
   its neighbours or the documentation should say it is not one.
+
+
+---
+
+## A second pass
+
+Seven follow-ups, all landed.
+
+| | before | after |
+|---|---|---|
+| `PYOPENGL_SIZE_1_ARRAY_UNPACK=0` | not settable at all; 312 failed once it was | 3,139 passed / 485 skipped |
+| `PYOPENGL_DISPATCH=c` | — | 3,140 / 484 |
+| `exercise()` sites with a stated reason | 0 of 98 | 98 of 98 |
+| Errors `exercise()` may swallow | any | three, and counted |
+| `nv_path_rendering` | two files, 99.2% identical | 243 shared, two of 25 |
+
+### The name collision, and what it really was
+
+Not a name collision at all. A context's extension list is cached against its
+handle; a handle is an address the driver hands out again; and `forget_context`
+retired the dispatch table without dropping that cache. So the next context on
+the address read the dead one's extension list, and every entry point gated on
+an extension only the new context has was refused —
+`bool(glTexParameterIivEXT)` answering False under an ES context that exports
+it. That is why fourteen ES cases ran or skipped depending on collection order,
+and why `pytest-xdist` looked faster while testing less.
+
+`forget_context` now drops what *describes* a context and nothing else. Not
+`contextdata.cleanupContext`, which also releases the client array pointers the
+driver may still be reading — its own docstring warns that doing so is a
+protection fault, and doing it here segfaulted the run.
+
+`require_entrypoint` in `glcontext.py` exists to paper over this and can
+probably go; it is left in place because nothing now needs it and removing it
+is a separate change.
+
+### Also found
+
+- **The output-array guard was missing from a third path.** It is in the C
+  dispatch layer, and (from the first pass) in the pure-Python converters — but
+  `OpenGL_accelerate`'s Cython `SizedOutputOrInput` had neither, and that is
+  what runs with accelerate installed and `PYOPENGL_DISPATCH=ctypes`. The new
+  overrun test aborted there.
+- **`SIZE_1_ARRAY_UNPACK`'s off-mode was broken library-wide.** Twenty-three
+  places read a size-1 query for themselves with `int()`, which numpy refuses
+  for an array that is not zero-dimensional. `OpenGL/_scalar.py` holds the one
+  answer now. One of those was a defect in the *default* configuration too:
+  `_as_address` could not read a pointer that arrived in a one-element array,
+  so `use_debug_output` reported no application callback installed and PyOpenGL
+  would have taken over one that was not its to take.
+- **`run_in_child` defaults to asserting exit zero**, which is wrong for the
+  four modules that read exit 77 as "nothing here to test with" — they reported
+  a skip as a failure. Introduced by the first pass's conversion; fixed.
+
+### Still open
+
+- **`PYOPENGL_DISPATCH=ctypes` with accelerate installed: 6 failures**, in the
+  legacy ARB shader and program extensions and NV path rendering. They fail at
+  the commit this work started from, so they are a difference between the
+  compiled and ctypes paths rather than anything here. CI runs `dispctypes`
+  only with `accel0`, which is why nothing had reported them. Worth a session
+  of its own.
+- **`pytest-xdist`** — now that the caches follow their context, the reason it
+  tested less is gone. It is still not adopted: that would want measuring
+  again, against these counts.
+- The `accelerate/tests` array contract, still run only where the extension is
+  installed.
