@@ -32,9 +32,16 @@ from __future__ import print_function
 
 from OpenGL._configflags import ERROR_ON_COPY
 
+#: Whether numpy itself is installed, as against the shim standing in for it.
+#: ``np`` is always something, so ``not np`` is never true and is not the guard
+#: a case wanting numpy proper is looking for -- this is.
+HAVE_NUMPY = True
+
 try:
     import numpy as np  # noqa: F401  (re-exported)
 except ImportError:
+    HAVE_NUMPY = False
+
     from OpenGL.arrays._arrayconstants import GL_INTPTR, GL_SIZEIPTR
     from OpenGL.arrays.ctypesarrays import CtypesArrayHandler as _handler
 
@@ -165,15 +172,23 @@ def one(generated):
 
     ``SIZE_1_ARRAY_UNPACK`` decides whether a call that makes one object hands
     back the name or a one-element array holding it, so a caller that has not
-    pinned the flag has to read both.  ``int()`` alone does not: numpy refuses
-    to convert an array that is not zero-dimensional, so
-    ``int(glGenTextures(1))`` -- which reads like the careful spelling -- works
-    only while the flag is on.
+    pinned the flag has to read both.  ``int()`` alone does not: it cannot read
+    a ctypes array at all, and for a numpy one it depends on the numpy --
+    converting an array that is not zero-dimensional raises on some versions
+    and warns on others, and a warning is an error here, which is neither the
+    exception the fallback catches nor a value.
+
+    So ask the shape rather than letting the conversion decide: what has a
+    length holds the name, and what does not is the name.  ``.value`` is the
+    last step for a ctypes scalar, which carries its number there.
     """
     try:
-        return int(generated)
+        len(generated)
     except TypeError:
-        return int(generated[0])
+        pass                            # a single value already
+    else:
+        generated = generated[0]
+    return int(getattr(generated, 'value', generated))
 
 
 def object_names(*values):

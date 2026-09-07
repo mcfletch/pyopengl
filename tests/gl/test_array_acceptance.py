@@ -14,7 +14,7 @@ import unittest
 
 import pytest
 
-from arraycompat import np, object_names, one
+from arraycompat import HAVE_NUMPY, np, object_names, one
 from gltestcase import GLTestCase
 import OpenGL
 from OpenGL import acceleratesupport, arrays, error, _configflags
@@ -157,7 +157,7 @@ class TestArraysReachingTheEntryPoints(GLTestCase):
         s = struct.pack('>iiii', 2, 3, 4, 5) * 2
         glVertexPointer(4, GL_INT, 0, s)
 
-    @pytest.mark.skipif(not np, reason="Numpy not available")
+    @pytest.mark.skipif(not HAVE_NUMPY, reason='needs numpy itself, not the shim')
     def test_numpyConversion(self):
         """Test that we can run a numpy conversion from double to float for glColorArray"""
         a = np.arange(0, 1.2, 0.1, 'd').reshape((-1, 3))
@@ -168,7 +168,7 @@ class TestArraysReachingTheEntryPoints(GLTestCase):
         finally:
             glDisableClientState(GL_VERTEX_ARRAY)
 
-    @pytest.mark.skipif(not np, reason="Numpy not available")
+    @pytest.mark.skipif(not HAVE_NUMPY, reason='needs numpy itself, not the shim')
     def test_glbuffersubdata_numeric(self):
         from OpenGL.arrays import vbo
 
@@ -193,7 +193,7 @@ class TestArraysReachingTheEntryPoints(GLTestCase):
                 np.array([1, 1, 1], dtype='f'),
             )
 
-    @pytest.mark.skipif(not np, reason="Numpy not available")
+    @pytest.mark.skipif(not HAVE_NUMPY, reason='needs numpy itself, not the shim')
     @pytest.mark.skipif(OpenGL.ERROR_ON_COPY, reason="Test requires array copy")
     def test_copyNonContiguous(self):
         """Test that a non-contiguous (transposed) array gets applied as a copy"""

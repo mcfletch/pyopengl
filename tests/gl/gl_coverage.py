@@ -32,10 +32,15 @@ def version_sources():
     is where the commands live: they were files of ``def gl...`` once, and
     scanning for those quietly reported nothing at all once they stopped being.
     """
-    from OpenGL._dispatch import _c
+    # The shipped tables rather than the compiled extension, which is None
+    # wherever accelerate is not installed -- and the two describe the same
+    # set, which is why the finder reads the tables for this even when the
+    # extension is there to answer.
+    from OpenGL import _declarations
 
+    declarations = _declarations.data_declarations()
     names = []
-    for module in _c.module_names():
+    for module in declarations.module_names():
         if not module.startswith('OpenGL.raw.GL.VERSION.GL_'):
             continue
         tail = module.rsplit('.', 1)[-1]            # GL_1_0
@@ -46,7 +51,7 @@ def version_sources():
         names.append((order, tail, module))
     out = []
     for _order, tail, module in sorted(names):
-        contents = _c.module_contents(module) or {}
+        contents = declarations.module_contents(module) or {}
         # Each command is (name, argument names, ctypes signature).
         out.append((tail, {entry[0] for entry in contents.get('commands') or ()}))
     return out

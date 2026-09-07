@@ -14,8 +14,13 @@ known until there is a context, deferred until something asks for it.
 
 import unittest
 
+import json
+
+import pytest
+
 from arraycompat import one
-from childenv import json_from_child
+from checkutils import SKIP_EXIT_CODE
+from childenv import run_in_child
 from gltestcase import GLTestCase
 from OpenGL.extensions import GLQuerier, hasGLExtension
 from OpenGL.GL import *  # noqa: F401,F403
@@ -56,14 +61,22 @@ class TestTheContextIdentifiesItself(GLTestCase):
 #: whether ``pullVersion`` can stand on its own.
 VERSION_FIRST = r'''
 import json
-import os
+import unittest
 
-os.environ.setdefault('PYOPENGL_PLATFORM', 'egl')
-
-report = {}
+from checkutils import skip
 from glcontext import Context
 
-with Context(profile='compatibility', gl_version=(2, 1)):
+# A machine with no context to give -- a macOS runner with no window server,
+# say -- has nothing to ask, and that is a skip rather than an answer.  The
+# backend says so by raising SkipTest, which would otherwise leave here as a
+# non-zero exit and read as the query having failed.
+try:
+    context = Context(profile='compatibility', gl_version=(2, 1))
+except unittest.SkipTest as err:
+    skip(str(err))
+
+report = {}
+with context:
     from OpenGL.extensions import GLQuerier
 
     try:
@@ -85,7 +98,11 @@ class TestTheVersionIsReadableOnItsOwn(unittest.TestCase):
     """
 
     def answer(self, **environment):
-        return json_from_child(VERSION_FIRST, **environment)
+        completed = run_in_child(VERSION_FIRST, check=False, **environment)
+        if completed.returncode == SKIP_EXIT_CODE:
+            pytest.skip(completed.stdout.strip() or 'no context to ask')
+        assert completed.returncode == 0, completed.stderr[-2000:]
+        return json.loads(completed.stdout)
 
     def test_the_querier_answers_under_ctypes(self):
         answered = self.answer(PYOPENGL_DISPATCH='ctypes')
