@@ -178,11 +178,15 @@ suite is run under them, because they change what the entry points do:
 |---|---|
 | `PYOPENGL_ERROR_ON_COPY=1` | The caller refuses the implicit copy PyOpenGL makes for a Python sequence or a mismatched array. Cases whose subject *is* that conversion skip, saying so; the rest keep working. Build data with `arraycompat.copy_safe` where the list was incidental, and `arraycompat.object_names` for GL object names. |
 | `PYOPENGL_ARRAY_SIZE_CHECKING=0` | The output-size check is off. The cases that assert the refusal skip. |
-| `PYOPENGL_USE_ACCELERATE=0` | The compiled accelerators are off, whether or not they are installed. Ask `OpenGL.dispatch.settle()`, not `_dispatch.AVAILABLE`: the extension being *importable* is not the same as its entry points being the ones installed. |
+| `PYOPENGL_SIZE_1_ARRAY_UNPACK=0` | A query producing one value answers with a one-element array rather than the value. Read such an answer with `OpenGL._scalar.as_int`, which is what the library itself does. |
+| `PYOPENGL_USE_ACCELERATE=0` | The compiled accelerators are off, whether or not they are installed. Ask `OpenGL.dispatch.settle()`, not `_dispatch.AVAILABLE`, and `acceleratesupport.ACCELERATE_AVAILABLE` rather than `import OpenGL_accelerate`: the extension being *importable* is not the same as its entry points being the ones installed. |
 
 `tox.ini` carries these as a `flag{...}` factor on the newest interpreter,
 crossed with numpy and accelerate — which is what an array flag is a claim
-about — rather than across the whole interpreter sweep.
+about — rather than across the whole interpreter sweep. `USE_ACCELERATE` is
+the `useaccel0` factor instead, since it needs accelerate *built* to say
+anything: a run with the extension absent cannot tell a guard that asks
+whether the extension is in use from one that asks whether it can be imported.
 
 **Passing a list is not a bug to fix.** It is how the list handler gets
 exercised, and PyOpenGL copying it is the documented default. `copy_safe` is

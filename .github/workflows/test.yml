@@ -50,7 +50,19 @@ jobs:
           # dispatch layer it carries actually selected.  conftest refuses this
           # combination if the extension did not build, so the axis cannot pass
           # while testing ctypes under another name.
-          - {python: '3.12', toxenv: py312-num1-accel1-dispc}
+          - {python: '3.12', toxenv: py312-num1-accel1-dispc,
+             paths: 'tests/ accelerate/tests'}
+          # The accelerated converters reached through the ctypes entry points,
+          # which is what an installed accelerate gives a caller who has asked
+          # for ctypes -- and a combination neither of the two above covers,
+          # since one has no accelerate and the other takes the C layer.
+          - {python: '3.14', toxenv: py314-num1-accel1-dispctypes,
+             paths: 'tests/ accelerate/tests'}
+          # The same build with the accelerators declined at runtime.  Absent
+          # and switched off are different configurations, and only this one
+          # can catch a guard that decides by trying the import.
+          - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-useaccel0,
+             paths: 'tests/ accelerate/tests'}
           # Without numpy, which is an optional dependency and so a supported
           # way to have PyOpenGL installed.
           - {python: '3.12', toxenv: py312-num0-accel0-dispctypes}
@@ -59,9 +71,12 @@ jobs:
           # ERROR_ON_COPY, and a heap overrun reachable without the compiled
           # accelerator, both went unreported.  One interpreter is enough: a
           # flag about array conversion is not a claim about the interpreter.
-          - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-flagerrorcopy}
-          - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-flagnosizecheck}
-          - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-flagnounpack}
+          - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-flagerrorcopy,
+             paths: 'tests/ accelerate/tests'}
+          - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-flagnosizecheck,
+             paths: 'tests/ accelerate/tests'}
+          - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-flagnounpack,
+             paths: 'tests/ accelerate/tests'}
     env:
       # The headless EGL-device backend, on the software device.  Both are read
       # by tests/glcontext_egl.py, and tox passes them through.
@@ -118,10 +133,15 @@ jobs:
         # need no display, but the stand-alone check scripts open a window and
         # skip where they cannot -- twenty of them, which is a green run that
         # exercised no windowing at all.  `-a` picks a free server number.
+        #
+        # The paths are named here rather than left to tox's own default,
+        # because `-m` below is itself a positional argument: with anything in
+        # posargs the default never renders, which is how the accelerate
+        # suites came to run in no job at all.
         run: >
           xvfb-run -a
           python -m tox -e ${{ matrix.toxenv }} --
-          ${{ inputs.tests || 'tests/' }} -m "not performance"
+          ${{ inputs.tests || matrix.paths || 'tests/' }} -m "not performance"
 
   macos:
     name: macOS ${{ matrix.os }} / CGL / ${{ matrix.toxenv }}
