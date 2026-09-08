@@ -201,7 +201,7 @@ class TestForgettingAContextAsksWhetherThereIsOneToAsk:
         getter = getattr(platform.PLATFORM, 'GetCurrentContext', None)
         if getter is None:                  # pragma: no cover - has one here
             pytest.skip('this platform cannot say which context is current')
-        assert dispatch._current_context() == int(getter() or 0)
+        assert dispatch._current_context() == dispatch._as_address(getter())
 
 
 class TestTheFlagIsOnlyReadWhereSomethingSetsIt:

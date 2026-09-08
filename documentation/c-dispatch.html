@@ -177,6 +177,12 @@ the handle <code>OpenGL.platform.PLATFORM.GetCurrentContext()</code> returns.
 Exact and free, for a program willing to say so.</li>
 </ul>
 
+<p>The handle goes in whichever shape names a context on the platform: an
+<code>int</code> from WGL or CGL, a <code>c_void_p</code>, or a ctypes pointer
+such as GLX's <code>GLXContext</code>.  A toolkit that holds the object its own
+API handed it passes that object; <code>None</code> or a null pointer names no
+context.</p>
+
 <p><code>OpenGL.dispatch.forget_context(handle)</code> releases a destroyed
 context's table.  A table is a slot and a flag per entry point, about
 43 KB, so a hundred live contexts cost 4.3 MB.</p>

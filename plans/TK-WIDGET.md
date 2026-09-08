@@ -188,10 +188,23 @@ context, and answer `makeCurrent` / `swapBuffers` / `setSwapInterval` from it.
 `OpenGL/Tk/context.py` already dispatches on `tk windowingsystem`, so an `aqua`
 implementation registers beside the other two and nothing else moves.
 
-## Four defects X11 turned up
+## Five defects X11 turned up
 
 Each was found by needing it, and each is fixed with a test of its own.
 Windows turned up its own, [above](#what-windows-turned-up).
+
+**A context handle could not be read as an address.**  `nowCurrent` and `gone`
+turned the widget's handle into the integer the dispatch tables are keyed by
+with `int(handle)`, and `int()` reads anything offering the buffer protocol --
+which every ctypes object does -- as a string of digits.  GLX's `GLXContext` is
+a pointer to an opaque struct, so every one of the widget's `makeCurrent` calls
+raised `ValueError: invalid literal for int() with base 10: b'@\xeb...'`, and
+the 13 windowed cases went with it.  WGL's `HGLRC` fails the same way; it
+survived only because the shape reaching `nowCurrent` there is a plain `int`.
+The conversion belongs at the dispatch boundary rather than in each caller, so
+`OpenGL.dispatch.make_current` and `forget_context` now take the handle in
+whichever shape names a context on the platform, and the Tk helpers pass what
+they hold.  `tests/bindings/dispatch/test_context_handles.py`.
 
 **Every GLX extension read as absent.**  `_GLXQuerier.getDisplay()` passed a
 `str` to `XOpenDisplay`, which takes a `char *`; with no `argtypes` set ctypes

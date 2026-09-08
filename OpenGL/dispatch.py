@@ -221,7 +221,10 @@ def make_current(handle):
 
     Call this wherever the application makes a context current, so that N
     contexts in one process each resolve and hold their own entry points.  The
-    handle is the one ``OpenGL.platform.PLATFORM.GetCurrentContext()`` returns.
+    handle is the one ``OpenGL.platform.PLATFORM.GetCurrentContext()`` returns,
+    in whichever shape that platform names a context by -- an ``int``, a
+    ``c_void_p``, or a ctypes pointer such as GLX's ``GLXContext``.  ``None``
+    or a null pointer names no context.
 
     It is worth calling under either implementation.  The C one dispatches
     through the named context's table from here on; the ctypes one has no
@@ -231,12 +234,13 @@ def make_current(handle):
     global _ctypes_current_context
 
     _end_suspended_block()
+    address = _as_address(handle)
     layer = _layer()
     if layer is not None:
-        layer.make_current(int(handle or 0))
+        layer.make_current(address)
     else:
         _drop_unnamed_arming()
-        _ctypes_current_context = int(handle or 0)
+        _ctypes_current_context = address
     # Before the offer, which may arm this context and start the reading
     # itself: what this settles is the context that arrives *unarmed*.
     _follow_debug_output()
@@ -253,7 +257,7 @@ def forget_context(handle):
     aside ones at a moment the caller says is quiet.
     """
     _end_suspended_block()
-    handle = int(handle or 0)
+    handle = _as_address(handle)
     if handle and handle in _installed_callbacks and handle == _current_context():
         # Take our callback back out while there is still a context to take it
         # out of.  The driver holds the address until something replaces it,
@@ -477,8 +481,8 @@ def _current_context():
     from OpenGL import platform
 
     try:
-        return int(platform.PLATFORM.GetCurrentContext() or 0)
-    except Exception:  # pragma: no cover - a platform with no way to ask
+        return _as_address(platform.PLATFORM.GetCurrentContext())
+    except Exception:
         return None
 
 
@@ -880,13 +884,24 @@ def _callback_address(callback):
 
 
 def _as_address(value):
-    """A pointer the GL handed back, as a plain integer.
+    """A pointer, as a plain integer, in whichever shape it arrived.
 
-    ``glGetPointerv`` answers with whatever the array handler in use returns --
-    a numpy scalar where numpy is installed, a ctypes pointer where it is not,
-    and a one-element array holding either where ``SIZE_1_ARRAY_UNPACK`` is
-    off.  Reading that last one as zero would say no application callback is
-    installed, and PyOpenGL would take one over that is not its to take.
+    Two sources produce these.  A context handle comes from the platform,
+    which declares its getter as the type its API names: ``c_void_p`` on WGL
+    and CGL, so an ``int``, and ``GLXContext`` on GLX, so a ctypes pointer to
+    an opaque struct.  A callback address comes back from ``glGetPointerv``
+    through the array handler in use -- a numpy scalar where numpy is
+    installed, a ctypes pointer where it is not, and a one-element array
+    holding either where ``SIZE_1_ARRAY_UNPACK`` is off.  Read as zero, that
+    last one would say no application callback is installed, and PyOpenGL
+    would take one over that is not its to take.
+
+    Each is asked what it is rather than handed to ``int()`` to see how it
+    fails.  ``int()`` reads anything offering the buffer protocol as a string
+    of digits, and every ctypes object offers one: a pointer put through it
+    is not refused as the wrong kind of thing but accepted and then reported
+    as a misspelt number -- and, in the rare case where the bytes of an
+    address are all digits, accepted and answered wrongly.
     """
     if value is None:
         return 0
@@ -896,10 +911,22 @@ def _as_address(value):
     # saying it is not a sequence.
     if hasattr(value, '__len__') and len(value) == 1:
         value = value[0]
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        try:
-            return ctypes.cast(value, ctypes.c_void_p).value or 0
-        except ctypes.ArgumentError:  # pragma: no cover - an answer we cannot read
+        if value is None:
             return 0
+    # An integer, or something that is one on request: numpy's scalars are.
+    if hasattr(value, '__index__'):
+        return int(value)
+    # A pointer-sized scalar, whose value *is* the address: c_void_p, and
+    # WGL's HGLRC and HDC.  Those are declared as simple types rather than as
+    # pointer classes, because ctypes shares every reference to c_void_p and a
+    # shared one would disable the array machinery for everything else -- so
+    # neither ``isinstance`` against a pointer class nor ``ctypes.cast``
+    # recognises one.  The same rule is stated for the C layer as
+    # ``OpenGL._dispatch.support.is_pointer_sized``.
+    if (isinstance(value, ctypes._SimpleCData)
+            and getattr(type(value), '_type_', None) == 'P'):
+        return value.value or 0
+    try:
+        return ctypes.cast(value, ctypes.c_void_p).value or 0
+    except ctypes.ArgumentError:  # pragma: no cover - an answer we cannot read
+        return 0

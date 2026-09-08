@@ -613,6 +613,13 @@ def current_context():
     The platform layer is the only thing that knows which interface owns it:
     a Linux process can hold GLX and EGL contexts at once, and asking the
     wrong one answers "none".
+
+    Read through :func:`as_pointer`, because :meth:`GetCurrentContext` is
+    documented for the opaque pointer a platform names a context by and every
+    platform answers in the shape its own API declares.  ``int()`` would not
+    do: handed anything offering the buffer protocol -- which every ctypes
+    object does -- it reads the bytes as a string of digits, so a pointer
+    falls to the 0 below, which says no context is current while one is.
     """
     try:
         # Probing means loading EGL and GLX to ask each of them, and loading
@@ -621,10 +628,12 @@ def current_context():
         # an interface already loaded -- but CONTEXT_CHECKING is a caller
         # asking to be told when no context is current, and that answer cannot
         # be had without asking.  The flag is what buys the probe.
-        return int(platform.PLATFORM.GetCurrentContext(probe=probe_allowed()) or 0)
+        return as_pointer(
+            platform.PLATFORM.GetCurrentContext(probe=probe_allowed())
+        )
     except TypeError:  # a platform whose signature predates the argument
         try:
-            return int(platform.PLATFORM.GetCurrentContext() or 0)
+            return as_pointer(platform.PLATFORM.GetCurrentContext())
         except Exception:
             return 0
     except Exception:

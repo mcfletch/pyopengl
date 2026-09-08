@@ -51,7 +51,7 @@ def nowCurrent(handle: object) -> None:
     """
     from OpenGL import _dispatch
 
-    _dispatch.make_current(int(handle or 0))
+    _dispatch.make_current(handle)
 
 
 def gone(handle: object) -> None:
@@ -65,7 +65,7 @@ def gone(handle: object) -> None:
     """
     from OpenGL import _dispatch
 
-    _dispatch.forget_context(int(handle or 0))
+    _dispatch.forget_context(handle)
 
 #: What each of Tk's windowing systems is served by.  ``aqua`` is absent, and
 #: :func:`createContext` says what that costs.

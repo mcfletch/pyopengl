@@ -311,7 +311,7 @@ def forget_context(handle):
         from OpenGL import _dispatch
     except ImportError:                    # pragma: no cover - ctypes-only build
         return
-    _dispatch.forget_context(int(handle))
+    _dispatch.forget_context(handle)
 
 
 def parse_gl_version(reported):

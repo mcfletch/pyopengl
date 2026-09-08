@@ -782,11 +782,11 @@ class OffscreenContext:
         # resolves in whichever context the layer believes is current.  Left
         # unsaid, that is the context being destroyed, whose table does not
         # have it.
-        _dispatch.make_current(int(booted.context or 0))
+        _dispatch.make_current(booted.context)
         try:
             if self.context:
                 if forget:
-                    _dispatch.forget_context(int(self.context))
+                    _dispatch.forget_context(self.context)
                 WGL.wglDeleteContext(HGLRC(self.context))
                 self.context = None
             self._release_pbuffer(self.handle, self.dc)
@@ -800,7 +800,7 @@ class OffscreenContext:
             # the layer goes on dispatching through the bootstrap's table -- a
             # legacy context that has resolved almost nothing -- and reports
             # entry points the caller's own context had as undefined.
-            _dispatch.make_current(int(was_context or 0) if restore else 0)
+            _dispatch.make_current(was_context if restore else 0)
 
     def __enter__(self):
         return self

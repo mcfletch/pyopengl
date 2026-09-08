@@ -20,14 +20,30 @@ dispatch = pytest.importorskip('OpenGL.dispatch')
 
 @pytest.fixture
 def ctypes_armed(monkeypatch):
-    """The ctypes implementation, armed against a context nothing named."""
+    """The ctypes implementation, armed against a context nothing named.
+
+    Armed means both halves: a callback recorded under 0, *and* the checker
+    reading the flag that callback sets.  Pinning only the first would leave
+    the second as whatever the process was last left in, and
+    ``_follow_debug_output`` re-points on a change -- so the same call would
+    stop the reading once or twice depending on which files this worker
+    happened to run before this one.
+
+    The stub for the stop keeps that flag's invariant while it records, since
+    the real one is what clears it.
+    """
     stops = []
+
+    def stopped():
+        dispatch._reading_debug_output = False
+        stops.append(0)
+
     monkeypatch.setattr(dispatch, '_layer', lambda: None)
     monkeypatch.setattr(dispatch, '_installed_callbacks', {0: object()})
     monkeypatch.setattr(dispatch, '_offered', {0})
     monkeypatch.setattr(dispatch, '_ctypes_current_context', 0)
-    monkeypatch.setattr(dispatch, '_stop_reading_debug_output',
-                        lambda: stops.append(0))
+    monkeypatch.setattr(dispatch, '_reading_debug_output', True)
+    monkeypatch.setattr(dispatch, '_stop_reading_debug_output', stopped)
     # Nothing here has a context, and the offer that follows would make GL
     # calls into whatever is current.  What is under test is what happens to
     # the arming, so record the offer rather than making it.

@@ -23,8 +23,6 @@ EVENT_TIMEOUT = float(os.environ.get('TEST_X_EVENT_TIMEOUT', '30'))
 #: show the window by default (set TEST_VISIBLE=0 for headless/CI runs).
 TEST_VISIBLE = os.environ.get('TEST_VISIBLE', '1').lower() not in ('0', 'false', 'no')
 
-from OpenGL import arrays
-
 # EGL ships with the graphics driver, and a platform with none -- macOS -- says
 # so with an ImportError.  Without this the script dies on the import, produces
 # no output, and reads to the harness as a failed check rather than one there
@@ -78,6 +76,21 @@ API_NAMES = dict(
         for k, v in API_BITS.items()
     ]
 )
+
+
+def attributeArray(values):
+    """``values`` as the ``EGLint`` array an attribute list has to be.
+
+    Built rather than left a list, because a list has no data pointer to give
+    the driver: PyOpenGL copies one into a buffer for the call, and a caller
+    running under ``ERROR_ON_COPY`` has declined that copy.  The attribute
+    lists here are incidental -- a list is the readable way to write one --
+    so they are built the way a program under the flag has to build them.
+    ``arraycompat.copy_safe`` is the same decision for the cases that pass
+    array data to an entry point; this does not use it because these scripts
+    run on the no-numpy axis as well.
+    """
+    return (EGLint * len(values))(*values)
 
 
 class EGLWindow(object):
@@ -150,7 +163,7 @@ class EGLWindow(object):
             ]
         )
         print("local_attributes", local_attributes)
-        local_attributes = arrays.GLintArray.asArray(local_attributes)
+        local_attributes = attributeArray(local_attributes)
         eglChooseConfig(display, local_attributes, configs, 2, num_configs)
         if num_configs.value < 1:
             raise RuntimeError("Unable to find a suitable config")
@@ -162,7 +175,7 @@ class EGLWindow(object):
         client_version = API_CLIENT_VERSIONS.get(API_BITS[self.api.lower()])
         context_attributes = None
         if client_version is not None:
-            context_attributes = arrays.GLintArray.asArray([
+            context_attributes = attributeArray([
                 EGL_CONTEXT_CLIENT_VERSION,
                 client_version,
                 EGL_NONE,
