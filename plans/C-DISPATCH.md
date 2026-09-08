@@ -1247,6 +1247,22 @@ what changed under measurement, and where the implementation stands.
   `proc.extension` reports is unchanged, so the attribute surface does not
   move.
 
+- **A core version is one of those declarations, and the ctypes path could not
+  see it.** Each command's `alternates` carry every feature that declares it,
+  core versions included, so the C layer's gate stands aside for a name a core
+  version has. The ctypes path is handed only the one extension its module was
+  built from, so `OpenGL.GL.KHR.debug.glGetPointerv` — GL 1.1, re-specified by
+  `GL_KHR_debug` to report a debug callback — was refused as "extension not
+  available" on a driver without that extension. Apple's is one: it implements
+  no version that has `GL_KHR_debug`, and the macOS jobs are what found this.
+  `_declarations.core_command_names` reads the same fact from the shipped
+  tables for the ctypes path, built once per API on the first gate that needs
+  it. The aside is for a core-declared name only: macOS exports every entry
+  point its framework implements whether or not the current context does, so a
+  rule that answered from the library alone would report an absent extension
+  as present there. `tests/gl/test_core_entry_point_resolution.py` asks both
+  halves, denying the extension on a driver that has it.
+
 - **Virtual packages save nothing while the files are still imported.** Phase
   9's exit asked for import time and resident size to improve. Built, they do
   not: `import OpenGL.GL` takes 58 ms warm and 62 MB either way, and holds the

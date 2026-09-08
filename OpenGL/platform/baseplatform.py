@@ -79,6 +79,23 @@ def _find_module(exclude=(__name__,)):
     return None
 
 
+def _also_core(functionName, module):
+    """Whether a core version of ``module``'s API declares ``functionName``.
+
+    ``module`` is the generated module the declaration came from, which is
+    what says the API to ask about.  False where there is none to ask -- a
+    caller building a binding by hand, or one of the hand-maintained APIs
+    (GLU, GLUT, GLE) that no table describes.
+    """
+    if not module:
+        return False
+    from OpenGL import _declarations
+
+    return functionName in _declarations.core_command_names(
+        _declarations.api_of(module)
+    )
+
+
 class BasePlatform(object):
     """Base class for per-platform implementations
 
@@ -260,7 +277,21 @@ class BasePlatform(object):
             and not inside_begin_block()
             and not self.checkExtension(extension)
         ):
-            raise AttributeError("""Extension not available""")
+            # A core version declaring the same name means the library exports
+            # it, and what the extension re-specified is which arguments it
+            # takes rather than whether it exists.  So the gate stands aside
+            # and the library answers -- which is what the compiled layer does
+            # with the same fact, held as each command's ``alternates``.
+            #
+            # Only for such a name, and not for whatever the library happens
+            # to export: macOS exports every entry point its framework
+            # implements whether or not the current context does, so answering
+            # from the library alone would report an unadvertised extension as
+            # present there, which is the question the gate exists to answer.
+            if _also_core(functionName, module):
+                force_base = True
+            else:
+                raise AttributeError("""Extension not available""")
         argTypes = [self.finalArgType(t) for t in argTypes]
 
         if not force_base and (
@@ -336,6 +367,7 @@ class BasePlatform(object):
                     extension=extension,
                     deprecated=deprecated,
                     error_checker=error_checker,
+                    module=module,
                 )
             else:
                 result = self.constructFunction(
@@ -347,6 +379,7 @@ class BasePlatform(object):
                     argNames=argNames,
                     extension=extension,
                     error_checker=error_checker,
+                    module=module,
                 )
         except AttributeError as err:
             result = self.nullFunction(
@@ -358,6 +391,7 @@ class BasePlatform(object):
                 argNames=argNames,
                 extension=extension,
                 error_checker=error_checker,
+                module=module,
             )
         if MODULE_ANNOTATIONS:
             if not module:
@@ -424,6 +458,7 @@ class BasePlatform(object):
                 extension=original.extension,
                 deprecated=original.deprecated,
                 error_checker=original.error_checker,
+                module=original.module,
             )
         elif hasattr(original, 'originalFunction'):
             original = original.originalFunction
@@ -481,6 +516,7 @@ class BasePlatform(object):
             doc=doc,
             error_checker=error_checker,
             force_extension=force_extension,
+            module=module,
         )
 
     def GetCurrentContext(self):
@@ -554,6 +590,7 @@ class _NullFunctionPointer(object):
         deprecated=False,
         error_checker=None,
         force_extension=None,
+        module=None,
     ):
         from OpenGL import error
 
@@ -568,6 +605,10 @@ class _NullFunctionPointer(object):
         self.deprecated = deprecated
         self.error_checker = error_checker
         self.force_extension = force_extension
+        #: The generated module this was declared in, which is what says the
+        #: API a later resolution is for.  Kept because :meth:`load` runs
+        #: ``constructFunction`` again, and the answer differs by API.
+        self.module = module
 
     resolved = False
 
@@ -608,6 +649,7 @@ class _NullFunctionPointer(object):
                 extension=self.extension,
                 error_checker=self.error_checker,
                 force_extension=self.force_extension,
+                module=self.module,
             )
         except AttributeError as err:
             return None

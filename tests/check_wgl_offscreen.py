@@ -17,7 +17,23 @@ no windowless context at all, and the extensions it lacks are named below
 rather than left to be inferred from a run in which everything skipped.
 """
 
+import os
 import sys
+
+#: The checkout this script is part of, ahead of whatever else is on the path.
+#:
+#: A script's ``sys.path`` starts at its own directory rather than at the one
+#: it was run from, so an installation reached through a finder -- what an
+#: editable install is -- can be shadowed here by a directory named ``OpenGL``
+#: that holds no ``__init__.py``.  The suite does not meet that, being run as
+#: ``python -m pytest`` from the checkout, which puts the checkout on the path
+#: for it.  This says the same thing for itself.
+#:
+#: Named only where it is a checkout, so that running this beside an installed
+#: PyOpenGL still asks about the installed one.
+_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if os.path.exists(os.path.join(_ROOT, 'OpenGL', '__init__.py')):
+    sys.path.insert(0, _ROOT)
 
 from OpenGL.WGL import offscreen
 

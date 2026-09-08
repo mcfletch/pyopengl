@@ -417,6 +417,16 @@ is real: <code>opengl32</code> exports GL 1.1 and nothing above it, while
 <code>wglGetProcAddress</code> answers for everything above GL 1.1 and returns
 NULL for the 1.1 set.  A name is looked for in both.</p>
 
+<p>Nor does the driver's extension string decide it.  What an extension
+re-specifies about a core entry point is which arguments it takes, not whether
+the entry point is there, so importing <code>glGetPointerv</code> from
+<code>OpenGL.GL.KHR.debug</code> gives a working entry point on a driver that
+does not advertise <code>GL_KHR_debug</code> &#8212; Apple's, which implements
+no version that has it.  The gate stands aside only for a name a core version
+declares: macOS exports every entry point its framework implements whether or
+not the current context does, so an extension that is genuinely absent is
+still reported absent.</p>
+
 <h2>Docstrings and introspection</h2>
 
 <p>Entry points carry a docstring and a text signature under the C
@@ -576,10 +586,11 @@ it that way.</p>
         import order</td>
     <td>the core declaration.  A command adopted into a GL version is declared
         twice, by the extension that introduced it and by the version that
-        adopted it; the core one resolves without an extension check, so an
-        entry point resolves in a context that has the function but no longer
-        advertises the old extension string.  No entry point that resolves
-        under ctypes fails to resolve under C.</td></tr>
+        adopted it, and <code>proc.extension</code> reports one of the two.
+        Both implementations resolve it either way: a name a core version
+        declares is present whether or not the extension that re-specified it
+        is advertised, so neither the declaration a caller reached nor the
+        driver's extension string decides whether the entry point exists.</td></tr>
 </table>
 
 <p>The full list is not a matter of recollection:

@@ -63,15 +63,33 @@ import importlib
 import OpenGL.GL as GL
 
 GL.glGetString(GL.GL_VERSION)
+
+# A driver that does not advertise the extension, for asking what the gate
+# does with one on a machine whose driver does.  Apple's GL is such a machine
+# for GL_KHR_debug -- it implements no version that has it -- and so is any
+# driver predating an extension that re-specified a core entry point.
+denied = %(deny)r
+if denied:
+    from OpenGL import platform
+    advertised = platform.PLATFORM.checkExtension
+    platform.PLATFORM.checkExtension = (
+        lambda extension: False if extension == denied else advertised(extension)
+    )
+
 entry = getattr(importlib.import_module(%(module)r), %(name)r)
 print(bool(entry))
 '''
 
 
-def defined(module, name, implementation):
-    """Whether ``<module>.<name>`` resolves under `implementation`."""
+def defined(module, name, implementation, deny=None):
+    """Whether ``<module>.<name>`` resolves under `implementation`.
+
+    ``deny`` names an extension the driver is to report as absent, so that a
+    machine which has it can be asked what a machine without it would find.
+    """
     completed = subprocess.run(
-        [sys.executable, '-c', SCRIPT % {'module': module, 'name': name}],
+        [sys.executable, '-c',
+         SCRIPT % {'module': module, 'name': name, 'deny': deny}],
         capture_output=True,
         text=True,
         cwd=ROOT,
@@ -92,6 +110,46 @@ def test_it_resolves_under_either_implementation(module, name, implementation):
     assert defined(module, name, implementation) == 'True', (
         '%s.%s is undefined under the %s implementation'
         % (module, name, implementation)
+    )
+
+
+@pytest.mark.parametrize('module,name', DOUBLY_DECLARED)
+@pytest.mark.parametrize('implementation', IMPLEMENTATIONS)
+def test_it_resolves_though_the_extension_is_absent(module, name,
+                                                    implementation):
+    """The half of the rule a driver advertising ``GL_KHR_debug`` cannot show.
+
+    ``glGetPointerv`` is GL 1.1, and the extension added pnames to it rather
+    than adding it, so it is there whether or not the extension is.  Which is
+    what Apple's GL is: 4.1 at most, with no version that has ``GL_KHR_debug``
+    in it, and where the extension module's declaration used to answer that a
+    GL 1.1 entry point did not exist.
+    """
+    assert defined(module, name, implementation, deny='GL_KHR_debug') == 'True', (
+        '%s.%s is undefined under the %s implementation on a driver that does '
+        'not advertise GL_KHR_debug' % (module, name, implementation)
+    )
+
+
+#: An entry point only an extension declares, so the library exporting it says
+#: nothing about the context.  ``glGenQueries`` is core; this spelling is not.
+EXTENSION_ONLY = ('OpenGL.GL.ARB.occlusion_query', 'glGenQueriesARB')
+
+
+@pytest.mark.parametrize('implementation', IMPLEMENTATIONS)
+def test_an_extension_only_name_is_still_refused(implementation):
+    """The aside above is for a name a core version declares, and no wider.
+
+    macOS exports every entry point its framework implements whether or not
+    the context does, so a rule that answered from the library alone would
+    report an unadvertised extension as present there -- which is the question
+    the gate exists to answer.
+    """
+    module, name = EXTENSION_ONLY
+    assert defined(module, name, implementation,
+                   deny='GL_ARB_occlusion_query') == 'False', (
+        '%s.%s resolved on a driver that does not advertise its extension'
+        % (module, name)
     )
 
 

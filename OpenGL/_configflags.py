@@ -1,4 +1,28 @@
 """Holds the import-time constants for various configuration flags"""
+import OpenGL as _package
+
+# A directory named `OpenGL` with no `__init__.py` in it, on sys.path, is
+# imported as a namespace package -- and the finder that does that runs ahead
+# of the one an editable install adds, so an empty directory wins over the
+# real installation.  The submodules still load, because the editable
+# install's finder answers for those by name, so what a caller sees is this
+# import failing four frames inside some friendly module rather than
+# `import OpenGL` failing.  Said here because this is the first module to read
+# anything off the package, and because none of what follows is answerable:
+# `__init__.py` never ran, so there are no flags to hold.
+if getattr(_package, '__file__', None) is None:
+    raise ImportError(
+        'PyOpenGL was imported as a namespace package, so its OpenGL/'
+        '__init__.py never ran and none of its configuration exists.  A '
+        'directory named "OpenGL" with no __init__.py in it is on sys.path, '
+        'and one found there is used ahead of an installed package.  It is '
+        'at: %s.  Two things leave one: an install that replaced a wheel '
+        'with an editable install of the same project and left the emptied '
+        'directory behind, and a directory of that name in whichever '
+        'directory the program was started from.'
+        % (', '.join(_package.__path__) or 'no location this can name',)
+    )
+
 from OpenGL import (
     ERROR_CHECKING,
     ERROR_DEBUG_OUTPUT,

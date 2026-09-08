@@ -200,6 +200,46 @@ def api_of(module_name):
     return parts[2] if len(parts) > 2 else 'GL'
 
 
+#: Per API, the names a core version declares.  See :func:`core_command_names`.
+_core_commands = {}
+
+
+def core_command_names(api):
+    """The entry points a core version of ``api`` declares.
+
+    An extension may re-specify a name a core version already has:
+    ``GL_KHR_debug`` gave ``glGetPointerv`` the pnames that report a debug
+    callback, and the entry point itself has been GL 1.1 since 1995.  What a
+    caller reaches is settled by which module they imported from, and the gate
+    that refuses an unadvertised extension has to know which names those are
+    -- or importing from the extension's module answers that a GL 1.1 entry
+    point does not exist, on a driver that has always had it.
+
+    Read from the shipped tables, which is where the core versions are listed,
+    and built once per API on the first gate that needs one.  The compiled
+    layer is told the same fact at generation time, held as each command's
+    ``alternates``; this is how the ctypes path comes to know it.
+    """
+    known = _core_commands.get(api)
+    if known is not None:
+        return known
+    names = set()
+    declarations = data_declarations()
+    for module_name in declarations.module_names():
+        if api_of(module_name) != api:
+            continue
+        contents = declarations.module_contents(module_name) or {}
+        extension = contents.get('extension') or ''
+        # The same rule BasePlatform.constructFunction applies: a core version
+        # names itself GL_VERSION_1_1 or GL_ES_VERSION_3_2, so the token is not
+        # always in the same place and the name is asked rather than the path.
+        if extension and 'VERSION' not in extension.split('_'):
+            continue
+        names.update(command for command, _arguments, _types in contents['commands'])
+    known = _core_commands[api] = frozenset(names)
+    return known
+
+
 def contents_for(module_name):
     """What one generated module declared, or None if nothing describes it.
 
@@ -697,3 +737,4 @@ def clear_caches():
     _namespaces.clear()
     _types_cache.clear()
     _table_paths.clear()
+    _core_commands.clear()
