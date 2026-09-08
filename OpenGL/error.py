@@ -178,11 +178,97 @@ def inside_begin_block( ):
     find that out would load a driver to answer a question about a block that
     cannot exist.
     """
+    checker = _desktop_checker( )
+    return bool( checker is not None and getattr( checker, 'suspended', False ) )
+
+
+def _desktop_checker( ):
+    """Desktop GL's error checker, or None where nothing has made one.
+
+    Read from ``sys.modules`` rather than imported, for the reason
+    :func:`inside_begin_block` gives.
+    """
     import sys
 
     module = sys.modules.get( 'OpenGL.raw.GL._errors' )
-    checker = getattr( module, '_error_checker', None ) if module else None
-    return bool( checker is not None and getattr( checker, 'suspended', False ) )
+    return getattr( module, '_error_checker', None ) if module else None
+
+
+def end_abandoned_block( ):
+    """Close a ``glBegin`` block left open, and say whether there was one.
+
+    A block belongs to the context it was opened in and has to be closed
+    there.  A context created or destroyed while one is open is undefined, and
+    a driver need not survive being denied the ``glEnd``: Intel's Windows ICD
+    leaves state that the *next* context creation in the process faults on,
+    which reaches the program as an access violation with nothing near it to
+    name the block that caused it.
+
+    A block is left open when an exception escapes it -- a bad vertex, an
+    entry point the driver does not export -- which is why the exception-safe
+    form is ``glBegin(...)`` then ``try: ... finally: glEnd()``.  This is what
+    a toolkit calls before it creates or destroys a context, while the context
+    holding the block is still current, so a program that got that shape wrong
+    is answered with a closed block rather than a crash.  PyOpenGL calls it
+    for the context changes it is told about, in
+    :func:`OpenGL.dispatch.make_current` and
+    :func:`OpenGL.dispatch.forget_context`; a toolkit that makes contexts of
+    its own calls it for the change it makes and PyOpenGL does not see.
+
+    With ``PYOPENGL_ERROR_CHECKING=0`` there is no checker and so no record
+    that a block was opened, and this answers False: a program built that way
+    closes its own blocks.
+    """
+    checker = _desktop_checker( )
+    if checker is None:
+        return False
+    if not getattr( checker, 'suspended', False ):
+        # No block to close.  ``onEnd`` is still what the context changes have
+        # always called here, and outside a block it only puts the registered
+        # checker back where it already is.
+        checker.onEnd( )
+        return False
+    _close_block_in_gl( )
+    checker.onEnd( )
+    _resume_compiled_checking( )
+    return True
+
+
+def _close_block_in_gl( ):
+    """Issue the ``glEnd`` an abandoned block never got, if there is a context.
+
+    Only where one is current to close it in: :func:`end_abandoned_block` is
+    also reached for a context that has already gone, and there ``glEnd``
+    would be a call into nothing.  The platform's own entry point rather than
+    ``OpenGL.GL.glEnd``, which would re-enter the bookkeeping this is part of.
+    """
+    from OpenGL.platform import PLATFORM
+
+    try:
+        if not PLATFORM.GetCurrentContext( ):
+            return
+        end = getattr( PLATFORM.GL, 'glEnd', None )
+    except Exception:          # pragma: no cover - no GL library to ask at all
+        return
+    if end is not None:
+        end( )
+
+
+def _resume_compiled_checking( ):
+    """Turn the compiled dispatch layer's own check back on, where it is in use.
+
+    It keeps a suspension switch of its own -- ``glBegin`` throws both -- so a
+    block closed here has to be closed in both.  Imported on use, so choosing
+    the ctypes implementation does not load the C extension to say it is not
+    wanted.
+    """
+    from OpenGL import _configflags
+
+    if _configflags.DISPATCH != 'c':
+        return
+    from OpenGL import _dispatch
+
+    _dispatch.suspend_error_checking( False )
 
 
 #: Set when PyOpenGL's own entry-point lookup ran inside a glBegin block and

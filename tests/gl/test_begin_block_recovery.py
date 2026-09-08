@@ -132,6 +132,35 @@ class TestAnAbandonedBeginBlock(unittest.TestCase):
             'suspended error checking'
         )
 
+    def test_forgetting_the_context_closes_the_block_in_the_driver(self):
+        """The switch is not the driver's state, and only one of them crashes.
+
+        A context destroyed with a block still open is undefined: the
+        specification says a block is closed in the context it was opened in,
+        and a driver need not survive being denied that.  Intel's Windows ICD
+        does not -- it leaves state that the *next* context creation in the
+        process faults on, which arrives as an access violation a long way
+        from the block that caused it.
+
+        So the notification closes the block in GL as well as in the
+        bookkeeping.  ``glEnd`` is legal only inside a block, so a second one
+        says which of the two happened: it succeeds while the block is still
+        open, and is ``GL_INVALID_OPERATION`` once it is really closed.
+        """
+        self._become(self._context())
+        glBegin(GL_POINTS)
+        dispatch.forget_context(platform.PLATFORM.GetCurrentContext())
+        with pytest.raises(error.GLError):
+            glEnd()
+
+    def test_making_another_context_current_closes_the_block_in_the_driver(self):
+        """The other notification, for the same reason as the case above."""
+        self._become(self._context())
+        glBegin(GL_POINTS)
+        self._become(self._context())
+        with pytest.raises(error.GLError):
+            glEnd()
+
     def test_forgetting_the_context_ends_an_abandoned_block(self):
         """The shape a test suite has: tear the context down, build the next.
 

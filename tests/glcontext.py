@@ -172,7 +172,7 @@ class Context(object):
         self._case = type(
             'StandaloneContext', (pick_backend(), ContextTestCase), namespace,
         )('runTest')
-        self._case._create_context()
+        self._case._open_context()
         self._released = False
         try:
             self._check_version()
@@ -418,6 +418,25 @@ class ContextTestCase(unittest.TestCase):
     def _destroy_context(self):
         raise NotImplementedError
 
+    # --- taking a context and giving it back ------------------------------
+    def _open_context(self):
+        """Create the requested context, with no abandoned block left open.
+
+        A GL context cannot be created while a ``glBegin`` block is open on
+        the current one: a block is closed in the context that opened it, the
+        specification defines nothing for a context made or destroyed inside
+        one, and Intel's Windows ICD faults in ``wglCreateContext`` -- so the
+        crash lands on whichever case asks for the next context rather than on
+        the one that abandoned the block.  The toolkits here make their own
+        contexts, so PyOpenGL is never told this is about to happen and the
+        owner of the call says it: see
+        :func:`OpenGL.error.end_abandoned_block`.
+        """
+        from OpenGL import error
+
+        error.end_abandoned_block()
+        self._create_context()
+
     # --- giving a context back -------------------------------------------
     def _context_handle(self):
         """The GL context handle the dispatch table is keyed by, or ``None``.
@@ -465,7 +484,7 @@ class ContextTestCase(unittest.TestCase):
         on a platform whose entry points resolve regardless -- see
         :func:`version_shortfall`.
         """
-        self._create_context()
+        self._open_context()
         # Registered here rather than done in tearDown, for two reasons.
         # unittest runs tearDown() before doCleanups(), so destroying the
         # context there would destroy it before any addCleanup() the test

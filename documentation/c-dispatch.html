@@ -181,6 +181,35 @@ Exact and free, for a program willing to say so.</li>
 context's table.  A table is a slot and a flag per entry point, about
 43 KB, so a hundred live contexts cost 4.3 MB.</p>
 
+<h3>A glBegin block and the life of a context</h3>
+
+<p>A <code>glBegin</code> block is closed in the context that opened it.  A
+context created or destroyed while one is still open is undefined, and a driver
+need not survive being denied the <code>glEnd</code>: Intel's Windows ICD leaves
+state that the <em>next</em> context creation in the process faults on, so the
+access violation arrives with nothing near it to name the block that caused
+it.</p>
+
+<p>A block is left open when an exception escapes it &#8212; a bad vertex, an
+entry point the driver does not export &#8212; which is why the exception-safe
+form is:</p>
+
+<pre>glBegin(GL_POINTS)
+try:
+    ...
+finally:
+    glEnd()</pre>
+
+<p><code>make_current</code> and <code>forget_context</code> close such a block
+for you, so the two notifications above are worth making for this reason as well
+as for the tables.  For the change PyOpenGL is <em>not</em> told about &#8212;
+creating a context, which happens inside the toolkit &#8212; call
+<code>OpenGL.error.end_abandoned_block()</code> first; it answers whether there
+was one.  <code>OpenGL.error.inside_begin_block()</code> asks without closing
+anything.  With <code>PYOPENGL_ERROR_CHECKING=0</code> there is no record that a
+block was opened and both answer False, so a program built that way closes its
+own.</p>
+
 <h2>Arrays</h2>
 
 <p>Nothing you can pass today stops being accepted.  Where an array is wanted,

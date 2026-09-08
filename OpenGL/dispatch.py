@@ -200,16 +200,20 @@ def _end_suspended_block():
     bad vertex, an entry point the driver does not export -- means ``glEnd``
     never runs and every later call in the process goes unchecked.
 
-    Reads ``sys.modules`` rather than importing: a process using only ES or EGL
-    has no desktop-GL checker to resume, and importing one to find that out
-    would load a driver to answer a question about a block it cannot have
-    opened.  The compiled layer keeps the same switch of its own, which
-    ``make_current`` and ``forget_context`` clear for themselves.
+    The block is closed in GL as well, because the switch is a record of the
+    driver's state rather than the state itself, and a context destroyed with
+    a block still open is undefined -- see
+    :func:`OpenGL.error.end_abandoned_block`, which is what does both and is
+    what a toolkit making contexts of its own calls for the changes PyOpenGL
+    is not told about.
+
+    Imported on use rather than at module scope: a process using only ES or
+    EGL has no desktop-GL block to close, and this module is loaded to decide
+    how entry points are dispatched, before there is any question of one.
     """
-    module = sys.modules.get('OpenGL.raw.GL._errors')
-    checker = getattr(module, '_error_checker', None) if module else None
-    if checker is not None:
-        checker.onEnd()
+    from OpenGL import error
+
+    error.end_abandoned_block()
 
 
 def make_current(handle):
