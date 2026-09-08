@@ -197,9 +197,15 @@ that is *about* what a list does keeps the list and skips under the flag.
 
 | Marker | What it means | Deselect with |
 |---|---|---|
-| `performance` | asserts how fast something draws, so it needs a GPU | `-m "not performance"` |
+| `performance` | asserts a speed that only a real driver can give — how fast something draws, or what a round trip to the driver costs — so it needs a GPU, and an unloaded one | `-m "not performance"` |
 | `resources` | asserts a budget in memory or import time, so it measures the machine as much as the library | `-m "not resources"` |
 | `slow` | takes seconds because it builds something — a frozen application, an archive | `-m "not slow"` |
+
+`tox` deselects `performance` and `resources` for every environment, so a run
+through it — a developer's and CI's alike — leaves out the same thing. Both
+still run under a bare `pytest`, which is where a claim about speed or memory
+is worth making: one machine, doing nothing else. `tox -e ... -- -m performance`
+asks for them back, since a later `-m` overrides the one tox supplies.
 
 ## The base test cases
 

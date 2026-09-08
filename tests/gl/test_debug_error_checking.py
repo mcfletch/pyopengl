@@ -64,6 +64,7 @@ class TestDebugErrorChecking(GLTestCase):
         glEnable(GL_DEPTH_TEST)
         glDisable(GL_DEPTH_TEST)
 
+    @pytest.mark.performance
     def test_it_costs_less_than_a_glGetError_per_call(self):
         """The point of the exercise: checking stops being a round trip.
 
@@ -71,6 +72,13 @@ class TestDebugErrorChecking(GLTestCase):
         then the other.  What a driver has just been asked to do it keeps doing
         cheaply for a while, so a run of one followed by a run of the other
         compares two different machine states as much as two mechanisms.
+
+        Marked ``performance`` because the saving it measures is a driver round
+        trip: on a software rasteriser ``glGetError`` is a call in this process
+        and there is no round trip to save, so the two mechanisms sit within
+        each other's noise however carefully they are timed.  A machine with
+        other work on it -- several test processes sharing its cores -- adds
+        enough to that noise to decide the comparison on its own.
         """
 
         def measure(count=20000):

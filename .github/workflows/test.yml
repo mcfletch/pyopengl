@@ -125,9 +125,9 @@ jobs:
           PYOPENGL_PLATFORM: egl
 
       - name: Run the tests
-        # `not performance` is a claim about how fast something draws, and a CPU
-        # rasteriser cannot answer one.  Nothing carries the marker yet; the
-        # deselection is here so that the first test to need it is right.
+        # What is deselected is declared in tox.ini, so that a developer's run
+        # and this one leave out the same thing -- a speed only a real driver
+        # can give, and a memory budget that other work on the machine spends.
         #
         # Under Xvfb because the GL suites reach their context through EGL and
         # need no display, but the stand-alone check scripts open a window and
@@ -153,7 +153,7 @@ jobs:
         run: >
           xvfb-run -a
           python -m tox -e ${{ matrix.toxenv }} --
-          ${{ inputs.tests || matrix.paths || 'tests/' }} -m "not performance"
+          ${{ inputs.tests || matrix.paths || 'tests/' }}
           -n 4 --dist loadfile --max-worker-restart=0
 
   macos:
@@ -222,7 +222,7 @@ jobs:
           set -o pipefail
           python -m tox -e ${{ matrix.toxenv }} -- \
             ${{ inputs.tests || 'tests/bindings tests/harness tests/checks tests/directdocs' }} \
-            -m "not performance" 2>&1 | tee test-logs/root.log
+            2>&1 | tee test-logs/root.log
 
       - name: Run the tests -- cdispatch
         id: cdispatch
@@ -231,7 +231,7 @@ jobs:
         run: |
           mkdir -p test-logs
           set -o pipefail
-          python -m tox -e ${{ matrix.toxenv }} -- tests/cdispatch -m "not performance" \
+          python -m tox -e ${{ matrix.toxenv }} -- tests/cdispatch \
             2>&1 | tee test-logs/cdispatch.log
 
       - name: Run the tests -- gl
@@ -241,7 +241,7 @@ jobs:
         run: |
           mkdir -p test-logs
           set -o pipefail
-          python -m tox -e ${{ matrix.toxenv }} -- tests/gl -m "not performance" \
+          python -m tox -e ${{ matrix.toxenv }} -- tests/gl \
             2>&1 | tee test-logs/gl.log
 
       - name: Run the tests -- glu
@@ -251,7 +251,7 @@ jobs:
         run: |
           mkdir -p test-logs
           set -o pipefail
-          python -m tox -e ${{ matrix.toxenv }} -- tests/glu -m "not performance" \
+          python -m tox -e ${{ matrix.toxenv }} -- tests/glu \
             2>&1 | tee test-logs/glu.log
 
       - name: Run the tests -- gles
@@ -261,7 +261,7 @@ jobs:
         run: |
           mkdir -p test-logs
           set -o pipefail
-          python -m tox -e ${{ matrix.toxenv }} -- tests/gles -m "not performance" \
+          python -m tox -e ${{ matrix.toxenv }} -- tests/gles \
             2>&1 | tee test-logs/gles.log
 
       # A crash on a machine none of us can log into is only as debuggable as
