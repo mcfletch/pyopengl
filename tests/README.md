@@ -274,7 +274,14 @@ On a Wayland session with the NVIDIA driver, `glReadPixels` from an on-screen
 window answers black however the frame was drawn, so the cases that read back
 what a widget rendered fail there and pass under `xvfb-run`. The Linux CI runs
 the whole suite under `xvfb-run -a` already; a developer on such a session wants
-the same for the windowed suites.
+the same for the windowed suites — thirteen check scripts run there and nowhere
+else, so without it they are exercised only by CI.
+
+Whether the GLUT and Xlib scripts can run is asked of `DISPLAY` rather than of
+the login session, since `xvfb-run` changes the first and not the second.
+XWayland is refused: it is an X server, so it opens, but GLUT's support for it
+is poor enough that a window either does not appear or does not answer, and it
+says what it is by advertising the `XWAYLAND` extension.
 
 On an NVIDIA driver, roughly one run in ten dies with SIGSEGV while a context is
 torn down. The faulting frame is inside `libnvidia-eglcore`, reached through

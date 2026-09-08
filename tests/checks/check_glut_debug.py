@@ -53,7 +53,7 @@ def display():
 
 def get_debug_messages():
     messages = []
-    count = glGetIntegerv(GL_DEBUG_LOGGED_MESSAGES)
+    count = one(glGetIntegerv(GL_DEBUG_LOGGED_MESSAGES))
     max_size = one(glGetIntegerv(GL_MAX_DEBUG_MESSAGE_LENGTH))
     source = GLenum()
     type = GLenum()

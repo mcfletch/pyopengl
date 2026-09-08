@@ -68,16 +68,68 @@ def _numpy_installed():
     return True
 
 
+#: Open the X display and say what it is.  Exits non-zero where it cannot be
+#: opened, which is a display these programs cannot use either.
+_X_DISPLAY_PROBE = r"""
+from Xlib import display
+
+connection = display.Display()
+try:
+    print('xwayland' if 'XWAYLAND' in set(connection.list_extensions())
+          else 'usable')
+finally:
+    connection.close()
+"""
+
+
+def _x_display_is_usable():
+    """Whether ``DISPLAY`` names an X server these programs can use.
+
+    Asked of the display rather than of the login session.  The two differ
+    exactly where it matters: under ``xvfb-run`` on a Wayland desktop the
+    session is still Wayland while ``DISPLAY`` names an X server that GLUT and
+    raw Xlib are perfectly happy with -- and skipping there is how twenty
+    scripts came to run only on CI, which is the one place nobody sees them
+    fail until afterwards.
+
+    XWayland is the case to refuse: it is an X server, so it opens, but GLUT's
+    support for it is poor enough that a window either does not appear or does
+    not answer.  It says what it is by advertising the XWAYLAND extension.
+
+    ``None`` where the question cannot be asked -- no python-xlib, no DISPLAY
+    -- and the caller falls back to the session type.
+
+    Asked in a child, and once: a connection that fails part-way leaves
+    python-xlib holding an open socket it will not close, which reaches this
+    suite as an unraisable ResourceWarning against whichever case happens to
+    be tearing down.
+    """
+    if not os.environ.get('DISPLAY', '').strip():
+        return None
+    completed = subprocess.run(
+        [sys.executable, '-c', _X_DISPLAY_PROBE],
+        capture_output=True, text=True, timeout=30,
+    )
+    if completed.returncode != 0:
+        return False
+    answer = completed.stdout.strip()
+    return {'usable': True, 'xwayland': False}.get(answer)
+
+
 def _window_server():
     """Somewhere to open a window on, that the scripts can actually use.
 
-    Wayland counts as nowhere here.  These are X11 and GLUT programs: raw Xlib
-    calls have no Wayland equivalent, and GLUT's support for it is poor enough
-    that a window either does not appear or does not answer.  Under a compositor
-    the run wants ``xvfb-run``, which is what the Linux CI job does.
+    These are X11 and GLUT programs: raw Xlib calls have no Wayland
+    equivalent, and GLUT's support for it is poor enough that a window either
+    does not appear or does not answer.  Under a compositor the run wants
+    ``xvfb-run``, which is what the Linux CI job does -- and what a developer
+    on such a session should do, since these otherwise go unrun until CI.
     """
-    if WAYLAND:
+    usable = _x_display_is_usable()
+    if usable is False or (usable is None and WAYLAND):
         return 'GLUT and raw X11 have no usable Wayland path; run under xvfb-run'
+    if usable:
+        return None
     if not backends.has_window_server():
         # A machine with the libraries but nowhere to draw.  freeglut answers a
         # display it cannot open by writing to stderr and calling exit(), which
