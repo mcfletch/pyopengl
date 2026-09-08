@@ -13,6 +13,7 @@ import os
 import paths
 import re
 import glob
+import json
 import unittest
 
 ROOT = paths.ROOT
@@ -122,6 +123,47 @@ class TestALengthTheDriverDecidesIsAskedFor(unittest.TestCase):
             offenders, [],
             'a glGet whose length the driver decides is declared fixed:\n'
             + '\n'.join(offenders),
+        )
+
+
+class TestTheSnapshotsAgreeWithTheTable(unittest.TestCase):
+    """``tests/<suite>/glget_groups.json`` records each pname's size beside the
+    getter family it belongs to, so the size suite can ask what a feature
+    defines without parsing the registry.  It is generated from the CSV by
+    ``src/glget_groups_gen.py``.
+
+    A CSV edit that does not regenerate it leaves the suite asserting the size
+    that was corrected, and the correction has no effect on what is checked --
+    which is how ``GL_PROGRAM_BINARY_FORMATS`` went on being asked for as one
+    value on a driver that has none.
+    """
+
+    def test_every_recorded_size_is_the_one_the_table_states(self):
+        from regen_glgets import load_csv
+
+        table = dict(load_csv())
+        offenders = []
+        for path in sorted(
+            glob.glob(os.path.join(ROOT, 'tests', '*', 'glget_groups.json'))
+        ):
+            suite = os.path.basename(os.path.dirname(path))
+            with open(path, encoding='utf-8') as handle:
+                data = json.load(handle)
+            for kind in ('features', 'extensions'):
+                for entry in data.get(kind, {}).values():
+                    for descriptor in entry.get('glgets', ()):
+                        stated = table.get(descriptor['name'])
+                        if stated is not None and stated != descriptor['size']:
+                            offenders.append(
+                                '  [%s] %s is %r, and glgetsizes.csv states %r'
+                                % (suite, descriptor['name'],
+                                   descriptor['size'], stated)
+                            )
+        self.assertEqual(
+            sorted(set(offenders)), [],
+            'a snapshot disagrees with the size table; run '
+            'python src/glget_groups_gen.py\n'
+            + '\n'.join(sorted(set(offenders))),
         )
 
 

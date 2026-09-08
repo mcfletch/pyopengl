@@ -403,7 +403,7 @@
      "family": "state?",
      "group": null,
      "name": "GL_PRIMITIVE_BOUNDING_BOX_ARB",
-     "size": "(1,)#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/ARB/ARB_ES3_2_compatibility.txt",
+     "size": "(8,)",
      "value": "0x92BE"
     },
     {
@@ -450,15 +450,15 @@
   "GL_ARB_clip_control": {
    "glgets": [
     {
-     "family": "state?",
-     "group": null,
+     "family": "state",
+     "group": "GetPName",
      "name": "GL_CLIP_ORIGIN",
      "size": "(1,)",
      "value": "0x935C"
     },
     {
-     "family": "state?",
-     "group": null,
+     "family": "state",
+     "group": "GetPName",
      "name": "GL_CLIP_DEPTH_MODE",
      "size": "(1,)",
      "value": "0x935D"
@@ -1464,7 +1464,7 @@
      "family": "state",
      "group": "GetPName",
      "name": "GL_PROGRAM_BINARY_FORMATS",
-     "size": "(1,)",
+     "size": "(_L(0x87FE),)",
      "value": "0x87FF"
     }
    ],
@@ -7203,7 +7203,7 @@
      "family": "state?",
      "group": null,
      "name": "GL_MULTISAMPLE_COVERAGE_MODES_NV",
-     "size": "(1,)#TODO Review http://www.opengl.org/registry/specs//NV/framebuffer_multisample_coverage.txt",
+     "size": "(2, _L(0x8E11),)",
      "value": "0x8E12"
     }
    ],
@@ -12355,7 +12355,7 @@
      "family": "state",
      "group": "GetPName",
      "name": "GL_PROGRAM_BINARY_FORMATS",
-     "size": "(1,)",
+     "size": "(_L(0x87FE),)",
      "value": "0x87FF"
     },
     {
@@ -13184,15 +13184,15 @@
   "GL_VERSION_4_5": {
    "glgets": [
     {
-     "family": "state?",
-     "group": null,
+     "family": "state",
+     "group": "GetPName",
      "name": "GL_CLIP_ORIGIN",
      "size": "(1,)",
      "value": "0x935C"
     },
     {
-     "family": "state?",
-     "group": null,
+     "family": "state",
+     "group": "GetPName",
      "name": "GL_CLIP_DEPTH_MODE",
      "size": "(1,)",
      "value": "0x935D"

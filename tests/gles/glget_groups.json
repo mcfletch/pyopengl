@@ -169,6 +169,23 @@
    ],
    "missing_size": []
   },
+  "GL_EXT_clip_control": {
+   "glgets": [],
+   "missing_size": [
+    {
+     "family": "state",
+     "group": "GetPName",
+     "name": "GL_CLIP_ORIGIN_EXT",
+     "value": "0x935C"
+    },
+    {
+     "family": "state",
+     "group": "GetPName",
+     "name": "GL_CLIP_DEPTH_MODE_EXT",
+     "value": "0x935D"
+    }
+   ]
+  },
   "GL_EXT_disjoint_timer_query": {
    "glgets": [
     {
@@ -631,7 +648,7 @@
      "family": "state?",
      "group": null,
      "name": "GL_PRIMITIVE_BOUNDING_BOX_EXT",
-     "size": "(1,)#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/EXT/EXT_primitive_bounding_box.txt",
+     "size": "(8,)",
      "value": "0x92BE"
     }
    ],
@@ -2115,7 +2132,7 @@
      "family": "state?",
      "group": null,
      "name": "GL_PRIMITIVE_BOUNDING_BOX_OES",
-     "size": "(1,)#TODO Review /home/mcfletch/OpenGL-dev/pyopengl/src/khronosapi/extensions/OES/OES_primitive_bounding_box.txt",
+     "size": "(8,)",
      "value": "0x92BE"
     }
    ],
@@ -3374,7 +3391,7 @@
      "family": "state",
      "group": "GetPName",
      "name": "GL_PROGRAM_BINARY_FORMATS",
-     "size": "(1,)",
+     "size": "(_L(0x87FE),)",
      "value": "0x87FF"
     },
     {
