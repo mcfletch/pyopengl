@@ -1,8 +1,9 @@
 # The Tk widget makes its own context
 
-**Status:** X11 landed and verified (2026-09-06). Windows and macOS are the
-two platforms still to land, and both are wanted for the next release --
-see [Still to land](#still-to-land).
+**Status:** X11 landed and verified (2026-09-06). Windows landed and verified
+(2026-09-07) -- see [What Windows turned up](#what-windows-turned-up). macOS is
+the one platform still to land, and it is wanted for the next release -- see
+[Still to land](#still-to-land).
 
 ## What was there
 
@@ -71,7 +72,7 @@ root.mainloop()
 | Tk windowing system | How | State |
 | --- | --- | --- |
 | `x11` | `glXCreateContextAttribsARB` on the window `winfo_id()` names | Implemented, verified against Mesa |
-| `win32` | `wglCreateContextAttribsARB` on the DC of that `HWND` | Implemented, not verified here |
+| `win32` | `wglCreateContextAttribsARB` on the DC of that `HWND` | Implemented, verified against Intel UHD 630 |
 | `aqua` | `NSOpenGLContext.setView:` on the `NSView` Tk owns | Raises, naming what it needs |
 
 macOS is the one that needs a language binding rather than a call: the context
@@ -79,20 +80,103 @@ is attached to a view through Objective-C, and Tk's Aqua windows are `NSView`s
 that `winfo_id()` does not hand out as such. What it raises says so, and says
 that Togl and `pyopengltk` are what there is meanwhile.
 
+## What Windows turned up
+
+Run 2026-09-07 on Windows 10 Pro 19045, CPython 3.13.1, Intel UHD Graphics 630,
+driver 31.0.101.2114. `TEST_WINDOWING=tk python -m pytest tests` and
+`tests/test_tk_widget.py`. Five defects, each fixed with a test of its own; the
+prediction that any correction would belong in `OpenGL/Tk/win32.py` held for two
+of them and not for the rest.
+
+**Every Win32 handle lost its top half.** `OpenGL/Tk/win32.py` reached `GetDC`,
+`SetPixelFormat` and the rest through `ctypes.windll` with no prototypes
+declared, and ctypes gives an undeclared function a return type of C `int` --
+half the width of an `HDC`. `SetPixelFormat`, undeclared, was handed the
+truncated value zero-extended; `wglCreateContext`, whose `HDC` *is* declared,
+was handed it sign-extended. The format was set on one device context and the
+context asked for on another, and the driver answered
+`ERROR_INVALID_PIXEL_FORMAT` with nothing in it to say a handle was to blame.
+Which half of the handle a window happened to land in decided whether it showed,
+so the same program made a context on one window and not the next -- and a
+failure to make one is a `skipTest`, so most of the suite skipped while
+reporting green. `OpenGL/Tk/win32.py` now declares every entry point it calls in
+`SIGNATURES`, on a `WinDLL` of its own rather than the one every library in the
+process shares. `tests/test_tk_win32.py`.
+
+**The widget's own suite never ran here.** `tests/test_tk_widget.py` gated its
+windowed cases on `DISPLAY`, which names a display only on Linux, so 32 of its
+36 cases skipped on Windows -- which is why the defect above was not caught by
+the tests written for it. It asks `backends.has_window_server()` now, which is
+the question in a form each platform can answer.
+
+**Nothing said when a context went.** The dispatch layer's table of resolved
+entry points is keyed by the context handle, and a handle is an address the
+driver hands out again. WGL needs two throwaway contexts per widget -- one to
+look `wglChoosePixelFormatARB` up through, one for
+`wglCreateContextAttribsARB`, neither resolvable without a context that already
+exists -- so this module creates and destroys three contexts where a caller
+asked for one, and their addresses come back quickly. It said nothing about any
+of them. A table left behind under a reused address answers for a context that
+is no longer there: an entry point reported undefined where the context has it,
+or resolved where it does not, which is what
+`tests/gl/test_no_context_calls.py` saw as the C and ctypes layers disagreeing.
+`OpenGL.Tk.context.nowCurrent` and `.gone` are the two notifications, used by
+both platform implementations, exactly as
+`OpenGL.WGL.offscreen.OffscreenContext` already used them -- a caller reaching
+for the widget directly has no fixture to do it for them. The GLX side takes
+the same two calls; it makes no throwaway contexts, so only its `destroy` was
+missing one, and that half is **not** verified here for want of an X display.
+
+**`TkBackend` had no `_make_current`,** so the suite's `_context_handle()`
+answered None for every Tk context and none of them was ever forgotten -- the
+stale-table hazard `_release_context` exists to prevent, run for the whole
+suite. `tests/glcontext_tk.py` implements the hook, which is what
+`test_shared_context_setup` was asking for all along.
+
+**A context torn down inside a `glBegin` block took the process with it.** Not a
+Tk defect -- it reproduced on GLFW too, and is
+[the 2026-09-03 note's item D](2026-09-03-windows-suite-remaining-work.md)
+("an access violation in `glfwCreateWindow`, seen once, not reproduced"). See
+[A block outlives nothing](#a-block-outlives-nothing).
+
+## A block outlives nothing
+
+A `glBegin` block is closed in the context that opened it. A context created or
+destroyed while one is still open is undefined, and Intel's Windows ICD does not
+survive it: it leaves state that the **next** context creation in the process
+faults on, so the access violation lands on whichever code asks for the next
+context rather than on the one that abandoned the block.
+
+Measured, `tests/gl/test_begin_block_recovery.py`, 20 runs each:
+
+| what was left out of the sequence | access violations |
+| --- | --- |
+| nothing (the case as written) | 10/20 |
+| the `glBegin` | 0/20 |
+| the block left open -- `glEnd` called | 0/20 |
+| `dispatch.forget_context` | 12/20 |
+| destroying the context | 0/20 |
+| creating the next context | 0/20 |
+| making the next context current | 9/20 |
+
+So the block, the destruction and the next creation are each necessary, and
+neither the notification nor the make-current is. `ig9icd64.dll` 31.0.101.2114,
+`0xC0000005`, fault offset `0x5b37bb` -- the same instruction in all of them.
+
+The fix is that PyOpenGL closes such a block rather than handing the driver a
+state the specification does not define. `OpenGL.error.end_abandoned_block()`
+closes one and answers whether there was one; `make_current` and
+`forget_context` call it for the changes PyOpenGL is told about, and a toolkit
+calls it for the one it is not -- creating a context, which happens inside the
+toolkit. `OpenGL.Tk` does that in `GLFrame.createContext`, and the suite's
+fixture in `ContextTestCase._open_context`, since it owns the GLFW window.
+
+After it: 0/30 on GLFW and 0/30 on Tk, where the same command was 7/30 and 9/20.
+The two cases that used to skip with "driver did not provide the requested
+context" now run, because that refusal was the driver declining to make a
+context inside the open block.
+
 ## Still to land
-
-Both are wanted for the next release, and neither can be finished in this
-container -- there is no Windows and no macOS here, and a context is exactly the
-thing that cannot be checked without the platform that makes it.
-
-**Windows (WGL).** `OpenGL/Tk/win32.py` is written: `wglChoosePixelFormatARB`
-and `wglCreateContextAttribsARB`, with the dummy-context dance those two need
-because the ARB entry points can only be resolved through a context that already
-exists. What it needs is a run: `TEST_WINDOWING=tk python -m pytest tests` on a
-Windows machine, which exercises the same suite X11 passes, and
-`examples/tk_shader.py`, which is the core profile doing something only a core
-profile can. Any correction belongs in that module; nothing above it should have
-to change.
 
 **macOS (Aqua).** Not implemented. Tk's Aqua windows are `NSView`s, and a
 context is attached to one through Objective-C -- `NSOpenGLContext` over the CGL
@@ -104,9 +188,10 @@ context, and answer `makeCurrent` / `swapBuffers` / `setSwapInterval` from it.
 `OpenGL/Tk/context.py` already dispatches on `tk windowingsystem`, so an `aqua`
 implementation registers beside the other two and nothing else moves.
 
-## Four defects it turned up
+## Four defects X11 turned up
 
 Each was found by needing it, and each is fixed with a test of its own.
+Windows turned up its own, [above](#what-windows-turned-up).
 
 **Every GLX extension read as absent.**  `_GLXQuerier.getDisplay()` passed a
 `str` to `XOpenDisplay`, which takes a `char *`; with no `argtypes` set ctypes
