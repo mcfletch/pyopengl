@@ -202,3 +202,58 @@ class TestForgettingAContextAsksWhetherThereIsOneToAsk:
         if getter is None:                  # pragma: no cover - has one here
             pytest.skip('this platform cannot say which context is current')
         assert dispatch._current_context() == int(getter() or 0)
+
+
+class TestTheFlagIsOnlyReadWhereSomethingSetsIt:
+    """The callback is armed per context; the ctypes checker is one object for
+    the whole process. So a context with no callback of its own sets no flag --
+    and a checker still reading one finds no errors at all, in any of them.
+
+    That is not a cost, it is a silence: every ``GLError`` the driver reports
+    is lost, and the call that caused it returns as though it succeeded.
+
+    It is the ordinary case on Windows rather than a corner. The WGL offscreen
+    path makes a bootstrap context to resolve entry points through, arms *that*
+    one, and then goes back to whatever was current -- leaving the flag being
+    read for a context nobody is drawing in, and the real contexts unchecked.
+    """
+
+    @pytest.fixture
+    def readers(self, monkeypatch):
+        """Context 0x10000 armed and its flag being read, as the bootstrap
+        leaves things; the list records each re-pointing after that."""
+        pointed = []
+        monkeypatch.setattr(dispatch, '_layer', lambda: None)
+        monkeypatch.setattr(dispatch, '_installed_callbacks', {0x10000: object()})
+        monkeypatch.setattr(dispatch, '_reading_debug_output', True)
+        monkeypatch.setattr(dispatch, '_start_reading_debug_output',
+                            lambda: pointed.append(True))
+        monkeypatch.setattr(dispatch, '_stop_reading_debug_output',
+                            lambda: pointed.append(False))
+        monkeypatch.setattr(dispatch, 'offer_debug_output', lambda: None)
+        return pointed
+
+    def test_making_an_unarmed_context_current_goes_back_to_the_round_trip(
+        self, readers
+    ):
+        dispatch.make_current(0x20001)
+        assert readers == [False], readers
+
+    def test_making_the_armed_one_current_again_keeps_reading_the_flag(
+        self, readers
+    ):
+        """And re-points nothing: make_current runs on every context switch a
+        program makes."""
+        dispatch.make_current(0x10000)
+        assert readers == [], readers
+
+    def test_naming_no_context_goes_back_to_the_round_trip(self, readers):
+        """What the WGL bootstrap does on its way out."""
+        dispatch.make_current(0)
+        assert readers == [False], readers
+
+    def test_forgetting_the_armed_one_stops_the_reading(self, readers,
+                                                        monkeypatch):
+        monkeypatch.setattr(dispatch, '_current_context', lambda: 0)
+        dispatch.forget_context(0x10000)
+        assert readers[-1] is False, readers

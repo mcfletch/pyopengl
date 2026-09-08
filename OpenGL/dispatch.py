@@ -237,6 +237,9 @@ def make_current(handle):
     else:
         _drop_unnamed_arming()
         _ctypes_current_context = int(handle or 0)
+    # Before the offer, which may arm this context and start the reading
+    # itself: what this settles is the context that arrives *unarmed*.
+    _follow_debug_output()
     offer_debug_output()
 
 
@@ -267,6 +270,8 @@ def forget_context(handle):
         layer.forget_context(handle)
     else:
         _drop_unnamed_arming()
+    # The context that was setting the flag may be the one that has just gone.
+    _follow_debug_output()
 
 
 def _forget_context_data(handle):
@@ -624,6 +629,52 @@ def use_debug_output(enable=True):
     return True
 
 
+def _follow_debug_output():
+    """Read the flag only while the context that sets it is the current one.
+
+    The driver's callback is installed **per context**; the ctypes error
+    checker is one object for the whole process.  So a context with no callback
+    of its own sets no flag, and a checker still reading one finds no errors in
+    it at all -- every ``GLError`` the driver reports is lost and the call that
+    caused it returns as though it had worked.  A silence rather than a cost,
+    and the opposite of what error checking is for.
+
+    :func:`_release_debug_callback` cannot answer this on its own: it goes back
+    to the round trip once *nothing* holds a callback, which is right for the
+    context giving one up and says nothing about which context is now current.
+
+    The Windows offscreen path is the ordinary case rather than a corner.
+    ``OpenGL.WGL.offscreen`` makes a bootstrap context to resolve entry points
+    through, names it current, arms it, and then names back whatever was
+    current before -- leaving the flag being read for a context nobody draws
+    in, and every real one unchecked.
+
+    The compiled layer keeps the mode with the context's own dispatch table, so
+    it follows the context by construction and there is nothing to do here.
+    """
+    global _reading_debug_output
+
+    if _layer() is not None:
+        return
+    wanted = _context_key() in _installed_callbacks
+    if wanted == _reading_debug_output:
+        # Nothing to re-point.  ``make_current`` is called on every context
+        # switch a program makes, and pointing the checker at what it is
+        # already reading would be work per switch for no change.
+        return
+    _reading_debug_output = wanted
+    if wanted:
+        _start_reading_debug_output()
+    else:
+        _stop_reading_debug_output()
+
+
+#: Whether the ctypes checker is reading the flag rather than asking the
+#: driver.  Kept because :func:`_follow_debug_output` re-points it only on a
+#: change; the two functions that do the pointing keep it true.
+_reading_debug_output = False
+
+
 def _context_key():
     """What the installed callbacks are recorded against.
 
@@ -724,6 +775,9 @@ def _read_debug_error():
 
 def _start_reading_debug_output():
     """Point the implementation's error check at the flag the callback sets."""
+    global _reading_debug_output
+
+    _reading_debug_output = True
     layer = _layer()
     if layer is not None:
         layer.set_error_mode(1)
@@ -756,6 +810,9 @@ def offer_on_first_check(checker):
 
 def _stop_reading_debug_output():
     """Go back to a glGetError per call."""
+    global _reading_debug_output
+
+    _reading_debug_output = False
     layer = _layer()
     if layer is not None:
         layer.set_error_mode(0)
