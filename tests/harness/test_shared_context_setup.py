@@ -36,15 +36,29 @@ class TestItRunsWhereThereIsNoWindow:
     #: none.  A platform with no headless backend cannot answer the question.
     HEADLESS = backends.headless_for()
 
+    #: How long the child gets.  It runs the whole of ``tests/gl`` -- four
+    #: minutes on a slow machine -- and the bound is generous rather than
+    #: tight.  What it is for is the case where the child does not finish at
+    #: all: a GL call that blocks takes this process with it, and a suite that
+    #: hangs after its last line of output says nothing about what went wrong.
+    CHILD_TIMEOUT = 900
+
     def _run(self, windowing):
         environment = dict(os.environ)
         environment['TEST_WINDOWING'] = windowing
         environment['TEST_VISIBLE'] = '0'
-        return subprocess.run(
-            [sys.executable, '-m', 'pytest', '-q', '--no-header', '-p',
-             'no:randomly', os.path.join('tests', 'gl')],
-            cwd=ROOT, env=environment, capture_output=True, text=True,
-            check=False)
+        try:
+            return subprocess.run(
+                [sys.executable, '-m', 'pytest', '-q', '--no-header', '-p',
+                 'no:randomly', os.path.join('tests', 'gl')],
+                cwd=ROOT, env=environment, capture_output=True, text=True,
+                check=False, timeout=self.CHILD_TIMEOUT)
+        except subprocess.TimeoutExpired as expired:
+            pytest.fail(
+                'the child running tests/gl under %s did not finish within '
+                '%d seconds; its output so far:\n%s'
+                % (windowing, self.CHILD_TIMEOUT,
+                   (expired.stdout or b'')[-2000:]))
 
     def test_this_platform_has_a_headless_backend(self):
         """The premise of the two below, said once and by name: without one,

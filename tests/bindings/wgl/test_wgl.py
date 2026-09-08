@@ -6,22 +6,43 @@ HERE = os.path.dirname( __file__ )
 if sys.platform != 'win32':
     raise pytest.skip('Non-windows (WGL) platform', allow_module_level=True)
 import pygame, pygame.display
-pygame.display.init()
 from OpenGL.GL import *
 from OpenGL.WGL import *
 
 class TestWGL(unittest.TestCase):
     width,height = 300,300
+
+    #: Whether the window may be seen.  ``TEST_VISIBLE=0`` is how the suite
+    #: says it may not, and these cases need a window rather than a *shown*
+    #: one: several hundred GL tests flashing windows over whatever the person
+    #: running them is doing, and taking the focus while they type, is not
+    #: something to inflict on anyone.  See tests/glcontext_pygame.py, which
+    #: hides its window the same way.
+    visible = os.environ.get('TEST_VISIBLE', '1').strip().lower() not in (
+        '0', 'false', 'no', '',
+    )
+
     def setUp(self):
-        self.screen = pygame.display.set_mode(
-            (self.width,self.height),
-            pygame.OPENGL | pygame.DOUBLEBUF,
-        )
-        
+        # Here rather than at module scope: pytest imports every module while
+        # it collects, so an import-time init starts the display subsystem for
+        # a run that may not go on to use it.
+        pygame.display.init()
+        flags = pygame.OPENGL | pygame.DOUBLEBUF
+        if not self.visible:
+            # pygame.HIDDEN arrived in pygame 2.0; fall back gracefully.
+            flags |= getattr(pygame, 'HIDDEN', 0)
+        self.screen = pygame.display.set_mode((self.width,self.height), flags)
         pygame.display.set_caption('Testing system')
         pygame.key.set_repeat(500,30)
+
     def tearDown(self):
         pygame.display.flip()
+        # And give the window back.  ``set_mode`` alone leaves it on screen for
+        # the rest of the process -- the run has hundreds of tests still to go
+        # and a window sitting over them for all of it -- and the GL context it
+        # carries stays current, which the next backend to ask for the thread
+        # then has to take off it.
+        pygame.display.quit()
 
     def test_wgl_imported(self):
         assert bool(wglCreateContext)
