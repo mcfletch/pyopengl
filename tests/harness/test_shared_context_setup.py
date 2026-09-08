@@ -178,11 +178,14 @@ class TestAContextThatGoesIsForgotten:
             for handle in forgotten:
                 real(handle)
         assert handles[0], 'no context handle to forget'
-        # That it was said, and about this context, rather than how many times.
-        # Retiring a table twice is retiring it and then finding nothing to
-        # retire, and a backend may sit on a library that owns contexts too:
-        # `OpenGL.WGL.offscreen.OffscreenContext` tells the dispatch layer when
-        # it destroys its own context, which it has to, because a caller
-        # reaching for it directly has no fixture doing it for them.
+        # That it was said, and about this context, rather than how many times
+        # or about how many contexts.  Retiring a table twice is retiring it
+        # and then finding nothing to retire, and a backend may sit on a
+        # library that owns contexts of its own and retires those too -- which
+        # it has to, because a caller reaching for it directly has no fixture
+        # doing it for them.  `OpenGL.WGL.offscreen.OffscreenContext` retires
+        # the one it hands out; `OpenGL.Tk` retires that one and the two
+        # throwaway contexts WGL needs to look an extension up through, whose
+        # handles the driver hands out again as readily as any other.
         assert forgotten, (forgotten, handles)
-        assert set(forgotten) == {handles[0]}, (forgotten, handles)
+        assert handles[0] in forgotten, (forgotten, handles)

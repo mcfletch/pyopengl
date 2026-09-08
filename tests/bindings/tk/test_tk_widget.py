@@ -1,11 +1,14 @@
-"""A Tk widget with a GL context of its own, against a real X server.
+"""A Tk widget with a GL context of its own, against a real window server.
 
 What the widget promises: importing it does nothing, a context appears when the
 window does, ``initgl`` runs once and ``redraw`` runs per frame, the context is
 the profile that was asked for, and it goes when the widget does.
 
-The import test runs anywhere; the rest need a display, since a Tk window is
-what there is to make a context on.
+The import test runs anywhere; the rest need somewhere to put a window, since a
+Tk window is what there is to make a context on.  Which is a different question
+on each platform -- ``DISPLAY`` names one only on Linux -- so it is put through
+:func:`backends.has_window_server`, and these cases run on Windows against WGL
+and on X11 against GLX rather than skipping wherever the variable is unset.
 
 See `plans/TK-WIDGET.md`.
 """
@@ -17,12 +20,12 @@ import sys
 from arraycompat import one
 import paths
 import pytest
+from backends import has_window_server
 
 pytest.importorskip('tkinter')
 
-HAS_DISPLAY = bool(os.environ.get('DISPLAY', '').strip())
 needs_display = pytest.mark.skipif(
-    not HAS_DISPLAY, reason='no X display to open a Tk window on')
+    not has_window_server(), reason='no window server to open a Tk window on')
 
 
 def assert_the_old_pipeline_is_there():

@@ -92,17 +92,10 @@ class TkBackend(object):
         if self._frame is not None:
             self._frame.swapBuffers()
 
-    def _context_handle(self):
-        """This widget's GL context handle, read while it is current.
-
-        Another test's window may have been made current since; the handle the
-        dispatch table is keyed by is this context's, not whichever one happens
-        to be current now.
-        """
+    def _make_current(self):
         if self._frame is None:
-            return None
+            raise RuntimeError('this backend has no context to make current')
         self._frame.makeCurrent()
-        return super()._context_handle()
 
     def _destroy_context(self):
         if self._frame is not None:
