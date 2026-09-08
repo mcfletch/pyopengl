@@ -21,20 +21,31 @@ import backends
 from childenv import run_in_child
 from glcontext import CHILD_PREAMBLE, NOTHING_TO_TEST_WITH
 
-#: Backends whose teardown is itself GL calls made in *another* context.
-#: Destroying a pbuffer needs a context current to resolve
+#: Backends that cannot be put in the situation these cases are about: a
+#: context torn down with the dispatch layer never told.  Both of them are
+#: PyOpenGL's own context implementations, and both say something on the way
+#: out, so ``release(forget=False)`` does not buy the silence the case needs.
+#:
+#: ``wgl`` -- destroying a pbuffer needs a context current to resolve
 #: ``wglDestroyPbufferARB`` through, and it cannot be the one being destroyed,
-#: so ``OpenGL.WGL.offscreen`` borrows its bootstrap context to do it.  The
+#: so ``OpenGL.WGL.offscreen`` borrows its bootstrap context and names it.  The
 #: compiled layer follows whichever context it last dispatched in, so what a
-#: call meets afterwards is that context's table rather than the dead one's --
-#: and the situation these cases are about, where nothing has dispatched since
-#: the context went, is one such a backend cannot be put in.
-_TEARS_DOWN_ELSEWHERE = ('wgl',)
+#: call meets afterwards is that context's table rather than the dead one's.
+#:
+#: ``tk`` -- ``OpenGL.Tk`` owns its widget's context and retires the table in
+#: ``WGLContext.destroy``, for the same reason ``OpenGL.WGL.offscreen`` does:
+#: a caller reaching for the widget directly has no fixture to do it for them.
+#: It also makes and destroys two throwaway contexts per widget, whose handles
+#: the driver hands out again.
+#:
+#: The parity these cases defend is asked of every backend that *can* be made
+#: silent -- glfw, pygame, and the headless egl and cgl ones.
+_TELLS_THE_LAYER_REGARDLESS = ('wgl', 'tk')
 
-tears_down_elsewhere = pytest.mark.skipif(
-    backends.requested() in _TEARS_DOWN_ELSEWHERE,
-    reason='this backend tears its context down through another one, so the '
-           'call under test does not meet a context that has merely gone',
+tells_the_layer_regardless = pytest.mark.skipif(
+    backends.requested() in _TELLS_THE_LAYER_REGARDLESS,
+    reason='this backend owns its context and says when it goes, so the call '
+           'under test does not meet a context the layer was never told about',
 )
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -88,7 +99,7 @@ def behaviour(dispatch, checking, debug_output=True):
     return completed.stdout.strip().splitlines()[-1]
 
 
-@tears_down_elsewhere
+@tells_the_layer_regardless
 @pytest.mark.parametrize('debug_output', [True, False],
                          ids=['debug-output', 'get-error'])
 def test_the_default_is_quiet_under_both_implementations(debug_output):

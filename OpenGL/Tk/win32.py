@@ -16,20 +16,29 @@ destroyed.  This is the documented sequence and there is no shorter one.
 throwaway context is made on a window of its own rather than on the widget's:
 setting a format on the widget to ask the question would spend the one chance
 to set the format the answer names.
+
+**Every Win32 entry point used here is declared** in :data:`SIGNATURES`, and
+reached through :func:`windowsLibrary` rather than ``ctypes.windll``.  See
+:data:`SIGNATURES` for why a handle has to say how wide it is.
 """
 
 from __future__ import annotations
 
 import ctypes
 import logging
-from typing import Any, List
+from typing import Any, Dict, List, Tuple
 
+from OpenGL.error import end_abandoned_block
 from OpenGL.Tk.attributes import ContextAttributes
+from OpenGL.Tk.context import gone, nowCurrent
 from OpenGL.Tk.errors import TkContextError
 
 log = logging.getLogger(__name__)
 
-__all__ = ['WGLContext', 'contextAttributes', 'pixelFormatAttributes']
+__all__ = [
+    'SIGNATURES', 'WGLContext', 'contextAttributes', 'pixelFormatAttributes',
+    'windowsLibrary',
+]
 
 
 def _arb(name: str) -> Any:
@@ -181,6 +190,74 @@ def describedFormat(attributes: ContextAttributes) -> PIXELFORMATDESCRIPTOR:
     return described
 
 
+#: Win32's own names for the types these calls pass around, so a signature
+#: below reads as the one in the platform's headers.  A handle is pointer-sized
+#: whatever it is a handle to, and ``BOOL`` is a C ``int``.
+HWND = HDC = HMENU = HINSTANCE = LPVOID = ctypes.c_void_p
+BOOL = ctypes.c_int
+DWORD = ctypes.c_uint32
+LPCWSTR = ctypes.c_wchar_p
+PPIXELFORMATDESCRIPTOR = ctypes.POINTER(PIXELFORMATDESCRIPTOR)
+
+#: Every Win32 entry point this module calls, by ``(library, name)``, with the
+#: type it answers and the types it takes.
+#:
+#: Declaring them is not optional on a 64-bit build.  ``ctypes`` gives an
+#: undeclared function a return type of C ``int``, which is half the width of a
+#: handle: an undeclared ``GetDC`` answers the low 32 bits of the ``HDC``, as a
+#: signed number.  The rest of the sequence then disagrees about which device
+#: context it means -- ``SetPixelFormat``, taking an undeclared argument, is
+#: handed the truncated value zero-extended, while ``wglCreateContext``, whose
+#: ``HDC`` *is* declared, is handed it sign-extended -- so the format is set on
+#: one device context and the context asked for on another.  The driver answers
+#: ``ERROR_INVALID_PIXEL_FORMAT`` and no context, and there is nothing in that
+#: to say a handle was the problem.
+#:
+#: Which half of the handle a window happens to land in decides whether any of
+#: this shows, so the same program makes a context on one window and not the
+#: next.
+SIGNATURES: Dict[Tuple[str, str], Tuple[Any, List[Any]]] = {
+    ('gdi32', 'ChoosePixelFormat'): (
+        ctypes.c_int, [HDC, PPIXELFORMATDESCRIPTOR]),
+    ('gdi32', 'SetPixelFormat'): (
+        BOOL, [HDC, ctypes.c_int, PPIXELFORMATDESCRIPTOR]),
+    ('gdi32', 'SwapBuffers'): (BOOL, [HDC]),
+    ('user32', 'CreateWindowExW'): (HWND, [
+        DWORD, LPCWSTR, LPCWSTR, DWORD,
+        ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_int,
+        HWND, HMENU, HINSTANCE, LPVOID,
+    ]),
+    ('user32', 'DestroyWindow'): (BOOL, [HWND]),
+    ('user32', 'GetDC'): (HDC, [HWND]),
+    ('user32', 'ReleaseDC'): (ctypes.c_int, [HWND, HDC]),
+}
+
+#: The libraries :func:`windowsLibrary` has loaded, by name.
+_LIBRARIES: Dict[str, Any] = {}
+
+
+def windowsLibrary(name: str) -> Any:
+    """``name``.dll, with the entry points :data:`SIGNATURES` names declared
+
+    A library object of this module's own rather than ``ctypes.windll.<name>``,
+    which every library in the process shares: a prototype declared on that one
+    changes the signature under whoever else is calling through it.
+    """
+    library = _LIBRARIES.get(name)
+    if library is None:
+        # windll and WinDLL exist only on Windows, which is the only place
+        # this is called; see OpenGL.Tk.context, which picks an implementation
+        # by Tk's own windowing system.
+        windows: Any = ctypes
+        library = _LIBRARIES[name] = windows.WinDLL(name)
+        for (where, entryPoint), (restype, argtypes) in SIGNATURES.items():
+            if where == name:
+                declared = getattr(library, entryPoint)
+                declared.restype = restype
+                declared.argtypes = argtypes
+    return library
+
+
 class WGLContext(object):
     """A WGL context bound to the window a Tk widget owns
 
@@ -201,12 +278,8 @@ class WGLContext(object):
 
         self.attributes = attributes
         self._wgl = WGL
-        # windll exists only on Windows, which is the only place this module
-        # is ever constructed; see OpenGL.Tk.context, which picks by Tk's own
-        # windowing system.
-        windows: Any = ctypes
-        self._gdi32 = windows.windll.gdi32
-        self._user32 = windows.windll.user32
+        self._gdi32 = windowsLibrary('gdi32')
+        self._user32 = windowsLibrary('user32')
         self.window = int(widget.winfo_id())
         self.deviceContext = self._user32.GetDC(self.window)
         if not self.deviceContext:
@@ -294,11 +367,15 @@ class WGLContext(object):
                     yield False
                     return
                 self._wgl.wglMakeCurrent(device, handle)
+                nowCurrent(handle)
                 yield True
             finally:
+                if handle:
+                    gone(handle)
                 self._wgl.wglMakeCurrent(None, None)
                 if handle:
                     self._wgl.wglDeleteContext(handle)
+                nowCurrent(None)
                 self._user32.ReleaseDC(window, device)
                 self._user32.DestroyWindow(window)
 
@@ -335,6 +412,7 @@ class WGLContext(object):
                 'Windows would not create any GL context on this window')
         try:
             self._wgl.wglMakeCurrent(self.deviceContext, old)
+            nowCurrent(old)
             if not create_context.wglCreateContextAttribsARB:
                 raise TkContextError(
                     'This driver has no WGL_ARB_create_context, so it cannot '
@@ -346,8 +424,10 @@ class WGLContext(object):
                 (ctypes.c_int * len(wanted))(*wanted),
             )
         finally:
+            gone(old)
             self._wgl.wglMakeCurrent(None, None)
             self._wgl.wglDeleteContext(old)
+            nowCurrent(None)
         return self._checked(handle)
 
     def _checked(self, handle):
@@ -362,11 +442,15 @@ class WGLContext(object):
         """Draw into this widget from now on; False if the driver refused"""
         if self.handle is None:
             return False
-        return bool(self._wgl.wglMakeCurrent(self.deviceContext, self.handle))
+        made = bool(self._wgl.wglMakeCurrent(self.deviceContext, self.handle))
+        if made:
+            nowCurrent(self.handle)
+        return made
 
     def releaseCurrent(self) -> None:
         """Let go of the current context, leaving none current"""
         self._wgl.wglMakeCurrent(None, None)
+        nowCurrent(None)
 
     def swapBuffers(self) -> None:
         """Show what has been drawn"""
@@ -392,8 +476,15 @@ class WGLContext(object):
         """Give the context and the device context back
 
         Called twice is called once; the second call has nothing to do.
+
+        A ``glBegin`` block left open goes with it: a context destroyed inside
+        one is undefined and a driver need not survive it, so the block is
+        closed while there is still a context to close it in.  See
+        :func:`OpenGL.error.end_abandoned_block`.
         """
         if self.handle is not None:
+            end_abandoned_block()
+            gone(self.handle)
             self.releaseCurrent()
             self._wgl.wglDeleteContext(self.handle)
             self.handle = None

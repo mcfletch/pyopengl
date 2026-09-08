@@ -31,7 +31,41 @@ from typing import Any, Optional
 from OpenGL.Tk.attributes import ContextAttributes
 from OpenGL.Tk.errors import TkContextError
 
-__all__ = ['createContext', 'windowingSystem']
+__all__ = ['createContext', 'gone', 'nowCurrent', 'windowingSystem']
+
+
+def nowCurrent(handle: object) -> None:
+    """Tell the dispatch layer which context this thread draws through now.
+
+    Its table of resolved entry points is keyed by the context handle, and a
+    handle is an address the driver hands out again.  An implementation here
+    makes contexts the application never sees -- WGL needs two throwaway ones
+    per widget, since ``wglChoosePixelFormatARB`` and
+    ``wglCreateContextAttribsARB`` can only be looked up through a context that
+    already exists -- so those addresses come back quickly, and often as the
+    widget's own.
+
+    ``OpenGL.Tk`` owns these contexts, so it is the only thing that can say.  A
+    program driving the widget through :class:`~OpenGL.Tk.widget.GLFrame` never
+    calls ``OpenGL.dispatch.make_current`` itself and should not have to.
+    """
+    from OpenGL import _dispatch
+
+    _dispatch.make_current(int(handle or 0))
+
+
+def gone(handle: object) -> None:
+    """Tell the dispatch layer a context is about to stop existing.
+
+    While it still does: the table is retired for that handle, so the next
+    context to be given the address resolves its own entry points rather than
+    inheriting the dead one's.  Left unsaid, the stale table answers about a
+    context that is no longer there -- an entry point reported undefined where
+    this context has it, or resolved where it does not.
+    """
+    from OpenGL import _dispatch
+
+    _dispatch.forget_context(int(handle or 0))
 
 #: What each of Tk's windowing systems is served by.  ``aqua`` is absent, and
 #: :func:`createContext` says what that costs.

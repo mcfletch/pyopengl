@@ -33,6 +33,7 @@ import time
 import tkinter
 from typing import Any, Optional
 
+from OpenGL.error import end_abandoned_block
 from OpenGL.Tk.attributes import ContextAttributes
 from OpenGL.Tk.context import createContext
 from OpenGL.Tk.errors import TkContextError
@@ -145,6 +146,10 @@ class GLFrame(tkinter.Frame):
         """
         if self.context is not None:
             return self.context
+        # A context cannot be made while a glBegin block is open on the
+        # current one, and a widget mapped from inside a redraw is exactly
+        # where that happens.  See OpenGL.error.end_abandoned_block.
+        end_abandoned_block()
         self.update_idletasks()         # so winfo_id() names a real window
         self.context = createContext(self, self.attributes)
         self.contextError = None

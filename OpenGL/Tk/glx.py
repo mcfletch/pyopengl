@@ -26,8 +26,10 @@ from typing import Any, List, Optional
 from OpenGL import GL, GLX
 from OpenGL.GLX.ARB import create_context as _create_context
 from OpenGL.GLX.ARB import create_context_profile as _create_context_profile
+from OpenGL.error import end_abandoned_block
 from OpenGL.platform import ctypesloader
 from OpenGL.Tk.attributes import ContextAttributes
+from OpenGL.Tk.context import gone, nowCurrent
 from OpenGL.Tk.errors import TkContextError
 
 log = logging.getLogger(__name__)
@@ -335,12 +337,16 @@ class GLXContext(object):
 
         current: Any = platform.PLATFORM
         current.releaseCurrentContext()
-        return bool(GLX.glXMakeCurrent(self.display, self.drawable,
+        made = bool(GLX.glXMakeCurrent(self.display, self.drawable,
                                        self.handle))
+        if made:
+            nowCurrent(self.handle)
+        return made
 
     def releaseCurrent(self) -> None:
         """Let go of the current context, leaving none current"""
         GLX.glXMakeCurrent(self.display, 0, None)
+        nowCurrent(None)
 
     def swapBuffers(self) -> None:
         """Show what has been drawn"""
@@ -367,8 +373,15 @@ class GLXContext(object):
         """Give the context and this module's display connection back
 
         Called twice is called once; the second call has nothing to do.
+
+        A ``glBegin`` block left open goes with it: a context destroyed inside
+        one is undefined and a driver need not survive it, so the block is
+        closed while there is still a context to close it in.  See
+        :func:`OpenGL.error.end_abandoned_block`.
         """
         if self.handle is not None:
+            end_abandoned_block()
+            gone(self.handle)
             self.releaseCurrent()
             GLX.glXDestroyContext(self.display, self.handle)
             self.handle = None
