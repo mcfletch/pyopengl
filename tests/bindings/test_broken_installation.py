@@ -27,6 +27,8 @@ import sys
 
 import pytest
 
+import paths
+
 
 def run(where, source):
     """`source` in a child run from ``where``, which is its ``sys.path[0]``."""
@@ -76,3 +78,59 @@ class TestTheFailureNamesItself:
         )
         assert completed.returncode == 0, completed.stderr
         assert completed.stdout.strip() in ('True', 'False'), completed.stdout
+
+
+#: ``setup.py`` with the platform it decides by forced, and ``setup`` itself
+#: replaced by something that records what it was handed.  Windows because
+#: that is the branch that has ever declared ``data_files``, and where the
+#: prefix is a site directory -- ``site.getsitepackages()`` there answers
+#: ``[prefix, prefix\\Lib\\site-packages]``, so a directory installed into the
+#: prefix is a directory on ``sys.path``.
+DECLARED = '''
+import runpy
+import sys
+
+import setuptools
+
+recorded = {}
+setuptools.setup = lambda **named: recorded.update(named)
+sys.platform = 'win32'
+runpy.run_path('setup.py', run_name='__main__')
+print(repr(recorded.get('data_files') or []))
+'''
+
+
+class TestNothingIsInstalledOutsideThePackage:
+    """``data_files`` with a relative target installs into the *install
+    prefix*, not into the package.  Naming one ``OpenGL/DLLS`` puts an
+    ``OpenGL`` directory with no ``__init__.py`` in it in the prefix -- which
+    on Windows is a directory the interpreter imports from, so it shadows the
+    real package for every process that runs from anywhere but the checkout.
+
+    Nothing reads the copy: ``ctypesloader.DLL_DIRECTORY`` is
+    ``os.path.dirname(OpenGL.__file__)/DLLS``, inside the package, which is
+    where the DLLs ship as package data.
+    """
+
+    def test_the_build_declares_no_data_files(self):
+        completed = subprocess.run(
+            [sys.executable, '-c', DECLARED],
+            capture_output=True, text=True, cwd=paths.ROOT, timeout=300,
+        )
+        assert completed.returncode == 0, completed.stderr
+        assert completed.stdout.strip() == '[]', (
+            'setup.py declares data_files, which install relative to the '
+            'prefix rather than into the package: %s' % (completed.stdout.strip(),)
+        )
+
+    def test_the_windows_dlls_ship_inside_the_package(self):
+        """Which is what makes the declaration above unnecessary as well as
+        harmful: they are already where the loader looks."""
+        from OpenGL.platform import ctypesloader
+
+        assert os.path.isdir(ctypesloader.DLL_DIRECTORY), \
+            ctypesloader.DLL_DIRECTORY
+        assert any(
+            name.endswith('.dll')
+            for name in os.listdir(ctypesloader.DLL_DIRECTORY)
+        ), os.listdir(ctypesloader.DLL_DIRECTORY)

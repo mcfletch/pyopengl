@@ -188,6 +188,17 @@ context, and answer `makeCurrent` / `swapBuffers` / `setSwapInterval` from it.
 `OpenGL/Tk/context.py` already dispatches on `tk windowingsystem`, so an `aqua`
 implementation registers beside the other two and nothing else moves.
 
+Until it does, the widget's own suite skips there rather than failing: the
+`root` fixture asks `tk windowingsystem` and skips where
+`context.IMPLEMENTATIONS` has nothing for it, naming the system. Asked of Tk
+rather than of `sys.platform`, because an X11 build of Tk on macOS is served by
+the GLX implementation and should run the whole suite. What Aqua *does*
+promise is asserted from everywhere instead —
+`TestAWindowingSystemWithNoImplementation` holds `createContext` to raising a
+`TkContextError` that says which system it is and names Togl and `pyopengltk`,
+rather than letting a caller find out from a `NullFunctionError` inside a
+context that was never made.
+
 ## Five defects X11 turned up
 
 Each was found by needing it, and each is fixed with a test of its own.

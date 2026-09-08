@@ -104,11 +104,30 @@ class TestImportingItDoesNothing:
 
 @pytest.fixture
 def root():
-    """A Tk root that is destroyed however the test ends"""
+    """A Tk root that is destroyed however the test ends
+
+    Skipped where ``OpenGL.Tk`` has no context implementation for the
+    windowing system Tk is using: the widget cannot make a context there, and
+    the cases below are about one that has.  What it promises on such a
+    platform instead -- a ``TkContextError`` naming what does work -- is
+    :class:`TestAWindowingSystemWithNoImplementation`, which runs everywhere.
+
+    Asked of Tk rather than of ``sys.platform``, for the reason the module
+    docstring gives: an X11 build of Tk on macOS has X windows and is served.
+    """
     import tkinter
+
+    from OpenGL.Tk.context import IMPLEMENTATIONS, windowingSystem
 
     made = tkinter.Tk()
     made.geometry('200x150')
+    system = windowingSystem(made)
+    if system not in IMPLEMENTATIONS:
+        made.destroy()
+        pytest.skip(
+            'OpenGL.Tk has no context implementation for Tk on %s; see '
+            'plans/TK-WIDGET.md' % (system,)
+        )
     try:
         yield made
     finally:
@@ -140,6 +159,52 @@ def scene(root):
     made.pack(fill='both', expand=True)
     made.waitForMap()
     return made
+
+
+class TestAWindowingSystemWithNoImplementation:
+    """What a platform `OpenGL.Tk` does not serve is promised instead.
+
+    Aqua is the one: a context is attached to an NSView there, through
+    Objective-C, rather than made against a window id, and `plans/TK-WIDGET.md`
+    has it as still to land.  So the promise is a `TkContextError` that says
+    so and names what does work -- not a `NullFunctionError` from somewhere
+    inside a context that was never made.
+
+    Asked with a stub rather than on Aqua, so the promise is held to from
+    wherever the suite runs; `tk windowingsystem` is the whole of what
+    `createContext` reads to decide.
+    """
+
+    class Widget:
+        """As much of a Tk widget as choosing an implementation reads."""
+
+        def __init__(self, system):
+            self.system = system
+            self.tk = self
+
+        def call(self, *arguments):
+            assert arguments == ('tk', 'windowingsystem'), arguments
+            return self.system
+
+    def test_aqua_says_so_and_says_what_does_work(self):
+        from OpenGL.Tk.context import createContext
+        from OpenGL.Tk.errors import TkContextError
+
+        with pytest.raises(TkContextError) as raised:
+            createContext(self.Widget('aqua'))
+        message = str(raised.value)
+        assert 'Aqua' in message, message
+        # The two that do serve it, so the reader has somewhere to go.
+        assert 'togl' in message.lower() and 'pyopengltk' in message, message
+
+    def test_and_so_does_one_nobody_has_heard_of(self):
+        """A Tk built for something neither this nor the message knows."""
+        from OpenGL.Tk.context import createContext
+        from OpenGL.Tk.errors import TkContextError
+
+        with pytest.raises(TkContextError) as raised:
+            createContext(self.Widget('haiku'))
+        assert 'haiku' in str(raised.value), raised.value
 
 
 @needs_display
