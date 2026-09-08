@@ -5,6 +5,15 @@ A context is current per thread, and the table a thread dispatches through is
 thread-local, so a thread that has never made a GL call starts with no table
 at all.  It has to find the right one on its first call rather than inheriting
 whatever the thread that created it was using.
+
+**The workers are daemons, and the joins below are bounded**, because taking a
+context is a call that can fail to return: ``glfwMakeContextCurrent`` blocks
+where the driver will not hand the context over, and a worker stuck in it never
+finishes.  A bounded join then reports the failure -- which is what a test
+should do -- but a *non-daemon* thread still holds the interpreter open at
+exit, and ``threading._shutdown`` waits on it with no timeout at all.  The run
+then hangs after the summary has been printed, which reads as a hung suite
+rather than as three failing cases.
 """
 
 import threading
@@ -52,7 +61,7 @@ class TestThreadedDispatch(unittest.TestCase):
                 answers['error'] = raised
             self._let_go()
 
-        thread = threading.Thread(target=worker)
+        thread = threading.Thread(target=worker, daemon=True)
         thread.start()
         thread.join(timeout=30)
 
@@ -79,7 +88,8 @@ class TestThreadedDispatch(unittest.TestCase):
                 results.append((index, glGetString(GL_VERSION)))
                 self._let_go()
 
-        threads = [threading.Thread(target=worker, args=(i,)) for i in range(4)]
+        threads = [threading.Thread(target=worker, args=(i,), daemon=True)
+                   for i in range(4)]
         for thread in threads:
             thread.start()
         for thread in threads:
