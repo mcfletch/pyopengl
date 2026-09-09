@@ -7,7 +7,6 @@ from OpenGL.raw.GL._types import *
 
 GL_ACTIVE_PROGRAM: int
 GL_ALL_SHADER_BITS: int
-GL_FIXED: int
 GL_FRAGMENT_SHADER_BIT: int
 GL_GEOMETRY_SHADER_BIT: int
 GL_HIGH_FLOAT: int

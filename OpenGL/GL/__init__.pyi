@@ -6,7 +6,7 @@ Regenerate with:  python src/regenerate_c.py
 import ctypes
 import sys
 from collections.abc import Sequence
-from typing import Any, TypeAlias
+from typing import Any, TypeAlias, overload
 
 if sys.version_info >= (3, 12):
     from collections.abc import Buffer
@@ -5166,6 +5166,11 @@ def glApplyTextureEXT(mode: int) -> None:
 def glAreProgramsResidentNV(n: int, programs: UIntArray, residences: UByteArray | None = None) -> UByteArrayResult:
     """glAreProgramsResidentNV(n: GLsizei, programs: GLuint[]) -> residences: GLboolean[]"""
 
+@overload
+def glAreTexturesResident(textures: UIntArray) -> UByteArrayResult:
+    """glAreTexturesResident(textures: GLuint[]) -> GLboolean[]"""
+
+@overload
 def glAreTexturesResident(n: int, textures: UIntArray, residences: UByteArray | None = None) -> UByteArrayResult:
     """glAreTexturesResident(n: GLsizei, textures: GLuint[]) -> residences: GLboolean[]"""
 
@@ -5571,6 +5576,11 @@ def glCallCommandListNV(list: int) -> None:
 def glCallList(list: int) -> None:
     """glCallList(list: GLuint) -> None"""
 
+@overload
+def glCallLists(lists: AnyArray) -> None:
+    """glCallLists(lists: bytes or GLuint[]) -> None"""
+
+@overload
 def glCallLists(n: int, type: int, lists: AnyArray) -> None:
     """glCallLists(n: GLsizei, type: GLenum, lists: void[]) -> None"""
 
@@ -6450,6 +6460,11 @@ def glDeleteStatesNV(n: int, states: UIntArray) -> None:
 def glDeleteSync(sync: Any) -> None:
     """glDeleteSync(sync: GLsync) -> None"""
 
+@overload
+def glDeleteTextures(textures: UIntArray) -> None:
+    """glDeleteTextures(textures: GLuint[]) -> None"""
+
+@overload
 def glDeleteTextures(n: int, textures: UIntArray) -> None:
     """glDeleteTextures(n: GLsizei, textures: GLuint[]) -> None"""
 
@@ -9129,20 +9144,20 @@ def glMakeTextureHandleResidentARB(handle: int) -> None:
 def glMakeTextureHandleResidentNV(handle: int) -> None:
     """glMakeTextureHandleResidentNV(handle: GLuint64) -> None"""
 
-def glMap1d(target: int, u1: float, u2: float, stride: int, order: int, points: DoubleArray) -> None:
-    """glMap1d(target: GLenum, u1: GLdouble, u2: GLdouble, stride: GLint, order: GLint, points: GLdouble[]) -> None"""
+def glMap1d(target: int, u1: float, u2: float, points: DoubleArray) -> None:
+    """glMap1d(target, u1, u2, points[][]) -> None"""
 
-def glMap1f(target: int, u1: float, u2: float, stride: int, order: int, points: FloatArray) -> None:
-    """glMap1f(target: GLenum, u1: GLfloat, u2: GLfloat, stride: GLint, order: GLint, points: GLfloat[]) -> None"""
+def glMap1f(target: int, u1: float, u2: float, points: FloatArray) -> None:
+    """glMap1f(target, u1, u2, points[][]) -> None"""
 
 def glMap1xOES(target: int, u1: int, u2: int, stride: int, order: int, points: int) -> None:
     """glMap1xOES(target: GLenum, u1: GLfixed, u2: GLfixed, stride: GLint, order: GLint, points: GLfixed) -> None"""
 
-def glMap2d(target: int, u1: float, u2: float, ustride: int, uorder: int, v1: float, v2: float, vstride: int, vorder: int, points: DoubleArray) -> None:
-    """glMap2d(target: GLenum, u1: GLdouble, u2: GLdouble, ustride: GLint, uorder: GLint, v1: GLdouble, v2: GLdouble, vstride: GLint, vorder: GLint, points: GLdouble[]) -> None"""
+def glMap2d(target: int, u1: float, u2: float, v1: float, v2: float, points: DoubleArray) -> None:
+    """glMap2d(target, u1, u2, v1, v2, points[][][]) -> None"""
 
-def glMap2f(target: int, u1: float, u2: float, ustride: int, uorder: int, v1: float, v2: float, vstride: int, vorder: int, points: FloatArray) -> None:
-    """glMap2f(target: GLenum, u1: GLfloat, u2: GLfloat, ustride: GLint, uorder: GLint, v1: GLfloat, v2: GLfloat, vstride: GLint, vorder: GLint, points: GLfloat[]) -> None"""
+def glMap2f(target: int, u1: float, u2: float, v1: float, v2: float, points: FloatArray) -> None:
+    """glMap2f(target, u1, u2, v1, v2, points[][][]) -> None"""
 
 def glMap2xOES(target: int, u1: int, u2: int, ustride: int, uorder: int, v1: int, v2: int, vstride: int, vorder: int, points: int) -> None:
     """glMap2xOES(target: GLenum, u1: GLfixed, u2: GLfixed, ustride: GLint, uorder: GLint, v1: GLfixed, v2: GLfixed, vstride: GLint, vorder: GLint, points: GLfixed) -> None"""

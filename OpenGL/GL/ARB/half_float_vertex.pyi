@@ -4,7 +4,6 @@ from typing import Any
 
 from OpenGL.raw.GL._types import *
 
-GL_HALF_FLOAT: int
 
 def glInitHalfFloatVertexARB() -> bool: ...
 

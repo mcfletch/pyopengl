@@ -160,6 +160,21 @@ class TestSubmodule:
         assert 'def glBindVertexArray(array: int) -> None:' in text
         assert 'GL_VERTEX_ARRAY_BINDING: int' in text
 
+    def test_a_constant_the_star_import_already_gives_is_not_repeated(self):
+        """`GL_BYTE` is declared by `_types`, and a second declaration of it
+        here is a name defined twice in one stub.  A checker reports that, and
+        the second line says nothing the first did not."""
+        text = emit_pyi.emit_submodule(
+            'OpenGL.GL.VERSION.GL_1_0',
+            [],
+            constants=('GL_BYTE', 'GL_2_BYTES'),
+            reexports=('OpenGL.raw.GL._types',),
+        )
+        assert 'from OpenGL.raw.GL._types import *' in text
+        assert 'GL_BYTE: int' not in text
+        # One the star-import does not provide is still declared.
+        assert 'GL_2_BYTES: int' in text
+
     def test_it_does_not_repeat_itself_in_an_all(self):
         """A stub exports what it defines, so an __all__ would be a second
         copy of every name -- across 1,300 modules, most of their weight."""

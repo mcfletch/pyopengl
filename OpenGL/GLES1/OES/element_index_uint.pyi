@@ -4,7 +4,6 @@ from typing import Any
 
 from OpenGL.raw.GLES1._types import *
 
-GL_UNSIGNED_INT: int
 
 def glInitElementIndexUintOES() -> bool: ...
 

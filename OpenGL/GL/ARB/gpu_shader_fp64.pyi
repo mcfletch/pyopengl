@@ -5,7 +5,6 @@ from OpenGL._typing import DoubleArray
 
 from OpenGL.raw.GL._types import *
 
-GL_DOUBLE: int
 GL_DOUBLE_MAT2: int
 GL_DOUBLE_MAT2x3: int
 GL_DOUBLE_MAT2x4: int

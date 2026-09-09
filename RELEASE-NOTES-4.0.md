@@ -83,6 +83,25 @@ What changed since the 3.x series. The current development version is
 - Docstrings state GL types in the registry's own names, so
   `glBindTexture(target: GLenum, texture: GLuint) -> None` rather than
   `glBindTexture(target, texture) -> None`.
+- The entry points `OpenGL.GL` exports through a wrapper of its own are
+  described as the wrapper takes them, not as the C function does.
+  `glDeleteTextures(textures)` reads the count from the array it is given, and
+  the stub offers that call alongside the `(n, textures)` pair; `glMap1d`,
+  `glMap1f`, `glMap2d` and `glMap2f` take the points array without the strides,
+  and the stub offers that call alone, since it is the only one they accept.
+  `glCallLists` and `glAreTexturesResident` gain their Pythonic forms the same
+  way.
+- The stubs are checked, and a defect in them fails the build. `mypy` runs over
+  all 1,307 of them in CI, and the suite holds each one against the object it
+  describes. What the gate covers, and why the package's own source is not in
+  it, is in `[tool.mypy]` in `pyproject.toml`.
+- Fourteen modules that could not be imported at all now import:
+  `OpenGL.GLSC2` in its entirety, which had no `raw/GLSC2/_types.py`;
+  `OpenGL.GLU.EXT.nurbs_tessellator`, which read its constants from a module
+  that does not hold them; `OpenGL.GLX.NV.video_capture` and the two
+  `OpenGL.GLX.SGIX` modules, whose GLX types were undeclared; and
+  `OpenGL.GLES3.vboimplementation`, which named an `OpenGL.GLES3.OES` package
+  that does not exist. Every shipped module is now imported by the suite.
 - PyOpenGL no longer reports errors from its own interior in a user's `mypy`
   run: 3,041 errors in 252 files became 318 in 54, and a six-line user program
   that came back with errors from `OpenGL/plugins.py` now comes back clean.

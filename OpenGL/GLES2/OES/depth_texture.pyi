@@ -5,8 +5,6 @@ from typing import Any
 from OpenGL.raw.GLES2._types import *
 
 GL_DEPTH_COMPONENT: int
-GL_UNSIGNED_INT: int
-GL_UNSIGNED_SHORT: int
 
 def glInitDepthTextureOES() -> bool: ...
 

@@ -140,7 +140,7 @@ def glMap1( baseFunction, arrayType ):
         uorder = dims[0]
         ustride = dims[1]
         return baseFunction( target, u1,u2,ustride,uorder, ptr )
-    glMap1.__name__ == baseFunction.__name__
+    glMap1.__name__ = baseFunction.__name__
     glMap1.baseFunction = baseFunction
     return glMap1
 glMap1d = glMap1( full.glMap1d, arrays.GLdoubleArray )

@@ -6,7 +6,6 @@ from OpenGL._typing import AnyArray, AnyArrayResult, ByteArray, ByteArrayResult,
 from OpenGL.raw.GL._types import *
 
 GL_CURRENT_VERTEX_ATTRIB_ARB: int
-GL_FLOAT: int
 GL_FLOAT_MAT2_ARB: int
 GL_FLOAT_MAT3_ARB: int
 GL_FLOAT_MAT4_ARB: int

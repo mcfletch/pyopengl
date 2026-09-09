@@ -5,7 +5,6 @@ from OpenGL._typing import AnyArray, IntArray, IntArrayResult, UIntArray
 
 from OpenGL.raw.GL._types import *
 
-GL_FIXED: int
 GL_HIGH_FLOAT: int
 GL_HIGH_INT: int
 GL_IMPLEMENTATION_COLOR_READ_FORMAT: int

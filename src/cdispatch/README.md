@@ -124,6 +124,8 @@ nothing needs unwinding while only scalars have been converted.
 **5. `emit_pyi.py` — the stubs.** From the same record, so
 `glGenTextures(n, textures=None) -> UIntArrayResult` falls out of the size and
 direction annotations rather than being written. Two kinds, described below.
+`exceptional.py` supplies what the record cannot: the names `OpenGL.GL` exports
+through a wrapper of its own, and the shorter call each of those takes.
 
 ## The type stubs
 
@@ -179,6 +181,39 @@ they are generated and never shipped. `tests/test_module_stubs.py` holds every
 stub to the names its module actually ends up with — following re-exports the
 way a checker does, so a name that arrives through one counts as described —
 and `tests/cdispatch/test_emit_pyi.py` covers the emitter itself.
+
+### Wrappers the registry cannot describe
+
+`OpenGL/GL/__init__.py` ends with `from OpenGL.GL.exceptional import *`, so for
+a handful of names the callable a program reaches is a wrapper written by hand
+rather than the entry point the registry describes. Each takes a call the C
+form cannot: `glDeleteTextures(textures)` reads the count from the array it is
+given, and `glMap2d` computes the strides from the shape of the points.
+
+The registry knows only the C form, so a stub derived from it alone contradicts
+the library — it reports an error against the call the wrapper's own docstring
+gives. `exceptional.py` in this directory carries one row per wrapper: the
+Pythonic parameter list, what it returns, and whether the wrapper also passes
+the C form through. `emit_pyi.emit_module` reads it, and emits
+
+- **an overload pair** where both calls are real, wrapper's form first, so an
+  ambiguous call resolves to the one the docstring gives; or
+- **a single `def`** where only the wrapper's form is, as for the `glMap`
+  family — offering the C form there would describe a call that raises
+  `TypeError`.
+
+Only the namespace that has wrappers imports `overload`, so the other seven
+API stubs are unchanged by this.
+
+`tests/bindings/generated/test_exceptional_stubs.py` holds the three things
+that can go wrong: a stub demanding more arguments than the wrapper needs, a
+row claiming a call the wrapper cannot take, and the C form being offered where
+the wrapper does not pass it through. The middle one is what keeps the row
+honest — without it the stub and the row would agree with each other and both
+be wrong, since the emitter writes what the row says.
+
+Adding a wrapper: write it in `OpenGL/GL/exceptional.py`, add it to that
+module's `__all__`, add a row to `exceptional.py` here, and regenerate.
 
 ## The rule everything else follows
 

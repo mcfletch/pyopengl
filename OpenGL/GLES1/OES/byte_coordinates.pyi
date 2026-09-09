@@ -5,7 +5,6 @@ from OpenGL._typing import ByteArray
 
 from OpenGL.raw.GLES1._types import *
 
-GL_BYTE: int
 
 def glMultiTexCoord1bOES(texture: int, s: int) -> None: ...
 def glMultiTexCoord1bvOES(texture: int, coords: ByteArray) -> None: ...

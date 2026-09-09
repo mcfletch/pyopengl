@@ -7,10 +7,11 @@ worth doing: ``glGenTextures(n) -> UIntArray`` is the useful form, and it comes
 out of the size and direction annotations.
 """
 
+import importlib
 import keyword
 
 from . import ctypes_model as cm
-from . import emit_c, model
+from . import emit_c, exceptional, model
 
 __all__ = [
     'emit_signature',
@@ -94,7 +95,7 @@ Regenerate with:  python src/regenerate_c.py
 import ctypes
 import sys
 from collections.abc import Sequence
-from typing import Any, TypeAlias
+from typing import Any, TypeAlias%(overload)s
 
 if sys.version_info >= (3, 12):
     from collections.abc import Buffer
@@ -239,6 +240,46 @@ def _safe_docstring(text):
     return text.replace('\\', '\\\\').replace('"""', "'''")
 
 
+def _star_exports(reexports):
+    """The names a stub's ``import *`` lines already provide.
+
+    Only the private declaration modules -- ``_types``, ``_errors``,
+    ``_glgets`` -- are consulted.  They are plain files whose contents are what
+    they say, so importing one answers the question exactly.  The friendly
+    modules are not: their namespaces arrive from the declaration tables when
+    they are imported, and what they hold is what the tables were asked for
+    here anyway.
+    """
+    provided = set()
+    for reexport in reexports:
+        # The friendly modules are consulted too, not only the private
+        # declaration ones: a version module re-exports the one below it, and
+        # a constant both of them declare -- `GL_TEXTURE_COMPONENTS` is in GL
+        # 1.0 and GL 1.1 alike -- would otherwise be defined twice in the
+        # stub.  Importing one loads the platform's GL library, which
+        # generating the `_types` stubs does anyway.
+        name = reexport if reexport.rsplit('.', 1)[-1].startswith('_') else (
+            reexport.replace('OpenGL.raw.', 'OpenGL.', 1)
+        )
+        try:
+            module = importlib.import_module(name)
+        except ImportError:
+            # A re-export naming a module that is not there provides nothing,
+            # so nothing is filtered and the constants are declared as before.
+            # That the module is missing at all is a defect in its own right --
+            # the friendly module beside the stub imports it too and raises on
+            # import -- and is what `test_every_generated_module_imports.py`
+            # is for.  Failing the whole regeneration here would only make the
+            # generator the thing that reports it.
+            continue
+        declared = getattr(module, '__all__', None)
+        provided |= (
+            set(declared) if declared is not None
+            else {name for name in vars(module) if not name.startswith('_')}
+        )
+    return provided
+
+
 def emit_submodule(name, commands, constants=(), extras=(), reexports=()):
     """One friendly module's stub: what a program can import from it.
 
@@ -283,7 +324,13 @@ def emit_submodule(name, commands, constants=(), extras=(), reexports=()):
     if reexports:
         parts.append('')
 
-    for constant in sorted(constants):
+    # A constant the star-import already brings in must not be declared again:
+    # the second line says nothing the first did not, and a name defined twice
+    # in one stub is an error to a checker reading it.  `GL_BYTE` and its kin
+    # live in `_types` beside the GL types, and every version module that
+    # mentions them re-exports that module.
+    provided = _star_exports(reexports)
+    for constant in sorted(set(constants) - provided):
         parts.append('%s: int' % (constant,))
     if constants:
         parts.append('')
@@ -301,9 +348,18 @@ def emit_submodule(name, commands, constants=(), extras=(), reexports=()):
     # glInitXxx, the constants it aliases, the entry points it builds itself.
     # Declarations rather than names, because only the reader of the module can
     # say what each one is.
+    # A hand-written alias for a name the star-import already gives -- GL 1.1
+    # aliases `GL_TEXTURE_COMPONENTS`, which GL 1.0 exports -- would be that
+    # name defined twice in one stub, as a duplicated constant would.
+    emitted = []
     for declaration in extras:
-        parts.append(declaration)
-    if extras:
+        subject = declaration.split(':', 1)[0].split('(', 1)[0]
+        subject = subject.removeprefix('def ').strip()
+        if subject in provided:
+            continue
+        emitted.append(declaration)
+    parts.extend(emitted)
+    if emitted:
         parts.append('')
 
     # No __all__: everything here is *defined* here, and a stub exports what it
@@ -324,11 +380,50 @@ def _returned_aliases(command):
     ]
 
 
+def _exceptional_lines(command, wrapper, generated_doc):
+    """The stub lines for an entry point ``exceptional.py`` wraps.
+
+    The wrapper's own form comes first, so a checker resolving an ambiguous
+    call picks the one the docstring gives.  Where the wrapper also passes the
+    C form through, the generated line follows it as a second overload; where
+    it does not, the wrapper's form is the only one, and a plain ``def`` says
+    so more clearly than an overload set of one.
+    """
+    pythonic = 'def %s(%s) -> %s:' % (
+        command.name,
+        ', '.join(wrapper.parameters),
+        wrapper.returns,
+    )
+    if not wrapper.keeps_c_form:
+        return [pythonic, '    """%s"""' % (_safe_docstring(wrapper.signature),), '']
+    return [
+        '@overload',
+        pythonic,
+        '    """%s"""' % (_safe_docstring(wrapper.signature),),
+        '',
+        '@overload',
+        emit_signature(command).replace(': ...', ':', 1),
+        '    """%s"""' % (_safe_docstring(generated_doc),),
+        '',
+    ]
+
+
 def emit_module(api, commands, constants=()):
     """One API's stub file."""
+    wrapped = {
+        command.name
+        for command in commands
+        if exceptional.lookup(api, command.name) is not None
+    }
     parts = [
         _PREAMBLE
-        % {'title': 'OpenGL.%s' % (api,), 'aliases': _alias_declarations()}
+        % {
+            'title': 'OpenGL.%s' % (api,),
+            'aliases': _alias_declarations(),
+            # Only the namespace that has wrappers needs it, and an import a
+            # stub does not use is one a checker reports.
+            'overload': ', overload' if wrapped else '',
+        }
     ]
     if constants:
         parts.append(
@@ -347,6 +442,10 @@ def emit_module(api, commands, constants=()):
         doc = hand.signature if hand is not None else command.signature_line()
         if command.purpose:
             doc = '%s\n\n    %s' % (doc, command.purpose)
+        wrapper = exceptional.lookup(api, command.name)
+        if wrapper is not None:
+            parts.extend(_exceptional_lines(command, wrapper, doc))
+            continue
         # The docstring is the body.  A def cannot carry both an ellipsis body
         # and a docstring, and the docstring is the more useful of the two --
         # it is what an editor shows without importing PyOpenGL at all.
