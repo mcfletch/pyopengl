@@ -15,22 +15,28 @@ assert as_8_bit
 from OpenGL._opaque import opaque_pointer_cls as _opaque_pointer_cls
 
 sizeof = ctypes.sizeof
-GL_FALSE = Constant( 'GL_FALSE', 0x0 )
-GL_TRUE = Constant( 'GL_TRUE', 0x1 )
-GL_BYTE = Constant( 'GL_BYTE', 0x1400 )
-GL_UNSIGNED_BYTE = Constant( 'GL_UNSIGNED_BYTE', 0x1401 )
-GL_SHORT = Constant( 'GL_SHORT', 0x1402 )
-GL_UNSIGNED_SHORT = Constant( 'GL_UNSIGNED_SHORT', 0x1403 )
-GL_INT = Constant( 'GL_INT', 0x1404 )
-GL_UNSIGNED_INT = Constant( 'GL_UNSIGNED_INT', 0x1405 )
-GL_UNSIGNED_INT64 = Constant( 'GL_UNSIGNED_INT64_AMD', 0x8BC2 )
-GL_INT64 = Constant( 'GL_INT64_NV', 0x140E )
-GL_FLOAT = Constant( 'GL_FLOAT', 0x1406 )
-GL_DOUBLE = Constant( 'GL_DOUBLE', 0x140a )
+# `int`, because that is what each of these *is*: `Constant` answers an
+# `IntConstant` for an integer value.  The generated stubs declare the same
+# names `int`, and every generated extension stub star-imports this module
+# alongside them -- so a checker compares the two declarations in any program
+# that imports GL and an extension, and two answers there is an error in that
+# program rather than a difference of description.
+GL_FALSE: int = Constant( 'GL_FALSE', 0x0 )
+GL_TRUE: int = Constant( 'GL_TRUE', 0x1 )
+GL_BYTE: int = Constant( 'GL_BYTE', 0x1400 )
+GL_UNSIGNED_BYTE: int = Constant( 'GL_UNSIGNED_BYTE', 0x1401 )
+GL_SHORT: int = Constant( 'GL_SHORT', 0x1402 )
+GL_UNSIGNED_SHORT: int = Constant( 'GL_UNSIGNED_SHORT', 0x1403 )
+GL_INT: int = Constant( 'GL_INT', 0x1404 )
+GL_UNSIGNED_INT: int = Constant( 'GL_UNSIGNED_INT', 0x1405 )
+GL_UNSIGNED_INT64: int = Constant( 'GL_UNSIGNED_INT64_AMD', 0x8BC2 )
+GL_INT64: int = Constant( 'GL_INT64_NV', 0x140E )
+GL_FLOAT: int = Constant( 'GL_FLOAT', 0x1406 )
+GL_DOUBLE: int = Constant( 'GL_DOUBLE', 0x140a )
 GL_CHAR = bytes
-GL_HALF_FLOAT = Constant( 'GL_HALF_FLOAT_ARB',0x140B)
-GL_HALF_NV = Constant( 'GL_HALF_NV', 0x1401 )
-GL_FIXED=Constant('GL_FIXED',0x140C)
+GL_HALF_FLOAT: int = Constant( 'GL_HALF_FLOAT_ARB',0x140B)
+GL_HALF_NV: int = Constant( 'GL_HALF_NV', 0x1401 )
+GL_FIXED: int = Constant('GL_FIXED',0x140C)
 GL_VOID_P = object()
 
 def _get_ctypes_version():

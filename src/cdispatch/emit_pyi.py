@@ -36,7 +36,10 @@ _SCALAR_ANNOTATION = {
     'GL_U64': 'int',
     'GL_IPTR': 'int',
     'GL_HANDLE': 'int',
-    'GL_B': 'bool',
+    # GLboolean is int, not bool: the values the specification names for these
+    # are GL_TRUE and GL_FALSE, which are IntConstant, and bool is an int
+    # anyway -- so int accepts both and bool would refuse the idiomatic call.
+    'GL_B': 'int',
     'GL_F': 'float',
     'GL_D': 'float',
     'GL_OPAQUE': 'Any',
@@ -188,11 +191,6 @@ def _return_annotation(command):
             return 'int | None'
         return 'bytes'
     macro = cm.scalar_macro(command.return_type)
-    if macro == 'GL_B':
-        # A GLboolean *return* is an int -- glIsTexture answers 0 or 1, not
-        # False or True -- while a GLboolean *parameter* accepts a bool.  The
-        # asymmetry is the existing behaviour, not an oversight.
-        return 'int'
     return _SCALAR_ANNOTATION.get(macro, 'int')
 
 

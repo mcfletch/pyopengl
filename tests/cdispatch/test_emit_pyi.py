@@ -43,13 +43,18 @@ class TestSignatures:
         assert 'depth: float' in text
 
     def test_a_boolean_argument(self):
+        """GLboolean is int: GL_TRUE and GL_FALSE are what a caller passes.
+
+        They are ``IntConstant``, and ``bool`` is an ``int`` besides, so ``int``
+        takes both forms where ``bool`` would refuse the specification's own.
+        """
         text = emit_pyi.emit_signature(
             command(
                 name='glDepthMask',
                 parameters=[('flag', 'GLboolean', {})],
             )
         )
-        assert 'flag: bool' in text
+        assert 'flag: int' in text
 
     def test_an_input_array(self):
         text = emit_pyi.emit_signature(

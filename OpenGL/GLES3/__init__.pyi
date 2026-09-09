@@ -561,7 +561,7 @@ def glBindBufferBase(target: int, index: int, buffer: int) -> None:
 def glBindBufferRange(target: int, index: int, buffer: int, offset: int, size: int) -> None:
     """glBindBufferRange(target: GLenum, index: GLuint, buffer: GLuint, offset: GLintptr, size: GLsizeiptr) -> None"""
 
-def glBindImageTexture(unit: int, texture: int, level: int, layered: bool, layer: int, access: int, format: int) -> None:
+def glBindImageTexture(unit: int, texture: int, level: int, layered: int, layer: int, access: int, format: int) -> None:
     """glBindImageTexture(unit: GLuint, texture: GLuint, level: GLint, layered: GLboolean, layer: GLint, access: GLenum, format: GLenum) -> None"""
 
 def glBindProgramPipeline(pipeline: int) -> None:
@@ -911,31 +911,31 @@ def glProgramUniform4ui(program: int, location: int, v0: int, v1: int, v2: int, 
 def glProgramUniform4uiv(program: int, location: int, count: int, value: UIntArray) -> None:
     """glProgramUniform4uiv(program: GLuint, location: GLint, count: GLsizei, value: GLuint[]) -> None"""
 
-def glProgramUniformMatrix2fv(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glProgramUniformMatrix2fv(program: int, location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glProgramUniformMatrix2fv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glProgramUniformMatrix2x3fv(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glProgramUniformMatrix2x3fv(program: int, location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glProgramUniformMatrix2x3fv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glProgramUniformMatrix2x4fv(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glProgramUniformMatrix2x4fv(program: int, location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glProgramUniformMatrix2x4fv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glProgramUniformMatrix3fv(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glProgramUniformMatrix3fv(program: int, location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glProgramUniformMatrix3fv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glProgramUniformMatrix3x2fv(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glProgramUniformMatrix3x2fv(program: int, location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glProgramUniformMatrix3x2fv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glProgramUniformMatrix3x4fv(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glProgramUniformMatrix3x4fv(program: int, location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glProgramUniformMatrix3x4fv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glProgramUniformMatrix4fv(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glProgramUniformMatrix4fv(program: int, location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glProgramUniformMatrix4fv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glProgramUniformMatrix4x2fv(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glProgramUniformMatrix4x2fv(program: int, location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glProgramUniformMatrix4x2fv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glProgramUniformMatrix4x3fv(program: int, location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glProgramUniformMatrix4x3fv(program: int, location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glProgramUniformMatrix4x3fv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glReadBuffer(src: int) -> None:
@@ -968,7 +968,7 @@ def glTexImage3D(target: int, level: int, internalformat: int, width: int, heigh
 def glTexStorage2D(target: int, levels: int, internalformat: int, width: int, height: int) -> None:
     """glTexStorage2D(target: GLenum, levels: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None"""
 
-def glTexStorage2DMultisample(target: int, samples: int, internalformat: int, width: int, height: int, fixedsamplelocations: bool) -> None:
+def glTexStorage2DMultisample(target: int, samples: int, internalformat: int, width: int, height: int, fixedsamplelocations: int) -> None:
     """glTexStorage2DMultisample(target: GLenum, samples: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei, fixedsamplelocations: GLboolean) -> None"""
 
 def glTexStorage3D(target: int, levels: int, internalformat: int, width: int, height: int, depth: int) -> None:
@@ -1012,22 +1012,22 @@ def glUniform4uiv(location: int, count: int, value: UIntArray) -> None:
 def glUniformBlockBinding(program: int, uniformBlockIndex: int, uniformBlockBinding: int) -> None:
     """glUniformBlockBinding(program: GLuint, uniformBlockIndex: GLuint, uniformBlockBinding: GLuint) -> None"""
 
-def glUniformMatrix2x3fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glUniformMatrix2x3fv(location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glUniformMatrix2x3fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glUniformMatrix2x4fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glUniformMatrix2x4fv(location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glUniformMatrix2x4fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glUniformMatrix3x2fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glUniformMatrix3x2fv(location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glUniformMatrix3x2fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glUniformMatrix3x4fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glUniformMatrix3x4fv(location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glUniformMatrix3x4fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glUniformMatrix4x2fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glUniformMatrix4x2fv(location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glUniformMatrix4x2fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glUniformMatrix4x3fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glUniformMatrix4x3fv(location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glUniformMatrix4x3fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glUnmapBuffer(target: int) -> int:
@@ -1045,7 +1045,7 @@ def glVertexAttribBinding(attribindex: int, bindingindex: int) -> None:
 def glVertexAttribDivisor(index: int, divisor: int) -> None:
     """glVertexAttribDivisor(index: GLuint, divisor: GLuint) -> None"""
 
-def glVertexAttribFormat(attribindex: int, size: int, type: int, normalized: bool, relativeoffset: int) -> None:
+def glVertexAttribFormat(attribindex: int, size: int, type: int, normalized: int, relativeoffset: int) -> None:
     """glVertexAttribFormat(attribindex: GLuint, size: GLint, type: GLenum, normalized: GLboolean, relativeoffset: GLuint) -> None"""
 
 def glVertexAttribI4i(index: int, x: int, y: int, z: int, w: int) -> None:

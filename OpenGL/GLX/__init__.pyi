@@ -709,7 +709,7 @@ def glXSelectEvent(dpy: AnyArray, draw: Any, event_mask: int) -> None:
 def glXSelectEventSGIX(dpy: AnyArray, drawable: Any, mask: int) -> None:
     """glXSelectEventSGIX(dpy: Display[], drawable: GLXDrawable, mask: c_ulong) -> None"""
 
-def glXSendPbufferToVideoNV(dpy: AnyArray, pbuf: Any, iBufferType: int, pulCounterPbuffer: AnyArray, bBlock: bool) -> int:
+def glXSendPbufferToVideoNV(dpy: AnyArray, pbuf: Any, iBufferType: int, pulCounterPbuffer: AnyArray, bBlock: int) -> int:
     """glXSendPbufferToVideoNV(dpy: Display[], pbuf: GLXPbuffer, iBufferType: c_int, pulCounterPbuffer: c_ulong[], bBlock: GLboolean) -> c_int"""
 
 def glXSet3DfxModeMESA(mode: int) -> int:

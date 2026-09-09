@@ -10,6 +10,7 @@ import OpenGL as root
 import sys
 import logging
 import re
+from typing import Any
 
 _log = logging.getLogger('OpenGL.extensions')
 VERSION_PREFIX = as_8_bit('GL_VERSION_GL_')
@@ -327,6 +328,25 @@ def hasExtension(specifier):
 
 
 hasGLExtension = hasGLUExtension = hasExtension
+
+
+def available(entryPoint: Any) -> bool:
+    """Is this entry point one the driver serves?
+
+    An entry point answers ``bool()`` with this already, so
+    ``if glPointParameterf:`` guards an optional call correctly.  A stub
+    declares the name as a function, though, and a function object is always
+    true -- so a type checker reads that guard as a missing ``()`` and reports
+    code that is right.  This asks the same question as a call, which a checker
+    has nothing to say about.
+
+    ``None`` is not available, so a name reached with
+    ``getattr(module, name, None)`` needs no separate test::
+
+        if available(getattr(GL, 'glPointParameterf', None)):
+            ...
+    """
+    return bool(entryPoint)
 
 
 class _Alternate(LateBind):

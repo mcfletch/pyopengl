@@ -885,7 +885,7 @@ def glColor4xOES(red: int, green: int, blue: int, alpha: int) -> None:
 def glColor4xvOES(components: IntArray) -> None:
     """glColor4xvOES(components: GLfixed[]) -> None"""
 
-def glColorMask(red: bool, green: bool, blue: bool, alpha: bool) -> None:
+def glColorMask(red: int, green: int, blue: int, alpha: int) -> None:
     """glColorMask(red: GLboolean, green: GLboolean, blue: GLboolean, alpha: GLboolean) -> None"""
 
 def glColorPointer(size: int, type: int, stride: int, pointer: AnyArray) -> None:
@@ -924,10 +924,10 @@ def glDebugMessageCallback(callback: Any, userParam: AnyArray) -> None:
 def glDebugMessageCallbackKHR(callback: Any, userParam: AnyArray) -> None:
     """glDebugMessageCallbackKHR(callback: GLDEBUGPROCKHR, userParam: void[]) -> None"""
 
-def glDebugMessageControl(source: int, type: int, severity: int, count: int, ids: UIntArray, enabled: bool) -> None:
+def glDebugMessageControl(source: int, type: int, severity: int, count: int, ids: UIntArray, enabled: int) -> None:
     """glDebugMessageControl(source: GLenum, type: GLenum, severity: GLenum, count: GLsizei, ids: GLuint[], enabled: GLboolean) -> None"""
 
-def glDebugMessageControlKHR(source: int, type: int, severity: int, count: int, ids: UIntArray, enabled: bool) -> None:
+def glDebugMessageControlKHR(source: int, type: int, severity: int, count: int, ids: UIntArray, enabled: int) -> None:
     """glDebugMessageControlKHR(source: GLenum, type: GLenum, severity: GLenum, count: GLsizei, ids: GLuint[], enabled: GLboolean) -> None"""
 
 def glDebugMessageInsert(source: int, type: int, id: int, severity: int, length: int, buf: ByteArray) -> None:
@@ -960,7 +960,7 @@ def glDeleteVertexArraysOES(n: int, arrays: UIntArray) -> None:
 def glDepthFunc(func: int) -> None:
     """glDepthFunc(func: GLenum) -> None"""
 
-def glDepthMask(flag: bool) -> None:
+def glDepthMask(flag: int) -> None:
     """glDepthMask(flag: GLboolean) -> None"""
 
 def glDepthRangef(n: float, f: float) -> None:
@@ -1728,13 +1728,13 @@ def glRotatex(angle: int, x: int, y: int, z: int) -> None:
 def glRotatexOES(angle: int, x: int, y: int, z: int) -> None:
     """glRotatexOES(angle: GLfixed, x: GLfixed, y: GLfixed, z: GLfixed) -> None"""
 
-def glSampleCoverage(value: float, invert: bool) -> None:
+def glSampleCoverage(value: float, invert: int) -> None:
     """glSampleCoverage(value: GLfloat, invert: GLboolean) -> None"""
 
-def glSampleCoveragex(value: int, invert: bool) -> None:
+def glSampleCoveragex(value: int, invert: int) -> None:
     """glSampleCoveragex(value: GLclampx, invert: GLboolean) -> None"""
 
-def glSampleCoveragexOES(value: int, invert: bool) -> None:
+def glSampleCoveragexOES(value: int, invert: int) -> None:
     """glSampleCoveragexOES(value: GLclampx, invert: GLboolean) -> None"""
 
 def glScalef(x: float, y: float, z: float) -> None:

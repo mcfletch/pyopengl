@@ -332,6 +332,20 @@ stop advertising one it has promoted, as a core profile commonly does. So:</p>
 provides, and from the extension module when the extension itself is what you
 are depending on.</p>
 
+<p>A single entry point answers for itself, which is what you want when one
+command of an extension is all you need, or when a driver serves part of one.
+<code>OpenGL.extensions.available</code> asks it:</p>
+
+<pre>from OpenGL.extensions import available<br><br>if available( glPointParameterf ):<br>	glPointParameterf( GL_POINT_SIZE_MAX, 64.0 )<br></pre>
+
+<p>The entry point answers <code>bool()</code> with the same thing, so
+<code>if glPointParameterf:</code> has always worked and still does. Prefer
+the call in code you type-check: a stub declares the name as a function, a
+function object is always true, and a checker reports the bare form as a
+missing <code>()</code>. <code>available(None)</code> is
+<code>False</code>, so a name reached with
+<code>getattr(module, name, None)</code> needs no separate test.</p>
+
 
 
 

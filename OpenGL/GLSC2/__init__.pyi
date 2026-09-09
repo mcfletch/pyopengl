@@ -389,7 +389,7 @@ def glClearDepthf(d: float) -> None:
 def glClearStencil(s: int) -> None:
     """glClearStencil(s: GLint) -> None"""
 
-def glColorMask(red: bool, green: bool, blue: bool, alpha: bool) -> None:
+def glColorMask(red: int, green: int, blue: int, alpha: int) -> None:
     """glColorMask(red: GLboolean, green: GLboolean, blue: GLboolean, alpha: GLboolean) -> None"""
 
 def glCompressedTexSubImage2D(target: int, level: int, xoffset: int, yoffset: int, width: int, height: int, format: int, imageSize: int, data: AnyArray) -> None:
@@ -404,7 +404,7 @@ def glCullFace(mode: int) -> None:
 def glDepthFunc(func: int) -> None:
     """glDepthFunc(func: GLenum) -> None"""
 
-def glDepthMask(flag: bool) -> None:
+def glDepthMask(flag: int) -> None:
     """glDepthMask(flag: GLboolean) -> None"""
 
 def glDepthRangef(n: float, f: float) -> None:
@@ -539,7 +539,7 @@ def glReadnPixels(x: int, y: int, width: int, height: int, format: int, type: in
 def glRenderbufferStorage(target: int, internalformat: int, width: int, height: int) -> None:
     """glRenderbufferStorage(target: GLenum, internalformat: GLenum, width: GLsizei, height: GLsizei) -> None"""
 
-def glSampleCoverage(value: float, invert: bool) -> None:
+def glSampleCoverage(value: float, invert: int) -> None:
     """glSampleCoverage(value: GLfloat, invert: GLboolean) -> None"""
 
 def glScissor(x: int, y: int, width: int, height: int) -> None:
@@ -629,13 +629,13 @@ def glUniform4i(location: int, v0: int, v1: int, v2: int, v3: int) -> None:
 def glUniform4iv(location: int, count: int, value: IntArray) -> None:
     """glUniform4iv(location: GLint, count: GLsizei, value: GLint[]) -> None"""
 
-def glUniformMatrix2fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glUniformMatrix2fv(location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glUniformMatrix2fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glUniformMatrix3fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glUniformMatrix3fv(location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glUniformMatrix3fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
-def glUniformMatrix4fv(location: int, count: int, transpose: bool, value: FloatArray) -> None:
+def glUniformMatrix4fv(location: int, count: int, transpose: int, value: FloatArray) -> None:
     """glUniformMatrix4fv(location: GLint, count: GLsizei, transpose: GLboolean, value: GLfloat[]) -> None"""
 
 def glUseProgram(program: int) -> None:
@@ -665,7 +665,7 @@ def glVertexAttrib4f(index: int, x: float, y: float, z: float, w: float) -> None
 def glVertexAttrib4fv(index: int, v: FloatArray) -> None:
     """glVertexAttrib4fv(index: GLuint, v: GLfloat[]) -> None"""
 
-def glVertexAttribPointer(index: int, size: int, type: int, normalized: bool, stride: int, pointer: AnyArray) -> None:
+def glVertexAttribPointer(index: int, size: int, type: int, normalized: int, stride: int, pointer: AnyArray) -> None:
     """glVertexAttribPointer(index: GLuint, size: GLint, type: GLenum, normalized: GLboolean, stride: GLsizei, pointer: void[]) -> None"""
 
 def glViewport(x: int, y: int, width: int, height: int) -> None:
