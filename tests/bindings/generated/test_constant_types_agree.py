@@ -67,6 +67,23 @@ def test_the_raw_module_and_the_stub_declare_a_constant_alike(source, stub):
     assert not disagreements, '\n'.join(disagreements)
 
 
+@pytest.mark.parametrize('source,stub', PAIRINGS, ids=[s for s, _t in PAIRINGS])
+def test_the_stub_declares_every_constant_the_raw_module_defines(source, stub):
+    """Annotating one must not take it out of the API's stub.
+
+    The generator reads these names out of the source to put them in the stub,
+    since they are PyOpenGL's own rather than the registry's.  A name it stops
+    finding is one a caller sees as ``Any`` again, and nothing else would say
+    so: the star import from the raw module still reaches it.
+    """
+    declared = set(_declared_types(source))
+    missing = sorted(declared - set(_declared_types(stub)))
+    assert not missing, (
+        '%s declares %s, and %s does not: the generator did not find them.'
+        % (source, ', '.join(missing), stub)
+    )
+
+
 @pytest.mark.parametrize('source', RAW_TYPES)
 def test_every_constant_the_raw_module_defines_says_what_it_is(source):
     """An unannotated one is inferred as ``Constant``, which is not an ``int``."""

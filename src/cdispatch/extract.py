@@ -822,7 +822,14 @@ def extract_constants(root):
                     except SyntaxError:
                         continue
                 for node in tree.body:
-                    if not isinstance(node, ast.Assign):
+                    # `GL_BYTE = Constant(...)` and `GL_BYTE: int = Constant(...)`
+                    # declare the same constant; the annotation says what the
+                    # value is and must not take the name out of the stub.
+                    if isinstance(node, ast.Assign):
+                        targets = node.targets
+                    elif isinstance(node, ast.AnnAssign):
+                        targets = [node.target]
+                    else:
                         continue
                     if not isinstance(node.value, ast.Call):
                         continue
@@ -832,7 +839,7 @@ def extract_constants(root):
                     )
                     if called not in ('_C', 'Constant', 'IntConstant'):
                         continue
-                    for target in node.targets:
+                    for target in targets:
                         if isinstance(target, ast.Name) and target.id.isidentifier():
                             names.add(target.id)
         constants[api] = sorted(names)
