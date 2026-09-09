@@ -418,6 +418,34 @@ class TestTheOldWidgets:
         made.makeCurrent()
         assert one(glGetIntegerv(GL_MATRIX_MODE)) == before
 
+    def test_a_matrix_mode_that_could_not_be_read_is_not_put_back(
+        self, root, monkeypatch
+    ):
+        """The frame still reaches the screen.
+
+        ``glGetIntegerv`` answers 0 -- not an error, the untouched output
+        buffer -- when no context is current, and 0 is not a matrix mode.
+        Feeding that back raises ``GLError(1280)`` out of the ``finally``,
+        which loses the frame: the buffers are swapped after that block.
+
+        Staging a genuinely lost context underneath a mapped widget is not
+        something a test can do without tearing down the window it is drawing
+        into, so the read is what answers 0 here.  What is being held is the
+        widget's response to it.
+        """
+        from OpenGL.Tk import RawOpengl, togl
+
+        made = RawOpengl(root, width=64, height=64, double=1)
+        made.pack()
+        made.waitForMap()
+
+        swapped = []
+        monkeypatch.setattr(togl, 'glGetIntegerv', lambda pname: 0)
+        monkeypatch.setattr(made, 'swapBuffers', lambda: swapped.append(True))
+
+        assert made.render() is True
+        assert swapped, 'the frame was drawn and then thrown away'
+
     def test_it_gets_a_compatibility_context(self, root):
         """It draws with glMatrixMode and gluPerspective, so it needs them."""
         from OpenGL.Tk import RawOpengl

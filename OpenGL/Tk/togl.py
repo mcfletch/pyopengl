@@ -24,9 +24,10 @@ import tkinter
 from tkinter import Misc, TclError, Widget
 
 from OpenGL.GL import (
-    GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_DEPTH_TEST, GL_LESS,
+    GL_COLOR, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_DEPTH_TEST, GL_LESS,
     GL_LIGHT0, GL_LIGHTING, GL_MATRIX_MODE, GL_MODELVIEW, GL_MODELVIEW_MATRIX,
-    GL_POSITION, GL_PROJECTION, glClear, glClearColor, glDepthFunc, glEnable,
+    GL_POSITION, GL_PROJECTION, GL_TEXTURE, glClear, glClearColor, glDepthFunc,
+    glEnable,
     glFlush, glGetDoublev, glGetIntegerv, glLightfv, glLoadIdentity,
     glMatrixMode,
     glMultMatrixd, glPopMatrix, glPushMatrix, glRotatef, glTranslatef,
@@ -38,6 +39,13 @@ from OpenGL.Tk.widget import GLFrame
 from OpenGL._scalar import as_int
 
 log = logging.getLogger(__name__)
+
+#: Every value ``GL_MATRIX_MODE`` can answer.  A read that comes back with
+#: something else did not reach a context: ``glGetIntegerv`` leaves its output
+#: untouched and answers 0 when none is current, and 0 is not a mode.  Putting
+#: that back raises out of the ``finally`` in :meth:`RawOpengl.render`, after
+#: the frame is drawn and before it is swapped, so the frame goes with it.
+MATRIX_MODES = frozenset((GL_MODELVIEW, GL_PROJECTION, GL_TEXTURE, GL_COLOR))
 
 __all__ = [
     'TOGL_NORMAL', 'TOGL_OPTIONS', 'TOGL_OVERLAY', 'Opengl', 'RawOpengl',
@@ -316,7 +324,12 @@ class RawOpengl(GLFrame, Misc):
             finally:
                 glPopMatrix()
         finally:
-            glMatrixMode(mode)
+            if mode in MATRIX_MODES:
+                glMatrixMode(mode)
+            else:
+                log.debug(
+                    'GL_MATRIX_MODE answered %r, which is not a matrix mode, '
+                    'so there is nothing to put back', mode)
         self.swapBuffers()
         return True
 
