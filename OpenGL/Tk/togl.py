@@ -293,9 +293,15 @@ class RawOpengl(GLFrame, Misc):
 
     def render(self):
         """Draw one frame with the projection matrix left as it was found"""
+        # Tk settles first, and the context is taken after it. Pending idle
+        # work maps and resizes widgets, and doing that for a *sibling* widget
+        # makes the sibling's context current -- so a `makeCurrent` before this
+        # line no longer holds after it, and the state read below then comes
+        # back zero. `glMatrixMode(0)` out of the `finally` is what that looks
+        # like, and only in a process where a second widget exists.
+        self.update_idletasks()
         if not self.makeCurrent():
             return False
-        self.update_idletasks()
         # An enum, so the integer getter: the double one answers 5888.0,
         # and restoring the mode with a float is a ctypes.ArgumentError
         # out of the finally below -- which loses the frame, since the
