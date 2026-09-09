@@ -28,8 +28,21 @@ REASON = (
 )
 
 
+#: Machine-written modules under ``raw/`` that are nevertheless ordinary
+#: Python: a data table or a small class, with every name visible in the file.
+#: The marker is for a module a checker *cannot* read -- one whose namespace
+#: arrives when ``_define()`` runs -- and exempting these would only hide
+#: whatever they get wrong.  Their generators annotate them instead.
+TYPED_UNDER_RAW = ('_glgets.py',)
+
+
 def generated(path, text):
-    """Whether this file is machine-written rather than authored."""
+    """Whether a checker should be told to skip this file.
+
+    Being machine-written is not the test on its own; being unreadable is.
+    """
+    if os.path.basename(path) in TYPED_UNDER_RAW:
+        return False
     if os.sep + 'raw' + os.sep in path:
         return True
     return '_define(globals()' in text
@@ -42,7 +55,7 @@ def main(argv=None):
     options = parser.parse_args(argv)
 
     marked = 0
-    for directory, folders, files in os.walk(options.root):
+    for directory, _folders, files in os.walk(options.root):
         if '__pycache__' in directory:
             continue
         for name in sorted(files):
