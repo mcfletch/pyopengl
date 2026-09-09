@@ -59,6 +59,18 @@ class TestCompileProgramValidation(GLTestCase):
         assert int(program)
         assert glGetProgramiv(program, GL_LINK_STATUS)
 
+    def test_using_it_as_a_context_manager_hands_back_the_program(self):
+        """``with program as bound`` is the point of the context manager.
+
+        The program is the number every later call needs -- glUniform,
+        glGetUniformLocation, glUseProgram -- so a ``with`` that binds nothing
+        makes the form useless and reads as though it worked.
+        """
+        program = self.program(ONE_TARGET)
+        with program as bound:
+            assert bound is program
+            assert int(bound) == int(program)
+
     def test_one_sampler_target_is_still_validated(self):
         """The check is skipped where it cannot mean anything, not removed."""
         program = self.program(ONE_TARGET)

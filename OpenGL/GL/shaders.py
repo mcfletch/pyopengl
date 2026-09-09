@@ -9,6 +9,7 @@ There are also two utility methods compileProgram and compileShader
 which make it easy to create demos which are shader-using.
 """
 import logging
+from typing import Any, Sequence, Tuple, Union
 log = logging.getLogger( __name__ )
 from OpenGL import GL
 from OpenGL.GL.ARB import (
@@ -160,19 +161,20 @@ def _distinct_sampler_targets( program ):
 
 class ShaderProgram( int ):
     """Integer sub-class with context-manager operation"""
-    validated = False
+    validated: bool = False
     #: True where a validation the caller asked for was not performed because
     #: the answer would have been about the program's uniforms rather than
     #: about the program.  See :meth:`check_validate`.
-    validation_deferred = False
-    def __enter__( self ):
+    validation_deferred: bool = False
+    def __enter__( self ) -> 'ShaderProgram':
         """Start use of the program"""
         glUseProgram( self )
-    def __exit__( self, typ, val, tb ):
+        return self
+    def __exit__( self, typ: Any, val: Any, tb: Any ) -> None:
         """Stop use of the program"""
         glUseProgram( 0 )
     
-    def check_validate( self, when_meaningful=False ):
+    def check_validate( self, when_meaningful: bool = False ) -> 'ShaderProgram':
         """Check that the program validates
 
         Validation has to occur *after* linking/loading
@@ -213,7 +215,7 @@ class ShaderProgram( int ):
         self.validation_deferred = False
         return self
 
-    def check_linked( self ):
+    def check_linked( self ) -> 'ShaderProgram':
         """Check link status for this program
         
         raises ShaderLinkError on failures
@@ -227,7 +229,7 @@ class ShaderProgram( int ):
             ))
         return self
 
-    def retrieve( self ):
+    def retrieve( self ) -> Tuple[int, Any]:
         """Attempt to retrieve binary for this compiled shader
 
         Note that binaries for a program are *not* generally portable,
@@ -248,7 +250,7 @@ class ShaderProgram( int ):
         )
         # format was passed in and filled by the call
         return format.value, binary 
-    def load( self, format, binary, validate=True ):
+    def load( self, format: int, binary: Any, validate: bool = True ) -> 'ShaderProgram':
         """Attempt to load binary-format for a pre-compiled shader
         
         See notes in retrieve
@@ -262,7 +264,7 @@ class ShaderProgram( int ):
             self.check_validate( when_meaningful=True )
         return self
 
-def compileProgram(*shaders, **named):
+def compileProgram(*shaders: int, **named: Any) -> ShaderProgram:
     """Create a new program, attach shaders and validate
 
     shaders -- arbitrary number of shaders to attach to the
@@ -319,7 +321,8 @@ def compileProgram(*shaders, **named):
     for shader in shaders:
         glDeleteShader(shader)
     return program
-def compileShader( source, shaderType ):
+def compileShader( source: Union[str, bytes, Sequence[Union[str, bytes]]],
+                   shaderType: int ) -> int:
     """Compile shader source of given type
 
     source -- GLSL source-code for the shader
