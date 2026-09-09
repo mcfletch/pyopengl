@@ -6,7 +6,7 @@ Regenerate with:  python src/regenerate_c.py
 import ctypes
 import sys
 from collections.abc import Sequence
-from typing import Any, TypeAlias
+from typing import Any, TypeAlias, overload
 
 if sys.version_info >= (3, 12):
     from collections.abc import Buffer
@@ -2145,8 +2145,8 @@ def glBlitFramebufferNV(srcX0: int, srcY0: int, srcX1: int, srcY1: int, dstX0: i
 def glBufferAttachMemoryNV(target: int, memory: int, offset: int) -> None:
     """glBufferAttachMemoryNV(target: GLenum, memory: GLuint, offset: GLuint64) -> None"""
 
-def glBufferData(target: int, size: int, data: AnyArray, usage: int) -> None:
-    """glBufferData(target: GLenum, size: GLsizeiptr, data: void[], usage: GLenum) -> None"""
+def glBufferData(target: Any, size: Any, data: Any = ..., usage: Any = ...) -> Any:
+    """glBufferData(target, size, data, usage) -- the form the wrapper takes"""
 
 def glBufferPageCommitmentMemNV(target: int, offset: int, size: int, memory: int, memOffset: int, commit: bool) -> None:
     """glBufferPageCommitmentMemNV(target: GLenum, offset: GLintptr, size: GLsizeiptr, memory: GLuint, memOffset: GLuint64, commit: GLboolean) -> None"""
@@ -2160,8 +2160,8 @@ def glBufferStorageExternalEXT(target: int, offset: int, size: int, clientBuffer
 def glBufferStorageMemEXT(target: int, size: int, memory: int, offset: int) -> None:
     """glBufferStorageMemEXT(target: GLenum, size: GLsizeiptr, memory: GLuint, offset: GLuint64) -> None"""
 
-def glBufferSubData(target: int, offset: int, size: int, data: AnyArray) -> None:
-    """glBufferSubData(target: GLenum, offset: GLintptr, size: GLsizeiptr, data: void[]) -> None"""
+def glBufferSubData(target: Any, offset: Any, size: Any = ..., data: Any = ...) -> Any:
+    """glBufferSubData(target, offset, size, data) -- the form the wrapper takes"""
 
 def glCheckFramebufferStatus(target: int) -> int:
     """glCheckFramebufferStatus(target: GLenum) -> GLenum"""
@@ -2430,8 +2430,8 @@ def glDrawArraysInstancedEXT(mode: int, start: int, count: int, primcount: int) 
 def glDrawArraysInstancedNV(mode: int, first: int, count: int, primcount: int) -> None:
     """glDrawArraysInstancedNV(mode: GLenum, first: GLint, count: GLsizei, primcount: GLsizei) -> None"""
 
-def glDrawBuffersEXT(n: int, bufs: UIntArray) -> None:
-    """glDrawBuffersEXT(n: GLsizei, bufs: GLuint[]) -> None"""
+def glDrawBuffersEXT(n: Any = ..., bufs: Any = ...) -> Any:
+    """glDrawBuffersEXT(n, bufs) -- the form the wrapper takes"""
 
 def glDrawBuffersIndexedEXT(n: int, location: UIntArray, indices: IntArray) -> None:
     """glDrawBuffersIndexedEXT(n: GLint, location: GLuint[], indices: GLint[]) -> None"""
@@ -2706,12 +2706,27 @@ def glGenVertexArraysOES(n: int, arrays: UIntArray) -> None:
 def glGenerateMipmap(target: int) -> None:
     """glGenerateMipmap(target: GLenum) -> None"""
 
+@overload
+def glGetActiveAttrib(program: Any, index: Any, bufSize: Any = ...) -> Any:
+    """glGetActiveAttrib(program, index, bufSize) -- the form the wrapper takes"""
+
+@overload
 def glGetActiveAttrib(program: int, index: int, bufSize: int, length: IntArray | None = None, size: IntArray | None = None, type: UIntArray | None = None, name: ByteArray | None = None) -> tuple[IntArrayResult, ByteArrayResult, IntArrayResult, UIntArrayResult]:
     """glGetActiveAttrib(program: GLuint, index: GLuint, bufSize: GLsizei) -> length: GLsizei[], name: GLchar[], size: GLint[], type: GLuint[]"""
 
+@overload
+def glGetActiveUniform(program: Any, index: Any, bufSize: Any = ...) -> Any:
+    """glGetActiveUniform(program, index, bufSize) -- the form the wrapper takes"""
+
+@overload
 def glGetActiveUniform(program: int, index: int, bufSize: int, length: IntArray | None = None, size: IntArray | None = None, type: UIntArray | None = None, name: ByteArray | None = None) -> tuple[IntArrayResult, ByteArrayResult, IntArrayResult, UIntArrayResult]:
     """glGetActiveUniform(program: GLuint, index: GLuint, bufSize: GLsizei) -> length: GLsizei[], name: GLchar[], size: GLint[], type: GLuint[]"""
 
+@overload
+def glGetAttachedShaders(obj: Any) -> Any:
+    """glGetAttachedShaders(obj) -- the form the wrapper takes"""
+
+@overload
 def glGetAttachedShaders(program: int, maxCount: int, count: IntArray, shaders: UIntArray) -> IntArrayResult:
     """glGetAttachedShaders(program: GLuint, maxCount: GLsizei, shaders: GLuint[]) -> count: GLsizei[]"""
 
@@ -2904,6 +2919,11 @@ def glGetPointervKHR(pname: int, params: AnyArray) -> None:
 def glGetProgramBinaryOES(program: int, bufSize: int, length: IntArray, binaryFormat: UIntArray, binary: AnyArray) -> None:
     """glGetProgramBinaryOES(program: GLuint, bufSize: GLsizei, length: GLsizei[], binaryFormat: GLuint[], binary: void[]) -> None"""
 
+@overload
+def glGetProgramInfoLog(obj: Any) -> Any:
+    """glGetProgramInfoLog(obj) -- the form the wrapper takes"""
+
+@overload
 def glGetProgramInfoLog(program: int, bufSize: int, length: IntArray | None = None, infoLog: ByteArray | None = None) -> tuple[ByteArrayResult, IntArrayResult]:
     """glGetProgramInfoLog(program: GLuint, bufSize: GLsizei) -> infoLog: GLchar[], length: GLsizei[]"""
 
@@ -2970,12 +2990,22 @@ def glGetSemaphoreParameterivNV(semaphore: int, pname: int, params: IntArray) ->
 def glGetSemaphoreParameterui64vEXT(semaphore: int, pname: int, params: UInt64Array) -> None:
     """glGetSemaphoreParameterui64vEXT(semaphore: GLuint, pname: GLenum, params: GLuint64[]) -> None"""
 
+@overload
+def glGetShaderInfoLog(obj: Any) -> Any:
+    """glGetShaderInfoLog(obj) -- the form the wrapper takes"""
+
+@overload
 def glGetShaderInfoLog(shader: int, bufSize: int, length: IntArray | None = None, infoLog: ByteArray | None = None) -> tuple[ByteArrayResult, IntArrayResult]:
     """glGetShaderInfoLog(shader: GLuint, bufSize: GLsizei) -> infoLog: GLchar[], length: GLsizei[]"""
 
 def glGetShaderPrecisionFormat(shadertype: int, precisiontype: int, range: IntArray | None = None, precision: IntArray | None = None) -> tuple[IntArrayResult, IntArrayResult]:
     """glGetShaderPrecisionFormat(shadertype: GLenum, precisiontype: GLenum) -> precision: GLint[], range: GLint[]"""
 
+@overload
+def glGetShaderSource(obj: Any) -> Any:
+    """glGetShaderSource(obj) -- the form the wrapper takes"""
+
+@overload
 def glGetShaderSource(shader: int, bufSize: int, length: IntArray | None = None, source: ByteArray | None = None) -> tuple[IntArrayResult, ByteArrayResult]:
     """glGetShaderSource(shader: GLuint, bufSize: GLsizei) -> length: GLsizei[], source: GLchar[]"""
 

@@ -9,9 +9,15 @@ out of the size and direction annotations.
 
 import importlib
 import keyword
+import os
 
 from . import ctypes_model as cm
 from . import emit_c, exceptional, model
+
+#: The package this generator writes for, beside the generator itself.
+PACKAGE_ROOT = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
+    'OpenGL')
 
 __all__ = [
     'emit_signature',
@@ -408,12 +414,62 @@ def _exceptional_lines(command, wrapper, generated_doc):
     ]
 
 
+def _required_arguments(command):
+    """How many arguments the generated signature demands."""
+    trailing = len(command.parameters)
+    while trailing and command.parameters[trailing - 1].is_output:
+        trailing -= 1
+    return trailing
+
+
+def _lazy_lines(command, wrapper, generated_doc):
+    """Stub lines for an entry point a friendly module wraps with ``lazy``.
+
+    The wrapper's own parameter list is the call it takes, and it is all that
+    is known about it: the parameters carry no annotations, and the wrapper may
+    return something the entry point does not -- ``glGetActiveAttrib`` answers
+    three values where the C form fills four buffers. So the short form is
+    typed ``Any``, which admits the documented call without claiming to know
+    more than the source says, and the generated line follows it for callers
+    passing the C arguments.
+    """
+    required, names = wrapper
+    declared = [
+        '%s: Any' % (_parameter_name(name),) if name in required
+        else '%s: Any = ...' % (_parameter_name(name),)
+        for name in names
+    ]
+    short = 'def %s(%s) -> Any:' % (command.name, ', '.join(declared))
+    prose = '    """%s"""' % (_safe_docstring(
+        '%s(%s) -- the form the wrapper takes' % (command.name, ', '.join(names))),)
+    if len(names) >= len(command.parameters):
+        # The wrapper's own list already spans every call the C form does --
+        # its trailing parameters default -- so a second overload for the C
+        # form would be one a checker can never reach.
+        return [short, prose, '']
+    return [
+        '@overload',
+        short,
+        prose,
+        '',
+        '@overload',
+        emit_signature(command).replace(': ...', ':', 1),
+        '    """%s"""' % (_safe_docstring(generated_doc),),
+        '',
+    ]
+
+
 def emit_module(api, commands, constants=()):
     """One API's stub file."""
+    # The friendly modules' `@_lazy` wrappers, whose shorter call the registry
+    # cannot know about. Read from the package beside this generator, which is
+    # the tree being generated for.
+    discovered = exceptional.discover(PACKAGE_ROOT, api)
     wrapped = {
         command.name
         for command in commands
         if exceptional.lookup(api, command.name) is not None
+        or command.name in discovered
     }
     parts = [
         _PREAMBLE
@@ -445,6 +501,10 @@ def emit_module(api, commands, constants=()):
         wrapper = exceptional.lookup(api, command.name)
         if wrapper is not None:
             parts.extend(_exceptional_lines(command, wrapper, doc))
+            continue
+        shorter = discovered.get(command.name)
+        if shorter is not None and len(shorter[0]) < _required_arguments(command):
+            parts.extend(_lazy_lines(command, shorter, doc))
             continue
         # The docstring is the body.  A def cannot carry both an ellipsis body
         # and a docstring, and the docstring is the more useful of the two --

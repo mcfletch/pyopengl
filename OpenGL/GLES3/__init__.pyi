@@ -6,7 +6,7 @@ Regenerate with:  python src/regenerate_c.py
 import ctypes
 import sys
 from collections.abc import Sequence
-from typing import Any, TypeAlias
+from typing import Any, TypeAlias, overload
 
 if sys.version_info >= (3, 12):
     from collections.abc import Buffer
@@ -780,6 +780,11 @@ def glGetTransformFeedbackVarying(program: int, index: int, bufSize: int, length
 def glGetUniformBlockIndex(program: int, uniformBlockName: ByteArray) -> int:
     """glGetUniformBlockIndex(program: GLuint, uniformBlockName: GLchar[]) -> GLuint"""
 
+@overload
+def glGetUniformIndices(program: Any, uniformNames: Any, uniformIndices: Any = ...) -> Any:
+    """glGetUniformIndices(program, uniformNames, uniformIndices) -- the form the wrapper takes"""
+
+@overload
 def glGetUniformIndices(program: int, uniformCount: int, uniformNames: AnyArray, uniformIndices: UIntArray | None = None) -> UIntArrayResult:
     """glGetUniformIndices(program: GLuint, uniformCount: GLsizei, uniformNames: GLchar[][]) -> uniformIndices: GLuint[]"""
 
@@ -972,6 +977,11 @@ def glTexStorage3D(target: int, levels: int, internalformat: int, width: int, he
 def glTexSubImage3D(target: int, level: int, xoffset: int, yoffset: int, zoffset: int, width: int, height: int, depth: int, format: int, type: int, pixels: AnyArray) -> None:
     """glTexSubImage3D(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: GLenum, type: GLenum, pixels: void[]) -> None"""
 
+@overload
+def glTransformFeedbackVaryings(program: Any, varyings: Any, bufferMode: Any) -> Any:
+    """glTransformFeedbackVaryings(program, varyings, bufferMode) -- the form the wrapper takes"""
+
+@overload
 def glTransformFeedbackVaryings(program: int, count: int, varyings: AnyArray, bufferMode: int) -> None:
     """glTransformFeedbackVaryings(program: GLuint, count: GLsizei, varyings: GLchar[][], bufferMode: GLenum) -> None"""
 

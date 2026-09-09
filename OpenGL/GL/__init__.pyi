@@ -5540,11 +5540,11 @@ def glBufferAddressRangeNV(pname: int, index: int, address: int, length: int) ->
 def glBufferAttachMemoryNV(target: int, memory: int, offset: int) -> None:
     """glBufferAttachMemoryNV(target: GLenum, memory: GLuint, offset: GLuint64) -> None"""
 
-def glBufferData(target: int, size: int, data: AnyArray, usage: int) -> None:
-    """glBufferData(target: GLenum, size: GLsizeiptr, data: void[], usage: GLenum) -> None"""
+def glBufferData(target: Any, size: Any, data: Any = ..., usage: Any = ...) -> Any:
+    """glBufferData(target, size, data, usage) -- the form the wrapper takes"""
 
-def glBufferDataARB(target: int, size: int, data: AnyArray, usage: int) -> None:
-    """glBufferDataARB(target: GLenum, size: GLsizeiptrARB, data: void[], usage: GLenum) -> None"""
+def glBufferDataARB(target: Any, size: Any, data: Any = ..., usage: Any = ...) -> Any:
+    """glBufferDataARB(target, size, data, usage) -- the form the wrapper takes"""
 
 def glBufferPageCommitmentARB(target: int, offset: int, size: int, commit: bool) -> None:
     """glBufferPageCommitmentARB(target: GLenum, offset: GLintptr, size: GLsizeiptr, commit: GLboolean) -> None"""
@@ -5564,11 +5564,11 @@ def glBufferStorageExternalEXT(target: int, offset: int, size: int, clientBuffer
 def glBufferStorageMemEXT(target: int, size: int, memory: int, offset: int) -> None:
     """glBufferStorageMemEXT(target: GLenum, size: GLsizeiptr, memory: GLuint, offset: GLuint64) -> None"""
 
-def glBufferSubData(target: int, offset: int, size: int, data: AnyArray) -> None:
-    """glBufferSubData(target: GLenum, offset: GLintptr, size: GLsizeiptr, data: void[]) -> None"""
+def glBufferSubData(target: Any, offset: Any, size: Any = ..., data: Any = ...) -> Any:
+    """glBufferSubData(target, offset, size, data) -- the form the wrapper takes"""
 
-def glBufferSubDataARB(target: int, offset: int, size: int, data: AnyArray) -> None:
-    """glBufferSubDataARB(target: GLenum, offset: GLintptrARB, size: GLsizeiptrARB, data: void[]) -> None"""
+def glBufferSubDataARB(target: Any, offset: Any, size: Any = ..., data: Any = ...) -> Any:
+    """glBufferSubDataARB(target, offset, size, data) -- the form the wrapper takes"""
 
 def glCallCommandListNV(list: int) -> None:
     """glCallCommandListNV(list: GLuint) -> None"""
@@ -6382,11 +6382,11 @@ def glDeleteFencesNV(n: int, fences: UIntArray) -> None:
 def glDeleteFragmentShaderATI(id: int) -> None:
     """glDeleteFragmentShaderATI(id: GLuint) -> None"""
 
-def glDeleteFramebuffers(n: int, framebuffers: UIntArray) -> None:
-    """glDeleteFramebuffers(n: GLsizei, framebuffers: GLuint[]) -> None"""
+def glDeleteFramebuffers(n: Any, framebuffers: Any = ...) -> Any:
+    """glDeleteFramebuffers(n, framebuffers) -- the form the wrapper takes"""
 
-def glDeleteFramebuffersEXT(n: int, framebuffers: UIntArray) -> None:
-    """glDeleteFramebuffersEXT(n: GLsizei, framebuffers: GLuint[]) -> None"""
+def glDeleteFramebuffersEXT(n: Any, framebuffers: Any = ...) -> Any:
+    """glDeleteFramebuffersEXT(n, framebuffers) -- the form the wrapper takes"""
 
 def glDeleteLists(list: int, range: int) -> None:
     """glDeleteLists(list: GLuint, range: GLsizei) -> None"""
@@ -6430,11 +6430,11 @@ def glDeleteProgramsARB(n: int, programs: UIntArray) -> None:
 def glDeleteProgramsNV(n: int, programs: UIntArray) -> None:
     """glDeleteProgramsNV(n: GLsizei, programs: GLuint[]) -> None"""
 
-def glDeleteQueries(n: int, ids: UIntArray) -> None:
-    """glDeleteQueries(n: GLsizei, ids: GLuint[]) -> None"""
+def glDeleteQueries(n: Any, ids: Any = ...) -> Any:
+    """glDeleteQueries(n, ids) -- the form the wrapper takes"""
 
-def glDeleteQueriesARB(n: int, ids: UIntArray) -> None:
-    """glDeleteQueriesARB(n: GLsizei, ids: GLuint[]) -> None"""
+def glDeleteQueriesARB(n: Any, ids: Any = ...) -> Any:
+    """glDeleteQueriesARB(n, ids) -- the form the wrapper takes"""
 
 def glDeleteQueryResourceTagNV(n: int, tagIds: IntArray) -> None:
     """glDeleteQueryResourceTagNV(n: GLsizei, tagIds: GLint[]) -> None"""
@@ -6606,14 +6606,14 @@ def glDrawArraysInstancedEXT(mode: int, start: int, count: int, primcount: int) 
 def glDrawBuffer(buf: int) -> None:
     """glDrawBuffer(buf: GLenum) -> None"""
 
-def glDrawBuffers(n: int, bufs: UIntArray) -> None:
-    """glDrawBuffers(n: GLsizei, bufs: GLuint[]) -> None"""
+def glDrawBuffers(n: Any = ..., bufs: Any = ...) -> Any:
+    """glDrawBuffers(n, bufs) -- the form the wrapper takes"""
 
-def glDrawBuffersARB(n: int, bufs: UIntArray) -> None:
-    """glDrawBuffersARB(n: GLsizei, bufs: GLuint[]) -> None"""
+def glDrawBuffersARB(n: Any = ..., bufs: Any = ...) -> Any:
+    """glDrawBuffersARB(n, bufs) -- the form the wrapper takes"""
 
-def glDrawBuffersATI(n: int, bufs: UIntArray) -> None:
-    """glDrawBuffersATI(n: GLsizei, bufs: GLuint[]) -> None"""
+def glDrawBuffersATI(n: Any = ..., bufs: Any = ...) -> Any:
+    """glDrawBuffersATI(n, bufs) -- the form the wrapper takes"""
 
 def glDrawCommandsAddressNV(primitiveMode: int, indirects: UInt64Array, sizes: IntArray, count: int) -> None:
     """glDrawCommandsAddressNV(primitiveMode: GLenum, indirects: GLuint64[], sizes: GLsizei[], count: GLuint) -> None"""
@@ -7266,9 +7266,19 @@ def glGenerateTextureMipmapEXT(texture: int, target: int) -> None:
 def glGetActiveAtomicCounterBufferiv(program: int, bufferIndex: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetActiveAtomicCounterBufferiv(program: GLuint, bufferIndex: GLuint, pname: GLenum) -> params: GLint[]"""
 
+@overload
+def glGetActiveAttrib(program: Any, index: Any, bufSize: Any = ...) -> Any:
+    """glGetActiveAttrib(program, index, bufSize) -- the form the wrapper takes"""
+
+@overload
 def glGetActiveAttrib(program: int, index: int, bufSize: int, length: IntArray | None = None, size: IntArray | None = None, type: UIntArray | None = None, name: ByteArray | None = None) -> tuple[IntArrayResult, ByteArrayResult, IntArrayResult, UIntArrayResult]:
     """glGetActiveAttrib(program: GLuint, index: GLuint, bufSize: GLsizei) -> length: GLsizei[], name: GLchar[], size: GLint[], type: GLuint[]"""
 
+@overload
+def glGetActiveAttribARB(program: Any, index: Any, bufSize: Any = ...) -> Any:
+    """glGetActiveAttribARB(program, index, bufSize) -- the form the wrapper takes"""
+
+@overload
 def glGetActiveAttribARB(programObj: int, index: int, maxLength: int, length: IntArray | None = None, size: IntArray | None = None, type: UIntArray | None = None, name: ByteArray | None = None) -> tuple[IntArrayResult, ByteArrayResult, IntArrayResult, UIntArrayResult]:
     """glGetActiveAttribARB(programObj: GLhandleARB, index: GLuint, maxLength: GLsizei) -> length: GLsizei[], name: GLcharARB[], size: GLint[], type: GLuint[]"""
 
@@ -7281,9 +7291,19 @@ def glGetActiveSubroutineUniformName(program: int, shadertype: int, index: int, 
 def glGetActiveSubroutineUniformiv(program: int, shadertype: int, index: int, pname: int, values: IntArray | None = None) -> IntArrayResult:
     """glGetActiveSubroutineUniformiv(program: GLuint, shadertype: GLenum, index: GLuint, pname: GLenum) -> values: GLint[]"""
 
+@overload
+def glGetActiveUniform(program: Any, index: Any, bufSize: Any = ...) -> Any:
+    """glGetActiveUniform(program, index, bufSize) -- the form the wrapper takes"""
+
+@overload
 def glGetActiveUniform(program: int, index: int, bufSize: int, length: IntArray | None = None, size: IntArray | None = None, type: UIntArray | None = None, name: ByteArray | None = None) -> tuple[IntArrayResult, ByteArrayResult, IntArrayResult, UIntArrayResult]:
     """glGetActiveUniform(program: GLuint, index: GLuint, bufSize: GLsizei) -> length: GLsizei[], name: GLchar[], size: GLint[], type: GLuint[]"""
 
+@overload
+def glGetActiveUniformARB(program: Any, index: Any, bufSize: Any = ...) -> Any:
+    """glGetActiveUniformARB(program, index, bufSize) -- the form the wrapper takes"""
+
+@overload
 def glGetActiveUniformARB(programObj: int, index: int, maxLength: int, length: IntArray | None = None, size: IntArray | None = None, type: UIntArray | None = None, name: ByteArray | None = None) -> tuple[IntArrayResult, ByteArrayResult, IntArrayResult, UIntArrayResult]:
     """glGetActiveUniformARB(programObj: GLhandleARB, index: GLuint, maxLength: GLsizei) -> length: GLsizei[], name: GLcharARB[], size: GLint[], type: GLuint[]"""
 
@@ -7308,9 +7328,19 @@ def glGetArrayObjectfvATI(array: int, pname: int, params: FloatArray | None = No
 def glGetArrayObjectivATI(array: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetArrayObjectivATI(array: GLenum, pname: GLenum) -> params: GLint[]"""
 
+@overload
+def glGetAttachedObjectsARB(obj: Any) -> Any:
+    """glGetAttachedObjectsARB(obj) -- the form the wrapper takes"""
+
+@overload
 def glGetAttachedObjectsARB(containerObj: int, maxCount: int, count: IntArray | None = None, obj: UIntArray | None = None) -> tuple[IntArrayResult, UIntArrayResult]:
     """glGetAttachedObjectsARB(containerObj: GLhandleARB, maxCount: GLsizei) -> count: GLsizei[], obj: GLuint[]"""
 
+@overload
+def glGetAttachedShaders(obj: Any) -> Any:
+    """glGetAttachedShaders(obj) -- the form the wrapper takes"""
+
+@overload
 def glGetAttachedShaders(program: int, maxCount: int, count: IntArray, shaders: UIntArray) -> IntArrayResult:
     """glGetAttachedShaders(program: GLuint, maxCount: GLsizei, shaders: GLuint[]) -> count: GLsizei[]"""
 
@@ -7593,6 +7623,11 @@ def glGetImageTransformParameterfvHP(target: int, pname: int, params: FloatArray
 def glGetImageTransformParameterivHP(target: int, pname: int, params: IntArray | None = None) -> IntArrayResult:
     """glGetImageTransformParameterivHP(target: GLenum, pname: GLenum) -> params: GLint[]"""
 
+@overload
+def glGetInfoLogARB(obj: Any) -> Any:
+    """glGetInfoLogARB(obj) -- the form the wrapper takes"""
+
+@overload
 def glGetInfoLogARB(obj: int, maxLength: int, length: IntArray | None = None, infoLog: ByteArray | None = None) -> tuple[ByteArrayResult, IntArrayResult]:
     """glGetInfoLogARB(obj: GLhandleARB, maxLength: GLsizei) -> infoLog: GLcharARB[], length: GLsizei[]"""
 
@@ -8004,6 +8039,11 @@ def glGetProgramEnvParameterdvARB(target: int, index: int, params: DoubleArray |
 def glGetProgramEnvParameterfvARB(target: int, index: int, params: FloatArray | None = None) -> FloatArrayResult:
     """glGetProgramEnvParameterfvARB(target: GLenum, index: GLuint) -> params: GLfloat[]"""
 
+@overload
+def glGetProgramInfoLog(obj: Any) -> Any:
+    """glGetProgramInfoLog(obj) -- the form the wrapper takes"""
+
+@overload
 def glGetProgramInfoLog(program: int, bufSize: int, length: IntArray | None = None, infoLog: ByteArray | None = None) -> tuple[ByteArrayResult, IntArrayResult]:
     """glGetProgramInfoLog(program: GLuint, bufSize: GLsizei) -> infoLog: GLchar[], length: GLsizei[]"""
 
@@ -8160,15 +8200,30 @@ def glGetSeparableFilter(target: int, format: int, type: int, row: AnyArray | No
 def glGetSeparableFilterEXT(target: int, format: int, type: int, row: AnyArray | None = None, column: AnyArray | None = None, span: AnyArray | None = None) -> tuple[AnyArrayResult, AnyArrayResult, AnyArrayResult]:
     """glGetSeparableFilterEXT(target: GLenum, format: GLenum, type: GLenum) -> row: void[], column: void[], span: void[]"""
 
+@overload
+def glGetShaderInfoLog(obj: Any) -> Any:
+    """glGetShaderInfoLog(obj) -- the form the wrapper takes"""
+
+@overload
 def glGetShaderInfoLog(shader: int, bufSize: int, length: IntArray | None = None, infoLog: ByteArray | None = None) -> tuple[ByteArrayResult, IntArrayResult]:
     """glGetShaderInfoLog(shader: GLuint, bufSize: GLsizei) -> infoLog: GLchar[], length: GLsizei[]"""
 
 def glGetShaderPrecisionFormat(shadertype: int, precisiontype: int, range: IntArray | None = None, precision: IntArray | None = None) -> tuple[IntArrayResult, IntArrayResult]:
     """glGetShaderPrecisionFormat(shadertype: GLenum, precisiontype: GLenum) -> precision: GLint[], range: GLint[]"""
 
+@overload
+def glGetShaderSource(obj: Any) -> Any:
+    """glGetShaderSource(obj) -- the form the wrapper takes"""
+
+@overload
 def glGetShaderSource(shader: int, bufSize: int, length: IntArray | None = None, source: ByteArray | None = None) -> tuple[IntArrayResult, ByteArrayResult]:
     """glGetShaderSource(shader: GLuint, bufSize: GLsizei) -> length: GLsizei[], source: GLchar[]"""
 
+@overload
+def glGetShaderSourceARB(obj: Any) -> Any:
+    """glGetShaderSourceARB(obj) -- the form the wrapper takes"""
+
+@overload
 def glGetShaderSourceARB(obj: int, maxLength: int, length: IntArray | None = None, source: ByteArray | None = None) -> tuple[IntArrayResult, ByteArrayResult]:
     """glGetShaderSourceARB(obj: GLhandleARB, maxLength: GLsizei) -> length: GLsizei[], source: GLcharARB[]"""
 
