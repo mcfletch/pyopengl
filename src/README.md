@@ -47,6 +47,6 @@ available.
 * Togl -- original (ancient) Togl wrapper
 * GLU -- hand coded wrapper (old)
 * GLE -- (extrusion library) hand coded wrapper
-* GLUT -- hand coded wrapper script `missingglut.py` tries to find any missing entry points
-* WGL -- uses gccxml to transform wgl.h => wgl.xml => parsed by wraptypes.ctypesparser (gengl) => python
+* GLUT -- hand coded wrapper
+* WGL -- hand coded wrapper
 

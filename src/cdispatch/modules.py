@@ -236,7 +236,7 @@ def read_modules(package_root, apis):
         api_root = os.path.join(raw_root, api)
         if not os.path.isdir(api_root):
             continue
-        for directory, _folders, files in os.walk(api_root):
+        for directory, __folders, files in os.walk(api_root):
             if '__pycache__' in directory:
                 continue
             for filename in sorted(files):

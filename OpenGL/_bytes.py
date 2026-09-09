@@ -1,82 +1,70 @@
-"""8-bit string definitions for Python 2/3 compatibility
+"""Naming the difference between text and 8-bit strings.
 
-Defines the following which allow for dealing with Python 3 breakages:
+An entry point that takes a ``const char *`` wants bytes, and a caller may
+hand it either those or text; the conversions live here so that every wrapper
+that has to make the distinction makes it the same way.
 
     STR_IS_BYTES
     STR_IS_UNICODE
-    
-        Easily checked booleans for type identities
-    
+
+        Whether `str` holds bytes or text.  `False` and `True` here.
+
     _NULL_8_BYTE
-    
-        An 8-bit byte with NULL (0) value 
-    
-    as_8_bit( x, encoding='utf-8')
-    
-        Returns the value as the 8-bit version
-    
-    unicode -- always pointing to the unicode type 
-    bytes -- always pointing to the 8-bit bytes type
+
+        An 8-bit byte with NULL (0) value.
+
+    as_8_bit( x, encoding='utf-8' )
+    as_str( x, encoding='utf-8' )
+    as_unicode( x, encoding='utf-8' )
+
+        The value as bytes, as `str`, and as text.
+
+    bytes, unicode, long, integer_types, maxsize
+
+        Type names a wrapper can read for what it means rather than for what
+        it is: `unicode` where text is wanted as against `bytes`, and `long`
+        where a value may exceed a machine word.
 """
 import sys
 
-STR_IS_BYTES = True
+#: `str` holds text rather than bytes, so a caller handing an entry point a
+#: `str` where an 8-bit string is wanted needs it encoded first.
+STR_IS_BYTES = False
+STR_IS_UNICODE = True
 
-if sys.version_info[:2] < (2,6):
-    # no bytes, traditional setup...
-    bytes = str 
-else:
-    bytes = bytes
-try:
-    long = long
-except NameError as err:
-    long = int
-if sys.version_info[:2] < (3,0):
-    # traditional setup, with bytes defined...
-    unicode = unicode
-    _NULL_8_BYTE = '\000'
-    def as_8_bit( x, encoding='utf-8' ):
-        if isinstance( x, unicode ):
-            return x.encode( encoding )
-        return bytes( x )
-    integer_types = int,long
-    def as_str( x, encoding='utf-8'):
-        """Produce a native string (i.e. different on python 2 and 3)"""
-        if isinstance(x,bytes):
-            return x
-        elif isinstance(x,unicode):
-            return x.encode(encoding)
-        else:
-            return str(x)
-else:
-    # new setup, str is now unicode...
-    STR_IS_BYTES = False
-    _NULL_8_BYTE = bytes( '\000','latin1' )
-    def as_8_bit( x, encoding='utf-8' ):
-        if isinstance( x,unicode ):
-            return x.encode(encoding)
-        elif isinstance( x, bytes ):
-            # Note: this can create an 8-bit string that is *not* in encoding,
-            # but that is potentially exactly what we wanted, as these can 
-            # be arbitrary byte-streams being passed to C functions
-            return x
-        return str(x).encode( encoding )
-    unicode = str
-    integer_types = int,
-    def as_str( x, encoding='utf-8'):
-        """Produce a native string (i.e. different on python 2 and 3)"""
-        if isinstance(x,unicode):
-            return x
-        elif isinstance(x,bytes):
-            return x.decode(encoding)
-        else:
-            return str(x)
+#: The aliases this module exists to provide.  `unicode` and `long` name the
+#: same types as `str` and `int`; they are here because the modules that read
+#: them say what they mean by the name -- text as against bytes, and a value
+#: that may exceed a machine word.
+bytes = bytes
+unicode = str
+long = int
+integer_types = (int,)
+maxsize = sys.maxsize
 
-STR_IS_UNICODE = not STR_IS_BYTES
-if hasattr( sys, 'maxsize' ):
-    maxsize = sys.maxsize 
-else:
-    maxsize = sys.maxint
+_NULL_8_BYTE = b'\000'
+
+
+def as_8_bit( x, encoding='utf-8' ):
+    """`x` as an 8-bit string, encoding it only if it is text."""
+    if isinstance( x, unicode ):
+        return x.encode(encoding)
+    elif isinstance( x, bytes ):
+        # Note: this can create an 8-bit string that is *not* in encoding,
+        # but that is potentially exactly what we wanted, as these can
+        # be arbitrary byte-streams being passed to C functions
+        return x
+    return str(x).encode( encoding )
+
+
+def as_str( x, encoding='utf-8'):
+    """`x` as a `str`, decoding it if it arrived as bytes."""
+    if isinstance(x,unicode):
+        return x
+    elif isinstance(x,bytes):
+        return x.decode(encoding)
+    else:
+        return str(x)
 
 def as_unicode(x,encoding='utf-8'):
     """Ensure is a unicode object given default encoding"""

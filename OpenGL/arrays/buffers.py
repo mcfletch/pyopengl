@@ -14,10 +14,7 @@ from OpenGL import _configflags
 from OpenGL import acceleratesupport
 
 _log = logging.getLogger(__name__)
-try:
-    reduce
-except NameError as err:
-    from functools import reduce
+from functools import reduce
 
 MemoryviewHandler = BufferHandler = None
 if sys.version_info[:2] > (2, 6):

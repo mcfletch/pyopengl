@@ -111,10 +111,10 @@ def _shipped_enums(package_root):
     import ast
 
     names = set()
-    for api, api_names in extract.extract_constants(package_root).items():
+    for _api, api_names in extract.extract_constants(package_root).items():
         names.update(api_names)
     raw_root = os.path.join(package_root, 'raw')
-    for directory, _folders, files in os.walk(raw_root):
+    for directory, __folders, files in os.walk(raw_root):
         if '__pycache__' in directory:
             continue
         for filename in files:

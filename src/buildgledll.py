@@ -3,13 +3,13 @@
 
 Start a VC shell:
     
-    "c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\Visual Studio 2008 Command Prompt.lnk"
-    "c:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\bin\Visual Studio 2008 x64 Win64 Command Prompt.lnk"
+    "c:\\Program Files (x86)\\Microsoft Visual Studio 9.0\\VC\bin\\Visual Studio 2008 Command Prompt.lnk"
+    "c:\\Program Files (x86)\\Microsoft Visual Studio 9.0\\VC\bin\\Visual Studio 2008 x64 Win64 Command Prompt.lnk"
 
 Then run this script with the appropriate (32-bit or 64-bit python):
 
-    c:\python27-32\python.exe buildgledll.py
-    c:\python27-64\python.exe buildgledll.py
+    c:\\python27-32\\python.exe buildgledll.py
+    c:\\python27-64\\python.exe buildgledll.py
 
 Note: the name "opengle" is required because someone issues DMCA takedown orders against anything named "gle.dll"
 despite the name GLE referring to the GLE project for a very long time (they took PyOpenGL offline for a while
@@ -63,7 +63,7 @@ def build():
         exports = " ".join([ '/EXPORT:%s'%(x) for x in EXPORTS.split() if x])
 
         subprocess.check_call( 'cl -c /D"WIN32" /D "_WINDLL" /Gd /MD *.c' )
-        subprocess.check_call( 'link  /LIBPATH:"C:\Program Files\Microsoft Platform SDK\Lib" %(exports)s /DLL /OUT:%(outfile)s opengl32.lib glu32.lib *.obj'%locals() )
+        subprocess.check_call( r'link  /LIBPATH:"C:\Program Files\Microsoft Platform SDK\Lib" %(exports)s /DLL /OUT:%(outfile)s opengl32.lib glu32.lib *.obj'%locals() )
 
         shutil.copyfile( outfile, target )
         print('Created file %(target)s'%locals())

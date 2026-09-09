@@ -3,7 +3,7 @@ import logging, os, subprocess
 log = logging.getLogger( 'checker' )
 def main():
     env = running_env = os.environ.copy()
-    for path,dirs,files in os.walk( os.path.join('..','OpenGL','raw') ):
+    for path,_dirs,files in os.walk( os.path.join('..','OpenGL','raw') ):
         for file in files:
             if file.endswith( '.py' ):
                 log.debug( 'Check: %s', file )

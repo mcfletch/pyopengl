@@ -122,7 +122,7 @@ def main(argv=None):
             _declarations.define(rebuilt, raw_name, customise=True)
 
             rebound = _rebound_by_star_imports(text, from_chain)
-            for command, _arguments, _types in contents.get('commands', ()):
+            for command, __arguments, __types in contents.get('commands', ()):
                 theirs = getattr(from_chain, command, None)
                 ours = rebuilt.get(command)
                 if theirs is None or ours is None:

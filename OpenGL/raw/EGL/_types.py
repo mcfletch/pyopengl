@@ -136,50 +136,7 @@ else:
 
 _VERSION_PREFIX = 'EGL_VERSION_EGL_'
 
-
-[
-    'EGLAttrib',
-    'EGLnsecsANDROID',
-    'EGLClientPixmapHI',
-    'EGLDEBUGPROCKHR',
-    'EGLObjectKHR',
-    'EGLLabelKHR',
-    'EGLAttribKHR',
-    'EGLBoolean',
-    'EGLClientBuffer',
-    'EGLClientPixmapHI',
-    'EGLConfig',
-    'EGLContext',
-    'EGLDisplay',
-    'EGLGetBlobFuncANDROID',
-    'EGLImageKHR',
-    'EGLModeMESA',
-    'EGLNativeDisplayType',
-    'EGLNativeFileDescriptorKHR',
-    'EGLNativePixmapType',
-    'EGLNativeWindowType',
-    'EGLScreenMESA',
-    'EGLSetBlobFuncANDROID',
-    'EGLStreamKHR',
-    'EGLSurface',
-    'EGLSyncKHR',
-    'EGLSyncNV',
-    'EGLSync',
-    'EGLTimeKHR',
-    'EGLTimeNV',
-    'EGLTime',
-    'EGL_DEFAULT_DISPLAY',
-    'EGL_DONT_CARE',
-    'EGL_NO_CONTEXT',
-    'EGL_NO_DISPLAY',
-    'EGL_NO_SURFACE',
-    'EGLenum',
-    'EGLint',
-    'EGLsizeiANDROID',
-    'EGLuint64KHR',
-    'EGLuint64NV',
-    'NativeDisplayType',
-    'NativePixmapType',
-    'NativeWindowType',
-    'wl_display',
-]
+# A list of type names sat here as a bare expression: built on every import
+# and thrown away, because the assignment it belonged to was lost. It cannot
+# be restored as `__all__` -- it is missing names the EGL extension modules
+# import by name, so exporting only these breaks them.

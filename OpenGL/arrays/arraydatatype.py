@@ -9,11 +9,7 @@ from OpenGL.arrays import formathandler, _arrayconstants as GL_1_1
 from OpenGL import logs
 
 _log = logs.getLog("OpenGL.arrays.arraydatatype")
-try:
-    unicode
-except NameError:
-    unicode = str
-
+from OpenGL._bytes import unicode
 from OpenGL import acceleratesupport
 
 ADT = None
@@ -148,7 +144,7 @@ if ADT is None:
             ffi type is the correct declaration.  CPython's C ``ctypes`` never
             calls this hook, so it is inert there.
             """
-            return getattr(ctypes.c_void_p, 'get_ffi_argtype')()
+            return ctypes.c_void_p.get_ffi_argtype()
 
         @classmethod 
         @logs.logOnFailDec(_log)

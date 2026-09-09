@@ -245,7 +245,7 @@ def _shipped(package_root):
         for command in declared.values()
     }
     root = os.path.join(package_root, 'raw', 'EGL')
-    for directory, folders, files in os.walk(root):
+    for directory, _folders, files in os.walk(root):
         if '__pycache__' in directory:
             continue
         for filename in files:

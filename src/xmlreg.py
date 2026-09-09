@@ -93,7 +93,7 @@ class Registry(object):
             context.append(as_str(name))
 
     def debug_enums(self):
-        for name, namespace in self.enum_namespaces.items():
+        for _name, namespace in self.enum_namespaces.items():
             print('Namespace', namespace.namespace)
             for enum in namespace:
                 print('  ', enum)
@@ -157,7 +157,7 @@ class Registry(object):
         return ' '.join([x for x in return_type if x]) or 'void'
 
     def debug_commands(self):
-        for name, command in sorted(self.command_set.items()):
+        for _name, command in sorted(self.command_set.items()):
             print(command)
 
     def feature(self, element, context=None):
@@ -303,11 +303,11 @@ class Command(object):
                 result.append((target, DynamicInput(length)))
             elif '*' in length:
                 params = [x.strip() for x in length.split('*')]
-                in_set = [x for x in params if x in self.argNames]
+                [x for x in params if x in self.argNames]
                 result.append((target, MultiplyInput(params)))
             elif '/' in length:
                 params = [x.strip() for x in length.split('/')]
-                in_set = [x for x in params if x in self.argNames]
+                [x for x in params if x in self.argNames]
                 result.append((target, DivideInput(params)))
             else:
                 raise RuntimeError((target, length))

@@ -107,9 +107,16 @@ try:
     CheckBuffer.argtypes = [ctypes.py_object]
     CheckBuffer.restype = ctypes.c_int
 except AttributeError as err:
-    # Python 2.6 doesn't appear to have CheckBuffer support...
+    # An interpreter whose `ctypes.pythonapi` does not export the symbol. There
+    # is then no way to ask whether an object supports the buffer protocol, so
+    # the answer is yes and `GetBuffer` below is what finds out -- it returns
+    # non-zero for an object that cannot serve one, and that is already checked.
+    #
+    # `return True`, not a bare `True`: without the return this answers None,
+    # every caller takes the `not CheckBuffer(...)` branch, and the buffer
+    # protocol is refused for every object on the interpreters that land here.
     def CheckBuffer(x):
-        True
+        return True
 
 
 IncRef = ctypes.pythonapi.Py_IncRef

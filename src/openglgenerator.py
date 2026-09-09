@@ -250,7 +250,7 @@ class OpenGLDecorator(OpenGLFunction):
         if base.endswith('v'):
             base = base[:-1]
             found = 0
-            for suffix, typ in self.SUFFIX_TO_ARRAY_DATATYPE:
+            for suffix, _typ in self.SUFFIX_TO_ARRAY_DATATYPE:
                 if base.endswith(suffix):
                     found = 1
                     base = base[: -len(suffix)]
@@ -261,12 +261,12 @@ class OpenGLDecorator(OpenGLFunction):
                     break
         elif base[:-1].endswith('Matrix'):
             # glLoadMatrix, glMultMatrix
-            for suffix, typ in self.SUFFIX_TO_ARRAY_DATATYPE:
+            for suffix, _typ in self.SUFFIX_TO_ARRAY_DATATYPE:
                 if name.endswith(suffix):
                     size = 16
                     break
         result = ''
-        for index, (arg, argName) in enumerate(
+        for _index, (arg, argName) in enumerate(
             zip(func.iterArgTypes(), func.iterArgNames())
         ):
             type = self.arrayTypeName(generator, arg)

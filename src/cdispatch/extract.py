@@ -628,7 +628,7 @@ def _apply_registry(commands, registry_root):
     """Fold what the registry says about parameter sizing into the records."""
     lengths = _registry_lengths(registry_root)
     by_name = {}
-    for (api, name), command in commands.items():
+    for (_api, name), command in commands.items():
         by_name.setdefault(name, []).append(command)
     for name, group in by_name.items():
         sizes = lengths.get(name, {})
@@ -689,7 +689,7 @@ def extract_tree(root, registry_root=None, read_chains=True):
     """
     commands = {}
     for api in APIS:
-        for _module_name, declared in read_declarations(root, api):
+        for __module_name, declared in read_declarations(root, api):
             for command_name, command in declared.items():
                 key = (api, command_name)
                 existing = commands.get(key)
@@ -702,7 +702,7 @@ def extract_tree(root, registry_root=None, read_chains=True):
                 commands[key] = _prefer(existing, command)
 
     if read_chains:
-        for directory, _folders, files in os.walk(root):
+        for directory, __folders, files in os.walk(root):
             if 'raw' in directory.split(os.sep) or '__pycache__' in directory:
                 continue
             api = _api_for_path(root, directory)
@@ -809,7 +809,7 @@ def extract_constants(root):
         if not os.path.isdir(api_root):
             continue
         names = set(_table_constants(root, api))
-        for directory, _folders, files in os.walk(api_root):
+        for directory, __folders, files in os.walk(api_root):
             if '__pycache__' in directory:
                 continue
             for filename in sorted(files):
