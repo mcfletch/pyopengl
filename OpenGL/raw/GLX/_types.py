@@ -331,3 +331,21 @@ class GLXHyperpipeConfigSGIX( Structure ):
         ('timeSlice',c_int),
     ]
 
+
+#: ``GLX_SGIX_hyperpipe``'s other structure, alongside the configuration one
+#: above.  Both name a pipe in the same 80-byte field; the specification writes
+#: that length as ``GLX_HYPERPIPE_PIPE_NAME_LENGTH_SGIX`` and gives it as 80.
+class GLXHyperpipeNetworkSGIX( Structure ):
+    _fields_ = [
+        ('pipeName', c_char * 80),
+        ('networkId', c_int),
+    ]
+
+#: ``GLX_SGIX_fbconfig``'s framebuffer configuration.  The same opaque record
+#: the core ``GLXFBConfig`` points at -- the extension is what the core
+#: mechanism was promoted from, so the two name one thing.
+GLXFBConfigSGIX = POINTER(struct___GLXFBConfigRec)
+
+#: ``GLX_NV_video_capture``'s device handle: an X resource id, as the other
+#: GLX handles that are not pointers are.
+GLXVideoCaptureDeviceNV = XID

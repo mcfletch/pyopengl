@@ -104,7 +104,7 @@ class BasePlatform(object):
         EXPORTED_NAMES -- set of names exported via the platform
             module's namespace...
 
-        GL, GLU, GLUT, GLE, GLES1, GLES2, GLES3, EGL, GLX -- ctypes
+        GL, GLU, GLUT, GLE, GLES1, GLES2, GLES3, GLSC2, EGL, GLX -- ctypes
             libraries, or None where this platform has no such library.
             A subclass normally overrides the ones it can provide with a
             lazy_property, so that a library is only loaded once something
@@ -152,6 +152,12 @@ class BasePlatform(object):
     GLES1 = None
     GLES2 = None
     GLES3 = None
+    # OpenGL SC 2.0, the safety-critical profile.  No platform here loads one:
+    # it ships with a conformant SC implementation rather than with a desktop
+    # driver.  Named all the same, so `OpenGL.GLSC2` imports and its entry
+    # points report themselves unavailable, which is what every other API a
+    # machine lacks does.
+    GLSC2 = None
     EGL = None
     GLX = None
 
