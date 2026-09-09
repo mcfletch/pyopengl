@@ -39,7 +39,7 @@ sys.path.insert(0, HERE)
 
 import fetch_registries  # noqa: E402
 from cdispatch import generate  # noqa: E402
-from cdispatch.emit_glut import emit_glut  # noqa: E402
+from cdispatch.emit_handwritten import emit_handwritten  # noqa: E402
 
 
 def main(argv=None):
@@ -109,21 +109,23 @@ def main(argv=None):
         stubs_root=arguments.package,
     )
     report['slots'] = len(slots)
-    # GLUT is not a registry API, so `generate` has nothing to say about it;
-    # its stub is read from the hand-maintained declarations instead.
-    report['glut_names'] = emit_glut(arguments.package)
+    # GLU, GLUT and GLE are not registry APIs, so `generate` has nothing to
+    # say about them; their stubs are read from the hand-maintained
+    # declarations instead.
+    report['handwritten_names'] = emit_handwritten(arguments.package)
     with open(arguments.manifest, 'w', encoding='utf-8') as handle:
         json.dump(report, handle, indent=2, sort_keys=True)
         handle.write('\n')
 
     print(
-        'bindings %d, emitted %d (%.1f%%), apis %s; GLUT stub %d names'
+        'bindings %d, emitted %d (%.1f%%), apis %s; hand-maintained stubs %s'
         % (
             report['total'],
             report['emitted'],
             100.0 * report['emitted'] / report['total'],
             ', '.join(report['apis']),
-            report['glut_names'],
+            ', '.join('%s %d' % (api, count) for api, count
+                      in sorted(report['handwritten_names'].items())),
         )
     )
     return 0

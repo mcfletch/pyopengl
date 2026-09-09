@@ -76,10 +76,16 @@ What changed since the 3.x series. The current development version is
 
 ## Editors and type checkers can see the API
 
-- 1,307 `.pyi` stubs and a `py.typed` marker. The generated modules fill their
+- 1,310 `.pyi` stubs and a `py.typed` marker. The generated modules fill their
   namespaces from declaration tables at import, so nothing reading the source
   could see them: completion offered nothing and a checker typed every name as
   `Any`. The stubs carry the constants, the entry points and their signatures.
+- **GLU, GLUT and GLE are covered too.** None of the three is a Khronos API, so
+  each is written by hand and the registry-driven generator has nothing to say
+  about it. `from OpenGL.GLUT import *` therefore put no name a checker could
+  see into a caller's namespace, and every program built on them was unchecked
+  from its import line. Their stubs are emitted from the declarations
+  themselves: 354 GLUT names, 219 GLU, 52 GLE.
 - Docstrings state GL types in the registry's own names, so
   `glBindTexture(target: GLenum, texture: GLuint) -> None` rather than
   `glBindTexture(target, texture) -> None`.
@@ -90,10 +96,15 @@ What changed since the 3.x series. The current development version is
   `glMap1f`, `glMap2d` and `glMap2f` take the points array without the strides,
   and the stub offers that call alone, since it is the only one they accept.
   `glCallLists` and `glAreTexturesResident` gain their Pythonic forms the same
-  way.
+  way. GLU and GLE are full of these: `gleExtrusion(contour, cont_normal, up,
+  point_array, color_array)` takes five arguments where the C entry point takes
+  seven, because both counts are read off the arrays passed with them, and
+  `gluProject(objX, objY, objZ)` fills in the three matrices from the current
+  GL state. The stub says what each wrapper takes.
 - The stubs are checked, and a defect in them fails the build. `mypy` runs over
-  all 1,307 of them in CI, and the suite holds each one against the object it
-  describes. What the gate covers, and why the package's own source is not in
+  all 1,310 of them in CI, and the suite holds each one against the object it
+  describes -- including holding every GLU, GLUT and GLE entry point to the
+  number of arguments its Python form actually takes. What the gate covers, and why the package's own source is not in
   it, is in `[tool.mypy]` in `pyproject.toml`.
 - Fourteen modules that could not be imported at all now import:
   `OpenGL.GLSC2` in its entirety, which had no `raw/GLSC2/_types.py`;

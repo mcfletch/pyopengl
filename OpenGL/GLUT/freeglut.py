@@ -306,4 +306,5 @@ that unless registered in the correct order, will cause seg-faults.
 To work around this, call fgDeinitialize(False) before doing a 
 sys.exit() or similar call that terminates your GLUT mainloop.
 ''',
+    argNames=('deinitializeGLUT',),
 )
