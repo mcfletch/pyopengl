@@ -120,7 +120,7 @@ def glBufferSubData( baseOperation, target, offset, size=None, data=None ):
         if data is not None:
             raise TypeError(
                 """Expect an integer size *or* a data-array, not both"""
-            )
+            ) from None
         data = size
         size = None
     data = ArrayDatatype.asArray( data )

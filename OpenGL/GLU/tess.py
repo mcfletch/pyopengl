@@ -109,7 +109,7 @@ class GLUtesselator(glustruct.GLUStruct, _simple.GLUtesselator):
                 void **outData
             )
         """
-        if (function is not None) and (not hasattr(function, '__call__')):
+        if (function is not None) and (not callable(function)):
             raise TypeError("""Require a callable callback, got:  %s""" % (function,))
 
         def wrap(coords, vertex_data, weight, outData, *args):
@@ -132,7 +132,7 @@ class GLUtesselator(glustruct.GLUStruct, _simple.GLUtesselator):
                         args,
                         str(err),
                     )
-                )
+                ) from err
             if outData:
                 # c_void_p slot accepts the integer handle directly.
                 outData[0] = self.noteObject(result)
@@ -144,7 +144,7 @@ class GLUtesselator(glustruct.GLUStruct, _simple.GLUtesselator):
 
     def dataWrapper(self, function):
         """Wrap a function which only has the one data-pointer as last arg"""
-        if (function is not None) and (not hasattr(function, '__call__')):
+        if (function is not None) and (not callable(function)):
             raise TypeError("""Require a callable callback, got:  %s""" % (function,))
 
         def wrap(*args):
@@ -160,7 +160,7 @@ class GLUtesselator(glustruct.GLUStruct, _simple.GLUtesselator):
 
     def dataWrapper2(self, function):
         """Wrap a function which has two data-pointers as last args"""
-        if (function is not None) and (not hasattr(function, '__call__')):
+        if (function is not None) and (not callable(function)):
             raise TypeError("""Require a callable callback, got:  %s""" % (function,))
 
         def wrap(*args):
@@ -179,7 +179,7 @@ class GLUtesselator(glustruct.GLUStruct, _simple.GLUtesselator):
 
     def vertexWrapper(self, function):
         """Converts a vertex-pointer into an OOR vertex for processing"""
-        if (function is not None) and (not hasattr(function, '__call__')):
+        if (function is not None) and (not callable(function)):
             raise TypeError("""Require a callable callback, got:  %s""" % (function,))
 
         def wrap(vertex, data=None):

@@ -270,7 +270,7 @@ def context_or_exit(**requirements):
         return Context(**requirements)
     except unittest.SkipTest as reason:
         print(reason, file=sys.stderr)
-        raise SystemExit(NOTHING_TO_TEST_WITH)
+        raise SystemExit(NOTHING_TO_TEST_WITH) from reason
 
 
 def window_was_made(window):

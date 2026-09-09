@@ -216,7 +216,10 @@ class Togl(Widget):
     that needs nothing outside Python.
     """
 
-    def __init__(self, master=None, cnf={}, **kw):
+    def __init__(self, master=None, cnf=None, **kw):
+        # `None` rather than `{}`: a mutable default is one object shared
+        # by every widget that does not pass its own.
+        cnf = {} if cnf is None else cnf
         loadTogl(master or tkinter._default_root)
         Widget.__init__(self, master, 'togl', cnf, kw)
 
@@ -277,7 +280,10 @@ class RawOpengl(GLFrame, Misc):
     compatibility profile, since there is a matrix stack in that sentence.
     """
 
-    def __init__(self, master=None, cnf={}, **kw):
+    def __init__(self, master=None, cnf=None, **kw):
+        # `None` rather than `{}`: a mutable default is one object shared
+        # by every widget that does not pass its own.
+        cnf = {} if cnf is None else cnf
         merged = dict(cnf or {})
         merged.update(kw)
         attributes, options, animate = attributesFromToglOptions(merged)
@@ -330,11 +336,14 @@ button 2 rotates and button 3 zooms.  Set ``redraw`` to a callable taking the
 widget, or subclass and override it.
 """
 
-    def __init__(self, master=None, cnf={}, **kw):
+    def __init__(self, master=None, cnf=None, **kw):
         """\
         Create an opengl widget.
         Arrange for redraws when the window is exposed or when
         it changes size."""
+        # `None` rather than `{}`: a mutable default is one object shared
+        # by every widget that does not pass its own.
+        cnf = {} if cnf is None else cnf
 
         RawOpengl.__init__(self, master, cnf, **kw)
         self.initialised = 0

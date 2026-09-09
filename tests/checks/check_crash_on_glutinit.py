@@ -7,7 +7,7 @@ def main():
     if glutInit:
         glutInit(' ')
         glutInitDisplayMode(GLUT_SINGLE)
-        window = glutCreateWindow("hello")
+        glutCreateWindow("hello")
         glutDisplayFunc(lambda *args: 1)
         # glutMainLoop()
         try:

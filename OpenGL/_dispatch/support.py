@@ -199,7 +199,7 @@ def as_pointer(value):
     try:
         return int(value)
     except (TypeError, ValueError):
-        raise TypeError('cannot use %r as a pointer' % (type(value).__name__,))
+        raise TypeError('cannot use %r as a pointer' % (type(value).__name__,)) from None
 
 
 _opaque_classes = {}
@@ -404,7 +404,7 @@ def _replayed(proc):
 
     binding = ctypes_callable(proc.__name__, getattr(proc, 'api', None))
     built = wrapper.wrapper(binding)
-    for (earlier, _which), earlier_args in swallowed_for(proc).items():
+    for (earlier, __which), earlier_args in swallowed_for(proc).items():
         built = getattr(built, earlier)(*earlier_args)
     return built
 

@@ -11,7 +11,7 @@ import operator
 try:
     import numpy
 except ImportError as err:
-    raise ImportError( """No numpy module present: %s"""%(err))
+    raise ImportError( """No numpy module present: %s"""%(err)) from err
 from OpenGL.arrays import buffers
 from OpenGL.arrays import _arrayconstants
 from OpenGL.raw.GL import _types 

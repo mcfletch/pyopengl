@@ -33,7 +33,7 @@ def held_for(handle):
 
 class TestTheCachesGoWithTheContext(unittest.TestCase):
     def test_the_description_is_dropped_when_the_context_is_forgotten(self):
-        with Context(profile='compatibility', gl_version=(2, 1)) as context:
+        with Context(profile='compatibility', gl_version=(2, 1)):
             handle = int(platform.PLATFORM.GetCurrentContext())
             platform.PLATFORM.checkExtension('GL_ARB_multitexture')
             described = [key for key in held_for(handle)

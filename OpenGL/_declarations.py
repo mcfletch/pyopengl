@@ -325,7 +325,7 @@ def customise_entry(entry, api, name, declared):
         return entry
 
     built = entry
-    for parameter, _kind in declared:
+    for parameter, __kind in declared:
         bits = parameters.get(parameter, {})
         if bits.get('out'):
             continue          # rebuilt below, in the order the chain used
@@ -340,7 +340,7 @@ def customise_entry(entry, api, name, declared):
             built = wrapper.wrapper(entry)
         built = built.setInputArraySize(parameter, length)
 
-    for _order, parameter, size in outputs:
+    for __order, parameter, size in outputs:
         if built is entry:
             built = wrapper.wrapper(entry)
         kind = size['kind']

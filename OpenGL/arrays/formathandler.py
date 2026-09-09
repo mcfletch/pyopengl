@@ -73,7 +73,7 @@ class FormatHandler(object):
             if plugin:
                 cls.loadPlugin(plugin)
                 return registry[type]
-            raise KeyError("""Unable to find data-format handler for %s""" % (type,))
+            raise KeyError("""Unable to find data-format handler for %s""" % (type,)) from err
 
     loadAll = classmethod(loadAll)
 

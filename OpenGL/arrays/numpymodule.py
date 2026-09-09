@@ -11,7 +11,7 @@ _log = logging.getLogger( __name__ )
 try:
     import numpy
 except ImportError as err:
-    raise ImportError( """No numpy module present: %s"""%(err))
+    raise ImportError( """No numpy module present: %s"""%(err)) from err
 import OpenGL
 assert OpenGL
 import ctypes
@@ -140,7 +140,7 @@ if NumpyHandler is None:
                     raise error.CopyError(
                         """Non-numpy array passed to numpy arrayByteCount: %s""",
                         type(value),
-                    )
+                    ) from None
                 value = cls.asArray( value, typeCode )
                 return value.nbytes
         @classmethod

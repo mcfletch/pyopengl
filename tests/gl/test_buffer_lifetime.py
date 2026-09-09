@@ -26,6 +26,8 @@ import sys
 import unittest
 import weakref
 
+from OpenGL.error import GLError
+
 import pytest
 
 from arraycompat import np, object_names, one
@@ -181,7 +183,7 @@ class TestBufferLifetime(GLTestCase):
         """
         first = np.zeros(2, 'i')
         with no_references_kept(first):
-            with pytest.raises(Exception):
+            with pytest.raises((TypeError, ValueError, GLError)):
                 glMultiDrawArrays(GL_TRIANGLES, first, object(), 0)
 
     def test_the_argument_is_not_kept_alive_after_the_call(self):

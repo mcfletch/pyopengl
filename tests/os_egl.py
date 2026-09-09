@@ -135,7 +135,7 @@ def egl_context(
             eglInitialize(display, major, minor)
         except EGLError as err:
             log.warning("eglInitilise failure on %s: %s", display, err.err)
-            raise NoEGLSupport(display)
+            raise NoEGLSupport(display) from err
         log.debug(
             "Available configs:\n%s",
             debug.format_debug_configs(debug.debug_configs(display)),

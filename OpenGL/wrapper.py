@@ -130,7 +130,7 @@ class Wrapper(LateBind):
         except (ValueError, IndexError):
             raise KeyError(
                 """No argument %r in argument list %r""" % (argName, argNames)
-            )
+            ) from None
 
     def cArgIndex(self, argName):
         """Return the C-argument index for the given argument name"""
@@ -140,7 +140,7 @@ class Wrapper(LateBind):
         except (ValueError, IndexError):
             raise KeyError(
                 """No argument %r in argument list %r""" % (argName, argNames)
-            )
+            ) from None
 
     def setOutput(
         self,
@@ -181,7 +181,7 @@ class Wrapper(LateBind):
                         )
                     )
         if pnameArg is None:
-            assert not hasattr(size, '__call__')
+            assert not callable(size)
             if orPassIn:
                 cls = converters.OutputOrInput
             else:
@@ -197,7 +197,7 @@ class Wrapper(LateBind):
                 size = size.__getitem__
             else:
                 setattr(self, '%s_FROM_%s' % (outArg, pnameArg), size)
-            assert hasattr(size, '__call__')
+            assert callable(size)
             if orPassIn:
                 cls = converters.SizedOutputOrInput
             else:
@@ -346,7 +346,7 @@ class Wrapper(LateBind):
                     self.wrappedOperation.__name__,
                     self.pyConverterNames,
                 )
-            )
+            ) from None
         if function is NULL:
             del self.pyConverters[i]
             del self.pyConverterNames[i]
@@ -388,7 +388,7 @@ class Wrapper(LateBind):
                     argName,
                     self.wrappedOperation.argNames,
                 )
-            )
+            ) from None
         if self.cConverters[i] is not None:
             raise RuntimeError(
                 "Double wrapping of output parameter: %r on %s"
@@ -412,7 +412,7 @@ class Wrapper(LateBind):
                     argName,
                     self.wrappedOperation.argNames,
                 )
-            )
+            ) from None
         if function is NULL:
             del self.cResolvers[i]
         else:
@@ -466,7 +466,7 @@ class Wrapper(LateBind):
                                     item,
                                     err,
                                 )
-                            )
+                            ) from err
         if hasattr(self, 'cConverters'):
             for i, converter in enumerate(self.cConverters):
                 if isinstance(converter, (type(None), DefaultCConverter)):
@@ -556,7 +556,7 @@ class Wrapper(LateBind):
                 calculate_cArgs = CArgCalculator(self, cConverters)
             else:
                 cConverters_mapped = [
-                    (i, converter, hasattr(converter, '__call__'))
+                    (i, converter, callable(converter))
                     for (i, converter) in enumerate(cConverters)
                 ]
 
@@ -1035,7 +1035,7 @@ class Wrapper(LateBind):
                                 cArgs = []
                                 for index, converter in enumerate(cConverters):
                                     # move enumerate out...
-                                    if not hasattr(converter, '__call__'):
+                                    if not callable(converter):
                                         cArgs.append(converter)
                                     else:
                                         try:
@@ -1082,7 +1082,7 @@ class Wrapper(LateBind):
                                 cArgs = []
                                 for index, converter in enumerate(cConverters):
                                     # move enumerate out...
-                                    if not hasattr(converter, '__call__'):
+                                    if not callable(converter):
                                         cArgs.append(converter)
                                     else:
                                         try:
@@ -1125,7 +1125,7 @@ class Wrapper(LateBind):
                                 cArgs = []
                                 for index, converter in enumerate(cConverters):
                                     # move enumerate out...
-                                    if not hasattr(converter, '__call__'):
+                                    if not callable(converter):
                                         cArgs.append(converter)
                                     else:
                                         try:
@@ -1165,7 +1165,7 @@ class Wrapper(LateBind):
                                 cArgs = []
                                 for index, converter in enumerate(cConverters):
                                     # move enumerate out...
-                                    if not hasattr(converter, '__call__'):
+                                    if not callable(converter):
                                         cArgs.append(converter)
                                     else:
                                         try:
@@ -1203,7 +1203,7 @@ class Wrapper(LateBind):
                                 cArgs = []
                                 for index, converter in enumerate(cConverters):
                                     # move enumerate out...
-                                    if not hasattr(converter, '__call__'):
+                                    if not callable(converter):
                                         cArgs.append(converter)
                                     else:
                                         try:
@@ -1250,7 +1250,7 @@ class Wrapper(LateBind):
                                 cArgs = []
                                 for index, converter in enumerate(cConverters):
                                     # move enumerate out...
-                                    if not hasattr(converter, '__call__'):
+                                    if not callable(converter):
                                         cArgs.append(converter)
                                     else:
                                         try:
@@ -1293,7 +1293,7 @@ class Wrapper(LateBind):
                                 cArgs = []
                                 for index, converter in enumerate(cConverters):
                                     # move enumerate out...
-                                    if not hasattr(converter, '__call__'):
+                                    if not callable(converter):
                                         cArgs.append(converter)
                                     else:
                                         try:
@@ -1333,7 +1333,7 @@ class Wrapper(LateBind):
                                 cArgs = []
                                 for index, converter in enumerate(cConverters):
                                     # move enumerate out...
-                                    if not hasattr(converter, '__call__'):
+                                    if not callable(converter):
                                         cArgs.append(converter)
                                     else:
                                         try:
@@ -1592,7 +1592,7 @@ class Wrapper(LateBind):
         if cConverters:
             cArgs = []
             for index, converter in enumerate(cConverters):
-                if not hasattr(converter, '__call__'):
+                if not callable(converter):
                     cArgs.append(converter)
                 else:
                     try:

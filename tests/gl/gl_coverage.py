@@ -50,7 +50,7 @@ def version_sources():
             continue
         names.append((order, tail, module))
     out = []
-    for _order, tail, module in sorted(names):
+    for __order, tail, module in sorted(names):
         contents = declarations.module_contents(module) or {}
         # Each command is (name, argument names, ctypes signature).
         out.append((tail, {entry[0] for entry in contents.get('commands') or ()}))
@@ -180,7 +180,7 @@ def main():
                 print('\n# %s uncovered (%d):' % (name, len(missing)))
                 print(' '.join(missing))
     if '--ext-uncovered' in sys.argv and ext:
-        for name, funcs, c in ext[2]:
+        for name, funcs, _c in ext[2]:
             missing = [f for f in funcs if f not in used]
             if missing:
                 print('# %s (%d left): %s' % (name, len(missing), ' '.join(missing)))

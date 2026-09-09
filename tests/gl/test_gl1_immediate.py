@@ -5,6 +5,7 @@ Exercises every glVertex/glColor/glNormal/glTexCoord/glRasterPos/glIndex/
 glEdgeFlag/glRect type variant inside a compatibility context.
 """
 
+import ctypes
 import unittest
 from arraycompat import np  # numpy, or a ctypes fallback when numpy is absent
 
@@ -222,7 +223,7 @@ class TestWhatAVertexCallAccepts(GLTestCase):
         """
         glColor4f(0, 1, 1, 0)
         for rejected in (object(), object):
-            with self.assertRaises(Exception):
+            with self.assertRaises((ctypes.ArgumentError, TypeError, ValueError, GLError)):
                 glColor4f(0, 1, 1, rejected)
 
 

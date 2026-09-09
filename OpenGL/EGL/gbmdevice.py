@@ -82,7 +82,7 @@ def open_device(path):
             devices = enumerate_devices()
             path = devices[int]
         except IndexError:
-            raise RuntimeError('Only %s devices available, cannot use 0-index %s'%(len(devices),path))
+            raise RuntimeError('Only %s devices available, cannot use 0-index %s'%(len(devices),path)) from None
     else:
         path = os.path.join('/dev/dri',path) # allow for specifying "renderD128"
     log.debug("Final device path: %s", path)

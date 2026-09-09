@@ -240,7 +240,7 @@ class GLGetCheckMixin:
         self.assertIsNotNone(size, '%s needs a static index count' % name)
         # the indexed getter is core in desktop GL but lives in GLES3 (not GLES2)
         get_i = getattr(self.gl, 'glGetIntegeri_v', None) or \
-            getattr(self.gl3, 'glGetIntegeri_v')
+            self.gl3.glGetIntegeri_v
         count = size[0]
         values = []
         for i in range(count):

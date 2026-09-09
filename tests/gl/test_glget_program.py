@@ -70,7 +70,7 @@ class TestProgramGLGet(GLGetCheckMixin, GLTestCase):
         for kind in ('features', 'extensions'):
             import glget_check
             data = glget_check.load_groups('gl')
-            for name, info in data[kind].items():
+            for _name, info in data[kind].items():
                 for d in info['glgets']:
                     if d['family'] == family and d['value'] not in seen:
                         seen.add(d['value'])

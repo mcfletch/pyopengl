@@ -29,7 +29,7 @@ def parseFeedback( buffer, entryCount ):
             temp = [_simple.GL_POLYGON_TOKEN]
             count = int(buffer[bufferIndex])
             bufferIndex += 1
-            for item in range(count):
+            for _item in range(count):
                 vData,bufferIndex = getVertex( buffer, bufferIndex )
                 temp.append( Vertex(*vData))
             result.append( tuple(temp))

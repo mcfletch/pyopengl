@@ -432,7 +432,7 @@ def setDimensionsAsInts( baseOperation ):
     """Set arguments with names in INT_DIMENSION_NAMES to asInt processing"""
     baseOperation = asWrapper( baseOperation )
     argNames = getattr( baseOperation, 'pyConverterNames', baseOperation.argNames )
-    for i,argName in enumerate(argNames):
+    for _i,argName in enumerate(argNames):
         if argName in INT_DIMENSION_NAMES:
             baseOperation = baseOperation.setPyConverter( argName, asIntConverter )
     return baseOperation
@@ -531,7 +531,7 @@ def setImageInput(
     # the base's signature.
     if arrayType:
         converter = TypedImageInputConverter( rank, pixelName, arrayType, typeName=typeName )
-        for i,argName in enumerate(baseOperation.argNames):
+        for _i,argName in enumerate(baseOperation.argNames):
             if argName in dimNames:
                 baseOperation = baseOperation.setPyConverter( argName )
                 baseOperation = baseOperation.setCConverter( argName, getattr(converter,argName) )

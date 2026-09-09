@@ -122,7 +122,7 @@ def cleanupContext( context=None ):
     """
     if context is None:
         context = platform.GetCurrentContext()
-    for storage in STORAGES:
+    for _storage in STORAGES:
         try:
             del storedPointers[ context ]
         except KeyError as err:

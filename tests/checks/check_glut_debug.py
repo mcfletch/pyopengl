@@ -61,7 +61,7 @@ def get_debug_messages():
     severity = GLenum()
     length = GLsizei()
     buffer = ctypes.create_string_buffer(max_size)
-    for i in range(count):
+    for _i in range(count):
         result = glGetDebugMessageLog(
             1, max_size, source, type, id, severity, length, buffer
         )

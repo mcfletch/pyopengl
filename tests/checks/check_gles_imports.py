@@ -2,7 +2,7 @@
 """Attempt to import GLES libraries"""
 import os
 
-if not 'PYOPENGL_PLATFORM' in os.environ:
+if 'PYOPENGL_PLATFORM' not in os.environ:
     os.environ['PYOPENGL_PLATFORM'] = 'egl'
 from OpenGL.GLES1 import *
 from OpenGL.GLES2 import *

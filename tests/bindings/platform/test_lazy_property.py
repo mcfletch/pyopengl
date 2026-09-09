@@ -60,7 +60,7 @@ class TestReadingItFromTheClass:
 
     def test_and_does_not_run_the_getter(self):
         """There is no instance to run it against, and no library to load."""
-        Subject.library
+        Subject.library  # noqa: B018 - reaching for it is the whole case
         assert Subject.loads == 0
 
     def test_the_docstring_comes_with_it(self):

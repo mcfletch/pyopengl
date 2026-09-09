@@ -238,7 +238,7 @@ def gluNurbsCurve( baseFunction, nurb, knots, control, type ):
     try:
         length,step = arrays.GLfloatArray.dimensions( control )
     except ValueError as err:
-        raise error.GLUError( """Need a 2-dimensional control array""" )
+        raise error.GLUError( """Need a 2-dimensional control array""" ) from err
     order = knotCount - length
     if _configflags.ERROR_CHECKING:
         checkOrder( order, knotCount, 'order of NURBS curve')
@@ -262,7 +262,7 @@ def gluNurbsSurface( baseFunction, nurb, sKnots, tKnots, control, type ):
     try:
         length,width,step = arrays.GLfloatArray.dimensions( control )
     except ValueError as err:
-        raise error.GLUError( """Need a 3-dimensional control array""" )
+        raise error.GLUError( """Need a 3-dimensional control array""" ) from err
     sOrder = sKnotCount - length
     tOrder = tKnotCount - width
     sStride = width*step

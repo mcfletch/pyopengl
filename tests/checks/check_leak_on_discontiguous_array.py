@@ -32,7 +32,7 @@ def main():
     reversed_data = data[::-1]
     assert not reversed_data.flags['C_CONTIGUOUS']
     rc1 = getrefcount(reversed_data)
-    for i in range(100):
+    for _i in range(100):
         glTexImage2D(
             GL_TEXTURE_2D,
             0,

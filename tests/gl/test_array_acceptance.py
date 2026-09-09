@@ -133,7 +133,7 @@ class TestArraysReachingTheEntryPoints(GLTestCase):
 
         repr(glVertexPointerb([[2, 3], [4, 5]]))
         glVertexPointerf([[2, 3], [4, 5]])
-        assert arrays.ArrayDatatype.dataPointer(None) == None
+        assert arrays.ArrayDatatype.dataPointer(None) is None
         glVertexPointerf(None)
 
         glNormalPointerd([[2, 3, 4], [2, 3, 4]])

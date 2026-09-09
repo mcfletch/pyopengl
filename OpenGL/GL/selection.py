@@ -31,7 +31,7 @@ class GLSelectRecord( object ):
         result = []
         index = 0
         arrayLength = len(array)
-        for item in range( total ):
+        for _item in range( total ):
             if index + 2 >= arrayLength:
                 break
             count = array[index]
@@ -61,4 +61,4 @@ class GLSelectRecord( object ):
             except AttributeError as err:
                 raise KeyError( """Don't have an index/key %r for %s instant"""%(
                     key, self.__class__,
-                ))
+                )) from err

@@ -180,7 +180,7 @@ if CallFuncPyConverter is None:
                 raise ValueError(
                     """Expected parameter index %r, but pyArgs only length %s"""
                     % (self.index, len(pyArgs))
-                )
+                ) from None
 
     class getPyArgsName(CConverter):
         """CConverter returning named Python argument
@@ -202,7 +202,7 @@ if CallFuncPyConverter is None:
             except AttributeError:
                 raise RuntimeError(
                     """"Did not resolve parameter index for %r""" % (self.name)
-                )
+                ) from None
 
     class Output(CConverter):
         """CConverter generating static-size typed output arrays
@@ -409,12 +409,12 @@ if CallFuncPyConverter is None:
             except AttributeError:
                 raise RuntimeError(
                     """"Did not resolve parameter index for %r""" % (self.name)
-                )
+                ) from None
             else:
                 try:
                     return self.lookup(specifier)
                 except KeyError:
-                    raise KeyError("""Unknown specifier %s""" % (specifier))
+                    raise KeyError("""Unknown specifier %s""" % (specifier)) from None
 
     class SizedOutputOrInput(SizedOutput):
         DO_OUTPUT = (None, NULL)
@@ -477,7 +477,7 @@ class getPyArgsPointer(CConverter):
         except AttributeError:
             raise RuntimeError(
                 """"Did not resolve parameter index for %r""" % (self.name)
-            )
+            ) from None
         return self.arrayType.typedPointer(value)
 
 

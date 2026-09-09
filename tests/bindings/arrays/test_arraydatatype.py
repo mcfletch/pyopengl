@@ -173,7 +173,7 @@ class TestCoreDatatype(unittest.TestCase):
                         strides,
                         buf.strides[: buf.ndim],
                     )
-            assert buf.obj == None, buf.obj
+            assert buf.obj is None, buf.obj
             del buf
 
 
@@ -204,7 +204,7 @@ class TestCoreDatatype(unittest.TestCase):
 
             assert type(a) in handler.HANDLED_TYPES, type(a)
             calculated = arraydatatype.ArrayDatatype.arrayByteCount(a)
-            assert calculated == expected, "Byte count for %s was %s, expected %" % (
+            assert calculated == expected, "Byte count for %s was %s, expected %s" % (
                 a,
                 calculated,
                 expected,
@@ -216,7 +216,7 @@ class TestCoreDatatype(unittest.TestCase):
             ((ctypes.c_float * 3 * 4)(), 4 * 3 * 4),
         ]:
             calculated = arraydatatype.ArrayDatatype.arrayByteCount(a)
-            assert calculated == expected, "Byte count for %s was %s, expected %" % (
+            assert calculated == expected, "Byte count for %s was %s, expected %s" % (
                 a,
                 calculated,
                 expected,

@@ -38,7 +38,7 @@ class DarwinPlatform( baseplatform.BasePlatform ):
                 mode=ctypes.RTLD_GLOBAL 
             ) 
         except OSError as err:
-            raise ImportError("Unable to load OpenGL library", *err.args)
+            raise ImportError("Unable to load OpenGL library", *err.args) from err
     @baseplatform.lazy_property
     def GLU(self): return self.GL
     @baseplatform.lazy_property

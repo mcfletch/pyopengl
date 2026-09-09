@@ -68,7 +68,7 @@ class TestWGL(unittest.TestCase):
 
     def test_get_extensions_low_level(self):    
         from OpenGL.WGL.ARB.extensions_string import wglGetExtensionsStringARB
-        window = pygame.display.get_wm_info()['window']
+        pygame.display.get_wm_info()['window']
         extensions = wglGetExtensionsStringARB(wglGetCurrentDC())
         assert extensions 
         assert b'WGL_ARB_extensions_string' in extensions, extensions
@@ -77,6 +77,6 @@ class TestWGL(unittest.TestCase):
         from OpenGL.WGL.EXT import swap_control
         if not swap_control.wglGetSwapIntervalEXT:
             raise pytest.skip(reason='No wglGetSwapIntervalEXT available')
-        interval = swap_control.wglGetSwapIntervalEXT()
+        swap_control.wglGetSwapIntervalEXT()
 
         swap_control.wglSwapIntervalEXT(1)
