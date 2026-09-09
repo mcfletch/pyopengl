@@ -47,6 +47,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # The shipped stub surface, which is what a user's own type checker
+          # reads.  A defect there is one every caller of the entry point meets,
+          # and it is invisible to the suite: a stub is read by a checker and by
+          # nothing else.  See [tool.mypy] in pyproject.toml for what is in the
+          # gate and why the package's own source is not.
+          - {python: '3.12', toxenv: typecheck}
           # The interpreter sweep, on the ordinary configuration: numpy present,
           # no compiled extension, ctypes entry points.
           - {python: '3.10', toxenv: py310-num1-accel0-dispctypes}

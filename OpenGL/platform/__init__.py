@@ -18,14 +18,37 @@ specific modules for examples to use when porting.
 """
 
 import os, sys
+from typing import TYPE_CHECKING, Any, Callable
+
 from OpenGL.plugins import PlatformPlugin
 from OpenGL import _configflags
+
+if TYPE_CHECKING:
+    from OpenGL.platform.baseplatform import BasePlatform
 
 XDG = 'XDG_SESSION_TYPE'
 WAYLAND_DISPLAY = 'WAYLAND_DISPLAY'
 
-PLATFORM = None
-nullFunction = None
+#: The platform implementation for this machine, and the entry points it
+#: exports onto this module.  `_load()` at the foot of this module installs
+#: every one of them -- `BasePlatform.install` sets `PLATFORM` and each name in
+#: `BasePlatform.EXPORTED_NAMES` -- and it runs while the module is being
+#: imported, so an importer never sees the interval before they are here.
+#:
+#: Declared rather than assigned `None`: a reader and a checker both need to
+#: know what these are, and `PLATFORM = None` told them it is `None` forever.
+#: Bare annotations bind no value, so the names are still absent until `_load()`
+#: puts them there, and an import cycle that reached this module early would
+#: raise NameError rather than return a `None` to call.
+PLATFORM: 'BasePlatform'
+GetCurrentContext: Callable[..., Any]
+CurrentContextIsValid: Callable[..., Any]
+createBaseFunction: Callable[..., Any]
+createExtensionFunction: Callable[..., Any]
+copyBaseFunction: Callable[..., Any]
+getGLUTFontPointer: Callable[..., Any]
+nullFunction: Callable[..., Any]
+GLUT_GUARD_CALLBACKS: bool
 
 
 def _load():

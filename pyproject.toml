@@ -143,11 +143,51 @@ markers = [
     "slow: takes seconds rather than milliseconds, because it builds something -- a frozen application, an archive. Deselected with '-m \"not slow\"' while iterating.",
 ]
 
+[tool.mypy]
+# The gate is the shipped stub surface: the 1,307 `.pyi` files and the
+# `py.typed` beside them are what a user's own type checker reads, and a defect
+# there is one every user of the entry point meets. That is not hypothetical --
+# a `glDeleteTextures` stub that described the C entry point rather than the
+# wrapper `OpenGL.GL` exports made the documented call an error, and cost a
+# release.
+#
+# The package's own source is deliberately *not* in it. Most of it is generated
+# modules whose namespaces arrive from the declaration tables when `_define()`
+# runs, which a checker cannot read at all; what is left reports around 240
+# findings, overwhelmingly mypy failing to model the dynamic dispatch layer
+# rather than defects. Bringing that to green would be annotation work with
+# very little correctness in it, and a gate nobody can pass is not a gate.
+#
+# What guards the source instead is
+# `tests/bindings/generated/test_every_generated_module_imports.py`: it imports
+# every shipped module, which no marker can silence and which is what found the
+# fourteen that did not import at all.
+# Not the `requires-python` floor: numpy's own stubs use a `type` statement,
+# which mypy refuses to parse below 3.12, so a lower setting stops the run
+# before it has checked anything of ours. That the package installs and imports
+# on its floor is checked where a user meets it, by installing it there.
+python_version = "3.12"
+files = ["OpenGL/**/*.pyi"]
+# Only the stubs. A `.pyi` beside a module shadows it, so this checks the
+# declared surface without following into the implementation.
+follow_imports = "skip"
+ignore_missing_imports = true
+warn_unused_ignores = true
+
 [tool.black]
 skip-string-normalization=true
 
 [tool.ruff.lint]
-dummy-variable-rgx="^(_|err)$"
+# Named explicitly. With `select` unset ruff applies its own default, and that
+# default has widened between releases -- the same checkout went from a few
+# hundred findings to five thousand without a line changing. A gate whose
+# meaning moves when a tool is upgraded is not a gate, so this says what the
+# project holds itself to.
+select = ["E", "W", "F", "B"]
+# `_`, `err`, and the conventional `_name`: an underscore prefix is how Python
+# says a name is bound but deliberately unused, and a loop target that must be
+# unpacked to reach the one beside it reads better as `_feet` than as `_`.
+dummy-variable-rgx = "^(_[a-zA-Z0-9_]*|err)$"
 ignore = [
     'D200', # Allow multiline docstring even when it could fit on one line
 
@@ -168,6 +208,21 @@ ignore = [
     # 'F821', # Undefined variables due to start imports, again
     'E741', # Variables from the underlying api are often e.g. `l`
 
+    # Names arrive from the declaration tables when `_define()` runs, so a
+    # checker reading a generated module sees uses of things it cannot find.
+    # The same reason F403 and F405 are above; what actually holds those
+    # modules to importing is the suite, which imports every one of them.
+    'F821',
+
+    # Whitespace, in a codebase that has been accumulating it since 1997.
+    # Nine thousand of these, every one mechanical: putting them right is a
+    # deliberate pass of its own, on its own commit, not something a release
+    # gate should force into an unrelated change. Reflowing them here would
+    # rewrite `git blame` for most of the package to say this.
+    'W291', # trailing whitespace
+    'W293', # whitespace on a blank line
+    'W292', # no newline at end of file
+    'E101', # indentation mixes spaces and tabs
 ]
 [tool.ruff.lint.per-file-ignores]
 "OpenGL/_bytes.py" = [
