@@ -39,6 +39,7 @@ sys.path.insert(0, HERE)
 
 import fetch_registries  # noqa: E402
 from cdispatch import generate  # noqa: E402
+from cdispatch.emit_glut import emit_glut  # noqa: E402
 
 
 def main(argv=None):
@@ -108,17 +109,21 @@ def main(argv=None):
         stubs_root=arguments.package,
     )
     report['slots'] = len(slots)
+    # GLUT is not a registry API, so `generate` has nothing to say about it;
+    # its stub is read from the hand-maintained declarations instead.
+    report['glut_names'] = emit_glut(arguments.package)
     with open(arguments.manifest, 'w', encoding='utf-8') as handle:
         json.dump(report, handle, indent=2, sort_keys=True)
         handle.write('\n')
 
     print(
-        'bindings %d, emitted %d (%.1f%%), apis %s'
+        'bindings %d, emitted %d (%.1f%%), apis %s; GLUT stub %d names'
         % (
             report['total'],
             report['emitted'],
             100.0 * report['emitted'] / report['total'],
             ', '.join(report['apis']),
+            report['glut_names'],
         )
     )
     return 0
