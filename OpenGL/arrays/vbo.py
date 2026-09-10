@@ -378,7 +378,12 @@ if VBO is None:
             if self.buffers:
                 while self.buffers:
                     try:
-                        self.implementation.glDeleteBuffers(1, self.buffers.pop(0))
+                        # An array rather than the name itself, as the deleter
+                        # that runs at collection also does: a caller who has
+                        # turned the implicit copy off cannot be handed a bare
+                        # int here, and would not be able to delete a buffer.
+                        name = _types.GLuint(self.buffers.pop(0))
+                        self.implementation.glDeleteBuffers(1, name)
                     except (AttributeError, error.NullFunctionError) as err:
                         pass
 

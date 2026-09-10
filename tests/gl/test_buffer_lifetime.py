@@ -183,7 +183,11 @@ class TestBufferLifetime(GLTestCase):
         """
         first = np.zeros(2, 'i')
         with no_references_kept(first):
-            with pytest.raises((TypeError, ValueError, GLError)):
+            # ctypes hands a converter's refusal back inside its own
+            # ArgumentError, which is what the bindings raise where the
+            # C layer raises the TypeError directly.
+            with pytest.raises(
+                    (TypeError, ValueError, GLError, ctypes.ArgumentError)):
                 glMultiDrawArrays(GL_TRIANGLES, first, object(), 0)
 
     def test_the_argument_is_not_kept_alive_after_the_call(self):

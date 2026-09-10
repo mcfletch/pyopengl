@@ -96,12 +96,20 @@ class TestVDPAUInterop(GLTestCase):
             glVDPAUSurfaceAccessNV(NO_SURFACE, GL_WRITE_DISCARD_NV)
 
     def test_mapping_surfaces_takes_an_array_of_handles(self):
-        surfaces = np.zeros(2, 'uintp')
+        # `intp`, signed: GL_NV_vdpau_interop declares GLvdpauSurfaceNV a
+        # GLintptr, and an unsigned array is a different type to convert
+        # from -- which a caller who has turned the implicit copy off
+        # is told about rather than charged for.
+        surfaces = np.zeros(2, 'intp')
         with self.tolerate_glerror(GL_INVALID_OPERATION, GL_INVALID_VALUE):
             glVDPAUMapSurfacesNV(2, surfaces)
 
     def test_unmapping_surfaces_takes_the_same_array(self):
-        surfaces = np.zeros(2, 'uintp')
+        # `intp`, signed: GL_NV_vdpau_interop declares GLvdpauSurfaceNV a
+        # GLintptr, and an unsigned array is a different type to convert
+        # from -- which a caller who has turned the implicit copy off
+        # is told about rather than charged for.
+        surfaces = np.zeros(2, 'intp')
         with self.tolerate_glerror(GL_INVALID_OPERATION, GL_INVALID_VALUE):
             glVDPAUUnmapSurfacesNV(2, surfaces)
 
