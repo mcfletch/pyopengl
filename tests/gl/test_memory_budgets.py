@@ -46,9 +46,18 @@ class TestGettingAMatrixBack(GLTestCase):
     #: the size one call needs -- is not counted as growth.
     WARMUP = 2000
 
-    #: Calls measured.  Each one returns a 4x4 array, so leaking even the array
-    #: costs ~64 bytes a call and this many calls would show megabytes.
+    #: Calls in a round.  Each one returns a 4x4 array, so leaking even the
+    #: array costs ~64 bytes a call and a round would show megabytes.
     MEASURED = 20000
+
+    #: Rounds of that many calls.  What is asserted is the *smallest* round's
+    #: growth, because a leak grows every round by the same amount while an
+    #: allocator growing an arena does it now and then: one round's worth of a
+    #: per-call leak is above the budget by itself, so a leak leaves no round
+    #: under it.  CPython frees each array as the call returns and every round
+    #: is flat; PyPy has no refcount and reaches steady state over the first
+    #: few, which is the same reason the VBO case below warms up longer there.
+    ROUNDS = 6
 
     #: Resident memory moves in page-sized steps and the process is doing other
     #: things; this is far below what any per-call leak would reach over
@@ -58,14 +67,20 @@ class TestGettingAMatrixBack(GLTestCase):
     def test_the_returned_array_is_not_kept(self):
         for _ in range(self.WARMUP):
             assert glGetFloatv(GL_MODELVIEW_MATRIX) is not None
-        before = resident_bytes()
-        for _ in range(self.MEASURED):
-            glGetFloatv(GL_MODELVIEW_MATRIX)
-        growth = resident_bytes() - before
+        rounds = []
+        for _ in range(self.ROUNDS):
+            gc.collect()
+            before = resident_bytes()
+            for _ in range(self.MEASURED):
+                glGetFloatv(GL_MODELVIEW_MATRIX)
+            gc.collect()
+            rounds.append(resident_bytes() - before)
+        growth = min(rounds)
         self.assertLess(
             growth, self.BUDGET,
-            'resident memory grew %d bytes over %d calls (%.1f bytes a call)'
-            % (growth, self.MEASURED, growth / float(self.MEASURED)),
+            'resident memory grew in every round of %d calls, the smallest by '
+            '%d bytes (%.1f bytes a call)\nrounds: %s'
+            % (self.MEASURED, growth, growth / float(self.MEASURED), rounds),
         )
 
 
