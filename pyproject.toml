@@ -135,6 +135,10 @@ filterwarnings = [
     # one -- without it the pattern silently matches nothing and the warning is
     # still an error.
     "ignore:(?s).*Please remove unknown .Extension. options.*:UserWarning",
+    # The same warning as the line above, in the wording setuptools used
+    # before it was reworded. Both are here because the matrix spans the
+    # setuptools each interpreter's environment resolves.
+    "ignore:Unknown Extension options:UserWarning",
 ]
 
 markers = [
