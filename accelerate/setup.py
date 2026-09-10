@@ -155,6 +155,58 @@ def dispatch_extension():
 extensions.extend(dispatch_extension())
 
 
+#: Where the toolchain the generated C was written against is recorded.
+TOOLCHAIN_STAMP = os.path.join(HERE, 'src', '.cython-toolchain')
+
+
+def _toolchain():
+    """Cython and numpy as the generated C sees them: version strings.
+
+    numpy is in here because these modules ``cimport numpy``, and what that
+    expands to is numpy's own declarations rather than anything in this
+    package.
+    """
+    from Cython import __version__ as cython_version
+
+    try:
+        from numpy import __version__ as numpy_version
+    except ImportError:                     # the numpy extension is skipped
+        numpy_version = 'none'
+    return 'cython %s\nnumpy %s\n' % (cython_version, numpy_version)
+
+
+def drop_c_from_another_toolchain():
+    """Delete generated C that a different Cython or numpy wrote.
+
+    ``cythonize`` decides whether to rewrite a ``.c`` by comparing it against
+    the ``.pyx`` and the ``.pxd`` files that ``.pyx`` cimports.  A
+    wheel-installed numpy carries the timestamps recorded in the wheel, so its
+    declarations can be years older than a ``.c`` generated from a *previous*
+    numpy last week -- and the stale C is then compiled against headers that no
+    longer match it.  What that reports is a compile error inside a numpy
+    internal, naming nothing in this package.
+
+    The generated C is not tracked by git and every ``.pyx`` beside it is
+    shipped, so it can always be written again.  Only with Cython installed:
+    an install from an sdist without one has the C and no way to make more.
+    """
+    import glob
+
+    if not have_cython:
+        return
+    wanted = _toolchain()
+    try:
+        with open(TOOLCHAIN_STAMP, encoding='utf-8') as handle:
+            if handle.read() == wanted:
+                return
+    except OSError:
+        pass
+    for path in glob.glob(os.path.join(HERE, 'src', '*.c')):
+        os.unlink(path)
+    with open(TOOLCHAIN_STAMP, 'w', encoding='utf-8') as handle:
+        handle.write(wanted)
+
+
 def cython_extension(
     name,
     include_dirs=(),
@@ -224,6 +276,10 @@ else:
 if (  # Prevents running of setup during code introspection imports
     __name__ == "__main__"
 ):
+    # Here rather than at module level: importing this file is how the suite
+    # and the packaging tools read what it declares, and an import that
+    # deleted generated C would make reading the declarations a build step.
+    drop_c_from_another_toolchain()
     # Workaround for Broken apple Python build params echoed in distutils
     # Approach taken from the PyMongo driver. OS-X Python builds were created with
     # non-existent flag, and distutils passes those flags to the extension

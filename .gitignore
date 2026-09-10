@@ -15,6 +15,9 @@ tests/output.ppm
 
 accelerate/manylinux-dist/
 accelerate/src/*.c
+# Which Cython and numpy wrote the generated C beside it, so a build against
+# different ones writes it again rather than compiling what no longer matches.
+accelerate/src/.cython-toolchain
 
 # Written by accelerate's setup.py from the version it reads at build time,
 # so that a version bump reaches the C rather than sitting in a stale object.
