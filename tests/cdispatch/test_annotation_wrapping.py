@@ -40,14 +40,17 @@ def table():
     return annotations.load()
 
 
+# Module scope rather than a fixture inside the class below: pytest asks for a
+# `classmethod` there, and a `classmethod` object carries no `__name__` before
+# Python 3.10, which is inside this package's supported range.
+@pytest.fixture(scope='module')
+def chains():
+    """``{(api, command): [(call, arguments), ...]}`` from the modules."""
+    return extract.extract_customisations(PACKAGE)
+
+
 class TestTheChainsAreASecondCopy:
     """Every customisation a module applies is already in the table."""
-
-    @pytest.fixture(scope='class')
-    @staticmethod
-    def chains():
-        """``{(api, command): [(call, arguments), ...]}`` from the modules."""
-        return extract.extract_customisations(PACKAGE)
 
     def test_every_size_a_module_sets_is_in_the_table(self, chains, table):
         missing = []

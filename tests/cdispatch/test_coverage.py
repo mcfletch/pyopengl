@@ -27,6 +27,14 @@ def report():
     return upstream.compare(PACKAGE, REGISTRY)
 
 
+# Module scope rather than a fixture inside the class below: pytest asks for a
+# `classmethod` there, and a `classmethod` object carries no `__name__` before
+# Python 3.10, which is inside this package's supported range.
+@pytest.fixture(scope='module')
+def drift(report):
+    return upstream.new_drift(report)
+
+
 class TestRegistryCoverage:
     """No *new* drift against the registry.
 
@@ -34,11 +42,6 @@ class TestRegistryCoverage:
     hundred-odd enums, all recorded in registry_baseline.json with the reason.
     What must not happen unnoticed is a registry pull adding more.
     """
-
-    @pytest.fixture(scope='class')
-    @staticmethod
-    def drift(report):
-        return upstream.new_drift(report)
 
     def test_no_new_registry_command_lacks_a_binding(self, drift):
         assert drift['missing_commands'] == [], drift['missing_commands'][:40]

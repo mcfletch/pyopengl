@@ -81,15 +81,19 @@ class TestEmission:
         assert 'BLOCKING' not in text
 
 
+# Module scope rather than a fixture inside the class below: pytest asks for a
+# `classmethod` there, and a `classmethod` object carries no `__name__` before
+# Python 3.10, which is inside this package's supported range.
+@pytest.fixture(scope='module')
+def header():
+    with open(os.path.join(HERE, 'accelerate', 'src', 'c', 'pygl.h'),
+              encoding='utf-8') as handle:
+        return handle.read()
+
+
 class TestTheMacro:
     """The release has to wrap the driver call and nothing else: calling into
     CPython with the GIL released is a crash rather than a slow program."""
-
-    @pytest.fixture(scope='class')
-    @staticmethod
-    def header():
-        with open(os.path.join(HERE, 'accelerate', 'src', 'c', 'pygl.h'), encoding='utf-8') as f:
-            return f.read()
 
     @pytest.mark.parametrize(
         'macro', ['PYGL_CALL_V_BLOCKING', 'PYGL_CALL_R_BLOCKING']
