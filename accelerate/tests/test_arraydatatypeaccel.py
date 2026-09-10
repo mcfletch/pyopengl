@@ -95,20 +95,29 @@ class TestNumpy( _BaseTest, unittest.TestCase ):
         z = self.handler.zeros( (0,), GL.GL_BYTE )
         assert z.dtype == numpy.byte, z
 
+def two_rows_of_three():
+    """Six floats in memory a VBO can be made from without a copy.
+
+    Where there is no numpy the array is built and filled rather than
+    converted from a list: converting one *is* the copy ERROR_ON_COPY refuses,
+    and what these cases are about is the VBO handler rather than the way the
+    array beside it was made.
+    """
+    if numpy:
+        return numpy.array( [[1,2,3],[4,5,6]], 'f' )
+    array = adt.GLfloatArray.zeros( (2,3) )
+    array[0][:] = (1.0,2.0,3.0)
+    array[1][:] = (4.0,5.0,6.0)
+    return array
+
 class TestVBO( _BaseTest, unittest.TestCase ):
     def setUp( self ):
-        if numpy:
-            self.array = vbo.VBO(numpy.array( [[1,2,3],[4,5,6]],'f'))
-        else:
-            self.array = vbo.VBO(adt.GLfloatArray.asArray([[1,2,3],[4,5,6]]))
+        self.array = vbo.VBO(two_rows_of_three())
         super(TestVBO,self).setUp()
 
 class TestVBOOffset( _BaseTest, unittest.TestCase ):
     def setUp( self ):
-        if numpy:
-            self.array = vbo.VBO(numpy.array( [[1,2,3],[4,5,6]],'f')) + 12
-        else:
-            self.array = vbo.VBO(adt.GLfloatArray.asArray([[1,2,3],[4,5,6]])) + 12
+        self.array = vbo.VBO(two_rows_of_three()) + 12
         super(TestVBOOffset,self).setUp()
         
 class TestNones( unittest.TestCase ):

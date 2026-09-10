@@ -11,7 +11,8 @@ It shows up where a value PyOpenGL returned is passed back in:
 ``glGenVertexArrays(1, buffer)`` is a lookup for the scalar's own type.
 """
 
-import sys
+import ctypes
+import warnings
 
 import pytest
 
@@ -19,13 +20,27 @@ numpy = pytest.importorskip('numpy')
 
 from OpenGL.arrays import ArrayDatatype  # noqa: E402
 
-#: Whether refusing a float where an integer is wanted is the interpreter's to
-#: do.  ``GLint`` is ``ctypes.c_int``, and ctypes converted through ``__int__``
-#: until Python 3.10 -- so on 3.9 a numpy float reaches a GLint whatever this
-#: package does, with a DeprecationWarning and nothing else.  Making it refuse
-#: there would mean a ``from_param`` of our own, which is the retry
-#: ``ALLOW_NUMPY_SCALARS`` used to install.
-CTYPES_REFUSES_A_FLOAT = sys.version_info >= (3, 10)
+
+def _ctypes_refuses_a_float():
+    """Whether this interpreter refuses a float where an integer is wanted.
+
+    ``GLint`` is ``ctypes.c_int``, so the refusal is ctypes' rather than this
+    package's.  CPython converted through ``__int__`` until 3.10 and PyPy
+    still does, and making it refuse there would mean a ``from_param`` of our
+    own -- which is the retry ``ALLOW_NUMPY_SCALARS`` used to install.  Asked
+    of the interpreter rather than worked out from its version number,
+    because it is the interpreter's answer that decides what is testable.
+    """
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore')
+        try:
+            ctypes.c_int.from_param(numpy.float32(1.5))
+        except TypeError:
+            return True
+    return False
+
+
+CTYPES_REFUSES_A_FLOAT = _ctypes_refuses_a_float()
 
 #: The C-named aliases, which are the ones a ctypes-derived array yields.
 C_NAMED = (
@@ -121,8 +136,8 @@ print(json.dumps({
 
     @pytest.mark.skipif(
         not CTYPES_REFUSES_A_FLOAT,
-        reason='ctypes converts through __int__ before 3.10, so the refusal '
-               'is not this package\'s to make',
+        reason="this interpreter's ctypes converts through __int__, so the "
+               "refusal is not this package's to make",
     )
     def test_a_float_scalar_is_refused_where_an_integer_is_wanted(self):
         assert not self.report()['float']
@@ -133,7 +148,7 @@ print(json.dumps({
         Against this interpreter's own answer rather than against a fixed
         one, so that what is asserted is that the flag installs nothing --
         which is the claim -- on the interpreters that refuse a float and on
-        the one that does not.
+        those that do not.
         """
         asked = self.report(PYOPENGL_ALLOW_NUMPY_SCALARS='1')
         plain = self.report()

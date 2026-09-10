@@ -297,22 +297,52 @@ class Wrapper(LateBind):
         def setInputArraySize(self, argName, size=None):
             """Decorate function with vector-handling code for a single argument
 
-            if OpenGL.ERROR_ON_COPY is False, then we return the
-            named argument, converting to the passed array type,
-            optionally checking that the array matches size.
+            With ERROR_ON_COPY the conversion is left to the declared type
+            wherever that type can do it: an array class's own ``from_param``
+            takes whatever already has a data pointer and refuses what would
+            have to be copied, which is the whole of what the flag asks for.
+            Installing a converter to say the same thing again would cost a
+            call per array argument per draw, which is what the flag is set to
+            avoid.
 
-            if OpenGL.ERROR_ON_COPY is True, then we will dramatically
-            simplify this function, only wrapping if size is True, i.e.
-            only wrapping if we intend to do a size check on the array.
+            Two cases it cannot leave alone. A **size**, which is a check the
+            type does not make. And a parameter declared as a **bare pointer**
+            -- GLintptr and GLsizeiptr parameters are -- where the ctypes
+            pointer type refuses every array there is, including the one whose
+            memory is exactly what the call wants; the array class for the
+            pointer's element is what converts it, and it refuses a copy the
+            same way.
             """
-            if size is not None:
-                arrayType = self.typeOfArg(argName)
-                # return value is always the source array...
-                if hasattr(arrayType, 'asArray'):
+            arrayType = self.typeOfArg(argName)
+            if not hasattr(arrayType, 'asArray'):
+                element = getattr(arrayType, '_type_', None)
+                byElement = (
+                    arraydatatype.arrayTypeForElement(element)
+                    if element is not None
+                    else None
+                )
+                if byElement is None:
+                    # Nothing here knows how to convert it, and the flag is a
+                    # promise not to copy rather than a promise to convert.
+                    return self
+                if size is not None:
                     self.setPyConverter(
-                        argName, arrayhelpers.asArrayTypeSize(arrayType, size)
+                        argName, arrayhelpers.asArrayTypeSize(byElement, size)
                     )
-                    self.setCConverter(argName, converters.getPyArgsName(argName))
+                else:
+                    self.setPyConverter(
+                        argName, arrayhelpers.asArrayType(byElement)
+                    )
+                self.setCConverter(
+                    argName, converters.getPyArgsPointer(argName, byElement)
+                )
+                return self
+            if size is not None:
+                # return value is always the source array...
+                self.setPyConverter(
+                    argName, arrayhelpers.asArrayTypeSize(arrayType, size)
+                )
+                self.setCConverter(argName, converters.getPyArgsName(argName))
             return self
 
     def setPyConverter(self, argName, function=NULL):
