@@ -42,7 +42,7 @@ class TestGL41(GLTestCase):
     def test_pipeline_and_program_uniforms(self):
         p = glCreateShaderProgramv(GL_FRAGMENT_SHADER, 1, _char_pp([FRAGMENT]))
         self.assertEqual(
-            glGetProgramiv(p, GL_LINK_STATUS), GL_TRUE, glGetProgramInfoLog(p)
+            one(glGetProgramiv(p, GL_LINK_STATUS)), GL_TRUE, glGetProgramInfoLog(p)
         )
         pipe = one(glGenProgramPipelines(1))
         pipe = int(pipe[0]) if hasattr(pipe, '__len__') else int(pipe)

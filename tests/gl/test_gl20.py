@@ -37,7 +37,7 @@ class TestGL20(GLTestCase):
         glShaderSource(vs, VERTEX)
         glCompileShader(vs)
         self.assertEqual(
-            glGetShaderiv(vs, GL_COMPILE_STATUS), GL_TRUE, glGetShaderInfoLog(vs)
+            one(glGetShaderiv(vs, GL_COMPILE_STATUS)), GL_TRUE, glGetShaderInfoLog(vs)
         )
         self.assertTrue(glIsShader(vs))
         self.assertIn(
@@ -56,7 +56,7 @@ class TestGL20(GLTestCase):
         glBindAttribLocation(program, 0, 'position')
         glLinkProgram(program)
         self.assertEqual(
-            glGetProgramiv(program, GL_LINK_STATUS),
+            one(glGetProgramiv(program, GL_LINK_STATUS)),
             GL_TRUE,
             glGetProgramInfoLog(program),
         )
@@ -200,7 +200,7 @@ class TestCompilingAShaderFromAString(GLTestCase):
         glShaderSource(shader, SIMPLE_VERTEX_SHADER)
         glCompileShader(shader)
         self.assertTrue(
-            glGetShaderiv(shader, GL_COMPILE_STATUS),
+            one(glGetShaderiv(shader, GL_COMPILE_STATUS)),
             'the shader did not compile: %s' % (glGetShaderInfoLog(shader),),
         )
 

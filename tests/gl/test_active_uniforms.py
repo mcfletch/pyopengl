@@ -63,11 +63,23 @@ class TestTheActiveUniformQuery(GLTestCase):
             core = glGetActiveUniform(program, index)
             arb = glGetActiveUniformARB(program, index)
             self.assertEqual(
-                tuple(core), tuple(arb),
+                _readable(core), _readable(arb),
                 'the core and ARB spellings answered differently for uniform '
                 '%d: %r vs %r' % (index, core, arb),
             )
         self.check_error('glGetActiveUniformARB')
+
+
+def _readable(answer):
+    """A multi-output answer as values, whichever shape they arrived in.
+
+    `SIZE_1_ARRAY_UNPACK` decides whether the size and the type come back as
+    numbers or as one-element arrays holding them, and two arrays compare by
+    identity -- so the two spellings would read as disagreeing whenever they
+    agreed.
+    """
+    return tuple(part if isinstance(part, bytes) else one(part)
+                 for part in answer)
 
 
 class TestEveryOutputOfAMultiOutputQueryIsItsOwn(GLTestCase):

@@ -96,8 +96,8 @@ class TestES31ProgramPipeline(ESTestCase):
     def test_pipeline(self):
         vprog = glCreateShaderProgramv(GL_VERTEX_SHADER, 1, _char_pp([VERTEX]))
         fprog = glCreateShaderProgramv(GL_FRAGMENT_SHADER, 1, _char_pp([FRAGMENT]))
-        self.assertEqual(glGetProgramiv(vprog, GL_LINK_STATUS), GL_TRUE)
-        self.assertEqual(glGetProgramiv(fprog, GL_LINK_STATUS), GL_TRUE)
+        self.assertEqual(one(glGetProgramiv(vprog, GL_LINK_STATUS)), GL_TRUE)
+        self.assertEqual(one(glGetProgramiv(fprog, GL_LINK_STATUS)), GL_TRUE)
 
         pipeline = one(glGenProgramPipelines(1))
         glBindProgramPipeline(pipeline)

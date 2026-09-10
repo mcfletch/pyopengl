@@ -96,7 +96,7 @@ class TestES3Misc(ESTestCase):
 
     def test_uniform_indices(self):
         program = self.compile_program(VERTEX, FRAGMENT)
-        n = glGetProgramiv(program, GL_ACTIVE_UNIFORMS)
+        n = one(glGetProgramiv(program, GL_ACTIVE_UNIFORMS))
         self.assertGreaterEqual(one(n), 1)
         indices = glGetUniformIndices(program, ['uf'])
         self.assertNotEqual(int(indices[0]), 0xFFFFFFFF)
@@ -116,7 +116,7 @@ class TestES3Misc(ESTestCase):
         glAttachShader(program, fs)
         glProgramParameteri(program, GL_PROGRAM_BINARY_RETRIEVABLE_HINT, GL_TRUE)
         glLinkProgram(program)
-        self.assertEqual(glGetProgramiv(program, GL_LINK_STATUS), GL_TRUE)
+        self.assertEqual(one(glGetProgramiv(program, GL_LINK_STATUS)), GL_TRUE)
 
         length = one(glGetProgramiv(program, GL_PROGRAM_BINARY_LENGTH))
         if length < 1:

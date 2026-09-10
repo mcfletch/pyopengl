@@ -19,7 +19,7 @@ import unittest
 
 import pytest
 
-from arraycompat import np
+from arraycompat import np, one
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
 from OpenGL import _dispatch
@@ -62,7 +62,7 @@ class TestShaderSourceForms(GLTestCase):
     def compiles(self, source):
         glShaderSource(self.shader, source)
         glCompileShader(self.shader)
-        assert glGetShaderiv(self.shader, GL_COMPILE_STATUS) == GL_TRUE, (
+        assert one(glGetShaderiv(self.shader, GL_COMPILE_STATUS)) == GL_TRUE, (
             glGetShaderInfoLog(self.shader)
         )
 
@@ -170,7 +170,7 @@ class TestTheHandWrittenEntryPointsAreUsed(GLTestCase):
         self.addCleanup(glDeleteShader, shader)
         demoted(shader, VERTEX_120)
         glCompileShader(shader)
-        assert glGetShaderiv(shader, GL_COMPILE_STATUS) == GL_TRUE, glGetShaderInfoLog(
+        assert one(glGetShaderiv(shader, GL_COMPILE_STATUS)) == GL_TRUE, glGetShaderInfoLog(
             shader
         )
 
@@ -223,16 +223,16 @@ class TestTransformFeedbackVaryings(GLTestCase):
         glShaderSource(fragment, FRAGMENT_150)
         for shader in (vertex, fragment):
             glCompileShader(shader)
-            assert glGetShaderiv(shader, GL_COMPILE_STATUS) == GL_TRUE, (
+            assert one(glGetShaderiv(shader, GL_COMPILE_STATUS)) == GL_TRUE, (
                 glGetShaderInfoLog(shader)
             )
             glAttachShader(self.program, shader)
         self.records(1, ['carried'])
         glLinkProgram(self.program)
-        assert glGetProgramiv(self.program, GL_LINK_STATUS) == GL_TRUE, (
+        assert one(glGetProgramiv(self.program, GL_LINK_STATUS)) == GL_TRUE, (
             glGetProgramInfoLog(self.program)
         )
-        assert glGetProgramiv(self.program, GL_TRANSFORM_FEEDBACK_VARYINGS) == 1
+        assert one(glGetProgramiv(self.program, GL_TRANSFORM_FEEDBACK_VARYINGS)) == 1
 
 
 class TestUniformIndices(GLTestCase):
@@ -267,7 +267,7 @@ class TestShaderProgramv(GLTestCase):
     def links(self, strings, count=1):
         program = glCreateShaderProgramv(GL_FRAGMENT_SHADER, count, strings)
         self.addCleanup(glDeleteProgram, program)
-        assert glGetProgramiv(program, GL_LINK_STATUS) == GL_TRUE, glGetProgramInfoLog(
+        assert one(glGetProgramiv(program, GL_LINK_STATUS)) == GL_TRUE, glGetProgramInfoLog(
             program
         )
 

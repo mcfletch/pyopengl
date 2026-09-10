@@ -34,6 +34,7 @@ implementation of the VBO functions.
 from OpenGL.arrays.arraydatatype import ArrayDatatype
 from OpenGL.arrays.formathandler import FormatHandler
 from OpenGL.raw.GL import _types
+from OpenGL._scalar import as_int
 from OpenGL import error, platform
 from OpenGL._bytes import bytes, unicode, as_8_bit
 import ctypes, logging
@@ -337,7 +338,11 @@ if VBO is None:
         def create_buffers(self):
             """Create the internal buffer(s)"""
             assert not self.buffers, """Already created the buffer"""
-            self.buffers = [long(self.implementation.glGenBuffers(1))]
+            # Through `as_int`: `SIZE_1_ARRAY_UNPACK` decides whether a
+            # call that makes one object answers the name or a
+            # one-element array holding it, and the flag is the
+            # caller's -- so the library reads both.
+            self.buffers = [as_int(self.implementation.glGenBuffers(1))]
             self.target = self.resolve(self.target)
             self.usage = self.resolve(self.usage)
             self.implementation._DELETERS_[id(self)] = weakref.ref(

@@ -67,7 +67,7 @@ class TestES2Program(ESTestCase):
         glShaderSource(shader, source)
         glCompileShader(shader)
         self.assertEqual(
-            glGetShaderiv(shader, GL_COMPILE_STATUS),
+            one(glGetShaderiv(shader, GL_COMPILE_STATUS)),
             GL_TRUE,
             glGetShaderInfoLog(shader),
         )
@@ -88,7 +88,7 @@ class TestES2Program(ESTestCase):
         glBindAttribLocation(program, 0, 'position')
         glLinkProgram(program)
         self.assertEqual(
-            glGetProgramiv(program, GL_LINK_STATUS),
+            one(glGetProgramiv(program, GL_LINK_STATUS)),
             GL_TRUE,
             glGetProgramInfoLog(program),
         )
@@ -98,11 +98,11 @@ class TestES2Program(ESTestCase):
         self.assertEqual(set(int(s) for s in attached), {int(vs), int(fs)})
 
         glValidateProgram(program)
-        glGetProgramiv(program, GL_VALIDATE_STATUS)
+        one(glGetProgramiv(program, GL_VALIDATE_STATUS))
         glUseProgram(program)
 
-        self.assertEqual(glGetProgramiv(program, GL_ACTIVE_ATTRIBUTES), 1)
-        self.assertEqual(glGetProgramiv(program, GL_ACTIVE_UNIFORMS), 1)
+        self.assertEqual(one(glGetProgramiv(program, GL_ACTIVE_ATTRIBUTES)), 1)
+        self.assertEqual(one(glGetProgramiv(program, GL_ACTIVE_UNIFORMS)), 1)
         # name, size, type of the single active attribute / uniform
         a_name = glGetActiveAttrib(program, 0)[0]
         u_name = glGetActiveUniform(program, 0)[0]

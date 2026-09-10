@@ -119,11 +119,17 @@ class TestQueryingTextureState(GLTestCase):
     gl_version = (2, 1)
 
     def test_an_enable_bit_reads_back_as_a_boolean(self):
-        """``glGetBoolean(GL_TEXTURE_2D)`` is a one-element query."""
+        """``glGetBoolean(GL_TEXTURE_2D)`` is a one-element query.
+
+        Through `one`, because `SIZE_1_ARRAY_UNPACK` decides whether that is
+        the value or a one-element array holding it -- and an array is truthy
+        whatever is in it, so the second assertion below would pass on a bit
+        that is set.
+        """
         glEnable(GL_TEXTURE_2D)
-        self.assertTrue(glGetBoolean(GL_TEXTURE_2D))
+        self.assertTrue(one(glGetBoolean(GL_TEXTURE_2D)))
         glDisable(GL_TEXTURE_2D)
-        self.assertFalse(glGetBoolean(GL_TEXTURE_2D))
+        self.assertFalse(one(glGetBoolean(GL_TEXTURE_2D)))
         self.check_error('glGetBoolean(GL_TEXTURE_2D)')
 
     def test_the_image_unit_count_is_positive(self):
