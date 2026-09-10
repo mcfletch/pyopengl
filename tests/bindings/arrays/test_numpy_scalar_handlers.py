@@ -11,11 +11,21 @@ It shows up where a value PyOpenGL returned is passed back in:
 ``glGenVertexArrays(1, buffer)`` is a lookup for the scalar's own type.
 """
 
+import sys
+
 import pytest
 
 numpy = pytest.importorskip('numpy')
 
 from OpenGL.arrays import ArrayDatatype  # noqa: E402
+
+#: Whether refusing a float where an integer is wanted is the interpreter's to
+#: do.  ``GLint`` is ``ctypes.c_int``, and ctypes converted through ``__int__``
+#: until Python 3.10 -- so on 3.9 a numpy float reaches a GLint whatever this
+#: package does, with a DeprecationWarning and nothing else.  Making it refuse
+#: there would mean a ``from_param`` of our own, which is the retry
+#: ``ALLOW_NUMPY_SCALARS`` used to install.
+CTYPES_REFUSES_A_FLOAT = sys.version_info >= (3, 10)
 
 #: The C-named aliases, which are the ones a ctypes-derived array yields.
 C_NAMED = (
@@ -109,15 +119,31 @@ print(json.dumps({
     def test_an_integer_scalar_is_accepted(self):
         assert self.report()['integer']
 
+    @pytest.mark.skipif(
+        not CTYPES_REFUSES_A_FLOAT,
+        reason='ctypes converts through __int__ before 3.10, so the refusal '
+               'is not this package\'s to make',
+    )
     def test_a_float_scalar_is_refused_where_an_integer_is_wanted(self):
         assert not self.report()['float']
 
-    def test_asking_for_the_old_behaviour_does_not_bring_it_back(self):
-        """The flag is readable, and reading it is all it does now."""
-        answered = self.report(PYOPENGL_ALLOW_NUMPY_SCALARS='1')
-        assert answered['flag'], 'the flag no longer reads back at all'
-        assert answered['integer']
-        assert not answered['float'], (
-            'ALLOW_NUMPY_SCALARS still installs the long() retry, which '
-            'accepts a numpy float where an integer is wanted'
+    def test_asking_for_the_old_behaviour_changes_nothing(self):
+        """The flag is readable, and reading it is all it does now.
+
+        Against this interpreter's own answer rather than against a fixed
+        one, so that what is asserted is that the flag installs nothing --
+        which is the claim -- on the interpreters that refuse a float and on
+        the one that does not.
+        """
+        asked = self.report(PYOPENGL_ALLOW_NUMPY_SCALARS='1')
+        plain = self.report()
+        assert asked['flag'], 'the flag no longer reads back at all'
+        assert asked['integer']
+        assert asked['float'] == plain['float'], (
+            'ALLOW_NUMPY_SCALARS still changes what a GLint accepts'
         )
+        if CTYPES_REFUSES_A_FLOAT:
+            assert not asked['float'], (
+                'ALLOW_NUMPY_SCALARS still installs the long() retry, which '
+                'accepts a numpy float where an integer is wanted'
+            )
