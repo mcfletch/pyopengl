@@ -31,9 +31,16 @@ windows_only = pytest.mark.skipif(
 
 
 def pairs(attributes):
-    """The token/value list as a dict, ignoring the zero terminator."""
+    """The token/value list as a dict, ignoring the zero terminator.
+
+    The length is asserted rather than left to `zip(strict=True)`, which is a
+    3.10 keyword and this package supports 3.9.
+    """
     values = list(attributes)
-    return dict(zip(values[:-1:2], values[1::2], strict=True))
+    assert len(values) % 2 == 1, (
+        'a WGL attribute list is token/value pairs and a zero terminator: %r'
+        % (values,))
+    return dict(zip(values[:-1:2], values[1::2]))
 
 
 class TestTheModuleIsDocumented:
