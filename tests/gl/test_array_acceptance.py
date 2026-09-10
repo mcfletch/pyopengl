@@ -10,6 +10,7 @@ the same file asserts the contract for both.
 
 import ctypes
 import struct
+import sys
 import unittest
 
 import pytest
@@ -70,6 +71,10 @@ class TestArrayAcceptance(GLTestCase):
     def test_ctypes_arrays_are_accepted(self):
         glVertex3dv((ctypes.c_double * 3)(1.0, 2.0, 3.0))
 
+    @pytest.mark.skipif(
+        sys.implementation.name != 'cpython',
+        reason='the buffer handler reads the protocol through '
+               'ctypes.pythonapi, which only CPython offers')
     def test_memoryview_is_accepted(self):
         glVertex3dv(memoryview(np.zeros(3, 'd')))
 

@@ -102,6 +102,17 @@ class Py_buffer(ctypes.Structure):
 BUFFER_POINTER = ctypes.POINTER(Py_buffer)
 
 
+# The buffer protocol is reached through CPython's own C API, and an
+# interpreter that does not offer one -- PyPy -- has no `ctypes.pythonapi` at
+# all.  Said as an ImportError, because that is what it is: this module cannot
+# be imported there, and the plugin that names it then reports no handler for a
+# memoryview rather than raising from inside the first call that passes one.
+if not hasattr(ctypes, 'pythonapi'):
+    raise ImportError(
+        'the buffer-protocol handler needs ctypes.pythonapi, which %s does '
+        'not offer' % (sys.implementation.name,)
+    )
+
 try:
     CheckBuffer = ctypes.pythonapi.PyObject_CheckBuffer
     CheckBuffer.argtypes = [ctypes.py_object]

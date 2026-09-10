@@ -34,6 +34,7 @@ read rather than a ``glGetError`` round trip -- and
 """
 
 import ctypes
+import os
 import sys
 import threading
 from typing import NamedTuple, Optional
@@ -177,6 +178,11 @@ def _reason(asked, running):
     if not _configflags.USE_ACCELERATE:
         return 'OpenGL.USE_ACCELERATE is off, which turns off every compiled accelerator'
     if asked != 'c':
+        # The switch first where a caller set it: naming the interpreter there
+        # would answer a question nobody asked and hide the setting that
+        # actually decided.  Unset, the interpreter is the whole reason.
+        if 'PYOPENGL_DISPATCH' in os.environ:
+            return 'PYOPENGL_DISPATCH asks for the ctypes implementation'
         if sys.implementation.name != 'cpython':
             return (
                 'the C dispatch extension is built for CPython only, and this '

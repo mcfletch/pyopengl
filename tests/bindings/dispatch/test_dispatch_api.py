@@ -155,6 +155,10 @@ class TestStatusSaysWhyItIsNotWhatWasAskedFor:
             'state = dispatch.status()\n'
             'print(state.requested, state.active, state.available, state.reason)',
             block=True,
+            # Asked for, rather than left to the default: the default is
+            # ctypes on an interpreter the extension is not built for, and
+            # this is about what a caller who *did* ask is told.
+            PYOPENGL_DISPATCH='c',
         )
         requested, active, available, reason = answer.split(None, 3)
         assert (requested, active, available) == ('c', 'ctypes', 'False')

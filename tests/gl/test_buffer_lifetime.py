@@ -17,6 +17,11 @@ has accumulated:
   which the caller must end up holding alone.
 * An array registered against the context, which outlives the call by design
   and so has to be given back when the registration is replaced.
+
+All of it is read through ``sys.getrefcount``, so all of it is about an
+interpreter that counts references.  PyPy does not: it collects by tracing, a
+reference given back is not observable, and the counts here would be assertions
+about nothing.
 """
 
 import contextlib
@@ -29,6 +34,11 @@ import weakref
 from OpenGL.error import GLError
 
 import pytest
+
+pytestmark = pytest.mark.skipif(
+    sys.implementation.name != 'cpython',
+    reason='these count references, which only a counting interpreter has')
+
 
 from arraycompat import np, object_names, one
 from gltestcase import GLTestCase
