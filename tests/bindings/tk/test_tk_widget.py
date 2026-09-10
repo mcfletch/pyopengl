@@ -119,7 +119,15 @@ def root():
 
     from OpenGL.Tk.context import IMPLEMENTATIONS, windowingSystem
 
-    made = tkinter.Tk()
+    try:
+        made = tkinter.Tk()
+    except tkinter.TclError as error:
+        # Tk imports but cannot start: its own script library is missing or
+        # does not run against this Tcl.  There is no Tk here to hold the
+        # widget to, which is the same condition `importorskip` above answers
+        # for a Tk that is not installed at all.
+        pytest.skip('tkinter imports but cannot open a window here: %s'
+                    % (error,))
     made.geometry('200x150')
     system = windowingSystem(made)
     if system not in IMPLEMENTATIONS:

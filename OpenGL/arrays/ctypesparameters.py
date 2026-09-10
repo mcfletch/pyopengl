@@ -6,6 +6,7 @@ from OpenGL.raw.GL import _types
 from OpenGL.arrays import _arrayconstants as GL_1_1
 from OpenGL import constant
 from OpenGL.arrays import formathandler
+from OpenGL.arrays.ctypesarrays import _as_shape
 from OpenGL._bytes import bytes,unicode,as_8_bit
 import operator
 
@@ -41,11 +42,15 @@ class CtypesParameterHandler( formathandler.FormatHandler ):
             return ctypes.addressof( value )
     dataPointer = classmethod( dataPointer )
     def zeros( self, dims, typeCode ):
-        """Return Numpy array of zeros in given size"""
+        """Return a ctypes array of zeros in the given size
+
+        ``dims`` is a shape or a single length, as ``numpy.zeros`` takes
+        either: the handlers answer the same call whichever is installed.
+        """
         type = GL_TYPE_TO_ARRAY_MAPPING[ typeCode ]
-        for dim in dims:
-            type *= dim
-        return type() # should expicitly set to 0s
+        for dim in _as_shape(dims):
+            type *= int(dim)
+        return type() # ctypes arrays are zero-initialised
     def ones( self, dims, typeCode='d' ):
         """Return numpy array of ones in given size"""
         raise NotImplementedError( """Haven't got a good ones implementation yet""" )

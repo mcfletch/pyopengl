@@ -13,6 +13,22 @@ from OpenGL.arrays import formathandler
 from OpenGL._bytes import bytes,unicode
 import operator
 
+
+def _as_shape( dims ):
+    """``dims`` as a sequence of lengths, whether it arrived as one or not.
+
+    ``numpy.zeros`` takes ``3`` and ``(3,)`` alike, and the entry points that
+    allocate their own result pass whichever suits them -- so a handler that
+    took only the sequence answered `TypeError: 'int' object is not
+    reversible` on the plainest call there is, on any installation without
+    numpy.
+    """
+    try:
+        return tuple(dims)
+    except TypeError:
+        return (dims,)
+
+
 class CtypesArrayHandler( formathandler.FormatHandler ):
     """Ctypes Array-type-specific data-type handler for OpenGL"""
     @classmethod
@@ -27,11 +43,17 @@ class CtypesArrayHandler( formathandler.FormatHandler ):
         return ctypes.byref( value )
     @classmethod
     def zeros( cls, dims, typeCode ):
-        """Return ctypes array of zeros in given size"""
+        """Return ctypes array of zeros in given size
+
+        ``dims`` is a shape or a single length, as ``numpy.zeros`` takes
+        either: an entry point that produces `n` values asks for `n` and the
+        two handlers have to answer the same call, or a program that runs with
+        numpy installed stops running without it.
+        """
         type = GL_TYPE_TO_ARRAY_MAPPING[ typeCode ]
         # build inner-most dimension first so the array indexes outer->inner,
         # matching numpy's row-major shape (zeros((2,3)) -> 2 rows of 3)
-        for dim in reversed(dims):
+        for dim in reversed(_as_shape(dims)):
             type *= int(dim)
         return type() # ctypes arrays are zero-initialised
     @classmethod

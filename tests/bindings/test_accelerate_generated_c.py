@@ -15,6 +15,7 @@ internal, naming nothing in this package.
 it where either has moved.
 """
 
+import importlib.util
 import os
 import sys
 
@@ -37,15 +38,32 @@ def accelerate_setup():
     return accelerate_setup
 
 
+#: Cython is what writes the C, so where it is absent there is nothing to
+#: write it again with and the shipped C is all there is -- which is a case of
+#: its own, covered below rather than skipped.
+needs_cython = pytest.mark.skipif(
+    importlib.util.find_spec('Cython') is None,
+    reason='Cython writes the generated C; there is none to write here')
+
+
 class TestTheToolchainIsRecorded:
-    def test_it_names_both_halves(self):
-        """Cython writes the C; numpy is what the C is written against."""
-        import numpy
+    @needs_cython
+    def test_it_names_the_cython_that_writes_the_c(self):
         from Cython import __version__ as cython_version
 
+        assert cython_version in accelerate_setup()._toolchain()
+
+    @needs_cython
+    def test_it_names_the_numpy_the_c_is_written_against(self):
+        """Or says there is none: an environment without numpy builds every
+        module but the numpy format handler, and the C is written for that."""
         stated = accelerate_setup()._toolchain()
-        assert cython_version in stated
-        assert numpy.__version__ in stated
+        if importlib.util.find_spec('numpy') is None:
+            assert 'numpy none' in stated
+        else:
+            import numpy
+
+            assert numpy.__version__ in stated
 
     def test_the_drop_happens_only_when_the_file_is_run(self):
         """Reading what a setup file declares is not a build.
@@ -96,6 +114,7 @@ class TestWhatIsDroppedAndWhatIsKept:
                             str(source / '.cython-toolchain'))
         return setup, source
 
+    @needs_cython
     def test_c_from_another_toolchain_is_dropped(self, elsewhere):
         setup, source = elsewhere
         monkeypatched = setup
@@ -104,11 +123,13 @@ class TestWhatIsDroppedAndWhatIsKept:
         assert (source / 'wrapper.pyx').exists(), (
             'the source it would be written from must be left alone')
 
+    @needs_cython
     def test_the_toolchain_is_recorded_as_it_goes(self, elsewhere):
         setup, source = elsewhere
         setup.drop_c_from_another_toolchain()
         assert (source / '.cython-toolchain').read_text() == setup._toolchain()
 
+    @needs_cython
     def test_a_second_build_keeps_the_c(self, elsewhere):
         """Regenerating on every build would cost a minute for nothing."""
         setup, source = elsewhere
@@ -117,6 +138,7 @@ class TestWhatIsDroppedAndWhatIsKept:
         setup.drop_c_from_another_toolchain()
         assert (source / 'wrapper.c').exists()
 
+    @needs_cython
     def test_a_moved_toolchain_drops_it_again(self, elsewhere):
         setup, source = elsewhere
         setup.drop_c_from_another_toolchain()
