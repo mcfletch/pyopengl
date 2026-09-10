@@ -58,7 +58,9 @@ json.dump(out, sys.stdout)
 #: possible when the files went: there is no second source to survey any more.
 #: So the answer they gave is checked in, and the synthesised modules are held
 #: to it -- which is the same assertion, against a baseline that cannot drift
-#: because it is no longer derived from anything.
+#: because it is no longer derived from anything.  A name added by hand to an
+#: ``OpenGL/raw/<API>/_types.py`` is added here as well: every module of that
+#: API re-exports it, and a file would have carried it too.
 BASELINE = os.path.join(paths.DATA, 'generated_module_names.json')
 
 

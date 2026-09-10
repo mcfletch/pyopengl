@@ -16,6 +16,10 @@ tests/output.ppm
 accelerate/manylinux-dist/
 accelerate/src/*.c
 
+# Written by accelerate's setup.py from the version it reads at build time,
+# so that a version bump reaches the C rather than sitting in a stale object.
+accelerate/src/c/generated/pygl_version.h
+
 # The C dispatch extension, built in place by an editable install.
 OpenGL/_dispatch/*.so
 

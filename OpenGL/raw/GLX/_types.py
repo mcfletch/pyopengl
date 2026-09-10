@@ -349,3 +349,39 @@ GLXFBConfigSGIX = POINTER(struct___GLXFBConfigRec)
 #: ``GLX_NV_video_capture``'s device handle: an X resource id, as the other
 #: GLX handles that are not pointers are.
 GLXVideoCaptureDeviceNV = XID
+
+#: X11's colour map, an X resource id like every other -- `GLX_MESA_pixmap_colormap`
+#: takes one to say how a pixmap's indices are read.
+Colormap = XID
+
+#: X11's `Status`: zero for failure, non-zero for success.  What
+#: `glXGetTransparentIndexSUN` answers.
+Status = c_int
+
+#: `GLX_NV_video_out`'s output device, numbered rather than an X resource:
+#: the spec declares it `unsigned int`.
+GLXVideoDeviceNV = c_uint
+
+
+class struct___DMparams(Structure):
+    """SGI digital-media parameter list; only ever handled by pointer."""
+
+    __slots__ = [
+    ]
+
+
+struct___DMparams._fields_ = [
+    ('_opaque_struct', c_int)
+]
+
+#: `GLX_SGIX_dmbuffer` passes a parameter list by pointer and a buffer by
+#: value, both belonging to SGI's digital-media library rather than to GLX.
+DMparams = struct___DMparams
+DMbuffer = c_void_p
+
+#: `GLX_SGIX_video_source` names a video path on a video server, both from
+#: SGI's video library: the server is a handle, the path and the node are
+#: numbers within it.
+VLServer = c_void_p
+VLPath = c_int
+VLNode = c_int

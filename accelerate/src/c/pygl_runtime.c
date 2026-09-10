@@ -2864,10 +2864,15 @@ static int pygl_init_errors(void)
     return (pygl_null_function_error && pygl_no_context_error) ? 0 : -1;
 }
 
-/* The PyOpenGL version this extension's tables were generated from, supplied by
- * accelerate's setup.py.  Absent only in a build that has not been told, and a
- * build that cannot say which tables it holds is not one to dispatch through --
- * see OpenGL._dispatch._versions_match. */
+/* The PyOpenGL version this extension's tables were generated from, written by
+ * accelerate's setup.py into generated/pygl_version.h.  A build that cannot say
+ * which tables it holds is not one to dispatch through, so an absent header
+ * leaves a version nothing matches -- see OpenGL._dispatch._versions_match. */
+#if defined(__has_include)
+#  if __has_include("generated/pygl_version.h")
+#    include "generated/pygl_version.h"
+#  endif
+#endif
 #ifndef PYOPENGL_VERSION
 #define PYOPENGL_VERSION "unknown"
 #endif

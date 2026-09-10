@@ -165,6 +165,15 @@ GLDEBUGPROCAMD = _p.DEFAULT_FUNCTION_TYPE(
     GLvoidp,# userParam
 )
 
-GLeglImageOES = GLvoidp 
+#: `GL_OES_EGL_image`'s handle on an EGLImage: a `void *` on the GL side,
+#: whatever EGL made of it on the other.
+GLeglImageOES = GLvoidp
+#: `GL_EXT_external_buffer`'s handle on a buffer another API owns -- a
+#: `void *`, as `GLeglImageOES` beside it is.
+GLeglClientBufferEXT = GLvoidp
+#: `GL_NV_draw_vulkan_image`'s Vulkan entry point: `void (*)(void)`, which is
+#: what `vkGetInstanceProcAddr` answers and what `glGetVkProcAddrNV` is
+#: declared to return.
+GLVULKANPROCNV = _p.DEFAULT_FUNCTION_TYPE(None)
 c_int = ctypes.c_int
 

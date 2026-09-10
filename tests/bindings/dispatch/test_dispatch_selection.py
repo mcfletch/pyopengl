@@ -352,6 +352,66 @@ class TestThePairIsPinnedBeforeItIsInstalled:
         assert requirements == 'PyOpenGL==%s' % (accelerate_setup._our_version(),)
 
 
+class TestTheVersionReachesTheCompiledObject:
+    """A bump has to rebuild what carries the number.
+
+    The build compares each source and the headers in ``depends`` against the
+    object it already has, and recompiles what is older.  Compiler flags are
+    not part of that comparison, so a version passed as ``-D`` leaves an
+    existing ``pygl_runtime.o`` looking current: the extension links as it
+    stands and announces the version it was first built with, which the pairing
+    check then refuses against the PyOpenGL beside it.  Carrying the number in
+    a header instead puts it where the comparison can see it.
+    """
+
+    def accelerate_setup(self):
+        sys.path.insert(0, os.path.join(paths.ROOT, 'accelerate'))
+        try:
+            import setup as accelerate_setup
+        except ImportError as err:              # pragma: no cover - no source tree
+            pytest.skip('accelerate/setup.py is not importable here: %s' % (err,))
+        finally:
+            sys.path.pop(0)
+        return accelerate_setup
+
+    def test_the_header_states_the_version_it_was_written_from(self):
+        accelerate_setup = self.accelerate_setup()
+        written = accelerate_setup.write_version_header()
+        path = os.path.join(paths.ROOT, 'accelerate', written)
+        with open(path, encoding='utf-8') as handle:
+            contents = handle.read()
+        assert '#define PYOPENGL_VERSION "%s"' % (
+            accelerate_setup._our_version(),) in contents
+
+    def test_writing_it_again_leaves_the_file_alone(self):
+        """Rewriting on every build would recompile the runtime on every build,
+        so an unchanged version has to leave the timestamp where it was."""
+        accelerate_setup = self.accelerate_setup()
+        path = os.path.join(
+            paths.ROOT, 'accelerate', accelerate_setup.write_version_header())
+        before = os.stat(path).st_mtime_ns
+        accelerate_setup.write_version_header()
+        assert os.stat(path).st_mtime_ns == before
+
+    def test_the_number_is_not_passed_as_a_compiler_flag(self):
+        """`define_macros` is invisible to the up-to-date comparison, which is
+        the whole reason the header exists."""
+        with open(os.path.join(paths.ROOT, 'accelerate', 'setup.py'),
+                  encoding='utf-8') as handle:
+            source = handle.read()
+        assert 'PYOPENGL_VERSION' not in source.split('def dispatch_extension')[-1], (
+            'the version is being handed to the compiler as a macro again')
+
+    def test_the_header_is_among_the_dependencies_of_the_extension(self):
+        accelerate_setup = self.accelerate_setup()
+        extensions = accelerate_setup.dispatch_extension()
+        if not extensions:                      # pragma: no cover - no C dispatch
+            pytest.skip('this build has no C dispatch extension')
+        depends = extensions[0].depends
+        assert any(path.endswith('pygl_version.h') for path in depends), (
+            'a version bump would not recompile the runtime: %r' % (depends,))
+
+
 class TestTheFloorForTheOtherAccelerators:
     """``acceleratesupport`` gates the accelerators that do *not* share the
     generated tables -- the wrapper, the array datatypes, the format handlers.

@@ -53,6 +53,42 @@ def pyopengl_requirement():
     return 'PyOpenGL==%s' % (_our_version(),)
 
 
+VERSION_HEADER = 'src/c/generated/pygl_version.h'
+
+
+def write_version_header():
+    """State the version in a header, and answer where it was written.
+
+    The extension reports at import which PyOpenGL its tables came from, so
+    that number has to reach the C.  A ``-D`` on the command line would too,
+    but a compiler driver's flags are not something the build compares against
+    an object file it already has: bump the version, and the existing
+    ``pygl_runtime.o`` is still newer than every source and header, so it is
+    linked as it stands and the new build announces the old version.  A header
+    is compared, being in ``depends``, so a bump recompiles what includes it.
+
+    Rewritten only when the contents change, so an unchanged version does not
+    invalidate the objects on every build.
+    """
+    path = os.path.join(HERE, VERSION_HEADER)
+    contents = (
+        '/* Written by accelerate\'s setup.py from OpenGL_accelerate.__version__.\n'
+        ' * The pair is released together and carries one number, so this is\n'
+        ' * the PyOpenGL whose generated tables this extension holds. */\n'
+        '#define PYOPENGL_VERSION "%s"\n' % (_our_version(),)
+    )
+    try:
+        with open(path, encoding='utf-8') as handle:
+            if handle.read() == contents:
+                return VERSION_HEADER
+    except OSError:
+        pass
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, 'w', encoding='utf-8') as handle:
+        handle.write(contents)
+    return VERSION_HEADER
+
+
 def dispatch_extension():
     """The registry-generated C implementation of the OpenGL entry points.
 
@@ -94,18 +130,16 @@ def dispatch_extension():
         'src/c/pygl.h',
         'src/c/generated/pygl_elements.h',
         'src/c/generated/pygl_glgets.h',
+        # Says which PyOpenGL these tables were generated from, so that a
+        # mismatched pair is refused with a sentence rather than dispatching
+        # through the wrong slot indices.
+        write_version_header(),
     ]
     return [
         Extension(
             'OpenGL_accelerate.dispatch',
             sources=sources,
             include_dirs=['src/c', 'src/c/generated'],
-            # The extension states which PyOpenGL its tables were generated
-            # from, so that a mismatched pair is refused with a sentence rather
-            # than dispatching through the wrong slot indices.  The two are
-            # released together and carry the same number, so this is the
-            # accelerate version.
-            define_macros=[('PYOPENGL_VERSION', '"%s"' % (_our_version(),))],
             depends=[
                 path for path in headers if os.path.exists(os.path.join(HERE, path))
             ],
