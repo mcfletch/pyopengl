@@ -999,3 +999,25 @@ so those corrections had no effect on what was checked, and the
 `GL_PROGRAM_BINARY_FORMATS` fix would have had none either. Both are
 regenerated, and both now have an invariant holding them to the CSV, because a
 fact kept in three places is a fact that will disagree with itself again.
+
+## A sixth pass — what the matrix found once and could not be made to say again
+
+`test_gl1_eval.py::TestGL1Eval::test_map2` raised a `GLError` in one cell of
+one matrix run — `pypy311-num1-accel0-dispctypes`, inside the child that
+`TestItRunsWhereThereIsNoWindow.test_and_it_actually_passes_there` runs the
+whole of `tests/gl` in. It has not been made to happen again: five sequential
+runs of `tests/gl` on that interpreter and three more concurrently, in the same
+configuration and the same fixed order, are 383 passed each. The GPU was
+carrying 54 tox cells and another suite at the time, and an evaluator call is a
+plausible thing for a contended driver to refuse — but that is where the
+evidence stops, and "environmental" is a conclusion rather than a starting
+point, so it is written here as an open question and not as an answer.
+
+What the incident did settle is that the nested case could not be diagnosed.
+The child ran with `-q` and no `--tb`, and the parent reported the last two
+thousand characters of its output — which on any one driver is the several
+hundred skip reasons `tests/gl` prints, not the failure. Learning even the name
+of the failing test cost a second full matrix. The child now runs with
+`--tb=short`, and the parent leads its report with the lines naming the
+failures before the tail. Should it happen again there will be a traceback and
+a GL error code to work from.

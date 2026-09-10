@@ -49,8 +49,12 @@ class TestItRunsWhereThereIsNoWindow:
         environment['TEST_VISIBLE'] = '0'
         try:
             return subprocess.run(
-                [sys.executable, '-m', 'pytest', '-q', '--no-header', '-p',
-                 'no:randomly', os.path.join('tests', 'gl')],
+                # `--tb=short`: what this case reports is the child's output,
+                # and without a traceback in it a failure here says a name
+                # and nothing else -- which costs a whole run to learn.
+                [sys.executable, '-m', 'pytest', '-q', '--no-header',
+                 '--tb=short', '-p', 'no:randomly',
+                 os.path.join('tests', 'gl')],
                 cwd=ROOT, env=environment, capture_output=True, text=True,
                 check=False, timeout=self.CHILD_TIMEOUT)
         except subprocess.TimeoutExpired as expired:
@@ -59,6 +63,24 @@ class TestItRunsWhereThereIsNoWindow:
                 '%d seconds; its output so far:\n%s'
                 % (windowing, self.CHILD_TIMEOUT,
                    (expired.stdout or b'')[-2000:]))
+
+    @staticmethod
+    def _why(completed):
+        """What the child said about its failures.
+
+        Leading with the lines naming them, because the child prints its
+        tracebacks *before* the summary of what it skipped -- and `tests/gl`
+        skips several hundred cases on any one driver, so the tail of its
+        output is those and not the failure.
+        """
+        named = [
+            line for line in completed.stdout.splitlines()
+            if line.startswith(('FAILED', 'ERROR'))
+        ]
+        return '%s\n\nthe tail of its output:\n%s' % (
+            '\n'.join(named) or '(it named no failure)',
+            completed.stdout[-6000:],
+        )
 
     def test_this_platform_has_a_headless_backend(self):
         """The premise of the two below, said once and by name: without one,
@@ -77,8 +99,8 @@ class TestItRunsWhereThereIsNoWindow:
         for absent in ('no usable GL', 'no EGL', 'no offscreen'):
             if absent in completed.stdout:
                 pytest.skip('no headless GL on this machine')
-        assert ' passed' in completed.stdout, completed.stdout[-2000:]
-        assert 'failed' not in completed.stdout, completed.stdout[-2000:]
+        assert ' passed' in completed.stdout, self._why(completed)
+        assert 'failed' not in completed.stdout, self._why(completed)
 
 
 class TestNoBackendIsImplementedTwice:
