@@ -196,3 +196,21 @@ def egl_refusal():
     except ImportError as error:
         return error
     return None
+
+
+#: Modules that load a native library while being imported, with the libraries
+#: whose absence each one reports as an ``ImportError`` naming it.  For these
+#: that refusal is the supported answer on a machine without the library, and
+#: ``test_optional_module_imports`` holds them to giving it.
+OPTIONAL_MODULES = {
+    # libgbm is Linux graphics infrastructure: absent on Windows, where ANGLE
+    # can still provide EGL.  Where there is no EGL at all -- macOS -- the EGL
+    # binding refuses first, and names EGL.
+    'OpenGL.EGL.gbmdevice': ('gbm', 'EGL'),
+}
+
+
+def missing_library(name, error):
+    """Whether `error`, raised importing module `name`, is that module saying
+    a library it needs is not installed here"""
+    return any(library in str(error) for library in OPTIONAL_MODULES.get(name, ()))

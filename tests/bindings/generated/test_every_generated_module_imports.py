@@ -20,7 +20,7 @@ import pkgutil
 
 import paths
 import pytest
-from backends import egl_refusal
+from backends import egl_refusal, missing_library
 
 #: The API namespaces, each imported on its own so a failure names the one it
 #: is in rather than stopping at the first.
@@ -74,6 +74,10 @@ def test_a_shipped_module_imports(name):
     try:
         importlib.import_module(name)
     except ImportError as error:
+        if missing_library(name, error):
+            # A module that needs a library this machine lacks, saying so the
+            # way it promises to (backends.OPTIONAL_MODULES).
+            pytest.skip(str(error))
         pytest.fail(
             '%s does not import: %s\n'
             'A module that raises here is one a user cannot reach at all.'
