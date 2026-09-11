@@ -13,6 +13,12 @@ the generated one.
 
 Adding one: write the wrapper in ``OpenGL/GL/exceptional.py``, add it to that
 module's ``__all__``, add a row here, and regenerate.
+
+The other wrapper mechanism -- ``OpenGL.lazywrapper.lazy``, used across the
+friendly modules -- is read out of the source by
+:mod:`cdispatch.lazy_wrappers` rather than listed.  These rows are written by
+hand because they carry what reading cannot see: a return type the wrapper
+changes, and whether the C form still works.
 """
 
 from dataclasses import dataclass
@@ -127,68 +133,3 @@ def lookup(api, name):
         if entry.name == name and api in entry.apis:
             return entry
     return None
-
-
-# ---------------------------------------------------------------------------
-# The wrappers the friendly modules put over an entry point with
-# ``OpenGL.lazywrapper.lazy``.  Those are discovered rather than listed: there
-# are dozens, they are spread across the whole package, and a hand-kept list
-# would be one more thing to drift.  The rows above stay hand-written because
-# they carry what discovery cannot see -- a return type the wrapper changes,
-# and whether the C form still works.
-# ---------------------------------------------------------------------------
-
-import ast
-import os
-
-
-def _required_and_names(definition):
-    """The parameters a caller supplies, and whether more may follow.
-
-    ``lazy`` binds the entry point as the first parameter, so it is not one.
-    """
-    arguments = definition.args
-    positional = (arguments.posonlyargs + arguments.args)[1:]
-    optional = len(arguments.defaults)
-    required = [a.arg for a in positional[:len(positional) - optional]]
-    return required, [a.arg for a in positional], arguments.vararg is not None
-
-
-def discover(package_root, api):
-    """``{name: [parameter, ...]}`` for the wrappers ``OpenGL.<api>`` exports.
-
-    Read from the source: the decorated function's own parameter list is the
-    call it takes, and nothing else records it.
-    """
-    found = {}
-    api_root = os.path.join(package_root, api)
-    if not os.path.isdir(api_root):
-        return found
-    for directory, folders, files in os.walk(api_root):
-        folders[:] = [f for f in folders if f not in ('__pycache__', 'raw')]
-        for name in sorted(files):
-            if not name.endswith('.py'):
-                continue
-            try:
-                with open(os.path.join(directory, name), encoding='utf-8') as handle:
-                    tree = ast.parse(handle.read())
-            except (SyntaxError, UnicodeDecodeError):
-                continue
-            for node in ast.walk(tree):
-                if not isinstance(node, ast.FunctionDef):
-                    continue
-                for decorator in node.decorator_list:
-                    function = (decorator.func if isinstance(decorator, ast.Call)
-                                else decorator)
-                    if isinstance(function, ast.Name) and function.id in ('_lazy', 'lazy'):
-                        # A `*args` wrapper -- glGetActiveAttrib takes one --
-                        # still has a smallest call, and that is the number
-                        # the stub has to admit.
-                        # Both lists: the optional parameters are part of the
-                        # call too -- `glDrawBuffers(bufs)` passes one of two
-                        # that both default -- so the stub carries them with
-                        # defaults rather than stopping at the required ones.
-                        required, names, _variadic = _required_and_names(node)
-                        found.setdefault(node.name, (required, names))
-                        break
-    return found
