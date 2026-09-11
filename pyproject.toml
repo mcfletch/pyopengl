@@ -105,7 +105,13 @@ testpaths = ["tests", "accelerate/tests"]
 # reached by three conftest.py files editing sys.path and by pytest's prepend
 # import mode adding each test file's own directory, which importlib mode
 # (below) does not do.
-pythonpath = ["tests", "tests/gl", "tests/gles", "tests/glu", "src"]
+#
+# The checkout itself is named too, for the packages at its root that are not
+# part of the distribution -- `directdocs` -- which `python -m pytest` reaches
+# through the current directory and a bare `pytest` does not.  Without it,
+# `import directdocs` under a bare `pytest` finds only tests/directdocs, the
+# directory of that package's tests, and there is nothing in it to import.
+pythonpath = [".", "tests", "tests/gl", "tests/gles", "tests/glu", "src"]
 
 # importlib import mode gives each test module a name derived from its path, so
 # two suites may hold the same basename: tests/gl and tests/gles cover the same
