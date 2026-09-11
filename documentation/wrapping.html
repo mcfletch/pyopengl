@@ -145,6 +145,14 @@ and each is one annotation:</p>
     <td><code>Parameter.retain</code>.</td></tr>
 </table>
 
+<p>What a wrapper's Python call takes, after all of these, is
+<code>wrapper.pyArgNames()</code>: the C argument names, less the ones a
+<code>setPyConverter</code> removed.  It is the same whichever converters the
+configuration installed -- under <code>ERROR_ON_COPY</code> an array argument
+is passed through with none -- so it, rather than <code>pyConverterNames</code>,
+which exists only once a converter has been set, is what to read a call
+from.</p>
+
 <p>The table was built by parsing these chains, never by importing the modules,
 so extraction needs no GL context and no working build.  It reads the registry
 as well, because the chains alone are not enough: <code>images.py</code>

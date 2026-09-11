@@ -46,14 +46,16 @@ def declared(api):
 def python_arguments(entry_point):
     """The names the Python form takes, or None where nothing records them.
 
-    Three shapes reach here.  A ``wrapper.Wrapper`` computes ``pyConverterNames``
-    as it is built, dropping whatever ``setPyConverter`` took out -- the counts
-    GLE reads off its arrays.  A plain function carries its own signature.  A
-    bare entry point carries the C argument names.
+    Three shapes reach here.  A ``wrapper.Wrapper`` answers ``pyArgNames``: the
+    C names less whatever ``setPyConverter`` took out -- the counts GLE reads
+    off its arrays -- whichever converters the configuration installed.  A
+    plain function carries its own signature.  A bare entry point carries the
+    C argument names.
     """
-    names = getattr(entry_point, 'pyConverterNames', None)
-    if names is not None:
-        return list(names)
+    from OpenGL.wrapper import Wrapper
+
+    if isinstance(entry_point, Wrapper):
+        return entry_point.pyArgNames()
     if getattr(entry_point, 'wrappedOperation', None) is not None:
         # A lazy wrapper: its own parameter list is what a caller passes, and
         # `wrappedOperation.argNames` is the C form it was built over.  Neither

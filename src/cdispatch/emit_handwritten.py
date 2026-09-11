@@ -16,9 +16,11 @@ off the arrays passed with them -- and the rule for which arguments go lives in
 the wrapper machinery.  Restating that rule here would be a second copy of it,
 and a second copy that drifts is what put the wrong signature on
 ``glDeleteTextures``.  So the *names* of those arguments come from the wrapper
-itself, through ``pyConverterNames``, which it works out as it is built.  That
-is not machine-dependent: an entry point whose library is missing still carries
-the argument names its declaration gave it.
+itself, through ``Wrapper.pyArgNames``, which it works out as it is built.
+That is not machine-dependent: an entry point whose library is missing still
+carries the argument names its declaration gave it.  Nor does it depend on the
+configuration: ``ERROR_ON_COPY`` changes which converters a wrapper installs,
+not which arguments a caller passes.
 
 ``emit_handwritten`` is called from :mod:`regenerate_c`; :func:`declarations` is
 the part worth reading.
@@ -250,15 +252,16 @@ def _wrapper_built(package_root, api):
             'reshapes cannot be read; a stub written now would declare the C '
             'form of each of them. Install what %s needs and generate again. '
             '(%s: %s)' % (api, api, type(err).__name__, err)) from err
+    from OpenGL.wrapper import Wrapper
+
     for name in dir(module):
         if name.startswith('_') or not name.startswith(PREFIXES[api]):
             continue
         entry_point = getattr(module, name)
-        argument_names = getattr(entry_point, 'pyConverterNames', None)
-        if argument_names is None:
+        if not isinstance(entry_point, Wrapper):
             continue
         declared = ['%s: Any' % (_parameter(argument),)
-                    for argument in argument_names]
+                    for argument in entry_point.pyArgNames()]
         lines[name] = 'def %s(%s) -> Any: ...' % (name, ', '.join(declared))
     return lines
 

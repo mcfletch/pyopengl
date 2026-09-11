@@ -120,13 +120,26 @@ class Wrapper(LateBind):
         else:
             return setattr(self.wrappedOperation, key, value)
 
-    def pyArgIndex(self, argName):
-        """Return the Python-argument index for the given argument name"""
+    def pyArgNames(self):
+        """The names of the arguments a Python caller passes, in order
+
+        The C argument names, less whichever ones ``setPyConverter`` removed:
+        a count read off an array, an output the wrapper allocates.  Which
+        converters were installed does not change it -- with ``ERROR_ON_COPY``
+        an array is passed through without one, and the call is the same -- so
+        this is what to read a wrapper's call from, rather than
+        ``pyConverterNames``, which exists only once a converter has been set.
+        """
         argNames = getattr(self, 'pyConverterNames', None)
         if argNames is None:
             argNames = self.wrappedOperation.argNames
+        return list(argNames)
+
+    def pyArgIndex(self, argName):
+        """Return the Python-argument index for the given argument name"""
+        argNames = self.pyArgNames()
         try:
-            return asList(argNames).index(argName)
+            return argNames.index(argName)
         except (ValueError, IndexError):
             raise KeyError(
                 """No argument %r in argument list %r""" % (argName, argNames)
