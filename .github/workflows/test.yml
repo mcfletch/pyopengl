@@ -55,6 +55,13 @@ jobs:
           - {python: '3.12', toxenv: typecheck}
           # The interpreter sweep, on the ordinary configuration: numpy present,
           # no compiled extension, ctypes entry points.
+          #
+          # 3.9 is the `requires-python` floor and the lowest trove classifier,
+          # and the suite is what evaluates that promise: mypy cannot, since it
+          # refuses `--python-version=3.9` outright and numpy's own stubs need
+          # 3.12 to parse.  A floor nothing runs is a floor that is true until
+          # the first person on it finds otherwise.
+          - {python: '3.9', toxenv: py39-num1-accel0-dispctypes}
           - {python: '3.10', toxenv: py310-num1-accel0-dispctypes}
           - {python: '3.12', toxenv: py312-num1-accel0-dispctypes}
           - {python: '3.13', toxenv: py313-num1-accel0-dispctypes}
