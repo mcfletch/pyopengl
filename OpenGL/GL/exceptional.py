@@ -33,6 +33,20 @@ glRasterPosDispatch = {
 }
 
 if _configflags.ERROR_CHECKING:
+    def _block_checking( event ):
+        """Tell the checker a glBegin block opened or closed, if there is one.
+
+        A platform with no desktop GL behind it has no ``glGetError`` to build
+        a checker from, and ``_errors._error_checker`` is then None -- at which
+        point ``glBegin`` is a null entry point like any other and should say
+        so. Calling through the absent checker first turned that into an
+        ``AttributeError`` against ``None``, from a frame naming neither the
+        function the caller asked for nor the library it is missing from.
+        """
+        checker = _errors._error_checker
+        if checker is not None:
+            getattr( checker, event )( )
+
     def _suspend_c_checking( suspend ):
         """Tell the C dispatch layer, if it is the one in use.
 
@@ -50,7 +64,7 @@ if _configflags.ERROR_CHECKING:
     @_lazy( full.glBegin )
     def glBegin( baseFunction, mode ):
         """Begin GL geometry-definition mode, disable automatic error checking"""
-        _errors._error_checker.onBegin( )
+        _block_checking( 'onBegin' )
         _suspend_c_checking( True )
         return baseFunction( mode )
     @_lazy( full.glEnd )
@@ -65,7 +79,7 @@ if _configflags.ERROR_CHECKING:
             # is no way to tell it apart from the caller's once the block is
             # closed, and it is ours.
             result = baseFunction( )
-            _errors._error_checker.onEnd( )
+            _block_checking( 'onEnd' )
             _suspend_c_checking( False )
             # The platform's own entry point: unchecked, and the same call
             # whichever error checker is in use.
@@ -75,7 +89,7 @@ if _configflags.ERROR_CHECKING:
             if _get_error is not None:
                 _get_error( )
             return result
-        _errors._error_checker.onEnd( )
+        _block_checking( 'onEnd' )
         _suspend_c_checking( False )
         return baseFunction( )
 else:
