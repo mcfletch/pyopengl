@@ -102,9 +102,8 @@ class TestImportingItDoesNothing:
         assert result.stdout.split() == ['Tk', 'Frame', 'GLFrame']
 
 
-@pytest.fixture
-def root():
-    """A Tk root that is destroyed however the test ends
+def make_root():
+    """A new Tk root, or a skip saying why there cannot be one here
 
     Skipped where ``OpenGL.Tk`` has no context implementation for the
     windowing system Tk is using: the widget cannot make a context there, and
@@ -136,6 +135,26 @@ def root():
             'OpenGL.Tk has no context implementation for Tk on %s; see '
             'plans/TK-WIDGET.md' % (system,)
         )
+    return made
+
+
+@pytest.fixture
+def root():
+    """A Tk root, as :func:`make_root` makes one, destroyed however the test ends
+
+    And then a collection, here on the thread that made the root.  A test that
+    gives a widget a callback closing over the widget -- ``redraw`` appending
+    it to a list, a monkeypatched method put back on the instance -- leaves a
+    cycle holding the widget, and through ``master`` the root.  Tcl requires an
+    interpreter to be deleted by the thread that created it; left to the next
+    automatic collection, that is whichever thread triggers one, and on Windows
+    pytest-timeout's timer is a thread, so Tcl aborts the run ("Tcl_AsyncDelete:
+    async handler deleted by the wrong thread").
+    """
+    import gc
+    import tkinter
+
+    made = make_root()
     try:
         yield made
     finally:
@@ -143,6 +162,8 @@ def root():
             made.destroy()
         except tkinter.TclError:
             pass
+        del made
+        gc.collect()
 
 
 @pytest.fixture
@@ -271,6 +292,68 @@ class TestTheContext:
             made.waitForMap()
         assert made.winfo_exists()
         assert made.makeCurrent.__self__ is made
+
+
+@needs_display
+class TestWhatADestroyedWidgetLeaves:
+    """Nothing for the garbage collector to find.
+
+    Tcl requires an interpreter to be deleted by the thread that created it,
+    and the interpreter goes when the last reference to its ``tkinter.Tk``
+    does.  A reference cycle through a widget puts that off to whichever
+    collection finds it, on whatever thread happens to trigger one -- in a
+    program with a worker thread, or under pytest-timeout on Windows, where the
+    timer is a thread, that is Tcl aborting the process with "Tcl_AsyncDelete:
+    async handler deleted by the wrong thread".  So with the collector off, a
+    destroyed root and its widget have to go as soon as nothing names them.
+    """
+
+    def what_is_gone(self, build):
+        """(root gone, widget gone) once *build*'s widget and its root are
+        destroyed and dropped, with no collection in between"""
+        import gc
+        import weakref
+
+        enabled = gc.isenabled()
+        gc.collect()
+        gc.disable()
+        try:
+            root = make_root()
+            widget = build(root)
+            references = weakref.ref(root), weakref.ref(widget)
+            root.destroy()
+            del root, widget
+            return tuple(reference() is None for reference in references)
+        finally:
+            if enabled:
+                gc.enable()
+
+    def test_after_a_context_was_made(self):
+        from OpenGL.Tk import GLFrame
+
+        def build(root):
+            made = GLFrame(root, width=64, height=64)
+            made.pack()
+            made.waitForMap()
+            return made
+
+        assert self.what_is_gone(build) == (True, True)
+
+    def test_after_a_context_was_refused(self):
+        """The refusal is kept for waitForMap to raise, and an exception keeps
+        the frames it passed through -- which hold the widget."""
+        from OpenGL.Tk import GLFrame, TkContextError
+
+        def build(root):
+            made = GLFrame(root, width=64, height=64, version=(9, 9))
+            made.pack()
+            with pytest.raises(TkContextError):
+                made.waitForMap()
+            with pytest.raises(TkContextError):
+                made.makeCurrent()
+            return made
+
+        assert self.what_is_gone(build) == (True, True)
 
 
 @needs_display

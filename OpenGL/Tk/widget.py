@@ -71,7 +71,8 @@ class GLFrame(tkinter.Frame):
             one did.  Kept rather than raised out of the ``<Map>`` binding,
             where an exception would surface as a Tk callback error with no
             connection to the code that built the widget; :meth:`waitForMap`
-            and :meth:`makeCurrent` raise it.
+            and :meth:`makeCurrent` raise it.  Dropped when the widget is
+            destroyed.
     """
 
     #: Milliseconds between renders while an animation is running, or 0 for
@@ -280,7 +281,13 @@ class GLFrame(tkinter.Frame):
             # with nothing to connect it to the code that built the widget.
             # waitForMap and makeCurrent raise it where a caller is listening.
             self.contextError = error
-            log.error('could not make a GL context for %s: %s', self, error)
+            # Strings, not the objects: a handler that keeps records -- a
+            # MemoryHandler, a QueueHandler, a test's log capture -- would
+            # otherwise keep this widget, and through it the Tk root, alive for
+            # as long as it keeps the record, and let the root go on whichever
+            # thread drops the record last.
+            log.error('could not make a GL context for %s: %s',
+                      str(self), str(error))
             return
         self._ensureInitialised()
         self.render()
@@ -318,10 +325,16 @@ class GLFrame(tkinter.Frame):
         self.render()
 
     def _onDestroy(self, event: Any = None) -> None:
-        """Let the context go with the widget"""
+        """Let the context go with the widget, and the error that stopped one"""
         if event is not None and event.widget is not self:
             return                      # a child's destruction, not ours
         self.destroyContext()
+        # A kept error holds the frames it was raised through, and they hold
+        # this widget.  Kept past destruction that is a cycle only the
+        # collector breaks, and the Tcl interpreter behind the root is then
+        # deleted on whichever thread the collector ran on -- which Tcl
+        # answers by aborting the process.
+        self.contextError = None
 
     ### the names the Togl-based widget answered to
     def tkRedraw(self, *arguments: Any) -> None:
