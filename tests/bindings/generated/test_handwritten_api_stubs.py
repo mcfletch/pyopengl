@@ -22,8 +22,11 @@ import os
 
 import paths
 import pytest
+import stubs
 
-PACKAGE = os.path.join(paths.ROOT, 'OpenGL')
+from cdispatch import emit_handwritten
+
+PACKAGE = paths.PACKAGE
 
 #: The hand-maintained APIs, and one entry point apiece that a program cannot
 #: do without -- so a stub that regressed to empty fails loudly.
@@ -31,24 +34,13 @@ APIS = ['GLU', 'GLE', 'GLUT']
 
 
 def stub_for(api):
-    return os.path.join(PACKAGE, api, '__init__.pyi')
+    """The API's stub, package-relative, as ``tests/stubs.py`` names one."""
+    return os.path.join(api, '__init__.pyi')
 
 
 def declared(api):
     """{name: node} for everything an API's stub declares at module level."""
-    path = stub_for(api)
-    if not os.path.exists(path):
-        return {}
-    with open(path, encoding='utf-8') as handle:
-        tree = ast.parse(handle.read(), filename=path)
-    found = {}
-    for node in tree.body:
-        if isinstance(node, ast.FunctionDef):
-            # A later declaration wins, as it does in the namespace itself.
-            found[node.name] = node
-        elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
-            found[node.target.id] = node
-    return found
+    return stubs.declarations(stub_for(api))
 
 
 def python_arguments(entry_point):
@@ -94,11 +86,13 @@ def stub_minimum(node):
 #: than by what a value looks like: an entry point is a ctypes function
 #: pointer, a Wrapper, or a plain function depending on how it is wrapped, and
 #: those are not distinguishable from the machinery that shares the namespace.
-PREFIXES = {
-    'GLU': ('glu',),
-    'GLE': ('gle', 'rot_', 'urot_', 'uview'),
-    'GLUT': ('glut', 'fg'),
-}
+#:
+#: The generator's own table rather than a copy of it.  What the stub is held
+#: to and what the stub was written from have to be the same set: a prefix
+#: added there and not here names entry points nothing would check.  The
+#: constants it also names are separated by asking each value what it is, below
+#: and in :func:`test_it_covers_the_namespace_the_package_offers`.
+PREFIXES = emit_handwritten.PREFIXES
 
 
 def entry_points(api):
@@ -117,7 +111,7 @@ def entry_points(api):
 
 @pytest.mark.parametrize('api', APIS)
 def test_the_stub_exists(api):
-    assert os.path.exists(stub_for(api)), (
+    assert stubs.tree(stub_for(api)) is not None, (
         'OpenGL/%s/__init__.pyi is missing, so every program using %s is '
         'unchecked from its import line.' % (api, api)
     )
@@ -126,11 +120,7 @@ def test_the_stub_exists(api):
 @pytest.mark.parametrize('api', APIS)
 def test_an_unknown_name_does_not_error(api):
     """Each namespace carries implementation leakage a caller may still touch."""
-    path = stub_for(api)
-    with open(path, encoding='utf-8') as handle:
-        tree = ast.parse(handle.read(), filename=path)
-    assert any(isinstance(node, ast.FunctionDef) and node.name == '__getattr__'
-               for node in tree.body), (
+    assert '__getattr__' in declared(api), (
         'without a module __getattr__ the stub makes every name it does not '
         'list an error, which is worse than having no stub.'
     )
@@ -139,10 +129,8 @@ def test_an_unknown_name_does_not_error(api):
 @pytest.mark.parametrize('api', APIS)
 def test_it_covers_the_namespace_the_package_offers(api):
     module = pytest.importorskip('OpenGL.%s' % (api,))
-    prefix = {'GLU': ('glu', 'GLU_'), 'GLE': ('gle', 'GLE_'),
-              'GLUT': ('glut', 'GLUT_')}[api]
     offered = {name for name in dir(module)
-               if name.startswith(prefix) and not name.startswith('_')
+               if name.startswith(PREFIXES[api]) and not name.startswith('_')
                and not inspect.ismodule(getattr(module, name))}
     missing = sorted(offered - set(declared(api)))
     assert not missing, (

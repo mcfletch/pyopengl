@@ -14,13 +14,13 @@ mapping, a swap under vsync.
 
 import os
 
+import paths
 import pytest
 
 from cdispatch import blocking, emit_c, extract
 
-HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-PACKAGE = os.path.join(HERE, 'OpenGL')
-REGISTRY = os.path.join(HERE, 'src', 'khronosapi', 'xml')
+PACKAGE = paths.PACKAGE
+REGISTRY = paths.REGISTRY
 
 pytestmark = pytest.mark.skipif(
     not os.path.isdir(REGISTRY), reason='no Khronos registry checked out'
@@ -86,7 +86,7 @@ class TestEmission:
 # Python 3.10, which is inside this package's supported range.
 @pytest.fixture(scope='module')
 def header():
-    with open(os.path.join(HERE, 'accelerate', 'src', 'c', 'pygl.h'),
+    with open(os.path.join(paths.ROOT, 'accelerate', 'src', 'c', 'pygl.h'),
               encoding='utf-8') as handle:
         return handle.read()
 

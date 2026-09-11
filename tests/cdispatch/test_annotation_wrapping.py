@@ -22,13 +22,13 @@ copies is the only thing it is still for -- generation reads the table alone
 
 import os
 
+import paths
 import pytest
 
 from cdispatch import annotations, extract
 
-HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-PACKAGE = os.path.join(HERE, 'OpenGL')
-REGISTRY = os.path.join(HERE, 'src', 'khronosapi', 'xml')
+PACKAGE = paths.PACKAGE
+REGISTRY = paths.REGISTRY
 
 pytestmark = pytest.mark.skipif(
     not os.path.isdir(REGISTRY), reason='no Khronos registry checked out'
@@ -86,10 +86,10 @@ class TestTheChainsAreASecondCopy:
         import sys
 
         completed = subprocess.run(
-            [sys.executable, os.path.join(HERE, 'src', 'absorb_chains.py')],
+            [sys.executable, os.path.join(paths.ROOT, 'src', 'absorb_chains.py')],
             capture_output=True,
             text=True,
-            cwd=HERE,
+            cwd=paths.ROOT,
             timeout=300,
         )
         assert completed.returncode == 0, completed.stderr
@@ -195,6 +195,6 @@ class TestTheAnnotationsShip:
     def test_the_wheel_carries_them(self):
         """package-data has to name the file, or it is built and left out --
         which is what happened to the declarations themselves."""
-        with open(os.path.join(HERE, 'pyproject.toml'), encoding='utf-8') as handle:
+        with open(os.path.join(paths.ROOT, 'pyproject.toml'), encoding='utf-8') as handle:
             text = handle.read()
         assert 'raw/_declarations/*.dat' in text

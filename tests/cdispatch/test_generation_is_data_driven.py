@@ -15,13 +15,13 @@ test rather than a habit.
 
 import os
 
+import paths
 import pytest
 
 from cdispatch import annotations, emit_c, extract
 
-HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-PACKAGE = os.path.join(HERE, 'OpenGL')
-REGISTRY = os.path.join(HERE, 'src', 'khronosapi', 'xml')
+PACKAGE = paths.PACKAGE
+REGISTRY = paths.REGISTRY
 
 pytestmark = pytest.mark.skipif(
     not os.path.isdir(REGISTRY), reason='no Khronos registry checked out'

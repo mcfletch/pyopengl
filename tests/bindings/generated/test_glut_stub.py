@@ -16,27 +16,13 @@ import os
 
 import paths
 import pytest
+import stubs
 
-PACKAGE = os.path.join(paths.ROOT, 'OpenGL')
-STUB = os.path.join(PACKAGE, 'GLUT', '__init__.pyi')
+PACKAGE = paths.PACKAGE
+#: The stub, package-relative, as ``tests/stubs.py`` names one.
+STUB = os.path.join('GLUT', '__init__.pyi')
 
-
-def declared():
-    """{name: node} for everything the stub declares at module level."""
-    if not os.path.exists(STUB):
-        return {}
-    with open(STUB, encoding='utf-8') as handle:
-        tree = ast.parse(handle.read(), filename=STUB)
-    found = {}
-    for node in tree.body:
-        if isinstance(node, ast.FunctionDef):
-            found[node.name] = node
-        elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name):
-            found[node.target.id] = node
-    return found
-
-
-DECLARED = declared()
+DECLARED = stubs.declarations(STUB)
 
 #: What a first GLUT program touches, across every shape the namespace holds:
 #: a raw entry point, a freeglut one, a callback, a menu, a font pointer, and
@@ -55,7 +41,7 @@ ESSENTIALS = [
 
 
 def test_the_stub_exists():
-    assert os.path.exists(STUB), (
+    assert stubs.tree(STUB) is not None, (
         'OpenGL/GLUT/__init__.pyi is missing, so every GLUT program is '
         'unchecked from its import line.'
     )
@@ -101,10 +87,7 @@ def test_a_callback_setter_takes_the_callback():
 
 def test_an_unknown_name_does_not_error():
     """The namespace carries implementation leakage a caller may still touch."""
-    with open(STUB, encoding='utf-8') as handle:
-        tree = ast.parse(handle.read(), filename=STUB)
-    assert any(isinstance(node, ast.FunctionDef) and node.name == '__getattr__'
-               for node in tree.body), (
+    assert '__getattr__' in stubs.declarations(STUB), (
         'without a module __getattr__ the stub makes every name it does not '
         'list an error, which is worse than having no stub.'
     )

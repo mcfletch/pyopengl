@@ -12,13 +12,13 @@ the registry names that ``EGL/_types.py`` did not define.
 
 import os
 
+import paths
 import pytest
 
 from cdispatch import eglgen
 
-HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-PACKAGE = os.path.join(HERE, 'OpenGL')
-EGL_XML = os.path.join(HERE, 'src', 'eglapi', 'api', 'egl.xml')
+PACKAGE = paths.PACKAGE
+EGL_XML = os.path.join(paths.ROOT, 'src', 'eglapi', 'api', 'egl.xml')
 
 pytestmark = pytest.mark.skipif(
     not os.path.exists(EGL_XML),

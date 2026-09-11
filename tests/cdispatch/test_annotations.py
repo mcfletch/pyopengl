@@ -13,13 +13,13 @@ tree says, or the table is a second source of truth rather than the only one.
 
 import os
 
+import paths
 import pytest
 
 from cdispatch import annotations, extract, model
 
-HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-PACKAGE = os.path.join(HERE, 'OpenGL')
-REGISTRY = os.path.join(HERE, 'src', 'khronosapi', 'xml')
+PACKAGE = paths.PACKAGE
+REGISTRY = paths.REGISTRY
 
 pytestmark = pytest.mark.skipif(
     not os.path.isdir(REGISTRY), reason='no Khronos registry checked out'

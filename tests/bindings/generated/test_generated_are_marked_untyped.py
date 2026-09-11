@@ -23,7 +23,7 @@ import mark_generated_untyped
 import paths
 import pytest
 
-PACKAGE = os.path.join(paths.ROOT, 'OpenGL')
+PACKAGE = paths.PACKAGE
 
 
 def generated_modules():

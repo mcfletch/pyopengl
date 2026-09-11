@@ -9,17 +9,17 @@ one description in one place.
 
 import os
 
+import paths
 import pytest
 
 from cdispatch import extract, model
 
-HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 @pytest.fixture(scope='module')
 def commands():
     """Every binding PyOpenGL ships, keyed by ``(api, name)``."""
-    return extract.extract_tree(os.path.join(HERE, 'OpenGL'))
+    return extract.extract_tree(os.path.join(paths.ROOT, 'OpenGL'))
 
 
 @pytest.fixture(scope='module')

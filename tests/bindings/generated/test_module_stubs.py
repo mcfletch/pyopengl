@@ -20,7 +20,7 @@ import pytest
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = paths.ROOT
-PACKAGE = os.path.join(ROOT, 'OpenGL')
+PACKAGE = paths.PACKAGE
 
 #: A spread: a core version, two extensions, and a second API namespace.
 SAMPLE = [

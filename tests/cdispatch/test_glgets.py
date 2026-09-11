@@ -9,12 +9,12 @@ numbers.
 
 import os
 
+import paths
 import pytest
 
 from cdispatch import glgets
 
-HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-PACKAGE = os.path.join(HERE, 'OpenGL')
+PACKAGE = paths.PACKAGE
 
 
 @pytest.fixture(scope='module')

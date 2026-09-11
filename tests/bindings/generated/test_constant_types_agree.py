@@ -21,8 +21,9 @@ import os
 
 import paths
 import pytest
+import stubs
 
-PACKAGE = os.path.join(paths.ROOT, 'OpenGL')
+PACKAGE = paths.PACKAGE
 
 #: Every raw ``_types`` module.  Only the GL one defines these constants; the
 #: GLES ones reach them by star-importing along the chain, so annotating the
@@ -37,22 +38,19 @@ PAIRINGS = [('raw/GL/_types.py', 'GL/__init__.pyi')]
 
 
 def _declared_types(relative):
-    """{name: annotation} for every annotated module-level GL constant."""
-    path = os.path.join(PACKAGE, relative)
-    with open(path, encoding='utf-8') as handle:
-        tree = ast.parse(handle.read(), filename=path)
-    found = {}
-    for node in tree.body:
-        if (isinstance(node, ast.AnnAssign)
-                and isinstance(node.target, ast.Name)
-                and node.target.id.startswith('GL_')):
-            found[node.target.id] = ast.unparse(node.annotation)
-    return found
+    """{name: annotation} for every annotated module-level GL constant.
+
+    The raw module and the stub are read the same way, which is the point:
+    what the two say about one name has to be the same string.
+    """
+    return {name: annotation
+            for name, annotation in stubs.annotations(relative).items()
+            if name.startswith('GL_')}
 
 
 @pytest.mark.parametrize('source,stub', PAIRINGS, ids=[s for s, _t in PAIRINGS])
 def test_the_raw_module_and_the_stub_declare_a_constant_alike(source, stub):
-    if not os.path.exists(os.path.join(PACKAGE, source)):
+    if stubs.tree(source) is None:
         pytest.skip('%s has no raw _types module' % (source,))
     raw = _declared_types(source)
     generated = _declared_types(stub)
@@ -87,11 +85,9 @@ def test_the_stub_declares_every_constant_the_raw_module_defines(source, stub):
 @pytest.mark.parametrize('source', RAW_TYPES)
 def test_every_constant_the_raw_module_defines_says_what_it_is(source):
     """An unannotated one is inferred as ``Constant``, which is not an ``int``."""
-    path = os.path.join(PACKAGE, source)
-    if not os.path.exists(path):
+    tree = stubs.tree(source)
+    if tree is None:
         pytest.skip('%s has no raw _types module' % (source,))
-    with open(path, encoding='utf-8') as handle:
-        tree = ast.parse(handle.read(), filename=path)
     bare = [target.id
             for node in tree.body if isinstance(node, ast.Assign)
             for target in node.targets

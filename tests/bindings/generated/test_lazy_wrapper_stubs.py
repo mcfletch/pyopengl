@@ -23,13 +23,15 @@ import re
 
 import paths
 import pytest
+import stubs
 
-PACKAGE = os.path.join(paths.ROOT, 'OpenGL')
+PACKAGE = paths.PACKAGE
 #: A wrapper is held against the stub for *its own* namespace: a name may be
 #: wrapped in GLES3 and not in GL, and comparing across the two asks the wrong
 #: question.
 def _api_stub(api):
-    return os.path.join(PACKAGE, api, '__init__.pyi')
+    """The API's stub, package-relative, as ``tests/stubs.py`` names one."""
+    return os.path.join(api, '__init__.pyi')
 
 
 def _required_of(definition):
@@ -77,19 +79,13 @@ def lazy_wrappers():
 
 def stub_minimums(api):
     """The fewest positional arguments each stubbed name will accept."""
-    path = _api_stub(api)
-    if not os.path.exists(path):
-        return {}
-    with open(path, encoding='utf-8') as handle:
-        tree = ast.parse(handle.read(), filename=path)
     fewest = {}
-    for node in tree.body:
-        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-            continue
-        arguments = node.args
-        positional = arguments.posonlyargs + arguments.args
-        required = len(positional) - len(arguments.defaults)
-        fewest[node.name] = min(fewest.get(node.name, required), required)
+    for name, node in stubs.every_function(_api_stub(api)):
+        # The fewest across every declaration of the name: an `@overload` pair
+        # declares the C form and the Pythonic one, and a call satisfying
+        # either is one a checker accepts.
+        required = len(stubs.parameters(node)) - len(node.args.defaults)
+        fewest[name] = min(fewest.get(name, required), required)
     return fewest
 
 

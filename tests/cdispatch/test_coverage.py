@@ -8,13 +8,13 @@ job runs to decide whether a registry update needs a human.
 
 import os
 
+import paths
 import pytest
 
 from cdispatch import emit_c, extract, upstream
 
-HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-PACKAGE = os.path.join(HERE, 'OpenGL')
-REGISTRY = os.path.join(HERE, 'src', 'khronosapi', 'xml')
+PACKAGE = paths.PACKAGE
+REGISTRY = paths.REGISTRY
 
 pytestmark = pytest.mark.skipif(
     not os.path.isdir(REGISTRY),

@@ -23,7 +23,7 @@ from childenv import child_environment
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = paths.ROOT
-PACKAGE = os.path.join(ROOT, 'OpenGL')
+PACKAGE = paths.PACKAGE
 
 #: Enough to prove the tables were read: a raw module that is synthesised, a
 #: name it declares, and the friendly import that reaches for it first.
