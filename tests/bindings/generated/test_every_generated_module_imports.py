@@ -20,6 +20,7 @@ import pkgutil
 
 import paths
 import pytest
+from backends import egl_refusal
 
 #: The API namespaces, each imported on its own so a failure names the one it
 #: is in rather than stopping at the first.
@@ -39,7 +40,18 @@ def _modules_under(namespace):
 
 def _collect():
     found = []
+    refused = egl_refusal()
     for namespace in NAMESPACES:
+        if namespace == 'EGL' and refused is not None:
+            # No EGL library here, and the binding refuses to import without
+            # one -- which is what it promises.  A machine that has one walks
+            # this namespace.
+            found.append(pytest.param(
+                'OpenGL.EGL', id='OpenGL.EGL',
+                marks=pytest.mark.skip(
+                    reason='OpenGL.EGL does not import here: %s' % (refused,)),
+            ))
+            continue
         try:
             found.extend(_modules_under(namespace))
         except ImportError as error:      # the namespace itself is broken

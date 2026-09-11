@@ -178,3 +178,21 @@ def has_window_server(environ=None, platform=None):
         environ.get('DISPLAY', '').strip()
         or environ.get('WAYLAND_DISPLAY', '').strip()
     )
+
+
+def egl_refusal():
+    """The ``ImportError`` importing ``OpenGL.raw.EGL`` raises here, or None.
+
+    Where there is no EGL library -- macOS and Windows have none, and a Linux
+    machine may lack one -- the raw binding refuses to import at all, so every
+    declaration and module under it is out of reach on that machine.  Asked by
+    importing it, which is how the platform answers, rather than by reading the
+    platform's attributes.
+    """
+    import importlib
+
+    try:
+        importlib.import_module('OpenGL.raw.EGL')
+    except ImportError as error:
+        return error
+    return None

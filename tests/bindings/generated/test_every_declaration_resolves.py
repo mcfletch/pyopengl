@@ -19,6 +19,7 @@ without one raises only on the path that builds a binding.
 import importlib
 
 import pytest
+from backends import egl_refusal
 
 from OpenGL._declarations import (
     APIS,
@@ -26,6 +27,23 @@ from OpenGL._declarations import (
     api_of,
     data_declarations,
 )
+
+#: Why ``OpenGL.raw.EGL`` will not import on this machine, or None where it
+#: does.  With no EGL library -- macOS and Windows have none -- the raw binding
+#: refuses at import, so nothing declared under it can be resolved or bound
+#: here.  The tables are the same everywhere, and a machine with EGL checks
+#: that part of them.
+EGL_REFUSED = egl_refusal()
+
+
+def reachable(declaration):
+    """Whether this machine can import what `declaration` is declared in."""
+    return not (EGL_REFUSED is not None and declaration.api == 'EGL')
+
+
+def skip_unreachable(api):
+    if api == 'EGL' and EGL_REFUSED is not None:
+        pytest.skip('OpenGL.raw.EGL does not import here: %s' % (EGL_REFUSED,))
 
 
 def _declarations():
@@ -61,7 +79,7 @@ def test_every_declared_type_resolves():
     way to find that out.
     """
     unresolved = []
-    for declaration in DECLARATIONS:
+    for declaration in filter(reachable, DECLARATIONS):
         try:
             declaration._resolve_types()
         except Exception as error:
@@ -73,6 +91,7 @@ def test_every_declared_type_resolves():
 @pytest.mark.parametrize('api', sorted(APIS))
 def test_an_api_that_is_generated_has_an_error_checker(api):
     """Every declaration in an API reads ``_errors._error_checker``."""
+    skip_unreachable(api)
     errors = importlib.import_module('OpenGL.raw.%s._errors' % (api,))
     assert hasattr(errors, '_error_checker')
 
@@ -86,6 +105,7 @@ def test_a_binding_can_be_built_for_each_api(api):
     One per API exercises the rest of the path -- the platform lookup and the
     error checker -- without that.
     """
+    skip_unreachable(api)
     for declaration in DECLARATIONS:
         if declaration.api != api:
             continue

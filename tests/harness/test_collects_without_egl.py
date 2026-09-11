@@ -1,4 +1,4 @@
-"""The suite collects on a platform that has no EGL library.
+"""The suite collects, and its sweeps pass, on a platform that has no EGL library.
 
 EGL ships with the graphics driver, and macOS has none at all -- so
 ``import OpenGL.EGL`` there raises ``ImportError`` naming the missing library.
@@ -17,7 +17,9 @@ Two things make it easy to get wrong, and both are worth stating:
 
 So the check is what the platform would do rather than a rule about imports: a
 child that answers every ``OpenGL.raw.EGL`` import the way a machine with no
-library does, collecting the same suite.
+library does, collecting the same suite -- and running the cases that reach
+every API by construction, which have to leave EGL out there rather than fail
+on it.
 """
 
 import importlib.util
@@ -44,7 +46,7 @@ def windowed_backend():
             return name
     return None
 
-COLLECT = r'''
+WITHOUT_EGL = r'''
 import sys
 
 
@@ -63,12 +65,12 @@ sys.meta_path.insert(0, NoEGLLibrary())
 
 import pytest
 
-sys.exit(pytest.main(['-q', '--collect-only', %r]))
+sys.exit(pytest.main(%r))
 '''
 
 
-def collect(target):
-    """Collect `target` on a machine with no EGL; answer what pytest said."""
+def without_egl(arguments):
+    """Run pytest with `arguments` on a machine with no EGL; answer what it said."""
     backend = windowed_backend()
     if backend is None:
         pytest.skip('no windowed backend installed to collect the GL suites on')
@@ -76,9 +78,14 @@ def collect(target):
     # interface the entry points load through -- which is the one being taken
     # away, so the child is given none.
     return run_in_child(
-        COLLECT % (target,), check=False,
+        WITHOUT_EGL % (list(arguments),), check=False,
         TEST_WINDOWING=backend, PYOPENGL_PLATFORM=None,
     )
+
+
+def collect(target):
+    """Collect `target` on a machine with no EGL; answer what pytest said."""
+    return without_egl(['-q', '--collect-only', target])
 
 
 def test_the_root_suite_collects():
@@ -93,5 +100,24 @@ def test_the_gl_suite_collects():
     completed = collect('tests/gl')
     assert completed.returncode == 0, (
         'collection failed with no EGL library present:\n%s'
+        % (completed.stdout[-3000:] + completed.stderr[-2000:],)
+    )
+
+
+def test_the_sweeps_over_every_api_pass():
+    """Past collecting: the cases that reach every API by construction.
+
+    They walk every declaration in the tables and every module the package
+    ships, EGL's among them, so on a machine with no EGL library they have to
+    leave EGL out and say so rather than fail on it -- and macOS and Windows
+    are both such machines.
+    """
+    completed = without_egl([
+        '-q', '-p', 'no:cacheprovider',
+        'tests/bindings/generated/test_every_declaration_resolves.py',
+        'tests/bindings/generated/test_every_generated_module_imports.py',
+    ])
+    assert completed.returncode == 0, (
+        'the sweeps failed with no EGL library present:\n%s'
         % (completed.stdout[-3000:] + completed.stderr[-2000:],)
     )
