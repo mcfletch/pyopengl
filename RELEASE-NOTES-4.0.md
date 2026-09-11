@@ -59,6 +59,13 @@ What changed since the 3.x series. The current development version is
   context; a crash when EGL device enumeration met a device that would not
   initialise; a doubly-wrapped entry point that crashed `vertex_array_object`
   on import; and a software/hardware renderer contradiction that dumped core.
+- A `VBO` garbage-collected while a different context was current deleted that
+  context's buffer of the same number -- every context numbers its buffers from
+  1 -- and the other context's next draw came up empty. A `VBO` now deletes its
+  buffer only in the context that made it, recognised through
+  `OpenGL.dispatch.context_identity()` even where the driver has since given
+  that context's handle to a new one, and otherwise leaves the buffer to its
+  context. A program that holds GL names of its own can do the same.
 - Output arrays that are too short for what the call was told to write are
   refused rather than handed to the driver.
 

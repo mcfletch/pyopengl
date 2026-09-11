@@ -24,7 +24,9 @@ point, so a process with two contexts of differing capability resolves each of
 them correctly; :func:`make_current` says a context has become current and
 :func:`forget_context` that one has been destroyed.  Both are worth calling
 under either implementation, because both decide which context PyOpenGL checks
-errors in.
+errors in.  :func:`context_identity` is what they make exact for everything
+else: an object standing for the current context, which a destroyed context's
+successor does not share even where the driver gives it the same handle.
 
 Error checking is the other half.  A context that offers ``GL_KHR_debug`` is
 given the cheaper of the two mechanisms without being asked -- the driver
@@ -48,6 +50,7 @@ __all__ = [
     'status',
     'make_current',
     'forget_context',
+    'context_identity',
     'reclaim_retired',
     'set_error_checking',
     'error_checking_mode',
@@ -274,6 +277,8 @@ def forget_context(handle):
         use_debug_output(False)
     _offered.discard(handle)
     _installed_callbacks.pop(handle, None)
+    with _identities_lock:
+        _identities.pop(handle, None)
     _forget_context_data(handle)
     layer = _layer()
     if layer is not None:
@@ -282,6 +287,49 @@ def forget_context(handle):
         _drop_unnamed_arming()
     # The context that was setting the flag may be the one that has just gone.
     _follow_debug_output()
+
+
+#: The identity :func:`context_identity` has handed out for each context, by
+#: address, until :func:`forget_context` says the context at that address is
+#: gone.
+_identities = {}
+_identities_lock = threading.Lock()
+
+
+class ContextIdentity:
+    """Stands for one context for as long as it lives; see :func:`context_identity`."""
+
+    __slots__ = ('address', '__weakref__')
+
+    def __init__(self, address):
+        self.address = address
+
+    def __repr__(self):
+        return '<ContextIdentity for the context at 0x%x>' % (self.address,)
+
+
+def context_identity():
+    """An object standing for the current context, or None where none is current.
+
+    The same object for as long as the context lives, and a different one once
+    :func:`forget_context` has said it is gone -- which the handle cannot say,
+    since the driver hands a destroyed context's address to the next context it
+    makes.  Something that belongs to one context -- a buffer, a texture, a
+    program, all numbered per context from 1 -- keeps this beside its name and
+    compares before using the name, rather than using it in whichever context
+    happens to be current, where the same number is some other object.
+
+    As exact as :func:`forget_context` is told: a context destroyed without it,
+    and another made at the same address, share an identity.
+    """
+    address = _current_context()
+    if not address:
+        return None
+    with _identities_lock:
+        identity = _identities.get(address)
+        if identity is None:
+            identity = _identities[address] = ContextIdentity(address)
+    return identity
 
 
 def _forget_context_data(handle):

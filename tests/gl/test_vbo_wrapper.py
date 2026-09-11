@@ -81,6 +81,31 @@ class TestDrawingFromAVBO(GLTestCase):
         buffer.delete()  # the second one has nothing to do, and must not raise
         self.check_error('deleting a VBO twice')
 
+    def test_a_collected_buffer_is_left_to_the_context_that_made_it(self):
+        """Every context numbers its buffers from 1, so in any other context
+        the name a VBO holds is that context's own buffer.  The other context
+        here is this one's successor: once forget_context has said the context
+        at this handle is gone, the handle names a new one -- as it does when
+        a driver gives a destroyed context's address to the next."""
+        from OpenGL import dispatch, platform
+
+        buffer = vbo.VBO(np.array(POINTS, 'd'))
+        with buffer:
+            pass
+        name = int(buffer)
+        handle = platform.PLATFORM.GetCurrentContext()
+        dispatch.forget_context(handle)
+        dispatch.make_current(handle)
+        del buffer                      # the deleter runs as the VBO goes
+        try:
+            self.assertTrue(
+                glIsBuffer(name),
+                'a collected VBO deleted a buffer in a context it did not '
+                'make the buffer in',
+            )
+        finally:
+            glDeleteBuffers(1, np.array([name], 'I'))
+
 
 class TestPixelsFromAMappedFile(GLTestCase):
     """``numpy.memmap`` as the source array: PyOpenGL does not own the pages.

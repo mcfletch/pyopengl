@@ -2,7 +2,7 @@
 #cython: language_level=3
 import ctypes, weakref
 from OpenGL_accelerate.formathandler cimport FormatHandler
-from OpenGL import error
+from OpenGL import dispatch, error
 from OpenGL._bytes import bytes,unicode
 try:
     long = long
@@ -201,7 +201,11 @@ cdef class VBO:
         self.get_implementation()._DELETERS_[ id(self) ] = weakref.ref(
             # Cython instances can't have weakrefs, sigh...
             self,
-            self.get_implementation().deleter( [self.buffer], id(self) )
+            # With the context the buffer was made in, which is the only one
+            # its name means this buffer in; see OpenGL.arrays.vbo.
+            self.get_implementation().deleter(
+                [self.buffer], id(self), dispatch.context_identity()
+            )
         )
         return self.buffer
     def copy_data( self ):

@@ -218,6 +218,18 @@ context.</p>
 context's table.  A table is a slot and a flag per entry point, about
 43 KB, so a hundred live contexts cost 4.3 MB.</p>
 
+<p><code>OpenGL.dispatch.context_identity()</code> answers an object standing
+for the current context: the same object for as long as the context lives, and a
+different one once <code>forget_context</code> has been told it is gone, even
+where the driver gives the next context the same handle.  Buffers, textures and
+programs are numbered per context from 1, so a name kept past its context is, in
+the next one, some other object; keep the identity beside the name and compare
+before using it.  <code>OpenGL.arrays.vbo.VBO</code> does this before it deletes
+its buffer when it is garbage-collected, and leaves the buffer to its context
+otherwise.  It is as exact as <code>forget_context</code> is told: a context
+destroyed without it, and another made at the same address, share an
+identity.</p>
+
 <h3>A glBegin block and the life of a context</h3>
 
 <p>A <code>glBegin</code> block is closed in the context that opened it.  A

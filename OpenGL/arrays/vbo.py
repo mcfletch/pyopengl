@@ -35,7 +35,7 @@ from OpenGL.arrays.arraydatatype import ArrayDatatype
 from OpenGL.arrays.formathandler import FormatHandler
 from OpenGL.raw.GL import _types
 from OpenGL._scalar import as_int
-from OpenGL import error, platform
+from OpenGL import dispatch, error, platform
 from OpenGL._bytes import bytes, unicode, as_8_bit
 import ctypes, logging
 
@@ -109,25 +109,35 @@ class Implementation(object):
 
     __bool__ = __nonzero__
 
-    def deleter(self, buffers, key):
-        """Produce a deleter callback to delete the given buffer"""
+    def deleter(self, buffers, key, owner):
+        """Produce a deleter callback to delete the given buffers
+
+        owner -- the :func:`OpenGL.dispatch.context_identity` of the context
+            the buffers were made in; they are deleted only while that same
+            context is current
+        """
         # these values are stored here to avoid them being cleaned up
         # to non during module deletion and causing errors to be raised
         nfe = error.NullFunctionError
         gluint = _types.GLuint
-        get_current = platform.GetCurrentContext
+        current_identity = dispatch.context_identity
 
         def doBufferDeletion(*args, **named):
             # A deleter runs from a weakref callback, so it runs wherever the
             # collector happened to be -- which for a program that loads in the
             # background is as likely as not a worker thread, with no GL context
-            # current on it at all. Deleting a buffer there cannot work: buffer
-            # names belong to the context that made them, so the call either
-            # does nothing or, on some drivers, takes the process down. The
-            # names are dropped instead; the driver frees them with the context
-            # they belong to.
+            # current on it at all, and in a program with more than one context
+            # as likely as not while another one is current. Buffer names belong
+            # to the context that made them and every context numbers its own
+            # from 1: with none current the call does nothing or, on some
+            # drivers, takes the process down, and with another current it
+            # deletes that context's buffer of the same number. So the names
+            # are deleted only in their own context -- which a handle alone
+            # cannot recognise once the driver has given its address to a new
+            # one -- and dropped anywhere else; the driver frees them with the
+            # context they belong to.
             try:
-                deletable = bool(get_current())
+                deletable = owner is not None and current_identity() is owner
             except Exception:
                 # Asked during interpreter shutdown, where what it needs may
                 # already be gone. Nothing can be freed then either.
@@ -346,7 +356,10 @@ if VBO is None:
             self.target = self.resolve(self.target)
             self.usage = self.resolve(self.usage)
             self.implementation._DELETERS_[id(self)] = weakref.ref(
-                self, self.implementation.deleter(self.buffers, id(self))
+                self,
+                self.implementation.deleter(
+                    self.buffers, id(self), dispatch.context_identity()
+                ),
             )
             return self.buffers
 
