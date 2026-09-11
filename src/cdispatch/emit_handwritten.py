@@ -27,6 +27,8 @@ the part worth reading.
 import ast
 import os
 
+from . import emit_pyi
+
 __all__ = ['declarations', 'emit_handwritten', 'emit_api', 'APIS',
            'CTYPES_ANNOTATION']
 
@@ -147,12 +149,10 @@ def _base_function(node, call):
     return node, arguments, result
 
 
-def _parameter(name):
-    """A name a stub may use: registry and header names include keywords."""
-    import keyword as keyword_module
-    if keyword_module.iskeyword(name) or not name.isidentifier():
-        return '%s_' % (name,)
-    return name
+#: A name a stub may use, spelled the way the registry-driven emitter spells
+#: it: the two write into one package, and a parameter renamed in one and not
+#: the other is a name a caller cannot pass.
+_parameter = emit_pyi.parameter_name
 
 
 def _font_names(tree):
@@ -198,18 +198,58 @@ def _lazy_wrapper(node):
     return None
 
 
+def _factory_declaration(node, lines):
+    """Declare ``name = factory(...)`` into ``lines``, by the factory called.
+
+    A closed set of four, matched on the last segment of the call rather than
+    by suffix: each is reached through whichever module the file imported it
+    from -- ``platform.createBaseFunction``, a bare ``Constant`` -- while a
+    suffix test would take ``enums.MyConstant`` for ``Constant`` and declare a
+    wrapper as an integer.  Anything else is left to the readers that follow.
+    """
+    name = node.targets[0].id
+    call = node.value
+    called = ast.unparse(call.func).rsplit('.', 1)[-1]
+    if called == 'createBaseFunction':
+        _name, arguments, result = _base_function(name, call)
+        lines[name] = 'def %s(%s) -> %s: ...' % (
+            name, ', '.join(arguments), result)
+    elif called == 'Constant':
+        lines[name] = '%s: int' % (name,)
+    elif called == 'GLUTCallback':
+        # The wrapper takes the function GLUT will call back on, and answers
+        # the one it replaced -- which is how a program puts a callback back
+        # when it is done with its own.
+        lines[name] = ('def %s(function: Callable[..., Any] | None)'
+                       ' -> Any: ...' % (name,))
+    elif called == 'GLUTTimerCallback':
+        lines[name] = ('def %s(milliseconds: int,'
+                       ' function: Callable[..., Any] | None,'
+                       ' value: int) -> Any: ...' % (name,))
+
+
 def _wrapper_built(package_root, api):
     """{name: line} for the entry points ``OpenGL.wrapper`` reshapes.
 
     These take fewer arguments than the C form, and which ones go is decided by
     the wrapper as it is built.  Asking it is the only account of that which
     cannot drift from the one a caller meets.
+
+    An API that will not import stops the generation rather than answering
+    "none".  A stub written without these carries the C form of every call a
+    program makes with fewer arguments -- which is the defect that cost
+    4.0.0a4 a re-release over ``glDeleteTextures`` -- and it would be written
+    with the run reporting success.
     """
     lines = {}
     try:
         module = __import__('OpenGL.%s' % (api,), {}, {}, ['*'])
-    except Exception:                           # pragma: no cover - a partial tree
-        return lines
+    except Exception as err:
+        raise RuntimeError(
+            'OpenGL.%s could not be imported, so the entry points its wrapper '
+            'reshapes cannot be read; a stub written now would declare the C '
+            'form of each of them. Install what %s needs and generate again. '
+            '(%s: %s)' % (api, api, type(err).__name__, err)) from err
     for name in dir(module):
         if name.startswith('_') or not name.startswith(PREFIXES[api]):
             continue
@@ -262,24 +302,7 @@ def declarations(package_root, api):
                 continue
             if not isinstance(node.value, ast.Call):
                 continue
-            name, call = target.id, node.value
-            called = ast.unparse(call.func)
-            if called.endswith('createBaseFunction'):
-                _name, arguments, result = _base_function(name, call)
-                lines[name] = 'def %s(%s) -> %s: ...' % (
-                    name, ', '.join(arguments), result)
-            elif called.endswith('Constant'):
-                lines[name] = '%s: int' % (name,)
-            elif called.endswith('GLUTCallback'):
-                # The wrapper takes the function GLUT will call back on, and
-                # answers the one it replaced -- which is how a program puts a
-                # callback back when it is done with its own.
-                lines[name] = ('def %s(function: Callable[..., Any] | None)'
-                               ' -> Any: ...' % (name,))
-            elif called.endswith('GLUTTimerCallback'):
-                lines[name] = ('def %s(milliseconds: int,'
-                               ' function: Callable[..., Any] | None,'
-                               ' value: int) -> Any: ...' % (name,))
+            _factory_declaration(node, lines)
         for name, line in _hand_written(tree, prefixes).items():
             lines[name] = line
     # The wrapper-built forms outrank the C ones they were built over, and the
