@@ -153,6 +153,25 @@ def _linux():
     return None
 
 
+def _angle():
+    """An ANGLE this machine can load, which is never a given.
+
+    ANGLE is not installed system-wide anywhere: it travels inside browsers and
+    Electron applications, so a machine may hold several copies of different
+    ages and no two alike. ``PYOPENGL_ANGLE_PATH`` names the one to use, and
+    without it there is nothing to test against.
+    """
+    from OpenGL.platform.angle import ANGLE_PATH
+
+    directory = os.environ.get(ANGLE_PATH)
+    if not directory:
+        return ('no ANGLE named; set %s to a directory holding libEGL.dll '
+                'and libGLESv2.dll' % (ANGLE_PATH,))
+    if not os.path.isfile(os.path.join(directory, 'libEGL.dll')):
+        return '%s names %r, which holds no libEGL.dll' % (ANGLE_PATH, directory)
+    return None
+
+
 #: What a ``# requires:`` word means, as a function answering the reason it is
 #: not satisfied (or ``None``).  ``implies`` chains them, so ``glx`` need not
 #: restate that raw X11 needs a window server.
@@ -162,6 +181,7 @@ REQUIREMENTS = {
     'xlib': (lambda: None, ('window-server',)),
     'glx': (_linux, ('xlib',)),
     'glut': (_glut, ('window-server',)),
+    'angle': (_angle, ()),
 }
 
 

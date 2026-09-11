@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <title>OpenGL ES through ANGLE</title><link rel="stylesheet" type="text/css" href="style/tutorial.css">
+</head>
+<body>
+
+<h1>OpenGL ES through ANGLE</h1>
+
+<p>Windows has no EGL and no OpenGL ES of its own: its OpenGL is desktop GL
+through WGL, and an ES program has nothing to bind to.  <strong>ANGLE</strong>
+supplies both, translating OpenGL ES onto Direct3D&nbsp;11, and
+<code>PYOPENGL_PLATFORM=angle</code> is the platform module that binds PyOpenGL
+to it.</p>
+
+<pre>set PYOPENGL_PLATFORM=angle
+set PYOPENGL_ANGLE_PATH=C:\path\to\angle</pre>
+
+<p>With those set, <code>OpenGL.EGL</code> and <code>OpenGL.GLES2</code> behave
+as they do on Linux &#8212; choose a config, make a pbuffer current, render and
+read back, with no window anywhere:</p>
+
+<pre>from OpenGL.EGL import (
+    EGL_DEFAULT_DISPLAY, EGL_OPENGL_ES_API, eglBindAPI, eglGetDisplay,
+    eglInitialize, eglMakeCurrent,
+)
+from OpenGL.GLES2 import GL_COLOR_BUFFER_BIT, glClear, glClearColor
+
+display = eglGetDisplay(EGL_DEFAULT_DISPLAY)
+eglInitialize(display, major, minor)
+eglBindAPI(EGL_OPENGL_ES_API)
+...                                  # config, pbuffer surface, context
+glClearColor(0.25, 0.5, 0.75, 1.0)
+glClear(GL_COLOR_BUFFER_BIT)</pre>
+
+<h2>It is asked for, never guessed at</h2>
+
+<p>Nothing selects this platform on its own.  A Windows machine's OpenGL is
+WGL's, and a program that did not ask for ES should go on getting desktop GL
+from the driver &#8212; so naming it in <code>PYOPENGL_PLATFORM</code> is the
+whole of how it is chosen.  That is also why it is safe for it to supply no
+desktop GL at all: nothing lands here by accident.</p>
+
+<h2>OpenGL ES, and only OpenGL ES</h2>
+
+<p>ANGLE is an ES implementation.  It advertises an
+<code>EGL_CLIENT_APIS</code> of <code>OpenGL_ES</code>, offers no framebuffer
+config carrying <code>EGL_OPENGL_BIT</code>, and answers
+<code>eglBindAPI(EGL_OPENGL_API)</code> with <code>EGL_BAD_PARAMETER</code>.</p>
+
+<p>So this platform's <code>GL</code> is <code>None</code>, which is what
+PyOpenGL means by "this platform has no such library": <code>OpenGL.GL</code>
+still imports, and calling a desktop-only entry point raises
+<code>NullFunctionError</code> naming the function.  A platform that answered
+<code>opengl32</code> for <code>GL</code> instead would hand back a desktop
+entry point from a binding that had promised ES, and the mismatch would surface
+somewhere far away from the cause.</p>
+
+<pre>&gt;&gt;&gt; from OpenGL.GL import glBegin, GL_TRIANGLES     # imports
+&gt;&gt;&gt; glBegin(GL_TRIANGLES)
+NullFunctionError: Attempt to call an undefined function glBegin</pre>
+
+<p>ES&nbsp;1, ES&nbsp;2 and ES&nbsp;3 are one library here.
+<code>libGLESv2.dll</code> carries <code>glCreateShader</code> and
+<code>glDrawArraysInstanced</code> as expected, and <code>glAlphaFunc</code> and
+<code>glMatrixMode</code> besides &#8212; ANGLE's ES&nbsp;1 emulation lives in
+the same file &#8212; so <code>GLES1</code>, <code>GLES2</code> and
+<code>GLES3</code> all answer with it.</p>
+
+<h2>Where the DLLs come from</h2>
+
+<p>ANGLE is not installed system-wide on any platform.  It travels inside
+applications &#8212; every Chromium browser and every Electron application
+carries a copy &#8212; so one machine may hold several, of different ages and
+built against different Direct3D feature levels.  There is therefore no sensible
+default, and <code>PYOPENGL_ANGLE_PATH</code> names the directory holding
+<code>libEGL.dll</code> and <code>libGLESv2.dll</code>.  That directory is added
+to the DLL search path before the load, so ANGLE's own dependencies &#8212; its
+Direct3D shader compiler, and the SwiftShader library it falls back to &#8212;
+resolve beside it rather than against whatever is on <code>PATH</code>.</p>
+
+<p>Without the variable the ordinary library search runs, which finds an ANGLE
+that has been put on <code>PATH</code> and nothing otherwise.  Asking for the
+platform on a machine with no ANGLE fails when the platform is selected, naming
+the variable to set: every entry point this platform has comes out of those two
+files, so there is nothing it could usefully do instead.</p>
+
+<h2>What it reports</h2>
+
+<p>A context from a recent ANGLE on ordinary integrated hardware:</p>
+
+<pre>EGL         1.5 (ANGLE 2.1)
+GL_VENDOR   Google Inc. (Intel)
+GL_RENDERER ANGLE (Intel, Intel(R) UHD Graphics 630, Direct3D11 vs_5_0 ps_5_0)
+GL_VERSION  OpenGL ES 3.0 (ANGLE 2.1)
+GLSL        OpenGL ES GLSL ES 3.00</pre>
+
+<p>The ES version depends on the ANGLE build and on what the Direct3D feature
+level beneath it supports; ask <code>glGetString(GL_VERSION)</code> rather than
+assuming.</p>
+
+<h2>Desktop GL on Windows</h2>
+
+<p>This platform is for ES.  For desktop OpenGL on Windows, use WGL, which is
+the platform PyOpenGL selects there by default; for desktop OpenGL with nothing
+on screen, see <a href="wgl-offscreen.html">Offscreen OpenGL on Windows</a>,
+which renders into a pbuffer the display driver allocates.</p>
+
+</body></html>

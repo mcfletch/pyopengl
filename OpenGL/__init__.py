@@ -291,6 +291,10 @@ PlatformPlugin("glx", "OpenGL.platform.linux.LinuxPlatform")
 PlatformPlugin("posix", "OpenGL.platform.linux.LinuxPlatform")
 PlatformPlugin("x11", "OpenGL.platform.linux.LinuxPlatform")  # xdg session type
 PlatformPlugin("osmesa", "OpenGL.platform.osmesa.OSMesaPlatform")
+# ANGLE supplies EGL and OpenGL ES on a machine whose own GL is not ES -- which
+# on Windows is every machine. Asked for by name and never guessed at: it has
+# no desktop GL to offer, so nothing should land on it by accident.
+PlatformPlugin("angle", "OpenGL.platform.angle.ANGLEPlatform")
 PlatformPlugin("egl", "OpenGL.platform.linux.LinuxPlatform")
 PlatformPlugin("wayland", "OpenGL.platform.linux.LinuxPlatform")  # xdg session type
 PlatformPlugin("xwayland", "OpenGL.platform.linux.LinuxPlatform")  # xdg session type

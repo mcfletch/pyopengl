@@ -156,6 +156,45 @@ optional there.
 .. _`Offscreen OpenGL on macOS`: https://mcfletch.github.io/pyopengl/documentation/cgl-offscreen.html
 
 
+OpenGL ES through ANGLE
+------------------------
+
+Windows has no EGL and no OpenGL ES of its own.  ANGLE supplies both, by
+translating ES onto Direct3D 11, and ``PYOPENGL_PLATFORM=angle`` is how
+PyOpenGL binds to it::
+
+    PYOPENGL_PLATFORM=angle
+    PYOPENGL_ANGLE_PATH=C:\path\to\angle     # holding libEGL.dll, libGLESv2.dll
+
+With those set, ``OpenGL.EGL`` and ``OpenGL.GLES2`` work as they do on Linux:
+pick a config, make a pbuffer current, and render with no window::
+
+    from OpenGL.EGL import eglGetDisplay, eglInitialize, eglBindAPI, ...
+    from OpenGL.GLES2 import glClear, glClearColor, glReadPixels
+
+The platform is chosen by asking for it and never by guessing.  A Windows
+machine's OpenGL is WGL's, and a program that did not ask for ES goes on
+getting desktop GL from the driver.
+
+**It supplies OpenGL ES only.**  ANGLE has no desktop GL: it advertises
+``EGL_CLIENT_APIS`` of ``OpenGL_ES``, offers no config carrying
+``EGL_OPENGL_BIT``, and refuses ``eglBindAPI(EGL_OPENGL_API)``.  So this
+platform's ``GL`` is ``None``, ``OpenGL.GL`` still imports, and calling a
+desktop-only entry point raises ``NullFunctionError`` naming it rather than
+binding to something that is not there.  ES 1, 2 and 3 all come from
+``libGLESv2.dll``, ANGLE's ES 1 emulation included.
+
+``PYOPENGL_ANGLE_PATH`` is needed because ANGLE is not installed system-wide:
+it travels inside browsers and Electron applications, so a machine may hold
+several copies of different ages.  Without the variable the ordinary library
+search runs, which finds an ANGLE that is on ``PATH`` and nothing otherwise.
+
+See `OpenGL ES through ANGLE`_ for what a context can be asked for and what the
+platform does and does not supply.
+
+.. _`OpenGL ES through ANGLE`: https://mcfletch.github.io/pyopengl/documentation/angle-gles.html
+
+
 OpenGL in a Tkinter window
 ---------------------------
 

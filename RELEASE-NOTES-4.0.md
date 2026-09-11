@@ -140,8 +140,12 @@ What changed since the 3.x series. The current development version is
   no longer need Togl.
 - **Wayland.** On Linux the GLX/EGL choice is a context-level probe, so GLUT
   runs under Wayland and XWayland.
-- **Windows.** ES and EGL reach through ANGLE, and the WGL calls that live in
-  GDI resolve properly.
+- **Windows.** `PYOPENGL_PLATFORM=angle` binds EGL and OpenGL ES to an
+  installed ANGLE, which is the only way a Windows machine has either;
+  `PYOPENGL_ANGLE_PATH` says which copy to use, since ANGLE travels inside
+  applications rather than being installed system-wide. It supplies ES and no
+  desktop GL, because that is what ANGLE has. The WGL calls that live in GDI
+  also resolve properly.
 
 ## Packaging and freezing
 
@@ -183,3 +187,5 @@ What changed since the 3.x series. The current development version is
 - [EGL devices](https://mcfletch.github.io/pyopengl/documentation/egl-devices.html)
 - [Offscreen OpenGL on macOS](https://mcfletch.github.io/pyopengl/documentation/cgl-offscreen.html)
 - [OpenGL in a Tkinter widget](https://mcfletch.github.io/pyopengl/documentation/tk-widget.html)
+- [Offscreen OpenGL on Windows](https://mcfletch.github.io/pyopengl/documentation/wgl-offscreen.html)
+- [OpenGL ES through ANGLE](https://mcfletch.github.io/pyopengl/documentation/angle-gles.html)
