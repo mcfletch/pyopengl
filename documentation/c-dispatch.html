@@ -60,6 +60,37 @@ implementation would be slower than ctypes, so
 <code>PyOpenGL_accelerate</code> does not build it there and ctypes is what
 runs.</p>
 
+<h3>Keeping the pair matched</h3>
+
+<p>The two distributions carry the same version number and have to be equal.
+The extension's tables are generated from a particular <code>PyOpenGL</code>,
+and the slot numbering in one release is meaningless to another, so a
+mismatched pair does not degrade &#8212; it dispatches through the wrong
+entry points.  <code>PyOpenGL_accelerate</code> therefore requires the exact
+<code>PyOpenGL</code> it was released with, which is what stops a resolver
+assembling such a pair in the first place.</p>
+
+<p>That constraint travels in one direction only.  Installing or upgrading
+<code>PyOpenGL_accelerate</code> brings the matching <code>PyOpenGL</code>
+with it; upgrading <code>PyOpenGL</code> on its own leaves the older
+accelerate installed, since an installer resolves what it was asked for rather
+than what is already there.  pip reports that as a conflict after it has
+installed, and other installers may not report it at all, so name both
+packages whenever you upgrade either:</p>
+
+<pre>pip install -U PyOpenGL PyOpenGL_accelerate</pre>
+
+<p>A pair that has come apart is refused when the first entry point is built,
+in a message naming both versions.  Two things are checked: the C dispatch
+extension states the <code>PyOpenGL</code> its tables were generated from and
+is held to equality with it, and the older Cython accelerators &#8212; the
+wrapper, array-datatype and format-handler modules, which follow PyOpenGL's
+internals rather than sharing its tables &#8212; are held to a floor that
+moves with the major version.  <code>PYOPENGL_USE_ACCELERATE=0</code> in the
+environment runs on ctypes until the versions are put right, and is read
+before the pair is judged so that it works from inside a broken
+installation.</p>
+
 <h2>Selecting an implementation</h2>
 
 <dl>

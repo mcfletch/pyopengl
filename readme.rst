@@ -5,6 +5,22 @@ PyOpenGL is normally distributed via PyPI using standard pip::
 
     $ pip install PyOpenGL PyOpenGL_accelerate
 
+The two carry the same version number and have to be equal.  They are released
+together and share the dispatch extension's generated tables, so a mismatched
+pair does not degrade, it dispatches through the wrong slot indices;
+``PyOpenGL_accelerate`` therefore requires the *exact* ``PyOpenGL`` it was
+released with.  That constraint travels in one direction only: installing or
+upgrading accelerate brings the matching PyOpenGL with it, while upgrading
+``PyOpenGL`` on its own leaves the older accelerate in place -- which pip
+reports as a conflict once it has already installed, and other installers may
+not report at all.  Name both packages whenever you upgrade either::
+
+    $ pip install -U PyOpenGL PyOpenGL_accelerate
+
+A pair that has come apart is refused when the first entry point is built, in a
+message naming both versions.  Until it is put right,
+``PYOPENGL_USE_ACCELERATE=0`` in the environment runs on ctypes.
+
 `RELEASE-NOTES-4.0.md <RELEASE-NOTES-4.0.md>`_ covers what changed between the
 3.x series and 4.0, including the requirements a 3.x program has to meet.
 
@@ -14,13 +30,10 @@ You can install this repository by branching/cloning and running
     $ cd pyopengl
     $ pip install -e . ./accelerate
 
-Both at once, because ``PyOpenGL_accelerate`` requires the *exact* PyOpenGL it
-pairs with: the two are released together and its dispatch extension's tables
-are generated from that PyOpenGL, so a mismatched pair does not degrade, it
-dispatches through the wrong slot indices.  Between releases that version is in
-this tree and on no index, so installing accelerate on its own asks PyPI for a
-version that is not there yet and the resolver refuses.  Installing both from
-the checkout in one command resolves them against each other.
+Both at once, for the same reason.  Between releases the version in this tree is
+on no index, so installing accelerate on its own asks PyPI for a version that is
+not there yet and the resolver refuses.  Installing both from the checkout in
+one command resolves them against each other.
 
 Note that to compile PyOpenGL_accelerate you will need to have 
 a functioning Python extension-compiling environment.

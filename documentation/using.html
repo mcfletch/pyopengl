@@ -90,11 +90,20 @@ Python).</p>
 
 <h2>Installing the Package</h2>
 
+<p>PyOpenGL installs from PyPI, with the compiled accelerators alongside it:</p>
 
+<pre>pip install PyOpenGL PyOpenGL_accelerate</pre>
 
-
-
-
+<p class="technical">The two distributions carry the same version number and
+have to be equal: they share the dispatch extension's generated tables, so
+<code>PyOpenGL_accelerate</code> requires the exact <code>PyOpenGL</code> it
+was released with, and a pair that has come apart is refused when the first
+entry point is built rather than dispatching through the wrong entry points.
+Installing or upgrading accelerate brings the matching <code>PyOpenGL</code>
+with it; upgrading <code>PyOpenGL</code> on its own leaves the older
+accelerate installed, so name both packages whenever you upgrade either.  See
+<a href="c-dispatch.html">the C dispatch layer</a> for what is checked and for
+the environment variable that runs on ctypes in the meantime.</p>
 
 <p>The PyOpenGL package uses the "SetupTools" package, which is a new,
 common mechanism for distributing and installing Python packages.
