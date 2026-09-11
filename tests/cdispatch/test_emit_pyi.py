@@ -188,7 +188,8 @@ class TestSubmodule:
             [command(name='glBindVertexArray',
                      parameters=[('array', 'GLuint', {})])],
             constants=('GL_VERTEX_ARRAY_BINDING',),
-            extras=('def glInitVertexArrayObjectARB() -> bool: ...',),
+            extras=(('glInitVertexArrayObjectARB',
+                     'def glInitVertexArrayObjectARB() -> bool: ...'),),
         )
         assert '__all__' not in text
         assert text.count('glBindVertexArray') == 1
@@ -211,12 +212,24 @@ class TestSubmodule:
             'OpenGL.GL.ARB.vertex_array_object',
             [],
             extras=(
-                'def glInitVertexArrayObjectARB() -> bool: ...',
-                'GL_INFO_LOG_LENGTH_ARB: int',
+                ('glInitVertexArrayObjectARB',
+                 'def glInitVertexArrayObjectARB() -> bool: ...'),
+                ('GL_INFO_LOG_LENGTH_ARB', 'GL_INFO_LOG_LENGTH_ARB: int'),
             ),
         )
         assert 'def glInitVertexArrayObjectARB() -> bool: ...' in text
         assert 'GL_INFO_LOG_LENGTH_ARB: int' in text
+
+    def test_a_name_a_star_import_already_gives_is_left_out(self):
+        """GL 1.1 aliases `GL_TEXTURE_COMPONENTS`, which GL 1.0 exports:
+        declaring it here would define one name twice in one stub."""
+        text = emit_pyi.emit_submodule(
+            'OpenGL.GL.VERSION.GL_1_1',
+            [],
+            extras=(('GL_TEXTURE_COMPONENTS', 'GL_TEXTURE_COMPONENTS: int'),),
+            reexports=('OpenGL.raw.GL.VERSION.GL_1_0',),
+        )
+        assert 'GL_TEXTURE_COMPONENTS: int' not in text
 
     def test_it_re_exports_what_the_module_re_exports(self):
         """A module that imports * from another has that one's names too."""

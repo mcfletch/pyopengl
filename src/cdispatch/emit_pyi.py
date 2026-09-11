@@ -10,14 +10,15 @@ out of the size and direction annotations.
 import importlib
 import keyword
 import os
+from pathlib import Path
 
 from . import ctypes_model as cm
-from . import emit_c, exceptional, model
+from . import emit_c, exceptional, lazy_wrappers, model
 
-#: The package this generator writes for, beside the generator itself.
-PACKAGE_ROOT = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
-    'OpenGL')
+#: The package this generator writes for: the ``OpenGL/`` beside the checkout
+#: this module is in.  What :func:`emit_module` reads the ``@lazy`` wrappers
+#: from unless it is handed another tree.
+PACKAGE_ROOT = str(Path(__file__).resolve().parents[2] / 'OpenGL')
 
 __all__ = [
     'emit_signature',
@@ -194,11 +195,12 @@ def _return_annotation(command):
     return _SCALAR_ANNOTATION.get(macro, 'int')
 
 
-def _parameter_name(name):
+def parameter_name(name):
     """A name a type checker will accept.
 
-    Registry parameter names include Python keywords, which cannot appear in a
-    stub even though the entry point takes its arguments positionally.
+    Registry parameter names -- and the hand-maintained libraries' header names
+    -- include Python keywords, which cannot appear in a stub even though the
+    entry point takes its arguments positionally.
     """
     if keyword.iskeyword(name) or not name.isidentifier():
         return '%s_' % (name,)
@@ -210,7 +212,7 @@ def emit_signature(command):
     hand = emit_c.hand_written(command)
     if hand is not None:
         arguments = ', '.join(
-            '%s: Any' % (_parameter_name(name),) for name in hand.arg_names
+            '%s: Any' % (parameter_name(name),) for name in hand.arg_names
         )
         return 'def %s(%s) -> %s: ...' % (
             command.name,
@@ -228,10 +230,10 @@ def emit_signature(command):
         if parameter.is_output and index >= trailing:
             parts.append(
                 '%s: %s | None = None'
-                % (_parameter_name(parameter.name), annotation)
+                % (parameter_name(parameter.name), annotation)
             )
         else:
-            parts.append('%s: %s' % (_parameter_name(parameter.name), annotation))
+            parts.append('%s: %s' % (parameter_name(parameter.name), annotation))
     return 'def %s(%s) -> %s: ...' % (
         command.name,
         ', '.join(parts),
@@ -247,21 +249,19 @@ def _safe_docstring(text):
 def _star_exports(reexports):
     """The names a stub's ``import *`` lines already provide.
 
-    Only the private declaration modules -- ``_types``, ``_errors``,
-    ``_glgets`` -- are consulted.  They are plain files whose contents are what
-    they say, so importing one answers the question exactly.  The friendly
-    modules are not: their namespaces arrive from the declaration tables when
-    they are imported, and what they hold is what the tables were asked for
-    here anyway.
+    Every re-exported module is consulted: the private declaration modules --
+    ``_types``, ``_errors``, ``_glgets`` -- and the friendly ones alike.  A
+    version module re-exports the one below it, and a constant both of them
+    declare (``GL_TEXTURE_COMPONENTS`` is in GL 1.0 and GL 1.1 alike) would
+    otherwise be declared twice in the stub.  Importing a friendly module loads
+    the platform's GL library, which generating the ``_types`` stubs does
+    anyway.
     """
     provided = set()
     for reexport in reexports:
-        # The friendly modules are consulted too, not only the private
-        # declaration ones: a version module re-exports the one below it, and
-        # a constant both of them declare -- `GL_TEXTURE_COMPONENTS` is in GL
-        # 1.0 and GL 1.1 alike -- would otherwise be defined twice in the
-        # stub.  Importing one loads the platform's GL library, which
-        # generating the `_types` stubs does anyway.
+        # A private declaration module is the file it names; a friendly one
+        # lives beside `OpenGL.raw`'s copy rather than in it, and is what
+        # actually fills the namespace a star import reaches.
         name = reexport if reexport.rsplit('.', 1)[-1].startswith('_') else (
             reexport.replace('OpenGL.raw.', 'OpenGL.', 1)
         )
@@ -355,13 +355,8 @@ def emit_submodule(name, commands, constants=(), extras=(), reexports=()):
     # A hand-written alias for a name the star-import already gives -- GL 1.1
     # aliases `GL_TEXTURE_COMPONENTS`, which GL 1.0 exports -- would be that
     # name defined twice in one stub, as a duplicated constant would.
-    emitted = []
-    for declaration in extras:
-        subject = declaration.split(':', 1)[0].split('(', 1)[0]
-        subject = subject.removeprefix('def ').strip()
-        if subject in provided:
-            continue
-        emitted.append(declaration)
+    emitted = [declaration for name, declaration in extras
+               if name not in provided]
     parts.extend(emitted)
     if emitted:
         parts.append('')
@@ -433,8 +428,8 @@ def _lazy_lines(command, wrapper, generated_doc):
     """
     required, names = wrapper
     declared = [
-        '%s: Any' % (_parameter_name(name),) if name in required
-        else '%s: Any = ...' % (_parameter_name(name),)
+        '%s: Any' % (parameter_name(name),) if name in required
+        else '%s: Any = ...' % (parameter_name(name),)
         for name in names
     ]
     short = 'def %s(%s) -> Any:' % (command.name, ', '.join(declared))
@@ -457,12 +452,17 @@ def _lazy_lines(command, wrapper, generated_doc):
     ]
 
 
-def emit_module(api, commands, constants=()):
-    """One API's stub file."""
+def emit_module(api, commands, constants=(), package_root=None):
+    """One API's stub file.
+
+    ``package_root`` is the ``OpenGL/`` directory being generated for, so this
+    can be pointed at a tree other than the one beside the generator, as
+    :func:`cdispatch.emit_handwritten.emit_api` can.
+    """
     # The friendly modules' `@_lazy` wrappers, whose shorter call the registry
-    # cannot know about. Read from the package beside this generator, which is
-    # the tree being generated for.
-    discovered = exceptional.discover(PACKAGE_ROOT, api)
+    # cannot know about; only the decorated function's parameter list says what
+    # they take.
+    discovered = lazy_wrappers.discover(package_root or PACKAGE_ROOT, api)
     wrapped = {
         command.name
         for command in commands

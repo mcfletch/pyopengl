@@ -248,11 +248,15 @@ def _write_submodule_stubs(package_root, stubs_root, commands):
 def _module_definitions(path, tabulated):
     """What a friendly module states in Python rather than taking from a table.
 
-    Its ``glInitXxx`` availability check, the constants it aliases by hand
-    (``GL_DEPTH_BUFFER = GL_DEPTH``), and any helper it defines.  A name the
-    tables already describe is left to them: a module that customises an entry
-    point rebinds its name, and describing that as ``Any`` would throw away the
-    signature the record knows.
+    ``(name, declaration)`` for its ``glInitXxx`` availability check, the
+    constants it aliases by hand (``GL_DEPTH_BUFFER = GL_DEPTH``), and any
+    helper it defines.  The name travels with the declaration because only this
+    reader knows it: recovering it from the text afterwards means parsing back
+    out what was already in hand.
+
+    A name the tables already describe is left to them: a module that
+    customises an entry point rebinds its name, and describing that as ``Any``
+    would throw away the signature the record knows.
     """
     import ast
 
@@ -266,10 +270,12 @@ def _module_definitions(path, tabulated):
             if node.name.startswith('glInit'):
                 # The extension check: it takes nothing and answers a bool,
                 # which is the whole of its signature.
-                declarations.append('def %s() -> bool: ...' % (node.name,))
+                declarations.append(
+                    (node.name, 'def %s() -> bool: ...' % (node.name,)))
             else:
                 declarations.append(
-                    'def %s(*args: Any, **named: Any) -> Any: ...' % (node.name,)
+                    (node.name,
+                     'def %s(*args: Any, **named: Any) -> Any: ...' % (node.name,))
                 )
             continue
         if not isinstance(node, ast.Assign):
@@ -280,7 +286,9 @@ def _module_definitions(path, tabulated):
             if target.id in tabulated:
                 continue
             declarations.append(
-                '%s: %s' % (target.id, 'int' if _is_enum_name(target.id) else 'Any')
+                (target.id,
+                 '%s: %s' % (target.id,
+                             'int' if _is_enum_name(target.id) else 'Any'))
             )
     return tuple(declarations)
 
