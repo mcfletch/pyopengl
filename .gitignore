@@ -28,3 +28,8 @@ OpenGL/_dispatch/*.so
 
 # uv lock (byproduct of tox-uv; not tracked for a library)
 uv.lock
+
+# coverage.py data, rebuilt by any run: see [tool.coverage] in pyproject.toml
+.coverage
+.coverage.*
+htmlcov/
