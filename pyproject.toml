@@ -73,6 +73,11 @@ test = [
     "glfw",
     # tests/cdispatch reads the Khronos registry XML through src/xmlreg.py.
     "lxml",
+    # `tomllib` is the standard library's TOML reader from 3.11; `tomli` is
+    # the same API under its original name, and is what the two interpreters
+    # below that floor have.  The suite reads accelerate's pyproject.toml to
+    # check what it declares as a build requirement.
+    "tomli ; python_version < '3.11'",
 ]
 dev = [
     "cython >= 0.28",

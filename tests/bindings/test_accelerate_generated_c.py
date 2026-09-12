@@ -24,6 +24,7 @@ import sysconfig
 
 import paths
 import pytest
+import tomlread
 
 
 def accelerate_setup():
@@ -402,13 +403,10 @@ class TestNumpyIsABuildRequirement:
     """
 
     def requires(self):
-        import tomllib
-
         path = os.path.join(paths.ROOT, 'accelerate', 'pyproject.toml')
         if not os.path.exists(path):
             pytest.skip('the accelerate source tree is not in this checkout')
-        with open(path, 'rb') as handle:
-            return tomllib.load(handle)['build-system']['requires']
+        return tomlread.load(path)['build-system']['requires']
 
     def test_numpy_is_named(self):
         named = [one for one in self.requires()
