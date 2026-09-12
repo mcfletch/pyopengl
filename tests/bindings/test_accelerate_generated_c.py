@@ -15,6 +15,7 @@ internal, naming nothing in this package.
 it where either has moved.
 """
 
+import importlib.metadata
 import importlib.util
 import os
 import sys
@@ -154,3 +155,62 @@ class TestWhatIsDroppedAndWhatIsKept:
         monkeypatch.setattr(setup, 'have_cython', False)
         setup.drop_c_from_another_toolchain()
         assert (source / 'wrapper.c').exists()
+
+
+class TestTheSourcesCompileWithTheCythonInstalled:
+    """Every ``.pyx`` in the accelerator turns into C with the Cython here.
+
+    An sdist install runs Cython over these sources on the user's machine,
+    against whatever Cython their environment resolved.  So a construct Cython
+    stops accepting is not a warning on the way to a working build -- it is
+    every source install of ``PyOpenGL_accelerate`` failing on that Cython
+    onwards, on every platform at once, and the wheels not covering it.
+
+    Cython 3.1 dropping ``long`` as a builtin name is the case that happened:
+    ``vbo.pyx`` used it, and the release then would not build anywhere Cython
+    had reached 3.1 -- reported from Raspberry Pi, from arm64 and from an Intel
+    Mac within a month of each other, each read as an architecture problem
+    because that is what the reporter had in front of them.
+
+    https://github.com/mcfletch/pyopengl/issues/147
+    https://github.com/mcfletch/pyopengl/issues/145
+    https://github.com/mcfletch/pyopengl/issues/79
+    """
+
+    def sources(self):
+        root = os.path.join(paths.ROOT, 'accelerate', 'src')
+        if not os.path.isdir(root):
+            pytest.skip('the accelerate source tree is not in this checkout')
+        found = sorted(
+            name for name in os.listdir(root) if name.endswith('.pyx')
+        )
+        assert found, root
+        return root, found
+
+    @needs_cython
+    @pytest.mark.slow
+    def test_every_pyx_cythonizes(self, tmp_path):
+        """Through the command line, which is the interface a build uses.
+
+        Cython's Python API has moved between the releases this has to run
+        under; ``python -m cython`` has not. One file per call, so a failure
+        names the file it is in rather than the first of nine.
+        """
+        import subprocess
+
+        root, found = self.sources()
+        failed = []
+        for name in found:
+            completed = subprocess.run(
+                [sys.executable, '-m', 'cython', '-3',
+                 '-I', root, '-I', os.path.join(paths.ROOT, 'accelerate'),
+                 os.path.join(root, name),
+                 '-o', str(tmp_path / (name[:-4] + '.c'))],
+                capture_output=True, text=True, timeout=300,
+            )
+            if completed.returncode:
+                failed.append(f'--- {name} ---\n{completed.stderr.strip()}')
+        assert not failed, (
+            'Cython %s refuses these sources:\n%s'
+            % (importlib.metadata.version('cython'), '\n\n'.join(failed))
+        )

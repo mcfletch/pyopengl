@@ -407,5 +407,76 @@ class TestAnOutputArrayIsMeasuredAgainstTheCount(GLTestCase):
         self.check_error('glGenTextures allocating its own array')
 
 
+class TestAMemoryViewAsTheSource(GLTestCase):
+    """A ``memoryview`` handed to a call that uploads bytes.
+
+    A memoryview is the ordinary way to hand over part of a buffer without
+    copying it, and every path that reaches the driver has to measure it the
+    same way: the length in bytes, and the address of the first one.  Reading
+    either from the wrong place -- the element count where the byte count
+    belongs, the view object where the buffer belongs -- hands the driver a
+    length longer than the allocation, and it reads off the end of it.
+
+    So each case asserts the size the buffer object ended up with, not merely
+    that the call returned.  A wrong length that happens not to fault is the
+    same defect one allocation luckier.
+
+    https://github.com/mcfletch/pyopengl/issues/175
+    """
+
+    profile = 'core'
+    gl_version = (3, 3)
+
+    #: Something with a stride, so a view of it is not the whole of it.
+    PAYLOAD = b''.join(bytes([n]) * 4 for n in range(64))
+
+    def setUp(self):
+        super().setUp()
+        self.buffer = glGenBuffers(1)
+        glBindBuffer(GL_ARRAY_BUFFER, self.buffer)
+
+    def uploaded_size(self):
+        return int(one(glGetBufferParameteriv(GL_ARRAY_BUFFER,
+                                              GL_BUFFER_SIZE)))
+
+    def test_a_memoryview_with_an_explicit_size(self):
+        view = memoryview(self.PAYLOAD)
+        glBufferData(GL_ARRAY_BUFFER, len(view), view, GL_STATIC_DRAW)
+        self.check_error('glBufferData(size, memoryview)')
+        self.assertEqual(self.uploaded_size(), len(self.PAYLOAD))
+
+    def test_a_memoryview_measuring_itself(self):
+        view = memoryview(self.PAYLOAD)
+        glBufferData(GL_ARRAY_BUFFER, view, GL_STATIC_DRAW)
+        self.check_error('glBufferData(memoryview)')
+        self.assertEqual(self.uploaded_size(), len(self.PAYLOAD))
+
+    def test_a_slice_of_a_memoryview(self):
+        """A view that is not the whole object, which is what one is for."""
+        view = memoryview(self.PAYLOAD)[16:48]
+        glBufferData(GL_ARRAY_BUFFER, view, GL_STATIC_DRAW)
+        self.check_error('glBufferData(memoryview slice)')
+        self.assertEqual(self.uploaded_size(), 32)
+
+    def test_the_bytes_it_uploaded_are_the_bytes_it_was_given(self):
+        """Read the buffer back, so this is about the data and not the length."""
+        view = memoryview(self.PAYLOAD)
+        glBufferData(GL_ARRAY_BUFFER, view, GL_STATIC_DRAW)
+        self.check_error('glBufferData(memoryview)')
+        got = glGetBufferSubData(GL_ARRAY_BUFFER, 0, len(self.PAYLOAD))
+        self.assertEqual(bytes(bytearray(got))[:len(self.PAYLOAD)],
+                         self.PAYLOAD)
+
+    def test_the_spellings_agree(self):
+        """``bytes`` is the spelling the ticket found to work; a view of the
+        same bytes has to reach the driver identically."""
+        sizes = []
+        for source in (self.PAYLOAD, memoryview(self.PAYLOAD)):
+            glBufferData(GL_ARRAY_BUFFER, source, GL_STATIC_DRAW)
+            self.check_error(f'glBufferData({type(source).__name__})')
+            sizes.append(self.uploaded_size())
+        self.assertEqual(sizes[0], sizes[1])
+
+
 if __name__ == '__main__':
     unittest.main()
