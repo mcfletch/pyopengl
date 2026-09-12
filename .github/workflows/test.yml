@@ -24,7 +24,12 @@ name: Tests
 
 on:
   push:
-    branches: [develop]
+    # `develop` is the integration branch. `issue/**` is where a single
+    # tracker ticket's test is written, on the platform that ticket is about:
+    # a great many of them are Windows- or macOS-only, so the test cannot be
+    # run where it is written and pushing the branch is how it is run at all.
+    # See plans/ISSUE-TRIAGE.md.
+    branches: [develop, 'issue/**']
   workflow_dispatch:
     inputs:
       tests:
@@ -33,6 +38,14 @@ on:
           For iterating on one failure without waiting for the rest.
         default: ''
         required: false
+      platforms:
+        description: >-
+          Which platforms to run. A ticket about one of them does not need
+          the other two, and the Linux matrix alone is twelve jobs.
+        default: all
+        required: false
+        type: choice
+        options: [all, linux, macos, windows]
 
 concurrency:
   group: tests-${{ github.ref }}
@@ -41,6 +54,11 @@ concurrency:
 jobs:
   tox:
     name: ${{ matrix.toxenv }}
+    # `inputs.platforms` is empty on a push and set only on a dispatch, so the
+    # empty case is what makes a push run everything.
+    if: >-
+      inputs.platforms == '' || inputs.platforms == 'all'
+      || inputs.platforms == 'linux'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     strategy:
@@ -178,6 +196,9 @@ jobs:
 
   windows:
     name: Windows / WGL pbuffer / ${{ matrix.toxenv }}
+    if: >-
+      inputs.platforms == '' || inputs.platforms == 'all'
+      || inputs.platforms == 'windows'
     runs-on: windows-latest
     timeout-minutes: 30
     strategy:
@@ -271,6 +292,9 @@ jobs:
 
   macos:
     name: macOS ${{ matrix.os }} / CGL / ${{ matrix.toxenv }}
+    if: >-
+      inputs.platforms == '' || inputs.platforms == 'all'
+      || inputs.platforms == 'macos'
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
     strategy:
