@@ -686,7 +686,14 @@ def image_output(name, format, type, rank, d0, d1, d2, value):
 
 
 def image_pointer(array):
-    """The address of a converted image."""
+    """The address of a converted image, or the offset it already is.
+
+    A `const void *` argument that named a buffer offset has already been
+    turned into the ``c_void_p`` holding it, and that is the value to pass:
+    taking its address would hand the driver a pointer to the offset.
+    """
+    if isinstance(array, ctypes.c_void_p):
+        return array
     return arrays.ArrayDatatype.dataPointer(array)
 
 
@@ -716,9 +723,15 @@ def as_typed_array(value, type):
     knowing about it.
     """
     from OpenGL.arrays import GL_CONSTANT_TO_ARRAY_TYPE
+    from OpenGL.arrays.arraydatatype import buffer_offset
 
     if value is None:
         return None
+    # An integer here is a byte offset into the bound buffer, not one datum to
+    # upload; see `OpenGL.arrays.arraydatatype.buffer_offset`.
+    offset = buffer_offset(value)
+    if offset is not None:
+        return offset
     array_type = GL_CONSTANT_TO_ARRAY_TYPE.get(type)
     if array_type is None:
         # No type named, or one that is not an array element type: hand it to

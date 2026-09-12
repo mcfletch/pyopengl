@@ -257,10 +257,15 @@ class Wrapper(LateBind):
             if not hasattr(arrayType, 'asArray'):
                 if arrayType == ctypes.c_void_p:
                     # special case, we will convert to a void * array...
+                    #
+                    # ...unless the caller passed an integer, which for a
+                    # `const void *` parameter is a byte offset into the bound
+                    # buffer rather than data to upload.  See
+                    # `arraydatatype.buffer_offset`.
                     self.setPyConverter(
                         argName,
                         converters.CallFuncPyConverter(
-                            arraydatatype.ArrayDatatype.asArray
+                            arraydatatype.as_offset_or_array
                         ),
                     )
                     self.setCConverter(argName, converters.getPyArgsName(argName))

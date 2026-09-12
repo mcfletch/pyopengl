@@ -12,6 +12,48 @@ _log = logs.getLog("OpenGL.arrays.arraydatatype")
 from OpenGL._bytes import unicode
 from OpenGL import acceleratesupport
 
+
+def buffer_offset(value):
+    """``value`` as a byte offset into a bound buffer, or ``None``.
+
+    A great many entry points declare a parameter ``const void *`` and, with a
+    buffer object bound, read it as an offset from the start of that buffer
+    rather than as an address: ``glDrawElements``' indices,
+    ``glVertexAttribPointer``' pointer, the client-side array pointers, and
+    the pixel calls when a pixel buffer is bound.  Zero is overwhelmingly the
+    value wanted, and ``0`` is how a caller writes it.
+
+    Without this an integer reaches the array machinery, which is not wrong to
+    treat a number as data -- that is what it is for -- and turns it into a
+    one-element array holding that number.  The *address* of that array then
+    goes to the driver as the offset, which is a pointer into the heap where a
+    small offset was meant.
+
+    Only a Python ``int``, and not a ``bool``: a numpy integer or a ctypes
+    scalar arriving here is as likely to be data the caller means to upload,
+    and reading it as an offset would be the same mistake in the other
+    direction.  ``None`` means "not an offset", so a caller falls through to
+    the array conversion.
+    """
+    if type(value) is int:
+        return ctypes.c_void_p(value)
+    return None
+
+
+def as_offset_or_array(value, typeCode=None):
+    """A ``const void *`` argument: the offset it names, or the array it is.
+
+    The conversion for every parameter the C API declares as a pointer and the
+    GL reads as either one.  ``typeCode`` is the element type where the entry
+    point names one in another argument, as ``glDrawElements`` does.
+    """
+    offset = buffer_offset(value)
+    if offset is not None:
+        return offset
+    if typeCode is None:
+        return ArrayDatatype.asArray(value)
+    return ArrayDatatype.asArray(value, typeCode)
+
 ADT = None
 if acceleratesupport.ACCELERATE_AVAILABLE:
     try:

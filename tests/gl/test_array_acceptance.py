@@ -525,6 +525,52 @@ class TestAnOffsetIntoABoundBuffer(GLTestCase):
         glVertexAttribPointer(0, 2, GL_FLOAT, False, 8, 8)
         self.check_error('glVertexAttribPointer at offset 8')
 
+    def test_a_vertex_attrib_offset_is_an_offset_and_not_a_pointer(self):
+        """The quiet half, and the worse one.
+
+        ``glVertexAttribPointer`` accepts an int where ``glDrawElements``
+        refuses one, which reads as the first being supported.  It is not: the
+        int goes through the array machinery, becomes a one-element array
+        holding that number, and the *address of that array* is handed over as
+        the offset.  The driver is given a pointer into the heap where a small
+        offset was meant, reads nothing an attribute could come from, and
+        reports no error -- so the frame comes back empty and nothing anywhere
+        says why.
+
+        Drawn and counted rather than merely called, because ``glGetError``
+        has nothing to say about it either way.
+        """
+        program = self.compile_program(
+            '''#version 330 core
+            layout(location=0) in vec2 position;
+            void main() { gl_Position = vec4(position * 2.0 - 1.0, 0.0, 1.0); }
+            ''',
+            '''#version 330 core
+            out vec4 colour;
+            void main() { colour = vec4(1.0, 0.0, 0.0, 1.0); }
+            ''',
+        )
+        glUseProgram(program)
+        glEnableVertexAttribArray(0)
+
+        drawn = {}
+        for label, offset in (('c_void_p', ctypes.c_void_p(0)), ('int', 0)):
+            glVertexAttribPointer(0, 2, GL_FLOAT, False, 8, offset)
+            self.check_error(f'glVertexAttribPointer with {label}')
+            glClearColor(0.0, 0.0, 0.0, 1.0)
+            glClear(GL_COLOR_BUFFER_BIT)
+            glDrawArrays(GL_TRIANGLES, 0, 3)
+            self.check_error(f'glDrawArrays after {label}')
+            glFinish()
+            drawn[label] = int((self.read_image()[:, :, 0] > 128).sum())
+
+        self.assertTrue(drawn['c_void_p'], 'the c_void_p spelling drew nothing')
+        self.assertEqual(
+            drawn['int'], drawn['c_void_p'],
+            'the integer offset drew %d lit pixels where the c_void_p drew %d'
+            % (drawn['int'], drawn['c_void_p']),
+        )
+
     def test_draw_elements_takes_an_integer_offset(self):
         glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, 0)
         self.check_error('glDrawElements at offset 0')

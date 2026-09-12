@@ -228,7 +228,7 @@ from OpenGL.lazywrapper import lazy as _lazy
 from OpenGL.raw.GL import _errors
 
 from OpenGL import converters, error, contextdata
-from OpenGL.arrays.arraydatatype import ArrayDatatype, GLenumArray
+from OpenGL.arrays.arraydatatype import ArrayDatatype, GLenumArray, buffer_offset
 
 GL_INFO_LOG_LENGTH = constant.Constant('GL_INFO_LOG_LENGTH', 0x8B84)
 
@@ -518,6 +518,12 @@ def glVertexAttribPointer(
     in the contextdata structure in order to prevent null-
     reference errors in the renderer.
     """
+    offset = buffer_offset(pointer)
+    if offset is not None:
+        # A byte offset into the bound buffer, which is not data and has
+        # nothing to keep alive: the GL copies the number, and the buffer
+        # object it indexes belongs to the GL already.
+        return baseOperation(index, size, type, normalized, stride, offset)
     array = ArrayDatatype.asArray(pointer, type)
     key = ('vertex-attrib', index)
     contextdata.setValue(key, array)
