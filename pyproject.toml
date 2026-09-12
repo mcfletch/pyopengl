@@ -136,7 +136,7 @@ testpaths = ["tests", "accelerate/tests"]
 # through the current directory and a bare `pytest` does not.  Without it,
 # `import directdocs` under a bare `pytest` finds only tests/directdocs, the
 # directory of that package's tests, and there is nothing in it to import.
-pythonpath = [".", "tests", "tests/gl", "tests/gles", "tests/glu", "src"]
+pythonpath = [".", "tests", "tests/gl", "tests/gles", "tests/glu", "tests/gates", "src"]
 
 # importlib import mode gives each test module a name derived from its path, so
 # two suites may hold the same basename: tests/gl and tests/gles cover the same

@@ -5,6 +5,12 @@
 two and four. `tests/gl/test_glget_sizes.py` now walks the whole shipped table
 against the live driver so a recorded size cannot go short again.
 
+The half a driver cannot answer is `tests/gates/test_glget_sizes_agree.py`: the
+Python table and the header compiled into the extension carry the same size for
+every pname, so correcting one and not the other is a failing test rather than
+a path still overrunning. It needs no GL, so it also reaches a pname no driver
+in the matrix implements.
+
 ## What a wrong size costs
 
 `glGetFloatv(pname)` allocates its output array from the recorded size and hands

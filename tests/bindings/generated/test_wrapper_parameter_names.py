@@ -145,3 +145,98 @@ def test_no_wrapper_names_an_empty_parameter():
     ``pnameArg=''`` says there is."""
     empty = [finding for finding in FINDINGS if "names ''" in finding]
     assert not empty, '\n  '.join(empty)
+
+
+def _table_findings():
+    """The same question asked of the shipped annotation table.
+
+    The customisation chains moved into ``_annotations.dat``: 2,027
+    ``setInputArraySize`` calls and 687 ``setOutput`` calls were 97% of them,
+    and both were already in the table because the table was extracted from
+    them.  So the table is now where most of these names live, and it carries
+    them in the same way -- as strings, matched against ``argNames`` when a
+    wrapper is rebuilt -- which means it can go wrong in the same way, and
+    where the chains are gone there is nothing else left to notice.
+
+    A parameter's own name is checked, and so is a size that names another
+    argument: ``{'kind': 'from-argument', 'argument': 'count'}`` is the table's
+    spelling of what ``pnameArg`` used to say.
+    """
+    from OpenGL import _declarations
+
+    findings, checked = [], 0
+    for key, entry in sorted(_declarations.annotations().items()):
+        api, _, name = key.partition('.')
+        declared = _arg_names(api, name)
+        if declared is None:
+            continue
+        for parameter, description in sorted(entry.get('parameters', {}).items()):
+            checked += 1
+            if parameter not in declared:
+                findings.append(
+                    '%s.%s: the table names a parameter %r, and the entry '
+                    'point has %s' % (api, name, parameter, sorted(declared)))
+            size = description.get('size')
+            if isinstance(size, dict) and size.get('kind') == 'from-argument':
+                checked += 1
+                named = size.get('argument')
+                if named not in declared:
+                    findings.append(
+                        '%s.%s: the size of %r is read from an argument %r, '
+                        'and the entry point has %s'
+                        % (api, name, parameter, named, sorted(declared)))
+    return findings, checked
+
+
+def _arg_names(api, name):
+    """The argument names the declaration tables give an entry point.
+
+    A command in a table is ``(name, 'a,b,c', 'restype,argtypes...')`` -- the
+    argument names as one comma-separated string rather than as a sequence, so
+    a set built from it without splitting is a set of letters.
+    """
+    for command in _commands_of(api).get(name, ()):
+        return {part for part in (command or '').split(',') if part}
+    return None
+
+
+#: One API's commands, read once: the walk goes over every declaration table.
+_COMMANDS = {}
+
+
+def _commands_of(api):
+    """``{entry point: [argument-name string]}`` for one API, read once."""
+    if api in _COMMANDS:
+        return _COMMANDS[api]
+    from OpenGL import _declarations
+
+    declarations = _declarations.data_declarations()
+    found = {}
+    prefix = 'OpenGL.raw.%s.' % (api,)
+    for module in declarations.module_names():
+        if not module.startswith(prefix):
+            continue
+        contents = declarations.module_contents(module) or {}
+        for command in contents.get('commands') or ():
+            found.setdefault(command[0], []).append(command[1])
+    _COMMANDS[api] = found
+    return found
+
+
+#: Computed once: it walks every declaration table.
+TABLE_FINDINGS, TABLE_CHECKED = _table_findings()
+
+
+def test_the_table_sweep_found_parameters_to_check():
+    """A sweep that matched nothing would pass while checking nothing."""
+    assert TABLE_CHECKED > 1000, TABLE_CHECKED
+
+
+def test_the_annotation_table_names_no_parameter_that_is_not_there():
+    assert not TABLE_FINDINGS, (
+        '%d annotation(s) name a parameter their entry point does not have. '
+        'The table is matched against `argNames` when a wrapper is rebuilt '
+        'from it, so a name that is not there does not fail -- the wrapper is '
+        'built and the customisation silently does not happen, which is a '
+        'checked call becoming an unchecked one:\n  %s'
+        % (len(TABLE_FINDINGS), '\n  '.join(TABLE_FINDINGS)))
