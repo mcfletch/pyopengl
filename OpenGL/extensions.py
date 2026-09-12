@@ -200,8 +200,13 @@ class _GLQuerier(ExtensionQuerier):
     # to parse out the ES value, but this is one of those "the issue is the usage"
     # problems. You shouldn't do this, but if you do, this will make
     # the issue clearer
+    #
+    # `api_marker` holds the marker and not the space after it, because
+    # `pullVersion` compares it against 'OpenGL ES': the separator belongs to
+    # the pattern rather than to the group, or the comparison is against a
+    # string the group can never hold and no ES context is ever recognised.
     version_matcher = re.compile(
-        r'^(?P<api_marker>OpenGL (ES )?)?(?P<version>\d+([.]\d+)+)'
+        r'^(?P<api_marker>OpenGL(?: ES)?)?\s*(?P<version>\d+([.]\d+)+)'
     )
     is_opengl_es = False
 
