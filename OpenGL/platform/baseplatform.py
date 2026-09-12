@@ -161,6 +161,41 @@ class BasePlatform(object):
     EGL = None
     GLX = None
 
+    #: APIs that belong to one platform rather than being a library every
+    #: platform may or may not have, mapped to the ``PYOPENGL_PLATFORM`` value
+    #: that selects it.  Asking any other platform for one of these is not a
+    #: machine missing a library, it is a program that has not said which
+    #: platform it wants -- and the answer is a setting, so the refusal names
+    #: it.  See https://github.com/mcfletch/pyopengl/issues/129
+    PLATFORM_SPECIFIC_APIS = {
+        'OSMesa': 'osmesa',
+    }
+
+    def __getattr__(self, name):
+        """Say how to reach an API that belongs to a platform this is not.
+
+        Reached only when ordinary lookup has failed, so a platform that
+        provides the API answers with it and never arrives here.
+
+        The default ``AttributeError`` names an attribute of a class the
+        caller has never heard of -- ``'EGLPlatform' object has no attribute
+        'OSMesa'`` -- which reads as a defect in PyOpenGL rather than as a
+        choice they have not made.  Whoever meets this one can least afford
+        that: OSMesa is how a machine with no display renders, so by
+        construction they cannot see what their session is.
+        """
+        platform = self.PLATFORM_SPECIFIC_APIS.get(name)
+        if platform is None:
+            raise AttributeError(
+                '%r object has no attribute %r'
+                % (self.__class__.__name__, name))
+        raise AttributeError(
+            '%r has no %s: it belongs to the %r platform, which this run did '
+            'not select. Set PYOPENGL_PLATFORM=%s in the environment, or '
+            'os.environ before the first `import OpenGL`, since the platform '
+            'decides which library every entry point is loaded from.'
+            % (self.__class__.__name__, name, platform, platform))
+
     def secondaryLibraries(self):
         """Libraries to search when an API's own does not export a name.
 
