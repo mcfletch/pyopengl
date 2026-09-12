@@ -13,6 +13,7 @@ raises :class:`OpenGL.error.NullFunctionError` when called.
 
 import pytest
 
+from childenv import run_in_child
 from OpenGL.platform import PLATFORM, baseplatform
 
 #: The library attributes BasePlatform's docstring promises.
@@ -57,6 +58,44 @@ def test_the_egl_namespace_imports_or_names_the_library():
         import OpenGL.EGL
     except ImportError as raised:
         assert 'EGL' in str(raised), str(raised)
+
+
+#: Reach for a platform-specific namespace from a platform that is not it.
+#: OSMesa is the one people arrive at: it is how a machine with no display
+#: renders, so the caller finding this is by definition unable to see what
+#: their session is.
+ASKING_THE_WRONG_PLATFORM = '''
+import sys
+try:
+    from OpenGL import osmesa
+except Exception as raised:
+    sys.stdout.write('%s: %s' % (type(raised).__name__, raised))
+else:
+    sys.stdout.write('imported')
+'''
+
+
+def test_a_namespace_the_platform_cannot_serve_says_how_to_select_it():
+    """``PYOPENGL_PLATFORM`` is the answer, so the failure has to name it.
+
+    Importing ``OpenGL.osmesa`` under any other platform cannot work -- the
+    entry points belong to a library that platform does not load.  What the
+    caller needs to be told is that the platform is chosen from the
+    environment and which value chooses this one; what they get instead is an
+    ``AttributeError`` naming an attribute of a class they have never heard
+    of, which reads as a defect in PyOpenGL rather than as a setting they have
+    not made.
+
+    https://github.com/mcfletch/pyopengl/issues/129
+    https://github.com/mcfletch/pyopengl/issues/70
+    """
+    if getattr(PLATFORM, 'OSMesa', None) is not None:
+        pytest.skip('this run has selected the OSMesa platform')
+    answered = run_in_child(ASKING_THE_WRONG_PLATFORM).stdout.strip()
+    if answered == 'imported':
+        pytest.skip('OSMesa is importable here, so there is no refusal to read')
+    assert 'PYOPENGL_PLATFORM' in answered, answered
+    assert 'osmesa' in answered.lower(), answered
 
 
 def test_absent_entry_point_raises_pyopengls_own_error():
