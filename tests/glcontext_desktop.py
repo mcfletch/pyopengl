@@ -111,7 +111,7 @@ class DesktopGLTestCaseBase(ContextTestCase):
         could be drawing into.
         """
         bound = 0
-        with self.tolerate_glerror():
+        with self.tolerate_glerror(_gl.GL_INVALID_ENUM):
             bound = self.getInteger(_gl.GL_FRAMEBUFFER_BINDING)
         return int(bound)
 

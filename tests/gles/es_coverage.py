@@ -8,7 +8,6 @@ directly to print a summary; ``--uncovered`` lists what nothing calls.
 
 import os
 import paths
-import re
 import sys
 import coverage_scan
 import json
@@ -17,26 +16,39 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 # repo root holding the ``OpenGL`` package (this file lives in tests/gles/)
 ROOT = paths.ROOT
 
-# Per-level source modules; each bucket holds the commands *introduced* at that
-# level (3.x builds on 2.0, so the buckets are disjoint).
-LEVEL_SOURCES = [
-    ('GLES2.0', 'OpenGL/raw/GLES2/VERSION/GLES2_2_0.py'),
-    ('GLES3.0', 'OpenGL/raw/GLES3/VERSION/GLES3_3_0.py'),
-    ('GLES3.1', 'OpenGL/raw/GLES3/VERSION/GLES3_3_1.py'),
-    ('GLES3.2', 'OpenGL/raw/GLES2/ES/VERSION_3_2.py'),
+#: The declaration table each ES level's commands are declared in, and the name
+#: to report it under.  Each bucket holds the commands *introduced* at that
+#: level -- 3.x builds on 2.0, so the buckets are disjoint.
+LEVEL_MODULES = [
+    ('GLES2.0', 'OpenGL.raw.GLES2.VERSION.GLES2_2_0'),
+    ('GLES3.0', 'OpenGL.raw.GLES3.VERSION.GLES3_3_0'),
+    ('GLES3.1', 'OpenGL.raw.GLES3.VERSION.GLES3_3_1'),
+    ('GLES3.2', 'OpenGL.raw.GLES2.ES.VERSION_3_2'),
 ]
 
-_DEF = re.compile(r'^def (gl[A-Za-z0-9_]+)\(', re.MULTILINE)
-_CALL = re.compile(r'\b(gl[A-Z][A-Za-z0-9_]*)\b')
+
+def declarations():
+    """The shipped tables the raw modules are built from.
+
+    The tables rather than the compiled extension, which is None wherever
+    accelerate is not installed -- and the two describe the same set.
+    """
+    from OpenGL import _declarations
+
+    return _declarations.data_declarations()
 
 
-def defined_funcs(rel_path):
-    path = os.path.join(ROOT, rel_path)
-    try:
-        with open(path) as fh:
-            return set(_DEF.findall(fh.read()))
-    except IOError:
-        return set()
+def defined_funcs(module):
+    """The ``gl*`` commands a declaration table's module declares.
+
+    Read from the table rather than by scanning a file for ``def gl``: the
+    generated modules stopped being files, and a scan for them then reported
+    nothing at all for every level while printing a table that looked as
+    though it had run.
+    """
+    contents = declarations().module_contents(module) or {}
+    # Each command is (name, argument names, ctypes signature).
+    return {entry[0] for entry in contents.get('commands') or ()}
 
 
 def called_funcs():
@@ -45,27 +57,28 @@ def called_funcs():
 
 
 def extension_sources():
-    """Map 'GL_VENDOR_name' -> raw module path, for ext modules with commands."""
+    """``{'GL_VENDOR_name': (module, commands)}`` for the ES extensions."""
+    table = declarations()
     out = {}
-    for base in ('OpenGL/raw/GLES2', 'OpenGL/raw/GLES3'):
-        for path in glob.glob(os.path.join(ROOT, base, '*', '*.py')):
-            vendor = os.path.basename(os.path.dirname(path))
-            if vendor in ('VERSION', 'ES', '__pycache__'):
+    for module in table.module_names():
+        parts = module.split('.')
+        if len(parts) != 5 or parts[:3] != ['OpenGL', 'raw', 'GLES2']:
+            if len(parts) != 5 or parts[:3] != ['OpenGL', 'raw', 'GLES3']:
                 continue
-            name = os.path.splitext(os.path.basename(path))[0]
-            if name.startswith('_'):
-                continue
-            funcs = defined_funcs(os.path.relpath(path, ROOT))
-            if funcs:
-                out['GL_%s_%s' % (vendor, name)] = (os.path.relpath(path, ROOT), funcs)
+        vendor, name = parts[3], parts[4]
+        if vendor in ('VERSION', 'ES') or name.startswith('_'):
+            continue
+        funcs = defined_funcs(module)
+        if funcs:
+            out['GL_%s_%s' % (vendor, name)] = (module, funcs)
     return out
 
 
 def level_report():
     used = called_funcs()
     rows = []
-    for name, src in LEVEL_SOURCES:
-        defined = defined_funcs(src)
+    for name, module in LEVEL_MODULES:
+        defined = defined_funcs(module)
         covered = defined & used
         rows.append((name, defined, covered))
     return used, rows

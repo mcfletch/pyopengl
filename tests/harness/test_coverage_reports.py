@@ -65,7 +65,24 @@ class TestEachReportRuns:
         assert completed.returncode == 0, completed.stderr[-2000:]
 
     def test_it_reports_a_universe_that_is_not_empty(self, api, script):
-        """A report of 100% over nothing is the failure mode worth catching."""
+        """A report of 100% over nothing is the failure mode worth catching.
+
+        The numbers rather than a phrase: this asserted that ``'0 total'`` was
+        absent, which is a sentence only the GLU report writes, so the ES one
+        printed ``0`` against every level for months and passed.  A row's
+        universe is the first number on it, and none of them may be zero.
+        """
         completed = self.run(script)
         assert completed.stdout.strip(), completed.stderr[-2000:]
-        assert '0 total' not in completed.stdout, completed.stdout[-2000:]
+        empty = []
+        for line in completed.stdout.splitlines():
+            for field in line.split():
+                if field.isdigit():
+                    if int(field) == 0:
+                        empty.append(line)
+                    break           # the first number on the row is its universe
+        assert not empty, (
+            'these rows count a universe of nothing, which reports as full '
+            'coverage of an empty set:\n  %s\n\n%s'
+            % ('\n  '.join(empty), completed.stdout[-2000:])
+        )
