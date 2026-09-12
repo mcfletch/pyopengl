@@ -196,6 +196,16 @@ well as with the defaults.
   graphics driver installed; looking on `PATH` first meant a conda environment,
   which puts a Mesa `opengl32.dll` ahead of it, rendered in software with
   nothing saying so.
+- **`NullFunctionError` says which of three things happened.** The message was
+  the same whether the library was not installed, no context had been created
+  yet, or the driver genuinely lacked the entry point — three different
+  problems with three different answers, described as one. Where the library
+  is absent it now names the library and where to get it, and says that every
+  entry point in it is undefined rather than sending the reader to check the
+  one name they happened to call. Where no context is current it says so —
+  above GL 1.1 an address comes from the context, so on Windows, where
+  `wglGetProcAddress` needs a current one, that is the usual reason a call
+  like `glGenVertexArrays` is undefined on a machine whose driver has it.
 - **A GLUT you installed is found by its own name.** The Windows platform asks
   for `freeglut` and `glut32` — what the official freeglut binaries, MSYS2,
   vcpkg and the original GLUT install — before the builds bundled in

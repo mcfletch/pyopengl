@@ -27,7 +27,9 @@ Wanted, with no plan document:
   so this is closed going forward; the tags #77 asks for cover releases made
   before that and have to be reconstructed from the changelog.
 - **The remaining open tickets that need a person rather than a machine.**
-  Twelve reports — #32, #54, #59, #61, #73, #82, #105, #115, #124, #132, #167,
-  #170 — describing a machine, program or driver in too little detail to
-  reproduce, several of them years old. Each wants one specific question
-  asked, not a silent close.
+  Nine reports — #32, #61, #73, #82, #105, #124, #132, #167, #170 —
+  describing a machine, program or driver in too little detail to reproduce,
+  several of them years old. Each wants one specific question asked, not a
+  silent close. #54, #59 and #115 have left this list: all three were
+  `NullFunctionError` saying the same thing for three different problems, and
+  the message now tells them apart.

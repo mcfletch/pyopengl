@@ -450,6 +450,76 @@ a crash.
 > output of `OpenGL.WGL.WGLQuerier.getExtensions()` would say whether the
 > driver is listing it.
 
+### #59 / #54 — an undefined function, because the library is not installed
+
+**Test** `tests/bindings/platform/test_missing_library_errors.py`
+**Commit** `6556784b`
+
+Both reporters were told the entry point was undefined. Neither was told that
+the library holding it was not on the machine, which is a different problem
+with one thing to do about it.
+
+> Fixed, and the error is the fix.
+>
+> `gluOrtho2D` was undefined here because `libGLU` is not installed —
+> `python-opengl` does not bring it, and on Arch and CentOS it is a separate
+> package. #54 is the same thing for GLUT, and the answer arrived on that
+> ticket thirteen months later as a comment reading
+> `apt-get install freeglut3-dev`.
+>
+> The message said none of that. It named one function and told you to check
+> `bool()` on it, when in fact *every* GLU entry point was undefined and
+> checking any of them would have said the same. It reads as PyOpenGL being
+> broken rather than as a package that is not installed, which is why both
+> tickets are somebody asking what they did wrong.
+>
+> It now says which library was not found, that every entry point in it is
+> undefined, and where to get it:
+>
+>     Attempt to call an undefined function gluOrtho2D: the GLU library was
+>     not found on this machine, so every GLU entry point is undefined
+>     (Debian and Ubuntu: libglu1-mesa; Fedora: mesa-libGLU; Arch: glu;
+>     Windows and macOS ship it). Check bool(gluOrtho2D) before calling.
+>
+> GLU, GLUT, GLE and EGL each have their own line. The library is read from
+> the entry point's prefix, which is the API's own naming — there is nothing
+> else left to read, because a library that would not load is `None` and every
+> declaration in the module was built against it.
+>
+> Fixed in 4.0.0b1.
+
+### #115 — `glGenVertexArrays` undefined, with a driver that has it
+
+**Test** `tests/bindings/platform/test_missing_library_errors.py::TestACallMadeBeforeThereIsAContext`
+**Commit** `6556784b`
+
+The message defect is fixed. The ticket stays open on one question, because
+what the reporter had is very likely a second thing.
+
+> A 1080ti on driver 545 has `glGenVertexArrays`, so the message was wrong
+> about what was happening, and there are two candidates in your report.
+>
+> The one I would look at first is `PyOpenGL 3.1.0` beside
+> `PyOpenGL-accelerate 3.1.7`. Those are not a matching pair — 3.1.0 is from
+> 2015 — and the accelerator's tables are generated from the PyOpenGL it
+> shipped with, so a mismatch can produce exactly this, and the
+> `free(): invalid pointer` underneath it is the kind of thing it produces
+> next. 4.0 refuses a mismatched pair rather than running on one.
+>
+> The other is ordering: above GL 1.1 an entry point's address comes from the
+> *context*, so a call made before pyglet has created one finds nothing. That
+> is the usual cause of this error on Windows, where `wglGetProcAddress`
+> needs a current context; on Linux with GLX it is less likely, since
+> `glXGetProcAddress` answers without one. It is worth ruling out.
+>
+> The message itself is fixed either way. It said the same thing for a
+> library that is not installed, a call made before there was a context, and
+> a driver that lacks the entry point — three problems with three different
+> answers — and it now tells them apart and says which one you are in.
+>
+> Would you try `pip install -U PyOpenGL PyOpenGL_accelerate` so the two
+> match, and paste what the error says then?
+
 ### #29 — `test_buffer_api_basic` on i586 and armv7l
 
 **Test** `tests/bindings/arrays/test_arraydatatype.py::TestReadingAFormatString`
@@ -859,7 +929,7 @@ Covered above under #47: the sequence is a case, and it does not fault here.
 
 ## What this release does not answer
 
-The other 18 open issues, so the list above is not read as the whole tracker.
+The other 15 open issues, so the list above is not read as the whole tracker.
 [plans/ISSUE-TRIAGE.md](plans/ISSUE-TRIAGE.md) carries the reasoning for each,
 and the ten that are not defects are listed after them.
 
@@ -882,10 +952,13 @@ with assertions; #124 an NVIDIA container; #170 is TensorFlow and Mesa loading
 two different LLVMs into one process, which is not ours to fix. #92 is held
 above and would still be worth confirming on an s390x.
 
-**Needs something only the reporter can supply.** #32, #54, #59, #61, #73, #82,
-#115, #132, #167 are each a machine, a program or a driver that has not been
-described in enough detail to reproduce, and several are years old. Each is
-worth a comment asking one specific question rather than being closed silently.
+**Needs something only the reporter can supply.** #32, #61, #73, #82, #132 and
+#167 are each a machine, a program or a driver that has not been described in
+enough detail to reproduce, and several are years old. Each is worth a comment
+asking one specific question rather than being closed silently. #115 is above,
+with its question drafted: the message defect behind it is fixed, and what is
+left to ask is about the mismatched PyOpenGL and accelerate versions in the
+report.
 
 **Not a defect.** #58 (an empty ticket), #63 (answered: constants carry a
 `.name`), #64 (a Windows-versus-WSL report with no traceback, code or version in it), #65 and #69 (pyrender's pin, which only pyrender can change), #72
@@ -899,12 +972,12 @@ answering since it will recur).
 
 | | |
 |---|---|
-| Fixed, with a test that was red first | 20 tickets |
+| Fixed, with a test that was red first | 23 tickets |
 | Held fixed, with a test red against the reporter's release | 26 tickets |
 | Not reproducible, with what was tried recorded | 4 tickets |
 | Answered, with a case keeping the answer true | 2 tickets |
 | Not a defect, answered on the ticket | 10 tickets |
-| Deferred to a platform, other hardware, or the reporter | 18 tickets |
+| Deferred to a platform, other hardware, or the reporter | 15 tickets |
 | **Open on the tracker** | **80 tickets** |
 
 Defects found while writing the tests, which no ticket had reported: the

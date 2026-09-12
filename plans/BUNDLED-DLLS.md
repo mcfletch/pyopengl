@@ -62,6 +62,14 @@ The answer to both is the same: the error. `glutInit` with no library must say
 `pip install PyOpenGL[glut]`, not `NullFunctionError`. That is the deciding
 piece of work, not the packaging.
 
+**Half of that has landed.** `NullFunctionError` now tells the three cases
+apart, and where the library itself is absent it names the library and where
+to get it — `OpenGL.platform.baseplatform.LIBRARY_SOURCES` holds the wording,
+one entry per library, and `tests/bindings/platform/test_missing_library_errors.py`
+holds it. So what this change needs is the GLUT entry's wording changed from
+"PyOpenGL bundles builds in OpenGL/DLLS" to `pip install PyOpenGL[glut]`, not
+a mechanism built. Same for GLE.
+
 ## Shape
 
 **`PyOpenGL-glut-binaries`** — a new distribution, `win32`/`win_amd64` wheels
@@ -92,7 +100,9 @@ turns a working program into a puzzle.
    thing that keeps them out afterwards. Beside the sdist cases in
    `tests/bindings/test_accelerate_generated_c.py::TestWhatTheSdistShips`.
 2. A case that `glutInit` with no library raises something naming
-   `PyOpenGL[glut]`. Red first; it is the whole compatibility story.
+   `PyOpenGL[glut]`. Red first; it is the whole compatibility story. The
+   mechanism is already there — see *Half of that has landed* above — so this
+   is `LIBRARY_SOURCES['GLUT']` and the case that reads it.
 3. The new distribution, built from the files as they stand. No rebuild: a
    rebuild is a separate decision with its own risk, and doing both at once
    makes any regression unattributable.
