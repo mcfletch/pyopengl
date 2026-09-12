@@ -10,6 +10,145 @@ from OpenGL import logs, MODULE_ANNOTATIONS
 
 log = logging.getLogger(__name__)
 
+#: Which library an entry point lives in, read from the prefix of its name.
+#:
+#: Longest first, because ``glutInit`` also begins with ``glu``.
+#:
+#: The prefix is the API's own naming rather than a guess -- the registry and
+#: the SGI headers assign it -- and where the library could not be loaded at
+#: all it is the only thing left to read.  The platform answers ``None`` for
+#: such a library, so every declaration in the module is built against
+#: ``None`` and there is no object to ask which one it was.
+ENTRY_POINT_PREFIXES = (
+    ('glut', 'GLUT'),
+    ('glu', 'GLU'),
+    ('gle', 'GLE'),
+    ('egl', 'EGL'),
+    ('wgl', 'GL'),
+    ('glX', 'GL'),
+    ('gl', 'GL'),
+)
+
+#: Where to get a library this machine does not have.
+#:
+#: Per platform, because the answer differs and the reader has one machine in
+#: front of them -- #59 was on Arch and then on CentOS, and #54's answer, when
+#: it came thirteen months later, was a Debian package name.
+#:
+#: GL is deliberately absent: no OpenGL library at all means no graphics
+#: driver, which is a different conversation from a package that was not
+#: installed, and a package name would be the wrong advice.
+LIBRARY_SOURCES = {
+    'GLU': (
+        'Debian and Ubuntu: libglu1-mesa; Fedora: mesa-libGLU; Arch: glu; '
+        'Windows and macOS ship it'
+    ),
+    'GLUT': (
+        'Debian and Ubuntu: freeglut3-dev; Fedora: freeglut; Arch: freeglut; '
+        'macOS ships it; on Windows PyOpenGL bundles builds in OpenGL/DLLS, '
+        'so a missing one there means that directory is not in your install'
+    ),
+    'GLE': (
+        'Debian and Ubuntu: libgle3; Fedora: gle; on Windows PyOpenGL bundles '
+        'builds in OpenGL/DLLS'
+    ),
+    'EGL': (
+        'it arrives with the graphics driver; on Windows it comes from an '
+        'ANGLE build shipped beside the application'
+    ),
+}
+
+
+#: Why an entry point does not resolve when there is no context.
+#:
+#: Shared with :func:`OpenGL.extensions.alternate`, which reports the same
+#: situation for a call that has several possible names and found none of
+#: them -- the framebuffer-object entry points among them.
+NO_CONTEXT_EXPLANATION = (
+    'no OpenGL context is current, and every entry point above GL 1.1 is '
+    'resolved through the context -- so this says the call came before a '
+    'context was created rather than that the driver lacks it. Create a '
+    'context first, through GLUT, GLFW, pygame, Qt, EGL or whatever your '
+    'program uses'
+)
+
+
+def library_for_entry_point(name):
+    """The library ``name`` belongs to, or None where the prefix says nothing.
+
+    See :data:`ENTRY_POINT_PREFIXES` for why the name is what answers this.
+    """
+    for prefix, library in ENTRY_POINT_PREFIXES:
+        if name.startswith(prefix):
+            return library
+    return None
+
+
+def undefined_function_message(name, dll, has_context=None):
+    """Why ``name`` cannot be called, in terms the caller can act on.
+
+    Three situations reach here and they want different answers.
+
+    A ``dll`` of ``None`` means the library itself was not found, so every
+    entry point in it is undefined and there is one thing to do about it.
+
+    A library that loaded, with no context current, means the entry point
+    could not be *resolved* rather than that it is absent: above GL 1.1 an
+    address comes from the context, so every such name is undefined until
+    there is one.  This is the usual way to meet the error on Windows, where
+    ``wglGetProcAddress`` needs a current context; GLX answers without one,
+    so it is rarer on Linux.  It is the case the old message described least
+    well, naming a driver problem for what is an ordering problem in the
+    caller's own program.
+
+    A library that loaded with a context current, and still no entry point, is
+    a driver too old for it or an extension this machine does not have. There
+    is nothing to install.
+
+    ``has_context`` is ``None`` where it could not be determined, which reads
+    as the third case rather than guessing.
+
+    All three end by naming ``bool(name)``, which is the check this error has
+    always pointed at and what a caller already handling it looks for.
+    """
+    if dll is None:
+        library = library_for_entry_point(name)
+        if library is None:
+            what = 'the library it belongs to was not found on this machine'
+        else:
+            what = (
+                'the %s library was not found on this machine, so every %s '
+                'entry point is undefined' % (library, library)
+            )
+        source = LIBRARY_SOURCES.get(library)
+        if source:
+            what += ' (%s)' % (source,)
+    elif has_context is False:
+        what = NO_CONTEXT_EXPLANATION
+    else:
+        what = (
+            'the library it belongs to does not export it, which is a driver '
+            'too old for it or an extension this machine does not have, '
+            'rather than a missing install'
+        )
+    return 'Attempt to call an undefined function %s: %s. Check bool(%s) ' \
+           'before calling.' % (name, what, name)
+
+
+def _context_is_current():
+    """Whether a GL context is current, or None where that cannot be asked.
+
+    Only ever called while building an error message, so the cost of asking
+    the driver is paid on a path that is already failing -- and any platform
+    that cannot answer says so rather than turning one error into another.
+    """
+    try:
+        from OpenGL import platform
+
+        return bool(platform.PLATFORM.GetCurrentContext())
+    except Exception:
+        return None
+
 
 class lazy_property(object):
     """An attribute worked out when it is first read, then cached on the instance
@@ -712,10 +851,8 @@ class _NullFunctionPointer(object):
                 pass
             else:
                 raise error.NullFunctionError(
-                    """Attempt to call an undefined function %s, check for bool(%s) before calling"""
-                    % (
-                        self.__name__,
-                        self.__name__,
+                    undefined_function_message(
+                        self.__name__, self.DLL, _context_is_current()
                     )
                 )
 

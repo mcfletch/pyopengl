@@ -385,10 +385,25 @@ class _Alternate(LateBind):
                 #                )
                 return alternate
         from OpenGL import error
+        from OpenGL.platform import baseplatform
 
+        # Same three situations as a single entry point, and the same reason
+        # to tell them apart: none of these names resolving usually says the
+        # call came before there was a context, not that the driver has none
+        # of them.  See baseplatform.undefined_function_message.
+        if baseplatform._context_is_current() is False:
+            why = baseplatform.NO_CONTEXT_EXPLANATION
+        else:
+            why = (
+                'this driver offers none of them, which is a driver too old '
+                'for the feature or an extension this machine does not have'
+            )
         raise error.NullFunctionError(
-            """Attempt to call an undefined alternate function (%s), check for bool(%s) before calling"""
+            'Attempt to call an undefined alternate function %s: %s. Tried '
+            '%s. Check bool(%s) before calling.'
             % (
+                self.__name__,
+                why,
                 ', '.join([x.__name__ for x in self._alternatives]),
                 self.__name__,
             )

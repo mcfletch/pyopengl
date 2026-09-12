@@ -195,9 +195,16 @@ attributes under both to keep them so.</p>
 <table border="1" cellpadding="5" cellspacing="0">
 <tr><th>symptom</th><th>usually means</th></tr>
 <tr><td><code>NullFunctionError</code></td>
-    <td>The entry point did not resolve in the current context: the driver does
-        not have it, or no context was current when it was first called.  Check
-        <code>bool(glFoo)</code> <em>with the context current</em>.</td></tr>
+    <td>The entry point did not resolve, and the message says which of three
+        reasons it was.  <em>The library was not found on this machine</em> —
+        every entry point in it is undefined, and the message names the
+        library and where to get it; this is the usual answer for GLU, GLUT
+        and GLE, which are separate packages on Linux.  <em>No context is
+        current</em> — every entry point above GL 1.1 is resolved through the
+        context, so the call came before one was created.  <em>The library
+        does not export it</em> — a driver too old for it, or an extension
+        this machine does not have.  Check <code>bool(glFoo)</code>
+        <em>with the context current</em>.</td></tr>
 <tr><td><code>NoContext</code> error</td>
     <td><code>OpenGL.CONTEXT_CHECKING</code> is on and there was no current
         context.  Off by default, because deleting objects from a cleanup
