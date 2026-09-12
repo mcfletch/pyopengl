@@ -478,5 +478,100 @@ class TestAMemoryViewAsTheSource(GLTestCase):
         self.assertEqual(sizes[0], sizes[1])
 
 
+class TestAnOffsetIntoABoundBuffer(GLTestCase):
+    """Where the C API says ``const void *`` but means a byte offset.
+
+    ``glVertexAttribPointer``, ``glDrawElements`` and their neighbours take a
+    pointer that, with a buffer bound, the driver reads as an offset from the
+    start of that buffer rather than as an address.  Zero is the overwhelmingly
+    common value and is the one a caller writes as ``0``.
+
+    Refusing the integer is not a way of insisting on ``ctypes.c_void_p``: an
+    ``int`` where a pointer is wanted has one meaning here, the message the
+    refusal carries names an array-type handler the caller was never trying to
+    supply, and the caller cannot tell from it that a cast is what is missing.
+
+    https://github.com/mcfletch/pyopengl/issues/3
+    https://github.com/mcfletch/pyopengl/issues/42
+    """
+
+    profile = 'core'
+    gl_version = (3, 3)
+
+    #: Enough vertices for one triangle, and indices naming them.
+    VERTICES = [0.0, 0.0, 1.0, 0.0, 0.0, 1.0]
+    INDICES = [0, 1, 2]
+
+    def setUp(self):
+        super().setUp()
+        self.require_vertex_arrays()
+        self.vao = glGenVertexArrays(1)
+        glBindVertexArray(self.vao)
+        self.vbo = glGenBuffers(1)
+        glBindBuffer(GL_ARRAY_BUFFER, self.vbo)
+        glBufferData(GL_ARRAY_BUFFER, np.array(self.VERTICES, 'f'),
+                     GL_STATIC_DRAW)
+        self.ebo = glGenBuffers(1)
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.ebo)
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+                     np.array(self.INDICES, 'H'), GL_STATIC_DRAW)
+        self.check_error('setting up the buffers')
+
+    def test_vertex_attrib_pointer_takes_an_integer_offset(self):
+        glVertexAttribPointer(0, 2, GL_FLOAT, False, 8, 0)
+        self.check_error('glVertexAttribPointer at offset 0')
+
+    def test_vertex_attrib_pointer_takes_a_non_zero_integer_offset(self):
+        glVertexAttribPointer(0, 2, GL_FLOAT, False, 8, 8)
+        self.check_error('glVertexAttribPointer at offset 8')
+
+    def test_draw_elements_takes_an_integer_offset(self):
+        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, 0)
+        self.check_error('glDrawElements at offset 0')
+
+    def test_draw_elements_takes_a_non_zero_integer_offset(self):
+        """One index in, which is two bytes for ``GL_UNSIGNED_SHORT``."""
+        glDrawElements(GL_TRIANGLES, 2, GL_UNSIGNED_SHORT, 2)
+        self.check_error('glDrawElements at offset 2')
+
+    def test_draw_elements_takes_a_void_pointer(self):
+        """The spelling that has always worked, so a fix does not lose it."""
+        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, ctypes.c_void_p(0))
+        self.check_error('glDrawElements with a c_void_p')
+
+    def test_the_two_spellings_of_an_offset_agree(self):
+        """A drawn result, so this is about more than the call being accepted.
+
+        An offset silently read as an address would draw from somewhere else,
+        or from nothing; the two calls have to put the same pixels down.
+        """
+        program = self.compile_program(
+            '''#version 330 core
+            layout(location=0) in vec2 position;
+            void main() { gl_Position = vec4(position * 2.0 - 1.0, 0.0, 1.0); }
+            ''',
+            '''#version 330 core
+            out vec4 colour;
+            void main() { colour = vec4(1.0, 0.0, 0.0, 1.0); }
+            ''',
+        )
+        glUseProgram(program)
+        glVertexAttribPointer(0, 2, GL_FLOAT, False, 8, ctypes.c_void_p(0))
+        glEnableVertexAttribArray(0)
+
+        frames = []
+        for offset in (ctypes.c_void_p(0), 0):
+            glClearColor(0.0, 0.0, 0.0, 1.0)
+            glClear(GL_COLOR_BUFFER_BIT)
+            glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, offset)
+            self.check_error(f'glDrawElements with {offset!r}')
+            glFinish()
+            frames.append(self.read_image())
+        self.assertTrue(
+            (frames[0] == frames[1]).all(),
+            'the integer offset drew a different frame from the c_void_p',
+        )
+
+
 if __name__ == '__main__':
     unittest.main()
