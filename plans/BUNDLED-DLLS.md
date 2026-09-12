@@ -13,29 +13,31 @@ They come out into a package of their own, and a caller who wants them asks:
 pip install PyOpenGL[glut]
 ```
 
+**PyOpenGL remains the provider.** The new package is a GitHub project of its
+own, with its own release process, created and managed under the same umbrella
+as PyOpenGL — a Windows user who asks for GLUT gets the same builds from the
+same people as today. What changes is that they are an optional include rather
+than something every install carries. This is not a step towards dropping
+them.
+
 ## Why
 
-**They are somebody else's binaries, and we are redistributing them.**
-freeglut is not ours and neither is GLE; both are vendored, both are from
-compilers three generations old (vc9 is Visual Studio 2008), and neither has
-been rebuilt in about a decade. Shipping a third party's compiled code inside
-our wheel makes us responsible for it in ways nothing here can discharge: we
-cannot patch it, we do not know what is in it, and we cannot say what it was
-built against.
+**Every install carries them, whether it can use them or not.** They are in
+the pure-Python `py3-none-any` wheel, so a Linux server rendering headlessly
+through EGL downloads six freeglut builds it can never load. GLUT is a 1990s
+windowing toolkit that a new program has no reason to choose over GLFW, pygame
+or Qt; GLE is a tubing library that one module (`OpenGL.GLE`) wraps. Both
+still have users, and those users keep getting them — by asking.
 
 **A scanner has already objected.** #164 is ClamAV reporting
 `gle32.vc14.dll` and `freeglut32.vc9.dll` as `PUA.Win.Packer.NspackDotnetNor-2`.
 Almost certainly a false positive — the files have not changed in ten years —
-but it is not answerable by us: we did not build them, so we cannot say what
-the scanner is seeing. It will recur, and every recurrence costs a ticket. A
-user whose corporate scanner quarantines a pip install has no way to proceed
-and no way to understand why.
-
-**Everyone pays for them and few use them.** They are in the pure-Python
-`py3-none-any` wheel, so a Linux server rendering headlessly through EGL
-downloads six freeglut builds it can never load. GLUT is a 1990s windowing
-toolkit that a new program has no reason to choose over GLFW, pygame or Qt;
-GLE is a tubing library that one module (`OpenGL.GLE`) wraps.
+and hard to answer from the files alone, since they are vendored builds from
+compilers three generations old (vc9 is Visual Studio 2008). It will recur. As
+long as the files are in the core wheel, a corporate scanner that quarantines
+them quarantines PyOpenGL itself, for users who never wanted GLUT; once they
+are an extra, the objection lands on a package only GLUT users install, and
+PyOpenGL installs cleanly everywhere.
 
 **The bundling does not even work reliably.** #76, #125 and #127 are all
 Windows users finding GLUT absent, and #127's own thread answers it with "the
@@ -73,9 +75,11 @@ a mechanism built. Same for GLE.
 ## Shape
 
 **`PyOpenGL-glut-binaries`** — a new distribution, `win32`/`win_amd64` wheels
-only, containing the DLLs and nothing else. Not pure-Python: the point of the
-split is that a Linux user never downloads it, and only a platform-tagged
-wheel achieves that.
+only, containing the DLLs and nothing else. Its own GitHub repository and its
+own release process, created and maintained under the PyOpenGL umbrella, and
+a submodule of this workspace like the other projects. Not pure-Python: the
+point of the split is that a Linux user never downloads it, and only a
+platform-tagged wheel achieves that.
 
 **`PyOpenGL[glut]`** — an extra that requires it, on Windows only:
 
@@ -103,17 +107,18 @@ turns a working program into a puzzle.
    `PyOpenGL[glut]`. Red first; it is the whole compatibility story. The
    mechanism is already there — see *Half of that has landed* above — so this
    is `LIBRARY_SOURCES['GLUT']` and the case that reads it.
-3. The new distribution, built from the files as they stand. No rebuild: a
-   rebuild is a separate decision with its own risk, and doing both at once
-   makes any regression unattributable.
+3. The new project: its repository, its CI and release workflow, and its first
+   release to PyPI, built from the files as they stand. No rebuild: a rebuild
+   is a separate decision with its own risk, and doing both at once makes any
+   regression unattributable.
 4. The extra, the loader change, and the messages.
-5. `OpenGL/DLLS/` deleted, in the same change that publishes the new package —
-   never before it.
+5. `OpenGL/DLLS/` deleted, in the PyOpenGL change that adds the extra — never
+   before the new package is installable from PyPI.
 
 ## What it settles
 
-- **#164** — the scanner has nothing of ours to object to. Anyone who wants
-  the binaries opts in, and can decline.
+- **#164** — the core wheel carries nothing for a scanner to object to. The
+  binaries are still ours to ship, to the users who ask for them.
 - **#76 / #125 / #127** — either way the user is told what to do. Today they
   get `NullFunctionError` naming a function.
 - The `py3-none-any` wheel becomes what it claims to be: pure Python.
@@ -126,8 +131,9 @@ message, which is why it is step two rather than step five.
 - **Does GLE go too?** Same argument, much smaller audience — `OpenGL.GLE`
   wraps one library and the tests for it skip wherever `libgle` is absent. One
   package for both, or two? One, unless somebody wants GLE without GLUT.
-- **Who builds the new package**, and does it get its own repository? The
-  release tool in this workspace releases in dependency order and would need
-  to know about it.
+- **Release ordering.** The new package releases on its own cycle, but the
+  first `PyOpenGL[glut]` release depends on it being on PyPI already. The
+  release tool in this workspace releases in dependency order and needs to
+  know about it.
 - **Is a rebuild wanted eventually?** vc9 binaries load on current Windows,
   but nothing says how long that stays true. Not part of this change.
