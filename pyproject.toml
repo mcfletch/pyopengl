@@ -158,6 +158,30 @@ markers = [
     "slow: takes seconds rather than milliseconds, because it builds something -- a frozen application, an archive. Deselected with '-m \"not slow\"' while iterating.",
 ]
 
+[tool.coverage.run]
+# What the suite actually executes, which is a different question from what it
+# names.  A case can mention an entry point in a comment, a skip reason or an
+# assertion it never reaches, so counting names overstates coverage -- and the
+# under-tested paths are where the defects are.
+branch = true
+source = ["OpenGL"]
+# Several suites answer their question in a fresh interpreter, because it is
+# settled once per process: which dispatch implementation is installed, what an
+# import costs, which platform the entry points were built for.  Those children
+# are most of the coverage of the platform plugins, so measuring only the
+# parent reports the OSMesa and EGL platforms as nearly untouched.
+parallel = true
+patch = ["subprocess"]
+
+[tool.coverage.report]
+exclude_also = [
+    # A generated `def name(...): pass` is a declaration, not a body: the
+    # decorator replaces it with a ctypes function, so the line never runs
+    # however often the entry point is called.
+    "^def .*: pass$",
+    "if TYPE_CHECKING:",
+]
+
 [tool.mypy]
 # The gate is the shipped stub surface: the 1,307 `.pyi` files and the
 # `py.typed` beside them are what a user's own type checker reads, and a defect

@@ -91,6 +91,8 @@ tests/
 │   ├── arrays/               ArrayDatatype and the format handlers
 │   ├── platform/             which library each platform dispatches to
 │   ├── egl/ wgl/ glx/        the window-system bindings
+│   ├── osmesa/               OSMesa's own entry points, in child processes
+│   │                           because the platform is chosen at import
 │   ├── tk/ glut/             the toolkits PyOpenGL ships an integration for
 │   └── errors/               error checking and the debug-output policy
 ├── harness/                tests OF the fixtures above, rather than of the
@@ -381,6 +383,29 @@ skip (a window plus the egl-device platform is incompatible).
 
 Run it on a real GPU (`TEST_WINDOWING=egl` in a container, or windowed on the
 host) **and** on the software path, and confirm it skips where it should.
+
+## Measuring what a run executed
+
+`coverage.py` is configured in `pyproject.toml`, with `parallel` and
+`patch = subprocess` because several suites answer their question in a fresh
+interpreter — the platform plugins are almost entirely covered by children, so
+measuring only the parent reports them as untouched.
+
+```
+python -m coverage run -m pytest tests/
+python -m coverage combine
+python -m coverage report -m OpenGL/raw/osmesa/mesa.py
+```
+
+Generated `def name(...): pass` declarations are excluded from the report: the
+decorator replaces the body with a ctypes function, so the line never runs
+however often the entry point is called, and counting it as a miss buries the
+lines that are genuinely unreached.
+
+This answers a different question from the entry-point counters below, and the
+stricter one. Those ask which entry points a suite *names*; this asks which
+lines a run *executed*, and a case can name a call in a skip reason or behind
+an assertion it never reaches.
 
 ## Coverage tooling
 

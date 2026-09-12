@@ -62,9 +62,16 @@ def OSMesaDestroyContext(ctx): pass
 @_p.types(GLboolean, OSMesaContext, ctypes.POINTER(None), GLenum, GLsizei, GLsizei )
 def OSMesaMakeCurrent( ctx, buffer, type,width,height ): pass
 
-@_f 
-@_p.types(None, GLint, GLint )
-def OSMesaPixelStore( ctx, buffer, type,width,height ): pass
+@_f
+# void OSMesaPixelStore( GLint pname, GLint value )
+#
+# The names matter as much as the types: they are the signature a caller
+# reads, and what a keyword call binds to.  These said
+# `(ctx, buffer, type, width, height)`, copied from OSMesaMakeCurrent above,
+# so the two-argument call the declared types describe could only be made
+# positionally.
+@_p.types(None, GLint, GLint)
+def OSMesaPixelStore( pname, value ): pass
 
 def OSMesaGetIntegerv(pname):
     value = GLint()
@@ -99,7 +106,12 @@ def OSMesaGetColorBuffer(c):
         return 0, 0, 0, None
 
 @_f
-@_p.types(GLboolean)
+# void OSMesaColorClamp( GLboolean enable )
+#
+# `types(GLboolean)` named a GLboolean *return* and no arguments at all, which
+# ctypes reads as "accepts anything": the call happened to work, and nothing
+# checked the argument it was given.
+@_p.types(None, GLboolean)
 def OSMesaColorClamp(enable):
     """Enable/disable color clamping, off by default
 
@@ -107,7 +119,14 @@ def OSMesaColorClamp(enable):
     """
 
 @_f
-@_p.types(OSMesaContext, arrays.GLcharArray, GLuint)
+# void OSMesaPostprocess( OSMesaContext osmesa, const char *filter,
+#                         GLuint enable_value )
+#
+# The context was missing from the types, so the first argument was read as
+# the filter and the filter as the enable value: every call raised
+# `ctypes.ArgumentError: argument 2` naming a position the signature does not
+# have.
+@_p.types(None, OSMesaContext, arrays.GLcharArray, GLuint)
 def OSMesaPostprocess(osmesa, filter, enable_value):
     """Enable/disable Gallium post-process filters.
 
