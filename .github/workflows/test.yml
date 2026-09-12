@@ -14,6 +14,9 @@ name: Tests
 #   macOS    CGL, which hands out a context with no window server (=cgl)
 #   Windows  a WGL pbuffer, on the llvmpipe this job installs (=wgl)
 #
+# One Linux row renders through OSMesa instead (=osmesa), which is a PyOpenGL
+# platform rather than another driver behind EGL -- see the matrix below.
+#
 # The same renderer on every run is what makes a difference between runs mean
 # something, and each job reports which one answered before it runs anything:
 # a suite that found no GL skips its way to green, which reads as a pass.
@@ -53,7 +56,7 @@ concurrency:
 
 jobs:
   tox:
-    name: ${{ matrix.toxenv }}
+    name: ${{ matrix.toxenv }}${{ matrix.windowing && format(' / {0}', matrix.windowing) || '' }}
     # `inputs.platforms` is empty on a push and set only on a dispatch, so the
     # empty case is what makes a push run everything.
     if: >-
@@ -115,10 +118,19 @@ jobs:
              paths: 'tests/ accelerate/tests'}
           - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-flagnounpack,
              paths: 'tests/ accelerate/tests'}
+          # OSMesa, which is a PyOpenGL *platform* rather than another driver
+          # behind EGL: it rasterises into an array in the process's own
+          # memory, so a different set of the library is exercised -- the
+          # osmesa platform plugin, its context handle, and the paths that
+          # key per-context state by one.  Every other job here renders
+          # through the EGL device platform, so nothing else covers it.
+          - {python: '3.12', toxenv: py312-num1-accel1-dispc, windowing: osmesa,
+             paths: 'tests/ accelerate/tests'}
     env:
       # The headless EGL-device backend, on the software device.  Both are read
-      # by tests/glcontext_egl.py, and tox passes them through.
-      TEST_WINDOWING: egl
+      # by tests/glcontext_egl.py, and tox passes them through.  A matrix entry
+      # naming a different backend gets that one; see the OSMesa row above.
+      TEST_WINDOWING: ${{ matrix.windowing || 'egl' }}
       LIBGL_ALWAYS_SOFTWARE: '1'
       TEST_VISIBLE: '0'
     steps:
@@ -136,11 +148,23 @@ jobs:
         # fixture's own perspective, and the GLUT check scripts have nothing to
         # call.  The X libraries are for the glfw wheel, which links them
         # whether or not a display is ever opened.
+        #
+        # libosmesa6 is a platform rather than a library: OSMesa renders into
+        # an array the caller owns, with no window system and no device node,
+        # and PyOpenGL reaches it through a platform plugin of its own.
+        # Nothing else here loads it, so without this the whole platform is
+        # untested -- which is how four tracker issues about it stayed open
+        # with nobody able to reproduce them.
+        #
+        # clang because macOS and the BSDs build the accelerator with it and
+        # this matrix does not: it has twice made an error of a diagnostic gcc
+        # still allows, and each time every source install on those platforms
+        # stopped while these jobs stayed green.
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
             libegl1 libegl-mesa0 libgl1 libglx-mesa0 libgl1-mesa-dri \
-            libglu1-mesa freeglut3-dev xvfb \
+            libglu1-mesa libosmesa6 freeglut3-dev xvfb clang \
             libx11-6 libxrandr2 libxinerama1 libxcursor1 libxi6
 
       - name: Install tox
@@ -156,11 +180,23 @@ jobs:
         # In the environment the tests will run in, so it is that PyOpenGL
         # being asked.  A suite that silently found no GL would skip its way to
         # green, so say what is about to render before anything runs.
+        if: matrix.windowing != 'osmesa'
         run: >
           python -m tox exec -e ${{ matrix.toxenv }} --
           python tests/report_egl_device_enumeration.py
         env:
           PYOPENGL_PLATFORM: egl
+
+      - name: Report the renderer under test -- OSMesa
+        # The same claim for the OSMesa row, which renders through a different
+        # platform entirely: enumerating EGL devices there would report a
+        # renderer no test is going to use.  The check script makes a context,
+        # clears it and reads the pixel back, so a Mesa that loads but cannot
+        # render fails here rather than skipping its way through the suite.
+        if: matrix.windowing == 'osmesa'
+        run: >
+          python -m tox exec -e ${{ matrix.toxenv }} --
+          python tests/checks/check_osmesa.py
 
       - name: Run the tests
         # What is deselected is declared in tox.ini, so that a developer's run

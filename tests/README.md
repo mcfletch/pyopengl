@@ -49,12 +49,16 @@ tests/
 ├── glcontext_pygame.py     windowing backend: on-screen pygame/SDL window
 ├── glcontext_egl.py        windowing backend: headless EGL device (real GPU,
 │                             no window) — for CI / containers
+├── glcontext_osmesa.py     windowing backend: OSMesa, rasterising into an
+│                             array of our own — no display server at all
 ├── glcontext_desktop.py    DesktopGLTestCaseBase (OpenGL.GL) + GLUTestCaseBase
 ├── glcontext_es.py         ESTestCaseBase (OpenGL.GLES2 / GLES3)
 ├── conftest.py             what must be settled before any test module is
-│                             imported: PYOPENGL_PLATFORM=egl for the egl
-│                             backend, and that the dispatch implementation is
-│                             the one the run asked for
+│                             imported: PYOPENGL_PLATFORM for the backends that
+│                             need one (egl, osmesa), and that the dispatch
+│                             implementation is the one the run asked for
+├── platforms.py            which platform plugin this run selected, for a case
+│                             only one of them can serve: `platforms.needs(...)`
 ├── arraycompat.py          `from arraycompat import np` — numpy, or a ctypes
 │                             fallback for the no-numpy (num0) tox environments
 │
@@ -152,6 +156,7 @@ that serves them.
 | The Tk widget or the GLUT integration | `bindings/tk/`, `bindings/glut/` |
 | Error checking, `CONTEXT_CHECKING`, the debug-output policy | `bindings/errors/` |
 | The suite's own fixtures, backends and collection | `harness/` |
+| A case that only one platform plugin can serve — GLX, EGL, WGL, OSMesa | wherever its subject belongs, marked with `platforms.needs(...)` |
 | A program needing a toolkit main loop, a window of its own, or a fresh process | a `checks/check_*.py` script — see [Check scripts](#check-scripts) |
 | A report about what the machine has, for CI to print | a `report_*.py` script; nothing collects these |
 
@@ -278,6 +283,7 @@ window" rather than any particular one.
 | `tk`             | on-screen Tk window (`glcontext_tk.py`) | through `OpenGL.Tk.GLFrame`, which makes its own core-profile context on the window Tk hands out. Needs no package installed and needs an X display on Linux, Tk having no Wayland backend. |
 | `egl`            | **headless EGL device** (`glcontext_egl.py`) | renders directly on a GPU with no window system — the right choice for CI / containers where the compositor is software-rendered. Forces `PYOPENGL_PLATFORM=egl`; ES vs GL both work via an offscreen pbuffer. |
 | `cgl`            | **headless macOS context** (`glcontext_cgl.py`) | CGL is the layer NSGL and AGL are built on and the only one that hands out a context with no window server, which is what a macOS CI runner has. Framebuffer zero belongs to a drawable and there is none, so the backend binds a framebuffer object of the requested size. No OpenGL-ES, and no compatibility profile above 2.1; `TEST_CGL_RENDERER` pins the renderer kind. |
+| `osmesa`         | **software, into an array of our own** (`glcontext_osmesa.py`) | Mesa's off-screen interface: a PyOpenGL *platform* rather than a driver behind GLX or EGL, so it forces `PYOPENGL_PLATFORM=osmesa`. It needs no display server and no `/dev/dri` — only `libOSMesa` — which makes it the one that runs where nothing else will, and always software. The array it renders into *is* framebuffer zero, so nothing has to be bound in its place. Desktop GL only; an OpenGL-ES case skips. `OpenGL.osmesa.offscreen` is the machinery, usable by a program that wants a headless context of its own. |
 | `wgl`            | **headless Windows pbuffer** (`glcontext_wgl.py`) | a drawable the display driver allocates out of its own memory, belonging to no window. It *is* framebuffer zero, so nothing has to be bound in its place; it is asked for double-buffered, because the suite is written against a window and the GL 1.x and 2.0 state cases call `glDrawBuffer(GL_BACK)`. No OpenGL-ES: WGL provides none. `python tests/check_wgl_offscreen.py` says whether a machine can serve it, and names the WGL extensions it lacks if not — Windows' own GDI Generic fallback has none of them. |
 
 On a Wayland session with the NVIDIA driver, `glReadPixels` from an on-screen

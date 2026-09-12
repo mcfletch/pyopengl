@@ -19,6 +19,7 @@ import os
 import pkgutil
 
 import paths
+import platforms
 import pytest
 from backends import egl_refusal, missing_library
 
@@ -42,14 +43,26 @@ def _collect():
     found = []
     refused = egl_refusal()
     for namespace in NAMESPACES:
-        if namespace == 'EGL' and refused is not None:
-            # No EGL library here, and the binding refuses to import without
-            # one -- which is what it promises.  A machine that has one walks
-            # this namespace.
+        if not platforms.bindable(namespace):
+            # An API this run cannot bind, for either of two reasons. The
+            # machine may have no such library -- macOS and Windows have no
+            # EGL, and the binding refuses to import without one, which is
+            # what it promises. Or the platform this run selected may not
+            # carry it: OSMesa has no EGL and no GLX in the process, however
+            # much of either is installed. Both are the binding saying so
+            # correctly rather than a module a user cannot reach, which is
+            # what this case is about.
+            #
+            # Recorded as a skip naming the namespace rather than dropped, so
+            # an API that quietly stops being walked everywhere is visible.
+            if namespace == 'EGL' and refused is not None:
+                reason = 'OpenGL.EGL does not import here: %s' % (refused,)
+            else:
+                reason = ('the %s platform supplies no %s'
+                          % (platforms.selected() or 'default', namespace))
             found.append(pytest.param(
-                'OpenGL.EGL', id='OpenGL.EGL',
-                marks=pytest.mark.skip(
-                    reason='OpenGL.EGL does not import here: %s' % (refused,)),
+                'OpenGL.%s' % (namespace,), id='OpenGL.%s' % (namespace,),
+                marks=pytest.mark.skip(reason=reason),
             ))
             continue
         try:

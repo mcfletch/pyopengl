@@ -16,8 +16,10 @@ declaration reaches for it to say which checker the binding calls, and an API
 without one raises only on the path that builds a binding.
 """
 
+import functools
 import importlib
 
+import platforms
 import pytest
 from backends import egl_refusal
 
@@ -36,14 +38,40 @@ from OpenGL._declarations import (
 EGL_REFUSED = egl_refusal()
 
 
+@functools.lru_cache(maxsize=None)
+def _bindable(api):
+    """Whether this run can build `api`'s bindings, asked once per API.
+
+    Two different things stop it, and either is enough. The *machine* may have
+    no EGL library -- macOS and Windows have none -- so ``OpenGL.raw.EGL``
+    refuses at import. Or the *platform this run selected* may not supply it:
+    ``PYOPENGL_PLATFORM=osmesa`` has no EGL and no GLX in the process however
+    much of either is installed on the machine.
+
+    ``platforms.bindable`` answers both, by asking whether the API's error
+    checker imports -- the first thing every declaration in that API reaches
+    for. Cached because the sweep below asks it once per declaration, and a
+    failing import is not cached by the import system.
+    """
+    return platforms.bindable(api)
+
+
+def _why_not(api):
+    """Why `api` cannot be built here, for the skip to say."""
+    if api == 'EGL' and EGL_REFUSED is not None:
+        return 'OpenGL.raw.EGL does not import here: %s' % (EGL_REFUSED,)
+    return ('the %s platform supplies no %s'
+            % (platforms.selected() or 'default', api))
+
+
 def reachable(declaration):
-    """Whether this machine can import what `declaration` is declared in."""
-    return not (EGL_REFUSED is not None and declaration.api == 'EGL')
+    """Whether this run can build what `declaration` is declared in."""
+    return _bindable(declaration.api)
 
 
 def skip_unreachable(api):
-    if api == 'EGL' and EGL_REFUSED is not None:
-        pytest.skip('OpenGL.raw.EGL does not import here: %s' % (EGL_REFUSED,))
+    if not _bindable(api):
+        pytest.skip(_why_not(api))
 
 
 def _declarations():
@@ -79,6 +107,9 @@ def test_every_declared_type_resolves():
     way to find that out.
     """
     unresolved = []
+    # `reachable` drops the APIs this run cannot build: a window-system API
+    # the selected platform does not carry, and an EGL the machine has none
+    # of.  Either way the declarations are somebody else's to resolve.
     for declaration in filter(reachable, DECLARATIONS):
         try:
             declaration._resolve_types()

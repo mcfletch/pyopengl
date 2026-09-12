@@ -69,6 +69,26 @@ class OSMesaPlatform( baseplatform.BasePlatform ):
     @baseplatform.lazy_property
     def CurrentContextIsValid( self ): return self.GetCurrentContext
     
+    def releaseCurrentContext( self ):
+        """Let go of the context this thread holds; answer whether there was one
+
+        See
+        :meth:`OpenGL.platform.baseplatform.BasePlatform.releaseCurrentContext`
+        for why a program with two GL bindings in it needs this.  OSMesa says
+        "no context" the same way it says "this context": a make-current with
+        a null context and no buffer, which it accepts whether or not one was
+        held.
+
+        So whether there *was* one is read first, and the release is only
+        attempted when there was -- the answer this returns is that question
+        and not whether the call succeeded.
+        """
+        current = self.GetCurrentContext()
+        if not current:
+            return False
+        self.OSMesa.OSMesaMakeCurrent( None, None, 0, 0, 0 )
+        return True
+
     @baseplatform.lazy_property
     def getExtensionProcedure( self ):
         function = self.OSMesa.OSMesaGetProcAddress

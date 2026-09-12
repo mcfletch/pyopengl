@@ -261,7 +261,21 @@ def run_check(filename):
     # import checkutils and the fixtures by bare name.
     env = child_environment()
     if backends.is_headless(backends.requested(env)):
+        # These scripts open windows, so a headless backend's choices are not
+        # theirs.  TEST_WINDOWING would hand the child a backend with no
+        # window in it; PYOPENGL_PLATFORM, which conftest set from that same
+        # backend, would hand it a platform that may have no windowing path at
+        # all -- OSMesa has none by definition, so every GLX entry point a
+        # GLUT or glfw script reaches for resolves to null and the script dies
+        # having printed nothing, which the harness reads as a failed check.
+        #
+        # Dropping both puts the child where a run that asked for no backend
+        # would put it, and `child_environment` then pins the platform it
+        # would have pinned there.
+        env = child_environment(PYOPENGL_PLATFORM=None)
         env.pop('TEST_WINDOWING', None)
+        if sys.platform not in ('win32', 'darwin'):
+            env['PYOPENGL_PLATFORM'] = 'glx'
     pipe = subprocess.Popen(
         [sys.executable, os.path.join(HERE, filename)],
         stdout=subprocess.PIPE,

@@ -30,9 +30,18 @@ class TestTheVocabulary:
         assert backends.module_for('tk') == 'tkinter'
 
     def test_the_headless_ones_need_no_display(self):
-        """One per platform: EGL's device platform on Linux, CGL on macOS, a
-        WGL pbuffer on Windows."""
-        assert backends.HEADLESS == ('egl', 'cgl', 'wgl')
+        """Three per platform -- EGL's device platform on Linux, CGL on macOS,
+        a WGL pbuffer on Windows -- and OSMesa, which belongs to no platform
+        and asks least of the machine: it rasterises into an array in the
+        process's own memory, needing neither a display server nor a device
+        node."""
+        assert backends.HEADLESS == ('egl', 'cgl', 'wgl', 'osmesa')
+
+    def test_osmesa_is_not_a_platform_default(self):
+        """``headless_for`` answers what a platform *has*, and every platform
+        here has a hardware-capable one.  OSMesa is software always, so it is
+        asked for by name rather than fallen into."""
+        assert 'osmesa' not in dict(backends.HEADLESS_BY_PLATFORM).values()
 
     def test_every_name_is_one_or_the_other(self):
         assert set(backends.ALL) == set(backends.WINDOWED) | set(backends.HEADLESS)

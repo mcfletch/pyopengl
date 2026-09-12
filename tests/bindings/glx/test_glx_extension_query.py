@@ -19,6 +19,7 @@ import os
 
 import pytest
 
+import platforms
 from OpenGL.raw.GLX._types import GLXQuerier, displayName
 
 
@@ -48,6 +49,7 @@ class TestNamingTheDisplay:
 
 @pytest.mark.skipif(not os.environ.get('DISPLAY', '').strip(),
                     reason='no X display to query GLX on')
+@platforms.needs('GLX')
 class TestAgainstARealServer:
     def test_the_version_is_reported(self):
         """[0, 0] is what a failed connection answers, and no server is at 0."""

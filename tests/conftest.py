@@ -21,8 +21,14 @@ import pytest
 # cgl, is macOS's own and needs nothing.
 import backends
 
-if backends.requested() == 'egl':
-    os.environ.setdefault('PYOPENGL_PLATFORM', 'egl')
+#: The backends whose entry points come from a library the platform plugin
+#: chooses, and the value that chooses it.  cgl and wgl are their platforms'
+#: own and need nothing said.
+_PLATFORM_FOR_BACKEND = {'egl': 'egl', 'osmesa': 'osmesa'}
+
+_platform = _PLATFORM_FOR_BACKEND.get(backends.requested())
+if _platform:
+    os.environ.setdefault('PYOPENGL_PLATFORM', _platform)
 
 
 def pytest_configure(config):

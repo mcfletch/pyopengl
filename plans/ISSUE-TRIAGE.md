@@ -68,23 +68,23 @@ test rather than a platform one.
 
 | # | What it is | State on `develop` |
 |---|---|---|
-| 3 | integer offset to `glVertexAttribPointer` | fixed; red against 3.1.1 |
+| 3 | integer offset to `glVertexAttribPointer` | **fixed here** — it took an int and read it as an address |
 | 5 | VBO memory growth, `ERROR_ON_COPY` silent | to reproduce |
 | 10 | OSMesa: `undefined symbol: glGetError` | does not reproduce on this Mesa |
 | 12 | `.pxd` files missing from the accelerate sdist | to reproduce |
 | 18 | the same, from a different caller | duplicate of 10 |
 | 21 | `numpy.float128` assumed to exist | fixed; red against 3.1.1 |
-| 33 | unhashable context under OSMesa | fixed; the context hashes and stores |
+| 33 | unhashable context under OSMesa | **fixed here** — the handle now hashes *and* compares |
 | 34 | `glClear` segfault under OSMesa RGB | does not reproduce on this Mesa |
 | 38 | upstream renamed registry parameters | needs a registry-vs-wrapper test |
-| 42 | integer offset to `glDrawElements` | **live — red now** |
+| 42 | integer offset to `glDrawElements` | **fixed here** |
 | 43 | platform plugin load failure reports `NoneType` | error-quality test |
 | 46 | accelerate built without numpy drops `numpy_formathandler` | packaging test |
 | 47 | `glTexImage2D` leaks a reference on a non-contiguous array | fixed; red against 3.1.5 |
 | 48 | `glutCreateWindow` with a `str` | partly; the bytes path is here |
 | 51 | `GL_HALF_FLOAT` for `glTexImage2D` | fixed; red against 3.1.5 |
 | 68 | `glReadPixels` with `GL_RGB`/`GL_UNSIGNED_BYTE` | fixed; red against 3.1.5 |
-| 70 | `OSMesaCreateContextAttribs` not declared | the declaration is testable here |
+| 70 | `OSMesaCreateContextAttribs` not declared | present; #129 covers the error a caller met |
 | 79 | accelerate build: `++Py_REFCNT` is not an lvalue | build test |
 | 88 | `glInitFramebufferObjectARB` under Wayland | fixed; see the cluster above |
 | 95 | `glActiveTexture` slow under 3.1.6 | performance test |
@@ -96,9 +96,9 @@ test rather than a platform one.
 | 117 | the same clang failure on an M3 | duplicate of 107 |
 | 120 | `ARB_bindless_texture` missing | fixed; red against 3.1.7 |
 | 121 | generated Cython C shipped in the release | packaging test |
-| 129 | platform has no such sub-API — unhelpful error | **live — the error message** |
-| 137 | GLES version string parsing | parse fixed; `is_opengl_es` **live** |
-| 138 | `xlib` test dependency is unmaintained | **live — still in pyproject** |
+| 129 | platform has no such sub-API — unhelpful error | **fixed here** — the message names `PYOPENGL_PLATFORM` |
+| 137 | GLES version string parsing | **fixed here** — `is_opengl_es` was dead code |
+| 138 | `xlib` test dependency is unmaintained | **fixed here** — now `python-xlib` |
 | 141 | Debian package test failures | several, mostly here |
 | 142 | `glCallLists` name stack empty on newer Mesa | passes here; needs the reporter's Mesa |
 | 143 | `SyntaxWarning: invalid escape sequence` | fixed; red against 3.1.9 |

@@ -49,7 +49,12 @@ test = [
     # headless backends, and the pygame windowing backend is simply absent.
     "pygame-ce >= 2.1.3; python_version >= '3.11'",
     "psutil",
-    "xlib",
+    # python-xlib, not xlib: both install the same `Xlib` package, and
+    # xlib's last release was 0.21 in 2018 against python-xlib's 0.33.
+    # The name matters beyond currency -- conda-forge packages
+    # python-xlib and not xlib, so a conda environment could not
+    # satisfy this at all.
+    "python-xlib >= 0.33",
     "glfw",
     # tests/cdispatch reads the Khronos registry XML through src/xmlreg.py.
     "lxml",

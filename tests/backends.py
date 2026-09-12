@@ -19,8 +19,12 @@ CGL on macOS, WGL pbuffers on Windows.
 #: rather than to fall into.
 WINDOWED = ('glfw', 'pygame', 'tk')
 
-#: Backends that need no window and no display server, one per platform.
-HEADLESS = ('egl', 'cgl', 'wgl')
+#: Backends that need no window and no display server.  The first three are
+#: one per platform and render on whatever that platform's driver offers
+#: without a window; ``osmesa`` belongs to no platform and asks least of the
+#: machine -- it rasterises into an array in this process's own memory, so it
+#: needs neither a display server nor a device node, only ``libOSMesa``.
+HEADLESS = ('egl', 'cgl', 'wgl', 'osmesa')
 
 #: Which of them serves each platform, by the prefix ``sys.platform`` takes
 #: there.  A run that wants "headless, whatever that means here" asks

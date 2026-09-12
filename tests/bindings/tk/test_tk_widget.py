@@ -21,11 +21,18 @@ from arraycompat import one
 import paths
 import pytest
 from backends import has_window_server
+import platforms
 
 pytest.importorskip('tkinter')
 
 needs_display = pytest.mark.skipif(
     not has_window_server(), reason='no window server to open a Tk window on')
+
+#: `OpenGL.Tk` makes its context with `glXChooseFBConfig`, so a run that
+#: selected a platform without GLX -- the OSMesa one, which has no window
+#: system at all -- has no path to a widget's context and every entry point
+#: the widget reaches for is null.
+pytestmark = platforms.needs('GLX')
 
 
 def assert_the_old_pipeline_is_there():
