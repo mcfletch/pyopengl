@@ -78,3 +78,39 @@ def as_unicode(x,encoding='utf-8'):
     else:
         return unicode(x)
 
+
+
+#: How much of one argument an error message may show.  Enough to recognise
+#: what was passed; far short of printing a mesh.
+ARGUMENT_REPR_LIMIT = 100
+
+
+def short_repr(value, limit=ARGUMENT_REPR_LIMIT):
+    """``repr(value)``, shortened, for putting in an error message.
+
+    The arguments of a GL call are routinely enormous -- a vertex buffer, a
+    texture, a mesh -- and an exception that formats one produces megabytes of
+    digits. What the caller sees then is not a diagnosis but a terminal that
+    has stopped responding: IDLE hangs outright, and elsewhere the message
+    they needed scrolls past behind the contents of a buffer.
+
+    Shortened here, where the message is built, rather than by whatever prints
+    it: `str(error)` is called by logging, by `repr`, and by the traceback
+    machinery before anything decides whether to show it, so the cost is paid
+    whether or not anybody ever reads the result.
+
+    https://github.com/mcfletch/pyopengl/issues/114
+    """
+    try:
+        text = repr(value)
+    except Exception:                  # pragma: no cover - a hostile __repr__
+        return '<%s, whose repr raised>' % (type(value).__name__,)
+    if len(text) <= limit:
+        return text
+    return '%s... (%s of %d characters)' % (
+        text[:limit], type(value).__name__, len(text))
+
+
+def short_repr_tuple(values, limit=ARGUMENT_REPR_LIMIT):
+    """A tuple of arguments, each shortened -- ``(a, b, c)``."""
+    return '(%s)' % (', '.join(short_repr(one, limit) for one in values),)

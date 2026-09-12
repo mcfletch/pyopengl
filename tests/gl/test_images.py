@@ -19,6 +19,7 @@ import pytest
 
 from arraycompat import np, object_names, one
 from gltestcase import GLTestCase
+from OpenGL import _configflags
 from OpenGL.arrays import arraydatatype
 from OpenGL.GL import *  # noqa: F401,F403
 # After the star import, which binds `images` to OpenGL.GL.images.
@@ -229,7 +230,7 @@ class TestAnImageTheCallerKeeps(GLTestCase):
 
     def setUp(self):
         super().setUp()
-        self.texture = glGenTextures(1)
+        self.texture = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, self.texture)
 
     def tearDown(self):
@@ -262,6 +263,10 @@ class TestAnImageTheCallerKeeps(GLTestCase):
 
     @pytest.mark.skipif(not hasattr(np, 'ndarray'),
                         reason='needs numpy itself, not the ctypes shim')
+    @pytest.mark.skipif(
+        _configflags.ERROR_ON_COPY,
+        reason='ERROR_ON_COPY refuses the copy this case is about, so there '
+               'is no retained copy to ask after')
     def test_a_flipped_image_is_not_retained(self):
         """The case both tickets hit: PyOpenGL has to copy this one."""
         image = np.zeros((16, 16, 4), dtype='u1')[::-1]
@@ -313,7 +318,7 @@ class TestHalfFloatImages(GLTestCase):
     def setUp(self):
         super().setUp()
         self.require_extension('GL_ARB_half_float_pixel')
-        self.texture = glGenTextures(1)
+        self.texture = one(glGenTextures(1))
         glBindTexture(GL_TEXTURE_2D, self.texture)
 
     def tearDown(self):

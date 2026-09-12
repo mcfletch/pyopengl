@@ -4,6 +4,7 @@
 Will *only* work for Python 2.6+, and pretty much just works for strings
 under 2.6 (in terms of the common object types).
 """
+import ctypes
 import sys, operator, logging, traceback
 from OpenGL.arrays import _buffers
 from OpenGL.raw.GL import _types
@@ -41,21 +42,16 @@ if not BufferHandler:
 
             @classmethod
             def from_param(cls, value, typeCode=None):
-                if not isinstance(value, _buffers.Py_buffer):
-                    value = cls.asArray(value)
-                    # raise TypeError( """Can't convert value to py-buffer in from_param""" )
-                # TODO: only do this IFF value.internal is None
-                return _types.GLvoidp(value.buf)
+                # Through `dataPointer`, which reads the address out of
+                # whichever shape the value arrived in -- `asArray` now
+                # answers with a memoryview, which has no `.buf`.
+                return _types.GLvoidp(cls.dataPointer(value))
 
-        #                return value
         else:
 
             @classmethod
             def from_param(cls, value, typeCode=None):
-                if not isinstance(value, _buffers.Py_buffer):
-                    value = cls.asArray(value)
-                    # raise TypeError( """Can't convert value to py-buffer in from_param""" )
-                return value.buf
+                return cls.dataPointer(value)
 
         def dataPointer(value):
             if not isinstance(value, _buffers.Py_buffer):
@@ -79,10 +75,26 @@ if not BufferHandler:
             """Currently don't allow strings as output types!"""
             raise NotImplementedError("""Have not implemented ones for buffer type""")
 
+        @staticmethod
+        def _view(value):
+            """`value` as a memoryview, whatever shape it arrived in.
+
+            The accessors below are called with whatever a caller passed as
+            well as with what `asArray` answered, so each has to read both.
+            """
+            if isinstance(value, memoryview):
+                return value
+            if isinstance(value, _buffers.Py_buffer):
+                # A structure a previous release's `asArray` produced, and
+                # what `dataPointer` still builds internally.
+                return memoryview(
+                    (ctypes.c_ubyte * value.len).from_address(value.buf))
+            return memoryview(value)
+
         @classmethod
         def arrayToGLType(cls, value):
             """Given a value, guess OpenGL type of the corresponding pointer"""
-            format = value.format
+            format = cls._view(value).format
             if format in ARRAY_TO_GL_TYPE_MAPPING:
                 return ARRAY_TO_GL_TYPE_MAPPING[format]
             raise TypeError('Unknown format: %r' % (format,))
@@ -90,27 +102,40 @@ if not BufferHandler:
         @classmethod
         def arraySize(cls, value, typeCode=None):
             """Given a data-value, calculate ravelled size for the array"""
-            return value.len // value.itemsize
+            view = cls._view(value)
+            return view.nbytes // view.itemsize
 
         @classmethod
         def arrayByteCount(cls, value, typeCode=None):
             """Given a data-value, calculate number of bytes required to represent"""
-            return value.len
+            return cls._view(value).nbytes
 
         @classmethod
         def unitSize(cls, value, default=None):
-            return value.dims[-1]
+            return cls._view(value).shape[-1]
 
         @classmethod
         def asArray(cls, value, typeCode=None):
-            """Convert given value to an array value of given typeCode"""
-            buf = _buffers.Py_buffer.from_object(value)
-            return buf
+            """Convert given value to an array value of given typeCode
+
+            A ``memoryview``, which is what the compiled handler answers with
+            too.  It used to be a ``Py_buffer`` -- and that is a
+            ``ctypes.Structure``, which ctypes passes to a ``void *``
+            parameter as *a pointer to the structure*.  So an entry point
+            taking ``const void *data`` received the address of the wrapper
+            and uploaded the wrapper's own bytes: right size, no GL error, and
+            a pointer value in the buffer where the data should be.  A
+            memoryview is passed by ctypes as the address of its data, which
+            is what every one of these calls means.
+
+            See https://github.com/mcfletch/pyopengl/issues/175
+            """
+            return cls._view(value)
 
         @classmethod
         def dimensions(cls, value, typeCode=None):
             """Determine dimensions of the passed array value (if possible)"""
-            return value.dims
+            return cls._view(value).shape
 
 
 ARRAY_TO_GL_TYPE_MAPPING = _buffers.ARRAY_TO_GL_TYPE_MAPPING

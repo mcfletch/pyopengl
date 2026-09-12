@@ -22,7 +22,7 @@ import time
 
 import pytest
 
-from arraycompat import np
+from arraycompat import np, one
 from gltestcase import GLTestCase
 from OpenGL.GL import *  # noqa: F401,F403
 
@@ -46,7 +46,7 @@ class TestAWrongCallWithALargeArgument(GLTestCase):
 
     def setUp(self):
         super().setUp()
-        self.buffer = glGenBuffers(1)
+        self.buffer = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, self.buffer)
 
     def raise_it(self, call):

@@ -491,6 +491,14 @@ cdef class AsArrayOfType(pyArgConverter):
         self.typeIndex = wrapper.pyArgIndex( self.typeName )
     cdef object c_call( self, object incoming, object function, tuple arguments ):
         """Get the arg as an array of the appropriate type"""
+        # An integer is a byte offset into the bound buffer rather than one
+        # datum to upload: this converter serves glDrawElements and the pixel
+        # calls, whose data argument the GL reads as an offset whenever a
+        # buffer object is bound.  Kept in step with the ctypes converter of
+        # the same name in OpenGL/arrays/arrayhelpers.py, and with
+        # OpenGL.arrays.arraydatatype.buffer_offset, which decides.
+        if type(incoming) is int:
+            return ctypes.c_void_p( incoming )
         return self.arrayType.asArray( incoming, arguments[ self.typeIndex ] )
 
 cdef class AsArrayTyped(pyArgConverter):

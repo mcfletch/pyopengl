@@ -432,7 +432,7 @@ class TestAMemoryViewAsTheSource(GLTestCase):
 
     def setUp(self):
         super().setUp()
-        self.buffer = glGenBuffers(1)
+        self.buffer = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, self.buffer)
 
     def uploaded_size(self):
@@ -505,13 +505,13 @@ class TestAnOffsetIntoABoundBuffer(GLTestCase):
     def setUp(self):
         super().setUp()
         self.require_vertex_arrays()
-        self.vao = glGenVertexArrays(1)
+        self.vao = one(glGenVertexArrays(1))
         glBindVertexArray(self.vao)
-        self.vbo = glGenBuffers(1)
+        self.vbo = one(glGenBuffers(1))
         glBindBuffer(GL_ARRAY_BUFFER, self.vbo)
         glBufferData(GL_ARRAY_BUFFER, np.array(self.VERTICES, 'f'),
                      GL_STATIC_DRAW)
-        self.ebo = glGenBuffers(1)
+        self.ebo = one(glGenBuffers(1))
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.ebo)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER,
                      np.array(self.INDICES, 'H'), GL_STATIC_DRAW)

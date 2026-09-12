@@ -41,9 +41,17 @@ PREAMBLE = '''
 import ctypes, json
 from OpenGL import arrays
 from OpenGL.raw.osmesa import mesa
-from OpenGL.raw.GL.VERSION.GL_1_1 import *
-from OpenGL.raw.GL.VERSION.GL_3_0 import (
-    GL_MAJOR_VERSION, GL_MINOR_VERSION)
+# The friendly namespace rather than OpenGL.raw: a raw entry point's declared
+# restype is the array type the C signature names, and only the C dispatch
+# layer turns that into what it actually is -- so `glGetString(GL_RENDERER)`
+# off the raw module answers with an array under ctypes and fails converting
+# its argument.  OpenGL.GL is what a caller uses and what these should ask.
+# `mesa` stays raw because the OSMesa declarations are the subject here.
+from OpenGL.GL import *
+# SIZE_1_ARRAY_UNPACK=0 makes a query producing one value answer with a
+# one-element array instead, which int() cannot read.  as_int is what the
+# library itself uses to read such an answer either way.
+from OpenGL._scalar import as_int
 
 WIDTH, HEIGHT = 64, 48
 report = {}
@@ -152,8 +160,8 @@ class TestTheThreeConstructors:
                 buffer = buffer_for()
                 mesa.OSMesaMakeCurrent(context, buffer, GL_UNSIGNED_BYTE,
                                        WIDTH, HEIGHT)
-                report['depth_bits'] = int(glGetIntegerv(GL_DEPTH_BITS))
-                report['stencil_bits'] = int(glGetIntegerv(GL_STENCIL_BITS))
+                report['depth_bits'] = as_int(glGetIntegerv(GL_DEPTH_BITS))
+                report['stencil_bits'] = as_int(glGetIntegerv(GL_STENCIL_BITS))
                 glFinish()
                 mesa.OSMesaDestroyContext(context)
         ''')
@@ -182,8 +190,8 @@ class TestTheThreeConstructors:
                 mesa.OSMesaMakeCurrent(context, buffer, GL_UNSIGNED_BYTE,
                                        WIDTH, HEIGHT)
                 report['version'] = glGetString(GL_VERSION).decode()
-                report['major'] = int(glGetIntegerv(GL_MAJOR_VERSION))
-                report['minor'] = int(glGetIntegerv(GL_MINOR_VERSION))
+                report['major'] = as_int(glGetIntegerv(GL_MAJOR_VERSION))
+                report['minor'] = as_int(glGetIntegerv(GL_MINOR_VERSION))
                 glFinish()
                 mesa.OSMesaDestroyContext(context)
         ''')
@@ -495,7 +503,7 @@ class TestWhenTheQueryHasNothingToAnswerWith:
             buffer = buffer_for()
             mesa.OSMesaMakeCurrent(context, buffer, GL_UNSIGNED_BYTE,
                                    WIDTH, HEIGHT)
-            report['depth_bits'] = int(glGetIntegerv(GL_DEPTH_BITS))
+            report['depth_bits'] = as_int(glGetIntegerv(GL_DEPTH_BITS))
             report['answer'] = list(mesa.OSMesaGetDepthBuffer(context)[:3])
             report['pointer_is_none'] = (
                 mesa.OSMesaGetDepthBuffer(context)[3] is None)

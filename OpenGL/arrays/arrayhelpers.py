@@ -61,6 +61,14 @@ if AsArrayTypedSizeChecked is None:
 
         def __call__(self, arg, wrappedOperation, args):
             """Get the arg as an array of the appropriate type"""
+            # An integer here is a byte offset into the bound buffer rather
+            # than one datum to upload: this converter serves `glDrawElements`
+            # and the pixel calls, whose data argument the GL reads as an
+            # offset whenever a buffer object is bound.  See
+            # `OpenGL.arrays.arraydatatype.buffer_offset`.
+            offset = arraydatatype.buffer_offset(arg)
+            if offset is not None:
+                return offset
             type = args[self.typeIndex]
             arrayType = arraydatatype.GL_CONSTANT_TO_ARRAY_TYPE[type]
             return arrayType.asArray(arg)

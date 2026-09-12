@@ -8,6 +8,7 @@ from OpenGL.converters import DefaultCConverter
 from OpenGL.converters import returnCArgument, returnPyArgument
 from OpenGL.latebind import LateBind
 from OpenGL.arrays import arrayhelpers, arraydatatype
+from OpenGL._bytes import short_repr_tuple
 from OpenGL._null import NULL
 
 from OpenGL import acceleratesupport
@@ -575,13 +576,13 @@ class Wrapper(LateBind):
                 def calculate_pyArgs(args):
                     if pyConverters_length > len(args):
                         raise ValueError(
-                            """%s requires %r arguments (%s), received %s: %r"""
+                            """%s requires %r arguments (%s), received %s: %s"""
                             % (
                                 wrappedOperation.__name__,
                                 pyConverters_length,
                                 ", ".join(self.pyConverterNames),
                                 len(args),
-                                args,
+                                short_repr_tuple(args),
                             )
                         )
                     for index, converter, isNone in pyConverters_mapped:
@@ -1619,13 +1620,13 @@ class Wrapper(LateBind):
         if pyConverters:
             if len(pyConverters) != len(args):
                 raise ValueError(
-                    """%s requires %r arguments (%s), received %s: %r"""
+                    """%s requires %r arguments (%s), received %s: %s"""
                     % (
                         self.wrappedOperation.__name__,
                         len(pyConverters),
                         ", ".join(self.pyConverterNames),
                         len(args),
-                        args,
+                        short_repr_tuple(args),
                     )
                 )
             pyArgs = []

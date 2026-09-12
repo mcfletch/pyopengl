@@ -303,6 +303,71 @@ Two defects under one symptom, and the quieter one was worse.
 >
 > Fixed in 4.0.0b1.
 
+### #114 — a large argument in an error message
+
+**Test** `tests/bindings/errors/test_big_arguments_in_messages.py`
+**Commit** `61ff46ac`, `ca-pending`
+
+Believed fixed until the test was run on the ctypes dispatch layer, where it
+was not: 134 million characters of message for a 32 MB argument.
+
+> Reproduced and fixed, and the test found more than the ticket did.
+>
+> A GL call's arguments are routinely enormous, and formatting one into an
+> exception produces megabytes of digits: your IDLE stopped responding, and a
+> terminal fills its scrollback while the message you needed scrolls past.
+>
+> The C dispatch layer already bounded this. The ctypes layer did not, and
+> neither did the compiled wrapper's own arity check — three copies of the
+> same "requires N arguments, received M: %r" message, two of them formatting
+> the whole argument tuple. On a 32 MB `bytes` that is a 134-million-character
+> message; the same call now produces 51 characters.
+>
+> Bounded where the message is built rather than by whatever prints it, since
+> `str(error)` is called by logging, by `repr` and by the traceback machinery
+> before anything decides whether to show it — so the cost was paid whether or
+> not anybody ever read the result. Each argument is shown to 100 characters
+> and then named by type and length.
+>
+> Fixed in 4.0.0b1.
+
+### #175 — `glBufferData` with a `memoryview`
+
+**Test** `tests/gl/test_array_acceptance.py::TestAMemoryViewAsTheSource`,
+`tests/bindings/arrays/test_py_buffer_as_a_pointer.py`
+**Commit** `017ccf86`, `pending`
+
+Recorded first as not reproducible; running the suite with the accelerators
+switched off found a defect of the same shape — silent corruption rather than
+a crash.
+
+> Your crash does not reproduce here, but writing the cases for it found a
+> real defect one configuration over, and it is very likely the same root.
+>
+> With the compiled accelerators off — which is PyPy, any platform with no
+> wheel, and anyone setting `PYOPENGL_USE_ACCELERATE=0` — `glBufferData` with
+> a `memoryview` uploaded **the wrong bytes**. The size was right, the call
+> succeeded, `glGetError` said nothing, and the buffer held a pointer value
+> where the data should be.
+>
+> The pure-Python array machinery turned a memoryview into a `Py_buffer`,
+> which is a `ctypes.Structure`, and ctypes passes one of those to a
+> `void *` parameter as *the address of the structure*. So the driver was
+> handed the wrapper and copied the wrapper's own bytes. The compiled handler
+> answers with the memoryview itself, which ctypes passes correctly — which is
+> why this was invisible to anyone with a wheel, and why your `bytes(mem)`
+> workaround helped: `bytes` takes a different handler entirely.
+>
+> The Python handler now answers with a memoryview too, so both
+> configurations agree. Cases cover `bytes`, a memoryview, a slice of one and
+> a bytearray, and they read the buffer back rather than trusting the call to
+> have returned — a wrong length or wrong content that happens not to fault is
+> the same defect one allocation luckier, which is plausibly what you were on
+> the wrong side of.
+>
+> Fixed in 4.0.0b1. If it still crashes for you there, `python -m
+> OpenGL.version` and your Mesa version would help.
+
 ---
 
 ## Held
@@ -363,21 +428,6 @@ module both tickets name.
 >
 > Released in 4.0.0b1.
 
-### #175 — `glBufferData` with a `memoryview`
-
-**Test** `tests/gl/test_array_acceptance.py::TestAMemoryViewAsTheSource`
-**Commit** `017ccf86`
-
-> Not reproduced here: PyOpenGL 3.1.7 on Mesa 25.2 uploads the correct bytes
-> for every spelling in your report, including both `glBufferData` forms.
-> Something on your machine is needed to trigger it that I have not identified.
->
-> There are now cases for each form, and they assert the resulting buffer size
-> and read the data back rather than merely that the call returned — a wrong
-> length that happens not to fault is the same defect one allocation luckier.
-> If it still crashes for you on 4.0.0b1, the output of
-> `python -m OpenGL.version` and your Mesa version would help.
-
 ### #47 / #96 — an image the caller keeps
 
 **Test** `tests/gl/test_images.py::TestAnImageTheCallerKeeps`
@@ -421,24 +471,6 @@ module both tickets name.
 > type unconditionally fails while it is being *built*, so it is not one call
 > that breaks but the whole array plug-in, reported from whichever entry point
 > the caller reached first. It had nothing to do with glGenTextures.
->
-> Released in 4.0.0b1.
-
-### #114 — a large argument in an error message
-
-**Test** `tests/bindings/errors/test_big_arguments_in_messages.py`
-**Commit** `61ff46ac`
-
-> Fixed and now held. A GL call's arguments are routinely enormous, and
-> formatting one into a message produces megabytes of digits — your IDLE
-> stopped responding, and a terminal fills its scrollback while the message
-> scrolls past.
->
-> Bounded on the way in rather than by whatever prints it, because
-> `str(error)` is called by logging, by `repr` and by the traceback machinery
-> before anything decides whether to show it. There is a case for each way a
-> message is built — a wrong-arity TypeError and a driver GLError — and one
-> that the bounded message still says what went wrong.
 >
 > Released in 4.0.0b1.
 

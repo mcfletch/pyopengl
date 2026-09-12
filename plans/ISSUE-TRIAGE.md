@@ -69,44 +69,44 @@ test rather than a platform one.
 | # | What it is | State on `develop` |
 |---|---|---|
 | 3 | integer offset to `glVertexAttribPointer` | **fixed here** — it took an int and read it as an address |
-| 5 | VBO memory growth, `ERROR_ON_COPY` silent | to reproduce |
+| 5 | VBO memory growth, `ERROR_ON_COPY` silent | **fixed here** — the flag was set too late and said nothing |
 | 10 | OSMesa: `undefined symbol: glGetError` | does not reproduce on this Mesa |
-| 12 | `.pxd` files missing from the accelerate sdist | to reproduce |
+| 12 | `.pxd` files missing from the accelerate sdist | **held** — the .pxd files ship, and a case says so |
 | 18 | the same, from a different caller | duplicate of 10 |
-| 21 | `numpy.float128` assumed to exist | fixed; red against 3.1.1 |
+| 21 | `numpy.float128` assumed to exist | **held** — red against a numpy with float128 removed |
 | 33 | unhashable context under OSMesa | **fixed here** — the handle now hashes *and* compares |
 | 34 | `glClear` segfault under OSMesa RGB | does not reproduce on this Mesa |
-| 38 | upstream renamed registry parameters | needs a registry-vs-wrapper test |
+| 38 | upstream renamed registry parameters | **fixed here** — 624 parameter references now checked |
 | 42 | integer offset to `glDrawElements` | **fixed here** |
-| 43 | platform plugin load failure reports `NoneType` | error-quality test |
-| 46 | accelerate built without numpy drops `numpy_formathandler` | packaging test |
-| 47 | `glTexImage2D` leaks a reference on a non-contiguous array | fixed; red against 3.1.5 |
-| 48 | `glutCreateWindow` with a `str` | partly; the bytes path is here |
-| 51 | `GL_HALF_FLOAT` for `glTexImage2D` | fixed; red against 3.1.5 |
-| 68 | `glReadPixels` with `GL_RGB`/`GL_UNSIGNED_BYTE` | fixed; red against 3.1.5 |
+| 43 | platform plugin load failure reports `NoneType` | **fixed here** — the plugin names itself and its reason |
+| 46 | accelerate built without numpy drops `numpy_formathandler` | **held** — numpy is a build requirement |
+| 47 | `glTexImage2D` leaks a reference on a non-contiguous array | **held** — refcounts asserted over eight uploads |
+| 48 | `glutCreateWindow` with a `str` | **held** — the Windows title type has a case |
+| 51 | `GL_HALF_FLOAT` for `glTexImage2D` | **held** — the table and a real upload |
+| 68 | `glReadPixels` with `GL_RGB`/`GL_UNSIGNED_BYTE` | **held** — read back and asserted on every run |
 | 70 | `OSMesaCreateContextAttribs` not declared | present; #129 covers the error a caller met |
 | 79 | accelerate build: `++Py_REFCNT` is not an lvalue | build test |
 | 88 | `glInitFramebufferObjectARB` under Wayland | fixed; see the cluster above |
-| 95 | `glActiveTexture` slow under 3.1.6 | performance test |
-| 96 | `glGenerateMipmap` segfault | **crash — stop-and-fix** |
+| 95 | `glActiveTexture` slow under 3.1.6 | not reproducible: 0.07 us/call; four calls now timed |
+| 96 | `glGenerateMipmap` segfault | not reproducible; the reported sequence is a case |
 | 104 | `GetCurrentContext()` returning 0 read as invalid | fixed; see the cluster |
 | 107 | clang 15 `-Wint-conversion` | fixed; red against 3.1.7 under clang 18 |
 | 113 | `GetCurrentContext` vs `eglGetCurrentContext` | fixed; see the cluster |
-| 114 | a large `bytes` argument formatted into an error | fixed; red against 3.1.7 |
+| 114 | a large `bytes` argument formatted into an error | **held** — bounded message, red against 3.1.7 |
 | 117 | the same clang failure on an M3 | duplicate of 107 |
-| 120 | `ARB_bindless_texture` missing | fixed; red against 3.1.7 |
-| 121 | generated Cython C shipped in the release | packaging test |
+| 120 | `ARB_bindless_texture` missing | **held** — present, and walked by the import sweep |
+| 121 | generated Cython C shipped in the release | **fixed here** — the sdist stops shipping Cython output |
 | 129 | platform has no such sub-API — unhelpful error | **fixed here** — the message names `PYOPENGL_PLATFORM` |
 | 137 | GLES version string parsing | **fixed here** — `is_opengl_es` was dead code |
 | 138 | `xlib` test dependency is unmaintained | **fixed here** — now `python-xlib` |
-| 141 | Debian package test failures | several, mostly here |
-| 142 | `glCallLists` name stack empty on newer Mesa | passes here; needs the reporter's Mesa |
+| 141 | Debian package test failures | **held** — every sub-issue resolved or the reporter's driver |
+| 142 | `glCallLists` name stack empty on newer Mesa | passes here; left open for somebody on the affected Mesa |
 | 143 | `SyntaxWarning: invalid escape sequence` | fixed; red against 3.1.9 |
 | 145 | accelerate build on arm — `long` undeclared | same root as 147 |
 | 147 | accelerate build fails with Cython 3.1 | build test |
 | 148 | GLX import under the EGL platform | fixed; see the cluster |
 | 158 | the same `SyntaxWarning`, still reported | duplicate of 143 |
-| 159 | scalar object name into a delete under `ERROR_ON_COPY` | fixed; red against 3.1.9 |
+| 159 | scalar object name into a delete under `ERROR_ON_COPY` | **held** — covered by the flagerrorcopy CI axis |
 | 172 | EGL selected on a Wayland session using GLX | fixed; see the cluster |
 | 175 | `glBufferData` segfault on a `memoryview` | fixed; red against 3.1.7 |
 
@@ -119,7 +119,7 @@ lets a branch carrying one of these tests be run on demand.
 |---|---|---|
 | 7 | WGL extension strings vs bytes | Windows |
 | 29 | `test_buffer_api_basic` on i586 / armv7l | 32-bit |
-| 43 | platform plugin load failure | Windows (the message is testable here) |
+| 43 | platform plugin load failure | Windows; the message itself is fixed, see the here table |
 | 55 | Big Sur dyld cache in `ctypesloader` | macOS |
 | 60 | no accelerated renderer, then a segfault | macOS |
 | 76 | freeglut DLL naming | Windows |
@@ -166,7 +166,7 @@ lets a branch carrying one of these tests be run on demand.
 | 157 | ship the generated modules as a zip — a design proposal |
 | 163 | pyMSVC for Windows builds — a suggestion |
 | 164 | ClamAV flags two shipped DLLs as a packer — a false positive worth answering |
-| 166 | the error when a GLES library is missing says nothing useful — **partly here**, as an error-quality test |
+| 166 | the error when a GLES library is missing says nothing | **fixed here** — GLES2 would not import with checking off |
 
 ## Counts
 

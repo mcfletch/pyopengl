@@ -149,13 +149,19 @@ cdef class PyArgCalculator:
         return self.c_call( args )
     cdef list c_call( self, tuple args ):
         if self.length > len(args):
+            # Each argument shortened: a GL call's arguments are routinely
+            # enormous, and formatting one whole produces megabytes of digits
+            # in a message nobody can then read.  See
+            # OpenGL._bytes.short_repr_tuple and
+            # https://github.com/mcfletch/pyopengl/issues/114
+            from OpenGL._bytes import short_repr_tuple
             raise ValueError(
-                """%s requires %r arguments (%s), received %s: %r"""%(
+                """%s requires %r arguments (%s), received %s: %s"""%(
                     self.wrapper.wrappedOperation.__name__,
                     self.length,
                     ", ".join( self.wrapper.pyConverterNames ),
                     len(args),
-                    args
+                    short_repr_tuple(args)
                 )
             )
         return [

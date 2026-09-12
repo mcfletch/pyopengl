@@ -75,6 +75,29 @@ class Py_buffer(ctypes.Structure):
     _fields_ = _fields_
 
     @property
+    def _as_parameter_(self):
+        """The data address, for a parameter declared ``void *``.
+
+        This is a ``ctypes.Structure``, and ctypes passes one of those to a
+        pointer parameter as *a pointer to the structure*. Without saying
+        otherwise, an entry point declared ``const void *data`` therefore
+        received the address of this wrapper and uploaded the wrapper's own
+        bytes: the size was right, the call succeeded, ``glGetError`` said
+        nothing, and the buffer held a pointer value where the data should be.
+
+        Reached only where the compiled accelerators are absent, since with
+        them the array machinery answers with the ``memoryview`` itself --
+        which is to say on PyPy, on any platform with no wheel, and under
+        ``PYOPENGL_USE_ACCELERATE=0``.
+
+        ``ctypes.byref(a_py_buffer)`` is unaffected and still refers to the
+        structure, which is what ``from_object`` and the release below want.
+
+        See https://github.com/mcfletch/pyopengl/issues/175
+        """
+        return ctypes.c_void_p(self.buf)
+
+    @property
     def dims(self):
         return self.shape[: self.ndim]
 

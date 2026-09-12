@@ -121,13 +121,18 @@ import OpenGL.GL                     # the wrappers are built here...
 import OpenGL
 from OpenGL import _configflags
 
+# The opposite of whatever is in force: setting a flag to the value it already
+# has changes nothing whenever it happens, so there would be nothing to warn
+# about -- and the run under PYOPENGL_ERROR_ON_COPY=1 is exactly that case.
+wanted = not _configflags.ERROR_ON_COPY
 with warnings.catch_warnings(record=True) as raised:
     warnings.simplefilter('always')
-    OpenGL.ERROR_ON_COPY = True      # ...and this is already too late
+    OpenGL.ERROR_ON_COPY = wanted    # ...and this is already too late
 print(json.dumps({
     'warned': [str(one.message) for one in raised],
     'categories': [one.category.__name__ for one in raised],
-    'took_effect': bool(_configflags.ERROR_ON_COPY),
+    'wanted': wanted,
+    'took_effect': bool(_configflags.ERROR_ON_COPY) == wanted,
 }))
 '''
 
@@ -135,14 +140,15 @@ print(json.dumps({
 SET_IN_TIME = '''
 import json, warnings
 import OpenGL
+wanted = not OpenGL.ERROR_ON_COPY
 with warnings.catch_warnings(record=True) as raised:
     warnings.simplefilter('always')
-    OpenGL.ERROR_ON_COPY = True      # before anything reads the flags
+    OpenGL.ERROR_ON_COPY = wanted    # before anything reads the flags
     import OpenGL.GL
 from OpenGL import _configflags
 print(json.dumps({
     'warned': [str(one.message) for one in raised],
-    'took_effect': bool(_configflags.ERROR_ON_COPY),
+    'took_effect': bool(_configflags.ERROR_ON_COPY) == wanted,
 }))
 '''
 

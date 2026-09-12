@@ -15,6 +15,8 @@ import ast
 
 import pytest
 
+from OpenGL import _configflags
+
 from cdispatch import emit_handwritten
 
 
@@ -78,6 +80,12 @@ class TestTheWrapperBuiltForms:
             emit_handwritten._wrapper_built('/nowhere', 'NotAnAPI')
         assert 'NotAnAPI' in str(caught.value)
 
+    @pytest.mark.skipif(
+        _configflags.ERROR_ON_COPY,
+        reason='the shipped stubs describe the default build, and under '
+               'ERROR_ON_COPY the wrappers that would be read are not built: '
+               'a stub surface generated here would describe a configuration '
+               'nobody receives')
     def test_a_real_api_answers_the_forms_the_wrapper_built(self):
         found = emit_handwritten._wrapper_built(None, 'GLU')
         assert found, 'GLU builds wrappers; none were read'
