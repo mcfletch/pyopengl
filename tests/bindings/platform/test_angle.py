@@ -11,11 +11,14 @@ would give a caller a desktop context from a binding that had promised ES.
 The cases that need ANGLE itself find it through ``PYOPENGL_ANGLE_PATH`` and
 skip without it, so this file runs anywhere. The ones that do not need it --
 what the platform declares, and what it says when the libraries are missing --
-run everywhere and are the bulk of it.
+run everywhere and are the bulk of it. That includes importing the module on a
+machine that could never load ANGLE: a platform whose module only imports where
+it works is a platform nothing off that machine can check.
 """
 
 import ctypes
 import os
+import sys
 
 import pytest
 
@@ -23,6 +26,15 @@ from childenv import json_from_child, run_in_child
 
 from OpenGL.platform import angle, baseplatform
 from OpenGL.plugins import PlatformPlugin
+
+windows_only = pytest.mark.skipif(
+    sys.platform != 'win32',
+    reason='ANGLE is reached here through Windows DLLs',
+)
+not_windows = pytest.mark.skipif(
+    sys.platform == 'win32',
+    reason='asks what a machine without ANGLE\'s DLLs is told',
+)
 
 
 def _angle_directory():
@@ -63,11 +75,14 @@ class TestWhatItDeclares:
         assert platform.GLU is None
         assert platform.GLUT is None
 
+    @windows_only
     def test_entry_points_are_stdcall(self):
         """``GL_APIENTRY`` is ``__stdcall`` on Windows. It makes no difference
         on x64, where there is one convention, and it is the whole difference
-        on 32-bit."""
-        assert angle.ANGLEPlatform.DEFAULT_FUNCTION_TYPE is ctypes.WINFUNCTYPE
+        on 32-bit. Read from an instance, because ``WINFUNCTYPE`` exists only
+        where there is a ``__stdcall`` to name and the class is read on every
+        machine."""
+        assert angle.ANGLEPlatform().DEFAULT_FUNCTION_TYPE is ctypes.WINFUNCTYPE
 
     def test_it_is_a_platform(self):
         assert issubclass(angle.ANGLEPlatform, baseplatform.BasePlatform)
@@ -131,6 +146,7 @@ class TestSelectingItWithoutIt:
     that mentions neither ANGLE nor where to put it.
     """
 
+    @windows_only
     def test_it_fails_at_selection_naming_what_to_set(self, tmp_path):
         completed = run_in_child(
             'import OpenGL.GLES2\n',
@@ -144,6 +160,7 @@ class TestSelectingItWithoutIt:
 
 
 class TestWhenAngleIsNotThere:
+    @windows_only
     def test_a_directory_with_no_angle_in_it_says_so(self, tmp_path, monkeypatch):
         """Naming the variable and the file it wanted: ANGLE travels inside
         applications rather than being installed system-wide, so "which
@@ -155,6 +172,44 @@ class TestWhenAngleIsNotThere:
         message = str(caught.value)
         assert 'PYOPENGL_ANGLE_PATH' in message
         assert 'libEGL' in message
+
+
+@not_windows
+class TestSelectingItOffWindows:
+    """What a machine that cannot load a DLL is told.
+
+    The libraries this platform binds are ``libEGL.dll`` and ``libGLESv2.dll``,
+    so a Linux or macOS machine gets no further than asking for them. It is
+    told that, in the one place that knows it -- an ``ImportError`` out of the
+    load, like every other library this platform cannot find, rather than an
+    ``AttributeError`` against a ``ctypes`` or ``os`` member that only exists
+    on Windows, which names nothing the caller wrote and says nothing about
+    ANGLE.
+    """
+
+    def test_the_module_imports(self):
+        """A platform module that only imports where it runs is one nobody can
+        check anywhere else: this file's cases, the type checker and a
+        documentation build all read the class on the machine they are on."""
+        assert angle.ANGLEPlatform.GL is None
+
+    @pytest.mark.parametrize('name', ['EGL', 'GLES1', 'GLES2', 'GLES3'])
+    def test_every_library_says_why_it_cannot_be_loaded(self, name, tmp_path,
+                                                        monkeypatch):
+        monkeypatch.setenv('PYOPENGL_ANGLE_PATH', str(tmp_path))
+        with pytest.raises(ImportError) as caught:
+            _ = getattr(angle.ANGLEPlatform(), name)
+        message = str(caught.value)
+        assert sys.platform in message
+        assert 'libEGL.dll' in message
+        assert 'PYOPENGL_PLATFORM' in message
+
+    def test_it_says_so_without_the_path_set_too(self, monkeypatch):
+        """The machine is the obstacle, not the variable, so naming a
+        directory changes nothing about the answer."""
+        monkeypatch.delenv('PYOPENGL_ANGLE_PATH', raising=False)
+        with pytest.raises(ImportError):
+            _ = angle.ANGLEPlatform().EGL
 
 
 @needs_angle

@@ -11,6 +11,13 @@ It is never selected by guessing. A Windows machine's OpenGL is WGL's, and a
 program that did not ask for ES should go on getting desktop GL from the
 driver; asking for this platform is the whole of how it is chosen.
 
+**The libraries it binds are Windows DLLs.** Selecting it anywhere else raises
+:exc:`ImportError` naming the machine, since the ``libEGL.dll`` and
+``libGLESv2.dll`` this platform loads are not what an ANGLE built for Linux or
+macOS installs; a machine that has its own EGL reaches OpenGL ES through the
+platform it is guessed into. The module itself imports on any machine, so the
+class can be read where it cannot be loaded.
+
 **It supplies OpenGL ES, and nothing else.** ANGLE advertises
 ``EGL_CLIENT_APIS`` of ``OpenGL_ES``, offers no framebuffer config carrying
 ``EGL_OPENGL_BIT``, and answers ``eglBindAPI(EGL_OPENGL_API)`` with
@@ -37,6 +44,7 @@ that has been put on ``PATH`` and nothing otherwise.
 """
 import ctypes
 import os
+import sys
 
 from OpenGL.platform import baseplatform, ctypesloader
 
@@ -49,13 +57,21 @@ ANGLE_PATH = 'PYOPENGL_ANGLE_PATH'
 class ANGLEPlatform(baseplatform.BasePlatform):
     """PyOpenGL's binding to an ANGLE installation: EGL, and OpenGL ES"""
 
-    #: ``GL_APIENTRY`` is ``__stdcall``. That is nothing on x64, where there is
-    #: one calling convention, and everything on 32-bit.
-    DEFAULT_FUNCTION_TYPE = staticmethod(ctypes.WINFUNCTYPE)
-
     #: Stated rather than inherited, because it is the defining property of
     #: this platform rather than an omission. See the module docstring.
     GL = None
+
+    @baseplatform.lazy_property
+    def DEFAULT_FUNCTION_TYPE(self):
+        """``ctypes.WINFUNCTYPE``: ``GL_APIENTRY`` is ``__stdcall``
+
+        That is nothing on x64, where there is one calling convention, and
+        everything on 32-bit. Read when a function is built rather than when
+        this module is imported, because ``ctypes`` defines ``WINFUNCTYPE``
+        only where there is a ``__stdcall`` to name: the class describes the
+        platform on any machine, and only using it needs Windows.
+        """
+        return ctypes.WINFUNCTYPE
 
     def _load(self, name):
         """Load one of ANGLE's libraries, or ImportError saying where it looked
@@ -64,6 +80,13 @@ class ANGLEPlatform(baseplatform.BasePlatform):
         message as one who has none, because from here the two are the same
         situation: the fix for both is to name the directory.
         """
+        if sys.platform != 'win32':
+            raise ImportError(
+                'ANGLE is loaded here from libEGL.dll and libGLESv2.dll, '
+                'which a %s machine has no way to load. Leave '
+                'PYOPENGL_PLATFORM unset for the platform this machine does '
+                'have.' % (sys.platform,)
+            )
         directory = os.environ.get(ANGLE_PATH)
         if directory:
             path = os.path.join(directory, '%s.dll' % (name,))

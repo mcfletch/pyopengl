@@ -85,6 +85,12 @@ platform on a machine with no ANGLE fails when the platform is selected, naming
 the variable to set: every entry point this platform has comes out of those two
 files, so there is nothing it could usefully do instead.</p>
 
+<p>Those two files are Windows DLLs, and an ANGLE built for Linux or macOS
+installs neither, so selecting this platform elsewhere fails at selection too,
+naming the machine.  A machine that has an EGL of its own reaches OpenGL ES
+through the platform PyOpenGL guesses for it, which is what leaving
+<code>PYOPENGL_PLATFORM</code> unset asks for.</p>
+
 <h2>What it reports</h2>
 
 <p>A context from a recent ANGLE on ordinary integrated hardware:</p>
