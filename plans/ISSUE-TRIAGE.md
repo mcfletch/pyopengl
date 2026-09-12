@@ -156,7 +156,7 @@ lets a branch carrying one of these tests be run on demand.
 |---|---|
 | 58 | an empty question |
 | 63 | how to stringify a GL enum — answered |
-| 64 | a request for issue labels |
+| 64 | code that works in WSL2 with an X server and not on Windows 10, with no traceback, code or version given |
 | 65 | pyrender pins PyOpenGL 3.1.0 — theirs to change |
 | 69 | a question about pyrender's pin |
 | 72 | fixed in CPython 3.8.10 / 3.9.1 |

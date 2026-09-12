@@ -717,7 +717,7 @@ described in enough detail to reproduce, and several are years old. Each is
 worth a comment asking one specific question rather than being closed silently.
 
 **Not a defect.** #58 (an empty ticket), #63 (answered: constants carry a
-`.name`), #64, #65 and #69 (pyrender's version pin, theirs to change), #72
+`.name`), #64 (a Windows-versus-WSL report with no traceback, code or version in it), #65 and #69 (pyrender's pin, which only pyrender can change), #72
 (fixed in CPython 3.8.10 and 3.9.1), #111 (a download script in another
 project), #157 (a proposal to ship the generated modules as a zip — worth
 discussing, not a bug), #163 (a suggestion to use pyMSVC), #164 (ClamAV
