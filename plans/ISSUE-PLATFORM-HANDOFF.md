@@ -11,6 +11,34 @@ be started here, it says so and how far it goes: several of these are only
 *confirmed* off-platform, and the fix is ordinary Python that can be written
 and tested anywhere.
 
+## Start here
+
+Every ticket below that could be written from Linux has been. Nine of them now
+need a run rather than a change, so the first pass on a Windows machine is one
+command:
+
+```
+python -m pytest tests/
+```
+
+Green settles #144 and confirms the fixes for #174, #76, #125 and #7. The
+cases that hold each are named under it. What no case can answer is the last
+step in three of them -- whether the driver's GL is the one that arrived,
+whether a GLUT the machine already had is found, whether the driver lists an
+extension -- and each says below what to run by hand for that.
+
+| Ticket | State | What is left |
+|---|---|---|
+| #174 | fixed | Confirm the driver's GL loads, and in a conda environment |
+| #76, #125 | fixed | Confirm a user-installed freeglut is found |
+| #7 | fixed | One live `wglGetSwapIntervalEXT()` call |
+| #144 | held | The suite, green |
+| #127 | guarded | Nothing here; a wheel from this tree carries the DLLs |
+| #55 | fixed | One macOS run |
+| #29 | fixed | A 32-bit run to confirm |
+| #139, #60 | — | A runner exists now; run it |
+| #162 | — | Needs a person at an Apple Silicon Mac |
+
 ## Running the suite somewhere else
 
 CI is `.github/workflows/test.yml`. It runs on a push to `develop` or to any
@@ -65,45 +93,79 @@ below cannot be answered by pushing a branch:
 
 ### #174 — `opengl32.dll` should come from System32
 
-**Can be started here.** The fix is ordinary Python; only the confirmation
-needs Windows.
-
-`OpenGL/platform/ctypesloader.py:_loadLibraryWindows` asks
-`ctypes.util.find_library` first, which walks `PATH`. The reporter's point is
-that `C:\Windows\System32\opengl32.dll` is a trampoline to whatever the
-graphics driver installed, so it is always the right one — and conda puts
+**Fixed; needs confirming.** `_loadLibraryWindows` asked
+`ctypes.util.find_library` first, which walks `PATH`.
+`C:\Windows\System32\opengl32.dll` is a trampoline to whatever the graphics
+driver installed, so it is the only correct one — and conda puts
 `Library\bin`, which carries a Mesa `opengl32.dll`, ahead of System32 on
-`PATH`. A conda user therefore gets software rendering with nothing saying so.
+`PATH`. A conda user asking for their GPU's OpenGL got software rendering,
+with nothing saying so.
 
-- **Where the test goes**: `tests/bindings/platform/`, driving
-  `_loadLibraryWindows` with a stubbed `find_library` and loader. That runs on
-  Linux, because what is wrong is the choice, not the load.
-- **What settles it**: the same suite on a Windows runner, plus somebody with
-  a conda environment confirming they get the driver's GL.
-- **Branch**: `issue/174-opengl32-from-system32`
+`opengl32` and `glu32` now go to the loader bare, which is what the reporter
+suggested: Windows' own search order reaches the system directory before
+`PATH`. freeglut is deliberately not on that list, since where the user put it
+is exactly what `PATH` is for.
 
-### #76, #125, #127 — GLUT is not found on Windows
+- **The case**: `tests/bindings/platform/test_library_loading.py`, class
+  `TestALibraryWindowsItselfProvides`. It runs on Linux, because what was
+  wrong is the choice rather than the load.
+- **What is left**: on a Windows machine, and then in a conda environment,
 
-**Can be started here.** All three are "`glutInit` or `glutInitDisplayMode` is
-an undefined function on Windows", and #127's thread answers itself: "The
-DLLS folder is missing."
+  ```
+  python -c "from OpenGL.GL import *; from OpenGL.GLUT import *; \
+             glutInit(); glutCreateWindow(b'x'); print(glGetString(GL_RENDERER))"
+  ```
 
-The package does ship freeglut: `OpenGL/DLLS/` holds `freeglut32/64` for
-vc9, vc10 and vc14, and a wheel built from this checkout contains 18 such
-members. So the question is not whether they are shipped but why those users
-had none — a wheel built differently, an installer that dropped them, or
-`DLL_DIRECTORY` not being consulted.
+  The renderer string should name the graphics card rather than
+  `llvmpipe` or `GDI Generic`.
 
-- **Where the test goes**: a packaging case beside
-  `tests/bindings/test_accelerate_generated_c.py::TestWhatTheSdistShips`,
-  asserting the wheel carries `OpenGL/DLLS/*.dll`; and a
-  `tests/bindings/glut/` case that the loader looks in `DLL_DIRECTORY`.
-- **What settles it**: `pip install` of the built wheel on a clean Windows
-  box, then `python -c "from OpenGL.GLUT import *; glutInit()"`.
-- **See also** #164, which is ClamAV flagging two of those same DLLs as a
-  packer. Whether these are still worth shipping at all is one decision for
-  all four tickets.
-- **Branch**: `issue/127-windows-glut-dlls`
+### #76, #125 — GLUT is not found on Windows
+
+**Fixed; needs confirming.** Both are "`glutInit` or `glutInitDisplayMode` is
+an undefined function on Windows", and #76 says why. The reporter downloaded
+the official freeglut, put it on `PATH`, got the same error, and read the
+source to find out that the only names asked for were `freeglut64.vc14` and
+`glut64.vc14` — names nothing ships under but us. They renamed the file and it
+worked.
+
+`Win32Platform.GLUT_LIBRARY_NAMES` now asks for the names such a GLUT actually
+has, and first: `freeglut`, which the official Windows binaries, MSYS2 and
+vcpkg all install, and `glut32`, the original GLUT. The bundled builds follow.
+
+- **The case**: `tests/bindings/glut/test_glut_library_names.py`, which holds
+  the order and runs anywhere.
+- **What is left**: on a Windows machine with freeglut installed and *not*
+  renamed,
+
+  ```
+  python -c "from OpenGL.GLUT import *; glutInit(); print('ok')"
+  ```
+
+  and `OpenGL.platform.PLATFORM.GLUT._name` to see which file answered.
+- **See also** #164 and `BUNDLED-DLLS.md`: whether to keep shipping the
+  bundled builds at all is one decision for all four tickets.
+
+### #127 — the DLLS folder is missing from an installation
+
+**Guarded here; nothing left to write.** The thread answers itself with "the
+DLLS folder is missing, copy one in yourself". A wheel built from this
+checkout carries all eighteen files, so whatever produced that install was not
+this configuration.
+
+What was worth doing was asking the built artifact. `OpenGL/DLLS` is a
+directory inside a package with no `__init__.py`, so `packages.find` does not
+see it and it arrives only as package data — named in `MANIFEST.in` and not in
+`[tool.setuptools.package-data]`, which works because `include-package-data`
+defaults to true for a project configured through `pyproject.toml`. Every
+Windows GLUT user depends on a default in another project's tool. Dropping
+that one `MANIFEST.in` line removes all eighteen from the wheel with nothing
+failing.
+
+- **The case**: `tests/bindings/test_what_the_wheel_ships.py`. It builds the
+  wheel and reads it, in about two seconds.
+- **What is left**: nothing that needs Windows. If the ticket is answered, it
+  is answered by asking the reporter where their PyOpenGL came from — conda,
+  a distribution package, or PyPI.
 
 ### #144 — `glutCreateWindow` with a `str`
 
@@ -120,15 +182,26 @@ Windows and nowhere else.
 
 ### #7 — WGL extensions not found under Python 3
 
-**Partly startable here.** Reported fixed by the maintainer in 2020 and
-disputed by a second reporter, with nobody since. The querier's string
-handling in `OpenGL/raw/WGL/_types.py` is testable anywhere; whether
-`wglGetExtensionsStringARB` then answers is not.
+**Fixed; needs one live call.** Reported fixed by the maintainer in 2020,
+disputed by a second reporter, nobody since.
 
-- **Where the test goes**: `tests/bindings/wgl/`.
-- **What settles it**: `from OpenGL.WGL.EXT import swap_control;
-  swap_control.wglGetSwapIntervalEXT()` against a real context on Windows.
-- **Branch**: `issue/7-wgl-extension-strings`
+The str-versus-bytes handling the ticket describes was already right. Writing
+the cases for it found something else: `pullExtensions` ends in
+`except AttributeError: return []`, the answer for a platform that is not WGL,
+and the lookup that raises it sat *outside* the `try`. The clause could never
+run, so a `WGL_` specifier on a machine with no WGL raised out of whatever
+import asked. Both lines are now inside it.
+
+- **The case**: `tests/bindings/wgl/test_wgl_extension_query.py` — the list
+  comes back as bytes, the entry point is asked for by a bytes name, a `str`
+  and a `bytes` specifier both match, and the device context is declared `HDC`
+  so a 64-bit handle keeps its top half.
+- **What is left**: against a real context on Windows,
+
+  ```
+  from OpenGL.WGL.EXT import swap_control
+  swap_control.wglGetSwapIntervalEXT()
+  ```
 
 ---
 
@@ -164,13 +237,21 @@ the answer is about how a program should detect the software fallback, and
 
 ### #55 — Big Sur's dyld cache
 
-**Probably answerable without a Mac.** The reporter's point was that Big Sur
-stopped keeping dynamic libraries as files, so checking for one by path fails
-— and that CPython fixed this in 3.8.10 and 3.9.1. `requires-python` here is
-`>=3.9`, so every supported interpreter has the fix.
+**Fixed; needs one macOS run.** Big Sur stopped keeping the system libraries
+as files, so checking for one by path fails. CPython's `find_library` learned
+about the dynamic linker cache in 3.8.10 and 3.9.1, and `requires-python` here
+is `>=3.9`, so every supported interpreter has that fix.
 
-- **What settles it**: reading `ctypesloader.py` for a remaining
-  `os.path.isfile` on a framework path, and one macOS run.
+Nothing in `ctypesloader.py` checked a framework path, and there is now a
+fallback for the machines where `find_library`'s heuristics come up empty:
+`/System/Library/Frameworks/<name>.framework/<name>`, handed straight to
+`dlopen`, because `dlopen` is what asks the cache.
+
+- **The case**: `tests/bindings/platform/test_library_loading.py`, class
+  `TestAMacOSFramework` — including that nothing asks whether the framework is
+  a file, which is the whole of the ticket.
+- **What is left**: the suite on any macOS runner. It is covered by the runs
+  #139 and #60 need.
 
 ### #162 — rendering from a thread on an M3
 
@@ -219,16 +300,29 @@ natively rather than under emulation.
 
 ### #29 — `test_buffer_api_basic` on i586 and armv7l
 
-**Partly startable here.** A 32-bit failure in the buffer format strings, from
-a distribution build in 2019. #92 was the same shape on s390x and was fixed by
-having the case read `sys.byteorder` rather than assuming little-endian; this
-one is about pointer width rather than byte order, and the same treatment
-probably applies.
+**Fixed; needs a 32-bit run to confirm.** A distribution build in 2019, and
+the traceback on the ticket says exactly what happened:
+`assert '<l' in ['(3)<i', '(3)<l', '<i']`. The case listed the format strings
+CPython reports for a `(GLint * 3)` and asserted the answer was one of them. A
+4-byte signed int is a `c_long` on i586 and armv7l, so the letter is `l` and
+the list did not have it.
 
-- **Where the test goes**: `tests/bindings/arrays/test_arraydatatype.py`,
-  which is where #92's fix went.
-- **What settles it**: a 32-bit run. GitHub offers no i586 or armv7l runner,
-  so this is the one ticket here that no addition to the matrix reaches.
+#92 was the same failure on s390x, where the byte-order character is `>`, and
+was fixed by branching on `sys.byteorder` — which left this half in place and
+made the list one architecture longer.
+
+`format_letter` in `tests/bindings/arrays/test_arraydatatype.py` now reads the
+item-type letter out of the format string and the case asserts what the value
+*is*: a signed integer, an unsigned one. No width is lost, because `itemsize`
+is asserted on the line above and is what pins it.
+`TestReadingAFormatString` covers the reader over the spellings both tickets
+reported. A machine that reports a fifth one changes nothing.
+
+- **What is left**: a 32-bit run, to confirm that nothing *after* the format
+  assertion fails as well — the traceback stops at the first, so the shape and
+  strides checks below it have never been seen on a 32-bit machine. GitHub
+  offers no i586 or armv7l runner, so this is the one ticket here that no
+  addition to the matrix reaches.
 
 Three ways to get one, cheapest first:
 
