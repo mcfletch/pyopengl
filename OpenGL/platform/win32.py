@@ -37,16 +37,45 @@ class Win32Platform( baseplatform.BasePlatform ):
             )
         except OSError:
             return None
+    #: The GLUT libraries to try, in order.
+    #:
+    #: The plain names come first because a GLUT the *user* installed is one
+    #: they chose, and theirs is the build that gets fixes.  Those names are
+    #: what such a GLUT is actually called: the official freeglut Windows
+    #: binaries, MSYS2 and vcpkg all install ``freeglut.dll``, and the original
+    #: GLUT is ``glut32.dll`` -- 32 for the Win32 API rather than for the word
+    #: size, so it is that name on a 64-bit machine too.
+    #:
+    #: The vc-tagged names are the builds bundled in ``OpenGL/DLLS``, which
+    #: nothing but this package ships.  Asking for only those meant a user who
+    #: had downloaded freeglut and put it on ``PATH`` still got
+    #: ``NullFunctionError`` from ``glutInit``, with nothing to say the file
+    #: they had wanted renaming.
+    #:
+    #: freeglut before GLUT at each step: freeglut is the maintained one, and
+    #: the bundled builds are freeglut too.
+    #:
+    #: https://github.com/mcfletch/pyopengl/issues/76
+    #: https://github.com/mcfletch/pyopengl/issues/125
+    GLUT_LIBRARY_NAMES = (
+        'freeglut',
+        'freeglut%s.%s'%(size,vc,),
+        'glut32',
+        'glut',
+        'glut%s.%s'%(size,vc,),
+    )
+
     @baseplatform.lazy_property
     def GLUT( self ):
-        for possible in ('freeglut%s.%s'%(size,vc,), 'glut%s.%s'%(size,vc,)):
-            # Prefer FreeGLUT if the user has installed it, fallback to the included 
-            # GLUT if it is installed
+        for possible in self.GLUT_LIBRARY_NAMES:
             try:
                 return ctypesloader.loadLibrary(
                     ctypes.windll, possible, mode = ctypes.RTLD_GLOBAL
                 )
-            except WindowsError:
+            except OSError:
+                # The wrong architecture, a missing dependency, or no such
+                # library: all reasons to go on to the next name rather than
+                # to stop with the one that happened to be found first.
                 pass
         return None
     @baseplatform.lazy_property
@@ -56,10 +85,8 @@ class Win32Platform( baseplatform.BasePlatform ):
                 GLE = ctypesloader.loadLibrary( ctypes.cdll, libName )
                 GLE.FunctionType = ctypes.CFUNCTYPE
                 return GLE
-            except WindowsError:
+            except OSError:
                 pass
-            else:
-                break
         return None
 
     def _optional_library( self, *names ):
