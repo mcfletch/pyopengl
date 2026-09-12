@@ -1,9 +1,9 @@
 # PyOpenGL 4.0 release notes
 
 What changed since the 3.x series. The current development version is
-`4.0.0a4`.
+`4.0.0a5`.
 
-## Calls are much faster, and your code does not change
+## C dispatch layer in PyOpenGL_accelerate
 
 - A C dispatch layer, generated from the Khronos registry, ships in
   `PyOpenGL_accelerate`. It covers 4,859 of PyOpenGL's 4,880 bindings across
@@ -22,7 +22,7 @@ What changed since the 3.x series. The current development version is
   `OpenGL.dispatch.status()` reports which one you got and, if it is not the
   one you asked for, why.
 
-## Each context holds its own function pointers
+## Per-context entry-point tables
 
 - Under ctypes, whichever context resolves an entry point first determines the
   binding for the whole process. Where two contexts differ — a discrete-GPU
@@ -35,7 +35,7 @@ What changed since the 3.x series. The current development version is
   program that wants to be exact about switches; `PYOPENGL_CONTEXT_TRACKING=verify`
   asks the driver on every call instead, with nothing to change in the program.
 
-## Error checking costs less and tells you more
+## Error checking: `GL_KHR_debug`, and one query per API
 
 - Where the context offers `GL_KHR_debug`, PyOpenGL uses it: checking costs
   0.8 ns rather than an 11 ns `glGetError` round trip, and the `GLError` carries
@@ -47,7 +47,7 @@ What changed since the 3.x series. The current development version is
 - `OpenGL.dispatch.set_error_checking()` changes checking at run time, for one
   entry point or for all of them, which the import-time flag could not do.
 
-## Memory-safety and crash fixes
+## Memory safety and crash fixes
 
 - Several `glGet` output sizes were recorded short, so the driver wrote past the
   end of the array PyOpenGL had allocated. Nothing raised; the damage surfaced
@@ -56,9 +56,8 @@ What changed since the 3.x series. The current development version is
   query are corrected, and the whole shipped size table is now checked against
   the live driver on every test run.
 - Fixed: segfaults on exit under GLFW; VBO deletion attempted with no current
-  context; a crash when EGL device enumeration met a device that would not
-  initialise; a doubly-wrapped entry point that crashed `vertex_array_object`
-  on import; and a software/hardware renderer contradiction that dumped core.
+  context; and `OpenGL.GL.ARB.vertex_array_object` wrapping the output of
+  `glGenVertexArrays` twice, once from the generator and once by hand.
 - A `VBO` garbage-collected while a different context was current deleted that
   context's buffer of the same number -- every context numbers its buffers from
   1 -- and the other context's next draw came up empty. A `VBO` now deletes its
@@ -69,7 +68,7 @@ What changed since the 3.x series. The current development version is
 - Output arrays that are too short for what the call was told to write are
   refused rather than handed to the driver.
 
-## Binding bugs found by a much larger test suite
+## Binding fixes
 
 - `gluUnproject4` had the wrong signature; GLU quadrics, NURBS and the
   tessellator had defects the new suites exposed.
@@ -80,19 +79,33 @@ What changed since the 3.x series. The current development version is
 - `int64` and `uint64` array element types are supported.
 - Extension availability is cached per context rather than re-queried.
 - A command adopted into core is exported as core rather than as its extension.
+- Modules that could not be imported at all now import, and the type names their
+  declarations reach for are declared: `OpenGL.GLSC2` in its entirety, which had
+  neither `raw/GLSC2/_types.py` nor `raw/GLSC2/_errors.py`;
+  `OpenGL.GLU.EXT.nurbs_tessellator`, which read its constants from a module
+  that does not hold them; `OpenGL.GLES3.vboimplementation`, which named an
+  `OpenGL.GLES3.OES` package that does not exist; `OpenGL.GLX.NV.video_capture`
+  and the `OpenGL.GLX.SGIX` modules, whose `Colormap`, `Status`,
+  `GLXVideoDeviceNV`, `DMparams`, `DMbuffer`, `VLServer`, `VLPath` and `VLNode`
+  were undeclared; and the GL extensions declared with `GLeglClientBufferEXT` or
+  `GLVULKANPROCNV`. The suite imports every shipped module and evaluates every
+  declaration in the shipped tables.
+- `glGenVertexArrays(1)` and the other entry points that allocate their own
+  output ask the array handler for a length rather than a shape. The ctypes
+  handlers took only a sequence, so without numpy installed those calls raised
+  `TypeError` before reaching the driver. Both take a length or a shape now, as
+  the numpy handler does.
 
-## Editors and type checkers can see the API
+## Type stubs and `py.typed`
 
-- 1,310 `.pyi` stubs and a `py.typed` marker. The generated modules fill their
-  namespaces from declaration tables at import, so nothing reading the source
-  could see them: completion offered nothing and a checker typed every name as
-  `Any`. The stubs carry the constants, the entry points and their signatures.
-- **GLU, GLUT and GLE are covered too.** None of the three is a Khronos API, so
+- 1,310 `.pyi` stubs and a `py.typed` marker, carrying the constants, the entry
+  points and their signatures. The generated modules fill their namespaces from
+  declaration tables at import, so the stubs are what an editor's completion and
+  a type checker read.
+- GLU, GLUT and GLE have stubs as well. None of the three is a Khronos API, so
   each is written by hand and the registry-driven generator has nothing to say
-  about it. `from OpenGL.GLUT import *` therefore put no name a checker could
-  see into a caller's namespace, and every program built on them was unchecked
-  from its import line. Their stubs are emitted from the declarations
-  themselves: 354 GLUT names, 219 GLU, 52 GLE.
+  about them; their stubs are emitted from the declarations themselves, 354 GLUT
+  names, 219 GLU and 52 GLE.
 - Docstrings state GL types in the registry's own names, so
   `glBindTexture(target: GLenum, texture: GLuint) -> None` rather than
   `glBindTexture(target, texture) -> None`.
@@ -103,28 +116,51 @@ What changed since the 3.x series. The current development version is
   `glMap1f`, `glMap2d` and `glMap2f` take the points array without the strides,
   and the stub offers that call alone, since it is the only one they accept.
   `glCallLists` and `glAreTexturesResident` gain their Pythonic forms the same
-  way. GLU and GLE are full of these: `gleExtrusion(contour, cont_normal, up,
-  point_array, color_array)` takes five arguments where the C entry point takes
-  seven, because both counts are read off the arrays passed with them, and
-  `gluProject(objX, objY, objZ)` fills in the three matrices from the current
-  GL state. The stub says what each wrapper takes.
+  way. GLU and GLE have many of these:
+  `gleExtrusion(contour, cont_normal, up, point_array, color_array)` takes five
+  arguments where the C entry point takes seven, because both counts are read
+  off the arrays passed with them, and `gluProject(objX, objY, objZ)` fills in
+  the three matrices from the current GL state. The stub says what each wrapper
+  takes.
 - The stubs are checked, and a defect in them fails the build. `mypy` runs over
   all 1,310 of them in CI, and the suite holds each one against the object it
-  describes -- including holding every GLU, GLUT and GLE entry point to the
-  number of arguments its Python form actually takes. What the gate covers, and why the package's own source is not in
-  it, is in `[tool.mypy]` in `pyproject.toml`.
-- Fourteen modules that could not be imported at all now import:
-  `OpenGL.GLSC2` in its entirety, which had no `raw/GLSC2/_types.py`;
-  `OpenGL.GLU.EXT.nurbs_tessellator`, which read its constants from a module
-  that does not hold them; `OpenGL.GLX.NV.video_capture` and the two
-  `OpenGL.GLX.SGIX` modules, whose GLX types were undeclared; and
-  `OpenGL.GLES3.vboimplementation`, which named an `OpenGL.GLES3.OES` package
-  that does not exist. Every shipped module is now imported by the suite.
-- PyOpenGL no longer reports errors from its own interior in a user's `mypy`
-  run: 3,041 errors in 252 files became 318 in 54, and a six-line user program
-  that came back with errors from `OpenGL/plugins.py` now comes back clean.
+  describes — including holding every GLU, GLUT and GLE entry point to the
+  number of arguments its Python form actually takes. What the gate covers, and
+  why the package's own source is not in it, is in `[tool.mypy]` in
+  `pyproject.toml`.
+- A `mypy` run over a program that imports PyOpenGL reads the stubs, and reports
+  nothing from inside the package's own modules.
 
-## More ways to get a context
+## Configuration flags
+
+The flags `OpenGL/__init__.py` documents are read from the environment as
+`PYOPENGL_<NAME>`. CI runs the whole suite with `PYOPENGL_ERROR_ON_COPY=1`, with
+`PYOPENGL_ARRAY_SIZE_CHECKING=0` and with `PYOPENGL_SIZE_1_ARRAY_UNPACK=0`, as
+well as with the defaults.
+
+- `SIZE_1_ARRAY_UNPACK` reads `PYOPENGL_SIZE_1_ARRAY_UNPACK`. It was the one
+  flag of the set that read no environment variable, so setting the variable did
+  nothing and only assigning the name before the first import had any effect.
+- With `PYOPENGL_SIZE_1_ARRAY_UNPACK=0`, `vbo.VBO` could not create a buffer: it
+  read what `glGenBuffers(1)` returned with `long()`, which cannot read a
+  one-element array. It reads through `OpenGL._scalar.as_int`, which takes
+  either shape.
+- With `PYOPENGL_ERROR_ON_COPY=1`, a parameter declared as a bare pointer —
+  `GLintptr` and `GLsizeiptr`, `GL_NV_vdpau_interop`'s surface arrays among them
+  — got no converter on the ctypes path, so ctypes refused every array passed to
+  it, the one whose memory the call wanted included. Such a parameter resolves
+  to the array class for its element type, and that class refuses a copy the
+  same way, so the flag still means what it did.
+- With `PYOPENGL_ERROR_ON_COPY=1`, `VBO.delete()` could not delete a buffer: it
+  passed the buffer name as an int, which the wrapper copies into an array. It
+  builds a `GLuint`, as the deleter that runs at collection already did.
+- `ALLOW_NUMPY_SCALARS` has no effect from 4.0, and reading or setting it is
+  still allowed. A numpy integer scalar is accepted wherever an integer is
+  wanted with the flag or without it, because ctypes converts through
+  `__index__`. What the flag added beyond that was a retry through `int()`,
+  which also accepted a numpy float and truncated it silently.
+
+## Context creation
 
 - **Headless EGL.** `OpenGL.EGL.devices` reports the EGL devices a system
   offers, what each driver calls itself, and which of them rasterise on the CPU,
@@ -140,12 +176,31 @@ What changed since the 3.x series. The current development version is
   no longer need Togl.
 - **Wayland.** On Linux the GLX/EGL choice is a context-level probe, so GLUT
   runs under Wayland and XWayland.
-- **Windows.** `PYOPENGL_PLATFORM=angle` binds EGL and OpenGL ES to an
-  installed ANGLE, which is the only way a Windows machine has either;
+- **Windows.** ES and EGL are not part of Windows, and ANGLE is how a machine
+  has either. `PYOPENGL_PLATFORM=angle` binds them to an installed ANGLE, and
   `PYOPENGL_ANGLE_PATH` says which copy to use, since ANGLE travels inside
-  applications rather than being installed system-wide. It supplies ES and no
-  desktop GL, because that is what ANGLE has. The WGL calls that live in GDI
-  also resolve properly.
+  applications rather than being installed system-wide and a machine may hold
+  several. That platform supplies ES and no desktop GL, because that is what
+  ANGLE has.
+- **Windows, without selecting a platform.** The default one looks for
+  `libEGL`, `libGLESv1_CM` and `libGLESv2` — the names an ANGLE or Mesa build
+  installs beside the application that ships it — as well as the bare `EGL`,
+  `GLESv1_CM` and `GLESv2` an SDK or driver vendor uses. `OpenGL.GLES1`,
+  `OpenGL.GLES2` and `OpenGL.GLES3` import whether or not a machine has one, and
+  a call with no entry point under it raises `NullFunctionError` naming the
+  function. The WGL calls that live in `gdi32` resolve there rather than being
+  looked for in `opengl32` alone.
+- **Windows loads its own OpenGL.** `opengl32` and `glu32` go to the loader by
+  name, so Windows' search order answers and the system directory is reached
+  before `PATH`. `System32\opengl32.dll` is a trampoline to whatever the
+  graphics driver installed; looking on `PATH` first meant a conda environment,
+  which puts a Mesa `opengl32.dll` ahead of it, rendered in software with
+  nothing saying so.
+- **A GLUT you installed is found by its own name.** The Windows platform asks
+  for `freeglut` and `glut32` — what the official freeglut binaries, MSYS2,
+  vcpkg and the original GLUT install — before the builds bundled in
+  `OpenGL/DLLS`, and a library of the wrong architecture no longer stops the
+  search at the first name.
 
 ## Packaging and freezing
 
@@ -153,6 +208,11 @@ What changed since the 3.x series. The current development version is
   reports the modules PyOpenGL's plug-in registries would import — including
   plug-ins added by other packages — and the Windows GLUT and GLE DLLs. For any
   other freezer, `OpenGL.plugins.registered_modules()` is the same answer.
+- Building `PyOpenGL_accelerate` from a source tree drops the generated C where
+  the Cython or the numpy that wrote it has changed. Those modules
+  `cimport numpy`, and `cythonize` decides by timestamp whether to write the C
+  again, so C left over from an earlier build can otherwise be compiled against
+  numpy headers it no longer matches.
 
 ## Testing and CI
 
@@ -164,19 +224,39 @@ What changed since the 3.x series. The current development version is
   versions, and of the 1,910 entry points a reference driver provides, the five
   not called by anything are `GL_EXT_semaphore` calls that need a semaphore
   imported from Vulkan or Direct3D.
-- CI runs on llvmpipe and on the macOS runners on every push, across six Python
-  versions, with and without numpy, and with and without `accelerate`.
+- CI runs on every push, on three platforms and their software renderers: Linux
+  on llvmpipe through an EGL device and through OSMesa, Windows on Mesa through
+  a WGL pbuffer, and macOS through CGL on macOS 13, 14 and 15 — the first
+  Intel, the other two Apple Silicon. A Linux cell runs on arm64, and the
+  `PyOpenGL_accelerate` wheels are built for aarch64 on an arm64 machine rather
+  than under emulation.
+- The interpreter sweep runs 3.9, 3.10, 3.12, 3.13 and 3.14. 3.9 is the
+  `requires-python` floor, and the suite is what evaluates it: mypy refuses
+  `--python-version=3.9`, and numpy's own stubs need 3.12 to parse.
+- Further cells cover numpy absent, `accelerate` built with the C entry points
+  selected, `accelerate` built with the ctypes entry points selected,
+  `accelerate` built and then declined with `PYOPENGL_USE_ACCELERATE=0`, and the
+  configuration flags above. A run that asks for the C entry points where the
+  extension is not installed is refused rather than falling back to ctypes.
+- The stub typecheck is a cell of the matrix, so `tox` runs it.
 - A weekly job pulls the Khronos registry, regenerates the bindings and opens a
   pull request when anything changed, so a new entry point is not discovered by
   somebody trying to call it.
 
-## Compatibility notes
+## Compatibility
 
 - **Python 3.9 or newer, and numpy 2.x.** numpy remains optional; the suite runs
   and is tested without it.
 - **`PyOpenGL_accelerate` must match the PyOpenGL it was generated from.** The
   two are released together and its dispatch tables are generated from that
   PyOpenGL, so install the pair in one command.
+- **PyPy runs the ctypes bindings.** `PyOpenGL_accelerate` is built for CPython,
+  so neither the C dispatch layer nor the Cython accelerators are available
+  there, and `OpenGL.dispatch.status()` says which implementation is running and
+  why. The buffer-protocol array handler reads CPython's C API through
+  `ctypes.pythonapi`, which PyPy does not have, so a `memoryview` has no array
+  handler there, reported as a missing handler rather than as an error from
+  inside the call that passed one.
 - The platform module is now named `linux` rather than `unix`.
 - Licence metadata is in SPDX form; the licence itself is unchanged BSD-3-Clause.
 
