@@ -71,6 +71,26 @@ def _load():
     plugin = PlatformPlugin.match(key)
     plugin_class = plugin.load()
     plugin.loaded = True
+    if plugin_class is None:
+        # `load()` answers None where importing the plugin raised, having put
+        # the reason in the log and nowhere else.  Calling it produced
+        # `TypeError: 'NoneType' object is not callable`, which names neither
+        # the plugin nor the ImportError underneath it -- and this is the
+        # first thing a broken install does, so it is the error most likely to
+        # be somebody's first contact with PyOpenGL.
+        # See https://github.com/mcfletch/pyopengl/issues/43
+        raise ImportError(
+            'PyOpenGL could not load the %r platform plugin (%s), which is '
+            'the one it selected for this machine from PYOPENGL_PLATFORM=%r, '
+            'sys.platform=%r and os.name=%r. The import raised, and the '
+            'reason went to the "OpenGL.plugins" logger: run with '
+            'logging.basicConfig(level=logging.WARNING) to see it. It is '
+            'usually a library PyOpenGL could not find -- an OpenGL, EGL or '
+            'GLX that is absent, or present somewhere the dynamic loader '
+            'does not look.'
+            % (plugin.name, plugin.import_path,
+               os.environ.get('PYOPENGL_PLATFORM'), sys.platform, os.name)
+        )
     # create instance of this platform implementation
     plugin = plugin_class()
 
