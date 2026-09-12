@@ -447,7 +447,18 @@ from OpenGL.raw.%(prefix)s.%(owner)s.%(module)s import _EXTENSION_NAME
                                 % locals()
                             )
                         elif isinstance(dependency, xmlreg.Compsize):
-                            if len(dependency) == 1:
+                            # `COMPSIZE()` with no argument in it: the registry
+                            # says the size is computed and names nothing to
+                            # compute it from, so there is no pname to size the
+                            # output by.  Emitting one anyway wrote
+                            # `pnameArg=''`, and a name no parameter has is not
+                            # refused -- the wrapper is built, the module
+                            # imports, and the call dies inside the converter
+                            # machinery naming none of this.  Falls through to
+                            # the comment below, which is what every other
+                            # unsizeable output gets.
+                            # See https://github.com/mcfletch/pyopengl/issues/38
+                            if len(dependency) == 1 and dependency[0]:
                                 pname = dependency[0]
                                 base.append(
                                     '.setOutput(\n    %(param)r,size=_glgets._glget_size_mapping,pnameArg=%(pname)r,orPassIn=True\n)'
