@@ -380,3 +380,56 @@ class TestWhatTheSdistShips:
         assert shipped, (
             'the registry-generated dispatch C is missing, and the generator '
             'that writes it does not run at install time')
+
+
+class TestNumpyIsABuildRequirement:
+    """The numpy format handler is built because numpy is always there.
+
+    ``numpy_formathandler`` is the module that makes a numpy array reach the
+    driver without a copy, and it is the whole reason most people install this
+    package.  ``setup.py`` skips building it where numpy cannot be imported --
+    reasonable, since it ``cimport``s numpy -- so a build in an environment
+    without numpy produces a package that installs cleanly, imports cleanly,
+    and quietly has no numpy acceleration in it.  What the user sees is
+    PyOpenGL logging ``Unable to load numpy_formathandler accelerator`` and
+    running at the speed they installed this package to avoid.
+
+    Naming numpy in ``[build-system] requires`` is what closes that: the
+    backend installs it into the build environment whether or not the machine
+    has one, so the skip cannot be reached from a wheel or an sdist build.
+
+    https://github.com/mcfletch/pyopengl/issues/46
+    """
+
+    def requires(self):
+        import tomllib
+
+        path = os.path.join(paths.ROOT, 'accelerate', 'pyproject.toml')
+        if not os.path.exists(path):
+            pytest.skip('the accelerate source tree is not in this checkout')
+        with open(path, 'rb') as handle:
+            return tomllib.load(handle)['build-system']['requires']
+
+    def test_numpy_is_named(self):
+        named = [one for one in self.requires()
+                 if one.split()[0].lower().replace('_', '-') == 'numpy']
+        assert named, (
+            'numpy is not a build requirement, so a build on a machine '
+            'without it silently produces a package with no numpy handler: %s'
+            % (self.requires(),))
+
+    def test_cython_is_named(self):
+        """The other half: without it there is no C to compile at all, since
+        the sdist no longer ships any."""
+        named = [one for one in self.requires()
+                 if one.split()[0].lower() == 'cython']
+        assert named, self.requires()
+
+    def test_the_handler_is_in_this_build(self):
+        """And it actually got built here, which is what the ticket is about."""
+        accelerate = pytest.importorskip('OpenGL_accelerate')
+        pytest.importorskip('numpy')
+        built = os.listdir(os.path.dirname(accelerate.__file__))
+        assert any(name.startswith('numpy_formathandler') for name in built), (
+            'PyOpenGL_accelerate is installed without its numpy handler: %s'
+            % (sorted(built),))
