@@ -472,3 +472,90 @@ FormatHandler(
 from OpenGL import _rawfinder as _rawfinder_module
 
 _rawfinder_module.install()
+
+
+# -- a flag set too late says so ---------------------------------------------
+#
+# The flags above are read once, when the first entry point is built, and
+# frozen into `OpenGL._configflags`; every wrapper is built from that snapshot.
+# So this is the documented order, and works:
+#
+#     import OpenGL
+#     OpenGL.ERROR_ON_COPY = True
+#     import OpenGL.GL
+#
+# and this changes nothing at all:
+#
+#     import OpenGL.GL
+#     OpenGL.ERROR_ON_COPY = True
+#
+# The second is easy to reach without meaning to -- under pytest, another test
+# module's `import OpenGL.GL` runs during collection, before the module that
+# sets the flag -- and a caller then runs on believing a setting is in force
+# that is not. Two tracker issues are exactly that, each spent looking at the
+# array machinery, which was behaving correctly the whole time:
+# https://github.com/mcfletch/pyopengl/issues/5 and .../issues/159
+#
+# Warned rather than raised, and the assignment is still not honoured: making
+# it work would mean rebuilding every entry point already bound, which is not
+# something an attribute assignment may do.
+
+#: The names whose value is snapshotted into `_configflags`.
+_SNAPSHOTTED_FLAGS = frozenset([
+    'ERROR_CHECKING', 'ERROR_DEBUG_OUTPUT', 'ERROR_LOGGING', 'ERROR_ON_COPY',
+    'ARRAY_SIZE_CHECKING', 'STORE_POINTERS', 'WARN_ON_FORMAT_UNAVAILABLE',
+    'FORWARD_COMPATIBLE_ONLY', 'SIZE_1_ARRAY_UNPACK', 'USE_ACCELERATE',
+    'CONTEXT_CHECKING', 'FULL_LOGGING', 'ALLOW_NUMPY_SCALARS',
+    'UNSIGNED_BYTE_IMAGES_AS_STRING', 'MODULE_ANNOTATIONS', 'TYPE_ANNOTATIONS',
+])
+
+
+class _ConfigurationHasBeenReadWarning(RuntimeWarning):
+    """A configuration flag was set after the wrappers were built from it."""
+
+
+def _warn_if_too_late(name, value):
+    """Warn where assigning `name` can no longer have any effect.
+
+    Only once the snapshot exists, since until then the assignment is exactly
+    what the caller intends, and only where the value actually differs from
+    what was taken -- setting a flag to the value already in force changes
+    nothing whenever it happens.
+    """
+    import sys as _sys
+
+    snapshot = _sys.modules.get('OpenGL._configflags')
+    if snapshot is None or name not in _SNAPSHOTTED_FLAGS:
+        return
+    if getattr(snapshot, name, value) == value:
+        return
+    import warnings as _warnings
+
+    _warnings.warn(
+        'OpenGL.%s was set after PyOpenGL had already read its configuration, '
+        'so it has no effect: the entry points were built with %s=%r and keep '
+        'that. Set it before the first `import OpenGL.GL` (or any other API '
+        'namespace), or set PYOPENGL_%s in the environment, which works '
+        'whatever the import order.'
+        % (name, name, getattr(snapshot, name, None), name),
+        _ConfigurationHasBeenReadWarning,
+        stacklevel=3,
+    )
+
+
+def _install_flag_guard():
+    """Give this module a ``__setattr__`` that can see a late assignment."""
+    import sys as _sys
+    from types import ModuleType as _ModuleType
+
+    module = _sys.modules[__name__]
+
+    class _ConfigurationModule(_ModuleType):
+        def __setattr__(self, name, value):
+            _warn_if_too_late(name, value)
+            _ModuleType.__setattr__(self, name, value)
+
+    module.__class__ = _ConfigurationModule
+
+
+_install_flag_guard()

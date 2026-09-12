@@ -110,3 +110,99 @@ def test_every_documented_flag_is_covered_here():
     assert not missing, (
         'documented flags that nothing here varies: %s' % (', '.join(sorted(missing)),)
     )
+
+
+#: What the child does: build the wrappers, then set a flag, which is the
+#: order that does not work.  Printed rather than raised so the case can say
+#: which of the two things went wrong.
+SET_TOO_LATE = '''
+import json, warnings
+import OpenGL.GL                     # the wrappers are built here...
+import OpenGL
+from OpenGL import _configflags
+
+with warnings.catch_warnings(record=True) as raised:
+    warnings.simplefilter('always')
+    OpenGL.ERROR_ON_COPY = True      # ...and this is already too late
+print(json.dumps({
+    'warned': [str(one.message) for one in raised],
+    'categories': [one.category.__name__ for one in raised],
+    'took_effect': bool(_configflags.ERROR_ON_COPY),
+}))
+'''
+
+#: The order that does work, and must stay silent.
+SET_IN_TIME = '''
+import json, warnings
+import OpenGL
+with warnings.catch_warnings(record=True) as raised:
+    warnings.simplefilter('always')
+    OpenGL.ERROR_ON_COPY = True      # before anything reads the flags
+    import OpenGL.GL
+from OpenGL import _configflags
+print(json.dumps({
+    'warned': [str(one.message) for one in raised],
+    'took_effect': bool(_configflags.ERROR_ON_COPY),
+}))
+'''
+
+
+class TestAFlagSetAfterTheWrappersAreBuilt:
+    """Assigning to a flag too late does nothing, and has to say so.
+
+    The flags are read once, when the first entry point is built, and frozen
+    into ``_configflags``; the wrappers are built from that.  So
+
+        import OpenGL.GL
+        OpenGL.ERROR_ON_COPY = True
+
+    is an assignment that changes nothing, and until it says so the program
+    runs on with the caller believing a setting is in force that is not.
+
+    That is not a hypothetical misreading.  #5 is somebody reporting that
+    ``ERROR_ON_COPY`` "doesn't trigger" after setting it exactly this way, and
+    #159 is somebody else finding the same thing in a test module -- where
+    pytest had imported another module, and its ``import OpenGL.GL``, before
+    the one setting the flag ran.  Both spent the ticket looking at the array
+    machinery, which was behaving correctly.
+
+    https://github.com/mcfletch/pyopengl/issues/5
+    https://github.com/mcfletch/pyopengl/issues/159
+    """
+
+    def test_it_warns(self):
+        answered = json_from_child(SET_TOO_LATE)
+        assert answered['warned'], (
+            'setting ERROR_ON_COPY after the wrappers were built changed '
+            'nothing and said nothing')
+
+    def test_the_warning_names_the_flag_and_the_remedy(self):
+        answered = json_from_child(SET_TOO_LATE)
+        message = ' '.join(answered['warned'])
+        assert 'ERROR_ON_COPY' in message, message
+        assert 'PYOPENGL_ERROR_ON_COPY' in message, (
+            'the message should name the environment variable, which works '
+            'whatever the import order: %s' % (message,))
+
+    def test_it_is_a_warning_rather_than_an_error(self):
+        """A program doing this today keeps running; it is now told."""
+        answered = json_from_child(SET_TOO_LATE)
+        assert answered['categories'], answered
+        assert all(name.endswith('Warning')
+                   for name in answered['categories']), answered
+
+    def test_the_assignment_still_does_not_take_effect(self):
+        """The warning says so; it does not paper over it.
+
+        Making a late assignment work would mean rebuilding every entry point
+        already bound, which is not something an attribute assignment can be
+        allowed to do.
+        """
+        answered = json_from_child(SET_TOO_LATE)
+        assert answered['took_effect'] is False, answered
+
+    def test_setting_it_in_time_is_silent_and_works(self):
+        """The documented order, which must not have acquired a warning."""
+        answered = json_from_child(SET_IN_TIME)
+        assert answered['warned'] == [], answered
+        assert answered['took_effect'] is True, answered
