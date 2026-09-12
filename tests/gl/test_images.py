@@ -203,5 +203,157 @@ class TestTwoComponentTextures(GLTestCase):
         glDeleteTextures(1, object_names(texture))
 
 
+class TestAnImageTheCallerKeeps(GLTestCase):
+    """Uploading an image must not take a reference and hold it.
+
+    PyOpenGL converts an array the driver cannot read directly -- one that is
+    not contiguous, or not of the element type the call names -- by copying it
+    into a buffer of its own. The copy is the right thing; keeping the
+    original alive afterwards is not. A renderer uploading a frame each time
+    round its loop then accumulates one array per frame, which is a leak
+    measured in the size of the images rather than in bytes.
+
+    ``data[::-1]`` is how it arrives in practice: an image flipped so it is
+    the right way up, which is what both tickets were doing.
+
+    https://github.com/mcfletch/pyopengl/issues/47
+    https://github.com/mcfletch/pyopengl/issues/96
+    """
+
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    #: Enough repetitions that a leak of one reference per call is unmistakable
+    #: beside the ordinary noise of a refcount read.
+    UPLOADS = 8
+
+    def setUp(self):
+        super().setUp()
+        self.texture = glGenTextures(1)
+        glBindTexture(GL_TEXTURE_2D, self.texture)
+
+    def tearDown(self):
+        glDeleteTextures(1, object_names(self.texture))
+        super().tearDown()
+
+    def upload(self, image):
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 16, 16, 0, GL_RGBA,
+                     GL_UNSIGNED_BYTE, image)
+
+    def assert_no_references_kept(self, image, what):
+        import sys
+
+        self.upload(image)                 # the first one may cache legitimately
+        before = sys.getrefcount(image)
+        for _ in range(self.UPLOADS):
+            self.upload(image)
+        after = sys.getrefcount(image)
+        self.check_error(what)
+        self.assertEqual(
+            after, before,
+            '%s: %d uploads took %d reference(s) and did not give them back'
+            % (what, self.UPLOADS, after - before))
+
+    @pytest.mark.skipif(not hasattr(np, 'ndarray'),
+                        reason='needs numpy itself, not the ctypes shim')
+    def test_a_contiguous_image_is_not_retained(self):
+        self.assert_no_references_kept(
+            np.zeros((16, 16, 4), dtype='u1'), 'a contiguous image')
+
+    @pytest.mark.skipif(not hasattr(np, 'ndarray'),
+                        reason='needs numpy itself, not the ctypes shim')
+    def test_a_flipped_image_is_not_retained(self):
+        """The case both tickets hit: PyOpenGL has to copy this one."""
+        image = np.zeros((16, 16, 4), dtype='u1')[::-1]
+        self.assertFalse(image.flags['C_CONTIGUOUS'])
+        self.assert_no_references_kept(image, 'a flipped image')
+
+    @pytest.mark.skipif(not hasattr(np, 'ndarray'),
+                        reason='needs numpy itself, not the ctypes shim')
+    def test_the_reported_sequence_completes(self):
+        """#96 in full: upload a flipped image, then build its mipmaps.
+
+        The report is a segfault in ``glGenerateMipmap``, which is where a
+        short or freed upload buffer would be noticed rather than where it was
+        made -- the upload writes into the texture and the mipmap build reads
+        the whole of it back.
+        """
+        if not glGenerateMipmap:
+            self.skipTest('no glGenerateMipmap on this context')
+        image = np.zeros((64, 64, 3), dtype='u1')
+        image[:, :, 1] = 200
+        flipped = np.flip(image, 0)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 64, 64, 0, GL_RGB,
+                     GL_UNSIGNED_BYTE,
+                     np.frombuffer(flipped.tobytes(), np.uint8))
+        glGenerateMipmap(GL_TEXTURE_2D)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 3)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                        GL_LINEAR_MIPMAP_LINEAR)
+        glFinish()
+        self.check_error('upload a flipped image and build its mipmaps')
+
+
+class TestHalfFloatImages(GLTestCase):
+    """``GL_HALF_FLOAT`` is an element type images can be given in.
+
+    Sixteen-bit floats are how a renderer uploads high-dynamic-range data at
+    half the bandwidth, so the type is ordinary rather than exotic. It reaches
+    PyOpenGL through the same table as every other: a type absent from
+    ``TYPE_TO_ARRAYTYPE`` is a ``KeyError`` naming the constant and the
+    converter object, several frames inside the wrapper, which is what the
+    ticket reports.
+
+    https://github.com/mcfletch/pyopengl/issues/51
+    """
+
+    profile = 'compatibility'
+    gl_version = (2, 1)
+
+    def setUp(self):
+        super().setUp()
+        self.require_extension('GL_ARB_half_float_pixel')
+        self.texture = glGenTextures(1)
+        glBindTexture(GL_TEXTURE_2D, self.texture)
+
+    def tearDown(self):
+        glDeleteTextures(1, object_names(self.texture))
+        super().tearDown()
+
+    def test_the_type_is_known_to_the_image_machinery(self):
+        """Asked of the table directly, so a failure names the missing type
+        rather than arriving as a KeyError out of a converter."""
+        from OpenGL.arrays import GL_CONSTANT_TO_ARRAY_TYPE
+
+        array_type = toplevel_images.TYPE_TO_ARRAYTYPE.get(
+            GL_HALF_FLOAT, GL_HALF_FLOAT)
+        self.assertIn(
+            array_type, GL_CONSTANT_TO_ARRAY_TYPE,
+            'GL_HALF_FLOAT maps to %r, which is not an array type'
+            % (array_type,))
+
+    @pytest.mark.skipif(not hasattr(np, 'ndarray'),
+                        reason='needs numpy itself, not the ctypes shim')
+    def test_a_half_float_image_uploads(self):
+        image = np.zeros((16, 16, 4), dtype='float16')
+        image[:, :, 0] = 0.5
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, 16, 16, 0, GL_RGBA,
+                     GL_HALF_FLOAT, image)
+        glFinish()
+        self.check_error('glTexImage2D with GL_HALF_FLOAT')
+
+    @pytest.mark.skipif(not hasattr(np, 'ndarray'),
+                        reason='needs numpy itself, not the ctypes shim')
+    def test_a_half_float_image_reads_back(self):
+        image = np.zeros((16, 16, 4), dtype='float16')
+        image[:, :, 0] = 0.5
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, 16, 16, 0, GL_RGBA,
+                     GL_HALF_FLOAT, image)
+        glFinish()
+        read = glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_HALF_FLOAT)
+        self.check_error('glGetTexImage with GL_HALF_FLOAT')
+        self.assertEqual(np.asarray(read).dtype, np.dtype('float16'))
+
+
 if __name__ == '__main__':
     unittest.main()
