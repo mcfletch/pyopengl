@@ -42,17 +42,22 @@ actually hands back on a Mac.
 
 ## What the CI matrix does not cover
 
-Worth knowing before picking a ticket up, because two of these cannot be
-answered by pushing a branch:
+The matrix now covers x86-64 and arm64 Linux, Intel and Apple Silicon macOS,
+and x86-64 Windows. Two gaps remain, and they are the reason some tickets
+below cannot be answered by pushing a branch:
 
 - **No window server anywhere.** Every runner is headless: Linux renders
   through EGL's device platform, macOS through CGL, Windows through a WGL
   pbuffer. A ticket about a window being moved, resized, or driven from a
-  second thread cannot be reproduced on any of them.
-- **macOS runners are Apple Silicon.** `macos-14` and `macos-15` both are. An
-  Intel Mac needs `macos-13` adding to the matrix.
-- **No arm Linux runner yet**, and no GPU on any of them: GitHub's GPU runners
-  are larger runners, billed per minute and never free.
+  second thread cannot be reproduced on any of them. #162 is one.
+- **No GPU anywhere.** Every renderer in the matrix is a software one --
+  llvmpipe on Linux and Windows, Apple's software renderer on macOS. So
+  nothing here can answer a question about a driver, and #60 is a report
+  *about* the software fallback rather than in spite of it. GitHub's GPU
+  runners are larger runners, billed per minute and never free whatever the
+  repository's visibility.
+- **No 32-bit anything.** GitHub offers no i586 or armv7l runner, which is
+  what #29 is about. See the note under it.
 
 ---
 
@@ -222,9 +227,29 @@ probably applies.
 
 - **Where the test goes**: `tests/bindings/arrays/test_arraydatatype.py`,
   which is where #92's fix went.
-- **What settles it**: a 32-bit run. No hosted runner offers one, so this is a
-  distribution packager or an emulated build.
-- **Branch**: `issue/29-32-bit-buffer-formats`
+- **What settles it**: a 32-bit run. GitHub offers no i586 or armv7l runner,
+  so this is the one ticket here that no addition to the matrix reaches.
+
+Three ways to get one, cheapest first:
+
+1. **An emulated container.** `docker run --platform linux/arm/v7` with
+   `qemu-user-static` registered gives armv7l on any x86-64 host, and
+   `--platform linux/386` gives i586. Slow, and qemu is not the hardware, but
+   it exercises the pointer width and the struct formats, which is what this
+   ticket is about. Neither docker nor qemu is installed in the development
+   container today.
+2. **A Raspberry Pi.** A Pi 4 or Pi 5 on 32-bit Raspberry Pi OS is armv7l --
+   the reporter's exact architecture, on real hardware. It brings two things
+   no runner has: a real GPU and a real window server. That makes it the only
+   machine discussed here that could also serve the GLES suite against a real
+   driver, which is where several of the SBC reports came from (#137 and #166
+   from OrangePi boards, #158 from a Pi Zero W, #145 from a Pi 5). It does
+   *not* answer #135, which asks for hosted runners, and a Pi as a
+   self-hosted runner on a public repository would let a fork's pull request
+   run arbitrary code on it.
+3. **A distribution packager.** #29 came from one, and openSUSE and Debian
+   both still build for 32-bit arm. The reporter of #141 builds the Debian
+   package and has been responsive.
 
 ---
 
