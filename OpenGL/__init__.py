@@ -131,6 +131,25 @@ import occurs the flags should no longer be changed.
         is and what it costs.  Both dispatch implementations, C and
         ctypes, behave identically on each platform.
 
+    ARRAY_SIZE_CHECKING -- if True, an output array a caller passes
+        in is measured against what the call will write into it
+        before the driver is handed the pointer.
+
+        Only a size the call *promises* is checked -- one derived
+        from a count argument, where the driver will write exactly
+        that many.  A fixed size and a pname table lookup say "no
+        more than this" instead, and passing a smaller array for a
+        pname that returns one value is not an error.
+
+        What this prevents is a heap overrun: glGenTextures(1024, a)
+        with a sixteen-byte array writes 4096 bytes into it, and the
+        bytes past the end belong to another live allocation, so the
+        damage surfaces somewhere else entirely. Switching the check
+        off trades that guard for the cost of measuring, which is a
+        few array attribute reads per call.
+
+        Default: True
+
     STORE_POINTERS -- if set to True, PyOpenGL array operations
         will attempt to store references to pointers which are
         being passed in order to prevent memory-access failures
@@ -205,10 +224,22 @@ import occurs the flags should no longer be changed.
 
         Default: True
 
-    FORWARD_COMPATIBLE_ONLY -- only include OpenGL 3.1 compatible
-        entry points.  Note that this will generally break most
-        PyOpenGL code that hasn't been explicitly made "legacy free"
-        via a significant rewrite.
+    FORWARD_COMPATIBLE_ONLY -- no effect from 4.0; the flag is
+        still readable and settable so that a program that sets
+        it is not an error.
+
+        It was meant to make the entry points OpenGL 3.1 dropped
+        refuse the call, whatever the driver exported.  What it
+        reads is a `deprecated` mark on each entry point as it is
+        built, and nothing marks one: the list of forward-
+        compatible names is in OpenGL/platform/entrypoint31.py and
+        nothing imports it.  So the flag has had nothing to gate
+        on, and turning it on changes no call.
+
+        What a context is asked for is a different question and is
+        unaffected: a forward-compatible *context* is requested
+        through the window system, and the backends that can ask
+        for one do.
 
         Default: False
 
@@ -236,12 +267,24 @@ import occurs the flags should no longer be changed.
         
         Default: False
     
-    TYPE_ANNOTATIONS -- if True, set up type annotations in __annotations__
-        on raw functions. This is mostly just so that people can play
-        with the use of e.g. mypy or the like, but the values put in the
-        annotations dictionary are generally either ctypes types or 
-        ArrayDataType references, so this isn't *likely* to be all that useful
-        without further work.
+    TYPE_ANNOTATIONS -- if True, fill __annotations__ on the entry
+        points declared with OpenGL.platform.types.
+
+        That is nine of them from 4.0: OSMesa's eight and one EGL
+        extension, which are the raw modules still written by
+        hand.  Everything the registry generates arrives from the
+        declaration tables and never passes through that
+        decorator, so the flag does not reach it.
+
+        The values are ctypes types and ArrayDatatype classes, so
+        what they describe is the C signature rather than the call
+        a caller writes.  What a type checker reads is the .pyi
+        stub beside each package, generated from the registry and
+        shipped with a py.typed marker, which describes the Python
+        signature -- including the arguments the friendly form
+        drops.  See documentation/c-dispatch.html.
+
+        Default: False
 """
 from OpenGL.version import __version__
 import os
@@ -263,8 +306,8 @@ ERROR_LOGGING = environ_key("ERROR_LOGGING", False)
 ERROR_ON_COPY = environ_key("ERROR_ON_COPY", False)
 ARRAY_SIZE_CHECKING = environ_key("ARRAY_SIZE_CHECKING", True)
 STORE_POINTERS = environ_key("STORE_POINTERS", True)
-WARN_ON_FORMAT_UNAVAILABLE = False
-FORWARD_COMPATIBLE_ONLY = False
+WARN_ON_FORMAT_UNAVAILABLE = environ_key("WARN_ON_FORMAT_UNAVAILABLE", False)
+FORWARD_COMPATIBLE_ONLY = environ_key("FORWARD_COMPATIBLE_ONLY", False)
 SIZE_1_ARRAY_UNPACK = environ_key("SIZE_1_ARRAY_UNPACK", True)
 USE_ACCELERATE = environ_key("USE_ACCELERATE", True)
 CONTEXT_CHECKING = environ_key("CONTEXT_CHECKING", False)
@@ -273,8 +316,8 @@ ERROR_DEBUG_OUTPUT = environ_key("ERROR_DEBUG_OUTPUT", True)
 FULL_LOGGING = environ_key("FULL_LOGGING", False)
 ALLOW_NUMPY_SCALARS = environ_key("ALLOW_NUMPY_SCALARS", False)
 UNSIGNED_BYTE_IMAGES_AS_STRING = environ_key("UNSIGNED_BYTE_IMAGES_AS_STRING", True)
-MODULE_ANNOTATIONS = False
-TYPE_ANNOTATIONS = False
+MODULE_ANNOTATIONS = environ_key("MODULE_ANNOTATIONS", False)
+TYPE_ANNOTATIONS = environ_key("TYPE_ANNOTATIONS", False)
 
 
 # Declarations of plugins provided by PyOpenGL itself

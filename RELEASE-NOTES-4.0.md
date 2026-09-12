@@ -162,6 +162,18 @@ well as with the defaults.
 - With `PYOPENGL_ERROR_ON_COPY=1`, `VBO.delete()` could not delete a buffer: it
   passed the buffer name as an int, which the wrapper copies into an array. It
   builds a `GLuint`, as the deleter that runs at collection already did.
+- `FORWARD_COMPATIBLE_ONLY` has no effect from 4.0, and reading or setting it is
+  still allowed. It was meant to make the entry points OpenGL 3.1 dropped refuse
+  the call, and what it reads is a `deprecated` mark on each entry point as it
+  is built — which nothing sets: the list of forward-compatible names is in
+  `OpenGL/platform/entrypoint31.py` and nothing imports it. Asking the window
+  system for a forward-compatible *context* is a different thing and is
+  unaffected.
+- `TYPE_ANNOTATIONS` reaches nine entry points: OSMesa's eight and one EGL
+  extension, which are the raw modules still written by hand. Everything the
+  registry generates arrives from the declaration tables and never passes
+  through `OpenGL.platform.types`, which is the decorator the flag gates. What a
+  type checker reads is the `.pyi` stub beside each package.
 - `ALLOW_NUMPY_SCALARS` has no effect from 4.0, and reading or setting it is
   still allowed. A numpy integer scalar is accepted wherever an integer is
   wanted with the flag or without it, because ctypes converts through

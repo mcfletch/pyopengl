@@ -34,6 +34,25 @@ SETTABLE = {
     'FULL_LOGGING': True,
 }
 
+#: Flags the docstring says have no effect from 4.0.  Each is still readable
+#: and settable, because a program that sets one should not break on upgrade,
+#: and each names in its own paragraph what became of the behaviour.  The
+#: cases below hold the claim: what a flag gates on has to be gone, or the
+#: documentation is wrong in the direction that costs somebody a day.
+NO_EFFECT = {
+    'ALLOW_NUMPY_SCALARS',
+    'FORWARD_COMPATIBLE_ONLY',
+}
+
+#: Flags whose reach is small enough that the docstring names a number.  A
+#: number in prose goes stale silently, so the case below counts.
+NARROW = {
+    # `OpenGL.platform.types` is the decorator TYPE_ANNOTATIONS gates, and it
+    # is applied only by the raw modules still written by hand: everything the
+    # registry generates arrives from the declaration tables instead.
+    'TYPE_ANNOTATIONS': 9,
+}
+
 REPORT = '''
 import json
 from OpenGL import _configflags
@@ -102,10 +121,9 @@ def test_every_documented_flag_is_covered_here():
     # they are read while the modules are being built, before any environment
     # is consulted, or they are switches for the generator rather than the run.
     in_code_only = {
-        'FORWARD_COMPATIBLE_ONLY', 'WARN_ON_FORMAT_UNAVAILABLE',
-        'MODULE_ANNOTATIONS', 'TYPE_ANNOTATIONS', 'ALLOW_NUMPY_SCALARS',
+        'WARN_ON_FORMAT_UNAVAILABLE', 'MODULE_ANNOTATIONS',
         'UNSIGNED_BYTE_IMAGES_AS_STRING',
-    }
+    } | NO_EFFECT | set(NARROW)
     missing = documented - set(SETTABLE) - in_code_only
     assert not missing, (
         'documented flags that nothing here varies: %s' % (', '.join(sorted(missing)),)
@@ -212,3 +230,104 @@ class TestAFlagSetAfterTheWrappersAreBuilt:
         answered = json_from_child(SET_IN_TIME)
         assert answered['warned'] == [], answered
         assert answered['took_effect'] is True, answered
+
+
+class TestAFlagThatSaysItHasNoEffect:
+    """Three flags are documented as doing nothing from 4.0.
+
+    A flag that says it is inert and is not would be the expensive direction:
+    somebody reads the paragraph, leaves the flag set, and the behaviour it
+    switches on is in force with nothing saying so.  So what each one gates on
+    is asked about here rather than taken from the docstring.
+    """
+
+    def test_the_docstring_says_so_for_each(self):
+        import re
+
+        import OpenGL
+
+        for name in sorted(NO_EFFECT):
+            paragraph = re.search(
+                r'^    %s --(.*?)(?=^    [A-Z][A-Z0-9_]+ --|\Z)' % (name,),
+                OpenGL.__doc__, re.M | re.S,
+            )
+            assert paragraph, 'the docstring does not introduce %s' % (name,)
+            assert 'no effect' in paragraph.group(1), (
+                '%s is listed as inert and its paragraph does not say so'
+                % (name,)
+            )
+
+    def test_each_is_still_readable(self):
+        """A program that sets one must not break on upgrade."""
+        import OpenGL
+        from OpenGL import _configflags
+
+        for name in sorted(NO_EFFECT):
+            assert hasattr(OpenGL, name), name
+            assert hasattr(_configflags, name), name
+
+    def test_nothing_marks_an_entry_point_deprecated(self):
+        """What ``FORWARD_COMPATIBLE_ONLY`` gates on.
+
+        ``createBaseFunction`` refuses a deprecated entry point under the
+        flag, and an entry point is marked deprecated by nothing: the list of
+        the names OpenGL 3.1 kept is in ``OpenGL/platform/entrypoint31.py``
+        and nothing imports it.  If something starts marking them, this fails
+        and the flag's paragraph is wrong.
+        """
+        import OpenGL.GL                                    # noqa: F401
+        import OpenGL.GLU                                   # noqa: F401
+        from OpenGL import _declarations
+
+        annotations = _declarations.annotations()
+        marked = [key for key, entry in annotations.items()
+                  if 'deprecated' in repr(entry)]
+        assert not marked, marked
+
+
+class TestAFlagWhoseReachTheDocstringCounts:
+    """``TYPE_ANNOTATIONS`` reaches nine entry points and the paragraph says so.
+
+    ``OpenGL.platform.types`` is the decorator that fills
+    ``__annotations__``, and it is applied only by the raw modules still
+    written by hand -- OSMesa's and one EGL extension's.  Everything the
+    registry generates arrives from the declaration tables and never passes
+    through it.  A number written into prose is the kind that goes stale
+    without anybody noticing, so it is counted rather than remembered.
+    """
+
+    def _applications(self):
+        import ast
+
+        import sources
+
+        found = []
+        for module in sources.package():
+            for node in ast.walk(module.tree):
+                if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    continue
+                for decorator in node.decorator_list:
+                    target = (decorator.func
+                              if isinstance(decorator, ast.Call) else decorator)
+                    name = (getattr(target, 'attr', None)
+                            or getattr(target, 'id', None))
+                    if name == 'types':
+                        found.append(module.where(node))
+        return found
+
+    def test_the_count_is_what_the_docstring_says(self):
+        found = self._applications()
+        assert len(found) == NARROW['TYPE_ANNOTATIONS'], (
+            'the docstring says TYPE_ANNOTATIONS reaches %d entry points and '
+            '`OpenGL.platform.types` is now applied to %d.  Either the '
+            'paragraph or this number is out of date:\n  %s'
+            % (NARROW['TYPE_ANNOTATIONS'], len(found), '\n  '.join(found))
+        )
+
+    def test_the_typed_surface_is_the_stubs(self):
+        """What replaced it, and the marker without which a checker ignores it."""
+        import os
+
+        import paths
+
+        assert os.path.exists(os.path.join(paths.PACKAGE, 'py.typed'))

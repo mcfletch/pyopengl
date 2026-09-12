@@ -672,6 +672,15 @@ before the call returns.</p>
 
 <pre>import OpenGL<br>OpenGL.ERROR_ON_COPY = True<br></pre>
 
+<p>The assignment has to come before the first entry point is built: the
+flags are read once and frozen, so setting one afterwards is dropped and
+PyOpenGL warns that it was. Every flag in
+<code>OpenGL.__init__</code>'s list is also settable as
+<code>PYOPENGL_&lt;NAME&gt;</code> in the environment &mdash;
+<code>PYOPENGL_ERROR_ON_COPY=1</code> &mdash; which is read before anything
+is built and so works whatever the import order, and is how a program that
+does not control its own imports sets one.</p>
+
 
 
 
