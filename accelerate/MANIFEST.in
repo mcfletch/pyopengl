@@ -1,4 +1,25 @@
+# The sources an install builds from.
 include src/*.pyx
-include src/*.c
 include OpenGL_accelerate/*.pxd
 include license.txt
+
+# `exclude`, not merely "not included": setuptools puts every extension
+# `sources` entry into the archive by itself, and `cythonize` rewrites those
+# entries from the .pyx to the .c it generated. So the C arrives without
+# anything here asking for it, and has to be taken back out.
+exclude src/*.c
+
+# NOT `include src/*.c`: that is Cython's output from the .pyx beside it, and
+# Cython is a hard build requirement of this package (see [build-system]), so
+# every install from this archive writes that C itself. `setup.py`'s
+# `drop_c_from_another_toolchain` deletes any that arrived, because the
+# archive carries no toolchain stamp for it to match against -- so shipping it
+# is weight that is deleted on arrival, with a hazard attached: stale
+# generated C is what fails to compile against a numpy it was not written for,
+# reporting an error inside a numpy header that names nothing in this package.
+# See https://github.com/mcfletch/pyopengl/issues/121
+#
+# `src/c/**` is a different thing and is shipped: the dispatch layer generated
+# from the Khronos registry by a tool that does not run at install time and is
+# not distributed. setup.py names those as extension sources, which is what
+# puts them in the archive.

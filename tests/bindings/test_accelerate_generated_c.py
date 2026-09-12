@@ -290,3 +290,93 @@ class TestTheGeneratedCSatisfiesClangToo:
                           if 'error:' in line]
                 refused.append('--- %s ---\n%s' % (name, '\n'.join(errors[:6])))
         assert not refused, 'clang refuses:\n' + '\n\n'.join(refused)
+
+
+@pytest.fixture(scope='module')
+def archive(tmp_path_factory):
+    """The sdist this checkout produces, as a list of member names.
+
+    Built once for the module: it is a couple of seconds, and four cases ask
+    the same question of it.
+    """
+    import subprocess
+    import tarfile
+
+    root = os.path.join(paths.ROOT, 'accelerate')
+    if not os.path.exists(os.path.join(root, 'setup.py')):
+        pytest.skip('the accelerate source tree is not in this checkout')
+    into = tmp_path_factory.mktemp('sdist')
+    completed = subprocess.run(
+        [sys.executable, 'setup.py', 'sdist', '--dist-dir', str(into), '-q'],
+        cwd=root, capture_output=True, text=True, timeout=600,
+    )
+    assert completed.returncode == 0, completed.stderr[-3000:]
+    built = list(into.glob('*.tar.gz'))
+    assert len(built) == 1, built
+    with tarfile.open(built[0]) as handle:
+        # Drop the leading `name-version/` that sdists wrap everything in.
+        return sorted(name.split('/', 1)[1]
+                      for name in handle.getnames() if '/' in name)
+
+
+class TestWhatTheSdistShips:
+    """The source release carries sources, and the C it cannot regenerate.
+
+    Two kinds of generated C live under ``accelerate/src`` and they are not
+    the same question.
+
+    ``src/*.c`` is Cython's output from the ``.pyx`` beside it.  Cython is a
+    hard build requirement of this package, so every install from an sdist has
+    one and writes that C itself -- and ``drop_c_from_another_toolchain``
+    deletes any that came in the archive, because the sdist carries no
+    toolchain stamp for it to match against.  Shipping it is therefore weight
+    that is deleted on arrival, and weight with a hazard attached: it is
+    exactly the stale C that fails to compile against a numpy it was not
+    written for, which is what the ticket reports of other projects.
+
+    ``src/c/**/*.c`` is the dispatch layer, generated from the Khronos
+    registry by a tool that does *not* run at install time and is not shipped.
+    That C has to be in the archive or the package cannot be built at all.
+
+    https://github.com/mcfletch/pyopengl/issues/121
+    https://github.com/mcfletch/pyopengl/issues/12
+    """
+
+    @pytest.mark.slow
+    def test_every_pyx_is_shipped(self, archive):
+        """Without these there is nothing to build from at all."""
+        shipped = [name for name in archive if name.endswith('.pyx')]
+        assert len(shipped) >= 9, shipped
+
+    @pytest.mark.slow
+    def test_the_pxd_files_are_shipped(self, archive):
+        """#12: without them a `cimport` in a .pyx has nothing to read, and
+        regenerating the C from an sdist fails on the first module."""
+        shipped = [name for name in archive if name.endswith('.pxd')]
+        assert shipped, 'no .pxd files in the sdist'
+        assert 'OpenGL_accelerate/__init__.py' in archive, (
+            'the package directory has no __init__.py, so the .pxd files in '
+            'it are not a package Cython can cimport from')
+
+    @pytest.mark.slow
+    def test_no_cython_output_is_shipped(self, archive):
+        """#121: one `.c` per `.pyx`, and every one of them a liability."""
+        cython_output = {
+            name[:-4] + '.c' for name in archive
+            if name.startswith('src/') and name.endswith('.pyx')
+        }
+        shipped = sorted(cython_output & set(archive))
+        assert not shipped, (
+            '%d Cython-generated file(s) in the sdist; every install deletes '
+            'and rewrites them, and a stale one is a compile error inside a '
+            'numpy header naming nothing in this package:\n  %s'
+            % (len(shipped), '\n  '.join(shipped)))
+
+    @pytest.mark.slow
+    def test_the_dispatch_layer_c_is_shipped(self, archive):
+        """The other kind, which nothing at install time can write again."""
+        shipped = [name for name in archive
+                   if name.startswith('src/c/') and name.endswith('.c')]
+        assert shipped, (
+            'the registry-generated dispatch C is missing, and the generator '
+            'that writes it does not run at install time')
