@@ -95,6 +95,14 @@ What changed since the 3.x series. The current development version is
   handlers took only a sequence, so without numpy installed those calls raised
   `TypeError` before reaching the driver. Both take a length or a shape now, as
   the numpy handler does.
+- `FormatHandler.typeLookup` answers which handler a data type resolved to, and
+  raised `TypeError: 'HandlerRegistry' object is not subscriptable` wherever
+  PyOpenGL_accelerate was installed. The pure-Python registry is a dict
+  subclass; the compiled one offered only `__setitem__`. It answers a lookup by
+  type now, and a type nothing handles raises the documented `KeyError`.
+- `FormatHandler.dimensions` declared a `typeCode` parameter no handler accepts
+  and no caller passes, so the interface a third party writing a handler reads
+  described an argument every implementation would have refused.
 
 ## Type stubs and `py.typed`
 

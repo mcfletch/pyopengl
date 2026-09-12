@@ -58,7 +58,11 @@ if os.name == "nt":
         argNames=('callback',),
     )
 else:
-    # Linux, OSX, etceteras
+    # Linux, OSX, etceteras.  Both names are bound on every platform: the
+    # block below reads `_exitfunctype`, and spelling its guard as "is
+    # `__glutInitWithExit` set" left whether the other name exists to a
+    # coincidence of the two branches.
+    _exitfunctype = None
     __glutInitWithExit = None
 if __glutInitWithExit:
     # Normal platforms + Win32 w/ FreeGLUT (SF#2813722)

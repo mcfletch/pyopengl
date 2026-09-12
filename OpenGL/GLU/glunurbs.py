@@ -152,15 +152,22 @@ def _callbackWithType( funcType ):
     assert result.argtypes[-1] == funcType
     return result
 
-for (c,funcType) in GLUnurbs.CALLBACK_TYPES.items():
-    cb = _callbackWithType( funcType )
-    GLUnurbs.CALLBACK_FUNCTION_REGISTRARS[ c ] = cb
-    assert funcType == GLUnurbs.CALLBACK_TYPES[c]
-    assert cb.argtypes[-1] == funcType
-try:
-    del c,cb, funcType
-except NameError as err:
-    pass
+def _registerCallbackTypes():
+    """Give each callback constant a gluNurbsCallback typed for it.
+
+    A function rather than a loop at module scope: the loop's targets stay
+    bound afterwards and became three names exported from this module, which
+    the ``del`` below it removed under a ``try``/``except NameError`` -- a
+    guard for the loop running no times, which it cannot, and which left the
+    last callback type reachable as ``cb`` when it did.
+    """
+    for which, funcType in GLUnurbs.CALLBACK_TYPES.items():
+        registrar = _callbackWithType( funcType )
+        GLUnurbs.CALLBACK_FUNCTION_REGISTRARS[ which ] = registrar
+        assert funcType == GLUnurbs.CALLBACK_TYPES[which]
+        assert registrar.argtypes[-1] == funcType
+
+_registerCallbackTypes()
 
 def gluNurbsCallback( nurb, which, CallBackFunc ):
     """Dispatch to the nurb's addCallback operation"""

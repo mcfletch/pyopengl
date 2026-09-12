@@ -109,5 +109,12 @@ class FormatHandler(object):
         if self.baseType is not None:
             return
 
-    def dimensions(self, value, typeCode=None):
-        """Determine dimensions of the passed array value (if possible)"""
+    def dimensions(self, value):
+        """Determine dimensions of the passed array value (if possible)
+
+        The shape of an array is a property of the array, so this takes no
+        type code: no handler here has ever accepted one, and no caller has
+        ever passed one.  Declaring it meant the interface a third party
+        writing a handler reads described an argument every implementation
+        would have refused.
+        """

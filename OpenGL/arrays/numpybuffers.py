@@ -75,12 +75,11 @@ class NumpyHandler( buffers.BufferHandler ):
                 if typeCode is None:
                     typeCode = source.dtype.char
                 return numpy.ascontiguousarray( source, typeCode )
-try:
-    numpy.array( [1], 's' )
-    SHORT_TYPE = 's'
-except TypeError as err:
-    SHORT_TYPE = 'h'
-    USHORT_TYPE = 'H'
+#: numpy's own typecodes for the two 16-bit integers.  See the note beside the
+#: same pair in ``OpenGL/arrays/numpymodule.py``: the probe these replace left
+#: ``USHORT_TYPE`` unbound on the branch it could take.
+SHORT_TYPE = 'h'
+USHORT_TYPE = 'H'
 
 def lookupDtype( char ):
     return numpy.zeros( (1,), dtype=char ).dtype

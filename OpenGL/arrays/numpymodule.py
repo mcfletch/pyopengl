@@ -224,12 +224,14 @@ if NumpyHandler is None:
                     )
                 return c_void_p( pointer )
 
-try:
-    numpy.array( [1], 's' )
-    SHORT_TYPE = 's'
-except TypeError as err:
-    SHORT_TYPE = 'h'
-    USHORT_TYPE = 'H'
+#: numpy's own typecodes for the two 16-bit integers.  These were probed for
+#: by asking numpy to build an array of the Numeric-era ``'s'``: where that
+#: succeeded ``SHORT_TYPE`` became ``'s'`` and ``USHORT_TYPE`` was left unset,
+#: so the table below would have raised ``NameError`` on import -- the branch
+#: has not been reachable for as long as this package has required numpy, and
+#: an import that answers a question the same way every time says the answer.
+SHORT_TYPE = 'h'
+USHORT_TYPE = 'H'
 
 def lookupDtype( char ):
     return numpy.zeros( (1,), dtype=char ).dtype

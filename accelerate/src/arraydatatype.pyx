@@ -28,9 +28,35 @@ cdef class HandlerRegistry:
         self.all_output_handlers = []
     def __setitem__( self,key,value ):
         self.registry[key] = value
+    # The pure-Python HandlerRegistry is a dict subclass, so it answers a
+    # lookup by type as well as a lookup by value.  This one held its mapping
+    # privately and offered only __setitem__, so `FormatHandler.typeLookup`
+    # -- a public classmethod, and how a third party asks which handler its
+    # own array format resolved to -- raised
+    #     TypeError: 'HandlerRegistry' object is not subscriptable
+    # wherever the accelerators are installed, which is most installations.
+    # Its `except KeyError` could not catch that, so the caller got an error
+    # about the registry's type rather than the answer or the KeyError the
+    # method documents.
+    def __getitem__( self, key ):
+        return self.registry[key]
+    def __contains__( self, key ):
+        return key in self.registry
+    def __len__( self ):
+        return len( self.registry )
+    def __iter__( self ):
+        return iter( self.registry )
+    def get( self, key, default=None ):
+        return self.registry.get( key, default )
+    def keys( self ):
+        return self.registry.keys()
+    def values( self ):
+        return self.registry.values()
+    def items( self ):
+        return self.registry.items()
     def __call__( self, value ):
         return self.c_lookup( value )
-    
+
     cdef object c_lookup( self, object value ):
         """C-level lookup of handler for given value"""
         cdef object typ, handler,base
