@@ -9,6 +9,7 @@ The cases that pass the results of that conversion to an entry point are in
 """
 
 import ctypes
+import re
 import struct
 import sys
 import unittest
@@ -33,6 +34,74 @@ needs_accelerate = pytest.mark.skipif(
     reason='the buffer protocol support is the C accelerator\'s',
 )
 
+#: A PEP 3118 format string: an optional shape in parentheses, an optional
+#: byte-order character, then the struct-module letter for the item type.
+FORMAT = re.compile(r'^(?:\((?P<shape>[\d,]+)\))?(?P<order>[<>=!@])?(?P<letter>.+)$')
+
+#: struct-module letters for a signed integer, of whatever width.
+SIGNED_INTEGERS = frozenset('bhilqn')
+
+#: And for an unsigned one.
+UNSIGNED_INTEGERS = frozenset('BHILQN')
+
+
+def format_letter(format):
+    """The item-type letter of a Py_buffer format string.
+
+    Which letter a platform uses for a given C type is the platform's
+    business: a 4-byte signed int is ``i`` on x86-64 and ``l`` on i586 and
+    armv7l, and the shape prefix comes and goes with the interpreter version.
+    The byte-order character varies too -- ``<`` on a little-endian machine and
+    ``>`` on s390x.
+
+    So a case says what the value *is* and lets the machine spell it. Width is
+    not lost by doing so: ``itemsize`` is asserted separately and is what pins
+    it.
+
+    https://github.com/mcfletch/pyopengl/issues/29
+    https://github.com/mcfletch/pyopengl/issues/92
+    """
+    if isinstance(format, bytes):
+        format = format.decode('ascii')
+    match = FORMAT.match(format)
+    assert match, 'not a buffer format string: %r' % (format,)
+    return match.group('letter')
+
+
+class TestReadingAFormatString:
+    """``format_letter`` against the spellings the tracker has seen.
+
+    Two tickets are one machine reporting a format string the case did not
+    list, so the spellings from both are here -- and a machine that reports a
+    fifth one now changes nothing.
+    """
+
+    @pytest.mark.parametrize(
+        'format,letter',
+        [
+            (b'<i', 'i'),                # x86-64
+            (b'(3)<i', 'i'),             # x86-64, through Py_buffer
+            (b'<l', 'l'),                # i586 and armv7l, GH#29
+            (b'(3)<l', 'l'),
+            (b'>i', 'i'),                # s390x, GH#92
+            (b'(3)>i', 'i'),
+            (b'<q', 'q'),                # a 64-bit c_long
+            (b'(3,3)<I', 'I'),           # a two-dimensional shape
+            (b'B', 'B'),                 # no order character at all
+            (b'I', 'I'),
+        ],
+    )
+    def test_the_letter_is_read_whatever_surrounds_it(self, format, letter):
+        assert format_letter(format) == letter
+
+    def test_text_is_read_as_well_as_bytes(self):
+        """CPython answers bytes; the reports quote str."""
+        assert format_letter('(3)<l') == 'l'
+
+    def test_every_signed_spelling_of_a_four_byte_int_is_signed(self):
+        for format in (b'<i', b'(3)<i', b'<l', b'(3)<l', b'>i'):
+            assert format_letter(format) in SIGNED_INTEGERS, format
+
 
 class TestCoreDatatype(unittest.TestCase):
     def test_arrayPointer(self):
@@ -48,91 +117,63 @@ class TestCoreDatatype(unittest.TestCase):
 
     @needs_accelerate
     def test_buffer_api_basic(self):
+        """What ``Py_buffer.from_object`` reports about an object's memory.
+
+        A ``format`` given as a ``frozenset`` is a set of acceptable item-type
+        letters rather than a whole format string; see ``format_letter`` above
+        for why the spelling is the machine's to choose.
+        """
         import array as silly_array
 
-        structures = []
-        if sys.version_info[:2] >= (3, 9):
-            structures.append(
-                (b'this and that', 13, 1, True, 1, b'B', [13], [1]),
-            )
-
-        if sys.version_info[:2] >= (2, 7):
-            # GH#92 Big-endian hosts report different formats because yeah, obviously
-            if sys.byteorder == 'little':  # x86 cases
-                int_formats = [b'(3)<i', b'(3)<l', b'<i', b'<l']
-            else:
-                int_formats = [b'(3)>i', b'(3)>l', b'>i', b'>l']
-
-            if sys.version_info[:2] not in [(3, 8), (3, 7)]:
-
-                structures.append(
-                    # on Python 3.4 we do *not* get the (3) prefix :(
-                    (
-                        (GLint * 3)(1, 2, 3),
-                        12,
-                        4,
-                        False,
-                        1,
-                        int_formats,
-                        [3],
-                        None,
-                    ),
-                )
-
-        if sys.version_info[:2] >= (3, 0) and sys.version_info[:2] not in [
-            (3, 8),
-            (3, 7),
-        ]:
-            # only supports buffer protocol in 3.x
+        structures = [
+            (b'this and that', 13, 1, True, 1, UNSIGNED_INTEGERS, [13], [1]),
+            (
+                (GLint * 3)(1, 2, 3),
+                12,
+                4,
+                False,
+                1,
+                SIGNED_INTEGERS,
+                [3],
+                None,
+            ),
+            (
+                silly_array.array('I', [1, 2, 3]),
+                12,
+                4,
+                False,
+                1,
+                UNSIGNED_INTEGERS,
+                [3],
+                [4],
+            ),
+            (memoryview(b'this'), 4, 1, True, 1, UNSIGNED_INTEGERS, [4], [1]),
+        ]
+        if np is not None:
             structures.extend(
                 [
                     (
-                        silly_array.array('I', [1, 2, 3]),
+                        np.arange(0, 9, dtype='I').reshape((3, 3)),
+                        36,
+                        4,
+                        False,
+                        2,
+                        UNSIGNED_INTEGERS,
+                        [3, 3],
+                        [12, 4],
+                    ),
+                    (
+                        np.arange(0, 9, dtype='I').reshape((3, 3))[:, 1],
                         12,
                         4,
                         False,
                         1,
-                        b'I',
+                        UNSIGNED_INTEGERS,
                         [3],
-                        [4],
+                        [12],
                     ),
                 ]
             )
-        try:
-            if sys.version_info[:2] not in [(3, 8), (3, 7)]:
-                structures.append((memoryview(b'this'), 4, 1, True, 1, b'B', [4], [1]))
-        except NameError:
-            # Python 2.6 doesn't have memory view
-            pass
-        try:
-            if array:
-                structures.extend(
-                    [
-                        (
-                            arange(0, 9, dtype='I').reshape((3, 3)),
-                            36,
-                            4,
-                            False,
-                            2,
-                            b'I',
-                            [3, 3],
-                            [12, 4],
-                        ),
-                        (
-                            arange(0, 9, dtype='I').reshape((3, 3))[:, 1],
-                            12,
-                            4,
-                            False,
-                            1,
-                            b'I',
-                            [3],
-                            [12],
-                        ),
-                    ]
-                )
-        except NameError:
-            # Don't have numpy installed...
-            pass
 
         from OpenGL.arrays import _buffers
 
@@ -154,8 +195,12 @@ class TestCoreDatatype(unittest.TestCase):
                 assert buf.itemsize == itemsize, (object, itemsize, buf.itemsize)
                 assert buf.readonly == readonly, (object, readonly, buf.readonly)
                 assert buf.ndim == ndim, (object, ndim, buf.ndim)
-                if isinstance(format, list):
-                    assert buf.format in format, (object, format, buf.format)
+                if isinstance(format, frozenset):
+                    assert format_letter(buf.format) in format, (
+                        object,
+                        format,
+                        buf.format,
+                    )
                 else:
                     assert buf.format == format, (object, format, buf.format)
                 assert buf.shape[: buf.ndim] == shape, (

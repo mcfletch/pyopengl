@@ -137,6 +137,12 @@ def test_the_address_of_a_null_handle_is_none_rather_than_a_fault():
 
 def test_pickling_is_still_refused():
     """A handle belongs to a driver in this process. Whatever ctypes does with
-    one, adding equality must not turn it into something that travels."""
-    with pytest.raises(Exception):
+    one, adding equality must not turn it into something that travels.
+
+    ctypes refuses it, with "ctypes objects containing pointers cannot be
+    pickled" -- and a ``__reduce__`` added along with ``__eq__`` and
+    ``__hash__``, to make a handle behave like a value, is what would quietly
+    lift that refusal.
+    """
+    with pytest.raises(ValueError, match='cannot be pickled'):
         pickle.dumps(at(GLsync, 0x1234))
