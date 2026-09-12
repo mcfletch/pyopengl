@@ -131,9 +131,9 @@ handling in `OpenGL/raw/WGL/_types.py` is testable anywhere; whether
 
 ### #139 — segfaults and hangs on an Intel Mac
 
-**Needs a matrix change first.** `macos-14` and `macos-15` are both Apple
-Silicon, so the current matrix cannot see this. Adding `macos-13` is the
-first step and is a one-line change here.
+**`macos-13` added, not yet run.** It is the last Intel runner GitHub offers;
+14 and 15 are both Apple Silicon, so nothing in the matrix could previously
+have seen this.
 
 The report is 3.1.8 segfaulting in the suite on Python 3.11 and 3.12, and
 `master` at the time failing a lot and then hanging. The suite has moved a
@@ -190,24 +190,27 @@ rates.
 
 ### #135 — arm64 runners
 
-**The change is writable here.** GitHub's `ubuntu-24.04-arm` and
-`ubuntu-22.04-arm` runners are free for public repositories. Adding one row to
-the Linux matrix is the whole of it; the job's Mesa install and EGL device
-backend work unchanged.
+**Added, not yet run.** `test.yml` carries an `ubuntu-24.04-arm` row
+(`py312-num1-accel1-dispc`), and the job takes its runner from
+`matrix.runner`, defaulting to `ubuntu-latest`. The Mesa install and the EGL
+device backend are unchanged; only the label differs.
 
-- **What settles it**: a green arm64 row.
-- **Branch**: `issue/135-arm64-runner`
+- **What settles it**: that row green. Nothing here can run it.
+- **What might not work**: the test dependencies. `glfw` and `pygame-ce` need
+  aarch64 wheels or the tox environment will not build — the EGL backend needs
+  neither, but tox installs the extra whole. If that is what fails, the answer
+  is to mark them as x86-64 only rather than to drop the row.
 
 ### #173 — aarch64 wheels
 
-**Depends on #135**, and on `accelerate-manylinux.yml` rather than the test
-workflow: the accelerator is the only part with anything to compile. Once
-there is an arm64 runner, cibuildwheel builds `manylinux_aarch64` on it
+**Added, not yet run.** `accelerate-manylinux.yml` builds on
+`ubuntu-24.04-arm` as well, so cibuildwheel produces `manylinux_aarch64`
 natively rather than under emulation.
 
 - **What settles it**: an aarch64 wheel on PyPI that installs on the
-  reporter's DGX Spark.
-- **Branch**: `issue/173-aarch64-wheels`
+  reporter's DGX Spark. A build is not the same as an install: the wheel
+  should be tried on real hardware before the ticket is answered, and the job
+  runs the test command cibuildwheel is given.
 
 ### #29 — `test_buffer_api_basic` on i586 and armv7l
 

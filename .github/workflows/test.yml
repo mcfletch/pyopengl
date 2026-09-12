@@ -56,13 +56,13 @@ concurrency:
 
 jobs:
   tox:
-    name: ${{ matrix.toxenv }}${{ matrix.windowing && format(' / {0}', matrix.windowing) || '' }}
+    name: ${{ matrix.toxenv }}${{ matrix.windowing && format(' / {0}', matrix.windowing) || '' }}${{ matrix.runner && format(' / {0}', matrix.runner) || '' }}
     # `inputs.platforms` is empty on a push and set only on a dispatch, so the
     # empty case is what makes a push run everything.
     if: >-
       inputs.platforms == '' || inputs.platforms == 'all'
       || inputs.platforms == 'linux'
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runner || 'ubuntu-latest' }}
     timeout-minutes: 30
     strategy:
       fail-fast: false
@@ -117,6 +117,16 @@ jobs:
           - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-flagnosizecheck,
              paths: 'tests/ accelerate/tests'}
           - {python: '3.14', toxenv: py314-num1-accel1-dispctypes-flagnounpack,
+             paths: 'tests/ accelerate/tests'}
+          # arm64, on GitHub's hosted arm runners.  Everything else in this
+          # matrix is x86-64, and the reports that reach us from arm are a
+          # steady trickle -- a Raspberry Pi, an Intel Mac's opposite number,
+          # a DGX Spark -- each read by its reporter as an architecture
+          # problem because that is what they had in front of them, and each
+          # so far turning out not to be.  A row here is how that stops being
+          # a guess.  The Mesa install and the EGL device backend are the
+          # same; only the runner label differs.
+          - {python: '3.12', toxenv: py312-num1-accel1-dispc, runner: ubuntu-24.04-arm,
              paths: 'tests/ accelerate/tests'}
           # OSMesa, which is a PyOpenGL *platform* rather than another driver
           # behind EGL: it rasterises into an array in the process's own
@@ -336,7 +346,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-14, macos-15]
+        # macos-13 is the last Intel runner GitHub offers; 14 and 15 are both
+        # Apple Silicon.  #139 is a segfault on an Intel Mac, and without this
+        # row nothing in the matrix could ever see it.
+        os: [macos-13, macos-14, macos-15]
         # Both implementations, because the compiled one is the release's
         # substance and Linux is otherwise the only platform it is ever run on.
         # The wheel job compiles it for macOS already; nothing there loads what
