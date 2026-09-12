@@ -116,6 +116,71 @@ class TestTheVersionIsReadableOnItsOwn(unittest.TestCase):
         self.assertTrue(answered['version'], answered)
 
 
+class TestTheVersionStringIsParsed(unittest.TestCase):
+    """What ``GL_VERSION`` says, in the shapes drivers actually say it.
+
+    The specification fixes only the start of the string -- a version, then
+    optionally a space and whatever the vendor wants -- and an ES driver
+    prefixes ``OpenGL ES`` in front of that.  A version this cannot read is not
+    a wrong number: ``pullVersion`` ends in ``int()`` over what it split, so an
+    unparsed string is a ``ValueError`` out of whatever call first asked how
+    new the context was.
+
+    No context is taken.  The subject is the pattern, and the strings below are
+    the ones drivers reported on the tickets.
+
+    https://github.com/mcfletch/pyopengl/issues/137
+    https://github.com/mcfletch/pyopengl/issues/166
+    """
+
+    #: (what the driver said, the version in it, whether it is an ES string).
+    REPORTED = [
+        ('4.6 (Core Profile) Mesa 24.0.9', '4.6', False),
+        ('3.0 Mesa 18.3.6', '3.0', False),
+        ('2.1 INTEL-10.6.33', '2.1', False),
+        ('4.6.0 NVIDIA 535.216.01', '4.6.0', False),
+        ('OpenGL ES 3.2 NVIDIA 535.216.01', '3.2', True),
+        ('OpenGL ES 3.1', '3.1', True),
+        ('OpenGL ES 2.0 build 1.9@1234', '2.0', True),
+    ]
+
+    def parse(self, reported):
+        match = GLQuerier.version_matcher.match(reported)
+        self.assertIsNotNone(match, f'no version found in {reported!r}')
+        return match
+
+    def test_the_version_is_found(self):
+        for reported, version, _ in self.REPORTED:
+            with self.subTest(reported=reported):
+                self.assertEqual(self.parse(reported).group('version'), version)
+
+    def test_the_version_is_a_pair_of_integers(self):
+        """What ``pullVersion`` does with what it matched, which is where an
+        unparsed string becomes an exception rather than a wrong answer."""
+        for reported, version, _ in self.REPORTED:
+            with self.subTest(reported=reported):
+                self.assertTrue(
+                    all(part.isdigit() for part in version.split('.')),
+                    version,
+                )
+                [int(part) for part in version.split('.')]
+
+    def test_an_es_string_is_recognised_as_es(self):
+        """``pullVersion`` sets ``is_opengl_es`` from this group, and warns.
+
+        Whatever the group holds has to be what that comparison is written
+        against: an ES context reached through the desktop API is a caller
+        about to call an entry point that is not the one they mean, and the
+        warning is the only place they are told.
+        """
+        for reported, _, is_es in self.REPORTED:
+            with self.subTest(reported=reported):
+                marker = self.parse(reported).group('api_marker')
+                self.assertEqual(bool(marker), is_es, marker)
+                if is_es:
+                    self.assertEqual(marker, 'OpenGL ES', repr(marker))
+
+
 class TestAConstantResolvedAgainstTheContext(GLTestCase):
     """``LookupInt`` defers a glGet until something reads the value."""
 
