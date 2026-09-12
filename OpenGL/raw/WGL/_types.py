@@ -18,21 +18,31 @@ class _WGLQuerier( extensions.ExtensionQuerier ):
         # only one version...
         return [1,0]
     def pullExtensions( self ):
+        """The extensions the current device context reports, as bytes
+
+        Every querier is registered process-wide, so this one is asked on
+        machines that have no WGL at all -- and the platform there has no
+        ``wglGetCurrentDC`` to look up.  That is the AttributeError below, and
+        it has to be reached: the lookup belongs inside the ``try``, or the
+        first ``WGL_`` specifier anywhere raises out of an import.
+        """
         from OpenGL.platform import PLATFORM
-        wglGetCurrentDC = PLATFORM.OpenGL.wglGetCurrentDC
-        # Without this the handle comes back through the default c_int and
-        # loses its top half on a 64-bit build.
-        wglGetCurrentDC.restype = HDC
         try:
+            wglGetCurrentDC = PLATFORM.OpenGL.wglGetCurrentDC
+            # Without this the handle comes back through the default c_int and
+            # loses its top half on a 64-bit build.
+            wglGetCurrentDC.restype = HDC
             dc = wglGetCurrentDC()
             proc_address = PLATFORM.getExtensionProcedure(b'wglGetExtensionsStringARB')
             wglGetExtensionStringARB = PLATFORM.functionTypeFor( PLATFORM.WGL )(
                 c_char_p,
                 HDC,
             )( proc_address )
-        except TypeError as err:
+        except TypeError:
+            # No address for the entry point, so there is no way to ask.
             return None
-        except AttributeError as err:
+        except AttributeError:
+            # Not a WGL platform.
             return []
         else:
             return wglGetExtensionStringARB(dc).split()
