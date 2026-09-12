@@ -8,13 +8,14 @@ The pass that produced this is described in
 [plans/ISSUE-TRIAGE.md](plans/ISSUE-TRIAGE.md), which carries a verdict for
 every open issue including the ones no release can close.
 
-Three kinds of entry appear here, and the distinction is the point:
+Four kinds of entry appear here, and the distinction is the point:
 
 | Verdict | What it means |
 |---|---|
 | **fixed** | A defect, reproduced and corrected. The test named goes red without the fix. |
 | **held** | Already right on `develop`, with nothing standing behind it. The test named goes red against the release the ticket was filed against, so the ticket cannot come back unnoticed. |
 | **not reproducible** | Cannot be made to happen on current Mesa or current PyOpenGL. Said so plainly, with what was tried, rather than closed silently. |
+| **answered** | The report is real and the cause is not here. What was checked is written down, and a case is added where one can keep the answer true. |
 
 Every version number below is the release the reporter had, and every "red
 against" is a test actually run against that release rather than an inference.
@@ -368,6 +369,113 @@ a crash.
 > Fixed in 4.0.0b1. If it still crashes for you there, `python -m
 > OpenGL.version` and your Mesa version would help.
 
+### #174 — `opengl32.dll` came from `PATH` rather than from Windows
+
+**Test** `tests/bindings/platform/test_library_loading.py::TestALibraryWindowsItselfProvides`
+**Commit** `9ce2ecec`
+
+> Reproduced and fixed, and you had the right diagnosis and the right remedy.
+>
+> `_loadLibraryWindows` asked `ctypes.util.find_library` first, which walks
+> `PATH`. `System32\opengl32.dll` is a trampoline to whatever the graphics
+> driver installed, so it is the only correct one, and conda puts
+> `Library\bin` — carrying a Mesa `opengl32.dll` — ahead of System32. The
+> result is the worst kind of wrong: the load succeeds, the calls succeed, and
+> the only sign is that the program is slow and `GL_RENDERER` says something
+> else.
+>
+> `opengl32` and `glu32` now go to the loader bare, so Windows' own search
+> order answers, which reaches the system directory before `PATH`. freeglut
+> and the rest still go through `find_library`, because where the user put one
+> of those is exactly what `PATH` is for.
+>
+> The case stands in for the loader and records which name was handed to it,
+> so it runs on any machine; what a Windows machine adds is confirming that
+> the driver's GL is what arrives.
+>
+> Fixed in 4.0.0b1.
+
+### #76 / #125 — a freeglut you installed was not found
+
+**Test** `tests/bindings/glut/test_glut_library_names.py`
+**Commit** `53fbd9c9`
+
+> Reproduced and fixed. #76 diagnosed it exactly, by reading the source, which
+> should not have been necessary.
+>
+> The only GLUT names asked for were `freeglut64.vc14` and `glut64.vc14` —
+> names nothing ships under but us. The official freeglut Windows binaries
+> install `freeglut.dll`, MSYS2 and vcpkg install `freeglut.dll`, and the
+> original GLUT is `glut32.dll`. So a machine that had GLUT still reported
+> `glutInit` as an undefined function, and renaming the file was the only way
+> through.
+>
+> Those names are now asked for, and first: a GLUT you installed is one you
+> chose, and yours is the build that gets fixes. The bundled builds follow.
+> freeglut before GLUT at each step, which is what the loop always intended.
+>
+> Two things went with it. `except WindowsError` is now `except OSError` —
+> they are the same class on Windows, and the clause matters, because a 32-bit
+> freeglut on a 64-bit `PATH` is a file that exists and will not load and must
+> not stop the search. And #76's second error, `ctypes.ArgumentError` from
+> `glutCreateWindow("...")`, is a separate defect: it is already right on
+> `develop` and held by `tests/bindings/glut/test_glut_window_title.py`, which
+> is #48 and #144.
+>
+> Fixed in 4.0.0b1.
+
+### #7 — the WGL extension query on a platform that is not WGL
+
+**Test** `tests/bindings/wgl/test_wgl_extension_query.py`
+**Commit** `a58f0222`
+
+> The str-versus-bytes handling you reported was fixed, and the dispute on
+> this ticket deserved better than silence, so it now has cases rather than an
+> assurance: the extension list comes back as bytes, the entry point is asked
+> for by a bytes name, and a `str` specifier and a `bytes` specifier both
+> match.
+>
+> Writing them found something adjacent. `pullExtensions` ends in
+> `except AttributeError: return []`, which is the answer for a platform that
+> is not WGL — and the lookup that raises it sat outside the `try`, so the
+> clause could never run and a `WGL_` specifier on a machine with no WGL
+> raised out of whatever import asked. Both lines are inside it now.
+>
+> Also held: the device context is declared `HDC` before the call, so a
+> 64-bit handle keeps its top half rather than becoming a valid-looking DC
+> belonging to nothing — which would present as exactly this ticket, an
+> extension list that is empty for no visible reason.
+>
+> Fixed in 4.0.0b1. If `wglGetSwapIntervalEXT()` still fails for you there, the
+> output of `OpenGL.WGL.WGLQuerier.getExtensions()` would say whether the
+> driver is listing it.
+
+### #29 — `test_buffer_api_basic` on i586 and armv7l
+
+**Test** `tests/bindings/arrays/test_arraydatatype.py::TestReadingAFormatString`
+**Commit** `90e8dd11`
+
+> Fixed, and thank you for the full traceback — it is what made this
+> answerable without a 32-bit machine.
+>
+> `assert '<l' in ['(3)<i', '(3)<l', '<i']`. The case listed the format strings
+> CPython reports for a `(GLint * 3)` and asserted the answer was one of them.
+> A 4-byte signed int is a `c_long` on i586 and armv7l, so the letter is `l`,
+> and the list did not have it. #92 was the same failure on s390x, where the
+> byte-order character is `>`; that was fixed by branching on `sys.byteorder`,
+> which left this half in place.
+>
+> The spelling is the machine's to choose — the shape prefix comes and goes
+> with the interpreter version, the order character with the endianness, the
+> letter with which C type is four bytes wide. So the case now reads the
+> item-type letter out of the format string and asserts what the value *is*, a
+> signed integer. No width is lost: `itemsize` is asserted separately and is
+> what pins it. A machine that reports a fifth spelling changes nothing.
+>
+> Fixed in 4.0.0b1. A 32-bit run would still be welcome: your traceback stops
+> at the first failing assertion, so the shape and strides checks below it have
+> never been seen on a 32-bit machine.
+
 ---
 
 ## Held
@@ -696,20 +804,83 @@ Covered above under #47: the sequence is a case, and it does not fault here.
 
 ---
 
+## Answered
+
+### #127 — the DLLS folder is missing from an installation
+
+**Test** `tests/bindings/test_what_the_wheel_ships.py`
+**Commit** `de859543`
+
+> A wheel built from this checkout carries all eighteen files in
+> `OpenGL/DLLS` -- the freeglut and GLE builds for vc9, vc10 and vc14 in 32-
+> and 64-bit, and their licences. So whatever produced an installation without
+> them, it was not this configuration, and the answer to "can't install
+> freeglut" is that you should not have to: it is already inside PyOpenGL.
+>
+> The way they arrive was worth pinning down while looking. `OpenGL/DLLS` is a
+> directory inside a package with no `__init__.py`, so setuptools does not see
+> it as a package and it arrives only as package data -- named in `MANIFEST.in`
+> and not in `[tool.setuptools.package-data]`, which works because
+> `include-package-data` defaults to true for a project configured through
+> `pyproject.toml`. Every Windows GLUT user depends on a default in another
+> project's tool, and dropping that one line removes all eighteen from the
+> wheel with nothing failing. There is now a case that builds the wheel and
+> reads it, so that cannot happen unnoticed.
+>
+> #76 and #125 are the other half of "GLUT is not found on Windows" and were a
+> real defect: the only names asked for were the bundled builds' own, so a
+> freeglut you installed yourself was never looked for. That is fixed in
+> 4.0.0b1.
+>
+> If you still have no `OpenGL/DLLS` after `pip install PyOpenGL`, where the
+> package came from would help -- conda, a distribution package, or PyPI.
+
+### #55 — Big Sur's dyld cache
+
+**Test** `tests/bindings/platform/test_library_loading.py::TestAMacOSFramework`
+**Commit** `9ce2ecec`
+
+> You were right about the mechanism, and the answer turned out to be two
+> things.
+>
+> CPython fixed `find_library` for the dyld cache in 3.8.10 and 3.9.1. This
+> package now requires 3.9, so every supported interpreter has that fix, and
+> the line you linked has since gone.
+>
+> What is added is a fallback for where `find_library`'s heuristics still come
+> up empty: `/System/Library/Frameworks/<name>.framework/<name>`, handed
+> straight to `dlopen`. Nothing checks that the path names a file first, which
+> is the part of the release note that matters — the case asserts that nothing
+> asks, so it stays true.
+>
+> Fixed in 4.0.0b1. Thank you for the offer of a PR, and sorry it sat.
+
+---
+
 ## What this release does not answer
 
-The other 35 open issues, so the list above is not read as the whole tracker.
-[plans/ISSUE-TRIAGE.md](plans/ISSUE-TRIAGE.md) carries the reasoning for each.
+The other 18 open issues, so the list above is not read as the whole tracker.
+[plans/ISSUE-TRIAGE.md](plans/ISSUE-TRIAGE.md) carries the reasoning for each,
+and the ten that are not defects are listed after them.
 
-**Needs a platform this pass could not run** — a test exists or is written,
-and the branch it runs on is pushed for CI. #7, #55, #60, #76, #125, #127,
-#139, #144, #162, #174 (Windows and macOS); #29, #135, #173 (other
-architectures).
+**Needs a platform this pass could not run.** #60, #139, #144 and #162
+(Windows and macOS); #135 and #173 (other architectures).
+[plans/ISSUE-PLATFORM-HANDOFF.md](plans/ISSUE-PLATFORM-HANDOFF.md) is written
+for somebody sitting at one of those machines: what the reporter saw, what
+would settle it, and which case holds it.
+
+Everything on that list that could be written from Linux has been, so #7, #29,
+#55, #76, #125, #127 and #174 appear above rather than here. What each still
+wants is a run rather than a change, and only three want anything a case
+cannot do: whether the driver's GL is the one that arrived (#174), whether a
+GLUT the machine already had is found (#76), and whether the driver lists an
+extension (#7). Those three ship in 4.0.0b1 on the strength of cases that
+stand in for the platform.
 
 **Needs hardware or a build nobody here has.** #105 wants an interpreter built
-with assertions; #124 an NVIDIA container; #92 an s390x to confirm on; #170 is
-TensorFlow and Mesa loading two different LLVMs into one process, which is not
-ours to fix.
+with assertions; #124 an NVIDIA container; #170 is TensorFlow and Mesa loading
+two different LLVMs into one process, which is not ours to fix. #92 is held
+above and would still be worth confirming on an s390x.
 
 **Needs something only the reporter can supply.** #32, #54, #59, #61, #73, #82,
 #115, #132, #167 are each a machine, a program or a driver that has not been
@@ -728,14 +899,17 @@ answering since it will recur).
 
 | | |
 |---|---|
-| Fixed, with a test that was red first | 11 tickets |
-| Held fixed, with a test red against the reporter's release | 15 tickets |
-| Not reproducible, with what was tried recorded | 5 tickets |
-| Answered without a release change | 14 tickets |
-| Deferred to CI, other hardware, or the reporter | 35 tickets |
+| Fixed, with a test that was red first | 20 tickets |
+| Held fixed, with a test red against the reporter's release | 26 tickets |
+| Not reproducible, with what was tried recorded | 4 tickets |
+| Answered, with a case keeping the answer true | 2 tickets |
+| Not a defect, answered on the ticket | 10 tickets |
+| Deferred to a platform, other hardware, or the reporter | 18 tickets |
+| **Open on the tracker** | **80 tickets** |
 
 Defects found while writing the tests, which no ticket had reported: the
 silent half of #3 (an integer offset accepted and read as an address), the
 silent half of #33 (per-context storage never finding what it stored, growing
 without bound), three OSMesa entry points whose declarations disagreed with
-themselves, and one generated wrapper naming a parameter that does not exist.
+themselves, one generated wrapper naming a parameter that does not exist, and
+a WGL `except AttributeError` guarding a lookup that sat outside its `try`.
