@@ -21,6 +21,18 @@ and freeglut. `PyOpenGL_accelerate` is built, numpy is present, and both
 `DISPLAY` and `WAYLAND_DISPLAY` are set. That covers a large majority of the
 tracker.
 
+Two things were added to the image for this pass, because without them seven
+tickets could only be read rather than run:
+
+- **`libosmesa6`.** OSMesa is a PyOpenGL platform of its own — it rasterises
+  into an array the caller owns, with no window system — so nothing else in
+  the image loads it and the platform had no coverage at all. It now answers a
+  4.5 compatibility profile on llvmpipe, and `tests/checks/check_osmesa.py`
+  drives it.
+- **`clang`.** gcc compiles this package on every Linux build, so gcc's
+  opinion is the one always heard; clang's arrives as a bug report from macOS
+  and the BSDs. It now reads the accelerator's generated C on every run.
+
 Four verdicts, and every open issue carries one:
 
 | Verdict | What it means |
@@ -52,14 +64,18 @@ test rather than a platform one.
 
 ## The verdicts
 
-### here — 34 issues
+### here — 41 issues
 
 | # | What it is | State on `develop` |
 |---|---|---|
 | 3 | integer offset to `glVertexAttribPointer` | fixed; red against 3.1.1 |
 | 5 | VBO memory growth, `ERROR_ON_COPY` silent | to reproduce |
+| 10 | OSMesa: `undefined symbol: glGetError` | does not reproduce on this Mesa |
 | 12 | `.pxd` files missing from the accelerate sdist | to reproduce |
+| 18 | the same, from a different caller | duplicate of 10 |
 | 21 | `numpy.float128` assumed to exist | fixed; red against 3.1.1 |
+| 33 | unhashable context under OSMesa | fixed; the context hashes and stores |
+| 34 | `glClear` segfault under OSMesa RGB | does not reproduce on this Mesa |
 | 38 | upstream renamed registry parameters | needs a registry-vs-wrapper test |
 | 42 | integer offset to `glDrawElements` | **live — red now** |
 | 43 | platform plugin load failure reports `NoneType` | error-quality test |
@@ -74,8 +90,10 @@ test rather than a platform one.
 | 95 | `glActiveTexture` slow under 3.1.6 | performance test |
 | 96 | `glGenerateMipmap` segfault | **crash — stop-and-fix** |
 | 104 | `GetCurrentContext()` returning 0 read as invalid | fixed; see the cluster |
+| 107 | clang 15 `-Wint-conversion` | fixed; red against 3.1.7 under clang 18 |
 | 113 | `GetCurrentContext` vs `eglGetCurrentContext` | fixed; see the cluster |
 | 114 | a large `bytes` argument formatted into an error | fixed; red against 3.1.7 |
+| 117 | the same clang failure on an M3 | duplicate of 107 |
 | 120 | `ARB_bindless_texture` missing | fixed; red against 3.1.7 |
 | 121 | generated Cython C shipped in the release | packaging test |
 | 129 | platform has no such sub-API — unhelpful error | **live — the error message** |
@@ -89,9 +107,10 @@ test rather than a platform one.
 | 148 | GLX import under the EGL platform | fixed; see the cluster |
 | 158 | the same `SyntaxWarning`, still reported | duplicate of 143 |
 | 159 | scalar object name into a delete under `ERROR_ON_COPY` | fixed; red against 3.1.9 |
+| 172 | EGL selected on a Wayland session using GLX | fixed; see the cluster |
 | 175 | `glBufferData` segfault on a `memoryview` | fixed; red against 3.1.7 |
 
-### CI — 12 issues
+### CI — 14 issues
 
 Each needs a platform this container is not. The workflow change below is what
 lets a branch carrying one of these tests be run on demand.
@@ -113,15 +132,11 @@ lets a branch carrying one of these tests be run on demand.
 | 173 | aarch64 wheels | arm64 |
 | 174 | `opengl32.dll` should come from System32 | Windows (the path logic is testable here) |
 
-### elsewhere — 17 issues
+### elsewhere — 13 issues
 
 | # | What it is | What it would need |
 |---|---|---|
-| 10 | OSMesa: `undefined symbol: glGetError` | `libosmesa6` installed |
-| 18 | the same, from a different caller | `libosmesa6` |
 | 32 | `glDepthFunc` appearing not to work | the reporter's program; maintainer could not reproduce |
-| 33 | unhashable context under OSMesa | `libosmesa6` |
-| 34 | `glClear` segfault under OSMesa RGB | `libosmesa6` — and it is a crash |
 | 54 | a freeglut internal error, reported as a screenshot | information |
 | 59 | `gluOrtho2D` undefined | the reporter's GLU install |
 | 61 | a conda package reported as corrupted | conda |
@@ -129,9 +144,7 @@ lets a branch carrying one of these tests be run on demand.
 | 82 | `eglInitialize` returning `EGL_NOT_INITIALIZED` | information |
 | 92 | big-endian buffer formats | s390x |
 | 105 | an assertion inside `PyMemoryView_GetContiguous` | a `--with-assertions` interpreter |
-| 107 | clang 15 `-Wint-conversion` | clang; reported fixed in 3.1.9a2 |
 | 115 | undefined `glGenVertexArrays`, then `free(): invalid pointer` | the reporter's mismatched install |
-| 117 | the same clang build failure on an M3 | clang on macOS — duplicate of 107 |
 | 124 | no EGL device in an NVIDIA container | that container |
 | 132 | no OpenGL library inside a container | resolved by the reporter |
 | 167 | `glGenBuffers` answering `GL_INVALID_OPERATION` | information; no context is the likely cause |
@@ -159,13 +172,14 @@ lets a branch carrying one of these tests be run on demand.
 
 | Verdict | Issues |
 |---|---|
-| here | 34 |
-| CI | 12 |
-| elsewhere | 17 |
+| here | 41 |
+| CI | 14 |
+| elsewhere | 13 |
 | no test | 13 |
 
-Six tickets appear under two verdicts, because half of each is testable here
-and half is not: #43, #48, #141, #166, #174 and the platform cluster.
+That is 81 rows for 80 issues: #43 is the one counted twice, because the
+unhelpful message it reports can be read here while the Windows import failure
+underneath it cannot.
 
 ## Running a branch through CI
 

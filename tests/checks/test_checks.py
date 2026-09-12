@@ -172,6 +172,21 @@ def _angle():
     return None
 
 
+def _osmesa():
+    """Whether ``libOSMesa`` is on this machine, asked without importing it.
+
+    OSMesa is a platform of its own rather than a driver behind GLX or EGL, so
+    a script using it runs under ``PYOPENGL_PLATFORM=osmesa`` -- which is
+    settled at import and cannot be set once this process has one.  Asking
+    ctypes where the library is answers the question without loading anything.
+    """
+    import ctypes.util
+
+    if ctypes.util.find_library('OSMesa') is None:
+        return 'no libOSMesa installed'
+    return None
+
+
 #: What a ``# requires:`` word means, as a function answering the reason it is
 #: not satisfied (or ``None``).  ``implies`` chains them, so ``glx`` need not
 #: restate that raw X11 needs a window server.
@@ -182,6 +197,8 @@ REQUIREMENTS = {
     'glx': (_linux, ('xlib',)),
     'glut': (_glut, ('window-server',)),
     'angle': (_angle, ()),
+    # No window server implied: rendering with none is the whole point of it.
+    'osmesa': (_osmesa, ()),
 }
 
 

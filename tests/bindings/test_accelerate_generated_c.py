@@ -18,7 +18,9 @@ it where either has moved.
 import importlib.metadata
 import importlib.util
 import os
+import shutil
 import sys
+import sysconfig
 
 import paths
 import pytest
@@ -214,3 +216,77 @@ class TestTheSourcesCompileWithTheCythonInstalled:
             'Cython %s refuses these sources:\n%s'
             % (importlib.metadata.version('cython'), '\n\n'.join(failed))
         )
+
+
+#: The diagnostics that have stopped a build of this package, promoted back to
+#: errors so a test says so before a user's compiler does.  Both are about a
+#: pointer where a scalar belongs or the reverse, which is the class of mistake
+#: generated C makes when the API it was generated against has moved.
+FATAL_DIAGNOSTICS = ('-Werror=int-conversion',
+                     '-Werror=incompatible-pointer-types')
+
+
+class TestTheGeneratedCSatisfiesClangToo:
+    """The other compiler reads the generated C without complaint.
+
+    gcc compiles this package on every Linux build, so its opinion is the one
+    always heard.  clang's is the one that arrives as a bug report: it is the
+    system compiler on macOS and the BSDs, and it has twice turned a
+    diagnostic gcc still permits into an error -- ``-Wint-conversion`` at
+    clang 15, ``-Wincompatible-pointer-types`` after it.  Each time, every
+    source install of ``PyOpenGL_accelerate`` on those platforms stopped
+    working while every Linux build stayed green.
+
+    Syntax-only, so this costs about a second for the whole set: what is being
+    asked is whether the compiler accepts the code, not whether the object
+    file it would emit is any good.  The build itself is what produces those.
+
+    https://github.com/mcfletch/pyopengl/issues/107
+    https://github.com/mcfletch/pyopengl/issues/117
+    """
+
+    def clang(self):
+        found = shutil.which('clang')
+        if found is None:
+            pytest.skip('no clang here; gcc is exercised by every build')
+        return found
+
+    def generated(self):
+        root = os.path.join(paths.ROOT, 'accelerate', 'src')
+        if not os.path.isdir(root):
+            pytest.skip('the accelerate source tree is not in this checkout')
+        found = sorted(name for name in os.listdir(root) if name.endswith('.c'))
+        if not found:
+            pytest.skip(
+                'no generated C to read -- this is an environment with the '
+                'accelerator not built, and there is nothing yet to compile')
+        return root, found
+
+    def includes(self, root):
+        paths_ = ['-I' + root, '-I' + os.path.join(paths.ROOT, 'accelerate'),
+                  '-I' + sysconfig.get_paths()['include']]
+        try:
+            import numpy
+        except ImportError:
+            return paths_
+        return paths_ + ['-I' + numpy.get_include(),
+                         '-DNPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION']
+
+    def test_clang_accepts_every_generated_module(self):
+        import subprocess
+
+        clang = self.clang()
+        root, found = self.generated()
+        includes = self.includes(root)
+        refused = []
+        for name in found:
+            completed = subprocess.run(
+                [clang, '-fsyntax-only', *FATAL_DIAGNOSTICS, *includes,
+                 os.path.join(root, name)],
+                capture_output=True, text=True, timeout=300,
+            )
+            if completed.returncode:
+                errors = [line for line in completed.stderr.splitlines()
+                          if 'error:' in line]
+                refused.append('--- %s ---\n%s' % (name, '\n'.join(errors[:6])))
+        assert not refused, 'clang refuses:\n' + '\n\n'.join(refused)
