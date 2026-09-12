@@ -24,7 +24,14 @@ from OpenGL import contextdata, dispatch, platform
 
 
 def held_for(handle):
-    """Everything cached against `handle`, across the context stores."""
+    """Everything cached against `handle`, across the context stores.
+
+    The handle is whatever ``GetCurrentContext`` answered and is kept as that
+    -- an integer on some platforms, an opaque pointer on others -- because it
+    is the key ``contextdata`` filed the entries under.  Reducing it to an
+    integer would look up something that was never stored, and on a platform
+    whose handle is a pointer ``int()`` will not even convert it.
+    """
     keys = []
     for storage in contextdata.STORAGES:
         keys.extend(storage.get(handle, {}))
@@ -34,7 +41,7 @@ def held_for(handle):
 class TestTheCachesGoWithTheContext(unittest.TestCase):
     def test_the_description_is_dropped_when_the_context_is_forgotten(self):
         with Context(profile='compatibility', gl_version=(2, 1)):
-            handle = int(platform.PLATFORM.GetCurrentContext())
+            handle = platform.PLATFORM.GetCurrentContext()
             platform.PLATFORM.checkExtension('GL_ARB_multitexture')
             described = [key for key in held_for(handle)
                          if dispatch._describes_a_context(key)]
@@ -50,7 +57,7 @@ class TestTheCachesGoWithTheContext(unittest.TestCase):
         and the driver may still be reading them -- which is what
         ``contextdata.cleanupContext`` warns about."""
         with Context(profile='compatibility', gl_version=(2, 1)):
-            handle = int(platform.PLATFORM.GetCurrentContext())
+            handle = platform.PLATFORM.GetCurrentContext()
             contextdata.setValue('a caller of ours', [1, 2, 3], weak=False)
         assert 'a caller of ours' in held_for(handle)
         contextdata.delValue('a caller of ours', context=handle)
@@ -63,14 +70,14 @@ class TestAnEntryPointFollowsTheCurrentContext(unittest.TestCase):
         from OpenGL.GLES2.EXT.texture_border_clamp import glTexParameterIivEXT
 
         with Context(profile='compatibility', gl_version=(2, 1)):
-            first = int(platform.PLATFORM.GetCurrentContext())
+            first = platform.PLATFORM.GetCurrentContext()
             # Desktop GL does not offer it, so this resolves to nothing and the
             # answer is cached against `first`.
             bool(glTexParameterIivEXT)
 
         try:
             with Context(api='gles', gl_version=(3, 1)):
-                second = int(platform.PLATFORM.GetCurrentContext())
+                second = platform.PLATFORM.GetCurrentContext()
                 # Asked of the platform rather than through the fixture's
                 # helper: this is an ES context, and the indexed query the
                 # helper uses is GLES3's.

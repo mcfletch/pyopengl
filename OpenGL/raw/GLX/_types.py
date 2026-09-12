@@ -2,6 +2,7 @@
 # The names in this module arrive from the declaration tables at import
 # time, so a checker reading this file sees calls to things it cannot
 # find.  The typed surface is the .pyi stub beside the package.
+from OpenGL._opaque import opaque_pointer_cls as _opaque_pointer_cls
 from OpenGL import platform as _p, constant, extensions
 from ctypes import *
 from OpenGL.raw.GL._types import *
@@ -121,21 +122,16 @@ class _GLXQuerier( extensions.ExtensionQuerier ):
 GLXQuerier=_GLXQuerier()
 
 
-class struct___GLXcontextRec(Structure):
-    __slots__ = [
-    ]
-struct___GLXcontextRec._fields_ = [
-    ('_opaque_struct', c_int)
-]
-
-class struct___GLXcontextRec(Structure):
-    __slots__ = [
-    ]
-struct___GLXcontextRec._fields_ = [
-    ('_opaque_struct', c_int)
-]
-
-GLXContext = POINTER(struct___GLXcontextRec) 	# /usr/include/GL/glx.h:178
+# /usr/include/GL/glx.h:178.  An opaque pointer class rather than a bare
+# POINTER to a placeholder struct, as EGLContext and OSMesaContext are: a
+# plain ctypes pointer is unhashable and compares by object identity, and a
+# context handle is used as neither.  `OpenGL.contextdata` files everything it
+# holds per context under this -- the client-side arrays the GL goes on
+# reading, and the cached version and extension list -- so an unhashable
+# handle is `TypeError: unhashable type` out of the first call that stores
+# anything, and one that compares by identity is a lookup that never hits.
+# See OpenGL/_opaque.py and https://github.com/mcfletch/pyopengl/issues/33
+GLXContext = _opaque_pointer_cls( 'GLXContext' )
 XID = c_ulong 	# /usr/include/X11/X.h:66
 GLXPixmap = XID 	# /usr/include/GL/glx.h:179
 GLXDrawable = XID 	# /usr/include/GL/glx.h:180

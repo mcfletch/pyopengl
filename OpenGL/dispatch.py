@@ -266,6 +266,15 @@ def forget_context(handle):
     aside ones at a moment the caller says is quiet.
     """
     _end_suspended_block()
+    # Two things are keyed by a context and they do not agree on what the key
+    # is: the dispatch table by the address, and `contextdata` by the handle
+    # object the platform answered with.  On a platform whose handle *is* an
+    # integer -- WGL, CGL, EGL here -- the two coincide and one value serves
+    # both.  On one whose handle is an opaque pointer, OSMesa's or GLX's, an
+    # address looks up nothing contextdata ever stored, and the destroyed
+    # context's cached extension list is left for whichever context the driver
+    # hands that address to next.
+    context = handle
     handle = _as_address(handle)
     if handle and handle in _installed_callbacks and handle == _current_context():
         # Take our callback back out while there is still a context to take it
@@ -278,8 +287,9 @@ def forget_context(handle):
     _offered.discard(handle)
     _installed_callbacks.pop(handle, None)
     with _identities_lock:
+        # Keyed by address, which is what `context_identity` files it under.
         _identities.pop(handle, None)
-    _forget_context_data(handle)
+    _forget_context_data(context)
     layer = _layer()
     if layer is not None:
         layer.forget_context(handle)
@@ -363,7 +373,14 @@ def _forget_context_data(handle):
     except ImportError:                # pragma: no cover - interpreter shutdown
         return
     for storage in contextdata.STORAGES:
-        held = storage.get(handle)
+        try:
+            held = storage.get(handle)
+        except TypeError:
+            # An unhashable handle -- a bare ctypes pointer, as a caller may
+            # hand us straight from a binding of its own.  Nothing was ever
+            # filed under it, because `contextdata.setValue` would have raised
+            # the same TypeError trying to, so there is nothing here to drop.
+            return
         if not held:
             continue
         for key in [k for k in held if _describes_a_context(k)]:
