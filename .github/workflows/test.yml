@@ -74,6 +74,22 @@ jobs:
           # nothing else.  See [tool.mypy] in pyproject.toml for what is in the
           # gate and why the package's own source is not.
           - {python: '3.12', toxenv: typecheck}
+          # The `requires-python` floor, read off the text rather than run.
+          # A py39 row only reaches the files it imports -- a helper used on
+          # one platform, a branch behind a flag -- and a standard-library
+          # module that arrived later is a question about the source that can
+          # be settled for every file at once.
+          - {python: '3.12', toxenv: floor}
+          # A name that may be unbound where it is read, which is the shape of
+          # a handler that raises NameError while reporting something else --
+          # and an error path is exactly what no case enters, so nothing else
+          # here can find one.
+          - {python: '3.12', toxenv: possiblyundefined}
+          # The error paths a run of the suite never enters, which is where
+          # the handlers that raise instead of reporting have all been found.
+          # It runs the suite under coverage, so it is a row of its own rather
+          # than a measurement bolted onto one of the cells below.
+          - {python: '3.12', toxenv: errorpaths}
           # The interpreter sweep, on the ordinary configuration: numpy present,
           # no compiled extension, ctypes entry points.
           #

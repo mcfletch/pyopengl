@@ -95,6 +95,13 @@ tests/
 │   │                           because the platform is chosen at import
 │   ├── tk/ glut/             the toolkits PyOpenGL ships an integration for
 │   └── errors/               error checking and the debug-output policy
+├── gates/                  questions a parser settles about the tree itself,
+│                             on any machine and with no GL: an error path
+│                             nothing enters, a foreign function with no
+│                             prototypes, two sibling APIs that drifted, a
+│                             flag read somewhere other than where it is set,
+│                             a test that cannot fail, a declared gate nothing
+│                             runs.  See plans/STATIC-GATES.md
 ├── harness/                tests OF the fixtures above, rather than of the
 │                             library: the backends, the context requirements,
 │                             what collects where
@@ -104,6 +111,12 @@ tests/
 ├── data/                   fixtures the suites read rather than build
 │
 ├── paths.py                ROOT / TESTS / SRC / PACKAGE, worked out once
+├── sources.py              the tree's own Python, parsed once: `from sources
+│                             import package, suite` for a question a parser
+│                             settles
+├── stubs.py                the shipped `.pyi` surface, parsed once
+├── tomlread.py             `from tomlread import load` -- tomllib, or tomli
+│                             on the two interpreters below 3.11
 ├── testdecorator.py        `@gltest`: the same fixture around a plain function,
 │                             for the stand-alone check scripts
 └── report_*.py             programs CI runs to say what the machine has;
@@ -432,6 +445,41 @@ error or asks the context its version first.
 ```
 python gl/enum_age_audit.py
 ```
+
+## The static gates
+
+`gates/` holds the questions a parser can settle about the tree itself. They
+need no GL, no driver and no platform, they run in a couple of seconds, and
+they answer for every file at once — which is what makes them the only thing
+that reads the Windows and macOS halves of this package on a Linux machine.
+Each one is a class of defect this repository has actually had;
+[plans/STATIC-GATES.md](../plans/STATIC-GATES.md) reads the history they came
+from and says which classes a parser cannot answer.
+
+| Gate | What it refuses |
+| --- | --- |
+| `test_the_suite_can_fail.py` | `pytest.raises(Exception)`, a fixture under `@staticmethod`, an optional import at module scope, a named script that is not there, a blanket `tolerate_glerror()`, a skip with no reason |
+| `test_sibling_apis_agree.py` | a per-API module that has drifted from its siblings, and an `_ErrorChecker` built without asking whether error checking is on |
+| `test_foreign_functions_are_declared.py` | a ctypes call with no `argtypes`/`restype` |
+| `test_configuration_is_one_story.py` | a flag the environment cannot set, or one the docstring does not introduce |
+| `test_declared_gates_run.py` | a tox factor, a marker or a test path nothing runs |
+| `test_parallel_implementations_agree.py` | a format handler that does less than the interface, or a registry that answers one implementation's questions and not the other's |
+| `test_glget_sizes_agree.py` | the two shipped glGet size tables disagreeing |
+
+Three more are somebody else's tool, run from tox because they need one:
+
+```
+tox -e floor              # vermin: nothing above the requires-python floor
+tox -e possiblyundefined  # mypy: a name that may be unbound where it is read
+tox -e errorpaths         # the suite under coverage, then the error paths
+                          # nothing entered -- see src/error-paths-unentered.txt
+```
+
+`errorpaths` is the one with a record behind it. An `except` clause or a
+`finally` block no case enters is one nothing has ever checked, and that is
+where the handlers that raise instead of reporting have all been found. The
+record lists what this configuration does not reach today; a new one is a
+failure, and the list is meant to shrink.
 
 ## Running
 
