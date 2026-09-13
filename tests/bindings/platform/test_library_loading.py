@@ -20,9 +20,12 @@ https://github.com/mcfletch/pyopengl/issues/55
 """
 
 import os
+import sys
+import types
 
 import pytest
 
+import OpenGL
 from OpenGL.platform import ctypesloader
 
 
@@ -208,11 +211,67 @@ class TestAMacOSFramework:
         assert loader.tried == ['C:\\conda\\Library\\bin\\OpenGL.dll']
 
 
+class TestWhereTheBundledLibrariesAre:
+    """The prebuilt freeglut and GLE builds are a distribution of their own.
+
+    ``PyOpenGL-glut-binaries``, which a Windows user asks for as ``pip install
+    PyOpenGL[glut]``. So the directory is wherever that package was installed,
+    and this one falls back to the copy it used to carry -- an install made
+    before the split, and this checkout, both still have one.
+
+    Only the *directory* moves. What is looked for in it, and the order a
+    system library is preferred in, are unchanged: see the cases above.
+
+    See ``plans/BUNDLED-DLLS.md``.
+    """
+
+    @pytest.fixture
+    def installed(self, monkeypatch, tmp_path):
+        """``pyopengl_glut_binaries`` is installed and says where its files are."""
+        module = types.ModuleType('pyopengl_glut_binaries')
+        module.DLL_DIRECTORY = str(tmp_path)
+        monkeypatch.setitem(sys.modules, 'pyopengl_glut_binaries', module)
+        return str(tmp_path)
+
+    @pytest.fixture
+    def not_installed(self, monkeypatch):
+        """It is absent, which is what a plain ``pip install PyOpenGL`` gives.
+
+        ``None`` in ``sys.modules`` is how the import system spells "this name
+        does not resolve", and it answers without touching the filesystem.
+        """
+        monkeypatch.setitem(sys.modules, 'pyopengl_glut_binaries', None)
+
+    def test_the_package_is_where_they_come_from(self, installed):
+        assert ctypesloader._bundled_dll_directory() == installed
+
+    def test_without_it_the_copy_inside_this_package_is_used(self, not_installed):
+        assert ctypesloader._bundled_dll_directory() == os.path.join(
+            os.path.dirname(OpenGL.__file__), 'DLLS'
+        )
+
+    def test_a_package_too_old_to_say_is_the_same_as_none(self, monkeypatch):
+        """A ``pyopengl_glut_binaries`` without the attribute is one this
+        PyOpenGL does not know how to ask, not a reason to raise out of the
+        import that happened to be first."""
+        monkeypatch.setitem(
+            sys.modules, 'pyopengl_glut_binaries',
+            types.ModuleType('pyopengl_glut_binaries'),
+        )
+        assert ctypesloader._bundled_dll_directory() == os.path.join(
+            os.path.dirname(OpenGL.__file__), 'DLLS'
+        )
+
+    def test_the_constant_the_loader_reads_is_what_the_lookup_answered(self):
+        """``DLL_DIRECTORY`` is the name ``_loadLibraryWindows`` joins onto and
+        the name the cases above monkeypatch, so the lookup has to be what
+        computes it rather than a second copy of the same rule."""
+        assert ctypesloader.DLL_DIRECTORY == ctypesloader._bundled_dll_directory()
+
+
 class TestWhatEachPlatformLooksIn:
     def test_only_macos_has_framework_directories(self):
         """A Linux or Windows load must not go looking under ``/System``."""
-        import sys
-
         if sys.platform == 'darwin':
             assert ctypesloader.FRAMEWORK_DIRECTORIES
         else:

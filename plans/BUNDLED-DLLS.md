@@ -1,6 +1,29 @@
 # The bundled Windows DLLs become an optional package
 
-**Status:** Proposed. Nothing has landed.
+**Status:** Partly landed. The new project exists in the workspace and
+PyOpenGL finds it; nothing is published and nothing is deleted.
+
+What is done:
+
+- **`pyopengl-glut-binaries/`** is a project in this workspace, carrying the
+  eighteen files, its own `pyproject.toml`, suite, CI and release workflow.
+  Its wheels come out `py3-none-win32` and `py3-none-win_amd64`, so a Linux or
+  macOS install never downloads them, and every Python 3 is served by one wheel
+  rather than one per interpreter release.
+- **`ctypesloader.DLL_DIRECTORY`** is the new package where it is installed and
+  `OpenGL/DLLS` where it is not. Confirmed on Windows both ways: with the
+  package on the path `OpenGL.GLUT` and `OpenGL.GLE` load out of it, and
+  without it they load out of `OpenGL/DLLS` as before.
+- It is registered with `verify-everything.py`, `tools/preflight.toml` and
+  `tools/release.toml` — the last as `publish = false`, since there is nothing
+  to push to yet.
+
+That is steps 1 and 2 of *Doing it* below. What is left is the repository and
+the first PyPI release, and then the extra, the message wording and the
+deletion of `OpenGL/DLLS`. None of the last three may land first: an extra
+naming a distribution that is not on PyPI resolves to nothing, and an error
+message telling a user to run `pip install PyOpenGL[glut]` before that works is
+worse than the one it replaces.
 
 **Scope:** `OpenGL/DLLS/`, which is eighteen files — freeglut for vc9, vc10 and
 vc14 in 32- and 64-bit, the GLE tubing library in the same six flavours, and
@@ -81,6 +104,15 @@ a submodule of this workspace like the other projects. Not pure-Python: the
 point of the split is that a Linux user never downloads it, and only a
 platform-tagged wheel achieves that.
 
+There is no extension module to make the wheel impure, so its `setup.py`
+answers `has_ext_modules` yes and overrides `get_tag` to `py3-none-<platform>`
+— a platform tag, but no interpreter or ABI, since a DLL reached through
+ctypes is tied to neither. `--plat-name` then chooses the platform, which is
+how one Linux runner builds both Windows wheels: nothing is compiled, so the
+tag is the only thing the machine would have decided. The release workflow
+asserts both filenames and refuses an `any` wheel, because an `any` wheel is
+silently the state this change exists to leave.
+
 **`PyOpenGL[glut]`** — an extra that requires it, on Windows only:
 
 ```toml
@@ -100,20 +132,34 @@ turns a working program into a puzzle.
 
 ## Doing it
 
-1. A case asserting the wheel carries no `.dll` at all — red first, and the
-   thing that keeps them out afterwards. Beside the sdist cases in
-   `tests/bindings/test_accelerate_generated_c.py::TestWhatTheSdistShips`.
-2. A case that `glutInit` with no library raises something naming
-   `PyOpenGL[glut]`. Red first; it is the whole compatibility story. The
-   mechanism is already there — see *Half of that has landed* above — so this
-   is `LIBRARY_SOURCES['GLUT']` and the case that reads it.
-3. The new project: its repository, its CI and release workflow, and its first
-   release to PyPI, built from the files as they stand. No rebuild: a rebuild
-   is a separate decision with its own risk, and doing both at once makes any
-   regression unattributable.
-4. The extra, the loader change, and the messages.
-5. `OpenGL/DLLS/` deleted, in the PyOpenGL change that adds the extra — never
-   before the new package is installable from PyPI.
+Steps 1 and 2 were written here as cases to write red first. They are not, and
+have been moved to where they go green: each asserts the state *after* the
+deletion, so landing either now would be carrying a known failure, which this
+workspace does not do. Step 3's local half is done and step 4's loader change
+is done; what is left is in order.
+
+1. ~~The new project~~ — **done as a directory in this workspace.**
+   `pyopengl-glut-binaries/`, built from the files as they stand. No rebuild: a
+   rebuild is a separate decision with its own risk, and doing both at once
+   makes any regression unattributable.
+2. ~~The loader change~~ — **done.** `ctypesloader.DLL_DIRECTORY` is the new
+   package where it is installed and `OpenGL/DLLS` where it is not, held by
+   `TestWhereTheBundledLibrariesAre` in
+   `tests/bindings/platform/test_library_loading.py`. Nothing changes for a
+   user who does not have the package, which is every user today.
+3. **Its repository and its first release to PyPI.** A GitHub project under the
+   same umbrella, added here as a submodule like the others, and released by
+   the workflow it already carries. `tools/release.toml` holds it at
+   `publish = false` until then.
+4. **The extra and the messages**, together, once step 3 is on PyPI:
+   `glut = ["PyOpenGL-glut-binaries; sys_platform == 'win32'"]`, and
+   `LIBRARY_SOURCES['GLUT']` and `['GLE']` changed from "PyOpenGL bundles
+   builds in OpenGL/DLLS" to name the extra. Red first, and now they can be:
+   the advice becomes true the moment the extra exists.
+5. **`OpenGL/DLLS/` deleted**, with the `MANIFEST.in` line, and
+   `tests/bindings/test_what_the_wheel_ships.py::TestTheBundledWindowsLibraries`
+   inverted to assert the wheel carries no `.dll` at all. In the same change as
+   the extra — never before the new package is installable from PyPI.
 
 ## What it settles
 
@@ -126,11 +172,48 @@ turns a working program into a puzzle.
 None of those closes on the packaging alone. All of them close on the error
 message, which is why it is step two rather than step five.
 
+## Why not download them instead
+
+Asked, and answered no. The appeal is obvious: ship no binaries anywhere and
+fetch the official builds when a user needs them. It has no clean form.
+
+**A wheel has no install hook.** pip unpacks a wheel; it does not execute one.
+So a fetch can only happen in a source build, at runtime, or in a command the
+user runs. Publishing an sdist and no wheel is the first, and it breaks
+`pip install --require-hashes`, offline and mirrored indexes, `pip download`
+for air-gapped transfer, and distribution packaging, which forbids network
+access during a build. Fetching from inside `glutInit` is the second, and is
+silent network access from a graphics call. The third — `pyopengl-fetch-glut`,
+the way a browser automation library installs its browsers — is honest and
+does work, but it adds a step to every install, Dockerfile and CI job, and it
+fails behind the proxies that a corporate user has.
+
+**"Official" is one person's website.** freeglut upstream publishes source.
+The Windows MSVC binaries everyone uses, ours included, are Martin Payne's
+builds — `freeglut_README.txt` says "freeglut 3.0.0-1.mp for MSVC". An
+install-time dependency on a personal site means a beginner's install breaks
+the day it moves.
+
+**`PyOpenGL[glut]` already is download-on-install**, through pip, which brings
+hashes, mirroring, offline support and reproducibility with it. A bespoke
+fetcher is that mechanism rebuilt worse.
+
+What does survive the question is fetching at *release* time: the release
+workflow could download the official archive, check a pinned SHA-256, and
+build the wheel from that, so the network dependency sits in CI where a failure
+is loud. That is the rebuild question below rather than this one, and it is
+deliberately not being done at the same time as the split.
+
 ## Open
 
-- **Does GLE go too?** Same argument, much smaller audience — `OpenGL.GLE`
-  wraps one library and the tests for it skip wherever `libgle` is absent. One
-  package for both, or two? One, unless somebody wants GLE without GLUT.
+- **Does GLE go too?** Decided: one package for both. `OpenGL.GLE` wraps one
+  library with a much smaller audience than GLUT's, and nobody has asked for
+  GLE without GLUT, so a second distribution would be release machinery for
+  nothing. `PyOpenGL[glut]` brings both.
+- **Should the two Windows wheels differ?** They are identical but for the
+  tag: both carry all eighteen files, so a 64-bit user downloads six 32-bit
+  builds they cannot load. Splitting by word size halves the download and is a
+  change to make on its own, where a regression in it is attributable.
 - **Release ordering.** The new package releases on its own cycle, but the
   first `PyOpenGL[glut]` release depends on it being on PyPI already. The
   release tool in this workspace releases in dependency order and needs to

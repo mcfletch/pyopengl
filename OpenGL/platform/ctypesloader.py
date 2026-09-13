@@ -12,7 +12,35 @@ ctypes_version = [
 from ctypes import util
 import OpenGL
 
-DLL_DIRECTORY = os.path.join( os.path.dirname( OpenGL.__file__ ), 'DLLS' )
+def _bundled_dll_directory( ):
+    """Where the prebuilt Windows freeglut and GLE builds are
+
+    They are a distribution of their own, ``PyOpenGL-glut-binaries``, which a
+    Windows user asks for as ``pip install PyOpenGL[glut]``: a Linux or macOS
+    install then never downloads six freeglut builds it cannot load, and a
+    scanner objecting to a vendored binary objects to a package only GLUT
+    users have.
+
+    Where it is absent the answer is the copy inside this package, which is
+    where they used to live -- an installation made before the split still has
+    one, and so does a checkout.  A ``pyopengl_glut_binaries`` too old to name
+    the directory raises ``ImportError`` from the ``from`` clause and reads the
+    same way, rather than raising out of whichever import came first.
+
+    Only the directory is decided here.  What is looked for in it, and that a
+    library the *system* provides is preferred over any of this, are
+    :func:`_loadLibraryWindows`.
+
+    See ``plans/BUNDLED-DLLS.md``.
+    """
+    try:
+        from pyopengl_glut_binaries import DLL_DIRECTORY as directory
+    except ImportError:
+        return os.path.join( os.path.dirname( OpenGL.__file__ ), 'DLLS' )
+    return directory
+
+
+DLL_DIRECTORY = _bundled_dll_directory( )
 
 #: The Windows libraries that are part of the operating system.
 #:
