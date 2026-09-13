@@ -25,11 +25,44 @@ https://github.com/mcfletch/pyopengl/issues/125
 import os
 import subprocess
 import sys
-import tomllib
 import zipfile
 
 import paths
 import pytest
+import tomlread
+
+
+def _refuse_a_stale_build_tree():
+    """Fail on a `build/lib` older than the source, naming it.
+
+    ``pip wheel`` runs setuptools in the checkout, and setuptools copies into
+    ``build/lib`` and reuses whatever is already there.  So a tree built
+    before a file was *removed* from the package still holds that file, and
+    the wheel carries it -- which is how a release ships what a commit took
+    out, and it is exactly what the cases below are here to refuse.
+
+    Without this the report is the one those cases give: "Windows binaries are
+    back in the pure-Python wheel", which sends the reader to `setup.py`.  The
+    tree is not deleted from here: it is somebody's checkout, and a test that
+    removes things in it races with every other test that builds.
+    """
+    built = os.path.join(paths.ROOT, 'build', 'lib')
+    if not os.path.isdir(built):
+        return
+    newest = max(
+        (os.path.getmtime(os.path.join(directory, name))
+         for directory, _sub, names in os.walk(os.path.join(paths.ROOT, 'OpenGL'))
+         for name in names if name.endswith(('.py', '.pyi'))),
+        default=0,
+    )
+    if os.path.getmtime(built) < newest:
+        pytest.fail(
+            'build/lib is older than the package, and setuptools builds the '
+            'wheel by copying into it -- so the wheel this would examine is '
+            'partly a tree from before whatever changed since. A file removed '
+            'from the package is still in there. Remove it and run again:\n'
+            '    rm -rf build PyOpenGL.egg-info'
+        )
 
 
 @pytest.fixture(scope='module')
@@ -40,6 +73,7 @@ def wheel(tmp_path_factory):
     what *this* tree produces with the tools already here, and a fresh build
     environment would be several minutes rather than a couple of seconds.
     """
+    _refuse_a_stale_build_tree()
     into = tmp_path_factory.mktemp('wheel')
     completed = subprocess.run(
         [sys.executable, '-m', 'pip', 'wheel', '--no-deps',
@@ -102,8 +136,7 @@ class TestTheWheelCarriesNoWindowsBinaries:
     def test_the_extra_that_replaces_them_is_declared(self):
         """A user told to run ``pip install PyOpenGL[glut]`` has to get
         something: an undeclared extra installs nothing and says nothing."""
-        with open(os.path.join(paths.ROOT, 'pyproject.toml'), 'rb') as source:
-            declared = tomllib.load(source)
+        declared = tomlread.load(os.path.join(paths.ROOT, 'pyproject.toml'))
         extras = declared['project']['optional-dependencies']
         assert 'glut' in extras, sorted(extras)
         assert any('glut-binaries' in requirement.lower()

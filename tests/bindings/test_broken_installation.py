@@ -107,9 +107,10 @@ class TestNothingIsInstalledOutsideThePackage:
     on Windows is a directory the interpreter imports from, so it shadows the
     real package for every process that runs from anywhere but the checkout.
 
-    Nothing reads the copy: ``ctypesloader.DLL_DIRECTORY`` is
-    ``os.path.dirname(OpenGL.__file__)/DLLS``, inside the package, which is
-    where the DLLs ship as package data.
+    Nothing reads the copy: ``ctypesloader.DLL_DIRECTORY`` is inside a
+    package directory whichever package answers for it -- the installed
+    ``pyopengl_glut_binaries`` where there is one, and ``OpenGL/DLLS``
+    otherwise -- and never the install prefix.
     """
 
     def test_the_build_declares_no_data_files(self):
@@ -123,14 +124,48 @@ class TestNothingIsInstalledOutsideThePackage:
             'prefix rather than into the package: %s' % (completed.stdout.strip(),)
         )
 
-    def test_the_windows_dlls_ship_inside_the_package(self):
+    def test_the_loader_looks_inside_a_package_and_not_the_prefix(self):
         """Which is what makes the declaration above unnecessary as well as
-        harmful: they are already where the loader looks."""
+        harmful: wherever the libraries are, the loader looks for them in a
+        package directory.
+
+        The directory need not exist.  The Windows builds left this wheel for
+        ``PyOpenGL-glut-binaries``, which is a Windows-only download, so a
+        Linux or macOS install has no such directory and nothing should ask
+        for one -- what matters is that the *path* is inside whichever package
+        provides them.
+        """
+        import OpenGL
         from OpenGL.platform import ctypesloader
 
-        assert os.path.isdir(ctypesloader.DLL_DIRECTORY), \
-            ctypesloader.DLL_DIRECTORY
-        assert any(
-            name.endswith('.dll')
-            for name in os.listdir(ctypesloader.DLL_DIRECTORY)
-        ), os.listdir(ctypesloader.DLL_DIRECTORY)
+        directory = ctypesloader.DLL_DIRECTORY
+        assert os.path.basename(directory) == 'DLLS', directory
+
+        provider = os.path.dirname(directory)
+        try:
+            import pyopengl_glut_binaries
+        except ImportError:
+            expected = os.path.dirname(OpenGL.__file__)
+        else:
+            expected = os.path.dirname(pyopengl_glut_binaries.__file__)
+        assert os.path.normpath(provider) == os.path.normpath(expected), (
+            'the loader looks in %r, and the package that provides the '
+            'libraries is at %r' % (directory, expected)
+        )
+        assert os.path.isfile(os.path.join(provider, '__init__.py')), (
+            '%r is not a package directory, so this is the install prefix or '
+            'a namespace directory rather than somewhere a wheel put files'
+            % (provider,)
+        )
+
+    def test_a_checkout_that_ships_no_binaries_still_answers(self):
+        """A path for a directory that is not there is the right answer.
+
+        ``_bundled_dll_directory`` falls back to ``OpenGL/DLLS`` where the
+        binaries package is absent, and that directory went with the split.
+        The loader is what handles its absence; this only holds that asking
+        does not raise.
+        """
+        from OpenGL.platform import ctypesloader
+
+        assert isinstance(ctypesloader._bundled_dll_directory(), str)
