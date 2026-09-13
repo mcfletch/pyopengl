@@ -9,9 +9,11 @@
 # Read by the same script without --write, which fails on a
 # handler that is unentered and NOT here.  A handler here that
 # has started running is reported and does not fail: this list
-# is written from one configuration -- ctypes entry points,
-# numpy present, the EGL device backend on Linux -- and a
-# machine with more of the world in front of it enters more.
+# is written from the `errorpaths` tox environment -- numpy
+# present, PyOpenGL_accelerate built, the EGL device backend on
+# Linux -- and another configuration enters a different set.
+# Re-record from that environment, or the difference between
+# two configurations reads as a regression.
 #
 # The list is meant to shrink.  Each line is a case somebody
 # could write, or a path that has to be recorded because this

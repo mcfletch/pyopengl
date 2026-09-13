@@ -191,13 +191,26 @@ def _table_findings():
 def _arg_names(api, name):
     """The argument names the declaration tables give an entry point.
 
-    A command in a table is ``(name, 'a,b,c', 'restype,argtypes...')`` -- the
-    argument names as one comma-separated string rather than as a sequence, so
-    a set built from it without splitting is a set of letters.
+    The tables answer two shapes for this, and which one arrives depends on
+    whether ``PyOpenGL_accelerate`` is installed: the compiled reader gives
+    ``(name, 'a,b,c', 'restype,argtypes...')``, one comma-separated string per
+    field, and the pure-Python one gives ``(name, ('a', 'b', 'c'), (...))``.
+    A set built from the string without splitting is a set of letters, and
+    ``.split`` on the tuple raises -- which is a collection error, and ends
+    the whole run rather than this module.
     """
     for command in _commands_of(api).get(name, ()):
-        return {part for part in (command or '').split(',') if part}
+        return _names_from(command)
     return None
+
+
+def _names_from(field):
+    """The argument names in one command's argument-name field, either shape."""
+    if field is None:
+        return set()
+    if isinstance(field, str):
+        field = field.split(',')
+    return {part for part in field if part}
 
 
 #: One API's commands, read once: the walk goes over every declaration table.
@@ -240,3 +253,19 @@ def test_the_annotation_table_names_no_parameter_that_is_not_there():
         'built and the customisation silently does not happen, which is a '
         'checked call becoming an unchecked one:\n  %s'
         % (len(TABLE_FINDINGS), '\n  '.join(TABLE_FINDINGS)))
+
+
+def test_the_argument_names_are_read_in_whichever_shape_the_table_gives():
+    """The tables answer two shapes, and both have to be read.
+
+    With ``PyOpenGL_accelerate`` installed a command's argument names arrive
+    as one comma-separated string; without it, as a tuple.  Reading only the
+    first made the sweep above a collection error in every ``accel0``
+    environment -- and a collection error ends the run rather than the module.
+    """
+    assert _names_from('n,textures,residences') == {'n', 'textures', 'residences'}
+    assert _names_from(('n', 'textures', 'residences')) == {
+        'n', 'textures', 'residences'}
+    assert _names_from('') == set()
+    assert _names_from(()) == set()
+    assert _names_from(None) == set()

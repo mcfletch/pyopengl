@@ -34,12 +34,13 @@ A handler that is unentered and **not** recorded is a failure: it is new, and
 new is the case worth stopping.
 
 The other direction is reported and does not fail.  The record is written from
-one configuration -- ctypes entry points, numpy present, the EGL device
-backend on Linux -- and a great many handlers here are for a platform or a
-library that configuration does not have.  A run with more of the world in
-front of it legitimately enters more of them, and that must not be a red
-build on somebody's laptop.  What it does instead is say which entries have
-started running, so the record can be pruned deliberately::
+one configuration -- the `errorpaths` tox environment: numpy present,
+PyOpenGL_accelerate built, and the EGL device backend on Linux -- and a great
+many handlers here are for a platform or a library that configuration does not
+have.  A run with more of the world in front of it legitimately enters more of
+them, and that must not be a red build on somebody's laptop.  What it does
+instead is say which entries have started running, so the record can be pruned
+deliberately::
 
     python src/check_error_paths.py --write
 
@@ -231,9 +232,11 @@ def write(entries, path=RECORD):
             '# Read by the same script without --write, which fails on a\n'
             '# handler that is unentered and NOT here.  A handler here that\n'
             '# has started running is reported and does not fail: this list\n'
-            '# is written from one configuration -- ctypes entry points,\n'
-            '# numpy present, the EGL device backend on Linux -- and a\n'
-            '# machine with more of the world in front of it enters more.\n'
+            '# is written from the `errorpaths` tox environment -- numpy\n'
+            '# present, PyOpenGL_accelerate built, the EGL device backend on\n'
+            '# Linux -- and another configuration enters a different set.\n'
+            '# Re-record from that environment, or the difference between\n'
+            '# two configurations reads as a regression.\n'
             '#\n'
             '# The list is meant to shrink.  Each line is a case somebody\n'
             '# could write, or a path that has to be recorded because this\n'
