@@ -5,7 +5,9 @@ include src/win32deps.py src/toglinstall/get_togl.py src/*.py
 include tests/*.py tests/*.png
 include examples/*.py
 include metadata.py
-include OpenGL/DLLS/*
+# No OpenGL/DLLS: the prebuilt Windows freeglut and GLE builds are
+# PyOpenGL-glut-binaries now, asked for as `pip install PyOpenGL[glut]`. This
+# line is what put them in every wheel and sdist on every platform.
 include license.txt
 include ChangeLog.txt
 exclude accelerate

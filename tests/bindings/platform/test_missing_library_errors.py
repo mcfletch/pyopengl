@@ -278,3 +278,39 @@ class TestTheAdviceIsWorthReading:
         """No OpenGL library at all is no graphics driver, which is a
         different conversation from a package that was not installed."""
         assert 'GL' not in baseplatform.LIBRARY_SOURCES
+
+
+class TestTheWindowsAdviceNamesTheExtra:
+    """This is what the GLUT split turns on, rather than the packaging.
+
+    A Windows program calling ``glutInit()`` used to work on ``pip install
+    PyOpenGL``, because the builds rode along in every wheel. They are
+    ``PyOpenGL-glut-binaries`` now, so that program needs ``PyOpenGL[glut]``
+    -- and the tutorials, textbooks and course materials that teach OpenGL
+    through GLUT will not be updated. The error is the only thing those
+    readers will see, so it has to carry the command.
+
+    See ``plans/BUNDLED-DLLS.md``.
+    """
+
+    @pytest.mark.parametrize('library', ['GLUT', 'GLE'])
+    def test_it_says_what_to_install(self, library):
+        said = baseplatform.LIBRARY_SOURCES[library]
+        assert 'PyOpenGL[glut]' in said, said
+
+    @pytest.mark.parametrize('library', ['GLUT', 'GLE'])
+    def test_it_does_not_still_point_at_the_bundled_directory(self, library):
+        """``OpenGL/DLLS`` no longer exists, and sending a reader to look for
+        a directory that cannot be there is worse than saying nothing."""
+        assert 'DLLS' not in baseplatform.LIBRARY_SOURCES[library]
+
+    def test_a_reader_who_wanted_gle_is_not_left_guessing(self):
+        """One distribution carries both, so the GLE advice names an extra
+        spelled ``glut``. That reads as a mistake unless it says why."""
+        assert 'GLE' in baseplatform.LIBRARY_SOURCES['GLE']
+
+    @pytest.mark.parametrize('name', ['glutInit', 'gleExtrusion'])
+    def test_the_error_a_caller_sees_carries_it(self, name):
+        """The wording is only worth holding where it reaches the caller, and
+        ``glutInit`` is the call the reader of a tutorial will have made."""
+        assert 'PyOpenGL[glut]' in message(absent(name)), name

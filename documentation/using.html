@@ -178,17 +178,20 @@ used to provide the plugin mechanism used by array data-type plugin
 mechanism. &nbsp;You will probably want to install <a href="http://numpy.scipy.org/">numpy</a> as well. &nbsp;<a href="http://starship.python.net/crew/theller/ctypes/">ctypes</a> is a dependency&nbsp;for Python 2.4 and Python 2.3 but included with Python 2.5.</p>
 <h3>Win32 Dependencies</h3>
 <p>PyOpenGL is a wrapper around OpenGL, GLU, GLUT (including
-Free/OpenGLUT) and GLE. Most Linux and OS-X systems will have these
-available or be able to install them automatically as packages.
-&nbsp;On Win32 we need to do a bit more work:</p>
-<ul>
-  <li>Download the <a href="http://www.xmission.com/%7Enate/glut.html">GLUT for Win32</a> package, copy&nbsp;glut32.dll to your WINDOWS/system32 directory</li>
-  <li>Download the compiled <a title="Download the zip package" href="http://www.vrplumber.com/gle32.zip">GLE for Win32</a> package, copy gle32.dll to your WINDOWS/system32 directory</li>
-</ul>
-<p><a href="http://pyopengl.cvs.sourceforge.net/*checkout*/pyopengl/OpenGL-ctypes/src/win32deps.py">This script</a>
-automates the process. &nbsp;Note that you will be agreeing to be bound
-by the license agreements of the GLUT and GLE libraries on running the
-script.</p>
+Free/OpenGLUT) and GLE. OpenGL and GLU are part of Windows itself; most Linux
+and macOS systems have GLUT and GLE available or can install them as
+packages. Windows does not ship those two, so ask for them:</p>
+<pre>pip install PyOpenGL[glut]</pre>
+<p>That brings in <code>PyOpenGL-glut-binaries</code>, which carries builds of
+both freeglut and GLE and is a Windows-only download &mdash; a Linux or macOS
+install of PyOpenGL never fetches it. There is nothing to configure
+afterwards: PyOpenGL finds the libraries itself. You will be agreeing to be
+bound by the licence agreements of the GLUT and GLE libraries, which ship
+beside the binaries.</p>
+<p>A freeglut you installed yourself still wins over the bundled build, so if
+you have one on <code>PATH</code> &mdash; from the official Windows binaries,
+MSYS2 or vcpkg &mdash; PyOpenGL uses that. Without either, a GLUT call raises
+an error naming the command above.</p>
 <h3>Bleeding Edge Development</h3>
 
 

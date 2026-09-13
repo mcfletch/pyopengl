@@ -126,18 +126,20 @@ Pyglet License (BSD Style):
     ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
     POSSIBILITY OF SUCH DAMAGE.
 
-OpenGL-ctypes may include source code from the GLE (GL Tubing and Extrusion) library, which is 
-licensed under the license declared in OpenGL/DLLS/gle_COPYING.src if GLE is included in this 
-distribution.  Copyright notice follows:
+OpenGL-ctypes wraps the GLE (GL Tubing and Extrusion) library, which is licensed under the
+license declared in gle_COPYING.src.  On Windows a build of it is distributed separately, as
+PyOpenGL-glut-binaries (pip install PyOpenGL[glut]), and that licence file ships beside the
+binaries there.  Copyright notice follows:
 
     This software is owned by International Business Machines Corporation
     ("IBM"), or its subsidiaries or IBM's suppliers, and is copyrighted and
     licensed, not sold.  IBM retains title to the software, and grants you a
     nonexclusive license for the software.
 
-OpenGL-ctypes may include source code from FreeGLUT (GL Utility Toolkit) library,
-which is licensed under the MIT/X-Consortium License, available in 
-OpenGL/DLLS/freeglut_COPYING.txt if FreeGLUT is included in this distribution:
+OpenGL-ctypes wraps the FreeGLUT (GL Utility Toolkit) library, which is licensed under the
+MIT/X-Consortium License, available in freeglut_COPYING.txt.  On Windows a build of it is
+distributed separately, as PyOpenGL-glut-binaries (pip install PyOpenGL[glut]), and that
+licence file ships beside the binaries there:
 
     Freeglut code without an explicit copyright is covered by the following 
     copyright:

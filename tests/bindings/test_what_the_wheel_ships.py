@@ -1,22 +1,22 @@
 #! /usr/bin/env python3
 """What a built wheel actually carries, beyond the ``.py`` files.
 
-Three kinds of file in this package are not Python and reach an installation
-only because the packaging says so: the bundled Windows GLUT and GLE builds
-under ``OpenGL/DLLS``, the declaration tables the pure-Python path reads, and
-the typing stubs. Each is declared in a different place -- the DLLs by
-``MANIFEST.in`` plus setuptools' ``include-package-data``, the rest by
-``[tool.setuptools.package-data]`` -- and nothing before this asked the built
-artifact whether they arrived.
+Two kinds of file in this package are not Python and reach an installation
+only because ``[tool.setuptools.package-data]`` says so: the declaration
+tables the pure-Python path reads, and the typing stubs. Nothing but the built
+artifact can say whether they arrived.
 
-#127 is a Windows user with no ``OpenGL/DLLS`` directory in their
-installation, answered on the ticket with "the DLLS folder is missing, copy
-one in yourself". Whatever produced that install, a wheel from this checkout
-carries them, and these cases are what keeps that true while
-`plans/BUNDLED-DLLS.md <../../plans/BUNDLED-DLLS.md>`_ is still a proposal --
-that plan takes the DLLs out into a package of their own, and the case below
-is the one it inverts.
+The third kind used to be the Windows freeglut and GLE builds, and the cases
+here are the ones that kept them arriving. They ship as
+``PyOpenGL-glut-binaries`` now -- ``pip install PyOpenGL[glut]`` -- so what
+these cases hold is the opposite: that the wheel carries no binaries at all.
+A ``.dll`` reappearing in it is a Linux or macOS install downloading Windows
+libraries it cannot load, which is the whole of what the split was for, and
+it would come back silently.
 
+See `plans/BUNDLED-DLLS.md <../../plans/BUNDLED-DLLS.md>`_.
+
+https://github.com/mcfletch/pyopengl/issues/164
 https://github.com/mcfletch/pyopengl/issues/127
 https://github.com/mcfletch/pyopengl/issues/76
 https://github.com/mcfletch/pyopengl/issues/125
@@ -25,6 +25,7 @@ https://github.com/mcfletch/pyopengl/issues/125
 import os
 import subprocess
 import sys
+import tomllib
 import zipfile
 
 import paths
@@ -61,62 +62,52 @@ def under(members, directory):
                   if name.startswith(prefix) and not name.endswith('/'))
 
 
-class TestTheBundledWindowsLibraries:
-    """``OpenGL/DLLS`` is a directory inside a package with no ``__init__``.
+class TestTheWheelCarriesNoWindowsBinaries:
+    """The freeglut and GLE builds are ``PyOpenGL-glut-binaries`` now.
 
-    That is what makes it worth a case: ``packages.find`` does not see it as a
-    package, so it arrives only as package data.  It is named in
-    ``MANIFEST.in`` and not in ``[tool.setuptools.package-data]``, which works
-    because ``include-package-data`` defaults to true for a project configured
-    through ``pyproject.toml`` -- a default, in another project's tool, that
-    every Windows GLUT user depends on.
+    This wheel is ``py3-none-any``, so anything in it is downloaded by every
+    platform. Six freeglut builds and six GLE builds reaching a Linux server
+    rendering through EGL is what the split ended, and #164 is a scanner
+    quarantining PyOpenGL itself over two of them -- for users who never
+    wanted GLUT.
+
+    Nothing would announce their return. They arrived through ``MANIFEST.in``
+    and setuptools' ``include-package-data``, which is a default in another
+    project's tool: one line restored, or a directory of binaries added
+    anywhere under the package, and every install carries them again.
     """
 
-    def test_the_freeglut_builds_are_there(self, wheel):
-        shipped = [name for name in under(wheel, 'OpenGL/DLLS')
-                   if name.startswith('freeglut')
-                   and name.endswith('.dll')]
-        assert shipped, (
-            'no freeglut DLLs in the wheel; OpenGL.GLUT will find nothing on '
-            'a Windows machine that has no GLUT of its own'
+    def test_no_dll_is_in_the_wheel_at_all(self, wheel):
+        shipped = [name for name in wheel if name.lower().endswith('.dll')]
+        assert not shipped, (
+            'Windows binaries are back in the pure-Python wheel, so every '
+            'Linux and macOS install now downloads them: %s' % (shipped,)
         )
 
-    def test_the_gle_builds_are_there(self, wheel):
-        shipped = [name for name in under(wheel, 'OpenGL/DLLS')
-                   if name.startswith('gle') and name.endswith('.dll')]
-        assert shipped, 'no GLE DLLs in the wheel'
+    def test_the_bundled_directory_is_gone(self, wheel):
+        assert not under(wheel, 'OpenGL/DLLS')
 
-    def test_the_build_the_current_interpreter_would_ask_for_is_there(
-        self, wheel
-    ):
-        """The platform module asks for one exact name, built from the word
-        size and the compiler generation; a wheel carrying five of the six is
-        a wheel that fails on one interpreter and nowhere else."""
-        shipped = under(wheel, 'OpenGL/DLLS')
-        for size in ('32', '64'):
-            for vc in ('vc9', 'vc10', 'vc14'):
-                assert 'freeglut%s.%s.dll' % (size, vc) in shipped
-
-    def test_the_licences_travel_with_the_binaries(self, wheel):
-        """freeglut and GLE are somebody else's code; redistributing a binary
-        without its licence is not a thing we may do."""
-        shipped = under(wheel, 'OpenGL/DLLS')
-        assert 'freeglut_COPYING.txt' in shipped
-        assert 'gle_COPYING' in shipped
-
-    def test_every_tracked_file_arrives(self, wheel):
-        """Whatever is in the directory in the checkout is what a user gets;
-        a file added there and not shipped is the failure #127 describes."""
+    def test_the_checkout_does_not_carry_them_either(self):
+        """The sdist ships what is tracked, and a checkout is what a developer
+        builds from -- so the files being absent from the wheel while still in
+        the tree would only mean they were not being *shipped* yet."""
         tracked = subprocess.run(
             ['git', 'ls-files', 'OpenGL/DLLS'],
             cwd=paths.ROOT, capture_output=True, text=True,
         )
         if tracked.returncode != 0:                # pragma: no cover - no git
             pytest.skip('not a git checkout')
-        wanted = sorted(os.path.basename(line)
-                        for line in tracked.stdout.split('\n') if line.strip())
-        assert wanted, 'no DLLS files tracked in this checkout'
-        assert under(wheel, 'OpenGL/DLLS') == wanted
+        assert not tracked.stdout.strip(), tracked.stdout
+
+    def test_the_extra_that_replaces_them_is_declared(self):
+        """A user told to run ``pip install PyOpenGL[glut]`` has to get
+        something: an undeclared extra installs nothing and says nothing."""
+        with open(os.path.join(paths.ROOT, 'pyproject.toml'), 'rb') as source:
+            declared = tomllib.load(source)
+        extras = declared['project']['optional-dependencies']
+        assert 'glut' in extras, sorted(extras)
+        assert any('glut-binaries' in requirement.lower()
+                   for requirement in extras['glut']), extras['glut']
 
 
 class TestTheDataThePurePythonPathReads:

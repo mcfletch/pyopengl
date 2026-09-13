@@ -269,6 +269,44 @@ class TestWhereTheBundledLibrariesAre:
         assert ctypesloader.DLL_DIRECTORY == ctypesloader._bundled_dll_directory()
 
 
+class TestWhereAFrozenApplicationHasToPutThem:
+    """A freezer collects from ``DLL_DIRECTORY`` and writes into a bundle.
+
+    The running loader in that bundle performs the same lookup, so the two
+    have to agree: an application that put the libraries under ``OpenGL`` and
+    then looked for them under ``pyopengl_glut_binaries`` carries them and
+    cannot load them, and says so as ``glutInit`` being undefined.
+    """
+
+    def destination(self, monkeypatch, directory):
+        monkeypatch.setattr(ctypesloader, 'DLL_DIRECTORY', directory)
+        return ctypesloader._bundled_dll_destination()
+
+    def test_the_binaries_package_keeps_its_own_name(self, monkeypatch):
+        assert self.destination(
+            monkeypatch,
+            os.path.join('any', 'where', 'pyopengl_glut_binaries', 'DLLS'),
+        ) == os.path.join('pyopengl_glut_binaries', 'DLLS')
+
+    def test_the_fallback_keeps_openglslash_dlls(self, monkeypatch):
+        assert self.destination(
+            monkeypatch, os.path.join('any', 'where', 'OpenGL', 'DLLS')
+        ) == os.path.join('OpenGL', 'DLLS')
+
+    def test_it_follows_the_lookup_rather_than_naming_a_package(self, monkeypatch):
+        """Nothing here spells either package name, so a rename of the
+        providing distribution does not silently break freezing."""
+        assert self.destination(
+            monkeypatch, os.path.join('any', 'where', 'renamed_later', 'DLLS')
+        ) == os.path.join('renamed_later', 'DLLS')
+
+    def test_it_describes_the_directory_the_loader_actually_uses(self):
+        """Against the real value rather than a constructed one."""
+        destination = ctypesloader._bundled_dll_destination()
+        assert ctypesloader.DLL_DIRECTORY.endswith(destination), (
+            destination, ctypesloader.DLL_DIRECTORY)
+
+
 class TestWhatEachPlatformLooksIn:
     def test_only_macos_has_framework_directories(self):
         """A Linux or Windows load must not go looking under ``/System``."""

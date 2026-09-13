@@ -50,8 +50,11 @@ PyOpenGL therefore ships its own PyInstaller hook, which PyInstaller finds by
 itself through the ``pyinstaller40`` entry point: there is nothing to configure
 and nothing to list. It reports the modules the registries would import --
 read from the registries themselves, so a plug-in added by another package is
-carried too -- and on Windows the GLUT and GLE DLLs, which
-``OpenGL.platform.ctypesloader`` opens by path.
+carried too -- and on Windows the GLUT and GLE libraries, which
+``OpenGL.platform.ctypesloader`` opens by path. Those come from
+``PyOpenGL-glut-binaries`` where it is installed, so a frozen application gets
+them if the build host asked for ``PyOpenGL[glut]`` and is frozen without GLUT
+if it did not.
 
 For another freezer, ``OpenGL.plugins.registered_modules()`` is the same answer
 without PyInstaller in the way::

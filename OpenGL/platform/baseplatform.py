@@ -45,12 +45,11 @@ LIBRARY_SOURCES = {
     ),
     'GLUT': (
         'Debian and Ubuntu: freeglut3-dev; Fedora: freeglut; Arch: freeglut; '
-        'macOS ships it; on Windows PyOpenGL bundles builds in OpenGL/DLLS, '
-        'so a missing one there means that directory is not in your install'
+        'macOS ships it; on Windows, pip install PyOpenGL[glut]'
     ),
     'GLE': (
-        'Debian and Ubuntu: libgle3; Fedora: gle; on Windows PyOpenGL bundles '
-        'builds in OpenGL/DLLS'
+        'Debian and Ubuntu: libgle3; Fedora: gle; on Windows, '
+        'pip install PyOpenGL[glut] -- one download carries GLE as well'
     ),
     'EGL': (
         'it arrives with the graphics driver; on Windows it comes from an '

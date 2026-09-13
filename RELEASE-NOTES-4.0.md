@@ -208,16 +208,33 @@ well as with the defaults.
   like `glGenVertexArrays` is undefined on a machine whose driver has it.
 - **A GLUT you installed is found by its own name.** The Windows platform asks
   for `freeglut` and `glut32` — what the official freeglut binaries, MSYS2,
-  vcpkg and the original GLUT install — before the builds bundled in
-  `OpenGL/DLLS`, and a library of the wrong architecture no longer stops the
-  search at the first name.
+  vcpkg and the original GLUT install — before the builds we ship, and a
+  library of the wrong architecture no longer stops the search at the first
+  name.
 
 ## Packaging and freezing
 
+- **The Windows GLUT and GLE builds are an optional download.** They shipped
+  inside every wheel, on every platform, so a Linux server rendering through
+  EGL fetched twelve Windows libraries it could never load — and a scanner
+  objecting to a decade-old vendored binary quarantined PyOpenGL itself for
+  users who never wanted GLUT (#164). They are `PyOpenGL-glut-binaries` now:
+
+  ```
+  pip install PyOpenGL[glut]
+  ```
+
+  **A Windows program that calls `glutInit()` needs that extra**, where a
+  plain `pip install PyOpenGL` used to be enough. Nothing else changes: a
+  freeglut the system provides still wins over the shipped build, and where
+  neither is present the error names the command to run rather than reporting
+  an undefined function. One download carries GLE as well.
 - A PyInstaller hook ships in the box and PyInstaller finds it by itself. It
   reports the modules PyOpenGL's plug-in registries would import — including
-  plug-ins added by other packages — and the Windows GLUT and GLE DLLs. For any
-  other freezer, `OpenGL.plugins.registered_modules()` is the same answer.
+  plug-ins added by other packages — and the Windows GLUT and GLE libraries,
+  from wherever the running loader would find them. An application frozen on a
+  host without the extra is frozen without GLUT. For any other freezer,
+  `OpenGL.plugins.registered_modules()` is the same answer.
 - Building `PyOpenGL_accelerate` from a source tree drops the generated C where
   the Cython or the numpy that wrote it has changed. Those modules
   `cimport numpy`, and `cythonize` decides by timestamp whether to write the C

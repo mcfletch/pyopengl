@@ -21,11 +21,17 @@ def _bundled_dll_directory( ):
     scanner objecting to a vendored binary objects to a package only GLUT
     users have.
 
-    Where it is absent the answer is the copy inside this package, which is
-    where they used to live -- an installation made before the split still has
-    one, and so does a checkout.  A ``pyopengl_glut_binaries`` too old to name
-    the directory raises ``ImportError`` from the ``from`` clause and reads the
-    same way, rather than raising out of whichever import came first.
+    Where it is absent the answer is ``OpenGL/DLLS``, which is where they used
+    to live.  Nothing ships that directory any more, so on most machines it
+    names nothing and the caller finds no file there -- but an installation
+    upgraded in place over a pre-4.0 one still has the old builds, and a
+    frozen application may have been packaged with them.  Keeping the fallback
+    costs a path join, and dropping it would take GLUT away from those two
+    without warning.
+
+    A ``pyopengl_glut_binaries`` too old to name the directory raises
+    ``ImportError`` from the ``from`` clause and reads the same way, rather
+    than raising out of whichever import came first.
 
     Only the directory is decided here.  What is looked for in it, and that a
     library the *system* provides is preferred over any of this, are
@@ -41,6 +47,26 @@ def _bundled_dll_directory( ):
 
 
 DLL_DIRECTORY = _bundled_dll_directory( )
+
+
+def _bundled_dll_destination( ):
+    """Where a frozen application has to put the files from that directory
+
+    A freezer collects them from :data:`DLL_DIRECTORY` and has to write them
+    where the *running* loader will look, which is this same lookup performed
+    inside the bundle.  Both answers are a package directory with ``DLLS``
+    under it -- ``pyopengl_glut_binaries/DLLS`` or ``OpenGL/DLLS`` -- and the
+    loader finds that package by its own ``__file__``, so the last two
+    segments of the path are what the bundle has to reproduce.  Taking them
+    rather than branching keeps this right if the providing package is ever
+    renamed.
+
+    Freezing to the other one produces an application that carries the
+    libraries and cannot find them.  ``OpenGL/__pyinstaller/hook-OpenGL.py``
+    is the caller.
+    """
+    parent, leaf = os.path.split( DLL_DIRECTORY )
+    return os.path.join( os.path.basename( parent ), leaf )
 
 #: The Windows libraries that are part of the operating system.
 #:

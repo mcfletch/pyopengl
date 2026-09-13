@@ -31,6 +31,21 @@ classifiers = [
 ]
 
 [project.optional-dependencies]
+# The prebuilt Windows freeglut and GLE builds, which `OpenGL.GLUT` and
+# `OpenGL.GLE` need on a machine that has no GLUT of its own. They shipped
+# inside this wheel until 4.0, which meant every Linux and macOS install
+# downloaded twelve Windows libraries it could never load, and a scanner
+# objecting to a decade-old vendored binary quarantined PyOpenGL itself for
+# users who never wanted GLUT (#164).
+#
+# Windows only, because that is the only platform the builds are for -- a
+# `pip install PyOpenGL[glut]` elsewhere is satisfied by asking for nothing,
+# rather than failing, so the same command works in a cross-platform install
+# script. Where the system has its own freeglut it still wins; see
+# `OpenGL.platform.ctypesloader`.
+#
+# https://github.com/mcfletch/pyopengl/issues/164
+glut = ["PyOpenGL-glut-binaries >= 1.0.0 ; sys_platform == 'win32'"]
 test = [
     "tox",
     "tox-uv >= 1",

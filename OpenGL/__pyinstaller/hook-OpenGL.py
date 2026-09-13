@@ -80,11 +80,18 @@ def _tk_context_modules():
 
 
 @isolated.decorate
-def _dll_directory():
-    """Where the running library looks for its bundled Windows DLLs"""
+def _dll_layout():
+    """Where the prebuilt Windows libraries are, and where they must go
+
+    Two answers rather than one because the destination is not a constant: the
+    builds ship as ``PyOpenGL-glut-binaries`` where the user asked for
+    ``PyOpenGL[glut]`` and are absent otherwise, and the loader computes the
+    directory from whichever package provided them.  A bundle that reproduced
+    the other layout would carry the libraries and not find them.
+    """
     from OpenGL.platform import ctypesloader
 
-    return ctypesloader.DLL_DIRECTORY
+    return ctypesloader.DLL_DIRECTORY, ctypesloader._bundled_dll_destination()
 
 
 # Every platform's module, not only the one being built for: which is used is
@@ -101,14 +108,24 @@ hiddenimports = _plugin_modules() + _error_modules() + _tk_context_modules()
 datas = collect_data_files('OpenGL', includes=['raw/_declarations/*.dat'])
 
 if is_win:
-    # `ctypesloader` opens these by path out of a directory beside the package,
-    # so they are collected from that directory rather than from anywhere the
-    # installer happened to put a copy -- if the running library would not find
-    # a file, a frozen application has no use for it either.
-    _directory = _dll_directory()
+    # `ctypesloader` opens these by path out of the package that provides
+    # them, so they are collected from that directory rather than from
+    # anywhere the installer happened to put a copy -- if the running library
+    # would not find a file, a frozen application has no use for it either.
+    #
+    # A machine with no `PyOpenGL-glut-binaries` and no leftover `OpenGL/DLLS`
+    # has nothing to collect, and the application is frozen without GLUT. That
+    # is the right answer rather than an error: `OpenGL.GLUT` is optional, and
+    # a build host that did not install the extra did not ask for it.
+    _directory, _into = _dll_layout()
     _names = sorted(os.listdir(_directory)) if os.path.isdir(_directory) else []
     binaries = [
-        (os.path.join(_directory, name), os.path.join('OpenGL', 'DLLS'))
+        (os.path.join(_directory, name), _into)
         for name in _names
         if name.lower().endswith('.dll')
     ]
+    # Without this the module is not in the bundle, the loader's import of it
+    # fails there, and it falls back to `OpenGL/DLLS` -- which is not where
+    # the files above were put.
+    if _names and not _into.startswith('OpenGL'):
+        hiddenimports = hiddenimports + ['pyopengl_glut_binaries']

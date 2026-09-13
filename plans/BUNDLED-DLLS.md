@@ -1,7 +1,10 @@
 # The bundled Windows DLLs become an optional package
 
-**Status:** Partly landed. The new project exists in the workspace and
-PyOpenGL finds it; nothing is published and nothing is deleted.
+**Status:** Landed in both repositories, unreleased. `OpenGL/DLLS` is gone and
+`PyOpenGL[glut]` is what replaces it. What is left is not code: the new
+project needs a GitHub repository and a first PyPI release, and **PyOpenGL
+must not be released before that happens** — the extra would resolve to
+nothing and the error would name a command that does not work.
 
 What is done:
 
@@ -17,13 +20,28 @@ What is done:
 - It is registered with `verify-everything.py`, `tools/preflight.toml` and
   `tools/release.toml` — the last as `publish = false`, since there is nothing
   to push to yet.
+- **`OpenGL/DLLS/` is deleted**, with the `MANIFEST.in` line that shipped it.
+  `tests/bindings/test_what_the_wheel_ships.py` is inverted: it asserts the
+  wheel carries no `.dll` at all, that the checkout tracks none, and that the
+  `glut` extra is declared — because nothing else would announce their return.
+- **`PyOpenGL[glut]`** is declared, Windows-only, so the same command is
+  harmless in a cross-platform install script.
+- **The errors name it.** `LIBRARY_SOURCES` for GLUT and GLE say
+  `pip install PyOpenGL[glut]` instead of pointing at a directory that no
+  longer exists, and the GLE entry says that one download carries both.
+- **Freezing follows the split.** The PyInstaller hook collected from
+  `DLL_DIRECTORY` already, but wrote to a hardcoded `OpenGL/DLLS` — which
+  would have produced applications carrying the libraries and unable to find
+  them. `ctypesloader._bundled_dll_destination()` derives the bundle path from
+  the same lookup, and the hook adds `pyopengl_glut_binaries` to
+  `hiddenimports` so the loader's import of it succeeds inside the bundle.
+- **The build recipes moved with the binaries.** `downloadglut.py`,
+  `buildgledll.py` and `gle32.zip` are in the new project's `tools/`, with a
+  README saying what each is and why neither script runs on a current machine.
 
-That is steps 1 and 2 of *Doing it* below. What is left is the repository and
-the first PyPI release, and then the extra, the message wording and the
-deletion of `OpenGL/DLLS`. None of the last three may land first: an extra
-naming a distribution that is not on PyPI resolves to nothing, and an error
-message telling a user to run `pip install PyOpenGL[glut]` before that works is
-worse than the one it replaces.
+Every step of *Doing it* below is done but the third. What is left is the
+repository and the first PyPI release — no code, and the ordering constraint
+above.
 
 **Scope:** `OpenGL/DLLS/`, which is eighteen files — freeglut for vc9, vc10 and
 vc14 in 32- and 64-bit, the GLE tubing library in the same six flavours, and
@@ -132,11 +150,13 @@ turns a working program into a puzzle.
 
 ## Doing it
 
-Steps 1 and 2 were written here as cases to write red first. They are not, and
-have been moved to where they go green: each asserts the state *after* the
-deletion, so landing either now would be carrying a known failure, which this
-workspace does not do. Step 3's local half is done and step 4's loader change
-is done; what is left is in order.
+Originally this listed two red-first cases before the packaging. Each asserted
+the state *after* the deletion, so neither could land before it without
+carrying a known failure. They were written red at the point the deletion was
+made instead, which is step 4 below.
+
+Everything but step 3 is done. Step 3 is the release, and it is a hard gate on
+releasing PyOpenGL, not merely the next task.
 
 1. ~~The new project~~ — **done as a directory in this workspace.**
    `pyopengl-glut-binaries/`, built from the files as they stand. No rebuild: a
@@ -147,19 +167,24 @@ is done; what is left is in order.
    `TestWhereTheBundledLibrariesAre` in
    `tests/bindings/platform/test_library_loading.py`. Nothing changes for a
    user who does not have the package, which is every user today.
-3. **Its repository and its first release to PyPI.** A GitHub project under the
-   same umbrella, added here as a submodule like the others, and released by
-   the workflow it already carries. `tools/release.toml` holds it at
-   `publish = false` until then.
-4. **The extra and the messages**, together, once step 3 is on PyPI:
-   `glut = ["PyOpenGL-glut-binaries; sys_platform == 'win32'"]`, and
-   `LIBRARY_SOURCES['GLUT']` and `['GLE']` changed from "PyOpenGL bundles
-   builds in OpenGL/DLLS" to name the extra. Red first, and now they can be:
-   the advice becomes true the moment the extra exists.
-5. **`OpenGL/DLLS/` deleted**, with the `MANIFEST.in` line, and
-   `tests/bindings/test_what_the_wheel_ships.py::TestTheBundledWindowsLibraries`
-   inverted to assert the wheel carries no `.dll` at all. In the same change as
-   the extra — never before the new package is installable from PyPI.
+3. **Its repository and its first release to PyPI** — the only step left. A
+   GitHub project under the same umbrella, added here as a submodule like the
+   others, and released by the workflow it already carries.
+   `tools/release.toml` holds it at `publish = false` until then. Two of its
+   three actions are outward-facing: creating the repository, and configuring
+   trusted publishing on PyPI, which claims the distribution name for good.
+   Check the name is free before relying on it.
+4. ~~The extra, the messages, and the deletion~~ — **done, in one change.**
+   The extra is declared Windows-only; `LIBRARY_SOURCES` for GLUT and GLE name
+   it; `OpenGL/DLLS` and its `MANIFEST.in` line are gone; the wheel cases are
+   inverted; the PyInstaller hook writes to the directory the loader will
+   compute rather than to a hardcoded one.
+
+**Until step 3 lands, PyOpenGL is unreleasable.** A `pip install
+PyOpenGL[glut]` would resolve to nothing, and every Windows GLUT user would
+get an error naming a command that does not work — which is worse than the
+`NullFunctionError` this set out to replace. `tools/release.toml` records the
+ordering; nothing enforces it automatically.
 
 ## What it settles
 
@@ -170,7 +195,7 @@ is done; what is left is in order.
 - The `py3-none-any` wheel becomes what it claims to be: pure Python.
 
 None of those closes on the packaging alone. All of them close on the error
-message, which is why it is step two rather than step five.
+message, which is why it landed with the deletion rather than after it.
 
 ## Why not download them instead
 

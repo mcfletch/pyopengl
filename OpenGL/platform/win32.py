@@ -46,14 +46,14 @@ class Win32Platform( baseplatform.BasePlatform ):
     #: GLUT is ``glut32.dll`` -- 32 for the Win32 API rather than for the word
     #: size, so it is that name on a 64-bit machine too.
     #:
-    #: The vc-tagged names are the builds bundled in ``OpenGL/DLLS``, which
-    #: nothing but this package ships.  Asking for only those meant a user who
-    #: had downloaded freeglut and put it on ``PATH`` still got
+    #: The vc-tagged names are the builds in ``PyOpenGL-glut-binaries``, which
+    #: nothing but we ship under those names.  Asking for only those meant a
+    #: user who had downloaded freeglut and put it on ``PATH`` still got
     #: ``NullFunctionError`` from ``glutInit``, with nothing to say the file
     #: they had wanted renaming.
     #:
     #: freeglut before GLUT at each step: freeglut is the maintained one, and
-    #: the bundled builds are freeglut too.
+    #: the builds we ship are freeglut too.
     #:
     #: https://github.com/mcfletch/pyopengl/issues/76
     #: https://github.com/mcfletch/pyopengl/issues/125
