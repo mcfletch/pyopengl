@@ -35,9 +35,13 @@ What is done:
   them. `ctypesloader._bundled_dll_destination()` derives the bundle path from
   the same lookup, and the hook adds `pyopengl_glut_binaries` to
   `hiddenimports` so the loader's import of it succeeds inside the bundle.
-- **The build recipes moved with the binaries.** `downloadglut.py`,
-  `buildgledll.py` and `gle32.zip` are in the new project's `tools/`, with a
-  README saying what each is and why neither script runs on a current machine.
+- **The build recipes moved with the binaries.** `buildgledll.py` and
+  `gle32.zip` are in the new project's `tools/`, with a README saying what each
+  is and why the script does not run on a current machine. A third,
+  `downloadglut.py`, is deleted: it fetched GLUT 3.7.6 — Kilgard's original,
+  not freeglut — and nothing it produced was ever shipped. So there is a
+  recipe for GLE and none for the freeglut builds, which came from a third
+  party's download; whoever rebuilds those chooses a source first.
 
 Every step of *Doing it* below is done but the third. What is left is the
 repository and the first PyPI release — no code, and the ordering constraint
