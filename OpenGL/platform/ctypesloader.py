@@ -3,7 +3,7 @@
 We keep rewriting functions as the main entry points change,
 so let's just localise the changes here...
 """
-import ctypes, logging, os, sys
+import ctypes, logging, os, posixpath, sys
 _log = logging.getLogger( 'OpenGL.platform.ctypesloader' )
 #_log.setLevel( logging.DEBUG )
 ctypes_version = [
@@ -134,7 +134,11 @@ def _loadLibraryWindows(dllType, name, mode):
                 candidates.append( bundled )
             candidates.append( name )
             candidates.extend([
-                os.path.join( directory, '%s.framework'%(name,), name )
+                # posixpath rather than os.path: a framework path is a macOS
+                # filesystem path, so the separator is a slash whatever host
+                # builds it.  This function serves Windows as well, where
+                # os.path.join would spell it with backslashes.
+                posixpath.join( directory, '%s.framework'%(name,), name )
                 for directory in FRAMEWORK_DIRECTORIES
             ])
     err = None

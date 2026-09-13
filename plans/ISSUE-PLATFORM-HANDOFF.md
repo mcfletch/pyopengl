@@ -27,17 +27,46 @@ step in three of them -- whether the driver's GL is the one that arrived,
 whether a GLUT the machine already had is found, whether the driver lists an
 extension -- and each says below what to run by hand for that.
 
+**That run has happened.** Windows 10, Python 3.13, an Intel UHD 630 with the
+driver's own GL: 5511 passed, 633 skipped, and three failures the run itself
+found. Two were defects and are fixed -- see *What the Windows run turned up*
+below; the third was #144's answer, which is that it passes. Every by-hand
+step named above has been taken and each is recorded under its ticket.
+
 | Ticket | State | What is left |
 |---|---|---|
-| #174 | fixed | Confirm the driver's GL loads, and in a conda environment |
-| #76, #125 | fixed | Confirm a user-installed freeglut is found |
-| #7 | fixed | One live `wglGetSwapIntervalEXT()` call |
-| #144 | held | The suite, green |
+| #174 | confirmed | Nothing; the driver's GL loads and outranks a `PATH` copy |
+| #76, #125 | confirmed | Nothing; a freeglut on `PATH` under its own name is found |
+| #7 | confirmed | Nothing; the extension lists and the swap interval round-trips |
+| #144 | confirmed | Nothing; the case is green on Windows |
 | #127 | guarded | Nothing here; a wheel from this tree carries the DLLs |
-| #55 | fixed | One macOS run |
+| #55 | fixed | One macOS run; the Windows half of its cases is now green |
 | #29 | fixed | A 32-bit run to confirm |
 | #139, #60 | — | A runner exists now; run it |
 | #162 | — | Needs a person at an Apple Silicon Mac |
+
+Each of the confirmed rows is now a comment to write on the ticket rather than
+a question to answer. What that comment says is under *What to write back*.
+
+### What the Windows run turned up
+
+Neither is a ticket; both are cases that could not do their job on Windows,
+found by being run there for the first time.
+
+- **A framework path was built with the host's separator.**
+  `_loadLibraryWindows` serves macOS and Windows both, and its macOS fallback
+  composed `/System/Library/Frameworks/<name>.framework/<name>` with
+  `os.path.join`, which spells it with backslashes on Windows. A macOS
+  filesystem path has a slash in it whatever machine writes it down, so the
+  join is `posixpath.join`; the two `TestAMacOSFramework` cases that hold #55
+  now run on Windows as well as on macOS.
+- **The numpy case asserted the simulation rather than the state.**
+  `test_numpy_without_float128` builds the handler in a child with
+  `numpy.float128` deleted, and guarded against a vacuous run by asserting
+  something had been deleted. Windows numpy has no `float128` to delete --
+  which is the machine #21 was reported from, and where the case is at its
+  least vacuous. It asserts what the handler saw instead: that the attributes
+  are absent, however they came to be.
 
 ## Running the suite somewhere else
 
@@ -109,15 +138,23 @@ is exactly what `PATH` is for.
 - **The case**: `tests/bindings/platform/test_library_loading.py`, class
   `TestALibraryWindowsItselfProvides`. It runs on Linux, because what was
   wrong is the choice rather than the load.
-- **What is left**: on a Windows machine, and then in a conda environment,
+- **Confirmed.** On Windows 10 with an Intel UHD 630,
 
   ```
   python -c "from OpenGL.GL import *; from OpenGL.GLUT import *; \
              glutInit(); glutCreateWindow(b'x'); print(glGetString(GL_RENDERER))"
   ```
 
-  The renderer string should name the graphics card rather than
-  `llvmpipe` or `GDI Generic`.
+  answers `Intel(R) UHD Graphics 630` on GL `4.6.0 - Build 31.0.101.2114` --
+  the graphics card, not `llvmpipe` or `GDI Generic`.
+
+  The conda half is the same question without needing conda: what conda does
+  is put a directory holding an `opengl32.dll` ahead of System32 on `PATH`.
+  With such a directory on `PATH`, `GetModuleFileNameW` on the handle PyOpenGL
+  loaded answers `C:\WINDOWS\SYSTEM32\opengl32.DLL`, while
+  `ctypes.util.find_library('opengl32')` -- the call this fix removed --
+  answers the copy on `PATH`. That is the ticket in two lines: the old route
+  reaches the decoy and the current one does not.
 
 ### #76, #125 — GLUT is not found on Windows
 
@@ -134,14 +171,19 @@ vcpkg all install, and `glut32`, the original GLUT. The bundled builds follow.
 
 - **The case**: `tests/bindings/glut/test_glut_library_names.py`, which holds
   the order and runs anywhere.
-- **What is left**: on a Windows machine with freeglut installed and *not*
-  renamed,
+- **Confirmed.** With a freeglut on `PATH` under the name it ships with,
+  `freeglut.dll`, and not renamed,
 
   ```
   python -c "from OpenGL.GLUT import *; glutInit(); print('ok')"
   ```
 
-  and `OpenGL.platform.PLATFORM.GLUT._name` to see which file answered.
+  prints `ok`, and `OpenGL.platform.PLATFORM.GLUT._name` names that file --
+  so the one the user installed wins over the bundled build, which is what
+  the reporter had to rename their copy to get. On a machine with no freeglut
+  of its own the bare `freeglut` name finds nothing and
+  `freeglut64.vc14.dll` from `OpenGL/DLLS` answers, so the fallback the
+  bundling exists for is intact.
 - **See also** #164 and `BUNDLED-DLLS.md`: whether to keep shipping the
   bundled builds at all is one decision for all four tickets.
 
@@ -176,9 +218,8 @@ the binding goes through `__glutCreateWindowWithExit`, and that override
 declaring the wrong title type is what made this a `ctypes.ArgumentError` on
 Windows and nowhere else.
 
-- **What settles it**: that file green on a Windows runner.
-- **Branch**: none needed; a dispatch of `develop` with
-  `platforms=windows tests=tests/bindings/glut` answers it.
+- **Confirmed.** The file is green on Windows 10 under Python 3.13, as is the
+  rest of `tests/bindings` -- 4408 cases.
 
 ### #7 — WGL extensions not found under Python 3
 
@@ -196,12 +237,18 @@ import asked. Both lines are now inside it.
   comes back as bytes, the entry point is asked for by a bytes name, a `str`
   and a `bytes` specifier both match, and the device context is declared `HDC`
   so a 64-bit handle keeps its top half.
-- **What is left**: against a real context on Windows,
+- **Confirmed.** Against a real context on Windows -- an Intel UHD 630 --
+  `WGLQuerier.pullExtensions()` answers 22 names, every one of them `bytes`,
+  `WGL_EXT_swap_control` among them; the querier matches it given either a
+  `str` or a `bytes` specifier; `glInitSwapControlEXT()` is true; and
 
   ```
   from OpenGL.WGL.EXT import swap_control
   swap_control.wglGetSwapIntervalEXT()
   ```
+
+  answers, with `wglSwapIntervalEXT(0)` and `wglSwapIntervalEXT(1)` each read
+  back by the getter.
 
 ---
 
@@ -249,9 +296,12 @@ fallback for the machines where `find_library`'s heuristics come up empty:
 
 - **The case**: `tests/bindings/platform/test_library_loading.py`, class
   `TestAMacOSFramework` — including that nothing asks whether the framework is
-  a file, which is the whole of the ticket.
-- **What is left**: the suite on any macOS runner. It is covered by the runs
-  #139 and #60 need.
+  a file, which is the whole of the ticket. It stands in for the loader, so it
+  runs anywhere; running it on Windows is what found the `os.path.join` in the
+  fallback, and it is green there now.
+- **What is left**: the suite on any macOS runner, which is the half no
+  stand-in can answer -- whether `dlopen` on that path reaches the cache. It
+  is covered by the runs #139 and #60 need.
 
 ### #162 — rendering from a thread on an M3
 

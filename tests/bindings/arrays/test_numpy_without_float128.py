@@ -14,8 +14,9 @@ do with glGenTextures.
 
 Asked in a child with the attribute removed, because whether the handler reads
 it is settled while the module is imported, and this process has already
-imported it. Removing the attribute is the whole of the simulation: it is
-exactly what a Windows numpy looks like from inside the handler.
+imported it. Removing the attribute is the whole of the simulation, and on
+Windows there is nothing to remove -- what the handler sees is the same either
+way, which is what the cases assert.
 
 https://github.com/mcfletch/pyopengl/issues/21
 """
@@ -28,16 +29,23 @@ pytest.importorskip('numpy', reason='the handler under test is numpy\'s')
 
 #: Delete the attribute, then let PyOpenGL build its numpy handler and say
 #: what it accepts.
+#:
+#: ``still_present`` is what the handler will actually see, and is the
+#: precondition the cases below rest on.  A Windows numpy has none of these to
+#: begin with, so ``removed`` is empty there and absence is the machine rather
+#: than the simulation.
 WITHOUT_FLOAT128 = '''
 import json
 import numpy
 
-removed = [name for name in ('float128', 'complex256', 'longdouble')
-           if hasattr(numpy, name)]
+WIDE = ('float128', 'complex256', 'longdouble')
+
+removed = [name for name in WIDE if hasattr(numpy, name)]
 for name in removed:
     delattr(numpy, name)
 
-report = {'removed': removed}
+report = {'removed': removed,
+          'still_present': [name for name in WIDE if hasattr(numpy, name)]}
 try:
     from OpenGL.arrays import numpymodule
     report['handled'] = len(numpymodule.NumpyHandler.HANDLED_TYPES)
@@ -55,12 +63,16 @@ def test_the_handler_builds_without_it():
     assert answered['imported'] is True, answered
 
 
-def test_the_attribute_really_was_absent():
-    """Otherwise the case above proves nothing about a numpy that lacks it."""
+def test_the_attributes_really_were_absent():
+    """Otherwise the case above proves nothing about a numpy that lacks them.
+
+    What matters is that the handler was built against a numpy without them,
+    not how it came to be one.  Asserting the deletion instead would hold only
+    where there was something to delete -- and Windows, where there is not, is
+    the platform the ticket came from.
+    """
     answered = json_from_child(WITHOUT_FLOAT128)
-    assert 'float128' in answered['removed'], (
-        'this numpy has no float128 to remove, so the case is vacuous here: '
-        '%r' % (answered['removed'],))
+    assert answered['still_present'] == [], answered
 
 
 def test_it_still_handles_the_ordinary_types():
