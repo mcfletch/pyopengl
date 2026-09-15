@@ -15,7 +15,7 @@ import unittest
 
 import pytest
 
-from arraycompat import HAVE_NUMPY, np, object_names, one
+from arraycompat import HAVE_NUMPY, as_bytes, np, object_names, one
 from gltestcase import GLTestCase
 import OpenGL
 from OpenGL import acceleratesupport, arrays, error, _configflags
@@ -502,6 +502,21 @@ class TestAnOffsetIntoABoundBuffer(GLTestCase):
     VERTICES = [0.0, 0.0, 1.0, 0.0, 0.0, 1.0]
     INDICES = [0, 1, 2]
 
+    #: The program every draw below runs.  A core profile has no
+    #: fixed-function pipeline to fall back on, so a draw with no program in
+    #: use is a ``GL_INVALID_OPERATION`` on a driver that says so -- Apple's
+    #: does, llvmpipe lets it through -- and what these cases are asking is
+    #: whether the offset argument reaches the driver, not what a driver makes
+    #: of a draw with nothing to run.
+    VERTEX_SHADER = '''#version 330 core
+    layout(location=0) in vec2 position;
+    void main() { gl_Position = vec4(position * 2.0 - 1.0, 0.0, 1.0); }
+    '''
+    FRAGMENT_SHADER = '''#version 330 core
+    out vec4 colour;
+    void main() { colour = vec4(1.0, 0.0, 0.0, 1.0); }
+    '''
+
     def setUp(self):
         super().setUp()
         self.require_vertex_arrays()
@@ -515,7 +530,11 @@ class TestAnOffsetIntoABoundBuffer(GLTestCase):
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.ebo)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER,
                      np.array(self.INDICES, 'H'), GL_STATIC_DRAW)
-        self.check_error('setting up the buffers')
+        self.program = self.compile_program(
+            self.VERTEX_SHADER, self.FRAGMENT_SHADER
+        )
+        glUseProgram(self.program)
+        self.check_error('setting up the buffers and the program')
 
     def test_vertex_attrib_pointer_takes_an_integer_offset(self):
         glVertexAttribPointer(0, 2, GL_FLOAT, False, 8, 0)
@@ -540,17 +559,6 @@ class TestAnOffsetIntoABoundBuffer(GLTestCase):
         Drawn and counted rather than merely called, because ``glGetError``
         has nothing to say about it either way.
         """
-        program = self.compile_program(
-            '''#version 330 core
-            layout(location=0) in vec2 position;
-            void main() { gl_Position = vec4(position * 2.0 - 1.0, 0.0, 1.0); }
-            ''',
-            '''#version 330 core
-            out vec4 colour;
-            void main() { colour = vec4(1.0, 0.0, 0.0, 1.0); }
-            ''',
-        )
-        glUseProgram(program)
         glEnableVertexAttribArray(0)
 
         drawn = {}
@@ -562,7 +570,8 @@ class TestAnOffsetIntoABoundBuffer(GLTestCase):
             glDrawArrays(GL_TRIANGLES, 0, 3)
             self.check_error(f'glDrawArrays after {label}')
             glFinish()
-            drawn[label] = int((self.read_image()[:, :, 0] > 128).sum())
+            red = as_bytes(self.read_image())[0::4]
+            drawn[label] = sum(1 for value in red if value > 128)
 
         self.assertTrue(drawn['c_void_p'], 'the c_void_p spelling drew nothing')
         self.assertEqual(
@@ -591,17 +600,6 @@ class TestAnOffsetIntoABoundBuffer(GLTestCase):
         An offset silently read as an address would draw from somewhere else,
         or from nothing; the two calls have to put the same pixels down.
         """
-        program = self.compile_program(
-            '''#version 330 core
-            layout(location=0) in vec2 position;
-            void main() { gl_Position = vec4(position * 2.0 - 1.0, 0.0, 1.0); }
-            ''',
-            '''#version 330 core
-            out vec4 colour;
-            void main() { colour = vec4(1.0, 0.0, 0.0, 1.0); }
-            ''',
-        )
-        glUseProgram(program)
         glVertexAttribPointer(0, 2, GL_FLOAT, False, 8, ctypes.c_void_p(0))
         glEnableVertexAttribArray(0)
 
@@ -612,9 +610,9 @@ class TestAnOffsetIntoABoundBuffer(GLTestCase):
             glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, offset)
             self.check_error(f'glDrawElements with {offset!r}')
             glFinish()
-            frames.append(self.read_image())
+            frames.append(as_bytes(self.read_image()))
         self.assertTrue(
-            (frames[0] == frames[1]).all(),
+            frames[0] == frames[1],
             'the integer offset drew a different frame from the c_void_p',
         )
 

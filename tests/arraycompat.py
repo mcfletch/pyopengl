@@ -256,6 +256,18 @@ def ravel(a):
     return (base * len(scalars))(*scalars)
 
 
+def as_bytes(a):
+    """The memory of a numpy or (nested) ctypes array, as ``bytes``.
+
+    What a frame read back with ``glReadPixels`` can be compared or counted
+    through whichever ``np`` is in play: the numpy array has ``tobytes`` and
+    axis slicing, the ctypes array has neither, and both offer the buffer
+    protocol.  So ``as_bytes(frame)[0::4]`` is the red channel of every pixel
+    in either, and two frames compare as the bytes they are.
+    """
+    return bytes(memoryview(a).cast('B'))
+
+
 def shape(a):
     """Shape tuple of a numpy or (possibly nested) ctypes array."""
     s = getattr(a, 'shape', None)
