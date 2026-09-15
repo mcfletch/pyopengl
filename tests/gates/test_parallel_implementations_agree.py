@@ -185,12 +185,26 @@ class TestTheRegistryAnswersTheSameQuestionsEitherWay:
     """
 
     def test_a_type_nothing_handles_raises_the_documented_error(self):
-        import ctypes
-
         with pytest.raises(KeyError):
             FormatHandler.typeLookup(type('NotAnArray', (), {}))
-        with pytest.raises(KeyError):
-            FormatHandler.typeLookup(ctypes.c_uint * 3)
+
+    def test_an_array_type_is_answered_rather_than_refused(self):
+        """The registry is read, whether or not this type is in it yet.
+
+        A ctypes array is a type PyOpenGL handles, and it enters the registry
+        the first time one is converted -- so what this may answer depends on
+        what the process did before it, and either answer is right.  What is
+        wrong either way is ``TypeError``: that is the registry refusing to be
+        read at all, which is the failure this class is about.
+        """
+        import ctypes
+
+        try:
+            handler = FormatHandler.typeLookup(ctypes.c_uint * 3)
+        except KeyError:
+            pass          # nothing has converted one in this process yet
+        else:
+            assert handler is not None
 
     def test_the_registry_reads_back_what_was_registered(self):
         from OpenGL.arrays.arraydatatype import ArrayDatatype
