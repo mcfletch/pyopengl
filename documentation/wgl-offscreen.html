@@ -143,6 +143,24 @@ EGL: see <a href="egl-devices.html">EGL devices</a>.  The macOS one is
 Windows provide EGL instead, and <code>OpenGL.EGL</code> reaches those; ANGLE
 offers OpenGL ES rather than desktop GL.</p>
 
+<h2>Where the GL library comes from</h2>
+
+<p><code>opengl32.dll</code> is asked of Windows rather than looked for on
+<code>PATH</code>: the copy in <code>System32</code> is a trampoline to whatever
+the graphics driver installed, and a directory on <code>PATH</code> &#8212; a
+conda environment's <code>Library\bin</code>, say &#8212; is somewhere a
+different one arrives because something else was installed.</p>
+
+<p>A copy <em>beside the running executable</em> is preferred to both, which is
+how a machine with no vendor driver is given one.  Mesa's Windows build is
+distributed to be unpacked next to the program that will use it, so putting its
+<code>opengl32.dll</code> in the directory holding <code>python.exe</code>
+&#8212; the virtual environment's <code>Scripts</code>, for a virtual
+environment &#8212; gives that interpreter llvmpipe, with the pbuffer and
+create-context extensions this module needs.  The same directory holds the
+libraries Mesa's <code>opengl32.dll</code> loads in turn, and it is the first
+place they are looked for.  <code>glu32</code> is chosen the same way.</p>
+
 <h2>Checking a machine</h2>
 
 <p><code>tests/test_wgl_offscreen.py</code> holds the cases: the attribute lists

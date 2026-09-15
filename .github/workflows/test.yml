@@ -305,10 +305,11 @@ jobs:
         # WGL_ARB_create_context.  It can serve no windowless context at all,
         # so without a renderer installed this job would skip every GL case.
         #
-        # opengl32.dll is found beside the executable before it is found in
-        # System32, which is the only search order that puts Mesa's ahead of
-        # Windows' own -- so the DLLs go next to the interpreter tox built,
-        # asked for rather than assumed.
+        # PyOpenGL looks for opengl32.dll beside the running executable before
+        # it asks Windows for the system one, which is what puts Mesa's ahead
+        # of Windows' own -- see `beside_the_interpreter` in
+        # OpenGL/platform/ctypesloader.py.  So the DLLs go next to the
+        # interpreter tox built, asked for rather than assumed.
         shell: pwsh
         run: |
           $version = '24.3.4'
@@ -328,9 +329,22 @@ jobs:
           $target = Split-Path -Parent (Get-Content interpreter.txt -Raw).Trim()
           Remove-Item interpreter.txt
           Write-Host "installing into $target"
-          Get-ChildItem "$env:RUNNER_TEMP\mesa\x64" -Filter *.dll |
+          $source = "$env:RUNNER_TEMP\mesa\x64"
+          if (-not (Test-Path $source)) {
+            throw "the archive holds no $source; its layout has moved"
+          }
+          Get-ChildItem $source -Filter *.dll |
             ForEach-Object { Copy-Item $_.FullName $target -Force }
-          Get-ChildItem $target -Filter opengl32.dll | Select-Object Name, Length
+          # Asserted rather than printed.  A renderer that did not land is the
+          # GDI Generic implementation for the rest of the job, and the step
+          # that then fails is the report below -- which says the machine has
+          # no windowless GL, and reads as a machine rather than as a copy
+          # that went somewhere else.
+          $landed = Join-Path $target 'opengl32.dll'
+          if (-not (Test-Path $landed)) {
+            throw "Mesa's opengl32.dll is not at $landed"
+          }
+          Get-ChildItem $landed | Select-Object FullName, Length
 
       - name: Report the renderer under test
         # In the environment the tests will run in, and non-zero where no

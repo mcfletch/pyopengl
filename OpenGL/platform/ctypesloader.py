@@ -78,13 +78,39 @@ def _bundled_dll_destination( ):
 #: for the driver's GL then got software rendering, with nothing saying so.
 #:
 #: Handed to the loader bare, these resolve through Windows' own search order,
-#: which reaches the system directory before ``PATH``.
+#: which reaches the system directory before ``PATH``.  A copy the user put
+#: beside the interpreter still comes first; see :func:`beside_the_interpreter`.
 #:
 #: https://github.com/mcfletch/pyopengl/issues/174
 SYSTEM_LIBRARIES = set([
     'opengl32',
     'glu32',
 ])
+
+
+def beside_the_interpreter( name ):
+    """``name``.dll in the directory the running executable is in, or None.
+
+    Replacing Windows' own OpenGL by putting a DLL next to the executable is
+    how a machine with no graphics driver is given one: Mesa's Windows build
+    is distributed to be dropped there, and that is where a CI runner, a
+    headless server and a virtual desktop get their GL from.  Windows' own
+    search order prefers it as well, the application directory coming before
+    the system directory -- this names it so that the preference holds
+    whichever search flags reach ``LoadLibraryEx``.
+
+    That is a different question from the one :data:`SYSTEM_LIBRARIES`
+    settles.  A library is on ``PATH`` because something else was installed;
+    it is next to the interpreter because somebody put it there.
+    """
+    executable = getattr( sys, 'executable', None )
+    if not executable:
+        return None
+    candidate = os.path.join( os.path.dirname( executable ), name + '.dll' )
+    if os.path.isfile( candidate ):
+        return candidate
+    return None
+
 
 #: Where macOS keeps the frameworks this package loads, tried when
 #: ``find_library`` answers nothing.
@@ -161,7 +187,9 @@ def _loadLibraryWindows(dllType, name, mode):
 
     Windows and macOS both arrive here, and each wants something different
     from ``ctypes.util.find_library``: see :data:`SYSTEM_LIBRARIES` and
-    :data:`FRAMEWORK_DIRECTORIES` for what and why.
+    :data:`FRAMEWORK_DIRECTORIES` for what and why.  A library the operating
+    system provides is looked for beside the interpreter before it is asked of
+    the system; see :func:`beside_the_interpreter`.
 
     Where the first choice does not load -- a library of the wrong
     architecture, a bundled copy an installer dropped -- the rest are tried in
@@ -172,7 +200,10 @@ def _loadLibraryWindows(dllType, name, mode):
     """
     fullName = None
     if name.lower() in SYSTEM_LIBRARIES:
-        candidates = [name]
+        candidates = [
+            path for path in [beside_the_interpreter( name )] if path
+        ]
+        candidates.append( name )
     else:
         try:
             fullName = util.find_library( name )

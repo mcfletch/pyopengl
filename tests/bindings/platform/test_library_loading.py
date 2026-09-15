@@ -113,6 +113,73 @@ class TestALibraryWindowsItselfProvides:
         assert loader.tried == ['C:\\conda\\Library\\bin\\freeglut64.vc14.dll']
 
 
+class TestARendererDroppedBesideTheInterpreter:
+    """``opengl32.dll`` next to the executable is how Windows is given a
+    software renderer.
+
+    Mesa's Windows build is distributed to be dropped there, and that is where
+    a headless machine, a CI runner or a virtual desktop gets its GL from.
+    Windows' own search order prefers it too: the application directory comes
+    before the system one. Named here rather than left to the loader, so the
+    preference holds whichever search flags ctypes passes.
+
+    It is not the same question as :data:`SYSTEM_LIBRARIES`: ``PATH`` is where
+    a library ends up because something else was installed, and the directory
+    the interpreter is in is where one arrives because somebody put it there.
+
+    https://github.com/mcfletch/pyopengl/issues/174
+    """
+
+    @pytest.fixture
+    def dropped(self, monkeypatch, tmp_path):
+        """A Mesa ``opengl32.dll`` beside the running interpreter."""
+        monkeypatch.setattr(
+            ctypesloader.sys, 'executable', str(tmp_path / 'python.exe')
+        )
+        (tmp_path / 'opengl32.dll').write_bytes(b'')
+        return str(tmp_path / 'opengl32.dll')
+
+    @pytest.fixture
+    def nothing_dropped(self, monkeypatch, tmp_path):
+        """An interpreter directory with no GL library in it."""
+        monkeypatch.setattr(
+            ctypesloader.sys, 'executable', str(tmp_path / 'python.exe')
+        )
+
+    def test_it_is_preferred_to_the_system_one(self, dropped, on_path):
+        loader = RecordingLoader()
+        ctypesloader._loadLibraryWindows(loader, 'opengl32', 0)
+        assert loader.tried == [dropped]
+
+    def test_the_system_one_is_next_where_it_will_not_load(
+        self, dropped, on_path
+    ):
+        """A 32-bit Mesa in a 64-bit process exists and does not load, and the
+        driver's own GL is still there to fall back to."""
+        loader = RecordingLoader(loadable=['opengl32'])
+        assert ctypesloader._loadLibraryWindows(loader, 'opengl32', 0)
+        assert loader.tried == [dropped, 'opengl32']
+
+    def test_nothing_beside_it_leaves_the_bare_name(
+        self, nothing_dropped, on_path
+    ):
+        loader = RecordingLoader()
+        ctypesloader._loadLibraryWindows(loader, 'opengl32', 0)
+        assert loader.tried == ['opengl32']
+
+    def test_path_is_still_not_looked_at(self, dropped, monkeypatch):
+        """Which is what #174 asked for: a conda ``Library\\bin`` ahead of
+        ``System32`` decides nothing here."""
+
+        def refuse(name):
+            raise AssertionError('find_library was asked about %r' % (name,))
+
+        monkeypatch.setattr(ctypesloader.util, 'find_library', refuse)
+        loader = RecordingLoader()
+        ctypesloader._loadLibraryWindows(loader, 'opengl32', 0)
+        assert loader.tried == [dropped]
+
+
 class TestALibraryFindLibraryDoesNotKnow:
     """The bundled copy, then the bare name."""
 
